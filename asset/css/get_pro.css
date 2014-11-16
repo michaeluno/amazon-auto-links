@@ -1,0 +1,48 @@
+table.aal-table {
+	border: 1px solid #E2E2E2;
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.aal-table td {
+	text-align: center;
+}
+.aal-table th, .aal-table td {
+	border-top: 1px solid #E2E2E2;
+	height:	30px; 
+	width:	250px;
+	padding: 10px 20px 10px 50px;
+}
+.aal-table th {
+	border-top: 0px;
+	background-color:#EEEEEE;
+}
+.aal-table td img {
+	border-bottom: 0px;
+	border-left: 0px;
+	display: inline;
+	border-top: 0px;
+	border-right: 0px;
+	margin: 0 auto;
+	display: block;	
+}
+
+.aal-table-row {
+	background-color: #FFF;
+}
+
+.get-pro {
+	text-align: center;
+	margin-top:30px;
+	clear: both;
+}
+.get-now-button {
+	float: right;
+	margin-right: 8px;
+}
+.feature-available,
+.feature-unavailable {
+	width: 32px;
+	height: 32px;
+	border: none; 
+}

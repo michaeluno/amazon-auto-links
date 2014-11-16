@@ -1,0 +1,2611 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Amazon Auto Links 2.0.0\n"
+"POT-Creation-Date: 2013-10-26 16:47+0900\n"
+"PO-Revision-Date: 2013-10-26 22:56+0900\n"
+"Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
+"Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ./\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: ja\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:48
+msgid "Add Unit by Category"
+msgstr "カテゴリーユニットの追加"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:54
+msgid "Add Unit by Tag"
+msgstr "タグユニットの追加"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:59
+msgid "Add Unit by Search"
+msgstr "検索ユニットの追加"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:64
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:18
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:19
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:20
+#: ../class/AmazonAutoLinks_Form_Category_.php:27
+#: ../class/AmazonAutoLinks_Form_Search_.php:38
+#: ../class/AmazonAutoLinks_Form_Tag_.php:25
+msgid "Auto Insert"
+msgstr "オートインサート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:69
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:24
+msgid "Edit Auto Insert"
+msgstr "オートインサートの編集"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:70
+msgid "Add Auto Insert"
+msgstr "オートインサートの追加"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:75
+#: ../library/admin-page-framework-for-amazon-auto-links.php:5493
+msgid "Settings"
+msgstr "設定"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:85
+msgid "Templates"
+msgstr "テンプレート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:90
+msgid "About"
+msgstr "アバウト"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:98
+#: ../class/AmazonAutoLinks_Form_Settings_.php:72
+msgid "Debug"
+msgstr "デバッグ"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:110
+#: ../class/AmazonAutoLinks_AdminPage_.php:116
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:45
+msgid "Select Categories"
+msgstr "カテゴリーの選択"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:126
+msgid "Initial Options"
+msgstr "初期設定"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:132
+msgid "Proceeding Options"
+msgstr "次の設定"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:142
+msgid "Authentication"
+msgstr "認証"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:148
+msgid "General"
+msgstr "一般"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:154
+msgid "Misc"
+msgstr "その他"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:160
+msgid "Reset"
+msgstr "リセット"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:166
+#: ../class/AmazonAutoLinks_Form_Settings_.php:41
+msgid "Support"
+msgstr "サポート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:173
+msgid "Import v1 Options"
+msgstr "v1 設定のインポート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:190
+msgid "Installed Templates"
+msgstr "インストール済テンプレート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:196
+msgid "Get Templates"
+msgstr "テンプレートを取得"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:204
+msgid "Get Pro!"
+msgstr "プロをゲット!"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:209
+msgid "Contact"
+msgstr "コンタクト"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:279
+msgid "Donate"
+msgstr "カンパ"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:280
+msgid "Order custom plugin"
+msgstr "オーダーメイドプラグイン"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:307
+msgid "Manage Units"
+msgstr "ユニットの編集"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:406
+msgid "An error occurred. Please go back to the previous page and do it again."
+msgstr "エラーが発生しました。前のページに戻ってやり直して見てください。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:430
+#: ../class/AmazonAutoLinks_AdminPage_.php:497
+#: ../class/AmazonAutoLinks_AdminPage_.php:625
+#, php-format
+msgid ""
+"Please upgrade to <A href=\"%1$s\">Pro</a> to add more units! Make sure to "
+"empty the <a href=\"%2$s\">trash box</a> to delete the units completely!"
+msgstr ""
+"ユニットをこれ以上追加するには、<A href=\"%1$s\">Pro</a> にアップグレードして"
+"下さい！ また、現在のユニット数を減らすには、<a href=\"%2$s\">ゴミ箱</a>を空"
+"にする必要があります。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:441
+#: ../class/AmazonAutoLinks_AdminPage_.php:529
+#: ../class/AmazonAutoLinks_AdminPage_.php:681
+msgid "The associate ID cannot be empty."
+msgstr "アソシエイトIDは空欄にはできません。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:451
+#: ../class/AmazonAutoLinks_AdminPage_.php:539
+#: ../class/AmazonAutoLinks_AdminPage_.php:654
+#: ../class/AmazonAutoLinks_AdminPage_.php:691
+#: ../class/AmazonAutoLinks_AdminPage_.php:804
+#: ../class/AmazonAutoLinks_AdminPage_.php:936
+msgid "There was an error in your input."
+msgstr "入力に誤りがあります。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:509
+msgid "The customer ID must consist of 13 characters."
+msgstr "カスタマー ID は13文字でなくてはなりません。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:517
+#: ../class/AmazonAutoLinks_AdminPage_.php:519
+msgid "Either tags or customer ID has to be entered."
+msgstr "タグ、又はカスタマー ID が入力されている必要があります。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:605
+msgid ""
+"A problem occurred while loading the page of adding a search unit. Please go "
+"back to the previous page."
+msgstr ""
+"検索ユニットを追加するページをロード中に問題が発生しました。前のページに戻っ"
+"て下さい。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:640
+#: ../class/AmazonAutoLinks_AdminPage_.php:916
+msgid "The Access Key ID must consist of 20 characters."
+msgstr "アクセスキー ID は20文字でなくてはなりません。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:645
+#: ../class/AmazonAutoLinks_AdminPage_.php:926
+msgid "The Secret Access Key must consist of 40 characters."
+msgstr "シークレットアクセスキーは40文字でなくてはなりません。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:663
+#: ../class/AmazonAutoLinks_AdminPage_.php:664
+#: ../class/AmazonAutoLinks_AdminPage_.php:945
+#: ../class/AmazonAutoLinks_AdminPage_.php:946
+msgid "Sent Value"
+msgstr "送信値"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:666
+#: ../class/AmazonAutoLinks_AdminPage_.php:948
+msgid "Failed authentication."
+msgstr "認証に失敗しました。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:785
+#: ../class/AmazonAutoLinks_AdminPage_.php:786
+#: ../class/AmazonAutoLinks_AdminPage_.php:787
+#: ../class/AmazonAutoLinks_AdminPage_.php:788
+msgid "At least one area must be set."
+msgstr "少なくとも一つエリアが指定されている必要があります。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:794
+msgid "A unit must be selected."
+msgstr "ユニットが選択されている必要があります。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:876
+#: ../class/AmazonAutoLinks_AdminPage_.php:881
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:140
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:19
+msgid "Status"
+msgstr "状態"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:884
+msgid "Authenticated"
+msgstr "認証済"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:884
+msgid "Not authenticated"
+msgstr "未認証"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1016
+msgid "The caches have been cleared."
+msgstr "キャッシュが削除されました。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1025
+msgid "Please select your preferences."
+msgstr "お好みの設定を選択してください。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1135
+#, php-format
+msgid ""
+"Please upgrade the options of previous versions of the plugin by clicking <a "
+"href=\"%1$s\">here</a>."
+msgstr ""
+"<a href=\"%1$s\">こちら</a>をクリックして以前のプラグインのバージョンのオプ"
+"ションをアップグレードして下さい。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1136
+msgid "Before you do it, please <strong>back up</strong> the database."
+msgstr ""
+"念のためその前にデータベースの<strong>バックアップ</strong>をして下さい。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1137
+#, php-format
+msgid "Dismiss this message by clicking <a href=\"%2$s\">here</a>."
+msgstr ""
+"<a href=\"%2$s\">ここ</a>をクリックしてこのメッセージを非表示にできます。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1151
+msgid "Could not find the options to import."
+msgstr "インポートするオプションが見つかりませんでした。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1154
+#, php-format
+msgid "Options have been imported. ( %1$s unit(s) )"
+msgstr "オプションがインポートされました。( %1$s ユニット )"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1157
+#, php-format
+msgid "Options been partially imported. ( %1$s unit(s) )"
+msgstr "オプションの一部がインポートされました。( %1$s ユニット )"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1160
+msgid "No unit was imported."
+msgstr "ユニットはインポートされませんでした。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1247
+#, php-format
+msgid "Want your template to be listed here? Send the file to %1$s."
+msgstr "あなたのテンプレートをこのリストに追加するには %1$s に送ってください。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1252
+#: ../class/AmazonAutoLinks_AdminPage_.php:1327
+msgid "No extension has been found."
+msgstr "機能拡張は見つかりませんでした。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1275
+#: ../class/AmazonAutoLinks_AdminPage_.php:1350
+msgid "Get it Now"
+msgstr "プロを今すぐ入手"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1396
+msgid "Available"
+msgstr "有効"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1397
+msgid "Unavailable"
+msgstr "無効"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1402
+msgid "Get Pro Now!"
+msgstr "プロを今すぐ入手!"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1403
+msgid ""
+"Please consider upgrading to the pro version if you like the plugin and want "
+"more useful features, which includes unlimited numbers of categories, units, "
+"and items, and more!"
+msgstr ""
+"もしこのプラグインを気に入って下さり、より便利な機能をお求めの場合、プロバー"
+"ジョンへのアップグレードを検討お勧め致します。カテゴリー、ユニット、表示商品"
+"などが無制限になります。他にもあります！"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1405
+msgid "Supported Features"
+msgstr "サポートされている機能"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1411
+msgid "Standard"
+msgstr "スタンダード"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1412
+msgid "Pro"
+msgstr "プロ"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1415
+#: ../class/AmazonAutoLinks_Form_Category_.php:125
+#: ../class/AmazonAutoLinks_Form_Search_.php:302
+#: ../class/AmazonAutoLinks_Form_Tag_.php:176
+msgid "Image Size"
+msgstr "画像サイズ"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1420
+msgid "Black and White List"
+msgstr "ブラック・ホワイトリスト"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1425
+#: ../class/AmazonAutoLinks_Form_Category_.php:139
+#: ../class/AmazonAutoLinks_Form_Search_.php:317
+#: ../class/AmazonAutoLinks_Form_Tag_.php:190
+msgid "Sort Order"
+msgstr "並び順"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1430
+#: ../class/AmazonAutoLinks_Form_Category_.php:179
+#: ../class/AmazonAutoLinks_Form_Search_.php:332
+#: ../class/AmazonAutoLinks_Form_Tag_.php:212
+msgid "Direct Link Bonus"
+msgstr "直接リンク"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1435
+msgid "Insert in Posts and Feeds"
+msgstr "記事やフィードに挿入"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1440
+msgid "Widget"
+msgstr "ウィジェット"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1445
+#: ../class/AmazonAutoLinks_AdminPage_.php:1477
+msgid "Max Number of Items to Show"
+msgstr "表示できる最大アイテム数"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1447
+#: ../class/AmazonAutoLinks_AdminPage_.php:1452
+#: ../class/AmazonAutoLinks_AdminPage_.php:1457
+msgid "Unlimited"
+msgstr "無制限"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1450
+#: ../class/AmazonAutoLinks_AdminPage_.php:1479
+msgid "Max Number of Categories Per Unit"
+msgstr "ユニットに追加できるカテゴリーの最大数"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1455
+#: ../class/AmazonAutoLinks_AdminPage_.php:1481
+msgid "Max Number of Units"
+msgstr "作成できるユニットの最大数"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1460
+msgid "Export and Import Units"
+msgstr "ユニットのインポートやエクスポート"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1465
+msgid "Exclude Sub Categories"
+msgstr "サブカテゴリーの除外"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1470
+msgid "Multiple Columns"
+msgstr "複数カラム"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1478
+msgid "Get pro for unlimited items to show."
+msgstr "無制限にアイテムを表示するには、プロを入手しましょう。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1480
+msgid "Get pro for unlimited categories to set up!"
+msgstr "無制限にカテゴリーを追加するには、プロを入手しましょう。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1482
+msgid ""
+"Get pro for unlimited units so that you can put ads as many as you want."
+msgstr "無制限にユニットを作成するには、プロを入手しましょう。"
+
+#: ../class/AmazonAutoLinks_AdminPage_.php:1492
+msgid "Get Now!"
+msgstr "今すぐゲット！"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:21
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:22
+msgid "Add New Auto Insert"
+msgstr "新規オートインサートを追加"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:23
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:124
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:186
+#: ../class/AmazonAutoLinks_PostType_.php:24
+msgid "Edit"
+msgstr "編集"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:25
+msgid "New Auto Insert"
+msgstr "新規オートインサート"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:26
+#: ../class/AmazonAutoLinks_PostType_.php:27
+msgid "View"
+msgstr "閲覧"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:27
+msgid "View Auto Insert"
+msgstr "オートインサートを閲覧"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:28
+msgid "Search Auto Insert Definitions"
+msgstr "オートインサートを検索"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:29
+msgid "No definitions found for Auto Insert"
+msgstr "オートインサートの定義は見つかりませんでした。"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:30
+msgid "No definitions Found for Auto Insert in Trash"
+msgstr "ゴミ箱にはオートインサートの定義は見つかりませんでした"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:31
+msgid "Parent Auto Insert"
+msgstr "親オートインサート"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:66
+msgid "Auto-Insert"
+msgstr "オートインサート"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:139
+msgid "Auto Insert Definitions"
+msgstr "オートインサートの定義"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:141
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:184
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:263
+msgid "Areas"
+msgstr "エリア"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:168
+msgid "etc."
+msgstr "等"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:186
+msgid "Edit this item"
+msgstr "この項目を編集"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:206
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:207
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:153
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:295
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:362
+#: ../class/AmazonAutoLinks_Form_Category_.php:182
+#: ../class/AmazonAutoLinks_Form_Category_.php:220
+#: ../class/AmazonAutoLinks_Form_Category_.php:238
+#: ../class/AmazonAutoLinks_Form_Search_.php:335
+#: ../class/AmazonAutoLinks_Form_Search_.php:382
+#: ../class/AmazonAutoLinks_Form_Search_.php:606
+#: ../class/AmazonAutoLinks_Form_Settings_.php:197
+#: ../class/AmazonAutoLinks_Form_Settings_.php:210
+#: ../class/AmazonAutoLinks_Form_Settings_.php:214
+#: ../class/AmazonAutoLinks_Form_Settings_.php:247
+#: ../class/AmazonAutoLinks_Form_Settings_.php:351
+#: ../class/AmazonAutoLinks_Form_Tag_.php:215
+#: ../class/AmazonAutoLinks_Form_Tag_.php:252
+#: ../class/AmazonAutoLinks_Form_Tag_.php:271
+msgid "On"
+msgstr "オン"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:206
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:207
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:154
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:296
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:363
+#: ../class/AmazonAutoLinks_Form_Category_.php:183
+#: ../class/AmazonAutoLinks_Form_Category_.php:221
+#: ../class/AmazonAutoLinks_Form_Category_.php:239
+#: ../class/AmazonAutoLinks_Form_Search_.php:336
+#: ../class/AmazonAutoLinks_Form_Search_.php:383
+#: ../class/AmazonAutoLinks_Form_Search_.php:607
+#: ../class/AmazonAutoLinks_Form_Settings_.php:198
+#: ../class/AmazonAutoLinks_Form_Settings_.php:201
+#: ../class/AmazonAutoLinks_Form_Settings_.php:211
+#: ../class/AmazonAutoLinks_Form_Settings_.php:248
+#: ../class/AmazonAutoLinks_Form_Settings_.php:352
+#: ../class/AmazonAutoLinks_Form_Tag_.php:216
+#: ../class/AmazonAutoLinks_Form_Tag_.php:253
+#: ../class/AmazonAutoLinks_Form_Tag_.php:272
+msgid "Off"
+msgstr "オフ"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:210
+msgid "Toggle the status"
+msgstr "ステータスの切り替え"
+
+#: ../class/AmazonAutoLinks_AutoInsert_PostType_.php:210
+#, php-format
+msgid "Set it %1$s"
+msgstr "%1$s に設定する"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:59
+msgid "A problem occurred."
+msgstr "問題が発生しました。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:141
+msgid "None"
+msgstr "なし"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:178
+msgid "No categories added."
+msgstr "カテゴリーは追加されていません。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:264
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:418
+#: ../class/AmazonAutoLinks_Form_Search_.php:636
+#: ../class/AmazonAutoLinks_Form_Tag_.php:300
+msgid "Create"
+msgstr "作成"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:264
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:234
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:418
+msgid "Save"
+msgstr "保存"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:267
+msgid "Add the current selection!"
+msgstr "現在のカテゴリーを追加する！"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:268
+msgid "Create the unit!"
+msgstr "ユニットを作成する！"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:269
+msgid "Select a category from the links!"
+msgstr "リンクからカテゴリーを選択しましょう！"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:286
+msgid "Current Selection"
+msgstr "現在の選択"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:291
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:159
+msgid "Go Back"
+msgstr "戻る"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:293
+msgid "Add Category"
+msgstr "カテゴリーの追加"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:294
+msgid "Add Excluding Category"
+msgstr "除外カテゴリーを追加"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:295
+msgid "Remove Checked"
+msgstr "チェックされた項目を削除"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:298
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:16
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:72
+msgid "Added Categories"
+msgstr "追加されたカテゴリー"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:300
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:78
+msgid "Added Excluding Sub-categories"
+msgstr "除外サブカテゴリーを追加"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:307
+msgid "Select Category"
+msgstr "カテゴリーの選択"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:313
+msgid "Preview of This Category"
+msgstr "このカテゴリーのプレビュー"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:313
+msgid "No Preview"
+msgstr "プレビューはありません"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:321
+msgid "Please select a category from the list on the left."
+msgstr "左側のリストからカテゴリーを選択して下さい。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:325
+msgid "Unit Preview"
+msgstr "ユニットプレビュー"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:332
+msgid "Please add a category from the list after selecting it."
+msgstr "リストから選択後、カテゴリーを追加してください"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:391
+#, php-format
+msgid ""
+"Please upgrade to <a href=\"%1$s\" target=\"_black\">Pro</a> to add more "
+"categories."
+msgstr ""
+"これ以上カテゴリーを追加するには、<a href=\"%1$s\" target=\"_black\">プロ版</"
+"a>へアップグレードする必要があります。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:392
+msgid "Please upgrade to Pro to add more categories!"
+msgstr ""
+"カテゴリーをこれ以上追加するには、プロバージョン.にアップグレードしてくださ"
+"い！"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:480
+#, php-format
+msgid ""
+"Could not find the category in this page: %1$s Please consult the plugin "
+"developer."
+msgstr ""
+"次のページにカテゴリーを見つけることができませんでした： %1$s プラグイン開発"
+"者に相談して下さい。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:514
+msgid "Could not load categories. Please consult the plugin developer."
+msgstr ""
+"カテゴリーを読み込みできませんでした。プラグイン開発者に相談してください。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:564
+#, php-format
+msgid "Could not load the page: %1$s Please consult the plugin developer."
+msgstr ""
+"ページを読み込みできませんでした：　%1$s　プラグイン開発者に相談してくださ"
+"い。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:674
+msgid "Categories not found. Please consult the plugin developer."
+msgstr "カテゴリーは見つかりませんでした。プラグイン開発者に相談してください。"
+
+#: ../class/AmazonAutoLinks_CategorySelect_.php:723
+#: ../class/AmazonAutoLinks_CategorySelect_.php:767
+msgid "Failed to generate the breadcrumb."
+msgstr "パンくずリストの生成に失敗しました。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:20
+msgid "Switch On / Off"
+msgstr "オン・オフの切り替え"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:25
+msgid "Where to Insert"
+msgstr "挿入する場所"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:26
+msgid "Define where auto insert should be performed."
+msgstr "オートインサートが実行される場所を定義します。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:31
+msgid "Static Insertion"
+msgstr "スタティックインサート"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:32
+msgid ""
+"Use this to insert unit outputs in the database when a post gets published. "
+"This means product links stay after plugin gets deactivated."
+msgstr ""
+"投稿が公開される時に、データベースにユニットの出力を保存するにはこのオプショ"
+"ンを使用します。これは、プラグインが無効にされても残ります。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:37
+msgid "Where to Enable"
+msgstr "有効にする所"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:38
+msgid ""
+"Only insert in the areas with certain page types, post types, taxonomies, "
+"and post IDs."
+msgstr ""
+"指定した投稿タイプ、ページタイプ、タクソノミー、ポストIDのみオートインサート"
+"を適用させます。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:43
+msgid "Where to Disable"
+msgstr "無効にする所"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:44
+msgid ""
+"Do not insert in the areas with certain page types, post types, taxonomies, "
+"and post IDs."
+msgstr ""
+"投稿タイプ、ページタイプ、タクソノミー、ポストIDを指定して、オートインサート"
+"を無効にできます。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:129
+msgid "Post / Page Content"
+msgstr "記事"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:130
+msgid "Excerpt"
+msgstr "抜粋"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:131
+msgid "Comment"
+msgstr "コメント"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:132
+msgid "Feed"
+msgstr "フィード"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:133
+msgid "Feed Excerpt"
+msgstr "フィードの抜粋"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:139
+msgid "Post / Page Content on Publish"
+msgstr "記事（投稿時）"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:140
+msgid "inserts product links into the database so they will be static."
+msgstr "これはリンクをデータベースに挿入するので、リンクは静的になります。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:150
+msgid "Toggle Status"
+msgstr "ステータスの切り替え"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:157
+msgid "Use this to temporarily disable this auto-insertion."
+msgstr "オートインサートを一時的に無効にする時に使用します。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:175
+msgid "Select Units"
+msgstr "ユニットの選択"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:188
+msgid "Check where product links should appear."
+msgstr "商品が表示される場所をチェックします。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:194
+msgid "Filter Hooks"
+msgstr "フィルターフック"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:194
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:217
+msgid "advanced"
+msgstr "詳細"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:197
+#, php-format
+msgid ""
+"Enter the WordPress <a href=\"%1$s\" target=\"_blank\">filter hooks</a> with "
+"which the auto-insertion is performed, separated by commas."
+msgstr ""
+"WordPress <a href=\"%1$s\" target=\"_blank\">フィルターフック</a>を入力しま"
+"す。複数の場合はコンマで区切ります。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:204
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:273
+msgid "Positions "
+msgstr "位置"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:207
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:276
+msgid "Above"
+msgstr "上部"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:208
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:277
+msgid "Below"
+msgstr "下部"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:209
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:278
+msgid "Both"
+msgstr "両方"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:211
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:280
+msgid ""
+"Determines whether the items are placed before or after (above or below) the "
+"area. This does not take effect for action hooks."
+msgstr ""
+"商品が選択されたエリアの前か後ろ（上部か下部）に配置されるかを決定します。ア"
+"クションフックには影響しません。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:217
+msgid "Action Hooks"
+msgstr "アクションフック"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:220
+#, php-format
+msgid ""
+"Enter the WordPress <a href=\"%1$s\" target=\"_blank\">action hooks</a> with "
+"which the auto-insertion is performed, separated by commas."
+msgstr ""
+"WordPress <a href=\"%1$s\" target=\"_blank\">アクションフック</a>を入力しま"
+"す。複数の場合はコンマで区切ります。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:267
+msgid ""
+"Make sure you pick appropriate post types in the below sections of Where to "
+"Enable/Disable."
+msgstr ""
+"以下の、有効・無効にする場所のセクションで適切な投稿タイプを選択するようにし"
+"て下さい。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:292
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:359
+msgid "On / Off"
+msgstr "オン / オフ"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:298
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:365
+msgid "Applies the criteria set in this section."
+msgstr "このセクションで決められた条件を適用します。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:305
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:372
+msgid "Post IDs"
+msgstr "投稿 ID"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:308
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:375
+msgid "Enter post IDs separated by commas."
+msgstr "ポストID をコンマで区切って入力します。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:314
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:381
+msgid "Page Types"
+msgstr "ページタイプ"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:317
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:384
+msgid "Home / Front"
+msgstr "ホーム・フロントページ"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:318
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:385
+msgid "Archive"
+msgstr "アーカイブ"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:319
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:386
+msgid "404"
+msgstr "404"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:320
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:387
+#: ../class/AmazonAutoLinks_PostType_.php:191
+msgid "Search"
+msgstr "検索"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:322
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:389
+msgid "This option does not take effect for static insertion."
+msgstr "このオプションは、スタティックインサートには影響ありません。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:328
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:395
+msgid "Post Types"
+msgstr "投稿タイプ"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:337
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:403
+msgid "Taxonomies"
+msgstr "分類"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:340
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:406
+msgid ""
+"For static insertion, only Category for the default Post post type can take "
+"effect."
+msgstr ""
+"スタティックインサートには、通常の投稿の投稿タイプの「カテゴリー」のみの設定"
+"が反映されます。"
+
+#: ../class/AmazonAutoLinks_Form_AutoInsert_.php:430
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:21
+#: ../class/AmazonAutoLinks_PostType_.php:22
+msgid "Add New Unit by Category"
+msgstr "カテゴリーユニットの新規追加"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:33
+#: ../class/AmazonAutoLinks_Form_Search_.php:44
+#: ../class/AmazonAutoLinks_Form_Tag_.php:30
+#: ../class/AmazonAutoLinks_PostType_.php:148
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:200
+msgid "Template"
+msgstr "テンプレート"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:65
+#: ../class/AmazonAutoLinks_Form_Search_.php:85
+#: ../class/AmazonAutoLinks_Form_Search_.php:200
+#: ../class/AmazonAutoLinks_Form_Tag_.php:61
+#: ../class/AmazonAutoLinks_PostType_.php:146
+msgid "Unit Name"
+msgstr "ユニット名"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:73
+#: ../class/AmazonAutoLinks_Form_Search_.php:115
+#: ../class/AmazonAutoLinks_Form_Tag_.php:69
+msgid "Country"
+msgstr "国"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:76
+#: ../class/AmazonAutoLinks_Form_Search_.php:118
+msgid "Canada"
+msgstr "カナダ"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:77
+#: ../class/AmazonAutoLinks_Form_Search_.php:119
+msgid "China"
+msgstr "中国"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:78
+#: ../class/AmazonAutoLinks_Form_Search_.php:120
+msgid "France"
+msgstr "フランス"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:79
+#: ../class/AmazonAutoLinks_Form_Search_.php:121
+msgid "Germany"
+msgstr "ドイツ"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:80
+#: ../class/AmazonAutoLinks_Form_Search_.php:122
+msgid "Italy"
+msgstr "イタリア"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:81
+#: ../class/AmazonAutoLinks_Form_Search_.php:123
+msgid "Japan"
+msgstr "日本"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:82
+#: ../class/AmazonAutoLinks_Form_Search_.php:124
+msgid "United Kingdom"
+msgstr "イギリス"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:83
+#: ../class/AmazonAutoLinks_Form_Search_.php:125
+msgid "Spain"
+msgstr "スペイン"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:84
+#: ../class/AmazonAutoLinks_Form_Search_.php:126
+#: ../class/AmazonAutoLinks_Form_Tag_.php:81
+msgid "United States"
+msgstr "アメリカ合衆国"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:85
+msgid "India"
+msgstr "インド"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:86
+msgid "Brazil"
+msgstr "ブラジル"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:87
+msgid "Mexico"
+msgstr "メキシコシティ"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:94
+#: ../class/AmazonAutoLinks_Form_Search_.php:136
+#: ../class/AmazonAutoLinks_Form_Search_.php:243
+#: ../class/AmazonAutoLinks_Form_Tag_.php:92
+msgid "Associate ID"
+msgstr "アソシエイトID"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:102
+#: ../class/AmazonAutoLinks_Form_Search_.php:277
+#: ../class/AmazonAutoLinks_Form_Tag_.php:153
+msgid "Number of Items"
+msgstr "表示するアイテムの数"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:104
+#: ../class/AmazonAutoLinks_Form_Search_.php:281
+#: ../class/AmazonAutoLinks_Form_Tag_.php:155
+msgid "The number of product links to display."
+msgstr "表示する商品の数。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:110
+#: ../class/AmazonAutoLinks_Form_Search_.php:287
+#: ../class/AmazonAutoLinks_Form_Tag_.php:161
+msgid "Number of Columns"
+msgstr "列数"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:116
+#: ../class/AmazonAutoLinks_Form_Search_.php:293
+#: ../class/AmazonAutoLinks_Form_Tag_.php:167
+msgid "The number of columns"
+msgstr "列数"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:117
+#: ../class/AmazonAutoLinks_Form_Search_.php:294
+#: ../class/AmazonAutoLinks_Form_Tag_.php:168
+msgid "This option requires a column supported template to be activated."
+msgstr ""
+"このオプションを使用するには、カラムをサポートするテンプレートが有効になって"
+"いる必要があります。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:118
+#: ../class/AmazonAutoLinks_Form_Search_.php:295
+#: ../class/AmazonAutoLinks_Form_Tag_.php:169
+#, php-format
+msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット！"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:127
+#: ../class/AmazonAutoLinks_Form_Search_.php:304
+#: ../class/AmazonAutoLinks_Form_Tag_.php:178
+msgid "pixel"
+msgstr "ピクセル"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:129
+#: ../class/AmazonAutoLinks_Form_Search_.php:306
+#: ../class/AmazonAutoLinks_Form_Tag_.php:180
+msgid ""
+"The maximum width of the product image in pixel. Set <code>0</code> for no "
+"image."
+msgstr "商品サンプル画像の最大幅ピクセル数。画像非表示は<code>0</code>を設定。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:130
+#: ../class/AmazonAutoLinks_Form_Search_.php:307
+#: ../class/AmazonAutoLinks_Form_Tag_.php:181
+msgid "Max"
+msgstr "最大"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:131
+#: ../class/AmazonAutoLinks_Form_Category_.php:196
+#: ../class/AmazonAutoLinks_Form_Category_.php:206
+#: ../class/AmazonAutoLinks_Form_Search_.php:308
+#: ../class/AmazonAutoLinks_Form_Search_.php:348
+#: ../class/AmazonAutoLinks_Form_Search_.php:358
+#: ../class/AmazonAutoLinks_Form_Search_.php:368
+#: ../class/AmazonAutoLinks_Form_Settings_.php:201
+#: ../class/AmazonAutoLinks_Form_Settings_.php:214
+#: ../class/AmazonAutoLinks_Form_Settings_.php:304
+#: ../class/AmazonAutoLinks_Form_Settings_.php:328
+#: ../class/AmazonAutoLinks_Form_Tag_.php:147
+#: ../class/AmazonAutoLinks_Form_Tag_.php:182
+#: ../class/AmazonAutoLinks_Form_Tag_.php:228
+#: ../class/AmazonAutoLinks_Form_Tag_.php:238
+msgid "Default"
+msgstr "デフォルト"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:142
+#: ../class/AmazonAutoLinks_Form_Tag_.php:193
+#: ../library/admin-page-framework-for-amazon-auto-links.php:6744
+msgid "Date"
+msgstr "日付"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:143
+#: ../class/AmazonAutoLinks_Form_Search_.php:465
+#: ../class/AmazonAutoLinks_Form_Settings_.php:163
+#: ../class/AmazonAutoLinks_Form_Settings_.php:182
+#: ../class/AmazonAutoLinks_Form_Tag_.php:194
+#: ../class/AmazonAutoLinks_WidgetByID_.php:28
+#: ../library/admin-page-framework-for-amazon-auto-links.php:6739
+msgid "Title"
+msgstr "タイトル"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:144
+#: ../class/AmazonAutoLinks_Form_Tag_.php:195
+msgid "Title Descending"
+msgstr "タイトル降順"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:145
+#: ../class/AmazonAutoLinks_Form_Tag_.php:196
+msgid "Random"
+msgstr "ランダム"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:152
+msgid "Sort Option"
+msgstr "ソート設定"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:154
+msgid "Keep raw titles."
+msgstr "サニタイズ前のタイトルを使用する。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:155
+msgid ""
+"If checked, unsanitized titles will be used. This is useful to sort by rank."
+msgstr ""
+"もしチェックされていると、サニタイズされていないタイトルが使用されます。ラン"
+"クでソートする場合に使えます。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:161
+#: ../class/AmazonAutoLinks_Form_Search_.php:143
+#: ../class/AmazonAutoLinks_Form_Tag_.php:125
+msgid "Types"
+msgstr "種類"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:165
+msgid "Best Sellers"
+msgstr "ベストセラー"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:166
+msgid "Hot New Releases"
+msgstr "新着ニューリリース"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:167
+msgid "Mover and Shakers"
+msgstr "ヒット商品"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:168
+msgid "Top Rated"
+msgstr "評価の高い商品"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:169
+msgid "Most Wished For"
+msgstr "一番ほしい物リストに追加されている商品"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:170
+msgid "Gift Ideas"
+msgstr "一番ギフトとして贈られている商品"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:172
+#: ../class/AmazonAutoLinks_Form_Tag_.php:133
+msgid "It is recommended to check only a few for faster page loading."
+msgstr "ページロードのスピードを考慮して少ない数を選択することをお勧めします。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:173
+msgid ""
+"Some of the types other than Best Sellers are not supported in some locales."
+msgstr "いくつかの地域ではベストセラー以外の項目はサポートされていません。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:185
+#: ../class/AmazonAutoLinks_Form_Search_.php:338
+#: ../class/AmazonAutoLinks_Form_Tag_.php:218
+#, php-format
+msgid ""
+"Inserts <code>ref=nosim</code> in the link url. For more information, visit "
+"<a href=\"%1$s\">this page</a>."
+msgstr ""
+"<code>ref=nosim</code> がリンク URL 内に挿入されます。詳細については、<a "
+"href=\"%1$s\">こちら</a>を参照して下さい。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:192
+#: ../class/AmazonAutoLinks_Form_Search_.php:344
+#: ../class/AmazonAutoLinks_Form_Tag_.php:224
+msgid "Title Length"
+msgstr "タイトルの長さ"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:194
+#: ../class/AmazonAutoLinks_Form_Search_.php:346
+#: ../class/AmazonAutoLinks_Form_Tag_.php:226
+msgid "The allowed character length for the title."
+msgstr "タイトルの許容文字数。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:195
+#: ../class/AmazonAutoLinks_Form_Search_.php:347
+#: ../class/AmazonAutoLinks_Form_Tag_.php:227
+msgid ""
+"Use it to prevent a broken layout caused by a very long product title. Set "
+"-1 for no limit."
+msgstr ""
+"これは長いプロダクトタイトルによってレイアウトが崩れるのを防ぎます。無制限は "
+"-1。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:202
+#: ../class/AmazonAutoLinks_Form_Search_.php:364
+#: ../class/AmazonAutoLinks_Form_Tag_.php:234
+msgid "Link Style"
+msgstr "リンクスタイル"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:217
+#: ../class/AmazonAutoLinks_Form_Search_.php:379
+#: ../class/AmazonAutoLinks_Form_Tag_.php:249
+msgid "Credit Link"
+msgstr "クレジットリンク"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:223
+#: ../class/AmazonAutoLinks_Form_Search_.php:385
+#: ../class/AmazonAutoLinks_Form_Tag_.php:255
+msgid "Inserts the credit link at the end of the unit output."
+msgstr "ユニットの出力の最後にクレジットリンクを表示させます。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:235
+#: ../class/AmazonAutoLinks_Form_Search_.php:603
+#: ../class/AmazonAutoLinks_Form_Tag_.php:268
+msgid "Enable Auto Insert"
+msgstr "オートインサートの編集"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:241
+#: ../class/AmazonAutoLinks_Form_Search_.php:609
+#: ../class/AmazonAutoLinks_Form_Tag_.php:274
+msgid ""
+"Set it On to insert product links into post and pages automatically. More "
+"advanced options can be configured later."
+msgstr ""
+"自動で記事にプロダクトリンクを挿入するにはオンに設定します。詳細のオプション"
+"は後ほど設定できます。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:255
+#: ../class/AmazonAutoLinks_Form_Search_.php:623
+#: ../class/AmazonAutoLinks_Form_Tag_.php:287
+#: ../class/AmazonAutoLinks_MetaBox_Template_.php:11
+msgid "Sets a default template for this unit."
+msgstr "このユニットに対するデフォルトのテンプレートを設定します。"
+
+#: ../class/AmazonAutoLinks_Form_Category_.php:268
+#: ../class/AmazonAutoLinks_Form_Search_.php:167
+#: ../class/AmazonAutoLinks_Form_Settings_.php:268
+msgid "Proceed"
+msgstr "進む"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:20
+#: ../class/AmazonAutoLinks_Form_Search_.php:26
+msgid "Add New Unit by Search"
+msgstr "検索ユニットの新規追加"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:32
+msgid "Advanced Search Criteria"
+msgstr "詳細検索条件"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:93
+#: ../class/AmazonAutoLinks_Form_Settings_.php:123
+msgid "Access Key ID"
+msgstr "アクセスキー ID"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:94
+#: ../class/AmazonAutoLinks_Form_Settings_.php:124
+msgid "The public key consisting of 20 alphabetic characters."
+msgstr "アルファベット20文字の公開キー。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:104
+#: ../class/AmazonAutoLinks_Form_Settings_.php:132
+msgid "Secret Access Key"
+msgstr "シークレットアクセスキー"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:105
+#: ../class/AmazonAutoLinks_Form_Settings_.php:133
+msgid "The private key consisting of 40 alphabetic characters."
+msgstr "アルファベット40文字の非公開キー。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:146
+#: ../class/AmazonAutoLinks_Form_Search_.php:394
+msgid "Products"
+msgstr "商品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:146
+msgid ""
+"returns items that satisfy the search criteria in the title and descriptions."
+msgstr "タイトルと詳細に適用する検索条件を満たす商品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:147
+#: ../class/AmazonAutoLinks_Form_Search_.php:396
+msgid "ASIN"
+msgstr "ASIN"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:147
+msgid ""
+"returns some or all of the item attributes with the given item identifier."
+msgstr "与えられた項目にあたる属性の商品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:148
+#: ../class/AmazonAutoLinks_Form_Search_.php:398
+msgid "Similar Products"
+msgstr "よく似た商品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:148
+msgid "returns products that are similar to one or more items specified."
+msgstr "指定された商品と似ている商品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:155
+msgid ""
+"Currently only the Products type search is available. The other types are "
+"still work in progress."
+msgstr "現在、検索タイプのみ可能です。他のタイプは現在取り組み中です。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:208
+msgid "Search Keyword"
+msgstr "キーワードで検索"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:211
+msgid ""
+"Enter the keyword to search. For multiple items, separate them by commas."
+msgstr "検索キーワードを入力します。複数ある場合は、コンマで区切ります。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:218
+msgid "Search Type"
+msgstr "検索タイプ"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:227
+msgid "Operation"
+msgstr "操作"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:235
+msgid "Locale"
+msgstr "地域"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:251
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:255
+msgid "Select the category to limit the searching area."
+msgstr "検索エリアを制限するカテゴリーを選択。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:256
+msgid ""
+"Since some options do not work with the All index, it is recommended to pick "
+"one."
+msgstr ""
+"いくつかのオプションは、全て(All) インデックスでは動作しないため、中から一つ"
+"選択されることをお勧めします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:320
+msgid "Price Ascending"
+msgstr "価格昇順"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:320
+msgid "Sorts items from the cheapest to the most expensive."
+msgstr "値段が安いものから高いものへソートします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:321
+msgid "Price Descending"
+msgstr "価格降順"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:321
+msgid "Sorts items from the most expensive to the cheapest."
+msgstr "値段が高いものから安いものへソートします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:322
+msgid "Sales Rank"
+msgstr "セールスランク"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:322
+msgid ""
+"Sorts items based on how well they have been sold, from best to worst "
+"sellers."
+msgstr "セール数の多いものから少ないものへソートします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:323
+msgid "Relevance Rank"
+msgstr "関連性"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:323
+msgid ""
+"Sorts items based on how often the keyword appear in the product description."
+msgstr "商品詳細中のキーワードの関連性の高いものから低いものへソートします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:324
+msgid "Review Rank"
+msgstr "レビューランク"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:324
+msgid ""
+"Sorts items based on how highly rated the item was reviewed by customers "
+"where the highest ranked items are listed first and the lowest ranked items "
+"are listed last."
+msgstr "カスタマーレビューのポイントが高いものから低いものへソートします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:327
+msgid ""
+"When the search index is selected to All, this option does not take effect."
+msgstr ""
+"もし検索インデックスが、全て(All) に設定されている場合、このオプションは反映"
+"されません。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:354
+msgid "Description Length"
+msgstr "説明の長さ"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:356
+msgid "The allowed character length for the description."
+msgstr "詳細に対する許容文字数。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:357
+msgid "Set -1 for no limit."
+msgstr "無制限は -1 を設定"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:419
+#: ../class/AmazonAutoLinks_Form_Search_.php:540
+#: ../class/AmazonAutoLinks_Form_Settings_.php:378
+#: ../class_final/AmazonAutoLinks_Properties.php:84
+#: ../class_final/AmazonAutoLinks_Properties.php:106
+#: ../class_final/AmazonAutoLinks_Properties.php:135
+#: ../class_final/AmazonAutoLinks_Properties.php:178
+#: ../class_final/AmazonAutoLinks_Properties.php:197
+#: ../class_final/AmazonAutoLinks_Properties.php:232
+#: ../class_final/AmazonAutoLinks_Properties.php:238
+#: ../class_final/AmazonAutoLinks_Properties.php:259
+#: ../class_final/AmazonAutoLinks_Properties.php:295
+#: ../class_final/AmazonAutoLinks_Properties.php:336
+msgid "All"
+msgstr "全て"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:458
+msgid "Please consider upgrading to Pro to use this feature!"
+msgstr "この機能を使うにはプロ版へのアップグレードの検討をお願いします！"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:465
+#: ../class/AmazonAutoLinks_Form_Search_.php:477
+#: ../class/AmazonAutoLinks_Form_Search_.php:548
+#: ../class/AmazonAutoLinks_Form_Search_.php:560
+#: ../class/AmazonAutoLinks_Form_Search_.php:572
+#: ../class/AmazonAutoLinks_Form_Search_.php:584
+#: ../class/AmazonAutoLinks_Form_Tag_.php:112
+msgid "optional"
+msgstr "任意"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:471
+msgid ""
+"Enter keywords which should be matched in the product title. For multiple "
+"keywords, separate them by commas."
+msgstr ""
+"商品タイトルにマッチすべきキーワードを入力します。複数のキーワードを指定する"
+"場合は、コンマで区切ります。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:472
+#: ../class/AmazonAutoLinks_Form_Search_.php:505
+msgid "If this is set, the Search Keyword option can be empty."
+msgstr ""
+"もしこれが設定されている場合、検索キーワードオプションは空白でも構いません。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:477
+msgid "Additional Attribute"
+msgstr "追加属性"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:494
+msgid "Manufacturer"
+msgstr "製造者"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:495
+#: ../class/AmazonAutoLinks_Form_Settings_.php:334
+#: ../library/admin-page-framework-for-amazon-auto-links.php:6740
+msgid "Author"
+msgstr "作者"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:496
+msgid "Actor"
+msgstr "出演者"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:497
+msgid "Composer"
+msgstr "作曲家"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:498
+msgid "Brand"
+msgstr "ブランド"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:499
+msgid "Artist"
+msgstr "アーティスト"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:500
+msgid "Conductor"
+msgstr "指揮者"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:501
+msgid "Director"
+msgstr "監督"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:504
+msgid ""
+"Enter a keyword to narrow down the results with one of the above attributes."
+msgstr "上記属性で結果を絞るためにキーワードを入力します。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:517
+msgid "Availability"
+msgstr "可能状況"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:523
+msgid ""
+"Filter out most of the items that are unavailable as may products can become "
+"unavailable quickly."
+msgstr "多くの商品はすぐに品切れになるため、それらの商品を除外します。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:529
+msgid "Condition"
+msgstr "条件"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:536
+#: ../class/AmazonAutoLinks_Form_Tag_.php:129
+msgid "New"
+msgstr "新品"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:537
+msgid "Used"
+msgstr "中古"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:538
+msgid "Collectible"
+msgstr "販売可能"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:539
+msgid "Refurbished"
+msgstr "改装済み"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:543
+msgid "If the search index is All, this option does not take effect."
+msgstr ""
+"もし検索インデックスが 全て(All) に設定されている場合、このオプションは反映さ"
+"れません。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:548
+msgid "Maximum Price"
+msgstr "最高額"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:555
+msgid ""
+"Specifies the maximum price of the items in the response. Prices are in "
+"terms of the lowest currency denomination, for example, pennies. For "
+"example, 3241 represents $32.41."
+msgstr ""
+"検索結果における商品価格の最大値を指定します。価格は、その地域の通貨の一番小"
+"さな表示単位で入力します。例えば$32.41 は 3241 とします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:560
+#: ../class/AmazonAutoLinks_Form_Search_.php:572
+msgid "Minimum Price"
+msgstr "最低額"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:567
+msgid ""
+"Specifies the minimum price of the items to return. Prices are in terms of "
+"the lowest currency denomination, for example, pennies, for example, 3241 "
+"represents $32.41."
+msgstr ""
+"検索結果における商品価格の最小値を指定します。価格は、その地域の通貨の一番小"
+"さな表示単位で入力します。例えば$32.41 は 3241 とします。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:579
+msgid "Specifies the minimum percentage off for the items to return."
+msgstr "検索結果における商品の割引％の最低数。"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:584
+msgid "Browse Node ID"
+msgstr "ノード ID の参照"
+
+#: ../class/AmazonAutoLinks_Form_Search_.php:591
+msgid ""
+"If you know the browse node that you are searching, specify it here. It is a "
+"positive integer."
+msgstr "ブラウズノードをここで指定できます。正数。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:23
+msgid "AWS Access Key Identifiers"
+msgstr "AWS アクセスキー ID"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:24
+#, php-format
+msgid ""
+"Credentials are required to perform search requests with Amazon <a href="
+"\"%1$s\" target=\"_blank\">Product Advertising API</a>."
+msgstr ""
+"Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising API</a> を商品"
+"検索に使用するために、認証情報が必要です。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:25
+#, php-format
+msgid ""
+"The keys can be obtained by logging in to the <a href=\"%1$s\" target="
+"\"_blank\">Amazon Web Services web site</a>."
+msgstr ""
+"認証キーは、<a href=\"%1$s\" target=\"_blank\">Amazon Web Services web site</"
+"a>で取得できます。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:26
+#, php-format
+msgid ""
+"The instruction is documented <a href=\"%1$s\" target=\"_blank\">here</a>."
+msgstr ""
+"詳しい方法は<a href=\"%1$s\" target=\"_blank\">こちら</a>を参照して下さい。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:34
+msgid "Filters"
+msgstr "フィルター"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:35
+msgid "Set the criteria to filter fetched items."
+msgstr "取得アイテムをフィルターする条件を定めます。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:42
+msgid "Help the developer!"
+msgstr "開発者を援助しよう！"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:48
+msgid "Amazon Auto Links Plugin Agreements"
+msgstr "Amazon Auto Links プラグイン同意文言"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:49
+msgid "Please define how you want to support the developer."
+msgstr "開発者を援助する方法を選択して下さい。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:55
+msgid "Custom Query Key"
+msgstr "カスタムクエリキー"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:64
+msgid "Access Rights"
+msgstr "アクセス権限"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:65
+msgid "Set the access levels to the plugin setting pages."
+msgstr "プラグイン設定ページのアクセス権限を設定します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:73
+msgid "For developers who need to see the internal workings of the plugin."
+msgstr "プラグインの内部動作を見るための開発者用。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:82
+msgid "Reset Settings"
+msgstr "リセット設定"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:83
+msgid "If you get broken options, initialize them by performing reset."
+msgstr "もしオプションが壊れている場合、リセットをして設定の初期化をします。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:89
+msgid "Caches"
+msgstr "キャッシュ"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:90
+msgid "If you need to refresh the product link outputs, clear the cashes."
+msgstr "商品の表示を更新するには、キャッシュを消去します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:146
+msgid "Authenticate"
+msgstr "認証する"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:156
+msgid "White List"
+msgstr "ホワイトリスト"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:157
+#: ../class/AmazonAutoLinks_Form_Settings_.php:176
+msgid "Enter characters separated by commas."
+msgstr "文字列をコンマで区切って入力します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:158
+msgid "Product links that do not contain the white list items will be omitted."
+msgstr "ホワイトリストに含まれていない商品はスキップされます。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:164
+#: ../class/AmazonAutoLinks_Form_Settings_.php:183
+#: ../class/AmazonAutoLinks_ListTable_.php:108
+msgid "Description"
+msgstr "詳細"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:175
+msgid "Black List"
+msgstr "ブラックリスト"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:177
+msgid "Product links that contain the black list items will be omitted."
+msgstr "ブラックリストに含まれる商品はスキップされます。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:194
+msgid "Case Sensitive"
+msgstr "大文字と小文字を区別する"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:200
+msgid ""
+"If this is on, upper cases and lower cases of characters have to match to "
+"find the given string."
+msgstr "これがオンの場合、大文字小文字が一致している必要があります。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:207
+msgid "Prevent Duplicates"
+msgstr "同一アイテムを防ぐ"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:213
+msgid ""
+"If this is on, the same products that are already loaded will not be "
+"displayed among different units"
+msgstr ""
+"これがオンの場合、同一ページ上で複数ユニットが呼び出された場合に、同じ商品が"
+"表示されなくなります。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:224
+msgid "Support Rate"
+msgstr "サポート率"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:225
+msgid ""
+"The percentage that the associate ID is altered with the plugin developers"
+msgstr "プラグイン開発者のアソシエイトIDが挿入される確率。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:234
+#, php-format
+msgid ""
+"Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> to "
+"help the plugin development if you set it 0%%!"
+msgstr ""
+"もし0％に設定する場合は、開発を援助するために <a href=\"%1$s\" target="
+"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:243
+msgid "Advertisement"
+msgstr "広告"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:244
+msgid "Display ads in the plugins's settings page"
+msgstr "プラグイン設定ページに広告を表示する。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:251
+#, php-format
+msgid ""
+"Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> to "
+"help the plugin development if you set it off!"
+msgstr ""
+"もしオフに設定する場合は、開発を援助するために <a href=\"%1$s\" target="
+"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:302
+msgid "Link Style Query Key"
+msgstr "リンクスタイルクエリキー"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:303
+msgid "Define the query parameter key for the cloaking link style."
+msgstr "クロークリンクスタイルのクエリパラメータキーを定義します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:316
+#: ../class/AmazonAutoLinks_Form_Settings_.php:364
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:326
+msgid "Capability"
+msgstr "権限"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:327
+msgid ""
+"Select the user role that is allowed to access the plugin setting pages."
+msgstr ""
+"このプラグインの設定ページにアクセスできるユーザーグループを選択します。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:328
+#: ../class/AmazonAutoLinks_Form_Settings_.php:332
+msgid "Administrator"
+msgstr "管理者"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:333
+msgid "Editor"
+msgstr "編集者"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:335
+msgid "Contributor"
+msgstr "寄稿者"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:336
+msgid "Subscriber"
+msgstr "購読者"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:347
+msgid "Debug Mode"
+msgstr "デバッグモード"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:374
+msgid "Options to Delete"
+msgstr "削除するオプション"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:379
+msgid "General options"
+msgstr "一般設定"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:380
+msgid "Template related options"
+msgstr "テンプレート関連設定"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:400
+msgid "Clear Caches"
+msgstr "キャッシュをクリア"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:402
+msgid "Clear caches of product links."
+msgstr "商品のキャッシュをクリアします。"
+
+#: ../class/AmazonAutoLinks_Form_Settings_.php:412
+msgid "Perform"
+msgstr "実行"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:20
+msgid "Add New Unit by Tag and Customer ID"
+msgstr "タグとカスタマー ID で新規ユニットを追加する"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:87
+msgid "Currently only the U.S. locale is supported for this unit type."
+msgstr "現在、このユニットタイプは U.S. 地域のみサポートされています。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:100
+msgid "Tags"
+msgstr "タグ"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:103
+msgid "Enter keywords that represent tags separated by commas."
+msgstr "タグを表すキーワードをコンマで区切って入力します。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:104
+msgid ""
+"If the customer ID is provided, this option is optional and if it is left "
+"empty, all products tagged by the customer will be fetched."
+msgstr ""
+"もしカスタマー ID が設定されている場合、この設定は任意で、もし空白の場合、指"
+"定されたカスタマーによってタグ付けされた全ての商品が取得対象になります。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:105
+msgid "Any upper-case characters will be converted to lower-cases."
+msgstr "大文字は小文字に変換されます。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:112
+msgid "Customer ID"
+msgstr "カスタマー ID"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:114
+msgid "Enter a 13-character ID of the customer who tagged the products."
+msgstr "タグをつけた人のカスタマー ID を13文字で入力します。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:115
+#, php-format
+msgid ""
+"You can find it by looking at the url of the customer profile page. The "
+"format is <code>%1$s</code>."
+msgstr ""
+"カスタマープロファイルページの URL の中からそれを見つけることができます。"
+"フォーマット： <code>%1$s</code>。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:116
+msgid "This is recommended to filter spam tagged products."
+msgstr "スパムでタグヅケされた商品を除外するのに有効です。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:117
+msgid ""
+"If not specified, tagged products link by all customers will be fetched."
+msgstr "もし指定がない場合、全てのカスタマーがタグ付けした商品が取得されます。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:118
+#, php-format
+msgid ""
+"An example of the <a href=\"%1$s\" target=\"_blank\">customer profile page</"
+"a>."
+msgstr ""
+"<a href=\"%1$s\" target=\"_blank\">カスタマープロファイルページ</a>の例。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:130
+msgid "Popular"
+msgstr "人気"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:131
+msgid "Recent"
+msgstr "最近"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:134
+msgid "If the customer ID is provided, this option will not take effect."
+msgstr "カスタマー ID が指定されている場合は、このオプションは反映されません。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:140
+msgid "Threshhold"
+msgstr "スレッシュホールド"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:145
+msgid ""
+"This option indicates a threshold for how many times an item must have been "
+"tagged in order to appear in the \"recent\" feed. "
+msgstr ""
+"この設定は、「最近」としてフィードに表示されるための基準として、どのくらいの"
+"頻度で商品がタグ付されたかのスレッシュホールドを示します。"
+
+#: ../class/AmazonAutoLinks_Form_Tag_.php:146
+msgid ""
+"If the threshold is set to 5, items will not appear in the recency feed "
+"until they have been tagged 5 times, and will be bumped up every time they "
+"are tagged after that."
+msgstr ""
+"もしスレッシュホールドが5の場合、最近のフィードとして、商品が5回タグ付けされ"
+"るまで表示されることはありません。"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:49
+msgid "Version"
+msgstr "バージョン"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:51
+msgid "CSS"
+msgstr "CSS"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:82
+#: ../class/AmazonAutoLinks_ListTable_.php:124
+msgid "Deactivate"
+msgstr "無効化"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:84
+#: ../class/AmazonAutoLinks_ListTable_.php:123
+msgid "Activate"
+msgstr "有効化"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:106
+msgid "Template Name"
+msgstr "テンプレート名"
+
+#: ../class/AmazonAutoLinks_ListTable_.php:107
+msgid "Thumbnail"
+msgstr "サムネイル"
+
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:67
+msgid "No category added."
+msgstr "カテゴリーは追加されていません。"
+
+#: ../class/AmazonAutoLinks_MetaBox_Categories_.php:70
+msgid "No excluding sub-category added."
+msgstr "除外サブカテゴリーは設定されていません。"
+
+#: ../class/AmazonAutoLinks_MetaBox_CategoryOptions_.php:30
+#: ../class/AmazonAutoLinks_MetaBox_SearchOptions_.php:31
+#: ../class/AmazonAutoLinks_MetaBox_TagOptions_.php:30
+msgid "Cache Duration"
+msgstr "キャッシュの保存時間"
+
+#: ../class/AmazonAutoLinks_MetaBox_CategoryOptions_.php:31
+#: ../class/AmazonAutoLinks_MetaBox_SearchOptions_.php:32
+#: ../class/AmazonAutoLinks_MetaBox_TagOptions_.php:31
+msgid "The cache lifespan in seconds. For no cache, set 0."
+msgstr "キャッシュ有効期間の秒数。キャッシュを無効にするには 0 を設定。"
+
+#: ../class/AmazonAutoLinks_MetaBox_CategoryOptions_.php:31
+#: ../class/AmazonAutoLinks_MetaBox_SearchOptions_.php:32
+#: ../class/AmazonAutoLinks_MetaBox_TagOptions_.php:31
+msgid "Default:"
+msgstr "デフォルト："
+
+#: ../class/AmazonAutoLinks_MetaBox_Misc_.php:16
+msgid "Information"
+msgstr "お知らせ"
+
+#: ../class/AmazonAutoLinks_MetaBox_Template_.php:10
+msgid "Select Template"
+msgstr "テンプレートの選択"
+
+#: ../class/AmazonAutoLinks_PostType_.php:20
+msgid "Amazon Auto Links Unit"
+msgstr "Amazon Auto Links ユニット"
+
+#: ../class/AmazonAutoLinks_PostType_.php:23
+msgid "Add New Unit"
+msgstr "新しいユニットの追加"
+
+#: ../class/AmazonAutoLinks_PostType_.php:25
+msgid "Edit Unit"
+msgstr "ユニットの編集"
+
+#: ../class/AmazonAutoLinks_PostType_.php:26
+msgid "New Unit"
+msgstr "新しいユニット"
+
+#: ../class/AmazonAutoLinks_PostType_.php:28
+msgid "View Product Links"
+msgstr "プロダクトリンクの閲覧"
+
+#: ../class/AmazonAutoLinks_PostType_.php:29
+msgid "Search Units"
+msgstr "ユニットの検索"
+
+#: ../class/AmazonAutoLinks_PostType_.php:30
+msgid "No unit found for Amazon Auto Links"
+msgstr "Amazon Auto Links のユニットは見つかりませんでした"
+
+#: ../class/AmazonAutoLinks_PostType_.php:31
+msgid "No Unit Found for Amazon Auto Links in Trash"
+msgstr "ゴミ箱には Amazon Auto Links のユニットは見つかりませんでした"
+
+#: ../class/AmazonAutoLinks_PostType_.php:53
+msgid "Label"
+msgstr "ラベル"
+
+#: ../class/AmazonAutoLinks_PostType_.php:54
+msgid "Add New Label"
+msgstr "新しいラベルの追加"
+
+#: ../class/AmazonAutoLinks_PostType_.php:55
+msgid "New Label"
+msgstr "新規ラベル"
+
+#: ../class/AmazonAutoLinks_PostType_.php:80
+#: ../class/AmazonAutoLinks_PostType_.php:135
+msgid "Units"
+msgstr "ユニット:"
+
+#: ../class/AmazonAutoLinks_PostType_.php:84
+msgid "Set the unit name here."
+msgstr "ユニット名を入力してください。"
+
+#: ../class/AmazonAutoLinks_PostType_.php:119
+#: ../class/AmazonAutoLinks_Units_.php:69
+msgid "Could not identify the unit type."
+msgstr "ユニットタイプが認識できませんでした。"
+
+#: ../class/AmazonAutoLinks_PostType_.php:147
+msgid "Unit Type"
+msgstr "ユニットタイプ"
+
+#: ../class/AmazonAutoLinks_PostType_.php:150
+msgid "Labels"
+msgstr "ラベル"
+
+#: ../class/AmazonAutoLinks_PostType_.php:151
+msgid "Shortcode / PHP Code"
+msgstr "ショートコード / PHP コード"
+
+#: ../class/AmazonAutoLinks_PostType_.php:193
+msgid "Tag"
+msgstr "タグ"
+
+#: ../class/AmazonAutoLinks_PostType_.php:196
+msgid "Category"
+msgstr "カテゴリー"
+
+#: ../class/AmazonAutoLinks_Templates_.php:262
+msgid "/* The CSS file does not exist. */"
+msgstr "/* CSS ファイルが存在しません *./"
+
+#: ../class/AmazonAutoLinks_Unit.php:133
+msgid "read more"
+msgstr "もっと読む"
+
+#: ../class/AmazonAutoLinks_WidgetByID_.php:15
+msgid ""
+"A widget that display Amazon products of defined Amazon Auto Links units."
+msgstr ""
+"Amazon Auto Links ユニットで定義されたアマゾンの商品を表示するウィジェットで"
+"す。"
+
+#: ../class/AmazonAutoLinks_WidgetByID_.php:35
+msgid "Select Rules"
+msgstr "ルールの選択"
+
+#: ../class/AmazonAutoLinks_WidgetByID_.php:56
+msgid ""
+"Hold down the Ctrl (windows) / Command (Mac) key to select multiple items."
+msgstr ""
+"コントールキー(Windows) / コマンドキー(Mac) を押して複数の項目を選択できま"
+"す。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:165
+msgid "Category Unit Options"
+msgstr "カテゴリーユニットの設定"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:175
+msgid "Tag Unit Options"
+msgstr "タグユニットの設定"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:184
+msgid "Search Unit Options"
+msgstr "検索ユニットの設定"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:191
+msgid "Advanced Search Options"
+msgstr "詳細検索設定"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:246
+#, php-format
+msgid "The plugin requires the PHP version %1$s or higher."
+msgstr ""
+"このプラグインを使用するには、PHPバージョン %1$s より新しいものがが必要となり"
+"ます。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:250
+#, php-format
+msgid "The plugin requires the WordPress version %1$s or higher."
+msgstr ""
+"このプラグインを使うには、WordPress のバージョンが %1$s より新しいものをお使"
+"いになっている必要があります。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:253
+#, php-format
+msgid "The plugin requires the <a href=\"%2$s\">%1$s</a> to be installed."
+msgstr ""
+"このプラグインを使うには <a href=\"%2$s\">%1$s</a> がインストールされている必"
+"要があります。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:253
+msgid "the Multibyte String library"
+msgstr "マルチバイト文字ライブラリ"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:254
+#, php-format
+msgid "The plugin requires the %1$s to be installed."
+msgstr "このプラグインを使うには %1$s がインストールされている必要があります。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:254
+msgid "the cURL library"
+msgstr "cURL ライブラリ"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:257
+#, php-format
+msgid ""
+"The DOMDocument class could not be found. The plugin requires the <a href="
+"\"%1$s\">libxml</a> extension to be activated."
+msgstr ""
+"DOMDocument クラスが見つかりませんでした。プラグインは<a href=\"%1$s"
+"\">libxml</a> 機能拡張が必要です。"
+
+#: ../class_final/AmazonAutoLinks_Bootstrap.php:258
+#, php-format
+msgid ""
+"The DomXpath class could not be found. The plugin requires the <a href=\"%1$s"
+"\">libxml</a> extension to be activated."
+msgstr ""
+"DomXpath クラスが見つかりませんでした。プラグインは<a href=\"%1$s\">libxml</"
+"a> 機能拡張が必要です。"
+
+#: ../class_final/AmazonAutoLinks_ImageHandler.php:122
+msgid "The image data is empty."
+msgstr "画像データが空です。"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:85
+#: ../class_final/AmazonAutoLinks_Properties.php:110
+#: ../class_final/AmazonAutoLinks_Properties.php:138
+#: ../class_final/AmazonAutoLinks_Properties.php:180
+#: ../class_final/AmazonAutoLinks_Properties.php:200
+#: ../class_final/AmazonAutoLinks_Properties.php:240
+#: ../class_final/AmazonAutoLinks_Properties.php:263
+#: ../class_final/AmazonAutoLinks_Properties.php:298
+#: ../class_final/AmazonAutoLinks_Properties.php:341
+msgid "Baby"
+msgstr "赤ちゃん"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:86
+#: ../class_final/AmazonAutoLinks_Properties.php:111
+#: ../class_final/AmazonAutoLinks_Properties.php:139
+#: ../class_final/AmazonAutoLinks_Properties.php:201
+#: ../class_final/AmazonAutoLinks_Properties.php:264
+#: ../class_final/AmazonAutoLinks_Properties.php:299
+#: ../class_final/AmazonAutoLinks_Properties.php:342
+msgid "Beauty"
+msgstr "美容"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:87
+#: ../class_final/AmazonAutoLinks_Properties.php:140
+#: ../class_final/AmazonAutoLinks_Properties.php:202
+#: ../class_final/AmazonAutoLinks_Properties.php:265
+#: ../class_final/AmazonAutoLinks_Properties.php:300
+#: ../class_final/AmazonAutoLinks_Properties.php:343
+msgid "Blended"
+msgstr "ブレンド"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:88
+#: ../class_final/AmazonAutoLinks_Properties.php:112
+#: ../class_final/AmazonAutoLinks_Properties.php:141
+#: ../class_final/AmazonAutoLinks_Properties.php:181
+#: ../class_final/AmazonAutoLinks_Properties.php:203
+#: ../class_final/AmazonAutoLinks_Properties.php:233
+#: ../class_final/AmazonAutoLinks_Properties.php:241
+#: ../class_final/AmazonAutoLinks_Properties.php:266
+#: ../class_final/AmazonAutoLinks_Properties.php:301
+#: ../class_final/AmazonAutoLinks_Properties.php:344
+msgid "Books"
+msgstr "本"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:89
+#: ../class_final/AmazonAutoLinks_Properties.php:142
+#: ../class_final/AmazonAutoLinks_Properties.php:204
+#: ../class_final/AmazonAutoLinks_Properties.php:267
+#: ../class_final/AmazonAutoLinks_Properties.php:302
+#: ../class_final/AmazonAutoLinks_Properties.php:345
+msgid "Classical"
+msgstr "カジュアル"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:90
+#: ../class_final/AmazonAutoLinks_Properties.php:143
+#: ../class_final/AmazonAutoLinks_Properties.php:182
+#: ../class_final/AmazonAutoLinks_Properties.php:205
+#: ../class_final/AmazonAutoLinks_Properties.php:234
+#: ../class_final/AmazonAutoLinks_Properties.php:242
+#: ../class_final/AmazonAutoLinks_Properties.php:268
+#: ../class_final/AmazonAutoLinks_Properties.php:303
+#: ../class_final/AmazonAutoLinks_Properties.php:348
+msgid "DVD"
+msgstr "DVD"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:91
+#: ../class_final/AmazonAutoLinks_Properties.php:113
+#: ../class_final/AmazonAutoLinks_Properties.php:144
+#: ../class_final/AmazonAutoLinks_Properties.php:183
+#: ../class_final/AmazonAutoLinks_Properties.php:206
+#: ../class_final/AmazonAutoLinks_Properties.php:243
+#: ../class_final/AmazonAutoLinks_Properties.php:269
+#: ../class_final/AmazonAutoLinks_Properties.php:304
+#: ../class_final/AmazonAutoLinks_Properties.php:349
+msgid "Electronics"
+msgstr "電化製品"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:92
+#: ../class_final/AmazonAutoLinks_Properties.php:145
+#: ../class_final/AmazonAutoLinks_Properties.php:184
+#: ../class_final/AmazonAutoLinks_Properties.php:207
+#: ../class_final/AmazonAutoLinks_Properties.php:244
+#: ../class_final/AmazonAutoLinks_Properties.php:270
+msgid "Foreign Books"
+msgstr "洋書"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:93
+#: ../class_final/AmazonAutoLinks_Properties.php:115
+#: ../class_final/AmazonAutoLinks_Properties.php:147
+#: ../class_final/AmazonAutoLinks_Properties.php:208
+#: ../class_final/AmazonAutoLinks_Properties.php:272
+#: ../class_final/AmazonAutoLinks_Properties.php:306
+#: ../class_final/AmazonAutoLinks_Properties.php:352
+msgid "Health Personal Care"
+msgstr "健康"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:94
+#: ../class_final/AmazonAutoLinks_Properties.php:119
+#: ../class_final/AmazonAutoLinks_Properties.php:151
+#: ../class_final/AmazonAutoLinks_Properties.php:185
+#: ../class_final/AmazonAutoLinks_Properties.php:210
+#: ../class_final/AmazonAutoLinks_Properties.php:246
+#: ../class_final/AmazonAutoLinks_Properties.php:276
+#: ../class_final/AmazonAutoLinks_Properties.php:310
+#: ../class_final/AmazonAutoLinks_Properties.php:356
+msgid "Kindle Store"
+msgstr "キンドルストア"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:95
+#: ../class_final/AmazonAutoLinks_Properties.php:358
+msgid "Lawn and Garden"
+msgstr "ガーデニング"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:96
+#: ../class_final/AmazonAutoLinks_Properties.php:121
+#: ../class_final/AmazonAutoLinks_Properties.php:157
+#: ../class_final/AmazonAutoLinks_Properties.php:188
+#: ../class_final/AmazonAutoLinks_Properties.php:214
+#: ../class_final/AmazonAutoLinks_Properties.php:250
+#: ../class_final/AmazonAutoLinks_Properties.php:281
+#: ../class_final/AmazonAutoLinks_Properties.php:315
+#: ../class_final/AmazonAutoLinks_Properties.php:364
+msgid "Music"
+msgstr "音楽"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:97
+#: ../class_final/AmazonAutoLinks_Properties.php:123
+#: ../class_final/AmazonAutoLinks_Properties.php:219
+#: ../class_final/AmazonAutoLinks_Properties.php:370
+msgid "Pet Supplies"
+msgstr "ペット用品"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:98
+#: ../class_final/AmazonAutoLinks_Properties.php:126
+#: ../class_final/AmazonAutoLinks_Properties.php:166
+#: ../class_final/AmazonAutoLinks_Properties.php:190
+#: ../class_final/AmazonAutoLinks_Properties.php:221
+#: ../class_final/AmazonAutoLinks_Properties.php:252
+#: ../class_final/AmazonAutoLinks_Properties.php:286
+#: ../class_final/AmazonAutoLinks_Properties.php:323
+#: ../class_final/AmazonAutoLinks_Properties.php:373
+msgid "Software"
+msgstr "ソフトウェア"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:99
+#: ../class_final/AmazonAutoLinks_Properties.php:167
+#: ../class_final/AmazonAutoLinks_Properties.php:222
+#: ../class_final/AmazonAutoLinks_Properties.php:324
+msgid "Software Video Games"
+msgstr "ソフトウェアビデオゲーム"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:100
+#: ../class_final/AmazonAutoLinks_Properties.php:171
+#: ../class_final/AmazonAutoLinks_Properties.php:225
+#: ../class_final/AmazonAutoLinks_Properties.php:289
+#: ../class_final/AmazonAutoLinks_Properties.php:328
+#: ../class_final/AmazonAutoLinks_Properties.php:378
+msgid "VHS"
+msgstr "VHS"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:101
+#: ../class_final/AmazonAutoLinks_Properties.php:129
+#: ../class_final/AmazonAutoLinks_Properties.php:172
+#: ../class_final/AmazonAutoLinks_Properties.php:226
+#: ../class_final/AmazonAutoLinks_Properties.php:290
+#: ../class_final/AmazonAutoLinks_Properties.php:329
+#: ../class_final/AmazonAutoLinks_Properties.php:379
+msgid "Video"
+msgstr "ビデオ"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:102
+#: ../class_final/AmazonAutoLinks_Properties.php:130
+#: ../class_final/AmazonAutoLinks_Properties.php:173
+#: ../class_final/AmazonAutoLinks_Properties.php:192
+#: ../class_final/AmazonAutoLinks_Properties.php:227
+#: ../class_final/AmazonAutoLinks_Properties.php:254
+#: ../class_final/AmazonAutoLinks_Properties.php:291
+#: ../class_final/AmazonAutoLinks_Properties.php:330
+#: ../class_final/AmazonAutoLinks_Properties.php:380
+msgid "Video Games"
+msgstr "ビデオゲーム"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:107
+#: ../class_final/AmazonAutoLinks_Properties.php:136
+#: ../class_final/AmazonAutoLinks_Properties.php:198
+#: ../class_final/AmazonAutoLinks_Properties.php:260
+#: ../class_final/AmazonAutoLinks_Properties.php:296
+#: ../class_final/AmazonAutoLinks_Properties.php:337
+msgid "Apparel"
+msgstr "アパレル"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:108
+#: ../class_final/AmazonAutoLinks_Properties.php:261
+#: ../class_final/AmazonAutoLinks_Properties.php:338
+msgid "Appliances"
+msgstr "家電"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:109
+#: ../class_final/AmazonAutoLinks_Properties.php:137
+#: ../class_final/AmazonAutoLinks_Properties.php:179
+#: ../class_final/AmazonAutoLinks_Properties.php:199
+#: ../class_final/AmazonAutoLinks_Properties.php:239
+#: ../class_final/AmazonAutoLinks_Properties.php:262
+#: ../class_final/AmazonAutoLinks_Properties.php:297
+#: ../class_final/AmazonAutoLinks_Properties.php:340
+msgid "Automotive"
+msgstr "車"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:114
+#: ../class_final/AmazonAutoLinks_Properties.php:146
+#: ../class_final/AmazonAutoLinks_Properties.php:271
+#: ../class_final/AmazonAutoLinks_Properties.php:305
+#: ../class_final/AmazonAutoLinks_Properties.php:351
+msgid "Grocery"
+msgstr "グロッサリー"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:116
+msgid "Home"
+msgstr "ホーム"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:117
+#: ../class_final/AmazonAutoLinks_Properties.php:149
+#: ../class_final/AmazonAutoLinks_Properties.php:274
+#: ../class_final/AmazonAutoLinks_Properties.php:308
+msgid "Home Improvement"
+msgstr "工具"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:118
+#: ../class_final/AmazonAutoLinks_Properties.php:150
+#: ../class_final/AmazonAutoLinks_Properties.php:209
+#: ../class_final/AmazonAutoLinks_Properties.php:275
+#: ../class_final/AmazonAutoLinks_Properties.php:309
+#: ../class_final/AmazonAutoLinks_Properties.php:355
+msgid "Jewelry"
+msgstr "宝石"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:120
+#: ../class_final/AmazonAutoLinks_Properties.php:361
+msgid "Miscellaneous"
+msgstr "その他"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:122
+#: ../class_final/AmazonAutoLinks_Properties.php:160
+#: ../class_final/AmazonAutoLinks_Properties.php:217
+#: ../class_final/AmazonAutoLinks_Properties.php:284
+#: ../class_final/AmazonAutoLinks_Properties.php:318
+#: ../class_final/AmazonAutoLinks_Properties.php:367
+msgid "Office Products"
+msgstr "オフィス用品"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:124
+#: ../class_final/AmazonAutoLinks_Properties.php:164
+#: ../class_final/AmazonAutoLinks_Properties.php:371
+msgid "Photo"
+msgstr "写真"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:125
+#: ../class_final/AmazonAutoLinks_Properties.php:165
+#: ../class_final/AmazonAutoLinks_Properties.php:189
+#: ../class_final/AmazonAutoLinks_Properties.php:220
+#: ../class_final/AmazonAutoLinks_Properties.php:251
+#: ../class_final/AmazonAutoLinks_Properties.php:285
+#: ../class_final/AmazonAutoLinks_Properties.php:322
+#: ../class_final/AmazonAutoLinks_Properties.php:372
+msgid "Shoes"
+msgstr "靴"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:127
+#: ../class_final/AmazonAutoLinks_Properties.php:168
+#: ../class_final/AmazonAutoLinks_Properties.php:223
+#: ../class_final/AmazonAutoLinks_Properties.php:287
+#: ../class_final/AmazonAutoLinks_Properties.php:325
+#: ../class_final/AmazonAutoLinks_Properties.php:374
+msgid "Sporting Goods"
+msgstr "スポーツ用品"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:128
+#: ../class_final/AmazonAutoLinks_Properties.php:170
+#: ../class_final/AmazonAutoLinks_Properties.php:191
+#: ../class_final/AmazonAutoLinks_Properties.php:224
+#: ../class_final/AmazonAutoLinks_Properties.php:253
+#: ../class_final/AmazonAutoLinks_Properties.php:288
+#: ../class_final/AmazonAutoLinks_Properties.php:327
+#: ../class_final/AmazonAutoLinks_Properties.php:376
+msgid "Toys"
+msgstr "おもちゃ"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:131
+#: ../class_final/AmazonAutoLinks_Properties.php:174
+#: ../class_final/AmazonAutoLinks_Properties.php:193
+#: ../class_final/AmazonAutoLinks_Properties.php:228
+#: ../class_final/AmazonAutoLinks_Properties.php:255
+#: ../class_final/AmazonAutoLinks_Properties.php:331
+#: ../class_final/AmazonAutoLinks_Properties.php:381
+msgid "Watches"
+msgstr "時計"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:148
+#: ../class_final/AmazonAutoLinks_Properties.php:307
+#: ../class_final/AmazonAutoLinks_Properties.php:353
+msgid "Home Garden"
+msgstr "庭"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:152
+#: ../class_final/AmazonAutoLinks_Properties.php:186
+#: ../class_final/AmazonAutoLinks_Properties.php:211
+#: ../class_final/AmazonAutoLinks_Properties.php:247
+#: ../class_final/AmazonAutoLinks_Properties.php:277
+#: ../class_final/AmazonAutoLinks_Properties.php:311
+#: ../class_final/AmazonAutoLinks_Properties.php:357
+msgid "Kitchen"
+msgstr "キッチン"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:153
+#: ../class_final/AmazonAutoLinks_Properties.php:212
+#: ../class_final/AmazonAutoLinks_Properties.php:248
+#: ../class_final/AmazonAutoLinks_Properties.php:312
+msgid "Lighting"
+msgstr "証明"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:154
+#: ../class_final/AmazonAutoLinks_Properties.php:359
+msgid "Magazines"
+msgstr "雑誌"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:155
+#: ../class_final/AmazonAutoLinks_Properties.php:278
+#: ../class_final/AmazonAutoLinks_Properties.php:313
+#: ../class_final/AmazonAutoLinks_Properties.php:360
+msgid "Marketplace"
+msgstr "マーケットプレイス"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:156
+#: ../class_final/AmazonAutoLinks_Properties.php:187
+#: ../class_final/AmazonAutoLinks_Properties.php:213
+#: ../class_final/AmazonAutoLinks_Properties.php:249
+#: ../class_final/AmazonAutoLinks_Properties.php:280
+#: ../class_final/AmazonAutoLinks_Properties.php:314
+#: ../class_final/AmazonAutoLinks_Properties.php:363
+msgid "MP3 Downloads"
+msgstr "MP3 ダウンロード"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:158
+#: ../class_final/AmazonAutoLinks_Properties.php:215
+#: ../class_final/AmazonAutoLinks_Properties.php:282
+#: ../class_final/AmazonAutoLinks_Properties.php:316
+#: ../class_final/AmazonAutoLinks_Properties.php:365
+msgid "Musical Instruments"
+msgstr "楽器"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:159
+#: ../class_final/AmazonAutoLinks_Properties.php:216
+#: ../class_final/AmazonAutoLinks_Properties.php:283
+#: ../class_final/AmazonAutoLinks_Properties.php:317
+#: ../class_final/AmazonAutoLinks_Properties.php:366
+msgid "Music Tracks"
+msgstr "サウンドトラック"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:161
+#: ../class_final/AmazonAutoLinks_Properties.php:319
+#: ../class_final/AmazonAutoLinks_Properties.php:368
+msgid "Outdoor Living"
+msgstr "アウトドア"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:162
+#: ../class_final/AmazonAutoLinks_Properties.php:320
+msgid "Outlet"
+msgstr "アウトレット"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:163
+#: ../class_final/AmazonAutoLinks_Properties.php:218
+#: ../class_final/AmazonAutoLinks_Properties.php:321
+#: ../class_final/AmazonAutoLinks_Properties.php:369
+msgid "PC Hardware"
+msgstr "PCハードウェア"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:169
+#: ../class_final/AmazonAutoLinks_Properties.php:326
+#: ../class_final/AmazonAutoLinks_Properties.php:375
+msgid "Tools"
+msgstr "ツール"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:245
+msgid "Garden"
+msgstr "ガーデニング"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:273
+msgid "Hobbies"
+msgstr "ホビー"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:279
+#: ../class_final/AmazonAutoLinks_Properties.php:362
+msgid "Mobile Apps"
+msgstr "モバイルアプリ"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:339
+msgid "Arts And Crafts"
+msgstr "アート・工芸"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:346
+msgid "Collectibles"
+msgstr "セレブリティ"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:347
+msgid "Digital Music"
+msgstr "デジタル音楽"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:350
+msgid "Gourmet Food"
+msgstr "健康食品"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:354
+msgid "Industrial"
+msgstr "産業"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:377
+msgid "Unbox Video"
+msgstr "動画を出す"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:382
+msgid "Wireless"
+msgstr "ワイヤレス"
+
+#: ../class_final/AmazonAutoLinks_Properties.php:383
+msgid "Wireless Accessories"
+msgstr "ワイヤレスアクセサリー"
+
+#: ../class_final/AmazonAutoLinks_Requirements.php:116
+msgid "Deactivating the plugin."
+msgstr "プラグインを停止します。"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:2288
+#: ../library/admin-page-framework-for-amazon-auto-links.php:7448
+msgid "Upload Image"
+msgstr "画像アップロード"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:2289
+#: ../library/admin-page-framework-for-amazon-auto-links.php:3025
+#: ../library/admin-page-framework-for-amazon-auto-links.php:7449
+#: ../library/admin-page-framework-for-amazon-auto-links.php:7529
+msgid "Use This Image"
+msgstr "この画像を使う"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:5233
+msgid "Powered by"
+msgstr "Powered by"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:5271
+msgid "Manage"
+msgstr "編集"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:6180
+msgid "Submit"
+msgstr "送信"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:6416
+msgid "Select Image"
+msgstr "画像を選択"
+
+#: ../library/admin-page-framework-for-amazon-auto-links.php:7060
+msgid "Show All"
+msgstr "全て表示"
+
+#: ../template/category/template.php:23 ../template/preview/template.php:11
+#: ../template/search/template.php:30
+msgid "No products found."
+msgstr "プロダクトが見つかりません"
+
+#: ../template/search/template.php:60
+#, php-format
+msgid "by %1$s"
+msgstr "by %1$s"
+
+#: ../template/search/template.php:65
+#, php-format
+msgid "at %1$s"
+msgstr "at %1$s"
+
+#: ../template/search/template.php:70
+#, php-format
+msgid "New from %1$s"
+msgstr "新品 %1$s より"
+
+#: ../template/search/template.php:75
+#, php-format
+msgid "Used from %1$s"
+msgstr "中古 %1$s より"

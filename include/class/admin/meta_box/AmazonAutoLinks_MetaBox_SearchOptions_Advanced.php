@@ -1,0 +1,2 @@
+<?php
+class AmazonAutoLinks_MetaBox_SearchOptions_Advanced extends AmazonAutoLinks_MetaBox_SearchOptions_Advanced_ {}

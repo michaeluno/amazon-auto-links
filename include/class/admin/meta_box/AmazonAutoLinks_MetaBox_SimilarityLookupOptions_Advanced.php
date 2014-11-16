@@ -1,0 +1,2 @@
+<?php
+class AmazonAutoLinks_MetaBox_SimilarityLookupOptions_Advanced extends AmazonAutoLinks_MetaBox_SimilarityLookupOptions_Advanced_ {}

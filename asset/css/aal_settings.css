@@ -1,0 +1,15 @@
+ .auth-status {
+	margin-bottom: 2em;
+}
+.authenticated {
+	font-weight:bold;
+	color: green;				
+}
+.unauthenticated {
+	font-weight:bold;
+	color: red;				
+}
+
+.top-right { 
+	padding: 0 0 20px; 
+} 

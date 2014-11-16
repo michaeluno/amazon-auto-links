@@ -1,0 +1,16 @@
+<h3>Exchange</h3>
+<p>You can receive a discount or a copy of the Pro version of the plugin by contributing one of the followings. A contribution does not have to be for this plugin. It can be for any product of miunosoft. Please just ask.
+<li><strong>Translations</strong> - submit a localization file for an untranslated language. With a plugin called <a href="http://wordpress.org/extend/plugins/codestyling-localization/stats/">Codestyling Localization</a> no programming skill is required to create a language file. 
+<li><strong>Review Articles</strong> - publish an article about the product. It is required that the site has Google Page Rank 3 or higher and the link to the product page. 
+<li><strong>Testimonials</strong> - write a testimonial for the product. Your photo or link to your SNS page will be asked. 
+<li><strong>Graphic Design</strong> - create logos, icons, or banners for the product. 
+<li><strong>Video Tutorials</strong> - create a brief instruction video tutorial with your narration. 
+<li><strong>Something else</strong> - please ask for other possibilities for the exchange. 
+<h3>Bug Report</h3>
+<p>If you find the plugin not working or having issues, please report it via the <a href="http://michaeluno.jp/en/bug-report">bug report form</a>.
+<h3>Donation</h3>
+<p>Donations are always appreciated. If you like to donate to the developer, please do so via <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=J4UJHETVAZX34">PayPal</a>.
+<h3>Order a custom plugin or theme</h3>
+<p>If you need a custom plugin, please ask for a quote <a href="http://en.michaeluno.jp/contact/custom-order/">here</a>. We maybe able to create one for you!
+<h3>Contact</h3>
+<p>wpplugins@michaeluno.jp</p></li>
