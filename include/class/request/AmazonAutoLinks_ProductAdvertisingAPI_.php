@@ -24,8 +24,8 @@ class AmazonAutoLinks_ProductAdvertisingAPI_ extends AmazonAutoLinks_APIRequestT
 		'JP'	=> 'co.jp',
 		'UK'	=> 'co.uk',
 		'US'	=> 'com',
+		'IN'	=> 'in',	        // 2.1.0+
 		// The followings locales are not supported by Amazon Product Advertising API.
-		// 'IN'	=> '',	
 		// 'BR'	=> '',
 		// 'MX'	=> '',		
 	);

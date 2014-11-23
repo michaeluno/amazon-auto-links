@@ -193,7 +193,7 @@ abstract class AmazonAutoLinks_Form_Search_ extends AmazonAutoLinks_Form {
 					'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
 					'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
 					'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
-					// 'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
+					'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
 					// 'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
 					// 'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
 				),

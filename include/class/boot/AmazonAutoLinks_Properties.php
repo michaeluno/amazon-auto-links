@@ -242,11 +242,13 @@ final class AmazonAutoLinks_Properties {
 					'VideoGames' => __( 'Video Games', 'amazon-auto-links' ),
 					'Watches' => __( 'Watches', 'amazon-auto-links' ),				
 				);			
-			case "IN":
+			case "IN":  // 2.1.0+ updated the list to the Amazon API Version 2013-08-01 from 2011-08-01
 				return array(
-					'All' => __( 'All', 'amazon-auto-links' ),
-					'Books' => __( 'Books', 'amazon-auto-links' ),
-					'DVD' => __( 'DVD', 'amazon-auto-links' ),				
+					'All'           => __( 'All', 'amazon-auto-links' ),
+					'Books'         => __( 'Books', 'amazon-auto-links' ),
+					'Electronics'   => __( 'Electronics', 'amazon-auto-links' ),
+					'Marketplace'   => __( 'Marketplace', 'amazon-auto-links' ),
+					'DVD'           => __( 'DVD', 'amazon-auto-links' ),				
 				);
 			case "IT":
 				return array(
@@ -400,6 +402,10 @@ final class AmazonAutoLinks_Properties {
 		}
 		
 	}	
+    
+    /**
+     * @todo    Confirm if this property is being used. 
+     */
 	public static $arrSearchIndex = array(
 		'CA' => array(
 			"All","Baby","Beauty","Blended","Books","Classical","DVD","Electronics","ForeignBooks",
@@ -463,6 +469,7 @@ final class AmazonAutoLinks_Properties {
 	 * 
 	 * @remark			These IDs were valid as of the publication date of this guide. API Version 2011-08-01
 	 * @see				http://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDs.html
+     * @todo            Confirm if this property is used or not. The caller method may not be used.
 	 */
 	public static $arrRootNodes = array(
 		'CA' => array(
@@ -488,7 +495,9 @@ final class AmazonAutoLinks_Properties {
 			193711031,818936031,57686031,213080031,206442031,537366,340862031,192420031,1571268031,215934031,
 			548012,548014,548014,578610,578608,548014,60937031,
 		),
-		'IN' => array( 976389031, 976416031 ),
+		// 'IN' => array( 976389031, 976416031 ), 
+        // 2.1.0+ Updated the list to the API Version 2013-08-01) from API Version 2011-08-01
+		'IN' => array( 976389031, 976416031, 976419031, 976442031, 1951048031, 976392031, 1350380031, 1350387031 ),
 		'IT' => array(
 			1571280031,1571286031,411663031,412606031,412609031,433842031,635016031,818937031,524015031,
 			1571292031,1748203031,412600031,524006031,412612031,523997031,412603031,524009031,
