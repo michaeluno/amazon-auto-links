@@ -1,12 +1,12 @@
 === Amazon Auto Links ===
-Contributors: Michael Uno, miunosoft
-Donate link: http://en.michaeluno.jp/donate
-Tags: amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
-Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 2.0.7
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Contributors:       Michael Uno, miunosoft
+Donate link:        http://en.michaeluno.jp/donate
+Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
+Requires at least:  3.3
+Tested up to:       4.0.1
+Stable tag:         2.0.7
+License:            GPLv2 or later
+License             URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 
@@ -156,6 +156,9 @@ You can check if your access key is valid or not with this tool (http://associat
 4. **Widget Sample**
 
 == Changelog ==
+
+= 2.1.0 = 
+- Added the India locale for the search unit type.
 
 = 2.0.7 - 11/14/2014 =
 - Added a error message when a template is not found.
