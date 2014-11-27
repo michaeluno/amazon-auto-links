@@ -27,6 +27,7 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
 		'MinimumPrice'          => null,
 		'MinPercentageOff'      => null,
         'MerchantId'            => null,    // 2.0.7+
+        'MarketplaceDomain'     => null,    // 2.1.0+
 		'ItemPage'              => null,
 		'additional_attribute'  => null,
 		'search_by'             => 'Author',
@@ -211,7 +212,7 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
 	 */
 	protected function getAPIParameterArray( $sOperation='ItemSearch', $iItemPage=null ) {
 
-		$_bIsIndexAllOrBlended  = ( $this->arrArgs['SearchIndex'] == 'All' || $this->arrArgs['SearchIndex'] == 'Blended' );
+		$_bIsIndexAllOrBlended  = ( 'All' === $this->arrArgs['SearchIndex'] || 'Blended' === $this->arrArgs['SearchIndex'] );
 		$_aParams               = array(
 			'Keywords'              => AmazonAutoLinks_Utilities::trimDelimitedElements( $this->arrArgs['Keywords'], ',', false ),
 			'Title'                 => $_bIsIndexAllOrBlended 
@@ -227,7 +228,6 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
 			'BrowseNode'            => ! $_bIsIndexAllOrBlended && isset( $this->arrArgs['BrowseNode'] ) && $this->arrArgs['BrowseNode'] ? $this->arrArgs['BrowseNode'] : null,
 			'Availability'          => isset( $this->arrArgs['Availability'] ) && $this->arrArgs['Availability'] ? 'Available' : null,
 			'Condition'             => $_bIsIndexAllOrBlended ? null : $this->arrArgs['Condition'],
-			// 'ItemPage' => 
 			'IncludeReviewsSummary' => "True",
 			'MaximumPrice'          => ! $_bIsIndexAllOrBlended && $this->arrArgs['MaximumPrice'] 
                 ? $this->arrArgs['MaximumPrice'] 
@@ -242,7 +242,13 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
             'MerchantId'            => 'Amazon' === $this->arrArgs['MerchantId']
                 ? $this->arrArgs['MerchantId'] 
                 : null, 
-		);			
+            // 2.1.0+
+            'MarketplaceDomain'     => 'Marketplace' === $this->arrArgs['SearchIndex'] 
+                ? AmazonAutoLinks_Properties::getMarketplaceDomainByLocale( $this->arrArgs['country'] )
+                : null,                
+		);		
+// var_dump( $this->arrArgs );
+// var_dump( $_aParams );
 		$_aParams = $iItemPage
 			? $_aParams + array( 'ItemPage' => $iItemPage )
 			: $_aParams;
