@@ -6,7 +6,7 @@ Requires at least:  3.3
 Tested up to:       4.0.1
 Stable tag:         2.0.7
 License:            GPLv2 or later
-License             URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
 Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 
