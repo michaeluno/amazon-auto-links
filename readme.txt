@@ -157,7 +157,7 @@ You can check if your access key is valid or not with this tool (http://associat
 
 == Changelog ==
 
-= 2.1.0 = 
+= 2.1.0 - 11/24/2014 = 
 - Added the India locale for the search unit type.
 - Fixed an issue that when `Marketpalce` is selected in the `Category` option of the Select unit type, an error was shown.
 
