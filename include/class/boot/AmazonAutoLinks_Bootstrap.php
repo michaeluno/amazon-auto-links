@@ -13,8 +13,25 @@
 
 final class AmazonAutoLinks_Bootstrap {
 	
-	function __construct( $sPluginFilePath ) {
+    /**
+     * Indicates wheher the class has been instantiated or not. 
+     * 
+     * The bootstrap class can only be instantiated per page load.
+     * 
+     * @since   2.1.1
+     */
+    static private $_bLoaded = false;
+    
+    /**
+     * Sets up hooks and properties.
+     */
+	public function __construct( $sPluginFilePath ) {
 		
+        if ( self::$_bLoaded ) {
+            return;
+        }
+        self::$_bLoaded = true;        
+        
 		$this->_bIsAdmin    = is_admin();
 		$this->_sFilePath   = $sPluginFilePath;
 		
@@ -118,9 +135,9 @@ final class AmazonAutoLinks_Bootstrap {
 		private function _registerMetaBoxes() {
 			
 			$GLOBALS['strAmazonAutoLinks_UnitType'] = AmazonAutoLinks_Option::getUnitType();
-			$strUnitType = $GLOBALS['strAmazonAutoLinks_UnitType'];
-			$bIsUpdatinUnit = ( empty( $_GET ) && $GLOBALS['pagenow'] == 'post.php' );	// when saving the meta data, the GET array is empty
-			if ( $strUnitType == 'category' || $bIsUpdatinUnit ) {	
+			$_sUnitType       = $GLOBALS['strAmazonAutoLinks_UnitType'];
+			$_bIsUpdatingUnit = ( empty( $_GET ) && 'post.php' === $GLOBALS['pagenow'] );	// when saving the meta data, the GET array is empty
+			if ( $_sUnitType == 'category' || $_bIsUpdatingUnit ) {	
 				new AmazonAutoLinks_MetaBox_CategoryOptions(
 					'amazon_auto_links_category_unit_options_meta_box',	// meta box ID
 					__( 'Category Unit Options', 'amazon-auto-links' ),		// meta box title
@@ -131,7 +148,7 @@ final class AmazonAutoLinks_Bootstrap {
 				new AmazonAutoLinks_MetaBox_Categories;
 			}
 			// Do not use  else here for the meta box saving process
-			if ( $strUnitType == 'tag' || $bIsUpdatinUnit ) {
+			if ( $_sUnitType == 'tag' || $_bIsUpdatingUnit ) {
 				new AmazonAutoLinks_MetaBox_TagOptions(
 					'amazon_auto_links_tag_unit_options_meta_box',	// meta box ID
 					__( 'Tag Unit Options', 'amazon-auto-links' ),		// meta box title
@@ -141,7 +158,7 @@ final class AmazonAutoLinks_Bootstrap {
 				);					
 			}
 			// Do not use  else here for the meta box saving process
-			if ( $strUnitType == 'search' || $bIsUpdatinUnit ) {
+			if ( $_sUnitType == 'search' || $_bIsUpdatingUnit ) {
 				new AmazonAutoLinks_MetaBox_SearchOptions(
 					'amazon_auto_links_search_unit_options_meta_box',	// meta box ID
 					__( 'Search Unit Options', 'amazon-auto-links' ),		// meta box title
@@ -158,7 +175,7 @@ final class AmazonAutoLinks_Bootstrap {
 				);	
 			}
 			// Do not use else here for the meta box saving process
-			if ( $strUnitType == 'item_lookup' || $bIsUpdatinUnit ) {	// the second condition is for when updating the unit.
+			if ( $_sUnitType == 'item_lookup' || $_bIsUpdatingUnit ) {	// the second condition is for when updating the unit.
 				new AmazonAutoLinks_MetaBox_ItemLookupOptions(
 					'amazon_auto_links_item_lookup_unit_options_meta_box',	// meta box ID
 					__( 'Item Look-up Options', 'amazon-auto-links' ),		// meta box title
@@ -175,7 +192,7 @@ final class AmazonAutoLinks_Bootstrap {
 				);
 			}			
 			// Do not use else here for the meta box saving process
-			if ( $strUnitType == 'similarity_lookup' || $bIsUpdatinUnit ) {	// the second condition is for when updating the unit.
+			if ( $_sUnitType == 'similarity_lookup' || $_bIsUpdatingUnit ) {	// the second condition is for when updating the unit.
 				new AmazonAutoLinks_MetaBox_SimilarityLookupOptions(
 					'amazon_auto_links_similarity_lookup_unit_options_meta_box',	// meta box ID
 					__( 'Similarity Look-up Options', 'amazon-auto-links' ),		// meta box title
