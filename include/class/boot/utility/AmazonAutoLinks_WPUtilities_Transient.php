@@ -1,12 +1,12 @@
 <?php
 /**
- *	Deals with WordPress transients.
+ *    Deals with WordPress transients.
  * 
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl	http://michaeluno.jp
+ * @authorurl    http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since		2.0.0 
+ * @since        2.0.0 
  */
 
 class AmazonAutoLinks_WPUtilities_Transient extends AmazonAutoLinks_Utilities {
@@ -16,17 +16,17 @@ class AmazonAutoLinks_WPUtilities_Transient extends AmazonAutoLinks_Utilities {
      * @since   2.0.0
      * @since   2.0.7       Moved from `AmazonAutoLinks_Transients`.
      */
-	public static function cleanTransients( $vPrefixes=array() ) {	// for the deactivation hook.
+    public static function cleanTransients( $vPrefixes=array() ) {    // for the deactivation hook.
 
-		// This method also serves for the deactivation callback and in that case, an empty value is passed to the first parameter.		
-		$arrPrefixes = empty( $arrPrefixes ) ? array( AmazonAutoLinks_Commons::TransientPrefix ) : ( array ) $vPrefixes;
-		
-		foreach( $arrPrefixes as $strPrefix ) {
-			$GLOBALS['wpdb']->query( "DELETE FROM `" . $GLOBALS['table_prefix'] . "options` WHERE `option_name` LIKE ( '_transient_%{$strPrefix}%' )" );
-			$GLOBALS['wpdb']->query( "DELETE FROM `" . $GLOBALS['table_prefix'] . "options` WHERE `option_name` LIKE ( '_transient_timeout_%{$strPrefix}%' )" );
-		}
-	
-	}
+        // This method also serves for the deactivation callback and in that case, an empty value is passed to the first parameter.        
+        $arrPrefixes = empty( $arrPrefixes ) ? array( AmazonAutoLinks_Commons::TransientPrefix ) : ( array ) $vPrefixes;
+        
+        foreach( $arrPrefixes as $strPrefix ) {
+            $GLOBALS['wpdb']->query( "DELETE FROM `" . $GLOBALS['table_prefix'] . "options` WHERE `option_name` LIKE ( '_transient_%{$strPrefix}%' )" );
+            $GLOBALS['wpdb']->query( "DELETE FROM `" . $GLOBALS['table_prefix'] . "options` WHERE `option_name` LIKE ( '_transient_timeout_%{$strPrefix}%' )" );
+        }
+    
+    }
     
     /**
      * Stores whether the page is loaded in the network admin or not.
@@ -108,5 +108,5 @@ class AmazonAutoLinks_WPUtilities_Transient extends AmazonAutoLinks_Utilities {
 
         return $_vTransient;     
     }
-	
+    
 }

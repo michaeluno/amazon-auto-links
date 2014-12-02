@@ -4,9 +4,9 @@
  * 
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl	http://michaeluno.jp
+ * @authorurl    http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since		1.0.0
+ * @since        1.0.0
  * 
 */
 
@@ -88,69 +88,69 @@ final class AmazonAutoLinks_Debug {
      * 
      * @deprecated  Use the dump() method instead.
      */
-	static public function dumpArray( $arr, $strFilePath=null ) {
-		self::dump( $arr, $strFilePath );
-	}
+    static public function dumpArray( $arr, $strFilePath=null ) {
+        self::dump( $arr, $strFilePath );
+    }
     /**
      * 
      * @deprecated  Use the get() method instead.
      */
-	static public function getArray( $arr, $strFilePath=null ) {
-		self::get( $arr, $strFilePath );
-	}
+    static public function getArray( $arr, $strFilePath=null ) {
+        self::get( $arr, $strFilePath );
+    }
     /**
      * 
      * @deprecated  Use the log() method instead.
      */
-	static public function logArray( $asArray, $sFilePath=null ) {
-		self::log( $asArray, $sFilePath );	
+    static public function logArray( $asArray, $sFilePath=null ) {
+        self::log( $asArray, $sFilePath );    
     }
 
-	/**
-	 * Retrieves the currently loaded page url.
-	 * 
-	 * @since			1.3.3.11
-	 */
-	static public function getCurrentURL() {
-		$sSSL = ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) ? true:false;
-		$sServerProtocol = strtolower( $_SERVER['SERVER_PROTOCOL'] );
-		$sProtocol = substr( $sServerProtocol, 0, strpos( $sServerProtocol, '/' ) ) . ( ( $sSSL ) ? 's' : '' );
-		$sPort = $_SERVER['SERVER_PORT'];
-		$sPort = ( ( !$sSSL && $sPort=='80' ) || ( $sSSL && $sPort=='443' ) ) ? '' : ':' . $sPort;
-		$sHost = isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-		return $sProtocol . '://' . $sHost . $sPort . $_SERVER['REQUEST_URI'];
-	}
-	
-	static public function echoMemoryUsage() {
-		
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
-				   
-		echo self::getMemoryUsage() . "<br/>";
-		
-	} 		
+    /**
+     * Retrieves the currently loaded page url.
+     * 
+     * @since            1.3.3.11
+     */
+    static public function getCurrentURL() {
+        $sSSL = ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) ? true:false;
+        $sServerProtocol = strtolower( $_SERVER['SERVER_PROTOCOL'] );
+        $sProtocol = substr( $sServerProtocol, 0, strpos( $sServerProtocol, '/' ) ) . ( ( $sSSL ) ? 's' : '' );
+        $sPort = $_SERVER['SERVER_PORT'];
+        $sPort = ( ( !$sSSL && $sPort=='80' ) || ( $sSSL && $sPort=='443' ) ) ? '' : ':' . $sPort;
+        $sHost = isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+        return $sProtocol . '://' . $sHost . $sPort . $_SERVER['REQUEST_URI'];
+    }
+    
+    static public function echoMemoryUsage() {
+        
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+                   
+        echo self::getMemoryUsage() . "<br/>";
+        
+    }         
 
-    static public function getMemoryUsage( $intType=1 ) {	// since 1.1.4
+    static public function getMemoryUsage( $intType=1 ) {    // since 1.1.4
        
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
-	   
-		$intMemoryUsage = $intType == 1 ? memory_get_usage( true ) : memory_get_peak_usage( true );
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+       
+        $intMemoryUsage = $intType == 1 ? memory_get_usage( true ) : memory_get_peak_usage( true );
        
         if ( $intMemoryUsage < 1024 ) return $intMemoryUsage . " bytes";
         
-		if ( $intMemoryUsage < 1048576 ) return round( $intMemoryUsage/1024,2 ) . " kilobytes";
+        if ( $intMemoryUsage < 1048576 ) return round( $intMemoryUsage/1024,2 ) . " kilobytes";
         
         return round( $intMemoryUsage / 1048576,2 ) . " megabytes";
            
-    } 		
-	
-	static public function getOption( $strKey ) {
+    }         
+    
+    static public function getOption( $strKey ) {
 
-		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
-		
-		$oOption = & $GLOBALS['oAmazonAutoLinks_Option'];		
-		if ( ! isset( $oOption->arrOptions[ $strKey ] ) ) return;
-		
-		die( self::getArray( $oOption->arrOptions[ $strKey ] ) );
-		
-	}
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
+        
+        $oOption = & $GLOBALS['oAmazonAutoLinks_Option'];        
+        if ( ! isset( $oOption->arrOptions[ $strKey ] ) ) return;
+        
+        die( self::getArray( $oOption->arrOptions[ $strKey ] ) );
+        
+    }
 }

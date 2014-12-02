@@ -1,7 +1,7 @@
 <?php
-function AmazonAutoLinks( $arrArgs ) {
-	
-	$oUnits = new AmazonAutoLinks_Units( $arrArgs );
-	return $oUnits->render();
-	
+function AmazonAutoLinks( $aArgs ) {
+    
+    $_oUnits = new AmazonAutoLinks_Units( $aArgs );
+    return $_oUnits->render();
+    
 }

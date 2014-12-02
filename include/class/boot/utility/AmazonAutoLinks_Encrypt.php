@@ -7,38 +7,38 @@
  *
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl	http://michaeluno.jp
+ * @authorurl    http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since		2.0.0
+ * @since        2.0.0
  */
 if ( ! class_exists( 'IXR_Message' ) ) require_once( ABSPATH . WPINC . '/class-IXR.php' );
 class AmazonAutoLinks_Encrypt extends IXR_Message {
 
-	protected $strFunction = 'base64_encode';
-	
-	function __construct() {}	// needs it to override the parent constructor.
-	
-	public function encode( $vData ) {
-		
-		if ( is_array( $vData ) || is_object( $vData ) )
-			$vData = serialize( $vData );
-			
-		return call_user_func_array( $this->strFunction, array( $vData ));
-	}
-	
-	public function decode( $strCode ) {
-			
-		$this->params = array();	// make sure it's empty
-		$this->_currentTagContents = $strCode;
-		$this->tag_close( '', 'base64' );
-		$vData = $this->params[0];
-		
-		return is_serialized( $vData ) 
-			? unserialize( $vData )
-			: $vData;
-		
-	}	
-	
-	
-	
+    protected $strFunction = 'base64_encode';
+    
+    function __construct() {}    // needs it to override the parent constructor.
+    
+    public function encode( $vData ) {
+        
+        if ( is_array( $vData ) || is_object( $vData ) )
+            $vData = serialize( $vData );
+            
+        return call_user_func_array( $this->strFunction, array( $vData ));
+    }
+    
+    public function decode( $strCode ) {
+            
+        $this->params = array();    // make sure it's empty
+        $this->_currentTagContents = $strCode;
+        $this->tag_close( '', 'base64' );
+        $vData = $this->params[0];
+        
+        return is_serialized( $vData ) 
+            ? unserialize( $vData )
+            : $vData;
+        
+    }    
+    
+    
+    
 }
