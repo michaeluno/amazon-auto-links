@@ -48,11 +48,11 @@ final class AmazonAutoLinks_Commons extends AmazonAutoLinks_Commons_Base {
     
 	const TextDomain                = 'amazon-auto-links';
 	const TextDomainPath            = './language';
-	const PostTypeSlug              = 'amazon_auto_links';
 	const ShortCode                 = 'amazon_auto_links';
 	const TagSlug                   = 'amazon_auto_links_tag';
 	const AdminOptionKey            = 'amazon_auto_links_admin';
 	const TransientPrefix           = 'AAL';
+	const PostTypeSlug              = 'amazon_auto_links';
 	const PostTypeSlugAutoInsert    = 'aal_auto_insert';	// amazon_auto_links_auto_insert fails creating the post type.
 	const PageSettingsSlug          = 'aal_settings';	// this is to be referred by Pro and third party extension.
 	const SectionID_License         = 'pro_license';
