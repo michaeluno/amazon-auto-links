@@ -4,25 +4,25 @@
     
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl    http://michaeluno.jp
+ * @authorurl   http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.0
+ * @since       2.0.0
 */
 
 abstract class AmazonAutoLinks_AutoInsert_ extends AmazonAutoLinks_AutoInsert_SetUp {
     
-    protected $arrAutoInsertIDs = array();    // stores the post IDs of the auto-insert custom post type.
+    protected $arrAutoInsertIDs     = array();    // stores the post IDs of the auto-insert custom post type.
     protected $arrAutoInsertOptions = array();    // multi-dimensional array storing all the options of the auto-insert definitions.
-    protected $arrActionHooks = array();    // stores all the action hooks. 
-    protected $arrFilterHooks = array();    // stores all the filter hooks.
+    protected $arrActionHooks       = array();    // stores all the action hooks. 
+    protected $arrFilterHooks       = array();    // stores all the filter hooks.
     
     protected $arrDisplayedPageTypes = array(        // stores the current page type information.
-        'is_single' => null,    // deprecated
-        'is_singular' => null,
-        'is_home' => null,
-        'is_archive' => null,
-        'is_404' => null,
-        'is_search' => null,            
+        'is_single'     => null,    // deprecated
+        'is_singular'   => null,
+        'is_home'       => null,
+        'is_archive'    => null,
+        'is_404'        => null,
+        'is_search'     => null,            
     );
     protected $strPostType ='';    // stores the current post type.
     protected $arrTermIDs = array();    // stores the taxonomy terms' IDs of the current post.
@@ -35,15 +35,15 @@ abstract class AmazonAutoLinks_AutoInsert_ extends AmazonAutoLinks_AutoInsert_Se
      * 
      */
     protected static $arrStructure_SubjectPageInfo = array(
-        'post_id' => null,
-        'post_type' => null, 
-        'is_single' => null,    // deprecated
-        'is_singular' => null,
-        'is_home' => null,
-        'is_archive' => null,
-        'is_404' => null,
-        'is_search' => null,
-        'term_ids' => array(),
+        'post_id'       => null,
+        'post_type'     => null, 
+        'is_single'     => null,    // deprecated
+        'is_singular'   => null,
+        'is_home'       => null,
+        'is_archive'    => null,
+        'is_404'        => null,
+        'is_search'     => null,
+        'term_ids'      => array(),
     );    
     
         
@@ -164,12 +164,7 @@ abstract class AmazonAutoLinks_AutoInsert_ extends AmazonAutoLinks_AutoInsert_Se
             [tax_input] => Array(
                 [post_tag] => test
             )
-        */
-        
-// AmazonAutoLinks_Debug::logArray( '---LOG START---' );        
-// AmazonAutoLinks_Debug::logArray( $arrPostContent );
-// AmazonAutoLinks_Debug::logArray( $arrPostMeta );
-// AmazonAutoLinks_Debug::logArray( '---LOG END---' );        
+        */  
 
         $arrSubjectPostInfo = array(
             'post_id' => $arrPostMeta['ID'],
@@ -300,7 +295,7 @@ abstract class AmazonAutoLinks_AutoInsert_ extends AmazonAutoLinks_AutoInsert_Se
     }
     
     protected function isAllowed( $arrAutoInsertOptions, $arrSubjectPostInfo ) {
-// AmazonAutoLinks_Debug::logArray( $arrAutoInsertOptions );
+
         /* Post IDs - the option field is converted to array at earlier point in this class */
         $_aEnabledPostIDs = array_filter( $arrAutoInsertOptions['enable_post_ids'] );
         if ( ! empty( $_aEnabledPostIDs ) && ! in_array( $arrSubjectPostInfo['post_id'], $_aEnabledPostIDs ) ) {    // at least one id is set
