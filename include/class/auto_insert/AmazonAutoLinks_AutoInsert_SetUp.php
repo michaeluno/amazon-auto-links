@@ -60,7 +60,7 @@ abstract class AmazonAutoLinks_AutoInsert_SetUp {
      */
     public function _replyToSetUpHooks() {
         
-        if ( count( $this->arrAutoInsertIDs ) == 0 ) return;
+        if ( 0 == count( $this->arrAutoInsertIDs ) ) { return; }
         
         // Retrieve all the options.
         foreach( $this->arrAutoInsertIDs as $intID ) {

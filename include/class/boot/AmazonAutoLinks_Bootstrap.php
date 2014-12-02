@@ -96,7 +96,7 @@ final class AmazonAutoLinks_Bootstrap {
         if ( $this->_bIsAdmin ) {
             new AmazonAutoLinks_AdminPage( AmazonAutoLinks_Commons::AdminOptionKey, $this->_sFilePath );        
         }
-        
+
         // 5. Post Type - It should not use "if ( is_admin() )" for the this class because posts of custom post type can be accessed from front-end regular pages.
         new AmazonAutoLinks_PostType( AmazonAutoLinks_Commons::PostTypeSlug, null, $this->_sFilePath );     // post type slug
         new AmazonAutoLinks_PostType_AutoInsert( AmazonAutoLinks_Commons::PostTypeSlugAutoInsert, null, $this->_sFilePath );     // post type slug
@@ -262,7 +262,9 @@ final class AmazonAutoLinks_Bootstrap {
      */
     protected function _loadClasses( $sFilePath ) {
         
-        new AmazonAutoLinks_AutoLoad( dirname( $sFilePath ) . '/include/class/boot' );
+        $_aClassFiles = array();    // this variable will be updated in the included file.
+        include( dirname( $sFilePath ) . '/include/amazon-auto-links-include-class-file-list-boot.php' );
+        new AmazonAutoLinks_RegisterClasses( '', array(), $_aClassFiles );
         
         // Schedule to register regular classes when all the plugins are loaded. This allows other scripts to modify the loading class files.
         add_action( 'plugins_loaded', array( $this, '_replyToLoadClasses') );
@@ -281,12 +283,19 @@ final class AmazonAutoLinks_Bootstrap {
             }
             $_aAmazonAutoLinksClasses = apply_filters( 'aal_filter_classes', $_aAmazonAutoLinksClasses );
             
-            $_sPluginDir = dirname( $this->_sFilePath );
-            $_aExcludeDirs = array(
-                $_sPluginDir . '/include/class/boot',
-            );
-            new AmazonAutoLinks_AutoLoad( $_sPluginDir . '/include/class', $_aAmazonAutoLinksClasses, array( 'is_recursive' => true, 'exclude_dirs' => $_aExcludeDirs ) );
-
+            $_sPluginDir    = dirname( $this->_sFilePath );            
+            
+                // @todo This block shuold be done with the id_admin() check. However, some components such as auto-insert needs to read array structures defined in form classes.
+                // So classes that reside in the admin directory also need to be loaded in the front end at the moment.
+                // Move those structure definitions into the options class then this should be able to be avoided.
+                $_aAdminClassFiles  = array();
+                include( $_sPluginDir . '/include/amazon-auto-links-include-class-file-list-admin.php' );
+                new AmazonAutoLinks_RegisterClasses( '', array(), $_aAmazonAutoLinksClasses + $_aAdminClassFiles );
+         
+            $_aClassFiles = array();
+            include( $_sPluginDir . '/include/amazon-auto-links-include-class-file-list.php' );
+            new AmazonAutoLinks_RegisterClasses( '', array(), $_aAmazonAutoLinksClasses + $_aClassFiles );
+            
         }
 
     /**
