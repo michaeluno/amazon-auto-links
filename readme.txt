@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
 Tested up to:       4.0.1
-Stable tag:         2.0.7
+Stable tag:         2.1.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,13 @@ Yes, with [Pro](http://en.michaeluno.jp/amazon-auto-links/amazon-auto-links-pro)
 
 = I have a feature request. Would you implement that? = 
 Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto-links). If it is feasible, it will be included in the to-do list in the Other Notes section.
+
+= I get Amazon product links everywhere on the site after creating some units. How can I restrict them to certain pages? =
+Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
+
+= My credientials do not seem to be authenticated. How can I check if my access keys are the correct ones? = 
+Try [Scratchpad](http://associates-amazon.s3.amazonaws.com/scratchpad/index.html) to make sure your keys work there as well.
+
 
 == Other Notes ==
 
@@ -146,7 +153,7 @@ Then press the `Create New Access Key` button to create a key. Don't forget to k
 
 Also note that at the point that an access key is issued, if you have not created an account with Product Advertising API, the key will be invalid. If that happens, delete the created access key and go back to the previous step.
 
-You can check if your access key is valid or not with this tool (http://associates-amazon.s3.amazonaws.com/scratchpad/index.html). 
+You can check if your access key is valid or not with [Scratchpad](http://associates-amazon.s3.amazonaws.com/scratchpad/index.html). 
 
 == Screenshots ==
 
@@ -156,6 +163,9 @@ You can check if your access key is valid or not with this tool (http://associat
 4. **Widget Sample**
 
 == Changelog ==
+
+= 2.1.1 =
+- Optimized the performance.
 
 = 2.1.0 - 11/24/2014 = 
 - Added the India locale for the search unit type.
