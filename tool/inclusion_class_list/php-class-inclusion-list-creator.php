@@ -54,7 +54,7 @@ new PHP_Class_Files_Inclusion_Script_Creator(
 // for the front-end
 new PHP_Class_Files_Inclusion_Script_Creator(
 	$sTargetBaseDir,
-	array( $sTargetBaseDir . '/include/library', $sTargetBaseDir . '/include/class' ), 	// scan directory paths
+	array( $sTargetBaseDir . '/include/class' ), 	// scan directory paths
 	$sResultFilePath2, 
 	array(
 		// 'header_class_name'	=>	'TaskScheduler_InclusionScriptHeader',
@@ -65,7 +65,7 @@ new PHP_Class_Files_Inclusion_Script_Creator(
 		'base_dir_var'  	=>	'AmazonAutoLinks_Commons::$sDirPath',
 		'search'			=>	array(
 			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
-			'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/admin' ),
+			'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/admin', $sTargetBaseDir . '/include/library' ),
 			'exclude_dir_names'		=>	array(),
 			'is_recursive'			=>	true,
 		),			
@@ -85,7 +85,7 @@ new PHP_Class_Files_Inclusion_Script_Creator(
 		'base_dir_var'  	=>	'AmazonAutoLinks_Commons::$sDirPath',
 		'search'			=>	array(
 			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
-			// 'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/admin' ),
+			'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/library' ),
 			'exclude_dir_names'		=>	array(),
 			'is_recursive'			=>	true,
 		),			
