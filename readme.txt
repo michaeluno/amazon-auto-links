@@ -165,6 +165,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 2.1.1 =
+- Chagned the displayed product price of the `Search` unit type to use the discount price if there is an offered price.
 - Optimized the performance.
 
 = 2.1.0 - 11/24/2014 = 

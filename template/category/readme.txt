@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.0.3 =
+- Changed local variable names.
+
 = 1.0.2 - 05/27/2014 =
 - Tweaked the styling to center the not found image.
 

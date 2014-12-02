@@ -7,7 +7,7 @@
  * $arrArgs - the user defined arguments such as image size and count etc.
  */
 
-$arrStructure_Product = array(
+$_aStructure_Product = array(
 	'product_url' => '',
 	'title' => '',
 	'text_description' => '',
@@ -43,10 +43,10 @@ $sClassAttributes_ProductsContainer .= empty( $arrArgs['_labels'] ) ? '' : ' ama
 <?php endif; ?>
 
 <div class="<?php echo $sClassAttributes_ProductsContainer; ?>">
-<?php foreach( $arrProducts as $arrProduct ) : ?>
-	<?php $arrProduct = $arrProduct + $arrStructure_Product; ?>
+<?php foreach( $arrProducts as $_aProduct ) : ?>
+	<?php $_aProduct = $_aProduct + $_aStructure_Product; ?>
 	<div class="amazon-product-container">
-		<?php echo $arrProduct['formed_item']; ?>
+		<?php echo $_aProduct['formatted_item']; ?>
 	</div>
 <?php endforeach; ?>	
 </div>
