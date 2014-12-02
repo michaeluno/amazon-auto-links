@@ -16,31 +16,31 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         $this->setPostTypeArgs(
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
                 'labels' => array(
-                    'name' => AmazonAutoLinks_Commons::$strPluginName,
-                    'singular_name' => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
-                    'menu_name' => AmazonAutoLinks_Commons::$strPluginName,    // this changes the root menu name so cannot simply put Manage Unit here
-                    'add_new' => __( 'Add New Unit by Category', 'amazon-auto-links' ),
-                    'add_new_item' => __( 'Add New Unit', 'amazon-auto-links' ),
-                    'edit' => __( 'Edit', 'amazon-auto-links' ),
-                    'edit_item' => __( 'Edit Unit', 'amazon-auto-links' ),
-                    'new_item' => __( 'New Unit', 'amazon-auto-links' ),
-                    'view' => __( 'View', 'amazon-auto-links' ),
-                    'view_item' => __( 'View Product Links', 'amazon-auto-links' ),
-                    'search_items' => __( 'Search Units', 'amazon-auto-links' ),
-                    'not_found' => __( 'No unit found for Amazon Auto Links', 'amazon-auto-links' ),
-                    'not_found_in_trash' => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
-                    'parent' => 'Parent Unit'
+                    'name'                  => AmazonAutoLinks_Commons::$strPluginName,
+                    'singular_name'         => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
+                    'menu_name'             => AmazonAutoLinks_Commons::$strPluginName,    // this changes the root menu name so cannot simply put Manage Unit here
+                    'add_new'               => __( 'Add New Unit by Category', 'amazon-auto-links' ),
+                    'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
+                    'edit'                  => __( 'Edit', 'amazon-auto-links' ),
+                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
+                    'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
+                    'view'                  => __( 'View', 'amazon-auto-links' ),
+                    'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
+                    'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
+                    'not_found'             => __( 'No unit found for Amazon Auto Links', 'amazon-auto-links' ),
+                    'not_found_in_trash'    => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
+                    'parent'                => 'Parent Unit'
                 ),
-                'public' => true,
-                'menu_position' => 110,
+                'public'            => true,
+                'menu_position'     => 110,
                 // 'supports' => array( 'title', 'editor', 'comments', 'thumbnail' ),    // 'custom-fields'
-                'supports' => array( 'title' ),
-                'taxonomies' => array( '' ),
-                'menu_icon' => AmazonAutoLinks_Commons::getPluginURL( 'asset/image/menu_icon_16x16.png' ),
-                'has_archive' => true,
-                'hierarchical' => false,
+                'supports'          => array( 'title' ),
+                'taxonomies'        => array( '' ),
+                'menu_icon'         => AmazonAutoLinks_Commons::getPluginURL( 'asset/image/menu_icon_16x16.png' ),
+                'has_archive'       => true,
+                'hierarchical'      => false,
                 'show_admin_column' => true,
-                'can_export' => $GLOBALS['oAmazonAutoLinks_Option']->canExport(),
+                'can_export'        => $GLOBALS['oAmazonAutoLinks_Option']->canExport(),
             )        
         );
         $this->setAutoSave( false );
@@ -49,22 +49,23 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         $this->addTaxonomy( 
             AmazonAutoLinks_Commons::TagSlug, //'amazon_auto_links_tag', 
             array(
-                'labels' => array(
-                    'name' => __( 'Label', 'amazon-auto-links' ),
-                    'add_new_item' => __( 'Add New Label', 'amazon-auto-links' ),
+                'labels'                => array(
+                    'name'          => __( 'Label', 'amazon-auto-links' ),
+                    'add_new_item'  => __( 'Add New Label', 'amazon-auto-links' ),
                     'new_item_name' => __( 'New Label', 'amazon-auto-links' ),
                 ),
-                'show_ui' => true,
-                'show_tagcloud' => false,
-                'hierarchical' => false,
-                'show_admin_column' => true,
-                'show_in_nav_menus' => false,
-                'show_table_filter' => true,        // framework specific key
+                'show_ui'               => true,
+                'show_tagcloud'         => false,
+                'hierarchical'          => false,
+                'show_admin_column'     => true,
+                'show_in_nav_menus'     => false,
+                'show_table_filter'     => true,        // framework specific key
                 'show_in_sidebar_menus' => true,    // framework specific key
             )
         );
         
-        $_sCurrentPostTypeInAdmin = isset( $GLOBALS['post_type'] ) ? $GLOBALS['post_type']
+        $_sCurrentPostTypeInAdmin = isset( $GLOBALS['post_type'] ) 
+            ? $GLOBALS['post_type']
             : isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
         
         // For admin
@@ -84,10 +85,12 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         }
         
         
-        add_filter( 'the_content', array( $this, 'previewProductLinks' ) );    
+        add_filter( 'the_content', array( $this, '_replytToPrintPreviewProductLinks' ) );    
 
-        if ( isset( $this->oLink ) )    // if not in admin or the post type slug is not set, the oLink object won't be set.
+        // if not in admin or the post type slug is not set, the oLink object won't be set.
+        if ( isset( $this->oLink ) ) {
             $this->oLink->strSettingPageLinkTitle = __( 'Units', 'amazon-auto-links' );
+        }
             
     }
     
@@ -113,55 +116,30 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
      * 
      * @remark            Used for the post type single page that functions as preview the result.
      * */
-    public function previewProductLinks( $sContent ) {
+    public function _replytToPrintPreviewProductLinks( $sContent ) {
     
-        if ( ! isset( $GLOBALS['post']->post_type ) || $GLOBALS['post']->post_type != $this->oProps->strPostType ) return $sContent;
-
-        $_aUnitOptions = AmazonAutoLinks_Option::getUnitOptionsByPostID( $GLOBALS['post']->ID );
-        $_aUnitOptions['id'] = $GLOBALS['post']->ID;
-        $_sOutput = '';
-        switch ( $_aUnitOptions['unit_type'] ) {
-            case 'category':
-                $_oAALCat = new AmazonAutoLinks_Unit_Category( $_aUnitOptions );
-                $_sOutput = $_oAALCat->getOutput();
-                break;
-            case 'tag':
-                $_oAALTag = new AmazonAutoLinks_Unit_Tag( $_aUnitOptions );
-                $_sOutput = $_oAALTag->getOutput();
-                break;
-            case 'search':
-                $_oAALSearch = new AmazonAutoLinks_Unit_Search( $_aUnitOptions );
-                $_sOutput = $_oAALSearch->getOutput();
-                break;
-            case 'item_lookup':
-                $_oAALSearch = new AmazonAutoLinks_Unit_Search_ItemLookup( $_aUnitOptions );
-                $_sOutput = $_oAALSearch->getOutput();
-                break;
-            case 'similarity_lookup':
-                $_oAALSearch = new AmazonAutoLinks_Unit_Search_SimilarityLookup( $_aUnitOptions );                
-                $_sOutput = $_oAALSearch->getOutput();    
-                break;
-            default:
-                echo AmazonAutoLinks_Commons::$strPluginName . ': ' . __( 'Could not identify the unit type.', 'amazon-auto-links' );
-                break;
+        if ( ! isset( $GLOBALS['post']->post_type ) || $GLOBALS['post']->post_type != $this->oProps->strPostType ) { 
+            return $sContent; 
         }
         
-        return $sContent     // $sContent should be an empty string.
-            . $_sOutput;    
-        
+        $_aUnitOptions = AmazonAutoLinks_Option::getUnitOptionsByPostID( $GLOBALS['post']->ID );
+        $_aUnitOptions['id'] = $GLOBALS['post']->ID;
+        return $sContent 
+            . AmazonAutoLinks_Units::getInstance( $_aUnitOptions )->getOutput();
+
     }
 
     /*
      * Extensible methods
      */
-    public function addSettingsLinkInPluginListingPage( $arrLinks ) {
+    public function addSettingsLinkInPluginListingPage( $aLinks ) {
         
         // http://.../wp-admin/edit.php?post_type=[...]
         array_unshift(    
-            $arrLinks,
+            $aLinks,
             "<a href='edit.php?post_type={$this->strPostTypeSlug}'>" . __( 'Units', 'admin-page-framework' ) . "</a>"
         ); 
-        return $arrLinks;        
+        return $aLinks;        
         
     }
     
