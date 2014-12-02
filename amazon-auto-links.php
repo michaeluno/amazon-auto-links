@@ -129,7 +129,5 @@ AmazonAutoLinks_Commons::setUp( __FILE__ );
 include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_AutoLoad.php' );
 include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_Bootstrap.php' );
 include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_RegisterClasses.php' );
-// include( AmazonAutoLinks_Commons::$sDirPath . '/include/function/functions.php' );
-// new AmazonAutoLinks_AutoLoad( dirname( __FILE__ ) . '/include/class/boot/' );
 
 new AmazonAutoLinks_Bootstrap( __FILE__ );
