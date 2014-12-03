@@ -42,7 +42,7 @@ There are various ways you can contribute:
 
 If you like it, please rate and review it in the [WordPress Plugin Directory](http://wordpress.org/support/view/plugin-reviews/amazon-auto-links?filter=5). Also donation would be greatly appreciated. Thank you!
 
-[![Donate with PayPal](https://www.paypal.com/en_US/i/btn/x-click-but04.gif)](https://en.michaeluno.jp/donate) 
+[![Donate with PayPal](https://www.paypal.com/en_US/i/btn/x-click-but04.gif)](http://en.michaeluno.jp/donate) 
 
 ## Copyright and License ##
 
