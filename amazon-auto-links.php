@@ -8,7 +8,7 @@
 	Text Domain:    amazon-auto-links
 	Domain Path:    /language
 	Requirements:   WordPress >= 3.3 and PHP >= 5.2.4
-	Version:        2.1.1b01
+	Version:        2.1.1
 */
 
 /**
@@ -18,7 +18,7 @@
  */
 class AmazonAutoLinks_Commons_Base {
  
-	const Version        = '2.1.1b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const Version        = '2.1.1';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const Name           = 'Amazon Auto Links';
 	const Description    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
