@@ -1,0 +1,3004 @@
+# Copyright (C) 2014 Amazon Auto Links
+# This file is distributed under the same license as the Amazon Auto Links package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Amazon Auto Links 2.1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/amazon-auto-links\n"
+"POT-Creation-Date: 2014-12-11 06:51:56+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: include/class/admin/AmazonAutoLinks_ListExtensions_.php:138
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Extension.php:47
+msgid "Get it Now"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:49
+msgid "Version"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:51
+msgid "CSS"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:84
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:126
+msgid "Deactivate"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:86
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:125
+msgid "Activate"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:108
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:18
+msgid "Template Name"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:109
+msgid "Thumbnail"
+msgstr ""
+
+#: include/class/admin/AmazonAutoLinks_ListTable_.php:110
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:179
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:198
+msgid "Description"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:96
+msgid ""
+"Please upgrade the options of previous versions of the plugin by clicking <a "
+"href=\"%1$s\">here</a>."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:97
+msgid "Before you do it, please <strong>back up</strong> the database."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:98
+msgid "Dismiss this message by clicking <a href=\"%2$s\">here</a>."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:112
+msgid "Could not find the options to import."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:115
+msgid "Options have been imported. ( %1$s unit(s) )"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:118
+msgid "Options been partially imported. ( %1$s unit(s) )"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:121
+msgid "No unit was imported."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:27
+msgid ""
+"The other versions of Amazon Auto Links can be downloaded from <a href=\"%1$s"
+"\">this page</a>."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:34
+msgid "Available"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:35
+msgid "Unavailable"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:40
+msgid "Get Pro Now!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:41
+msgid ""
+"Please consider upgrading to the pro version if you like the plugin and want "
+"more useful features, which includes unlimited numbers of categories, units, "
+"and items, and more!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:43
+msgid "Supported Features"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:49
+msgid "Standard"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:50
+msgid "Pro"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:53
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:110
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:338
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:778
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:993
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:161
+msgid "Image Size"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:58
+msgid "Black and White List"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:63
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:124
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:353
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:175
+msgid "Sort Order"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:68
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:164
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:368
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:792
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1007
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:197
+msgid "Direct Link Bonus"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:73
+msgid "Insert in Posts and Feeds"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:78
+msgid "Widget"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:83
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:120
+msgid "Max Number of Items to Show"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:85
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:90
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:95
+msgid "Unlimited"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:88
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:122
+msgid "Max Number of Categories Per Unit"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:93
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:124
+msgid "Max Number of Units"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:98
+msgid "Export and Import Units"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:103
+msgid "Exclude Sub Categories"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:108
+msgid "Multiple Columns"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:113
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:171
+msgid "Advanced Search Options"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:121
+msgid "Get pro for unlimited items to show."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:123
+msgid "Get pro for unlimited categories to set up!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:125
+msgid ""
+"Get pro for unlimited units so that you can put ads as many as you want."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:135
+msgid "Get Now!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:22
+msgid ""
+"A problem occurred while loading the page of adding a search unit. Please go "
+"back to the previous page."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:42
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:52
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:27
+msgid ""
+"Please upgrade to <A href=\"%1$s\">Pro</a> to add more units! Make sure to "
+"empty the <a href=\"%2$s\">trash box</a> to delete the units completely!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:57
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:95
+msgid "The Access Key ID must consist of 20 characters."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:62
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:105
+msgid "The Secret Access Key must consist of 40 characters."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:71
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:108
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:73
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:69
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:55
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:115
+msgid "There was an error in your input."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:80
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:81
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:124
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:125
+msgid "Sent Value"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:83
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:127
+msgid "Failed authentication."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:98
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:63
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:59
+msgid "The associate ID cannot be empty."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:28
+msgid "An error occurred. Please go back to the previous page and do it again."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:39
+msgid "The customer ID must consist of 13 characters."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:47
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:49
+msgid "Either tags or customer ID has to be entered."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:36
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:37
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:38
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:39
+msgid "At least one area must be set."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_DefineAutoInsert.php:45
+msgid "A unit must be selected."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Extension.php:24
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Template.php:52
+msgid "No extension has been found."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Menu.php:38
+msgid "Manage Units"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp.php:25
+msgid "Donate"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp.php:26
+msgid "Order custom plugin"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:21
+msgid "Add Unit by Category"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:27
+msgid "Add Unit by Tag"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:32
+msgid "Add Unit by Search"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:37
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:20
+msgid "Manage Auto Insert"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:42
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:24
+msgid "Edit Auto Insert"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:43
+msgid "Add Auto Insert"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:48
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4795
+msgid "Settings"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:58
+msgid "Templates"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:63
+msgid "About"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:68
+msgid "Help"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:76
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:85
+msgid "Debug"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:88
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:94
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:45
+msgid "Select Categories"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:104
+msgid "Initial Options"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:110
+msgid "Product Search"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:117
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:432
+msgid "Item Lookup"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:124
+msgid "Similarity Lookup"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:134
+msgid "Authentication"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:140
+msgid "General"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:146
+msgid "Misc"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:152
+msgid "Reset"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:158
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:41
+msgid "Support"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:165
+msgid "Import v1 Options"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:182
+msgid "Installed Templates"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:188
+msgid "Get Templates"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:196
+msgid "Features"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:201
+msgid "Get Pro!"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:206
+msgid "Contact"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:211
+msgid "Change Log"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:218
+msgid "Installation"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:223
+msgid "FAQ"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:228
+msgid "Other Notes"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:55
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:60
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:19
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:213
+msgid "Status"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:63
+msgid "Authenticated"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:63
+msgid "Not authenticated"
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:202
+msgid "The caches have been cleared."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:211
+msgid "Please select your preferences."
+msgstr ""
+
+#: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Template.php:48
+msgid "Want your template to be listed here? Send the file to %1$s."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:59
+msgid "A problem occurred."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:141
+msgid "None"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:178
+msgid "No categories added."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:262
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:425
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:100
+msgid "Create"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:262
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:234
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:425
+msgid "Save"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:265
+msgid "Add the current selection!"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:266
+msgid "Create the unit!"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:267
+msgid "Select a category from the links!"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:279
+msgid "Current Selection"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:284
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:159
+msgid "Go Back"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:286
+msgid "Add Category"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:287
+msgid "Add Excluding Category"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:288
+msgid "Remove Checked"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:291
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:16
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:72
+msgid "Added Categories"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:293
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:78
+msgid "Added Excluding Sub-categories"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:300
+msgid "Select Category"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:306
+msgid "Preview of This Category"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:306
+msgid "No Preview"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:314
+msgid "Please select a category from the list on the left."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:318
+msgid "Unit Preview"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:325
+msgid "Please add a category from the list after selecting it."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:384
+msgid ""
+"Please upgrade to <a href=\"%1$s\" target=\"_black\">Pro</a> to add more "
+"categories."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:385
+msgid "Please upgrade to Pro to add more categories!"
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:473
+msgid ""
+"Could not find the category in this page: %1$s Please consult the plugin "
+"developer."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:507
+msgid "Could not load categories. Please consult the plugin developer."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:557
+msgid "Could not load the page: %1$s Please consult the plugin developer."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:667
+msgid "Categories not found. Please consult the plugin developer."
+msgstr ""
+
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:716
+#: include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:760
+msgid "Failed to generate the breadcrumb."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:20
+msgid "Switch On / Off"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:25
+msgid "Where to Insert"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:26
+msgid "Define where auto insert should be performed."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:31
+msgid "Static Insertion"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:32
+msgid ""
+"Use this to insert unit outputs in the database when a post gets published. "
+"This means product links stay after plugin gets deactivated."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:37
+msgid "Where to Enable"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:38
+msgid ""
+"Only insert in the areas with certain page types, post types, taxonomies, "
+"and post IDs."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:43
+msgid "Where to Disable"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:44
+msgid ""
+"Do not insert in the areas with certain page types, post types, taxonomies, "
+"and post IDs."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:129
+msgid "Post / Page Content"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:130
+msgid "Excerpt"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:131
+msgid "Comment"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:132
+msgid "Feed"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:133
+msgid "Feed Excerpt"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:139
+msgid "Post / Page Content on Publish"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:140
+msgid "inserts product links into the database so they will be static."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:150
+msgid "Toggle Status"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:153
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:295
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:368
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:167
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:205
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:223
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:371
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:418
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:655
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:795
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:842
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1010
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1057
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:212
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:225
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:229
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:262
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:408
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:200
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:237
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:256
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:285
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:286
+msgid "On"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:154
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:296
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:369
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:168
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:206
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:224
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:372
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:419
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:656
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:796
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:843
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1011
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1058
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:213
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:216
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:226
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:263
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:409
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:201
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:238
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:257
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:285
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:286
+msgid "Off"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:157
+msgid "Use this to temporarily disable this auto-insertion."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:175
+msgid "Select Units"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:184
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:263
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:214
+msgid "Areas"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:188
+msgid "Check where product links should appear."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:194
+msgid "Filter Hooks"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:194
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:217
+msgid "advanced"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:197
+msgid ""
+"Enter the WordPress <a href=\"%1$s\" target=\"_blank\">filter hooks</a> with "
+"which the auto-insertion is performed, separated by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:204
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:273
+msgid "Positions "
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:207
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:276
+msgid "Above"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:208
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:277
+msgid "Below"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:209
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:278
+msgid "Both"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:211
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:280
+msgid ""
+"Determines whether the items are placed before or after (above or below) the "
+"area. This does not take effect for action hooks."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:217
+msgid "Action Hooks"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:220
+msgid ""
+"Enter the WordPress <a href=\"%1$s\" target=\"_blank\">action hooks</a> with "
+"which the auto-insertion is performed, separated by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:267
+msgid ""
+"Make sure you pick appropriate post types in the below sections of Where to "
+"Enable/Disable."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:292
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:365
+msgid "On / Off"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:298
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:371
+msgid "Applies the criteria set in this section."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:305
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:378
+msgid "Post IDs"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:308
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:381
+msgid "Enter post IDs separated by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:309
+msgid "Leave this empty to disable this option."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:315
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:387
+msgid "Page Types"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:318
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:390
+msgid "Single Post"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:319
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:391
+msgid "Home / Front"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:320
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:392
+msgid "Archive"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:321
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:393
+msgid "404"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:322
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:394
+msgid "Search"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:324
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:396
+msgid "This option does not take effect for static insertion."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:325
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:335
+msgid "If no item is checked, this option will not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:331
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:402
+msgid "Post Types"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:341
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:410
+msgid "Taxonomies"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:344
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:413
+msgid ""
+"For static insertion, only Category for the default Post post type can take "
+"effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:345
+msgid ""
+"The checked terms which do not belong to the post type of the currently "
+"loading page will not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:346
+msgid "Leave all unchecked not to enable this option."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:437
+msgid "Cancel"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:21
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:22
+msgid "Add New Unit by Category"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:27
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:39
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:64
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:89
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:25
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:18
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:19
+msgid "Auto Insert"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:33
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:45
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:70
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:95
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:30
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:215
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:153
+msgid "Template"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:65
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:152
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:267
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:693
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:920
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:61
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:151
+msgid "Unit Name"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:73
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:184
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:69
+msgid "Country"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:76
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:187
+msgid "Canada"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:77
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:188
+msgid "China"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:78
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:189
+msgid "France"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:79
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:190
+msgid "Germany"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:80
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:191
+msgid "Italy"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:81
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:192
+msgid "Japan"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:82
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:193
+msgid "United Kingdom"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:83
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:194
+msgid "Spain"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:84
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:195
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:81
+msgid "United States"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:85
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:196
+msgid "India"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:86
+msgid "Brazil"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:87
+msgid "Mexico"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:94
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:205
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:310
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:758
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:985
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:92
+msgid "Associate ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:102
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:328
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:950
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:153
+msgid "Number of Items"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:104
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:332
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:155
+msgid "The number of product links to display."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:112
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:340
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:780
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:995
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:163
+msgid "pixel"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:114
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:342
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:782
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:997
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:165
+msgid ""
+"The maximum width of the product image in pixel. Set <code>0</code> for no "
+"image."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:115
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:343
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:783
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:998
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:166
+msgid "Max"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:116
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:181
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:191
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:344
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:384
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:394
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:404
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:784
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:808
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:818
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:828
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:999
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1023
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1033
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1043
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:216
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:229
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:318
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:371
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:147
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:167
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:213
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:223
+msgid "Default"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:127
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:178
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4786
+msgid "Date"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:128
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:501
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:178
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:197
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:179
+#: include/class/widget/AmazonAutoLinks_WidgetByID_.php:28
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4781
+msgid "Title"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:129
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:180
+msgid "Title Descending"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:130
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:942
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:181
+msgid "Random"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:137
+msgid "Sort Option"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:139
+msgid "Keep raw titles."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:140
+msgid ""
+"If checked, unsanitized titles will be used. This is useful to sort by rank."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:146
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:212
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:125
+msgid "Types"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:150
+msgid "Best Sellers"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:151
+msgid "Hot New Releases"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:152
+msgid "Mover and Shakers"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:153
+msgid "Top Rated"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:154
+msgid "Most Wished For"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:155
+msgid "Gift Ideas"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:157
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:133
+msgid "It is recommended to check only a few for faster page loading."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:158
+msgid ""
+"Some of the types other than Best Sellers are not supported in some locales."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:170
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:374
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:798
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1013
+msgid ""
+"Inserts <code>ref=nosim</code> in the link url. For more information, visit "
+"<a href=\"%1$s\">this page</a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:177
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:380
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:804
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1019
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:209
+msgid "Title Length"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:179
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:382
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:806
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1021
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:211
+msgid "The allowed character length for the title."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:180
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:383
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:807
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1022
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:212
+msgid ""
+"Use it to prevent a broken layout caused by a very long product title. Set "
+"-1 for no limit."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:187
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:400
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:824
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1039
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:219
+msgid "Link Style"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:202
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:415
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:839
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1054
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:234
+msgid "Credit Link"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:208
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:421
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:845
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1060
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:240
+msgid "Inserts the credit link at the end of the unit output."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:220
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:652
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:253
+msgid "Enable Auto Insert"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:226
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:658
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:259
+msgid ""
+"Set it On to insert product links into post and pages automatically. More "
+"advanced options can be configured later."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Category_.php:245
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:236
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:283
+msgid "Proceed"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:20
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:27
+msgid "Add New Unit by Search"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:33
+msgid "Advanced Search Criteria"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:52
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:77
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:216
+msgid "Item Look-up"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:58
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:83
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:188
+msgid "Advanced Item Look-up Options"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:160
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:138
+msgid "Access Key ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:161
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:139
+msgid "The public key consisting of 20 alphabetic characters."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:163
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:25
+msgid ""
+"The keys can be obtained by logging in to the <a href=\"%1$s\" target="
+"\"_blank\">Amazon Web Services web site</a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:164
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:26
+msgid ""
+"The instruction is documented <a href=\"%1$s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:173
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:147
+msgid "Secret Access Key"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:174
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:148
+msgid "The private key consisting of 40 alphabetic characters."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:215
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:430
+msgid "Products"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:215
+msgid ""
+"returns items that satisfy the search criteria in the title and descriptions."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:216
+msgid ""
+"returns some or all of the item attributes with the given item identifier."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:217
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:434
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:964
+msgid "Similar Products"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:217
+msgid "returns products that are similar to one or more items specified."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:275
+msgid "Search Keyword"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:278
+msgid ""
+"Enter the keyword to search. For multiple items, separate them by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:285
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:733
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:960
+msgid "Search Type"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:294
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:742
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:969
+msgid "Operation"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:302
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:750
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:977
+msgid "Locale"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:318
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:208
+msgid "Category"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:322
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:771
+msgid "Select the category to limit the searching area."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:323
+msgid ""
+"Since some options do not work with the All index, it is recommended to pick "
+"one."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:356
+msgid "Price Ascending"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:356
+msgid "Sorts items from the cheapest to the most expensive."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:357
+msgid "Price Descending"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:357
+msgid "Sorts items from the most expensive to the cheapest."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:358
+msgid "Sales Rank"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:358
+msgid ""
+"Sorts items based on how well they have been sold, from best to worst "
+"sellers."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:359
+msgid "Relevance Rank"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:359
+msgid ""
+"Sorts items based on how often the keyword appear in the product description."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:360
+msgid "Review Rank"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:360
+msgid ""
+"Sorts items based on how highly rated the item was reviewed by customers "
+"where the highest ranked items are listed first and the lowest ranked items "
+"are listed last."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:363
+msgid ""
+"When the search index is selected to All, this option does not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:390
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:814
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1029
+msgid "Description Length"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:392
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:816
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1031
+msgid "The allowed character length for the description."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:393
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:817
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:1032
+msgid "Set -1 for no limit."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:455
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:576
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:893
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:435
+#: include/class/boot/AmazonAutoLinks_Properties.php:99
+#: include/class/boot/AmazonAutoLinks_Properties.php:123
+#: include/class/boot/AmazonAutoLinks_Properties.php:153
+#: include/class/boot/AmazonAutoLinks_Properties.php:198
+#: include/class/boot/AmazonAutoLinks_Properties.php:219
+#: include/class/boot/AmazonAutoLinks_Properties.php:256
+#: include/class/boot/AmazonAutoLinks_Properties.php:264
+#: include/class/boot/AmazonAutoLinks_Properties.php:287
+#: include/class/boot/AmazonAutoLinks_Properties.php:323
+#: include/class/boot/AmazonAutoLinks_Properties.php:366
+msgid "All"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:494
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:859
+msgid "Please consider upgrading to Pro to use this feature!"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:501
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:513
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:584
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:597
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:610
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:622
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:634
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:866
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:112
+msgid "optional"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:507
+msgid ""
+"Enter keywords which should be matched in the product title. For multiple "
+"keywords, separate them by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:508
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:541
+msgid "If this is set, the Search Keyword option can be empty."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:513
+msgid "Additional Attribute"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:530
+msgid "Manufacturer"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:531
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:377
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4782
+msgid "Author"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:532
+msgid "Actor"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:533
+msgid "Composer"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:534
+msgid "Brand"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:535
+msgid "Artist"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:536
+msgid "Conductor"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:537
+msgid "Director"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:540
+msgid ""
+"Enter a keyword to narrow down the results with one of the above attributes."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:553
+msgid "Availability"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:559
+msgid ""
+"Filter out most of the items that are unavailable as may products can become "
+"unavailable quickly."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:565
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:882
+msgid "Condition"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:572
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:889
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:129
+msgid "New"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:573
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:890
+msgid "Used"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:574
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:891
+msgid "Collectible"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:575
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:892
+msgid "Refurbished"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:579
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:896
+msgid "If the search index is All, this option does not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:584
+msgid "Maximum Price"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:591
+msgid ""
+"Specifies the maximum price of the items in the response. Prices are in "
+"terms of the lowest currency denomination, for example, pennies. For "
+"example, 3241 represents $32.41."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:592
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:605
+msgid ""
+"This option will not take effect if the Category option is set to <code>All</"
+"code> or <code>Blended</code>"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:597
+msgid "Minimum Price"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:604
+msgid ""
+"Specifies the minimum price of the items to return. Prices are in terms of "
+"the lowest currency denomination, for example, pennies, for example, 3241 "
+"represents $32.41."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:610
+msgid "Minimum Percentage Off"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:617
+msgid "Specifies the minimum percentage off for the items to return."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:622
+msgid "Browse Node ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:629
+msgid ""
+"If you know the browse node that you are searching, specify it here. It is a "
+"positive integer."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:634
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:866
+msgid "Merchant ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:640
+msgid ""
+"Filter search results and offer listings to only include items sold by "
+"Amazon. By default, Product Advertising API returns items sold by various "
+"merchants including Amazon. Use the Amazon to limit the response to only "
+"items sold by Amazon. Case sensitive. e.g.<code>Amazon</code>"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:701
+msgid "Item ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:704
+msgid ""
+"Enter the ID(s) of the product. For more more than one items, use the <code>,"
+"</code> (comma) characters to delimit the items."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:712
+msgid "ID Type"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:717
+msgid "Not available in the CA locale."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:719
+msgid "The US locale only, when the search index is Books."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:766
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4783
+msgid "Categories"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:772
+msgid "If the above ID Type is ISBN, this will be automatically set to Books."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:773
+msgid "If the ID Type is ASIN this option will not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:876
+msgid ""
+"Select <code>Amazon</code> if you only want to see items sold by Amazon; "
+"otherwise, <code>All</code>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:928
+msgid "Item ASIN"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:931
+msgid ""
+"Enter the ASIN(s) of the product. For more more than one items, use the "
+"<code>,</code> (comma) characters to delimit the items."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:938
+msgid "Similarity Type"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:941
+msgid "Intersection"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:941
+msgid ""
+"returns the intersection of items that are similar to all of the ASINs "
+"specified"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:942
+msgid ""
+"returns the union of randomly picked items that are similar to all of the "
+"ASINs specified."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:944
+msgid "The maximum of only ten items can be retrieved."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:954
+msgid ""
+"The number of product links to display. This unit type cannot display more "
+"than 10 items."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:23
+msgid "AWS Access Key Identifiers"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
+msgid ""
+"For the Search Unit type, credentials are required to perform search "
+"requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
+"API</a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:34
+msgid "Filters"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:35
+msgid "Set the criteria to filter fetched items."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:42
+msgid "Help the developer!"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:48
+msgid "Amazon Auto Links Plugin Agreements"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:49
+msgid "Please define how you want to support the developer."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:55
+msgid "Custom Query Key"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:61
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:102
+msgid "Caches"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:69
+msgid "Access Rights"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:70
+msgid "Set the access levels to the plugin setting pages."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:77
+msgid "Form"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:78
+msgid "Set allowed HTML tags etc.."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:86
+msgid "For developers who need to see the internal workings of the plugin."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:95
+msgid "Reset Settings"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:96
+msgid "If you get broken options, initialize them by performing reset."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:103
+msgid "If you need to refresh the product link outputs, clear the cashes."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:161
+msgid "Authenticate"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:171
+msgid "White List"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:172
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:191
+msgid "Enter characters separated by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:173
+msgid "Product links that do not contain the white list items will be omitted."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:190
+msgid "Black List"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:192
+msgid "Product links that contain the black list items will be omitted."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:209
+msgid "Case Sensitive"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:215
+msgid ""
+"If this is on, upper cases and lower cases of characters have to match to "
+"find the given string."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:222
+msgid "Prevent Duplicates"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:228
+msgid ""
+"If this is on, the same products that are already loaded will not be "
+"displayed among different units"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:239
+msgid "Support Rate"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:240
+msgid ""
+"The percentage that the associate ID is altered with the plugin developers"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:249
+msgid ""
+"Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> to "
+"help the plugin development if you set it 0%%!"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:258
+msgid "Advertisement"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:259
+msgid "Display ads in the plugins's settings page"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:266
+msgid ""
+"Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> to "
+"help the plugin development if you set it off!"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:316
+msgid "Link Style Query Key"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:317
+msgid "Define the query parameter key for the cloaking link style."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:340
+msgid "Caching Mode"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:344
+msgid "Normal"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:344
+msgid "relies on WP Cron."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:345
+msgid "Intense"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:345
+msgid "relies on the plugin caching method."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:347
+msgid ""
+"The intense mode should only be enabled when the normal mode does not work."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:359
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:421
+msgid "Save Changes"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:369
+msgid "Capability"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:370
+msgid ""
+"Select the user role that is allowed to access the plugin setting pages."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:371
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:375
+msgid "Administrator"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:376
+msgid "Editor"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:378
+msgid "Contributor"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:379
+msgid "Subscriber"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:390
+msgid "Allowed HTML Tags"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:391
+msgid ""
+"Enter the allowed HTML tags for the form input, separated by commas. By "
+"default, WordPress applies a filter called KSES that strips out certain tags "
+"before the user input is saved in the database for security reasons."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:404
+msgid "Debug Mode"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:431
+msgid "Options to Delete"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:436
+msgid "General options"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:437
+msgid "Template related options"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:457
+msgid "Clear Caches"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:459
+msgid "Clear caches of product links."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:469
+msgid "Perform"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:20
+msgid "Add New Unit by Tag and Customer ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:87
+msgid "Currently only the U.S. locale is supported for this unit type."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:100
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4784
+msgid "Tags"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:103
+msgid "Enter keywords that represent tags separated by commas."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:104
+msgid ""
+"If the customer ID is provided, this option is optional and if it is left "
+"empty, all products tagged by the customer will be fetched."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:105
+msgid "Any upper-case characters will be converted to lower-cases."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:112
+msgid "Customer ID"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:114
+msgid "Enter a 13-character ID of the customer who tagged the products."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:115
+msgid ""
+"You can find it by looking at the url of the customer profile page. The "
+"format is <code>%1$s</code>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:116
+msgid "This is recommended to filter spam tagged products."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:117
+msgid ""
+"If not specified, product links tagged by all customers will be fetched."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:118
+msgid ""
+"An example of the <a href=\"%1$s\" target=\"_blank\">customer profile page</"
+"a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:130
+msgid "Popular"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:131
+msgid "Recent"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:134
+msgid "If the customer ID is provided, this option will not take effect."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:140
+msgid "Threshhold"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:145
+msgid ""
+"This option indicates a threshold for how many times an item must have been "
+"tagged in order to appear in the \"recent\" feed. "
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:146
+msgid ""
+"If the threshold is set to 5, items will not appear in the recency feed "
+"until they have been tagged 5 times, and will be bumped up every time they "
+"are tagged after that."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:203
+msgid ""
+"Inserts <code>ref=nosim</code> in the product link url. For more "
+"information, visit <a href=\"%1$s\">this page</a>."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:20
+msgid "Sets a default template for this unit."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:27
+msgid "Number of Columns"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:33
+msgid "The number of columns"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:34
+msgid "This option requires a column supported template to be activated."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:35
+msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:41
+msgid "Item Format"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:48
+msgid "Sets the layout of an item. The following variables are available."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:49
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:68
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:83
+msgid "product link url"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:50
+msgid "title with HTML tags defined in the Title Format option"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:51
+msgid "title without HTML tags"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:52
+msgid "thumbnail with HTML tags defined in the Image Format option"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:53
+msgid "description with HTML tags"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:54
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:70
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:87
+msgid "description without HTML tags"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:55
+msgid "the product price (only for the search unit type)."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:60
+msgid "Title Format"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:67
+msgid "Sets the layout of a title."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:69
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:84
+msgid "title"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:75
+msgid "Image Format"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:82
+msgid "Sets the layout of an image."
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:85
+msgid "image url"
+msgstr ""
+
+#: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:86
+msgid "image size"
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:67
+msgid "No category added."
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Categories_.php:70
+msgid "No excluding sub-category added."
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_CategoryOptions_.php:30
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_ItemLookupOptions_.php:27
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SearchOptions_.php:27
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SimilarityLookupOptions_.php:27
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_TagOptions_.php:30
+msgid "Cache Duration"
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_CategoryOptions_.php:31
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_ItemLookupOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SearchOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SimilarityLookupOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_TagOptions_.php:31
+msgid "The cache lifespan in seconds. For no cache, set 0."
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_CategoryOptions_.php:31
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_ItemLookupOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SearchOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SimilarityLookupOptions_.php:28
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_TagOptions_.php:31
+msgid "Default:"
+msgstr ""
+
+#: include/class/admin/meta_box/AmazonAutoLinks_MetaBox_Misc_.php:16
+msgid "Information"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:143
+msgid "Category Unit Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:154
+msgid "Tag Unit Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:164
+msgid "Search Unit Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:181
+msgid "Item Look-up Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:198
+msgid "Similarity Look-up Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:205
+msgid "Advanced Similarity Look-up Options"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:360
+msgid "The plugin requires the PHP version %1$s or higher."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:364
+msgid "The plugin requires the WordPress version %1$s or higher."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:367
+msgid "The plugin requires the <a href=\"%2$s\">%1$s</a> to be installed."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:367
+msgid "the Multibyte String library"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:368
+msgid "The plugin requires the %1$s to be installed."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:368
+msgid "the cURL library"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:371
+msgid ""
+"The DOMDocument class could not be found. The plugin requires the <a href="
+"\"%1$s\">libxml</a> extension to be activated."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Bootstrap.php:372
+msgid ""
+"The DomXpath class could not be found. The plugin requires the <a href=\"%1$s"
+"\">libxml</a> extension to be activated."
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:100
+#: include/class/boot/AmazonAutoLinks_Properties.php:127
+#: include/class/boot/AmazonAutoLinks_Properties.php:156
+#: include/class/boot/AmazonAutoLinks_Properties.php:200
+#: include/class/boot/AmazonAutoLinks_Properties.php:222
+#: include/class/boot/AmazonAutoLinks_Properties.php:266
+#: include/class/boot/AmazonAutoLinks_Properties.php:291
+#: include/class/boot/AmazonAutoLinks_Properties.php:326
+#: include/class/boot/AmazonAutoLinks_Properties.php:371
+msgid "Baby"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:101
+#: include/class/boot/AmazonAutoLinks_Properties.php:128
+#: include/class/boot/AmazonAutoLinks_Properties.php:157
+#: include/class/boot/AmazonAutoLinks_Properties.php:223
+#: include/class/boot/AmazonAutoLinks_Properties.php:292
+#: include/class/boot/AmazonAutoLinks_Properties.php:327
+#: include/class/boot/AmazonAutoLinks_Properties.php:372
+msgid "Beauty"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:102
+#: include/class/boot/AmazonAutoLinks_Properties.php:158
+#: include/class/boot/AmazonAutoLinks_Properties.php:224
+#: include/class/boot/AmazonAutoLinks_Properties.php:293
+#: include/class/boot/AmazonAutoLinks_Properties.php:328
+#: include/class/boot/AmazonAutoLinks_Properties.php:373
+msgid "Blended"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:103
+#: include/class/boot/AmazonAutoLinks_Properties.php:129
+#: include/class/boot/AmazonAutoLinks_Properties.php:159
+#: include/class/boot/AmazonAutoLinks_Properties.php:201
+#: include/class/boot/AmazonAutoLinks_Properties.php:225
+#: include/class/boot/AmazonAutoLinks_Properties.php:257
+#: include/class/boot/AmazonAutoLinks_Properties.php:267
+#: include/class/boot/AmazonAutoLinks_Properties.php:294
+#: include/class/boot/AmazonAutoLinks_Properties.php:329
+#: include/class/boot/AmazonAutoLinks_Properties.php:374
+msgid "Books"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:104
+#: include/class/boot/AmazonAutoLinks_Properties.php:160
+#: include/class/boot/AmazonAutoLinks_Properties.php:226
+#: include/class/boot/AmazonAutoLinks_Properties.php:295
+#: include/class/boot/AmazonAutoLinks_Properties.php:330
+#: include/class/boot/AmazonAutoLinks_Properties.php:375
+msgid "Classical"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:105
+#: include/class/boot/AmazonAutoLinks_Properties.php:161
+#: include/class/boot/AmazonAutoLinks_Properties.php:202
+#: include/class/boot/AmazonAutoLinks_Properties.php:227
+#: include/class/boot/AmazonAutoLinks_Properties.php:260
+#: include/class/boot/AmazonAutoLinks_Properties.php:268
+#: include/class/boot/AmazonAutoLinks_Properties.php:296
+#: include/class/boot/AmazonAutoLinks_Properties.php:331
+#: include/class/boot/AmazonAutoLinks_Properties.php:378
+msgid "DVD"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:106
+#: include/class/boot/AmazonAutoLinks_Properties.php:130
+#: include/class/boot/AmazonAutoLinks_Properties.php:162
+#: include/class/boot/AmazonAutoLinks_Properties.php:203
+#: include/class/boot/AmazonAutoLinks_Properties.php:228
+#: include/class/boot/AmazonAutoLinks_Properties.php:258
+#: include/class/boot/AmazonAutoLinks_Properties.php:269
+#: include/class/boot/AmazonAutoLinks_Properties.php:297
+#: include/class/boot/AmazonAutoLinks_Properties.php:332
+#: include/class/boot/AmazonAutoLinks_Properties.php:379
+msgid "Electronics"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:107
+#: include/class/boot/AmazonAutoLinks_Properties.php:163
+#: include/class/boot/AmazonAutoLinks_Properties.php:204
+#: include/class/boot/AmazonAutoLinks_Properties.php:229
+#: include/class/boot/AmazonAutoLinks_Properties.php:270
+#: include/class/boot/AmazonAutoLinks_Properties.php:298
+msgid "Foreign Books"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:108
+#: include/class/boot/AmazonAutoLinks_Properties.php:132
+#: include/class/boot/AmazonAutoLinks_Properties.php:165
+#: include/class/boot/AmazonAutoLinks_Properties.php:230
+#: include/class/boot/AmazonAutoLinks_Properties.php:300
+#: include/class/boot/AmazonAutoLinks_Properties.php:334
+#: include/class/boot/AmazonAutoLinks_Properties.php:382
+msgid "Health Personal Care"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:109
+#: include/class/boot/AmazonAutoLinks_Properties.php:136
+#: include/class/boot/AmazonAutoLinks_Properties.php:169
+#: include/class/boot/AmazonAutoLinks_Properties.php:205
+#: include/class/boot/AmazonAutoLinks_Properties.php:232
+#: include/class/boot/AmazonAutoLinks_Properties.php:272
+#: include/class/boot/AmazonAutoLinks_Properties.php:304
+#: include/class/boot/AmazonAutoLinks_Properties.php:338
+#: include/class/boot/AmazonAutoLinks_Properties.php:386
+msgid "Kindle Store"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:110
+#: include/class/boot/AmazonAutoLinks_Properties.php:388
+msgid "Lawn and Garden"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:111
+#: include/class/boot/AmazonAutoLinks_Properties.php:172
+#: include/class/boot/AmazonAutoLinks_Properties.php:235
+#: include/class/boot/AmazonAutoLinks_Properties.php:275
+#: include/class/boot/AmazonAutoLinks_Properties.php:341
+msgid "Luggage"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:112
+#: include/class/boot/AmazonAutoLinks_Properties.php:138
+#: include/class/boot/AmazonAutoLinks_Properties.php:177
+#: include/class/boot/AmazonAutoLinks_Properties.php:209
+#: include/class/boot/AmazonAutoLinks_Properties.php:238
+#: include/class/boot/AmazonAutoLinks_Properties.php:278
+#: include/class/boot/AmazonAutoLinks_Properties.php:309
+#: include/class/boot/AmazonAutoLinks_Properties.php:345
+#: include/class/boot/AmazonAutoLinks_Properties.php:394
+msgid "Music"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:113
+#: include/class/boot/AmazonAutoLinks_Properties.php:141
+#: include/class/boot/AmazonAutoLinks_Properties.php:243
+#: include/class/boot/AmazonAutoLinks_Properties.php:400
+msgid "Pet Supplies"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:114
+#: include/class/boot/AmazonAutoLinks_Properties.php:144
+#: include/class/boot/AmazonAutoLinks_Properties.php:186
+#: include/class/boot/AmazonAutoLinks_Properties.php:211
+#: include/class/boot/AmazonAutoLinks_Properties.php:245
+#: include/class/boot/AmazonAutoLinks_Properties.php:280
+#: include/class/boot/AmazonAutoLinks_Properties.php:314
+#: include/class/boot/AmazonAutoLinks_Properties.php:353
+#: include/class/boot/AmazonAutoLinks_Properties.php:403
+msgid "Software"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:115
+#: include/class/boot/AmazonAutoLinks_Properties.php:187
+#: include/class/boot/AmazonAutoLinks_Properties.php:246
+#: include/class/boot/AmazonAutoLinks_Properties.php:354
+msgid "Software Video Games"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:116
+#: include/class/boot/AmazonAutoLinks_Properties.php:146
+#: include/class/boot/AmazonAutoLinks_Properties.php:190
+#: include/class/boot/AmazonAutoLinks_Properties.php:213
+#: include/class/boot/AmazonAutoLinks_Properties.php:248
+#: include/class/boot/AmazonAutoLinks_Properties.php:281
+#: include/class/boot/AmazonAutoLinks_Properties.php:316
+#: include/class/boot/AmazonAutoLinks_Properties.php:357
+#: include/class/boot/AmazonAutoLinks_Properties.php:406
+msgid "Toys"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:117
+#: include/class/boot/AmazonAutoLinks_Properties.php:191
+#: include/class/boot/AmazonAutoLinks_Properties.php:249
+#: include/class/boot/AmazonAutoLinks_Properties.php:317
+#: include/class/boot/AmazonAutoLinks_Properties.php:358
+#: include/class/boot/AmazonAutoLinks_Properties.php:408
+msgid "VHS"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:118
+#: include/class/boot/AmazonAutoLinks_Properties.php:147
+#: include/class/boot/AmazonAutoLinks_Properties.php:192
+#: include/class/boot/AmazonAutoLinks_Properties.php:250
+#: include/class/boot/AmazonAutoLinks_Properties.php:318
+#: include/class/boot/AmazonAutoLinks_Properties.php:359
+#: include/class/boot/AmazonAutoLinks_Properties.php:409
+msgid "Video"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:119
+#: include/class/boot/AmazonAutoLinks_Properties.php:148
+#: include/class/boot/AmazonAutoLinks_Properties.php:193
+#: include/class/boot/AmazonAutoLinks_Properties.php:214
+#: include/class/boot/AmazonAutoLinks_Properties.php:251
+#: include/class/boot/AmazonAutoLinks_Properties.php:282
+#: include/class/boot/AmazonAutoLinks_Properties.php:319
+#: include/class/boot/AmazonAutoLinks_Properties.php:360
+#: include/class/boot/AmazonAutoLinks_Properties.php:410
+msgid "Video Games"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:124
+#: include/class/boot/AmazonAutoLinks_Properties.php:154
+#: include/class/boot/AmazonAutoLinks_Properties.php:220
+#: include/class/boot/AmazonAutoLinks_Properties.php:288
+#: include/class/boot/AmazonAutoLinks_Properties.php:324
+#: include/class/boot/AmazonAutoLinks_Properties.php:367
+msgid "Apparel"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:125
+#: include/class/boot/AmazonAutoLinks_Properties.php:289
+#: include/class/boot/AmazonAutoLinks_Properties.php:368
+msgid "Appliances"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:126
+#: include/class/boot/AmazonAutoLinks_Properties.php:155
+#: include/class/boot/AmazonAutoLinks_Properties.php:199
+#: include/class/boot/AmazonAutoLinks_Properties.php:221
+#: include/class/boot/AmazonAutoLinks_Properties.php:265
+#: include/class/boot/AmazonAutoLinks_Properties.php:290
+#: include/class/boot/AmazonAutoLinks_Properties.php:325
+#: include/class/boot/AmazonAutoLinks_Properties.php:370
+msgid "Automotive"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:131
+#: include/class/boot/AmazonAutoLinks_Properties.php:164
+#: include/class/boot/AmazonAutoLinks_Properties.php:299
+#: include/class/boot/AmazonAutoLinks_Properties.php:333
+#: include/class/boot/AmazonAutoLinks_Properties.php:381
+msgid "Grocery"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:133
+msgid "Home"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:134
+#: include/class/boot/AmazonAutoLinks_Properties.php:167
+#: include/class/boot/AmazonAutoLinks_Properties.php:302
+#: include/class/boot/AmazonAutoLinks_Properties.php:336
+msgid "Home Improvement"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:135
+#: include/class/boot/AmazonAutoLinks_Properties.php:168
+#: include/class/boot/AmazonAutoLinks_Properties.php:231
+#: include/class/boot/AmazonAutoLinks_Properties.php:303
+#: include/class/boot/AmazonAutoLinks_Properties.php:337
+#: include/class/boot/AmazonAutoLinks_Properties.php:385
+msgid "Jewelry"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:137
+#: include/class/boot/AmazonAutoLinks_Properties.php:391
+msgid "Miscellaneous"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:139
+msgid "MusicalInstruments"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:140
+#: include/class/boot/AmazonAutoLinks_Properties.php:180
+#: include/class/boot/AmazonAutoLinks_Properties.php:241
+#: include/class/boot/AmazonAutoLinks_Properties.php:312
+#: include/class/boot/AmazonAutoLinks_Properties.php:348
+#: include/class/boot/AmazonAutoLinks_Properties.php:397
+msgid "Office Products"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:142
+#: include/class/boot/AmazonAutoLinks_Properties.php:184
+#: include/class/boot/AmazonAutoLinks_Properties.php:401
+msgid "Photo"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:143
+#: include/class/boot/AmazonAutoLinks_Properties.php:185
+#: include/class/boot/AmazonAutoLinks_Properties.php:210
+#: include/class/boot/AmazonAutoLinks_Properties.php:244
+#: include/class/boot/AmazonAutoLinks_Properties.php:279
+#: include/class/boot/AmazonAutoLinks_Properties.php:313
+#: include/class/boot/AmazonAutoLinks_Properties.php:352
+#: include/class/boot/AmazonAutoLinks_Properties.php:402
+msgid "Shoes"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:145
+#: include/class/boot/AmazonAutoLinks_Properties.php:188
+#: include/class/boot/AmazonAutoLinks_Properties.php:212
+#: include/class/boot/AmazonAutoLinks_Properties.php:247
+#: include/class/boot/AmazonAutoLinks_Properties.php:315
+#: include/class/boot/AmazonAutoLinks_Properties.php:355
+#: include/class/boot/AmazonAutoLinks_Properties.php:404
+msgid "Sporting Goods"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:149
+#: include/class/boot/AmazonAutoLinks_Properties.php:194
+#: include/class/boot/AmazonAutoLinks_Properties.php:215
+#: include/class/boot/AmazonAutoLinks_Properties.php:252
+#: include/class/boot/AmazonAutoLinks_Properties.php:283
+#: include/class/boot/AmazonAutoLinks_Properties.php:361
+#: include/class/boot/AmazonAutoLinks_Properties.php:411
+msgid "Watches"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:166
+#: include/class/boot/AmazonAutoLinks_Properties.php:335
+#: include/class/boot/AmazonAutoLinks_Properties.php:383
+msgid "Home Garden"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:170
+#: include/class/boot/AmazonAutoLinks_Properties.php:206
+#: include/class/boot/AmazonAutoLinks_Properties.php:233
+#: include/class/boot/AmazonAutoLinks_Properties.php:273
+#: include/class/boot/AmazonAutoLinks_Properties.php:305
+#: include/class/boot/AmazonAutoLinks_Properties.php:339
+#: include/class/boot/AmazonAutoLinks_Properties.php:387
+msgid "Kitchen"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:171
+#: include/class/boot/AmazonAutoLinks_Properties.php:234
+#: include/class/boot/AmazonAutoLinks_Properties.php:274
+#: include/class/boot/AmazonAutoLinks_Properties.php:340
+msgid "Lighting"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:173
+#: include/class/boot/AmazonAutoLinks_Properties.php:389
+msgid "Magazines"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:174
+#: include/class/boot/AmazonAutoLinks_Properties.php:306
+#: include/class/boot/AmazonAutoLinks_Properties.php:342
+#: include/class/boot/AmazonAutoLinks_Properties.php:390
+msgid "Marketplace"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:175
+#: include/class/boot/AmazonAutoLinks_Properties.php:207
+#: include/class/boot/AmazonAutoLinks_Properties.php:236
+#: include/class/boot/AmazonAutoLinks_Properties.php:276
+#: include/class/boot/AmazonAutoLinks_Properties.php:307
+#: include/class/boot/AmazonAutoLinks_Properties.php:343
+#: include/class/boot/AmazonAutoLinks_Properties.php:392
+msgid "Mobile Apps"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:176
+#: include/class/boot/AmazonAutoLinks_Properties.php:208
+#: include/class/boot/AmazonAutoLinks_Properties.php:237
+#: include/class/boot/AmazonAutoLinks_Properties.php:277
+#: include/class/boot/AmazonAutoLinks_Properties.php:308
+#: include/class/boot/AmazonAutoLinks_Properties.php:344
+#: include/class/boot/AmazonAutoLinks_Properties.php:393
+msgid "MP3 Downloads"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:178
+#: include/class/boot/AmazonAutoLinks_Properties.php:239
+#: include/class/boot/AmazonAutoLinks_Properties.php:310
+#: include/class/boot/AmazonAutoLinks_Properties.php:346
+#: include/class/boot/AmazonAutoLinks_Properties.php:395
+msgid "Musical Instruments"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:179
+#: include/class/boot/AmazonAutoLinks_Properties.php:240
+#: include/class/boot/AmazonAutoLinks_Properties.php:311
+#: include/class/boot/AmazonAutoLinks_Properties.php:347
+#: include/class/boot/AmazonAutoLinks_Properties.php:396
+msgid "Music Tracks"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:181
+#: include/class/boot/AmazonAutoLinks_Properties.php:349
+#: include/class/boot/AmazonAutoLinks_Properties.php:398
+msgid "Outdoor Living"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:182
+#: include/class/boot/AmazonAutoLinks_Properties.php:350
+msgid "Outlet"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:183
+#: include/class/boot/AmazonAutoLinks_Properties.php:242
+#: include/class/boot/AmazonAutoLinks_Properties.php:351
+#: include/class/boot/AmazonAutoLinks_Properties.php:399
+msgid "PC Hardware"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:189
+#: include/class/boot/AmazonAutoLinks_Properties.php:356
+#: include/class/boot/AmazonAutoLinks_Properties.php:405
+msgid "Tools"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:271
+msgid "Garden"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:301
+msgid "Hobbies"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:369
+msgid "Arts And Crafts"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:376
+msgid "Collectibles"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:377
+msgid "Digital Music"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:380
+msgid "Gourmet Food"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:384
+msgid "Industrial"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:407
+msgid "Unbox Video"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:412
+msgid "Wireless"
+msgstr ""
+
+#: include/class/boot/AmazonAutoLinks_Properties.php:413
+msgid "Wireless Accessories"
+msgstr ""
+
+#: include/class/boot/utility/AmazonAutoLinks_ImageHandler.php:122
+msgid "The image data is empty."
+msgstr ""
+
+#: include/class/boot/utility/AmazonAutoLinks_Requirements.php:116
+msgid "Deactivating the plugin."
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:20
+msgid "Amazon Auto Links Unit"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:23
+msgid "Add New Unit"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:24
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:23
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:196
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:265
+msgid "Edit"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:25
+msgid "Edit Unit"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:26
+msgid "New Unit"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:27
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:26
+msgid "View"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:28
+msgid "View Product Links"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:29
+msgid "Search Units"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:30
+msgid "No unit found for Amazon Auto Links"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:31
+msgid "No Unit Found for Amazon Auto Links in Trash"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:53
+msgid "Label"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:54
+msgid "Add New Label"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:55
+msgid "New Label"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:92
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:140
+msgid "Units"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:103
+msgid "Set the unit name here."
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:152
+msgid "Unit Type"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:155
+msgid "Labels"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:156
+msgid "Shortcode / PHP Code"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:199
+msgid "Search - Similarity Look-up"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:201
+msgid "Search - Item Look-up"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:203
+msgid "Search - Products"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_.php:205
+msgid "Tag"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:21
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:22
+msgid "Add New Auto Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:25
+msgid "New Auto Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:27
+msgid "View Auto Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:28
+msgid "Search Auto Insert Definitions"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:29
+msgid "No definitions found for Auto Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:30
+msgid "No definitions Found for Auto Insert in Trash"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:31
+msgid "Parent Auto Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:68
+msgid "Auto-Insert"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:212
+msgid "Auto Insert Definitions"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:244
+msgid "etc."
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:251
+msgid "(No unit is selected)"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:265
+msgid "Edit this item"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:289
+msgid "Toggle the status"
+msgstr ""
+
+#: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:289
+msgid "Set it %1$s"
+msgstr ""
+
+#: include/class/template/AmazonAutoLinks_Templates_.php:268
+msgid "/* The CSS file does not exist. */"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit.php:164
+msgid "read more"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit.php:380
+msgid ""
+"the template could not be found. Try reselecting the template in the unit "
+"option page."
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit_Search_.php:374
+msgid "by %1$s"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit_Search_.php:379
+msgid "for %1$s"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit_Search_.php:384
+msgid "New from %1$s"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Unit_Search_.php:389
+msgid "Used from %1$s"
+msgstr ""
+
+#: include/class/unit/AmazonAutoLinks_Units.php:106
+msgid ""
+"Could not identify the unit type. Please make sure to update the auto-insert "
+"definition if you have deleted the unit."
+msgstr ""
+
+#: include/class/widget/AmazonAutoLinks_WidgetByID_.php:15
+msgid ""
+"A widget that display Amazon products of defined Amazon Auto Links units."
+msgstr ""
+
+#: include/class/widget/AmazonAutoLinks_WidgetByID_.php:35
+msgid "Select Rules"
+msgstr ""
+
+#: include/class/widget/AmazonAutoLinks_WidgetByID_.php:56
+msgid ""
+"Hold down the Ctrl (windows) / Command (Mac) key to select multiple items."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4761
+msgid "The options have been updated."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4762
+msgid "The options have been cleared."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4763
+msgid "Export Options"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4764
+msgid "Import Options"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4765
+msgid "Submit"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4766
+msgid "An error occurred while uploading the import file."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4767
+msgid "The uploaded file type is not supported."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4768
+msgid "Could not load the importing data."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4769
+msgid "The uploaded file has been imported."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4770
+msgid "No data could be imported."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4771
+msgid "Add"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4772
+msgid "Remove"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4773
+msgid "Upload Image"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4774
+msgid "Use This Image"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4775
+msgid "Are you sure you want to reset the options?"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4776
+msgid "Please confirm if you want to perform the specified task."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4777
+msgid "The options have been reset."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4778
+msgid "The specified options have been deleted."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4785
+msgid "Comments"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4787
+msgid "Show All"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4792
+msgid "Powered by"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4798
+msgid "Manage"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4801
+msgid "Select Image"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4802
+msgid "Upload File"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4803
+msgid "Use This File"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4804
+msgid "Select File"
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4807
+msgid "%s queries in %s seconds."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4808
+msgid "%s out of %s MB (%s) memory used."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4809
+msgid "Peak memory usage %s MB."
+msgstr ""
+
+#: include/library/admin-page-framework-for-amazon-auto-links.php:4810
+msgid "Initial memory usage  %s MB."
+msgstr ""
+
+#: template/category/template.php:25 template/preview/template.php:11
+#: template/search/template.php:33
+msgid "No products found."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Amazon Auto Links"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://en.michaeluno.jp/amazon-auto-links"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Generates links of Amazon products just coming out today. You just pick "
+"categories and they appear even in JavaScript disabled browsers."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Michael Uno (miunosoft)"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://michaeluno.jp"
+msgstr ""
