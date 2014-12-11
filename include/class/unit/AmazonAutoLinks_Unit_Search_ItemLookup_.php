@@ -12,32 +12,32 @@ abstract class AmazonAutoLinks_Unit_Search_ItemLookup_ extends AmazonAutoLinks_U
 
 
     /**
-     * 
+     * Represents the array structure of the API request arguments.
      * @since            2.0.2
      */
     public static $aStructure_ItemLookup = array(    
-        'Operation' => 'ItemLookup',
-        'Condition' => 'New',
-        'IdType' => null,
+        'Operation'             => 'ItemLookup',
+        'Condition'             => 'New',
+        'IdType'                => null,
         'IncludeReviewsSummary' => null,
-        'ItemId' => null,
-        'MerchantId' => null,
-        'RelatedItemPage' => null,
-        'RelationshipType' => null,
-        'SearchIndex' => null,
-        'TruncateReviewsAt' => null,
-        'VariationPage' => null,
-        'ResponseGroup' => null,
+        'ItemId'                => null,
+        'MerchantId'            => null,
+        'RelatedItemPage'       => null,
+        'RelationshipType'      => null,
+        'SearchIndex'           => null,
+        'TruncateReviewsAt'     => null,
+        'VariationPage'         => null,
+        'ResponseGroup'         => null,
     );
     
     /**
-     * Performs Amazon Product API request.
+     * Performs an Amazon Product API request.
      * 
      * @since            2.0.2
      */
-    protected function getRequest( $intCount ) {
+    protected function getRequest( $iCount ) {
         
-        $oAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
+        $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
             $this->arrArgs['country'], 
             $this->oOption->getAccessPublicKey(),
             $this->oOption->getAccessPrivateKey(),
@@ -46,7 +46,7 @@ abstract class AmazonAutoLinks_Unit_Search_ItemLookup_ extends AmazonAutoLinks_U
             
         // Perform the search for the first page regardless the specified count (number of items).
         // Keys with an empty value will be filtered out when performing the request.
-        return $oAPI->request( $this->getAPIParameterArray( $this->arrArgs['Operation'] ), '', $this->arrArgs['cache_duration'] );    
+        return $_oAPI->request( $this->getAPIParameterArray( $this->arrArgs['Operation'] ), '', $this->arrArgs['cache_duration'] );
                  
     }
     
@@ -61,18 +61,17 @@ abstract class AmazonAutoLinks_Unit_Search_ItemLookup_ extends AmazonAutoLinks_U
 
         $this->arrArgs = $this->arrArgs + self::$aStructure_ItemLookup;
         $aParams = array(
-            'Operation' => $sOperation,
-            'Condition' => $this->arrArgs['Condition'],    // (optional) Used | Collectible | Refurbished, All
-            'IdType' => $this->arrArgs['IdType'],    // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
+            'Operation'             => $sOperation,
+            'Condition'             => $this->arrArgs['Condition'],    // (optional) Used | Collectible | Refurbished, All
+            'IdType'                => $this->arrArgs['IdType'],    // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
             'IncludeReviewsSummary' => "True",        // (optional)
-            'ItemId' => $this->arrArgs['ItemId'],    // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
+            'ItemId'                => $this->arrArgs['ItemId'],    // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
             // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
             // 'RelationshipType' => null,    // (conditional)    This parameter is required when the RelatedItems response group is used. 
-            'SearchIndex' => $this->arrArgs['SearchIndex'],    // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
+            'SearchIndex'           => $this->arrArgs['SearchIndex'],    // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
             // 'TruncateReviewsAt' => 1000, // (optional)
             // 'VariationPage' => null, // (optional)
-            'ResponseGroup' => 'Large', // (optional)
-        
+            'ResponseGroup'         => 'Large', // (optional)
         );
         
         if ( 'ASIN' === $this->arrArgs['IdType'] ) {

@@ -11,6 +11,7 @@
 abstract class AmazonAutoLinks_Unit_Search_SimilarityLookup_ extends AmazonAutoLinks_Unit_Search_ {
 
     /**
+     * Represents the array structure of the API request arguments.
      * 
      * @since            2.0.2
      */
@@ -24,7 +25,7 @@ abstract class AmazonAutoLinks_Unit_Search_SimilarityLookup_ extends AmazonAutoL
     );
     
     /**
-     * Performs Amazon Product API request.
+     * Performs an Amazon Product API request.
      * 
      * @since            2.0.2
      */
