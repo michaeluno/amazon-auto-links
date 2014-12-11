@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
 Tested up to:       4.0.1
-Stable tag:         2.1.0
+Stable tag:         2.1.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 2.1.2 =
+- Added a discounted price to be displayed in the search unit type.
 
 = 2.1.1 - 12/04/2014 =
 - Added the ability to automatically remove auto-insert items with no unit associated when a unit is removed.

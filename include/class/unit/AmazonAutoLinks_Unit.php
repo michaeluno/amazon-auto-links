@@ -67,8 +67,9 @@ abstract class AmazonAutoLinks_Unit {
                 continue;
             }
             if ( is_array( $arrSection ) ) {
-                foreach( $arrSection as $strArea => $strUserInput ) 
+                foreach( $arrSection as $strArea => $strUserInput ) {
                     $arrBlackWhiteLists[ $strSection ][ $strArea ] = AmazonAutoLinks_Utilities::convertStringToArray( $strUserInput, ',' );
+                }
             } 
         }
         
@@ -88,7 +89,7 @@ abstract class AmazonAutoLinks_Unit {
      */
     protected function isBlocked( $strString, $strType ) {
 
-        if ( ! is_string( $strString ) && ! is_integer( $strString ) ) return false;
+        if ( ! is_string( $strString ) && ! is_integer( $strString ) ) { return false; }
     
         switch ( strtolower( $strType ) ) {
             default:
@@ -106,9 +107,14 @@ abstract class AmazonAutoLinks_Unit {
                 break;
         }
     
-        if ( ! empty( $arrWhiteList ) )
-            if ( ! $this->isWhiteListed( $strString, $arrWhiteList ) ) return true;
-        if ( $this->isBlackListed( $strString, $arrBlackList ) ) return true;    
+        if ( ! empty( $arrWhiteList ) ) {            
+            if ( ! $this->isWhiteListed( $strString, $arrWhiteList ) ) {
+                return true;
+            }
+        }
+        if ( $this->isBlackListed( $strString, $arrBlackList ) ) { 
+            return true; 
+        }
         return false;
         
     }
@@ -123,9 +129,11 @@ abstract class AmazonAutoLinks_Unit {
         
         $strFunc = $this->fBWListCaseSensitive ? 'strpos' : 'stripos';
         
-        foreach( $arrWhiteList as $strWhiteStringFindMe )
-            if ( call_user_func_array( $strFunc, array( $strString , $strWhiteStringFindMe ) ) !== false )
+        foreach( $arrWhiteList as $strWhiteStringFindMe ) {            
+            if ( call_user_func_array( $strFunc, array( $strString , $strWhiteStringFindMe ) ) !== false ) {
                 return true;
+            }
+        }
                 
         return false;
         
@@ -138,9 +146,11 @@ abstract class AmazonAutoLinks_Unit {
     protected function isBlackListed( $strString, $arrBlackList ) {
         
         $strFunc = $this->fBWListCaseSensitive ? 'strpos' : 'stripos';
-        foreach( $arrBlackList as $strBlackStringFindMe )
-            if ( call_user_func_array( $strFunc, array( $strString , $strBlackStringFindMe ) ) !== false )
+        foreach( $arrBlackList as $strBlackStringFindMe ) {            
+            if ( call_user_func_array( $strFunc, array( $strString , $strBlackStringFindMe ) ) !== false ) {
                 return true;        
+            }
+        }
                 
         return false;
         
@@ -156,10 +166,10 @@ abstract class AmazonAutoLinks_Unit {
         
         // Title character length
         $numMaxLength = $numMaxLength ? $numMaxLength : $this->arrArgs['description_length'];
-        if ( $numMaxLength == 0 ) return '';
+        if ( $numMaxLength == 0 ) { return ''; }
         
-        $strDescription = ( $numMaxLength > 0 && mb_strlen( $strDescription ) > $numMaxLength )
-            ? esc_attr( mb_substr( $strDescription, 0, $numMaxLength ) ) . '...'
+        $strDescription = ( $numMaxLength > 0 && AmazonAutoLinks_Utilities::getStringLength( $strDescription ) > $numMaxLength )
+            ? esc_attr( AmazonAutoLinks_Utilities::getSubstring( $strDescription, 0, $numMaxLength ) ) . '...'
                 . ( $strReadMoreURL 
                     ? " <a href='{$strReadMoreURL}' target='_blank' rel='nofollow'>" . __( 'read more', 'amazon-auto-links' ) . "</a>"
                     : ''
@@ -184,10 +194,12 @@ abstract class AmazonAutoLinks_Unit {
         $strTitle = trim( preg_replace('/#\d+?:\s+?/i', '', $strTitle ) );
         
         // Title character length
-        if ( $this->arrArgs['title_length'] == 0 )
+        if ( $this->arrArgs['title_length'] == 0 ) {
             return '';
-        if ( $this->arrArgs['title_length'] > 0 && mb_strlen( $strTitle ) > $this->arrArgs['title_length'] )    
-            $strTitle = mb_substr( $strTitle, 0, $this->arrArgs['title_length'] ) . '...';
+        }
+        if ( $this->arrArgs['title_length'] > 0 && AmazonAutoLinks_Utilities::getStringLength( $strTitle ) > $this->arrArgs['title_length'] ) {            
+            $strTitle = AmazonAutoLinks_Utilities::getSubstring( $strTitle, 0, $this->arrArgs['title_length'] ) . '...';
+        }
         
         // return $strTitle;
         return esc_attr( $strTitle );

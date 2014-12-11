@@ -302,4 +302,51 @@ class AmazonAutoLinks_Utilities {
         
     }
     
+    /**
+     * Indicates whether the mb_strlen() exists or not.
+     * @since   2.1.2
+     */
+    static private $_bFunctionExists_mb_strlen;
+    
+    /**
+     * Returns the given string length.
+     * @since           2.1.2
+     */
+    static public function getStringLength( $sString ) {
+        
+        self::$_bFunctionExists_mb_strlen = isset( self::$_bFunctionExists_mb_strlen )
+            ? self::$_bFunctionExists_mb_strlen
+            : function_exists( 'mb_strlen' );
+        
+        return self::$_bFunctionExists_mb_strlen
+            ? mb_strlen( $sString )
+            : strlen( $sString );        
+        
+    }
+    
+    /**
+     * Indicates whether the mb_substr() exists or not.
+     * @since   2.1.2
+     */
+    static private $_bFunctionExists_mb_substr;    
+    
+    /**
+     * Returns the substring of the given subject string.
+     * @since           2.1.2
+     */
+    static public function getSubstring( $sString, $iStart, $iLength=null, $sEncoding=null ) {
+
+        self::$_bFunctionExists_mb_substr = isset( self::$_bFunctionExists_mb_substr )
+            ? self::$_bFunctionExists_mb_substr
+            : function_exists( 'mb_substr' );
+        
+        if ( ! self::$_bFunctionExists_mb_substr ) {
+            return substr( $sString, $iStart, $iLength );
+        }
+        
+        $sEncoding = isset( $sEncoding ) ? $sEncoding : mb_internal_encoding();
+        return mb_substr( $sString, $iStart, $iLength, $sEncoding );
+        
+    }
+    
 }

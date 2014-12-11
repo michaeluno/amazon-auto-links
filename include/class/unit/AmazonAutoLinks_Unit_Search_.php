@@ -55,6 +55,11 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
         '_labels'               => array(), // stores labels (plugin custom taxonomy)
     );
     
+
+    /**
+     * Represents the array structure of the API request arguments.
+     * @since            unknown
+     */    
     public static $aStructure_Item = array(
         'ASIN'              => null,
         'ItemAttributes'    => null,
@@ -67,16 +72,20 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
         'MediumImage'       => null,
         'OfferSummary'      => null,
     );
-    function __construct( $arrArgs=array() ) {
+    
+    /**
+     * Sets up properties.
+     */
+    function __construct( $aArgs=array() ) {
             
         parent::__construct();
-        $this->setArguments( $arrArgs );
+        $this->setArguments( $aArgs );
         $this->strUnitType = 'search';
         
     }    
     
-    public function setArguments( $arrArgs ) {
-        $this->arrArgs = $arrArgs + self::$arrStructure_Args + self::getItemFormatArray();
+    public function setArguments( $aArgs ) {
+        $this->arrArgs = $aArgs + self::$arrStructure_Args + self::getItemFormatArray();
     }
     
     /**
@@ -288,7 +297,7 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
                 : '';
             $_sDescription = $this->sanitizeDescription( $_sContent, $this->arrArgs['description_length'], $_sProductURL );
             if ( $this->isBlocked( $_sDescription, 'description' ) ) { continue; }
-
+                        
             $_aProduct = array(
                 'ASIN'               => $_aItem['ASIN'],
                 'product_url'        => $_sProductURL,
@@ -304,13 +313,13 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
                 'category'           => isset( $_aItem['ItemAttributes']['ProductGroup'] ) ? $_aItem['ItemAttributes']['ProductGroup'] : '',
                 'date'               => isset( $_aItem['ItemAttributes']['PublicationDate'] ) ? $_aItem['ItemAttributes']['PublicationDate'] : '',    // ReleaseDate
                 // 'is_adult_product' => $_aItem['ItemAttributes']['IsAdultProduct'],
-                'price'              => $this->_getProductPrice( $_aItem ),
-                'lowest_new_price'   => isset( $_aItem['OfferSummary']['LowestNewPrice']['FormattedPrice'] ) ? "<span class='amazon-product-lowest-new-price-value'>" . $_aItem['OfferSummary']['LowestNewPrice']['FormattedPrice'] . "</span>" : '',
-                'lowest_used_price'  => isset( $_aItem['OfferSummary']['LowestUsedPrice']['FormattedPrice'] ) ? "<span class='amazon-product-lowest-used-price-value'>" . $_aItem['OfferSummary']['LowestUsedPrice']['FormattedPrice'] . "</span>" : '',
-                // The below revieww items are not implemented yet
+
+                // The below review items are not implemented yet
                 'editorial_review'   => '',
                 'user_review'        => '', 
-            ) + $_aItem;
+            ) 
+            + $this->_getPrices( $_aItem )
+            + $_aItem;
             
             // Add meta data to the description
             $_aProduct['meta']        = $this->_formatProductMeta( $_aProduct );
@@ -341,26 +350,50 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
         
     }
         /**
-         * Retuns the formatted price as an HTML block.
-         * @since       2.1.1
+         * Returns prices of the product as an array.
+         * @since       2.1.2
          */
-        private function _getProductPrice( array $aItem ) {
+        private function _getPrices( array $aItem ) {
             
-            // If the offered price exists, use that.
-            if ( isset( $aItem['Offers']['Offer']['OfferListing']['Price']['FormattedPrice'] ) ) {
-                return "<span class='amazon-product-price-value'>" 
-                        . $aItem['Offers']['Offer']['OfferListing']['Price']['FormattedPrice']
-                    . "</span>";
-                    
-            }
-            
-            return isset( $aItem['ItemAttributes']['ListPrice']['FormattedPrice'] ) 
-                ? "<span class='amazon-product-price-value'>"  
-                        . $aItem['ItemAttributes']['ListPrice']['FormattedPrice'] 
-                    . "</span>" 
+            $_sProperPirce      = isset( $aItem['ItemAttributes']['ListPrice']['FormattedPrice'] )
+                ? $aItem['ItemAttributes']['ListPrice']['FormattedPrice']
+                : '';     
+            $_sDiscountedPrice  = isset( $aItem['Offers']['Offer']['OfferListing']['Price']['FormattedPrice'] )
+                ? $aItem['Offers']['Offer']['OfferListing']['Price']['FormattedPrice']
                 : '';
+            $_sDiscountedPrice  = $_sProperPirce && $_sDiscountedPrice === $_sProperPirce
+                ? ''
+                : $_sDiscountedPrice;
+            $_sProperPirce      = $_sDiscountedPrice
+                ? "<s>" . $_sProperPirce . "</s>"
+                : $_sProperPirce;
+                
+            $_aPrices = array(
+                'price'              => $_sProperPirce
+                    ? "<span class='amazon-product-price-value'>"  
+                           . $_sProperPirce
+                        . "</span>"
+                    : "",
+                'discounted_price'   => $_sDiscountedPrice
+                    ? "<span class='amazon-product-discounted-price-value'>" 
+                            . $aItem['Offers']['Offer']['OfferListing']['Price']['FormattedPrice']
+                        . "</span>"
+                    : '',
+                'lowest_new_price'   => isset( $aItem['OfferSummary']['LowestNewPrice']['FormattedPrice'] )
+                    ? "<span class='amazon-product-lowest-new-price-value'>"
+                            . $aItem['OfferSummary']['LowestNewPrice']['FormattedPrice']
+                        . "</span>"
+                    : '',
+                'lowest_used_price'  => isset( $aItem['OfferSummary']['LowestUsedPrice']['FormattedPrice'] )
+                    ? "<span class='amazon-product-lowest-used-price-value'>"
+                            . $aItem['OfferSummary']['LowestUsedPrice']['FormattedPrice']
+                        . "</span>"
+                    : '',
+            );
             
+            return $_aPrices;
         }
+
         /**
          * Returns the formatted product meta HTML block.
          * 
@@ -377,6 +410,11 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
             if ( $aProduct['price'] ) {
                 $_aOutput[] = "<span class='amazon-product-price'>" 
                         . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct['price'] )
+                    . "</span>";
+            }
+            if ( $aProduct['discounted_price'] ) {
+                $_aOutput[] = "<span class='amazon-product-discounted-price'>" 
+                        . $aProduct['discounted_price']
                     . "</span>";
             }
             if ( $aProduct['lowest_new_price'] ) {

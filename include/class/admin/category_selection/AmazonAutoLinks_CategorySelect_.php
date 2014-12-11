@@ -712,8 +712,9 @@ abstract class AmazonAutoLinks_CategorySelect_ {
         $nodeBrowseRoot = $oSimpleDOM->getElementById( 'zg_browseRoot' );
         $nodeSelected = $nodeBrowseRoot->find( '.zg_selected', 0 );
         // $nodeSelected = $oSimpleDOM->find( "//*[@id='zg_browseRoot']//*[@class='zg_selected']" );        
-        if ( ! $nodeSelected )
+        if ( ! $nodeSelected ) {
             return __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+        }
             
         // Current category
         $arrBreadcrumb[] = trim( $nodeSelected->plaintext );        
@@ -740,7 +741,10 @@ abstract class AmazonAutoLinks_CategorySelect_ {
     
     protected function convertCharacters( $strHTML, $strMBLang='', $strEncoding='' ) {
     
-        if ( ! empty( $strMBLang ) ) mb_language( $strMBLang ); // without this, the characters get broken    
+        // without this, the characters get broken    
+        if ( ! empty( $strMBLang ) ) { 
+            mb_language( $strMBLang ); 
+        }
                     
         $strEncoding = empty( $strEncoding ) ? @mb_detect_encoding( $strHTML, 'AUTO' ) : $strEncoding;
         $strHTML = @mb_convert_encoding( $strHTML, $this->strCharEncoding , $strEncoding );    
@@ -756,8 +760,9 @@ abstract class AmazonAutoLinks_CategorySelect_ {
         $oXpath = new DomXpath( $oDOM );
         $nodeZg_Selected = $oXpath->query( "//*[@id='zg_browseRoot']//*[@class='zg_selected']" ); 
         
-        if ( ! $nodeZg_Selected->length ) 
+        if ( ! $nodeZg_Selected->length ) {
             return __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+        }
         
         $strCurrentCategory = trim( $nodeZg_Selected->item( 0 )->nodeValue );
         $arrBreadcrumb[] = $strCurrentCategory;
