@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.0.4 =
+- Added a style for discounted price element.
+
 = 1.0.3 =
 - Chagned some local variable names.
 
