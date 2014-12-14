@@ -362,7 +362,7 @@ abstract class AmazonAutoLinks_Unit_Category_ extends AmazonAutoLinks_Unit {
             }
         }
         
-        // getInnerHTML extracts intter html code, meaning the outer div tag will be stripped.
+        // getInnerHTML extracts inner html code, meaning the outer div tag will be stripped.
         $_sDescription = str_replace( '[identical_replacement_string]', '<br />', $this->oDOM->getInnerHTML( $oNode ) );
         
         // Omit the text 'visit blah blah blah for more information'
