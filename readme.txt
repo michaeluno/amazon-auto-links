@@ -165,7 +165,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 2.1.2 =
-- Added a discounted price to be displayed in the search unit type.
+- Added the `aal_action_loaded_plugin` action hook.
+- Changed the timing of a localization function call.
+- Tweaked the way to display product prices of the search unit type.
+- Updated the Japanese translation file.
 
 = 2.1.1 - 12/04/2014 =
 - Added the ability to automatically remove auto-insert items with no unit associated when a unit is removed.

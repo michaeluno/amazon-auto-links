@@ -7,10 +7,14 @@
  * @authorurl    http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since        2.0.0
- * @action        schedule    aal_action_setup_transients     The cron event hook that sets up transients.
- * @filter        apply        aal_filter_classes              Applies to the loading class array.
 */
 
+/**
+ * 
+ * @action      schedule    aal_action_setup_transients     The cron event hook that sets up transients.
+ * @action      do          aal_action_loaded_plugin        Triggered after all the plugin components are loaded.
+ * @filter      apply       aal_filter_classes              Applies to the loading class array.
+ */
 final class AmazonAutoLinks_Bootstrap {
     
     /**
@@ -54,13 +58,10 @@ final class AmazonAutoLinks_Bootstrap {
         register_deactivation_hook( $this->_sFilePath, array( $this, '_replyToDoWhenPluginDeactivates' ) );
         // register_uninstall_hook( $this->_sFilePath, 'self::_replyToDoWhenPluginUninstalled' );
         
-        // 6. Set up localization.
-        $this->_localize();
-
-        // 7. Schedule to call start-up functions after all the plugins are loaded.
+        // 6. Schedule to call start-up functions after all the plugins are loaded.
         add_action( 'plugins_loaded', array( $this, '_replyToLoadPlugin' ), 999, 1 );
 
-        // 8. Plugin requirement check. 
+        // 7. Plugin requirement check. 
         $this->_checkRequirements();
         
     }    
@@ -74,17 +75,19 @@ final class AmazonAutoLinks_Bootstrap {
     public function _replyToLoadPlugin() {
         
         // All the necessary classes have been already loaded.
+        // 1. Set up localization.
+        $this->_localize();
         
-        // 0. Load Necessary libraries
+        // 2. Load Necessary libraries
         include( dirname( $this->_sFilePath ) . '/include/library/admin-page-framework-for-amazon-auto-links.php' );
 
-        // 1. Include functions.
+        // 3. Include functions.
         include( dirname( $this->_sFilePath ) . '/include/function/functions.php' );
         
-        // 2. Option Object
+        // 4. Option Object
         $GLOBALS['oAmazonAutoLinks_Option'] = new AmazonAutoLinks_Option( AmazonAutoLinks_Commons::AdminOptionKey );
 
-        // 3. Templates
+        // 5. Templates
         $GLOBALS['oAmazonAutoLinks_Templates'] = new AmazonAutoLinks_Templates;        
         $GLOBALS['oAmazonAutoLinks_Templates']->loadFunctionsOfActiveTemplates();
         add_action( 'wp_enqueue_scripts', array( $GLOBALS['oAmazonAutoLinks_Templates'], 'enqueueActiveTemplateStyles' ) );
@@ -92,38 +95,41 @@ final class AmazonAutoLinks_Bootstrap {
             $GLOBALS['oAmazonAutoLinks_Templates']->loadSettingsOfActiveTemplates();
         }
             
-        // 4. Admin pages
+        // 6. Admin pages
         if ( $this->_bIsAdmin ) {
             new AmazonAutoLinks_AdminPage( AmazonAutoLinks_Commons::AdminOptionKey, $this->_sFilePath );        
         }
 
-        // 5. Post Type - It should not use "if ( is_admin() )" for the this class because posts of custom post type can be accessed from front-end regular pages.
+        // 7. Post Type - It should not use "if ( is_admin() )" for the this class because posts of custom post type can be accessed from front-end regular pages.
         new AmazonAutoLinks_PostType( AmazonAutoLinks_Commons::PostTypeSlug, null, $this->_sFilePath );     // post type slug
         new AmazonAutoLinks_PostType_AutoInsert( AmazonAutoLinks_Commons::PostTypeSlugAutoInsert, null, $this->_sFilePath );     // post type slug
     
-        // 6. Meta Boxes
+        // 8. Meta Boxes
         if ( $this->_bIsAdmin ) {
             $this->_registerMetaBoxes();
         }
                 
-        // 7. Shortcode - e.g. [amazon_auto_links id="143"]
+        // 9. Shortcode - e.g. [amazon_auto_links id="143"]
         new AmazonAutoLinks_Shortcode( AmazonAutoLinks_Commons::ShortCode );    // amazon_auto_links
         new AmazonAutoLinks_Shortcode( 'amazonautolinks' );     // backward compatibility with v1.x. This will be deprecated later at some point.
             
-        // 8. Widgets
+        // 10. Widgets
         add_action( 'widgets_init', 'AmazonAutoLinks_WidgetByID::registerWidget' );
         // add_action( 'widgets_init', 'AmazonAutoLinks_WidgetByTag::registerWidget' );
                 
-        // 9. Auto-insert        
+        // 11. Auto-insert        
         new AmazonAutoLinks_AutoInsert;
         
-        // 10. Events
+        // 12. Events
         new AmazonAutoLinks_Event;    
         
-        // 11. MISC
+        // 13. MISC
         if ( $this->_bIsAdmin ) {
             $GLOBALS['oAmazonAutoLinksUserAds'] = isset( $GLOBALS['oAmazonAutoLinksUserAds'] ) ? $GLOBALS['oAmazonAutoLinksUserAds'] : new AmazonAutoLinks_UserAds;
         }
+        
+        // 14. Trigger the action. 2.1.2+
+        do_action( 'aal_action_loaded_plugin' );
         
     }
     

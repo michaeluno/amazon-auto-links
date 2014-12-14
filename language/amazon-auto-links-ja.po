@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Amazon Auto Links 2.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/amazon-auto-links\n"
 "POT-Creation-Date: 2014-12-11 06:51:56+00:00\n"
-"PO-Revision-Date: 2014-12-11 15:59+0900\n"
+"PO-Revision-Date: 2014-12-14 21:30+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -93,6 +93,8 @@ msgid ""
 "The other versions of Amazon Auto Links can be downloaded from <a href=\"%1$s"
 "\">this page</a>."
 msgstr ""
+"古いバージョンの Amazon Auto Links は<a href=\"%1$s\">こちらのページ</a>.から"
+"ダウンロードできます。"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:34
 msgid "Available"
@@ -331,9 +333,8 @@ msgstr "検索ユニットの追加"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:37
 #: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:20
-#, fuzzy
 msgid "Manage Auto Insert"
-msgstr "オートインサートの追加"
+msgstr "オートインサートの編集"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:42
 #: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:24
@@ -358,7 +359,6 @@ msgid "About"
 msgstr "アバウト"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:68
-#, fuzzy
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -378,20 +378,17 @@ msgid "Initial Options"
 msgstr "初期設定"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:110
-#, fuzzy
 msgid "Product Search"
-msgstr "カテゴリーを検索"
+msgstr "商品検索"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:117
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:432
-#, fuzzy
 msgid "Item Lookup"
-msgstr "辞書を参照"
+msgstr "単品検索"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:124
-#, fuzzy
 msgid "Similarity Lookup"
-msgstr "辞書を参照"
+msgstr "類似性検索"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:134
 msgid "Authentication"
@@ -427,7 +424,6 @@ msgid "Get Templates"
 msgstr "テンプレートを取得"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:196
-#, fuzzy
 msgid "Features"
 msgstr "機能"
 
@@ -440,22 +436,18 @@ msgid "Contact"
 msgstr "コンタクト"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:211
-#, fuzzy
 msgid "Change Log"
-msgstr "購入ログ"
+msgstr "更新履歴"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:218
-#, fuzzy
 msgid "Installation"
 msgstr "インストール"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:223
-#, fuzzy
 msgid "FAQ"
 msgstr "よくある質問"
 
 #: include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:228
-#, fuzzy
 msgid "Other Notes"
 msgstr "その他"
 
@@ -857,9 +849,8 @@ msgid "Enter post IDs separated by commas."
 msgstr "ポストID をコンマで区切って入力します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:309
-#, fuzzy
 msgid "Leave this empty to disable this option."
-msgstr "オートインサートを一時的に無効にする時に使用します。"
+msgstr "このオプションを有効にしない場合は空白にします。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:315
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:387
@@ -868,9 +859,8 @@ msgstr "ページタイプ"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:318
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:390
-#, fuzzy
 msgid "Single Post"
-msgstr "単一記事の投稿"
+msgstr "単一記事"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:319
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:391
@@ -899,9 +889,8 @@ msgstr "このオプションは、スタティックインサートには影響
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:325
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:335
-#, fuzzy
 msgid "If no item is checked, this option will not take effect."
-msgstr "カスタマー ID が指定されている場合は、このオプションは反映されません。"
+msgstr "項目がチェックされなければ、このオプションは無効になります。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:331
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:402
@@ -926,11 +915,11 @@ msgstr ""
 msgid ""
 "The checked terms which do not belong to the post type of the currently "
 "loading page will not take effect."
-msgstr ""
+msgstr "チェックされた項目で投稿タイプに属しないものは効果が適用されません。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:346
 msgid "Leave all unchecked not to enable this option."
-msgstr ""
+msgstr "このオプションを有効にしない場合は全てチェックを外します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:437
 msgid "Cancel"
@@ -1289,16 +1278,14 @@ msgstr "詳細検索条件"
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:52
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:77
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:216
-#, fuzzy
 msgid "Item Look-up"
-msgstr "調べる単語を入力:"
+msgstr "単品検索"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:58
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:83
 #: include/class/boot/AmazonAutoLinks_Bootstrap.php:188
-#, fuzzy
 msgid "Advanced Item Look-up Options"
-msgstr "詳細検索設定"
+msgstr "単品検索詳細設定"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:160
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:138
@@ -1630,6 +1617,8 @@ msgid ""
 "This option will not take effect if the Category option is set to <code>All</"
 "code> or <code>Blended</code>"
 msgstr ""
+"もし「カテゴリ」オプションが<code>全て</code>若しくは<code>ブレンド</code>の"
+"場合、このオプションは効果がありません。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:597
 msgid "Minimum Price"
@@ -1645,9 +1634,8 @@ msgstr ""
 "さな表示単位で入力します。例えば$32.41 は 3241 とします。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:610
-#, fuzzy
 msgid "Minimum Percentage Off"
-msgstr "オン・オフの切り替え"
+msgstr "最小割引パーセンテージ"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:617
 msgid "Specifies the minimum percentage off for the items to return."
@@ -1665,9 +1653,8 @@ msgstr "ブラウズノードをここで指定できます。正数。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:634
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:866
-#, fuzzy
 msgid "Merchant ID"
-msgstr "アソシエイトID"
+msgstr "販売者ID"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:640
 msgid ""
@@ -1676,30 +1663,33 @@ msgid ""
 "merchants including Amazon. Use the Amazon to limit the response to only "
 "items sold by Amazon. Case sensitive. e.g.<code>Amazon</code>"
 msgstr ""
+"販売人を指定します。デフォルトではプロダクトアドバタイジングAPIはAmazonを含む"
+"様々な販売人によって売られる商品データを返します。Amazonによって販売されてい"
+"るものに限定する場合、Amazon と指定します。大文字小文字は区別されます。e.g."
+"<code>Amazon</code>"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:701
-#, fuzzy
 msgid "Item ID"
-msgstr "アソシエイトID"
+msgstr "商品ID"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:704
 msgid ""
 "Enter the ID(s) of the product. For more more than one items, use the <code>,"
 "</code> (comma) characters to delimit the items."
 msgstr ""
+"商品のIDを入力します。複数の場合<code>,</code>(半角英数コンマ)で区切ります。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:712
-#, fuzzy
 msgid "ID Type"
-msgstr "広告  種類"
+msgstr "ID型"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:717
 msgid "Not available in the CA locale."
-msgstr ""
+msgstr "CA 言語では使用できません。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:719
 msgid "The US locale only, when the search index is Books."
-msgstr ""
+msgstr "検索インデックスが「本」の場合で地域が「US」の場合。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:766
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4783
@@ -1708,78 +1698,74 @@ msgstr "カテゴリー"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:772
 msgid "If the above ID Type is ISBN, this will be automatically set to Books."
-msgstr ""
+msgstr "上記IDタイプがISBNの場合、これは「本」に自動的に設定されます。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:773
-#, fuzzy
 msgid "If the ID Type is ASIN this option will not take effect."
-msgstr "カスタマー ID が指定されている場合は、このオプションは反映されません。"
+msgstr "ID タイプが ASIN の場合は、このオプションは反映されません。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:876
 msgid ""
 "Select <code>Amazon</code> if you only want to see items sold by Amazon; "
 "otherwise, <code>All</code>."
 msgstr ""
+"Amazonで販売された商品にしたい場合、<code>Amazon</code>を選択します。そうでな"
+"い場合<code>全て</code>を選びます。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:928
-#, fuzzy
 msgid "Item ASIN"
-msgstr "by ASIN"
+msgstr "ASIN アイテム"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:931
 msgid ""
 "Enter the ASIN(s) of the product. For more more than one items, use the "
 "<code>,</code> (comma) characters to delimit the items."
 msgstr ""
+"商品のASINを入力します。複数の場合、<code>,</code>(半角英数コンマ)で区切りま"
+"す。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:938
-#, fuzzy
 msgid "Similarity Type"
-msgstr "広告  種類"
+msgstr "類似型"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:941
-#, fuzzy
 msgid "Intersection"
-msgstr "現在の選択"
+msgstr "共通事項"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:941
-#, fuzzy
 msgid ""
 "returns the intersection of items that are similar to all of the ASINs "
 "specified"
-msgstr "指定された商品と似ている商品"
+msgstr "全ての指定されたASINに共通する商品を返します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:942
-#, fuzzy
 msgid ""
 "returns the union of randomly picked items that are similar to all of the "
 "ASINs specified."
-msgstr "指定された商品と似ている商品"
+msgstr "全ての指定されたASINに似通った商品をランダムに返します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:944
 msgid "The maximum of only ten items can be retrieved."
-msgstr ""
+msgstr "最大で10項目取得可能です。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Search_.php:954
-#, fuzzy
 msgid ""
 "The number of product links to display. This unit type cannot display more "
 "than 10 items."
-msgstr "表示する商品の数。"
+msgstr "商品リンクを表示する数。このユニットタイプは10まで可能です。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:23
 msgid "AWS Access Key Identifiers"
 msgstr "AWS アクセスキー ID"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
-#, fuzzy
 msgid ""
 "For the Search Unit type, credentials are required to perform search "
 "requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
 "API</a>."
 msgstr ""
-"Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising API</a> を商品"
-"検索に使用するために、認証情報が必要です。"
+"検索ユニットタイプの場合、Amazon <a href=\"%1$s\" target=\"_blank\">Product "
+"Advertising API</a> を商品検索に使用するために、認証情報が必要です。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:34
 msgid "Filters"
@@ -1819,13 +1805,12 @@ msgid "Set the access levels to the plugin setting pages."
 msgstr "プラグイン設定ページのアクセス権限を設定します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:77
-#, fuzzy
 msgid "Form"
 msgstr "フォーム"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:78
 msgid "Set allowed HTML tags etc.."
-msgstr ""
+msgstr "使用可能なHTMLタグ等を設定します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:86
 msgid "For developers who need to see the internal workings of the plugin."
@@ -1932,31 +1917,30 @@ msgid "Define the query parameter key for the cloaking link style."
 msgstr "クロークリンクスタイルのクエリパラメータキーを定義します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:340
-#, fuzzy
 msgid "Caching Mode"
-msgstr "ディスプレイモード"
+msgstr "キャッシングモード"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:344
-#, fuzzy
 msgid "Normal"
 msgstr "通常"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:344
 msgid "relies on WP Cron."
-msgstr ""
+msgstr "WP Cron を使用"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:345
 msgid "Intense"
-msgstr ""
+msgstr "インテンス"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:345
 msgid "relies on the plugin caching method."
-msgstr ""
+msgstr "プラグインのキャッシングメソッドを使用する。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:347
 msgid ""
 "The intense mode should only be enabled when the normal mode does not work."
 msgstr ""
+"インテンスモードはノーマルモードでキャッシングが作動しない場合に使用します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:359
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:421
@@ -1991,9 +1975,8 @@ msgid "Subscriber"
 msgstr "購読者"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:390
-#, fuzzy
 msgid "Allowed HTML Tags"
-msgstr "HTMLタグ付きの詳細"
+msgstr "許可されたHTMLタグ"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:391
 msgid ""
@@ -2001,6 +1984,9 @@ msgid ""
 "default, WordPress applies a filter called KSES that strips out certain tags "
 "before the user input is saved in the database for security reasons."
 msgstr ""
+"フォームに入力できる許可されたHTMLタグを半角英数コンマ(,) で区切り入力しま"
+"す。デフォルトではWordPressはKSESフィルタを適用し特定のタグをデータベースに保"
+"存される時にセキュリティ上の理由で除去します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:404
 msgid "Debug Mode"
@@ -2080,7 +2066,6 @@ msgid "This is recommended to filter spam tagged products."
 msgstr "スパムでタグヅケされた商品を除外するのに有効です。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:117
-#, fuzzy
 msgid ""
 "If not specified, product links tagged by all customers will be fetched."
 msgstr "もし指定がない場合、全てのカスタマーがタグ付けした商品が取得されます。"
@@ -2126,7 +2111,6 @@ msgstr ""
 "るまで表示されることはありません。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:203
-#, fuzzy
 msgid ""
 "Inserts <code>ref=nosim</code> in the product link url. For more "
 "information, visit <a href=\"%1$s\">this page</a>."
@@ -2157,83 +2141,71 @@ msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
 msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット！"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:41
-#, fuzzy
 msgid "Item Format"
 msgstr "アイテムフォーマット"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:48
 msgid "Sets the layout of an item. The following variables are available."
-msgstr ""
+msgstr "商品のレイアウトを決めます。以下のヘンスが使用可能です。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:49
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:68
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:83
-#, fuzzy
 msgid "product link url"
-msgstr "リンクのURLを編集"
+msgstr "商品リンクURL"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:50
 msgid "title with HTML tags defined in the Title Format option"
-msgstr ""
+msgstr "タイトルフォーマット設定で定められたHTMLタグ付きのタイトル"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:51
-#, fuzzy
 msgid "title without HTML tags"
-msgstr "タグなしの詳細テキスト"
+msgstr "HTMLアグなしのタイトル"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:52
 msgid "thumbnail with HTML tags defined in the Image Format option"
-msgstr ""
+msgstr "画像フォーマット設定で定められたHTMLタグ付きのサムネイル"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:53
-#, fuzzy
 msgid "description with HTML tags"
-msgstr "HTMLタグ付きの詳細"
+msgstr "HTMLタグ付き詳細"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:54
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:70
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:87
-#, fuzzy
 msgid "description without HTML tags"
-msgstr "タグなしの詳細テキスト"
+msgstr "HTMLタグなしの詳細"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:55
 msgid "the product price (only for the search unit type)."
-msgstr ""
+msgstr "商品価格(検索ユニットタイプのみ)"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:60
-#, fuzzy
 msgid "Title Format"
-msgstr "404エラーのタイトルフォーマット："
+msgstr "タイトルのフォーマット"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:67
-#, fuzzy
 msgid "Sets the layout of a title."
-msgstr "サンプルプロダクトタイトル"
+msgstr "タイトルのレイアウトを設定します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:69
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:84
-#, fuzzy
 msgid "title"
 msgstr "タイトル"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:75
-#, fuzzy
 msgid "Image Format"
 msgstr "イメージフォーマット"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:82
-#, fuzzy
 msgid "Sets the layout of an image."
-msgstr "詳細画像設定"
+msgstr "画像のレイアウトを設定します。"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:85
-#, fuzzy
 msgid "image url"
 msgstr "画像の URL"
 
 #: include/class/admin/form/AmazonAutoLinks_Form_Template_.php:86
-#, fuzzy
 msgid "image size"
 msgstr "イメージサイズ"
 
@@ -2286,19 +2258,16 @@ msgid "Search Unit Options"
 msgstr "検索ユニットの設定"
 
 #: include/class/boot/AmazonAutoLinks_Bootstrap.php:181
-#, fuzzy
 msgid "Item Look-up Options"
-msgstr "調べる単語を入力:"
+msgstr "単品検索設定"
 
 #: include/class/boot/AmazonAutoLinks_Bootstrap.php:198
-#, fuzzy
 msgid "Similarity Look-up Options"
-msgstr "調べる単語を入力:"
+msgstr "類似性検索設定"
 
 #: include/class/boot/AmazonAutoLinks_Bootstrap.php:205
-#, fuzzy
 msgid "Advanced Similarity Look-up Options"
-msgstr "詳細検索設定"
+msgstr "類似性検索詳細設定"
 
 #: include/class/boot/AmazonAutoLinks_Bootstrap.php:360
 msgid "The plugin requires the PHP version %1$s or higher."
@@ -2466,7 +2435,7 @@ msgstr "ガーデニング"
 #: include/class/boot/AmazonAutoLinks_Properties.php:275
 #: include/class/boot/AmazonAutoLinks_Properties.php:341
 msgid "Luggage"
-msgstr ""
+msgstr "鞄"
 
 #: include/class/boot/AmazonAutoLinks_Properties.php:112
 #: include/class/boot/AmazonAutoLinks_Properties.php:138
@@ -2609,7 +2578,6 @@ msgid "Miscellaneous"
 msgstr "その他"
 
 #: include/class/boot/AmazonAutoLinks_Properties.php:139
-#, fuzzy
 msgid "MusicalInstruments"
 msgstr "楽器"
 
@@ -2880,19 +2848,16 @@ msgid "Shortcode / PHP Code"
 msgstr "ショートコード / PHP コード"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_.php:199
-#, fuzzy
 msgid "Search - Similarity Look-up"
-msgstr "調べる単語を入力:"
+msgstr "検索 - 類似性検索"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_.php:201
-#, fuzzy
 msgid "Search - Item Look-up"
-msgstr "調べる単語を入力:"
+msgstr "検索 - 商品 (単品)"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_.php:203
-#, fuzzy
 msgid "Search - Products"
-msgstr "バンドルプロダクト"
+msgstr "検索 - 商品 (複数)"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_.php:205
 msgid "Tag"
@@ -2940,9 +2905,8 @@ msgid "etc."
 msgstr "等"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:251
-#, fuzzy
 msgid "(No unit is selected)"
-msgstr "ユニットが選択されている必要があります。"
+msgstr "(ユニットが選択されていません)"
 
 #: include/class/post_type/AmazonAutoLinks_PostType_AutoInsert_.php:265
 msgid "Edit this item"
@@ -2969,15 +2933,16 @@ msgid ""
 "the template could not be found. Try reselecting the template in the unit "
 "option page."
 msgstr ""
+"テンプレートが見つかりませんでした。ユニット定義ページでテンプレートを再度選"
+"択して下さい。"
 
 #: include/class/unit/AmazonAutoLinks_Unit_Search_.php:374
 msgid "by %1$s"
 msgstr "by %1$s"
 
 #: include/class/unit/AmazonAutoLinks_Unit_Search_.php:379
-#, fuzzy
 msgid "for %1$s"
-msgstr "for"
+msgstr "%1$s"
 
 #: include/class/unit/AmazonAutoLinks_Unit_Search_.php:384
 msgid "New from %1$s"
@@ -2992,6 +2957,8 @@ msgid ""
 "Could not identify the unit type. Please make sure to update the auto-insert "
 "definition if you have deleted the unit."
 msgstr ""
+"ユニットタイプを特定できませんでした。削除されたユニットがある場合オートイン"
+"サートの定義を更新して下さい。"
 
 #: include/class/widget/AmazonAutoLinks_WidgetByID_.php:15
 msgid ""
@@ -3012,24 +2979,20 @@ msgstr ""
 "す。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4761
-#, fuzzy
 msgid "The options have been updated."
-msgstr "サイトのオプションを更新しました。"
+msgstr "オプションが更新されました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4762
-#, fuzzy
 msgid "The options have been cleared."
-msgstr "キャッシュが削除されました。"
+msgstr "オプションがが消去されました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4763
-#, fuzzy
 msgid "Export Options"
-msgstr "オプションがアップデートされました。"
+msgstr "エキスポート設定"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4764
-#, fuzzy
 msgid "Import Options"
-msgstr "v1 設定のインポート"
+msgstr "インポート設定"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4765
 msgid "Submit"
@@ -3037,34 +3000,29 @@ msgstr "送信"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4766
 msgid "An error occurred while uploading the import file."
-msgstr ""
+msgstr "インポートファイルをアップロード中にエラーが発生しました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4767
-#, fuzzy
 msgid "The uploaded file type is not supported."
-msgstr "アップロードされたファイルが許可されたファイル形式に適合しない"
+msgstr "アップロードされたファイルが許可されたファイル形式に適合しません。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4768
-#, fuzzy
 msgid "Could not load the importing data."
-msgstr "アルバムデータが読めません。"
+msgstr "インポートデータを読み込みできませんでした。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4769
 msgid "The uploaded file has been imported."
-msgstr ""
+msgstr "アップロードされたファイルはインポートされました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4770
-#, fuzzy
 msgid "No data could be imported."
-msgstr "設定をインポートできませんでした:"
+msgstr "データをインポートできませんでした。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4771
-#, fuzzy
 msgid "Add"
 msgstr "追加"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4772
-#, fuzzy
 msgid "Remove"
 msgstr "削除"
 
@@ -3077,27 +3035,22 @@ msgid "Use This Image"
 msgstr "この画像を使う"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4775
-#, fuzzy
 msgid "Are you sure you want to reset the options?"
-msgstr "本当に実行していいですか ?"
+msgstr "本当に設定をリセットしますか？"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4776
-#, fuzzy
 msgid "Please confirm if you want to perform the specified task."
-msgstr "開発者を援助する方法を選択して下さい。"
+msgstr "指定されたタスクを実行するか確認して下さい。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4777
-#, fuzzy
 msgid "The options have been reset."
-msgstr "qTranslate はリセットされました。"
+msgstr "オプションはリセットされました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4778
-#, fuzzy
 msgid "The specified options have been deleted."
-msgstr "支払いは削除されました。"
+msgstr "指定されたオプションは削除されました。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4785
-#, fuzzy
 msgid "Comments"
 msgstr "コメント"
 
@@ -3118,38 +3071,32 @@ msgid "Select Image"
 msgstr "画像を選択"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4802
-#, fuzzy
 msgid "Upload File"
-msgstr "アップロード"
+msgstr "ファイルのアップロード"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4803
-#, fuzzy
 msgid "Use This File"
 msgstr "このファイルを使う"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4804
-#, fuzzy
 msgid "Select File"
 msgstr "ファイルを選択"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4807
-#, fuzzy
 msgid "%s queries in %s seconds."
-msgstr "HTTPリダイレクトまでの時間（秒）"
+msgstr "%s クエリ (%s 秒中)"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4808
 msgid "%s out of %s MB (%s) memory used."
-msgstr ""
+msgstr "%sMBのメモリ使用 (%s (%s)中)。"
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4809
-#, fuzzy
 msgid "Peak memory usage %s MB."
-msgstr "このユニットのメモリ使用量"
+msgstr "ピークメモリ使用量: $sMB."
 
 #: include/library/admin-page-framework-for-amazon-auto-links.php:4810
-#, fuzzy
 msgid "Initial memory usage  %s MB."
-msgstr "このユニットのメモリ使用量"
+msgstr "初期メモリ使用量: %sMB"
 
 #: template/category/template.php:25 template/preview/template.php:11
 #: template/search/template.php:33
@@ -3157,12 +3104,10 @@ msgid "No products found."
 msgstr "プロダクトが見つかりません"
 
 #. Plugin Name of the plugin/theme
-#, fuzzy
 msgid "Amazon Auto Links"
 msgstr "Amazon Auto Links"
 
 #. Plugin URI of the plugin/theme
-#, fuzzy
 msgid "http://en.michaeluno.jp/amazon-auto-links"
 msgstr "http://jp.michaeluno.jp/amazon-auto-links"
 
@@ -3176,12 +3121,10 @@ msgstr ""
 "JavaScript を無効にしたブラウザでも表示されます。"
 
 #. Author of the plugin/theme
-#, fuzzy
 msgid "Michael Uno (miunosoft)"
 msgstr "Michael Uno (maiunosoft)"
 
 #. Author URI of the plugin/theme
-#, fuzzy
 msgid "http://michaeluno.jp"
 msgstr "http://michaeluno.jp"
 
