@@ -175,11 +175,12 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
         /**
          * Returns the total page number
          * 
-         * @since            2.0.4.1b
+         * @since   2.0.4.1b
+         * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
          */
         protected function _getTotalPageNumber( $iCount, $aResponse, $sSearchIndex='All' ) {
             
-            $iMaxAllowedPages = $sSearchIndex == 'All' ? 5 : 10;        // see the API documentation: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
+            $iMaxAllowedPages = $sSearchIndex == 'All' ? 5 : 10;        
             $iPage = ceil( $iCount / 10 );
             $iPage = $iPage > $iMaxAllowedPages ? $iMaxAllowedPages : $iPage;
             $iFoundTotalPages = isset( $aResponse['Items']['TotalPages'] ) ? $aResponse['Items']['TotalPages'] : 1;
@@ -215,8 +216,8 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
     /**
      * 
      * 'Operation' => 'ItemSearch',    // ItemSearch, ItemLookup, SimilarityLookup
-     * @since            2.0.2
-     * @see                http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
+     * @since   2.0.2
+     * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
      */
     protected function getAPIParameterArray( $sOperation='ItemSearch', $iItemPage=null ) {
 
@@ -255,8 +256,6 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
                 ? AmazonAutoLinks_Properties::getMarketplaceDomainByLocale( $this->arrArgs['country'] )
                 : null,                
         );        
-// var_dump( $this->arrArgs );
-// var_dump( $_aParams );
         $_aParams = $iItemPage
             ? $_aParams + array( 'ItemPage' => $iItemPage )
             : $_aParams;
