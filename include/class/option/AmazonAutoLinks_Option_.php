@@ -2,11 +2,11 @@
 /**
  * Handles the options of Amazon Auto Links.
  * 
- * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package      Amazon Auto Links
+ * @copyright    Copyright (c) 2013-2015, Michael Uno
+ * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since        2.0.0
- * @filter        aal_filter_max_column_number
+ * @filter       aal_filter_max_column_number
  * 
  */
 abstract class AmazonAutoLinks_Option_ {
@@ -63,6 +63,10 @@ abstract class AmazonAutoLinks_Option_ {
             'import_v1_options' => array(
                 'dismiss' => false,
             ),
+            // 2.2.0+
+            'custom_preview_post_type' => array(
+                'custom_preview_post_type_slug' => '',
+            ),
         ),
         'arrTemplates' => array(),    // stores information of active templates.
     );
@@ -73,9 +77,9 @@ abstract class AmazonAutoLinks_Option_ {
          
     public function __construct( $sOptionKey ) {
 
-        $this->strOptionKey = $sOptionKey;
-        $this->arrOptions = $this->set( $sOptionKey );
-        $this->strCharEncoding = get_bloginfo( 'charset' ); 
+        $this->strOptionKey     = $sOptionKey;
+        $this->arrOptions       = $this->set( $sOptionKey );
+        $this->strCharEncoding  = get_bloginfo( 'charset' ); 
         
         // Black ASINs 
         $GLOBALS['arrBlackASINs'] = AmazonAutoLinks_Utilities::convertStringToArray( 
@@ -94,7 +98,9 @@ abstract class AmazonAutoLinks_Option_ {
         $vOption = get_option( $sOptionKey, array() );
         
         // Avoid casting array because it causes a zero key when the subject is null.
-        $vOption = empty( $vOption ) ? array() : $vOption;        
+        $vOption = empty( $vOption ) 
+            ? array() 
+            : $vOption;        
         
         // Now $vOption is an array so merge with the default option to avoid undefined index warnings.
         $arrOptions = AmazonAutoLinks_Utilities::uniteArrays( $vOption, self::$arrStructure_Options );
@@ -108,16 +114,12 @@ abstract class AmazonAutoLinks_Option_ {
      * 
      */
     protected function reset() {
-        
         delete_option( $this->strOptionKey );
-        
     }
     
     
     public function save() {
-        
         update_option( $this->strOptionKey, $this->arrOptions );
-        
     }
     
     public function sanitizeUnitOpitons( $arrUnitOptions ) {
@@ -145,8 +147,9 @@ abstract class AmazonAutoLinks_Option_ {
             );            
 
         // For the 'item_lookup' unit type
-        if ( isset( $arrUnitOptions['unit_type'] ) && $arrUnitOptions['unit_type'] == 'item_lookup' ) 
+        if ( isset( $arrUnitOptions['unit_type'] ) && 'item_lookup' === $arrUnitOptions['unit_type'] ) {
             $this->sanitizeUnitOptions_ItemLookUp( $arrUnitOptions );        
+        }
         
         return $arrUnitOptions;
         
@@ -159,8 +162,9 @@ abstract class AmazonAutoLinks_Option_ {
     protected function sanitizeUnitOptions_ItemLookUp( array &$aUnitOptions ) {
         
         // if the ISDN is spceified, the search index must be set to Books.
-        if ( isset( $aUnitOptions['IdType'], $aUnitOptions['SearchIndex'] ) && $aUnitOptions['IdType'] == 'ISBN' )
+        if ( isset( $aUnitOptions['IdType'], $aUnitOptions['SearchIndex'] ) && $aUnitOptions['IdType'] == 'ISBN' ) {
             $aUnitOptions['SearchIndex'] = 'Books';
+        }
         
         $aUnitOptions['ItemId'] =  trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $aUnitOptions['ItemId'], ',' ) );
         
@@ -169,28 +173,34 @@ abstract class AmazonAutoLinks_Option_ {
     
     public static function getUnitOptionsByPostID( $intPostID ) {
         
-        $arrPostData = array();
-        if ( $intPostID == 0 ) return $arrPostData;
+        if ( 0 == $intPostID  ) { 
+            return $arrPostData;
+        }
         
         // this way, array will be unserialized
-        foreach( ( array ) get_post_custom_keys( $intPostID ) as $strKey )     // casting array in case the post does not exist
-            $arrPostData[ $strKey ] = get_post_meta( $intPostID, $strKey, true );
-
+        // casting array in case the post does not exist
+        $arrPostData = array();
+        foreach( ( array ) get_post_custom_keys( $intPostID ) as $strKey ) {
+            $arrPostData[ $strKey ] = get_post_meta( $intPostID, $strKey, true );        
+        }
         return $arrPostData;
         
     }
     
     public static function getUnitType( $intPostID=null ) {
 
-        if ( $intPostID )
+        if ( $intPostID ) {
             return get_post_meta( $intPostID, 'unit_type', true );
+        }
             
-        if ( ! isset( $_GET['post'] ) || ! $_GET['post'] ) return '';
+        if ( ! isset( $_GET['post'] ) || ! $_GET['post'] ) { 
+            return ''; 
+        }
     
         // If the 'action' query value is edit, search for the meta field value which previously set when it is saved.
-        if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) 
+        if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
             return get_post_meta( $_GET['post'], 'unit_type', true );
-        
+        }
         return '';
         
     }        
@@ -225,8 +235,9 @@ abstract class AmazonAutoLinks_Option_ {
         );        
         
         // Remove the ignoring keys.
-        foreach( $arrIgnoreFields as $strFieldKey )
+        foreach( $arrIgnoreFields as $strFieldKey ) {
             unset( $arrUnitOptions[ $strFieldKey ] );
+        }
         
         // Add meta fields.
         self::updatePostMeta( $intPostID, $arrUnitOptions );
@@ -236,15 +247,20 @@ abstract class AmazonAutoLinks_Option_ {
     }    
     public static function updatePostMeta( $intPostID, $arrPostData ) {
         
-        foreach( $arrPostData as $strFieldID => $vValue ) 
+        foreach( $arrPostData as $strFieldID => $vValue ) {
             update_post_meta( $intPostID, $strFieldID, $vValue );
+        }
         
     }
     
     public function isDebugMode() {
         
-        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG  ) return false;
-        if ( ! $this->arrOptions['aal_settings']['debug']['debug_mode'] ) return false;            
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG  ) { 
+            return false; 
+        }
+        if ( ! $this->arrOptions['aal_settings']['debug']['debug_mode'] ) { 
+            return false; 
+        }
         return true;
         
     }
@@ -271,15 +287,17 @@ abstract class AmazonAutoLinks_Option_ {
     public function getRemainedAllowedUnits( $intNumberOfUnits=null ) {
         
         if ( ! isset( $intNumberOfUnits ) ) {
-            $oNumberOfUnits = AmazonAutoLinks_WPUtilities::countPosts( AmazonAutoLinks_Commons::PostTypeSlug );
-            $intNumberOfUnits = $oNumberOfUnits->publish + $oNumberOfUnits->private + $oNumberOfUnits->trash;
+            $oNumberOfUnits     = AmazonAutoLinks_WPUtilities::countPosts( AmazonAutoLinks_Commons::PostTypeSlug );
+            $intNumberOfUnits   = $oNumberOfUnits->publish + $oNumberOfUnits->private + $oNumberOfUnits->trash;
         } 
         
         return 3 - $intNumberOfUnits;
         
     }
     public function isReachedCategoryLimit( $intNumberOfCategories ) {        
-        return ( $intNumberOfCategories >= 3 ) ? true : false;
+        return ( $intNumberOfCategories >= 3 ) 
+            ? true 
+            : false;
     }    
     public function getMaximumProductLinkCount() {
         return 10;
@@ -295,8 +313,10 @@ abstract class AmazonAutoLinks_Option_ {
     }
     
     public function getMaxSupportedColumnNumber() {
-        
-        return apply_filters( 'aal_filter_max_column_number', $this->arrOptions['aal_settings']['template']['max_column'] );
-            
+        return apply_filters( 
+            'aal_filter_max_column_number', 
+            $this->arrOptions['aal_settings']['template']['max_column'] 
+        );            
     }
+    
 }
