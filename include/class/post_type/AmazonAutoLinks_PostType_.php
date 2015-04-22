@@ -3,9 +3,9 @@
  * Creates Amazon Auto Links custom post type.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
+ * @copyright   Copyright (c) 2013-2015, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.0
+ * @since       2.0.0
  * 
  */
 
@@ -121,7 +121,7 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         if ( ! isset( $GLOBALS['post']->post_type ) || $GLOBALS['post']->post_type != $this->oProps->strPostType ) { 
             return $sContent; 
         }
-        
+    
         $_aUnitOptions = AmazonAutoLinks_Option::getUnitOptionsByPostID( $GLOBALS['post']->ID );
         $_aUnitOptions['id'] = $GLOBALS['post']->ID;
         return $sContent 
