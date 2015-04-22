@@ -16,7 +16,7 @@ if ( ! class_exists( 'PHP_Class_Files_Script_Generator_Base' ) ) {
  * This is meant to be used for the callback function for the spl_autoload_register() function.
  *  
  * @remark		The parsed class file must have a name of the class defined in the file.
- * @version		1.0.1
+ * @version		1.0.2
  */
 class PHP_Class_Files_Inclusion_Script_Creator extends PHP_Class_Files_Script_Generator_Base {
 	
@@ -64,18 +64,18 @@ class PHP_Class_Files_Inclusion_Script_Creator extends PHP_Class_Files_Script_Ge
 	 * 
 	 * When false is passed to the 'use_docblock' argument, the constants of the header class must include 'Version', 'Name', 'Description', 'URI', 'Author', 'CopyRight', 'License'. 
 	 * <h3>Example</h3>
-	 * <code>class TaskScheduler_Registry_Base {
-	 * 		const Version		= '1.0.0b08';
-	 * 		const Name			= 'Task Scheduler';
-	 * 		const Description	= 'Provides an enhanced task management system for WordPress.';
-	 * 		const URI			= 'http://en.michaeluno.jp/';
-	 * 		const Author		= 'miunosoft (Michael Uno)';
-	 * 		const AuthorURI		= 'http://en.michaeluno.jp/';
-	 * 		const CopyRight		= 'Copyright (c) 2014, <Michael Uno>';
-	 * 		const License		= 'GPL v2 or later';
-	 * 		const Contributors	= '';
-	 * }</code>
-	 */
+     * <code>class TaskScheduler_Registry_Base {
+     *         const VERSION        = '1.0.0b08';
+     *         const NAME           = 'Task Scheduler';
+     *         const DESCRIPTION    = 'Provides an enhanced task management system for WordPress.';
+     *         const URI            = 'http://en.michaeluno.jp/';
+     *         const AUTHOR         = 'miunosoft (Michael Uno)';
+     *         const AUTHOR_URI     = 'http://en.michaeluno.jp/';
+     *         const COPYRIGHT      = 'Copyright (c) 2014, <Michael Uno>';
+     *         const LICENSE        = 'GPL v2 or later';
+     *         const CONTRIBUTORS   = '';
+     * }</code>
+     */
 	public function __construct( $sBaseDirPath, $asScanDirPaths, $sOutputFilePath, array $aOptions=array() ) {
 
 		$aOptions			= $aOptions + self::$_aStructure_Options;
@@ -93,13 +93,7 @@ class PHP_Class_Files_Inclusion_Script_Creator extends PHP_Class_Files_Script_Ge
 		unset( $_aFiles[ pathinfo( $sOutputFilePath, PATHINFO_FILENAME ) ] );	// it's possible that the minified file also gets loaded but we don't want it.
 
 		if ( $aOptions['output_buffer'] ) {
-			
 			echo sprintf( 'Found %1$s file(s)', count( $_aFiles ) ) . $_sCarriageReturn;
-			foreach ( $_aFiles as $_aFile ) {
-				echo $_aFile['path'] . $_sCarriageReturn;
-				// echo implode( ', ', $_aFile['defined_classes'] ) . $_sCarriageReturn;
-			}
-			
 		}			
 	
 		/* Generate the output script header comment */
@@ -128,17 +122,22 @@ class PHP_Class_Files_Inclusion_Script_Creator extends PHP_Class_Files_Script_Ge
 			}
 		}
 		
-		$aFiles = $this->_extractDefinedClasses( $aFiles );
+		$aFiles = $this->_extractDefinedClasses( $aFiles, $aExcludingClassNames );
 		
 		return $aFiles;
 	
 	}
-		private function _extractDefinedClasses( array $aFiles ) {
+		private function _extractDefinedClasses( array $aFiles, array $aExcludingClassNames ) {
 			
 			$_aAdditionalClasses = array();
 			foreach( $aFiles as $_sClassName => $_aFile ) {
 				foreach( $_aFile['defined_classes'] as $_sAdditionalClass ) {
-					if ( isset( $aFiles[ $_sAdditionalClass ] ) ) { continue; }
+					if ( isset( $aFiles[ $_sAdditionalClass ] ) ) { 
+                        continue; 
+                    }
+                    if ( in_array( $_sAdditionalClass, $aExcludingClassNames ) ) {
+                        continue;
+                    }                    
 					$_aAdditionalClasses[ $_sAdditionalClass ] = $_aFile;
 				}
 			}
@@ -173,7 +172,11 @@ class PHP_Class_Files_Inclusion_Script_Creator extends PHP_Class_Files_Script_Ge
 		}
 		
 		// Write to a file.
-		file_put_contents( $sOutputFilePath, implode( '', $_aData ), FILE_APPEND | LOCK_EX );
+		file_put_contents( 
+            $sOutputFilePath, 
+            trim( implode( '', $_aData ) ), 
+            FILE_APPEND | LOCK_EX
+        );
 		
 	}
 	
