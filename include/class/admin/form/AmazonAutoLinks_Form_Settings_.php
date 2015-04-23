@@ -3,7 +3,7 @@
  * Provides the definitions of form fields for the category type unit.
  * 
  * @since            2.0.0
- * @remark            The admin page and meta box access it.
+ * @remark           The admin page and meta box access it.
  */
 abstract class AmazonAutoLinks_Form_Settings_ extends AmazonAutoLinks_Form {
     
@@ -17,90 +17,96 @@ abstract class AmazonAutoLinks_Form_Settings_ extends AmazonAutoLinks_Form {
             // authentication
             array( 
                 'strSectionID'        => 'authentication_keys',
-                'strCapability'        => 'manage_options',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'authentication',
+                'strCapability'       => 'manage_options',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'authentication',
                 'strTitle'            => __( 'AWS Access Key Identifiers', 'amazon-auto-links' ),
-                'strDescription'    => sprintf( __( 'For the Search Unit type, credentials are required to perform search requests with Amazon <a href="%1$s" target="_blank">Product Advertising API</a>.', 'amazon-auto-links' ), 'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html' )
+                'strDescription'      => sprintf( __( 'For the Search Unit type, credentials are required to perform search requests with Amazon <a href="%1$s" target="_blank">Product Advertising API</a>.', 'amazon-auto-links' ), 'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html' )
                     . ' ' . sprintf( __( 'The keys can be obtained by logging in to the <a href="%1$s" target="_blank">Amazon Web Services web site</a>.', 'amazon-auto-links' ), 'http://aws.amazon.com/' )
                     . ' ' . sprintf( __( 'The instruction is documented <a href="%1$s" target="_blank">here</a>.', 'amazon-auto-links' ), '?post_type=amazon_auto_links&page=aal_help&tab=notes#How_to_Obtain_Access_Key_and_Secret_Key' ),
             ),
 
             // general
             array( 
-                'strSectionID'        => 'product_filters',
+                'strSectionID'       => 'product_filters',
                 'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'general',
-                'strTitle'            => __( 'Filters', 'amazon-auto-links' ),
-                'strDescription'    => __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
+                'strTabSlug'         => 'general',
+                'strTitle'           => __( 'Filters', 'amazon-auto-links' ),
+                'strDescription'     => __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
             ),
             array( 
-                'strSectionID'        => 'support',
+                'strSectionID'       => 'support',
                 'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'general',
-                'strTitle'            => __( 'Support', 'amazon-auto-links' ),
-                'strDescription'    => __( 'Help the developer!', 'amazon-auto-links' ),
+                'strTabSlug'         => 'general',
+                'strTitle'           => __( 'Support', 'amazon-auto-links' ),
+                'strDescription'     => __( 'Help the developer!', 'amazon-auto-links' ),
             ),
             array( 
-                'strSectionID'        => 'initial_support',
+                'strSectionID'       => 'initial_support',
                 'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'support',
-                'strTitle'            => __( 'Amazon Auto Links Plugin Agreements', 'amazon-auto-links' ),
-                'strDescription'    => __( 'Please define how you want to support the developer.', 'amazon-auto-links' ),
-            ),            
+                'strTabSlug'         => 'support',
+                'strTitle'           => __( 'Amazon Auto Links Plugin Agreements', 'amazon-auto-links' ),
+                'strDescription'     => __( 'Please define how you want to support the developer.', 'amazon-auto-links' ),
+            ),    
+            array(  // 2.2.0+
+                'strSectionID'        => 'unit_preview',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'general',
+                'strTitle'            => __( 'Unit Preview', 'amazon-auto-links' ),
+            ),
             array( 
                 'strSectionID'        => 'query',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'general',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'general',
                 'strTitle'            => __( 'Custom Query Key', 'amazon-auto-links' ),
             ),
             array( 
                 'strSectionID'        => 'cache',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'general',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'general',
                 'strTitle'            => __( 'Caches', 'amazon-auto-links' ),
             ),
             // misc
             array(
                 'strSectionID'        => 'capabilities',
-                'strCapability'        => 'manage_options',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'misc',
+                'strCapability'       => 'manage_options',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'misc',
                 'strTitle'            => __( 'Access Rights', 'amazon-auto-links' ),
-                'strDescription'    => __( 'Set the access levels to the plugin setting pages.', 'amazon-auto-links' ),
+                'strDescription'      => __( 'Set the access levels to the plugin setting pages.', 'amazon-auto-links' ),
             ),        
             array(
                 'strSectionID'        => 'form_options',
-                'strCapability'        => 'manage_options',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'misc',
+                'strCapability'       => 'manage_options',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'misc',
                 'strTitle'            => __( 'Form', 'amazon-auto-links' ),
-                'strDescription'    => __( 'Set allowed HTML tags etc..', 'amazon-auto-links' ),
+                'strDescription'      => __( 'Set allowed HTML tags etc..', 'amazon-auto-links' ),
             ),                    
             array(
                 'strSectionID'        => 'debug',
-                'strCapability'        => 'manage_options',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'misc',
+                'strCapability'       => 'manage_options',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'misc',
                 'strTitle'            => __( 'Debug', 'amazon-auto-links' ),
-                'strDescription'    => __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
+                'strDescription'      => __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
             ),
     
             // reset
             array(
                 'strSectionID'        => 'reset_settings',
-                'strPageSlug'        => $strPageSlug,
-                'strCapability'        => 'manage_options',
-                'strTabSlug'        => 'reset',
+                'strPageSlug'         => $strPageSlug,
+                'strCapability'       => 'manage_options',
+                'strTabSlug'          => 'reset',
                 'strTitle'            => __( 'Reset Settings', 'amazon-auto-links' ),
-                'strDescription'    => __( 'If you get broken options, initialize them by performing reset.', 'amazon-auto-links' ),
+                'strDescription'      => __( 'If you get broken options, initialize them by performing reset.', 'amazon-auto-links' ),
             ),
             array(
                 'strSectionID'        => 'caches',
-                'strPageSlug'        => $strPageSlug,
-                'strTabSlug'        => 'reset',
+                'strPageSlug'         => $strPageSlug,
+                'strTabSlug'          => 'reset',
                 'strTitle'            => __( 'Caches', 'amazon-auto-links' ),
-                'strDescription'    => __( 'If you need to refresh the product link outputs, clear the cashes.', 'amazon-auto-links' ),
+                'strDescription'      => __( 'If you need to refresh the product link outputs, clear the cashes.', 'amazon-auto-links' ),
             )    
         );
     
@@ -119,6 +125,7 @@ abstract class AmazonAutoLinks_Form_Settings_ extends AmazonAutoLinks_Form {
             $this->getFieldsOfBlackWhiteList(),
             $this->getFieldsOfSupport( 'support' ),
             $this->getFieldsOfSupport( 'initial_support', 'initial_' ),
+            $this->getFieldsOfCustomPreviewPostType(),
             $this->getFieldsOfQuery(),
             $this->getFieldsOfCacheSettings(),
             $this->getFieldsOfDebug(),
@@ -308,16 +315,54 @@ abstract class AmazonAutoLinks_Form_Settings_ extends AmazonAutoLinks_Form {
             // return $oEncode->decode( $_GET['bounce_url'] );
             
         }
+    /**
+     * 
+     * @since       2.2.0
+     * @return      array
+     */
+    protected function getFieldsOfCustomPreviewPostType() {
+        return array(
+            array(
+                'strSectionID'      => 'unit_preview',
+                'strFieldID'        => 'preview_post_type_slug',
+                'strTitle'          => __( 'Post Type Slug', 'amazon-auto-links' ),
+                'strDescription'    => __( 'Up to 20 characters with small-case alpha numeric characters.', 'amazon-auto-links' )
+                    . ' ' . __( 'Default', 'amazon-auto-links' )
+                    . ': <code>'
+                        . AmazonAutoLinks_Commons::PostTypeSlug
+                    . '</code>',
+                'strType'           => 'text',
+                'vDefault'          => AmazonAutoLinks_Commons::PostTypeSlug,
+            ),
+            array(
+                'strSectionID'      => 'unit_preview',
+                'strType'           => 'checkbox',
+                'strFieldID'        => 'visible_to_guests',
+                'strTitle'          => __( 'Visibility', 'amazon-auto-links' ),                
+                'vLabel'            => __( 'Visible to non-logged-in users.', 'amazon-auto-links' ),
+                'vDefault'          => true,
+            ),
+            array(
+                'strSectionID'      => 'unit_preview',
+                'strType'           => 'checkbox',
+                'strFieldID'        => 'searchable',
+                'strTitle'          => __( 'Searchable', 'amazon-auto-links' ),                
+                'vLabel'            => __( 'Possible for the WordPress search form to find the plugin preview pages.', 'amazon-auto-links' ),
+                'vDefault'          => false,
+            ),            
+        );
+ 
+    }
     protected function getFieldsOfQuery() {
         return array(
             array(
-                'strFieldID' => 'cloak',
-                'strSectionID' => 'query',
-                'strTitle' => __( 'Link Style Query Key', 'amazon-auto-links' ),
-                'strDescription' => __( 'Define the query parameter key for the cloaking link style.', 'amazon-auto-links' ) . '<br />'
+                'strFieldID'        => 'cloak',
+                'strSectionID'      => 'query',
+                'strTitle'          => __( 'Link Style Query Key', 'amazon-auto-links' ),
+                'strDescription'    => __( 'Define the query parameter key for the cloaking link style.', 'amazon-auto-links' ) . '<br />'
                     . __( 'Default', 'amazon-auto-links' ) . ': <code>' . AmazonAutoLinks_Option::$arrStructure_Options['aal_settings']['query']['cloak'] . '</code>',
-                'strType' => 'text',
-                'vDefault' => AmazonAutoLinks_Option::$arrStructure_Options['aal_settings']['query']['cloak'],
+                'strType'           => 'text',
+                'vDefault'          => AmazonAutoLinks_Option::$arrStructure_Options['aal_settings']['query']['cloak'],
             ),
             // array(  // single button
                 // 'strFieldID' => 'submit_general',

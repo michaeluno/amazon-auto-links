@@ -31,16 +31,27 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
                     'not_found_in_trash'    => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
                     'parent'                => 'Parent Unit'
                 ),
-                'public'            => true,
-                'menu_position'     => 110,
+                
+                // If a custom preview post type is set, make it not public. 
+                // However, other ui arguments should be enabled.
+                'public'                => ! $GLOBALS['oAmazonAutoLinks_Option']->isCustomPreviewPostTypeSet(),
+                'publicly_queryable'    => ! $GLOBALS['oAmazonAutoLinks_Option']->isCustomPreviewPostTypeSet()
+                    && $GLOBALS['oAmazonAutoLinks_Option']->isPreviewVisible(),
+                'has_archive'           => true,
+                'show_ui'               => true,
+                'show_in_nav_menus'     => true,
+                'show_in_menu'          => true,
+
+                'menu_position'         => 110,
                 // 'supports' => array( 'title', 'editor', 'comments', 'thumbnail' ),    // 'custom-fields'
-                'supports'          => array( 'title' ),
-                'taxonomies'        => array( '' ),
-                'menu_icon'         => AmazonAutoLinks_Commons::getPluginURL( 'asset/image/menu_icon_16x16.png' ),
-                'has_archive'       => true,
-                'hierarchical'      => false,
-                'show_admin_column' => true,
-                'can_export'        => $GLOBALS['oAmazonAutoLinks_Option']->canExport(),
+                'supports'              => array( 'title' ),
+                'taxonomies'            => array( '' ),
+                'menu_icon'             => AmazonAutoLinks_Commons::getPluginURL( 'asset/image/menu_icon_16x16.png' ),
+                
+                'hierarchical'          => false,
+                'show_admin_column'     => true,
+                'can_export'            => $GLOBALS['oAmazonAutoLinks_Option']->canExport(),
+                'exclude_from_search'   => ! $GLOBALS['oAmazonAutoLinks_Option']->arrOptions['aal_settings']['unit_preview']['searchable'],
             )        
         );
         $this->setAutoSave( false );
@@ -118,11 +129,19 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
      * */
     public function _replytToPrintPreviewProductLinks( $sContent ) {
     
+        if ( ! is_singular() ) {
+            return $sContent;
+        }
+    
         if ( ! isset( $GLOBALS['post']->post_type ) || $GLOBALS['post']->post_type != $this->oProps->strPostType ) { 
             return $sContent; 
         }
-    
-        $_aUnitOptions = AmazonAutoLinks_Option::getUnitOptionsByPostID( $GLOBALS['post']->ID );
+
+        if ( ! $GLOBALS['oAmazonAutoLinks_Option']->isPreviewVisible() ) {
+            return $sContent;
+        }
+        
+        $_aUnitOptions       = AmazonAutoLinks_Option::getUnitOptionsByPostID( $GLOBALS['post']->ID );
         $_aUnitOptions['id'] = $GLOBALS['post']->ID;
         return $sContent 
             . AmazonAutoLinks_Units::getInstance( $_aUnitOptions )->getOutput();
@@ -174,7 +193,9 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         $arrTerms = get_the_terms( $intPostID, AmazonAutoLinks_Commons::TagSlug );
     
         // If no tag is assigned to the post,
-        if ( empty( $arrTerms ) ) return '—';
+        if ( empty( $arrTerms ) ) { 
+            return '—'; 
+        }
         
         // Variables
         global $post;

@@ -16,7 +16,6 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_Utilities"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_Utilities.php", 
 	"AmazonAutoLinks_WPUtilities"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_WPUtilities.php", 
 	"AmazonAutoLinks_WPUtilities_Transient"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_WPUtilities_Transient.php", 
-	"could"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/AmazonAutoLinks_Bootstrap.php", 
 	"AmazonAutoLinks_SimplePie___"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_SimplePie.php", 
 	"AmazonAutoLinks_SimplePie__"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_SimplePie.php", 
 	"AmazonAutoLinks_SimplePie_Cache"	=>	AmazonAutoLinks_Commons::$sDirPath . "/include/class/boot/utility/AmazonAutoLinks_SimplePie.php", 

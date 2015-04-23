@@ -64,8 +64,10 @@ abstract class AmazonAutoLinks_Option_ {
                 'dismiss' => false,
             ),
             // 2.2.0+
-            'custom_preview_post_type' => array(
-                'custom_preview_post_type_slug' => '',
+            'unit_preview' => array(
+                'preview_post_type_slug' => '',
+                'visible_to_guests'      => true,
+                'searchable'             => false,
             ),
         ),
         'arrTemplates' => array(),    // stores information of active templates.
@@ -252,6 +254,34 @@ abstract class AmazonAutoLinks_Option_ {
         }
         
     }
+    
+    /**
+     * 
+     * @since       2.2.0
+     * @return      boolean
+     */
+    public function isCustomPreviewPostTypeSet()  {
+        
+        if ( ! $this->arrOptions['aal_settings']['unit_preview']['preview_post_type_slug'] ) {
+            return false;
+        }
+        return AmazonAutoLinks_Commons::PostTypeSlug !== $this->arrOptions['aal_settings']['unit_preview']['preview_post_type_slug'];
+        
+    }
+    /**
+     * 
+     * @since       2.2.0
+     * @return      boolean
+     */
+    public function isPreviewVisible() {
+        
+        if ( $this->arrOptions['aal_settings']['unit_preview']['visible_to_guests'] ) {
+            return true;
+        }
+        return ( boolean ) is_user_logged_in();
+        
+    }
+    
     
     public function isDebugMode() {
         

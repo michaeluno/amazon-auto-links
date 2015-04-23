@@ -302,6 +302,18 @@ class AmazonAutoLinks_Utilities {
         
     }
     
+    
+    /**
+     * Returns a truncated string.
+     * @since       2.2.0
+     * @return      string
+     */
+    static public function getTrancatedString( $sString, $iLength, $sSuffix='...' ) {        
+        return ( self::getStringLength( $sString ) > $iLength )
+            ? substr( $sString, 0, $iLength - self::getStringLength( $sSuffix ) ) . $sSuffix
+            : $sString;
+    }
+    
     /**
      * Indicates whether the mb_strlen() exists or not.
      * @since   2.1.2

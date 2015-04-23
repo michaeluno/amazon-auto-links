@@ -164,6 +164,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 2.2.0 - 0423/2015 =
+- Added the `Preview Unit` options including one that allows the user to set a custom url slug to the unit preview page.
+
 = 2.1.2 - 12/15/2014 =
 - Added the `aal_action_loaded_plugin` action hook.
 - Changed the timing of a localization function call.

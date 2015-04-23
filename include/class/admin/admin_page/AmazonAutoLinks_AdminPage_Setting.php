@@ -5,7 +5,7 @@
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.5
+ * @since       2.0.5
  * 
  */
 abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Template {
@@ -29,13 +29,7 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
     }
     
     public function do_form_aal_settings_authentication() {
-    
         $this->renderAuthenticationStatus();
-    
-
-        
-    // AmazonAutoLinks_Debug::dumpArray( $arrResponse );
-        
     }
     /**
      * Renders the authentication status table.
@@ -46,10 +40,10 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
      */
     protected function renderAuthenticationStatus() {
     
-        $strPublicKey = $this->getFieldValue( 'access_key' );
-        $strPrivateKey = $this->getFieldValue( 'access_key_secret' );
-        $oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 'com', $strPublicKey, $strPrivateKey );
-        $fVerified = $oAmazonAPI->test();
+        $strPublicKey   = $this->getFieldValue( 'access_key' );
+        $strPrivateKey  = $this->getFieldValue( 'access_key_secret' );
+        $oAmazonAPI     = new AmazonAutoLinks_ProductAdvertisingAPI( 'com', $strPublicKey, $strPrivateKey );
+        $fVerified      = $oAmazonAPI->test();
 
         ?>        
         <h3><?php _e( 'Status', 'amazon-auto-links' ); ?></h3>
@@ -67,18 +61,6 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
         </table>
                     
         <?php
-
-        // $arrResponse = $oAmazonAPI->request(
-            // array(
-                // 'Operation' => 'BrowseNodeLookup',
-                // 'BrowseNodeId' => '0',    // the Books node 
-                // 'BrowseNodeId' => '1000,301668',    // the Books node 
-            // ),
-            // 'US'    // or 'com' would work
-        // );    
-
-
-// AmazonAutoLinks_Debug::dumpArray( $arrResponse );
         
     }
     
@@ -128,35 +110,26 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
             $arrOldInput;
             
         }
-
-
+        
         return $arrInput;
         
     }
     
+    /**
+     * 
+     *  // [aal_settings] => Array
+            // [form_options] => Array
+                    // [allowed_html_tags]     
+     */
     public function validation_aal_settings_misc( $arrInput, $arrOldInput ) {
-        
         // Sanitize text inputs
-        // [aal_settings] => Array
-                // [form_options] => Array
-                        // [allowed_html_tags]     
         $arrInput['aal_settings']['form_options']['allowed_html_tags'] = trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $arrInput['aal_settings']['form_options']['allowed_html_tags'], ',' ) );
         return $arrInput;
     }
-    
-    public function validation_aal_settings_general( $arrInput, $arrOldInput ) {
-        
-        // Sanitize text inputs
-        foreach( $arrInput['aal_settings']['product_filters']['black_list'] as &$str1 )
-            $str1 = trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $str1, ',' ) ); 
-        foreach( $arrInput['aal_settings']['product_filters']['white_list'] as &$str2 ) 
-            $str2 = trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $str2, ',' ) );            
-            
-        // Sanitize the query key.
-        $arrInput['aal_settings']['query']['cloak'] = AmazonAutoLinks_Utilities::sanitizeCharsForURLQueryKey( $arrInput['aal_settings']['query']['cloak'] );
-        
-        
-/*       [aal_settings] => Array
+    /**
+     * 
+     *
+       [aal_settings] => Array
         (
             [product_filters] => Array
                 (
@@ -188,8 +161,30 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
                     [submit_general] => Save Changes
                 )
 
-        )     */
-// AmazonAutoLinks_Debug::logArray( $arrInput );                    
+        )     
+    */    
+    public function validation_aal_settings_general( $arrInput, $arrOldInput ) {
+        
+        // Sanitize text inputs
+        foreach( $arrInput['aal_settings']['product_filters']['black_list'] as &$str1 ) {
+            $str1 = trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $str1, ',' ) ); 
+        }
+        foreach( $arrInput['aal_settings']['product_filters']['white_list'] as &$str2 ) {
+            $str2 = trim( AmazonAutoLinks_Utilities::trimDelimitedElements( $str2, ',' ) );            
+        }
+            
+        // Sanitize the query key.
+        $arrInput['aal_settings']['query']['cloak'] = AmazonAutoLinks_Utilities::sanitizeCharsForURLQueryKey( $arrInput['aal_settings']['query']['cloak'] );
+        
+        // Sanitize the custom preview slug.
+        $_sCustomPreviewPostTypeSlug = AmazonAutoLinks_Utilities::getTrancatedString(
+            $arrInput['aal_settings']['unit_preview']['preview_post_type_slug'],
+            20, // character length
+            ''  // suffix
+        );
+        $_sCustomPreviewPostTypeSlug = AmazonAutoLinks_Utilities::sanitizeCharsForURLQueryKey( $_sCustomPreviewPostTypeSlug );
+        $arrInput['aal_settings']['unit_preview']['preview_post_type_slug'] = $_sCustomPreviewPostTypeSlug;
+        
         return $arrInput;
         
     }
@@ -225,13 +220,12 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
      */
     public function load_aal_settings_import_v1_options() {
         
-        if ( ! isset( $_GET['bounce_url'] ) ) return;
+        if ( ! isset( $_GET['bounce_url'] ) ) { 
+            return; 
+        }
         
         $strBounceURL = AmazonAutoLinks_WPUtilities::getTransient( $_GET['bounce_url'] );    // AAL_BounceURL_Importer
         
-// AmazonAutoLinks_Debug::logArray( $strBounceURL );
-        // $strBounceURL = $this->oEncode->decode( $_GET['bounce_url'] );
-
         // If the Dismiss link is selected, 
         if ( isset( $_GET['action'] ) && $_GET['action'] == 'dismiss' ) {
             $this->oOption->arrOptions['aal_settings']['import_v1_options']['dismiss'] = true;
@@ -243,14 +237,13 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
         $oImportV1Options = new AmazonAutoLinks_ImportV1Options;
         
         $arrV1Options = get_option( 'amazonautolinks' );        
-        if ( $arrV1Options === false ) {
+        if ( false === $arrV1Options ) {
             $this->oOption->arrOptions['aal_settings']['import_v1_options']['dismiss'] = true;
             $this->oOption->save();            
             die( wp_redirect( $strBounceURL . "&aal-option-upgrade=not-found" ) );
         }
     
         $intRemained = $this->oOption->getRemainedAllowedUnits();            
-// AmazonAutoLinks_Debug::logArray( "remained allowed number of units: " . $intRemained );        
         if ( $intRemained > 0 ) {
             
             // Import units and general options and delete the option from the database
@@ -258,14 +251,14 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
             $intCount = $oImportV1Options->importUnits( $arrV1Options['units'] );
             
             // Delete the old options from the database.
-// delete_option( 'amazonautolinks' );
             
             $this->oOption->arrOptions['aal_settings']['import_v1_options']['dismiss'] = true;
             $this->oOption->save();
-            if ( $intCount )
-                die( wp_redirect( $strBounceURL . "&aal-option-upgrade=succeed&count={$intCount}" ) );
-            else 
-                die( wp_redirect( $strBounceURL . "&aal-option-upgrade=failed" ) );
+            if ( $intCount ) {
+                exit( wp_redirect( $strBounceURL . "&aal-option-upgrade=succeed&count={$intCount}" ) );
+            } else {
+                exit( wp_redirect( $strBounceURL . "&aal-option-upgrade=failed" ) );
+            }
         }
         
         // Means it's free version and the old version has more than the allowed units.
@@ -276,10 +269,11 @@ abstract class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPa
         $intCount = $oImportV1Options->importUnits( $arrV1Units );
         $this->oOption->arrOptions['aal_settings']['import_v1_options']['dismiss'] = true;
         $this->oOption->save();
-        if ( $intCount )
-            die( wp_redirect( $strBounceURL . "&aal-option-upgrade=partial&count={$intCount}" ) );
-        else 
-            die( wp_redirect( $strBounceURL . "&aal-option-upgrade=failed" ) );
+        if ( $intCount ) {
+            exit( wp_redirect( $strBounceURL . "&aal-option-upgrade=partial&count={$intCount}" ) );
+        } else {
+            exit( wp_redirect( $strBounceURL . "&aal-option-upgrade=failed" ) );
+        }
         
     }
     

@@ -100,10 +100,11 @@ final class AmazonAutoLinks_Bootstrap {
             new AmazonAutoLinks_AdminPage( AmazonAutoLinks_Commons::AdminOptionKey, $this->_sFilePath );        
         }
 
-        // 7. Post Type - It should not use "if ( is_admin() )" for the this class because posts of custom post type can be accessed from front-end regular pages.
+        // 7. Post Types
         new AmazonAutoLinks_PostType( AmazonAutoLinks_Commons::PostTypeSlug, null, $this->_sFilePath );     // post type slug
         new AmazonAutoLinks_PostType_AutoInsert( AmazonAutoLinks_Commons::PostTypeSlugAutoInsert, null, $this->_sFilePath );     // post type slug
-    
+        new AmazonAutoLinks_PostType_UnitPreview;
+        
         // 8. Meta Boxes
         if ( $this->_bIsAdmin ) {
             $this->_registerMetaBoxes();
@@ -340,12 +341,13 @@ final class AmazonAutoLinks_Bootstrap {
             dirname( plugin_basename( $this->_sFilePath ) ) . '/language/'
         );
         
-        if ( is_admin() ) 
+        if ( is_admin() ) {
             load_plugin_textdomain( 
                 'admin-page-framework', 
                 false, 
                 dirname( plugin_basename( $this->_sFilePath ) ) . '/language/'
             );        
+        }
         
     }        
         
