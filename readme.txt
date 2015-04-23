@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
-Tested up to:       4.0.1
-Stable tag:         2.1.1
+Tested up to:       4.1.2
+Stable tag:         2.1.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,7 +164,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 2.2.0 - 0423/2015 =
+= 2.2.0 - 04/23/2015 =
 - Added the `Preview Unit` options including one that allows the user to set a custom url slug to the unit preview page.
 
 = 2.1.2 - 12/15/2014 =
