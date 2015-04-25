@@ -2,9 +2,9 @@
 /**
  * Lists plugin extensions.
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
+ * @copyright   Copyright (c) 2013-2015, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.0
+ * @since       2.0.0
 */
 abstract class AmazonAutoLinks_ListExtensions_ {
 
@@ -20,7 +20,9 @@ abstract class AmazonAutoLinks_ListExtensions_ {
     
     public function fetchFeed( $vURLs, $numItems=0, $fCacheRenew=false ) {
         
-        $arrURLs = is_array( $vURLs ) ? $vURLs : ( array ) $vURLs ;
+        $arrURLs  = is_array( $vURLs ) 
+            ? $vURLs 
+            : ( array ) $vURLs;
         $strURLID = md5( serialize( $arrURLs ) );
         
         if ( ! isset( $this->arrFeedItems[ $strURLID ] ) && $fCacheRenew == false ) {
@@ -36,15 +38,18 @@ abstract class AmazonAutoLinks_ListExtensions_ {
             foreach( $arrURLs as $strURL ) {
                                 
                 $oFeed = $this->getFeedObj( $strURL, null, $fCacheRenew ? 0 : 3600 );
-                foreach ( $oFeed->get_items() as $oItem )     // foreach ( $oFeed->get_items( 0, $numItems * 3 ) as $item ) does not change the memory usage
+                
+                // foreach ( $oFeed->get_items( 0, $numItems * 3 ) as $item ) does not change the memory usage
+                foreach ( $oFeed->get_items() as $oItem ) {
                     $this->arrFeedItems[ $strURLID ][ $oItem->get_title() ] = array( 
                         'strContent'        => $oItem->get_content(),
                         'strDescription'    => $oItem->get_description(),
-                        'strTitle'            => $oItem->get_title(),
-                        'strDate'            => $oItem->get_title(),
-                        'strAuthor'            => $oItem->get_date( 'j F Y, g:i a' ),
-                        'strLink'            => $oItem->get_permalink(),    // get_link() may be used as well        
+                        'strTitle'          => $oItem->get_title(),
+                        'strDate'           => $oItem->get_title(),
+                        'strAuthor'         => $oItem->get_date( 'j F Y, g:i a' ),
+                        'strLink'           => $oItem->get_permalink(),    // get_link() may be used as well        
                     );
+                }
                 
                 // For PHP below 5.3 to release the memory.
                 $oFeed->__destruct(); // Do what PHP should be doing on it's own.
@@ -58,8 +63,9 @@ abstract class AmazonAutoLinks_ListExtensions_ {
         }
         
         $arrOut = $this->arrFeedItems[ $strURLID ];
-        if ( $numItems  )
+        if ( $numItems  ) {
             array_splice( $arrOut, $$numItems );
+        }
             
         return $arrOut;
         
@@ -68,7 +74,9 @@ abstract class AmazonAutoLinks_ListExtensions_ {
     protected function getFeedObj( $arrUrls, $numItem=0, $numCacheDuration=3600 ) {    // 60 seconds * 60 = 1 hour, 1800 = 30 minutes
         
         // Reuse the object that already exists. This conserves the memory usage.
-        $this->oFeed = isset( $this->oFeed ) ? $this->oFeed : new AmazonAutoLinks_SimplePie();
+        $this->oFeed = isset( $this->oFeed ) 
+            ? $this->oFeed 
+            : new AmazonAutoLinks_SimplePie();
         $oFeed = $this->oFeed; 
         
         // Set sort type.
@@ -76,8 +84,9 @@ abstract class AmazonAutoLinks_ListExtensions_ {
 
         // Set urls
         $oFeed->set_feed_url( $arrUrls );    
-        if ( $numItem )
+        if ( $numItem ) {
             $oFeed->set_item_limit( $numItem );    
+        }
         
         // This should be set after defining $urls
         $oFeed->set_cache_duration( $numCacheDuration );    
@@ -85,8 +94,9 @@ abstract class AmazonAutoLinks_ListExtensions_ {
         $oFeed->set_stupidly_fast( true );
         
         // If the cache lifetime is explicitly set to 0, do not trigger the background renewal cache event
-        if ( $numCacheDuration == 0 )
+        if ( 0 == $numCacheDuration ) {
             $oFeed->setBackground( true );    // setting it true will be considered the background process; thus, it won't trigger the renewal event.
+        }
         
         // set_stupidly_fast() disables this internally so turn it on manually because it will trigger the custom sort method
         $oFeed->enable_order_by_date( true );    
@@ -97,23 +107,25 @@ abstract class AmazonAutoLinks_ListExtensions_ {
     
     
     public function printColumnOutput( $arrItems ) {
-        
-        echo $this->getColumnOutput( $arrItems );
-        
+        echo $this->getColumnOutput( $arrItems );        
     }
     
     
     protected $arrColumnOption = array (
-        'strClassAttr'                 =>    'amazon_auto_links_multiple_columns',
-        'strClassAttrGroup'         =>    'amazon_auto_links_multiple_columns_box',
-        'strClassAttrRow'             =>    'amazon_auto_links_multiple_columns_row',
-        'strClassAttrCol'             =>    'amazon_auto_links_multiple_columns_col',
-        'strClassAttrFirstCol'         =>    'amazon_auto_links_multiple_columns_first_col',
+        'strClassAttr'          => 'amazon_auto_links_multiple_columns',
+        'strClassAttrGroup'     => 'amazon_auto_links_multiple_columns_box',
+        'strClassAttrRow'       => 'amazon_auto_links_multiple_columns_row',
+        'strClassAttrCol'       => 'amazon_auto_links_multiple_columns_col',
+        'strClassAttrFirstCol'  => 'amazon_auto_links_multiple_columns_first_col',
     );    
-    protected $arrColumnInfoDefault = array (    // this will be modified as the items get rendered
-        'fIsRowTagClosed'    =>    False,
-        'numCurrRowPos'        =>    0,
-        'numCurrColPos'        =>     0,
+    /**
+     * 
+     * @remark      this will be modified as the items get rendered
+     */
+    protected $arrColumnInfoDefault = array (   
+        'fIsRowTagClosed'       => false,
+        'numCurrRowPos'         => 0,
+        'numCurrColPos'         => 0,
     );    
     public function getColumnOutput( $arrItems, $intMaxCols=4 ) {
         
@@ -134,9 +146,11 @@ abstract class AmazonAutoLinks_ListExtensions_ {
                 . '<div class="amazon_auto_links_extension_item">' 
                     . "<h4>{$arrItem['strTitle']}</h4>"
                     . $arrItem['strDescription'] 
-                    . "<div class='get-now'><a href='{$arrItem['strLink']}' target='_blank' rel='nofollow'>" 
-                        . "<input class='button button-secondary' type='submit' value='" . __( 'Get it Now', 'amazon-auto-links' ) . "' />"
-                    . "</a></div>"
+                    . "<div class='get-now'>"
+                        . "<a href='{$arrItem['strLink']}' target='_blank' rel='nofollow'>" 
+                            . "<input class='button button-secondary' type='submit' value='" . esc_attr( __( 'Get it Now', 'amazon-auto-links' ) ) . "' />"
+                        . "</a>"
+                   . "</div>"
                 . '</div>'
                 . '</div>';    
                 

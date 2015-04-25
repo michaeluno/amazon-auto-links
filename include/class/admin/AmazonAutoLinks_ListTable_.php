@@ -1,23 +1,32 @@
 <?php
 /**
-    Handles the list table of Amazon Auto Links templates. 
-    
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers
+ *  
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl    http://michaeluno.jp
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.0
- * @filters
- *  - aal_filter_template_listing_table_action_links
- 
+ * @copyright   Copyright (c) 2013-2015, Michael Uno
+ * @authorurl   http://michaeluno.jp
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
 */
 
-if ( ! class_exists( 'WP_List_Table' ) ) require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+if ( ! class_exists( 'WP_List_Table' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+}
 
-
+/**
+ * Handles the list table of Amazon Auto Links templates. 
+ * @filter      aal_filter_template_listing_table_action_links
+ * @since       2.0.0
+ */
 class AmazonAutoLinks_ListTable_ extends WP_List_Table {
     
-
+    /**
+     * 
+     * @since       2.0.0
+     * @since       2.2.0       Declared for compatibility with WordPress 4.2.
+     */
+    public $arrData = array();
+    public $arrArgs = array();
+    
     public function __construct( $arrData ){
               
         $this->arrData = $arrData;
@@ -27,12 +36,13 @@ class AmazonAutoLinks_ListTable_ extends WP_List_Table {
             'singular'  => 'template',        // singular name of the listed items
             'plural'    => 'templates',        // plural name of the listed items
             'ajax'      => false,            // does this table support ajax?
-            'screen'     => null,            // not sure what this is for... 
+            'screen'    => null,            // not sure what this is for... 
         );
-        if ( headers_sent() )
+        if ( headers_sent() ) {
             parent::__construct( $this->arrArgs );
-        else
+        } else {
             add_action( 'admin_notices', array( $this, 'delayConstructor' ) );
+        }
         
     }
     public function delayConstructor() {

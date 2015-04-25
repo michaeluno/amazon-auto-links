@@ -6,7 +6,7 @@
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
 	Requirements:   WordPress >= 3.3 and PHP >= 5.2.4
-	Version:        2.2.0
+	Version:        2.2.1
 */
 
 /**
@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_Commons_Base {
  
-	const Version        = '2.2.0';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const Version        = '2.2.1';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const Name           = 'Amazon Auto Links';
 	const Description    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -29,7 +29,9 @@ class AmazonAutoLinks_Commons_Base {
 }
 
 // Do not load if accessed directly
-if ( ! defined( 'ABSPATH' ) ) { return; }
+if ( ! defined( 'ABSPATH' ) ) { 
+    return; 
+}
 
 /**
  * Provides the common data shared among plugin files.

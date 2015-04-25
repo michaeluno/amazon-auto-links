@@ -1,34 +1,37 @@
 <?php
 /**
- * Deals with the plugin admin pages.
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
+ * @copyright   Copyright (c) 2013-2015, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.5
+ * @since       2.0.5
  * 
+ */
+
+/**
+ * Deals with the plugin admin pages. 
  */
 abstract class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Extension {
 
-    /*
-     * The Template page
-     */ 
-    public function load_aal_templates() {    // load_ + {page slug}
-
-        // For the list table bulk actions. The WP_List_Table class does not set the post type query string in the redirected page.
-        // if ( 
-            // ( isset( $_POST['post_type'] ) && $_POST['post_type'] == AmazonAutoLinks_Commons::PostTypeSlug )    // the form is submitted 
-            // && ( ! isset( $_GET['post_type'] ) )    // and post_type query string is not in the url
-            // && ( isset( $_GET['page'] ) && $_GET['page'] == 'templates' ) // and the page is the template listing table page,
-        // )
-            // die( wp_redirect( add_query_arg( array( 'post_type' => AmazonAutoLinks_Commons::PostTypeSlug ) + $_GET, admin_url( $GLOBALS['pagenow'] )  ) ) );
-
+    /**
+     * 
+     * @callback        action      load_ + {page slug}
+     */
+    public function load_aal_templates() {   
+    
         $oTemplate = $GLOBALS['oAmazonAutoLinks_Templates'];        
-        $this->oTemplateListTable = new AmazonAutoLinks_ListTable( $oTemplate->getActiveTemplates() + $oTemplate->getUploadedTemplates() );
+        $this->oTemplateListTable = new AmazonAutoLinks_ListTable( 
+            $oTemplate->getActiveTemplates() + $oTemplate->getUploadedTemplates() 
+        );
         $this->oTemplateListTable->process_bulk_action();
         
     }        
-    public function do_aal_templates_table() {    // do_ + page slug + tab slug
+    /**
+     * 
+     * @callback        action      do_ + page slug + tab slug
+     */
+    public function do_aal_templates_table() {   
             
         $this->oTemplateListTable->prepare_items();
         ?>
@@ -46,13 +49,13 @@ abstract class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminP
     public function do_aal_templates_get() {
         
         echo "<p>" . sprintf( __( 'Want your template to be listed here? Send the file to %1$s.', 'amazon-auto-links' ), 'wpplugins@michaeluno.jp' ) . "</p>";
-        $oExtensionLoader = new AmazonAutoLinks_ListExtensions();
-        $arrFeedItems = $oExtensionLoader->fetchFeed( 'http://feeds.feedburner.com/AmazonAutoLinksTemplates' );
-        if ( empty( $arrFeedItems ) ) {
+        $_oExtensionLoader  = new AmazonAutoLinks_ListExtensions();
+        $_aFeedItems        = $_oExtensionLoader->fetchFeed( 'http://feeds.feedburner.com/AmazonAutoLinksTemplates' );
+        if ( empty( $_aFeedItems ) ) {
             echo "<h3>" . __( 'No extension has been found.', 'amazon-auto-links' ) . "</h3>";
             return;
         }
-        $oExtensionLoader->printColumnOutput( $arrFeedItems );
+        $_oExtensionLoader->printColumnOutput( $_aFeedItems );
 
     }    
         
