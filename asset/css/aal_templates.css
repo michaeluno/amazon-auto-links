@@ -37,3 +37,9 @@
 	visibility: visible;
 	top: 50px;				
 }	
+
+/* Make fetched template listing images fit in the container */
+div.amazon_auto_links_multiple_columns_col div.amazon_auto_links_extension_item img {    
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
