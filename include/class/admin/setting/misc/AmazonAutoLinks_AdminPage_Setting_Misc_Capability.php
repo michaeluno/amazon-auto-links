@@ -1,0 +1,74 @@
+<?php
+/**
+ * Amazon Auto Links
+ * 
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno; Licensed GPLv2
+ */
+
+/**
+ * Adds the 'Capability' form section to the 'Misc' tab.
+ * 
+ * @since       3
+ */
+class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_AdminPage_Section_Base {
+    
+    /**
+     * A user constructor.
+     * 
+     * @since       3
+     * @return      void
+     */
+    protected function construct( $oFactory ) {}
+    
+    /**
+     * Adds form fields.
+     * @since       3
+     * @return      void
+     */
+    public function addFields( $oFactory, $sSectionID ) {
+
+        $oFactory->addSettingFields(
+            $sSectionID, // the target section id    
+            array(
+                'field_id'      => 'setting_page_capability',
+                'type'          => 'select',
+                'title'         => __( 'Capability', 'amazon-auto-links' ),
+                'description'   => __( 'Select the user role that is allowed to access the plugin setting pages.', 'amazon-auto-links' )
+                    . __( 'Default', 'amazon-auto-links' ) . ': ' . __( 'Administrator', 'amazon-auto-links' ),
+                'capability'    => 'manage_options',
+                'label'         => array(                        
+                    'manage_options' => __( 'Administrator', 'amazon-auto-links' ),
+                    'edit_pages'     => __( 'Editor', 'amazon-auto-links' ),
+                    'publish_posts'  => __( 'Author', 'amazon-auto-links' ),
+                    'edit_posts'     => __( 'Contributor', 'amazon-auto-links' ),
+                    'read'           => __( 'Subscriber', 'amazon-auto-links' ),
+                ),
+            )
+        );
+    }
+        
+    
+    /**
+     * Validates the submitted form data.
+     * 
+     * @since       3
+     */
+    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    
+        $_bVerified = true;
+        $_aErrors   = array();
+        
+          
+        // An invalid value is found. Set a field error array and an admin notice and return the old values.
+        if ( ! $_bVerified ) {
+            $oAdminPage->setFieldErrors( $_aErrors );     
+            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
+            return $aOldInput;
+        }
+                
+        return $aInput;     
+        
+    }
+   
+}

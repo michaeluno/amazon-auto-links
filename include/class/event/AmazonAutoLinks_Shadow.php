@@ -45,21 +45,29 @@ class AmazonAutoLinks_Shadow {
       */ 
     public function __construct( $aActionHooks ) {
 
-        if ( empty( $aActionHooks ) ) return;
+        if ( empty( $aActionHooks ) ) { return; }
         $aActionHooks = ( array ) $aActionHooks;
         
         // If not called from the background, return.
         if ( isset( $_GET['doing_wp_cron'] ) ) return;    // WP Cron
         if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin-ajax.php' ) return;    // WP Heart-beat API
         
-        if ( ! $this->isBackground() ) return;
+        if ( ! $this->isBackground() ) { 
+            return;
+        }
     
         // Tell WordPress this is a background routine by setting the Cron flag.
         if ( ! defined( 'DOING_CRON' ) ) { define( 'DOING_CRON', true ); }        
-        
+        ignore_user_abort( true );        
+
         // Do not process if a delay is not set.
         if ( ! $this->isBackground( true ) ) {    
-            die( $this->_loadBackgroundPageWithDelay( 2, $_GET ) );    // give 2 seconds delay
+            exit( 
+                $this->_loadBackgroundPageWithDelay( 
+                    2,  // 2 seconds delay
+                    $_GET 
+                ) 
+            );    
         }
 
         // At this point, the page is loaded in the background with some delays.
@@ -92,7 +100,7 @@ class AmazonAutoLinks_Shadow {
     protected function _handleCronTasks( $aActionHooks ) {
 
         $_sTransientName = md5( get_class() );
-        $_aTasks = AmazonAutoLinks_WPUtilities::getTransient( $_sTransientName );
+        $_aTasks = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
         $_nNow = microtime( true );
         $_nCalledTime = isset( $_aTasks['called'] ) ? $_aTasks['called'] : 0;
         $_nLockedTime = isset( $_aTasks['locked'] ) ? $_aTasks['locked'] : 0;
@@ -116,11 +124,11 @@ class AmazonAutoLinks_Shadow {
             'locked'    =>    microtime( true ),    // set/renew the locked time
             'called'    =>    $_nCalledTime,        // inherit the called time
         );
-        AmazonAutoLinks_WPUtilities::setTransient( $_sTransientName, $aFlagKeys + $_aTasks, $this->getAllowedMaxExecutionTime() ); // lock the process.
+        AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $aFlagKeys + $_aTasks, $this->getAllowedMaxExecutionTime() ); // lock the process.
         $this->_doTasks( $_aTasks );    
 
         // remove tasks but leave the flag element.
-        AmazonAutoLinks_WPUtilities::setTransient( $_sTransientName, $aFlagKeys, $this->getAllowedMaxExecutionTime() ); // lock the process.
+        AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $aFlagKeys, $this->getAllowedMaxExecutionTime() ); // lock the process.
         exit;
         
     }
@@ -226,13 +234,21 @@ class AmazonAutoLinks_Shadow {
      * @since            1.0.0
      */
     static public function see( $aGet=array(), $fIgnoreLock=false ) {
-        
-        if ( isset( $_GET['doing_wp_cron'] ) ) return;    // WP Cron
-        if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin-ajax.php' ) return;    // WP Heart-beat API
+
+        // WP Cron
+        if ( isset( $_GET['doing_wp_cron'] ) ) {
+           return;    
+        }
+        // WP Heart-beat API
+        if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin-ajax.php' ) { 
+            return;    
+        }
     
         // Ensures the task is done only once in a page load.
         static $_bIsCalled;
-        if ( $_bIsCalled ) return;
+        if ( $_bIsCalled ) { 
+            return;
+        }
         $_bIsCalled = true;        
         
         // Store the static properties.
@@ -253,16 +269,18 @@ class AmazonAutoLinks_Shadow {
          * @since            1.0.0
          */
         static public function _replyToAccessSite() {
-        
+
             // Retrieve the plugin scheduled tasks array.
             $_sTransientName = md5( get_class() );
-            $_aTasks = AmazonAutoLinks_WPUtilities::getTransient( $_sTransientName );
+            $_aTasks = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
             $_aTasks = $_aTasks ? $_aTasks : array();
             $_nNow = microtime( true );
             
             // Check the excessive background call protection interval 
             if ( ! self::$_fIgnoreLock ) {                
-                $_nCalled = isset( $_aTasks['called'] ) ? $_aTasks['called'] : 0;
+                $_nCalled = isset( $_aTasks['called'] ) 
+                    ? $_aTasks['called'] 
+                    : 0;
                 if ( $_nCalled + self::$_iLockBackgroundCallInterval > $_nNow ) {    
                     return;    // if it's called within 10 seconds from the last time of calling this method, do nothing to avoid excessive calls.
                 } 
@@ -272,12 +290,17 @@ class AmazonAutoLinks_Shadow {
             $_aFlagKeys = array(
                 'called'    =>    $_nNow,
             );
-            AmazonAutoLinks_WPUtilities::setTransient( $_sTransientName, $_aFlagKeys + $_aTasks, self::getAllowedMaxExecutionTime() );    // set a locked key so it prevents duplicated function calls due to too many calls caused by simultaneous accesses.
+            // set a locked key so it prevents duplicated function calls due to too many calls caused by simultaneous accesses.
+            AmazonAutoLinks_WPUtility::setTransient( 
+                $_sTransientName, 
+                $_aFlagKeys + $_aTasks, 
+                self::getAllowedMaxExecutionTime() 
+            );    
             
             // Compose a GET query array
             $_aGet = self::$_aGet;
             if ( defined( 'WP_DEBUG' ) ) {
-                $_aGet['debug'] = WP_DEBUG;
+                $_aGet[ 'debug' ] = WP_DEBUG;
             }
             unset( $_aGet[ 0 ] );
             
@@ -285,12 +308,12 @@ class AmazonAutoLinks_Shadow {
             wp_remote_get(
                 site_url(  '?' . http_build_query( $_aGet ) ), 
                 array( 
-                    'timeout'    =>    0.01, 
-                    'sslverify'    =>    false, 
-                    'cookies'    =>    $_aFlagKeys + array( $_sTransientName => true ),
+                    'timeout'    => 0.1,    // 0.0.1
+                    'sslverify'  => false, 
+                    'cookies'    => $_aFlagKeys + array( $_sTransientName => true ),
                 ) 
             );    
-            
+
         }    
         
         /**
@@ -305,14 +328,14 @@ class AmazonAutoLinks_Shadow {
             sleep( $iSecond );
             
             if ( defined( 'WP_DEBUG' ) ) {
-                $aGet['debug'] = WP_DEBUG;
+                $aGet[ 'debug' ] = WP_DEBUG;
             }            
             wp_remote_get(
                 site_url(  '?' . http_build_query( $aGet ) ), 
                 array( 
-                    'timeout'    =>    0.01, 
-                    'sslverify'    =>    false, 
-                    'cookies'    =>    array( md5( get_class() ) => true, 'delay' => true ),
+                    'timeout'    => 0.01, 
+                    'sslverify'  => false, 
+                    'cookies'    => array( md5( get_class() ) => true, 'delay' => true ),
                 ) 
             );                
         }

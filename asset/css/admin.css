@@ -1,4 +1,20 @@
+/* Form fields */
+.links-style-label {
+    font-size: 0.8em;
+}
+.links-style-label code {
+    font-size: 0.8em;
+}
 
+/* Debug output */
+pre.dump-array {
+    width: inherit !important;   
+}
+
+.right-submit-button {
+    margin-right: 2em;
+    float: right;
+}
 .right-button {
 	margin-top: 8px;
 	float: right;
@@ -54,127 +70,6 @@ textarea.read-only {
 	margin-bottom: 10px;
 }
 
-/* Extension Listing Table */
-.amazon_auto_links_extension_container{
-	padding-right: 30px;
-	padding-left: 10px;
-	margin-top: 10px;
-	text-align: center;
-}
-.amazon_auto_links_extension { 
-	
-}
-.amazon_auto_links_extension_item {
-	margin-right: 10px;
-	padding: 20px 20px 20px 20px;
-	background-color: #FAFAFA;
-	border: 1px solid;
-	border-color: #DDD;
-	
-}
-.amazon_auto_links_extension_item h4 {
-	margin: 0.6em 0;	
-}
-.amazon_auto_links_extension_item img {
-	max-width: 150px;
-	max-height: 200px;
-}
-'
-. '.amazon_auto_links_multiple_columns {
-	padding: 4px;
-	line-height: 1.5em;
-}
-.amazon_auto_links_multiple_columns_first_col {
-	margin-left: 0px;
-	clear: left;
-}
-/*  SECTIONS  ============================================================================= */
-.amazon_auto_links_multiple_columns_row {
-	clear: both;
-	padding: 0px;
-	margin: 0px;
-}
-/*  GROUPING  ============================================================================= */
-.amazon_auto_links_multiple_columns_box:before,
-.amazon_auto_links_multiple_columns_box:after {
-	content:"";
-	display:table;
-}
-.amazon_auto_links_multiple_columns_box:after {
-	clear:both;
-}
-.amazon_auto_links_multiple_columns_box {
-	float: none;
-	width: 100%;		
-	zoom:1; /* For IE 6/7 (trigger hasLayout) */
-}
-/*  GRID COLUMN SETUP   ==================================================================== */
-.amazon_auto_links_multiple_columns_col {
-	display: block;
-	float:left;
-	margin: 1% 0 1% 1.6%;
-}
-.amazon_auto_links_multiple_columns_col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
-/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 800 PIXELS */
-@media only screen and (max-width: 800px) {
-	.amazon_auto_links_multiple_columns_col { 
-		margin: 1% 0 1% 0%;
-	}
-}
-/*  GRID OF TWO   ============================================================================= */
-.amazon_auto_links_col_element_of_1 {
-	width: 100%;
-}
-.amazon_auto_links_col_element_of_2 {
-	width: 49.2%;
-}
-.amazon_auto_links_col_element_of_3 {
-	width: 32.2%; 
-}
-.amazon_auto_links_col_element_of_4 {
-	width: 23.8%;
-}
-.amazon_auto_links_col_element_of_5 {
-	width: 18.72%;
-}
-.amazon_auto_links_col_element_of_6 {
-	width: 15.33%;
-}
-.amazon_auto_links_col_element_of_7 {
-	width: 12.91%;
-}
-.amazon_auto_links_col_element_of_8 {
-	width: 11.1%; 
-}
-.amazon_auto_links_col_element_of_9 {
-	width: 9.68%; 
-}
-.amazon_auto_links_col_element_of_10 {
-	width: 8.56%; 
-}
-.amazon_auto_links_col_element_of_11 {
-	width: 7.63%; 
-}
-.amazon_auto_links_col_element_of_12 {
-	width: 6.86%; 
-}
-
-/*  GO FULL WIDTH AT LESS THAN 800 PIXELS */
-@media only screen and (max-width: 800px) {
-	.amazon_auto_links_col_element_of_2,
-	.amazon_auto_links_col_element_of_3,
-	.amazon_auto_links_col_element_of_4,
-	.amazon_auto_links_col_element_of_5,
-	.amazon_auto_links_col_element_of_6,
-	.amazon_auto_links_col_element_of_7,
-	.amazon_auto_links_col_element_of_8,
-	.amazon_auto_links_col_element_of_9,
-	.amazon_auto_links_col_element_of_10,
-	.amazon_auto_links_col_element_of_11,
-	.amazon_auto_links_col_element_of_12
-	{	width: 49.2%;  }			
-}
-
 /* Footer page load info */
 /* Page Load Stats */
 #admin-page-framework-page-load-stats {
@@ -190,4 +85,13 @@ textarea.read-only {
 /* To give the footer area more space */
 #wpbody-content {
 	padding-bottom: 140px;
+}
+
+/* */
+.delete-line {
+    text-decoration: line-through;
+}
+
+span.warning {
+    color: red;
 }

@@ -5,26 +5,27 @@
 	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Requirements:   WordPress >= 3.3 and PHP >= 5.2.4
-	Version:        2.2.1
+	Version:        3
 */
 
 /**
  * Provides the basic information about the plugin.
  * 
  * @since       2.0.6
+ * @since       3       Changed the name from `AmazonAutoLinks_Commons_Base`
  */
-class AmazonAutoLinks_Commons_Base {
+class AmazonAutoLinks_Registry_Base {
  
-	const Version        = '2.2.1';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
-	const Name           = 'Amazon Auto Links';
-	const Description    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+	const VERSION        = '3';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const NAME           = 'Amazon Auto Links';
+	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
-	const Author         = 'miunosoft (Michael Uno)';
-	const AuthorURI      = 'http://en.michaeluno.jp/';
-	const Copyright      = 'Copyright (c) 2013-2014, Michael Uno';
-	const License        = 'GPL v2 or later';
-	const Contributors   = '';
+	const AUTHOR         = 'miunosoft (Michael Uno)';
+	const AUTHOR_URI     = 'http://en.michaeluno.jp/';
+	const PLUGIN_URI     = 'http://en.michaeluno.jp/amazon-auto-links';
+	const COPYRIGHT      = 'Copyright (c) 2013-2014, Michael Uno';
+	const LICENSE        = 'GPL v2 or later';
+	const CONTRIBUTORS   = '';
  
 }
 
@@ -43,91 +44,216 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @authorurl	http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since		2.0.0
+ * @since       3           Changed the name from `AmazonAutoLinks_Commons`.
 */
-final class AmazonAutoLinks_Commons extends AmazonAutoLinks_Commons_Base {
+final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     
-	const TextDomain                = 'amazon-auto-links';
-	const TextDomainPath            = './language';
-	const ShortCode                 = 'amazon_auto_links';
-	const TagSlug                   = 'amazon_auto_links_tag';
-	const AdminOptionKey            = 'amazon_auto_links_admin';
-	const TransientPrefix           = 'AAL';
-	const PostTypeSlug              = 'amazon_auto_links';
-	const PostTypeSlugAutoInsert    = 'aal_auto_insert';	// amazon_auto_links_auto_insert fails creating the post type.
-	const PageSettingsSlug          = 'aal_settings';	// this is to be referred by Pro and third party extension.
-	const SectionID_License         = 'pro_license';
-	const FieldID_LicenseKey        = 'pro_license_key';
-	
-    static public $sFilePath;   // 2.0.6+
-    static public $sDirPath;    // 2.0.6+
-    static public $sPluginPath;
-    static public $sPluginDirPath;
-    static public $sPluginName;     
-    static public $sPluginVersion;       
-    static public $sPluginDescription;   
-    static public $sPluginAuthor;      
-    static public $sPluginAuthorURI;     
-    static public $sPluginStoreURI;      
-    static public $sPluginTextDomain;    
-    static public $sPluginDomainPath;            
-    static public $strPluginFilePath;  
-    static public $strPluginDirPath;     	
-    static public $strPluginName;     
-    static public $strPluginVersion;     
-    static public $strPluginDescription;
-    static public $strPluginAuthor;  
-    static public $strPluginAuthorURI;
-    static public $strPluginTextDomain;
-    static public $strPluginDomainPath; 
-    static public $strPluginNetwork;   
-    static public $strPluginSiteWide; 
-    static public $strPluginStoreURI; 
+	const TEXT_DOMAIN               = 'amazon-auto-links';
+	const TEXT_DOMAIN_PATH          = '/language';
     
-	static function setUp( $sPluginFilePath=null ) {
-		
-        self::$sFilePath            = $sPluginFilePath ? $sPluginFilePath : __FILE__;             // 2.0.6+
-        self::$sDirPath             = dirname( self::$sFilePath );  // 2.0.6+
+    /**
+     * The hook slug used for the prefix of action and filter hook names.
+     * 
+     * @remark      The ending underscore is not necessary.
+     */    
+	const HOOK_SLUG                 = 'aal';    // without trailing underscore
+    
+    /**
+     * The transient prefix. 
+     * 
+     * @remark      This is also accessed from uninstall.php so do not remove.
+     * @remark      Up to 8 characters as transient name allows 45 characters or less ( 40 for site transients ) so that md5 (32 characters) can be added
+     */    
+	const TRANSIENT_PREFIX          = 'AAL';
+    
+   
+	// const SectionID_License         = 'pro_license';
+	// const FieldID_LicenseKey        = 'pro_license_key';
+	    
+    /**
+     * 
+     * @since       2.0.6
+     */
+    static public $sFilePath;  
+    
+    /**
+     * 
+     * @since       2.0.6
+     */    
+    static public $sDirPath;    
+    
+    /**
+     * @since       3
+     */
+    static public $aOptionKeys = array(
+    
+        'main'              => 'amazon_auto_links', // used to be const AdminOptionKey          
+        'template'          => 'amazon_auto_links_templates',
+        'button_css'        => 'amazon_auto_links_button_css',
         
-		// These static properties are for backward compatibility.
-        self::$sPluginPath          = self::$sFilePath;             // backward compat
-        self::$sPluginDirPath       = self::$sDirPath;              // backward compat
-        self::$sPluginName          = self::Name;
-        self::$sPluginVersion       = self::Version;
-        self::$sPluginDescription   = self::Description;
-        self::$sPluginAuthor        = self::Author;
-        self::$sPluginAuthorURI     = self::AuthorURI;
-        self::$sPluginStoreURI      = 'http://michaeluno.jp';
-        self::$sPluginTextDomain    = self::TextDomain;
-        self::$sPluginDomainPath    = self::TextDomainPath;
-	
-        // Backward compatibility - will be deprecated
-		self::$strPluginFilePath    = self::$sFilePath;
-		self::$strPluginDirPath     = self::$sDirPath;
-		// self::$strPluginURI         = plugins_url( '', self::$strPluginFilePath );   // @deprecated
-        self::$strPluginName        = self::Name;
-        self::$strPluginVersion     = self::Version;
-        self::$strPluginDescription = self::Description;
-        self::$strPluginAuthor      = self::Author;
-        self::$strPluginAuthorURI   = self::AuthorURI;
-        self::$strPluginTextDomain  = self::TextDomain;
-        self::$strPluginDomainPath  = self::TextDomainPath;
-        self::$strPluginNetwork     = '';
-        self::$strPluginSiteWide    = 'Site Wide Only';
-        self::$strPluginStoreURI    = 'http://michaeluno.jp';
+        'table_versions'    => array(
+            // $aDatabaseTables property key => {table name}_version
+            'product'       => 'aal_products_version',
+            'request_cache' => 'aal_request_cache_version',
+        ),
+        
+        // Legacy option keys - not used and should be deleted on uninstall.
+        'v1'                => 'amazonautolinks',
+        'v2'                => 'amazon_auto_links_admin',
+        
+    );
+        
+    /**
+     * Used admin pages.
+     * @since       3
+     */
+    static public $aAdminPages = array(
+        // key => 'page slug'        
+        'main'              => 'aal_settings', // Settings - used to be const PageSettingsSlug         
+        'category_select'   => 'aal_add_category_unit', // Add Unit by Category
+        'auto_insert'       => 'aal_define_auto_insert', // Add Auto-insert
+        'tag_unit'          => 'aal_add_tag_unit', // Add Unit by Tag
+        'search_unit'       => 'aal_add_search_unit', // Add Unit by Search
+        'template'          => 'aal_templates',
+        'tool'              => 'aal_tools',
+        'help'              => 'aal_help',
+    );
     
+    /**
+     * Used post types.
+     */
+    static public $aPostTypes = array(
+
+        // used to be const PostTypeSlug      
+        'unit'        => 'amazon_auto_links',
+        
+        // use to be const PostTypeSlugAutoInsert
+        'auto_insert' => 'aal_auto_insert',
+        
+        // 3+
+        'button'      => 'aal_button',
+	
+    );
+    
+    /**
+     * Used post types by meta boxes.
+     */
+    static public $aMetaBoxPostTypes = array(
+        // 'page'      => 'page',
+        // 'post'      => 'post',
+    );
+    
+    /**
+     * Used taxonomies.
+     * @remark      
+     */
+    static public $aTaxonomies = array(
+        // Used to be stored in the `TagSlug` class constant.
+        'tag'   => 'amazon_auto_links_tag',
+    );
+    
+    /**
+     * Used shortcode slugs
+     */
+    static public $aShortcodes = array(
+        'main'  => 'amazon_auto_links',
+        'v1'    => 'amazonautolinks',   // backward compatibility for v1
+    );
+    
+    /**
+     * Stores custom database table names.
+     * @remark      slug (part of class file name) => table name
+     * @since       3
+     */
+    static public $aDatabaseTables = array(
+        'product'       => 'aal_products',
+        'request_cache' => 'aal_request_cache',
+    );
+    /**
+     * Stores the database table versions.
+     * @since       3
+     */
+    static public $aDatabaseTableVersions = array(
+        'product'       => '1.0.0',
+        'request_cache' => '1.0.0',
+    );
+    
+    /**
+     * Sets up class properties.
+     * @return      void
+     */
+	static function setUp( $sPluginFilePath ) {
+		
+        self::$sFilePath = $sPluginFilePath; 
+        self::$sDirPath  = dirname( self::$sFilePath );  
+        
 	}	
 	
+    /**
+     * @return      string
+     */
 	public static function getPluginURL( $sRelativePath='' ) {
-		return plugins_url( $sRelativePath, self::$strPluginFilePath );
+		return plugins_url( $sRelativePath, self::$sFilePath );
 	}
 
+    /**
+     * Requirements.
+     * @since           3
+     */    
+    static public $aRequirements = array(
+        'php' => array(
+            'version'   => '5.2.4',
+            'error'     => 'The plugin requires the PHP version %1$s or higher.',
+        ),
+        'wordpress'         => array(
+            'version'   => '3.4',   // uses $wpdb->delete()
+            'error'     => 'The plugin requires the WordPress version %1$s or higher.',
+        ),
+        'mysql'             => array(
+            'version'   => '5.0.3', // uses VARCHAR(2083) 
+            'error'     => 'The plugin requires the MySQL version %1$s or higher.',
+        ),
+        'functions'     => '', // disabled
+        // array(
+            // e.g. 'mblang' => 'The plugin requires the mbstring extension.',
+        // ),
+        'classes'       => array(
+            'DOMDocument' => 'The plugin requires the DOMXML extension.',
+        ),
+        'constants'     => '', // disabled
+        // array(
+            // e.g. 'THEADDONFILE' => 'The plugin requires the ... addon to be installed.',
+            // e.g. 'APSPATH' => 'The script cannot be loaded directly.',
+        // ),
+        'files'         => '', // disabled
+        // array(
+            // e.g. 'home/my_user_name/my_dir/scripts/my_scripts.php' => 'The required script could not be found.',
+        // ),
+    );        
 	
 }
+AmazonAutoLinks_Registry::setUp( __FILE__ );
 
-// Run the bootstrap
-AmazonAutoLinks_Commons::setUp( __FILE__ );
-include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_AutoLoad.php' );
-include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_Bootstrap.php' );
-include( AmazonAutoLinks_Commons::$sDirPath . '/include/class/boot/AmazonAutoLinks_RegisterClasses.php' );
 
-new AmazonAutoLinks_Bootstrap( __FILE__ );
+/**
+ * Determine whether to load v2 or v3.
+ * 
+ * If the v3 option array does not exist and v2 option array exists, include v2.
+ * If the user installs v3 for the first time, v3 will be loaded.
+ * If the user updated from v2, v2 will loaded and if the user updates the option, then v3 will be loaded.
+ */
+if ( 
+    false === get_option( 'amazon_auto_links', false ) 
+    && false !== get_option( 'amazon_auto_links_admin', false )
+) {
+    include( dirname( __FILE__ ) . '/include/v2/amazon-auto-links.php' );
+    return;
+}
+
+// Otherwise, load v3 - run the bootstrap script.    
+include( dirname( __FILE__ ).'/include/library/admin-page-framework/admin-page-framework.php' );
+include( dirname( __FILE__ ).'/include/class/boot/AmazonAutoLinks_Bootstrap.php' );
+new AmazonAutoLinks_Bootstrap(
+    AmazonAutoLinks_Registry::$sFilePath,
+    AmazonAutoLinks_Registry::HOOK_SLUG    // hook prefix    
+);

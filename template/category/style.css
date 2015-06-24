@@ -12,6 +12,11 @@
 */
 .amazon-products-container {
 	width: 100%;
+    
+    overflow-y: auto;	
+	overflow-x: hidden;
+    width: inherit;
+    padding-right: 0.8em;    
 }
 .amazon-products-container a {
 	text-decoration: none;	
@@ -36,4 +41,45 @@
 }
 .amazon-products-container .amazon-auto-links-credit {
 	font-size: smaller;
+}
+
+
+/* Customer Reviews */
+/* Rating stars */
+.amazon-product-container span.asinReviewsSummary > a > img,
+.amazon-product-container .amazon-customer-reviews img,
+.amazon-product-container span.crVotingButtons > nobr > a  > img {
+    display: inline-block;
+}
+.amazon-product-container .reviews-voting-stripe {
+    border-right: 0 !important;
+}
+.amazon-product-container span.crAvgStars a {
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+/* Sub-images */
+.amazon-products-container .sub-image-container {
+    display: inline-block;
+    clear: none;
+    margin: 1em;
+}
+
+/* Button */
+.amazon-products-container .amazon-auto-links-button-container {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* For debugging */
+.amazon-products-container .dump-array {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: 0 1em;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin: 1em 0;        
 }

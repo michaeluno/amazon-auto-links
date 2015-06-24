@@ -52,11 +52,19 @@ Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Ama
 
 = Do I need Amazon Access Keys? = 
 
-For the *category* and *tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API.
+For the *Category* and *Tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API.
+
+However, for the *Search* unit type, and for some items such as `%image_set%` in the *Item Format* option, setting up API keys is required. 
 
 To use the keys you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
 More detailed instruction, refer to the [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
+
+= What does Unit mean? =
+
+A unit is a set of rules that defines how Amazon products should be displayed.
+
+When you display Amazon products, you would call a unit and the plugin will generate outputs based on the rules defined for the unit.
 
 = What would be the benefit to upgrade to the pro version? =
 
@@ -78,7 +86,7 @@ Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto
 = I get Amazon product links everywhere on the site after creating some units. How can I restrict them to certain pages? =
 Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
 
-= My credientials do not seem to be authenticated. How can I check if my access keys are the correct ones? = 
+= My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? = 
 Try [Scratchpad](http://associates-amazon.s3.amazonaws.com/scratchpad/index.html) to make sure your keys work there as well.
 
 
@@ -164,6 +172,25 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3 =
+- Added the `Tools` setting page.
+- Added the contextual products widget.
+- Added the ability to design buttons and insert them in units.
+- Added black and white lists per unit.
+- Added common advanced unit options.
+- Added the `%button%`, `%review%`, `%rating%`, and %image_set% variables to the template option.
+- Refined the method of processing RSS feed data by getting rid of SimplePie.
+- Refined the caching mechanism by introducing custom tables.
+- Refined the setting pages.
+    - Changed the behaviour of the white-list to only allow certain products from being blocked, from only showing certain products.
+    - Added a unit preview link to a unit name in the Auto-insert listing table.
+    - Tweaked the `Manage Auto-insert` admin menu that did not appear in the Auto-insert listing page.
+    - Remove the `Template` option section when creating a new unit.
+    - Removed the `Add Auto insert` admin menu link.
+    - Removed the `Support` section from the settings.
+    - Updated Admin Page Framework.
+- Updated the Amazon Product Advertising API version.
+
 = 2.2.1 - 04/25/2015 =
 - Fixed a compatibility issue with WordPress 4.2 in template listing page.
 - Tweaked the styling of plugin template listing pages.
@@ -179,7 +206,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 2.1.1 - 12/04/2014 =
 - Added the ability to automatically remove auto-insert items with no unit associated when a unit is removed.
-- Chagned the displayed product price of the `Search` unit type to use the discount price if there is an offered price.
+- Changed the displayed product price of the `Search` unit type to use the discount price if there is an offered price.
 - Optimized the performance.
 
 = 2.1.0 - 11/24/2014 = 

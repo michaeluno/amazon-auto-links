@@ -1,390 +1,527 @@
 <?php
 /**
- * Handles the initial set-up for the plugin.
+ * Amazon Auto Links
  * 
- * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
- * @authorurl    http://michaeluno.jp
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since        2.0.0
-*/
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno
+ * 
+ */
 
 /**
+ * Loads the plugin.
  * 
- * @action      schedule    aal_action_setup_transients     The cron event hook that sets up transients.
- * @action      do          aal_action_loaded_plugin        Triggered after all the plugin components are loaded.
- * @filter      apply       aal_filter_classes              Applies to the loading class array.
+ * @action      do      aal_action_after_loading_plugin
+ * @since       3
  */
-final class AmazonAutoLinks_Bootstrap {
+final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework_PluginBootstrap {
     
     /**
-     * Indicates wheher the class has been instantiated or not. 
-     * 
-     * The bootstrap class can only be instantiated per page load.
-     * 
-     * @since   2.1.1
+     * User constructor.
      */
-    static private $_bLoaded = false;
-    
-    /**
-     * Sets up hooks and properties.
-     */
-    public function __construct( $sPluginFilePath ) {
+    protected function construct()  {
         
-        if ( self::$_bLoaded ) {
-            return;
-        }
-        self::$_bLoaded = true;        
-        
-        $this->_bIsAdmin    = is_admin();
-        $this->_sFilePath   = $sPluginFilePath;
-        
-        // 0. Define constants.
-        $this->_defineConstants();
-        
-        // 1. Set global variables.
-        $this->_setGlobals();
-        
-        // 2. Set up auto-load classes.
-        $this->_loadClasses( $this->_sFilePath );
-        
-        // 3. Load the class that holds the common plugin info.
-        // AmazonAutoLinks_Commons::setUp( $this->_sFilePath );
-        
-        // 4. Set up activation hook.
-        register_activation_hook( $this->_sFilePath, array( $this, '_replyToDoWhenPluginActivates' ) );
-        
-        // 5. Set up deactivation hook.
-        register_deactivation_hook( $this->_sFilePath, array( $this, '_replyToDoWhenPluginDeactivates' ) );
-        // register_uninstall_hook( $this->_sFilePath, 'self::_replyToDoWhenPluginUninstalled' );
-        
-        // 6. Schedule to call start-up functions after all the plugins are loaded.
-        add_action( 'plugins_loaded', array( $this, '_replyToLoadPlugin' ), 999, 1 );
-
-        // 7. Plugin requirement check. 
-        $this->_checkRequirements();
-        
-    }    
-    
-    /**
-     * Loads the plugin full components.
-     * 
-     * The callback method triggered with the 'plugins_loaded' hook.
-     * 
-     */
-    public function _replyToLoadPlugin() {
-        
-        // All the necessary classes have been already loaded.
-        // 1. Set up localization.
-        $this->_localize();
-        
-        // 2. Load Necessary libraries
-        include( dirname( $this->_sFilePath ) . '/include/library/admin-page-framework-for-amazon-auto-links.php' );
-
-        // 3. Include functions.
-        include( dirname( $this->_sFilePath ) . '/include/function/functions.php' );
-        
-        // 4. Option Object
-        $GLOBALS['oAmazonAutoLinks_Option'] = new AmazonAutoLinks_Option( AmazonAutoLinks_Commons::AdminOptionKey );
-
-        // 5. Templates
-        $GLOBALS['oAmazonAutoLinks_Templates'] = new AmazonAutoLinks_Templates;        
-        $GLOBALS['oAmazonAutoLinks_Templates']->loadFunctionsOfActiveTemplates();
-        add_action( 'wp_enqueue_scripts', array( $GLOBALS['oAmazonAutoLinks_Templates'], 'enqueueActiveTemplateStyles' ) );
-        if ( $this->_bIsAdmin ) {
-            $GLOBALS['oAmazonAutoLinks_Templates']->loadSettingsOfActiveTemplates();
-        }
-            
-        // 6. Admin pages
-        if ( $this->_bIsAdmin ) {
-            new AmazonAutoLinks_AdminPage( AmazonAutoLinks_Commons::AdminOptionKey, $this->_sFilePath );        
-        }
-
-        // 7. Post Types
-        new AmazonAutoLinks_PostType( AmazonAutoLinks_Commons::PostTypeSlug, null, $this->_sFilePath );     // post type slug
-        new AmazonAutoLinks_PostType_AutoInsert( AmazonAutoLinks_Commons::PostTypeSlugAutoInsert, null, $this->_sFilePath );     // post type slug
-        new AmazonAutoLinks_PostType_UnitPreview;
-        
-        // 8. Meta Boxes
-        if ( $this->_bIsAdmin ) {
-            $this->_registerMetaBoxes();
-        }
-                
-        // 9. Shortcode - e.g. [amazon_auto_links id="143"]
-        new AmazonAutoLinks_Shortcode( AmazonAutoLinks_Commons::ShortCode );    // amazon_auto_links
-        new AmazonAutoLinks_Shortcode( 'amazonautolinks' );     // backward compatibility with v1.x. This will be deprecated later at some point.
-            
-        // 10. Widgets
-        add_action( 'widgets_init', 'AmazonAutoLinks_WidgetByID::registerWidget' );
-        // add_action( 'widgets_init', 'AmazonAutoLinks_WidgetByTag::registerWidget' );
-                
-        // 11. Auto-insert        
-        new AmazonAutoLinks_AutoInsert;
-        
-        // 12. Events
-        new AmazonAutoLinks_Event;    
-        
-        // 13. MISC
-        if ( $this->_bIsAdmin ) {
-            $GLOBALS['oAmazonAutoLinksUserAds'] = isset( $GLOBALS['oAmazonAutoLinksUserAds'] ) ? $GLOBALS['oAmazonAutoLinksUserAds'] : new AmazonAutoLinks_UserAds;
-        }
-        
-        // 14. Trigger the action. 2.1.2+
-        do_action( 'aal_action_loaded_plugin' );
-        
-    }
-    
-        /**
-         * Registers the plugin meta boxes
-         * 
-         * @since            2.0.3
-         */
-        private function _registerMetaBoxes() {
-            
-            $GLOBALS['strAmazonAutoLinks_UnitType'] = AmazonAutoLinks_Option::getUnitType();
-            $_sUnitType       = $GLOBALS['strAmazonAutoLinks_UnitType'];
-            $_bIsUpdatingUnit = ( empty( $_GET ) && 'post.php' === $GLOBALS['pagenow'] );    // when saving the meta data, the GET array is empty
-            if ( $_sUnitType == 'category' || $_bIsUpdatingUnit ) {    
-                new AmazonAutoLinks_MetaBox_CategoryOptions(
-                    'amazon_auto_links_category_unit_options_meta_box',    // meta box ID
-                    __( 'Category Unit Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'
-                );    
-                new AmazonAutoLinks_MetaBox_Categories;
-            }
-            // Do not use  else here for the meta box saving process
-            if ( $_sUnitType == 'tag' || $_bIsUpdatingUnit ) {
-                new AmazonAutoLinks_MetaBox_TagOptions(
-                    'amazon_auto_links_tag_unit_options_meta_box',    // meta box ID
-                    __( 'Tag Unit Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'
-                );                    
-            }
-            // Do not use  else here for the meta box saving process
-            if ( $_sUnitType == 'search' || $_bIsUpdatingUnit ) {
-                new AmazonAutoLinks_MetaBox_SearchOptions(
-                    'amazon_auto_links_search_unit_options_meta_box',    // meta box ID
-                    __( 'Search Unit Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'            
-                );    
-                new AmazonAutoLinks_MetaBox_SearchOptions_Advanced(
-                    'amazon_auto_links_advanced_search_unit_options_meta_box',    // meta box ID
-                    __( 'Advanced Search Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'            
-                );    
-            }
-            // Do not use else here for the meta box saving process
-            if ( $_sUnitType == 'item_lookup' || $_bIsUpdatingUnit ) {    // the second condition is for when updating the unit.
-                new AmazonAutoLinks_MetaBox_ItemLookupOptions(
-                    'amazon_auto_links_item_lookup_unit_options_meta_box',    // meta box ID
-                    __( 'Item Look-up Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'            
-                );
-                new AmazonAutoLinks_MetaBox_ItemLookupOptions_Advanced(
-                    'amazon_auto_links_advanced_item_lookup_unit_options_meta_box',    // meta box ID
-                    __( 'Advanced Item Look-up Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'                
-                );
-            }            
-            // Do not use else here for the meta box saving process
-            if ( $_sUnitType == 'similarity_lookup' || $_bIsUpdatingUnit ) {    // the second condition is for when updating the unit.
-                new AmazonAutoLinks_MetaBox_SimilarityLookupOptions(
-                    'amazon_auto_links_similarity_lookup_unit_options_meta_box',    // meta box ID
-                    __( 'Similarity Look-up Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'            
-                );
-                new AmazonAutoLinks_MetaBox_SimilarityLookupOptions_Advanced(
-                    'amazon_auto_links_advanced_similarity_lookup_unit_options_meta_box',    // meta box ID
-                    __( 'Advanced Similarity Look-up Options', 'amazon-auto-links' ),        // meta box title
-                    array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                    'normal',
-                    'default'                
-                );
-            }                
-            
-            
-            new AmazonAutoLinks_MetaBox_Template(
-                'amazon_auto_links_template_meta_box',    // meta box ID
-                __( 'Template', 'amazon-auto-links' ),        // meta box title
-                array( AmazonAutoLinks_Commons::PostTypeSlug ),    // post, page, etc.
-                'normal',    // side 
-                'default'
-            );
-            
-            new AmazonAutoLinks_MetaBox_Misc;        
-            
-        }
-
-    
-    /**
-     * Defines plugin specific constants.
-     */
-    protected function _defineConstants() {
-        
-        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", plugin_basename( $this->_sFilePath ) );    // for backward compatibility.
-    
-    }
-    
-    /**
-     * Declares plugin specific global variables.
-     */
-    protected function _setGlobals() {
-        
-        // Stores the option object
-        $GLOBALS['oAmazonAutoLinks_Option'] = null;    
-        
-        // Stores the template object
-        $GLOBALS['oAmazonAutoLinks_Templates'] = null;    
-        
-        // Stores custom registering class paths
-        $GLOBALS['arrAmazonAutoLinks_Classes'] = isset( $GLOBALS['arrAmazonAutoLinks_Classes'] ) && is_array( $GLOBALS['arrAmazonAutoLinks_Classes'] ) ? $GLOBALS['arrAmazonAutoLinks_Classes'] : array();
-                
-        // Stores request url's transient info.
-        $GLOBALS['arrAmazonAutoLinks_APIRequestURIs'] = array();
-    
-        // Stores the current unit type in admin pages. This will be set in the method that loads meta boxes.
-        $GLOBALS['strAmazonAutoLinks_UnitType'] = '';
-        
-        // ASINs blacklist 
-        $GLOBALS['arrBlackASINs'] = array();
-        
-    }
-    
-    /**
-     * Register class files to be auto-loaded.
-     */
-    protected function _loadClasses( $sFilePath ) {
-        
-        $_aClassFiles = array();    // this variable will be updated in the included file.
-        include( dirname( $sFilePath ) . '/include/amazon-auto-links-include-class-file-list-boot.php' );
-        new AmazonAutoLinks_RegisterClasses( '', array(), $_aClassFiles );
-        
-        // Schedule to register regular classes when all the plugins are loaded. This allows other scripts to modify the loading class files.
-        add_action( 'plugins_loaded', array( $this, '_replyToLoadClasses') );
-        
-    }
-        /**
-         * Register class files to be auto-loaded with a delay.
-         */
-        public function _replyToLoadClasses() {
-                        
-            // For the backward compatibility. The old versions store elements with the key of file base name including its file extension.
-            // Here it sets the key without its file extension.
-            $_aAmazonAutoLinksClasses = array();
-            foreach( ( array ) $GLOBALS['arrAmazonAutoLinks_Classes'] as $_sBaseName => $_sFilePath ) {
-                $_aAmazonAutoLinksClasses[ pathinfo( $_sFilePath, PATHINFO_FILENAME ) ] = $_sFilePath;
-            }
-            $_aAmazonAutoLinksClasses = apply_filters( 'aal_filter_classes', $_aAmazonAutoLinksClasses );
-            
-            $_sPluginDir    = dirname( $this->_sFilePath );            
-            
-                // @todo This block shuold be done with the id_admin() check. However, some components such as auto-insert needs to read array structures defined in form classes.
-                // So classes that reside in the admin directory also need to be loaded in the front end at the moment.
-                // Move those structure definitions into the options class then this should be able to be avoided.
-                $_aAdminClassFiles  = array();
-                include( $_sPluginDir . '/include/amazon-auto-links-include-class-file-list-admin.php' );
-                new AmazonAutoLinks_RegisterClasses( '', array(), $_aAmazonAutoLinksClasses + $_aAdminClassFiles );
-         
-            $_aClassFiles = array();
-            include( $_sPluginDir . '/include/amazon-auto-links-include-class-file-list.php' );
-            new AmazonAutoLinks_RegisterClasses( '', array(), $_aAmazonAutoLinksClasses + $_aClassFiles );
-            
-        }
-
-    /**
-     * A callback method triggered when the plugin is activated.
-     */
-    public function _replyToDoWhenPluginActivates() {
-        
-        // Schedule transient set-ups
-        wp_schedule_single_event( time(), 'aal_action_setup_transients' );        
-        
-    }
-    
-    /**
-     * A callback method triggered when the plugin is deactivated.
-     */
-    public function _replyToDoWhenPluginDeactivates() {
-        AmazonAutoLinks_WPUtilities::cleanTransients();
-    }    
-    
-    /**
-     * A callback method triggered when the plugin is uninstalled.
-     * @remark            currently not used yet.
-     */
-    public static function _replyToDoWhenPluginUninstalled() {
-        AmazonAutoLinks_WPUtilities::cleanTransients();    
-    }
-    
-    /**
-     * Registers localization files.
-     */
-    protected function _localize() {
-        
-        load_plugin_textdomain( 
-            AmazonAutoLinks_Commons::TextDomain, 
-            false, 
-            dirname( plugin_basename( $this->_sFilePath ) ) . '/language/'
-        );
-        
-        if ( is_admin() ) {
-            load_plugin_textdomain( 
-                'admin-page-framework', 
-                false, 
-                dirname( plugin_basename( $this->_sFilePath ) ) . '/language/'
-            );        
+        if ( $this->bIsAdmin ) {
+            $this->checkCustomTables();
         }
         
     }        
         
+        /**
+         * Checks if table version options exist and if not install it.
+         */
+        private function checkCustomTables() {
+            
+            $_aTableVersions = array();
+            foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'table_versions' ] as $_sOptionKey ) {
+                $_aTableVersions[] = get_option( $_sOptionKey, false );
+            }
+            if ( ! in_array( false, $_aTableVersions, true ) ) {
+                return;
+            }
+            
+            // At this point, there is a value `false` in the array, 
+            // which means there is a table that is not installed.            
+            // Install tables.
+            add_action( 
+                'plugins_loaded', // action hook name
+                array( $this, 'replyToInstallCustomTables' ), // callback 
+                1       // priority
+            );
+            
+        }
+    
+    
     /**
-     * Performs plugin requirements check.
-     * 
-     * This is triggered with the admin_init hook. Do not use this with register_activation_hook(), which does not work.
-     * 
-     */    
-    protected function _checkRequirements() {
+     * Installs plugin custom database tables.
+     * @callback        plugins_loaded
+     */
+    public function replyToInstallCustomTables() {
+        new AmazonAutoLinks_DatabaseTableInstall( 
+            true    // install
+        );        
+    }
         
-        // Requirement Check
-        new AmazonAutoLinks_Requirements( 
-            $this->_sFilePath,
-            array(
-                'php' => array(
-                    'version' => '5.2.4',
-                    'error' => __( 'The plugin requires the PHP version %1$s or higher.', 'amazon-auto-links' ),
-                ),
-                'wordpress' => array(
-                    'version' => '3.3',
-                    'error' => __( 'The plugin requires the WordPress version %1$s or higher.', 'amazon-auto-links' ),
-                ),
-                'functions' => array(
-                    'mb_substr' => sprintf( __( 'The plugin requires the <a href="%2$s">%1$s</a> to be installed.', 'amazon-auto-links' ), __( 'the Multibyte String library', 'amazon-auto-links' ), 'http://www.php.net/manual/en/book.mbstring.php' ),
-                    'curl_version' => sprintf( __( 'The plugin requires the %1$s to be installed.', 'amazon-auto-links' ), __( 'the cURL library', 'amazon-auto-links' ) ),
-                ),
-                'classes' => array(
-                    'DOMDocument' => sprintf( __( 'The DOMDocument class could not be found. The plugin requires the <a href="%1$s">libxml</a> extension to be activated.', 'amazon-auto-links' ), 'http://www.php.net/manual/en/book.libxml.php' ),
-                    'DomXpath' => sprintf( __( 'The DomXpath class could not be found. The plugin requires the <a href="%1$s">libxml</a> extension to be activated.', 'amazon-auto-links' ), 'http://www.php.net/manual/en/book.libxml.php' ),
-                ),
-                'constants'    => array(),
-            ),
-            true,             // if it fails it will deactivate the plugin
-            'admin_init'
-        );    
+    /**
+     * Register classes to be auto-loaded.
+     * 
+     * @since       3
+     */
+    public function getClasses() {
+        
+        // Include the include lists. The including file reassigns the list(array) to the $_aClassFiles variable.
+        $_aClassFiles   = array();
+        $_bLoaded       = include( dirname( $this->sFilePath ) . '/include/class-list.php' );
+        if ( ! $_bLoaded ) {
+            return $_aClassFiles;
+        }
+        return $_aClassFiles;
+                
+    }
 
+    /**
+     * Sets up constants.
+     */
+    public function setConstants() {
+        
+        // for backward compatibility.
+        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", plugin_basename( $this->sFilePath ) ); 
+        
     }    
+    
+    /**
+     * Sets up global variables.
+     */
+    public function setGlobals() {
+        
+        if ( $this->bIsAdmin ) { 
+        
+            // The form transient key will be sent via the both get and post methods.
+            $GLOBALS[ 'aal_transient_id' ] = isset( $_REQUEST[ 'transient_id' ] )
+                ? $_REQUEST[ 'transient_id' ]
+                : AmazonAutoLinks_Registry::TRANSIENT_PREFIX 
+                    . '_Form' 
+                    . '_' . get_current_user_id() 
+                    . '_' . uniqid();
+
+        }        
+        
+    }    
+    
+    /**
+     * The plugin activation callback method.
+     */    
+    public function replyToPluginActivation() {
+
+        $this->_checkRequirements();
+        
+        $this->replyToInstallCustomTables();
+        
+        $this->replyToCreateDefaultButton();
+        
+    }
+        
+        /**
+         * 
+         * @since            3
+         */
+        private function _checkRequirements() {
+
+            $_oRequirementCheck = new AmazonAutoLinks_AdminPageFramework_Requirement(
+                AmazonAutoLinks_Registry::$aRequirements,
+                AmazonAutoLinks_Registry::NAME
+            );
+            
+            if ( $_oRequirementCheck->check() ) {            
+                $_oRequirementCheck->deactivatePlugin( 
+                    $this->sFilePath, 
+                    __( 'Deactivating the plugin', 'amazon-auto-links' ),  // additional message
+                    true    // is in the activation hook. This will exit the script.
+                );
+            }        
+             
+        }    
+        /**
+         * 
+         * @callback        action      plugins_loaded
+         */
+        public function replyToCreateDefaultButton() {
+            new AmazonAutoLinks_DefaultButtonCreation;    
+        }        
+        
+    /**
+     * The plugin activation callback method.
+     */    
+    public function replyToPluginDeactivation() {
+        
+        // Clean transients.
+        AmazonAutoLinks_WPUtility::cleanTransients( 
+            AmazonAutoLinks_Registry::TRANSIENT_PREFIX
+        );
+        AmazonAutoLinks_WPUtility::cleanTransients( 
+            'apf_'
+        );
+        
+    }        
+    
+        
+    /**
+     * Load localization files.
+     * 
+     * @callback    action      init
+     */
+    public function setLocalization() {
+        
+        // This plugin does not have messages to be displayed in the front end.
+        if ( ! $this->bIsAdmin ) { 
+            return; 
+        }
+        
+        load_plugin_textdomain( 
+            AmazonAutoLinks_Registry::TEXT_DOMAIN, 
+            false, 
+            dirname( plugin_basename( $this->sFilePath ) ) . '/' . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
+        );
+        
+    }        
+    
+    /**
+     * Loads the plugin specific components. 
+     * 
+     * @remark        All the necessary classes should have been already loaded.
+     */
+    public function setUp() {
+        
+        // This constant is set when uninstall.php is loaded.
+        if ( defined( 'DOING_PLUGIN_UNINSTALL' ) && DOING_PLUGIN_UNINSTALL ) {
+            return;
+        }
+            
+        // 1. Include PHP files.
+        $this->_include();
+            
+        // 2. Option Object - must be done before the template object.
+        // The initial instantiation will handle formatting options from earlier versions of the plugin.
+        AmazonAutoLinks_Option::getInstance();
+       
+        // 3. Templates and Buttons
+        new AmazonAutoLinks_TemplateLoader;
+        new AmazonAutoLinks_ButtonStyleLoader;
+        
+        // 4. Post Types
+        new AmazonAutoLinks_PostType( 
+            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],  // slug
+            null,   // post type argument. This is defined in the class.
+            $this->sFilePath   // script path
+        );            
+        new AmazonAutoLinks_PostType_AutoInsert(
+            AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],  // slug
+            null,   // post type argument. This is defined in the class.
+            $this->sFilePath   // script path               
+        );
+        new AmazonAutoLinks_PostType_Button(
+            AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],  // slug
+            null,   // post type argument. This is defined in the class.
+            $this->sFilePath   // script path               
+        );        
+        new AmazonAutoLinks_PostType_UnitPreview;            
+            
+        // 5. Admin pages
+        if ( $this->bIsAdmin ) {
+                            
+            new AmazonAutoLinks_AutoInsertAdminPage(
+                '', // disable the options
+                $this->sFilePath             
+            );            
+            new AmazonAutoLinks_CategoryUnitAdminPage(
+                array(
+                    'type'      => 'transient',
+                    'key'       => $GLOBALS[ 'aal_transient_id' ],
+                    'duration'  => 60*60*24*2,
+                ),
+                $this->sFilePath 
+            );        
+            new AmazonAutoLinks_TagUnitAdminPage(
+                array(
+                    'type'      => 'transient',
+                    'key'       => $GLOBALS[ 'aal_transient_id' ],
+                    'duration'  => 60*60*24*2,
+                ),
+                $this->sFilePath             
+            );
+            new AmazonAutoLinks_SearchUnitAdminPage(
+                array(
+                    'type'      => 'transient',
+                    'key'       => $GLOBALS[ 'aal_transient_id' ],
+                    'duration'  => 60*60*24*2,
+                ),
+                $this->sFilePath                             
+            );
+            
+            new AmazonAutoLinks_AdminPage( 
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], 
+                $this->sFilePath 
+            );
+            new AmazonAutoLinks_ToolAdminPage(
+                '', // no options
+                $this->sFilePath 
+            );
+            new AmazonAutoLinks_HelpAdminPage(
+                '', // no options
+                $this->sFilePath 
+            );
+
+            // Meta boxes
+            $this->_registerMetaBoxes();
+        }
+                
+        // 6. Shortcode - e.g. [amazon_auto_links id="143"]
+        new AmazonAutoLinks_Shortcode( 
+            AmazonAutoLinks_Registry::$aShortcodes 
+        );
+            
+        // 7. Widgets
+        new AmazonAutoLinks_WidgetByID(
+            sprintf( 
+                __( '%1$s by Unit' ),
+                AmazonAutoLinks_Registry::NAME
+            )
+        );
+        new AmazonAutoLinks_ContextualProductWidget(
+            AmazonAutoLinks_Registry::NAME . ' - ' . __( 'Contextual Products', 'amazon-auto-links' )
+        );
+
+        // 8. Auto-insert        
+        new AmazonAutoLinks_AutoInsert;
+
+        // 9. Events
+        new AmazonAutoLinks_Event;    
+                
+        // 10. Trigger the action. 2.1.2+
+        do_action( 'aal_action_loaded_plugin' );
+        
+    }
+        /**
+         * Includes additional files.
+         */
+        private function _include() {
+            
+            // Functions
+            include( dirname( $this->sFilePath ) . '/include/function/functions.php' );
+            
+        }
+        
+        /**
+         * Adds meta boxes.
+         */
+        private function _registerMetaBoxes() {
+            
+            new AmazonAutoLinks_MetaBox_Unit_ViewLink(
+                null,
+                __( 'View', 'amazon-auto-links' ), // meta box title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'high' // priority                                                            
+            );
+            new AmazonAutoLinks_MetaBox_TagUnit_Main(
+                null,
+                __( 'Main', 'amazon-auto-links' ), // meta box title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'high' // priority                                    
+            );
+            new AmazonAutoLinks_MetaBox_CategoryUnit_Main(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Main', 'amazon-auto-links' ), // meta box title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'high' // priority                        
+            );            
+            new AmazonAutoLinks_MetaBox_CategoryUnit_Submit(
+                null, // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Added Categories', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'side', // context - e.g. 'normal', 'advanced', or 'side'
+                'high' // priority - e.g. 'high', 'core', 'default' or 'low'
+            );
+            
+            new AmazonAutoLinks_MetaBox_SearchUnit_Main(
+                null,   // meta box ID - null for auto-generate
+                __( 'Product Search Main', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'core'  // priority - e.g. 'high', 'core', 'default' or 'low'
+            );            
+            new AmazonAutoLinks_MetaBox_SearchUnit_Advanced(
+                null,   // meta box ID - null for auto-generate
+                __( 'Product Search Advanced', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+            );
+            
+            new AmazonAutoLinks_MetaBox_ItemLookupUnit_Main(
+                null,   // meta box ID - null for auto-generate
+                __( 'Item Look-up Main', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'core'  // priority - e.g. 'high', 'core', 'default' or 'low'
+            );                 
+            new AmazonAutoLinks_MetaBox_ItemLookupUnit_Advanced(
+                null,   // meta box ID - null for auto-generate
+                __( 'Item Look-up Advanced', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'low' // priority - e.g. 'high', 'core', 'default' or 'low'            
+            );
+
+            new AmazonAutoLinks_MetaBox_SimilarityLookupUnit_Main(
+                null,   // meta box ID - null for auto-generate
+                __( 'Similarity Look-up Main', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'core'  // priority - e.g. 'high', 'core', 'default' or 'low'
+            );   
+            new AmazonAutoLinks_MetaBox_SimilarityLookupUnit_Advanced(
+                null,   // meta box ID - null for auto-generate
+                __( 'Similarity Look-up Advanced', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ),                 
+                'normal', // context - e.g. 'normal', 'advanced', or 'side'
+                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+            );
+            new AmazonAutoLinks_MetaBox_Unit_CommonAdvanced(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Common Advanced', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'advanced', // context (what kind of metabox this is)
+                'low' // priority                                    
+            );
+            
+            new AmazonAutoLinks_MetaBox_Unit_ProductFilter(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Unit Product Filters', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'advanced', // context (what kind of metabox this is)
+                'low' // priority                                                
+            );
+            
+            // Common meta boxes
+            new AmazonAutoLinks_MetaBox_Cache(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Cache', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'default' // priority                        
+            );                   
+            new AmazonAutoLinks_MetaBox_Template(
+                null, // meta box ID - null to auto-generate
+                __( 'Template', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'side', // context - e.g. 'normal', 'advanced', or 'side'
+                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+            );
+            
+            new AmazonAutoLinks_MetaBox_DebugInfo(
+                null, // meta box ID - null to auto-generate
+                __( 'Debug Information', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'advanced', // context (what kind of metabox this is)
+                'low' // priority                                        
+            );                       
+            
+            // Button Post Type
+            new AmazonAutoLinks_MetaBox_Button_Preview(
+                null, // meta box ID - null to auto-generate
+                __( 'Button Preview', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
+            );            
+            new AmazonAutoLinks_MetaBox_Button_CSS(
+                null, // meta box ID - null to auto-generate
+                __( 'CSS', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
+            );                        
+            new AmazonAutoLinks_MetaBox_Button_Text(
+                null, // meta box ID - null to auto-generate
+                __( 'Text', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );
+            new AmazonAutoLinks_MetaBox_Button_Box(
+                null, // meta box ID - null to auto-generate
+                __( 'Box', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );  
+            new AmazonAutoLinks_MetaBox_Button_Border(
+                null, // meta box ID - null to auto-generate
+                __( 'Border', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );            
+            new AmazonAutoLinks_MetaBox_Button_Background(
+                null, // meta box ID - null to auto-generate
+                __( 'Background', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );
+            new AmazonAutoLinks_MetaBox_Button_Hover(
+                null, // meta box ID - null to auto-generate
+                __( 'Hover', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );                        
+        }
     
 }

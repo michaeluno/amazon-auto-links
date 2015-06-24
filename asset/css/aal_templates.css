@@ -39,7 +39,24 @@
 }	
 
 /* Make fetched template listing images fit in the container */
-div.amazon_auto_links_multiple_columns_col div.amazon_auto_links_extension_item img {    
+div.amazon_auto_links_columns_col div.amazon_auto_links_item img {    
     max-width: 100% !important;
     max-height: 100% !important;
+}
+
+/* Get Now tab */
+.amazon_auto_links_item {
+	margin-right: 10px;
+	padding: 20px 20px 20px 20px;
+	background-color: #FAFAFA;
+	border: 1px solid;
+	border-color: #DDD;
+	
+}
+.amazon_auto_links_item h4 {
+	margin: 0.6em 0;	
+}
+.amazon_auto_links_item img {
+	max-width: 150px;
+	max-height: 200px;
 }

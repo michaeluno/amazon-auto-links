@@ -1,11 +1,11 @@
- .auth-status {
+.auth-status {
 	margin-bottom: 2em;
 }
-.authenticated {
+.connected {
 	font-weight:bold;
 	color: green;				
 }
-.unauthenticated {
+.disconnected {
 	font-weight:bold;
 	color: red;				
 }

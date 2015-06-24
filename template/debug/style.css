@@ -1,0 +1,23 @@
+/*
+    Template Name:  Debug
+    Template URI:   http://en.michaeluno.jp
+    Author:         Michael Uno
+    Author URI:     http://en.michaeluno.jp
+    Description:    Displays raw unit fetched data.
+    Version:        1.0.0
+    License:        GNU General Public License v2 or later
+    License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:           default
+    Text Domain:    amazon-auto-links
+*/
+
+.amazon-auto-links-debug .debug,
+.amazon-auto-links-debug .dump-array {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: 0 1em;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin: 1em 0;        
+}

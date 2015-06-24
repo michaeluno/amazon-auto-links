@@ -1,29 +1,41 @@
 <?php
 /**
+ * Amazon Auto Links
+ * 
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno
+ * 
+ */
+
+/**
  * Handles plugin's shortcodes.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.0.0
-*/
-class AmazonAutoLinks_Shortcode {
+ * @since       3       Extends `AmazonAutoLinks_WPUtility`.
+ */
+class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
 
     /**
-     * Regiesters the shortcode.
+     * Registers the shortcode(s).
      */
-    public function __construct( $sShortCode ) {
-        add_shortcode( $sShortCode, array( $this, '_replyToGetOutput' ) );
+    public function __construct( $asShortCode ) {
+        foreach( $this->getAsArray( $asShortCode ) as $_sShortCode ) {            
+            add_shortcode( 
+                $_sShortCode, 
+                array( $this, '_replyToGetOutput' ) 
+            );
+        }
     }
     
     /**
      * Returns the output based on the shortcode arguments.
      * 
      * @since       2.0.0
-     * @since       2.1.1       Chagned the name from `getOutput()`.
+     * @since       2.1.1       Change the name from `getOutput()`.
      */
-    public function _replyToGetOutput( $aArgs ) {
-        return AmazonAutoLinks_Units::getInstance( $aArgs )->getOutput();
+    public function _replyToGetOutput( $aArguments ) {
+        return AmazonAutoLinks( $aArguments, false );
     }    
 
 }

@@ -2,9 +2,8 @@
 
 /* Configuration */
 $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
-$sResultFilePath	= $sTargetBaseDir . '/include/amazon-auto-links-include-class-file-list-boot.php';
-$sResultFilePath2	= $sTargetBaseDir . '/include/amazon-auto-links-include-class-file-list.php';
-$sResultFilePath3	= $sTargetBaseDir . '/include/amazon-auto-links-include-class-file-list-admin.php';
+$sResultFilePath	= $sTargetBaseDir . '/include/class-list.php';
+
 
 
 
@@ -33,7 +32,7 @@ echo 'Started...' . $sCarriageReturn;
 // for the boot files
 new PHP_Class_Files_Inclusion_Script_Creator(
 	$sTargetBaseDir,
-	array( $sTargetBaseDir . '/include/class/boot' ), 	// scan directory paths
+	array( $sTargetBaseDir . '/include/class/' ), 	// scan directory paths
 	$sResultFilePath, 
 	array(
 		// 'header_class_name'	=>	'TaskScheduler_InclusionScriptHeader',
@@ -41,56 +40,14 @@ new PHP_Class_Files_Inclusion_Script_Creator(
 		'header_type'		=>	'CONSTANTS',	
 		// 'exclude_classes'	=>	array( 'TaskScheduler_InclusionScriptHeader', 'TaskScheduler_MinifiedVersionHeader' ),
 		'output_var_name'	=>	'$_aClassFiles',		
-		'base_dir_var'  	=>	'AmazonAutoLinks_Commons::$sDirPath',
+		'base_dir_var'  	=>	'AmazonAutoLinks_Registry::$sDirPath',
 		'search'			=>	array(
 			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
 			// 'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/backend' ),
-			'exclude_dir_names'		=>	array(),
+			'exclude_dir_names'		=>	array( 'v2' ),
 			'is_recursive'			=>	true,
 		),			
 	)
 );
-
-// for the front-end
-new PHP_Class_Files_Inclusion_Script_Creator(
-	$sTargetBaseDir,
-	array( $sTargetBaseDir . '/include/class' ), 	// scan directory paths
-	$sResultFilePath2, 
-	array(
-		// 'header_class_name'	=>	'TaskScheduler_InclusionScriptHeader',
-		'output_buffer'		=>	true,
-		'header_type'		=>	'CONSTANTS',	
-		// 'exclude_classes'	=>	array( 'TaskScheduler_InclusionScriptHeader', 'TaskScheduler_MinifiedVersionHeader' ),
-		'output_var_name'	=>	'$_aClassFiles',		
-		'base_dir_var'  	=>	'AmazonAutoLinks_Commons::$sDirPath',
-		'search'			=>	array(
-			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
-			'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/admin', $sTargetBaseDir . '/include/library' ),
-			'exclude_dir_names'		=>	array(),
-			'is_recursive'			=>	true,
-		),			
-	)
-);
-// for the back-end
-new PHP_Class_Files_Inclusion_Script_Creator(
-	$sTargetBaseDir,
-	array( $sTargetBaseDir . '/include/class/admin' ), 	// scan directory paths
-	$sResultFilePath3, 
-	array(
-		// 'header_class_name'	=>	'TaskScheduler_InclusionScriptHeader',
-		'output_buffer'		=>	true,
-		'header_type'		=>	'CONSTANTS',	
-		// 'exclude_classes'	=>	array( 'TaskScheduler_InclusionScriptHeader', 'TaskScheduler_MinifiedVersionHeader' ),
-		'output_var_name'	=>	'$_aAdminClassFiles',		
-		'base_dir_var'  	=>	'AmazonAutoLinks_Commons::$sDirPath',
-		'search'			=>	array(
-			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
-			'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/library' ),
-			'exclude_dir_names'		=>	array(),
-			'is_recursive'			=>	true,
-		),			
-	)
-);
-
 
 echo 'Done!' . $sCarriageReturn;
