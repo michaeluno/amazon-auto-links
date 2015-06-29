@@ -170,12 +170,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @callback    action      init
      */
     public function setLocalization() {
-        
-        // This plugin does not have messages to be displayed in the front end.
-        if ( ! $this->bIsAdmin ) { 
-            return; 
-        }
-        
+                
         load_plugin_textdomain( 
             AmazonAutoLinks_Registry::TEXT_DOMAIN, 
             false, 
