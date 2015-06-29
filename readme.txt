@@ -29,7 +29,7 @@ If you are good at HTML and CSS coding and know a little about PHP, you can crea
 * **Random/Title/Date sort order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
 * **Shortcode** - Insert the ads in posts and pages. 
 * **PHP function** - Insert the ads in the theme template.
-* **Blacklist and Whitelist** - If you want certain products not to be shown, the black list and white list can be set by ASIN, substring of title and description.
+* **Blacklist and Whitelist** - If you want certain products not to be shown, black and white lists can be set by ASIN, substring of title and description.
 * **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
 * **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
   
@@ -171,6 +171,11 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+ 
+= 3.0.1 - 06/30/2015 =
+- Tweaked the formatting of a product element.
+- Fixed an issue that translation files were not loaded in the front-end.
+- Updated the base translation file.
 
 = 3 - 06/29/2015 =
 - Added the `Tools` setting page.
