@@ -613,7 +613,9 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
             $_sEncodedHTML,
             true // character set - auto detect
         );
-        return $_oScraper->get();
+        return "<div class='amazon-customer-rating-stars'>"
+                . $_oScraper->get()
+            . "</div>";
             
     }
  
