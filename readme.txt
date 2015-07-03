@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
 Tested up to:       4.2.2
-Stable tag:         3
+Stable tag:         3.0.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,7 @@ If you are good at HTML and CSS coding and know a little about PHP, you can crea
 * **Blacklist and Whitelist** - If you want certain products not to be shown, black and white lists can be set by ASIN, substring of title and description.
 * **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
 * **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
+* **Templates** - You can design the output with the template system.
   
 = Supported Language =
 * Japanese  
@@ -171,6 +172,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.0.2 - 07/04/2015 =
+- Fixed an issue that templates were not properly loaded if the user did not upgrade the options to v3.
  
 = 3.0.1 - 06/30/2015 =
 - Tweaked the formatting of a product element.

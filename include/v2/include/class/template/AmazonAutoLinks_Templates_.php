@@ -86,8 +86,9 @@ abstract class AmazonAutoLinks_Templates_ {
      */
     public function getTemplateArrayForSelectLabel( $arrTemplates=null ) {
         
-        if ( ! $arrTemplates )
+        if ( ! $arrTemplates ) {
             $arrTemplates = $this->getActiveTemplates();
+        }
             
         $arrLabels = array();
         foreach ( $arrTemplates as $strID => $arrTemplate ) 
@@ -115,14 +116,49 @@ abstract class AmazonAutoLinks_Templates_ {
     }
     
     /**
+     * Formats the paths for v3 while the user does not upgrade the options.
+     * 
+     * @since       3.0.2
+     * @return      array
+     */
+    public function getActiveTemplates( $bUseProperty=true ) {
+        $_aActiveTempaltes = $this->_getActiveTemplates( $bUseProperty ); 
+
+        foreach( $_aActiveTempaltes as &$_aTemplate ) {
+            if ( ! in_array( $_aTemplate[ 'strName' ], array( 'Category', 'Search' ) ) ) {
+                continue;
+            }
+            $_aTemplate[ 'strCSSPath' ]       = $this->_getV3Path( $_aTemplate[ 'strCSSPath' ] );
+            $_aTemplate[ 'strTemplatePath' ]  = $this->_getV3Path( $_aTemplate[ 'strTemplatePath' ] );
+            $_aTemplate[ 'strDirPath' ]       = $this->_getV3Path( $_aTemplate[ 'strDirPath' ] );
+            $_aTemplate[ 'strFunctionsPath' ] = $this->_getV3Path( $_aTemplate[ 'strFunctionsPath' ] );
+            $_aTemplate[ 'strSettingsPath' ]  = $this->_getV3Path( $_aTemplate[ 'strSettingsPath' ] );
+            $_aTemplate[ 'strThumbnailPath' ] = $this->_getV3Path( $_aTemplate[ 'strThumbnailPath' ] );
+        }
+        return $_aActiveTempaltes;
+        
+    }
+        /**
+         * @return      string
+         * @since       3.0.2
+         */
+        private function _getV3Path( $sV2Path ) {
+            return preg_replace(
+                '#(\\\\|/)template(\\\\|/)#', // needle pattern - forward/back slash 
+                '$1include$1v2$1template$1', // replacement
+                $sV2Path // subject haystack
+            );
+        }
+    
+    /**
      * Returns an array that holds arrays of activated template information stored in the option array.
      * 
-     * @param            boolean            $fUseProperty            If this is true, it checks the previously set data and if there are, use them.
-     * 
+     * @param       boolean            $fUseProperty            If this is true, it checks the previously set data and if there are, use them.
+     * @return      array
      */
-    public function getActiveTemplates( $fUseProperty=true ) {
+    public function _getActiveTemplates( $fUseProperty=true ) {
 
-        $_oOption = $GLOBALS['oAmazonAutoLinks_Option'];
+        $_oOption = $GLOBALS[ 'oAmazonAutoLinks_Option' ];
     
         if ( $fUseProperty && isset( $_oOption->arrOptions['arrTemplates'] ) && ! empty( $_oOption->arrOptions['arrTemplates'] ) ) {
             return $_oOption->arrOptions['arrTemplates'];
@@ -132,7 +168,7 @@ abstract class AmazonAutoLinks_Templates_ {
         $_aActiveTempletes = $_oOption->arrOptions['arrTemplates'];
                         
         // Check if they exist - moving the site may cause an issue that files don't exist anymore.
-        foreach( $_aActiveTempletes as $_sDirSlug => &$_aActiveTemplete ) {        
+        foreach( $_aActiveTempletes as $_sDirSlug => &$_aActiveTemplete ) {
         
             if ( ! is_array( $_aActiveTemplete ) || $_sDirSlug == '' ) {
                 unset( $_aActiveTempletes[ $_sDirSlug ] );
@@ -307,7 +343,9 @@ abstract class AmazonAutoLinks_Templates_ {
      */ 
     public function loadSettingsOfActiveTemplates() {
         
-        if ( ! is_admin() ) return;
+        if ( ! is_admin() ) {
+            return;
+        }
         
         foreach( $this->getActiveTemplates() as $arrTemplate ) {
 
@@ -327,8 +365,9 @@ abstract class AmazonAutoLinks_Templates_ {
                     ? dirname( $arrTemplate['strCSSPath'] ) . '/settings.php'
                     : null
                 );
-            if ( $strSettingsPath )
+            if ( $strSettingsPath ) {
                 include_once( $strSettingsPath );
+            }
                         
         }
     }
@@ -349,7 +388,9 @@ abstract class AmazonAutoLinks_Templates_ {
                         $arrTemplate['strTemplatePath'],
                     )
                 ) 
-            )    continue;
+            ) {
+                continue;
+            }
             
             wp_register_style( "amazon-auto-links-{$arrTemplate['strID']}", AmazonAutoLinks_WPUtilities::getSRCFromPath( $arrTemplate['strCSSPath'] ) );
             // wp_register_style( "amazon-auto-links-{$arrTemplate['strID']}", site_url() . "?amazon_auto_links_style={$arrTemplate['strID']}" );
