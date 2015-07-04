@@ -478,6 +478,11 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
          */
         private function _getSubImageURLs( array $aImages, $iMaxImageSize, $iMaxNumberOfImages ) {
             
+            // If the size is set to 0, it means the user wants no image.
+            if ( ! $iMaxImageSize ) {
+                return array();
+            }
+            
             // The 'main' element is embedded by the plugin.
             unset( $aImages[ 'main' ] );
             
@@ -495,6 +500,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
             }
             // Drop empty items.
             return array_filter( $_aURLs );
+            
         }
             /**
              * 
