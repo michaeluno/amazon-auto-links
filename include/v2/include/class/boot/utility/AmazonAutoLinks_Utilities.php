@@ -350,13 +350,16 @@ class AmazonAutoLinks_Utilities {
 
         self::$_bFunctionExists_mb_substr = isset( self::$_bFunctionExists_mb_substr )
             ? self::$_bFunctionExists_mb_substr
-            : function_exists( 'mb_substr' );
+            : function_exists( 'mb_substr' ) && function_exists( 'mb_internal_encoding' );
         
         if ( ! self::$_bFunctionExists_mb_substr ) {
             return substr( $sString, $iStart, $iLength );
         }
         
-        $sEncoding = isset( $sEncoding ) ? $sEncoding : mb_internal_encoding();
+        $sEncoding = isset( $sEncoding ) 
+            ? $sEncoding 
+            : mb_internal_encoding();
+            
         return mb_substr( $sString, $iStart, $iLength, $sEncoding );
         
     }

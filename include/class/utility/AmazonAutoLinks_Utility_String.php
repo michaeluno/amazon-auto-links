@@ -36,10 +36,17 @@ class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_
      * @since       3           Moved from `AmazonAutoLinks_Utility`
      * @return      string
      */
-    static public function getTrancatedString( $sString, $iLength, $sSuffix='...' ) {        
+    static public function getTrancatedString( $sString, $iLength, $sSuffix='...' ) {
+        
         return ( self::getStringLength( $sString ) > $iLength )
-            ? substr( $sString, 0, $iLength - self::getStringLength( $sSuffix ) ) . $sSuffix
+            ? self::getSubstring( 
+                    $sString, 
+                    0, 
+                    $iLength - self::getStringLength( $sSuffix )
+                ) . $sSuffix
+                // ? substr( $sString, 0, $iLength - self::getStringLength( $sSuffix ) ) . $sSuffix
             : $sString;
+            
     }
     
     /**
@@ -82,16 +89,22 @@ class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_
 
         self::$_bFunctionExists_mb_substr = isset( self::$_bFunctionExists_mb_substr )
             ? self::$_bFunctionExists_mb_substr
-            : function_exists( 'mb_substr' );
+            : function_exists( 'mb_substr' ) && function_exists( 'mb_internal_encoding' );
         
         if ( ! self::$_bFunctionExists_mb_substr ) {
             return substr( $sString, $iStart, $iLength );
         }
         
-        $sEncoding = isset( $sEncoding )    
+        $sEncoding = isset( $sEncoding )
             ? $sEncoding 
             : mb_internal_encoding();
-        return mb_substr( $sString, $iStart, $iLength, $sEncoding );
+            
+        return mb_substr( 
+            $sString, 
+            $iStart, 
+            $iLength, 
+            $sEncoding 
+        );
         
     }
          
