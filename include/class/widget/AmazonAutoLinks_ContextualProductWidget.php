@@ -69,20 +69,45 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
-            'AmazonAutoLinks_FormFields_Setting_ProductFilter',
             'AmazonAutoLinks_FormFields_Unit_Cache',
             'AmazonAutoLinks_FormFields_Unit_Template',
             'AmazonAutoLinks_FormFields_Widget_Visibility',
         );
-        foreach( $_aClasses as $_sClsssName ) {            
-            $_oFields = new $_sClsssName;
-            foreach( $_oFields->get() as $_aField ) {
-                $this->addSettingFields( $_aField );
-            }
-        }
+        $this->_addFieldsByFieldClass( $_aClasses );
+        
+        // Product filters
+        $this->addSettingSections(
+            array(
+                'section_id' => 'product_filters',
+            )
+        );
+      
+        // Set the target section.
+        $this->addSettingFields( 'product_filters' );
+        
+        // Add fields 
+        $this->_addFieldsByFieldClass(
+            array(
+                'AmazonAutoLinks_FormFields_Setting_ProductFilter',
+            )
+        );
         
     }
-
+        /**
+         * Adds form fields by the given class names.
+         * @since       3.0.3
+         * @return      void
+         */
+        private function _addFieldsByFieldClass( $aClassNames ) {
+            
+            foreach( $aClassNames as $_sClsssName ) {            
+                $_oFields = new $_sClsssName;
+                foreach( $_oFields->get() as $_aField ) {
+                    $this->addSettingFields( $_aField );
+                }
+            }            
+            
+        }
     
     /**
      * Validates the submitted form data.
@@ -105,10 +130,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      */
     public function content( $sContent, $aArguments, $aFormData ) {
         
-        // @todo finish the formatting method.
         $aFormData = $this->_getFormattedFormData( $aFormData );    
-// var_dump( '$aFormData' );
-// var_dump( $aFormData );
+
         if ( 
             ! in_array( 
                 AmazonAutoLinks_PluginUtility::getCurrentPageType(), 

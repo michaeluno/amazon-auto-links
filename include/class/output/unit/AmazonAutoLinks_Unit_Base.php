@@ -91,12 +91,12 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         $this->bIsSSL               = is_ssl();        
         $this->oDOM                 = new AmazonAutoLinks_DOM;
         $this->oEncrypt             = new AmazonAutoLinks_Encrypt;
-        
+
         $this->oGlobalProductFilter = new AmazonAutoLinks_ProductFilter(
             $this->getAsArray(
                 $this->oOption->get( 'product_filters' )
             )
-        );
+        );     
         $this->oUnitProductFilter   = new AmazonAutoLinks_ProductFilter(
             $this->getAsArray( 
                 $this->oUnitOption->get( 'product_filters' ) 
