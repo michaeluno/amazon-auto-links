@@ -30,7 +30,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         'relative_dir_path' => null,  // (string)
         'id'                => null,  // (string)
         'old_id'            => null,  // (string) v2 id (strID)
-        'is_active'         => null,  // (booean)
+        'is_active'         => null,  // (boolean)
         'index'             => null,  // (integer)
         'name'              => null,  // (string)   will be used to list templates in options.
         
@@ -155,6 +155,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             
             if ( ! $_aActiveTemplate[ 'is_active' ] ) {
                 continue;
+            }
+            
+            // Backward compatibility for the v2 options structure.
+            if ( $_sID !== $_aActiveTemplate[ 'relative_dir_path' ] ) {
+                unset( $_aActiveTemplates[ $_sID ] );
+                $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] = $_aActiveTemplate[ 'relative_dir_path' ];
             }
             
             $_aActiveTemplate[ 'is_active' ] = true;

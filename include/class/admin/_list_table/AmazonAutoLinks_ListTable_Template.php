@@ -151,11 +151,12 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      */         
     public function column_thumbnail( $aItem ) {
         
-        if ( ! file_exists( $aItem[ 'thumbnail_path' ] ) ) {
+        $_sThumbNamilPath = $this->_getThumbnailPath( $aItem );
+        if ( ! file_exists( $_sThumbNamilPath ) ) {
             return '';
         }
         $_sImageURL = esc_url(
-            AmazonAutoLinks_WPUtility::getSRCFromPath( $aItem[ 'thumbnail_path' ] )
+            AmazonAutoLinks_WPUtility::getSRCFromPath( $_sThumbNamilPath )
         );
         return "<a class='template-thumbnail' href='#thumb'>"
                 . "<img src='{$_sImageURL}' style='max-width:80px; max-height:80px;' />"
@@ -167,6 +168,24 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 . "</span>"
             . "</a>";       
     }
+        /**
+         * @since       3.0.3
+         * @return      string
+         */
+        private function _getThumbnailPath( $aItem ) {
+            
+            if ( isset( $aItem[ 'thumbnail_path' ] ) ) {
+                return $aItem[ 'thumbnail_path' ];
+            }
+            
+            // backward compatibility for v2
+            if ( isset( $aItem[ 'strThumbnailPath' ] ) ) {
+                return $aItem[ 'strThumbnailPath' ];
+            }
+            
+            return '';
+            
+        }
         
     /**
      * 

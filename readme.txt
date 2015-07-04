@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
 Tested up to:       4.2.2
-Stable tag:         3.0.1
+Stable tag:         3.0.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.0.3 - 07/25/2015 =
+- Fixed an issue that templates inherited from v2 options were listed twice in the template listing table.
 
 = 3.0.2 - 07/04/2015 =
 - Fixed an issue that templates were not properly loaded if the user did not upgrade the options to v3.
