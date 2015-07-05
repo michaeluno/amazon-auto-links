@@ -158,9 +158,21 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             }
             
             // Backward compatibility for the v2 options structure.
-            if ( $_sID !== $_aActiveTemplate[ 'relative_dir_path' ] ) {
+            // If the id is not a relative dir path,
+            if ( 
+                $_sID !== $_aActiveTemplate[ 'relative_dir_path' ] 
+            ) {
+                
+                // Remove the old item.
                 unset( $_aActiveTemplates[ $_sID ] );
-                $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] = $_aActiveTemplate[ 'relative_dir_path' ];
+                
+                // If the same ID already exists, set the old id.
+                if ( isset( $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] ) ) {
+                    $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ][ 'old_id' ] = $_sID;
+                } else {                    
+                    $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] = $_aActiveTemplate[ 'relative_dir_path' ];
+                }
+                
             }
             
             $_aActiveTemplate[ 'is_active' ] = true;
