@@ -36,6 +36,26 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_New extends AmazonAutoLinks
      
     }    
         
+    /**
+     * Form field validation.
+     * 
+     * @callback        validation_{page slug}_{tab_slug}
+     */
+    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
+        
+        $_aInput = parent::validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo );
+        $_sURL   = add_query_arg(
+            array(
+                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
+            ),
+            admin_url( 'edit.php' )
+        );
+        exit(
+            wp_redirect( $_sURL )
+        );
+        
+    }       
+        
         /**
          * 
          * 

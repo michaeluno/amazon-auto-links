@@ -33,12 +33,12 @@ class AmazonAutoLinks_FormFields_AutoInsert_Save extends AmazonAutoLinks_FormFie
                         'style' => 'float:right; clear:none; display: inline;',
                     ),
                 ),         
-                'redirect_url'      => add_query_arg(
-                    array(
-                        'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
-                    ),
-                    admin_url( 'edit.php' )
-                ),
+                // 'redirect_url'      => add_query_arg(
+                    // array(
+                        // 'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
+                    // ),
+                    // admin_url( 'edit.php' )
+                // ),
             )    
         );
     }

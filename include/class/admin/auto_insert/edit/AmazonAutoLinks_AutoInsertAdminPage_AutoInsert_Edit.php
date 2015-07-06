@@ -113,8 +113,6 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             $this->getSanitizedAutoInsertMeta( $aInput )
         );                            
                
-        // The 'redirect' submit field will send the user 
-        // to the listing table page.
         return $aInput;
         
     }
