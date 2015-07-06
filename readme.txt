@@ -175,6 +175,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 3.0.4 - 07/07/2015 =
 - Changed debug methods not to function when the site debug mode is off.
+- Changed not to redirect the user to the listing table page after editing an auto-insert definition.
 - Fixed strict standard PHP warnings.
 
 = 3.0.3 - 07/05/2015 =
