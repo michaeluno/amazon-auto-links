@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
 Tested up to:       4.2.2
-Stable tag:         3.0.2
+Stable tag:         3.0.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,7 +173,11 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.0.3 - 07/25/2015 =
+= 3.0.4 - 07/07/2015 =
+- Changed debug methods not to function when the site debug mode is off.
+- Fixed strict standard PHP warnings.
+
+= 3.0.3 - 07/05/2015 =
 - Fixed a bug in the contextual product widget that product filter options did not take effect.
 - Fixed a bug that setting `0` for the `Max Image Size for Sub-images` option did not disable the images.
 - Fixed a bug that templates inherited from v2 options were listed twice in the template listing table.

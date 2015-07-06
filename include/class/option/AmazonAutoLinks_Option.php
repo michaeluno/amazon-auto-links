@@ -188,6 +188,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return      boolean
      */
     public function isDebug() {
+        if ( ! self::isDebugModeEnabled() ) {
+            return false;
+        }                
         return ( boolean ) $this->get( 
             'debug', 
             'debug_mode' 
