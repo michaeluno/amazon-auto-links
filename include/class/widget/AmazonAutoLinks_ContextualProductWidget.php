@@ -98,15 +98,13 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @since       3.0.3
          * @return      void
          */
-        private function _addFieldsByFieldClass( $aClassNames ) {
-            
+        private function _addFieldsByFieldClass( $aClassNames ) {     
             foreach( $aClassNames as $_sClsssName ) {            
                 $_oFields = new $_sClsssName;
                 foreach( $_oFields->get() as $_aField ) {
                     $this->addSettingFields( $_aField );
                 }
             }            
-            
         }
     
     /**
@@ -184,7 +182,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 array_filter( $aFormData[ 'available_page_types' ] ) 
             );
             
-            $_oOption = AmazonAutoLinks_Option::getInstance();
+            // $_oOption = AmazonAutoLinks_Option::getInstance();
             $aFormData[ 'show_errors' ] = false; // $_oOption->isDebug();
             
             return $aFormData;

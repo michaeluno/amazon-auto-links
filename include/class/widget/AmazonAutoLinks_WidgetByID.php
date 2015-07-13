@@ -62,8 +62,28 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
            
         );        
 
+        // Additional fields 
+        $this->_addFieldsByFieldClass(
+            array(
+                'AmazonAutoLinks_FormFields_Widget_Visibility',
+            )
+        );        
         
     }
+        /**
+         * Adds form fields by the given class names.
+         * @since       3.0.5
+         * @return      void
+         */
+        private function _addFieldsByFieldClass( $aClassNames ) {     
+            foreach( $aClassNames as $_sClsssName ) {            
+                $_oFields = new $_sClsssName;
+                foreach( $_oFields->get() as $_aField ) {
+                    $this->addSettingFields( $_aField );
+                }
+            }            
+        }
+        
         /**
          * @return  array
          */
@@ -94,13 +114,57 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
      */
     public function content( $sContent, $aArguments, $aFormData ) {
         
+        $aFormData = $this->_getFormattedFormData( $aFormData );    
+        
+        if ( 
+            ! in_array( 
+                AmazonAutoLinks_PluginUtility::getCurrentPageType(), 
+                $aFormData[ 'available_page_types' ] 
+            )
+        ) {
+            $this->oProp->bShowWidgetTitle = false;
+            return $sContent;
+        }                
+        
         return $sContent
             . AmazonAutoLinks( 
                 $aFormData, 
-                false // echo or output
-            )
-            ;
+                false // echo or retrun
+            );
     
     }
-        
+
+        /**
+         * 
+         * @since       3.0.5
+         * @return      array
+         */
+        private function _getFormattedFormData( array $aFormData ) {
+            $aFormData = $aFormData + array(
+                'title'                     => null,
+                'width'                     => 100,
+                'width_unit'                => '%',
+                'height'                    => 400,
+                'height_unit'               => 'px',
+                'available_page_types'      => array(
+                    'singular'          => true,
+                    'post_type_archive' => false,
+                    'taxonomy'          => false,
+                    'date'              => false,
+                    'author'            => false,
+                    'search'            => false,
+                    '404'               => false,
+                ),
+            );
+            $aFormData[ 'available_page_types' ] = array_keys( 
+                array_filter( $aFormData[ 'available_page_types' ] ) 
+            );
+            
+            // $_oOption = AmazonAutoLinks_Option::getInstance();
+            $aFormData[ 'show_errors' ] = false; // $_oOption->isDebug();
+            
+            return $aFormData;
+            
+        }        
+    
 }

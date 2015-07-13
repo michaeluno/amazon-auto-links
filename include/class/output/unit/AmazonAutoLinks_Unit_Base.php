@@ -153,6 +153,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
      * 
      * The template key is a user friendly one and it should point to the name of the template. If multiple names exist, the first item will be used.
      * 
+     * @return      string
      */
     protected function getTemplatePath( $aArguments ) {
 
@@ -224,12 +225,13 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
     /**
      * Gets the output of product links by specifying a template.
      * 
+     * @remark      The local variables defined in this method will be accessible in the template file.
      */
     public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
         
         $aOptions      = $this->oOption->aOptions; 
         
-        // this lets the template file to access the local $arrArgs variable.
+        // Let the template file to access the local $arrArgs variable.
         $aArguments    = $this->oUnitOption->get();
         
         $aProducts     = $this->fetch( $aURLs );
@@ -241,8 +243,8 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
             "aal_filter_template_path", 
             isset( $sTemplatePath ) 
                 ? $sTemplatePath 
-                : $this->getTemplatePath( $this->oUnitOption->get() ),
-            $this->oUnitOption->get()
+                : $this->getTemplatePath( $aArguments ),
+            $aArguments
         );
                 
         // Capture the output buffer
@@ -253,9 +255,9 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         $arrOptions    = $aOptions;
         $arrProducts   = $aProducts;        
         
-        if ( file_exists( $sTemplatePath ) ) {
-            include( $sTemplatePath ); 
-        } else {
+        // Not using include_once() because templates can be loaded multiple times.
+        $_bLoaded      = @include( $sTemplatePath );
+        if ( ! $_bLoaded ) {
             echo '<p>' 
                 . AmazonAutoLinks_Registry::NAME 
                 . ': ' . __( 'the template could not be found. Try reselecting the template in the unit option page.', 'amazon-auto-links' )
@@ -285,8 +287,8 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
     }      
         /**
          * Checks whether response has an error.
-         * @return      boolean
          * @since       3
+         * @return      boolean
          */
         protected function _isError( $aProducts ) {
             return empty( $aProducts );

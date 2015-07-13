@@ -21,21 +21,21 @@ If you want to search a specific product, yes you can do that too.
 If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
 = Features =
-* **Supports all Amazon locales** - Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supporeted as well.
-* **Automatic insertion in posts and feeds** - Just check where you want the product links to appear. If you want the product link to be static, just check that option.
-* **Widget** - Just put it in the sidebar and select the unit you created. The product links will appear in where you wanted.
-* **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
-* **Works without JavaScript** - Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works.
-* **Random/Title/Date sort order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
-* **Shortcode** - Insert the ads in posts and pages. 
-* **PHP function** - Insert the ads in the theme template.
-* **Blacklist and Whitelist** - If you want certain products not to be shown, black and white lists can be set by ASIN, substring of title and description.
-* **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
-* **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
-* **Templates** - You can design the output with the template system.
+- **Supports all Amazon locales** - Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supporeted as well.
+- **Automatic insertion in posts and feeds** - Just check where you want the product links to appear. If you want the product link to be static, just check that option.
+- **Widget** - Just put it in the sidebar and select the unit you created. The product links will appear in where you wanted. Supports widget types by unit and context.
+- **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
+- **Works without JavaScript** - Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works.
+- **Random/Title/Date sort order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
+- **Shortcode** - Insert the ads in posts and pages. 
+- **PHP function** - Insert the ads in the theme template.
+- **Blacklist and Whitelist** - If you want certain products not to be shown, black and white lists can be set by ASIN, substring of title and description.
+- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
+- **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
+- **Templates** - You can design the output with the template system.
   
 = Supported Language =
-* Japanese  
+- Japanese  
   
 == Installation ==
 
@@ -173,7 +173,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.0.5 =
+= 3.0.5 - 07/14/2015 =
+- Added visibility options to the widget by unit.
 - Fixed a credit link that pointed the plugin directory which occurs when the user does not update the options to v3.
 
 = 3.0.4 - 07/07/2015 =
