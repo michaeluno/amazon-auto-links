@@ -62,10 +62,25 @@ abstract class AmazonAutoLinks_Event_ {
         // URL Cloak
         $_sQueryKey = $GLOBALS['oAmazonAutoLinks_Option']->arrOptions['aal_settings']['query']['cloak'];
         if ( isset( $_GET[ $_sQueryKey ] ) ) {
-            $this->goToStore( $_GET[ $_sQueryKey ], $_GET );    
+            $this->_redirect( $_GET[ $_sQueryKey ] );
         }
 
     }
+        /**
+         * @since       3.0.5
+         */
+        private function _redirect( $sQueryValue ) {
+            
+            if ( 'vendor' === $sQueryValue ) {
+                exit( 
+                    wp_redirect( AmazonAutoLinks_Commons::URI ) 
+                );
+            }
+            
+            $this->goToStore( $sQueryValue, $_GET );
+            
+            exit();
+        }
 
     public function _replyToRenewAPITransients( $arrRequestInfo ) {
 
@@ -101,8 +116,6 @@ abstract class AmazonAutoLinks_Event_ {
         // Set the background flag to True so that it won't trigger the event action recursively.
         $oFeed->setBackground( true );
         $oFeed->init();    
-
-// AmazonAutoLinks_Debug::logArray( $vURLs, dirname( __FILE__ ) . '/cache_renewals.txt' );    
         
     }
     
@@ -114,8 +127,8 @@ abstract class AmazonAutoLinks_Event_ {
         
         $aArgs = $aArgs + array(
             'locale' => null,
-            'tag' => null,
-            'ref' => null,
+            'tag'    => null,
+            'ref'    => null,
         );
         
         // http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
@@ -123,13 +136,16 @@ abstract class AmazonAutoLinks_Event_ {
             ? AmazonAutoLinks_Properties::$arrCategoryRootURLs[ strtoupper( $aArgs['locale'] ) ]
             : AmazonAutoLinks_Properties::$arrCategoryRootURLs['US'];
         
-        $_aURLelem = parse_url( $_sURL );
+        $_aURLelem  = parse_url( $_sURL );
         $_sStoreURL = $_aURLelem['scheme'] . '://' . $_aURLelem['host'] 
             . '/dp/ASIN/' . $sASIN . '/' 
             . ( empty( $aArgs['ref'] ) ? '' : 'ref=nosim' )
             . "?tag={$aArgs['tag']}";
-        
-        die( wp_redirect( apply_filters( 'aal_filter_store_redirect_url', $_sStoreURL ) ) );
+        exit( 
+            wp_redirect( 
+                apply_filters( 'aal_filter_store_redirect_url', $_sStoreURL ) 
+            ) 
+        );
                 
     }
     

@@ -397,11 +397,20 @@ abstract class AmazonAutoLinks_Unit {
         return apply_filters( "aal_filter_unit_output", $strContent . $this->getCredit( $this->arrArgs['credit_link'] ), $arrArgs );
         
     }        
-        protected function getCredit( $fEnabled=true ) {
+        /**
+         * @return      string
+         */
+        protected function getCredit( $bEnabled=true ) {
             
+            $_sQueryKey  = $GLOBALS[ 'oAmazonAutoLinks_Option' ]->arrOptions[ 'aal_settings' ][ 'query' ][ 'cloak' ];
+            $_sVendorURL = site_url( "?{$_sQueryKey}=vendor" );
             return "<!-- Rendered with Amazon Auto Links by miunosoft -->"
-                . ( $fEnabled 
-                    ? "<span class='amazon-auto-links-credit'>by <a href='" . esc_url( AmazonAutoLinks_Commons::getPluginURL() ) . "' rel='author' title='" . esc_attr( AmazonAutoLinks_Commons::$strPluginDescription ) . "'>Amazon Auto Links</a></span>"
+                . ( $bEnabled
+                    ? "<span class='amazon-auto-links-credit'>"
+                            . "by <a href='" . esc_url( $_sVendorURL ) . "' rel='author' title='" . esc_attr( AmazonAutoLinks_Commons::$strPluginDescription ) . "'>"
+                                . AmazonAutoLinks_Commons::Name
+                            . "</a>"
+                        . "</span>"
                     : "" 
                 );
             
