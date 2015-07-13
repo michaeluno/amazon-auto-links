@@ -66,6 +66,7 @@ $aClassFiles = array(
 	"AmazonAutoLinks_AdminPageFramework_WPUtility_URL"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/utility/AdminPageFramework_WPUtility/AdminPageFramework_WPUtility_URL.php", 
 	"AmazonAutoLinks_AdminPageFramework_FieldTypeRegistration"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_FieldTypeRegistration.php", 
 	"AmazonAutoLinks_AdminPageFramework_PageLoadInfo_Base"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_PageLoadInfo_Base.php", 
+	"AmazonAutoLinks_AdminPageFramework_TabNavigationBar"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_TabNavigationBar.php", 
 	"AmazonAutoLinks_AdminPageFramework_FieldType"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_FieldType/AdminPageFramework_FieldType.php", 
 	"AmazonAutoLinks_AdminPageFramework_FieldType_Base"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_FieldType/AdminPageFramework_FieldType_Base.php", 
 	"AmazonAutoLinks_AdminPageFramework_FieldType_checkbox"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/AdminPageFramework_Factory/view/AdminPageFramework_FieldType/AdminPageFramework_FieldType_checkbox.php", 
