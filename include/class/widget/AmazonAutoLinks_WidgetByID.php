@@ -10,7 +10,7 @@
 /**
  * Creates a widget by unit.
  * 
- * @since   3
+ * @since       3
  * @remark      The class name is important as it is used as the widget ID. 
  * And the name `AmazonAutoLinks_WidgetByID` is also used as the widget ID in v2.
  */

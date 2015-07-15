@@ -29,6 +29,7 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
             'template'              => __( 'Template', 'amazon-auto-links' ),
             'amazon_auto_links_tag' => __( 'Labels', 'amazon-auto-links' ),  
             'code'                  => __( 'Shortcode / PHP Code', 'amazon-auto-links' ),
+            'feed'                  => __( 'Feed', 'amazon-auto-links' ), // 3.1.0+
         );                      
     }    
         
@@ -82,6 +83,7 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
     }
     /**
      * @callback        filter      cell_{post type slug}_{column key}
+     * @return          string
      */
     public function cell_amazon_auto_links_unit_type( $sCell, $iPostID ) {
         
@@ -94,6 +96,7 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
     }
     /**
      * @callback        filter      cell_{post type slug}_{column key}
+     * @return          string
      */
     public function cell_amazon_auto_links_template( $sCell, $iPostID ) {
         return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID( 
@@ -103,6 +106,7 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
     
     /**
      * @callback        filter      cell_{post type slug}_{column name}
+     * @return          string
      */
     public function cell_amazon_auto_links_code( $sCell, $iPostID ) {
         return '<p>'
@@ -111,4 +115,68 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
             . '</p>';
     }
 
+    /**
+     * @callback        filter      cell_{post type slug}_{column name}
+     * @return          string
+     */
+    public function cell_amazon_auto_links_feed( $sCell, $iPostID ) {
+           
+        // Feed by ID
+        $_aOutput   = array();
+        $_aOutput[] = "<p>"
+                . $this->_getFeedIcon( 
+                    'rss2', 
+                    __( 'RSS Feed by ID', 'amazon-auto-links' ), 
+                    'id', 
+                    $iPostID 
+                )
+                . $this->_getFeedIcon( 
+                    'json', 
+                    __( 'JSON Feed by ID', 'amazon-auto-links' ), 
+                    'id', 
+                    $iPostID 
+                ) 
+            . "</p>";
+        return implode( '', $_aOutput );
+        
+    }    
+        /**
+         * 
+         * @since       3.1.0
+         * @return      string
+         */
+        private function _getFeedIcon( $sType, $sLabel, $sKey, $mValue ) {
+            $_oOption     = AmazonAutoLinks_Option::getInstance();
+            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );                    
+            $_sImgURL     = AmazonAutoLinks_Registry::getPluginURL(                 
+                'rss2' === $sType 
+                    ? 'asset/image/rss16x16.gif'
+                    : 'asset/image/json16x16.gif'
+            );
+            return "<span class='feed-icon'>"
+                . $this->oUtil->generateHTMLTag(
+                    'a',
+                    array(
+                        'href'      => add_query_arg(
+                            array(
+                                $_sQueryKey => 'feed',
+                                'output'    => $sType,
+                                $sKey       => $mValue,
+                            ),
+                            site_url()
+                        ),
+                        'target'    => '_blank',
+                        'title'     => $sLabel,
+                    ),
+                    $this->oUtil->generateHTMLTag(
+                        'img',
+                        array(
+                            'src' => esc_url( $_sImgURL ),
+                            'alt' => $sLabel,
+                        )
+                    )
+                )
+                . "</span>";
+        }
+    
 }

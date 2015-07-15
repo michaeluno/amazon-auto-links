@@ -14,6 +14,86 @@
  * @since       3       
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
+    
+    /**
+     * Returns the HTML credit comment.
+     * @since       3.1.0
+     * @return      string
+     */
+    static public function getCommentCredit() {
+        return '<!-- Rendered with Amazon Auto Links by miunosoft -->';
+    }
+    
+    /**
+     * Returns a list of labels (unit taxonomy) associated with the given unit id.
+     * @since       3.1.0
+     * @return      string
+     */
+    static public function getReadableLabelsByUnitID( $iUnitID ) {
+        $_aboTerms = get_the_terms( 
+            $iUnitID, 
+            AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ]
+        );
+        if ( ! is_array( $_aboTerms ) ) {
+            return '';
+        }
+        $_aTermLabels = array();
+        foreach( $_aboTerms as $_oTerm ) {
+            $_aTermLabels[] = $_oTerm->name;
+        }
+        return implode( ', ', $_aTermLabels );
+    }
+    
+    /**
+     * @since       3.1.0
+     * @return      string      comma-delimited readable unit labels.
+     */
+    static public function getReadableLabelsByLabelID( $asTermIDs ) {
+
+        $_aTermIDs = is_array( $asTermIDs )
+            ? $asTermIDs
+            : self::convertStringToArray( $asTermIDs, ',' );
+    
+        $_aTermLabels = array();
+        foreach( $_aTermIDs as $_iTermID ) {
+            $_oTerm = get_term_by( 
+                'id', 
+                absint( $_iTermID ), 
+                AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ]
+            );
+            $_aTermLabels[] = $_oTerm->name;
+        }
+    
+        return implode( ', ', $_aTermLabels );
+        
+    }
+    
+    
+    /**
+     * 
+     * @since       3.1.0
+     * @return      string       comma-delimited unit label ids.
+     */
+    static public function getLabelIDsByUnitID( $iUnitID ) {
+        
+        // Get the genres for the post.
+        $_abTerms = get_the_terms( 
+            $iUnitID, 
+            AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ] 
+        );
+        
+        $_aTerms  = self::getAsArray( $_abTerms );
+
+        // Iterate each term, linking to the 'edit posts' page for the specific term. 
+        $_aOutput = array();
+        foreach ( $_aTerms as $_oTerm ) {
+            $_aOutput[] = $_oTerm->term_id;
+        }
+
+        // Join the terms, separating them with a comma.
+        return implode( ',', $_aOutput );
+        
+    }
 
     /**
      * Returns an array holding unit type labels.
@@ -166,31 +246,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $sImgURL
         );
     }
-
-    /**
-     * Schedules a pre-fetch task.
-     * @since       3
-     * @return      void
-     * @deprecated
-     */
-/*     static public function schedulePrefetch( $iPostID ) {
-        
-        if ( ! $iPostID ) {
-            return;
-        }
-        
-        // Schedules the action to run in the background with WP Cron.
-        if ( wp_next_scheduled( 'aal_action_unit_prefetch', array( $iPostID ) ) ) { 
-            return;        
-        }
-        wp_schedule_single_event( 
-            time(), // scheduling time
-            'aal_action_unit_prefetch', // action name
-            array( $iPostID )       // arguments
-        );            
-        
-    }
- */
 
     /**
      * Creates an auto-insert.

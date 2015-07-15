@@ -143,6 +143,21 @@ class AmazonAutoLinks_PostType extends AmazonAutoLinks_PostType_PostContent {
             #post-query-submit {
                 display: {$_sNone};
             }            
+            /* List Table Columns */
+            .column-unit_type, 
+            .column-template,
+            .column-feed {
+                width:10%; 
+            }
+            /* Feed column */
+            .column-feed { 
+                text-align: center 
+            }
+            .feed-icon {
+                display: inline-block;
+                margin-top: 0.4em;
+                margin-right: 0.8em;
+            }
         ";
     }
 }

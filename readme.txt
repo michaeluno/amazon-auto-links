@@ -173,6 +173,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.1.0 =
+- Added the ability to produce RSS and JSON feeds by unit id.
+
 = 3.0.5 - 07/14/2015 =
 - Added visibility options to the widget by unit.
 - Fixed a credit link that pointed the plugin directory which occurs when the user does not update the options to v3.

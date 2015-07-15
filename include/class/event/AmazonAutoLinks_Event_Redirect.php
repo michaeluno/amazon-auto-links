@@ -19,25 +19,18 @@ class AmazonAutoLinks_Event_Redirect {
     /**
      * Routes url requests.
      * @since       3
+     * @since       3.0.1       Added the `$sQueryKey` parameter.
      */
-    public function __construct() {
-        
-        $_oOption     = AmazonAutoLinks_Option::getInstance();
-        $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
-        if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
-            return;
-        }
+    public function __construct( $sQueryKey ) {
        
         // At this point, it is a cloaked url.
-        $_sQueryValue = $_GET[ $_sQueryKey ];
+        $_sQueryValue = $_GET[ $sQueryKey ];
        
         if ( 'vendor' === $_sQueryValue ) {
             $this->_goToVendor();
         }
         
-        $this->_goToStore( $_GET[ $_sQueryKey ], $_GET );    
-        
-        exit();
+        $this->_goToStore( $_GET[ $sQueryKey ], $_GET );    
         
     }
 

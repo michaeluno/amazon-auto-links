@@ -81,8 +81,28 @@ class AmazonAutoLinks_Event {
             }
         }
               
-        new AmazonAutoLinks_Event_Redirect;
-
+        $this->_handleQueryURL();
+        
     }
+        /**
+         * 
+         * @since       3.1.0
+         */
+        private function _handleQueryURL() {
+            
+            $_oOption     = AmazonAutoLinks_Option::getInstance();
+            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
+            if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
+                return;
+            }
+            
+            if ( 'feed' === $_GET[ $_sQueryKey ] ) {
+                new AmazonAutoLinks_Event_Feed;
+                return;
+            }
+            
+            new AmazonAutoLinks_Event_Redirect( $_sQueryKey );
+            
+        }    
     
 }

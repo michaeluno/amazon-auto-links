@@ -127,6 +127,7 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_DatabaseTable_product"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/database/AmazonAutoLinks_DatabaseTable_product.php", 
 	"AmazonAutoLinks_DatabaseTable_request_cache"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/database/AmazonAutoLinks_DatabaseTable_request_cache.php", 
 	"AmazonAutoLinks_Event"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/event/AmazonAutoLinks_Event.php", 
+	"AmazonAutoLinks_Event_Feed"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/event/AmazonAutoLinks_Event_Feed.php", 
 	"AmazonAutoLinks_Event_HTTPCacheRenewal"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/event/AmazonAutoLinks_Event_HTTPCacheRenewal.php", 
 	"AmazonAutoLinks_Event_Redirect"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/event/AmazonAutoLinks_Event_Redirect.php", 
 	"AmazonAutoLinks_Event_Scheduler"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/event/AmazonAutoLinks_Event_Scheduler.php", 

@@ -100,7 +100,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
         $_aOutputs  = array();
         $_aIDs      = array_unique( $_aIDs );
-        
+
         // If called by unit,
         if ( ! empty( $_aIDs ) ) {
             foreach( $_aIDs as $_iID ) {            
@@ -140,6 +140,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                 + array( 
                     'unit_type' => null,
                 );    
+
             return $this->_getOutputByUnitType( 
                 $_aUnitOptions[ 'unit_type' ],
                 $_aUnitOptions 

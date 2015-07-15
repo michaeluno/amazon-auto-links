@@ -228,7 +228,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
      * @remark      The local variables defined in this method will be accessible in the template file.
      */
     public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
-        
+
         $aOptions      = $this->oOption->aOptions; 
         
         // Let the template file to access the local $arrArgs variable.
@@ -246,7 +246,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
                 : $this->getTemplatePath( $aArguments ),
             $aArguments
         );
-                
+
         // Capture the output buffer
         ob_start(); 
                 
@@ -256,14 +256,18 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         $arrProducts   = $aProducts;        
         
         // Not using include_once() because templates can be loaded multiple times.
-        $_bLoaded      = @include( $sTemplatePath );
+        
+        $_bLoaded      = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? include( $sTemplatePath )
+            : @include( $sTemplatePath );
+            
         if ( ! $_bLoaded ) {
             echo '<p>' 
                 . AmazonAutoLinks_Registry::NAME 
                 . ': ' . __( 'the template could not be found. Try reselecting the template in the unit option page.', 'amazon-auto-links' )
             . '</p>';
         }
-        
+
         if ( $this->oOption->isDebug() && ! $this->oUnitOption->get( 'is_preview' ) ) {
             $this->_printDebugInfo(
                 $sTemplatePath,
@@ -274,7 +278,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         }        
         $_sContent = ob_get_contents(); 
         ob_end_clean(); 
-        
+    
         return apply_filters( 
             "aal_filter_unit_output", 
             $_sContent . $this->_getCredit(), 
@@ -298,7 +302,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
          */
         protected function _getCredit() {            
                         
-            $_sHTMLCOmment = "<!-- Rendered with Amazon Auto Links by miunosoft -->";
+            $_sHTMLCOmment = AmazonAutoLinks_PluginUtility::getCommentCredit();
             if ( ! $this->oUnitOption->get( 'credit_link' ) ) {
                 return $_sHTMLCOmment;
             }
@@ -310,7 +314,8 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
                 ),
                 site_url()
             );
-            return "<span class='amazon-auto-links-credit'>by "
+            return $_sHTMLCOmment
+                . "<span class='amazon-auto-links-credit'>by "
                     ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author'>"
                         . AmazonAutoLinks_Registry::NAME
                     . "</a>"
