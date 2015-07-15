@@ -138,6 +138,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @since       3
      */
     static private $_aFunctionNamesWithSlugs = array(
+        // function name => page type slug
+        'is_home'               => 'home',
+        'is_front_page'         => 'front',    
         'is_singular'           => 'singular',
         'is_post_type_archive'  => 'post_type_archive',
         'is_tax'                => 'taxonomy',

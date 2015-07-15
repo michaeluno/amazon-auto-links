@@ -169,6 +169,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 'height'                    => 400,
                 'height_unit'               => 'px',
                 'available_page_types'      => array(
+                    'home'              => true,
+                    'front'             => true,                
                     'singular'          => true,
                     'post_type_archive' => false,
                     'taxonomy'          => false,

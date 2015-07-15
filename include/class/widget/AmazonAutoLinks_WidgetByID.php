@@ -75,11 +75,27 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
          * @since       3.0.5
          * @return      void
          */
-        private function _addFieldsByFieldClass( $aClassNames ) {     
+        private function _addFieldsByFieldClass( $aClassNames ) {    
+        
             foreach( $aClassNames as $_sClsssName ) {            
                 $_oFields = new $_sClsssName;
                 foreach( $_oFields->get() as $_aField ) {
+                    
+                    $_aField = $_aField + array(
+                       'field_id' => null,
+                    );
+                    
+                    // Modify a field 
+                    if ( 'available_page_types' === $_aField[ 'field_id' ] ) {
+                        $_aField[ 'default' ] = array(
+                            'home'              => true,
+                            'front'             => true,
+                        ) + $_aField[ 'default' ];
+                    }
+                    
+                    // Add the iterating field
                     $this->addSettingFields( $_aField );
+                    
                 }
             }            
         }
@@ -147,6 +163,8 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
                 'height'                    => 400,
                 'height_unit'               => 'px',
                 'available_page_types'      => array(
+                    'home'              => true,
+                    'front'             => true,
                     'singular'          => true,
                     'post_type_archive' => false,
                     'taxonomy'          => false,

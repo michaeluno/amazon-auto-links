@@ -175,6 +175,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 3.1.0 =
 - Added the ability to produce RSS and JSON feeds by unit id.
+- Added the home and front page criteria for the `Available Page Types` option in the widget form.
+- Fixed an issue that widget by unit could not be displayed in the front/home page, introduced in 3.0.5.
 
 = 3.0.5 - 07/14/2015 =
 - Added visibility options to the widget by unit.

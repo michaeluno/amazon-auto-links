@@ -59,6 +59,8 @@ class AmazonAutoLinks_FormFields_Widget_Visibility extends AmazonAutoLinks_FormF
                 'type'          => 'checkbox',
                 'title'         => __( 'Available Page Types', 'amazon-auto-links' ),
                 'label'         => array(
+                    'home'              => __( 'The home page.', 'amazon-auto-links' ),
+                    'front'             => __( 'The front page.', 'amazon-auto-links' ),
                     'singular'          => __( 'Single pages.', 'amazon-auto-links' ),
                     'post_type_archive' => __( 'Post type archive pages.', 'amazon-auto-links' ),
                     'taxonomy'          => __( 'Taxonomy archive pages.', 'amazon-auto-links' ),
@@ -68,6 +70,8 @@ class AmazonAutoLinks_FormFields_Widget_Visibility extends AmazonAutoLinks_FormF
                     '404'               => __( 'The 404 page.', 'amazon-auto-links' ),
                 ),
                 'default'       => array(
+                    'home'              => false,
+                    'front'             => false,
                     'singular'          => true,
                     'post_type_archive' => false,
                     'taxonomy'          => false,
