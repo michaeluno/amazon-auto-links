@@ -16,7 +16,7 @@
     overflow-y: auto;	
 	overflow-x: hidden;
     width: inherit;
-    padding-right: 0.8em;    
+    padding-right: 1em;    
 }
 .amazon-products-container a {
 	text-decoration: none;	
@@ -45,6 +45,9 @@
 
 
 /* Customer Reviews */
+.amazon-product-container .amazon-customer-reviews .reviewText {
+    word-break: break-all;
+}
 /* Rating stars */
 .amazon-product-container span.asinReviewsSummary > a > img,
 .amazon-product-container .amazon-customer-reviews img,

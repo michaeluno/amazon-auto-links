@@ -315,11 +315,11 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
                 site_url()
             );
             return $_sHTMLCOmment
-                . "<span class='amazon-auto-links-credit'>by "
-                    ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author'>"
+                ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author' target='_blank' style='border: none;'>"
+                    . "<div class='amazon-auto-links-credit' style='margin: 1em 0.4em; float: right; background-image: url(" . esc_url( AmazonAutoLinks_Registry::getPluginUrl( 'asset/image/menu_icon_16x16.png' ) ) . "); background-repeat:no-repeat; background-position: 0% 50%; padding-left: 20px; font-size: smaller;'>"
                         . AmazonAutoLinks_Registry::NAME
-                    . "</a>"
-                . "</span>";
+                    . "</div>"
+                . "</a>";
                 
         }
         
