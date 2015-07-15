@@ -49,7 +49,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 <?php foreach( $aProducts as $_aProduct ) : ?>
     <?php $_aProduct = $_aProduct + $_aStructure_Product; ?>
     <div class="amazon-product-container">
-        <?php echo $_aProduct['formatted_item']; ?>
+        <?php echo $_aProduct[ 'formatted_item' ]; ?>
     </div>
 <?php endforeach; ?>    
 </div>
