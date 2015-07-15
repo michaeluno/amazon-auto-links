@@ -8,25 +8,27 @@
  */
 
 $_aStructure_Product = array(
-	'product_url' => '',
-	'title' => '',
-	'text_description' => '',
-	'content' => '',
-	'description' => '',
-	'image_size' => '',
-	'product_url' => '',
-	'thumbnail_url' => '',	
-	'author' => '',
-	'ASIN' => '',
-	'date' => '',
+	'product_url'       => '',
+	'title'             => '',
+	'text_description'  => '',
+	'content'           => '',
+	'description'       => '',
+	'image_size'        => '',
+	'product_url'       => '',
+	'thumbnail_url'     => '',	
+	'author'            => '',
+	'ASIN'              => '',
+	'date'              => '',
 	'is_adult_product' 	=> '',
-	'price' => '',
-	'lowest_new_price' => '', 
+	'price'             => '',
+	'lowest_new_price'  => '', 
 	'lowest_used_price' => '',
 ); 
 
 $sClassAttributes_ProductsContainer = 'amazon-products-container-search' . ' amazon-unit-' . $aArguments['id'];
-$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] ) ? '' : ' amazon-label-' . implode( ' amazon-label-', $aArguments['_labels'] );
+$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] ) 
+    ? '' 
+    : ' amazon-label-' . implode( ' amazon-label-', $aArguments['_labels'] );
 
 $_sWidth  = AmazonAutoLinks_PluginUtility::getDegree( 'width', $aArguments );
 $_sWidth  = $_sWidth
@@ -56,7 +58,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 <?php foreach( $aProducts as $_aProduct ) : ?>
 	<?php $_aProduct = $_aProduct + $_aStructure_Product; ?>
 	<div class="amazon-product-container">
-		<?php echo $_aProduct['formatted_item']; ?>
+		<?php echo $_aProduct[ 'formatted_item' ]; ?>
 	</div>
 <?php endforeach; ?>	
 </div>
