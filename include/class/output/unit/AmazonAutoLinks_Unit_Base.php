@@ -255,13 +255,12 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         $arrOptions    = $aOptions;
         $arrProducts   = $aProducts;        
         
-        // Not using include_once() because templates can be loaded multiple times.
-        
-        $_bLoaded      = defined( 'WP_DEBUG' ) && WP_DEBUG
-            ? include( $sTemplatePath )
-            : @include( $sTemplatePath );
-            
-        if ( ! $_bLoaded ) {
+        if ( file_exists( $sTemplatePath ) ) {
+            // Not using include_once() because templates can be loaded multiple times.
+            $_bLoaded      = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? include( $sTemplatePath )
+                : @include( $sTemplatePath );            
+        } else {
             echo '<p>' 
                 . AmazonAutoLinks_Registry::NAME 
                 . ': ' . __( 'the template could not be found. Try reselecting the template in the unit option page.', 'amazon-auto-links' )

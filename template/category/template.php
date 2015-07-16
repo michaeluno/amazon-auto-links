@@ -33,7 +33,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 ?>
 <?php if ( empty( $aProducts ) ) : ?>
     <div><p><?php _e( 'No products found.', 'amazon-auto-links' ); ?></p></div>  
-    <?php return; ?>
+    <?php return true; ?>
 <?php endif; ?>    
 
 <?php if ( isset( $aProducts['Error']['Message'], $aProducts['Error']['Code'] ) ) : ?>    
@@ -42,7 +42,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
             <?php echo $aProducts['Error']['Code'] . ': '. $aProducts['Error']['Message']; ?>
         </p>
     </div>
-<?php return; ?>
+<?php return true; ?>
 <?php endif; ?>
     
 <div class="<?php echo $sClassAttributes_ProductsContainer; ?>" style="<?php echo $_sInlineStyle; ?>">
