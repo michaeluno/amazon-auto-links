@@ -1,5 +1,14 @@
 <?php
 /**
+ * Amazon Auto Links
+ * 
+ * 
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno; Licensed GPLv2
+ * 
+ */
+
+/**
  * Provides the definitions of form fields.
  * 
  * @since           3  
