@@ -52,7 +52,16 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
                 'title'         => __( 'Custom Query Key', 'amazon-auto-links' ),
             )
         );         
-        
+        new AmazonAutoLinks_AdminPage_Setting_General_ExternalScript( 
+            $oAdminPage,
+            $this->sPageSlug, 
+            array(
+                'section_id'    => 'external_scripts',
+                'tab_slug'      => $this->sTabSlug,
+                'title'         => __( 'External Scripts', 'amazon-auto-links' ),
+            )
+        );              
+     
     }
     
     public function replyToDoTab( $oFactory ) {

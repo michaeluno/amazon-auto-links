@@ -63,23 +63,27 @@ class AmazonAutoLinks_Unit_tag extends AmazonAutoLinks_Unit_category {
      */
     protected function _getRSSURLsFromArguments( $aArguments, $_deprecated=null ) {
         
-        $aRSSURLs = array();
-        $sScheme  = $this->bIsSSL ? 'https' : 'http';
-        $aTags    = $this->convertStringToArray( $aArguments[ 'tags' ], "," );
+        $aRSSURLs           = array();
+        $sScheme            = $this->bIsSSL ? 'https' : 'http';
+        $aTags              = $this->convertStringToArray( $aArguments[ 'tags' ], "," );
+        $_sDummyAssociateID = 'amazon-auto-links-20';
         
         // If the customer ID is provided, compose the URL for it first.
         if ( $aArguments[ 'customer_id' ] ) {
             
             if ( ! $aArguments[ 'tags' ] || empty( $aTags ) ) {
-                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products?tag={$aArguments[ 'associate_id' ]}";
+                // $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products?tag={$aArguments[ 'associate_id' ]}";
+                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products?tag={$_sDummyAssociateID}";
                 return $aRSSURLs;
             }
             
             foreach( $aTags as $sTag ) {                
                 $sTag = strtolower( $sTag );
-                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products/{$sTag}?tag={$aArguments[ 'associate_id' ]}&threshold={$aArguments[ 'threshold' ]}";                
+                // $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products/{$sTag}?tag={$aArguments[ 'associate_id' ]}&threshold={$aArguments[ 'threshold' ]}";                
+                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/people/{$aArguments[ 'customer_id' ]}/products/{$sTag}?tag={$_sDummyAssociateID}&threshold={$aArguments[ 'threshold' ]}";                
             }
             return $aRSSURLs;
+            
         }
         
         // So there is a tag set by the user.
@@ -93,7 +97,8 @@ class AmazonAutoLinks_Unit_tag extends AmazonAutoLinks_Unit_category {
                 }
                 
                 // $sType : new, popular, or recent
-                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/tag/{$sTag}/{$sType}?tag={$aArguments[ 'associate_id' ]}&threshold={$aArguments[ 'threshold' ]}";
+                // $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/tag/{$sTag}/{$sType}?tag={$aArguments[ 'associate_id' ]}&threshold={$aArguments[ 'threshold' ]}";
+                $aRSSURLs[] = "{$sScheme}://www.amazon.com/rss/tag/{$sTag}/{$sType}?tag={$_sDummyAssociateID}&threshold={$aArguments[ 'threshold' ]}";
                 
             }
                     

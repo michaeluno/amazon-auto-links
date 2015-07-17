@@ -256,10 +256,15 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         $arrProducts   = $aProducts;        
         
         if ( file_exists( $sTemplatePath ) ) {
+            
             // Not using include_once() because templates can be loaded multiple times.
             $_bLoaded      = defined( 'WP_DEBUG' ) && WP_DEBUG
                 ? include( $sTemplatePath )
-                : @include( $sTemplatePath );            
+                : @include( $sTemplatePath ); 
+                
+            // Enqueue the impression counter script.
+            $this->_enqueueImpressionCounter();
+            
         } else {
             echo '<p>' 
                 . AmazonAutoLinks_Registry::NAME 
@@ -288,6 +293,45 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
         );
         
     }      
+        /**
+         * Stores the locales of the impression counter scripts to insert.
+         * @since       3.1.0
+         */
+        static private $_aImressionCounterSciptLocales = array();
+        /*
+         * Enqueues the impression counter script.
+         * @since       3.1.0
+         */
+        private function _enqueueImpressionCounter() {
+            
+            if ( ! $this->oOption->get( 'external_scripts', 'impression_counter_script' ) ) {
+                return;
+            }
+            $_sLocale = $this->oUnitOption->get( 'country' );
+            self::$_aImressionCounterSciptLocales[ $_sLocale ] = isset( self::$_aImressionCounterSciptLocales[ $_sLocale ] )
+                ? self::$_aImressionCounterSciptLocales[ $_sLocale ]
+                : array();
+            self::$_aImressionCounterSciptLocales[ $_sLocale ][ $this->oUnitOption->get( 'associate_id' ) ] = $this->oUnitOption->get( 'associate_id' );
+                
+            add_action( 'wp_footer', array( $this, '_replyToInsertImpressionCounter' ), 999 );
+            
+        }
+            /**
+             * Inserts impression counter scripts.
+             * @since       3.1.0
+             */
+            public function _replyToInsertImpressionCounter() {
+                foreach( self::$_aImressionCounterSciptLocales as $_sLocale => $_aAssociateTags ) {
+                    foreach( $_aAssociateTags as $_sAssociateTag ) {                        
+                        echo str_replace(
+                            '%ASSOCIATE_TAG%',  // needle
+                            $_sAssociateTag,    // replacement
+                            AmazonAutoLinks_Property::getImpressionCounterScript( $_sLocale ) // haystack
+                        );
+                    }
+                }
+            }
+        
         /**
          * Checks whether response has an error.
          * @since       3

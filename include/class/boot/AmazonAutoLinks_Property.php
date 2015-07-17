@@ -20,7 +20,7 @@ final class AmazonAutoLinks_Property {
      * 
      * @see                http://php.net/manual/en/function.mb-language.php
      */
-    public static $aCategoryPageMBLanguages = array(
+    static public $aCategoryPageMBLanguages = array(
         'CA'    => 'uni',
         'CN'    => 'uni',
         'FR'    => 'uni',
@@ -34,7 +34,7 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'uni',
         'MX'    => 'uni',
     );        
-    public static $aCategoryRootURLs = array(
+    static public $aCategoryRootURLs = array(
         'CA'    => 'http://www.amazon.ca/gp/bestsellers/',
         'CN'    => 'http://www.amazon.cn/gp/bestsellers/',
         'FR'    => 'http://www.amazon.fr/gp/bestsellers/',
@@ -48,7 +48,7 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'http://www.amazon.com.br/gp/bestsellers/',
         'MX'    => 'http://www.amazon.com.mx/gp/bestsellers/',
     );    
-    public static $aCategoryBlackCurtainURLs = array(
+    static public $aCategoryBlackCurtainURLs = array(
         'CA'    => 'http://www.amazon.ca/gp/product/black-curtain-redirect.html',
         'CN'    => 'http://www.amazon.cn/gp/product/black-curtain-redirect.html',
         'FR'    => 'http://www.amazon.fr/gp/product/black-curtain-redirect.html',
@@ -63,7 +63,7 @@ final class AmazonAutoLinks_Property {
         'MX'    => 'http://www.amazon.com.mx/gp/product/black-curtain-redirect.html',
     );
 
-    public static $aNoImageAvailable = array(    // the domain can be g-ecx.images-amazon.com
+    static public $aNoImageAvailable = array(    // the domain can be g-ecx.images-amazon.com
         'CA'    => 'http://g-images.amazon.com/images/G/01/x-site/icons/no-img-sm.gif',
         'CN'    => 'http://g-images.amazon.com/images/G/28/x-site/icons/no-img-sm.gif',
         'FR'    => 'http://g-images.amazon.com/images/G/08/x-site/icons/no-img-sm.gif',
@@ -78,7 +78,7 @@ final class AmazonAutoLinks_Property {
         'MX'    => 'http://g-images.amazon.com/images/G/30/x-site/icons/no-img-sm.gif',    // Spanish
     );
     
-    public static $aTokens = array(
+    static public $aTokens = array(
         'CA' => 'bWl1bm9zb2Z0Y2EtMjA=',
         'CN' => 'bWl1bm9zb2Z0LTIz',
         'FR' => 'bWl1bm9zb2Z0ZnItMjE=',
@@ -95,7 +95,7 @@ final class AmazonAutoLinks_Property {
      * 
      * @see                http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
      */
-    public static function getSearchIndexByLocale( $sLocale ) {
+    static public function getSearchIndexByLocale( $sLocale ) {
         
         switch ( strtoupper( $sLocale ) ) {
             case "CA":
@@ -423,7 +423,7 @@ final class AmazonAutoLinks_Property {
     /**
      * @todo    Confirm if this property is being used. 
      */
-    public static $aSearchIndex = array(
+    static public $aSearchIndex = array(
         'CA' => array(
             "All","Baby","Beauty","Blended","Books","Classical","DVD","Electronics","ForeignBooks",
             "HealthPersonalCare","KindleStore","LawnAndGarden","Music","PetSupplies","Software",
@@ -488,7 +488,7 @@ final class AmazonAutoLinks_Property {
      * @see             http://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDs.html
      * @todo            Confirm if this property is used or not. The caller method may not be used.
      */
-    public static $aRootNodes = array(
+    static public $aRootNodes = array(
         'CA' => array(
             3561346011,6205124011,927726,962454,14113311,677211011,927726,6205177011,2972705011,2206275011,
             6205499011,962454,6205514011,3234171,3323751,962072,962454,110218011,
@@ -542,7 +542,7 @@ final class AmazonAutoLinks_Property {
      * 
      * The nodes are divided up to 10 elements for the API request.
      */
-    public static function getRootNoeds( $sLocale ) {
+    static public function getRootNoeds( $sLocale ) {
         
         if ( ! isset( self::$aRootNodes[ strtoupper( $sLocale ) ] ) ) {
             return array();
@@ -580,4 +580,54 @@ final class AmazonAutoLinks_Property {
             : self::$aMarketplaceDomain[ 'US' ];    // default
         
     }
+    
+    /**
+     * Returns the JavaScript script of the impression counter.
+     * @since       3.1.0
+     * @return      string
+     */
+    static public function getImpressionCounterScript( $sLocale ) {
+        return isset( self::$aImpressionCounterScripts[ $sLocale ] )
+            ? self::$aImpressionCounterScripts[ $sLocale ]
+            : self::$aImpressionCounterScripts[ 'US' ]; // default 
+    }
+        /**
+         * 
+         * @remark      %ASSOCIATE_TAG% is a dummy associate id.
+         * @since       3.1.0
+         */
+        static public $aImpressionCounterScripts = array(
+        
+            // https://associates.amazon.ca/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_m=A3DWYIK6Y9EEQB&pf_rd_p=&pf_rd_r=&pf_rd_s=assoc-center-1&pf_rd_t=501&ref_=amb_link_10060771_2&rw_useCurrentProtocol=1
+            'CA'    => '<script class="amazon_auto_links_impression_counter_ca" type="text/javascript" src="http://ir-ca.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=15"></script><noscript><img class="amazon_auto_links_impression_counter_ca" src="http://ir-ca.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // https://associates.amazon.cn/gp/associates/tips/impressions.html?ie=UTF8&%20=&pf_rd_i=assoc_help_t20_a2&pf_rd_m=A1AJ19PSB66TGU&pf_rd_p=&pf_rd_r=&pf_rd_s=assoc-center-1&pf_rd_t=501&ref_=amb_link_3141918_2&rw_useCurrentProtocol=1
+            'CN'    => '<script class="amazon_auto_links_impression_counter_cn" type="text/javascript" src="http://ir-cn.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=28"></script><noscript><img class="amazon_auto_links_impression_counter_cn" src="http://ir-cn.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+           
+            // https://partnernet.amazon.de/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_s=assoc-center-1&pf_rd_t=501
+            'DE'    => '<script class="amazon_auto_links_impression_counter_de" type="text/javascript" src="http://ir-de.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=3"></script><noscript><img class="amazon_auto_links_impression_counter_de" src="http://ir-de.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',            
+            
+            // https://affiliate.amazon.co.jp/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t16_a8&pf_rd_m=AN1VRQENFRJN5&pf_rd_p=&pf_rd_r=&pf_rd_s=center-1&pf_rd_t=501&ref_=amb_link_10038521_1&rw_useCurrentProtocol=1
+            'JP'    => '<script class="amazon_auto_links_impression_counter_jp" type="text/javascript" src="http://ir-jp.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=9"></script><noscript><img class="amazon_auto_links_impression_counter_jp" src="http://ir-jp.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // https://affiliate-program.amazon.co.uk/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_s=assoc-center-1&pf_rd_t=501
+            'UK'    => '<script class="amazon_auto_links_impression_counter_uk" type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=2"></script><noscript><img class="amazon_auto_links_impression_counter_uk" src="http://ir-uk.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // https://affiliate-program.amazon.co.uk/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_s=assoc-center-1&pf_rd_t=501
+            'US'    => '<script class="amazon_auto_links_impression_counter_us" type="text/javascript" src="http://ir-na.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=1"></script><noscript><img class="amazon_auto_links_impression_counter_us" src="http://ir-na.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // https://associados.amazon.com.br/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_m=A1ZZFT5FULY4LN&pf_rd_p=&pf_rd_r=&pf_rd_s=assoc-center-1&pf_rd_t=501&ref_=amb_link_395484562_2&rw_useCurrentProtocol=1
+            'BR'    => '<script class="amazon_auto_links_impression_counter_br" type="text/javascript" src="http://ir-br.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=33"></script><noscript><img class="amazon_auto_links_impression_counter_br" src="http://ir-br.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // https://affiliate-program.amazon.in/gp/associates/tips/impressions.html?ie=UTF8&pf_rd_i=assoc_help_t20_a2&pf_rd_m=A1VBAL9TL5WCBF&pf_rd_p=&pf_rd_r=&pf_rd_s=assoc-center-1&pf_rd_t=501&ref_=amb_link_162366867_2&rw_useCurrentProtocol=1
+            'IN'    => '<script class="amazon_auto_links_impression_counter_in" type="text/javascript" src="http://ir-in.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=31"></script><noscript><img class="amazon_auto_links_impression_counter_in" src="http://ir-in.amazon-adsystem.com/s/noscript?tag=%ASSOCIATE_TAG%" alt="" /></noscript>',
+            
+            // Not available
+            // 'IT'    => '',
+            // 'ES'    => '',            
+            // 'FR'    => '',            
+            // 'MX'    => '',
+            
+        );
+    
 }

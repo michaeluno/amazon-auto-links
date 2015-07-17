@@ -78,7 +78,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'dismiss' => false,
         ),
         // 2.2.0+
-        'unit_preview' => array(
+        'unit_preview'      => array(
             'preview_post_type_slug' => '',
             'visible_to_guests'      => true,
             'searchable'             => false,
@@ -89,9 +89,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'reset_on_uninstall'    => false,
         ),
         
+        // 3.1.0+
+        'external_scripts'  => array(
+            'impression_counter_script' => false,
+        ),
+        
         // 3+ Changed the name from `arrTemplates`.
         // stores information of active templates.   
-// @todo    format v2 options to v3 
         // 'templates' => array(),    
     
     );
