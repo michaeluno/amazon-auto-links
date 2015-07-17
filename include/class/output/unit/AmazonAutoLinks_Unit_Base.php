@@ -307,20 +307,21 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
             if ( ! $this->oOption->get( 'external_scripts', 'impression_counter_script' ) ) {
                 return;
             }
-            $_sLocale = $this->oUnitOption->get( 'country' );
+            $_sLocale       = $this->oUnitOption->get( 'country' );
+            $_sAssociateID  = $this->oUnitOption->get( 'associate_id' );
             self::$_aImressionCounterSciptLocales[ $_sLocale ] = isset( self::$_aImressionCounterSciptLocales[ $_sLocale ] )
                 ? self::$_aImressionCounterSciptLocales[ $_sLocale ]
                 : array();
-            self::$_aImressionCounterSciptLocales[ $_sLocale ][ $this->oUnitOption->get( 'associate_id' ) ] = $this->oUnitOption->get( 'associate_id' );
+            self::$_aImressionCounterSciptLocales[ $_sLocale ][ $_sAssociateID ] = $_sAssociateID;
                 
-            add_action( 'wp_footer', array( $this, '_replyToInsertImpressionCounter' ), 999 );
+            add_action( 'wp_footer', array( __CLASS__, '_replyToInsertImpressionCounter' ), 999 );
             
         }
             /**
              * Inserts impression counter scripts.
              * @since       3.1.0
              */
-            public function _replyToInsertImpressionCounter() {
+            static public function _replyToInsertImpressionCounter() {
                 foreach( self::$_aImressionCounterSciptLocales as $_sLocale => $_aAssociateTags ) {
                     foreach( $_aAssociateTags as $_sAssociateTag ) {                        
                         echo str_replace(
