@@ -56,7 +56,7 @@
 
 
 /* Customer Reviews */
-.amazon-products-container-search .amazon-customer-reviews .reviewText {
+.amazon-products-container-search .amazon-customer-reviews {
     word-break: break-all;
 }
 /* Rating stars */

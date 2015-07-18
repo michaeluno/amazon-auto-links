@@ -43,9 +43,8 @@
 	font-size: smaller;
 }
 
-
 /* Customer Reviews */
-.amazon-product-container .amazon-customer-reviews .reviewText {
+.amazon-product-container .amazon-customer-reviews {
     word-break: break-all;
 }
 /* Rating stars */
