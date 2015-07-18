@@ -360,15 +360,27 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
          * @since       3.1.0
          */
         protected function _getAddToCartButton( $sASIN, $sLocale, $sAssociateID, $isButtonID, $sAccessKey='' ) {            
-            return AmazonAutoLinks_PluginUtility::getAddToCartFormButton( 
-                $sASIN, 
-                $sLocale, 
-                $sAssociateID, 
-                $isButtonID, 
-                '', // button label 
-                true, 
-                $sAccessKey
-            );        
+        
+            $_sScheme       = is_ssl() ? 'https' : 'http';
+            $_sURL          = isset( AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ] )
+                ? AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ]
+                : AmazonAutoLinks_Property::$aAddToCartURLs[ 'US' ];        
+            $_sGETFormURL = esc_url(
+                add_query_arg(                  
+                    array(
+                        'AssociateTag'      => $sAssociateID,
+                        'SubscriptionId'    => $sAccessKey,
+                        'AWSAccessKeyId'    => $sAccessKey,
+                        'ASIN.1'            => $sASIN,
+                        'Quantity.1'        => 1,
+                    ),
+                    $_sScheme . '://' . $_sURL
+                )
+            );
+            return "<a href='{$_sGETFormURL}' target='_blank'>"
+                    . $this->getButton( $isButtonID )
+                . "</a>";            
+      
         }
     
     /**

@@ -236,57 +236,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
                 . "</div>"
             . "</div>";
             
-    }
-
-    /**
-     * Returns a button form output by a given button (custom post) ID.
-     * @return      string
-     * @since       3.1.0
-     * @see         https://affiliate-program.amazon.com/gp/associates/help/t1/a10?ie=UTF8&pf_rd_i=assoc_help_t6_a1&pf_rd_m=ATVPDKIKX0DER&pf_rd_p=&pf_rd_r=&pf_rd_s=assoc-center-1&pf_rd_t=501&ref_=amb_link_177735_1&rw_useCurrentProtocol=1
-     * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/AddToCartForm.html
-     */
-    static public function getAddToCartFormButton( $sASIN, $sLocale, $sAssociateID, $isButtonID, $sLabel='', $bVisible=true, $sAccessKey='' ) {
-        
-        $_sButtonLabel      = $sLabel
-            ? $sLabel
-            : ( 
-                is_numeric( $isButtonID ) && $isButtonID
-                    ? get_post_meta( $isButtonID, 'button_label', true )
-                    : ''
-            );
-
-        $_sButtonLabel      = $_sButtonLabel
-            ? $_sButtonLabel
-            : __( 'Buy Now', 'amazon-auto-links' );
-            
-        $_sButtonIDSelector = $isButtonID
-            ? "amazon-auto-links-button-$isButtonID"
-            : "amazon-auto-links-button-___button_id___";
-        $_sNone         = 'none';
-        $bVisible       = $bVisible
-            ? ''
-            : "display:{$_sNone};";
-        $_sScheme       = is_ssl() ? 'https' : 'http';
-        $_sButtonFormID = 'amazon_auto_links_add_to_cart_button_' . uniqid();
-        $sAccessKey     = $sAccessKey ? $sAccessKey : '[AWSAccessKeyId]';
-        $_sURL          = isset( AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ] )
-            ? AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ]
-            : AmazonAutoLinks_Property::$aAddToCartURLs[ 'US' ];
-        return "<form id='{$_sButtonFormID}' method='GET' action='{$_sScheme}://{$_sURL}' target='_blank'>"
-                . "<input type='hidden' name='AssociateTag' value='{$sAssociateID}'/>"
-                . "<input type='hidden' name='SubscriptionId' value='{$sAccessKey}'/>"
-                . "<input type='hidden' name='AWSAccessKeyId' value='{$sAccessKey}'/>"
-                . "<input type='hidden' name='ASIN.1' value='{$sASIN}'/>"
-                . "<input type='hidden' name='Quantity.1' value='1'/>"
-                . "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-                    . "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
-                        . "<input type='submit' name='add' value='" . esc_attr( $_sButtonLabel ). "' style='background: none;'>"
-                    . "</div>"
-                . "</div>"
-                // . "<input type='image' name='add' value='Buy from Amazon.com' border='0' alt='Buy from Amazon.com' src='http://images.amazon.com/images/G/01/associates/add-to-cart.gif'>"
-            . "</form>";
-            
-    }    
+    } 
     
     /**
      * Returns the url using the Amazon SSL image server.
