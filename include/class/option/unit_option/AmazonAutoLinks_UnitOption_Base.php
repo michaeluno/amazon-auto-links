@@ -67,6 +67,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         'customer_review_include_extra' => false,
         
         'button_id'                     => null, // a button (post) id will be assigned
+        // 3.1.0+
+        'button_type'                   => 0,   // 0 to 1 
         
         'product_filters'               => array(
             'white_list'    => array(

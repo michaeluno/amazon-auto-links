@@ -23,7 +23,7 @@ class AmazonAutoLinks_MetaBox_Button_Box extends AmazonAutoLinks_MetaBox_Button 
                 'attributes'    => array(
                     'data-property' => 'width',
                 ),
-                'default'       => 100,
+                'default'       => 140,
             ),             
         
             array(

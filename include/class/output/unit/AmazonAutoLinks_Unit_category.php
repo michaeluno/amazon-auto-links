@@ -343,9 +343,16 @@ class AmazonAutoLinks_Unit_category extends AmazonAutoLinks_Unit_Base_ElementFor
                 ) 
             ) {            
                 $_aProduct[ 'button' ] = $this->_getButton( 
-                    $this->_getButtonID(),
-                    $_aProduct[ 'product_url' ]
+                    $this->oUnitOption->get( 'button_type' ), 
+                    $this->_getButtonID(), 
+                    $_aProduct[ 'product_url' ], 
+                    $_aProduct[ 'ASIN' ], 
+                    $_sLocale, 
+                    $_sAssociateID, 
+                    $this->_getButtonID(), 
+                    $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
                 );
+                
             }
             
             // Store the product output

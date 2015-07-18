@@ -190,6 +190,10 @@ class AmazonAutoLinks_ButtonStyleLoader extends AmazonAutoLinks_PluginUtility {
             border: solid #6891a5 1px;
             text-decoration: none;
         }
+        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > input {
+            background: none;
+            font-size: 13px;
+        }
         .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID}:hover {
             background: #3cb0fd;
             background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
