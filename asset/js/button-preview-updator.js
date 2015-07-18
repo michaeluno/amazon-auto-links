@@ -3,7 +3,6 @@
     oPreviewButton = {};
     oPreviewButton.styles = [];
     oPreviewButton.styles_markup = '';
-    oPreviewButton.styles_form_input = '';
     oPreviewButton.styles_hover_markup = '';
     oPreviewButton.aPixelProperties = [ 
         'font-size', 
@@ -42,7 +41,6 @@
             'white-space': 'nowrap',
         };
         oPreviewButton.styles_markup        = '';
-        oPreviewButton.styles_form_input    = '';
         oPreviewButton.styles_hover_markup  = '';
 
         $( '#post' )
@@ -220,11 +218,6 @@
                     oPreviewButton.styles_hover_markup = oPreviewButton.getStyleByLine( 'background', sCSSValue );
                 } else{
                     oPreviewButton.styles_markup += oPreviewButton.getStyleByLine( sCSSProperty, sCSSValue );
-                    oPreviewButton.styles_form_input += oPreviewButton.getStyleByLine( sCSSProperty, sCSSValue );
-                }
-                if ( 'font-size' === sCSSProperty ) {
-                    oPreviewButton.styles_form_input += oPreviewButton.getStyleByLine( 'background', 'none' );
-                    
                 }
                 
             });
@@ -235,7 +228,6 @@
           // wrap the style markups in proper css calls
           var _isButtonID = aal_button_script_preview_updator[ 'post_id' ];          
           oPreviewButton.styles_markup = '.amazon-auto-links-button.amazon-auto-links-button-' + _isButtonID + ' {\n' + oPreviewButton.styles_markup + '}';
-          oPreviewButton.styles_form_input = '\n\n.amazon-auto-links-button.amazon-auto-links-button-' + _isButtonID + ' > input {\n' + oPreviewButton.styles_form_input + '}';
           oPreviewButton.styles_hover_markup += oPreviewButton.getStyleByLine( 'text-decoration', 'none' );
           oPreviewButton.styles_hover_markup = '\n\n.amazon-auto-links-button.amazon-auto-links-button-' + _isButtonID + ':hover {\n'
             + oPreviewButton.styles_hover_markup 
@@ -248,7 +240,6 @@
     oPreviewButton.printStyles = function(){
         
         var _sOutput = oPreviewButton.styles_markup 
-            + oPreviewButton.styles_form_input
             + oPreviewButton.styles_hover_markup;
         var _sStyleTag = '<style id="amazon-auto-links-button-style" type="text/css">' 
                 + _sOutput 
