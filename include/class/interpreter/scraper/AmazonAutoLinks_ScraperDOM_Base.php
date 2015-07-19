@@ -36,8 +36,9 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
                 $_bsCharSetFrom // detect encoding
             );                    
         }        
-        // Else if it is a file path,
-        else if ( file_exists( $sURLOrFIlePathOrHTML ) ) {
+        // Else if it is a file path, 
+        // disable warnings here as in PHP 5.3 or above, PHP_MAXPATHLEN is defined and it may cause warnings
+        else if ( @file_exists( $sURLOrFIlePathOrHTML ) ) {
             $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
                 file_get_contents( $sURLOrFIlePathOrHTML ),
                 '', // mb_lang

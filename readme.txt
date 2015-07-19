@@ -179,6 +179,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the home and front page criteria for the `Available Page Types` option in the widget form.
 - Tweaked the style of built-in templates.
 - Tweaked the style of the credit link.
+- Fixed PHP warnings related file path lengths set to the `PHP_MAXPATHLEN` constant. 
 - Fixed an issue that widget by unit could not be displayed in the front/home page, introduced in 3.0.5.
 
 = 3.0.5 - 07/14/2015 =
