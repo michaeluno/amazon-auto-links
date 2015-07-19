@@ -25,7 +25,6 @@ class AmazonAutoLinks_MetaBox_Button_Box extends AmazonAutoLinks_MetaBox_Button 
                 ),
                 'default'       => 100,
             ),             
-        
             array(
                 'field_id'      => 'box_shadow_switch',
                 'type'          => 'revealer',

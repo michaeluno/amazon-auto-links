@@ -68,7 +68,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         
         'button_id'                     => null, // a button (post) id will be assigned
         // 3.1.0+
-        'button_type'                   => 0,   // 0 to 1 
+        'button_type'                   => 1,   // 0: normal link, 1: add to cart
         
         'product_filters'               => array(
             'white_list'    => array(

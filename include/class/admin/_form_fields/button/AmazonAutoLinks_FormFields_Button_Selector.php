@@ -57,7 +57,7 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
                     0   => __( 'Link to the product page.', 'amazon-auto-links' ),
                     1   => __( 'Add to cart.', 'amazon-auto-links' ),
                 ),
-                'default'           => 0,
+                'default'           => 1,
             ), 
         );
        
