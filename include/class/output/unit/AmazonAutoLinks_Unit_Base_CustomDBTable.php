@@ -8,7 +8,7 @@
  */
 
 /**
- * A one of the base classes for unit classes.
+ * One of the base classes for unit classes.
  * 
  * Provides shared methods and properties for debugging.
  * @since       3
