@@ -324,6 +324,14 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 continue; 
             }
             
+            $_sThumbnailURL = isset( $_aItem[ 'MediumImage' ] ) 
+                ? $_aItem[ 'MediumImage' ][ 'URL' ] 
+                : null;
+            
+            if ( ! $this->_isNoImageAllowed( $_sThumbnailURL ) ) {
+                continue;
+            }
+                
             $_sProductURL = $this->formatProductLinkURL( 
                 rawurldecode( $_aItem[ 'DetailPageURL' ] ),
                 $_aItem[ 'ASIN' ] 
@@ -359,9 +367,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 'content'            => $_sContent,
                 'image_size'         => $this->oUnitOption->get( 'image_size' ),
                 'thumbnail_url'      => $this->_formatProductImageURL( 
-                    isset( $_aItem[ 'MediumImage' ] ) 
-                        ? $_aItem[ 'MediumImage' ][ 'URL' ] 
-                        : null, 
+                    $_sThumbnailURL, 
                     $this->oUnitOption->get( 'image_size' )
                 ),
                 'author'             => isset( $_aItem[ 'ItemAttributes' ][ 'Author' ] ) 
@@ -447,7 +453,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         );
         
     }
-  
+      
         /**
          * Extracts items array from the API response array.
          * @since       3

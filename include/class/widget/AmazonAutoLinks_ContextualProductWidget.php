@@ -88,7 +88,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Add fields 
         $this->_addFieldsByFieldClass(
             array(
-                'AmazonAutoLinks_FormFields_Setting_ProductFilter',
+                'AmazonAutoLinks_FormFields_ProductFilter',
+                'AmazonAutoLinks_FormFields_ProductFilter_Image',
             )
         );
         

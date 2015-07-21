@@ -174,6 +174,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.1.0 =
+- Added the ability to skip no thumbnail items.
 - Added the `Button Type` unit option that lets the user add a product to the Amazon shopping cart.
 - Added the ability to produce RSS and JSON feeds by unit id.
 - Added the home and front page criteria for the `Available Page Types` option in the widget form.

@@ -73,5 +73,44 @@ abstract class AmazonAutoLinks_Unit_Base_ProductFilter extends AmazonAutoLinks_U
         $this->oUnitProductFilter->markParsed( $sASIN );
         $this->oGlobalProductFilter->markParsed( $sASIN );        
     }
+    
 
+    /**
+     * 
+     * @since       3.1.0
+     * @return      boolean
+     */
+    protected function _isNoImageAllowed( $sImageURL ) {
+        
+        if ( ! $this->oUnitOption->get( 'product_filters', 'skip_no_image' ) ) {
+            return true;
+        }
+        
+        // At this point, the user wants to skip no image items.
+        return ! $this->_isNoImage( $sImageURL );
+                
+    }        
+
+    /**
+     * Checks if the given image is an alternative image for no-image.
+     * 
+     * @since       3.1.0
+     * @return      boolean
+     */
+    protected function _isNoImage( $sImageURL ) {
+        
+        if ( empty( $sImageURL ) ) {
+            return true;
+        }
+        
+        if ( false !== strpos( $sImageURL, '/no-img' ) ) {
+           return true; 
+        }
+        
+        // @todo research what else image urls represent no-image.
+        
+        return false;
+        
+    }
+    
 }

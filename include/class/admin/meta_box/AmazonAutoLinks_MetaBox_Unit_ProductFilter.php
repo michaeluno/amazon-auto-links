@@ -41,15 +41,28 @@ class AmazonAutoLinks_MetaBox_Unit_ProductFilter extends AmazonAutoLinks_MetaBox
             )
         );
         
-        $_oFields    = new AmazonAutoLinks_FormFields_Setting_ProductFilter;
-        foreach( $_oFields->get() as $_aField ) {
-            $this->addSettingFields(
-                $_sSectionID, // the target section id,
-                $_aField
-            );
-        }        
+        // Set the target section.
+        $this->addSettingFields( $_sSectionID );        
+        
+        $_aClassNames = array(
+            'AmazonAutoLinks_FormFields_ProductFilter',
+            'AmazonAutoLinks_FormFields_ProductFilter_Image',
+        );
+        $this->_addFieldsByClasses( $_aClassNames );
                     
     }
+        /**
+         * Adds form fields.
+         * @since       3.1.0
+         */
+        private function _addFieldsByClasses( $aClassNames ) {   
+            foreach( $aClassNames as $_sClassName ) {
+                $_oFields = new $_sClassName;
+                foreach( $_oFields->get() as $_aField ) {
+                    $this->addSettingFields( $_aField );
+                }   
+            }                 
+        }
     
     /**
      * Validates submitted form data.

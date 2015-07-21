@@ -13,7 +13,7 @@
  * 
  * @since           3  
  */
-class AmazonAutoLinks_FormFields_Setting_ProductFilter extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormFields_Base {
 
     /**
      * Returns field definition arrays.

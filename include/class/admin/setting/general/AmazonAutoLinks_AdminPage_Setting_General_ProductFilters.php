@@ -28,7 +28,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_ProductFilters extends AmazonAut
      */
     public function addFields( $oFactory, $sSectionID ) {
 
-        $_oFields = new AmazonAutoLinks_FormFields_Setting_ProductFilter;
+        $_oFields = new AmazonAutoLinks_FormFields_ProductFilter;
         foreach( $_oFields->get() as $_aField ) {
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id,

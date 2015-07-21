@@ -311,6 +311,11 @@ class AmazonAutoLinks_Unit_category extends AmazonAutoLinks_Unit_Base_ElementFor
                 $this->oUnitOption->get( 'image_size' ) 
             );
 
+            // Check whether no-image shuld be skipped.
+            if ( ! $this->_isNoImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
+                continue;
+            }
+            
             // Links - a tags
             $this->formatLinks( 
                 $_oNodeDiv, 
