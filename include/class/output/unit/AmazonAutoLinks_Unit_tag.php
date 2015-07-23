@@ -59,9 +59,8 @@ class AmazonAutoLinks_Unit_tag extends AmazonAutoLinks_Unit_category {
     
     /**
      * @param            array           The argument array.
-     * @param            null            This is only to be compatible with the parent class method.
      */
-    protected function _getRSSURLsFromArguments( $aArguments, $_deprecated=null ) {
+    protected function _getRSSURLsFromArguments( array $aArguments ) {
         
         $aRSSURLs           = array();
         $sScheme            = $this->bIsSSL ? 'https' : 'http';
