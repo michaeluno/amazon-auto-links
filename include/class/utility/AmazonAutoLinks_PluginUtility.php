@@ -120,7 +120,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $sDegreeType,
             null
         );
-        if ( null === $_iDegree ) {
+        if ( in_array( $_iDegree, array( null, '', false ), true ) ) {
             return '';
         }
         $_sUnit = self::getElement(

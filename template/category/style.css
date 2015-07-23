@@ -10,12 +10,11 @@
     Tags:           default
     Text Domain:    amazon-auto-links
 */
-.amazon-products-container {
-	width: 100%;
-    
+.amazon-products-container {    
     overflow-y: auto;	
 	overflow-x: hidden;
-    width: inherit;
+    /* width: inherit; */
+    width: 100%;
     padding-right: 1em;    
 }
 .amazon-products-container a {
