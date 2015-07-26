@@ -5,7 +5,7 @@
 	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Version:        3.1.0b11
+	Version:        3.1.0
 */
 
 /**
@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-	const VERSION        = '3.1.0b11';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '3.1.0';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Amazon Auto Links';
 	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013, Michael Uno
+ * @copyright   Copyright (c) 2013-2015, Michael Uno
  * @authorurl	http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since		2.0.0

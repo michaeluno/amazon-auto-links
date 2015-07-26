@@ -3,7 +3,7 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
-Tested up to:       4.2.2
+Tested up to:       4.2.3
 Stable tag:         3.0.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -173,7 +173,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.1.0 =
+= 3.1.0 - 07/27/2015 =
 - Added the ability to skip no thumbnail items.
 - Added the `Button Type` unit option that lets the user add a product to the Amazon shopping cart.
 - Added the ability to produce RSS and JSON feeds by unit id.
