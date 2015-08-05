@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.3
-Tested up to:       4.2.3
-Stable tag:         3.0.4
+Tested up to:       4.2.4
+Stable tag:         3.1.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,7 @@ If you are good at HTML and CSS coding and know a little about PHP, you can crea
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
 - **Templates** - You can design the output with the template system.
+- **Product Feeds** - subscribe the unit outputs as RSS or JSON so that you can import unit outputs into other sites. 
   
 = Supported Language =
 - Japanese  
@@ -172,6 +173,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.1.1 =
+- Fixed a bug that the `%price%` variable in the `Item Format` unit option was not functional.
 
 = 3.1.0 - 07/27/2015 =
 - Added the ability to skip no thumbnail items.

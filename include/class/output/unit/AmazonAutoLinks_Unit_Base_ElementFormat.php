@@ -462,7 +462,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
             ? '<p>' 
                 . __( 'Now retrieving the price.', 'amazon-auto-links' )
                 . '</p>'
-            : '';
+            : $_sPriceFormatted;
     }
     
     /**
