@@ -175,6 +175,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.1.1 =
+- Fixed a fatal error `Call to undefined function mb_detect_encoding()...` in the category select page on the server that does not install the multibite string extension.
 - Fixed a bug that the `%price%` variable in the `Item Format` unit option was not functional.
 
 = 3.1.0 - 07/27/2015 =
