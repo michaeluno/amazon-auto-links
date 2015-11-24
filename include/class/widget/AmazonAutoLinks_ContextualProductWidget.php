@@ -103,10 +103,23 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             foreach( $aClassNames as $_sClsssName ) {            
                 $_oFields = new $_sClsssName;
                 foreach( $_oFields->get() as $_aField ) {
-                    $this->addSettingFields( $_aField );
+                    $this->_addField( $_aField );
+                    
                 }
             }            
         }
+            /**
+             * @since       3.1.2
+             */
+            private function _addField( $aField ) {
+                
+                $_sFieldID = $this->oUtil->getElement( $aField, 'field_id' );
+                if ( $this->oUtil->hasSuffix( 'available_page_types', $_sFieldID ) ) {
+                    $this->oUtil->setMultiDimensionalArray( $aField, array( 'default', 'search' ) , true );
+                }
+                
+                $this->addSettingFields( $aField );
+            }
     
     /**
      * Validates the submitted form data.
