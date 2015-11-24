@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.0.5 =
+- Adjusted the margin of product thumbnails.
+
 = 1.0.4 =
 - Added a style for discounted price element.
 

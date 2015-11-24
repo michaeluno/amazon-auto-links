@@ -23,7 +23,7 @@ If you are good at HTML and CSS coding and know a little about PHP, you can crea
 = Features =
 - **Supports all Amazon locales** - Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supporeted as well.
 - **Automatic insertion in posts and feeds** - Just check where you want the product links to appear. If you want the product link to be static, just check that option.
-- **Widget** - Just put it in the sidebar and select the unit you created. The product links will appear in where you wanted. Supports widget types by unit and context.
+- **Widgets** - Just put it in the sidebar and select the unit you created. The product links will appear in where you wanted. Supports widget types by unit and context.
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Works without JavaScript** - Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works.
 - **Random/Title/Date sort order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
@@ -34,8 +34,23 @@ If you are good at HTML and CSS coding and know a little about PHP, you can crea
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
 - **Templates** - You can design the output with the template system.
 - **Product Feeds** - subscribe the unit outputs as RSS or JSON so that you can import unit outputs into other sites. 
-  
+- **Custom Buttons** - define your custom buttons and insert it to the unit output. 
+and more.
+
+= Unit Types =
+- **Category** - pick your category that matches your site topic.
+- **Tag** - you can display products by tag. 
+- **Search** - you can create a unit of a search result.
+
+= Widgets = 
+- **By Units** - choose the created units to display in the widget.
+- **Contextual Search** - with this, you don't have to create a unit. It will automatically searches products relating to the currently displayed page contents.
+   
+To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
+
+    
 = Supported Language =
+- English
 - Japanese  
   
 == Installation ==
@@ -173,6 +188,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.1.2 =
+- Changed the default value of the page type option in the Contextual Search widget.
+- Tweaked the style of thumbnails of the Category and Search templates.
 
 = 3.1.1 - 08/09/2015 =
 - Fixed a fatal error `Call to undefined function mb_detect_encoding()...` in the category select page on the server that does not install the multibite string extension.

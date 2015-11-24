@@ -1,4 +1,7 @@
 == Change log ==
+ 
+= 1.0.4 =
+- Adjusted the margin of product thumbnails.
 
 = 1.0.3 =
 - Changed local variable names.
