@@ -2,8 +2,8 @@
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
-Requires at least:  3.3
-Tested up to:       4.2.4
+Requires at least:  3.4
+Tested up to:       4.3.1
 Stable tag:         3.1.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,7 +40,9 @@ and more.
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
 - **Tag** - you can display products by tag. 
-- **Search** - you can create a unit of a search result.
+- **Product Search** - you can create a unit of a search result.
+- **Item Look-up** - display specific products.
+- **Similarity Look-up** - display similar products.
 
 = Widgets = 
 - **By Units** - choose the created units to display in the widget.
@@ -48,7 +50,6 @@ and more.
    
 To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
 
-    
 = Supported Language =
 - English
 - Japanese  
@@ -189,7 +190,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.1.2 =
+= 3.1.2 - 11/25/2015 =
 - Changed the default value of the page type option in the Contextual Search widget.
 - Tweaked the style of thumbnails of the Category and Search templates.
 
