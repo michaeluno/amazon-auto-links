@@ -6,6 +6,11 @@
     font-size: 0.8em;
 }
 
+/* Admin Page Framework Style FIx */
+.amazon-auto-links-input-label-container {
+    width: 100%;
+}
+
 /* Debug output */
 pre.dump-array {
     width: inherit !important;   
