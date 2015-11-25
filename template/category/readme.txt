@@ -1,5 +1,9 @@
 == Change log ==
  
+= 1.0.5 =
+- Tweaked the style of rating images.
+- Tweaked the style of sub-images in widgets.
+ 
 = 1.0.4 =
 - Adjusted the margin of product thumbnails.
 

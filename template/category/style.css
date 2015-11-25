@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the category unit type.
-    Version:        1.0.4
+    Version:        1.0.5
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -61,12 +61,18 @@
     text-decoration: none;
     border-bottom: 0;
 }
+.amazon-products-container .amazon-customer-rating-stars {
+    margin: 0.4em 0;
+}
 
 /* Sub-images */
 .amazon-products-container .sub-image-container {
     display: inline-block;
     clear: none;
     margin: 1em;
+}
+.widget-area .amazon-products-container .sub-image-container { 
+    margin: 0.4em 0.4em 0 0;
 }
 
 /* Button */
