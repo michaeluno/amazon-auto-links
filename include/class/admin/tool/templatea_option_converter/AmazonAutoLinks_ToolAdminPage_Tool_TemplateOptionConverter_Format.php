@@ -183,7 +183,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_oUtil   = new AmazonAutoLinks_WPUtility;
             
-            add_filter( 'safe_style_css', array( $this, 'replyToAllowInlineStyleMaxWidth' ) );
+            add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
             $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
                 $_oOption->get( 
                     'form_options', // first dimensional key
@@ -194,7 +194,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
             $aInput[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInput[ 'item_format' ], $_aAllowedHTMLTags );
             $aInput[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'image_format' ], $_aAllowedHTMLTags );
             $aInput[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'title_format' ], $_aAllowedHTMLTags );
-            remove_filter( 'safe_style_css', array( $this, 'replyToAllowInlineStyleMaxWidth' ) );
+            remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
                           
             // Drop unnecessary items.
             unset(
@@ -211,8 +211,11 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
             /**
              * @return      array
              */
-            public function replyToAllowInlineStyleMaxWidth( $aProperty ) {
+            public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
                 $aProperty[] = 'max-width';
+                $aProperty[] = 'min-width';
+                $aProperty[] = 'max-height';
+                $aProperty[] = 'min-height';
                 return $aProperty;
             }    
        

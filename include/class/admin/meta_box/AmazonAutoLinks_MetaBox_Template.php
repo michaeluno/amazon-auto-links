@@ -47,7 +47,7 @@ class AmazonAutoLinks_MetaBox_Template extends AmazonAutoLinks_MetaBox_Base {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $_oUtil   = new AmazonAutoLinks_WPUtility;
         
-        add_filter( 'safe_style_css', array( $this, 'replyToAllowInlineStyleMaxWidth' ) );
+        add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
         $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
             $_oOption->get( 
                 'form_options', // first dimensional key
@@ -58,7 +58,7 @@ class AmazonAutoLinks_MetaBox_Template extends AmazonAutoLinks_MetaBox_Base {
         $aInput[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInput[ 'item_format' ], $_aAllowedHTMLTags );
         $aInput[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'image_format' ], $_aAllowedHTMLTags );
         $aInput[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'title_format' ], $_aAllowedHTMLTags );
-        remove_filter( 'safe_style_css', array( $this, 'replyToAllowInlineStyleMaxWidth' ) );
+        remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
         
         // Schedule pre-fetch for the unit if the options have been changed.
         if ( $aInput !== $aOriginal ) {
@@ -73,8 +73,11 @@ class AmazonAutoLinks_MetaBox_Template extends AmazonAutoLinks_MetaBox_Base {
         /**
          * @return      array
          */
-        public function replyToAllowInlineStyleMaxWidth( $aProperty ) {
+        public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
             $aProperty[] = 'max-width';
+            $aProperty[] = 'min-width';
+            $aProperty[] = 'max-height';
+            $aProperty[] = 'min-height';
             return $aProperty;
         }
     
