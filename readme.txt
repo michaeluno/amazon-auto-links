@@ -191,6 +191,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.1.3 =
+- Tweaked the style of some option fields in the plugin setting pages.
 - Fixed a bug that some options with numbers could not set more than `1`.
 
 = 3.1.2 - 11/25/2015 =
