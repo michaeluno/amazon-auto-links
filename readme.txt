@@ -190,7 +190,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.1.3 =
+= 3.1.3 - 11/26/2015 =
 - Changed the unit template formatting options to accept some inline CSS properties.
 - Tweaked the style of rating images of the `Category` and `Search` templates.
 - Tweaked the style of sub-images in widgets of the `Category` and `Search` templates.
