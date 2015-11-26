@@ -47,8 +47,8 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         // Maybe later at some point, custom request URIs can get implemented and they can be directly passed to this method.
         unset( $aURLs );
         
-        $_aResponse = $this->getRequest( $this->oUnitOption->get( 'count' ) );
-
+        $_aResponse = $this->_getResponses();
+        
         // Check errors
         if ( isset( $_aResponse[ 'Error' ][ 'Code' ] ) ) {
             return $this->oUnitOption->get( 'show_errors' )
@@ -60,7 +60,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             return $this->oUnitOption->get( 'show_errors' )
                 ? $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
                 : array();
-        }
+        }            
             
         $_aProducts = $this->getProducts( $_aResponse );
 
@@ -68,6 +68,51 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         return $_aProducts;
         
     }
+        /**
+         * @since       3.1.4
+         * @return      array
+         */
+        private function _getResponses() {
+            
+            if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
+                // Normal operation
+                return $this->getRequest( $this->oUnitOption->get( 'count' ) );
+                
+            } 
+                
+            // For contextual search, perform search by each keyword
+            $_iCount    = $this->oUnitOption->get( 'count' );
+            $_iItems    = array();
+            $_aResponse = array();
+            $_aKeywords = explode( ',', $this->oUnitOption->get( 'Keywords' ) );
+            
+            foreach( $_aKeywords as $_sKeyword ) {
+                $this->oUnitOption->set( 'Keywords', $_sKeyword );
+                $_aResponse = $this->getRequest( $_iCount );
+                $_iItems        = array_merge(
+                    $_iItems,
+                    $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) )
+                );
+                if ( count( $_iItems ) >= $_iCount ) {
+                    break;
+                }
+            }
+            array_splice( $_iItems, $_iCount );   // up to the set item count
+            $this->setMultiDimensionalArray( 
+                $_aResponse,
+                array( 'Items', 'Item' ),
+                $_iItems
+            );
+            if ( 0 < count( $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) ) ) ) {
+                unset(
+                    $_aResponse[ 'Error' ][ 'Code' ],
+                    $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
+                );
+            }            
+                            
+            return $_aResponse;            
+            
+        }
     
         /**
          * Checks whether response has an error.
@@ -223,7 +268,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 ',', 
                 false 
             ),
-            // 3+
+            // 3+ Power parameter, which can only be used when the search index equals Books.
             'Power'                 => $this->oUnitOption->get( 'Power' ), 
             
             'Title'                 => $_bIsIndexAllOrBlended 
@@ -278,6 +323,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             ? $_aParams + array( 'ItemPage' => $iItemPage )
             : $_aParams;
 
+
         // 3+ When the Power argument is set, the SearchIndex must not be set. 
         // and when the SearchIndex is not set, Sort cannot be set.
         if ( $_aParams[ 'Power' ] ) {
@@ -291,7 +337,12 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             // );
             // $_aParams[ 'SearchIndex' ] = 'Books';
         // }
-            
+
+/* $_aParams[ 'Keywords' ] = '';
+unset( $_aParams[ 'Keywords' ] );
+// unset( $_aParams[ 'Power' ] );
+AmazonAutoLinks_Debug::log( $_aParams ); */
+        
         return $_aParams;
     }
     

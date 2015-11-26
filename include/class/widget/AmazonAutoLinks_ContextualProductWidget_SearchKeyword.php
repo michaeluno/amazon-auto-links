@@ -32,7 +32,7 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
      * 
      * @return      string       The search keywords.
      */
-    public function get() {
+    public function get( $bRetunType=true ) {
         
         $_aKeywords    = $this->_getSearchKeywordsByCriteria( $this->aCriteria );
         $_aKeywords    = $this->_getFormattedSearchKeywordsArray( $_aKeywords );
@@ -44,8 +44,12 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
         $_sAdditionals = $_sAdditionals
             ? ',' . $_sAdditionals
             : '';
-        return  implode( ',', $_aKeywords )
+        $_sKeywords    =   implode( ',', $_aKeywords )
             . $_sAdditionals;
+            
+        return $bRetunType
+            ? explode( ',', $_sKeywords )
+            : $_sKeywords;
             
     }
 
@@ -77,7 +81,7 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
         private function _getSearchKeywordsByCriteria( array $aCriteria ) {
 
             $_aKeywords  = array();
-            foreach( $this->_getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {
+            foreach( $this->_getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {                
                 $_aKeywords = array_merge(
                     call_user_func(
                         array( $this, '_getSearchKeywordsByType_' . $_sCriteriaKey )

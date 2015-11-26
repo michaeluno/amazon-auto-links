@@ -215,15 +215,25 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 $aFormData[ 'criteria' ], 
                 $aFormData[ 'additional_keywords' ]
             );
-            $_sSearchKeywords   = $_oContextualSearch->get();           
-            if ( ! $_sSearchKeywords ) {
+            $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
+            if ( empty( $_aSearchKeywords ) ) {
                 return '';
             }
+            
+            shuffle ( $_aSearchKeywords );
+            array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
 
             return AmazonAutoLinks( 
                 array( 
-                    'Keywords'         => $_sSearchKeywords,
-                    'Operation'     => 'ItemSearch',
+                    'Keywords'         => implode( ',', $_aSearchKeywords ),
+                    'Operation'        => 'ItemSearch',
+                    
+                    // The `Power` parameter will not be used as it only works with the Books category.
+                    
+                    // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
+                    // The Amazon API does not provide an OR operator for the Keywords parameter. Power cannot be used for categories other than Books.
+                    // So here we set a plugin specific option here to perform search by each keyword.
+                    'search_per_keyword'    => true,
                 )
                 + $aFormData, 
                 false // echo or output

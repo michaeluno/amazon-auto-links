@@ -25,6 +25,8 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'search_by'             => 'Author',
         'description_length'    => 250,
         
+        'search_per_keyword'    => false,
+        
         // 'nodes' => 0,    // 0 is for all nodes.    Comma delimited strings will be passed. e.g. 12345,12425,5353
         
         // These are used for API parameters as well

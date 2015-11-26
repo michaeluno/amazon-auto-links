@@ -266,4 +266,19 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
   
     }    
     
+    /**
+     * Sets a value to the specified keys.
+     * 
+     * @param       array|string        $asOptionKey        The key path. e.g. 'search_per_keyword'
+     * @return      void
+     * @since       3.1.4
+     */
+    public function set( $asOptionKey, $mValue ) {
+        $this->setMultiDimensionalArray( 
+            $this->aUnitOptions, 
+            $this->getAsArray( $asOptionKey ),
+            $mValue
+        );
+    }
+    
 }

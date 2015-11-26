@@ -190,6 +190,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.1.4 =
+- Added the `search_per_keyword` argument for the shortcode which can be set to `true` when performing search with multiple keywords.
+- Enhanced the ability of the contextual product widget.
+
 = 3.1.3 - 11/26/2015 =
 - Changed the unit template formatting options to accept some inline CSS properties.
 - Tweaked the style of rating images of the `Category` and `Search` templates.
