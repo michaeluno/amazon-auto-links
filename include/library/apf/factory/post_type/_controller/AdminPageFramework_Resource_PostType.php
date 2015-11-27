@@ -1,0 +1,3 @@
+<?php
+class AmazonAutoLinks_AdminPageFramework_Resource_PostType extends AmazonAutoLinks_AdminPageFramework_Resource_MetaBox {
+}

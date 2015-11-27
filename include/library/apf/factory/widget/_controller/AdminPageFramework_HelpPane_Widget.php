@@ -1,0 +1,3 @@
+<?php
+class AmazonAutoLinks_AdminPageFramework_HelpPane_Widget extends AmazonAutoLinks_AdminPageFramework_HelpPane_MetaBox {
+}

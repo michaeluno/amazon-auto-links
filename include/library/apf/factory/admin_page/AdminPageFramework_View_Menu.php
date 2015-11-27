@@ -1,0 +1,3 @@
+<?php
+abstract class AmazonAutoLinks_AdminPageFramework_View_Menu extends AmazonAutoLinks_AdminPageFramework_Model_Menu {
+}

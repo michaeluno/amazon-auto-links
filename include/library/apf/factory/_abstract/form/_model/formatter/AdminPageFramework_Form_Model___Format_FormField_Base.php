@@ -1,0 +1,3 @@
+<?php
+abstract class AmazonAutoLinks_AdminPageFramework_Form_Model___Format_FormField_Base extends AmazonAutoLinks_AdminPageFramework_Form_Utility {
+}

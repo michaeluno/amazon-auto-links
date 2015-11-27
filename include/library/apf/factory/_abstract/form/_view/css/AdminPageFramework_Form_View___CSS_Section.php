@@ -1,0 +1,131 @@
+<?php
+class AmazonAutoLinks_AdminPageFramework_Form_View___CSS_Section extends AmazonAutoLinks_AdminPageFramework_Form_View___CSS_Base {
+    protected function _get() {
+        return $this->_getFormSectionRules();
+    }
+    private function _getFormSectionRules() {
+        return <<<CSSRULES
+/* Section Table */
+.amazon-auto-links-section .form-table {
+    margin-top: 0;
+}
+.amazon-auto-links-section .form-table td label {
+   display: inline;  /* adjusts the horizontal alignment with the th element */
+}
+/* Section Tabs */
+.amazon-auto-links-section-tabs-contents {
+    margin-top: 1em;
+}
+.amazon-auto-links-section-tabs { /* The section tabs' container */
+    margin: 0;
+}
+.amazon-auto-links-tab-content { /* each section including sub-sections of repeatable fields */
+    padding: 0.5em 2em 1.5em 2em;
+    margin: 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dfdfdf;
+    background-color: #fdfdfd;     
+}
+.amazon-auto-links-section-tab {
+    background-color: transparent;
+    vertical-align: bottom; /* for Firefox */
+}
+.amazon-auto-links-section-tab.active {
+    background-color: #fdfdfd;     
+}
+.amazon-auto-links-section-tab h4 {
+    margin: 0;
+    padding: 8px 14px 10px;
+    font-size: 1.2em;
+    vertical-align: middle;
+    white-space: nowrap;
+    display:inline-block;
+}
+.amazon-auto-links-section-tab.nav-tab {
+    padding: 0;
+}
+.amazon-auto-links-section-tab.nav-tab a {
+    text-decoration: none;
+    color: #464646;
+    vertical-align: inherit; /* for Firefox - without this tiny dots appear */
+    outline: 0; /* for FireFox - remove dotted outline */
+}        
+.amazon-auto-links-section-tab.nav-tab a:focus { 
+    /* For FireFox - remove dotted outline when a switchable tab is activated */
+    box-shadow: none;
+}
+.amazon-auto-links-section-tab.nav-tab.active a {
+    color: #000;
+}
+.amazon-auto-links-content ul.amazon-auto-links-section-tabs > li.amazon-auto-links-section-tab {    
+    /* Do not show bullets in section tabs */
+    list-style-type: none;
+    /* For WordPress 4.4, make sure to attach the tab to the container */
+    margin: -4px 4px -1px 0;
+}
+/* Repeatable Sections */
+.amazon-auto-links-repeatable-section-buttons {
+    float: right;
+    clear: right;
+    margin-top: 1em;
+}
+/* Section Caption */
+.amazon-auto-links-section-caption {
+    text-align: left;
+    margin: 0;
+}
+/* Section Title */
+.amazon-auto-links-section .amazon-auto-links-section-title {
+    /* background: none; */               /* @todo examine what this is for. @deprecated 3.4.0 for repeatable collapsible section titles */
+    /* -webkit-box-shadow: none; */       /* @todo examine what this is for. @deprecated 3.4.0 for repeatable collapsible section titles */
+    /* _box-shadow: none; */              /* @todo examine what this is for. @deprecated 3.4.0 for repeatable collapsible section titles */
+}
+
+/* Sortable Sections */
+.amazon-auto-links-sections.sortable-section > .amazon-auto-links-section {
+    padding: 1em 2em 1em 2em;
+}
+
+/* Sortable Collapsible Sections */
+.amazon-auto-links-sections.sortable-section > .amazon-auto-links-section.is_subsection_collapsible {
+    display: block; 
+    float: none;
+    border: 0px;
+    padding: 0;
+    background: transparent;
+}
+/* Sortable Tabbed Sections */
+.amazon-auto-links-sections.sortable-section > .amazon-auto-links-tab-content {
+    display: block; 
+    float: none;
+    border: 0px;    
+
+    padding: 0.5em 2em 1.5em 2em;
+    margin: 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dfdfdf;
+    background-color: #fdfdfd;      
+}
+
+.amazon-auto-links-sections.sortable-section > .amazon-auto-links-section {
+    margin-bottom: 1em;
+}
+.amazon-auto-links-section {
+    margin-bottom: 1em; /* gives a margin between sections. This helps for the debug info in each sectionset and collapsible sections. */
+}            
+.amazon-auto-links-sectionset {
+    margin-bottom: 1em; 
+    display:inline-block;
+    width:100%;
+}            
+/* Nested sections */
+.amazon-auto-links-section > .amazon-auto-links-sectionset {
+    margin-left: 2em;
+}
+
+CSSRULES;
+        
+    }
+}

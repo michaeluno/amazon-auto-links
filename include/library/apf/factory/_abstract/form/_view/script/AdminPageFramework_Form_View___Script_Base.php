@@ -1,0 +1,3 @@
+<?php
+class AmazonAutoLinks_AdminPageFramework_Form_View___Script_Base extends AmazonAutoLinks_AdminPageFramework_Factory___Script_Base {
+}
