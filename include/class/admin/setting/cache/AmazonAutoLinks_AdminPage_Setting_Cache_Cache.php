@@ -95,7 +95,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                     'normal'        => __( 'Normal', 'amazon-auto-links' ) . ' - ' . __( 'relies on WP Cron.', 'amazon-auto-links' ) . '<br />',
                     'intense'       => __( 'Intense', 'amazon-auto-links' ) . ' - ' . __( 'relies on the plugin caching method.', 'amazon-auto-links' ) . '<br />',
                 ),
-                'description'       => __( 'The intense mode should only be enabled when the normal mode does not work.', 'amazon-auto-links' ),
+                'tip'               => __( 'The intense mode should only be enabled when the normal mode does not work.', 'amazon-auto-links' ),
                 'default' => 'normal',
             )            
         );    

@@ -46,7 +46,7 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
                 'type'              => 'submit',
                 'reset'             => true,
                 'value'             => __( 'Restore', 'amazon-auto-links' ),
-                'description'       => __( 'Restore the default options.', 'amazon-auto-links' ),
+                'tip'               => __( 'Restore the default options.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'size'          => 30,
                     // 'required' => 'required',

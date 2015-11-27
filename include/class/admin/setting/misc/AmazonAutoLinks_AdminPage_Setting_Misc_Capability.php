@@ -34,8 +34,8 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_
                 'field_id'      => 'setting_page_capability',
                 'type'          => 'select',
                 'title'         => __( 'Capability', 'amazon-auto-links' ),
-                'description'   => __( 'Select the user role that is allowed to access the plugin setting pages.', 'amazon-auto-links' )
-                    . __( 'Default', 'amazon-auto-links' ) . ': ' . __( 'Administrator', 'amazon-auto-links' ),
+                'tip'           => __( 'Select the user role that is allowed to access the plugin setting pages.', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ': ' . __( 'Administrator', 'amazon-auto-links' ),
                 'capability'    => 'manage_options',
                 'label'         => array(                        
                     'manage_options' => __( 'Administrator', 'amazon-auto-links' ),

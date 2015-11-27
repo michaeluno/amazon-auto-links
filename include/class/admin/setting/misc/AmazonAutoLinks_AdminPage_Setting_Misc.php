@@ -43,9 +43,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
                 'section_id'    => 'form_options',       // avoid hyphen(dash), dots, and white spaces
                 'capability'    => 'manage_options',
                 'title'         => __( 'Form', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Set allowed HTML tags etc.', 'amazon-auto-links' ),
-                ),
+                'description'   => __( 'Set allowed HTML tags etc.', 'amazon-auto-links' ),
             )
         );        
         new AmazonAutoLinks_AdminPage_Setting_Misc_Debug( 
@@ -56,9 +54,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
                 'section_id'    => 'debug', 
                 'capability'    => 'manage_options',
                 'title'         => __( 'Debug', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
-                ),
+                'description'   => __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
             )
         );
         

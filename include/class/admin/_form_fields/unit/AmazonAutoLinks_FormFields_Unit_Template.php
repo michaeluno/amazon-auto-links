@@ -28,7 +28,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'field_id'          => $sFieldIDPrefix . 'template_id',
                 'type'              => 'select',            
                 'title'             => __( 'Template Name', 'amazon-auto-links' ),
-                'description'       => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
+                'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
                 'label'             => $this->oTemplateOption->getActiveTemplateLabels(),
                 'default'           => $this->oTemplateOption->getDefaultTemplateIDByUnitType( $sUnitType ),
             ),
@@ -47,11 +47,10 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     // 'min' => 1, // <-- not sure this horizontally diminishes the input element
                 ),
                 'after_input'       => "<div style='margin:auto; width:100%; clear: both;'><img src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/columns.gif' ) . "' title='" . __( 'The number of columns', 'amazon-auto-links' ) . "' style='width:220px; margin-top: 8px;' /></div>",
-                'description'       => __( 'This option requires a column supported template to be activated.' ) 
-                    . ( $_iMaxCol > 1 
-                        ? '' 
-                        : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'http://en.michaeluno.jp/amazon-auto-links-pro/' ) 
-                    ),
+                'tip'               => __( 'This option requires a column supported template to be activated.' ),
+                'description'       => $_iMaxCol > 1 
+                    ? '' 
+                    : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'http://en.michaeluno.jp/amazon-auto-links-pro/' ),                
                 'default'           => 4,
                 'delimiter'         => '',
             ),                
@@ -66,13 +65,12 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     'readonly' => $_oOption->isAdvancedAllowed() 
                         ? null
                         : 'raedonly', 
-                    'row'      => 4,                
+                    'rows'     => 6,                
                     'style'    => 'width: 96%',
                     
                 ),
                 'default'           => $_aItemFormat['item_format'],
-                'description'       => array(
-                    __( 'Sets the layout of an item. The following variables are available.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => __( 'Sets the layout of an item. The following variables are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -84,7 +82,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer review.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%button%</code> - " . __( 'store link button.', 'amazon-auto-links' ),
-                    $_bAPIConnected
+                'description'       => $_bAPIConnected
                         ? null
                         : sprintf(
                             '* <span class="warning">' 
@@ -92,7 +90,6 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                             . "</span>",
                             AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
                         ),
-                ),
             ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'title_format',
@@ -100,7 +97,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'type'              => 'textarea',
                 'default'           => $_aItemFormat['title_format'],
                 'attributes'        => array(
-                    'row'       => 4,
+                    'rows'      => 6,
                     'class'     => $_oOption->isAdvancedAllowed() 
                         ? '' 
                         : 'read-only',
@@ -109,7 +106,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         : 'readonly', 
                     'style'     => 'width: 96%',
                 ),
-                'description'       => __( 'Sets the layout of a title.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => __( 'Sets the layout of a title.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
@@ -120,7 +117,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'type'          => 'textarea',
                 'attributes'    => array(
                     // 'cols'      => 40,
-                    'row'       => 4,
+                    'rows'      => 6,
                     'class'     => $_oOption->isAdvancedAllowed() 
                         ? '' 
                         : 'read-only',
@@ -130,7 +127,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     'style'     => 'width: 96%',
                 ),
                 'default'       => $_aItemFormat['image_format'],
-                'description'   => __( 'Sets the layout of an image.', 'amazon-auto-links' ) . '<br />'
+                'tip'           => __( 'Sets the layout of an image.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'

@@ -33,7 +33,7 @@ class AmazonAutoLinks_FormFields_Widget_Visibility extends AmazonAutoLinks_FormF
                     'em'    => 'em'
                 ),                
                 'default'       => '%',
-                'description'   => __( 'Set 0 for no limit.', 'amazon-auto-links' ),
+                'description'   => __( 'Set 0 for no limit.', 'amazon-auto-links' ),               
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'height',

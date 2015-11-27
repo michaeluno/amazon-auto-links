@@ -23,11 +23,11 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
                 'class'             => array(
                     'fieldrow'      => 'button-select-row',
                 ),   
+                'tip'               => sprintf(
+                    __( 'Select the button for the <code>%1$s</code> parameter.', 'amazon-auto-links' ),
+                    '%button%'
+                ),
                 'description'       => array(
-                    sprintf(
-                        __( 'Select the button for the <code>%1$s</code> parameter.', 'amazon-auto-links' ),
-                        '%button%'
-                    ),
                     sprintf(
                         __( 'Buttons can be created from <a href="%1$s">this screen</a>.', 'amazon-auto-links' ),
                         add_query_arg(

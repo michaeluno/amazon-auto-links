@@ -34,10 +34,8 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_
                 'field_id'      => 'allowed_html_tags',
                 'type'          => 'text',
                 'title'         => __( 'Allowed HTML Tags', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Enter the allowed HTML tags for the form input, separated by commas. By default, WordPress applies a filter called KSES that strips out certain tags before the user input is saved in the database for security reasons.', 'amazon-auto-links' ),
-                    ' e.g. <code>noscript, style</code>',
-                ),
+                'tip'           => __( 'Enter the allowed HTML tags for the form input, separated by commas. By default, WordPress applies a filter called KSES that strips out certain tags before the user input is saved in the database for security reasons.', 'amazon-auto-links' ),
+                'description'   => 'e.g. <code>noscript, style</code>',
                 'attributes'    => array(
                     'size'         => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 60 

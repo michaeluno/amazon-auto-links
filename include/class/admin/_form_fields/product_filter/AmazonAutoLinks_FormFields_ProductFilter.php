@@ -29,7 +29,7 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
                 'field_id'      => 'white_list',
                 'type'          => 'text',
                 'title'         => __( 'White List', 'amazon-auto-links' ),
-                'description'   => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
+                'tip'           => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
                     . ' ' . __( 'Product links that do not contain the white list items will be omitted.', 'amazon-auto-links' ),
                 'attributes'    => array(   
                     'style' => 'width: 96%;',               
@@ -52,7 +52,7 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
                 'field_id'      => 'black_list',
                 'title'         => __( 'Black List', 'amazon-auto-links' ),
                 'type'          => 'text',
-                'description'   => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
+                'tip'           => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
                     . ' ' . __( 'Product links that contain the black list items will be omitted.', 'amazon-auto-links' ),
                 'attributes'    => array(   
                     'style' => 'width: 96%;',               
@@ -80,7 +80,7 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
                 'default'       => 0,
-                'description'   => __( 'If this is on, upper cases and lower cases of characters have to match to find the given string.', 'amazon-auto-links' )
+                'tip'           => __( 'If this is on, upper cases and lower cases of characters have to match to find the given string.', 'amazon-auto-links' )
                     . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'Off', 'amazon-auto-links' ) . '</code>',
             ),
             array(
@@ -92,7 +92,7 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
                 'default'       => 0,
-                'description'   => __( 'If this is on, the same products that are already loaded will not be displayed among different units', 'amazon-auto-links' )
+                'tip'           => __( 'If this is on, the same products that are already loaded will not be displayed among different units', 'amazon-auto-links' )
                     . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'On', 'amazon-auto-links' ) . '</code>',
             ),                
         );

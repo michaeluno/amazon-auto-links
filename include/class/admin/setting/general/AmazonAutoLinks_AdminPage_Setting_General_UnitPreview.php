@@ -33,8 +33,8 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
             array(
                 'field_id'       => 'preview_post_type_slug',
                 'title'          => __( 'Post Type Slug', 'amazon-auto-links' ),
-                'description'    => __( 'Up to 20 characters with small-case alpha numeric characters.', 'amazon-auto-links' )
-                    . ' ' . __( 'Default', 'amazon-auto-links' )
+                'tip'            => __( 'Up to 20 characters with small-case alpha numeric characters.', 'amazon-auto-links' ),
+                'description'    => __( 'Default', 'amazon-auto-links' )
                     . ': <code>'
                         . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
                     . '</code>',

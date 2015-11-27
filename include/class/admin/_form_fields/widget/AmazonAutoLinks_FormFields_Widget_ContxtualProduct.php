@@ -50,7 +50,7 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                 'attributes'    => array(
                     'style' => 'width: 80%',
                 ),
-                'description'   => __( 'Add additional search keywords.', 'amazon-auto-links' ),
+                'tip'           => __( 'Add additional search keywords, separated by commas.', 'amazon-auto-links' ),
             ),     
             
             array(
@@ -77,7 +77,8 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                 'field_id'          => $sFieldIDPrefix . 'associate_id',
                 'type'              => 'text',
                 'title'             => __( 'Associate ID', 'amazon-auto-links' ),
-                'description'       => 'e.g. ' . '<code>miunosorft-20</code>'
+                'tip'               => __( 'The Amazon Associate affiliate id (tag).', 'amazon-auto-links' )
+                    . ' e.g. ' . '<code>miunosorft-20</code>'
             ),     
             array(
                 'field_id'          => $sFieldIDPrefix . 'count',
@@ -99,8 +100,8 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     'min'   => 0,
                     'max'   => 500,
                 ),
-                'after_input'   => ' ' . __( 'pixel', 'amazon-auto-links' ),
-                'description'   => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
+                'after_input'       => ' ' . __( 'pixel', 'amazon-auto-links' ),
+                'tip'               => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
                     . ' ' . __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> ' 
                     . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',                                
                 'default'           => 160,
@@ -123,7 +124,7 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                 'field_id'      => $sFieldIDPrefix. 'title_length',
                 'title'         => __( 'Title Length', 'amazon-auto-links' ),
                 'type'          => 'number',
-                'description'   => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
+                'tip'           => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
                     . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ) . '<br />'
                     . __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
                 'default'       => -1,
@@ -140,8 +141,20 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     4    => 'http://www.amazon.<code>[domain-suffix]</code>/dp/ASIN/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>',
                     5    => site_url() . '?' . $_oOption->get( 'query', 'cloak' ) . '=<code>[asin]</code>&locale=<code>[...]</code>&tag=<code>[associate-id]</code>'
                 ),
-                'before_label'  => "<span class='links-style-label'>",
-                'after_label'   => "</span>",
+                'before_label'  => array(
+                    1 => "<span class='links-style-label'>",
+                    2 => "<span class='links-style-label'>",
+                    3 => "<span class='links-style-label'>",
+                    4 => "<span class='links-style-label'>",
+                    5 => "<span class='links-style-label'>",
+                ),
+                'after_label'   => array(
+                    1 => "</span>",
+                    2 => "</span>",
+                    3 => "</span>",
+                    4 => "</span>",
+                    5 => "</span>",
+                ),
                 'default'       => 1,
             ),        
             array(
@@ -152,7 +165,7 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'   => sprintf( 
+                'tip'           => sprintf( 
                     __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
                     '' 
                 ),

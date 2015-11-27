@@ -18,7 +18,7 @@ class AmazonAutoLinks_FormFields_Unit_Cache extends AmazonAutoLinks_FormFields_B
             array(
                 'field_id'        => $sFieldIDPrefix . 'cache_duration',
                 'title'           => __( 'Cache Duration', 'amazon-auto-links' ),
-                'description'     => __( 'The cache lifespan in seconds. For no cache, set 0.', 'amazon-auto-links' ) 
+                'tip'             => __( 'The cache lifespan in seconds. For no cache, set 0.', 'amazon-auto-links' ) 
                     . ' ' . __( 'Default:', 'amazon-auto-links' ) 
                         . ': <code>' .  ( 60 * 60 * 24 ) . '</code>'
                         . " (" . __( 'One day', 'amazon-auto-links' ) . ")",                

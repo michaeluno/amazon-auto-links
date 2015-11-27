@@ -27,11 +27,9 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'field_id'          => $sFieldIDPrefix . 'subimage_size',
                 'type'              => 'number',            
                 'title'             => __( 'Max Image Size for Sub-images', 'amazon-auto-links' ),
-                'description'       => array(
-                    __( 'Set the maximum width or height for sub-images.', 'amazon-auto-links' ),
-                    __( 'Set 0 for no image.', 'amazon-auto-links' ),
-                    __( 'Default', 'amazon-auto-links' ) . ': <code>100</code>',                    
-                ),
+                'tip'               => __( 'Set the maximum width or height for sub-images.', 'amazon-auto-links' )
+                    . ' ' . __( 'Set 0 for no image.', 'amazon-auto-links' )
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>100</code>',                    
                 'after_input'       => '  pixel(s)',
                 'attributes'        => array(
                     'max'               => 500,

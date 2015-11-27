@@ -35,7 +35,31 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             ) 
         );
         
+        add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToModifyCSSRules' ) );
+        
     }    
+        public function replyToModifyCSSRules( $sCSSRules ) {
+            
+            return $sCSSRules
+                . '
+.links-style-label code,    
+.links-style-label > div {
+    font-size: 0.8em;
+}                
+.widget .amazon-auto-links-input-label-container {
+    width: auto;
+}
+.widget form-table .amazon-auto-links-section-table,
+.widget .amazon-auto-links-sectionset, 
+.widget .amazon-auto-links-section {
+    margin-bottom: 0;
+}
+.widget .amazon-auto-links-section-title > h3 {
+    margin: 0.2em 0;
+}
+                ';
+            
+        }
 
     /**
      * Sets up the form.
@@ -78,7 +102,13 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Product filters
         $this->addSettingSections(
             array(
-                'section_id' => 'product_filters',
+                'title'         => __( 'Product Filters', 'amazon-auto-links' ),
+                'section_id'    => 'product_filters',
+                'collapsible'   => array(
+                    'collapsed' => true,
+                    'type'      => 'button',
+                    'container' => 'section',
+                ),
             )
         );
       

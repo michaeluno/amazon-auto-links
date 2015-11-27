@@ -35,7 +35,7 @@ class AmazonAutoLinks_MetaBox_Unit_ProductFilter extends AmazonAutoLinks_MetaBox
         $this->addSettingSections(
             array(
                 'section_id'    => $_sSectionID,
-                'description'   => array(
+                'tip'           => array(
                     __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
                 ),
             )

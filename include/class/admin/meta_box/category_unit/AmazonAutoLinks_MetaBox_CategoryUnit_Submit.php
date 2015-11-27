@@ -49,7 +49,7 @@ class AmazonAutoLinks_MetaBox_CategoryUnit_Submit extends AmazonAutoLinks_MetaBo
         );
         ?>
 
-        <div style="padding: 0.8em 0 1.5em; ">
+        <div style="padding: 1.5em 0">
             <div style="text-align: center;">
                 <a class="button button-primary button-large" href="<?php echo esc_url( $_sSelectCategoryPageURL ); ?>">
                     <?php _e( 'Select Categories', 'amazon-auto-links' ); ?>

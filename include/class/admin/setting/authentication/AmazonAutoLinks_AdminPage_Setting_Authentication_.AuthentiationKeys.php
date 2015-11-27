@@ -43,8 +43,8 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'field_id'          => 'access_key',
                 'title'             => __( 'Access Key', 'amazon-auto-links' ),
                 'type'              => 'text',
-                'description'       => __( 'The public key consisting of 20 alphabetic characters.', 'amazon-auto-links' )
-                    . ' e.g.<code>022QF06E7MXBSH9DHM02</code>',
+                'tip'               => __( 'The public key consisting of 20 alphabetic characters.', 'amazon-auto-links' ),
+                'description'       => 'e.g.<code>022QF06E7MXBSH9DHM02</code>',
                 'attributes'        => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 20 
@@ -55,8 +55,8 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'field_id'          => 'access_key_secret',
                 'title'             => __( 'Secret Access Key', 'amazon-auto-links' ),
                 'type'              => 'text',
-                'description'       => __( 'The private key consisting of 40 alphabetic characters.', 'amazon-auto-links' )
-                    . ' e.g.<code>kWcrlUX5JEDGM/LtmEENI/aVmYvHNif5zB+d9+ct</code>',
+                'tip'               => __( 'The private key consisting of 40 alphabetic characters.', 'amazon-auto-links' ),
+                'description'       => 'e.g.<code>kWcrlUX5JEDGM/LtmEENI/aVmYvHNif5zB+d9+ct</code>',
                 'attributes'        => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 40 

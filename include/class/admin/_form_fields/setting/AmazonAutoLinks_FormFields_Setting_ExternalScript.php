@@ -33,7 +33,7 @@ class AmazonAutoLinks_FormFields_Setting_ExternalScript extends AmazonAutoLinks_
                     __( 'Add the Amazon impression counter, <a href="%1$s" target="_blank">Link Update JavaScript script</a> to track link impressions.', 'amazon-auto-links' ),
                     'https://affiliate-program.amazon.com/gp/associates/tips/impressions.html'
                 ),                
-                'description'   => array(
+                'tip'           => array(
                     __( 'The sript is not available for the following locales.', 'amazon-auto-links' )
                         . ' ' .  __( 'Italy', 'amazon-auto-links' ) 
                         . ', ' . __( 'France', 'amazon-auto-links' )
