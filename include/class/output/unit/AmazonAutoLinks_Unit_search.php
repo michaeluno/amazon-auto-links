@@ -268,7 +268,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 ',', 
                 false 
             ),
-            // 3+ Power parameter, which can only be used when the search index equals Books.
+            // 3+ Power parameter, which can only be used when the search index equals 'Books'.
             'Power'                 => $this->oUnitOption->get( 'Power' ), 
             
             'Title'                 => $_bIsIndexAllOrBlended 
@@ -337,11 +337,6 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             // );
             // $_aParams[ 'SearchIndex' ] = 'Books';
         // }
-
-/* $_aParams[ 'Keywords' ] = '';
-unset( $_aParams[ 'Keywords' ] );
-// unset( $_aParams[ 'Power' ] );
-AmazonAutoLinks_Debug::log( $_aParams ); */
         
         return $_aParams;
     }
