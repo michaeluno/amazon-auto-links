@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.3.1
-Stable tag:         3.1.2
+Stable tag:         3.1.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -190,7 +190,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.1.4 =
+= 3.1.4 - 11/27/2015 =
 - Added the `search_per_keyword` argument for the shortcode which can be set to `true` when performing search with multiple keywords.
 - Enhanced the ability of the contextual product widget.
 
