@@ -22,21 +22,11 @@ class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAd
      */
     public function setOptions( $aOptions ) {
 
-        // $_sTransientID     = isset( $_GET[ 'transient_id' ] )
-            // ? $_GET[ 'transient_id' ]
-            // : '';
-        // $_aTempUnitOptions = $_sTransientID
-            // ? ( array ) AmazonAutoLinks_WPUtility::getTransient( 
-                // 'AAL_CreateUnit_' . $_sTransientID
-            // )
-            // : array();
-        // return $aOptions + $_aTempUnitOptions;
-// @todo examine whether it is possibe to merge with unit options of the choosen search type.
-        return $aOptions;
+        return $aOptions + $this->_getLastUnitInputs();
         
-// return $aOptions + AmazonAutoLinks_UnitOption_tag::$aStructure_Default;
-
     }
+    
+    
 
     /**
      * Sets up admin pages.

@@ -190,6 +190,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.2.0 = 
+- Added the internal ability to set previous unit option values when creating a new unit.
+- Tweaked the style of setting pages and forms. 
+
 = 3.1.4 - 11/27/2015 =
 - Added the `search_per_keyword` argument for the shortcode which can be set to `true` when performing search with multiple keywords.
 - Enhanced the ability of the contextual product widget.

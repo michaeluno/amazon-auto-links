@@ -37,6 +37,13 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
         // Create a unit - the method will take care of data sanitization.    
         $_iNewPostID = $this->_createSearchUnit( $aInput );
         
+        // Store the inputs for the next time.
+        update_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
+            $aInput,
+            false       // disable auto-load 
+        );            
+        
         $this->_goToNextPage( $_iNewPostID );
         
         return $aInput;

@@ -21,7 +21,9 @@ class AmazonAutoLinks_TagUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
      * @return      array       The options array.
      */
     public function setOptions( $aOptions ) {
-        return $aOptions + AmazonAutoLinks_UnitOption_tag::$aStructure_Default;
+        return $aOptions 
+            + $this->_getLastUnitInputs()
+            + AmazonAutoLinks_UnitOption_tag::$aStructure_Default;
     }
 
     /**

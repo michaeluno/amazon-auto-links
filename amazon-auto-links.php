@@ -91,6 +91,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'template'          => 'amazon_auto_links_templates',
         'button_css'        => 'amazon_auto_links_button_css',
         
+        // 3.2.0+
+        'last_input'        => 'amazon_auto_llink_last_input',
+        
         'table_versions'    => array(
             // $aDatabaseTables property key => {table name}_version
             'product'       => 'aal_products_version',

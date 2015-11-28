@@ -48,6 +48,23 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
     public function setOptions( $aOptions ) {
         return $aOptions;
     }
+    /**
+     * @return      array
+     */
+    protected function _getLastUnitInputs() {
+        $_aLastInputs = get_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
+            array()
+        );           
+        unset( 
+            $_aLastInputs[ 'unit_title' ],
+            $_aLastInputs[ 'Keywords' ],
+            $_aLastInputs[ 'ItemId' ],
+            $_aLastInputs[ 'tags' ],
+            $_aLastInputs[ 'customer_id' ]
+        );
+        return $_aLastInputs;
+    }    
     
     /**
      * @return      boolean

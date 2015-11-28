@@ -97,6 +97,13 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
             __( 'Select a category from the below list.', 'amazon-auto-links' ),
             'updated'
          );
+         
+        // Store the inputs for the next time.
+        update_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
+            $aInput,
+            false       // disable auto-load 
+        );
         
         return $aInput;
         

@@ -173,6 +173,13 @@ class AmazonAutoLinks_TagUnitAdminPage_TagUnit extends AmazonAutoLinks_AdminPage
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
         );        
         
+        // Store the inputs for the next time.
+        update_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
+            $aInput,
+            false       // disable auto-load 
+        );         
+        
         // This won't be reached.
         return $aInput;
         

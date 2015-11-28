@@ -70,7 +70,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
         
         return $aOptions 
             + $_aOptions
-            + $_aUnitOptions;
+            + $_aUnitOptions
+            + $this->_getLastUnitInputs();
         
     }
         
