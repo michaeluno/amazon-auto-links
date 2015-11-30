@@ -21,6 +21,13 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
     public $sUnitType = 'item_lookup';
     
     /**
+     * Stores the unit option key that is used for the search.
+     * This is needed for the `search_per_keyword` option.
+     * @since       3.2.0
+     */
+    public $sSearchTermKey = 'ItemId';
+    
+    /**
      * Represents the array structure of the API request arguments.
      * @since            2.0.2
      */
@@ -39,6 +46,17 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
         'ResponseGroup'         => null,
     );
 
+    /**
+     * @scope       protected       Item look-up and Similarity look-up will override this method.
+     * @since       3.2.0
+     * @return      integer
+     */
+    protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
+        return $this->oOption->isAdvancedAllowed()
+            ? 10
+            : count( $aTerms );
+    }    
+    
     /**
      * Performs an Amazon Product API request.
      * 
@@ -90,7 +108,7 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
             // 'VariationPage' => null, // (optional)
             'ResponseGroup'         => 'Large', // (optional)
         );
-        
+
         if ( 'ASIN' === $_aUnitOptions['IdType'] ) {
             unset( $aParams['SearchIndex'] );
         }

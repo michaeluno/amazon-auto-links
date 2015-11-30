@@ -193,6 +193,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.0 = 
+- Added the `Search per Keyword` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
 - Added the `%disclaimer%` variable in the `Item Format` unit option.
 - Added a unit option to toggle the visibility of `Now Retrieving...` message.
 - Added the internal ability to set previous unit option values when creating a new unit.

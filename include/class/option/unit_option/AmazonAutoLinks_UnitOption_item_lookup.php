@@ -38,7 +38,9 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      * @return  array
      */
     protected function getDefaultOptionStructure() {
-        return self::$aStructure_Default + parent::$aStructure_Default;
+        return self::$aStructure_Default 
+            + parent::$aStructure_Default
+            + AmazonAutoLinks_UnitOption_search::$aStructure_Default;
     }
 
     /**

@@ -37,9 +37,17 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                         ? 40 
                         : 60,
                 ),
-                'description'   => __( 'Enter the keyword to search. For multiple items, separate them by commas.', 'amazon-auto-links' )
+                'tip'           => __( 'Enter the keyword to search.', 'amazon-auto-links' ),
+                'description'   => __( 'For multiple items, separate them by commas.', 'amazon-auto-links' )
                     . ' e.g. <code>WordPress, PHP</code>',
             ),
+            array(
+                'field_id'      => $sFieldIDPrefix . 'search_per_keyword',
+                'type'          => 'checkbox',
+                'title'         => __( 'Search per Item', 'amazon-auto-links' ),
+                'tip'           => __( 'When setting multiple items and if one of them could not be found, Amazon API returns an error. To prevent it, check this option so that the rest will be returned.', 'amazon-auto-links' ),
+                'label'         => __( 'Perform search per item.', 'amazon-auto-links' ),
+            ),            
             array(
                 'field_id'      => $sFieldIDPrefix . 'Operation',
                 'type'          => 'hidden',
@@ -70,8 +78,9 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                         : null 
                 ),
                 'default'       => 'All',
-                'description'   => __( 'Select the category to limit the searching area.', 'amazon-auto-links' )
-                    . ' ' . __( 'Since some options do not work with the All index, it is recommended to pick one.', 'amazon-auto-links' ),
+                'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
+                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
+                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
             ),    
             array(
                 'field_id'      => $sFieldIDPrefix . 'count',
@@ -83,7 +92,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                         ? $_oOption->getMaximumProductLinkCount() 
                         : null,
                 ),
-                'description'   => __( 'The number of product links to display.' ),
+                'tip'           => __( 'The number of product links to display.', 'amazon-auto-links' ),
                 'default'       => 10,
             ),            
             array(
@@ -92,9 +101,9 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'title'         => __( 'Image Size', 'amazon-auto-links' ),
                 'after_input'   => ' ' . __( 'pixel', 'amazon-auto-links' ),
                 'delimiter'     => '',
-                'description'   => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
-                    . ' ' . __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> ' 
-                    . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',                
+                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
+                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
                 'attributes'    => array(
                     'max' => 500,
                     'min' => 0,
@@ -114,7 +123,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                     'reviewrank'          => "<strong>" . __( 'Review Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how highly rated the item was reviewed by customers where the highest ranked items are listed first and the lowest ranked items are listed last.', 'amazon-auto-links' ) . '<br />',
                 ),
                 'default'       => 'salesrank',
-                'description'   => __( 'When the search index is selected to All, this option does not take effect.', 'amazon-auto-links' ),
+                'description'   => __( 'When the search index is selected to <code>All</code>, this option does not take effect.', 'amazon-auto-links' ),
             ),                
             array(
                 'field_id'      => $sFieldIDPrefix . 'ref_nosim',
@@ -131,18 +140,18 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'field_id'      => $sFieldIDPrefix . 'title_length',
                 'type'          => 'number',
                 'title'         => __( 'Title Length', 'amazon-auto-links' ),
-                'description'   => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ) . '<br />'
-                    . __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
+                'tip'           => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
                 'default'       => -1,
             ),                
             array(
                 'field_id'      => $sFieldIDPrefix . 'description_length',
                 'type'          => 'number',
                 'title'         => __( 'Description Length', 'amazon-auto-links' ),
-                'description'   => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ) . '<br />'
-                    . __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
+                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
                 'default'       => 250,
             ),        
             array(
@@ -169,7 +178,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                     1 => __( 'On', 'amazon-auto-links' ),
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'   => sprintf( __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), '' ),
+                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
                 'default'       => 1,
             ),    
         );

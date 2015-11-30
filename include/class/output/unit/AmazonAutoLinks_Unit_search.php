@@ -21,6 +21,13 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
     public $sUnitType = 'search';
     
     /**
+     * Stores the unit option key that is used for the search.
+     * This is needed for the `search_per_keyword` option.
+     * @since       3.2.0
+     */
+    public $sSearchTermKey = 'Keywords';    
+    
+    /**
      * Represents the array structure of the item array element of API response data.
      * @since            unknown
      */    
@@ -73,7 +80,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
          * @return      array
          */
         private function _getResponses() {
-            
+
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
                 // Normal operation
                 return $this->getRequest( $this->oUnitOption->get( 'count' ) );
@@ -81,38 +88,72 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             } 
                 
             // For contextual search, perform search by each keyword
-            $_iCount    = $this->oUnitOption->get( 'count' );
-            $_iItems    = array();
-            $_aResponse = array();
-            $_aKeywords = explode( ',', $this->oUnitOption->get( 'Keywords' ) );
-            
-            foreach( $_aKeywords as $_sKeyword ) {
-                $this->oUnitOption->set( 'Keywords', $_sKeyword );
-                $_aResponse = $this->getRequest( $_iCount );
-                $_iItems        = array_merge(
-                    $_iItems,
-                    $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) )
-                );
-                if ( count( $_iItems ) >= $_iCount ) {
-                    break;
-                }
-            }
-            array_splice( $_iItems, $_iCount );   // up to the set item count
-            $this->setMultiDimensionalArray( 
-                $_aResponse,
-                array( 'Items', 'Item' ),
-                $_iItems
-            );
-            if ( 0 < count( $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) ) ) ) {
-                unset(
-                    $_aResponse[ 'Error' ][ 'Code' ],
-                    $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
-                );
-            }            
-                            
-            return $_aResponse;            
+            return $this->_getResponsesByMultipleKeywords();
             
         }
+            /**
+             * @scope       protected       Item Look-up and Similarity Look-up unit types will override this method.
+             * @since       3.2.0
+             * @return      array
+             */
+            protected function _getResponsesByMultipleKeywords() {
+             
+                $_iItems    = array();
+                $_aResponse = array();           
+                $_aTerms    = explode( ',', $this->oUnitOption->get( $this->sSearchTermKey ) );
+                $_aTerms    = $this->convertStringToArray( $this->oUnitOption->get( $this->sSearchTermKey ), ',' );
+                $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
+                foreach( $_aTerms as $_sSearchTerm ) {
+
+                    $this->oUnitOption->set( $this->sSearchTermKey, $_sSearchTerm );
+                    $_aResponse = $this->getRequest( $_iCount );
+                    
+                    $_iItems        = array_merge(
+                        $_iItems,
+                        $this->_getItemsNumericallyIndexed( $_aResponse )
+                    );
+                    if ( count( $_iItems ) >= $_iCount ) {
+                        break;
+                    }
+                }
+
+                array_splice( $_iItems, $_iCount );   // up to the set item count
+                $this->setMultiDimensionalArray( 
+                    $_aResponse,
+                    array( 'Items', 'Item' ),
+                    $_iItems
+                );
+                if ( 0 < count( $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) ) ) ) {
+                    unset(
+                        $_aResponse[ 'Error' ][ 'Code' ],
+                        $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
+                    );
+                }            
+                                
+                return $_aResponse; 
+             
+            }          
+                /**
+                 * If a single item is returned, it is an associative array; otherwize, numeric.
+                 * @return      array       Numerically indexed item element.
+                 */
+                private function _getItemsNumericallyIndexed( $aResponse ) {
+                    
+                    $_aItems = $this->getElementAsArray( $aResponse, array( 'Items', 'Item' ) );
+                    return $this->isAssociative( $_aItems )
+                        ? array( $_aItems )
+                        : $_aItems;
+                    
+                }
+                /**
+                 * @scope       protected       Item look-up and Similarity look-up will override this method.
+                 * @since       3.2.0
+                 * @return      integer
+                 */
+                protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
+                    return $this->oUnitOption->get( 'count' );
+                }
+
     
         /**
          * Checks whether response has an error.

@@ -55,7 +55,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'field_id'      => 'count',
                 'title'         => __( 'Number of Items', 'amazon-auto-links' ),
                 'type'          => 'number',
-                'description'   => __( 'The number of product links to display.', 'amazon-auto-links' ),
+                'tip'           => __( 'The number of product links to display.', 'amazon-auto-links' ),
                 'default'       => 10,
                 'attributes'    => array(
                     'min' => 1,
@@ -70,9 +70,9 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'type'          => 'number',
                 'after_input'   => ' ' . __( 'pixel', 'amazon-auto-links' ),
                 'elimiter'      => '',
-                'description'   => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
-                    . ' ' . __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> ' 
-                    . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',                
+                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
+                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
                 'attributes'    => array(
                     'max'   => 500,
                     'min'   => 0,
@@ -135,9 +135,9 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'field_id'      => 'title_length',
                 'title'         => __( 'Title Length', 'amazon-auto-links' ),
                 'type'          => 'number',
-                'description'   => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ) . '<br />'
-                    . __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
+                'tip'           => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
                 'default'       => -1,
             ),        
             array(
@@ -164,10 +164,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'   => sprintf( 
-                    __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
-                    '' 
-                ),
+                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
                 'default'       => 1,
             ),    
         );

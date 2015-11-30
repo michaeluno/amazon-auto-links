@@ -101,9 +101,9 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     'max'   => 500,
                 ),
                 'after_input'       => ' ' . __( 'pixel', 'amazon-auto-links' ),
-                'tip'               => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
-                    . ' ' . __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> ' 
-                    . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',                                
+                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
+                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
                 'default'           => 160,
             ),
             array(
@@ -165,10 +165,7 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'tip'           => sprintf( 
-                    __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
-                    '' 
-                ),
+                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
                 'default'       => 1,
             ),                                    
             array()

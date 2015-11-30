@@ -21,6 +21,13 @@ class AmazonAutoLinks_Unit_similarity_lookup extends AmazonAutoLinks_Unit_search
     public $sUnitType = 'similarity_lookup';
     
     /**
+     * Stores the unit option key that is used for the search.
+     * This is needed for the `search_per_keyword` option.
+     * @since       3.2.0
+     */
+    public $sSearchTermKey = 'ItemId';
+    
+    /**
      * Represents the array structure of the API request arguments.
      * @since            2.0.2
      */
@@ -32,8 +39,7 @@ class AmazonAutoLinks_Unit_similarity_lookup extends AmazonAutoLinks_Unit_search
         'SimilarityType'    => 'Intersection',
         'ResponseGroup'     => 'Large',
     );
-    
-
+   
     /**
      * Performs an Amazon Product API request.
      * 

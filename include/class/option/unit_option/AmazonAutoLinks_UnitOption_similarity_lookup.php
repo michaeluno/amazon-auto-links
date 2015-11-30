@@ -37,7 +37,9 @@ class AmazonAutoLinks_UnitOption_similarity_lookup extends AmazonAutoLinks_UnitO
      * @return  array
      */
     protected function getDefaultOptionStructure() {
-        return self::$aStructure_Default + parent::$aStructure_Default;
+        return self::$aStructure_Default
+            + parent::$aStructure_Default
+            + AmazonAutoLinks_UnitOption_search::$aStructure_Default;
     }    
     
 }

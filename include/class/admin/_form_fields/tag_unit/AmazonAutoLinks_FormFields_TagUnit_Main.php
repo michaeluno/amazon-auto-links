@@ -100,8 +100,8 @@ class AmazonAutoLinks_FormFields_TagUnit_Main extends AmazonAutoLinks_FormFields
                 'field_id'          => $sFieldIDPrefix . 'count',
                 'title'             => __( 'Number of Items', 'amazon-auto-links' ),
                 'type'              => 'number',
-                'description'       => __( 'The number of product links to display.' ),
-                'attributes'    => array(
+                'tip'               => __( 'The number of product links to display.', 'amazon-auto-links' ),
+                'attributes'        => array(
                     'min' => 1,
                     'max' => $_oOption->getMaximumProductLinkCount() 
                         ? $_oOption->getMaximumProductLinkCount() 
@@ -115,9 +115,9 @@ class AmazonAutoLinks_FormFields_TagUnit_Main extends AmazonAutoLinks_FormFields
                 'title'             => __( 'Image Size', 'amazon-auto-links' ),
                 'after_input'       => ' ' . __( 'pixel', 'amazon-auto-links' ),
                 'delimiter'         => '',
-                'description'       => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' )
-                    . ' ' . __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> ' 
-                    . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
+                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
+                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
                 'attributes'        => array(
                     'max' => 500,
                     'min' => 0,                
@@ -154,9 +154,9 @@ class AmazonAutoLinks_FormFields_TagUnit_Main extends AmazonAutoLinks_FormFields
                 'field_id'          => $sFieldIDPrefix . 'title_length',
                 'type'              => 'number',
                 'title'             => __( 'Title Length', 'amazon-auto-links' ),
-                'description'       => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ) . '<br />'
-                    . __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
+                'tip'               => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ),
+                'description'       => __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
                 'default'           => -1,
             ),        
             array(
@@ -183,10 +183,7 @@ class AmazonAutoLinks_FormFields_TagUnit_Main extends AmazonAutoLinks_FormFields
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'       => sprintf( 
-                    __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
-                    '' 
-                ),
+                'tip'               => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
                 'default'           => 1,
             ),           
         );
