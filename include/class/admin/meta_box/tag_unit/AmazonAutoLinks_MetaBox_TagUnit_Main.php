@@ -31,8 +31,11 @@ class AmazonAutoLinks_MetaBox_TagUnit_Main extends AmazonAutoLinks_MetaBox_Base 
         }
         
         // 3.2.0+
+        $_sMessage            = esc_attr( __( 'Warning!', 'amazon-auto-links' ) );
+        $_sExclamationIconURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/exclamationmark_16x16.png' );
         new AmazonAutoLinks_AdminPageFramework_AdminNotice(
-            sprintf(
+            "<img src='{$_sExclamationIconURL}' alt='{$_sMessage}' /> "
+            . sprintf(
                 __( 'Amazon deprecated the <a href="%1$s" target="_blank">tags</a> feature. So this is no longer functional.', 'amazon-auto-links' ),
                 'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571'
             )
