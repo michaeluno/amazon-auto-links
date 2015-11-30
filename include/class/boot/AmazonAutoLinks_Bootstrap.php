@@ -414,6 +414,16 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 'low' // priority                                    
             );
             
+            new AmazonAutoLinks_MetaBox_Template(
+                null, // meta box ID - null to auto-generate
+                __( 'Template', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'advanced', // context - e.g. 'normal', 'advanced', or 'side'
+                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+            );  
+  
             new AmazonAutoLinks_MetaBox_Unit_ProductFilter(
                 null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
                 __( 'Unit Product Filters', 'amazon-auto-links' ), // title
@@ -434,15 +444,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 'side', // context (what kind of metabox this is)
                 'default' // priority                        
             );                   
-            new AmazonAutoLinks_MetaBox_Template(
-                null, // meta box ID - null to auto-generate
-                __( 'Template', 'amazon-auto-links' ), // title
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-                ), 
-                'side', // context - e.g. 'normal', 'advanced', or 'side'
-                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
-            );
+
             
             new AmazonAutoLinks_MetaBox_DebugInfo(
                 null, // meta box ID - null to auto-generate

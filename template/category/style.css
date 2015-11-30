@@ -44,6 +44,11 @@
 	font-size: smaller;
 }
 
+/* Description fix */
+.riRssContributor {
+    margin-right: 0.4em;
+}
+
 /* Customer Reviews */
 .amazon-product-container .amazon-customer-reviews {
     word-break: break-all;
@@ -91,4 +96,45 @@
     word-wrap: break-word;
     word-break: break-all;
     margin: 1em 0;        
+}
+
+/* Pricing disclaimer */
+.amazon-products-container .pricing-disclaimer {
+    font-size: small;
+    margin-left: 1em;
+}
+
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip {
+   outline: none; 
+}
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip strong {
+    line-height:30px;
+}
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover {
+    text-decoration: none;
+} 
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span {
+    z-index:10;
+    display:none; 
+    padding:14px 20px;
+    margin-top:-30px; 
+    margin-left:28px;
+    width:300px; 
+    line-height:16px;
+    
+}
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover span{
+    display:inline; 
+    position:absolute; 
+    color:#111;
+    border:1px solid #DCA; 
+    background:#fffAF0;
+    
+    /* Adjust the pop up element position */
+    margin-left: -100px;
+    margin-top: -140px;    
+}
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span {
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
 }

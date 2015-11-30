@@ -81,7 +81,8 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%price%</code> - " . __( 'product price.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer review.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%button%</code> - " . __( 'store link button.', 'amazon-auto-links' ),
+                        . "<code>%button%</code> - " . __( 'store link button.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%disclaimer%</code> - " . __( 'disclaimer for the product information.', 'amazon-auto-links' ),
                 'description'       => $_bAPIConnected
                         ? null
                         : sprintf(

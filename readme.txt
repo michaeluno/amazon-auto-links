@@ -193,8 +193,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.0 = 
+- Added the `%disclaimer%` variable in the `Item Format` unit option.
 - Added a unit option to toggle the visibility of `Now Retrieving...` message.
 - Added the internal ability to set previous unit option values when creating a new unit.
+- Changed the initial position of the `Template` unit option section.
 - Tweaked the style of setting pages and forms. 
 - Deprecated the `tag` unit type as it is no longer supported by [Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571).
 

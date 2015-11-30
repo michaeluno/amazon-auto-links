@@ -17,7 +17,7 @@
  * @filter      apply       aal_filter_unit_product_formatted_html
  */
 abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_Unit_Base_ProductFilter {
-    
+        
     /**
      * @return      array
      */
@@ -92,6 +92,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
      * @return      string
      */
     protected function _formatProductOutput( array $aProduct ) {
+
         $_sOutput = str_replace( 
             array( 
                 "%href%", 
@@ -105,6 +106,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 "%price%",
                 "%button%",
                 "%image_set%",
+                "%disclaimer%", // 3.2.0+
             ),
             array( 
                 $aProduct[ 'product_url' ], 
@@ -118,6 +120,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 $aProduct[ 'price' ],
                 $aProduct[ 'button' ],
                 $aProduct[ 'image_set' ],
+                $this->_getPricingDisclaimer( $aProduct[ 'updated_date' ] ) // 3.2.0+
             ),
             apply_filters(
                 'aal_filter_unit_item_format',
@@ -126,6 +129,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 $this->oUnitOption->get()
             )
         );
+
         return apply_filters(
             'aal_filter_unit_product_formatted_html',    // filter hook name
             $_sOutput, // filtering value
@@ -133,6 +137,37 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
             $this->oUnitOption->get( 'country' ) // additional parameter 2
         );
     }        
+    
+        /**
+         * @since       3.2.0
+         * @return      string
+         */
+        protected function _getPricingDisclaimer( $sResponseDate ) {
+            
+            return "<span class='pricing-disclaimer'>"
+                . "(" 
+                    . sprintf(
+                        __( 'as of %1$s', 'amazon-auto-links' ),
+                        $this->getSiteReadableDate( strtotime( $sResponseDate ) )
+                    )
+                    . ' - '
+                    . $this->_getDisclaimerTooltip()
+                . ")"
+                . "</span>";
+        }            
+            /**
+             * @since       3.2.0
+             * @return      string
+             */
+            private function _getDisclaimerTooltip() {
+                return "<a href='#' class='amazon-disclaimer-tooltip'>"
+                        . __( 'More info', 'amazon-auto-links' )
+                        . "<span class='amazon-disclaimer-tooltip-content'>"
+                            . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
+                        . "</span>"
+                    . "</a>";                
+            }
+        
 
     /**
      * Returns the formatted product title HTML Block.

@@ -17,6 +17,33 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     
     /**
+     * Returns the readable date-time string.
+     */
+    static public function getSiteReadableDate( $iTimeStamp, $sDateTimeFormat=null, $bAdjustGMT=false ) {
+                
+        static $_iOffsetSeconds, $_sDateFormat, $_sTimeFormat;
+        $_iOffsetSeconds = $_iOffsetSeconds 
+            ? $_iOffsetSeconds 
+            : get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
+        $_sDateFormat = $_sDateFormat
+            ? $_sDateFormat
+            : get_option( 'date_format' );
+        $_sTimeFormat = $_sTimeFormat
+            ? $_sTimeFormat
+            : get_option( 'time_format' );    
+        $sDateTimeFormat = $sDateTimeFormat
+            ? $sDateTimeFormat
+            : $_sDateFormat . ' ' . $_sTimeFormat;
+        
+        if ( ! $iTimeStamp ) {
+            return 'n/a';
+        }
+        $iTimeStamp = $bAdjustGMT ? $iTimeStamp + $_iOffsetSeconds : $iTimeStamp;
+        return date_i18n( $sDateTimeFormat, $iTimeStamp );
+            
+    }       
+    
+    /**
      * Finds scheduled cron tasks by the given action name.
      *  
      * @since       3

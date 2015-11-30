@@ -347,13 +347,15 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
      * @return      array
      */
     protected function getProducts( $aResponse ) {
+
+        $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
+        $_sLocale       = strtoupper( $this->oUnitOption->get( 'country' ) );
+        $_sAssociateID  = $this->oUnitOption->get( 'associate_id' );        
         
-        $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
-        $_sLocale      = strtoupper( $this->oUnitOption->get( 'country' ) );
-        $_sAssociateID = $this->oUnitOption->get( 'associate_id' );        
-        
+        $_sResponseDate = $this->_getAPIResponseDate( $aResponse );
+
         // First Iteration - Extract displaying ASINs.
-        $_aProducts    = array();
+        $_aProducts     = array();
         foreach ( $this->_getItems( $aResponse ) as $_aItem ) {
 
             if ( ! is_array( $_aItem ) ) { 
@@ -398,7 +400,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             if ( $this->isDescriptionBlocked( $_sDescription ) ) { 
                 continue; 
             }
-            
+                    
             // At this point, update the black&white lists as this item is parsed.
             $this->setParsedASIN( $_aItem['ASIN'] );            
             
@@ -425,11 +427,16 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                     array( 'ItemAttributes', 'ProductGroup' ),
                     ''
                 ),
+                // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
                 'date'               => $this->getElement(
                     $_aItem,
-                    array( 'ItemAttributes', 'PublicationDate' ),
-                    ''
+                    array( 'ItemAttributes', 'ReleaseDate' ),
+                    $this->getElement(
+                        $_aItem,
+                        array( 'ItemAttributes', 'PublicationDate' )
+                    )
                 ),
+                'updated_date'       => $_sResponseDate, 
                 'is_adult_product'   => $this->getElement(
                     $_aItem,
                     array( 'ItemAttributes', 'IsAdultProduct' ),
@@ -445,7 +452,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             ) 
             + $this->_getPrices( $_aItem )
             + $_aItem;
-            
+
             // Add meta data to the description
             $_aProduct[ 'meta' ]        = $this->_formatProductMeta( $_aProduct );
             $_aProduct[ 'description' ] = $this->_formatProductDescription( $_aProduct );
@@ -499,6 +506,35 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         );
         
     }
+        
+        /**
+         * Returns the API response date which must be inserted in the advertisement output.
+         * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2
+         * @see         (0) in the above link.
+         * @since       3.2.0
+         * @return      string 
+         */
+        private function _getAPIResponseDate( $aResponse ) {
+            
+            $_aArguments = $this->getElementAsArray( 
+                $aResponse,
+                array( 'OperationRequest', 'Arguments', 'Argument' )
+            );
+            foreach( $_aArguments as $_aArgument ) {
+                $_sTimeStampKey = $this->getElement(
+                    $_aArgument,
+                    array( '@attributes', 'Name' )
+                );
+                if ( 'Timestamp' === $_sTimeStampKey ) {
+                    return $this->getElement(
+                        $_aArgument,
+                        array( '@attributes', 'Value' )
+                    );
+                }
+            }
+            return '';
+            
+        }      
       
         /**
          * Extracts items array from the API response array.

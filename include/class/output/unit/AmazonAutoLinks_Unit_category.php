@@ -326,9 +326,11 @@ class AmazonAutoLinks_Unit_category extends AmazonAutoLinks_Unit_Base_ElementFor
                 ),
                 $_aProduct[ 'ASIN' ]
             );
-            $_aProduct[ 'description' ] = $this->getDescription( $_oNodeDiv );
+            $_aProduct[ 'description' ]         = $this->getDescription( $_oNodeDiv, $_aItem );
             
-            $_aProduct[ 'date' ]          = $this->getElement( $_aItem, 'pubDate' );
+            // no published date of the product is avariable in this feed
+            // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );   
+            $_aProduct[ 'updated_date' ]        = $this->getElement( $_aItem, 'pubDate' );  // 3.2.0+
             
             // Format the item
             // Thumbnail
@@ -368,7 +370,7 @@ class AmazonAutoLinks_Unit_category extends AmazonAutoLinks_Unit_Base_ElementFor
             if ( count( $_aProducts ) >= $this->oUnitOption->get( 'count' ) ) {
                 break; 
             }
-            
+      
         }
         
         // Revert the error message setting for DOM
