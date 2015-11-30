@@ -36,7 +36,7 @@ class AmazonAutoLinks_MetaBox_TagUnit_Main extends AmazonAutoLinks_MetaBox_Base 
         new AmazonAutoLinks_AdminPageFramework_AdminNotice(
             "<img src='{$_sExclamationIconURL}' alt='{$_sMessage}' /> "
             . sprintf(
-                __( 'Amazon deprecated the <a href="%1$s" target="_blank">tags</a> feature. So this is no longer functional.', 'amazon-auto-links' ),
+                __( 'Amazon has deprecated the <a href="%1$s" target="_blank">tags</a> feature. So this is no longer functional.', 'amazon-auto-links' ),
                 'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571'
             )
         );
