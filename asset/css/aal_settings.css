@@ -13,3 +13,10 @@
 .top-right { 
 	padding: 0 0 20px; 
 } 
+
+.disclaimer {
+    padding: 1em;
+    border: 1px solid rgb(251, 255, 100);
+    background-color: rgb(254, 255, 246);
+        
+}

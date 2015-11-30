@@ -64,6 +64,21 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 ),
             ),             
             array(
+                'field_id'          => 'disclaimer',
+                'title'             => __( 'Disclaimer', 'amazon-auto-links' ),
+                'type'              => 'custom_content',
+                
+                'content'           => "<p class='notice disclaimer'>"
+                        . "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON SERVICES LLC. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME."
+                    . "</p>"
+                    . "<p>"
+                        . sprintf(
+                            __( 'Please check the <a href="%1$s" target="_blank">Amazon.com Product Advertising API License Agreement</a> to be safe.', 'amazon-auto-links' ),
+                            'https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2'
+                        )
+                    . "</p>"
+            ),
+            array(
                 'field_id'          => 'submit_connect_to_api_server',
                 'type'              => 'submit',
                 'value'             => $_bConnected
@@ -78,7 +93,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                         'style' => 'float:right; clear:none; display: inline;',
                     ),
                 ),                      
-            )
+            )            
         );          
         
     }
