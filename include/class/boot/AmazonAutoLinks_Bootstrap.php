@@ -235,14 +235,15 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 ),
                 $this->sFilePath 
             );        
-            new AmazonAutoLinks_TagUnitAdminPage(
+            // @deprecated 
+            /* new AmazonAutoLinks_TagUnitAdminPage(
                 array(
                     'type'      => 'transient',
                     'key'       => $GLOBALS[ 'aal_transient_id' ],
                     'duration'  => 60*60*24*2,
                 ),
                 $this->sFilePath             
-            );
+            ); */
             new AmazonAutoLinks_SearchUnitAdminPage(
                 array(
                     'type'      => 'transient',
