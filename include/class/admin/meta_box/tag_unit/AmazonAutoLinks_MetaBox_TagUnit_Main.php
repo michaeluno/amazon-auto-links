@@ -29,7 +29,15 @@ class AmazonAutoLinks_MetaBox_TagUnit_Main extends AmazonAutoLinks_MetaBox_Base 
             }
             $this->addSettingFields( $_aField );
         }
-                    
+        
+        // 3.2.0+
+        new AmazonAutoLinks_AdminPageFramework_AdminNotice(
+            sprintf(
+                __( 'Amazon deprecated the <a href="%1$s" target="_blank">tags</a> feature. So this is no longer functional.', 'amazon-auto-links' ),
+                'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571'
+            )
+        );
+        
     }
     
     /**
