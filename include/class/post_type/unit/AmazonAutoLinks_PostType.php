@@ -94,21 +94,18 @@ class AmazonAutoLinks_PostType extends AmazonAutoLinks_PostType_PostContent {
             $this->setAuthorTableFilter( false );            
             add_filter( 'months_dropdown_results', '__return_empty_array' );
             
-            add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );    
-            add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );    
+            add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );
+            add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );
                 
             $this->enqueueStyles(
                 AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
             );
-         
-            // unit listing table columns
-            add_filter(    
-                'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                array( $this, 'replyToModifyColumnHeader' )
-            );
-         
+                  
         }
-                    
+        
+        parent::setUp();
+
+           
     }
         
     /**
