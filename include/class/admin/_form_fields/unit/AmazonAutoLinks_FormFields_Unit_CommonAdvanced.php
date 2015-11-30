@@ -56,6 +56,13 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'description'       => __( 'To keep it simple, uncheck it.', 'amazon-auto-links' ),
                 'default'           => false,
             ),     
+            array(
+                'field_id'          => $sFieldIDPrefix . 'show_now_retrieving_message',
+                'title'             => __( 'Now Retrieving Message', 'amazon-auto-links' ),
+                'type'              => 'checkbox',
+                'label'             => __( 'Show the <strong>Now Retrieving...</strong> message for the elements being fetched in the background.', 'amazon-auto-links' ),
+                'default'           => true,
+            ),                
         );
 
        

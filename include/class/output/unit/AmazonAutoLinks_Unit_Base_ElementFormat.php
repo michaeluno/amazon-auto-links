@@ -458,11 +458,15 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 'associate_id'  => $sAssociateID,
             )
         );
-        return null === $_sPriceFormatted
+        if ( null !== $_sPriceFormatted ) {
+            return $_sPriceFormatted;
+        }
+            
+        return $this->oUnitOption->get( 'show_now_retrieving_message' )
             ? '<p>' 
                 . __( 'Now retrieving the price.', 'amazon-auto-links' )
                 . '</p>'
-            : $_sPriceFormatted;
+            : '';
     }
     
     /**
@@ -482,9 +486,10 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 'associate_id'  => $sAssociateID,
             )
         );       
+        
         // When the DB row is not set, the value will be null.
-        if ( empty( $_asImages ) ) {
-            return null === $_asImages
+        if ( null === $_asImages ) {            
+            return $this->oUnitOption->get( 'show_now_retrieving_message' )
                 ? '<p>'
                         . __( 'Now retrieving an image set.', 'amazon-auto-links' )
                     . '</p>'
@@ -617,9 +622,12 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 $sLocale, 
                 ( int ) $this->oUnitOption->get( 'cache_duration' )
             );
-            return '<p>' 
-                . __( 'Now retrieving customer reviews.', 'amazon-auto-links' ) 
-            . '</p>';            
+            
+            return $this->oUnitOption->get( 'show_now_retrieving_message' )
+                ? '<p>' 
+                    . __( 'Now retrieving customer reviews.', 'amazon-auto-links' ) 
+                . '</p>'
+                : '';            
             
         }
         if ( ! $_sEncodedHTML ) {
@@ -664,9 +672,12 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 $sLocale, 
                 ( int ) $this->oUnitOption->get( 'cache_duration' )
             );
-            return '<p>' 
-                . __( 'Now retrieving the rating.', 'amazon-auto-links' ) 
-            . '</p>';            
+            
+            return $this->oUnitOption->get( 'show_now_retrieving_message' )
+                ? '<p>' 
+                        . __( 'Now retrieving the rating.', 'amazon-auto-links' ) 
+                    . '</p>'
+                : '';
             
         }         
         if ( '' === $_sEncodedHTML ) {

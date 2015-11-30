@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.3.1
-Stable tag:         3.1.4
+Stable tag:         3.2.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -193,8 +193,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.0 = 
+- Added a unit option to toggle the visibility of `Now Retrieving...` message.
 - Added the internal ability to set previous unit option values when creating a new unit.
 - Tweaked the style of setting pages and forms. 
+- Deprecated the `tag` unit type as it is no longer supported by [Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571).
 
 = 3.1.4 - 11/27/2015 =
 - Added the `search_per_keyword` argument for the shortcode which can be set to `true` when performing search with multiple keywords.

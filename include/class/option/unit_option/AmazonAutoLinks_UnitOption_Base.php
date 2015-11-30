@@ -97,6 +97,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         
         'show_errors'   => true,    // whether to show an error message.
         
+        // 3.2.0+
+        'show_now_retrieving_message'   => true,
  
     );
     
