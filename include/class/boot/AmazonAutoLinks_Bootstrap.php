@@ -404,15 +404,6 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 'normal', // context - e.g. 'normal', 'advanced', or 'side'
                 'low' // priority - e.g. 'high', 'core', 'default' or 'low'
             );
-            new AmazonAutoLinks_MetaBox_Unit_CommonAdvanced(
-                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
-                __( 'Common Advanced', 'amazon-auto-links' ), // title
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-                ), 
-                'advanced', // context (what kind of metabox this is)
-                'low' // priority                                    
-            );
             
             new AmazonAutoLinks_MetaBox_Template(
                 null, // meta box ID - null to auto-generate
@@ -445,6 +436,15 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 'default' // priority                        
             );                   
 
+            new AmazonAutoLinks_MetaBox_Unit_CommonAdvanced(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Common Advanced', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'low' // priority                                    
+            );            
             
             new AmazonAutoLinks_MetaBox_DebugInfo(
                 null, // meta box ID - null to auto-generate
