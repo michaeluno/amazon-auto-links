@@ -39,7 +39,6 @@ and more.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
-- **Tag** - you can display products by tag. 
 - **Product Search** - you can create a unit of a search result.
 - **Item Look-up** - display specific products.
 - **Similarity Look-up** - display similar products.
@@ -56,11 +55,14 @@ To get started, create a unit first and display it with widgets, shortcode, or a
   
 == Installation ==
 
+= Install =
 1. Upload **`amazon-auto-links.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
+
+= Getting Started = 
 1. Go to **Dashboard** -> **Amazon Auto Links** -> **Add Unit by Category**.
 1. Configure the options and select categories.
-1. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is avaiable in the **Apparence** -> **Widgets** page as well.
+1. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is available in the **Appearance** -> **Widgets** page as well.
 
 == Frequently asked questions ==
 
