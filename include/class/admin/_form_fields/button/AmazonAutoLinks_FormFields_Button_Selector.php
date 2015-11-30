@@ -24,7 +24,7 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
                     'fieldrow'      => 'button-select-row',
                 ),   
                 'tip'               => sprintf(
-                    __( 'Select the button for the <code>%1$s</code> parameter.', 'amazon-auto-links' ),
+                    __( 'Select the button for the <code>%1$s</code> parameter of the Item Format option.', 'amazon-auto-links' ),
                     '%button%'
                 ),
                 'description'       => array(
