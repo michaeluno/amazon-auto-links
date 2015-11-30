@@ -40,6 +40,9 @@ class AmazonAutoLinks_AdminPageFramework_Form_View___Sectionsets extends AmazonA
         if (empty($aSectionsets)) {
             return '';
         }
+        if (!count($aFieldsets)) {
+            return '';
+        }
         $_aFirstSectionset = $this->getFirstElement($aSectionsets);
         $_sSectionTabSlug = '';
         $_aOutputs = array('section_tab_list' => array(), 'section_contents' => array(), 'count_subsections' => 0,);

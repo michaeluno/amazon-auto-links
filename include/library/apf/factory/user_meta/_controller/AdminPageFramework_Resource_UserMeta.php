@@ -1,0 +1,3 @@
+<?php
+class AmazonAutoLinks_AdminPageFramework_Resource_UserMeta extends AmazonAutoLinks_AdminPageFramework_Resource_MetaBox {
+}
