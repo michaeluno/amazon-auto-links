@@ -53,7 +53,8 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         // The search unit type does not use directly passed urls.
         // Maybe later at some point, custom request URIs can get implemented and they can be directly passed to this method.
         unset( $aURLs );
-        
+                
+        // Get API responses
         $_aResponse = $this->_getResponses();
         
         // Check errors
@@ -82,6 +83,9 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
          */
         protected function _getResponses() {
 
+            // Sanitize the searthc terms
+            $this->_setSearchTerms();
+     
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
                 // Normal operation
                 return $this->getRequest( $this->oUnitOption->get( 'count' ) );
@@ -93,6 +97,25 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             
         }
             /**
+             * Sanitizes the search terms.
+             * @since       3.2.0
+             */
+            private function _setSearchTerms() {
+                $_sTerms    = trim( $this->oUnitOption->get( $this->sSearchTermKey ) );
+                if ( ! $_sTerms ) {
+                    $this->oUnitOption->set( 'search_per_keyword', false );
+                    return;
+                }
+                $_sTerms    = str_replace(
+                    PHP_EOL,
+                    ',',
+                    $_sTerms
+                );
+                $_aTerms    =  $this->convertStringToArray( $_sTerms, ',' );
+                $this->oUnitOption->set( $this->sSearchTermKey,  implode( ',', $_aTerms ) );
+                
+            }        
+            /**
              * @since       3.2.0
              * @return      array
              */
@@ -100,8 +123,11 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
              
                 $_aItems    = array();
                 $_aResponse = array();           
-                $_aTerms    = explode( ',', $this->oUnitOption->get( $this->sSearchTermKey ) );
-                $_aTerms    = $this->convertStringToArray( $this->oUnitOption->get( $this->sSearchTermKey ), ',' );
+                $_asTerms   = $this->oUnitOption->get( $this->sSearchTermKey );
+                $_aTerms    = is_array( $_asTerms )
+                    ? $_asTerms
+                    : $this->convertStringToArray( $_asTerms, ',' );
+                    
                 $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
 
                 foreach( $_aTerms as $_sSearchTerm ) {

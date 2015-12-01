@@ -35,14 +35,14 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
             ),            
             array(
                 'field_id'      => $sFieldIDPrefix . 'ItemId',
-                'type'          => 'text',
+                'type'          => 'textarea',
                 'title'         => __( 'Item ID', 'amazon-auto-links' ),
                 'attributes'    => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 40 
                         : 60,
                 ),
-                'description'   => __( 'Enter the ID(s) of the product. For more more than one items, use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
+                'description'   => __( 'Enter the ID(s) of the product per line or use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
                     . ' e.g. <code>B009ZVO3H6, B0043D2DZA</code>',
             ),
             array(

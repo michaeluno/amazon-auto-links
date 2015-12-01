@@ -33,11 +33,11 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
             array(
                 'field_id'      => $sFieldIDPrefix . 'ItemId',
                 'title'         => __( 'Item ASIN', 'amazon-auto-links' ),
-                'type'          => 'text',
+                'type'          => 'textarea',
                 'attributes'    => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) ? 40 : 60,
-                ),
-                'description'   => __( 'Enter the ASIN(s) of the product. For more more than one items, use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
+                ),             
+                'description'   => __( 'Enter the ASIN(s) of the product per line or use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
                     . ' e.g. <code>B009ZVO3H6</code>',
             ),    
             array(
