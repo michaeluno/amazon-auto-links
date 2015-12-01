@@ -62,6 +62,16 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
             )
         );              
      
+        new AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate( 
+            $oAdminPage,
+            $this->sPageSlug, 
+            array(
+                'section_id'    => 'miunosoft_affiliate',
+                'tab_slug'      => $this->sTabSlug,
+                'title'         => __( 'miunosoft Affiliate', 'amazon-auto-links' ),
+            )
+        );         
+     
     }
     
     public function replyToDoTab( $oFactory ) {

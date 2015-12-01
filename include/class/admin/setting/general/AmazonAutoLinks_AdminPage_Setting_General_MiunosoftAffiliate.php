@@ -1,0 +1,65 @@
+<?php
+/**
+ * Amazon Auto Links
+ * 
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno; Licensed GPLv2
+ */
+
+/**
+ * Adds the 'miunosoft Affiliate' form section to the 'General' tab.
+ * 
+ * @since       3.2.0
+ */
+class AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate extends AmazonAutoLinks_AdminPage_Section_Base {
+    
+    /**
+     * A user constructor.
+     * 
+     * @since       3.2.0
+     * @return      void
+     */
+    protected function construct( $oFactory ) {}
+    
+    /**
+     * Adds form fields.
+     * @since       3.2.0
+     * @return      void
+     */
+    public function addFields( $oFactory, $sSectionID ) {
+
+        $_oFields = new AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate;
+        foreach( $_oFields->get() as $_aField ) {
+            $oFactory->addSettingFields(
+                $sSectionID, // the target section id,
+                $_aField
+            );
+        }
+    
+    }
+        
+    
+    /**
+     * Validates the submitted form data.
+     * 
+     * @since       3.2.0
+     */
+    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    
+        $_bVerified = true;
+        $_aErrors   = array();
+        
+        $aInput[ 'affiliate_id' ] = trim( $aInput[ 'affiliate_id' ] );
+        
+        // An invalid value is found. Set a field error array and an admin notice and return the old values.
+        if ( ! $_bVerified ) {
+            $oAdminPage->setFieldErrors( $_aErrors );     
+            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
+            return $aOldInput;
+        }
+                
+        return $aInput;     
+        
+    }
+   
+}

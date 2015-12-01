@@ -71,6 +71,11 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 	// const FieldID_LicenseKey        = 'pro_license_key';
 	    
     /**
+     * @since       3.2.0
+     */ 
+    const STORE_URI_PRO             = 'http://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro/';
+        
+    /**
      * 
      * @since       2.0.6
      */

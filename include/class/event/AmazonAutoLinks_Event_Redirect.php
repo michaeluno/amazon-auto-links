@@ -33,12 +33,27 @@ class AmazonAutoLinks_Event_Redirect {
         $this->_goToStore( $_GET[ $sQueryKey ], $_GET );    
         
     }
-
+    
+    /**
+     * Redirects the user to the vendor site.
+     */
     private function _goToVendor() {
-// @todo Check the miunosoft affiliate id option and if set redirect the vsitor to the store page.
+
+        $_sURL          = AmazonAutoLinks_Registry::PLUGIN_URI;
+        $_oOption       = AmazonAutoLinks_Option::getInstance();
+        $_isAffiliateID = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
+        if ( strlen( $_isAffiliateID ) ) {
+            $_sURL = add_query_arg(
+                array(
+                    'ref'   => $_isAffiliateID,
+                ),
+                AmazonAutoLinks_Registry::STORE_URI_PRO
+            );
+        }
+AmazonAutoLinks_Debug::log( $_sURL );
         exit(
             wp_redirect(
-                AmazonAutoLinks_Registry::PLUGIN_URI
+                $_sURL
             )
         );
     }
