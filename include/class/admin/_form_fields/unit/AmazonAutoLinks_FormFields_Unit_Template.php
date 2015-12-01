@@ -70,7 +70,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     
                 ),
                 'default'           => $_aItemFormat['item_format'],
-                'tip'               => __( 'Sets the layout of an item. The following variables are available.', 'amazon-auto-links' ) . '<br />'
+                'description'       => __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -82,14 +82,15 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer review.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%button%</code> - " . __( 'store link button.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%disclaimer%</code> - " . __( 'disclaimer for the product information.', 'amazon-auto-links' ),
-                'description'       => $_bAPIConnected
-                        ? null
-                        : sprintf(
-                            '* <span class="warning">' 
-                                . __( 'Some items need <a href="%1$s">API</a> to be set up.', 'amazon-auto-links' )
-                            . "</span>",
-                            AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
+                        . "<code>%disclaimer%</code> - " . __( 'disclaimer for the product information.', 'amazon-auto-links' ) . '<br />'
+                        . ( $_bAPIConnected
+                            ? null
+                            : sprintf(
+                                '* <span class="warning">' 
+                                    . __( 'Some items need <a href="%1$s">API</a> to be set up.', 'amazon-auto-links' )
+                                . "</span>",
+                                AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
+                            )
                         ),
             ),
             array(
@@ -107,7 +108,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         : 'readonly', 
                     'style'     => 'width: 96%',
                 ),
-                'tip'               => __( 'Sets the layout of a title.', 'amazon-auto-links' ) . '<br />'
+                'description'        => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
@@ -128,7 +129,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     'style'     => 'width: 96%',
                 ),
                 'default'       => $_aItemFormat['image_format'],
-                'tip'           => __( 'Sets the layout of an image.', 'amazon-auto-links' ) . '<br />'
+                'description'   => __( 'Sets the layout of the image.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'
