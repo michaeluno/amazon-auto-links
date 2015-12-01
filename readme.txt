@@ -194,6 +194,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.0 - 12/02/2015 = 
+- Enhanced the ability of the contextual product search for the site search terms.
 - Added the `URL` unit type which enables to search products and list them with given urls.
 - Added the `Query per Term` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
 - Added the `%disclaimer%` variable in the `Item Format` unit option.

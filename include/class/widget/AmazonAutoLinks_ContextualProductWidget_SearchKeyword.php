@@ -35,6 +35,10 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
     public function get( $bRetunType=true ) {
         
         $_aKeywords    = $this->_getSearchKeywordsByCriteria( $this->aCriteria );
+        $_aKeywords    = array_merge(
+            $_aKeywords,
+            $this->_getSiteSearchKeywords()
+        );
         $_aKeywords    = $this->_getFormattedSearchKeywordsArray( $_aKeywords );
         $_sAdditionals = $this->trimDelimitedElements( 
             trim( $this->sAdditionalKeywords ), // subject string
@@ -52,7 +56,21 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
             : $_sKeywords;
             
     }
-
+        
+        /**
+         * @return      array
+         */
+        private function _getSiteSearchKeywords() {
+            
+            $_sQuery = $this->getElement( $_GET, 's' );
+            $_sQuery = str_replace(
+                array( '+' ),
+                ',',
+                $_sQuery
+            );
+            return explode( ',', $_sQuery );
+            
+        }
 
         /**
          * 
@@ -60,9 +78,6 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
          */
         private function _getFormattedSearchKeywordsArray( array $aKeywords ) {
             $aKeywords = array_unique( array_filter( $aKeywords ) );
-            // foreach( $aKeywords as &$_sKeyword ) {
-                // $_sKeyword = '"' . $_sKeyword . '"';
-            // }
             return $aKeywords;
         }
 
