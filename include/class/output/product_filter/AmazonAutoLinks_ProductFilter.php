@@ -107,7 +107,8 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
     public function markParsed( $sASIN ) {
         if ( ! in_array( $sASIN, self::$aParsed ) ) {
             self::$aParsed[] = $sASIN;
-        }        
+        }      
+        $this->aBlackListASINs[] = $sASIN;
     }
     // public function addToGlobalWhiteList( $sASIN ) {}
     
