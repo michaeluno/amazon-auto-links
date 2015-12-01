@@ -167,18 +167,18 @@ class AmazonAutoLinks_TagUnitAdminPage_TagUnit extends AmazonAutoLinks_AdminPage
         // so that by the time the user opens the unit page, the cache will be ready.
         AmazonAutoLinks_Event_Scheduler::prefetch( $_iNewPostID );
         
-        // Go to the post editing page and exit. This way the framework won't create a new form transient row.
-        $_oUtil->goToPostDefinitionPage(
-            $_iNewPostID,
-            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );        
-        
         // Store the inputs for the next time.
         update_option( 
             AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
             $aInput,
             false       // disable auto-load 
-        );         
+        );           
+        
+        // Go to the post editing page and exit. This way the framework won't create a new form transient row.
+        $_oUtil->goToPostDefinitionPage(
+            $_iNewPostID,
+            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+        );        
         
         // This won't be reached.
         return $aInput;
