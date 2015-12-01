@@ -35,6 +35,7 @@ class AmazonAutoLinks_Event_Redirect {
     }
 
     private function _goToVendor() {
+// @todo Check the miunosoft affiliate id option and if set redirect the vsitor to the store page.
         exit(
             wp_redirect(
                 AmazonAutoLinks_Registry::PLUGIN_URI
