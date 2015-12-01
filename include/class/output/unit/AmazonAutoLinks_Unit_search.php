@@ -103,10 +103,12 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 $_aTerms    = explode( ',', $this->oUnitOption->get( $this->sSearchTermKey ) );
                 $_aTerms    = $this->convertStringToArray( $this->oUnitOption->get( $this->sSearchTermKey ), ',' );
                 $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
+
                 foreach( $_aTerms as $_sSearchTerm ) {
 
                     $this->oUnitOption->set( $this->sSearchTermKey, $_sSearchTerm );
                     $_aResponse = $this->getRequest( $_iCount );
+
                     $_aItems    = $this->_getItemsMerged( $_aItems, $_aResponse );                    
                     if ( count( $_aItems ) >= $_iCount ) {
                         break;
@@ -129,10 +131,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 return $_aResponse; 
              
             }    
-                /**
-                 * Stores parsed ASINs to prvent duplicates for the `search_per_keyword` option.
-                 */
-                private $_aParsedASINs = array();
+
                 /**
                  * @return      array
                  */
@@ -142,11 +141,13 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                         $aItems,
                         $this->_getItemsNumericallyIndexed( $aResponse )
                     );
+                                             
                     // Drop duplicates.
+                    $_aParsedASINs = array();
                     foreach( $aItems as $_iIndex => $_aItem ) {
                         
                         $_sASIN = $this->getElement( $_aItem, 'ASIN' );
-                        
+
                         // In some cases, an empty array can be contained.
                         if ( ! $_sASIN ) {
                             unset( $aItems[ $_iIndex ] );       
@@ -154,16 +155,17 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                         }
                         
                         // remove the entry as it is a duplicate
-                        if ( isset( $this->_aParsedASINs[ $_sASIN ] ) )  {
+                        if ( isset( $_aParsedASINs[ $_sASIN ] ) )  {
                             unset( $aItems[ $_iIndex ] );       
                             continue;
                         }
-                        
+                               
                         // Set a parsed ASIN
-                        $this->_aParsedASINs[ $_sASIN ] = $_sASIN;
+                        $_aParsedASINs[ $_sASIN ] = $_sASIN;
                         
                     }
-                    return array_values( $aItems );
+                    $aItems = array_values( $aItems );
+                    return $aItems;
                     
                 }            
                 /**
@@ -227,9 +229,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             $this->oUnitOption->get( 'country' ),   // locale
             $this->oUnitOption->get( 'cache_duration' )
         );    
-// AmazonAutoLinks_Debug::log( $this->oUnitOption->get() );
-// AmazonAutoLinks_Debug::log( $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ) );
-// AmazonAutoLinks_Debug::log( $_aResponse );
+
         if ( $iCount <= 10 ) {
             return $_aResponse;
         }
