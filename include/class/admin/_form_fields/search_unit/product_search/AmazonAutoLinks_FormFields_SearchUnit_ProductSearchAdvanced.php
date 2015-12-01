@@ -96,7 +96,14 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'field_id'      => $sFieldIDPrefix . 'BrowseNode',
                 'type'          => 'number',
                 'title'         => __( 'Browse Node ID', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
-                'description'   => __( 'If you know the browse node that you are searching, specify it here. It is a positive integer.', 'amazon-auto-links' ),
+                'description'   => array(
+                    __( 'If you know the browse node (the category ID) that you are searching, specify it here. It is a positive integer.', 'amazon-auto-links' )
+                    . ' ' . sprintf( 
+                        __( 'Browse nodes can be found <a href="" target="_blank">here</a>.', 'amazon-auto-links' ),
+                        'http://www.findbrowsenodes.com/'
+                    )
+                    . ' e.g. <code>158597011</code>',
+                ),
             ),    
             array(
                 'field_id'      => $sFieldIDPrefix . 'MerchantId',
