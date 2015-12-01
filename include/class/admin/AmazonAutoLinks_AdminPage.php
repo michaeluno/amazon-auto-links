@@ -125,7 +125,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
                 continue;
             }
             
-            // Copy and remove the Tag menu element to change the position. 
+            // Copy and remove the Tag (taxonomy) menu element to change the position. 
             if ( 'edit-tags.php?taxonomy=' . AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ] . '&amp;post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] === $_aSubMenu[ 2 ] ) {
                 $_aMenuEntry_Tag = array( $GLOBALS['submenu'][ $_sPageSlug ][ $_iIndex ] );
                 unset( $GLOBALS['submenu'][ $_sPageSlug ][ $_iIndex ] );
