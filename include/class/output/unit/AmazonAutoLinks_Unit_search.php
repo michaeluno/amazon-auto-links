@@ -26,7 +26,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
      * @since       3.2.0
      */
     public $sSearchTermKey = 'Keywords';    
-    
+
     /**
      * Represents the array structure of the item array element of API response data.
      * @since            unknown
@@ -77,9 +77,10 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
     }
         /**
          * @since       3.1.4
+         * @scope       protected       The 'url' unit type will extend this method.
          * @return      array
          */
-        private function _getResponses() {
+        protected function _getResponses() {
 
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
                 // Normal operation
@@ -92,13 +93,12 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             
         }
             /**
-             * @scope       protected       Item Look-up and Similarity Look-up unit types will override this method.
              * @since       3.2.0
              * @return      array
              */
-            protected function _getResponsesByMultipleKeywords() {
+            private function _getResponsesByMultipleKeywords() {
              
-                $_iItems    = array();
+                $_aItems    = array();
                 $_aResponse = array();           
                 $_aTerms    = explode( ',', $this->oUnitOption->get( $this->sSearchTermKey ) );
                 $_aTerms    = $this->convertStringToArray( $this->oUnitOption->get( $this->sSearchTermKey ), ',' );
@@ -107,21 +107,17 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
 
                     $this->oUnitOption->set( $this->sSearchTermKey, $_sSearchTerm );
                     $_aResponse = $this->getRequest( $_iCount );
-                    
-                    $_iItems        = array_merge(
-                        $_iItems,
-                        $this->_getItemsNumericallyIndexed( $_aResponse )
-                    );
-                    if ( count( $_iItems ) >= $_iCount ) {
+                    $_aItems    = $this->_getItemsMerged( $_aItems, $_aResponse );                    
+                    if ( count( $_aItems ) >= $_iCount ) {
                         break;
                     }
                 }
 
-                array_splice( $_iItems, $_iCount );   // up to the set item count
+                array_splice( $_aItems, $_iCount );   // up to the set item count
                 $this->setMultiDimensionalArray( 
                     $_aResponse,
                     array( 'Items', 'Item' ),
-                    $_iItems
+                    $_aItems
                 );
                 if ( 0 < count( $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) ) ) ) {
                     unset(
@@ -132,7 +128,44 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                                 
                 return $_aResponse; 
              
-            }          
+            }    
+                /**
+                 * Stores parsed ASINs to prvent duplicates for the `search_per_keyword` option.
+                 */
+                private $_aParsedASINs = array();
+                /**
+                 * @return      array
+                 */
+                private function _getItemsMerged( $aItems, $aResponse ) {
+                    
+                    $aItems        = array_merge(
+                        $aItems,
+                        $this->_getItemsNumericallyIndexed( $aResponse )
+                    );
+                    // Drop duplicates.
+                    foreach( $aItems as $_iIndex => $_aItem ) {
+                        
+                        $_sASIN = $this->getElement( $_aItem, 'ASIN' );
+                        
+                        // In some cases, an empty array can be contained.
+                        if ( ! $_sASIN ) {
+                            unset( $aItems[ $_iIndex ] );       
+                            continue;
+                        }
+                        
+                        // remove the entry as it is a duplicate
+                        if ( isset( $this->_aParsedASINs[ $_sASIN ] ) )  {
+                            unset( $aItems[ $_iIndex ] );       
+                            continue;
+                        }
+                        
+                        // Set a parsed ASIN
+                        $this->_aParsedASINs[ $_sASIN ] = $_sASIN;
+                        
+                    }
+                    return array_values( $aItems );
+                    
+                }            
                 /**
                  * If a single item is returned, it is an associative array; otherwize, numeric.
                  * @return      array       Numerically indexed item element.
@@ -194,11 +227,14 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             $this->oUnitOption->get( 'country' ),   // locale
             $this->oUnitOption->get( 'cache_duration' )
         );    
+// AmazonAutoLinks_Debug::log( $this->oUnitOption->get() );
+// AmazonAutoLinks_Debug::log( $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ) );
+// AmazonAutoLinks_Debug::log( $_aResponse );
         if ( $iCount <= 10 ) {
             return $_aResponse;
         }
         
-        // Check necessary key is set
+        // Check if the necessary key is set
         if ( ! isset( $_aResponse[ 'Items' ][ 'Item' ] ) || ! is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
             return $_aResponse;
         }
@@ -372,6 +408,10 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 $_aParams[ 'Sort' ]
             );
         }
+        
+        unset(
+            $_aParams[ '' ]         // not sure but it occured an element without an empty key got inserted
+        );
         // if ( $_aParams[ 'Title' ] ) {
             // unset(
                 // $_aParams[ 'SearchIndex' ]
@@ -443,7 +483,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             }
                     
             // At this point, update the black&white lists as this item is parsed.
-            $this->setParsedASIN( $_aItem['ASIN'] );            
+            $this->setParsedASIN( $_aItem[ 'ASIN' ] );
             
             // Construct a product array. This will be passed to a template.
             $_aProduct = array(

@@ -116,7 +116,7 @@ class AmazonAutoLinks_Unit_category extends AmazonAutoLinks_Unit_Base_ElementFor
         if ( empty ( $aRSSURLs ) ) { 
             return array(); 
         }
-        
+
         $_aExcludingRSSURLs = $this->formatRSSURLs( 
             $this->_aExcludingRSSURLs
         );

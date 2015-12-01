@@ -40,7 +40,7 @@ class AmazonAutoLinks_MetaBox_SimilarityLookupUnit_Advanced extends AmazonAutoLi
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_tag(
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_similarity_lookup(
             null,
             $aInput
         );

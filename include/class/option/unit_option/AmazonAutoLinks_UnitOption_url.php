@@ -1,0 +1,59 @@
+<?php
+/**
+ * Amazon Auto Links
+ * 
+ * http://en.michaeluno.jp/amazn-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno
+ * 
+ */
+
+/**
+ * Handles 'url' unit options.
+ * 
+ * @since       3.2.0
+ */
+class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_search {
+    
+    /**
+     * Stores the unit type.
+     * @remark      Should be overridden in an extended class.
+     */
+    public $sUnitType = 'url';    
+    
+    /**
+     * Stores the default structure and key-values of the unit.
+     * @remark      Accessed from the base class constructor to construct a default option array.
+     */    
+    static public $aStructure_Default = array(
+    
+        'urls'           => '',  // (string|array)
+        'search_per_keyword'    => true,
+        '_found_items'   => '',  // (string)
+
+    );
+    
+    /**
+     * 
+     * @return  array
+     */
+    protected function getDefaultOptionStructure() {
+        return self::$aStructure_Default
+            + parent::$aStructure_Default;
+    }
+
+    
+    /**
+     * 
+     * @since       3 
+     */
+    protected function format( array $aUnitOptions ) {
+
+        $aUnitOptions = parent::format( $aUnitOptions );
+        
+        $aUnitOptions[ 'urls' ]  = $this->getAsArray( $aUnitOptions[ 'urls' ] );
+                
+        return $aUnitOptions;
+        
+    }    
+
+}

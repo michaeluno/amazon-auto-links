@@ -92,6 +92,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         private function _getFormattedURLContainer( $aURLs ) {
             $_aFormatted = array();
             foreach( $aURLs as $_sURL ) {
+                $_sURL = trim( $_sURL );
                 // Set the key to the cache name
                 $_aFormatted[ $this->_getCacheName( $_sURL ) ] = $_sURL;
             }
@@ -208,7 +209,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 : $_oCacheTable->getCache(  
                     array_keys( $aURLs ), // multiple names - the url array is indexed with cache names
                     $iCacheDuration
-                );         
+                );     
+
             foreach( $_aCaches as $_aCache ) {
                 
                 // Format

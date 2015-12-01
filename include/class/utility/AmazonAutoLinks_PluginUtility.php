@@ -107,6 +107,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             'search'            => __( 'Product Search', 'amazon-auto-links' ),
             'item_lookup'       => __( 'Item Look-up', 'amazon-auto-links' ),
             'similarity_lookup' => __( 'Similarity Look-up', 'amazon-auto-links' ),
+            'url'               => __( 'URL', 'amazon-auto-links' ),
         );
     }
 

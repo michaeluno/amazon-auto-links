@@ -15,14 +15,18 @@ class AmazonAutoLinks_MetaBox_Unit_ProductFilter extends AmazonAutoLinks_MetaBox
     /**
      * Stores the unit type slug(s). 
      * 
-     * @remark      The meta box will not be added to a unit type not listed in this array.
-     */    
+     * The meta box will not be added to a unit type not listed in this array.
+     * 
+     * @remark      This property is checked in the `_isInThePage()` method
+     * so set the unit types of that this meta box shuld apper.
+     */     
     protected $aUnitTypes = array( 
         'category', 
         'similarity_lookup',
         'item_lookup',
         'search',
         'tag',        
+        'url',          // 3.2.0+
     );    
     
     /**

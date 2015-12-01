@@ -19,7 +19,8 @@ abstract class AmazonAutoLinks_Unit_Base_ProductFilter extends AmazonAutoLinks_U
      * @return      boolean
      */
     protected function isASINBlocked( $sASIN ) {            
-        if ( ! trim( $sASIN ) ) {
+        $sASIN = trim( $sASIN );
+        if ( ! $sASIN ) {
             return true;
         }
         if ( $this->oUnitProductFilter->isASINAllowed( $sASIN ) ) {

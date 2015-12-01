@@ -184,6 +184,9 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                 if ( isset( $aArguments[ 'tags' ] ) ) {
                     return 'tag';
                 }
+                if ( isset( $aArguments[ 'urls' ] ) ) {
+                    
+                }
                 return 'unknown';
                 
             }
@@ -199,6 +202,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     case 'search':
                     case 'item_lookup':
                     case 'similarity_lookup':        
+                    case 'url':        
                         $_sClassName = "AmazonAutoLinks_Unit_" . strtolower( $sUnitType );
                         $_oUnit      = new $_sClassName( $_aUnitOptions );
                         return $_oUnit->getOutput();

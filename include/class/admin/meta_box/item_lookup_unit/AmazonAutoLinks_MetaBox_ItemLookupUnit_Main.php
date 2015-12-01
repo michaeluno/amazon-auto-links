@@ -40,7 +40,7 @@ class AmazonAutoLinks_MetaBox_ItemLookupUnit_Main extends AmazonAutoLinks_MetaBo
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_tag(
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_item_lookup(
             null,
             $aInput
         );

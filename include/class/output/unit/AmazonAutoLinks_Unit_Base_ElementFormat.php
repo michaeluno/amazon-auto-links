@@ -315,7 +315,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
      */
     protected function getASIN( $sURL ) {
         preg_match( 
-            '/(dp|gp|e)\/(.+\/)?(\w{10})(\/|$|\?)/i', // needle - \w{10} is the ASIN
+            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})(\/|$|\?)/', // needle - [A-Z0-9]{10} is the ASIN
             $sURL,  // subject
             $_aMatches // match container
         );

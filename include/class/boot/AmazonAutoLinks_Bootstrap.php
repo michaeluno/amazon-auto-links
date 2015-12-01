@@ -253,6 +253,15 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 $this->sFilePath                             
             );
             
+            new AmazonAutoLinks_URLUnitAdminPage(
+                array(
+                    'type'      => 'transient',
+                    'key'       => $GLOBALS[ 'aal_transient_id' ],
+                    'duration'  => 60*60*24*2,
+                ),
+                $this->sFilePath             
+            );             
+            
             new AmazonAutoLinks_AdminPage( 
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], 
                 $this->sFilePath 
@@ -319,7 +328,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 ), 
                 'side', // context (what kind of metabox this is)
                 'high' // priority                                                            
-            );
+            );         
             new AmazonAutoLinks_MetaBox_TagUnit_Main(
                 null,
                 __( 'Main', 'amazon-auto-links' ), // meta box title

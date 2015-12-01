@@ -231,7 +231,7 @@ abstract class AmazonAutoLinks_Unit_Base extends AmazonAutoLinks_PluginUtility {
 
         $aOptions      = $this->oOption->aOptions; 
         
-        // Let the template file to access the local $arrArgs variable.
+        // Let the template file access the local `$aArguments` variable.
         $aArguments    = $this->oUnitOption->get();
         
         $aProducts     = $this->fetch( $aURLs );

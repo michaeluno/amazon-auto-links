@@ -44,8 +44,8 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
             array(
                 'field_id'      => $sFieldIDPrefix . 'search_per_keyword',
                 'type'          => 'checkbox',
-                'title'         => __( 'Search per Item', 'amazon-auto-links' ),
-                'tip'           => __( 'When setting multiple items and if one of them could not be found, Amazon API returns an error. To prevent it, check this option so that the rest will be returned.', 'amazon-auto-links' ),
+                'title'         => __( 'Query per Term', 'amazon-auto-links' ),
+                'tip'           => __( 'Although Amazon API allows multiple search terms to be set per request, when one of them returns an error, the entire result becomes an error. To prevent it, check this option so that the rest will be returned.', 'amazon-auto-links' ),
                 'label'         => __( 'Perform search per item.', 'amazon-auto-links' ),
             ),            
             array(

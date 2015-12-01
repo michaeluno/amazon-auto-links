@@ -50,6 +50,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
     }
     /**
      * @return      array
+     * @since       3.2.0
      */
     protected function _getLastUnitInputs() {
         $_aLastInputs = get_option( 
@@ -61,7 +62,8 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             $_aLastInputs[ 'Keywords' ],
             $_aLastInputs[ 'ItemId' ],
             $_aLastInputs[ 'tags' ],
-            $_aLastInputs[ 'customer_id' ]
+            $_aLastInputs[ 'customer_id' ],
+            $_aLastInputs[ 'urls' ]
         );
         return $_aLastInputs;
     }    

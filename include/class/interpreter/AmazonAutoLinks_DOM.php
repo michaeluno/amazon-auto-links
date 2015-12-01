@@ -48,13 +48,16 @@ final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     /**
      * Creates a DOM object from a given url.
      * @return      object      DOM object
+     * @since       unknown
+     * @since       3.2.0       Added the cache duration parameter.
      */
-    public function loadDOMFromURL( $sURL, $sMBLang='uni', $bUseFileGetContents=false, $sSourceCharSet='' ) {
+    public function loadDOMFromURL( $sURL, $sMBLang='uni', $bUseFileGetContents=false, $sSourceCharSet='', $iCacheDuration=86400 ) {
             
         return $this->loadDOMFromHTML( 
             $this->getHTML( 
                 $sURL, 
-                $bUseFileGetContents 
+                $bUseFileGetContents,
+                $iCacheDuration
             ), 
             $sMBLang,
             $sSourceCharSet
@@ -138,13 +141,13 @@ final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * 
      * @return      string
      */
-    public function getHTML( $sURL, $bUseFileGetContents=false ) {
+    public function getHTML( $sURL, $bUseFileGetContents=false, $iCacheDuration=86400 ) {
     
         if ( $bUseFileGetContents ) {
-            $_oHTML = new AmazonAutoLinks_HTTPClient_FileGetContents( $sURL );
+            $_oHTML = new AmazonAutoLinks_HTTPClient_FileGetContents( $sURL, $iCacheDuration );
             return $_oHTML->get();
         }
-        $_oHTML = new AmazonAutoLinks_HTTPClient( $sURL );
+        $_oHTML = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration );
         return $_oHTML->get();    
     
     }
@@ -213,5 +216,34 @@ final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         }
         
     }                
+ 
+    /**
+     * Removes specified tags from the given dom node.
+     */
+    public function removeTags( $oDom, array $aTags ) {
+        
+        foreach( $aTags as $_sTag ) {
+            
+            $_oXpath = new DOMXPath( $oDom );
+            $_oNode  = $_oXpath->query( 
+                "//*/{$_sTag}" 
+            );
+            foreach( $_oNode as $e ) {
+                $e->parentNode->removeChild( $e );
+            }          
+        
+        }
+    }
     
+    /**
+     * @return      sring       Returns an outer HTML output of a specified tag.       
+     * @since       3.2.0
+     */
+    public function getTagOuterHTML( $oDoc, $sTag, $iIndex=0 ) {
+        $_oXpath           = new DOMXPath( $oDoc );               
+        $_oTags            = $_oXpath->query( "/html/{$sTag}" );
+        $_oTag             = $_oTags->item( $iIndex );
+        return $oDoc->saveXml( $_oTag );                                    
+    }    
+ 
 }

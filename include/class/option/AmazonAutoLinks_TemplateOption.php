@@ -334,6 +334,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             case 'similarity_lookup':
             case 'item_lookup':
             case 'search':
+            case 'url': // 3.2.0+
                 $_sTemplateDirectoryName = 'search';
                 break;
             case 'tag':

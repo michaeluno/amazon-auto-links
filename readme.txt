@@ -39,9 +39,10 @@ and more.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
-- **Product Search** - you can create a unit of a search result.
+- **Product Search** - create a unit of a search result.
 - **Item Look-up** - display specific products.
 - **Similarity Look-up** - display similar products.
+- **URL** - list items from an external web source.
 
 = Widgets = 
 - **By Units** - choose the created units to display in the widget.
@@ -193,7 +194,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.0 = 
-- Added the `Search per Keyword` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
+- Added the `URL` unit type which enables to search products and list them with given urls.
+- Added the `Query per Term` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
 - Added the `%disclaimer%` variable in the `Item Format` unit option.
 - Added a unit option to toggle the visibility of `Now Retrieving...` message.
 - Added the internal ability to set previous unit option values when creating a new unit.
