@@ -51,10 +51,14 @@ class AmazonAutoLinks_AdminPage_Setting_General_ProductFilters extends AmazonAut
         
         // Sanitize text inputs
         foreach( $aInput[ 'black_list' ] as &$_sElem ) {
-            $_sElem = trim( AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' ) );
+            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' );
+            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, PHP_EOL, false );
+            $_sElem = trim( $_sElem );
         }
         foreach( $aInput[ 'white_list' ] as &$_sElem ) {
-            $_sElem = trim( AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' ) );
+            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' );
+            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, PHP_EOL, false );
+            $_sElem = trim( $_sElem );
         }
        
         // An invalid value is found. Set a field error array and an admin notice and return the old values.

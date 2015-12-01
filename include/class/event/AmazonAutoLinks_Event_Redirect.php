@@ -50,7 +50,7 @@ class AmazonAutoLinks_Event_Redirect {
                 AmazonAutoLinks_Registry::STORE_URI_PRO
             );
         }
-AmazonAutoLinks_Debug::log( $_sURL );
+
         exit(
             wp_redirect(
                 $_sURL

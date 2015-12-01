@@ -89,14 +89,21 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
          * @return      array
          */
         private function _getCriteriaFromCommaDelimitedString( $aSubject, array $aDimensionalKeys ) {
-            return $this->convertStringToArray(
-                $this->getElement(
-                    $aSubject,
-                    $aDimensionalKeys,
-                    '' 
-                ),
-                ',' // comma delimited string into array
-            );            
+           
+            $_sList = $this->getElement(
+                $aSubject,
+                $aDimensionalKeys,
+                '' 
+            );
+            $_sList = str_replace(
+                PHP_EOL,
+                ',',
+                $_sList
+            );
+            $_aList = $this->convertStringToArray( $_sList, ',' );
+
+            return $_aList;
+            
         }
         
     /**

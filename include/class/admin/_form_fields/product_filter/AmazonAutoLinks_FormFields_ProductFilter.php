@@ -27,9 +27,9 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
         return array(
             array(
                 'field_id'      => 'white_list',
-                'type'          => 'text',
+                'type'          => 'textarea',
                 'title'         => __( 'White List', 'amazon-auto-links' ),
-                'tip'           => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
+                'tip'           => __( 'Enter characters separated by commas or in each line.', 'amazon-auto-links' )
                     . ' ' . __( 'Product links that do not contain the white list items will be omitted.', 'amazon-auto-links' ),
                 'attributes'    => array(   
                     'style' => 'width: 96%;',               
@@ -51,8 +51,8 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
             array(
                 'field_id'      => 'black_list',
                 'title'         => __( 'Black List', 'amazon-auto-links' ),
-                'type'          => 'text',
-                'tip'           => __( 'Enter characters separated by commas.', 'amazon-auto-links' )
+                'type'          => 'textarea',
+                'tip'           => __( 'Enter characters separated by commas or in each line.', 'amazon-auto-links' )
                     . ' ' . __( 'Product links that contain the black list items will be omitted.', 'amazon-auto-links' ),
                 'attributes'    => array(   
                     'style' => 'width: 96%;',               

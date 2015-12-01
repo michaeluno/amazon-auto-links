@@ -199,7 +199,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `%disclaimer%` variable in the `Item Format` unit option.
 - Added a unit option to toggle the visibility of `Now Retrieving...` message.
 - Added the internal ability to set previous unit option values when creating a new unit.
-- Changed the item id option field of the `Item Look-up` and `Similarity Look-up` unit type to accept multilined values.
+- Changed the some option inputs larger including product filter options and search items of the Item look-up and Similarity look-up unit type s.
 - Changed the initial position of the `Template` unit option section.
 - Tweaked the style of setting pages and forms. 
 - Deprecated the `tag` unit type as it is no longer supported by [Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571).
