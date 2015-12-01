@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.3.1
-Stable tag:         3.2.0
+Stable tag:         3.1.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -193,7 +193,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.2.0 = 
+= 3.2.0 - 12/02/2015 = 
 - Added the `URL` unit type which enables to search products and list them with given urls.
 - Added the `Query per Term` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
 - Added the `%disclaimer%` variable in the `Item Format` unit option.
