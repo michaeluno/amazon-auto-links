@@ -30,7 +30,7 @@ class AmazonAutoLinks_FormFields_Setting_ExternalScript extends AmazonAutoLinks_
                 'type'          => 'checkbox',
                 'title'         => __( 'Impression Counter', 'amazon-auto-links' ),
                 'label'         => sprintf( 
-                    __( 'Add the Amazon impression counter, <a href="%1$s" target="_blank">Link Update JavaScript script</a> to track link impressions.', 'amazon-auto-links' ),
+                    __( 'Add the Amazon impression counter, <a href="%1$s" target="_blank">Link Update JavaScript script</a>, to track link impressions.', 'amazon-auto-links' ),
                     'https://affiliate-program.amazon.com/gp/associates/tips/impressions.html'
                 ),                
                 'tip'           => array(
