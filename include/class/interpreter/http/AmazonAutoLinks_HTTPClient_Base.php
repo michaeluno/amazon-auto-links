@@ -108,10 +108,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             }
             
     /**
-     * Returns an HTTP body or multiple HTTP bodies.
+     * Returns HTTP body(s).
      * 
      * @remark      Handles character encoding conversion.
-     * @return      string
+     * @return      string|array
      */
     public function get() {
         
@@ -224,7 +224,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     continue;
                 }
                 
-                // Filters - this allows to modify the remained time externally. 
+                // Filters - this allows external components to modify the remained time, 
                 // which can be used to trick the below check and return the stored data anyway.
                 // So the cache renewal event can be scheduled in the background.
                 $_aCache = apply_filters(
