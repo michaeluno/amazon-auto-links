@@ -20,6 +20,8 @@ If you want to search a specific product, yes you can do that too.
 
 If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
+[youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
+
 = Features =
 - **Supports all Amazon locales** - Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supporeted as well.
 - **Automatic insertion in posts and feeds** - Just check where you want the product links to appear. If you want the product link to be static, just check that option.
