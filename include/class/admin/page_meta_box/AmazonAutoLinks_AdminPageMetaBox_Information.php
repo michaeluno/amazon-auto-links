@@ -25,9 +25,14 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
         if ( ! $this->_isInThePage() ) {
             return;
         }
-
+        
+        $_bProInstalled   = class_exists( 'AmazonAutoLinksPro_Registry' );
+        
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
+        
         // Disable the meta box if the Pro version exists.
-        if ( class_exists( 'AmazonAutoLinksPro_Registry' ) ) {
+        if ( $_bProInstalled && $_bJoindAffiliate ) {
             $this->oProp->aPageSlugs = array();
         }        
         
@@ -39,26 +44,49 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
      * Alternatively use the `content_{instantiated class name}` method instead.
      */
     public function content( $sContent ) {
-        
-        $_sProImage = esc_url( 
-            AmazonAutoLinks_Registry::getPluginURL( 'asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg' ) 
-        );
-        return ''
-            . "<a href='http://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
-                . "<img src='{$_sProImage}'/>"
-            . "</a>"
-            . "<h4>" 
-                . __( 'Join Affiliate Program ', 'admin-page-framework-loader' ) 
-            . "</h4>"            
-            . "<p>"
-                . __( 'Earn 20% commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
-                . ' ' . sprintf( 
-                    __( '<a href="%1$s" target="_blank">Sing up</a> for the affiliate program first.', 'amazon-auto-links' ),
-                    'http://store.michaeluno.jp/wp-signup.php'
-                )
-            . "</p>"
-            ;
-        
+        return $this->_getProInfo()
+            . $this->_getAffiliateInfo()
+            ;        
     }
+        /**
+         * @return      string
+         */    
+        private function _getProInfo() {
+            $_sProImage = esc_url( 
+                AmazonAutoLinks_Registry::getPluginURL( 'asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg' ) 
+            );            
+            return class_exists( 'AmazonAutoLinksPro_Registry' )
+                ? ''
+                : "<a href='http://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
+                    . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}'/>"
+                . "</a>";            
+        }
+        
+        /**
+         * @return      string
+         */
+        private function _getAffiliateInfo() {
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );            
+            $_sLink = 'http://store.michaeluno.jp/wp-signup.php';
+            return $_bJoindAffiliate
+                ? ''
+                : "<h4>" 
+                    . __( 'Join Affiliate Program ', 'admin-page-framework-loader' ) 
+                . "</h4>"            
+                . "<p>"
+                    . __( 'Earn 20% commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
+                    . ' ' . sprintf( 
+                        __( '<a href="%1$s" target="_blank">Sing up</a> for the affiliate program first.', 'amazon-auto-links' ),
+                        $_sLink
+                    )
+                . "</p>"
+                . "<a href='{$_sLink}' target='_blank'>"
+                    . "<img style='max-width:100%; max-width: 250px;' src='"
+                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/tip/credit_link.jpg' ) )
+                        . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>"
+                    . "</a>"
+                    ;
+        }
  
 }
