@@ -276,7 +276,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             );
 
             // Meta boxes
-            $this->_registerMetaBoxes();
+            $this->_registerPageMetaBoxes();
+            $this->_registerPostMetaBoxes();
+            
         }
                 
         // 6. Shortcode - e.g. [amazon_auto_links id="143"]
@@ -315,10 +317,27 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             
         }
         
+        private function _registerPageMetaBoxes() {
+
+            new AmazonAutoLinks_AdminPageMetaBox_Information(
+                null,                                           // meta box id - passing null will make it auto generate
+                __( 'Information', 'amazon-auto-links' ), // title
+                array( // page slugs
+                    AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+                    AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
+                    AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
+                ),
+                'side',                                       // context
+                'default'                                     // priority            
+            );
+            
+            
+        }
+        
         /**
          * Adds meta boxes.
          */
-        private function _registerMetaBoxes() {
+        private function _registerPostMetaBoxes() {
             
             new AmazonAutoLinks_MetaBox_Unit_ViewLink(
                 null,

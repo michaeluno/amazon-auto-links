@@ -57,6 +57,7 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_MetaBox_URLUnit_Advanced"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/meta_box/url_unit/AmazonAutoLinks_MetaBox_URLUnit_Advanced.php", 
 	"AmazonAutoLinks_MetaBox_URLUnit_Main"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/meta_box/url_unit/AmazonAutoLinks_MetaBox_URLUnit_Main.php", 
 	"AmazonAutoLinks_MetaBox_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/meta_box/_abstract/AmazonAutoLinks_MetaBox_Base.php", 
+	"AmazonAutoLinks_AdminPageMetaBox_Information"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php", 
 	"AmazonAutoLinks_AdminPage_Setting"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/setting/AmazonAutoLinks_AdminPage_Setting.php", 
 	"AmazonAutoLinks_AdminPage_Setting_Authentication"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php", 
 	"AmazonAutoLinks_AdminPage_Setting_Authentication_.AuthentiationKeys"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_.AuthentiationKeys.php", 
