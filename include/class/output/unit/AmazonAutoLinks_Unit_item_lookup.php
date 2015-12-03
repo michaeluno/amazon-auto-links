@@ -47,18 +47,6 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
     );
 
     /**
-     * @scope       protected       Item look-up and Similarity look-up will override this method.
-     * @since       3.2.0
-     * @return      integer
-     * @deprecated  3.2.1
-     */
-/*     protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
-        return $this->oOption->isAdvancedAllowed()
-            ? count( $aTerms )
-            : 10;
-    }     */
-    
-    /**
      * Performs an Amazon Product API request.
      * 
      * @since            2.0.2
@@ -109,7 +97,9 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
                     array( 'ItemAttributes', 'ProductTypeName' )
                 );            
 
-                if ( 'CONTRIBUTOR_AUTHORITY_SET' === $_sProductType ) {                                               
+                // These product links are broken
+                // e.g. http://www.amazon.com/Amanda-Jaffe-Series/dp/B00CIZP3M0%3FSubscriptionId%3DAKIAIUOXXAXPYUKNVPVA%26tag%3Dmiunosoft-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00CIZP3M0
+                if ( in_array( $_sProductType, array( 'LITERARY_SERIES', 'CONTRIBUTOR_AUTHORITY_SET' ) ) ) {
                     unset( $_aItems[ $_iIndex ] );
                 }
                 
@@ -117,11 +107,9 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
 
             // Reindex - important as some sob-routines check with `isAssociative()`.
             $aResponse[ 'Items' ][ 'Item' ] = array_values( $_aItems );
-
             return $aResponse;
             
         }
-    
     
     /**
      * 
