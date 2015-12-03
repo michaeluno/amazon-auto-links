@@ -53,8 +53,8 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
      */
     protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
         return $this->oOption->isAdvancedAllowed()
-            ? 10
-            : count( $aTerms );
+            ? count( $aTerms )
+            : 10;
     }    
     
     /**
