@@ -139,7 +139,7 @@
     margin-left: -100px;
     margin-top: -140px;   
 }
-.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span {
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
     border-radius:4px;
     box-shadow: 5px 5px 8px #CCC;
 }
