@@ -227,9 +227,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                     . '%disclaimer%'    // 3.2.0+
                     ,
                     
-            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%;">' . PHP_EOL
+            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%px;">' . PHP_EOL
                 . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">' . PHP_EOL 
-                . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%;" />' . PHP_EOL
+                . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
                 . '    </a>' . PHP_EOL
                 . '</div>',
                 
