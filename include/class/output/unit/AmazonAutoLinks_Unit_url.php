@@ -12,7 +12,7 @@
  * 
  * @package         Amazon Auto Links
  */
-class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_search {
+class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
     
     /**
      * Stores the unit type.
@@ -42,9 +42,21 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_search {
 
         // Set the found items to the `ItemId` argument.
         $this->oUnitOption->set( 
-            'Keywords', 
+            $this->sSearchTermKey,  // ItemId
             implode( ',', $_aFoundASINs )
         );
+        
+        // In v3.2.0, the Operation meta was missing and ItemSearch may be storead instead. So override it here.
+        $this->oUnitOption->set( 
+            'Operation',  // ItemId
+            'ItemLookup'
+        );
+        
+        // Set allowed ASINs. This way items other than the queried ASINs will not be returned.
+        $this->oUnitOption->set( 
+            '_allowed_ASINs', 
+            $_aFoundASINs
+        );        
         
         // If the id is set, save the found items so that the user can view what's found in the unit editing page.
         $_iPostID = $this->oUnitOption->get( 'id' );

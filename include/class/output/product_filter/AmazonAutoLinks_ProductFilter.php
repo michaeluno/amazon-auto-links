@@ -42,6 +42,25 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
     public $aWhiteListTitles       = array();
     public $aWhiteListDescriptions = array();
     
+    // 3.2.1
+    /**
+     * Restrict results to certain ASINs.
+     * 
+     * The difference from the white list by ASIN is that an item of whilte list will be allowed even when it is in a black list.
+     * On the other hand, items not listed here will not be allowed.
+     *      
+     * Used by the URL unit type.
+     * @since       3.2.1
+     */
+    public $aAllowedASINs          = array();
+    
+    /**
+     * Indicates whether allowed ASINs are set. 
+     * If this value is true, prodcuts not listed here will not be returned.
+     * @since       3.2.1
+     */
+    public $bASINRestrictced       = false;
+    
     /**
      * Sets up properties.
      */
@@ -84,6 +103,19 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
             array( 'white_list', 'description' )
         );                
         
+        // 3.2.1
+        $this->aAllowedASINs           = $this->getElementAsArray(
+            $aArguments,
+            '_allowed_ASINs'
+        );
+        $this->bASINRestrictced        = ! empty( $this->aAllowedASINs );
+        $this->aAllowedASINs           = array_unique(
+            array_merge(
+                $this->aAllowedASINs,
+                $this->aWhiteListASINs
+            )
+        );
+        
     }
         /**
          * @return      array
@@ -123,12 +155,24 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
      * @return      boolean
      */
     public function isASINAllowed( $sASIN ) {
+        if ( $this->bASINRestrictced ) {
+            return in_array(
+                $sASIN,
+                $this->aAllowedASINs
+            );
+        }
         return in_array(
             $sASIN,
             $this->aWhiteListASINs
         );
     }
     public function isASINBlocked( $sASIN ) {
+        if ( $this->bASINRestrictced ) {
+            return ! in_array(
+                $sASIN,
+                $this->aAllowedASINs
+            );
+        }        
         if ( $this->bNoDuplicate ) {
             if ( in_array( $sASIN, self::$aParsed ) ) {
                 return true;

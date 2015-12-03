@@ -172,7 +172,13 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 ),
                 'tip'               => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
                 'default'           => 1,
-            ),           
+            ),    
+            array(
+                'field_id'      => $sFieldIDPrefix . 'Operation',
+                'type'          => 'hidden',
+                'hidden'        => true,
+                'value'         => 'ItemLookup',
+            ),            
         );
     }
   

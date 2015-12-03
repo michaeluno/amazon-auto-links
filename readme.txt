@@ -195,6 +195,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.2.1 =
+- Removed some advanced options of the URL unit type as their values could not be used rather led to errors.
+
 = 3.2.0 - 12/02/2015 = 
 - Enhanced the ability of the contextual product search for the site search terms.
 - Added the `URL` unit type which enables to search products and list them with given urls.

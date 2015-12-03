@@ -73,13 +73,14 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
             
         // Perform the search for the first page regardless the specified count (number of items).
         // Keys with an empty value will be filtered out when performing the request.
-        return $_oAPI->request( 
+        $_aResponse = $_oAPI->request( 
             $this->getAPIParameterArray( 
                 $this->oUnitOption->get( 'Operation' ) 
             ), 
             $this->oUnitOption->get( 'country' ),   // locale
             $this->oUnitOption->get( 'cache_duration' )
         );
+        return $_aResponse;
                  
     }
     
@@ -116,6 +117,7 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
         $_aAPIParameters = 'Amazon' === $_aUnitOptions['MerchantId']
             ? $aParams + array( 'MerchantId' => $_aUnitOptions['MerchantId'] )    // (optional) 'Amazon' restrict the returned items only to be soled by Amazon.
             : $aParams;
+            
         return $_aAPIParameters;
         
     }

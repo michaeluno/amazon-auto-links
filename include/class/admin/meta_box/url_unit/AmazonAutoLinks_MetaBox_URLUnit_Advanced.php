@@ -11,7 +11,7 @@
  * Defines the meta box,
  * @since       3.2.0
  */
-class AmazonAutoLinks_MetaBox_URLUnit_Advanced extends AmazonAutoLinks_MetaBox_SearchUnit_Advanced {
+class AmazonAutoLinks_MetaBox_URLUnit_Advanced extends AmazonAutoLinks_MetaBox_ItemLookupUnit_Advanced {
     
     /**
      * Stores the unit type slug(s). 

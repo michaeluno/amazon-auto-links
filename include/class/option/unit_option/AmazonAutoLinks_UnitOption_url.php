@@ -12,7 +12,7 @@
  * 
  * @since       3.2.0
  */
-class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_search {
+class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_lookup {
     
     /**
      * Stores the unit type.
@@ -38,9 +38,8 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_search {
      */
     protected function getDefaultOptionStructure() {
         return self::$aStructure_Default
-            + parent::$aStructure_Default;
+            + parent::getDefaultOptionStructure();       
     }
-
     
     /**
      * 
