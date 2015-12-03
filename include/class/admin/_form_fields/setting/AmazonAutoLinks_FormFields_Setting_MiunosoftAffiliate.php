@@ -34,10 +34,10 @@ class AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate extends AmazonAutoLi
                     "<img style='float: left; margin: 1em 1.6em 1em 0.5em; text-align:center; max-height: 200px;' src='"
                         . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/tip/credit_link.jpg' ) )
                         . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>",
-                    __( 'If you set your affiliate ID of Amazon Auto Links Pro here, the credit text at the bottom of in unit oitputs will be linked to the Amazon Auto Links Pro product page.' ),
+                    __( 'If you set your affiliate ID of Amazon Auto Links Pro here, the credit text at the bottom of unit outputs will be linked to the Amazon Auto Links Pro product page.', 'amazon-auto-links' ),
                 ),
                 'description'   => array(
-                    __( 'Earn commisons by putting a link to the product page of Amazon Auto Links Pro in the credit link of unit outputs.', 'amazon-auto-links' ),
+                    __( 'Earn commissions by putting a link to the product page of Amazon Auto Links Pro in the credit link of unit outputs.', 'amazon-auto-links' ),
                     sprintf(
                         __( 'You need to <a href="%1$s" target="_blank">sign up</a> first for Amazon Auto Links Pro affiliate program to get commisions.', 'amazon-auto-links' ),
                         'http://store.michaeluno.jp/wp-signup.php'
