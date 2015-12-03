@@ -331,6 +331,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultTemplateIDByUnitType( $sUnitType ) {
         switch ( $sUnitType ) {
+            case 'contextual_widget':   // 3.2.1+
             case 'similarity_lookup':
             case 'item_lookup':
             case 'search':

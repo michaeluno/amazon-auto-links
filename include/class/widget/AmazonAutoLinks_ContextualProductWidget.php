@@ -132,7 +132,10 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         private function _addFieldsByFieldClass( $aClassNames ) {     
             foreach( $aClassNames as $_sClsssName ) {            
                 $_oFields = new $_sClsssName;
-                foreach( $_oFields->get() as $_aField ) {
+                $_aFields = 'AmazonAutoLinks_FormFields_Unit_Template' === $_sClsssName
+                    ? $_oFields->get( '', 'contextual_widget' )
+                    : $_oFields->get();
+                foreach( $_aFields as $_aField ) {
                     $this->_addField( $_aField );
                     
                 }
