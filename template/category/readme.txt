@@ -1,4 +1,7 @@
 == Change log ==
+
+= 1.0.6 =
+- Tweaked the style of disclaimer element for widgets. 
  
 = 1.0.5 =
 - Tweaked the style of rating images.

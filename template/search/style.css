@@ -132,8 +132,8 @@
 .amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip:hover {
     text-decoration: none;
 } 
-.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip span {
-    z-index:10;
+.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    z-index:999;
     display:none; 
     padding:14px 20px;
     margin-top:-30px; 
@@ -142,18 +142,23 @@
     line-height:16px;
     
 }
-.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip:hover span{
-    display:inline; 
-    position:absolute; 
+.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content {
+    display: inline;
+    position: relative;
+}
+.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    display: inline; 
+    float: right;
+    position: absolute; 
     color:#111;
     border:1px solid #DCA; 
     background:#fffAF0;
     
     /* Adjust the pop up element position */
     margin-left: -100px;
-    margin-top: -140px;    
+    margin-top: -140px;   
 }
-.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip span {
+.amazon-products-container-search .pricing-disclaimer a.amazon-disclaimer-tooltip > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
     border-radius:4px;
     box-shadow: 5px 5px 8px #CCC;
 }

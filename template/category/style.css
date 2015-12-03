@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the category unit type.
-    Version:        1.0.5
+    Version:        1.0.6
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -113,26 +113,31 @@
 .amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover {
     text-decoration: none;
 } 
-.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span {
-    z-index:10;
-    display:none; 
-    padding:14px 20px;
-    margin-top:-30px; 
-    margin-left:28px;
-    width:300px; 
-    line-height:16px;
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    z-index: 999;
+    display: none; 
+    padding: 14px 20px;
+    margin-top: -30px; 
+    margin-left: 28px;
+    width: 300px; 
+    line-height: 16px;
     
 }
-.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover span{
-    display:inline; 
-    position:absolute; 
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content {
+    display: inline;
+    position: relative;
+}
+.amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    display: inline; 
+    float: right;
+    position: absolute; 
     color:#111;
     border:1px solid #DCA; 
     background:#fffAF0;
     
     /* Adjust the pop up element position */
     margin-left: -100px;
-    margin-top: -140px;    
+    margin-top: -140px;   
 }
 .amazon-products-container .pricing-disclaimer a.amazon-disclaimer-tooltip span {
     border-radius:4px;
