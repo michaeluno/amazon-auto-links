@@ -53,6 +53,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
                 'field_id'      => $sFieldIDPrefix . 'Operation',
                 'type'          => 'radio',
                 'title'         => __( 'Types', 'amazon-auto-links' ),
+                'label_min_width' => '100%',
                 'label'         => array(                        
                     'ItemSearch'        => '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns items that satisfy the search criteria in the title and descriptions.', 'amazon-auto-links' ),
                     'ItemLookup'        => '<span class=""><strong>' . __( 'Item Look-up', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns some or all of the item attributes with the given item identifier.', 'amazon-auto-links' ) . '</span>',
