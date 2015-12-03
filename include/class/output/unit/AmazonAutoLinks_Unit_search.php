@@ -264,7 +264,9 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                  * @return      integer
                  */
                 protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
-                    return $this->oUnitOption->get( 'count' );
+                    return $this->oOption->isAdvancedAllowed()
+                        ? $this->oUnitOption->get( 'count' )
+                        : 10;
                 }
 
     
