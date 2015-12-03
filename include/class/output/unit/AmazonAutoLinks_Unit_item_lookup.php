@@ -50,12 +50,13 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
      * @scope       protected       Item look-up and Similarity look-up will override this method.
      * @since       3.2.0
      * @return      integer
+     * @deprecated  3.2.1
      */
-    protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
+/*     protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
         return $this->oOption->isAdvancedAllowed()
             ? count( $aTerms )
             : 10;
-    }    
+    }     */
     
     /**
      * Performs an Amazon Product API request.
@@ -80,9 +81,46 @@ class AmazonAutoLinks_Unit_item_lookup extends AmazonAutoLinks_Unit_search {
             $this->oUnitOption->get( 'country' ),   // locale
             $this->oUnitOption->get( 'cache_duration' )
         );
+        
+        $_aResponse = $this->_getValidResponse( $_aResponse );
         return $_aResponse;
                  
     }
+        /**
+         * Sometimes Author data is found with an un-accessible url.
+         * In that case drop those items.
+         * @since       3.2.1
+         * @return      array
+         */
+        private function _getValidResponse( $aResponse ) {
+            
+            $_aItems = $this->getElement(
+                $aResponse,
+                array( 'Items', 'Item' )
+            );
+            if ( ! isset( $_aItems[ 0 ] ) ) {
+                $_aItems = array( $_aItems );
+            }
+            
+            foreach( $_aItems as $_iIndex => $_aItem ) {
+            
+                $_sProductType = $this->getElement(
+                    $_aItem,
+                    array( 'ItemAttributes', 'ProductTypeName' )
+                );            
+
+                if ( 'CONTRIBUTOR_AUTHORITY_SET' === $_sProductType ) {                                               
+                    unset( $_aItems[ $_iIndex ] );
+                }
+                
+            }
+
+            // Reindex - important as some sob-routines check with `isAssociative()`.
+            $aResponse[ 'Items' ][ 'Item' ] = array_values( $_aItems );
+
+            return $aResponse;
+            
+        }
     
     
     /**

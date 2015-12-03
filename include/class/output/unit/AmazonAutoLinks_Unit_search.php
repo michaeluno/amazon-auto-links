@@ -56,19 +56,13 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                 
         // Get API responses
         $_aResponse = $this->_getResponses();
-        
-        // Check errors
-        if ( isset( $_aResponse[ 'Error' ][ 'Code' ] ) ) {
+
+        $_aError    = $this->_getResponseError( $_aResponse );
+        if ( ! empty( $_aError ) ) {
             return $this->oUnitOption->get( 'show_errors' )
-                ? $_aResponse
+                ? $_aError
                 : array();
-        }            
-        // Error in the Request element.
-        if ( isset( $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
-            return $this->oUnitOption->get( 'show_errors' )
-                ? $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
-                : array();
-        }            
+        }
             
         $_aProducts = $this->getProducts( $_aResponse );
 
@@ -76,6 +70,34 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
         return $_aProducts;
         
     }
+        /**
+         * @since       3.2.1
+         * @return      array
+         */
+        private function _getResponseError( $aResponse ) {
+            
+            // HTTP or API Resonse error
+            if ( isset( $aResponse[ 'Error' ][ 'Code' ] ) ) {
+                return $aResponse;
+            }
+            
+            // Error in the API Requests.
+            $_aErrors = $this->getElement( 
+                $aResponse,
+                array( 'Items', 'Request', 'Errors' )
+            );
+            if ( ! empty( $_aErrors ) ) {
+                
+                // Retrun the first error item as the template currently only checks the Error element.
+                if ( isset( $_aErrors[ 'Error' ][ 0 ] ) ) {
+                    $_aErrors[ 'Error' ] = $_aErrors[ 'Error' ][ 0 ];
+                }
+                return $_aErrors;
+                    
+            }       
+            return array();
+            
+        }
         /**
          * @since       3.1.4
          * @scope       protected       The 'url' unit type will extend this method.
@@ -101,6 +123,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
              * @since       3.2.0
              */
             private function _setSearchTerms() {
+                
                 $_sTerms    = trim( $this->oUnitOption->get( $this->sSearchTermKey ) );
                 if ( ! $_sTerms ) {
                     $this->oUnitOption->set( 'search_per_keyword', false );
@@ -112,7 +135,28 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                     $_sTerms
                 );
                 $_aTerms    =  $this->convertStringToArray( $_sTerms, ',' );
-                $this->oUnitOption->set( $this->sSearchTermKey,  implode( ',', $_aTerms ) );
+                
+                $_bSearchPerTerm = $this->oUnitOption->get( 'search_per_keyword' );
+                if ( count( $_aTerms ) > 10 && ! $_bSearchPerTerm ) {
+                     
+                    // Auto-truncate search terms to 10 as the Amazon API does not allow more than 10 terms to be set per request.
+                    $this->oUnitOption->set( 'search_per_keyword', true );
+                    
+                    // The above 'search_per_keyword' = false will trigger `_getResponsesByMultipleKeywords()` 
+                    // so an array can be set for the terms. 
+                    $this->oUnitOption->set( 
+                        $this->sSearchTermKey,  // ItemId
+                        array_chunk( $_aTerms, 10 )
+                    );                    
+                    
+                } else {
+                                    
+                    $this->oUnitOption->set( 
+                        $this->sSearchTermKey,  
+                        implode( ',', $_aTerms ) 
+                    );
+                    
+                }
                 
             }        
             /**
@@ -123,16 +167,23 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
              
                 $_aItems    = array();
                 $_aResponse = array();           
-                $_asTerms   = $this->oUnitOption->get( $this->sSearchTermKey );
+                $_asTerms   = $this->oUnitOption->get( $this->sSearchTermKey );                
                 $_aTerms    = is_array( $_asTerms )
                     ? $_asTerms
                     : $this->convertStringToArray( $_asTerms, ',' );
-                    
+                
                 $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
+                foreach( $_aTerms as $_asSearchTerms ) {
+                    
+                    $_sSearchTerms = is_scalar( $_asSearchTerms )    
+                        ? $_asSearchTerms
+                        : implode( ',', $_asSearchTerms );
 
-                foreach( $_aTerms as $_sSearchTerm ) {
-
-                    $this->oUnitOption->set( $this->sSearchTermKey, $_sSearchTerm );
+                    $this->oUnitOption->set( 
+                        $this->sSearchTermKey, 
+                        // 3.2.1+ Nested array is supported to auto-truncate terms more than 10 as API does not allow it.
+                        $_sSearchTerms
+                    );
                     $_aResponse = $this->getRequest( $_iCount );
 
                     $_aItems    = $this->_getItemsMerged( $_aItems, $_aResponse );                    
@@ -141,7 +192,8 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                     }
                 }
 
-                array_splice( $_aItems, $_iCount );   // up to the set item count
+                // Up to the set item count + 10% more as they may get filtered out.
+                array_splice( $_aItems, $_iCount );   
                 $this->setMultiDimensionalArray( 
                     $_aResponse,
                     array( 'Items', 'Item' ),
@@ -153,7 +205,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                         $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
                     );
                 }            
-                                
+
                 return $_aResponse; 
              
             }    
@@ -182,7 +234,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                         
                         // remove the entry as it is a duplicate
                         if ( isset( $_aParsedASINs[ $_sASIN ] ) )  {
-                            unset( $aItems[ $_iIndex ] );       
+                            unset( $aItems[ $_iIndex ] );     
                             continue;
                         }
                                
@@ -463,7 +515,8 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
 
         // First Iteration - Extract displaying ASINs.
         $_aProducts     = array();
-        foreach ( $this->_getItems( $aResponse ) as $_aItem ) {
+        $_aItems        = $this->_getItems( $aResponse );
+        foreach ( $_aItems as $_aItem ) {
 
             if ( ! is_array( $_aItem ) ) { 
                 continue; 
@@ -605,12 +658,13 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
             
         }
         
-        return $this->_formatProducts( 
+        $_aProducts = $this->_formatProducts( 
             $_aProducts,
             $_aASINLocales,
             $_sLocale,
             $_sAssociateID
         );
+        return $_aProducts;
         
     }
         

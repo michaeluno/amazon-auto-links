@@ -21,11 +21,74 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
     public $sUnitType = 'url';
     
     /**
+     * Sorts items.
+     * @remark      Overriding the method in the `AmazonutoLinks_Unit_search` class.
+     * @since       3.2.1
+     * @return      array
+     */
+    protected function getProducts( $aResponse ) {       
+        
+        $_sSortType = $this->oUnitOption->get( 
+            array( '_sort' ),  // dimensional path
+            'raw'   // default
+        );
+
+        /*                     
+         * 'title'             => __( 'Title', 'amazon-auto-links' ),
+         * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
+         * 'random'            => __( 'Random', 'amazon-auto-links' ),
+         * 'raw'               => __( 'Raw', 'amazon-auto-links' ),         
+         */        
+        $_sMethodName = "_getItemsSorted_{$_sSortType}";
+        return $this->{$_sMethodName}( 
+            parent::getProducts( $aResponse )
+        );
+        
+    }
+        /**
+         * @since       3.2.1
+         */
+        private function _getItemsSorted_( $aProducts ) {
+            return $this->_getItemsSorted_raw( $aProducts );
+        }        
+        private function _getItemsSorted_title( $aProducts ) {
+            uasort( $aProducts, array( $this, 'replyToSortProductsByTitle' ) );
+            return $aProducts;
+        }
+        private function _getItemsSorted_title_descending( $aProducts ) {
+            uasort( $aProducts, array( $this, 'replyToSortProductsByTitleDescending' ) );
+            return $aProducts;
+        }
+        private function _getItemsSorted_random( $aProducts ) {
+            shuffle( $aProducts );
+            return $aProducts;
+        }
+        private function _getItemsSorted_raw( $aProducts ) {
+            return $aProducts;
+        }
+            public function replyToSortProductsByTitle( $aProductA, $aProductB ) {
+                $_sTitleA = $this->getElement( $aProductA, 'title' );
+                $_sTitleB = $this->getElement( $aProductB, 'title' );
+                return strnatcasecmp( 
+                    $_sTitleA, 
+                    $_sTitleB
+                );    
+            }
+            public function replyToSortProductsByTitleDescending( $aProductA, $aProductB ) {
+                $_sTitleA = $this->getElement( $aProductA, 'title' );
+                $_sTitleB = $this->getElement( $aProductB, 'title' );
+                return strnatcasecmp( 
+                    $_sTitleB,
+                    $_sTitleA 
+                );    
+            }            
+        
+    /**
      * Performs API requests and get responses.
      * 
      * First, sets up the unit options for the item look up API query.
      * 
-     * @since       3.1.4
+     * @since       3.2.0
      * @scope       protected       The 'url' unit type will extend this method.
      * @return      array
      */
@@ -37,27 +100,12 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
          */
         $_aHTMLs = $this->_getHTMLBodies( $this->oUnitOption->get( 'urls' ) );       
         
-        // Retrive ASINs from the given documents. Supports plain text.
+        // Retrieve ASINs from the given documents. Supports plain text.
         $_aFoundASINs = $this->_getFoundItems( $_aHTMLs );
 
-        // Set the found items to the `ItemId` argument.
-        $this->oUnitOption->set( 
-            $this->sSearchTermKey,  // ItemId
-            implode( ',', $_aFoundASINs )
-        );
-        
-        // In v3.2.0, the Operation meta was missing and ItemSearch may be storead instead. So override it here.
-        $this->oUnitOption->set( 
-            'Operation',  // ItemId
-            'ItemLookup'
-        );
-        
-        // Set allowed ASINs. This way items other than the queried ASINs will not be returned.
-        $this->oUnitOption->set( 
-            '_allowed_ASINs', 
-            $_aFoundASINs
-        );        
-        
+        // Update unit options.
+        $this->_setUnitTypeSpecificUnitOptions( $_aFoundASINs );
+                
         // If the id is set, save the found items so that the user can view what's found in the unit editing page.
         $_iPostID = $this->oUnitOption->get( 'id' );
         if ( $_iPostID ) {
@@ -68,6 +116,32 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
         return parent::_getResponses();
         
     }  
+        /**
+         * Updated unit options.
+         * @since       3.2.1
+         */
+        private function _setUnitTypeSpecificUnitOptions( $aFoundASINs ) {
+                            
+            // Set the found items to the `ItemId` argument.
+            $this->oUnitOption->set( 
+                $this->sSearchTermKey,  // ItemId
+                implode( ',', $aFoundASINs )
+            );
+            
+            // In v3.2.0, the Operation meta was missing and ItemSearch may be storead instead. So override it here.
+            $this->oUnitOption->set( 
+                'Operation',  // ItemId
+                'ItemLookup'
+            );
+            
+            // Set allowed ASINs. This way items other than the queried ASINs will not be returned.
+            $this->oUnitOption->set( 
+                '_allowed_ASINs', 
+                $aFoundASINs
+            );        
+            
+        }
+        
         /**
          * 
          */

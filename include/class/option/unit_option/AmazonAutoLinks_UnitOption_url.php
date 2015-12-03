@@ -29,6 +29,7 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
         'urls'           => '',  // (string|array)
         'search_per_keyword'    => true,
         '_found_items'   => '',  // (string)
+        '_sort'          => 'raw',  // 3.2.1+ (string)
 
     );
     

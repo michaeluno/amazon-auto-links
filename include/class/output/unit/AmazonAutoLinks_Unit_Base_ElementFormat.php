@@ -78,7 +78,7 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 $_aProduct 
             );
             $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
-        
+
         }
         return $aProducts;
         
@@ -163,7 +163,9 @@ abstract class AmazonAutoLinks_Unit_Base_ElementFormat extends AmazonAutoLinks_U
                 return "<a href='#' class='amazon-disclaimer-tooltip'>"
                         . __( 'More info', 'amazon-auto-links' )
                         . "<span class='amazon-disclaimer-tooltip-content'>"
-                            . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
+                            . "<span class='amazon-disclaimer-tooltip-content-text'>"   // needed for widget CSS 
+                                . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
+                            . "</span'>"
                         . "</span>"
                     . "</a>";                
             }

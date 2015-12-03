@@ -195,7 +195,13 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.2.1 =
+= 3.2.1 - 12/04/2015 =
+- Fixed a bug with the `Item Look-up` and `URL` unit types that the `Number of Items` option did not take effect.
+- Fixed a bug that some Amazon Product Advertising API response errors could not be displayed when the `Query per Item` option was enabled.
+- Fixed incorrect inline CSS values in the default Image Format unit option.
+- Changed the default template of the Contextual Products Widget to `Search`.
+- Tweaked the style of `Search` and `Category` templates for disclaimer elements in widgets.
+- Tweaked the style of `Search` template to wrap descriptions.
 - Removed some advanced options of the URL unit type as their values could not be used rather led to errors.
 
 = 3.2.0 - 12/02/2015 = 
