@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.0.7 =
+- Made the description element wrap.
+
 = 1.0.6 =
 - Tweaked the style of rating images.
 - Tweaked the style of sub-images.
@@ -11,7 +14,7 @@
 - Added a style for discounted price element.
 
 = 1.0.3 =
-- Chagned some local variable names.
+- Changed some local variable names.
 
 = 1.0.2 =
 - Tweaked the styling to horizontally center the Not Found image.
