@@ -102,7 +102,7 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
         
         // Retrieve ASINs from the given documents. Supports plain text.
         $_aFoundASINs = $this->_getFoundItems( $_aHTMLs );
-
+                
         // Update unit options.
         $this->_setUnitTypeSpecificUnitOptions( $_aFoundASINs );
                 
@@ -122,6 +122,7 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
         return parent::_getResponses();
         
     }  
+
         /**
          * Updated unit options.
          * @since       3.2.1
@@ -157,8 +158,53 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
                 $_aURLs,
                 $this->oUnitOption->get( 'cache_duration' )
             );
-            return $_oHTTP->get();                 
+            
+            $_aHTMLBodies = $_oHTTP->get();
+            
+            // Set a debug output
+            $this->_setDebugInfoForHTMLBodies( $_aHTMLBodies );            
+            
+            return $_aHTMLBodies;
         }
+            
+            /**
+             * Stores retrieved HTML bodies for debug outputs.
+             * @since       3.2.2
+             */
+            private $_aHTMLs = array();
+            /**
+             * @since      3.2.2
+             * @return     void
+             */
+            private function _setDebugInfoForHTMLBodies( $aHTMLs ) {
+                if ( ! $this->oOption->isDebug() ) {
+                    return;
+                }
+                $this->_aHTMLs = $aHTMLs;
+                add_filter( 
+                    'aal_filter_unit_output',
+                    array( $this, '_replyToAddHTMLBodies' ),
+                    20,  // priority
+                    3    // 3 parameters
+                );                
+            }
+                /**
+                 * @since       3.2.2
+                 * @return      string
+                 */
+                public function _replyToAddHTMLBodies( $sProductHTML, $sASIN, $sLocale ) {
+                    $_aHTMLs = $this->_aHTMLs;
+                    $this->_aHTMLs = array();   // reset for next outputs.
+                    return $sProductHTML
+                        . '<pre class="debug" style="max-height: 300px; overflow-y: scroll; overflow-x: auto; padding: 0 1em; word-wrap: break-word; word-break: break-all; margin: 1em 0;">'
+                            . '<h3>' 
+                                . __( 'Debug Info', 'amazon-auto-links' ) 
+                                . ' - ' . __( 'HTML Bodies', 'amazon-auto-links' ) 
+                            . '</h3>'
+                            . AmazonAutoLinks_Debug::get( $_aHTMLs )      
+                        . "</pre>";
+                    
+                }
         
         /**
          * Parses the given HTML content and returns the found ASINs.
