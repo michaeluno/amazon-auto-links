@@ -195,6 +195,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.2.2 =
+- Changed the Found Items field in the URL unit definition page to display Not Found message for finding no item.
+
 = 3.2.1 - 12/04/2015 =
 - Fixed a bug with the `Item Look-up` and `URL` unit types that the `Number of Items` option did not take effect.
 - Fixed a bug that some Amazon Product Advertising API response errors could not be displayed when the `Query per Item` option was enabled.
