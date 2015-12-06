@@ -78,13 +78,26 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $this->getAsArray( $asURLs ) 
         );
         $this->iCacheDuration = $iCacheDuration;
-        $this->aArguments     = null === $aArguments
-            ? $this->aArguments
-            : $aArguments;
+        $this->aArguments     = $this->_getFormattedArguments( $aArguments );
         $this->sSiteCharSet   = get_bloginfo( 'charset' );
         $this->sRequestType   = $sRequestType;
         
-    }         
+        
+    }      
+        /**
+         * @return      array
+         */
+        private function _getFormattedArguments( $aArguments ) {
+            $aArguments     = null === $aArguments
+                ? $this->aArguments
+                : $aArguments;
+            //  3.7  or later, it should be true.
+            $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
+            return apply_filters(
+                'aal_filter_http_request_arguments',
+                $aArguments
+            );
+        }
         /**
          * 
          * @return      array       The formatted array.
@@ -273,8 +286,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @remark      this does not set cache
          */
         protected function _getHTTPResponse( $sURL, array $aArguments ) {
-            return function_exists( 'wp_safe_remote_request' )
-                ? wp_safe_remote_request( $sURL, $aArguments )
+            return function_exists( 'wp_safe_remote_get' )
+                ? wp_safe_remote_get( $sURL, $aArguments )
                 : wp_remote_get( $sURL, $aArguments );
         }
         /**
