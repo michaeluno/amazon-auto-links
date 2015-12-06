@@ -109,7 +109,13 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
         // If the id is set, save the found items so that the user can view what's found in the unit editing page.
         $_iPostID = $this->oUnitOption->get( 'id' );
         if ( $_iPostID ) {
-            update_post_meta( $_iPostID, '_found_items', implode( PHP_EOL, $_aFoundASINs ) );
+            update_post_meta( 
+                $_iPostID, 
+                '_found_items', 
+                empty( $_aFoundASINs )
+                    ? __( 'Product not found.', 'amazon-auto-links' )
+                    : implode( PHP_EOL, $_aFoundASINs )
+            );
         }
         
         // Now do the API request and get responses.
