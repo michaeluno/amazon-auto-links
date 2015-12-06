@@ -91,8 +91,12 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $aArguments     = null === $aArguments
                 ? $this->aArguments
                 : $aArguments;
+                
+            $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
+            
             //  3.7  or later, it should be true.
             $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
+            
             return apply_filters(
                 'aal_filter_http_request_arguments',
                 $aArguments
