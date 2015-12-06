@@ -105,7 +105,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
          */
         protected function _getResponses() {
 
-            // Sanitize the searthc terms
+            // Sanitize the search terms
             $this->_setSearchTerms();
      
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
@@ -192,7 +192,7 @@ class AmazonAutoLinks_Unit_search extends AmazonAutoLinks_Unit_Base_ElementForma
                     }
                 }
 
-                // Up to the set item count + 10% more as they may get filtered out.
+                // Up to the set item count.
                 array_splice( $_aItems, $_iCount );   
                 $this->setMultiDimensionalArray( 
                     $_aResponse,
