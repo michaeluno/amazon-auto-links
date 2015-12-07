@@ -196,6 +196,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.2 =
+- Changed the minimum required cache duration to `600`.
 - Changed the Found Items field in the URL unit definition page to display Not Found message for finding no item.
 
 = 3.2.1 - 12/04/2015 =
