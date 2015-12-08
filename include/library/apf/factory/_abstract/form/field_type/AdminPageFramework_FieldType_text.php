@@ -6,7 +6,8 @@ class AmazonAutoLinks_AdminPageFramework_FieldType_text extends AmazonAutoLinks_
         return <<<CSSRULES
 /* Text Field Type */
 .amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container {
-    vertical-align: top; 
+    /* vertical-align: top; @depracated 3.7.1 */
+    vertical-align: middle; 
 }
 
 .amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container.amazon-auto-links-field-text-multiple-labels {

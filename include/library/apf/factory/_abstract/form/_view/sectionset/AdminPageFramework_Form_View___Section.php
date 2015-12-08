@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_View___Section extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_View___Section extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aArguments = array();
     public $aSectionset = array();
     public $aStructure = array();

@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Model__FormSubmission_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Model__FormSubmission_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     protected function _getPressedSubmitButtonData(array $aPostElements, $sTargetKey = 'field_id') {
         foreach ($aPostElements as $_sInputID => $_aSubElements) {
             if (!isset($_aSubElements['name'])) {

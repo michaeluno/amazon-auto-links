@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Form_Utility extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Form_Utility extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static public function getElementPathAsArray($asPath) {
         if (is_array($asPath)) {
             return;

@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_View___DebugInfo extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_View___DebugInfo extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $sStructureType = '';
     public $oMsg;
     public function __construct() {

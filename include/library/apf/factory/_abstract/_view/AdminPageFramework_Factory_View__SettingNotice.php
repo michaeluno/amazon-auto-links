@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Factory_View__SettingNotice extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Factory_View__SettingNotice extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $oFactory;
     public function __construct($oFactory) {
         $this->oFactory = $oFactory;

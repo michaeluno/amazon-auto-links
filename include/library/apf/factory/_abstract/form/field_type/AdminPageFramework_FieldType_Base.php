@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_FieldType_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_FieldType_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $_sFieldSetType = '';
     public $aFieldTypeSlugs = array('default');
     protected $aDefaultKeys = array();

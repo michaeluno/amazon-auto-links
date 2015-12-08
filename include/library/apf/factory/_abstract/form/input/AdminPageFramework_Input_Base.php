@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Input_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Input_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aField = array();
     public $aAttributes = array();
     public $aOptions = array();

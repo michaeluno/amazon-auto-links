@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_Model___FieldTypeRegistration extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_Model___FieldTypeRegistration extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public function __construct(array $aFieldTypeDefinition, $sStructureType) {
         $this->_initialize($aFieldTypeDefinition, $sStructureType);
     }

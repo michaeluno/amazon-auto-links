@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_PointerToolTip extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_PointerToolTip extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static private $_bResourceLoaded = false;
     static private $aPointers = array();
     public $sPointerID;

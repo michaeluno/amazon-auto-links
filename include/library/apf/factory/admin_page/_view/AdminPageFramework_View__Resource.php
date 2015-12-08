@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_View__Resource extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_View__Resource extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $oFactory;
     public $sCurrentPageSlug;
     public $sCurrentTabSlug;

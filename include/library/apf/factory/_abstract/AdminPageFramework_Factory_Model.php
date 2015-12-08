@@ -2,12 +2,12 @@
 abstract class AmazonAutoLinks_AdminPageFramework_Factory_Model extends AmazonAutoLinks_AdminPageFramework_Factory_Router {
     public function __construct($oProp) {
         parent::__construct($oProp);
-        add_filter('field_types_admin_page_framework', array($this, '_replyToFilterFieldTypeDefinitions'));
+        add_filter('field_types_' . $oProp->sClassName, array($this, '_replyToFilterFieldTypeDefinitions'));
     }
     protected function _setUp() {
         $this->setUp();
     }
-    public function _replyToFieldsetReourceRegistration($aFieldset) {
+    public function _replyToFieldsetResourceRegistration($aFieldset) {
         $aFieldset = $aFieldset + array('help' => null, 'title' => null, 'help_aside' => null,);
         if (!$aFieldset['help']) {
             return;
@@ -15,7 +15,10 @@ abstract class AmazonAutoLinks_AdminPageFramework_Factory_Model extends AmazonAu
         $this->oHelpPane->_addHelpTextForFormFields($aFieldset['title'], $aFieldset['help'], $aFieldset['help_aside']);
     }
     public function _replyToFilterFieldTypeDefinitions($aFieldTypeDefinitions) {
-        return $this->oUtil->addAndApplyFilters($this, "field_types_{$this->oProp->sClassName}", $aFieldTypeDefinitions);
+        if (method_exists($this, 'field_types_' . $this->oProp->sClassName)) {
+            return call_user_func_array(array($this, 'field_types_' . $this->oProp->sClassName), array($aFieldTypeDefinitions));
+        }
+        return $aFieldTypeDefinitions;
     }
     public function _replyToModifySectionsets($aSectionsets) {
         return $this->oUtil->addAndApplyFilter($this, "sections_{$this->oProp->sClassName}", $aSectionsets);

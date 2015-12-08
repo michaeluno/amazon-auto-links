@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_MetaBox_Model___PostMeta extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_MetaBox_Model___PostMeta extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $iPostID = array();
     public $aFieldsets = array();
     public function __construct() {

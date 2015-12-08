@@ -249,6 +249,7 @@ $aClassFiles = array(
 	"AmazonAutoLinks_AdminPageFramework_ArrayHandler"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_ArrayHandler.php", 
 	"AmazonAutoLinks_AdminPageFramework_Debug"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_Debug.php", 
 	"AmazonAutoLinks_AdminPageFramework_ErrorReporting"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_ErrorReporting.php", 
+	"AmazonAutoLinks_AdminPageFramework_FrameworkUtility"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_FrameworkUtility.php", 
 	"AmazonAutoLinks_AdminPageFramework_RegisterClasses"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_RegisterClasses.php", 
 	"AmazonAutoLinks_AdminPageFramework_AdminNotice"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/admin_notice/AdminPageFramework_AdminNotice.php", 
 	"AmazonAutoLinks_AdminPageFramework_AdminNotice___Script"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/admin_notice/AdminPageFramework_AdminNotice___Script.php", 

@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_TabNavigationBar extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_TabNavigationBar extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $sTabTag = 'h2';
     public $aTabs = array();
     public $aAttributes = array('class' => 'nav-tab-wrapper',);

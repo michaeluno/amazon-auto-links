@@ -96,7 +96,9 @@ class AmazonAutoLinks_AdminPageFramework_Form_View___CSS_Section extends AmazonA
 
 /* Sortable Sections */
 .amazon-auto-links-sections.sortable-section > .amazon-auto-links-section {
-    padding: 1em 2em 1em 2em;
+    /* padding: 1em 2.5em 1.5em 2.5em; */
+    padding: 1em 1.8em 1em 2.6em;
+    
 }
 
 /* Sortable Collapsible Sections */

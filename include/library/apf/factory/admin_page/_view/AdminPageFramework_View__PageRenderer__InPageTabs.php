@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_View__PageRenderer__InPageTabs extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_View__PageRenderer__InPageTabs extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $oFactory;
     public $sPageSlug;
     public $sTag = 'h3';

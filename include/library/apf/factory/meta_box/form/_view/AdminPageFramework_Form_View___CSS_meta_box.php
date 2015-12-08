@@ -21,13 +21,23 @@ class AmazonAutoLinks_AdminPageFramework_Form_View___CSS_meta_box extends Amazon
 }
 
 .postbox .amazon-auto-links-field {
-    width: 96%; /* Not 100% because it will stick out */
+    /* Not 100% because it will stick out */
+    /* width: 96%; @deprecated 3.7.1 */ 
+    
+    /* width: 96% causes the repeatable buttons apper on the far right side. */
+    width: auto;
 }            
 
+/* Fix image width in Firefox */
+.postbox .amazon-auto-links-field {
+    max-width: 100%;
+}
 /* Sortable fields do not look well if the width is fully expanded  */
 .postbox .sortable .amazon-auto-links-field {
     /* In Firefox, in side meta boxes, the width needs to be smaller for image previews. */
-    width: 84%;
+    max-width: 84%; 
+    /* The above width: 84% looks inconsitent in the main meta box areas */
+    width: auto;
 }
             
 /* Field Titles */             

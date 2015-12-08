@@ -30,12 +30,14 @@ class AmazonAutoLinks_AdminPageFramework_FieldType_color extends AmazonAutoLinks
     height: auto;
     margin-top: -11px;
 }
-.amazon-auto-links-field-color .amazon-auto-links-field .amazon-auto-links-input-label-container {
-    vertical-align: top; 
-}
 .amazon-auto-links-field-color .amazon-auto-links-repeatable-field-buttons {
     margin-top: 0;
 }
+.amazon-auto-links-field-color .wp-color-result {
+    /* Overriding the default css rule, margin: 0 6px 6px 0px; to vertically align middle in the sortable box */
+    margin: 3px;
+}
+
 CSSRULES;
         
     }

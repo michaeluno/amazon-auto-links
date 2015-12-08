@@ -1,3 +1,3 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Form_Model___Modifier_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Form_Model___Modifier_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
 }

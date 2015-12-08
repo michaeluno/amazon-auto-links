@@ -110,7 +110,7 @@ tbody.amazon-auto-links-collapsible-content.table-caption {
     background: none;   /* for Wordpress v3.7.x or below, the background image need to be removed as well */
 }
 
-/* DEVVER+ For the button type collapsible sections, do not set a white color in the background */
+/* 3.7.0+ For the button type collapsible sections, do not set a white color in the background */
 .accordion-section-content.amazon-auto-links-collapsible-content-type-button {
     background-color: transparent;
 }

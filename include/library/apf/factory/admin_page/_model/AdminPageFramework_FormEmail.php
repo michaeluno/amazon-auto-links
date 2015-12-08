@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_FormEmail extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_FormEmail extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aEmailOptions = array();
     public $aInput = array();
     public $sSubmitSectionID;

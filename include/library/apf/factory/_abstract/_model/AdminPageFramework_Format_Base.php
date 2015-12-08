@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Format_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Format_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static public $aStructure = array();
     public $aSubject = array();
     public function __construct() {

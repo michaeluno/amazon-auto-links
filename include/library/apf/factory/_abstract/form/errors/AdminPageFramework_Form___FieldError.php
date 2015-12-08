@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form___FieldError extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form___FieldError extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static private $_aErrors = array();
     public $sCallerID;
     public function __construct($sCallerID) {

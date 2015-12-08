@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Debug extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Debug extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static public function dump($asArray, $sFilePath = null) {
         echo self::get($asArray, $sFilePath);
     }

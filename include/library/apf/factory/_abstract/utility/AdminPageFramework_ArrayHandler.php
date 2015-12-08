@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_ArrayHandler extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_ArrayHandler extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aData = array();
     public $aDefault = array();
     public function __construct() {

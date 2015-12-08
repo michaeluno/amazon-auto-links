@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_View___Format_SectionsetsByTab extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_View___Format_SectionsetsByTab extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aSectionsets = array();
     public $aFieldsets = array();
     public $iNestedDepth = 0;

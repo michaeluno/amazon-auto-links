@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_View__PageMataBoxRenderer extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_View__PageMataBoxRenderer extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public function render($sContext) {
         if (!$this->doesMetaBoxExist()) {
             return;

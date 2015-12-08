@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Form_View___Attribute_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Form_View___Attribute_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $sContext = '';
     public $aArguments = array();
     public $aAttributes = array();

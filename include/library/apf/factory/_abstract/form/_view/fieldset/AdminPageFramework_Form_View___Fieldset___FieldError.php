@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_View___Fieldset___FieldError extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_View___Fieldset___FieldError extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aErrors = array();
     public $aSectionPath = array();
     public $aFieldPath = array();

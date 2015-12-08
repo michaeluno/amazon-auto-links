@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form___SubmitNotice extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form___SubmitNotice extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static private $_aNotices = array();
     public function hasNotice($sType = '') {
         if (!$sType) {

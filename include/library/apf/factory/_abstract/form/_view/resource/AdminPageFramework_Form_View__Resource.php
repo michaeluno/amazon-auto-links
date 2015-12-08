@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $oForm;
     public function __construct($oForm) {
         $this->oForm = $oForm;

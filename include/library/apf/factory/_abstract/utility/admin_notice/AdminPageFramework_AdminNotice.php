@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_AdminNotice extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_AdminNotice extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     static private $_aNotices = array();
     public $sNotice = '';
     public $aAttributes = array();

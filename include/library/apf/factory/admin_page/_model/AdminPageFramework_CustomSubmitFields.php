@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_CustomSubmitFields extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_CustomSubmitFields extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aPost = array();
     public $sInputID;
     public function __construct(array $aPostElement) {

@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     protected static $_aStructure_EnqueuingResources = array('sSRC' => null, 'aPostTypes' => array(), 'sPageSlug' => null, 'sTabSlug' => null, 'sType' => null, 'handle_id' => null, 'dependencies' => array(), 'version' => false, 'translation' => array(), 'in_footer' => false, 'media' => 'all', 'attributes' => array(),);
     protected $_sClassSelector_Style = 'amazon-auto-links-style';
     protected $_sClassSelector_Script = 'amazon-auto-links-script';

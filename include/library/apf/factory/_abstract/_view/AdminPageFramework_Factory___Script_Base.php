@@ -1,5 +1,5 @@
 <?php
-abstract class AmazonAutoLinks_AdminPageFramework_Factory___Script_Base extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+abstract class AmazonAutoLinks_AdminPageFramework_Factory___Script_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $oMsg;
     public function __construct($oMsg = null) {
         if ($this->hasBeenCalled(get_class($this))) {

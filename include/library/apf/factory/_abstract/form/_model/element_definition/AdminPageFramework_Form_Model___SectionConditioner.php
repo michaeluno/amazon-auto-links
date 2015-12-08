@@ -1,5 +1,5 @@
 <?php
-class AmazonAutoLinks_AdminPageFramework_Form_Model___SectionConditioner extends AmazonAutoLinks_AdminPageFramework_WPUtility {
+class AmazonAutoLinks_AdminPageFramework_Form_Model___SectionConditioner extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
     public $aSectionsets = array();
     public function __construct() {
         $_aParameters = func_get_args() + array($this->aSectionsets,);
