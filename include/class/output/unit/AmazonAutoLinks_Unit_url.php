@@ -191,6 +191,7 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
                 /**
                  * @since       3.2.2
                  * @return      string
+                 * @callback    filter      aal_filter_unit_output
                  */
                 public function _replyToAddHTMLBodies( $sProductHTML, $sASIN, $sLocale ) {
                     $_aHTMLs = $this->_aHTMLs;
@@ -199,7 +200,7 @@ class AmazonAutoLinks_Unit_url extends AmazonAutoLinks_Unit_item_lookup {
                         . '<pre class="debug" style="max-height: 300px; overflow-y: scroll; overflow-x: auto; padding: 0 1em; word-wrap: break-word; word-break: break-all; margin: 1em 0;">'
                             . '<h3>' 
                                 . __( 'Debug Info', 'amazon-auto-links' ) 
-                                . ' - ' . __( 'HTML Bodies', 'amazon-auto-links' ) 
+                                . ' - ' . __( 'HTTP Bodies', 'amazon-auto-links' ) 
                             . '</h3>'
                             . AmazonAutoLinks_Debug::get( $_aHTMLs )      
                         . "</pre>";
