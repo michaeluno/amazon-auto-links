@@ -38,6 +38,9 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.           
         
+        // Register custom filed type.
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );        
+        
     }
     
     /**

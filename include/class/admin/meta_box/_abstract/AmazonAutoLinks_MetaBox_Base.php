@@ -30,6 +30,9 @@ abstract class AmazonAutoLinks_MetaBox_Base extends AmazonAutoLinks_AdminPageFra
             return false;
         }
         
+        // Register custom filed type.
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
+        
         // At this point, it is TRUE evaluated by the framework.
         // but we need to evaluate it for the plugin.
         
