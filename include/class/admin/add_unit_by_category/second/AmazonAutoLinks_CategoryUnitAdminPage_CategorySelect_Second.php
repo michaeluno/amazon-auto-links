@@ -18,6 +18,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
     
     /**
      * Triggered when the tab is loaded.
+     * @callback        action      load_{$sPageSlug}_{$this->sTabSlug}
      */
     public function replyToLoadTab( $oFactory ) {
                 
@@ -39,18 +40,27 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ) );
         
     }
-            
+    
+    /**
+     * 
+     * @callback        action      do_{$this->sPageSlug}_{$this->sTabSlug} 
+     */
     public function replyToDoTab( $oFactory ) {
 
-        // The object handles the form validations and redirection.
-        // So this needs to be done in the load_{...} callback.
-        // Then in the do_{...} callback, the form will be rendered.        
+        /**
+         * Renders a custom form for category selection.
+         * 
+         * The object handles the form validations and redirection.
+         * So this needs to be done in the load_{...} callback.
+         * Then in the do_{...} callback, the form will be rendered.        
+         */
         $_oCategorySelectForm = new AmazonAutoLinks_Form_CategorySelect(
-            $oFactory->oProp->aOptions,     // unit options
-            $oFactory->oProp->aOptions      // form options
+            $oFactory->getSavedOptions(),     // unit options   // $oFactory->oProp->aOptions,     // unit options            
+            $oFactory->getSavedOptions()      // form options   // $oFactory->oProp->aOptions      // form options
         );            
         $_oCategorySelectForm->render();
-        
+
+        // Debug
         $this->_printDebugInfo( $oFactory );
         
     }
@@ -89,7 +99,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         if ( isset( $_POST[ 'amazon_auto_links_cat_select' ] ) ) {
             return $this->_getCategorySelectFormInput(
                 $_POST[ 'amazon_auto_links_cat_select' ],
-                $aOldInput,
+                $oFactory->getSavedOptions(),    // $aOldInput,
                 $oFactory
             );
         }   
@@ -104,7 +114,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * @return      array
          */
         private function _getCategorySelectFormInput( array $aPost, $aInput, $oFactory ) {
-                        
+
             // If the 'Save' or 'Create' button is pressed, save the data to the post.
             // The key is set in `AmazonAutoLinks_Form_CategorySelect` when rendering the form.
             if ( isset( $aPost[ 'save' ] ) ) {

@@ -68,10 +68,11 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
             );
         }
         
-        return $aOptions 
+        $_aOptions = $aOptions 
             + $_aOptions
             + $_aUnitOptions
             + $this->_getLastUnitInputs();
+        return $_aOptions;
         
     }
         

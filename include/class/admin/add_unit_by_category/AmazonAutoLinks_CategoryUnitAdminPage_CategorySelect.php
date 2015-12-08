@@ -65,7 +65,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
                 . ": " . __( 'Form Options', 'amazon-auto-links' )
             . "</h3>"
             . $oFactory->oDebug->get( 
-                $oFactory->oProp->aOptions 
+                // $oFactory->oProp->aOptions 
+                $oFactory->getSavedOptions()
             );
       
     }

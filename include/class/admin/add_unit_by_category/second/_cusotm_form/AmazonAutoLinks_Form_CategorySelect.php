@@ -218,7 +218,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     <span class="primary"><a class="button button-primary" href="<?php echo $aPageElements[ 'sBounceURL' ]; ?>"><?php _e( 'Go Back', 'amazon-auto-links' ); ?></a></span>
                     <span class="primary"><?php echo $sCreateArrow; ?><input type="submit" name="amazon_auto_links_cat_select[save]" class="button button-primary" value="<?php echo $sCreateOrSave; ?>" <?php echo $sCreateDisabled; ?> /></span>
                     <span><?php echo $sAddArrow; ?><input type="submit" name="amazon_auto_links_cat_select[add]" class="button button-secondary" value="<?php _e( 'Add Category', 'amazon-auto-links' ); ?>" <?php echo $sAddDisabled; ?> /></span>
-                    <span><input type="submit" name="amazon_auto_links_cat_select[exclude]" class="button button-secondary" value="<?php _e( 'Add Excluding Category', 'amazon-auto-links' ); ?>" <?php echo $sExcludeDisabled; ?> /></span>                                
+                    <span><input type="submit" name="amazon_auto_links_cat_select[exclude]" class="button button-secondary" value="<?php _e( 'Add Excluding Category', 'amazon-auto-links' ); ?>" <?php echo $sExcludeDisabled; ?> /></span>
                     <span><input type="submit" name="amazon_auto_links_cat_select[remove]" class="button button-secondary" value="<?php _e( 'Remove Checked', 'amazon-auto-links' ); ?>" <?php echo $sRemoveDisabled; ?> /></span>
                 </div>
                 <div>
