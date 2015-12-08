@@ -38,19 +38,19 @@ class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_
                 'title'             => __( 'Credit Link Type', 'amazon-auto-links' ),
                 'label'             => array(
                     0   => __( 'Normal', 'amazon-auto-links' ) 
-                        . "<div style='width: 160px; height: 200px; margin-top: 1em;'>" 
+                        . "<div style='width: 160px; height: 160px; margin-top: 1em;'>" 
                             . apply_filters( 'aal_filter_credit_link_0', '', $this->oOption )
                         . "</div>",
                     1   => __( 'Square Image', 'amazon-auto-links' ) 
-                        . "<div style='width: 200px; height: 200px; margin-top: 1em;'>" 
+                        . "<div style='width: 200px; height: 160px; margin-top: 1em;'>" 
                             . apply_filters( 'aal_filter_credit_link_1', '', $this->oOption )
                         . "</div>",
                     2   => __( 'Horizontal Image', 'amazon-auto-links' ) 
-                        . "<div style='width: 320px; height: 200px; margin-top: 1em;'>" 
+                        . "<div style='width: 320px; margin-top: 1em;'>" 
                             . apply_filters( 'aal_filter_credit_link_2', '', $this->oOption )
                         . "</div>",
                 ),
-                'label_min_width'   => '100px',
+                'label_min_width'   => '100px; vertical-align: top;',
                 'default'           => 1,
                 'hidden'            => true,
                 'class'             => array(
