@@ -19,9 +19,8 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
         $aUnitOptions  = $aUnitOptions + array( 'country' => null );
         $_bUPCAllowed  = 'CA' !== $aUnitOptions[ 'country' ];
         $_bISBNAllowed = 'US' === $aUnitOptions[ 'country' ];
-        
-        
-        return array(
+         
+        $_aFields       =  array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',
                 'type'          => 'hidden',
@@ -174,19 +173,17 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'before_label'  => "<span class='links-style-label'>",
                 'after_label'   => "</span>",
                 'default'       => 1,
-            ),       
-            array(
-                'field_id'      => $sFieldIDPrefix . 'credit_link',
-                'type'          => 'radio',
-                'title'         => __( 'Credit Link', 'amazon-auto-links' ),
-                'label' => array(                        
-                    1   => __( 'On', 'amazon-auto-links' ),
-                    0   => __( 'Off', 'amazon-auto-links' ),
-                ),
-                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
-                'default'       => 1,
-            ),                
+            )          
         );
+
+        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );             
+        
+        return array_merge(
+            $_aFields,          // comes first
+            $_aCreditFields    // appendded
+        );        
+        
     }
           
 }

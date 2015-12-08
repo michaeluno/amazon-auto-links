@@ -23,8 +23,7 @@ class AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate extends AmazonAutoLi
      * @return      array
      */    
     public function get( $sFieldIDPrefix='' ) {
-            
-            
+                        
         return array(
             array(
                 'field_id'      => 'affiliate_id',
@@ -44,7 +43,7 @@ class AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate extends AmazonAutoLi
                     ),
                     'e.g. <code>456</code>',
                 ),
-            ),
+            )
         );
         
     }

@@ -17,7 +17,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
     public function get( $sFieldIDPrefix='' ) {
             
         $_oOption = $this->oOption;
-        return array(
+        $_aFields = array(
             array(
                 'field_id'      => 'unit_type',
                 'type'          => 'hidden',
@@ -155,19 +155,17 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'before_label'  => "<span class='links-style-label'>",
                 'after_label'   => "</span>",
                 'default'       => 1,
-            ),        
-            array(
-                'field_id'      => 'credit_link',
-                'title'         => __( 'Credit Link', 'amazon-auto-links' ),
-                'type'          => 'radio',
-                'label'         => array(                        
-                    1   => __( 'On', 'amazon-auto-links' ),
-                    0   => __( 'Off', 'amazon-auto-links' ),
-                ),
-                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ), 
-                'default'       => 1,
-            ),    
+            )
         );
+        
+        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );
+        
+        return array_merge(
+            $_aFields,          // comes first
+            $_aCreditFields    // appendded
+        );
+        
     }
   
 }

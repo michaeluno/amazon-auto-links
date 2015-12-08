@@ -156,21 +156,16 @@ class AmazonAutoLinks_FormFields_Widget_ContxtualProduct extends AmazonAutoLinks
                     5 => "</span>",
                 ),
                 'default'       => 1,
-            ),        
-            array(
-                'field_id'      => $sFieldIDPrefix. 'credit_link',
-                'title'         => __( 'Credit Link', 'amazon-auto-links' ),
-                'type'          => 'radio',
-                'label'         => array(                        
-                    1   => __( 'On', 'amazon-auto-links' ),
-                    0   => __( 'Off', 'amazon-auto-links' ),
-                ),
-                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
-                'default'       => 1,
-            ),                                    
-            array()
+            )
         );
-        return $_aFields;
+        
+        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );
+        
+        return array_merge(
+            $_aFields,         // comes first
+            $_aCreditFields    // appendded
+        );          
         
     }
       

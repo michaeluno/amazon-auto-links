@@ -196,6 +196,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.2.2 =
+- Added a unit option to select credit link type.
+- Fixed a bug that reselecting categories via the Select Categories button in the Category unit editing page let to a fatal error, introduced in v3.2.0.
 - Changed the minimum required cache duration to `600`.
 - Changed the Found Items field in the URL unit definition page to display Not Found message for finding no item.
 

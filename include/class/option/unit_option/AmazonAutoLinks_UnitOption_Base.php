@@ -43,7 +43,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         'ref_nosim'                     => false,
         'title_length'                  => -1,
         'link_style'                    => 1,
-        'credit_link'                   => 1, // 1 or 0
+        'credit_link'                   => 1,   // 1 or 0
+        'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
 
 // @todo not sure about this         
 'title'                 => '',      // won't be used to fetch links. Used to create a unit.

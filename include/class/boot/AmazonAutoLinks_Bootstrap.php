@@ -303,7 +303,10 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         // 9. Events
         new AmazonAutoLinks_Event;    
                 
-        // 10. Trigger the action. 2.1.2+
+        // 10. Outputs
+        new AmazonAutoLinks_Credit;
+                
+        // 11. Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
         
     }

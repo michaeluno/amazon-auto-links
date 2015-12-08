@@ -17,8 +17,7 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
             
         $_oOption      = $this->oOption;
         $aUnitOptions  = $aUnitOptions + array( 'country' => null );
-            
-        return array(
+        $_aFields      = array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
                 'type'          => 'text',
@@ -152,19 +151,17 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
                 'before_label'  => "<span class='links-style-label'>",
                 'after_label'   => "</span>",
                 'default'       => 1,
-            ),           
-            array(
-                'field_id'      => $sFieldIDPrefix . 'credit_link',
-                'title'         => __( 'Credit Link', 'amazon-auto-links' ),
-                'type'          => 'radio',
-                'label'         => array(                        
-                    1   => __( 'On', 'amazon-auto-links' ),
-                    0   => __( 'Off', 'amazon-auto-links' ),
-                ),
-                'tip'           => __( 'Inserts the credit link at the end of the unit output.', 'amazon-auto-links' ),
-                'default'       => 1,
-            ),    
+            )
         );
+        
+        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );
+        
+        return array_merge(
+            $_aFields,         // comes first
+            $_aCreditFields    // appendded
+        );        
+        
     }
           
 }
