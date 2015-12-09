@@ -35,6 +35,10 @@ class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
                 'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
                 'title'     => __( 'Help', 'amazon-auto-links' ),
                 'order'     => 1000, // to be the last menu item
+                'style'     => array(
+                    AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+                    AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ),
+                ),
             )                
         );          
         
@@ -51,7 +55,8 @@ class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $this->setInPageTabTag( 'h2' );                
             $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-            $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+            // $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+            // $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
 
         }
     

@@ -14,32 +14,50 @@
  * @since       3
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
-class AmazonAutoLinks_HelpAdminPage_Help_Tips extends AmazonAutoLinks_AdminPage_Tab_Base {
+class AmazonAutoLinks_HelpAdminPage_Help_Tips extends AmazonAutoLinks_AdminPage_Tab_ReadMeBase {
     
     /**
      * Triggered when the tab is loaded.
-     * 
-     * @callback        action      load_{page slug}_{tab slug}
      */
-    public function replyToLoadTab( $oFactory ) {
-        
-        // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-    }
-    
-    /**
-     * 
-     * @callback        action      do_{page slug}_{tab slug}
-     */
-    public function replyToDoTab( $oFactory ) {
-
-        $_oWPReadmeParser = new AmazonAutoLinks_AdminPageFramework_WPReadmeParser( 
-            AmazonAutoLinks_Registry::$sDirPath . '/readme.txt'
-        );    
-        echo "<h3>" . __( 'Other Notes', 'amazon-auto-links' ) . "</h3>"
-            . $_oWPReadmeParser->getSection( 'Other Notes' );    
+    public function replyToLoadTab( $oAdminPage ) {
             
-       
-    
-    }    
+        $_aItems     = $this->getContentsByHeader( $this->getReadmeContents(), 4 );
+        $_iLastIndex = count( $_aItems ) - 1;
+        foreach( $_aItems as $_iIndex => $_aContent ) {
+
+            $_oParser   = new AdminPageFramework_WPReadmeParser( $_aContent[ 1 ] );
+            $_sContent  = $_oParser->get();
+            $oAdminPage->addSettingSections(    
+                $this->sPageSlug, // the target page slug  
+                array(
+                    'section_id'        => 'tips_' . $_iIndex,
+                    'title'             => $_aContent[ 0 ],
+                    'collapsible'       => array(
+                        'toggle_all_button' => $_iLastIndex === $_iIndex 
+                            ? array( 'bottom-right' )
+                            : ( 0 === $_iIndex
+                                ? array( 'top-right' )
+                                : false
+                            ),
+                    ),
+                    'content'           => $_sContent,
+                            
+                )
+            );              
+            
+        }        
+
+    }
+        /**
+         * @return      string
+         */
+        private function getReadMeContents()  {       
+            return $this->_getReadmeContents( 
+                AmazonAutoLinks_Registry::$sDirPath . '/readme.txt',    // source path
+                '', // TOC title
+                array( 'Other Notes' )  // sections
+            );
+
+        }       
             
 }
