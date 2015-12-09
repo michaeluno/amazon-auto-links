@@ -20,7 +20,7 @@ class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_
                 'field_id'          => $sFieldIDPrefix . 'credit_link',
                 'type'              => 'revealer',
                 'select_type'       => 'radio',
-                'label_min_width'   => '140px;margin-right:1em;',
+                'label_min_width'   => '140px;',
                 'title'             => __( 'Credit Link', 'amazon-auto-links' ),
                 'label'             => array(                        
                     1   => __( 'On', 'amazon-auto-links' ),

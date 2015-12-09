@@ -33,43 +33,43 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *  array(
  *      'field_id'      => 'revealer_field_by_id',
  *      'type'          => 'revealer',     
- *      'title'         => __( 'Reveal Hidden Fields', 'amazon-auto-links-field-type-pack' ),
+ *      'title'         => __( 'Reveal Hidden Fields', 'amazon-auto-links' ),
  *      'default'       => 'undefined',
  *      'label'         => array( // the keys represent the selector to reveal, in this case, their tag id : #fieldrow-{section id}_{field id}
- *          'undefined' => __( '-- Select a Field --', 'amazon-auto-links-field-type-pack' ),     
- *          '#fieldrow-revealer_revealer_field_option_a' => __( 'Option A', 'amazon-auto-links-field-type-pack' ),     
- *          '#fieldrow-revealer_revealer_field_option_b, #fieldrow-revealer_revealer_field_option_c' => __( 'Option B and C', 'amazon-auto-links-field-type-pack' ),
- *          '#fieldrow-revealer_another_revealer_field' => __( 'Another Revealer', 'amazon-auto-links-field-type-pack' ),
+ *          'undefined' => __( '-- Select a Field --', 'amazon-auto-links' ),     
+ *          '#fieldrow-revealer_revealer_field_option_a' => __( 'Option A', 'amazon-auto-links' ),     
+ *          '#fieldrow-revealer_revealer_field_option_b, #fieldrow-revealer_revealer_field_option_c' => __( 'Option B and C', 'amazon-auto-links' ),
+ *          '#fieldrow-revealer_another_revealer_field' => __( 'Another Revealer', 'amazon-auto-links' ),
  *      ),
- *      'description'   => __( 'Specify the selectors to reveal in the <code>label</code> argument keys in the field definition array.', 'amazon-auto-links-field-type-pack' ),
+ *      'description'   => __( 'Specify the selectors to reveal in the <code>label</code> argument keys in the field definition array.', 'amazon-auto-links' ),
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_a',
  *      'type'          => 'textarea',     
- *      'default'       => __( 'Hi there!', 'amazon-auto-links-field-type-pack' ),
+ *      'default'       => __( 'Hi there!', 'amazon-auto-links' ),
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_b',     
  *      'type'          => 'password',     
- *      'description'   => __( 'Type a password.', 'amazon-auto-links-field-type-pack' ),     
+ *      'description'   => __( 'Type a password.', 'amazon-auto-links' ),     
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_c',
  *      'type'          => 'text',     
- *      'description'   => __( 'Type text.', 'amazon-auto-links-field-type-pack' ),     
+ *      'description'   => __( 'Type text.', 'amazon-auto-links' ),     
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'another_revealer_field',
  *      'type'          => 'revealer',  
  *      'select_type'   => 'radio',
- *      'title'         => __( 'Another Hidden Field', 'amazon-auto-links-field-type-pack' ),
+ *      'title'         => __( 'Another Hidden Field', 'amazon-auto-links' ),
  *      'label'         => array( // the keys represent the selector to reveal, in this case, their tag id : #fieldrow-{field id}
- *          '.revealer_field_option_d' => __( 'Option D', 'amazon-auto-links-field-type-pack' ),     
- *          '.revealer_field_option_e' => __( 'Option E', 'amazon-auto-links-field-type-pack' ),
- *          '.revealer_field_option_f' => __( 'Option F', 'amazon-auto-links-field-type-pack' ),
+ *          '.revealer_field_option_d' => __( 'Option D', 'amazon-auto-links' ),     
+ *          '.revealer_field_option_e' => __( 'Option E', 'amazon-auto-links' ),
+ *          '.revealer_field_option_f' => __( 'Option F', 'amazon-auto-links' ),
  *      ),
  *      'hidden'        => true,
  *      'default'       => '.revealer_field_option_e',
@@ -87,9 +87,9 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *      array(
  *          'type'          => 'radio',
  *          'label'         => array(
- *              'a' => __( 'A', 'amazon-auto-links-field-type-pack' ),
- *              'b' => __( 'B', 'amazon-auto-links-field-type-pack' ),
- *              'c' => __( 'C', 'amazon-auto-links-field-type-pack' ),
+ *              'a' => __( 'A', 'amazon-auto-links' ),
+ *              'b' => __( 'B', 'amazon-auto-links' ),
+ *              'c' => __( 'C', 'amazon-auto-links' ),
  *          ),
  *          'default'       => 'a',
  *          'class'         => array(
@@ -100,9 +100,9 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *      array(
  *          'type'          => 'select',     
  *          'label'         => array(
- *              'i'     => __( 'i', 'amazon-auto-links-field-type-pack' ),
- *              'ii'    => __( 'ii', 'amazon-auto-links-field-type-pack' ),
- *              'iii'   => __( 'iii', 'amazon-auto-links-field-type-pack' ),
+ *              'i'     => __( 'i', 'amazon-auto-links' ),
+ *              'ii'    => __( 'ii', 'amazon-auto-links' ),
+ *              'iii'   => __( 'iii', 'amazon-auto-links' ),
  *          ),                
  *          'default'       => 'ii',
  *          'class'         => array(
@@ -182,8 +182,8 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
             trigger_error(
                 $this->getFrameworkName() . ': ' 
                 . sprintf( 
-                    __( 'This revealer field type version requires Admin Page Framework %1$s to function properly.', 'amazon-auto-links-field-type-pack' )
-                    . ' ' . __( 'You are using the framework version %2$s.', 'amazon-auto-links-field-type-pack' ),
+                    __( 'This revealer field type version requires Admin Page Framework %1$s to function properly.', 'amazon-auto-links' )
+                    . ' ' . __( 'You are using the framework version %2$s.', 'amazon-auto-links' ),
                     '3.7.1',
                     $this->getFrameworkVersion()
                 ),
