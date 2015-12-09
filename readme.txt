@@ -3,14 +3,16 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
-Tested up to:       4.3.1
-Stable tag:         3.2.1
+Tested up to:       4.4
+Stable tag:         3.2.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
 Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 
 == Description ==
+
+= Display Amazon Affiliate Links Automatically = 
 
 Still manually searching products and pasting affiliate links? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
@@ -20,24 +22,49 @@ If you want to search a specific product, yes you can do that too.
 
 If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
-[youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
+Display affiliate links along with your posts with this plugin to generate actual income with minimum efforts.
 
 = Features =
-- **Supports all Amazon locales** - Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supporeted as well.
-- **Automatic insertion in posts and feeds** - Just check where you want the product links to appear. If you want the product link to be static, just check that option.
-- **Widgets** - Just put it in the sidebar and select the unit you created. The product links will appear in where you wanted. Supports widget types by unit and context.
-- **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
-- **Works without JavaScript** - Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works.
-- **Random/Title/Date sort order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
-- **Shortcode** - Insert the ads in posts and pages. 
-- **PHP function** - Insert the ads in the theme template.
-- **Blacklist and Whitelist** - If you want certain products not to be shown, black and white lists can be set by ASIN, substring of title and description.
-- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
+
+[youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
+
+= Supports All Amazon Locales =
+Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supported as well.
+
+= Works without JavaScript =
+Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
+
+= Automatically Insert Amazon Product Links in Posts and Feeds = 
+Just check where you want the product links to appear with auto-insert. 
+
+- **Static Contents Conversion** - If you want the product link to be static, it is possible.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
-- **Templates** - You can design the output with the template system.
-- **Product Feeds** - subscribe the unit outputs as RSS or JSON so that you can import unit outputs into other sites. 
-- **Custom Buttons** - define your custom buttons and insert it to the unit output. 
-and more.
+
+= Widgets = 
+Put the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
+
+- **By Units** - choose the created units to display in the widget.
+- **Contextual Search** - with this, you don't have to create a unit. It will automatically searches products relating to the currently displayed page contents.
+
+= Shortcode and PHP Function = 
+Insert the ads in specific posts and pages with the shortcode. If you want to insert in the theme template, use the PHP code the plugin provides to produce the outputs.
+
+= Filter Unwanted Products = 
+If there are some items you don't want to display, you can create a black and white list by description, title, and ASIN.
+
+= Custom Buttons =
+Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output. 
+
+= Export Ads into External Sites with Feed = 
+By subscribing the product feed produced with the units you create as RSS or JSON, you can import them in other sites.
+
+= Various Unit Options = 
+- **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
+- **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
+- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
+
+= Templates =
+In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
@@ -46,10 +73,7 @@ and more.
 - **Similarity Look-up** - display similar products.
 - **URL** - list items from an external web source.
 
-= Widgets = 
-- **By Units** - choose the created units to display in the widget.
-- **Contextual Search** - with this, you don't have to create a unit. It will automatically searches products relating to the currently displayed page contents.
-   
+= Getting Started =    
 To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
 
 = Supported Language =
@@ -87,7 +111,7 @@ More detailed instruction, refer to the [**How to Obtain Access Key and Secret K
 
 A unit is a set of rules that defines how Amazon products should be displayed.
 
-When you display Amazon products, you would call a unit and the plugin will generate outputs based on the rules defined for the unit.
+When you display Amazon products, you would specify a unit and the plugin will generate outputs based on the rules defined for the unit.
 
 = What would be the benefit to upgrade to the pro version? =
 
