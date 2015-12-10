@@ -218,6 +218,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+ 
+= 3.2.3 - 12/11/2015 =
+- Fixed a compatibility issue with WordPress 4.4 that some widget options could not be saved.
 
 = 3.2.2 - 12/09/2015 =
 - Added a unit option to select credit link type.
