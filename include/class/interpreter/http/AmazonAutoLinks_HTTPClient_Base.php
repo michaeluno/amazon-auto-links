@@ -134,9 +134,12 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
     public function get() {
         
         $_aData      = array();
-        foreach( $this->getResponses() as $_sURL => $_aResponse ) {
+        foreach( $this->getResponses() as $_sURL => $_aoResponse ) {
          
-            $_sHTTPBody         = wp_remote_retrieve_body( $_aResponse );
+            $_sHTTPBody         = is_wp_error( $_aoResponse )
+                ? $_aoResponse->get_error_message()
+                : wp_remote_retrieve_body( $_aoResponse );         
+            // $_sHTTPBody         = wp_remote_retrieve_body( $_aResponse );
             $_sCharSetFrom      = $this->getCharacterSet( $_sURL );
             $_sCharSetTo        = $this->sSiteCharSet;
 
