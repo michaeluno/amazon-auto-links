@@ -28,20 +28,20 @@ Display affiliate links along with your posts with this plugin to generate actua
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
-= Supports All Amazon Locales =
+= Supports All Amazon Associates Locales =
 Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supported as well.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
 
-= Automatically Insert Amazon Product Links in Posts and Feeds = 
+= Automatically Insert Amazon Advertisement Links in Posts and Feeds = 
 Just check where you want the product links to appear with auto-insert. 
 
 - **Static Contents Conversion** - If you want the product link to be static, it is possible.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
 
 = Widgets = 
-Put the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
+Place the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
 
 - **By Units** - choose the created units to display in the widget.
 - **Contextual Search** - with this, you don't have to create a unit. It will automatically searches products relating to the currently displayed page contents.
@@ -64,7 +64,7 @@ By subscribing to the product feed produced with the units you create as RSS or 
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
 
 = Templates =
-In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template.
+In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This lets you achieve more advanced and detailed desing.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
