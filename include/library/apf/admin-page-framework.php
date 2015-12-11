@@ -5,7 +5,7 @@
  <http://en.michaeluno.jp/admin-page-framework>
  Copyright (c) 2013-2015, Michael Uno; Licensed under MIT <http://opensource.org/licenses/MIT>
  Included Components: Admin Pages, Custom Post Types, Post Meta Boxes, Page Meta Boxes, Widgets, Utilities
- Generated on 2015-12-10 */
+ Generated on 2015-12-11 */
 abstract class AmazonAutoLinks_AdminPageFramework_Registry_Base {
     const VERSION = '3.7.2';
     const NAME = 'Admin Page Framework';
