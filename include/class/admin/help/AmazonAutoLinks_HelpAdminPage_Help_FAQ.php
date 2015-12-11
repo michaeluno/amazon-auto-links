@@ -25,7 +25,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_FAQ extends AmazonAutoLinks_AdminPage_T
         $_iLastIndex = count( $_aItems ) - 1;
         foreach( $_aItems as $_iIndex => $_aContent ) {
 
-            $_oParser   = new AdminPageFramework_WPReadmeParser( $_aContent[ 1 ] );
+            $_oParser   = new AmazonAutoLinks_AdminPageFramework_WPReadmeParser( $_aContent[ 1 ] );
             $_sContent  = $_oParser->get();
             $oAdminPage->addSettingSections(    
                 $this->sPageSlug, // the target page slug  

@@ -23,10 +23,10 @@ abstract class AmazonAutoLinks_AdminPage_Tab_ReadMeBase extends AmazonAutoLinks_
      */
     protected function _getReadmeContents( $sFilePath, $sTOCTitle, $asSections=array(), $bDoShortcode=false ) {
         
-        $_oWPReadmeParser = new AdminPageFramework_WPReadmeParser( 
+        $_oWPReadmeParser = new AmazonAutoLinks_AdminPageFramework_WPReadmeParser( 
             $sFilePath, 
             array( // replacements
-                '%PLUGIN_DIR_URL%'  => AdminPageFrameworkLoader_Registry::getPluginURL(),
+                '%PLUGIN_DIR_URL%'  => AmazonAutoLinks_Registry::getPluginURL(),
                 '%WP_ADMIN_URL%'    => admin_url(),
             ),
             array( // callbacks
