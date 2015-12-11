@@ -22,7 +22,7 @@ If you want to search a specific product, yes you can do that too.
 
 If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
-Display affiliate links along with your posts with this plugin to generate actual income with minimum efforts.
+Display affiliate links along with your posts with this plugin to generate actual income with minimal efforts.
 
 = Features =
 
@@ -56,12 +56,12 @@ If there are some items you don't want to display, you can create a black and wh
 Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output. 
 
 = Export Ads into External Sites with Feed = 
-By subscribing the product feed produced with the units you create as RSS or JSON, you can import them in other sites.
+By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them in other sites.
 
 = Various Unit Options = 
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
-- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-bloking add-ons. 
+- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
 
 = Templates =
 In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template.
