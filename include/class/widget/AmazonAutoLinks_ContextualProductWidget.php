@@ -166,16 +166,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Uncomment the following line to check the submitted value.
         // AdminPageFramework_Debug::log( $aSubmit );
         
-        
-        
+        $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aSubmit, $aStored );
+        $aSubmit = $_oItemFormatValidator->get();
         
         return $aSubmit;
         
-    }    
-    
-    
-    
-    
+    }        
     
     /**
      * Print out the contents in the front-end.

@@ -129,6 +129,7 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_FormFields_Widget_Visibility"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/_form_fields/widget/AmazonAutoLinks_FormFields_Widget_Visibility.php", 
 	"AmazonAutoLinks_FormFields_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/_form_fields/_abstract/AmazonAutoLinks_FormFields_Base.php", 
 	"AmazonAutoLinks_ListTable_Template"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/_list_table/AmazonAutoLinks_ListTable_Template.php", 
+	"AmazonAutoLinks_FormValidator_ItemFormat"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/admin/_validator/AmazonAutoLinks_FormValidator_ItemFormat.php", 
 	"AmazonAutoLinks_AutoInsert"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/auto_insert/AmazonAutoLinks_AutoInsert.php", 
 	"AmazonAutoLinks_AutoInsert_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/auto_insert/AmazonAutoLinks_AutoInsert_Base.php", 
 	"AmazonAutoLinks_Bootstrap"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/boot/AmazonAutoLinks_Bootstrap.php", 
