@@ -24,7 +24,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_New extends AmazonAutoLinks
     protected function getFormFieldClasses() {         
 
         return array(
-            'AmazonAutoLinks_FormFields_AutoInsert_GoBack',
+            // 'AmazonAutoLinks_FormFields_AutoInsert_GoBack',
             'AmazonAutoLinks_FormFields_AutoInsert_Status',
             // 'AmazonAutoLinks_FormFields_AutoInsert_PostID',
             'AmazonAutoLinks_FormFields_AutoInsert_Area',
