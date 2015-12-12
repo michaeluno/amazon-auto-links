@@ -16,6 +16,17 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
+     * @since       3.2.4
+     * @return      string
+     */
+    static public function getUpgradePromptMessage() {        
+        return sprintf(
+            __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
+            'http://en.michaeluno.jp/amazon-auto-links-pro/'
+        );
+    }
+    
+    /**
      * Returns the HTML credit comment.
      * @since       3.1.0
      * @return      string

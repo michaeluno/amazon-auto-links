@@ -148,6 +148,12 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
             $_aErrors[ $this->sSectionID ][ 'unit_types' ] = __( 'At least one item needs to be checked.', 'amazon-auto-links' );
         }
         
+        $_oOption = AmazonAutoLinks_Option::getInstance();  
+        if ( ! $_oOption->isAdvancedAllowed() ) {
+            $oAdminPage->setSettingNotice( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage() );
+            return $aOldInput;
+        }
+        
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
