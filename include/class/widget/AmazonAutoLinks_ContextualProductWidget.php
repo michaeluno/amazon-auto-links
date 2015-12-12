@@ -35,6 +35,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             ) 
         );
         
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
+        
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToModifyCSSRules' ) );
         
     }    
@@ -67,7 +69,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      * Alternatively you may use load_{instantiated class name} method.
      */
     public function load( $oAdminWidget ) {
-        
+                
         $_oOption       = AmazonAutoLinks_Option::getInstance();
         $_bAPIConnected = $_oOption->isAPIConnected();
         if ( ! $_bAPIConnected ) {
@@ -164,9 +166,16 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Uncomment the following line to check the submitted value.
         // AdminPageFramework_Debug::log( $aSubmit );
         
+        
+        
+        
         return $aSubmit;
         
     }    
+    
+    
+    
+    
     
     /**
      * Print out the contents in the front-end.
