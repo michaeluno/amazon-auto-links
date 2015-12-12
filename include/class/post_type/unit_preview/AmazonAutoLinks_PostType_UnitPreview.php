@@ -69,13 +69,19 @@ class AmazonAutoLinks_PostType_UnitPreview {
      * @callback    filter      post_row_actions
      * @return      array       The action link definition array.
      */
-    public function _replyToAddViewActionLink( $aArctions, $oPost ) {
+    public function _replyToAddViewActionLink( $aActions, $oPost ) {
+
+        if ( $this->sDefaultPreviewSlug !== $oPost->post_type ) {
+            return $aActions;
+        }    
+        
         $_sLink = $this->_replaceWithUserSetPostTypeSlug( get_permalink( $oPost->ID ) );
-        $aArctions[ 'view' ] = '<a href="' 
+        $aActions[ 'view' ] = '<a href="' 
             . $_sLink . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $oPost->post_title ) ) . '" rel="permalink">' 
                 . __( 'View' ) 
             . '</a>';
-        return $aArctions;
+        return $aActions;
+        
     }
       
     /**
