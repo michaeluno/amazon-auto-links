@@ -317,7 +317,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             
             // Functions
             include( dirname( $this->sFilePath ) . '/include/function/functions.php' );
-            
+                        
         }
         
         private function _registerPageMetaBoxes() {

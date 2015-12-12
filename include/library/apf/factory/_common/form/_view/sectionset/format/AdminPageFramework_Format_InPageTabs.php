@@ -24,7 +24,7 @@ class AmazonAutoLinks_AdminPageFramework_Format_InPageTabs extends AmazonAutoLin
     
     public $aInPageTabs = array();
     
-    public $sPageSlug = array();
+    public $sPageSlug = '';
     
     public $oFactory;
     

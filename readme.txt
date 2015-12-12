@@ -219,6 +219,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
  
+= 3.2.4 - 12/13/2015 =
+- Fixed an issue of a fatal error `Maximum function nesting level of 'x' reached` when the server enables the XDebug extension and sets a low value for the `xdebug.max_nesting_level` option. 
+ 
 = 3.2.3 - 12/11/2015 =
 - Fixed a compatibility issue with WordPress 4.4 that some widget options could not be saved.
 
