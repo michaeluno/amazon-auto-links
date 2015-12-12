@@ -48,43 +48,75 @@ class AmazonAutoLinks_MetaBox_Template extends AmazonAutoLinks_MetaBox_Base {
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInput, $aOriginal, $oFactory ) {    
+    public function validate( $aInputs, $aOldInputs, $oFactory ) {    
         
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        $_oUtil   = new AmazonAutoLinks_WPUtility;
-        
-        add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-        $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
-            $_oOption->get( 
-                'form_options', // first dimensional key
-                'allowed_html_tags' // second dimensional key
-            ), 
-            ',' 
-        );
-        $aInput[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInput[ 'item_format' ], $_aAllowedHTMLTags );
-        $aInput[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'image_format' ], $_aAllowedHTMLTags );
-        $aInput[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'title_format' ], $_aAllowedHTMLTags );
-        remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-        
+        // Sanitize format options.
+        $aInputs = $this->_getItemFormatsSanitized( $aInputs, $aOldInputs );
+                
         // Schedule pre-fetch for the unit if the options have been changed.
-        if ( $aInput !== $aOriginal ) {
+        if ( $aInputs !== $aOldInputs ) {
             AmazonAutoLinks_Event_Scheduler::prefetch( 
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
         }
         
-        return $aInput;
+        return $aInputs;
         
     }
+    
         /**
          * @return      array
+         * @since       3.2.4
          */
-        public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
-            $aProperty[] = 'max-width';
-            $aProperty[] = 'min-width';
-            $aProperty[] = 'max-height';
-            $aProperty[] = 'min-height';
-            return $aProperty;
-        }
+        private function _getItemFormatsSanitized( $aInputs, $aOldInputs ) {
+            
+            $_oOption = AmazonAutoLinks_Option::getInstance();    
+            $_oUtil   = new AmazonAutoLinks_WPUtility;
+            
+            add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
+            $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
+                $_oOption->get( 
+                    'form_options', // first dimensional key
+                    'allowed_html_tags' // second dimensional key
+                ), 
+                ',' 
+            );
+            
+            if ( ! $_oOption->isAdvancedAllowed() ) {
+                $_aItemFormat   = AmazonAutoLinks_UnitOption_Base::getDefaultItemFormat();
+                $aInputs[ 'item_format' ] = $_oUtil->getElement(
+                    $aOldInputs,
+                    'item_format',
+                    $_aItemFormat[ 'item_format' ]
+                );
+                $aInputs[ 'image_format' ] = $_oUtil->getElement(
+                    $aOldInputs,
+                    'image_format',
+                    $_aItemFormat[ 'image_format' ]
+                );
+                $aInputs[ 'title_format' ] = $_oUtil->getElement(
+                    $aOldInputs,
+                    'title_format',
+                    $_aItemFormat[ 'title_format' ]
+                );                
+            }
+            $aInputs[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInputs[ 'item_format' ], $_aAllowedHTMLTags );
+            $aInputs[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'image_format' ], $_aAllowedHTMLTags );
+            $aInputs[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'title_format' ], $_aAllowedHTMLTags );
+            remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
+            
+            return $aInputs;
+            
+        }    
+            /**
+             * @return      array
+             */
+            public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
+                $aProperty[] = 'max-width';
+                $aProperty[] = 'min-width';
+                $aProperty[] = 'max-height';
+                $aProperty[] = 'min-height';
+                return $aProperty;
+            }
     
 }
