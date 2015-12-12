@@ -21,13 +21,13 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
         if (  $this->_isInThePage() ) {
 
             $this->handleCustomActions();   
-        
+
             add_filter( 
-                'post_row_actions', 
-                array( $this, 'replyToModifyRowActions' ), 
+                'action_links_' . $this->oProp->sPostType, 
+                array( $this, 'replyToModifyActionLinks' ), 
                 10, 
                 2 
-            );
+            );            
             add_filter( 
                 'bulk_actions-edit-' . $this->oProp->sPostType, 
                 array( $this, 'replyToModifyBulkActionsDropDownList' ) 
@@ -39,32 +39,30 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
 
     /**
      * 
-     * @callback        filter      post_row_actions
+     * @callback        filter      action_links_{post type slug}
      */
-    public function replyToModifyRowActions( $aActions, WP_Post $oPost ) {
-// @todo add Disable, Enable actions.        
-return $aActions;        
-        if ( $oPost->post_type != $this->oProp->sPostType ) {
-            return $aActions;
-        }
-        
+    public function replyToModifyActionLinks( $aActions, WP_Post $oPost ) {
+
         unset( $aActions['inline'] );
         unset( $aActions['inline hide-if-no-js'] );
-        // http://.../wp-admin/edit.php?post_type=amazon_auto_links&page=aal_define_auto_insert
+
         $_sSettingPageURL = add_query_arg( 
             array( 
-                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    // the main post type slug, not auto-insert's.
-                'page'      => 'aal_define_auto_insert',
-                'mode'      => 'edit',
+                // the main post type slug, not auto-insert's.  \'
+                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    
+                'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'auto_insert' ],
+                'tab'       => 'edit',
                 'post'      => $oPost->ID,
             ), 
             admin_url( 'edit.php' ) 
-        );    
-        $aActions['edit'] = "<a href='{$_sSettingPageURL}'>" 
+        );            
+
+        $aActions[ 'edit' ] = "<a href='{$_sSettingPageURL}'>" 
                 . __( 'Edit', 'amazon-auto-links' ) 
             . "</a>";
         
         return $aActions;
+        
     }
     
     /**

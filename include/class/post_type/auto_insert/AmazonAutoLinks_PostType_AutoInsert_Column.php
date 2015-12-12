@@ -75,26 +75,8 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
                 get_post_meta( $iPostID, 'unit_ids', true ) 
             )
         );
-        $_sSettingPageURL = add_query_arg( 
-            array( 
-                // the main post type slug, not auto-insert's.  \'
-                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    
-                'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'auto_insert' ],
-                'tab'       => 'edit',
-                'post'      => $iPostID,
-            ), 
-            admin_url( 'edit.php' ) 
-        );    
-        return $this->_getUnitTItles( $_aUnitIDs ) 
-            . "<div class='row-actions'>"
-                . "<span class='edit'>"
-                    . "<a href='" . esc_url( $_sSettingPageURL ) . "' title='" . esc_attr( __( 'Edit this item', 'amazon-auto-links' ) ) . "'>" 
-                        . __( 'Edit', 'amazon-auto-links' ) 
-                    . "</a>"
-                . "</span>"
-            . "</div>"
-        ;
-        
+        return $this->_getUnitTItles( $_aUnitIDs ) ;
+
     }
         /**
          * 
