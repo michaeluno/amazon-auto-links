@@ -252,11 +252,11 @@ return true;
             $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
                 AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
             );
+// @todo set the cache duration                
             $_aData        = $_oCacheTable->setCache( 
                 $sTransientKey, // name
                 array(
                     'mod'  => time(),
-                    // 'data' => $this->oEncrypt->encode( $vData ),  // data
                     'data' => $vData,  // data
                 ), // data
                 ( integer ) $iDuration, // cache life span

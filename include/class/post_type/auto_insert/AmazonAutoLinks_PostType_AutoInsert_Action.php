@@ -77,30 +77,49 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
     
     protected function handleCustomActions() {
         
-        if ( ! isset( $_GET['custom_action'], $_GET['nonce'], $_GET['post'] ) ) { 
+        if ( ! isset( $_GET[ 'custom_action' ], $_GET[ 'nonce' ], $_GET[ 'post' ], $_GET[ 'post_type' ] ) ) { 
             return; 
         }
-        
-        $_sNonce = AmazonAutoLinks_WPUtility::getTransient( 'AAL_Nonce_' . $_GET['nonce'] );
-        if ( false === $_sNonce ) { 
-            add_action( 'admin_notices', array( $this, 'replyToNotifyNonceFailed' ) );
+        // If a WordPress action is performed, do nothing.
+        if ( isset( $_GET[ 'action' ] ) ) {
             return;
         }
-        AmazonAutoLinks_WPUtility::deleteTransient( 'AAL_Nonce_' . $_GET['nonce'] );
+        
+        $_sNonce = $this->oUtil->getTransient( 'AAL_Nonce_' . $_GET[ 'nonce' ] );        
+        if ( false === $_sNonce ) { 
+            new AmazonAutoLinks_AdminPageFramework_AdminNotice(
+                __( 'The action could not be processed due to the inactivity.', 'amazon-auto-links' ),
+                array(
+                    'class' => 'error',
+                )
+            );       
+            return;
+        }
+        $this->oUtil->deleteTransient( 'AAL_Nonce_' . $_GET[ 'nonce' ] );
         
         // Currently only the status toggle is supported.
-        If ( 'toggle_status' === $_GET['custom_action'] && $_GET['post'] ) {
+        If ( 'toggle_status' === $_GET[ 'custom_action' ] && $_GET[ 'post' ] ) {
             
-            $_aUnitIDs = get_post_meta( $_GET['post'], 'unit_ids', true );    
+            $_aUnitIDs = get_post_meta( $_GET[ 'post' ], 'unit_ids', true );    
             // if this field is empty, the post must be the wrong post type.
             if ( empty( $_aUnitIDs ) ) { 
                 return; 
             }  
             
-            $_bIsEnabled = get_post_meta( $_GET['post'], 'status', true );
-            update_post_meta( $_GET['post'], 'status', ! $_bIsEnabled );
+            $_bIsEnabled = get_post_meta( $_GET[ 'post' ], 'status', true );
+            update_post_meta( $_GET[ 'post' ], 'status', ! $_bIsEnabled );
             
         }
+    
+        // Reload the page without query arguments so that the admin notice will not be shown in the next page load with other actions.
+        $_sURLSendback = add_query_arg(
+            array(
+                'post_type' => $this->oProp->sPostType,
+            ),
+            admin_url( 'edit.php' )
+        );
+        wp_safe_redirect( $_sURLSendback );    
+        exit();    
     
     }
     

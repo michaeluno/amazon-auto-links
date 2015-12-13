@@ -203,7 +203,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         new AmazonAutoLinks_ButtonStyleLoader;
         
         // 4. Post Types
-        new AmazonAutoLinks_PostType( 
+        new AmazonAutoLinks_PostType_Unit( 
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],  // slug
             null,   // post type argument. This is defined in the class.
             $this->sFilePath   // script path

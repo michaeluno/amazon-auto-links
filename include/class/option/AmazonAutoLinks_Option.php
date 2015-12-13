@@ -176,6 +176,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
     
     /**
+     * @since       3.3.0
+     */
+    public function canCloneUnits() {
+        return false;
+    }
+    
+    /**
      * Checks whether the API keys are set and it has been verified.
      * @since       3
      * @return      boolean

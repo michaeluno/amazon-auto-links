@@ -14,7 +14,7 @@
  * @since       3
  * 
  */
-class AmazonAutoLinks_PostType_PostContent extends AmazonAutoLinks_PostType_ListTable {
+class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType_Unit_Action {
     
     /**
      * Prints out the fetched product links.
@@ -30,7 +30,7 @@ class AmazonAutoLinks_PostType_PostContent extends AmazonAutoLinks_PostType_List
         }
         
         $_sUnitType            = get_post_meta(
-            $GLOBALS['post']->ID,
+            $GLOBALS[ 'post' ]->ID,
             'unit_type',
             true
         );
@@ -46,4 +46,3 @@ class AmazonAutoLinks_PostType_PostContent extends AmazonAutoLinks_PostType_List
     }    
    
 }
-

@@ -447,7 +447,8 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
             $_aRawData = $_oAmazonAPI->request(
                 $_aAPIArguments,
                 $sLocale,
-                60 // null  // cache duration - null to not to use cache.
+// @todo Examine whether a unit cache duration can be set.                
+                60 // cache duration - null to not to use cache.
             );
             return $this->getElement(
                 $_aRawData, // subject

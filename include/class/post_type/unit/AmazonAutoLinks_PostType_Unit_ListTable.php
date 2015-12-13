@@ -13,8 +13,8 @@
  * @package     Amazon Auto Links
  * @since       3
  */
-class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramework_PostType {
-    
+class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageFramework_PostType {
+        
     /**
      * Sets up hooks.
      * @since       3.2.0
@@ -22,62 +22,18 @@ class AmazonAutoLinks_PostType_ListTable extends AmazonAutoLinks_AdminPageFramew
     public function setUp() {
     
         if (  $this->_isInThePage() ) {
-            
+           
             // unit listing table columns
             add_filter(    
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
                 array( $this, 'replyToModifyColumnHeader' )
             );            
             
-            // Add an warning icon to the tag unit type's action link.
-            add_filter( 
-                'post_row_actions',
-                array( $this, 'replyToModifyActionLinks' ), 
-                10, 
-                2 
-            );
             
         }
     
     }
-    
-    /**
-     * @return  array
-     */
-    public function replyToModifyActionLinks( $aActionLinks, $oPost ){
         
-        if ( $oPost->post_type !== $this->oProp->sPostType ){
-            return $aActionLinks;
-        }
-        
-        $_sUnitType = get_post_meta( $oPost->ID, 'unit_type', true );
-        if ( 'tag' !== $_sUnitType )  {
-            return $aActionLinks;
-        }
-            
-        $aActionLinks[ 'tag_deprecated_warning' ] = $this->_getTagDeprecateWarning();
-        return $aActionLinks;
-        
-        
-    }    
-        /**
-         * @since       3.2.0
-         * @return      string       
-         */
-        private function _getTagDeprecateWarning() {
-            
-            $_sTitle              = esc_attr( 
-                __( 'Amazon has deprecated the tags feature. So this is no longer functional.', 'amazon-auto-links' )
-            );
-            $_sWarning            = esc_attr( __( 'Warning!', 'amazon-auto-links' ) );
-            $_sURL                = 'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571';
-            $_sExclamationIconURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/exclamationmark_16x16.png' );
-            return "<a href='{$_sURL}' target='_blank'>"
-                . "<img src='{$_sExclamationIconURL}' alt='{$_sWarning}' title='{$_sTitle}' />"
-                . "</a> ";
-            
-        }
-    
     /**
     * Defines the column header of the unit listing table.
     * 

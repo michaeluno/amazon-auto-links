@@ -15,7 +15,7 @@
  * 
  * @filter      apply       aal_filter_admin_menu_name
  */
-class AmazonAutoLinks_PostType extends AmazonAutoLinks_PostType_PostContent {
+class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostContent {
     
     public function setUp() {
         
@@ -43,7 +43,7 @@ class AmazonAutoLinks_PostType extends AmazonAutoLinks_PostType_PostContent {
                     'parent'                => 'Parent Unit',
                     
                     // framework specific keys
-                    'plugin_listing_table_title_cell_link' => __( 'Manage Units', 'amazon-auto-links' ),
+                    'plugin_action_link' => __( 'Manage Units', 'amazon-auto-links' ),
                 ),
                 
                 // If a custom preview post type is set, make it not public. 
@@ -125,7 +125,7 @@ class AmazonAutoLinks_PostType extends AmazonAutoLinks_PostType_PostContent {
      * Style for this custom post type pages
      * @callback        filter      style_{class name}
      */
-    public function style_AmazonAutoLinks_PostType() {
+    public function style_AmazonAutoLinks_PostType_Unit() {
         $_sNone = 'none';
         return "#post-body-content {
                 margin-bottom: 10px;

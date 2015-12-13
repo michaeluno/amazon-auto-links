@@ -43,7 +43,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
      */
     static public function getCurrentPostID() {
 
-        // When editing a post, usually this is availabe.
+        // When editing a post, usually this is available.
         if ( isset( $_GET[ 'post' ] ) ) {
             return $_GET[ 'post' ];
         }
@@ -72,10 +72,6 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
     static public function countPosts( $strPostType, $perm='' ) {
         
         global $wpdb;
-
-        if ( ! post_type_exists( $strPostType ) ) {
-            return new stdClass;
-        }
 
         $oUser      = wp_get_current_user();
         $cache_key  = 'posts-' . $strPostType;
@@ -165,13 +161,27 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
             )        
         );
         
-        // Add meta fields.
-        if ( $_iPostID ) {
-            self::updatePostMeta( 
-                $_iPostID, 
-                $aPostMeta 
-            );
+        if ( ! $_iPostID ) {
+            return $_iPostID;
         }
+        
+        // Add meta fields.
+        self::updatePostMeta( 
+            $_iPostID, 
+            $aPostMeta 
+        );
+        
+        // Add terms because the 'tax_input' argument does not take effect for some reasons when multiple terms are set.
+        // if ( ! empty( $aTaxonomy ) ) {
+            // foreach( $aTaxonomy as $_sTaxonomySlug => $_aTerms ) {                
+                // wp_set_object_terms( 
+                    // $_iPostID, 
+                    // $_aTerms, 
+                    // $_sTaxonomySlug, 
+                    // true 
+                // );
+            // }
+        // }     
                 
         return $_iPostID;        
         

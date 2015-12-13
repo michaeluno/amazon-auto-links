@@ -19,11 +19,14 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @since       3.2.4
      * @return      string
      */
-    static public function getUpgradePromptMessage() {        
-        return sprintf(
-            __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
-            'http://en.michaeluno.jp/amazon-auto-links-pro/'
-        );
+    static public function getUpgradePromptMessage( $bHasLink=true ) {        
+        return $bHasLink
+            ? sprintf(
+                __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
+                'http://en.michaeluno.jp/amazon-auto-links-pro/'
+            )
+            : __( 'Please consider upgrading to Pro to enable this feature.', 'amazon-auto-links' );
+            
     }
     
     /**
