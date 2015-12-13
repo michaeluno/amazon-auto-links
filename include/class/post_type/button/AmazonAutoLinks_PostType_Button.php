@@ -37,7 +37,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                     'parent'                => __( 'Parent Button', 'amazon-auto-links' ),
                     
                     // framework specific keys
-                    'plugin_listing_table_title_cell_link' => __( 'Button', 'amazon-auto-links' ),
+                    'plugin_action_link' => __( 'Buttons', 'amazon-auto-links' ),
                 ),
                 
                 'menu_position'         => 120,
