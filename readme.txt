@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         3.2.2
+Stable tag:         3.2.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,9 +18,7 @@ Still manually searching products and pasting affiliate links? What happens if t
 
 The links are tagged with your Amazon Associate ID. The plugin supports 10 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
-If you want to search a specific product, yes you can do that too. 
-
-If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
+If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
 Display affiliate links along with your posts with this plugin to generate actual income with minimal efforts.
 
@@ -63,8 +61,8 @@ By subscribing to the product feed produced with the units you create as RSS or 
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
 
-= Templates =
-In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This lets you achieve more advanced and detailed desing.
+= Customize Outputs =
+In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This gives you freedom of customization and lets you achieve more advanced and detailed design.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
