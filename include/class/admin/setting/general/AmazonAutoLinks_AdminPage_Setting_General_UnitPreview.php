@@ -65,29 +65,71 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
      * 
      * @since       3
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
         
         // Sanitize the custom preview slug.
-        $aInput[ 'preview_post_type_slug' ] = AmazonAutoLinks_Utility::sanitizeCharsForURLQueryKey(
+        $aInputs[ 'preview_post_type_slug' ] = AmazonAutoLinks_Utility::sanitizeCharsForURLQueryKey(
             AmazonAutoLinks_Utility::getTrancatedString(
-                $aInput[ 'preview_post_type_slug' ],
+                $aInputs[ 'preview_post_type_slug' ],
                 20, // character length
                 ''  // suffix
             )   
         );
+        
+        // If a custom post type slug is set, the rewrite rules need to be refreshed.
+        $this->_flushRewriteRulesIfNecessary( $aInputs, $aOldInputs );
 
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
+            return $aOldInputs;
         }
                 
-        return $aInput;     
+        return $aInputs;     
         
     }
+        
+        /**
+         * Refreshes the site rewrite rules if a custom post type slug is set.
+         * @since       3.2.4
+         * @return      void
+         */
+        private function _flushRewriteRulesIfNecessary( $aInputs, $aOldInputs ) {
+
+            $_oUtil = new AmazonAutoLinks_PluginUtility;
+            
+            $_sNew = $_oUtil->getElement( $aInputs, 'preview_post_type_slug' );
+            $_sOld = $_oUtil->getElement( $aOldInputs, 'preview_post_type_slug' );
+            
+            // If no change, do nothing
+            if ( $_sNew === $_sOld ) {
+                return;
+            }
+
+            // If the user set an empty value, the default will be used so do nothing
+            if ( ! $_sNew ) {
+                return;
+            }
+            
+            
+            // Set an option and instantiate the custom post type to force register the custom preview post type
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            $_oOption->set( 
+                array( 'unit_preview', 'preview_post_type_slug' ),
+                $_sNew
+            );
+            
+            // Force post type registration.
+            $_oPostType = new AmazonAutoLinks_PostType_UnitPreview;
+            $_oPostType->_replyToRegisterCustomPreviewPostType();
+            
+            // Flush rewrite rules.
+            flush_rewrite_rules( true );
+            
+        }
    
 }

@@ -28,6 +28,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
       
     /**
      * Sets up hooks and properties.
+     * 
      * @since       2.2.0
      */
     public function __construct() {
