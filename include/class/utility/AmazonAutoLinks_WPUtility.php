@@ -267,12 +267,14 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     /**
      * Escapes the given string for the KSES filter with the criteria of allowing/disallowing tags and the protocol.
      * 
-     * @remark           Attributes are not supported at this moment.
-     * @param            array            $aAllowedTags                e.g. array( 'noscript', 'style', )
-     * @param            array            $aDisallowedTags            e.g. array( 'table', 'tbody', 'thoot', 'thead', 'th', 'tr' )
-     * @since            2.0.0
+     * @remark      Attributes are not supported at this moment.
+     * @param       array       $aAllowedTags               e.g. array( 'noscript', 'style', )
+     * @param       array       $aDisallowedTags            e.g. array( 'table', 'tbody', 'thoot', 'thead', 'th', 'tr' )
+     * @param       array       $aAllowedAttributes         e.g. array( 'rel', 'itemtype', 'style' )
+     * @since       2.0.0
+     * @since       3.1.0       Added the $aAllowedAttributes parameter.
      */
-    static public function escapeKSESFilter( $sString, $aAllowedTags = array(), $aDisallowedTags=array(), $aAllowedProtocols=array() ) {
+    static public function escapeKSESFilter( $sString, $aAllowedTags = array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
         foreach( $aAllowedTags as $sTag ) {
             $aFormatAllowedTags[ $sTag ] = array();    // activate the inline style attribute.
@@ -283,6 +285,12 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
             if ( isset( $aAllowedHTMLTags[ $sTag ] ) ) {
                 unset( $aAllowedHTMLTags[ $sTag ] );
             }
+        }
+        
+        // Set allowed attributes.
+        $_aFormattedAllowedAttributes = array_fill_keys( $aAllowedAttributes, 1 );
+        foreach( $aAllowedHTMLTags as $_sTagName => $_aAttributes ) {
+            $aAllowedHTMLTags[ $_sTagName ] = $_aAttributes + $_aFormattedAllowedAttributes;
         }
         
         if ( empty( $aAllowedProtocols ) ) {

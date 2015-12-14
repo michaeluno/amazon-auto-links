@@ -28,21 +28,42 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_
      */
     public function addFields( $oFactory, $sSectionID ) {
 
+        // The default values will be merged with the options object property.
         $oFactory->addSettingFields(
             $sSectionID, // the target section id    
             array(
                 'field_id'      => 'allowed_html_tags',
-                'type'          => 'text',
+                'type'          => 'textarea',
                 'title'         => __( 'Allowed HTML Tags', 'amazon-auto-links' ),
-                'tip'           => __( 'Enter the allowed HTML tags for the form input, separated by commas. By default, WordPress applies a filter called KSES that strips out certain tags before the user input is saved in the database for security reasons.', 'amazon-auto-links' ),
+                'tip'           => __( 'Enter allowed HTML tags for the form input, per line or separated by commas. By default, WordPress applies a filter called KSES that strips out certain tags before the user input is saved in the database for security reasons.', 'amazon-auto-links' ),
                 'description'   => 'e.g. <code>noscript, style</code>',
                 'attributes'    => array(
-                    'size'         => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
-                        ? 60 
-                        : 80,
+                    'style' => 'width: 92%;'
                 ),
                 'capability' => 'manage_options',
-            )
+            ),
+            array(
+                'field_id'      => 'allowed_attributes',
+                'type'          => 'textarea',
+                'title'         => __( 'Allowed HTML Tag Attributes', 'amazon-auto-links' ),
+                'tip'           => __( 'Enter allowed HTML tag attributes for options that enter HTML tags such as Item Format unit option.', 'amazon-auto-links' ),
+                'description'   => 'e.g. <code>itemscope, itemtype, itemprop, </code>',
+                'attributes'    => array(
+                    'style' => 'width: 92%;'
+                ),
+                'capability' => 'manage_options',
+            ),
+            array(
+                'field_id'      => 'allowed_inline_css_properties',
+                'type'          => 'textarea',
+                'title'         => __( 'Allowed Inline CSS Properties', 'amazon-auto-links' ),
+                'tip'           => __( 'Enter allowed inline CSS properties for options that enter HTML tags such as Item Format unit option.', 'amazon-auto-links' ),
+                'description'   => 'e.g. <code>min-height, max-height, max-height, min-height, display</code>',
+                'attributes'    => array(
+                    'style' => 'width: 92%;'
+                ),
+                'capability' => 'manage_options',
+            )            
         );           
     
     }
@@ -59,6 +80,11 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_
         $_aErrors   = array();
         
         // Sanitize text inputs
+        $aInput[ 'allowed_html_tags' ] = str_replace(
+            PHP_EOL,    // search
+            ',',        // replace
+            $aInput[ 'allowed_html_tags' ]  // subject
+        );
         $aInput[ 'allowed_html_tags' ] = trim( 
             AmazonAutoLinks_Utility::trimDelimitedElements( 
                 $aInput['allowed_html_tags'], 

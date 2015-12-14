@@ -39,9 +39,24 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
             
             add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
             $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
-                $_oOption->get( 
-                    'form_options', // first dimensional key
-                    'allowed_html_tags' // second dimensional key
+                str_replace(
+                    PHP_EOL,            // search
+                    ',',                // replace
+                    $_oOption->get(     // subject
+                        'form_options',     // first dimensional key
+                        'allowed_html_tags' // second dimensional key
+                    )
+                ), 
+                ',' 
+            );
+            $_aAllowedAttributes = $_oUtil->convertStringToArray(
+                str_replace(
+                    PHP_EOL,            // search
+                    ',',                // replace
+                    $_oOption->get(     // subject
+                        'form_options',     // first dimensional key
+                        'allowed_attributes' // second dimensional key
+                    )
                 ), 
                 ',' 
             );
@@ -64,9 +79,9 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                     $_aItemFormat[ 'title_format' ]
                 );                
             }
-            $aInputs[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInputs[ 'item_format' ], $_aAllowedHTMLTags );
-            $aInputs[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'image_format' ], $_aAllowedHTMLTags );
-            $aInputs[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'title_format' ], $_aAllowedHTMLTags );
+            $aInputs[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInputs[ 'item_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
+            $aInputs[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'image_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
+            $aInputs[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'title_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
             remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
             
             return $aInputs;
@@ -76,11 +91,33 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
              * @return      array
              */
             public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
-                $aProperty[] = 'max-width';
-                $aProperty[] = 'min-width';
-                $aProperty[] = 'max-height';
-                $aProperty[] = 'min-height';
-                return $aProperty;
+                
+                $_oOption = AmazonAutoLinks_Option::getInstance();    
+                $_oUtil   = new AmazonAutoLinks_WPUtility;
+                $_aAllowedCSSProperties = $_oUtil->convertStringToArray(
+                    str_replace(
+                        PHP_EOL,            // search
+                        ',',                // replace
+                        $_oOption->get(     // subject
+                            'form_options',     // first dimensional key
+                            'allowed_inline_css_properties' // second dimensional key
+                        )
+                    ),
+                    ',' // delimiter
+                ) + array(
+                    'max-width', 'min-width', 'max-height', 'min-height'
+                );
+
+                $_aResult = array_unique( 
+                    array_merge( 
+                        $aProperty, 
+                        $_aAllowedCSSProperties 
+                    ) 
+                );
+
+                return $_aResult;                  
+                
             }        
+            
       
 }

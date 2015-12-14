@@ -186,22 +186,9 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
          */
         private function _getSanitizedInputs( $aInput ) {
             
-            $_oOption = AmazonAutoLinks_Option::getInstance();
-            $_oUtil   = new AmazonAutoLinks_WPUtility;
-            
-            add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-            $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
-                $_oOption->get( 
-                    'form_options', // first dimensional key
-                    'allowed_html_tags' // second dimensional key
-                ), 
-                ',' 
-            );
-            $aInput[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInput[ 'item_format' ], $_aAllowedHTMLTags );
-            $aInput[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'image_format' ], $_aAllowedHTMLTags );
-            $aInput[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInput[ 'title_format' ], $_aAllowedHTMLTags );
-            remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-                          
+            $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aInputs, $aOldInputs );
+            $aInputs = $_oItemFormatValidator->get();        
+                                
             // Drop unnecessary items.
             unset(
                 $aInput[ '_submit_convert' ],
@@ -214,17 +201,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
             return $aInput;
             
         }
-            /**
-             * @return      array
-             */
-            public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
-                $aProperty[] = 'max-width';
-                $aProperty[] = 'min-width';
-                $aProperty[] = 'max-height';
-                $aProperty[] = 'min-height';
-                return $aProperty;
-            }    
-       
+        
         /**
          * 
          * @return      integer
