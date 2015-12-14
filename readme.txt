@@ -1,18 +1,18 @@
 === Amazon Auto Links ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, ecommerce, internet-marketing, marketing, monetization, revenue, shortcode
+Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.4
 Stable tag:         3.2.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
-Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+Generates links of Amazon products just coming out today. Pick categories and they appear even in JavaScript disabled browsers.
 
 == Description ==
 
-= Display Amazon Affiliate Links Automatically = 
+= Display Amazon Associates Links with Minimal Effort = 
 
 Still manually searching products and pasting affiliate links? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
@@ -22,7 +22,7 @@ If you want to search a specific product, yes, you can do that too. If you are g
 
 Display affiliate links along with your posts with this plugin to generate actual income with minimal efforts.
 
-= Features =
+= See How Amazon Affiliate Links are Displayed =
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
@@ -32,10 +32,10 @@ Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, a
 = Works without JavaScript =
 Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
 
-= Automatically Insert Amazon Advertisement Links in Posts and Feeds = 
+= Automatic Insertion in Posts and Feeds = 
 Just check where you want the product links to appear with auto-insert. 
 
-- **Static Contents Conversion** - If you want the product link to be static, it is possible.
+- **Static Contents Conversion** - If you want the product link to be static, it is possible. This means if you deactivate the plugin, the converted contents will remain.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
 
 = Widgets = 
@@ -54,15 +54,18 @@ If there are some items you don't want to display, you can create a black and wh
 Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output. 
 
 = Export Ads into External Sites with Feed = 
-By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them in other sites.
+By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them from other sites. 
+
+If you have a web site that can display RSS feed contents, just create a WordPress site somewhere with this plugin and fetch the feed from the site. If you are an App developer, you can just display the items from the feed without programming an API client.
 
 = Various Unit Options = 
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
+and more.
 
 = Customize Outputs =
-In addition to the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This gives you freedom of customization and lets you achieve more advanced and detailed design.
+Besides the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This gives you freedom of customization and lets you achieve more advanced and detailed design.
 
 = Unit Types =
 - **Category** - pick your category that matches your site topic.
