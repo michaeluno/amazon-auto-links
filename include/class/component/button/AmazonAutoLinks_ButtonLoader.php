@@ -64,6 +64,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
                 'AmazonAutoLinks_FormFields_Button_Text',
                 'AmazonAutoLinks_FormFields_Button_Background',
                 'AmazonAutoLinks_FormFields_Button_Border',
+                'AmazonAutoLinks_FormFields_Button_CSS',
             
             );
             foreach( $_aClassNames as $_sClassName ) {
@@ -72,15 +73,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             }
             
             return $aMetaKeys;
-            
-            // $_aButtonMetaKeys = array(
-                // 'button_css',
-                // 'button_label',
-                // 'button_id',
-                // 'button_type',
-            // );
-            // return array_merge( $aMetaKeys, $_aButtonMetaKeys );
-            
+
         }
     
 
