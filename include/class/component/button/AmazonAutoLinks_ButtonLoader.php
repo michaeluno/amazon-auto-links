@@ -1,0 +1,122 @@
+<?php
+/**
+ * Amazon Auto Links
+ * 
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2015 Michael Uno
+ * 
+ */
+
+ 
+/**
+ *  Loads the button component
+ *  
+ *  @package    Amazon Auto Links
+ *  @since      3.1.0
+ */
+class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
+
+    /**
+     * Sets up hooks and properties.
+     */
+    public function __construct( $sScriptPath ) {
+        
+        if ( $this->hasBeenCalled( __METHOD__ ) ) {
+            return;
+        }
+        
+        // Front-end
+        
+        /// Resource loader
+        new AmazonAutoLinks_ButtonResourceLoader;
+        
+        /// Post type
+        new AmazonAutoLinks_PostType_Button(
+            AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],  // slug
+            null,   // post type argument. This is defined in the class.
+            $sScriptPath   // script path               
+        );                
+        
+        // Back-end
+        if ( is_admin() ) {
+            
+            // Post meta boxes    
+            $this->_registerPostMetaBoxes();
+            
+        }         
+        
+        
+    }
+    
+        /**
+         * Adds post meta boxes.
+         */
+        private function _registerPostMetaBoxes() {
+            
+            new AmazonAutoLinks_PostMetaBox_Button_Preview(
+                null, // meta box ID - null to auto-generate
+                __( 'Button Preview', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
+            );            
+            new AmazonAutoLinks_PostMetaBox_Button_CSS(
+                null, // meta box ID - null to auto-generate
+                __( 'CSS', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'side', // context (what kind of metabox this is)
+                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
+            );                        
+            new AmazonAutoLinks_PostMetaBox_Button_Text(
+                null, // meta box ID - null to auto-generate
+                __( 'Text', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );
+            new AmazonAutoLinks_PostMetaBox_Button_Box(
+                null, // meta box ID - null to auto-generate
+                __( 'Box', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );  
+            new AmazonAutoLinks_PostMetaBox_Button_Border(
+                null, // meta box ID - null to auto-generate
+                __( 'Border', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );            
+            new AmazonAutoLinks_PostMetaBox_Button_Background(
+                null, // meta box ID - null to auto-generate
+                __( 'Background', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );
+            new AmazonAutoLinks_PostMetaBox_Button_Hover(
+                null, // meta box ID - null to auto-generate
+                __( 'Hover', 'amazon-auto-links' ),
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'default' // priority                        
+            );              
+            
+        }
+ 
+}

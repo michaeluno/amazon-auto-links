@@ -5,7 +5,7 @@
 	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Version:        3.3.0b01
+	Version:        3.3.0b02
 */
 
 /**
@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-	const VERSION        = '3.3.0b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '3.3.0b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Amazon Auto Links';
 	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -261,7 +261,7 @@ if (
 
 // Otherwise, load v3 - run the bootstrap script.    
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
-include( dirname( __FILE__ ).'/include/class/boot/AmazonAutoLinks_Bootstrap.php' );
+include( dirname( __FILE__ ).'/include/class/main/boot/AmazonAutoLinks_Bootstrap.php' );
 new AmazonAutoLinks_Bootstrap(
     AmazonAutoLinks_Registry::$sFilePath,
     AmazonAutoLinks_Registry::HOOK_SLUG    // hook prefix    
