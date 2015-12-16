@@ -8,18 +8,16 @@
  */
 
 /**
- * Defines the meta box added to the category unit definition page.
+ * Defines the meta box added to the unit definition page.
  */
-abstract class AmazonAutoLinks_PostMetaBox_Base extends AmazonAutoLinks_AdminPageFramework_MetaBox {
+abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_PostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      * 
-     * The default is 'category'.
-     * 
-     * Each extended class should override this value.
+     * Each unit type should add the slug with the `aal_filter_unit_types_common_unit_meta_boxes'`
      */
-    protected $aUnitTypes = array( 'category' );
+    protected $aUnitTypes = array();
     
     /**
      * Checks whether the meta box should be registered or not in the loading page.
@@ -29,9 +27,13 @@ abstract class AmazonAutoLinks_PostMetaBox_Base extends AmazonAutoLinks_AdminPag
         if ( ! parent::_isInThePage() ) {
             return false;
         }
+                
+        $this->aUnitTypes = empty( $this->aUnitTypes )
+            ? apply_filters( 'aal_filter_registered_unit_types', $this->aUnitTypes )
+            : $this->aUnitTypes;
         
         // Register custom filed type.
-        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
+        // new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
         
         // At this point, it is TRUE evaluated by the framework.
         // but we need to evaluate it for the plugin.

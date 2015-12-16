@@ -8,22 +8,25 @@
  */
 
 /**
- * Defines the meta box added to the category unit definition page.
+ * Defines the meta box,
  */
-class AmazonAutoLinks_PostMetaBox_CategoryUnit_Main extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Advanced_search extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
-    protected $aUnitTypes = array( 'category' );
+    protected $aUnitTypes = array( 'search' );
     
     /**
      * Sets up form fields.
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
-        foreach( $_oFields->get() as $_aField ) {           
+        $_oFields = new AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced;
+        foreach( $_oFields->get() as $_aField ) {
+            if ( 'unit_title' === $_aField[ 'field_id' ] ) {
+                continue;
+            }
             $this->addSettingFields( $_aField );
         }
                     
@@ -35,11 +38,11 @@ class AmazonAutoLinks_PostMetaBox_CategoryUnit_Main extends AmazonAutoLinks_Post
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oCategoryUnitOption = new AmazonAutoLinks_UnitOption_category(
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_search(
             null,
             $aInput
         );
-        $_aFormatted = $_oCategoryUnitOption->get();
+        $_aFormatted = $_oUnitOption->get();
         
         // Drop unsent keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {
@@ -53,7 +56,7 @@ class AmazonAutoLinks_PostMetaBox_CategoryUnit_Main extends AmazonAutoLinks_Post
             AmazonAutoLinks_Event_Scheduler::prefetch(
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
-        }
+        }   
         
         return $_aFormatted + $aInput;
         

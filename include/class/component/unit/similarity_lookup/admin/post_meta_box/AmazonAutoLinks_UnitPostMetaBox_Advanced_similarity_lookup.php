@@ -8,39 +8,30 @@
  */
 
 /**
- * Defines the meta box added to the 'tag' unit definition page.
+ * Defines the meta box,
  */
-class AmazonAutoLinks_PostMetaBox_TagUnit_Main extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Advanced_similarity_lookup extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
-    protected $aUnitTypes = array( 'tag' );
+    protected $aUnitTypes = array( 
+        'similarity_lookup'
+    );
     
     /**
      * Sets up form fields.
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_TagUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_SimilarityLookupUnit_Advanced;
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;
             }
             $this->addSettingFields( $_aField );
         }
-        
-        // 3.2.0+
-        $_sMessage            = esc_attr( __( 'Warning!', 'amazon-auto-links' ) );
-        $_sExclamationIconURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/exclamationmark_16x16.png' );
-        new AmazonAutoLinks_AdminPageFramework_AdminNotice(
-            "<img src='{$_sExclamationIconURL}' alt='{$_sMessage}' /> "
-            . sprintf(
-                __( 'Amazon has deprecated the <a href="%1$s" target="_blank">tags</a> feature. So this is no longer functional.', 'amazon-auto-links' ),
-                'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571'
-            )
-        );
-        
+                    
     }
     
     /**
@@ -49,7 +40,7 @@ class AmazonAutoLinks_PostMetaBox_TagUnit_Main extends AmazonAutoLinks_PostMetaB
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_tag(
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_similarity_lookup(
             null,
             $aInput
         );
@@ -67,7 +58,7 @@ class AmazonAutoLinks_PostMetaBox_TagUnit_Main extends AmazonAutoLinks_PostMetaB
             AmazonAutoLinks_Event_Scheduler::prefetch(
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
-        }
+        }   
         
         return $_aFormatted + $aInput;
         

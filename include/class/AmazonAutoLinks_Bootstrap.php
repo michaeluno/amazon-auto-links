@@ -209,8 +209,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         do_action( 'aal_action_loaded_plugin' );
         
     }
-
-        
+   
         /**
          * @since       3.3.0
          * @return      void
@@ -221,7 +220,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             new AmazonAutoLinks_TemplateLoader( $this->sFilePath );
             
             // Units
-            new AmazonAutoLinks_UnitsLoader( $this->sFilePath );
+            new AmazonAutoLinks_UnitTypesLoader( $this->sFilePath );
             
             // Buttons
             new AmazonAutoLinks_ButtonLoader( $this->sFilePath );
@@ -268,8 +267,5 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             include( dirname( $this->sFilePath ) . '/include/function/functions.php' );
                         
         }
-        
-
-
     
 }

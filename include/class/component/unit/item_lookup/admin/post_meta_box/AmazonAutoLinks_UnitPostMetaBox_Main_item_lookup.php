@@ -10,13 +10,13 @@
 /**
  * Defines the meta box,
  */
-class AmazonAutoLinks_PostMetaBox_SimilarityLookupUnit_Main extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
     protected $aUnitTypes = array( 
-        'similarity_lookup',
+        'item_lookup',
     );
     
     /**
@@ -24,7 +24,7 @@ class AmazonAutoLinks_PostMetaBox_SimilarityLookupUnit_Main extends AmazonAutoLi
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main;
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;
@@ -40,7 +40,7 @@ class AmazonAutoLinks_PostMetaBox_SimilarityLookupUnit_Main extends AmazonAutoLi
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_similarity_lookup(
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_item_lookup(
             null,
             $aInput
         );
@@ -55,7 +55,7 @@ class AmazonAutoLinks_PostMetaBox_SimilarityLookupUnit_Main extends AmazonAutoLi
 
         // Schedule pre-fetch for the unit if the options have been changed.
         if ( $aInput !== $aOriginal ) {
-            AmazonAutoLinks_Event_Scheduler::prefetch(
+            AmazonAutoLinks_Event_Scheduler::prefetch( 
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
         }        

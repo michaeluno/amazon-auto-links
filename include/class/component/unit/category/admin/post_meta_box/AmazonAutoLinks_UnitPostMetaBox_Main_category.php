@@ -8,27 +8,22 @@
  */
 
 /**
- * Defines the meta box,
+ * Defines the meta box added to the category unit definition page.
  */
-class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Advanced extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Main_category extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
-    protected $aUnitTypes = array( 
-        'item_lookup'
-    );
+    protected $aUnitTypes = array( 'category' );
     
     /**
      * Sets up form fields.
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced;
-        foreach( $_oFields->get() as $_aField ) {
-            if ( 'unit_title' === $_aField[ 'field_id' ] ) {
-                continue;
-            }
+        $_oFields = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
+        foreach( $_oFields->get() as $_aField ) {           
             $this->addSettingFields( $_aField );
         }
                     
@@ -40,11 +35,11 @@ class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Advanced extends AmazonAutoLink
     public function validate( $aInput, $aOriginal, $oFactory ) {    
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_item_lookup(
+        $_oCategoryUnitOption = new AmazonAutoLinks_UnitOption_category(
             null,
             $aInput
         );
-        $_aFormatted = $_oUnitOption->get();
+        $_aFormatted = $_oCategoryUnitOption->get();
         
         // Drop unsent keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {
@@ -55,10 +50,10 @@ class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Advanced extends AmazonAutoLink
         
         // Schedule pre-fetch for the unit if the options have been changed.
         if ( $aInput !== $aOriginal ) {
-            AmazonAutoLinks_Event_Scheduler::prefetch( 
+            AmazonAutoLinks_Event_Scheduler::prefetch(
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
-        }   
+        }
         
         return $_aFormatted + $aInput;
         

@@ -55,34 +55,7 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
             )
         );
      
-        $this->_registerMetaBoxes();
-     
     }
-        /**
-         * @since       3.2.0
-         */
-        private function _registerMetaBoxes() {
-            
-            new AmazonAutoLinks_PostMetaBox_URLUnit_Main(
-                null,
-                __( 'Main', 'amazon-auto-links' ), // meta box title
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'high' // priority                                    
-            );   
-            new AmazonAutoLinks_PostMetaBox_URLUnit_Advanced(
-                null,   // meta box ID - null for auto-generate
-                __( 'URL Unit Advanced', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-                ),                 
-                'normal', // context - e.g. 'normal', 'advanced', or 'side'
-                'low' // priority - e.g. 'high', 'core', 'default' or 'low'
-            );            
-            
-        }
     
     /**
      * Registers custom filed types of Admin Page Framework.

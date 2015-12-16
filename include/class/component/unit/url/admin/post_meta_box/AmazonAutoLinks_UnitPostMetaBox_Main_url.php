@@ -10,7 +10,7 @@
 /**
  * Defines the meta box added to the 'url' unit definition page.
  */
-class AmazonAutoLinks_PostMetaBox_URLUnit_Main extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Main_url extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 

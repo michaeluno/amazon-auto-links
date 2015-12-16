@@ -10,7 +10,7 @@
 /**
  * Defines the meta box that shows the Select Categories submit button
  */
-class AmazonAutoLinks_PostMetaBox_CategoryUnit_Submit extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_UnitPostMetaBox_Base {
 
     /**
      * Stores the unit type slug(s). 

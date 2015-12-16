@@ -10,13 +10,13 @@
 /**
  * Defines the meta box,
  */
-class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Main extends AmazonAutoLinks_PostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Advanced_item_lookup extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
     protected $aUnitTypes = array( 
-        'item_lookup',
+        'item_lookup'
     );
     
     /**
@@ -24,7 +24,7 @@ class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Main extends AmazonAutoLinks_Po
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced;
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;
@@ -52,13 +52,13 @@ class AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Main extends AmazonAutoLinks_Po
                 unset( $_aFormatted[ $_sKey ] );
             }
         }
-
+        
         // Schedule pre-fetch for the unit if the options have been changed.
         if ( $aInput !== $aOriginal ) {
             AmazonAutoLinks_Event_Scheduler::prefetch( 
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
-        }        
+        }   
         
         return $_aFormatted + $aInput;
         
