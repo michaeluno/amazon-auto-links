@@ -36,4 +36,20 @@ abstract class AmazonAutoLinks_FormFields_Base extends AmazonAutoLinks_WPUtility
      */
     // public function get() {}
   
+    /**
+     * Returns the field IDs.
+     * Used to filter protected meta keys.
+     * @since       3.1.0
+     * @return      array
+     */
+    public function getFieldIDs() {
+        $_aIDs = array();
+        foreach( $this->get() as $_aField ) {
+            if ( isset( $_aField[ 'field_id' ] ) ) {                
+                $_aIDs[] = $_aField[ 'field_id' ];
+            }
+        }
+        return $_aIDs;
+    }
+  
 }

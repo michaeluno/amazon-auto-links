@@ -15,7 +15,7 @@ class AmazonAutoLinks_FormFields_Button_Preview extends AmazonAutoLinks_FormFiel
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
         
-        $_aFields       = array(
+        return array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'button_preview',
                 'type'              => '_preview_button',            
@@ -23,7 +23,8 @@ class AmazonAutoLinks_FormFields_Button_Preview extends AmazonAutoLinks_FormFiel
                 'show_title_column' => false,
                 'attributes'        => array(
                     'name'               => '',
-                ),                
+                ), 
+                'save'              => false,
                 'before_field'      => "<div style='margin: 3em 3em 3em 0; width:100%;'>"
                     . "<div style='margin-left: auto; margin-right: auto; '>" // text-align:center;
                         . AmazonAutoLinks_PluginUtility::getButton(
@@ -35,11 +36,7 @@ class AmazonAutoLinks_FormFields_Button_Preview extends AmazonAutoLinks_FormFiel
                 . "</div>",
             
             )
-  
         );
-
-       
-        return $_aFields;
         
     }
       

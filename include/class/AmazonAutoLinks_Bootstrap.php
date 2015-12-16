@@ -194,28 +194,23 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         // Include PHP files.
         $this->_include();
             
-        // Option Object - must be done before the template object.
-        // The initial instantiation will handle formatting options from earlier versions of the plugin.
-        AmazonAutoLinks_Option::getInstance();
+        // Load the main component.
+        new AmazonAutoLinks_MainLoader( $this->sFilePath );
                
-        // Components
+        // Load sub-components
         $this->_loadComponents();
             
-        /// Admin only components
+        /// Admin only sub-components
         if ( $this->bIsAdmin ) {
             $this->_loadAdminComponents();            
         }
-                
-        // Events
-        new AmazonAutoLinks_Event;    
-                
-        // Outputs
-        new AmazonAutoLinks_Credit;
                 
         // Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
         
     }
+
+        
         /**
          * @since       3.3.0
          * @return      void
@@ -248,13 +243,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * @return      void
          */
         private function _loadAdminComponents() {
-            
-            // Create the main admin page.
-            new AmazonAutoLinks_AdminPage( 
-                AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], 
-                $this->sFilePath 
-            );
-            
+                        
             new AmazonAutoLinks_SettingsAdminPageLoader;
             
             new AmazonAutoLinks_ToolAdminPage(

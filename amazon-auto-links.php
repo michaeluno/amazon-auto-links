@@ -261,7 +261,7 @@ if (
 
 // Otherwise, load v3 - run the bootstrap script.    
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
-include( dirname( __FILE__ ).'/include/class/main/boot/AmazonAutoLinks_Bootstrap.php' );
+include( dirname( __FILE__ ).'/include/class/AmazonAutoLinks_Bootstrap.php' );
 new AmazonAutoLinks_Bootstrap(
     AmazonAutoLinks_Registry::$sFilePath,
     AmazonAutoLinks_Registry::HOOK_SLUG    // hook prefix    

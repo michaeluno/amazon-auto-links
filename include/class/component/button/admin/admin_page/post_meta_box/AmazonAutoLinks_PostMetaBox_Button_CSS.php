@@ -15,34 +15,18 @@ class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox
     
     public function setUp() {
         
-        $this->addSettingFields(
-            array(
-                'field_id'      => 'button_css',
-                'type'          => 'textarea',
-                'title'         => __( 'Generated CSS', 'amazon-auto-links' ),
-                'description'   => __( 'The generated CSS rules will look like this.', 'amazon-auto-links' ),
-                'attributes'    => array(
-                    'style' => 'width: 100%; height: 320px;',
-                ),
-            ),
-            array(
-                'field_id'      => 'custom_css',
-                'type'          => 'textarea',
-                'title'         => __( 'Custom CSS', 'amazon-auto-links' ),
-                'description'   => __( 'Enter additional CSS rules here.', 'amazon-auto-links' ),
-                'attributes'    => array(
-                    'style' => 'width: 100%; height: 200px;',
-                ),                
-            )     
-        );
-        
-        
+        $_oFields = new AmazonAutoLinks_FormFields_Button_CSS;
+        foreach( $_oFields->get() as $_aField ) {            
+            $this->addSettingFields( $_aField );
+        }        
+
     }
     
     /**
      * Draws the Select Category submit button and some other links.
+     * @deprecated
      */
-    public function replyToPrintMetaBoxConetnt( $oFactory ) {
+/*     public function replyToPrintMetaBoxConetnt( $oFactory ) {
         $_sPostTitle = isset( $_GET[ 'post' ] )
             ? get_the_title( $_GET[ 'post' ] )
             : '';
@@ -57,6 +41,6 @@ class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox
             </div>            
         </div>
         <?php
-    }    
+    }     */
     
 }

@@ -14,9 +14,8 @@ class AmazonAutoLinks_PostMetaBox_Button_Preview extends AmazonAutoLinks_PostMet
 
     public function setUp() {
                
-        $_oFIelds = new AmazonAutoLinks_FormFields_Button_Preview;
-        $_aFields = $_oFIelds->get();
-        foreach( $_aFields as $_aField ) {
+        $_oFields = new AmazonAutoLinks_FormFields_Button_Preview;
+        foreach( $_oFields->get() as $_aField ) {
             $this->addSettingFields( $_aField );
         }
         

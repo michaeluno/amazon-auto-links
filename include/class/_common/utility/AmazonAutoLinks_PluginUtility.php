@@ -14,7 +14,7 @@
  * @since       3       
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
-    
+        
     /**
      * @since       3.2.4
      * @return      string

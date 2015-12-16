@@ -14,6 +14,14 @@
  * @since       3       
  */
 class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient {
+    
+    /**
+     * @since       3.1.0
+     * @return      boolean
+     */
+    static public function isInPostEditingPage() {
+        return in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ) );
+    }
 
     /**
      * Returns a form field label array listing post titles.
@@ -49,8 +57,8 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
         }
     
         // It is set when the user send the form in post.php.
-        if ( isset( $_POST[ 'post_ID'] ) ) {
-            return $_POST[ 'post_ID'];
+        if ( isset( $_POST[ 'post_ID' ] ) ) {
+            return $_POST[ 'post_ID' ];
         }
         
         // This also shoudl be available.

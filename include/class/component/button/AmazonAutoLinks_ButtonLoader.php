@@ -12,7 +12,7 @@
  *  Loads the button component
  *  
  *  @package    Amazon Auto Links
- *  @since      3.1.0
+ *  @since      3.3.0
  */
 class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
 
@@ -43,13 +43,50 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             // Post meta boxes    
             $this->_registerPostMetaBoxes();
             
-        }         
-        
+            add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
+            
+        }                 
         
     }
+        
+        /**
+         * @return      array
+         * @since       3.3.0
+         * @callback    filter      aal_filter_custom_meta_keys
+         */
+        public function replyToAddProtectedMetaKeys( $aMetaKeys ) {
+            
+            $_aClassNames = array(
+                'AmazonAutoLinks_FormFields_Button_Preview',
+                'AmazonAutoLinks_FormFields_Button_Selector',
+                'AmazonAutoLinks_FormFields_Button_Box',
+                'AmazonAutoLinks_FormFields_Button_Hover',
+                'AmazonAutoLinks_FormFields_Button_Text',
+                'AmazonAutoLinks_FormFields_Button_Background',
+                'AmazonAutoLinks_FormFields_Button_Border',
+            
+            );
+            foreach( $_aClassNames as $_sClassName ) {
+                $_oFields = new $_sClassName;
+                $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
+            }
+            
+            return $aMetaKeys;
+            
+            // $_aButtonMetaKeys = array(
+                // 'button_css',
+                // 'button_label',
+                // 'button_id',
+                // 'button_type',
+            // );
+            // return array_merge( $aMetaKeys, $_aButtonMetaKeys );
+            
+        }
     
+
         /**
          * Adds post meta boxes.
+         * @since       3.3.0
          */
         private function _registerPostMetaBoxes() {
             
@@ -58,7 +95,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
                 __( 'Button Preview', 'amazon-auto-links' ),
                 array( // post type slugs: post, page, etc.
                     AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
+                ),
                 'side', // context (what kind of metabox this is)
                 'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
             );            
