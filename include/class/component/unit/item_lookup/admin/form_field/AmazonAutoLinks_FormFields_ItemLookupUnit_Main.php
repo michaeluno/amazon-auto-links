@@ -181,7 +181,7 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
         
         return array_merge(
             $_aFields,          // comes first
-            $_aCreditFields    // appendded
+            $_aCreditFields     // appended
         );        
         
     }
