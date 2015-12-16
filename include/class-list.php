@@ -2,8 +2,6 @@
 $_aClassFiles = array( 
 	"AmazonAutoLinks_Bootstrap"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/AmazonAutoLinks_Bootstrap.php", 
 	"AmazonAutoLinks_AutoInsertLoader"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/AmazonAutoLinks_AutoInsertLoader.php", 
-	"AmazonAutoLinks_AutoInsertOutput"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/AmazonAutoLinks_AutoInsertOutput.php", 
-	"AmazonAutoLinks_AutoInsertOutput_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/AmazonAutoLinks_AutoInsertOutput_Base.php", 
 	"AmazonAutoLinks_AutoInsertAdminPage"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage.php", 
 	"AmazonAutoLinks_AutoInsertAdminPage_AutoInsert"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php", 
 	"AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/admin_page/edit/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit.php", 
@@ -16,6 +14,8 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_FormFields_AutoInsert_Status"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php", 
 	"AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable.php", 
 	"AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable.php", 
+	"AmazonAutoLinks_AutoInsertOutput"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/output/AmazonAutoLinks_AutoInsertOutput.php", 
+	"AmazonAutoLinks_AutoInsertOutput_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/output/AmazonAutoLinks_AutoInsertOutput_Base.php", 
 	"AmazonAutoLinks_PostType_AutoInsert"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php", 
 	"AmazonAutoLinks_PostType_AutoInsert_Action"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Action.php", 
 	"AmazonAutoLinks_PostType_AutoInsert_Column"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Column.php", 
