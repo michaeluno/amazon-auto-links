@@ -25,6 +25,7 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *      </ul>
  *  </li>
  *  <li>`label` - (array) Specifies the element to toggle the visibility. Set the jQuery selector of the element to the array key and it will be toggled when the user selects it.</li>
+ *  <li>`selectors` - (array) Specifies the selectors of the target element to level in each key of the `label` argument. If this argument is set, the above label key will not be used.</li>
  * </ul>
  * 
  * <h3>Example</h3>
@@ -32,43 +33,43 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *  array(
  *      'field_id'      => 'revealer_field_by_id',
  *      'type'          => 'revealer',     
- *      'title'         => __( 'Reveal Hidden Fields', 'amazon-auto-links-field-type-pack' ),
+ *      'title'         => __( 'Reveal Hidden Fields', 'amazon-auto-links' ),
  *      'default'       => 'undefined',
  *      'label'         => array( // the keys represent the selector to reveal, in this case, their tag id : #fieldrow-{section id}_{field id}
- *          'undefined' => __( '-- Select a Field --', 'amazon-auto-links-field-type-pack' ),     
- *          '#fieldrow-revealer_revealer_field_option_a' => __( 'Option A', 'amazon-auto-links-field-type-pack' ),     
- *          '#fieldrow-revealer_revealer_field_option_b, #fieldrow-revealer_revealer_field_option_c' => __( 'Option B and C', 'amazon-auto-links-field-type-pack' ),
- *          '#fieldrow-revealer_another_revealer_field' => __( 'Another Revealer', 'amazon-auto-links-field-type-pack' ),
+ *          'undefined' => __( '-- Select a Field --', 'amazon-auto-links' ),     
+ *          '#fieldrow-revealer_revealer_field_option_a' => __( 'Option A', 'amazon-auto-links' ),     
+ *          '#fieldrow-revealer_revealer_field_option_b, #fieldrow-revealer_revealer_field_option_c' => __( 'Option B and C', 'amazon-auto-links' ),
+ *          '#fieldrow-revealer_another_revealer_field' => __( 'Another Revealer', 'amazon-auto-links' ),
  *      ),
- *      'description'   => __( 'Specify the selectors to reveal in the <code>label</code> argument keys in the field definition array.', 'amazon-auto-links-field-type-pack' ),
+ *      'description'   => __( 'Specify the selectors to reveal in the <code>label</code> argument keys in the field definition array.', 'amazon-auto-links' ),
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_a',
  *      'type'          => 'textarea',     
- *      'default'       => __( 'Hi there!', 'amazon-auto-links-field-type-pack' ),
+ *      'default'       => __( 'Hi there!', 'amazon-auto-links' ),
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_b',     
  *      'type'          => 'password',     
- *      'description'   => __( 'Type a password.', 'amazon-auto-links-field-type-pack' ),     
+ *      'description'   => __( 'Type a password.', 'amazon-auto-links' ),     
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'revealer_field_option_c',
  *      'type'          => 'text',     
- *      'description'   => __( 'Type text.', 'amazon-auto-links-field-type-pack' ),     
+ *      'description'   => __( 'Type text.', 'amazon-auto-links' ),     
  *      'hidden'        => true,
  *  ),
  *  array(
  *      'field_id'      => 'another_revealer_field',
  *      'type'          => 'revealer',  
  *      'select_type'   => 'radio',
- *      'title'         => __( 'Another Hidden Field', 'amazon-auto-links-field-type-pack' ),
+ *      'title'         => __( 'Another Hidden Field', 'amazon-auto-links' ),
  *      'label'         => array( // the keys represent the selector to reveal, in this case, their tag id : #fieldrow-{field id}
- *          '.revealer_field_option_d' => __( 'Option D', 'amazon-auto-links-field-type-pack' ),     
- *          '.revealer_field_option_e' => __( 'Option E', 'amazon-auto-links-field-type-pack' ),
- *          '.revealer_field_option_f' => __( 'Option F', 'amazon-auto-links-field-type-pack' ),
+ *          '.revealer_field_option_d' => __( 'Option D', 'amazon-auto-links' ),     
+ *          '.revealer_field_option_e' => __( 'Option E', 'amazon-auto-links' ),
+ *          '.revealer_field_option_f' => __( 'Option F', 'amazon-auto-links' ),
  *      ),
  *      'hidden'        => true,
  *      'default'       => '.revealer_field_option_e',
@@ -86,9 +87,9 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *      array(
  *          'type'          => 'radio',
  *          'label'         => array(
- *              'a' => __( 'A', 'amazon-auto-links-field-type-pack' ),
- *              'b' => __( 'B', 'amazon-auto-links-field-type-pack' ),
- *              'c' => __( 'C', 'amazon-auto-links-field-type-pack' ),
+ *              'a' => __( 'A', 'amazon-auto-links' ),
+ *              'b' => __( 'B', 'amazon-auto-links' ),
+ *              'c' => __( 'C', 'amazon-auto-links' ),
  *          ),
  *          'default'       => 'a',
  *          'class'         => array(
@@ -99,9 +100,9 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  *      array(
  *          'type'          => 'select',     
  *          'label'         => array(
- *              'i'     => __( 'i', 'amazon-auto-links-field-type-pack' ),
- *              'ii'    => __( 'ii', 'amazon-auto-links-field-type-pack' ),
- *              'iii'   => __( 'iii', 'amazon-auto-links-field-type-pack' ),
+ *              'i'     => __( 'i', 'amazon-auto-links' ),
+ *              'ii'    => __( 'ii', 'amazon-auto-links' ),
+ *              'iii'   => __( 'iii', 'amazon-auto-links' ),
  *          ),                
  *          'default'       => 'ii',
  *          'class'         => array(
@@ -116,6 +117,7 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  * @since       1.0.0
  * @package     AmazonAutoLinks_AdminPageFrameworkFieldTypePack
  * @subpackage  CustomFieldType
+ * @version     1.0.1
  */
 class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageFramework_FieldType {
         
@@ -132,6 +134,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
     protected $aDefaultKeys = array(
         'select_type'   => 'select',        // accepts 'radio', 'checkbox'
         'is_multiple'   => false,
+        'selectors'     => array(),
         'attributes'    => array(
             'select'    => array(
                 'size'          => 1,
@@ -159,7 +162,47 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
             self::$_bIsLoaded = add_action( 'admin_print_footer_scripts', array( $this, '_replyToAddRevealerjQueryPlugin' ) );
         }
         
+        $this->_checkFrameworkVersion();
+        
     }    
+    
+        /**
+         * @return      void
+         */
+        private function _checkFrameworkVersion() {
+                        
+            // Requires Admin Page Framework 3.7.1+
+            if ( 
+                method_exists( $this, 'getFrameworkVersion' ) 
+                && version_compare( '3.7.1', $this->_getSuffixRemoved( $this->getFrameworkVersion(), '.dev'  ), '<=' ) 
+            ) {
+                return;
+            }
+            
+            trigger_error(
+                $this->getFrameworkName() . ': ' 
+                . sprintf( 
+                    __( 'This revealer field type version requires Admin Page Framework %1$s to function properly.', 'amazon-auto-links' )
+                    . ' ' . __( 'You are using the framework version %2$s.', 'amazon-auto-links' ),
+                    '3.7.1',
+                    $this->getFrameworkVersion()
+                ),
+                E_USER_WARNING 
+            );                
+            
+        }
+        /**
+         * @return  string
+         */
+        private function _getSuffixRemoved( $sString, $sSuffix ) {
+
+            $_iLength = strlen( $sSuffix );
+            if ( substr( $sString, $_iLength * -1 ) !== $sSuffix ) {
+                return $sString;
+            } 
+            return substr( $sString, 0, $_iLength * - 1 );
+
+        }        
 
     /**
      * Returns an array holding the urls of enqueuing scripts.
@@ -206,23 +249,23 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
      * Returns the output of the field type.
      */
     protected function getField( $aField ) { 
-        
+                
         $_aOutput   = array();        
         $aField     = $this->_sanitizeInnerFieldArray( $aField );
         $_aOutput[] = $this->geFieldOutput( $aField );
-        $_aOutput[] = $this->_getRevealerScript( $aField['input_id'] );
-        switch( $aField['select_type'] ) {
+        $_aOutput[] = $this->_getRevealerScript( $aField[ 'input_id' ] );
+        switch( $aField[ 'select_type' ] ) {
             default:
             case 'select':
             case 'radio':                          
-                $_aOutput[] = $this->_getConcealerScript( $aField['input_id'], $aField['label'], $aField['value'] );
+                $_aOutput[] = $this->_getConcealerScript( $aField[ 'input_id' ], $aField[ 'label' ], $aField[ 'value' ] );
                 break;
                 
             case 'checkbox':
-                $_aSelections = is_array( $aField['value'] )
-                    ? array_keys( array_filter( $aField['value'] ) )
-                    : $aField['label'];                  
-                $_aOutput[] = $this->_getConcealerScript( $aField['input_id'], $aField['label'], $_aSelections );
+                $_aSelections = is_array( $aField[ 'value' ] )
+                    ? array_keys( array_filter( $aField[ 'value' ] ) )
+                    : $aField[ 'label' ];                  
+                $_aOutput[] = $this->_getConcealerScript( $aField[ 'input_id' ], $aField[ 'label' ], $_aSelections );
                 break;
   
         }
@@ -238,64 +281,79 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
         private function _sanitizeInnerFieldArray( array $aField ) {
             
             // The revealer field type has its own description element.
-            unset( $aField['description'] );
+            unset( $aField[ 'description' ] );
             
             // The revealer script of checkboxes needs the reference of the selector to reveal. 
             // For radio and select input types, the key of the label array can be used but for the checkbox input type, 
             // the value attribute needs to be always 1 (for cases of key of zero '0') so the selector needs to be separately stored.
-            switch( $aField['select_type'] ) {
+            $_aSelectors = $this->getAsArray( $aField[ 'selectors' ] );
+            switch( $aField[ 'select_type' ] ) {
                 default:
                 case 'select':
-                case 'radio': 
-                    break;
-                case 'checkbox':
-                    foreach( $this->getAsArray( $aField['label'] ) as $_sSelector => $_sLabel ) {
-                        $aField['attributes'][ $_sSelector ] = array(
+                    foreach( $this->getAsArray( $aField[ 'label' ] ) as $_sKey => $_sLabel ) {
+                        // If the user sets the 'selectors' argument, its value will be used; otherwise, the label key will be used.
+                        $_sSelector = $this->getElement( $_aSelectors, array( $_sKey ), $_sKey );
+                        $aField[ 'attributes' ][ 'option' ][ $_sKey ] = array(
                                 'data-reveal'   => $_sSelector,
                             ) 
-                            + $this->getElementAsArray( $aField['attributes'], $_sSelector, array() );
+                            + $this->getElementAsArray( $aField[ 'attributes' ], array( 'option', $_sKey ) );
+                    }                
+                    break;
+                case 'radio': 
+                case 'checkbox':
+                    
+                    foreach( $this->getAsArray( $aField[ 'label' ] ) as $_sKey => $_sLabel ) {
+                        // If the user sets the 'selectors' argument, its value will be used; otherwise, the label key will be used.
+                        $_sSelector = $this->getElement( $_aSelectors, array( $_sKey ), $_sKey );
+                        $aField[ 'attributes' ][ $_sKey ] = array(
+                                'data-reveal'   => $_sSelector,
+                            ) 
+                            + $this->getElementAsArray( $aField[ 'attributes' ], $_sKey );
                     }
                     break;
       
             }
-                
+
             // Set the select_type to the type argument.
             return array( 
-                    'type' => $aField['select_type'] 
+                    'type' => $aField[ 'select_type' ] 
                 ) + $aField;
             
         }
         
         private function _getRevealerScript( $sInputID ) {
             return 
-                "<script type='text/javascript' >
-                    jQuery( document ).ready( function(){
-                        jQuery('*[data-id=\"{$sInputID}\"]').setRevealer();
-                    });                
-                </script>";    
+                "<script type='text/javascript' >"
+                    . '/* <![CDATA[ */ '
+                    . "jQuery( document ).ready( function(){
+                        jQuery('*[data-id=\"{$sInputID}\"]').setAmazonAutoLinks_AdminPageFrameworkRevealer();
+                    });"
+                    . ' /* ]]> */'
+                . "</script>";    
         }        
         private function _getConcealerScript( $sSelectorID, $aLabels, $asCurrentSelection ) {
             
             $aLabels            = $this->getAsArray( $aLabels );
             $_aCurrentSelection = $this->getAsArray( $asCurrentSelection );
-            unset( $_aCurrentSelection['undefined'] );    // an internal reserved key    
+            unset( $_aCurrentSelection[ 'undefined' ] );    // an internal reserved key    
             if( ( $_sKey = array_search( 'undefined' , $_aCurrentSelection) ) !== false ) {
                 unset( $_aCurrentSelection[ $_sKey ] );
             }            
             $_sCurrentSelection = json_encode( $_aCurrentSelection );            
             
-            unset( $aLabels['undefined'] );
+            unset( $aLabels[ 'undefined' ] );
             $aLabels    = array_keys( $aLabels );
             $_sLabels   = json_encode( $aLabels );    // encode it to be usable in JavaScript
             return 
-                "<script type='text/javascript' class='amazon-auto-links-revealer-field-type-concealer-script'>
-                    jQuery( document ).ready( function(){
+                "<script type='text/javascript' class='amazon-auto-links-revealer-field-type-concealer-script'>"
+                    . '/* <![CDATA[ */ '
+                    . "jQuery( document ).ready( function(){
 
                         jQuery.each( {$_sLabels}, function( iIndex, sValue ) {
 
                             /* If it is the selected item, show it */
                             if ( jQuery.inArray( sValue, {$_sCurrentSelection} ) !== -1 ) { 
-                                jQuery( sValue ).show();
+                                jQuery( sValue ).fadeIn();
                                 return true;    // continue
                             }
                             
@@ -304,8 +362,9 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                         });
                         jQuery( 'select[data-id=\"{$sSelectorID}\"], input:checked[type=radio][data-id=\"{$sSelectorID}\"], input:checked[type=checkbox][data-id=\"{$sSelectorID}\"]' )
                             .trigger( 'change' );
-                    });                
-                </script>";
+                    });"
+                    . ' /* ]]> */'
+                . "</script>";
                 
         }
 
@@ -321,17 +380,20 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
             /**
              * Binds the revealer event to the element.
              */
-            $.fn.setRevealer = function() {
+            $.fn.setAmazonAutoLinks_AdminPageFrameworkRevealer = function() {
 
                 var _sLastRevealedSelector;
                 this.change( function() {
-
+                    
+                    var _sTargetSelector        = $( this ).is( 'select' )
+                        ? $( this ).children( 'option:selected' ).data( 'reveal' )
+                        : $( this ).data( 'reveal' );
+                    
                     // For checkboxes       
                     if ( $( this ).is(':checkbox') ) {
-                        var _sTargetSelector        = $( this ).data( 'reveal' );
                         var _oElementToReveal       = $( _sTargetSelector );
                         if ( $( this ).is( ':checked' ) ) {
-                            _oElementToReveal.show();
+                            _oElementToReveal.fadeIn();
                         } else {
                             _oElementToReveal.hide();    
                         }                      
@@ -339,7 +401,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                     }
                     
                     // For other types (select and radio).
-                    var _sTargetSelector        = $( this ).val();
+                    // var _sTargetSelector        = $( this ).val();
                     var _oElementToReveal       = $( _sTargetSelector );
 
                     // Hide the previously hidden element.
@@ -351,7 +413,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                     if ( 'undefined' === _sTargetSelector ) { 
                         return; 
                     }
-                    _oElementToReveal.show();                                       
+                    _oElementToReveal.fadeIn();                                       
                     
                 });
                 
@@ -359,7 +421,11 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                         
         }( jQuery ));";
         
-        echo "<script type='text/javascript' class='amazon-auto-links-revealer-jQuery-plugin'>{$_sScript}</script>";
+        echo "<script type='text/javascript' class='amazon-auto-links-revealer-jQuery-plugin'>"
+                . '/* <![CDATA[ */ '
+                . $_sScript
+                . ' /* ]]> */'
+            . "</script>";
         
     }        
     
