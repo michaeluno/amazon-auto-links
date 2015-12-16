@@ -41,6 +41,7 @@ class AmazonAutoLinks_FormFields_AutoInsert_GoBack extends AmazonAutoLinks_FormF
                     ),
                     admin_url( 'edit.php' )
                 ),
+                'save'          => false,
             )
         );
     }
