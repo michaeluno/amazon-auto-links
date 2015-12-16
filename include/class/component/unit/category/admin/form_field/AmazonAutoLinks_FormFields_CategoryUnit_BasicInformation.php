@@ -43,42 +43,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                     'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
                 ),
                 'default'       => 'US',
-            ),        
-            array(
-                'field_id'      => 'associate_id',
-                'title'         => __( 'Associate ID', 'amazon-auto-links' ),
-                'type'          => 'text',
-                'description'   => 'e.g. <code>miunosoft-20</code>',
-                'default'       => '',
-            ),
-            array(
-                'field_id'      => 'count',
-                'title'         => __( 'Number of Items', 'amazon-auto-links' ),
-                'type'          => 'number',
-                'tip'           => __( 'The number of product links to display.', 'amazon-auto-links' ),
-                'default'       => 10,
-                'attributes'    => array(
-                    'min' => 1,
-                    'max' => $_oOption->getMaximumProductLinkCount() 
-                        ? $_oOption->getMaximumProductLinkCount() 
-                        : null,
-                ),                
-            ),    
-            array(
-                'field_id'      => 'image_size',
-                'title'         => __( 'Image Size', 'amazon-auto-links' ),
-                'type'          => 'number',
-                'after_input'   => ' ' . __( 'pixel', 'amazon-auto-links' ),
-                'elimiter'      => '',
-                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
-                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
-                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
-                'attributes'    => array(
-                    'max'   => 500,
-                    'min'   => 0,
-                ),
-                'default'       => 160,
-            ),        
+            ),              
             array(
                 'field_id'      => 'sort',
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),
@@ -115,56 +80,10 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'description'   => __( 'It is recommended to check only a few for faster page loading.', 'amazon-auto-links' )
                     . '&nbsp;' . __( 'Some of the types other than Best Sellers are not supported in some locales.', 'amazon-auto-links' ),
                 'default'       => array( 'bestsellers' => true ),
-            ),        
-            array(
-                'field_id'      => 'ref_nosim',
-                'title'         => __( 'Direct Link Bonus', 'amazon-auto-links' ),
-                'type'          => 'radio',
-                'label'         => array(                        
-                    1        => __( 'On', 'amazon-auto-links' ),
-                    0        => __( 'Off', 'amazon-auto-links' ),
-                ),
-                'description'   => sprintf( 
-                    __( 'Inserts <code>ref=nosim</code> in the link url. For more information, visit <a href="%1$s">this page</a>.', 'amazon-auto-links' ),
-                    'https://affiliate-program.amazon.co.uk/gp/associates/help/t5/a21'
-                ),
-                'default'       => 0,
-            ),        
-
-            array(
-                'field_id'      => 'title_length',
-                'title'         => __( 'Title Length', 'amazon-auto-links' ),
-                'type'          => 'number',
-                'tip'           => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
-                'default'       => -1,
-            ),        
-            array(
-                'field_id'      => 'link_style',
-                'title'         => __( 'Link Style', 'amazon-auto-links' ),
-                'type'          => 'radio',
-                'label'         => array(                        
-                    1    => 'http://www.amazon.<code>[domain-suffix]</code>/<code>[product-name]</code>/dp/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>'
-                        . "&nbsp;<span class='description'>(" . __( 'Default', 'amazon-auto-links' ) . ")</span>",
-                    2    => 'http://www.amazon.<code>[domain-suffix]</code>/exec/obidos/ASIN/<code>[asin]</code>/<code>[associate-id]</code>/ref=<code>[...]</code>',
-                    3    => 'http://www.amazon.<code>[domain-suffix]</code>/gp/product/<code>[asin]</code>/?tag=<code>[associate-id]</code>&ref=<code>[...]</code>',
-                    4    => 'http://www.amazon.<code>[domain-suffix]</code>/dp/ASIN/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>',
-                    5    => site_url() . '?' . $_oOption->get( 'query', 'cloak' ) . '=<code>[asin]</code>&locale=<code>[...]</code>&tag=<code>[associate-id]</code>'
-                ),
-                'before_label'  => "<span class='links-style-label'>",
-                'after_label'   => "</span>",
-                'default'       => 1,
-            )
+            )       
+    
         );
-        
-        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
-        $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );
-        
-        return array_merge(
-            $_aFields,          // comes first
-            $_aCreditFields    // appendded
-        );
+        return $_aFields;
         
     }
   

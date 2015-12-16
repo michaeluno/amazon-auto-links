@@ -52,6 +52,8 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         private function _getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_URLUnit_Main',
+                'AmazonAutoLinks_FormFields_Unit_Common',
+                'AmazonAutoLinks_FormFields_Unit_Credit',
                 'AmazonAutoLinks_FormFields_Unit_AutoInsert',
                 'AmazonAutoLinks_FormFields_URLUnit_Submit',
             );

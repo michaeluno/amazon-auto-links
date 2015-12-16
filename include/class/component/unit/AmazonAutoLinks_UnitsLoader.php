@@ -71,6 +71,8 @@ class AmazonAutoLinks_UnitsLoader {
             
         }
         
+        do_action( 'aal_action_register_unit_types' );
+        
     }    
     
         /**
@@ -122,7 +124,7 @@ class AmazonAutoLinks_UnitsLoader {
                     AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
                 ),                 
                 'normal', // context - e.g. 'normal', 'advanced', or 'side'
-                'core'  // priority - e.g. 'high', 'core', 'default' or 'low'
+                'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
             );            
             new AmazonAutoLinks_PostMetaBox_SearchUnit_Advanced(
                 null,   // meta box ID - null for auto-generate
@@ -141,7 +143,7 @@ class AmazonAutoLinks_UnitsLoader {
                     AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
                 ),                 
                 'normal', // context - e.g. 'normal', 'advanced', or 'side'
-                'core'  // priority - e.g. 'high', 'core', 'default' or 'low'
+                'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
             );                 
             new AmazonAutoLinks_PostMetaBox_ItemLookupUnit_Advanced(
                 null,   // meta box ID - null for auto-generate
@@ -170,7 +172,17 @@ class AmazonAutoLinks_UnitsLoader {
                 ),                 
                 'normal', // context - e.g. 'normal', 'advanced', or 'side'
                 'low' // priority - e.g. 'high', 'core', 'default' or 'low'
-            );
+            );             
+            
+            new AmazonAutoLinks_PostMetaBox_Unit_Common(
+                null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+                __( 'Common', 'amazon-auto-links' ), // title
+                array( // post type slugs: post, page, etc.
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+                ), 
+                'normal', // context (what kind of metabox this is)
+                'core' // priority                                    
+            );                   
             
             new AmazonAutoLinks_PostMetaBox_Template(
                 null, // meta box ID - null to auto-generate

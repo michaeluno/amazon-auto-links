@@ -37,6 +37,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation
     public function addFields( $oFactory, $sSectionID ) {
         
         $_oFieldsBasicInformation = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
+        $_oFieldsCommon           = new AmazonAutoLinks_FormFields_Unit_Common;
+        $_oFieldsCredit           = new AmazonAutoLinks_FormFields_Unit_Credit;
         $_aFields                 = array_merge(
             array(
                 array(
@@ -50,7 +52,9 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation
                         : null,
                 ),                       
             ),
-            $_oFieldsBasicInformation->get()
+            $_oFieldsBasicInformation->get(),
+            $_oFieldsCommon->get(),
+            $_oFieldsCredit->get()
         );
         
         foreach( $_aFields as $_aField ) {
@@ -59,9 +63,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation
                 $_aField
             );
         }
+                        
         
     }
-        
+           
     
     /**
      * Validates the submitted form data.

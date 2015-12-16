@@ -53,6 +53,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
         private function _getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_ItemLookupUnit_Main',
+                'AmazonAutoLinks_FormFields_Unit_Common',
+                'AmazonAutoLinks_FormFields_Unit_Credit',                
                 'AmazonAutoLinks_FormFields_Unit_AutoInsert',
                 'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
             );

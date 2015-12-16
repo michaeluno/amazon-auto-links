@@ -54,6 +54,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup ex
         private function _getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main',
+                'AmazonAutoLinks_FormFields_Unit_Common',
+                'AmazonAutoLinks_FormFields_Unit_Credit',
                 'AmazonAutoLinks_FormFields_Unit_AutoInsert',
                 'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
             );

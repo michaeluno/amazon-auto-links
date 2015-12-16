@@ -53,6 +53,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products exte
         private function _getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
+                'AmazonAutoLinks_FormFields_Unit_Common',
+                'AmazonAutoLinks_FormFields_Unit_Credit',                
                 'AmazonAutoLinks_FormFields_Unit_AutoInsert',
                 'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
             );
