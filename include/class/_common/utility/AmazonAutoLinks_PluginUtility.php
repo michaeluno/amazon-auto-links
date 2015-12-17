@@ -14,7 +14,32 @@
  * @since       3       
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
-        
+       
+    /**
+     * Returns the auto-insert ids.
+     * 
+     * 
+     * @since       3.3.0
+     * @return      array
+     */
+    static public function getActiveAutoInsertIDs() {
+        $_oQuery = new WP_Query(
+            array(
+                'post_status'    => 'publish',     // optional
+                'post_type'      => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ], 
+                'posts_per_page' => -1, // ALL posts
+                'fields'         => 'ids',  // return an array of post IDs
+                'meta_query'        => array(
+                    array(    // do not select tasks of empty values of the _next_run_time key.
+                        'key'       => 'status',
+                        'value'     => true,
+                    ),                            
+                ),                    
+            )
+        );       
+        return $_oQuery->posts;
+    }    
+       
     /**
      * @since       3.2.4
      * @return      string

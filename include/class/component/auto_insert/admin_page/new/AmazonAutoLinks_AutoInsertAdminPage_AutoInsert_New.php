@@ -61,7 +61,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_New extends AmazonAutoLinks
          * 
          * @access      protected as the ..._New class extends this class and acess this method.
          */
-        protected function updatePostMeta( $iPostID, $aMeta ) {
+        protected function _updatePostMeta( $iPostID, $aMeta ) {
             AmazonAutoLinks_WPUtility::insertPost( 
                 $aMeta, 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ]

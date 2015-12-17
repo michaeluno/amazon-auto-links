@@ -29,6 +29,12 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
      */
     static public function getPostsLabelsByPostType( $sPostTypeSlug ) {
         
+        static $_aCache = array();
+        
+        if ( isset( $_aCache[ $sPostTypeSlug ] ) ) {
+            return $_aCache[ $sPostTypeSlug ];
+        }
+        
         $_aLabels = array();
         $_oQuery  = new WP_Query(
             array(
@@ -40,6 +46,8 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
         foreach( $_oQuery->posts as $_oPost ) {
             $_aLabels[ $_oPost->ID ] = $_oPost->post_title;
         }
+        
+        $_aCache[ $sPostTypeSlug ] = $_aLabels;
         return $_aLabels;
         
     }  

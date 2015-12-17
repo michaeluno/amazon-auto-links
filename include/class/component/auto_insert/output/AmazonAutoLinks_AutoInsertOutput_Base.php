@@ -13,21 +13,23 @@
  * @package     Amazon Auto Links
  * @since       2.0.5
 */
-abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_WPUtility {
+abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_PluginUtility {
     
     /**
      * Sets up hooks.
      */
-    function __construct() {
+    public function __construct() {
                 
-        add_action( 'init', array( $this, '_replyToSetAutoInsertIDs' ), 10 );
-                
+        if ( ! $this->_shouldProceed() ) {
+            return;
+        }
+                                
         /**
          * Set up hooks - add hooks regardless whether the unit output is not for the displaying page or not
          * in order to let custom hooks being added which are loaded earlier than the $wp_query object is established.
          * This must be done after setting up the auto-insert ID property array.
          */
-        add_action( 'init', array( $this, '_replyToSetUpHooks' ), 11 );
+        add_action( 'init', array( $this, '_replyToSetUpHooks' ) );
 
         /**
          * Set up the properties for currently displaying page.
@@ -38,36 +40,21 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_WPU
 
         
     }    
-
-    /**
-     * Stores auto-insert IDs into the property.
-     * 
-     * Find auto-insert definitions and if no auto-insert items are set, do nothing.
-     * 
-     * @callback        action      init
-     */
-    public function _replyToSetAutoInsertIDs() {
-            
-        $this->aAutoInsertIDs = $this->getAutoInsertIDs();
-        
-    }    
         /**
-         * Returns the auto-insert ids.
-         * 
-         * @todo        The database query is slow so implement a mechanism that stores the enabled items in the options table. 
-         * When the auto-insert items are removed or added, the option should will be updated and this class only uses the value stored there.
+         * @since       3.3.0
+         * @return      boolean
          */
-        protected function getAutoInsertIDs() {
+        private function _shouldProceed() {
             
-            $_oQuery = new WP_Query(
-                array(
-                    'post_status'    => 'publish',     // optional
-                    'post_type'      => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ], 
-                    'posts_per_page' => -1, // ALL posts
-                    'fields'         => 'ids',  // return an array of post IDs
-                )
-            );       
-            return $_oQuery->posts;
+            if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+                return false;
+            }
+            
+            if ( defined( 'DOING_CRON' ) ) {
+                return false;
+            }
+
+            return ! is_admin();
             
         }
 
@@ -78,6 +65,7 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_WPU
      */
     public function _replyToSetUpHooks() {
         
+        $this->aAutoInsertIDs = $this->_getActiveAutoInsertIDs();
         if ( 0 == count( $this->aAutoInsertIDs ) ) { 
             return; 
         }
@@ -116,6 +104,24 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_WPU
         }
 
     }
+    
+        /**
+         * Returns the auto-insert ids.
+         * 
+         * @return  array
+         */
+        protected function _getActiveAutoInsertIDs() {
+            
+            // 3.3.0+
+            $_abActiveAutoInsertIDs = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ] );
+            if ( false !== $_abActiveAutoInsertIDs ) {
+                return $this->getAsArray( $_abActiveAutoInsertIDs );
+            }
+            
+            // Backward compatibility - if the option is not set, query the database.
+            return $this->getActiveAutoInsertIDs();
+
+        }    
     
         protected function getFilters( $aAutoInsertOptions ) {
 

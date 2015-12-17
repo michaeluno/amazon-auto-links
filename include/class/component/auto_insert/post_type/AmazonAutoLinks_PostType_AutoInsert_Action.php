@@ -109,6 +109,8 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
             $_bIsEnabled = get_post_meta( $_GET[ 'post' ], 'status', true );
             update_post_meta( $_GET[ 'post' ], 'status', ! $_bIsEnabled );
             
+            $this->_updateActiveAutoInsertItems();
+            
         }
     
         // Reload the page without query arguments so that the admin notice will not be shown in the next page load with other actions.
@@ -122,6 +124,19 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
         exit();    
     
     }
+    
+        /**
+         * 
+         */
+        private function _updateActiveAutoInsertItems() {
+AmazonAutoLinks_Debug::log( AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDs() );
+            update_option( 
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ],
+                AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDs(),
+                true   // enable auto-load
+            );
+           
+        }    
     
     /**
      * 

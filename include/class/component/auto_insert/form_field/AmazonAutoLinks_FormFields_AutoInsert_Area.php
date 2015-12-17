@@ -42,9 +42,10 @@ class AmazonAutoLinks_FormFields_AutoInsert_Area extends AmazonAutoLinks_FormFie
                 'title'         => __( 'Select Units', 'amazon-auto-links' ),        
                 'type'          => 'select',
                 'is_multiple'   => true,
-                'label'         => $this->getPostsLabelsByPostType(
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-                ),
+                // The below method is expensive so the `label` argument will be assigned in the `field_definition_{instantiated class name}_{field ID}` hook.
+                // 'label'         => $this->getPostsLabelsByPostType(
+                    // AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+                // ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'built_in_areas',

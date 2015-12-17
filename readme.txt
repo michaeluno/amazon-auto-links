@@ -221,6 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
  
 = 3.3.0 =
+- Improved the performance of the auto-insert functionality. 
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
  
 = 3.2.4 - 12/13/2015 =

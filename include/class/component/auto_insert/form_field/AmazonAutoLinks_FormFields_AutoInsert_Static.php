@@ -29,16 +29,17 @@ class AmazonAutoLinks_FormFields_AutoInsert_Static extends AmazonAutoLinks_FormF
                         . __( 'Use this to insert unit outputs in the database when a post gets published.', 'amazon-auto-links' )
                         . ' ' . __( 'This means product links stay after plugin gets deactivated.', 'amazon-auto-links' )
                     . "</p>",
-            ),        
-            array(
-                'field_id'      => $sFieldIDPrefix . 'unit_ids',
-                'title'         => __( 'Select Units', 'amazon-auto-links' ),        
-                'type'          => 'select',
-                'is_multiple'   => true,
-                'label'         => $this->getPostsLabelsByPostType(
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-                ),
-            ),
+            ),       
+            // @3.3.0 Deprecated. The same field id exists in another section.
+            // array(
+                // 'field_id'      => $sFieldIDPrefix . 'unit_ids',
+                // 'title'         => __( 'Select Units', 'amazon-auto-links' ),        
+                // 'type'          => 'select',
+                // 'is_multiple'   => true,
+                // 'label'         => $this->getPostsLabelsByPostType(
+                    // AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+                // ),
+            // ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'static_areas',
                 'title'         => __( 'Areas', 'amazon-auto-links' ),

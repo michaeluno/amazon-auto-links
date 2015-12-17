@@ -11,7 +11,7 @@
  * 
  * @since       3
  */
-abstract class AmazonAutoLinks_AdminPage_RootBase {
+abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_PluginUtility {
     
     /**
      * Stores callback method names.

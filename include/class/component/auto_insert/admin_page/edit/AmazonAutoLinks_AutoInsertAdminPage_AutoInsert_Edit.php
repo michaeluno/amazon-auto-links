@@ -43,7 +43,10 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
                 );
             }                    
         }
-                           
+       
+        // field_definition_{instantiated class name}_{field ID} ho
+        add_filter( 'field_definition_' . $oFactory->oProp->sClassName . '_unit_ids',  array( $this, 'replyToSetUnitLabels' ) );
+             
     }
         /**
          * Returns a list of classes that define form fields.
@@ -64,6 +67,19 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             );      
          
         }
+        
+    /**
+     * Adds the label element to the `unit_ids` field.
+     * @return      array
+     * @since       3.3.0
+     */
+    public function replyToSetUnitLabels( $aFieldset ) {
+        $aFieldset[ 'label' ] = $this->getPostsLabelsByPostType(
+            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+        );
+        return $aFieldset;
+    }
+        
     /**
      * Form field validation.
      * 
@@ -78,7 +94,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
     
         // Check invalid values
         // Check necessary settings.
-        if ( ! array_filter( $aInput['built_in_areas'] + $aInput['static_areas'] ) 
+        if ( ! array_filter( $aInput[ 'built_in_areas' ] + $aInput[ 'static_areas' ] ) 
             && ! $aInput[ 'filter_hooks' ]
             && ! $aInput[ 'action_hooks' ]
         ) {
@@ -91,7 +107,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             $_bVerified = false;
             
         }
-        if ( ! isset( $aInput['unit_ids'] ) ) {    // if no item is selected, the select input with the multiple attribute does not send the key.
+        if ( ! isset( $aInput[ 'unit_ids' ] ) ) {    // if no item is selected, the select input with the multiple attribute does not send the key.
             
             $_aErrors[ 'autoinsert_unit_ids' ] = __( 'A unit must be selected.', 'amazon-auto-links' );
             $_bVerified = false;
@@ -106,21 +122,35 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
         }        
         
         // Update an auto-insert post.
-        $this->updatePostMeta( 
-            isset( $aInput[ 'post_id' ] )
-                ? $aInput[ 'post_id' ]
-                : 0,
+        $_iPostID = isset( $aInput[ 'post_id' ] )
+            ? $aInput[ 'post_id' ]
+            : 0;
+        $this->_updatePostMeta( 
+            $_iPostID,
             $this->getSanitizedAutoInsertMeta( $aInput )
         );                            
-               
+        
+        $this->_updateActiveAutoInsertItems();
+        
         return $aInput;
         
     }
         /**
          * 
+         */
+        protected function _updateActiveAutoInsertItems() {
+            update_option( 
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ],
+                $this->getActiveAutoInsertIDs(),
+                true   // enable auto-load
+            );
+        }
+    
+        /**
+         * 
          * @access      protected as the ..._New class extends this class and acess this method.
          */
-        protected function updatePostMeta( $iPostID, $aMeta ) {
+        protected function _updatePostMeta( $iPostID, $aMeta ) {
             AmazonAutoLinks_WPUtility::updatePostMeta( 
                 $iPostID, 
                 $aMeta
