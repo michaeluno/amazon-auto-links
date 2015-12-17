@@ -129,14 +129,12 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
          * 
          */
         private function _updateActiveAutoInsertItems() {
-AmazonAutoLinks_Debug::log( AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDs() );
             update_option( 
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ],
                 AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDs(),
                 true   // enable auto-load
             );
-           
-        }    
+        }
     
     /**
      * 
