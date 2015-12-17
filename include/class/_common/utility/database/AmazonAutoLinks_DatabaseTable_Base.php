@@ -22,6 +22,12 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     public $sTableName = '';
     
     /**
+     * Stores the table suffix. 
+     * This also serves as the option key name.
+     */
+    public $sTableSuffix = '';
+    
+    /**
      * Stores the table version.
      */
     public $sVersion = '';
@@ -29,10 +35,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     /**
      * Sets up properties.
      */
-    public function __construct( $sTableName, $sVersion='', $bAcrossNetwork=true ) {
-        $this->sTableName = $bAcrossNetwork
-            ? $GLOBALS[ 'wpdb' ]->base_prefix . $sTableName
-            : $GLOBALS[ 'wpdb' ]->prefix . $sTableName;
+    public function __construct( $sTableNameSuffix, $sVersion='', $bAcrossNetwork=true ) {
+        $this->sTableNameSuffix = $sTableNameSuffix;
+        $this->sTableName       = $bAcrossNetwork
+            ? $GLOBALS[ 'wpdb' ]->base_prefix . $sTableNameSuffix
+            : $GLOBALS[ 'wpdb' ]->prefix . $sTableNameSuffix;
         $this->sVersion   = $sVersion;
     }
     
@@ -59,7 +66,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         
         if ( $this->sVersion ) {
             update_option(
-                $this->sTableName  . '_version',  // key 
+                $this->sTableNameSuffix  . '_version',  // key 
                 $this->sVersion     // data
             );
         }

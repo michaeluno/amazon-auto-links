@@ -223,6 +223,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 = 3.3.0 =
 - Improved the performance of the auto-insert functionality. 
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
+- Fixed a bug that custom database table versions were not saved properly and caused extra database queries.
  
 = 3.2.4 - 12/13/2015 =
 - Fixed an issue that unit preview could not be displayed without re-saving the site permalink options after setting a custom unit preview post type slug.

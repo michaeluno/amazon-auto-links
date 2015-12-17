@@ -30,10 +30,10 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * Checks if table version options exist and if not install it.
          */
         private function checkCustomTables() {
-            
+
             $_aTableVersions = array();
             foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'table_versions' ] as $_sOptionKey ) {
-                $_aTableVersions[] = get_option( $_sOptionKey, false );
+                $_aTableVersions[ $_sOptionKey ] = get_option( $_sOptionKey, false );
             }
             if ( ! in_array( false, $_aTableVersions, true ) ) {
                 return;
