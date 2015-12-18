@@ -26,10 +26,17 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
-    
+        'AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation',
     );    
+    
+    /**
+     * Stores protected meta key names.
+     */    
+    public $aProtectedMetaKeys = array(
+        'categories_exclude',
+        'categories',
+    );    
+
     
     /**
      * Adds post meta boxes.

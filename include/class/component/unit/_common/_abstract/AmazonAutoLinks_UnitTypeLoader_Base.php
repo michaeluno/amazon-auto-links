@@ -28,6 +28,11 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
     public $aFieldClasses = array();
     
     /**
+     * Stores protected meta key names.
+     */
+    public $aProtectedMetaKeys = array();
+    
+    /**
      * Loads necessary components.
      */
     public function __construct( $sScriptPath ) {
@@ -39,7 +44,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
             // Post meta boxes
             $this->loadAdminComponents( $sScriptPath );
             
-            add_filter( 'aal_filter_custom_meta_keys', array( $this, 'getProtectedMetaKeys' ) );
+            add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToGetProtectedMetaKeys' ) );
             
         }
         
@@ -60,18 +65,19 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
             return $aUnitTypeSlugs;
         }
     
-    /**
-     * @return      array
-     * @since       3.3.0
-     * @callback    filter      aal_filter_custom_meta_keys
-     */
-    public function getProtectedMetaKeys( $aMetaKeys ) {                
-        foreach( $this->aFieldClasses as $_sClassName ) {
-            $_oFields = new $_sClassName;
-            $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
-        }
-        return $aMetaKeys;
-    }    
+        /**
+         * @return      array
+         * @since       3.3.0
+         * @callback    filter      aal_filter_custom_meta_keys
+         * @remark      For field with a section, set keys in the $aProtectedMetaKeys property.
+         */
+        public function replyToGetProtectedMetaKeys( $aMetaKeys ) {                
+            foreach( $this->aFieldClasses as $_sClassName ) {
+                $_oFields = new $_sClassName;
+                $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
+            }            
+            return array_merge( $aMetaKeys, $this->aProtectedMetaKeys );
+        }    
     
     /**
      * Adds post meta boxes.

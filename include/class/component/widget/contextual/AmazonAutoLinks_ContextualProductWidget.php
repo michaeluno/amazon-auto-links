@@ -92,12 +92,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         }
         
         $_aClasses = array(
-            'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
-            'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
-            'AmazonAutoLinks_FormFields_Button_Selector',
+            // 'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
+            // 'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
+            // 'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
             'AmazonAutoLinks_FormFields_Unit_Template',
-            'AmazonAutoLinks_FormFields_Widget_Visibility',
+            // 'AmazonAutoLinks_FormFields_Widget_Visibility',
         );
         $this->_addFieldsByFieldClass( $_aClasses );
         
@@ -120,12 +120,48 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Add fields 
         $this->_addFieldsByFieldClass(
             array(
-                'AmazonAutoLinks_FormFields_ProductFilter',
+                // 'AmazonAutoLinks_FormFields_ProductFilter',
                 'AmazonAutoLinks_FormFields_ProductFilter_Image',
             )
         );
         
+        add_filter( 'field_definition_' . $this->oProp->sClassName . '_button_id', array( $this, 'replyToSetActiveButtonLabels' ) );
+        
     }
+        /**
+         * Modifies the 'button_id' field to add lables for selection.
+         * @return      array
+         * @since       3.3.0
+         */
+        public function replyToSetActiveButtonLabels( $aFieldset ) {
+            
+            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            return $aFieldset;
+            
+        }
+            /**
+             * @return      array
+             * @since       3.3.0
+             */
+            private function _getActiveButtonLabelsForFields() {
+                
+                static $_aCache;
+                
+                if ( isset( $_aCache ) ) {
+                    return $_aCache;
+                }
+                
+                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
+                $_aLabels    = array();
+                foreach( $_aButtonIDs as $_iButtonID ) {
+                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
+                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
+                }
+                $_aCache = $_aLabels;           
+                return $_aCache;
+                
+            }
+            
         /**
          * Adds form fields by the given class names.
          * @since       3.0.3

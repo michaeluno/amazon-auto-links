@@ -26,8 +26,7 @@ class AmazonAutoLinks_UnitTypeLoader_tag extends AmazonAutoLinks_UnitTypeLoader_
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
+        // 'AmazonAutoLinks_FormFields_TagUnit_Main',
     
     );    
     

@@ -26,9 +26,13 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_UnitTypeLoader_
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
+        'AmazonAutoLinks_FormFields_URLUnit_Main',
+    );    
     
+    /**
+     * Stores protected meta key names.
+     */    
+    public $aProtectedMetaKeys = array(
     );    
     
     /**

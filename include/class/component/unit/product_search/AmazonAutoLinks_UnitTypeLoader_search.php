@@ -26,9 +26,8 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
-    
+        'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
+        'AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced',
     );    
     
     /**

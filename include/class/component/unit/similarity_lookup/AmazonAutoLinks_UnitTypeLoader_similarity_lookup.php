@@ -26,9 +26,8 @@ class AmazonAutoLinks_UnitTypeLoader_similarity_lookup extends AmazonAutoLinks_U
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
-    
+        'AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main',    
+        'AmazonAutoLinks_FormFields_SimilarityLookupUnit_Advanced',
     );    
     
     /**

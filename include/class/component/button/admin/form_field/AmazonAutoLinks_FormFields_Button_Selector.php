@@ -38,7 +38,8 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
                         )
                     ),                    
                 ),
-                'label'             => $this->_getActiveButtonLabels(),
+                // The label argument will be set with the 'field_definition_{...}' filter as it performs a database query.
+                // 'label'             => $this->_getActiveButtonLabels(),
                 'after_field'       => "<div style='margin: 3em 3em 3em 0; width:100%;'>"
                     . "<div style='margin-left: auto; margin-right: auto; '>" // text-align:center;
                         . AmazonAutoLinks_PluginUtility::getButton( 

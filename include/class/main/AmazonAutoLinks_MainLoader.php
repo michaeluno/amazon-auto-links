@@ -84,9 +84,6 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
             }
             
             if ( in_array( $sMetaKey, $this->_getPluginCustomMetaKeys(), true ) ) {
-AmazonAutoLinks_Debug::log( func_get_args() );
-AmazonAutoLinks_Debug::log( $sMetaKey );
-AmazonAutoLinks_Debug::log( $this->_getPluginCustomMetaKeys() );
                 return true;
             }
             
@@ -99,7 +96,13 @@ AmazonAutoLinks_Debug::log( $this->_getPluginCustomMetaKeys() );
              * @return      array
              */
             private function _getPluginCustomMetaKeys() {
-                return ( array ) apply_filters( 'aal_filter_custom_meta_keys', array() );        
+                static $_aCache;
+                
+                if ( isset( $_aCache ) ) {
+                    return $_aCache;
+                }
+                $_aCache = ( array ) apply_filters( 'aal_filter_custom_meta_keys', array() );
+                return $_aCache;        
             }    
     
 }

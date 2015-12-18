@@ -231,6 +231,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      array       An array holding button IDs.
      */
     static public function getActiveButtonIDs() {
+
+// @todo use the options table to auto-load active buttons.    
+        static $_aCache;
+        
+        if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }
         
         $_oQuery = new WP_Query(
             array(
@@ -240,7 +247,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
                 'fields'         => 'ids',  // return an array of post IDs
             )
         );       
-        return $_oQuery->posts;                
+        $_aCache = $_oQuery->posts;                
+        return $_aCache;
         
     }        
 

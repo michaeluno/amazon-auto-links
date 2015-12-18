@@ -16,13 +16,23 @@
 class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Base {
     
     /**
-     * Stores class names of form fields.
+     * Stores class names of common form fields among all the unit types.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
+        'AmazonAutoLinks_FormFields_Unit_Template',
+        'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
+        'AmazonAutoLinks_FormFields_Button_Selector',
+        'AmazonAutoLinks_FormFields_Unit_Common',    
+        'AmazonAutoLinks_FormFields_Unit_Cache',
+    );      
     
-    );        
+    /**
+     * Stores protected meta key names.
+     */    
+    public $aProtectedMetaKeys = array(
+        'product_filters',      // section id
+    );
+    
     
     /**
      * 

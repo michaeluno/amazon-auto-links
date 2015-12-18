@@ -26,9 +26,8 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      * Stores class names of form fields.
      */
     public $aFieldClasses = array(
-
-// @todo add classes    
-    
+        'AmazonAutoLinks_FormFields_ItemLookupUnit_Main',
+        'AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced',
     );    
     
     /**

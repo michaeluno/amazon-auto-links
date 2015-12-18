@@ -35,16 +35,44 @@ class AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced extends AmazonAutoLinks_Uni
             array(  
                 'handle_id'    => 'aal_button_preview_labels',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => $this->_getActiveButtonLabels(),
+                'translation'  => $this->_getActiveButtonLabelsForJavaScript(),
             )
         );         
         
+        add_filter( 'field_definition_' . $this->oProp->sClassName . '_button_id', array( $this, 'replyToSetActiveButtonLabels' ) );
+        
     }
+        /**
+         * Modifies the 'button_id' field to add lables for selection.
+         * @return      array
+         * @since       3.3.0
+         */
+        public function replyToSetActiveButtonLabels( $aFieldset ) {
+            
+            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            return $aFieldset;
+            
+        }
+            /**
+             * @return      array
+             * @since       3.3.0
+             */
+            private function _getActiveButtonLabelsForFields() {
+                
+                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
+                $_aLabels    = array();
+                foreach( $_aButtonIDs as $_iButtonID ) {
+                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
+                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
+                }
+                return $_aLabels;           
+                
+            }
     
         /**
          * @return      array
          */
-        private function _getActiveButtonLabels() {
+        private function _getActiveButtonLabelsForJavaScript() {
             
             $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
             $_aLabels    = array();
