@@ -34,6 +34,18 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
                 ),
             )
         );
+        
+        // 3.3.0+
+        new AmazonAutoLinks_AdminPage_Setting_General_Feed( 
+            $oAdminPage,
+            $this->sPageSlug, 
+            array(
+                'section_id'    => 'feed',
+                'tab_slug'      => $this->sTabSlug,
+                'title'         => __( 'Feed', 'amazon-auto-links' ),
+            )
+        );          
+        
         new AmazonAutoLinks_AdminPage_Setting_General_UnitPreview( 
             $oAdminPage,
             $this->sPageSlug, 

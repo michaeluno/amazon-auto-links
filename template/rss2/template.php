@@ -7,8 +7,10 @@
  * $aArguments - the user defined unit arguments such as image size and count etc.
  */
 
+$_oOption = AmazonAutoLinks_Option::getInstance();
+echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>'; 
 
-echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>'; ?>
+?>
 <rss version="2.0"
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
@@ -48,7 +50,7 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
                 ? AmazonAutoLinks_PluginUtility::getReadableLabelsByUnitID( $aArguments[ 'id' ] )
                 : AmazonAutoLinks_PluginUtility::getReadableLabelsByLabelID( $aArguments[ '_labels' ] );
             $_sGUID  = $aArguments[ 'unit_type' ] . '_' . $_aProduct[ 'ASIN' ] . '_' . $aArguments[ 'country' ];
-            
+
     ?>    
     <item>
         <title><![CDATA[<?php echo $_aProduct[ 'title' ]; ?>]]></title>
@@ -59,8 +61,12 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
         
         <category><![CDATA[<?php echo $sLabels; ?>]]></category>
         <guid isPermaLink="false"><?php echo $_sGUID; ?></guid>        
+        <?php if ( ! $_oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
         <description><![CDATA[<?php echo $_aProduct[ 'description' ]; ?>]]></description>
-        <content:encoded><![CDATA[<?php echo "<div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div>"; ?>]]></content:encoded>
+        <content:encoded><![CDATA[<?php echo "<div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div>"; ?>]]></content:encoded>   
+        <?php else : ?>
+        <description><![CDATA[<?php echo "<div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div>"; ?>]]></description>        
+        <?php endif; ?>
         <wfw:commentRss></wfw:commentRss>
         <slash:comments></slash:comments>
 

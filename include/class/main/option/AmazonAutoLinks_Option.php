@@ -100,6 +100,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         // stores information of active templates.   
         // 'templates' => array(),    
     
+        // 3.3.0+
+        'feed'  => array(
+            'use_description_tag_for_rss_product_content' => false,
+        ),
+    
     );
          
     /**
