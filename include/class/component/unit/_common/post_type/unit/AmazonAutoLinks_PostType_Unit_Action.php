@@ -101,6 +101,7 @@ class AmazonAutoLinks_PostType_Unit_Action extends AmazonAutoLinks_PostType_Unit
          * @return      array
          */
         private function _getCloneActionLink( $aActionLinks, $oPost ) {
+            
             $_sURL = add_query_arg( 
                 array( 
                     'post_type'     => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
@@ -110,11 +111,12 @@ class AmazonAutoLinks_PostType_Unit_Action extends AmazonAutoLinks_PostType_Unit
                 ), 
                 admin_url( $this->oProp->sPageNow ) 
             );    
-            $_sLabel    = __( 'Clone Unit', 'amazon-auto-links' );
+            $_sLabel    = __( 'Clone', 'amazon-auto-links' );
+            $_sTitle    = __( 'Clone Unit', 'amazon-auto-links' );
             
             $_oOption   = AmazonAutoLinks_Option::getInstance();            
             $aActionLinks[ 'clone_unit' ] = $_oOption->canCloneUnits()
-                ? "<a href='{$_sURL}' title='{$_sLabel}'>"
+                ? "<a href='{$_sURL}' title='{$_sTitle}'>"
                     . $_sLabel
                 . "</a> "
                 : "<span class='disabled' title='" . esc_attr( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage( false /* no link */ ) ) . "'>"
