@@ -110,14 +110,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
         $this->bDBTableAccess    = $this->_hasCustomDBTableAccess();
         
         // Sanitize product title for sorting.
-        add_filter(
-            'aal_filter_unit_product_raw_title',
-            array( $this, 'replyToModifyRawTitle' ),
-            10,
-            2
-        );
+        add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ) );
  
     }   
+        /**
+         * Sanitizes a raw product title.
+         * @return      Overridden by an extended class.
+         * @return      string
+         */
+        public function replyToModifyRawTitle( $sTitle ) {
+            return $sTitle;
+        }
     
         /**
          * Checks whether the unit needs to access the plugin custom database table.
