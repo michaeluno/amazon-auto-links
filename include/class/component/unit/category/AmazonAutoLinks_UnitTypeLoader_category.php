@@ -45,7 +45,16 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
      * @return      void
      */
     public function loadAdminComponents( $sScriptPath ) {
-        
+
+        new AmazonAutoLinks_CategoryUnitAdminPage(
+            array(
+                'type'      => 'transient',
+                'key'       => $GLOBALS[ 'aal_transient_id' ],
+                'duration'  => 60*60*24*2,
+            ),
+            $sScriptPath 
+        );        
+    
         new AmazonAutoLinks_UnitPostMetaBox_Main_category(
             null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
             __( 'Main', 'amazon-auto-links' ), // meta box title
