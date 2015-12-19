@@ -222,10 +222,12 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
  
 = 3.3.0 =
 - Improved the performance of the auto-insert functionality. 
+- Added the `%content%` variable for the full product description to the Item Format unit option.
 - Added the RSS Content Tag option that lets the user decide whether a complete product output should be in the `<description>` tag or the `<content>` tag in the feed.
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
 - Fixed a bug that custom database table versions were not saved properly and caused extra database queries.
 - Reduced the number of database queries in widget forms.
+- Changed the `%description%` variable of the `Category` unit type to include description produced by Amazon Product Advertising API if the user has authenticated the plugin.
  
 = 3.2.4 - 12/13/2015 =
 - Fixed an issue that unit preview could not be displayed without re-saving the site permalink options after setting a custom unit preview post type slug.

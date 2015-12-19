@@ -23,7 +23,6 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
 
         'additional_attribute'  => null,
         'search_by'             => 'Author',
-        'description_length'    => 250,
         
         'search_per_keyword'    => false,
         

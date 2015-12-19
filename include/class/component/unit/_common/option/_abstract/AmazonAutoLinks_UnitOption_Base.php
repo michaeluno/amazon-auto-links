@@ -42,6 +42,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         'image_size'                    => 160,      
         'ref_nosim'                     => false,
         'title_length'                  => -1,
+        'description_length'            => 250,     // 3.3.0+  Moved from the search unit types.
         'link_style'                    => 1,
         'credit_link'                   => 1,   // 1 or 0
         'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
@@ -56,7 +57,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         'is_preview'            => false,   // for the search unit, true won't be used but just for the code consistency. 
         
         
-        // stores labels associated with the units (the plugin custom taxonomy).
+        // stores labels associated with the units (the plugin custom taxonomy). Used by the RSS2 template.
         '_labels'               => array(),    
         
 // this is for fetching by label. AND, IN, NOT IN can be used
@@ -103,6 +104,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
  
         // 3.2.1+
         '_allowed_ASINs' => array(),
+        
+        // 3.3.0+
+        'highest_content_heading_tag_level' => 5,
         
     );
     

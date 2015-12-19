@@ -62,7 +62,22 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'type'              => 'checkbox',
                 'label'             => __( 'Show the <strong>Now Retrieving...</strong> message for the elements being fetched in the background.', 'amazon-auto-links' ),
                 'default'           => true,
-            ),                
+            ),     
+            array(
+                'field_id'          => $sFieldIDPrefix . 'highest_content_heading_tag_level',
+                'title'             => __( 'Highest Heading Tag Level', 'amazon-auto-links' ),
+                'tip'               => array(
+                    __( 'Set the highest level of heading tags in the product content output inserted with the <code>%content%</code> variable in the Item Format option.', 'amazon-auto-links' ),
+                    __( 'For example, setting <code>3</code> will degrade <code>h1</code> and <code>h2</code> to <code>h3</code> and <code>h4</code> in product content outputs.', 'amazon-auto-links' ),
+                    
+                ),
+                'type'              => 'number',
+                'attributes'        => array(
+                    'min'   => 1,
+                    'step'  => 1,
+                ),  
+                'default'           => 5,
+            ),             
         );
 
        

@@ -69,6 +69,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         
         $this->_setProperties();
         
+        add_filter( 
+            'aal_filter_unit_each_product_with_database_row', 
+            array( $this, 'replyToFormatProductWithDBRow' ), 
+            10, 
+            3
+        );
+        
     }        
         /**
          * Sets up properties.
@@ -98,6 +105,81 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             return $_aRSSURLs;                
         }
 
+    /**
+     * Called when the unit has access to the plugin custom database table.
+     * 
+     * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
+     * 
+     * @return      3.3.0
+     * @return      array
+     */
+    public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
+    
+        $aProduct[ 'content' ]      = $this->getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
+        $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "
+            . $this->getDescriptionSanitized( 
+                $aProduct[ 'content' ], 
+                $this->oUnitOption->get( 'description_length' ), 
+                $this->_getReadMoreText( $aProduct[ 'product_url' ] )
+            );
+        return $aProduct;
+    
+    }
+        
+    /**
+     * @return      string
+     * @since       3.3.0
+     * 
+     */
+    protected function getContents( $aProduct /*, $aDBRow, $aScheduleIdentifier */ ) {
+        
+        $_aParams            = func_get_args();
+        $aProduct            = $_aParams[ 0 ];
+        $aDBRow              = $_aParams[ 1 ];
+        $aScheduleIdentifier = $_aParams[ 2 ];
+        
+        $_aReviews = $this->_getValueFromRow( 
+            'editorial_reviews', 
+            $aDBRow, 
+            array(),   // default
+            $aScheduleIdentifier
+        );    
+    
+        $_sContents = $this->_getJoinedElements( $_aReviews, 'Content' );
+        $_sContents = $this->_getContentsSanitized( $_sContents );
+        
+        return "<div class='amazon-product-content'>"
+                . $_sContents
+            . "</div>";
+
+    }               
+        
+        
+    /**
+     * Checks whether the unit needs to access the plugin custom database table.
+     * 
+     * @remark      For the category unit type, the %description%, %content%, and %price% variables need to access the database table 
+     * and it requires the API to be connected.
+     * 
+     * @remark      Overriding the method defined in the base class.
+     * @since       3.3.0
+     * @return      boolean
+     */
+    protected function _hasCustomDBTableAccess() {
+
+        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%' );
+    
+        if ( $this->oOption->isAPIConnected() ) {
+            $_aVariablesToCheck[] = '%description%';
+        }
+        
+        return $this->_hasCustomVariable( 
+            $this->oUnitOption->get( 'item_format' ),
+            $_aVariablesToCheck
+        );        
+        
+    }        
+        
     /**
      * Fetches and returns the associative array containing the output of product links.
      * 
@@ -273,14 +355,14 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             }
             
             // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
-            $_aProduct[ 'product_url' ] = $this->formatProductLinkURL( 
+            $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted( 
                 $_sPermalink, 
                 $_aProduct[ 'ASIN' ]
             );
             
             // Title
             $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
-            $_aProduct[ 'title' ]     = $this->sanitizeTitle( $_aProduct[ 'raw_title' ] );
+            $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ] );
             if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) { 
                 continue; 
             }
@@ -436,9 +518,21 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_sDescription  = $_sDescription1 . $_sDescription2;
         $_aDescription  = preg_split('/<br.*?\/?>/i', $_sDescription);        // devide the string into arrays by <br> or <br />    
         $_sDescription  = trim( implode( " ", $_aDescription ) );    // return them back to html text
-        return force_balance_tags( $_sDescription );
-
+        $_sDescription  = force_balance_tags( $_sDescription );
+        
+        return $this->_getDescriptionFromDBTable( $_sDescription );
+        
     }
+        /**
+         * @since       3.3.0
+         * @return      string
+         */
+        private function _getDescriptionFromDBTable( $sDescription ) {
+// @todo complete this            
+            return $sDescription;
+            
+        }
+    
     
     /**
      * Retrieves the description part from the given dom node and strips the html tags.
@@ -481,7 +575,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             
             $_sHref = $_nodeA->getAttribute( 'href' );
             if ( empty( $_sHref ) ) { continue; }
-            $_sHref = $this->formatProductLinkURL( $_sHref, $sASIN );
+            $_sHref = $this->getProductLinkURLFormatted( $_sHref, $sASIN );
 
             // Reported Issue: Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8
             $_bResult = @$_nodeA->setAttribute( 'href', $_sHref );

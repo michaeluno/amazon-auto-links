@@ -10,15 +10,17 @@
 /**
  * One of the base classes for unit classes.
  * 
- * Provides shared methods and properties relating formating product elements.
+ * Provides shared methods and properties relating formatting product elements.
  *
  * @since       3
  * 
  * @filter      apply       aal_filter_unit_product_formatted_html
+ * @filter      apply       aal_filter_unit_each_product_with_database_row
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoLinks_UnitOutput_Base_ProductFilter {
         
     /**
+     * @filter      apply       aal_filter_unit_each_product_with_database_row
      * @return      array
      */
     protected function _formatProducts( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
@@ -71,6 +73,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     $_aDBProductRow
                 );
                 
+                // This lets unit types that need to use the data from database rows access them.
+                $_aProduct = apply_filters( 
+                    'aal_filter_unit_each_product_with_database_row', 
+                    $_aProduct, 
+                    $_aDBProductRow,
+                    array( 
+                        'locale'        => $sLocale, 
+                        'asin'          => $_aProduct[ 'ASIN' ], 
+                        'associate_id'  => $sAssociateID 
+                    )
+                );
+                
             }              
         
             // Item        
@@ -107,6 +121,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 "%button%",
                 "%image_set%",
                 "%disclaimer%", // 3.2.0+
+                "%content%", // 3.3.0+
             ),
             array( 
                 $aProduct[ 'product_url' ], 
@@ -120,7 +135,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $aProduct[ 'price' ],
                 $aProduct[ 'button' ],
                 $aProduct[ 'image_set' ],
-                $this->_getPricingDisclaimer( $aProduct[ 'updated_date' ] ) // 3.2.0+
+                $this->_getPricingDisclaimer( $aProduct[ 'updated_date' ] ), // 3.2.0+
+                $aProduct[ 'content' ], // 3.3.0+
             ),
             apply_filters(
                 'aal_filter_unit_item_format',
@@ -224,29 +240,60 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Strips tags and truncates the given string.
      * 
+     * @since       unknown
+     * @since       3.3.0       Renamed from `sanitizeDecription()`.
      */
-    protected function sanitizeDescription( $strDescription, $numMaxLength=null, $strReadMoreURL='' ) {
-        
-        $strDescription = strip_tags( $strDescription );
+    protected function getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
+
+        $sDescription = strip_tags( $sDescription );
         
         // Title character length
-        $numMaxLength = $numMaxLength 
-            ? $numMaxLength 
+        $nMaxLength = $nMaxLength 
+            ? $nMaxLength 
             : $this->oUnitOption->get( 'description_length' );
-        if ( $numMaxLength == 0 ) { 
+        if ( $nMaxLength == 0 ) { 
             return ''; 
         }
         
-        $strDescription = ( $numMaxLength > 0 && $this->getStringLength( $strDescription ) > $numMaxLength )
-            ? esc_attr( $this->getSubstring( $strDescription, 0, $numMaxLength ) ) . '...'
-                . ( $strReadMoreURL 
-                    ? " <a href='{$strReadMoreURL}' target='_blank' rel='nofollow'>" . __( 'read more', 'amazon-auto-links' ) . "</a>"
-                    : ''
-                )
-            : esc_attr( $strDescription );
+        $sDescription = ( $nMaxLength > 0 && $this->getStringLength( $sDescription ) > $nMaxLength )
+            ? esc_attr( $this->getSubstring( $sDescription, 0, $nMaxLength ) ) . '...'
+                . $sReadMoreText
+            : esc_attr( $sDescription );
         
-        return $strDescription;
+        return trim( $sDescription );
         
+    }
+    
+    /**
+     * @since       3.3.0
+     * @return      string
+     * @deprecated  Not used at the moment.
+     */
+/*     protected function getHTMLStringTruncated( $sHTMLDescription, $iMaxLength=-1, $sReadMore='' ) {
+       
+        $iMaxLength = ( integer ) $iMaxLength;
+        $_oTruncator = new AmazonAutoLInks_HTMLStringTruncator;
+        if ( -1 !== $iMaxLength ) {
+            $sHTMLDescription = $_oTruncator->getTrimmed( $sHTMLDescription, $iMaxLength, $sReadMore );
+        }
+        return $sHTMLDescription;
+        
+    } */
+    
+    /**
+     * @return      string
+     * @since       3.3.0
+     */
+    protected function _getReadMoreText( $sReadMoreURL ) {
+        
+        if ( ! $sReadMoreURL ) {
+            return '';
+        }
+        $sReadMoreURL = esc_url( $sReadMoreURL );
+        
+        return " <a href='{$sReadMoreURL}' target='_blank' rel='nofollow' style='display:inline;'>" 
+                . __( 'read more', 'amazon-auto-links' ) 
+            . "</a>";
         
     }
     
@@ -256,7 +303,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * This does not create a final result of the title as this method is called from sorting items as well.
      * 
      * @remark      Used for sorting as well.
-     * @since        3
+     * @since       3
      * @return      string
      */
     public function replyToModifyRawTitle( $sTitle ) {
@@ -275,7 +322,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * Strips HTML tags and sanitizes the product title.
      * 
      */
-    protected function sanitizeTitle( $sTitle ) {
+    protected function getTitleSanitized( $sTitle ) {
 
         // $sTitle = strip_tags( $sTitle );
 
@@ -425,7 +472,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * 
      * @return      string
      */
-    protected function formatProductLinkURL( $sURL, $sASIN ) {
+    protected function getProductLinkURLFormatted( $sURL, $sASIN ) {
 
         $_sStyledURL = $this->getFormattedProductLinkByStyle( 
             $sURL, 
@@ -439,7 +486,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             
     }
         /**
-         * A helper function for the above formatProductLinkURL() method.
+         * A helper function for the above getProductLinkURLFormatted() method.
          * 
          * @remark      $iStyle should be 1 to 5 indicating the url style of the link.
          * @return      string
@@ -731,5 +778,99 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             . "</div>";
             
     }
+    
+    /**
+     * @return      string
+     * @since       3.3.0
+     * 
+     */
+    protected function getContents( $aItem ) {
+
+        $_aEditorialReviews = $this->getElementAsArray( 
+            $aItem,
+            array( 'EditorialReviews', 'EditorialReview' )
+        );
+                
+        $_sContents = $this->_getJoinedElements( $_aEditorialReviews, 'Content' );
+        $_sContents = $this->_getContentsSanitized( $_sContents );
+        
+        return "<div class='amazon-product-content'>"
+                . $_sContents
+            . "</div>";
+
+    }        
+        /**
+         * @return      string
+         * @since       3.3.0
+         */
+        protected function _getContentsSanitized( $sContents ) {
+
+            $_iHighestHTag = ( integer ) $this->oUnitOption->get( 'highest_content_heading_tag_level' );
+            if ( 1 >= $_iHighestHTag ) {
+                return $sContents;
+            }
+            
+            $_aSearches = $_aReplaces = array();
+            $_iOffset   = $_iHighestHTag - 1; // for example the user wants h3 to be the highest, the offset will be 2
+            for( $_i = 5; $_i >= 1; $_i-- ) {
+                $_aSearches[] = "h{$_i}";
+                $_aReplaces[] = "h" . min( $_i + $_iOffset, 6 ); // up to h6
+            }
+            
+            $_oDoc = $this->oDOM->loadDOMFromHTMLElement( $sContents );
+            $this->oDOM->removeTags( $_oDoc, array( 'br' ) );
+            
+            // Modify the DOM document object
+            $_oHeaderRenamer = new AmazonAutoLinks_RenameTags;
+            $_oHeaderRenamer->rename(
+                $_aSearches,
+                $_aReplaces,
+                $_oDoc
+            );    
+          
+            return $_oDoc->saveXML( $_oDoc->documentElement );
+            
+        }
+    
+        /**
+         * Joins the given value if it is an array with the provided key.
+         * 
+         * For example, the subject array structure can be either
+         * `
+         * array(
+         *      'Content' => 'some contents...'
+         * )
+         * `
+         * or
+         * `
+         * array(
+         *      array(
+         *          'Content' => 'some contents...',
+         *      ),
+         *      array(
+         *          'Content' => 'some contents...',
+         *      ),
+         *      ...
+         * )
+         * `
+         * @return      string
+         */
+        protected function _getJoinedElements( $aParentArray, $sKey ) {
+            
+            if ( isset( $aParentArray[ $sKey ] ) ) { 
+                return ( string ) $aParentArray[ $sKey ]; 
+            }
+            
+            $_aElems = array();
+            foreach( $aParentArray as $_vElem ) {
+                if ( ! isset( $_vElem[ $sKey ] ) ) {
+                    continue;
+                }
+                $_aElems[] = $_vElem[ $sKey ];
+            }
+                    
+            return implode( '', $_aElems );        
+            
+        }    
  
 }

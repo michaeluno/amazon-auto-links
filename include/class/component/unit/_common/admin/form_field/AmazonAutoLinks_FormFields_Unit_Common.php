@@ -75,6 +75,15 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'default'       => -1,
             ),   
             array(
+                'field_id'      => $sFieldIDPrefix . 'description_length',
+                'type'          => 'number',
+                'title'         => __( 'Description Length', 'amazon-auto-links' ),
+                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
+                'default'       => 250,
+            ),                
+            array(
                 'field_id'          => $sFieldIDPrefix . 'link_style',
                 'type'              => 'radio',
                 'title'             => __( 'Link Style', 'amazon-auto-links' ),

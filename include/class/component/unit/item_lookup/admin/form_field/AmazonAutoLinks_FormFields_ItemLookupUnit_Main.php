@@ -104,17 +104,7 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
                 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
                     . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
-            ),                      
-            array(
-                'field_id'      => $sFieldIDPrefix . 'description_length',
-                'type'          => 'number',
-                'title'         => __( 'Description Length', 'amazon-auto-links' ),
-                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
-                'default'       => 250,
-            ),        
-        
+            ),                         
         );
         return $_aFields; 
         

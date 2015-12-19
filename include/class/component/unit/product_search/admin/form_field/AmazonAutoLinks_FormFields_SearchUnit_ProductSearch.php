@@ -92,15 +92,6 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'default'       => 'salesrank',
                 'description'   => __( 'When the search index is selected to <code>All</code>, this option does not take effect.', 'amazon-auto-links' ),
             ),                              
-            array(
-                'field_id'      => $sFieldIDPrefix . 'description_length',
-                'type'          => 'number',
-                'title'         => __( 'Description Length', 'amazon-auto-links' ),
-                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
-                'default'       => 250,
-            )
         );
         return $_aFields;
         

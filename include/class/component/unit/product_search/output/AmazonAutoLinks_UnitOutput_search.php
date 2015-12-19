@@ -529,35 +529,31 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 continue; 
             }
                 
-            $_sTitle = $this->sanitizeTitle( $_aItem[ 'ItemAttributes' ][ 'Title' ] );
+            $_sTitle = $this->getTitleSanitized( $_aItem[ 'ItemAttributes' ][ 'Title' ] );
             if ( $this->isTitleBlocked( $_sTitle ) ) { 
                 continue; 
             }
             
-            $_sThumbnailURL = isset( $_aItem[ 'MediumImage' ] ) 
-                ? $_aItem[ 'MediumImage' ][ 'URL' ] 
-                : null;
+            $_sThumbnailURL = $this->getElement(
+                $_aItem,
+                array( 'MediumImage', 'URL' )
+            );
             
             if ( ! $this->_isNoImageAllowed( $_sThumbnailURL ) ) {
                 continue;
             }
                 
-            $_sProductURL = $this->formatProductLinkURL( 
+            $_sProductURL  = $this->getProductLinkURLFormatted( 
                 rawurldecode( $_aItem[ 'DetailPageURL' ] ),
                 $_aItem[ 'ASIN' ] 
             );
 
-            $_sContent = isset( $_aItem[ 'EditorialReviews' ][ 'EditorialReview' ] ) 
-                ? $this->joinIfArray( 
-                    $_aItem[ 'EditorialReviews' ][ 'EditorialReview' ], 
-                    'Content' 
-                )
-                : '';
+            $_sContent     = $this->getContents( $_aItem );
                 
-            $_sDescription = $this->sanitizeDescription( 
+            $_sDescription = $this->getDescriptionSanitized( 
                 $_sContent, 
                 $this->oUnitOption->get( 'description_length' ), 
-                $_sProductURL 
+                $this->_getReadMoreText( $_sProductURL )
             );
             if ( $this->isDescriptionBlocked( $_sDescription ) ) { 
                 continue; 
@@ -571,12 +567,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 'ASIN'               => $_aItem[ 'ASIN' ],
                 'product_url'        => $_sProductURL,
                 'title'              => $_sTitle,
-                'text_description'   => $this->sanitizeDescription( $_sContent, 250 ),
-                'description'        => $_sDescription,
+                'text_description'   => $this->getDescriptionSanitized( $_sContent, 250 ),  // forced-truncated version of the contents
+                'description'        => $_sDescription, // reflects the user set character length
                 'meta'               => '',
                 'content'            => $_sContent,
                 'image_size'         => $this->oUnitOption->get( 'image_size' ),
-                'thumbnail_url'      => $this->_formatProductImageURL( 
+                'thumbnail_url'      => $this->_gettProductImageURLFormatted( 
                     $_sThumbnailURL, 
                     $this->oUnitOption->get( 'image_size' )
                 ),
@@ -823,35 +819,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 . "</div>";
 
         }
-              
-        /**
-         * Joins the given value if it is an array with the provided key.
-         * 
-         */
-        protected function joinIfArray( $aParentArray, $sKey ) {
-            
-            if ( isset( $aParentArray[ $sKey ] ) ) { 
-                return ( string ) $aParentArray[ $sKey ]; 
-            }
-            
-            $_aElems = array();
-            foreach( $aParentArray as $_vElem ) {
-                if ( ! isset( $_vElem[ $sKey ] ) ) {
-                    continue;
-                }
-                $_aElems[] = $_vElem[ $sKey ];
-            }
-                    
-            return implode( '', $_aElems );        
-            
-        }
-        
+                 
         /**
          * 
          * @since       unknown
          * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
          */
-        private function _formatProductImageURL( $sImageURL, $isImageSize ) {
+        private function _gettProductImageURLFormatted( $sImageURL, $isImageSize ) {
             
             // If no product image is found
             if ( ! $sImageURL ) {

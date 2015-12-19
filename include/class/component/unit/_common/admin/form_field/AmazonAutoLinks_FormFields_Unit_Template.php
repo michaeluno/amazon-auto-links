@@ -71,18 +71,19 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 ),
                 'default'           => $_aItemFormat['item_format'],
                 'description'       => __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%href%</code> - " . __( 'product link url', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%title%</code> - " . __( 'title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%title_text%</code> - " . __( 'title without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%image%</code> - " . __( 'thumbnail with HTML tags defined in the Image Format option', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%image%</code> - " . __( 'a thumbnail with HTML tags defined in the Image Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%image_set%</code> - " . __( 'sub-images.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%description%</code> - " . __( 'description with HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%description_text%</code> - " . __( 'description without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%price%</code> - " . __( 'product price.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%description%</code> - " . __( 'a description with HTML tags', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%description_text%</code> - " . __( 'a description without HTML tags', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%price%</code> - " . __( 'a product price.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer review.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%button%</code> - " . __( 'store link button.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%disclaimer%</code> - " . __( 'disclaimer for the product information.', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer reviews.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%button%</code> - " . __( 'a store link button.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%disclaimer%</code> - " . __( 'a disclaimer for the product information.', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description .', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         . ( $_bAPIConnected
                             ? null
                             : sprintf(

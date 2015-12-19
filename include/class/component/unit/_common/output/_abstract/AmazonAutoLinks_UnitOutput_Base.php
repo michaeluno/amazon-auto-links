@@ -107,10 +107,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
             $this->oUnitProductFilter->bNoDuplicate = false;
         }
         
-        $this->bDBTableAccess    = $this->_hasCustomVariable( 
-            $this->oUnitOption->get( 'item_format' ),
-            array( '%price%', '%review%', '%rating%', '%image_set%' )
-        );
+        $this->bDBTableAccess    = $this->_hasCustomDBTableAccess();
         
         // Sanitize product title for sorting.
         add_filter(
@@ -119,8 +116,27 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
             10,
             2
         );
-        
+ 
     }   
+    
+        /**
+         * Checks whether the unit needs to access the plugin custom database table.
+         * 
+         * @remark      For the category unit type, the %description%, %content%, and %price% variables need to access the database table 
+         * and it requires the API to be connected.
+         * 
+         * @since       3.3.0
+         * @return      boolean
+         */
+        protected function _hasCustomDBTableAccess() {
+// @todo add %similar_products%
+            return $this->_hasCustomVariable( 
+                $this->oUnitOption->get( 'item_format' ),
+                array( '%price%', '%review%', '%rating%', '%image_set%' )
+            );        
+            
+        }
+    
         /**
          * Checks if a given custom variable(s) exists in a subject string.
          * @return      boolean

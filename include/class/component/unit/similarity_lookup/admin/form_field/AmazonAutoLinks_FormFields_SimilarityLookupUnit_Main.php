@@ -71,16 +71,7 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
                 'attributes'    => array(
                     'readonly' => true,
                 ),
-            ),                                 
-            array(
-                'field_id'      => $sFieldIDPrefix . 'description_length',
-                'type'          => 'number',
-                'title'         => __( 'Description Length', 'amazon-auto-links' ),
-                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
-                'default'       => 250,
-            )
+            ),                                
         );
         return $_aFields;
         

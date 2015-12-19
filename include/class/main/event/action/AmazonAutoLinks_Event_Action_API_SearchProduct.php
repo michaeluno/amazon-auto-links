@@ -168,7 +168,7 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                         $aAPIResponseProductData,
                         array( 'SimilarProducts', 'SimilarProduct' )
                     ),        
-// @todo    Append amazon review as well                    
+
                     'editorial_reviews'  => $this->getElement(
                         $aAPIResponseProductData,
                         array( 'EditorialReviews', 'EditorialReview' )
@@ -176,6 +176,12 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                                         
                     // 'description'        => null,   // (string) product details
 
+                    // @todo Add the browse_nodex column
+                    // 'browse_nodes'    => $this->getElement(
+                        // $aAPIResponseProductData,
+                        // array( 'BrowseNodes', 'BrowseNode' )                        
+                    // ),
+                    
                 ); 
                 
                 // Retrieve or calculate a discounted price.

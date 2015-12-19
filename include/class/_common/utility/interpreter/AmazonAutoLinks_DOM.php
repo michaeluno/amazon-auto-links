@@ -14,7 +14,7 @@
  * @since       2.0.0
  * @since       3       Extends `AmazonAutoLinks_WPUtility`.
  */
-final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
+class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     
     /**
      * Sets up properties.
@@ -31,10 +31,14 @@ final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     /**
      * Creates a DOM object from a given HTML string.
      * 
+     * @remark      To output the modified HTML, perform 
+     * `
+     * $_oDoc->saveXML( $_oDoc->documentElement );
+     * `
      * @return      object      DOM object
      */
     public function loadDOMFromHTMLElement( $sHTMLElements, $sMBLang='uni', $sSourceCharSet='' ) {
-                
+
         return $this->loadDOMFromHTML( 
             // Enclosing in a div tag prevents from inserting the comment <!-- xml version .... --> when using saveXML() later.
             '<div>' 
@@ -236,7 +240,7 @@ final class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     }
     
     /**
-     * @return      sring       Returns an outer HTML output of a specified tag.       
+     * @return      string       Returns an outer HTML output of a specified tag.       
      * @since       3.2.0
      */
     public function getTagOuterHTML( $oDoc, $sTag, $iIndex=0 ) {
