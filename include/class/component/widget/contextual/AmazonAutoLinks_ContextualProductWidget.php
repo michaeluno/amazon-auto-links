@@ -92,12 +92,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         }
         
         $_aClasses = array(
-            // 'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
-            // 'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
-            // 'AmazonAutoLinks_FormFields_Button_Selector',
+            'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
+            'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
+            'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
             'AmazonAutoLinks_FormFields_Unit_Template',
-            // 'AmazonAutoLinks_FormFields_Widget_Visibility',
+            'AmazonAutoLinks_FormFields_Widget_Visibility',
         );
         $this->_addFieldsByFieldClass( $_aClasses );
         
@@ -120,7 +120,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         // Add fields 
         $this->_addFieldsByFieldClass(
             array(
-                // 'AmazonAutoLinks_FormFields_ProductFilter',
+                'AmazonAutoLinks_FormFields_ProductFilter',
                 'AmazonAutoLinks_FormFields_ProductFilter_Image',
             )
         );
