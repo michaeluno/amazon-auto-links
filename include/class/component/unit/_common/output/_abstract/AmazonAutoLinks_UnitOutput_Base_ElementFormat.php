@@ -809,7 +809,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             if ( 1 >= $_iHighestHTag ) {
                 return $sContents;
             }
-            
+           
             $_aSearches = $_aReplaces = array();
             $_iOffset   = $_iHighestHTag - 1; // for example the user wants h3 to be the highest, the offset will be 2
             for( $_i = 5; $_i >= 1; $_i-- ) {
@@ -828,7 +828,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_oDoc
             );    
           
-            return $_oDoc->saveXML( $_oDoc->documentElement );
+            return $_oDoc->saveXML( $_oDoc->documentElement, LIBXML_NOEMPTYTAG );
             
         }
     

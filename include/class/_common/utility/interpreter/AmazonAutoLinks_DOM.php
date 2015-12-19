@@ -33,7 +33,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * 
      * @remark      To output the modified HTML, perform 
      * `
-     * $_oDoc->saveXML( $_oDoc->documentElement );
+     * $_oDoc->saveXML( $_oDoc->documentElement, LIBXML_NOEMPTYTAG );
      * `
      * @return      object      DOM object
      */
@@ -247,7 +247,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         $_oXpath           = new DOMXPath( $oDoc );               
         $_oTags            = $_oXpath->query( "/html/{$sTag}" );
         $_oTag             = $_oTags->item( $iIndex );
-        return $oDoc->saveXml( $_oTag );                                    
+        return $oDoc->saveXml( $_oTag, LIBXML_NOEMPTYTAG );                                    
     }    
  
 }
