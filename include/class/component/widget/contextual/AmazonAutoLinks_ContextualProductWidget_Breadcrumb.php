@@ -30,6 +30,22 @@ class AmazonAutoLinks_ContextualProductWidget_Breadcrumb extends AmazonAutoLinks
         return array_filter( $_aBreadcrumbs );
     
     }       
+
+    /**
+     * 
+     * @return  array
+     */
+    private function _getItemsByType_home() {
+        return array( get_bloginfo( 'name' ) );
+    }
+    /**
+     * 
+     * @return  array
+     */
+    private function _getItemsByType_front() {
+        return array( get_bloginfo( 'name' ) );
+    }
+        
     
     /**
      * 
