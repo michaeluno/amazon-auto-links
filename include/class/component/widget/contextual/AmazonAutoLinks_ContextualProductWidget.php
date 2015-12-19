@@ -39,7 +39,13 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToModifyCSSRules' ) );
         
+        add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'replyToSetDefaultOptions' ) );        
+        
+        
     }    
+        /**
+         * @return      string
+         */
         public function replyToModifyCSSRules( $sCSSRules ) {
             
             return $sCSSRules
@@ -62,6 +68,17 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 ';
             
         }
+        
+        /**
+         * Sets the default options.
+         * @return      array
+         * @since       3.3.0
+         */
+        public function replyToSetDefaultOptions( $aOptions ) {          
+            $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
+            return $aOptions + $_aDefaults;
+        }
+        
 
     /**
      * Sets up the form.
@@ -83,6 +100,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                             AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
                         ),
                     ),
+                    'save'        => false,
                     'attributes'  => array(
                         'name' => '',
                     ),
@@ -93,6 +111,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         
         $_aClasses = array(
             'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
+            'AmazonAutoLinks_FormFields_Unit_Common',
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
@@ -199,12 +218,16 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      */
     public function validate( $aSubmit, $aStored, $oAdminWidget ) {
         
-        // Uncomment the following line to check the submitted value.
-        // AdminPageFramework_Debug::log( $aSubmit );
-        
+        // When the user does not set the API keys, an empty widget form will be rendered and thus inputs will be empty.
+        if ( empty( $aSubmit ) ) {
+            return $aSubmit;
+        }
+
+        $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
+        $aSubmit    = $aSubmit + $_aDefaults;
         $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aSubmit, $aStored );
-        $aSubmit = $_oItemFormatValidator->get();
-        
+        $aSubmit    = $_oItemFormatValidator->get();
+
         return $aSubmit;
         
     }        

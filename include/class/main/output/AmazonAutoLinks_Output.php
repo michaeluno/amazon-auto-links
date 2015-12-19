@@ -64,8 +64,8 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         $_aIDs = array();
 
         // The id parameter - the id parameter can accept comma delimited ids.
-        if ( isset( $this->aArguments['id'] ) ) {
-            if ( is_string( $this->aArguments['id'] ) || is_integer( $this->aArguments['id'] ) ) {
+        if ( isset( $this->aArguments[ 'id' ] ) ) {
+            if ( is_string( $this->aArguments[ 'id' ] ) || is_integer( $this->aArguments[ 'id' ] ) ) {
                 $_aIDs = array_merge( 
                     $this->convertStringToArray( 
                         $this->aArguments[ 'id' ], 

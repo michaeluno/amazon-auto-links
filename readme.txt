@@ -225,7 +225,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `%content%` variable for the full product description to the Item Format unit option.
 - Added the RSS Content Tag option that lets the user decide whether a complete product output should be in the `<description>` tag or the `<content>` tag in the feed.
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
-- Fixed a bug with the contextual widget which caused a fatal error when the user enabled `Breadcrumb` in the `Additional Criteria` option and enabled `The home page` in the `Available` Page Type` option.
+- Fixed a bug with the contextual product widget which caused Item Format option to be empty when the user first add the widget without connecting to the API.
+- Fixed a bug with the contextual product widget which caused a fatal error when the user enabled `Breadcrumb` in the `Additional Criteria` option and enabled `The home page` in the `Available` Page Type` option.
 - Fixed a bug that custom database table versions were not saved properly and caused extra database queries.
 - Reduced the number of database queries in widget forms.
 - Changed the `%description%` variable of the `Category` unit type to include description produced by Amazon Product Advertising API if the user has authenticated the plugin.

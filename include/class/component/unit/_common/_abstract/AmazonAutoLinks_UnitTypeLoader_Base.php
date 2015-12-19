@@ -47,11 +47,31 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToGetProtectedMetaKeys' ) );
             
         }
+                
+        add_filter( 'aal_filter_default_unit_options_' . $this->sUnitTypeSlug, array( $this, 'replyToGetDefaultUnitOptions' ) ); 
         
         $this->construct( $sScriptPath );
         
-        
     }    
+    
+        /**
+         * @return      array
+         * @sinec       3.3.0
+         */
+        public function replyToGetDefaultUnitOptions( $aUnitOptions ) {
+            
+            if ( empty( $this->sUnitTypeSlug ) ) {
+                return $aUnitOptions;
+            }
+        
+            $_sClassName   = "AmazonAutoLinks_UnitOption_{$this->sUnitTypeSlug}";
+            $_oUnitOptions = new $_sClassName(
+                null,   // unit id
+                array() // arguments
+            );        
+            return $_oUnitOptions->get();
+            
+        }    
     
         /**
          * @since       3.3.0
