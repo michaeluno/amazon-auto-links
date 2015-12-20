@@ -128,9 +128,6 @@ public function replyToSetUnitLabels( $aFieldset ) {
      */
     public function validate( $aSubmit, $aStored, $oAdminWidget ) {
         
-        // Uncomment the following line to check the submitted value.
-        // AdminPageFramework_Debug::log( $aSubmit );
-        
         return $aSubmit;
         
     }    

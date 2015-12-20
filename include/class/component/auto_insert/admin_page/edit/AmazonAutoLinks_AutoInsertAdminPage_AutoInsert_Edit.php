@@ -130,21 +130,11 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             $this->getSanitizedAutoInsertMeta( $aInput )
         );                            
         
-        $this->_updateActiveAutoInsertItems();
+        do_action( 'aal_action_update_active_auto_insert' );
         
         return $aInput;
         
     }
-        /**
-         * 
-         */
-        protected function _updateActiveAutoInsertItems() {
-            update_option( 
-                AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ],
-                $this->getActiveAutoInsertIDs(),
-                true   // enable auto-load
-            );
-        }
     
         /**
          * 
@@ -155,8 +145,8 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
                 $iPostID, 
                 $aMeta
             );            
-            
         }
+        
         /**
          * 
          * @access      protected as the ..._New class extends this class and acess this method.

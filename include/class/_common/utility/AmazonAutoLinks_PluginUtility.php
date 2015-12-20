@@ -18,7 +18,10 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Returns the auto-insert ids.
      * 
-     * 
+     * @remark      Do not cache the result as this method can be called multiple times in one page-load.
+     * When an auto-insert post is about to be published, the callback for the `transition_post_status` action is triggered and calls this method. However, it is too early 
+     * so the plugin triggers another callback after the post is completely published. So in that case, the method gets called twice. 
+     * The callback for the `transition_post_status` hook is needed for user's trashing/restoring posts.
      * @since       3.3.0
      * @return      array
      */
