@@ -1,18 +1,22 @@
 (function($){
     
     $( document ).ready( function() {
-    
+        
         var _setPreviewButton = function( iButtonID, oThis ) {
-            
+        
+            if ( 'undefined' === typeof aal_button_preview_labels ) {
+                return false;
+            }
+        
             oThis.closest( 'fieldset' )
                 .find( '.amazon-auto-links-button' )
                 .each( function(){
-                    // console.log( $( this ).attr( 'class' ) );
+                    
                     $( this ).attr( 
-                        'class', // the suject attribute name
+                        'class', // the subject attribute name
                         'amazon-auto-links-button amazon-auto-links-button-' + iButtonID // value
                     );   
-                    if( undefined !== aal_button_preview_labels[ iButtonID ] ) {
+                    if( 'undefined' !== typeof aal_button_preview_labels[ iButtonID ] ) {
                         $( this ).text( aal_button_preview_labels[ iButtonID ] );
                     }
                     
