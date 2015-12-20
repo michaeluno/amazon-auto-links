@@ -130,7 +130,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             $this->getSanitizedAutoInsertMeta( $aInput )
         );                            
         
-        do_action( 'aal_action_update_active_auto_insert' );
+        do_action( 'aal_action_update_active_auto_inserts' );
         
         return $aInput;
         

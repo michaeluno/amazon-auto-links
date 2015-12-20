@@ -92,25 +92,26 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     static public $aOptionKeys = array(
     
-        'main'              => 'amazon_auto_links', // used to be const AdminOptionKey          
-        'template'          => 'amazon_auto_links_templates',
-        'button_css'        => 'amazon_auto_links_button_css',
+        'main'                  => 'amazon_auto_links', // used to be const AdminOptionKey          
+        'template'              => 'amazon_auto_links_templates',
+        'button_css'            => 'amazon_auto_links_button_css',
         
-        // 3.3.0+
-        'auto_insert'       => 'amazon_auto_links_auto_insert',
+        // 3.3.0+ Stores active auto-insert items.
+        'active_auto_inserts'   => 'amazon_auto_links_active_auto_inserts',
+        'active_buttons'        => 'amazon_auto_links_active_buttons',
         
         // 3.2.0+
-        'last_input'        => 'amazon_auto_links_last_input',
+        'last_input'            => 'amazon_auto_links_last_input',
         
-        'table_versions'    => array(
+        'table_versions'        => array(
             // $aDatabaseTables property key => {table name}_version
             'product'       => 'aal_products_version',
             'request_cache' => 'aal_request_cache_version',
         ),
         
         // Legacy option keys - not used and should be deleted on uninstall.
-        'v1'                => 'amazonautolinks',
-        'v2'                => 'amazon_auto_links_admin',
+        'v1'                    => 'amazonautolinks',
+        'v2'                    => 'amazon_auto_links_admin',
         
     );
         

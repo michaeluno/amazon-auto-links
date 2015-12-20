@@ -14,9 +14,39 @@
  * @since       3       
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
-       
+    
     /**
-     * Returns the auto-insert ids.
+     * Returns the active auto-insert ids.
+     * @sine        3.3.0
+     * @return      array
+     */
+    static public function getActiveAutoInsertIDs() {
+        
+        static $_aCache;
+        if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }            
+        
+        $_abActiveAutoInsertIDs = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'active_auto_inserts' ] );
+        if ( false !== $_abActiveAutoInsertIDs ) {
+             $_aCache = self::getAsArray( $_abActiveAutoInsertIDs );
+            return $_aCache;
+        }
+        
+        // Backward compatibility - if the option is not set, query the database.
+        $_aActiveAutoInsertIDs = self::getActiveAutoInsertIDsQueried();
+        update_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'active_auto_inserts' ],
+            $_aActiveAutoInsertIDs,
+            true   // enable auto-load
+        );           
+        $_aCache = $_aActiveAutoInsertIDs;
+        return $_aCache;
+        
+    }
+    
+    /**
+     * Returns the active auto-insert ids.
      * 
      * @remark      Do not cache the result as this method can be called multiple times in one page-load.
      * When an auto-insert post is about to be published, the callback for the `transition_post_status` action is triggered and calls this method. However, it is too early 
@@ -25,7 +55,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @since       3.3.0
      * @return      array
      */
-    static public function getActiveAutoInsertIDs() {
+    static public function getActiveAutoInsertIDsQueried() {
         $_oQuery = new WP_Query(
             array(
                 'post_status'    => 'publish',     // optional
@@ -235,13 +265,35 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      */
     static public function getActiveButtonIDs() {
 
-// @todo use the options table to auto-load active buttons.    
         static $_aCache;
-        
         if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }    
+    
+        $_abActiveIDs = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'active_buttons' ] );
+        if ( false !== $_abActiveIDs ) {
+            $_aCache = self::getAsArray( $_abActiveIDs );
             return $_aCache;
         }
         
+        // Backward compatibility - if the option is not set, query the database.
+        $_aActiveIDs = self::getActiveButtonIDsQueried();
+        update_option( 
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'active_buttons' ],
+            $_aActiveIDs,
+            true   // enable auto-load
+        );      
+        $_aCache = $_aActiveIDs;
+        return $_aCache;
+        
+    }  
+    
+    /**
+     * Queries active buttons without caches.
+     * @since       3.3.0
+     * @return      array
+     */
+    static public function getActiveButtonIDsQueried() {
         $_oQuery = new WP_Query(
             array(
                 'post_status'    => 'publish',     // optional
@@ -250,10 +302,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
                 'fields'         => 'ids',  // return an array of post IDs
             )
         );       
-        $_aCache = $_oQuery->posts;                
-        return $_aCache;
-        
-    }        
+        return $_oQuery->posts;
+    }
 
     /**
      * Returns a button output by a given button (custom post) ID.

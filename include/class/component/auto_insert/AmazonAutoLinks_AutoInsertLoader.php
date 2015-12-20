@@ -43,41 +43,32 @@ class AmazonAutoLinks_AutoInsertLoader {
         }
     
         // Update auto-insert status change
-        add_action( 'transition_post_status', array( $this, 'replyToCheckActiveAutoInsertStatusChange' ), 10, 3 );    
-        add_action( 'aal_action_update_active_auto_insert', array( $this, 'replyToUpdateActiveAutoInsert' ) );
+        add_action( 'publish_' . AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ], array( $this, 'replyToCheckActiveAutoInsertStatusChange' ), 10, 2 );
+        add_action( 'trash_' . AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ], array( $this, 'replyToCheckActiveAutoInsertStatusChange' ), 10, 2 );    
+        add_action( 'aal_action_update_active_auto_inserts', array( $this, 'replyToUpdateActiveAutoInsert' ) );
     
     }    
         /**
          * @remark      When an auto-insert is created or edited, this method will be called too early from the system.
          * However, this hook is also triggered when the user trashes the auto-insert item from the action link in the post listing table. 
          * @since       3.3.0
-         * @callback    filter      transition_post_status
+         * @callback    filter      "{new post status}_{post type slug}"
          * @return      string
          */
-        public function replyToCheckActiveAutoInsertStatusChange( $sNewStatus, $sOldStatus, $oPost ) {
-            
-            if ( AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ] !== $oPost->post_type ) {
-                return $sNewStatus;
-            }
-            
-            // At this point, the post status of auto-insert has been changed.
-            if ( $sNewStatus !== $sOldStatus ) {                
-                do_action( 'aal_action_update_active_auto_insert' );
-            }
-            
-            return $sNewStatus;
-            
+        public function replyToCheckActiveAutoInsertStatusChange( $iPostID, $oPost ) {           
+            do_action( 'aal_action_update_active_auto_inserts' );
         }
     
         /**
          * Updates the active auto-insert items.
          * @since           3.3.0
-         * @callback        action      aal_action_update_active_auto_insert
+         * @callback        action      aal_action_update_active_auto_inserts
          */
         public function replyToUpdateActiveAutoInsert() {
+            $_aActiveIDs = AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDsQueried();
             update_option( 
-                AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ],
-                AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDs(),
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'active_auto_inserts' ],    // key
+                $_aActiveIDs, // data
                 true   // enable auto-load
             );            
         }

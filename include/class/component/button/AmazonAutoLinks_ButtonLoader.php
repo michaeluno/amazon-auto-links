@@ -45,9 +45,41 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
             
-        }                 
+        }        
+
+        // Update button post status change
+        add_action( 'publish_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 2 );
+        add_action( 'trash_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 2 );            
+        // add_action( 'transition_post_status', array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 3 );    
+        add_action( 'aal_action_update_active_buttons', array( $this, 'replyToUpdateActiveItems' ) );
+            
         
     }
+        
+        /**
+         * @remark      When a button is created or edited, this method will be called too early from the system.
+         * However, this hook is also triggered when the user trashes the item from the action link in the post listing table. 
+         * @since       3.3.0
+         * @callback    filter      {new post status}_{post type slug}
+         * @return      string
+         */
+        public function replyToCheckActiveItemStatusChange( $iPostID, $oPost ) {
+            do_action( 'aal_action_update_active_buttons' );
+        }
+    
+        /**
+         * Updates the active auto-insert items.
+         * @since           3.3.0
+         * @callback        action      aal_action_update_active_buttons
+         */
+        public function replyToUpdateActiveItems() {
+            $_aActiveIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDsQueried();
+            update_option( 
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'active_buttons' ],
+                $_aActiveIDs,
+                true   // enable auto-load
+            );            
+        }        
         
         /**
          * @return      array

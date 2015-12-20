@@ -65,7 +65,7 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
      */
     public function _replyToSetUpHooks() {
         
-        $this->aAutoInsertIDs = $this->_getActiveAutoInsertIDs();
+        $this->aAutoInsertIDs = $this->getActiveAutoInsertIDs();
         if ( 0 == count( $this->aAutoInsertIDs ) ) { 
             return; 
         }
@@ -104,25 +104,7 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
         }
 
     }
-    
-        /**
-         * Returns the auto-insert ids.
-         * 
-         * @return  array
-         */
-        protected function _getActiveAutoInsertIDs() {
-            
-            // 3.3.0+
-            $_abActiveAutoInsertIDs = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'auto_insert' ] );
-            if ( false !== $_abActiveAutoInsertIDs ) {
-                return $this->getAsArray( $_abActiveAutoInsertIDs );
-            }
-            
-            // Backward compatibility - if the option is not set, query the database.
-            return $this->getActiveAutoInsertIDs();
-
-        }    
-    
+        
         protected function getFilters( $aAutoInsertOptions ) {
 
             $aFilterHooks = array();    

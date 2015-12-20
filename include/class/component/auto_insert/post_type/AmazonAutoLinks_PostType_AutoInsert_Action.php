@@ -109,7 +109,7 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
             $_bIsEnabled = get_post_meta( $_GET[ 'post' ], 'status', true );
             update_post_meta( $_GET[ 'post' ], 'status', ! $_bIsEnabled );
             
-            do_action( 'aal_action_update_active_auto_insert' );
+            do_action( 'aal_action_update_active_auto_inserts' );
                         
         }
     
