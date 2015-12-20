@@ -50,10 +50,8 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
         // Update button post status change
         add_action( 'publish_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 2 );
         add_action( 'trash_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 2 );            
-        // add_action( 'transition_post_status', array( $this, 'replyToCheckActiveItemStatusChange' ), 10, 3 );    
         add_action( 'aal_action_update_active_buttons', array( $this, 'replyToUpdateActiveItems' ) );
-            
-        
+                    
     }
         
         /**

@@ -47,15 +47,42 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         );            
         new AmazonAutoLinks_PostType_UnitPreview;            
         
-        // Unit types.
+        // Unit types
         new AmazonAutoLinks_UnitTypeLoader_category( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_tag( $sScriptPath );  
         new AmazonAutoLinks_UnitTypeLoader_search( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_item_lookup( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_similarity_lookup( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_url( $sScriptPath );
-
+        
+        // Unit specific events
+        add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
+        
     }
+    
+        /**
+         * @callback        action      aal_action_events
+         */
+        public function replyToLoadEvents() {
+
+            new AmazonAutoLinks_Event_Action_UnitPrefetch(
+                'aal_action_unit_prefetch'
+            );
+            
+            new AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal(
+                'aal_action_api_transient_renewal'
+            );
+                    
+            new AmazonAutoLinks_Event_Action_API_SearchProduct(
+                'aal_action_api_get_product_info'
+            );
+            
+            new AmazonAutoLinks_Event_Action_CustomerReview(
+                'aal_action_api_get_customer_review'
+            );        
+            
+        }
+        
     
     /**
      * Loads necessary components.

@@ -24,14 +24,15 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
     public function construct( $oFactory ) {
         
         // Tabs
-        new AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'template_option_converter',
-                'title'     => __( 'Template Option Converter', 'amazon-auto-links' ),
-            )
-        );
+        // @deprecated 3.3.0
+        // new AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter( 
+            // $this->oFactory,
+            // $this->sPageSlug,
+            // array( 
+                // 'tab_slug'  => 'template_option_converter',
+                // 'title'     => __( 'Template Option Converter', 'amazon-auto-links' ),
+            // )
+        // );
      
     }   
     

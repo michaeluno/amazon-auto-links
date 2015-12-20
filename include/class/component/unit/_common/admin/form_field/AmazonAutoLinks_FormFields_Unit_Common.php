@@ -22,6 +22,9 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'type'          => 'text',
                 'title'         => __( 'Associate ID', 'amazon-auto-links' ),
                 'description'   => 'e.g. <code>miunosoft-20</code>',
+                'attributes'    => array(
+                    'required'  => 'required',
+                ),
             ),        
             array(
                 'field_id'      => 'count',

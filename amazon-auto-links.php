@@ -100,6 +100,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'active_auto_inserts'   => 'amazon_auto_links_active_auto_inserts',
         'active_buttons'        => 'amazon_auto_links_active_buttons',
         
+        // 3.3.0+ The Tools page - to remember last inputs
+        'tools'                 => 'amazon_auto_links_tools',
+        
         // 3.2.0+
         'last_input'            => 'amazon_auto_links_last_input',
         

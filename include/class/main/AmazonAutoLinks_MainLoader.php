@@ -34,7 +34,7 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
         AmazonAutoLinks_Option::getInstance();            
         
         // Events
-        new AmazonAutoLinks_Event;    
+        new AmazonAutoLinks_Event;               
                 
         // Outputs
         new AmazonAutoLinks_Credit;            
@@ -58,6 +58,7 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
         }                 
         
     }
+    
         /**
          * @callback    action      current_screen
          * @since       3.3.0

@@ -199,12 +199,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                
         // Load sub-components
         $this->_loadComponents();
-            
-        /// Admin only sub-components
-        if ( $this->bIsAdmin ) {
-            $this->_loadAdminComponents();            
-        }
-                
+                            
         // Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
         
@@ -236,27 +231,36 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // Widgets
             new AmazonAutoLinks_WidgetsLoader;                 
             
-        }
-        /**
-         * @since       3.3.0
-         * @return      void
-         */
-        private function _loadAdminComponents() {
-                        
-            new AmazonAutoLinks_SettingsAdminPageLoader;
-            
-            new AmazonAutoLinks_ToolAdminPage(
-                '', // no options
-                $this->sFilePath 
-            );
-            new AmazonAutoLinks_HelpAdminPage(
-                '', // no options
-                $this->sFilePath 
-            );
-            
-            new AmazonAutoLinks_InfoBoxLoader;
+            // Tools - Unit option converter. This component has an event handler so needs to be loaded in the front-end as well.
+            new AmazonAutoLinks_UnitOptionConverterLoader;
+                            
+            /// Admin only sub-components
+            if ( $this->bIsAdmin ) {
+                $this->_loadAdminComponents();            
+            }            
             
         }
+            /**
+             * @since       3.3.0
+             * @return      void
+             */
+            private function _loadAdminComponents() {
+                            
+                new AmazonAutoLinks_SettingsAdminPageLoader;
+                
+                new AmazonAutoLinks_ToolAdminPage(
+                    AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ],
+                    $this->sFilePath 
+                );
+                new AmazonAutoLinks_HelpAdminPage(
+                    '', // no options
+                    $this->sFilePath 
+                );
+                
+                new AmazonAutoLinks_InfoBoxLoader;
+             
+                
+            }
         
         /**
          * Includes additional files.
