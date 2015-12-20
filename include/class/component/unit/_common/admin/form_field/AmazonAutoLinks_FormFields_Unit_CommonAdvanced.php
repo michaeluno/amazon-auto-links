@@ -75,6 +75,7 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'attributes'        => array(
                     'min'   => 1,
                     'step'  => 1,
+                    'max'   => 6,
                 ),  
                 'default'           => 5,
             ),             

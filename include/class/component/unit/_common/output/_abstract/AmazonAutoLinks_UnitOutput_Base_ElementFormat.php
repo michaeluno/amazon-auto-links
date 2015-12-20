@@ -791,86 +791,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             array( 'EditorialReviews', 'EditorialReview' )
         );
                 
-        $_sContents = $this->_getJoinedElements( $_aEditorialReviews, 'Content' );
-        $_sContents = $this->_getContentsSanitized( $_sContents );
+        $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
+            $_aEditorialReviews,
+            $this->oDOM,
+            $this->oUnitOption
+        );
+        $_sContents = $_oContentFormatter->get();                
         
         return "<div class='amazon-product-content'>"
                 . $_sContents
             . "</div>";
 
     }        
-        /**
-         * @return      string
-         * @since       3.3.0
-         */
-        protected function _getContentsSanitized( $sContents ) {
 
-            $_iHighestHTag = ( integer ) $this->oUnitOption->get( 'highest_content_heading_tag_level' );
-            if ( 1 >= $_iHighestHTag ) {
-                return $sContents;
-            }
-           
-            $_aSearches = $_aReplaces = array();
-            $_iOffset   = $_iHighestHTag - 1; // for example the user wants h3 to be the highest, the offset will be 2
-            for( $_i = 5; $_i >= 1; $_i-- ) {
-                $_aSearches[] = "h{$_i}";
-                $_aReplaces[] = "h" . min( $_i + $_iOffset, 6 ); // up to h6
-            }
-            
-            $_oDoc = $this->oDOM->loadDOMFromHTMLElement( $sContents );
-            $this->oDOM->removeTags( $_oDoc, array( 'br' ) );
-            
-            // Modify the DOM document object
-            $_oHeaderRenamer = new AmazonAutoLinks_RenameTags;
-            $_oHeaderRenamer->rename(
-                $_aSearches,
-                $_aReplaces,
-                $_oDoc
-            );    
-          
-            return $_oDoc->saveXML( $_oDoc->documentElement, LIBXML_NOEMPTYTAG );
-            
-        }
-    
-        /**
-         * Joins the given value if it is an array with the provided key.
-         * 
-         * For example, the subject array structure can be either
-         * `
-         * array(
-         *      'Content' => 'some contents...'
-         * )
-         * `
-         * or
-         * `
-         * array(
-         *      array(
-         *          'Content' => 'some contents...',
-         *      ),
-         *      array(
-         *          'Content' => 'some contents...',
-         *      ),
-         *      ...
-         * )
-         * `
-         * @return      string
-         */
-        protected function _getJoinedElements( $aParentArray, $sKey ) {
-            
-            if ( isset( $aParentArray[ $sKey ] ) ) { 
-                return ( string ) $aParentArray[ $sKey ]; 
-            }
-            
-            $_aElems = array();
-            foreach( $aParentArray as $_vElem ) {
-                if ( ! isset( $_vElem[ $sKey ] ) ) {
-                    continue;
-                }
-                $_aElems[] = $_vElem[ $sKey ];
-            }
-                    
-            return implode( '', $_aElems );        
-            
-        }    
- 
+     
 }

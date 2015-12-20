@@ -144,10 +144,14 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             array(),   // default
             $aScheduleIdentifier
         );    
-    
-        $_sContents = $this->_getJoinedElements( $_aReviews, 'Content' );
-        $_sContents = $this->_getContentsSanitized( $_sContents );
         
+        $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
+            $_aReviews,
+            $this->oDOM,
+            $this->oUnitOption
+        );
+        $_sContents = $_oContentFormatter->get();
+                
         return "<div class='amazon-product-content'>"
                 . $_sContents
             . "</div>";

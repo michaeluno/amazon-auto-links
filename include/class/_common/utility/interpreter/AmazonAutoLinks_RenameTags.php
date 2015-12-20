@@ -16,29 +16,25 @@
 class AmazonAutoLinks_RenameTags extends AmazonAutoLInks_DOM {
         
     /**
-     * 
+     * Renames HTML tags.
      */
-    public function rename( $asSearches, $asReplaces, $osHTMLORDOM ) {
+    public function rename( $asSearches, $asReplaces, $oDOM ) {
 
-        if ( is_string( $osHTMLORDOM ) ) {
-            $_oDOM      = $this->loadDOMFromHTMLElement( $osHTMLORDOM );
-        }
-        $_oDOM = $osHTMLORDOM;
     
         $_aSearches = $this->getAsArray( $asSearches );
         $_aReplaces = $this->getAsArray( $asReplaces );
 
         foreach( $_aSearches as $_iIndex => $_sSearchTag ) {
             
-            $_oXpath = new DOMXPath( $_oDOM );
+            $_oXpath = new DOMXPath( $oDOM );
             $_oNodes = $_oXpath->query( 
-                "//*/{$_sSearchTag}" 
+                ".//{$_sSearchTag}" // "//*/{$_sSearchTag}" 
             );            
             
             foreach( $_oNodes as $_oNode ) {
                 $_sReplace = isset( $_aReplaces[ $_iIndex ] )
                     ? $_aReplaces[ $_iIndex ]
-                    : $_aReplaces[ 0 ];                    
+                    : $_aReplaces[ 0 ];  
                 $this->_renameTag( $_oNode, $_sReplace );
             }                    
                         
@@ -59,9 +55,9 @@ class AmazonAutoLinks_RenameTags extends AmazonAutoLInks_DOM {
             
             $_oRenamed = $oNode->ownerDocument->createElement( $sTagName );
 
-            foreach ( $oNode->attributes as $attribute ) {
-                $_oRenamed->setAttribute( $attribute->nodeName, $attribute->nodeValue );
-            }
+            // foreach ( $oNode->attributes as $attribute ) {
+                // $_oRenamed->setAttribute( $attribute->nodeName, $attribute->nodeValue );
+            // }
 
             while ( $oNode->firstChild ) {
                 $_oRenamed->appendChild( $oNode->firstChild );
