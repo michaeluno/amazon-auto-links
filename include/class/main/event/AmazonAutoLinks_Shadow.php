@@ -323,7 +323,7 @@ class AmazonAutoLinks_Shadow {
          * 
          * @since            1.0.0
          */
-        private function _loadBackgroundPageWithDelay( $iSecond=1, $aGet=array() ) {
+        static private function _loadBackgroundPageWithDelay( $iSecond=1, $aGet=array() ) {
             
             sleep( $iSecond );
             

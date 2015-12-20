@@ -162,3 +162,14 @@
     border-radius:4px;
     box-shadow: 5px 5px 8px #CCC;
 }
+
+/* Content in Widgets*/
+.widget .amazon-products-container-search .amazon-product-content *
+{
+    width: auto; 
+    display: inline-block;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+        
+}
