@@ -25,7 +25,7 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
      * 'title_decending'
      * 'random' 
      */
-    public $sSortOrder = 'date_decending';
+    public $sSortOrder = 'date';
     
     /**
      * Sets up properties
@@ -63,9 +63,10 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
                 shuffle( $aItems );
                 return;
             }
+            $_sSortOrder = $this->sSortOrder;
             usort( 
                 $aItems, 
-                array( $this, 'replyToSortBy_'. $this->sSortOrder ) 
+                array( $this, 'replyToSortBy_'. $_sSortOrder ) 
             );
         }
             /**
@@ -75,7 +76,10 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
             public function replyToSortBy_date_ascending( $aA, $aB ) {
                 return strtotime( $aA[ 'pubDate' ] ) - strtotime( $aB[ 'pubDate' ] );
             }
-            public function replyToSortBy_date_decending( $aA, $aB ) {
+            public function replyToSortBy_date( $aA, $aB ) {
+                return strtotime( $aB[ 'pubDate' ] ) - strtotime( $aA[ 'pubDate' ] );
+            } 
+            public function replyToSortBy_date_descending( $aA, $aB ) {
                 return strtotime( $aB[ 'pubDate' ] ) - strtotime( $aA[ 'pubDate' ] );
             }            
             public function replyToSortBy_title_ascending( $aA, $aB ) {
@@ -91,7 +95,18 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
                 return strnatcasecmp( $_sTitle_A, $_sTitle_B );
                 
             }               
-            public function replyToSortBy_title_decending( $aA, $aB ) {
+            public function replyToSortBy_title( $aA, $aB ) {
+                $_sTitle_A = apply_filters(
+                    'aal_filter_unit_product_raw_title', 
+                    $aA[ 'title' ]
+                );
+                $_sTitle_B = apply_filters(
+                    'aal_filter_unit_product_raw_title', 
+                    $aB[ 'title' ]
+                );
+                return strnatcasecmp( $_sTitle_B, $_sTitle_A );                    
+            }
+            public function replyToSortBy_title_descending( $aA, $aB ) {
 
                 $_sTitle_A = apply_filters(
                     'aal_filter_unit_product_raw_title', 
