@@ -189,8 +189,9 @@
     display: inline-block;    
     margin: 1em;
 }
-.amazon-products-container-search .amazon-similar-product  .amazon-similar-product > img {
+.amazon-products-container-search .amazon-similar-products  .amazon-similar-product > img {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+    vertical-align: middle;
 }

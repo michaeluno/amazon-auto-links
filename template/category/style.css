@@ -172,6 +172,7 @@
     box-shadow: 5px 5px 8px #CCC;
 }
 
+/* Contents %content% */
 /* Content in Widgets*/
 .widget .amazon-products-container .amazon-product-content *
 {
@@ -188,8 +189,9 @@
     display: inline-block;    
     margin: 1em;
 }
-.amazon-products-container .amazon-similar-product  .amazon-similar-product > img {
+.amazon-products-container .amazon-similar-products .amazon-similar-product > img {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+    vertical-align: middle;
 }

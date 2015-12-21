@@ -63,9 +63,9 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
         <guid isPermaLink="false"><?php echo $_sGUID; ?></guid>        
         <?php if ( ! $_oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
         <description><![CDATA[<?php echo $_aProduct[ 'description' ]; ?>]]></description>
-        <content:encoded><![CDATA[<?php echo "<div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div>"; ?>]]></content:encoded>   
+        <content:encoded><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></content:encoded>   
         <?php else : ?>
-        <description><![CDATA[<?php echo "<div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div>"; ?>]]></description>        
+        <description><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></description>        
         <?php endif; ?>
         <wfw:commentRss></wfw:commentRss>
         <slash:comments></slash:comments>

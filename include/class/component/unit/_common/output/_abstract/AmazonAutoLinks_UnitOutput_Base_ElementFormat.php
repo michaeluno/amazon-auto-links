@@ -208,14 +208,26 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     return '';
                 }
                 
+                if ( ! $this->_isNoImageAllowed( $_sThumbnailURL ) ) {
+                    return '';
+                }
+                
                 $_sTitle        = $this->getElement(
                     $_aProduct,
                     array( 'ItemAttributes', 'Title' )
                 );
+                if ( $this->isTitleBlocked( $_sTitle ) ) {
+                    return '';
+                }
+                
                 $_sASIN         = $this->getElement(
                     $_aProduct,
                     array( 'ASIN' )
                 );
+                if ( $this->isASINBlocked( $_sASIN ) ) {
+                    return '';
+                }
+                
                 $_sProductURL   = $this->getProductLinkURLFormatted( 
                     rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
                     $_sASIN

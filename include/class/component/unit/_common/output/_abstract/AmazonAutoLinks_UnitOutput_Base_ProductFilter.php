@@ -79,7 +79,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
     /**
      * 
      * @since       3.1.0
-     * @return      boolean
+     * @return      boolean     True if the passed image is okay to display; otherwise, false.
+     * @param       string      $sImageURL      The image url to check.
      */
     protected function _isNoImageAllowed( $sImageURL ) {
         
