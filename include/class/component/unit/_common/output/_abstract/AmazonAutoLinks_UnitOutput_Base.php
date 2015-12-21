@@ -136,7 +136,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
                 $this->oUnitOption->get( 'item_format' ),
                 apply_filters(
                     'aal_filter_item_format_database_query_variables',
-                    array( '%price%', '%review%', '%rating%', '%image_set%', '%similar_products%' )
+                    array( '%price%', '%review%', '%rating%', '%image_set%', '%similar_product%' )
                 )
             );
         }

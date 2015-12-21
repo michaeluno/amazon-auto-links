@@ -66,8 +66,17 @@
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+    
+    /* For the disclaimer to continue */
+    display: inline;
+    margin-right: 0.5em;
 }
 
+/* Meta */
+.amazon-products-container-search > .amazon-product-container  .amazon-product-meta {
+    display: inline;
+    margin-right: 0.4em;
+}
 
 /* Customer Reviews */
 .amazon-products-container-search .amazon-customer-reviews {
@@ -178,7 +187,7 @@
 /* Similar Products */
 .amazon-products-container-search .amazon-similar-products  .amazon-similar-product  {
     display: inline-block;    
-    margin-right: 2em;
+    margin: 1em;
 }
 .amazon-products-container-search .amazon-similar-product  .amazon-similar-product > img {
     max-width: 100%;
