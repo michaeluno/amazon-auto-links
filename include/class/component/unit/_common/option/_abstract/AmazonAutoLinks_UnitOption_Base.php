@@ -111,6 +111,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         // 3.3.0+ (boolean) Whether to fetch similar products. The background routine of retrieving similar products need to set this `false`.
         '_search_similar_products'      => true,        
         
+        'similar_product_image_size'    => 100,
+        'similar_product_max_count'     => 10,
+        
     );
     
     /**

@@ -165,21 +165,49 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          * @since       3.3.0
          */
         private function _getSimilarProductOutputs( $_aSimilarProducts ) {
-            
+
+            $_iImageSIze        = $this->oUnitOption->get( 'similar_product_image_size' );
+            $_iMaxCount         = $this->oUnitOption->get( 'similar_product_max_count' );
+        
+            // By setting 0 or below to the image size, the user can disable the similar products.
+            if ( 0 >= $_iImageSIze ) {
+                return array();
+            }
+        
             $_aOutputs = array();
-            foreach( $this->getAsArray( $_aSimilarProducts ) as $_aProduct ) {
+            foreach( $this->getAsArray( $_aSimilarProducts ) as $_iIndex => $_aProduct ) {
                 
-                $_sImageURL = $this->getElement(
-                    $_aProduct,
-                    array( 'MediumImage', 'URL' )
-                ); 
-// @todo create an image size option for similar products                
-$_iImageSIze = 120; 
-                $_sThumbnailURL = $this->_getProductImageURLFormatted( $_sImageURL, $_iImageSIze );
-                // $_sThumbnailURL = $this->getElement( $_aProduct, 'thumbnail_url' );
-                if ( ! $_sThumbnailURL ) {
+                if ( $_iIndex >= $_iMaxCount ) {
+                    break;
+                }
+                
+                $_sOutput = $this->_getSimilarProductEach( $_aProduct, $_iImageSIze, $_iMaxCount );
+                if ( ! $_sOutput ) {
                     continue;
                 }
+                $_aOutputs[] = $_sOutput;
+                
+            }               
+            return $_aOutputs;
+            
+        }
+            /**
+             * @since       3.3.0
+             * @return      string
+             */
+            private function _getSimilarProductEach( $_aProduct, $_iImageSize ) {
+                
+                $_sThumbnailURL     = $this->_getProductImageURLFormatted( 
+                    $this->getElement(
+                        $_aProduct,
+                        array( 'MediumImage', 'URL' )
+                    ), 
+                    $_iImageSize 
+                );
+                if ( ! $_sThumbnailURL ) {
+                    return '';
+                }
+                
                 $_sTitle        = $this->getElement(
                     $_aProduct,
                     array( 'ItemAttributes', 'Title' )
@@ -190,23 +218,19 @@ $_iImageSIze = 120;
                 );
                 $_sProductURL   = $this->getProductLinkURLFormatted( 
                     rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
-                    $_aProduct[ 'ASIN' ] 
+                    $_sASIN
                 );
-                $_sProductURL   = $this->getProductLinkURLFormatted( $_sProductURL, $_sASIN );
+                // $_sProductURL   = $this->getProductLinkURLFormatted( $_sProductURL, $_sASIN );
                 $_sProductURL   = esc_url( $_sProductURL );
                 $_sThumbnailURL = esc_url( $_sThumbnailURL );
                 $_sTitle        = esc_attr( $_sTitle );
-                $_aOutputs[]    = ''
-                        . "<a href='{$_sProductURL}' target='blank'>"
-                        . "<div class='amazon-similar-product'>"
-                            . "<img class='amazon-similar-product-thumbnail' src='{$_sThumbnailURL}' title='{$_sTitle}' alt='{$_sTitle}'/>"
+                return "<a href='{$_sProductURL}' target='blank'>"
+                        . "<div class='amazon-similar-product' style='max-height: {$_iImageSize}px; max-width: {$_iImageSize}px;'>"
+                            . "<img class='amazon-similar-product-thumbnail' src='{$_sThumbnailURL}' title='{$_sTitle}' alt='{$_sTitle}' style='max-height: {$_iImageSize}px;' />"
                         . "</div>"
-                    . "</a>"                    
-                    ;
-            }               
-            return $_aOutputs;
-            
-        }
+                    . "</a>";
+
+            }
     
     /**
      * Returns the formatted product HTML block.
