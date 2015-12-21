@@ -73,6 +73,13 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'default'           => 5,
             ),
             array(
+                'field_id'          => $sFieldIDPrefix . 'description_suffix',
+                'title'             => __( 'Description Suffix', 'amazon-auto-links' ),
+                'tip'               => __( 'Set the text appended to the description element when truncated. To disable it set an empty value.', 'amazon-auto-links' ),
+                'type'              => 'text',
+                'default'           => __( 'read more', 'amazon-auto-links' ),
+            ),            
+            array(
                 'field_id'          => $sFieldIDPrefix . 'customer_review_include_extra',
                 'title'             => __( 'Include Extra', 'amazon-auto-links' ),
                 'type'              => 'checkbox',

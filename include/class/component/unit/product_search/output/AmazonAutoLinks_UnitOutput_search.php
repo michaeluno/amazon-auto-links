@@ -567,7 +567,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 'ASIN'               => $_aItem[ 'ASIN' ],
                 'product_url'        => $_sProductURL,
                 'title'              => $_sTitle,
-                'text_description'   => $this->getDescriptionSanitized( $_sContent, 250 ),  // forced-truncated version of the contents
+                'text_description'   => $this->getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                 'description'        => $_sDescription, // reflects the user set character length
                 'meta'               => '',
                 'content'            => $_sContent,

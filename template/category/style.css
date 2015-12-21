@@ -173,6 +173,12 @@
 }
 
 /* Contents %content% */
+.amazon-products-container .amazon-product-content *
+{
+    width: auto !important;     
+    max-width: 100% !important;
+}
+
 /* Content in Widgets*/
 .widget .amazon-products-container .amazon-product-content *
 {

@@ -117,7 +117,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $this->oUnitOption->get( 'item_format' ),
             apply_filters(
                 'aal_filter_item_format_database_query_variables',
-                array( '%similar_product%' )
+                array( '%similar%' )
             )
         );    
         if ( ! $_bEnabledSimilarProducts ) {
@@ -269,7 +269,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 "%disclaimer%", // 3.2.0+
                 "%content%", // 3.3.0+
                 "%meta%",   // 3.3.0+
-                "%similar_product%",   // 3.3.0+
+                "%similar%",   // 3.3.0+
             ),
             array( 
                 $aProduct[ 'product_url' ], 
@@ -464,8 +464,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         }
         $sReadMoreURL = esc_url( $sReadMoreURL );
         
+        $_sText = $this->oUnitOption->get( 'description_suffix' );
+        if ( ! $_sText ) {
+            return '';
+        }
         return " <a href='{$sReadMoreURL}' target='_blank' rel='nofollow' style='display:inline;'>" 
-                . __( 'read more', 'amazon-auto-links' ) 
+                . $_sText
             . "</a>";
         
     }

@@ -114,6 +114,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         'similar_product_image_size'    => 100,
         'similar_product_max_count'     => 10,
         
+        'description_suffix'            => 'read more',
+        
     );
     
     /**
@@ -150,6 +152,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             )
             + $this->getDefaultOptionStructure()
             + $this->getDefaultItemFormat()
+            + $this->getExtraDefaultOptions()
             + $this->aCommonKeys;
         $this->aUnitOptions = $iUnitID
             ? $aUnitOptions 
@@ -159,6 +162,22 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $this->aUnitOptions = $this->format( $this->aUnitOptions );
 
     }
+        /**
+         * Returns default options which cannot be set with the property declaration.
+         * 
+         * Some items need to run a function and in PHP calling a function is not possible in property declaration.
+         * 
+         * @since       3.3.0
+         * @return      array
+         */
+        protected function getExtraDefaultOptions() {
+            
+            return array(
+                'description_suffix'            => __( 'read more', 'amazon-auto-links' ),
+            );
+            
+        }
+    
         /**
          * @return      array
          */

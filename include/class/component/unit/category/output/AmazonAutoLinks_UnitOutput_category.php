@@ -196,7 +196,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
 /*     protected function _hasCustomDBTableAccess() {
 
-        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%', '%similar_product%' );
+        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%', '%similar%' );
     
         if ( $this->oOption->isAPIConnected() ) {
             $_aVariablesToCheck[] = '%description%';
