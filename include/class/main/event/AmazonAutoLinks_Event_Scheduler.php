@@ -34,14 +34,27 @@ class AmazonAutoLinks_Event_Scheduler {
     }    
     
     /**
-     * 
-     * @action      schedule        aal_action_api_get_customer_review
+     * @since       3.3.0
+     * @deprecated  Not used at the moment
      */
-    static public function getCustomerReviews( $sURL, $sAISN, $sLocale, $iCacheDuration ) {
+    static public function prefetchByArguments( $aArguments ) {
+
+        self::_scheduleTask( 
+            'aal_action_unit_prefetch_by_arguments',  // action name
+            $aArguments // arguments
+        );            
+        
+    }
+    
+    /**
+     * @since       3.3.0
+     * @action      schedule        aal_action_api_get_similar_products
+     */
+    static public function getSimilarProducts( $aASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
 
         $_bScheduled = self::_scheduleTask( 
-            'aal_action_api_get_customer_review',  // action name
-            array( $sURL, $sAISN, $sLocale, $iCacheDuration )
+            'aal_action_api_get_similar_products',  // action name
+            array( $aASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration )
         );
         if ( ! $_bScheduled ) {
             return $_bScheduled;
@@ -49,7 +62,26 @@ class AmazonAutoLinks_Event_Scheduler {
         
         // Loads the site in the background. The method takes care of doing it only once in the entire page load.
         AmazonAutoLinks_Shadow::see();
-        return true;        
+        return true;
+    }
+    
+    /**
+     * 
+     * @action      schedule        aal_action_api_get_customer_review
+     */
+    static public function getCustomerReviews( $sURL, $sASIN, $sLocale, $iCacheDuration ) {
+
+        $_bScheduled = self::_scheduleTask( 
+            'aal_action_api_get_customer_review',  // action name
+            array( $sURL, $sASIN, $sLocale, $iCacheDuration )
+        );
+        if ( ! $_bScheduled ) {
+            return $_bScheduled;
+        }
+        
+        // Loads the site in the background. The method takes care of doing it only once in the entire page load.
+        AmazonAutoLinks_Shadow::see();
+        return true;
     
     }
 

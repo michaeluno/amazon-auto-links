@@ -154,3 +154,14 @@
     margin-right: auto;
         
 }
+
+/* Similar Products */
+.amazon-products-container .amazon-similar-products  .amazon-similar-product  {
+    display: inline-block;    
+    margin-right: 2em;
+}
+.amazon-products-container .amazon-similar-product  .amazon-similar-product > img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

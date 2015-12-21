@@ -40,6 +40,15 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
             return;
         }
 
+        // Retrieve similar products with a separate routine
+        $this->_scheduleFetchingSimilarProducts( 
+            $_aProductData, 
+            $_sASIN,
+            $_sLocale, 
+            $_sAssociateID, 
+            $_iCacheDuration 
+        );
+        
         $this->_setProductData( 
             $_aProductData, 
             $_sASIN,
@@ -49,25 +58,37 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
         
     }
         /**
-         * Checks whether a customer review exists or not.
-         * @return      boolean
+         * 
          */
-        private function _hasCustomerReview( array $aProductData ) {
-            return in_array(
-                $this->getElement(
-                    $aProductData,
-                    array( 'CustomerReviews', 'HasReviews' ),
-                    false
-                ),
-                array( true, 'true', 'TRUE', 'True', 1, '1',  ),
-                true    // type-sensitive
+        private function _scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+            
+            $_aSimilarProducts = $this->getElementAsArray(
+                $aAPIResponseProductData,
+                array( 'SimilarProducts', 'SimilarProduct' )
             );
-        }    
+            $_aASINs = array();
+            foreach( $_aSimilarProducts as $_aItem ) {
+                if ( ! isset( $_aItem[ 'ASIN' ] ) ) {
+                    continue;
+                }
+                $_aASINs[] = $_aItem[ 'ASIN' ];
+            }
+
+            AmazonAutoLinks_Event_Scheduler::getSimilarProducts(
+                $_aASINs,
+                $sASIN,
+                $sLocale,
+                $sAssociateID,
+                $iCacheDuration
+            );            
+            
+        }
+    
+
         private function _setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration ) {
              
             // Check if a customer review exists.
             $_bCustomerReviewExists = $this->_hasCustomerReview( $aAPIResponseProductData );
-       
             if ( $_bCustomerReviewExists ) {            
                 AmazonAutoLinks_Event_Scheduler::getCustomerReviews(
                     $this->getElement(
@@ -79,8 +100,8 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                     $sLocale,
                     $iCacheDuration
                 );
-            }            
-            
+            }   
+                                   
             $_aRow             = $this->_formatRow( 
                 $aAPIResponseProductData, 
                 $sASIN, 
@@ -99,8 +120,23 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
 
         }
             /**
+             * Checks whether a customer review exists or not.
+             * @return      boolean
+             */
+            private function _hasCustomerReview( array $aProductData ) {
+                return in_array(
+                    $this->getElement(
+                        $aProductData,
+                        array( 'CustomerReviews', 'HasReviews' ),
+                        false
+                    ),
+                    array( true, 'true', 'TRUE', 'True', 1, '1',  ),
+                    true    // type-sensitive
+                );
+            }            
+            /**
              * Formats the given API Item (which contains product information) array 
-             * to insert then into the database table.
+             * to insert them into the database table.
              * 
              * @return      array
              */
@@ -163,12 +199,11 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                     ),    
                     'images'             => $this->_getImages( 
                         $aAPIResponseProductData 
-                    ),
-                    'similar_products'   => $this->getElement(
-                        $aAPIResponseProductData,
-                        array( 'SimilarProducts', 'SimilarProduct' )
-                    ),        
-
+                    ),     
+                    
+                    // Similar products will be set with a separate routine.
+                    'similar_products'   => '',
+                    
                     'editorial_reviews'  => $this->getElement(
                         $aAPIResponseProductData,
                         array( 'EditorialReviews', 'EditorialReview' )
@@ -176,7 +211,7 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                                         
                     // 'description'        => null,   // (string) product details
 
-                    // @todo Add the browse_nodex column
+                    // @todo Add the browse_nodes column
                     // 'browse_nodes'    => $this->getElement(
                         // $aAPIResponseProductData,
                         // array( 'BrowseNodes', 'BrowseNode' )                        
@@ -201,8 +236,8 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                 );
                 
                 // If a customer review does not exist, fill these elements an empty value.
-                // When a element value is null when retrieved from the front-end, 
-                // It scheduels the background task. So in order to avoid it, set a value.
+                // When an element value is null when retrieved from the front-end, 
+                // It schedules the background task. So in order to avoid it, set a value.
                 if ( ! $bCustomerReviewExists ) {
                     
                     $_aRow[ 'rating' ]                  = 0;

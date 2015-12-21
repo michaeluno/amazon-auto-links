@@ -222,7 +222,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
  
 = 3.3.0 =
 - Improved the performance of the auto-insert functionality. 
-- Added the Unit Options Converter.
+- Added the `%meta%` variable to the Item Format unit option.
+- Added the `%similar_products%` variable to the Item Format unit option.
+- Added the Unit Options Converter in the Tools page.
 - Added the `%content%` variable for the full product description to the Item Format unit option.
 - Added the RSS Content Tag option that lets the user decide whether a complete product output should be in the `<description>` tag or the `<content>` tag in the feed.
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.

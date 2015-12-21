@@ -14,7 +14,7 @@
  * @since        3
  * @action       aal_action_unit_prefetch
  */
-class AmazonAutoLinks_Event_Action_UnitPrefetch extends AmazonAutoLinks_Event_Action_Base {
+class AmazonAutoLinks_Event_Action_UnitPrefetchByID extends AmazonAutoLinks_Event_Action_Base {
         
     /**
      * 

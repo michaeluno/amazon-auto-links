@@ -572,7 +572,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 'meta'               => '',
                 'content'            => $_sContent,
                 'image_size'         => $this->oUnitOption->get( 'image_size' ),
-                'thumbnail_url'      => $this->_gettProductImageURLFormatted( 
+                'thumbnail_url'      => $this->_getProductImageURLFormatted( 
                     $_sThumbnailURL, 
                     $this->oUnitOption->get( 'image_size' )
                 ),
@@ -607,6 +607,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 'image_set'           => '',  // 3+
 // @todo add a formt method for editorial reviews.
                 'editorial_review'    => '',  // 3+
+                
+                'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
             ) 
             + $this->_getPrices( $_aItem )
             + $_aItem;
@@ -667,7 +669,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     }
         
         /**
-         * Returns the API response date which must be inserted in the advertisement output.
+         * Returns the API response date which must be inserted in the advertisement output for the API agreements.
          * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2
          * @see         (0) in the above link.
          * @since       3.2.0
@@ -820,27 +822,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         }
                  
-        /**
-         * 
-         * @since       unknown
-         * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
-         */
-        private function _gettProductImageURLFormatted( $sImageURL, $isImageSize ) {
-            
-            // If no product image is found
-            if ( ! $sImageURL ) {
-                $_sLocale  = strtoupper( $this->oUnitOption->get( 'country' ) );
-                $sImageURL = isset( AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ] )
-                    ? AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ]
-                    : AmazonAutoLinks_Property::$aNoImageAvailable[ 'US' ];
-            }
-            
-            if ( $this->bIsSSL ) {
-                $sImageURL = $this->getAmazonSSLImageURL( $sImageURL );
-            }
-            
-            return $this->setImageSize( $sImageURL, $isImageSize );
-            
-        }
+
     
 }

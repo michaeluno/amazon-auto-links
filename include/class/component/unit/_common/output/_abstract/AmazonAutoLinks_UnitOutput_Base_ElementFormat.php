@@ -41,7 +41,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $sLocale,
                 $sAssociateID // for scheduling a background task when a row is not found
             );
-            
+
             if ( $this->bDBTableAccess ) {
                 
                 $_aProduct[ 'price' ]     = $this->formatPrices( 
@@ -73,6 +73,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     $_aDBProductRow
                 );
                 
+                $_aProduct[ 'similar_products' ] = $this->getSimilarProductsFormatted(
+                    $_aProduct[ 'ASIN' ], 
+                    $sLocale, 
+                    $sAssociateID,
+                    $_aDBProductRow                
+                );
+                
                 // This lets unit types that need to use the data from database rows access them.
                 $_aProduct = apply_filters( 
                     'aal_filter_unit_each_product_with_database_row', 
@@ -91,12 +98,115 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_aProduct[ 'formatted_item' ] = $this->_formatProductOutput( 
                 $_aProduct 
             );
+
             $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
 
         }
         return $aProducts;
         
     }    
+    
+    /**
+     * 
+     * @since       3.3.0
+     * @return      string
+     */    
+    public function getSimilarProductsFormatted( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
+
+        $_bEnabledSimilarProducts = $this->_hasCustomVariable( 
+            $this->oUnitOption->get( 'item_format' ),
+            apply_filters(
+                'aal_filter_item_format_database_query_variables',
+                array( '%similar_products%' )
+            )
+        );    
+        if ( ! $_bEnabledSimilarProducts ) {
+            return '<!-- Similar products are not enabled -->';
+        }
+    
+        $_aSimilarProducts = $this->_getValueFromRow( 
+            'similar_products', // column name
+            $aRow, // row
+            null,  // default
+            array( // schedule task
+                'asin'          => $sASIN, 
+                'locale'        => $sLocale, 
+                'associate_id'  => $sAssociateID,
+            )               
+        );
+        if ( null === $_aSimilarProducts && $this->oUnitOption->get( '_search_similar_products' ) ) {
+            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+                $sAssociateID,
+                $sASIN,
+                $sLocale, 
+                ( int ) $this->oUnitOption->get( 'cache_duration' )
+            );
+            return $this->oUnitOption->get( 'show_now_retrieving_message' )
+                ? '<p>' 
+                    . __( 'Now retrieving similar products.', 'amazon-auto-links' ) 
+                . '</p>'
+                : '';            
+            
+        }
+        
+        $_aOutputs = $this->_getSimilarProductOutputs( $_aSimilarProducts );
+    
+        if ( empty( $_aOutputs ) ) {
+            return '<!-- No similar products for '  . $sASIN . ' -->';
+        }
+        
+        return "<div class='amazon-similar-products'>"
+                . implode( '', $_aOutputs )
+            . "</div>";
+            
+    }    
+        /**
+         * @return      array
+         * @since       3.3.0
+         */
+        private function _getSimilarProductOutputs( $_aSimilarProducts ) {
+            
+            $_aOutputs = array();
+            foreach( $this->getAsArray( $_aSimilarProducts ) as $_aProduct ) {
+                
+                $_sImageURL = $this->getElement(
+                    $_aProduct,
+                    array( 'MediumImage', 'URL' )
+                ); 
+// @todo create an image size option for similar products                
+$_iImageSIze = 120; 
+                $_sThumbnailURL = $this->_getProductImageURLFormatted( $_sImageURL, $_iImageSIze );
+                // $_sThumbnailURL = $this->getElement( $_aProduct, 'thumbnail_url' );
+                if ( ! $_sThumbnailURL ) {
+                    continue;
+                }
+                $_sTitle        = $this->getElement(
+                    $_aProduct,
+                    array( 'ItemAttributes', 'Title' )
+                );
+                $_sASIN         = $this->getElement(
+                    $_aProduct,
+                    array( 'ASIN' )
+                );
+                $_sProductURL   = $this->getProductLinkURLFormatted( 
+                    rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
+                    $_aProduct[ 'ASIN' ] 
+                );
+                $_sProductURL   = $this->getProductLinkURLFormatted( $_sProductURL, $_sASIN );
+                $_sProductURL   = esc_url( $_sProductURL );
+                $_sThumbnailURL = esc_url( $_sThumbnailURL );
+                $_sTitle        = esc_attr( $_sTitle );
+                $_aOutputs[]    = ''
+                        . "<a href='{$_sProductURL}' target='blank'>"
+                        . "<div class='amazon-similar-product'>"
+                            . "<img class='amazon-similar-product-thumbnail' src='{$_sThumbnailURL}' title='{$_sTitle}' alt='{$_sTitle}'/>"
+                        . "</div>"
+                    . "</a>"                    
+                    ;
+            }               
+            return $_aOutputs;
+            
+        }
     
     /**
      * Returns the formatted product HTML block.
@@ -122,6 +232,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 "%image_set%",
                 "%disclaimer%", // 3.2.0+
                 "%content%", // 3.3.0+
+                "%meta%",   // 3.3.0+
+                "%similar_products%",   // 3.3.0+
             ),
             array( 
                 $aProduct[ 'product_url' ], 
@@ -137,6 +249,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $aProduct[ 'image_set' ],
                 $this->_getPricingDisclaimer( $aProduct[ 'updated_date' ] ), // 3.2.0+
                 $aProduct[ 'content' ], // 3.3.0+
+                $aProduct[ 'meta' ], // 3.3.0+
+                $aProduct[ 'similar_products' ], // 3.3.0+
             ),
             apply_filters(
                 'aal_filter_unit_item_format',
@@ -235,6 +349,29 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             : '';            
         
     }
+    
+    /**
+     * 
+     * @since       unknown
+     * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
+     */
+    protected function _getProductImageURLFormatted( $sImageURL, $isImageSize ) {
+        
+        // If no product image is found
+        if ( ! $sImageURL ) {
+            $_sLocale  = strtoupper( $this->oUnitOption->get( 'country' ) );
+            $sImageURL = isset( AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ] )
+                ? AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ]
+                : AmazonAutoLinks_Property::$aNoImageAvailable[ 'US' ];
+        }
+        
+        if ( $this->bIsSSL ) {
+            $sImageURL = $this->getAmazonSSLImageURL( $sImageURL );
+        }
+        
+        return $this->setImageSize( $sImageURL, $isImageSize );
+        
+    }    
     
     
     /**

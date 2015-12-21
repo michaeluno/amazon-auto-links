@@ -45,6 +45,12 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         // Unused items
         'date'                  => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless.
         
+        
+        // 3.3.0
+        'content'               => null,
+        'meta'                  => null,
+        'similar_products'      => null,
+        
     );
     
     
@@ -76,6 +82,11 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             3
         );
         
+        add_filter(
+            'aal_filter_item_format_database_query_variables',
+            array( $this, 'replyToSetCustomDatabaseQueryVariables' )
+        );
+        
     }        
         /**
          * Sets up properties.
@@ -104,6 +115,18 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             }
             return $_aRSSURLs;                
         }
+        
+    /**
+     * Returns an array holding Item Format variables which require database table access.
+     * @return      array
+     * @since       3.3.0
+     */
+    public function replyToSetCustomDatabaseQueryVariables( $aVariables ) {
+        if ( $this->oOption->isAPIConnected() ) {
+            $aVariables[] = '%description%';
+        }
+        return $aVariables;
+    }
 
     /**
      * Called when the unit has access to the plugin custom database table.
@@ -122,6 +145,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $this->oUnitOption->get( 'description_length' ), 
                 $this->_getReadMoreText( $aProduct[ 'product_url' ] )
             );
+        
         return $aProduct;
     
     }
@@ -168,10 +192,11 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @remark      Overriding the method defined in the base class.
      * @since       3.3.0
      * @return      boolean
+     * @deprecated
      */
-    protected function _hasCustomDBTableAccess() {
+/*     protected function _hasCustomDBTableAccess() {
 
-        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%' );
+        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%', '%similar_products%' );
     
         if ( $this->oOption->isAPIConnected() ) {
             $_aVariablesToCheck[] = '%description%';
@@ -182,7 +207,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $_aVariablesToCheck
         );        
         
-    }        
+    }         */
         
     /**
      * Fetches and returns the associative array containing the output of product links.
@@ -413,6 +438,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_aProduct[ 'ASIN' ]
             );
             $_aProduct[ 'description' ]         = $this->getDescription( $_oNodeDiv, $_aItem );
+            $_aProduct[ 'meta' ]                = $_aProduct[ 'description' ];
             
             // no published date of the product is avariable in this feed
             // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );   

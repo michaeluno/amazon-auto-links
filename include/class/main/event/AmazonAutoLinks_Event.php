@@ -62,12 +62,14 @@ class AmazonAutoLinks_Event {
                         'aal_action_api_transient_renewal',
                         'aal_action_api_get_product_info',
                         'aal_action_api_get_customer_review',
+                        'aal_action_api_get_similar_products',  // 3.3.0+
                         'aal_action_http_cache_renewal',
                     )
                     : array(
                         'aal_action_unit_prefetch',
                         'aal_action_api_get_product_info',
                         'aal_action_api_get_customer_review',
+                        'aal_action_api_get_similar_products',  // 3.3.0+
                         'aal_action_http_cache_renewal',
                     )
             );    

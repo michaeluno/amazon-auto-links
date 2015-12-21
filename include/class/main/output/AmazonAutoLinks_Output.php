@@ -205,7 +205,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     case 'url':        
                         $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $sUnitType );
                         $_oUnit      = new $_sClassName( $_aUnitOptions );
-                        return $_oUnit->getOutput();
+                        return $_oUnit->get();
                     default:
                         $_oOption  = AmazonAutoLinks_Option::getInstance();
                         $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );

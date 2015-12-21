@@ -132,12 +132,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
          * @return      boolean
          */
         protected function _hasCustomDBTableAccess() {
-// @todo add %similar_products%
             return $this->_hasCustomVariable( 
                 $this->oUnitOption->get( 'item_format' ),
-                array( '%price%', '%review%', '%rating%', '%image_set%' )
-            );        
-            
+                apply_filters(
+                    'aal_filter_item_format_database_query_variables',
+                    array( '%price%', '%review%', '%rating%', '%image_set%', '%similar_products%' )
+                )
+            );
         }
     
         /**
@@ -242,11 +243,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
     }
     
     /**
+     * @deprecated      Use `get()` instead.
+     * @return      string
+     */
+    public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
+        return $this->get( $aURLs, $sTemplatePath );
+    }
+    
+    /**
      * Gets the output of product links by specifying a template.
      * 
      * @remark      The local variables defined in this method will be accessible in the template file.
+     * @return      string
      */
-    public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
+    public function get( $aURLs=array(), $sTemplatePath=null ) {
 
         $aOptions      = $this->oOption->aOptions; 
         

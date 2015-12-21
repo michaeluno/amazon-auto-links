@@ -108,6 +108,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         // 3.3.0+
         'highest_content_heading_tag_level' => 5,
         
+        // 3.3.0+ (boolean) Whether to fetch similar products. The background routine of retrieving similar products need to set this `false`.
+        '_search_similar_products'      => true,        
+        
     );
     
     /**
