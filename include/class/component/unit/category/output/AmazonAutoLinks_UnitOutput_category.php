@@ -437,7 +437,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 ),
                 $_aProduct[ 'ASIN' ]
             );
-            $_aProduct[ 'description' ]         = $this->getDescription( $_oNodeDiv, $_aItem );
+            $_aProduct[ 'description' ]         = "<div class='amazon-product-description'>" 
+                    . $this->getDescription( $_oNodeDiv, $_aItem )
+                . "</div>";
             $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
                     . $_aProduct[ 'description' ]
                 . "</div>";
@@ -551,19 +553,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_aDescription  = preg_split('/<br.*?\/?>/i', $_sDescription);        // devide the string into arrays by <br> or <br />    
         $_sDescription  = trim( implode( " ", $_aDescription ) );    // return them back to html text
         $_sDescription  = force_balance_tags( $_sDescription );
-        
-        return $this->_getDescriptionFromDBTable( $_sDescription );
+        return $_sDescription;        
         
     }
-        /**
-         * @since       3.3.0
-         * @return      string
-         */
-        private function _getDescriptionFromDBTable( $sDescription ) {
-// @todo complete this            
-            return $sDescription;
-            
-        }
     
     
     /**
