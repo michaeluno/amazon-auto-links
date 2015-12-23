@@ -108,6 +108,8 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     
     /**
      * Saves the options.
+     * 
+     * @return      boolean     true on success; otherwise, false.
      */
     public function save( $aOptions=null ) {
 

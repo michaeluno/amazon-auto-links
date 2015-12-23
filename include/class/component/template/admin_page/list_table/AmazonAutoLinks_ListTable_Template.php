@@ -234,9 +234,6 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             return;
         }
         
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        
-        
         switch( strtolower( $this->current_action() ) ){
 
             case 'activate':
@@ -251,7 +248,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 foreach( ( array ) $_REQUEST[ 'template' ] as $sID ) {
                     if ( ! $sID ) {
                         continue;
-                    }                    
+                    }  
+
                     $this->aData[ $sID ][ 'is_active' ] = false;
                 }
                 break;    
@@ -260,6 +258,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 
         }   
 
+        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();        
+        
         /**
          * For the first time of loading, although the default templates are activated,
          * no item is actually set to the option.
@@ -270,8 +270,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         $_oTemplateOption->aOptions = $this->aData;       
         
         // Save the options.
-        $_oTemplateOption->save();
-
+        $_bSaved = $_oTemplateOption->save();
+        
         // Reload the page.
         exit( 
             wp_safe_redirect( 

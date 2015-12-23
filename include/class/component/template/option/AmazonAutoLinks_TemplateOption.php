@@ -142,48 +142,58 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             return self::$_aActiveTemplates;
         }
                 
-        // The saved active templates.
-        $_aActiveTemplates = $this->get();
+        $_aActiveTemplates = $this->_getActiveTemplatesExtracted( 
+            $this->get()    // saved all templates
+        );
 
-        // Format the template array.
-        foreach( $_aActiveTemplates as $_sID => &$_aActiveTemplate ) {
-      
-            $_aActiveTemplate = $this->_formatTemplateArray( $_aActiveTemplate );
-            if ( ! $_aActiveTemplate ) {
-                unset( $_aActiveTemplates[ $_sID ] );
-            }
-            
-            if ( ! $_aActiveTemplate[ 'is_active' ] ) {
-                continue;
-            }
-            
-            // Backward compatibility for the v2 options structure.
-            // If the id is not a relative dir path,
-            if ( 
-                $_sID !== $_aActiveTemplate[ 'relative_dir_path' ] 
-            ) {
-                
-                // Remove the old item.
-                unset( $_aActiveTemplates[ $_sID ] );
-                
-                // If the same ID already exists, set the old id.
-                if ( isset( $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] ) ) {
-                    $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ][ 'old_id' ] = $_sID;
-                } else {                    
-                    $_aActiveTemplates[ $_aActiveTemplate[ 'relative_dir_path' ] ] = $_aActiveTemplate[ 'relative_dir_path' ];
-                }
-                
-            }
-            
-            $_aActiveTemplate[ 'is_active' ] = true;
-            
-        }
-        
         // Cache
         self::$_aActiveTemplates = $_aActiveTemplates;
         return $_aActiveTemplates;
         
     }
+        /**
+         * @since       3.3.0
+         * @return      array
+         */
+        private function _getActiveTemplatesExtracted( array $aTemplates ) {
+            
+            // $_aActive = array();
+            foreach( $aTemplates as $_sID => $_aTemplate ) {
+                
+                $_aTemplate = $this->_formatTemplateArray( $_aTemplate );
+
+                // Remove inactive templates.
+                if ( ! $this->getElement( $_aTemplate, 'is_active' ) ) {
+                    unset( $aTemplates[ $_sID ] );
+                    continue;
+                }
+                
+                // Backward compatibility for the v2 options structure.
+                // If the id is not a relative dir path,
+                if ( 
+                    $_sID !== $_aTemplate[ 'relative_dir_path' ] 
+                ) {
+                    
+                    // Remove the old item.
+                    unset( $aTemplates[ $_sID ] );
+                    
+                    // If the same ID already exists, set the old id.
+                    if ( isset( $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] ) ) {
+                        $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ][ 'old_id' ] = $_sID;
+                    } else {                    
+                        $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] = $_aTemplate[ 'relative_dir_path' ];
+                    }
+                    
+                }
+                
+                $_aTemplate[ 'is_active' ] = true;
+                                
+                
+            }
+            return $aTemplates;
+            
+        }
+       
         /**
          * Formats the template array.
          * 

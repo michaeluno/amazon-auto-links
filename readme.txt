@@ -230,6 +230,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `%content%` variable for the full product description to the Item Format unit option.
 - Added the RSS Content Tag option that lets the user decide whether a complete product output should be in the `<description>` tag or the `<content>` tag in the feed.
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
+- Fixed a bug that deactivated templates were loaded as active.
 - Fixed some incompatibility issue with PHP 7.
 - Fixed a bug that the unit options could not load when there is no button created.
 - Fixed a bug with the contextual product widget which caused Item Format option to be empty when the user first add the widget without connecting to the API.
