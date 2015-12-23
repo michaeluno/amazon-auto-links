@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         3.2.3
+Stable tag:         3.2.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -230,6 +230,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `%content%` variable for the full product description to the Item Format unit option.
 - Added the RSS Content Tag option that lets the user decide whether a complete product output should be in the `<description>` tag or the `<content>` tag in the feed.
 - Added the Allowed HTML Tag Attributes option and the Allowed Inline CSS Properties option in the Misc setting page.
+- Fixed some incompatibility issue with PHP 7.
 - Fixed a bug that the unit options could not load when there is no button created.
 - Fixed a bug with the contextual product widget which caused Item Format option to be empty when the user first add the widget without connecting to the API.
 - Fixed a bug with the contextual product widget which caused a fatal error when the user enabled `Breadcrumb` in the `Additional Criteria` option and enabled `The home page` in the `Available` Page Type` option.
