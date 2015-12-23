@@ -20,7 +20,7 @@ class AmazonAutoLinks_UnitTypeLoader_tag extends AmazonAutoLinks_UnitTypeLoader_
      * @remark      Each extended class should assign own unique unit type slug here.
      * @since       3.3.0
      */
-    public $sUnitTypeSlug = 'category';
+    public $sUnitTypeSlug = 'tag';
     
     /**
      * Stores class names of form fields.
