@@ -59,12 +59,6 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'type'              => 'textarea',    
                 'title'             => __( 'Item Format', 'amazon-auto-links' ),
                 'attributes'        => array(
-                    'class'    => $_oOption->isAdvancedAllowed() 
-                        ? '' 
-                        : 'read-only',
-                    'readonly' => $_oOption->isAdvancedAllowed() 
-                        ? null
-                        : 'raedonly', 
                     'rows'     => 6,                
                     'style'    => 'width: 96%',
                     
@@ -103,12 +97,6 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'default'           => $_aItemFormat['title_format'],
                 'attributes'        => array(
                     'rows'      => 6,
-                    'class'     => $_oOption->isAdvancedAllowed() 
-                        ? '' 
-                        : 'read-only',
-                    'readonly'  => $_oOption->isAdvancedAllowed() 
-                        ? null
-                        : 'readonly', 
                     'style'     => 'width: 96%',
                 ),
                 'description'        => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
@@ -121,14 +109,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'title'         => __( 'Image Format', 'amazon-auto-links' ),
                 'type'          => 'textarea',
                 'attributes'    => array(
-                    // 'cols'      => 40,
                     'rows'      => 6,
-                    'class'     => $_oOption->isAdvancedAllowed() 
-                        ? '' 
-                        : 'read-only',
-                    'readonly'  => $_oOption->isAdvancedAllowed() 
-                        ? null
-                        : 'readonly', 
                     'style'     => 'width: 96%',
                 ),
                 'default'       => $_aItemFormat['image_format'],
@@ -142,28 +123,6 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
             
         );
 
-        // Insert common field arguments.
-        $_bIsDisabled  = ! $_oOption->isAdvancedAllowed();
-        if ( ! $_bIsDisabled ) {
-            return $_aFields;
-        }
-        $_sOpeningTag  = $_bIsDisabled 
-            ? "<div class='upgrade-to-pro' style='margin:0; padding:0; display: inline-block;' title='" . __( 'Please consider upgrading to Pro to use this feature!', 'amazon-auto-links' ) . "'>" 
-            : "";
-        $_sClosingTag  = $_bIsDisabled 
-            ? "</div>" 
-            : "";        
-        foreach( $_aFields as &$_aField ) {
-            if ( $sFieldIDPrefix . 'template_id' === $_aField[ 'field_id' ] ) {
-                continue;
-            }
-            $_aField = array(
-                    'before_fieldset' => $_sOpeningTag,
-                    'after_fieldset'  => $_sClosingTag,
-                )
-                + $_aField
-            ;
-        }  
         return $_aFields;
         
     }

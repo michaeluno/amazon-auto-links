@@ -61,24 +61,6 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 ',' 
             );
             
-            if ( ! $_oOption->isAdvancedAllowed() ) {
-                $_aItemFormat   = AmazonAutoLinks_UnitOption_Base::getDefaultItemFormat();
-                $aInputs[ 'item_format' ] = $_oUtil->getElement(
-                    $aOldInputs,
-                    'item_format',
-                    $_aItemFormat[ 'item_format' ]
-                );
-                $aInputs[ 'image_format' ] = $_oUtil->getElement(
-                    $aOldInputs,
-                    'image_format',
-                    $_aItemFormat[ 'image_format' ]
-                );
-                $aInputs[ 'title_format' ] = $_oUtil->getElement(
-                    $aOldInputs,
-                    'title_format',
-                    $_aItemFormat[ 'title_format' ]
-                );                
-            }
             $aInputs[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInputs[ 'item_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
             $aInputs[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'image_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
             $aInputs[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'title_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
@@ -118,6 +100,5 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 return $_aResult;                  
                 
             }        
-            
       
 }

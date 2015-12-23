@@ -236,6 +236,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Fixed a bug with the contextual product widget which caused a fatal error when the user enabled `Breadcrumb` in the `Additional Criteria` option and enabled `The home page` in the `Available` Page Type` option.
 - Fixed a bug that custom database table versions were not saved properly and caused extra database queries.
 - Reduced the number of database queries in widget forms.
+- Changed the Item Format option to be available. 
 - Changed the `%description%` variable of the `Category` unit type to include description produced by Amazon Product Advertising API if the user has authenticated the plugin.
 - Deprecated the Template Options Converter.
 
