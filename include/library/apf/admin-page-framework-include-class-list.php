@@ -89,6 +89,7 @@ $aClassFiles = array(
 	"AmazonAutoLinks_AdminPageFramework_Form_post_type"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/form/AdminPageFramework_Form_post_type.php", 
 	"AmazonAutoLinks_AdminPageFramework_Link_PostType"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_controller/AdminPageFramework_Link_PostType.php", 
 	"AmazonAutoLinks_AdminPageFramework_Resource_PostType"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_controller/AdminPageFramework_Resource_PostType.php", 
+	"AmazonAutoLinks_AdminPageFramework_PostType_Model__FlushRewriteRules"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_model/AdminPageFramework_PostType_Model__FlushRewriteRules.php", 
 	"AmazonAutoLinks_AdminPageFramework_PostType_Model__SubMenuOrder"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_model/AdminPageFramework_PostType_Model__SubMenuOrder.php", 
 	"AmazonAutoLinks_AdminPageFramework_Property_PostType"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_model/AdminPageFramework_Property_PostType.php", 
 	"AmazonAutoLinks_AdminPageFramework_PageLoadInfo_PostType"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/post_type/_view/AdminPageFramework_PageLoadInfo_PostType.php", 
