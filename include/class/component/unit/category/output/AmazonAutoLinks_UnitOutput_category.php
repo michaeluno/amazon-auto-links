@@ -74,19 +74,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         parent::__construct( $aoUnitOptions );
         
         $this->_setProperties();
-        
-        add_filter( 
-            'aal_filter_unit_each_product_with_database_row', 
-            array( $this, 'replyToFormatProductWithDBRow' ), 
-            10, 
-            3
-        );
-        
-        add_filter(
-            'aal_filter_item_format_database_query_variables',
-            array( $this, 'replyToSetCustomDatabaseQueryVariables' )
-        );
-        
+        $this->_setHooks();
+                
     }        
         /**
          * Sets up properties.
@@ -102,6 +91,34 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $this->oUnitOption->get( array( 'categories_exclude' ), array() ) 
             );        
         
+        }
+        /**
+         * @since       3.3.0
+         */
+        private function _setHooks() {
+            
+            static $bLoaded;
+            
+            // Make sure the below hooks are set only once per object instance.
+        // @todo Investigate why in the category selection page, the callback gets triggred multiple times.
+        // So this check is necessary. However, this check should not be necessary.
+            if ( $bLoaded ) {
+                return;
+            }
+            $bLoaded = true;
+            
+            add_filter( 
+                'aal_filter_unit_each_product_with_database_row', 
+                array( $this, 'replyToFormatProductWithDBRow' ), 
+                10, 
+                3
+            );
+            
+            add_filter(
+                'aal_filter_item_format_database_query_variables',
+                array( $this, 'replyToSetCustomDatabaseQueryVariables' )
+            );
+            
         }
 
         /**
@@ -139,12 +156,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
     
         $aProduct[ 'content' ]      = $this->getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
-        $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "
-            . $this->getDescriptionSanitized( 
-                $aProduct[ 'content' ], 
-                $this->oUnitOption->get( 'description_length' ), 
-                $this->_getReadMoreText( $aProduct[ 'product_url' ] )
-            );
+        $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "  // only the meta is added by default
+            . "<div class='amazon-product-description'>"
+                . $this->getDescriptionSanitized( 
+                    $aProduct[ 'content' ], 
+                    $this->oUnitOption->get( 'description_length' ), 
+                    $this->_getReadMoreText( $aProduct[ 'product_url' ] )
+                )
+            . "</div>"
+            ;
         
         return $aProduct;
     
@@ -437,12 +457,11 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 ),
                 $_aProduct[ 'ASIN' ]
             );
-            $_aProduct[ 'description' ]         = "<div class='amazon-product-description'>" 
-                    . $this->getDescription( $_oNodeDiv, $_aItem )
-                . "</div>";
             $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
-                    . $_aProduct[ 'description' ]
-                . "</div>";
+                    . $this->getDescription( $_oNodeDiv, $_aItem )
+                . "</div>";            
+            $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
+
             
             // no published date of the product is avariable in this feed
             // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );   
