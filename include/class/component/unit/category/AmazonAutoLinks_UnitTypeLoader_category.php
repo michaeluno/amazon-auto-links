@@ -72,7 +72,7 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
             ), 
             'side', // context - e.g. 'normal', 'advanced', or 'side'
-            'core' // priority - e.g. 'high', 'core', 'default' or 'low'
+            'high' // priority - e.g. 'high', 'core', 'default' or 'low'
         );              
         
     }     
