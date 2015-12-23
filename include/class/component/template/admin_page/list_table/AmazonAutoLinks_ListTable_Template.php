@@ -274,14 +274,14 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
 
         // Reload the page.
         exit( 
-            wp_redirect( 
+            wp_safe_redirect( 
                 add_query_arg( 
                     array(
                         'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
                         'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
                         'tab'       => 'table',
                     ), 
-                    admin_url( $GLOBALS['pagenow'] ) 
+                    admin_url( $GLOBALS[ 'pagenow' ] ) 
                 )
             )
         );
