@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         3.2.4
+Stable tag:         3.3.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,10 +59,11 @@ By subscribing to the product feed produced with the units you create as RSS or 
 If you have a web site that can display RSS feed contents, just create a WordPress site somewhere with this plugin and fetch the feed from the site. If you are an App developer, you can just display the items from the feed without programming an API client.
 
 = Various Unit Options = 
+
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
-and more.
+- and more.
 
 = Customize Outputs =
 Besides the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This gives you freedom of customization and lets you achieve more advanced and detailed design.
@@ -220,7 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
  
-= 3.3.1 = 
+= 3.3.1 - 12/25/2015 = 
 - Fixed invalid offset warnings in PHP 7. 
 - Fixed a bug that an invalid character was inserted in the RSS feed.
  
