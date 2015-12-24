@@ -221,6 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
  
 = 3.3.1 = 
+- Fixed invalid offset warnings in PHP 7. 
 - Fixed a bug that an invalid character was inserted in the RSS feed.
  
 = 3.3.0 - 12/23/2015 =

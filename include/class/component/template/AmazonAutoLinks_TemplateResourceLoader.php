@@ -43,6 +43,9 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
      */    
     private function _loadFunctionsOfActiveTemplates() {    
         foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+            if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
+                continue;
+            }            
             $this->includeOnce(
                 $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php'
             );
@@ -127,6 +130,9 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
             return;
         }
         foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+            if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
+                continue;
+            }
             $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' );
         }        
     }    
