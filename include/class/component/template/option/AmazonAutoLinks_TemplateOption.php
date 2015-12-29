@@ -181,13 +181,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                     if ( isset( $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] ) ) {
                         $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ][ 'old_id' ] = $_sID;
                     } else {                    
-                        $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] = $_aTemplate[ 'relative_dir_path' ];
+                        $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] = $_aTemplate;
                     }
                     
                 }
                 
-                $_aTemplate[ 'is_active' ] = true;
-                                
+                $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ][ 'is_active' ] = true;
                 
             }
             return $aTemplates;
@@ -222,7 +221,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             
             // Set the directory path every time the page loads. Do not store in the data base. 
             // This path is absolute so when the user moves the site, the value will be different.
-            $aTemplate['dir_path']           = $this->getElement(
+            $aTemplate[ 'dir_path' ]           = $this->getElement(
                 $aTemplate,
                 'dir_path',
                 $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ] )

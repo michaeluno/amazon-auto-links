@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, internet-marketing, marketing, monetization, revenue, shortcode
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         3.3.1
+Stable tag:         3.3.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -220,6 +220,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.3.3 =
+- Fixed a bug that caused illegal string offset warnings with stored template data.
  
 = 3.3.2 -12/29/2015 =
 - Fixed an issue that the setting forms could not be displayed when third-party plugins or themes have JavaScript errors in the same page.
