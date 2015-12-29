@@ -33,7 +33,7 @@ class AmazonAutoLinks_SimplePie_File extends WP_SimplePie_File {
 
         $this->timeout   = $iTimeout;
         $this->redirects = $iRedirects;
-        $this->headers   = $sUserAgent;
+        $this->headers   = $aHeaders;
         $this->useragent = $sUserAgent;        
         $this->url       = $sURL;
 

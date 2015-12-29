@@ -155,7 +155,7 @@ class AmazonAutoLinks_PostType_Unit_Action extends AmazonAutoLinks_PostType_Unit
             }    
     
     /**
-     * @sinec       3.1.0
+     * @since       3.1.0
      */
     protected function handleCustomActions() {
         
