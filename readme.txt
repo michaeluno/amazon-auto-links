@@ -221,13 +221,14 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.3.4 = 
+= 3.3.4 - 01/02/2015 = 
+- Fixed a bug that a fatal error which occurred with category units with the site enabling SSL.
 - Improved a performance in the setting pages.
 
-= 3.3.3 =
+= 3.3.3 - 12/31/2015 =
 - Fixed a bug that caused illegal string offset warnings with stored template data.
  
-= 3.3.2 -12/29/2015 =
+= 3.3.2 - 12/29/2015 =
 - Fixed an issue that the setting forms could not be displayed when third-party plugins or themes have JavaScript errors in the same page.
  
 = 3.3.1 - 12/25/2015 = 

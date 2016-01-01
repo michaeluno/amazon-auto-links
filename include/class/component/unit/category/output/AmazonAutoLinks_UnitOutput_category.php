@@ -636,7 +636,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         
         // Take care of SSL image urls - in SSL enabled sites, if src-image urls use non-ssl protocol, some browsers show warnings.
         if ( $this->bIsSSL ) { 
-            $this->setSSLImagesByDOM( $oDoc ); 
+            $this->setSSLImagesByDOM( $oNode ); 
         }
         
         // For the Brazil and Mexico locals, the element images in descriptions should be replaced as they don't load.
