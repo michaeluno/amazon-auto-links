@@ -1,10 +1,10 @@
-=== Amazon Auto Links ===
+=== Amazon Auto Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, link, links, ad, ads, advertisement, widget, widgets, sidebar, post, posts, affiliate, affiliate marketing, internet-marketing, marketing, monetization, revenue, shortcode
+Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         3.3.2
+Stable tag:         3.3.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -220,6 +220,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.3.4 = 
+- Improved a performance in the setting pages.
 
 = 3.3.3 =
 - Fixed a bug that caused illegal string offset warnings with stored template data.

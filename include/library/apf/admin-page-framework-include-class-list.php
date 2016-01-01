@@ -179,6 +179,7 @@ $aClassFiles = array(
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___DefaultValues"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/AdminPageFramework_Form_Model___DefaultValues.php", 
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___FieldTypeRegistration"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/AdminPageFramework_Form_Model___FieldTypeRegistration.php", 
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___FieldTypeResource"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/AdminPageFramework_Form_Model___FieldTypeResource.php", 
+	"AmazonAutoLinks_AdminPageFramework_Form_Model___LastInput"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/AdminPageFramework_Form_Model___LastInput.php", 
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___SetFieldResources"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/AdminPageFramework_Form_Model___SetFieldResources.php", 
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___FieldConditioner"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/element_definition/AdminPageFramework_Form_Model___FieldConditioner.php", 
 	"AmazonAutoLinks_AdminPageFramework_Form_Model___SectionConditioner"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/element_definition/AdminPageFramework_Form_Model___SectionConditioner.php", 
