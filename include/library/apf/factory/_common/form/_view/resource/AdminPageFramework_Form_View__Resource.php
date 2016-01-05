@@ -11,6 +11,9 @@ class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoL
         if ($this->isDoingAjax()) {
             return;
         }
+        if ($this->hasBeenCalled('resource_' . $oForm->aArguments['caller_id'])) {
+            return;
+        }
         $this->_setHooks();
     }
     private function _setHooks() {

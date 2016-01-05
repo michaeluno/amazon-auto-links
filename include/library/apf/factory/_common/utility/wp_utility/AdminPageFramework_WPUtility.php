@@ -82,13 +82,13 @@ class AmazonAutoLinks_AdminPageFramework_WPUtility_HTML extends AmazonAutoLinks_
 }
 class AmazonAutoLinks_AdminPageFramework_WPUtility_Page extends AmazonAutoLinks_AdminPageFramework_WPUtility_HTML {
     static public function getCurrentPostType() {
-        static $_sCurrentPostType;
-        if ($_sCurrentPostType) {
-            return $_sCurrentPostType;
+        if (isset(self::$_sCurrentPostType)) {
+            return self::$_sCurrentPostType;
         }
-        $_sCurrentPostType = self::_getCurrentPostType();
-        return $_sCurrentPostType;
+        self::$_sCurrentPostType = self::_getCurrentPostType();
+        return self::$_sCurrentPostType;
     }
+    static private $_sCurrentPostType;
     static private function _getCurrentPostType() {
         $_aMethodsToTry = array('getPostTypeByTypeNow', 'getPostTypeByScreenObject', 'getPostTypeByREQUEST', 'getPostTypeByPostObject',);
         foreach ($_aMethodsToTry as $_sMethodName) {
@@ -118,7 +118,7 @@ class AmazonAutoLinks_AdminPageFramework_WPUtility_Page extends AmazonAutoLinks_
         }
     }
     static public function getPostTypeByPostObject() {
-        if (isset($GLOBALS['post'], $GLOBALS['post']->post_type) && $GLOBALS['post']->post_type) {
+        if (isset($GLOBALS['post']->post_type) && $GLOBALS['post']->post_type) {
             return $GLOBALS['post']->post_type;
         }
     }

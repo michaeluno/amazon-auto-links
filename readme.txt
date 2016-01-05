@@ -221,9 +221,12 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.3.5 =
+- Optimized performance in the admin area.
+
 = 3.3.4 - 01/02/2015 = 
 - Fixed a bug that a fatal error occurred with category units on sites enabling SSL.
-- Improved a performance in the setting pages.
+- Improved performance of the setting pages.
 
 = 3.3.3 - 12/31/2015 =
 - Fixed a bug that caused illegal string offset warnings with stored template data.
