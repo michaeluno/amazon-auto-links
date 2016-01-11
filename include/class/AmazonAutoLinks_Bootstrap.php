@@ -252,13 +252,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                     AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ],
                     $this->sFilePath 
                 );
-                new AmazonAutoLinks_HelpAdminPage(
-                    '', // no options
-                    $this->sFilePath 
-                );
                 
+                new AmazonAutoLinks_HelpAdminPage;                
                 new AmazonAutoLinks_InfoBoxLoader;
-             
                 
             }
         
