@@ -102,8 +102,8 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
 
             $_oUtil = new AmazonAutoLinks_PluginUtility;
             
-            $_sNew = $_oUtil->getElement( $aInputs, 'preview_post_type_slug' );
-            $_sOld = $_oUtil->getElement( $aOldInputs, 'preview_post_type_slug' );
+            $_sNew = trim( $_oUtil->getElement( $aInputs, 'preview_post_type_slug' ) );
+            $_sOld = trim( $_oUtil->getElement( $aOldInputs, 'preview_post_type_slug' ) );
             
             // If no change, do nothing
             if ( $_sNew === $_sOld ) {
@@ -114,8 +114,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
             if ( ! $_sNew ) {
                 return;
             }
-            
-            
+                        
             // Set an option and instantiate the custom post type to force register the custom preview post type
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_oOption->set( 
@@ -125,7 +124,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
             
             // Force post type registration.
             $_oPostType = new AmazonAutoLinks_PostType_UnitPreview;
-            $_oPostType->_replyToRegisterCustomPreviewPostType();
+            $_oPostType->_replyToRegisterCustomPreviewPostType( $_sNew );
             
             // Flush rewrite rules.
             flush_rewrite_rules( true );

@@ -22,29 +22,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setArguments(
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
-                'labels' => array(
-                    'name'                  => AmazonAutoLinks_Registry::NAME,
-                    'menu_name'             => apply_filters(
-                        'aal_filter_admin_menu_name',
-                        AmazonAutoLinks_Registry::NAME
-                    ),
-                    'all_items'             => __( 'Manage Units', 'amazon-auto-links' ),    // sub menu label
-                    'singular_name'         => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
-                    'add_new'               => __( 'Add Unit by Category', 'amazon-auto-links' ),
-                    'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
-                    'edit'                  => __( 'Edit', 'amazon-auto-links' ),
-                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
-                    'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
-                    'view'                  => __( 'View', 'amazon-auto-links' ),
-                    'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
-                    'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
-                    'not_found'             => __( 'No unit found for Amazon Auto Links', 'amazon-auto-links' ),
-                    'not_found_in_trash'    => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
-                    'parent'                => 'Parent Unit',
-                    
-                    // framework specific keys
-                    'plugin_action_link' => __( 'Manage Units', 'amazon-auto-links' ),
-                ),
+                'labels'                => $this->getLabels(),
                 
                 // If a custom preview post type is set, make it not public. 
                 // However, other ui arguments should be enabled.
@@ -90,25 +68,61 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 'submenu_order'         => 40,  // the Setting page is 50
             )
         );
-        
-        if (  $this->_isInThePage() ) {
-            
-            $this->setAutoSave( false );
-            $this->setAuthorTableFilter( false );            
-            add_filter( 'months_dropdown_results', '__return_empty_array' );
-            
-            add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );
-            add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );
                 
-            $this->enqueueStyles(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
-            );
-                  
-        }
-        
         parent::setUp();
-
            
+    }
+        /**
+         * @return      array       Label arguments.
+         */
+        private function getLabels() {
+            
+            return $this->oProp->bIsAdmin
+                ? array(
+                    'name'                  => AmazonAutoLinks_Registry::NAME,
+                    'menu_name'             => apply_filters(
+                        'aal_filter_admin_menu_name',
+                        AmazonAutoLinks_Registry::NAME
+                    ),
+                    'all_items'             => __( 'Manage Units', 'amazon-auto-links' ),    // sub menu label
+                    'singular_name'         => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
+                    'add_new'               => __( 'Add Unit by Category', 'amazon-auto-links' ),
+                    'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
+                    'edit'                  => __( 'Edit', 'amazon-auto-links' ),
+                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
+                    'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
+                    'view'                  => __( 'View', 'amazon-auto-links' ),
+                    'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
+                    'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
+                    'not_found'             => __( 'No unit found for Amazon Auto Links', 'amazon-auto-links' ),
+                    'not_found_in_trash'    => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
+                    'parent'                => 'Parent Unit',
+                    
+                    // framework specific keys
+                    'plugin_action_link' => __( 'Manage Units', 'amazon-auto-links' ),
+                ) 
+                : array(
+                    'name'                  => AmazonAutoLinks_Registry::NAME,
+                );
+            
+        }
+    /**
+     * Called when the edit.php of the post type starts loading.
+     * @since       3.3.5
+     */
+    public function load() {
+        
+        $this->setAutoSave( false );
+        $this->setAuthorTableFilter( false );            
+        add_filter( 'months_dropdown_results', '__return_empty_array' );
+        
+        add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );
+        add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );
+            
+        $this->enqueueStyles(
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
+        );        
+        
     }
         
     /**

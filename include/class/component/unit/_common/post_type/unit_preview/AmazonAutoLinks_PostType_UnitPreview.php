@@ -31,7 +31,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
      * 
      * @since       2.2.0
      */
-    public function __construct() {
+    public function __construct( $sPreviewPostTypeSlug='' ) {
         
         // If a custom preview post type is not set, do nothing.
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -41,10 +41,16 @@ class AmazonAutoLinks_PostType_UnitPreview {
         
         // Properties
         $this->sDefaultPreviewSlug  = AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
-        $this->sPreviewPostTypeSlug = $_oOption->get( 
-            'unit_preview', 
-            'preview_post_type_slug' 
-        );
+        $this->sPreviewPostTypeSlug = $sPreviewPostTypeSlug
+            ? $sPreviewPostTypeSlug
+            : $_oOption->get( 
+                'unit_preview', 
+                'preview_post_type_slug' 
+            );
+        
+        if ( ! $this->sPreviewPostTypeSlug ) {
+            return;
+        }
         
         // Hooks
         /// Post Type
@@ -116,6 +122,10 @@ class AmazonAutoLinks_PostType_UnitPreview {
      */
     public function _replyToRegisterCustomPreviewPostType() {
 
+        if ( ! $this->sPreviewPostTypeSlug ) {
+            return;
+        }    
+    
         $_oOption = AmazonAutoLinks_Option::getInstance();
         register_post_type(
             $this->sPreviewPostTypeSlug,
