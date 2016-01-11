@@ -222,6 +222,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.3.5 =
+- Tweaked the style of an Auto-insert option. 
 - Fixed a bug that caused a warning when setting the Post Type Slug option ( `Settings` -> `General` -> `Unit Preview` -> `Post Type Slug`).
 - Optimized performance in the admin area.
 
