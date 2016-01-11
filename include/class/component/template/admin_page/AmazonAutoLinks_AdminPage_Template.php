@@ -14,14 +14,10 @@
  */
 class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_Base {
 
-
     /**
-     * A user constructor.
-     * 
-     * @since       3
-     * @return      void
+     * @callback        action      load_{page slug}
      */
-    public function construct( $oFactory ) {
+    public function replyToLoadPage( $oFactory ) {
         
         // Tabs
         new AmazonAutoLinks_AdminPage_Template_ListTable( 
@@ -39,10 +35,8 @@ class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_
                 'tab_slug'  => 'get',
                 'title'     => __( 'Get New', 'amazon-auto-links' ),
             )
-        );
-
-    }   
-    
-
+        );        
+        
+    }
         
 }
