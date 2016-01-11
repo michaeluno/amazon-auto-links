@@ -44,6 +44,15 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             }                    
         }
         
+        // Custom messages
+        $oFactory->setMessage(
+            'allowed_maximum_number_of_fields',
+            sprintf(
+                __( 'Please upgrade to <a href="%1$s">Pro</a> to add more items!', 'amazon-auto-links' ),
+                'http://en.michaeluno.jp/amazon-auto-links-pro'
+            )
+        );        
+        
     }
         /**
          * @since       3

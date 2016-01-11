@@ -46,32 +46,16 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
                 'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
             )
         );        
-        
-        $this->setMessage(
-            'allowed_maximum_number_of_fields',
-            sprintf(
-                __( 'Please upgrade to <a href="%1$s">Pro</a> to add more items!', 'amazon-auto-links' ),
-                'http://en.michaeluno.jp/amazon-auto-links-pro'
-            )
-        );
      
     }
-    
-    /**
-     * Registers custom filed types of Admin Page Framework.
-     */
-    public function registerFieldTypes() {}
-    
+        
     /**
      * Page styling
      * @since       3
      * @return      void
      */
-    public function doPageSettings() {
-                    
+    public function doPageSettings() {                
         $this->setPageTitleVisibility( true ); // disable the page title of a specific page.   
-       
-                    
     }
         
 }
