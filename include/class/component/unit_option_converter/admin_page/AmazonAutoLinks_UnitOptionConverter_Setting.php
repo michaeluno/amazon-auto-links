@@ -21,7 +21,12 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
             'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], 
             array( $this, 'replyToLoadPage' )
         );
+                
+    }
+    
+    public function replyToLoadPage( $oFactory ) {
         
+        // Page meta boxes.
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Common(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Common', 'amazon-auto-links' ), // title
@@ -80,12 +85,9 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
             ),
             'side',                                       // context
             'high'                                     // priority                    
-        );
+        );        
         
-    }
-    
-    public function replyToLoadPage( $oFactory ) {
-        
+        // Tabs
         new AmazonAutoLinks_UnitOptionConverter_Setting_Tab( 
             $oFactory,
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
