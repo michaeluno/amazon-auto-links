@@ -20,22 +20,40 @@ class AmazonAutoLinks_InfoBoxLoader {
      */
     public function __construct() {
         
-        if ( ! is_admin() ) {
+        $_aTargetPageSlugs = array( // page slugs
+            AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+            AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
+            AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
+        );
+                
+        if ( ! $this->_shouldProceed( $_aTargetPageSlugs ) ) {
             return;
-        }        
-    
+        }
+            
         new AmazonAutoLinks_AdminPageMetaBox_Information(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Information', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
-                AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
-            ),
+            $_aTargetPageSlugs,
             'side',                                       // context
             'default'                                     // priority            
         );    
     
     }    
+        /**
+         * @return      boolean
+         */
+        private function _shouldProceed( $aTargetPageSlugs ) {
+        
+            if ( ! is_admin() ) {
+                return false;
+            }        
+        
+            if ( ! isset( $_GET[ 'page' ] ) ) {
+                return false;
+            }
+            
+            return in_array( $_GET[ 'page' ], $aTargetPageSlugs );
+        
+        }
     
 }
