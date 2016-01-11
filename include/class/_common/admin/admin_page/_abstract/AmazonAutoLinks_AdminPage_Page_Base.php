@@ -32,18 +32,8 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
         $this->sPageSlug    = $aPageArguments['page_slug'];
         $this->_addPage( $aPageArguments );
         $this->construct( $oFactory );
-        $this->_enqueueStyle();
-        
+                
     }
-        /**
-         * Enqueues the style of the css file with the page slug name to the page.
-         */
-        protected function _enqueueStyle() {
-            $this->oFactory->enqueueStyle( 
-                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/' . $this->sPageSlug . '.css' ),
-                $this->sPageSlug
-            );    
-        }    
     
     private function _addPage( array $aPageArguments ) {
         
@@ -55,13 +45,26 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
                 'screen_icon'   => null,
             )                
         );
+        add_action( "load_{$this->sPageSlug}", array( $this, 'replyToSetResources' ) );
         add_action( "load_{$this->sPageSlug}", array( $this, 'replyToLoadPage' ) );
         add_action( "do_{$this->sPageSlug}", array( $this, 'replyToDoPage' ) );
         add_action( "do_after_{$this->sPageSlug}", array( $this, 'replyToDoAfterPage' ) );
         add_filter( "validation_{$this->sPageSlug}", array( $this, 'validate' ), 10, 4 );
         
     }
-
+    
+    /**
+     * @callback    action      load_{page slug}
+     */
+    public function replyToSetResources( $oFactory ) {
+        
+        $this->oFactory->enqueueStyle( 
+            AmazonAutoLinks_Registry::getPluginURL( 'asset/css/' . $this->sPageSlug . '.css' ),
+            $this->sPageSlug
+        );            
+        
+    }
+    
     /**
      * Called when the page loads.
      * 
