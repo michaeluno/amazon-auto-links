@@ -14,14 +14,11 @@
  */
 class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_Base {
 
-
     /**
-     * A user constructor.
      * 
-     * @since       3
-     * @return      void
-     */
-    public function construct( $oFactory ) {
+     * @callback        action      load_{page slug}
+     */    
+    public function replyToLoadPage( $oFactory ) {
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
         
@@ -67,9 +64,9 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
                     'title'     => __( 'Get Pro', 'amazon-auto-links' ),
                 )
             );       
-        }
-
-    }   
+        }        
+        
+    }
     
     /**
      * 
