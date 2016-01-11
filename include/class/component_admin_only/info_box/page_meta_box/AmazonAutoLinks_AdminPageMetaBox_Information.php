@@ -7,26 +7,17 @@
  * 
  */
  
- 
 class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_AdminPageFramework_PageMetaBox {
         
-    /*
-     * ( optional ) Use the setUp() method to define settings of this meta box.
+    /**
+     * (optional) Use the setUp() method to define settings of this meta box.
      */
     public function setUp() {
-        add_action( 
-            'current_screen', 
-            array( $this, 'replyToDecideToLoad' ), 
-            1
-        );        
-    }
-    public function replyToDecideToLoad( $oScreen ) {
 
-        if ( ! $this->_isInThePage() ) {
-            return;
-        }
-        
-        $_bProInstalled   = class_exists( 'AmazonAutoLinksPro_Registry' );
+        $_bProInstalled   = class_exists( 
+            'AmazonAutoLinksPro_Registry', 
+            false       // disable auto-load for performance
+        );
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
