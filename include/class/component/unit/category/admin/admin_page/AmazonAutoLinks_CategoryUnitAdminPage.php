@@ -97,15 +97,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
         );        
         
     }
-    /**
-     * Registers custom filed types of Admin Page Framework.
-     */
-    public function registerFieldTypes() {
-        
-        // @deprecated
-        // new AmazonPAAPIAuthFieldType( 'AmazonAutoLinks_AdminPage' );
-        
-    }
+
     /**
      * Page styling
      * @since       3
@@ -115,40 +107,12 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
                     
         $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
         $this->setInPageTabTag( 'h2' );                
-        $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
+        
         $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-        
-        
-// @todo examine whether this is necessary or not.            
-$this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
-return;                          
-        // Action Links (plugin.php)
-        // $this->addLinkToPluginTitle(
-            // $_sLink1,
-            // $_sLink2
-        // );
-
-        
-        $this->setPageHeadingTabsVisibility( false );        // disables the page heading tabs by passing false.
-                     
-        $this->setInPageTabTag( 'h3', 'aal_add_category_unit' );
-        $this->setInPageTabsVisibility( false, 'aal_add_category_unit' );
-        $this->setInPageTabsVisibility( false, 'aal_add_search_unit' );
-        $this->setInPageTabsVisibility( false, 'aal_define_auto_insert' );
                 
-        
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/select_categories.css' ), 'aal_add_category_unit', 'select_categories' );
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/aal_add_search_unit.css' ), 'aal_add_search_unit' );
-        
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/aal_templates.css' ), 'aal_templates' );
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/readme.css' ), 'aal_about' );
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/readme.css' ), 'aal_help' );
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/get_pro.css' ), 'aal_about', 'get_pro' );
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ), 'aal_add_category_unit', 'select_categories' );
+        // @todo examine whether this is necessary or not.            
+        $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
 
-        
-            
-            
     }
         
 }

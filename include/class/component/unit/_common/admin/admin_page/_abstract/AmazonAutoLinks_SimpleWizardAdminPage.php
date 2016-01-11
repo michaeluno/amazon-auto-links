@@ -31,7 +31,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             array( $this, 'registerFieldTypes' )
         );
         add_action( 
-            "set_up_" . $this->oProp->sClassName,
+            "load_" . $this->oProp->sClassName,
             array( $this, 'doPageSettings' )
         );        
         
