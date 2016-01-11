@@ -28,7 +28,6 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             array( $this, 'replyToSetOptions' )
         );
         
-           
     }
         /**
          * Sets the default option values for the setting form.
@@ -49,7 +48,10 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
         );
         
-        $this->_doPageSettings();
+        add_action( 
+            'load_' . $this->oProp->sClassName,
+            array( $this, 'replyToDoPageSettings' )
+        );
         
     }
         
@@ -58,11 +60,11 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
          * @since       3
          * @return      void
          */
-        private function _doPageSettings() {
+        public function replyToDoPageSettings() {
                         
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $this->setInPageTabTag( 'h2' );                
-            // $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
+
             $this->addLinkToPluginDescription(
                 "<a href='https://wordpress.org/support/plugin/amazon-auto-links' target='_blank'>" . __( 'Support', 'amazon-auto-links' ) . "</a>"
             );         
