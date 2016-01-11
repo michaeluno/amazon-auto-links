@@ -22,7 +22,8 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
         
         add_action( 
             'set_up_' . 'AmazonAutoLinks_AdminPage',
-            array( $this, 'replyToSetUpAdminPage' )
+            array( $this, 'replyToSetUpAdminPage' ),
+            5   // faily higher priority so that the plugin action link points to this page
         );
 
     }    
