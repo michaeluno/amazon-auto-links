@@ -14,36 +14,26 @@
  */
 class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_Base {
 
-
     /**
-     * A user constructor.
      * 
-     * @since       3
-     * @return      void
-     */
-    public function construct( $oFactory ) {
+     * @callback        action      load_{page slug}
+     */    
+    public function replyToLoadPage( $oFactory ) {
         
-        // Tabs
-        // @deprecated 3.3.0
-        // new AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter( 
-            // $this->oFactory,
-            // $this->sPageSlug,
-            // array( 
-                // 'tab_slug'  => 'template_option_converter',
-                // 'title'     => __( 'Template Option Converter', 'amazon-auto-links' ),
-            // )
-        // );
-     
-    }   
-    
-    /**
-     * Prints debug information at the bottom of the page.
-     * 
-     * @callback        action      do_after_{page slug}
-     */
-    public function replyToDoAfterPage( $oFactory ) {
-            
-
+        $this->_doPageSettings( $oFactory );
+        
     }
+        /**
+         * Page styling
+         * @since       3
+         * @return      void
+         */
+        private function _doPageSettings( $oFactory ) {
+                        
+            $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
+            $oFactory->setInPageTabTag( 'h2' );                
+            $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+  
+        }    
         
 }

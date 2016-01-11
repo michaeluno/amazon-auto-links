@@ -38,22 +38,8 @@ class AmazonAutoLinks_ToolAdminPage extends AmazonAutoLinks_AdminPageFramework {
             )                
         );          
         
-        $this->_doPageSettings();
+        $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.      
         
     }
-        
-        /**
-         * Page styling
-         * @since       3
-         * @return      void
-         */
-        private function _doPageSettings() {
-                        
-            $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-            $this->setInPageTabTag( 'h2' );                
-            $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.      
-            $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-  
-        }
 
 }
