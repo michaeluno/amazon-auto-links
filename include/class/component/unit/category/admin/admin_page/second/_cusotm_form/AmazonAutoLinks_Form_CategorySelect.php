@@ -350,7 +350,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     protected function _getSidebar( $sPageURL, $sLocale='US', $iAttempt=0 ) {
         
         // Include the library.
-        if ( ! class_exists( 'simple_html_dom_node' ) ) {
+        if ( ! class_exists( 'simple_html_dom_node', false ) ) {
             include_once( AmazonAutoLinks_Registry::$sDirPath . '/include/library/simple_html_dom.php' );
         }
 

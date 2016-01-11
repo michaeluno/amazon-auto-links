@@ -46,7 +46,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
             $_sProImage = esc_url( 
                 AmazonAutoLinks_Registry::getPluginURL( 'asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg' ) 
             );            
-            return class_exists( 'AmazonAutoLinksPro_Registry' )
+            return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
                 : "<a href='http://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
                     . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}'/>"

@@ -8,7 +8,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
 */
 
-if ( ! class_exists( 'WP_List_Table' ) ) {
+if ( ! class_exists( 'WP_List_Table', false ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 

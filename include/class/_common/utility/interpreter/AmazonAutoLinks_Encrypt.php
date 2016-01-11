@@ -11,7 +11,7 @@
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since        2.0.0
  */
-if ( ! class_exists( 'IXR_Message' ) ) { 
+if ( ! class_exists( 'IXR_Message', false ) ) { 
     require_once( ABSPATH . WPINC . '/class-IXR.php' );
 }
 class AmazonAutoLinks_Encrypt extends IXR_Message {

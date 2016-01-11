@@ -24,7 +24,7 @@ abstract class AmazonAutoLinks_ScraperPSHDP_Base extends AmazonAutoLinks_PluginU
      */
     public function __construct( $sURLOrFIlePathOrHTML ) {
 
-        if ( ! class_exists( 'simple_html_dom_node' ) ) {
+        if ( ! class_exists( 'simple_html_dom_node', false ) ) {
             include( AmazonAutoLinks_Registry::$sDirPath . '/include/library/simple_html_dom.php' );
         }     
         
