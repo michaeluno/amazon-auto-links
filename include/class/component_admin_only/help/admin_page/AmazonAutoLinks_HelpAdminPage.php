@@ -12,25 +12,25 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
+class AmazonAutoLinks_HelpAdminPage  {
+// class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
 
-    /**
-     * User constructor.
-     */
-    public function start() {  
+    public function __construct() {
+        
+        add_action( 
+            'set_up_' .  'AmazonAutoLinks_AdminPage',
+            array( $this, 'replyToSetUp' )
+        );
+        
     }
 
     /**
      * Sets up admin pages.
      */
-    public function setUp() {
+    public function replyToSetUp( $oFactory ) {
         
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
-    
         new AmazonAutoLinks_HelpAdminPage_Help( 
-            $this,
+            $oFactory,
             array(
                 'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
                 'title'     => __( 'Help', 'amazon-auto-links' ),
@@ -42,23 +42,6 @@ class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
             )                
         );          
         
-        $this->_doPageSettings();
     }
-        
-        /**
-         * Page styling
-         * @since       3
-         * @return      void
-         */
-        private function _doPageSettings() {
-                        
-            $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-            $this->setInPageTabTag( 'h2' );                
-            $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-            // $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-            // $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
-
-        }
-    
    
 }

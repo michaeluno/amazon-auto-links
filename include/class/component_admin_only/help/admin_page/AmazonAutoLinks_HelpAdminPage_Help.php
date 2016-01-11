@@ -66,13 +66,23 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
             );       
         }        
         
+        $this->_doPageSettings( $oFactory );
+        
     }
     
-    /**
-     * 
-     * @callback        action      do_after_{page slug}
-     */
-    public function replyToDoAfterPage( $oFactory ) {
-    }
-        
+        /**
+         * Page styling
+         * @since       3
+         * @return      void
+         */
+        private function _doPageSettings( $oFactory ) {
+                        
+            $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
+            $oFactory->setInPageTabTag( 'h2' );                
+            $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
+            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
+
+        }    
+            
 }
