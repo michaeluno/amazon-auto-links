@@ -97,6 +97,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
 
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
+            $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
             $oFactory->setSettingNotice( 
                 sprintf( 
                     __( 'Please upgrade to <A href="%1$s">Pro</a> to add more units! Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ), 
