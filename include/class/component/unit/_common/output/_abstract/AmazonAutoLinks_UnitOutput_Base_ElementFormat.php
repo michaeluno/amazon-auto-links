@@ -3,7 +3,7 @@
  * Amazon Auto Links
  * 
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2015 Michael Uno
+ * Copyright (c) 2013-2016 Michael Uno
  * 
  */
 
@@ -232,15 +232,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
                     $_sASIN
                 );
-                // $_sProductURL   = $this->getProductLinkURLFormatted( $_sProductURL, $_sASIN );
+
                 $_sProductURL   = esc_url( $_sProductURL );
                 $_sThumbnailURL = esc_url( $_sThumbnailURL );
                 $_sTitle        = esc_attr( $_sTitle );
-                return "<a href='{$_sProductURL}' target='blank'>"
-                        . "<div class='amazon-similar-product' style='max-height: {$_iImageSize}px; max-width: {$_iImageSize}px;'>"
+                return "<div class='amazon-similar-product' style='max-height: {$_iImageSize}px; max-width: {$_iImageSize}px;'>"
+                        . "<a href='{$_sProductURL}' target='blank'>"
                             . "<img class='amazon-similar-product-thumbnail' src='{$_sThumbnailURL}' title='{$_sTitle}' alt='{$_sTitle}' style='max-height: {$_iImageSize}px;' />"
-                        . "</div>"
-                    . "</a>";
+                        . "</a>"
+                    . "</div>";
 
             }
     
