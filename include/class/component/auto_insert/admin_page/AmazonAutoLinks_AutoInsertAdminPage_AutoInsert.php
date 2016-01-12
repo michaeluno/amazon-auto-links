@@ -42,19 +42,17 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
             )
         );
        
-        $this->_doPageSettings();
-        
     }   
     
-        private function _doPageSettings() {
-            
-            $this->oFactory->setPageHeadingTabsVisibility( true );
-            $this->oFactory->setPageTitleVisibility( true ); 
-            $this->oFactory->setInPageTabsVisibility( false );
-            
-        }
  
-    public function replyToDoPage( $oFactory ) {}
+    public function replyToLoadPage( $oFactory ) {
+    
+        $oFactory->setPageHeadingTabsVisibility( true );
+        $oFactory->setPageTitleVisibility( true ); 
+        $oFactory->setInPageTabsVisibility( false );      
+      
+    }
+ 
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isDebug() ) {
