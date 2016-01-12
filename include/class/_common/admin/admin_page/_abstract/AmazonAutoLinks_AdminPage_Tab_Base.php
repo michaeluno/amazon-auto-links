@@ -3,7 +3,7 @@
  * Amazon Auto Links
  * 
  * http://en.michaeluno.jp/amazon-auto-inks/
- * Copyright (c) 2013-2015 Michael Uno; Licensed GPLv2
+ * Copyright (c) 2013-2016 Michael Uno; Licensed GPLv2
  */
 
 /**
