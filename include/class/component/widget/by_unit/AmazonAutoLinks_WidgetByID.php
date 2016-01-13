@@ -58,9 +58,13 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
                 'is_multiple'   => true,
                 'label'         => array(), // will be reassigned in a callback
                 // 'label'         => $this->_getUnitLabels(),
-                'description'   => __( 'Hold down the Ctrl (windows) / Command (Mac) key to select multiple items.', 'amazon-auto-links' )
+                'description'   => __( 'Hold down the Ctrl (windows) / Command (Mac) key to select multiple items.', 'amazon-auto-links' ),
+                'attributes'    => array(
+                    'select'    => array(
+                        'size'  => 10,
+                    ),
+                ),
             )
-           
         );        
 
         // Additional fields 
@@ -70,17 +74,17 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
             )
         );  
 
-add_filter( 'field_definition_' . $this->oProp->sClassName  . '_id', array( $this, 'replyToSetUnitLabels' ) );
+        add_filter( 'field_definition_' . $this->oProp->sClassName  . '_id', array( $this, 'replyToSetUnitLabels' ) );
         
     }
-/**
- * @return      array
- * @since       3.3.0
- */
-public function replyToSetUnitLabels( $aFieldset ) {
-    $aFieldset[ 'label' ] = $this->_getUnitLabels();
-    return $aFieldset;
-}
+        /**
+         * @return      array
+         * @since       3.3.0
+         */
+        public function replyToSetUnitLabels( $aFieldset ) {
+            $aFieldset[ 'label' ] = $this->_getUnitLabels();
+            return $aFieldset;
+        }
     
         /**
          * Adds form fields by the given class names.
