@@ -99,7 +99,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                     'parent'                => 'Parent Unit',
                     
                     // framework specific keys
-                    'plugin_action_link' => __( 'Manage Units', 'amazon-auto-links' ),
+                    'plugin_action_link' => __( 'Units', 'amazon-auto-links' ),
                 ) 
                 : array(
                     'name'                  => AmazonAutoLinks_Registry::NAME,
