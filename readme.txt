@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.3.6 =
+- Fixed PHP warning for using a deprecated method.
+
 = 3.3.5 - 01/13/2016 =
 - Tweaked the style of an Auto-insert option. 
 - Fixed a bug that caused a warning when setting the Post Type Slug option ( `Settings` -> `General` -> `Unit Preview` -> `Post Type Slug`).
