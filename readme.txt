@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.4
-Stable tag:         3.3.4
+Tested up to:       4.4.1
+Stable tag:         3.3.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,12 +221,12 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.3.5 =
+= 3.3.5 - 01/13/2016 =
 - Tweaked the style of an Auto-insert option. 
 - Fixed a bug that caused a warning when setting the Post Type Slug option ( `Settings` -> `General` -> `Unit Preview` -> `Post Type Slug`).
 - Optimized performance in the admin area.
 
-= 3.3.4 - 01/02/2015 = 
+= 3.3.4 - 01/02/2016 = 
 - Fixed a bug that a fatal error occurred with category units on sites enabling SSL.
 - Improved performance of the setting pages.
 
