@@ -156,7 +156,11 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             $_aURLs = $this->getAsArray( $asURLs );
             $_oHTTP = new AmazonAutoLinks_HTTPClient( 
                 $_aURLs,
-                $this->oUnitOption->get( 'cache_duration' )
+                $this->oUnitOption->get( 'cache_duration' ),
+                array(  // http argumentss
+                    'timeout'     => 20,
+                    'redirection' => 20,
+                )
             );
             
             $_aHTMLBodies = $_oHTTP->get();
@@ -237,7 +241,6 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             }
             
             $_aURLs = $_aURLs + $this->_getURLs( implode( PHP_EOL, $_aTexts ) );
-            
             $_aASINs = $this->_getASINsExtracted( $_aURLs );
             return $_aASINs;
 
@@ -277,7 +280,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * @return      array    List of urls
          */
         private function _getURLs( $sText ) {
-            
+
             $_aURLs = array();
             preg_match_all( 
                 '#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#s',
@@ -285,9 +288,11 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 $_aURLs
             );
             $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
-            
+
             // Make it associative so that duplicate items will be lost.
-            return array_combine( $_aURLs, $_aURLs );
+            return empty( $_aURLs )
+                ? $_aURLs
+                : array_combine( $_aURLs, $_aURLs );
             
         }
   
