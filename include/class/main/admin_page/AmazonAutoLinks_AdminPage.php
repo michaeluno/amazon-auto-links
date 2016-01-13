@@ -53,6 +53,14 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             array( $this, 'replyToDoPageSettings' )
         );
         
+        if ( 'plugins.php' === $this->oProp->sPageNow ) {
+            $this->addLinkToPluginDescription(
+                "<a href='https://wordpress.org/support/plugin/amazon-auto-links' target='_blank'>" 
+                        . __( 'Support', 'amazon-auto-links' ) 
+                    . "</a>"
+            );         
+        }
+        
     }
         
         /**
@@ -64,13 +72,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
                         
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $this->setInPageTabTag( 'h2' );                
-
-            $this->addLinkToPluginDescription(
-                "<a href='https://wordpress.org/support/plugin/amazon-auto-links' target='_blank'>" . __( 'Support', 'amazon-auto-links' ) . "</a>"
-            );         
-
             $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-
             $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
         
         }
