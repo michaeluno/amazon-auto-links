@@ -23,7 +23,7 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
         add_action( 
             'set_up_' . 'AmazonAutoLinks_AdminPage',
             array( $this, 'replyToSetUpAdminPage' ),
-            5   // faily higher priority so that the plugin action link points to this page
+            5   // fairly higher priority so that the plugin action link points to this page
         );
 
     }    
@@ -42,10 +42,23 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
                 'order'         => 50,
             )
         );
-       
         
+        if ( 'plugins.php' === $oFactory->oProp->sPageNow ) {
+            $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.      
+            $_sSettingsURL = add_query_arg(
+                array(
+                    'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                    'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+                ),
+                admin_url( 'edit.php' )
+            );
+            $oFactory->addLinkToPluginTitle(
+                "<a href='" . esc_url( $_sSettingsURL ) . "'>" 
+                        . __( 'Settings', 'amazon-auto-links' ) 
+                    . "</a>"
+            );         
+        }
+            
     }
-    
-  
-    
+ 
 }

@@ -106,7 +106,7 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_PluginUtility
 
         $_sCSSRules = defined( 'WP_DEBUG' ) && WP_DEBUG
             ? $_sCSSRules
-            : AmazonAutoLinks_Utility::minifyCSS( $_sCSSRules );
+            : $this->getCSSMinified( $_sCSSRules );
         echo "<style type='text/css' id='amazon-auto-links-button-css'>"
                 . $_sCSSRules
             . "</style>";

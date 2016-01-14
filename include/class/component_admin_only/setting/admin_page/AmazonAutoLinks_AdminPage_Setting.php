@@ -23,6 +23,17 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
      */
     public function construct( $oFactory ) {
         
+       
+
+    }   
+    
+    /**
+     * Gets load when the page starts loading.
+     * @callback        load_{page slug}
+     * @return      void
+     */
+    public function replyToLoadPage( $oFactory ) {
+        
         // Tabs
         new AmazonAutoLinks_AdminPage_Setting_Authentication( 
             $this->oFactory,
@@ -63,10 +74,9 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
                 'tab_slug'  => 'reset',
                 'title'     => __( 'Reset', 'amazon-auto-links' ),
             )
-        );
-       
-
-    }   
+        );                
+        
+    }
     
     /**
      * Prints debug information at the bottom of the page.
