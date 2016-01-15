@@ -14,7 +14,10 @@
  * @since        3.3.0
  */
 class AmazonAutoLinks_UnitOptionConverter_Setting {
-        
+    
+    /**
+     * Sets up hooks.
+     */
     public function __construct() {
        
         add_action( 
@@ -24,6 +27,10 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
                 
     }
     
+    /**
+     * @return      void
+     * @callback    action      load_{page slug}
+     */
     public function replyToLoadPage( $oFactory ) {
         
         // Page meta boxes.
@@ -97,7 +104,6 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
             )
         );        
                 
-    }
-            
+    }            
             
 }
