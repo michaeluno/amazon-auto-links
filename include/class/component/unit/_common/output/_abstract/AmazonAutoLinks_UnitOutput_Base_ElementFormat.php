@@ -670,7 +670,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          */
         protected function getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
             
-            $iStyle = ( integer ) $iStyle;
+            $iStyle = $iStyle
+                ? ( integer ) $iStyle 
+                : 1;
             $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
             $_oLinksTyle = new $_sClassName(
                 $bRefNosim,
@@ -688,20 +690,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
 
         }
-            /**
-             * @deprecated      3
-             */
-            protected function styleProductLink( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ){
-                return $this->getFormattedProductLinkByStyle(
-                    $sURL, 
-                    $sASIN, 
-                    $iStyle,
-                    $bRefNosim=false, 
-                    $sAssociateID='', 
-                    $sLocale='US' 
-                );
-            }
-
     
     /**
      * 

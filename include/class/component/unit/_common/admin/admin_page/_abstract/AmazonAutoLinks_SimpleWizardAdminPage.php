@@ -31,17 +31,18 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             array( $this, 'registerFieldTypes' )
         );
         add_action( 
+            'load_' . $this->oProp->sClassName,
+            array( $this, 'replyToRegisterFieldTypes' )
+        );        
+        add_action( 
             "load_" . $this->oProp->sClassName,
             array( $this, 'doPageSettings' )
         );        
-        
+                
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.           
-        
-        // Register custom filed type.
-        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );        
-        
+                
     }
-    
+        
     /**
      * Sets the default option values for the setting form.
      * @callback    filter      `options_{class name}`
@@ -85,16 +86,23 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         }
         return $sPostTypeSlug === $_GET[ 'post_type' ];            
     }
+
+    /**
+     * Registers custom filed types.
+     * @return      void
+     * @callback    action      load_{instantiated class name}
+     */
+    public function replyToRegisterFieldTypes() {
+        
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );                
+      
+    }
         
     /**
      * Registers custom filed types of Admin Page Framework.
      */
-    public function registerFieldTypes() {
-        
-        // @deprecated
-        // new AmazonPAAPIAuthFieldType( 'AmazonAutoLinks_AdminPage' );
-        
-    }
+    public function registerFieldTypes() {}
+    
     /**
      * Page styling
      * @since       3

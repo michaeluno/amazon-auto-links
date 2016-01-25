@@ -48,7 +48,7 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
         $this->bIsNetworkAdmin  = false; // disabled.
         $this->sOptionKey       = $sOptionKey;
         $this->aOptions         = $this->_getFormattedOptions( $sOptionKey );
-
+        
     }     
         /**
          * Returns the formatted options array.
@@ -65,7 +65,7 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
                 $this->aDefault
             );
         }
-    
+        
     /**
      * Checks the version number
      * 

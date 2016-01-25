@@ -13,23 +13,10 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_Base {
-
-
-    /**
-     * A user constructor.
-     * 
-     * @since       3
-     * @return      void
-     */
-    public function construct( $oFactory ) {
-        
-       
-
-    }   
     
     /**
      * Gets load when the page starts loading.
-     * @callback        load_{page slug}
+     * @callback    load_{page slug}
      * @return      void
      */
     public function replyToLoadPage( $oFactory ) {
@@ -50,6 +37,14 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
                 'tab_slug'  => 'general',
                 'title'     => __( 'General', 'amazon-auto-links' ),
             )
+        );
+        new AmazonAutoLinks_AdminPage_Setting_Default(
+            $this->oFactory,
+            $this->sPageSlug,
+            array( 
+                'tab_slug'  => 'default',
+                'title'     => __( 'Default', 'amazon-auto-links' ),
+            )        
         );
         new AmazonAutoLinks_AdminPage_Setting_Cache( 
             $this->oFactory,

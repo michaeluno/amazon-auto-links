@@ -22,7 +22,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
             ? ''
             : "delete-line";
         $_iMaxCol       = $this->oOption->getMaxSupportedColumnNumber();
-        $_aItemFormat   = AmazonAutoLinks_UnitOption_Base::getDefaultItemFormat();
+        $_aItemFormat   = $this->oOption->getDefaultItemFormat();
         $_aFields       = array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'template_id',
@@ -63,7 +63,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     'style'    => 'width: 96%',
                     
                 ),
-                'default'           => $_aItemFormat['item_format'],
+                'default'           => $_aItemFormat[ 'item_format' ],
                 'description'       => __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'

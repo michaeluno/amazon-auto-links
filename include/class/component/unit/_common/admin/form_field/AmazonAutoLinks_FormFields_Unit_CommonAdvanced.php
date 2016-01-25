@@ -21,7 +21,6 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
             ? ''
             : "delete-line";
         $_iMaxCol       = $this->oOption->getMaxSupportedColumnNumber();
-        $_aItemFormat   = AmazonAutoLinks_UnitOption_Base::getDefaultItemFormat();
         $_aFields       = array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'subimage_size',

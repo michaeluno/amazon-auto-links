@@ -27,7 +27,6 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     /**
      * Stores the default values.
      */
-    // public $aDefault = array();
     public $aDefault = array(
     
         'capabilities' => array(
@@ -105,8 +104,113 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'use_description_tag_for_rss_product_content' => false,
         ),
     
+        // 3.4.0+
+        'unit_default'  => array(
+            'unit_type'                     => null,
+            'unit_title'                    => null,
+            'cache_duration'                => 86400,  // 60*60*24
+            
+            'count'                         => 10,
+            'column'                        => 4,
+            'country'                       => 'US',
+            'associate_id'                  => null,
+            'image_size'                    => 160,      
+            'ref_nosim'                     => false,
+            'title_length'                  => -1,
+            'description_length'            => 250,     // 3.3.0+  Moved from the search unit types.
+            'link_style'                    => 1,
+            'credit_link'                   => 1,   // 1 or 0
+            'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
+
+        // @todo not sure about this         
+        'title'                 => '',      // won't be used to fetch links. Used to create a unit.
+            
+            'template'              => '',      // the template name - if multiple templates with a same name are registered, the first found item will be used.
+            'template_id'           => null,    // the template ID: md5( dir path )
+            'template_path'         => '',      // the template can be specified by the template path. If this is set, the 'template' key won't take effect.
+            
+            'is_preview'            => false,   // for the search unit, true won't be used but just for the code consistency. 
+                        
+            // stores labels associated with the units (the plugin custom taxonomy). Used by the RSS2 template.
+            '_labels'               => array(),    
+            
+    // this is for fetching by label. AND, IN, NOT IN can be used
+    'operator'              => 'AND',   
+
+            
+            // 3+
+            'subimage_size'                 => 100,
+            'subimage_max_count'            => 5,
+            'customer_review_max_count'     => 2,
+            'customer_review_include_extra' => false,
+            
+            'button_id'                     => null, // a button (post) id will be assigned
+            // 3.1.0+
+            'button_type'                   => 1,   // 0: normal link, 1: add to cart
+            
+            'product_filters'               => array(
+                'white_list'    => array(
+                    'asin'          => '',
+                    'title'         => '',
+                    'description'   => '',
+                ),
+                'black_list'    => array(
+                    'asin'          => '',
+                    'title'         => '',
+                    'description'   => '',
+                ),
+                'case_sensitive'    => 0,   // or 1
+                'no_duplicate'      => 0,   // or 1
+            ),
+            // 3.1.0+
+            'skip_no_image'               => false,
+           
+           
+            'width'         => null,
+            'width_unit'    => '%',
+            'height'        => null,
+            'height_unit'   => 'px',
+            
+            'show_errors'   => true,    // whether to show an error message.
+            
+            // 3.2.0+
+            'show_now_retrieving_message'   => true,
+     
+            // 3.2.1+
+            '_allowed_ASINs' => array(),
+            
+            // 3.3.0+
+            'highest_content_heading_tag_level' => 5,
+            
+            // 3.3.0+ (boolean) Whether to fetch similar products. The background routine of retrieving similar products need to set this `false`.
+            '_search_similar_products'      => true,        
+            
+            'similar_product_image_size'    => 100,
+            'similar_product_max_count'     => 10,
+            
+            'description_suffix'            => 'read more',
+        )
+        
     );
-         
+       
+    /**
+     * Set up default options values.
+     * 
+     * Deals with default option items that need to call functions.
+     */
+    public function __construct( $sOptionKey ) {
+                
+        $this->aDefault[ 'unit_default' ][ 'description_suffix' ] = __( 'read more', 'amazon-auto-links' );
+        
+        // The `$this->aOptions` property will be established.
+        parent::__construct( $sOptionKey );
+        
+        // After `this->aOptions` is created. Set the default Item Format option.
+        $this->aOptions[ 'unit_default' ] = $this->aOptions[ 'unit_default' ] 
+            + $this->getDefaultItemFormat();  // needs to check API is connected
+        
+    }
+       
     /**
      * Returns the instance of the class.
      * 
@@ -132,7 +236,49 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         
     }         
             
-    /* Plugin specific methods */    
+            
+    /**
+     * 
+     * @remark      The array contains the concatenation character(.) 
+     * so it cannot be done in the declaration.
+     * @since       unknown
+     * @since       3.4.0       Moved from `AmazonAutoLinks_UnitOption_Base`. Removed the static scope.
+     * @return      array
+     */
+    public function getDefaultItemFormat() {
+        
+        $_bAPIConnected = $this->isAPIConnected();
+        return array(
+            'item_format' => $_bAPIConnected
+                ? '%image%' . PHP_EOL    // since the 
+                    . '%image_set%' . PHP_EOL
+                    . '%rating%' . PHP_EOL
+                    . '%title%' . PHP_EOL
+                    . '%description%' . PHP_EOL
+                    . '%disclaimer%'    // 3.2.0+
+                : '%image%' . PHP_EOL    // since the 
+                    . '%title%' . PHP_EOL
+                    . '%description%' . PHP_EOL
+                    . '%disclaimer%'    // 3.2.0+
+                    ,
+                    
+            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%px;">' . PHP_EOL
+                . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">' . PHP_EOL 
+                . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
+                . '    </a>' . PHP_EOL
+                . '</div>',
+                
+            'title_format' => '<h5 class="amazon-product-title">' . PHP_EOL
+                . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">%title_text%</a>' . PHP_EOL 
+                . '</h5>',    
+                
+        );
+        
+    }                
+            
+    /**
+     * @return      boolean
+     */
     public function isUnitLimitReached( $iNumberOfUnits=null ) {
         
         if ( ! isset( $iNumberOfUnits ) ) {

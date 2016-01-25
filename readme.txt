@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.0 =
+- Added the default unit options.
+
 = 3.3.6 - 01/14/2016 =
 - Fixed PHP warnings caused by using a deprecated method.
 

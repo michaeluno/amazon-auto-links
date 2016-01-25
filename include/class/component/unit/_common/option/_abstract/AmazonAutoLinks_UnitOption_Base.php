@@ -25,98 +25,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * Stores the unit ID.
      */
     public $iUnitID;
-
-    /**
-     * Stores the required common unit option keys.
-     * 
-     */
-    public $aCommonKeys = array(
-        'unit_type'                     => null,
-        'unit_title'                    => null,
-        'cache_duration'                => 86400,  // 60*60*24
-        
-        'count'                         => 10,
-        'column'                        => 4,
-        'country'                       => 'US',
-        'associate_id'                  => null,
-        'image_size'                    => 160,      
-        'ref_nosim'                     => false,
-        'title_length'                  => -1,
-        'description_length'            => 250,     // 3.3.0+  Moved from the search unit types.
-        'link_style'                    => 1,
-        'credit_link'                   => 1,   // 1 or 0
-        'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
-
-// @todo not sure about this         
-'title'                 => '',      // won't be used to fetch links. Used to create a unit.
-        
-        'template'              => '',      // the template name - if multiple templates with a same name are registered, the first found item will be used.
-        'template_id'           => null,    // the template ID: md5( dir path )
-        'template_path'         => '',      // the template can be specified by the template path. If this is set, the 'template' key won't take effect.
-        
-        'is_preview'            => false,   // for the search unit, true won't be used but just for the code consistency. 
-        
-        
-        // stores labels associated with the units (the plugin custom taxonomy). Used by the RSS2 template.
-        '_labels'               => array(),    
-        
-// this is for fetching by label. AND, IN, NOT IN can be used
-'operator'              => 'AND',   
-
-        
-        // 3+
-        'subimage_size'                 => 100,
-        'subimage_max_count'            => 5,
-        'customer_review_max_count'     => 2,
-        'customer_review_include_extra' => false,
-        
-        'button_id'                     => null, // a button (post) id will be assigned
-        // 3.1.0+
-        'button_type'                   => 1,   // 0: normal link, 1: add to cart
-        
-        'product_filters'               => array(
-            'white_list'    => array(
-                'asin'          => '',
-                'title'         => '',
-                'description'   => '',
-            ),
-            'black_list'    => array(
-                'asin'          => '',
-                'title'         => '',
-                'description'   => '',
-            ),
-            'case_sensitive'    => 0,   // or 1
-            'no_duplicate'      => 0,   // or 1
-        ),
-        // 3.1.0+
-        'skip_no_image'               => false,
-       
-       
-        'width'         => null,
-        'width_unit'    => '%',
-        'height'        => null,
-        'height_unit'   => 'px',
-        
-        'show_errors'   => true,    // whether to show an error message.
-        
-        // 3.2.0+
-        'show_now_retrieving_message'   => true,
- 
-        // 3.2.1+
-        '_allowed_ASINs' => array(),
-        
-        // 3.3.0+
-        'highest_content_heading_tag_level' => 5,
-        
-        // 3.3.0+ (boolean) Whether to fetch similar products. The background routine of retrieving similar products need to set this `false`.
-        '_search_similar_products'      => true,        
-        
-        'similar_product_image_size'    => 100,
-        'similar_product_max_count'     => 10,
-        
-        'description_suffix'            => 'read more',
-        
-    );
     
     /**
      * Stores the default option structure.
@@ -145,15 +53,16 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      */
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
         
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        
         $this->iUnitID      = $iUnitID;
         $this->aDefault     = array(
                 'unit_type' => $this->sUnitType,
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
-            + $this->getDefaultItemFormat()
-            + $this->getExtraDefaultOptions()
-            + $this->aCommonKeys;
+            + $_oOption->get( 'unit_default' )      // 3.4.0+
+            ;
         $this->aUnitOptions = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
@@ -161,23 +70,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             : $aUnitOptions;
         $this->aUnitOptions = $this->format( $this->aUnitOptions );
 
-    }
-        /**
-         * Returns default options which cannot be set with the property declaration.
-         * 
-         * Some items need to run a function and in PHP calling a function is not possible in property declaration.
-         * 
-         * @since       3.3.0
-         * @return      array
-         */
-        protected function getExtraDefaultOptions() {
-            
-            return array(
-                'description_suffix'            => __( 'read more', 'amazon-auto-links' ),
-            );
-            
-        }
-    
+    }    
         /**
          * @return      array
          */
@@ -231,45 +124,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         
         return $aUnitOptions;
         
-    }    
-        
-    /**
-     * @scope       static  public        This is because form field classes need to retrieve the structure.
-     * @remark      The array contains the concatenation character(.) 
-     * so it cannot be done in the declaration.
-     * @return      array
-     */
-    static public function getDefaultItemFormat() {
-        
-        $_oOption       = AmazonAutoLinks_Option::getInstance();
-        $_bAPIConnected = $_oOption->isAPIConnected();
-        return array(
-            'item_format' => $_bAPIConnected
-                ? '%image%' . PHP_EOL    // since the 
-                    . '%image_set%' . PHP_EOL
-                    . '%rating%' . PHP_EOL
-                    . '%title%' . PHP_EOL
-                    . '%description%' . PHP_EOL
-                    . '%disclaimer%'    // 3.2.0+
-                : '%image%' . PHP_EOL    // since the 
-                    . '%title%' . PHP_EOL
-                    . '%description%' . PHP_EOL
-                    . '%disclaimer%'    // 3.2.0+
-                    ,
-                    
-            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%px;">' . PHP_EOL
-                . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">' . PHP_EOL 
-                . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
-                . '    </a>' . PHP_EOL
-                . '</div>',
-                
-            'title_format' => '<h5 class="amazon-product-title">' . PHP_EOL
-                . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">%title_text%</a>' . PHP_EOL 
-                . '</h5>',    
-                
-        );
-        
-    }        
+    }      
     
     /**
      * Returns the all associated options if no key is set; otherwise, the value of the specified key.

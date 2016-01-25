@@ -22,7 +22,11 @@ class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAd
      */
     public function setOptions( $aOptions ) {
 
-        return $aOptions + $this->_getLastUnitInputs();
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        return $aOptions 
+            + $this->_getLastUnitInputs()
+            + $_oOption->get( 'unit_default' )  // 3.4.0+
+            ;
         
     }
     

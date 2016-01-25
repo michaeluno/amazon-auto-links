@@ -57,7 +57,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
         }
         
         // Set some items for the edit mode.
-        $_iMode    = ! isset( $_GET['post'] ); // 0: edit, 1: new
+        $_iMode    = ! isset( $_GET[ 'post' ] ); // 0: edit, 1: new
         $_aOptions = array(
             'mode'       => $_iMode,
         );
@@ -68,10 +68,14 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
             );
         }
         
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        
         $_aOptions = $aOptions 
             + $_aOptions
             + $_aUnitOptions
-            + $this->_getLastUnitInputs();
+            + $this->_getLastUnitInputs()
+            + $_oOption->get( 'unit_default' )  // 3.4.0+
+            ;
         return $_aOptions;
         
     }
