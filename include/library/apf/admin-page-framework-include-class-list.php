@@ -225,7 +225,6 @@ $aClassFiles = array(
 	"AmazonAutoLinks_AdminPageFramework_MetaBox_View"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/meta_box/AdminPageFramework_MetaBox.php", 
 	"AmazonAutoLinks_AdminPageFramework_MetaBox_Controller"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/meta_box/AdminPageFramework_MetaBox.php", 
 	"AmazonAutoLinks_AdminPageFramework_Link_network_admin_page"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/network_admin_page/_controller/AdminPageFramework_Link_network_acmin_page.php", 
-	"AmazonAutoLinks_AdminPageFramework_Property_NetworkAdmin"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/network_admin_page/_model/AdminPageFramework_Property_network_admin_page.php", 
 	"AmazonAutoLinks_AdminPageFramework_PageMetaBox_Router"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/page_meta_box/AdminPageFramework_PageMetaBox.php", 
 	"AmazonAutoLinks_AdminPageFramework_PageMetaBox_Model"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/page_meta_box/AdminPageFramework_PageMetaBox.php", 
 	"AmazonAutoLinks_AdminPageFramework_PageMetaBox_View"	=>	AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/page_meta_box/AdminPageFramework_PageMetaBox.php", 
