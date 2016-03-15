@@ -223,6 +223,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 3.4.0 =
 - Added the default unit options.
+- Fixed a bug that the custom data base tables did not have the proper character set and collation. 
 
 = 3.3.6 - 01/14/2016 =
 - Fixed PHP warnings caused by using a deprecated method.
