@@ -84,6 +84,22 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
     
     /**
+     * @return      string
+     * @since       3.4.0
+     */
+    protected function _getCharactersetCollation() {
+                
+        $_sDefaultCharset = $GLOBALS[ 'wpdb' ]->charset
+            ? 'DEFAULT CHARACTER SET ' . $GLOBALS[ 'wpdb' ]->charset . ' '
+            : '';
+        $_sCollation      = $GLOBALS[ 'wpdb' ]->collate
+            ? 'COLLATE ' . $GLOBALS[ 'wpdb' ]->collate
+            : '';
+        return trim( $_sDefaultCharset . $_sCollation );            
+        
+    }    
+    
+    /**
      * Inserts a row.
      * 
      * <h3>Example</h3>

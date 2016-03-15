@@ -89,9 +89,9 @@ class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTabl
             customer_reviews mediumblob,
             number_of_reviews bigint(20) unsigned,
             PRIMARY KEY  (object_id) 
-        );";            
+        ) " . $this->_getCharactersetCollation() . ";";
     }
-    
+        
     /**
      * Sets a row.
      * @param       string       $sASINLocale    A combination of ASIN + underscore + upper case locale notation.

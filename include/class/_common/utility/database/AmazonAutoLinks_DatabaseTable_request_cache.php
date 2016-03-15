@@ -30,7 +30,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             modified_time datetime NOT NULL default '0000-00-00 00:00:00',
             expiration_time datetime NOT NULL default '0000-00-00 00:00:00',
             PRIMARY KEY  (name)
-        );";            
+        ) " . $this->_getCharactersetCollation() . ";";    
     }
     
     /**
