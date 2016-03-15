@@ -11,7 +11,11 @@
  * @since       3.4.0
  */
 class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced extends AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Base {
+    
+    // public function start() {
         
+    // }
+    
     /**
      * Sets up form fields.
      */ 
@@ -37,11 +41,35 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
         }            
         
         add_filter( 
-            'field_definition_' . $this->oProp->sClassName . '_button_id', 
+            'field_definition_' . $this->oProp->sClassName . '_' . $this->_sSectionID . '_button_id', 
             array( $this, 'replyToSetActiveButtonLabels' ) 
         );
         
+        // Resources for the button preview
+        $this->enqueueScript(
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-in-unit-definition-page.js',
+            $this->oProp->sPageSlug,
+            'default',
+            array(  
+                'handle_id'    => 'aal_button_preview_labels',
+                'dependencies' => array( 'jquery' ),
+                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+            )
+        );   
+        add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToSetStyle' ) );
+                
     }
+    
+        /**
+         * @return      string
+         * @callback    action      style_{class name}
+         * @since       3.4.0
+         */
+        public function replyToSetStyle( $sCSSRules ) {
+            return $sCSSRules . PHP_EOL
+                . AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS() . PHP_EOL;
+        }    
+        
         /**
          * Modifies the 'button_id' field to add labels for selection.
          * @return      array

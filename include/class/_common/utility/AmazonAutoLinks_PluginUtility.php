@@ -15,6 +15,26 @@
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
+    
+    /**
+     * @since       3.4.0
+     * @return      array
+     */
+    static public function getActiveButtonLabelsForJavaScript() {
+        
+        $_aButtonIDs = self::getActiveButtonIDs();
+        $_aLabels    = array();
+        foreach( $_aButtonIDs as $_iButtonID ) {
+            $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
+            $_sButtonLabel = $_sButtonLabel
+                ? $_sButtonLabel
+                : __( 'Buy Now', 'amazon-auto-links' );
+            $_aLabels[ $_iButtonID ] = $_sButtonLabel;
+        }
+        return $_aLabels;
+        
+    }        
+    
     /**
      * Returns the active auto-insert ids.
      * @sine        3.3.0

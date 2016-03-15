@@ -43,7 +43,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             array(  
                 'handle_id'    => 'aal_button_preview_labels',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => $this->_getActiveButtonLabelsForJavaScript(),
+                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
             )
         );      
 
@@ -53,8 +53,9 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
 
         /**
          * @return      array
+         * @deprecated  3.4.0
          */
-        private function _getActiveButtonLabelsForJavaScript() {
+/*         private function _getActiveButtonLabelsForJavaScript() {
             
             $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
             $_aLabels    = array();
@@ -67,7 +68,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             }
             return $_aLabels;
             
-        }       
+        }  */      
         
         /**
          * @return      string
