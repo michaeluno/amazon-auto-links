@@ -24,7 +24,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             return;
         }     
         add_filter( 
-            "options_" . $this->oProp->sClassName,
+            'options_' . $this->oProp->sClassName,
             array( $this, 'replyToSetOptions' )
         );
         
@@ -34,7 +34,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
          * @return      array       The options array.
          */
         public function replyToSetOptions( $aOptions ) {
-            
+
             $_oOption    = AmazonAutoLinks_Option::getInstance();
             return $aOptions + $_oOption->aDefault;
             

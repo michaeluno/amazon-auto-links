@@ -23,11 +23,11 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             return;
         }     
         add_filter( 
-            "options_" . $this->oProp->sClassName,
+            'options_' . $this->oProp->sClassName,
             array( $this, 'setOptions' )
         );
         add_action( 
-            "set_up_" . $this->oProp->sClassName,
+            'set_up_' . $this->oProp->sClassName,
             array( $this, 'registerFieldTypes' )
         );
         add_action( 
@@ -35,7 +35,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             array( $this, 'replyToRegisterFieldTypes' )
         );        
         add_action( 
-            "load_" . $this->oProp->sClassName,
+            'load_' . $this->oProp->sClassName,
             array( $this, 'doPageSettings' )
         );        
                 
