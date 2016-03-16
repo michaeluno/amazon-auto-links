@@ -36,9 +36,15 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         public function replyToSetOptions( $aOptions ) {
 
             $_oOption    = AmazonAutoLinks_Option::getInstance();
-            return $aOptions + $_oOption->aDefault;
+            
+            // Merging recursively (3.4.0+) to cover newly added elements over new versions. 
+            return $this->oUtil->uniteArrays(
+                $aOptions,
+                $_oOption->aDefault
+            );
             
         }
+        
     /**
      * Sets up admin pages.
      */

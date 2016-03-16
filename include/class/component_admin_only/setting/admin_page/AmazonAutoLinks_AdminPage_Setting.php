@@ -69,8 +69,8 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
                 'tab_slug'  => 'reset',
                 'title'     => __( 'Reset', 'amazon-auto-links' ),
             )
-        );                
-        
+        );    
+      
     }
     
     /**

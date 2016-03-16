@@ -61,7 +61,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'agreed' => false,        // hidden
         ),
         'cache'    =>    array(
-            'chaching_mode' => 'normal',
+            'chaching_mode'                     => 'normal',
+            
+            // 3.4.0+
+            'expired_cache_removal_intereval'   => array(
+                'size'  => 7,
+                'unit'  => 86400,   // either 3600, 86400, or 604800
+            ),
         ),
         'query' => array(
             'cloak' => 'productlink'

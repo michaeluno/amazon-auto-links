@@ -41,7 +41,8 @@ class AmazonAutoLinks_Event {
                 'aal_action_simplepie_renew_cache'  // action name
             );
             
-
+            // 3.4.0+
+            new AmazonAutoLinks_Event_Schedule_DeleteExpiredCaches;
             
             // @deprecated  3.3.0
             // new AmazonAutoLinks_Event_Action_TemplateOptionConverter(
@@ -49,7 +50,7 @@ class AmazonAutoLinks_Event {
                 // 2   // number of arguments
             // );
                     
-            // This must be called after the above action hooks are added.
+            // This must be called after the above action hooks.
             $_oOption               = AmazonAutoLinks_Option::getInstance();
             $_bIsIntenceCachingMode = 'intense' === $_oOption->get( 'cache', 'chaching_mode' );
             
@@ -64,6 +65,7 @@ class AmazonAutoLinks_Event {
                         'aal_action_api_get_customer_review',
                         'aal_action_api_get_similar_products',  // 3.3.0+
                         'aal_action_http_cache_renewal',
+                        'aal_action_delete_expired_caches', // 3.4.0+
                     )
                     : array(
                         'aal_action_unit_prefetch',
@@ -83,25 +85,26 @@ class AmazonAutoLinks_Event {
             $this->_handleQueryURL();
             
         }    
-        /**
-         * 
-         * @since       3.1.0
-         */
-        private function _handleQueryURL() {
-            
-            $_oOption     = AmazonAutoLinks_Option::getInstance();
-            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
-            if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
-                return;
-            }
-            
-            if ( 'feed' === $_GET[ $_sQueryKey ] ) {
-                new AmazonAutoLinks_Event_Feed;
-                return;
-            }
-            
-            new AmazonAutoLinks_Event_Redirect( $_sQueryKey );
-            
-        }    
+            /**
+             * 
+             * @since       3.1.0
+             * @return      void
+             */
+            private function _handleQueryURL() {
+                
+                $_oOption     = AmazonAutoLinks_Option::getInstance();
+                $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
+                if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
+                    return;
+                }
+                
+                if ( 'feed' === $_GET[ $_sQueryKey ] ) {
+                    new AmazonAutoLinks_Event_Feed;
+                    return;
+                }
+                
+                new AmazonAutoLinks_Event_Redirect( $_sQueryKey );
+                
+            }    
     
 }

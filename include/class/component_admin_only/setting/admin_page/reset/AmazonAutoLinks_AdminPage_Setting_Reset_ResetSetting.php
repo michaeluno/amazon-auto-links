@@ -49,7 +49,6 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
                 'tip'               => __( 'Restore the default options.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'size'          => 30,
-                    // 'required' => 'required',
                 ),
             ),
             array(
@@ -74,6 +73,11 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
         // Button options
         delete_option(
             AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ]
+        );
+        
+        // Last inputs
+        delete_option(
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ]
         );
     
     }

@@ -15,6 +15,23 @@
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
+    /**
+     * Removes expired items in the set plugin custom database tables.
+     * @since       3.4.0
+     * @return      void
+     */
+    static public function deleteExpiredTableItems() {
+        
+        $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_request_cache(
+            AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
+        );           
+        $_oCacheTable->deleteExpired();
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product(
+            AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
+        );             
+        $_oProductTable->deleteExpired();        
+        
+    }
     
     /**
      * @since       3.4.0

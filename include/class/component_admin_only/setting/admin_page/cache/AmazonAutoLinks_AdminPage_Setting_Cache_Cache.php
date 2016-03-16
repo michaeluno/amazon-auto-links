@@ -97,7 +97,27 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 ),
                 'tip'               => __( 'The intense mode should only be enabled when the normal mode does not work.', 'amazon-auto-links' ),
                 'default' => 'normal',
-            )            
+            ),
+            array(
+                'field_id'          => 'expired_cache_removal_intereval',
+                'type'              => 'size',
+                'title'             => __( 'Interval for Removing Expired Caches', 'amazon-auto-links' ),
+                'capability'        => 'manage_options',
+                'units'             => array(
+                    3600     => __( 'hour(s)', 'amazon-auto-links' ),
+                    86400    => __( 'day(s)', 'amazon-auto-links' ),
+                    604800   => __( 'week(s)', 'amazon-auto-links' ),
+                ),
+                'attributes'        => array(
+                    'size'      => array(
+                        'step' => 0.1
+                    ),
+                ),
+                'default'           => array(
+                    'size'      => 7,
+                    'unit'      => 'day'
+                ),            
+            )
         );    
     }
         
@@ -106,32 +126,65 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
      * Validates the submitted form data.
      * 
      * @since       3
+     * @param       array       $aInputs        The user set form section values.
+     * @return      array
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
         
         if ( 'submit_clear_all_caches' === $aSubmitInfo[ 'field_id' ] ) {
             $this->_clearAllCaches( $oAdminPage );
-            return $aOldInput;            
+            return $aOldInputs;            
         }
         if ( 'submit_clear_expired_caches' === $aSubmitInfo[ 'field_id' ] ) {
             $this->_clearExpiredCaches( $oAdminPage );
-            return $aOldInput;
+            return $aOldInputs;
         }
                 
-
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
+            return $aOldInputs;
         }
-                
-        return $aInput;     
+        
+        // If the interval for deleting expired caches changes, update the scheduled task.
+        $this->_rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage );        
+        
+        return $aInputs;     
         
     }
+        /**
+         * Update the scheduled task if the interval for deleting expired caches changes, 
+         * @since       3.4.0
+         * @return      void
+         */
+        private function _rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage ) {
+
+            $_aNewExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aInputs, array( 'expired_cache_removal_intereval' ) );
+            $_aOldExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aOldInputs, array( 'expired_cache_removal_intereval' ) );
+            if ( $_aNewExpiredDeleteInterval === $_aOldExpiredDeleteInterval ) {
+                return;
+            }          
+            
+            // At this point, the user changed the value.
+            $_aArguments = array();
+            $_iInterval  = ( integer ) $oAdminPage->oUtil->getElement( $_aNewExpiredDeleteInterval, array( 'size' ), 7 )
+                * ( integer ) $oAdminPage->oUtil->getElement( $_aNewExpiredDeleteInterval, array( 'unit' ), 86400 );
+                
+            /// Remove the previously set WP-Cron action.
+            wp_clear_scheduled_hook( 'aal_action_delete_expired_caches', $_aArguments );
+            
+            /// Schedule
+            wp_schedule_single_event( 
+                time() + $_iInterval, // now + interval
+                'aal_action_delete_expired_caches', // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
+                $_aArguments // must be enclosed in an array.
+            );            
+            
+        }
     
         /**
          * Clears all the plugin caches.
@@ -162,7 +215,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 // delete all rows.
             ); 
             
-            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ) );
+            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
         }
         /**
          * Clears expired caches.
@@ -171,16 +224,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          */
         private function _clearExpiredCaches( $oFactory ) {
 
-            $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );           
-            $_oCacheTable->deleteExpired();
-            $_oProductTable = new AmazonAutoLinks_DatabaseTable_product(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
-            );             
-            $_oProductTable->deleteExpired();
+            AmazonAutoLinks_PluginUtility::deleteExpiredTableItems();
+            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
             
-            // DELETE FROM table WHERE (col1,col2) IN ((1,2),(3,4),(5,6))
-            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ) );
         }   
+        
 }
