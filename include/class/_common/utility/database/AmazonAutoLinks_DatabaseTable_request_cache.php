@@ -22,7 +22,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
     public function getCreationQuery() {
         // request_id bigint(20) unsigned UNIQUE NOT NULL,
         return "CREATE TABLE " . $this->sTableName . " (
-            name varchar(255) UNIQUE,    
+            name varchar(191) UNIQUE,    
             request_uri text,   
             type varchar(20),
             charset varchar(20),
