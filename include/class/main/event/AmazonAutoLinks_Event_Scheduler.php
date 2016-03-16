@@ -112,39 +112,39 @@ class AmazonAutoLinks_Event_Scheduler {
         
     }
     
-    /**
-     * Stores how many actions are schedules bu action name.
-     */
-    static protected $_aCounters = array();
+        /**
+         * Stores how many actions are schedules by action name.
+         */
+        static protected $_aCounters = array();
 
-    /**
-     * @return      boolean
-     */
-    static private function _scheduleTask( /* $_sActionName, $aArgument1, $aArgument2, ... */ ) {
-         
-        $_aParams       = func_get_args() + array( null, array() );
-        $_sActionName   = array_shift( $_aParams ); // the first element
-        
-        // $_aArguments    = array( $_aParams[ 1 ] );
-        $_aArguments    = $_aParams; // the rest 
+        /**
+         * @return      boolean
+         */
+        static private function _scheduleTask( /* $_sActionName, $aArgument1, $aArgument2, ... */ ) {
+             
+            $_aParams       = func_get_args() + array( null, array() );
+            $_sActionName   = array_shift( $_aParams ); // the first element
+            
+            // $_aArguments    = array( $_aParams[ 1 ] );
+            $_aArguments    = $_aParams; // the rest 
 
-        // If already scheduled, skip.
-        if ( wp_next_scheduled( $_sActionName, $_aArguments ) ) {
-            return false; 
-        }
-        
-        self::$_aCounters[ $_sActionName ] = isset( self::$_aCounters[ $_sActionName ] )
-            ? self::$_aCounters[ $_sActionName ] + 1
-            : 1;
-        
-        wp_schedule_single_event( 
-            time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit runout.
-            $_sActionName, // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
-            $_aArguments // must be enclosed in an array.
-        );            
+            // If already scheduled, skip.
+            if ( wp_next_scheduled( $_sActionName, $_aArguments ) ) {
+                return false; 
+            }
+            
+            self::$_aCounters[ $_sActionName ] = isset( self::$_aCounters[ $_sActionName ] )
+                ? self::$_aCounters[ $_sActionName ] + 1
+                : 1;
+            
+            wp_schedule_single_event( 
+                time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit runout.
+                $_sActionName, // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
+                $_aArguments // must be enclosed in an array.
+            );            
 
-        return true;
-        
-    }    
+            return true;
+            
+        }    
     
 }
