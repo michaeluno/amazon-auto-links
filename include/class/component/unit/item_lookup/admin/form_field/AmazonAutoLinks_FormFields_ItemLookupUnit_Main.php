@@ -15,7 +15,6 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
             
-        $_oOption      = $this->oOption;
         $aUnitOptions  = $aUnitOptions + array( 'country' => null );
         $_bUPCAllowed  = 'CA' !== $aUnitOptions[ 'country' ];
         $_bISBNAllowed = 'US' === $aUnitOptions[ 'country' ];
@@ -42,6 +41,7 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                         : 60,
                 ),
                 'description'   => __( 'Enter the ID(s) of the product per line or use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
+                    . ' ' . __( 'For ASINs, you can simply paste text that includes ASINs.', 'amazon-auto-links' ) 
                     . ' e.g. <code>B009ZVO3H6, B0043D2DZA</code>',
             ),
             array(
@@ -96,8 +96,8 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'type'          => 'select',
                 'title'         => __( 'Categories', 'amazon-auto-links' ),            
                 'label'         => AmazonAutoLinks_Property::getSearchIndexByLocale( 
-                    isset( $aUnitOptions['country'] ) 
-                        ? $aUnitOptions['country'] 
+                    isset( $aUnitOptions[ 'country' ] ) 
+                        ? $aUnitOptions[ 'country' ] 
                         : null 
                     ),
                 'default'       => 'All',

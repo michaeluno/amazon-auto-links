@@ -222,6 +222,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.4.0 =
+- Added the ability to automatically extract ASINs for the Item Look-up and Similarity search unit types.
 - Added the ability to set a custom label for the unit preview page.
 - Added the `Interval for Removing Expired Caches` option.
 - Added the default unit options.

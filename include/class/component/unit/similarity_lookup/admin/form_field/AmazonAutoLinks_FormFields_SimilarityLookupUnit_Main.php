@@ -15,7 +15,6 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
             
-        $_oOption      = $this->oOption;
         $aUnitOptions  = $aUnitOptions + array( 'country' => null );
         $_aFields      = array(
             array(
@@ -36,7 +35,7 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
                 'attributes'    => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) ? 40 : 60,
                 ),             
-                'description'   => __( 'Enter the ASIN(s) of the product per line or use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
+                'description'   => __( 'Enter the ASIN(s) of the product per line or simply paste text that includes ASINs.', 'amazon-auto-links' ) 
                     . ' e.g. <code>B009ZVO3H6</code>',
             ),    
             array(

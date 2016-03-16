@@ -60,6 +60,33 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
             );
         }        
         
-   
+    /**
+     * 
+     * @since       3.4.0
+     * @callback    filter      validation_{page slug}_{tab slug}
+     */            
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+        
+        // Find ASINs from the user input.
+        $aInputs[ 'ItemId' ] = $this->_getItemIdSanitized( $aInputs, $oFactory );        
+        
+        return parent::validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
+        
+    }
+        /**
+         * @since       3.4.0
+         * @return      string
+         */
+        private function _getItemIdSanitized( $aInputs, $oFactory ) {
+            
+            $_sIdType = $oFactory->oUtil->getElement( $aInputs, array( 'IdType' ), '' );
+            $_sItemId = $oFactory->oUtil->getElement( $aInputs, array( 'ItemId' ), '' );
+            
+            if ( 'ASIN' !== $_sIdType ) {
+                return $_sItemId;
+            }
+            return AmazonAutoLinks_PluginUtility::getASINsExtracted( $_sItemId, PHP_EOL );
+            
+        }
     
 }

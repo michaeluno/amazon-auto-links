@@ -60,5 +60,31 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup ex
                 'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
             );
         }   
+        
+    /**
+     * 
+     * @since       3.4.0
+     * @callback    filter      validation_{page slug}_{tab slug}
+     */            
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+        
+        // Find ASINs from the user input.
+        $aInputs[ 'ItemId' ] = $this->_getItemIdSanitized( $aInputs, $oFactory );        
+        
+        return parent::validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
+        
+    }
+        /**
+         * @since       3.4.0
+         * @return      string
+         */
+        private function _getItemIdSanitized( $aInputs, $oFactory ) {
+            
+            return AmazonAutoLinks_PluginUtility::getASINsExtracted( 
+                $oFactory->oUtil->getElement( $aInputs, array( 'ItemId' ), '' ), 
+                PHP_EOL 
+            );
+            
+        }        
     
 }

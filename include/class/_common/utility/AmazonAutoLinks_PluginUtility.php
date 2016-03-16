@@ -16,6 +16,24 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
+     * Finds and extracts ASINs from given text.
+     * @since       3.4.0
+     * @return      string
+     */
+    static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
+                                
+        $_biResult = preg_match_all( 
+            '/[A-Z0-9]{10}/', // needle - [A-Z0-9]{10} is the ASIN
+            $sText,           // subject
+            $_aMatches        // match container
+        );
+        return $_biResult && isset( $_aMatches[ 0 ] ) && is_array( $_aMatches[ 0 ] )
+            ? implode( $sDelimiter, array_unique( $_aMatches[ 0 ] ) )
+            : $sText;
+        
+    }
+    
+    /**
      * Removes expired items in the set plugin custom database tables.
      * @since       3.4.0
      * @return      void

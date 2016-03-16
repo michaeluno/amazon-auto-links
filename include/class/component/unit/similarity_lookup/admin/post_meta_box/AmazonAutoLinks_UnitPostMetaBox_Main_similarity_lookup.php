@@ -37,31 +37,46 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_similarity_lookup extends AmazonAutoL
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInput, $aOriginal, $oFactory ) {    
+    public function validate( $aInputs, $aOriginal, $oFactory ) {    
+        
+        // 3.4.0+ Find ASINs from the user input.
+        $aInputs[ 'ItemId' ] = $this->_getItemIdSanitized( $aInputs, $oFactory );        
         
         // Formats the options
         $_oUnitOption = new AmazonAutoLinks_UnitOption_similarity_lookup(
             null,
-            $aInput
+            $aInputs
         );
         $_aFormatted = $_oUnitOption->get();
         
         // Drop unsent keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {
-            if ( ! array_key_exists( $_sKey, $aInput ) ) {
+            if ( ! array_key_exists( $_sKey, $aInputs ) ) {
                 unset( $_aFormatted[ $_sKey ] );
             }
         }
 
         // Schedule pre-fetch for the unit if the options have been changed.
-        if ( $aInput !== $aOriginal ) {
+        if ( $aInputs !== $aOriginal ) {
             AmazonAutoLinks_Event_Scheduler::prefetch(
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
         }        
         
-        return $_aFormatted + $aInput;
+        return $_aFormatted + $aInputs;
         
     }
+        /**
+         * @since       3.4.0
+         * @return      string
+         */
+        private function _getItemIdSanitized( $aInputs, $oFactory ) {
+            
+            return AmazonAutoLinks_PluginUtility::getASINsExtracted( 
+                $oFactory->oUtil->getElement( $aInputs, array( 'ItemId' ), '' ), 
+                PHP_EOL 
+            );
+            
+        }     
     
 }
