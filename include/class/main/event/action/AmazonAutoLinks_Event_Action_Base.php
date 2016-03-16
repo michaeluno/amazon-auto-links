@@ -36,14 +36,11 @@ abstract class AmazonAutoLinks_Event_Action_Base extends AmazonAutoLinks_WPUtili
     }
     
     /**
-     * 
+     * @remark          Override this method in an extended class.
      * @callback        action       
      */
     public function doAction( /* $aArguments */ ) {
-        
         $_aParams = func_get_args() + array( null );
-        // AmazonAutoLinks_Debug::log( $_aParams );
-        
     }
     
 }
