@@ -31,6 +31,20 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
+                'field_id'       => 'preview_post_type_label',
+                'type'           => 'text',
+                'title'          => __( 'Post Type Label', 'amazon-auto-links' ),
+                'tip'            => __( 'Set the name which appear in breadcrumbs.', 'amazon-auto-links' ),
+                'description'    => __( 'Default', 'amazon-auto-links' )
+                    . ': <code>'
+                        . AmazonAutoLinks_Registry::NAME
+                    . '</code>',
+                'attributes'     => array(
+                    'style' => 'width: 400px;',
+                ),
+                'default'        => AmazonAutoLinks_Registry::NAME,
+            ),            
+            array(
                 'field_id'       => 'preview_post_type_slug',
                 'title'          => __( 'Post Type Slug', 'amazon-auto-links' ),
                 'tip'            => __( 'Up to 20 characters with small-case alpha numeric characters.', 'amazon-auto-links' ),
