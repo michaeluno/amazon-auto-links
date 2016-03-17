@@ -605,7 +605,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 'rating'              => '',  // 3+
                 'button'              => '',  // 3+
                 'image_set'           => '',  // 3+
-// @todo add a formt method for editorial reviews.
+// @todo add a format method for editorial reviews.
                 'editorial_review'    => '',  // 3+
                 
                 'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
@@ -764,7 +764,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         . "</span>"
                     : '',
             );
-            
+
             return $_aPrices;
         }
 

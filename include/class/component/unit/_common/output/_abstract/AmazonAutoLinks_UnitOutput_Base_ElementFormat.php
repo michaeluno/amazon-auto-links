@@ -707,15 +707,34 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 'associate_id'  => $sAssociateID,
             )
         );
-        if ( null !== $_sPriceFormatted ) {
-            return $_sPriceFormatted;
-        }
-            
-        return $this->oUnitOption->get( 'show_now_retrieving_message' )
+        
+        // If a price is not found, return a message or an empty string.
+        if ( null === $_sPriceFormatted ) {
+            return $this->oUnitOption->get( 'show_now_retrieving_message' )
             ? '<p>' 
                 . __( 'Now retrieving the price.', 'amazon-auto-links' )
                 . '</p>'
             : '';
+        }
+        
+        // At this point, a price for the product is found.
+        
+        // Check if there is a discounted price.
+        $_sDiscounted     = $this->_getValueFromRow( 
+            'discounted_price_formatted', 
+            $aRow, 
+            null,   // default
+            array(
+                'asin'          => $sASIN,
+                'locale'        => $sLocale,
+                'associate_id'  => $sAssociateID,
+            )
+        );
+        
+        return null === $_sDiscounted
+            ? $_sPriceFormatted
+            : '<s>' . $_sPriceFormatted . '</s> ' . $_sDiscounted;
+        
     }
     
     /**
