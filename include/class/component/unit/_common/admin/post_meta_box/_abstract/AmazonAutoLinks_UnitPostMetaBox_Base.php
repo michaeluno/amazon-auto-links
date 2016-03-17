@@ -31,10 +31,7 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         $this->aUnitTypes = empty( $this->aUnitTypes )
             ? apply_filters( 'aal_filter_registered_unit_types', $this->aUnitTypes )
             : $this->aUnitTypes;
-        
-        // Register custom filed type.
-        // new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
-        
+                
         // At this point, it is TRUE evaluated by the framework.
         // but we need to evaluate it for the plugin.
         
