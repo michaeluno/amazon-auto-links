@@ -227,6 +227,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `Interval for Removing Expired Caches` option.
 - Added the default unit options.
 - Changed the `%price%` variable in the `Item Format` option to display a discounted price when available.
+- Fixed a bug that `ISBN` could not be set with the `Item Look-up` unit type even the locale was set to `US`.
 - Fixed a bug that expired caches were not cleared automatically.
 - Fixed a bug that the custom data base tables did not have the proper character set and collation. 
 
