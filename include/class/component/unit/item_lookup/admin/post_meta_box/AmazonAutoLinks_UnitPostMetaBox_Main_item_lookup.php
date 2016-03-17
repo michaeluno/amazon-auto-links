@@ -24,17 +24,63 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
      */ 
     public function setUp() {
 
-// @todo Set unit options as they need to be parsed.
-$_aUnitOptions = array();
         $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main;
-        foreach( $_oFields->get( '', $_aUnitOptions ) as $_aField ) {
+        foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;
             }
             $this->addSettingFields( $_aField );
         }
+        
+        // Callbacks to modify field definitions
+        add_filter( 'field_definition_' . $this->oProp->sClassName . '_IdType', array( $this, 'replyToModifyField_IdType' ) );
+        add_filter( 'field_definition_' . $this->oProp->sClassName . '_SearchIndex', array( $this, 'replyToModifyField_SearchIndex' ) );
                     
     }
+        /**
+         * @since       3.4.0       
+         * @return      array
+         */
+        public function replyToModifyField_IdType( $aField ) {
+            $_bUPCAllowed  = 'CA' !== $this->oForm->aSavedData[ 'country' ];
+            $_bISBNAllowed = 'US' === $this->oForm->aSavedData[ 'country' ];
+            return array(
+                'label'         => array(
+                    'ASIN'  => 'ASIN',
+                    'SKU'   => 'SKU',
+                    'UPC'   => '<span class="' . ( $_bUPCAllowed ? "" : "disabled" ) . '">UPC <span class="description">(' . __( 'Not available in the CA locale.', 'amazon-auto-links' ) . ')</span></span>',
+                    'EAN'   => 'EAN',
+                    'ISBN'  => '<span class="' . ( $_bISBNAllowed ? "" : "disabled" ) . '">ISBN <span class="description">(' . __( 'The US locale only, when the search index is Books.', 'amaozn-auto-links' ) .')</span></span>',
+                ),
+                'attributes' => array(              
+                    'UPC' => array(
+                        'disabled' => $_bUPCAllowed 
+                            ? null 
+                            : 'disabled',
+                    ),                
+                    'ISBN' => array(
+                        'disabled' => $_bISBNAllowed 
+                            ? null 
+                            : 'disabled',
+                    ),                                    
+                ),
+            ) + $aField;
+            
+        }
+        
+        /**
+         * @return      array
+         * @since       3.4.0
+         */
+        public function replyToModifyField_SearchIndex( $aField ) {
+            return array(            
+                'label'         => AmazonAutoLinks_Property::getSearchIndexByLocale( 
+                    isset( $this->oForm->aSavedData[ 'country' ] ) 
+                        ? $this->oForm->aSavedData[ 'country' ] 
+                        : null 
+                    ),            
+            ) + $aField;
+        }
     
     /**
      * Validates submitted form data.
