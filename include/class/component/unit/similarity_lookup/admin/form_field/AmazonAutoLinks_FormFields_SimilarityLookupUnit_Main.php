@@ -15,7 +15,6 @@ class AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main extends AmazonAutoLin
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
             
-        $aUnitOptions  = $aUnitOptions + array( 'country' => null );
         $_aFields      = array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
