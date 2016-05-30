@@ -25,7 +25,7 @@ class AmazonAutoLinks_ScraperDOM_UserRating extends AmazonAutoLinks_ScraperDOM_B
             $this->setSSLImagesByDOM( $this->oDoc );
         }
 
-        // Modify a tags.
+        // Modify tags.
         $this->oDOM->setAttributesByTagName( 
             $this->oDoc, // node
             'a', // tag name

@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.1 - 05/30/2016 =
+- Fixed a bug that the `%rating%` variable in the `Item Format` option produced HTML outputs with an invalid structure.
+
 = 3.4.0 - 03/17/2016 =
 - Added the ability to automatically extract ASINs for the Item Look-up and Similarity search unit types.
 - Added the ability to set a custom label for the unit preview page.

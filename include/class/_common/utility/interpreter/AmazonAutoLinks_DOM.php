@@ -72,7 +72,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * 
      * @param       string          $sHTML     
      * @param       string          $sMBLang     
-     * @param       string  $sSourceCharSet     If true, it auto-detects the character set. If a string is given, 
+     * @param       string          $sSourceCharSet     If true, it auto-detects the character set. If a string is given, 
      * the HTML string will be converted to the given character set. If false, the HTML string is treated as it is.
      */
     public function loadDOMFromHTML( $sHTML, $sMBLang='uni', $sSourceCharSet='' ) {
@@ -102,14 +102,33 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         // $oDOM->sictErrorChecking = false; // @todo examine whether this is necessary or not. 
         $oDOM->preserveWhiteSpace = false;
         $oDOM->formatOutput       = true;
-        @$oDOM->loadHTML( 
-            function_exists( 'mb_convert_encoding' )
-                ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
-                : $sHTML
-        );    
+        $this->_loadHTML( $oDOM, $sHTML );
         return $oDOM;
         
     }
+        /**
+         * Performs the `loadHTML()` DOMDocument method with some additional checks and sanitization.
+         * @return      void
+         * @since       3.4.1
+         */
+        private function _loadHTML( $oDOM, $sHTML ) {
+            
+            $sHTML = function_exists( 'mb_convert_encoding' )
+                ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
+                : $sHTML;
+            
+            if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
+                @$oDOM->loadHTML( 
+                    $sHTML,     // subject HTML contents to parse
+                    LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD        // removes <html><body> tags
+                );
+                return;
+            }
+            @$oDOM->loadHTML( 
+                $sHTML     // subject HTML contents to parse
+            );               
+            
+        }
     
     /**
      * 
@@ -121,25 +140,50 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             return $sInnerHTML;
         }
         $oChildNodes = $oNode->childNodes; 
-        foreach ( $oChildNodes as $oChildNode ) { 
-            $oTempDom    = new DOMDocument( '1.0', $this->sCharEncoding );
+        foreach ( $oChildNodes as $_oChildNode ) { 
+            $_oTempDom    = new DOMDocument( '1.0', $this->sCharEncoding );
             
-            $_oImportedNode = $oTempDom->importNode( 
-                $oChildNode, 
+            $_oImportedNode = $_oTempDom->importNode( 
+                $_oChildNode, 
                 true 
             );
             if ( $_oImportedNode ) {
-                $oTempDom->appendChild( 
+                $_oTempDom->appendChild( 
                     $_oImportedNode    
                 ); 
-            }
+            } 
+
+            // 3.4.1+ Sometimes <html><body> tags get inserted.
+            $sInnerHTML .= $this->_getAutoInjectedWrapperTagsRemoved( @$_oTempDom->saveHTML() );
             
-            $sInnerHTML .= trim( @$oTempDom->saveHTML() ); 
         } 
         return $sInnerHTML;     
         
     }
-
+        /**
+         * Removes wrapped `<html>` and `<body>`tags from a given string.
+         * 
+         * Sometimes $oDOM->saveHTML() returns a string with <html><body> wrapped. Use this method to remove those.
+         * 
+         * @since       2.4.1
+         * @return      string
+         */
+        private function _getAutoInjectedWrapperTagsRemoved( $sHTML ) {
+            
+            $sHTML = trim( $sHTML );
+            
+            if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
+                return $sHTML;
+            }
+            
+            return preg_replace(
+                '~<(?:!DOCTYPE|/?(?:html|head|body))[^>]*>\s*~i', 
+                '', 
+                $sHTML
+            );
+            
+        }
+    
     /**
      * Fetches HTML body with the specified URL with caching functionality.
      * 
