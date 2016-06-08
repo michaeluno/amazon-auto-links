@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.5.2
-Stable tag:         3.4.1
+Stable tag:         3.4.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,7 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.4.2 =
+= 3.4.2 - 06/09/2016 =
 - Fixed a bug that products of Category units were not displayed on some servers introduced in v3.4.1.
 
 = 3.4.1 - 05/31/2016 =
