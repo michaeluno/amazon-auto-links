@@ -26,6 +26,10 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         $this->sHTMLCachePrefix = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . "_HTML_";
             
         $this->bIsMBStringInstalled = function_exists( 'mb_language' );
+        
+        $this->bLoadHTMLFix     = defined( 'LIBXML_HTML_NOIMPLIED' ) && defined( 'LIBXML_HTML_NODEFDTD' ) 
+            && ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 );
+        
     }
     
     /**
@@ -94,6 +98,8 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         // @todo    Examine whether the below line takes effect or not.
         // mb_internal_encoding( $this->sCharEncoding );                     
         
+        $_bInternalErrors = libxml_use_internal_errors( true );
+        
         $oDOM                     = new DOMDocument( 
             '1.0', 
             $this->sCharEncoding
@@ -103,6 +109,9 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         $oDOM->preserveWhiteSpace = false;
         $oDOM->formatOutput       = true;
         $this->_loadHTML( $oDOM, $sHTML );
+        
+        libxml_use_internal_errors( $_bInternalErrors );
+        
         return $oDOM;
         
     }
@@ -117,14 +126,14 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
                 ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
                 : $sHTML;
             
-            if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
-                @$oDOM->loadHTML( 
+            if ( $this->bLoadHTMLFix ) {
+                $oDOM->loadHTML( 
                     $sHTML,     // subject HTML contents to parse
                     LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD        // removes <html><body> tags
                 );
                 return;
             }
-            @$oDOM->loadHTML( 
+            $oDOM->loadHTML( 
                 $sHTML     // subject HTML contents to parse
             );               
             
@@ -172,10 +181,10 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             
             $sHTML = trim( $sHTML );
             
-            if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 ) {
+            if ( $this->bLoadHTMLFix ) {
                 return $sHTML;
             }
-            
+
             return preg_replace(
                 '~<(?:!DOCTYPE|/?(?:html|head|body))[^>]*>\s*~i', 
                 '', 

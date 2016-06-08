@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.2 =
+- Fixed a bug that products of Category units were not displayed on some servers introduced in v3.4.1.
+
 = 3.4.1 - 05/31/2016 =
 - Fixed a bug that the `%rating%` variable in the `Item Format` option produced HTML outputs with an invalid structure.
 
