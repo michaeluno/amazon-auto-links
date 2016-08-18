@@ -720,7 +720,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         // At this point, a price for the product is found.
         
         // Check if there is a discounted price.
-        $_sDiscounted     = $this->_getValueFromRow( 
+        $_sDiscountFormatted     = $this->_getValueFromRow( 
             'discounted_price_formatted', 
             $aRow, 
             null,   // default
@@ -729,13 +729,44 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 'locale'        => $sLocale,
                 'associate_id'  => $sAssociateID,
             )
+        );        
+        $_iPrice                = $this->_getValueFromRow( 
+            'price',
+            $aRow, 
+            null,   // default
+            array(
+                'asin'          => $sASIN,
+                'locale'        => $sLocale,
+                'associate_id'  => $sAssociateID,
+            )
         );
+        $_iDiscount             = $this->_getValueFromRow( 
+            'discounted_price', 
+            $aRow, 
+            null,   // default
+            array(
+                'asin'          => $sASIN,
+                'locale'        => $sLocale,
+                'associate_id'  => $sAssociateID,
+            )
+        );       
         
-        return null === $_sDiscounted
+        // return null === $_sDiscountFormatted
+        return ! $this->_isPriceDiscounted( $_iPrice, $_iDiscount )
             ? $_sPriceFormatted
-            : '<s>' . $_sPriceFormatted . '</s> ' . $_sDiscounted;
+            : '<s>' . $_sPriceFormatted . '</s> ' . $_sDiscountFormatted;
         
     }
+        /**
+         * @since       3.4.3
+         * @return      boolean
+         */
+        private function _isPriceDiscounted( $iPrice, $iDiscountedPrice ) {
+            if ( null === $iDiscountedPrice ) {
+                return false;
+            }
+            return ( $iPrice > $iDiscountedPrice );
+        }
     
     /**
      * 
