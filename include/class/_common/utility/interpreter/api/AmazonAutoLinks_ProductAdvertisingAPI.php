@@ -28,9 +28,9 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
         'UK'    => 'co.uk',
         'US'    => 'com',
         'IN'    => 'in',            // 2.1.0+
-        // The followings locales are not supported by Amazon Product Advertising API.
-        // 'BR'    => '',
-        // 'MX'    => '',        
+        
+        'BR'    => 'com.br',        // 3.4.4+
+        'MX'    => 'com.mx',        // 3.4.4+
     );
 
     protected $sLocale = 'US';
