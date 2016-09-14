@@ -12,7 +12,7 @@
  * 
  * @package     Amazon Auto Links
  * @since       2.0.0
- * @since       3       Chagned the name from `AmazonAutoLinks_Properties`.
+ * @since       3       Changed the name from `AmazonAutoLinks_Properties`.
 */
 final class AmazonAutoLinks_Property {
     
