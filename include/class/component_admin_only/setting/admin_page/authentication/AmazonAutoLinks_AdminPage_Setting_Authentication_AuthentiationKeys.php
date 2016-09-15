@@ -62,7 +62,28 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                         ? 40 
                         : 60,
                 ),
-            ),             
+            ),
+            array(
+                'field_id'          => 'server_locale',
+                'title'             => __( 'Server Locale', 'amazon-auto-links' ),
+                'type'              => 'select',
+                'description'       => __( 'The region of the API server to use. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
+                'label'             => array(
+                    'CA'    => 'CA - webservices.amazon.ca',
+                    'CN'    => 'CN - webservices.amazon.cn',
+                    'DE'    => 'DE - webservices.amazon.de',
+                    'ES'    => 'ES - webservices.amazon.es',
+                    'FR'    => 'FR - webservices.amazon.fr',
+                    'IT'    => 'IT - webservices.amazon.it',
+                    'JP'    => 'JP - webservices.amazon.co.jp',
+                    'UK'    => 'UK - webservices.amazon.co.uk',
+                    'US'    => 'US - webservices.amazon.com',
+                    'IN'    => 'IN - webservices.amazon.in',            
+                    'BR'    => 'BR - webservices.amazon.com.br',        
+                    'MX'    => 'MX - webservices.amazon.com.mx',        
+                ),
+                // 'default'           => 'US',
+            ),                
             array(
                 'field_id'          => 'disclaimer',
                 'title'             => __( 'Disclaimer', 'amazon-auto-links' ),
@@ -100,13 +121,16 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
         /**
          * 
          * @since       3
+         * @since       3.4.4       Added the `$sLocale` third parameter.
          * @return      boolean
          */
-        private function _isConnected( $sPublicKey='', $sPrivateKey='' ) {
+        private function _isConnected( $sPublicKey='', $sPrivateKey='', $sLocale='' ) {
             
             $_oOption    = AmazonAutoLinks_Option::getInstance();
             $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
-                'US',   // locale
+                $sLocale
+                    ? $sLocale
+                    : $_oOption->get( array( 'authentication_keys', 'server_locale' ), 'US' ),
                 $sPublicKey
                     ? $sPublicKey
                     : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ), 
@@ -123,7 +147,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
          * @return      string
          */
         private function _getStatus( $bConnected ) {
-            // $_bIsConnected    = $this->_isConnected();
+            
             $_bIsConnected    = $bConnected;
             $_sStatusSelector = $_bIsConnected
                 ? 'connected'
@@ -182,10 +206,10 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             return $aOldInput;
         }
                 
-        if ( ! $this->_isConnected( $_sPublicKey, $_sPrivateKey ) ) {
+        if ( ! $this->_isConnected( $_sPublicKey, $_sPrivateKey, $aInput[ 'server_locale' ] ) ) {
             
-            $_aErrors[ $this->sSectionID ]['access_key'] = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPublicKey;
-            $_aErrors[ $this->sSectionID ]['access_key_secret'] = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPrivateKey;            
+            $_aErrors[ $this->sSectionID ][ 'access_key' ]        = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPublicKey;
+            $_aErrors[ $this->sSectionID ][ 'access_key_secret' ] = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPrivateKey;            
             $oAdminPage->setFieldErrors( $_aErrors );
             $oAdminPage->setSettingNotice( __( 'Failed authentication.', 'amazon-auto-links' ) );
             return $aOldInput;

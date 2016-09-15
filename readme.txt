@@ -3,7 +3,7 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.6.0
+Tested up to:       4.6.1
 Stable tag:         3.4.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,7 +27,7 @@ Display affiliate links along with your posts with this plugin to generate actua
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Austria, India, and China. For the category unit types, Mexico and Brazil are supported as well.
+Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India, and China. For the category unit types, Mexico and Brazil are supported as well.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
@@ -220,6 +220,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.4.4 =
+- Fixed an issue that some locale specific API keys were not connected to the API server by adding the `Server Locale` option in the `Authentication` section.
 
 = 3.4.3 - 09/02/2016 =
 - Fixed a bug of discount prices displayed with the `%price%` variable for the `Item Format` unit option.

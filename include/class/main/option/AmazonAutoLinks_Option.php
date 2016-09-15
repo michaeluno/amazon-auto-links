@@ -73,9 +73,10 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'cloak' => 'productlink'
         ),
         'authentication_keys' => array(
-            'access_key'                => '',  // public key
-            'access_key_secret'         => '',  // private key
+            'access_key'                => '',   // public key
+            'access_key_secret'         => '',   // private key
             'api_authentication_status' => false,
+            'server_locale'             => 'US', // 3.4.4+
         ),            
         // Hidden options
         'template' => array(

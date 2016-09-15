@@ -27,8 +27,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
         'JP'    => 'co.jp',
         'UK'    => 'co.uk',
         'US'    => 'com',
-        'IN'    => 'in',            // 2.1.0+
-        
+        'IN'    => 'in',            // 2.1.0+        
         'BR'    => 'com.br',        // 3.4.4+
         'MX'    => 'com.mx',        // 3.4.4+
     );
@@ -37,7 +36,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
     
     protected $sUserAgent = "Amazon Auto Links";
     
-    function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', $sVersion='2013-08-01' ) {  // 
+    public function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', $sVersion='2013-08-01' ) {  // 
          
         $this->sLocale          = $sLocale;
         $this->sDomain          = $this->getDomain( $sLocale );
@@ -76,17 +75,17 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
      * @return      boolean            If succeeds, returns true; otherwise, false.
      */
     public function test() {
-        
+
         $_aResponse = $this->request(
             array(
                 'Operation'     => 'BrowseNodeLookup',
                 'BrowseNodeId'  => '1000',    // the Books node 
             ),
-            'US',    // or 'com' would work
+            $this->sLocale,
             null     // do not use cache
         );            
         return ( boolean ) ( 
-            ! isset( $_aResponse['Error'] ) 
+            ! isset( $_aResponse[ 'Error' ] ) 
             && ! empty( $_aResponse ) 
         );
         
