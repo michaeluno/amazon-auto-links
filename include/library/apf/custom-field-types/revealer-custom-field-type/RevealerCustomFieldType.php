@@ -117,7 +117,7 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  * @since       1.0.0
  * @package     AmazonAutoLinks_AdminPageFrameworkFieldTypePack
  * @subpackage  CustomFieldType
- * @version     1.0.1
+ * @version     1.0.3
  */
 class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageFramework_FieldType {
         
@@ -225,7 +225,24 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
      * Returns the field type specific JavaScript script.
      */ 
     protected function getScripts() { 
-        return "";
+        $_aJSArray      = json_encode( $this->aFieldTypeSlugs );
+        $_sDoubleQuote  = '\"';
+        return <<<JAVASCRIPTS
+
+/* The below function will be triggered when a new repeatable field is added. Since the APF repeater script does not
+    renew the color piker element (while it does on the input tag value), the renewal task must be dealt here separately. */
+jQuery( document ).ready( function(){
+    
+    jQuery().registerAmazonAutoLinks_AdminPageFrameworkCallbacks( {     
+        added_repeatable_field: function( oClonedField, sFieldType, sFieldTagID, sCallType ) {
+            oClonedField.find( 'select[data-reveal],input[type=\"checkbox\"][data-reveal],input[type=\"radio\"][data-reveal]' )
+                .setAmazonAutoLinks_AdminPageFrameworkRevealer();
+        }
+    },
+    {$_aJSArray}
+    );
+});
+JAVASCRIPTS;
     }
 
     /**
@@ -281,9 +298,12 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
         private function _sanitizeInnerFieldArray( array $aField ) {
             
             // The revealer field type has its own description element.
-            unset( $aField[ 'description' ] );
+            unset( 
+                $aField[ 'description' ],
+                $aField[ 'title' ] 
+            );
             
-            // The revealer script of checkboxes needs the reference of the selector to reveal. 
+            // The revealer script of check boxes needs the reference of the selector to reveal. 
             // For radio and select input types, the key of the label array can be used but for the checkbox input type, 
             // the value attribute needs to be always 1 (for cases of key of zero '0') so the selector needs to be separately stored.
             $_aSelectors = $this->getAsArray( $aField[ 'selectors' ] );
@@ -293,6 +313,9 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                     foreach( $this->getAsArray( $aField[ 'label' ] ) as $_sKey => $_sLabel ) {
                         // If the user sets the 'selectors' argument, its value will be used; otherwise, the label key will be used.
                         $_sSelector = $this->getElement( $_aSelectors, array( $_sKey ), $_sKey );
+                        $aField[ 'attributes' ][ 'select' ] = array(
+                            'data-reveal' => $_sSelector, // this is only for identifying the select element is of the revealer field type, not for referencing.
+                        );
                         $aField[ 'attributes' ][ 'option' ][ $_sKey ] = array(
                                 'data-reveal'   => $_sSelector,
                             ) 
@@ -326,7 +349,8 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                 "<script type='text/javascript' >"
                     . '/* <![CDATA[ */ '
                     . "jQuery( document ).ready( function(){
-                        jQuery('*[data-id=\"{$sInputID}\"]').setAmazonAutoLinks_AdminPageFrameworkRevealer();
+                        jQuery('select[data-id=\"{$sInputID}\"][data-reveal],input[data-id=\"{$sInputID}\"][data-reveal]')
+                            .setAmazonAutoLinks_AdminPageFrameworkRevealer();
                     });"
                     . ' /* ]]> */'
                 . "</script>";    
@@ -360,7 +384,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
                             jQuery( sValue ).hide();
                                 
                         });
-                        jQuery( 'select[data-id=\"{$sSelectorID}\"], input:checked[type=radio][data-id=\"{$sSelectorID}\"], input:checked[type=checkbox][data-id=\"{$sSelectorID}\"]' )
+                        jQuery( 'select[data-id=\"{$sSelectorID}\"][data-reveal], input:checked[type=radio][data-id=\"{$sSelectorID}\"], input:checked[type=checkbox][data-id=\"{$sSelectorID}\"][data-reveal]' )
                             .trigger( 'change' );
                     });"
                     . ' /* ]]> */'
@@ -383,6 +407,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
             $.fn.setAmazonAutoLinks_AdminPageFrameworkRevealer = function() {
 
                 var _sLastRevealedSelector;
+                this.unbind( 'change' ); // for repeatable fields
                 this.change( function() {
                     
                     var _sTargetSelector        = $( this ).is( 'select' )
