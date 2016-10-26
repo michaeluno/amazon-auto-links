@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.5 - 10/27/2016 =
+- Fixed an issue that reaches PHP max input vars in the auto-insert definition page on some servers.
+
 = 3.4.4 - 09/16/2016 =
 - Fixed an issue that some locale specific API keys were not connected to the API server by adding the `Server Locale` option in the `Authentication` section.
 

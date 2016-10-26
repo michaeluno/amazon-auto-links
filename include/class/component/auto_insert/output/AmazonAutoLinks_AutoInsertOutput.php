@@ -431,8 +431,8 @@ class AmazonAutoLinks_AutoInsertOutput extends AmazonAutoLinks_AutoInsertOutput_
         // Retrieve the taxonomy names associated with the current page's post type
         $aTerms = array();
         foreach( ( array ) get_object_taxonomies( $aSubjectPostInfo['post_type'], 'names' ) as $sTaxonomySlug  ) {
-            $aTerms = isset( $aAutoInsertOptions['enable_taxonomy'][ $sTaxonomySlug ] )
-                ? $aTerms + $aAutoInsertOptions['enable_taxonomy'][ $sTaxonomySlug ]
+            $aTerms = isset( $aAutoInsertOptions[ 'enable_taxonomy' ][ $sTaxonomySlug ] )
+                ? $aTerms + ( array ) $aAutoInsertOptions[ 'enable_taxonomy' ][ $sTaxonomySlug ]
                 : $aTerms;
         }
             

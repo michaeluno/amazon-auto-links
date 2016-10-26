@@ -85,8 +85,9 @@ class AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable extends AmazonAutoLin
                 'title'           => __( 'Taxonomies', 'amazon-auto-links' ),
                 'taxonomy_slugs'  => $this->getSiteTaxonomies(),
                 'description'     => __( 'For static insertion, only Category for the default Post post type can take effect.', 'amazon-auto-links' ),
-                'select_all_button'  => false,       
-                'select_none_button' => false,                                                 
+                'select_all_button'  => true,
+                'select_none_button' => true,
+                'save_unchecked'     => false,
             ),  
         );
     }   

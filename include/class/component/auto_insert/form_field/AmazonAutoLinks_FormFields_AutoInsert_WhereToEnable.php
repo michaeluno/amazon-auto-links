@@ -95,8 +95,9 @@ class AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable extends AmazonAutoLink
                 'field_id'           => $sFieldIDPrefix . 'enable_taxonomy',
                 'title'              => __( 'Taxonomies', 'amazon-auto-links' ),
                 'type'               => 'taxonomy',
-                'select_all_button'  => false,       
-                'select_none_button' => false,                                 
+                'save_unchecked'     => false,
+                'select_all_button'  => true,       
+                'select_none_button' => true,                                 
                 'taxonomy_slugs'     => $this->getSiteTaxonomies(),
                 'description'        => __( 'For static insertion, only Category for the default Post post type can take effect.', 'amazon-auto-links' )
                     . ' ' . __( 'The checked terms which do not belong to the post type of the currently loading page will not take effect.', 'amazon-auto-links' )
