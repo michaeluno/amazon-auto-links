@@ -37,7 +37,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'title'             => __( 'Status', 'amazon-auto-links' ),
                 'type'              => 'hidden',
                 'value'             => $_bConnected,
-                'before_field'      => $this->_getStatus( $_bConnected ),
+                'label'             => $this->_getStatus( $_bConnected ),
             ),
             array(
                 'field_id'          => 'access_key',
