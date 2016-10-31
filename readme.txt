@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.6 - 10/31/2016 =
+- Fixed a bug with the shortcode that some direct product search arguments were not recognized.
+
 = 3.4.5 - 10/27/2016 =
 - Fixed an issue that reaches PHP max input vars in the auto-insert definition page on some servers.
 

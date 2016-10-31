@@ -33,6 +33,17 @@ class AmazonAutoLinks_UnitOption_similarity_lookup extends AmazonAutoLinks_UnitO
     );
 
     /**
+     * @since       3.4.6
+     */
+    public static $aShortcodeArgumentKeys = array(
+        'operation'             => 'Operation',
+        'itemid'                => 'ItemId',
+        'merchantid'            => 'MerchantId',     
+        'condition'             => 'Condition',         
+        'similaritytype'        => 'SimilarityType',         
+    );        
+
+    /**
      * 
      * @return  array
      */
@@ -41,5 +52,16 @@ class AmazonAutoLinks_UnitOption_similarity_lookup extends AmazonAutoLinks_UnitO
             + parent::$aStructure_Default
             + AmazonAutoLinks_UnitOption_search::$aStructure_Default;
     }    
+    
+    /**
+     * 
+     * @since       3.4.6
+     */
+    protected function format( array $aUnitOptions ) {
+
+        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        return parent::format( $aUnitOptions )
+        
+    }        
     
 }

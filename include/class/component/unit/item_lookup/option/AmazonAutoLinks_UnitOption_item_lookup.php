@@ -35,6 +35,18 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
     );
 
     /**
+     * @since       3.4.6
+     */
+    public static $aShortcodeArgumentKeys = array(
+        'operation'             => 'Operation',
+        'searchindex'           => 'SearchIndex',
+        'merchantid'            => 'MerchantId',     
+        'condition'             => 'Condition',         
+        'itemid'                => 'ItemId',
+        'idtype'                => 'IdType',        
+    );    
+    
+    /**
      * 
      * @return  array
      */
@@ -50,6 +62,7 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      */
     protected function format( array $aUnitOptions ) {
 
+        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
         $aUnitOptions = parent::format( $aUnitOptions )
             + AmazonAutoLinks_UnitOutput_similarity_lookup::$aStructure_APIParameters;
         $aUnitOptions = $this->sanitize( $aUnitOptions );

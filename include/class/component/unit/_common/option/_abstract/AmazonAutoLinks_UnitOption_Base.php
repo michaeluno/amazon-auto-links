@@ -34,6 +34,12 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     static public $aStructure_Default = array();    
     
     /**
+     * @remark      Shortcode argument keys are all converted to lower-cases but Amazon API keys are camel-cased.
+     * @since       3.4.6
+     */
+    static public $aShortcodeArgumentKeys = array();
+    
+    /**
      * Stores the default unit option values and represents the array structure.
      * 
      * @remark      Should be defined in an extended class.
@@ -90,6 +96,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $_oOption     = AmazonAutoLinks_Option::getInstance();        
         $aUnitOptions = $aUnitOptions + $this->aDefault;
 
+        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        
         // the item lookup search unit type does not have a count field
         if( isset( $aUnitOptions['count'] ) ) {
             $aUnitOptions['count'] = $this->fixNumber( 
@@ -124,7 +132,24 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         
         return $aUnitOptions;
         
-    }      
+    }   
+
+        /**
+         * @remark      shortcode arguments are all converted to lower-cases but Amazon API keys are camel-calsed.
+         * @since       3.4.6
+         * @return      array
+         */
+        protected function getShortcodeArgumentKeysSanitized( array $aUnitOptions, array $aShortcodeArgumentKeys ) {
+            // Shortcode parameter keys are converted to lower cases.
+            foreach( $aUnitOptions as $_sKey => $_mValue ) {
+                if ( isset( $aShortcodeArgumentKeys[ $_sKey ] ) ) {
+                    $_sCorrectKey = $aShortcodeArgumentKeys[ $_sKey ];
+                    $aUnitOptions[ $_sCorrectKey ] = $_mValue;
+                    unset( $aUnitOptions[ $_sKey ] );
+                }
+            }
+            return $aUnitOptions;
+        }    
     
     /**
      * Returns the all associated options if no key is set; otherwise, the value of the specified key.

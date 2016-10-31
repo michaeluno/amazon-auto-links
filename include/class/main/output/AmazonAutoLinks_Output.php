@@ -40,7 +40,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * 
      * @since       2.0.0
      */
-    function __construct( $aArguments ) {
+    public function __construct( $aArguments ) {
         $this->aArguments = $aArguments;
     }
 
@@ -163,21 +163,27 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * Determines the unit type from the given argument array.
              * @since       3
              * @return      string      The unit type slug.
+             * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
              */
             private function _getUnitTypeFromArguments( $aArguments ) {
                 
-                if ( isset( $aArguments[ 'Operation' ] ) ) {
-                        
-                    if ( 'ItemSearch' === $aArguments[ 'Operation' ] ) {
+                if ( isset( $aArguments[ 'unit_type' ] ) ) {
+                    return $aArguments[ 'unit_type' ];
+                }
+                
+                $_nsOperation = $this->_getOperationArgument( $aArguments );
+                if ( $_nsOperation ) {                       
+                    if ( 'ItemSearch' === $_nsOperation ) {
                         return 'search';
                     }
-                    if ( 'ItemLookup' === $aArguments[ 'Operation' ] ) {
+                    if ( 'ItemLookup' === $_nsOperation ) {
                         return 'item_lookup';
                     }
-                    if ( 'SimilarityLookup' === $aArguments[ 'Operation' ] ) {
+                    if ( 'SimilarityLookup' === $_nsOperation ) {
                         return 'similarity_lookup';
                     }
                 }
+                
                 if ( isset( $aArguments[ 'categories' ] ) ) {
                     return 'category';
                 }                
@@ -185,17 +191,30 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     return 'tag';
                 }
                 if ( isset( $aArguments[ 'urls' ] ) ) {
-                    
+                    return 'url';
                 }
                 return 'unknown';
                 
             }
+                /**
+                 * @remark      Shortcode argument keys are all lower-case.
+                 * @since       3.4.6
+                 * @return      string
+                 */
+                private function _getOperationArgument( $aArguments ) {
+                    $_sOperation = $this->getElement( $aArguments, 'Operation' );
+                    if ( $_sOperation ) {
+                        return $_sOperation;
+                    }
+                    return $this->getElement( $aArguments, 'operation' );    
+                }
             
             /**
              * 
              * @return      string      The unit output
              */
             private function _getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
+
                 switch ( $sUnitType ) {
                     case 'category':
                     case 'tag':

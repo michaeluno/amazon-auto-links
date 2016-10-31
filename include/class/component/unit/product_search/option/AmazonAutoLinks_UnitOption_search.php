@@ -46,6 +46,36 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'ItemPage'              => null,        
 
     );
+    
+    /**
+     * @since       3.4.6
+     */
+    public static $aShortcodeArgumentKeys = array(
+        'keywords'              => 'Keywords',
+        'power'                 => 'Power',             
+        'operation'             => 'Operation',
+        'title'                 => 'Title',            
+        'sort'                  => 'Sort',                
+        'searchindex'           => 'SearchIndex',
+        'browsenode'            => 'BrowseNode',          
+        'availability'          => 'Availability',
+        'condition'             => 'Condition',         
+        'maximumprice'          => 'MaximumPrice',
+        'minimumprice'          => 'MinimumPrice',         
+        'minpercentageoff'      => 'MinPercentageOff',
+        'merchantid'            => 'MerchantId',     
+        'marketplacedomain'     => 'MarketplaceDomain',
+        'itempage'              => 'ItemPage',
+    );
 
+    /**
+     * @since       3.4.6
+     */
+    protected function format( array $aUnitOptions ) {
 
+        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        return parent::format( $aUnitOptions );
+        
+    }
+    
 }
