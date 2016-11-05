@@ -223,6 +223,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 3.4.7 - 11/05/2016 =
 - Fixed a bug that the Contextual Products widgets were no longer displaying any products, introduced in 3.4.6.
+- Fixed a bug occurred in PHP 5.3 that caused a warning `debug_backtrace() expects at most 1 parameter, 2 given`.
 
 = 3.4.6 - 11/02/2016 =
 - Fixed a bug with the shortcode that some direct product search arguments were not recognized.
