@@ -60,59 +60,21 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      */
     public function get() {
 
-        // Retrieve IDs 
-        $_aIDs = array();
-
-        // The id parameter - the id parameter can accept comma delimited ids.
-        if ( isset( $this->aArguments[ 'id' ] ) ) {
-            if ( is_string( $this->aArguments[ 'id' ] ) || is_integer( $this->aArguments[ 'id' ] ) ) {
-                $_aIDs = array_merge( 
-                    $this->convertStringToArray( 
-                        $this->aArguments[ 'id' ], 
-                        "," 
-                    ), 
-                    $_aIDs 
-                );
-            } else if ( is_array( $this->aArguments['id'] ) ) {
-                // The Auto-insert feature passes the id as array.
-                $_aIDs = $this->aArguments[ 'id' ];
-            }
-        }
-            
-        // The label parameter.
-        if ( isset( $this->aArguments[ 'label' ] ) ) {
-            
-            $this->aArguments[ '_labels' ] = $this->convertStringToArray( 
-                $this->aArguments['label'], 
-                "," 
-            );
-            $_aIDs = array_merge(
-                $this->_getPostIDsByLabel( 
-                    $this->aArguments[ '_labels' ], 
-                    isset( $this->aArguments[ 'operator' ] ) 
-                        ? $this->aArguments[ 'operator' ] 
-                        : null 
-                ), 
-                $_aIDs 
-            );
-            
-        }
-
-        $_aOutputs  = array();
-        $_aIDs      = array_unique( $_aIDs );
+        $_sOutput = '';        
+        $_aIDs    = $this->_getUnitIDs();
 
         // If called by unit,
         if ( ! empty( $_aIDs ) ) {
             foreach( $_aIDs as $_iID ) {            
-                $_aOutputs[] = $this->_getOutputByID( $_iID );
+                $_sOutput .= $this->_getOutputByID( $_iID );
             }
+            return trim( $_sOutput );
         } 
+        
         // there are cases called without a unit 
-        else {
-            $_aOutputs[] = $this->_getOutputByDirectArguments( $this->aArguments );            
-        }
-    
-        return trim( implode( '', $_aOutputs ) );
+        return trim( 
+            $this->_getOutputByDirectArguments( $this->aArguments ) 
+        );
 
     }
         /**
@@ -121,6 +83,53 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         public function getOutput() {
             return $this->get();
         }
+        
+        /**
+         * @return      array
+         * @since       3.4.7
+         */
+        private function _getUnitIDs() {
+            
+            $_aIDs = array();
+            
+            // The id parameter - the id parameter can accept comma delimited ids.
+            if ( isset( $this->aArguments[ 'id' ] ) ) {
+                if ( is_string( $this->aArguments[ 'id' ] ) || is_integer( $this->aArguments[ 'id' ] ) ) {
+                    $_aIDs = array_merge( 
+                        $this->convertStringToArray( 
+                            $this->aArguments[ 'id' ], 
+                            "," 
+                        ), 
+                        $_aIDs 
+                    );
+                } else if ( is_array( $this->aArguments['id'] ) ) {
+                    // The Auto-insert feature passes the id as array.
+                    $_aIDs = $this->aArguments[ 'id' ];
+                }
+            }
+                
+            // The label parameter.
+            if ( isset( $this->aArguments[ 'label' ] ) ) {
+                
+                $this->aArguments[ '_labels' ] = $this->convertStringToArray( 
+                    $this->aArguments['label'], 
+                    "," 
+                );
+                $_aIDs = array_merge(
+                    $this->_getPostIDsByLabel( 
+                        $this->aArguments[ '_labels' ], 
+                        isset( $this->aArguments[ 'operator' ] ) 
+                            ? $this->aArguments[ 'operator' ] 
+                            : null 
+                    ), 
+                    $_aIDs 
+                );
+                
+            }
+            $_aIDs      = array_unique( $_aIDs );
+            return $_aIDs;
+            
+        }        
         
         /**
          * Returns the unit output by post (unit) ID.
