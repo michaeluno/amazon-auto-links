@@ -16,7 +16,6 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
     
     /**
      * Stores the unit type.
-     * @remark      Should be overridden in an extended class.
      */
     public $sUnitType = 'url';    
     

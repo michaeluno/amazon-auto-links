@@ -16,6 +16,11 @@
 class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_search {
 
     /**
+     * Stores the unit type.
+     */
+    public $sUnitType = 'item_lookup';
+
+    /**
      * Stores the default structure and key-values of the unit.
      * @remark      Accessed from the base class constructor to construct a default option array.
      */
