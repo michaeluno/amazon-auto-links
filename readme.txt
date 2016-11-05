@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.6.1
-Stable tag:         3.4.6
+Stable tag:         3.4.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,7 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.4.7 - 11/05/2016 =
+= 3.4.7 - 11/06/2016 =
 - Fixed a bug that the Contextual Products widgets were no longer displaying any products, introduced in 3.4.6.
 - Fixed a bug occurred in PHP 5.3 that caused a warning `debug_backtrace() expects at most 1 parameter, 2 given`.
 
