@@ -13,7 +13,7 @@
  * @since       3       Added the second parameter to let the user choose whether it should echo or return the output.
  */
 function AmazonAutoLinks( $aArguments, $bEcho=true ) {
-    
+
     if ( $bEcho ) {
         AmazonAutoLinks_Output::getInstance( $aArguments )->render();
         return;

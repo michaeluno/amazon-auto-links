@@ -194,7 +194,6 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     : $_oFields->get();
                 foreach( $_aFields as $_aField ) {
                     $this->_addField( $_aField );
-                    
                 }
             }            
         }
@@ -226,8 +225,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
         $aSubmit    = $aSubmit + $_aDefaults;
         $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aSubmit, $aStored );
-        $aSubmit    = $_oItemFormatValidator->get();
-
+        $aSubmit    = $_oItemFormatValidator->get();      
         return $aSubmit;
         
     }        
@@ -239,8 +237,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      */
     public function content( $sContent, $aArguments, $aFormData ) {
         
-        $aFormData = $this->_getFormattedFormData( $aFormData );    
-
+        $aFormData = $this->_getFormattedFormData( $aFormData );        
         if ( 
             ! in_array( 
                 AmazonAutoLinks_PluginUtility::getCurrentPageType(), 
@@ -250,7 +247,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             $this->oProp->bShowWidgetTitle = false;
             return $sContent;
         }        
-        
+
         $_sOutput = $this->_getOutput( $aFormData, $aArguments );
         if ( ! $_sOutput && ! $aFormData[ 'show_title_on_no_result' ] ) {
             $this->oProp->bShowWidgetTitle = false;
@@ -324,6 +321,17 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 array( 
                     'Keywords'         => implode( ',', $_aSearchKeywords ),
                     'Operation'        => 'ItemSearch',
+                    
+                    /**
+                     * Fixed a bug that contextual widgets did not return outputs
+                     * due to the form data was having the value of `category` for the `unit_type` argument.
+                     * This was because the unit option formatter class did not set the correct `unit_type` in the class,
+                     * which has been fixed in 3.4.7.
+                     * 
+                     * So setting the value here is a workaround to keep backward compatibility.
+                     * @since       3.4.7
+                     */
+                    'unit_type'        => 'search',
                     
                     // The `Power` parameter will not be used as it only works with the Books category.
                     

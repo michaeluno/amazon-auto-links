@@ -115,14 +115,13 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         return trim( implode( '', $_aOutputs ) );
 
     }
-
         /**
-         * 
          * @deprecated      3
          */
         public function getOutput() {
             return $this->get();
         }
+        
         /**
          * Returns the unit output by post (unit) ID.
          */
@@ -166,7 +165,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
              */
             private function _getUnitTypeFromArguments( $aArguments ) {
-                
+          
                 if ( isset( $aArguments[ 'unit_type' ] ) ) {
                     return $aArguments[ 'unit_type' ];
                 }
