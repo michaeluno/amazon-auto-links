@@ -540,6 +540,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @return      string      The found ASIN, or an empty string when not found.
      */
     protected function getASIN( $sURL ) {
+        
+        $sURL = remove_query_arg( 
+            array( 'smid', 'pf_rd_p', 'pf_rd_s', 'pf_rd_t', 'pf_rd_i', 'pf_rd_m', 'pf_rd_r' ),
+            $sURL
+        );
+        
+        $sURL = preg_replace(
+            array(
+                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
+                '/[0-9]{10}/',      // Remove ones consisting of only numbers.
+            ), 
+            '', 
+            $sURL
+        );
+        
         preg_match( 
             '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})(\/|$|\?)/', // needle - [A-Z0-9]{10} is the ASIN
             $sURL,  // subject

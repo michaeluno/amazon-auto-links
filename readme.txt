@@ -222,6 +222,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.4.8 =
+- Fixed an issue that some ASINs were not detected accurately in URL units.
 - Fixed a bug that PHP warnings occurred in the background in some rare occasion.
 
 = 3.4.7 - 11/06/2016 =

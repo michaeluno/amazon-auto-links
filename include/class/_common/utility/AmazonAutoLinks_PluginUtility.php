@@ -21,7 +21,16 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
-                                
+        
+        $sText = preg_replace(
+            array(
+                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
+                '/[0-9]{10}/',      // Remove ones consisting of only numbers.
+            ), 
+            '', 
+            $sText
+        );
+                               
         $_biResult = preg_match_all( 
             '/[A-Z0-9]{10}/', // needle - [A-Z0-9]{10} is the ASIN
             $sText,           // subject
