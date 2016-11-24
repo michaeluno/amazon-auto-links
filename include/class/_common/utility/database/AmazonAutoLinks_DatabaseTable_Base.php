@@ -11,6 +11,7 @@
  * Provides shared methods for the plugin database table classes.
  * 
  * @since       3
+ * @version     1.0.0
  */
 abstract class AmazonAutoLinks_DatabaseTable_Base {
     
@@ -278,5 +279,23 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             "DROP  TABLE IF EXISTS " . $this->sTableName
         );
     }
+    
+    /**
+     * @return      string
+     */
+    public function getTableSize() {
+        $_aResult = $GLOBALS[ 'wpdb' ]->get_results(
+            "SELECT 
+            table_name AS `Table`, 
+            round(((data_length + index_length) / 1024 / 1024), 2) `Size_in_MB` 
+            FROM information_schema.TABLES 
+            WHERE table_schema = (SELECT DATABASE())
+            AND table_name = '{$this->sTableName}'",
+            'ARRAY_A'
+        ); 
+        return isset( $_aResult[ 0 ][ 'Size_in_MB' ] )
+            ? $_aResult[ 0 ][ 'Size_in_MB' ] . ' MB'
+            : 'n/a';
+    }    
     
 }

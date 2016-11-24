@@ -155,11 +155,12 @@ class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTabl
 
         $sExpiryTime = $sExpiryTime
             ? $sExpiryTime
-            : "NOW()";
+            : "UTC_TIMESTAMP()";
         $this->getVariable(
             "DELETE FROM `{$this->sTableName}` "
             . "WHERE expiration_time < {$sExpiryTime}" 
         ); 
+        $this->getVariable( "OPTIMIZE TABLE `{$this->sTableName}`;" );
         
     }    
     

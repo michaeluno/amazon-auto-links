@@ -222,6 +222,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.4.8 =
+- Added cache size indications in the `Cache` setting section.
+- Fixed a bug that unexpired caches were deleted when deleting expired caches.
 - Fixed an issue that some ASINs were not detected accurately in URL units.
 - Fixed a bug that PHP warnings occurred in the background in some rare occasion.
 

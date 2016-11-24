@@ -36,7 +36,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         );
         $_iExpiredProducts = $_oProductTable->getVariable( 
             "SELECT COUNT(*) FROM {$_oProductTable->sTableName} "
-            . "WHERE expiration_time < NOW()" 
+            . "WHERE expiration_time < UTC_TIMESTAMP()" 
         );
         
         $_oCacheTable      = new AmazonAutoLinks_DatabaseTable_request_cache(
@@ -47,15 +47,28 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         );
         $_iExpiredRequests = $_oCacheTable->getVariable( 
             "SELECT COUNT(*) FROM {$_oCacheTable->sTableName} "
-            . "WHERE expiration_time < NOW()" 
+            . "WHERE expiration_time < UTC_TIMESTAMP()" 
         );
         
         $oFactory->addSettingFields(
-            $sSectionID, // the target section id    
+            $sSectionID, // the target section id   
+            array( 
+                'field_id'        => '_table_sizes',
+                'title'           => __( 'Sizes', 'amazon-auto-links' ),
+                'content' => ''
+                    . "<p style='margin-bottom: 1em;'>" 
+                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' 
+                            . $_oProductTable->getTableSize()
+                    . '</p>'
+                    . "<p style='margin-bottom: 1em;'>" 
+                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                            . $_oCacheTable->getTableSize()
+                    . '</p>',
+            ),                   
             array( 
                 'field_id'        => 'submit_clear_all_caches',
                 'type'            => 'submit',
-                'title'           => __( 'Clear All Caches', 'adazon-auto-links' ),
+                'title'           => __( 'Clear All Caches', 'amazon-auto-links' ),
                 'label_min_width' => 0,
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
@@ -63,16 +76,18 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 ),
                 'before_fieldset' => ''
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' . $_iProductCount 
+                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' 
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iProductCount )
                     . '</p>'
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' . $_iRequestCount 
+                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iRequestCount )
                     . '</p>',
             ),            
             array( 
                 'field_id'        => 'submit_clear_expired_caches',
                 'type'            => 'submit',
-                'title'           => __( 'Clear Expired Caches', 'adazon-auto-links' ),
+                'title'           => __( 'Clear Expired Caches', 'amazon-auto-links' ),
                 'label_min_width' => 0,
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
@@ -80,10 +95,12 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 ),
                 'before_fieldset' => ''
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' . $_iExpiredProducts 
+                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' 
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredProducts )
                     . '</p>'
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' . $_iExpiredRequests 
+                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredRequests )
                     . '</p>',                
             ),
             array(
@@ -92,8 +109,8 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'title'             => __( 'Caching Mode', 'amazon-auto-links' ),
                 'capability'        => 'manage_options',
                 'label' => array(
-                    'normal'        => __( 'Normal', 'amazon-auto-links' ) . ' - ' . __( 'relies on WP Cron.', 'amazon-auto-links' ) . '<br />',
-                    'intense'       => __( 'Intense', 'amazon-auto-links' ) . ' - ' . __( 'relies on the plugin caching method.', 'amazon-auto-links' ) . '<br />',
+                    'normal'        => __( 'Normal', 'amazon-auto-links' ) . ' - ' . __( 'relies on WP Cron to renew caches.', 'amazon-auto-links' ) . '<br />',
+                    'intense'       => __( 'Intense', 'amazon-auto-links' ) . ' - ' . __( 'relies on the plugin caching method to renew caches.', 'amazon-auto-links' ) . '<br />',
                 ),
                 'tip'               => __( 'The intense mode should only be enabled when the normal mode does not work.', 'amazon-auto-links' ),
                 'default' => 'normal',
