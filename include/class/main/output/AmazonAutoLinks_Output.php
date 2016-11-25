@@ -92,18 +92,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             
             // The id parameter - the id parameter can accept comma delimited ids.
             if ( isset( $this->aArguments[ 'id' ] ) ) {
-                if ( is_string( $this->aArguments[ 'id' ] ) || is_integer( $this->aArguments[ 'id' ] ) ) {
-                    $_aIDs = array_merge( 
-                        $this->getStringIntoArray( 
-                            $this->aArguments[ 'id' ], 
-                            "," 
-                        ), 
-                        $_aIDs 
-                    );
-                } else if ( is_array( $this->aArguments['id'] ) ) {
-                    // The Auto-insert feature passes the id as array.
-                    $_aIDs = $this->aArguments[ 'id' ];
-                }
+                $_aIDs = $this->___getIDsFormatted( $this->aArguments[ 'id' ] );
             }
                 
             // The label parameter.
@@ -116,9 +105,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                 $_aIDs = array_merge(
                     $this->_getPostIDsByLabel( 
                         $this->aArguments[ '_labels' ], 
-                        isset( $this->aArguments[ 'operator' ] ) 
-                            ? $this->aArguments[ 'operator' ] 
-                            : null 
+                        $this->getElement( $this->aArguments, 'operator' )
                     ), 
                     $_aIDs 
                 );
@@ -127,7 +114,22 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             return array_unique( $_aIDs );
             
         }        
-        
+            /**
+             * Formates the `id` argument.
+             * @since       3.5.0
+             * @return      array
+             */
+            private function ___getIDsFormatted( $aisIDs ) {                    
+                if ( is_scalar( $aisIDs ) ) {
+                    return $this->getStringIntoArray( $aisIDs, ',' );
+                } 
+                // The Auto-insert feature passes ids with an array.
+                if ( is_array( $aisIDs ) ) {
+                    return $aisIDs;
+                }
+                return $this->getAsArray( $aisIDs );
+            }
+            
         /**
          * Returns the unit output by post (unit) ID.
          */
