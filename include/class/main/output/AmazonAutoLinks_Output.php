@@ -271,14 +271,14 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     return array(); 
                 }
                     
-                $_aPostObjects = get_posts( 
+                $_aPostIDs = get_posts( 
                     array(
                         'post_type'         => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    
                         'posts_per_page'    => -1, // ALL posts
+                        'fields'            => 'ids',
                         'tax_query'         => array(
                             array(
                                 'taxonomy'  => AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ],
-    // @todo it should be possible to set ID here so that the result only contains post IDs                            
                                 'field'     => $this->_sanitizeFieldKey( $sFieldType ),    // id or slug
                                 'terms'     => $aTermSlugs, // the array of term slugs
                                 'operator'  => $this->_sanitizeOperator( $sOperator ),    // 'IN', 'NOT IN', 'AND. If the item is only one, use AND.
@@ -286,11 +286,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                         )
                     )
                 );
-                $_aIDs = array();
-                foreach( $_aPostObjects as $oPost ) {
-                    $_aIDs[] = $oPost->ID;
-                }
-                return array_unique( $_aIDs );
+                return $_aPostIDs;
                 
             }
                 private function _sanitizeFieldKey( $sField ) {
