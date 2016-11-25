@@ -188,7 +188,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
         $_aTermIDs = is_array( $asTermIDs )
             ? $asTermIDs
-            : self::convertStringToArray( $asTermIDs, ',' );
+            : self::getStringIntoArray( $asTermIDs, ',' );
     
         $_aTermLabels = array();
         foreach( $_aTermIDs as $_iTermID ) {

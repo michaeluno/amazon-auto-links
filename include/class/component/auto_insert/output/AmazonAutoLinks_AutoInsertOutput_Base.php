@@ -77,8 +77,8 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
                 + AmazonAutoLinks_AutoInsertAdminPage::$aStructure_AutoInsertDefaultOptions;
             
             // convert comma delimited stings to array
-            $this->aAutoInsertOptions[ $iID ]['diable_post_ids'] = $this->convertStringToArray( $this->aAutoInsertOptions[ $iID ]['diable_post_ids'], ',' );
-            $this->aAutoInsertOptions[ $iID ]['enable_post_ids'] = $this->convertStringToArray( $this->aAutoInsertOptions[ $iID ]['enable_post_ids'], ',' );
+            $this->aAutoInsertOptions[ $iID ]['diable_post_ids'] = $this->getStringIntoArray( $this->aAutoInsertOptions[ $iID ]['diable_post_ids'], ',' );
+            $this->aAutoInsertOptions[ $iID ]['enable_post_ids'] = $this->getStringIntoArray( $this->aAutoInsertOptions[ $iID ]['enable_post_ids'], ',' );
             
         }
         
@@ -138,7 +138,7 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
             
             foreach( $aAutoInsertOptions as $iAutoInsertID => $aOptions ) {
                 
-                $aParsedHooks = $this->convertStringToArray( 
+                $aParsedHooks = $this->getStringIntoArray( 
                     $aOptions[ $sOptionKey ], 
                     ',' 
                 );        

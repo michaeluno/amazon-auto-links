@@ -134,7 +134,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     ',',
                     $_sTerms
                 );
-                $_aTerms    =  $this->convertStringToArray( $_sTerms, ',' );
+                $_aTerms    =  $this->getStringIntoArray( $_sTerms, ',' );
                 
                 $_bSearchPerTerm = $this->oUnitOption->get( 'search_per_keyword' );
                 if ( count( $_aTerms ) > 10 && ! $_bSearchPerTerm ) {
@@ -170,7 +170,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_asTerms   = $this->oUnitOption->get( $this->sSearchTermKey );                
                 $_aTerms    = is_array( $_asTerms )
                     ? $_asTerms
-                    : $this->convertStringToArray( $_asTerms, ',' );
+                    : $this->getStringIntoArray( $_asTerms, ',' );
                 
                 $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
                 foreach( $_aTerms as $_asSearchTerms ) {

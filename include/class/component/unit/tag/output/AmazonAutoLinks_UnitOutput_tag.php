@@ -64,7 +64,7 @@ class AmazonAutoLinks_UnitOutput_tag extends AmazonAutoLinks_UnitOutput_category
         
         $aRSSURLs           = array();
         $sScheme            = $this->bIsSSL ? 'https' : 'http';
-        $aTags              = $this->convertStringToArray( $aArguments[ 'tags' ], "," );
+        $aTags              = $this->getStringIntoArray( $aArguments[ 'tags' ], "," );
         $_sDummyAssociateID = 'amazon-auto-links-20';
         
         // If the customer ID is provided, compose the URL for it first.

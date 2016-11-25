@@ -72,9 +72,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         } 
         
         // there are cases called without a unit 
-        return trim( 
-            $this->_getOutputByDirectArguments( $this->aArguments ) 
-        );
+        return $this->_getOutputByDirectArguments( $this->aArguments );
 
     }
         /**
@@ -96,7 +94,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             if ( isset( $this->aArguments[ 'id' ] ) ) {
                 if ( is_string( $this->aArguments[ 'id' ] ) || is_integer( $this->aArguments[ 'id' ] ) ) {
                     $_aIDs = array_merge( 
-                        $this->convertStringToArray( 
+                        $this->getStringIntoArray( 
                             $this->aArguments[ 'id' ], 
                             "," 
                         ), 
@@ -111,7 +109,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             // The label parameter.
             if ( isset( $this->aArguments[ 'label' ] ) ) {
                 
-                $this->aArguments[ '_labels' ] = $this->convertStringToArray( 
+                $this->aArguments[ '_labels' ] = $this->getStringIntoArray( 
                     $this->aArguments['label'], 
                     "," 
                 );
@@ -126,8 +124,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                 );
                 
             }
-            $_aIDs      = array_unique( $_aIDs );
-            return $_aIDs;
+            return array_unique( $_aIDs );
             
         }        
         
@@ -232,18 +229,20 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     case 'url':        
                         $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $sUnitType );
                         $_oUnit      = new $_sClassName( $_aUnitOptions );
-                        return $_oUnit->get();
+                        return trim( $_oUnit->get() );
                     default:
                         $_oOption  = AmazonAutoLinks_Option::getInstance();
                         $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
                         return $_oOption->isDebug()
                             ? "<p>" . __( 'Debug', 'amazon-auto-links' ) . ': ' . $_sMessage . "</p>"
                             : "<!-- "  . $_sMessage . " -->";
-                }                        
+                }
+                
             }            
             
         /**
          * Retrieves the post (unit) IDs by the given unit label.
+         * @return      array
          */
         private function _getPostIDsByLabel( $aLabels, $sOperator ) {
             
@@ -264,6 +263,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         }
             /**
              * Retrieves post (unit) IDs by the plugin tag taxonomy slug.
+             * @return      array
              */
             private function _getPostIDsByTag( $aTermSlugs, $sFieldType='slug', $sOperator='AND' ) {
 

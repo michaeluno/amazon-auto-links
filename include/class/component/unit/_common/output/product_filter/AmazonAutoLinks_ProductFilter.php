@@ -132,7 +132,7 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
                 ',',
                 $_sList
             );
-            $_aList = $this->convertStringToArray( $_sList, ',' );
+            $_aList = $this->getStringIntoArray( $_sList, ',' );
 
             return $_aList;
             

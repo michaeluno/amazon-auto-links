@@ -38,7 +38,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
             $_oUtil   = new AmazonAutoLinks_WPUtility;
             
             add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-            $_aAllowedHTMLTags = $_oUtil->convertStringToArray(
+            $_aAllowedHTMLTags = $_oUtil->getStringIntoArray(
                 str_replace(
                     PHP_EOL,            // search
                     ',',                // replace
@@ -49,7 +49,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 ), 
                 ',' 
             );
-            $_aAllowedAttributes = $_oUtil->convertStringToArray(
+            $_aAllowedAttributes = $_oUtil->getStringIntoArray(
                 str_replace(
                     PHP_EOL,            // search
                     ',',                // replace
@@ -76,7 +76,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 
                 $_oOption = AmazonAutoLinks_Option::getInstance();    
                 $_oUtil   = new AmazonAutoLinks_WPUtility;
-                $_aAllowedCSSProperties = $_oUtil->convertStringToArray(
+                $_aAllowedCSSProperties = $_oUtil->getStringIntoArray(
                     str_replace(
                         PHP_EOL,            // search
                         ',',                // replace

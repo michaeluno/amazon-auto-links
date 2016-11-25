@@ -151,8 +151,8 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
                 $_aList[] = $aAreasLabel[ $sArea ];
             }
         }
-        $aFilters = $_oUtil->convertStringToArray( get_post_meta( $iPostID, 'filter_hooks', true ), ',' );
-        $aActions = $_oUtil->convertStringToArray( get_post_meta( $iPostID, 'action_hooks', true ), ',' );
+        $aFilters = $_oUtil->getStringIntoArray( get_post_meta( $iPostID, 'filter_hooks', true ), ',' );
+        $aActions = $_oUtil->getStringIntoArray( get_post_meta( $iPostID, 'action_hooks', true ), ',' );
         $_aList   = array_merge( $aFilters, $aActions, $_aList );
         return '<p>' 
                 . implode( ', ', $_aList ) 

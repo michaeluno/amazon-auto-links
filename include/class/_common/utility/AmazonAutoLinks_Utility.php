@@ -137,7 +137,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     static public function trimDelimitedElements( $strToFix, $strDelimiter, $fReadable=true, $fUnique=true ) {
         
         $strToFix    = ( string ) $strToFix;
-        $arrElems    = self::convertStringToArray( $strToFix, $strDelimiter );
+        $arrElems    = self::getStringIntoArray( $strToFix, $strDelimiter );
         $arrNewElems = array();
         foreach ( $arrElems as $strElem ) {
             if ( ! is_array( $strElem ) || ! is_object( $strElem ) ) {
@@ -161,40 +161,62 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * Parameters: 
      * 1: haystack string
      * 2, 3, 4...: delimiter
-     * e.g. $arr = convertStringToArray( 'a-1,b-2,c,d|e,f,g', "|", ',', '-' );
+     * e.g. $arr = getStringIntoArray( 'a-1,b-2,c,d|e,f,g', "|", ',', '-' );
      * 
      */
-    static public function convertStringToArray() {
+    static public function getStringIntoArray() {
         
-        $intArgs = func_num_args();
-        $arrArgs = func_get_args();
-        $strInput = $arrArgs[ 0 ];            
+        $intArgs      = func_num_args();
+        $arrArgs      = func_get_args();
+        $strInput     = $arrArgs[ 0 ];            
         $strDelimiter = $arrArgs[ 1 ];
         
-        if ( ! is_string( $strDelimiter ) || $strDelimiter == '' ) return $strInput;
-        if ( is_array( $strInput ) ) return $strInput;    // note that is_string( 1 ) yields false.
+        if ( ! is_string( $strDelimiter ) || $strDelimiter == '' ) {
+            return $strInput;
+        }
+        if ( is_array( $strInput ) ) {
+            return $strInput;    // note that is_string( 1 ) yields false.
+        }
             
         $arrElems = preg_split( "/[{$strDelimiter}]\s*/", trim( $strInput ), 0, PREG_SPLIT_NO_EMPTY );
-        if ( ! is_array( $arrElems ) ) return array();
+        if ( ! is_array( $arrElems ) ) {
+            return array();
+        }
         
         foreach( $arrElems as &$strElem ) {
             
             $arrParams = $arrArgs;
             $arrParams[0] = $strElem;
             unset( $arrParams[ 1 ] );    // remove the used delimiter.
-            // now $strElem becomes an array.
-            if ( count( $arrParams ) > 1 ) // if the delimiters are gone, 
-                $strElem = call_user_func_array( 'AmazonAutoLinks_Utilities::convertStringToArray', $arrParams );
+            // now `$strElem` becomes an array.
+            // if the delimiters are gone, 
+            if ( count( $arrParams ) > 1 ) {                
+                $strElem = call_user_func_array( 
+                    array( __CLASS__, 'getStringIntoArray' ),
+                    $arrParams 
+                );
+            }
             
             // Added this because the function was not trimming the elements sometimes... not fully tested with multi-dimensional arrays. 
-            if ( is_string( $strElem ) )
+            if ( is_string( $strElem ) ) {
                 $strElem = trim( $strElem );
+            }
             
         }
-
         return $arrElems;
 
     }        
+        /**
+         * An alias of `getStringIntoArray()`.
+         * @deprecated      3.5.0       Use `getStringIntoArray()`.
+         */
+        static public function convertStringToArray() {
+            $_aParams = func_get_args();
+            return call_user_func_array(
+                array( __CLASS__, 'getStringIntoArray' ),
+                $_aParams
+            );
+        }        
     
     /**
      * Implodes the given (multi-dimensional) array.
