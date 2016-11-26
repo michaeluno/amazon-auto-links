@@ -125,19 +125,20 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
          * @return      boolean
          */
         private function _isConnected( $sPublicKey='', $sPrivateKey='', $sLocale='' ) {
-            
             $_oOption    = AmazonAutoLinks_Option::getInstance();
-            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
-                $sLocale
-                    ? $sLocale
-                    : $_oOption->get( array( 'authentication_keys', 'server_locale' ), 'US' ),
-                $sPublicKey
-                    ? $sPublicKey
-                    : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ), 
-                $sPrivateKey
-                    ? $sPrivateKey
-                    : $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' ) 
-            );
+            $_sLocale    = $sLocale
+                ? $sLocale
+                : $_oOption->get( array( 'authentication_keys', 'server_locale' ), 'US' );
+            $_sPublicKey = $sPublicKey
+                ? $sPublicKey
+                : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
+            $_sPrivateKey = $sPrivateKey
+                ? $sPrivateKey
+                : $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );        
+            if ( ! $_sPublicKey || ! $_sPrivateKey ) {
+                return false;
+            }
+            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( $_sLocale, $_sPublicKey, $_sPrivateKey );
             return ( boolean ) $_oAmazonAPI->test();                
         
         }

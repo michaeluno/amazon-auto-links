@@ -25,7 +25,7 @@ abstract class AmazonAutoLinks_ProductAdvertisingAPI_Base {
     /**
      * Sets up hooks and properties.
      */
-    function __construct() {
+    public function __construct() {
         
         // Schedule the transient update task.
         add_action( 'shutdown', array( $this, '_replyToScheduleUpdatingCaches' ) );
@@ -47,6 +47,7 @@ abstract class AmazonAutoLinks_ProductAdvertisingAPI_Base {
 // @todo complete this method.            
 return true;            
         }
+        
     /**
      * Checks if the request is cached or not from the given request array.
      * 
@@ -55,7 +56,7 @@ return true;
      */
     protected function isCached( $aParams=array() ) {
         return ( boolean ) $this->getCache( 
-            $this->generateIDFromRequestParameter( $aParams ) 
+            $this->___getRequestHash( $aParams ) 
         );
     }
     
@@ -73,30 +74,28 @@ return true;
     protected function requestWithCache( $sRequestURI, $aHTTPArgs=array(), $aParams=array(), $iCacheDuration=3600, $sLocale='US' ) {
 
         // Create an ID from the URI - it's better not use the ID from an Amazon API request URI because it is built upon a timestamp.
-        $sTransientID = $this->generateIDFromRequestParameter( $aParams );
-
-        // Retrieve the cache, and if there is, use it.
-        $aTransient = $this->getCache( $sTransientID );     
-        if ( 
-            null !== $iCacheDuration
-            && $aTransient !== false 
-            && is_array( $aTransient ) 
-            && isset( $aTransient[ 'mod' ], $aTransient[ 'data' ] )
-        ) {
-            
-            // Check the cache expiration.
-            if ( ( $aTransient[ 'mod' ] + ( ( int ) $iCacheDuration ) ) < time() ) { // expired
-                $GLOBALS[ 'aAmazonAutoLinks_APIRequestURIs' ][ $sTransientID ] = array( 
-                    // these keys will be checked in the cache renewal events.
-                    'parameters' => $aParams,
-                    'locale'     => $sLocale,
-                );
-            }    
-            
-            return $this->bUseCacheTable
-                ? $aTransient[ 'data' ]
-                : $this->oEncrypt->decode( $aTransient[ 'data' ] );
-            
+        $sTransientID = $this->___getRequestHash( $aParams );
+        
+        if ( null !== $iCacheDuration ) {
+                    
+            // Retrieve the cache, and if there is, use it.
+            $aTransient = $this->getCache( $sTransientID );     
+            if ( $this->___isProperCache( $aTransient ) ) {
+                
+                // Check the cache expiration.
+                if ( $this->___hasCacheBeenExpired( $aTransient[ 'mod' ], $iCacheDuration ) ) { 
+                    $GLOBALS[ 'aAmazonAutoLinks_APIRequestURIs' ][ $sTransientID ] = array( 
+                        // these keys will be checked in the cache renewal events.
+                        'parameters' => $aParams,
+                        'locale'     => $sLocale,
+                    );
+                }    
+                
+                return $this->bUseCacheTable
+                    ? $aTransient[ 'data' ]
+                    : $this->oEncrypt->decode( $aTransient[ 'data' ] );
+                
+            }
         }
 
         return $this->setAPIRequestCache( 
@@ -107,7 +106,29 @@ return true;
         );
         
     }    
-    
+        /**
+         * @since       3.5.0
+         * @return      boolean
+         */
+        private function ___hasCacheBeenExpired( $iCacheModificationTime, $iSetCacheDuration ) {
+            return ( $iCacheModificationTime + ( ( integer ) $iSetCacheDuration ) ) < time();
+        }
+        /**
+         * Determines whether a given data contains cached data.
+         * @since       3.5.0
+         * @return      boolean
+         */
+        private function ___isProperCache( $mData ) {
+            
+            if ( false === $mData ) {
+                return false;
+            }
+            if ( ! is_array( $mData ) ) {
+                return false;
+            }
+            return isset( $mData[ 'mod' ], $mData[ 'data' ] );
+            
+        }    
     /**
      * Performs the API request and sets the cache.
      * 
@@ -211,8 +232,6 @@ return true;
         $aHTTPArgs = array_filter( $aHTTPArgs );    // drop non value elements.        
         
         $vResponse = wp_remote_get( $sRequestURI, $aHTTPArgs );
-        // $vResponse = wp_safe_remote_request( $sRequestURI, $aHTTPArgs );    // not supported in WP version 3.5.x or below.
-
         if ( is_wp_error( $vResponse ) ) {
             return array( 'Error' => array(
                     'Code'    => $vResponse->get_error_code(),
@@ -329,22 +348,34 @@ return true;
     }
     
     /**
-     * Generates an ID from the passed parameter.
-     * 
-     * Signed request URI uses a timestamp so it is not suitable for transient ID.
-     * 
+     * Generates a hash from request parameters.
+     * @since       3.5.0       
      */
-    public function generateIDFromRequestParameter( $aParams ) {
-        
+    private function ___getRequestHash( array $aParams ) {
+     
         $aParams = array_filter( $aParams + $this->aParams );        // Omits empty values.
         $aParams = $aParams + self::$aMandatoryParameters;    // Append mandatory elements.
         ksort( $aParams );        
-        unset( $aParams[ 'AssociateTag' ] );
+        unset( 
+            $aParams[ 'AssociateTag' ],
+            $aParams[ 'Timestamp' ],
+            $aParams[ 'Signature' ] 
+        );
         $aParams[ 'locale' ] = $this->sLocale;    
         $sQuery = implode( '&', $aParams );
         return AmazonAutoLinks_Registry::TRANSIENT_PREFIX . "_"  . md5( $sQuery );
-        
-    }
+     
+    }    
+        /**
+         * Generates an ID from the passed parameter.
+         * 
+         * Signed request URI uses a timestamp so it is not suitable for transient ID.
+         * 
+         * @deprecated      3.5.0   Use `___getRequestHash()`.
+         */
+        public function generateIDFromRequestParameter( $aParams ) {
+            return $this->___getRequestHash( $aParams );        
+        }
     
     /*
      * Callbacks

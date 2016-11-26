@@ -82,7 +82,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
                 'BrowseNodeId'  => '1000',    // the Books node 
             ),
             $this->sLocale,
-            null     // do not use cache
+            60     // 1 minutes
         );            
         return ( boolean ) ( 
             ! isset( $_aResponse[ 'Error' ] ) 
@@ -131,7 +131,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
                 : $this->sUserAgent,
         );
         $aHTTPArgs = array_filter( $aHTTPArgs );    // drop non value elements.
-        
+
         // Request
         $vResponse = $this->requestWithCache( 
             $this->getSignedRequestURI( $aParams, $sLocale ), 
