@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.6.1
-Stable tag:         3.4.8
+Stable tag:         3.4.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -220,6 +220,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.4.9 - 11/27/2016 =
+- Fixed an issue that some API requests were not cached properly.
 
 = 3.4.8 - 11/25/2016 =
 - Added cache size indications in the `Cache` setting section.
