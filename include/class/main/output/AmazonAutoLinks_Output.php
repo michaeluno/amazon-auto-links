@@ -44,7 +44,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         $this->aArguments = $this->___getArgumentsFormatted( $aArguments );
     }
         /**
-         * @since       3.5.0
+         * @since       3.4.9
          * @return      array
          */
         private function ___getArgumentsFormatted( $aArguments ) {
@@ -123,7 +123,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         }        
             /**
              * Formates the `id` argument.
-             * @since       3.5.0
+             * @since       3.4.9
              * @return      array
              */
             private function ___getIDsFormatted( $aisIDs ) {                    

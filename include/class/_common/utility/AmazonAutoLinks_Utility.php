@@ -208,7 +208,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }        
         /**
          * An alias of `getStringIntoArray()`.
-         * @deprecated      3.5.0       Use `getStringIntoArray()`.
+         * @deprecated      3.4.9       Use `getStringIntoArray()`.
          */
         static public function convertStringToArray() {
             $_aParams = func_get_args();

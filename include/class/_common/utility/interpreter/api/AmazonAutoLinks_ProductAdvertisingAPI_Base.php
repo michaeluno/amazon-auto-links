@@ -107,7 +107,7 @@ return true;
         
     }    
         /**
-         * @since       3.5.0
+         * @since       3.4.9
          * @return      boolean
          */
         private function ___hasCacheBeenExpired( $iCacheModificationTime, $iSetCacheDuration ) {
@@ -115,7 +115,7 @@ return true;
         }
         /**
          * Determines whether a given data contains cached data.
-         * @since       3.5.0
+         * @since       3.4.9
          * @return      boolean
          */
         private function ___isProperCache( $mData ) {
@@ -349,7 +349,7 @@ return true;
     
     /**
      * Generates a hash from request parameters.
-     * @since       3.5.0       
+     * @since       3.4.9
      */
     private function ___getRequestHash( array $aParams ) {
      
@@ -371,7 +371,7 @@ return true;
          * 
          * Signed request URI uses a timestamp so it is not suitable for transient ID.
          * 
-         * @deprecated      3.5.0   Use `___getRequestHash()`.
+         * @deprecated      3.4.9   Use `___getRequestHash()`.
          */
         public function generateIDFromRequestParameter( $aParams ) {
             return $this->___getRequestHash( $aParams );        
