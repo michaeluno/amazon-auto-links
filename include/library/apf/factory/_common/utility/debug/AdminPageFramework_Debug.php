@@ -79,7 +79,7 @@ class AmazonAutoLinks_AdminPageFramework_Debug_Base extends AmazonAutoLinks_Admi
         }
         return null;
     }
-    static private function _getLegibleString($sString, $iCharLimit = 200) {
+    static private function _getLegibleString($sString, $iCharLimit = 1000) {
         static $_iMBSupport;
         $_iMBSupport = isset($_iMBSupport) ? $_iMBSupport : ( integer )function_exists('mb_strlen');
         $_aStrLenMethod = array('strlen', 'mb_strlen');
