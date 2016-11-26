@@ -26,7 +26,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * 
      * This is to enable a technique to call a method in one line like
      * <code>
-     * $_sOutput = AmazonAutoLinks_Units::getInstance()->render();
+     * $_sOutput = AmazonAutoLinks_Output::getInstance()->render();
      * </code>
      * 
      * @sicne       2.1.1
@@ -41,8 +41,15 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @since       2.0.0
      */
     public function __construct( $aArguments ) {
-        $this->aArguments = $aArguments;
+        $this->aArguments = $this->___getArgumentsFormatted( $aArguments );
     }
+        /**
+         * @since       3.5.0
+         * @return      array
+         */
+        private function ___getArgumentsFormatted( $aArguments ) {
+            return $this->getAsArray( $aArguments ); 
+        }
 
     /**
      * Renders the output.
@@ -161,11 +168,14 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
          * @return      string
          */
         private function _getOutputByDirectArguments( $aArguments ) {
+                        
             return $this->_getOutputByUnitType( 
                 $this->_getUnitTypeFromArguments( $aArguments ), 
                 $aArguments 
             );
+            
         }
+        
             /**
              * Determines the unit type from the given argument array.
              * @since       3
@@ -228,7 +238,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     case 'search':
                     case 'item_lookup':
                     case 'similarity_lookup':        
-                    case 'url':        
+                    case 'url':                       
                         $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $sUnitType );
                         $_oUnit      = new $_sClassName( $_aUnitOptions );
                         return trim( $_oUnit->get() );
