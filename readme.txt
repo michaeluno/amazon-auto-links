@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.10 =
+- Fixed a bug with static auto-insert.
+
 = 3.4.9 - 11/27/2016 =
 - Fixed an issue that some API requests were not cached properly.
 

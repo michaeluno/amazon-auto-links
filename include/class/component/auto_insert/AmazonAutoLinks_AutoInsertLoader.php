@@ -28,10 +28,12 @@ class AmazonAutoLinks_AutoInsertLoader {
         );    
     
         // Outputs
-        new AmazonAutoLinks_AutoInsertOutput;
+        new AmazonAutoLinks_AutoInsertOutput_Frontend;
     
         // Admin
         if ( is_admin() ) {
+            
+            new AmazonAutoLinks_AutoInsertOutput_StaticInsertion;       // 3.4.10+
             
             new AmazonAutoLinks_AutoInsertAdminPage(
                 '', // disable the options
