@@ -75,11 +75,13 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             foreach( $_aIDs as $_iID ) {            
                 $_sOutput .= $this->_getOutputByID( $_iID );
             }
-            return trim( $_sOutput );
-        } 
+            $_sOutput = trim( $_sOutput );
+        } else {
+            // For cases without a unit 
+            $_sOutput = $this->_getOutputByDirectArguments( $this->aArguments );
+        }
         
-        // there are cases called without a unit 
-        return $this->_getOutputByDirectArguments( $this->aArguments );
+        return "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
 
     }
         /**
