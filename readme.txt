@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.11 =
+- Fixed an issue that static auto-insert was not performed when a draft is saved.
+
 = 3.4.10 - 11/28/2016 =
 - Fixed a bug with static auto-insert.
 

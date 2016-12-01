@@ -26,10 +26,7 @@ class AmazonAutoLinks_AutoInsertLoader {
             null,   // post type argument. This is defined in the class.
             $sScriptPath   // script path               
         );    
-    
-        // Outputs
-        new AmazonAutoLinks_AutoInsertOutput_Frontend;
-    
+
         // Admin
         if ( is_admin() ) {
             
@@ -41,7 +38,11 @@ class AmazonAutoLinks_AutoInsertLoader {
             );        
             
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
-            
+
+        }
+        // Front-end
+        else {
+            new AmazonAutoLinks_AutoInsertOutput_Frontend;
         }
     
         // Update auto-insert status change

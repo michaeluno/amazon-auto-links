@@ -31,12 +31,12 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
      */
     protected function _getFiltersApplied( $sFilterName, $aArguments ) {
 
-        $_aPostContent = $this->getElement( $aArguments, 0 );   // __call argument
+        $_mFilteringValue = $this->getElement( $aArguments, 0 );   // __call argument
         if ( 'wp_insert_post_data' !== $sFilterName ) {
-            return $_aPostContent;
+            return $_mFilteringValue;
         }
-        return $this->___getPostContentWithUnitOutput( 
-            $_aPostContent, 
+        return $this->___getPostContentWithUnitOutput(
+            $_mFilteringValue,  // ( array ) post content
             $this->getElementAsArray( $aArguments, 1 ) 
         );
         
@@ -45,37 +45,28 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
         /**
          * Handles static insertion for posts.
          * 
-         * @remark            Only category taxonomy allow/deny check is supported. Other types post_tags and custom taxonomies are not supported yet.
+         * @remark      Only category taxonomy allow/deny check is supported. Other types post_tags and custom taxonomies are not supported yet.
+         * @return      array
          */
         private function ___getPostContentWithUnitOutput( array $aPostContent, $aPostMeta=array() ) {
 
-            // if the publish key exists, it means it is an update
-            if ( 'Update' === $this->getElement( $aPostMeta, 'save' ) ) {
-                return $aPostContent;
-            }
-            
-            // If it's auto-draft saving feature, do nothing.
-            if ( 'publish' !== $this->getElement( $aPostContent, 'post_status' ) ) {
-                return $aPostContent;
-            }
-        
-            // The default disabled post types.
-            if ( in_array( $aPostContent[ 'post_type' ], array( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ], 'revision', 'attachment', 'nav_menu_item' ) )  ) {
+            if ( ! $this->___shouldStaticAutoInsert( $aPostContent, $aPostMeta ) ) {
                 return $aPostContent;
             }
 
-            /*    $aPostMeta structure
-                [ID] => 278
-                [post_category] => Array (
-                    [0] => 0
-                    [1] => 10
-                    [2] => 9
-                    [3] => 1
-                )
-                [tax_input] => Array(
-                    [post_tag] => test
-                )
-            */  
+            /**
+             * $aPostMeta structure
+             *  [ID] => 278
+             *  [post_category] => Array (
+             *      [0] => 0
+             *      [1] => 10
+             *      [2] => 9
+             *      [3] => 1
+             *  )
+             *  [tax_input] => Array(
+             *      [post_tag] => test
+             *  )
+             */
 
             $aSubjectPostInfo = array(
                 'post_id'   => $aPostMeta[ 'ID' ],
@@ -85,23 +76,23 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
 
             $sPre  = '';
             $sPost = '';
-            foreach( $this->aFilterHooks[ 'wp_insert_post_data' ] as $iAutoInsertID ) {
+            foreach( $this->aFilterHooks[ 'wp_insert_post_data' ] as $_iAutoInsertID ) {
                 
-                if ( ! $this->_isAutoInsertEnabledPage( $iAutoInsertID, $aSubjectPostInfo ) ) {
+                if ( ! $this->_isAutoInsertEnabledPage( $_iAutoInsertID, $aSubjectPostInfo ) ) {
                     continue;
                 }
 
-                $aAutoInsertOptions = $this->aAutoInsertOptions[ $iAutoInsertID ];        
+                $_aAutoInsertOptions = $this->aAutoInsertOptions[ $_iAutoInsertID ];        
                 
                 // position - above, below, or both,
-                $sPosition   = $aAutoInsertOptions[ 'static_position' ];
+                $_sPosition  = $_aAutoInsertOptions[ 'static_position' ];
                 $_aArguments = array( 
-                    'id' => $aAutoInsertOptions[ 'unit_ids' ]
+                    'id' => $_aAutoInsertOptions[ 'unit_ids' ]
                 );                       
-                if ( 'above' === $sPosition || 'both' === $sPosition ) {
+                if ( 'above' === $_sPosition || 'both' === $_sPosition ) {
                     $sPre  .= AmazonAutoLinks( $_aArguments, false );
                 }
-                if ( 'below' === $sPosition || 'both' === $sPosition ) {
+                if ( 'below' === $_sPosition || 'both' === $_sPosition ) {
                     $sPost .= AmazonAutoLinks( $_aArguments, false );
                 }
             
@@ -112,5 +103,49 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
             return $aPostContent;
             
         }
+
+            /**
+             * @since       3.4.11
+             * @param       array   $aPostContent
+             * @param       array   $aPostMeta
+             * @return      boolean
+             */
+            private function ___shouldStaticAutoInsert( $aPostContent, $aPostMeta ) {
+
+                // If it's auto-draft saving feature, do nothing.
+                if ( $this->getElement( $aPostMeta, 'auto_draft' ) ) {
+                    return false;
+                }
+
+                // If it is not an allowed post status, do not proceed.
+                $_sNewPostStatus       = $this->getElement( $aPostContent, 'post_status' );
+                $_aAllowedPostStatuses = array( 'publish', 'draft', 'pending' );
+                if ( ! in_array( $_sNewPostStatus, $_aAllowedPostStatuses ) ) {
+                    return false;
+                }
+
+                // The default disabled post types.
+                $_aDisallowedPostTypes = array(
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                    AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
+                    'revision',
+                    'attachment',
+                    'nav_menu_item'
+                );
+                if ( in_array( $aPostContent[ 'post_type' ], $_aDisallowedPostTypes ) ) {
+                    return false;
+                }
+
+                // Check whether this is a first time of saving the post.
+                // If it is an update, do not perform auto-insert.
+                if(
+                    $this->getElement( $aPostContent, 'post_date' )
+                    !== $this->getElement( $aPostContent, 'post_modified' )
+                ) {
+                    return false;
+                }
+
+                return true;
+            }
    
 }
