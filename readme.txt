@@ -224,6 +224,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 = 3.4.11 =
 - Fixed a warning `wp_kses_js_entities is deprecated since version 4.7.0`.
 - Fixed an issue that static auto-insert was not performed when a draft is saved.
+- Changed the `%price%` variable for the `Item Format` unit option to show the lowest offered price from just a discounted price when available.
 
 = 3.4.10 - 11/28/2016 =
 - Fixed a bug with static auto-insert.

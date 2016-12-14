@@ -712,15 +712,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @return      string
      */
     public function formatPrices( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
+
         $_sPriceFormatted = $this->_getValueFromRow( 
             'price_formatted', 
             $aRow, 
             null,   // default
-            array(
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
+            array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
         );
         
         // If a price is not found, return a message or an empty string.
@@ -733,55 +730,77 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         }
         
         // At this point, a price for the product is found.
-        
-        // Check if there is a discounted price.
-        $_sDiscountFormatted     = $this->_getValueFromRow( 
-            'discounted_price_formatted', 
-            $aRow, 
-            null,   // default
-            array(
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
-        );        
-        $_iPrice                = $this->_getValueFromRow( 
-            'price',
-            $aRow, 
-            null,   // default
-            array(
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
-        );
-        $_iDiscount             = $this->_getValueFromRow( 
-            'discounted_price', 
-            $aRow, 
-            null,   // default
-            array(
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
-        );       
-        
-        // return null === $_sDiscountFormatted
-        return ! $this->_isPriceDiscounted( $_iPrice, $_iDiscount )
-            ? $_sPriceFormatted
-            : '<s>' . $_sPriceFormatted . '</s> ' . $_sDiscountFormatted;
-        
+        return $this->___getPriceOutput( $_sPriceFormatted, $sASIN, $sLocale, $sAssociateID, $aRow );
+
     }
         /**
-         * @since       3.4.3
-         * @return      boolean
+         * @since       3.4.11
+         * @return      string
          */
-        private function _isPriceDiscounted( $iPrice, $iDiscountedPrice ) {
-            if ( null === $iDiscountedPrice ) {
-                return false;
-            }
-            return ( $iPrice > $iDiscountedPrice );
+        private function ___getPriceOutput( $_sPriceFormatted, $sASIN, $sLocale, $sAssociateID, $aRow ) {
+
+            // Check if there is a discounted price.
+            $_inPrice                = $this->_getValueFromRow(
+                'price',
+                $aRow,
+                null,   // default
+                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
+            );
+            $_inLowestNew            = $this->_getValueFromRow(
+                'lowest_new_price',
+                $aRow,
+                null,   // default
+                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
+            );
+            $_inDiscount            = $this->_getValueFromRow(
+                'discounted_price',
+                $aRow,
+                null,   // default
+                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
+            );
+
+            $_inOffered             = $this->___getLowestPrice( $_inLowestNew, $_inDiscount );
+            $_sOfferedFormatted     = $this->_getValueFromRow(
+                $_inDiscount === $_inOffered ? 'discounted_price_formatted' : 'lowest_new_price_formatted',
+                $aRow,
+                null,   // default
+                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
+            );
+            return $this->___isPriceDiscounted( $_inPrice, $_inOffered )
+                ? '<s>' . $_sPriceFormatted . '</s> ' . $_sOfferedFormatted
+                : $_sPriceFormatted;
+
         }
+            /**
+             * @param integer $_iLowestNew
+             * @param integer $_iDiscount
+             *
+             * @return integer|null
+             * @since  3.4.11
+             */
+            private function ___getLowestPrice( $_iLowestNew, $_iDiscount ) {
+                $_aOfferedPrices        = array();
+                if ( null !== $_iLowestNew ) {
+                    $_aOfferedPrices[] = ( integer ) $_iLowestNew;
+                }
+                if ( null !== $_iDiscount ) {
+                    $_aOfferedPrices[] = ( integer ) $_iDiscount;
+                }
+                return ! empty( $_aOfferedPrices )
+                    ? min( $_aOfferedPrices )
+                    : null;
+            }
+            /**
+             * @since       3.4.3
+             * @since       3.4.11      Renamed the name from `_isPriceDiscounted()`.
+             * @return      boolean
+             */
+            private function ___isPriceDiscounted( $iPrice, $iOfferedPrice ) {
+                if ( null === $iOfferedPrice ) {
+                    return false;
+                }
+                return ( $iPrice > $iOfferedPrice );
+            }
     
     /**
      * 
