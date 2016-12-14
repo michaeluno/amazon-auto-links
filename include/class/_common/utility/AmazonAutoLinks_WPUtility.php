@@ -300,7 +300,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         $sString = addslashes( $sString );                    // the original function call was doing this - could be redundant but haven't fully tested it
         $sString = stripslashes( $sString );                    // wp_filter_post_kses()
         $sString = wp_kses_no_null( $sString );                // wp_kses()
-        $sString = wp_kses_js_entities( $sString );            // wp_kses()
         $sString = wp_kses_normalize_entities( $sString );    // wp_kses()
         $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols ); // WP changed the order of these funcs and added args to wp_kses_hook
         $sString = wp_kses_split( $sString, $aAllowedHTMLTags, $aAllowedProtocols );        
@@ -309,7 +308,5 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         return $sString;
         
     }        
-        
-
 
 }
