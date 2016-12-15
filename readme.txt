@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.6.1
-Stable tag:         3.4.10
+Tested up to:       4.7.0
+Stable tag:         3.4.11
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,7 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.4.11 =
+= 3.4.11 - 12/16/2016 =
 - Fixed a warning `wp_kses_js_entities is deprecated since version 4.7.0`.
 - Fixed an issue that static auto-insert was not performed when a draft is saved.
 - Changed the `%price%` variable for the `Item Format` unit option to show the lowest offered price from just a discounted price when available.
