@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.7.0
-Stable tag:         3.4.11
+Stable tag:         3.4.12
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,7 +221,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.4.12 =
+= 3.4.12 - 12/24/2016 =
 - Fixed a bug that invalid user inputs for the `Item ID` option were saved with the `Item Look-up` unit.
 
 = 3.4.11 - 12/16/2016 =
