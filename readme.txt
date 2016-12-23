@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.4.12 =
+- Fixed a bug that invalid user inputs for the `Item ID` option were saved with the `Item Look-up` unit.
+
 = 3.4.11 - 12/16/2016 =
 - Fixed a warning `wp_kses_js_entities is deprecated since version 4.7.0`.
 - Fixed an issue that static auto-insert was not performed when a draft is saved.

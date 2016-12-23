@@ -11,21 +11,22 @@
  * Provides plugin specific utility methods that uses WordPerss built-in functions.
  *
  * @package     Amazon Auto Links
- * @since       3       
+ * @since       3
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
      * Finds and extracts ASINs from given text.
      * @since       3.4.0
+     * @since       3.4.12      Changed it to return an empty string if no ASIN is found.
      * @return      string
      */
     static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
         
         $sText = preg_replace(
             array(
-                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
-                '/[0-9]{10}/',      // Remove ones consisting of only numbers.
+                '/[A-Z0-9]{11,}/',      // Remove strings like an ASIN but with more than 10 characters.
+                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers.
             ), 
             '', 
             $sText
@@ -38,7 +39,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         );
         return $_biResult && isset( $_aMatches[ 0 ] ) && is_array( $_aMatches[ 0 ] )
             ? implode( $sDelimiter, array_unique( $_aMatches[ 0 ] ) )
-            : $sText;
+            : '';
         
     }
     
