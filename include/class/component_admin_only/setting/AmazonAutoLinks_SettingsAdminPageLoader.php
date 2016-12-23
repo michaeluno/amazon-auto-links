@@ -56,7 +56,12 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
                 "<a href='" . esc_url( $_sSettingsURL ) . "'>" 
                         . __( 'Settings', 'amazon-auto-links' ) 
                     . "</a>"
-            );         
+            );
+            $oFactory->addLinkToPluginDescription(
+                "<a href='" . esc_url( 'http://en.michaeluno.jp/custom-order' ) . "'>"
+                        . __( 'Custom Order', 'amazon-auto-links' )
+                    . "</a>"
+            );
         }
             
     }
