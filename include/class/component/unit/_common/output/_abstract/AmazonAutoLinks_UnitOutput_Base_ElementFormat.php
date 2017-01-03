@@ -890,7 +890,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 if ( ( integer ) $_iIndex >= $iMaxNumberOfImages ) {
                     break;
                 }                
-                $_aURLs[] = $this->_getImageURLFromResposeElement( 
+                $_aURLs[] = $this->_getImageURLFromResponseElement(
                     $_aImage, 
                     $iMaxImageSize 
                 );
@@ -910,7 +910,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
              * - LargeImage
              * - HiResImage
              */
-            private function _getImageURLFromResposeElement( array $aImage, $iImageSize ) {
+            private function _getImageURLFromResponseElement( array $aImage, $iImageSize ) {
                  
                 $_sURL = '';
                 foreach( $aImage as $_sKey => $_aDetails ) {
