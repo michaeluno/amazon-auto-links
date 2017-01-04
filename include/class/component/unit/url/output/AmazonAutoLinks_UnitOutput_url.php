@@ -212,7 +212,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 }
         
         /**
-         * Parses the given HTML content and returns the found ASINs.
+         * Parses the given HTML content and returns found ASINs.
          * @since       3.2.0
          * @return      array
          */

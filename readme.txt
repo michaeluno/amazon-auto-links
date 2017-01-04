@@ -223,6 +223,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 = 3.4.13 =
 - Fixed a bug that an incorrect offered price was displayed with the `%price%` variable of the `Item Format` option.
+- Tweaked the accuracy of detecting products with URL units.
 
 = 3.4.12 - 12/24/2016 =
 - Fixed a bug that invalid user inputs for the `Item ID` option were saved with the `Item Look-up` unit.

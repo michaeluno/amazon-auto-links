@@ -549,14 +549,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         $sURL = preg_replace(
             array(
                 '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
-                '/[0-9]{10}/',      // Remove ones consisting of only numbers.
             ), 
             '', 
             $sURL
         );
         
         preg_match( 
-            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})(\/|$|\?)/', // needle - [A-Z0-9]{10} is the ASIN
+            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})\W/', // needle - [A-Z0-9]{10} is the ASIN
             $sURL,  // subject
             $_aMatches // match container
         );
