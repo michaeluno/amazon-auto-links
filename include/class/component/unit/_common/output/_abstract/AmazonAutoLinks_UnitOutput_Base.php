@@ -65,7 +65,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
      * @since       3
      */
     public $bDBTableAccess = false;
-    
+
+    /**
+     * Stores a unit option object.
+     * @var object
+     */
+    public $oUnitOption;
+
     /**
      * Sets up properties and hooks.
      */

@@ -496,7 +496,26 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 );
                 
             }
-            
+
+            /**
+             * Let third-parties filter products.
+             * @since 3.4.13
+             */
+            $_aProduct = apply_filters(
+                'aal_filter_unit_each_product',
+                $_aProduct,
+                array(
+                    'locale'        => $_sLocale,
+                    'asin'          => $_aProduct[ 'ASIN' ],
+                    'associate_id'  => $_sAssociateID,
+                    'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
+                ),
+                $this
+            );
+            if ( empty( $_aProduct ) ) {
+                continue;
+            }
+
             // Store the product output
             $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
             $_aProducts[]    = $_aProduct;

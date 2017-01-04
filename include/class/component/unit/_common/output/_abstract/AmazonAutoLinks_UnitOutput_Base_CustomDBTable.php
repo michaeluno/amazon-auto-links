@@ -14,7 +14,21 @@
  * @since       3
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoLinks_UnitOutput_Base_Debug {
-    
+
+    /**
+     *
+     * @remark  Added for third-party components that access the unit output object from filter callbacks.
+     * @since   3.4.13
+     * @param   array  $aDBRows
+     * @param   string $sASIN
+     * @param   string $sLocale
+     * @param   string $sAssociateID
+     * @return  array
+     */
+    public function getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID='' ) {
+        return $this->_getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID );
+    }
+
     /**
      * Retrieves a row array from the given database rows.
      * 
@@ -29,15 +43,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         if ( ! $this->bDBTableAccess ) {
             return array();
         }
-        $_aDBProductRow = $this->getElementAsArray(
-            $aDBRows,
-            $sASIN . '_' . $sLocale,
-            array()
-        );            
+        $_aDBProductRow = $this->getElementAsArray( $aDBRows, $sASIN . '_' . $sLocale );
         
         // Schedule a background task to retrieve the product information.
         if ( empty( $_aDBProductRow ) && $sAssociateID ) {
-
             AmazonAutoLinks_Event_Scheduler::getProductInfo(
                 $sAssociateID,
                 $sASIN, 
@@ -45,10 +54,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
                 ( int ) $this->oUnitOption->get( 'cache_duration' )
             );
         }
-        
         return $_aDBProductRow;
+
     }    
-    
+
+    /**
+     *
+     * @remark  Added for third-party components that access the unit output object from filter callbacks.
+     * @since   3.4.13
+     * @return  array
+     */
+    public function getValueFromRow( $sColumnName, array $aRow, $mDefault=null, $aScheduleTask=array( 'locale' => '', 'asin' => '', 'associate_id' => '' ) ) {
+        return $this->_getValueFromRow( $sColumnName, $aRow, $mDefault, $aScheduleTask );
+    }
+
     /**
      * 
      * @since       3
@@ -105,16 +124,29 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         
         return $_mValue;
 
-    }  
-    
+    }
+
+    /**
+     *
+     * @remark  Added for third-party components that access the unit output object from filter callbacks.
+     * @param   array $aASINLocales
+     * @return  array
+     * @since   3.4.13
+     */
+    public function getProductsFromCustomDBTable( array $aASINLocales ) {
+        return $this->_getProductsFromCustomDBTable( $aASINLocales );
+    }
+
     /**
      * 
      * @since       3
      * @return      array
      */
     protected function _getProductsFromCustomDBTable( array $aASINLocales ) {
-        
-        $_sASINLocales = "('" . implode( "','", $aASINLocales ) . "')";
+        $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales );
+        return $_oProducts->get();
+
+/*        $_sASINLocales = "('" . implode( "','", $aASINLocales ) . "')";
         $_aResults     =  $this->oProductTable->getRows(
             "SELECT *
             FROM {$this->oProductTable->sTableName}
@@ -122,14 +154,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         );     
         return is_array( $_aResults )
             ? $this->_formatRows( $_aResults )
-            : array();
+            : array();*/
         
     }
         /**
          * Modifies the array keys to asin_locale from numeric index.
          * @return      array
+         * @deprecated  3.4.13
          */
-        private function _formatRows( array $aRows ) {
+/*        private function _formatRows( array $aRows ) {
             $_aNewRows = array();
             foreach( $aRows as $_iIndex => &$_aRow ) {
                 if ( ! isset( $_aRow[ 'asin_locale' ] ) ) {
@@ -138,6 +171,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
                 $_aNewRows[ $_aRow[ 'asin_locale' ] ] = $_aRow;
             }
             return $_aNewRows;
-        }
+        }*/
     
 }

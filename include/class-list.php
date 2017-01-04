@@ -1,6 +1,5 @@
 <?php 
 $_aClassFiles = array( 
-	"AmazonAutoLinks_Bootstrap"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/AmazonAutoLinks_Bootstrap.php", 
 	"AmazonAutoLinks_AutoInsertLoader"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/AmazonAutoLinks_AutoInsertLoader.php", 
 	"AmazonAutoLinks_AutoInsertAdminPage"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage.php", 
 	"AmazonAutoLinks_AutoInsertAdminPage_AutoInsert"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php", 
@@ -142,6 +141,10 @@ $_aClassFiles = array(
 	"AmazonAutoLinks_FormValidator_ItemFormat"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/admin/validator/AmazonAutoLinks_FormValidator_ItemFormat.php", 
 	"AmazonAutoLinks_UnitOption_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/option/_abstract/AmazonAutoLinks_UnitOption_Base.php", 
 	"AmazonAutoLinks_Credit"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/credit/AmazonAutoLinks_Credit.php", 
+	"AmazonAutoLinks_ProductDatabase_Base"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/database/AmazonAutoLinks_ProductDatabase_Base.php", 
+	"AmazonAutoLinks_ProductDatabase_Cell"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/database/AmazonAutoLinks_ProductDatabase_Cell.php", 
+	"AmazonAutoLinks_ProductDatabase_Row"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/database/AmazonAutoLinks_ProductDatabase_Row.php", 
+	"AmazonAutoLinks_ProductDatabase_Rows"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/database/AmazonAutoLinks_ProductDatabase_Rows.php", 
 	"AmazonAutoLinks_UnitOutput__Format_content"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/formatter/content/AmazonAutoLinks_UnitOutput__Format_content.php", 
 	"AmazonAutoLinks_Output_Format_LinksStyle_1"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_1.php", 
 	"AmazonAutoLinks_Output_Format_LinksStyle_2"	=>	AmazonAutoLinks_Registry::$sDirPath . "/include/class/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_2.php", 

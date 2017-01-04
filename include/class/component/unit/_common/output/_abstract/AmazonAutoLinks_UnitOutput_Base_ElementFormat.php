@@ -43,7 +43,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
 
             if ( $this->bDBTableAccess ) {
-                
+
                 $_aProduct[ 'price' ]     = $this->formatPrices( 
                     $_aProduct[ 'ASIN' ], 
                     $sLocale, 
@@ -713,9 +713,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      */
     public function formatPrices( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
 
-        $_sPriceFormatted = $this->_getValueFromRow( 
-            'price_formatted', 
-            $aRow, 
+        $_sPriceFormatted = $this->_getValueFromRow(
+            'price_formatted',
+            $aRow,
             null,   // default
             array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
         );
@@ -734,40 +734,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
     }
         /**
+         * Generates a price output with a discount price if available.
          * @since       3.4.11
          * @return      string
          */
         private function ___getPriceOutput( $_sPriceFormatted, $sASIN, $sLocale, $sAssociateID, $aRow ) {
 
-            // Check if there is a discounted price.
-            $_inPrice                = $this->_getValueFromRow(
-                'price',
-                $aRow,
-                null,   // default
-                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
-            );
-            $_inLowestNew            = $this->_getValueFromRow(
-                'lowest_new_price',
-                $aRow,
-                null,   // default
-                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
-            );
-            $_inDiscount            = $this->_getValueFromRow(
-                'discounted_price',
-                $aRow,
-                null,   // default
-                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
-            );
-
+            $_aDBArguments          = array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, );
+            // $_inPrice               = $this->_getValueFromRow( 'price', $aRow, null, $_aDBArguments );
+            $_inLowestNew           = $this->_getValueFromRow( 'lowest_new_price', $aRow, null, $_aDBArguments );
+            $_inDiscount            = $this->_getValueFromRow( 'discounted_price', $aRow, null, $_aDBArguments );
             $_inOffered             = $this->___getLowestPrice( $_inLowestNew, $_inDiscount );
-            $_sOfferedFormatted     = $this->_getValueFromRow(
-                $_inDiscount === $_inOffered ? 'discounted_price_formatted' : 'lowest_new_price_formatted',
-                $aRow,
-                null,   // default
-                array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
-            );
-            return $this->___isPriceDiscounted( $_inPrice, $_inOffered )
-                ? '<s>' . $_sPriceFormatted . '</s> ' . $_sOfferedFormatted
+            $_sLowestColumnName     = $_inDiscount === $_inOffered ? 'discounted_price_formatted' : 'lowest_new_price_formatted';
+            $_sLowestFormatted      = $this->_getValueFromRow( $_sLowestColumnName, $aRow, null, $_aDBArguments );
+            return $_sPriceFormatted !== $_sLowestFormatted
+                ? '<s>' . $_sPriceFormatted . '</s> ' . $_sLowestFormatted
                 : $_sPriceFormatted;
 
         }
@@ -794,13 +775,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
              * @since       3.4.3
              * @since       3.4.11      Renamed the name from `_isPriceDiscounted()`.
              * @return      boolean
+             * @deprecated  3.4.13
              */
-            private function ___isPriceDiscounted( $iPrice, $iOfferedPrice ) {
+/*            private function ___isPriceDiscounted( $iPrice, $iOfferedPrice ) {
                 if ( null === $iOfferedPrice ) {
                     return false;
                 }
+                $iPrice        = ( integer ) $iPrice;
+                $iOfferedPrice = ( integer ) $iOfferedPrice;
                 return ( $iPrice > $iOfferedPrice );
-            }
+            }*/
     
     /**
      * 
