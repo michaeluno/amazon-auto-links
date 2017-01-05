@@ -55,7 +55,7 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 'type'          => 'text',
                 'title'         => __( 'URLs', 'amazon-auto-links' ),
                 'attributes'    => array(
-                    'style' => 'width: 720px; max-width: 86%; ',
+                    'style' => 'min-width: 80%; max-width: 100%; ',
                     'size'  => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 40 
                         : 60,
