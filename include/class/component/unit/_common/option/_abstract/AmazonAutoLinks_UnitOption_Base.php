@@ -99,23 +99,23 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
         
         // the item lookup search unit type does not have a count field
-        if( isset( $aUnitOptions['count'] ) ) {
-            $aUnitOptions['count'] = $this->fixNumber( 
-                $aUnitOptions['count'],     // number to sanitize
+        if( isset( $aUnitOptions[ 'count' ] ) ) {
+            $aUnitOptions[ 'count' ] = $this->fixNumber(
+                $aUnitOptions[ 'count' ],     // number to sanitize
                 10,     // default
                 1,         // minimum
                 $_oOption->getMaximumProductLinkCount() // max
             );            
         }
         $aUnitOptions[ 'image_size' ] = $this->fixNumber( 
-            $aUnitOptions['image_size'],     // number to sanitize
+            $aUnitOptions[ 'image_size' ],     // number to sanitize
             160,     // default
             0,         // minimum
             500     // max
         );        
         if ( isset( $aUnitOptions[ 'column' ] ) ) {
             $aUnitOptions[ 'column' ] = AmazonAutoLinks_Utility::fixNumber( 
-                $aUnitOptions['column'],     // number to sanitize
+                $aUnitOptions[ 'column' ],     // number to sanitize
                 4,     // default
                 1,         // minimum
                 $_oOption->getMaxSupportedColumnNumber()
