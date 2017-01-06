@@ -221,6 +221,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.5.0 =
+- Added the `Sort Order` option to the `Item Look-up` unit type.
+
 = 3.4.13 - 01/05/2017 =
 - Fixed a bug that an incorrect offered price was displayed with the `%price%` variable of the `Item Format` option.
 - Tweaked the accuracy of detecting products with URL units.

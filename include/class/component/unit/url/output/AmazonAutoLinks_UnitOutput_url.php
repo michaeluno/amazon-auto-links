@@ -19,69 +19,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
      * @remark      Note that the base constructor will create a unit option object based on this value.
      */    
     public $sUnitType = 'url';
-    
-    /**
-     * Sorts items.
-     * @remark      Overriding the method in the `AmazonutoLinks_Unit_search` class.
-     * @since       3.2.1
-     * @return      array
-     */
-    protected function getProducts( $aResponse ) {       
-        
-        $_sSortType = $this->oUnitOption->get( 
-            array( '_sort' ),  // dimensional path
-            'raw'   // default
-        );
 
-        /*                     
-         * 'title'             => __( 'Title', 'amazon-auto-links' ),
-         * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
-         * 'random'            => __( 'Random', 'amazon-auto-links' ),
-         * 'raw'               => __( 'Raw', 'amazon-auto-links' ),         
-         */        
-        $_sMethodName = "_getItemsSorted_{$_sSortType}";
-        return $this->{$_sMethodName}( 
-            parent::getProducts( $aResponse )
-        );
-        
-    }
-        /**
-         * @since       3.2.1
-         */
-        private function _getItemsSorted_( $aProducts ) {
-            return $this->_getItemsSorted_raw( $aProducts );
-        }        
-        private function _getItemsSorted_title( $aProducts ) {
-            uasort( $aProducts, array( $this, 'replyToSortProductsByTitle' ) );
-            return $aProducts;
-        }
-        private function _getItemsSorted_title_descending( $aProducts ) {
-            uasort( $aProducts, array( $this, 'replyToSortProductsByTitleDescending' ) );
-            return $aProducts;
-        }
-        private function _getItemsSorted_random( $aProducts ) {
-            shuffle( $aProducts );
-            return $aProducts;
-        }
-        private function _getItemsSorted_raw( $aProducts ) {
-            return $aProducts;
-        }
-            public function replyToSortProductsByTitle( $aProductA, $aProductB ) {
-                $_sTitleA = $this->getElement( $aProductA, 'title' );
-                $_sTitleB = $this->getElement( $aProductB, 'title' );
-                return strnatcasecmp( 
-                    $_sTitleA, 
-                    $_sTitleB
-                );    
-            }
-            public function replyToSortProductsByTitleDescending( $aProductA, $aProductB ) {
-                $_sTitleA = $this->getElement( $aProductA, 'title' );
-                $_sTitleB = $this->getElement( $aProductB, 'title' );
-                return strnatcasecmp( 
-                    $_sTitleB,
-                    $_sTitleA 
-                );    
-            }            
         
     /**
      * Performs API requests and get responses.

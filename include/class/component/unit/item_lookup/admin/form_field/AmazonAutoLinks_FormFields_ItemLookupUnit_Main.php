@@ -104,7 +104,21 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
                 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
                     . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
-            ),                         
+            ),
+            // 3.5.0+
+            array(
+                'field_id'          => $sFieldIDPrefix . '_sort',
+                'type'              => 'select',
+                'title'             => __( 'Sort Order', 'amazon-auto-links' ),
+                'label'             => array(
+                    'raw'               => __( 'Raw', 'amazon-auto-links' ),
+                    'title'             => __( 'Title', 'amazon-auto-links' ),
+                    'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
+                    'random'            => __( 'Random', 'amazon-auto-links' ),
+                ),
+                'tip'               => __( 'In order to not to sort and leave it as the found order, choose <code>Raw</code>.', 'amazon-auto-links' ),
+                'default'           => 'raw',
+            ),
         );
         return $_aFields; 
         

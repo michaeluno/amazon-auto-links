@@ -37,6 +37,9 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
         'Condition'     => 'New',
         
         'search_per_keyword'    => true,    // 3.2.0+
+
+
+        '_sort'          => 'raw',  // 3.5.0+ (string) or `random`
     );
 
     /**
