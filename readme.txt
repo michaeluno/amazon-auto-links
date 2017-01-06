@@ -222,6 +222,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.5.0 =
+- Added the `Contextual` unit type.
 - Added the `Sort Order` option to the `Item Look-up` unit type.
 
 = 3.4.13 - 01/05/2017 =

@@ -66,24 +66,31 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     public function get() {
+        return "<div class='amazon-auto-links'>"
+                . $this->___getOutput()
+            . "</div>";
+    }
+        /**
+         * @since       3.5.0
+         * @return      string
+         */
+        private function ___getOutput() {
 
-        $_sOutput = '';        
-        $_aIDs    = $this->_getUnitIDs();
+            $_aIDs    = $this->_getUnitIDs();
 
-        // If called by unit,
-        if ( ! empty( $_aIDs ) ) {
-            foreach( $_aIDs as $_iID ) {            
+            // For cases without a unit
+            if ( empty( $_aIDs ) ) {
+                return $this->_getOutputByDirectArguments( $this->aArguments );
+            }
+
+            // If called by unit,
+            $_sOutput = '';
+            foreach( $_aIDs as $_iID ) {
                 $_sOutput .= $this->_getOutputByID( $_iID );
             }
-            $_sOutput = trim( $_sOutput );
-        } else {
-            // For cases without a unit 
-            $_sOutput = $this->_getOutputByDirectArguments( $this->aArguments );
-        }
-        
-        return "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
+            return trim( $_sOutput );
 
-    }
+        }
         /**
          * @deprecated      3
          */
@@ -170,12 +177,10 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
          * @return      string
          */
         private function _getOutputByDirectArguments( $aArguments ) {
-                        
             return $this->_getOutputByUnitType( 
                 $this->_getUnitTypeFromArguments( $aArguments ), 
                 $aArguments 
             );
-            
         }
         
             /**
@@ -185,48 +190,10 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
              */
             private function _getUnitTypeFromArguments( $aArguments ) {
-          
-                if ( isset( $aArguments[ 'unit_type' ] ) ) {
-                    return $aArguments[ 'unit_type' ];
-                }
-                
-                $_nsOperation = $this->_getOperationArgument( $aArguments );
-                if ( $_nsOperation ) {                       
-                    if ( 'ItemSearch' === $_nsOperation ) {
-                        return 'search';
-                    }
-                    if ( 'ItemLookup' === $_nsOperation ) {
-                        return 'item_lookup';
-                    }
-                    if ( 'SimilarityLookup' === $_nsOperation ) {
-                        return 'similarity_lookup';
-                    }
-                }
-                
-                if ( isset( $aArguments[ 'categories' ] ) ) {
-                    return 'category';
-                }                
-                if ( isset( $aArguments[ 'tags' ] ) ) {
-                    return 'tag';
-                }
-                if ( isset( $aArguments[ 'urls' ] ) ) {
-                    return 'url';
-                }
-                return 'unknown';
-                
+                return isset( $aArguments[ 'unit_type' ] )
+                    ? $aArguments[ 'unit_type' ]
+                    : apply_filters( 'aal_filter_detected_unit_type_by_arguments', 'unknown', $aArguments );
             }
-                /**
-                 * @remark      Shortcode argument keys are all lower-case.
-                 * @since       3.4.6
-                 * @return      string
-                 */
-                private function _getOperationArgument( $aArguments ) {
-                    $_sOperation = $this->getElement( $aArguments, 'Operation' );
-                    if ( $_sOperation ) {
-                        return $_sOperation;
-                    }
-                    return $this->getElement( $aArguments, 'operation' );    
-                }
             
             /**
              * 
@@ -234,25 +201,18 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              */
             private function _getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
 
-                switch ( $sUnitType ) {
-                    case 'category':
-                    case 'tag':
-                    case 'search':
-                    case 'item_lookup':
-                    case 'similarity_lookup':        
-                    case 'url':                       
-                        $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $sUnitType );
-                        $_oUnit      = new $_sClassName( $_aUnitOptions );
-                        return trim( $_oUnit->get() );
-                    default:
-                        $_oOption  = AmazonAutoLinks_Option::getInstance();
-                        $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
-                        return $_oOption->isDebug()
-                            ? "<p>" . __( 'Debug', 'amazon-auto-links' ) . ': ' . $_sMessage . "</p>"
-                            : "<!-- "  . $_sMessage . " -->";
+                $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
+                if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
+                    return apply_filters( 'aal_filter_unit_output_' . $sUnitType, '', $_aUnitOptions );
                 }
-                
-            }            
+
+                $_oOption  = AmazonAutoLinks_Option::getInstance();
+                $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
+                return $_oOption->isDebug()
+                    ? "<p>" . __( 'Debug', 'amazon-auto-links' ) . ': ' . $_sMessage . "</p>"
+                    : "<!-- "  . $_sMessage . " -->";
+
+            }
             
         /**
          * Retrieves the post (unit) IDs by the given unit label.

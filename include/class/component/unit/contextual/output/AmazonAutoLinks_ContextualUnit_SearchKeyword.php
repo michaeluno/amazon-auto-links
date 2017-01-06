@@ -11,9 +11,10 @@
 /**
  * Provides methods to find search keywords from the current page.
  * 
- * @since           3  
+ * @since           3
+ * @since           3.5.0       Renamed from `AmazonAutoLinks_ContextualProductWidget_SearchKeyword`.
  */
-class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_PluginUtility {
 
     public $aCriteria           = array();
     public $sAdditionalKeywords = '';
@@ -134,7 +135,7 @@ class AmazonAutoLinks_ContextualProductWidget_SearchKeyword extends AmazonAutoLi
              * @return      array
              */
             private function _getSearchKeywordsByType_breadcrumb() {
-                $_oBreadcrumb  = new AmazonAutoLinks_ContextualProductWidget_Breadcrumb;
+                $_oBreadcrumb  = new AmazonAutoLinks_ContextualUnit_Breadcrumb;
                 return $_oBreadcrumb->get();
             }  
  

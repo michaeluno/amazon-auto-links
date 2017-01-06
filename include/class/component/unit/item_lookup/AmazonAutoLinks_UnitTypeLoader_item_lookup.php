@@ -57,7 +57,22 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
             'low' // priority - e.g. 'high', 'core', 'default' or 'low'            
         );         
         
-    }     
+    }
+
+    /**
+     * Determines the unit type from given arguments.
+     * @since       3.5.0
+     * @param       string      $sUnitType
+     * @param       array       $aArguments
+     * @param       null|string $_nsOperation
+     * @return      string
+     */
+    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+        return 'ItemLookup' === $this->_getOperationArgument( $aArguments )
+            ? $this->sUnitTypeSlug
+            : $sUnitType;
+    }
+
 
 
    

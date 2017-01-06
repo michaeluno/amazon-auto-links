@@ -48,7 +48,13 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
             
         }
                 
-        add_filter( 'aal_filter_default_unit_options_' . $this->sUnitTypeSlug, array( $this, 'replyToGetDefaultUnitOptions' ) ); 
+        add_filter( 'aal_filter_default_unit_options_' . $this->sUnitTypeSlug, array( $this, 'replyToGetDefaultUnitOptions' ) );
+
+        // 3.5.0+
+        add_filter( 'aal_filter_unit_output_' . $this->sUnitTypeSlug, array( $this, 'replyToGetUnitOutput' ), 10, 2 );
+
+        // 3.5.0+
+        add_filter( 'aal_filter_detected_unit_type_by_arguments', array( $this, 'replyToDetermineUnitType' ), 10, 2 );
         
         $this->construct( $sScriptPath );
         
@@ -113,5 +119,43 @@ class AmazonAutoLinks_UnitTypeLoader_Base {
      * @return      void
      */
     public function construct( $sScriptPath ) {}
-    
+
+    /**
+     * Return the unit output.
+     *
+     * @remark      Override this method in each unit type loader class.
+     * @callback    add_filter      aal_filter_unit_output_{unit type slug}
+     * @param       string $sOutput
+     * @param       array $aArguments
+     * @since       3.5.0
+     * @return      string
+     */
+    public function replyToGetUnitOutput( $sOutput, $aArguments ) {
+        $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $this->sUnitTypeSlug );
+        $_oUnit      = new $_sClassName( $aArguments );
+        return $sOutput . trim( $_oUnit->get() );
+    }
+
+    /**
+     * @callback    add_filter  aal_filter_detected_unit_type_by_arguments
+     * @param       string      $sUnitType
+     * @param       array       $aArguments
+     * @return      string
+     */
+    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+        return $sUnitType;
+    }
+        /**
+         * @remark      Shortcode argument keys are all lower-case.
+         * @since       3.4.6
+         * @since       3.5.0       Moved from `AmazonAutoLinks_Output`.
+         * @return      string
+         */
+        protected function _getOperationArgument( $aArguments ) {
+            $_sOperation = $this->getElement( $aArguments, 'Operation' );
+            return $_sOperation
+                ? $_sOperation
+                : $this->getElement( $aArguments, 'operation', '' );
+        }
+
 }

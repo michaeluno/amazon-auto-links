@@ -60,4 +60,18 @@ class AmazonAutoLinks_UnitTypeLoader_tag extends AmazonAutoLinks_UnitTypeLoader_
         
     }     
 
+    /**
+     * Determines the unit type from given arguments.
+     * @since       3.5.0
+     * @param       string      $sUnitType
+     * @param       array       $aArguments
+     * @param       null|string $_nsOperation
+     * @return      string
+     */
+    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+        return isset( $aArguments[ 'tags' ] )
+            ? $this->sUnitTypeSlug
+            : $sUnitType;
+    }
+
 }

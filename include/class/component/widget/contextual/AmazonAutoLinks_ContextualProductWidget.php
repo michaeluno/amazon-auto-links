@@ -110,7 +110,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         }
         
         $_aClasses = array(
-            'AmazonAutoLinks_FormFields_Widget_ContxtualProduct',
+            'AmazonAutoLinks_FormFields_Widget_ContextualProduct',
             'AmazonAutoLinks_FormFields_Unit_Common',
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
@@ -248,13 +248,11 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             return $sContent;
         }        
 
-        $_sOutput = $this->_getOutput( $aFormData, $aArguments );
+        $_sOutput = $this->_getOutput( $aFormData );
         if ( ! $_sOutput && ! $aFormData[ 'show_title_on_no_result' ] ) {
             $this->oProp->bShowWidgetTitle = false;
         }
-        
-        return $sContent
-            . $_sOutput;
+        return $sContent . $_sOutput;
     
     }
         
@@ -303,47 +301,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * Returns the output of the widget.
          * @return      string
          */
-        private function _getOutput( $aFormData, $aArguments ) {
-
-            $_oContextualSearch = new AmazonAutoLinks_ContextualProductWidget_SearchKeyword(
-                $aFormData[ 'criteria' ], 
-                $aFormData[ 'additional_keywords' ]
-            );
-            $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
-            if ( empty( $_aSearchKeywords ) ) {
-                return '';
-            }
-            
-            shuffle ( $_aSearchKeywords );
-            array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
-
-            return AmazonAutoLinks( 
-                array( 
-                    'Keywords'         => implode( ',', $_aSearchKeywords ),
-                    'Operation'        => 'ItemSearch',
-                    
-                    /**
-                     * Fixed a bug that contextual widgets did not return outputs
-                     * due to the form data was having the value of `category` for the `unit_type` argument.
-                     * This was because the unit option formatter class did not set the correct `unit_type` in the class,
-                     * which has been fixed in 3.4.7.
-                     * 
-                     * So setting the value here is a workaround to keep backward compatibility.
-                     * @since       3.4.7
-                     */
-                    'unit_type'        => 'search',
-                    
-                    // The `Power` parameter will not be used as it only works with the Books category.
-                    
-                    // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
-                    // The Amazon API does not provide an OR operator for the Keywords parameter. Power cannot be used for categories other than Books.
-                    // So here we set a plugin specific option here to perform search by each keyword.
-                    'search_per_keyword'    => true,
-                )
-                + $aFormData, 
-                false // echo or output
-            );
-
+        private function _getOutput( $aFormData ) {
+            $aFormData[ 'unit_type' ] = 'contextual';
+            return AmazonAutoLinks( $aFormData, false );
         }
        
 }

@@ -340,11 +340,13 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultTemplateIDByUnitType( $sUnitType ) {
         switch ( $sUnitType ) {
+            case 'email':               // 3.5.0+
+            case 'contextual':          // 3.5.0+
             case 'contextual_widget':   // 3.2.1+
             case 'similarity_lookup':
             case 'item_lookup':
             case 'search':
-            case 'url': // 3.2.0+
+            case 'url':                 // 3.2.0+
                 $_sTemplateDirectoryName = 'search';
                 break;
             case 'tag':

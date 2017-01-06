@@ -11,10 +11,11 @@
 /**
  * 
  * 
- * @since           3  
+ * @since       3
+ * @since       3.5.0       Renamed from `AmazonAutoLinks_ContextualProductWidget_Breadcrumb `.
  */
-class AmazonAutoLinks_ContextualProductWidget_Breadcrumb extends AmazonAutoLinks_PluginUtility {
-         
+class AmazonAutoLinks_ContextualUnit_Breadcrumb extends AmazonAutoLinks_PluginUtility {
+
     /**
      * 
      * @return  array

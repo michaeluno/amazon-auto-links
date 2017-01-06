@@ -124,12 +124,14 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     static public $aAdminPages = array(
         // key => 'page slug'        
-        'main'              => 'aal_settings', // Settings - used to be const PageSettingsSlug         
-        'category_select'   => 'aal_add_category_unit', // Add Unit by Category
-        'auto_insert'       => 'aal_define_auto_insert', // Add Auto-insert
-        'tag_unit'          => 'aal_add_tag_unit', // Add Unit by Tag
-        'search_unit'       => 'aal_add_search_unit', // Add Unit by Search
-        'url_unit'          => 'aal_add_url_unit', // 3.2.0+
+        'main'              => 'aal_settings',                  // Settings - used to be const PageSettingsSlug
+        'category_select'   => 'aal_add_category_unit',         // Add Unit by Category
+        'auto_insert'       => 'aal_define_auto_insert',        // Add Auto-insert
+        'tag_unit'          => 'aal_add_tag_unit',              // Add Unit by Tag
+        'search_unit'       => 'aal_add_search_unit',           // Add Unit by Search
+        'url_unit'          => 'aal_add_url_unit',              // 3.2.0+
+        'contextual_unit'   => 'aal_add_contextual_unit',       // 3.5.0+
+        'email_unit'        => 'aal_add_email_unit',            // 3.5.0+
         'template'          => 'aal_templates',
         'tool'              => 'aal_tools',
         'help'              => 'aal_help',
