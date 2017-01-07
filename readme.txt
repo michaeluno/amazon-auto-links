@@ -146,17 +146,36 @@ The following parameters can be used for the shortcode, `[amazon_auto_links]` or
 
 <h5><strong>id</strong> - the unit ID</h5>
 
-`[amazon_auto_links id="123"]` 
-<!-- separator -->
+`
+[amazon_auto_links id="123"]
+`
 
-`<?php AmazonAutoLinks( array( 'id' => 123 ) ); ?>`
+`
+<?php AmazonAutoLinks( array( 'id' => 123 ) ); ?>
+`
 
 <h5><strong>label</strong> - the label associated with the units</h5>
 
-`[amazon_auto_links label="WordPress"]` 
-<!-- separator -->
- 
-`<?php AmazonAutoLinks( array( 'label' => 'WordPress' ) ); ?>`
+`
+[amazon_auto_links label="WordPress"]
+`
+
+`
+<?php AmazonAutoLinks( array( 'label' => 'WordPress' ) ); ?>
+`
+
+<h5><strong>asin</strong> - ASINs (product IDs) separated by commas (`,`).</h5>
+
+`
+[amazon_auto_links asin="B016ZNRC0Q, B00ZV9PXP2"]
+`
+
+`
+<?php AmazonAutoLinks( array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
+`
+
+Optionally, `country` for the locale and `associate_id` for the Amazon Associate ID can be specified.
+If omitted, the values set in the Default section of the settings (`Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`) are used.
 
 = How to Create Own Template =
 
@@ -222,6 +241,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.5.0 =
+- Added the `asin` shortcode and function argument.
 - Added the `Contextual` unit type.
 - Added the `Sort Order` option to the `Item Look-up` unit type.
 
