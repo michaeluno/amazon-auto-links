@@ -22,13 +22,24 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     public function setUp() {
     
         if (  $this->_isInThePage() ) {
-           
+
+            // Action links
+            $_sCustomNonce = uniqid() . '_' . get_current_user_id();
+            AmazonAutoLinks_WPUtility::setTransient(
+                'AAL_Nonce_' . $_sCustomNonce,
+                $_sCustomNonce,
+                60*60*24    // one day
+            );
+
+            new AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit( $this, $_sCustomNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache( $this, $_sCustomNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning( $this, $_sCustomNonce );
+
             // unit listing table columns
             add_filter(    
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
                 array( $this, 'replyToModifyColumnHeader' )
-            );            
-            
+            );
             
         }
     

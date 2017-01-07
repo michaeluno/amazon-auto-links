@@ -14,23 +14,30 @@
  * @action      schedule        aal_action_api_get_product_info
  */
 class AmazonAutoLinks_Event_Scheduler {
-    
+
     /**
      * Schedules a pre-fetch task.
      * @since       3
+     * @param       integer|array       a unit ID of integer or an output argument array.
      * @return      void
      * @action      aal_action_unit_prefetch
      */
-    static public function prefetch( $iPostID ) {
+    static public function prefetch( $iaArguments ) {
         
-        if ( ! $iPostID ) {
+        if ( empty( $iaArguments ) ) {
             return;
         }
-        self::_scheduleTask( 
+
+        $_aArguments = is_scalar( $iaArguments )
+            ? array( 'id' => $iaArguments )
+            : ( array ) $iaArguments;
+
+        // Otherwise, it's an argument.
+        self::_scheduleTask(
             'aal_action_unit_prefetch',  // action name
-            $iPostID // arguments
-        );        
-        
+            $_aArguments // arguments
+        );
+
     }    
     
     /**

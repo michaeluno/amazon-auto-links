@@ -16,7 +16,7 @@
 class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * Sets up hooks.
+     * Performs the action.
      * @since       3.3.0
      */
     public function __construct( array $aPostIDs, $oFactory ) {

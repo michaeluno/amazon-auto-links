@@ -48,18 +48,20 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             'modified_time'     => '0000-00-00 00:00:00',
             'expiration_time'   => '0000-00-00 00:00:00',
         );
-         
-        return $this->setRow( 
-            array(
+
+        $_aRow = array(
                 'name'  => $sName,
                 'cache' => maybe_serialize( $mData ),
-            ) 
+            )
             + array_intersect_key( $aExtra, $_aColumns ) // removes unsupported items
             + array(
-                'modified_time'   => date( 'Y-m-d H:i:s' ), 
-                'expiration_time' => date( 'Y-m-d H:i:s', time() + $iDuration ),
-            )
-        );
+                'modified_time'   => date( 'Y-m-d H:i:s' ),
+            );
+        if ( $iDuration ) {
+            $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iDuration );
+        }
+
+        return $this->setRow( $_aRow );
         
     }
         /**

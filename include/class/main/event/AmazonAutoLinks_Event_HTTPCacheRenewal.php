@@ -29,7 +29,7 @@ class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtili
         // For SimplePie cache renewal events 
         add_filter( 
             'aal_filter_http_response_cache',  // filter hook name
-            array( $this, 'replyToModifyCacheRmainedTime' ), // callback
+            array( $this, 'replyToModifyCacheRemainedTime' ), // callback
             10, // priority
             4 // number of parameters
         );    
@@ -63,7 +63,7 @@ class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtili
      * 
      * @callback        filter      aal_filter_http_response_cache
      */
-    public function replyToModifyCacheRmainedTime( $aCache, $iCacheDuration, $aArguments, $sType='wp_remote_get' ) {
+    public function replyToModifyCacheRemainedTime( $aCache, $iCacheDuration, $aArguments, $sType='wp_remote_get' ) {
         
         // Check if it is expired.
         if ( 0 >= $aCache[ 'remained_time' ] ) {

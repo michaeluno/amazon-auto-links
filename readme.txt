@@ -278,6 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.5.0 =
+- Added the `Renew Cache` action link in the unit listing table.
 - Added the `search` shortcode and function argument which performs a keyword search with the set keywords.
 - Added the `asin` shortcode and function argument which list products of the set ASINs.
 - Added the `Contextual` unit type.

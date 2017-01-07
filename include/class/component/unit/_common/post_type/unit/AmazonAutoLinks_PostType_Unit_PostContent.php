@@ -14,7 +14,7 @@
  * @since       3
  * 
  */
-class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType_Unit_Action {
+class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType_Unit_ListTable {
     
     /**
      * Prints out the fetched product links.

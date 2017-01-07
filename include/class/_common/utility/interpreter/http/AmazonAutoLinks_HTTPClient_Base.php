@@ -90,7 +90,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         private function _getFormattedArguments( $aArguments ) {
             $aArguments     = null === $aArguments
                 ? $this->aArguments
-                : $aArguments;
+                : $this->getAsArray( $aArguments ) + $this->aArguments;
                 
             $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
             
@@ -120,9 +120,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
              * @return      string
              */
             protected function _getCacheName( $sURL ) {
-                return AmazonAutoLinks_Registry::TRANSIENT_PREFIX 
+                $_sCacheName = AmazonAutoLinks_Registry::TRANSIENT_PREFIX
                     . '_' 
-                    . md5( $sURL );;
+                    . md5( $sURL );
+                return apply_filters( 'aal_filter_http_request_cache_name', $_sCacheName, $sURL, $this->sRequestType );
             }
             
     /**
@@ -317,13 +318,13 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $_sCharSet    = $this->_getCharacterSet( $mData );            
             $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
                 AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );             
+            );
+            // when 0 is passed, use a default value of 86400 (one day). So pass 0 to renew the cache.
+            $iCacheDuration = $iCacheDuration ? ( integer ) $iCacheDuration : 86400;
             $_bResult = $_oCacheTable->setCache( 
                 $this->_getCacheName( $sURL ), // name
                 $mData,
-                $iCacheDuration // when 0 is passed, use a default value of 86400 (one day). So pass 0 to renew the cache.
-                    ? ( integer ) $iCacheDuration
-                    : 86400, // cache life span
+                $iCacheDuration,
                 array( // extra column items
                     'request_uri' => $sURL,
                     'type'        => $this->sRequestType,
