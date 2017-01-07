@@ -24,6 +24,7 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
 
         $this->___setUnitIDArgument();
         $this->___setASINArguments();
+        $this->___setSearchArguments();
         return $this->_aArguments;
 
     }
@@ -53,6 +54,16 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
             $this->_aArguments[ 'ItemId' ]         = implode( ',', $_aASINs );
             $this->_aArguments[ 'Operation' ]      = 'ItemLookup';
             $this->_aArguments[ '_allowed_ASINs' ] = $_aASINs;
+            $this->_aArguments[ 'unit_type' ]      = 'item_lookup';
+        }
+
+        private function ___setSearchArguments() {
+            if ( ! isset( $this->_aArguments[ 'search' ] ) ) {
+                return;
+            }
+            $this->_aArguments[ 'Operation' ]     = 'ItemSearch';
+            $this->_aArguments[ 'Keywords' ]      = $this->_aArguments[ 'search' ];
+            $this->_aArguments[ 'unit_type' ]     = 'search';
         }
 
 }

@@ -174,8 +174,45 @@ The following parameters can be used for the shortcode, `[amazon_auto_links]` or
 <?php AmazonAutoLinks( array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
 `
 
-Optionally, `country` for the locale and `associate_id` for the Amazon Associate ID can be specified.
-If omitted, the values set in the Default section of the settings (`Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`) are used.
+<h5><strong>search</strong> - Search keywords separated by commas (`,`).</h5>
+
+`
+[amazon_auto_links search="WordPress"]
+`
+
+`
+<?php AmazonAutoLinks( array( 'search' => 'WordPress' ) ); ?>
+`
+
+The `id`, `asin` and `search` arguments cannot be used together.
+
+Optionally, the following arguments may be set.
+
+- `country` - (string) the locale of the store. Accepted values are `CA`, 'CN`, 'FR`, 'DE`, 'IT`, 'JP`, 'UK`, 'ES`, 'US`, 'IN`, 'BR`, and 'MX`.
+- `associate_id` - (string) the Amazon Associates ID for the affiliate.
+- `count` - (integer) determines how many items should be displayed.
+- `image_size` - (integer) the image size in pixels.
+- `title_length` - (integer) the maximum title character length. Set `-1` for no limit. Default: `-1`.
+- `description_length` - (integer) the maximum description character length. Set `-1` for no limit. Default: `250`.
+- `link_style` - (integer) the link style. Accepted values are `1`, `2`, `3`, `4`, and `5`. Default: `1`.
+    - `1` - http://www.amazon.[domain-suffix]/[product-name]/dp/[asin]/ref=[...]?tag=[associate-id]
+    - `2` - http://www.amazon.[domain-suffix]/exec/obidos/ASIN/[asin]/[associate-id]/ref=[...]
+    - `3` - http://www.amazon.[domain-suffix]/gp/product/[asin]/?tag=[associate-id]&ref=[...]
+    - `4` - http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
+    - `5` - http://localhost/wp47?productlink=[asin]&locale=[...]&tag=[associate-id]
+- `credit_link` - (integer|boolean) whether to show the credit link. `1`/`true` to show, `0`/`false` to hide.
+- `subimage_size` - (integer) the sub-image size in pixels. Default: `100`.
+- `subimage_max_count` - (integer) the maximum number of sub-images to display.
+- `similar_product_image_size` - (integer) the image size of similar products in pixels. Default: `100`.
+- `similar_product_max_count` - (integer) the maximum number of similar products.
+- `customer_review_max_count` - (integer) the maximum number of customer reviews.
+- `show_now_retrieving_message` - (boolean|integer) Whether to show the "Now retrieving..." message when sub-elements are pending to be fetched. `true`/`1` to show `false`/`0` to hide.
+- `button_type` - (integer) The type of buttons. The following values are accepted. Default: `1`.
+    - `0` - Link to the product page.
+    - `1` - Add to cart.
+
+These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
+If these arguments are omitted, the values set in the setting page will be used.
 
 = How to Create Own Template =
 
@@ -241,7 +278,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.5.0 =
-- Added the `asin` shortcode and function argument.
+- Added the `search` shortcode and function argument which performs a keyword search with the set keywords.
+- Added the `asin` shortcode and function argument which list products of the set ASINs.
 - Added the `Contextual` unit type.
 - Added the `Sort Order` option to the `Item Look-up` unit type.
 
