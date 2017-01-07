@@ -73,17 +73,11 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 implode( ',', $aFoundASINs )
             );
             
-            // In v3.2.0, the Operation meta was missing and ItemSearch may be storead instead. So override it here.
-            $this->oUnitOption->set( 
-                'Operation',  // ItemId
-                'ItemLookup'
-            );
+            // In v3.2.0, the `Operation` meta was missing and `ItemSearch` may be stored instead. So override it here.
+            $this->oUnitOption->set( 'Operation', 'ItemLookup' );
             
             // Set allowed ASINs. This way items other than the queried ASINs will not be returned.
-            $this->oUnitOption->set( 
-                '_allowed_ASINs', 
-                $aFoundASINs
-            );        
+            $this->oUnitOption->set( '_allowed_ASINs', $aFoundASINs );
             
         }
         
