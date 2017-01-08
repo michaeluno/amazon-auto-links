@@ -4,9 +4,6 @@
 $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
 $sResultFilePath	= $sTargetBaseDir . '/include/class-list.php';
 
-
-
-
 /* If accessed from a browser, exit. */
 $bIsCLI				= php_sapi_name() == 'cli';
 $sCarriageReturn	= $bIsCLI ? PHP_EOL : '<br />';
@@ -32,7 +29,7 @@ echo 'Started...' . $sCarriageReturn;
 // for the boot files
 new PHP_Class_Files_Inclusion_Script_Creator(
 	$sTargetBaseDir,
-	array( $sTargetBaseDir . '/include/class/' ), 	// scan directory paths
+	array( $sTargetBaseDir . '/include/core/' ), 	// scan directory paths
 	$sResultFilePath, 
 	array(
 		// 'header_class_name'	=>	'TaskScheduler_InclusionScriptHeader',
@@ -44,7 +41,7 @@ new PHP_Class_Files_Inclusion_Script_Creator(
 		'search'			=>	array(
 			'allowed_extensions'	=>	array( 'php' ),	// e.g. array( 'php', 'inc' )
 			// 'exclude_dir_paths'		=>	array( $sTargetBaseDir . '/include/class/backend' ),
-			'exclude_dir_names'		=>	array( 'v2' ),
+			'exclude_dir_names'		=>	array( 'v2', 'function' ),
 			'is_recursive'			=>	true,
 		),			
 	)

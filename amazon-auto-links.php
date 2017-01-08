@@ -5,7 +5,7 @@
  *	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *	Author:         Michael Uno (miunosoft)
  *	Author URI:     http://michaeluno.jp
- *	Version:        3.5.0b02
+ *	Version:        3.5.0b03
  */
 
 /**
@@ -16,14 +16,14 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-	const VERSION        = '3.5.0b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '3.5.0b03';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Amazon Auto Links';
 	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
 	const AUTHOR         = 'miunosoft (Michael Uno)';
 	const AUTHOR_URI     = 'http://en.michaeluno.jp/';
 	const PLUGIN_URI     = 'http://en.michaeluno.jp/amazon-auto-links';
-	const COPYRIGHT      = 'Copyright (c) 2013-2016, Michael Uno';
+	const COPYRIGHT      = 'Copyright (c) 2013-2017, Michael Uno';
 	const LICENSE        = 'GPL v2 or later';
 	const CONTRIBUTORS   = '';
  
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013-2016, Michael Uno
+ * @copyright   Copyright (c) 2013-2017, Michael Uno
  * @authorurl	http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since		2.0.0
@@ -264,7 +264,7 @@ if (
     false === get_option( 'amazon_auto_links', false ) 
     && false !== get_option( 'amazon_auto_links_admin', false )
 ) {
-    include( dirname( __FILE__ ) . '/include/v2/amazon-auto-links.php' );
+    include( dirname( __FILE__ ) . '/include/legacy/v2/amazon-auto-links.php' );
     return;
 }
 

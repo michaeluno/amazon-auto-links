@@ -1,0 +1,88 @@
+<?php
+/**
+ * Amazon Auto Links
+ *
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2017 Michael Uno
+ */
+
+/**
+ * Loads the units component.
+ *  
+ * @package     Amazon Auto Links
+ * @since       3.3.0
+*/
+class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoader_Base {
+        
+    /**
+     * Stores the unit type slug.
+     * @remark      Each extended class should assign own unique unit type slug here.
+     * @since       3.3.0
+     */
+    public $sUnitTypeSlug = 'search';
+    
+    /**
+     * Stores class names of form fields.
+     */
+    public $aFieldClasses = array(
+        'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
+        'AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced',
+    );    
+    
+    /**
+     * Adds post meta boxes.
+     * 
+     * @since       3.3.0
+     * @return      void
+     */
+    public function loadAdminComponents( $sScriptPath ) {
+        
+        // Admin pages
+        new AmazonAutoLinks_SearchUnitAdminPage(
+            array(
+                'type'      => 'transient',
+                'key'       => $GLOBALS[ 'aal_transient_id' ],
+                'duration'  => 60*60*24*2,
+            ),
+            $sScriptPath
+        );
+        
+        // Post meta boxes
+        new AmazonAutoLinks_UnitPostMetaBox_Main_search(
+            null,   // meta box ID - null for auto-generate
+            __( 'Product Search Main', 'amazon-auto-links' ),
+            array( // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+            ),                 
+            'normal', // context - e.g. 'normal', 'advanced', or 'side'
+            'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
+        );            
+        new AmazonAutoLinks_UnitPostMetaBox_Advanced_search(
+            null,   // meta box ID - null for auto-generate
+            __( 'Product Search Advanced', 'amazon-auto-links' ),
+            array( // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+            ),                 
+            'normal', // context - e.g. 'normal', 'advanced', or 'side'
+            'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+        );        
+        
+    }     
+
+    /**
+     * Determines the unit type from given arguments.
+     * @since       3.5.0
+     * @param       string      $sUnitType
+     * @param       array       $aArguments
+     * @param       null|string $_nsOperation
+     * @return      string
+     */
+    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+        return 'ItemSearch' === $this->_getOperationArgument( $aArguments )
+            ? $this->sUnitTypeSlug
+            : $sUnitType;
+    }
+
+}
