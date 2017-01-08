@@ -44,8 +44,8 @@ class AmazonAutoLinks_Event_Schedule_DeleteExpiredCaches {
         
             // Get the set interval in seconds.
             $_oOption   = AmazonAutoLinks_Option::getInstance();
-            $_iSize     = ( integer ) $_oOption->get( array( 'cache', 'expired_cache_removal_intereval', 'size' ), 7 );
-            $_iUnit     = ( integer ) $_oOption->get( array( 'cache', 'expired_cache_removal_intereval', 'unit' ), 86400 );
+            $_iSize     = ( integer ) $_oOption->get( array( 'cache', 'expired_cache_removal_interval', 'size' ), 7 );
+            $_iUnit     = ( integer ) $_oOption->get( array( 'cache', 'expired_cache_removal_interval', 'unit' ), 86400 );
             $_iInterval = $_iSize * $_iUnit;
             
             // Schedule

@@ -53,7 +53,7 @@ class AmazonAutoLinks_Event {
                     
             // This must be called after the above action hooks.
             $_oOption               = AmazonAutoLinks_Option::getInstance();
-            $_bIsIntenceCachingMode = 'intense' === $_oOption->get( 'cache', 'chaching_mode' );
+            $_bIsIntenceCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
             
             // Force executing actions.
             new AmazonAutoLinks_Shadow(    

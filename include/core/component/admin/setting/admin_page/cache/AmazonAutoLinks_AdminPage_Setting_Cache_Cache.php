@@ -92,7 +92,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                     . '</p>',                
             ),
             array(
-                'field_id'          => 'chaching_mode',
+                'field_id'          => 'caching_mode',
                 'type'              => 'radio',
                 'title'             => __( 'Caching Mode', 'amazon-auto-links' ),
                 'capability'        => 'manage_options',
@@ -104,7 +104,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'default' => 'normal',
             ),
             array(
-                'field_id'          => 'expired_cache_removal_intereval',
+                'field_id'          => 'expired_cache_removal_interval',
                 'type'              => 'size',
                 'title'             => __( 'Interval for Removing Expired Caches', 'amazon-auto-links' ),
                 'capability'        => 'manage_options',
@@ -168,8 +168,8 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          */
         private function _rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage ) {
 
-            $_aNewExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aInputs, array( 'expired_cache_removal_intereval' ) );
-            $_aOldExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aOldInputs, array( 'expired_cache_removal_intereval' ) );
+            $_aNewExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aInputs, array( 'expired_cache_removal_interval' ) );
+            $_aOldExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aOldInputs, array( 'expired_cache_removal_interval' ) );
             if ( $_aNewExpiredDeleteInterval === $_aOldExpiredDeleteInterval ) {
                 return;
             }          
