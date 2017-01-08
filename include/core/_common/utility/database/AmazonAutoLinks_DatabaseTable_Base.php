@@ -12,174 +12,254 @@
  * Provides shared methods for the plugin database table classes.
  * 
  * @since       3
- * @version     1.0.0
+ * @version     1.1.0
  */
 abstract class AmazonAutoLinks_DatabaseTable_Base {
     
-    /**
-     * Stores the subject table name.
-     * 
-     * @access      public      Let it access from outside.
-     */
-    public $sTableName = '';
-    
-    /**
-     * Stores the table suffix. 
-     * This also serves as the option key name.
-     */
-    public $sTableSuffix = '';
-    
-    /**
-     * Stores the table version.
-     */
-    public $sVersion = '';
-    
+    public $aArguments = array(
+        'name'              => '',      // the table name suffix
+        'version'           => '1.0.0',
+        'across_network'    => true,    // whether to share the table in across the multi-site network.
+
+        // Arguments automatically set
+        'table_name'        => '',      // determined in the formatting method
+    );
+
     /**
      * Sets up properties.
+     * @since   1.1.0
      */
-    public function __construct( $sTableNameSuffix, $sVersion='', $bAcrossNetwork=true ) {
-        $this->sTableNameSuffix = $sTableNameSuffix;
-        $this->sTableName       = $bAcrossNetwork
-            ? $GLOBALS[ 'wpdb' ]->base_prefix . $sTableNameSuffix
-            : $GLOBALS[ 'wpdb' ]->prefix . $sTableNameSuffix;
-        $this->sVersion   = $sVersion;
+    public function __construct() {
+        $this->aArguments       = $this->_getArgumentsFormatted( $this->_getArguments() );
     }
-    
-    /**
-     * Installs a table. 
-     * 
-     * @todo        Add a force option to overide an existing table.
-     */
-    public function install() {
-        
-        // If already exists, return.
-        if ( $GLOBALS[ 'wpdb' ]->get_var( "SHOW TABLES LIKE '" .  $this->sTableName . "'" ) == $this->sTableName ) { 
-            return;
+        /**
+         * Returns the class arguments.
+         * @remark      This should be overridden in the extended class.
+         * @since       1.1.0
+         * @return      array
+         */
+        protected function _getArguments() {
+            return $this->aArguments;
         }
-        
-        // The method should be overridden in the extended clasz.
-        $_sSQLQuery = $this->getCreationQuery();
-        if ( ! $_sSQLQuery ) {
-            return;
-        }
-        
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        dbDelta( $_sSQLQuery );
-        
-        if ( $this->sVersion ) {
-            update_option(
-                $this->sTableNameSuffix  . '_version',  // key 
-                $this->sVersion     // data
+        /**
+         * Formats the arguments.
+         * @since       1.1.0
+         * @return      array
+         */
+        protected function _getArgumentsFormatted( array $aArguments ) {
+
+            $aArguments[ 'table_name' ] = $aArguments[ 'across_network' ]
+                ? $GLOBALS[ 'wpdb' ]->base_prefix . $aArguments[ 'name' ]
+                : $GLOBALS[ 'wpdb' ]->prefix . $aArguments[ 'name' ];
+            return $aArguments + array(
+                'name' => __CLASS__,
             );
+
         }
-        
+
+    /**
+     * Upgrade the table.
+     * @return      array       Strings containing the results of the various update queries.
+     * @since       1.1.0
+     */
+    public function upgrade() {
+
+        $_sExistingVersion = get_option(
+            $this->aArguments[ 'name' ]  . '_version',
+            '0'
+        );
+
+        // If the existent version is above or equal to the set version in the argument, do not upgrade.
+        if ( version_compare( $_sExistingVersion, $this->aArguments[ 'version' ], '>=' ) ) {
+            return array();
+        }
+
+        return $this->install( true );
+
     }
-    
+
+    /**
+     * Installs a table.
+     *
+     * @since       1.1.0
+     * @return      array       Strings containing the results of the various update queries.
+     */
+    public function install( $bForce=false ) {
+
+        // If already exists, return.
+        if ( ! $bForce && $this->___hasTable() ) {
+            return array();
+        }
+        return $this->___install();
+
+    }
+        /**
+         * Checks whether the table exists or not.
+         * @return      boolean
+         * @since       1.1.0
+         */
+        private function ___hasTable() {
+            $_sExistingTableName = $GLOBALS[ 'wpdb' ]->get_var(
+                "SHOW TABLES LIKE '"
+                .  $this->aArguments[ 'table_name' ]
+                . "'"
+            );
+            return $_sExistingTableName === $this->aArguments[ 'table_name' ];
+        }
+        /**
+         * Installs the database table.
+         * @return      array       Strings containing the results of the various update queries.
+         * @since       1.1.0
+         */
+        private function ___install() {
+
+            // The method should be overridden in the extended class.
+            $_sSQLQuery = $this->getCreationQuery();
+            if ( ! $_sSQLQuery ) {
+                return;
+            }
+
+            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+            $_aResult = dbDelta( $_sSQLQuery );
+
+            if ( $this->aArguments[ 'version' ] ) {
+                update_option(
+                    $this->aArguments[ 'name' ]  . '_version',  // key
+                    $this->aArguments[ 'version' ]     // data
+                );
+            }
+            return $_aResult;
+
+        }
+
+    /**
+     * Drops a table.
+     * @since   1.1.0
+     */
+    public function uninstall() {
+
+        if ( $this->aArguments[ 'version' ] ) {
+            delete_option( $this->aArguments[ 'name' ]  . '_version' );
+        }
+
+        $GLOBALS[ 'wpdb' ]->query(
+            "DROP  TABLE IF EXISTS " . $this->aArguments[ 'table_name' ]
+        );
+    }
+
     /**
      * Override this method in the extended class.
-     * 
+     *
      * @return      string
-     * @since       3
+     * @since       1.1.0
      */
     public function getCreationQuery() {
-        return "";
+        return '';
     }
-    
+
     /**
      * @return      string
-     * @since       3.4.0
+     * @since       1.1.0
      */
     protected function _getCharactersetCollation() {
-                
+
         $_sDefaultCharset = $GLOBALS[ 'wpdb' ]->charset
             ? 'DEFAULT CHARACTER SET ' . $GLOBALS[ 'wpdb' ]->charset . ' '
             : '';
         $_sCollation      = $GLOBALS[ 'wpdb' ]->collate
             ? 'COLLATE ' . $GLOBALS[ 'wpdb' ]->collate
             : '';
-        return trim( $_sDefaultCharset . $_sCollation );            
-        
-    }    
-    
+        return trim( $_sDefaultCharset . $_sCollation );
+
+    }
+
     /**
      * Inserts a row.
-     * 
+     *
      * <h3>Example</h3>
      * `
      *  $_oTable->insert(
-     *      array( 
-     *          'column1' => 'value1', 
-     *          'column2' => 123 
-     *      ), 
-     *      array( 
-     *          '%s', 
-     *          '%d' 
-     *      ) 
+     *      array(
+     *          'column1' => 'value1',
+     *          'column2' => 123
+     *      ),
+     *      array(
+     *          '%s',
+     *          '%d'
+     *      )
      *  );
      * `
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#INSERT_rows
+     * @since   1.1.0
      */
-    public function insert( $aRow, $asFormat=null ) {        
-        return $GLOBALS[ 'wpdb' ]->insert( 
-            $this->sTableName, 
+    public function insert( $aRow, $asFormat=null ) {
+        return $GLOBALS[ 'wpdb' ]->insert(
+            $this->aArguments[ 'table_name' ],
             $aRow,
             null === $asFormat  // row format
                 ? $this->_getPlaceHolders( $aRow )
                 : $asFormat
-        );    
+        );
     }
-    
+
     /**
-     * $wpdb->delete( 
-     *  'table', 
-     *   array( 'ID' => 1 ), array( '%d' ) );
-     * 
-     * @param       array           $aWhere     An array which defines the where SQL query part. 
+     * ```
+     * $wpdb->delete(
+     *  'table',
+     *   array( 'ID' => 1 ), array( '%d' )
+     * );
+     * ```
+     *
+     * @param       array           $aWhere     An array which defines the where SQL query part.
      * If empty, it attempts to delete all rows.
      * @param       array|string    $asFormat
      * @return      void
+     * @since       1.1.0
      */
     public function delete( $aWhere=array(), $asFormat=null ) {
-        
+
         if ( empty( $aWhere ) ) {
-            $GLOBALS[ 'wpdb' ]->query( 
-                "TRUNCATE TABLE `{$this->sTableName}`" 
-            );            
+            $GLOBALS[ 'wpdb' ]->query(
+                "TRUNCATE TABLE `{$this->aArguments[ 'table_name' ]}`"
+            );
             return;
         }
-        
-        $GLOBALS[ 'wpdb' ]->delete( 
-            $this->sTableName, 
+
+        $GLOBALS[ 'wpdb' ]->delete(
+            $this->aArguments[ 'table_name' ],
             $aWhere,
             null === $asFormat  // row format
                 ? $this->_getPlaceHolders( $aWhere )
                 : $asFormat
         );
+
     }
-    
+
     /**
-     * 
+     *
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
+     * @since   1.1.0
      */
-    public function replace( $aRow, $asFormat=null ) {        
+    public function replace( $aRow, $asFormat=null ) {
         $aRow = $this->_getSanitizedRow( $aRow );
-        return $GLOBALS[ 'wpdb' ]->replace( 
-            $this->sTableName, 
+        return $GLOBALS[ 'wpdb' ]->replace(
+            $this->aArguments[ 'table_name' ],
             $aRow,
             null === $asFormat  // row format
                 ? $this->_getPlaceHolders( $aRow )
                 : $asFormat
-        );    
-    }    
-       
+        );
+    }
+
     /**
-     * 
+     *
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
+     * @since   1.1.0
      */
     public function update( $aRow, $aWhere=array(), $asFormat=null, $asWhereFormat=null ) {
         $aRow = $this->_getSanitizedRow( $aRow );
-        return $GLOBALS[ 'wpdb' ]->update( 
-            $this->sTableName, 
+        return $GLOBALS[ 'wpdb' ]->update(
+            $this->aArguments[ 'table_name' ],
             $aRow, // the new data to update
             $aWhere, // e.g. array( 'id' => ... ) which updates the row whose id is ...
             null === $asFormat  // row format
@@ -188,10 +268,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             null === $asWhereFormat
                 ? $this->_getPlaceHolders( $aWhere )
                 : $asWhereFormat
-        );    
-    }           
+        );
+    }
         /**
          * @return      array
+         * @since       1.1.0
          */
         private function _getSanitizedRow( array $aRow ) {
             foreach( $aRow as $_sColumnName => $_mValue ) {
@@ -199,10 +280,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             }
             return $aRow;
         }
-        
+
         /**
          * @return      array       The placefolders such as %s, %d, %f for the format parameter of the above methods.
          * @see         https://codex.wordpress.org/Class_Reference/wpdb#Placeholders
+         * @since       1.1.0
          */
         private function _getPlaceHolders( $aRow ) {
             $_aPlaceHolders = array();
@@ -211,7 +293,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             }
             return $_aPlaceHolders;
         }
-            private function _getPlaceHolder( $mData ) {                
+            private function _getPlaceHolder( $mData ) {
                 switch ( gettype( $mData ) ) {
                     case 'integer':
                         return '%d';
@@ -220,30 +302,32 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
                         return '%f';
                     case 'boolean':
                     case 'string':
-                    default: 
+                    default:
                         return '%s';
                 }
             }
-    
+
     /**
      * Retrieves a value.
      * @remark      Returns `null` if no item is found.
+     * @since       1.1.0
      */
     public function getVariable( $sSQLQuery, $iColumnOffset=0, $iRowOffset=0 ) {
-        $_mResult = $GLOBALS[ 'wpdb' ]->get_var( 
-            $sSQLQuery, 
-            $iColumnOffset, 
+        $_mResult = $GLOBALS[ 'wpdb' ]->get_var(
+            $sSQLQuery,
+            $iColumnOffset,
             $iRowOffset
         );
         return maybe_unserialize( $_mResult );
     }
     /**
      * Selects a single row.
+     * @since   1.1.0
      */
     public function getRow( $sSQLQuery, $sFormat='ARRAY_A', $iRowOffset=0 ) {
         $_aRow = $GLOBALS[ 'wpdb' ]->get_row(
-            $sSQLQuery, 
-            $sFormat, 
+            $sSQLQuery,
+            $sFormat,
             $iRowOffset
         );
         // A user can set own format with $sFormat so if it's not array, return as it is.
@@ -258,6 +342,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
     /**
      * Selects multiple rows.
+     * @since   1.1.0
      */
     public function getRows( $sSQLQuery, $sFormat='ARRAY_A' ) {
         $_aRows = $GLOBALS[ 'wpdb' ]->get_results(
@@ -267,21 +352,33 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         foreach( $_aRows as &$_aRow ) {
             foreach( $_aRow as $_sColumnName => $_mValue ) {
                 $_aRow[ $_sColumnName ] = maybe_unserialize( $_mValue );
-            }            
+            }
         }
         return $_aRows;
     }
-    
+
     /**
-     * Drops a table.
+     * Retrieves a total count of rows.
+     * @sine        2.5.3
+     * @return      integer     The total row count.
      */
-    public function uninstall() {
-        $GLOBALS[ 'wpdb' ]->query( 
-            "DROP  TABLE IF EXISTS " . $this->sTableName
+    public function getTotalItemCount() {
+        return ( integer ) $this->getVariable(
+            "SELECT COUNT(*) FROM `{$this->aArguments[ 'table_name' ]}`"
         );
     }
-    
+
     /**
+     * Retrieves the table name.
+     * @since       2.5.3
+     * @return      string
+     */
+    public function getTableName() {
+        return $this->aArguments[ 'table_name' ];
+    }
+
+    /**
+     * @since       2.5.0
      * @return      string
      */
     public function getTableSize() {
@@ -291,12 +388,12 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             round(((data_length + index_length) / 1024 / 1024), 2) `Size_in_MB` 
             FROM information_schema.TABLES 
             WHERE table_schema = (SELECT DATABASE())
-            AND table_name = '{$this->sTableName}'",
+            AND table_name = '{$this->aArguments[ 'table_name' ]}'",
             'ARRAY_A'
-        ); 
+        );
         return isset( $_aResult[ 0 ][ 'Size_in_MB' ] )
             ? $_aResult[ 0 ][ 'Size_in_MB' ] . ' MB'
             : 'n/a';
-    }    
-    
+    }
+
 }

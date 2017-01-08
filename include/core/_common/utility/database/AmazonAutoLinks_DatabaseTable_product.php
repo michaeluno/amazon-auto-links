@@ -13,7 +13,17 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTable_Base {
+class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTable_Utility {
+    
+    /**
+     * Returns the table arguments.
+     * @return      array
+     * @since       3.5.0
+     */
+    protected function _getArguments() {
+        return AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_products' ];
+    }    
+
     /**
      * Represents the structure of a row of the table.
      * 
@@ -58,7 +68,7 @@ class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTabl
      * @since       3
      */
     public function getCreationQuery() {
-        return "CREATE TABLE " . $this->sTableName . " (
+        return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             object_id bigint(20) unsigned NOT NULL auto_increment,
             asin_locale varchar(13) UNIQUE NOT NULL,
             locale varchar(4),            
@@ -136,7 +146,7 @@ class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTabl
     public function getIDByASINLocale( $sASINLocale ) {
         return $this->getVariable(
             "SELECT object_id
-            FROM {$this->sTableName}
+            FROM {$this->aArguments[ 'table_name' ]}
             WHERE asin_locale = '{$sASINLocale}'"
         );
     }
@@ -148,21 +158,5 @@ class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTabl
         return ( boolean ) $this->getID( $sASIN, $sLocale );
     }
     
-    /**
-     * Removes expired items from the table.
-     * @since       3
-     */
-    public function deleteExpired( $sExpiryTime='' ) {
 
-        $sExpiryTime = $sExpiryTime
-            ? $sExpiryTime
-            : "UTC_TIMESTAMP()";
-        $this->getVariable(
-            "DELETE FROM `{$this->sTableName}` "
-            . "WHERE expiration_time < {$sExpiryTime}" 
-        ); 
-        $this->getVariable( "OPTIMIZE TABLE `{$this->sTableName}`;" );
-        
-    }    
-    
 }

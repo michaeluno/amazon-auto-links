@@ -56,9 +56,7 @@ class AmazonAutoLinks_HTTPClient_FileGetContents extends AmazonAutoLinks_HTTPCli
          */
         protected function _getHTTPResponseWithCache( $sURL, $aArguments=array(), $iCacheDuration=86400 ) {
             
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
             
             // If a cache exists, use it.
             $_aData        = 0 === $iCacheDuration

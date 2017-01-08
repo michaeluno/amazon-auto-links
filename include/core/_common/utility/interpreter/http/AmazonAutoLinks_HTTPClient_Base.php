@@ -187,9 +187,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          */
         private function _getCharacterSetFromCache( $sCacheName ) {
             
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );             
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
             $_aRow = $_oCacheTable->getCache( 
                 $sCacheName // single item returns a single row
             ); 
@@ -221,9 +219,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $_aValidCaches = array();
             
             // First retrieve the cache
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            ); 
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
             
             // If a cache exists, use it.
             $_aCaches = 0 === $iCacheDuration
@@ -317,9 +313,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         private function _setCache( $sURL, $mData, $iCacheDuration=86400 ) {
 
             $_sCharSet    = $this->_getCharacterSet( $mData );            
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
+
             // when 0 is passed, use a default value of 86400 (one day). So pass 0 to renew the cache.
             $iCacheDuration = $iCacheDuration ? ( integer ) $iCacheDuration : 86400;
             $_bResult = $_oCacheTable->setCache( 
@@ -344,9 +339,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
      */
     public function deleteCache() {
         
-        $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-        );
+        $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
         foreach( $this->aURLs as $_sCacheName => $_sURL ) {            
 // @todo implement deleteCaches() method
             $_oCacheTable->deleteCache(

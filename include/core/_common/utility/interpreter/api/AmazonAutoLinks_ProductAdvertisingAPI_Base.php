@@ -269,9 +269,7 @@ return true;
 
         // Save the cache
         if ( $this->bUseCacheTable ) {   
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
 // @todo set the cache duration                
             $_aData        = $_oCacheTable->setCache( 
                 $sTransientKey, // name
@@ -312,9 +310,7 @@ return true;
     public function getCache( $sTransientKey ) {
         
         if ( $this->bUseCacheTable ) {            
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache(
-                AmazonAutoLinks_Registry::$aDatabaseTables[ 'request_cache' ]
-            );
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
             $_aData        = $_oCacheTable->getCache( 
                 $sTransientKey 
             );

@@ -182,20 +182,49 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * Stores custom database table names.
      * @remark      slug (part of class file name) => table name
      * @since       3
+     * @deprecated  3.5.0
      */
-    static public $aDatabaseTables = array(
+/*    static public $aDatabaseTables = array(
         'product'       => 'aal_products',
         'request_cache' => 'aal_request_cache',
-    );
+    );*/
     /**
      * Stores the database table versions.
      * @since       3
+     * @deprecated  3.5.0
      */
-    static public $aDatabaseTableVersions = array(
+/*    static public $aDatabaseTableVersions = array(
         'product'       => '1.0.0',
         'request_cache' => '1.0.0',
+    );*/
+
+    /**
+     * Stores custom database table names.
+     * @remark      The below is the structure
+     * array(
+     *      'slug (part of database wrapper class file name)' => array(
+     *          'version'   => '0.1',
+     *          'name'      => 'table_name',    // serves as the table name suffix
+     *      ),
+     *      ...
+     * )
+     * @since       3.5.0
+     */
+    static public $aDatabaseTables = array(
+         'aal_products'        => array(
+             'name'              => 'aal_products', // serves as the table name suffix
+             'version'           => '1.0.0',
+             'across_network'    => true,
+             'class_name'        => 'AmazonAutoLinks_DatabaseTable_product',
+         ),
+        'aal_request_cache'    => array(
+            'name'              => 'aal_request_cache',  // serves as the table name suffix
+            'version'           => '1.0.0',
+            'across_network'    => true,
+            'class_name'        => 'AmazonAutoLinks_DatabaseTable_request_cache',
+        ),
     );
-    
+
     /**
      * Sets up class properties.
      * @return      void

@@ -35,9 +35,7 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
 
         parent::__construct( $aArguments );
 
-        $this->___oProductTable = new AmazonAutoLinks_DatabaseTable_product(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
-        );
+        $this->___oProductTable = new AmazonAutoLinks_DatabaseTable_product;
 
     }
 
@@ -148,10 +146,11 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
             if ( empty( $aASINLocales ) ) {
                 return array();
             }
+            $_sTableName   = $this->___oProductTable->getTableName();
             $_sASINLocales = "('" . implode( "','", $aASINLocales ) . "')";
             $_aResults     = $this->___oProductTable->getRows(
                 "SELECT * "
-                . "FROM {$this->___oProductTable->sTableName} "
+                . "FROM {$_sTableName} "
                 . "WHERE asin_locale in {$_sASINLocales}"
             );
             return $this->___getRowsFormatted( $_aResults );
@@ -171,6 +170,5 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
                 }
                 return $_aNewRows;
             }
-
 
 }

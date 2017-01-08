@@ -46,9 +46,7 @@ class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_
             return;
         }
 
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
-        );             
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product;
         $_iSetObjectID  = $_oProductTable->setRowByASINLocale(
             $_sASIN . '_' . strtoupper( $_sLocale ),
             $_aRow

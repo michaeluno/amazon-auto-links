@@ -281,6 +281,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_WPUtility_Transient"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility_Transient.php", 
     "AmazonAutoLinks_DatabaseTableInstall"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTableInstall.php", 
     "AmazonAutoLinks_DatabaseTable_Base"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_Base.php", 
+    "AmazonAutoLinks_DatabaseTable_Utility"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_Utility.php", 
     "AmazonAutoLinks_DatabaseTable_product"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_product.php", 
     "AmazonAutoLinks_DatabaseTable_request_cache"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_request_cache.php", 
     "AmazonAutoLinks_DOM"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_DOM.php", 

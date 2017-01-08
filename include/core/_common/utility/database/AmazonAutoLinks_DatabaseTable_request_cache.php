@@ -13,8 +13,17 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_DatabaseTable_Base {
-    
+class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_DatabaseTable_Utility {
+
+    /**
+     * Returns the table arguments.
+     * @return      array
+     * @since       3.5.0
+     */
+    protected function _getArguments() {
+        return AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_request_cache' ];
+    }
+
     /**
      * 
      * @return      string
@@ -22,7 +31,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
      */
     public function getCreationQuery() {
         // request_id bigint(20) unsigned UNIQUE NOT NULL,
-        return "CREATE TABLE " . $this->sTableName . " (
+        return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             name varchar(191) UNIQUE,    
             request_uri text,   
             type varchar(20),
@@ -57,9 +66,11 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             + array_intersect_key( $aExtra, $_aColumns ) // removes unsupported items
             + array(
                 'modified_time'   => date( 'Y-m-d H:i:s' ),
+                'expiration_time' => date( 'Y-m-d H:i:s', time() + $iDuration ),
             );
-        if ( $iDuration ) {
-            $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iDuration );
+
+        if ( -1 === $iDuration ) {
+            unset( $_aRow[ 'expiration_time' ] );
         }
 
         return $this->setRow( $_aRow );
@@ -97,7 +108,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             public function doesRowExist( $sName ) {
                 return ( boolean ) $this->getVariable(
                     "SELECT name
-                    FROM {$this->sTableName}
+                    FROM {$this->aArguments[ 'table_name' ]}
                     WHERE name = '{$sName}'"
                 );             
             }
@@ -126,7 +137,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             $_sNames   = "('" . implode( "','", $aNames ) . "')";
             $_aResults =  $this->getRows(
                 "SELECT cache,modified_time,expiration_time,charset,request_uri,name
-                FROM {$this->sTableName}
+                FROM {$this->aArguments[ 'table_name' ]}
                 WHERE name in {$_sNames}"
             );       
 
@@ -149,7 +160,7 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
             
             $_aRow = $this->getRow(
                 "SELECT cache,modified_time,expiration_time,charset,request_uri,name
-                FROM {$this->sTableName}
+                FROM {$this->aArguments[ 'table_name' ]}
                 WHERE name = '{$sName}'",
                 'ARRAY_A' 
             );                
@@ -205,22 +216,5 @@ class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_Databa
         }
         
     }
-    
-    /**
-     * Removes expired items from the table.
-     * @since       3
-     */
-    public function deleteExpired( $sExpiryTime='' ) {
 
-        $sExpiryTime = $sExpiryTime
-            ? $sExpiryTime
-            : "UTC_TIMESTAMP()";
-        $this->getVariable(
-            "DELETE FROM `{$this->sTableName}` "
-            . "WHERE expiration_time < {$sExpiryTime}" 
-        ); 
-        $this->getVariable( "OPTIMIZE TABLE `{$this->sTableName}`;" );
-        
-    }
-    
 }

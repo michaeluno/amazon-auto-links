@@ -24,12 +24,9 @@ class AmazonAutoLinks_DatabaseTableInstall {
             ? 'install'
             : 'uninstall';
             
-        foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sKey => $_sTableName ) {
-            $_sClassName = "AmazonAutoLinks_DatabaseTable_$_sKey";
-            $_oTable     = new $_sClassName(
-                $_sTableName,
-                AmazonAutoLinks_Registry::$aDatabaseTableVersions[ $_sKey ] // version
-            );
+        foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sKey => $_aArguments ) {
+            $_sClassName = "AmazonAutoLinks_DatabaseTable_{$_sKey}";
+            $_oTable     = new $_sClassName;
             $_oTable->$_sMethodName();
         }
  

@@ -91,9 +91,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
             );
 
         $this->oOption              = AmazonAutoLinks_Option::getInstance();
-        $this->oProductTable        = new AmazonAutoLinks_DatabaseTable_product(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
-        );            
+        $this->oProductTable        = new AmazonAutoLinks_DatabaseTable_product;
         $this->sCharEncoding        = get_bloginfo( 'charset' );
         $this->bIsSSL               = is_ssl();        
         $this->oDOM                 = new AmazonAutoLinks_DOM;

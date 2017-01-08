@@ -54,9 +54,7 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
             $_iCacheDuration
         );
 
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'product' ]
-        );             
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product;
         $_iSetObjectID  = $_oProductTable->setRowByASINLocale(
             $_sASIN . '_' . strtoupper( $_sLocale ),
             $_aRow
