@@ -15,24 +15,23 @@
  */
 class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_PluginUtility {
 
-    static private $___sRequestType   = 'api';
-
     private $___sRequestURI           = '';
     private $___aHTTPArguments        = array();
     private $___iCacheDuration        = 84000;
     private $___bForceCaching         = false;
-//    private $___aConstructorArguments = array();
+    private $___sRequestType          = 'api';
 
     /**
      * Sets up properties.
      *
      * @param       array   $aConstructorArguments      Parameters passed to the constructor of the API class. This is used for background cache renewal events.
      */
-    public function __construct( $sRequestURI, array $aHTTPArguments, $iCacheDuration, $bForceCaching ) {
+    public function __construct( $sRequestURI, array $aHTTPArguments, $iCacheDuration, $bForceCaching, $sRequestType='api' ) {
         $this->___sRequestURI           = $sRequestURI;
         $this->___aHTTPArguments        = $aHTTPArguments;
         $this->___iCacheDuration        = $iCacheDuration;
         $this->___bForceCaching         = $bForceCaching;
+        $this->___sRequestType          = $sRequestType;
     }
 
     /**
@@ -125,7 +124,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
 
             $this->___sleep( $sRequestURI );
 
-            add_filter( 'aal_filter_http_request_cache_name', array( __CLASS__, 'replyToModifyCacheName' ), 10, 3 );
+            add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10, 3 );
             $_oHTTP = new AmazonAutoLinks_HTTPClient(
                 $sRequestURI,
                 $iDuration,
@@ -133,13 +132,13 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
                     'timeout'       => 20,
                     'sslverify'     => false,
                 ),
-                self::$___sRequestType // request type
+                $this->___sRequestType // request type
             );
             if ( $bForceCaching ) {
                 $_oHTTP->deleteCache();
             }
             $_asResponse =  $_oHTTP->get();
-            remove_filter( 'aal_filter_http_request_cache_name', array( __CLASS__, 'replyToModifyCacheName' ), 10 );
+            remove_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10 );
             return $_asResponse;
 
         }
@@ -148,10 +147,12 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
              *
              * Check a lock transient that lasts only one second
              * as Amazon Product Advertising API only allows one request per second.
-             * @since       3
+             *
+             * @since       3.5.0
              * @return      void
              */
             private function ___sleep( $sRequestURI ) {
+
                 $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
                 $_iIteration      = 0;
                 while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
@@ -166,6 +167,8 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
             }
 
             /**
+             * Generates a cache name by removing request-specific keys from the query url.
+             *
              * @callback    add_filter  aal_filter_http_request_cache_name
              * @param       string      $sCacheName
              * @param       string      $sURL
@@ -173,9 +176,9 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
              * @since       3.5.0
              * @return      string
              */
-            static public function replyToModifyCacheName( $sCacheName, $sURL, $sRequestType ) {
+            public function replyToModifyCacheName( $sCacheName, $sURL, $sRequestType ) {
 
-                if ( self::$___sRequestType !== $sRequestType ) {
+                if ( $this->___sRequestType !== $sRequestType ) {
                     return $sCacheName;
                 }
                 // e.g. http://webservices.amazon.com/onca/xml?AWSAccessKeyId=AKIAIUOXXAXPYUKNVPVA&AssociateTag=miunosoft-20&Condition=New&IdType=ASIN&IncludeReviewsSummary=True&ItemId=B00DBYBNEE%2CB00ZV9PXP2%2CB01DYC10PE%2CB016ZNRC0Q%2CB00K2EOONI%2CB00TEFTA80%2CB01JZHCBM8%2CB00E9JIP5A%2CB01BLUCAY6%2CB009KAARUE&Operation=ItemLookup&ResponseGroup=Large&Service=AWSECommerceService&Timestamp=2017-01-08T12%3A37%3A13Z&Version=2013-08-01&Signature=yBq0JAVSG4%2BB9JthTyvfunsyuAKyhr3u3s%2BQTPMq%2Fq0%3D
@@ -183,9 +186,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
                     array( 'AWSAccessKeyId', 'AssociateTag', 'Timestamp', 'Signature', ),
                     $sURL
                 );
-                return AmazonAutoLinks_Registry::TRANSIENT_PREFIX
-                    . '_'
-                    . md5( $sURL );
+                return AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_' . md5( $sURL );
 
             }    
     

@@ -13,16 +13,20 @@
  * 
  * @package      Amazon Auto Links
  * @since        3
+ * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_UnitOptionConverter`.
+ *
  * @action       aal_action_event_convert_template_options
- * @deprecated   3.3.0
  */
-class AmazonAutoLinks_Event_Action_TemplateOptionConverter extends AmazonAutoLinks_Event_Action_Base {
-        
+class AmazonAutoLinks_Event___Action_UnitOptionConverter extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName     = 'aal_action_event_convert_unit_options';
+    protected $_iCallbackParameters = 2;
+
     /**
      * 
-     * @callback        action        aal_action_event_convert_template_options
+     * @callback        action        aal_action_event_convert_imot_options
      */
-    public function doAction( /* $iUnitID, $aInput */ ) {
+    protected function _doAction( /* $iUnitID, $aInput */ ) {
         
         $_aParams  = func_get_args() + array( 0, array() );
         $_iUnitID  = $_aParams[ 0 ];
@@ -43,6 +47,7 @@ class AmazonAutoLinks_Event_Action_TemplateOptionConverter extends AmazonAutoLin
             );    
             $_bUpdated = true;
         }       
+
         if ( $_bUpdated ) {
             AmazonAutoLinks_Event_Scheduler::prefetch( $_iUnitID );
         }

@@ -40,9 +40,11 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
 
     private $___sLocale = 'US';
 
-    private $___sDomain ='';
+    private $___sDomain = '';
 
     private $___sSecretAccessKey = '';
+
+    private $___sRequestType = 'api';
 
     private $___aAPIParameters = array(
         'Version'      => '2013-08-01',
@@ -70,9 +72,9 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
      * @since       unknown
      * @since       3.5.0       Removed the `$sVersion` parameter.
      */
-    public function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', array $aHTTPArguments=array() ) {
+    public function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', array $aHTTPArguments=array(), $sRequestType='api' ) {
 
-        $this->___aConstructorParameters = func_get_args();
+        $this->___aConstructorParameters = func_get_args() + array( '', '', '', '', array(), 'api' );
         $this->___sLocale                = $sLocale;
         $this->___sDomain                = $this->___getDomain( $sLocale );
         $this->___sSecretAccessKey       = $sSecretAccessKey;
@@ -81,6 +83,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
             $sAssociateID
         );
         $this->___aHTTPArguments         = $aHTTPArguments + $this->___aHTTPArguments;
+        $this->___sRequestType           = $sRequestType;
 
     }
         /**
@@ -121,6 +124,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
      */
     public function test() {
 
+        $this->___sRequestType = 'api_test';
         $_aResponse = $this->request(
             array(
                 'Operation'     => 'BrowseNodeLookup',
@@ -180,10 +184,11 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
             $_oAPIRequestURIBuilder->get(), // Request URI
             $_aHTTPArguments,
             $iCacheDuration,
-            $bForceCaching
+            $bForceCaching,
+            $this->___sRequestType
         );
         $_asResponse = $_oAPIRequestCache->get();
-        
+
         // If an error occurs, an array will be returned.
         if ( ! is_string( $_asResponse ) ) {
             return $_asResponse;

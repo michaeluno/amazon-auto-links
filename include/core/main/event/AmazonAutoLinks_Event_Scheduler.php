@@ -9,7 +9,7 @@
  */
 
 /**
- * Handles plugin event scheduling.
+ * Provides methods to schedule events.
  * 
  * @since       3
  */

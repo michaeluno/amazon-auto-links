@@ -12,15 +12,34 @@
  * 
  * @package      Amazon Auto Links
  * @since        3.3.0
- * @action       aal_action_api_get_similar_products
+ * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_SimilarProducts`.
  */
-class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event_Action_Base {
-        
+class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName = 'aal_action_api_get_similar_products';
+
+    private $___sAPIRequestType = 'api_product_information';
+
+    protected function _construct() {
+        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+    }
+        /**
+         * Adds the request type for excepted types.
+         *
+         * This way, cache renewal events of HTTP requests of the type do not get processed in the background.
+         * If the caches are expired, they will be fetched at the time the request is made.
+         *
+         * @return array
+         */
+        public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
+            $aExceptedRequestTypes[] = $this->___sAPIRequestType;
+            return $aExceptedRequestTypes;
+        }
+
     /**
-     * 
-     * @callback        action        aal_action_api_get_similar_products
+     *
      */
-    public function doAction( /* $aArguments=array( 0 => asins, 1 => ASIN, 2 => locale, 3 => associate id, 4 => cache_duration  ) */ ) {
+    protected function _doAction( /* $aArguments=array( 0 => asins, 1 => ASIN, 2 => locale, 3 => associate id, 4 => cache_duration  ) */ ) {
         
         $_aParams               = func_get_args() + array( null );
         $_aArguments            = $_aParams[ 0 ] + array( null, null, null, null );
@@ -111,7 +130,9 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
                 $sLocale,   // locale
                 $_sPublicKey, 
                 $_sPrivateKey,
-                $sAssociateID
+                $sAssociateID,
+                array(),    // HTTP Arguments
+                $this->___sAPIRequestType
             );
             $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
 

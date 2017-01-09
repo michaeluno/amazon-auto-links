@@ -13,14 +13,19 @@
  *
  * @since        3.5.0
  */
-class AmazonAutoLinks_Event_APIRequestCacheRenewal extends AmazonAutoLinks_Event_HTTPCacheRenewal {
+class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLinks_Event___Action_HTTPCacheRenewal {
+
+    private $___aAPIRequestTypes = array(
+        'api',
+        'api_test',
+    );
 
     protected function _construct() {
         add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+        parent::_construct();
     }
         public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
-            $aExceptedRequestTypes[] = 'api';
-            return $aExceptedRequestTypes;
+            return array_merge( $this->___aAPIRequestTypes, $aExceptedRequestTypes );
         }
 
     /**
@@ -29,29 +34,29 @@ class AmazonAutoLinks_Event_APIRequestCacheRenewal extends AmazonAutoLinks_Event
      * @return      boolean
      */
     protected function _isType( $sType ) {
-        return 'api' === $sType;
+        return in_array( $sType, $this->___aAPIRequestTypes );
     }
 
     /**
      *
      * @callback        action      aal_action_http_cache_renewal
      */
-    public function replyToRenewCache( $sURL, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
+    protected function _doAction( $sURL, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
 
         if ( ! $this->_isType( $sType ) ) {
             return;
         }
 
-        // Perform API Request.
         $_aConstructorParameters = $aHTTPArguments[ 'constructor_parameters' ] + array(
-            null, null, null, '', array()
+            null, null, null, '', array(), 'api'
         );
         $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
             $_aConstructorParameters[ 0 ],
             $_aConstructorParameters[ 1 ],
             $_aConstructorParameters[ 2 ],
             $_aConstructorParameters[ 3 ],
-            $_aConstructorParameters[ 4 ]
+            $_aConstructorParameters[ 4 ],
+            $_aConstructorParameters[ 5 ]
         );
         $_oAPI->request(
             $aHTTPArguments[ 'api_parameters' ],

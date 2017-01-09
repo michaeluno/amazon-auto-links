@@ -15,15 +15,16 @@
  * @since        3
  *
  */
-class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtility {
-    
-    public $sCacheRenewalActionName = 'aal_action_http_cache_renewal';
+class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName     = 'aal_action_http_cache_renewal';
+    protected $_iCallbackParameters = 4;
 
     /**
      * Sets up hooks.
-     * @since       3
+     * @since       3.5.0
      */
-    public function __construct() {
+    protected function _construct() {
 
         add_filter(
             'aal_filter_http_response_cache',  // filter hook name
@@ -32,22 +33,8 @@ class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtili
             4 // number of parameters
         );
 
-        add_action(
-            $this->sCacheRenewalActionName, // action hook name
-            array( $this, 'replyToRenewCache' ),
-            10,
-            4
-        );
-
-        $this->_construct();
-
     }
 
-    /**
-     * @since       3.5.0
-     * @return      void
-     */
-    protected function _construct() {}
 
     /**
      * Checks whether the given type is accepted.
@@ -63,9 +50,8 @@ class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtili
 
     /**
      *
-     * @callback        action      aal_action_http_cache_renewal
      */
-    public function replyToRenewCache( $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' ) {
+    protected function _doAction( $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' ) {
 
         if ( ! $this->_isType( $sType ) ) {
             return;
@@ -99,7 +85,7 @@ class AmazonAutoLinks_Event_HTTPCacheRenewal extends AmazonAutoLinks_PluginUtili
 
             // It is expired. So schedule a task that renews the cache in the background.
             $_bScheduled = $this->scheduleSingleWPCronTask(
-                $this->sCacheRenewalActionName,
+                $this->_sActionHookName,
                 array(
                     $aCache[ 'request_uri' ],
                     $iCacheDuration,

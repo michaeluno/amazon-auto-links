@@ -11,16 +11,36 @@
 /**
  * Searches a product by the given ASIN and locale.
  
- * @package      Amazon Auto Links
- * @since        3
+ * @package     Amazon Auto Links
+ * @since       3
+ * @since       3.5.0       Renamed from `AmazonAutoLinks_Event_Action_API_SearchProduct`.
  */
-class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Event_Action_Base {
-    
+class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName = 'aal_action_api_get_product_info';
+
+    private $___sAPIRequestType = 'api_product_information';
+
+    protected function _construct() {
+        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+    }
+        /**
+         * Adds the request type for excepted types.
+         *
+         * This way, cache renewal events of HTTP requests of the type do not get processed in the background.
+         * If the caches are expired, they will be fetched at the time the request is made.
+         *
+         * @return array
+         */
+        public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
+            $aExceptedRequestTypes[] = $this->___sAPIRequestType;
+            return $aExceptedRequestTypes;
+        }
+
     /**
      * Searches the product and saves the data.
-     * @callback        action        aal_action_api_get_product_info
      */
-    public function doAction( /* $aArguments */ ) {
+    protected function _doAction( /* $aArguments */ ) {
 
         $_aParams        = func_get_args() + array( null );
 
@@ -485,10 +505,12 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                 $sLocale,   // locale
                 $_sPublicKey, 
                 $_sPrivateKey,
-                $sAssociateID
+                $sAssociateID,
+                array(),    // HTTP arguments
+                $this->___sAPIRequestType  // type
             );
 
-// @note 3.5.0 The cache duration was set to 60 for some reasons.
+            // @note 3.5.0 The cache duration was 60 for some reasons.
             $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
             return $this->getElement(
                 $_aRawData, // subject
@@ -497,4 +519,5 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
             );
             
         }
+
 }

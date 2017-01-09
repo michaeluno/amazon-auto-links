@@ -27,7 +27,6 @@ class AmazonAutoLinks_Event {
     public function __construct() {
         add_action( 'aal_action_loaded_plugin', array( $this, 'replyToLoadEvents' ) );
     }
-    
         /**
          * @return      void
          * @since       3.3.0
@@ -35,57 +34,66 @@ class AmazonAutoLinks_Event {
         public function replyToLoadEvents() {
 
             do_action( 'aal_action_events' );
-        
-            new AmazonAutoLinks_Event_HTTPCacheRenewal;
-            
-            new AmazonAutoLinks_Event_Action_SimplePie_CacheRenewal(
-                'aal_action_simplepie_renew_cache'  // action name
-            );
-            
-            // 3.4.0+
-            new AmazonAutoLinks_Event_Schedule_DeleteExpiredCaches;
 
-            // @deprecated  3.3.0
-            // new AmazonAutoLinks_Event_Action_TemplateOptionConverter(
-                // 'aal_action_event_convert_template_options',
-                // 2   // number of arguments
-            // );
-                    
-            // This must be called after the above action hooks.
-            $_oOption               = AmazonAutoLinks_Option::getInstance();
-            $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
+            $this->___registerActions();
 
-            // Force executing actions.
-            new AmazonAutoLinks_Shadow(    
-                $_bIsIntenseCachingMode
-                    ? array(
-                        'aal_action_unit_prefetch',
-                        'aal_action_simplepie_renew_cache',
-                        'aal_action_api_transient_renewal',
-                        'aal_action_api_get_product_info',
-                        'aal_action_api_get_customer_review',
-                        'aal_action_api_get_similar_products',  // 3.3.0+
-                        'aal_action_http_cache_renewal',
-                        'aal_action_delete_expired_caches', // 3.4.0+
-                    )
-                    : array(
-                        'aal_action_unit_prefetch',
-                        'aal_action_api_get_product_info',
-                        'aal_action_api_get_customer_review',
-                        'aal_action_api_get_similar_products',  // 3.3.0+
-                        'aal_action_http_cache_renewal',
-                    )
-            );    
-                    
-            if ( ! $_bIsIntenseCachingMode ) {
-                if ( AmazonAutoLinks_Shadow::isBackground() ) {
-                    exit;
-                }
-            }
-                  
+            $this->___handleBackgroundRoutines();
+
             $this->_handleQueryURL();
             
-        }    
+        }
+            /**
+             * @since       3.5.0
+             * @return      void
+             */
+            private function ___registerActions() {
+
+                new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
+                new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
+                new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
+
+            }
+
+            /**
+             * @since       3.5.0
+             * @return      void
+             */
+            private function ___handleBackgroundRoutines() {
+
+                // This must be called after the above action hooks.
+                $_oOption               = AmazonAutoLinks_Option::getInstance();
+                $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
+
+                // Force executing actions.
+                new AmazonAutoLinks_Shadow(
+                    $_bIsIntenseCachingMode
+                        ? array(
+                            'aal_action_unit_prefetch',
+                            'aal_action_simplepie_renew_cache',
+                            'aal_action_api_transient_renewal',
+                            'aal_action_api_get_product_info',
+                            'aal_action_api_get_customer_review',
+                            'aal_action_api_get_similar_products',  // 3.3.0+
+                            'aal_action_http_cache_renewal',
+                            'aal_action_delete_expired_caches', // 3.4.0+
+                        )
+                        : array(
+                            'aal_action_unit_prefetch',
+                            'aal_action_api_get_product_info',
+                            'aal_action_api_get_customer_review',
+                            'aal_action_api_get_similar_products',  // 3.3.0+
+                            'aal_action_http_cache_renewal',
+                        )
+                );
+
+                if ( ! $_bIsIntenseCachingMode ) {
+                    if ( AmazonAutoLinks_Shadow::isBackground() ) {
+                        exit;
+                    }
+                }
+
+            }
+
             /**
              * 
              * @since       3.1.0
@@ -100,11 +108,11 @@ class AmazonAutoLinks_Event {
                 }
                 
                 if ( 'feed' === $_GET[ $_sQueryKey ] ) {
-                    new AmazonAutoLinks_Event_Feed;
+                    new AmazonAutoLinks_Event___Query_Feed;
                     return;
                 }
                 
-                new AmazonAutoLinks_Event_Redirect( $_sQueryKey );
+                new AmazonAutoLinks_Event___Query_Redirect( $_sQueryKey );
                 
             }    
     

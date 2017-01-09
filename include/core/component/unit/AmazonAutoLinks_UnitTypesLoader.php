@@ -68,32 +68,13 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
          */
         public function replyToLoadEvents() {
 
-            new AmazonAutoLinks_Event_Action_UnitPrefetchByID(
-                'aal_action_unit_prefetch'
-            );
-
-            new AmazonAutoLinks_Event_Action_UnitPrefetchByArguments(
-                'aal_action_unit_prefetch_by_arguments'
-            );
-            
-            new AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal(
-                'aal_action_api_transient_renewal'
-            );
-                    
-            new AmazonAutoLinks_Event_Action_API_SearchProduct(
-                'aal_action_api_get_product_info'
-            );
-            
-            new AmazonAutoLinks_Event_Action_CustomerReview(
-                'aal_action_api_get_customer_review'
-            );        
-
-            new AmazonAutoLinks_Event_Action_SimilarProducts(
-                'aal_action_api_get_similar_products'
-            );        
-
-            // 3.5.0+
-            new AmazonAutoLinks_Event_APIRequestCacheRenewal;
+            new AmazonAutoLinks_Event___Action_UnitPrefetchByID;
+            new AmazonAutoLinks_Event___Action_UnitPrefetchByArguments;
+            new AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal;
+            new AmazonAutoLinks_Event___Action_APIRequestSearchProduct;
+            new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;
+            new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
+            new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+
 
         }
         

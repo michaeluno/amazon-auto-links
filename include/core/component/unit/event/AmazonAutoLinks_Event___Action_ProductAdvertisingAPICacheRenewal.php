@@ -12,15 +12,16 @@
  * Handles  SimplePie cache renewal events.
  * @package      Amazon Auto Links
  * @since        3
- * @action       aal_action_api_transient_renewal
+ * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal`.
  */
-class AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal extends AmazonAutoLinks_Event_Action_Base {    
-    
+class AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName = 'aal_action_api_transient_renewal';
+
     /**
-     * 
-     * @callback        action        aal_action_api_transient_renewal
+     *
      */
-    public function doAction( /* $aRequestInfo */ ) {
+    protected function _doAction( /* $aRequestInfo */ ) {
         
         $_oOption        = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {

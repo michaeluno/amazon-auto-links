@@ -10,17 +10,18 @@
 
 /**
  * Handles  SimplePie cache renewal events.
+ *
  * @package      Amazon Auto Links
  * @since        3
- * @action       aal_action_simplepie_renew_cache
  */
-class AmazonAutoLinks_Event_Action_SimplePie_CacheRenewal extends AmazonAutoLinks_Event_Action_Base {
-        
+class AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName = 'aal_action_simplepie_renew_cache';
+
     /**
-     * 
-     * @callback        action        aal_action_simplepie_renew_cache
+     *
      */
-    public function doAction( /* $asURLs */ ) {
+    protected function _doAction( /* $asURLs */ ) {
         
         $_aParams = func_get_args() + array( null );
         $asURLs   = $_aParams[ 0 ];
@@ -37,8 +38,7 @@ class AmazonAutoLinks_Event_Action_SimplePie_CacheRenewal extends AmazonAutoLink
     
         // Set the background flag to True so that it won't trigger the event action recursively.
         $_oFeed->setBackground( true );
-        $_oFeed->init();    
-
+        $_oFeed->init();
         
     }   
     

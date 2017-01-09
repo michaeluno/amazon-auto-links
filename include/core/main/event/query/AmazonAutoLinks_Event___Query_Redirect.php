@@ -10,12 +10,11 @@
 
 /**
  * Redirects the visitor to an appropriate page depending on the request.
- * @package      Amazon Auto Links
- * @since        3
- * 
- * @filter      apply       aal_filter_store_redirect_url   
+ * @package     Amazon Auto Links
+ * @since       3
+ * @since       3.5.0   Renamed from `AmazonAutoLinks_Event_Redirect`
  */
-class AmazonAutoLinks_Event_Redirect {
+class AmazonAutoLinks_Event___Query_Redirect{
     
     /**
      * Routes url requests.

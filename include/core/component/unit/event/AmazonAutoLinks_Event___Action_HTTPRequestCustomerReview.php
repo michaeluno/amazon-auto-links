@@ -12,9 +12,11 @@
  * Handles  SimplePie cache renewal events.
  * @package      Amazon Auto Links
  * @since        3
- * @action       aal_action_api_get_customer_review
+ * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_CustomerReview`.
  */
-class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_Action_Base {
+class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAutoLinks_Event___Action_Base {
+
+    protected $_sActionHookName = 'aal_action_api_get_customer_review';
 
     protected function _construct() {
         add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
@@ -58,10 +60,9 @@ class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_
         }
 
     /**
-     * 
-     * @callback        action        aal_action_api_get_customer_review
+     *
      */
-    public function doAction( /* $aArguments=array( 0 => url, 1 => asin, 2 => locale, 3 => cache_duration  ) */ ) {
+    protected function _doAction( /* $aArguments=array( 0 => url, 1 => asin, 2 => locale, 3 => cache_duration  ) */ ) {
         
         $_aParams        = func_get_args() + array( null );
         $_aArguments     = $_aParams[ 0 ] + array( null, null, null, null );
