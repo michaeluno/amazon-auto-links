@@ -283,6 +283,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `asin` shortcode and function argument which list products of the set ASINs.
 - Added the `Contextual` unit type.
 - Added the `Sort Order` option to the `Item Look-up` unit type.
+- Refined the API request caching mechanism.
 - (breaking change) Fixed typos in option key names. This fix affects the stored option values of `Interval for Removing Expired Caches` and `Caching Mode`. Some users may need to re-save the options.
 
 = 3.4.13 - 01/05/2017 =

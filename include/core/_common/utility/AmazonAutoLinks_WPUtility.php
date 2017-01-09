@@ -16,7 +16,26 @@
  * @since       3       Changed the name from `AmazonAutoLinks_WPUtilities`.
  */
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
-    
+
+    /**
+     * Schedules a WP Cron single event.
+     * @since       3.5.0
+     * @return      boolean     True if scheduled, false otherwise.
+     */
+    static public function scheduleSingleWPCronTask( $sActionName, array $aArguments, $iTime=0 ) {
+
+        if ( wp_next_scheduled( $sActionName, $aArguments ) ) {
+            return false;
+        }
+        $_bCancelled = wp_schedule_single_event(
+            $iTime ? $iTime : time(), // now
+            $sActionName,   // an action hook name which gets executed with WP Cron.
+            $aArguments     // must be enclosed in an array.
+        );
+        return false !== $_bCancelled;
+
+    }
+
     /**
      * Returns the readable date-time string.
      */

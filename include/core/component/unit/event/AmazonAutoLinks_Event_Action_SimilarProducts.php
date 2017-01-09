@@ -22,41 +22,23 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
      */
     public function doAction( /* $aArguments=array( 0 => asins, 1 => ASIN, 2 => locale, 3 => associate id, 4 => cache_duration  ) */ ) {
         
-        $_aParams        = func_get_args() + array( null );
-        $_aArguments     = $_aParams[ 0 ] + array( null, null, null, null );
-        $_aASINs         = $_aArguments[ 0 ];
-        $_sASIN          = $_aArguments[ 1 ];
-        $_sLocale        = $_aArguments[ 2 ];
-        $_sAssociateID   = $_aArguments[ 3 ];
-        $_iCacheDuration = $_aArguments[ 4 ];
+        $_aParams               = func_get_args() + array( null );
+        $_aArguments            = $_aParams[ 0 ] + array( null, null, null, null );
+        $_aSimilarProductASINs  = $_aArguments[ 0 ];
+        $_sSubjectASIN          = $_aArguments[ 1 ];
+        $_sLocale               = $_aArguments[ 2 ];
+        $_sAssociateID          = $_aArguments[ 3 ];
+        $_iCacheDuration        = $_aArguments[ 4 ];
 
-        $_aASINs         = array_diff( 
-            $_aASINs,   // the similar items to fetch 
-            array( $_sASIN ) // the subject product
+        $_aSimilarProductASINs  = array_diff(
+            $_aSimilarProductASINs,     // the similar items to fetch
+            array( $_sSubjectASIN )     // the subject product
         );             
-        $_aProducts      = $this->_getProducts( $_aASINs, $_sASIN, $_sLocale, $_sAssociateID, $_iCacheDuration );
-
-        // This caused infinite recursion.
-/*         $_oUnit          = new AmazonAutoLinks_UnitOutput_item_lookup(
-            array(
-                'Operation'                 => 'ItemLookup',
-                'ItemId'                    => implode( ',', $_aASINs ),
-                'search_per_keyword'        => true,
-                'title_length'              => -1,
-                '_search_similar_products'  => false,
-                'cache_duration'            => $_iCacheDuration,
-            )
-        );
-        $_aProducts      = $_oUnit->fetch(); */
-
-        $_aRow           = $this->_formatColumns( 
-            $_aProducts,
-            $_iCacheDuration
-        );
-
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product;
-        $_iSetObjectID  = $_oProductTable->setRowByASINLocale(
-            $_sASIN . '_' . strtoupper( $_sLocale ),
+        $_aProducts             = $this->___getProducts( $_aSimilarProductASINs, $_sLocale, $_sAssociateID, $_iCacheDuration );
+        $_aRow                  = $this->___getRowFormatted( $_aProducts, $_iCacheDuration );
+        $_oProductTable         = new AmazonAutoLinks_DatabaseTable_product;
+        $_iSetObjectID          = $_oProductTable->setRowByASINLocale(
+            $_sSubjectASIN . '_' . strtoupper( $_sLocale ),
             $_aRow
         );  
 
@@ -65,14 +47,19 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
         /**
          * Performs API request for the similar products.
          * 
-         * Do not use the AmazonAutoLinks_UnitOutput_item_lookup class to fetch items because it will recursively fetch similar items of simialr items.
+         * Do not use the AmazonAutoLinks_UnitOutput_item_lookup class to fetch items because it will recursively fetch similar items of similar items.
          * 
          * @return      array
          * @since       3.3.0
+         * @since       3.5.0       Renamed from `_getProducts()`. Removed the `$sASIN` parameter.
          * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
          */
-        private function _getProducts( $aASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
-            
+        private function ___getProducts( $aASINs, $sLocale, $sAssociateID, $iCacheDuration ) {
+
+            if ( empty( $aASINs ) ) {
+                return array();
+            }
+
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isAPIConnected() ) {
                 return array();
@@ -103,7 +90,7 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
                 // (optional)
                 'IncludeReviewsSummary' => "True", 
                 
-                // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
+                // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
                 'ItemId'                => $_sASINs,    
                 
                 // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
@@ -119,19 +106,14 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
                 'ResponseGroup'         => 'Large', 
                 
             );
-            
-            
+
             $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
                 $sLocale,   // locale
                 $_sPublicKey, 
                 $_sPrivateKey,
                 $sAssociateID
             );
-            $_aRawData = $_oAmazonAPI->request(
-                $_aAPIArguments,
-                $sLocale,           
-                $iCacheDuration // cache duration - null to not to use cache.
-            );
+            $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
 
             return $this->getElement(
                 $_aRawData, // subject
@@ -142,18 +124,19 @@ class AmazonAutoLinks_Event_Action_SimilarProducts extends AmazonAutoLinks_Event
         }            
         /**
          * @since       3.3.0
+         * @since       3.5.0       Renamed from `_formatColumns()`.
          * @return      array
          */
-        private function _formatColumns( $aProducts, $iCacheDuration ) {
-            $_aColumns = array(
+        private function ___getRowFormatted( $aProducts, $iCacheDuration ) {
+            $_aRow = array(
                 'similar_products'        => $this->getAsArray( $aProducts ),
                 'modified_time'           => date( 'Y-m-d H:i:s' ),
             );
             // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
             if ( $iCacheDuration ) {
-                $_aColumns[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
+                $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
             }
-            return $_aColumns;
+            return $_aRow;
         }
 
 }

@@ -10,15 +10,18 @@
  
 /**
  * Performs requests to the Product Advertising API.
+ *
+ * @sicne       unknown
+ * @since       3.5.0           Extends `AmazonAutoLinks_PluginUtility`.
  */
-class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdvertisingAPI_Base {
+class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Add the prefix, https:, for a SSL server, otherwise, http:.
      * 
      * @see            http://docs.aws.amazon.com/AWSECommerceService/latest/DG/AnatomyOfaRESTRequest.html
      */
-    protected static $aTopLevelDomains = array(
+    private static $___aTopLevelDomains = array(
         'CA'    => 'ca',
         'CN'    => 'cn',
         'DE'    => 'de',
@@ -33,38 +36,79 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
         'MX'    => 'com.mx',        // 3.4.4+
     );
 
-    protected $sLocale = 'US';
-    
-    protected $sUserAgent = "Amazon Auto Links";
-    
-    public function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', $sVersion='2013-08-01' ) {  // 
-         
-        $this->sLocale          = $sLocale;
-        $this->sDomain          = $this->getDomain( $sLocale );
-        $this->sSecretAccessKey = $sSecretAccessKey;
-                
-        $this->aParams = array(
-            'AWSAccessKeyId'    => $sAccessKey,
-            'Version'           => $sVersion,   // 2011-08-01 etc
-            'AssociateTag'      => empty ( $sAssociateID ) 
-                ? self::$aMandatoryParameters[ 'AssociateTag' ] 
-                : $sAssociateID,
-        );                
-                
-        // The parent constructor has a cache renewal scheduling task so it must be called.
-        parent::__construct();            
-                
-    }        
+    private $___aConstructorParameters = array();
+
+    private $___sLocale = 'US';
+
+    private $___sDomain ='';
+
+    private $___sSecretAccessKey = '';
+
+    private $___aAPIParameters = array(
+        'Version'      => '2013-08-01',
+        'Service'      => 'AWSECommerceService',
+        // a dummy Amazon Associate tag - required as the API returns an error without it.
+        'AssociateTag' => 'amazon-auto-links-20',
+    );
+
+    /**
+     * @var array
+     */
+    private $___aHTTPArguments = array(
+        'timeout'       => 20,
+        'redirection'   => 5,
+        'sslverify'     => false,
+    );
+
+    /**
+     * AmazonAutoLinks_ProductAdvertisingAPI constructor.
+     *
+     * @param       string   $sLocale
+     * @param       string   $sAccessKey
+     * @param       string   $sSecretAccessKey
+     * @param       string   $sAssociateID
+     * @since       unknown
+     * @since       3.5.0       Removed the `$sVersion` parameter.
+     */
+    public function __construct( $sLocale, $sAccessKey, $sSecretAccessKey, $sAssociateID='', array $aHTTPArguments=array() ) {
+
+        $this->___aConstructorParameters = func_get_args();
+        $this->___sLocale                = $sLocale;
+        $this->___sDomain                = $this->___getDomain( $sLocale );
+        $this->___sSecretAccessKey       = $sSecretAccessKey;
+        $this->___aAPIParameters         = $this->___getAPIParametersFormatted(
+            $sAccessKey,
+            $sAssociateID
+        );
+        $this->___aHTTPArguments         = $aHTTPArguments + $this->___aHTTPArguments;
+
+    }
+        /**
+         * @param       string      $sAccessKey
+         * @param       string      $sAssociateID
+         * @return      array
+         * @since       3.5.0
+         */
+        private function ___getAPIParametersFormatted( $sAccessKey, $sAssociateID ) {
+            $_aAPIParameters = array(
+                'AWSAccessKeyId'    => $sAccessKey,
+            ) + $this->___aAPIParameters;
+            if ( ! empty( $sAssociateID ) ) {
+                $_aAPIParameters[ 'AssociateTag' ] = $sAssociateID;
+            }
+            return $_aAPIParameters;
+        }
+
         /**
          * Generates a domain url from the given locale identifier.
          * @return      string
          */
-        protected function getDomain( $sLocale ) {
-            $sLocale = ( $sKey = array_search( strtolower( $sLocale ), self::$aTopLevelDomains ) ) 
+        private function ___getDomain( $sLocale ) {
+            $sLocale = ( $sKey = array_search( strtolower( $sLocale ), self::$___aTopLevelDomains ) ) 
                 ? $sKey     // This allows the user to pass the top level domain as the locale. 
                 : strtoupper( $sLocale );    // sanitize the locale key
-            $_sTopLevelDomain = isset( self::$aTopLevelDomains[ $sLocale ] )
-                ? self::$aTopLevelDomains[ $sLocale ]
+            $_sTopLevelDomain = isset( self::$___aTopLevelDomains[ $sLocale ] )
+                ? self::$___aTopLevelDomains[ $sLocale ]
                 : 'com';    // when a transient gets cleared unexpectedly, it might occur 
             return "webservices.amazon.{$_sTopLevelDomain}";    
         }
@@ -82,7 +126,6 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
                 'Operation'     => 'BrowseNodeLookup',
                 'BrowseNodeId'  => '1000',    // the Books node 
             ),
-            $this->sLocale,
             60     // 1 minutes
         );            
         return ( boolean ) ( 
@@ -95,64 +138,62 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
     /**
      * Preforms an API request in the background if no cache is available.
      * 
-     * @since            2.0.4.1b
+     * @since           2.0.4.1b
+     * @remark          Accessed publicly.
+     * @since           3.5.0       Removed the `$sLocale` parameter.
+     * @return          boolean     True if scheduled; otherwise, false.
      */
-    public function scheduleInBackground( array $aParams, $sLocale='' ) {
-
-        if ( ! $this->isCached( $aParams ) ) {
-            return $this->_scheduleCacheRenewal(
+    public function scheduleInBackground( array $aAPIParameters, $iCacheDuration=3600 ) {
+        return $this->scheduleSingleWPCronTask(
+            'aal_action_api_transient_renewal',
+            array(
                 array(
-                    'parameters' => $aParams,
-                    'locale'     => $sLocale
-                        ? $sLocale 
-                        : $this->sLocale,
-                )            
-            );
-        }
-        return false;
+                    'parameters'     => $aAPIParameters,
+                    'locale'         => $this->___sLocale,
+                    'cache_duration' => $iCacheDuration,
+                )
+            ),
+            time()
+        );
     }
     
     /**
      * Performs an API request from the given request API parameters and returns the result as associative array.
-     * 
-     * @param            string            $sType            The return type, either 'array', 'json'
+     *
+     * @remark      Accessed publicly
+     * @since       unknown
+     * @since       3.5.0       Removed the $sLocale, $sType, $iTimeout, $iRedirection, $sHeaders, $sUserAgent parameters.
      */
-    public function request( array $aParams, $sLocale='', $iCacheDuration=3600, $sType='array', $iTimeout=20, $iRedirection=5, $sHeaders='', $sUserAgent='' ) {
-        
-        // Arguments
-        $aHTTPArgs = array(
-            'timeout'       => $iTimeout,
-            'redirection'   => $iRedirection,
-            'sslverify'     => false,
-            'headers'       => ! empty( $sHeaders ) 
-                ? $sHeaders 
-                : null,
-            'user-agent'    => $sUserAgent
-                ? $sUserAgent 
-                : $this->sUserAgent,
-        );
-        $aHTTPArgs = array_filter( $aHTTPArgs );    // drop non value elements.
+    public function request( array $aAPIParameters, $iCacheDuration=3600, $bForceCaching=false ) {
 
-        // Request
-        $vResponse = $this->requestWithCache( 
-            $this->getSignedRequestURI( $aParams, $sLocale ), 
-            $aHTTPArgs, 
-            $aParams,
-            $iCacheDuration,
-            $sLocale 
-                ? $sLocale 
-                : $this->sLocale
+        $_oAPIRequestURIBuilder = new AmazonAutoLinks_ProductAdvertisingAPI___URIBuilder(
+            $aAPIParameters + $this->___aAPIParameters,
+            $this->___sSecretAccessKey,
+            $this->___sDomain
         );
-    
-        // If an error occurs, 
-        if ( ! is_string( $vResponse ) ) {    
-            return $vResponse;
+        // Inject additional arguments for the background cache renewal event.
+        $_aHTTPArguments        = $this->___aHTTPArguments + array(
+            'constructor_parameters' => $this->___aConstructorParameters,
+            'api_parameters'         => $aAPIParameters,    
+        );
+        $_oAPIRequestCache      = new AmazonAutoLinks_ProductAdvertisingAPI___Cache(
+            $_oAPIRequestURIBuilder->get(), // Request URI
+            $_aHTTPArguments,
+            $iCacheDuration,
+            $bForceCaching
+        );
+        $_asResponse = $_oAPIRequestCache->get();
+        
+        // If an error occurs, an array will be returned.
+        if ( ! is_string( $_asResponse ) ) {
+            return $_asResponse;
         }
-            
-        $_sXMLResponse = $vResponse;
+
+        // At this point, it is an XML response.
+        $_sXMLResponse = $_asResponse;
         
         // It returns a string if it's not a valid XML content.
-        $_boXML = AmazonAutoLinks_Utility::getXMLObject( $_sXMLResponse );
+        $_boXML = $this->getXMLObject( $_sXMLResponse );
         if ( false === $_boXML ) {
             return array( 
                 'Error' => 
@@ -162,137 +203,8 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_ProductAdver
                     ) 
             );    
         }
-                    
-        // Return the result with the specified type.
-        if ( 'xml' === $sType ) {
-            return $_sXMLResponse;
-        }
-        else if ( 'array' === $sType ) {
-            return AmazonAutoLinks_Utility::convertXMLtoArray( $_boXML );
-        }
-        else if ( 'json' == $sType ) { 
-            return AmazonAutoLinks_Utility::convertXMLtoJSON( $_boXML );
-        }
-        
+        return $this->convertXMLtoArray( $_boXML );
+
     }
-            
-    /**
-     * The aws_signed_request() function, Modified by Michael Uno.
-     * 
-     * @see                  http://www.ulrichmierendorff.com/software/aws_hmac_signer.html
-     * @copyright            Copyright (c) 2013-2017, Michael Uno
-     * @copyright            Copyright (c) 2009-2012 Ulrich Mierendorff
-    
-    Copyright (c) 2009-2012 Ulrich Mierendorff
 
-    Permission is hereby granted, free of charge, to any person obtaining a
-    copy of this software and associated documentation files (the "Software"),
-    to deal in the Software without restriction, including without limitation
-    the rights to use, copy, modify, merge, publish, distribute, sublicense,
-    and/or sell copies of the Software, and to permit persons to whom the
-    Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in
-    all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-    DEALINGS IN THE SOFTWARE.
-    */
-    public function getSignedRequestURI( $aParams=array(), $sLocale='' ) {
-        
-        // Build the query string.
-        $_sQuery     = $this->_formatQueryPart( 
-            $_aParams = $this->_formatQueryArguments( $aParams )
-        );
-
-        $_sURIPart   = '/onca/xml';
-        $_sDomain    = empty( $sLocale ) 
-            ? $this->sDomain 
-            : $this->getDomain( $sLocale );
-        $_sScheme    = is_ssl() 
-            ? "https" 
-            : "http";              
-        $_sSignature = $this->_getAPIRequestSignature(
-            $this->sSecretAccessKey,
-            $_sQuery, 
-            'GET', 
-            $_sDomain, 
-            $_sURIPart  
-        );
-        
-        // Returns the request URI with the signature.
-        return $_sScheme . "://" . $_sDomain . $_sURIPart 
-            . '?' . $_sQuery . '&Signature=' . $_sSignature;
-                
-    }
-        /**
-         * @return      array
-         */
-        private function _formatQueryArguments( array $aArguments ) {
-            
-            // Required keys
-            $aArguments = array(
-                    'Timestamp' => gmdate( 'Y-m-d\TH:i:s\Z' ),
-                )
-                + array_filter( $aArguments )
-                + $this->aParams
-                + self::$aMandatoryParameters
-            ;
-
-            // Sort - required for matching with embedded query string in the signature.
-            ksort( $aArguments );
-            return $aArguments;
-            
-        }         
-        /**
-         * 
-         * @since       3
-         * @return      string      The formatted query part of the request URI.
-         */
-        private function _formatQueryPart( array $aArguments ) {
-            
-            $_aQuery = array();
-            foreach ( $aArguments as $_sKey => $_sValue ) {
-                $_sKey     = str_replace( '%7E', '~', rawurlencode( $_sKey ) );
-                $_sValue   = str_replace( '%7E', '~', rawurlencode( $_sValue ) );
-                $_aQuery[] = $_sKey . '=' . $_sValue;
-            }
-            return implode( '&', $_aQuery );                    
-            
-        }   
-        /**
-         * Creates a API request signature.
-         * 
-         * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/rest-signature.html
-         * @since       3
-         * @return      string
-         */
-        private function _getAPIRequestSignature( $sSecretAcesssKey, $sQuery, $sMethod, $sDomain, $sURIPath ) {
-
-            // Create a signature 
-            $_sSign = "GET" . "\n"
-                . $sDomain . "\n"
-                . $sURIPath . "\n"
-                . $sQuery;                
-            
-            return str_replace( 
-                '%7E', '~', 
-                rawurlencode( 
-                    base64_encode( 
-                        hash_hmac( 
-                            'sha256', 
-                            $_sSign, 
-                            $sSecretAcesssKey, 
-                            true 
-                        ) 
-                    )
-                ) 
-            );
-        }              
-        
 }

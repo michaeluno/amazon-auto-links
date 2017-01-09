@@ -15,7 +15,48 @@
  * @action       aal_action_api_get_customer_review
  */
 class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_Action_Base {
-        
+
+    protected function _construct() {
+        add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
+//        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+    }
+//        public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
+//            $aExceptedRequestTypes[] = 'customer_review';
+//            return $aExceptedRequestTypes;
+//        }
+        /**
+         * Remove request specific query argument in the URL query string to construct a cache name.
+         * @callback    add_filter  aal_filter_http_request_cache_name
+         * @param       string      $sCacheName
+         * @param       string      $sURL
+         * @param       string      $sRequestType
+         * @return      string
+         * @since       3.5.0
+         */
+        public function replyToModifyHTTPRequestCacheName( $sCacheName, $sURL, $sRequestType ) {
+
+            if ( 'customer_review' !== $sRequestType ) {
+                return $sCacheName;
+            }
+            // e.g. https://www.amazon.com/reviews/iframe?akid=AKIAIUOXXAXPYUKNVPVA&alinkCode=xm2&asin=B00DBYBNEE&atag=amazon-auto-links-20&exp=2017-01-08T17%3A14%3A23Z&summary=1&v=2&sig=Ey0%2FaqdtYsl1kf8PyUA4hst9SJQBfjYX2EBJsvMEVAU%3D
+            $sURL = remove_query_arg(
+                array(
+                    'akid',         //=AKIAIUOXXAXPYUKNVPVA
+                    'alinkCode',    //=xm2
+                    'atag',         //=amazon-auto-links-20
+                    'exp',          //=2017-01-08T17%3A14%3A23Z
+                    'summary',      //=1
+                    'v',            //=2
+                    'sig',          //=Ey0%2FaqdtYsl1kf8PyUA4hst9SJQBfjYX2EBJsvMEVAU%3D
+                ),
+                $sURL
+            );
+            return AmazonAutoLinks_Registry::TRANSIENT_PREFIX
+                . '_'
+                . md5( $sURL );
+
+        }
+
     /**
      * 
      * @callback        action        aal_action_api_get_customer_review
@@ -29,9 +70,9 @@ class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_
         $_sLocale        = $_aArguments[ 2 ];
         $_iCacheDuration = $_aArguments[ 3 ];
 
-        add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
-        $_oHTTP         = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, null, 'customer_review' );
-        $_sHTMLBody     = $_oHTTP->get();
+        $_oHTTP          = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, null, 'customer_review' );
+        $_sHTMLBody      = $_oHTTP->get();
+
         if ( ! $_sHTMLBody ) {
             return;
         }        
@@ -86,36 +127,5 @@ class AmazonAutoLinks_Event_Action_CustomerReview extends AmazonAutoLinks_Event_
             
         }
 
-        /**
-         * Remove request specific query argument in the URL query string to construct a cache name.
-         * @param       string      $sCacheName
-         * @param       string      $sURL
-         * @param       string      $sRequestType
-         * @return      string
-         * @since       3.5.0
-         */
-        public function replyToModifyHTTPRequestCacheName( $sCacheName, $sURL, $sRequestType ) {
-
-            if ( 'customer_review' !== $sRequestType ) {
-                return $sCacheName;
-            }
-            // e.g. https://www.amazon.com/reviews/iframe?akid=AKIAIUOXXAXPYUKNVPVA&alinkCode=xm2&asin=B00DBYBNEE&atag=amazon-auto-links-20&exp=2017-01-08T17%3A14%3A23Z&summary=1&v=2&sig=Ey0%2FaqdtYsl1kf8PyUA4hst9SJQBfjYX2EBJsvMEVAU%3D
-            $sURL = remove_query_arg(
-                array(
-                    'akid',         //=AKIAIUOXXAXPYUKNVPVA
-                    'alinkCode',    //=xm2
-                    'atag',         //=amazon-auto-links-20
-                    'exp',          //=2017-01-08T17%3A14%3A23Z
-                    'summary',      //=1
-                    'v',            //=2
-                    'sig',          //=Ey0%2FaqdtYsl1kf8PyUA4hst9SJQBfjYX2EBJsvMEVAU%3D
-                ),
-                $sURL
-            );
-            return AmazonAutoLinks_Registry::TRANSIENT_PREFIX
-                . '_'
-                . md5( $sURL );
-
-        }
 
 }

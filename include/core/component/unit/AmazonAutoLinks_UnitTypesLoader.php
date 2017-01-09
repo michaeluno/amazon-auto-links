@@ -91,7 +91,10 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             new AmazonAutoLinks_Event_Action_SimilarProducts(
                 'aal_action_api_get_similar_products'
             );        
-            
+
+            // 3.5.0+
+            new AmazonAutoLinks_Event_APIRequestCacheRenewal;
+
         }
         
     

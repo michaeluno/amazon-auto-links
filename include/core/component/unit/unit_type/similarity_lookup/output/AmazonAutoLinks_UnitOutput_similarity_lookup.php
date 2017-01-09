@@ -60,8 +60,7 @@ class AmazonAutoLinks_UnitOutput_similarity_lookup extends AmazonAutoLinks_UnitO
         return $_oAPI->request( 
             $this->getAPIParameterArray( 
                 $this->oUnitOption->get( 'Operation' ) 
-            ), 
-            $this->oUnitOption->get( 'country' ),   // locale
+            ),
             $this->oUnitOption->get( 'cache_duration' )
         );    
                  

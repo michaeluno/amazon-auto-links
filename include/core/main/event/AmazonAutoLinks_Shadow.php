@@ -49,15 +49,24 @@ class AmazonAutoLinks_Shadow {
         $aActionHooks = ( array ) $aActionHooks;
         
         // If not called from the background, return.
-        if ( isset( $_GET['doing_wp_cron'] ) ) return;    // WP Cron
-        if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin-ajax.php' ) return;    // WP Heart-beat API
+        if ( isset( $_GET['doing_wp_cron'] ) ) {
+            return;
+        }   // WP Cron
+        if ( isset( $GLOBALS['pagenow'] ) && $GLOBALS['pagenow'] == 'admin-ajax.php' ) {
+            return;
+        }    // WP Heart-beat API
         
         if ( ! $this->isBackground() ) { 
             return;
         }
     
         // Tell WordPress this is a background routine by setting the Cron flag.
-        if ( ! defined( 'DOING_CRON' ) ) { define( 'DOING_CRON', true ); }        
+        if ( ! defined( 'DOING_CRON' ) ) {
+            define( 'DOING_CRON', true );
+        }
+        if ( ! defined( 'WP_USE_THEMES' ) ) {
+            define( 'WP_USE_THEMES', false );
+        }
         ignore_user_abort( true );        
 
         // Do not process if a delay is not set.
@@ -254,13 +263,12 @@ class AmazonAutoLinks_Shadow {
         // Store the static properties.
         self::$_fIgnoreLock = $fIgnoreLock ? $fIgnoreLock : self::$_fIgnoreLock;
         self::$_aGet = ( array ) $aGet + self::$_aGet;
-        
-        $_sSelfClassName = get_class();
+
         if ( did_action( 'shutdown' ) ) {
             self::_replyToAccessSite();
             return;    // important as what the action has performed does not mean the action never will be fired again.
         }
-        add_action( 'shutdown', "{$_sSelfClassName}::_replyToAccessSite", 999 );    // do not pass self::_replyToAccessSite.
+        add_action( 'shutdown', array( __CLASS__, '_replyToAccessSite' ), 999 );
 
     }    
         /**
@@ -272,9 +280,9 @@ class AmazonAutoLinks_Shadow {
 
             // Retrieve the plugin scheduled tasks array.
             $_sTransientName = md5( get_class() );
-            $_aTasks = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
-            $_aTasks = $_aTasks ? $_aTasks : array();
-            $_nNow = microtime( true );
+            $_aTasks         = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
+            $_aTasks         = $_aTasks ? $_aTasks : array();
+            $_nNow           = microtime( true );
             
             // Check the excessive background call protection interval 
             if ( ! self::$_fIgnoreLock ) {                

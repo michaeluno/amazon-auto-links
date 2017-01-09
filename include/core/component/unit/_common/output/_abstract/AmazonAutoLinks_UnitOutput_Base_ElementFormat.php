@@ -136,7 +136,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             )               
         );
         if ( null === $_aSimilarProducts && $this->oUnitOption->get( '_search_similar_products' ) ) {
-            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 
@@ -933,7 +933,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             )               
         );
         if ( null === $_sEncodedHTML ) {
-            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 
@@ -983,7 +983,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         );
         // If the value is null, it means the value does not exist in the database table.
         if ( null === $_sEncodedHTML ) {
-            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 

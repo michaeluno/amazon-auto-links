@@ -125,14 +125,15 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
             $this->oUnitOption->get( 'associate_id' )
         );
-            
-        // Perform the search for the first page regardless the specified count (number of items).
-        // Keys with an empty value will be filtered out when performing the request.
+
+        /**
+         * Perform the search for the first page regardless the specified count (number of items).
+         * Keys with an empty value will be filtered out when performing the request.
+         */
         $_aResponse = $_oAPI->request( 
             $this->getAPIParameterArray( 
                 $this->oUnitOption->get( 'Operation' ) 
-            ), 
-            $this->oUnitOption->get( 'country' ),   // locale
+            ),
             $this->oUnitOption->get( 'cache_duration' )
         );
         

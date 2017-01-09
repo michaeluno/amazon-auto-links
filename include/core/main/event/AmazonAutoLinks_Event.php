@@ -44,7 +44,7 @@ class AmazonAutoLinks_Event {
             
             // 3.4.0+
             new AmazonAutoLinks_Event_Schedule_DeleteExpiredCaches;
-            
+
             // @deprecated  3.3.0
             // new AmazonAutoLinks_Event_Action_TemplateOptionConverter(
                 // 'aal_action_event_convert_template_options',
@@ -53,11 +53,11 @@ class AmazonAutoLinks_Event {
                     
             // This must be called after the above action hooks.
             $_oOption               = AmazonAutoLinks_Option::getInstance();
-            $_bIsIntenceCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
-            
+            $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
+
             // Force executing actions.
             new AmazonAutoLinks_Shadow(    
-                $_bIsIntenceCachingMode
+                $_bIsIntenseCachingMode
                     ? array(
                         'aal_action_unit_prefetch',
                         'aal_action_simplepie_renew_cache',
@@ -77,7 +77,7 @@ class AmazonAutoLinks_Event {
                     )
             );    
                     
-            if ( ! $_bIsIntenceCachingMode ) {
+            if ( ! $_bIsIntenseCachingMode ) {
                 if ( AmazonAutoLinks_Shadow::isBackground() ) {
                     exit;
                 }

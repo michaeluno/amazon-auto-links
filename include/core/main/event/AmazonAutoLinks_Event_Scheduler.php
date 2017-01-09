@@ -12,7 +12,6 @@
  * Handles plugin event scheduling.
  * 
  * @since       3
- * @action      schedule        aal_action_api_get_product_info
  */
 class AmazonAutoLinks_Event_Scheduler {
 
@@ -56,16 +55,21 @@ class AmazonAutoLinks_Event_Scheduler {
     
     /**
      * @since       3.3.0
+     * @sicne       3.5.0           Renamed from `getSimliarProducts()`.
      * @action      schedule        aal_action_api_get_similar_products
      */
-    static public function getSimilarProducts( $aASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+    static public function scheduleSimilarProducts( $aSimilarProductASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+
+        if ( empty( $aSimilarProductASINs ) ) {
+            return false;
+        }
 
         $_bScheduled = self::_scheduleTask( 
             'aal_action_api_get_similar_products',  // action name
-            array( $aASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration )
+            array( $aSimilarProductASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration )
         );
         if ( ! $_bScheduled ) {
-            return $_bScheduled;
+            return false;
         }
         
         // Loads the site in the background. The method takes care of doing it only once in the entire page load.
@@ -74,17 +78,20 @@ class AmazonAutoLinks_Event_Scheduler {
     }
     
     /**
-     * 
+     * Schedule a background task to retrieve customer reviews.
+     *
      * @action      schedule        aal_action_api_get_customer_review
+     * @since       unknown
+     * @since       3.5.0           Renamed from `getCustomerReviews()` as there was a method with the same name.
      */
-    static public function getCustomerReviews( $sURL, $sASIN, $sLocale, $iCacheDuration ) {
+    static public function scheduleCustomerReviews( $sURL, $sASIN, $sLocale, $iCacheDuration ) {
 
         $_bScheduled = self::_scheduleTask( 
             'aal_action_api_get_customer_review',  // action name
             array( $sURL, $sASIN, $sLocale, $iCacheDuration )
         );
         if ( ! $_bScheduled ) {
-            return $_bScheduled;
+            return false;
         }
         
         // Loads the site in the background. The method takes care of doing it only once in the entire page load.
@@ -97,9 +104,10 @@ class AmazonAutoLinks_Event_Scheduler {
      * Schedules an action of getting product information in the background.
      * 
      * @since       3
-     * @action      schedule        aal_action_api_get_product_info
+     * @since       3.5.0       Renamed from `getProductInfo()`.
+     * @return      boolean
      */
-    static public function getProductInfo( $sAssociateID, $sASIN, $sLocale, $iCacheDuration ) {
+    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration ) {
     
         $_oOption   = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {

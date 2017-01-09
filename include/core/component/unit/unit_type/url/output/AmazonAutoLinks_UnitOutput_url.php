@@ -90,10 +90,11 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             $_oHTTP = new AmazonAutoLinks_HTTPClient( 
                 $_aURLs,
                 $this->oUnitOption->get( 'cache_duration' ),
-                array(  // http argumentss
+                array(  // http arguments
                     'timeout'     => 20,
                     'redirection' => 20,
-                )
+                ),
+                'url_unit_type' // request type
             );
             
             $_aHTMLBodies = $_oHTTP->get();

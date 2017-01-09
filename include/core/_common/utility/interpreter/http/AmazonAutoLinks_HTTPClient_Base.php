@@ -75,14 +75,13 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
     public function __construct( $asURLs, $iCacheDuration=86400, $aArguments=null, $sRequestType='wp_remote_get' ) {
                         
         $this->bIsSingle      = is_string( $asURLs );
+        $this->iCacheDuration = $iCacheDuration;
+        $this->sSiteCharSet   = get_bloginfo( 'charset' );
+        $this->sRequestType   = $sRequestType;
         $this->aURLs          = $this->_getFormattedURLContainer( 
             $this->getAsArray( $asURLs ) 
         );
-        $this->iCacheDuration = $iCacheDuration;
         $this->aArguments     = $this->_getFormattedArguments( $aArguments );
-        $this->sSiteCharSet   = get_bloginfo( 'charset' );
-        $this->sRequestType   = $sRequestType;
-        
         
     }      
         /**
@@ -210,26 +209,25 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         );        
     }    
         /**
-         * 
+         *
+         * @param       array       $aURLs      The URLs to be requested. The array keys must be indexed with cache names.
          * @return      object|array        Response array or WP Error object.
          */
         protected function _getHTTPResponseWithCache( array $aURLs, $aArguments=array(), $iCacheDuration=86400 ) {
 
             $_aData        = array();
             $_aValidCaches = array();
-            
-            // First retrieve the cache
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
-            
+
             // If a cache exists, use it.
-            $_aCaches = 0 === $iCacheDuration
+            $_oCacheTable  = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_aCaches      = 0 === $iCacheDuration
                 ? array()
                 : $_oCacheTable->getCache(  
                     array_keys( $aURLs ), // multiple names - the url array is indexed with cache names
                     $iCacheDuration
                 );     
 
-            foreach( $_aCaches as $_aCache ) {
+            foreach( $_aCaches as $_sCacheName => $_aCache ) {
                 
                 // Format
                 $_aCache = $_aCache + array( // structure
@@ -243,10 +241,12 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 if ( ! isset( $_aCache[ 'data' ] ) ) {
                     continue;
                 }
-                
-                // Filters - this allows external components to modify the remained time, 
-                // which can be used to trick the below check and return the stored data anyway.
-                // So the cache renewal event can be scheduled in the background.
+
+                /**
+                 * Filters - this allows external components to modify the remained time,
+                 * which can be used to trick the below check and return the stored data anyway.
+                 * So the cache renewal event can be scheduled in the background.
+                 */
                 $_aCache = apply_filters(
                     'aal_filter_http_response_cache',
                     $_aCache,
@@ -254,33 +254,26 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     $aArguments,
                     $this->sRequestType
                 );
-                
+
                 // Set a valid item.
                 if ( $_aCache[ 'remained_time' ] && $_aCache[ 'data' ] ) {
                     $this->sLastCharSet = $_aCache[ 'charset' ];
-                    $_aValidCaches[ $_aCache[ 'request_uri' ] ] = $_aCache[ 'data' ];
+                    $_aValidCaches[ $_sCacheName ] = $_aCache[ 'data' ];
                 }
                 
             }
             
             // Check if caches exist one by one and if not, get the response and set a cache.
-            foreach( $aURLs as $_sURL ) {
+            foreach( $aURLs as $_sCacheName => $_sURL ) {
                 
-                if ( isset( $_aValidCaches[ $_sURL ] ) ) {
-                    $_aData[ $_sURL ] = $_aValidCaches[ $_sURL ];
+                if ( isset( $_aValidCaches[ $_sCacheName ] ) ) {
+                    $_aData[ $_sURL ] = $_aValidCaches[ $_sCacheName ];
                     continue;
                 }
                                 
                 // Perform an HTTP request.
-                $_aData[ $_sURL ] = $this->_getHTTPResponse( 
-                    $_sURL, 
-                    $aArguments 
-                );
-                $this->_setCache( 
-                    $_sURL,
-                    $_aData[ $_sURL ], 
-                    $iCacheDuration 
-                );
+                $_aData[ $_sURL ] = $this->_getHTTPResponse( $_sURL, $aArguments );
+                $this->_setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration );
             }
             return $_aData;
             
@@ -307,18 +300,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         /**
          * Sets a cache by url.
          * It internally sets a cache name.
+         * @remark      To renew its cache, use the `deleteCache()` method prior to call the `get()` method.
          * @return      boolean     
          * @todo        Examine the return value as it is not tested.
          */
         private function _setCache( $sURL, $mData, $iCacheDuration=86400 ) {
 
-            $_sCharSet    = $this->_getCharacterSet( $mData );            
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
-
-            // when 0 is passed, use a default value of 86400 (one day). So pass 0 to renew the cache.
-            $iCacheDuration = $iCacheDuration ? ( integer ) $iCacheDuration : 86400;
-            $_bResult = $_oCacheTable->setCache( 
-                $this->_getCacheName( $sURL ), // name
+            $_sCharSet       = $this->_getCharacterSet( $mData );
+            $_sCacheName     = $this->_getCacheName( $sURL );
+            $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_bResult        = $_oCacheTable->setCache(
+                $_sCacheName, // name
                 $mData,
                 $iCacheDuration,
                 array( // extra column items

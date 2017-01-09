@@ -13,7 +13,6 @@
  
  * @package      Amazon Auto Links
  * @since        3
- * @action       aal_action_api_get_product_info
  */
 class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Event_Action_Base {
     
@@ -32,17 +31,18 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
         $_iCacheDuration = $aArguments[ 3 ];
  
         // Extract the product data from the entire API response.
-        $_aProductData     = $this->_getProductData( 
+        $_aProductData     = $this->___getProductData(
             $_sASIN, 
             $_sLocale, 
-            $_sAssociateID 
+            $_sAssociateID,
+            $_iCacheDuration
         );
         if ( empty( $_aProductData ) ) {
             return;
         }
 
-        // Retrieve similar products with a separate routine
-        $this->_scheduleFetchingSimilarProducts( 
+        // Retrieve similar products in a separate routine
+        $this->___scheduleFetchingSimilarProducts(
             $_aProductData, 
             $_sASIN,
             $_sLocale, 
@@ -50,7 +50,7 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
             $_iCacheDuration 
         );
         
-        $this->_setProductData( 
+        $this->___setProductData(
             $_aProductData, 
             $_sASIN,
             $_sLocale,
@@ -61,22 +61,22 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
         /**
          * 
          */
-        private function _scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+        private function ___scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
             
             $_aSimilarProducts = $this->getElementAsArray(
                 $aAPIResponseProductData,
                 array( 'SimilarProducts', 'SimilarProduct' )
             );
-            $_aASINs = array();
+            $_aSimilarProductASINs = array();
             foreach( $_aSimilarProducts as $_aItem ) {
                 if ( ! isset( $_aItem[ 'ASIN' ] ) ) {
                     continue;
                 }
-                $_aASINs[] = $_aItem[ 'ASIN' ];
+                $_aSimilarProductASINs[] = $_aItem[ 'ASIN' ];
             }
 
-            AmazonAutoLinks_Event_Scheduler::getSimilarProducts(
-                $_aASINs,
+            AmazonAutoLinks_Event_Scheduler::scheduleSimilarProducts(
+                $_aSimilarProductASINs,
                 $sASIN,
                 $sLocale,
                 $sAssociateID,
@@ -86,12 +86,12 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
         }
     
 
-        private function _setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration ) {
+        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration ) {
              
             // Check if a customer review exists.
             $_bCustomerReviewExists = $this->_hasCustomerReview( $aAPIResponseProductData );
             if ( $_bCustomerReviewExists ) {            
-                AmazonAutoLinks_Event_Scheduler::getCustomerReviews(
+                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
                     $this->getElement(
                         $aAPIResponseProductData,
                         array( 'CustomerReviews', 'IFrameURL' ),
@@ -436,7 +436,7 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
          * @return      array
          * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
          */
-        private function _getProductData( $sASIN, $sLocale, $sAssociateID ) {
+        private function ___getProductData( $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
             
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isAPIConnected() ) {
@@ -462,9 +462,9 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                 'IdType'                => 'ASIN',    
                 
                 // (optional)
-                'IncludeReviewsSummary' => "True", 
+                'IncludeReviewsSummary' => 'True',
                 
-                // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
+                // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
                 'ItemId'                => $sASIN,    
                 
                 // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
@@ -480,20 +480,16 @@ class AmazonAutoLinks_Event_Action_API_SearchProduct extends AmazonAutoLinks_Eve
                 'ResponseGroup'         => 'Large', 
                 
             );
-            
-            
+
             $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
                 $sLocale,   // locale
                 $_sPublicKey, 
                 $_sPrivateKey,
                 $sAssociateID
             );
-            $_aRawData = $_oAmazonAPI->request(
-                $_aAPIArguments,
-                $sLocale,
-// @todo Examine whether a unit cache duration can be set.                
-                60 // cache duration - null to not to use cache.
-            );
+
+// @note 3.5.0 The cache duration was set to 60 for some reasons.
+            $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
             return $this->getElement(
                 $_aRawData, // subject
                 array( 'Items', 'Item' ), // dimensional keys

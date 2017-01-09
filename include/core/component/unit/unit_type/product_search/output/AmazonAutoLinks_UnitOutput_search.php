@@ -306,8 +306,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         // First, perform the search for the first page regardless the specified count (number of items).
         // Keys with an empty value will be filtered out when performing the request.            
         $_aResponse = $_oAPI->request(
-            $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ), 
-            $this->oUnitOption->get( 'country' ),   // locale
+            $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
             $this->oUnitOption->get( 'cache_duration' )
         );    
 
@@ -330,16 +329,14 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         $_aResponseTrunk = $_aResponse;
                 
         // First perform fetching data in the background if caches are not available. Parse backwards 
-        $_bScheduled = null;
+        $_iScheduled = 0;
         for ( $_i = $_iPage; $_i >= 2 ; $_i-- ) {
-            $_fResult = $_oAPI->scheduleInBackground( 
-                $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ), $_i ) 
+            $_iScheduled += ( integer ) $_oAPI->scheduleInBackground(
+                $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ), $_i ),
+                $this->oUnitOption->get( 'cache_duration' )
             );
-            $_bScheduled = $_bScheduled 
-                ? $_bScheduled 
-                : $_fResult;
         }
-        if ( $_bScheduled ) {
+        if ( $_iScheduled ) {
             // there are items scheduled to fetch in the background, do it right now.
             AmazonAutoLinks_Shadow::gaze();
         }
@@ -351,8 +348,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $this->getAPIParameterArray(
                     $this->oUnitOption->get( 'Operation' ), 
                     $_i 
-                ), 
-                '', 
+                ),
                 $this->oUnitOption->get( 'cache_duration' )
             );
             if ( isset( $_aResponse[ 'Items' ][ 'Item' ] ) && is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {

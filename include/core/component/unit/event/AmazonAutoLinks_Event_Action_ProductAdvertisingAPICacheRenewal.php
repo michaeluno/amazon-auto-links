@@ -22,26 +22,23 @@ class AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal extends Ama
      */
     public function doAction( /* $aRequestInfo */ ) {
         
-        $_oOption       = AmazonAutoLinks_Option::getInstance();
+        $_oOption        = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
             return;
         }
         
-        $_aParams       = func_get_args() + array( null );
-        $aRequestInfo   = $_aParams[ 0 ];
+        $_aParams        = func_get_args() + array( null );
+        $aRequestInfo    = $_aParams[ 0 ];
 
-        $_sLocale       = $aRequestInfo[ 'locale' ];
-        $_aParameters   = $aRequestInfo[ 'parameters' ];
-        $_oAmazonAPI    = new AmazonAutoLinks_ProductAdvertisingAPI(
+        $_sLocale        = $aRequestInfo[ 'locale' ];
+        $_aParameters    = $aRequestInfo[ 'parameters' ];
+        $_iCacheDuration = $aRequestInfo[ 'cache_duration' ];
+        $_oAmazonAPI     = new AmazonAutoLinks_ProductAdvertisingAPI(
             $_sLocale, 
             $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ), 
             $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' )
         );
-        $_oAmazonAPI->request( 
-            $_aParameters, 
-            $_sLocale, 
-            null // passing null will fetch the data right away and sets the cache.
-        );    
+        $_oAmazonAPI->request( $_aParameters, $_iCacheDuration );
         
     }
     

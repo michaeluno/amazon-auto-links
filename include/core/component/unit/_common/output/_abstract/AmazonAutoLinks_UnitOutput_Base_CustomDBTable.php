@@ -48,7 +48,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         
         // Schedule a background task to retrieve the product information.
         if ( empty( $_aDBProductRow ) && $sAssociateID ) {
-            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $sAssociateID,
                 $sASIN, 
                 $sLocale,
@@ -99,7 +99,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         if ( 
             $_bScheduleTask && $_bIsExpired
         ) {
-            AmazonAutoLinks_Event_Scheduler::getProductInfo(
+            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $aScheduleTask[ 'associate_id' ],
                 $aScheduleTask[ 'asin' ], 
                 $aScheduleTask[ 'locale' ],

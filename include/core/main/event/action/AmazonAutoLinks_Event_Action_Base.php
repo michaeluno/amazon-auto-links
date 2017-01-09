@@ -34,7 +34,14 @@ abstract class AmazonAutoLinks_Event_Action_Base extends AmazonAutoLinks_WPUtili
             $iParameters
         );    
 
+        $this->_construct();
+
     }
+
+    /**
+     * @since       3.5.0
+     */
+    protected function _construct() {}
     
     /**
      * @remark          Override this method in an extended class.

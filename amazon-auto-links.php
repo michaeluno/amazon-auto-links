@@ -5,7 +5,7 @@
  *	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *	Author:         Michael Uno (miunosoft)
  *	Author URI:     http://michaeluno.jp
- *	Version:        3.5.0b03
+ *	Version:        3.5.0b04
  */
 
 /**
