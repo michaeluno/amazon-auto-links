@@ -61,7 +61,8 @@ class AmazonAutoLinks_UnitOutput_similarity_lookup extends AmazonAutoLinks_UnitO
             $this->getAPIParameterArray( 
                 $this->oUnitOption->get( 'Operation' ) 
             ),
-            $this->oUnitOption->get( 'cache_duration' )
+            $this->oUnitOption->get( 'cache_duration' ),
+            $this->oUnitOption->get( '_force_cache_renewal' )
         );    
                  
     }

@@ -31,7 +31,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * 
      * This one will be merged with several other key structure and $aDefault will be constructed.
      */
-    static public $aStructure_Default = array();    
+    static public $aStructure_Default = array(
+        '_force_cache_renewal' => false,        // 3.5.0+
+    );
     
     /**
      * @remark      Shortcode argument keys are all converted to lower-cases but Amazon API keys are camel-cased.
@@ -84,7 +86,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
             // This lets PHP 5.2 access static properties of an extended class.
             $_aProperties = get_class_vars( get_class( $this ) );
-            return $_aProperties[ 'aStructure_Default' ];
+            return $_aProperties[ 'aStructure_Default' ] + self::$aStructure_Default;
             
         }
     /**

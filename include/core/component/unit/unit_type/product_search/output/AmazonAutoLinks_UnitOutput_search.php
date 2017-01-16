@@ -107,7 +107,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         protected function _getResponses() {
 
             // Sanitize the search terms
-            $this->_setSearchTerms();
+            $this->___setSearchTerms();
      
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
                 // Normal operation
@@ -116,14 +116,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             } 
                 
             // For contextual search, perform search by each keyword
-            return $this->_getResponsesByMultipleKeywords();
+            return $this->___getResponsesByMultipleKeywords();
             
         }
             /**
              * Sanitizes the search terms.
              * @since       3.2.0
+             * @return      void
              */
-            private function _setSearchTerms() {
+            private function ___setSearchTerms() {
                 
                 $_sTerms    = trim( $this->oUnitOption->get( $this->sSearchTermKey ) );
                 if ( ! $_sTerms ) {
@@ -143,7 +144,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     // Auto-truncate search terms to 10 as the Amazon API does not allow more than 10 terms to be set per request.
                     $this->oUnitOption->set( 'search_per_keyword', true );
                     
-                    // The above 'search_per_keyword' = false will trigger `_getResponsesByMultipleKeywords()` 
+                    // The above 'search_per_keyword' = false will trigger `___getResponsesByMultipleKeywords()` 
                     // so an array can be set for the terms. 
                     $this->oUnitOption->set( 
                         $this->sSearchTermKey,  // ItemId
@@ -164,7 +165,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since       3.2.0
              * @return      array
              */
-            private function _getResponsesByMultipleKeywords() {
+            private function ___getResponsesByMultipleKeywords() {
              
                 $_aItems    = array();
                 $_aResponse = array();           
@@ -187,7 +188,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     );
                     $_aResponse = $this->getRequest( $_iCount );
 
-                    $_aItems    = $this->_getItemsMerged( $_aItems, $_aResponse );                    
+                    $_aItems    = $this->___getItemsMerged( $_aItems, $_aResponse );                    
                     if ( count( $_aItems ) >= $_iCount ) {
                         break;
                     }
@@ -214,11 +215,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 /**
                  * @return      array
                  */
-                private function _getItemsMerged( $aItems, $aResponse ) {
+                private function ___getItemsMerged( $aItems, $aResponse ) {
                     
                     $aItems        = array_merge(
                         $aItems,
-                        $this->_getItemsNumericallyIndexed( $aResponse )
+                        $this->___getItemsNumericallyIndexed( $aResponse )
                     );
                                              
                     // Drop duplicates.
@@ -251,7 +252,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  * If a single item is returned, it is an associative array; otherwize, numeric.
                  * @return      array       Numerically indexed item element.
                  */
-                private function _getItemsNumericallyIndexed( $aResponse ) {
+                private function ___getItemsNumericallyIndexed( $aResponse ) {
                     
                     $_aItems = $this->getElementAsArray( $aResponse, array( 'Items', 'Item' ) );
                     return $this->isAssociative( $_aItems )
@@ -292,7 +293,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * 
      * This enables to retrieve more than 10 items. However, for it, it performs multiple requests, thus, it will be slow.
      * 
-     * @since            2.0.1
+     * @since           2.0.1
+     * @return          arrat
      */
     protected function getRequest( $iCount ) {
         
@@ -307,8 +309,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         // Keys with an empty value will be filtered out when performing the request.            
         $_aResponse = $_oAPI->request(
             $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
-            $this->oUnitOption->get( 'cache_duration' )
-        );    
+            $this->oUnitOption->get( 'cache_duration' ),
+            $this->oUnitOption->get( '_force_cache_renewal' )
+        );
 
         if ( $iCount <= 10 ) {
             return $_aResponse;
@@ -349,7 +352,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $this->oUnitOption->get( 'Operation' ), 
                     $_i 
                 ),
-                $this->oUnitOption->get( 'cache_duration' )
+                $this->oUnitOption->get( 'cache_duration' ),
+                $this->oUnitOption->get( '_force_cache_renewal' )
             );
             if ( isset( $_aResponse[ 'Items' ][ 'Item' ] ) && is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
                 $_aResponseTrunk[ 'Items' ][ 'Item' ] = $this->_addItems( $_aResponseTrunk[ 'Items' ][ 'Item' ], $_aResponse[ 'Items' ][ 'Item' ] );    

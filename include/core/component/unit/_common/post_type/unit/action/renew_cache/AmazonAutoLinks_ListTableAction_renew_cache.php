@@ -33,8 +33,8 @@ class AmazonAutoLinks_ListTableAction_renew_cache extends AmazonAutoLinks_Plugin
         private function ___getCacheRenewed( $iPostID ) {
             AmazonAutoLinks_Event_Scheduler::prefetch(
                 array(
-                    'id'                => $iPostID,
-                    'cache_duration'    => 0,
+                    'id'                    => $iPostID,
+                    '_force_cache_renewal'  => true,
                 )
             );
         }

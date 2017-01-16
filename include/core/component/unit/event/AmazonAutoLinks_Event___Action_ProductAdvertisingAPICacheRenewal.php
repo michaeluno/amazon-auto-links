@@ -39,7 +39,7 @@ class AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal extends A
             $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ), 
             $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' )
         );
-        $_oAmazonAPI->request( $_aParameters, $_iCacheDuration );
+        $_oAmazonAPI->request( $_aParameters, $_iCacheDuration, true );
         
     }
     
