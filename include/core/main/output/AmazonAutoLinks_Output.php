@@ -73,13 +73,13 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
             // For cases without a unit
             if ( empty( $_aIDs ) ) {
-                return $this->_getOutputByDirectArguments( $this->aArguments );
+                return $this->___getOutputByDirectArguments( $this->aArguments );
             }
 
             // If called by unit,
             $_sOutput = '';
             foreach( $_aIDs as $_iID ) {
-                $_sOutput .= $this->_getOutputByID( $_iID );
+                $_sOutput .= $this->___getOutputByID( $_iID );
             }
             return trim( $_sOutput );
 
@@ -95,7 +95,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the unit output by post (unit) ID.
          */
-        private function _getOutputByID( $iPostID ) {
+        private function ___getOutputByID( $iPostID ) {
 
             /**
              * The auto-insert sets the 'id' as array storing multiple ids. But this method is called per ID so the ID should be discarded.
@@ -110,7 +110,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     'unit_type' => null,
                 );    
 
-            return $this->_getOutputByUnitType( 
+            return $this->___getOutputByUnitType( 
                 $_aUnitOptions[ 'unit_type' ],
                 $_aUnitOptions 
             );
@@ -122,9 +122,9 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
          * @since       3
          * @return      string
          */
-        private function _getOutputByDirectArguments( $aArguments ) {
-            return $this->_getOutputByUnitType( 
-                $this->_getUnitTypeFromArguments( $aArguments ), 
+        private function ___getOutputByDirectArguments( $aArguments ) {
+            return $this->___getOutputByUnitType( 
+                $this->___getUnitTypeFromArguments( $aArguments ), 
                 $aArguments 
             );
         }
@@ -135,7 +135,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * @return      string      The unit type slug.
              * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
              */
-            private function _getUnitTypeFromArguments( $aArguments ) {
+            private function ___getUnitTypeFromArguments( $aArguments ) {
                 return isset( $aArguments[ 'unit_type' ] )
                     ? $aArguments[ 'unit_type' ]
                     : apply_filters( 'aal_filter_detected_unit_type_by_arguments', 'unknown', $aArguments );
@@ -145,7 +145,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * 
              * @return      string      The unit output
              */
-            private function _getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
+            private function ___getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
 
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
                 if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
