@@ -79,7 +79,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         
     }
         /**
-         * 
+         * @return      void
          */
         private function ___scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
             
@@ -104,12 +104,18 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
             );            
             
         }
-    
 
+    /**
+     * @param       array       $aAPIResponseProductData
+     * @param       string      $sASIN
+     * @param       string      $sLocale
+     * @param       integer     $iCacheDuration
+     * @return      void
+     */
         private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration ) {
              
             // Check if a customer review exists.
-            $_bCustomerReviewExists = $this->_hasCustomerReview( $aAPIResponseProductData );
+            $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
             if ( $_bCustomerReviewExists ) {            
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
                     $this->getElement(
@@ -123,7 +129,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 );
             }   
                                    
-            $_aRow             = $this->_formatRow( 
+            $_aRow             = $this->___getRowFormatted( 
                 $aAPIResponseProductData, 
                 $sASIN, 
                 $sLocale,
@@ -142,7 +148,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
              * Checks whether a customer review exists or not.
              * @return      boolean
              */
-            private function _hasCustomerReview( array $aProductData ) {
+            private function ___hasCustomerReview( array $aProductData ) {
                 return in_array(
                     $this->getElement(
                         $aProductData,
@@ -159,7 +165,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
              * 
              * @return      array
              */
-            private function _formatRow( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bCustomerReviewExists ) {
+            private function ___getRowFormatted( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bCustomerReviewExists ) {
                 
                 $_aRow = array(
                     'asin_locale'        => $sASIN . '_' . $sLocale,  
@@ -169,12 +175,12 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                         $aAPIResponseProductData,
                         array( 'ItemLinks', 'ItemLink', )
                     ),
-                    'price'              => $this->_getPriceByKey(
+                    'price'              => $this->___getPriceByKey(
                         $aAPIResponseProductData,
                         'Amount', // key
                         0  // default - when not found
                     ),
-                    'price_formatted'    => $this->_getPriceByKey( 
+                    'price_formatted'    => $this->___getPriceByKey( 
                         $aAPIResponseProductData,
                         'FormattedPrice',
                         ''  // default 
@@ -215,7 +221,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                         $aAPIResponseProductData,
                         array( 'ItemAttributes', 'Title' )
                     ),    
-                    'images'             => $this->_getImages( 
+                    'images'             => $this->___getImages( 
                         $aAPIResponseProductData 
                     ),     
                     
@@ -243,14 +249,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 }
 
                 // Retrieve or calculate a discounted price.
-                $_aOffer           = $this->_getOfferArray( $aAPIResponseProductData, $_aRow[ 'price' ] );
-                $_nDiscountedPrice = $this->_getDiscountedPrice( 
+                $_aOffer           = $this->___getOfferArray( $aAPIResponseProductData, $_aRow[ 'price' ] );
+                $_nDiscountedPrice = $this->___getDiscountedPrice( 
                     $_aOffer,
                     $_aRow[ 'price' ]
                 );
                 $_aRow = $_aRow + array(
                     'discounted_price'            => $_nDiscountedPrice,
-                    'discounted_price_formatted'  => $this->_getFormattedDiscountPrice(
+                    'discounted_price_formatted'  => $this->___getFormattedDiscountPrice(
                         $_aOffer,
                         $_aRow[ 'price' ],
                         $_aRow[ 'price_formatted' ],
@@ -279,7 +285,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                  * 
                  * @return      string
                  */
-                private function _getPriceByKey( $aAPIResponseProductData, $sKey, $mDefault ) {
+                private function ___getPriceByKey( $aAPIResponseProductData, $sKey, $mDefault ) {
                     
                     // There are cases the listed price is not set.
                     $_sFormattedPrice = $this->getElement(
@@ -303,7 +309,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                  * Extracs image info from the product array.
                  * @return      array
                  */
-                private function _getImages( $aProduct ) {
+                private function ___getImages( $aProduct ) {
                     
                     $_aMainImage = array(
                         'SwatchImage' => $this->getElement(
@@ -347,7 +353,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                  * 
                  * @return      string
                  */
-                private function _getFormattedDiscountPrice( $aOffer, $nPrice, $sPriceFormatted, $nDiscountedPrice ) {
+                private function ___getFormattedDiscountPrice( $aOffer, $nPrice, $sPriceFormatted, $nDiscountedPrice ) {
                     
                     // If the formatted price is set in the Offer element, use it.
                     $_sDiscountedPriceFormatted = $this->getElement(
@@ -360,13 +366,19 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     }
                     
                     // Otherwise, replace the price part of the listed price with the discounted one.
-                    return $this->_getFormattedPriceFromModel( 
+                    return $this->___getFormattedPriceFromModel(
                         $nDiscountedPrice / 100,   // decimal
                         $sPriceFormatted 
                     );
                     
                 }
-                    private function _getFormattedPriceFromModel( $nPrice, $sModel ) {
+                    /**
+                     * @param $nPrice
+                     * @param $sModel
+                     *
+                     * @return string
+                     */
+                    private function ___getFormattedPriceFromModel( $nPrice, $sModel ) {
                         return preg_replace(
                             '/[\d\.,]+/',   // needle
                             $nPrice,
@@ -379,7 +391,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                  * @param       mixed       $nPrice     The listed price.
                  * @return      integer
                  */
-                private function _getDiscountedPrice( $aOffer, $nPrice ) {
+                private function ___getDiscountedPrice( $aOffer, $nPrice ) {
                     
                     $_nDiscountedPrice = $this->getElement(
                         $aOffer,
@@ -414,7 +426,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 /**
                  * @return      array
                  */
-                private function _getOfferArray( $aProduct, $nPrice=null ) {
+                private function ___getOfferArray( $aProduct, $nPrice=null ) {
 
                     $_iTotalOffers = $this->getElement(
                         $aProduct,
@@ -441,7 +453,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                             continue;
                         }
                         
-                        $_aDiscountedPrices[ $_iIndex ] = $this->_getDiscountedPrice(
+                        $_aDiscountedPrices[ $_iIndex ] = $this->___getDiscountedPrice(
                             $_aOffer[ 'OfferListing' ],
                             $nPrice
                         );

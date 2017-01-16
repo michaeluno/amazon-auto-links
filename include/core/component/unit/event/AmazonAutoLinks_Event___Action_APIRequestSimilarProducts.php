@@ -91,7 +91,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
                 return array();
             }
             
-            // THe API does not allow more than 10 items.
+            // The API does not allow more than 10 items.
             array_splice( $aASINs, 10 );
             $_sASINs = implode( ',', $aASINs );
             

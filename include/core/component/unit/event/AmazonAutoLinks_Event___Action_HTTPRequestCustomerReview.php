@@ -78,7 +78,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
             return;
         }        
 
-        $_aRow           = $this->_formatRow( 
+        $_aRow           = $this->___getRowFormatted(
             $_sURL,
             $_sHTMLBody,
             $_iCacheDuration,
@@ -99,7 +99,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * 
          * @return      array
          */
-        private function _formatRow( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
+        private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
                      
             $_oScraper = new AmazonAutoLinks_ScraperPSHDP_CustomerReview(
                 $sHTML
