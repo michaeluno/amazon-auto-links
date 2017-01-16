@@ -13,7 +13,7 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_DatabaseTable_request_cache extends AmazonAutoLinks_DatabaseTable_Utility {
+class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_DatabaseTable_Utility {
 
     /**
      * Returns the table arguments.

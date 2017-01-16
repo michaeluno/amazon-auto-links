@@ -186,7 +186,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          */
         private function _getCharacterSetFromCache( $sCacheName ) {
             
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $_aRow = $_oCacheTable->getCache( 
                 $sCacheName // single item returns a single row
             ); 
@@ -219,7 +219,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $_aValidCaches = array();
 
             // If a cache exists, use it.
-            $_oCacheTable  = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_oCacheTable  = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $_aCaches      = 0 === $iCacheDuration
                 ? array()
                 : $_oCacheTable->getCache(  
@@ -308,7 +308,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
-            $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $_bResult        = $_oCacheTable->setCache(
                 $_sCacheName, // name
                 $mData,
@@ -331,7 +331,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
      */
     public function deleteCache() {
         
-        $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
+        $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         foreach( $this->aURLs as $_sCacheName => $_sURL ) {            
 // @todo implement deleteCaches() method
             $_oCacheTable->deleteCache(

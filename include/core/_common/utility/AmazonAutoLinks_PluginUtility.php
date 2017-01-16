@@ -51,9 +51,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      */
     static public function deleteExpiredTableItems() {
         
-        $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_request_cache;
+        $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $_oCacheTable->deleteExpired();
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product;
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_oProductTable->deleteExpired();        
         
     }

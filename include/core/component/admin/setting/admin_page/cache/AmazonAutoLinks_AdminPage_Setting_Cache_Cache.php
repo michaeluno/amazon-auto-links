@@ -30,11 +30,11 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
      */
     public function addFields( $oFactory, $sSectionID ) {
         
-        $_oProductTable    = new AmazonAutoLinks_DatabaseTable_product;
+        $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_iProductCount    = $_oProductTable->getTotalItemCount();
         $_iExpiredProducts = $_oProductTable->getExpiredItemCount();
         
-        $_oCacheTable      = new AmazonAutoLinks_DatabaseTable_request_cache;
+        $_oCacheTable      = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $_iRequestCount    = $_oCacheTable->getTotalItemCount();
         $_iExpiredRequests = $_oCacheTable->getExpiredItemCount();
         
@@ -206,12 +206,12 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'apf_'
             );            
             
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_request_cache;
+            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $_oCacheTable->delete(
                 // delete all rows by passing nothing.
             );    
 
-            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_product;
+            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
             $_oProductTable->delete(
                 // delete all rows.
             ); 

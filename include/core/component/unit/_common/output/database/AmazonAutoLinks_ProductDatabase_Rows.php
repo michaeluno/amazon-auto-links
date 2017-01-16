@@ -35,7 +35,7 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
 
         parent::__construct( $aArguments );
 
-        $this->___oProductTable = new AmazonAutoLinks_DatabaseTable_product;
+        $this->___oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
 
     }
 

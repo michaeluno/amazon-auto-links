@@ -88,7 +88,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
             return;
         }
 
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_product;
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_iSetObjectID  = $_oProductTable->setRowByASINLocale(
             $_sASIN . '_' . strtoupper( $_sLocale ),
             $_aRow

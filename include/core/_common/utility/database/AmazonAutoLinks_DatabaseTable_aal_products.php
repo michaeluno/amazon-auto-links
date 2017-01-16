@@ -13,8 +13,8 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_DatabaseTable_product extends AmazonAutoLinks_DatabaseTable_Utility {
-    
+class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_DatabaseTable_Utility {
+
     /**
      * Returns the table arguments.
      * @return      array

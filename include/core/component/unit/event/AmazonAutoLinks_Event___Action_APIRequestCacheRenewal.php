@@ -41,7 +41,14 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
      *
      * @callback        action      aal_action_http_cache_renewal
      */
-    protected function _doAction( $sURL, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
+    protected function _doAction( /* $sURL, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' */ ) {
+
+        $_aArguments    = func_get_args() + array( null, null, array(), 'wp_remote_get' );
+        $sURL           = $_aArguments[ 0 ];
+        $iCacheDuration = $_aArguments[ 1 ];
+        $aHTTPArguments = $_aArguments[ 2 ];
+        $sType          = $_aArguments[ 3 ];
+
 
         if ( ! $this->_isType( $sType ) ) {
             return;

@@ -131,7 +131,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 $_bCustomerReviewExists
             );
 
-            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_product;
+            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
             $_iObjectID = $_oProductTable->setRowByASINLocale(
                 $sASIN . '_' . strtoupper( $sLocale ),  // asin _ locale
                 $_aRow // row data to set

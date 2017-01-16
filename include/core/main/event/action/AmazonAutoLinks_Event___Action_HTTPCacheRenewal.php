@@ -51,7 +51,13 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     /**
      *
      */
-    protected function _doAction( $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' ) {
+    protected function _doAction( /* $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' */ ) {
+
+        $_aArguments    = func_get_args() + array( null, 8600, array(), 'wp_remote_get', );
+        $sURL           = $_aArguments[ 0 ];
+        $iCacheDuration = $_aArguments[ 1 ];
+        $aArguments     = $_aArguments[ 2 ];
+        $sType          = $_aArguments[ 3 ];
 
         if ( ! $this->_isType( $sType ) ) {
             return;

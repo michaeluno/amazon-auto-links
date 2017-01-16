@@ -25,9 +25,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @return      array
      */
     protected function _formatProducts( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
-        
-        // If the user wants elements which need to access the custom database table,
-        // Retrieve all the data at once to save the number of database queries.
+
+        /**
+         * If the user wants elements which need to access the custom database table,
+         * retrieve all the data at once to save the number of database queries.
+         */
         $_aDBProductRows = $this->bDBTableAccess
             ? $this->_getProductsFromCustomDBTable( $aASINLocales )
             : array();

@@ -55,7 +55,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
         );             
         $_aProducts             = $this->___getProducts( $_aSimilarProductASINs, $_sLocale, $_sAssociateID, $_iCacheDuration );
         $_aRow                  = $this->___getRowFormatted( $_aProducts, $_iCacheDuration );
-        $_oProductTable         = new AmazonAutoLinks_DatabaseTable_product;
+        $_oProductTable         = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_iSetObjectID          = $_oProductTable->setRowByASINLocale(
             $_sSubjectASIN . '_' . strtoupper( $_sLocale ),
             $_aRow
