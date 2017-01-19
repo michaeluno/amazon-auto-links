@@ -73,5 +73,13 @@ class AmazonAutoLinks_UnitTypeLoader_similarity_lookup extends AmazonAutoLinks_U
             ? $this->sUnitTypeSlug
             : $sUnitType;
     }
-    
+
+    /**
+     * @return      string
+     * @since       3.5.0
+     */
+    protected function _getLabel() {
+        return __( 'Similarity Look-up', 'amazon-auto-links' );
+    }
+
 }

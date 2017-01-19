@@ -122,7 +122,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         $_aUnitTypeLabels = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
         return isset( $_aUnitTypeLabels[ $_sUnitType ] )
             ? $_aUnitTypeLabels[ $_sUnitType ]
-            : __( 'Category', 'amazon-auto-links' );
+            : __( 'Unknown', 'amazon-auto-links' );
         
     }
     /**

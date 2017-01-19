@@ -91,5 +91,13 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
             ? $this->sUnitTypeSlug
             : $sUnitType;
     }
-        
+
+    /**
+     * @return      string
+     * @since       3.5.0
+     */
+    protected function _getLabel() {
+        return __( 'Category', 'amazon-auto-links' );
+    }
+
 }

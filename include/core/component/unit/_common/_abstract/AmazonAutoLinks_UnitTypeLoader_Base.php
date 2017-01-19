@@ -56,11 +56,14 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
 
         // 3.5.0+
         add_filter( 'aal_filter_detected_unit_type_by_arguments', array( $this, 'replyToDetermineUnitType' ), 10, 2 );
-        
+
+        // 3.5.0+
+        add_filter( 'aal_filter_registered_unit_type_labels', array( $this, 'replyToAddLabel' ) );
+
         $this->construct( $sScriptPath );
         
-    }    
-    
+    }
+
         /**
          * @return      array
          * @sinec       3.3.0
@@ -83,7 +86,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         /**
          * @since       3.3.0
          * @return      array
-         * @callback    filter      aal_filter_registered_unit_types
+         * @callback    add_filter      aal_filter_registered_unit_types
          */
         public function replyToRegisterUnitTypeSlug( $aUnitTypeSlugs ) {
             if ( $this->sUnitTypeSlug ) {
@@ -95,7 +98,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         /**
          * @return      array
          * @since       3.3.0
-         * @callback    filter      aal_filter_custom_meta_keys
+         * @callback    add_filter      aal_filter_custom_meta_keys
          * @remark      For field with a section, set keys in the $aProtectedMetaKeys property.
          */
         public function replyToGetProtectedMetaKeys( $aMetaKeys ) {                
@@ -157,6 +160,25 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
             return $_sOperation
                 ? $_sOperation
                 : $this->getElement( $aArguments, 'operation', '' );
+        }
+
+    /**
+     * @callback    add_filter      aal_filter_registered_unit_type_labels
+     * @param       array           $aLables
+     * @return      array
+     * @since       3.5.0
+     */
+    public function replyToAddLabel( $aLables ) {
+        return $aLables + array(
+            $this->sUnitTypeSlug => $this->_getLabel(),
+        );
+    }
+        /**
+         * @return      string
+         * @sicne       3.5.0
+         */
+        protected function _getLabel() {
+            return __( 'Unknown', 'amazon-auto-links' );
         }
 
 }

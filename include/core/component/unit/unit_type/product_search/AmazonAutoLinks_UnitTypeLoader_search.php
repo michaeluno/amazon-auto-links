@@ -85,4 +85,12 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
             : $sUnitType;
     }
 
+    /**
+     * @return      string
+     * @since       3.5.0
+     */
+    protected function _getLabel() {
+        return __( 'Product Search', 'amazon-auto-links' );
+    }
+
 }

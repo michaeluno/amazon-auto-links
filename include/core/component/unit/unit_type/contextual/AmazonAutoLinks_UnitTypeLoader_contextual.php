@@ -81,4 +81,12 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_UnitType
             : $sUnitType;
     }
 
+    /**
+     * @return      string
+     * @since       3.5.0
+     */
+    protected function _getLabel() {
+        return __( 'Contextual', 'amazon-auto-links' );
+    }
+
 }

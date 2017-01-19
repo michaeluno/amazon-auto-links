@@ -235,14 +235,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      array
      */
     static public function getUnitTypeLabels() {
-        return array(
-            'category'          => __( 'Category', 'amazon-auto-links' ),
-            'tag'               => __( 'Tag', 'amazon-auto-links' ),
-            'search'            => __( 'Product Search', 'amazon-auto-links' ),
-            'item_lookup'       => __( 'Item Look-up', 'amazon-auto-links' ),
-            'similarity_lookup' => __( 'Similarity Look-up', 'amazon-auto-links' ),
-            'url'               => __( 'URL', 'amazon-auto-links' ),
-        );
+        return apply_filters( 'aal_filter_registered_unit_type_labels', array() );
     }
 
     /**

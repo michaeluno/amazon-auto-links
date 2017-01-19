@@ -75,4 +75,12 @@ class AmazonAutoLinks_UnitTypeLoader_tag extends AmazonAutoLinks_UnitTypeLoader_
             : $sUnitType;
     }
 
+    /**
+     * @return      string
+     * @since       3.5.0
+     */
+    protected function _getLabel() {
+        return __( 'Tag', 'amazon-auto-links' );
+    }
+
 }
