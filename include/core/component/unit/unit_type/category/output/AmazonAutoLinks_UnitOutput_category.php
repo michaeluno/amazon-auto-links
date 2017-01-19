@@ -371,174 +371,250 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     protected function getProducts( array $aItems ) {
 
         // Disable DOM related errors to be displayed.
-        $_bDOMError    = libxml_use_internal_errors( true );
+        $_bDOMError = libxml_use_internal_errors( true );
 
-        $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
-        $_sLocale      = strtoupper( $this->oUnitOption->get( 'country' ) );
-        $_sAssociateID = $this->oUnitOption->get( 'associate_id' );
-    
-        // First Iteration - Extract displaying ASINs.
-        $_aProducts    = array();
-        foreach ( $aItems as $_aItem ) {
-            
-            // Load a DOM Object for description.
-            // passing an empty string to the second parameter disables mb_language() function to be executed.
-            $_oDoc = $this->oDOM->loadDOMFromHTMLElement( 
-                $this->getElement( $_aItem, 'description' ), 
-                '' // mb_language
-           );
-
-            // The first depth div tag - If SimplePie is used outside of WordPress it should be the second depth which contains the description including images
-            // Skip if the container node object could not be established. Sometimes this happens when unavailable feed is passed, such as Top Rated, which is not supported in some countries.
-            $_oNodeDiv = $_oDoc->getElementsByTagName( 'div' )->item( 0 );
-            if ( ! $_oNodeDiv ) { 
-                continue; 
-            }
-
-            $_aProduct = self::$aStructure_Product;
-            
-            // ASIN - required to detect duplicated items.
-            $_sPermalink         = trim( $this->getElement( $_aItem, 'link' ) );
-            $_aProduct[ 'ASIN' ] = $this->getASIN( $_sPermalink );
-            if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
-                continue; 
-            }
-            
-            // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
-            $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted( 
-                $_sPermalink, 
-                $_aProduct[ 'ASIN' ]
-            );
-            
-            // Title
-            $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
-            $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ] );
-            if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) { 
-                continue; 
-            }
-        
-            // Description ( creates $htmldescription and $textdescription ) 
-            // remove the span tag containing the title
-            $this->oDOM->removeNodeByTagAndClass( $_oNodeDiv, 'span', 'riRssTitle', 0 );
-            $_aProduct[ 'text_description' ] = $this->getTextDescription( $_oNodeDiv );
-            if ( $this->isDescriptionBlocked( $_aProduct[ 'text_description' ] ) ) { 
-                continue; 
-            }
-
-            // At this point, update the black&white lists as this item is parsed.
-            $this->setParsedASIN( $_aProduct[ 'ASIN' ] );
-            
-            // Images - img tags 
-            $this->formatImages( 
-                $_oDoc, 
-                array( 
-                    'alt'   => $_aProduct[ 'title' ],
-                    'title' => $_aProduct[ 'text_description' ] 
-                ) 
-            );
-        
-            // Thumbnail image
-            $_aProduct[ 'thumbnail_url' ] = $this->getThumbnail( 
-                $_oDoc, 
-                $this->oUnitOption->get( 'image_size' ) 
-            );
-
-            // Check whether no-image shuld be skipped.
-            if ( ! $this->_isNoImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
-                continue;
-            }
-            
-            // Links - a tags
-            $this->formatLinks( 
-                $_oNodeDiv, 
-                array( 
-                    'rel'       => 'nofollow',
-                    'target'    => '_blank',
-                    'title'     => $_aProduct[ 'title' ] . " - " . $_aProduct[ 'text_description' ] 
-                ),
-                $_aProduct[ 'ASIN' ]
-            );
-            $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
-                    . $this->getDescription( $_oNodeDiv, $_aItem )
-                . "</div>";            
-            $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
-
-            
-            // no published date of the product is avariable in this feed
-            // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );   
-            $_aProduct[ 'updated_date' ]        = $this->getElement( $_aItem, 'pubDate' );  // 3.2.0+
-            
-            // Format the item
-            // Thumbnail
-            $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
-            $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ];  // backward compatibility
-        
-            // Title
-            $_aProduct[ 'formatted_title' ]     = $this->_formatProductTitle( $_aProduct );
-            $_aProduct[ 'formed_title' ]        = $_aProduct[ 'formatted_title' ];  // backward compatibility
-            
-            // Button - check if the %button% variable exists in the item format definition.
-            // It accesses the database, so if not found, the method should not be called.
-            if ( 
-                $this->_hasCustomVariable( 
-                    $this->oUnitOption->get( 'item_format' ),
-                    array( '%button%', )
-                ) 
-            ) {            
-                $_aProduct[ 'button' ] = $this->_getButton( 
-                    $this->oUnitOption->get( 'button_type' ), 
-                    $this->_getButtonID(), 
-                    $_aProduct[ 'product_url' ], 
-                    $_aProduct[ 'ASIN' ], 
-                    $_sLocale, 
-                    $_sAssociateID, 
-                    $this->_getButtonID(), 
-                    $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
-                );
-                
-            }
-
-            /**
-             * Let third-parties filter products.
-             * @since 3.4.13
-             */
-            $_aProduct = apply_filters(
-                'aal_filter_unit_each_product',
-                $_aProduct,
-                array(
-                    'locale'        => $_sLocale,
-                    'asin'          => $_aProduct[ 'ASIN' ],
-                    'associate_id'  => $_sAssociateID,
-                    'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
-                ),
-                $this
-            );
-            if ( empty( $_aProduct ) ) {
-                continue;
-            }
-
-            // Store the product output
-            $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
-            $_aProducts[]    = $_aProduct;
-            
-            // Max Number of Items 
-            if ( count( $_aProducts ) >= $this->oUnitOption->get( 'count' ) ) {
-                break; 
-            }
-      
-        }
-        
-        // Revert the error message setting for DOM
-        libxml_use_internal_errors( $_bDOMError );        
-        
-        return $this->_formatProducts( 
-            $_aProducts,
-            $_aASINLocales,
-            $_sLocale,
-            $_sAssociateID
+        $_aProducts = $this->___getProductsFromResponseItems(
+            $aItems,          // items
+            strtoupper( $this->oUnitOption->get( 'country' ) ), // locale
+            $this->oUnitOption->get( 'associate_id' ),          // associate id
+            $this->oUnitOption->get( 'count' )
         );
-        
+        // Revert the error message setting for DOM
+        libxml_use_internal_errors( $_bDOMError );
+        return $_aProducts;
+
     }
+        /**
+         * @param       array   $_aItems
+         * @param       string  $_sLocale
+         * @param       string  $_sAssociateID
+         * @since       3.5.0
+         * @return      array
+         */
+        private function ___getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_iCount ) {
+
+            // First Iteration - Extract displaying ASINs.
+            $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
+            $_aProducts    = array();
+            foreach ( $aItems as $_iIndex => $_aItem ) {
+
+                // This parsed item is no longer needed and must be removed once it is parsed
+                // as this method is called recursively.
+                unset( $aItems[ $_iIndex ] );
+
+                try {
+                    $_aProduct = $this->___getProduct(
+                        $_aItem,
+                        $_sLocale,
+                        $_sAssociateID
+                    );
+
+                } catch ( Exception $_oException ) {
+                    // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+                    continue;   // skip
+                }
+
+                // Store the product output
+                $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
+                $_aProducts[]    = $_aProduct;
+
+                // Max Number of Items
+                if ( count( $_aProducts ) >= $_iCount ) {
+                    break;
+                }
+
+            }
+
+            return $this->___getProductsFormattedFromResponseItems(
+                $aItems,
+                $_aProducts,
+                $_aASINLocales,
+                $_sLocale,
+                $_sAssociateID
+            );
+
+        }
+            /**
+             *
+             * @return     array
+             * @since      3.5.0
+             */
+            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID ) {
+
+                try {
+                    $_iResultCount = count( $_aProducts );
+                    // Second iteration.
+                    $_aProducts = $this->_formatProducts(
+                        $_aProducts,
+                        $_aASINLocales,
+                        $_sLocale,
+                        $_sAssociateID
+                    );
+                    $_iCountAfterFormatting = count( $_aProducts );
+                    if ( $_iResultCount > $_iCountAfterFormatting ) {
+                        throw new Exception( $_iCount - $_iCountAfterFormatting );
+                    }
+
+                } catch ( Exception $_oException ) {
+
+                    // Do a recursive call
+                    $_aAdditionalProducts = $this->___getProductsFromResponseItems(
+                        $aItems,
+                        $_sLocale,
+                        $_sAssociateID,
+                        ( integer ) $_oException->getMessage() // the number of items to retrieve
+                    );
+                    $_aProducts = array_merge( $_aProducts, $_aAdditionalProducts );
+
+                }
+                return $_aProducts;
+
+            }
+            /**
+             *
+             * @return     array
+             * @since      3.5.0
+             */
+            private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
+
+                // Load a DOM Object for description.
+                // passing an empty string to the second parameter disables mb_language() function to be executed.
+                $_oDoc = $this->oDOM->loadDOMFromHTMLElement(
+                    $this->getElement( $_aItem, 'description' ),
+                    '' // mb_language
+                );
+
+                // The first depth div tag - If SimplePie is used outside of WordPress it should be the second depth which contains the description including images
+                // Skip if the container node object could not be established. Sometimes this happens when unavailable feed is passed, such as Top Rated, which is not supported in some countries.
+                $_oNodeDiv = $_oDoc->getElementsByTagName( 'div' )->item( 0 );
+                if ( ! $_oNodeDiv ) {
+                    throw new Exception( 'Failed to create a node.' );
+                }
+
+                $_aProduct = self::$aStructure_Product;
+
+                // ASIN - required to detect duplicated items.
+                $_sPermalink         = trim( $this->getElement( $_aItem, 'link' ) );
+                $_aProduct[ 'ASIN' ] = $this->getASIN( $_sPermalink );
+                if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
+                    throw new Exception( 'The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
+                }
+
+                // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
+                $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
+                    $_sPermalink,
+                    $_aProduct[ 'ASIN' ]
+                );
+
+                // Title
+                $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
+                $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ] );
+                if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) {
+                    throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'title' ] );
+                }
+
+                // Description ( creates $htmldescription and $textdescription )
+                // remove the span tag containing the title
+                $this->oDOM->removeNodeByTagAndClass( $_oNodeDiv, 'span', 'riRssTitle', 0 );
+                $_aProduct[ 'text_description' ] = $this->getTextDescription( $_oNodeDiv );
+                if ( $this->isDescriptionBlocked( $_aProduct[ 'text_description' ] ) ) {
+                    throw new Exception( 'The description is black-listed: ' . $_aProduct[ 'text_description' ] );
+                }
+
+                // At this point, update the black&white lists as this item is parsed.
+                $this->setParsedASIN( $_aProduct[ 'ASIN' ] );
+
+                // Images - img tags
+                $this->formatImages(
+                    $_oDoc,
+                    array(
+                        'alt'   => $_aProduct[ 'title' ],
+                        'title' => $_aProduct[ 'text_description' ]
+                    )
+                );
+
+                // Thumbnail image
+                $_aProduct[ 'thumbnail_url' ] = $this->getThumbnail(
+                    $_oDoc,
+                    $this->oUnitOption->get( 'image_size' )
+                );
+
+                // Check whether no-image shuld be skipped.
+                if ( ! $this->_isNoImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
+                    throw new Exception( 'No image is allowed: ' );
+                }
+
+                // Links - a tags
+                $this->formatLinks(
+                    $_oNodeDiv,
+                    array(
+                        'rel'       => 'nofollow',
+                        'target'    => '_blank',
+                        'title'     => $_aProduct[ 'title' ] . " - " . $_aProduct[ 'text_description' ]
+                    ),
+                    $_aProduct[ 'ASIN' ]
+                );
+                $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
+                        . $this->getDescription( $_oNodeDiv, $_aItem )
+                    . "</div>";
+                $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
+
+
+                // no published date of the product is avariable in this feed
+                // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );
+                $_aProduct[ 'updated_date' ]        = $this->getElement( $_aItem, 'pubDate' );  // 3.2.0+
+
+                // Format the item
+                // Thumbnail
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
+                $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ];  // backward compatibility
+
+                // Title
+                $_aProduct[ 'formatted_title' ]     = $this->_formatProductTitle( $_aProduct );
+                $_aProduct[ 'formed_title' ]        = $_aProduct[ 'formatted_title' ];  // backward compatibility
+
+                // Button - check if the %button% variable exists in the item format definition.
+                // It accesses the database, so if not found, the method should not be called.
+                if (
+                    $this->_hasCustomVariable(
+                        $this->oUnitOption->get( 'item_format' ),
+                        array( '%button%', )
+                    )
+                ) {
+                    $_aProduct[ 'button' ] = $this->_getButton(
+                        $this->oUnitOption->get( 'button_type' ),
+                        $this->_getButtonID(),
+                        $_aProduct[ 'product_url' ],
+                        $_aProduct[ 'ASIN' ],
+                        $_sLocale,
+                        $_sAssociateID,
+                        $this->_getButtonID(),
+                        $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
+                    );
+
+                }
+
+                /**
+                 * Let third-parties filter products.
+                 * @since 3.4.13
+                 */
+                $_aProduct = apply_filters(
+                    'aal_filter_unit_each_product',
+                    $_aProduct,
+                    array(
+                        'locale'        => $_sLocale,
+                        'asin'          => $_aProduct[ 'ASIN' ],
+                        'associate_id'  => $_sAssociateID,
+                        'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
+                    ),
+                    $this
+                );
+                if ( empty( $_aProduct ) ) {
+                    throw new Exception( 'The product array is empty. Most likely it is filtered out.' );
+                }
+                return $_aProduct;
+
+            }
         
     /**
      * Converts the url scheme to https:// from http:// and uses the amazon's secure image server.

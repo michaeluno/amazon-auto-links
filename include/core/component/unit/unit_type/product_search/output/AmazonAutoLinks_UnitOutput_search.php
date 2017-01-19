@@ -509,339 +509,487 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @return      array
      */
     protected function getProducts( $aResponse ) {
-
-        $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
-        $_sLocale       = strtoupper( $this->oUnitOption->get( 'country' ) );
-        $_sAssociateID  = $this->oUnitOption->get( 'associate_id' );        
-        
-        $_sResponseDate = $this->_getAPIResponseDate( $aResponse );
-
-        // First Iteration - Extract displaying ASINs.
-        $_aProducts     = array();
-        $_aItems        = $this->_getItems( $aResponse );
-        foreach ( $_aItems as $_aItem ) {
-
-            if ( ! is_array( $_aItem ) ) { 
-                continue; 
-            }
-            $_aItem = $_aItem + self::$aStructure_Item;
-        
-            if ( $this->isASINBlocked( $_aItem[ 'ASIN' ] ) ) {
-                continue; 
-            }
-                
-            $_sTitle = $this->getTitleSanitized( $_aItem[ 'ItemAttributes' ][ 'Title' ] );
-            if ( $this->isTitleBlocked( $_sTitle ) ) { 
-                continue; 
-            }
-            
-            $_sThumbnailURL = $this->getElement(
-                $_aItem,
-                array( 'MediumImage', 'URL' )
-            );
-            
-            if ( ! $this->_isNoImageAllowed( $_sThumbnailURL ) ) {
-                continue;
-            }
-                
-            $_sProductURL  = $this->getProductLinkURLFormatted( 
-                rawurldecode( $_aItem[ 'DetailPageURL' ] ),
-                $_aItem[ 'ASIN' ] 
-            );
-
-            $_sContent     = $this->getContents( $_aItem );
-                
-            $_sDescription = $this->getDescriptionSanitized( 
-                $_sContent, 
-                $this->oUnitOption->get( 'description_length' ), 
-                $this->_getReadMoreText( $_sProductURL )
-            );
-            if ( $this->isDescriptionBlocked( $_sDescription ) ) { 
-                continue; 
-            }
-                    
-            // At this point, update the black&white lists as this item is parsed.
-            $this->setParsedASIN( $_aItem[ 'ASIN' ] );
-            
-            // Construct a product array. This will be passed to a template.
-            $_aProduct = array(
-                'ASIN'               => $_aItem[ 'ASIN' ],
-                'product_url'        => $_sProductURL,
-                'title'              => $_sTitle,
-                'text_description'   => $this->getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
-                'description'        => $_sDescription, // reflects the user set character length
-                'meta'               => '',
-                'content'            => $_sContent,
-                'image_size'         => $this->oUnitOption->get( 'image_size' ),
-                'thumbnail_url'      => $this->_getProductImageURLFormatted( 
-                    $_sThumbnailURL, 
-                    $this->oUnitOption->get( 'image_size' )
-                ),
-                'author'             => isset( $_aItem[ 'ItemAttributes' ][ 'Author' ] ) 
-                    ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] ) 
-                    : '',
-                // 'manufacturer' => $_aItem[ 'ItemAttributes' ][ 'Manufacturer' ], 
-                'category'           => $this->getElement(
-                    $_aItem,
-                    array( 'ItemAttributes', 'ProductGroup' ),
-                    ''
-                ),
-                // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
-                'date'               => $this->getElement(
-                    $_aItem,
-                    array( 'ItemAttributes', 'ReleaseDate' ),
-                    $this->getElement(
-                        $_aItem,
-                        array( 'ItemAttributes', 'PublicationDate' )
-                    )
-                ),
-                'updated_date'       => $_sResponseDate, 
-                'is_adult_product'   => $this->getElement(
-                    $_aItem,
-                    array( 'ItemAttributes', 'IsAdultProduct' ),
-                    false
-                ),
-
-                'review'              => '',  // customer reviews
-                'rating'              => '',  // 3+
-                'button'              => '',  // 3+
-                'image_set'           => '',  // 3+
-// @todo add a format method for editorial reviews.
-                'editorial_review'    => '',  // 3+
-                
-                'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
-            ) 
-            + $this->_getPrices( $_aItem )
-            + $_aItem;
-
-            // Add meta data to the description
-            $_aProduct[ 'meta' ]        = $this->_formatProductMeta( $_aProduct );
-            $_aProduct[ 'description' ] = $this->_formatProductDescription( $_aProduct );
-
-            // Thumbnail
-            $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
-            $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ]; // backward compatibility
-        
-            // Title
-            $_aProduct[ 'formatted_title' ] = $this->_formatProductTitle( $_aProduct );
-            $_aProduct[ 'formed_title' ]    = $_aProduct[ 'formatted_title' ]; // backward compatibility
-           
-            
-            // Button - check if the %button% variable exists in the item format definition.
-            // It accesses the database, so if not found, the method should not be called.
-            if ( 
-                $this->_hasCustomVariable( 
-                    $this->oUnitOption->get( 'item_format' ),
-                    array( '%button%', )
-                ) 
-            ) {                
-
-                $_aProduct[ 'button' ] = $this->_getButton( 
-                    $this->oUnitOption->get( 'button_type' ), 
-                    $this->_getButtonID(), 
-                    $_aProduct[ 'product_url' ], 
-                    $_aProduct[ 'ASIN' ], 
-                    $_sLocale, 
-                    $_sAssociateID, 
-                    $this->_getButtonID(), 
-                    $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
-                );                
-            
-            }            
-
-            /**
-             * Let third-parties filter products.
-             * @since 3.4.13
-             */
-            $_aProduct = apply_filters(
-                'aal_filter_unit_each_product',
-                $_aProduct,
-                array(
-                    'locale'        => $_sLocale,
-                    'asin'          => $_aProduct[ 'ASIN' ],
-                    'associate_id'  => $_sAssociateID,
-                    'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
-                ),
-                $this
-            );
-            if ( empty( $_aProduct ) ) {
-                continue;
-            }
-
-            $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
-            $_aProducts[]    = $_aProduct;
-            
-            // Max Number of Items 
-            if ( count( $_aProducts ) >= $this->oUnitOption->get( 'count' ) ) {
-                break;            
-            }
-            
-        }
-        
-        $_aProducts = $this->_formatProducts( 
-            $_aProducts,
-            $_aASINLocales,
-            $_sLocale,
-            $_sAssociateID
+        return $this->___getProductsFromResponseItems(
+            $this->___getItemsExtracted( $aResponse ),          // items
+            strtoupper( $this->oUnitOption->get( 'country' ) ), // locale
+            $this->oUnitOption->get( 'associate_id' ),          // associate id
+            $this->___getAPIResponseDate( $aResponse ),         // response date
+            $this->oUnitOption->get( 'count' )
         );
-        return $_aProducts;
-        
     }
-        
         /**
-         * Returns the API response date which must be inserted in the advertisement output for the API agreements.
-         * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2
-         * @see         (0) in the above link.
-         * @since       3.2.0
-         * @return      string 
+         * @param       array   $aItems
+         * @param       string  $_sLocale
+         * @param       string  $_sAssociateID
+         * @param       string  $_sResponseDate
+         * @since       3.5.0
+         * @return      array
          */
-        private function _getAPIResponseDate( $aResponse ) {
-            
-            $_aArguments = $this->getElementAsArray( 
-                $aResponse,
-                array( 'OperationRequest', 'Arguments', 'Argument' )
-            );
-            foreach( $_aArguments as $_aArgument ) {
-                $_sTimeStampKey = $this->getElement(
-                    $_aArgument,
-                    array( '@attributes', 'Name' )
-                );
-                if ( 'Timestamp' === $_sTimeStampKey ) {
-                    return $this->getElement(
-                        $_aArgument,
-                        array( '@attributes', 'Value' )
+        private function ___getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_sResponseDate, $_iCount ) {
+
+            $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
+            $_aProducts     = array();
+
+            // First Iteration - Extract displaying ASINs.
+            foreach ( $aItems as $_iIndex => $_aItem ) {
+
+                // This parsed item is no longer needed and must be removed once it is parsed
+                // as this method is called recursively.
+                unset( $aItems[ $_iIndex ] );
+
+                try {
+                    $_aItem         = $this->___getItemStructured( $_aItem );
+                    $_sTitle        = $this->___getTitle( $_aItem );
+                    $_sThumbnailURL = $this->___getThumbnailURL( $_aItem );
+                    $_sProductURL   = $this->getProductLinkURLFormatted(
+                        rawurldecode( $_aItem[ 'DetailPageURL' ] ),
+                        $_aItem[ 'ASIN' ]
                     );
+                    $_sContent      = $this->getContents( $_aItem );
+                    $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
+    
+                    // At this point, update the black&white lists as this item is parsed.
+                    $this->setParsedASIN( $_aItem[ 'ASIN' ] );
+    
+                    $_aProduct      = $this->___getProduct(
+                        $_aItem,
+                        $_sTitle,
+                        $_sThumbnailURL,
+                        $_sProductURL,
+                        $_sContent,
+                        $_sDescription,
+                        $_sLocale,
+                        $_sAssociateID,
+                        $_sResponseDate
+                    );
+    
+                } catch ( Exception $_oException ) {
+                    // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+                    continue;   // skip
                 }
-            }
-            return '';
-            
-        }      
-      
-        /**
-         * Extracts items array from the API response array.
-         * @since       3
-         * @return      array
-         */
-        private function _getItems( $aResponse ) {
-
-            $_aItems = $this->getElement(
-                $aResponse, // subject array
-                array( 'Items', 'Item' ), // dimensional keys
-                $aResponse  // default
-            );
-            
-            // When only one item is found, the item elements are not contained in an array. So contain it.
-            if ( isset( $_aItems[ 'ASIN' ] ) ) {
-                $_aItems = array( $_aItems ); 
-            }
-            return $_aItems;
-            
-        }
-        
-        /**
-         * Returns prices of the product as an array.
-         * @since       2.1.2
-         * @return      array
-         */
-        private function _getPrices( array $aItem ) {
-            
-            $_sProperPirce      = $this->getElement(
-                $aItem,
-                array( 'ItemAttributes', 'ListPrice', 'FormattedPrice' ),
-                ''
-            );
-            $_sDiscountedPrice  = $this->getElement(
-                $aItem,
-                array( 'Offers', 'Offer', 'OfferListing', 'Price', 'FormattedPrice' ),
-                ''
-            );
-            $_sDiscountedPrice  = $_sProperPirce && $_sDiscountedPrice === $_sProperPirce
-                ? ''
-                : $_sDiscountedPrice;
-            $_sProperPirce      = $_sDiscountedPrice
-                ? "<s>" . $_sProperPirce . "</s>"
-                : $_sProperPirce;
+    
+                $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
+                $_aProducts[]    = $_aProduct;
                 
-            $_aPrices = array(
-                'price'              => $_sProperPirce
-                    ? "<span class='amazon-product-price-value'>"  
-                           . $_sProperPirce
-                        . "</span>"
-                    : "",
-                'discounted_price'   => $_sDiscountedPrice
-                    ? "<span class='amazon-product-discounted-price-value'>" 
-                            . $aItem[ 'Offers' ][ 'Offer' ][ 'OfferListing' ][ 'Price' ][ 'FormattedPrice' ]
-                        . "</span>"
-                    : '',
-                'lowest_new_price'   => isset( $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ] )
-                    ? "<span class='amazon-product-lowest-new-price-value'>"
-                            . $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ]
-                        . "</span>"
-                    : '',
-                'lowest_used_price'  => isset( $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ] )
-                    ? "<span class='amazon-product-lowest-used-price-value'>"
-                            . $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ]
-                        . "</span>"
-                    : '',
+                // Max Number of Items 
+                if ( count( $_aProducts ) >= $_iCount ) {
+                    break;            
+                }
+                
+            }
+
+            return $this->___getProductsFormattedFromResponseItems(
+                $aItems,
+                $_aProducts,
+                $_aASINLocales,
+                $_sLocale,
+                $_sAssociateID
             );
-
-            return $_aPrices;
-        }
-
-        /**
-         * Returns the formatted product meta HTML block.
-         * 
-         * @since       2.1.1
-         */
-        private function _formatProductMeta( array $aProduct ) {
             
-            $_aOutput = array();
-            if ( $aProduct[ 'author' ] ) {
-                $_aOutput[] = "<span class='amazon-product-author'>" 
-                        . sprintf( __( 'by %1$s', 'amazon-auto-links' ) , $aProduct[ 'author' ] ) 
-                    . "</span>";
-            }
-            if ( $aProduct[ 'price' ] ) {
-                $_aOutput[] = "<span class='amazon-product-price'>" 
-                        . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct[ 'price' ] )
-                    . "</span>";
-            }
-            if ( $aProduct[ 'discounted_price' ] ) {
-                $_aOutput[] = "<span class='amazon-product-discounted-price'>" 
-                        . $aProduct[ 'discounted_price' ]
-                    . "</span>";
-            }
-            if ( $aProduct[ 'lowest_new_price' ] ) {
-                $_aOutput[] = "<span class='amazon-product-lowest-new-price'>" 
-                        . sprintf( __( 'New from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_new_price' ] )
-                    . "</span>";
-            }
-            if ( $aProduct[ 'lowest_used_price' ] ) {
-                $_aOutput[] = "<span class='amazon-product-lowest-used-price'>" 
-                        . sprintf( __( 'Used from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_used_price' ] ) 
-                    . "</span>";
-            }
-            return empty( $_aOutput )
-                ? ''
-                : "<div class='amazon-product-meta'>"
-                    . implode( ' ', $_aOutput )
-                    . "</div>";          
-                    
-        }
-        /**
-         * Returns the formatted product description HTML block.
-         * 
-         * @since       2.1.1
-         */        
-        private function _formatProductDescription( array $aProduct ) {
-               
-            return $aProduct[ 'meta' ] 
-                . "<div class='amazon-product-description'>" 
-                    . $aProduct[ 'description' ] 
-                . "</div>";
+        }    
+                
+            /**
+             *
+             * @return     array
+             * @since      3.5.0
+             */
+            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID ) {
+        
+                try {
 
-        }
-                 
+                    $_iResultCount = count( $_aProducts );
+                    // Second iteration.
+                    $_aProducts = $this->_formatProducts(
+                        $_aProducts,
+                        $_aASINLocales,
+                        $_sLocale,
+                        $_sAssociateID
+                    );
+                    $_iCountAfterFormatting = count( $_aProducts );
+                    if ( $_iResultCount > $_iCountAfterFormatting ) {
+                        throw new Exception( $_iCount - $_iCountAfterFormatting );
+                    }
+
+                } catch ( Exception $_oException ) {
+
+                    // Do a recursive call
+                    $_aAdditionalProducts = $this->___getProductsFromResponseItems(
+                        $aItems,
+                        $_sLocale,
+                        $_sAssociateID,
+                        $_sResponseDate,
+                        ( integer ) $_oException->getMessage() // the number of items to retrieve
+                    );
+                    $_aProducts = array_merge( $_aProducts, $_aAdditionalProducts );
+
+                }
+                return $_aProducts;
+        
+            }        
+        
+            /**
+             * @throws  Exception
+             * @since   3.5.0
+             */
+            private function ___getItemStructured( $aItem ) {
+                if ( ! is_array( $aItem ) ) {
+                    throw new Exception( 'The product element must be an array.' );
+                }
+                $_aItem = $aItem + self::$aStructure_Item;
+                $this->___checkASINBlocked( $_aItem[ 'ASIN' ] );
+                return $_aItem;
+            }
+                /**
+                 * @throws  Exception
+                 * @since   3.5.0
+                 */
+                private function ___checkASINBlocked( $_sASIN ) {
+                    if ( $this->isASINBlocked( $_sASIN ) ) {
+                        throw new Exception( 'The product ASIN is black-listed: ' . $_sASIN );
+                    }
+                }
+    
+            /**
+             * @param   array   $aItem
+             * @since   3.5.0
+             * @return  string
+             */
+            private function ___getTitle( $aItem ) {
+                $_sTitle = $this->getTitleSanitized( $aItem[ 'ItemAttributes' ][ 'Title' ] );
+                $this->___checkTitleBlocked( $_sTitle );
+                return $_sTitle;
+            }
+                /**
+                 * @since   3.5.0
+                 * @throws  Exception
+                 */
+                private function ___checkTitleBlocked( $sTitle ) {
+                    if ( $this->isTitleBlocked( $sTitle ) ) {
+                        throw new Exception( 'The title is black-listed: ' . $sTitle );
+                    }
+                }
+    
+            /**
+             * @param       array       $aItem
+             * @return      string
+             * @since       3.5.0
+             */
+            private function ___getThumbnailURL( $aItem ) {
+                $_sThumbnailURL = $this->getElement( $aItem, array( 'MediumImage', 'URL' ), '' );
+                $this->___checkNoImageAllowed( $_sThumbnailURL );
+                return $_sThumbnailURL;
+            }
+                /**
+                 * @since   3.5.0
+                 * @throws  Exception
+                 */
+                private function ___checkNoImageAllowed( $sThumbnailURL ) {
+                    if ( ! $this->_isNoImageAllowed( $sThumbnailURL ) ) {
+                        throw new Exception( 'No image is allowed: ' . $sThumbnailURL );
+                    }
+                }
+            /**
+             * @param $sContent
+             * @param $sProductURL
+             * @return  string
+             * @since   3.5.0
+             */
+            private function ___getDescription( $sContent, $sProductURL ) {
+                $_sDescription  = $this->getDescriptionSanitized(
+                    $sContent,
+                    $this->oUnitOption->get( 'description_length' ),
+                    $this->_getReadMoreText( $sProductURL )
+                );
+                $this->___checkDescriptionBlocked( $_sDescription );
+                return $_sDescription;
+            }
+                /**
+                 * @since   3.5.0
+                 * @throws  Exception
+                 */
+                private function ___checkDescriptionBlocked( $sDescription ) {
+                    if ( $this->isDescriptionBlocked( $sDescription ) ) {
+                        throw new Exception( 'The description is not allowed: ' . $sDescription );
+                    }
+                }
+    
+            /**
+             * @since   3.5.0
+             * @return array
+             * @throws Exception
+             */
+            private function ___getProduct(
+                $_aItem,
+                $_sTitle,
+                $_sThumbnailURL,
+                $_sProductURL,
+                $_sContent,
+                $_sDescription,
+                $_sLocale,
+                $_sAssociateID,
+                $_sResponseDate
+            ) {
+    
+                // Construct a product array. This will be passed to a template.
+                $_aProduct = array(
+                    'ASIN'               => $_aItem[ 'ASIN' ],
+                    'product_url'        => $_sProductURL,
+                    'title'              => $_sTitle,
+                    'text_description'   => $this->getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
+                    'description'        => $_sDescription, // reflects the user set character length
+                    'meta'               => '',
+                    'content'            => $_sContent,
+                    'image_size'         => $this->oUnitOption->get( 'image_size' ),
+                    'thumbnail_url'      => $this->_getProductImageURLFormatted(
+                        $_sThumbnailURL,
+                        $this->oUnitOption->get( 'image_size' )
+                    ),
+                    'author'             => isset( $_aItem[ 'ItemAttributes' ][ 'Author' ] )
+                        ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] )
+                        : '',
+                    // 'manufacturer' => $_aItem[ 'ItemAttributes' ][ 'Manufacturer' ],
+                    'category'           => $this->getElement(
+                        $_aItem,
+                        array( 'ItemAttributes', 'ProductGroup' ),
+                        ''
+                    ),
+                    // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
+                    'date'               => $this->getElement(
+                        $_aItem,
+                        array( 'ItemAttributes', 'ReleaseDate' ),
+                        $this->getElement(
+                            $_aItem,
+                            array( 'ItemAttributes', 'PublicationDate' )
+                        )
+                    ),
+                    'updated_date'       => $_sResponseDate,
+                    'is_adult_product'   => $this->getElement(
+                        $_aItem,
+                        array( 'ItemAttributes', 'IsAdultProduct' ),
+                        false
+                    ),
+    
+                    'review'              => '',  // customer reviews
+                    'rating'              => '',  // 3+
+                    'button'              => '',  // 3+
+                    'image_set'           => '',  // 3+
+                    'editorial_review'    => '',  // 3+ // @todo add a format method for editorial reviews.
+                    'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
+                )
+                + $this->___getPrices( $_aItem )
+                + $_aItem;
+    
+                // Add meta data to the description
+                $_aProduct[ 'meta' ]        = $this->___getProductMetaFormatted( $_aProduct );
+                $_aProduct[ 'description' ] = $this->___getProductDescriptionFormatted( $_aProduct );
+    
+                // Thumbnail
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
+                $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ]; // backward compatibility
+    
+                // Title
+                $_aProduct[ 'formatted_title' ] = $this->_formatProductTitle( $_aProduct );
+                $_aProduct[ 'formed_title' ]    = $_aProduct[ 'formatted_title' ]; // backward compatibility
+    
+    
+                // Button - check if the %button% variable exists in the item format definition.
+                // It accesses the database, so if not found, the method should not be called.
+                if (
+                    $this->_hasCustomVariable(
+                        $this->oUnitOption->get( 'item_format' ),
+                        array( '%button%', )
+                    )
+                ) {
+    
+                    $_aProduct[ 'button' ] = $this->_getButton(
+                        $this->oUnitOption->get( 'button_type' ),
+                        $this->_getButtonID(),
+                        $_aProduct[ 'product_url' ],
+                        $_aProduct[ 'ASIN' ],
+                        $_sLocale,
+                        $_sAssociateID,
+                        $this->_getButtonID(),
+                        $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
+                    );
+    
+                }
+    
+                /**
+                 * Let third-parties filter products.
+                 * @since 3.4.13
+                 */
+                $_aProduct = apply_filters(
+                    'aal_filter_unit_each_product',
+                    $_aProduct,
+                    array(
+                        'locale'        => $_sLocale,
+                        'asin'          => $_aProduct[ 'ASIN' ],
+                        'associate_id'  => $_sAssociateID,
+                        'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
+                    ),
+                    $this
+                );
+                if ( empty( $_aProduct ) ) {
+                    throw new Exception( 'The product array is empty.' );
+                }
+                return $_aProduct;
+    
+            }
+            
+            /**
+             * Returns the API response date which must be inserted in the advertisement output for the API agreements.
+             * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2
+             * @see         (0) in the above link.
+             * @since       3.2.0
+             * @return      string 
+             */
+            private function ___getAPIResponseDate( $aResponse ) {
+                
+                $_aArguments = $this->getElementAsArray( 
+                    $aResponse,
+                    array( 'OperationRequest', 'Arguments', 'Argument' )
+                );
+                foreach( $_aArguments as $_aArgument ) {
+                    $_sTimeStampKey = $this->getElement(
+                        $_aArgument,
+                        array( '@attributes', 'Name' )
+                    );
+                    if ( 'Timestamp' === $_sTimeStampKey ) {
+                        return $this->getElement(
+                            $_aArgument,
+                            array( '@attributes', 'Value' )
+                        );
+                    }
+                }
+                return '';
+                
+            }      
+          
+            /**
+             * Extracts items array from the API response array.
+             * @since       3
+             * @return      array
+             */
+            private function ___getItemsExtracted( $aResponse ) {
+    
+                $_aItems = $this->getElement(
+                    $aResponse, // subject array
+                    array( 'Items', 'Item' ), // dimensional keys
+                    $aResponse  // default
+                );
+                
+                // When only one item is found, the item elements are not contained in an array. So contain it.
+                if ( isset( $_aItems[ 'ASIN' ] ) ) {
+                    $_aItems = array( $_aItems ); 
+                }
+                return $_aItems;
+                
+            }
+            
+            /**
+             * Returns prices of the product as an array.
+             * @since       2.1.2
+             * @return      array
+             */
+            private function ___getPrices( array $aItem ) {
+                
+                $_sProperPirce      = $this->getElement(
+                    $aItem,
+                    array( 'ItemAttributes', 'ListPrice', 'FormattedPrice' ),
+                    ''
+                );
+                $_sDiscountedPrice  = $this->getElement(
+                    $aItem,
+                    array( 'Offers', 'Offer', 'OfferListing', 'Price', 'FormattedPrice' ),
+                    ''
+                );
+                $_sDiscountedPrice  = $_sProperPirce && $_sDiscountedPrice === $_sProperPirce
+                    ? ''
+                    : $_sDiscountedPrice;
+                $_sProperPirce      = $_sDiscountedPrice
+                    ? "<s>" . $_sProperPirce . "</s>"
+                    : $_sProperPirce;
+                    
+                $_aPrices = array(
+                    'price'              => $_sProperPirce
+                        ? "<span class='amazon-product-price-value'>"  
+                               . $_sProperPirce
+                            . "</span>"
+                        : "",
+                    'discounted_price'   => $_sDiscountedPrice
+                        ? "<span class='amazon-product-discounted-price-value'>" 
+                                . $aItem[ 'Offers' ][ 'Offer' ][ 'OfferListing' ][ 'Price' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                    'lowest_new_price'   => isset( $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ] )
+                        ? "<span class='amazon-product-lowest-new-price-value'>"
+                                . $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                    'lowest_used_price'  => isset( $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ] )
+                        ? "<span class='amazon-product-lowest-used-price-value'>"
+                                . $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                );
+    
+                return $_aPrices;
+            }
+    
+            /**
+             * Returns the formatted product meta HTML block.
+             * 
+             * @since       2.1.1
+             * @return      string
+             */
+            private function ___getProductMetaFormatted( array $aProduct ) {
+                
+                $_aOutput = array();
+                if ( $aProduct[ 'author' ] ) {
+                    $_aOutput[] = "<span class='amazon-product-author'>" 
+                            . sprintf( __( 'by %1$s', 'amazon-auto-links' ) , $aProduct[ 'author' ] ) 
+                        . "</span>";
+                }
+                if ( $aProduct[ 'price' ] ) {
+                    $_aOutput[] = "<span class='amazon-product-price'>" 
+                            . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct[ 'price' ] )
+                        . "</span>";
+                }
+                if ( $aProduct[ 'discounted_price' ] ) {
+                    $_aOutput[] = "<span class='amazon-product-discounted-price'>" 
+                            . $aProduct[ 'discounted_price' ]
+                        . "</span>";
+                }
+                if ( $aProduct[ 'lowest_new_price' ] ) {
+                    $_aOutput[] = "<span class='amazon-product-lowest-new-price'>" 
+                            . sprintf( __( 'New from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_new_price' ] )
+                        . "</span>";
+                }
+                if ( $aProduct[ 'lowest_used_price' ] ) {
+                    $_aOutput[] = "<span class='amazon-product-lowest-used-price'>" 
+                            . sprintf( __( 'Used from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_used_price' ] ) 
+                        . "</span>";
+                }
+                return empty( $_aOutput )
+                    ? ''
+                    : "<div class='amazon-product-meta'>"
+                        . implode( ' ', $_aOutput )
+                        . "</div>";          
+                        
+            }
+            /**
+             * Returns the formatted product description HTML block.
+             * 
+             * @since       2.1.1
+             * @return      string
+             */        
+            private function ___getProductDescriptionFormatted( array $aProduct ) {
+                return $aProduct[ 'meta' ] 
+                    . "<div class='amazon-product-description'>" 
+                        . $aProduct[ 'description' ] 
+                    . "</div>";
+            }
+                     
 
     
 }

@@ -21,7 +21,6 @@
 abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoLinks_UnitOutput_Base_ProductFilter {
         
     /**
-     * @filter      apply       aal_filter_unit_each_product_with_database_row
      * @return      array
      */
     protected function _formatProducts( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
@@ -35,7 +34,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             : array();
 
         // Second Iteration - format items and access custom database table.
-        foreach( $aProducts as &$_aProduct ) {
+        foreach( $aProducts as $_iIndex => &$_aProduct ) {
 
             // Price, Rating, Reviews, and Image Sets - these need to access the plugin cache database. e.g. %price%, %rating%, %review%                
             $_aDBProductRow = $this->_getDBProductRow(
@@ -94,9 +93,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                         'associate_id'  => $sAssociateID 
                     )
                 );
-                
+
             }              
-        
+
+
+            // 3.5.0+ With the above filter, the product may be filtered out. In that case, drop it.
+            if ( empty( $_aProduct ) ) {
+                unset( $aProducts[ $_iIndex ] );
+                continue;
+            }
+
             // Item        
             $_aProduct[ 'formatted_item' ] = $this->_formatProductOutput( 
                 $_aProduct 
