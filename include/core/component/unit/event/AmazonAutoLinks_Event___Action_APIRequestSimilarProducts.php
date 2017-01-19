@@ -18,10 +18,10 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
 
     protected $_sActionHookName = 'aal_action_api_get_similar_products';
 
-    private $___sAPIRequestType = 'api_product_information';
+    private $___sAPIRequestType = 'api_product_info'; // up to 20 chars
 
     protected function _construct() {
-        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+        add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
     }
         /**
          * Adds the request type for excepted types.
@@ -39,7 +39,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
     /**
      *
      */
-    protected function _doAction( /* $aArguments=array( 0 => asins, 1 => ASIN, 2 => locale, 3 => associate id, 4 => cache_duration  ) */ ) {
+    protected function _doAction( /* $aArguments=array( 0 => asins, 1 => ASIN, 2 => locale, 3 => associate id, 4 => cache_duration, 5=> force renew  ) */ ) {
         
         $_aParams               = func_get_args() + array( null );
         $_aArguments            = $_aParams[ 0 ] + array( null, null, null, null );
@@ -48,12 +48,13 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
         $_sLocale               = $_aArguments[ 2 ];
         $_sAssociateID          = $_aArguments[ 3 ];
         $_iCacheDuration        = $_aArguments[ 4 ];
+        $_bForceRenew           = $_aArguments[ 5 ];
 
         $_aSimilarProductASINs  = array_diff(
             $_aSimilarProductASINs,     // the similar items to fetch
             array( $_sSubjectASIN )     // the subject product
         );             
-        $_aProducts             = $this->___getProducts( $_aSimilarProductASINs, $_sLocale, $_sAssociateID, $_iCacheDuration );
+        $_aProducts             = $this->___getProducts( $_aSimilarProductASINs, $_sLocale, $_sAssociateID, $_iCacheDuration, $_bForceRenew );
         $_aRow                  = $this->___getRowFormatted( $_aProducts, $_iCacheDuration );
         $_oProductTable         = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_iSetObjectID          = $_oProductTable->setRowByASINLocale(
@@ -73,7 +74,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
          * @since       3.5.0       Renamed from `_getProducts()`. Removed the `$sASIN` parameter.
          * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
          */
-        private function ___getProducts( $aASINs, $sLocale, $sAssociateID, $iCacheDuration ) {
+        private function ___getProducts( $aASINs, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
 
             if ( empty( $aASINs ) ) {
                 return array();
@@ -134,7 +135,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
                 array(),    // HTTP Arguments
                 $this->___sAPIRequestType
             );
-            $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
+            $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration, $bForceRenew );
 
             return $this->getElement(
                 $_aRawData, // subject

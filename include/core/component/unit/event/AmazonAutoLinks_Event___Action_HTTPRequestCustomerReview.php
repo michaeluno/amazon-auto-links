@@ -20,12 +20,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
 
     protected function _construct() {
         add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
-//        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
     }
-//        public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
-//            $aExceptedRequestTypes[] = 'customer_review';
-//            return $aExceptedRequestTypes;
-//        }
         /**
          * Remove request specific query argument in the URL query string to construct a cache name.
          * @callback    add_filter  aal_filter_http_request_cache_name
@@ -62,16 +57,20 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
     /**
      *
      */
-    protected function _doAction( /* $aArguments=array( 0 => url, 1 => asin, 2 => locale, 3 => cache_duration  ) */ ) {
+    protected function _doAction( /* $aArguments=array( 0 => url, 1 => asin, 2 => locale, 3 => cache_duration, 4 => force renew  ) */ ) {
         
         $_aParams        = func_get_args() + array( null );
-        $_aArguments     = $_aParams[ 0 ] + array( null, null, null, null );
+        $_aArguments     = $_aParams[ 0 ] + array( null, null, null, null, false );
         $_sURL           = $_aArguments[ 0 ];
         $_sASIN          = $_aArguments[ 1 ];
         $_sLocale        = $_aArguments[ 2 ];
         $_iCacheDuration = $_aArguments[ 3 ];
+        $_bForceRenew    = $_aArguments[ 4 ];
 
         $_oHTTP          = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, null, 'customer_review' );
+        if ( $_bForceRenew ) {
+            $_oHTTP->deleteCache();
+        }
         $_sHTMLBody      = $_oHTTP->get();
 
         if ( ! $_sHTMLBody ) {

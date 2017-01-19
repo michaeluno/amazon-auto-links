@@ -142,7 +142,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 
-                ( int ) $this->oUnitOption->get( 'cache_duration' )
+                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
+                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
             );
             return $this->oUnitOption->get( 'show_now_retrieving_message' )
                 ? '<p>' 
@@ -939,7 +940,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 
-                ( int ) $this->oUnitOption->get( 'cache_duration' )
+                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
+                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
             );
             
             return $this->oUnitOption->get( 'show_now_retrieving_message' )
@@ -977,7 +979,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             'rating_html', // column name
             $aRow, // row
             null, // default - will
-            array( // shcedule background task
+            array( // schedule background task
                 'asin'          => $sASIN,
                 'locale'        => $sLocale,
                 'associate_id'  => $sAssociateID,
@@ -989,7 +991,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $sAssociateID,
                 $sASIN,
                 $sLocale, 
-                ( int ) $this->oUnitOption->get( 'cache_duration' )
+                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
+                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
             );
             
             return $this->oUnitOption->get( 'show_now_retrieving_message' )
@@ -1013,7 +1016,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             . "</div>";
             
     }
-    
+
     /**
      * @return      string
      * @since       3.3.0

@@ -15,6 +15,7 @@
 abstract class AmazonAutoLinks_ProductDatabase_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Stores Locale_ASIN items.
      * @var array
      */
     protected $_aArguments = array(

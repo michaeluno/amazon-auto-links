@@ -167,6 +167,7 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
                         continue;
                     }
                     $_aNewRows[ $_aRow[ 'asin_locale' ] ] = $_aRow;
+
                 }
                 return $_aNewRows;
             }

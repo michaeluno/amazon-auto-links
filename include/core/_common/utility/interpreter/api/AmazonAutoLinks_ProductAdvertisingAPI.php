@@ -180,6 +180,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
             'constructor_parameters' => $this->___aConstructorParameters,
             'api_parameters'         => $aAPIParameters,    
         );
+
         $_oAPIRequestCache      = new AmazonAutoLinks_ProductAdvertisingAPI___Cache(
             $_oAPIRequestURIBuilder->get(), // Request URI
             $_aHTTPArguments,

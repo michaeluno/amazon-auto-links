@@ -25,26 +25,35 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
      * @since       3.5.0
      */
     protected function _construct() {
-
         add_filter(
             'aal_filter_http_response_cache',  // filter hook name
             array( $this, 'replyToModifyCacheRemainedTime' ), // callback
             10, // priority
             4 // number of parameters
         );
-
     }
 
-
     /**
-     * Checks whether the given type is accepted.
+     * Checks whether the given type is accepted for performing HTTP requests.
      * @since       3.5.0
      * @return      boolean
      */
     protected function _isType( $sType ) {
         return ! in_array(
             $sType,
-            $this->getAsArray( apply_filters( 'aal_filter_excepted_http_request_types', array() ) )
+            $this->getAsArray( apply_filters( 'aal_filter_excepted_http_request_types_for_requests', array() ) )
+        );
+    }
+
+    /**
+     * Checks whether the given request type is accepted for caching.
+     * @since       3.5.0
+     * @return      boolean
+     */
+    protected function _isBackgroundCacheRenewalAllowed( $sType ) {
+        return ! in_array(
+            $sType,
+            $this->getAsArray( apply_filters( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array() ) )
         );
     }
 
@@ -76,13 +85,15 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
 
     /**
      *
-     * @callback        filter      aal_filter_http_response_cache
+     * @callback        add_filter      aal_filter_http_response_cache
      */
     public function replyToModifyCacheRemainedTime( $aCache, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
 
-        // API requests have request-specific parameters such as timestamp and signature,
-        // so it needs a special handling and do not process it here.
-        if ( ! $this->_isType( $sType ) ) {
+        /**
+         * API requests have request-specific parameters such as timestamp and signature,
+         * so it needs a special handling and do not process it here.
+         */
+        if ( ! $this->_isBackgroundCacheRenewalAllowed( $sType ) ) {
             return $aCache;
         }
 
@@ -102,7 +113,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
             if ( $_bScheduled ) {
                 AmazonAutoLinks_Shadow::see();
             }
-            
+
             // Tell the plugin it is not expired. 
             $aCache[ 'remained_time' ] = time();
             

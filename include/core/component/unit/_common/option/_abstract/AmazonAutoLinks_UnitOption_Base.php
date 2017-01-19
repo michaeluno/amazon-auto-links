@@ -69,6 +69,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
+            + self::$aStructure_Default
             + $_oOption->get( 'unit_default' )      // 3.4.0+
             ;
         $this->aUnitOptions = $iUnitID
@@ -86,7 +87,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
             // This lets PHP 5.2 access static properties of an extended class.
             $_aProperties = get_class_vars( get_class( $this ) );
-            return $_aProperties[ 'aStructure_Default' ] + self::$aStructure_Default;
+            return $_aProperties[ 'aStructure_Default' ];
             
         }
     /**
@@ -153,60 +154,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             return $aUnitOptions;
         }
 
-    /**
-     * Retrieves the processable cache duration value.
-     *
-     * This is for unit cache renewal event. The event sets 0 for the cache duration to update caches.
-     * If 0 is set, the cache should be updated
-     * but the expiration time of the item should not be the same as the updated time.
-     * By using this method, it returns a default cache duration interval when 0 is set.
-     *
-     * If the user explicitly sets 0 for the cache duration unit option from the UI, 0 will be returned.
-     *
-     * @since  3.5.0
-     * @return integer
-     * @DEPRECA
-     */
-    public function getCacheDuration() {
-        $_iCacheDuration = ( integer ) $this->get( 'cache_duration' );
-        return $_iCacheDuration
-            ? $_iCacheDuration
-            : ( integer ) $this->getDefault( 'cache_duration' );
-    }
-
-    /**
-     * Retrieves the specified default unit argument value.
-     * @since       3.5.0
-     * @return      mixed
-     * #deprecated  3.5.0
-     */
-    public function getDefault( /* $sKey1, $sKey2, $sKey3, ... OR $aKeys, $vDefault */ ) {
-        $_aArguments = func_get_args();
-        array_unshift( $_aArguments, $this->aDefault );
-        return $this->___getElement( $_aArguments );
-    }
-        private function ___getElement( /* $aSubject, $sKey1, $sKey2, $sKey3, ... OR $aSubject, $aKeys, $vDefault */ ) {
-
-            $_mDefault  = null;
-            $_aKeys     = func_get_args() + array( array(), null );
-            $_aSubject  = array_shift( $_aKeys );
-
-            // If no key is specified, return the entire option array.
-            if ( ! isset( $_aKeys[ 0 ] ) ) {
-                return $_aSubject;
-            }
-
-            // If the first key is an array, te second parameter is the default value.
-            if ( is_array( $_aKeys[ 0 ] ) ) {
-                $_mDefault = isset( $_aKeys[ 1 ] ) ? $_aKeys[ 1 ] : null;
-                $_aKeys    = $_aKeys[ 0 ];
-            }
-            return $this->getArrayValueByArrayKeys(
-                $_aSubject,
-                $_aKeys,
-                $_mDefault
-            );
-        }
     /**
      * Returns the all associated options if no key is set; otherwise, the value of the specified key.
      * 

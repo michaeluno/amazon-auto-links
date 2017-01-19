@@ -21,7 +21,8 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
     );
 
     protected function _construct() {
-        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+        add_filter( 'aal_filter_excepted_http_request_types_for_requests', array( $this, 'replyToAddExceptedRequestType' ) );
+        add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
         parent::_construct();
     }
         public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
@@ -35,6 +36,15 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
      */
     protected function _isType( $sType ) {
         return in_array( $sType, $this->___aAPIRequestTypes );
+    }
+
+    /**
+     * Checks whether the given request type is accepted for caching.
+     * @since       3.5.0
+     * @return      boolean
+     */
+    protected function _isBackgroundCacheRenewalAllowed( $sType ) {
+        return $this->_isType( $sType );
     }
 
     /**
@@ -65,6 +75,7 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
             $_aConstructorParameters[ 4 ],
             $_aConstructorParameters[ 5 ]
         );
+
         $_oAPI->request(
             $aHTTPArguments[ 'api_parameters' ],
             $iCacheDuration,

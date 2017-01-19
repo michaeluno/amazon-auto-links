@@ -47,17 +47,31 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
         $_aDBProductRow = $this->getElementAsArray( $aDBRows, $sASIN . '_' . $sLocale );
         
         // Schedule a background task to retrieve the product information.
-        if ( empty( $_aDBProductRow ) && $sAssociateID ) {
+        if ( $this->___shouldRenewRow( $_aDBProductRow, $sAssociateID ) ) {
             AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                 $sAssociateID,
                 $sASIN, 
                 $sLocale,
-                ( int ) $this->oUnitOption->get( 'cache_duration' )
+                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
+                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
             );
         }
         return $_aDBProductRow;
 
-    }    
+    }
+        /**
+         * @since       3.5.0
+         * @return      boolean
+         */
+        private function ___shouldRenewRow( $aDBProductRow, $sAssociateID ) {
+            if ( empty( $aDBProductRow ) && $sAssociateID ) {
+                return true;
+            }
+            if ( $this->oUnitOption->get( '_force_cache_renewal' ) ) {
+                return true;
+            }
+            return false;
+        }
 
     /**
      *
@@ -103,7 +117,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_CustomDBTable extends AmazonAutoL
                 $aScheduleTask[ 'associate_id' ],
                 $aScheduleTask[ 'asin' ], 
                 $aScheduleTask[ 'locale' ],
-                $_iCacheDuration
+                ( integer ) $_iCacheDuration,
+                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
             );
         }           
         

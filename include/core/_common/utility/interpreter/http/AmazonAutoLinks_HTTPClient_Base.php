@@ -256,7 +256,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 );
 
                 // Set a valid item.
-                if ( $_aCache[ 'remained_time' ] && $_aCache[ 'data' ] ) {
+                // if ( $_aCache[ 'remained_time' ] && $_aCache[ 'data' ] ) {
+                if ( ! $this->___isCacheExpired( $_aCache ) ) {
                     $this->sLastCharSet = $_aCache[ 'charset' ];
                     $_aValidCaches[ $_sCacheName ] = $_aCache[ 'data' ];
                 }
@@ -278,6 +279,18 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             return $_aData;
             
         }
+            /**
+             * @since       3.5.0
+             * @return      boolean
+             */
+            private function ___isCacheExpired( array $aCache ) {
+
+                if ( empty( $aCache[ 'data' ] ) && 0 !== $aCache[ 'data' ] ) {
+                    return true;
+                }
+                return $aCache[ 'remained_time' ] <= 0;
+
+            }
 
         /**
          * 
@@ -324,16 +337,16 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             
         }
             
-            
-            
+
     /**
      * Deletes the cache of the provided URL.
+     *
+     * @todo implement deleteCaches() method
      */
     public function deleteCache() {
         
         $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-        foreach( $this->aURLs as $_sCacheName => $_sURL ) {            
-// @todo implement deleteCaches() method
+        foreach( $this->aURLs as $_sCacheName => $_sURL ) {
             $_oCacheTable->deleteCache(
                 $_sCacheName
             );    

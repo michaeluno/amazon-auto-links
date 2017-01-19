@@ -19,10 +19,10 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
     protected $_sActionHookName = 'aal_action_api_get_product_info';
 
-    private $___sAPIRequestType = 'api_product_information';
+    private $___sAPIRequestType = 'api_product_info'; // up to 20 chars
 
     protected function _construct() {
-        add_filter( 'aal_filter_excepted_http_request_types', array( $this, 'replyToAddExceptedRequestType' ) );
+        add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
     }
         /**
          * Adds the request type for excepted types.
@@ -49,14 +49,17 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         $_sASIN          = $aArguments[ 1 ];
         $_sLocale        = strtoupper( $aArguments[ 2 ] );
         $_iCacheDuration = $aArguments[ 3 ];
+        $_bForceRenew    = ( boolean ) $aArguments[ 4 ];
  
         // Extract the product data from the entire API response.
         $_aProductData     = $this->___getProductData(
             $_sASIN, 
             $_sLocale, 
             $_sAssociateID,
-            $_iCacheDuration
+            $_iCacheDuration,
+            $_bForceRenew
         );
+
         if ( empty( $_aProductData ) ) {
             return;
         }
@@ -67,21 +70,23 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
             $_sASIN,
             $_sLocale, 
             $_sAssociateID, 
-            $_iCacheDuration 
+            $_iCacheDuration,
+            $_bForceRenew
         );
         
         $this->___setProductData(
             $_aProductData, 
             $_sASIN,
             $_sLocale,
-            $_iCacheDuration
+            $_iCacheDuration,
+            $_bForceRenew
         );
         
     }
         /**
          * @return      void
          */
-        private function ___scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+        private function ___scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
             
             $_aSimilarProducts = $this->getElementAsArray(
                 $aAPIResponseProductData,
@@ -100,19 +105,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 $sASIN,
                 $sLocale,
                 $sAssociateID,
-                $iCacheDuration
+                $iCacheDuration,
+                $bForceRenew
             );            
             
         }
 
-    /**
-     * @param       array       $aAPIResponseProductData
-     * @param       string      $sASIN
-     * @param       string      $sLocale
-     * @param       integer     $iCacheDuration
-     * @return      void
-     */
-        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration ) {
+        /**
+         * @param       array       $aAPIResponseProductData
+         * @param       string      $sASIN
+         * @param       string      $sLocale
+         * @param       integer     $iCacheDuration
+         * @return      void
+         */
+        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew ) {
              
             // Check if a customer review exists.
             $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
@@ -125,7 +131,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     ),
                     $sASIN,
                     $sLocale,
-                    $iCacheDuration
+                    $iCacheDuration,
+                    $bForceRenew
                 );
             }   
                                    
@@ -137,8 +144,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 $_bCustomerReviewExists
             );
 
-            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
-            $_iObjectID = $_oProductTable->setRowByASINLocale(
+            $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            $_oProductTable->setRowByASINLocale(
                 $sASIN . '_' . strtoupper( $sLocale ),  // asin _ locale
                 $_aRow // row data to set
             );           
@@ -468,7 +475,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          * @return      array
          * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
          */
-        private function ___getProductData( $sASIN, $sLocale, $sAssociateID, $iCacheDuration ) {
+        private function ___getProductData( $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
             
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isAPIConnected() ) {
@@ -513,7 +520,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 
             );
 
-            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
+            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
                 $sLocale,   // locale
                 $_sPublicKey, 
                 $_sPrivateKey,
@@ -521,9 +528,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 array(),    // HTTP arguments
                 $this->___sAPIRequestType  // type
             );
-
-            // @note 3.5.0 The cache duration was 60 for some reasons.
-            $_aRawData = $_oAmazonAPI->request( $_aAPIArguments, $iCacheDuration );
+            $_aRawData = $_oAmazonAPI->request(
+                $_aAPIArguments,
+                $iCacheDuration,    // @note before v3.5.0, the cache duration was 60 for some reasons.
+                $bForceRenew
+            );
             return $this->getElement(
                 $_aRawData, // subject
                 array( 'Items', 'Item' ), // dimensional keys

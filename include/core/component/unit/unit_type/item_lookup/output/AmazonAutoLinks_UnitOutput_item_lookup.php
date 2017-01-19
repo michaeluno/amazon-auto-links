@@ -130,11 +130,12 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
          * Perform the search for the first page regardless the specified count (number of items).
          * Keys with an empty value will be filtered out when performing the request.
          */
-        $_aResponse = $_oAPI->request( 
+        $_aResponse = $_oAPI->request(
             $this->getAPIParameterArray( 
                 $this->oUnitOption->get( 'Operation' ) 
             ),
-            $this->oUnitOption->get( 'cache_duration' )
+            $this->oUnitOption->get( 'cache_duration' ),
+            $this->oUnitOption->get( '_force_cache_renewal' )
         );
         
         $_aResponse = $this->_getValidResponse( $_aResponse );
