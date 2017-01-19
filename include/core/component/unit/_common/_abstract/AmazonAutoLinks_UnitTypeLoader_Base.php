@@ -43,7 +43,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         if ( is_admin() ) {
         
             // Post meta boxes
-            $this->loadAdminComponents( $sScriptPath );
+            $this->_loadAdminComponents( $sScriptPath );
             
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToGetProtectedMetaKeys' ) );
             
@@ -60,7 +60,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         // 3.5.0+
         add_filter( 'aal_filter_registered_unit_type_labels', array( $this, 'replyToAddLabel' ) );
 
-        $this->construct( $sScriptPath );
+        $this->_construct( $sScriptPath );
         
     }
 
@@ -110,19 +110,21 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         }    
     
     /**
-     * Adds post meta boxes.
+     * Loads admin components
      * 
      * @since       3.3.0
+     * @since       3.5.0       Changed th visibility from public and renamed from `construct()`.
      * @return      void
      */
-    public function loadAdminComponents( $sScriptPath ) {}    
+    protected function _loadAdminComponents( $sScriptPath ) {}
     
     /**
      * User constructor.
      * @since       3.3.0
+     * @since       3.5.0       Changed th visibility from public and renamed from `construct()`.
      * @return      void
      */
-    public function construct( $sScriptPath ) {}
+    protected function _construct( $sScriptPath ) {}
 
     /**
      * Return the unit output.
@@ -142,13 +144,24 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
 
     /**
      * @callback    add_filter  aal_filter_detected_unit_type_by_arguments
-     * @param       string      $sUnitType
-     * @param       array       $aArguments
+     * @param       string      $sUnitTypeSlug
+     * @param       array       $aArguments     Aa argument array passed to the output function.
      * @return      string
+     * @since       3.5.0
      */
-    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
-        return $sUnitType;
+    public function replyToDetermineUnitType( $sUnitTypeSlug, $aArguments ) {
+        return $this->_getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments );
     }
+        /**
+         * @param       string      $sUnitTypeSlug
+         * @param       array       $aArguments
+         * @return      string
+         * @since       3.5.0
+         */
+        protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
+            return $sUnitTypeSlug;
+        }
+
         /**
          * @remark      Shortcode argument keys are all lower-case.
          * @since       3.4.6

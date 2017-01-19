@@ -37,7 +37,7 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      * @since       3.3.0
      * @return      void
      */
-    public function loadAdminComponents( $sScriptPath ) {
+    protected function _loadAdminComponents( $sScriptPath ) {
         
         new AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup(
             null,   // meta box ID - null for auto-generate
@@ -61,17 +61,16 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
     }
 
     /**
-     * Determines the unit type from given arguments.
-     * @since       3.5.0
-     * @param       string      $sUnitType
+     * Determines the unit type from given output arguments.
+     * @param       string      $sUnitTypeSlug
      * @param       array       $aArguments
-     * @param       null|string $_nsOperation
      * @return      string
+     * @since       3.5.0
      */
-    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+    protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         return 'ItemLookup' === $this->_getOperationArgument( $aArguments )
             ? $this->sUnitTypeSlug
-            : $sUnitType;
+            : $sUnitTypeSlug;
     }
 
     /**

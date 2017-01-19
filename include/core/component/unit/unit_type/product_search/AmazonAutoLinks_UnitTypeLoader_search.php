@@ -37,7 +37,7 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * @since       3.3.0
      * @return      void
      */
-    public function loadAdminComponents( $sScriptPath ) {
+    protected function _loadAdminComponents( $sScriptPath ) {
         
         // Admin pages
         new AmazonAutoLinks_SearchUnitAdminPage(
@@ -72,17 +72,16 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
     }     
 
     /**
-     * Determines the unit type from given arguments.
-     * @since       3.5.0
-     * @param       string      $sUnitType
+     * Determines the unit type from given output arguments.
+     * @param       string      $sUnitTypeSlug
      * @param       array       $aArguments
-     * @param       null|string $_nsOperation
      * @return      string
+     * @since       3.5.0
      */
-    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+    protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         return 'ItemSearch' === $this->_getOperationArgument( $aArguments )
             ? $this->sUnitTypeSlug
-            : $sUnitType;
+            : $sUnitTypeSlug;
     }
 
     /**

@@ -42,7 +42,7 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_UnitType
      * @since       3.5.0
      * @return      void
      */
-    public function loadAdminComponents( $sScriptPath ) {
+    protected function _loadAdminComponents( $sScriptPath ) {
 
         // Admin pages
         new AmazonAutoLinks_ContextualUnitAdminPage(
@@ -68,17 +68,16 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_UnitType
     }
 
     /**
-     * Determines the unit type from given arguments.
-     * @since       3.5.0
-     * @param       string      $sUnitType
+     * Determines the unit type from given output arguments.
+     * @param       string      $sUnitTypeSlug
      * @param       array       $aArguments
-     * @param       null|string $_nsOperation
      * @return      string
+     * @since       3.5.0
      */
-    public function replyToDetermineUnitType( $sUnitType, $aArguments ) {
+    protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         return isset( $aArguments[ 'criteria' ], $aArguments[ 'additional_keywords' ] )
             ? $this->sUnitTypeSlug
-            : $sUnitType;
+            : $sUnitTypeSlug;
     }
 
     /**

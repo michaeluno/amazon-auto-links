@@ -38,7 +38,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
     /**
      * 
      */
-    public function construct( $sScriptPath ) {
+    protected function _construct( $sScriptPath ) {
         
         // Post types
         new AmazonAutoLinks_PostType_Unit( 
@@ -82,7 +82,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
     /**
      * Loads necessary components.
      */
-    public function loadAdminComponents( $sScriptPath ) {
+    protected function _loadAdminComponents( $sScriptPath ) {
                 
         new AmazonAutoLinks_UnitPostMetaBox_ViewLink(
             null,
