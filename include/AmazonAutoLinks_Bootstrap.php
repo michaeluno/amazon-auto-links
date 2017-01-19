@@ -22,7 +22,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     protected function construct()  {
         
         if ( $this->bIsAdmin ) {
-            $this->checkCustomTables();
+            $this->___checkCustomTables();
         }
         
     }        
@@ -30,7 +30,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         /**
          * Checks if table version options exist and if not install it.
          */
-        private function checkCustomTables() {
+        private function ___checkCustomTables() {
 
             $_aTableVersions = array();
             foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'table_versions' ] as $_sOptionKey ) {
@@ -113,7 +113,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      */    
     public function replyToPluginActivation() {
 
-        $this->_checkRequirements();
+        $this->___checkRequirements();
         
         $this->replyToInstallCustomTables();
         
@@ -125,7 +125,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * 
          * @since            3
          */
-        private function _checkRequirements() {
+        private function ___checkRequirements() {
 
             $_oRequirementCheck = new AmazonAutoLinks_AdminPageFramework_Requirement(
                 AmazonAutoLinks_Registry::$aRequirements,
@@ -193,13 +193,13 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         }
             
         // Include PHP files.
-        $this->_include();
+        $this->___include();
             
         // Load the main component.
         new AmazonAutoLinks_MainLoader( $this->sFilePath );
                
         // Load sub-components
-        $this->_loadComponents();
+        $this->___loadComponents();
                             
         // Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
@@ -210,7 +210,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * @since       3.3.0
          * @return      void
          */
-        private function _loadComponents() {
+        private function ___loadComponents() {
             
             // Templates
             new AmazonAutoLinks_TemplateLoader( $this->sFilePath );
@@ -237,7 +237,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                             
             /// Admin only sub-components
             if ( $this->bIsAdmin ) {
-                $this->_loadAdminComponents();            
+                $this->___loadAdminComponents();
             }            
             
         }
@@ -245,7 +245,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
              * @since       3.3.0
              * @return      void
              */
-            private function _loadAdminComponents() {
+            private function ___loadAdminComponents() {
                             
                 new AmazonAutoLinks_SettingsAdminPageLoader;
                 
@@ -262,7 +262,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         /**
          * Includes additional files.
          */
-        private function _include() {
+        private function ___include() {
             
             // Functions
             include( dirname( $this->sFilePath ) . '/include/core/function/functions.php' );
