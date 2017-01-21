@@ -31,9 +31,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * 
      * This one will be merged with several other key structure and $aDefault will be constructed.
      */
-    static public $aStructure_Default = array(
-        '_force_cache_renewal' => false,        // 3.5.0+
-    );
+    static public $aStructure_Default = array();
     
     /**
      * @remark      Shortcode argument keys are all converted to lower-cases but Amazon API keys are camel-cased.
@@ -69,7 +67,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
-            + self::$aStructure_Default
             + $_oOption->get( 'unit_default' )      // 3.4.0+
             ;
         $this->aUnitOptions = $iUnitID

@@ -22,7 +22,7 @@
  * 
  * @filter      add     aal_filter_unit_product_raw_title
  */
-abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUtility {
+abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutput_Utility {
 
     /**
      * Stores the unit type.
@@ -59,7 +59,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
     /**
      * The site character set.
      */
-    public $sCharEncoding ='';
+    public $sCharEncoding = '';
     
     /**
      * Indicates whether the unit needs to access custom databse table.
@@ -74,10 +74,31 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
     public $oUnitOption;
 
     /**
-     * Sets up properties and hooks.
+     * @var     AmazonAutoLinks_UnitOutput__ImpressionCounter
+     * @since   3.5.0
+     */
+    public $oImpressionCounter;
+
+    /**
+     * Stores an ID for the object instance.
+     * Used for debugging and to determine the caller object and checks whether unnecessary calls are made for hook callbacks.
+     * @var string
+     */
+    public $sCallID;
+
+    /**
+     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * @since       3.5.0
+     * @var array
+     */
+    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%image_set%', '%similar%' );
+
+    /**
+     * Sets up properties.
      */
     public function __construct( $aoUnitOptions, $sUnitType='' ) {
 
+        $this->sCallID              = uniqid();
         $this->sUnitType            = $sUnitType
             ? $sUnitType
             : $this->sUnitType;
@@ -96,7 +117,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
         $this->bIsSSL               = is_ssl();        
         $this->oDOM                 = new AmazonAutoLinks_DOM;
         $this->oEncrypt             = new AmazonAutoLinks_Encrypt;
-
+        $this->oImpressionCounter   = new AmazonAutoLinks_UnitOutput__ImpressionCounter( $this );
         $this->oGlobalProductFilter = new AmazonAutoLinks_ProductFilter(
             $this->getAsArray(
                 $this->oOption->get( 'product_filters' )
@@ -111,13 +132,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
             $this->oGlobalProductFilter->bNoDuplicate = false;
             $this->oUnitProductFilter->bNoDuplicate = false;
         }
-        
-        $this->bDBTableAccess    = $this->_hasCustomDBTableAccess();
-        
-        // Sanitize product title for sorting.
-        add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ) );
- 
-    }   
+
+        // Properties set after the user constructor as some properties need to be updated in individual unit types.
+        $this->bDBTableAccess    = $this->___hasCustomDBTableAccess();
+
+        // Let extended classes set their own properties.
+        $this->_setProperties();
+
+    }
+
         /**
          * Sanitizes a raw product title.
          * @return      Overridden by an extended class.
@@ -132,103 +155,40 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
          * 
          * @remark      For the category unit type, the %description%, %content%, and %price% variables need to access the database table 
          * and it requires the API to be connected.
-         * 
          * @since       3.3.0
+         * @since       3.5.0       Changed the visibility scope from protected.
          * @return      boolean
          */
-        protected function _hasCustomDBTableAccess() {
-            return $this->_hasCustomVariable( 
+        private function ___hasCustomDBTableAccess() {
+
+            $_bUseDatabaseVariables =  $this->hasCustomVariable(
                 $this->oUnitOption->get( 'item_format' ),
-                apply_filters(
-                    'aal_filter_item_format_database_query_variables',
-                    array( '%price%', '%review%', '%rating%', '%image_set%', '%similar%' )
-                )
+                $this->_aItemFormatDatabaseVariables
             );
-        }
-    
-        /**
-         * Checks if a given custom variable(s) exists in a subject string.
-         * @return      boolean
-         * @since       3
-         */
-        protected function _hasCustomVariable( $sSubject, array $aKeys = array( 'price', 'rating', 'review', 'image_set' ) ) {
-            $_aKeys = array();
-            foreach( $aKeys as $_sKey ) {
-                $_aKeys[] = '\Q' . $_sKey . '\E';
+            if ( $_bUseDatabaseVariables ) {
+                return true;
             }
-            return preg_match( 
-                '/(' . implode( '|', $aKeys ) . ')/',  // '/(\Q%price%\E|\Q%rating%\E|\Q%review%\E|\Q%image_set%\E)/'
-                $sSubject
-            );        
+            if ( $this->oUnitOption->get( '_no_pending_items' ) ) {
+                return true;
+            }
+            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
+                return true;
+            }
+            if ( $this->oUnitOption->get( '_filter_by_discount_rate', 'enabled' ) ) {
+                return true;
+            }
+            return false;
+
         }
 
     /**
      * Sets up properties.
+     * @remark      Called after required properties are all set up.
      * @remark      Should be overridden in an extended class.
      * @return      void
      */
     protected function _setProperties() {}
-  
-    /**
-     * Finds the template path from the given arguments(unit options).
-     * 
-     * The keys that can determine the template path are template, template_id, template_path.
-     * 
-     * The template_id key is automatically assigned when creating a unit. If the template_path is explicitly set and the file exists, it will be used.
-     * 
-     * The template key is a user friendly one and it should point to the name of the template. If multiple names exist, the first item will be used.
-     * 
-     * @return      string
-     */
-    protected function getTemplatePath( $aArguments ) {
 
-        // If it is set in a request, use it.
-        if ( isset( $aArguments[ 'template_path' ] ) && file_exists( $aArguments[ 'template_path' ] ) ) {
-            return $aArguments[ 'template_path' ];
-        }
-
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        
-        // If a template name is given in a request
-        if ( isset( $aArguments[ 'template' ] ) && $aArguments[ 'template' ] ) {
-            foreach( $_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-                if ( strtolower( $_aTemplate[ 'name' ] ) == strtolower( trim( $aArguments[ 'template' ] ) ) ) {
-                    return $_aTemplate[ 'template_path' ];
-                }
-            }
-        }
-                    
-        // If a template ID is given,
-        if ( isset( $aArguments[ 'template_id' ] ) && $aArguments[ 'template_id' ] ) {
-            foreach( $_oTemplateOption->getActiveTemplates() as $_sID => $_aTemplate ) {
-                if ( $_sID == trim( $aArguments[ 'template_id' ] ) ) {
-                    return $_aTemplate[ 'template_path' ];        
-                }
-            }        
-        }
-        
-        // Not found. In that case, use the default one.
-        return $this->getDefaultTemplatePath();       
-        
-    }
-    
-    /**
-     * 
-     * @remark      Each unit has to define its own default template.
-     * @since       3
-     * @return      string
-     */
-    public function getDefaultTemplatePath() {
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        $_aTemplate = $_oTemplateOption->getTemplateArrayByDirPath(
-            AmazonAutoLinks_Registry::$sDirPath 
-            . DIRECTORY_SEPARATOR . 'template'
-            . DIRECTORY_SEPARATOR . 'category',
-            false       // no extra info
-        );
-        return $_aTemplate[ 'dir_path' ] . '/template.php' ;
-    }
-    
     /**
      * 
      * @return      string|integer      The set button id. If not set, `default` will be returned.
@@ -246,15 +206,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
         return 'default';
         
     }
-    
-    /**
-     * @deprecated      Use `get()` instead.
-     * @return      string
-     */
-    public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
-        return $this->get( $aURLs, $sTemplatePath );
-    }
-    
+
     /**
      * Gets the output of product links by specifying a template.
      * 
@@ -263,144 +215,115 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
      */
     public function get( $aURLs=array(), $sTemplatePath=null ) {
 
-        $aOptions      = $this->oOption->aOptions; 
-        
-        // Let the template file access the local `$aArguments` variable.
-        $aArguments    = $this->oUnitOption->get();
-        
-        $aProducts     = $this->fetch( $aURLs );
-        if ( $this->_isError( $aProducts ) && ! $this->oUnitOption->get( 'show_errors' ) ) {
+        // Hooks of function-call basis.
+        add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
+        $_oFilterByRating   = new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this );
+        $_oFilterByDiscount = new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this );
+        $_oDebugInfoProduct = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
+        $_oDebugInfoUnit    = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
+        $_oCredit           = new AmazonAutoLinks_UnitOutput__Credit( $this );
+
+        $_aProducts         = $this->fetch( $aURLs );
+        if ( $this->_isError( $_aProducts ) && ! $this->oUnitOption->get( 'show_errors' ) ) {
             return '';
         }
-        
-        $sTemplatePath = apply_filters( 
-            "aal_filter_template_path", 
-            isset( $sTemplatePath ) 
-                ? $sTemplatePath 
-                : $this->getTemplatePath( $aArguments ),
-            $aArguments
+        $_aOptions          = $this->oOption->aOptions;
+        $_aArguments        = $this->oUnitOption->get();
+
+        $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
+        $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
+
+        $_sContent          = $this->getOutputBuffer(
+            array( $this, 'replyToGetOutput' ),
+            array(
+                $_aOptions,
+                $_aArguments,
+                $_aProducts,
+                $_sTemplatePath
+            )
         );
-
-        // Capture the output buffer
-        ob_start(); 
-                
-        // Backward compatibility (old format variable names)
-        $arrArgs       = $aArguments;  
-        $arrOptions    = $aOptions;
-        $arrProducts   = $aProducts;        
-        
-        if ( file_exists( $sTemplatePath ) ) {
-            
-            // Not using include_once() because templates can be loaded multiple times.
-            $_bLoaded      = defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? include( $sTemplatePath )
-                : @include( $sTemplatePath ); 
-                
-            // Enqueue the impression counter script.
-            $this->_enqueueImpressionCounter();
-            
-        } else {
-            echo '<p>' 
-                . AmazonAutoLinks_Registry::NAME 
-                . ': ' . __( 'the template could not be found. Try reselecting the template in the unit option page.', 'amazon-auto-links' )
-            . '</p>';
-        }
-
-        if ( $this->oOption->isDebug() && ! $this->oUnitOption->get( 'is_preview' ) ) {
-            $this->_printDebugInfo(
-                $sTemplatePath,
-                $aArguments,
-                $aOptions,
-                $aProducts
-            );
-        }        
-        $_sContent = ob_get_contents(); 
-        ob_end_clean(); 
-    
-        
-        return apply_filters( 
+        $_sContent          = apply_filters(
             "aal_filter_unit_output", 
-            $_sContent . $this->_getCredit(), 
-            $aArguments,
-            $sTemplatePath, // [3+]
-            $aOptions, // [3+]
-            $aProducts // [3+]
+            $_sContent,
+            $_aArguments,
+            $_sTemplatePath, // [3+]
+            $_aOptions,      // [3+]
+            $_aProducts      // [3+]
         );
-        
-    }      
+
+        // Remove hooks of function-call basis.
+        remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
+        $_oFilterByRating->__destruct();
+        $_oFilterByDiscount->__destruct();
+        $_oDebugInfoProduct->__destruct();
+        $_oDebugInfoUnit->__destruct();
+        $_oCredit->__destruct();
+
+        return $_sContent;
+
+    }
         /**
-         * Stores the locales of the impression counter scripts to insert.
-         * @since       3.1.0
+         * @param       array       $aOptions
+         * @param       array       $aArguments
+         * @param       array       $aProducts
+         * @param       string      $sTemplatePath
+         * @since       3.5.0
+         * @return      string
+         * @callback    self::getOutputBuffer()
+         * @remark      Not using include_once() because templates can be loaded multiple times.
          */
-        static private $_aImressionCounterSciptLocales = array();
-        /*
-         * Enqueues the impression counter script.
-         * @since       3.1.0
-         */
-        private function _enqueueImpressionCounter() {
-            
-            if ( ! $this->oOption->get( 'external_scripts', 'impression_counter_script' ) ) {
-                return;
+        public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
+
+            if ( file_exists( $sTemplatePath ) ) {
+
+                // Backward compatibility (old format variable names)
+                $arrArgs       = $aArguments;
+                $arrOptions    = $aOptions;
+                $arrProducts   = $aProducts;
+
+                defined( 'WP_DEBUG' ) && WP_DEBUG
+                    ? include( $sTemplatePath )
+                    : @include( $sTemplatePath );
+
+                // Enqueue the impression counter script.
+                $this->oImpressionCounter->add(
+                    $this->oUnitOption->get( 'country' ),
+                    $this->oUnitOption->get( 'associate_id' )
+                );
+
+            } else {
+                echo '<p>'
+                    . AmazonAutoLinks_Registry::NAME
+                    . ': ' . __( 'the template could not be found. Try re-selecting the template in the unit option page.', 'amazon-auto-links' )
+                . '</p>';
             }
-            $_sLocale       = $this->oUnitOption->get( 'country' );
-            $_sAssociateID  = $this->oUnitOption->get( 'associate_id' );
-            self::$_aImressionCounterSciptLocales[ $_sLocale ] = isset( self::$_aImressionCounterSciptLocales[ $_sLocale ] )
-                ? self::$_aImressionCounterSciptLocales[ $_sLocale ]
-                : array();
-            self::$_aImressionCounterSciptLocales[ $_sLocale ][ $_sAssociateID ] = $_sAssociateID;
-                
-            add_action( 'wp_footer', array( __CLASS__, '_replyToInsertImpressionCounter' ), 999 );
-            
+
         }
-            /**
-             * Inserts impression counter scripts.
-             * @since       3.1.0
-             */
-            static public function _replyToInsertImpressionCounter() {
-                foreach( self::$_aImressionCounterSciptLocales as $_sLocale => $_aAssociateTags ) {
-                    foreach( $_aAssociateTags as $_sAssociateTag ) {                        
-                        echo str_replace(
-                            '%ASSOCIATE_TAG%',  // needle
-                            $_sAssociateTag,    // replacement
-                            AmazonAutoLinks_Property::getImpressionCounterScript( $_sLocale ) // haystack
-                        );
-                    }
-                }
-            }
-        
+
         /**
-         * Checks whether response has an error.
-         * @since       3
-         * @return      boolean
-         */
-        protected function _isError( $aProducts ) {
-            return empty( $aProducts );
-        }
-        /**
+         * @deprecated  Use `get()` instead.
          * @return      string
          */
-        protected function _getCredit() {            
-                        
-            $_sHTMLComment = apply_filters( 'aal_filter_credit_comment', '' );            
-            if ( ! $this->oUnitOption->get( 'credit_link' ) ) {
-                return $_sHTMLComment;
-            }
-            $_iCreditType = ( integer ) $this->oUnitOption->get( array( 'credit_link_type' ), 0 );
-            return apply_filters( 
-                'aal_filter_credit_link_' . $_iCreditType,
-                $_sHTMLComment, 
-                $this->oOption 
-            );
-                
+        public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
+            return $this->get( $aURLs, $sTemplatePath );
         }
-        
+
+    /**
+     * Checks whether response has an error.
+     * @since       3
+     * @return      boolean
+     */
+    protected function _isError( $aProducts ) {
+        return empty( $aProducts );
+    }
+
     /**
      * Renders the product links.
      * 
      * @return      void
      */
     public function render( $aURLs=array() ) {
-        echo $this->getOutput( $aURLs );
+        echo $this->get( $aURLs );
     }
 
     /**
@@ -411,6 +334,5 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_PluginUti
     public function fetch( $aURLs ) { 
         return array(); 
     }
-       
-    
+
 }

@@ -55,5 +55,18 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         );        
         
     }
- 
+
+    /**
+     * Adds form fields.
+     * @since       3.1.0
+     */
+    protected function _addFieldsByClasses( $aClassNames ) {
+        foreach( $aClassNames as $_sClassName ) {
+            $_oFields = new $_sClassName;
+            foreach( $_oFields->get() as $_aField ) {
+                $this->addSettingFields( $_aField );
+            }
+        }
+    }
+
 }

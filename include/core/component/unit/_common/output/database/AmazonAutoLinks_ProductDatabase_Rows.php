@@ -118,7 +118,7 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
         private function ___get() {
             $_aCaches        = $this->getCachedRows( $this->_aArguments );
             $_aUncachedItems = $this->___getUncached( $_aCaches, $this->_aArguments );
-            $_aResult        = $this->___getProductsFromCustomDBTable( $_aUncachedItems );
+            $_aResult        = $this->___getRowsFromDatabaseTable( $_aUncachedItems );
             return $_aResult + $_aCaches;
         }
 
@@ -139,9 +139,10 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
          *
          * @since       3
          * @since       3.4.13      Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
+         * @since       3.5.0       Renamed from `_getProductsFromCustomDBTable()`.
          * @return      array
          */
-        private function ___getProductsFromCustomDBTable( array $aASINLocales ) {
+        private function ___getRowsFromDatabaseTable( array $aASINLocales ) {
 
             if ( empty( $aASINLocales ) ) {
                 return array();

@@ -186,7 +186,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 
                 $_aASINs = array();
                 foreach( $aURLs as $_sURL ) {
-                    $_sASIN = $this->getASIN( $_sURL );
+                    $_sASIN = $this->getASINFromURL( $_sURL );
                     if ( ! $_sASIN ) {
                         continue;
                     }

@@ -123,7 +123,17 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             'advanced', // context - e.g. 'normal', 'advanced', or 'side'
             'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
         );
-        
+
+        new AmazonAutoLinks_UnitPostMetaBox_ProductFilterAdvanced(
+            null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+            __( 'Advanced Unit Product Filters', 'amazon-auto-links' ), // title
+            array(      // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'advanced', // context - e.g. 'normal', 'advanced', or 'side'
+            'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
+
         // Common meta boxes
         new AmazonAutoLinks_UnitPostMetaBox_Cache(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.

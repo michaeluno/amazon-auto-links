@@ -61,15 +61,16 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         $_oCategorySelectForm->render();
 
         // Debug
-        $this->_printDebugInfo( $oFactory );
+        $this->___printDebugInformation( $oFactory );
         
     }
         /**
          * Debug information
          * @since       3
+         * @since       3.5.0       Renamed from `_printDebugInfo()`.
          * @return      void
          */
-        private function _printDebugInfo( $oFactory ) {
+        private function ___printDebugInformation( $oFactory ) {
                     
             $_oOption = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isDebug() ) {

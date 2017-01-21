@@ -198,6 +198,22 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'similar_product_max_count'     => 10,
             
             'description_suffix'            => 'read more',
+
+            // 3.5.0+
+            '_force_cache_renewal'          => false,
+
+            '_no_pending_items'             => false,
+            '_filter_by_rating'             => array(
+                'enabled'   => false,
+                'case'      => 'above',
+                'size'      => '0',
+            ),
+            '_filter_by_discount_rate'      => array(
+                'enabled'   => false,
+                'case'      => 'above',
+                'size'      => '0',
+            ),
+
         )
         
     );

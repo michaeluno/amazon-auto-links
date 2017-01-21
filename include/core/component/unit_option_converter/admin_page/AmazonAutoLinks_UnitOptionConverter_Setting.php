@@ -70,7 +70,19 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
             'normal',                                     // context (what kind of metabox this is)
             'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
-        
+
+        new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilterAdvanced(
+            null,                                           // meta box id - passing null will make it auto generate
+            __( 'Advanced Product Filter', 'amazon-auto-links' ), // title
+            array( // page slugs
+                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
+                    'unit_option_converter'
+                ),
+            ),
+            'normal',                                     // context (what kind of metabox this is)
+            'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
+        );
+
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Cache(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Cache', 'amazon-auto-links' ), // title

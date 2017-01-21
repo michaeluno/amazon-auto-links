@@ -38,7 +38,6 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
         'categories',
     );    
 
-    
     /**
      * Adds post meta boxes.
      * 

@@ -60,7 +60,19 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
             'normal',                                     // context (what kind of metabox this is)
             'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
-        
+
+        new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilterAdvanced(
+            null,                                           // meta box id - passing null will make it auto generate
+            __( 'Advanced Product Filter', 'amazon-auto-links' ), // title
+            array( // page slugs
+                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
+                    'default'
+                ),
+            ),
+            'normal',                                     // context (what kind of metabox this is)
+            'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
+        );
+
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit(
             null,
             __( 'Submit', 'amazon-auto-links' ), // title

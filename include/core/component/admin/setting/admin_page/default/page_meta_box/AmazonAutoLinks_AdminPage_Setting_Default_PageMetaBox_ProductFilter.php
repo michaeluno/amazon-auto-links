@@ -43,24 +43,12 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter extend
         $this->_addFieldsByClasses( $_aClassNames );
                     
     }
-        /**
-         * Adds form fields.
-         * @since       3.3.0
-         */
-        private function _addFieldsByClasses( $aClassNames ) {   
-            foreach( $aClassNames as $_sClassName ) {
-                $_oFields = new $_sClassName;
-                foreach( $_oFields->get() as $_aField ) {
-                    $this->addSettingFields( $_aField );
-                }   
-            }                 
-        }
-        
+
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInput, $aOriginal, $oFactory ) {    
-        return $aInput;        
+    public function validate( $aInputs, $aOldInputs, $oFactory ) {
+        return $aInputs;
     }
     
 }

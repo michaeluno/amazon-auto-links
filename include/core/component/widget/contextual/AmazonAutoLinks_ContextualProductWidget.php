@@ -134,17 +134,23 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             )
         );
       
-        // Set the target section.
-        $this->addSettingFields( 'product_filters' );
-        
-        // Add fields 
+        // Add fields
+        $this->addSettingFields( 'product_filters' );   // Set the target section.
         $this->_addFieldsByFieldClass(
             array(
                 'AmazonAutoLinks_FormFields_ProductFilter',
                 'AmazonAutoLinks_FormFields_ProductFilter_Image',
             )
         );
-        
+
+        // Add fields
+        $this->addSettingFields( '_default' );  // Set the target section.
+        $this->_addFieldsByFieldClass(
+            array(
+                'AmazonAutoLinks_FormFields_ProductFilterAdvanced',
+            )
+        );
+
         add_filter( 'field_definition_' . $this->oProp->sClassName . '_button_id', array( $this, 'replyToSetActiveButtonLabels' ) );
         
     }

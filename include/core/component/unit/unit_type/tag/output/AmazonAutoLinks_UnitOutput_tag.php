@@ -43,7 +43,7 @@ class AmazonAutoLinks_UnitOutput_tag extends AmazonAutoLinks_UnitOutput_category
      */
     public function replyToModifyRawTitle( $sTitle ) {
         
-        $sTItle = parent::replyToModifyRawTitle( $sTitle );
+        $sTitle = parent::replyToModifyRawTitle( $sTitle );
         
         // Fixes the 'newly tagged...' and 'tagged "..." x times' insertion. 
         $_aPatterns  = array(

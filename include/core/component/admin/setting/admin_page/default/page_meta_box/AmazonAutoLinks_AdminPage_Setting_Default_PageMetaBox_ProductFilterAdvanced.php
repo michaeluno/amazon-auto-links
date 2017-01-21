@@ -7,34 +7,26 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2017 Michael Uno
  */
-
+ 
 /**
- * Defines the meta box that contains product filter unit options.
+ * @since       3.5.0
  */
-class AmazonAutoLinks_UnitPostMetaBox_ProductFilter extends AmazonAutoLinks_UnitPostMetaBox_Base {
-        
+class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilterAdvanced extends AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Base {
+
     /**
      * Sets up form fields.
      */ 
     public function setUp() {
-        
-        $_sSectionID = 'product_filters';
-        
+
         $this->addSettingSections(
             array(
-                'section_id'    => $_sSectionID,
-                'tip'           => array(
-                    __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
-                ),
+                'section_id'    => $this->_sSectionID,
             )
         );
-        
-        // Set the target section.
-        $this->addSettingFields( $_sSectionID );        
-        
+        $this->addSettingFields( $this->_sSectionID );
+
         $_aClassNames = array(
-            'AmazonAutoLinks_FormFields_ProductFilter',
-            'AmazonAutoLinks_FormFields_ProductFilter_Image',
+            'AmazonAutoLinks_FormFields_ProductFilterAdvanced',
         );
         $this->_addFieldsByClasses( $_aClassNames );
                     
@@ -47,4 +39,5 @@ class AmazonAutoLinks_UnitPostMetaBox_ProductFilter extends AmazonAutoLinks_Unit
         return $aInputs;
     }
 
+    
 }

@@ -545,7 +545,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         rawurldecode( $_aItem[ 'DetailPageURL' ] ),
                         $_aItem[ 'ASIN' ]
                     );
-                    $_sContent      = $this->getContents( $_aItem );
+                    $_sContent      = $this->_getContents( $_aItem );
                     $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
     
                     // At this point, update the black&white lists as this item is parsed.
@@ -599,7 +599,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
                     $_iResultCount = count( $_aProducts );
                     // Second iteration.
-                    $_aProducts = $this->_formatProducts(
+                    $_aProducts = $this->_getProductsFormatted(
                         $_aProducts,
                         $_aASINLocales,
                         $_sLocale,
@@ -655,7 +655,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return  string
              */
             private function ___getTitle( $aItem ) {
-                $_sTitle = $this->getTitleSanitized( $aItem[ 'ItemAttributes' ][ 'Title' ] );
+                $_sTitle = $this->_getTitleSanitized( $aItem[ 'ItemAttributes' ][ 'Title' ] );
                 $this->___checkTitleBlocked( $_sTitle );
                 return $_sTitle;
             }
@@ -676,15 +676,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              */
             private function ___getThumbnailURL( $aItem ) {
                 $_sThumbnailURL = $this->getElement( $aItem, array( 'MediumImage', 'URL' ), '' );
-                $this->___checkNoImageAllowed( $_sThumbnailURL );
+                $this->___checkImageAllowed( $_sThumbnailURL );
                 return $_sThumbnailURL;
             }
                 /**
                  * @since   3.5.0
                  * @throws  Exception
                  */
-                private function ___checkNoImageAllowed( $sThumbnailURL ) {
-                    if ( ! $this->_isNoImageAllowed( $sThumbnailURL ) ) {
+                private function ___checkImageAllowed( $sThumbnailURL ) {
+                    if ( ! $this->isImageAllowed( $sThumbnailURL ) ) {
                         throw new Exception( 'No image is allowed: ' . $sThumbnailURL );
                     }
                 }
@@ -695,7 +695,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.5.0
              */
             private function ___getDescription( $sContent, $sProductURL ) {
-                $_sDescription  = $this->getDescriptionSanitized(
+                $_sDescription  = $this->_getDescriptionSanitized(
                     $sContent,
                     $this->oUnitOption->get( 'description_length' ),
                     $this->_getReadMoreText( $sProductURL )
@@ -735,14 +735,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
                     'title'              => $_sTitle,
-                    'text_description'   => $this->getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
+                    'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                     'description'        => $_sDescription, // reflects the user set character length
                     'meta'               => '',
                     'content'            => $_sContent,
                     'image_size'         => $this->oUnitOption->get( 'image_size' ),
-                    'thumbnail_url'      => $this->_getProductImageURLFormatted(
+                    'thumbnail_url'      => $this->getProductImageURLFormatted(
                         $_sThumbnailURL,
-                        $this->oUnitOption->get( 'image_size' )
+                        $this->oUnitOption->get( 'image_size' ),
+                        strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
                     ),
                     'author'             => isset( $_aItem[ 'ItemAttributes' ][ 'Author' ] )
                         ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] )
@@ -784,18 +785,18 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProduct[ 'description' ] = $this->___getProductDescriptionFormatted( $_aProduct );
     
                 // Thumbnail
-                $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
                 $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ]; // backward compatibility
     
                 // Title
-                $_aProduct[ 'formatted_title' ] = $this->_formatProductTitle( $_aProduct );
+                $_aProduct[ 'formatted_title' ] = $this->_getProductTitleFormatted( $_aProduct );
                 $_aProduct[ 'formed_title' ]    = $_aProduct[ 'formatted_title' ]; // backward compatibility
     
     
                 // Button - check if the %button% variable exists in the item format definition.
                 // It accesses the database, so if not found, the method should not be called.
                 if (
-                    $this->_hasCustomVariable(
+                    $this->hasCustomVariable(
                         $this->oUnitOption->get( 'item_format' ),
                         array( '%button%', )
                     )

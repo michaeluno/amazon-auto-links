@@ -14,344 +14,175 @@
  * Provides shared methods and properties relating formatting product elements.
  *
  * @since       3
- * 
- * @filter      apply       aal_filter_unit_product_formatted_html
- * @filter      apply       aal_filter_unit_each_product_with_database_row
+ *
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoLinks_UnitOutput_Base_ProductFilter {
         
     /**
      * @return      array
+     * @since       unknown
+     * @since       3.5.0       Renamed from `_formatProducts()`.
      */
-    protected function _formatProducts( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
+    protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
 
-        /**
-         * If the user wants elements which need to access the custom database table,
-         * retrieve all the data at once to save the number of database queries.
-         */
-        $_aDBProductRows = $this->bDBTableAccess
-            ? $this->_getProductsFromCustomDBTable( $aASINLocales )
-            : array();
+        $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocales );
 
         // Second Iteration - format items and access custom database table.
         foreach( $aProducts as $_iIndex => &$_aProduct ) {
 
-            // Price, Rating, Reviews, and Image Sets - these need to access the plugin cache database. e.g. %price%, %rating%, %review%                
-            $_aDBProductRow = $this->_getDBProductRow(
+            try {
+                $_aProduct = $this->___getProductFormatted(
+                    $_aProduct,
+                    $_aDBProductRows,
+                    $sLocale,
+                    $sAssociateID
+                );
+            } catch ( Exception $_oException ) {
+                unset( $aProducts[ $_iIndex ] );
+                continue;
+            }
+
+            // Item
+            $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
+                $this, $_aProduct
+            );
+            $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
+            $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
+
+        }
+        return $aProducts;
+        
+    }
+        /**
+         * If the user wants elements which need to access the custom database table,
+         * retrieve all the products at once to save the number of database queries.
+         *
+         * @param   array $aASINLocales
+         * @return  array
+         * @since   3.5.0
+         */
+        private function ___getProductsRowsFromDatabase( array $aASINLocales ) {
+            if ( ! $this->bDBTableAccess ) {
+                return array();
+            }
+            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales );
+            return $_oProducts->get();
+        }
+        /**
+         * @param       array       $_aProduct
+         * @since       3.5.0
+         * @throws      Exception
+         * @return      array
+         */
+        private function ___getProductFormatted( $_aProduct, $_aDBProductRows, $sLocale, $sAssociateID ) {
+
+            if ( ! $this->bDBTableAccess ) {
+                return $_aProduct;
+            }
+
+            // Price, Rating, Reviews, and Image Sets - these need to access the plugin cache database. e.g. %price%, %rating%, %review%
+            $_aDBProductRow                 = $this->___getDBProductRow(
                 $_aDBProductRows,
                 $_aProduct[ 'ASIN' ],
                 $sLocale,
                 $sAssociateID // for scheduling a background task when a row is not found
             );
 
-            if ( $this->bDBTableAccess ) {
+            $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
+            );
+            $_aProduct[ 'price' ]            = $_oPriceFormatter->get();
+            $_oUserReviewFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
+            );
+            $_aProduct[ 'review' ]           = $_oUserReviewFormatter->get();
+            $_oUserRatingFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
+            );
+            $_aProduct[ 'rating' ]           = $_oUserRatingFormatter->get();
+            $_oImageSetFormatter             = new AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'image_set' ]        = $_oImageSetFormatter->get();
+            $_oSimilarItemsFormatter         = new AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems(
+                $this, $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow
+            );
+            $_aProduct[ 'similar_products' ] = $_oSimilarItemsFormatter->get();
 
-                $_aProduct[ 'price' ]     = $this->formatPrices( 
-                    $_aProduct[ 'ASIN' ], 
-                    $sLocale, 
-                    $sAssociateID,
-                    $_aDBProductRow
-                );
-                $_aProduct[ 'review' ]    = $this->formatUserReview( 
-                    $_aProduct[ 'ASIN' ], 
-                    $sLocale, 
-                    $sAssociateID,
-                    $_aDBProductRow
-                );
-                $_aProduct[ 'rating' ]    = $this->formatUserRating( 
-                    $_aProduct[ 'ASIN' ], 
-                    $sLocale, 
-                    $sAssociateID,
-                    $_aDBProductRow
-                );
-                $_aProduct[ 'image_set' ] = $this->formatImageSet( 
-                    $_aProduct[ 'ASIN' ], 
-                    $sLocale, 
-                    $sAssociateID, 
-                    $_aProduct[ 'product_url' ], 
-                    $_aProduct[ 'formatted_title' ],
-                    $this->oUnitOption->get( 'subimage_size' ),
-                    $this->oUnitOption->get( 'subimage_max_count' ),
-                    $_aDBProductRow
-                );
-                
-                $_aProduct[ 'similar_products' ] = $this->getSimilarProductsFormatted(
-                    $_aProduct[ 'ASIN' ], 
-                    $sLocale, 
-                    $sAssociateID,
-                    $_aDBProductRow                
-                );
-                
-                // This lets unit types that need to use the data from database rows access them.
-                $_aProduct = apply_filters( 
-                    'aal_filter_unit_each_product_with_database_row', 
-                    $_aProduct, 
-                    $_aDBProductRow,
-                    array( 
-                        'locale'        => $sLocale, 
-                        'asin'          => $_aProduct[ 'ASIN' ], 
-                        'associate_id'  => $sAssociateID 
-                    )
-                );
+            // Let unit types that need to use the data from database rows access them.
+            $_aProduct = apply_filters(
+                'aal_filter_unit_each_product_with_database_row',
+                $_aProduct,
+                $_aDBProductRow,
+                array(
+                    'locale'        => $sLocale,
+                    'asin'          => $_aProduct[ 'ASIN' ],
+                    'associate_id'  => $sAssociateID
+                )
+            );
 
-            }              
-
-
-            // 3.5.0+ With the above filter, the product may be filtered out. In that case, drop it.
+            // 3.5.0+ the product can be filtered out.
             if ( empty( $_aProduct ) ) {
-                unset( $aProducts[ $_iIndex ] );
-                continue;
+                throw new Exception( 'The product array is empty. Most likely it is filtered out.' );
             }
 
-            // Item        
-            $_aProduct[ 'formatted_item' ] = $this->_formatProductOutput( 
-                $_aProduct 
-            );
-
-            $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
+            return $_aProduct;
 
         }
-        return $aProducts;
-        
-    }    
-    
-    /**
-     * 
-     * @since       3.3.0
-     * @return      string
-     */    
-    public function getSimilarProductsFormatted( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
 
-        $_bEnabledSimilarProducts = $this->_hasCustomVariable( 
-            $this->oUnitOption->get( 'item_format' ),
-            apply_filters(
-                'aal_filter_item_format_database_query_variables',
-                array( '%similar%' )
-            )
-        );    
-        if ( ! $_bEnabledSimilarProducts ) {
-            return '<!-- Similar products are not enabled -->';
-        }
-    
-        $_aSimilarProducts = $this->_getValueFromRow( 
-            'similar_products', // column name
-            $aRow, // row
-            null,  // default
-            array( // schedule task
-                'asin'          => $sASIN, 
-                'locale'        => $sLocale, 
-                'associate_id'  => $sAssociateID,
-            )               
-        );
-        if ( null === $_aSimilarProducts && $this->oUnitOption->get( '_search_similar_products' ) ) {
-            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                $sAssociateID,
-                $sASIN,
-                $sLocale, 
-                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
-                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
-            );
-            return $this->oUnitOption->get( 'show_now_retrieving_message' )
-                ? '<p>' 
-                    . __( 'Now retrieving similar products.', 'amazon-auto-links' ) 
-                . '</p>'
-                : '';            
-            
-        }
-        
-        $_aOutputs = $this->_getSimilarProductOutputs( $_aSimilarProducts );
-    
-        if ( empty( $_aOutputs ) ) {
-            return '<!-- No similar products for '  . $sASIN . ' -->';
-        }
-        
-        return "<div class='amazon-similar-products'>"
-                . implode( '', $_aOutputs )
-            . "</div>";
-            
-    }    
-        /**
-         * @return      array
-         * @since       3.3.0
-         */
-        private function _getSimilarProductOutputs( $_aSimilarProducts ) {
-
-            $_iImageSIze        = $this->oUnitOption->get( 'similar_product_image_size' );
-            $_iMaxCount         = $this->oUnitOption->get( 'similar_product_max_count' );
-        
-            // By setting 0 or below to the image size, the user can disable the similar products.
-            if ( 0 >= $_iImageSIze ) {
-                return array();
-            }
-        
-            $_aOutputs = array();
-            foreach( $this->getAsArray( $_aSimilarProducts ) as $_iIndex => $_aProduct ) {
-                
-                if ( $_iIndex >= $_iMaxCount ) {
-                    break;
-                }
-                
-                $_sOutput = $this->_getSimilarProductEach( $_aProduct, $_iImageSIze, $_iMaxCount );
-                if ( ! $_sOutput ) {
-                    continue;
-                }
-                $_aOutputs[] = $_sOutput;
-                
-            }               
-            return $_aOutputs;
-            
-        }
             /**
-             * @since       3.3.0
-             * @return      string
+             * Retrieves a row array from the given database rows.
+             *
+             * In order to perform a background task scheduling when a row is not found,
+             * pass the associate ID.
+             *
+             * @remark      The keys of the database rows must be formatted to have {asin}_{locale}.
+             * @return      array
+             * @since       3
+             * @since       3.5.0       Changed the visibility scope from protected.
+             * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
              */
-            private function _getSimilarProductEach( $_aProduct, $_iImageSize ) {
-                
-                $_sThumbnailURL     = $this->_getProductImageURLFormatted( 
-                    $this->getElement(
-                        $_aProduct,
-                        array( 'MediumImage', 'URL' )
-                    ), 
-                    $_iImageSize 
-                );
-                if ( ! $_sThumbnailURL ) {
-                    return '';
-                }
-                
-                if ( ! $this->_isNoImageAllowed( $_sThumbnailURL ) ) {
-                    return '';
-                }
-                
-                $_sTitle        = $this->getElement(
-                    $_aProduct,
-                    array( 'ItemAttributes', 'Title' )
-                );
-                if ( $this->isTitleBlocked( $_sTitle ) ) {
-                    return '';
-                }
-                
-                $_sASIN         = $this->getElement(
-                    $_aProduct,
-                    array( 'ASIN' )
-                );
-                if ( $this->isASINBlocked( $_sASIN ) ) {
-                    return '';
-                }
-                
-                $_sProductURL   = $this->getProductLinkURLFormatted( 
-                    rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
-                    $_sASIN
-                );
+            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID='' ) {
 
-                $_sProductURL   = esc_url( $_sProductURL );
-                $_sThumbnailURL = esc_url( $_sThumbnailURL );
-                $_sTitle        = esc_attr( $_sTitle );
-                return "<div class='amazon-similar-product' style='max-height: {$_iImageSize}px; max-width: {$_iImageSize}px;'>"
-                        . "<a href='{$_sProductURL}' target='blank'>"
-                            . "<img class='amazon-similar-product-thumbnail' src='{$_sThumbnailURL}' title='{$_sTitle}' alt='{$_sTitle}' style='max-height: {$_iImageSize}px;' />"
-                        . "</a>"
-                    . "</div>";
+                if ( ! $this->bDBTableAccess ) {
+                    return array();
+                }
+                $_aDBProductRow = $this->getElementAsArray( $aDBRows, $sASIN . '_' . $sLocale );
+
+                // Schedule a background task to retrieve the product information.
+                if ( $this->___shouldRenewRow( $_aDBProductRow, $sAssociateID ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
+                        $sAssociateID,
+                        $sASIN,
+                        $sLocale,
+                        ( integer ) $this->oUnitOption->get( 'cache_duration' ),
+                        ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
+                    );
+                }
+                return $_aDBProductRow;
 
             }
-    
-    /**
-     * Returns the formatted product HTML block.
-     * @since       2.1.1
-     * @filter      apply       aal_filter_unit_product_formatted_html
-     * @filter      apply       aal_filter_unit_item_format
-     * @return      string
-     */
-    protected function _formatProductOutput( array $aProduct ) {
-
-        $_sOutput = str_replace( 
-            array( 
-                "%href%", 
-                "%title_text%", 
-                "%description_text%", 
-                "%title%", 
-                "%image%", 
-                "%description%",
-                "%rating%",
-                "%review%",
-                "%price%",
-                "%button%",
-                "%image_set%",
-                "%disclaimer%", // 3.2.0+
-                "%content%", // 3.3.0+
-                "%meta%",   // 3.3.0+
-                "%similar%",   // 3.3.0+
-            ),
-            array( 
-                $aProduct[ 'product_url' ], 
-                $aProduct[ 'title' ], 
-                $aProduct[ 'text_description' ],
-                $aProduct[ 'formatted_title' ], 
-                $aProduct[ 'formatted_thumbnail' ],
-                $aProduct[ 'description' ],
-                $aProduct[ 'rating' ],
-                $aProduct[ 'review' ],
-                $aProduct[ 'price' ],
-                $aProduct[ 'button' ],
-                $aProduct[ 'image_set' ],
-                $this->_getPricingDisclaimer( $aProduct[ 'updated_date' ] ), // 3.2.0+
-                $aProduct[ 'content' ], // 3.3.0+
-                $aProduct[ 'meta' ], // 3.3.0+
-                $aProduct[ 'similar_products' ], // 3.3.0+
-            ),
-            apply_filters(
-                'aal_filter_unit_item_format',
-                $this->oUnitOption->get( 'item_format' ),
-                $aProduct,
-                $this->oUnitOption->get()
-            )
-        );
-
-        return apply_filters(
-            'aal_filter_unit_product_formatted_html',    // filter hook name
-            $_sOutput, // filtering value
-            $aProduct[ 'ASIN' ], // parameter 1
-            $this->oUnitOption->get( 'country' ) // additional parameter 2
-        );
-    }        
-    
-        /**
-         * @since       3.2.0
-         * @return      string
-         */
-        protected function _getPricingDisclaimer( $sResponseDate ) {
-            
-            return "<span class='pricing-disclaimer'>"
-                . "(" 
-                    . sprintf(
-                        __( 'as of %1$s', 'amazon-auto-links' ),
-                        $this->getSiteReadableDate( strtotime( $sResponseDate ) )
-                    )
-                    . ' - '
-                    . $this->_getDisclaimerTooltip()
-                . ")"
-                . "</span>";
-        }            
-            /**
-             * @since       3.2.0
-             * @return      string
-             */
-            private function _getDisclaimerTooltip() {
-                return "<a href='#' class='amazon-disclaimer-tooltip'>"
-                        . __( 'More info', 'amazon-auto-links' )
-                        . "<span class='amazon-disclaimer-tooltip-content'>"
-                            . "<span class='amazon-disclaimer-tooltip-content-text'>"   // needed for widget CSS 
-                                . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
-                            . "</span'>"
-                        . "</span>"
-                    . "</a>";                
-            }
-        
+                /**
+                 * @since       3.5.0
+                 * @return      boolean
+                 */
+                private function ___shouldRenewRow( $aDBProductRow, $sAssociateID ) {
+                    if ( empty( $aDBProductRow ) && $sAssociateID ) {
+                        return true;
+                    }
+                    if ( $this->oUnitOption->get( '_force_cache_renewal' ) ) {
+                        return true;
+                    }
+                    return false;
+                }
 
     /**
      * Returns the formatted product title HTML Block.
      * @since       2.1.1
+     * @since       3.5.0       Renamed from `_formatProductTitle()`.
+     * @return      string
      */
-    protected function _formatProductTitle( array $aProduct ) {
+    protected function _getProductTitleFormatted( array $aProduct ) {
         return str_replace( 
             array( 
                 "%href%", 
@@ -371,8 +202,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * Returns the formatted product thumbnail HTML block.
      * 
      * @since       2.1.1
+     * @since       3.5.0       Renamed from `_formatProductThumbnail()`.
+     * @return      string
      */
-    protected function _formatProductThumbnail( array $aProduct ) {
+    protected function _getProductThumbnailFormatted( array $aProduct ) {
         
         return isset( $aProduct[ 'thumbnail_url' ] )
             ? str_replace( 
@@ -395,38 +228,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             : '';            
         
     }
-    
-    /**
-     * 
-     * @since       unknown
-     * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
-     */
-    protected function _getProductImageURLFormatted( $sImageURL, $isImageSize ) {
-        
-        // If no product image is found
-        if ( ! $sImageURL ) {
-            $_sLocale  = strtoupper( $this->oUnitOption->get( 'country' ) );
-            $sImageURL = isset( AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ] )
-                ? AmazonAutoLinks_Property::$aNoImageAvailable[ $_sLocale ]
-                : AmazonAutoLinks_Property::$aNoImageAvailable[ 'US' ];
-        }
-        
-        if ( $this->bIsSSL ) {
-            $sImageURL = $this->getAmazonSSLImageURL( $sImageURL );
-        }
-        
-        return $this->setImageSize( $sImageURL, $isImageSize );
-        
-    }    
-    
-    
+
     /**
      * Strips tags and truncates the given string.
      * 
      * @since       unknown
-     * @since       3.3.0       Renamed from `sanitizeDecription()`.
+     * @since       3.3.0       Renamed from `sanitizeDescription()`.
      */
-    protected function getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
+    protected function _getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
 
         $sDescription = strip_tags( $sDescription );
         
@@ -446,23 +255,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         return trim( $sDescription );
         
     }
-    
-    /**
-     * @since       3.3.0
-     * @return      string
-     * @deprecated  Not used at the moment.
-     */
-/*     protected function getHTMLStringTruncated( $sHTMLDescription, $iMaxLength=-1, $sReadMore='' ) {
-       
-        $iMaxLength = ( integer ) $iMaxLength;
-        $_oTruncator = new AmazonAutoLInks_HTMLStringTruncator;
-        if ( -1 !== $iMaxLength ) {
-            $sHTMLDescription = $_oTruncator->getTrimmed( $sHTMLDescription, $iMaxLength, $sReadMore );
-        }
-        return $sHTMLDescription;
-        
-    } */
-    
+
     /**
      * @return      string
      * @since       3.3.0
@@ -507,9 +300,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     
     /**
      * Strips HTML tags and sanitizes the product title.
-     * 
+     * @return  string
      */
-    protected function getTitleSanitized( $sTitle ) {
+    protected function _getTitleSanitized( $sTitle ) {
 
         // $sTitle = strip_tags( $sTitle );
 
@@ -533,76 +326,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $sTitle = $this->getSubstring( $sTitle, 0, $this->oUnitOption->get( 'title_length' ) ) . '...';
         }
         
-        // return $sTitle;
-        return esc_attr( $sTitle );
+//        return $sTitle;
+        // @todo Examine whether escaping is needed here. The returned value may be used in an attribute.
+         return esc_attr( $sTitle );
 
     }
-        
-    /**
-     * Extracts ASIN from the given url. 
-     * 
-     * ASIN is a product ID consisting of 10 characters.
-     * 
-     * example regex patterns:
-     *         /http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/
-     *         "http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})"
-     * 
-     * @return      string      The found ASIN, or an empty string when not found.
-     */
-    protected function getASIN( $sURL ) {
-        
-        $sURL = remove_query_arg( 
-            array( 'smid', 'pf_rd_p', 'pf_rd_s', 'pf_rd_t', 'pf_rd_i', 'pf_rd_m', 'pf_rd_r' ),
-            $sURL
-        );
-        
-        $sURL = preg_replace(
-            array(
-                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
-            ), 
-            '', 
-            $sURL
-        );
-        
-        preg_match( 
-            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})\W/', // needle - [A-Z0-9]{10} is the ASIN
-            $sURL,  // subject
-            $_aMatches // match container
-        );
-        return isset( $_aMatches[ 3 ] ) 
-            ? $_aMatches[ 3 ] 
-            : '';
-    }
-    
-    /**
-     * Returns the resized image url.
-     * 
-     * @rmark       Adjusts the image size. _SL160_ or _SS160_
-     * @return      string
-     * @param       $sImgURL        string
-     * @param       $iImageSize     integer     0 to 500.
-     */
-    protected function getImageURLBySize( $sImgURL, $iImageSize ) {
-        return preg_replace( 
-            '/(?<=_S)([LS])(\d{1,3})(?=_)/i', 
-            '${1}'. $iImageSize, 
-            $sImgURL 
-       );          
-    }    
-        /**
-         * @deprecated
-         */
-        protected function setImageSize( $sImgURL, $iImageSize ) {
-            return $this->getImageURLBySize( $sImgURL, $iImageSize );
-        }
-    
-        /**
-         * @deprecated
-         */
-        protected function respectSSLImage( $sImgURL ) {
-            return $this->getAmazonSSLImageURL( $sImgURL );
-        }
-    
+
     /**
      * Formats a button.
      * 
@@ -667,15 +396,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 . "</a>";            
       
         }
-    
+
     /**
      * Formats the given url such as adding associate ID, ref=nosim, and link style.
      * 
      * @return      string
+     * @since       unknown
+     * @since       3.5.0       Changed the visibility scope from protected.
+     * @remark      The similarity product formatter class accesses it.
      */
-    protected function getProductLinkURLFormatted( $sURL, $sASIN ) {
+    public function getProductLinkURLFormatted( $sURL, $sASIN ) {
 
-        $_sStyledURL = $this->getFormattedProductLinkByStyle( 
+        $_sStyledURL = $this->___getFormattedProductLinkByStyle(
             $sURL, 
             $sASIN, 
             $this->oUnitOption->get( 'link_style' ), 
@@ -687,12 +419,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             
     }
         /**
-         * A helper function for the above getProductLinkURLFormatted() method.
+         * A helper function for the above `getProductLinkURLFormatted()` method.
          * 
          * @remark      $iStyle should be 1 to 5 indicating the url style of the link.
          * @return      string
          */
-        protected function getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
+        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
             
             $iStyle = $iStyle
                 ? ( integer ) $iStyle 
@@ -714,321 +446,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
 
         }
-    
-    /**
-     * 
-     * @since       3
-     * @return      string
-     */
-    public function formatPrices( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
-
-        $_sPriceFormatted = $this->_getValueFromRow(
-            'price_formatted',
-            $aRow,
-            null,   // default
-            array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, )
-        );
-        
-        // If a price is not found, return a message or an empty string.
-        if ( null === $_sPriceFormatted ) {
-            return $this->oUnitOption->get( 'show_now_retrieving_message' )
-            ? '<p>' 
-                . __( 'Now retrieving the price.', 'amazon-auto-links' )
-                . '</p>'
-            : '';
-        }
-        
-        // At this point, a price for the product is found.
-        return $this->___getPriceOutput( $_sPriceFormatted, $sASIN, $sLocale, $sAssociateID, $aRow );
-
-    }
-        /**
-         * Generates a price output with a discount price if available.
-         * @since       3.4.11
-         * @return      string
-         */
-        private function ___getPriceOutput( $_sPriceFormatted, $sASIN, $sLocale, $sAssociateID, $aRow ) {
-
-            $_aDBArguments          = array( 'asin' => $sASIN, 'locale' => $sLocale, 'associate_id'  => $sAssociateID, );
-            // $_inPrice               = $this->_getValueFromRow( 'price', $aRow, null, $_aDBArguments );
-            $_inLowestNew           = $this->_getValueFromRow( 'lowest_new_price', $aRow, null, $_aDBArguments );
-            $_inDiscount            = $this->_getValueFromRow( 'discounted_price', $aRow, null, $_aDBArguments );
-            $_inOffered             = $this->___getLowestPrice( $_inLowestNew, $_inDiscount );
-            $_sLowestColumnName     = $_inDiscount === $_inOffered ? 'discounted_price_formatted' : 'lowest_new_price_formatted';
-            $_sLowestFormatted      = $this->_getValueFromRow( $_sLowestColumnName, $aRow, null, $_aDBArguments );
-            return $_sPriceFormatted !== $_sLowestFormatted
-                ? '<s>' . $_sPriceFormatted . '</s> ' . $_sLowestFormatted
-                : $_sPriceFormatted;
-
-        }
-            /**
-             * @param integer $_iLowestNew
-             * @param integer $_iDiscount
-             *
-             * @return integer|null
-             * @since  3.4.11
-             */
-            private function ___getLowestPrice( $_iLowestNew, $_iDiscount ) {
-                $_aOfferedPrices        = array();
-                if ( null !== $_iLowestNew ) {
-                    $_aOfferedPrices[] = ( integer ) $_iLowestNew;
-                }
-                if ( null !== $_iDiscount ) {
-                    $_aOfferedPrices[] = ( integer ) $_iDiscount;
-                }
-                return ! empty( $_aOfferedPrices )
-                    ? min( $_aOfferedPrices )
-                    : null;
-            }
-            /**
-             * @since       3.4.3
-             * @since       3.4.11      Renamed the name from `_isPriceDiscounted()`.
-             * @return      boolean
-             * @deprecated  3.4.13
-             */
-/*            private function ___isPriceDiscounted( $iPrice, $iOfferedPrice ) {
-                if ( null === $iOfferedPrice ) {
-                    return false;
-                }
-                $iPrice        = ( integer ) $iPrice;
-                $iOfferedPrice = ( integer ) $iOfferedPrice;
-                return ( $iPrice > $iOfferedPrice );
-            }*/
-    
-    /**
-     * 
-     * @since       3
-     * @return      string
-     */
-    public function formatImageSet( $sASIN, $sLocale, $sAssociateID, $sProductURL, $sTitle, $iMaxImageSize=100, $iMaxNumberOfImages=5, array $aRow=array() ) {
-
-        $_asImages = $this->_getValueFromRow(
-            'images', // column name
-            $aRow, // row
-            null, // default
-            array(
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
-        );       
-        
-        // When the DB row is not set, the value will be null.
-        if ( null === $_asImages ) {            
-            return $this->oUnitOption->get( 'show_now_retrieving_message' )
-                ? '<p>'
-                        . __( 'Now retrieving an image set.', 'amazon-auto-links' )
-                    . '</p>'
-                : '';
-        }
-  
-        $sTitle    = strip_tags( $sTitle );
-  
-        // Extract image urls
-        $_aImageURLs = $this->_getSubImageURLs( 
-            $_asImages, 
-            $iMaxImageSize, 
-            $iMaxNumberOfImages
-        );
-
-        $_aSubImageTags = array();
-        foreach( $_aImageURLs as $_sImageURL ) {
-            $_sImageTag = $this->generateHTMLTag(
-                'img',
-                array(
-                    'src'   => esc_url( $_sImageURL ),
-                    'class' => 'sub-image',
-                    'alt'   => $sTitle,
-                )
-            );
-            $_sATag     = $this->generateHTMLTag(
-                'a',
-                array(
-                    'href'   => esc_url( $sProductURL ),
-                    'target' => '_blank',
-                    'title'  => $sTitle,
-                ),
-                $_sImageTag
-            );
-            $_aSubImageTags[] = $this->generateHTMLTag(
-                'div',
-                array(
-                    'class' => 'sub-image-container',
-                ),
-                $_sATag
-            );
-        }
-        return "<div class='sub-images'>"
-                . implode( '', $_aSubImageTags )
-            . "</div>";
-
-    }
-        /**
-         * @return      array       An array holding image urls.
-         */
-        private function _getSubImageURLs( array $aImages, $iMaxImageSize, $iMaxNumberOfImages ) {
-            
-            // If the size is set to 0, it means the user wants no image.
-            if ( ! $iMaxImageSize ) {
-                return array();
-            }
-            
-            // The 'main' element is embedded by the plugin.
-            unset( $aImages[ 'main' ] );
-            
-            $_aURLs  = array();
-            foreach( $aImages as $_iIndex => $_aImage ) {
-                
-                // The user may set 0 to disable it.
-                if ( ( integer ) $_iIndex >= $iMaxNumberOfImages ) {
-                    break;
-                }                
-                $_aURLs[] = $this->_getImageURLFromResponseElement(
-                    $_aImage, 
-                    $iMaxImageSize 
-                );
-            }
-            // Drop empty items.
-            return array_filter( $_aURLs );
-            
-        }
-            /**
-             * 
-             * @remark      available key names
-             * - SwatchImage
-             * - SmallImage
-             * - ThumbnailImage
-             * - TinyImage
-             * - MediumImage
-             * - LargeImage
-             * - HiResImage
-             */
-            private function _getImageURLFromResponseElement( array $aImage, $iImageSize ) {
-                 
-                $_sURL = '';
-                foreach( $aImage as $_sKey => $_aDetails ) {
-                    $_sURL = $this->getElement(
-                        $_aDetails, // subject array
-                        array( 'URL' ), // dimensional key
-                        ''  // default
-                    );                    
-                    if ( $_sURL ) {
-                        break;
-                    }
-                }
-                $_sURL = $this->getImageURLBySize(
-                    $_sURL,
-                    $iImageSize
-                );
-                return $this->bIsSSL
-                    ? $this->getAmazonSSLImageURL( $_sURL )
-                    : $_sURL;
-            }
-    
-    /**
-     * 
-     * @since       3
-     * @return      string
-     */    
-    public function formatUserReview( $sASIN, $sLocale, $sAssociateID, array $aRow ) {
-        $_sEncodedHTML = $this->_getValueFromRow( 
-            'customer_reviews', // column name
-            $aRow, // row
-            null,  // default
-            array( // schedule task
-                'asin'          => $sASIN, 
-                'locale'        => $sLocale, 
-                'associate_id'  => $sAssociateID,
-            )               
-        );
-        if ( null === $_sEncodedHTML ) {
-            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                $sAssociateID,
-                $sASIN,
-                $sLocale, 
-                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
-                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
-            );
-            
-            return $this->oUnitOption->get( 'show_now_retrieving_message' )
-                ? '<p>' 
-                    . __( 'Now retrieving customer reviews.', 'amazon-auto-links' ) 
-                . '</p>'
-                : '';            
-            
-        }
-        if ( ! $_sEncodedHTML ) {
-            return '';
-        }
-        
-        // Now modify the raw output.
-        // 1. Remove unnecessary elements.
-        $_oScraper  = new AmazonAutoLinks_ScraperDOM_CustomerReview_Each(
-            $_sEncodedHTML,
-            true,
-            $this->oUnitOption->get( 'customer_review_max_count' ),
-            $this->oUnitOption->get( 'customer_review_include_extra' )
-        );
-        return "<div class='amazon-customer-reviews'>" 
-                . $_oScraper->get()
-            . "</div>";        
-        
-    }
-    /**
-     * 
-     * @since       3
-     * @return      string
-     */    
-    public function formatUserRating( $sASIN, $sLocale, $sAssociateID, array $aRow=array() ) {
-        
-        $_sEncodedHTML = $this->_getValueFromRow(
-            'rating_html', // column name
-            $aRow, // row
-            null, // default - will
-            array( // schedule background task
-                'asin'          => $sASIN,
-                'locale'        => $sLocale,
-                'associate_id'  => $sAssociateID,
-            )
-        );
-        // If the value is null, it means the value does not exist in the database table.
-        if ( null === $_sEncodedHTML ) {
-            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                $sAssociateID,
-                $sASIN,
-                $sLocale, 
-                ( integer ) $this->oUnitOption->get( 'cache_duration' ),
-                ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
-            );
-            
-            return $this->oUnitOption->get( 'show_now_retrieving_message' )
-                ? '<p>' 
-                        . __( 'Now retrieving the rating.', 'amazon-auto-links' ) 
-                    . '</p>'
-                : '';
-            
-        }         
-        if ( '' === $_sEncodedHTML ) {
-            return '';
-        }        
-        
-        // Now modify the raw output.   
-        $_oScraper = new AmazonAutoLinks_ScraperDOM_UserRating(
-            $_sEncodedHTML,
-            true // character set - auto detect
-        );
-        return "<div class='amazon-customer-rating-stars'>"
-                . $_oScraper->get()
-            . "</div>";
-            
-    }
 
     /**
      * @return      string
      * @since       3.3.0
+     * @since       3.5.0   Renamed from `getContents()`.
      * 
      */
-    protected function getContents( $aItem ) {
+    protected function _getContents( $aItem ) {
 
         $_aEditorialReviews = $this->getElementAsArray( 
             $aItem,
@@ -1046,7 +471,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 . $_sContents
             . "</div>";
 
-    }        
-
+    }
      
 }

@@ -37,18 +37,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilter exte
         $this->_addFieldsByClasses( $_aClassNames );
                     
     }
-        /**
-         * Adds form fields.
-         * @since       3.3.0
-         */
-        private function _addFieldsByClasses( $aClassNames ) {   
-            foreach( $aClassNames as $_sClassName ) {
-                $_oFields = new $_sClassName;
-                foreach( $_oFields->get() as $_aField ) {
-                    $this->addSettingFields( $_aField );
-                }   
-            }                 
-        }
+
         
     /**
      * Validates submitted form data.

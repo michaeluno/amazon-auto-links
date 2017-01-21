@@ -64,62 +64,71 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * Stores rss urls to fetch and exclude the items from the result.
      */
     protected $_aExcludingRSSURLs = array();
-    
-    
-    
+
+    public function get( $aURLs=array(), $sTemplatePath=null ) {
+        $this->___setHooksForOutput();
+        $_sOutput = parent::get( $aURLs, $sTemplatePath );
+        $this->___removeHooksForOutput();
+        return $_sOutput;
+    }
+
     /**
      * Sets up properties.
      */
     public function __construct( $aoUnitOptions=array() ) {
-            
-        parent::__construct( $aoUnitOptions );
-        
-        $this->_setProperties();
-        $this->_setHooks();
-                
-    }        
-        /**
-         * Sets up properties.
-         * @remark      The 'tag' unit type will override this method.
-         */
-        protected function _setProperties() {
-        
-            $this->_aRSSURLs          = $this->_getRSSURLsFromArguments( 
-                $this->oUnitOption->get( array( 'categories' ), array() ) 
-            );
 
-            $this->_aExcludingRSSURLs = $this->_getRSSURLsFromArguments( 
-                $this->oUnitOption->get( array( 'categories_exclude' ), array() ) 
-            );        
-        
+        $this->___setProperties();
+        parent::__construct( $aoUnitOptions );
+
+    }
+
+    /**
+     * Called before any properties are set.
+     */
+    private function ___setProperties() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( $_oOption->isAPIConnected() ) {
+            $this->_aItemFormatDatabaseVariables[] = '%description%';
+            $this->_aItemFormatDatabaseVariables[] = '%content%';
         }
+    }
+
+    /**
+     * Sets up properties. Called at the end of the constructor.
+     *
+     * @remark      The 'tag' unit type will override this method.
+     */
+    protected function _setProperties() {
+
+        $this->_aRSSURLs          = $this->_getRSSURLsFromArguments(
+            $this->oUnitOption->get( array( 'categories' ), array() )
+        );
+
+        $this->_aExcludingRSSURLs = $this->_getRSSURLsFromArguments(
+            $this->oUnitOption->get( array( 'categories_exclude' ), array() )
+        );
+
+    }
         /**
          * @since       3.3.0
          */
-        private function _setHooks() {
-            
-            static $bLoaded;
-            
-            // Make sure the below hooks are set only once per object instance.
-        // @todo Investigate why in the category selection page, the callback gets triggred multiple times.
-        // So this check is necessary. However, this check should not be necessary.
-            if ( $bLoaded ) {
-                return;
-            }
-            $bLoaded = true;
-            
-            add_filter( 
+        private function ___setHooksForOutput() {
+            add_filter(
                 'aal_filter_unit_each_product_with_database_row', 
                 array( $this, 'replyToFormatProductWithDBRow' ), 
                 10, 
                 3
             );
-            
+        }
+        /**
+         * @since       3.5.0
+         */
+        private function ___removeHooksForOutput() {
             add_filter(
-                'aal_filter_item_format_database_query_variables',
-                array( $this, 'replyToSetCustomDatabaseQueryVariables' )
+                'aal_filter_unit_each_product_with_database_row',
+                array( $this, 'replyToFormatProductWithDBRow' ),
+                10
             );
-            
         }
 
         /**
@@ -134,17 +143,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             return $_aRSSURLs;                
         }
         
-    /**
-     * Returns an array holding Item Format variables which require database table access.
-     * @return      array
-     * @since       3.3.0
-     */
-    public function replyToSetCustomDatabaseQueryVariables( $aVariables ) {
-        if ( $this->oOption->isAPIConnected() ) {
-            $aVariables[] = '%description%';
-        }
-        return $aVariables;
-    }
 
     /**
      * Called when the unit has access to the plugin custom database table.
@@ -156,17 +154,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
     
-        $aProduct[ 'content' ]      = $this->getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
+        $aProduct[ 'content' ]      = $this->_getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
         $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "  // only the meta is added by default
             . "<div class='amazon-product-description'>"
-                . $this->getDescriptionSanitized( 
+                . $this->_getDescriptionSanitized(
                     $aProduct[ 'content' ], 
                     $this->oUnitOption->get( 'description_length' ), 
                     $this->_getReadMoreText( $aProduct[ 'product_url' ] )
                 )
-            . "</div>"
-            ;
-        
+            . "</div>";
         return $aProduct;
     
     }
@@ -176,20 +172,22 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @since       3.3.0
      * 
      */
-    protected function getContents( $aProduct /*, $aDBRow, $aScheduleIdentifier */ ) {
+    protected function _getContents( $aProduct /*, $aDBRow, $aScheduleIdentifier */ ) {
         
         $_aParams            = func_get_args();
         $aProduct            = $_aParams[ 0 ];
         $aDBRow              = $_aParams[ 1 ];
         $aScheduleIdentifier = $_aParams[ 2 ];
-        
-        $_aReviews = $this->_getValueFromRow( 
-            'editorial_reviews', 
-            $aDBRow, 
-            array(),   // default
-            $aScheduleIdentifier
-        );    
-        
+
+        $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
+            $aScheduleIdentifier[ 'asin' ],
+            $aScheduleIdentifier[ 'locale' ],
+            $aScheduleIdentifier[ 'associate_id' ],
+            $aDBRow,
+            $this->oUnitOption
+        );
+        $_aReviews = $_oRow->getCell( 'editorial_reviews' );
+
         $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
             $_aReviews,
             $this->oDOM,
@@ -202,34 +200,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             . "</div>";
 
     }               
-        
-        
-    /**
-     * Checks whether the unit needs to access the plugin custom database table.
-     * 
-     * @remark      For the category unit type, the %description%, %content%, and %price% variables need to access the database table 
-     * and it requires the API to be connected.
-     * 
-     * @remark      Overriding the method defined in the base class.
-     * @since       3.3.0
-     * @return      boolean
-     * @deprecated
-     */
-/*     protected function _hasCustomDBTableAccess() {
 
-        $_aVariablesToCheck   = array( '%price%', '%review%', '%rating%', '%image_set%', '%content%', '%similar%' );
-    
-        if ( $this->oOption->isAPIConnected() ) {
-            $_aVariablesToCheck[] = '%description%';
-        }
-        
-        return $this->_hasCustomVariable( 
-            $this->oUnitOption->get( 'item_format' ),
-            $_aVariablesToCheck
-        );        
-        
-    }         */
-        
     /**
      * Fetches and returns the associative array containing the output of product links.
      * 
@@ -356,7 +327,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     protected function _setBlackASINs( array $aItems ) {
         foreach ( $aItems as $_aItem ) {
             $this->setParsedASIN( 
-                $this->getASIN( 
+                $this->getASINFromURL(
                     $this->getElement( $aItems, 'link' ) 
                 ) 
             );
@@ -444,7 +415,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 try {
                     $_iResultCount = count( $_aProducts );
                     // Second iteration.
-                    $_aProducts = $this->_formatProducts(
+                    $_aProducts = $this->_getProductsFormatted(
                         $_aProducts,
                         $_aASINLocales,
                         $_sLocale,
@@ -495,7 +466,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 // ASIN - required to detect duplicated items.
                 $_sPermalink         = trim( $this->getElement( $_aItem, 'link' ) );
-                $_aProduct[ 'ASIN' ] = $this->getASIN( $_sPermalink );
+                $_aProduct[ 'ASIN' ] = $this->getASINFromURL( $_sPermalink );
                 if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
                     throw new Exception( 'The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
                 }
@@ -508,7 +479,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 // Title
                 $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
-                $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ] );
+                $_aProduct[ 'title' ]     = $this->_getTitleSanitized( $_aProduct[ 'raw_title' ] );
                 if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) {
                     throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'title' ] );
                 }
@@ -540,7 +511,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 );
 
                 // Check whether no-image shuld be skipped.
-                if ( ! $this->_isNoImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
+                if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
                     throw new Exception( 'No image is allowed: ' );
                 }
 
@@ -560,23 +531,23 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
 
 
-                // no published date of the product is avariable in this feed
+                // no published date of the product is available in this feed
                 // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );
                 $_aProduct[ 'updated_date' ]        = $this->getElement( $_aItem, 'pubDate' );  // 3.2.0+
 
                 // Format the item
                 // Thumbnail
-                $_aProduct[ 'formatted_thumbnail' ] = $this->_formatProductThumbnail( $_aProduct );
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
                 $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ];  // backward compatibility
 
                 // Title
-                $_aProduct[ 'formatted_title' ]     = $this->_formatProductTitle( $_aProduct );
+                $_aProduct[ 'formatted_title' ]     = $this->_getProductTitleFormatted( $_aProduct );
                 $_aProduct[ 'formed_title' ]        = $_aProduct[ 'formatted_title' ];  // backward compatibility
 
                 // Button - check if the %button% variable exists in the item format definition.
                 // It accesses the database, so if not found, the method should not be called.
                 if (
-                    $this->_hasCustomVariable(
+                    $this->hasCustomVariable(
                         $this->oUnitOption->get( 'item_format' ),
                         array( '%button%', )
                     )
@@ -771,7 +742,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $nodeImg = $oDoc->getElementsByTagName( 'img' )->item( 0 );
             if ( $nodeImg ) {
                 $_sImgURL = $nodeImg->attributes->getNamedItem( "src" )->value;
-                $_sImgURL = $this->setImageSize( $_sImgURL, $iImageSize );
+                $_sImgURL = $this->getImageURLBySize( $_sImgURL, $iImageSize );
             } 
             
         }
