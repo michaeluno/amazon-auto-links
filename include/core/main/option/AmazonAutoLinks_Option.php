@@ -206,12 +206,12 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             '_filter_by_rating'             => array(
                 'enabled'   => false,
                 'case'      => 'above',
-                'size'      => '0',
+                'amount'    => 0,
             ),
             '_filter_by_discount_rate'      => array(
                 'enabled'   => false,
                 'case'      => 'above',
-                'size'      => '0',
+                'amount'    => 0,
             ),
 
         )
@@ -414,6 +414,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         return ( boolean ) is_user_logged_in();
         
     }
-    
+
+    /**
+     * @return bool
+     * @since   3.5.0
+     */
+    public function isAdvancedProductFiltersAllowed() {
+        return false;
+    }
     
 }

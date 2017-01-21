@@ -401,7 +401,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_aProducts,
                 $_aASINLocales,
                 $_sLocale,
-                $_sAssociateID
+                $_sAssociateID,
+                $_iCount
             );
 
         }
@@ -410,7 +411,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
              * @return     array
              * @since      3.5.0
              */
-            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID ) {
+            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount ) {
 
                 try {
                     $_iResultCount = count( $_aProducts );

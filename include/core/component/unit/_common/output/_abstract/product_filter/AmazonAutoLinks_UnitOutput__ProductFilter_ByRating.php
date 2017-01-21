@@ -34,7 +34,32 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
      * @return      array       The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returend to be filtered out.
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
-        return $aProduct;
+
+        $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
+            $aRowIdentifier[ 'asin' ],
+            $aRowIdentifier[ 'locale' ],
+            $aRowIdentifier[ 'associate_id' ],
+            $aRow,
+            $this->_oUnitOutput->oUnitOption
+        );
+        $_iRating = ( integer ) $_oRow->getCell( 'rating' );
+
+        // The value is two digits such as 30 for 3.0.
+        $_iAcceptedRate = ( integer ) ( $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'amount' ) * 10 );
+        $_sCase = $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'case' );
+        switch ( $_sCase ) {
+            case 'below':
+                return ( $_iAcceptedRate >= $_iRating )
+                    ? $aProduct
+                    : array();     // do not show
+
+            default:
+            case 'above':
+                return ( $_iAcceptedRate <= $_iRating )
+                    ? $aProduct
+                    : array();   // do not show
+        }
+
     }
 
 }

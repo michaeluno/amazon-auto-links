@@ -583,7 +583,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProducts,
                 $_aASINLocales,
                 $_sLocale,
-                $_sAssociateID
+                $_sAssociateID,
+                $_iCount,
+                $_sResponseDate
             );
             
         }    
@@ -593,7 +595,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return     array
              * @since      3.5.0
              */
-            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID ) {
+            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount, $_sResponseDate ) {
         
                 try {
 
