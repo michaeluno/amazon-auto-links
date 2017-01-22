@@ -51,8 +51,9 @@ class AmazonAutoLinks_Event___Query_Feed {
     public function replyToLoadJSONFeed() {
         
         $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ] = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
-        $_aArguments[ 'credit_link' ]   = false;
+        $_aArguments[ 'template_path' ]       = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
+        $_aArguments[ 'credit_link' ]         = false;
+        $_aArguments[ '_no_outer_container' ] = true;
         header( 
             'Content-Type: application/json; charset=' . get_option( 'blog_charset' ),
             true
@@ -82,11 +83,12 @@ class AmazonAutoLinks_Event___Query_Feed {
     public function replyToLoadRSS2Feed() {
         
         $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ] = AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php';
-        $_aArguments[ 'credit_link' ] = false;
+        $_aArguments[ 'template_path' ]       = AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php';
+        $_aArguments[ 'credit_link' ]         = false;
+        $_aArguments[ '_no_outer_container' ] = true;
 
         header( 
-            'Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'),
+            'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ),
             true 
         );
 

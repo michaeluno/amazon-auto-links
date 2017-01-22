@@ -59,9 +59,11 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     public function get() {
-        return "<div class='amazon-auto-links'>"
-                . $this->___getOutput()
-            . "</div>";
+        $_sOutput = $this->___getOutput();
+        $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
+        return $_bNoOuterContainer
+            ? $_sOutput
+            : "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
     }
         /**
          * @since       3.5.0

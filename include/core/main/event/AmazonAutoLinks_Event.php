@@ -39,7 +39,7 @@ class AmazonAutoLinks_Event {
 
             $this->___handleBackgroundRoutines();
 
-            $this->_handleQueryURL();
+            $this->___handleQueryURL();
             
         }
             /**
@@ -99,7 +99,7 @@ class AmazonAutoLinks_Event {
              * @since       3.1.0
              * @return      void
              */
-            private function _handleQueryURL() {
+            private function ___handleQueryURL() {
                 
                 $_oOption     = AmazonAutoLinks_Option::getInstance();
                 $_sQueryKey   = $_oOption->get( 'query', 'cloak' );

@@ -285,6 +285,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 - Added the `Sort Order` option to the `Item Look-up` unit type.
 - Refined the API request caching mechanism.
 - (breaking change) Fixed typos in option key names. This fix affects the stored option values of `Interval for Removing Expired Caches` and `Caching Mode`. Some users may need to re-save the options.
+- Fixed a bug that produced invalid RSS2 and JSON formats.
 
 = 3.4.13 - 01/05/2017 =
 - Fixed a bug that an incorrect offered price was displayed with the `%price%` variable of the `Item Format` option.
