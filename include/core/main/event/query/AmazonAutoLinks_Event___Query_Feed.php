@@ -16,87 +16,29 @@
  * @since       3.5.0   Renamed from `AmazonAutoLinks_Event_Feed`.
  * 
  */
-class AmazonAutoLinks_Event___Query_Feed {
+class AmazonAutoLinks_Event___Query_Feed extends AmazonAutoLinks_PluginUtility {
     
     /**
      * Sets up properties and hooks.
      * @since       3.0.1       
      */
-    public function __construct() {
-        
-        $_sOutputType = isset( $_GET[ 'output' ] )
-            ? $_GET[ 'output' ]
-            : '';
-        
-        switch( $_sOutputType ) {            
+    public function __construct( $sQueryKey ) {
+
+        if ( 'feed' !== $_GET[ $sQueryKey ] ) {
+            return;
+        }
+        switch( $this->getElement( $_GET, array( 'output' ), '' ) ) {
         
             case 'json':
-                add_filter( 'aal_filter_unit_output', array( $this, 'replyToRemoveCredit' ) );
-                add_action( 'init', array( $this, 'replyToLoadJSONFeed' ), 999 );
-            break;
-            
+                new AmazonAutoLinks_Event___Feed_JSON;
+                break;
             default:
             case 'rss2':
-                add_action( 'init', array( $this, 'replyToLoadRSS2Feed' ), 999 );
-            break;            
+                new AmazonAutoLinks_Event___Feed_RSS2;
+                break;
             
         }
         
-    }
-    
-    /**
-     * 
-     * @since       3.1.0
-     */
-    public function replyToLoadJSONFeed() {
-        
-        $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ]       = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
-        $_aArguments[ 'credit_link' ]         = false;
-        $_aArguments[ '_no_outer_container' ] = true;
-        header( 
-            'Content-Type: application/json; charset=' . get_option( 'blog_charset' ),
-            true
-        );
-        AmazonAutoLinks(
-            $_aArguments,
-            true    // echo or return
-        );
-        exit;
-        
-    }    
-    /**
-     * @since       3.1.0
-     */
-    public function replyToRemoveCredit( $sUnitOutput ) {
-        return str_replace(
-            AmazonAutoLinks_PluginUtility::getCommentCredit(),
-            '',
-            $sUnitOutput
-        );
-    }
-    
-    /**
-     * 
-     * @since       3.1.0
-     */
-    public function replyToLoadRSS2Feed() {
-        
-        $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ]       = AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php';
-        $_aArguments[ 'credit_link' ]         = false;
-        $_aArguments[ '_no_outer_container' ] = true;
-
-        header( 
-            'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ),
-            true 
-        );
-
-        AmazonAutoLinks(
-            $_aArguments,
-            true    // echo or return 
-        );        
-        exit;
     }
 
 }

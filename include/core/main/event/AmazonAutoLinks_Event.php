@@ -106,12 +106,8 @@ class AmazonAutoLinks_Event {
                 if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
                     return;
                 }
-                
-                if ( 'feed' === $_GET[ $_sQueryKey ] ) {
-                    new AmazonAutoLinks_Event___Query_Feed;
-                    return;
-                }
-                
+
+                new AmazonAutoLinks_Event___Query_Feed( $_sQueryKey );
                 new AmazonAutoLinks_Event___Query_Redirect( $_sQueryKey );
                 
             }    
