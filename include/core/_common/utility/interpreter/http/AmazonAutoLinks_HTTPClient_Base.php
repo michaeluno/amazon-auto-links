@@ -139,9 +139,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          
             $_sHTTPBody         = is_wp_error( $_aoResponse )
                 ? $_aoResponse->get_error_message()
-                : wp_remote_retrieve_body( $_aoResponse );         
-            // $_sHTTPBody         = wp_remote_retrieve_body( $_aResponse );
-            $_sCharSetFrom      = $this->getCharacterSet( $_sURL );
+                : wp_remote_retrieve_body( $_aoResponse );
+            $_sCharSetFrom      = $this->_getCharacterSet( $_aoResponse );
             $_sCharSetTo        = $this->sSiteCharSet;
 
             // Encode the document from the source character set to the site character set.
@@ -162,7 +161,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         return $_aData;
         
     }
-    
+
     /**
      * Returns the response's character set by the url.
      * 
@@ -178,22 +177,18 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         $_sCacheName = filter_var( $sURLOrCacheName, FILTER_VALIDATE_URL )
             ? $this->_getCacheName( $sURLOrCacheName )
             : $sURLOrCacheName;
-        return $this->_getCharacterSetFromCache( $_sCacheName );
+        return $this->___getCharacterSetFromCache( $_sCacheName );
     }
         /**
          * 
          * @return      string
          */
-        private function _getCharacterSetFromCache( $sCacheName ) {
-            
+        private function ___getCharacterSetFromCache( $sCacheName ) {
             $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-            $_aRow = $_oCacheTable->getCache( 
-                $sCacheName // single item returns a single row
-            ); 
+            $_aRow        = $_oCacheTable->getCache( $sCacheName ); // single item returns a single row
             return isset( $_aRow[ 'charset' ] ) 
                 ? $_aRow[ 'charset' ]
                 : null;
-                
         }
 
     /**
@@ -256,7 +251,6 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 );
 
                 // Set a valid item.
-                // if ( $_aCache[ 'remained_time' ] && $_aCache[ 'data' ] ) {
                 if ( ! $this->___isCacheExpired( $_aCache ) ) {
                     $this->sLastCharSet = $_aCache[ 'charset' ];
                     $_aValidCaches[ $_sCacheName ] = $_aCache[ 'data' ];
