@@ -124,7 +124,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
          * @since       3.5.0
          */
         private function ___removeHooksForOutput() {
-            add_filter(
+            remove_filter(
                 'aal_filter_unit_each_product_with_database_row',
                 array( $this, 'replyToFormatProductWithDBRow' ),
                 10
@@ -151,6 +151,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * 
      * @return      3.3.0
      * @return      array
+     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
     
