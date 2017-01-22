@@ -122,9 +122,9 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
              */
             private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments=array(), $iDuration, $bForceCaching=false ) {
 
-                $this->___sleep( $sRequestURI );
-
                 add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10, 3 );
+                add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 10, 3 );
+
                 $_oHTTP = new AmazonAutoLinks_HTTPClient(
                     $sRequestURI,
                     $iDuration,
@@ -138,33 +138,48 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
                     $_oHTTP->deleteCache();
                 }
                 $_asResponse =  $_oHTTP->get();
+
                 remove_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10 );
+                remove_filter( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 10 );
                 return $_asResponse;
 
             }
                 /**
-                 * Gives an interval in API request to avoid reaching the API rate limit.
-                 *
-                 * Check a lock transient that lasts only one second
-                 * as Amazon Product Advertising API only allows one request per second.
-                 *
-                 * @since       3.5.0
-                 * @return      void
+                 * @since           3.5.0
+                 * @param           string      $sRequestURL
+                 * @param           array       $aArguments
+                 * @param           string      $sRequestType
+                 * @callback        add_action  aal_action_http_remote_get
                  */
-                private function ___sleep( $sRequestURI ) {
-
-                    $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
-                    $_iIteration      = 0;
-                    while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
-                        sleep( 1 );
-                        $_iIteration++;
+                public function replyToHaveHTTPRequestInterval( $sRequestURL, $aArguments, $sRequestType ) {
+                    if ( $this->___sRequestType !== $sRequestType ) {
+                        return;
                     }
-                    $this->setTransient(
-                        $_sAPIRequestLock,
-                        $sRequestURI, // any data will be sufficient
-                        1  // one second
-                    );
+                    $this->___sleep( $sRequestURL );
                 }
+                    /**
+                     * Gives an interval in API requests to avoid reaching the API rate limit.
+                     *
+                     * Check a lock transient that lasts only one second
+                     * as Amazon Product Advertising API only allows one request per second.
+                     *
+                     * @since       3.5.0
+                     * @return      void
+                     */
+                    private function ___sleep( $sRequestURI ) {
+
+                        $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
+                        $_iIteration      = 0;
+                        while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
+                            sleep( 1 );
+                            $_iIteration++;
+                        }
+                        $this->setTransient(
+                            $_sAPIRequestLock,
+                            $sRequestURI, // any data will be sufficient
+                            1  // one second
+                        );
+                    }
 
                 /**
                  * Generates a cache name by removing request-specific keys from the query url.

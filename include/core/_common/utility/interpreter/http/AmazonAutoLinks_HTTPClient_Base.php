@@ -297,6 +297,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @remark      this does not set cache
          */
         protected function _getHTTPResponse( $sURL, array $aArguments ) {
+            do_action( 'aal_action_http_remote_get', $sURL, $aArguments, $this->sRequestType ); // 3.5.0
             return function_exists( 'wp_safe_remote_get' )
                 ? wp_safe_remote_get( $sURL, $aArguments )
                 : wp_remote_get( $sURL, $aArguments );
