@@ -16,7 +16,7 @@ class AmazonAutoLinks_UnitPostMetaBox_DebugInfo extends AmazonAutoLinks_UnitPost
     /**
      * Checks whether the meta box should be registered or not in the loading page.
      */
-    public function _isInThePage() {
+    protected function _isInThePage() {
 
         if ( ! parent::_isInThePage() ) {
             return false;

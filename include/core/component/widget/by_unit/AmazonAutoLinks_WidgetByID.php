@@ -44,7 +44,7 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
      * 
      * Alternatively you may use load_{instantiated class name} method.
      */
-    public function load( $oAdminWidget ) {
+    public function load() {
         
         $this->addSettingFields(
             array(

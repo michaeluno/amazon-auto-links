@@ -38,8 +38,8 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
      */
     public function get() {
 
-        $_sContents = $this->_getJoinedElements( $this->aReviews, 'Content' );
-        $_sContents = $this->_getContentsSanitized( $_sContents );
+        $_sContents = $this->___getJoinedElements( $this->aReviews, 'Content' );
+        $_sContents = $this->___getContentsSanitized( $_sContents );
         return $_sContents;
         
     }
@@ -48,7 +48,7 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
          * @return      string
          * @since       3.3.0
          */
-        private function _getContentsSanitized( $sContents ) {
+        private function ___getContentsSanitized( $sContents ) {
             
             // DOM
             $_oDoc = $this->oDOM->loadDOMFromHTMLElement( $sContents );
@@ -156,7 +156,7 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
          * `
          * @return      string
          */
-        private function _getJoinedElements( $aParentArray, $sKey ) {
+        private function ___getJoinedElements( $aParentArray, $sKey ) {
             
             if ( isset( $aParentArray[ $sKey ] ) ) { 
                 return ( string ) $aParentArray[ $sKey ]; 

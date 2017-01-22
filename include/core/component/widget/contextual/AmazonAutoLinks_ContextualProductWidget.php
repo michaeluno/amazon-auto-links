@@ -86,7 +86,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      * 
      * Alternatively you may use load_{instantiated class name} method.
      */
-    public function load( $oAdminWidget ) {
+    public function load() {
                 
         $_oOption       = AmazonAutoLinks_Option::getInstance();
         $_bAPIConnected = $_oOption->isAPIConnected();
