@@ -79,6 +79,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             if ( ! $this->bDBTableAccess ) {
                 return $_aProduct;
             }
+            if ( ! $this->oOption->isAPIConnected() ) {
+                return $_aProduct;
+            }
 
             // Price, Rating, Reviews, and Image Sets - these need to access the plugin cache database. e.g. %price%, %rating%, %review%
             $_aDBProductRow                 = $this->___getDBProductRow(
