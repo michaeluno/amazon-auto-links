@@ -186,7 +186,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $aDBRow,
             $this->oUnitOption
         );
-        $_aReviews = $_oRow->getCell( 'editorial_reviews' );
+        $_aReviews = $_oRow->getCell( 'editorial_reviews', array() );
 
         $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
             $_aReviews,
