@@ -7,6 +7,7 @@
  * $aArguments - the user defined unit arguments such as image size and count etc.
  */
 
+$_oUtil   = new AmazonAutoLinks_PluginUtility;
 $_oOption = AmazonAutoLinks_Option::getInstance();
 echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>'; 
 
@@ -24,7 +25,7 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
     <?php
         $sFeedTitle = __( 'Amazon Products', 'amazon-auto-links' ) 
             . (
-                isset( $aArguments[ 'label' ] ) && ! empty( $aArguments[ 'label' ] )
+                $_oUtil->getElement( $aArguments, array( 'label' ) )
                     ? ( ' ' . implode( ', ', $aArguments[ 'label' ] ) )
                     : ( $aArguments[ 'id' ] 
                         ? ' ' . get_the_title( $aArguments[ 'id' ]  )
@@ -32,10 +33,10 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
                     )
             );
     ?>
-    <title><![CDATA[ <?php echo $sFeedTitle; ?>]]></title>
+    <title><?php echo strip_tags( $sFeedTitle ); ?></title>
     <atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml" />
-    <link><?php bloginfo_rss('url') ?></link>
-    <description><?php bloginfo_rss( "description" ); ?></description>
+    <link><?php bloginfo_rss( 'url' ) ?></link>
+    <description><?php bloginfo_rss( 'description' ); ?></description>
     <lastBuildDate><?php echo mysql2date( 'D, d M Y H:i:s +0000', get_lastpostmodified( 'GMT' ), false ); ?></lastBuildDate>
     <language><?php bloginfo_rss( 'language' ); ?></language>
     <sy:updatePeriod><?php echo apply_filters( 'rss_update_period', 'hourly' ); ?></sy:updatePeriod>
@@ -47,19 +48,20 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
         }
         foreach ( $aProducts as $_aProduct ) : 
             $sLabels = empty( $aArguments[ '_labels' ] )
-                ? AmazonAutoLinks_PluginUtility::getReadableLabelsByUnitID( $aArguments[ 'id' ] )
-                : AmazonAutoLinks_PluginUtility::getReadableLabelsByLabelID( $aArguments[ '_labels' ] );
+                ? $_oUtil->getReadableLabelsByUnitID( $aArguments[ 'id' ] )
+                : $_oUtil->getReadableLabelsByLabelID( $aArguments[ '_labels' ] );
             $_sGUID  = $aArguments[ 'unit_type' ] . '_' . $_aProduct[ 'ASIN' ] . '_' . $aArguments[ 'country' ];
 
     ?>    
     <item>
         <title><![CDATA[<?php echo $_aProduct[ 'title' ]; ?>]]></title>
         <link><?php echo $_aProduct[ 'product_url' ]; ?></link>
-        <comments></comments>
-        <pubDate><?php // echo date( 'D, d M Y H:i:s +0000', $_aProduct[ 'created_at' ] ); ?></pubDate>
-        <dc:creator><![CDATA[<?php // echo $_aProduct['user']['name']; ?>]]></dc:creator>
-        
+        <!--<comments></comments>-->
+        <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', $_aProduct[ 'updated_date' ], false ); ?></pubDate>
+        <!--<dc:creator><![CDATA[]]></dc:creator>-->
+        <?php if ( $sLabels ): ?>
         <category><![CDATA[<?php echo $sLabels; ?>]]></category>
+        <?php endif; ?>
         <guid isPermaLink="false"><?php echo $_sGUID; ?></guid>        
         <?php if ( ! $_oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
         <description><![CDATA[<?php echo $_aProduct[ 'description' ]; ?>]]></description>
@@ -67,8 +69,8 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
         <?php else : ?>
         <description><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></description>        
         <?php endif; ?>
-        <wfw:commentRss></wfw:commentRss>
-        <slash:comments></slash:comments>
+        <!--<wfw:commentRss></wfw:commentRss>-->
+        <!--<slash:comments></slash:comments>-->
 
     <?php do_action( 'rss2_item' ); ?>
     </item>

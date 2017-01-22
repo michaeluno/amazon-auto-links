@@ -44,7 +44,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'button'                => null,
         
         // Unused items
-        'date'                  => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless.
+        'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless.
         
         
         // 3.3.0
@@ -534,7 +534,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
 
                 // no published date of the product is available in this feed
-                // $_aProduct[ 'date' ]                = $this->getElement( $_aItem, 'pubDate' );
                 $_aProduct[ 'updated_date' ]        = $this->getElement( $_aItem, 'pubDate' );  // 3.2.0+
 
                 // Format the item
