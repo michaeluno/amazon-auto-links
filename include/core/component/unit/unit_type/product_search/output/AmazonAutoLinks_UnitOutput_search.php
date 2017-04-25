@@ -137,7 +137,16 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $_sTerms
                 );
                 $_aTerms    =  $this->getStringIntoArray( $_sTerms, ',' );
-                
+
+                /**
+                 * When the sort order is `random`, the query items should be shuffled first
+                 * because shuffling the retrieved truncated results will just display the same products with different order.
+                 * @since   3.5.1
+                 */
+                if ( 'random' === $this->oUnitOption->get( '_sort' ) ) {
+                    shuffle( $_aTerms );
+                }
+
                 $_bSearchPerTerm = $this->oUnitOption->get( 'search_per_keyword' );
                 if ( count( $_aTerms ) > 10 && ! $_bSearchPerTerm ) {
                      

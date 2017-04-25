@@ -3,7 +3,7 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.7.1
+Tested up to:       4.7.4
 Stable tag:         3.5.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -276,6 +276,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.5.1 =
+- Fixed an issue that the random sort order for URL and Item Look-up units was applied after the product data were retrieved which caused the same items to constantly appear.
 
 = 3.5.0 - 01/23/2017 =
 - Added the `Renew Cache` action link in the unit listing table.
