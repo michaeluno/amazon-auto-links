@@ -687,6 +687,17 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              */
             private function ___getThumbnailURL( $aItem ) {
                 $_sThumbnailURL = $this->getElement( $aItem, array( 'MediumImage', 'URL' ), '' );
+
+                /**
+                 * Occasionally, the `MediumImage` element (main thumbnail image) does not exist but sub-images do.
+                 * In that case, use the first sub-image.
+                 *
+                 * @since  3.5.2
+                 */
+                if ( empty( $_sThumbnailURL ) ) {
+                    $_sThumbnailURL = $this->getElement( $aItem, array( 'ImageSets', 'ImageSet', '0', 'MediumImage', 'URL' ), '' );
+                }
+
                 $this->___checkImageAllowed( $_sThumbnailURL );
                 return $_sThumbnailURL;
             }
