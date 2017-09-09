@@ -277,6 +277,9 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
+= 3.5.3 - 09/10/2017 =
+- Changed the default value of the Credit Link unit option.
+
 = 3.5.2 - 06/08/2017 =
 - Fixed an issue that the search unit types missed product thumbnails in rare cases.
 
