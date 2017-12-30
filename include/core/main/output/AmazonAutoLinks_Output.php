@@ -75,7 +75,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
             // For cases without a unit
             if ( empty( $_aIDs ) ) {
-                return $this->___getOutputByDirectArguments( $this->aArguments );
+                return trim( $this->___getOutputByDirectArguments( $this->aArguments ) );
             }
 
             // If called by unit,
