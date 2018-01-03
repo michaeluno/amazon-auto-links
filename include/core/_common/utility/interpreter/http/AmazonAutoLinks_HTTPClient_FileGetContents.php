@@ -36,7 +36,7 @@ class AmazonAutoLinks_HTTPClient_FileGetContents extends AmazonAutoLinks_HTTPCli
     public function get() {
         
         // file_get_contents() will return the response body by default.
-        $_sHTTPBody    = $this->getResponse();    
+        $_sHTTPBody    = $this->getResponses();
         $_sCharSetFrom = $this->sLastCharSet;
         $_sCharSetTo   = $this->sSiteCharSet;
         if ( $_sCharSetFrom && ( strtoupper( $_sCharSetTo ) <> strtoupper( $_sCharSetFrom ) ) ) {
@@ -53,8 +53,9 @@ class AmazonAutoLinks_HTTPClient_FileGetContents extends AmazonAutoLinks_HTTPCli
         /**
          * 
          * @return      object|array        Response array or WP Error object.
+         * @deprecated  3.5.4
          */
-        protected function _getHTTPResponseWithCache( $sURL, $aArguments=array(), $iCacheDuration=86400 ) {
+        protected function ____getHTTPResponseWithCache( $sURL, $aArguments=array(), $iCacheDuration=86400 ) {
             
             $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             
@@ -97,7 +98,13 @@ class AmazonAutoLinks_HTTPClient_FileGetContents extends AmazonAutoLinks_HTTPCli
             
         }
             
-   
+    /**
+     *
+     * @remark      this does not set cache
+     */
+    protected function _getHTTPResponse( $sURL, array $aArguments ) {
+        return file_get_contents( $sURL );
+    }
            
     
 }
