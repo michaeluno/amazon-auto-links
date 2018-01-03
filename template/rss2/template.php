@@ -19,7 +19,10 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
     xmlns:atom="http://www.w3.org/2005/Atom"
     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-    <?php do_action( 'rss2_ns' ); ?>
+    <?php
+    do_action( 'rss2_ns' );
+    do_action( 'aal_action_rss2_namespace' );    // 3.5.4+
+    ?>
 >
 <channel>
     <?php
@@ -65,14 +68,17 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
         <guid isPermaLink="false"><?php echo $_sGUID; ?></guid>        
         <?php if ( ! $_oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
         <description><![CDATA[<?php echo $_aProduct[ 'description' ]; ?>]]></description>
-        <content:encoded><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></content:encoded>   
+        <content:encoded><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></content:encoded>
         <?php else : ?>
         <description><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></description>        
         <?php endif; ?>
         <!--<wfw:commentRss></wfw:commentRss>-->
         <!--<slash:comments></slash:comments>-->
 
-    <?php do_action( 'rss2_item' ); ?>
+    <?php
+        do_action( 'rss2_item' );
+        do_action( 'aal_action_rss2_item', $_aProduct );    // 3.5.4+
+    ?>
     </item>
     
     <?php endforeach; ?>
