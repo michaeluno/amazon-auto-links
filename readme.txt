@@ -278,7 +278,8 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 == Changelog ==
 
 = 3.5.4 =
-- Added custom filter hooks in the feed templte to allow third-parties to modify the RSS feed outputs.
+- Fixed an issue that category units could not detect some sub-categories when creating a unit.
+- Added custom filter hooks in the feed template to allow third-parties to modify the RSS feed outputs.
 
 = 3.5.3 - 09/10/2017 =
 - Changed the default value of the Credit Link unit option.
