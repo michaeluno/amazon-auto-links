@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.7.5
-Stable tag:         3.5.3
+Tested up to:       4.9.0
+Stable tag:         3.5.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,7 +277,7 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 
 == Changelog ==
 
-= 3.5.4 =
+= 3.5.4 - 05/02/2018 =
 - Fixed an issue that category units could not detect some sub-categories when creating a unit.
 - Added custom filter hooks in the feed template to allow third-parties to modify the RSS feed outputs.
 
