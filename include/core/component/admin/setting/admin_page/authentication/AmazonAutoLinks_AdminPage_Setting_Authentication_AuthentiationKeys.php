@@ -82,7 +82,8 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                     'US'    => 'US - webservices.amazon.com',
                     'IN'    => 'IN - webservices.amazon.in',            
                     'BR'    => 'BR - webservices.amazon.com.br',        
-                    'MX'    => 'MX - webservices.amazon.com.mx',        
+                    'MX'    => 'MX - webservices.amazon.com.mx',
+                    'AU'    => 'AU - webservices.amazon.com.au',    // 3.5.5b01+
                 ),
                 // 'default'           => 'US',
             ),                

@@ -28,7 +28,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'field_id'      => 'country',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
                 'type'          => 'select',
-                'label'         => array(                        
+                'label'         => array(
                     'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
                     'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
                     'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
@@ -41,6 +41,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                     'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
                     'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
                     'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
+                    'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ), // 3.5.5+
                 ),
                 'default'       => 'US',
             ),              

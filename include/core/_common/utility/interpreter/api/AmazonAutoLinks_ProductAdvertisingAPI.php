@@ -34,6 +34,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
         'IN'    => 'in',            // 2.1.0+        
         'BR'    => 'com.br',        // 3.4.4+
         'MX'    => 'com.mx',        // 3.4.4+
+        'AU'    => 'com.au',        // 3.5.5+
     );
 
     private $___aConstructorParameters = array();

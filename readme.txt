@@ -27,7 +27,7 @@ Display affiliate links along with your posts with this plugin to generate actua
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India, and China. For the category unit types, Mexico and Brazil are supported as well.
+Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India, China, Mexico and Brazil.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
@@ -136,7 +136,7 @@ Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto
 Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
 
 = My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? = 
-Try [Scratchpad](http://associates-amazon.s3.amazonaws.com/scratchpad/index.html) to make sure your keys work there as well.
+Try [Scratchpad](http://webservices.amazon.com/scratchpad/) to make sure your keys work there as well.
 
 
 == Other Notes ==
@@ -266,7 +266,7 @@ Then press the `Create New Access Key` button to create a key. Don't forget to k
 
 Also note that at the point that an access key is issued, if you have not created an account with Product Advertising API, the key will be invalid. If that happens, delete the created access key and go back to the previous step.
 
-You can check if your access key is valid or not with [Scratchpad](http://associates-amazon.s3.amazonaws.com/scratchpad/index.html). 
+You can check if your access key is valid or not with [Scratchpad](http://webservices.amazon.com/scratchpad/).
 
 == Screenshots ==
 
@@ -276,6 +276,10 @@ You can check if your access key is valid or not with [Scratchpad](http://associ
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.5.5 =
+- Added support for the Australia locale.
+- Added support for the locales of Mexico and Brazil for the search units.
 
 = 3.5.4 - 05/02/2018 =
 - Fixed an issue that category units could not detect some sub-categories when creating a unit.

@@ -47,6 +47,7 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                     'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
                     'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
                     'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
+                    'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ),
                 ),
                 'default' => 'US',
             ),                     
