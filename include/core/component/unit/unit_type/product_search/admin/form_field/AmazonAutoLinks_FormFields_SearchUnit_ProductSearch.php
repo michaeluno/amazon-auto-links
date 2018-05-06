@@ -14,7 +14,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
      * @return      array
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
-            
+
         $_oOption   = $this->oOption;
         $_aFields   = array(
             array(
@@ -67,11 +67,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'field_id'      => $sFieldIDPrefix . 'SearchIndex',
                 'type'          => 'select',
                 'title'         => __( 'Category', 'amazon-auto-links' ),            
-                'label'         => AmazonAutoLinks_Property::getSearchIndexByLocale( 
-                    isset( $aUnitOptions[ 'country' ] ) 
-                        ? strtoupper( $aUnitOptions[ 'country' ] )
-                        : null 
-                ),
+                'label'         => $this->_getSearchIndex( $aUnitOptions ),
                 'default'       => 'All',
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
                 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
@@ -83,11 +79,11 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),
                 'type'          => 'radio',
                 'label'         => array(                        
-                    'pricerank'           => "<strong>" . __( 'Price Ascending', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items from the cheapest to the most expensive.', 'amazon-auto-links' ) . '<br />',
-                    'inversepricerank'    => "<strong>" . __( 'Price Descending', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items from the most expensive to the cheapest.', 'amazon-auto-links' ) . '<br />',
-                    'salesrank'           => "<strong>" . __( 'Sales Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how well they have been sold, from best to worst sellers.', 'amazon-auto-links' ) . '<br />',
-                    'relevancerank'       => "<strong>" . __( 'Relevance Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how often the keyword appear in the product description.', 'amazon-auto-links' ) . '<br />',
-                    'reviewrank'          => "<strong>" . __( 'Review Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how highly rated the item was reviewed by customers where the highest ranked items are listed first and the lowest ranked items are listed last.', 'amazon-auto-links' ) . '<br />',
+                    'price'           => "<strong>" . __( 'Price Ascending', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items from the cheapest to the most expensive.', 'amazon-auto-links' ) . '<br />',     // 3.5.5+ Changed from `pricerank` for consistency with `-price`.
+                    '-price'          => "<strong>" . __( 'Price Descending', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items from the most expensive to the cheapest.', 'amazon-auto-links' ) . '<br />',    // 3.5.5+ Changed from `inversepricerank` as `-price` is supported by other locales.
+                    'salesrank'       => "<strong>" . __( 'Sales Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how well they have been sold, from best to worst sellers.', 'amazon-auto-links' ) . '<br />',
+                    'relevancerank'   => "<strong>" . __( 'Relevance Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how often the keyword appear in the product description.', 'amazon-auto-links' ) . '<br />',
+                    'reviewrank'      => "<strong>" . __( 'Review Rank', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts items based on how highly rated the item was reviewed by customers where the highest ranked items are listed first and the lowest ranked items are listed last.', 'amazon-auto-links' ) . '<br />',
                 ),
                 'default'       => 'salesrank',
                 'description'   => __( 'When the search index is selected to <code>All</code>, this option does not take effect.', 'amazon-auto-links' ),
@@ -96,5 +92,5 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
         return $_aFields;
         
     }
-          
+
 }

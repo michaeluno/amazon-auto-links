@@ -278,6 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.5.5 =
+- Fixed a bug that incorrect categories were displayed when creating a new product search and item search unit.
 - Added support for the Australia locale.
 - Added support for the locales of Mexico and Brazil for the search units.
 

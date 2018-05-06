@@ -94,12 +94,8 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
             array(
                 'field_id'      => $sFieldIDPrefix . 'SearchIndex',
                 'type'          => 'select',
-                'title'         => __( 'Categories', 'amazon-auto-links' ),            
-                'label'         => AmazonAutoLinks_Property::getSearchIndexByLocale( 
-                    isset( $aUnitOptions[ 'country' ] ) 
-                        ? $aUnitOptions[ 'country' ] 
-                        : null 
-                    ),
+                'title'         => __( 'Categories', 'amazon-auto-links' ),
+                'label'         => $this->_getSearchIndex( $aUnitOptions ),
                 'default'       => 'All',
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
                 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
