@@ -525,14 +525,31 @@ final class AmazonAutoLinks_Property {
                     'Watches'               => __( 'Watches', 'amazon-auto-links' ),
                 );
             // @since   3.5.5
-            // @remark  The `AU` locale is missing in the AWS documentation.
+            // @remark  The `AU` locale is missing in the AWS documentation. So the categories are extracted from the HTML source code of ScratchPad SearchIndex parameter.
+            // @see     http://webservices.amazon.com.au/scratchpad/index.html
             case 'AU':
                 return array(
                     'All'                   => __( 'All', 'amazon-auto-links' ),
+                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
+                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
+                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
+                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
+                    'Fashion'               => __( 'Fashion', 'amazon-auto-links' ),
+                    'HealthPersonalCare'    => __( 'HealthPersonalCare', 'amazon-auto-links' ),
+                    'KindleStore'           => __( 'KindleStore', 'amazon-auto-links' ),
+                    'MobileApps'            => __( 'MobileApps', 'amazon-auto-links' ),
+                    'Movies'                => __( 'Movies', 'amazon-auto-links' ),
+                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
+                    'OfficeProducts'        => __( 'OfficeProducts', 'amazon-auto-links' ),
+                    'PCHardware'            => __( 'PCHardware', 'amazon-auto-links' ),
+                    'Software'              => __( 'Software', 'amazon-auto-links' ),
+                    'SportingGoods'         => __( 'SportingGoods', 'amazon-auto-links' ),
+                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
+                    'VideoGames'            => __( 'VideoGames', 'amazon-auto-links' ),
                 );
             // @since   3.5.5
             // @see     https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleBR.html
-            case "BR":
+            case 'BR':
                 return array(
                     'All'                   => __( 'All', 'amazon-auto-links' ),
                     'Books'                 => __( 'Livros', 'amazon-auto-links' ),
@@ -541,7 +558,7 @@ final class AmazonAutoLinks_Property {
                 );
             // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleUS.html
             default:
-            case "US":
+            case 'US':
                 return array(
                     'All'                   => __( 'All', 'amazon-auto-links' ),
                         'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),    // missing in recent documentation
