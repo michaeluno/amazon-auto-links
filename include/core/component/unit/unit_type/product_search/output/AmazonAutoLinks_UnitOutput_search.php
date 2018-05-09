@@ -436,24 +436,16 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 false 
             ),
             // 3+ Power parameter, which can only be used when the search index equals 'Books'.
-            'Power'                 => $this->oUnitOption->get( 'Power' ), 
-            
+            'Power'                 => $this->oUnitOption->get( 'Power' ),
             'Title'                 => $_bIsIndexAllOrBlended 
                 ? null 
                 : ( $_sTitle ? $_sTitle : null ),
-
-            // 'Operation'             => $sOperation,
             'Operation'             => $this->oUnitOption->get( 'Operation' ),
             'SearchIndex'           => $this->oUnitOption->get( 'SearchIndex' ),
             $this->oUnitOption->get( 'search_by' ) => $this->oUnitOption->get( 'additional_attribute' )
                 ? $this->oUnitOption->get( 'additional_attribute' )
                 : null,
-
-            // when the search index is All, sort cannot be specified
-            'Sort'                  => $_bIsIndexAllOrBlended 
-                ? null 
-                : $this->oUnitOption->get( 'Sort' ),    
-                
+            'Sort'                  => $this->___getParameterOfSort( $this->oUnitOption, ! $_bIsIndexAllOrBlended ),
             'ResponseGroup'         => "Large",
             'BrowseNode'            => ! $_bIsIndexAllOrBlended && $this->oUnitOption->get( 'BrowseNode' ) 
                 ? $this->oUnitOption->get( 'BrowseNode' )
@@ -511,7 +503,31 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         
         return $_aParams;
     }
-    
+        /**
+         * @param   boolean         $bParamterAllowed       Whether the sort parameter is allowed or not. When the search index is set to `All` or `Blended`, this is not allowed.
+         * @return  null|string
+         * @since   3.5.5
+         * @remark  when the search index is All, sort cannot be specified
+         */
+        private function ___getParameterOfSort( $oUnitOption, $bParamterAllowed ) {
+
+            if ( ! $bParamterAllowed ) {
+                return null;
+            }
+
+            // Backward compatibility for v3.5.4 or below.
+            // In recent Amazon Advertising API, `inversepricerank` is not supported in many locales.
+            $_sSortOption = $oUnitOption->get( 'Sort' );
+            if ( 'pricerank' == $_sSortOption ) {
+                return 'price';
+            }
+            if ( 'inversepricerank' == $_sSortOption ) {
+                return '-price';
+            }
+            return $_sSortOption;
+
+        }
+
     /**
      * Constructs products array to be parsed in the template.
      * 
