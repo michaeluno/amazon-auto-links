@@ -29,9 +29,9 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
      * @return      void
      */
     public function addFields( $oFactory, $sSectionID ) {
-        
-        $_bConnected = $this->_isConnected();
-    
+
+        $_bConnected         = true === $this->___getAPIConnectionStatus();
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -121,11 +121,41 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
         );          
         
     }
+
         /**
-         * 
+         * Checks Amazon Product Advertising API connection.
+         *
+         * @param string $sPublicKey
+         * @param string $sPrivateKey
+         * @param string $sLocale
+         * @since   3.5.6
+         * @return      boolean|string      True if connected; otherwise, an error message.
+         */
+        private function ___getAPIConnectionStatus( $sPublicKey='', $sPrivateKey='', $sLocale='' ) {
+            $_oOption    = AmazonAutoLinks_Option::getInstance();
+            $_sLocale    = $sLocale
+                ? $sLocale
+                : $_oOption->get( array( 'authentication_keys', 'server_locale' ), 'US' );
+            $_sPublicKey = $sPublicKey
+                ? $sPublicKey
+                : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
+            $_sPrivateKey = $sPrivateKey
+                ? $sPrivateKey
+                : $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
+            if ( ! $_sPublicKey || ! $_sPrivateKey ) {
+                return __( 'Either a public key or private key is not set.', 'amazon-auto-links' );
+            }
+            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( $_sLocale, $_sPublicKey, $_sPrivateKey );
+            $_bsStatus   = $_oAmazonAPI->test();
+            return true === $_bsStatus
+                ? true
+                : $_bsStatus;
+        }
+        /**
          * @since       3
          * @since       3.4.4       Added the `$sLocale` third parameter.
-         * @return      boolean
+         * @return      boolean|string      True if connected; otherwise, an error message.
+         * @deprecated  3.5.6   Use the `___getAPIConnectionStatus()` method.
          */
         private function _isConnected( $sPublicKey='', $sPrivateKey='', $sLocale='' ) {
             $_oOption    = AmazonAutoLinks_Option::getInstance();
@@ -142,9 +172,9 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 return false;
             }
             $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( $_sLocale, $_sPublicKey, $_sPrivateKey );
-            return ( boolean ) $_oAmazonAPI->test();                
-        
+            return ( boolean ) $_oAmazonAPI->test();
         }
+
         /**
          * 
          * @since       3
@@ -209,13 +239,18 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
             return $aOldInput;
         }
-                
-        if ( ! $this->_isConnected( $_sPublicKey, $_sPrivateKey, $aInput[ 'server_locale' ] ) ) {
-            
+
+        $_bsConnectionStatus = $this->___getAPIConnectionStatus( $_sPublicKey, $_sPrivateKey, $aInput[ 'server_locale' ] );
+        if ( true !== $_bsConnectionStatus ) {
+//        if ( ! $this->_isConnected( $_sPublicKey, $_sPrivateKey, $aInput[ 'server_locale' ] ) ) {
+
             $_aErrors[ $this->sSectionID ][ 'access_key' ]        = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPublicKey;
             $_aErrors[ $this->sSectionID ][ 'access_key_secret' ] = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPrivateKey;            
             $oAdminPage->setFieldErrors( $_aErrors );
-            $oAdminPage->setSettingNotice( __( 'Failed authentication.', 'amazon-auto-links' ) );
+            $oAdminPage->setSettingNotice(
+                __( 'Failed authentication.', 'amazon-auto-links' ) . '<br />'
+                . sprintf( 'Error: %1$s', $_bsConnectionStatus )
+            );
             return $aOldInput;
             
         } 

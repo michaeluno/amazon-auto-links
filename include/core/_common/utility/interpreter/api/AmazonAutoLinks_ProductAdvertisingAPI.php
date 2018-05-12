@@ -118,10 +118,12 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
         }
     
     /**
-     * Performs a simple request and checks if the authentication is velified.
-     * 
+     * Performs a simple request and checks if the authentication is verified.
+     *
      * @remark      Used in the Authentication plugin seetting admin page.
-     * @return      boolean            If succeeds, returns true; otherwise, false.
+     * @return      boolean|string  If succeeds, returns true; otherwise, the error message.
+     * @since       unknown
+     * @since       3.5.6           Changed the return value to return the error message if failed.
      */
     public function test() {
 
@@ -131,15 +133,42 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
                 'Operation'     => 'BrowseNodeLookup',
                 'BrowseNodeId'  => '1000',    // the Books node 
             ),
-            60     // 1 minutes
-        );            
-        return ( boolean ) ( 
-            ! isset( $_aResponse[ 'Error' ] ) 
-            && ! empty( $_aResponse ) 
+            60 * 5     // 5 minutes
         );
-        
+
+        $_bsResponseErrorStatus = $this->___getResponseError( $_aResponse );
+        if ( false === $_bsResponseErrorStatus ) {
+            return true;    // Succeeded
+        }
+        // Failed: error message
+        return $_bsResponseErrorStatus
+            . ' ' . sprintf( __( 'Locale: %1$s', 'amazon-auto-links' ), $this->___sLocale )
+            . ' ' . sprintf( __( 'Domain: %1$s', 'amazon-auto-links' ), $this->___sDomain );
+
     }
-    
+        /**
+         * @param $aResponse
+         *
+         * @return boolean|string       If no error, false; otherwise, the error message.
+         * @since       3.5.6
+         */
+        private function ___getResponseError( $aResponse ) {
+            if ( empty( $aResponse ) ) {
+                return __( 'The API response is empty.', 'amazon-auto-links' );
+            }
+            if ( isset( $aResponse[ 'Error' ] ) ) {
+                $_sError = $this->getElement( $aResponse, array( 'Error', 'Code' ) )
+                    . ': ' . $this->getElement( $aResponse, array( 'Error', 'Message' ) );
+                return $_sError
+                    ? $_sError
+                    : __( 'The API returned an error but could not retrieve the error message.', 'amazon-auto-links' );
+            }
+            // No need to check the error of items as this is for checking the connectivity.
+//            if ( isset( $aResponse[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
+//                return $aResponse[ 'Items' ][ 'Request' ][ 'Errors' ];
+//            }
+            return false;
+        }
     /**
      * Preforms an API request in the background if no cache is available.
      * 
