@@ -278,6 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.5.6 =
+- Added SSL support for impression counter scripts.
 - Added the API response error message to be displayed for API authentication in the setting page.
 
 = 3.5.5 - 05/11/2018 =
