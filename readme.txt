@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
-Tested up to:       4.9.5
-Stable tag:         3.5.5
+Tested up to:       4.9.6
+Stable tag:         3.5.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,7 +277,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.5.6 =
+= 3.5.6 - 06/05/2018 =
 - Added SSL support for impression counter scripts.
 - Added the API response error message to be displayed for API authentication in the setting page.
 
