@@ -7,10 +7,12 @@
  * $arrArgs - the user defined arguments such as image size and count etc.
  */
 
-// echo AmazonAutoLinks_Debug::get( $arrArgs );
-// echo AmazonAutoLinks_Debug::get( $arrOptions );
-// echo AmazonAutoLinks_Debug::get( $arrProducts );
+// echo AmazonAutoLinks_Debug::get( $aArguments );
+// echo AmazonAutoLinks_Debug::get( $aOptions );
+// echo AmazonAutoLinks_Debug::get( $aProducts );
 echo "<div class='amazon-auto-links-debug'>";
-var_dump( $arrArgs );
-var_dump( $arrProducts );
+echo "<h3>Arguments</h3>";
+var_dump( $aArguments );
+echo "<h3>Products</h3>";
+var_dump( $aProducts );
 echo "</div>";
