@@ -12,15 +12,14 @@
  * Provides shared methods for the category select form.
  * 
  */
-abstract class AmazonAutoLinks_Form_CategorySelect_Base extends AmazonAutoLinks_WPUtility {
+abstract class AmazonAutoLinks_Form_CategorySelect__Base extends AmazonAutoLinks_Form_CategorySelect__Utility {
 
     /**
      * Sets up basic properties.
      */
     public function __construct() {
         
-        $this->sCharEncoding = get_bloginfo( 'charset' ); 
-        $this->oEncrypt      = new AmazonAutoLinks_Encrypt;
+        $this->sCharEncoding = get_bloginfo( 'charset' );
         $this->oDOM          = new AmazonAutoLinks_DOM;        
         
         $_aParams = func_get_args();
@@ -40,7 +39,7 @@ abstract class AmazonAutoLinks_Form_CategorySelect_Base extends AmazonAutoLinks_
      * Checks whether the category item limit is reached.
      * 
      */
-    protected function isNumberOfCategoryReachedLimit( $iNumberOfCategories ) {
+    protected function _isNumberOfCategoryReachedLimit( $iNumberOfCategories ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         return ( boolean ) $_oOption->isReachedCategoryLimit( 
             $iNumberOfCategories

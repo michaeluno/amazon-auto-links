@@ -15,7 +15,7 @@
  * it needs to redirect the page to another page. In that case, if the header is already sent, an error occurs.
  * 
  */
-class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategorySelect_Base {
+class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategorySelect__Base {
 
     /**
      * Stores the form options.
@@ -58,16 +58,17 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      */
     public function render() {
         
-        $sPageURL = $this->_getPageURL( 
+        $sPageURL = $this->___getPageURL(
             isset( $_GET['href'] ) 
                 ? $_GET['href'] 
             : '', 
             $this->oUnitOption->get( 'country' )
         );
-        $aSidebar = $this->_getSidebar( 
-            $sPageURL, 
-            $this->oUnitOption->get( 'country' )
-        );
+        $_oSidebar      = new AmazonAutoLinks_Form_CategorySelect___Sidebar( $sPageURL, $this->oUnitOption->get( 'country' ) );
+//        $aSidebar = $this->___getSidebar(
+//            $sPageURL,
+//            $this->oUnitOption->get( 'country' )
+//        );
                             
         $this->_printPreviewTable(
             array(
@@ -75,20 +76,22 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     ? $this->aOptions[ 'mode' ]
                     : 0, // 0 : edit, 1 : new
                 'sPageURL'                      => $sPageURL,
-                'sRSSURL'                       => $aSidebar['sRSSURL'],
-                'aSelectedRSSURLs'              => $this->_getSelectedRSSURLs( $this->oUnitOption->get( 'categories' ) ),
+                'sRSSURL'                       => $_oSidebar->get( 'RSSURL' ), // $aSidebar['sRSSURL'],
+                'aSelectedRSSURLs'              => $this->___getSelectedRSSURLs( $this->oUnitOption->get( 'categories' ) ),
                 'sBounceURL'                    => $this->aOptions[ 'bounce_url' ],
                 'aWorkingURLs'                  => array(),
-                'sBreadcrumb'                   => $aSidebar['sRSSURL'] 
-                    ? $aSidebar['sBreadcrumb'] 
-                    : __( 'None', 'amazon-auto-links' ),
-                'sSidebarHTML'                  => $aSidebar['sCategoryList'] 
-                    ? $aSidebar['sCategoryList'] 
-                    : $aSidebar['error'],
-                'sSelectedCategories'           => $this->_getSelectedCategoryList( 
+//                'sBreadcrumb'                   => $_sRSSURL    // $aSidebar['sRSSURL']
+//                    ? $_oSidebar->get( 'Breadcrumb' ) // $aSidebar['sBreadcrumb']
+//                    : __( 'None', 'amazon-auto-links' ),
+                'sBreadcrumb'                   => $_oSidebar->get( 'Breadcrumb' ),
+//                'sSidebarHTML'                  => $_sCategoryList
+//                    ? $_sCategoryList // $aSidebar['sCategoryList']
+//                    : $_oSidebar->get( 'Error' ), // $aSidebar['error'],
+                'sSidebarHTML'                  => $_oSidebar->get( 'CategoryList' ),
+                'sSelectedCategories'           => $this->___getSelectedCategoryList(
                     $this->oUnitOption->get( 'categories' ) 
                 ),
-                'sSelectedExcludingCategories'  => $this->_getSelectedCategoryList( 
+                'sSelectedExcludingCategories'  => $this->___getSelectedCategoryList(
                     $this->oUnitOption->get( 'categories_exclude' ) 
                 ),
                 'sSelectedPreview'              => '<p>' 
@@ -104,13 +107,15 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
 
         /**
          * A helper function for the above renderForm() method that retrieves the feed urls of added categories.
-         * 
+         *
+         * @since       unknown
+         * @since       3.6.0       Changed the scope to private as this is only used in this class.
          */
-        protected function _getSelectedRSSURLs( $aCategories ) {
+        private function ___getSelectedRSSURLs( $aCategories ) {
                 
             $aURLs = array();
             foreach( $aCategories as $aCategory ) {
-                $aURLs[] = $aCategory['feed_url'];
+                $aURLs[] = $aCategory[ 'feed_url' ];
             }
             return $aURLs;
             
@@ -122,8 +127,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          *  'feed_url' => ..
          *  'page_url' => ...
          * );
+         * @since       unknown
+         * @since       3.6.0       Changed the scope to private as this is only used in this class.
          */
-        protected function _getSelectedCategoryList( $aCategories ) {
+        private function ___getSelectedCategoryList( $aCategories ) {
             
             if ( $this->isEmpty( $aCategories ) ) {
                 return "<p>" . __( 'No categories added.', ' amazon-auto-links' ) . "</p>"; 
@@ -133,7 +140,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             foreach( $aCategories as $sKey => $aCategory ) {
                 
                 $sName      = md5( $aCategory['feed_url'] );
-                $sPageURL   = $this->formatLinkURL( $aCategory['page_url'] );
+                $sPageURL   = $this->_getLinkURLFormatted( $aCategory['page_url'] );
                 $_aOutput[] = "<div class='category-select-selected-category'>" 
                         . "<label for='cb-{$sName}'>"
                             . "<input type='checkbox' name='amazon_auto_links_cat_select[checkboxes][{$sKey}]' value='{$sName}' id='cb-{$sName}' />"
@@ -159,19 +166,19 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
 
         // Buttons 
-        $bReachedLimit      = $this->isNumberOfCategoryReachedLimit(
+        $bReachedLimit      = $this->_isNumberOfCategoryReachedLimit(
             count( $this->oUnitOption->get( 'categories' ) ) 
             + count( $this->oUnitOption->get( 'categories_exclude' ) )
         );
-        $bIsAlreadyAdded    = $this->isAddedCategory( 
+        $bIsAlreadyAdded    = $this->___isAddedCategory(
             $aPageElements['sBreadcrumb'], 
             $this->oUnitOption->get( 'categories' ) 
         );
-        $bIsAlreadyAddedExcludingCategory = $this->isAddedCategory( 
+        $bIsAlreadyAddedExcludingCategory = $this->___isAddedCategory(
             $aPageElements['sBreadcrumb'], 
             $this->oUnitOption->get( 'categories_exclude' )
         );
-        $bIsSubCategoryOfAddedItems = $this->isSubCategoryOfAddedItems( 
+        $bIsSubCategoryOfAddedItems = $this->___isSubCategoryOfAddedItems(
             $aPageElements['sBreadcrumb'], 
             $this->oUnitOption->get( 'categories' ) 
         );
@@ -201,10 +208,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $sSelectArrow = $aPageElements['bNew'] && $this->isEmpty( $aPageElements['sRSSURL'] ) && $this->isEmpty( $this->oUnitOption->get( 'categories' ) ) 
             ? "<img class='category-select-left-bottom-arrow' title='" . __( 'Select a category from the links!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_left_bottom.png' ) . "'/>" 
             : "";
-        
+
+        $_oEncrypt = new AmazonAutoLinks_Encrypt;
         ?>
 
-<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $this->oEncrypt->encode( $aPageElements['sBreadcrumb'] ) ;?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $_oEncrypt->encode( $aPageElements['sBreadcrumb'] ) ;?>" />
 <input type="hidden" name="amazon_auto_links_cat_select[category][feed_url]" value="<?php echo $aPageElements['sRSSURL'] ;?>" />
 <input type="hidden" name="amazon_auto_links_cat_select[category][page_url]" value="<?php echo $aPageElements['sPageURL'] ;?>" />
 <table class="category-select-table">
@@ -282,8 +290,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     
         /**
          * Determines whether the current browsing category is already added or not.
+         * @since       unknown
+         * @since       3.6.0       Changed the scope to private as this is only used in this class.
          */
-        protected function isAddedCategory( $sBreadCrumb, $aCategories ) {
+        private function ___isAddedCategory( $sBreadCrumb, $aCategories ) {
             
             foreach( $aCategories as $aCategory ) {
                 if ( trim( $aCategory['breadcrumb'] ) == trim( $sBreadCrumb ) ) {
@@ -295,8 +305,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         }
         /**
          * Determines whether the current browsing category is a sub-category of added ones.
+         * @since       unknown
+         * @since       3.6.0       Changed the scope to private as this is only used in this class.
          */
-        protected function isSubCategoryOfAddedItems( $sBreadCrumb, $aCategories ) {
+        private function ___isSubCategoryOfAddedItems( $sBreadCrumb, $aCategories ) {
             
             foreach( $aCategories as $_aCategory ) {
                 if ( 
@@ -308,28 +320,29 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             }
             
         }
-
    
-    /**
-     * Returns the decrypted URL.
-     * 
-     * @since            2.0.0
-     */
-    protected function _getPageURL( $sEncryptedURL, $sLocale='US' ) {
-                
-        $_sURL = $sEncryptedURL 
-            ? $this->oEncrypt->decode( $sEncryptedURL  )
-            : ( isset( AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ] ) 
-                ? AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ] 
-                : AmazonAutoLinks_Property::$aCategoryRootURLs[ 'US' ] 
-            );
-            
-        // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
-        // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
-        // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.             
-        return trailingslashit( $_sURL ); 
-        
-    }
+        /**
+         * Returns the decrypted URL.
+         *
+         * @since           2.0.0
+         * @since           3.6.0       Changed the scope to private as it is only used in this class.
+         */
+        private function ___getPageURL( $sEncryptedURL, $sLocale='US' ) {
+
+            $_oEncrypt = new AmazonAutoLinks_Encrypt;
+            $_sURL     = $sEncryptedURL
+                ? $_oEncrypt->decode( $sEncryptedURL  )
+                : ( isset( AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ] )
+                    ? AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ]
+                    : AmazonAutoLinks_Property::$aCategoryRootURLs[ 'US' ]
+                );
+
+            // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
+            // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
+            // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.
+            return trailingslashit( $_sURL );
+
+        }
     
     /**
      * Represents the sidebar array.
@@ -345,11 +358,13 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Retrieves the sidebar category list.
      * 
      * @since           2.0.0
+     * @since           3.6.0       Changed the scope to private as it is only used in this class.
      * @remark          Due to missing elements with the DOMDocument class in some Japanese pages,
      * this method uses the simple_html_dom library.
      * @return          array
+     * @todo            The scope can be private as no other class seems to extend this class.
      */
-    protected function _getSidebar( $sPageURL, $sLocale='US', $iAttempt=0 ) {
+    private function ___getSidebar( $sPageURL, $sLocale='US', $iAttempt=0 ) {
         
         // Include the library.
         if ( ! class_exists( 'simple_html_dom_node', false ) ) {
@@ -369,6 +384,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         // Instantiate the class.
         $_oSimpleDOM = str_get_html( $sHTML );        
         if ( ! $_oSimpleDOM->find( "#zg_browseRoot", 0 ) ) {
+        // if ( ! $_oSimpleDOM->find( "*[id='zg_browseRoot'], *[id='crown-category-nav']", 0 ) ) {
 
             $_oHTTP->deleteCache();
       
@@ -398,92 +414,50 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     ) + self::$aStructure_Sidebar;
                 }
                 return array(
-                    'sRSSURL'       => $this->_getCategoryFeedURL( $_oSimpleDOM, $sPageURL ),
+                    'sRSSURL'       => $this->___getCategoryFeedURL( $_oSimpleDOM, $sPageURL ),
                     // must be done after the _getCategoryFeedURL() method as this method modifies the links.
-                    'sCategoryList' => $this->_getCategoryList( $_oSimpleDOM ), 
-                    'sBreadcrumb'   => $this->_getBreadcrumb( $_oSimpleDOM, $sLocale ),
+                    'sCategoryList' => $this->___getCategoryList( $_oSimpleDOM ),
+                    'sBreadcrumb'   => $this->___getBreadcrumb( $_oSimpleDOM, $sLocale ),
                 );        
                 
             }
-            return $this->_getSidebar( $sPageURL, $sLocale, ++$iAttempt );
+            return $this->___getSidebar( $sPageURL, $sLocale, ++$iAttempt );
     
         }
         
         return array(
-            'sRSSURL'       => $this->_getCategoryFeedURL( $_oSimpleDOM, $sPageURL ),
-            'sCategoryList' => $this->_getCategoryList( $_oSimpleDOM ), 
-            'sBreadcrumb'   => $this->_getBreadcrumb( $_oSimpleDOM, $sLocale ),
-        );    
+            'sRSSURL'       => $this->___getCategoryFeedURL( $_oSimpleDOM, $sPageURL ),
+            'sCategoryList' => $this->___getCategoryList( $_oSimpleDOM ),
+            'sBreadcrumb'   => $this->___getBreadcrumb( $_oSimpleDOM, $sLocale ),
+        );
         
     }
-        /**
-         * 
-         * @return  string
-         */
-        protected function getRedirectDestination( $sURL ) {
-            
-            $k = curl_init( $sURL );
-            curl_setopt( $k, CURLOPT_FOLLOWLOCATION, true ); // follow redirects
-            curl_setopt( $k, CURLOPT_USERAGENT, 
-                'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.7 ' .
-                '(KHTML, like Gecko) Chrome/7.0.517.41 Safari/534.7'
-            ); // imitate chrome
-            curl_setopt( $k, CURLOPT_NOBODY, true ); // HEAD request only (faster)
-            curl_setopt( $k, CURLOPT_RETURNTRANSFER, true ); // don't echo results
-            curl_exec($k);
-            $_sFinalURL = curl_getinfo( $k, CURLINFO_EFFECTIVE_URL ); // get last URL followed
-            curl_close($k);
-            return $_sFinalURL;            
-            
-        }
-    
-    /**
-     * Returns the language code of the specified Amazon store locale.
-     * 
-     * Either ja, en, or uni is returned.
-     * 
-     */
-    protected function getMBLanguage( $sLocale='US' ) {
-        return isset( AmazonAutoLinks_Property::$aCategoryPageMBLanguages[ $sLocale ] ) 
-                ? AmazonAutoLinks_Property::$aCategoryPageMBLanguages[ $sLocale ] 
-                : 'uni';        
-    }
-    
+
+
     /**
      * Generates the HTML output of the node tree list.
      * 
-     * @since            2.0.0
+     * @since           2.0.0
+     * @since           3.6.0       Changed the scope to private as it is only used in this class.
      */
-    protected function _getCategoryList( $_oSimpleDOM ) {
+    private function ___getCategoryList( $_oSimpleDOM ) {
         
         $_oNodeBrowseRoot = $_oSimpleDOM->getElementById( 'zg_browseRoot' );
-        $this->modifyHref( $_oNodeBrowseRoot );
+        $this->___modifyHref( $_oNodeBrowseRoot );
         return $_oNodeBrowseRoot->outertext; // the sidebar html code
         
-    }    
-        
-    private function removeLineFeeds( $sOutput ) {
-                
-        $sOutput    = str_replace( array( "\r\n", "\r" ), "\n", $sOutput );
-        
-        $aLines     = explode( "\n", $sOutput );
-        $aNewLines  = array();
-        foreach( $aLines as $i => $sLine ) {
-            if( ! $this->isEmpty( $sLine ) ) {
-                $aNewLines[] = trim( $sLine, '\t\n\r\0\x0B' );
-            }
-        }
-        
-        return implode( $aNewLines );
-    
     }
+
+
     /**
      * Converts href urls io a url with query which contains the original url.
      * 
      * e.g. <a href="http://amazon.com/something"> -> <a href="localhost/me.php?href=http://amazon.com/something"
      * and the href value beceomes base64 encoded.
+     *
+     * @since       3.6.0       Changed the scope to private as this is only used in this class.
      */
-    protected function modifyHref( $_oSimpleDOMNode, $aQueries=array() ) {
+    private function ___modifyHref( $_oSimpleDOMNode, $aQueries=array() ) {
         
         foreach( $_oSimpleDOMNode->getElementsByTagName( 'a' ) as $nodeA ) {
             
@@ -494,60 +468,22 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             $aURL  = explode( "ref=", $sHref, 2 );
             $sHref = $aURL[0];            
             
-            $nodeA->setAttribute( 'href', $this->formatLinkURL( $sHref, $aQueries ) );
+            $nodeA->setAttribute( 'href', $this->_getLinkURLFormatted( $sHref, $aQueries ) );
             
         }
         
     }
-    protected function _modifyHref( $oDOM, $aQueries=array() ) {    
-            
-        $aQueries   = ( array ) $aQueries;
-        $oXpath     = new DOMXPath( $oDOM );     // since getElementByID constantly returned false for unknown reason, use xpath
-        $domleftCol = $oXpath->query( "//*[@id='zg_browseRoot']" )->item( 0 );        // $domleftCol = $oDOM->getElementById('zg_browseRoot');
-        if ( !$domleftCol ) {
-            echo '<!-- ' . __( 'Categories not found. Please consult the plugin developer.', 'amazon-auto-links' ) . ' -->' . PHP_EOL;
-            return false;
-        }
-        foreach( $oDOM->getElementsByTagName( 'a' ) as $nodeA ) {
-            
-            $sHref = $nodeA->getAttribute( 'href' );
-            $nodeA->removeAttribute( 'href' );
-            
-            // sip the sing after 'ref=' in the url
-            // e.g. http://amazon.com/ref=zg_bs_123/324-5242552 -> http://amazon.com
-            $aURL  = explode( "ref=", $sHref, 2 );
-            $sHref = $aURL[0];
-            
-            @$nodeA->setAttribute( 'href', $this->formatLinkURL( $sHref, $aQueries ) );
-            
-        }    
-        return true;
-        
-    }    
-    
-    /**
-     * Gets the current self-url. needs to exclude the query part 
-     * e.g. http://localhost/me.php?href=http://....  -> http://localhost/me.php
-     * @return       string
-     */
-    protected function formatLinkURL( $sURL, $aQueries=array() ) {
-        return add_query_arg( 
-            array( 
-                'href' => $this->oEncrypt->encode( $sURL ),
-            ) + $aQueries + $_GET                
-            , admin_url( $GLOBALS['pagenow'] ) 
-        );
-    }
-    
+
     /**
      * Creates a breadcrumb of the Amazon page sidebar.
      * 
      * This is specific to Amazon's store page so if the site page sucture changes, it won't work.
      * Especially it uses the unique id and class names including zg_browseRoot, zg_selected, the sidebar element IDs. 
      * 
-     * @since            2.0.0
+     * @since           2.0.0
+     * @since           3.6.0   Changed the scope to private as this is only used in this class.
      */
-    protected function _getBreadcrumb( $_oSimpleDOM, $sLocale='US' ) {
+    private function ___getBreadcrumb( $_oSimpleDOM, $sLocale='US' ) {
         
         $aBreadcrumb    = array();
         $nodeBrowseRoot = $_oSimpleDOM->getElementById( 'zg_browseRoot' );
@@ -568,7 +504,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 $nodeA         = $nodeLi->getElementByTagName( 'a' );
                 $aBreadcrumb[] = trim( $nodeA->innertext );
             }
-            $nodeClimb = $nodeClimb->parentNode();    
+            $nodeClimb = $nodeClimb->parentNode();
             
         } While ( $nodeClimb && $nodeClimb->getAttribute( 'id' ) != 'zg_browseRoot' );
 
@@ -583,9 +519,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Extracts the category feed url from the given DOM object.
      * 
      * @since       2.0.0
+     * @sinec       3.6.0       Changed the scope to private as it is only used in this class.
      * @return      string      The category RSS feed URL
      */
-    protected function _getCategoryFeedURL( $_oSimpleDOM, $sPageURL ) {
+    private function ___getCategoryFeedURL( $_oSimpleDOM, $sPageURL ) {
         $_sFeedURL = $this->___getCategoryFeedURLExtracted( $_oSimpleDOM );
         return $_sFeedURL
             ? $_sFeedURL

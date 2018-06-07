@@ -98,7 +98,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                
         // If the user presses one of the custom form submit buttons, 
         if ( isset( $_POST[ 'amazon_auto_links_cat_select' ] ) ) {
-            return $this->_getCategorySelectFormInput(
+            return $this->___getCategorySelectFormInput(
                 $_POST[ 'amazon_auto_links_cat_select' ],
                 $oFactory->getSavedOptions(),    // $aOldInput,
                 $oFactory
@@ -114,7 +114,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * Called when the user submits the form of the category select page.
          * @return      array
          */
-        private function _getCategorySelectFormInput( array $aPost, $aInput, $oFactory ) {
+        private function ___getCategorySelectFormInput( array $aPost, $aInput, $oFactory ) {
 
             // If the 'Save' or 'Create' button is pressed, save the data to the post.
             // The key is set in `AmazonAutoLinks_Form_CategorySelect` when rendering the form.
@@ -125,7 +125,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                         : null,
                     $aInput // unit options
                 );
-                $_iPostID = $this->_postUnitByCategory( 
+                $_iPostID = $this->___postUnitByCategory(
                     $_oUnit->get(), // sanitized
                     $aInput // not sanitized, contains keys not needed for the unit options
                 );
@@ -154,7 +154,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             }  
                                 
             // Otherwise, update the form data.
-            return $this->_getUpdatedUnitOptions(
+            return $this->___getUpdatedUnitOptions(
                 $aPost,
                 $aInput,
                 $oFactory
@@ -167,7 +167,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * 
          * @return      integer     the post(unit) id.
          */
-        private function _postUnitByCategory( $aUnitOptions, $aOptions ) {
+        private function ___postUnitByCategory( $aUnitOptions, $aOptions ) {
             
             $_iPostID = 0;
             
@@ -226,7 +226,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
      * 
      * @return      array      The (un)updated data.
      */
-    private function _getUpdatedUnitOptions( $aPost, array $aInput, $oFactory ) {
+    private function ___getUpdatedUnitOptions( $aPost, array $aInput, $oFactory ) {
             
         $_iNumberOfCategories = count( $aInput[ 'categories' ] )  
             + count( $aInput[ 'categories_exclude' ] );
@@ -234,10 +234,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         // Check the limit
         if ( 
             ( isset( $aPost['add'] ) || isset( $aPost['exclude'] ) ) 
-            && $this->_isNumberOfCategoryReachedLimit( $_iNumberOfCategories ) 
+            && $this->___isNumberOfCategoryReachedLimit( $_iNumberOfCategories )
         ) {
             $oFactory->setSettingNotice(
-                $this->_getLimitNotice( true ) 
+                $this->___getLimitNotice( true )
             );
             return $aInput;
         }
@@ -284,9 +284,9 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
     }
         /**
          * Checks whether the category item limit is reached.
-         * 
+         * @return      boolean
          */
-        private function _isNumberOfCategoryReachedLimit( $iNumberOfCategories ) {
+        private function ___isNumberOfCategoryReachedLimit( $iNumberOfCategories ) {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             return ( boolean ) $_oOption->isReachedCategoryLimit( 
                 $iNumberOfCategories
@@ -297,7 +297,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * Returns the admin message.
          * @return      string
          */
-        private function _getLimitNotice( $bIsReachedLimit, $bEnableHTMLTag=true ) {
+        private function ___getLimitNotice( $bIsReachedLimit, $bEnableHTMLTag=true ) {
             if ( ! $bIsReachedLimit ) {
                 return '';
             }
