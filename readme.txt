@@ -277,6 +277,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.0 =
+- Fixed an issue that some categories could not be recognized in some recent design updates in the Amazon stores.
+
 = 3.5.6 - 06/05/2018 =
 - Added SSL support for impression counter scripts.
 - Added the API response error message to be displayed for API authentication in the setting page.

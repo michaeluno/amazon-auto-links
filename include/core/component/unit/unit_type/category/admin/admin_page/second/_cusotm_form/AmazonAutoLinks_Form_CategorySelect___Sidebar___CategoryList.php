@@ -16,14 +16,18 @@
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends AmazonAutoLinks_Form_CategorySelect__Utility {
 
     private $___oSimpleDOM = null;
+    private $___sPageURL   = '';    // used in an extended class
+
+    protected $_sSelector = 'zg_browseRoot';
 
     /**
      *
      * @param   $_oSimpleDOM
      * @since   3.6.0
      */
-    public function __construct( $_oSimpleDOM ) {
+    public function __construct( $_oSimpleDOM, $sPageURL ) {
         $this->___oSimpleDOM = $_oSimpleDOM;
+        $this->___sPageURL   = $sPageURL;
     }
 
     /**
@@ -31,7 +35,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
      * @return  string
      */
     public function get() {
-        return $this->___getCategoryList( $this->___oSimpleDOM );
+        return $this->_getCategoryList( $this->___oSimpleDOM, $this->___sPageURL );
     }
         /**
          * Generates the HTML output of the node tree list.
@@ -40,10 +44,10 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
          * @since           3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
          * @return          string
          */
-        private function ___getCategoryList( $_oSimpleDOM ) {
+        protected function _getCategoryList( $oSimpleDOM, $sPageURL ) {
 
-            $_oNodeBrowseRoot = $_oSimpleDOM->getElementById( 'zg_browseRoot' );
-            $this->___setHrefs( $_oNodeBrowseRoot );
+            $_oNodeBrowseRoot = $oSimpleDOM->getElementById( $this->_sSelector );
+            $this->_setHrefs( $_oNodeBrowseRoot, $sPageURL );
             return $_oNodeBrowseRoot->outertext; // the sidebar html code
 
         }
@@ -56,21 +60,45 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
              * @since       3.6.0       Renamed from `modifyHref`.
              * @since       3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
              */
-            private function ___setHrefs( $_oSimpleDOMNode, $aQueries=array() ) {
+            protected function _setHrefs( $oSimpleDOMNode, $sPageURL ) {
 
-                foreach( $_oSimpleDOMNode->getElementsByTagName( 'a' ) as $nodeA ) {
+                $_aURLParts = parse_url( $sPageURL );
+                $_sDomain   = $_aURLParts[ 'scheme' ] . '://' . $_aURLParts[ 'host' ];
 
-                    $sHref = $nodeA->getAttribute( 'href' );
+                foreach( $oSimpleDOMNode->getElementsByTagName( 'a' ) as $_nodeA ) {
 
-                    // sip the sing after 'ref=' in the url
-                    // e.g. http://amazon.com/ref=zg_bs_123/324-5242552 -> http://amazon.com
-                    $aURL  = explode( "ref=", $sHref, 2 );
-                    $sHref = $aURL[0];
-
-                    $nodeA->setAttribute( 'href', $this->_getLinkURLFormatted( $sHref, $aQueries ) );
+                    $_sHref = $_nodeA->getAttribute( 'href' );
+                    $_sHref = $this->___getHrefSanitized( $_sHref, $_sDomain );
+                    $_nodeA->setAttribute( 'href', $_sHref );
 
                 }
 
             }
+                /**
+                 * @remark
+                 * @since       3.6.0
+                 * @return      string
+                 */
+                private function ___getHrefSanitized( $sHref, $sDomain ) {
+
+                    // remove the substring after 'ref=' in the url
+                    // e.g. http://amazon.com/ref=zg_bs_123/324-5242552 -> http://amazon.com
+                    // e.g. amazon.com/ref=zg_bs_123/324-5242552 -> amazon.com
+                    $_aURL  = explode( "ref=", $sHref, 2 );
+                    $sHref  = $_aURL[ 0 ];
+
+                    // There are cases that the href value is relative and absolute URL.
+                    // relative: gp/top-sellers/digital-text/,
+                    // absolute: https://amazon.com/gp/top-sellers/digital-text/
+                    $_aURLParts = parse_url( $sHref );
+                    $sHref      = isset( $_aURLParts[ 'scheme' ] ) && $_aURLParts[ 'scheme' ]
+                        ? $sHref
+                        : $sDomain . '/' . $sHref;   // add the domain
+
+                    // Encrypt
+                    return $this->_getLinkURLFormatted( $sHref, array() );
+
+                }
+
 
 }

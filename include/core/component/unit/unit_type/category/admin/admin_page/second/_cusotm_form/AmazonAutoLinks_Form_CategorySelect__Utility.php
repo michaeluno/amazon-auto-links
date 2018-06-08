@@ -27,7 +27,7 @@ class AmazonAutoLinks_Form_CategorySelect__Utility extends AmazonAutoLinks_WPUti
         return add_query_arg(
             array(
                 'href' => $_oEncrypt->encode( $sURL ),
-                        ) + $aQueries + $_GET
+            ) + $aQueries + $_GET
             , admin_url( $GLOBALS['pagenow'] )
         );
     }
