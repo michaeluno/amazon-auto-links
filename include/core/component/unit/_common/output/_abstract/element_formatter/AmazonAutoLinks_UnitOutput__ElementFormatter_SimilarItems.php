@@ -48,7 +48,7 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
 
     }
         /**
-         * @param array $_aVariables
+         * @param array $aVariables
          *
          * @return boolean
          */
