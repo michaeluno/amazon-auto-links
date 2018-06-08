@@ -11,7 +11,7 @@
 /**
  * Provides methods to generate breadcrumb of selected categories.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
@@ -20,7 +20,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
     private $___sRSSURL    = '';
 
     /**
-     * @since       3.6.0
+     * @since       3.5.7
      */
     public function __construct( $oSimpleDOM, $sLocale, $sRSSURL ) {
 
@@ -32,7 +32,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
     }
 
     /**
-     * @since       3.6.0
+     * @since       3.5.7
      */
     public function get() {
         return $this->___sRSSURL
@@ -46,8 +46,8 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
          * Especially it uses the unique id and class names including zg_browseRoot, zg_selected, the sidebar element IDs.
          *
          * @since           2.0.0
-         * @since           3.6.0   Changed the scope to private as this is only used in this class.
-         * @since           3.6.0     Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since           3.5.7   Changed the scope to private as this is only used in this class.
+         * @since           3.5.7     Moved from `AmazonAutoLinks_Form_CategorySelect`.
          * @return          string  The generated category breadcrumb.
          */
         private function ___getBreadcrumb( $_oSimpleDOM, $sLocale='US' ) {

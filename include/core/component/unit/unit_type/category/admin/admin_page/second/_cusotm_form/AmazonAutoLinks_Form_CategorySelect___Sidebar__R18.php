@@ -11,14 +11,14 @@
 /**
  * Provides methods to retrieve sidebar menu list elements of Amazon best selling products for R18 areas.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar__R18 extends AmazonAutoLinks_Form_CategorySelect___Sidebar {
 
     protected $_sHTTPClientClass = 'AmazonAutoLinks_HTTPClient_FileGetContents';
 
     /**
-     * @since       3.6.0
+     * @since       3.5.7
      */
     protected _handleExceptionsToSetElements( $oHTTP, $oSimpleDOM, $sPageURL, $sLocale ) {
 

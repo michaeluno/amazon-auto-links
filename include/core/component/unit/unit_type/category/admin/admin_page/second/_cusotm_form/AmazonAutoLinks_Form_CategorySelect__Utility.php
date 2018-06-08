@@ -19,8 +19,8 @@ class AmazonAutoLinks_Form_CategorySelect__Utility extends AmazonAutoLinks_WPUti
      * e.g. http://localhost/me.php?href=http://....  -> http://localhost/me.php
      * @return      string
      * @since       unknown
-     * @since       3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
-     * @since       3.6.0       Renamed from from `_formatLinkURL()`.
+     * @since       3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+     * @since       3.5.7       Renamed from from `_formatLinkURL()`.
      */
     protected function _getLinkURLFormatted( $sURL, $aQueries=array() ) {
         $_oEncrypt = new AmazonAutoLinks_Encrypt;

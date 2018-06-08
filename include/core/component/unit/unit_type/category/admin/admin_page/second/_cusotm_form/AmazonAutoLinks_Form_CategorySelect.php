@@ -109,7 +109,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          * A helper function for the above renderForm() method that retrieves the feed urls of added categories.
          *
          * @since       unknown
-         * @since       3.6.0       Changed the scope to private as this is only used in this class.
+         * @since       3.5.7       Changed the scope to private as this is only used in this class.
          */
         private function ___getSelectedRSSURLs( $aCategories ) {
                 
@@ -128,7 +128,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          *  'page_url' => ...
          * );
          * @since       unknown
-         * @since       3.6.0       Changed the scope to private as this is only used in this class.
+         * @since       3.5.7       Changed the scope to private as this is only used in this class.
          */
         private function ___getSelectedCategoryList( $aCategories ) {
             
@@ -291,7 +291,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         /**
          * Determines whether the current browsing category is already added or not.
          * @since       unknown
-         * @since       3.6.0       Changed the scope to private as this is only used in this class.
+         * @since       3.5.7       Changed the scope to private as this is only used in this class.
          */
         private function ___isAddedCategory( $sBreadCrumb, $aCategories ) {
             
@@ -306,7 +306,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         /**
          * Determines whether the current browsing category is a sub-category of added ones.
          * @since       unknown
-         * @since       3.6.0       Changed the scope to private as this is only used in this class.
+         * @since       3.5.7       Changed the scope to private as this is only used in this class.
          */
         private function ___isSubCategoryOfAddedItems( $sBreadCrumb, $aCategories ) {
             
@@ -325,7 +325,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          * Returns the decrypted URL.
          *
          * @since           2.0.0
-         * @since           3.6.0       Changed the scope to private as it is only used in this class.
+         * @since           3.5.7       Changed the scope to private as it is only used in this class.
          */
         private function ___getPageURL( $sEncryptedURL, $sLocale='US' ) {
 
@@ -358,7 +358,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Retrieves the sidebar category list.
      * 
      * @since           2.0.0
-     * @since           3.6.0       Changed the scope to private as it is only used in this class.
+     * @since           3.5.7       Changed the scope to private as it is only used in this class.
      * @remark          Due to missing elements with the DOMDocument class in some Japanese pages,
      * this method uses the simple_html_dom library.
      * @return          array
@@ -438,7 +438,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Generates the HTML output of the node tree list.
      * 
      * @since           2.0.0
-     * @since           3.6.0       Changed the scope to private as it is only used in this class.
+     * @since           3.5.7       Changed the scope to private as it is only used in this class.
      */
     private function ___getCategoryList( $_oSimpleDOM ) {
         
@@ -455,7 +455,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * e.g. <a href="http://amazon.com/something"> -> <a href="localhost/me.php?href=http://amazon.com/something"
      * and the href value beceomes base64 encoded.
      *
-     * @since       3.6.0       Changed the scope to private as this is only used in this class.
+     * @since       3.5.7       Changed the scope to private as this is only used in this class.
      */
     private function ___modifyHref( $_oSimpleDOMNode, $aQueries=array() ) {
         
@@ -481,7 +481,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Especially it uses the unique id and class names including zg_browseRoot, zg_selected, the sidebar element IDs. 
      * 
      * @since           2.0.0
-     * @since           3.6.0   Changed the scope to private as this is only used in this class.
+     * @since           3.5.7   Changed the scope to private as this is only used in this class.
      */
     private function ___getBreadcrumb( $_oSimpleDOM, $sLocale='US' ) {
         
@@ -519,7 +519,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * Extracts the category feed url from the given DOM object.
      * 
      * @since       2.0.0
-     * @sinec       3.6.0       Changed the scope to private as it is only used in this class.
+     * @sinec       3.5.7       Changed the scope to private as it is only used in this class.
      * @return      string      The category RSS feed URL
      */
     private function ___getCategoryFeedURL( $_oSimpleDOM, $sPageURL ) {

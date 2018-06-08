@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract and construct category list of the given page.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB extends AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList {
 
@@ -20,7 +20,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB extends Amaz
     /**
      * Generates an HTML output of the node tree list.
      *
-     * @since           3.6.0
+     * @since           3.5.7
      * @return          string
      */
     protected function _getCategoryList( $oSimpleDOM, $sPageURL ) {

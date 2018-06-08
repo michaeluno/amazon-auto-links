@@ -11,7 +11,7 @@
 /**
  * Provides methods to retrieve sidebar menu list elements of Amazon best selling products.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUtility {
     
@@ -45,7 +45,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
 
         /**
          * Loads sidebar elements.
-         * @since       3.6.0
+         * @since       3.5.7
          */
         private function ___setElements( $sPageURL, $sLocale ) {
 
@@ -85,7 +85,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
              *  - the user navigated to the R18 area.
              *  - the page layout has changed to the new design.
              *  - other unknown reasons.
-             * @since       3.6.0
+             * @since       3.5.7
              */
             protected function _handleExceptionsToSetElements( $oHTTP, $oSimpleDOM, $sPageURL, $sLocale ) {
 
@@ -105,7 +105,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
 
             }
                 /**
-                 * @since       3.6.0
+                 * @since       3.5.7
                  * @param       string  The selector for the sidebar container element that contains the listed categories.
                  * @return      void
                  */
@@ -131,7 +131,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                      * @param   string  $sPageURL
                      * @param   string  $sLocale
                      * @param   string  $sRSSURL
-                     * @since   3.6.0
+                     * @since   3.5.7
                      * @return  array
                      */
                     private function ___getElements_zg_browseRoot( $oSimpleDOM, $sPageURL, $sLocale ) {
@@ -155,7 +155,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                      * @param $sLocale
                      *
                      * @return array
-                     * @since   3.6.0
+                     * @since   3.5.7
                      */
                     private function ___getElements_crown_category_nav( $oSimpleDOM, $sPageURL, $sLocale ) {
 
@@ -176,7 +176,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
     /**
      * @param       string      $sElement       The sidebar element name to retrieve.
      * @return      string|array
-     * @since       3.6.0
+     * @since       3.5.7
      */
     public function get( $sElementName='' ) {
 

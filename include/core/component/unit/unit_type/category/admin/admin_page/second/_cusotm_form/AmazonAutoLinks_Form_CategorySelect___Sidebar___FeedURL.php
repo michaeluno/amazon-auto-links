@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract the feed (RSS2) url of the specified page with a Simple DOM object.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
 
@@ -29,7 +29,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
     /**
      * Extracts the RSS feed URL of the given page.
      * @return  string
-     * @since   3.6.0
+     * @since   3.5.7
      */
     public function get() {
         return $this->___getCategoryFeedURL( $this->___oSimpleDOM, $this->___sPageURL );
@@ -38,7 +38,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
          * Extracts the category feed url from the given DOM object.
          *
          * @since       2.0.0
-         * @since       3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since       3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
          * @return      string      The category RSS feed URL
          */
         private function ___getCategoryFeedURL( $oSimpleDOM, $sPageURL ) {
@@ -53,7 +53,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
              * @since       3.5.4       Amazon store site (.com) has changed the web design and the new layout does not contain the RSS feed subscription element.                  *
              * So the URL must be constructed using the category node ID. The fact that the feed is no longer displayed in the new desing indicates
              * that the bestseller feeds may be deprecated in the near future.
-             * @since       3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+             * @since       3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
              */
             private function ___getCategoryFeedURLConstructed( $sPageURL ) {
 
@@ -106,7 +106,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
                  *
                  * e.g. https://www.amazon.com/gp/rss/bestsellers/3400291/ -> 3400291
                  * @since       3.5.4
-                 * @since       3.6.0     Moved from `AmazonAutoLinks_Form_CategorySelect`.
+                 * @since       3.5.7     Moved from `AmazonAutoLinks_Form_CategorySelect`.
                  * @param       string    $sPageURL
                  * @return      string
                  * @see         https://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDValues.html
@@ -120,7 +120,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
                 /**
                  * @param   string  $sURL       Without a trailing slash.
                  * @since   3.5.4
-                 * @since   3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+                 * @since   3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
                  * @return  string
                  * @see     https://stackoverflow.com/a/16027164
                  */
@@ -138,7 +138,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
             /**
              * Extracts the category feed url from the given DOM object.
              * @since   3.5.4   Moved from `_getCategoryFeedURL()`
-             * @since   3.6.0   Moved from `AmazonAutoLinks_Form_CategorySelect`.
+             * @since   3.5.7   Moved from `AmazonAutoLinks_Form_CategorySelect`.
              */
             private function ___getCategoryFeedURLExtracted( $oSimpleDOM ) {
 

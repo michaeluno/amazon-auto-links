@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract and construct category list of the given page.
  *
- * @sicne       3.6.0
+ * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends AmazonAutoLinks_Form_CategorySelect__Utility {
 
@@ -23,7 +23,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
     /**
      *
      * @param   $_oSimpleDOM
-     * @since   3.6.0
+     * @since   3.5.7
      */
     public function __construct( $_oSimpleDOM, $sPageURL ) {
         $this->___oSimpleDOM = $_oSimpleDOM;
@@ -31,7 +31,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
     }
 
     /**
-     * @since   3.6.0
+     * @since   3.5.7
      * @return  string
      */
     public function get() {
@@ -41,7 +41,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
          * Generates the HTML output of the node tree list.
          *
          * @since           2.0.0
-         * @since           3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since           3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
          * @return          string
          */
         protected function _getCategoryList( $oSimpleDOM, $sPageURL ) {
@@ -57,8 +57,8 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
              * e.g. <a href="http://amazon.com/something"> -> <a href="localhost/me.php?href=http://amazon.com/something"
              * and the href value becomes base64 encoded.
              * @since       unknown
-             * @since       3.6.0       Renamed from `modifyHref`.
-             * @since       3.6.0       Moved from `AmazonAutoLinks_Form_CategorySelect`.
+             * @since       3.5.7       Renamed from `modifyHref`.
+             * @since       3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
              */
             protected function _setHrefs( $oSimpleDOMNode, $sPageURL ) {
 
@@ -76,7 +76,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
             }
                 /**
                  * @remark
-                 * @since       3.6.0
+                 * @since       3.5.7
                  * @return      string
                  */
                 private function ___getHrefSanitized( $sHref, $sDomain ) {

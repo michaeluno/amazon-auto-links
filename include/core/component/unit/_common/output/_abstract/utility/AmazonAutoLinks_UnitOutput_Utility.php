@@ -43,7 +43,7 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Plugin
      * @since       3
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base`.
      */
-    static public function hasCustomVariable( $sSubject, array $aKeys = array( 'price', 'rating', 'review', 'image_set' ) ) {
+    static public function hasCustomVariable( $sSubject, array $aKeys = array( '%price%', '%rating%', '%review%', '%image_set%' ) ) {
         $_aKeys = array();
         foreach( $aKeys as $_sKey ) {
             $_aKeys[] = '\Q' . $_sKey . '\E';
