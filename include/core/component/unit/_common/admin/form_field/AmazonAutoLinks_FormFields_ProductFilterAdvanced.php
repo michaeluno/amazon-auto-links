@@ -40,7 +40,7 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                     array(
                         'field_id'      => 'enabled',
                         'type'          => 'checkbox',
-                        'label'         => sprintf( __( 'Show products which has a customer rating %1$s', 'amazon-auto-links' ), '' ),
+                        'label'         => sprintf( __( 'Show products which have a customer rating %1$s', 'amazon-auto-links' ), '' ),
                     ),
                     array(
                         'field_id'  => 'case',
@@ -70,7 +70,7 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                     array(
                         'field_id'      => 'enabled',
                         'type'          => 'checkbox',
-                        'label'         => sprintf( __( 'Show products which has a discount rate %1$s', 'amazon-auto-links' ), '' ),
+                        'label'         => sprintf( __( 'Show products which have a discount rate %1$s', 'amazon-auto-links' ), '' ),
                     ),
                     array(
                         'type'      => 'select',
