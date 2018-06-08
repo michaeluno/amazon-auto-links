@@ -52,19 +52,19 @@ final class AmazonAutoLinks_Property {
         'AU'    => 'http://www.amazon.com.au/gp/bestsellers/',
     );
     static public $aCategoryBlackCurtainURLs = array(
-        'CA'    => 'http://www.amazon.ca/gp/product/black-curtain-redirect.html',
-        'CN'    => 'http://www.amazon.cn/gp/product/black-curtain-redirect.html',
-        'FR'    => 'http://www.amazon.fr/gp/product/black-curtain-redirect.html',
-        'DE'    => 'http://www.amazon.de/gp/product/black-curtain-redirect.html',
-        'IT'    => 'http://www.amazon.it/gp/product/black-curtain-redirect.html',
-        'JP'    => 'http://www.amazon.co.jp/gp/product/black-curtain-redirect.html',
-        'UK'    => 'http://www.amazon.co.uk/gp/product/black-curtain-redirect.html',
-        'ES'    => 'http://www.amazon.es/gp/product/black-curtain-redirect.html',
-        'US'    => 'http://www.amazon.com/gp/product/black-curtain-redirect.html',    
-        'IN'    => 'http://www.amazon.in/gp/product/black-curtain-redirect.html',    
-        'BR'    => 'http://www.amazon.com.br/gp/product/black-curtain-redirect.html',
-        'MX'    => 'http://www.amazon.com.mx/gp/product/black-curtain-redirect.html',
-        'AU'    => 'http://www.amazon.com.au/gp/product/black-curtain-redirect.html',   // 3.5.5+
+        'CA'    => 'https://www.amazon.ca/gp/product/black-curtain-redirect.html',
+        'CN'    => 'https://www.amazon.cn/gp/product/black-curtain-redirect.html',
+        'FR'    => 'https://www.amazon.fr/gp/product/black-curtain-redirect.html',
+        'DE'    => 'https://www.amazon.de/gp/product/black-curtain-redirect.html',
+        'IT'    => 'https://www.amazon.it/gp/product/black-curtain-redirect.html',
+        'JP'    => 'https://www.amazon.co.jp/gp/product/black-curtain-redirect.html',
+        'UK'    => 'https://www.amazon.co.uk/gp/product/black-curtain-redirect.html',
+        'ES'    => 'https://www.amazon.es/gp/product/black-curtain-redirect.html',
+        'US'    => 'https://www.amazon.com/gp/product/black-curtain-redirect.html',
+        'IN'    => 'https://www.amazon.in/gp/product/black-curtain-redirect.html',
+        'BR'    => 'https://www.amazon.com.br/gp/product/black-curtain-redirect.html',
+        'MX'    => 'https://www.amazon.com.mx/gp/product/black-curtain-redirect.html',
+        'AU'    => 'https://www.amazon.com.au/gp/product/black-curtain-redirect.html',   // 3.5.5+
     );
 
     static public $aNoImageAvailable = array(    // the domain can be g-ecx.images-amazon.com

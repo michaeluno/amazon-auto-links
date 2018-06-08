@@ -31,14 +31,6 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
             include_once( AmazonAutoLinks_Registry::$sDirPath . '/include/library/simple_html_dom.php' );
         }
 
-        // Properties
-        // $this->___sPageURL = $sPageURL;
-        // $this->___sLocale  = $sLocale;
-
-        // @deprecated
-        // $this->___iAttempt = $iAttempt;
-
-        // Elements
         $this->___setElements( $sPageURL, $sLocale );
 
     }
@@ -52,10 +44,10 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
             // Fetch page HTML source contents.
             $_sClassName = $this->_sHTTPClientClass;
             $_oHTTP = new $_sClassName( $sPageURL ); // has caching ability
-            $_sHTML = $_oHTTP->get();
+            $_sHTML = trim( $_oHTTP->get() );
             if ( ! $_sHTML ) {
                 $this->_aElements[ 'Error' ] = sprintf(
-                    __( "Could not retrieve the category list: %1$s. Please consult the plugin developer.", 'amazon-auto-links' ),
+                    __( 'Could not retrieve the category list: %1$s. Please consult the plugin developer.', 'amazon-auto-links' ),
                     $sPageURL
                 );
                 return;
