@@ -47,8 +47,11 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
         );
         
         // Resources for the button preview
+        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? 'button-preview-in-unit-definition-page.js'
+            : 'button-preview-in-unit-definition-page.min.js';
         $this->enqueueScript(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-in-unit-definition-page.js',
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
             $this->oProp->sPageSlug,
             'default',
             array(  

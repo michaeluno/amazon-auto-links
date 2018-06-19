@@ -29,9 +29,12 @@ class AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced extends AmazonAutoLinks_Uni
                 $this->addSettingFields( $_aField );
             }            
         }            
-        
+
+        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? 'button-preview-in-unit-definition-page.js'
+            : 'button-preview-in-unit-definition-page.min.js';
         $this->enqueueScript(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-in-unit-definition-page.js',
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
             $this->oProp->aPostTypes,
             array(  
                 'handle_id'    => 'aal_button_preview_labels',

@@ -35,9 +35,12 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
                 'save'          => false,
             )
         );
-        
+
+        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? 'button-preview-in-unit-definition-page.js'
+            : 'button-preview-in-unit-definition-page.min.js';
         $oAdminPage->enqueueScript(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-in-unit-definition-page.js',
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], // page slug
             '', // tab slug
             array(  

@@ -135,7 +135,15 @@ class AmazonAutoLinks_Output___Ajax extends AmazonAutoLinks_PluginUtility {
                 ),
             ) + $this->___getPageTypeInformationForContextualUnits();
 
-            wp_enqueue_script( $_sScriptHandle, plugins_url( '/asset/js/ajax-unit-loading.js', AmazonAutoLinks_Registry::$sFilePath ), array( 'jquery' ) );
+            $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? 'ajax-unit-loading.js'
+                : 'ajax-unit-loading.min.js';
+            wp_enqueue_script(
+                $_sScriptHandle,
+                plugins_url( '/asset/js/' . $_sFileBaseName,
+                AmazonAutoLinks_Registry::$sFilePath ),
+                array( 'jquery' )
+            );
 
            	// in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
            	wp_localize_script(

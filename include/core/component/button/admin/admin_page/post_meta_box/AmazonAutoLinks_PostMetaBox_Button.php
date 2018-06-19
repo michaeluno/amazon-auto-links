@@ -72,18 +72,24 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
          * @callback        action      admin_head      For unknown reasons, `wp_enqueue_scripts` does not work.
          */        
         public function replyToSetScripts() {
-            
+
+            $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? 'button-preview-event-binder.js'
+                : 'button-preview-event-binder.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-event-binder.js',
+                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
                     'handle_id'    => 'aal_button_script_event_binder',                
                     'dependencies' => array( 'jquery' )
                 )
             );
-            
+
+            $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? 'button-preview-updator.js'
+                : 'button-preview-updator.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/button-preview-updator.js',
+                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
                     'handle_id'    => 'aal_button_script_preview_updator',
