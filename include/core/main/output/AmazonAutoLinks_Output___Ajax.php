@@ -106,7 +106,7 @@ class AmazonAutoLinks_Output___Ajax extends AmazonAutoLinks_PluginUtility {
 
         $this->___enqueueScript();
 
-        $_sNowLoadingText = $this->getElement( $this->___aArguments, array( '_now_loading_text' ), '' );
+        $_sNowLoadingText = $this->___getNowLoadingText();
         $_sPNowLoading    = $_sNowLoadingText
             ? "<p>" . $_sNowLoadingText . "</p>"
             : '';
@@ -115,6 +115,22 @@ class AmazonAutoLinks_Output___Ajax extends AmazonAutoLinks_PluginUtility {
             . "</div>";
 
     }
+        private function ___getNowLoadingText() {
+
+            $_aIDs    = $this->getAsArray( $this->___aArguments[ '_unit_ids' ] );
+
+            // For direct arguments
+            if ( empty( $_aIDs ) ) {
+                return $this->getElement( $this->___aArguments, array( '_now_loading_text' ) );
+            }
+
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            $_iPostID = $this->getFirstElement( $_aIDs );
+            return $_iPostID
+                ? $this->getPostMeta( $_iPostID, '_now_loading_text' )
+                : $_oOption->get( 'unit_default', '_now_loading_text' );
+
+        }
 
         private function ___enqueueScript() {
 
