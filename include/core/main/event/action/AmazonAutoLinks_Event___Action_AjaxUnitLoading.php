@@ -19,13 +19,13 @@
  */
 class AmazonAutoLinks_Event___Action_AjaxUnitLoading extends AmazonAutoLinks_Event___Action_Base {
 
-    protected $_sActionHookName     = 'wp_ajax_no_priv_aal_unit_ajax_loading';
+    protected $_sActionHookName     = 'wp_ajax_nopriv_aal_unit_ajax_loading';
 
     protected function _construct() {
         /**
-         * The both `wp_ajax_no_priv_{...}` and `wp_ajax_{...}` need to be hooked.
+         * The both `wp_ajax_nopriv_{...}` and `wp_ajax_{...}` need to be hooked.
          * `wp_ajax_{...}` is for logged-in users
-         * and `wp_ajax_no_priv_{...}` is for non-logged-in users.
+         * and `wp_ajax_nopriv_{...}` is for non-logged-in users.
          */
         add_action(
             'wp_ajax_aal_unit_ajax_loading',
@@ -47,7 +47,7 @@ class AmazonAutoLinks_Event___Action_AjaxUnitLoading extends AmazonAutoLinks_Eve
                 . "</div>";
         }
 
-        // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_no_priv_}aal_unit_ajax_loading` action hook )
+        // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_nopriv_}aal_unit_ajax_loading` action hook )
 
         // For the contextual widget
         add_filter( 'aal_filter_http_get', array( $this, 'replyToSetReferrerHTTPGET' ) );
