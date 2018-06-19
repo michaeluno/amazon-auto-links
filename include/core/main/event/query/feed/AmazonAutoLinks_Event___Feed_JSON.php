@@ -33,9 +33,10 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
     public function replyToLoadJSONFeed() {
 
         $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ]       = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
-        $_aArguments[ 'credit_link' ]         = false;
-        $_aArguments[ '_no_outer_container' ] = true;
+        $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
+        $_aArguments[ 'credit_link' ]          = false;
+        $_aArguments[ '_no_outer_container' ]  = true;
+        $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
         header(
             'Content-Type: application/json; charset=' . get_option( 'blog_charset' ),
             true

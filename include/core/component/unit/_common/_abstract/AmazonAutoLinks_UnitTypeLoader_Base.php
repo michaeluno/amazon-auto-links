@@ -137,7 +137,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
      * @return      string
      */
     public function replyToGetUnitOutput( $sOutput, $aArguments ) {
-        $_sClassName = "AmazonAutoLinks_UnitOutput_" . strtolower( $this->sUnitTypeSlug );
+        $_sClassName = 'AmazonAutoLinks_UnitOutput_' . strtolower( $this->sUnitTypeSlug );
         $_oUnit      = new $_sClassName( $aArguments );
         return $sOutput . trim( $_oUnit->get() );
     }

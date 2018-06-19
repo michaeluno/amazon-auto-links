@@ -14,6 +14,7 @@
  * @remark      Unlike unit output classes of other unit types, this does not extend the unit output base class.
  * @package     Amazon Auto Links
  * @since       3.5.0
+ * @filter      aal_filter_contextual_keywords
  */
 class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtility {
 
@@ -22,7 +23,10 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
     public function __construct( $aArguments ) {
         $this->___aArguments = $this->___getArgumentsFormatted( $aArguments );
     }
-
+        /**
+         * @param $aArguments
+         * @return array
+         */
         private function ___getArgumentsFormatted( $aArguments ) {
             $_oUnitOptions = new AmazonAutoLinks_UnitOption_contextual(
                 null,   // unit id
@@ -48,6 +52,10 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
         shuffle ( $_aSearchKeywords );
         array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
 
+        // 3.6.0+ This allows third parties to modify search keywords for cases that the keyword gets too long for long product title.
+        // @see https://wordpress.org/support/topic/problem-with-title-width/
+        $_aSearchKeywords = apply_filters( 'aal_filter_contextual_keywords', $_aSearchKeywords );
+
         return AmazonAutoLinks(
             array(
                 'Keywords'         => implode( ',', $_aSearchKeywords ),
@@ -55,7 +63,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
 
                 /**
                  * Fixed a bug that contextual widgets did not return outputs
-                 * due to the form data was having the value of `category` for the `unit_type` argument.
+                 * due to the form data having the value of `category` for the `unit_type` argument.
                  * This was because the unit option formatter class did not set the correct `unit_type` in the class,
                  * which has been fixed in 3.4.7.
                  *
@@ -70,6 +78,10 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
                 // The Amazon API does not provide an OR operator for the Keywords parameter. Power cannot be used for categories other than Books.
                 // So here we set a plugin specific option here to perform search by each keyword.
                 'search_per_keyword'    => true,
+
+                // 3.6.0+ This avoids dabble nested containers.
+                // '_no_outer_container'  => true,  // @todo figure out why this does not take effect.
+
             )
             + $this->___aArguments,
             false // echo or output

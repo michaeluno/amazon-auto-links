@@ -206,10 +206,11 @@ Optionally, the following arguments may be set.
 - `similar_product_image_size` - (integer) the image size of similar products in pixels. Default: `100`.
 - `similar_product_max_count` - (integer) the maximum number of similar products.
 - `customer_review_max_count` - (integer) the maximum number of customer reviews.
-- `show_now_retrieving_message` - (boolean|integer) Whether to show the "Now retrieving..." message when sub-elements are pending to be fetched. `true`/`1` to show `false`/`0` to hide.
+- `show_now_retrieving_message` - (boolean|integer) whether to show the "Now retrieving..." message when sub-elements are pending to be fetched. `true`/`1` to show `false`/`0` to hide.
 - `button_type` - (integer) The type of buttons. The following values are accepted. Default: `1`.
     - `0` - Link to the product page.
     - `1` - Add to cart.
+- `load_with_javascript` - [3.6.0+] (boolean|integer) whether to load the unit with JavaScript. `true`/`1` to yes, `false`/`0` to no.
 
 These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
 If these arguments are omitted, the values set in the setting page will be used.
@@ -276,6 +277,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.6.0 =
+- Added the `Load with Javascript` unit option that lets the user decide whether to display the unit with JavaScript.
 
 = 3.5.7 - 06/09/2018 =
 - Fixed an issue that some categories could not be recognized when creating a category unit.

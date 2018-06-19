@@ -3,7 +3,7 @@
  * Amazon Auto Links
  * 
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2017 Michael Uno
+ * Copyright (c) 2013-2018 Michael Uno
  */
 
 /**
@@ -19,7 +19,15 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * Stores unit arguments.
      */
     public $aArguments = array();
-    
+
+    /**
+     * Stores the raw arguments.
+     * @remark      Used for JavaScript loading.
+     * @var         array
+     * @sicne       3.6.0
+     */
+    private $___aRawArguments = array();
+
     /**
      * Instantiates the class and returns the object.
      * 
@@ -40,8 +48,9 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @since       2.0.0
      */
     public function __construct( $aArguments ) {
-        $_oFormatter      = new AmazonAutoLinks_Output___ArgumentFormatter( $aArguments );
-        $this->aArguments = $_oFormatter->get();
+        $this->___aRawArguments = $aArguments; // 3.6.0+
+        $_oFormatter            = new AmazonAutoLinks_Output___ArgumentFormatter( $aArguments );
+        $this->aArguments       = $_oFormatter->get();
     }
 
     /**
@@ -59,12 +68,22 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     public function get() {
+
+        // 3.6.0+
+        $_oAjaxOutput = new AmazonAutoLinks_Output___Ajax( $this->aArguments, $this->___aRawArguments );
+        $_sOutputForAjax = $_oAjaxOutput->get();
+        if ( $_sOutputForAjax ) {
+            return $_sOutputForAjax;
+        }
+
+// return '<h3>Testing: normal output will be rendered here.</h3>';
         $_sOutput = $this->___getOutput();
         $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
         return $_bNoOuterContainer
             ? $_sOutput
             : "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
     }
+
         /**
          * @since       3.5.0
          * @return      string
@@ -75,33 +94,32 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
             // For cases without a unit
             if ( empty( $_aIDs ) ) {
-                return trim( $this->___getOutputByDirectArguments( $this->aArguments ) );
+                // By direct arguments
+                return $this->___getOutputByUnitType(
+                    $this->___getUnitTypeFromArguments( $this->aArguments ),
+                    $this->aArguments
+                );
             }
 
-            // If called by unit,
+            // If called by unit IDs,
             $_sOutput = '';
             foreach( $_aIDs as $_iID ) {
                 $_sOutput .= $this->___getOutputByID( $_iID );
             }
-            return trim( $_sOutput );
+            return $_sOutput;
 
         }
-        /**
-         * @deprecated      3
-         */
-        public function getOutput() {
-            return $this->get();
-        }
-        
 
         /**
          * Returns the unit output by post (unit) ID.
+         * @return      string
          */
         private function ___getOutputByID( $iPostID ) {
 
             /**
-             * The auto-insert sets the 'id' as array storing multiple ids. But this method is called per ID so the ID should be discarded.
-             * if the unit gets deleted, auto-insert causes an error for not finding the options.
+             * The auto-insert sets the 'id' as array storing multiple ids.
+             * But this method is called per ID so the ID should be discarded.
+             * If the unit gets deleted, auto-insert causes an error for not finding the options.
              */            
             $_aUnitOptions = array(
                     'id' => $iPostID,
@@ -112,25 +130,13 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                     'unit_type' => null,
                 );    
 
-            return $this->___getOutputByUnitType( 
+            return $this->___getOutputByUnitType(
                 $_aUnitOptions[ 'unit_type' ],
-                $_aUnitOptions 
+                $_aUnitOptions
             );
    
         }
 
-        /**
-         * 
-         * @since       3
-         * @return      string
-         */
-        private function ___getOutputByDirectArguments( $aArguments ) {
-            return $this->___getOutputByUnitType( 
-                $this->___getUnitTypeFromArguments( $aArguments ), 
-                $aArguments 
-            );
-        }
-        
             /**
              * Determines the unit type from the given argument array.
              * @since       3
@@ -144,22 +150,39 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             }
             
             /**
-             * 
+             * Generates product outputs by the given unit type.
+             *
+             * @remark      All the outputs go through this method.
              * @return      string      The unit output
              */
             private function ___getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
 
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
                 if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
-                    return apply_filters( 'aal_filter_unit_output_' . $sUnitType, '', $_aUnitOptions );
+                    return trim( apply_filters( 'aal_filter_unit_output_' . $sUnitType, '', $_aUnitOptions ) );
                 }
 
+                // For undefined unit types,
                 $_oOption  = AmazonAutoLinks_Option::getInstance();
                 $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
                 return $_oOption->isDebug()
-                    ? "<p>" . __( 'Debug', 'amazon-auto-links' ) . ': ' . $_sMessage . "</p>"
+                    ? "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>"
+                        . "<p>" . $_sMessage . "</p>"
+                        . "<h4>" . __( 'Unit Arguments', 'amazon-auto-links' ) . "</h4>"
+                        . "<div>"
+                            . AmazonAutoLinks_Debug::get( $_aUnitOptions )
+                        . "</div>"
                     : "";
 
             }
+
+    /* Deprecated Methods */
+
+    /**
+     * @deprecated      3
+     */
+    public function getOutput() {
+        return $this->get();
+    }
 
 }

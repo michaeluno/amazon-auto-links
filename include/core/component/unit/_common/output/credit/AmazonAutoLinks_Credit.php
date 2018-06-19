@@ -53,7 +53,8 @@ class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
      * @since       3.2.3
      */
     public function replyToGetCreditComment( $sCredit ) {
-        return $sCredit . '<!-- Rendered with Amazon Auto Links by miunosoft -->';
+        return $sCredit
+            . self::getCommentCredit();
     }
 
     /**

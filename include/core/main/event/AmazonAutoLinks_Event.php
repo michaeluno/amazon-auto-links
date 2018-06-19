@@ -51,6 +51,7 @@ class AmazonAutoLinks_Event {
                 new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
                 new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
                 new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
+                new AmazonAutoLinks_Event___Action_AjaxUnitLoading; // 3.6.0+
 
             }
 

@@ -109,7 +109,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             );
             return;
         }
-        
+
         $_aClasses = array(
             'AmazonAutoLinks_FormFields_Widget_ContextualProduct',
             'AmazonAutoLinks_FormFields_Unit_Common',
@@ -229,8 +229,15 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             return $aSubmit;
         }
 
-        $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
-        $aSubmit    = $aSubmit + $_aDefaults;
+        // @fixed 3.6.0 Not sure why {...}_search was used here. It should be {...}_contextual
+//         $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
+
+        $_aDefaults = apply_filters( 'aal_filter_default_unit_options_contextual', array() );
+        $aSubmit    = array( 'unit_type' => 'contextual' )  // 3.6.0+ for Ajax unit loading
+            + $aSubmit
+            + $_aDefaults;
+
+        // Sanitize the form inputs.
         $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aSubmit, $aStored );
         $aSubmit    = $_oItemFormatValidator->get();      
         return $aSubmit;
@@ -243,7 +250,11 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      * @callback        filter      content_{instantiated class name}
      */
     public function content( $sContent, $aArguments, $aFormData ) {
-        
+
+//$sContent = $sContent
+//    . '<h3>Testing</h3>'
+//    . "<div>" . AmazonAutoLinks_Debug::get( $aFormData ) . "</div>";
+
         $aFormData = $this->_getFormattedFormData( $aFormData );        
         if ( 
             ! in_array( 
@@ -254,6 +265,13 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             $this->oProp->bShowWidgetTitle = false;
             return $sContent;
         }        
+
+        // @todo 3.6.0+ Echo JavaScript loading specific outputs.
+//        $_bLoadAsJS = $this->getElement( $aFormData, array( 'load_with_javascript' ) );
+
+        // Store widget instance information so that the output function knows what to do with JavaScript loading.
+        $aFormData[ '_widget_option_name' ] = $this->oProp->oWidget->option_name;
+        $aFormData[ '_widget_number' ] = $this->oProp->oWidget->number;
 
         $_sOutput = $this->_getOutput( $aFormData );
         if ( ! $_sOutput && ! $aFormData[ 'show_title_on_no_result' ] ) {

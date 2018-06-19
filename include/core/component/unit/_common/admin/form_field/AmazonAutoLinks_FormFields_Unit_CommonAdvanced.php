@@ -23,6 +23,20 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
         $_iMaxCol       = $this->oOption->getMaxSupportedColumnNumber();
         $_aFields       = array(
             array(
+                'field_id'          => $sFieldIDPrefix . 'load_with_javascript',
+                'type'              => 'checkbox',
+                'title'             => __( 'Load with JavaScript', 'amazon-auto-links' ),
+                'label'             => __( 'Load the output with JavaScript.', 'amazon-auto-links' ),
+                'default'           => false,
+            ),
+            array(
+                'field_id'          => $sFieldIDPrefix . '_now_loading_text',
+                'type'              => 'text',
+                'title'             => __( 'Now Loading Text', 'amazon-auto-links' ),
+                'default'           => __( 'Now loading...', 'amazon-auto-links' ),
+                'tip'               => __( 'The text that appears while loading the unit in the background.', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'          => $sFieldIDPrefix . 'subimage_size',
                 'type'              => 'number',            
                 'title'             => __( 'Max Image Size for Sub-images', 'amazon-auto-links' ),

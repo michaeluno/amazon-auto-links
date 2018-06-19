@@ -14,34 +14,45 @@
  * 
  * @since           3
  * @since           3.5.0       Renamed from `AmazonAutoLinks_ContextualProductWidget_SearchKeyword`.
+ * @filter          aal_filter_post_object
  */
 class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_PluginUtility {
 
     public $aCriteria           = array();
     public $sAdditionalKeywords = '';
 
+    private $___oPost;
+    private $___aGET = array();
+
     /**
      * Sets up properties.
      */
     public function __construct( array $aCriteria, $sAdditionalKeywords='' ) {
-        
+
         $this->aCriteria           = $aCriteria;
         $this->sAdditionalKeywords = $sAdditionalKeywords;
-        
+
+        // Allow ajax unit loading to set referrer's request
+        $this->___oPost            = apply_filters(
+            'aal_filter_post_object', 
+            $this->getElement( $GLOBALS, 'post' )
+        );
+        $this->___aGET             = apply_filters( 'aal_filter_http_get', $_GET );
     }
     
     /**
      * 
      * @return      string       The search keywords.
+     * @todo        If nothing uses the `$bReturnType` parameter, deprecate it.
      */
-    public function get( $bRetunType=true ) {
+    public function get( $bReturnType=true ) {
         
-        $_aKeywords    = $this->_getSearchKeywordsByCriteria( $this->aCriteria );
+        $_aKeywords    = $this->___getSearchKeywordsByCriteria( $this->aCriteria );
         $_aKeywords    = array_merge(
             $_aKeywords,
-            $this->_getSiteSearchKeywords()
+            $this->___getSiteSearchKeywords()
         );
-        $_aKeywords    = $this->_getFormattedSearchKeywordsArray( $_aKeywords );
+        $_aKeywords    = $this->___getFormattedSearchKeywordsArray( $_aKeywords );
         $_sAdditionals = $this->trimDelimitedElements( 
             trim( $this->sAdditionalKeywords ), // subject string
             ',',  // delimiter
@@ -50,10 +61,10 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         $_sAdditionals = $_sAdditionals
             ? ',' . $_sAdditionals
             : '';
-        $_sKeywords    =   implode( ',', $_aKeywords )
+        $_sKeywords    = implode( ',', $_aKeywords )
             . $_sAdditionals;
             
-        return $bRetunType
+        return $bReturnType
             ? explode( ',', $_sKeywords )
             : $_sKeywords;
             
@@ -62,9 +73,9 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         /**
          * @return      array
          */
-        private function _getSiteSearchKeywords() {
-            
-            $_sQuery = $this->getElement( $_GET, 's' );
+        private function ___getSiteSearchKeywords() {
+
+            $_sQuery = $this->getElement( $this->___aGET, 's' );
             $_sQuery = str_replace(
                 array( '+' ),
                 ',',
@@ -78,7 +89,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          * 
          * @return      array
          */
-        private function _getFormattedSearchKeywordsArray( array $aKeywords ) {
+        private function ___getFormattedSearchKeywordsArray( array $aKeywords ) {
             $aKeywords = array_unique( array_filter( $aKeywords ) );
             return $aKeywords;
         }
@@ -95,13 +106,13 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          *  )
          * @return      string
          */
-        private function _getSearchKeywordsByCriteria( array $aCriteria ) {
+        private function ___getSearchKeywordsByCriteria( array $aCriteria ) {
 
             $_aKeywords  = array();
-            foreach( $this->_getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {                
+            foreach( $this->___getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {
                 $_aKeywords = array_merge(
                     call_user_func(
-                        array( $this, '_getSearchKeywordsByType_' . $_sCriteriaKey )
+                        array( $this, '___getSearchKeywordsByType_' . $_sCriteriaKey )
                     ),
                     $_aKeywords
                 );
@@ -114,7 +125,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
              * @since       3
              * @return      array
              */
-            private function _getFormattedCriteriaArray( array $aCriteria ) {                
+            private function ___getFormattedCriteriaArray( array $aCriteria ) {
                 return array_keys(
                     array_filter( $aCriteria )
                 );                    
@@ -124,9 +135,9 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
              * @since       3
              * @return      array
              */
-            private function _getSearchKeywordsByType_post_title() {
-                return isset( $GLOBALS[ 'post' ]->post_title )
-                    ? array( $GLOBALS[ 'post' ]->post_title )
+            private function ___getSearchKeywordsByType_post_title() {
+                return isset( $this->___oPost->post_title )
+                    ? array( $this->___oPost->post_title )
                     : array();
             }
             
@@ -135,8 +146,11 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
              * @since       3
              * @return      array
              */
-            private function _getSearchKeywordsByType_breadcrumb() {
-                $_oBreadcrumb  = new AmazonAutoLinks_ContextualUnit_Breadcrumb;
+            private function ___getSearchKeywordsByType_breadcrumb() {
+                $_oBreadcrumb  = new AmazonAutoLinks_ContextualUnit_Breadcrumb(
+                    $this->___aGET,
+                    $this->___oPost
+                );
                 return $_oBreadcrumb->get();
             }  
  
@@ -145,15 +159,15 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
              * @since       3
              * @return      array
              */
-            private function _getSearchKeywordsByType_taxonomy_terms() {
+            private function ___getSearchKeywordsByType_taxonomy_terms() {
                 
-                if ( ! isset( $GLOBALS[ 'post' ]->post_type, $GLOBALS[ 'post' ]->ID ) ) {
+                if ( ! isset( $this->___oPost->post_type, $this->___oPost->ID ) ) {
                     return array();
                 }
                 
                 // Retrieve associated taxonomies.
                 $_aTaxonomyObjects = get_object_taxonomies( 
-                    $GLOBALS[ 'post' ]->post_type, 
+                    $this->___oPost->post_type, 
                     'objects' 
                 );
                 
@@ -166,7 +180,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                     $_aTaxoomyNames[] = $_oTaxonomy->name;
                 }
                 $_aTermsObjects = wp_get_post_terms( 
-                    $GLOBALS[ 'post' ]->ID, 
+                    $this->___oPost->ID, 
                     $_aTaxoomyNames
                 );
                         

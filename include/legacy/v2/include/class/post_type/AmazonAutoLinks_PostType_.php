@@ -242,8 +242,6 @@ abstract class AmazonAutoLinks_PostType_ extends AmazonAutoLinks_AdminPageFramew
         return '<p>'
             . '<span>[amazon_auto_links id="' . $intPostID . '"]</span>' . '<br />'
             . '<span>&lt;?php AmazonAutoLinks( array( ‘id’ =&gt; ' . $intPostID . ' ) ); ?&gt;</span>'
-            // . '<span>AmazonAutoLinks( ‘id’ =&gt; ' . $intPostID . ' );</span>'
-        
             . '</p>';
     }
     

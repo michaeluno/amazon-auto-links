@@ -15,7 +15,19 @@
  * @since       3
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
-    
+
+    /**
+     * @remark  Used for breadcrumbs.
+     * @return  null|object
+     * @since   3.6.0
+     */
+    static public function getCurrentQueriedObject() {
+        if ( ! method_exists( $GLOBALS[ 'wp_query' ], 'get_queried_object' ) ) {
+            return null;
+        }
+        return $GLOBALS[ 'wp_query' ]->get_queried_object();
+    }
+
     /**
      * Finds and extracts ASINs from given text.
      * @since       3.4.0
@@ -278,6 +290,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         'is_author'             => 'author',
         'is_search'             => 'search',
         'is_404'                => '404',
+//        'wp_doing_ajax'         => 'ajax',  // 3.6.0+ `wp_doing_ajax()` exists in WP 4.7+
     );
     /**
      * 

@@ -214,6 +214,16 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'amount'    => 0,
             ),
 
+            // unknown+
+            '_no_outer_container'           => false,
+
+            // 3.6.0+
+            'load_with_javascript'          => false,
+            '_now_loading_text'             => 'Now loading...',
+            /// for widget outputs - helps the output function know what to do with JavaScript loading
+            '_widget_option_name'           => null,
+            '_widget_number'                => null,
+
         )
         
     );

@@ -155,11 +155,15 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
             $this->oProp->bShowWidgetTitle = false;
             return $sContent;
         }                
-        
+
+        // Store widget instance information so that the output function knows what to do with JavaScript loading.
+        $aFormData[ '_widget_option_name' ] = $this->oProp->oWidget->option_name;
+        $aFormData[ '_widget_number' ] = $this->oProp->oWidget->number;
+
         return $sContent
             . AmazonAutoLinks( 
                 $aFormData, 
-                false // echo or retrun
+                false // echo or return
             );
     
     }
