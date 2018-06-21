@@ -1,10 +1,10 @@
 === Amazon Auto Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon associates, amazon associate, amazon affiliate, amazon ads, amazon ad, automation, ad, ads, advertisement, affiliate, marketing, monetization, revenue
+Tags:               amazon, amazon associates, amazon affiliate, amazon ads, automation, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.9.6
-Stable tag:         3.5.7
+Stable tag:         3.6.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -278,7 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.6.0 =
+= 3.6.0 - 06/22/2018 =
 - Added the `Load with Javascript` unit option that lets the user decide whether to display the unit with JavaScript.
 
 = 3.5.7 - 06/09/2018 =
