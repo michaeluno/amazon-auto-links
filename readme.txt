@@ -278,6 +278,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.1 =
+- Added `rel='nofollow'` to the button links.
+
 = 3.6.0 - 06/22/2018 =
 - Added the `Load with Javascript` unit option that lets the user decide whether to display the unit with JavaScript.
 
