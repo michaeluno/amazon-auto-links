@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon affiliate, amazon ads, automation, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.9.6
-Stable tag:         3.6.0
+Stable tag:         3.6.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -278,7 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.6.1 =
+= 3.6.1 - 07/04/2018 =
 - Added `rel='nofollow'` to the button links.
 
 = 3.6.0 - 06/22/2018 =
