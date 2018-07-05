@@ -110,13 +110,16 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     
     /**
      * The plugin activation callback method.
+     * @callback    function    register_activation_hook()      action hook: activate_{plugin_basename($file)}
+     * @remark      This callback is called in wp-admin/plugins.php and after this callback, the script just exits with `exit()`.
+     * Also custom post types are not registered by the time this is called.
      */    
     public function replyToPluginActivation() {
 
         $this->___checkRequirements();
         
         $this->replyToInstallCustomTables();
-        
+
         $this->replyToCreateDefaultButton();
         
     }
@@ -142,10 +145,17 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
              
         }    
         /**
-         * 
-         * @callback        action      plugins_loaded
+         *
          */
         public function replyToCreateDefaultButton() {
+            $_sButtonPostType = AmazonAutoLinks_Registry::$aPostTypes[ 'button' ];
+            if ( ! post_type_exists( $_sButtonPostType ) ) {
+                new AmazonAutoLinks_PostType_Button(
+                    $_sButtonPostType,  // slug
+                    null,   // post type argument. This is defined in the class.
+                    $this->sFilePath   // script path
+                );
+            }
             new AmazonAutoLinks_DefaultButtonCreation;    
         }        
         
@@ -184,6 +194,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * Loads the plugin specific components. 
      * 
      * @remark        All the necessary classes should have been already loaded.
+     * @callback      plugins_loaded        Unless it is set in the constructor's third parameter.
      */
     public function setUp() {
         

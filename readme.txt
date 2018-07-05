@@ -278,6 +278,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.2 =
+- Fixed a bug that the default button is not created.
+
 = 3.6.1 - 07/04/2018 =
 - Added `rel='nofollow'` to the button links.
 

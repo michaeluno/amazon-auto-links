@@ -19,40 +19,44 @@ class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_PluginUtilit
 
     /**
      * Triggers event actions.
+     * @remark      `wp_count_posts()` returns an empty object when the post type is not created.
+     * So make sure this class is called after the button post type registration is done.
      */
     public function __construct() {
 
-        // @todo check the count of posts of the button post type.
+        // Check the count of posts of the button post type.
         $_oPostCount = wp_count_posts(
             AmazonAutoLinks_Registry::$aPostTypes[ 'button' ]
         );
-        
-        if ( ! is_object( $_oPostCount ) ) {
+
+        // If a button exists, return
+        if (
+            ! is_object( $_oPostCount )
+            || ! isset( $_oPostCount->publish )
+            || $_oPostCount->publish > 0
+        ) {
             return;
         }
-        
-        // If a button exists, return
-        if ( 
-            isset( $_oPostCount->publish )
-            && $_oPostCount->publish <= 0 
-        ) {
-            
-            // Otherwise, create one.
-            $this->_createDefaultButton();            
-            
-        }
-        
+
+        // Otherwise, create one.
+        $_iPostID = $this->___createDefaultButton();
+
         // Update the button CSS option.
-        update_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-            AmazonAutoLinks_PluginUtility::getCSSRulesOfActiveButtons() // data
-        );
-        
+        if ( $_iPostID ) {
+            update_option(
+                AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
+                AmazonAutoLinks_PluginUtility::getCSSRulesOfActiveButtons() // data
+            );
+        }
+
     }
+
         /**
-         * 
+         * @since       3
+         * @since       3.6.2       Made it return the created post ID.
+         * @return      integer     The created post ID. `0` for failing.
          */
-        private function _createDefaultButton() {
+        private function ___createDefaultButton() {
             
             $_iPostID = $this->createPost( 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], 
@@ -70,6 +74,7 @@ class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_PluginUtilit
                     AmazonAutoLinks_ButtonResourceLoader::getDefaultButtonCSS( $_iPostID ) // value
                 );                  
             }
-            
+            return ( integer ) $_iPostID;
+
         }
 }
