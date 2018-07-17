@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon affiliate, amazon ads, automation, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.9.7
-Stable tag:         3.6.2
+Stable tag:         3.6.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.6.3 - 07/17/2018 =
+- Fixed a compatibility issue with third party plugins/themes which attempt to instantiate the plugin widgets.
 
 = 3.6.2 - 07/09/2018 =
 - Fixed a bug that the default button is not created.
