@@ -278,6 +278,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.4 =
+- Added the `aal_filter_product_link` filter hook to allow third-parties to modify product links.
+
 = 3.6.3 - 07/17/2018 =
 - Fixed a compatibility issue with third party plugins/themes which attempt to instantiate the plugin widgets.
 

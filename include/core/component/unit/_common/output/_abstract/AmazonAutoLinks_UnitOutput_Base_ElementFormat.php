@@ -418,6 +418,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $this->oUnitOption->get( 'associate_id' ), 
             $this->oUnitOption->get( 'country' )
         );
+        // 3.6.4+   Allows third parties to modify the link.
+        $_sStyledURL = apply_filters(
+           'aal_filter_product_link', // filter hook name
+            $_sStyledURL,    // filtering value
+            $sURL,  // 1st param
+            $sASIN, // 2nd param
+            $this->oUnitOption->get()    // 3rd param
+        );
         return esc_url( $_sStyledURL );
             
     }
