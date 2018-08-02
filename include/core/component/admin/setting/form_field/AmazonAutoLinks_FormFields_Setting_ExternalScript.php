@@ -34,7 +34,7 @@ class AmazonAutoLinks_FormFields_Setting_ExternalScript extends AmazonAutoLinks_
                     'https://affiliate-program.amazon.com/gp/associates/tips/impressions.html'
                 ),                
                 'tip'           => array(
-                    __( 'The sript is not available for the following locales.', 'amazon-auto-links' )
+                    __( 'The script is not available for the following locales.', 'amazon-auto-links' )
                         . ' ' .  __( 'Italy', 'amazon-auto-links' )
                         . ', ' . __( 'Australia', 'amazon-auto-links' )
                         . ', ' . __( 'Spain', 'amazon-auto-links' )
