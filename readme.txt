@@ -278,7 +278,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.6.5 =
+= 3.6.5 - 08/04/2018 =
 - Added the translation items for the Japanese and default language file.
 
 = 3.6.4 - 07/29/2018 =
