@@ -39,7 +39,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_Feed extends AmazonAutoLinks_Adm
                     __( 'By default, the plugin uses the <code>description</code> tag for excerpt and the <code>content</code> for the entire product output.', 'amazon-auto-links' ),
                     __( 'However, some RSS readers cannot retrieve contents of <code>content</code> tag. In that case, enable this option to replace the output of the <code>content</code> tag with the <code>description</code> tag.', 'amazon-auto-links' ),
                 ),
-                'label'          => __( 'Use the <code>description</code> tag instead of <code>content</code> tag for the complete product output.', 'amazon-auto-links' ),
+                'label'          => __( 'Use the <code>content</code> tag instead of <code>description</code> tag for the complete product output.', 'amazon-auto-links' ),
                 'type'           => 'checkbox',
                 'default'        => false,
             )  
