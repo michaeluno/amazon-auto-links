@@ -112,7 +112,7 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                     'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
                     'random'            => __( 'Random', 'amazon-auto-links' ),
                 ),
-                'tip'               => __( 'In order to not to sort and leave it as the found order, choose <code>Raw</code>.', 'amazon-auto-links' ),
+                'tip'               => __( 'In order not to sort and leave it as the found order, choose <code>Raw</code>.', 'amazon-auto-links' ),
                 'default'           => 'raw',
             ),
         );
