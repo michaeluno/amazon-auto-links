@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon affiliate, amazon ads, automation, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
 Tested up to:       4.9.8
-Stable tag:         3.6.4
+Stable tag:         3.6.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
