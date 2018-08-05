@@ -9,7 +9,7 @@
  */
 
 /**
- * Adds the 'Rest' tab to the 'Settings' page of the loader plugin.
+ * Adds the 'Reset' tab to the 'Settings' page of the loader plugin.
  * 
  * @since       3
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
