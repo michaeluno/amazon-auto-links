@@ -69,3 +69,24 @@ array_walk_recursive(
 new AmazonAutoLinks_DatabaseTableInstall( 
     false   // uninstall
 );
+
+// 4. [3.6.6+] Delete Custom Post Type Posts
+foreach( AmazonAutoLinks_Registry::$aPostTypes as $_sKey => $_sPostTypeSlug ) {
+    _deleteAmazonAutoLinksPosts( $_sPostTypeSlug );
+}
+
+/**
+ * @since 3.6.6
+ */
+function _deleteAmazonAutoLinksPosts( $sPostTypeSlug ) {
+    $_oResults   = new WP_Query(
+        array(
+            'post_type'      => $sPostTypeSlug,
+            'posts_per_page' => -1,     // `-1` for all
+            'fields'         => 'ids',  // return only post IDs by default.
+        )
+    );
+    foreach( $_oResults->posts as $_iPostID ) {
+        wp_delete_post( $_iPostID, true );
+    }
+}

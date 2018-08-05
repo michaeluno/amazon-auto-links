@@ -33,7 +33,22 @@ class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_
                     __( 'If you get broken options, initialize them by performing reset.', 'amazon-auto-links' ),
                 ),
             )
-        );           
+        );
+
+        // 3.6.6+
+        new AmazonAutoLinks_AdminPage_Setting_Reset_Data(
+            $oAdminPage,
+            $this->sPageSlug,
+            array(
+                'tab_slug'      => $this->sTabSlug,
+                'section_id'    => 'data',
+                'title'         => __( 'Data', 'amazon-auto-links' ),
+                'description'   => array(
+                    __( 'Handles export/import plugin options.', 'amazon-auto-links' )
+                    . ' ' . __( 'Units, auto-insert and buttons are not included.', 'amazon-auto-links' ),
+                ),
+            )
+        );
      
     }
     

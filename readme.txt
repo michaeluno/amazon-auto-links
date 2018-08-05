@@ -278,6 +278,10 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.6 =
+- Added the `Data` section in the `Reset` setting page, which handles export/import options.
+- Added the ability to clean up used custom post type posts upon plugin uninstall.
+
 = 3.6.5 - 08/04/2018 =
 - Added the translation items for the Japanese and default language file.
 
