@@ -3,8 +3,9 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, amazon affiliate, amazon ads, automation, ads, advertisement, affiliate, marketing, monetization, revenue
 Requires at least:  3.4
+Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.6.5
+Stable tag:         3.6.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -278,7 +279,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.6.6 =
+= 3.6.6 - 08/09/2018 =
 - Added the `Data` section in the `Reset` setting page, which handles export/import options.
 - Added the ability to clean up used custom post type posts upon plugin uninstall.
 
