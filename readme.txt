@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.6.7 =
+- Added the `Associate ID` field in the `Authentication` setting section for some locales.
+
 = 3.6.6 - 08/09/2018 =
 - Added the `Data` section in the `Reset` setting page, which handles export/import options.
 - Added the ability to clean up used custom post type posts upon plugin uninstall.

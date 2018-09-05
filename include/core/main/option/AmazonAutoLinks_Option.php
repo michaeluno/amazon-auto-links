@@ -77,6 +77,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'access_key'                => '',   // public key
             'access_key_secret'         => '',   // private key
             'api_authentication_status' => false,
+            'associates_test_tag'       => '',  // 3.6.7+
             'server_locale'             => 'US', // 3.4.4+
         ),            
         // Hidden options
