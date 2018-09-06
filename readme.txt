@@ -280,6 +280,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.6.7 =
+- Added the `aal_filter_api_request_uri` filter hook to allow third-parties to modify API request URI.
 - Added the `Associate ID` field in the `Authentication` setting section for some locales.
 
 = 3.6.6 - 08/09/2018 =

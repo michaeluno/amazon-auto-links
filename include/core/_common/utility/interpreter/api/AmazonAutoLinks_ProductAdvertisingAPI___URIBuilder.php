@@ -36,7 +36,12 @@ class AmazonAutoLinks_ProductAdvertisingAPI___URIBuilder {
      * @return      string
      */
     public function get() {
-        return $this->___getSignedRequestURI( $this->___aArguments );
+        // 3.6.7+
+        return apply_filters(
+            'aal_filter_api_request_uri',
+            $this->___getSignedRequestURI( $this->___aArguments ),   // the subject URI
+            $this->___aArguments
+        );
     }
 
         /**
