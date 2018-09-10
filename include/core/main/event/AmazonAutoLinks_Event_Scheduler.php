@@ -39,20 +39,7 @@ class AmazonAutoLinks_Event_Scheduler {
         );
 
     }    
-    
-    /**
-     * @since       3.3.0
-     * @deprecated  Not used at the moment
-     */
-    static public function prefetchByArguments( $aArguments ) {
 
-        self::_scheduleTask( 
-            'aal_action_unit_prefetch_by_arguments',  // action name
-            $aArguments // arguments
-        );            
-        
-    }
-    
     /**
      * @since       3.3.0
      * @sicne       3.5.0           Renamed from `getSimliarProducts()`.

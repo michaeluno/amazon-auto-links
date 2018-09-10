@@ -69,7 +69,6 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         public function replyToLoadEvents() {
 
             new AmazonAutoLinks_Event___Action_UnitPrefetchByID;
-            new AmazonAutoLinks_Event___Action_UnitPrefetchByArguments;
             new AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal;
             new AmazonAutoLinks_Event___Action_APIRequestSearchProduct;
             new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;
