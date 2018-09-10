@@ -79,9 +79,6 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 ? maybe_unserialize( $_mValue )
                 : $mDefault; // default
 
-            // Now schedule a background task to retrieve product info.
-    //        $_bScheduleTask = ! $this->isEmpty( array_filter( $aScheduleTask ) );
-
             $_sModifiedTime = $this->getElement(
                 $aRow, // subject array
                 array( 'modified_time' ), // dimensional keys
@@ -90,17 +87,7 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_iCacheDuration  = ( int ) $this->_oUnitOption->get( 'cache_duration' );
             $_iExpirationTime = strtotime( $_sModifiedTime ) + $_iCacheDuration;
             $_bIsExpired      = $this->isExpired( $_iExpirationTime );
-    //        if (
-    //            $_bScheduleTask && $_bIsExpired
-    //        ) {
-    //            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-    //                $aScheduleTask[ 'associate_id' ],
-    //                $aScheduleTask[ 'asin' ],
-    //                $aScheduleTask[ 'locale' ],
-    //                ( integer ) $_iCacheDuration,
-    //                ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' )
-    //            );
-    //        }
+
             $this->___scheduleBackgroundTask(
                 $_bIsExpired,
                 $aScheduleTask,

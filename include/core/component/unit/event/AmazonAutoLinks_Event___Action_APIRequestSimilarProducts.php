@@ -18,7 +18,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
 
     protected $_sActionHookName = 'aal_action_api_get_similar_products';
 
-    private $___sAPIRequestType = 'api_product_info'; // up to 20 chars
+    private $___sAPIRequestType = 'similar_products'; // up to 20 chars
 
     protected function _construct() {
         add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
@@ -112,19 +112,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
                 
                 // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
                 'ItemId'                => $_sASINs,    
-                
-                // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
-                // 'RelationshipType' => null,    // (conditional)    This parameter is required when the RelatedItems response group is used. 
 
-                // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
-                // 'SearchIndex'           => $this->arrArgs['SearchIndex'],    
-                
-                // 'TruncateReviewsAt' => 1000, // (optional)
-                // 'VariationPage' => null, // (optional)
-                
-                // (optional) 
-                'ResponseGroup'         => 'Large', 
-                
+                'ResponseGroup'         => 'Images,ItemAttributes', // 3.6.8+ Changed from `Large` for a smaller data set
+
             );
 
             $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
