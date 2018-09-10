@@ -106,6 +106,8 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3
      * @since       3.5.0       Renamed from `getProductInfo()`.
      * @return      boolean
+     * @todo        Add the sItemFormat parameter so that %similar% can be checked.
+     * @todo        Do this at once at the shutdown action and pass multiple ASINs to query at once to save a number of API requests.
      */
     static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false ) {
     

@@ -303,7 +303,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * This enables to retrieve more than 10 items. However, for it, it performs multiple requests, thus, it will be slow.
      * 
      * @since           2.0.1
-     * @return          arrat
+     * @return          array
      */
     protected function getRequest( $iCount ) {
         
@@ -932,7 +932,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              */
             private function ___getPrices( array $aItem ) {
                 
-                $_sProperPirce      = $this->getElement(
+                $_sProperPrice      = $this->getElement(
                     $aItem,
                     array( 'ItemAttributes', 'ListPrice', 'FormattedPrice' ),
                     ''
@@ -942,17 +942,17 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     array( 'Offers', 'Offer', 'OfferListing', 'Price', 'FormattedPrice' ),
                     ''
                 );
-                $_sDiscountedPrice  = $_sProperPirce && $_sDiscountedPrice === $_sProperPirce
+                $_sDiscountedPrice  = $_sProperPrice && $_sDiscountedPrice === $_sProperPrice
                     ? ''
                     : $_sDiscountedPrice;
-                $_sProperPirce      = $_sDiscountedPrice
-                    ? "<s>" . $_sProperPirce . "</s>"
-                    : $_sProperPirce;
+                $_sProperPrice      = $_sDiscountedPrice
+                    ? "<s>" . $_sProperPrice . "</s>"
+                    : $_sProperPrice;
                     
                 $_aPrices = array(
-                    'price'              => $_sProperPirce
+                    'price'              => $_sProperPrice
                         ? "<span class='amazon-product-price-value'>"  
-                               . $_sProperPirce
+                               . $_sProperPrice
                             . "</span>"
                         : "",
                     'discounted_price'   => $_sDiscountedPrice

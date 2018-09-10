@@ -65,6 +65,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         }
 
         // Retrieve similar products in a separate routine
+        // @todo Do this only %similar% is present in the Item Format option.
         $this->___scheduleFetchingSimilarProducts(
             $_aProductData, 
             $_sASIN,

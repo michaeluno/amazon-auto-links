@@ -44,14 +44,6 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
      * @throws      Exception
      */
     protected function _getPendingMessage( $sMessage ) {
-        // The scheduling should be handled automatically in the `___getValueFromRow()` method.
-//            AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-//                $this->_sAssociateID,
-//                $this->_sASIN,
-//                $this->_sLocale,
-//                ( integer ) $this->_oUnitOption->get( 'cache_duration' ),
-//                ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' )
-//            );
         if ( $this->_oUnitOption->get( '_no_pending_items' ) ) {
             throw new Exception( 'A product with a pending element is not allowed.' );
         }
