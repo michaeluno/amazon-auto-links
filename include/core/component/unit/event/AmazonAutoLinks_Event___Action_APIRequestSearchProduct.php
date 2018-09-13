@@ -44,13 +44,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
         $_aParams        = func_get_args() + array( null );
 
-        $aArguments      = $_aParams[ 0 ] + array( null, null, null, null );
+        $aArguments      = $_aParams[ 0 ] + array( null, null, null, null, null );
         $_sAssociateID   = $aArguments[ 0 ];
         $_sASIN          = $aArguments[ 1 ];
         $_sLocale        = strtoupper( $aArguments[ 2 ] );
         $_iCacheDuration = $aArguments[ 3 ];
         $_bForceRenew    = ( boolean ) $aArguments[ 4 ];
- 
+        $_sItemFormat    = $aArguments[ 5 ];
+
         // Extract the product data from the entire API response.
         $_aProductData     = $this->___getProductData(
             $_sASIN, 
@@ -65,22 +66,24 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         }
 
         // Retrieve similar products in a separate routine
-        // @todo Do this only %similar% is present in the Item Format option.
-        $this->___scheduleFetchingSimilarProducts(
-            $_aProductData, 
-            $_sASIN,
-            $_sLocale, 
-            $_sAssociateID, 
-            $_iCacheDuration,
-            $_bForceRenew
-        );
-        
+        // Do this only `%similar%` is present in the Item Format option.
+        if ( false !== strpos( $_sItemFormat, '%similar%' ) ) {
+            $this->___scheduleFetchingSimilarProducts(
+                $_aProductData,
+                $_sASIN,
+                $_sLocale,
+                $_sAssociateID,
+                $_iCacheDuration,
+                $_bForceRenew
+            );
+        }
         $this->___setProductData(
             $_aProductData, 
             $_sASIN,
             $_sLocale,
             $_iCacheDuration,
-            $_bForceRenew
+            $_bForceRenew,
+            $_sItemFormat
         );
         
     }
@@ -119,11 +122,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          * @param       integer     $iCacheDuration
          * @return      void
          */
-        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew ) {
+        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
             // Check if a customer review exists.
             $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
-            if ( $_bCustomerReviewExists ) {            
+            if ( $_bCustomerReviewExists ) {
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
                     $this->getElement(
                         $aAPIResponseProductData,
@@ -234,7 +237,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     ),     
                     
                     // Similar products will be set with a separate routine.
-                    'similar_products'   => '',
+                    // Once an empty value is set, it will no longer trigger the value retrieval background routine
+                    // 'similar_products'   => '',
                     
                     'editorial_reviews'  => $this->getElement(
                         $aAPIResponseProductData,

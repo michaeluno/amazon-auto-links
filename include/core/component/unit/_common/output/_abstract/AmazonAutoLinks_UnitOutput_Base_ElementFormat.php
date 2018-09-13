@@ -159,7 +159,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                         $sASIN,
                         $sLocale,
                         ( integer ) $this->oUnitOption->get( 'cache_duration' ),
-                        ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
+                        ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' ),
+                        $this->oUnitOption->get( 'item_format' )
                     );
                 }
                 return $_aDBProductRow;

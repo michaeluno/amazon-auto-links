@@ -281,6 +281,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 = 3.7.0 =
 - Added the ability to display errors in the unit listing table of the `Manage Units` page.
+- Optimized the number of API requests based on the `Item Format` option.
 - Optimized API request parameters regarding similar products.
 
 = 3.6.7 - 09/07/2018 =

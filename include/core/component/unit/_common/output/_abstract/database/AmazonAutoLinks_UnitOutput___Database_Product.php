@@ -128,7 +128,8 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                     $aScheduleTask[ 'asin' ],
                     $aScheduleTask[ 'locale' ],
                     ( integer ) $_iCacheDuration,
-                    ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' )
+                    ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
+                    $this->_oUnitOption->get( 'item_format' )
                 );
 
             }

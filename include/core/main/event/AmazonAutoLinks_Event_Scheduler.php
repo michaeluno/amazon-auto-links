@@ -93,10 +93,10 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3
      * @since       3.5.0       Renamed from `getProductInfo()`.
      * @return      boolean
-     * @todo        Add the sItemFormat parameter so that %similar% can be checked.
      * @todo        Do this at once at the shutdown action and pass multiple ASINs to query at once to save a number of API requests.
+     * @since       3.7.0       Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
      */
-    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false ) {
+    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
     
         $_oOption   = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
@@ -105,7 +105,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
         $_bScheduled = self::_scheduleTask( 
             'aal_action_api_get_product_info',  // action name
-            array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew )
+            array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat )
         );
         if ( ! $_bScheduled ) {
             return $_bScheduled;
