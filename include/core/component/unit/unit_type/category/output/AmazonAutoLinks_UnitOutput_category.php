@@ -803,6 +803,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_oFeed->init();     // will perform fetching the feeds.
         return $_oFeed;
         
-    }        
-    
+    }
+
 }

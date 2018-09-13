@@ -33,6 +33,7 @@ class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_PluginUtility {
         $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php';
         $_aArguments[ 'credit_link' ]          = false;
         $_aArguments[ '_no_outer_container' ]  = true;
+        $_aArguments[ 'show_errors' ]          = false;
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
 
         header(

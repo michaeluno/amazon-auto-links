@@ -328,6 +328,9 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 )
             );        
             $this->sLastCharSet = $_sCharSet;
+            if ( $_bResult ) {
+                do_action( 'aal_action_set_http_request_cache', $_sCacheName, $sURL, $mData, $iCacheDuration, $_sCharSet );
+            }
             return $_bResult;
             
         }

@@ -47,15 +47,16 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     }
         
     /**
-    * Defines the column header of the unit listing table.
-    * 
-    * @callback     filter      columns_{post type slug}
-    * @return       array
-    */
-   public function replyToModifyColumnHeader( $aHeaderColumns ) {    
+     * Defines the column header of the unit listing table.
+     *
+     * @callback     filter      columns_{post type slug}
+     * @return       array
+     */
+    public function replyToModifyColumnHeader( $aHeaderColumns ) {
         return array(
             'cb'                    => '<input type="checkbox" />',   
             'title'                 => __( 'Unit Name', 'amazon-auto-links' ),    
+            'status'                => __( 'Status', 'amazon-auto-links' ),
             'unit_type'             => __( 'Unit Type', 'amazon-auto-links' ),
             'template'              => __( 'Template', 'amazon-auto-links' ),
             'amazon_auto_links_tag' => __( 'Labels', 'amazon-auto-links' ),  
@@ -209,5 +210,39 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 )
                 . "</span>";
         }
-    
+
+    /**
+     * @callback        filter      cell_{post type slug}_{column key}
+     * @return          string
+     * @since       3.7.0
+     */
+    public function cell_amazon_auto_links_status( $sCell, $iPostID ) {
+
+        $_sError = get_post_meta( $iPostID, '_error', true );
+        if ( $_sError ) {
+            $_iModalID = 'response-error-' . $iPostID;
+            $_sTitle   = esc_attr( __( 'Unit Error', 'amazon-auto-links' ) );
+            return "<span class='circle red' title='" . $_sTitle . "'></span>"
+                . "<div id='{$_iModalID}' style='display:none;'>"
+                    . "<p>" . $_sError . "</p>"
+                . "</div>"
+                . "<div class='row-actions'>"
+                    . "<span class='show'>"
+                        . "<a href='#TB_inline?width=600&height=72&inlineId={$_iModalID}' class='inline hide-if-no-js thickbox' title='" . $_sTitle . "'>"
+                            . __( 'Show', 'amazon-auto-links' )
+                        . "</a>"
+                    . "</span>"
+                    . " | "
+                    . "<span class='copy'>"
+                        . "<a class='inline hide-if-no-js' data-target='{$_iModalID}'>"
+                            . __( 'Copy', 'amazon-auto-links' )
+                        . "</a>"
+                    . "</span>"
+                . "</div>";
+        }
+        return "<span class='circle green' title='" . __( 'Good', 'amazon-auto-links' ) . "'></span>";
+
+    }
+
+
 }

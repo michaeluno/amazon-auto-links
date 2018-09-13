@@ -57,19 +57,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 
         // Get API responses
         $_aResponse = $this->_getResponses();
-
         $_aError    = $this->_getResponseError( $_aResponse );
         if ( ! empty( $_aError ) ) {
-            return $this->oUnitOption->get( 'show_errors' )
-                ? $_aError
-                : array();
+            return $_aError;
         }
-            
-        $_aProducts = $this->getProducts( $_aResponse );
+        return $this->getProducts( $_aResponse );
 
-        // echo "<pre>" . htmlspecialchars( print_r( $_aResponse[ 'Items' ][ 'Item' ], true ) ) . "</pre>"
-        return $_aProducts;
-        
     }
         /**
          * @since       3.2.1
@@ -77,7 +70,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          */
         private function _getResponseError( $aResponse ) {
             
-            // HTTP or API Resonse error
+            // HTTP or API Response error
             if ( isset( $aResponse[ 'Error' ][ 'Code' ] ) ) {
                 return $aResponse;
             }
@@ -89,7 +82,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             );
             if ( ! empty( $_aErrors ) ) {
                 
-                // Retrun the first error item as the template currently only checks the Error element.
+                // Return the first error item for multiple cases as the template currently only checks the Error element.
                 if ( isset( $_aErrors[ 'Error' ][ 0 ] ) ) {
                     $_aErrors[ 'Error' ] = $_aErrors[ 'Error' ][ 0 ];
                 }
@@ -285,17 +278,18 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          * Checks whether response has an error.
          * @return      boolean
          * @since       3
+         * @deprecated  3.7.0
          */
-        protected function _isError( $aProducts ) {
-            if ( isset( $aProducts[ 'Error' ][ 'Code' ] ) ) {
-                return true;
-            }
-            if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
-                return true;
-            }
-            return parent::_isError( $aProducts );
-            
-        }    
+//        protected function _isError( $aProducts ) {
+//            if ( isset( $aProducts[ 'Error' ][ 'Code' ] ) ) {
+//                return true;
+//            }
+//            if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
+//                return true;
+//            }
+//            return parent::_isError( $aProducts );
+//
+//        }
     
     /**
      * Performs paged API requests.
@@ -1028,7 +1022,5 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         . $aProduct[ 'description' ] 
                     . "</div>";
             }
-                     
 
-    
 }

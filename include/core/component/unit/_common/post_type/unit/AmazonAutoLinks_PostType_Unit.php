@@ -128,8 +128,13 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             
         $this->enqueueStyles(
             AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
-        );        
-        
+        );
+        add_thickbox();
+        wp_enqueue_script( 'jquery' );
+        $this->enqueueScripts(
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/manage-units.js'
+        );
+
     }
         
     /**
@@ -165,8 +170,12 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 display: {$_sNone};
             }            
             /* List Table Columns */
+            .column-status {
+                width: 7.6%;
+                text-align: center;  
+            }            
             .column-unit_type, 
-            .column-template,
+            .column-template,            
             .column-feed {
                 width:10%; 
             }
@@ -178,6 +187,22 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 display: inline-block;
                 margin-top: 0.4em;
                 margin-right: 0.8em;
+            }
+            /* Status Circle */
+            .circle {
+                height: 1em;
+                width: 1em;              
+                border-radius: 50%;
+                display: inline-block;                
+            }
+            .green {
+                background-color: #339933;
+            }
+            .red {
+                background-color: red;
+            }
+            .column-status .circle {
+                margin-top: 0.4em;
             }
         ";
     }

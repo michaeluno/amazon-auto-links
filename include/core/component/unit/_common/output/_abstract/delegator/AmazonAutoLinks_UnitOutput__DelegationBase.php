@@ -65,7 +65,7 @@ abstract class AmazonAutoLinks_UnitOutput__DelegationBase extends AmazonAutoLink
          */
         private function ___removeHooks( array $aHooksArguments, $aosCallable ) {
             foreach( $aHooksArguments as $_aArguments ) {
-                unset( $aHooksArguments[ 3 ] );   // remove the 4th parameter
+                unset( $aHooksArguments[ 3 ] );   // remove the 4th parameter - the number of parameters
                 $this->___setHook( $_aArguments, $aosCallable );
             }        
         }

@@ -143,7 +143,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         /**
          * Sanitizes a raw product title.
-         * @return      Overridden by an extended class.
+         * @remark      Overridden by an extended class.
          * @return      string
          */
         public function replyToModifyRawTitle( $sTitle ) {
@@ -222,12 +222,19 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_oDebugInfoProduct = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
         $_oDebugInfoUnit    = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
         $_oCredit           = new AmazonAutoLinks_UnitOutput__Credit( $this );
+        $_oFoundItemCount   = new AmazonAutoLinks_UnitOutput__ErrorChecker( $this );
 
         try {
 
             $_aProducts         = $this->fetch( $aURLs );
-            if ( $this->_isError( $_aProducts ) && ! $this->oUnitOption->get( 'show_errors' ) ) {
-                throw new Exception('' );
+            $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
+            // @deprecated 3.7.0
+//            if ( $this->_isError( $_aProducts ) && ! $this->oUnitOption->get( 'show_errors' ) ) {
+//                throw new Exception('' );
+//            }
+            $_sError = $this->_getError( $_aProducts );
+            if ( $_sError ) {
+                throw new Exception( $_sError  );
             }
 
             $_aOptions          = $this->oOption->aOptions;
@@ -246,7 +253,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 )
             );
             $_sContent          = apply_filters(
-                "aal_filter_unit_output",
+                'aal_filter_unit_output',
                 $_sContent,
                 $_aArguments,
                 $_sTemplatePath, // [3+]
@@ -254,8 +261,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 $_aProducts      // [3+]
             );
 
-        } catch ( Exception $_oException ) {
-            $_sContent = '';
+        } catch ( Exception $_oException ) {;
+            $_sContent = $this->oUnitOption->get( 'show_errors' )
+                ? "<div class='error'><p>" . $_oException->getMessage() . "</p></div>"
+                : '';
         }
 
         // Remove hooks of function-call basis.
@@ -265,6 +274,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_oDebugInfoProduct->__destruct();
         $_oDebugInfoUnit->__destruct();
         $_oCredit->__destruct();
+        $_oFoundItemCount->__destruct();
 
         return $_sContent;
 
@@ -275,8 +285,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @param       array       $aProducts
          * @param       string      $sTemplatePath
          * @since       3.5.0
-         * @return      string
-         * @callback    self::getOutputBuffer()
+         * @return      void
+         * @callback    self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
          * @remark      Not using include_once() because templates can be loaded multiple times.
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
@@ -297,13 +307,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     $this->oUnitOption->get( 'country' ),
                     $this->oUnitOption->get( 'associate_id' )
                 );
-
-            } else {
-                echo '<p>'
+                return;
+            }
+            echo '<p>'
                     . AmazonAutoLinks_Registry::NAME
                     . ': ' . __( 'the template could not be found. Try re-selecting the template in the unit option page.', 'amazon-auto-links' )
                 . '</p>';
-            }
 
         }
 
@@ -316,12 +325,72 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
     /**
+     * Called when the unit HTTP request cache is set.
+     *
+     * @param       array   $aProducts
+     * @param       integer $iUnitID        The unit (post) ID.
+     * @callback    aal_filter_products
+     * @remark      Although this hook into a filter hook but called within an another outer callback method and this does not require a return value.
+     * @retuen      void
+     * @since       3.7.0
+     */
+    public function replyToCheckErrors( $aProducts, $iUnitID ) {
+
+        $_sError = $this->_getError( $aProducts );
+        if ( $_sError ) {
+            update_post_meta(
+                $iUnitID, // post id
+                '_error', // meta key
+                $_sError
+            );
+            return;
+        }
+        // At this point, the response has no error.
+        // In this case, check a previously set error and if present, remove it.
+        // This way, for cases of no error, it does not cause extra accesses to the database.
+        $_sStoredError = get_post_meta( $iUnitID, '_error', true );
+        if ( $_sStoredError ) {
+            update_post_meta(
+                $iUnitID, // post id
+                '_error', // meta key
+                ''
+            );
+        }
+    }
+
+    /**
      * Checks whether response has an error.
      * @since       3
      * @return      boolean
+     * @deprecated  3.7.0   Use _getError() instead
      */
-    protected function _isError( $aProducts ) {
-        return empty( $aProducts );
+//    protected function _isError( $aProducts ) {
+//        return empty( $aProducts );
+//    }
+
+    /**
+     * Returns the error message if found.
+     * @since       3.7.0
+     * @remark      Override this method in each extended class.
+     * @return      string  The found error.
+     * @return      string  The error message.
+     */
+    protected function _getError( $aProducts ) {
+        if ( empty( $aProducts ) ) {
+            return __( 'No products found.', 'amazon-auto-links' );
+        }
+        if ( isset( $aProducts[ 'Error' ][ 'Message' ], $aProducts[ 'Error' ][ 'Code' ] ) ) {
+            return $aProducts[ 'Error' ][ 'Code' ] . ': ' . $aProducts[ 'Error' ][ 'Message' ];
+        }
+        if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
+            return $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Code' ]
+                . ': ' . $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Message' ];
+        }
+        if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ] ) ) {
+            return $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ][ 'Code' ]
+                . ': ' . $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ][ 'Message' ];
+        }
+        return '';
     }
 
     /**
@@ -338,7 +407,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @remark      should be extended and must return an array.
      * @return      array
      */
-    public function fetch( $aURLs ) { 
+    public function fetch( $aURLs ) {
         return array(); 
     }
 

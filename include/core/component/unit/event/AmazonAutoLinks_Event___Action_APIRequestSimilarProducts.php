@@ -113,7 +113,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
                 // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
                 'ItemId'                => $_sASINs,    
 
-                'ResponseGroup'         => 'Images,ItemAttributes', // 3.6.8+ Changed from `Large` for a smaller data set
+                'ResponseGroup'         => 'Images,ItemAttributes', // 3.7.0+ Changed from `Large` for a smaller data set
 
             );
 

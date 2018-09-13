@@ -30,16 +30,15 @@ class AmazonAutoLinks_UnitPostMetaBox_ViewLink extends AmazonAutoLinks_UnitPostM
      */
     public function replyToPrintMetaBoxConetnt( $oFactory ) {
         
-        $_sViewLink              = esc_url( get_permalink( $_GET[ 'post' ] ) );
+        $_sViewLink    = esc_url( get_permalink( $this->_iPostID ) );
         ?>
-
         <div style="padding: 0.8em 0 1.5em; ">
             <div style="text-align: center;">
-                <p style="font-size: 1.2em; margin-bottom: 1.5em;"><a style="text-decoration: none;" href="<?php echo $_sViewLink; ?>"><?php _e( 'View Unit', 'admin-page-framewor' ); ?></a></p>
-            </div>            
+                <p style="font-size: 1.2em; margin-bottom: 1.5em;"><a style="text-decoration: none;" href="<?php echo $_sViewLink; ?>"><?php _e( 'View Unit', 'amazon-auto-links' ); ?></a></p>
+            </div>
         </div>
         <?php
     
-    }    
-    
+    }
+
 }

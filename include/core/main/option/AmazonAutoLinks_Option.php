@@ -181,8 +181,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'height'        => null,
             'height_unit'   => 'px',
             
-            'show_errors'   => true,    // whether to show an error message.
-            
+            // Whether to show an error message.
+            // When an error occurs, the error message will be shown and the template is not applied.
+            // Currently, no unit option meta box input field for this option.
+            'show_errors'   => true,
+
             // 3.2.0+
             'show_now_retrieving_message'   => true,
      
@@ -224,6 +227,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             /// for widget outputs - helps the output function know what to do with JavaScript loading
             '_widget_option_name'           => null,
             '_widget_number'                => null,
+
+            // 3.7.0+ These are not options that change the output behavior but post meta to store relevant information based on the result.
+            '_error'                        => null,
 
         )
         

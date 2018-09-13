@@ -12,7 +12,14 @@
  * Defines the meta box added to the unit definition page.
  */
 abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_PostMetaBox_Base {
-    
+
+    /**
+     * Stores the current post ID.
+     * @var int
+     * @since   3.7.0
+     */
+    protected $_iPostID = 0;
+
     /**
      * Stores the unit type slug(s). 
      * 
@@ -37,22 +44,19 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         // but we need to evaluate it for the plugin.
         
         // Get the post ID.
-        $_iPostID = AmazonAutoLinks_WPUtility::getCurrentPostID();
+        $this->_iPostID = AmazonAutoLinks_WPUtility::getCurrentPostID();
         
         // Maybe post-new.php
-        if ( ! $_iPostID ) {
+        if ( ! $this->_iPostID ) {
             return true;
         }
         
         $_sUnitType = get_post_meta(
-            $_iPostID,      
+            $this->_iPostID,
             'unit_type', // meta key
             true
         );
-        return in_array(
-            $_sUnitType,
-            $this->aUnitTypes
-        );        
+        return in_array( $_sUnitType, $this->aUnitTypes );
         
     }
 
