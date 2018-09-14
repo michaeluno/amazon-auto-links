@@ -327,6 +327,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     /**
      * Called when the unit HTTP request cache is set.
      *
+     * Cases:
+     * - An entirely new request is made and has no error. -> do nothing
+     * - An entirely new request is made and has an error. -> save an error
+     * - A cached request had no error and it is renewed and has no error. -> do nothing
+     * - A cached request had no error and it is renewed and has an error. -> save an error
+     * - A cached request had an error and it is renewed and has no error. -> delete an error
+     * - A cached request had an error and it is renewed and has an error. -> override an error
+     *
      * @param       array   $aProducts
      * @param       integer $iUnitID        The unit (post) ID.
      * @callback    aal_filter_products
