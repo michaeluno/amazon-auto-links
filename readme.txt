@@ -280,6 +280,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.1 =
+- Fixed an issue that the `No Products Found` message was moved to the top in the category selection screen of the Category unit type.
 - Tweaked unit error outputs which include the change of the class selector to `warning` from `error`.
 
 = 3.7.0 - 09/13/2018 =

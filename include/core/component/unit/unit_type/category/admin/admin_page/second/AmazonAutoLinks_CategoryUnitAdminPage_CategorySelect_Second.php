@@ -227,7 +227,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
      * @return      array      The (un)updated data.
      */
     private function ___getUpdatedUnitOptions( $aPost, array $aInput, $oFactory ) {
-            
+
         $_iNumberOfCategories = count( $aInput[ 'categories' ] )  
             + count( $aInput[ 'categories_exclude' ] );
         

@@ -49,7 +49,6 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             null,   // post id
             $this->aOptions
         );
-        
     }
     
     /**
@@ -149,10 +148,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
      * @uses        flush()
      */
     protected function _printPreviewTable( $aPageElements ) {
-                        
+
         // Instantiate the core object - the fetching process should be done while rendering the HTML output
         // because it takes some time so the flush() function is used in the middle.
-//        $this->oUnitOption->set( array( 'show_errors' ), false );
         $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
         $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
 
@@ -160,46 +158,46 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
 
         // Buttons 
         $bReachedLimit      = $this->_isNumberOfCategoryReachedLimit(
-            count( $this->oUnitOption->get( 'categories' ) ) 
+            count( $this->oUnitOption->get( 'categories' ) )
             + count( $this->oUnitOption->get( 'categories_exclude' ) )
         );
         $bIsAlreadyAdded    = $this->___isAddedCategory(
-            $aPageElements['sBreadcrumb'], 
-            $this->oUnitOption->get( 'categories' ) 
+            $aPageElements['sBreadcrumb'],
+            $this->oUnitOption->get( 'categories' )
         );
         $bIsAlreadyAddedExcludingCategory = $this->___isAddedCategory(
-            $aPageElements['sBreadcrumb'], 
+            $aPageElements['sBreadcrumb'],
             $this->oUnitOption->get( 'categories_exclude' )
         );
         $bIsSubCategoryOfAddedItems = $this->___isSubCategoryOfAddedItems(
-            $aPageElements['sBreadcrumb'], 
-            $this->oUnitOption->get( 'categories' ) 
+            $aPageElements['sBreadcrumb'],
+            $this->oUnitOption->get( 'categories' )
         );
         $sAddDisabled       = ! $_bNested || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory
-            ? "disabled='disabled'" 
+            ? "disabled='disabled'"
             : "";
-        $sExcludeDisabled   = $this->isEmpty( $this->oUnitOption->get( 'categories' ) ) || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory || ! $bIsSubCategoryOfAddedItems 
-            ? "disabled='disabled'" 
+        $sExcludeDisabled   = $this->isEmpty( $this->oUnitOption->get( 'categories' ) ) || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory || ! $bIsSubCategoryOfAddedItems
+            ? "disabled='disabled'"
             : "";
         $sRemoveDisabled    = $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
-            ? "disabled='disabled'" 
+            ? "disabled='disabled'"
             : "";
-        $sCreateDisabled    = $this->isEmpty( $this->oUnitOption->get( 'categories' ) ) 
-            ? "disabled='disabled'" 
+        $sCreateDisabled    = $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
+            ? "disabled='disabled'"
             : "";
-        $sCreateOrSave      = $aPageElements['bNew'] 
-            ? __( 'Create', 'amazon-auto-links' ) 
+        $sCreateOrSave      = $aPageElements['bNew']
+            ? __( 'Create', 'amazon-auto-links' )
             : __( 'Save', 'amazon-auto-links' );
 
         // Arrows
         $sAddArrow    = $aPageElements['bNew'] && $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
-            ? "<img class='category-select-right-arrow' title='" . __( 'Add the current selection!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) . "'/>" 
+            ? "<img class='category-select-right-arrow' title='" . __( 'Add the current selection!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) . "'/>"
             : "";
         $sCreateArrow = $aPageElements['bNew'] && $_bNested && ! $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
-            ? "<img class='category-select-right-arrow' title='" . __( 'Create the unit!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) . "'/>" 
+            ? "<img class='category-select-right-arrow' title='" . esc_attr( __( 'Create the unit!', 'amazon-auto-links' ) ) . "' src='" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) ) . "'/>"
             : "";
         $sSelectArrow = $aPageElements['bNew'] && ! $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
-            ? "<img class='category-select-left-bottom-arrow' title='" . __( 'Select a category from the links!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_left_bottom.png' ) . "'/>" 
+            ? "<img class='category-select-left-bottom-arrow' title='" . esc_attr( __( 'Select a category from the links!', 'amazon-auto-links' ) ) . "' src='" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_left_bottom.png' ) ) . "'/>"
             : "";
 
         $_oEncrypt = new AmazonAutoLinks_Encrypt;
@@ -211,11 +209,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
 <table class="category-select-table">
     <tbody>
         <tr>
-            <td class="category-select-first-column">                
+            <td class="category-select-first-column">
                 <h3><?php _e( 'Current Selection', 'amazon-auto-links' ); ?></h3>
-                <p class="category-select-breadcrumb"><?php echo $aPageElements['sBreadcrumb']; ?></p>
+                <p class="category-select-breadcrumb"><?php echo $aPageElements[ 'sBreadcrumb' ]; ?></p>
             </td>
-            <td class="category-select-second-column" colspan="2">        
+            <td class="category-select-second-column" colspan="2">
                 <div class="category-select-submit-buttons">
                     <span class="primary"><a class="button button-primary" href="<?php echo $aPageElements[ 'sBounceURL' ]; ?>"><?php _e( 'Go Back', 'amazon-auto-links' ); ?></a></span>
                     <span class="primary"><?php echo $sCreateArrow; ?><input type="submit" name="amazon_auto_links_cat_select[save]" class="button button-primary" value="<?php echo $sCreateOrSave; ?>" <?php echo $sCreateDisabled; ?> /></span>
@@ -239,20 +237,21 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             </td>
             <td class="category-select-second-column category-select-preview-left">
                 <h3>
-                    <?php echo $aPageElements['sRSSURL'] 
-                        ? __( 'Preview of This Category', 'amazon-auto-links' ) 
-                        : __( 'No Preview', 'amazon-auto-links' ); 
+                    <?php echo $aPageElements['sRSSURL']
+                        ? __( 'Preview of This Category', 'amazon-auto-links' )
+                        : __( 'No Preview', 'amazon-auto-links' );
                     ?>
-                </h3>                        
+                </h3>
                 <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
 
                 <?php
-                var_dump( $aPageElements[ 'sRSSURL' ] );
-                if ( $aPageElements[ 'sRSSURL' ] ) {
+                if ( $_bNested && $aPageElements[ 'sRSSURL' ] ) {
                     $_oAALCatPreview->render( array( $aPageElements[ 'sRSSURL' ] ) );
-                    // flush();
-                } else 
-                    _e( 'Please select a category from the list on the left.', 'amazon-auto-links' );  
+                } else {
+                    echo "<p>";
+                    _e( 'Please select a category from the list on the left.', 'amazon-auto-links' );
+                    echo "</p>";
+                }
                 ?>
             </td>
             <td class="category-select-third-column category-select-preview-right">
@@ -262,10 +261,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 if ( ! $this->isEmpty( $aPageElements['aSelectedRSSURLs'] ) ) { 
                     $_oAALUnitPreview->render( $aPageElements['aSelectedRSSURLs'] );
                     flush(); 
-                } else
+                } else {
                     echo "<p>";
                     _e( 'Please add a category from the list after selecting it.', 'amazon-auto-links' );
                     echo "</p>";
+                }
                 ?>
             </td>
         </tr>
