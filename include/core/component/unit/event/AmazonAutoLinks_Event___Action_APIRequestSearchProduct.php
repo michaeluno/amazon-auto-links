@@ -14,6 +14,7 @@
  * @package     Amazon Auto Links
  * @since       3
  * @since       3.5.0       Renamed from `AmazonAutoLinks_Event_Action_API_SearchProduct`.
+ * @since       3.7.1       Deprecated but serves as a base class for a new class that handles multiple item look-ups.
  */
 class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoLinks_Event___Action_Base {
 
@@ -54,8 +55,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
         // Extract the product data from the entire API response.
         $_aProductData     = $this->___getProductData(
-            $_sASIN, 
-            $_sLocale, 
+            $_sASIN,
+            $_sLocale,
             $_sAssociateID,
             $_iCacheDuration,
             $_bForceRenew
@@ -78,7 +79,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
             );
         }
         $this->___setProductData(
-            $_aProductData, 
+            $_aProductData,
             $_sASIN,
             $_sLocale,
             $_iCacheDuration,
@@ -87,6 +88,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         );
         
     }
+
         /**
          * @return      void
          */
@@ -124,7 +126,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          */
         private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
-            // Check if a customer review exists.
+            // Check if a customer review exists in the API response.
             $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
             if ( $_bCustomerReviewExists ) {
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(

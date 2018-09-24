@@ -88,34 +88,94 @@ class AmazonAutoLinks_Event_Scheduler {
     }
 
     /**
+     * @var array
+     * @since   3.7.1
+     */
+    static private $___aScheduledProductInformation = array();
+    static private $___bCalledScheduleProductInformation = false;
+    /**
      * Schedules an action of getting product information in the background.
      * 
      * @since       3
      * @since       3.5.0       Renamed from `getProductInfo()`.
-     * @return      boolean
+     * @return      void
      * @todo        Do this at once at the shutdown action and pass multiple ASINs to query at once to save a number of API requests.
      * @since       3.7.0       Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
+     * @since       3.7.1       Changed the return value to `void` as no calls use it and this method is going to schedule multiple items at once.
      */
     static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
     
         $_oOption   = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
-            return false;
+            return;
         }
+        self::$___aScheduledProductInformation[ $sASIN ] = func_get_args();
 
-        $_bScheduled = self::_scheduleTask( 
-            'aal_action_api_get_product_info',  // action name
-            array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat )
-        );
-        if ( ! $_bScheduled ) {
-            return $_bScheduled;
+        if ( ! self::$___bCalledScheduleProductInformation ) {
+            add_action(
+                'shutdown',
+                array( __CLASS__, '_replyToScheduleProductsInformation' ),
+                1   // higher priority
+            );
         }
+        self::$___bCalledScheduleProductInformation = true;
+
+        // @deprecated  3.7.1 Now they are queried all at once.
+//        $_bScheduled = self::_scheduleTask(
+//            'aal_action_api_get_product_info',  // action name
+//            array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat )
+//        );
+//        if ( ! $_bScheduled ) {
+//            return;
+//        }
         
         // Loads the site in the background. The method takes care of doing it only once in the entire page load.
-        AmazonAutoLinks_Shadow::see();
-        return true;
+//        AmazonAutoLinks_Shadow::see();
+        return;
         
     }
+        /**
+         * Schedules retrievals of product information at once.
+         * @since       3.7.1
+         * @callback    shutdown        With the priority of `1`.
+         */
+        public function _replyToScheduleProductsInformation() {
+
+            // Sort the array in order to prevent unnecessary look-ups due to different orders
+            // as `wp_next_scheduled()` stores and identify actions based on the serialized passed arguments.
+            ksort(self::$___aScheduledProductInformation );
+
+            // Divide items by 10 as `ItemLookup` operation accepts up to 10 items at a time.
+            $_aChunks = array_chunk( self::$___aScheduledProductInformation, 10 );
+
+            /**
+             * At this point the chunk array $_aChunks looks like this.
+             * The keys will be converted to numeric index.
+             *
+             * ```
+             * array(
+             *      0 => array(
+             *          0 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+             *          1 ...
+             *          2 ...
+             *          10 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+             *      ),
+             *      1 => array(
+             *          0 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+             *          1 ...
+             *          2 ...
+             *      ),
+             * )
+             * ```
+             */
+            foreach( $_aChunks as $_iIndex => $_aItems ) {
+                self::_scheduleTask(
+                    'aal_action_api_get_products_info',  // action name
+                    $_aItems
+                );
+            }
+            AmazonAutoLinks_Shadow::see();  // loads the site in the background
+        }
     
         /**
          * Stores how many actions are schedules by action name.
@@ -129,8 +189,7 @@ class AmazonAutoLinks_Event_Scheduler {
              
             $_aParams       = func_get_args() + array( null, array() );
             $_sActionName   = array_shift( $_aParams ); // the first element
-            
-            // $_aArguments    = array( $_aParams[ 1 ] );
+
             $_aArguments    = $_aParams; // the rest 
 
             // If already scheduled, skip.
@@ -143,7 +202,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 : 1;
             
             wp_schedule_single_event( 
-                time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit runout.
+                time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit run out.
                 $_sActionName, // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
                 $_aArguments // must be enclosed in an array.
             );            

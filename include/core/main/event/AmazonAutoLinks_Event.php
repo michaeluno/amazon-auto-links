@@ -73,6 +73,7 @@ class AmazonAutoLinks_Event {
                             'aal_action_simplepie_renew_cache',
                             'aal_action_api_transient_renewal',
                             'aal_action_api_get_product_info',
+                            'aal_action_api_get_products_info', // 3.7.1+
                             'aal_action_api_get_customer_review',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',
@@ -81,6 +82,7 @@ class AmazonAutoLinks_Event {
                         : array(
                             'aal_action_unit_prefetch',
                             'aal_action_api_get_product_info',
+                            'aal_action_api_get_products_info', // 3.7.1+
                             'aal_action_api_get_customer_review',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',

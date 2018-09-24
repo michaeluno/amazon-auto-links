@@ -35,7 +35,7 @@ class AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal extends AmazonAutoLi
         // this should be set after defining $asURLs
         // 0 seconds, means renew the cache right away.
         $_oFeed->set_cache_duration( 0 );    
-    
+
         // Set the background flag to True so that it won't trigger the event action recursively.
         $_oFeed->setBackground( true );
         $_oFeed->init();
