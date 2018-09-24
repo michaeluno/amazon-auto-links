@@ -152,6 +152,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                         
         // Instantiate the core object - the fetching process should be done while rendering the HTML output
         // because it takes some time so the flush() function is used in the middle.
+//        $this->oUnitOption->set( array( 'show_errors' ), false );
         $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
         $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
 
@@ -244,9 +245,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     ?>
                 </h3>                        
                 <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
-                <?php 
-                if ( $aPageElements['sRSSURL'] ) {
-                    $_oAALCatPreview->render( array( $aPageElements['sRSSURL'] ) );
+
+                <?php
+                var_dump( $aPageElements[ 'sRSSURL' ] );
+                if ( $aPageElements[ 'sRSSURL' ] ) {
+                    $_oAALCatPreview->render( array( $aPageElements[ 'sRSSURL' ] ) );
                     // flush();
                 } else 
                     _e( 'Please select a category from the list on the left.', 'amazon-auto-links' );  
@@ -259,8 +262,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 if ( ! $this->isEmpty( $aPageElements['aSelectedRSSURLs'] ) ) { 
                     $_oAALUnitPreview->render( $aPageElements['aSelectedRSSURLs'] );
                     flush(); 
-                } else 
+                } else
+                    echo "<p>";
                     _e( 'Please add a category from the list after selecting it.', 'amazon-auto-links' );
+                    echo "</p>";
                 ?>
             </td>
         </tr>

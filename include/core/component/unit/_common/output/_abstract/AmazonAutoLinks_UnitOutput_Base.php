@@ -263,7 +263,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         } catch ( Exception $_oException ) {;
             $_sContent = $this->oUnitOption->get( 'show_errors' )
-                ? "<div class='error'><p>" . $_oException->getMessage() . "</p></div>"
+                ? "<div class='warning'><p>" . $_oException->getMessage() . "</p></div>"
                 : '';
         }
 

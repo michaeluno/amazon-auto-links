@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.1 =
+- Tweaked unit error outputs which include the change of the class selector to `warning` from `error`.
+
 = 3.7.0 - 09/13/2018 =
 - Added the ability to display errors in the unit listing table of the `Manage Units` page.
 - Optimized the number of API requests based on the `Item Format` option.
