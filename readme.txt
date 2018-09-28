@@ -279,6 +279,10 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.2 - 09/29/2018 =
+- Fixed an issue that duplicated database queries were performed with category units.
+- Fixed a bug that excluding sub-categories for category units did not fully take effect.
+
 = 3.7.1 - 09/24/2018 =
 - Fixed an issue that the `No Products Found` message was moved to the top in the category selection screen of the Category unit type.
 - Tweaked unit error outputs which include the change of the class selector to `warning` from `error`.

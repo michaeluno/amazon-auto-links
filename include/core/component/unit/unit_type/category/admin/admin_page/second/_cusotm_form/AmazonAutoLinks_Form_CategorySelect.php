@@ -151,7 +151,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
 
         // Instantiate the core object - the fetching process should be done while rendering the HTML output
         // because it takes some time so the flush() function is used in the middle.
-        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
+        /// Edit the excluding category unit option for preview
+        $_aPreviewUnitOptions = $this->oUnitOption->get();
+        $_aPreviewUnitOptions[ 'categories_exclude' ] = array();
+        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $_aPreviewUnitOptions );
         $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
 
         $_bNested          = false !== strpos( $aPageElements[ 'sBreadcrumb' ], '>' );

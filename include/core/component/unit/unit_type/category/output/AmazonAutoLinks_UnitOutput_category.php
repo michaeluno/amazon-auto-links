@@ -224,8 +224,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_aExcludingRSSURLs = $this->formatRSSURLs( 
             $this->_aExcludingRSSURLs
         );
-        $_oRSS = new AmazonAutoLinks_RSSClient( 
-            $aRSSURLs,
+
+        $_oRSS = new AmazonAutoLinks_RSSClient(
+            $_aExcludingRSSURLs,
             ( int ) $this->oUnitOption->get( 'cache_duration' )
         );
         $this->_setBlackASINs( $_oRSS->get() );
@@ -329,7 +330,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         foreach ( $aItems as $_aItem ) {
             $this->setParsedASIN( 
                 $this->getASINFromURL(
-                    $this->getElement( $aItems, 'link' ) 
+                    $this->getElement( $_aItem, 'link' )
                 ) 
             );
         }
