@@ -316,7 +316,7 @@ class AmazonAutoLinks_Shadow {
             wp_remote_get(
                 site_url(  '?' . http_build_query( $_aGet ) ), 
                 array( 
-                    'timeout'    => 0.1,    // 0.0.1
+                    'timeout'    => 0.01,
                     'sslverify'  => false, 
                     'cookies'    => $_aFlagKeys + array( $_sTransientName => true ),
                 ) 
