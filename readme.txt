@@ -5,7 +5,7 @@ Tags:               amazon, amazon associates, amazon affiliate, amazon ads, aut
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.2
+Stable tag:         3.7.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,7 +279,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.7.3 =
+= 3.7.3 - 10/02/2018 =
 - Added the ability to limit the overall cache sizes.
 - Added a field notice of whether the periodic check of cache removal is functional in the setting page.
 
