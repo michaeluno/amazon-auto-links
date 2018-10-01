@@ -54,4 +54,34 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
         );
     }
 
+    /**
+     * Removes rows from older ones to limit the size.
+     * @since       3.7.3
+     */
+    public function truncateBySize( $iMB ) {
+
+        if ( 0 === $iMB ) {
+            $this->delete();    // delete all rows by passing nothing
+            return;
+        }
+
+        $_iSetSize      = ( integer ) $iMB;
+        $_iTableSize    = $this->getTableSize( true );  // mb
+        if ( $_iSetSize > $_iTableSize ) {
+            return;
+        }
+
+        $_iTotalRows    = $this->getTotalItemCount();
+        $_iGoalSize     = $_iTableSize * 0.9;   // 90% of the actual size in order not to exceed the set size
+        $_fSizePerRow   = $_iGoalSize / $_iTotalRows;    // float
+        $_iExceededSize = $_iGoalSize - $_iSetSize;
+        $_iNumToDelete  = ceil( $_iExceededSize / $_fSizePerRow );
+        $this->getVariable(
+            "DELETE FROM `{$this->aArguments[ 'table_name' ]}` "
+            . "ORDER BY modified_time ASC LIMIT {$_iNumToDelete};"
+        );
+        $this->getVariable( "OPTIMIZE TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+
+    }
+
 }

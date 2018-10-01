@@ -379,9 +379,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      * @since       2.5.0
-     * @return      string
+     * @since       3.7.3       Added an option to get the value as integer
+     * @param       boolean $bNumeric   Whether the return value is a numeric value (integer|float) or not. The unit is megabyte.
+     * @return      string|integer|float
      */
-    public function getTableSize() {
+    public function getTableSize( $bNumeric=false ) {
         $_aResult = $GLOBALS[ 'wpdb' ]->get_results(
             "SELECT 
             table_name AS `Table`, 
@@ -391,6 +393,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             AND table_name = '{$this->aArguments[ 'table_name' ]}'",
             'ARRAY_A'
         );
+        if ( $bNumeric ) {
+            return isset( $_aResult[ 0 ][ 'Size_in_MB' ] )
+                ? $_aResult[ 0 ][ 'Size_in_MB' ]
+                : 0;
+        }
         return isset( $_aResult[ 0 ][ 'Size_in_MB' ] )
             ? $_aResult[ 0 ][ 'Size_in_MB' ] . ' MB'
             : 'n/a';

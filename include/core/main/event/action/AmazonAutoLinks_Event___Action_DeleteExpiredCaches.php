@@ -38,7 +38,28 @@ class AmazonAutoLinks_Event___Action_DeleteExpiredCaches extends AmazonAutoLinks
      *
      */
     protected function _doAction() {
-        $this->deleteExpiredTableItems();
-    }   
-    
+
+        // Expiry deletion
+//        $this->deleteExpiredTableItems();
+
+        // Table truncation
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $_isProductTableSize = $_oOption->get( array( 'cache', 'table_size', 'products' ), '' );
+        $_isRequestTableSize = $_oOption->get( array( 'cache', 'table_size', 'requests' ), '' );
+        $_aTableSizes = array(
+            'AmazonAutoLinks_DatabaseTable_aal_products'      => $_isProductTableSize,
+            'AmazonAutoLinks_DatabaseTable_aal_request_cache' => $_isRequestTableSize,
+        );
+
+        foreach( $_aTableSizes as $_sClassName => $_isSizeMB ) {
+            // An empty string is for unlimited (do not truncate).
+            if ( '' === $_isSizeMB || null === $_isSizeMB ) {
+                continue;
+            }
+            $_oTable = new $_sClassName;
+            $_oTable->truncateBySize( ( integer ) $_isSizeMB );
+        }
+
+    }
+
 }

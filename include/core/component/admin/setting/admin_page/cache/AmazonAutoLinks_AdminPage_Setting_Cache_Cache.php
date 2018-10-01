@@ -51,7 +51,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                             . $_oProductTable->getTableSize()
                     . '</p>'
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                        . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                             . $_oCacheTable->getTableSize()
                     . '</p>',
             ),                   
@@ -70,7 +70,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iProductCount )
                     . '</p>'
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                        . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iRequestCount )
                     . '</p>',
             ),            
@@ -89,7 +89,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredProducts )
                     . '</p>'
                     . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Requests', 'amazon-auto-links' ) . '</strong>: ' 
+                        . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredRequests )
                     . '</p>',                
             ),
@@ -108,7 +108,8 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
             array(
                 'field_id'          => 'expired_cache_removal_interval',
                 'type'              => 'size',
-                'title'             => __( 'Interval for Removing Expired Caches', 'amazon-auto-links' ),
+                'title'             => __( 'Cache Clean-up Interval', 'amazon-auto-links' ),
+                'tip'               => __( 'With this periodic check, expired cache items will be automatically deleted. If the overall cache size exceeds the set amount, they will be deleted from old.', 'amazon-auto-links' ),
                 'capability'        => 'manage_options',
                 'units'             => array(
                     3600     => __( 'hour(s)', 'amazon-auto-links' ),
@@ -131,6 +132,25 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
                     . "</p></div>"
                     : '<div><p>' . sprintf( __( 'Next scheduled at %1$s.', 'amazon-auto-links' ), $this->getSiteReadableDate( $_biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true ) ) . '</p></div>',
+            ),
+            array(
+                'field_id'  => 'table_size',
+                'title'     => __( 'Maximum Overall Cache Sizes', 'amazon-auto-links' ),
+                'content'   => array(
+                    array(
+                        'label'     => __( 'Products', 'amazon-auto-links' ),
+                        'field_id'  => 'products',
+                        'type'      => 'number',
+                        'after_input' => ' mb',
+                    ),
+                    array(
+                        'label'     => __( 'HTTP Requests', 'amazon-auto-links' ),
+                        'field_id'  => 'requests',
+                        'type'      => 'number',
+                        'after_input' => ' mb',
+                    ),
+                ),
+                'description'   => __( 'Leave it blank for unlimited.', 'amazon-auto-links' ),
             )
         );    
     }
@@ -163,19 +183,44 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
             return $aOldInputs;
         }
-        
+
+        // Keep the cache data base table size
+        $this->___truncateCacheTableBySize( $aInputs, $oAdminPage );
+
         // If the interval for deleting expired caches changes, update the scheduled task.
-        $this->_rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage );        
+        $this->___rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage );
         
         return $aInputs;     
         
     }
         /**
+         * @param $aInputs
+         * @param $oAdminPage
+         * @since   3.7.3
+         */
+        private function ___truncateCacheTableBySize( $aInputs, $oAdminPage ) {
+            $_isProductTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'products' ), '' );
+            $_isRequestTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'requests' ), '' );
+            $_aTableSizes = array(
+                'AmazonAutoLinks_DatabaseTable_aal_products'      => $_isProductTableSize,
+                'AmazonAutoLinks_DatabaseTable_aal_request_cache' => $_isRequestTableSize,
+            );
+            foreach( $_aTableSizes as $_sClassName => $_isSizeMB ) {
+                // An empty string is for unlimited (do not truncate).
+                if ( '' === $_isSizeMB || null === $_isSizeMB ) {
+                    continue;
+                }
+                $_oTable = new $_sClassName;
+                $_oTable->truncateBySize( ( integer ) $_isSizeMB );
+            }
+        }
+
+        /**
          * Update the scheduled task if the interval for deleting expired caches changes, 
          * @since       3.4.0
          * @return      void
          */
-        private function _rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage ) {
+        private function ___rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage ) {
 
             $_aNewExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aInputs, array( 'expired_cache_removal_interval' ) );
             $_aOldExpiredDeleteInterval = $oAdminPage->oUtil->getElement( $aOldInputs, array( 'expired_cache_removal_interval' ) );
