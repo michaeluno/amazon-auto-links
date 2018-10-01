@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.3 =
+- Added a field notice of whether the periodic check of cache removal is functional in the setting page.
+
 = 3.7.2 - 09/29/2018 =
 - Fixed an issue that duplicated database queries were performed with category units.
 - Fixed a bug that excluding sub-categories for category units did not fully take effect.

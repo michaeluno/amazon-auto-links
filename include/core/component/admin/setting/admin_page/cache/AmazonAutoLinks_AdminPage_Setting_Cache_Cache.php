@@ -37,7 +37,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         $_oCacheTable      = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $_iRequestCount    = $_oCacheTable->getTotalItemCount();
         $_iExpiredRequests = $_oCacheTable->getExpiredItemCount();
-        
+
+        $_biNextScheduledCheck = wp_next_scheduled( 'aal_action_delete_expired_caches', array() );
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id   
             array( 
@@ -121,7 +123,14 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'default'           => array(
                     'size'      => 7,
                     'unit'      => 'day'
-                ),            
+                ),
+                'after_fieldset' => false === $_biNextScheduledCheck
+                    ? "<div><p class='field-error'>* "
+                        . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
+                        . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
+                        . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
+                    . "</p></div>"
+                    : '<div><p>' . sprintf( __( 'Next scheduled at %1$s.', 'amazon-auto-links' ), $this->getSiteReadableDate( $_biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true ) ) . '</p></div>',
             )
         );    
     }
