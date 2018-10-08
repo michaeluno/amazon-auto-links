@@ -57,7 +57,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'timeout'     => 5,
         'redirection' => 5,
         'httpversion' => '1.0',
-        'user-agent'  => 'Amazon Auto Links',
+        'user-agent'  => null,
         'blocking'    => true,
         'headers'     => array(),
         'cookies'     => array(),
@@ -91,9 +91,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $aArguments     = null === $aArguments
                 ? $this->aArguments
                 : $this->getAsArray( $aArguments ) + $this->aArguments;
-                
-            $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
-            
+
+            // @deprecated 3.7.4 Use the WordPress default user agent.
+            // $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
+
             // WordPress v3.7 or later, it should be true.
             $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
             

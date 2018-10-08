@@ -4,7 +4,7 @@
 class AmazonAutoLinks_SimplePie_File extends WP_SimplePie_File {
 
     var $url;
-    var $useragent = 'Amazon Auto Links';
+    var $useragent;
     var $success = true;
     var $headers = array();
     var $body;
@@ -17,7 +17,7 @@ class AmazonAutoLinks_SimplePie_File extends WP_SimplePie_File {
         'timeout'     => 5,
         'redirection' => 5,
         'httpversion' => '1.0',
-        'user-agent'  => 'Amazon Auto Links',
+        'user-agent'  => null,
         'blocking'    => true,
         'headers'     => array(),
         'cookies'     => array(),

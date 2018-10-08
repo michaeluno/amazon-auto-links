@@ -28,8 +28,7 @@ class AmazonAutoLinks_SimplePie extends AmazonAutoLinks_SimplePie_Base {
     protected $sPluginKey = '';
     
     public function __construct() {
-    
-        $this->useragent  = AmazonAutoLinks_Registry::NAME;
+
         $this->sPluginKey = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_FeedMs';
     
         // Set up the global arrays. Consider the cases that multiple instances of this object are created so the arrays may have been already created.
