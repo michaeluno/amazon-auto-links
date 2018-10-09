@@ -20,7 +20,8 @@ class AmazonAutoLinks_TemplateLoader {
      * Loads necessary components.
      */
     public function __construct( $sScriptPath ) {
-        
+
+        new AmazonAutoLinks_TemplateActivator;
         new AmazonAutoLinks_TemplateResourceLoader;
         
         if ( is_admin() ) {

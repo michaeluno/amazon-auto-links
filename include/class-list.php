@@ -92,6 +92,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_AdminPage_Template_GetNew"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_GetNew.php", 
     "AmazonAutoLinks_AdminPage_Template_ListTable"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php", 
     "AmazonAutoLinks_ListTable_Template"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/admin_page/list_table/AmazonAutoLinks_ListTable_Template.php", 
+    "AmazonAutoLinks_TemplateActivator"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/option/AmazonAutoLinks_TemplateActivator.php", 
     "AmazonAutoLinks_TemplateOption"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/option/AmazonAutoLinks_TemplateOption.php", 
     "AmazonAutoLinks_UnitTypesLoader"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/AmazonAutoLinks_UnitTypesLoader.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 

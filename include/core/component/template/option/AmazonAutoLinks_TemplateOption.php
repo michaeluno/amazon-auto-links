@@ -371,7 +371,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @since       3    
      */
     private static $_aUploadedTemplates = array();
- 
+
     /**
      * Retrieve templates and returns the template information as array.
      * 
@@ -412,31 +412,34 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         /**
          * Returns the template array by the given directory path.
          * @since       3
+         * @since       3.7.4       Added the `$bAbsolutePath` parameter.
          * @scope       public       The unit class also accesses this.
          */
-        public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true ) {
-                        
-            $_sRelativePath = str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $sDirPath ) ) );
+        public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true, $bAbsolutePath=true ) {
+
+            $_sRelativePath = $bAbsolutePath
+                ? str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $sDirPath ) ) )
+                : $sDirPath;
             $_aData         = array(
                 'dir_path'              => $sDirPath,
                 'relative_dir_path'     => $_sRelativePath,
                 'id'                    => $_sRelativePath,
-                'old_id'                => md5( $sDirPath ),            
-                    
+                'old_id'                => md5( $sDirPath ),
+
                 // Backward compatibility
                 'strDirPath'            => $sDirPath,
                 'strID'                 => md5( $sDirPath ),
             );
-            
-            if ( $bExtraInfo ) {               
+
+            if ( $bExtraInfo ) {
                 $_aData[ 'thumbnail_path' ] = $this->_getScreenshotPath( $_aData[ 'dir_path' ] );
-                return $this->_formatTemplateArray( 
+                return $this->_formatTemplateArray(
                     $this->getTemplateData( $_aData[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css' )
-                    + $_aData 
+                    + $_aData
                 );
             }
             return $this->_formatTemplateArray( $_aData );
-        }        
+        }
             /**
              * @return  string|null
              */

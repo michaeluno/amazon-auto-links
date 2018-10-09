@@ -235,43 +235,16 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
         
         switch( strtolower( $this->current_action() ) ){
-
             case 'activate':
-                foreach( ( array ) $_REQUEST[ 'template' ] as $sID ) {
-                    if ( ! $sID ) {
-                        continue;
-                    }
-                    $this->aData[ $sID ][ 'is_active' ] = true;
-                }
+                do_action( 'aal_action_activate_templates', ( array ) $_REQUEST[ 'template' ], true );
                 break;
             case 'deactivate':
-                foreach( ( array ) $_REQUEST[ 'template' ] as $sID ) {
-                    if ( ! $sID ) {
-                        continue;
-                    }  
-
-                    $this->aData[ $sID ][ 'is_active' ] = false;
-                }
+                do_action( 'aal_action_deactivate_templates', ( array ) $_REQUEST[ 'template' ], true );
                 break;    
             default:
                 return;    // do nothing.
-                
-        }   
+        }
 
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();        
-        
-        /**
-         * For the first time of loading, although the default templates are activated,
-         * no item is actually set to the option.
-         * In this situation, even deactivating an item does not mean anything 
-         * because no active template is stored. Just the default active templates will get listed in the next page.
-         * So set the options here so that the active tempaltes will be saved.
-         */
-        $_oTemplateOption->aOptions = $this->aData;       
-        
-        // Save the options.
-        $_bSaved = $_oTemplateOption->save();
-        
         // Reload the page.
         exit( 
             wp_safe_redirect( 
