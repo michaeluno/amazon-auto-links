@@ -135,7 +135,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
     }
         private function _printBuyNowButton() {    
         
-            $_sLink = 'http://en.michaeluno.jp/amazon-auto-links-pro/';
+            $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/';
             $_sLang = defined( 'WPLANG' ) 
                 ? WPLANG
                 : 'en';

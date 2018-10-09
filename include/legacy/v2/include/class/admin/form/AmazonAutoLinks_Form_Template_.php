@@ -32,7 +32,7 @@ abstract class AmazonAutoLinks_Form_Template_ extends AmazonAutoLinks_Form {
                 // 'vMin' => 1, // <-- not sure this horizontally diminishes the input element
                 'vAfterInputTag' => "<div style='margin:auto; width:100%; clear: both;'><img src='" . AmazonAutoLinks_Commons::getPluginURL( 'asset/image/columns.gif' ) . "' title='" . __( 'The number of columns', 'amazon-auto-links' ) . "' style='width:220px; margin-top: 8px;' /></div>",
                 'strDescription' => __( 'This option requires a column supported template to be activated.' ) 
-                    . ( $intMaxCol > 1 ? '' : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'http://en.michaeluno.jp/amazon-auto-links-pro/' ) ),
+                    . ( $intMaxCol > 1 ? '' : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' ) ),
                 'vDefault' => 4,
                 'vDelimiter' => '',
             ),                

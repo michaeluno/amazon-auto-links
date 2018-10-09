@@ -381,7 +381,7 @@ abstract class AmazonAutoLinks_CategorySelect_ {
             if ( ! $fIsReachedLimit ) return '';
             
             return $fEnableHTMLTag 
-                ? sprintf( __( 'Please upgrade to <a href="%1$s" target="_black">Pro</a> to add more categories.', 'amazon-auto-links' ), 'http://en.michaeluno.jp/amazon-auto-links-pro/' )
+                ? sprintf( __( 'Please upgrade to <a href="%1$s" target="_black">Pro</a> to add more categories.', 'amazon-auto-links' ), 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' )
                 : __( 'Please upgrade to Pro to add more categories!', 'amazon-auto-links' );
             
         }

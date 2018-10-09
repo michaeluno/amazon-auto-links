@@ -48,7 +48,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Support extends AmazonAutoLinks_AdminPa
         echo "<p>"
                 . sprintf(
                     __( 'You can get priority email support by purchasing <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ),
-                    'http://en.michaeluno.jp/amazon-auto-links-pro/'
+                    'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
                 )
             . "</p>";
             

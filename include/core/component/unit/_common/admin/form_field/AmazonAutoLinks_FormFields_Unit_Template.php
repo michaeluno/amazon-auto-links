@@ -50,7 +50,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'tip'               => __( 'This option requires a column supported template to be activated.' ),
                 'description'       => $_iMaxCol > 1 
                     ? '' 
-                    : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'http://en.michaeluno.jp/amazon-auto-links-pro/' ),                
+                    : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' ),
                 'default'           => 4,
                 'delimiter'         => '',
             ),                

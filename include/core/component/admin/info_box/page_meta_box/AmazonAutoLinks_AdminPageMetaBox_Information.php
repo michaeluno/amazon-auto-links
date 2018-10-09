@@ -49,7 +49,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
             );            
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
-                : "<a href='http://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
+                : "<a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
                     . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}'/>"
                 . "</a>";            
         }
@@ -60,7 +60,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
         private function _getAffiliateInfo() {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );            
-            $_sLink = 'http://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/';
+            $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/';
             return $_bJoindAffiliate
                 ? ''
                 : "<h4>" 

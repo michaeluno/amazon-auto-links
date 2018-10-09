@@ -40,7 +40,7 @@ abstract class AmazonAutoLinks_AdminPage_AddSearchUnit extends AmazonAutoLinks_A
             $this->setSettingNotice( 
                 sprintf( 
                     __( 'Please upgrade to <A href="%1$s">Pro</a> to add more units! Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ), 
-                    'http://en.michaeluno.jp/amazon-auto-links-pro/',
+                    'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/',
                     admin_url( 'edit.php?post_status=trash&post_type=' . AmazonAutoLinks_Commons::PostTypeSlug )
                 )
             );

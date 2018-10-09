@@ -113,7 +113,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert extends AmazonAuto
                     : "<p>"
                         . sprintf(
                             __( 'In order to use this feature, please consider purchasing <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ),
-                            'http://en.michaeluno.jp/amazon-auto-links-pro/'
+                            'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
                         )
                     . "</p>",
             )

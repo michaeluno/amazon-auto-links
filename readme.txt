@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.3
+Stable tag:         3.7.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,7 +118,7 @@ When you display Amazon products, you would specify a unit and the plugin will g
 
 = What would be the benefit to upgrade to the pro version? =
 
-With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestriceted as well. Please consider upgrading it. [Amazon Auto Links Pro](http://en.michaeluno.jp/amazon-auto-links/amazon-auto-links-pro) As of Pro 2.0.6, links can be displayed in multiple columns.
+With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestriceted as well. Please consider upgrading it. [Amazon Auto Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
 
 = I get a blank white page after adding a unit to the theme. What is it? What should I do? =
 
@@ -128,7 +128,7 @@ The part, 128M, should be changed accordingly.
 
 = I want to display product links horizontally in multiple columns. Is it possible? = 
 
-Yes, with [Pro](http://en.michaeluno.jp/amazon-auto-links/amazon-auto-links-pro)! 
+Yes, with [Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/)!
 
 = I have a feature request. Would you implement that? = 
 Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto-links). If it is feasible, it will be included in the to-do list in the Other Notes section.
@@ -278,6 +278,10 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.7.4 - 10/09/2018 =
+- Added the `aal_action_activate_templates` and `aal_action_deactivate_templates` action hooks so that third parties can toggle the template status.
+- Fixed some broken links in the admin area.
 
 = 3.7.3 - 10/02/2018 =
 - Added the ability to limit the overall cache sizes.
