@@ -66,7 +66,7 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                 // The id may be a relative path of the template directory
                 $_sDirPath = $this->getAbsolutePathFromRelative( $sID );
                 if ( ! file_exists( $_sDirPath ) ) {
-                    continue;
+                    return $aTemplats;
                 }
                 $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
                 $_aTemplate = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
