@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.5 =
+- Fixed a bug with the `Renew Cache` action link of URL units.
+
 = 3.7.4 - 10/09/2018 =
 - Added the `aal_action_activate_templates` and `aal_action_deactivate_templates` action hooks so that third parties can toggle the template status.
 - Fixed some broken links in the admin area.

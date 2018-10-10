@@ -35,7 +35,13 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_UnitTypeLoader_
      */    
     public $aProtectedMetaKeys = array(
     );    
-    
+
+    protected function _construct( $sScriptPath ) {
+        // URL unit specific event callbacks
+     //   new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher;
+        new AmazonAutoLinks_Unit_URL_Event_RenewCacheAction;
+    }
+
     /**
      * Adds post meta boxes.
      * 
