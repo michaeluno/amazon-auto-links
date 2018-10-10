@@ -312,12 +312,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @remark      To renew its cache, use the `deleteCache()` method prior to call the `get()` method.
          * @return      boolean     
          * @todo        Examine the return value as it is not tested.
+         * @since       3.7.5   Added the `aal_filter_http_request_set_cache` filter so that third parties can modify set cache contents.
          */
         private function _setCache( $sURL, $mData, $iCacheDuration=86400 ) {
 
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+            $mData           = apply_filters( 'aal_filter_http_request_set_cache', $mData, $this->sRequestType, $_sCacheName, $_sCharSet, $iCacheDuration );
             $_bResult        = $_oCacheTable->setCache(
                 $_sCacheName, // name
                 $mData,
