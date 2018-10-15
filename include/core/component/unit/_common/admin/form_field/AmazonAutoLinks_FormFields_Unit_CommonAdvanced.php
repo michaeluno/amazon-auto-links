@@ -122,10 +122,40 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                     'max'   => 6,
                 ),  
                 'default'           => 5,
-            ),             
+            )
         );
 
-       
+        $_aFieldURLQueryString = array(
+            'field_id'          => $sFieldIDPrefix . '_custom_url_query_string',
+            'title'             => __( 'Custom URL Query', 'amazon-auto-links' ),
+            'description'       => __( 'Key-value pairs added to product links.', 'amazon-auto-links' )
+                . ' e.g. ' . __( 'Key', 'amazon-auto-links' ) . ': <code>foo</code> ' . __( 'Value', 'amazon-auto-links' ) . ': <code>bar</code> -> '
+                . __( 'URL', 'amazon-auto-links' ) . ': https://amazon.com/...?<code>foo=bar</code>',
+            'type'              => 'text',
+            'repeatable'        => true,
+            'label'             => array(
+                'key'   => __( 'Key', 'amazon-auto-links' ),
+                'value' => __( 'Value', 'amazon-auto-links' ),
+            ),
+            'order'             => 99,
+        );
+        if ( ! $_oOption->canAddQueryStringToProductLinks() ) {
+            $_aFieldURLQueryString[ 'attributes' ]     = array(
+                'disabled' => 'disabled',
+                'class'    => 'disabled read-only',
+            );
+            $_aFieldURLQueryString[ 'repeatable' ] = array(
+                'disabled'  => array(
+                    'message' => sprintf(
+                        __( "Please upgrade to <a href='%1\$s' target='_blank'>Pro</a> to enable this feature.", 'amazon-auto-links' ),
+                        esc_url( AmazonAutoLinks_Registry::STORE_URI_PRO )
+                    ),
+                    'caption' => AmazonAutoLinks_Registry::NAME,
+                ),
+            );
+        }
+        $_aFields[] = $_aFieldURLQueryString;
+
         return $_aFields;
         
     }

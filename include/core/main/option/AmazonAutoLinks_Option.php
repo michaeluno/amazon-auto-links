@@ -236,6 +236,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             // 3.7.0+ These are not options that change the output behavior but post meta to store relevant information based on the result.
             '_error'                        => null,
 
+            // 3.7.5+
+            '_custom_url_query_string'      => array(),
+
         )
         
     );
@@ -377,8 +380,17 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     
     /**
      * @since       3.3.0
+     * @return      boolean
      */
     public function canCloneUnits() {
+        return false;
+    }
+
+    /**
+     * @since       3.7.5
+     * @return      boolean
+     */
+    public function canAddQueryStringToProductLinks() {
         return false;
     }
     

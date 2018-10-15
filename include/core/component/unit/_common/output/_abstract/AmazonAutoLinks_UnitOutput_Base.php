@@ -69,7 +69,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Stores a unit option object.
-     * @var object
+     * @var AmazonAutoLinks_UnitOption_Base
      */
     public $oUnitOption;
 
@@ -140,6 +140,35 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->_setProperties();
 
     }
+
+        /**
+         * @since   3.7.5
+         * @return  boolean
+         */
+        private function ___hasCustomProductLinkURLQuery() {
+            $_aLinkQueryRaw = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
+            foreach( $_aLinkQueryRaw as $_iIndex => $_aKeyValue ) {
+                $_aQueryKeyValue = array_filter( $_aKeyValue );
+                if ( empty( $_aQueryKeyValue ) ) {
+                    continue;
+                }
+                return true;
+            }
+            return false;
+        }
+        /**
+         * @return  string
+         * @since   3.7.5
+         * @callback    filter  aal_filter_product_link
+         */
+        public function replyToModifyProductURLs( $sURL, $sRawURL, $sASIN, $aUnitOptions ) {
+            $_aQuery     = array();
+            $_aKeyValues = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
+            foreach( $_aKeyValues as $_iIndex => $_aKeyValue ) {
+                $_aQuery[ $_aKeyValue[ 'key' ] ] = $_aKeyValue[ 'value' ];
+            }
+            return add_query_arg( $_aQuery, $sURL );
+        }
 
         /**
          * Sanitizes a raw product title.
@@ -224,6 +253,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_oCredit           = new AmazonAutoLinks_UnitOutput__Credit( $this );
         $_oFoundItemCount   = new AmazonAutoLinks_UnitOutput__ErrorChecker( $this );
 
+        // 3.7.5+
+        if ( $this->___hasCustomProductLinkURLQuery() ) {
+            add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
+        }
+
         try {
 
             $_aProducts         = $this->fetch( $aURLs );
@@ -269,6 +303,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         // Remove hooks of function-call basis.
         remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
+        remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
         $_oFilterByRating->__destruct();
         $_oFilterByDiscount->__destruct();
         $_oDebugInfoProduct->__destruct();

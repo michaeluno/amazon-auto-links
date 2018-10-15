@@ -281,6 +281,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 = 3.7.5 =
 - Added the ability to decrease URL unit cache sizes.
+- Added the `Custom URL Query` unit option field.
 - Fixed a bug with the `Renew Cache` action link of URL units.
 
 = 3.7.4 - 10/09/2018 =
