@@ -63,6 +63,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     
     /**
      * Indicates whether the unit needs to access custom databse table.
+     * @remark      Accessed from delegation classes publicly.
      * @since       3
      */
     public $bDBTableAccess = false;

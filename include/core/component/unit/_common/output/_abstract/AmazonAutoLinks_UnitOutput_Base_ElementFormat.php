@@ -43,8 +43,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             }
 
             // Item
+            $_aDBProductRow  = $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '_' . $sLocale );
             $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
-                $this, $_aProduct
+                $this,
+                $_aProduct,
+                $_aDBProductRow
             );
             $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
             $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
@@ -442,12 +445,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 ? ( integer ) $iStyle 
                 : 1;
             $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
-            $_oLinksTyle = new $_sClassName(
+            $_oLinkStyle = new $_sClassName(
                 $bRefNosim,
                 $sAssociateID,
                 $sLocale
             );
-            $_sURL = $_oLinksTyle->get(
+            $_sURL = $_oLinkStyle->get(
                 $sURL,
                 $sASIN
             );

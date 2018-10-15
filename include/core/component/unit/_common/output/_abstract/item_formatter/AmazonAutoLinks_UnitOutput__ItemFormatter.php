@@ -16,12 +16,21 @@
 class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutput_Utility {
 
     private $___oUnitOutput;
+    private $___aProduct    = array();
+    private $___aCacheDBRow = array();
 
-    private $___aProduct = array();
-
-    public function __construct( $oUnitOutput, array $aProduct ) {
+    /**
+     * AmazonAutoLinks_UnitOutput__ItemFormatter constructor.
+     *
+     * @param $oUnitOutput
+     * @param array $aProduct
+     * @param array $aCacheDBRow
+     * @since   3.7.5   Added the `$aCacheDBRow` parameter.
+     */
+    public function __construct( $oUnitOutput, array $aProduct, array $aCacheDBRow ) {
         $this->___oUnitOutput = $oUnitOutput;
         $this->___aProduct    = $aProduct;
+        $this->___aCacheDBRow = $aCacheDBRow;
     }
 
     /**
@@ -96,14 +105,20 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
          * @since       3.2.0
          * @since       3.5.0       Changed the visibility scope from protected.
          * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+         * @since       3.7.5       Made the date the cached time
          * @return      string
          */
         private function ___getPricingDisclaimer( $sResponseDate ) {
+
+            $_sCacheModTime = $this->getElement( $this->___aCacheDBRow, 'modified_time' );
+            $_iTime         = $this->___oUnitOutput->bDBTableAccess && $_sCacheModTime
+                ? strtotime( $_sCacheModTime )
+                : strtotime( $sResponseDate );
             return "<span class='pricing-disclaimer'>"
                 . "("
                     . sprintf(
                         __( 'as of %1$s', 'amazon-auto-links' ),
-                        $this->getSiteReadableDate( strtotime( $sResponseDate ) )
+                       $this->getSiteReadableDate( $_iTime, get_option( 'date_format' ), true )
                     )
                     . ' - '
                     . $this->___getDisclaimerTooltip()

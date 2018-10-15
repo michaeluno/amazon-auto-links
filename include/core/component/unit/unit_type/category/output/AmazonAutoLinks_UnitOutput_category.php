@@ -43,9 +43,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'image_set'             => null,
         'button'                => null,
         
-        // Unused items
-        'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless.
-        
+        // used for disclaimer
+        'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless
         
         // 3.3.0
         'content'               => null,
