@@ -238,6 +238,15 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     continue;
                 }
 
+                // 3.7.6+
+                $_bsUncompressed = function_exists( 'gzuncompress' )
+                    ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
+                    : false;
+                if ( $_bsUncompressed ) {
+                    $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
+                }
+                unset( $_aCache[ 'data' ][ 'http_response' ] );
+
                 /**
                  * Filters - this allows external components to modify the remained time,
                  * which can be used to trick the below check and return the stored data anyway.
@@ -320,6 +329,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $_sCacheName     = $this->_getCacheName( $sURL );
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $mData           = apply_filters( 'aal_filter_http_request_set_cache', $mData, $this->sRequestType, $_sCacheName, $_sCharSet, $iCacheDuration );
+            $mData           = $this->___getCacheCompressed( $mData );  // 3.7.6+
             $_bResult        = $_oCacheTable->setCache(
                 $_sCacheName, // name
                 $mData,
@@ -337,7 +347,29 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             return $_bResult;
             
         }
-            
+            /**
+             * @param $mData
+             *
+             * @return mixed
+             * @since   3.7.6
+             */
+            private function ___getCacheCompressed( $mData ) {
+
+                // this cause the data to be excessive large
+                unset( $mData[ 'http_response' ] );
+
+                // gz compress
+                if ( function_exists( 'gzcompress' ) ) {
+                    $_bsCompressed = gzcompress( $mData[ 'body' ] );
+                    if ( $_bsCompressed ) {
+                        $mData[ 'body' ] = $_bsCompressed ;
+
+                    }
+                }
+
+                return $mData;
+
+            }
 
     /**
      * Deletes the cache of the provided URL.
