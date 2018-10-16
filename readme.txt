@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.4
+Stable tag:         3.7.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,7 +279,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.7.5 =
+= 3.7.5 - 10/16/2018 =
 - Added the ability to decrease URL unit cache sizes.
 - Added the `Custom URL Query` unit option field.
 - Fixed an issue that dates in the disclaimer output were not accurate.
