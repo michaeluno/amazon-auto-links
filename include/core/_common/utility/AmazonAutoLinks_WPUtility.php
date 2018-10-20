@@ -106,6 +106,9 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         if ( ! function_exists( 'mb_detect_encoding' ) ) {
             return $sText;
         }
+        if ( ! is_string( $sText ) ) {
+            return $sText;
+        }
         
         $sCharSetTo = $sCharSetTo
             ? $sCharSetTo

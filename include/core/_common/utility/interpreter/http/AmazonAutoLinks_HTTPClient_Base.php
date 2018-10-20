@@ -66,8 +66,15 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'decompress'  => true,
         'sslverify'   => true,
         'stream'      => false,
-        'filename'    => null
+        'filename'    => null,
     ); 
+
+    /**
+     * Specific arguments to this class.
+     */
+    public $aCustomArguments = array(
+        'raw'         => false,  // (boolean) return the raw HTTP response
+    );
 
     /**
      * Sets up properties.
@@ -91,13 +98,20 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $aArguments     = null === $aArguments
                 ? $this->aArguments
                 : $this->getAsArray( $aArguments ) + $this->aArguments;
+            $aArguments     = $aArguments + $this->aCustomArguments;
 
             // @deprecated 3.7.4 Use the WordPress default user agent.
             // $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
 
             // WordPress v3.7 or later, it should be true.
             $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
-            
+
+            // Drop unsupported arguments
+            $aArguments = array_intersect_key(
+                $aArguments,    // subject that its elements get extracted
+                $this->aArguments + $this->aCustomArguments    // model to be compared with
+            );
+
             return apply_filters(
                 'aal_filter_http_request_arguments',
                 $aArguments
@@ -137,23 +151,21 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         
         $_aData      = array();
         foreach( $this->getResponses() as $_sURL => $_aoResponse ) {
-         
-            $_sHTTPBody         = is_wp_error( $_aoResponse )
-                ? $_aoResponse->get_error_message()
-                : wp_remote_retrieve_body( $_aoResponse );
+
+            $_asHTTPResponse    = $this->_getResponseItem( $_aoResponse );
             $_sCharSetFrom      = $this->_getCharacterSet( $_aoResponse );
             $_sCharSetTo        = $this->sSiteCharSet;
 
             // Encode the document from the source character set to the site character set.
             if ( $_sCharSetFrom && ( strtoupper( $_sCharSetTo ) <> strtoupper( $_sCharSetFrom ) ) ) {
-                $_sHTTPBody = $this->convertCharacterEncoding(
-                    $_sHTTPBody,
+                $_asHTTPResponse = $this->convertCharacterEncoding(
+                    $_asHTTPResponse,
                     $_sCharSetTo,  // to
                     $_sCharSetFrom, // from
                     false // no html-entities conversion
                 );
             }
-            $_aData[ $_sURL ] = $_sHTTPBody;
+            $_aData[ $_sURL ] = $_asHTTPResponse;
             
             if ( $this->bIsSingle ) {
                 return $_aData[ $_sURL ];
@@ -162,7 +174,22 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         return $_aData;
         
     }
+        /**
+         * @return      string|array
+         */
+        private function _getResponseItem( $aoResponse ) {
 
+            if ( $this->aArguments[ 'raw' ] ) {
+                return $aoResponse;
+            }
+
+            if ( is_wp_error( $aoResponse ) ) {
+                return $aoResponse->get_error_message();
+            }
+
+            return wp_remote_retrieve_body( $aoResponse );
+
+        }
     /**
      * Returns the response's character set by the url.
      * 
@@ -239,13 +266,15 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 }
 
                 // 3.7.6+
-                $_bsUncompressed = function_exists( 'gzuncompress' )
-                    ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
-                    : false;
-                if ( $_bsUncompressed ) {
-                    $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
+                if ( ! is_wp_error( $_aCache[ 'data' ] ) ) {
+                    $_bsUncompressed = function_exists( 'gzuncompress' )
+                        ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
+                        : false;
+                    if ( $_bsUncompressed ) {
+                        $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
+                    }
+                    unset( $_aCache[ 'data' ][ 'http_response' ] );
                 }
-                unset( $_aCache[ 'data' ][ 'http_response' ] );
 
                 /**
                  * Filters - this allows external components to modify the remained time,
@@ -354,6 +383,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
              * @since   3.7.6
              */
             private function ___getCacheCompressed( $mData ) {
+
+                if ( is_wp_error( $mData ) ) {
+                    return $mData;
+                }
 
                 // this cause the data to be excessive large
                 unset( $mData[ 'http_response' ] );
