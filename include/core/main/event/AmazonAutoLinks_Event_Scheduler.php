@@ -33,12 +33,12 @@ class AmazonAutoLinks_Event_Scheduler {
             : ( array ) $iaArguments;
 
         // Otherwise, it's an argument.
-        self::_scheduleTask(
+        $_bScheduled = self::_scheduleTask(
             'aal_action_unit_prefetch',  // action name
             $_aArguments // arguments
         );
 
-    }    
+    }
 
     /**
      * @since       3.3.0

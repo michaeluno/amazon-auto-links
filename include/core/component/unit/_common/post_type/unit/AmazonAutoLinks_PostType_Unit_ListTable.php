@@ -218,13 +218,14 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function cell_amazon_auto_links_status( $sCell, $iPostID ) {
 
-        $_sError = get_post_meta( $iPostID, '_error', true );
-        if ( $_sError ) {
+        $_snStatus = get_post_meta( $iPostID, '_error', true );
+
+        if ( $_snStatus ) {
             $_iModalID = 'response-error-' . $iPostID;
             $_sTitle   = esc_attr( __( 'Unit Error', 'amazon-auto-links' ) );
             return "<span class='circle red' title='" . $_sTitle . "'></span>"
                 . "<div id='{$_iModalID}' style='display:none;'>"
-                    . "<p>" . $_sError . "</p>"
+                    . "<p>" . $_snStatus . "</p>"
                 . "</div>"
                 . "<div class='row-actions'>"
                     . "<span class='show'>"
@@ -240,7 +241,10 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                     . "</span>"
                 . "</div>";
         }
-        return "<span class='circle green' title='" . __( 'Good', 'amazon-auto-links' ) . "'></span>";
+        if ( null === $_snStatus ) {
+            return "<span class='circle gray' title='" . __( 'Ready', 'amazon-auto-links' ) . "'></span>";
+        }
+        return "<span class='circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "'></span>";
 
     }
 

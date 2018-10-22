@@ -42,10 +42,18 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache extends AmazonAutoLin
             ),
             admin_url( $this->_oFactory->oProp->sPageNow )
         );
-        $_sLabel = __( 'Renew Cache', 'amazon-auto-links' );
+        $_sLabel = $this->_getActionLabel();
         return "<a href='" . esc_url( $_sURL ) . "' title='" . esc_attr( $_sLabel ) . "'>"
                 . $_sLabel
             . "</a> ";
+    }
+
+    /**
+     * @return string
+     * @since   3.7.6
+     */
+    protected function _getActionLabel() {
+        return __( 'Renew Cache', 'amazon-auto-links' );
     }
 
 }

@@ -21,14 +21,18 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_Base extends AmazonAutoLinks_Plu
     protected $_sActionSlug  = '';
 
     /**
+     * @var bool
+     * @since   3.7.6
+     */
+    protected $_bAddBulkAction = true;
+
+    /**
      * Sets up hooks and properties.
      */
     public function __construct( $oFactory, $sCustomNonce ) {
 
         $this->_oFactory     = $oFactory;
         $this->_sCustomNonce = $sCustomNonce;
-
-        $this->___doCustomActions();
 
         add_filter(
             'action_links_' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
@@ -37,8 +41,77 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_Base extends AmazonAutoLinks_Plu
             2
         );
 
+        add_action( 'current_screen', array( $this, 'replyToSetHooks' ) );
+
+        $this->_construct();
+
+        $this->___doCustomActions();
+
     }
 
+        /**
+         * @since   3.7.6
+         * @callback    action      current_screen
+         */
+        public function replyToSetHooks() {
+            if ( ! $this->_bAddBulkAction ) {
+                return;
+            }
+            $_sPostTypeSlug = $this->_oFactory->oProp->sPostType;
+            $_sScreenID = get_current_screen()->id;
+            if ( "edit-{$_sPostTypeSlug}" !== $_sScreenID ) {
+                return;
+            }
+            add_filter(
+                'bulk_actions-' . $_sScreenID,
+                array( $this, 'replyToAddBulkAction' )
+            );
+            add_filter(
+                'handle_bulk_actions-' . $_sScreenID,
+                array( $this, 'replyToFilterSendbackURL' ),
+                10,
+                3
+            );
+        }
+
+    /**
+     * @param $sSendbackURL
+     * @param $sDoAction
+     * @param $aPostIDs
+     *
+     * @return mixed
+     * @callback    filter      handle_bulk_actions-{screen id}
+     */
+    public function replyToFilterSendbackURL( $sSendbackURL, $sDoAction, $aPostIDs ) {
+        if ( $sDoAction !== $this->_sActionSlug ) {
+            return $sSendbackURL;
+        }
+        $aPostIDs = is_array( $aPostIDs )
+            ? $aPostIDs
+            : array( $aPostIDs );
+        $this->_doAction( $aPostIDs );
+        return $sSendbackURL;
+    }
+
+    /**
+     * @param array $aActionLabels
+     *
+     * @return      array
+     * @callback    filter      bulk_actions-{screen id}
+     * @sicne       3.7.6
+     */
+    public function replyToAddBulkAction( $aActionLabels ) {
+        $aActionLabels[ $this->_sActionSlug ] = $this->_getActionLabel();
+        return $aActionLabels;
+    }
+
+    /**
+     * @return string
+     * @since   3.7.6
+     */
+    protected function _getActionLabel() {
+        return 'THIS_ACTION_LABEL';
+    }
 
     /**
      * @since       3.1.0
@@ -128,9 +201,16 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_Base extends AmazonAutoLinks_Plu
 
     /**
      * @return string
+     * @since   3.7.6
      */
     protected function _getActionLink( $oPost ) {
         return '';
     }
+
+    /**
+     * User constructor
+     * @since 3.7.6
+     */
+    protected function _construct() {}
 
 }

@@ -42,7 +42,7 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit extends AmazonAutoLink
             ),
             admin_url( $this->_oFactory->oProp->sPageNow )
         );
-        $_sLabel    = __( 'Clone', 'amazon-auto-links' );
+        $_sLabel    = $this->_getActionLabel();
         $_sTitle    = __( 'Clone Unit', 'amazon-auto-links' );
         return AmazonAutoLinks_Option::getInstance()->canCloneUnits()
             ? "<a href='" . esc_attr( $_sURL ) . "' title='" . esc_attr( $_sTitle ) . "'>"
@@ -52,6 +52,22 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit extends AmazonAutoLink
                 . $_sLabel
             . "</span>";
 
+    }
+
+    /**
+     * @return string
+     * @since   3.7.6
+     */
+    protected function _getActionLabel() {
+        return __( 'Clone', 'amazon-auto-links' );
+    }
+
+    /**
+     * @since   3.7.6
+     */
+    protected function _construct() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $this->_bAddBulkAction = $_oOption->canAddQueryStringToProductLinks();
     }
 
 }

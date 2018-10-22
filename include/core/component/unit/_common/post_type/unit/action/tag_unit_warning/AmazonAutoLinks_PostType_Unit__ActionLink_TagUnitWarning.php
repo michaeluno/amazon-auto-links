@@ -16,6 +16,8 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning extends AmazonAut
 
     protected $_sActionSlug  = 'tag_deprecated_warning';
 
+    protected $_bAddBulkAction = false;
+
     /**
      * @param       object          $oPost
      * @return      string

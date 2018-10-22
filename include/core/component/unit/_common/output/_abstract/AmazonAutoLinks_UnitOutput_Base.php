@@ -380,11 +380,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     public function replyToCheckErrors( $aProducts, $iUnitID ) {
 
+        $_sUnitStatusMetaKey = '_error';
         $_sError = $this->_getError( $aProducts );
         if ( $_sError ) {
             update_post_meta(
                 $iUnitID, // post id
-                '_error', // meta key
+                $_sUnitStatusMetaKey, // meta key
                 $_sError
             );
             return;
@@ -392,11 +393,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // At this point, the response has no error.
         // In this case, check a previously set error and if present, remove it.
         // This way, for cases of no error, it does not cause extra accesses to the database.
-        $_sStoredError = get_post_meta( $iUnitID, '_error', true );
-        if ( $_sStoredError ) {
+        // Usually the value will be an empty string ``.
+        // If `null` it means the unit is newly created or in a process of renewing.
+        $_snStoredError = get_post_meta( $iUnitID, $_sUnitStatusMetaKey, true );
+        if ( $_snStoredError || null === $_snStoredError ) {
             update_post_meta(
                 $iUnitID, // post id
-                '_error', // meta key
+                $_sUnitStatusMetaKey, // meta key
                 ''
             );
         }

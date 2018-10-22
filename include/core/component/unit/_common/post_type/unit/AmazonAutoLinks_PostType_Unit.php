@@ -198,6 +198,9 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             .green {
                 background-color: #339933;
             }
+            .gray {
+                background-color: #999999;
+            }
             .red {
                 background-color: red;
             }

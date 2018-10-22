@@ -31,6 +31,7 @@ class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_Pl
 
             $_aURLs          = get_post_meta( $iPostID, 'urls', true );
             $_iCacheDuration = get_post_meta( $iPostID, 'cache_duration', true );
+            update_post_meta( $iPostID, '_error', null );
 
             // Just delete caches. Renewing will be done when performing the API request.
             $_oHTTP = new AmazonAutoLinks_HTTPClient(
