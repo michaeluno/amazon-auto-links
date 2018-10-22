@@ -42,6 +42,10 @@ class AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher extends AmazonAutoLinks
             return $mData;
         }
 
+        if ( is_wp_error( $mData ) ) {
+            return $mData;
+        }
+
         if ( ! isset( $mData[ 'body' ] ) ) {
             return $mData;
         }

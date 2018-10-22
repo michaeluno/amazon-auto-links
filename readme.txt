@@ -280,7 +280,8 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.6 =
-- Added the ability to reduce each cache size.
+- Fixed a bug that caused `PHP Notice:  Undefined index: constructor_parameters...` in the background, started with v3.7.5.
+- Added the ability to reduce each HTTP request cache size.
 
 = 3.7.5 - 10/16/2018 =
 - Added the ability to reduce URL unit cache sizes.

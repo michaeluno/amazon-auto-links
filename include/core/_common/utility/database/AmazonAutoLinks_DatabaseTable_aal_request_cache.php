@@ -207,13 +207,13 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
         $_aNames = is_array( $asNames )
             ? $asNames
             : array( 0 => $asNames );
-        foreach( $_aNames as $_sName ) {            
-            $this->delete(
-                array(
-                    'name' => $_sName,
-                )
-            );
-        }
+
+        // 3.7.5+ To support multiple cache items to be processed at once,
+        $_sCacheNames = "'" . implode( "','", $_aNames ) . "'";
+        $GLOBALS[ 'wpdb' ]->query(
+            "DELETE FROM {$this->aArguments[ 'table_name' ]} "
+            . "WHERE `name` IN( {$_sCacheNames} )"
+        );
         
     }
 

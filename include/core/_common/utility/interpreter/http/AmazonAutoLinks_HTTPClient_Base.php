@@ -267,12 +267,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
                 // 3.7.6+
                 if ( ! is_wp_error( $_aCache[ 'data' ] ) ) {
+/* @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
                     $_bsUncompressed = function_exists( 'gzuncompress' )
                         ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
                         : false;
                     if ( $_bsUncompressed ) {
                         $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
                     }
+*/
                     unset( $_aCache[ 'data' ][ 'http_response' ] );
                 }
 
@@ -392,13 +394,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 unset( $mData[ 'http_response' ] );
 
                 // gz compress
-                if ( function_exists( 'gzcompress' ) ) {
+/* @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
+                  if ( function_exists( 'gzcompress' ) ) {
                     $_bsCompressed = gzcompress( $mData[ 'body' ] );
                     if ( $_bsCompressed ) {
                         $mData[ 'body' ] = $_bsCompressed ;
 
                     }
-                }
+                }*/
 
                 return $mData;
 
@@ -407,17 +410,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
     /**
      * Deletes the cache of the provided URL.
      *
-     * @todo implement deleteCaches() method
      */
     public function deleteCache() {
         
         $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-        foreach( $this->aURLs as $_sCacheName => $_sURL ) {
-            $_oCacheTable->deleteCache(
-                $_sCacheName
-            );    
-        }
-        
+
+        // 3.7.6+ If multiple URLs are set, they will be deleted at once
+        $_oCacheTable->deleteCache( array_keys( $this->aURLs ) );
+
     }
     
 }

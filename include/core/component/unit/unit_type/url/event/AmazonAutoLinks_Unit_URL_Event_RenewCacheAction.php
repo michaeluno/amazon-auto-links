@@ -28,19 +28,18 @@ class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_Pl
         }
     }
         private function ___renewHTTPRequestCache( $iPostID ) {
-            $_aURLs = get_post_meta( $iPostID, 'urls', true );
+
+            $_aURLs          = get_post_meta( $iPostID, 'urls', true );
             $_iCacheDuration = get_post_meta( $iPostID, 'cache_duration', true );
-            foreach( $_aURLs as $_sURL ) {
-                $this->scheduleSingleWPCronTask(
-                    'aal_action_http_cache_renewal',
-                    array(
-                        $_sURL,
-                        $_iCacheDuration,
-                        array(), // http arguments
-                        'url_unit_type' // this is important as the cache diminisher class refers to it
-                    ),
-                    time()  // now
-                );
-            }
+
+            // Just delete caches. Renewing will be done when performing the API request.
+            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+                $_aURLs,
+                $_iCacheDuration,
+                array(),    // http arguments
+                'url_unit_type'
+            );
+            $_oHTTP->deleteCache();
+
         }
 }

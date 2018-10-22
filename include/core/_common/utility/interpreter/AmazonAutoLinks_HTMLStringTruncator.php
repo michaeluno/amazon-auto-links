@@ -9,7 +9,7 @@
  */
 
 /**
- * Provides method to truncate HTML stirng while preserving tags.
+ * Provides method to truncate HTML string while preserving tags.
  * 
  * @see         http://stackoverflow.com/questions/16583676/shorten-text-without-splitting-words-or-breaking-html-tags/16584383#16584383
  * @package     Amazon Auto Links
