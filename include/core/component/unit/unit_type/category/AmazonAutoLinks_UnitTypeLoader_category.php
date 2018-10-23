@@ -36,7 +36,16 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
     public $aProtectedMetaKeys = array(
         'categories_exclude',
         'categories',
-    );    
+    );
+
+    /**
+     * @param $sScriptPath
+     * @since   3.7.6
+     */
+    protected function _construct( $sScriptPath ) {
+          // Category unit specific event callbacks
+          new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
+    }
 
     /**
      * Adds post meta boxes.

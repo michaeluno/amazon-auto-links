@@ -131,6 +131,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
                     $aHTTPArguments + array(
                         'timeout'       => 20,
                         'sslverify'     => false,
+                        '_debug'        => __METHOD__,
                     ),
                     $this->___sRequestType // request type
                 );

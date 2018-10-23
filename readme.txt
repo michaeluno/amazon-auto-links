@@ -282,8 +282,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 = 3.7.6 =
 - Added the `Ready` unit status to be displayed when the unit has not been loaded yet.
 - Added unit action links to the bulk action drop down list in the unit listing page.
-- Fixed a bug that caused `PHP Notice:  Undefined index: constructor_parameters...` in the background, started with v3.7.5.
 - Added the ability to reduce each HTTP request cache size.
+- Fixed a bug with the `Renew Cache` action link of Category units.
+- Fixed a bug that caused `PHP Notice:  Undefined index: constructor_parameters...` in the background, started with v3.7.5.
 
 = 3.7.5 - 10/16/2018 =
 - Added the ability to reduce URL unit cache sizes.

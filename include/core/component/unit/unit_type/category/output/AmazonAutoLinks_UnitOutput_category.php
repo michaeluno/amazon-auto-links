@@ -226,13 +226,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
         $_oRSS = new AmazonAutoLinks_RSSClient(
             $_aExcludingRSSURLs,
-            ( int ) $this->oUnitOption->get( 'cache_duration' )
+            ( int ) $this->oUnitOption->get( 'cache_duration' ),
+            ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
         );
         $this->_setBlackASINs( $_oRSS->get() );
         
         $_oRSS = new AmazonAutoLinks_RSSClient( 
             $aRSSURLs,
-            ( int ) $this->oUnitOption->get( 'cache_duration' )
+            ( int ) $this->oUnitOption->get( 'cache_duration' ),
+            ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
         );
         $_oRSS->sSortOrder = $this->_getSortOrder();        
         return $this->getProducts( $_oRSS->get() );

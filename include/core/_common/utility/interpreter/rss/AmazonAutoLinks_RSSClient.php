@@ -16,8 +16,7 @@
  * @since       3       
  */
 class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
-    
-    
+
     /**
      * Supported sort order slugs.
      * 'date_ascending'
@@ -27,14 +26,24 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
      * 'random' 
      */
     public $sSortOrder = 'date';
-    
+
+    /**
+     * @var     bool
+     * @since   3.7.6
+     */
+    public $bForceCacheClear = false;
+
     /**
      * Sets up properties
+     *
+     * @since       unknown
+     * @since       3.7.6   Added the `$bForceCacheClear` parameter.
      */
-    public function __construct( $asURLs, $iCacheDuration=86400 ) {
+    public function __construct( $asURLs, $iCacheDuration=86400, $bForceCacheClear=false ) {
         
-        $this->aURLs = $this->getAsArray( $asURLs );
-        $this->iCacheDuration = $iCacheDuration;
+        $this->aURLs            = $this->getAsArray( $asURLs );
+        $this->iCacheDuration   = $iCacheDuration;
+        $this->bForceCacheClear = $bForceCacheClear;
         
     }
 
@@ -45,7 +54,11 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
             $this->iCacheDuration,
             null, // arguments
             'rss'   // response type - this just leaves a mark in the database table.
-        );  
+        );
+
+        if ( $this->bForceCacheClear ) {
+            $_oHTTP->deleteCache();
+        }
 
         $_aItems = array();
         foreach( $_oHTTP->get() as $_sHTTPBody ) {

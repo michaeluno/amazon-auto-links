@@ -74,6 +74,9 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
      */
     public $aCustomArguments = array(
         'raw'         => false,  // (boolean) return the raw HTTP response
+
+        'constructor_parameters' => array(),
+        'api_parameters' => array(),
     );
 
     /**
