@@ -259,24 +259,19 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
         }
 
+        $_aOptions          = $this->oOption->aOptions;
+        $_aArguments        = $this->oUnitOption->get();
+        $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
+        $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
+        $_aProducts         = $this->fetch( $aURLs );
+        $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
+
         try {
 
-            $_aProducts         = $this->fetch( $aURLs );
-            $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
-            // @deprecated 3.7.0
-//            if ( $this->_isError( $_aProducts ) && ! $this->oUnitOption->get( 'show_errors' ) ) {
-//                throw new Exception('' );
-//            }
-            $_sError = $this->_getError( $_aProducts );
+            $_sError            = $this->_getError( $_aProducts );
             if ( $_sError ) {
                 throw new Exception( $_sError  );
             }
-
-            $_aOptions          = $this->oOption->aOptions;
-            $_aArguments        = $this->oUnitOption->get();
-
-            $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
-            $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
 
             $_sContent          = $this->getOutputBuffer(
                 array( $this, 'replyToGetOutput' ),
@@ -287,20 +282,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     $_sTemplatePath
                 )
             );
-            $_sContent          = apply_filters(
-                'aal_filter_unit_output',
-                $_sContent,
-                $_aArguments,
-                $_sTemplatePath, // [3+]
-                $_aOptions,      // [3+]
-                $_aProducts      // [3+]
-            );
 
-        } catch ( Exception $_oException ) {;
-            $_sContent = $this->oUnitOption->get( 'show_errors' )
+        } catch ( Exception $_oException ) {
+            $_sContent   = $this->oUnitOption->get( 'show_errors' )
                 ? "<div class='warning'><p>" . $_oException->getMessage() . "</p></div>"
                 : '';
         }
+
+        $_sContent          = apply_filters(
+            'aal_filter_unit_output',
+            $_sContent,
+            $_aArguments,
+            $_sTemplatePath, // [3+]
+            $_aOptions,      // [3+]
+            $_aProducts      // [3+]
+        );
 
         // Remove hooks of function-call basis.
         remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
