@@ -122,18 +122,16 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_Base extends AmazonAutoLinks_Plu
         if ( ! $this->___shouldDoAction() ) {
             return;
         }
-
-        $_sNonce = $this->getTransient( 'AAL_Nonce_' . $_GET[ 'nonce' ] );
-        if ( false === $_sNonce ) {
+        $_sNonce = $this->getElement( $_GET, 'nonce' );
+        if ( ! wp_verify_nonce( $_sNonce, 'aal_unit_listing_table' ) ) {
             new AmazonAutoLinks_AdminPageFramework_AdminNotice(
-                __( 'The action could not be processed due to the inactivity.', 'amazon-auto-links' ),
+                __( 'The action could not be processed.', 'amazon-auto-links' ),
                 array(
                     'class' => 'error',
                 )
             );
             return;
         }
-        $this->deleteTransient( 'AAL_Nonce_' . $_GET[ 'nonce' ] );
 
         $this->_doAction( $_GET[ 'post' ] );
 

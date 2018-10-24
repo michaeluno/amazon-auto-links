@@ -22,19 +22,11 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function setUp() {
     
-        if (  $this->_isInThePage() ) {
+        if ( $this->_isInThePage() ) {
 
-            // Action links
-            $_sCustomNonce = uniqid() . '_' . get_current_user_id();
-            AmazonAutoLinks_WPUtility::setTransient(
-                'AAL_Nonce_' . $_sCustomNonce,
-                $_sCustomNonce,
-                60*60*24    // one day
-            );
-
-            new AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit( $this, $_sCustomNonce );
-            new AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache( $this, $_sCustomNonce );
-            new AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning( $this, $_sCustomNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit( $this, $this->_sNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache( $this, $this->_sNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning( $this, $this->_sNonce );
 
             // unit listing table columns
             add_filter(    
@@ -219,11 +211,12 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     public function cell_amazon_auto_links_status( $sCell, $iPostID ) {
 
         $_snStatus = get_post_meta( $iPostID, '_error', true );
+        $_sData    = "data-post-id='{$iPostID}'";
 
         if ( $_snStatus ) {
             $_iModalID = 'response-error-' . $iPostID;
             $_sTitle   = esc_attr( __( 'Unit Error', 'amazon-auto-links' ) );
-            return "<span class='circle red' title='" . $_sTitle . "'></span>"
+            return "<span class='unit-status circle red' title='" . $_sTitle . "' {$_sData}></span>"
                 . "<div id='{$_iModalID}' style='display:none;'>"
                     . "<p>" . $_snStatus . "</p>"
                 . "</div>"
@@ -242,9 +235,9 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 . "</div>";
         }
         if ( null === $_snStatus ) {
-            return "<span class='circle loading' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "'></span>";
+            return "<span class='unit-status circle loading' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "' {$_sData}></span>";
         }
-        return "<span class='circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "'></span>";
+        return "<span class='unit-status circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "' {$_sData}></span>";
 
     }
 

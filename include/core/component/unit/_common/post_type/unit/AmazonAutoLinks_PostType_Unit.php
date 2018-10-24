@@ -17,7 +17,15 @@
  * @filter      apply       aal_filter_admin_menu_name
  */
 class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostContent {
-    
+
+    /**
+     * Used in the Manage Units page for action links and ajax calls.
+     * @var     string
+     * @since   3.7.6
+     */
+    protected $_sNonceKey = 'aal_unit_listing_table';
+    protected $_sNonce    = '';
+
     public function setUp() {
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -69,7 +77,11 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 'submenu_order'         => 40,  // the Setting page is 50
             )
         );
-                
+
+        if (  $this->_isInThePage() ) {
+            $this->_sNonce = wp_create_nonce($this->_sNonceKey );
+        }
+
         parent::setUp();
            
     }
@@ -118,7 +130,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
      * @since       3.3.5
      */
     public function load() {
-        
+
         $this->setAutoSave( false );
         $this->setAuthorTableFilter( false );            
         add_filter( 'months_dropdown_results', '__return_empty_array' );
@@ -129,14 +141,39 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $this->enqueueStyles(
             AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
         );
+
+        // For the post listing table
+        $_sScreenID = get_current_screen()->id;
+        if ( "edit-{$this->oProp->sPostType}" !== $_sScreenID ) {
+            return;
+        }
         add_thickbox();
         wp_enqueue_script( 'jquery' );
         $this->enqueueScripts(
             AmazonAutoLinks_Registry::$sDirPath . '/asset/js/manage-units.js'
         );
+        $this->enqueueScripts(
+            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/manage-units-unit-status-updater.js',
+            array(
+                'handle_id' => 'aalManageUnits',
+                'translation'   => array(
+                    'ajaxURL' => admin_url( 'admin-ajax.php' ),
+                ),
+            )
+        );
+
+        // 3.7.6+ Set nonce
+        add_action( 'admin_footer', array( $this, 'replyToEmbedNonce' ) );
 
     }
-        
+        /**
+         * @since   3.7.6
+         */
+        public function replyToEmbedNonce() {
+            echo "<input type='hidden' id='amazon-auto-links-nonce' value='{$this->_sNonce}' />";
+        }
+
+
     /**
      * @callback        filter      `enter_title_here`
      */

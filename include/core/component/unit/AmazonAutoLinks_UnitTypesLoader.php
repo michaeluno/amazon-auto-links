@@ -39,7 +39,10 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
      * 
      */
     protected function _construct( $sScriptPath ) {
-        
+
+        // Overall Unit Events
+        new AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater;
+
         // Post types
         new AmazonAutoLinks_PostType_Unit( 
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],  // slug

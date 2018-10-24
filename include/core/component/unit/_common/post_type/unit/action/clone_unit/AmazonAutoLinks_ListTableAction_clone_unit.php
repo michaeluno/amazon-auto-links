@@ -71,10 +71,12 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         private function _cloneUnit( $iPostID ) {
 
             $_oSourcePost  = get_post( $iPostID );
+            $_aPostMeta    = $this->getPostMeta( $iPostID );
+            unset( $_aPostMeta[ '_error' ] );    // stores the unit status
             $_iNewPostID   = $this->createPost( 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    // post type slug
                 $this->_getPostColumns( $_oSourcePost ),    // columns
-                $this->getPostMeta( $iPostID ),   // meta 
+                $_aPostMeta,   // meta
                 $this->_getTaxInputArgument( $_oSourcePost )
             );
             if ( $_iNewPostID ) {
@@ -83,7 +85,6 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
                 $_iNewPostID = $this->_updatePostSlug( get_post( $_iNewPostID ) );
                 
             }
-            
             return $_iNewPostID;
             
         }
@@ -104,7 +105,6 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
                     $_oNewPost->post_type, 
                     $_oNewPost->post_parent
                 );
-                
 
                 $_aNewPost = array();
                 $_aNewPost[ 'ID' ]        = $_oNewPost->ID;
