@@ -51,7 +51,7 @@ class AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher extends AmazonAutoLinks
         }
 
         $_sHTML = $mData[ 'body' ];
-        $_sHTML = $this->___getHTMLDminishedWithDOMDocumnet( $_sHTML, $sCharSet );
+        $_sHTML = $this->___getHTMLDiminishedWithDOMDocument( $_sHTML, $sCharSet );
 
         // Remove doubled white spaces.
         $_sHTML = preg_replace( '/\s{2,}/', ' ', $_sHTML );
@@ -67,7 +67,7 @@ class AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher extends AmazonAutoLinks
             }
         }
 
-        private function ___getHTMLDminishedWithDOMDocumnet( $sHTML, $sCharSet ) {
+        private function ___getHTMLDiminishedWithDOMDocument( $sHTML, $sCharSet ) {
             $_oAALDOM = new AmazonAutoLinks_DOM;
             // @see https://stackoverflow.com/a/8218649
             $_sPrefix = '<' . '?' . 'xml encoding=' . '"' . $sCharSet . '" ' . '?' . '>';
@@ -115,7 +115,7 @@ class AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher extends AmazonAutoLinks
      * @return string
      * @deprecated
      */
-    private function ___getHTMLDminishedBySimpleHTMLDOMParser( $_sHTML ) {
+    private function ___getHTMLDiminishedBySimpleHTMLDOMParser( $_sHTML ) {
         if ( ! $this->hasBeenCalled( __METHOD__ ) ) {
             $this->___loadLibraries();
         }
