@@ -156,6 +156,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
      */
     public function style_AmazonAutoLinks_PostType_Unit() {
         $_sNone = 'none';
+        $_sSpinnerURL = admin_url( 'images/loading.gif' );
         return "#post-body-content {
                 margin-bottom: 10px;
             }
@@ -193,17 +194,20 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 height: 1em;
                 width: 1em;              
                 border-radius: 50%;
-                display: inline-block;                
+                display: inline-block;                                
             }
-            .green {
+            .green {            
                 background-color: #339933;
-            }
-            .gray {
-                background-color: #999999;
             }
             .red {
                 background-color: red;
             }
+            .circle.loading {
+                background-image: url({$_sSpinnerURL});
+                background-repeat: no-repeat;            
+                min-height: 16px;
+                min-width: 16px;            
+            }            
             .column-status .circle {
                 margin-top: 0.4em;
             }

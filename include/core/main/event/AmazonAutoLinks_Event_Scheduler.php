@@ -129,8 +129,7 @@ class AmazonAutoLinks_Event_Scheduler {
              
             $_aParams       = func_get_args() + array( null, array() );
             $_sActionName   = array_shift( $_aParams ); // the first element
-            
-            // $_aArguments    = array( $_aParams[ 1 ] );
+
             $_aArguments    = $_aParams; // the rest 
 
             // If already scheduled, skip.

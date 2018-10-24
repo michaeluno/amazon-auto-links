@@ -24,7 +24,7 @@ class AmazonAutoLinks_Event___Action_UnitPrefetchByID extends AmazonAutoLinks_Ev
      * @callback        action        aal_action_unit_prefetch
      */
     protected function _doAction( /* $aArguments */ ) {
-        
+
         $_aParams    = func_get_args() + array( array() );
         $_aArguments = $this->getAsArray( $_aParams[ 0 ] );
         AmazonAutoLinks( $_aArguments, false );

@@ -242,7 +242,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 . "</div>";
         }
         if ( null === $_snStatus ) {
-            return "<span class='circle gray' title='" . __( 'Ready', 'amazon-auto-links' ) . "'></span>";
+            return "<span class='circle loading' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "'></span>";
         }
         return "<span class='circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "'></span>";
 

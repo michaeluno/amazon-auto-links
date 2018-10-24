@@ -279,8 +279,8 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.7.6 =
-- Added the `Ready` unit status to be displayed when the unit has not been loaded yet.
+= 3.7.6 - 10/24/2018 =
+- Added the `Ready / Loading` unit status to be displayed when the unit has not been loaded yet.
 - Added unit action links to the bulk action drop down list in the unit listing page.
 - Added the ability to reduce each HTTP request cache size.
 - Fixed a bug with the `Renew Cache` action link of Category units.
