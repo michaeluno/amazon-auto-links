@@ -5,6 +5,7 @@
 # Editor Files
 .idea
 _memos
+_note
 
 # backup files.
 *.old
