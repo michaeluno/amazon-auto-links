@@ -1,0 +1,819 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse
+    xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+    <OperationRequest>
+        <HTTPHeaders>
+            <Header Name="UserAgent" Value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"></Header>
+        </HTTPHeaders>
+        <RequestId>e16d578f-3351-47b8-8fe6-e959596ae624</RequestId>
+        <Arguments>
+            <Argument Name="AWSAccessKeyId" Value="AKIAIUOXXAXPYUKNVPVA"></Argument>
+            <Argument Name="AssociateTag" Value="miuno-20"></Argument>
+            <Argument Name="IdType" Value="ASIN"></Argument>
+            <Argument Name="ItemId" Value="B000W7JWYG,B000W7G78A,B000W7I7EW"></Argument>
+            <Argument Name="Operation" Value="ItemLookup"></Argument>
+            <Argument Name="ResponseGroup" Value="Large,Similarities"></Argument>
+            <Argument Name="Service" Value="AWSECommerceService"></Argument>
+            <Argument Name="Timestamp" Value="2018-10-25T14:10:15.000Z"></Argument>
+            <Argument Name="Signature" Value="BOf0T5lqN+zSZdjmD4HogInCvcREDpHVVJRuxJ2mOQY="></Argument>
+        </Arguments>
+        <RequestProcessingTime>0.2189529720000000</RequestProcessingTime>
+    </OperationRequest>
+    <Items>
+        <Request>
+            <IsValid>True</IsValid>
+            <ItemLookupRequest>
+                <IdType>ASIN</IdType>
+                <ItemId>B000W7JWYG</ItemId>
+                <ItemId>B000W7G78A</ItemId>
+                <ItemId>B000W7I7EW</ItemId>
+                <ResponseGroup>Large</ResponseGroup>
+                <ResponseGroup>Similarities</ResponseGroup>
+                <VariationPage>All</VariationPage>
+            </ItemLookupRequest>
+        </Request>
+        <Item>
+            <ASIN>B000W7JWYG</ASIN>
+            <DetailPageURL>https://www.amazon.com/Settlers-Catan-Player-Extension/dp/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B000W7JWYG</DetailPageURL>
+            <ItemLinks>
+                <ItemLink>
+                    <Description>Technical Details</Description>
+                    <URL>https://www.amazon.com/Settlers-Catan-Player-Extension/dp/tech-data/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Baby Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/baby/add-item.html?asin.0=B000W7JWYG&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wedding Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/wedding/add-item.html?asin.0=B000W7JWYG&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wishlist</Description>
+                    <URL>https://www.amazon.com/gp/registry/wishlist/add-item.html?asin.0=B000W7JWYG&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Tell A Friend</Description>
+                    <URL>https://www.amazon.com/gp/pdp/taf/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Customer Reviews</Description>
+                    <URL>https://www.amazon.com/review/product/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Offers</Description>
+                    <URL>https://www.amazon.com/gp/offer-listing/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</URL>
+                </ItemLink>
+            </ItemLinks>
+            <SalesRank>143310</SalesRank>
+            <ItemAttributes>
+                <Binding>Toy</Binding>
+                <Brand>Mayfair Games</Brand>
+                <CatalogNumberList>
+                    <CatalogNumberListElement>4102483</CatalogNumberListElement>
+                    <CatalogNumberListElement>MFG3062</CatalogNumberListElement>
+                </CatalogNumberList>
+                <Color>Multi</Color>
+                <EAN>0885878192961</EAN>
+                <EANList>
+                    <EANListElement>0885878192961</EANListElement>
+                    <EANListElement>0793631570195</EANListElement>
+                    <EANListElement>0835769019686</EANListElement>
+                    <EANListElement>0298770306204</EANListElement>
+                    <EANListElement>0989159890017</EANListElement>
+                    <EANListElement>0029877030620</EANListElement>
+                    <EANListElement>0787793122033</EANListElement>
+                    <EANListElement>0885220600229</EANListElement>
+                    <EANListElement>0885157847360</EANListElement>
+                    <EANListElement>0885901447006</EANListElement>
+                    <EANListElement>0885456781686</EANListElement>
+                </EANList>
+                <Feature>This extension requires the Settlers of Catan game</Feature>
+                <Feature>Adds depth and complexity</Feature>
+                <Feature>Allows for 2 more players to play</Feature>
+                <Feature>Tons of replay value</Feature>
+                <Feature>Compatible with all other expansions as long as the base game is used</Feature>
+                <Genre>strategy</Genre>
+                <IsAdultProduct>0</IsAdultProduct>
+                <IsAutographed>0</IsAutographed>
+                <IsMemorabilia>0</IsMemorabilia>
+                <ItemDimensions>
+                    <Height Units="hundredths-inches">625</Height>
+                    <Length Units="hundredths-inches">175</Length>
+                    <Weight Units="Hundredths Pounds">87</Weight>
+                    <Width Units="hundredths-inches">800</Width>
+                </ItemDimensions>
+                <ItemPartNumber>4102483</ItemPartNumber>
+                <Label>Mayfair Games</Label>
+                <Languages>
+                    <Language>
+                        <Name>English</Name>
+                        <Type>Unknown</Type>
+                    </Language>
+                </Languages>
+                <LegalDisclaimer>WARNING: This product contains small parts and may not be suitable for use by children ages 4 and younger.</LegalDisclaimer>
+                <ListPrice>
+                    <Amount>2000</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$20.00</FormattedPrice>
+                </ListPrice>
+                <Manufacturer>Mayfair Games</Manufacturer>
+                <ManufacturerMaximumAge Units="months">168</ManufacturerMaximumAge>
+                <ManufacturerMinimumAge Units="months">120</ManufacturerMinimumAge>
+                <Model>MFG3062</Model>
+                <MPN>0029877030620</MPN>
+                <PackageDimensions>
+                    <Height Units="hundredths-inches">181</Height>
+                    <Length Units="hundredths-inches">858</Length>
+                    <Weight Units="Hundredths Pounds">110</Weight>
+                    <Width Units="hundredths-inches">646</Width>
+                </PackageDimensions>
+                <PackageQuantity>1</PackageQuantity>
+                <PartNumber>0029877030620</PartNumber>
+                <ProductGroup>Toy</ProductGroup>
+                <ProductTypeName>TOYS_AND_GAMES</ProductTypeName>
+                <Publisher>Mayfair Games</Publisher>
+                <ReleaseDate>2007-11-08</ReleaseDate>
+                <Size>Standard</Size>
+                <Studio>Mayfair Games</Studio>
+                <Title>The Settlers of Catan 5 & 6 Player Extension</Title>
+                <UPC>029877030620</UPC>
+                <UPCList>
+                    <UPCListElement>029877030620</UPCListElement>
+                    <UPCListElement>885456781686</UPCListElement>
+                    <UPCListElement>989159890017</UPCListElement>
+                    <UPCListElement>793631570195</UPCListElement>
+                    <UPCListElement>885157847360</UPCListElement>
+                    <UPCListElement>885901447006</UPCListElement>
+                    <UPCListElement>885878192961</UPCListElement>
+                    <UPCListElement>298770306204</UPCListElement>
+                    <UPCListElement>885220600229</UPCListElement>
+                    <UPCListElement>835769019686</UPCListElement>
+                    <UPCListElement>787793122033</UPCListElement>
+                </UPCList>
+                <Warranty>No Warranty</Warranty>
+            </ItemAttributes>
+            <OfferSummary>
+                <LowestNewPrice>
+                    <Amount>6995</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$69.95</FormattedPrice>
+                </LowestNewPrice>
+                <TotalNew>3</TotalNew>
+                <TotalUsed>0</TotalUsed>
+                <TotalCollectible>0</TotalCollectible>
+                <TotalRefurbished>0</TotalRefurbished>
+            </OfferSummary>
+            <Offers>
+                <TotalOffers>1</TotalOffers>
+                <TotalOfferPages>1</TotalOfferPages>
+                <MoreOffersUrl>https://www.amazon.com/gp/offer-listing/B000W7JWYG?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7JWYG</MoreOffersUrl>
+                <Offer>
+                    <OfferAttributes>
+                        <Condition>New</Condition>
+                    </OfferAttributes>
+                    <OfferListing>
+                        <OfferListingId>CDrexzjHoYVQUXJFbk67RSNjWjXyS%2FgDz7Jrop87ERjVzJnlvoiZ5F7Mn3gpVGnuGMg0K%2B1kOkxNYQOaLUF4%2B57u7zG3BZuNONgePnD5jYjjuXlp%2BRU8Uc5m3NdT54ZwVCoR%2BBKaDosMKfSOvKtQ1Q%3D%3D</OfferListingId>
+                        <Price>
+                            <Amount>7190</Amount>
+                            <CurrencyCode>USD</CurrencyCode>
+                            <FormattedPrice>$71.90</FormattedPrice>
+                        </Price>
+                        <Availability>Usually ships in 24 hours</Availability>
+                        <AvailabilityAttributes>
+                            <AvailabilityType>now</AvailabilityType>
+                            <MinimumHours>0</MinimumHours>
+                            <MaximumHours>0</MaximumHours>
+                        </AvailabilityAttributes>
+                        <IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping>
+                        <IsEligibleForPrime>1</IsEligibleForPrime>
+                    </OfferListing>
+                </Offer>
+            </Offers>
+            <CustomerReviews>
+                <IFrameURL>https://www.amazon.com/reviews/iframe?akid=AKIAIUOXXAXPYUKNVPVA&alinkCode=xm2&asin=B000W7JWYG&atag=miuno-20&exp=2018-10-26T14%3A10%3A09Z&v=2&sig=YxL6ZK4a3HzWe%252Fahh3vK7AIU3qI0Ij6R7yW1mMDWYo8%253D</IFrameURL>
+                <HasReviews>true</HasReviews>
+            </CustomerReviews>
+            <EditorialReviews>
+                <EditorialReview>
+                    <Source>Product Description</Source>
+                    <Content>Race against other settlers to tame the wild, unsettled galaxy in Race For The Galaxy. This exciting card game has you constantly reworking your strategy as you fight to develop and settle different planets to earn coveted victory points. Have the most points by the end to prove who the true galactic settler really is. Players start each round by choosing which of the seven roles to play. These roles decide the phases for that particular round. Everyone plays at once to complete the phases, such as developing or settling. You can play any cards in your hand for any roles chosen for that round. Try to play your own role for extra points. With a little strategy and luck, the galaxy could be yours! Highlights: Great science fiction card game for up to 4 players Build the most prosperous and powerful space empire! Contents: 5 Start world cards 109 Game cards 4 Sets of 7 player action cards 8 Cards for experienced two player game 4 Summary sheets 28 Victory point chips.</Content>
+                    <IsLinkSuppressed>0</IsLinkSuppressed>
+                </EditorialReview>
+            </EditorialReviews>
+            <SimilarProducts>
+                <SimilarProduct>
+                    <ASIN>B00U26V4VQ</ASIN>
+                    <Title>Catan</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V9F2</ASIN>
+                    <Title>Catan: Cities and Knights Expansion</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V4S4</ASIN>
+                    <Title>Catan: Seafarers Expansion</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JX9U</ASIN>
+                    <Title>Catan: Seafarers 5&6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V6WS</ASIN>
+                    <Title>Catan: Explorers and Pirates Expansion</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JXIQ</ASIN>
+                    <Title>Catan: Cities & Knights 5-6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V9HU</ASIN>
+                    <Title>Catan: Seafarers 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V4Q6</ASIN>
+                    <Title>Catan: Cities and Knights 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V4KC</ASIN>
+                    <Title>Catan: Traders and Barbarians 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>0975277324</ASIN>
+                    <Title>Days of Wonder Ticket To Ride</Title>
+                </SimilarProduct>
+            </SimilarProducts>
+            <BrowseNodes>
+                <BrowseNode>
+                    <BrowseNodeId>166225011</BrowseNodeId>
+                    <Name>Board Games</Name>
+                    <Ancestors>
+                        <BrowseNode>
+                            <BrowseNodeId>166220011</BrowseNodeId>
+                            <Name>Games</Name>
+                            <Ancestors>
+                                <BrowseNode>
+                                    <BrowseNodeId>165795011</BrowseNodeId>
+                                    <Name>Categories</Name>
+                                    <IsCategoryRoot>1</IsCategoryRoot>
+                                    <Ancestors>
+                                        <BrowseNode>
+                                            <BrowseNodeId>165793011</BrowseNodeId>
+                                            <Name>Toys & Games</Name>
+                                        </BrowseNode>
+                                    </Ancestors>
+                                </BrowseNode>
+                            </Ancestors>
+                        </BrowseNode>
+                    </Ancestors>
+                </BrowseNode>
+            </BrowseNodes>
+        </Item>
+        <Item>
+            <ASIN>B000W7G78A</ASIN>
+            <DetailPageURL>https://www.amazon.com/Catan-Seafarers-Game-Expansion-4th/dp/B000W7G78A?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B000W7G78A</DetailPageURL>
+            <ItemLinks>
+                <ItemLink>
+                    <Description>Technical Details</Description>
+                    <URL>https://www.amazon.com/Catan-Seafarers-Game-Expansion-4th/dp/tech-data/B000W7G78A?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Baby Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/baby/add-item.html?asin.0=B000W7G78A&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wedding Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/wedding/add-item.html?asin.0=B000W7G78A&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wishlist</Description>
+                    <URL>https://www.amazon.com/gp/registry/wishlist/add-item.html?asin.0=B000W7G78A&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Tell A Friend</Description>
+                    <URL>https://www.amazon.com/gp/pdp/taf/B000W7G78A?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Customer Reviews</Description>
+                    <URL>https://www.amazon.com/review/product/B000W7G78A?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Offers</Description>
+                    <URL>https://www.amazon.com/gp/offer-listing/B000W7G78A?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7G78A</URL>
+                </ItemLink>
+            </ItemLinks>
+            <SalesRank>201351</SalesRank>
+            <SmallImage>
+                <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL75_.jpg</URL>
+                <Height Units="pixels">61</Height>
+                <Width Units="pixels">75</Width>
+            </SmallImage>
+            <MediumImage>
+                <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL160_.jpg</URL>
+                <Height Units="pixels">129</Height>
+                <Width Units="pixels">160</Width>
+            </MediumImage>
+            <LargeImage>
+                <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL.jpg</URL>
+                <Height Units="pixels">404</Height>
+                <Width Units="pixels">500</Width>
+            </LargeImage>
+            <ImageSets>
+                <ImageSet Category="variant">
+                    <SwatchImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L._SL30_.jpg</URL>
+                        <Height Units="pixels">20</Height>
+                        <Width Units="pixels">30</Width>
+                    </SwatchImage>
+                    <SmallImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L._SL75_.jpg</URL>
+                        <Height Units="pixels">50</Height>
+                        <Width Units="pixels">75</Width>
+                    </SmallImage>
+                    <ThumbnailImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L._SL75_.jpg</URL>
+                        <Height Units="pixels">50</Height>
+                        <Width Units="pixels">75</Width>
+                    </ThumbnailImage>
+                    <TinyImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L._SL110_.jpg</URL>
+                        <Height Units="pixels">73</Height>
+                        <Width Units="pixels">110</Width>
+                    </TinyImage>
+                    <MediumImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L._SL160_.jpg</URL>
+                        <Height Units="pixels">107</Height>
+                        <Width Units="pixels">160</Width>
+                    </MediumImage>
+                    <LargeImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/61l9hq9QR6L.jpg</URL>
+                        <Height Units="pixels">333</Height>
+                        <Width Units="pixels">500</Width>
+                    </LargeImage>
+                </ImageSet>
+                <ImageSet Category="variant">
+                    <SwatchImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL._SL30_.jpg</URL>
+                        <Height Units="pixels">21</Height>
+                        <Width Units="pixels">30</Width>
+                    </SwatchImage>
+                    <SmallImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL._SL75_.jpg</URL>
+                        <Height Units="pixels">54</Height>
+                        <Width Units="pixels">75</Width>
+                    </SmallImage>
+                    <ThumbnailImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL._SL75_.jpg</URL>
+                        <Height Units="pixels">54</Height>
+                        <Width Units="pixels">75</Width>
+                    </ThumbnailImage>
+                    <TinyImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL._SL110_.jpg</URL>
+                        <Height Units="pixels">79</Height>
+                        <Width Units="pixels">110</Width>
+                    </TinyImage>
+                    <MediumImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL._SL160_.jpg</URL>
+                        <Height Units="pixels">114</Height>
+                        <Width Units="pixels">160</Width>
+                    </MediumImage>
+                    <LargeImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51kbf1hYDLL.jpg</URL>
+                        <Height Units="pixels">357</Height>
+                        <Width Units="pixels">500</Width>
+                    </LargeImage>
+                </ImageSet>
+                <ImageSet Category="primary">
+                    <SwatchImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL30_.jpg</URL>
+                        <Height Units="pixels">24</Height>
+                        <Width Units="pixels">30</Width>
+                    </SwatchImage>
+                    <SmallImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL75_.jpg</URL>
+                        <Height Units="pixels">61</Height>
+                        <Width Units="pixels">75</Width>
+                    </SmallImage>
+                    <ThumbnailImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL75_.jpg</URL>
+                        <Height Units="pixels">61</Height>
+                        <Width Units="pixels">75</Width>
+                    </ThumbnailImage>
+                    <TinyImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL110_.jpg</URL>
+                        <Height Units="pixels">89</Height>
+                        <Width Units="pixels">110</Width>
+                    </TinyImage>
+                    <MediumImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL._SL160_.jpg</URL>
+                        <Height Units="pixels">129</Height>
+                        <Width Units="pixels">160</Width>
+                    </MediumImage>
+                    <LargeImage>
+                        <URL>https://images-na.ssl-images-amazon.com/images/I/51y4o46PPiL.jpg</URL>
+                        <Height Units="pixels">404</Height>
+                        <Width Units="pixels">500</Width>
+                    </LargeImage>
+                </ImageSet>
+            </ImageSets>
+            <ItemAttributes>
+                <Binding>Toy</Binding>
+                <Brand>Mayfair Games</Brand>
+                <CatalogNumberList>
+                    <CatalogNumberListElement>MAYF 0486</CatalogNumberListElement>
+                    <CatalogNumberListElement>4102481</CatalogNumberListElement>
+                    <CatalogNumberListElement>MFG3063</CatalogNumberListElement>
+                </CatalogNumberList>
+                <Color>Multi</Color>
+                <EAN>0029877030637</EAN>
+                <EANList>
+                    <EANListElement>0029877030637</EANListElement>
+                    <EANListElement>0885136953846</EANListElement>
+                    <EANListElement>0885195961707</EANListElement>
+                    <EANListElement>0885846731406</EANListElement>
+                </EANList>
+                <Feature>This expansion requires the Settlers of Catan game</Feature>
+                <Feature>Adds depth and complexity</Feature>
+                <Feature>Compatible with all other expansions as long as the base game is used</Feature>
+                <Feature>New Packaging & Tiles!!</Feature>
+                <Genre>strategy</Genre>
+                <IsAdultProduct>0</IsAdultProduct>
+                <ItemDimensions>
+                    <Height Units="hundredths-inches">938</Height>
+                    <Length Units="hundredths-inches">312</Length>
+                    <Weight Units="Hundredths Pounds">300</Weight>
+                    <Width Units="hundredths-inches">1162</Width>
+                </ItemDimensions>
+                <ItemPartNumber>4102481</ItemPartNumber>
+                <Label>Mayfair Games</Label>
+                <Languages>
+                    <Language>
+                        <Name>English</Name>
+                        <Type>Manual</Type>
+                    </Language>
+                    <Language>
+                        <Name>English</Name>
+                        <Type>Unknown</Type>
+                    </Language>
+                </Languages>
+                <LegalDisclaimer>Brand new in perfect, unused condition.</LegalDisclaimer>
+                <ListPrice>
+                    <Amount>4200</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$42.00</FormattedPrice>
+                </ListPrice>
+                <Manufacturer>Mayfair Games</Manufacturer>
+                <ManufacturerMaximumAge Units="months">168</ManufacturerMaximumAge>
+                <ManufacturerMinimumAge Units="months">120</ManufacturerMinimumAge>
+                <Model>MFG3063</Model>
+                <MPN>MFG3063</MPN>
+                <PackageDimensions>
+                    <Height Units="hundredths-inches">307</Height>
+                    <Length Units="hundredths-inches">1165</Length>
+                    <Weight Units="Hundredths Pounds">216</Weight>
+                    <Width Units="hundredths-inches">937</Width>
+                </PackageDimensions>
+                <PackageQuantity>1</PackageQuantity>
+                <PartNumber>MFG3063</PartNumber>
+                <ProductGroup>Toy</ProductGroup>
+                <ProductTypeName>TOYS_AND_GAMES</ProductTypeName>
+                <Publisher>Mayfair Games</Publisher>
+                <ReleaseDate>2007-11-08</ReleaseDate>
+                <Size>Standard</Size>
+                <Studio>Mayfair Games</Studio>
+                <Title>Catan: Seafarers Game Expansion 4th Edition</Title>
+                <UPC>885136953846</UPC>
+                <UPCList>
+                    <UPCListElement>885136953846</UPCListElement>
+                    <UPCListElement>885195961707</UPCListElement>
+                    <UPCListElement>885846731406</UPCListElement>
+                    <UPCListElement>029877030637</UPCListElement>
+                </UPCList>
+                <Warranty>No Warranty</Warranty>
+            </ItemAttributes>
+            <OfferSummary>
+                <LowestNewPrice>
+                    <Amount>12799</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$127.99</FormattedPrice>
+                </LowestNewPrice>
+                <LowestCollectiblePrice>
+                    <Amount>10500</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$105.00</FormattedPrice>
+                </LowestCollectiblePrice>
+                <TotalNew>3</TotalNew>
+                <TotalUsed>0</TotalUsed>
+                <TotalCollectible>1</TotalCollectible>
+                <TotalRefurbished>0</TotalRefurbished>
+            </OfferSummary>
+            <Offers>
+                <TotalOffers>0</TotalOffers>
+                <TotalOfferPages>0</TotalOfferPages>
+                <MoreOffersUrl>0</MoreOffersUrl>
+            </Offers>
+            <CustomerReviews>
+                <IFrameURL>https://www.amazon.com/reviews/iframe?akid=AKIAIUOXXAXPYUKNVPVA&alinkCode=xm2&asin=B000W7G78A&atag=miuno-20&exp=2018-10-26T14%3A10%3A09Z&v=2&sig=Ad3GT2f6X7ETTAhbFpHEShMKxKStJDATbUIQmYo5Ero%253D</IFrameURL>
+                <HasReviews>true</HasReviews>
+            </CustomerReviews>
+            <EditorialReviews>
+                <EditorialReview>
+                    <Source>Product Description</Source>
+                    <Content>For children ages 5 through 10. 40 Page science book and kit. 18 Activities. Major Awards. All materials included except one D-cell battery. A children's classic. This should be your child's FIRST Electricity book. Beautiful step-by-step, highly visual instructions and child appropriate materials designed for young children to work independently. Add a touch of whimsy, include all materials, and you've got: Science Wiz Electricity.</Content>
+                    <IsLinkSuppressed>0</IsLinkSuppressed>
+                </EditorialReview>
+            </EditorialReviews>
+            <SimilarProducts>
+                <SimilarProduct>
+                    <ASIN>B000W7JX9U</ASIN>
+                    <Title>Catan: Seafarers 5&6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7I7EW</ASIN>
+                    <Title>Catan: Cities & Knights Game Expansion</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JWYG</ASIN>
+                    <Title>The Settlers of Catan 5 & 6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JXIQ</ASIN>
+                    <Title>Catan: Cities & Knights 5-6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00187MWH8</ASIN>
+                    <Title>Catan: Traders & Barbarians Expansion 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B001FA0DNS</ASIN>
+                    <Title>Catan: Traders & Barbarians 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000HN8KJ8</ASIN>
+                    <Title>Mayfair Games Replacement Card Set Settlers of Catan</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00B670TCU</ASIN>
+                    <Title>Catan: Explorers & Pirates Expansion 4th Edition</Title>
+                </SimilarProduct>
+            </SimilarProducts>
+            <BrowseNodes>
+                <BrowseNode>
+                    <BrowseNodeId>166225011</BrowseNodeId>
+                    <Name>Board Games</Name>
+                    <Ancestors>
+                        <BrowseNode>
+                            <BrowseNodeId>166220011</BrowseNodeId>
+                            <Name>Games</Name>
+                            <Ancestors>
+                                <BrowseNode>
+                                    <BrowseNodeId>165795011</BrowseNodeId>
+                                    <Name>Categories</Name>
+                                    <IsCategoryRoot>1</IsCategoryRoot>
+                                    <Ancestors>
+                                        <BrowseNode>
+                                            <BrowseNodeId>165793011</BrowseNodeId>
+                                            <Name>Toys & Games</Name>
+                                        </BrowseNode>
+                                    </Ancestors>
+                                </BrowseNode>
+                            </Ancestors>
+                        </BrowseNode>
+                    </Ancestors>
+                </BrowseNode>
+            </BrowseNodes>
+        </Item>
+        <Item>
+            <ASIN>B000W7I7EW</ASIN>
+            <DetailPageURL>https://www.amazon.com/Catan-Cities-Knights-Game-Expansion/dp/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B000W7I7EW</DetailPageURL>
+            <ItemLinks>
+                <ItemLink>
+                    <Description>Technical Details</Description>
+                    <URL>https://www.amazon.com/Catan-Cities-Knights-Game-Expansion/dp/tech-data/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Baby Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/baby/add-item.html?asin.0=B000W7I7EW&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wedding Registry</Description>
+                    <URL>https://www.amazon.com/gp/registry/wedding/add-item.html?asin.0=B000W7I7EW&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Add To Wishlist</Description>
+                    <URL>https://www.amazon.com/gp/registry/wishlist/add-item.html?asin.0=B000W7I7EW&SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>Tell A Friend</Description>
+                    <URL>https://www.amazon.com/gp/pdp/taf/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Customer Reviews</Description>
+                    <URL>https://www.amazon.com/review/product/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+                <ItemLink>
+                    <Description>All Offers</Description>
+                    <URL>https://www.amazon.com/gp/offer-listing/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</URL>
+                </ItemLink>
+            </ItemLinks>
+            <SalesRank>217470</SalesRank>
+            <ItemAttributes>
+                <Binding>Toy</Binding>
+                <Brand>Mayfair Games</Brand>
+                <CatalogNumberList>
+                    <CatalogNumberListElement>MFG3065</CatalogNumberListElement>
+                    <CatalogNumberListElement>4102482</CatalogNumberListElement>
+                    <CatalogNumberListElement>MAYF 0494</CatalogNumberListElement>
+                </CatalogNumberList>
+                <Color>Multi</Color>
+                <Department>toys</Department>
+                <EAN>0032484831085</EAN>
+                <EANList>
+                    <EANListElement>0032484831085</EANListElement>
+                    <EANListElement>0835769019808</EANListElement>
+                    <EANListElement>0029877030651</EANListElement>
+                </EANList>
+                <Feature>High Quality</Feature>
+                <Feature>Proprietary design</Feature>
+                <Feature>Exceptional performance</Feature>
+                <Feature>This expansion requires the Settlers of Catan game</Feature>
+                <Feature>Adds depth and complexity</Feature>
+                <Feature>Tons of replay value</Feature>
+                <Feature>Compatible with all other expansions as long as the base game is used</Feature>
+                <Feature>Full Color Rules Book</Feature>
+                <Genre>strategy</Genre>
+                <IsAdultProduct>0</IsAdultProduct>
+                <ItemDimensions>
+                    <Height Units="hundredths-inches">938</Height>
+                    <Length Units="hundredths-inches">312</Length>
+                    <Weight Units="Hundredths Pounds">150</Weight>
+                    <Width Units="hundredths-inches">1162</Width>
+                </ItemDimensions>
+                <ItemPartNumber>0029877030651</ItemPartNumber>
+                <Label>Mayfair Games</Label>
+                <Languages>
+                    <Language>
+                        <Name>English</Name>
+                        <Type>Manual</Type>
+                    </Language>
+                    <Language>
+                        <Name>English</Name>
+                        <Type>Unknown</Type>
+                    </Language>
+                </Languages>
+                <ListPrice>
+                    <Amount>4200</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$42.00</FormattedPrice>
+                </ListPrice>
+                <Manufacturer>Mayfair Games</Manufacturer>
+                <ManufacturerMaximumAge Units="months">168</ManufacturerMaximumAge>
+                <ManufacturerMinimumAge Units="months">120</ManufacturerMinimumAge>
+                <Model>MFG3065</Model>
+                <MPN>0029877030651</MPN>
+                <PackageDimensions>
+                    <Height Units="hundredths-inches">307</Height>
+                    <Length Units="hundredths-inches">1173</Length>
+                    <Weight Units="Hundredths Pounds">150</Weight>
+                    <Width Units="hundredths-inches">945</Width>
+                </PackageDimensions>
+                <PackageQuantity>1</PackageQuantity>
+                <PartNumber>0029877030651</PartNumber>
+                <ProductGroup>Toy</ProductGroup>
+                <ProductTypeName>TOYS_AND_GAMES</ProductTypeName>
+                <Publisher>Mayfair Games</Publisher>
+                <ReleaseDate>2007-11-08</ReleaseDate>
+                <Size>Standard</Size>
+                <Studio>Mayfair Games</Studio>
+                <Title>Catan: Cities & Knights Game Expansion</Title>
+                <UPC>835769019808</UPC>
+                <UPCList>
+                    <UPCListElement>835769019808</UPCListElement>
+                    <UPCListElement>029877030651</UPCListElement>
+                    <UPCListElement>032484831085</UPCListElement>
+                </UPCList>
+                <Warranty>No Warranty</Warranty>
+            </ItemAttributes>
+            <OfferSummary>
+                <LowestNewPrice>
+                    <Amount>7325</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$73.25</FormattedPrice>
+                </LowestNewPrice>
+                <LowestCollectiblePrice>
+                    <Amount>6500</Amount>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <FormattedPrice>$65.00</FormattedPrice>
+                </LowestCollectiblePrice>
+                <TotalNew>3</TotalNew>
+                <TotalUsed>0</TotalUsed>
+                <TotalCollectible>1</TotalCollectible>
+                <TotalRefurbished>0</TotalRefurbished>
+            </OfferSummary>
+            <Offers>
+                <TotalOffers>1</TotalOffers>
+                <TotalOfferPages>1</TotalOfferPages>
+                <MoreOffersUrl>https://www.amazon.com/gp/offer-listing/B000W7I7EW?SubscriptionId=AKIAIUOXXAXPYUKNVPVA&tag=miuno-20&linkCode=xm2&camp=2025&creative=386001&creativeASIN=B000W7I7EW</MoreOffersUrl>
+                <Offer>
+                    <OfferAttributes>
+                        <Condition>New</Condition>
+                    </OfferAttributes>
+                    <OfferListing>
+                        <OfferListingId>CDrexzjHoYVQUXJFbk67RU7uTXUaTS2FgZFheWn6JRr4hEMbNT7GbDdEjdal%2FLiOWVHzcqnPCKkt13eHv7AxeNfcT9NfBuX%2Bv62C6ZnyBcyyuQ2mmH0fNSSBMmK%2F6i%2FJuVGFB15FWySMdkUAKFCydw%3D%3D</OfferListingId>
+                        <Price>
+                            <Amount>8992</Amount>
+                            <CurrencyCode>USD</CurrencyCode>
+                            <FormattedPrice>$89.92</FormattedPrice>
+                        </Price>
+                        <Availability>Usually ships in 24 hours</Availability>
+                        <AvailabilityAttributes>
+                            <AvailabilityType>now</AvailabilityType>
+                            <MinimumHours>0</MinimumHours>
+                            <MaximumHours>0</MaximumHours>
+                        </AvailabilityAttributes>
+                        <IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping>
+                        <IsEligibleForPrime>1</IsEligibleForPrime>
+                    </OfferListing>
+                </Offer>
+            </Offers>
+            <CustomerReviews>
+                <IFrameURL>https://www.amazon.com/reviews/iframe?akid=AKIAIUOXXAXPYUKNVPVA&alinkCode=xm2&asin=B000W7I7EW&atag=miuno-20&exp=2018-10-26T14%3A10%3A09Z&v=2&sig=25Wadh5FL1judyNk8%252BKwW24G43Si%252BrGSpFPkIt7ES64%253D</IFrameURL>
+                <HasReviews>true</HasReviews>
+            </CustomerReviews>
+            <EditorialReviews>
+                <EditorialReview>
+                    <Source>Product Description</Source>
+                    <Content>Dominion: Alchemy Is An Expansion Set To The Popular Dominion Deck-Building Card Game. With The Alchemy Expansion Set Totaling 150 New Cards, Players Are Able To Apply Additional Game Moves And Themes To The Basic Cards, Allowing For A Unique, Fun And Challenging Game Play Experience Each And Every Time You Play. Every Type Of Kingdom Card Plays Differently, Which Allows For Virtually Limitless Game Combination Possibilities. Dominion: Alchemy Can Also Be Combined With Any Of The Other Popular Sets To Create A Truly Unlimited Game Of Province-Grabbing And a Kingdom-Building. Note: A This Is An Expansion And Requires The Dominion Base Game Or The Standalone Dominion Intrigue To Play Highlights: This Is The 3Rd Addition To Dominion Add Some Alchemists And Potions Into Your Dominion Experience! Contents: 150 Cards Box Liner Inlay Rule Booklet Expand Your Dominion Games With These Expansions, A Click Here!.</Content>
+                    <IsLinkSuppressed>0</IsLinkSuppressed>
+                </EditorialReview>
+            </EditorialReviews>
+            <SimilarProducts>
+                <SimilarProduct>
+                    <ASIN>B000W7G78A</ASIN>
+                    <Title>Catan: Seafarers Game Expansion 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JXIQ</ASIN>
+                    <Title>Catan: Cities & Knights 5-6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V4VQ</ASIN>
+                    <Title>Catan</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00U26V4S4</ASIN>
+                    <Title>Catan: Seafarers Expansion</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00187MWH8</ASIN>
+                    <Title>Catan: Traders & Barbarians Expansion 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JWYG</ASIN>
+                    <Title>The Settlers of Catan 5 & 6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B000W7JX9U</ASIN>
+                    <Title>Catan: Seafarers 5&6 Player Extension 4th Edition</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B001FA0DNS</ASIN>
+                    <Title>Catan: Traders & Barbarians 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00DUPVH68</ASIN>
+                    <Title>Catan: Explorers and Pirates 5-6 Player Extension</Title>
+                </SimilarProduct>
+                <SimilarProduct>
+                    <ASIN>B00B670TCU</ASIN>
+                    <Title>Catan: Explorers & Pirates Expansion 4th Edition</Title>
+                </SimilarProduct>
+            </SimilarProducts>
+            <BrowseNodes>
+                <BrowseNode>
+                    <BrowseNodeId>166225011</BrowseNodeId>
+                    <Name>Board Games</Name>
+                    <Ancestors>
+                        <BrowseNode>
+                            <BrowseNodeId>166220011</BrowseNodeId>
+                            <Name>Games</Name>
+                            <Ancestors>
+                                <BrowseNode>
+                                    <BrowseNodeId>165795011</BrowseNodeId>
+                                    <Name>Categories</Name>
+                                    <IsCategoryRoot>1</IsCategoryRoot>
+                                    <Ancestors>
+                                        <BrowseNode>
+                                            <BrowseNodeId>165793011</BrowseNodeId>
+                                            <Name>Toys & Games</Name>
+                                        </BrowseNode>
+                                    </Ancestors>
+                                </BrowseNode>
+                            </Ancestors>
+                        </BrowseNode>
+                    </Ancestors>
+                </BrowseNode>
+            </BrowseNodes>
+        </Item>
+    </Items>
+</ItemLookupResponse>

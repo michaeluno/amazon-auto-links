@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse
+    xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+    <OperationRequest>
+        <HTTPHeaders>
+            <Header Name="UserAgent" Value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"></Header>
+        </HTTPHeaders>
+        <RequestId>9c7f8542-2876-4710-9df2-456456cc97f2</RequestId>
+        <Arguments>
+            <Argument Name="AWSAccessKeyId" Value="AKIAIUOXXAXPYUKNVPVA"></Argument>
+            <Argument Name="AssociateTag"></Argument>
+            <Argument Name="IdType" Value="ASIN"></Argument>
+            <Argument Name="ItemId" Value="B01HUJEPZO,B000WLIK5Y,B0000C91EK"></Argument>
+            <Argument Name="Operation" Value="ItemLookup"></Argument>
+            <Argument Name="ResponseGroup" Value="Large"></Argument>
+            <Argument Name="Service" Value="AWSECommerceService"></Argument>
+            <Argument Name="Timestamp" Value="2018-10-25T11:33:40.000Z"></Argument>
+            <Argument Name="Signature" Value="XMTsRFcyNVqf8rWDELEaEslrMvIW4bkwN50eowQasmc="></Argument>
+        </Arguments>
+        <RequestProcessingTime>0.0011089160000000</RequestProcessingTime>
+    </OperationRequest>
+    <Items>
+        <Request>
+            <IsValid>False</IsValid>
+            <ItemLookupRequest>
+                <IdType>ASIN</IdType>
+                <ItemId>B01HUJEPZO</ItemId>
+                <ItemId>B000WLIK5Y</ItemId>
+                <ItemId>B0000C91EK</ItemId>
+                <ResponseGroup>Large</ResponseGroup>
+                <VariationPage>All</VariationPage>
+            </ItemLookupRequest>
+            <Errors>
+                <Error>
+                    <Code>AWS.MissingParameters</Code>
+                    <Message>Required parameters are missing.</Message>
+                </Error>
+            </Errors>
+        </Request>
+    </Items>
+</ItemLookupResponse>
