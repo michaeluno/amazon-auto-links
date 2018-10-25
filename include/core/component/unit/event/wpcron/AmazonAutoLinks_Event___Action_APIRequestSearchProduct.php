@@ -14,6 +14,7 @@
  * @package     Amazon Auto Links
  * @since       3
  * @since       3.5.0       Renamed from `AmazonAutoLinks_Event_Action_API_SearchProduct`.
+ * @since       3.7.7       Deprecated but serves as a base class for a new class that handles multiple item look-ups.
  */
 class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoLinks_Event___Action_Base {
 
@@ -54,8 +55,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
         // Extract the product data from the entire API response.
         $_aProductData     = $this->___getProductData(
-            $_sASIN, 
-            $_sLocale, 
+            $_sASIN,
+            $_sLocale,
             $_sAssociateID,
             $_iCacheDuration,
             $_bForceRenew
@@ -78,7 +79,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
             );
         }
         $this->___setProductData(
-            $_aProductData, 
+            $_aProductData,
             $_sASIN,
             $_sLocale,
             $_iCacheDuration,
@@ -87,6 +88,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         );
         
     }
+
         /**
          * @return      void
          */
@@ -124,7 +126,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          */
         private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
-            // Check if a customer review exists.
+            // Check if a customer review exists in the API response.
             $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
             if ( $_bCustomerReviewExists ) {
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
@@ -485,65 +487,78 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isAPIConnected() ) {
                 return array();
-            }            
-            
+            }
             $_sPublicKey  = $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
             $_sPrivateKey = $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
-            
             if ( empty( $_sPublicKey ) || empty( $_sPrivateKey ) ) {
                 return array();
             }
-            
-            // Construct API arguments
-            $_aAPIArguments = array(
-            
-                'Operation'             => 'ItemLookup',
-                
-                // (optional) Used | Collectible | Refurbished, All
-                'Condition'             => 'All',    
-                
-                // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
-                'IdType'                => 'ASIN',    
-                
-                // (optional)
-                'IncludeReviewsSummary' => 'True',
-                
-                // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
-                'ItemId'                => $sASIN,    
-                
-                // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
-                // 'RelationshipType' => null,    // (conditional)    This parameter is required when the RelatedItems response group is used. 
 
-                // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
-                // 'SearchIndex'           => $this->arrArgs['SearchIndex'],    
-                
-                // 'TruncateReviewsAt' => 1000, // (optional)
-                // 'VariationPage' => null, // (optional)
-                
-                // (optional) 
-                'ResponseGroup'         => 'Large', 
-                
-            );
-
-            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
-                $sLocale,   // locale
-                $_sPublicKey, 
+            return $this->_getAPIResponse(
+                $_sPublicKey,
                 $_sPrivateKey,
+                $sASIN,
+                $sLocale,
                 $sAssociateID,
-                array(),    // HTTP arguments
-                $this->___sAPIRequestType  // type
-            );
-            $_aRawData = $_oAmazonAPI->request(
-                $_aAPIArguments,
-                $iCacheDuration,    // @note before v3.5.0, the cache duration was 60 for some reasons.
+                $iCacheDuration,
                 $bForceRenew
             );
-            return $this->getElement(
-                $_aRawData, // subject
-                array( 'Items', 'Item' ), // dimensional keys
-                array() // default
-            );
-            
+
         }
+            /**
+             * @remark  Also accessed by an extended class.
+             * @since   3.7.7
+             * @return  array
+             */
+            protected function _getAPIResponse( $_sPublicKey, $_sPrivateKey, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew, $aResponseElement=array( 'Items', 'Item' ) ) {
+                $_aAPIArguments = array(
+                    'Operation'             => 'ItemLookup',
+
+                    // (optional) Used | Collectible | Refurbished, All
+                    'Condition'             => 'All',
+
+                    // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
+                    'IdType'                => 'ASIN',
+
+                    // (optional)
+                    'IncludeReviewsSummary' => 'True',
+
+                    // (required)  If ItemId is an ASIN, a SearchIndex cannot be specified in the request.
+                    'ItemId'                => $sASIN,
+
+                    // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
+                    // 'RelationshipType' => null,    // (conditional)    This parameter is required when the RelatedItems response group is used.
+
+                    // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
+                    // 'SearchIndex'           => $this->arrArgs['SearchIndex'],
+
+                    // 'TruncateReviewsAt' => 1000, // (optional)
+                    // 'VariationPage' => null, // (optional)
+
+                    // (optional)
+                    'ResponseGroup'         => 'Large',
+
+                );
+
+                $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
+                    $sLocale,   // locale
+                    $_sPublicKey,
+                    $_sPrivateKey,
+                    $sAssociateID,
+                    array(),    // HTTP arguments
+                    $this->___sAPIRequestType  // type
+                );
+                $_aRawData = $_oAmazonAPI->request(
+                    $_aAPIArguments,
+                    $iCacheDuration,    // @note before v3.5.0, the cache duration was 60 for some reasons.
+                    $bForceRenew
+                );
+                return $this->getElementAsArray(
+                    $_aRawData, // subject
+                    $aResponseElement, // dimensional keys
+                    array() // default
+                );
+
+            }
 
 }

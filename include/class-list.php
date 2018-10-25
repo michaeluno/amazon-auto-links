@@ -98,6 +98,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProduct"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProduct.php", 
+    "AmazonAutoLinks_Event___Action_APIRequestSearchProducts"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSimilarProducts"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSimilarProducts.php", 
     "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php", 
     "AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal.php", 
