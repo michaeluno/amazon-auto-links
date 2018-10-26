@@ -20,6 +20,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
 
     protected function _construct() {
         add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
+        new AmazonAutoLinks_Event___Filter_CustomerReviewCache;
     }
         /**
          * Remove request specific query argument in the URL query string to construct a cache name.
@@ -99,10 +100,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @return      array
          */
         private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
-                     
-            $_oScraper = new AmazonAutoLinks_ScraperPSHDP_CustomerReview(
-                $sHTML
-            );        
+
+            $_oScraper = new AmazonAutoLinks_ScraperPSHDP_CustomerReview( $sHTML );
             if ( ! $_oScraper->oSimpleDOM ) {
                 return array();  
             }

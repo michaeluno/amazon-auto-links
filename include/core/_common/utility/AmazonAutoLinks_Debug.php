@@ -57,7 +57,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
         if ( ! self::isDebugModeEnabled() ) {
             return;
         }
-        self::$iLegibleStringCharacterLimit = -1; // no limit
+        self::$iLegibleStringCharacterLimit = PHP_INT_MAX;
         parent::log( $mValue, $sFilePath );
     }
 }

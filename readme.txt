@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.7 =
+- Optimized the process of performing API requests for product information to reduce the number of HTTP requests.
+
 = 3.7.6 - 10/25/2018 =
 - Added the `Ready / Loading` unit status to be displayed when the unit has not been loaded yet.
 - Added unit action links to the bulk action drop down list in the unit listing page.

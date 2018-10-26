@@ -42,7 +42,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
      * Searches the product and saves the data.
      */
     protected function _doAction( /* $aArguments */ ) {
-
+return;
         $_aParams        = func_get_args() + array( null );
 
         $aArguments      = $_aParams[ 0 ] + array( null, null, null, null, null );
@@ -69,7 +69,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         // Retrieve similar products in a separate routine
         // Do this only `%similar%` is present in the Item Format option.
         if ( false !== strpos( $_sItemFormat, '%similar%' ) ) {
-            $this->___scheduleFetchingSimilarProducts(
+            $this->_scheduleFetchingSimilarProducts(
                 $_aProductData,
                 $_sASIN,
                 $_sLocale,
@@ -78,7 +78,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 $_bForceRenew
             );
         }
-        $this->___setProductData(
+        $this->_setProductData(
             $_aProductData,
             $_sASIN,
             $_sLocale,
@@ -91,8 +91,10 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
         /**
          * @return      void
+         * @since       unknown
+         * @since       3.7.7       Changed the scope to `protected` to allow extended class to access it.
          */
-        private function ___scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
+        protected function _scheduleFetchingSimilarProducts( $aAPIResponseProductData, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
             
             $_aSimilarProducts = $this->getElementAsArray(
                 $aAPIResponseProductData,
@@ -123,11 +125,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          * @param       string      $sLocale
          * @param       integer     $iCacheDuration
          * @return      void
+         * @since       unknown
+         * @since       3.7.7       Changed the visibility to `protected` to allow extended classes to access it.
          */
-        private function ___setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
+        protected function _setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
             // Check if a customer review exists in the API response.
             $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
+
             if ( $_bCustomerReviewExists ) {
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
                     $this->getElement(
@@ -553,6 +558,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $iCacheDuration,    // @note before v3.5.0, the cache duration was 60 for some reasons.
                     $bForceRenew
                 );
+                if ( empty( $aResponseElement ) ) {
+                    return $_aRawData;
+                }
                 return $this->getElementAsArray(
                     $_aRawData, // subject
                     $aResponseElement, // dimensional keys

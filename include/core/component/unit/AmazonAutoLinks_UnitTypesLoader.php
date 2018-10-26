@@ -50,7 +50,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             $sScriptPath   // script path
         );            
         new AmazonAutoLinks_PostType_UnitPreview;            
-        
+
         // Unit types
         new AmazonAutoLinks_UnitTypeLoader_category( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_tag( $sScriptPath );  
@@ -74,6 +74,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             new AmazonAutoLinks_Event___Action_UnitPrefetchByID;
             new AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal;
             new AmazonAutoLinks_Event___Action_APIRequestSearchProduct;
+            new AmazonAutoLinks_Event___Action_APIRequestSearchProducts;    // 3.7.7+
             new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;
             new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+

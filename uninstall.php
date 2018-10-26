@@ -37,6 +37,12 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
     return;
 }
 
+// 0. Delete the temporary directory
+$_sTempDirPath = sys_get_temp_dir() . '/' . AmazonAutoLinks_Registry::$sTempDirName;
+if ( file_exists( $_sTempDirPath ) ) {
+    unlink( $_sTempDirPath );
+}
+
 // 1. Delete transients
 $_aPrefixes = array(
     AmazonAutoLinks_Registry::TRANSIENT_PREFIX, // the plugin transients

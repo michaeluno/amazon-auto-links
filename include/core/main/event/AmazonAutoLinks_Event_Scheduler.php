@@ -73,6 +73,10 @@ class AmazonAutoLinks_Event_Scheduler {
      */
     static public function scheduleCustomerReviews( $sURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenew ) {
 
+        if ( empty( $sURL ) ) {
+            return false;
+        }
+
         $_bScheduled = self::_scheduleTask( 
             'aal_action_api_get_customer_review',  // action name
             array( $sURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenew )
@@ -114,10 +118,11 @@ class AmazonAutoLinks_Event_Scheduler {
          * These items need to be grouped by Associate ID + Locale as API requests cannot be done at once if these are different.
          * The user may be setting different Associate IDs between two units shown in one page. The same applies to the locale.
          */
-        if ( ! isset( self::$___aScheduledProductInformation[ $sAssociateID . $sLocale ] ) ) {
-            self::$___aScheduledProductInformation[ $sAssociateID . $sLocale ] = array();
+        $_sAssociateIDLocale = $sAssociateID  . '|' . $sLocale;
+        if ( ! isset( self::$___aScheduledProductInformation[ $_sAssociateIDLocale ] ) ) {
+            self::$___aScheduledProductInformation[ $_sAssociateIDLocale ] = array();
         }
-        self::$___aScheduledProductInformation[ $sAssociateID . '|' . $sLocale ][ $sASIN ] = func_get_args();
+        self::$___aScheduledProductInformation[ $_sAssociateIDLocale ][ $sASIN ] = func_get_args();
 
         if ( ! self::$___bCalledScheduleProductInformation ) {
             add_action(
@@ -128,7 +133,7 @@ class AmazonAutoLinks_Event_Scheduler {
         }
         self::$___bCalledScheduleProductInformation = true;
 
-        // @deprecated  3.7.7 Now they are queried all at once.
+/* @deprecated  3.7.7 Now they are queried all at once.
         $_bScheduled = self::_scheduleTask(
             'aal_action_api_get_product_info',  // action name
             array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat )
@@ -140,17 +145,17 @@ class AmazonAutoLinks_Event_Scheduler {
         // Loads the site in the background. The method takes care of doing it only once in the entire page load.
         AmazonAutoLinks_Shadow::see();
         return;
-        
+        */
     }
         /**
          * Schedules retrievals of product information at once.
          * @since       3.7.7
          * @callback    shutdown        With the priority of `1`.
          */
-        public function _replyToScheduleProductsInformation() {
-return;
+        static public function _replyToScheduleProductsInformation() {
+
             foreach( self::$___aScheduledProductInformation as $_sAssociateIDLocale => $_aFetchingItems ) {
-                $this->___scheduleProductInformationAPIRequest( $_sAssociateIDLocale, $_aFetchingItems );
+                self::___scheduleProductInformationAPIRequest( $_sAssociateIDLocale, $_aFetchingItems );
             }
             AmazonAutoLinks_Shadow::see();  // loads the site in the background
 
@@ -160,14 +165,14 @@ return;
              * @param array $aParameters
              * @since   3.7.7
              */
-            private function ___scheduleProductInformationAPIRequest( $sAssociateIDLocale, array $_aFetchingItems ) {
+            static private function ___scheduleProductInformationAPIRequest( $sAssociateIDLocale, array $aFetchingItems ) {
 
                 // Sort the array in order to prevent unnecessary look-ups due to different orders
                 // as `wp_next_scheduled()` stores and identify actions based on the serialized passed arguments.
-                ksort( $_aFetchingItems );
+                ksort( $aFetchingItems );
 
                 // Divide items by 10 as `ItemLookup` operation accepts up to 10 items at a time.
-                $_aChunks = array_chunk( $_aFetchingItems, 10 );
+                $_aChunks = array_chunk( $aFetchingItems, 10 );
 
                 $_aParts = explode( '|', $sAssociateIDLocale );
                 $_sAssociateID = $_aParts[ 0 ];
@@ -225,11 +230,10 @@ return;
             self::$_aCounters[ $_sActionName ] = isset( self::$_aCounters[ $_sActionName ] )
                 ? self::$_aCounters[ $_sActionName ] + 1
                 : 1;
-            
-            wp_schedule_single_event( 
+            wp_schedule_single_event(
                 time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit run out.
-                $_sActionName, // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
-                $_aArguments // must be enclosed in an array.
+                $_sActionName,  // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
+                $_aArguments    // must be enclosed in an array.
             );            
 
             return true;
