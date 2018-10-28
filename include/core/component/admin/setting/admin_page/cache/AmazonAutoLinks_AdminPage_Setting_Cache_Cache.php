@@ -251,7 +251,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          * @return      void
          */
         private function _clearAllCaches( $oFactory ) {
-            
+
+            $this->___deleteUnitStatusOfAllUnits();
+
             // Clear transients.
             AmazonAutoLinks_WPUtility::cleanTransients( 
                 AmazonAutoLinks_Registry::TRANSIENT_PREFIX
@@ -272,6 +274,30 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
             
             $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
         }
+            /**
+             * @since       3.7.7
+             */
+            private function ___deleteUnitStatusOfAllUnits() {
+
+                    $_sPostType = AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
+                    $_sPosts    = $GLOBALS[ 'wpdb' ]->posts;
+                    $_sPostMeta = $GLOBALS[ 'wpdb' ]->postmeta;
+                    $GLOBALS[ 'wpdb' ]->get_results(
+                        "DELETE {$_sPostMeta} "
+                        . "FROM {$_sPostMeta} "
+                        . "INNER JOIN {$_sPosts} ON ( {$_sPosts}.ID = {$_sPostMeta}.post_id ) "
+                        . "WHERE 1=1 "
+                        . "AND ( 
+                          {$_sPostMeta}.meta_key = '_error'
+                        ) "
+                        . "AND {$_sPosts}.post_type = '{$_sPostType}' "
+                        . "AND ( "
+                            . "({$_sPosts}.post_status <> 'trash' "
+                            . "AND {$_sPosts}.post_status <> 'auto-draft')"
+                        . ") "
+                    );
+
+            }
         /**
          * Clears expired caches.
          * @since       3

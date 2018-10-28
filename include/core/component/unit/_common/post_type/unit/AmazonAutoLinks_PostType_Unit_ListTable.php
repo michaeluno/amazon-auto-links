@@ -213,31 +213,34 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         $_snStatus = get_post_meta( $iPostID, '_error', true );
         $_sData    = "data-post-id='{$iPostID}'";
 
-        if ( $_snStatus ) {
-            $_iModalID = 'response-error-' . $iPostID;
-            $_sTitle   = esc_attr( __( 'Unit Error', 'amazon-auto-links' ) );
-            return "<span class='unit-status circle red' title='" . $_sTitle . "' {$_sData}></span>"
-                . "<div id='{$_iModalID}' style='display:none;'>"
-                    . "<p>" . $_snStatus . "</p>"
-                . "</div>"
-                . "<div class='row-actions'>"
-                    . "<span class='show'>"
-                        . "<a href='#TB_inline?width=600&height=72&inlineId={$_iModalID}' class='inline hide-if-no-js thickbox' title='" . $_sTitle . "'>"
-                            . __( 'Show', 'amazon-auto-links' )
-                        . "</a>"
-                    . "</span>"
-                    . " | "
-                    . "<span class='copy'>"
-                        . "<a class='inline hide-if-no-js' data-target='{$_iModalID}'>"
-                            . __( 'Copy', 'amazon-auto-links' )
-                        . "</a>"
-                    . "</span>"
-                . "</div>";
+        if ( 'normal' === $_snStatus ) {
+            return "<span class='unit-status circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "' {$_sData}></span>";
         }
-        if ( null === $_snStatus ) {
-            return "<span class='unit-status circle loading' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "' {$_sData}></span>";
+        // '': the meta key does not exists.
+        // null: backward-compatibility for v3.7.6 or below for the loading status.
+        if ( '' === $_snStatus || null === $_snStatus ) {
+            return "<span class='unit-status circle gray' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "' {$_sData}></span>";
         }
-        return "<span class='unit-status circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "' {$_sData}></span>";
+
+        $_iModalID = 'response-error-' . $iPostID;
+        $_sTitle   = esc_attr( __( 'Unit Error', 'amazon-auto-links' ) );
+        return "<span class='unit-status circle red' title='" . $_sTitle . "' {$_sData}></span>"
+            . "<div id='{$_iModalID}' style='display:none;'>"
+                . "<p>" . $_snStatus . "</p>"
+            . "</div>"
+            . "<div class='row-actions'>"
+                . "<span class='show'>"
+                    . "<a href='#TB_inline?width=600&height=72&inlineId={$_iModalID}' class='inline hide-if-no-js thickbox' title='" . $_sTitle . "'>"
+                        . __( 'Show', 'amazon-auto-links' )
+                    . "</a>"
+                . "</span>"
+                . " | "
+                . "<span class='copy'>"
+                    . "<a class='inline hide-if-no-js' data-target='{$_iModalID}'>"
+                        . __( 'Copy', 'amazon-auto-links' )
+                    . "</a>"
+                . "</span>"
+            . "</div>";
 
     }
 

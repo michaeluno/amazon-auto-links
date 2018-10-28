@@ -234,6 +234,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             '_widget_number'                => null,
 
             // 3.7.0+ These are not options that change the output behavior but post meta to store relevant information based on the result.
+            // 3.7.7  The default value became an empty string and become `normal` for loaded units without an error.
             '_error'                        => null,
 
             // 3.7.5+

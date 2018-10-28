@@ -280,10 +280,12 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.7 =
-- Optimized the process of performing API requests for product information to reduce the number of HTTP requests.
+- Tweaked the visual of unit status and updating indications in the unit listing table.
+- Added the ability to reset unit status of units when caches are deleted in the setting page.
+- Optimized the process of performing API requests for product information by reducing the number of HTTP requests.
 
 = 3.7.6 - 10/25/2018 =
-- Added the `Ready / Loading` unit status to be displayed when the unit has not been loaded yet.
+- Added the `Ready/Loading` unit status to be displayed when the unit has not been loaded yet.
 - Added unit action links to the bulk action drop down list in the unit listing page.
 - Added the ability to reduce each HTTP request cache size.
 - Fixed a bug that debug outputs for units were not shown when the unit response had an error.

@@ -9,11 +9,13 @@
 (function($){
     $( document ).ready( function() {
 
+        $( '.unit-status.gray' ).data( 'countTrial', 0 );
+
         _checkPendingUnitStatus();
-        var _refreshIntervalId = setInterval( _checkPendingUnitStatus, 15000 ); // 15 seconds interval
+        var _refreshIntervalId = setInterval( _checkPendingUnitStatus, 7500 ); // 7.5cseconds interval
         function _checkPendingUnitStatus() {
 
-            var _oPendingUnits = $( '.unit-status.loading' );
+            var _oPendingUnits = $( '.unit-status.gray' );
 
             // No pending items. Nothing to do.
             if ( ! _oPendingUnits.length ) {
@@ -21,11 +23,20 @@
                 return;
             }
 
-            // var _aPendingUnits = [];
             _oPendingUnits.each( function( index, element ) {
 
-                var _sUnitID = $( element ).attr( 'data-post-id' );
+                if ( $( element ).hasClass( 'done' ) ) {
+                    return true;
+                }
 
+                $( element ).data().countTrial++;
+                if ( $( element ).data( 'countTrial' ) > 3 ) {
+                    $( element ).addClass( 'gray done' );
+                    return true;
+                }
+
+                var _sUnitID = $( element ).attr( 'data-post-id' );
+                $( element ).removeClass( 'gray' ).addClass( 'loading' );
                 jQuery.ajax( {
                     type: "post",
                     dataType: 'json',
@@ -39,23 +50,27 @@
                     success: function ( response ) {
                         if ( response.success ) {
                             $.each( response.result, function( sIndex, value ) {
-                                // console.log( sIndex + ": " + value );
-                                if ( '' === value ) {
+                                if ( 'normal' === value ) {
                                     $( '.unit-status[data-post-id=' + sIndex + ']' )
                                         .removeClass( 'loading' )
-                                        .addClass( 'green' );
+                                        .addClass( 'green done' );
                                     return true;
                                 }
                                 if ( value ) {
                                     $( '.unit-status[data-post-id=' + sIndex + ']' )
                                         .removeClass( 'loading' )
-                                        .addClass( 'red' );
+                                        .addClass( 'red done' );
                                     return true;
                                 }
-
                             });
                         } else {
                         }
+                    },
+                    complete: function() {
+                        if ( $( element ).hasClass( 'done' ) ) {
+                            return;
+                        }
+                        $( element ).removeClass( 'loading' ).addClass( 'gray' );
                     }
                 } ); // ajax
 

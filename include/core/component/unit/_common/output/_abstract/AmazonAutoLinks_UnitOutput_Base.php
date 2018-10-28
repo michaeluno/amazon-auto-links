@@ -387,18 +387,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             return;
         }
         // At this point, the response has no error.
-        // In this case, check a previously set error and if present, remove it.
-        // This way, for cases of no error, it does not cause extra accesses to the database.
-        // Usually the value will be an empty string ``.
-        // If `null` it means the unit is newly created or in a process of renewing.
+
         $_snStoredError = get_post_meta( $iUnitID, $_sUnitStatusMetaKey, true );
-        if ( $_snStoredError || null === $_snStoredError ) {
+        if ( 'normal' !== $_snStoredError ) {
             update_post_meta(
                 $iUnitID, // post id
                 $_sUnitStatusMetaKey, // meta key
-                ''
+                'normal'
             );
         }
+
     }
 
     /**
