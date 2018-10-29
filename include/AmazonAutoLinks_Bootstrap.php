@@ -185,9 +185,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         load_plugin_textdomain( 
             AmazonAutoLinks_Registry::TEXT_DOMAIN, 
             false, 
-            dirname( plugin_basename( $this->sFilePath ) ) . '/' . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
+            dirname( plugin_basename( $this->sFilePath ) ) . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
         );
-        
+
     }        
     
     /**
