@@ -280,6 +280,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.8 =
+- Fixed an issue that unit status was not properly updated when an action link is clicked.
 - Added the `Toggle Status` bulk action for the Auto-insert listing table.
 
 = 3.7.7 - 10/29/2018 =

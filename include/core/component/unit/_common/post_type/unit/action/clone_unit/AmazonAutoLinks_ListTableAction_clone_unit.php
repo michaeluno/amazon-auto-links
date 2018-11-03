@@ -39,7 +39,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         $_aFailed     = array();
         $_aNewPostIDs = array();
         foreach( $aPostIDs as $_iPostID ) {
-            $_iNewPostID    = $this->_cloneUnit( $_iPostID );
+            $_iNewPostID    = $this->___cloneUnit( $_iPostID );
             if ( $_iNewPostID ) {
                 $_aNewPostIDs[] = $_iNewPostID;
                 continue;
@@ -68,11 +68,12 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
          * 
          * @return      integer     The new post id. If failed, 0.
          */
-        private function _cloneUnit( $iPostID ) {
+        private function ___cloneUnit( $iPostID ) {
 
             $_oSourcePost  = get_post( $iPostID );
             $_aPostMeta    = $this->getPostMeta( $iPostID );
-            unset( $_aPostMeta[ '_error' ] );    // stores the unit status
+            // @deprecated  3.7.8 It is okay to leave the status as the clone one uses the same cache.
+            // unset( $_aPostMeta[ '_error' ] );    // stores the unit status
             $_iNewPostID   = $this->createPost( 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    // post type slug
                 $this->_getPostColumns( $_oSourcePost ),    // columns

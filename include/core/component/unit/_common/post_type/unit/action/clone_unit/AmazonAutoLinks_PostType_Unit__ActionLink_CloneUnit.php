@@ -35,7 +35,7 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit extends AmazonAutoLink
     protected function _getActionLink( $oPost ) {
         $_sURL = add_query_arg(
             array(
-                'post_type'     => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                'post_type'     => $this->_oFactory->oProp->sPostType,
                 'custom_action' => $this->_sActionSlug,
                 'post'          => $oPost->ID,
                 'nonce'         => $this->_sCustomNonce,
