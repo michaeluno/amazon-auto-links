@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.7
+Stable tag:         3.7.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,7 +279,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.7.8 =
+= 3.7.8 - 11/04/2018 =
 - Added the `Toggle Status` bulk action for the Auto-insert listing table.
 - Tweaked UI by not displaying some action links and bulk actions in the drop down list in the trash view of the listing table.
 - Fixed an issue that unit status was not properly updated when an action link is clicked.
