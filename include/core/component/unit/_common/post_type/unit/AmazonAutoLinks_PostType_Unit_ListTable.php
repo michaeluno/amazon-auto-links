@@ -24,9 +24,9 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     
         if ( $this->_isInThePage() ) {
 
-            new AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit( $this, $this->_sNonce );
-            new AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache( $this, $this->_sNonce );
-            new AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning( $this, $this->_sNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit( $this, $this->_sNonceKey, $this->_sNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache( $this, $this->_sNonceKey, $this->_sNonce );
+            new AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning( $this, $this->_sNonceKey, $this->_sNonce );
 
             // unit listing table columns
             add_filter(    

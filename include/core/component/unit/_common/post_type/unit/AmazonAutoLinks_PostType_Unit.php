@@ -79,7 +79,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         );
 
         if (  $this->_isInThePage() ) {
-            $this->_sNonce = wp_create_nonce($this->_sNonceKey );
+            $this->_sNonce = wp_create_nonce( $this->_sNonceKey );
         }
 
         parent::setUp();

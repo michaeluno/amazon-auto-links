@@ -16,7 +16,8 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
     /**
      * Stores a custom nonce.
      */
-    protected $sCustomNonce;
+    protected $_sCustomNonce;
+    protected $_sNonceKey = 'aal_nonce_auto_insert';
 
     /**
      * Sets up hooks.
@@ -24,14 +25,9 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
     public function setUp() {
             
         if ( $this->_isInThePage() ) {
-            
-            $this->sCustomNonce = uniqid();            
-            AmazonAutoLinks_WPUtility::setTransient( 
-                'AAL_Nonce_' . $this->sCustomNonce, 
-                $this->sCustomNonce, 
-                60*10 
-            );
-            
+
+            $this->_sCustomNonce = wp_create_nonce( 'aal_nonce_auto_insert' );
+
             // unit listing table columns
             add_filter(    
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
@@ -75,14 +71,14 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
                 get_post_meta( $iPostID, 'unit_ids', true ) 
             )
         );
-        return $this->_getUnitTItles( $_aUnitIDs ) ;
+        return $this->___getUnitTitles( $_aUnitIDs ) ;
 
     }
         /**
          * 
          * @return      string
          */
-        private function _getUnitTitles( array $aUnitIDs ) {
+        private function ___getUnitTitles( array $aUnitIDs ) {
             
             $_aTitles = array();
             foreach( $aUnitIDs as $_iUnitID ) {
@@ -112,19 +108,26 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
             return implode( ', ', $_aTitles );
             
         }
-        
-    public function cell_aal_auto_insert_status( $sCell, $iPostID ) {
-        
-        $sToggleStatusURL = add_query_arg( 
-            array( 
+
+    /**
+     * @param $sCell
+     * @param $iPostID
+     *
+     * @return mixed
+     * @deprecated  3.7.8   Moved the action link class, `AmazonAutoLinks_PostType__AutoInsert___ActionLink_Status`.
+     */
+    public function _cell_aal_auto_insert_status( $sCell, $iPostID ) {
+
+        $sToggleStatusURL = add_query_arg(
+            array(
                 'post_type'     => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
                 'custom_action' => 'toggle_status',
                 'post'          => $iPostID,
-                'nonce'         => $this->sCustomNonce,
-            ), 
-            admin_url( 'edit.php' ) 
-        );    
-        
+                'nonce'         => $this->_sCustomNonce,
+            ),
+            admin_url( 'edit.php' )
+        );
+
         $fIsEnabled         = get_post_meta( $iPostID, 'status', true );
         $sStatus          = $fIsEnabled ? "<strong>" . __( 'On', 'amazon-auto-links' ) . "</strong>" : __( 'Off', 'amazon-auto-links' );
         $sOppositeStatus  = $fIsEnabled ? __( 'Off', 'amazon-auto-links' ) : __( 'On', 'amazon-auto-links' );
@@ -134,10 +137,10 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
                 . "</span>"
             . "</div>";
         return $sStatus . $sActions;
-        
-    }    
+
+    }
+
     public function cell_aal_auto_insert_area( $sCell, $iPostID ) {
-        
         $_oUtil = new AmazonAutoLinks_WPUtility;
         $_aList = array();
         $aSelectedAreas = ( ( array ) get_post_meta( $iPostID, 'built_in_areas', true ) )

@@ -279,6 +279,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.8 =
+- Added the `Toggle Status` bulk action for the Auto-insert listing table.
+
 = 3.7.7 - 10/29/2018 =
 - Tweaked the visual of unit status and updating indications in the unit listing table.
 - Added the ability to reset unit status of units when caches are deleted in the setting page.

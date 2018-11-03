@@ -17,24 +17,28 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
      * Sets up hooks.
      */
     public function setUp() {
-        
+
+        parent::setUp();    // needs to run to set the _sCustomNonce property first.
+
         if (  $this->_isInThePage() ) {
-
-            $this->handleCustomActions();   
-
-            add_filter( 
-                'action_links_' . $this->oProp->sPostType, 
-                array( $this, 'replyToModifyActionLinks' ), 
-                10, 
-                2 
-            );            
-            add_filter( 
-                'bulk_actions-edit-' . $this->oProp->sPostType, 
-                array( $this, 'replyToModifyBulkActionsDropDownList' ) 
+            new AmazonAutoLinks_PostType__AutoInsert___ActionLink_Status(
+                $this,
+                $this->_sNonceKey,
+                $this->_sCustomNonce
+            );
+            add_filter(
+                'action_links_' . $this->oProp->sPostType,
+                array( $this, 'replyToModifyActionLinks' ),
+                10,
+                2
+            );
+            add_filter(
+                'bulk_actions-edit-' . $this->oProp->sPostType,
+                array( $this, 'replyToModifyBulkActionsDropDownList' )
              );
         }        
         
-        parent::setUp();
+
     }
 
     /**
@@ -73,9 +77,12 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
     public function replyToModifyBulkActionsDropDownList( $aBulkActions ) {
         unset( $aBulkActions[ 'edit' ] );
         return $aBulkActions;
-    }    
-    
-    protected function handleCustomActions() {
+    }
+
+    /**
+     * @deprecated  3.7.8
+     */
+/*    protected function handleCustomActions() {
         
         if ( ! isset( $_GET[ 'custom_action' ], $_GET[ 'nonce' ], $_GET[ 'post' ], $_GET[ 'post_type' ] ) ) { 
             return; 
@@ -123,19 +130,19 @@ class AmazonAutoLinks_PostType_AutoInsert_Action extends AmazonAutoLinks_PostTyp
         wp_safe_redirect( $_sURLSendback );    
         exit();    
     
-    }
+    }*/
         
     /**
-     * 
+     * @todo        Deprecate this if not used any more.
      * @callback        action      admin_notice
      */
-    public function replyToNotifyNonceFailed() {
+/*    public function replyToNotifyNonceFailed() {
         echo '<div class="error">'
                 . '<p>' 
                     . __( 'The action could not be processed due to the inactivity.', 'amazon-auto-links' )
                 . '</p>'
             . '</div>';
-    }
+    }*/
        
 
 }
