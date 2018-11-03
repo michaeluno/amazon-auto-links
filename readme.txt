@@ -280,8 +280,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.8 =
-- Fixed an issue that unit status was not properly updated when an action link is clicked.
 - Added the `Toggle Status` bulk action for the Auto-insert listing table.
+- Tweaked UI by not displaying some action links and bulk actions in the drop down list in the trash view of the listing table.
+- Fixed an issue that unit status was not properly updated when an action link is clicked.
 
 = 3.7.7 - 10/29/2018 =
 - Tweaked the visual of unit status and updating indications in the unit listing table.

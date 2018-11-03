@@ -33,6 +33,8 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
      */
     protected $_bAddBulkAction = true;
 
+    protected $_aDisabledPostStatuses = array( 'trash' );
+
     /**
      * Sets up hooks and properties.
      */
@@ -42,14 +44,16 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
         $this->_sNonceKey    = $sNonceKey;
         $this->_sCustomNonce = $sCustomNonce;
 
-        add_filter(
-            'action_links_' . $this->_oFactory->oProp->sPostType,
-            array( $this, 'replyToModifyActionLinks' ),
-            10,
-            2
-        );
+        if ( ! in_array( $this->getElement( $_REQUEST, 'post_status' ), $this->_aDisabledPostStatuses ) ) {
+            add_filter(
+                'action_links_' . $this->_oFactory->oProp->sPostType,
+                array( $this, 'replyToModifyActionLinks' ),
+                10,
+                2
+            );
 
-        add_action( 'current_screen', array( $this, 'replyToSetHooks' ) );
+            add_action( 'current_screen', array( $this, 'replyToSetHooks' ) );
+        }
 
         $this->_construct();
 
