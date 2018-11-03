@@ -39,7 +39,7 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
 
 // 0. Delete the temporary directory
 $_sTempDirPath = sys_get_temp_dir() . '/' . AmazonAutoLinks_Registry::$sTempDirName;
-if ( file_exists( $_sTempDirPath ) ) {
+if ( file_exists( $_sTempDirPath ) && is_dir( $_sTempDirPath ) ) {
     unlink( $_sTempDirPath );
 }
 
