@@ -216,7 +216,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         if ( 'normal' === $_snStatus ) {
             return "<span class='unit-status circle green' title='" . __( 'Normal', 'amazon-auto-links' ) . "' {$_sData}></span>";
         }
-        // '': the meta key does not exists.
+        // '': the meta key does not exists, the very first status.
         // null: backward-compatibility for v3.7.6 or below for the loading status.
         if ( '' === $_snStatus || null === $_snStatus ) {
             return "<span class='unit-status circle gray' title='" . __( 'Ready', 'amazon-auto-links' ) . ' / ' . __( 'Loading', 'amazon-auto-links' ) . "' {$_sData}></span>";
