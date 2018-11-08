@@ -202,6 +202,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             $aUnitOptions[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 
                 'category'
             );
+            $aUnitOptions[ '_error' ] = 'normal';   // 3.7.9
             AmazonAutoLinks_WPUtility::updatePostMeta( $_iPostID, $aUnitOptions );
 
             // Create an auto insert - the 'auto_insert' key will be removed when creating a post.s

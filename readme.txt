@@ -279,6 +279,10 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.7.9 =
+- Fixed a bug that a unit status of the category unit type was not updated when it is created for the first time until the cache was renewed.
+- Fixed a bug that ratings became an incorrect number for some cases.
+
 = 3.7.8 - 11/04/2018 =
 - Added the `Toggle Status` bulk action for the Auto-insert listing table.
 - Tweaked UI by not displaying some action links and bulk actions in the drop down list in the trash view of the listing table.
