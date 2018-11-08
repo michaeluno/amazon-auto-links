@@ -35,11 +35,14 @@ class AmazonAutoLinks_Event___Filter_CustomerReviewCache extends AmazonAutoLinks
             return $mData;
         }
 
+        // @deprecated 3.7.9 The product ratings have started becoming a too long number sometimes and it might be because of this HTML clean-up
+        /*
         $_sHTML = $mData[ 'body' ];
         $_oHTMLCleaner = new AmazonAutoLinks_HTMLCleaner( $_sHTML, $sCharSet );
         $_oHTMLCleaner->setRemovingTags( $this->_aTagsToRemove );
         $_oHTMLCleaner->setRemovingAttributes( $this->_aAttributesToRemove );
         $mData[ 'body' ] = $_oHTMLCleaner->get();
+        */
         return $mData;
 
     }
