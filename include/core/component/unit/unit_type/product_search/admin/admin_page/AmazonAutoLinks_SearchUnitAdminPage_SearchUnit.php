@@ -21,7 +21,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
      * @since       3
      * @return      void
      */
-    public function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * 

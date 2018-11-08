@@ -21,7 +21,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
      * @since       3
      * @return      void
      */
-    public function construct( $oFactory ) {
+    protected function _construct( $oFactory ) {
         
         // Tabs
         new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First( 

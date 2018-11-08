@@ -33,7 +33,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
     /**
      * Stores callback method names.
      */
-    protected $aMethods = array(
+    protected $_aMethods = array(
         'replyToLoadTab',
         'replyToDoTab',
         'replyToDoAfterTab',
@@ -43,11 +43,12 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
     /**
      * Sets up hooks and properties.
      */
-    public function __construct( $oFactory, $sPageSlug, array $aTabDefinition ) {
+    public function __construct( $oFactory, $sPageSlug, array $aTabDefinition=array() ) {
         
         $this->oFactory     = $oFactory;
         $this->sPageSlug    = $sPageSlug;
-        $this->sTabSlug     = isset( $aTabDefinition['tab_slug'] ) 
+        $aTabDefinition     = $aTabDefinition + $this->_getTab();
+        $this->sTabSlug     = isset( $aTabDefinition['tab_slug'] )
             ? $aTabDefinition['tab_slug'] 
             : '';
         
@@ -55,12 +56,19 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
             return;
         }
                   
-        $this->_addTab( $this->sPageSlug, $aTabDefinition );
-        $this->construct( $oFactory );
+        $this->___addTab( $this->sPageSlug, $aTabDefinition );
+        $this->_construct( $oFactory );
         
     }
+        /**
+         * @since   3.8.0
+         * @return  array A tab definition array.
+         */
+        protected function _getTab() {
+            return array();
+        }
     
-    private function _addTab( $sPageSlug, $aTabDefinition ) {
+    private function ___addTab( $sPageSlug, $aTabDefinition ) {
         
         $this->oFactory->addInPageTabs(
             $sPageSlug,
@@ -100,12 +108,27 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
      * 
      * @remark      This method should be overridden in each extended class.
      */
-    // public function replyToLoadTab( $oFactory ) {}
-    // public function replyToDoTab( $oFactory ) {}
-    // public function replyToDoAfterTab( $oFactory ) {}
-        
-        
-    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
-        return $aInput;
-    }
+     public function replyToLoadTab( $oFactory ) {
+         $this->_loadTab( $oFactory );
+     }
+     public function replyToDoTab( $oFactory ) {
+         $this->_doTab( $oFactory );
+     }
+     public function replyToDoAfterTab( $oFactory ) {
+         $this->_doAfterTab( $oFactory );
+     }
+
+    /**
+     * @param $oFactory
+     * @since   3.8.0
+     */
+    protected function _loadTab( $oFactory ) {}
+    protected function _doTab( $oFactory ) {}
+    protected function _doAfterTab( $oFactory ) {}
+
+
+//    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+//        return $aInputs;
+//    }
+
 }

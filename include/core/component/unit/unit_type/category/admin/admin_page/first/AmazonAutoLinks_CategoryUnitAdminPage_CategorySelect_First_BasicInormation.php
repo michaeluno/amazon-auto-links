@@ -21,7 +21,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {
+    protected function _construct( $oFactory ) {
         
         add_filter(
             "validation_{$this->sPageSlug}_{$this->sTabSlug}",
@@ -36,7 +36,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
         
         $_oFieldsBasicInformation = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
         $_oFieldsCommon           = new AmazonAutoLinks_FormFields_Unit_Common;

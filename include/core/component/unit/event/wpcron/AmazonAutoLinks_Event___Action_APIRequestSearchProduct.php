@@ -42,7 +42,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
      * Searches the product and saves the data.
      */
     protected function _doAction( /* $aArguments */ ) {
-return;
+
         $_aParams        = func_get_args() + array( null );
 
         $aArguments      = $_aParams[ 0 ] + array( null, null, null, null, null );

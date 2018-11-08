@@ -31,13 +31,13 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     public function __construct( $oFactory, array $aPageArguments ) {
         
         $this->oFactory     = $oFactory;
-        $this->sPageSlug    = $aPageArguments['page_slug'];
-        $this->_addPage( $aPageArguments );
-        $this->construct( $oFactory );
+        $this->sPageSlug    = $aPageArguments[ 'page_slug' ];
+        $this->___addPage( $aPageArguments );
+        $this->_construct( $oFactory );
                 
     }
     
-    private function _addPage( array $aPageArguments ) {
+    private function ___addPage( array $aPageArguments ) {
         
         $this->oFactory->addSubMenuItems(
             $aPageArguments
@@ -59,22 +59,34 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
      * @callback    action      load_{page slug}
      */
     public function replyToSetResources( $oFactory ) {
-        
-        $this->oFactory->enqueueStyle( 
-            AmazonAutoLinks_Registry::getPluginURL( 'asset/css/' . $this->sPageSlug . '.css' ),
-            $this->sPageSlug
-        );            
+
+        $_sPageStyleSheetPath = AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . '.css';
+        $this->oFactory->enqueueStyle( $_sPageStyleSheetPath, $this->sPageSlug );
         
     }
     
     /**
      * Called when the page loads.
-     * 
-     * @remark      This method should be overridden in each extended class.
+     *
      */
-    // public function replyToLoadPage( $oFactory ) {}
-    // public function replyToDoPage( $oFactory ) {}
-    // public function replyToDoAfterPage( $oFactory ) {}
-    // public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ){}
-    
+     public function replyToLoadPage( $oFactory ) {
+         $this->_loadPage( $oFactory );
+     }
+     public function replyToDoPage( $oFactory ) {
+         $this->_doPage( $oFactory );
+     }
+     public function replyToDoAfterPage( $oFactory ) {
+         $this->_doAfterPage( $oFactory );
+     }
+
+
+    /**
+     * @param $oFactory
+     * @since   3.8.0
+     */
+    protected function _loadPage( $oFactory ) {}
+    protected function _doPage( $oFactory ) {}
+    protected function _doAfterPage( $oFactory ) {}
+
+
 }

@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_General_ExternalScript extends AmazonAut
      * @since       3.1.0
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3.1.0
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
 
         $_oFields = new AmazonAutoLinks_FormFields_Setting_ExternalScript;
         foreach( $_oFields->get() as $_aField ) {

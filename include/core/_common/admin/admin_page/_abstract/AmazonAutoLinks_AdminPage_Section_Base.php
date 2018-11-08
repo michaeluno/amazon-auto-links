@@ -34,30 +34,40 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
      * Stores the section ID.
      */
     public $sSectionID;    
-    
+
+    private $___aSection = array(
+        'tab_slug'      => '',
+        'section_id'    => '',
+    );
+
     /**
      * Sets up hooks and properties.
      */
-    public function __construct( $oFactory, $sPageSlug, array $aSectionDefinition ) {
+    public function __construct( $oFactory, $sPageSlug, array $aSectionDefinition=array() ) {
         
         $this->oFactory     = $oFactory;
         $this->sPageSlug    = $sPageSlug;
-        $aSectionDefinition = $aSectionDefinition + array(
-            'tab_slug'      => '',
-            'section_id'    => '',
-        );
-        $this->sTabSlug     = $aSectionDefinition['tab_slug'];
-        $this->sSectionID   = $aSectionDefinition['section_id'];
+        $aSectionDefinition = $aSectionDefinition + $this->_getSection() + $this->___aSection;
+        $this->sTabSlug     = $aSectionDefinition[ 'tab_slug' ];
+        $this->sSectionID   = $aSectionDefinition[ 'section_id' ];
         
         if ( ! $this->sSectionID ) {
             return;
         }
         $this->_addSection( $oFactory, $sPageSlug, $aSectionDefinition );
         
-        $this->construct( $oFactory );
+        $this->_construct( $oFactory );
         
     }
-    
+
+    /**
+     * @return array
+     * @since   3.8.0
+     */
+    protected function _getSection() {
+        return array();
+    }
+
     private function _addSection( $oFactory, $sPageSlug, array $aSectionDefinition ) {
         
         add_action( 
@@ -78,7 +88,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
         );
         
         // Call the user method
-        $this->addFields( $oFactory, $this->sSectionID );
+        $this->_addFields( $oFactory, $this->sSectionID );
 
     }
 
@@ -86,7 +96,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
      * Called when adding fields.
      * @remark      This method should be overridden in each extended class.
      */
-    public function addFields( $oFactory, $sSectionID ) {}
+    protected function _addFields( $oFactory, $sSectionID ) {}
  
     /**
      * Called upon form validation.

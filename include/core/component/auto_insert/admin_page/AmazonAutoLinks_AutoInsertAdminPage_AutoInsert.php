@@ -21,7 +21,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
      * @since       3
      * @return      void
      */
-    public function construct( $oFactory ) {
+    protected function _construct( $oFactory ) {
         
         // Tabs
         new AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_New( 

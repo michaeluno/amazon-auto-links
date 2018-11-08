@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_Admin
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
 
         $oFactory->addSettingFields(
             $sSectionID, // the target section id    

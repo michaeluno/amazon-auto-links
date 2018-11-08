@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_General_Feed extends AmazonAutoLinks_Adm
      * @since       3.3.0
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3.3.0
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
     
         $oFactory->addSettingFields(
             $sSectionID, // the target section id

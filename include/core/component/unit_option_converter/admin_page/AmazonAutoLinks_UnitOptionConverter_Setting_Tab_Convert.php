@@ -15,14 +15,26 @@
  * @action      schedule        aal_action_event_convert_unit_options
  */
 class AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    protected function _getSection() {
+        return array(
+            'section_id'    => '_convert',
+            'tab_slug'      => $this->sTabSlug,
+            'title'         => __( 'Unit Options', 'amazon-auto-links' ),
+            'description'   => array(
+                __( 'Convert unit options with batch processing.', 'amazon-auto-links' ),
+            ),
+            'save'          => false,
+        );
+    }
+
     /**
      * A user constructor.
      * 
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {
+    protected function _construct( $oFactory ) {
         
         add_filter( 
             "validation_" .  AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] . '_' . 'unit_option_converter', 
@@ -38,7 +50,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert extends AmazonAuto
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
         

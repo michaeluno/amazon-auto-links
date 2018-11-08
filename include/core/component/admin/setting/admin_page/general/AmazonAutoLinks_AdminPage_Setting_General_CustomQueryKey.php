@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey extends AmazonAut
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
     
         $_oOption = AmazonAutoLinks_Option::getInstance();    
         $oFactory->addSettingFields(

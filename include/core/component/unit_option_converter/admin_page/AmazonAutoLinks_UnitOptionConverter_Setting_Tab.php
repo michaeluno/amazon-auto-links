@@ -15,7 +15,18 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return  array
+     * @since   3.8.0
+     */
+    protected function _getTab() {
+        return array(
+            'tab_slug'  => 'unit_option_converter',
+            'title'     => __( 'Unit Option Converter', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
@@ -24,15 +35,9 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
         // Form sections
         new AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert( 
             $oAdminPage,
-            $this->sPageSlug, 
+            $this->sPageSlug,
             array(
-                'section_id'    => '_convert',
                 'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Unit Options', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Convert unit options with batch processing.', 'amazon-auto-links' ),
-                ),
-                'save'          => false,
             )
         );
 

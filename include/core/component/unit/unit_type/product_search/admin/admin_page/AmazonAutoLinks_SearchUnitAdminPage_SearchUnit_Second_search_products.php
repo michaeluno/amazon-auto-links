@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
     
-    public function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Triggered when the tab is loaded.

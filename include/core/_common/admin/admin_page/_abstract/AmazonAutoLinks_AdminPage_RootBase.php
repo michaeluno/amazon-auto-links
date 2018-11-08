@@ -20,7 +20,7 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
      * 
      * @since   3
      */
-    protected $aMethods = array(
+    protected $_aMethods = array(
         'replyToLoadPage',
         'replyToDoPage',
         'replyToDoAfterPage',
@@ -36,7 +36,7 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
      */
     public function __call( $sMethodName, $aArguments ) {
         
-        if ( in_array( $sMethodName, $this->aMethods ) ) {
+        if ( in_array( $sMethodName, $this->_aMethods ) ) {
             return isset( $aArguments[ 0 ] ) 
                 ? $aArguments[ 0 ] 
                 : null;
@@ -54,8 +54,26 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
     /**
      * A user constructor.
      * @since       3
+     * @since       3.8.0   Renamed to `_construct` from `construct`.
      * @return      void
      */
-    protected function construct( $oFactory ) {}
-    
+    protected function _construct( $oFactory ) {}
+
+
+    protected function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+        return $this->_validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
+    }
+    /**
+     * @param $aInputs
+     * @param $aOldInputs
+     * @param $oFactory
+     * @param $aSubmitInfo
+     *
+     * @return array
+     * @since   3.8.0
+     */
+    protected function _validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+        return $aInputs;
+    }
+
 }

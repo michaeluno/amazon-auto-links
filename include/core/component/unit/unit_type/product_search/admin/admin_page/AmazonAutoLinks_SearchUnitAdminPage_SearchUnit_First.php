@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLinks_AdminPage_Tab_Base {
     
-    public function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Triggered when the tab is loaded.

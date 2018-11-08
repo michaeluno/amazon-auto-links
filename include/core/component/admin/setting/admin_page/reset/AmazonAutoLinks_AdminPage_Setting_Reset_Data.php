@@ -23,15 +23,14 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_Data extends AmazonAutoLinks_Admin
      * @since       3.6.6
      * @return      void
      */
-    protected function construct( $oFactory ) {
-    }
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3.6.6
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
 
        $oFactory->addSettingFields(
             $sSectionID, // the target section id

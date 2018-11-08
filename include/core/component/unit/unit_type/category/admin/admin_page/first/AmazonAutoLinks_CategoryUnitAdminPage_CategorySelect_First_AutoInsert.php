@@ -21,14 +21,14 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_AutoInsert exte
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
         
         $_oFields = new AmazonAutoLinks_FormFields_Unit_AutoInsert;
         foreach( $_oFields->get() as $_aField ) {

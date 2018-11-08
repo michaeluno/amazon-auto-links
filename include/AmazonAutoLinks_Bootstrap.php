@@ -214,7 +214,21 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                             
         // Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
-        
+
+//$_aRow = array(
+//    'asin_locale'   => 'TESTING_JP',
+//    'title'         => 'This is a test',
+//    'rating'        => 50,
+//    'currency'      => 'JPY',
+//    // 'non_existent'  => 'foo bar',
+//);
+//$_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+//$_value = $_oProductTable->setRowByASINLocale(
+//    'TESTING_JP',  // asin _ locale
+//    $_aRow // row data to set
+//);
+//AmazonAutoLinks_Debug::log( $_value );
+
     }
    
         /**

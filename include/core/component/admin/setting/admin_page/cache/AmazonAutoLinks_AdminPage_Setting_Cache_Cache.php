@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
         
         $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_iProductCount    = $_oProductTable->getTotalItemCount();

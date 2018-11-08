@@ -110,11 +110,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
         // Tabs
         new AmazonAutoLinks_UnitOptionConverter_Setting_Tab( 
             $oFactory,
-            AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
-            array( 
-                'tab_slug'  => 'unit_option_converter',
-                'title'     => __( 'Unit Option Converter', 'amazon-auto-links' ),
-            )
+            AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ]
         );        
                 
     }            

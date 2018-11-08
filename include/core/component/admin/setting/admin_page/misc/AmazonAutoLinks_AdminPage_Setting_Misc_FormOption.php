@@ -21,14 +21,14 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
 
         // The default values will be merged with the options object property.
         $oFactory->addSettingFields(

@@ -21,7 +21,7 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
      * @since       3
      * @return      void
      */
-    protected function construct( $oFactory ) {
+    protected function _construct( $oFactory ) {
              
         // reset_{instantiated class name}_{section id}_{field id}
         add_action( 
@@ -38,7 +38,7 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
      * @since       3
      * @return      void
      */
-    public function addFields( $oFactory, $sSectionID ) {
+    protected function _addFields( $oFactory, $sSectionID ) {
 
        $oFactory->addSettingFields(
             $sSectionID, // the target section id
