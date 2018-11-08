@@ -242,6 +242,9 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             .red {
                 background-color: red;
             }
+            .unknown {
+                background-color: #DDD;
+            }
             .circle.loading {
                 background-image: url({$_sSpinnerURL});
                 background-repeat: no-repeat;            

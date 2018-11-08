@@ -210,6 +210,11 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function cell_amazon_auto_links_status( $sCell, $iPostID ) {
 
+        $_sUnitType = get_post_meta( $iPostID, 'unit_type', true );
+        if ( 'contextual' === $_sUnitType ) {
+            return "<span class='unit-status circle unknown' title='" . __( 'Unknown', 'amazon-auto-links' ) . "'></span>";
+        }
+
         $_snStatus = get_post_meta( $iPostID, '_error', true );
         $_sData    = "data-post-id='{$iPostID}'";
 

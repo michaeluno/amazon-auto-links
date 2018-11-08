@@ -53,7 +53,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             $this->___getSiteSearchKeywords()
         );
         $_aKeywords    = $this->___getFormattedSearchKeywordsArray( $_aKeywords );
-        $_sAdditionals = $this->trimDelimitedElements( 
+        $_sAdditionals = $this->trimDelimitedElements(
             trim( $this->sAdditionalKeywords ), // subject string
             ',',  // delimiter
             false // add a space with the delimiter
@@ -63,7 +63,6 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             : '';
         $_sKeywords    = implode( ',', $_aKeywords )
             . $_sAdditionals;
-            
         return $bReturnType
             ? explode( ',', $_sKeywords )
             : $_sKeywords;
@@ -91,6 +90,9 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          */
         private function ___getFormattedSearchKeywordsArray( array $aKeywords ) {
             $aKeywords = array_unique( array_filter( $aKeywords ) );
+            if ( empty( $aKeywords ) ) {
+                $aKeywords[] = get_bloginfo( 'name' );
+            }
             return $aKeywords;
         }
 
@@ -104,7 +106,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          *      'breadcrumb'        => true,
          *      'taxonomy_terms'    => true,
          *  )
-         * @return      string
+         * @return      array
          */
         private function ___getSearchKeywordsByCriteria( array $aCriteria ) {
 

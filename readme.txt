@@ -280,6 +280,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.7.9 =
+- Fixed an issue with a contextual unit that the unit status became `error` due to no context in the preview.
 - Fixed a bug that a unit status of the category unit type was not updated when it is created for the first time until the cache was renewed.
 - Fixed a bug that ratings became an incorrect number for some cases.
 
