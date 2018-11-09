@@ -54,7 +54,7 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
     /**
      * A user constructor.
      * @since       3
-     * @since       3.8.0   Renamed to `_construct` from `construct`.
+     * @since       3.7.9   Renamed to `_construct` from `construct`.
      * @return      void
      */
     protected function _construct( $oFactory ) {}
@@ -70,7 +70,7 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
      * @param $aSubmitInfo
      *
      * @return array
-     * @since   3.8.0
+     * @since   3.7.9
      */
     protected function _validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
         return $aInputs;

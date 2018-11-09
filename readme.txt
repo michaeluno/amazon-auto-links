@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.8
+Stable tag:         3.7.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,7 +279,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.7.9 =
+= 3.7.9 - 11/09/2018 =
 - Fixed an issue with a contextual unit that the unit status became `error` due to no context in the preview.
 - Fixed a bug that a unit status of the category unit type was not updated when it is created for the first time until the cache was renewed.
 - Fixed a bug that ratings became an incorrect number for some cases.

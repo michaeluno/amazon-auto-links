@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
 
     /**
      * @return array
-     * @since   3.8.0
+     * @since   3.7.9
      */
     protected function _getSection() {
         return array();

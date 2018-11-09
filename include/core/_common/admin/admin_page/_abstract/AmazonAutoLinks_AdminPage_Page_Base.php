@@ -82,7 +82,7 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
 
     /**
      * @param $oFactory
-     * @since   3.8.0
+     * @since   3.7.9
      */
     protected function _loadPage( $oFactory ) {}
     protected function _doPage( $oFactory ) {}

@@ -61,7 +61,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
         
     }
         /**
-         * @since   3.8.0
+         * @since   3.7.9
          * @return  array A tab definition array.
          */
         protected function _getTab() {
@@ -120,7 +120,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
 
     /**
      * @param $oFactory
-     * @since   3.8.0
+     * @since   3.7.9
      */
     protected function _loadTab( $oFactory ) {}
     protected function _doTab( $oFactory ) {}

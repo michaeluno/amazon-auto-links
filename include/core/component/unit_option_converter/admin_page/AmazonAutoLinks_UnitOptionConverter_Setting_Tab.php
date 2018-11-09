@@ -18,7 +18,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
 
     /**
      * @return  array
-     * @since   3.8.0
+     * @since   3.7.9
      */
     protected function _getTab() {
         return array(
