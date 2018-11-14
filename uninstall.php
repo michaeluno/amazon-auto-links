@@ -38,9 +38,15 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
 }
 
 // 0. Delete the temporary directory
-$_sTempDirPath = sys_get_temp_dir() . '/' . AmazonAutoLinks_Registry::$sTempDirName;
-if ( file_exists( $_sTempDirPath ) && is_dir( $_sTempDirPath ) ) {
-    unlink( $_sTempDirPath );
+$_sTempDirPath      = rtrim( sys_get_temp_dir(), '/' ) . '/' . AmazonAutoLinks_Registry::$sTempDirName;
+$_sTempDirPath_Site = $_sTempDirPath . '/' . md5( site_url() );
+if ( file_exists( $_sTempDirPath_Site ) && is_dir( $_sTempDirPath_Site ) ) {
+    AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sTempDirPath_Site );
+
+}
+/// Consider other sites on the same server uses the plugin
+if ( is_dir( $_sTempDirPath ) && AmazonAutoLinks_Utility::isDirectoryEmpty( $_sTempDirPath ) ) {
+    AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sTempDirPath );
 }
 
 // 1. Delete transients

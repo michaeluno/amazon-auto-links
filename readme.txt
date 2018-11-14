@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
-Stable tag:         3.7.9
+Stable tag:         3.7.10
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -278,6 +278,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 4. **Widget Sample**
 
 == Changelog ==
+
+= 3.7.10 - 11/14/2018 =
+- Fixed a bug that caused a PHP warning upon plugin uninstall.
 
 = 3.7.9 - 11/09/2018 =
 - Fixed an issue with a contextual unit that the unit status became `error` due to no context in the preview.
