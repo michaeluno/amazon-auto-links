@@ -21,7 +21,9 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
      * @return      void
      */
     public function replyToLoadPage( $oFactory ) {
-        
+
+        new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
+
         // Tabs
         new AmazonAutoLinks_AdminPage_Setting_Authentication( 
             $this->oFactory,

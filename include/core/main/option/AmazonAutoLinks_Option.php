@@ -118,6 +118,17 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         'feed'  => array(
             'use_description_tag_for_rss_product_content' => false,
         ),
+
+        // 3.8.0
+        'convert_links' => array(
+            'enabled'               => false,
+            'where'                 => array(
+                'the_content'  => 1,
+                'comment_text' => 1,
+            ),
+            'filter_hooks'   => '',
+        ),
+
     
         // 3.4.0+
         'unit_default'  => array(

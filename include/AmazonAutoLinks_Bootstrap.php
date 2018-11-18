@@ -264,7 +264,10 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             if ( $this->bIsAdmin ) {
                 $this->___loadAdminComponents();
             }            
-            
+
+            // 3.8.10
+            new AmazonAutoLinks_Loader_LinkConverter;
+
         }
             /**
              * @since       3.3.0
