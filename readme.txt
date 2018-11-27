@@ -281,6 +281,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 = 3.8.0 =
 - Added the ability to convert amazon links in posts, comments and possibly other areas into user's associate links.
+- Fixed a bug that descriptions of category units were HTML-encoded.
 
 = 3.7.10 - 11/14/2018 =
 - Fixed a bug that caused a PHP warning upon plugin uninstall.

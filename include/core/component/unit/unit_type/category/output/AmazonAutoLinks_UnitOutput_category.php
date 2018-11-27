@@ -623,7 +623,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         }
         
         // getInnerHTML extracts inner html code, meaning the outer div tag will be stripped.
-        $_sDescription = str_replace( '[identical_replacement_string]', '<br />', $this->oDOM->getInnerHTML( $oNode ) );
+        $_sPartialHTML = $this->oDOM->getInnerHTML( $oNode );
+        $_sPartialHTML = html_entity_decode( $_sPartialHTML ); // 3.8.0 It seems the output is HTML-encoded
+        $_sDescription = str_replace( '[identical_replacement_string]', '<br />', $_sPartialHTML );
         
         // Omit the text 'visit blah blah blah for more information'
         if ( preg_match( '/<span.+class=["\']price["\'].+span>/i', $_sDescription ) ) { // "
@@ -639,7 +641,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_sDescription1 = isset( $_aDescription[0] ) ? $_aDescription[0] : '';
         $_sDescription2 = isset( $_aDescription[1] ) ? $_aDescription[1] : '';
         $_sDescription  = $_sDescription1 . $_sDescription2;
-        $_aDescription  = preg_split('/<br.*?\/?>/i', $_sDescription);        // devide the string into arrays by <br> or <br />    
+        $_aDescription  = preg_split('/<br.*?\/?>/i', $_sDescription);        // divide the string into arrays by <br> or <br />
         $_sDescription  = trim( implode( " ", $_aDescription ) );    // return them back to html text
         $_sDescription  = force_balance_tags( $_sDescription );
         return $_sDescription;        
