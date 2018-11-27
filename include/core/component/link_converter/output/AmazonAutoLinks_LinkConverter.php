@@ -17,7 +17,7 @@
 class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
 
     private $___sUnitPostType = '';
-    private $___sAssciateID  = '';
+    private $___sAssociateID  = '';
 
     public function __construct() {
 
@@ -27,8 +27,8 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
         if ( ! $_bEnabled ) {
             return;
         }
-        $this->___sAssciateID = trim( ( string ) $_oOption->get( 'unit_default', 'associate_id' ) );
-        if ( ! $this->___sAssciateID ) {
+        $this->___sAssociateID = trim( ( string ) $_oOption->get( 'unit_default', 'associate_id' ) );
+        if ( ! $this->___sAssociateID ) {
             return;
         }
 
@@ -61,10 +61,10 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
             $_aFilterHooks = array_unique( $_aFilterHooks );
             foreach( $_aFilterHooks as $_sFilterHook ) {
                 if ( 'the_content' === $_sFilterHook ) {
-                    add_filter( $_sFilterHook, array( $this, 'replyToFilterContentsForPosts' ) );
+                    add_filter( $_sFilterHook, array( $this, 'replyToFilterContentsForPosts' ), 11 );
                     continue;
                 }
-                add_filter( $_sFilterHook, array( $this, 'replyToFilterContents' ) );
+                add_filter( $_sFilterHook, array( $this, 'replyToFilterContents' ), 11 );
             }
         }
 
@@ -95,15 +95,25 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
          * @param array $aMatches
          * @remark $aMatches[ 2 ] contains the url
          * @return string
+         * @callback    preg_replace_callback()
          */
         public function replyToConvertLink( $aMatches ) {
+
+            // If the tag is already inserted,
+            if ( false !== strpos( $aMatches[ 2 ], $this->___sAssociateID ) ) {
+                return $aMatches[ 1 ]
+                        . $aMatches[ 2 ]
+                    . $aMatches[ 4 ];
+            }
+
+            $_sURL = add_query_arg(
+                array(
+                    'tag' => $this->___sAssociateID,
+                ),
+                $aMatches[ 2 ]
+            );
             return $aMatches[ 1 ]
-                    . add_query_arg(
-                        array(
-                            'tag' => $this->___sAssciateID,
-                        ),
-                        $aMatches[ 2 ]
-                    )
+                    . $_sURL
                 . $aMatches[ 4 ];
         }
         /**
