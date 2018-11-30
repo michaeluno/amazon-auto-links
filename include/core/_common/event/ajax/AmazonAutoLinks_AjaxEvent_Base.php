@@ -58,7 +58,7 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
 
     /**
      * Override this method to return a response.
-     * @return array
+     * @return array|string
      */
     protected function _getResponse( array $aPost ) {
         return array();

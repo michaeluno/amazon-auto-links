@@ -5,7 +5,7 @@
  *	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *	Author:         Michael Uno (miunosoft)
  *	Author URI:     http://michaeluno.jp
- *	Version:        3.8.0b02
+ *	Version:        3.8.0b03
  */
 
 /**
@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-	const VERSION        = '3.8.0b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '3.8.0b03';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Amazon Auto Links';
 	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
 	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -215,11 +215,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      *      ...
      * )
      * @since       3.5.0
+     * @since       3.8.0       Changed the version from 1.0.0 to 1.1.0.
      */
     static public $aDatabaseTables = array(
          'aal_products'        => array(
              'name'              => 'aal_products', // serves as the table name suffix
-             'version'           => '1.0.0',
+             'version'           => '1.1.0',
              'across_network'    => true,
              'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_products',
          ),

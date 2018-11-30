@@ -267,6 +267,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
 
             // 3.8.10
             new AmazonAutoLinks_Loader_LinkConverter;
+            new AmazonAutoLinks_DatabaseUpdater_Loader;
 
         }
             /**

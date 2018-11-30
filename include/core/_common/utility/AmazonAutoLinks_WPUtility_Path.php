@@ -75,6 +75,8 @@ class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
      * @return           string            The source url
      * @since            2.0.1
      * @since            2.0.3.1           Prevented "/./" to be inserted in the url.
+     * @since            3.8.0              Not to escape the url.
+     * @todo            Can be deprecated as this is the same as the framework method.
      */
     static public function getSRCFromPath( $sFilePath ) {
                         
@@ -82,7 +84,7 @@ class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
         $_sRelativePath = AmazonAutoLinks_Utility::getRelativePath( ABSPATH, $sFilePath );       
         $_sRelativePath = preg_replace( "/^\.[\/\\\]/", '', $_sRelativePath, 1 ); // removes the heading ./ or .\ 
         $sHref          = trailingslashit( $_oWPStyles->base_url ) . $_sRelativePath;
-        return esc_url( $sHref );
+        return $sHref;
 
     }    
     

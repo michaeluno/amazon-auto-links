@@ -60,6 +60,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'customer_review_charset'       => null,   // (string) 
         'customer_reviews'              => null,   // (string) serialized array containing user reviews.
         'number_of_reviews'             => null,   // (integer) number of customer reviews.
+        'features'                      => null,   // (string) 3.8.0
+        'categories'                    => null,   // (string) 3.8.0
     );
    
     /**
@@ -99,6 +101,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             customer_review_charset varchar(20),
             customer_reviews mediumblob,
             number_of_reviews bigint(20) unsigned,
+            categories text,
+            features text,
             PRIMARY KEY  (object_id) 
         ) " . $this->_getCharactersetCollation() . ";";
     }

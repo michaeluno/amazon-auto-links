@@ -204,7 +204,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             ),
             'css'       => sprintf( 
                 '<a href="%s">' . __( 'CSS', 'amazon-auto-links' ) . '</a>', 
-                AmazonAutoLinks_WPUtility::getSRCFromPath( $aItem[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css' )
+                esc_url( AmazonAutoLinks_WPUtility::getSRCFromPath( $aItem[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css' ) )
             ),
         );
         return sprintf(

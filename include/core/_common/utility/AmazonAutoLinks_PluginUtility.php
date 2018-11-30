@@ -17,6 +17,29 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
+     * @return      boolean
+     * @since       3.8.0
+     */
+    static public function isPluginAdminPage() {
+
+        if ( ! is_admin() ) {
+            return false;
+        }
+        $_sPageNow = self::getPageNow();
+        if ( in_array( $_sPageNow, AmazonAutoLinks_Registry::$aAdminPages ) ) {
+            return true;
+        }
+        if ( 'edit.php' !== $_sPageNow ) {
+            return false;
+        }
+        return in_array(
+            self::getElement( $_GET, 'post_type' ),
+            AmazonAutoLinks_Registry::$aPostTypes
+        );
+
+    }
+
+    /**
      * @remark  Used for breadcrumbs.
      * @return  null|object
      * @since   3.6.0
