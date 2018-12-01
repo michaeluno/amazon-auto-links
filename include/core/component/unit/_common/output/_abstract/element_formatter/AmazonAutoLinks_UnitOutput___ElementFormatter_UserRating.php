@@ -39,7 +39,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
             if ( '' === $_snEncodedHTML ) {
                 return '';
             }
-            $_oScraper = new AmazonAutoLinks_ScraperDOM_UserRating(
+            $_snEncodedHTML = htmlspecialchars_decode( $_snEncodedHTML ); // 3.8.0 Not sure why but some unicode characters becomes broken without this.
+            $_oScraper      = new AmazonAutoLinks_ScraperDOM_UserRating(
                 $_snEncodedHTML,
                 true // character set - auto detect
             );

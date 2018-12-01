@@ -115,6 +115,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
             $_aProduct[ 'similar_products' ] = $_oSimilarItemsFormatter->get();
 
+            // 3.8.0 adding `feature`, `category`, `rank`
+            // for search-type units, the value is already assigned
+            $_oFeatureFormatter         = new AmazonAutoLinks_UnitOutput___ElementFormatter_Features(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'feature' ]     = $_oFeatureFormatter->get();
+            $_oCategoryFormatter         = new AmazonAutoLinks_UnitOutput___ElementFormatter_Categories(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'category' ]     = $_oCategoryFormatter->get();
+            $_oSalesRankFormatter        = new AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'sales_rank' ]   = $_oSalesRankFormatter->get();
+
             // Let unit types that need to use the data from database rows access them.
             $_aProduct = apply_filters(
                 'aal_filter_unit_each_product_with_database_row',
@@ -487,5 +502,33 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             . "</div>";
 
     }
-     
+
+    /**
+     * @param array $aItem
+     * @return  string
+     * @since   3.8.0
+     */
+    protected function _getFeatures( array $aItem ) {
+        $_aFeatures = $this->getElementAsArray(
+            $aItem,
+            array( 'ItemAttributes', 'Feature' ),
+            array()
+        );
+        return AmazonAutoLinks_UnitOutput_Utility::getFeatures( $_aFeatures );
+    }
+
+    /**
+     * @param array $aItem
+     * @return  string
+     * @since   3.8.0
+     */
+    protected function _getCategories( array $aItem ) {
+        $_aNodes = $this->getElementAsArray(
+            $aItem,
+            array( 'BrowseNodes',  )
+        );
+        return AmazonAutoLinks_UnitOutput_Utility::getCategories( $_aNodes );
+    }
+
+
 }

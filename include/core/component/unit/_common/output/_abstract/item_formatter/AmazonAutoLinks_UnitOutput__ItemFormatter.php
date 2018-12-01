@@ -50,7 +50,10 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
      */
     private function ___getProductOutputFormatted( array $aProduct ) {
 
-        $_sOutput = str_replace(
+        $_iUpdatedTime = $this->___getProductUpdatedTime( $aProduct[ 'updated_date' ] );
+        $_sUpdatedDate = $this->getSiteReadableDate( $_iUpdatedTime, get_option( 'date_format' ), true );
+
+        $_sOutput      = str_replace(
             array(
                 "%href%",
                 "%title_text%",
@@ -63,10 +66,14 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "%price%",
                 "%button%",
                 "%image_set%",
-                "%disclaimer%",     // 3.2.0+
-                "%content%",        // 3.3.0+
-                "%meta%",           // 3.3.0+
-                "%similar%",        // 3.3.0+
+                "%content%",        // 3.3.0
+                "%meta%",           // 3.3.0
+                "%similar%",        // 3.3.0
+                "%category%",       // 3.8.0
+                "%feature%",        // 3.8.0
+                "%rank%",     // 3.8.0
+                "%date%",           // 3.8.0  the date that the data is retrieved and updated
+                "%disclaimer%",     // 3.2.0
             ),
             array(
                 $aProduct[ 'product_url' ],
@@ -80,10 +87,14 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $aProduct[ 'price' ],
                 $aProduct[ 'button' ],
                 $aProduct[ 'image_set' ],
-                $this->___getPricingDisclaimer( $aProduct[ 'updated_date' ] ), // 3.2.0+
                 $aProduct[ 'content' ], // 3.3.0+
                 $aProduct[ 'meta' ], // 3.3.0+
                 $aProduct[ 'similar_products' ], // 3.3.0+
+                $aProduct[ 'category' ],       // 3.8.0
+                $aProduct[ 'feature' ],        // 3.8.0
+                $aProduct[ 'sales_rank' ],     // 3.8.0
+                $_sUpdatedDate,    // 3.8.0
+                $this->___getPricingDisclaimer( $_sUpdatedDate ), // 3.2.0+
             ),
             apply_filters(
                 'aal_filter_unit_item_format',
@@ -102,23 +113,32 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     }
 
         /**
+         * @param $sResponseDate
+         *
+         * @return  int
+         * @since   3.8.0
+         */
+        private function ___getProductUpdatedTime( $sResponseDate ) {
+            $_sCacheModTime = $this->getElement( $this->___aCacheDBRow, 'modified_time' );
+            $_iTime         = $this->___oUnitOutput->bDBTableAccess && $_sCacheModTime
+                ? strtotime( $_sCacheModTime )
+                : strtotime( $sResponseDate );
+            return ( integer ) $_iTime;
+        }
+
+        /**
          * @since       3.2.0
          * @since       3.5.0       Changed the visibility scope from protected.
          * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
          * @since       3.7.5       Made the date the cached time
          * @return      string
          */
-        private function ___getPricingDisclaimer( $sResponseDate ) {
-
-            $_sCacheModTime = $this->getElement( $this->___aCacheDBRow, 'modified_time' );
-            $_iTime         = $this->___oUnitOutput->bDBTableAccess && $_sCacheModTime
-                ? strtotime( $_sCacheModTime )
-                : strtotime( $sResponseDate );
+        private function ___getPricingDisclaimer( $sUpdatedDate ) {
             return "<span class='pricing-disclaimer'>"
                 . "("
                     . sprintf(
                         __( 'as of %1$s', 'amazon-auto-links' ),
-                       $this->getSiteReadableDate( $_iTime, get_option( 'date_format' ), true )
+                       $sUpdatedDate
                     )
                     . ' - '
                     . $this->___getDisclaimerTooltip()

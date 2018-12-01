@@ -50,7 +50,11 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'content'               => null,
         'meta'                  => null,
         'similar_products'      => null,
-        
+
+        // 3.8.0
+        'category'     => null,
+        'feature'      => null,
+        'sales_rank'   => null,
     );
     
     
@@ -89,6 +93,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         if ( $_oOption->isAPIConnected() ) {
             $this->_aItemFormatDatabaseVariables[] = '%description%';
             $this->_aItemFormatDatabaseVariables[] = '%content%';
+            $this->_aItemFormatDatabaseVariables[] = '%feature%';   // 3.8.0
+            $this->_aItemFormatDatabaseVariables[] = '%category%';  // 3.8.0
+            $this->_aItemFormatDatabaseVariables[] = '%rank%';      // 3.8.0
         }
     }
 

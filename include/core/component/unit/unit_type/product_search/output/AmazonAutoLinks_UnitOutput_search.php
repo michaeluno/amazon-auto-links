@@ -569,7 +569,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     
                     // At this point, update the black&white lists as this item is parsed.
                     $this->setParsedASIN( $_aItem[ 'ASIN' ] );
-    
+
                     $_aProduct      = $this->___getProduct(
                         $_aItem,
                         $_sTitle,
@@ -581,7 +581,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $_sAssociateID,
                         $_sResponseDate
                     );
-    
+
                 } catch ( Exception $_oException ) {
                     // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
                     continue;   // skip
@@ -761,7 +761,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_sAssociateID,
                 $_sResponseDate
             ) {
-    
+
                 // Construct a product array. This will be passed to a template.
                 $_aProduct = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
@@ -781,13 +781,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] )
                         : '',
                     // 'manufacturer' => $_aItem[ 'ItemAttributes' ][ 'Manufacturer' ],
-                    'category'           => $this->getElement(
-                        $_aItem,
-                        array( 'ItemAttributes', 'ProductGroup' ),
-                        ''
-                    ),
+                    'category'           => $this->_getCategories( $_aItem ),
                     // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
-                    'date'               => $this->getElement(
+                    'release_date'       => $this->getElement(  // 3.8.0
                         $_aItem,
                         array( 'ItemAttributes', 'ReleaseDate' ),
                         $this->getElement(
@@ -808,10 +804,16 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'image_set'           => '',  // 3+
                     'editorial_review'    => '',  // 3+ // @todo add a format method for editorial reviews.
                     'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
+                    'feature'             => $this->_getFeatures( $_aItem ),
+                    'sales_rank'          => $this->getElement(
+                        $_aItem,
+                        array( 'SalesRank' ),
+                        0
+                    ), // 3.8.0
                 )
                 + $this->___getPrices( $_aItem )
                 + $_aItem;
-    
+
                 // Add meta data to the description
                 $_aProduct[ 'meta' ]        = $this->___getProductMetaFormatted( $_aProduct );
                 $_aProduct[ 'description' ] = $this->___getProductDescriptionFormatted( $_aProduct );
@@ -868,7 +870,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 return $_aProduct;
     
             }
-            
+
             /**
              * Returns the API response date which must be inserted in the advertisement output for the API agreements.
              * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2

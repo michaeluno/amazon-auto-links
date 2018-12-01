@@ -15,6 +15,66 @@
 abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Constructs the category output from an array of nested browse nodes.
+     * @since       3.8.0
+     * @return      string
+     */
+    static public function getCategories( array $aBrowseNodes ) {
+        $_sList = '';
+        foreach( self::___getBrowseNodes( $aBrowseNodes ) as $_sBrowseNode ) {
+            $_sList .= "<li class='category'>" . $_sBrowseNode . "</li>";
+        }
+        return "<ul class='categories'>" . $_sList . "</ul>";
+    }
+        /**
+         * @param array $aBrowseNodes
+         *
+         * @return array
+         * @sicne   3.8.0
+         */
+        static private function ___getBrowseNodes( array $aBrowseNodes ) {
+            $_aList = array();
+            foreach( $aBrowseNodes as $_aBrowseNode ) {
+                $_aList[] = self::___getNodeBreadcrumb( $_aBrowseNode, '' );
+
+            }
+            return $_aList;
+        }
+            /**
+             * @param array $aBrowseNode
+             * @param strign $sBreadcrumb
+             * @since   3.8.0
+             * @return string
+             */
+            static private function ___getNodeBreadcrumb( array $aBrowseNode, $sBreadcrumb ) {
+
+                if ( $sBreadcrumb ) {
+                    $sBreadcrumb .= ' > ';
+                }
+                $sBreadcrumb .= self::getElement( $aBrowseNode, 'Name' );
+
+                $_aAncestor = self::getElementAsArray( $aBrowseNode, array( 'Ancestors', 'BrowseNode' ) );
+                if ( ! empty( $_aAncestor ) ) {
+                    $sBreadcrumb .= self::___getNodeBreadcrumb( $_aAncestor, $sBreadcrumb );
+                }
+                return $sBreadcrumb;
+
+            }
+
+    /**
+     * Constructs the features list output from an array storing features.
+     * @since       3.8.0
+     * @return      string
+     */
+    static public function getFeatures( array $aFeatures ) {
+        $_sList = "";
+        foreach( $aFeatures as $_sFeature ) {
+            $_sList .= "<li class='feature'>$_sFeature</li>";
+        }
+        return "<ul class='features'>" . $_sList . "</ul>";
+    }
+
+    /**
      *
      * @since       unknown
      * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
@@ -44,12 +104,12 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Plugin
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base`.
      */
     static public function hasCustomVariable( $sSubject, array $aKeys = array( '%price%', '%rating%', '%review%', '%image_set%' ) ) {
-        $_aKeys = array();
+        $_aKeysNeedle = array();
         foreach( $aKeys as $_sKey ) {
-            $_aKeys[] = '\Q' . $_sKey . '\E';
+            $_aKeysNeedle[] = '\Q' . $_sKey . '\E';
         }
         return preg_match(
-            '/(' . implode( '|', $aKeys ) . ')/',  // '/(\Q%price%\E|\Q%rating%\E|\Q%review%\E|\Q%image_set%\E)/'
+            '/(' . implode( '|', $_aKeysNeedle ) . ')/',  // '/(\Q%price%\E|\Q%rating%\E|\Q%review%\E|\Q%image_set%\E)/'
             $sSubject
         );
     }

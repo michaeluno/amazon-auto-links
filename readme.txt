@@ -280,7 +280,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.0 =
+- Added the `%category%`, `%feature%`, `%date%`, `%rank%` variables for the `Item Format` unit option.
 - Added the ability to convert amazon links in posts, comments and possibly other areas into user's associate links.
+- Fixed a bug that review numbers get broken characters for some locales.
 - Fixed a bug that descriptions of category units were HTML-encoded.
 
 = 3.7.10 - 11/14/2018 =

@@ -297,7 +297,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $_aRow[ 'customer_reviews' ]        = '';
                     
                 }
-                
+
+                // 3.8.0 If the table version is above 1.1.0b01 or above,
+                $_sCurrentVersion = get_option( "aal_products_version", '0' );
+                if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=')) {
+                    $_aRow[ 'features' ]   = $this->getElementAsArray(
+                        $aAPIResponseProductData,
+                        array( 'ItemAttributes', 'Feature', )
+                    );
+                    $_aRow[ 'categories' ] = $this->getElementAsArray(
+                        $aAPIResponseProductData,
+                        array( 'BrowseNodes', )
+                    );
+                }
+
                 return $_aRow;
             }
                 /**
