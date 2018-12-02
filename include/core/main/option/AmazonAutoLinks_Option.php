@@ -308,22 +308,12 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return      array
      */
     public function getDefaultItemFormat() {
-        
+
         $_bAPIConnected = $this->isAPIConnected();
         return array(
             'item_format' => $_bAPIConnected
-                ? '%image%' . PHP_EOL    // since the 
-                    . '%image_set%' . PHP_EOL
-                    . '%rating%' . PHP_EOL
-                    . '%title%' . PHP_EOL
-                    . '%description%' . PHP_EOL
-                    . '%disclaimer%'    // 3.2.0+
-                : '%image%' . PHP_EOL    // since the 
-                    . '%title%' . PHP_EOL
-                    . '%description%' . PHP_EOL
-                    . '%disclaimer%'    // 3.2.0+
-                    ,
-                    
+                ? $this->getDefaultItemFormatConnected()
+                : $this->getDefaultItemFormatDisconnected(),
             'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%px;">' . PHP_EOL
                 . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">' . PHP_EOL 
                 . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
@@ -336,7 +326,42 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 
         );
         
-    }                
+    }
+
+    /**
+     * @since   3.8.0
+     * @return  string
+     */
+    public function getDefaultItemFormatConnected() {
+        return '<div class="amazon-auto-links-product">' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-image">' . PHP_EOL
+            . '        %image%' . PHP_EOL
+            . '        %image_set%' . PHP_EOL
+            . '    </div>' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-body">' . PHP_EOL
+            . '        %title%' . PHP_EOL
+            . '        %rating%' . PHP_EOL
+            . '        %description%' . PHP_EOL
+            . '        %disclaimer%' . PHP_EOL
+            . '    </div>' . PHP_EOL
+            . '</div>';
+    }
+    /**
+     * @since   3.8.0
+     * @return  string
+     */
+    public function getDefaultItemFormatDisconnected() {
+        return '<div class="amazon-auto-links-product">' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-image">' . PHP_EOL
+            . '        %image%' . PHP_EOL
+            . '    </div>' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-body">' . PHP_EOL
+            . '        %title%' . PHP_EOL
+            . '        %description%' . PHP_EOL
+            . '        %disclaimer%' . PHP_EOL
+            . '    </div>' . PHP_EOL
+            . '</div>';
+    }
             
     /**
      * @return      boolean

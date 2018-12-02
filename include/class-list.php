@@ -303,6 +303,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_OptionConverter_Base"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionConverter_Base.php", 
     "AmazonAutoLinks_OptionConverter_V1ToV3"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionConverter_V1ToV3.php", 
     "AmazonAutoLinks_OptionConverter_V2ToV3"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionConverter_V2ToV3.php", 
+    "AmazonAutoLinks_OptionUpdater_To380"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionUpdater_To380.php", 
     "AmazonAutoLinks_Option_Base"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/_abstract/AmazonAutoLinks_Option_Base.php", 
     "AmazonAutoLinks_Output"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Output.php", 
     "AmazonAutoLinks_Output___Ajax"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Output___Ajax.php", 

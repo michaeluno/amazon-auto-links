@@ -56,8 +56,11 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
              */
             add_action( 'current_screen', array( $this, 'replyToSetUpHooks' ) );
 
-        }                 
-        
+        }
+
+        // 3.8.0
+        new AmazonAutoLinks_OptionUpdater_To380;
+
     }
     
         /**

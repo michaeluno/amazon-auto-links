@@ -44,6 +44,10 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
         private function ___getDatabaseTableUpdated( $sTableName, $sVersionTo ) {
 
             $_sCurrentVersion = get_option( "{$sTableName}_version", 0 );
+            /**
+             * This action is used to update the plugin options as well.
+             */
+            do_action( 'aal_action_update_plugin_database_table', $sTableName, $_sCurrentVersion, $sVersionTo );
             if ( version_compare($_sCurrentVersion, $sVersionTo, '>=')) {
                 throw new Exception( __( 'The database table is already up to date.', 'amazon-auto-links' ) );
             }
