@@ -91,7 +91,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     private function ___setProperties() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( $_oOption->isAPIConnected() ) {
-            $this->_aItemFormatDatabaseVariables[] = '%description%';
+            $this->_aItemFormatDatabaseVariables[] = '%description%'; // @todo this might be wrong and should be removed
             $this->_aItemFormatDatabaseVariables[] = '%content%';
             $this->_aItemFormatDatabaseVariables[] = '%feature%';   // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%category%';  // 3.8.0

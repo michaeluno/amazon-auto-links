@@ -11,11 +11,11 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
-     * 
+     *
      * @return      array
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
-        
+
         $_oOption       = $this->oOption;
         $_bAPIConnected = $this->oOption->isAPIConnected();
         $_sDel          = $_bAPIConnected
@@ -23,6 +23,14 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
             : "delete-line";
         $_iMaxCol       = $this->oOption->getMaxSupportedColumnNumber();
         $_aItemFormat   = $this->oOption->getDefaultItemFormat();
+
+        // 3.8.0 If the database table version is below 1.1.0b01,
+        $_bTableUpdateRequired = false;
+        if ( version_compare( get_option( "aal_products_version", '0' ), '1.1.0b01', '<' ) ) {
+            $_sDel = $_sDel ? $_sDel : 'delete-line';
+            $_bTableUpdateRequired = true;
+        }
+
         $_aFields       = array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'template_id',
@@ -64,7 +72,8 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                     
                 ),
                 'default'           => $_aItemFormat[ 'item_format' ],
-                'description'       => __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
+                'description'       => array(
+                    __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -93,6 +102,10 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                                 AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
                             )
                         ),
+                        $_bTableUpdateRequired
+                            ? '<span style="color: red;">' . __( 'Some variables require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
+                            : '',
+                    ),
             ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'title_format',
