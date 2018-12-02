@@ -69,6 +69,9 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Plugin
     static public function getFeatures( array $aFeatures ) {
         $_sList = "";
         foreach( $aFeatures as $_sFeature ) {
+            if ( ! trim( $_sFeature ) ) {
+                continue;
+            }
             $_sList .= "<li class='feature'>$_sFeature</li>";
         }
         return "<ul class='features'>" . $_sList . "</ul>";

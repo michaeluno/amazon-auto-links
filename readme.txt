@@ -281,6 +281,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 = 3.8.0 =
 - Changed the default `Item Format` unit option value.
+- Added the default template `List`.
 - Added the `%category%`, `%feature%`, `%date%`, `%rank%` variables for the `Item Format` unit option.
 - Added the ability to convert amazon links in posts, comments and possibly other areas into user's associate links.
 - Fixed a bug that review numbers get broken characters for some locales.

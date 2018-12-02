@@ -1,0 +1,233 @@
+/*
+    Template Name:  List
+    Template URI:   http://en.michaeluno.jp
+    Author:         Michael Uno
+    Author URI:     http://en.michaeluno.jp
+    Description:    Displays Amazon products for the list unit type.
+    Version:        1.0.0
+    License:        GNU General Public License v2 or later
+    License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:           default
+    Text Domain:    amazon-auto-links
+*/
+.amazon-products-container-list {
+    overflow-y: auto;
+	overflow-x: hidden;
+    width: 100%;
+}
+.amazon-products-container-list a {
+	text-decoration: none;
+}
+.amazon-products-container-list .amazon-product-container {
+	width: 100%;
+	display: block;
+	clear:both;
+	margin-bottom: 1.4em;
+}
+.amazon-products-container-list .amazon-product-title {
+}
+.amazon-products-container-list .amazon-product-thumbnail-container {
+	width: 100%;
+}
+.amazon-products-container-list .amazon-product-thumbnail {
+	margin: auto;
+	text-align: center;
+}
+.amazon-products-container-list .amazon-product-thumbnail img {
+	max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.amazon-products-container-list .amazon-auto-links-credit {
+	font-size: smaller;
+}
+.amazon-products-container-list .amazon-product-author,
+.amazon-products-container-list .amazon-product-price,
+.amazon-products-container-list .amazon-product-discounted-price,
+.amazon-products-container-list .amazon-product-lowest-new-price,
+.amazon-products-container-list .amazon-product-lowest-used-price {
+	font-size: 0.92em;
+}
+/* Description Word-wrap */
+.amazon-products-container-list > .amazon-product-container > .amazon-product-description {
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+    /* For the disclaimer to continue */
+    display: inline;
+    margin-right: 0.5em;
+}
+
+/* Meta */
+.amazon-products-container-list > .amazon-product-container  .amazon-product-meta {
+    display: inline;
+    margin-right: 0.4em;
+}
+
+/* Customer Reviews */
+.amazon-products-container-list .amazon-customer-reviews {
+    word-break: break-all;
+}
+/* Rating stars */
+.amazon-products-container-list span.asinReviewsSummary > a > img,
+.amazon-products-container-list .amazon-customer-reviews img,
+.amazon-products-container-list span.crVotingButtons > nobr > a  > img {
+    display: inline-block;
+}
+.amazon-products-container-list .reviews-voting-stripe {
+    border-right: 0 !important;
+}
+.amazon-products-container-list span.crAvgStars a {
+    text-decoration: none;
+    border-bottom: 0;
+}
+.amazon-products-container-list .amazon-customer-rating-stars {
+    margin: 0.4em 0;
+}
+
+/* Sub-images */
+.amazon-products-container-list .sub-image-container {
+    display: inline-block;
+    clear: none;
+    margin: 1em;
+}
+.widget-area .amazon-products-container-list .sub-image-container {
+    margin: 0.4em 0.4em 0 0;
+}
+
+/* Button */
+.amazon-products-container .amazon-auto-links-button-container {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* For debugging */
+.amazon-products-container-list .dump-array {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: 0 1em;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin: 1em 0;
+}
+
+/* Pricing disclaimer */
+.amazon-products-container-list .pricing-disclaimer {
+    font-size: xx-small;
+}
+
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip {
+   outline: none;
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip strong {
+    line-height:30px;
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip:hover {
+    text-decoration: none;
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    z-index:999;
+    display:none;
+    padding:14px 20px;
+    margin-top:-30px;
+    margin-left:28px;
+    width:300px;
+    line-height:16px;
+
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content {
+    display: inline;
+    position: relative;
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    display: inline;
+    float: right;
+    position: absolute;
+    color:#111;
+    border:1px solid #DCA;
+    background:#fffAF0;
+
+    /* Adjust the pop up element position */
+    margin-left: -100px;
+    margin-top: -140px;
+}
+.amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+}
+
+/* Contents %content% */
+.amazon-products-container .amazon-product-content *
+{
+    width: auto !important;
+    max-width: 100% !important;
+}
+
+/* Contents in Widgets*/
+.widget .amazon-products-container-list .amazon-product-content *
+{
+    width: auto;
+    display: inline-block;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+/* Similar Products */
+.amazon-products-container-list .amazon-similar-products  .amazon-similar-product  {
+    display: inline-block;
+    margin: 1em;
+}
+.amazon-products-container-list .amazon-similar-products  .amazon-similar-product > img {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+.amazon-products-container-list .categories {
+    list-style-type: none;
+}
+
+/* List template specific rules */
+.amazon-products-container-list .amazon-auto-links-product-image {
+    vertical-align: top;
+    display: inline-block;
+    width: 32%;
+    margin-right: 1%;
+    font-size: x-small;
+}
+.amazon-products-container-list .amazon-auto-links-product-image .amazon-product-thumbnail {
+    padding: 1em;
+}
+.amazon-products-container-list .sub-image-container {
+    display: inline-block;
+    max-width: 40px;
+    max-height: 40px;
+    margin: 0.1em;
+}
+.amazon-products-container-list .sub-image-container .sub-image {
+    max-width: 40px;
+    max-height: 40px;
+}
+.amazon-products-container-list .amazon-auto-links-product-body {
+    display: inline-block;
+    width: 66%;
+    font-size: x-small;
+}

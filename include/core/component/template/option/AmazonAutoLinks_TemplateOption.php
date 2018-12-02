@@ -113,7 +113,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             
             $_aDirPaths = array(
                 AmazonAutoLinks_Registry::$sDirPath . '/template/category',
-                AmazonAutoLinks_Registry::$sDirPath . '/template/search'
+                AmazonAutoLinks_Registry::$sDirPath . '/template/search',
+                AmazonAutoLinks_Registry::$sDirPath . '/template/list'  // 3.8.0
             );
             $_iIndex     = 0;
             $_aTemplates = array();
