@@ -27,9 +27,10 @@ class AmazonAutoLinks_OptionUpdater_To380 extends AmazonAutoLinks_PluginUtility 
      * @param $sVersionTo
      */
     public function replyToUpdateOptions( $sTableName, $sVersionFrom, $sVersionTo ) {
-        if ( version_compare( '1.1.0b01', $sVersionTo, '<' ) ) {
-            return;
-        }
+
+//        if ( version_compare( '1.1.0b01', $sVersionTo, '<' ) ) {
+//            return;
+//        }
 
         $_baOptions          = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
         if ( ! $_baOptions ) {
@@ -47,11 +48,14 @@ class AmazonAutoLinks_OptionUpdater_To380 extends AmazonAutoLinks_PluginUtility 
         $_sItemFormat        = $this->getElement( $_aOptions, array( 'unit_default', 'item_format' ), '' );
         $_aLegacyItemFormats = $this->___getLegacyDefaultItemFormats();
         foreach( $_aLegacyItemFormats as $_iIndex => $_sThisItemFormat ) {
+            // Remove line feeds as Windows and Unix handles PHP_EOL differently.
+            $_sThisItemFormat = str_replace( array( "\r", "\n", ), '', $_sThisItemFormat );
+            $_sItemFormat     = str_replace( array( "\r", "\n", ), '', $_sItemFormat );
             if ( $_sThisItemFormat !== $_sItemFormat ) {
                 continue;
             }
             // If they equal each other, update the option
-            $_aOptions[ 'unit_default' ][ 'item_format' ] = $this->___getNewItemFormat( $_sItemFormat, $_iIndex );
+            $_aOptions[ 'unit_default' ][ 'item_format' ] = $this->___getNewItemFormat( $_iIndex );
         }
         update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], $_aOptions );
     }
@@ -60,7 +64,7 @@ class AmazonAutoLinks_OptionUpdater_To380 extends AmazonAutoLinks_PluginUtility 
          * @param integer $iIndex
          * @return string
          */
-        private function ___getNewItemFormat( $sOldItemFormat, $iIndex ) {
+        private function ___getNewItemFormat( $iIndex ) {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             if ( 1 === $iIndex ) {
                 return $_oOption->getDefaultItemFormatConnected();
