@@ -25,6 +25,7 @@
 	margin-bottom: 1.4em;
 }
 .amazon-products-container-list .amazon-product-title {
+    margin: 0.1em 0 1em;
 }
 .amazon-products-container-list .amazon-product-thumbnail-container {
 	width: 100%;
