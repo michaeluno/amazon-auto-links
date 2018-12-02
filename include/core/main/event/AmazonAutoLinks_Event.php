@@ -35,23 +35,28 @@ class AmazonAutoLinks_Event {
 
             do_action( 'aal_action_events' );
 
-            $this->___registerActions();
+            $this->___handleWPCronEvents();
+
+            $this->___handleAjaxEvents();
 
             $this->___handleBackgroundRoutines();
 
             $this->___handleQueryURL();
+
             
         }
+            private function ___handleAjaxEvents() {
+                new AmazonAutoLinks_Event___Action_AjaxUnitLoading; // 3.6.0+
+            }
             /**
              * @since       3.5.0
              * @return      void
              */
-            private function ___registerActions() {
+            private function ___handleWPCronEvents() {
 
                 new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
                 new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
                 new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
-                new AmazonAutoLinks_Event___Action_AjaxUnitLoading; // 3.6.0+
 
             }
 
