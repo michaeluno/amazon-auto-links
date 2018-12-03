@@ -1,7 +1,7 @@
 === Amazon Auto Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, revenue
+Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, revenue, widget
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       4.9.8
@@ -38,6 +38,9 @@ Just check where you want the product links to appear with auto-insert.
 
 - **Static Contents Conversion** - If you want the product link to be static, it is possible. This means if you deactivate the plugin, the converted contents will remain.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
+
+= Auto Link Conversion =
+Hyper links to Amazon products in posts and comments can be transformed into your associate links. This is useful if you have a site that allows guests to post contents that include Amazon links. 
 
 = Widgets = 
 Place the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
@@ -272,10 +275,11 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Screenshots ==
 
-1. **Setting Page** (Creating New Unit)
-2. **Setting Page** (Selecting Categories)
-3. **Embedding Links below Post**
-4. **Widget Sample**
+1. **Embedding Links below Post**
+2. **Widget Sample**
+3. **Setting Page** (Selecting Categories)
+4. **Setting Page** (Creating New Category Unit)
+5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
 
