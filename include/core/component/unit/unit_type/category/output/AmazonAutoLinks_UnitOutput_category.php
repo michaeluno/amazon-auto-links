@@ -18,6 +18,7 @@
  * 
  * @since       unknown
  * @since       3           Changed the name from `AmazonAutoLinks_UnitOutput_Category`.
+ * @deprecated  3.8.1       As Amazon deprecated bestseller feeds this is no longer functional. Use `AmazonAutoLinks_UnitOutput_category2` instead.
  */
 class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
 
@@ -138,7 +139,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         }
 
         /**
-         * @remark      The 'tag' unit type will extend this mehtod.
+         * @remark      The 'tag' unit type will extend this method.
          * @return      array
          */
         protected function _getRSSURLsFromArguments( array $aCategories ) {
@@ -206,7 +207,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 . $_sContents
             . "</div>";
 
-    }               
+    }
 
     /**
      * Fetches and returns the associative array containing the output of product links.
@@ -214,7 +215,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * If the first parameter is not given, 
      * it will determine the RSS urls by the post IDs from the given arguments set in the constructor.
      * 
-     * @return            array            The array contains product information. 
+     * @return            array            The array contains product information.
      */
     public function fetch( $aRSSURLs=array() ) {
 
@@ -775,6 +776,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * Sets up SimplePie object.
      * 
      * @param       integer     $iCacheDuration     // 60 seconds * 60 = 1 hour, 1800 = 30 minutes
+     * @deprecated
      */
     protected function getFeedObj( $aUrls, $iItem=10, $iCacheDuration=36000 ) {    
     

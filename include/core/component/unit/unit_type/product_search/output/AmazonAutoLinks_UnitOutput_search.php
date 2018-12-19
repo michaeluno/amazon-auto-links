@@ -50,13 +50,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @return    array    The response array.
      */
     public function fetch( $aURLs=array() ) {
-        
-        // The search unit type does not use directly passed urls.
-        // Maybe later at some point, custom request URIs can get implemented and they can be directly passed to this method.
-        unset( $aURLs );
-                
+
         // Get API responses
-        $_aResponse = $this->_getResponses();
+        $_aResponse = $this->_getResponses( $aURLs );
         $_aError    = $this->_getResponseError( $_aResponse );
         if ( ! empty( $_aError ) ) {
             return $_aError;
@@ -94,10 +90,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         }
         /**
          * @since       3.1.4
+         * @since       3.8.1           Added the $aURLs parameter.
+         * @param       array       $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
          * @scope       protected       The 'url' unit type will extend this method.
          * @return      array
          */
-        protected function _getResponses() {
+        protected function _getResponses( array $aURLs=array() ) {
 
             // Sanitize the search terms
             $this->___setSearchTerms();
@@ -676,7 +674,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return  string
              */
             private function ___getTitle( $aItem ) {
-                $_sTitle = $this->_getTitleSanitized( $aItem[ 'ItemAttributes' ][ 'Title' ] );
+                $_sTitle = $this->getElement( $aItem, array( 'ItemAttributes', 'Title' ), '' );
+                $_sTitle = $this->_getTitleSanitized( $_sTitle );
                 $this->___checkTitleBlocked( $_sTitle );
                 return $_sTitle;
             }

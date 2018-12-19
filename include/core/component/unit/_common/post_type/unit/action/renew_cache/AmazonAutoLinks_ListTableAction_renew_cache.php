@@ -22,9 +22,12 @@ class AmazonAutoLinks_ListTableAction_renew_cache extends AmazonAutoLinks_Plugin
      */
     public function __construct( array $aPostIDs, $oFactory ) {
 
-        // 3.7.5 Allow unit components do own tasks upon this action
-        // For example, URL units need to renew associated HTTP request caches.
-        // 3.7.6 Moved this before ___getCacheRenewed() to let callbacks perform necessary routines
+        /**
+         * Allow unit components to do own tasks upon this action
+         * For example, URL units need to renew associated HTTP request caches.
+         * @since   3.7.5
+         * @since   3.7.6   Moved this before the below `___getCacheRenewed()` method to let callbacks perform necessary routines
+         */
         do_action( 'aal_action_renew_unit_caches', $aPostIDs );
 
         foreach( $aPostIDs as $_iPostID ) {

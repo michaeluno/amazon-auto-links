@@ -50,21 +50,23 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),
                 'type'          => 'select',
                 'label'         => array(                        
-                    'date'              => __( 'Date', 'amazon-auto-links' ),
+                    // 'date'              => __( 'Date', 'amazon-auto-links' ), // @deprecated 3.8.1
+                    'raw'               => __( 'Raw', 'amazon-auto-links' ),     // 3.8.1
                     'title'             => __( 'Title', 'amazon-auto-links' ),
                     'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
                     'random'            => __( 'Random', 'amazon-auto-links' ),
                 ),
                 'default'       => 'random',
-            ),        
-            array(
-                'field_id'      => 'keep_raw_title',
-                'title'         => __( 'Sort Option', 'amazon-auto-links' ),
-                'type'          => 'checkbox',
-                'label'         => __( 'Keep raw titles.', 'amazon-auto-links' ),
-                'description'   => __( 'If checked, unsanitized titles will be used. This is useful to sort by rank.', 'amazon-auto-links' ),
-                'default'       => false,
-            ),                
+            ),
+// @deprecated  3.8.1   As feeds are not used anymore
+//            array(
+//                'field_id'      => 'keep_raw_title',
+//                'title'         => __( 'Sort Option', 'amazon-auto-links' ),
+//                'type'          => 'checkbox',
+//                'label'         => __( 'Keep raw titles.', 'amazon-auto-links' ),
+//                'description'   => __( 'If checked, unsanitized titles will be used. This is useful to sort by rank.', 'amazon-auto-links' ),
+//                'default'       => false,
+//            ),
             array(
                 'field_id'      => 'feed_type',
                 'title'         => __( 'Types', 'amazon-auto-links' ),

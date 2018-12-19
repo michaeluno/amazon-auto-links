@@ -283,7 +283,16 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.0 - 2018/12/03 =
+= 3.8.1 =
+- Changed the category unit to require API keys.
+- Added the `Raw` sort select option for the category unit type.
+- Deprecated the `Date` sort select option for the category unit type.
+- Deprecated the `Keep the raw title` unit option for the category unit type.
+- Fixed an issue that category units no longer showed products due to deprecation of Amazon product feeds.
+- Fixed a bug that category unit caches were not deleted properly via the action link in the `Manage Units` page.
+- Fixed a bug that internally stored URLs for category units were malformed in some occasions.
+
+= 3.8.0 - 12/03/2018 =
 - Changed the default `Item Format` unit option value.
 - Added the default template `List`.
 - Added the `%category%`, `%feature%`, `%date%`, `%rank%` variables for the `Item Format` unit option.

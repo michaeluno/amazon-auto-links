@@ -38,7 +38,7 @@ class AmazonAutoLinks_Unit_Category_Event_RenewCacheAction extends AmazonAutoLin
                 $_aURLs,
                 $_iCacheDuration,
                 array(),    // http arguments
-                'rss'       // 3.8.1 Changed the value from `url_unit_type` as it appears to be a mistake.
+                'category_unit_type'       // 3.8.1 Changed the value from `url_unit_type` as it appears to be a mistake.
             );
             $_oHTTP->deleteCache();
 

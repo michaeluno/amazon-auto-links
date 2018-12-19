@@ -92,7 +92,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             }
             
             $this->oFactory->setSettingNotice( 
-                __( 'You need to set API keys first to create a Search unit', 'amazon-auto-links' ), 
+                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
                 'updated'
             );
             

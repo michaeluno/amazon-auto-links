@@ -38,9 +38,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     public function construct( /* array $aUnitOptions=array(), array $aFormOptions=array() */ ) {
         
         $_aParams           = func_get_args() + array( 0 => array(), 1 => array() );
-        $_aUnitOptions      = $_aParams[ 0 ];
+        // $_aUnitOptions      = $_aParams[ 0 ]; // @deprecated unused
         $_aFormOptions      = $_aParams[ 1 ];
-     
+
         $this->aOptions     = array(
             'template_path' => AmazonAutoLinks_Registry::$sDirPath . '/template/preview/template.php',
             'is_preview'    => true, // this disables the global ASIN blacklist.
@@ -58,8 +58,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     public function render() {
         
         $sPageURL = $this->___getPageURL(
-            isset( $_GET['href'] ) 
-                ? $_GET['href'] 
+            isset( $_GET[ 'href' ] )
+                ? $_GET[ 'href' ]
             : '', 
             $this->oUnitOption->get( 'country' )
         );
@@ -72,7 +72,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     : 0, // 0 : edit, 1 : new
                 'sPageURL'                      => $sPageURL,
                 'sRSSURL'                       => $_oSidebar->get( 'RSSURL' ), // $aSidebar['sRSSURL'],
-                'aSelectedRSSURLs'              => $this->___getSelectedRSSURLs( $this->oUnitOption->get( 'categories' ) ),
+                'aSelectedRSSURLs'              => $this->___getSelectedRSSURLs( $this->oUnitOption->get( 'categories' ) ), // @deprecated 3.8.1
+                'aSelectedPageURLs'             => wp_list_pluck( $this->oUnitOption->get( 'categories' ), 'page_url' ),
                 'sBounceURL'                    => $this->aOptions[ 'bounce_url' ],
                 'aWorkingURLs'                  => array(),
                 'sBreadcrumb'                   => $_oSidebar->get( 'Breadcrumb' ),
@@ -99,6 +100,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          *
          * @since       unknown
          * @since       3.5.7       Changed the scope to private as this is only used in this class.
+         * @deprecated  As bestseller feeds are deprecated this is no longer needed.
          */
         private function ___getSelectedRSSURLs( $aCategories ) {
                 
@@ -128,8 +130,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             $_aOutput = array();
             foreach( $aCategories as $sKey => $aCategory ) {
                 
-                $sName      = md5( $aCategory['feed_url'] );
-                $sPageURL   = $this->_getLinkURLFormatted( $aCategory['page_url'] );
+                $sName      = md5( $aCategory[ 'feed_url' ] );
+                $sPageURL   = $this->_getLinkURLFormatted( $aCategory[ 'page_url' ] );
                 $_aOutput[] = "<div class='category-select-selected-category'>" 
                         . "<label for='cb-{$sName}'>"
                             . "<input type='checkbox' name='amazon_auto_links_cat_select[checkboxes][{$sKey}]' value='{$sName}' id='cb-{$sName}' />"
@@ -154,8 +156,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         /// Edit the excluding category unit option for preview
         $_aPreviewUnitOptions = $this->oUnitOption->get();
         $_aPreviewUnitOptions[ 'categories_exclude' ] = array();
-        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $_aPreviewUnitOptions );
-        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
+        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category2_preview( $_aPreviewUnitOptions );
+        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category2_preview( $this->oUnitOption );
 
         $_bNested          = false !== strpos( $aPageElements[ 'sBreadcrumb' ], '>' );
 
@@ -165,15 +167,15 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             + count( $this->oUnitOption->get( 'categories_exclude' ) )
         );
         $bIsAlreadyAdded    = $this->___isAddedCategory(
-            $aPageElements['sBreadcrumb'],
+            $aPageElements[ 'sBreadcrumb' ],
             $this->oUnitOption->get( 'categories' )
         );
         $bIsAlreadyAddedExcludingCategory = $this->___isAddedCategory(
-            $aPageElements['sBreadcrumb'],
+            $aPageElements[ 'sBreadcrumb' ],
             $this->oUnitOption->get( 'categories_exclude' )
         );
         $bIsSubCategoryOfAddedItems = $this->___isSubCategoryOfAddedItems(
-            $aPageElements['sBreadcrumb'],
+            $aPageElements[ 'sBreadcrumb' ],
             $this->oUnitOption->get( 'categories' )
         );
         $sAddDisabled       = ! $_bNested || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory
@@ -188,27 +190,27 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $sCreateDisabled    = $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
             ? "disabled='disabled'"
             : "";
-        $sCreateOrSave      = $aPageElements['bNew']
+        $sCreateOrSave      = $aPageElements[ 'bNew' ]
             ? __( 'Create', 'amazon-auto-links' )
             : __( 'Save', 'amazon-auto-links' );
 
         // Arrows
-        $sAddArrow    = $aPageElements['bNew'] && $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
+        $sAddArrow    = $aPageElements[ 'bNew' ] && $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
             ? "<img class='category-select-right-arrow' title='" . __( 'Add the current selection!', 'amazon-auto-links' ) . "' src='" . AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) . "'/>"
             : "";
-        $sCreateArrow = $aPageElements['bNew'] && $_bNested && ! $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
+        $sCreateArrow = $aPageElements[ 'bNew' ] && $_bNested && ! $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
             ? "<img class='category-select-right-arrow' title='" . esc_attr( __( 'Create the unit!', 'amazon-auto-links' ) ) . "' src='" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_right.png' ) ) . "'/>"
             : "";
-        $sSelectArrow = $aPageElements['bNew'] && ! $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
+        $sSelectArrow = $aPageElements[ 'bNew' ] && ! $_bNested && $this->isEmpty( $this->oUnitOption->get( 'categories' ) )
             ? "<img class='category-select-left-bottom-arrow' title='" . esc_attr( __( 'Select a category from the links!', 'amazon-auto-links' ) ) . "' src='" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/arrow_left_bottom.png' ) ) . "'/>"
             : "";
-
         $_oEncrypt = new AmazonAutoLinks_Encrypt;
+
         ?>
 
-<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $_oEncrypt->encode( $aPageElements['sBreadcrumb'] ) ;?>" />
-<input type="hidden" name="amazon_auto_links_cat_select[category][feed_url]" value="<?php echo $aPageElements['sRSSURL'] ;?>" />
-<input type="hidden" name="amazon_auto_links_cat_select[category][page_url]" value="<?php echo $aPageElements['sPageURL'] ;?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $_oEncrypt->encode( $aPageElements[ 'sBreadcrumb' ] ) ;?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][feed_url]" value="<?php echo $aPageElements[ 'sRSSURL' ]; ?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][page_url]" value="<?php echo $aPageElements[ 'sPageURL' ]; ?>" />
 <table class="category-select-table">
     <tbody>
         <tr>
@@ -248,8 +250,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
 
                 <?php
-                if ( $_bNested && $aPageElements[ 'sRSSURL' ] ) {
-                    $_oAALCatPreview->render( array( $aPageElements[ 'sRSSURL' ] ) );
+                /**
+                 * @since   3.8.1   Changed the value to give to the below `render()` method from a RSS URL to a page URL as feeds are deprecated.
+                 */
+                if ( $_bNested && $aPageElements[ 'sPageURL' ] ) {
+                    $_oAALCatPreview->render( array( $aPageElements[ 'sPageURL' ] ) );
                 } else {
                     echo "<p>";
                     _e( 'Please select a category from the list on the left.', 'amazon-auto-links' );
@@ -261,8 +266,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 <h3><?php _e( 'Unit Preview', 'amazon-auto-links' ); ?></h3>                            
                 <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
                 <?php                         
-                if ( ! $this->isEmpty( $aPageElements['aSelectedRSSURLs'] ) ) { 
-                    $_oAALUnitPreview->render( $aPageElements['aSelectedRSSURLs'] );
+                if ( ! $this->isEmpty( $aPageElements[ 'aSelectedPageURLs' ] ) ) {
+                    /**
+                     * @since   3.8.1   Changed the value to give to the below `render()` method from RSS URLs to page URLs as best seller feeds are deprecated by Amazon.
+                     */
+                    $_oAALUnitPreview->render( $aPageElements[ 'aSelectedPageURLs' ] );
                     flush(); 
                 } else {
                     echo "<p>";
@@ -307,18 +315,20 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          * Determines whether the current browsing category is a sub-category of added ones.
          * @since       unknown
          * @since       3.5.7       Changed the scope to private as this is only used in this class.
+         * @return      boolean
          */
         private function ___isSubCategoryOfAddedItems( $sBreadCrumb, $aCategories ) {
-            
+            $_sBreadCrumb = trim( $sBreadCrumb );
             foreach( $aCategories as $_aCategory ) {
-                if ( 
-                    ( false !== strpos( trim( $sBreadCrumb ), trim( $_aCategory[ 'breadcrumb' ] ) ) )
-                    && ( trim( $_aCategory[ 'breadcrumb' ] ) != trim( $sBreadCrumb ) )
-                ) {
+                $_sCategoryBreadCrumb = trim( $_aCategory[ 'breadcrumb' ] );
+                if ( $_sCategoryBreadCrumb === $_sBreadCrumb ) {
+                    continue;
+                }
+                if ( false !== strpos( $_sBreadCrumb, $_sCategoryBreadCrumb ) ) {
                     return true;
                 }
             }
-            
+            return false;
         }
    
         /**
@@ -336,6 +346,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                     ? AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ]
                     : AmazonAutoLinks_Property::$aCategoryRootURLs[ 'US' ]
                 );
+
+            // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
+            $_sURL = str_replace("//gp/","/gp/", $_sURL );
 
             // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
             // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.

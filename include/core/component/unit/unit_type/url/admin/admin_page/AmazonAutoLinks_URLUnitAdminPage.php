@@ -62,5 +62,23 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
     public function doPageSettings() {                
         $this->setPageTitleVisibility( true ); // disable the page title of a specific page.   
     }
+
+    public function load() {
+        $this->___checkAPIKeys();
+    }
+        private function ___checkAPIKeys() {
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            if ( $_oOption->isAPIConnected() ) {
+                return;
+            }
+
+            $this->setSettingNotice(
+                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
+                'updated'
+            );
+
+            // Go to the Authentication tab of the Settings page.
+            AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
+        }
         
 }

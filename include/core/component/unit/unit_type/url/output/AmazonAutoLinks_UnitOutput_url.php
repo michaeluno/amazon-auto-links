@@ -20,7 +20,6 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
      * @remark      Note that the base constructor will create a unit option object based on this value.
      */    
     public $sUnitType = 'url';
-
         
     /**
      * Performs API requests and get responses.
@@ -28,22 +27,25 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
      * First, sets up the unit options for the item look up API query.
      * 
      * @since       3.2.0
+     * @since       3.8.1       Added the `$aURLs` parameter to accept direct URLs to be passsed.
      * @scope       protected       The 'url' unit type will extend this method.
      * @return      array
      */
-    protected function _getResponses() {
+    protected function _getResponses( array $aURLs=array() ) {
 
         /**
          * Retrieve the HTML body from data base. It will fetch if the data does not exist.
          * Also updates the `_found_items` unit option.
          */
-        $_aHTMLs = $this->_getHTMLBodies( $this->oUnitOption->get( 'urls' ) );       
+        $_aURLs  = array_merge( $aURLs, $this->getAsArray( $this->oUnitOption->get( 'urls' ) ) );
+        $_aURLs  = $this->_getURLs( $_aURLs );
+        $_aHTMLs = $this->_getHTMLBodies( $_aURLs );
         
         // Retrieve ASINs from the given documents. Supports plain text.
         $_aFoundASINs = $this->_getFoundItems( $_aHTMLs );
                 
         // Update unit options.
-        $this->_setUnitTypeSpecificUnitOptions( $_aFoundASINs );
+        $this->___setUnitTypeSpecificUnitOptions( $_aFoundASINs );
                 
         // If the id is set, save the found items so that the user can view what's found in the unit editing page.
         $_iPostID = $this->oUnitOption->get( 'id' );
@@ -58,7 +60,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
         }
         
         // Now do the API request and get responses.
-        return parent::_getResponses();
+        return parent::_getResponses( $_aURLs );
         
     }  
 
@@ -66,7 +68,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * Updated unit options.
          * @since       3.2.1
          */
-        private function _setUnitTypeSpecificUnitOptions( $aFoundASINs ) {
+        private function ___setUnitTypeSpecificUnitOptions( $aFoundASINs ) {
                             
             // Set the found items to the `ItemId` argument.
             $this->oUnitOption->set( 
@@ -81,26 +83,38 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             $this->oUnitOption->set( '_allowed_ASINs', $aFoundASINs );
             
         }
-        
+
         /**
-         * 
+         * Returns the subject urls for this unit.
+         * @scope   protected   the category2 unit output class extends this method to set own URLs.
+         * @param   $asURLs
+         * @since   3.8.1
+         * @return  array
          */
-        private function _getHTMLBodies( $asURLs ) {
-            $_aURLs = $this->getAsArray( $asURLs );
+        protected function _getURLs( $asURLs ) {
+            return $this->getAsArray( $asURLs );
+        }
+
+        /**
+         *
+         * @since       unknown
+         * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
+         */
+        protected function _getHTMLBodies( array $aURLs ) {
             $_oHTTP = new AmazonAutoLinks_HTTPClient( 
-                $_aURLs,
+                $aURLs,
                 $this->oUnitOption->get( 'cache_duration' ),
                 array(  // http arguments
                     'timeout'     => 20,
                     'redirection' => 20,
                 ),
-                'url_unit_type' // request type
+                $this->sUnitType . '_unit_type' // request type
             );
             
             $_aHTMLBodies = $_oHTTP->get();
             
             // Set a debug output
-            $this->_setDebugInfoForHTMLBodies( $_aHTMLBodies );            
+            $this->___setDebugInfoForHTMLBodies( $_aHTMLBodies );
             
             return $_aHTMLBodies;
         }
@@ -114,7 +128,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
              * @since      3.2.2
              * @return     void
              */
-            private function _setDebugInfoForHTMLBodies( $aHTMLs ) {
+            private function ___setDebugInfoForHTMLBodies( $aHTMLs ) {
                 if ( ! $this->oOption->isDebug() ) {
                     return;
                 }
@@ -130,8 +144,14 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                  * @since       3.2.2
                  * @return      string
                  * @callback    filter      aal_filter_unit_output
+                 * @todo       Probably `remove_filter( 'aal_filter_unit_output )` has to be done in the callback.
                  */
                 public function _replyToAddHTMLBodies( $sProductHTML, $sASIN, $sLocale ) {
+                    remove_filter(
+                        'aal_filter_unit_output',
+                        array( $this, '_replyToAddHTMLBodies' ),
+                        20  // priority
+                    );
                     $_aHTMLs = $this->_aHTMLs;
                     $this->_aHTMLs = array();   // reset for next outputs.
                     return $sProductHTML
@@ -142,15 +162,15 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                             . '</h3>'
                             . AmazonAutoLinks_Debug::get( $_aHTMLs )      
                         . "</pre>";
-                    
                 }
         
         /**
          * Parses the given HTML content and returns found ASINs.
          * @since       3.2.0
+         * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
          * @return      array
          */
-        private function _getFoundItems( $asHTMLs ) {
+        protected function _getFoundItems( $asHTMLs ) {
 
             $_aURLs  = array();
             $_aTexts = array();
@@ -161,7 +181,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'noscript' ) );
                 
                 // HTML documents, extract a tag href attribute value.
-                $_aURLs     = $_aURLs + $this->_getLinksFromHTML( $_oDoc );
+                $_aURLs     = $_aURLs + $this->___getLinksFromHTML( $_oDoc );
             
                 // For plain text pages, sanitize HTML entities.
                 $_sText     = $_oDOM->getTagOuterHTML( $_oDoc, 'body' );
@@ -174,15 +194,15 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 
             }
             
-            $_aURLs = $_aURLs + $this->_getURLs( implode( PHP_EOL, $_aTexts ) );
-            $_aASINs = $this->_getASINsExtracted( $_aURLs );
+            $_aURLs = $_aURLs + $this->___getURLsFromText( implode( PHP_EOL, $_aTexts ) );
+            $_aASINs = $this->___getASINsExtracted( $_aURLs );
             return $_aASINs;
 
         }
             /**
              * @return      array
              */
-            private function _getASINsExtracted( array $aURLs ) {
+            private function ___getASINsExtracted( array $aURLs ) {
                 
                 $_aASINs = array();
                 foreach( $aURLs as $_sURL ) {
@@ -198,7 +218,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
              * 
              * @return      array
              */
-            private function _getLinksFromHTML( $oDOM ) {
+            private function ___getLinksFromHTML( $oDOM ) {
                 
                 $_aLinks = array();
                 foreach( $oDOM->getElementsByTagName( 'a' ) as $nodeA ) {
@@ -209,27 +229,25 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 
             }        
             
-        /**
-         * Finds and returns urls from a given string.
-         * @return      array    List of urls
-         */
-        private function _getURLs( $sText ) {
+            /**
+             * Finds and returns urls from a given string.
+             * @return      array    List of urls
+             */
+            private function ___getURLsFromText( $sText ) {
 
-            $_aURLs = array();
-            preg_match_all( 
-                '#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#s',
-                $sText,
-                $_aURLs
-            );
-            $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
+                $_aURLs = array();
+                preg_match_all(
+                    '#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#s',
+                    $sText,
+                    $_aURLs
+                );
+                $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
 
-            // Make it associative so that duplicate items will be lost.
-            return empty( $_aURLs )
-                ? $_aURLs
-                : array_combine( $_aURLs, $_aURLs );
-            
-        }
-  
-   
-    
+                // Make it associative so that duplicate items will be lost.
+                return empty( $_aURLs )
+                    ? $_aURLs
+                    : array_combine( $_aURLs, $_aURLs );
+
+            }
+
 }

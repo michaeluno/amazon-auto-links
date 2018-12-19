@@ -119,5 +119,23 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
         $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
 
     }
+
+    public function load() {
+        $this->___checkAPIKeys();
+    }
+        private function ___checkAPIKeys() {
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            if ( $_oOption->isAPIConnected() ) {
+                return;
+            }
+
+            $this->setSettingNotice(
+                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
+                'updated'
+            );
+
+            // Go to the Authentication tab of the Settings page.
+            AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
+        }
         
 }
