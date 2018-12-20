@@ -4,8 +4,8 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, revenue, widget
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       4.9.8
-Stable tag:         3.8.0
+Tested up to:       5.0.1
+Stable tag:         3.8.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -283,7 +283,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.1 =
+= 3.8.1 - 12/20/2018 =
 - Changed the category unit to require API keys.
 - Added the `Raw` sort select option for the category unit type.
 - Deprecated the `Date` sort select option for the category unit type.
