@@ -44,23 +44,58 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
      * @since       3.8.2
      * @return      array
      */
-    protected function _getFoundItems( $asHTMLs ) {
-        $_aASINs = parent::_getFoundItems( $asHTMLs );
-        $_aASINs = array_diff( $_aASINs, $this->___getASINsToExclude() );
-        return $_aASINs;
+    protected function _getFoundItems( $aHTMLs ) {
+
+        $_aASINs        = parent::_getFoundItems( $aHTMLs );
+        $_aExcludeASINs = $this->___getASINs( $this->_aExcludingPageURLs );
+        $_aASINsDiff    = array_diff( $_aASINs, $_aExcludeASINs ); // the return value
+
+        // Cover cases with insufficient number of products by checking the paged pages.
+        $_iPage     = 2;    // starts from 2
+        $_iSetCount = $this->oUnitOption->get( 'count' );
+        $_aURLs     = array_keys( $aHTMLs );
+        while ( count( $_aASINsDiff ) < $_iSetCount ) {
+            $_aURLs             = $this->___getURLsPageIncremented( $_aURLs, $_iPage );
+            $_aThisFoundASINs   = $this->___getASINs( $_aURLs );
+            if ( empty( $_aThisFoundASINs ) ) {
+                break;
+            }
+            $_aASINs            = array_unique( array_merge( $_aASINs, $_aThisFoundASINs ) );
+            $_aExcludeURLs      = $this->___getURLsPageIncremented( $this->_aExcludingPageURLs, $_iPage );
+            $_aThisExcludeASINs = $this->___getASINs( $_aExcludeURLs );
+            $_aExcludeASINs     = array_unique( array_merge( $_aExcludeASINs, $_aThisExcludeASINs ) );
+            $_aASINsDiff        = array_diff( $_aASINs, $_aExcludeASINs ); // the return value
+            if ( $_iPage > 10 ) {
+                break;
+            }
+            $_iPage++;
+        }
+        return $_aASINsDiff;
+
     }
+        private function ___getURLsPageIncremented( array $aURLs, $iPage ) {
+            $_aURLs = array();
+            foreach( $aURLs as $_iIndex => $_sURL ) {
+                $_aURLs[ $_iIndex ] = add_query_arg(
+                    array(
+                       'pg' => $iPage,
+                    ),
+                    $_sURL
+                );
+            }
+            return $_aURLs;
+        }
         /**
          * @return array
          * @since   3.8.2
          */
-        private function ___getASINsToExclude() {
-            if ( empty( $this->_aExcludingPageURLs ) ) {
+        private function ___getASINs( array $aURLs = array() ) {
+            if ( empty( $aURLs ) ) {
                 return array();
             }
-            // First find out ASINs to exclude
-            $_aHTMLs          = parent::_getHTMLBodies( $this->_aExcludingPageURLs );
-            $_aASINsToExclude = parent::_getFoundItems( $_aHTMLs );
-            return $_aASINsToExclude;
+            $_aHTMLs = parent::_getHTMLBodies( $aURLs );
+            $_aASINs = parent::_getFoundItems( $_aHTMLs );
+            return $_aASINs;
         }
 
     /**

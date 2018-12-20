@@ -170,12 +170,12 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
          * @return      array
          */
-        protected function _getFoundItems( $asHTMLs ) {
+        protected function _getFoundItems( $aHTMLs ) {
 
             $_aURLs  = array();
             $_aTexts = array();
             $_oDOM   = new AmazonAutoLinks_DOM;
-            foreach( $asHTMLs as $_sURL => $_sHTML ) {   
+            foreach( $aHTMLs as $_sURL => $_sHTML ) {
             
                 $_oDoc      = $_oDOM->loadDOMFromHTML( $_sHTML );
                 $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'noscript' ) );
