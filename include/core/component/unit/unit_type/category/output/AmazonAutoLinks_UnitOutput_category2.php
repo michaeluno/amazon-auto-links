@@ -38,55 +38,29 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
      */
     protected $_aExcludingPageURLs = array();
 
-
     /**
-     * Fetches and returns the associative array containing the output of product links.
-     *
-     * If the first parameter is not given,
-     * it will determine the RSS urls by the post IDs from the given arguments set in the constructor.
-     * @return array
-     * @since  3.8.1    Rewritten for the deprecation change on the Amazon stores.
-     */
-//    public function fetch( $aURLs=array() ) {
-//return array();
-//        $_oFetch new AmazonAutoLinks_UnitOutput__Fetch_category(
-//            $aURLs,
-//            $this->_aPageURLs,
-//            $this->_aExcludingPageURLs,
-//            $this->oUnitOption
-//        );
-//        return $_oFetch->get();
-//    }
-
-    /**
-     * Performs API requests and get responses.
-     *
-     * @since       3.8.1
+     * Returns the found ASINs from HTML documents.
+     * @remark      Excludes ASINs of exclusion categories.
+     * @since       3.8.2
      * @return      array
      */
-    protected function _getResponses( array $aURLs=array() ) {
-
-        $this->___setASINsToExclude();
-        return parent::_getResponses( $aURLs );
-
+    protected function _getFoundItems( $asHTMLs ) {
+        $_aASINs = parent::_getFoundItems( $asHTMLs );
+        $_aASINs = array_diff( $_aASINs, $this->___getASINsToExclude() );
+        return $_aASINs;
     }
         /**
-         * @since   3.8.1
+         * @return array
+         * @since   3.8.2
          */
-        private function ___setASINsToExclude() {
-
+        private function ___getASINsToExclude() {
             if ( empty( $this->_aExcludingPageURLs ) ) {
-                return;
+                return array();
             }
             // First find out ASINs to exclude
-            $_aHTMLs          = $this->_getHTMLBodies( $this->_aExcludingPageURLs );
-            $_aASINsToExclude = $this->_getFoundItems( $_aHTMLs );
-            // Merge with the black list ASINs array
-            $this->oUnitProductFilter->aBlackListASINs = array_merge(
-                $this->oUnitProductFilter->aBlackListASINs,
-                $_aASINsToExclude
-            );
-
+            $_aHTMLs          = parent::_getHTMLBodies( $this->_aExcludingPageURLs );
+            $_aASINsToExclude = parent::_getFoundItems( $_aHTMLs );
+            return $_aASINsToExclude;
         }
 
     /**
