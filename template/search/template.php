@@ -14,7 +14,6 @@ $_aStructure_Product = array(
 	'content'           => '',
 	'description'       => '',
 	'image_size'        => '',
-	'product_url'       => '',
 	'thumbnail_url'     => '',	
 	'author'            => '',
 	'ASIN'              => '',
@@ -26,8 +25,8 @@ $_aStructure_Product = array(
 ); 
 
 $sClassAttributes_ProductsContainer = 'amazon-products-container-search' . ' amazon-unit-' . $aArguments['id'];
-$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] ) 
-    ? '' 
+$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] )
+    ? ''
     : ' amazon-label-' . implode( ' amazon-label-', $aArguments['_labels'] );
 
 $_sWidth  = AmazonAutoLinks_PluginUtility::getDegree( 'width', $aArguments );
