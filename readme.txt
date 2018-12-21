@@ -283,6 +283,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.2 =
+- Fixed an issue that category units often returned insufficient number of products.
+
 = 3.8.1 - 12/20/2018 =
 - Changed the category unit to require API keys.
 - Added the `Raw` sort select option for the category unit type.
