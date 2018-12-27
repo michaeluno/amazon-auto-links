@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.0.2
-Stable tag:         3.8.2
+Stable tag:         3.8.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -283,15 +283,18 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.3 - 12/27/2018 =
+- Tweaked styling of the `List`, `Category` and `Search` templates.
+
 = 3.8.2 - 12/22/2018 =
 - Fixed an issue that category units often returned insufficient number of products.
 
 = 3.8.1 - 12/20/2018 =
-- Changed the category unit to require API keys.
+- Changed the category unit type to require API keys.
 - Added the `Raw` sort select option for the category unit type.
 - Deprecated the `Date` sort select option for the category unit type.
 - Deprecated the `Keep the raw title` unit option for the category unit type.
-- Fixed an issue that category units no longer showed products due to deprecation of Amazon product feeds.
+- Fixed an issue that category units no longer showed products due to recent deprecation of Amazon product feeds by the Amazon store sites.
 - Fixed a bug that category unit caches were not deleted properly via the action link in the `Manage Units` page.
 - Fixed a bug that internally stored URLs for category units were malformed in some occasions.
 

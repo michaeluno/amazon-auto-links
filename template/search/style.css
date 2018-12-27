@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.0.7
+    Version:        1.0.8
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -48,6 +48,11 @@
 .amazon-products-container-search .amazon-product-lowest-new-price,
 .amazon-products-container-search .amazon-product-lowest-used-price {
 	font-size: 0.92em;	
+}
+.amazon-products-container-search .amazon-product-lowest-new-price-value,
+.amazon-products-container-search span.offered-price {
+    color: #B12704;
+    font-weight: bold;
 }
 /* Description Word-wrap */
 .amazon-products-container-search > .amazon-product-container > .amazon-product-description {
@@ -94,6 +99,8 @@
 .amazon-products-container-search span.crAvgStars a {
     text-decoration: none;
     border-bottom: 0;
+    /* No underlines in hyper links with box shadow */
+    box-shadow: none;
 }
 .amazon-products-container-search .amazon-customer-rating-stars {
     margin: 0.4em 0;

@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the category unit type.
-    Version:        1.0.6
+    Version:        1.0.7
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -94,6 +94,8 @@
 .amazon-product-container span.crAvgStars a {
     text-decoration: none;
     border-bottom: 0;
+    /* No underlines in hyper links with box shadow */
+    box-shadow: none;
 }
 .amazon-products-container .amazon-customer-rating-stars {
     margin: 0.4em 0;
@@ -107,6 +109,13 @@
 }
 .widget-area .amazon-products-container .sub-image-container { 
     margin: 0.4em 0.4em 0 0;
+}
+
+/* Prices */
+.amazon-products-container .amazon-product-lowest-new-price-value,
+.amazon-products-container span.offered-price {
+    color: #B12704;
+    font-weight: bold;
 }
 
 /* Button */

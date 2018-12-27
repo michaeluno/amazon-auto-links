@@ -56,8 +56,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
                 $_sLowestColumnName     = $_inDiscount === $_inOffered ? 'discounted_price_formatted' : 'lowest_new_price_formatted';
                 $_sLowestFormatted      = $this->_getCell( $_sLowestColumnName );
                 return $_sPriceFormatted !== $_sLowestFormatted
-                    ? '<s>' . $_sPriceFormatted . '</s> ' . $_sLowestFormatted
-                    : $_sPriceFormatted;
+                    ? '<span class="proper-price"><s>' . $_sPriceFormatted . '</s></span> <span class="offered-price">' . $_sLowestFormatted . '</span>'
+                    : '<span class="offered-price">' . $_sPriceFormatted . '</span>';
 
             }
                 /**

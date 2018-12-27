@@ -21,3 +21,9 @@
 .amazon-auto-links-credit {
 	font-size: smaller;
 }
+
+.amazon-product-lowest-new-price-value,
+span.offered-price {
+    color: #B12704;
+    font-weight: bold;
+}

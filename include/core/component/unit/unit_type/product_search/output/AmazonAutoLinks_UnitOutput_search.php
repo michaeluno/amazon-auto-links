@@ -947,7 +947,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aPrices = array(
                     'price'              => $_sProperPrice
                         ? "<span class='amazon-product-price-value'>"  
-                               . $_sProperPrice
+                               . "<span class='proper-price'>" . $_sProperPrice . "</span>"
                             . "</span>"
                         : "",
                     'discounted_price'   => $_sDiscountedPrice

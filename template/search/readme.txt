@@ -1,5 +1,9 @@
 == Change log ==
 
+= 1.0.8 =
+- Made lowest prices bold and red.
+- Disabled hyperlink underlines with box-shadow.
+
 = 1.0.7 =
 - Made the description element wrap.
 - Tweaked the style of disclaimer element for widgets.
