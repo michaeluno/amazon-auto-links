@@ -27,6 +27,12 @@ class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_
             array( 
                 'tab_slug'  => 'table',
                 'title'     => __( 'Installed', 'amazon-auto-links' ),
+                'script'    => array(
+                    dirname( __FILE__ ) . '/lightbox2/js/lightbox.js',
+                ),
+                'style'     => array(
+                    dirname( __FILE__ ) . '/lightbox2/css/lightbox.css',
+                ),
             )
         );
         new AmazonAutoLinks_AdminPage_Template_GetNew( 
@@ -36,8 +42,8 @@ class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_
                 'tab_slug'  => 'get',
                 'title'     => __( 'Get New', 'amazon-auto-links' ),
             )
-        );        
-        
+        );
+
     }
         
 }

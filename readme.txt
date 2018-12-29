@@ -283,6 +283,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.4 =
+- Tweaked styling of the template listing page.
+
 = 3.8.3 - 12/27/2018 =
 - Tweaked styling of the `List`, `Category` and `Search` templates.
 
