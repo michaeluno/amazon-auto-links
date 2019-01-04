@@ -47,9 +47,11 @@ class AmazonAutoLinks_Event_Scheduler {
      */
     static public function scheduleSimilarProducts( $aSimilarProductASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
 
-        if ( empty( $aSimilarProductASINs ) ) {
-            return false;
-        }
+         // @deprecated 3.8.5 Even there is no item, schedule a background task
+         // so that an empty value will be set instead of `null` which prevents automatic task rescheduling.
+//        if ( empty( $aSimilarProductASINs ) ) {
+//            return false;
+//        }
 
         $_bScheduled = self::_scheduleTask( 
             'aal_action_api_get_similar_products',  // action name

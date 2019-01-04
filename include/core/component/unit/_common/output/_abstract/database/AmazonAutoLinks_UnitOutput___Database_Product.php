@@ -87,9 +87,10 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_iCacheDuration  = ( int ) $this->_oUnitOption->get( 'cache_duration' );
             $_iExpirationTime = strtotime( $_sModifiedTime ) + $_iCacheDuration;
             $_bIsExpired      = $this->isExpired( $_iExpirationTime );
+            $_bShouldSchedule = $_bIsExpired || ! $_bIsSet; // 3.8.5 When the value is not set, schedule retrieving extra product information
 
             $this->___scheduleBackgroundTask(
-                $_bIsExpired,
+                $_bShouldSchedule,
                 $aScheduleTask,
                 $_iCacheDuration
             );
@@ -108,16 +109,16 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
         }
             /**
              * Schedules a background task to retrieve product info.
-             * @param $_bIsExpired
+             * @param $bShuoldSchedule
              * @param $aScheduleTask
              * @param $_iCacheDuration
              */
             private function ___scheduleBackgroundTask(
-                $_bIsExpired,
+                $bShuoldSchedule,
                 $aScheduleTask,
                 $_iCacheDuration
             ) {
-                if ( ! $_bIsExpired ) {
+                if ( ! $bShuoldSchedule ) {
                     return;
                 }
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {

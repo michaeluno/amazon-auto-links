@@ -182,6 +182,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
              * to insert them into the database table.
              * 
              * @return      array
+             * @since       unknown
+             * @since       3.8.5   Changed some of the default values from `null` to an empty string to avoid automatic scheduling of product details retrieval tasks.
              */
             private function ___getRowFormatted( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bCustomerReviewExists ) {
                 
@@ -191,7 +193,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     'modified_time'      => date( 'Y-m-d H:i:s' ),
                     'links'              => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'ItemLinks', 'ItemLink', )
+                        array( 'ItemLinks', 'ItemLink', ),
+                        ''
                     ),
                     'price'              => $this->___getPriceByKey(
                         $aAPIResponseProductData,
@@ -209,35 +212,43 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     ),
                     'sales_rank'         => ( integer ) $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'SalesRank' )
+                        array( 'SalesRank' ),
+                        0
                     ),
                     'lowest_new_price'   => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'LowestNewPrice', 'Amount' )
+                        array( 'OfferSummary', 'LowestNewPrice', 'Amount' ),
+                        0   // 3.8.5 Set a value to avoid setting `null` for automatic scheduling background task to fetch product details
                     ),
                     'lowest_new_price_formatted'  => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'LowestNewPrice', 'FormattedPrice' )
+                        array( 'OfferSummary', 'LowestNewPrice', 'FormattedPrice' ),
+                        '' // 3.8.5 Set a value to avoid setting `null` for automatic scheduling background task to fetch product details
                     ),                    
                     'lowest_used_price'           => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'LowestUsedPrice', 'Amount' )
+                        array( 'OfferSummary', 'LowestUsedPrice', 'Amount' ),
+                        0 // 3.8.5 Set a value to avoid setting `null` for automatic scheduling background task to fetch product details
                     ),
                     'lowest_used_price_formatted' => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'LowestUsedPrice', 'FormattedPrice' )
+                        array( 'OfferSummary', 'LowestUsedPrice', 'FormattedPrice' ),
+                        ''  // 3.8.5 Set a value to avoid setting `null` for automatic scheduling background task to fetch product details
                     ),   
                     'count_new'          => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'TotalNew' )
+                        array( 'OfferSummary', 'TotalNew' ),
+                        0
                     ),   
                     'count_used'         => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'OfferSummary', 'TotalUsed' )
+                        array( 'OfferSummary', 'TotalUsed' ),
+                        0
                     ),                       
                     'title'              => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'ItemAttributes', 'Title' )
+                        array( 'ItemAttributes', 'Title' ),
+                        ''
                     ),    
                     'images'             => $this->___getImages( 
                         $aAPIResponseProductData 
@@ -249,7 +260,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     
                     'editorial_reviews'  => $this->getElement(
                         $aAPIResponseProductData,
-                        array( 'EditorialReviews', 'EditorialReview' )
+                        array( 'EditorialReviews', 'EditorialReview' ),
+                        ''
                     ),
                                         
                     // 'description'        => null,   // (string) product details
@@ -391,9 +403,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $_sDiscountedPriceFormatted = $this->getElement(
                         $aOffer,
                         array( 'Price', 'FormattedPrice' ),
-                        null
+                        ''  // 3.8.5 Changed the value from `null` to an empty string to avoid automatic background product detail retrieval tasks
                     );
-                    if ( null !== $_sDiscountedPriceFormatted ) {
+                    if ( '' !== $_sDiscountedPriceFormatted ) {
                         return $_sDiscountedPriceFormatted;
                     }
                     
@@ -453,7 +465,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     if ( null !== $_nDiscountPercentage ) {
                         return $nPrice * ( ( 100 - $_nDiscountPercentage ) / 100 );
                     }                    
-                    return null;
+                    return 0;   // 3.8.5 changed the default value from null to 0 to avoid automatic background task of retrieving product details
                 }
                 /**
                  * @return      array

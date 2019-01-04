@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.0.2
-Stable tag:         3.8.4
+Stable tag:         3.8.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,6 +282,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 3.8.5 - 01/04/2019 =
+- Fixed an issue that sometimes pending product details did not complete.
 
 = 3.8.4 - 12/30/2018 =
 - Tweaked styling of the template listing page.
