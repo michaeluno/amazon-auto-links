@@ -34,8 +34,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoL
 
         // For search-type units, this value is already set with API response.
         if ( $this->_aProduct[ 'feature' ] ) {
-            return "<p>Features Already Exists</p>"
-                . $this->_aProduct[ 'feature' ];
+            return $this->_aProduct[ 'feature' ];
         }
 
         $_snEncodedHTML = $this->_getCell( 'features' );
