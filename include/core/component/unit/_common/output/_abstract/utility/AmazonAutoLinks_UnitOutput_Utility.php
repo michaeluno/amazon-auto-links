@@ -33,29 +33,41 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Plugin
          * @sicne   3.8.0
          */
         static private function ___getBrowseNodes( array $aBrowseNodes ) {
-            $_aList = array();
-            foreach( $aBrowseNodes as $_aBrowseNode ) {
-                $_aList[] = self::___getNodeBreadcrumb( $_aBrowseNode, '' );
 
+            $_aList = array();
+            $_aBrowseNodes = self::getElementAsArray( $aBrowseNodes, 'BrowseNode' );
+            if ( empty( $_aBrowseNodes ) ) {
+                return $_aList;
+            }
+
+            // For multiple nodes, the it is numerically indexed. Otherwise, the associative array itself.
+            $_aBrowseNodes = isset( $_aBrowseNodes[ 0 ] ) ? $_aBrowseNodes : array( $_aBrowseNodes );
+            foreach( $_aBrowseNodes as $_aBrowseNode ) {
+                $_aList[] = self::___getNodeBreadcrumb( $_aBrowseNode, '' );
             }
             return $_aList;
         }
             /**
              * @param array $aBrowseNode
-             * @param strign $sBreadcrumb
-             * @since   3.8.0
+             * @param string $sBreadcrumb
+             * @since 3.8.0
              * @return string
              */
-            static private function ___getNodeBreadcrumb( array $aBrowseNode, $sBreadcrumb ) {
+            static private function ___getNodeBreadcrumb( array $aBrowseNode, $sBreadcrumb, $sDelimiter=' > ' ) {
 
-                if ( $sBreadcrumb ) {
-                    $sBreadcrumb .= ' > ';
+                // There are cases that the `Name` does not exist.
+                $_sName       = self::getElement( $aBrowseNode, 'Name' );
+                if ( ! $_sName ) {
+                    return $sBreadcrumb;
                 }
-                $sBreadcrumb .= self::getElement( $aBrowseNode, 'Name' );
+
+                $sBreadcrumb = $sBreadcrumb
+                    ? $sBreadcrumb . $sDelimiter . $_sName
+                    : $_sName;
 
                 $_aAncestor = self::getElementAsArray( $aBrowseNode, array( 'Ancestors', 'BrowseNode' ) );
                 if ( ! empty( $_aAncestor ) ) {
-                    $sBreadcrumb .= self::___getNodeBreadcrumb( $_aAncestor, $sBreadcrumb );
+                   $sBreadcrumb = self::___getNodeBreadcrumb( $_aAncestor, $sBreadcrumb );
                 }
                 return $sBreadcrumb;
 
