@@ -22,10 +22,9 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
      */
     public function get() {
 
-        // For search-type units, this value is already set with API response.
+        // For search-type units, this value is already set with the API response.
         if ( $this->_aProduct[ 'category' ] ) {
-            return "<p>Category Already Exists</p>"
-                . $this->_aProduct[ 'category' ];
+            return $this->_aProduct[ 'category' ];
         }
 
         $_snEncodedHTML = $this->_getCell( 'categories' );
