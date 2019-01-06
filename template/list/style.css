@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.0.1
+    Version:        1.0.2
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -105,6 +105,13 @@
 .amazon-products-container-list .amazon-customer-rating-stars {
     margin: 0.4em 0;
 }
+.amazon-products-container-list .amazon-customer-rating-stars img {
+    /* Prevents rating stars from being wrapped */
+    display: inline-block;
+    /* In some themes the rating number and the star image do not align. This is for the fix.  */
+    vertical-align: middle;
+}
+
 
 /* Sub-images */
 .amazon-products-container-list .sub-image-container {

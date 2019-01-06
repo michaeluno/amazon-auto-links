@@ -284,6 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.6 =
+- Tweaked styling of the `List`, `Category` and `Search` templates.
 - Fixed a bug with the `%category%` variable for the `Item Format` unit option, which inserted debug outputs.
 
 = 3.8.5 - 01/04/2019 =
