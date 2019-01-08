@@ -11,7 +11,7 @@
 /**
  * One of the base classes for unit classes.
  * 
- * Provides shared methods and properties relating product filters (blacklist and whilte list)
+ * Provides shared methods and properties relating product filters (blacklist and white list)
  * @since       3
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoLinks_UnitOutput_Base {

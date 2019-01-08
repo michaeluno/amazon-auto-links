@@ -522,7 +522,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     $this->oUnitOption->get( 'image_size' )
                 );
 
-                // Check whether no-image shuld be skipped.
+                // Check whether no-image should be skipped.
                 if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
                     throw new Exception( 'No image is allowed: ' );
                 }

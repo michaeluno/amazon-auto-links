@@ -283,6 +283,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.7 =
+- Fixed an issue of too few products shown due to product filters when setting a small number of the `Item Count` unit option.
+
 = 3.8.6 - 01/08/2019 =
 - Fixed a bug of the malformed product category outputs with the `%category%` `Item Format` variable.
 - Fixed a bug with the `%category%` variable for the `Item Format` unit option, which inserted debug outputs.

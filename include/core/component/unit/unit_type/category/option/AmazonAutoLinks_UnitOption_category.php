@@ -40,7 +40,6 @@ class AmazonAutoLinks_UnitOption_category extends AmazonAutoLinks_UnitOption_Bas
         // 'item_format' => null,   // (string)
         // 'image_format' => null,  // (string)
         // 'title_format' => null,  // (string)
-         
 
     );
 

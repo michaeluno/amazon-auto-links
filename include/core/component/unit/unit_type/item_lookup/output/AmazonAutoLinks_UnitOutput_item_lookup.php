@@ -138,7 +138,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oUnitOption->get( '_force_cache_renewal' )
         );
         
-        $_aResponse = $this->_getValidResponse( $_aResponse );
+        $_aResponse = $this->___getValidResponse( $_aResponse );
         return $_aResponse;
                  
     }
@@ -148,7 +148,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
          * @since       3.2.1
          * @return      array
          */
-        private function _getValidResponse( $aResponse ) {
+        private function ___getValidResponse( $aResponse ) {
             
             $_aItems = $this->getElement(
                 $aResponse,

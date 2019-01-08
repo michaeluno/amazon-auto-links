@@ -99,13 +99,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
             // Sanitize the search terms
             $this->___setSearchTerms();
-     
+
+            // Normal operation
             if ( ! $this->oUnitOption->get( 'search_per_keyword' ) ) {
-                // Normal operation
                 return $this->getRequest( $this->oUnitOption->get( 'count' ) );
-                
             } 
-                
+
             // For contextual search, perform search by each keyword
             return $this->___getResponsesByMultipleKeywords();
             
@@ -159,7 +158,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     );
                     
                 }
-                
+
             }        
             /**
              * @since       3.2.0
@@ -174,7 +173,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     ? $_asTerms
                     : $this->getStringIntoArray( $_asTerms, ',' );
                 
-                $_iCount    = $this->_getMaximumCountForSearchPerKeyword( $_aTerms );
+                $_iCount    = $this->___getCountForSearchPerKeyword();
                 foreach( $_aTerms as $_asSearchTerms ) {
                     
                     $_sSearchTerms = is_scalar( $_asSearchTerms )    
@@ -187,7 +186,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $_sSearchTerms
                     );
                     $_aResponse = $this->getRequest( $_iCount );
-
                     $_aItems    = $this->___getItemsMerged( $_aItems, $_aResponse );                    
                     if ( count( $_aItems ) >= $_iCount ) {
                         break;
@@ -263,12 +261,28 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 /**
                  * @scope       protected       Item look-up and Similarity look-up will override this method.
                  * @since       3.2.0
+                 * @deprecated  3.8.7  Seems neither Item look-up nor Similarity unit types do not override this method.
+                 * Use the `___getCountForSearchPerKeyword()` method instead.
                  * @return      integer
                  */
                 protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
                     return $this->oOption->isAdvancedAllowed()
                         ? $this->oUnitOption->get( 'count' )
                         : 10;
+                }
+                /**
+                 * @remark      This sets the minimum count as 10 to cover cases that too few items shown
+                 * due to removals with product filters. 10 is also the maximum count for the API `ItemID` parameter.
+                 * @since       3.8.7
+                 * @return      integer     The item count.
+                 */
+                private function ___getCountForSearchPerKeyword() {
+                    $_iCount = $this->oOption->isAdvancedAllowed()
+                        ? ( integer ) $this->oUnitOption->get( 'count' )
+                        : 10;
+                    return $_iCount <= 10
+                        ? 10
+                        : $_iCount;
                 }
 
     
@@ -288,12 +302,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 //            return parent::_isError( $aProducts );
 //
 //        }
-    
+
     /**
      * Performs paged API requests.
-     * 
+     *
      * This enables to retrieve more than 10 items. However, for it, it performs multiple requests, thus, it will be slow.
-     * 
+     *
      * @since           2.0.1
      * @return          array
      */
@@ -581,7 +595,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     );
 
                 } catch ( Exception $_oException ) {
-                    // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
                     continue;   // skip
                 }
     

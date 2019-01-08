@@ -139,6 +139,7 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
 
         // The `url` unit type (which this `category` unit type extends) uses this key, `_sort`, not `sort`.
         $this->oUnitOption->set( '_sort', $this->oUnitOption->get( 'sort' ) );
+
         parent::_setProperties();
 
 
