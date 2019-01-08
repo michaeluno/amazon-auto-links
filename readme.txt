@@ -31,7 +31,7 @@ Display affiliate links along with your posts with this plugin to generate actua
 Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India, China, Mexico and Brazil.
 
 = Works without JavaScript =
-Some visitors turn off JavaScript for security and most ads including Google Adsense will not show up to them. But this one works!
+Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
 
 = Automatic Insertion in Posts and Feeds = 
 Just check where you want the product links to appear with auto-insert. 
@@ -40,7 +40,7 @@ Just check where you want the product links to appear with auto-insert.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
 
 = Auto Link Conversion =
-Hyper links to Amazon products in posts and comments can be transformed into your associate links. This is useful if you have a site that allows guests to post contents that include Amazon links. 
+Hyper links to Amazon products in posts and comments can be transformed into your associate links. This is useful if your site allows guests to post contents that include Amazon links.
 
 = Widgets = 
 Place the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
@@ -84,7 +84,8 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 
 = Supported Language =
 - English
-- Japanese  
+- Japanese
+- German
   
 == Installation ==
 
@@ -284,6 +285,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.7 =
+- Added the German translation.
 - Fixed an issue of too few products shown due to product filters when setting a small number of the `Item Count` unit option.
 
 = 3.8.6 - 01/08/2019 =
