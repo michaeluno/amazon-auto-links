@@ -285,6 +285,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.7 =
+- Updated the Japanese translation.
 - Added the German translation.
 - Fixed an issue of too few products shown due to product filters when setting a small number of the `Item Count` unit option.
 
