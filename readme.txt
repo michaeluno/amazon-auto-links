@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.0.2
-Stable tag:         3.8.6
+Stable tag:         3.8.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,7 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.7 =
+= 3.8.7 - 01/11/2019 =
 - Updated the Japanese translation.
 - Added the German translation.
 - Fixed an issue of too few products shown due to product filters when setting a small number of the `Item Count` unit option.
