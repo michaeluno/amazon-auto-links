@@ -284,6 +284,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.8 =
+- Fixed an issue that plugin translations are not recognized by wordpress.org by adding `Text Domain` and `Domain Path` to the plugin comment header
+
 = 3.8.7 - 01/11/2019 =
 - Updated the Japanese translation.
 - Added the German translation.
