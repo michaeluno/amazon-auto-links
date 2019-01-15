@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, revenue, widget
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.0.2
+Tested up to:       5.0.3
 Stable tag:         3.8.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -106,15 +106,15 @@ Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Ama
 
 = Do I need Amazon Access Keys? = 
 
-For the *Category* and *Tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API.
+<s>For the *Category* and *Tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API. However, for the *Search* unit type, and for some items such as `%image_set%` in the *Item Format* option, setting up API keys is required.</s>
 
-However, for the *Search* unit type, and for some items such as `%image_set%` in the *Item Format* option, setting up API keys is required. 
+Yes, all unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
 
-To use the keys you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
+For that, you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
-More detailed instruction, refer to the [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
+More detailed instruction, please refer to the [To register as a Product Advertising API developer](https://docs.aws.amazon.com/AWSECommerceService/latest/GSG/GettingStarted.html#BecominganAssociate) or [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
 
-= What does Unit mean? =
+= What does a Unit mean? =
 
 A unit is a set of rules that defines how Amazon products should be displayed.
 
@@ -255,9 +255,9 @@ When upgrading v1 to v2, a few options will be lost. That includes:
 These options need to be reconfigured.
 
 = How to Obtain Access Key and Secret Key =
-For the search unit type, an access key and its secret key are required to perform API requests. 
+An access and secret keys are required to perform API requests. We need to deal with additional _two_ separate Amazon services apart from Amazon Associates.
 
-We need to deal with additional two separate Amazon services apart from the Amazon Associates.
+For detailed instructions, please refer to the [To register as a Product Advertising API developer](https://docs.aws.amazon.com/AWSECommerceService/latest/GSG/GettingStarted.html#BecominganAssociate) section.
 
 <h5><strong>Step 1</strong> - Create a Product Advertising API Account</h5>
 Before you create an access key, you have to make sure you have singed up with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html).
