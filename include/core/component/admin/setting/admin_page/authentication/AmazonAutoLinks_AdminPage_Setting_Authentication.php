@@ -38,7 +38,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication extends AmazonAutoLinks_A
                     )
                     . ' ' . sprintf( 
                         __( 'The instruction is documented <a href="%1$s" target="_blank">here</a>.', 'amazon-auto-links' ), 
-                        '?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] . '&page=aal_help&tab=notes#How_to_Obtain_Access_Key_and_Secret_Key' 
+                        '?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] . '&page=aal_help&tab=tips#How_to_Obtain_Access_Key_and_Secret_Key'
                     ),
             )
         );

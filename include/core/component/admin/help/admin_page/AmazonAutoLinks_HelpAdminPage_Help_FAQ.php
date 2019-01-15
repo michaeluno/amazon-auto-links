@@ -21,7 +21,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_FAQ extends AmazonAutoLinks_AdminPage_T
      */
     public function replyToLoadTab( $oAdminPage ) {
             
-        $_aItems     = $this->getContentsByHeader( $this->getReadmeContents(), 4 );
+        $_aItems     = $this->getContentsByHeader( $this->_getReadmeContentsBySection(), 4 );
         $_iLastIndex = count( $_aItems ) - 1;
         foreach( $_aItems as $_iIndex => $_aContent ) {
 
@@ -51,13 +51,12 @@ class AmazonAutoLinks_HelpAdminPage_Help_FAQ extends AmazonAutoLinks_AdminPage_T
         /**
          * @return      string
          */
-        private function getReadMeContents()  {       
+        protected function _getReadmeContentsBySection()  {
             return $this->_getReadmeContents( 
                 AmazonAutoLinks_Registry::$sDirPath . '/readme.txt',    // source path
                 '', // TOC title
                 array( 'Frequently asked questions' )  // sections
             );
-
         }               
             
 }

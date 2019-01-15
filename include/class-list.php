@@ -134,7 +134,6 @@ $_aClassFiles = array(
     "AmazonAutoLinks_UnitPostMetaBox_Submit_category"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit_category.php", 
     "AmazonAutoLinks_Unit_Category_Event_RenewCacheAction"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/AmazonAutoLinks_Unit_Category_Event_RenewCacheAction.php", 
     "AmazonAutoLinks_UnitOption_category"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/option/AmazonAutoLinks_UnitOption_category.php", 
-    "AmazonAutoLinks_UnitOutput__Fetch_category"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput__Fetch_category.php", 
     "AmazonAutoLinks_UnitOutput_category"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category.php", 
     "AmazonAutoLinks_UnitOutput_category2"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category2.php", 
     "AmazonAutoLinks_UnitOutput_category2_preview"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category2_preview.php", 
