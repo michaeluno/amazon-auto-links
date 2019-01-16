@@ -37,7 +37,9 @@
                     url: aal_ajax_unit_loading.ajax_url,
                     data: _aData,
                     success: function( response ) {
-                        $( _oThis ).replaceWith( response );
+                        var _oReplacement = $( response );
+                        $( _oThis ).replaceWith( _oReplacement );
+                        _oReplacement.trigger( 'aal_ajax_loaded_unit', [] ); // @since 3.8.8
                     },
                     error: function (xhr) {
                         $( _oThis ).replaceWith( '<p>' + aal_ajax_unit_loading.messages.ajax_error + '<p>');
@@ -45,6 +47,6 @@
                 });
             });
         }
-        setTimeout( _loadAmazonAutoLinksAjax, 1500 );
+        setTimeout( _loadAmazonAutoLinksAjax, 1000 );
     });
 }(jQuery));
