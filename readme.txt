@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.0.3
-Stable tag:         3.8.7
+Stable tag:         3.8.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,7 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.8 =
+= 3.8.8 - 01/17/2019 =
 - Added the `aal_ajax_loaded_unit` jQuery event for templates using JavaScript.
 - Fixed an issue that plugin translations are not recognized by wordpress.org by adding `Text Domain` and `Domain Path` to the plugin comment header
 - Fixed a broken link in a setting page.
