@@ -135,7 +135,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     public function cell_amazon_auto_links_code( $sCell, $iPostID ) {
         return '<p>'
                 . '<span>[amazon_auto_links id="' . $iPostID . '"]</span>' . '<br />'
-                . '<span>&lt;?php AmazonAutoLinks( array( ‘id’ =&gt; ' . $iPostID . ' ) ); ?&gt;</span>'
+                . "<span>&lt;?php AmazonAutoLinks( array( 'id' =&gt; " . $iPostID . " ) ); ?&gt;</span>"
             . '</p>';
     }
 

@@ -284,6 +284,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.9 =
+- Fixed a misspelling in the `Manage Units` page regarding PHP codes.
+
 = 3.8.8 - 01/17/2019 =
 - Added the `aal_ajax_loaded_unit` jQuery event for templates using JavaScript.
 - Fixed an issue that plugin translations are not recognized by wordpress.org by adding `Text Domain` and `Domain Path` to the plugin comment header
