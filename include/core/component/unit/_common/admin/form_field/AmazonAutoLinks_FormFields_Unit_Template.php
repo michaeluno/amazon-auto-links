@@ -86,7 +86,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer reviews.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%button%</code> - " . __( 'a store link button.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%disclaimer%</code> - " . __( 'a disclaimer for the product information.', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description .', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
+                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         . "<code class='{$_sDel}'>%similar%</code> - " . __( 'similar products.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         . "<code class='{$_sDel}'>%meta%</code> - " . __( 'meta data of the product.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         . "<code class='{$_sDel}'>%category%</code> - " . __( 'categories that the product belongs to.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
