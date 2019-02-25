@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, revenue, widget
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.0.3
+Tested up to:       5.1.0
 Stable tag:         3.8.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -284,8 +284,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.9 =
+= 3.8.9 - 02/25/2019 =
 - Updated the Japanese translation.
+- Fixed an issue of unnecessary function calls in `admin-ajax.php`.
 - Fixed a misspelling in the `Manage Units` page regarding PHP codes.
 
 = 3.8.8 - 01/17/2019 =
