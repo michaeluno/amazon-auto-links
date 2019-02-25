@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/amazon-auto-links\n"
-"POT-Creation-Date: 2019-01-09 16:46+0900\n"
-"PO-Revision-Date: 2019-01-09 16:46+0900\n"
+"POT-Creation-Date: 2019-02-25 16:17+0900\n"
+"PO-Revision-Date: 2019-02-25 16:17+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: en\n"
@@ -365,12 +365,10 @@ msgid "AWS Access Key Identifiers"
 msgstr ""
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:32
-#: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
 #, php-format
 msgid ""
-"For the Search Unit type, credentials are required to perform search "
-"requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
-"API</a>."
+"Credentials are required to perform search requests with Amazon <a href="
+"\"%1$s\" target=\"_blank\">Product Advertising API</a>."
 msgstr ""
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:36
@@ -401,29 +399,36 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:46
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:44
+#, php-format
+msgid ""
+"If you get an error, try testing your keys with <a href=\"%1$s\" target="
+"\"_blank\">Scratchpad</a>."
+msgstr ""
+
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:50
 msgid "Access Key"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:48
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:52
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:161
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:146
 msgid "The public key consisting of 20 alphabetic characters."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:58
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:62
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:173
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:154
 msgid "Secret Access Key"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:60
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:64
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:174
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:155
 msgid "The private key consisting of 40 alphabetic characters."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:70
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:74
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:50
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:23
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Category_.php:94
@@ -435,76 +440,75 @@ msgstr ""
 msgid "Associate ID"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:71
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:75
 msgid "(optional)"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:73
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:77
 msgid "The Amazon Associates tag."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:74
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:78
 msgid "Some locales may require this to be set."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:79
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:83
 msgid "Server Locale"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:81
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:85
 msgid ""
-"The region of the API server to use. If you are unsure, select <code>US</"
-"code>."
+"The region of the API server. If you are unsure, select <code>US</code>."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:101
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:105
 msgid "Disclaimer"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:107
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:111
 #, php-format
 msgid ""
 "Please check the <a href=\"%1$s\" target=\"_blank\">Amazon.com Product "
 "Advertising API License Agreement</a> to be safe."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:116
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:120
 msgid "Disconnect"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:117
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:121
 msgid "Connect"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:152
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:156
 msgid "Either a public key or private key is not set."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:179
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:183
 msgid "Connected"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:180
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:184
 msgid "Disconnected"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:205
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:210
 msgid "Disconnected."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:215
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:220
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:57
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:77
 msgid "The Access Key ID must consist of 20 characters."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:223
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:228
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:62
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:87
 msgid "The Secret Access Key must consist of 40 characters."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:230
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:235
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:183
 #: ../include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default_Section.php:73
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:73
@@ -526,8 +530,8 @@ msgstr ""
 msgid "There was something wrong with your input."
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:242
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:243
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:247
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:248
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:80
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:81
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:106
@@ -535,7 +539,7 @@ msgstr ""
 msgid "Sent Value"
 msgstr ""
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:246
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:251
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:83
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:109
 msgid "Failed authentication."
@@ -2188,9 +2192,22 @@ msgstr ""
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:52
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:27
 #, php-format
+msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more units!"
+msgstr ""
+
+#: ../include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:67
+#: ../include/core/component/unit/unit_type/contextual/admin/admin_page/AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit.php:96
+#: ../include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:76
+#: ../include/core/component/unit/unit_type/tag/admin/admin_page/AmazonAutoLinks_TagUnitAdminPage_TagUnit.php:94
+#: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:104
+#: ../include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:30
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:42
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:52
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:27
+#, php-format
 msgid ""
-"Please upgrade to <A href=\"%1$s\">Pro</a> to add more units! Make sure to "
-"empty the <a href=\"%2$s\">trash box</a> to delete the units completely!"
+"Make sure to empty the <a href=\"%2$s\">trash box</a> to delete the units "
+"completely!"
 msgstr ""
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:97
@@ -3153,7 +3170,8 @@ msgid ""
 msgstr ""
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:102
-msgid "Browse nodes can be found <a href=\"\" target=\"_blank\">here</a>."
+#, php-format
+msgid "Browse nodes can be found <a href=\"%1$s\" target=\"_blank\">here</a>."
 msgstr ""
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:112
@@ -3975,7 +3993,7 @@ msgid "a disclaimer for the product information."
 msgstr ""
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:89
-msgid "a full product HTML description ."
+msgid "a full product HTML description."
 msgstr ""
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:90
@@ -5759,6 +5777,14 @@ msgstr ""
 msgid ""
 "The number of product links to display. This unit type cannot display more "
 "than 10 items."
+msgstr ""
+
+#: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
+#, php-format
+msgid ""
+"For the Search Unit type, credentials are required to perform search "
+"requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
+"API</a>."
 msgstr ""
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:34

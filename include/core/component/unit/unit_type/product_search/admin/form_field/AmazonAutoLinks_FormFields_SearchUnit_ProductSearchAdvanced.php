@@ -99,7 +99,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'description'   => array(
                     __( 'If you know the browse node (the category ID) that you are searching, specify it here. It is a positive integer.', 'amazon-auto-links' )
                     . ' ' . sprintf( 
-                        __( 'Browse nodes can be found <a href="" target="_blank">here</a>.', 'amazon-auto-links' ),
+                        __( 'Browse nodes can be found <a href="%1$s" target="_blank">here</a>.', 'amazon-auto-links' ),
                         'http://www.findbrowsenodes.com/'
                     )
                     . ' e.g. <code>158597011</code>',

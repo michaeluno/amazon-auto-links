@@ -91,7 +91,7 @@ class AmazonAutoLinks_TagUnitAdminPage_TagUnit extends AmazonAutoLinks_AdminPage
         if ( $_oOption->isUnitLimitReached() ) {
             $oFactory->setSettingNotice( 
                 sprintf( 
-                    __( 'Please upgrade to <A href="%1$s">Pro</a> to add more units! Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ), 
+                    __( 'Please upgrade to <a href="%1$s">Pro</a> to add more units!', 'amazon-auto-links' ) . ' ' . __( 'Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ),
                     'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/',
                     admin_url( 'edit.php?post_status=trash&post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] )
                 )

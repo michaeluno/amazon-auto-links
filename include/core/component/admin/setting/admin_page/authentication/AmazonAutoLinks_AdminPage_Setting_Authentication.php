@@ -29,7 +29,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication extends AmazonAutoLinks_A
                 'tab_slug'      => $this->sTabSlug,
                 'title'         => __( 'AWS Access Key Identifiers', 'amazon-auto-links' ),
                 'description'   => sprintf( 
-                        __( 'For the Search Unit type, credentials are required to perform search requests with Amazon <a href="%1$s" target="_blank">Product Advertising API</a>.', 'amazon-auto-links' ), 
+                        __( 'Credentials are required to perform search requests with Amazon <a href="%1$s" target="_blank">Product Advertising API</a>.', 'amazon-auto-links' ),
                         'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html' 
                     )
                     . ' ' . sprintf( 

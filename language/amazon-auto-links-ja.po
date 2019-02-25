@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Amazon Auto Links 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-auto-"
 "links\n"
-"POT-Creation-Date: 2019-01-09 16:47+0900\n"
-"PO-Revision-Date: 2019-01-09 17:06+0900\n"
+"POT-Creation-Date: 2019-02-25 16:13+0900\n"
+"PO-Revision-Date: 2019-02-25 16:16+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -66,7 +66,7 @@ msgstr "無効"
 #: ../include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:45
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:40
 msgid "Get Pro Now!"
-msgstr "プロを今すぐ入手!"
+msgstr "プロを今すぐ入手 !"
 
 #: ../include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:46
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:41
@@ -203,7 +203,7 @@ msgstr "無制限にアイテムを表示するには、プロを入手しまし
 #: ../include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:128
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:123
 msgid "Get pro for unlimited categories to set up!"
-msgstr "無制限にカテゴリーを追加するには、プロを入手しましょう。"
+msgstr "無制限にカテゴリーを追加するには、プロを入手しましょう！"
 
 #: ../include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:130
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:125
@@ -227,7 +227,7 @@ msgid ""
 "forum</a>."
 msgstr ""
 "無料サポートを受けるには、<a href=\"%1$s\" target=\"_blank\">サポートフォーラ"
-"ム</a>をご訪問下さい。"
+"ム</a>をご訪問ください。"
 
 #: ../include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:46
 msgid "Priority Support"
@@ -239,7 +239,7 @@ msgid ""
 "You can get priority email support by purchasing <a href=\"%1$s\" target="
 "\"_blank\">Pro</a>."
 msgstr ""
-"<a href=\"%1$s\" target=\"_blank\">Pro版</a>を購入することで、優先サポートを"
+"<a href=\"%1$s\" target=\"_blank\">Pro 版</a>を購入することで、優先サポートを"
 "受けることができます。"
 
 #: ../include/core/component/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:36
@@ -375,15 +375,13 @@ msgid "AWS Access Key Identifiers"
 msgstr "AWS アクセスキー ID"
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:32
-#: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
 #, php-format
 msgid ""
-"For the Search Unit type, credentials are required to perform search "
-"requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
-"API</a>."
+"Credentials are required to perform search requests with Amazon <a href="
+"\"%1$s\" target=\"_blank\">Product Advertising API</a>."
 msgstr ""
-"検索ユニットタイプの場合、Amazon <a href=\"%1$s\" target=\"_blank\">Product "
-"Advertising API</a> を商品検索に使用するために、認証情報が必要です。"
+"商品検索にAmazon <a href=\"%1$s\" target=\"_blank\">Product Advertising API</"
+"a> を使用する為、認証情報が必要です。"
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:36
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:163
@@ -394,7 +392,7 @@ msgid ""
 "\"_blank\">Amazon Web Services web site</a>."
 msgstr ""
 "認証キーは、<a href=\"%1$s\" target=\"_blank\">Amazon Web Services web site</"
-"a>で取得できます。"
+"a> で取得できます。"
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:40
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:164
@@ -403,7 +401,7 @@ msgstr ""
 msgid ""
 "The instruction is documented <a href=\"%1$s\" target=\"_blank\">here</a>."
 msgstr ""
-"詳しい方法は<a href=\"%1$s\" target=\"_blank\">こちら</a>を参照して下さい。"
+"詳しい方法は<a href=\"%1$s\" target=\"_blank\">こちら</a>を参照してください。"
 
 #: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:39
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:35
@@ -416,29 +414,38 @@ msgstr ""
 msgid "Status"
 msgstr "状態"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:46
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:44
+#, php-format
+msgid ""
+"If you get an error, try testing your keys with <a href=\"%1$s\" target="
+"\"_blank\">Scratchpad</a>."
+msgstr ""
+"もしエラーが出た場合、<a href=\"%1$s\" target=\"_blank\">Scratchpad</a> で"
+"キーをテストしてみてください。"
+
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:50
 msgid "Access Key"
 msgstr "アクセスキー"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:48
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:52
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:161
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:146
 msgid "The public key consisting of 20 alphabetic characters."
 msgstr "アルファベット20文字の公開キー。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:58
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:62
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:173
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:154
 msgid "Secret Access Key"
 msgstr "秘密アクセスキー"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:60
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:64
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:174
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:155
 msgid "The private key consisting of 40 alphabetic characters."
 msgstr "アルファベット40文字の非公開キー。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:70
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:74
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:50
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:23
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Category_.php:94
@@ -450,79 +457,79 @@ msgstr "アルファベット40文字の非公開キー。"
 msgid "Associate ID"
 msgstr "アソシエイトID"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:71
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:75
 msgid "(optional)"
-msgstr "（任意）"
+msgstr "(任意)"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:73
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:77
 msgid "The Amazon Associates tag."
 msgstr "アマゾンアソシエイトタグ。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:74
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:78
 msgid "Some locales may require this to be set."
 msgstr " 幾つかの地域はこれが設定されている必要があることがあります。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:79
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:83
 msgid "Server Locale"
 msgstr "サーバーの地域"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:81
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:85
 msgid ""
-"The region of the API server to use. If you are unsure, select <code>US</"
-"code>."
+"The region of the API server. If you are unsure, select <code>US</code>."
 msgstr ""
-"使用するAPIサーバーの地域。もしわからない場合は<code>US</code>を選択します。"
+"使用する API サーバーの地域。もしわからない場合は<code>US</code>を選択しま"
+"す。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:101
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:105
 msgid "Disclaimer"
 msgstr "免責"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:107
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:111
 #, php-format
 msgid ""
 "Please check the <a href=\"%1$s\" target=\"_blank\">Amazon.com Product "
 "Advertising API License Agreement</a> to be safe."
 msgstr ""
 "安全のため、<a href=\"%1$s\" target=\"_blank\">Amazon.com Product "
-"Advertising API License Agreement</a> をご確認下さい。"
+"Advertising API License Agreement</a> をご確認ください。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:116
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:120
 msgid "Disconnect"
 msgstr "接続を切る"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:117
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:121
 msgid "Connect"
 msgstr "接続"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:152
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:156
 msgid "Either a public key or private key is not set."
 msgstr "パブリックキーもしくはプライベートキーが設定されていません。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:179
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:183
 msgid "Connected"
 msgstr "接続されています"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:180
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:184
 msgid "Disconnected"
 msgstr "非接続"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:205
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:210
 msgid "Disconnected."
 msgstr "切断されました。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:215
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:220
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:57
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:77
 msgid "The Access Key ID must consist of 20 characters."
 msgstr "アクセスキー ID は20文字でなくてはなりません。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:223
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:228
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:62
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:87
 msgid "The Secret Access Key must consist of 40 characters."
 msgstr "秘密アクセスキーは40文字でなくてはなりません。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:230
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:235
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:183
 #: ../include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default_Section.php:73
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:73
@@ -544,8 +551,8 @@ msgstr "秘密アクセスキーは40文字でなくてはなりません。"
 msgid "There was something wrong with your input."
 msgstr "入力に誤りがあります。"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:242
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:243
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:247
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:248
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:80
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:81
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:106
@@ -553,7 +560,7 @@ msgstr "入力に誤りがあります。"
 msgid "Sent Value"
 msgstr "送信値"
 
-#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:246
+#: ../include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthentiationKeys.php:251
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:83
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_Setting.php:109
 msgid "Failed authentication."
@@ -589,7 +596,7 @@ msgstr "HTTP リクエスト"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:61
 msgid "Clear All Caches"
-msgstr "全てのキャッシュを消去します。"
+msgstr "すべてのキャッシュを消去します。"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:63
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:82
@@ -623,7 +630,7 @@ msgstr "通常"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:102
 msgid "relies on WP Cron to renew caches."
-msgstr "キャッシュの更新にWP Cron を使用する。"
+msgstr "キャッシュの更新に WP Cron を使用する。"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:103
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:390
@@ -660,11 +667,11 @@ msgstr "時間"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:116
 msgid "day(s)"
-msgstr "日間"
+msgstr "日"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:117
 msgid "week(s)"
-msgstr "週間"
+msgstr "週"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:130
 msgid "The periodic check of cache removal is not scheduled."
@@ -672,7 +679,7 @@ msgstr "キャシュ消去の定期チェックは予定されていません。
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:131
 msgid "It could be a WP Cron issue. Please consult the site administrator."
-msgstr "WP Cron の問題の可能性があります。管理者にお問い合わせ下さい。"
+msgstr "WP Cron の問題の可能性があります。管理者にお問い合わせください。"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:132
 msgid "If this is left unfixed, caches will not be cleared."
@@ -681,7 +688,7 @@ msgstr "もしこれが修正されない場合、キャッシュは消去され
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:134
 #, php-format
 msgid "Next scheduled at %1$s."
-msgstr "%s に次の予約。"
+msgstr "%1$s に次の予約。"
 
 #: ../include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:138
 msgid "Maximum Overall Cache Sizes"
@@ -811,14 +818,14 @@ msgstr "miunosoft アフィリエイト"
 
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:37
 msgid "RSS Content Tag"
-msgstr "RSSコンテンツタグ"
+msgstr "RSS コンテンツタグ"
 
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:39
 msgid ""
 "By default, the plugin uses the <code>description</code> tag for excerpt and "
 "the <code>content</code> for the entire product output."
 msgstr ""
-"初期値では、商品説明抜粋には<code>description</code> タグ、全説明には"
+"初期値では、商品説明抜粋には <code>description</code> タグ、全説明には "
 "<code>content</code>を使用します。"
 
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:40
@@ -827,17 +834,17 @@ msgid ""
 "tag. In that case, enable this option to replace the output of the "
 "<code>content</code> tag with the <code>description</code> tag."
 msgstr ""
-"しかし、RSSリーダーの中には<code>content</code>要素を取得できないものがありま"
-"す。その場合、このオプションを有効にし、 <code>content</code>を"
-"<code>description</code>に置き換えます。"
+"しかし、RSSリーダーの中には <code>content</code>要素を取得できないものがあり"
+"ます。その場合、このオプションを有効にし、 <code>content</code> を "
+"<code>description</code> に置き換えます。"
 
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:42
 msgid ""
 "Use the <code>content</code> tag instead of <code>description</code> tag for "
 "the complete product output."
 msgstr ""
-"全ての商品説明のコンテンツを表示するには、<code>description</code> タグではな"
-"く<code>content</code> タグを使用します。"
+"すべての商品説明のコンテンツを表示するには、 <code>description</code> タグで"
+"はなく <code>content</code> タグを使用します。"
 
 #: ../include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:38
 msgid "Post Type Label"
@@ -876,7 +883,7 @@ msgstr "検索可能"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:350
 msgid ""
 "Possible for the WordPress search form to find the plugin preview pages."
-msgstr "WordPressがプレビューページを検索フォームから検索できるようにする。"
+msgstr "WordPress がプレビューページを検索フォームから検索できるようにする。"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php:32
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:75
@@ -895,7 +902,7 @@ msgstr "フォーム"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php:46
 msgid "Set allowed HTML tags etc."
-msgstr "使用可能なHTMLタグ等を設定します。"
+msgstr "使用可能な HTML タグ等を設定します。"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php:56
 #: ../include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:64
@@ -1059,7 +1066,7 @@ msgstr "オフ"
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:39
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:435
 msgid "Allowed HTML Tags"
-msgstr "許可されたHTMLタグ"
+msgstr "許可された HTML タグ"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:40
 msgid ""
@@ -1067,33 +1074,33 @@ msgid ""
 "By default, WordPress applies a filter called KSES that strips out certain "
 "tags before the user input is saved in the database for security reasons."
 msgstr ""
-"フォームに入力できる許可されたHTMLタグを半角英数コンマ(,) で区切り入力しま"
-"す。デフォルトではWordPressはKSESフィルタを適用し特定のタグをデータベースに保"
-"存される時にセキュリティ上の理由で除去します。"
+"フォームに入力できる許可された HTML タグを半角英数コンマ (,) で区切り入力しま"
+"す。デフォルトでは WordPres は KSES フィルタを適用し特定のタグをデータベース"
+"に保存される時にセキュリティ上の理由で除去します。"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:50
 msgid "Allowed HTML Tag Attributes"
-msgstr "許可されたHTMLタグ属性"
+msgstr "許可された HTML タグ属性"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:51
 msgid ""
 "Enter allowed HTML tag attributes for options that enter HTML tags such as "
 "Item Format unit option."
 msgstr ""
-"ユニット定義のアイテムフォーマット設定で入力する時に使用できるHTMLタグの属性"
-"を入力します。"
+"ユニット定義のアイテムフォーマット設定で入力する時に使用できる HTML タグの属"
+"性を入力します。"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:61
 msgid "Allowed Inline CSS Properties"
-msgstr "許可されたインラインCSSプロパティ"
+msgstr "許可されたインライン CSS プロパティ"
 
 #: ../include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:62
 msgid ""
 "Enter allowed inline CSS properties for options that enter HTML tags such as "
 "Item Format unit option."
 msgstr ""
-"ユニット定義のアイテムフォーマット設定で入力する時に使用できるインラインCSSプ"
-"ロパティ"
+"ユニット定義のアイテムフォーマット設定で入力する時に使用できるインライン CSS "
+"プロパティ"
 
 #: ../include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:31
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:101
@@ -1103,7 +1110,7 @@ msgstr "リセット設定"
 #: ../include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:33
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:102
 msgid "If you get broken options, initialize them by performing reset."
-msgstr "もしオプションが壊れている場合、リセットをして設定の初期化をします。"
+msgstr "もし設定が壊れている場合、リセットをして設定の初期化をします。"
 
 #: ../include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:45
 msgid "Data"
@@ -1165,8 +1172,9 @@ msgid ""
 "Add the Amazon impression counter, the <a href=\"%1$s\" target=\"_blank"
 "\">Link Update JavaScript script</a>, to track link impressions."
 msgstr ""
-"インプレッショントラッキングのために、Amazonのインプレッションカウンター、<a "
-"href=\"%1$s\" target=\"_blank\">Link Update JavaScript script</a>を追加する。"
+"インプレッショントラッキングのために、 Amazon のインプレッションカウンター、 "
+"<a href=\"%1$s\" target=\"_blank\">Link Update JavaScript script</a> を追加す"
+"る。"
 
 #: ../include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:37
 msgid "The script is not available for the following locales."
@@ -1211,7 +1219,7 @@ msgstr "スペイン"
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:36
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Category_.php:87
 msgid "Mexico"
-msgstr "メキシコシティ"
+msgstr "メキシコ"
 
 #: ../include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:31
 msgid "Amazon Auto Links Pro Affiliate ID"
@@ -1223,15 +1231,15 @@ msgid ""
 "at the bottom of unit outputs will be linked to the Amazon Auto Links Pro "
 "product page."
 msgstr ""
-"Amazon Auto Links ProのアフィリエイトIDを設定すると、ユニットの出力の最後のク"
-"レジット表記がAmazon Auto Links Proにリンクされます。"
+"Amazon Auto Links Pro のアフィリエイト ID を設定すると、ユニットの出力の最後"
+"のクレジット表記が Amazon Auto Links Pro にリンクされます。"
 
 #: ../include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:39
 msgid ""
 "Earn commissions by putting a link to the product page of Amazon Auto Links "
 "Pro in the credit link of unit outputs."
 msgstr ""
-"ユニットの出力の最後のクレジット表記を利用してAmazon Auto Links Proのコミッ"
+"ユニットの出力の最後のクレジット表記を利用して Amazon Auto Links Pro のコミッ"
 "ション料を稼ぎましょう。"
 
 #: ../include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:41
@@ -1240,8 +1248,8 @@ msgid ""
 "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for Amazon "
 "Auto Links Pro affiliate program to get commisions."
 msgstr ""
-"コミッションを得るには、まずAmazon Auto Links Proのアフィリエイトプログラムに"
-"<a href=\"%1$s\" target=\"_blank\">加入</a>する必要があります。"
+"コミッションを得るには、まず Amazon Auto Links Pro のアフィリエイトプログラム"
+"に<a href=\"%1$s\" target=\"_blank\">加入</a>する必要があります。"
 
 #: ../include/core/component/admin/tool/admin_page/AmazonAutoLinks_ToolAdminPage.php:37
 #: ../include/core/_common/AmazonAutoLinks_Property.php:249
@@ -1292,7 +1300,7 @@ msgstr "変換設定"
 #: ../include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:121
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:208
 msgid "Get Pro!"
-msgstr "プロをゲット!"
+msgstr "プロをゲット！"
 
 #: ../include/core/component/admin/tool/templatea_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:111
 #: ../include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:127
@@ -1301,8 +1309,8 @@ msgid ""
 "In order to use this feature, please consider purchasing <a href=\"%1$s\" "
 "target=\"_blank\">Pro</a>."
 msgstr ""
-"この機能を使うには、<a href=\"%1$s\" target=\"_blank\">Pro版</a>の購入をご検"
-"討下さい。"
+"この機能を使うには、 <a href=\"%1$s\" target=\"_blank\">Pro 版</a>の購入をご"
+"検討ください。"
 
 #: ../include/core/component/admin/tool/templatea_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:150
 #: ../include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:166
@@ -1440,8 +1448,8 @@ msgid ""
 "Determines whether the items are placed before or after (above or below) the "
 "area. This does not take effect for action hooks."
 msgstr ""
-"商品が選択されたエリアの前か後ろ（上部か下部）に配置されるかを決定します。ア"
-"クションフックには影響しません。"
+"商品が選択されたエリアの前か後ろ （上部か下部） に配置されるかを決定します。"
+"アクションフックには影響しません。"
 
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Area.php:96
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:217
@@ -1488,7 +1496,7 @@ msgid ""
 "Enable/Disable."
 msgstr ""
 "以下の、有効・無効にする場所のセクションで適切な投稿タイプを選択するようにし"
-"て下さい。"
+"てください。"
 
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:38
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:20
@@ -1544,7 +1552,7 @@ msgstr "投稿 ID"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:308
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:381
 msgid "Enter post IDs separated by commas."
-msgstr "ポストID をコンマで区切って入力します。"
+msgstr "ポスト ID をコンマで区切って入力します。"
 
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable.php:58
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable.php:68
@@ -1655,7 +1663,7 @@ msgstr "チェックされた項目で投稿タイプに属しないものは効
 #: ../include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable.php:105
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:346
 msgid "Leave all unchecked not to enable this option."
-msgstr "このオプションを有効にしない場合は全てチェックを外します。"
+msgstr "このオプションを有効にしない場合はすべてチェックを外します。"
 
 #: ../include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:27
 #: ../include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:28
@@ -1882,19 +1890,19 @@ msgstr "パディング左"
 
 #: ../include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_CSS.php:22
 msgid "Generated CSS"
-msgstr "生成されたCSS"
+msgstr "生成された CSS"
 
 #: ../include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_CSS.php:23
 msgid "The generated CSS rules will look like this."
-msgstr "生成されたCSSルールは次のようになります。"
+msgstr "生成された CSS ルールは次のようになります。"
 
 #: ../include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_CSS.php:31
 msgid "Custom CSS"
-msgstr "カスタムCSS"
+msgstr "カスタム CSS"
 
 #: ../include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_CSS.php:32
 msgid "Enter additional CSS rules here."
-msgstr "追加のCSSルールをここに入力します。"
+msgstr "追加の CSS ルールをここに入力します。"
 
 #: ../include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Hover.php:23
 msgid "Hover Switch"
@@ -1993,7 +2001,7 @@ msgstr "ボタンの定義は見つかりません"
 
 #: ../include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:37
 msgid "No definitions Found for Button in Trash"
-msgstr "ゴミ箱にはボイたんの定義は見つかりません"
+msgstr "ゴミ箱にボタンは見つかりません"
 
 #: ../include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:38
 msgid "Parent Button"
@@ -2038,7 +2046,7 @@ msgstr "コンバートの対象リンク"
 
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:25
 msgid "Convert Amazon links in post and comment contents."
-msgstr "投稿とコメントの内容にあるAmazon のリンクをコンバートします。"
+msgstr "投稿とコメントの内容にある Amazon のリンクをコンバートします。"
 
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:57
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:123
@@ -2073,7 +2081,7 @@ msgstr ""
 
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:103
 msgid "Please set the default Amazon Associate ID first."
-msgstr "初期値のアマゾンアソシエイトIDをまず設定して下さい。"
+msgstr "初期値のアマゾンアソシエイト ID をまず設定してください。"
 
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:105
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:51
@@ -2087,7 +2095,7 @@ msgstr "コンバーター"
 
 #: ../include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:49
 msgid "The default Associate ID needs to be set."
-msgstr "初期値のアソシエイトIDが設定されている必要があります。"
+msgstr "初期値のアソシエイト ID が設定されている必要があります。"
 
 #: ../include/core/component/template/AmazonAutoLinks_TemplateLoader.php:47
 #: ../include/core/component/template/AmazonAutoLinks_TemplateLoader.php:63
@@ -2253,13 +2261,26 @@ msgstr "基本情報を埋め、カテゴリー選択のフォームに進みま
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:52
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:27
 #, php-format
-msgid ""
-"Please upgrade to <A href=\"%1$s\">Pro</a> to add more units! Make sure to "
-"empty the <a href=\"%2$s\">trash box</a> to delete the units completely!"
+msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more units!"
 msgstr ""
-"ユニットをこれ以上追加するには、<A href=\"%1$s\">Pro</a> にアップグレードして"
-"下さい！ また、現在のユニット数を減らすには、<a href=\"%2$s\">ゴミ箱</a>を空"
-"にする必要があります。"
+"これ以上項目を追加するには、<a href=\"%1$s\" target=\"_blank\">プロ版</a>へ"
+"アップグレードして下さい !"
+
+#: ../include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:67
+#: ../include/core/component/unit/unit_type/contextual/admin/admin_page/AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit.php:96
+#: ../include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:76
+#: ../include/core/component/unit/unit_type/tag/admin/admin_page/AmazonAutoLinks_TagUnitAdminPage_TagUnit.php:94
+#: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:104
+#: ../include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:30
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddSearchUnit.php:42
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:52
+#: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:27
+#, php-format
+msgid ""
+"Make sure to empty the <a href=\"%2$s\">trash box</a> to delete the units "
+"completely!"
+msgstr ""
+"ユニットを完全に削除するには<a href=\"%2$s\">ゴミ箱</a>を空にしてください !"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:97
 msgid "Select a category from the below list."
@@ -2293,7 +2314,7 @@ msgstr "ユニット名"
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:63
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByTag.php:59
 msgid "The associate ID cannot be empty."
-msgstr "アソシエイトIDは空欄にはできません。"
+msgstr "アソシエイト ID は空欄にはできません。"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second.php:134
 msgid "A unit has been created."
@@ -2306,15 +2327,15 @@ msgid ""
 "Please upgrade to <a href=\"%1$s\" target=\"_black\">Pro</a> to add more "
 "categories."
 msgstr ""
-"これ以上カテゴリーを追加するには、<a href=\"%1$s\" target=\"_blank\">プロ版</"
-"a>へアップグレードする必要があります。"
+"これ以上カテゴリーを追加するには、<a href=\"%1$s\" target=\"_black\">プロ版</"
+"a>へアップグレードしてください。"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second.php:307
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:385
 msgid "Please upgrade to Pro to add more categories!"
 msgstr ""
 "カテゴリーをこれ以上追加するには、プロバージョン.にアップグレードしてくださ"
-"い！"
+"い !"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:88
 msgid "Selected preview comes here."
@@ -2342,17 +2363,17 @@ msgstr "作成"
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:199
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:265
 msgid "Add the current selection!"
-msgstr "現在のカテゴリーを追加する！"
+msgstr "現在のカテゴリーを追加する ! "
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:202
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:266
 msgid "Create the unit!"
-msgstr "ユニットを作成する！"
+msgstr "ユニットを作成する !"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:205
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:267
 msgid "Select a category from the links!"
-msgstr "リンクからカテゴリーを選択しましょう！"
+msgstr "リンクからカテゴリーを選択しましょう !"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:218
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:279
@@ -2399,7 +2420,7 @@ msgstr "プレビューはありません"
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:260
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:314
 msgid "Please select a category from the list on the left."
-msgstr "左側のリストからカテゴリーを選択して下さい。"
+msgstr "左側のリストからカテゴリーを選択してください。"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:277
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:325
@@ -2408,11 +2429,11 @@ msgstr "リストから選択後、カテゴリーを追加してください"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:291
 msgid "Page URL"
-msgstr "ページURL"
+msgstr "ページ URL"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:293
 msgid "Feed URL"
-msgstr "フィードURL"
+msgstr "フィード URL"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect__Utility.php:86
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:667
@@ -2426,7 +2447,7 @@ msgid ""
 "developer."
 msgstr ""
 "次のページにカテゴリーを見つけることができませんでした： %1$s プラグイン開発"
-"者に相談して下さい。"
+"者に相談してください。"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar__R18.php:37
 #, php-format
@@ -2435,7 +2456,7 @@ msgid ""
 "developer."
 msgstr ""
 "次のページにカテゴリーを見つけることができませんでした： %1$s プラグイン開発"
-"者に相談して下さい。"
+"者に相談してください。"
 
 #: ../include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb.php:40
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:141
@@ -2730,7 +2751,7 @@ msgstr "追加語句"
 
 #: ../include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:50
 msgid "Add additional search keywords, separated by commas."
-msgstr "検索キーワードを半角英数コンマ(,)で区切って追加します。"
+msgstr "検索キーワードを半角英数コンマ (,) で区切って追加します。"
 
 #: ../include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:51
 msgid "laptop, desktop"
@@ -2765,7 +2786,7 @@ msgstr "ユニットを作成します。"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:634
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:866
 msgid "Merchant ID"
-msgstr "販売者ID"
+msgstr "販売者 ID"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php:25
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:24
@@ -2794,8 +2815,8 @@ msgid ""
 "Select <code>Amazon</code> if you only want to see items sold by Amazon; "
 "otherwise, <code>All</code>."
 msgstr ""
-"Amazonで販売された商品にしたい場合、<code>Amazon</code>を選択します。そうでな"
-"い場合<code>全て</code>を選びます。"
+"Amazon で販売された商品にしたい場合、 <code>Amazon</code> を選択します。そう"
+"でない場合<code>すべて</code>を選びます。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php:36
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:61
@@ -2832,7 +2853,7 @@ msgstr "販売可能"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:575
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:892
 msgid "Refurbished"
-msgstr "改装済み"
+msgstr "整備済"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php:42
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:67
@@ -2864,7 +2885,7 @@ msgstr "改装済み"
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Properties.php:323
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Properties.php:366
 msgid "All"
-msgstr "全て"
+msgstr "すべて"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php:45
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:70
@@ -2872,7 +2893,7 @@ msgstr "全て"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:896
 msgid "If the search index is All, this option does not take effect."
 msgstr ""
-"もし検索インデックスが 全て(All) に設定されている場合、このオプションは反映さ"
+"もし検索インデックスが 「すべて」に設定されている場合、このオプションは反映さ"
 "れません。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php:52
@@ -2881,31 +2902,31 @@ msgstr ""
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:494
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:859
 msgid "Please consider upgrading to Pro to use this feature!"
-msgstr "この機能を使うにはプロ版へのアップグレードの検討をお願いします！"
+msgstr "この機能を使うにはプロ版へのアップグレードの検討をお願いします !"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:37
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:701
 msgid "Item ID"
-msgstr "商品ID"
+msgstr "商品 ID"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:43
 msgid ""
 "Enter the ID(s) of the product per line or use the <code>,</code> (comma) "
 "characters to delimit the items."
 msgstr ""
-"プロダクトのIDを入力します。複数の場合<code>,</code>(半角英数コンマ)で区切る"
-"か、1行毎に入力します。"
+"プロダクトの ID を入力します。複数の場合<code>,</code> (半角英数コンマ) で区"
+"切るか、1行毎に入力します。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:44
 msgid "For ASINs, you can simply paste text that includes ASINs."
-msgstr "ASINを含むテキストを単純に貼り付けることができます。"
+msgstr "ASIN を含むテキストを単純に貼り付けることができます。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:50
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:47
 #: ../include/core/component/unit/unit_type/similarity_lookup/admin/form_field/AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main.php:43
 #: ../include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:75
 msgid "Query per Term"
-msgstr "ワード毎にAPIクエリを実行"
+msgstr "ワード毎に API クエリを実行"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:51
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:48
@@ -2916,9 +2937,9 @@ msgid ""
 "one of them returns an error, the entire result becomes an error. To prevent "
 "it, check this option so that the rest will be returned."
 msgstr ""
-"Amazon のAPIは一つのHTTPリクエストで複数の検索語句を許容しますが、その中の一"
-"つにエラーがあると、全結果がエラーとして扱われます。これを避けるには、このオ"
-"プションにチェックします。"
+"Amazon の API は一つの HTTP リクエストで複数の検索語句を許容しますが、その中"
+"の一つにエラーがあると、全結果がエラーとして扱われます。これを避けるには、こ"
+"のオプションにチェックします。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:52
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:49
@@ -2930,7 +2951,7 @@ msgstr "一項目毎に検索を実行する。"
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:58
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:712
 msgid "ID Type"
-msgstr "ID型"
+msgstr "ID 型"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:62
 #: ../include/core/component/unit/unit_type/item_lookup/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup.php:52
@@ -2942,7 +2963,7 @@ msgstr "CA 地域では使用できません。"
 #: ../include/core/component/unit/unit_type/item_lookup/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup.php:54
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:719
 msgid "The US locale only, when the search index is Books."
-msgstr "検索インデックスが「本」の場合で地域が「US」の場合。"
+msgstr "検索インデックスが本の場合で地域が US の場合。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:89
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:61
@@ -2971,7 +2992,7 @@ msgstr "検索エリアを制限するカテゴリーを選択。"
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:73
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:772
 msgid "If the above ID Type is ISBN, this will be automatically set to Books."
-msgstr "上記IDタイプがISBNの場合、これは「本」に自動的に設定されます。"
+msgstr "上記 ID タイプが ISBN の場合、これは本に自動的に設定されます。"
 
 #: ../include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:102
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:74
@@ -3111,8 +3132,8 @@ msgid ""
 "When the search index is selected to <code>All</code>, this option does not "
 "take effect."
 msgstr ""
-"もし検索インデックスが、<code>全て(All)</code> に設定されている場合、このオプ"
-"ションは反映されません。"
+"もし検索インデックスが、<code>すべて (All) </code> に設定されている場合、この"
+"オプションは反映されません。"
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:25
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:507
@@ -3212,8 +3233,8 @@ msgid ""
 "This option will not take effect if the Category option is set to <code>All</"
 "code> or <code>Blended</code>"
 msgstr ""
-"もし「カテゴリ」オプションが<code>全て</code>若しくは<code>ブレンド</code>の"
-"場合、このオプションは効果がありません。"
+"もし「カテゴリ」オプションが<code>すべて</code>若しくは<code>ブレンド</code>"
+"の場合、このオプションは効果がありません。"
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:82
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:597
@@ -3249,10 +3270,11 @@ msgstr "ノード ID の参照"
 msgid ""
 "If you know the browse node (the category ID) that you are searching, "
 "specify it here. It is a positive integer."
-msgstr "ブラウズノードをここで指定できます。正数。"
+msgstr "ブラウズノード (カテゴリー ID ) をここで指定します。正数。"
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:102
-msgid "Browse nodes can be found <a href=\"\" target=\"_blank\">here</a>."
+#, php-format
+msgid "Browse nodes can be found <a href=\"%1$s\" target=\"_blank\">here</a>."
 msgstr ""
 "<a href=\"%1$s\" target=\"_blank\">ここ</a>からブラウズノードを見つけることが"
 "できます。"
@@ -3265,10 +3287,10 @@ msgid ""
 "merchants including Amazon. Use the Amazon to limit the response to only "
 "items sold by Amazon. Case sensitive. e.g.<code>Amazon</code>"
 msgstr ""
-"販売人を指定します。デフォルトではプロダクトアドバタイジングAPIはAmazonを含む"
-"様々な販売人によって売られる商品データを返します。Amazonによって販売されてい"
-"るものに限定する場合、Amazon と指定します。大文字小文字は区別されます。e.g."
-"<code>Amazon</code>"
+"販売者を指定します。デフォルトではプロダクトアドバタイジング API は Amazon を"
+"含む様々な販売者によって売られる商品データを返します。 Amazon によって販売さ"
+"れているものに限定する場合、Amazon と指定します。大文字小文字は区別されま"
+"す。 e.g.<code>Amazon</code>"
 
 #: ../include/core/component/unit/unit_type/product_search/admin/form_field/_common/AmazonAutoLinks_FormFields_SearchUnit_Base.php:19
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:118
@@ -3311,7 +3333,7 @@ msgstr "by %1$s"
 #: ../include/legacy/v2/include/class/unit/AmazonAutoLinks_Unit_Search_.php:411
 #, php-format
 msgid "for %1$s"
-msgstr "%1$s"
+msgstr "for %1$s"
 
 #: ../include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1012
 #: ../include/legacy/v2/include/class/unit/AmazonAutoLinks_Unit_Search_.php:421
@@ -3342,7 +3364,7 @@ msgstr "ASIN アイテム"
 msgid ""
 "Enter the ASIN(s) of the product per line or simply paste text that includes "
 "ASINs."
-msgstr "ライン毎にASIN、もしくはASINを含むテキストを入力します。"
+msgstr "ライン毎に ASIN 、もしくは ASIN を含むテキストを入力します。"
 
 #: ../include/core/component/unit/unit_type/similarity_lookup/admin/form_field/AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main.php:51
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:938
@@ -3359,14 +3381,14 @@ msgstr "共通事項"
 msgid ""
 "returns the intersection of items that are similar to all of the ASINs "
 "specified"
-msgstr "全ての指定されたASINに共通する商品を返します。"
+msgstr "すべての指定された ASIN に共通する商品を返します。"
 
 #: ../include/core/component/unit/unit_type/similarity_lookup/admin/form_field/AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main.php:54
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:942
 msgid ""
 "returns the union of randomly picked items that are similar to all of the "
 "ASINs specified."
-msgstr "全ての指定されたASINに似通った商品をランダムに返します。"
+msgstr "すべての指定された ASIN に似通った商品をランダムに返します。"
 
 #: ../include/core/component/unit/unit_type/similarity_lookup/admin/form_field/AmazonAutoLinks_FormFields_SimilarityLookupUnit_Main.php:56
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:944
@@ -3398,7 +3420,7 @@ msgstr "タグ、又はカスタマー ID が入力されている必要があ�
 #: ../include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:35
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:87
 msgid "Currently only the U.S. locale is supported for this unit type."
-msgstr "現在、このユニットタイプは U.S.地域のみサポートされています。"
+msgstr "現在、このユニットタイプは  U.S. 地域のみサポートされています。"
 
 #: ../include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:40
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:100
@@ -3419,7 +3441,7 @@ msgid ""
 "empty, all products tagged by the customer will be fetched."
 msgstr ""
 "もしカスタマー ID が設定されている場合、この設定は任意で、もし空白の場合、指"
-"定されたカスタマーによってタグ付けされた全ての商品が取得対象になります。"
+"定されたカスタマーによってタグ付けされたすべての商品が取得対象になります。"
 
 #: ../include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:48
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:105
@@ -3455,7 +3477,8 @@ msgstr "スパムでタグヅケされた商品を除外するのに有効です
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:117
 msgid ""
 "If not specified, product links tagged by all customers will be fetched."
-msgstr "もし指定がない場合、全てのカスタマーがタグ付けした商品が取得されます。"
+msgstr ""
+"もし指定がない場合、すべてのカスタマーがタグ付けした商品が取得されます。"
 
 #: ../include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:59
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Tag_.php:118
@@ -3516,7 +3539,7 @@ msgstr "日付"
 #: ../include/core/component/unit/unit_type/tag/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_tag.php:35
 #: ../include/core/component/unit/_common/post_type/unit/action/tag_unit_warning/AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning.php:39
 msgid "Warning!"
-msgstr "警告!"
+msgstr "警告 !"
 
 #: ../include/core/component/unit/unit_type/tag/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_tag.php:40
 #, php-format
@@ -3524,12 +3547,12 @@ msgid ""
 "Amazon has deprecated the <a href=\"%1$s\" target=\"_blank\">tags</a> "
 "feature. So this is no longer functional."
 msgstr ""
-"Amazonは<a href=\"%1$s\" target=\"_blank\">タグ</a>機能を廃止しました。従いま"
-"して、これはもう機能いたしません。"
+"Amazonは<a href=\"%1$s\" target=\"_blank\">タグ</a>機能を廃止しました。よっ"
+"て、これはもう機能いたしません。"
 
 #: ../include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:75
 msgid "URL Unit Advanced"
-msgstr "URLyニット詳細"
+msgstr "URL ユニット詳細"
 
 #: ../include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:103
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:133
@@ -3538,14 +3561,14 @@ msgstr "URL"
 
 #: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage.php:49
 msgid "Add Unit by URL"
-msgstr "URLユニットの追加"
+msgstr "URL ユニットの追加"
 
 #: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:32
 msgid ""
 "The URL unit type allows you to search products found in the page with "
 "specified urls."
 msgstr ""
-"URLユニットタイプは指定されたURLのページで見つかったプロダクトを表示させま"
+"URL ユニットタイプは指定された URL のページで見つかったプロダクトを表示させま"
 "す。"
 
 #: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:52
@@ -3553,12 +3576,12 @@ msgstr ""
 msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more items!"
 msgstr ""
 "これ以上項目を追加するには、<a href=\"%1$s\" target=\"_blank\">プロ版</a>へ"
-"アップグレードして下さい。"
+"アップグレードしてください !"
 
 #: ../include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:115
 #: ../include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php:65
 msgid "Please set a url."
-msgstr "URLを設定して下さい。"
+msgstr "URL を設定してください。"
 
 #: ../include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:57
 msgid "URLs"
@@ -3566,7 +3589,7 @@ msgstr "URL"
 
 #: ../include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:69
 msgid "Enter URLs of the page to be parsed."
-msgstr "解析するページのURLを入力します。"
+msgstr "解析するページの URL を入力します。"
 
 #: ../include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php:37
 msgid "Found Products"
@@ -3574,7 +3597,7 @@ msgstr "見つかったプロダクト"
 
 #: ../include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php:41
 msgid "Retriving items..."
-msgstr "項目を取得中"
+msgstr "項目を取得中 ..."
 
 #: ../include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php:57
 msgid "Product not found."
@@ -3641,15 +3664,15 @@ msgstr "保留の項目はありません"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilterAdvanced.php:32
 msgid "Do not show products with pending elements."
-msgstr "保留要素を持つプロダクトは表示しない。"
+msgstr "保留の要素を持つプロダクトは表示しない。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilterAdvanced.php:33
 msgid ""
 "Some product data including rating and prices are retrieved in the "
 "background and will be pending when the product is first displayed."
 msgstr ""
-"幾つかの商品データ、例えば、カスタマー評価や価格はバックグラウンドで取得さ"
-"れ、プロダクトが最初に表示された時には保留状態になります。"
+"カスタマー評価や価格などの幾つかの商品データはバックグラウンドで取得され、プ"
+"ロダクトが最初に表示された時には保留状態になります。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilterAdvanced.php:38
 msgid "Customer Rating"
@@ -3804,7 +3827,7 @@ msgid ""
 "<a href=\"%1$s\">this page</a>."
 msgstr ""
 "<code>ref=nosim</code> がリンク URL 内に挿入されます。詳細については、<a "
-"href=\"%1$s\">こちら</a>を参照して下さい。"
+"href=\"%1$s\">こちら</a>を参照してください。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:74
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Category_.php:177
@@ -3869,11 +3892,11 @@ msgstr "リンクスタイル"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:28
 msgid "Load with JavaScript"
-msgstr "JavaScriptで読み込み"
+msgstr "JavaScript で読み込み"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:29
 msgid "Load the output with JavaScript."
-msgstr "JavaScriptで出力を読み込む。"
+msgstr "JavaScript での出力を読み込む。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:35
 msgid "Now Loading Text"
@@ -3881,7 +3904,7 @@ msgstr "只今テキストを読み込み中"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:36
 msgid "Now loading..."
-msgstr "只今読み込み中・・・"
+msgstr "只今読み込み中 ..."
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:37
 msgid "The text that appears while loading the unit in the background."
@@ -3959,8 +3982,7 @@ msgid ""
 "Show the <strong>Now Retrieving...</strong> message for the elements being "
 "fetched in the background."
 msgstr ""
-"バックグラウンドで取得中の要素は<strong>只今取得中・・・</strong>を表示しま"
-"す。"
+"バックグラウンドで取得中の要素は<strong>只今取得中 ...</strong>を表示します。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:112
 msgid "Highest Heading Tag Level"
@@ -3985,7 +4007,7 @@ msgstr ""
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:130
 msgid "Custom URL Query"
-msgstr "カスタムURLクエリ"
+msgstr "カスタム URL クエリ"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:131
 msgid "Key-value pairs added to product links."
@@ -4007,8 +4029,8 @@ msgid ""
 "Please upgrade to <a href='%1$s' target='_blank'>Pro</a> to enable this "
 "feature."
 msgstr ""
-"この機能を使うには<a href=\"%1$s\" target=\"_blank\">プロ版</a>へアップグレー"
-"ドして下さい。"
+"この機能を使うには<a href='%1$s' target='_blank'>プロ版</a>へアップグレードし"
+"てください。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:29
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Category_.php:208
@@ -4057,7 +4079,7 @@ msgstr ""
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:35
 #, php-format
 msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
-msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット！"
+msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット !"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:68
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:41
@@ -4070,19 +4092,19 @@ msgstr "プロダクトのレイアウトを決めます。以下の変数が使
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:77
 msgid "a product link url"
-msgstr "プロダクトリンクのURL"
+msgstr "プロダクトリンクの URL"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:78
 msgid "a title with HTML tags defined in the Title Format option"
-msgstr "タイトルフォーマット設定で定められたHTMLタグ付きのタイトル"
+msgstr "タイトルフォーマット設定で定められた HTML タグ付きのタイトル"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:79
 msgid "a title without HTML tags"
-msgstr "HTMLタグ無しのタイトル"
+msgstr "HTML タグ無しのタイトル"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:80
 msgid "a thumbnail with HTML tags defined in the Image Format option"
-msgstr "画像フォーマット設定で定められたHTMLタグ付きのサムネイル"
+msgstr "画像フォーマット設定で定められた HTML タグ付きのサムネイル"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:81
 msgid "sub-images."
@@ -4090,11 +4112,11 @@ msgstr "サブ画像。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:82
 msgid "a description with HTML tags"
-msgstr "HTMLタグ付きの商品説明"
+msgstr "HTML タグ付きの商品説明"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:83
 msgid "a description without HTML tags"
-msgstr "HTMLタグ無しの商品説明"
+msgstr "HTML タグ無しの商品説明"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:84
 msgid "a product price."
@@ -4117,8 +4139,8 @@ msgid "a disclaimer for the product information."
 msgstr "プロダクト情報に関する免責事項。"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:89
-msgid "a full product HTML description ."
-msgstr "HTMLタグ付きでのプロダクトの全説明"
+msgid "a full product HTML description."
+msgstr "HTML タグ付きでのプロダクトの全説明"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:90
 msgid "similar products."
@@ -4170,7 +4192,7 @@ msgstr "タイトルのレイアウトを設定します。"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:68
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:83
 msgid "product link url"
-msgstr "商品リンクURL"
+msgstr "商品リンク URL"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:121
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:135
@@ -4185,7 +4207,7 @@ msgstr "タイトル"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:70
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:87
 msgid "description without HTML tags"
-msgstr "HTMLタグなしの詳細"
+msgstr "HTML タグなしの詳細"
 
 #: ../include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:126
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:75
@@ -4221,7 +4243,7 @@ msgid ""
 "option page."
 msgstr ""
 "テンプレートが見つかりませんでした。ユニット定義ページでテンプレートを再度選"
-"択して下さい。"
+"択してください。"
 
 #: ../include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base.php:421
 #: ../include/legacy/v2/template/category/template.php:25
@@ -4246,7 +4268,7 @@ msgstr "只今、似ている商品を取得しています。"
 
 #: ../include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_Categories.php:33
 msgid "Now retrieving the categories."
-msgstr "只今カテゴリーを取得しています。"
+msgstr "只今、カテゴリーを取得しています。"
 
 #: ../include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview.php:28
 msgid "Now retrieving customer reviews."
@@ -4254,7 +4276,7 @@ msgstr "只今、カスタマーレビューを取得中です。"
 
 #: ../include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_Features.php:43
 msgid "Now retrieving the features."
-msgstr "只今商品の特徴リストを取得しています。"
+msgstr "只今、商品の特徴リストを取得しています。"
 
 #: ../include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet.php:44
 msgid "Now retrieving an image set."
@@ -4288,9 +4310,9 @@ msgid ""
 "on [relevant Amazon Site(s), as applicable] at the time of purchase will "
 "apply to the purchase of this product."
 msgstr ""
-"商品価格と取扱状況については記載された日時において正確であり、常に変動致しま"
-"す。Amazonのサイトに表示された価格と取扱状況の情報は、この商品が購入されたそ"
-"の時のものが適用されます。"
+"商品価格と取扱状況は記載された日時の時点で正確で、また常に変動します。Amazon "
+"のサイトに表示された価格と取扱状況の情報は、この商品が購入されたその時のもの"
+"が適用されます。"
 
 #: ../include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:67
 #: ../include/legacy/v2/include/class/post_type/AmazonAutoLinks_PostType_.php:65
@@ -4402,11 +4424,11 @@ msgstr "不明"
 
 #: ../include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:153
 msgid "RSS Feed by ID"
-msgstr "ID別RSS フィード"
+msgstr "ID 別RSS フィード"
 
 #: ../include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:159
 msgid "JSON Feed by ID"
-msgstr "ID別JSONフィード"
+msgstr "ID 別 JSON フィード"
 
 #: ../include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:227
 msgid "Ready"
@@ -4456,7 +4478,7 @@ msgstr "キャッシュの更新"
 #: ../include/core/component/unit/_common/post_type/unit/action/tag_unit_warning/AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning.php:38
 msgid ""
 "Amazon has deprecated the tags feature. So this is no longer functional."
-msgstr "Amazonはタグ機能を廃止しました。従いまして、これはもう機能しません。"
+msgstr "Amazon はタグ機能を廃止しました。従いまして、これはもう機能しません。"
 
 #: ../include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:88
 #: ../include/legacy/v2/include/class/post_type/AmazonAutoLinks_PostType_UnitPreview.php:64
@@ -4490,27 +4512,28 @@ msgstr "コンテクスチュアルプロダクト"
 
 #: ../include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php:36
 msgid "Displays Amazon product unit outputs."
-msgstr "Amazonプロダクトユニット設定を表示します。"
+msgstr "Amazon プロダクトユニット設定を表示します。"
 
 #: ../include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php:62
 #: ../include/legacy/v2/include/class/widget/AmazonAutoLinks_WidgetByID_.php:56
 msgid ""
 "Hold down the Ctrl (windows) / Command (Mac) key to select multiple items."
 msgstr ""
-"コントールキー(Windows) / コマンドキー(Mac) を押して複数の項目を選択できま"
-"す。"
+"コントールキー　 (Windows)  / コマンドキー (Mac) を押して複数の項目を選択でき"
+"ます。"
 
 #: ../include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:35
 msgid ""
 "Displays Amazon product links contextually related to the current page "
 "contents."
-msgstr "ページコンテンツを文脈解析してAmazonプロダクトを表示します。"
+msgstr "ページコンテンツを文脈解析してAmazon プロダクトを表示します。"
 
 #: ../include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:100
 #, php-format
 msgid "Please set up API keys first from <a href=\"%1$s\">this page</a>."
 msgstr ""
-"まず<a href=\"%1$s\">こちらのページ</a>からAPIキーをセットアップして下さい。"
+"まず<a href=\"%1$s\">こちらのページ</a>から API キーをセットアップしてくださ"
+"い。"
 
 #: ../include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:127
 msgid "Product Filters"
@@ -4518,7 +4541,7 @@ msgstr "プロダクトフィルター"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContxtualProduct.php:38
 msgid "Show widget title on no result."
-msgstr "結果が得られない場合、ウィジェットのタイトルの表示"
+msgstr "結果無しでもウィジェットのタイトルを表示する。"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:45
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:64
@@ -4531,7 +4554,7 @@ msgstr "高さ"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:69
 msgid "Available Page Types"
-msgstr "利用可能ページタイプ"
+msgstr "利用可能なページタイプ"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:71
 msgid "The home page."
@@ -4543,7 +4566,7 @@ msgstr "フロント。"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:73
 msgid "Single pages."
-msgstr "単一の個別記事"
+msgstr "単一の個別記事。"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:74
 msgid "Post type archive pages."
@@ -4559,15 +4582,15 @@ msgstr "日別アーカイブ"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:77
 msgid "Author pages."
-msgstr "投稿者"
+msgstr "投稿者ページ。"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:78
 msgid "Search result pages."
-msgstr "検索結果"
+msgstr "検索結果ページ。"
 
 #: ../include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:79
 msgid "The 404 page."
-msgstr "404"
+msgstr "404ページ。"
 
 #: ../include/core/main/event/action/AmazonAutoLinks_Event___Action_AjaxUnitLoading.php:46
 msgid "Failed to load the unit."
@@ -4580,7 +4603,7 @@ msgid ""
 "definition if you have deleted the unit."
 msgstr ""
 "ユニットタイプを特定できませんでした。削除されたユニットがある場合自動挿入の"
-"定義を更新して下さい。"
+"定義を更新してください。"
 
 #: ../include/core/main/output/AmazonAutoLinks_Output.php:171
 msgid "Unit Arguments"
@@ -5412,7 +5435,7 @@ msgstr "パントリー"
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Properties.php:351
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Properties.php:399
 msgid "PC Hardware"
-msgstr "PCハードウェア"
+msgstr "PC ハードウェア"
 
 #: ../include/core/_common/AmazonAutoLinks_Property.php:243
 msgid "PetSupplies"
@@ -5586,7 +5609,7 @@ msgstr "アクションは処理されませんでした。"
 
 #: ../include/core/_common/event/ajax/AmazonAutoLinks_AjaxEvent_Base.php:37
 msgid "Could not get a user ID."
-msgstr "ユーザーIDの取得ができませんでした。"
+msgstr "ユーザー ID の取得ができませんでした。"
 
 #: ../include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:180
 #, php-format
@@ -5624,7 +5647,7 @@ msgstr "フィードの抜粋"
 #: ../include/core/_common/utility/AmazonAutoLinks_WPUtility.php:219
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:139
 msgid "Post / Page Content on Publish"
-msgstr "記事（投稿時）"
+msgstr "投稿時の記事内容"
 
 #: ../include/core/_common/utility/AmazonAutoLinks_WPUtility.php:222
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:140
@@ -5643,12 +5666,12 @@ msgstr "ドメイン: %1$s"
 
 #: ../include/core/_common/utility/interpreter/api/AmazonAutoLinks_ProductAdvertisingAPI.php:157
 msgid "The API response is empty."
-msgstr "APIのレスポンスは空です。"
+msgstr "API のレスポンスは空です。"
 
 #: ../include/core/_common/utility/interpreter/api/AmazonAutoLinks_ProductAdvertisingAPI.php:164
 msgid "The API returned an error but could not retrieve the error message."
 msgstr ""
-"APIはエラーを返しました。しかし、エラーメッセージが取得できませんでした。"
+"API はエラーを返しました。しかし、エラーメッセージが取得できませんでした。"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:99
 #, php-format
@@ -5656,14 +5679,14 @@ msgid ""
 "Please upgrade the options of previous versions of the plugin by clicking <a "
 "href=\"%1$s\">here</a>."
 msgstr ""
-"<a href=\"%1$s\">こちら</a>をクリックして以前のプラグインのバージョンのオプ"
-"ションをアップグレードして下さい。"
+"<a href=\"%1$s\">こちら</a>をクリックして以前のプラグインのバージョンの設定を"
+"アップグレードしてください。"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:100
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:139
 msgid "Before you do it, please <strong>back up</strong> the database."
 msgstr ""
-"念のためその前にデータベースの<strong>バックアップ</strong>をして下さい。"
+"念のためその前にデータベースの<strong>バックアップ</strong>をしてください。"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:101
 #, php-format
@@ -5678,12 +5701,12 @@ msgstr "インポートするオプションが見つかりませんでした。
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:118
 #, php-format
 msgid "Options have been imported. ( %1$s unit(s) )"
-msgstr "オプションがインポートされました。( %1$s ユニット )"
+msgstr "オプションがインポートされました。  (%1$s ユニット)"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:121
 #, php-format
 msgid "Options been partially imported. ( %1$s unit(s) )"
-msgstr "オプションの一部がインポートされました。( %1$s ユニット )"
+msgstr "オプションの一部がインポートされました。 (%1$sユニット)"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_.php:124
 msgid "No unit was imported."
@@ -5695,8 +5718,8 @@ msgid ""
 "Please upgrade the options by clicking <strong><a href=\"%1$s\">here</a></"
 "strong>."
 msgstr ""
-"<a href=\"%1$s\">こちら</a>をクリックして以前のプラグインのバージョンのオプ"
-"ションをアップグレードして下さい。"
+"<strong><a href=\"%1$s\">こちら</a></strong>をクリックして設定をアップグレー"
+"ドしてください。"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_About.php:27
 #, php-format
@@ -5713,7 +5736,7 @@ msgid ""
 "back to the previous page."
 msgstr ""
 "検索ユニットを追加するページをロード中に問題が発生しました。前のページに戻っ"
-"て下さい。"
+"てください。"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_AddUnitByCategory.php:28
 msgid "An error occurred. Please go back to the previous page and do it again."
@@ -5775,7 +5798,7 @@ msgstr "v1 設定のインポート"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:173
 msgid "Create v3 Options"
-msgstr "v3 オプションの作成"
+msgstr "v3 設定の作成"
 
 #: ../include/legacy/v2/include/class/admin/admin_page/AmazonAutoLinks_AdminPage_SetUp_Page.php:189
 msgid "Installed Templates"
@@ -5812,7 +5835,7 @@ msgid ""
 "developer."
 msgstr ""
 "次のページにカテゴリーを見つけることができませんでした： %1$s プラグイン開発"
-"者に相談して下さい。"
+"者に相談してください。"
 
 #: ../include/legacy/v2/include/class/admin/category_selection/AmazonAutoLinks_CategorySelect_.php:507
 msgid "Could not load categories. Please consult the plugin developer."
@@ -5839,8 +5862,8 @@ msgid ""
 "Only insert in the areas with certain page types, post types, taxonomies, "
 "and post IDs."
 msgstr ""
-"指定した投稿タイプ、ページタイプ、タクソノミー、ポストIDのみ自動挿入を適用さ"
-"せます。"
+"指定した投稿タイプ、ページタイプ、タクソノミー、ポスト ID のみ自動挿入を適用"
+"させます。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_AutoInsert_.php:44
 msgid ""
@@ -5911,14 +5934,14 @@ msgid ""
 "Since some options do not work with the All index, it is recommended to pick "
 "one."
 msgstr ""
-"いくつかのオプションは、全て(All) インデックスでは動作しないため、中から一つ"
-"選択されることをお勧めします。"
+"いくつかのオプションは、「すべて」では動作しないため、中から一つ選択されるこ"
+"とをお勧めします。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:363
 msgid ""
 "When the search index is selected to All, this option does not take effect."
 msgstr ""
-"もし検索インデックスが、全て(All) に設定されている場合、このオプションは反映"
+"もし検索インデックスが、「すべて」に設定されている場合、このオプションは反映"
 "されません。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:629
@@ -5932,15 +5955,16 @@ msgid ""
 "Enter the ID(s) of the product. For more more than one items, use the <code>,"
 "</code> (comma) characters to delimit the items."
 msgstr ""
-"商品のIDを入力します。複数の場合<code>,</code>(半角英数コンマ)で区切ります。"
+"商品の ID を入力します。複数の場合<code>,</code> (半角英数コンマ) で区切りま"
+"す。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:931
 msgid ""
 "Enter the ASIN(s) of the product. For more more than one items, use the "
 "<code>,</code> (comma) characters to delimit the items."
 msgstr ""
-"商品のASINを入力します。複数の場合、<code>,</code>(半角英数コンマ)で区切りま"
-"す。"
+" 商品の ASIN を入力します。複数の場合、<code>,</code>(半角英数コンマ) で区切"
+"ります。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Search_.php:954
 msgid ""
@@ -5948,13 +5972,23 @@ msgid ""
 "than 10 items."
 msgstr "商品リンクを表示する数。このユニットタイプは10まで可能です。"
 
+#: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:24
+#, php-format
+msgid ""
+"For the Search Unit type, credentials are required to perform search "
+"requests with Amazon <a href=\"%1$s\" target=\"_blank\">Product Advertising "
+"API</a>."
+msgstr ""
+"検索ユニットタイプの場合、Amazon <a href=\"%1$s\" target=\"_blank\">Product "
+"Advertising API</a> を商品検索に使用するために、認証情報が必要です。"
+
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:34
 msgid "Filters"
 msgstr "フィルター"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:42
 msgid "Help the developer!"
-msgstr "開発者を援助しよう！"
+msgstr "開発者を援助しよう !"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:48
 msgid "Amazon Auto Links Plugin Agreements"
@@ -5962,11 +5996,11 @@ msgstr "Amazon Auto Links プラグイン同意文言"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:49
 msgid "Please define how you want to support the developer."
-msgstr "開発者を援助する方法を選択して下さい。"
+msgstr "開発者を援助する方法を選択してください。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:84
 msgid "Set allowed HTML tags etc.."
-msgstr "使用可能なHTMLタグ等を設定します。"
+msgstr "使用可能な HTML タグ等を設定します。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:109
 msgid "If you need to refresh the product link outputs, clear the cashes."
@@ -5988,7 +6022,7 @@ msgstr "サポート率"
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:247
 msgid ""
 "The percentage that the associate ID is altered with the plugin developers"
-msgstr "プラグイン開発者のアソシエイトIDが挿入される確率。"
+msgstr "プラグイン開発者のアソシエイト ID が挿入される確率。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:256
 #, php-format
@@ -5997,7 +6031,7 @@ msgid ""
 "help the plugin development if you set it 0%%!"
 msgstr ""
 "もし0％に設定する場合は、開発を援助するために <a href=\"%1$s\" target="
-"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します。"
+"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します !"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:265
 msgid "Advertisement"
@@ -6014,7 +6048,7 @@ msgid ""
 "help the plugin development if you set it off!"
 msgstr ""
 "もしオフに設定する場合は、開発を援助するために <a href=\"%1$s\" target="
-"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します。"
+"\"_blank\">プロ版</a>へのアップグレードのご検討をお願い致します !"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:389
 msgid "relies on WP Cron."
@@ -6035,13 +6069,13 @@ msgid ""
 "default, WordPress applies a filter called KSES that strips out certain tags "
 "before the user input is saved in the database for security reasons."
 msgstr ""
-"フォームに入力できる許可されたHTMLタグを半角英数コンマ(,) で区切り入力しま"
-"す。デフォルトではWordPressはKSESフィルタを適用し特定のタグをデータベースに保"
-"存される時にセキュリティ上の理由で除去します。"
+"フォームに入力できる許可された HTML タグを半角英数コンマ (,) で区切り入力しま"
+"す。デフォルトでは WordPress は KSES フィルタを適用し特定のタグをデータベース"
+"に保存される時にセキュリティ上の理由で除去します。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:476
 msgid "Options to Delete"
-msgstr "削除するオプション"
+msgstr "削除する設定"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Settings_.php:481
 msgid "General options"
@@ -6074,7 +6108,7 @@ msgid ""
 "information, visit <a href=\"%1$s\">this page</a>."
 msgstr ""
 "<code>ref=nosim</code> がリンク URL 内に挿入されます。詳細については、<a "
-"href=\"%1$s\">こちら</a>を参照して下さい。"
+"href=\"%1$s\">こちら</a>を参照してください。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:48
 msgid "Sets the layout of an item. The following variables are available."
@@ -6082,23 +6116,23 @@ msgstr "商品のレイアウトを決めます。以下のヘンスが使用可
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:50
 msgid "title with HTML tags defined in the Title Format option"
-msgstr "タイトルフォーマット設定で定められたHTMLタグ付きのタイトル"
+msgstr "タイトルフォーマット設定で定められた HTML タグ付きのタイトル"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:51
 msgid "title without HTML tags"
-msgstr "HTMLアグなしのタイトル"
+msgstr "HTML タグなしのタイトル"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:52
 msgid "thumbnail with HTML tags defined in the Image Format option"
-msgstr "画像フォーマット設定で定められたHTMLタグ付きのサムネイル"
+msgstr "画像フォーマット設定で定められた HTML タグ付きのサムネイル"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:53
 msgid "description with HTML tags"
-msgstr "HTMLタグ付き詳細"
+msgstr "HTML タグ付き詳細"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:55
 msgid "the product price (only for the search unit type)."
-msgstr "商品価格(検索ユニットタイプのみ)"
+msgstr "商品価格  (検索ユニットタイプのみ)  。"
 
 #: ../include/legacy/v2/include/class/admin/form/AmazonAutoLinks_Form_Template_.php:67
 msgid "Sets the layout of a title."
@@ -6114,7 +6148,7 @@ msgstr "画像のレイアウトを設定します。"
 #: ../include/legacy/v2/include/class/admin/meta_box/AmazonAutoLinks_MetaBox_SimilarityLookupOptions_.php:28
 #: ../include/legacy/v2/include/class/admin/meta_box/AmazonAutoLinks_MetaBox_TagOptions_.php:31
 msgid "The cache lifespan in seconds. For no cache, set 0."
-msgstr "キャッシュ有効期間の秒数。キャッシュを無効にするには 0 を設定。"
+msgstr "キャッシュ有効期間の秒数。キャッシュを無効にするには0を設定。"
 
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Bootstrap.php:150
 msgid "Category Unit Options"
@@ -6144,15 +6178,15 @@ msgstr "類似性検索詳細設定"
 #, php-format
 msgid "The plugin requires the PHP version %1$s or higher."
 msgstr ""
-"このプラグインを使用するには、PHPバージョン %1$s より新しいものがが必要となり"
-"ます。"
+"このプラグインを使用するには、PHP バージョン %1$s より新しいものがが必要とな"
+"ります。"
 
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Bootstrap.php:372
 #, php-format
 msgid "The plugin requires the WordPress version %1$s or higher."
 msgstr ""
-"このプラグインを使うには、WordPress のバージョンが %1$s より新しいものをお使"
-"いになっている必要があります。"
+"このプラグインを使うには、WordPress のバージョンが %1$s より新しいものを使う"
+"必要があります。"
 
 #: ../include/legacy/v2/include/class/boot/AmazonAutoLinks_Bootstrap.php:375
 #, php-format
@@ -6263,7 +6297,7 @@ msgid ""
 "option page."
 msgstr ""
 "テンプレートが見つかりませんでした。ユニット定義ページでテンプレートを再度選"
-"択して下さい。"
+"択してください。"
 
 #: ../include/legacy/v2/include/class/widget/AmazonAutoLinks_WidgetByID_.php:15
 msgid ""
@@ -6279,12 +6313,12 @@ msgstr "ルールの選択"
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4761
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:56
 msgid "The options have been updated."
-msgstr "オプションが更新されました。"
+msgstr "設定が更新されました。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4762
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 msgid "The options have been cleared."
-msgstr "オプションがが消去されました。"
+msgstr "設定が消去されました。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4766
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
@@ -6333,25 +6367,25 @@ msgstr "この画像を使う"
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4775
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:71
 msgid "Are you sure you want to reset the options?"
-msgstr "本当に設定をリセットしますか？"
+msgstr "本当に設定をリセットしますか ?"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4776
 msgid "Please confirm if you want to perform the specified task."
-msgstr "指定されたタスクを実行するか確認して下さい。"
+msgstr "指定されたタスクを実行するか確認してください。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4777
 msgid "The options have been reset."
-msgstr "オプションはリセットされました。"
+msgstr "設定はリセットされました。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4778
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:73
 msgid "The specified options have been deleted."
-msgstr "指定されたオプションは削除されました。"
+msgstr "指定された設定は削除されました。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4787
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:86
 msgid "Show All"
-msgstr "全て表示"
+msgstr "すべて表示"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4792
 msgid "Powered by"
@@ -6390,12 +6424,12 @@ msgstr "%s クエリ (%s 秒中)"
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4808
 #, php-format
 msgid "%s out of %s MB (%s) memory used."
-msgstr "%sMBのメモリ使用 (%s (%s)中)。"
+msgstr "%sMBのメモリ使用 (%s (%s)中) 。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4809
 #, php-format
 msgid "Peak memory usage %s MB."
-msgstr "ピークメモリ使用量は%1$sMBです。"
+msgstr "ピークメモリ使用量は%sMBです。"
 
 #: ../include/legacy/v2/include/library/admin-page-framework-for-amazon-auto-links.php:4810
 #, php-format
@@ -6406,7 +6440,8 @@ msgstr "初期メモリ使用量: %sMB"
 #, php-format
 msgid "The method is called too early. Perform <code>%2$s</code> earlier."
 msgstr ""
-"メソッドの呼び出しが早すぎました。<code>%2$s</code> を早めに実行して下さい。"
+"メソッドの呼び出しが早すぎました。<code>%2$s</code> を早めに実行してくださ"
+"い。"
 
 #: ../include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #, php-format
@@ -6514,7 +6549,7 @@ msgstr "最大実行時間"
 
 #: ../include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Max Input Vars"
-msgstr "Input Vars (フォームのinputタグ) の最大数"
+msgstr "Input Vars (フォーム内のinputタグ) の最大数"
 
 #: ../include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Argument Separator"
@@ -6599,7 +6634,7 @@ msgstr "URL から挿入"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:72
 msgid "Please confirm your action."
-msgstr "アクションを確認して下さい。"
+msgstr "アクションを確認してください。"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:74
 msgid "A problem occurred while processing the form data. Please try again."
@@ -6613,14 +6648,14 @@ msgid ""
 "increase the value. <code>max input vars</code>: %1$s. <code>$_POST</code> "
 "count: %2$s"
 msgstr ""
-"いくつかのフォームフィールドが送信されませんでした。サーバー側でPHPの"
+"いくつかのフォームフィールドが送信されませんでした。サーバー側で PHP の"
 "<code>max_input_vars</code>の値を調べ、サーバー管理者に値を上げるようにお問い"
-"合わせ下さい。<code>max input vars</code>: %1$s. <code>$_POST</code> count: "
-"%2$s"
+"合わせください。<code>max input vars</code>: %1$s. <code>$_POST</code> "
+"count: %2$s"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:76
 msgid "Is it okay to send the email?"
-msgstr "Eメールを送信してもよろしいですか？"
+msgstr "Eメールを送信してもよろしいですか ?"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:77
 msgid "The email has been sent."
@@ -6636,7 +6671,7 @@ msgstr "Eメールの送信に問題がありました。"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:87
 msgid "Show All Authors"
-msgstr "全ての投稿者を開示"
+msgstr "すべての投稿者を開示"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:88
 msgid "Thank you for creating with"
@@ -6724,11 +6759,11 @@ msgstr "セクションの削除"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:116
 msgid "Toggle All"
-msgstr "全てを切り替える"
+msgstr "すべてを切り替える"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:117
 msgid "Toggle all collapsible sections"
-msgstr "全ての折りたたみ可能セクションの切り替え"
+msgstr "すべての折りたたみ可能セクションの切り替え"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:119
 msgid "Yes"
@@ -6785,11 +6820,12 @@ msgstr "コンテンツを折りたたむにはここをクリック。"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:136
 msgid "Loading..."
-msgstr "読込中..."
+msgstr "読込中 ..."
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
 msgid "Please enable JavaScript for better user experience."
-msgstr "より良いユーザー体験のためにブラウザのJavaScriptを有効にして下さい。"
+msgstr ""
+"より良いユーザー体験のためにブラウザの JavaScript を有効にしてください。"
 
 #: ../include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:139
 msgid "Field Arguments"
@@ -6821,7 +6857,12 @@ msgstr "注意"
 
 #: ../template/rss2/template.php:29
 msgid "Amazon Products"
-msgstr "Amazonプロダクト"
+msgstr "Amazon プロダクト"
+
+#~ msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more units! ) . "
+#~ msgstr ""
+#~ "これ以上項目を追加するには、<a href=\"%1$s\" target=\"_blank\">プロ版</a>"
+#~ "へアップグレードして下さい。"
 
 #~ msgid "Interval for Removing Expired Caches"
 #~ msgstr "期限切れキャッシュの削除のインターバル"

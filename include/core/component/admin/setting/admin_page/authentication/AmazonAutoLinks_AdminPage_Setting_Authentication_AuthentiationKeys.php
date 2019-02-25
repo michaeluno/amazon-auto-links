@@ -40,6 +40,10 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'type'              => 'hidden',
                 'value'             => $_bConnected,
                 'label'             => $this->___getStatus( $_bConnected ),
+                'description'       => sprintf(
+                    __( 'If you get an error, try testing your keys with <a href="%1$s" target="_blank">Scratchpad</a>.', 'amazon-auto-links' ),
+                    'https://webservices.amazon.com/scratchpad/'
+                ),
             ),
             array(
                 'field_id'          => 'access_key',
@@ -78,7 +82,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'field_id'          => 'server_locale',
                 'title'             => __( 'Server Locale', 'amazon-auto-links' ),
                 'type'              => 'select',
-                'description'       => __( 'The region of the API server to use. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
+                'description'       => __( 'The region of the API server. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
                 'label'             => array(
                     'CA'    => 'CA - webservices.amazon.ca',
                     'CN'    => 'CN - webservices.amazon.cn',
@@ -178,9 +182,10 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             $_sLabel          = $_bIsConnected
                 ? __( 'Connected', 'amazon-auto-links' )
                 : __( 'Disconnected', 'amazon-auto-links' );
-            return '<span class="' . $_sStatusSelector . '">' 
+            return '<p><span class="' . $_sStatusSelector . '">'
                     . $_sLabel
-                .'</span>';
+                .'</span></p>';
+
         }
     
     /**
