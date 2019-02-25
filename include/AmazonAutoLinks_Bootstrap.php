@@ -183,7 +183,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     public function setLocalization() {
                 
         load_plugin_textdomain( 
-            AmazonAutoLinks_Registry::TEXT_DOMAIN, 
+            'amazon-auto-links',
             false, 
             dirname( plugin_basename( $this->sFilePath ) ) . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
         );
