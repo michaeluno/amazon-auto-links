@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.1.0
-Stable tag:         3.8.8
+Stable tag:         3.8.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
