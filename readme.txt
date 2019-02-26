@@ -284,7 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.9 - 02/25/2019 =
+= 3.8.9 - 02/26/2019 =
 - Updated the Japanese translation.
 - Fixed an issue of unnecessary function calls in `admin-ajax.php`.
 - Fixed a misspelling in the `Manage Units` page regarding PHP codes.
