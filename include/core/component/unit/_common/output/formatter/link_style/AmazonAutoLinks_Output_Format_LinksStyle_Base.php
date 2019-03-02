@@ -20,7 +20,6 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
     public $sLocale      = 'US';
 
     public $oOption;
-    public $oEncrypt;
     
     /**
      * Sets up properties.
@@ -32,7 +31,6 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
         $this->sLocale      = $sLocale;
         
         $this->oOption      = AmazonAutoLinks_Option::getInstance();
-        $this->oEncrypt     = new AmazonAutoLinks_Encrypt;
         
     }
     
@@ -48,16 +46,11 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
     /**
      * @remark      for supporting the developer.
      * @return      string
+     * @since       3
+     * @since       3.8.10      Removed supported tags.
      */
     protected function getAssociateID() {
-        
-        if ( ! $this->oOption->isSupported() ) {
-            return $this->sAssociateID;
-        }
-        return isset( AmazonAutoLinks_Property::$aTokens[ $sLocale ] )
-            ? $this->oEncrypt->decode( AmazonAutoLinks_Property::$aTokens[ $this->sLocale ] )
-            : $this->sAssociateID;
-        
+        return $this->sAssociateID;
     }       
    
 }
