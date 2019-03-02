@@ -243,7 +243,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 );
                 $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
 
-                // Make it associative so that duplicate items will be lost.
+                // Make it associative so that duplicate items will be removed.
                 return empty( $_aURLs )
                     ? $_aURLs
                     : array_combine( $_aURLs, $_aURLs );
