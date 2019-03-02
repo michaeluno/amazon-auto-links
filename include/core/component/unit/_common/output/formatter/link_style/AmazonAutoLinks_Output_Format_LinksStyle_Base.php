@@ -37,7 +37,7 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
     }
     
     /**
-     * Retruns a formatted url.
+     * Returns a formatted url.
      * @remark      Override this method in an extended class.
      * @return      string
      */
