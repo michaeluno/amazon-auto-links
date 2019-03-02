@@ -456,19 +456,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          */
         private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
             
-            $iStyle = $iStyle
-                ? ( integer ) $iStyle 
-                : 1;
+            $iStyle      = $iStyle ? ( integer ) $iStyle : 1;
             $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
             $_oLinkStyle = new $_sClassName(
                 $bRefNosim,
                 $sAssociateID,
                 $sLocale
             );
-            $_sURL = $_oLinkStyle->get(
-                $sURL,
-                $sASIN
-            );
+            $_sURL = $_oLinkStyle->get( $sURL, $sASIN );
             return str_replace(
                 'amazon-auto-links-20',  // dummy url used for a request
                 $sAssociateID,
