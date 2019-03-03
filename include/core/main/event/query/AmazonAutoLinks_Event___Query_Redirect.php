@@ -32,8 +32,9 @@ class AmazonAutoLinks_Event___Query_Redirect {
         if ( 'vendor' === $_sQueryValue ) {
             $this->___goToVendor();
         }
-        
-        $this->___goToStore( $_GET[ $sQueryKey ], $_GET );    
+
+        // At this point, it is a cloaked URL.
+        $this->___goToStore( $_sQueryValue, $_GET, $sQueryKey );
         
     }
         
@@ -60,8 +61,10 @@ class AmazonAutoLinks_Event___Query_Redirect {
         /**
          * 
          * For URL cloaking redirects.
+         * @since   3
+         * @since   3.8.10  Made it respect additional URL query parameters.
          */
-        private function ___goToStore( $sASIN, $aArgs ) {
+        private function ___goToStore( $sASIN, $aArgs, $sQueryKey ) {
             
             $aArgs = $aArgs + array(
                 'locale' => null,
@@ -77,9 +80,10 @@ class AmazonAutoLinks_Event___Query_Redirect {
             $_aURLElements  = parse_url( $_sURL );
             $_sStoreURL     = $_aURLElements[ 'scheme' ] . '://' . $_aURLElements[ 'host' ]
                 . '/dp/ASIN/' . $sASIN . '/' 
-                . ( empty( $aArgs[ 'ref' ] ) ? '' : 'ref=nosim' )
-                . "?tag={$aArgs[ 'tag' ]}";
-            
+                . ( empty( $aArgs[ 'ref' ] ) ? '' : 'ref=nosim' );
+
+            unset( $aArgs[ 'ref' ], $aArgs[ 'ref' ], $aArgs[ 'locale' ], $aArgs[ $sQueryKey ] );
+            $_sStoreURL     = add_query_arg( $aArgs, $_sStoreURL );
             exit( 
                 wp_redirect( 
                     apply_filters( 

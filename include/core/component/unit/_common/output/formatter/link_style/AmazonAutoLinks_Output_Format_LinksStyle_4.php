@@ -22,14 +22,17 @@ class AmazonAutoLinks_Output_Format_LinksStyle_4 extends AmazonAutoLinks_Output_
      */
     public function get( $sURL, $sASIN ) {
 
-        $_aURLelem = parse_url( trim( $sURL ) );
+        $_aURLParts = parse_url( trim( $sURL ) );
+        parse_str( $_aURLParts[ 'query' ], $_aQuery );
+        unset( $_aQuery[ 'tag' ] ); // prevent duplicates
+        $_aQuery    = $_aQuery + array(
+            'tag' => $this->getAssociateID(),
+        );
         return add_query_arg( 
-            array( 
-                'tag' => $this->getAssociateID(),
-            ),
-            $_aURLelem[ 'scheme' ]
+            $_aQuery,
+            $_aURLParts[ 'scheme' ]
                 . '://' 
-                . $_aURLelem[ 'host' ]
+                . $_aURLParts[ 'host' ]
                 . '/dp/ASIN/' 
                 . $sASIN 
                 . '/' 

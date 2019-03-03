@@ -22,18 +22,20 @@ class AmazonAutoLinks_Output_Format_LinksStyle_3 extends AmazonAutoLinks_Output_
      */
     public function get( $sURL, $sASIN ) {
 
-        $_aURLelem = parse_url( trim( $sURL ) );
-        $_aQueries = array( 
+        $_aURLParts = parse_url( trim( $sURL ) );
+        parse_str( $_aURLParts[ 'query' ], $_aQuery );
+        unset( $_aQuery[ 'tag' ] ); // prevent duplicates
+        $_aQuery    = $_aQuery + array(
             'tag' => $this->getAssociateID(),
         );
         if ( $this->bRefNosim ) {
-            $_aQueries[ 'ref' ] = 'nosim';
+            $_aQuery[ 'ref' ] = 'nosim';
         }
         return add_query_arg( 
-            $_aQueries,
-            $_aURLelem['scheme'] 
+            $_aQuery,
+            $_aURLParts[ 'scheme' ]
                 . '://' 
-                . $_aURLelem['host'] 
+                . $_aURLParts[ 'host' ]
                 . '/gp/product/' 
                 . $sASIN 
         );                             

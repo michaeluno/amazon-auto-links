@@ -31,7 +31,7 @@ class AmazonAutoLinks_Output_Format_LinksStyle_1 extends AmazonAutoLinks_Output_
             );
         }
             
-        // http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&amp;tag=miunosoft-20 -> http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&tag=miunosoft-20 -> 
+        // http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&amp;tag=miunosoft-20 -> http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&tag=miunosoft-20
         return add_query_arg( 
             array( 
                 'tag' => $this->getAssociateID(),

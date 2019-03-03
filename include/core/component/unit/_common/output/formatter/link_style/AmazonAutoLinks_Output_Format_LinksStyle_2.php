@@ -22,8 +22,9 @@ class AmazonAutoLinks_Output_Format_LinksStyle_2 extends AmazonAutoLinks_Output_
      */
     public function get( $sURL, $sASIN ) {
         
-        $_aURLelem = parse_url( trim( $sURL ) );                
-        return $_aURLelem[ 'scheme' ] . '://' . $_aURLelem[ 'host' ] 
+        $_aURLParts = parse_url( trim( $sURL ) );
+        parse_str( $_aURLParts[ 'query' ], $_aQuery );
+        $_sURL      = $_aURLParts[ 'scheme' ] . '://' . $_aURLParts[ 'host' ]
             . '/exec/obidos/ASIN/' . $sASIN 
             . '/' . $this->getAssociateID() 
             . ( 
@@ -31,7 +32,9 @@ class AmazonAutoLinks_Output_Format_LinksStyle_2 extends AmazonAutoLinks_Output_
                     ? '' 
                     : '/ref=nosim' 
             );    // ref=nosim
-        
+        unset( $_aQuery[ 'tag' ] ); // already inserted
+        return add_query_arg( $_aQuery, $_sURL );
+
     }
              
 }
