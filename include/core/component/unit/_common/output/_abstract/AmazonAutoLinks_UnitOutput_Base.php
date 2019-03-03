@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     public $sCharEncoding = '';
     
     /**
-     * Indicates whether the unit needs to access custom databse table.
+     * Indicates whether the unit needs to access custom database table.
      * @remark      Accessed from delegation classes publicly.
      * @since       3
      */

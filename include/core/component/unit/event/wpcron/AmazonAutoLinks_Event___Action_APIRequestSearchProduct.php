@@ -350,7 +350,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     return $_sFormattedPrice;
                 }            
                 /**
-                 * Extracs image info from the product array.
+                 * Extracts image info from the product array.
                  * @return      array
                  */
                 private function ___getImages( $aProduct ) {
