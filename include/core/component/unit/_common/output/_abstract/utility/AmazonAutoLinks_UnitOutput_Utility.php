@@ -12,82 +12,7 @@
  * A base class that provides utility methods for unit output classes.
  *
  */
-abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_PluginUtility {
-
-    /**
-     * Constructs the category output from an array of nested browse nodes.
-     * @since       3.8.0
-     * @return      string
-     */
-    static public function getCategories( array $aBrowseNodes ) {
-        $_sList = '';
-        foreach( self::___getBrowseNodes( $aBrowseNodes ) as $_sBrowseNode ) {
-            $_sList .= "<li class='category'>" . $_sBrowseNode . "</li>";
-        }
-        return "<ul class='categories'>" . $_sList . "</ul>";
-    }
-        /**
-         * @param array $aBrowseNodes
-         *
-         * @return array
-         * @sicne   3.8.0
-         */
-        static private function ___getBrowseNodes( array $aBrowseNodes ) {
-
-            $_aList = array();
-            $_aBrowseNodes = self::getElementAsArray( $aBrowseNodes, 'BrowseNode' );
-            if ( empty( $_aBrowseNodes ) ) {
-                return $_aList;
-            }
-
-            // For multiple nodes, the it is numerically indexed. Otherwise, the associative array itself.
-            $_aBrowseNodes = isset( $_aBrowseNodes[ 0 ] ) ? $_aBrowseNodes : array( $_aBrowseNodes );
-            foreach( $_aBrowseNodes as $_aBrowseNode ) {
-                $_aList[] = self::___getNodeBreadcrumb( $_aBrowseNode, '' );
-            }
-            return $_aList;
-        }
-            /**
-             * @param array $aBrowseNode
-             * @param string $sBreadcrumb
-             * @since 3.8.0
-             * @return string
-             */
-            static private function ___getNodeBreadcrumb( array $aBrowseNode, $sBreadcrumb, $sDelimiter=' > ' ) {
-
-                // There are cases that the `Name` does not exist.
-                $_sName       = self::getElement( $aBrowseNode, 'Name' );
-                if ( ! $_sName ) {
-                    return $sBreadcrumb;
-                }
-
-                $sBreadcrumb = $sBreadcrumb
-                    ? $sBreadcrumb . $sDelimiter . $_sName
-                    : $_sName;
-
-                $_aAncestor = self::getElementAsArray( $aBrowseNode, array( 'Ancestors', 'BrowseNode' ) );
-                if ( ! empty( $_aAncestor ) ) {
-                   $sBreadcrumb = self::___getNodeBreadcrumb( $_aAncestor, $sBreadcrumb );
-                }
-                return $sBreadcrumb;
-
-            }
-
-    /**
-     * Constructs the features list output from an array storing features.
-     * @since       3.8.0
-     * @return      string
-     */
-    static public function getFeatures( array $aFeatures ) {
-        $_sList = "";
-        foreach( $aFeatures as $_sFeature ) {
-            if ( ! trim( $_sFeature ) ) {
-                continue;
-            }
-            $_sList .= "<li class='feature'>$_sFeature</li>";
-        }
-        return "<ul class='features'>" . $_sList . "</ul>";
-    }
+abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_Utility {
 
     /**
      *
@@ -169,22 +94,5 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Plugin
 
     }
 
-    /**
-     * Returns the resized image url.
-     *
-     * @rmark       Adjusts the image size. _SL160_ or _SS160_
-     * @return      string
-     * @param       $sImgURL        string
-     * @param       $iImageSize     integer     0 to 500.
-     * @since       3
-     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-     */
-    static public function getImageURLBySize( $sImgURL, $iImageSize ) {
-        return preg_replace(
-            '/(?<=_S)([LS])(\d{1,3})(?=_)/i',
-            '${1}'. $iImageSize,
-            $sImgURL
-       );
-    }
 
 }

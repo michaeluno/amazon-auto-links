@@ -270,6 +270,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit/action/tag_unit_warning/AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning.php", 
     "AmazonAutoLinks_PostType_Unit__ActionLink_Base"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit/action/_common/AmazonAutoLinks_PostType_Unit__ActionLink_Base.php", 
     "AmazonAutoLinks_PostType_UnitPreview"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php", 
+    "AmazonAutoLinks_Unit_Utility"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php", 
     "AmazonAutoLinks_UnitTypeLoader_Base"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php", 
     "AmazonAutoLinks_UnitOptionConverterLoader"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit_option_converter/AmazonAutoLinks_UnitOptionConverterLoader.php", 
     "AmazonAutoLinks_UnitOptionConverter_Setting"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php", 

@@ -13,12 +13,12 @@
  *
  * @since       3.8.0
  */
-class AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank extends AmazonAutoLinks_UnitOutput___ElementFormatter_Features {
+class AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
     /**
      * @return      string
      * @throws      Exception
-     * @since       3.5.0
+     * @since       3.8.0
      */
     public function get() {
 

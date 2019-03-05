@@ -82,6 +82,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             if ( ! $this->bDBTableAccess ) {
                 return $_aProduct;
             }
+
+            // @todo even the API is disconnected, it should return the cache
             if ( ! $this->oOption->isAPIConnected() ) {
                 return $_aProduct;
             }
@@ -497,33 +499,5 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             . "</div>";
 
     }
-
-    /**
-     * @param array $aItem
-     * @return  string
-     * @since   3.8.0
-     */
-    protected function _getFeatures( array $aItem ) {
-        $_aFeatures = $this->getElementAsArray(
-            $aItem,
-            array( 'ItemAttributes', 'Feature' ),
-            array()
-        );
-        return AmazonAutoLinks_UnitOutput_Utility::getFeatures( $_aFeatures );
-    }
-
-    /**
-     * @param array $aItem
-     * @return  string
-     * @since   3.8.0
-     */
-    protected function _getCategories( array $aItem ) {
-        $_aNodes = $this->getElementAsArray(
-            $aItem,
-            array( 'BrowseNodes',  )
-        );
-        return AmazonAutoLinks_UnitOutput_Utility::getCategories( $_aNodes );
-    }
-
 
 }

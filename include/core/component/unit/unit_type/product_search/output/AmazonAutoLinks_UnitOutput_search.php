@@ -29,6 +29,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     public $sSearchTermKey = 'Keywords';    
 
     /**
+     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * @since       3.5.0
+     * @var array
+     */
+    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%similar%', );
+
+    /**
      * Represents the array structure of the item array element of API response data.
      * @since            unknown
      */    
@@ -44,7 +51,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         'MediumImage'       => null,
         'OfferSummary'      => null,
     );
-    
+
     /**
      * 
      * @return    array    The response array.
@@ -780,7 +787,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'product_url'        => $_sProductURL,
                     'title'              => $_sTitle,
                     'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
-                    'description'        => $_sDescription, // reflects the user set character length
+                    'description'        => $_sDescription, // reflects the user set character length. Additional meta data will be prepended.
                     'meta'               => '',
                     'content'            => $_sContent,
                     'image_size'         => $this->oUnitOption->get( 'image_size' ),
@@ -793,7 +800,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] )
                         : '',
                     // 'manufacturer' => $_aItem[ 'ItemAttributes' ][ 'Manufacturer' ],
-                    'category'           => $this->_getCategories( $_aItem ),
+                    'category'           => $this->___getCategories( $_aItem ),
                     // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
                     'release_date'       => $this->getElement(  // 3.8.0
                         $_aItem,
@@ -809,22 +816,28 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         array( 'ItemAttributes', 'IsAdultProduct' ),
                         false
                     ),
-    
+
                     'review'              => '',  // customer reviews
                     'rating'              => '',  // 3+
                     'button'              => '',  // 3+
                     'image_set'           => '',  // 3+
                     'editorial_review'    => '',  // 3+ // @todo add a format method for editorial reviews.
-                    'similar_products'    => '', // $this->getElement( $_aItem, 'SimilarProducts' ),
-                    'feature'             => $this->_getFeatures( $_aItem ),
-                    'sales_rank'          => $this->getElement(
-                        $_aItem,
-                        array( 'SalesRank' ),
-                        0
-                    ), // 3.8.0
+                    'similar_products'    => '',  // $this->getElement( $_aItem, 'SimilarProducts' ),
+                    'feature'             => $this->___getFeatures( $_aItem ),
+                    'sales_rank'          => $this->getElement( $_aItem, array( 'SalesRank' ), 0 ), // 3.8.0
+                    'is_prime'            => ( boolean ) $this->getElement( $_aItem, array( 'Offers', 'Offer', 'OfferListing', 'IsEligibleForPrime' ), 0 ), // 3.8.11
                 )
                 + $this->___getPrices( $_aItem )
                 + $_aItem;
+
+                // 3.8.11 Retrieve the images directly from the response rather than the custom database table
+                $_aProduct[ 'image_set' ] = $this->___getImageSet(
+                    $_aItem,
+                    $_sProductURL,
+                    $_sTitle,
+                    $this->oUnitOption->get( 'subimage_size' ),
+                    $this->oUnitOption->get( 'subimage_max_count' )
+                );
 
                 // Add meta data to the description
                 $_aProduct[ 'meta' ]        = $this->___getProductMetaFormatted( $_aProduct );
@@ -847,7 +860,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         array( '%button%', )
                     )
                 ) {
-    
+
                     $_aProduct[ 'button' ] = $this->_getButton(
                         $this->oUnitOption->get( 'button_type' ),
                         $this->_getButtonID(),
@@ -932,7 +945,47 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 return $_aItems;
                 
             }
-            
+
+            /**
+             * @return  string
+             * @since   3.8.11
+             */
+            private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%image_set%', ) ) ) {
+                    return '';
+                }
+                $_aImages = $this->getImageSet( $aItem );
+                return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages );
+            }
+
+            /**
+             * @param array $aItem
+             * @return  string
+             * @since   3.8.0
+             * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+             */
+            private function ___getCategories( array $aItem ) {
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%category%', ) ) ) {
+                    return '';
+                }
+                $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodes', ) );
+                return $this->getCategories( $_aNodes );
+            }
+
+            /**
+             * @param array $aItem
+             * @return  string
+             * @since   3.8.0
+             * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+             */
+            private function ___getFeatures( array $aItem ) {
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%feature%', ) ) ) {
+                    return '';
+                }
+                $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemAttributes', 'Feature' ) );
+                return $this->getFeatures( $_aFeatures );
+            }
+
             /**
              * Returns prices of the product as an array.
              * @since       2.1.2

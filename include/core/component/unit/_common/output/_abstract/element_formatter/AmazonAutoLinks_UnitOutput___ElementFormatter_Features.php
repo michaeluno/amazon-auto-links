@@ -15,20 +15,10 @@
  */
 class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
-    protected $_aProduct = array();
-
-    /**
-     * Sets up properties.
-     */
-    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption, $aProduct ) {
-        parent::__construct( $sASIN, $sLocale, $sAssociateID, $aRow, $oUnitOption );
-        $this->_aProduct = $aProduct;
-    }
-
     /**
      * @return      string
      * @throws      Exception
-     * @since       3.5.0
+     * @since       3.8.0
      */
     public function get() {
 
@@ -54,7 +44,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoL
             if ( '' === $_snEncodedHTML ) {
                 return '';
             }
-            return AmazonAutoLinks_UnitOutput_Utility::getFeatures(
+            return AmazonAutoLinks_Unit_Utility::getFeatures(
                 $this->getElementAsArray( $this->_aRow, 'features' )
             );
         }

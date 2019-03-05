@@ -13,7 +13,7 @@
  *
  * @since       3.8.0
  */
-class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAutoLinks_UnitOutput___ElementFormatter_Features {
+class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
     /**
      * @return      string
@@ -44,7 +44,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
             if ( '' === $_snEncodedHTML ) {
                 return '';
             }
-            return AmazonAutoLinks_UnitOutput_Utility::getCategories(
+            return AmazonAutoLinks_Unit_Utility::getCategories(
                 $this->getElementAsArray( $this->_aRow, 'categories' )
             );
         }

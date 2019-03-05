@@ -17,11 +17,16 @@
  */
 abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends AmazonAutoLinks_UnitOutput___Database_Product {
 
+    protected $_aProduct = array();
+
     /**
      * Sets up properties.
+     * @since       3.5.0
+     * @since       3.8.11      Added the `$aProduct` parameter so that some extended classes do not have to declare the their own constructor.
      */
-    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption ) {
+    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption, array $aProduct=array() ) {
         parent::__construct( $sASIN, $sLocale, $sAssociateID, $aRow, $oUnitOption );
+        $this->_aProduct = $aProduct;
         $this->_construct();
     }
 

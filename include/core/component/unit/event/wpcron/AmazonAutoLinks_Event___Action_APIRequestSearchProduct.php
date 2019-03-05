@@ -250,10 +250,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                         array( 'ItemAttributes', 'Title' ),
                         ''
                     ),    
-                    'images'             => $this->___getImages( 
-                        $aAPIResponseProductData 
-                    ),     
-                    
+                    'images'             => AmazonAutoLinks_Unit_Utility::getImageSet( $aAPIResponseProductData ),    // 3.8.11
+
                     // Similar products will be set with a separate routine.
                     // Once an empty value is set, it will no longer trigger the value retrieval background routine
                     // 'similar_products'   => '',
@@ -335,7 +333,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $_sFormattedPrice = $this->getElement(
                         $aAPIResponseProductData,
                         array( 'ItemAttributes', 'ListPrice', $sKey ),
-                        $mDefault // avoid null as in the fron-end, when null is returend, it triggers a background task
+                        $mDefault // avoid null as in the front-end, when null is returned, it triggers a background task
                     );
 
                     if ( ! empty( $_sFormattedPrice ) ) {
@@ -349,50 +347,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     ); 
                     return $_sFormattedPrice;
                 }            
-                /**
-                 * Extracts image info from the product array.
-                 * @return      array
-                 */
-                private function ___getImages( $aProduct ) {
-                    
-                    $_aMainImage = array(
-                        'SwatchImage' => $this->getElement(
-                            $aProduct,
-                            array( 'SwatchImage' )
-                        ),                    
-                        'SmallImage' => $this->getElement(
-                            $aProduct,
-                            array( 'SmallImage' )
-                        ),
-                        'MediumImage' => $this->getElement(
-                            $aProduct,
-                            array( 'MediumImage' )
-                        ), 
-                        'LargeImage' => $this->getElement(
-                            $aProduct,
-                            array( 'LargeImage' )
-                        ),         
-                        'HiResImage' => $this->getElement(
-                            $aProduct,
-                            array( 'HiResImage' )
-                        ),                                 
-                    );
-                    // Will be numerically indexed array holding sub-image each.
-                    $_aSubImages = $this->getElementAsArray(
-                        $aProduct,
-                        array( 'ImageSets', 'ImageSet' ),
-                        array()
-                    );  
-                    
-                    // Sub-images can be only single. In that case, put it in a numeric element.
-                    if ( ! isset( $_aSubImages[ 0 ] ) ) {
-                        $_aSubImages = array( $_aSubImages );
-                    }
-                    
-                    return array(
-                        'main' => $_aMainImage,
-                    ) + $_aSubImages;
-                }
+
                 /**
                  * 
                  * @return      string
