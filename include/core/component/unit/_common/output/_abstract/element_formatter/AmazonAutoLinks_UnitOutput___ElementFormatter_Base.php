@@ -36,6 +36,7 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
     protected function _construct() {}
 
     /**
+     * Returns the formatted element output.
      * @return      string
      * @since       3.5.0
      */
