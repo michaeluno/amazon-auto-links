@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.1.0
-Stable tag:         3.8.10
+Stable tag:         3.8.11
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,7 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.11 - 03/08/2019 =
+= 3.8.11 - 03/09/2019 =
 - Optimized the use of Amazon Product Advertising API to reduce unnecessary requests.
 
 = 3.8.10 - 03/04/2019 =
