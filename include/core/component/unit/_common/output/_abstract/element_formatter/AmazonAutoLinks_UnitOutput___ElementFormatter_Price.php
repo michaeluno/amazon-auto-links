@@ -21,25 +21,40 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
      * @since       3.5.0
      */
     public function get() {
-        
-        $_snEncodedHTML = $this->_getCell( 'price_formatted' );
-        if ( null === $_snEncodedHTML ) {
+
+        // For search-type units, this value is already set with API response.
+        if ( $this->_aProduct[ 'price' ] ) {
+            return $this->_aProduct[ 'price' ];
+        }
+
+        $_sPriceFormatted = $this->_getCell( 'price_formatted' );
+        if ( null === $_sPriceFormatted ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the price.', 'amazon-auto-links' )
             );
         }
-        return $this->___getFormattedOutput( $_snEncodedHTML );
+        return $this->___getFormattedOutput( $_sPriceFormatted );
 
     }
         /**
          * @since   3.5.0
          * @return  string
          */
-        private function ___getFormattedOutput( $_snEncodedHTML ) {
-            if ( '' === $_snEncodedHTML ) {
+        private function ___getFormattedOutput( $sPriceFormatted ) {
+            if ( '' === $sPriceFormatted ) {
                 return '';
             }
-            return $this->___getPriceOutput( $_snEncodedHTML );
+            $inLowestNew          = $this->_getCell( 'lowest_new_price' );
+            $inDiscounted         = $this->_getCell( 'discounted_price' );
+            $sDiscountedFormatted = $this->_getCell( 'discounted_price_formatted' );
+            $sLowestNewFormatted  = $this->_getCell( 'lowest_new_price_formatted' );
+            return AmazonAutoLinks_Unit_Utility::getPrice(
+                $sPriceFormatted,
+                $inDiscounted,
+                $inLowestNew,
+                $sDiscountedFormatted,
+                $sLowestNewFormatted
+            );
         }
 
             /**
@@ -47,8 +62,9 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
              * @since       3.4.11
              * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormatter`.
              * @return      string
+             * @deprecated  3.8.11      Moved to `AmazonAutoLinks_Unit_Utility`.
              */
-            private function ___getPriceOutput( $_sPriceFormatted ) {
+/*            private function ___getPriceOutput( $_sPriceFormatted ) {
 
                 $_inLowestNew           = $this->_getCell( 'lowest_new_price' );
                 $_inDiscount            = $this->_getCell( 'discounted_price' );
@@ -61,15 +77,16 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
                         . '<span class="offered-price">' . $_sLowestFormatted . '</span>'
                     : '<span class="offered-price">' . $_sPriceFormatted . '</span>';
 
-            }
+            }*/
                 /**
                  * @param   integer $_iLowestNew
                  * @param   integer $_iDiscount
                  * @return  integer|null
                  * @since   3.4.11
                  * @since   3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormatter`.
+                 * @deprecated  3.8.11
                  */
-                private function ___getLowestPrice( $_iLowestNew, $_iDiscount ) {
+/*                private function ___getLowestPrice( $_iLowestNew, $_iDiscount ) {
                     $_aOfferedPrices        = array();
                     if ( null !== $_iLowestNew ) {
                         $_aOfferedPrices[] = ( integer ) $_iLowestNew;
@@ -80,6 +97,6 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
                     return ! empty( $_aOfferedPrices )
                         ? min( $_aOfferedPrices )
                         : null;
-                }
+                }*/
 
 }

@@ -33,7 +33,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @since       3.5.0
      * @var array
      */
-    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%similar%', );
+    protected $_aItemFormatDatabaseVariables = array( '%review%', '%rating%', '%similar%', );
 
     /**
      * Represents the array structure of the item array element of API response data.
@@ -1009,9 +1009,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_sProperPrice      = $_sDiscountedPrice
                     ? "<s>" . $_sProperPrice . "</s>"
                     : $_sProperPrice;
-                    
+
                 $_aPrices = array(
-                    'price'              => $_sProperPrice
+                    'proper_price'       => $_sProperPrice  // 3.8.11 changed from `price`
                         ? "<span class='amazon-product-price-value'>"  
                                . "<span class='proper-price'>" . $_sProperPrice . "</span>"
                             . "</span>"
@@ -1032,8 +1032,48 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                             . "</span>"
                         : '',
                 );
-    
+
+                /**
+                 * Price is retrieved directly from the API response.
+                 * @since   3.8.11
+                 */
+                $_inLowestNew   = $this->getElement(
+                    $aItem,
+                    array( 'OfferSummary', 'LowestNewPrice', 'Amount' ),
+                    null    // here the default `null` is important as there is an offered price as `0`
+                );
+                $_iProperPrice  = AmazonAutoLinks_Unit_Utility::getPriceByKey(
+                    $aItem,
+                    'Amount', // key
+                    0  // default - when not found
+                );
+                $_aOffers       = AmazonAutoLinks_Unit_Utility::getOffers( $aItem, $_iProperPrice );
+                $_inDiscounted  = AmazonAutoLinks_Unit_Utility::getDiscountedPrice( $_aOffers, $_iProperPrice );
+                $_sProperPriceFormatted = AmazonAutoLinks_Unit_Utility::getPriceByKey(
+                    $aItem,
+                    'FormattedPrice',
+                    ''  // default
+                );
+                $_sDiscountedFormatted  = AmazonAutoLinks_Unit_Utility::getFormattedDiscountPrice(
+                    $_aOffers,
+                    $_iProperPrice,
+                    $_sProperPriceFormatted,
+                    $_inDiscounted
+                );
+                $_sLowestNewFormatted   = $this->getElement(
+                    $aItem,
+                    array( 'OfferSummary', 'LowestNewPrice', 'FormattedPrice' ),
+                    ''
+                );
+                $_aPrices[ 'price' ] = AmazonAutoLinks_Unit_Utility::getPrice(
+                    $_sProperPrice,         // string
+                    $_inDiscounted,         // integer|null
+                    $_inLowestNew,          // integer|null
+                    $_sDiscountedFormatted, // string
+                    $_sLowestNewFormatted   // string
+                );
                 return $_aPrices;
+
             }
     
             /**
@@ -1050,9 +1090,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                             . sprintf( __( 'by %1$s', 'amazon-auto-links' ) , $aProduct[ 'author' ] ) 
                         . "</span>";
                 }
-                if ( $aProduct[ 'price' ] ) {
+                if ( $aProduct[ 'proper_price' ] ) {
                     $_aOutput[] = "<span class='amazon-product-price'>" 
-                            . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct[ 'price' ] )
+                            . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct[ 'proper_price' ] )
                         . "</span>";
                 }
                 if ( $aProduct[ 'discounted_price' ] ) {

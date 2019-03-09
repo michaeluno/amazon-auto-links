@@ -43,7 +43,10 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'rating'                => null,
         'image_set'             => null,
         'button'                => null,
-        
+
+        // 3.8.11+
+        'proper_price'          => null,
+
         // used for disclaimer
         'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless
         

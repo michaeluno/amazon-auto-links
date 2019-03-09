@@ -97,7 +97,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
 
             $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
             $_aProduct[ 'price' ]            = $_oPriceFormatter->get();
             $_oUserReviewFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview(

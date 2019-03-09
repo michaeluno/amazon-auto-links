@@ -284,6 +284,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.11 - 03/08/2019 =
+- Optimized the use of Amazon Product Advertising API to reduce unnecessary requests.
+
 = 3.8.10 - 03/04/2019 =
 - Changed link styles other than the default one to preserve URL query parameters given by the Amazon Product Advertising API.
 

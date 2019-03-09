@@ -196,12 +196,12 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                         array( 'ItemLinks', 'ItemLink', ),
                         ''
                     ),
-                    'price'              => $this->___getPriceByKey(
+                    'price'              => AmazonAutoLinks_Unit_Utility::getPriceByKey(
                         $aAPIResponseProductData,
                         'Amount', // key
                         0  // default - when not found
                     ),
-                    'price_formatted'    => $this->___getPriceByKey( 
+                    'price_formatted'    => AmazonAutoLinks_Unit_Utility::getPriceByKey(
                         $aAPIResponseProductData,
                         'FormattedPrice',
                         ''  // default 
@@ -264,12 +264,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                                         
                     // 'description'        => null,   // (string) product details
 
-                    // @todo Add the browse_nodes column
-                    // 'browse_nodes'    => $this->getElement(
-                        // $aAPIResponseProductData,
-                        // array( 'BrowseNodes', 'BrowseNode' )                        
-                    // ),
-                    
                 );
 
                 // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
@@ -278,14 +272,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 }
 
                 // Retrieve or calculate a discounted price.
-                $_aOffer           = $this->___getOfferArray( $aAPIResponseProductData, $_aRow[ 'price' ] );
-                $_nDiscountedPrice = $this->___getDiscountedPrice( 
-                    $_aOffer,
-                    $_aRow[ 'price' ]
-                );
+                $_aOffer           = AmazonAutoLinks_Unit_Utility::getOffers( $aAPIResponseProductData, $_aRow[ 'price' ] );
+                $_nDiscountedPrice = AmazonAutoLinks_Unit_Utility::getDiscountedPrice( $_aOffer, $_aRow[ 'price' ] );
                 $_aRow = $_aRow + array(
                     'discounted_price'            => $_nDiscountedPrice,
-                    'discounted_price_formatted'  => $this->___getFormattedDiscountPrice(
+                    'discounted_price_formatted'  => AmazonAutoLinks_Unit_Utility::getFormattedDiscountPrice(
                         $_aOffer,
                         $_aRow[ 'price' ],
                         $_aRow[ 'price_formatted' ],
@@ -323,145 +314,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
                 return $_aRow;
             }
-                /**
-                 * 
-                 * @return      string
-                 */
-                private function ___getPriceByKey( $aAPIResponseProductData, $sKey, $mDefault ) {
-                    
-                    // There are cases the listed price is not set.
-                    $_sFormattedPrice = $this->getElement(
-                        $aAPIResponseProductData,
-                        array( 'ItemAttributes', 'ListPrice', $sKey ),
-                        $mDefault // avoid null as in the front-end, when null is returned, it triggers a background task
-                    );
 
-                    if ( ! empty( $_sFormattedPrice ) ) {
-                        return $_sFormattedPrice;
-                    }
-                    // Try to use a lowest new one.
-                    $_sFormattedPrice = $this->getElement(
-                        $aAPIResponseProductData,
-                        array( 'OfferSummary', 'LowestNewPrice', $sKey ),
-                        $mDefault  // avoid null as in the fron-end, when null is returend, it triggers a background task
-                    ); 
-                    return $_sFormattedPrice;
-                }            
-
-                /**
-                 * 
-                 * @return      string
-                 */
-                private function ___getFormattedDiscountPrice( $aOffer, $nPrice, $sPriceFormatted, $nDiscountedPrice ) {
-                    
-                    // If the formatted price is set in the Offer element, use it.
-                    $_sDiscountedPriceFormatted = $this->getElement(
-                        $aOffer,
-                        array( 'Price', 'FormattedPrice' ),
-                        ''  // 3.8.5 Changed the value from `null` to an empty string to avoid automatic background product detail retrieval tasks
-                    );
-                    if ( '' !== $_sDiscountedPriceFormatted ) {
-                        return $_sDiscountedPriceFormatted;
-                    }
-                    
-                    // Otherwise, replace the price part of the listed price with the discounted one.
-                    return $this->___getFormattedPriceFromModel(
-                        $nDiscountedPrice / 100,   // decimal
-                        $sPriceFormatted 
-                    );
-                    
-                }
-                    /**
-                     * @param $nPrice
-                     * @param $sModel
-                     *
-                     * @return string
-                     */
-                    private function ___getFormattedPriceFromModel( $nPrice, $sModel ) {
-                        return preg_replace(
-                            '/[\d\.,]+/',   // needle
-                            $nPrice,
-                            $sModel
-                        );                        
-                    }
-                /**
-                 * Calculates the discounted price.
-                 * @param       array       $aOffer     ListedOffer element in the Offer element array in the response product data.
-                 * @param       mixed       $nPrice     The listed price.
-                 * @return      integer
-                 */
-                private function ___getDiscountedPrice( $aOffer, $nPrice ) {
-                    
-                    $_nDiscountedPrice = $this->getElement(
-                        $aOffer,
-                        array( 'Price', 'Amount' ),
-                        null
-                    );
-                    if ( null !== $_nDiscountedPrice ) {
-                        return $_nDiscountedPrice;
-                    }
-                    
-                    // If saving amount is set
-                    $_nSavingAmount = $this->getElement(
-                        $aOffer,
-                        array( 'AmountSaved', 'Amount' ),
-                        null
-                    );
-                    if ( null !== $_nSavingAmount ) {
-                        return $nPrice - $_nSavingAmount;
-                    }
-                    
-                    // If discount percentage is set,
-                    $_nDiscountPercentage = $this->getElement(
-                        $aOffer,
-                        array( 'PercentageSaved' ),
-                        null
-                    );
-                    if ( null !== $_nDiscountPercentage ) {
-                        return $nPrice * ( ( 100 - $_nDiscountPercentage ) / 100 );
-                    }                    
-                    return 0;   // 3.8.5 changed the default value from null to 0 to avoid automatic background task of retrieving product details
-                }
-                /**
-                 * @return      array
-                 */
-                private function ___getOfferArray( $aProduct, $nPrice=null ) {
-
-                    $_iTotalOffers = $this->getElement(
-                        $aProduct,
-                        array( 'Offers', 'TotalOffers' ),
-                        0
-                    );  
-                    if ( 2 > $_iTotalOffers  ) {
-                        return $this->getElementAsArray(
-                            $aProduct,
-                            array( 'Offers', 'Offer', 'OfferListing' ),
-                            array()
-                        );
-                    }
-                    $_aOffers = $this->getElementAsArray(
-                        $aProduct,
-                        array( 'Offers', 'Offer' ),
-                        array()
-                    );
-                    
-                    $_aDiscountedPrices = array();
-                    foreach( $_aOffers as $_iIndex => $_aOffer ) {
-                        
-                        if ( ! isset( $_aOffer[ 'OfferListing' ] ) ) {
-                            continue;
-                        }
-                        
-                        $_aDiscountedPrices[ $_iIndex ] = $this->___getDiscountedPrice(
-                            $_aOffer[ 'OfferListing' ],
-                            $nPrice
-                        );
-                        
-                    }
-                    $_iIndex = $this->getKeyOfLowestElement( $_aDiscountedPrices );
-                    return $_aOffers[ $_iIndex ][ 'OfferListing' ];                    
-
-                }
         /**
          * Extracts product data from the response data fetched from amazon server with the Product Advertising API.
          * @return      array
