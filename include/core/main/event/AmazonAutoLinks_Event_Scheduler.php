@@ -105,13 +105,13 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3
      * @since       3.5.0       Renamed from `getProductInfo()`.
      * @return      void
-     * @todo        Do this at once at the shutdown action and pass multiple ASINs to query at once to save a number of API requests.
      * @since       3.7.0       Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
      * @since       3.7.7       Changed the return value to `void` as no calls use it and this method is going to schedule multiple items at once.
+     * @since       3.8.12      Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
      */
-    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
+    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='', $aAPIRawItem=array() ) {
     
-        $_oOption   = AmazonAutoLinks_Option::getInstance();
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
             return;
         }
@@ -152,7 +152,7 @@ class AmazonAutoLinks_Event_Scheduler {
         /**
          * Schedules retrievals of product information at once.
          * @since       3.7.7
-         * @callback    shutdown        With the priority of `1`.
+         * @callback    action      shutdown        With the priority of `1`.
          */
         static public function _replyToScheduleProductsInformation() {
 
@@ -173,14 +173,14 @@ class AmazonAutoLinks_Event_Scheduler {
                 // as `wp_next_scheduled()` stores and identify actions based on the serialized passed arguments.
                 ksort( $aFetchingItems );
 
-                // Divide items by 10 as `ItemLookup` operation accepts up to 10 items at a time.
-                $_aChunks = array_chunk( $aFetchingItems, 10 );
+                // Divide items by 10 as the `ItemLookup` operation API parameter accepts up to 10 items at a time.
+                $_aChunks      = array_chunk( $aFetchingItems, 10 );
 
-                $_aParts = explode( '|', $sAssociateIDLocale );
+                $_aParts       = explode( '|', $sAssociateIDLocale );
                 $_sAssociateID = $_aParts[ 0 ];
                 $_sLocale      = $_aParts[ 1 ];
                 /**
-                 * At this point the chunk array $_aChunks looks like this.
+                 * At this point the chunk array `$_aChunks` looks like this.
                  * The keys will be converted to numeric index.
                  *
                  * ```

@@ -9,27 +9,38 @@
  */
 
 /**
- * A class that provides method to retrieve products from a plugin custom database table.
+ * A class that provides method to retrieve product data from the given table row.
  *
- * @since       3.5.0
+ * @remark  This does not access the database but just extracts data from a given array.
+ * And if an item is expired, it schedules a background task to renew it.
+ * @since   3.5.0
  */
 class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_UnitOutput_Utility {
 
-    protected $_sASIN = '';
-    protected $_sLocale = '';
-    protected $_sAssociateID = '';
-    protected $_aRow = array();
+    protected $_sASIN           = '';
+    protected $_sLocale         = '';
+    protected $_sAssociateID    = '';
+    protected $_aRow            = array();
     protected $_oUnitOption;
-
+    
+    /**
+     * An array of raw item array extracted from the PA API response.
+     * Used to pass to the background routine to save an API request.  
+     * @sicne   3.8.12
+     * @var array 
+     */
+    protected $_aAPIRawItem    = array();
+    
     /**
      * Sets up properties.
      */
-    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption ) {
+    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption, array $aAPIRawItem=array() ) {
         $this->_sASIN           = $sASIN;
         $this->_sLocale         = $sLocale;
         $this->_sAssociateID    = $sAssociateID;
         $this->_aRow            = $aRow;
         $this->_oUnitOption     = $oUnitOption;
+        $this->_aAPIRawItem     = $aAPIRawItem;
     }
 
     /**
@@ -57,7 +68,8 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 'asin'         => $this->_sASIN,
                 'locale'       => $this->_sLocale,
                 'associate_id' => $this->_sAssociateID,
-            )
+            ),
+            $this->_aAPIRawItem
         );
     }
 
@@ -66,8 +78,9 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
          * @since       3
          * @sicne       3.5.0       Moved from `AmazonAutoLinks_UnitOutput__Base_CustomDBTable`.
          * @sicne       3.5.0       Changed the scope from protected.
+         * @sicne       3.8.12      Added the `$aAPIRawItem` parameter.
          */
-        private function ___getValueFromRow( $sColumnName, array $aRow, $mDefault=null, $aScheduleTask=array( 'locale' => '', 'asin' => '', 'associate_id' => '' ) ) {
+        private function ___getValueFromRow( $sColumnName, array $aRow, $mDefault=null, $aScheduleTask=array( 'locale' => '', 'asin' => '', 'associate_id' => '' ), $aAPIRawItem=array() ) {
 
             $_mValue        = $this->getElement(
                 $aRow, // subject array
@@ -89,12 +102,7 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_bIsExpired      = $this->isExpired( $_iExpirationTime );
             $_bShouldSchedule = $_bIsExpired || ! $_bIsSet; // 3.8.5 When the value is not set, schedule retrieving extra product information
 
-            $this->___scheduleBackgroundTask(
-                $_bShouldSchedule,
-                $aScheduleTask,
-                $_iCacheDuration
-            );
-
+            $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration, $aAPIRawItem );
             $this->___addDebugInformation(
                 $_bIsSet,
                 $sColumnName,
@@ -109,16 +117,13 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
         }
             /**
              * Schedules a background task to retrieve product info.
-             * @param $bShuoldSchedule
-             * @param $aScheduleTask
-             * @param $_iCacheDuration
+             * @param boolean $bShouldSchedule
+             * @param array   $aScheduleTask
+             * @param integer $_iCacheDuration
+             * @param array   $aAPIRawItem
              */
-            private function ___scheduleBackgroundTask(
-                $bShuoldSchedule,
-                $aScheduleTask,
-                $_iCacheDuration
-            ) {
-                if ( ! $bShuoldSchedule ) {
+            private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $_iCacheDuration, $aAPIRawItem=array() ) {
+                if ( ! $bShouldSchedule ) {
                     return;
                 }
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {
@@ -130,9 +135,9 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                     $aScheduleTask[ 'locale' ],
                     ( integer ) $_iCacheDuration,
                     ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
-                    $this->_oUnitOption->get( 'item_format' )
+                    $this->_oUnitOption->get( 'item_format' ),
+                    $aAPIRawItem    // 3.8.12
                 );
-
             }
 
             /**
