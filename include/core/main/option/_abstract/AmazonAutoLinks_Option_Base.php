@@ -179,6 +179,7 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
             return $this->aOptions;
         }
         if ( is_array( $_aKeys[ 0 ] ) ) {
+            $_aKeys[ 1 ] = isset( $_aKeys[ 1 ] ) ? $_aKeys[ 1 ] : null;
             $_mDefault = $_aKeys[ 1 ];
             $_aKeys    = $_aKeys[ 0 ];
         }
