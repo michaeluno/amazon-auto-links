@@ -21,7 +21,12 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
      * @since       3.5.0
      */
     public function get() {
-        
+
+        // For search-type units, this value is already set with API response.
+        if ( $this->_aProduct[ 'rating' ] ) {
+            return $this->_aProduct[ 'rating' ];
+        }
+
         $_snEncodedHTML = $this->_getCell( 'rating_html' );
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(

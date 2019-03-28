@@ -54,45 +54,5 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
         );
     }
 
-    /**
-     * Extracts ASIN from the given url.
-     *
-     * ASIN is a product ID consisting of 10 characters.
-     *
-     * example regex patterns:
-     *         /http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/
-     *         "http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})"
-     *
-     * @return      string      The found ASIN, or an empty string when not found.
-     * @since       unknown
-     * @since       3.5.0       Renamed from `getASIN()`
-     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-     */
-    static public function getASINFromURL( $sURL ) {
-
-        $sURL = remove_query_arg(
-            array( 'smid', 'pf_rd_p', 'pf_rd_s', 'pf_rd_t', 'pf_rd_i', 'pf_rd_m', 'pf_rd_r' ),
-            $sURL
-        );
-
-        $sURL = preg_replace(
-            array(
-                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
-            ),
-            '',
-            $sURL
-        );
-
-        preg_match(
-            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})\W/', // needle - [A-Z0-9]{10} is the ASIN
-            $sURL,  // subject
-            $_aMatches // match container
-        );
-        return isset( $_aMatches[ 3 ] )
-            ? $_aMatches[ 3 ]
-            : '';
-
-    }
-
 
 }

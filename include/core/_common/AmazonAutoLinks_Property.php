@@ -36,21 +36,60 @@ final class AmazonAutoLinks_Property {
         'MX'    => 'uni',
         'AU'    => 'uni',   // 3.5.5+
     );
+    /**
+     * @var array
+     * @since   2?
+     * @since   3.8.12      Changed the scheme to https from http.
+     */
     static public $aCategoryRootURLs = array(
-        'CA'    => 'http://www.amazon.ca/gp/bestsellers/',
-        'CN'    => 'http://www.amazon.cn/gp/bestsellers/',
-        'FR'    => 'http://www.amazon.fr/gp/bestsellers/',
-        'DE'    => 'http://www.amazon.de/gp/bestsellers/',
-        'IT'    => 'http://www.amazon.it/gp/bestsellers/',
-        'JP'    => 'http://www.amazon.co.jp/gp/bestsellers/',
-        'UK'    => 'http://www.amazon.co.uk/gp/bestsellers/',
-        'ES'    => 'http://www.amazon.es/gp/bestsellers/',
-        'US'    => 'http://www.amazon.com/gp/bestsellers/',
-        'IN'    => 'http://www.amazon.in/gp/bestsellers/',
-        'BR'    => 'http://www.amazon.com.br/gp/bestsellers/',
-        'MX'    => 'http://www.amazon.com.mx/gp/bestsellers/',
-        'AU'    => 'http://www.amazon.com.au/gp/bestsellers/',
+        'CA'    => 'https://www.amazon.ca/gp/bestsellers/',
+        'CN'    => 'https://www.amazon.cn/gp/bestsellers/',
+        'FR'    => 'https://www.amazon.fr/gp/bestsellers/',
+        'DE'    => 'https://www.amazon.de/gp/bestsellers/',
+        'IT'    => 'https://www.amazon.it/gp/bestsellers/',
+        'JP'    => 'https://www.amazon.co.jp/gp/bestsellers/',
+        'UK'    => 'https://www.amazon.co.uk/gp/bestsellers/',
+        'ES'    => 'https://www.amazon.es/gp/bestsellers/',
+        'US'    => 'https://www.amazon.com/gp/bestsellers/',
+        'IN'    => 'https://www.amazon.in/gp/bestsellers/',
+        'BR'    => 'https://www.amazon.com.br/gp/bestsellers/',
+        'MX'    => 'https://www.amazon.com.mx/gp/bestsellers/',
+        'AU'    => 'https://www.amazon.com.au/gp/bestsellers/',
     );
+
+    /**
+     * @var array 
+     * @since   3.8.12
+     */
+    static public $aStoreDomains = array(
+        'CA'    => 'www.amazon.ca',
+        'CN'    => 'www.amazon.cn',
+        'FR'    => 'www.amazon.fr',
+        'DE'    => 'www.amazon.de',
+        'IT'    => 'www.amazon.it',
+        'JP'    => 'www.amazon.co.jp',
+        'UK'    => 'www.amazon.co.uk',
+        'ES'    => 'www.amazon.es',
+        'US'    => 'www.amazon.com',
+        'IN'    => 'www.amazon.in',
+        'BR'    => 'www.amazon.com.br',
+        'MX'    => 'www.amazon.com.mx',
+        'AU'    => 'www.amazon.com.au',
+    );    
+    /**
+     * Returns the market place domain url by the given locale.
+     * 
+     * @since       3.8.12
+     * @return  string the store domain including the URL scheme (https://).
+     */
+    static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
+        $_sLocale = strtoupper( $sLocale );
+        $_sScheme = $bPrefixScheme ? 'https://' : '';
+        return isset( self::$aStoreDomains[ $_sLocale ] )
+            ? $_sScheme . self::$aStoreDomains[ $_sLocale ]
+            : $_sScheme . self::$aStoreDomains[ 'US' ];    // default
+    }    
+    
     static public $aCategoryBlackCurtainURLs = array(
         'CA'    => 'https://www.amazon.ca/gp/product/black-curtain-redirect.html',
         'CN'    => 'https://www.amazon.cn/gp/product/black-curtain-redirect.html',
@@ -756,7 +795,7 @@ final class AmazonAutoLinks_Property {
      * The nodes are divided up to 10 elements for the API request.
      * @remark      Not used at the moment.
      */
-    static public function getRootNoeds( $sLocale ) {
+    static public function getRootNodes( $sLocale ) {
         
         if ( ! isset( self::$aRootNodes[ strtoupper( $sLocale ) ] ) ) {
             return array();

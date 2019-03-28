@@ -30,7 +30,7 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
      * @var array
      */
     protected $_aPageURLs = array();
-
+    
     /**
      * The alternative for the `$_aExcludingRSSURLs` property.
      * @var array
@@ -39,30 +39,74 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
     protected $_aExcludingPageURLs = array();
 
     /**
+     * @var array
+     * @since   3.8.12
+     */
+    protected $_aScraped = array();
+
+
+    /**
+     * @param $aResponse
+     *
+     * @return array
+     */
+    protected function getProducts( $aResponse ) {
+        add_filter( 'aal_filter_unit_each_product', array( $this, 'replyToSetScrapedProductData' ), 10, 3 );
+        $_aProducts = parent::getProducts( $aResponse );    // refers to item_lookup's method
+        remove_filter( 'aal_filter_unit_each_product', array( $this, 'replyToSetScrapedProductData' ), 10 );
+        return $_aProducts;
+    }
+        /**
+         * Adds scraped product data to reduce background tasks.
+         * @since   3.8.12
+         * @return  array
+         */
+        public function replyToSetScrapedProductData( $aProduct, $aArguments, $oUnitOutput ) {
+            $_sASIN = $aArguments[ 'asin' ];
+             if ( ! isset( $this->_aScraped[ $_sASIN ] ) ) {
+                 return $aProduct;
+             }
+
+             $aProduct[ 'rating' ] = $this->_aScraped[ $_sASIN ][ 'rating' ];
+             $aProduct[ 'price' ]  = $aProduct[ 'price' ]
+                ? $aProduct[ 'price' ]
+                : $this->_aScraped[ $_sASIN ][ 'price' ];
+             return $aProduct;
+        } 
+
+    /**
      * Returns the found ASINs from HTML documents.
      * @remark      Excludes ASINs of exclusion categories.
      * @since       3.8.2
+     * @since       3.8.12      sets a property that stores product data scraped directly from the parsed HTML documents
      * @return      array
      */
     protected function _getFoundItems( $aHTMLs ) {
 
-        $_aASINs        = parent::_getFoundItems( $aHTMLs );
-        $_aExcludeASINs = $this->___getASINs( $this->_aExcludingPageURLs );
-        $_aASINsDiff    = array_diff( $_aASINs, $_aExcludeASINs ); // the return value
+        $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
+        $_sSiteDomain     = AmazonAutoLinks_Property::getStoreDomainByLocale( $this->oUnitOption->get( 'country' ) );
+
+        $this->_aScraped  = $this->_aScraped + $this->___getProductsScraped( $aHTMLs, $_sAssociateID, $_sSiteDomain );
+        $_aASINs          = array_keys( $this->_aScraped );
+        $_aExcludeASINs   = $this->___getASINs( $this->_aExcludingPageURLs, $_sAssociateID, $_sSiteDomain );
+        $_aASINsDiff      = array_diff( $_aASINs, $_aExcludeASINs ); // the return value
 
         // Cover cases with insufficient number of products by checking the paged pages.
-        $_iPage     = 2;    // starts from 2
-        $_iSetCount = $this->oUnitOption->get( 'count' );
-        $_aURLs     = array_keys( $aHTMLs );
+        $_iPage         = 2;    // starts from 2
+        $_iSetCount     = $this->oUnitOption->get( 'count' );
+        $_aURLs         = array_keys( $aHTMLs );
         while ( count( $_aASINsDiff ) < $_iSetCount ) {
             $_aURLs             = $this->___getURLsPageIncremented( $_aURLs, $_iPage );
-            $_aThisFoundASINs   = $this->___getASINs( $_aURLs );
+            $_aHTMLs            = $this->_getHTMLBodies( $_aURLs );
+            $_aProducts         = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sSiteDomain );
+            $_aThisFoundASINs   = array_keys( $_aProducts );
             if ( empty( $_aThisFoundASINs ) ) {
                 break;
             }
+            $this->_aScraped   = $this->_aScraped + $_aProducts;
             $_aASINs            = array_unique( array_merge( $_aASINs, $_aThisFoundASINs ) );
             $_aExcludeURLs      = $this->___getURLsPageIncremented( $this->_aExcludingPageURLs, $_iPage );
-            $_aThisExcludeASINs = $this->___getASINs( $_aExcludeURLs );
+            $_aThisExcludeASINs = $this->___getASINs( $_aExcludeURLs, $_sAssociateID, $_sSiteDomain );
             $_aExcludeASINs     = array_unique( array_merge( $_aExcludeASINs, $_aThisExcludeASINs ) );
             $_aASINsDiff        = array_diff( $_aASINs, $_aExcludeASINs ); // the return value
             if ( $_iPage > 10 ) {
@@ -70,6 +114,7 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
             }
             $_iPage++;
         }
+
         return $_aASINsDiff;
 
     }
@@ -86,17 +131,40 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
             return $_aURLs;
         }
         /**
+         * @param array $aHTMLs
+         * @param $sAssociateID
+         * @param $sSiteDomain
+         *
+         * @return array
+         */
+        private function ___getProductsScraped( array $aHTMLs, $sAssociateID, $sSiteDomain ) {
+            $_aProducts = array();
+            foreach( $aHTMLs as $_sHTML ) {
+                $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts_Minimal( $_sHTML );
+                $_aProducts       = $_aProducts + $_oProductScraper->get( $sAssociateID, $sSiteDomain );
+            }
+            return $_aProducts;
+        }
+        /**
          * @return array
          * @since   3.8.2
+         * @since   3.8.12  Added the `$sAssociateID` and `$sSiteDomain` parameters.
          */
-        private function ___getASINs( array $aURLs = array() ) {
+        private function ___getASINs( array $aURLs, $sAssociateID, $sSiteDomain ) {
             if ( empty( $aURLs ) ) {
                 return array();
             }
-            $_aHTMLs = parent::_getHTMLBodies( $aURLs );
-            $_aASINs = parent::_getFoundItems( $_aHTMLs );
-            return $_aASINs;
+
+            $_aASINs = array();
+            $_aHTMLs = $this->_getHTMLBodies( $aURLs );
+            foreach( $_aHTMLs as $_sHTML ) {
+                $_oASINScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts_ASIN( $_sHTML );
+                $_aASINs = array_merge( $_aASINs, $_oASINScraper->get( $sAssociateID, $sSiteDomain ) );
+            }
+            return array_unique( $_aASINs );
+
         }
+
 
     /**
      * Returns the subject urls for this unit.

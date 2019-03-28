@@ -15,6 +15,48 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Extracts ASIN from the given url.
+     *
+     * ASIN is a product ID consisting of 10 characters.
+     *
+     * example regex patterns:
+     *         /http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)/
+     *         "http://www.amazon.com/([\\w-]+/)?(dp|gp/product)/(\\w+/)?(\\w{10})"
+     *
+     * @return      string      The found ASIN, or an empty string when not found.
+     * @since       unknown
+     * @since       3.5.0       Renamed from `getASIN()`
+     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @since       3.8.12      Moved from `AmazonAutoLinks_UnitOutput_Utility`
+     */
+    static public function getASINFromURL( $sURL ) {
+
+        $sURL = remove_query_arg(
+            array( 'smid', 'pf_rd_p', 'pf_rd_s', 'pf_rd_t', 'pf_rd_i', 'pf_rd_m', 'pf_rd_r' ),
+            $sURL
+        );
+
+        $sURL = preg_replace(
+            array(
+                '/[A-Z0-9]{11,}/',  // Remove strings like an ASIN but with more than 10 characters.
+            ),
+            '',
+            $sURL
+        );
+
+        preg_match(
+            '/(dp|gp|e)\/(.+\/)?([A-Z0-9]{10})\W/', // needle - [A-Z0-9]{10} is the ASIN
+            $sURL,  // subject
+            $_aMatches // match container
+        );
+        return isset( $_aMatches[ 3 ] )
+            ? $_aMatches[ 3 ]
+            : '';
+
+    }
+
+
+    /**
      * Extract the price information from PA API response and generates the price output.
      * @since       3.8.11
      * @return      string  The price output. If a discount is available, the discounted price is also returned along with the proper price.
@@ -29,7 +71,10 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         return $_bDiscounted
             ? '<span class="proper-price"><s>' . $sPriceFormatted . '</s></span> '
                 . '<span class="offered-price">' . $_sLowestFormatted . '</span>'
-            : '<span class="offered-price">' . $sPriceFormatted . '</span>';
+            : ( '' === $sPriceFormatted
+                ? ''
+                : '<span class="offered-price">' . $sPriceFormatted . '</span>'
+            );
 
     }
         /**

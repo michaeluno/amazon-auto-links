@@ -454,7 +454,7 @@ abstract class AmazonAutoLinks_Form_Search_ extends AmazonAutoLinks_Form {
             $arrBrowseNodes = array();
             $arrNodeLabels = array( 0 => __( 'All', 'amazon-auto-links' ) );
             
-            foreach( AmazonAutoLinks_Properties::getRootNoeds( $strLocale ) as $arrNodeIDs )     {
+            foreach( AmazonAutoLinks_Properties::getRootNodes( $strLocale ) as $arrNodeIDs )     {
                 
                 $arrResult = $oAmazonAPI->request( 
                     array(
