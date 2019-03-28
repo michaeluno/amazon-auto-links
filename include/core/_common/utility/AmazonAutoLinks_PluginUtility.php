@@ -17,6 +17,28 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
+     * @param integer|string $iProductTableSize    Size in megabytes
+     * @param integer|string $iRequestTableSize    Size in megabytes
+     * @since   3.8.12
+     */
+    static public function truncateCacheTablesBySize( $isProductTableSize, $isRequestTableSize ) {
+
+        $_aTableSizes = array(
+            'AmazonAutoLinks_DatabaseTable_aal_products'      => $isProductTableSize,
+            'AmazonAutoLinks_DatabaseTable_aal_request_cache' => $isRequestTableSize,
+        );
+        foreach( $_aTableSizes as $_sClassName => $_isSizeMB ) {
+            // An empty string is for unlimited (do not truncate).
+            if ( '' === $_isSizeMB || null === $_isSizeMB ) {
+                continue;
+            }
+            $_oTable = new $_sClassName;
+            $_oTable->truncateBySize( ( integer ) $_isSizeMB );
+        }
+
+    }
+
+    /**
      * @return      boolean
      * @since       3.8.0
      */

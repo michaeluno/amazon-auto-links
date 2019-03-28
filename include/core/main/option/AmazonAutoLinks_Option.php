@@ -69,6 +69,10 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'size'  => 7,
                 'unit'  => 86400,   // either 3600, 86400, or 604800
             ),
+
+            // 3.8.12+
+            'cache_removal_event_last_run_time' => '',
+
             // 3.7.3+
             'table_size' => array(
                 'products' => '',   // (string|integer) blank string for unlimited. For integer values, mega bytes.

@@ -71,11 +71,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
             return;
         }
 
-        $_iTotalRows    = $this->getTotalItemCount();
-        $_iGoalSize     = $_iTableSize * 0.9;   // 90% of the actual size in order not to exceed the set size
-        $_fSizePerRow   = $_iGoalSize / $_iTotalRows;    // float
-        $_iExceededSize = $_iGoalSize - $_iSetSize;
-        $_iNumToDelete  = ceil( $_iExceededSize / $_fSizePerRow );
+        $_iNumToDelete  = $this->___getNumberOfRowsToDelete( $_iTableSize, $_iSetSize );
+
         $this->getVariable(
             "DELETE FROM `{$this->aArguments[ 'table_name' ]}` "
             . "ORDER BY modified_time ASC LIMIT {$_iNumToDelete};"
@@ -83,5 +80,23 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
         $this->getVariable( "OPTIMIZE TABLE `{$this->aArguments[ 'table_name' ]}`;" );
 
     }
+        /**
+         * @since   3.8.12
+         * @return  integer
+         */
+        private function ___getNumberOfRowsToDelete( $iTableSize, $iSetSize ) {
+
+            $_iTotalRows    = $this->getTotalItemCount();
+            $_fSizePerRow   = $iTableSize / $_iTotalRows;    // float - approximate size per row
+            $_iExceededSize = $iTableSize - $iSetSize;
+            $_iNumToDelete  = ceil( $_iExceededSize / $_fSizePerRow );
+
+            // Add extra number of rows
+            $_f10PercentOfSetSize = $iSetSize * 0.1;
+            $_iExtraRowsToDelete  = ceil( $_f10PercentOfSetSize / $_fSizePerRow );
+
+            return $_iNumToDelete + $_iExtraRowsToDelete;
+
+        }
 
 }

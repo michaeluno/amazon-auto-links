@@ -38,8 +38,6 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         $_iRequestCount    = $_oCacheTable->getTotalItemCount();
         $_iExpiredRequests = $_oCacheTable->getExpiredItemCount();
 
-        $_biNextScheduledCheck = wp_next_scheduled( 'aal_action_delete_expired_caches', array() );
-
         $oFactory->addSettingFields(
             $sSectionID, // the target section id   
             array( 
@@ -125,13 +123,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                     'size'      => 7,
                     'unit'      => 'day'
                 ),
-                'after_fieldset' => false === $_biNextScheduledCheck
-                    ? "<div><p class='field-error'>* "
-                        . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
-                        . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
-                        . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
-                    . "</p></div>"
-                    : '<div><p>' . sprintf( __( 'Next scheduled at %1$s.', 'amazon-auto-links' ), $this->getSiteReadableDate( $_biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true ) ) . '</p></div>',
+                'after_fieldset' => $this->___getCacheCleanupScheduledTime(),
             ),
             array(
                 'field_id'  => 'table_size',
@@ -154,7 +146,41 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
             )
         );    
     }
-        
+
+        /**
+         * @return string
+         * @since   3.8.12
+         */
+        private function ___getCacheCleanupScheduledTime() {
+
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            $_biNextScheduledCheck = wp_next_scheduled( 'aal_action_delete_expired_caches', array() );
+            $_iLastRunTime  = ( integer ) $_oOption->get( array( 'cache', 'cache_removal_event_last_run_time' ) );
+            $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
+            $_sLastRunTime .= $_iLastRunTime
+                ? $this->getSiteReadableDate( $_iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
+                : __( 'n/a', 'amazon-auto-links' );
+            $_sOutput = false === $_biNextScheduledCheck
+                ? "<div>"
+                        . "<p class='field-error'>* "
+                            . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
+                            . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
+                            . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
+                        . "</p>"
+                        . "<p>" . $_sLastRunTime . "</p>"
+                    . "</div>"
+                : "<div>"
+                        . "<p>"
+                            . sprintf(
+                                __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
+                                $this->getSiteReadableDate( $_biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
+                            )
+                        . "</p>"
+                        . "<p>" . $_sLastRunTime . "</p>"
+                    . "</div>";
+            return $_sOutput;
+
+        }
     
     /**
      * Validates the submitted form data.
@@ -185,7 +211,10 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         }
 
         // Keep the cache data base table size
-        $this->___truncateCacheTableBySize( $aInputs, $oAdminPage );
+        AmazonAutoLinks_PluginUtility::truncateCacheTablesBySize(
+            $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'products' ), '' ),
+            $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'requests' ), '' )
+        );
 
         // If the interval for deleting expired caches changes, update the scheduled task.
         $this->___rescheduleTaskOfDeletingExpiredCaches( $aInputs, $aOldInputs, $oAdminPage );
@@ -197,8 +226,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          * @param $aInputs
          * @param $oAdminPage
          * @since   3.7.3
+         * @deprecated  3.8.12
          */
-        private function ___truncateCacheTableBySize( $aInputs, $oAdminPage ) {
+/*        private function ___truncateCacheTableBySize( $aInputs, $oAdminPage ) {
             $_isProductTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'products' ), '' );
             $_isRequestTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'requests' ), '' );
             $_aTableSizes = array(
@@ -213,7 +243,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 $_oTable = new $_sClassName;
                 $_oTable->truncateBySize( ( integer ) $_isSizeMB );
             }
-        }
+        }*/
 
         /**
          * Update the scheduled task if the interval for deleting expired caches changes, 
