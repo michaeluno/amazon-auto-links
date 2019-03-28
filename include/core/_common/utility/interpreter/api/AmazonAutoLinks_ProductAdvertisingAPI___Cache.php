@@ -120,7 +120,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
              * @since           3.5.0           Changed the scope to private.
              * @return          string|array    Returns the retrieved HTML body string, and an error array on failure.
              */
-            private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments=array(), $iDuration, $bForceCaching=false ) {
+            private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching=false ) {
 
                 add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10, 3 );
                 add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 10, 3 );
