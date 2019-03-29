@@ -127,11 +127,12 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
      */
     public function test() {
 
+        $_iRandomBrowseNodeID = ( string ) mt_rand ( 1000, 10000 ); // 3.8.12
         $this->___sRequestType = 'api_test';
         $_aResponse = $this->request(
             array(
                 'Operation'     => 'BrowseNodeLookup',
-                'BrowseNodeId'  => '1000',    // the Books node 
+                'BrowseNodeId'  => $_iRandomBrowseNodeID,    // the Books node
             ),
             60 * 5     // 5 minutes
         );
