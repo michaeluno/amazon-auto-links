@@ -120,21 +120,28 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
     /**
      * Performs a simple request and checks if the authentication is verified.
      *
-     * @remark      Used in the Authentication plugin seetting admin page.
+     * @remark      Used in the Authentication plugin setting admin page.
      * @return      boolean|string  If succeeds, returns true; otherwise, the error message.
      * @since       unknown
      * @since       3.5.6           Changed the return value to return the error message if failed.
      */
     public function test() {
 
-        $_iRandomBrowseNodeID = ( string ) mt_rand ( 1000, 10000 ); // 3.8.12
+        /**
+         * Here we set either 1000, 1010, 1020, 1030, 1040, or 1050 based on the current time.
+         * This is to avoid the API throttle error for duplicate requests as PA API throws it when the same parameters are given in a short period of time apart from the documented rate limit.
+         * @since   3.8.12
+         * @remark  `1000` is for the Books node. Here it does not matter whether the browse node exists or not.
+         * Just checking whether the API returns a valid XML.
+         */
+        $_iBrowseNodeID        = ( string ) ( 1000 + round( date( 'i' ), -1 ) ); // 3.8.12
         $this->___sRequestType = 'api_test';
         $_aResponse = $this->request(
             array(
                 'Operation'     => 'BrowseNodeLookup',
-                'BrowseNodeId'  => $_iRandomBrowseNodeID,    // the Books node
+                'BrowseNodeId'  => $_iBrowseNodeID,    // the Books node
             ),
-            60 * 5     // 5 minutes
+            60 * 10     // 10 minutes
         );
 
         $_bsResponseErrorStatus = $this->___getResponseError( $_aResponse );
