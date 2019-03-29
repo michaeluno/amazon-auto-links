@@ -214,7 +214,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                             
         // Trigger the action. 2.1.2+
         do_action( 'aal_action_loaded_plugin' );
-        
+
     }
    
         /**
