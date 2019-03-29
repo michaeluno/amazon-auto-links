@@ -67,7 +67,10 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
                     . "</a>"
             );         
         }
-        
+
+        $_oOption    = AmazonAutoLinks_Option::getInstance();
+        $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
+
     }
         
         /**

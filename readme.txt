@@ -285,6 +285,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.12 - 03/29/2019 =
+- Fixed a bug that `Access Rights` -> `Capability` option did not take effect.
 - Fixed a bug that truncating database tables were not successful in some cases.
 - Fixed a bug that periodic background tasks of clearing expired caches were not functioning since v3.7.3.
 - Optimized the `category` unit type to reduce unnecessary database queries and API requests.

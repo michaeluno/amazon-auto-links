@@ -40,10 +40,12 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             array( $this, 'doPageSettings' )
         );        
                 
-        $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.           
-                
+        $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
+        $_oOption    = AmazonAutoLinks_Option::getInstance();
+        $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
+
     }
-        
+
     /**
      * Sets the default option values for the setting form.
      * @callback    filter      `options_{class name}`
