@@ -34,6 +34,7 @@
 			</a>
 		</div>
 		<div class="product-description">
+			<?php echo $_aProduct[ 'rating' ]; ?>
 			<?php echo $_aProduct[ 'description' ]; ?>
 		</div>
 	</div>
