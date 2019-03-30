@@ -90,7 +90,7 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
          * @return      string
          */
         private function _getFormattedDescription( $aItem ) {
-            $_aAttribuetes = array(
+            $_aAttributes = array(
                 'href'      => $aItem[ 'link' ],
                 'rel'       => 'nofollow',
                 'class'     => 'button button-secondary',
@@ -100,7 +100,7 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
             return "<h4>" . $aItem[ 'title' ] . "</h4>"
                 . $aItem[ 'description' ] 
                 . "<div class='get-now'>"
-                    . "<a " . AmazonAutoLinks_WPUtility::generateAttributes( $_aAttribuetes ) . ">" 
+                    . "<a " . AmazonAutoLinks_WPUtility::generateAttributes( $_aAttributes ) . ">"
                         . __( 'Get it Now', 'amazon-auto-links' )
                     . "</a>"
                . "</div>";

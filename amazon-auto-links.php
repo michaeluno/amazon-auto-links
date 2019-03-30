@@ -185,26 +185,6 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'main'  => 'amazon_auto_links',
         'v1'    => 'amazonautolinks',   // backward compatibility for v1
     );
-    
-    /**
-     * Stores custom database table names.
-     * @remark      slug (part of class file name) => table name
-     * @since       3
-     * @deprecated  3.5.0
-     */
-/*    static public $aDatabaseTables = array(
-        'product'       => 'aal_products',
-        'request_cache' => 'aal_request_cache',
-    );*/
-    /**
-     * Stores the database table versions.
-     * @since       3
-     * @deprecated  3.5.0
-     */
-/*    static public $aDatabaseTableVersions = array(
-        'product'       => '1.0.0',
-        'request_cache' => '1.0.0',
-    );*/
 
     /**
      * Stores custom database table names.
@@ -222,7 +202,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static public $aDatabaseTables = array(
          'aal_products'        => array(
              'name'              => 'aal_products', // serves as the table name suffix
-             'version'           => '1.1.0',
+             'version'           => '1.2.0b01',
              'across_network'    => true,
              'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_products',
          ),
@@ -247,10 +227,23 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 	
     /**
      * @return      string
+     * @since       ?
+     * @since       3.9.0       Added the `$bAbsolute` parameter.
      */
-	public static function getPluginURL( $sRelativePath='' ) {
-		return plugins_url( $sRelativePath, self::$sFilePath );
-	}
+    public static function getPluginURL( $sPath='', $bAbsolute=false ) {
+        $_sRelativePath = $bAbsolute
+            ? str_replace('\\', '/', str_replace( self::$sDirPath, '', $sPath ) )
+            : $sPath;
+        if ( isset( self::$_sPluginURLCache ) ) {
+            return self::$_sPluginURLCache . $_sRelativePath;
+        }
+        self::$_sPluginURLCache = trailingslashit( plugins_url( '', self::$sFilePath ) );
+        return self::$_sPluginURLCache . $_sRelativePath;
+    }
+        /**
+         * @since    3.9.0
+         */
+        static private $_sPluginURLCache;
 
     /**
      * Requirements.

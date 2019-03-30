@@ -135,19 +135,6 @@ class AmazonAutoLinks_Event_Scheduler {
         }
         self::$___bCalledScheduleProductInformation = true;
 
-/* @deprecated  3.7.7 Now they are queried all at once.
-        $_bScheduled = self::_scheduleTask(
-            'aal_action_api_get_product_info',  // action name
-            array( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat )
-        );
-        if ( ! $_bScheduled ) {
-            return;
-        }
-        
-        // Loads the site in the background. The method takes care of doing it only once in the entire page load.
-        AmazonAutoLinks_Shadow::see();
-        return;
-        */
     }
         /**
          * Schedules retrievals of product information at once.
