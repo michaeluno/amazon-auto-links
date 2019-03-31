@@ -32,6 +32,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_ProductFilters"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_UnitPreview"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php", 
+    "AmazonAutoLinks_AdminPage_Setting_General_Widgets"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php", 
     "AmazonAutoLinks_AdminPage_Setting_Misc"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php", 
     "AmazonAutoLinks_AdminPage_Setting_Misc_Capability"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php", 
     "AmazonAutoLinks_AdminPage_Setting_Misc_Debug"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php", 

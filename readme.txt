@@ -17,7 +17,7 @@ Generates links of Amazon products just coming out today. Pick categories and th
 
 Still manually searching products and pasting affiliate links? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
-The links are tagged with your Amazon Associate ID. The plugin supports 14 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
+The links are tagged with your Amazon Associate ID. This WordPress plugin supports 14 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
 If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
@@ -285,6 +285,10 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.9.0 -
+    - Added the feed unit type.
+    - Changed the category unit type not to require Product Advertising API keys.
+    - Added the a filter option to remove adult products.
+- Added the option to disable widgets.
 - Added the `%prime%` variable for the `Item Format` unit option which displays a prime icon.
 
 = 3.8.12 - 03/30/2019 =
@@ -333,7 +337,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 - Fixed an issue that category units often returned insufficient number of products.
 
 = 3.8.1 - 12/20/2018 =
-- Changed the category unit type to require API keys.
+- Changed the category unit type to require Product Advertising API keys.
 - Added the `Raw` sort select option for the category unit type.
 - Deprecated the `Date` sort select option for the category unit type.
 - Deprecated the `Keep the raw title` unit option for the category unit type.

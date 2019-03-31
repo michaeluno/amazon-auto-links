@@ -20,17 +20,23 @@ class AmazonAutoLinks_WidgetsLoader {
      * Loads necessary components.
      */
     public function __construct() {
-        
-        new AmazonAutoLinks_WidgetByID(
-            sprintf( 
-                __( '%1$s by Unit' ),
-                AmazonAutoLinks_Registry::NAME
-            )
-        );
-        new AmazonAutoLinks_ContextualProductWidget(
-            AmazonAutoLinks_Registry::NAME . ' - ' . __( 'Contextual Products', 'amazon-auto-links' )
-        );        
-        
+
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+
+        if ( $_oOption->get( 'widget', 'register', 'by_unit' ) ) {
+            new AmazonAutoLinks_WidgetByID(
+                sprintf(
+                    __( '%1$s by Unit' ),
+                    AmazonAutoLinks_Registry::NAME
+                )
+            );
+        }
+
+        if ( $_oOption->get( 'widget', 'register', 'contextual' ) ) {
+            new AmazonAutoLinks_ContextualProductWidget(
+                AmazonAutoLinks_Registry::NAME . ' - ' . __( 'Contextual Products', 'amazon-auto-links' )
+            );
+        }
     
     }    
     

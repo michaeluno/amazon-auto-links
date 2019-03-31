@@ -133,6 +133,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'filter_hooks'   => '',
         ),
 
+        // 3.9.0+
+        'widget'    => array(
+            'register'    => array(
+                'contextual'    => true,
+                'by_unit'       => true,
+            )
+        ),
     
         // 3.4.0+
         'unit_default'  => array(
