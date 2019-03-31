@@ -55,7 +55,7 @@
     font-weight: bold;
 }
 /* Description Word-wrap */
-.amazon-products-container-list > .amazon-product-container > .amazon-product-description {
+.amazon-products-container-list > .amazon-product-container .amazon-product-description {
     /* These are technically the same, but use both */
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -74,7 +74,8 @@
 
     /* For the disclaimer to continue */
     display: inline;
-    margin-right: 0.5em;
+    margin-right: 0.2em;
+
 }
 
 /* Meta */
@@ -103,13 +104,14 @@
     box-shadow: none;
 }
 .amazon-products-container-list .amazon-customer-rating-stars {
-    margin: 0.4em 0;
+    display: inline-block;
+    margin: 0 0.2em 0 0;
 }
 .amazon-products-container-list .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
     display: inline-block;
     /* In some themes the rating number and the star image do not align. This is for the fix.  */
-    vertical-align: middle;
+    vertical-align: text-top;
 }
 
 
@@ -245,4 +247,17 @@
     display: inline-block;
     width: 66%;
     font-size: x-small;
+}
+
+/* Prime Icon */
+.amazon-products-container-list .prime-icon {
+    display: inline-block;
+    width: 48px;
+    height: 12px;
+    background-image: url(http://localhost/test-amazon-auto-links/wp-content/plugins/amazon-auto-links/asset/image/unit/prime.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+    top: 2px;
 }

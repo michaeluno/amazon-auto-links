@@ -311,7 +311,7 @@ abstract class AmazonAutoLinks_Unit_Search_ extends AmazonAutoLinks_Unit {
                 // 'manufacturer' => $_aItem['ItemAttributes']['Manufacturer'], 
                 'category'           => isset( $_aItem['ItemAttributes']['ProductGroup'] ) ? $_aItem['ItemAttributes']['ProductGroup'] : '',
                 'date'               => isset( $_aItem['ItemAttributes']['PublicationDate'] ) ? $_aItem['ItemAttributes']['PublicationDate'] : '',    // ReleaseDate
-                // 'is_adult_product' => $_aItem['ItemAttributes']['IsAdultProduct'],
+                // 'is_adult' => $_aItem['ItemAttributes']['IsAdultProduct'],
 
                 // The below review items are not implemented yet
                 'editorial_review'   => '',

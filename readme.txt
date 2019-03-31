@@ -284,6 +284,9 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.9.0 -
+- Added the `%prime%` variable for the `Item Format` unit option which displays a prime icon.
+
 = 3.8.12 - 03/30/2019 =
 - Fixed a bug that `Access Rights` -> `Capability` option did not take effect.
 - Fixed a bug that truncating database tables were not successful in some cases.

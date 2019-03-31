@@ -74,6 +74,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "%rank%",     // 3.8.0
                 "%date%",           // 3.8.0  the date that the data is retrieved and updated
                 "%disclaimer%",     // 3.2.0
+                "%prime%",
             ),
             array(
                 $aProduct[ 'product_url' ],
@@ -90,11 +91,12 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $aProduct[ 'content' ], // 3.3.0+
                 $aProduct[ 'meta' ], // 3.3.0+
                 $aProduct[ 'similar_products' ], // 3.3.0+
-                $aProduct[ 'category' ],       // 3.8.0
-                $aProduct[ 'feature' ],        // 3.8.0
-                $aProduct[ 'sales_rank' ],     // 3.8.0
-                $_sUpdatedDate,    // 3.8.0
+                $aProduct[ 'category' ],       // 3.8.0+
+                $aProduct[ 'feature' ],        // 3.8.0+
+                $aProduct[ 'sales_rank' ],     // 3.8.0+
+                $_sUpdatedDate,    // 3.8.0+
                 $this->___getPricingDisclaimer( $_sUpdatedDate ), // 3.2.0+
+                $aProduct[ 'prime' ],     // 3.9.0+
             ),
             apply_filters(
                 'aal_filter_unit_item_format',

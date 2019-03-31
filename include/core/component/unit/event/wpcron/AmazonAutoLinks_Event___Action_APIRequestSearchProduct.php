@@ -299,7 +299,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     
                 }
 
-                // 3.8.0 If the table version is above 1.1.0b01 or above,
+                // 3.8.0+ If the table version is above 1.1.0b01 or above,
                 $_sCurrentVersion = get_option( "aal_products_version", '0' );
                 if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=')) {
                     $_aRow[ 'features' ]   = $this->getElementAsArray(
@@ -309,6 +309,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $_aRow[ 'categories' ] = $this->getElementAsArray(
                         $aAPIResponseProductData,
                         array( 'BrowseNodes', )
+                    );
+                }
+
+                // 3.9.0+ If the table version is above 1.2.0b01 or above,
+                if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=')) {
+                    $_aRow[ 'is_prime' ] = ( boolean ) $this->getElement(
+                        $aAPIResponseProductData,
+                        array( 'Offers', 'Offer', 'OfferListing', 'IsEligibleForPrime' ),
+                        false
+                    );
+                    $_aRow[ 'is_adult' ] = ( boolean ) $this->getElement(
+                        $aAPIResponseProductData,
+                        array( 'ItemAttributes', 'IsAdultProduct' ),
+                        false
                     );
                 }
 

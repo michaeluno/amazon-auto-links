@@ -100,6 +100,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $this->_aItemFormatDatabaseVariables[] = '%feature%';   // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%category%';  // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%rank%';      // 3.8.0
+            $this->_aItemFormatDatabaseVariables[] = '%prime%';     // 3.9.0
         }
     }
 

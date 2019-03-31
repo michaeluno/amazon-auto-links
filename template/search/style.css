@@ -6,7 +6,7 @@
     Description:    Displays Amazon products for search units.
     Version:        1.0.9
     License:        GNU General Public License v2 or later
-    License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+    Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
     Text Domain:    amazon-auto-links
 */
@@ -55,7 +55,7 @@
     font-weight: bold;
 }
 /* Description Word-wrap */
-.amazon-products-container-search > .amazon-product-container > .amazon-product-description {
+.amazon-products-container-search > .amazon-product-container .amazon-product-description {
     /* These are technically the same, but use both */
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -103,6 +103,7 @@
     box-shadow: none;
 }
 .amazon-products-container-search .amazon-customer-rating-stars {
+    display: inline-block;
     margin: 0.4em 0;
 }
 .amazon-products-container-search .amazon-customer-rating-stars img {
@@ -209,9 +210,22 @@
     display: inline-block;    
     margin: 1em;
 }
-.amazon-products-container-search .amazon-similar-products  .amazon-similar-product > img {
+.amazon-products-container-search .amazon-similar-products .amazon-similar-product > img {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     vertical-align: middle;
+}
+
+/* Prime Icon */
+.amazon-products-container-search .prime-icon {
+    display: inline-block;
+    width: 68px;
+    height: 16px;
+    background-image: url(http://localhost/test-amazon-auto-links/wp-content/plugins/amazon-auto-links/asset/image/unit/prime.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+    top: 2px;
 }

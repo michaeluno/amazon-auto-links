@@ -92,7 +92,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @since       3.5.0
      * @var array
      */
-    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%' );
+    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%', '%prime%' );
 
     /**
      * Sets up properties.

@@ -811,7 +811,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         )
                     ),
                     'updated_date'       => $_sResponseDate,
-                    'is_adult_product'   => $this->getElement(
+                    'is_adult'   => $this->getElement(
                         $_aItem,
                         array( 'ItemAttributes', 'IsAdultProduct' ),
                         false
@@ -838,6 +838,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $this->oUnitOption->get( 'subimage_size' ),
                     $this->oUnitOption->get( 'subimage_max_count' )
                 );
+
+                $_aProduct[ 'prime' ] = $this->___getPrimeMark( $_aProduct );
 
                 // Add meta data to the description
                 $_aProduct[ 'meta' ]        = $this->___getProductMetaFormatted( $_aProduct );
@@ -895,6 +897,36 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 return $_aProduct;
     
             }
+                /**
+                 * @since   3.9.0
+                 */
+                private function ___getPrimeMark( array $aProduct ) {
+                    if ( ! $this->getElement( $aProduct, 'is_prime' ) ) {
+                        return '';
+                    }
+                    $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/unit/prime.gif' );
+                    $_aAttributes    = array(
+                        'role'  => 'img',
+                        'class' => 'prime-icon',
+//                        'style' => $this->getInlineCSS(
+//                            array(
+//                                'display'               => 'inline-block',
+//                                'width'                 => '60px',
+//                                'height'                => '12px',
+//                                'background-image'      => 'url(' . esc_url( $_sPrimeImageURL ) . ')',
+//                                'background-size'       => 'contain',
+//                                'background-repeat'     => 'no-repeat',
+//                                'background-position'   => 'bottom',
+//                            )
+//                        ),
+                    );
+                    return "<span class='amazon-prime'>"
+                            . "<i " . $this->getAttributes( $_aAttributes ) . "></i>"
+                        . "</span>";
+
+    // <span style="position: relative; top: 2px;">
+
+                }
 
             /**
              * Returns the API response date which must be inserted in the advertisement output for the API agreements.

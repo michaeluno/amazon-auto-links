@@ -93,6 +93,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%feature%</code> - " . __( 'list of product features.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
                         . "<code class='{$_sDel}'>%rank%</code> - " . __( 'sales rank of the product.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
                         . "<code>%date%</code> - " . __( 'the updated date.', 'amazon-auto-links' ) . '<br />' // 3.8.0+
+                        . "<code class='{$_sDel}'>%prime%</code> - " . __( 'prime mark.', 'amazon-auto-links' ) . '<br />'    // 3.9.0+
                         . ( $_bAPIConnected
                             ? null
                             : sprintf(
