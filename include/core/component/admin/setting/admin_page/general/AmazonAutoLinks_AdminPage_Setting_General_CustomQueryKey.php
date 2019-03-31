@@ -34,10 +34,10 @@ class AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey extends AmazonAut
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
-                'field_id'        => 'cloak',
-                'type'            => 'text',
+                'field_id'       => 'cloak',
+                'type'           => 'text',
                 'title'          => __( 'Link Style Query Key', 'amazon-auto-links' ),
-                'tip'           => __( 'Define the query parameter key for the cloaking link style.', 'amazon-auto-links' ),
+                'tip'            => __( 'Define the query parameter key for the cloaking link style.', 'amazon-auto-links' ),
                 'description'    => array(
                     __( 'Default', 'amazon-auto-links' ) 
                         . ': <code>' 
