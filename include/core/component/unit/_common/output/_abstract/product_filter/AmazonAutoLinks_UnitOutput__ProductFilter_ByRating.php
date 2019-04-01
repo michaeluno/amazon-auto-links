@@ -30,8 +30,8 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
      * @param $aProduct
      * @param $aRow
      * @param $aRowIdentifier
-     * @callback        add_filter      aal_filter_unit_each_product_with_database_row
-     * @return      array       The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returend to be filtered out.
+     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     * @return      array       The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returned to be filtered out.
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
