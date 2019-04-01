@@ -811,7 +811,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         )
                     ),
                     'updated_date'       => $_sResponseDate,
-                    'is_adult'   => $this->getElement(
+                    'is_adult'           => ( boolean ) $this->getElement(
                         $_aItem,
                         array( 'ItemAttributes', 'IsAdultProduct' ),
                         false

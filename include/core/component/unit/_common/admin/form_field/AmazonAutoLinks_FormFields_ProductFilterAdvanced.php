@@ -33,6 +33,12 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                 'tip'           => __( 'Some product data including rating and prices are retrieved in the background and will be pending when the product is first displayed.', 'amazon-auto-links' ),
             ),
             array(
+                'field_id'      => '_filter_adult_products',
+                'type'          => 'checkbox',
+                'title'         => __( 'Adult Products', 'amazon-auto-links' ),
+                'label'         => sprintf( __( 'Do not show adult products', 'amazon-auto-links' ), '' ),
+            ),
+            array(
                 'field_id'      => '_filter_by_rating',
                 'type'          => 'inline_mixed',
                 'title'         => __( 'Customer Rating', 'amazon-auto-links' ),

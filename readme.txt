@@ -287,7 +287,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 = 3.9.0 -
     - Added the feed unit type.
     - Changed the category unit type not to require Product Advertising API keys.
-    - Added the a filter option to remove adult products.
+- Added the a unit filter option to remove adult products.
 - Added the option to disable widgets.
 - Added the `%prime%` variable for the `Item Format` unit option which displays a prime icon.
 

@@ -247,12 +247,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         // Hooks of function-call basis.
         add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-        $_oFilterByRating   = new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this );
-        $_oFilterByDiscount = new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this );
-        $_oDebugInfoProduct = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
-        $_oDebugInfoUnit    = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
-        $_oCredit           = new AmazonAutoLinks_UnitOutput__Credit( $this );
-        $_oFoundItemCount   = new AmazonAutoLinks_UnitOutput__ErrorChecker( $this );
+        $_oFilterByRating      = new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this );
+        $_oFilterAdultProducts = new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this );
+        $_oFilterByDiscount    = new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this );
+        $_oDebugInfoProduct    = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
+        $_oDebugInfoUnit       = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
+        $_oCredit              = new AmazonAutoLinks_UnitOutput__Credit( $this );
+        $_oFoundItemCount      = new AmazonAutoLinks_UnitOutput__ErrorChecker( $this );
 
         // 3.7.5+
         if ( $this->___hasCustomProductLinkURLQuery() ) {
@@ -302,6 +303,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
         remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
         $_oFilterByRating->__destruct();
+        $_oFilterAdultProducts->__destruct();
         $_oFilterByDiscount->__destruct();
         $_oDebugInfoProduct->__destruct();
         $_oDebugInfoUnit->__destruct();

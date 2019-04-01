@@ -234,6 +234,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             '_force_cache_renewal'          => false,
 
             '_no_pending_items'             => false,
+            '_filter_adult_products'        => false,   // 3.9.0+
             '_filter_by_rating'             => array(
                 'enabled'   => false,
                 'case'      => 'above',
