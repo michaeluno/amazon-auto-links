@@ -23,8 +23,10 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
     
     /**
      * Sets up properties.
+     * @since       3
+     * @since       3.9.0       Gave a type hint for the $aReviews parameter.
      */
-    public function __construct( $aReviews, $oDOM, $oUnitOption ) {
+    public function __construct( array $aReviews, $oDOM, $oUnitOption ) {
         
         $this->aReviews    = $aReviews;
         $this->oDOM        = $oDOM;
@@ -70,7 +72,7 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
                     
                 $_iDesiredHighestHTag = ( integer ) $this->oUnitOption->get( 'highest_content_heading_tag_level' );
                 
-                $_iActuralHighestHTag = $this->_getHigestHTag( $_oDoc );
+                $_iActuralHighestHTag = $this->_getHighestHTag( $_oDoc );
                 if ( 0 === $_iActuralHighestHTag ) {
                     return;
                 }
@@ -110,7 +112,7 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
                 /**
                  * @return      integer         The found highest heading tag number. 0 of not found.
                  */
-                private function _getHigestHTag( $oDoc ) {
+                private function _getHighestHTag( $oDoc ) {
                     
                     // Check 1 to 6
                     for( $_i = 1; $_i <= 6; $_i++ ) {
@@ -154,9 +156,11 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
          *      ...
          * )
          * `
+         * @param       array   $aParentArray
+         * @param       string  $sKey
          * @return      string
          */
-        private function ___getJoinedElements( $aParentArray, $sKey ) {
+        private function ___getJoinedElements( array $aParentArray, $sKey ) {
             
             if ( isset( $aParentArray[ $sKey ] ) ) { 
                 return ( string ) $aParentArray[ $sKey ]; 
