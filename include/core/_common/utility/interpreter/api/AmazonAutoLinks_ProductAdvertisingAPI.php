@@ -218,9 +218,10 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
             'constructor_parameters' => $this->___aConstructorParameters,
             'api_parameters'         => $aAPIParameters,    
         );
+        $_sRequestURI           = $_oAPIRequestURIBuilder->get();
 
         $_oAPIRequestCache      = new AmazonAutoLinks_ProductAdvertisingAPI___Cache(
-            $_oAPIRequestURIBuilder->get(), // Request URI
+            $_sRequestURI,
             $_aHTTPArguments,
             $iCacheDuration,
             $bForceCaching,
@@ -239,13 +240,14 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
         // It returns a string if it's not a valid XML content.
         $_boXML = $this->getXMLObject( $_sXMLResponse );
         if ( false === $_boXML ) {
-            return array( 
+            $_aError = array(
                 'Error' => 
                     array( 
                         'Message' => strip_tags( $_sXMLResponse ), 
                         'Code'    => 'Invalid XML' 
                     ) 
-            );    
+            );
+            return $_aError;
         }
         return $this->convertXMLtoArray( $_boXML );
 

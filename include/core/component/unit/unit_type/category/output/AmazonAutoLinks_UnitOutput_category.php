@@ -18,7 +18,8 @@
  * 
  * @since       unknown
  * @since       3           Changed the name from `AmazonAutoLinks_UnitOutput_Category`.
- * @deprecated  3.8.1       As Amazon deprecated bestseller feeds this is no longer functional. Use `AmazonAutoLinks_UnitOutput_category2` instead.
+ * @since       3.8.1       deprecated
+ * @since       3.9.0       Serves as a base class for `AmazonAutoLinks_UnitOutput_category3`
  */
 class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
 
@@ -59,6 +60,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'category'     => null,
         'feature'      => null,
         'sales_rank'   => null,
+
+        // 3.9.0
+        'prime'         => null,
     );
     
     
@@ -95,7 +99,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     private function ___setProperties() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( $_oOption->isAPIConnected() ) {
-            $this->_aItemFormatDatabaseVariables[] = '%description%'; // @todo this might be wrong and should be removed
+            $this->_aItemFormatDatabaseVariables[] = '%description%'; // this might be wrong and should be removed -> not wrong as it is updated in `replyToFormatProductWithDBRow()`.
             $this->_aItemFormatDatabaseVariables[] = '%content%';
             $this->_aItemFormatDatabaseVariables[] = '%feature%';   // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%category%';  // 3.8.0
@@ -160,12 +164,16 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * 
      * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
      * 
-     * @return      3.3.0
+     * @since       3.3.0
      * @return      array
      * @callback    add_filter      aal_filter_unit_each_product_with_database_row
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
-    
+
+        if ( empty( $aProduct ) ) {
+            return array();
+        }
+
         $aProduct[ 'content' ]      = $this->_getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
         $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "  // only the meta is added by default
             . "<div class='amazon-product-description'>"
@@ -198,10 +206,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $aDBRow,
             $this->oUnitOption
         );
-        $_aReviews = $_oRow->getCell( 'editorial_reviews', array() );
+        $_anReviews = $_oRow->getCell( 'editorial_reviews', array() );
+
+        // if null, the product data is not inserted in the plugin's database table.
+        if ( is_null( $_anReviews ) ) {
+            $_sContents = '';
+        }
 
         $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
-            $_aReviews,
+            $this->getAsArray( $_anReviews ),
             $this->oDOM,
             $this->oUnitOption
         );
@@ -715,42 +728,42 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         }
     
     }
-    
+
     protected function formatImages( $oNode, $aAttributes=array() ) {
-        
+
         // Take care of SSL image urls - in SSL enabled sites, if src-image urls use non-ssl protocol, some browsers show warnings.
-        if ( $this->bIsSSL ) { 
-            $this->setSSLImagesByDOM( $oNode ); 
+        if ( $this->bIsSSL ) {
+            $this->setSSLImagesByDOM( $oNode );
         }
-        
+
         // For the Brazil and Mexico locals, the element images in descriptions should be replaced as they don't load.
         if ( in_array( $this->oUnitOption->get( 'country' ), array( 'MX', 'BR' ) ) ) {
             $this->supportBrazilAndMexicoImages( $oNode );
         }
-        
+
         // Modify attributes
         $this->oDOM->setAttributesByTagName( $oNode, 'img', $aAttributes );
-        
+
     }
-    
+
     protected function supportBrazilAndMexicoImages( $oNode ) {
-    
+
         foreach( $oNode->getElementsByTagName( 'img' ) as $_oSelectedNode )  {
-            
+
             $_sImageURL = @$_oSelectedNode->getAttribute( 'src' );
             $_sImageURL = str_replace(
-                array( "/images/G/32/detail/", "/images/G/33/detail/" ),    // find    
+                array( "/images/G/32/detail/", "/images/G/33/detail/" ),    // find
                 "/images/G/01/detail/",    // replace
                 $_sImageURL    // source
-            );    
+            );
             if ( $_sImageURL ) {
                 @$_oSelectedNode->setAttribute( 'src', $_sImageURL );
             }
-            
+
         }
-        
+
     }
-    
+
     protected function getThumbnail( $oDoc, $iImageSize ) {
             
         $_sImgURL =""; 
@@ -772,53 +785,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             }
         }
         return $_sImgURL;            
-        
-    }
-    
-    
-    /**
-     * Sets up SimplePie object.
-     * 
-     * @param       integer     $iCacheDuration     // 60 seconds * 60 = 1 hour, 1800 = 30 minutes
-     * @deprecated
-     */
-    protected function getFeedObj( $aUrls, $iItem=10, $iCacheDuration=36000 ) {    
-    
-        
-        // Reuse the object that already exists. This conserves the memory usage.
-        // $this->oFeed = isset( $this->oFeed ) ? $this->oFeed : new AmazonAutoLinks_SimplePie;
-        // $oFeed = $this->oFeed; // 
-        
-        // For excluding sub categories, new instances need to be instantiated per set of uls as SimplePie somehow does not 
-        // property output newly fetched items.
-        $_oFeed = new AmazonAutoLinks_SimplePie();
-        
-        // Set sort type.        
-        $_oFeed->set_sortorder( $this->oUnitOption->get( 'sort' ) );
-        $_oFeed->set_charset_for_sort( $this->sCharEncoding );
-        $_oFeed->set_keeprawtitle( $this->oUnitOption->get( 'keep_raw_title' ) );
-        
-        // Set urls
-        $_oFeed->set_feed_url( $aUrls );    
-        $_oFeed->set_item_limit( $iItem );    
-        
-        // This should be set after defining $urls
-        $_oFeed->set_cache_duration( $iCacheDuration );    
-        
-        $_oFeed->set_stupidly_fast( true );
-        
-        // If the cache lifetime is explicitly set to 0, do not trigger the background renewal cache event
-        if ( 0 == $iCacheDuration ) {
-            // setting it true will be considered the background process; thus, it won't trigger the renewal event.
-            $_oFeed->setBackground( true );    
-        }
-        
-        // set_stupidly_fast() disables this internally so turn it on manually because it will trigger the custom sort method
-        $_oFeed->enable_order_by_date( true );    
-        
-        // $_oFeed->file_class = 'AmazonAutoLinks_SimplePie_File';    // this is assigned in the class definition already
-        $_oFeed->init();     // will perform fetching the feeds.
-        return $_oFeed;
         
     }
 

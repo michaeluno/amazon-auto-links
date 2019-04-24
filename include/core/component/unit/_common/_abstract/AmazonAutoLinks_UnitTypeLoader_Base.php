@@ -32,6 +32,13 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
      * Stores protected meta key names.
      */
     public $aProtectedMetaKeys = array();
+
+    /**
+     * Determines whether the unit type requires the PA API access.
+     * @var bool
+     * @since   3.9.0
+     */
+    public $bRequirePAAPI = true;
     
     /**
      * Loads necessary components.
@@ -60,9 +67,22 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         // 3.5.0+
         add_filter( 'aal_filter_registered_unit_type_labels', array( $this, 'replyToAddLabel' ) );
 
+        // 3.9.0+
+        add_filter( 'aal_filter_unit_type_is_api_access_required_' . $this->sUnitTypeSlug, array( $this, 'replyToDetermineAPIRequirement' ) );
+
         $this->_construct( $sScriptPath );
         
     }
+
+        /**
+         * @param $bRequired
+         * @since   3.9.0
+         * @callback    filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
+         * @return bool
+         */
+        public function replyToDetermineAPIRequirement( $bRequired ) {
+            return $this->bRequirePAAPI;
+        }
 
         /**
          * @return      array

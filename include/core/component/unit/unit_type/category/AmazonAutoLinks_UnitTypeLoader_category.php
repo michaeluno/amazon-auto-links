@@ -39,13 +39,33 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
     );
 
     /**
+     * Determines whether the unit type requires the PA API access.
+     * @var bool
+     * @since   3.9.0
+     */
+    public $bRequirePAAPI = false;
+
+
+    /**
      * @param $sScriptPath
      * @since   3.7.6
      */
     protected function _construct( $sScriptPath ) {
           // Category unit specific event callbacks
-          new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
+        new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
+
     }
+
+    /**
+     * @param $bRequired
+     * @since   3.9.0
+     * @callback    filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
+     * @return bool
+     */
+    public function replyToDetermineAPIRequirement( $bRequired ) {
+        return false;
+    }
+
 
     /**
      * Adds post meta boxes.
@@ -114,7 +134,7 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
      * @return      string
      */
     public function replyToGetUnitOutput( $sOutput, $aArguments ) {
-        $_oUnit      = new AmazonAutoLinks_UnitOutput_category2( $aArguments );
+        $_oUnit      = new AmazonAutoLinks_UnitOutput_category3( $aArguments );
         return $sOutput . trim( $_oUnit->get() );
     }
 

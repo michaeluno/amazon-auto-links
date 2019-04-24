@@ -29,7 +29,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
      */
     public function replyToLoadPage( $oFactory ) {
         
-        $this->_checkAPIKeys();       
+//        $this->_checkAPIKeys();   // @deprecated  3.9.0
+        AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $oFactory );
         
         // Tabs
         new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First( 
@@ -82,9 +83,12 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             $this->oFactory->setPageTitleVisibility( false ); 
             $this->oFactory->setInPageTabsVisibility( false );
             
-        }    
-    
-        private function _checkAPIKeys() {
+        }
+
+        /**
+         * @deprecated  3.9.0
+         */
+/*        private function _checkAPIKeys() {
             
             $_oOption = AmazonAutoLinks_Option::getInstance();    
             if ( $_oOption->isAPIConnected() ) {
@@ -99,7 +103,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             // Go to the Authentication tab of the Settings page.
             AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
             
-        }
+        }*/
         
         
     public function replyToDoAfterPage( $oFactory ) {

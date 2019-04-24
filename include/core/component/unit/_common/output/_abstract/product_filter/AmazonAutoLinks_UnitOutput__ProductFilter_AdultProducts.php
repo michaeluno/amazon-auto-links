@@ -22,7 +22,6 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts extends AmazonAuto
         if ( ! $this->_oUnitOutput->bDBTableAccess ) {
             return false;
         }
-return true;
         return ( boolean ) $this->_oUnitOutput->oUnitOption->get( '_filter_adult_products' );
     }
 
@@ -35,7 +34,7 @@ return true;
      * @return      array       The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returned to be filtered out.
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
-AmazonAutoLinks_Debug::log( $aProduct[ 'is_adult' ] );
+
         // Search units already have this value.
         if ( isset( $aProduct[ 'is_adult' ] ) ) {
             return ( boolean ) $aProduct[ 'is_adult' ]

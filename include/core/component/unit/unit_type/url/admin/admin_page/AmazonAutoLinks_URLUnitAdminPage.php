@@ -64,9 +64,13 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
     }
 
     public function load() {
-        $this->___checkAPIKeys();
+//        $this->___checkAPIKeys(); // @deprecated  3.9.0
+        AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
     }
-        private function ___checkAPIKeys() {
+    /**
+     * @deprecated  3.9.0
+     */
+/*        private function ___checkAPIKeys() {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             if ( $_oOption->isAPIConnected() ) {
                 return;
@@ -79,6 +83,6 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
 
             // Go to the Authentication tab of the Settings page.
             AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
-        }
+        }*/
         
 }

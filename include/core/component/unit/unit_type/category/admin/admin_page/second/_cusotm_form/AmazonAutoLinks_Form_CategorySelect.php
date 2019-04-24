@@ -156,8 +156,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         /// Edit the excluding category unit option for preview
         $_aPreviewUnitOptions = $this->oUnitOption->get();
         $_aPreviewUnitOptions[ 'categories_exclude' ] = array();
-        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category2_preview( $_aPreviewUnitOptions );
-        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category2_preview( $this->oUnitOption );
+        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category3( $_aPreviewUnitOptions );
+        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category3( $this->oUnitOption );
 
         $_bNested          = false !== strpos( $aPageElements[ 'sBreadcrumb' ], '>' );
 

@@ -85,5 +85,4 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
         return '';
     }
 
-    
 }

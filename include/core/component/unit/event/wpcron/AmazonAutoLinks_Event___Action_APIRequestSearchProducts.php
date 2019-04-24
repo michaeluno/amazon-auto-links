@@ -36,7 +36,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_sASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
         $_aResponse      = $this->___getAPIResponse( $_sASINs, $_sAssociateID, $_sLocale );
 
-        if ( $this->___getErrorType( $_aResponse ) ) {
+        if ( $_isErrorCode = $this->___getErrorType( $_aResponse ) ) {
+
+            // @deprecated 3.9.0
+            // $this->___setAPIErrorFlagFile( $_isErrorCode );
+
             // @todo for the response Throttling error that the API gives, schedule the same request with an interval.
             // @todo also when scheduling a task, there should be a check for an individual product information retrieval task scheduled or not. If yes, it should not be scheduled.
             return;
@@ -45,6 +49,31 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $this->___setItemsIntoDatabase( $_aResponse, $_aList );
 
     }
+        /**
+         * Creates a temporary file that indicates that an API request got an error and further API requests should hold back.
+         * @since   3.9.0
+         * @deprecated
+         */
+/*        private function ___setAPIErrorFlagFile( $isErrorCode ) {
+
+            if ( ! in_array( $isErrorCode, array( 'RequestThrottled', 'InvalidClientTokenId' ) ) ) {
+                return;
+            }
+            $_oOption      = AmazonAutoLinks_Option::getInstance();
+            $_sPublicKey   = $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
+            $_sPrivateKey  = $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
+
+            $_oFileManager = new AmazonAutoLinks_VersatileFileManager(
+                $_sPublicKey . '_' . $_sPrivateKey,
+                60 * 60,    // 1 hour
+                'AAL_PAAPI_ERROR_'
+            );
+            if ( $_oFileManager->exist() ) {
+                return;
+            }
+            $_oFileManager->set();
+
+        }*/
         /**
          * @return  string|integer     The found error code
          * @param   array   $aResponse

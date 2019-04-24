@@ -110,7 +110,7 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3.8.12      Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
      */
     static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='', $aAPIRawItem=array() ) {
-    
+
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
             return;
@@ -215,16 +215,15 @@ class AmazonAutoLinks_Event_Scheduler {
             if ( wp_next_scheduled( $_sActionName, $_aArguments ) ) {
                 return false; 
             }
-            
+
             self::$_aCounters[ $_sActionName ] = isset( self::$_aCounters[ $_sActionName ] )
                 ? self::$_aCounters[ $_sActionName ] + 1
                 : 1;
-            wp_schedule_single_event(
+            $_bScheduled = wp_schedule_single_event(
                 time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit run out.
                 $_sActionName,  // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
                 $_aArguments    // must be enclosed in an array.
-            );            
-
+            );
             return true;
             
         }    

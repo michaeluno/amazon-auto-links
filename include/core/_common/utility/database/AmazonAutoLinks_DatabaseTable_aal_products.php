@@ -62,6 +62,9 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'number_of_reviews'             => null,   // (integer) number of customer reviews.
         'features'                      => null,   // (string) 3.8.0
         'categories'                    => null,   // (string) 3.8.0
+        'is_prime'                      => null,   // (boolean) 3.9.0
+        'is_adult'                      => null,   // (boolean) 3.9.0
+        'language'                      => null,   // (string) 3.9.0 displaying language
     );
    
     /**
@@ -103,6 +106,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             number_of_reviews bigint(20) unsigned,
             categories text,
             features text,
+            is_prime tinyint(1),            
+            is_adult tinyint(1),
             PRIMARY KEY  (object_id) 
         ) " . $this->_getCharactersetCollation() . ";";
     }
