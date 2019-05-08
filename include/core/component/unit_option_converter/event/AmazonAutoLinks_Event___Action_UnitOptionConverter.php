@@ -24,7 +24,7 @@ class AmazonAutoLinks_Event___Action_UnitOptionConverter extends AmazonAutoLinks
 
     /**
      * 
-     * @callback        action        aal_action_event_convert_imot_options
+     * @callback        action        aal_action_event_convert_unit_options
      */
     protected function _doAction( /* $iUnitID, $aInput */ ) {
         
@@ -48,9 +48,11 @@ class AmazonAutoLinks_Event___Action_UnitOptionConverter extends AmazonAutoLinks
             $_bUpdated = true;
         }       
 
-        if ( $_bUpdated ) {
-            AmazonAutoLinks_Event_Scheduler::prefetch( $_iUnitID );
-        }
+        // @deprecated 3.9.0
+        // When thousands of units are converted, it causes PHP timeout.
+//        if ( $_bUpdated ) {
+//            AmazonAutoLinks_Event_Scheduler::prefetch( $_iUnitID );
+//        }
         
     }   
     
