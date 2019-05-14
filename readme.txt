@@ -287,6 +287,12 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 = 3.9.0 -
     - Added the feed unit type.
     - Changed the category unit type not to require Product Advertising API keys.
+        - @todo add the SubscriptionID parameter to product links when AWS keys are given.
+        - @todo add the language column to the product cache table
+        - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
+        - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
+    - Fixed a bug that rating stars appeared for in `category` units when the product did not have a review, started since v3.8.12.
+
 - Added the a unit filter option to remove adult products.
 - Added the option to disable widgets.
 - Added the `%prime%` variable for the `Item Format` unit option which displays a prime icon.
