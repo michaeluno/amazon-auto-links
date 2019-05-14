@@ -79,6 +79,8 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+
 
+            new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
+
         }
         
     

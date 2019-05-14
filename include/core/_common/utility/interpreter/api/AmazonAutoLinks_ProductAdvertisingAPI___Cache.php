@@ -123,7 +123,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
             private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching=false ) {
 
                 add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10, 3 );
-                add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 10, 3 );
+                add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100, 3 );
 
                 $_oHTTP = new AmazonAutoLinks_HTTPClient(
                     $sRequestURI,
@@ -141,7 +141,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
                 $_asResponse =  $_oHTTP->get();
 
                 remove_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10 );
-                remove_filter( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 10 );
+                remove_filter( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100 );
                 return $_asResponse;
 
             }

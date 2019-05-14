@@ -105,6 +105,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_TemplateOption"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/option/AmazonAutoLinks_TemplateOption.php", 
     "AmazonAutoLinks_UnitTypesLoader"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/AmazonAutoLinks_UnitTypesLoader.php", 
     "AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater.php", 
+    "AmazonAutoLinks_Unit_Log_PAAPIErrors"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProduct"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProduct.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
