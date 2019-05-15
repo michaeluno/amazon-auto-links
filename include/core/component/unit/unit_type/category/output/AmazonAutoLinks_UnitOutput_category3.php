@@ -37,14 +37,15 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_aPageURLs          = array_merge( $aURLs, $this->___getURLs( $_aPageURLs ) );
         $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
         $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
-
+//AmazonAutoLinks_Debug::log( $_aPageURLs );
+//AmazonAutoLinks_Debug::log( $_aExcludingPageURLs );
         $_sLocale      = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID = ( string ) $this->oUnitOption->get( 'associate_id' );
         $_iCount       = ( integer ) $this->oUnitOption->get( 'count' );
         
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
         $_aProducts          = $this->___getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
-// AmazonAutoLinks_Debug::log( $_aProducts );
+
         return $_aProducts;
 
     }
@@ -59,18 +60,53 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
             $_aAllURLs = array();
             foreach( $aURLs as $_sURL ) {
+
                 foreach ( $this->oUnitOption->get( 'feed_type' ) as $_sSlug => $_bEnabled ) {
+
                     if ( ! $_bEnabled ) {
                         continue;
                     }
-                    $_aAllURLs[] = str_replace(
+
+                    if ( 'bestsellers' === $_sSlug ) {
+                        $_aAllURLs[] = $_sURL;
+                        continue;
+                    }
+
+                    // At this point, it is not the best seller page.
+                    $_sReplaced = str_replace(
                         array( '/gp/bestsellers/', '/gp/top-sellers/' ),
                         "/gp/{$_sSlug}/",
                         $_sURL
                     );
+                    if ( $_sURL !== $_sReplaced ) {
+                        $_aAllURLs[] = $_sReplaced;
+                        continue;
+                    }
+
+                    /**
+                     * For a case of the US locale, the bestseller URLs of some categories have changed.
+                     * @since   3.8.13
+                     * For example, Best Sellers in Laptop Accessories
+                     * ### The original URL structure
+                     * https://www.amazon.com/bestsellers/pc/3011391011/ref=zg_bs_nav_pc_1_pc
+                     * ### Current structure
+                     * https://www.amazon.com/Best-Sellers-Computers-Accessories-Laptop/zgbs/pc/3011391011/
+                     * If the feed type slug is `new-releases`, it should be changed to
+                     * https://www.amazon.com/gp/new-releases/pc/3011391011
+                     */
+                    preg_match( '/\/\w+\/\d+\//', $_sURL, $_aMatches );
+                    if ( isset( $_aMatches[ 0 ] ) ) {
+                        $_aURLParts = parse_url( $_sURL );
+                        $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';
+                        $_sDomain   = isset( $_aURLParts[ 'host' ] ) ? $_aURLParts[ 'host' ] : '';
+                        $_sReplaced = $_sScheme . '://' . $_sDomain . '/gp/' . $_sSlug . $_aMatches[ 0 ];
+                    }
+                    $_aAllURLs[] = $_sReplaced;
+
                 }
             }
-            return array_unique( array_merge( $_aAllURLs, $aURLs ) );
+
+            return array_unique( $_aAllURLs );
 
         }
         /**
