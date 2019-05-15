@@ -229,7 +229,7 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
 
             }
         }
-AmazonAutoLinks_Debug::log( $_aAllURLs );
+
         return array_unique( $_aAllURLs );
 
     }
