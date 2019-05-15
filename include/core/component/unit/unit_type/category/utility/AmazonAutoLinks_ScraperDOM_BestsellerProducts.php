@@ -140,7 +140,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
             $_sReviewLink = $this->_getURLResolved( "/product-reviews/{$sASIN}", $sSiteDomain, $sAssociateID );
             $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
             $_iFirstDigit  = $_sRatingRound[ 0 ];
-            $_iSecondDigit = $_sRatingRound[ 1 ];
+            $_iSecondDigit = isset( $_sRatingRound[ 1 ] ) ? $_sRatingRound[ 1 ] : 0;
             $_sRatingStar  = $_iFirstDigit . "-" . $_iSecondDigit;
             $_sStarImage   = "https://images-eu.ssl-images-amazon.com/images/G/08/x-locale/common/customer-reviews/ratings/stars-{$_sRatingStar}.gif";
             return "<div class='amazon-customer-rating-stars'>"
