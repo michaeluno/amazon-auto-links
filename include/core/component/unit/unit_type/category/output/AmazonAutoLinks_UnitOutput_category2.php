@@ -174,24 +174,63 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
      * @return  array
      */
     protected function _getURLs( $asURLs ) {
+
         $_aURLs    = parent::_getURLs( $asURLs );
+        $_aURLs    = array_merge( $this->_aPageURLs, $_aURLs );
+
         $_aAllURLs = array();
         foreach( $_aURLs  as $_sURL ) {
+
             foreach ( $this->oUnitOption->get( 'feed_type' ) as $_sSlug => $_bEnabled ) {
+
                 if ( ! $_bEnabled ) {
                     continue;
                 }
-                $_aAllURLs[] = str_replace(
+
+                if ( 'bestsellers' === $_sSlug ) {
+                    $_aAllURLs[] = $_sURL;
+                    continue;
+                }
+
+                // At this point, it is not the best seller page.
+                $_sReplaced = str_replace(
                     array( '/gp/bestsellers/', '/gp/top-sellers/' ),
                     "/gp/{$_sSlug}/",
                     $_sURL
                 );
+                if ( $_sURL !== $_sReplaced ) {
+                    $_aAllURLs[] = $_sReplaced;
+                    continue;
+                }
+
+                /**
+                 * For a case of the US locale, the bestseller URLs of some categories have changed.
+                 * @since   3.8.13
+                 * For example, Best Sellers in Laptop Accessories
+                 * ### The original URL structure
+                 * https://www.amazon.com/bestsellers/pc/3011391011/ref=zg_bs_nav_pc_1_pc
+                 * https://www.amazon.com/bestsellers/pc/ref=zg_bs_nav_pc_1_pc
+                 * ### Current structure
+                 * https://www.amazon.com/Best-Sellers-Computers-Accessories-Laptop/zgbs/pc/3011391011/
+                 * If the feed type slug is `new-releases`, it should be changed to
+                 * https://www.amazon.com/gp/new-releases/pc/3011391011
+                 * https://www.amazon.com/gp/new-releases/pc/ref=zg_bs_nav_pc_1_pc
+                 */
+                preg_match( '/\/\w+\/(\d+\/)?(?=(ref\=)|$)/', $_sURL, $_aMatches );
+                if ( isset( $_aMatches[ 0 ] ) ) {
+                    $_aURLParts = parse_url( $_sURL );
+                    $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';
+                    $_sDomain   = isset( $_aURLParts[ 'host' ] ) ? $_aURLParts[ 'host' ] : '';
+                    $_sReplaced = $_sScheme . '://' . $_sDomain . '/gp/' . $_sSlug . $_aMatches[ 0 ];
+                    $_aAllURLs[] = $_sReplaced;
+                    continue;
+                }
+
+
             }
         }
-        $_aURLs = array_unique(
-            array_merge( $_aAllURLs, $this->_aPageURLs )
-        );
-        return $_aURLs;
+AmazonAutoLinks_Debug::log( $_aAllURLs );
+        return array_unique( $_aAllURLs );
 
     }
 
