@@ -15,7 +15,7 @@
 abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends AmazonAutoLinks_ScraperDOM_Base {
 
     /**
-     * @var DOMNodeList
+     * @var DOMNodeList|array
      */
     protected $_oItemNodes;
 
@@ -46,7 +46,7 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
 
     }
         /**
-         * @return DOMNodeList
+         * @return DOMNodeList|array
          */
         private function ___getItemNodes() {
 
@@ -57,7 +57,7 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
             // Get main container
             $_oContainerNodes = $_oXPath->query( '//ol[@id="zg-ordered-list"] | //div[@id="zg_left_col1"]' );
             if ( ! $_oContainerNodes->length ) {
-                return $_aProducts;
+                return array();
             }
             $_oContainerNode = $_oContainerNodes->item( 0 );
 
