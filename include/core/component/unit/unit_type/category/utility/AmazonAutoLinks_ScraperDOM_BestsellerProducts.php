@@ -137,6 +137,10 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          */
         protected function _getRatingHTML( DOMXPath $oXPath, $oRatingNode, $iRatingPoint, $iReviewCount, $sASIN, $sSiteDomain, $sAssociateID ) {
 
+            if ( ! $iReviewCount || ! $iRatingPoint ) {
+                return '';
+            }
+
             $_sReviewLink = $this->_getURLResolved( "/product-reviews/{$sASIN}", $sSiteDomain, $sAssociateID );
             $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
             $_iFirstDigit  = $_sRatingRound[ 0 ];
