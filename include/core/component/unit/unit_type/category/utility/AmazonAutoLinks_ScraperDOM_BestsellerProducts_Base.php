@@ -50,26 +50,110 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
          */
         private function ___getItemNodes() {
 
-            $_oXPath = $this->_oXPath;
+//            $_oXPath = $this->_oXPath;
 
-            // There are two versions (old and new) of the web page design.
+            // Going to parse three types of the web page design structure (old and new, and search).
+            try {
+
+                $_oItemNodes = $this->___getItemNodeListTypeCurrent( $this->_oXPath );
+                if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
+                    return $_oItemNodes;
+                }
+                $_oItemNodes = $this->___getItemNodeListTypeOld( $this->_oXPath );
+                if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
+                    return $_oItemNodes;
+                }
+                $_oItemNodes = $this->___getItemNodeListTypeSearchResult( $this->_oXPath );
+                if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
+                    return $_oItemNodes;
+                }
+
+            } catch ( Exception $_oException ) {
+                // to check error message, $_oException->getMessage();
+                return array();
+            }
+
+            // Not found
+            return array();
 
             // Get main container
-            $_oContainerNodes = $_oXPath->query( '//ol[@id="zg-ordered-list"] | //div[@id="zg_left_col1"]' );
+            // @deprecated 3.9.0 As having to deal with multiple design structures.
+/*            $_oContainerNodes = $_oXPath->query( '//ol[@id="zg-ordered-list"] | //div[@id="zg_left_col1"] | //div[contains(@class, "s-result-list")]' );
             if ( ! $_oContainerNodes->length ) {
                 return array();
             }
             $_oContainerNode = $_oContainerNodes->item( 0 );
 
             // For the old design, search elements with the `p13n-asin` class attribute
-            // and use `zg-item-immersion` for the new design.
+            // and use `zg-item-immersion` for the new design. For the search result page, use `s-result-item`.
             $_oItemNodes = $_oXPath->query(
-                './/*[contains(@class, "zg-item-immersion") or contains(@class, "p13n-asin")]',
+                './/*[contains(@class, "zg-item-immersion") or contains(@class, "p13n-asin") or contains(@class, "s-result-item")]',
                 $_oContainerNode
             );
-            return $_oItemNodes;
+
+            return $_oItemNodes;*/
 
         }
+            /**
+             * @throws  Exception
+             * @return  DOMNodeList|array
+             * @since   3.9.0
+             */
+            private function ___getItemNodeListTypeCurrent( $oXPath ) {
+                $_oContainerNodes = $oXPath->query( '//ol[@id="zg-ordered-list"]' );
+                if ( ! $_oContainerNodes->length ) {
+                    return array();
+                }
+                $_oContainerNode  = $_oContainerNodes->item( 0 );
+                $_oItemNodes      = $oXPath->query(
+                    './/*[contains(@class, "zg-item-immersion")]',
+                    $_oContainerNode
+                );
+                if ( ! $_oItemNodes->length ) {
+                    throw new Exception( 'the container found (current design) but the items not found' );
+                }
+                return $_oItemNodes;
+            }
+            /**
+             * @throws  Exception
+             * @return  DOMNodeList|array
+             * @since   3.9.0
+             */
+            private function ___getItemNodeListTypeOld( $oXPath ) {
+                $_oContainerNodes = $oXPath->query( '//div[@id="zg_left_col1"]' );
+                if ( ! $_oContainerNodes->length ) {
+                    return array();
+                }
+                $_oContainerNode = $_oContainerNodes->item( 0 );
+                $_oItemNodes      = $oXPath->query(
+                    './/*[contains(@class, "p13n-asin")]',
+                    $_oContainerNode
+                );
+                if ( ! $_oItemNodes->length ) {
+                    throw new Exception( 'the container found (old design) but the items not found' );
+                }
+                return $_oItemNodes;
+            }
+            /**
+             * @throws  Exception
+             * @return  DOMNodeList|array
+             * @since   3.9.0
+             */
+            private function ___getItemNodeListTypeSearchResult( $oXPath ) {
+                $_oContainerNodes = $oXPath->query( '//div[contains(@class, "s-result-list")]' );
+                if ( ! $_oContainerNodes->length ) {
+                    return array();
+                }
+                $_oContainerNode = $_oContainerNodes->item( 0 );
+                $_oItemNodes      = $oXPath->query(
+                    './/*[contains(@class, "s-result-item")]',
+                    $_oContainerNode
+                );
+                if ( ! $_oItemNodes->length ) {
+                    throw new Exception( 'the container found (search result) but the items not found' );
+                }
+                return $_oItemNodes;
+            }
 
     /**
      * @param $oXPath

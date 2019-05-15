@@ -122,6 +122,9 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          */
         protected function _getRatingPoint( DOMXPath $oXPath, $oRatingNode ) {
             $_oNodes = $oXPath->query( './/a[contains(@title, "5")]', $oRatingNode );
+            if ( ! $_oNodes->length ) {
+                $_oNodes = $oXPath->query( './/i[contains(@class, "a-star")]/span', $oRatingNode );
+            }
             foreach( $_oNodes as $_oNode ) {
                 $_sRatingPoint = trim( $_oNode->nodeValue );
                 preg_match( "/(\d+(.|,))+(\d)+/", $_sRatingPoint, $_aMatches );
@@ -174,7 +177,8 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          * @return mixed    void|DOMNode
          */
         protected function _getRatingNode( DOMXPath $oXPath, $oItemNode, $sSiteDomain, $sAssociateID ) {
-            $_oRatingNodes = $oXPath->query( './/div[./a/i[contains(@class, "a-icon-star")]]', $oItemNode );
+            // * is used to match `div` or `span`
+            $_oRatingNodes = $oXPath->query( './/*[./a/i[contains(@class, "a-icon-star")]]', $oItemNode );
             foreach( $_oRatingNodes as $_oRatingNode ) {
                 // Convert the link
                 $_oANodes = $oXPath->query( './/a', $_oRatingNode );
