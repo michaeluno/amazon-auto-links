@@ -285,6 +285,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 == Changelog ==
 
 = 3.8.13 =
+- Optimized the `category` and `url` unit types to reduce PA API requests when no items are found.
 - Fixed an issue that some products of the Types option of category units have been no longer available.
 
 = 3.8.12 - 03/30/2019 =
