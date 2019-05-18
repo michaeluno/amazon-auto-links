@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.2.0
-Stable tag:         3.8.12
+Stable tag:         3.8.13
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -284,7 +284,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.13 =
+= 3.8.13 - 05/19/2019 =
 - Optimized the `category` and `url` unit types to reduce PA API requests when no items are found.
 - Fixed an issue that some products of the Types option of category units have been no longer available.
 
