@@ -210,12 +210,14 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
                  * ### The original URL structure
                  * https://www.amazon.com/bestsellers/pc/3011391011/ref=zg_bs_nav_pc_1_pc
                  * https://www.amazon.com/bestsellers/pc/ref=zg_bs_nav_pc_1_pc
-                 * https://www.amazon.com/Best-Sellers-Sports-Collectibles/zgbs/sports-collectibles/
                  * ### Current structure
                  * https://www.amazon.com/Best-Sellers-Computers-Accessories-Laptop/zgbs/pc/3011391011/
                  * If the feed type slug is `new-releases`, it should be changed to
                  * https://www.amazon.com/gp/new-releases/pc/3011391011
+                 * ### Test Cases
+                 * https://www.amazon.com/Best-Sellers-Sports-Collectibles/zgbs/sports-collectibles/
                  * https://www.amazon.com/gp/new-releases/pc/ref=zg_bs_nav_pc_1_pc
+                 * https://www.amazon.com/Best-Sellers-Grocery-Gourmet-Food-Beverage-Gifts/zgbs/grocery/2255571011
                  */
                 preg_match( '/\/[^\/]+\/(\d+\/)?(?=(ref\=)|$)/', $_sURL, $_aMatches );
                 if ( isset( $_aMatches[ 0 ] ) ) {
