@@ -15,7 +15,7 @@ Generates links of Amazon products just coming out today. Pick categories and th
 
 = Display Amazon Associates Links with Minimal Effort =
 
-Still manually searching products and pasting affiliate links? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
+Still manually searching products and pasting affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
 The links are tagged with your Amazon Associate ID. This WordPress plugin supports 14 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
@@ -106,9 +106,7 @@ Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Ama
 
 = Do I need Amazon Access Keys? =
 
-<s>For the *Category* and *Tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API. However, for the *Search* unit type, and for some items such as `%image_set%` in the *Item Format* option, setting up API keys is required.</s>
-
-Yes, all unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
+Yes, all the unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
 
 For that, you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
