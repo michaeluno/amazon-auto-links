@@ -219,7 +219,9 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
                  * https://www.amazon.com/gp/new-releases/pc/ref=zg_bs_nav_pc_1_pc
                  * https://www.amazon.com/Best-Sellers-Grocery-Gourmet-Food-Beverage-Gifts/zgbs/grocery/2255571011
                  */
-                preg_match( '/\/[^\/]+\/(\d+\/)?(?=(ref\=)|$)/', $_sURL, $_aMatches );
+                $_sURL = preg_replace( '/ref\=.+$/', '', $_sURL );  // remove the ending part `ref=...`.
+                $_sURL = rtrim( $_sURL, '/\\' ) . '/';  // trailingslashit()
+                preg_match( '/\/[^\/]+\/(\d+\/)?(?=$)/', $_sURL, $_aMatches );
                 if ( isset( $_aMatches[ 0 ] ) ) {
                     $_aURLParts = parse_url( $_sURL );
                     $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';

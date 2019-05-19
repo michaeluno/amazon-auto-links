@@ -282,9 +282,12 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
+= 3.8.14 =
+- Fixed an issue with the `Types` option of category units that lead to find no products.
+
 = 3.8.13 - 05/19/2019 =
 - Optimized the `category` and `url` unit types to reduce PA API requests when no items are found.
-- Fixed an issue that some products of the Types option of category units have been no longer available.
+- Fixed an issue that some products of the `Types` option of category units have been no longer available.
 
 = 3.8.12 - 03/30/2019 =
 - Fixed a bug that `Access Rights` -> `Capability` option did not take effect.
