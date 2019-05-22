@@ -4,8 +4,8 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.2.0
-Stable tag:         3.8.13
+Tested up to:       5.2.1
+Stable tag:         3.8.14
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,7 +282,7 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 
 == Changelog ==
 
-= 3.8.14 =
+= 3.8.14 - 05/22/2019 =
 - Fixed an issue with the `Types` option of category units that lead to find no products.
 
 = 3.8.13 - 05/19/2019 =
