@@ -89,21 +89,30 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                      * For example, Best Sellers in Laptop Accessories
                      * ### The original URL structure
                      * https://www.amazon.com/bestsellers/pc/3011391011/ref=zg_bs_nav_pc_1_pc
+                     * https://www.amazon.com/bestsellers/pc/ref=zg_bs_nav_pc_1_pc
                      * ### Current structure
                      * https://www.amazon.com/Best-Sellers-Computers-Accessories-Laptop/zgbs/pc/3011391011/
                      * If the feed type slug is `new-releases`, it should be changed to
                      * https://www.amazon.com/gp/new-releases/pc/3011391011
+                     * ### Test Cases
+                     * https://www.amazon.com/Best-Sellers-Sports-Collectibles/zgbs/sports-collectibles/
+                     * https://www.amazon.com/gp/new-releases/pc/ref=zg_bs_nav_pc_1_pc
+                     * https://www.amazon.com/Best-Sellers-Grocery-Gourmet-Food-Beverage-Gifts/zgbs/grocery/2255571011
                      */
-                    preg_match( '/\/\w+\/\d+\//', $_sURL, $_aMatches );
+                    $_sURL = preg_replace( '/ref\=.+$/', '', $_sURL );  // remove the ending part `ref=...`.
+                    $_sURL = rtrim( $_sURL, '/\\' ) . '/';  // trailingslashit()
+                    preg_match( '/\/[^\/]+\/(\d+\/)?(?=$)/', $_sURL, $_aMatches );
                     if ( isset( $_aMatches[ 0 ] ) ) {
                         $_aURLParts = parse_url( $_sURL );
                         $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';
                         $_sDomain   = isset( $_aURLParts[ 'host' ] ) ? $_aURLParts[ 'host' ] : '';
                         $_sReplaced = $_sScheme . '://' . $_sDomain . '/gp/' . $_sSlug . $_aMatches[ 0 ];
+                        $_aAllURLs[] = $_sReplaced;
+                        continue;
                     }
-                    $_aAllURLs[] = $_sReplaced;
 
                 }
+
             }
 
             return array_unique( $_aAllURLs );
