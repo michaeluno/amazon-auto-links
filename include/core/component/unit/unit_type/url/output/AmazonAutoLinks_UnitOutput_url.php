@@ -43,7 +43,8 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
         
         // Retrieve ASINs from the given documents. Supports plain text.
         $_aFoundASINs = $this->_getFoundItems( $_aHTMLs );
-                
+        $_bNoProducts = empty( $_aFoundASINs );
+
         // Update unit options.
         $this->___setUnitTypeSpecificUnitOptions( $_aFoundASINs );
                 
@@ -53,12 +54,23 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             update_post_meta( 
                 $_iPostID, 
                 '_found_items', 
-                empty( $_aFoundASINs )
+                $_bNoProducts
                     ? __( 'Product not found.', 'amazon-auto-links' )
                     : implode( PHP_EOL, $_aFoundASINs )
             );
         }
-        
+
+        // 3.8.13
+        if ( $_bNoProducts ) {
+            return array(
+                'Error' =>
+                    array(
+                        'Message' => __( 'No products found.', 'amazon-auto-links' ),
+                        'Code'    => 'Amazon Auto Links'
+                    ),
+            );
+        }
+
         // Now do the API request and get responses.
         return parent::_getResponses( $_aURLs );
         

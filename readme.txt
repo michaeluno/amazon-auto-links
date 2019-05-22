@@ -4,8 +4,8 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.1.0
-Stable tag:         3.8.12
+Tested up to:       5.2.1
+Stable tag:         3.8.14
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,9 +13,9 @@ Generates links of Amazon products just coming out today. Pick categories and th
 
 == Description ==
 
-= Display Amazon Associates Links with Minimal Effort = 
+= Display Amazon Associates Links with Minimal Effort =
 
-Still manually searching products and pasting affiliate links? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
+Still manually searching products and pasting affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
 The links are tagged with your Amazon Associate ID. This WordPress plugin supports 14 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
@@ -33,40 +33,40 @@ Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India,
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
 
-= Automatic Insertion in Posts and Feeds = 
-Just check where you want the product links to appear with auto-insert. 
+= Automatic Insertion in Posts and Feeds =
+Just check where you want the product links to appear with auto-insert.
 
 - **Static Contents Conversion** - If you want the product link to be static, it is possible. This means if you deactivate the plugin, the converted contents will remain.
-- **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type. 
+- **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type.
 
 = Auto Link Conversion =
 Hyper links to Amazon products in posts and comments can be transformed into your associate links. This is useful if your site allows guests to post contents that include Amazon links.
 
-= Widgets = 
-Place the widget in the sidebar and select the unit you created. The product links will appear in where you want. 
+= Widgets =
+Place the widget in the sidebar and select the unit you created. The product links will appear in where you want.
 
 - **By Units** - choose the created units to display in the widget.
 - **Contextual Search** - with this, you don't have to create a unit. It will automatically searches products relating to the currently displayed page contents.
 
-= Shortcode and PHP Function = 
+= Shortcode and PHP Function =
 Insert the ads in specific posts and pages with the shortcode. If you want to insert in the theme template, use the PHP code the plugin provides to produce the outputs.
 
-= Filter Unwanted Products = 
+= Filter Unwanted Products =
 If there are some items you don't want to display, you can create a black and white list by description, title, and ASIN.
 
 = Custom Buttons =
-Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output. 
+Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output.
 
-= Export Ads into External Sites with Feed = 
-By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them from other sites. 
+= Export Ads into External Sites with Feed =
+By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them from other sites.
 
 If you have a web site that can display RSS feed contents, just create a WordPress site somewhere with this plugin and fetch the feed from the site. If you are an App developer, you can just display the items from the feed without programming an API client.
 
-= Various Unit Options = 
+= Various Unit Options =
 
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
-- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons. 
+- **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons.
 - and more.
 
 = Customize Outputs =
@@ -79,21 +79,21 @@ Besides the **Item Format** unit option which lets you design the output of a un
 - **Similarity Look-up** - display similar products.
 - **URL** - list items from an external web source.
 
-= Getting Started =    
+= Getting Started =
 To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
 
 = Supported Language =
 - English
 - Japanese
 - German
-  
+
 == Installation ==
 
 = Install =
 1. Upload **`amazon-auto-links.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 
-= Getting Started = 
+= Getting Started =
 1. Go to **Dashboard** -> **Amazon Auto Links** -> **Add Unit by Category**.
 1. Configure the options and select categories.
 1. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is available in the **Appearance** -> **Widgets** page as well.
@@ -102,13 +102,11 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 
 = Do I need Amazon Associate ID to use this plug-in? =
 
-Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Amazon Associates](https://affiliate-program.amazon.com/).  
+Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Amazon Associates](https://affiliate-program.amazon.com/).
 
-= Do I need Amazon Access Keys? = 
+= Do I need Amazon Access Keys? =
 
-<s>For the *Category* and *Tag* unit types, no, you don't need them. However, for the *search* unit type, you need them as the plugin uses Amazon API. However, for the *Search* unit type, and for some items such as `%image_set%` in the *Item Format* option, setting up API keys is required.</s>
-
-Yes, all unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
+Yes, all the unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
 
 For that, you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
@@ -130,17 +128,17 @@ It could be the allocated memory capacity for PHP reached the limit. One way to 
 `define( 'WP_MEMORY_LIMIT', '128M' );`
 The part, 128M, should be changed accordingly.
 
-= I want to display product links horizontally in multiple columns. Is it possible? = 
+= I want to display product links horizontally in multiple columns. Is it possible? =
 
 Yes, with [Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/)!
 
-= I have a feature request. Would you implement that? = 
+= I have a feature request. Would you implement that? =
 Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto-links). If it is feasible, it will be included in the to-do list in the Other Notes section.
 
 = I get Amazon product links everywhere on the site after creating some units. How can I restrict them to certain pages? =
 Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
 
-= My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? = 
+= My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? =
 Try [Scratchpad](http://webservices.amazon.com/scratchpad/) to make sure your keys work there as well.
 
 
@@ -231,7 +229,7 @@ Copy an existing template that is located in `...wp-content/plugins/amazon-auto-
 Remove the files besides `style.css` and `template.php` as other files are optional.
 
 <h5><strong>Step 3</strong></h5>
- 
+
 Edit `style.css` and `template.php` to customize the layout.
 
 <h5><strong>Step 4</strong></h5>
@@ -246,10 +244,10 @@ Move the working folder(the copied one) to it (the `amazon-auto-links` folder yo
 
 The plugin will automatically detect your template and add it in the template listing table. So activate it.
 
-= Upgrading V1 to V2 = 
+= Upgrading V1 to V2 =
 When upgrading v1 to v2, a few options will be lost. That includes:
 
-* Sidebar widget 
+* Sidebar widget
 * The positions of the inserting area
 
 These options need to be reconfigured.
@@ -283,7 +281,6 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
-
 = 3.9.0 -
     - Added the feed unit type.
     - Changed the category unit type not to require Product Advertising API keys.
