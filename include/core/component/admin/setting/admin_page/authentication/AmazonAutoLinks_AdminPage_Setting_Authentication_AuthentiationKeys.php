@@ -22,7 +22,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
      * @return      void
      */
     protected function _construct( $oFactory ) {}
-    
+
     /**
      * Adds form fields.
      * @since       3
@@ -30,7 +30,9 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
-        $_bConnected         = true === $this->___getAPIConnectionStatus();
+        $_bConnected         = ! $this->___shouldTestAPIConnection()
+            ? false
+            : true === $this->___getAPIConnectionStatus();
 
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
@@ -133,7 +135,25 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
         );          
         
     }
+        /**
+         * If API keys are set and the previous status is false, this means the user intentionally disconnected the connection.
+         * In this case, do not perfomr a test.
+         * @since 3.9.0
+         */
+        private function ___shouldTestAPIConnection() {
+            if ( ! $this->___isAPIKeySet() ) {
+                return false;
+            }
 
+            /**
+             * @todo    3.9.0 Check a saved flag value (make one somewhere) that indicates an API connection error.
+             * And if it occurred in a few hours, then consider it reached the API rate limit.
+             */
+
+            $_oOption    = AmazonAutoLinks_Option::getInstance();
+            return ( boolean ) $_oOption->get( array( 'authentication_keys', 'api_authentication_status' ), false );
+
+        }
         /**
          * Checks Amazon Product Advertising API connection.
          *
@@ -145,16 +165,18 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
          * @return      boolean|string      True if connected; otherwise, an error message.
          */
         private function ___getAPIConnectionStatus( $sPublicKey='', $sPrivateKey='', $sAssociateID='', $sLocale='' ) {
-            $_oOption    = AmazonAutoLinks_Option::getInstance();
-            $_sPublicKey = $sPublicKey
+
+            $_oOption     = AmazonAutoLinks_Option::getInstance();
+            $_sPublicKey  = $sPublicKey
                 ? $sPublicKey
                 : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
             $_sPrivateKey = $sPrivateKey
                 ? $sPrivateKey
                 : $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
-            if ( ! $_sPublicKey || ! $_sPrivateKey ) {
+            if ( ! $this->___isAPIKeySet( $_sPublicKey, $_sPrivateKey ) ) {
                 return __( 'Either a public key or private key is not set.', 'amazon-auto-links' );
             }
+
             $_sLocale    = $sLocale
                 ? $sLocale
                 : $_oOption->get( array( 'authentication_keys', 'server_locale' ), 'US' );
@@ -166,7 +188,29 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             return true === $_bsStatus
                 ? true
                 : $_bsStatus;
+
         }
+            /**
+             * Checks if keys are set in the options or passed to the parameters.
+             * @since   3.9.0
+             * @return  boolean
+             */
+            private function ___isAPIKeySet( $sPublicKey='', $sPrivateKey='' ) {
+                if ( $sPublicKey && $sPrivateKey ) {
+                    return true;
+                }
+                $_oOption    = AmazonAutoLinks_Option::getInstance();
+                $_sPublicKey = $sPublicKey
+                    ? $sPublicKey
+                    : $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
+                $_sPrivateKey = $sPrivateKey
+                    ? $sPrivateKey
+                    : $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
+                if ( ! $_sPublicKey || ! $_sPrivateKey ) {
+                    return false;
+                }
+                return true;
+            }
 
         /**
          * 
