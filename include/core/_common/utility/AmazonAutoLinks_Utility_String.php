@@ -14,7 +14,18 @@
  * @since       3       
  */
 class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_WPUtility {
-    
+
+    /**
+     * Checks if a given string is JSON.
+     * @param $sString
+     * @return bool
+     * @since   3.9.0
+     */
+    static public function isJSON( $sString ) {
+       json_decode( $sString );
+       return ( json_last_error() == JSON_ERROR_NONE );
+    }
+
     /**
      * Converts characters not supported to be used in the URL query key to underscore.
      * 
