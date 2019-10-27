@@ -89,10 +89,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         $this->iCacheDuration = $iCacheDuration;
         $this->sSiteCharSet   = get_bloginfo( 'charset' );
         $this->sRequestType   = $sRequestType;
+        $this->aArguments     = $this->_getFormattedArguments( $aArguments );
         $this->aURLs          = $this->_getFormattedURLContainer( 
             $this->getAsArray( $asURLs ) 
         );
-        $this->aArguments     = $this->_getFormattedArguments( $aArguments );
 
     }      
         /**
@@ -139,10 +139,24 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
              * @return      string
              */
             protected function _getCacheName( $sURL ) {
+
+                // @since   3.9.0   For the POST method and the `body` argument is present, use it to identify the request.
+                $_sBody = '';
+                if ( isset( $this->aArguments[ 'body' ] ) && $this->aArguments[ 'body' ] ) {
+                    $_sBody = maybe_serialize( $this->aArguments[ 'body' ] );
+                }
+
                 $_sCacheName = AmazonAutoLinks_Registry::TRANSIENT_PREFIX
                     . '_' 
-                    . md5( $sURL );
-                return apply_filters( 'aal_filter_http_request_cache_name', $_sCacheName, $sURL, $this->sRequestType );
+                    . md5( $sURL . $_sBody );
+
+                return apply_filters(
+                    'aal_filter_http_request_cache_name',
+                    $_sCacheName,
+                    $sURL,
+                    $this->sRequestType,
+                    $this->aArguments   // 3.9.0
+                );
             }
             
     /**
@@ -360,7 +374,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @since       3.7.7   deprecated the `aal_filter_http_request_set_cache` filter and introduced `aal_filter_http_request_set_cache_{request type}`.
          */
         private function _setCache( $sURL, $mData, $iCacheDuration=86400 ) {
-
+            
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
