@@ -67,6 +67,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'sslverify'   => true,
         'stream'      => false,
         'filename'    => null,
+        'method'      => null,  // 3.9.0
     ); 
 
     /**
@@ -92,7 +93,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $this->getAsArray( $asURLs ) 
         );
         $this->aArguments     = $this->_getFormattedArguments( $aArguments );
-        
+
     }      
         /**
          * @return      array
