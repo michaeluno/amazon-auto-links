@@ -13,6 +13,7 @@
  *
  * @sicne       unknown
  * @since       3.5.0           Extends `AmazonAutoLinks_PluginUtility`.
+ * @deprecated  3.9.0   PA-API 4.0 was deprecated as of Oct 31st, 2019.
  */
 class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtility {
 

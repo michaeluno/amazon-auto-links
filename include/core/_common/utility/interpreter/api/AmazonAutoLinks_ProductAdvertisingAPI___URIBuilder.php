@@ -11,6 +11,7 @@
 /**
  * Provides methods to construct Amazon Product Advertising API request URIs.
  * @since       3.5.0
+ * @deprecated  3.9.0   PA-API 4.0 was deprecated as of Oct 31st, 2019.
  */
 class AmazonAutoLinks_ProductAdvertisingAPI___URIBuilder {
 

@@ -12,6 +12,7 @@
  * Provides methods to cache API requests.
  * 
  * @since       3.5.0
+ * @deprecated  3.9.0   PA-API 4.0 was deprecated as of Oct 31st, 2019.
  */
 class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_PluginUtility {
 
