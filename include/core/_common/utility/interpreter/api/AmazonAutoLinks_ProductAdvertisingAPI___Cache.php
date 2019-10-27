@@ -54,7 +54,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___Cache extends AmazonAutoLinks_Plug
          * @since       3.5.0           Moved from `AmazonAutoLinks_ProductAdvertisingAPI_Base`.
          * @return      array|string    The response string of xml or an array of error.
          */
-    private function ___getAPIResponseBySettingCache( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching ) {
+        private function ___getAPIResponseBySettingCache( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching ) {
 
             $_asXMLResponse = $this->___getResponseBySignedRequest( $sRequestURI, $aHTTPArguments, $iDuration, $bForceCaching );
             if ( ! $this->___isValidAPIResponse( $_asXMLResponse ) ) {
