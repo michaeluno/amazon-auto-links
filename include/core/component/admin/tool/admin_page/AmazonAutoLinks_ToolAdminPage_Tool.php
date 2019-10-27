@@ -20,7 +20,12 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
      * @callback        action      load_{page slug}
      */    
     public function replyToLoadPage( $oFactory ) {
-        
+
+        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog(
+            $oFactory,
+            $this->sPageSlug
+        );
+
         $this->_doPageSettings( $oFactory );
         
     }

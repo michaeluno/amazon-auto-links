@@ -379,7 +379,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             $_sCacheName     = $this->_getCacheName( $sURL );
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             // @deprecated 3.7.7    $mData           = apply_filters( 'aal_filter_http_request_set_cache', $mData, $this->sRequestType, $_sCacheName, $_sCharSet, $iCacheDuration );
-            $mData           = apply_filters( 'aal_filter_http_request_set_cache_' . $this->sRequestType, $mData, $_sCacheName, $_sCharSet, $iCacheDuration );
+            $mData           = apply_filters(
+                'aal_filter_http_request_set_cache_' . $this->sRequestType,
+                $mData,
+                $_sCacheName,
+                $_sCharSet,
+                $iCacheDuration,
+                $sURL   // 3.9.0
+            );
             $mData           = $this->___getCacheCompressed( $mData );  // 3.7.6+
             $_bResult        = $_oCacheTable->setCache(
                 $_sCacheName, // name
