@@ -39,7 +39,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 <?php if ( isset( $aProducts['Error']['Message'], $aProducts['Error']['Code'] ) ) : ?>    
     <div class="error">
         <p>
-            <?php echo $aProducts['Error']['Code'] . ': '. $aProducts['Error']['Message']; ?>
+            <?php echo AmazonAutoLinks_Registry::NAME . ': ' . $aProducts['Error']['Code'] . ': '. $aProducts['Error']['Message']; ?>
         </p>
     </div>
 <?php return true; ?>
