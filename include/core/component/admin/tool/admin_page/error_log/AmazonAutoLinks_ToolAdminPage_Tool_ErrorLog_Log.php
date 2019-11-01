@@ -59,6 +59,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                     continue;
                 }
                 $_sErrorLog .= $this->getSiteReadableDate( $_aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ' . $_aLogItem[ 'cache_name' ] . ' ' . $_aLogItem[ 'url' ] . "\r\n"
+                    . $this->getElement( $_aLogItem, array( 'current_url' ) ) . "\r\n"
                     . $_aLogItem[ 'message' ] . "\r\n";
             }
             return $_sErrorLog

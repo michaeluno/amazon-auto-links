@@ -34,7 +34,7 @@ class AmazonAutoLinks_UnitOutput_similarity_lookup extends AmazonAutoLinks_UnitO
      */
     public static $aStructure_APIParameters = array(    
         'Operation'         => 'SimilarityLookup',        
-        'Condition'         => 'New',
+        'Condition'         => 'Any',
         'ItemId'            => null,
         'MerchantId'        => null,
         'SimilarityType'    => 'Intersection',
@@ -83,7 +83,7 @@ class AmazonAutoLinks_UnitOutput_similarity_lookup extends AmazonAutoLinks_UnitO
                 ? 'Amazon'
                 : null,
             'SimilarityType'    => $_aUnitOptions['SimilarityType'],        
-            'Condition'         => $_aUnitOptions['Condition'],    // (optional) Used | Collectible | Refurbished, All
+            'Condition'         => $_aUnitOptions['Condition'],    // (optional) Used | Collectible | Refurbished | New | Any
             'ItemId'            => $_aUnitOptions['ItemId'],    // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
             'ResponseGroup'     => 'Large', // (optional)
         );

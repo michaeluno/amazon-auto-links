@@ -34,7 +34,7 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
 
         // Advanced fields
         'MerchantId'    => 'All',
-        'Condition'     => 'New',
+        'Condition'     => 'Any',
         
         'search_per_keyword'    => true,    // 3.2.0+
 

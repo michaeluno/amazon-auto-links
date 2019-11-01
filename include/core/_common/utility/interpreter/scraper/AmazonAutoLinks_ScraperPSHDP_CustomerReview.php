@@ -10,7 +10,8 @@
 /**
  * Provides methods to extracts customer reviews.
  * 
- * @since        3
+ * @since      3
+ * @sicne      3.9.0       Deprecated as PA-API 5 does not provide customer review information. It now serves as a base class.
  */
 class AmazonAutoLinks_ScraperPSHDP_CustomerReview extends AmazonAutoLinks_ScraperPSHDP_Base {
         

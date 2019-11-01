@@ -39,9 +39,9 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced extends AmazonAutoLinks
                     'Used'          => __( 'Used', 'amazon-auto-links' ),
                     'Collectible'   => __( 'Collectible', 'amazon-auto-links' ),
                     'Refurbished'   => __( 'Refurbished', 'amazon-auto-links' ),
-                    'All'           => __( 'All', 'amazon-auto-links' ),
+                    'Any'           => __( 'Any', 'amazon-auto-links' ),
                 ),
-                'default'       => 'New',
+                'default'       => 'Any',
                 'description'   => __( 'If the search index is All, this option does not take effect.', 'amazon-auto-links' ),        
             ),
         );     

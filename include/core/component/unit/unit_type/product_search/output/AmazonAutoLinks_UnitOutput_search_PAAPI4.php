@@ -12,8 +12,9 @@
  * Creates Amazon product links by ItemSearch.
  * 
  * @package         Amazon Auto Links
+ * @deprecated      3.9.0 Changed the name from `AmazonAutoLinks_UnitOutput_search`.
  */
-class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
+class AmazonAutoLinks_UnitOutput_search_PAAPI4 extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
     
     /**
      * Stores the unit type.
@@ -26,15 +27,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * This is needed for the `search_per_keyword` option.
      * @since       3.2.0
      */
-    public $sSearchTermKey = 'Keywords';
-
-    /**
-     * The array element key name that containes `Items` element.
-     * PA-API 5 operations such as `GetItems`, `SearchItems` have different key names such as `ItemsResult` abd `SearchResult`.
-     * @var string
-     * @since   3.9.0
-     */
-    protected $_sResponseItemsParentKey = 'SearchResult';
+    public $sSearchTermKey = 'Keywords';    
 
     /**
      * Lists the variables used in the Item Format unit option that require to access the custom database.
@@ -46,23 +39,18 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     /**
      * Represents the array structure of the item array element of API response data.
      * @since            unknown
-     * @todo        3.9.0       The structure has been entirely changed in PA-API5
      */    
     public static $aStructure_Item = array(
         'ASIN'              => null,
+        'ItemAttributes'    => null,
         'DetailPageURL'     => null,
-        'ItemInfo'          => null,
-        'BrowseNodeInfo'    => null,
-        'Images'            => null,
-        'Offers'            => null,
-// @deprecated       'ItemAttributes'    => null,
-// @deprecated      'EditorialReviews'  => null,
-//        'ItemLinks'         => null,
-//        'ImageSets'         => null,
-//        'BrowseNodes'       => null,
-//        'SimilarProducts'   => null,
-//        'MediumImage'       => null,
-//        'OfferSummary'      => null,
+        'EditorialReviews'  => null,
+        'ItemLinks'         => null,
+        'ImageSets'         => null,
+        'BrowseNodes'       => null,
+        'SimilarProducts'   => null,
+        'MediumImage'       => null,
+        'OfferSummary'      => null,
     );
 
     /**
@@ -73,21 +61,41 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         // Get API responses
         $_aResponse = $this->_getResponses( $aURLs );
-        $_aError    = $this->getElement( $_aResponse, array( 'Error' ), array() );
-
-        // Check errors
-        if (
-            ! empty( $_aError )
-            && ! isset( $_aResponse[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
-        ) {
-            return $_aResponse;
+        $_aError    = $this->_getResponseError( $_aResponse );
+        if ( ! empty( $_aError ) ) {
+            return $_aError;
         }
-
-        // Format items
         return $this->getProducts( $_aResponse );
 
     }
-
+        /**
+         * @since       3.2.1
+         * @return      array
+         */
+        private function _getResponseError( $aResponse ) {
+            
+            // HTTP or API Response error
+            if ( isset( $aResponse[ 'Error' ][ 'Code' ] ) ) {
+                return $aResponse;
+            }
+            
+            // Error in the API Requests.
+            $_aErrors = $this->getElement( 
+                $aResponse,
+                array( 'Items', 'Request', 'Errors' )
+            );
+            if ( ! empty( $_aErrors ) ) {
+                
+                // Return the first error item for multiple cases as the template currently only checks the Error element.
+                if ( isset( $_aErrors[ 'Error' ][ 0 ] ) ) {
+                    $_aErrors[ 'Error' ] = $_aErrors[ 'Error' ][ 0 ];
+                }
+                return $_aErrors;
+                    
+            }       
+            return array();
+            
+        }
         /**
          * @since       3.1.4
          * @since       3.8.1           Added the $aURLs parameter.
@@ -146,7 +154,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     // The above 'search_per_keyword' = false will trigger `___getResponsesByMultipleKeywords()` 
                     // so an array can be set for the terms. 
                     $this->oUnitOption->set( 
-                        $this->sSearchTermKey,  // ItemId | Keywords
+                        $this->sSearchTermKey,  // ItemId
                         array_chunk( $_aTerms, 10 )
                     );                    
                     
@@ -193,17 +201,16 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 }
 
                 // Up to the set item count.
-                array_splice( $_aItems, $_iCount );
+                array_splice( $_aItems, $_iCount );   
                 $this->setMultiDimensionalArray( 
                     $_aResponse,
-                    array( $this->_sResponseItemsParentKey, 'Items', ),
+                    array( 'Items', 'Item' ),
                     $_aItems
                 );
-                if ( 0 < count( $this->getElementAsArray( $_aResponse, array( $this->_sResponseItemsParentKey, 'Items' ) ) ) ) {
+                if ( 0 < count( $this->getElementAsArray( $_aResponse, array( 'Items', 'Item' ) ) ) ) {
                     unset(
-                        $_aResponse[ 'Error' ]
-                        // @deprecated 3.9.0 $_aResponse[ 'Error' ][ 'Code' ]
-                        // @deprecated 3.9.0       $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
+                        $_aResponse[ 'Error' ][ 'Code' ],
+                        $_aResponse[ 'Items' ][ 'Request' ][ 'Errors' ]
                     );
                 }            
 
@@ -214,11 +221,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 /**
                  * @return      array
                  */
-                private function ___getItemsMerged( array $aItems, array $aResponse ) {
+                private function ___getItemsMerged( $aItems, $aResponse ) {
                     
                     $aItems        = array_merge(
                         $aItems,
-                        $this->getElementAsArray( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ) )
+                        $this->___getItemsNumericallyIndexed( $aResponse )
                     );
                                              
                     // Drop duplicates.
@@ -247,7 +254,30 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     return $aItems;
                     
                 }            
-
+                /**
+                 * If a single item is returned, it is an associative array; otherwize, numeric.
+                 * @return      array       Numerically indexed item element.
+                 */
+                private function ___getItemsNumericallyIndexed( $aResponse ) {
+                    
+                    $_aItems = $this->getElementAsArray( $aResponse, array( 'Items', 'Item' ) );
+                    return $this->isAssociative( $_aItems )
+                        ? array( $_aItems )
+                        : $_aItems;
+                    
+                }
+                /**
+                 * @scope       protected       Item look-up and Similarity look-up will override this method.
+                 * @since       3.2.0
+                 * @deprecated  3.8.7  Seems neither Item look-up nor Similarity unit types do not override this method.
+                 * Use the `___getCountForSearchPerKeyword()` method instead.
+                 * @return      integer
+                 */
+                protected function _getMaximumCountForSearchPerKeyword( $aTerms ) {
+                    return $this->oOption->isAdvancedAllowed()
+                        ? $this->oUnitOption->get( 'count' )
+                        : 10;
+                }
                 /**
                  * @remark      This sets the minimum count as 10 to cover cases that too few items shown
                  * due to removals with product filters. 10 is also the maximum count for the API `ItemID` parameter.
@@ -263,6 +293,24 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         : $_iCount;
                 }
 
+    
+        /**
+         * Checks whether response has an error.
+         * @return      boolean
+         * @since       3
+         * @deprecated  3.7.0
+         */
+//        protected function _isError( $aProducts ) {
+//            if ( isset( $aProducts[ 'Error' ][ 'Code' ] ) ) {
+//                return true;
+//            }
+//            if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
+//                return true;
+//            }
+//            return parent::_isError( $aProducts );
+//
+//        }
+
     /**
      * Performs paged API requests.
      *
@@ -273,7 +321,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      */
     protected function getRequest( $iCount ) {
         
-        $_oAPI = new AmazonAutoLinks_PAAPI50(
+        $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
             $this->oUnitOption->get( 'country' ), 
             $this->oOption->get( 'authentication_keys', 'access_key' ),
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
@@ -292,35 +340,22 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             return $_aResponse;
         }
         
-        // Check if it has an item
-        if ( ! $this->___hasItem( $_aResponse ) ) {
+        // Check if the necessary key is set
+        if ( ! isset( $_aResponse[ 'Items' ][ 'Item' ] ) || ! is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
             return $_aResponse;
         }
-
-        // @deprecated 3.9.0
-//        if ( ! isset( $_aResponse[ 'Items' ][ 'Item' ] ) || ! is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
-//            return $_aResponse;
-//        }
-
-        // @deprecated 3.9.0
+        
         // Calculate the required number of pages.
-//        $_iPage = $this->_getTotalPageNumber(
-//            $iCount,
-//            $_aResponse,
-//            $this->oUnitOption->get( 'SearchIndex' )
-//        );
-
-        /**
-         * As PA-API 5.0 does not return reliable total page count,
-         * perform search from the lowest page number and when it hits an error stop.
-         */
-        $_iMaxPage = ( integer ) ceil( $iCount / 10 );
-
+        $_iPage = $this->_getTotalPageNumber( 
+            $iCount, 
+            $_aResponse, 
+            $this->oUnitOption->get( 'SearchIndex' ) 
+        );
+        
         $_aResponseTrunk = $_aResponse;
-
-        // @deprecated 3.9.0
-        // Prefetch from backwards. First perform fetching data in the background if caches are not available. Parse backwards
-/*        $_iScheduled = 0;
+                
+        // First perform fetching data in the background if caches are not available. Parse backwards 
+        $_iScheduled = 0;
         for ( $_i = $_iPage; $_i >= 2 ; $_i-- ) {
             $_iScheduled += ( integer ) $_oAPI->scheduleInBackground(
                 $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ), $_i ),
@@ -330,208 +365,182 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         if ( $_iScheduled ) {
             // there are items scheduled to fetch in the background, do it right now.
             AmazonAutoLinks_Shadow::gaze();
-        }*/
+        }
         
         // Start from the second page since the first page has been already done. 
-        for ( $_i = 2; $_i <= $_iMaxPage; $_i++ ) {
-
+        for ( $_i = 2; $_i <= $_iPage; $_i++ ) {
+            
             $_aResponse = $_oAPI->request( 
                 $this->getAPIParameterArray(
                     $this->oUnitOption->get( 'Operation' ), 
-                    $_i // page number
+                    $_i 
                 ),
                 $this->oUnitOption->get( 'cache_duration' ),
                 $this->oUnitOption->get( '_force_cache_renewal' )
             );
-            if ( isset( $_aResponse[ 'Error' ] ) ) {
-                break;
+            if ( isset( $_aResponse[ 'Items' ][ 'Item' ] ) && is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
+                $_aResponseTrunk[ 'Items' ][ 'Item' ] = $this->_addItems( $_aResponseTrunk[ 'Items' ][ 'Item' ], $_aResponse[ 'Items' ][ 'Item' ] );    
             }
-            if ( $this->___hasItem( $_aResponse ) ) {
-                $_aResponseTrunk[ $this->_sResponseItemsParentKey ][ 'Items' ] = $this->___addItems(
-                    $_aResponseTrunk[ $this->_sResponseItemsParentKey ][ 'Items' ],
-                    $_aResponse[ $this->_sResponseItemsParentKey ][ 'Items' ]
-                );
-            }
-
+                            
         }    
         
         return $_aResponseTrunk;
         
     }
         /**
-         * @param $aResponse
-         *
-         * @return bool
-         */
-        private function ___hasItem( array $aResponse ) {
-            $_aItems = $this->getElement( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ) );
-            if ( ! is_array( $_aItems ) ) {
-                return false;
-            }
-            return ( boolean ) count( $_aItems );
-        }
-
-        /**
          * Returns the total page number
-         *
+         * 
          * @since   2.0.4.1b
          * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
-         * @see https://forums.aws.amazon.com/message.jspa?messageID=919160
-         * @return  integer
-         * @deprecated 3.9.0 `SearchResult` is not reliable for the bug that only returns 146 for every search request.
          */
-/*        protected function _getTotalPageNumber( $iCount, $aResponse, $sSearchIndex='All' ) {
-            return 0;
-            // @remark `SearchResult` is not reliable for the bug that only returns 146 for every search request.
-            // @see https://forums.aws.amazon.com/message.jspa?messageID=919160
-            // $_iTotalResultCount = $this->getElement( $aResponse, array( $this->_sResponseItemsParentKey, 'TotalResultCount' ), 0 );
-
-            $iMaxAllowedPages = $sSearchIndex == 'All' ? 5 : 10;
+        protected function _getTotalPageNumber( $iCount, $aResponse, $sSearchIndex='All' ) {
+            
+            $iMaxAllowedPages = $sSearchIndex == 'All' ? 5 : 10;        
             $iPage = ceil( $iCount / 10 );
             $iPage = $iPage > $iMaxAllowedPages ? $iMaxAllowedPages : $iPage;
             $iFoundTotalPages = isset( $aResponse[ 'Items' ][ 'TotalPages' ] ) ? $aResponse[ 'Items' ][ 'TotalPages' ] : 1;
-            return $iFoundTotalPages <= $iPage ?
-                $iFoundTotalPages
+            return $iFoundTotalPages <= $iPage ? 
+                $iFoundTotalPages 
                 : $iPage;
-
-        }*/
+            
+        }    
         /**
          * Adds product item elements in a response array if the same ASIN is not already in there
-         *
-         * @since       2.0.4.1
-         * @since       3.9.0   Changed the scope to private.
+         * 
+         * @since            2.0.4.1
          */
-        private function ___addItems( $aMain, $aItems ) {
-
+        protected function _addItems( $aMain, $aItems ) {
+            
             // Extract all ASINs from the main array.
             $_aASINs = array();
             foreach( $aMain as $_aItem ) {
-                if ( ! isset( $_aItem[ 'ASIN' ] ) ) {
-                    continue;
-                }
+                if ( ! isset( $_aItem[ 'ASIN' ] ) ) { continue; }
                 $_aASINs[ $_aItem[ 'ASIN' ] ] = $_aItem[ 'ASIN' ];
             }
-
+            
             // Add the items if not already there.
             foreach ( $aItems as $_aItem ) {
-                if ( ! isset( $_aItem[ 'ASIN' ] ) ) {
-                    continue;
-                }
-                if ( in_array( $_aItem[ 'ASIN' ], $_aASINs ) ) {
-                    continue;
-                }
+                if ( ! isset( $_aItem[ 'ASIN' ] ) ) { continue; }
+                if ( in_array( $_aItem[ 'ASIN' ], $_aASINs ) ) { continue; }
                 $aMain[] = $_aItem;    // finally add the item
             }
-
+            
             return $aMain;
-
+            
         }
     /**
-     *
+     * 
+     * 'Operation' => 'ItemSearch',    // ItemSearch, ItemLookup, SimilarityLookup
      * @since   2.0.2
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
-     * @since   3.9.0   The parameter format has been changed in PA-API 5
      */
-    protected function getAPIParameterArray( $sOperation='SearchItems', $iItemPage=null ) {
+    protected function getAPIParameterArray( $sOperation='ItemSearch', $iItemPage=null ) {
 
-        // @deprecated 3.9.0
         $_bIsIndexAllOrBlended  = ( 'All' === $this->oUnitOption->get( 'SearchIndex' ) || 'Blended' === $this->oUnitOption->get( 'SearchIndex' ) );
-
-        $_sTitle                = $this->trimDelimitedElements( $this->oUnitOption->get( 'Title' ), ',', false );
-        $_aPayload               = array(
-            'Keywords'              => $this->trimDelimitedElements( $this->oUnitOption->get( 'Keywords' ), ',', false ),
-            'Title'                 => $_sTitle ? $_sTitle : null,
-            'Operation'             => $this->_getOperation( $this->oUnitOption->get( 'Operation' ) ),  // SearchItems
+        $_sTitle                = $this->trimDelimitedElements( 
+            $this->oUnitOption->get( 'Title' ), 
+            ',', 
+            false 
+        ); 
+        $_aParams               = array(
+            'Keywords'              => $this->trimDelimitedElements( 
+                $this->oUnitOption->get( 'Keywords' ), 
+                ',', 
+                false 
+            ),
+            // 3+ Power parameter, which can only be used when the search index equals 'Books'.
+            'Power'                 => $this->oUnitOption->get( 'Power' ),
+            'Title'                 => $_bIsIndexAllOrBlended 
+                ? null 
+                : ( $_sTitle ? $_sTitle : null ),
+            'Operation'             => $this->oUnitOption->get( 'Operation' ),
             'SearchIndex'           => $this->oUnitOption->get( 'SearchIndex' ),
             $this->oUnitOption->get( 'search_by' ) => $this->oUnitOption->get( 'additional_attribute' )
                 ? $this->oUnitOption->get( 'additional_attribute' )
                 : null,
-            'SortBy'                => $this->___getParameterSortBy( $this->oUnitOption ),
-            'BrowseNodeId'          => $this->oUnitOption->get( 'BrowseNode' )
+            'Sort'                  => $this->___getParameterOfSort( $this->oUnitOption, ! $_bIsIndexAllOrBlended ),
+            'ResponseGroup'         => "Large",
+            'BrowseNode'            => ! $_bIsIndexAllOrBlended && $this->oUnitOption->get( 'BrowseNode' ) 
                 ? $this->oUnitOption->get( 'BrowseNode' )
                 : null,
             'Availability'          => $this->oUnitOption->get( 'Availability' ) 
                 ? 'Available' 
-                : 'IncludeOutOfStock',
-            'Condition'             => $this->oUnitOption->get( 'Condition' ),
-            'MaxPrice'              => $this->oUnitOption->get( 'MaximumPrice' )
+                : null,
+            'Condition'             => $_bIsIndexAllOrBlended 
+                ? null 
+                : $this->oUnitOption->get( 'Condition' ),
+            'IncludeReviewsSummary' => "True",
+            'MaximumPrice'          => ! $_bIsIndexAllOrBlended && $this->oUnitOption->get( 'MaximumPrice' )
                 ? $this->oUnitOption->get( 'MaximumPrice' )
                 : null,
-            'MinPrice'              => $this->oUnitOption->get( 'MinimumPrice' )
+            'MinimumPrice'          => ! $_bIsIndexAllOrBlended && $this->oUnitOption->get( 'MinimumPrice' )
                 ? $this->oUnitOption->get( 'MinimumPrice' )
                 : null,
-// @todo 3.9.0 add this in the unit option field
-            'MinReviewsRating'      => $this->oUnitOption->get( 'MinReviewsRating' )
-                ? $this->oUnitOption->get( 'MinReviewsRating' )
-                : null,
-            'MinSavingPercent'      => $this->oUnitOption->get( 'MinPercentageOff' )
+            'MinPercentageOff'      => $this->oUnitOption->get( 'MinPercentageOff' )
                 ? $this->oUnitOption->get( 'MinPercentageOff' )
                 : null,
-            'Merchant'            => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
+            
+            // 2.0.7+
+            'MerchantId'            => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
                 ? 'Amazon'
-                : null,
+                : null, 
+                
+            // 2.1.0+
+            'MarketplaceDomain'     => 'Marketplace' === $this->oUnitOption->get( 'SearchIndex' )
+                ? AmazonAutoLinks_Property::getMarketplaceDomainByLocale( $this->oUnitOption->get( 'country' ) )
+                : null,                
+                
+        );        
+        $_aParams = $iItemPage
+            ? $_aParams + array( 'ItemPage' => $iItemPage )
+            : $_aParams;
 
-// @todo 3.9.0 add this in the unit option field
-            'DeliveryFlags'         => $this->oUnitOption->get( 'DeliveryFlags' ),
-            'CurrencyOfPreference'  => $this->oUnitOption->get( 'CurrencyOfPreference' )
-                ? $this->oUnitOption->get( 'CurrencyOfPreference' )
-                : null,
-            'LanguagesOfPreference' => $this->oUnitOption->get( 'LanguagesOfPreference' )
-                ? array( $this->oUnitOption->get( 'LanguagesOfPreference' ) )
-                : null,
-            'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
-        );
-        $_aPayload = $iItemPage
-            ? $_aPayload + array( 'ItemPage' => $iItemPage )
-            : $_aPayload;
 
-        // not sure but it occurred an element without an empty key got inserted
-        unset( $_aPayload[ '' ] );
-
-        return $_aPayload;
-    }
-
-        /**
-         * For backward compatibility for PA-API 4
-         * @param $sOperation
-         * @since   3.9.0
-         */
-        protected function _getOperation( $sOperation ) {
-            // ItemSearch, ItemLookup, SimilarityLookup
-            if ( 'ItemSearch' === $sOperation ) {
-                return 'SearchItems';
-            }
-            if ( 'ItemLookup' === $sOperation ) {
-                return 'GetItems';
-            }
-            return $sOperation;
+        // 3+ When the Power argument is set, the SearchIndex must not be set. 
+        // and when the SearchIndex is not set, Sort cannot be set.
+        if ( $_aParams[ 'Power' ] ) {
+            unset( 
+                $_aParams[ 'Sort' ]
+            );
         }
-
+        
+        unset(
+            $_aParams[ '' ]         // not sure but it occured an element without an empty key got inserted
+        );
+        // if ( $_aParams[ 'Title' ] ) {
+            // unset(
+                // $_aParams[ 'SearchIndex' ]
+            // );
+            // $_aParams[ 'SearchIndex' ] = 'Books';
+        // }
+        
+        return $_aParams;
+    }
         /**
-         * @param $oUnitOption
-         *
-         * @return string
-         * @since   3.9.0
+         * @param   boolean         $bParamterAllowed       Whether the sort parameter is allowed or not. When the search index is set to `All` or `Blended`, this is not allowed.
+         * @return  null|string
+         * @since   3.5.5
+         * @remark  when the search index is All, sort cannot be specified
          */
-        private function ___getParameterSortBy( $oUnitOption ) {
+        private function ___getParameterOfSort( $oUnitOption, $bParamterAllowed ) {
+
+            if ( ! $bParamterAllowed ) {
+                return null;
+            }
+
+            // Backward compatibility for v3.5.4 or below.
+            // In recent Amazon Advertising API, `inversepricerank` is not supported in many locales.
             $_sSortOption = $oUnitOption->get( 'Sort' );
-            if ( in_array( $_sSortOption, array( 'price', 'pricerank' ) ) ) {
-                return 'Price:LowToHigh';
+            if ( 'pricerank' == $_sSortOption ) {
+                return 'price';
             }
-            if ( in_array( $_sSortOption, array( '-price', 'inversepricerank' ) ) ) {
-                return 'Price:HighToLow';
-            }
-            // sales rank option is not available in PA-API 5.0
-            if ( in_array( $_sSortOption, array( 'relevancerank', 'salesrank' ) ) ) {
-                return 'Relevance';
-            }
-            if ( in_array( $_sSortOption, array( 'reviewrank' ) ) ) {
-                return 'AvgCustomerReviews';
+            if ( 'inversepricerank' == $_sSortOption ) {
+                return '-price';
             }
             return $_sSortOption;
-        }
 
+        }
 
     /**
      * Constructs products array to be parsed in the template.
@@ -539,11 +548,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @return      array
      */
     protected function getProducts( $aResponse ) {
-        return $this->_getProductsFromResponseItems(
-            $this->getElementAsArray( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ), array() ),  // Items
+        return $this->___getProductsFromResponseItems(
+            $this->___getItemsExtracted( $aResponse ),          // items
             strtoupper( $this->oUnitOption->get( 'country' ) ), // locale
             $this->oUnitOption->get( 'associate_id' ),          // associate id
-            $this->getElement( $aResponse, array( '_ResponseDate' ) ), // response date - no need to adjust for GMT, will be done later
+            $this->___getAPIResponseDate( $aResponse ),         // response date
             $this->oUnitOption->get( 'count' )
         );
     }
@@ -554,18 +563,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          * @param       string  $_sResponseDate
          * @since       3.5.0
          * @return      array
-         * @since       3.9.0   Changed the scope to protected.
          */
-        protected function _getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_sResponseDate, $_iCount ) {
+        private function ___getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_sResponseDate, $_iCount ) {
 
-            $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
-            $_aProducts           = array();
+            $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
+            $_aProducts     = array();
 
-            $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
-            $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );            
-            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
-            $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );            
-            
             // First Iteration - Extract displaying ASINs.
             foreach ( $aItems as $_iIndex => $_aItem ) {
 
@@ -577,8 +580,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $_aItem         = $this->___getItemStructured( $_aItem );
                     $_sTitle        = $this->___getTitle( $_aItem );
                     $_sThumbnailURL = $this->___getThumbnailURL( $_aItem );
-                    $_sProductURL   = $this->getProductLinkURLFormatted( rawurldecode( $_aItem[ 'DetailPageURL' ] ), $_aItem[ 'ASIN' ] );
-                    $_sContent      = $this->getContent( $_aItem );
+                    $_sProductURL   = $this->getProductLinkURLFormatted(
+                        rawurldecode( $_aItem[ 'DetailPageURL' ] ),
+                        $_aItem[ 'ASIN' ]
+                    );
+                    $_sContent      = $this->_getContents( $_aItem );
                     $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
     
                     // At this point, update the black&white lists as this item is parsed.
@@ -599,11 +605,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 } catch ( Exception $_oException ) {
                     continue;   // skip
                 }
-
-                // @deprecated 3.9.0 $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
-                $_aASINLocaleCurLang    = $_aProduct[ 'ASIN' ] . '|' . strtoupper( $_sLocale ) . '|' . $_sCurrency . '|' . $_sLanguage;
-                $_aASINLocales[ $_aASINLocaleCurLang ] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
-                
+    
+                $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
                 $_aProducts[]    = $_aProduct;
                 
                 // Max Number of Items 
@@ -692,7 +695,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return  string
              */
             private function ___getTitle( $aItem ) {
-                $_sTitle = $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
+                $_sTitle = $this->getElement( $aItem, array( 'ItemAttributes', 'Title' ), '' );
                 $_sTitle = $this->_getTitleSanitized( $_sTitle );
                 $this->___checkTitleBlocked( $_sTitle );
                 return $_sTitle;
@@ -713,7 +716,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since       3.5.0
              */
             private function ___getThumbnailURL( $aItem ) {
-                $_sThumbnailURL = $this->getElement( $aItem, array( 'Images', 'Primary', 'Medium', 'URL' ), '' );
+                $_sThumbnailURL = $this->getElement( $aItem, array( 'MediumImage', 'URL' ), '' );
 
                 /**
                  * Occasionally, the `MediumImage` element (main thumbnail image) does not exist but sub-images do.
@@ -722,7 +725,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  * @since  3.5.2
                  */
                 if ( empty( $_sThumbnailURL ) ) {
-                    $_sThumbnailURL = $this->getElement( $aItem, array( 'Images', 'Variants', '0', 'Medium', 'URL' ), '' );
+                    $_sThumbnailURL = $this->getElement( $aItem, array( 'ImageSets', 'ImageSet', '0', 'MediumImage', 'URL' ), '' );
                 }
 
                 $this->___checkImageAllowed( $_sThumbnailURL );
@@ -766,7 +769,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.5.0
              * @return array
              * @throws Exception
-             * @compat PA-API5
              */
             private function ___getProduct(
                 $_aItem,
@@ -795,43 +797,38 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $this->oUnitOption->get( 'image_size' ),
                         strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
                     ),
-                    'author'             => $this->___getAuthors( $_aItem ),
-// @todo 3.9.0 implement manufacturer, brand, etc.
-                    'updated_date'       => $_sResponseDate, // not GMT aware at this point. Will be formatted later in the ItemFormatter class.
-                    'release_date'       => $this->getElement(
+                    'author'             => isset( $_aItem[ 'ItemAttributes' ][ 'Author' ] )
+                        ? implode( ', ', ( array ) $_aItem[ 'ItemAttributes' ][ 'Author' ] )
+                        : '',
+                    // 'manufacturer' => $_aItem[ 'ItemAttributes' ][ 'Manufacturer' ],
+                    'category'           => $this->___getCategories( $_aItem ),
+                    // Either the released date or the published date. @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/CHAP_response_elements.html#PublicationDate
+                    'release_date'       => $this->getElement(  // 3.8.0
                         $_aItem,
-                        array( 'ItemInfo', 'ContentInfo', 'PublicationDate', 'DisplayValue' ),
-                        ''
+                        array( 'ItemAttributes', 'ReleaseDate' ),
+                        $this->getElement(
+                            $_aItem,
+                            array( 'ItemAttributes', 'PublicationDate' )
+                        )
                     ),
+                    'updated_date'       => $_sResponseDate,
                     'is_adult'           => ( boolean ) $this->getElement(
                         $_aItem,
-                        array( 'ItemInfo', 'ProductInfo', 'IsAdultProduct', 'DisplayValue' ),
+                        array( 'ItemAttributes', 'IsAdultProduct' ),
                         false
                     ),
-                    // Not all items have top level sales rank information available. Hence, the WebsiteSalesRank information is not present for all items.
-                    // @see https://webservices.amazon.com/paapi5/documentation/use-cases/organization-of-items-on-amazon/browse-nodes/browse-nodes-and-sales-ranks.html#how-to-get-salesrank-information-for-an-item
-                    'sales_rank'          => $this->getElement(
-                        $_aItem,
-                        array( 'BrowseNodeInfo', 'WebsiteSalesRank', 'SalesRank' ), 0
-                    ), // 3.8.0
-                    'is_prime'            => $this->isPrime( $_aItem ),
-                    'feature'             => $this->___getFeatures( $_aItem ),
-                    'category'            => $this->___getCategories( $_aItem ),
 
-                    // These must be retrieved separately
                     'review'              => '',  // customer reviews
                     'rating'              => '',  // 3+
-
-                    // These will be assigned below
-                    'image_set'           => '',
                     'button'              => '',  // 3+
-
-                    // @deprecated 3.9.0 PA-API 5 does not support below
+                    'image_set'           => '',  // 3+
                     'editorial_review'    => '',  // 3+ // @todo add a format method for editorial reviews.
-                    'similar_products'    => '',
-
+                    'similar_products'    => '',  // $this->getElement( $_aItem, 'SimilarProducts' ),
+                    'feature'             => $this->___getFeatures( $_aItem ),
+                    'sales_rank'          => $this->getElement( $_aItem, array( 'SalesRank' ), 0 ), // 3.8.0
+                    'is_prime'            => ( boolean ) $this->getElement( $_aItem, array( 'Offers', 'Offer', 'OfferListing', 'IsEligibleForPrime' ), 0 ), // 3.8.11
                 )
-                + $this->getPrices( $_aItem )
+                + $this->___getPrices( $_aItem )
                 + $_aItem;
 
                 // 3.8.11 Retrieve the images directly from the response rather than the custom database table
@@ -902,23 +899,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     
             }
                 /**
-                 * Extracts authors of an item
-                 * @param array $aItem
-                 * @since   3.9.0
-                 * @return  string
-                 */
-                private function ___getAuthors( array $aItem ) {
-                    $_aAuthors = array();
-                    $_aContributors = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'ByLineInfo', 'Contributors' ), array() );
-                    foreach( $_aContributors as $_aContributor ) {
-                        $_sAuthor = $this->getElement( $_aContributor, array( 'Role' ) );
-                        if ( 'Author' === $_sAuthor ) {
-                            $_aAuthors[] = $this->getElement( $_aContributor, array( 'Name' ) );
-                        }
-                    }
-                    return implode( ", ", $_aAuthors );
-                }
-                /**
                  * @since   3.9.0
                  */
                 private function ___getPrimeMark( array $aProduct ) {
@@ -950,13 +930,63 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 }
 
             /**
+             * Returns the API response date which must be inserted in the advertisement output for the API agreements.
+             * @see         https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html/ref=amb_link_83957651_1?ie=UTF8&rw_useCurrentProtocol=1&pf_rd_m=ATVPDKIKX0DER&pf_rd_s=assoc-center-1&pf_rd_r=&pf_rd_t=501&pf_rd_p=&pf_rd_i=assoc-api-detail-5-v2
+             * @see         (0) in the above link.
+             * @since       3.2.0
+             * @return      string 
+             */
+            private function ___getAPIResponseDate( $aResponse ) {
+                
+                $_aArguments = $this->getElementAsArray( 
+                    $aResponse,
+                    array( 'OperationRequest', 'Arguments', 'Argument' )
+                );
+                foreach( $_aArguments as $_aArgument ) {
+                    $_sTimeStampKey = $this->getElement(
+                        $_aArgument,
+                        array( '@attributes', 'Name' )
+                    );
+                    if ( 'Timestamp' === $_sTimeStampKey ) {
+                        return $this->getElement(
+                            $_aArgument,
+                            array( '@attributes', 'Value' )
+                        );
+                    }
+                }
+                return '';
+                
+            }      
+          
+            /**
+             * Extracts items array from the API response array.
+             * @since       3
+             * @return      array
+             */
+            private function ___getItemsExtracted( $aResponse ) {
+    
+                $_aItems = $this->getElement(
+                    $aResponse, // subject array
+                    array( 'Items', 'Item' ), // dimensional keys
+                    $aResponse  // default
+                );
+                
+                // When only one item is found, the item elements are not contained in an array. So contain it.
+                if ( isset( $_aItems[ 'ASIN' ] ) ) {
+                    $_aItems = array( $_aItems ); 
+                }
+                return $_aItems;
+                
+            }
+
+            /**
              * @return  string
              * @since   3.8.11
              */
             private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
-//                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%image_set%', ) ) ) {
-//                    return '';
-//                }
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%image_set%', ) ) ) {
+                    return '';
+                }
                 $_aImages = $this->getImageSet( $aItem );
                 return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages );
             }
@@ -968,10 +998,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
              */
             private function ___getCategories( array $aItem ) {
-//                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%category%', ) ) ) {
-//                    return '';
-//                }
-                $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%category%', ) ) ) {
+                    return '';
+                }
+                $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodes', ) );
                 return $this->getCategories( $_aNodes );
             }
 
@@ -982,16 +1012,108 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
              */
             private function ___getFeatures( array $aItem ) {
-                $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
+                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%feature%', ) ) ) {
+                    return '';
+                }
+                $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemAttributes', 'Feature' ) );
                 return $this->getFeatures( $_aFeatures );
             }
 
+            /**
+             * Returns prices of the product as an array.
+             * @since       2.1.2
+             * @return      array
+             */
+            private function ___getPrices( array $aItem ) {
+                
+                $_sProperPrice      = $this->getElement(
+                    $aItem,
+                    array( 'ItemAttributes', 'ListPrice', 'FormattedPrice' ),
+                    ''
+                );
+                $_sDiscountedPrice  = $this->getElement(
+                    $aItem,
+                    array( 'Offers', 'Offer', 'OfferListing', 'Price', 'FormattedPrice' ),
+                    ''
+                );
+                $_sDiscountedPrice  = $_sProperPrice && $_sDiscountedPrice === $_sProperPrice
+                    ? ''
+                    : $_sDiscountedPrice;
+                $_sProperPrice      = $_sDiscountedPrice
+                    ? "<s>" . $_sProperPrice . "</s>"
+                    : $_sProperPrice;
+
+                $_aPrices = array(
+                    'proper_price'       => $_sProperPrice  // 3.8.11 changed from `price`
+                        ? "<span class='amazon-product-price-value'>"  
+                               . "<span class='proper-price'>" . $_sProperPrice . "</span>"
+                            . "</span>"
+                        : "",
+                    'discounted_price'   => $_sDiscountedPrice
+                        ? "<span class='amazon-product-discounted-price-value'>" 
+                                . $aItem[ 'Offers' ][ 'Offer' ][ 'OfferListing' ][ 'Price' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                    'lowest_new_price'   => isset( $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ] )
+                        ? "<span class='amazon-product-lowest-new-price-value'>"
+                                . $aItem[ 'OfferSummary' ][ 'LowestNewPrice' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                    'lowest_used_price'  => isset( $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ] )
+                        ? "<span class='amazon-product-lowest-used-price-value'>"
+                                . $aItem[ 'OfferSummary' ][ 'LowestUsedPrice' ][ 'FormattedPrice' ]
+                            . "</span>"
+                        : '',
+                );
+
+                /**
+                 * Price is retrieved directly from the API response.
+                 * @since   3.8.11
+                 */
+                $_inLowestNew   = $this->getElement(
+                    $aItem,
+                    array( 'OfferSummary', 'LowestNewPrice', 'Amount' ),
+                    null    // here the default `null` is important as there is an offered price as `0`
+                );
+                $_iProperPrice  = AmazonAutoLinks_Unit_Utility::getPriceByKey(
+                    $aItem,
+                    'Amount', // key
+                    0  // default - when not found
+                );
+                $_aOffers       = AmazonAutoLinks_Unit_Utility::getOffers( $aItem, $_iProperPrice );
+                $_inDiscounted  = AmazonAutoLinks_Unit_Utility::getDiscountedPrice( $_aOffers, $_iProperPrice );
+                $_sProperPriceFormatted = AmazonAutoLinks_Unit_Utility::getPriceByKey(
+                    $aItem,
+                    'FormattedPrice',
+                    ''  // default
+                );
+                $_sDiscountedFormatted  = AmazonAutoLinks_Unit_Utility::getFormattedDiscountPrice(
+                    $_aOffers,
+                    $_iProperPrice,
+                    $_sProperPriceFormatted,
+                    $_inDiscounted
+                );
+                $_sLowestNewFormatted   = $this->getElement(
+                    $aItem,
+                    array( 'OfferSummary', 'LowestNewPrice', 'FormattedPrice' ),
+                    ''
+                );
+                $_aPrices[ 'price' ] = AmazonAutoLinks_Unit_Utility::getPrice(
+                    $_sProperPrice,         // string
+                    $_inDiscounted,         // integer|null
+                    $_inLowestNew,          // integer|null
+                    $_sDiscountedFormatted, // string
+                    $_sLowestNewFormatted   // string
+                );
+                return $_aPrices;
+
+            }
+    
             /**
              * Returns the formatted product meta HTML block.
              * 
              * @since       2.1.1
              * @return      string
-             * @todo        3.9.0   Add `brand`, `manufacturer` etc
              */
             private function ___getProductMetaFormatted( array $aProduct ) {
                 
@@ -1033,10 +1155,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * 
              * @since       2.1.1
              * @return      string
-             * @since       3.9.0       Removed the `meta` element.
              */        
             private function ___getProductDescriptionFormatted( array $aProduct ) {
-                return "<div class='amazon-product-description'>"
+                return $aProduct[ 'meta' ] 
+                    . "<div class='amazon-product-description'>" 
                         . $aProduct[ 'description' ] 
                     . "</div>";
             }

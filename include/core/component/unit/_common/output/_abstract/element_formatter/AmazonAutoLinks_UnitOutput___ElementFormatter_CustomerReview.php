@@ -21,7 +21,15 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview extends Amazo
      * @since       3.5.0
      */
     public function get() {
-        
+
+        // Avoid accessing DB as it triggers a background routine when a value is not set
+        if ( ! ( boolean ) $this->hasCustomVariable(
+            $this->_oUnitOption->get( 'item_format' ),
+            array( '%review%' )
+        ) ) {
+            return '';
+        }
+
         $_snEncodedHTML = $this->_getCell( 'customer_reviews' );
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(
@@ -36,10 +44,24 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview extends Amazo
          * @since   3.5.0
          * @return  string
          */
-        private function ___getFormattedOutput( $_snEncodedHTML ) {
+        private function ___getFormattedOutput( $_snEncodedHTML, $sLocale='', $sAssociateID='' ) {
             if ( ! $_snEncodedHTML ) {
                 return '';
-            }            
+            }
+            $_oScraper  = new AmazonAutoLinks_ScraperDOM_CustomerReview2_Each(
+                $_snEncodedHTML,
+                true,
+                $this->_oUnitOption->get( 'customer_review_max_count' ),
+                $this->_oUnitOption->get( 'customer_review_include_extra' )
+            );
+            $_sReviews = $_oScraper->get( $this->_sLocale, $this->_sAssociateID );
+            if ( $_sReviews ) {
+                return "<div class='amazon-customer-reviews'>"
+                        . $_sReviews
+                    . "</div>";
+            }
+
+            // Backward compatibility with 3.8.x or below
             $_oScraper  = new AmazonAutoLinks_ScraperDOM_CustomerReview_Each(
                 $_snEncodedHTML,
                 true,

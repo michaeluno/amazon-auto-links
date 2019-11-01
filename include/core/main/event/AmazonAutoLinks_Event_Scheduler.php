@@ -72,6 +72,7 @@ class AmazonAutoLinks_Event_Scheduler {
      * @action      schedule        aal_action_api_get_customer_review
      * @since       unknown
      * @since       3.5.0           Renamed from `getCustomerReviews()` as there was a method with the same name.
+     * @deprecated  3.9.0       No longer works with PA-API5
      */
     static public function scheduleCustomerReviews( $sURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenew ) {
 
@@ -92,6 +93,25 @@ class AmazonAutoLinks_Event_Scheduler {
         return true;
     
     }
+    /**
+     * Schedule a background task to retrieve customer reviews.
+     *
+     * @action      schedule        aal_action_api_get_customer_review2
+     * @since       3.9.0
+     */
+    static public function scheduleCustomerReviews2( $sURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sCurrency, $sLanguage ) {
+
+        $_bScheduled = self::_scheduleTask(
+            'aal_action_api_get_customer_review2',  // action name
+            array( $sURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sCurrency, $sLanguage )
+        );
+        if ( ! $_bScheduled ) {
+            return false;
+        }
+        AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+        return true;
+
+    }
 
     /**
      * @var array
@@ -108,8 +128,10 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3.7.0       Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
      * @since       3.7.7       Changed the return value to `void` as no calls use it and this method is going to schedule multiple items at once.
      * @since       3.8.12      Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
+     * @since       3.9.0       Changed the first parameter to be associate_id|locale|currency|language.
+     * @since       3.9.0       Removed the `$sLocale` parameter
      */
-    static public function scheduleProductInformation( $sAssociateID, $sASIN, $sLocale, $iCacheDuration, $bForceRenew=false, $sItemFormat='', $aAPIRawItem=array() ) {
+    static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='', $aAPIRawItem=array() ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
@@ -120,11 +142,13 @@ class AmazonAutoLinks_Event_Scheduler {
          * These items need to be grouped by Associate ID + Locale as API requests cannot be done at once if these are different.
          * The user may be setting different Associate IDs between two units shown in one page. The same applies to the locale.
          */
-        $_sAssociateIDLocale = $sAssociateID  . '|' . $sLocale;
-        if ( ! isset( self::$___aScheduledProductInformation[ $_sAssociateIDLocale ] ) ) {
-            self::$___aScheduledProductInformation[ $_sAssociateIDLocale ] = array();
+        // @deprecated
+//        $_sAssociateIDLocale = $sAssociateID  . '|' . $sLocale;
+        if ( ! isset( self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] ) ) {
+            self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] = array();
         }
-        self::$___aScheduledProductInformation[ $_sAssociateIDLocale ][ $sASIN ] = func_get_args();
+        $_aParameters = func_get_args();
+        self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = $_aParameters;
 
         if ( ! self::$___bCalledScheduleProductInformation ) {
             add_action(
@@ -143,8 +167,8 @@ class AmazonAutoLinks_Event_Scheduler {
          */
         static public function _replyToScheduleProductsInformation() {
 
-            foreach( self::$___aScheduledProductInformation as $_sAssociateIDLocale => $_aFetchingItems ) {
-                self::___scheduleProductInformationAPIRequest( $_sAssociateIDLocale, $_aFetchingItems );
+            foreach( self::$___aScheduledProductInformation as $_sAssociateIDLocaleCurLang => $_aFetchingItems ) {
+                self::___scheduleProductInformationAPIRequest( $_sAssociateIDLocaleCurLang, $_aFetchingItems );
             }
             AmazonAutoLinks_Shadow::see();  // loads the site in the background
 
@@ -154,7 +178,7 @@ class AmazonAutoLinks_Event_Scheduler {
              * @param array $aParameters
              * @since   3.7.7
              */
-            static private function ___scheduleProductInformationAPIRequest( $sAssociateIDLocale, array $aFetchingItems ) {
+            static private function ___scheduleProductInformationAPIRequest( $sAssociateIDLocaleCurLang, array $aFetchingItems ) {
 
                 // Sort the array in order to prevent unnecessary look-ups due to different orders
                 // as `wp_next_scheduled()` stores and identify actions based on the serialized passed arguments.
@@ -163,9 +187,11 @@ class AmazonAutoLinks_Event_Scheduler {
                 // Divide items by 10 as the `ItemLookup` operation API parameter accepts up to 10 items at a time.
                 $_aChunks      = array_chunk( $aFetchingItems, 10 );
 
-                $_aParts       = explode( '|', $sAssociateIDLocale );
+                $_aParts       = explode( '|', $sAssociateIDLocaleCurLang );
                 $_sAssociateID = $_aParts[ 0 ];
                 $_sLocale      = $_aParts[ 1 ];
+                $_sCurrency    = $_aParts[ 2 ];
+                $_sLanguage    = $_aParts[ 3 ];
                 /**
                  * At this point the chunk array `$_aChunks` looks like this.
                  * The keys will be converted to numeric index.
@@ -173,13 +199,13 @@ class AmazonAutoLinks_Event_Scheduler {
                  * ```
                  * array(
                  *      0 => array(
-                 *          0 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+                 *          0 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),
                  *          1 ...
                  *          2 ...
-                 *          10 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+                 *          10 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),
                  *      ),
                  *      1 => array(
-                 *          0 => array( 0 => $sAssociateID, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+                 *          0 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),
                  *          1 ...
                  *          2 ...
                  *      ),
@@ -191,7 +217,9 @@ class AmazonAutoLinks_Event_Scheduler {
                         'aal_action_api_get_products_info',  // action name
                         $_aItems,
                         $_sAssociateID,
-                        $_sLocale
+                        $_sLocale,
+                        $_sCurrency,    // 3.9.0
+                        $_sLanguage     // 3.9.0
                     );
                 }
             }

@@ -224,7 +224,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             
             // 3.3.0+ (boolean) Whether to fetch similar products. The background routine of retrieving similar products need to set this `false`.
             '_search_similar_products'      => true,        
-            
+
+            // @deprecated 3.9.0    PA-API 5 does not support similarity look-up
             'similar_product_image_size'    => 100,
             'similar_product_max_count'     => 10,
             

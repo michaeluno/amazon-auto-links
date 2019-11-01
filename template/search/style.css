@@ -87,6 +87,21 @@
 .amazon-products-container-search .amazon-customer-reviews {
     word-break: break-all;
 }
+.amazon-products-container-search .crIFrameNumCustReviews {
+    display: inline-block;
+}
+.amazon-products-container-search .amazon-customer-reviews .review-date {
+    font-size: smaller;
+}
+.amazon-products-container-search .amazon-customer-reviews .review-title {
+    font-weight: bold;
+}
+.amazon-products-container-search .amazon-customer-reviews .review-image-tile {
+    display: inline-block;
+    max-height: 140px;
+    max-width: 200px;
+    margin: 0.2em;
+}
 /* Rating stars */
 .amazon-products-container-search span.asinReviewsSummary > a > img,
 .amazon-products-container-search .amazon-customer-reviews img,
@@ -111,6 +126,9 @@
     display: inline-block;
     /* In some themes the rating number and the star image do not align. This is for the fix.  */
     vertical-align: middle;
+}
+.amazon-products-container-search .crIFrameNumCustReviews .crAvgStars {
+    font-size: small;
 }
 
 /* Sub-images */
@@ -229,3 +247,4 @@
     position: relative;
     top: 2px;
 }
+

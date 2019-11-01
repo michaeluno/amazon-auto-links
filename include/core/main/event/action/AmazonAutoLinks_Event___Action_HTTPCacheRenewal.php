@@ -102,7 +102,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
 
             // It is expired. So schedule a task that renews the cache in the background.
             $_bScheduled = $this->scheduleSingleWPCronTask(
-                $this->_sActionHookName,
+                $this->_sActionHookName,    // aal_action_http_cache_renewal
                 array(
                     $aCache[ 'request_uri' ],
                     $iCacheDuration,

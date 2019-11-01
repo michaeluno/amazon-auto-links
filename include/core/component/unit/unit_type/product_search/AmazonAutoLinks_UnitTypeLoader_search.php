@@ -79,7 +79,7 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * @since       3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return 'ItemSearch' === $this->_getOperationArgument( $aArguments )
+        return in_array( $this->_getOperationArgument( $aArguments ), array( 'ItemSearch', 'SearchItems' ) ) // ItemSearch is for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }

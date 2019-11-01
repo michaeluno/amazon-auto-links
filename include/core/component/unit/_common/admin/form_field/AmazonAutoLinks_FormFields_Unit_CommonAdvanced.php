@@ -54,31 +54,32 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'title'             => __( 'Max Number of Sub-images', 'amazon-auto-links' ),
                 'type'              => 'number',
                 'default'            => 20,
-            ),       
-            array(
-                'field_id'          => $sFieldIDPrefix . 'similar_product_image_size',
-                'type'              => 'number',            
-                'title'             => __( 'Max Image Size for Similar Product Thumbnails', 'amazon-auto-links' ),
-                'tip'               => __( 'Set the maximum width or height for similar product thumbnails.', 'amazon-auto-links' )
-                    . ' ' . __( 'Set 0 for no image.', 'amazon-auto-links' )
-                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>100</code>',                    
-                'after_input'       => '  pixel(s)',
-                'attributes'        => array(
-                    'max'               => 500,
-                ),                
-                'default'           => 120,
             ),
-            array(
-                'field_id'          => $sFieldIDPrefix . 'similar_product_max_count',
-                'title'             => __( 'Max number of Similar Products', 'amazon-auto-links' ),
-                'type'              => 'number',
-                'attributes'        => array(
-                    'max'               => 10,
-                    'min'               => 0,
-                    'step'              => 1,
-                ),         
-                'default'            => 10,
-            ),                   
+// @depercated  3.9.0   PA-API 5 does not support similarity look-up
+//            array(
+//                'field_id'          => $sFieldIDPrefix . 'similar_product_image_size',
+//                'type'              => 'number',
+//                'title'             => __( 'Max Image Size for Similar Product Thumbnails', 'amazon-auto-links' ),
+//                'tip'               => __( 'Set the maximum width or height for similar product thumbnails.', 'amazon-auto-links' )
+//                    . ' ' . __( 'Set 0 for no image.', 'amazon-auto-links' )
+//                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>100</code>',
+//                'after_input'       => '  pixel(s)',
+//                'attributes'        => array(
+//                    'max'               => 500,
+//                ),
+//                'default'           => 120,
+//            ),
+//            array(
+//                'field_id'          => $sFieldIDPrefix . 'similar_product_max_count',
+//                'title'             => __( 'Max number of Similar Products', 'amazon-auto-links' ),
+//                'type'              => 'number',
+//                'attributes'        => array(
+//                    'max'               => 10,
+//                    'min'               => 0,
+//                    'step'              => 1,
+//                ),
+//                'default'            => 10,
+//            ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'customer_review_max_count',
                 'title'             => __( 'Max Number of Customer Reviews', 'amazon-auto-links' ),

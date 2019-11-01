@@ -48,7 +48,7 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
              * This action is used to update the plugin options as well.
              */
             do_action( 'aal_action_update_plugin_database_table', $sTableName, $_sCurrentVersion, $sVersionTo );
-            if ( version_compare($_sCurrentVersion, $sVersionTo, '>=')) {
+            if ( version_compare( $_sCurrentVersion, $sVersionTo, '>=') ) {
                 throw new Exception( __( 'The database table is already up to date.', 'amazon-auto-links' ) );
             }
 
@@ -57,4 +57,5 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
             $_aResult       = $_oTable->install( true );
             return empty( $_aResult ) ? false : true;
         }
+
 }

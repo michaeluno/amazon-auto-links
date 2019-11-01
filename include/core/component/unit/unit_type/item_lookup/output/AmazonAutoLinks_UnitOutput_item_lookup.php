@@ -27,24 +27,42 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * @since       3.2.0
      */
     public $sSearchTermKey = 'ItemId';
-    
+
+    /**
+     * The array element key name that containes `Items` element.
+     * PA-API 5 operations such as `GetItems`, `SearchItems` have different key names such as `ItemsResult` abd `SearchResult`.
+     * @var string
+     * @since   3.9.0
+     */
+    protected $_sResponseItemsParentKey = 'ItemsResult';
+
+
     /**
      * Represents the array structure of the API request arguments.
      * @since            2.0.2
+     * @see https://webservices.amazon.com/paapi5/documentation/get-items.html
      */
     public static $aStructure_APIParameters = array(    
-        'Operation'             => 'ItemLookup',
-        'Condition'             => 'New',
-        'IdType'                => null,
-        'IncludeReviewsSummary' => null,
-        'ItemId'                => null,
-        'MerchantId'            => null,
-        'RelatedItemPage'       => null,
-        'RelationshipType'      => null,
-        'SearchIndex'           => null,
-        'TruncateReviewsAt'     => null,
-        'VariationPage'         => null,
-        'ResponseGroup'         => null,
+        'Operation'             => 'GetItems',  // string
+        'Condition'             => 'Any',       // string default: Any
+        'ItemIdType'            => null,    // string   default: ASIN
+        'ItemIds'               => null,    // array
+        'Merchant'              => null,    // string
+        'OfferCount'            => null,    // integer
+        'Resources'             => null,    // array
+        'CurrencyOfPreference'  => null,    // string
+        'LanguagesOfPreference' => null,    // array
+        // @deprecated 3.9.0    The below parameters are not supported in PA-API 5
+//        'IdType'                => null,
+//        'IncludeReviewsSummary' => null,
+//        'ItemId'                => null,
+//        'MerchantId'            => null,
+//        'RelatedItemPage'       => null,
+//        'RelationshipType'      => null,
+//        'SearchIndex'           => null,
+//        'TruncateReviewsAt'     => null,
+//        'VariationPage'         => null,
+//        'ResponseGroup'         => null,
     );
 
     /**
@@ -61,6 +79,8 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             'raw'   // default
         );
 
+        $_aProducts = parent::getProducts( $aResponse );
+
         /*
          * 'title'             => __( 'Title', 'amazon-auto-links' ),
          * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
@@ -68,9 +88,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
          * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
          */
         $_sMethodName = "_getItemsSorted_{$_sSortType}";
-        return $this->{$_sMethodName}(
-            parent::getProducts( $aResponse )
-        );
+        return $this->{$_sMethodName}( $_aProducts );
 
     }
         /**
@@ -118,27 +136,19 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * @since            2.0.2
      */
     protected function getRequest( $iCount ) {
-        
-        $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI( 
-            $this->oUnitOption->get( 'country' ), 
+
+        $_oAPI = new AmazonAutoLinks_PAAPI50(
+            $this->oUnitOption->get( 'country' ),
             $this->oOption->get( 'authentication_keys', 'access_key' ),
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
             $this->oUnitOption->get( 'associate_id' )
         );
-
-        /**
-         * Perform the search for the first page regardless the specified count (number of items).
-         * Keys with an empty value will be filtered out when performing the request.
-         */
         $_aResponse = $_oAPI->request(
-            $this->getAPIParameterArray( 
-                $this->oUnitOption->get( 'Operation' ) 
-            ),
+            $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
             $this->oUnitOption->get( 'cache_duration' ),
             $this->oUnitOption->get( '_force_cache_renewal' )
         );
-        
-        $_aResponse = $this->___getValidResponse( $_aResponse );
+
         return $_aResponse;
                  
     }
@@ -147,6 +157,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
          * In that case drop those items.
          * @since       3.2.1
          * @return      array
+         * @deprecated  3.9.0
          */
         private function ___getValidResponse( $aResponse ) {
             
@@ -180,39 +191,33 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
         }
     
     /**
-     * 
-     * 'Operation' => 'ItemSearch',    // ItemSearch, ItemLookup, SimilarityLookup
+     *
      * @see              http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
      * @since            2.0.2
      */
-    protected function getAPIParameterArray( $sOperation='ItemLookup', $iItemPage=null ) {
+    protected function getAPIParameterArray( $sOperation='GetItems', $iItemPage=null ) {
 
-        // $this->arrArgs = $this->arrArgs + self::$aStructure_ItemLookup;
         $_aUnitOptions = $this->oUnitOption->get()
-            + self::$aStructure_APIParameters;        
-        $aParams = array(
-            'Operation'             => $sOperation,
-            'Condition'             => $_aUnitOptions['Condition'],    // (optional) Used | Collectible | Refurbished, All
-            'IdType'                => $_aUnitOptions['IdType'],    // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
-            'IncludeReviewsSummary' => "True",        // (optional)
-            'ItemId'                => $_aUnitOptions['ItemId'],    // (required)  If ItemIdis an ASIN, a SearchIndex cannot be specified in the request.
-            // 'RelatedItemPage' => null,    // (optional) This optional parameter is only valid when the RelatedItems response group is used.
-            // 'RelationshipType' => null,    // (conditional)    This parameter is required when the RelatedItems response group is used. 
-            'SearchIndex'           => $_aUnitOptions['SearchIndex'],    // (conditional) see: http://docs.aws.amazon.com/AWSECommerceService/latest/DG/APPNDX_SearchIndexValues.html
-            // 'TruncateReviewsAt' => 1000, // (optional)
-            // 'VariationPage' => null, // (optional)
-            'ResponseGroup'         => 'Large', // (optional)
+            + self::$aStructure_APIParameters;
+        $_aPayload = array(
+            'Operation'             => 'ItemLookup' === $sOperation
+                ? 'GetItems' : $sOperation,
+            'Condition'             => 'All' === $_aUnitOptions[ 'Condition' ]
+                ? 'Any' : $_aUnitOptions[ 'Condition' ],    // (optional) Used | Collectible | Refurbished, Any
+            'ItemIds'               => explode( ',', $_aUnitOptions[ 'ItemId' ] ),
+            'Merchant'              => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
+                ? 'Amazon'
+                : null,
+            'CurrencyOfPreference'  => $_aUnitOptions[ 'CurrencyOfPreference' ]
+                ? $_aUnitOptions[ 'CurrencyOfPreference' ]
+                : null,
+            'LanguagesOfPreference' => $_aUnitOptions[ 'LanguagesOfPreference' ]
+                ? array( $_aUnitOptions[ 'LanguagesOfPreference' ] )
+                : null,
+            'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );
+        return $_aPayload;
 
-        if ( 'ASIN' === $_aUnitOptions['IdType'] ) {
-            unset( $aParams['SearchIndex'] );
-        }
-
-        $_aAPIParameters = 'Amazon' === $_aUnitOptions['MerchantId']
-            ? $aParams + array( 'MerchantId' => $_aUnitOptions['MerchantId'] )    // (optional) 'Amazon' restrict the returned items only to be soled by Amazon.
-            : $aParams;
-            
-        return $_aAPIParameters;
         
     }
     

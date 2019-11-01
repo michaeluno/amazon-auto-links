@@ -56,10 +56,12 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
         // @see https://wordpress.org/support/topic/problem-with-title-width/
         $_aSearchKeywords = apply_filters( 'aal_filter_contextual_keywords', $_aSearchKeywords );
 
+        $_aArguments = $this->___aArguments;
+        unset( $_aArguments[ 'title' ] );   // this is a widget title field value and causes a conflict with the PA-API payload argument.
         return AmazonAutoLinks(
             array(
                 'Keywords'         => implode( ',', $_aSearchKeywords ),
-                'Operation'        => 'ItemSearch',
+                'Operation'        => 'SearchItems',
 
                 /**
                  * Fixed a bug that contextual widgets did not return outputs
@@ -83,7 +85,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
                 // '_no_outer_container'  => true,  // @todo figure out why this does not take effect.
 
             )
-            + $this->___aArguments,
+            + $_aArguments,
             false // echo or output
         );
 

@@ -80,6 +80,7 @@ class AmazonAutoLinks_Event {
                             'aal_action_api_get_product_info',
                             'aal_action_api_get_products_info', // 3.7.7+
                             'aal_action_api_get_customer_review',
+                            'aal_action_api_get_customer_review2',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',
                             'aal_action_delete_expired_caches', // 3.4.0+
@@ -89,6 +90,7 @@ class AmazonAutoLinks_Event {
                             'aal_action_api_get_product_info',
                             'aal_action_api_get_products_info', // 3.7.7+
                             'aal_action_api_get_customer_review',
+                            'aal_action_api_get_customer_review2',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',
                         )

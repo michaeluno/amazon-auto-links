@@ -5,7 +5,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2018 Michael Uno
+ * Copyright (c) 2013-2019 Michael Uno
  */
  
 /**
@@ -22,7 +22,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
     private $___sRequestType           = 'api';
     private $___aPayload               = array(
         'PartnerType'   => 'Associates',
-        'Marketplace'   => 'www.amazon.com',
+        // 'Marketplace'   => 'www.amazon.com',
     );
     private $___sHTTPMethod            = 'POST';
 
@@ -72,10 +72,13 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         $this->___sRequestType = 'api50_test';
         $_aPayload    = array(
                 'Keywords'      => 'WordPress',
-                'ItemPage'      => 71,
+//                'ItemPage'      => 1,
                 'ItemCount'     => 1,
                 'Operation'     => 'SearchItems',
+//                'ItemIds' => array( '2016212594', ),
+//                'Operation' => 'GetItems',
                 // 'LanguagesOfPreference' => array( 'en_US', ),
+                'Resources'     => array(),
             ) + $this->___aPayload;
 
         $_aResponse = $this->request( $_aPayload, 60 * 10 );
@@ -83,31 +86,12 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         if ( isset( $_aResponse[ 'Error' ] ) ) {
             $_sError = $this->getElement( $_aResponse, array( 'Error', 'Code' ) )
                 . ' ' . $this->getElement( $_aResponse, array( 'Error', 'Message' ) );
-AmazonAutoLinks_Debug::log( $_sError );
+//AmazonAutoLinks_Debug::log( $_sError );
             return $_sError;
         }
         return true;
 
     }
-        private function ___getHTTPStatusError( array $aWPRemoteResponse ) {
-            $_sCode    = $this->getElement( $aWPRemoteResponse, array( 'response', 'code' ) );
-            $_s1stChar = substr( $_sCode, 0, 1 );
-            if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
-                return '';
-            }
-            return $_sCode . ': ' . $this->getElement( $aWPRemoteResponse, array( 'response', 'message' ) );
-        }
-        private function ___getAPIResponseError( array $aResponse ) {
-            if ( ! isset( $aResponse[ 'Errors' ] ) ) {
-                return '';
-            }
-            $_sError = '';
-            foreach( $aResponse[ 'Errors' ] as $_aError ) {
-                $_sError .= $_aError[ 'Code' ] . ': ' . $_aError[ 'Message' ] . ' ';
-            }
-            return trim( $_sError );
-        }
-
 
     /**
      * Performs an API request from the given request API parameters and returns the result as associative array.
@@ -175,23 +159,50 @@ AmazonAutoLinks_Debug::log( $_sError );
         $_sResponseJSON = wp_remote_retrieve_body( $_aoResponse );
         $_aResponse     = $this->getAsArray( json_decode( $_sResponseJSON, true ) );
         $_sAPIError     = $this->___getAPIResponseError( $_aResponse );
+        // Not returning an error only as there are cases that found items are included with an error.
         if ( $_sAPIError ) {
-            return array(
-                'Error' => array(
-                    'Message' => $_sAPIError,
-                    'Code'    => 'PAAPIError',
-                )
+            $_aResponse[ 'Error' ] = array(
+                'Message' => $_sAPIError,
+                'Code'    => 'PAAPIError',
             );
         }
-AmazonAutoLinks_Debug::log( $_aResponse );
+
+        // Inject response date
+        $_sResponseDate = wp_remote_retrieve_header( $_aoResponse, 'date' );
+        $_aResponse[ '_ResponseDate' ] = $_sResponseDate;
         return $_aResponse;
 
     }
-        // @deprecated moved to the utility class
-//        private function ___isJSON( $sString ) {
-//           json_decode( $sString );
-//           return (json_last_error() == JSON_ERROR_NONE);
-//        }
+
+        /**
+         * @param array $aWPRemoteResponse
+         *
+         * @return string
+         */
+        private function ___getHTTPStatusError( array $aWPRemoteResponse ) {
+            $_sCode    = $this->getElement( $aWPRemoteResponse, array( 'response', 'code' ) );
+            $_s1stChar = substr( $_sCode, 0, 1 );
+            if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
+                return '';
+            }
+            return $_sCode . ': ' . $this->getElement( $aWPRemoteResponse, array( 'response', 'message' ) );
+        }
+        /**
+         * @param array $aResponse
+         *
+         * @return string
+         */
+        private function ___getAPIResponseError( array $aResponse ) {
+            if ( ! isset( $aResponse[ 'Errors' ] ) ) {
+                return '';
+            }
+            $_sError = '';
+            foreach( $aResponse[ 'Errors' ] as $_aError ) {
+                $_sError .= $_aError[ 'Code' ] . ': ' . $_aError[ 'Message' ] . ' ';
+            }
+            return trim( $_sError );
+        }
+
 
     public function scheduleInBackground( array $aPayload, $iCacheDuration=86400 ) {
     }

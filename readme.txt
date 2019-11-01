@@ -23,12 +23,15 @@ If you want to search a specific product, yes, you can do that too. If you are g
 
 Display affiliate links along with your posts with this plugin to generate actual income with minimal efforts.
 
+= Compatible with PA-API 5! =
+As of 2019/10/31, Amazon ended PA-API v4 and your site may no longer be able to display Amazon products with old API keys. In that case, regenerate keys on the Amazon Associates member's area and you are good to go!
+
 = See How Amazon Affiliate Links are Displayed =
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, UK, US, Canada, France, Australia, India, China, Mexico and Brazil.
+Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates and Brazil.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -76,7 +79,6 @@ Besides the **Item Format** unit option which lets you design the output of a un
 - **Category** - pick your category that matches your site topic.
 - **Product Search** - create a unit of a search result.
 - **Item Look-up** - display specific products.
-- **Similarity Look-up** - display similar products.
 - **URL** - list items from an external web source.
 
 = Getting Started =
@@ -106,11 +108,14 @@ Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Ama
 
 = Do I need Amazon Access Keys? =
 
-Yes, all the unit types require Amazon access keys (as of v3.8.2). You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
+For the category unit type, no but for other unit types, yes. You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
 
 For that, you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
 More detailed instruction, please refer to the [To register as a Product Advertising API developer](https://docs.aws.amazon.com/AWSECommerceService/latest/GSG/GettingStarted.html#BecominganAssociate) or [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
+
+= Is the plugin compatible with PA-API 5? =
+Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0.
 
 = What does a Unit mean? =
 
@@ -280,19 +285,23 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 4. **Setting Page** (Creating New Category Unit)
 5. **Setting Page** (Selecting Templates)
 
-== Changelog ==
-= 3.9.0 -
-    - Added the feed unit type.
-    - Changed the category unit type not to require Product Advertising API keys.
-        - @todo add the SubscriptionID parameter to product links when AWS keys are given.
-        - @todo add the language column to the product cache table
-        - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
-        - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
-    - Fixed a bug that rating stars appeared for in `category` units when the product did not have a review, started since v3.8.12.
+== Todo ==
+- @todo add the SubscriptionID parameter to product links when AWS keys are given.
+- @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
+- @todo implement a mechanism for unit types to determine whether it requires PA API or not.
+- @TODO compress HTTP request caches as customer review caches are too large.
 
+== Changelog ==
+= 3.9.0 11/1/2019 =
+- Added support for PA-API 5 (deprecated the use of PA-API 4, which is no longer functional as of Oct 31, 2019 due to the termination by Amazon).
+- Added the ability for the category unit type not to require Product Advertising API keys.
+- Added the `Error Log` page (Tools -> Error Log) that displays plugin errors.
 - Added the a unit filter option to remove adult products.
 - Added the option to disable widgets.
 - Added the `%prime%` variable for the `Item Format` unit option which displays a prime icon.
+- Fixed a bug that rating stars appeared in `category` units when the product did not have a review, started since v3.8.12.
+- Deprecated `Similarity Look-up` unit type as PA-API 5 does not support similarity look-up.
+- Deprecated `similar_product_image_size` and `similar_product_max_count` unit options.
 
 = 3.8.12 - 03/30/2019 =
 - Fixed a bug that `Access Rights` -> `Capability` option did not take effect.

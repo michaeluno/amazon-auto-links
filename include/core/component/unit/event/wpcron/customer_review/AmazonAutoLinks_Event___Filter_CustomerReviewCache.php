@@ -10,6 +10,7 @@
 
 /**
  * @since   3.7.7
+ * @deprecated  3.9.0
  */
 class AmazonAutoLinks_Event___Filter_CustomerReviewCache extends AmazonAutoLinks_Event___Filter_Base {
 

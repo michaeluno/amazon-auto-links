@@ -5,7 +5,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2018 Michael Uno
+ * Copyright (c) 2013-2019 Michael Uno
  */
 
 /**
@@ -55,7 +55,6 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
          */
         private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching=false ) {
 
-//            add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10, 3 );
             add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100, 3 );
 
             $_oHTTP = new AmazonAutoLinks_HTTPClient(
@@ -74,12 +73,16 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
             }
             $_asResponse =  $_oHTTP->get();
 
-//            remove_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyCacheName' ), 10 );
             remove_filter( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100 );
             return $_asResponse;
 
         }
             /**
+             * Gives an interval in API requests to avoid reaching the API rate limit.
+             *
+             * Check a lock transient that lasts only one second
+             * as Amazon Product Advertising API only allows one request per second.
+             *
              * @since           3.9.0
              * @param           string      $sRequestURL
              * @param           array       $aArguments
@@ -87,56 +90,19 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
              * @callback        add_action  aal_action_http_remote_get
              */
             public function replyToHaveHTTPRequestInterval( $sRequestURL, $aArguments, $sRequestType ) {
-                if ( $this->___sRequestType !== $sRequestType ) {
-                    return;
+
+                $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
+                $_iIteration      = 0;
+                while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
+                    sleep( 1 );
+                    $_iIteration++;
                 }
-                $this->___sleep( $sRequestURL );
+                $this->setTransient(
+                    $_sAPIRequestLock,
+                    $sRequestURL, // any data will be sufficient
+                    1  // one second
+                );
+
             }
-                /**
-                 * Gives an interval in API requests to avoid reaching the API rate limit.
-                 *
-                 * Check a lock transient that lasts only one second
-                 * as Amazon Product Advertising API only allows one request per second.
-                 *
-                 * @since       3.9.0
-                 * @return      void
-                 */
-                private function ___sleep( $sRequestURI ) {
-
-                    $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
-                    $_iIteration      = 0;
-                    while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
-                        sleep( 1 );
-                        $_iIteration++;
-                    }
-                    $this->setTransient(
-                        $_sAPIRequestLock,
-                        $sRequestURI, // any data will be sufficient
-                        1  // one second
-                    );
-                }
-
-    /**
-     * Generates a cache name by removing request-specific keys from the query url.
-     *
-     * @callback    add_filter  aal_filter_http_request_cache_name
-     * @param       string      $sCacheName
-     * @param       string      $sURL
-     * @param       string      $sRequestType
-     * @since       3.9.0
-     * @return      string
-     * @deprecated  3.9.0
-     */
-    public function replyToModifyCacheName( $sCacheName, $sURL, $sRequestType ) {
-
-        if ( $this->___sRequestType !== $sRequestType ) {
-            return $sCacheName;
-        }
-        $_sPayload = ( string ) $this->getElement( $this->___aHTTPArguments, 'body' );
-        return AmazonAutoLinks_Registry::TRANSIENT_PREFIX
-               . '_'
-               . md5( $sURL . $_sPayload );
-
-    }
 
 }

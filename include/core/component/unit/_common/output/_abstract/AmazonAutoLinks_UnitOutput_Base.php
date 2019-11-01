@@ -271,7 +271,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
             $_sError            = $this->_getError( $_aProducts );
             if ( $_sError ) {
-                throw new Exception( $_sError  );
+                throw new Exception( $_sError );
             }
 
             $_sContent          = $this->getOutputBuffer(
@@ -286,7 +286,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         } catch ( Exception $_oException ) {
             $_sContent   = $this->oUnitOption->get( 'show_errors' )
-                ? "<div class='warning'><p>" . $_oException->getMessage() . "</p></div>"
+                ? "<div class='warning'><p>"
+                  . AmazonAutoLinks_Registry::NAME. ': ' . $_oException->getMessage()
+                  . "</p></div>"
                 : '';
         }
 
@@ -425,6 +427,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         if ( isset( $aProducts[ 'Error' ][ 'Message' ], $aProducts[ 'Error' ][ 'Code' ] ) ) {
             return $aProducts[ 'Error' ][ 'Code' ] . ': ' . $aProducts[ 'Error' ][ 'Message' ];
         }
+        // @todo deprecate below as PA-API 5 changed the data structure but they may need to be kept for backward compatibility
         if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
             return $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Code' ]
                 . ': ' . $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Message' ];

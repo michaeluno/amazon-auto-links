@@ -34,14 +34,13 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
             array(
                 'field_id'      => $sFieldIDPrefix . 'ItemId',
                 'type'          => 'textarea',
-                'title'         => __( 'Item ID', 'amazon-auto-links' ),
+                'title'         => __( 'ASINs', 'amazon-auto-links' ),
                 'attributes'    => array(
                     'size' => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
                         ? 40 
                         : 60,
                 ),
-                'description'   => __( 'Enter the ID(s) of the product per line or use the <code>,</code> (comma) characters to delimit the items.', 'amazon-auto-links' ) 
-                    . ' ' . __( 'For ASINs, you can simply paste text that includes ASINs.', 'amazon-auto-links' ) 
+                'description'   => __( 'Paste text that includes ASINs.', 'amazon-auto-links' )
                     . ' e.g. <code>B009ZVO3H6, B0043D2DZA</code>',
             ),
             array(
@@ -52,36 +51,37 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'label'         => __( 'Perform search per item.', 'amazon-auto-links' ),
                 'default'       => false,
             ),
-            array(
-                'field_id'      => $sFieldIDPrefix . 'IdType',
-                'type'          => 'radio',
-                'title'         => __( 'ID Type', 'amazon-auto-links' ),
-                'label'         => array(
-                    'ASIN'  => 'ASIN',
-                    'SKU'   => 'SKU',
-                    'UPC'   => '<span class="' . ( $_bUPCAllowed ? "" : "disabled" ) . '">UPC <span class="description">(' . __( 'Not available in the CA locale.', 'amazon-auto-links' ) . ')</span></span>',
-                    'EAN'   => 'EAN',
-                    'ISBN'  => '<span class="' . ( $_bISBNAllowed ? "" : "disabled" ) . '">ISBN <span class="description">(' . __( 'The US locale only, when the search index is Books.', 'amaozn-auto-links' ) .')</span></span>',
-                ),
-                'attributes' => array(              
-                    'UPC' => array(
-                        'disabled' => $_bUPCAllowed 
-                            ? null 
-                            : 'disabled',
-                    ),                
-                    'ISBN' => array(
-                        'disabled' => $_bISBNAllowed 
-                            ? null 
-                            : 'disabled',
-                    ),                                    
-                ),
-                'default'       => 'ASIN',
-            ),                                    
+            // @deprecated 3.9.0
+//            array(
+//                'field_id'      => $sFieldIDPrefix . 'IdType',
+//                'type'          => 'radio',
+//                'title'         => __( 'ID Type', 'amazon-auto-links' ),
+//                'label'         => array(
+//                    'ASIN'  => 'ASIN',
+//                    'SKU'   => 'SKU',
+//                    'UPC'   => '<span class="' . ( $_bUPCAllowed ? "" : "disabled" ) . '">UPC <span class="description">(' . __( 'Not available in the CA locale.', 'amazon-auto-links' ) . ')</span></span>',
+//                    'EAN'   => 'EAN',
+//                    'ISBN'  => '<span class="' . ( $_bISBNAllowed ? "" : "disabled" ) . '">ISBN <span class="description">(' . __( 'The US locale only, when the search index is Books.', 'amaozn-auto-links' ) .')</span></span>',
+//                ),
+//                'attributes' => array(
+//                    'UPC' => array(
+//                        'disabled' => $_bUPCAllowed
+//                            ? null
+//                            : 'disabled',
+//                    ),
+//                    'ISBN' => array(
+//                        'disabled' => $_bISBNAllowed
+//                            ? null
+//                            : 'disabled',
+//                    ),
+//                ),
+//                'default'       => 'ASIN',
+//            ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'Operation',
                 'type'          => 'hidden',
                 'hidden'        => true,
-                'value'         => 'ItemLookup',
+                'value'         => 'GetItems',
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'country',
@@ -90,17 +90,18 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'attributes'    => array(
                     'readonly' => true,
                 ),
-            ),                          
-            array(
-                'field_id'      => $sFieldIDPrefix . 'SearchIndex',
-                'type'          => 'select',
-                'title'         => __( 'Categories', 'amazon-auto-links' ),
-                'label'         => $this->_getSearchIndex( $aUnitOptions ),
-                'default'       => 'All',
-                'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
-                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
-                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
             ),
+// @deprecated 3.9.0
+//            array(
+//                'field_id'      => $sFieldIDPrefix . 'SearchIndex',
+//                'type'          => 'select',
+//                'title'         => __( 'Categories', 'amazon-auto-links' ),
+//                'label'         => $this->_getSearchIndex( $aUnitOptions ),
+//                'default'       => 'All',
+//                'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
+//                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
+//                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
+//            ),
             // 3.5.0+
             array(
                 'field_id'          => $sFieldIDPrefix . '_sort',

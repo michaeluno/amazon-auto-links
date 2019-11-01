@@ -67,20 +67,29 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
         $_aConstructorParameters = $aHTTPArguments[ 'constructor_parameters' ] + array(
             null, null, null, '', array(), 'api'
         );
-        $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
-            $_aConstructorParameters[ 0 ],
-            $_aConstructorParameters[ 1 ],
-            $_aConstructorParameters[ 2 ],
-            $_aConstructorParameters[ 3 ],
-            $_aConstructorParameters[ 4 ],
-            $_aConstructorParameters[ 5 ]
-        );
 
-        $_oAPI->request(
-            $aHTTPArguments[ 'api_parameters' ],
-            $iCacheDuration,
-            true // force caching
+        // For compatible with v3.8.x or below
+        if ( ! isset( $aHTTPArguments[ 'body' ] ) ) {
+            $_oAPI = new AmazonAutoLinks_ProductAdvertisingAPI(
+                $_aConstructorParameters[ 0 ],
+                $_aConstructorParameters[ 1 ],
+                $_aConstructorParameters[ 2 ],
+                $_aConstructorParameters[ 3 ],
+                $_aConstructorParameters[ 4 ],
+                $_aConstructorParameters[ 5 ]
+            );
+            $_oAPI->request( $aHTTPArguments[ 'api_parameters' ], $iCacheDuration, true ); // force caching
+        }
+        // When the `body` argument is set, it means the POSt method and is a PA-API 5 request.
+        $_oPAAPI5 = new AmazonAutoLinks_PAAPI50(
+            $_aConstructorParameters[ 0 ],  // $sLocale
+            $_aConstructorParameters[ 1 ],  // $sPublicKey
+            $_aConstructorParameters[ 2 ],  // $sSecretKey
+            $_aConstructorParameters[ 3 ],  // $sAssociateID
+            $_aConstructorParameters[ 4 ],  // $aHTTPArguments
+            $_aConstructorParameters[ 5 ]   // $sRequestType
         );
+        $_aResponse = $_oPAAPI5->request( $aHTTPArguments[ 'api_parameters' ], $iCacheDuration, true ); // force caching
 
     }
 

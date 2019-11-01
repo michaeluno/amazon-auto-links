@@ -88,6 +88,22 @@
 .amazon-products-container-list .amazon-customer-reviews {
     word-break: break-all;
 }
+.amazon-products-container-list .crIFrameNumCustReviews {
+    display: inline-block;
+}
+.amazon-products-container-list .amazon-customer-reviews .review-date {
+    font-size: smaller;
+}
+.amazon-products-container-list .amazon-customer-reviews .review-title {
+    font-weight: bold;
+}
+.amazon-products-container-list .amazon-customer-reviews .review-image-tile {
+    display: inline-block;
+    max-height: 100px;
+    max-width: 100px;
+    margin: 0.2em;
+}
+
 /* Rating stars */
 .amazon-products-container-list span.asinReviewsSummary > a > img,
 .amazon-products-container-list .amazon-customer-reviews img,
@@ -102,7 +118,9 @@
     border-bottom: 0;
     /* No underlines in hyper links with box shadow */
     box-shadow: none;
+    font-size: small;
 }
+
 .amazon-products-container-list .amazon-customer-rating-stars {
     display: inline-block;
     margin: 0 0.2em 0 0;

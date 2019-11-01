@@ -58,7 +58,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
                 'label'         => array(                        
                     'ItemSearch'        => '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns items that satisfy the search criteria in the title and descriptions.', 'amazon-auto-links' ),
                     'ItemLookup'        => '<span class=""><strong>' . __( 'Item Look-up', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns some or all of the item attributes with the given item identifier.', 'amazon-auto-links' ) . '</span>',
-                    'SimilarityLookup'    => '<span class=""><strong>' . __( 'Similar Products', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns products that are similar to one or more items specified.', 'amazon-auto-links' ) . '</span>',
+//                    'SimilarityLookup'    => '<span class=""><strong>' . __( 'Similar Products', 'amazon-auto-links' ) . '</strong> - ' . __( 'returns products that are similar to one or more items specified.', 'amazon-auto-links' ) . '</span>', // @deprecated 3.9.0 PA-API 5 does not support this
                 ),
                 'default'       => 'ItemSearch', // array( 'ItemSearch' => true ),
             ),

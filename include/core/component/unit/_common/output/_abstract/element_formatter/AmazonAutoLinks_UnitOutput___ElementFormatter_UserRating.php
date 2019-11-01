@@ -27,15 +27,43 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
             return $this->_aProduct[ 'rating' ];
         }
 
+        // Avoid accessing DB as it triggers a background routine when a value is not set
+        if ( ! ( boolean ) $this->hasCustomVariable(
+            $this->_oUnitOption->get( 'item_format' ),
+            array( '%rating%' )
+        ) ) {
+            return '';
+        }
+
+        // Backward compatibility for 3.8.x or below
         $_snEncodedHTML = $this->_getCell( 'rating_html' );
-        if ( null === $_snEncodedHTML ) {
+        if ( $_snEncodedHTML ) {
+            return $this->___getFormattedOutput( $_snEncodedHTML );
+        }
+        // For 3.9.0 or above, generate the output from the rating value.
+        $_inRating      = $this->_getCell( 'rating' );
+        if ( $_inRating ) {
+            return $this->___getRatingOutput( $_inRating );
+        }
+        if ( null === $_snEncodedHTML && null === $_inRating ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the rating.', 'amazon-auto-links' )
             );
         }
-        return $this->___getFormattedOutput( $_snEncodedHTML );
+        return '';
 
     }
+        /**
+         * @since   3.9.0
+         * @return  string
+         */
+        private function ___getRatingOutput( $iRating ) {
+
+            $_iReviewCount  = ( integer ) $this->_getCell( 'number_of_reviews' );
+            $_sReviewURL    = ( string )  $this->_getCell( 'customer_review_url' );
+            return AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRating, $_sReviewURL, $_iReviewCount );
+
+        }
         /**
          * @since   3.5.0
          * @return  string

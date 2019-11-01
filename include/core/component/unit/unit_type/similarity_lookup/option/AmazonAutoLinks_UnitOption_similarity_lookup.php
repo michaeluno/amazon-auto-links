@@ -33,7 +33,7 @@ class AmazonAutoLinks_UnitOption_similarity_lookup extends AmazonAutoLinks_UnitO
         
         // Advanced fields
         'MerchantId'    => 'All',
-        'Condition'     => 'New',
+        'Condition'     => 'Any',
         
     );
 

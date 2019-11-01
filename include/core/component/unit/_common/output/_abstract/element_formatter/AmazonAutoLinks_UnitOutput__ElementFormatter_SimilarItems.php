@@ -32,12 +32,16 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
      * @return      string
      * @throws      Exception
      * @since       3.5.0
+     * @deprecated  3.9.0
      */
     public function get() {
 
         if ( ! $this->___hasItemFormatVariable( array( '%similar%' ) ) ) {
             return '<!-- Similar products are not enabled -->';
         }
+
+        // 3.9. this feature is deprecated
+        return '';
 
         $_snEncodedHTML = $this->_getCell( 'similar_products' );
         if ( null === $_snEncodedHTML && $this->_oUnitOption->get( '_search_similar_products' ) ) {

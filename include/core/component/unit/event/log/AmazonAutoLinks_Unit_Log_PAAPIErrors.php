@@ -17,9 +17,16 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
 
     public function __construct() {
 
+        // JSON
         add_filter( 'aal_filter_http_request_set_cache_api_product_info', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
         add_filter( 'aal_filter_http_request_set_cache_api50_test', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
         add_filter( 'aal_filter_http_request_set_cache_api', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
+
+        // HTML documents
+        add_filter( 'aal_filter_http_request_set_cache_customer_review', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
+        add_filter( 'aal_filter_http_request_set_cache_customer_review2', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
+        add_filter( 'aal_filter_http_request_set_cache_url_unit_type', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
+        add_filter( 'aal_filter_http_request_set_cache_wp_remote_get', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
 
     }
 
@@ -40,9 +47,24 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             $this->___setAPIErrorLog( $_sError, $sCacheName, $sURL );
         }
 
+        // If it is the TooManyRequests error, give a cache short lifespan
+        if( false !== strpos( $_sError, 'TooManyRequests' ) ){
+            add_filter(
+                'aal_filter_http_request_set_cache_duration_' . $sCacheName,
+                array( $this, 'replyToGiveShortCacheDuration' ),
+                10,
+                3
+            );
+        }
+
         return $mData;
 
     }
+        public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL ) {
+            remove_filter( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, array( $this, 'replyToGiveShortCacheDuration' ), 10 );
+            return 60 * 10; // 10 minutes
+        }
+
         /**
          * @param $mData
          * @return  string
@@ -57,19 +79,33 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             // HTTP Status Error
             $_sError  = $this->___getHTTPStatusError( $mData ) . ' ';
 
-            // PA-API Error
             $_sBody   = $this->getElement( $mData, array( 'body' ) );
-            $_sError .= $this->___getAPIResponseError( $_sBody );
-            $_sError  = trim( $_sError );
 
-            return $_sError;
+            if ( $this->isJSON( $_sBody ) ) {
+
+                $_aResponse = json_decode( $_sBody, true );
+
+                // PA-API Error
+                $_sError .= $this->___getAPIResponseFailure( $_aResponse );
+                $_sError .= $this->___getAPIResponseError( $_aResponse );
+            }
+
+            return trim( $_sError );
 
         }
-            private function ___getAPIResponseError( $sBody ) {
-                if ( ! $this->isJSON( $sBody ) ) {
+            private function ___getAPIResponseFailure( $_aResponse ) {
+                if ( ! isset( $_aResponse[ '__type' ], $_aResponse[ 'message' ] ) ) {
                     return '';
                 }
-                $_aResponse = json_decode( $sBody, true );
+                $_sError = $_aResponse[ '__type' ] . ': ' . $_aResponse[ 'message' ];
+                if ( isset( $_aResponse[ 'response' ] ) ) {
+                    $_sError .= '; '
+                        . $this->getElement( $_aResponse, array( 'response', 'code' ) )
+                        . ': ' . $this->getElement( $_aResponse, array( 'response', 'message' ) );
+                }
+                return $_sError;
+            }
+            private function ___getAPIResponseError( $_aResponse ) {
                 if ( ! isset( $_aResponse[ 'Errors' ] ) ) {
                     return '';
                 }
@@ -96,9 +132,10 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             $_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
             $_aErrorLog  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
             $_aErrorLog[ microtime( true ) ] = array(
-                'time'       => time(),
-                'cache_name' => $sCacheName,
-                'url'        => $sURL,
+                'time'           => time(),
+                'cache_name'     => $sCacheName,
+                'url'            => $sURL,
+                'current_url'    => $this->getCurrentURL(),
                 // 'note'       => '',
                 'message'    => $sErrorItem,
             );

@@ -27,7 +27,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank extends AmazonAuto
             return $this->_aProduct[ 'sales_rank' ];
         }
 
-        $_snEncodedHTML = $this->_getCell( 'features' );
+        $_snEncodedHTML = $this->_getCell( 'sales_rank' );
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the sales rank.', 'amazon-auto-links' )

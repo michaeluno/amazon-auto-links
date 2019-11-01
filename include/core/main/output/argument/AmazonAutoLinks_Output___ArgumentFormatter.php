@@ -61,7 +61,7 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
             if ( ! isset( $this->_aArguments[ 'search' ] ) ) {
                 return;
             }
-            $this->_aArguments[ 'Operation' ]     = 'ItemSearch';
+            $this->_aArguments[ 'Operation' ]     = 'SearchItems';
             $this->_aArguments[ 'Keywords' ]      = $this->_aArguments[ 'search' ];
             $this->_aArguments[ 'unit_type' ]     = 'search';
         }

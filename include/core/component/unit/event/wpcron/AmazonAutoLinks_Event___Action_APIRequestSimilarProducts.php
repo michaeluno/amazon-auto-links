@@ -13,6 +13,7 @@
  * @package      Amazon Auto Links
  * @since        3.3.0
  * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_SimilarProducts`.
+ * @deprecated   3.9.0      Similar products are gone in PA-API5.
  */
 class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAutoLinks_Event___Action_Base {
 
@@ -60,6 +61,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
         $_iSetObjectID          = $_oProductTable->setRowByASINLocale(
             $_sSubjectASIN . '_' . strtoupper( $_sLocale ),
             $_aRow
+            // @todo add currency when similar products are supported agaon
+            // language
         );  
 
     }   
@@ -101,8 +104,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSimilarProducts extends AmazonAut
             
                 'Operation'             => 'ItemLookup',
                 
-                // (optional) Used | Collectible | Refurbished, All
-                'Condition'             => 'All',    
+                // (optional) Used | Collectible | Refurbished | Newn| Any
+                'Condition'             => 'Any',
                 
                 // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
                 'IdType'                => 'ASIN',    

@@ -37,8 +37,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_aPageURLs          = array_merge( $aURLs, $this->___getURLs( $_aPageURLs ) );
         $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
         $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
-//AmazonAutoLinks_Debug::log( $_aPageURLs );
-//AmazonAutoLinks_Debug::log( $_aExcludingPageURLs );
+
         $_sLocale      = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID = ( string ) $this->oUnitOption->get( 'associate_id' );
         $_iCount       = ( integer ) $this->oUnitOption->get( 'count' );
@@ -256,6 +255,12 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 // First Iteration - Extract displaying ASINs.
                 $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
                 $_aProducts    = array();
+
+                $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
+                $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
+                $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );
+
                 foreach ( $aItems as $_sASIN => $_aItem ) {
 
                     // This parsed item is no longer needed and must be removed once it is parsed
@@ -273,7 +278,10 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     }
 
                     // Store the product
-                    $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $sLocale );
+                    // @deprecated 3.9.0 $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $sLocale );
+                    $_aASINLocaleCurLang    = $_aProduct[ 'ASIN' ] . '|' . strtoupper( $_sLocale ) . '|' . $_sCurrency . '|' . $_sLanguage;
+                    $_aASINLocales[ $_aASINLocaleCurLang ] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
+
                     $_aProducts[]    = $_aProduct;
 
                     // Max Number of Items

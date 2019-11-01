@@ -20,7 +20,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
 
     protected function _construct() {
         add_filter( 'aal_filter_http_request_cache_name', array( $this, 'replyToModifyHTTPRequestCacheName' ), 10, 3 );
-        new AmazonAutoLinks_Event___Filter_CustomerReviewCache;
+        // @deprecated 3.9.0
+        // new AmazonAutoLinks_Event___Filter_CustomerReviewCache;
     }
         /**
          * Remove request specific query argument in the URL query string to construct a cache name.

@@ -85,21 +85,22 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'title'             => __( 'Server Locale', 'amazon-auto-links' ),
                 'type'              => 'select',
                 'description'       => __( 'The region of the API server. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
-                'label'             => array(
-                    'CA'    => 'CA - webservices.amazon.ca',
-                    'CN'    => 'CN - webservices.amazon.cn',
-                    'DE'    => 'DE - webservices.amazon.de',
-                    'ES'    => 'ES - webservices.amazon.es',
-                    'FR'    => 'FR - webservices.amazon.fr',
-                    'IT'    => 'IT - webservices.amazon.it',
-                    'JP'    => 'JP - webservices.amazon.co.jp',
-                    'UK'    => 'UK - webservices.amazon.co.uk',
-                    'US'    => 'US - webservices.amazon.com',
-                    'IN'    => 'IN - webservices.amazon.in',            
-                    'BR'    => 'BR - webservices.amazon.com.br',        
-                    'MX'    => 'MX - webservices.amazon.com.mx',
-                    'AU'    => 'AU - webservices.amazon.com.au',    // 3.5.5b01+
-                ),
+                'label'             => $this->___getLocaleLabels(),
+//                '_label'             => array(
+//                    'CA'    => 'CA - webservices.amazon.ca',
+//                    'CN'    => 'CN - webservices.amazon.cn',
+//                    'DE'    => 'DE - webservices.amazon.de',
+//                    'ES'    => 'ES - webservices.amazon.es',
+//                    'FR'    => 'FR - webservices.amazon.fr',
+//                    'IT'    => 'IT - webservices.amazon.it',
+//                    'JP'    => 'JP - webservices.amazon.co.jp',
+//                    'UK'    => 'UK - webservices.amazon.co.uk',
+//                    'US'    => 'US - webservices.amazon.com',
+//                    'IN'    => 'IN - webservices.amazon.in',
+//                    'BR'    => 'BR - webservices.amazon.com.br',
+//                    'MX'    => 'MX - webservices.amazon.com.mx',
+//                    'AU'    => 'AU - webservices.amazon.com.au',    // 3.5.5b01+
+//                ),
                 // 'default'           => 'US',
             ),                
             array(
@@ -135,6 +136,18 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
         );          
         
     }
+        /**
+         * @since   3.9.0
+         * @return  array
+         */
+        private function ___getLocaleLabels() {
+            $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
+            $_aLabels  = array();
+            foreach( $_oLocales->aHosts as $_sKey => $_sHost ) {
+                $_aLabels[ $_sKey ] = $_sKey . ' - ' . $_sHost;
+            }
+            return $_aLabels;
+        }
         /**
          * If API keys are set and the previous status is false, this means the user intentionally disconnected the connection.
          * In this case, do not perfomr a test.

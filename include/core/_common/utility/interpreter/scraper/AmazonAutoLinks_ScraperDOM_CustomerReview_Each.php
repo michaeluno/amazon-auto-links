@@ -10,15 +10,19 @@
 /**
  * Provides methods to extracts each customer review by using DOM objects.
  * 
- * @since        3
+ * @since       3
+ * @since       3.9.0   Deprecated and now serves as a base class.
  */
 class AmazonAutoLinks_ScraperDOM_CustomerReview_Each extends AmazonAutoLinks_ScraperDOM_Base {
         
     /**
      * Stores a DOM object.
      */
-    public $oDoc;    
-        
+    public $oDoc;
+
+    public $iMaxCount     = 0;   // integer
+    public $bIncludeExtra = false;   // boolean
+
     public function __construct( $sURLOrFIlePathOrHTML, $sCharset='', $iMaxCount=5, $bIncludeExtra=false ) {
         
         parent::__construct( $sURLOrFIlePathOrHTML, $sCharset );
@@ -80,7 +84,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview_Each extends AmazonAutoLinks_Scr
         
     }
     
-        private function _removeExtraElements() {
+        protected function _removeExtraElements() {
             
             $_oXpath = new DOMXPath( $this->oDoc );   
             $_oBRs = $_oXpath->query( 

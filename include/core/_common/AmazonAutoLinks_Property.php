@@ -164,51 +164,461 @@ final class AmazonAutoLinks_Property {
      * @remark             The above link is no longer available.
      * @see                https://docs.aws.amazon.com/AWSECommerceService/latest/DG/localevalues.html
      * @remark             The `AU` locale is missing in the AWS documentation.
+     * @since   unknown
+     * @since   3.9.0   Made it compatible with PA-API 5
+     * @see     https://webservices.amazon.com/paapi5/documentation/locale-reference.html
      */
     static public function getSearchIndexByLocale( $sLocale ) {
 
         switch ( strtoupper( $sLocale ) ) {
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleCA.html
-            case 'CA':
+            case 'AU':
                 return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Clothing & Accessories', 'amazon-auto-links' ),
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Classical'             => __( 'Classical', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ),
-                    'Grocery'               => __( 'Grocery & Gourmet Food', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'Industrial'            => __( 'Industrial & Scientific', 'amazon-auto-links' ),
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Home & Kitchen', 'amazon-auto-links' ),
-                    'LawnAndGarden'         => __( 'Lawn and Garden', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage & Bags', 'amazon-auto-links' ),    // 3.5.5+
-                    'MobileApps'            => __( 'Apps & Games', 'amazon-auto-links' ),      // 3.5.5+
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments, Stage & Studio', 'amazon-auto-links' ), // 3.5.5+
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ), // 3.5.5+
-                    'PetSupplies'           => __( 'Pet Supplies', 'amazon-auto-links' ),   // 2.1.0+
-                    'Shoes'                 => __( 'Shoes & Handbags', 'amazon-auto-links' ),   // 3.5.5+
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SoftwareVideoGames'    => __( 'Software Video Games', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'Sports & Outdoors', 'amazon-auto-links' ),  // 3.5.5+
-                    'Tools'                 => __( 'Tools & Home ImprovementToys', 'amazon-auto-links' ),   // 3.5.5+
-                    'Toys'                  => __( 'Toys & Games', 'amazon-auto-links' ),   // 2.1.0+
-                    'VHS'                   => __( 'VHS', 'amazon-auto-links' ),
-                    'Video'                 => __( 'Video', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ), // 3.5.5+
+                    'All' => __( 'All Departments', 'amazon-auto-links' ),
+                    'Automotive' => __( 'Automotive', 'amazon-auto-links' ),
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ),
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ),
+                    'Books' => __( 'Books', 'amazon-auto-links' ),
+                    'Computers' => __( 'Computers', 'amazon-auto-links' ),
+                    'Electronics' => __( 'Electronics', 'amazon-auto-links' ),
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ),
+                    'Fashion' => __( 'Clothing & Shoes', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' =>	__( 'Health,  Household & Personal Care', 'amazon-auto-links' ),
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Lighting', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Luggage & Travel Gear', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Movies & TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'CDs & Vinyl', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Stationery & Office Products', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports,  Fitness & Outdoors', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Home Improvement', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Video Games', 'amazon-auto-links' ), 
                 );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleCN.html
+            case 'BR':
+                return array(
+                    'All' => __( 'Todos os departamentos', 'amazon-auto-links' ), 
+                    'Books' => __( 'Livros', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computadores e Informática', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Eletrônicos', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Casa e Cozinha', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Loja Kindle', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps e Jogos', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Material para Escritório e Papelaria', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Ferramentas e Materiais de Construção', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Games', 'amazon-auto-links' ), 
+                );
+            case 'CA':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/canada.html
+                return array(
+                    'All' => __( 'All Department', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Clothing & Accessories', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Automotive', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ), 
+                    'Books' => __( 'Books', 'amazon-auto-links' ), 
+                    'Classical' => __( 'Classical Music', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'English Books', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Patio, Lawn & Garden', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Grocery & Gourmet Food', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Health & Personal Care', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industrial & Scientific', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Jewelry', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Luggage & Bags', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Luxury Beauty', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Movies & TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'Music', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musical Instruments, Stage & Studio', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Office Products', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Shoes & Handbags', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports & Outdoors', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Tools & Home Improvement', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VHS' => __( 'VHS', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Video Games', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Watches', 'amazon-auto-links' ), 
+                );
+            case 'FR':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/france.html
+                return array(
+                    'All' => __( 'Toutes nos catégories', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Vêtements et accessoires', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Gros électroménager', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Auto et Moto', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Bébés & Puériculture', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauté et Parfum', 'amazon-auto-links' ), 
+                    'Books' => __( 'Livres en français', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Informatique', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Téléchargement de musique', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'High-Tech', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Autres', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Mode', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'Livres anglais et étrangers', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Jardin', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Boutique chèques-cadeaux', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Epicerie', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Hygiène et Santé', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Cuisine & Maison', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Secteur industriel & scientifique', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Bijoux', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Boutique Kindle', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Luminaires et Eclairage', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Bagages', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Beauté Prestige', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Applis & Jeux', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'DVD & Blu-ray', 'amazon-auto-links' ), 
+                    'Music' => __( 'Musique : CD & Vinyles', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Instruments de musique & Sono', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Fournitures de bureau', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Animalerie', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Chaussures et Sacs', 'amazon-auto-links' ), 
+                    'Software' => __( 'Logiciels', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports et Loisirs', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Bricolage', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Jeux et Jouets', 'amazon-auto-links' ), 
+                    'VHS' => __( 'VHS', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Jeux vidéo', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Montres', 'amazon-auto-links' ), 
+                );
+            case 'DE':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/germany.html
+                return array(
+                    'All' => __( 'Alle Kategorien', 'amazon-auto-links' ), 
+                    'AmazonVideo' => __( 'Prime Video', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Bekleidung', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Elektro-Großgeräte', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Auto & Motorrad', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ), 
+                    'Books' => __( 'Bücher', 'amazon-auto-links' ), 
+                    'Classical' => __( 'Klassik', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computer & Zubehör', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Musik-Downloads', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Elektronik & Foto', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Sonstiges', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Fashion', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'Bücher (Fremdsprachig)', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Garten', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Geschenkgutscheine', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Lebensmittel & Getränke', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Drogerie & Körperpflege', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Küche, Haushalt & Wohnen', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Gewerbe, Industrie & Wissenschaft', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Schmuck', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle-Shop', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Beleuchtung', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Koffer, Rucksäcke & Taschen', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Luxury Beauty', 'amazon-auto-links' ), 
+                    'Magazines' => __( 'Zeitschriften', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Spiele', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'DVD & Blu-ray', 'amazon-auto-links' ), 
+                    'Music' => __( 'Musik-CDs & Vinyl', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musikinstrumente & DJ-Equipment', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Bürobedarf & Schreibwaren', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Haustier', 'amazon-auto-links' ), 
+                    'Photo' => __( 'Kamera & Foto', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Schuhe & Handtaschen', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sport & Freizeit', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Baumarkt', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Spielzeug', 'amazon-auto-links' ), 
+                    'VHS' => __( 'VHS', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Games', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Uhren', 'amazon-auto-links' ), 
+                );
+            case 'IN':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/india.html
+                return array(
+                    'All' => __( 'All Categories', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Clothing & Accessories', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Appliances', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Car & Motorbike', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ), 
+                    'Books' => __( 'Books', 'amazon-auto-links' ), 
+                    'Collectibles' => __( 'Collectibles', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computers & Accessories', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Amazon Fashion', 'amazon-auto-links' ), 
+                    'Furniture' => __( 'Furniture', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Garden & Outdoors', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Grocery & Gourmet Foods', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Health & Personal Care', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industrial & Scientific', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Jewellery', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Luggage & Bags', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Luxury Beauty', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Movies & TV Shows', 'amazon-auto-links' ), 
+                    'Music' => __( 'Music', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musical Instruments', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Office Products', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Shoes & Handbags', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports, Fitness & Outdoors', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Tools & Home Improvement', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Video Games', 'amazon-auto-links' ),
+                    'Watches' => __( 'Watches', 'amazon-auto-links' ),
+                );
+            case 'IT':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/italy.html
+                return array(
+                    'All' => __( 'Tutte le categorie', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Abbigliamento', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Grandi elettrodomestici', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Auto e Moto', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Prima infanzia', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Bellezza', 'amazon-auto-links' ), 
+                    'Books' => __( 'Libri', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Informatica', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Musica Digitale', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Elettronica', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Altro', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Moda', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'Libri in altre lingue', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Giardino e giardinaggio', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Buoni Regalo', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Alimentari e cura della casa', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Salute e cura della persona', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Casa e cucina', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industria e Scienza', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Gioielli', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Illuminazione', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Valigeria', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'App e Giochi', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Film e TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'CD e Vinili', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Strumenti musicali e DJ', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Cancelleria e prodotti per ufficio', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Prodotti per animali domestici', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Scarpe e borse', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sport e tempo libero', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Fai da te', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Giochi e giocattoli', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Videogiochi', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Orologi', 'amazon-auto-links' ),
+                );
+            case 'JP':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/japan.html
+                return array(
+                    'All' => __( 'All Departments', 'amazon-auto-links' ), 
+                    'AmazonVideo' => __( 'Prime Video', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Clothing & Accessories', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Large Appliances', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Car & Bike Products', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby & Maternity', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ), 
+                    'Books' => __( 'Japanese Books', 'amazon-auto-links' ), 
+                    'Classical' => __( 'Classical', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computers & Accessories', 'amazon-auto-links' ), 
+                    'CreditCards' => __( 'Credit Cards', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Digital Music', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics & Cameras', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Fashion', 'amazon-auto-links' ), 
+                    'FashionBaby' => __( 'Kids & Baby', 'amazon-auto-links' ), 
+                    'FashionMen' => __( 'Men', 'amazon-auto-links' ), 
+                    'FashionWomen' => __( 'Women', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'English Books', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Food & Beverage', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Health & Personal Care', 'amazon-auto-links' ), 
+                    'Hobbies' => __( 'Hobby', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Kitchen & Housewares', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industrial & Scientific', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Jewelry', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Movies & TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'Music', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musical Instruments', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Stationery and Office Products', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Shoes & Bags', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'DIY, Tools & Garden', 'amazon-auto-links' ), 
+                    'Toys' => __( 'Toys', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Computer & Video Games', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Watches', 'amazon-auto-links' ),
+                );
+            case 'MX':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/mexico.html
+                return array(
+                    'All' => __( 'Todos los departamentos', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Auto', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Bebé', 'amazon-auto-links' ), 
+                    'Books' => __( 'Libros', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electrónicos', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Ropa, Zapatos y Accesorios', 'amazon-auto-links' ), 
+                    'FashionBaby' => __( 'Ropa, Zapatos y Accesorios Bebé', 'amazon-auto-links' ), 
+                    'FashionBoys' => __( 'Ropa, Zapatos y Accesorios Niños', 'amazon-auto-links' ), 
+                    'FashionGirls' => __( 'Ropa, Zapatos y Accesorios Niñas', 'amazon-auto-links' ), 
+                    'FashionMen' => __( 'Ropa, Zapatos y Accesorios Hombres', 'amazon-auto-links' ), 
+                    'FashionWomen' => __( 'Ropa, Zapatos y Accesorios Mujeres', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Alimentos y Bebidas', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Productos Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Salud, Belleza y Cuidado Personal', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Hogar y Cocina', 'amazon-auto-links' ), 
+                    'IndustrialAndScientific' => __( 'Industria y ciencia', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Tienda Kindle', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Películas y Series de TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'Música', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Instrumentos musicales', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Oficina y Papelería', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Mascotas', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Deportes y Aire Libre', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Herramientas y Mejoras del Hogar', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Juegos y juguetes', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Videojuegos', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Relojes', 'amazon-auto-links' ),
+                );
+            case 'ES':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/spain.html
+                return array(
+                    'All' => __( 'Todos los departamentos', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Ropa y accesorios', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Grandes electrodomésticos', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Coche y moto', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Bebé', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Belleza', 'amazon-auto-links' ), 
+                    'Books' => __( 'Libros', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Informática', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Música Digital', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electrónica', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Otros Productos', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Moda', 'amazon-auto-links' ), 
+                    'ForeignBooks' => __( 'Libros en idiomas extranjeros', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Jardín', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Cheques regalo', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Alimentación y bebidas', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Salud y cuidado personal', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Hogar y cocina', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industria y ciencia', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Joyería', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Tienda Kindle', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Iluminación', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Equipaje', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Appstore para Android', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Películas y TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'Música: CDs y vinilos', 'amazon-auto-links' ),
+                    'MusicalInstruments' => __( 'Instrumentos musicales', 'amazon-auto-links' ),
+                    'OfficeProducts' => __( 'Oficina y papelería', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Productos para mascotas', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Zapatos y complementos', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Deportes y aire libre', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Bricolaje y herramientas', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Juguetes y juegos', 'amazon-auto-links' ), 
+                    'Vehicles' => __( 'Coche - renting', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Videojuegos', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Relojes', 'amazon-auto-links' ), 
+                );
+            case 'TR':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/turkey.html
+                return array(
+                    'All' => __( 'Tüm Kategoriler', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Bebek', 'amazon-auto-links' ), 
+                    'Books' => __( 'Kitaplar', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Bilgisayarlar', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Elektronik', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Diğer Her Şey', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Moda', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Ev ve Mutfak', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Ofis Ürünleri', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Spor', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Yapı Market', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Oyuncaklar ve Oyunlar', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'PC ve Video Oyunları', 'amazon-auto-links' ), 
+                );
+            case 'AE':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/united-arab-emirates.html
+                return array(
+                    'All' => __( 'All Departments', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Automotive Parts & Accessories', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty & Personal Care', 'amazon-auto-links' ), 
+                    'Books' => __( 'Books', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computers', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Clothing, Shoes & Jewelry', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Lighting', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Video Games', 'amazon-auto-links' ), 
+                );
+            case 'UK':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/united-kingdom.html
+                return array(
+                    'All' => __( 'All Departments', 'amazon-auto-links' ), 
+                    'AmazonVideo' => __( 'Amazon Video', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Clothing', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Large Appliances', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Car & Motorbike', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty', 'amazon-auto-links' ), 
+                    'Books' => __( 'Books', 'amazon-auto-links' ), 
+                    'Classical' => __( 'Classical Music', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computers & Accessories', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Digital Music', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics & Photo', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Fashion', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Garden & Outdoors', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Grocery', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Health & Personal Care', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industrial & Scientific', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Jewellery', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'Lighting' => __( 'Lighting', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Luxury Beauty', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'DVD & Blu-ray', 'amazon-auto-links' ), 
+                    'Music' => __( 'CDs & Vinyl', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musical Instruments & DJ', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Stationery & Office Supplies', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Shoes & Bags', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports & Outdoors', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'DIY & Tools', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VHS' => __( 'VHS', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'PC & Video Games', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Watches', 'amazon-auto-links' ), 
+                );
             case 'CN':
+                // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleCN.html
                 return array(
                     'All'                   => __( 'All', 'amazon-auto-links' ),
                     'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),
@@ -236,434 +646,67 @@ final class AmazonAutoLinks_Property {
                     'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
                     'Software'              => __( 'Software', 'amazon-auto-links' ),
                     'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                        'Toys'                  => __( 'Toys', 'amazon-auto-links' ),   // missing in recent documentation
+                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),   // missing in recent documentation
                     'Video'                 => __( 'Video', 'amazon-auto-links' ),
                     'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
                     'Watches'               => __( 'Watches', 'amazon-auto-links' ),
                 );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleDE.html
-            case 'DE':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ), // 3.5.5+
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Classical'             => __( 'Classical', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ), // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'HomeGarden'            => __( 'Home Garden', 'amazon-auto-links' ),
-                        'HomeImprovement'       => __( 'Home Improvement', 'amazon-auto-links' ), // missing in recent documentation
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ),
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'Lighting'              => __( 'Lighting', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ),      // 2.1.0+
-                    'Magazines'             => __( 'Magazines', 'amazon-auto-links' ),
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),   // 2.1.0+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),
-                        'MusicTracks'           => __( 'Music Tracks', 'amazon-auto-links' ), // missing in recent documentation
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                        'OutdoorLiving'         => __( 'Outdoor Living', 'amazon-auto-links' ), // missing in recent documentation
-                        'Outlet'                => __( 'Outlet', 'amazon-auto-links' ), // missing in recent documentation
-                    'Pantry'                => __( 'Pantry', 'amazon-auto-links' ), // 3.5.5+
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),
-                    'PetSupplies'            => __( 'PetSupplies', 'amazon-auto-links' ),   // 3.5.5+
-                    'Photo'                 => __( 'Photo', 'amazon-auto-links' ),
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                        'SoftwareVideoGames'    => __( 'Software Video Games', 'amazon-auto-links' ),   // missing in recent documentation
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'Tools'                 => __( 'Tools', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'UnboxVideo'            => __( 'Unbox Video', 'amazon-auto-links' ), // 3.5.5+
-                        'VHS'                   => __( 'VHS', 'amazon-auto-links' ),    // missing in recent documentation
-                        'Video'                 => __( 'Video', 'amazon-auto-links' ),  // missing in recent documentation
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleES.html
-            case 'ES':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),    // 3.5.5+
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ), // 3.5.5+
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ),    // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),    // 3.5.5+
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ),    // 3.5.5+
-                    'HealthPersonalCare'    => __( 'HealthPersonalCare', 'amazon-auto-links' ),    // 3.5.5+
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ),    // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),    // 3.5.5+
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'LawnAndGarden'         => __( 'Lawn And Garden', 'amazon-auto-links' ), // 3.5.5+
-                    'Lighting'              => __( 'Lighting', 'amazon-auto-links' ), // 3.5.5+
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ), // 3.5.5+
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),   // 2.1.0+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ), // 3.5.5+
-                    'OfficeProducts'        => __( 'OfficeProducts', 'amazon-auto-links' ), // 3.5.5+
-                    'PCHardware'            => __( 'PCHardware', 'amazon-auto-links' ), // 3.5.5+
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ), // 2.1.0+
-                    'Tools'                 => __( 'Tools', 'amazon-auto-links' ), // 3.5.5+
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleFR.html
-            case 'FR':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),
-                        'Automotive'            => __( 'Automotive', 'amazon-auto-links' ), // missing in recent documentation
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ), // 3.5.5+
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Classical'             => __( 'Classical', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'GiftCards', 'amazon-auto-links' ),  // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),  // 3.5.5+
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ),  // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'HomeImprovement'       => __( 'Home Improvement', 'amazon-auto-links' ),
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ), // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'LawnAndGarden'         => __( 'LawnAndGarden', 'amazon-auto-links' ),  // 3.5.5+
-                    'Lighting'              => __( 'Lighting', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ),      // 2.1.0+
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),      // 3.5.5+
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),      // 2.1.0+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),
-                        'MusicTracks'           => __( 'Music Tracks', 'amazon-auto-links' ),  // missing in recent documentation
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),
-                    'PetSupplies'           => __( 'Pet Supplies', 'amazon-auto-links' ),
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                        'SoftwareVideoGames'    => __( 'Software Video Games', 'amazon-auto-links' ),   // missing in recent documentation
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                        'VHS'                   => __( 'VHS', 'amazon-auto-links' ),    // missing in recent documentation
-                        'Video'                 => __( 'Video', 'amazon-auto-links' ),  // missing in recent documentation
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // 2.1.0+ updated the list to the Amazon API Version 2013-08-01 from 2011-08-01
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleIN.html
-            case 'IN':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),    // 3.5.5+
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ),    // 3.5.5+
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),    // 3.5.5+
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),    // 3.5.5+
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),    // 3.5.5+
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    // 'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ), // Does not seem to be supported by Amazon API although the documentation indicates a check. // Missing in recent documentation
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'Furniture'             => __( 'Furniture', 'amazon-auto-links' ),    // 3.5.5+
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ),    // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),    // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),    // 3.5.5+
-                    'HomeGarden'            => __( 'Home Garden', 'amazon-auto-links' ),    // 3.5.5+
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ),    // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),    // 3.5.5+
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),    // 3.5.5+
-                    'LawnAndGarden'         => __( 'Lawn and Garden', 'amazon-auto-links' ),    // 3.5.5+
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ),    // 3.5.5+
-                    'LuxuryBeauty'          => __( 'Luxury Beauty', 'amazon-auto-links' ),    // 3.5.5+
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),    // 3.5.5+
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),    // 3.5.5+
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),    // 3.5.5+
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),    // 3.5.5+
-                    'Pantry'                => __( 'Pantry', 'amazon-auto-links' ),    // 3.5.5+
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),    // 3.5.5+
-                    'PetSupplies'           => __( 'Pet Supplies', 'amazon-auto-links' ),    // 3.5.5+
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),    // 3.5.5+
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),    // 3.5.5+
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),    // 3.5.5+
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),    // 3.5.5+
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),    // 3.5.5+
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),    // 3.5.5+
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleIT.html
-            case 'IT':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),    // 3.5.5+
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ), // 3.5.5+
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'Garden'                => __( 'Garden', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ), // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ), // 3.5.5+
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ), // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ), // 3.5.5+
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ), // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ), // 3.5.5+
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'Lighting'              => __( 'Lighting', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ),      // 3.1.0+
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),   // 3.1.0+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),    // 3.5.5+
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),    // 3.5.5+
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),    // 3.5.5+
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'SportingGoods', 'amazon-auto-links' ),  // 3.5.5+
-                    'Tools'                 => __( 'Tools', 'amazon-auto-links' ),  // 3.5.5+
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleJP.html
-            case 'JP':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ),
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Classical'             => __( 'Classical', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'ForeignBooks'          => __( 'Foreign Books', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ), // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'Hobbies'               => __( 'Hobbies', 'amazon-auto-links' ),
-                    'HomeImprovement'       => __( 'Home Improvement', 'amazon-auto-links' ),
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ), // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),
-                        'MusicTracks'           => __( 'Music Tracks', 'amazon-auto-links' ),   // missing in recent documentation
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),    // 3.5.5+
-                    'PetSupplies'           => __( 'Pet Supplies', 'amazon-auto-links' ),    // 3.5.5+
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                        'VHS'                   => __( 'VHS', 'amazon-auto-links' ),    // missing in recent documentation
-                    'Video'                 => __( 'Video', 'amazon-auto-links' ),
-                    'VideoDownload'         => __( 'Video Download', 'amazon-auto-links' ), // 3.5.5+
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),    // 3.5.5+
-                );
-            // @since   3.5.5
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleMX.html
-            case "MX":
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'HomeImprovement'       => __( 'Home Improvement', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleUK.html
-            case 'UK':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ),
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Classical'             => __( 'Classical', 'amazon-auto-links' ),
-                    'DVD'                   => __( 'DVD', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ), // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ),   // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'HomeGarden'            => __( 'Home Garden', 'amazon-auto-links' ),
-                        'HomeImprovement'       => __( 'Home Improvement', 'amazon-auto-links' ),   // missing in recent documentation
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ), // 3.5.5+
-                    'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                    'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),
-                    'Lighting'              => __( 'Lighting', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage', 'amazon-auto-links' ),      // 2.1.0+
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),       // 2.1.0+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),
-                        'MusicTracks'           => __( 'Music Tracks', 'amazon-auto-links' ),   // missing in recent documentation
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                    'Pantry'                => __( 'Pantry', 'amazon-auto-links' ), // 3.5.5+
-                        'OutdoorLiving'         => __( 'Outdoor Living', 'amazon-auto-links' ), // missing in recent documentation
-                        'Outlet'                => __( 'Outlet', 'amazon-auto-links' ), // missing in recent documentation
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),
-                    'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                        'SoftwareVideoGames'    => __( 'Software Video Games', 'amazon-auto-links' ),   // missing in recent documentation
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'Tools'                 => __( 'Tools', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'UnboxVideo'            => __( 'Unbox Video', 'amazon-auto-links' ),    // 3.5.5+
-                    'VHS'                   => __( 'VHS', 'amazon-auto-links' ),
-                    'Video'                 => __( 'Video', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                    'Watches'               => __( 'Watches', 'amazon-auto-links' ),
-                );
-            // @since   3.5.5
-            // @remark  The `AU` locale is missing in the AWS documentation. So the categories are extracted from the HTML source code of ScratchPad SearchIndex parameter.
-            // @see     http://webservices.amazon.com.au/scratchpad/index.html
-            case 'AU':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                    'Fashion'               => __( 'Fashion', 'amazon-auto-links' ),
-                    'HealthPersonalCare'    => __( 'HealthPersonalCare', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'KindleStore', 'amazon-auto-links' ),
-                    'MobileApps'            => __( 'MobileApps', 'amazon-auto-links' ),
-                    'Movies'                => __( 'Movies', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'OfficeProducts'        => __( 'OfficeProducts', 'amazon-auto-links' ),
-                    'PCHardware'            => __( 'PCHardware', 'amazon-auto-links' ),
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'SportingGoods', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'VideoGames'            => __( 'VideoGames', 'amazon-auto-links' ),
-                );
-            // @since   3.5.5
-            // @see     https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleBR.html
-            case 'BR':
-                return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Livros', 'amazon-auto-links' ),
-                    'KindleStore'           => __( 'Loja Kindle', 'amazon-auto-links' ),
-                    'MobileApps'            => __( 'Apps e Jogos', 'amazon-auto-links' ),
-                );
-            // @see https://docs.aws.amazon.com/AWSECommerceService/latest/DG/LocaleUS.html
             default:
             case 'US':
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html
                 return array(
-                    'All'                   => __( 'All', 'amazon-auto-links' ),
-                        'Apparel'               => __( 'Apparel', 'amazon-auto-links' ),    // missing in recent documentation
-                    'Appliances'            => __( 'Appliances', 'amazon-auto-links' ),
-                    'ArtsAndCrafts'         => __( 'Arts And Crafts', 'amazon-auto-links' ),
-                    'Automotive'            => __( 'Automotive', 'amazon-auto-links' ),
-                    'Baby'                  => __( 'Baby', 'amazon-auto-links' ),
-                    'Beauty'                => __( 'Beauty', 'amazon-auto-links' ),
-                    'Blended'               => __( 'Blended', 'amazon-auto-links' ),
-                    'Books'                 => __( 'Books', 'amazon-auto-links' ),
-                        'Classical'             => __( 'Classical', 'amazon-auto-links' ),  // missing in recent documentation
-                    'Collectibles'          => __( 'Collectibles', 'amazon-auto-links' ),
-                        'DigitalMusic'          => __( 'Digital Music', 'amazon-auto-links' ),  // missing in recent documentation
-                        'DVD'                   => __( 'DVD', 'amazon-auto-links' ),    // missing in recent documentation
-                    'Electronics'           => __( 'Electronics', 'amazon-auto-links' ),
-                        'GourmetFood'           => __( 'Gourmet Food', 'amazon-auto-links' ),   // missing in recent documentation
-                    'Fashion'               => __( 'Fashion', 'amazon-auto-links' ), // 3.5.5+
-                    'FashionBaby'           => __( 'Fashion Baby', 'amazon-auto-links' ), // 3.5.5+
-                    'FashionBoys'           => __( 'Fashion Boys', 'amazon-auto-links' ), // 3.5.5+
-                    'FashionGirls'          => __( 'Fashion Girls', 'amazon-auto-links' ), // 3.5.5+
-                    'FashionMen'            => __( 'Fashion Men', 'amazon-auto-links' ), // 3.5.5+
-                    'FashionWomen'          => __( 'Fashion Women', 'amazon-auto-links' ), // 3.5.5+
-                    'GiftCards'             => __( 'Gift Cards', 'amazon-auto-links' ), // 3.5.5+
-                    'Grocery'               => __( 'Grocery', 'amazon-auto-links' ),
-                    'Handmade'              => __( 'Handmade', 'amazon-auto-links' ),   // 3.5.5+
-                    'HealthPersonalCare'    => __( 'Health Personal Care', 'amazon-auto-links' ),
-                    'HomeGarden'            => __( 'Home Garden', 'amazon-auto-links' ),
-                    'Industrial'            => __( 'Industrial', 'amazon-auto-links' ),
-                        'Jewelry'               => __( 'Jewelry', 'amazon-auto-links' ),    // missing in recent documentation
-                    'KindleStore'           => __( 'Kindle Store', 'amazon-auto-links' ),
-                        'Kitchen'               => __( 'Kitchen', 'amazon-auto-links' ),    // missing in recent documentation
-                    'LawnAndGarden'         => __( 'Lawn and Garden', 'amazon-auto-links' ),
-                    'Luggage'               => __( 'Luggage & Travel Gear', 'amazon-auto-links' ),        // 3.5.5+
-                    'Magazines'             => __( 'Magazines', 'amazon-auto-links' ),
-                    'Marketplace'           => __( 'Marketplace', 'amazon-auto-links' ),
-                        'Miscellaneous'         => __( 'Miscellaneous', 'amazon-auto-links' ),  // missing in recent documentation
-                    'Merchants'             => __( 'Merchants', 'amazon-auto-links' ),  // 3.5.5+
-                    'MobileApps'            => __( 'Mobile Apps', 'amazon-auto-links' ),
-                    'Movies'                => __( 'Movies', 'amazon-auto-links' ), // 3.5.5+
-                    'MP3Downloads'          => __( 'MP3 Downloads', 'amazon-auto-links' ),
-                    'Music'                 => __( 'Music', 'amazon-auto-links' ),
-                    'MusicalInstruments'    => __( 'Musical Instruments', 'amazon-auto-links' ),
-                        'MusicTracks'           => __( 'Music Tracks', 'amazon-auto-links' ),   // missing in recent documentation
-                    'OfficeProducts'        => __( 'Office Products', 'amazon-auto-links' ),
-                        'OutdoorLiving'         => __( 'Outdoor Living', 'amazon-auto-links' ), // missing in recent documentation
-                    'Pantry'                => __( 'Pantry', 'amazon-auto-links' ),
-                    'PCHardware'            => __( 'PC Hardware', 'amazon-auto-links' ),
-                    'PetSupplies'           => __( 'Pet Supplies', 'amazon-auto-links' ),
-                    'Photo'                 => __( 'Photo', 'amazon-auto-links' ),
-                       'Shoes'                 => __( 'Shoes', 'amazon-auto-links' ),   // missing in recent documentation
-                    'Software'              => __( 'Software', 'amazon-auto-links' ),
-                    'SportingGoods'         => __( 'Sporting Goods', 'amazon-auto-links' ),
-                    'Tools'                 => __( 'Tools', 'amazon-auto-links' ),
-                    'Toys'                  => __( 'Toys', 'amazon-auto-links' ),
-                    'UnboxVideo'            => __( 'Unbox Video', 'amazon-auto-links' ),
-                        'VHS'                   => __( 'VHS', 'amazon-auto-links' ),    // missing in recent documentation
-                        'Video'                 => __( 'Video', 'amazon-auto-links' ),  // missing in recent documentation
-                    'Vehicles'              => __( 'Vehicles', 'amazon-auto-links' ),   // 3.5.5+
-                    'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
-                        'Watches'               => __( 'Watches', 'amazon-auto-links' ),    // missing in recent documentation
-                    'Wine'                  => __( 'Wine', 'amazon-auto-links' ),
-                    'Wireless'              => __( 'Wireless', 'amazon-auto-links' ),
-                        'WirelessAccessories'   => __( 'Wireless Accessories', 'amazon-auto-links' ),   // missing in recent documenattion
+                    'All' => __( 'All Departments', 'amazon-auto-links' ), 
+                    'AmazonVideo' => __( 'Prime Video', 'amazon-auto-links' ), 
+                    'Apparel' => __( 'Clothing & Accessories', 'amazon-auto-links' ), 
+                    'Appliances' => __( 'Appliances', 'amazon-auto-links' ), 
+                    'ArtsAndCrafts' => __( 'Arts, Crafts & Sewing', 'amazon-auto-links' ), 
+                    'Automotive' => __( 'Automotive Parts & Accessories', 'amazon-auto-links' ), 
+                    'Baby' => __( 'Baby', 'amazon-auto-links' ), 
+                    'Beauty' => __( 'Beauty & Personal Care', 'amazon-auto-links' ), 
+                    'Books' => __( 'Books', 'amazon-auto-links' ), 
+                    'Classical' => __( 'Classical', 'amazon-auto-links' ), 
+                    'Collectibles' => __( 'Collectibles & Fine Art', 'amazon-auto-links' ), 
+                    'Computers' => __( 'Computers', 'amazon-auto-links' ), 
+                    'DigitalMusic' => __( 'Digital Music', 'amazon-auto-links' ), 
+                    'Electronics' => __( 'Electronics', 'amazon-auto-links' ), 
+                    'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ), 
+                    'Fashion' => __( 'Clothing, Shoes & Jewelry', 'amazon-auto-links' ), 
+                    'FashionBaby' => __( 'Clothing, Shoes & Jewelry Baby', 'amazon-auto-links' ), 
+                    'FashionBoys' => __( 'Clothing, Shoes & Jewelry Boys', 'amazon-auto-links' ), 
+                    'FashionGirls' => __( 'Clothing, Shoes & Jewelry Girls', 'amazon-auto-links' ), 
+                    'FashionMen' => __( 'Clothing, Shoes & Jewelry Men', 'amazon-auto-links' ), 
+                    'FashionWomen' => __( 'Clothing, Shoes & Jewelry Women', 'amazon-auto-links' ), 
+                    'GardenAndOutdoor' => __( 'Garden & Outdoor', 'amazon-auto-links' ), 
+                    'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
+                    'GroceryAndGourmetFood' => __( 'Grocery & Gourmet Food', 'amazon-auto-links' ), 
+                    'Handmade' => __( 'Handmade', 'amazon-auto-links' ), 
+                    'HealthPersonalCare' => __( 'Health, Household & Baby Care', 'amazon-auto-links' ), 
+                    'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
+                    'Industrial' => __( 'Industrial & Scientific', 'amazon-auto-links' ), 
+                    'Jewelry' => __( 'Jewelry', 'amazon-auto-links' ), 
+                    'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
+                    'LocalServices' => __( 'Home & Business Services', 'amazon-auto-links' ), 
+                    'Luggage' => __( 'Luggage & Travel Gear', 'amazon-auto-links' ), 
+                    'LuxuryBeauty' => __( 'Luxury Beauty', 'amazon-auto-links' ), 
+                    'Magazines' => __( 'Magazine Subscriptions', 'amazon-auto-links' ), 
+                    'MobileAndAccessories' => __( 'Cell Phones & Accessories', 'amazon-auto-links' ), 
+                    'MobileApps' => __( 'Apps & Games', 'amazon-auto-links' ), 
+                    'MoviesAndTV' => __( 'Movies & TV', 'amazon-auto-links' ), 
+                    'Music' => __( 'CDs & Vinyl', 'amazon-auto-links' ), 
+                    'MusicalInstruments' => __( 'Musical Instruments', 'amazon-auto-links' ), 
+                    'OfficeProducts' => __( 'Office Products', 'amazon-auto-links' ), 
+                    'PetSupplies' => __( 'Pet Supplies', 'amazon-auto-links' ), 
+                    'Photo' => __( 'Camera & Photo', 'amazon-auto-links' ), 
+                    'Shoes' => __( 'Shoes', 'amazon-auto-links' ), 
+                    'Software' => __( 'Software', 'amazon-auto-links' ), 
+                    'SportsAndOutdoors' => __( 'Sports & Outdoors', 'amazon-auto-links' ), 
+                    'ToolsAndHomeImprovement' => __( 'Tools & Home Improvement', 'amazon-auto-links' ), 
+                    'ToysAndGames' => __( 'Toys & Games', 'amazon-auto-links' ), 
+                    'VHS' => __( 'VHS', 'amazon-auto-links' ), 
+                    'VideoGames' => __( 'Video Games', 'amazon-auto-links' ), 
+                    'Watches' => __( 'Watches', 'amazon-auto-links' ), 
                 );
         }
-
     }
 
     /**

@@ -35,14 +35,14 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         
         // These are used for API parameters as well
         'Keywords'              => null,      // the keyword to search
-        'Power'                 => null,        // @see http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
-        'Operation'             => 'ItemSearch',    // ItemSearch, ItemLookup, SimilarityLookup
+        // @deprecated 3.9.0 'Power'                 => null,        // @see http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
+        'Operation'             => 'SearchItems',    // ItemSearch, ItemLookup, SimilarityLookup // 3.9.0 PA-API changed the parameter structure
         'Title'                 => '',      // for the advanced Title option
         'Sort'                  => 'salesrank',        // pricerank, inversepricerank, sales_rank, relevancerank, reviewrank
         'SearchIndex'           => 'All',        
         'BrowseNode'            => '',    // ( optional )
         'Availability'          => 'Available',    // ( optional ) 
-        'Condition'             => 'New',    
+        'Condition'             => 'Any',
         'MaximumPrice'          => null,
         'MinimumPrice'          => null,
         'MinPercentageOff'      => null,

@@ -35,14 +35,16 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'type'          => 'radio',
                 'title'         => '', 
                 'label'         => array(
-                    'Manufacturer' => __( 'Manufacturer', 'amazon-auto-links' ),
-                    'Author'       => __( 'Author', 'amazon-auto-links' ),
                     'Actor'        => __( 'Actor', 'amazon-auto-links' ),
-                    'Composer'     => __( 'Composer', 'amazon-auto-links' ),
-                    'Brand'        => __( 'Brand', 'amazon-auto-links' ),
                     'Artist'       => __( 'Artist', 'amazon-auto-links' ),
-                    'Conductor'    => __( 'Conductor', 'amazon-auto-links' ),
-                    'Director'     => __( 'Director', 'amazon-auto-links' ),
+                    'Author'       => __( 'Author', 'amazon-auto-links' ),
+                    'Brand'        => __( 'Brand', 'amazon-auto-links' ),
+
+// @deprecated 3.9.0    PA-API 5.0 Do not support these
+//                    'Manufacturer' => __( 'Manufacturer', 'amazon-auto-links' ),
+//                    'Composer'     => __( 'Composer', 'amazon-auto-links' ),
+//                    'Conductor'    => __( 'Conductor', 'amazon-auto-links' ),
+//                    'Director'     => __( 'Director', 'amazon-auto-links' ),
                 ),
                 'default'       => 'Author',
                 'description'   => __( 'Enter a keyword to narrow down the results with one of the above attributes.', 'amazon-auto-links' )
@@ -64,9 +66,9 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                     'Used'          => __( 'Used', 'amazon-auto-links' ),
                     'Collectible'   => __( 'Collectible', 'amazon-auto-links' ),
                     'Refurbished'   => __( 'Refurbished', 'amazon-auto-links' ),
-                    'All'           => __( 'All', 'amazon-auto-links' ),
+                    'Any'           => __( 'Any', 'amazon-auto-links' ),
                 ),
-                'default'       => 'New',
+                'default'       => 'Any',
                 'description'   => __( 'If the search index is All, this option does not take effect.', 'amazon-auto-links' ),
             ),
             array(

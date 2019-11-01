@@ -129,10 +129,15 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {
                     return;
                 }
+
+                $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
+                $_sLocale   = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sCurrency = $this->_oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
+                $_sLanguage = $this->_oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );
+
                 AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                    $aScheduleTask[ 'associate_id' ],
+                    $aScheduleTask[ 'associate_id' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
                     $aScheduleTask[ 'asin' ],
-                    $aScheduleTask[ 'locale' ],
                     ( integer ) $_iCacheDuration,
                     ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
                     $this->_oUnitOption->get( 'item_format' ),

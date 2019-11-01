@@ -68,16 +68,17 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
 
         // Retrieve similar products in a separate routine
         // Do this only `%similar%` is present in the Item Format option.
-        if ( false !== strpos( $_sItemFormat, '%similar%' ) ) {
-            $this->_scheduleFetchingSimilarProducts(
-                $_aProductData,
-                $_sASIN,
-                $_sLocale,
-                $_sAssociateID,
-                $_iCacheDuration,
-                $_bForceRenew
-            );
-        }
+        // @deprecated 3.9.0
+//        if ( false !== strpos( $_sItemFormat, '%similar%' ) ) {
+//            $this->_scheduleFetchingSimilarProducts(
+//                $_aProductData,
+//                $_sASIN,
+//                $_sLocale,
+//                $_sAssociateID,
+//                $_iCacheDuration,
+//                $_bForceRenew
+//            );
+//        }
         $this->_setProductData(
             $_aProductData,
             $_sASIN,
@@ -366,8 +367,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                 $_aAPIArguments = array(
                     'Operation'             => 'ItemLookup',
 
-                    // (optional) Used | Collectible | Refurbished, All
-                    'Condition'             => 'All',
+                    // (optional) Used | Collectible | Refurbished, Any
+                    'Condition'             => 'Any',
 
                     // (optional) All IdTypes except ASINx require a SearchIndex to be specified.  SKU | UPC | EAN | ISBN (US only, when search index is Books). UPC is not valid in the CA locale.
                     'IdType'                => 'ASIN',

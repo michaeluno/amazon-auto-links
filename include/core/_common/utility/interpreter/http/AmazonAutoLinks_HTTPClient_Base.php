@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'headers'     => array(),
         'cookies'     => array(),
         'body'        => null,
-        'compress'    => false,
+        'compress'    => false, // does not seem to take effect
         'decompress'  => true,
         'sslverify'   => true,
         'stream'      => false,
@@ -386,6 +386,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $_sCharSet,
                 $iCacheDuration,
                 $sURL   // 3.9.0
+            );
+            // 3.9.0 - gives a change to change the cache duration, depending on the cached data content, checked in the above filter hook callbacks
+            // this is useful when an error is returned which should not be kept so long
+            $iCacheDuration  = apply_filters(
+                'aal_filter_http_request_set_cache_duration_' . $_sCacheName,
+                $iCacheDuration,
+                $_sCacheName,
+                $sURL
             );
             $mData           = $this->___getCacheCompressed( $mData );  // 3.7.6+
             $_bResult        = $_oCacheTable->setCache(

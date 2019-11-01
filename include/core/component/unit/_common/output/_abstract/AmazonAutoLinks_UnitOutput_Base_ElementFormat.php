@@ -24,8 +24,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       3.5.0       Renamed from `_formatProducts()`.
      */
     protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
-
+        
         $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocales );
+        $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
+        $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+        $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
+        $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );
 
         // Second Iteration - format items and access custom database table.
         foreach( $aProducts as $_iIndex => &$_aProduct ) {
@@ -35,7 +39,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     $_aProduct,
                     $_aDBProductRows,
                     $sLocale,
-                    $sAssociateID
+                    $sAssociateID,
+                    $_sCurrency,
+                    $_sLanguage
                 );
             } catch ( Exception $_oException ) {
                 unset( $aProducts[ $_iIndex ] );
@@ -63,37 +69,48 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          * @param   array $aASINLocales
          * @return  array
          * @since   3.5.0
+         * @todo 3.9.0 Implement a unit options for `preferred_currency` and `language`
          */
         private function ___getProductsRowsFromDatabase( array $aASINLocales ) {
             if ( ! $this->bDBTableAccess ) {
                 return array();
             }
-            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales );
+//            $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
+//            $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+            // Not setting a default value here for backward-compatibility with v3.8.x or below
+            // which do not have `preferred_currency` and `language` columns
+            // as the class queries with these columns while it doesn't when there isn't a value passed.
+            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), '' );
+            $_sLanguage = $this->oUnitOption->get( array( 'language' ), '' );
+            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales, $_sLanguage, $_sCurrency );
             return $_oProducts->get();
         }
         /**
          * @param       array       $_aProduct
          * @since       3.5.0
+         * @since       3.9.0       Added the $_sCurrency, $_sLanguage parameters.
          * @throws      Exception
          * @return      array
          */
-        private function ___getProductFormatted( $_aProduct, $_aDBProductRows, $sLocale, $sAssociateID ) {
+        private function ___getProductFormatted( $_aProduct, $_aDBProductRows, $sLocale, $sAssociateID, $_sCurrency, $_sLanguage ) {
 
             if ( ! $this->bDBTableAccess ) {
                 return $_aProduct;
             }
 
             // @todo even the API is disconnected, it should return the cache
-            if ( ! $this->oOption->isAPIConnected() ) {
-                return $_aProduct;
-            }
+//            if ( ! $this->oOption->isAPIConnected() ) {
+//                return $_aProduct;
+//            }
 
-            // Price, Rating, Reviews, and Image Sets - these need to access the plugin cache database. e.g. %price%, %rating%, %review%
+            // Rating and Reviews - these need to access the plugin cache database. e.g. %rating%, %review%
             $_aDBProductRow                 = $this->___getDBProductRow(
                 $_aDBProductRows,
                 $_aProduct[ 'ASIN' ],
                 $sLocale,
-                $sAssociateID // for scheduling a background task when a row is not found
+                $sAssociateID, // for scheduling a background task when a row is not found
+                $_sCurrency,
+                $_sLanguage
             );
 
             $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
@@ -112,10 +129,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
             $_aProduct[ 'image_set' ]        = $_oImageSetFormatter->get();
-            $_oSimilarItemsFormatter         = new AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems(
-                $this, $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow
-            );
-            $_aProduct[ 'similar_products' ] = $_oSimilarItemsFormatter->get();
+//            $_oSimilarItemsFormatter         = new AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems(
+//                $this, $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow
+//            );
+//            $_aProduct[ 'similar_products' ] = $_oSimilarItemsFormatter->get();
+            // 3.9.0 Deprecated
+            $_aProduct[ 'similar_products' ] = '';
 
             // 3.8.0 adding `feature`, `category`, `rank`
             // for search-type units, the value is already assigned
@@ -164,20 +183,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
              * @since       3
              * @since       3.5.0       Changed the visibility scope from protected.
              * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
+             * @since       3.9.0       Added the $_sCurrency, $_sLanguage parameters.
              */
-            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID='' ) {
+            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID='', $_sCurrency, $_sLanguage ) {
 
                 if ( ! $this->bDBTableAccess ) {
                     return array();
                 }
-                $_aDBProductRow = $this->getElementAsArray( $aDBRows, $sASIN . '_' . $sLocale );
+
+                $_aDBProductRow = $this->getElementAsArray( $aDBRows, $sASIN . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage );
 
                 // Schedule a background task to retrieve the product information.
                 if ( $this->___shouldRenewRow( $_aDBProductRow, $sAssociateID ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                        $sAssociateID,
+                        $sAssociateID . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
                         $sASIN,
-                        $sLocale,
                         ( integer ) $this->oUnitOption->get( 'cache_duration' ),
                         ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' ),
                         $this->oUnitOption->get( 'item_format' )
@@ -328,16 +348,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      */
     protected function _getTitleSanitized( $sTitle ) {
 
-        // $sTitle = strip_tags( $sTitle );
-
-        // removes the heading numbering. e.g. #3: Product Name -> Product Name
-        // Do not use "substr($sTitle, strpos($sTitle, ' '))" since some title contains double-quotes and they mess up html formats
-        // $sTitle = trim( preg_replace('/#\d+?:\s+?/i', '', $sTitle ) );
-        
-        $sTitle = apply_filters(
-            'aal_filter_unit_product_raw_title', 
-            $sTitle
-        );
+        $sTitle = apply_filters( 'aal_filter_unit_product_raw_title', $sTitle );
         
         // Title character length
         if ( 0 == $this->oUnitOption->get( 'title_length' ) ) {
@@ -349,8 +360,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         ) {
             $sTitle = $this->getSubstring( $sTitle, 0, $this->oUnitOption->get( 'title_length' ) ) . '...';
         }
-        
-//        return $sTitle;
+
         // @todo Examine whether escaping is needed here. The returned value may be used in an attribute.
          return esc_attr( $sTitle );
 
@@ -447,6 +457,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $sASIN, // 2nd param
             $this->oUnitOption->get()    // 3rd param
         );
+
+        // @todo Examine whether escaping here is needed
         return esc_url( $_sStyledURL );
             
     }
@@ -478,22 +490,25 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @return      string
      * @since       3.3.0
      * @since       3.5.0   Renamed from `getContents()`.
-     * 
+     * @since       3.9.0   The EditorialReviews element has gone in PA-API 5.0. So use the Features element.
+     * @deprecated  3.9.0   Use the method of `AmazonAutoLinks_Unit_Utility`.
      */
     protected function _getContents( $aItem ) {
 
-        $_aEditorialReviews = $this->getElementAsArray( 
+        // @deprecated 3.9.0    EditorialReviews no longer exist in the response of PA-API 5.0.
+/*        $_aEditorialReviews = $this->getElementAsArray(
             $aItem,
             array( 'EditorialReviews', 'EditorialReview' )
         );
-                
         $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
             $_aEditorialReviews,
             $this->oDOM,
             $this->oUnitOption
         );
-        $_sContents = $_oContentFormatter->get();                
-        
+        $_sContents = $_oContentFormatter->get();*/
+
+        $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
+        $_sContents = implode( ' ', $_aFeatures );
         return "<div class='amazon-product-content'>"
                 . $_sContents
             . "</div>";

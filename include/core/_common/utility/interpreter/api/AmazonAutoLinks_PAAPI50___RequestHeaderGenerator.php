@@ -15,54 +15,13 @@
  */
 class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
 
-    /**
-     * @var array
-     * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
-     * @remark  The CN locale is missing
-     */
-    private $___aRegionNames = array(
-        'AU'        => 'us-west-2',  // Australia	webservices.amazon.com.au
-        'BR'        => 'us-east-1',  // Brazil	webservices.amazon.com.br
-        'CA'        => 'us-east-1',  // Canada	webservices.amazon.ca
-        'FR'        => 'eu-west-1',  // France	webservices.amazon.fr
-        'DE'        => 'eu-west-1',  // Germany	webservices.amazon.de
-        'IN'        => 'eu-west-1',  // India	webservices.amazon.in
-        'IT'        => 'eu-west-1',  // Italy	webservices.amazon.it
-        'JP'        => 'us-west-2',  // Japan	webservices.amazon.co.jp
-        'MX'        => 'us-east-1',  // Mexico	webservices.amazon.com.mx
-        'ES'        => 'eu-west-1',  // Spain	webservices.amazon.es
-        'TR'        => 'eu-west-1',  // Turkey	webservices.amazon.com.tr
-        'AE'        => 'eu-west-1',  // United Arab Emirates	webservices.amazon.ae
-        'UK'        => 'eu-west-1',  // United Kingdom	webservices.amazon.co.uk
-        'US'        => 'us-east-1',  // United States	webservices.amazon.com
-    );
-    private $___aHosts = array(
-        'AU'        => 'webservices.amazon.com.au',  // Australia
-        'BR'        => 'webservices.amazon.com.br',  // Brazil
-        'CA'        => 'webservices.amazon.ca',  // Canada
-        'FR'        => 'webservices.amazon.fr',  // France
-        'DE'        => 'webservices.amazon.de',  // Germany
-        'IN'        => 'webservices.amazon.in',  // India
-        'IT'        => 'webservices.amazon.it',  // Italy
-        'JP'        => 'webservices.amazon.co.jp',  // Japan
-        'MX'        => 'webservices.amazon.com.mx',  // Mexico
-        'ES'        => 'webservices.amazon.es',  // Spain
-        'TR'        => 'webservices.amazon.com.tr',  // Turkey
-        'AE'        => 'webservices.amazon.ae',  // United Arab Emirates
-        'UK'        => 'webservices.amazon.co.uk',  // United Kingdom
-        'US'        => 'webservices.amazon.com',  // United States
-    );
-
     private $___sAccessKey      = null;
     private $___sSecretKey      = null;
     private $___sPath           = '/paapi5/searchitems';    // the url part that follows after the domain
     private $___sRegionName     = null;
     private $___sServiceName    = 'ProductAdvertisingAPI';
     private $___sHTTPMethod     = 'POST';
-
     private $___aHeaderItems    = array();
-
-
     private $___sHMACAlgorithm  = "AWS4-HMAC-SHA256";
     private $___sPAAPI5Request  = "aws4_request";
     private $___sSignedHeader   = null;
@@ -70,7 +29,6 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
     private $___sCurrentDate    = null;
     private $___sLocale         = 'US';
     private $___sHost           = '';
-
     private $___sOperation      = '';
     private $___aPayload        = array();
     private $___sPayload        = "";
@@ -99,16 +57,18 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
      * @param   string  $sLocale    Accepts 'AU', 'BR', 'CA', 'FR', 'DE', 'IN', 'IT', 'JP', 'MX', 'ES', 'TR', 'AE', 'UK', 'US'
      */
     public function setLocale( $sLocale ) {
-        $_sRegion = isset( $this->___aRegionNames[ $sLocale ] )
-            ? $this->___aRegionNames[ $sLocale ]
-            : $this->___aRegionNames[ 'US' ];
+        $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
+        $_sRegion = isset( $_oLocale->aRegionNames[ $sLocale ] )
+            ? $_oLocale->aRegionNames[ $sLocale ]
+            : $_oLocale->aRegionNames[ 'US' ];
         $this->setRegionName( $_sRegion );
         $this->___sHost = $this->___getHostByLocale( $sLocale );
     }
         private function ___getHostByLocale( $sLocale ) {
-            return isset( $this->___aHosts[ $sLocale ] )
-                ? $this->___aHosts[ $sLocale ]
-                : $this->___aHosts[ 'US' ];
+            $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
+            return isset( $_oLocale->aHosts[ $sLocale ] )
+                ? $_oLocale->aHosts[ $sLocale ]
+                : $_oLocale->aHosts[ 'US' ];
         }
 
     public function setPath( $sPath ) {
@@ -124,6 +84,14 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
     }
 
     public function setPayload( array $aPayload ) {
+        foreach( $aPayload as $_k => $_v ) {
+            if ( null === $_v ) {
+                unset( $aPayload[ $_k ] );
+            }
+        }
+        $aPayload = $aPayload + array(
+            'Marketplace' => $this->___getMarketplaceByLocale( $this->___sLocale ),
+        );
         $this->___aPayload = $aPayload;
         $this->___sPayload = json_encode( $aPayload );
         // if the `Operation` argument is set, set the Operation property
@@ -131,7 +99,12 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
             ? $aPayload[ 'Operation' ]
             : '';
     }
-
+        private function ___getMarketplaceByLocale( $sLocale ) {
+            $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
+            return isset( $_oLocale->aMarketPlaces[ $sLocale ] )
+                ? $_oLocale->aMarketPlaces[ $sLocale ]
+                : $_oLocale->aMarketPlaces[ 'US' ];
+        }
     public function setRequestMethod( $sMethod ) {
         $this->___sHTTPMethod = $sMethod;
     }
@@ -156,9 +129,8 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
      * @return string
      */
     public function getHeadersAsString() {
-        $_aHeaders = $this->getHeaders();
         $_sHeaderString = "";
-        foreach( $_aHeaders as $_sKey => $_sValue ) {
+        foreach( $this->getHeaders() as $_sKey => $_sValue ) {
             $_sHeaderString .= $_sKey . ': ' . $_sValue . "\r\n";
         }
         return $_sHeaderString;

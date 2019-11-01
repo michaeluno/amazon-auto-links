@@ -32,7 +32,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
     static public $aStructure_Row = array(
         'object_id'                     => null,   // (integer)
         'asin_locale'                   => null,   // (string) XXXXXXXXXX_XX
-        'locale'                        => null,   // (string) XX      e.g. US 
+        'locale'                        => null,   // (string) XX      e.g. US
         'modified_time'                 => null,   // (string) dddd-dd-dd dd:dd:dd
         'expiration_time'               => null,   // (string) dddd-dd-dd dd:dd:dd
         'links'                         => null,   // (string) 
@@ -64,7 +64,9 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'categories'                    => null,   // (string) 3.8.0
         'is_prime'                      => null,   // (boolean) 3.9.0
         'is_adult'                      => null,   // (boolean) 3.9.0
-        'language'                      => null,   // (string) 3.9.0 displaying language
+        'language'                      => null,   // (string) 3.9.0 displaying language,  e.g. de_DE
+        'preferred_currency'            => null,   // (string) 3.9.0
+        'error'                         => null,   // (string) 3.9.0
     );
    
     /**
@@ -75,14 +77,16 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
     public function getCreationQuery() {
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             object_id bigint(20) unsigned NOT NULL auto_increment,
-            asin_locale varchar(13) UNIQUE NOT NULL,
+            asin_locale varchar(13) NOT NULL,
             locale varchar(4),            
+            language varchar(10),            
             modified_time datetime NOT NULL default '0000-00-00 00:00:00',
             expiration_time datetime NOT NULL default '0000-00-00 00:00:00',
             links text,
             rating tinyint unsigned,
             rating_image_url text,
             rating_html blob,
+            preferred_currency varchar(10),
             currency varchar(10),
             sales_rank bigint(20),
             price bigint(20) unsigned,
@@ -108,6 +112,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             features text,
             is_prime tinyint(1),            
             is_adult tinyint(1),
+            error varchar(800),
             PRIMARY KEY  (object_id) 
         ) " . $this->_getCharactersetCollation() . ";";
     }
@@ -118,10 +123,18 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
      * @param       array        $aRow           The row data.
      * @param       array|string $asFormat       Placeholders that indicate row array element data types. Leave it `null` to apply auto-generated formats.
      * @return      integer      The object id if successfully set; otherwise, 0;
+     * @since       unknown
+     * @since       3.9.0        Added the currency and language parameters. Moved the `$asFormat` parameter to the last.
      */
-    public function setRowByASINLocale( $sASINLocale, $aRow, $asFormat=null ) {
-        
-        $_iID  = $this->getIDByASINLocale( $sASINLocale );
+    public function setRowByASINLocale( $sASINLocale, $aRow, $sCurrency='', $sLanguage='', $asFormat=null ) {
+
+        $sCurrency = $sCurrency
+            ? $sCurrency
+            : $this->getElement( $aRow, array( 'preferred_currency' ), '' );
+        $sLanguage = $sLanguage
+            ? $sLanguage
+            : $this->getElement( $aRow, array( 'language' ), '' );
+        $_iID  = $this->getIDByASINLocale( $sASINLocale, $sCurrency, $sLanguage );
         if ( $_iID ) {
             $_iCountSetRows = $this->update( 
                 $aRow, // data
@@ -137,7 +150,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
                 $aRow,
                 $asFormat
             );
-            $_iID  = $this->getIDByASINLocale( $sASINLocale );
+            $_iID  = $this->getIDByASINLocale( $sASINLocale, $sCurrency, $sLanguage );
 
         }     
         // This method is supposed to edit only one row 
@@ -148,24 +161,48 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             
     }
 
-    public function getID( $sASIN, $sLocale ) {
+    /**
+     * @param $sASIN
+     * @param $sLocale
+     *
+     * @return mixed
+     */
+    public function getID( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
         $_sASINLocale = $sASIN . '_' . strtoupper( $sLocale );
-        return $this->getIDByASINLocale( $_sASINLocale );
+        return $this->getIDByASINLocale( $_sASINLocale, $sCurrency, $sLanguage );
     }
-    public function getIDByASINLocale( $sASINLocale ) {
-        return $this->getVariable(
-            "SELECT object_id
-            FROM {$this->aArguments[ 'table_name' ]}
-            WHERE asin_locale = '{$sASINLocale}'"
-        );
+
+    /**
+     * @param $sASINLocale
+     *
+     * @return mixed
+     */
+    public function getIDByASINLocale( $sASINLocale, $sCurrency='', $sLanguage='' ) {
+
+        $_sQuery = "SELECT object_id "
+            . "FROM {$this->aArguments[ 'table_name' ]} "
+            . "WHERE asin_locale = '{$sASINLocale}'";
+
+        // @since 3.9.0 Added `language` and `preferred_currency` columns
+        $_sCurrentVersion = get_option( "aal_products_version", '0' );
+        if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=')) {
+            if ( $sLanguage ) {
+                $_sQuery .= " AND language='{$sLanguage}'";
+            }
+            if ( $sCurrency ) {
+                $_sQuery .= " AND preferred_currency='{$sCurrency}'";
+            }
+        }
+
+        return $this->getVariable( $_sQuery );
     }
     /**
      * Checks whether a row exists or not by ASIN and locale.
      * @return      boolean
+     * @todo    Support language and currency
      */
-    public function doesRowExist( $sASIN, $sLocale ) {
-        return ( boolean ) $this->getID( $sASIN, $sLocale );
+    public function doesRowExist( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
+        return ( boolean ) $this->getID( $sASIN, $sLocale, $sCurrency, $sLanguage );
     }
-    
 
 }
