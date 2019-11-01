@@ -4,8 +4,8 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.2.1
-Stable tag:         3.8.14
+Tested up to:       5.2.4
+Stable tag:         3.9.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -286,13 +286,14 @@ You can check if your access key is valid or not with [Scratchpad](http://webser
 5. **Setting Page** (Selecting Templates)
 
 == Todo ==
+- @todo update PHP Simple HTML DOM Parser as it is not compatible with PHP 7.3.
 - @todo add the SubscriptionID parameter to product links when AWS keys are given.
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
 - @TODO compress HTTP request caches as customer review caches are too large.
 
 == Changelog ==
-= 3.9.0 11/1/2019 =
+= 3.9.0 - 11/1/2019 =
 - Added support for PA-API 5 (deprecated the use of PA-API 4, which is no longer functional as of Oct 31, 2019 due to the termination by Amazon).
 - Added the ability for the category unit type not to require Product Advertising API keys.
 - Added the `Error Log` page (Tools -> Error Log) that displays plugin errors.
