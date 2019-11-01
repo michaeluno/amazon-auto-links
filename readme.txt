@@ -144,7 +144,7 @@ Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto
 Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
 
 = My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? =
-Try [Scratchpad](http://webservices.amazon.com/scratchpad/) to make sure your keys work there as well.
+Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure your keys work there as well.
 
 
 == Other Notes ==
@@ -275,7 +275,7 @@ Then press the `Create New Access Key` button to create a key. Don't forget to k
 
 Also note that at the point that an access key is issued, if you have not created an account with Product Advertising API, the key will be invalid. If that happens, delete the created access key and go back to the previous step.
 
-You can check if your access key is valid or not with [Scratchpad](http://webservices.amazon.com/scratchpad/).
+You can check if your access key is valid or not with [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/).
 
 == Screenshots ==
 

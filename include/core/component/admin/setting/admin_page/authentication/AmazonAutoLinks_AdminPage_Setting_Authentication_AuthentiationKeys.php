@@ -44,7 +44,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'label'             => $this->___getStatus( $_bConnected ),
                 'description'       => sprintf(
                     __( 'If you get an error, try testing your keys with <a href="%1$s" target="_blank">Scratchpad</a>.', 'amazon-auto-links' ),
-                    'https://webservices.amazon.com/scratchpad/'
+                    'https://webservices.amazon.com/paapi5/scratchpad/'
                 ),
             ),
             array(
