@@ -73,8 +73,8 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             ),
             array(  // 3.6.7+
                 'field_id'          => 'associates_test_tag',
-                'title'             => __( 'Associate ID', 'amazon-auto-links' )
-                    . ' ' . __( '(optional)', 'amazon-auto-links' ),
+                'title'             => __( 'Associate ID', 'amazon-auto-links' ),
+                    // . ' ' . __( '(optional)', 'amazon-auto-links' ),
                 'type'              => 'text',
                 'description'       => __( 'The Amazon Associates tag.', 'amazon-auto-links' ) . ' '
                     . __( 'Some locales may require this to be set.', 'amazon-auto-links' ) . ' '
