@@ -58,7 +58,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {
             private function ___getCategoryFeedURLConstructed( $sPageURL ) {
 
                 // Validate the URL
-                if( false === filter_var( $sPageURL, FILTER_VALIDATE_URL, FILTER_FLAG_HOST_REQUIRED) ){
+                if( false === filter_var( $sPageURL, FILTER_VALIDATE_URL ) ){
                     return '';
                 }
 
