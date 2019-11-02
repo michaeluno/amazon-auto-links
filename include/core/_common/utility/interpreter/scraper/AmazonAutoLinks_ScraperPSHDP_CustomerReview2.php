@@ -11,6 +11,7 @@
  * Provides methods to extracts customer reviews.
  *
  * @since      3.9.0
+ * @deprecated       3.9.1      Use `AmazonAutoLinks_ScraperDOM_CustomerReview2` instead.
  */
 class AmazonAutoLinks_ScraperPSHDP_CustomerReview2 extends AmazonAutoLinks_ScraperPSHDP_CustomerReview {
         

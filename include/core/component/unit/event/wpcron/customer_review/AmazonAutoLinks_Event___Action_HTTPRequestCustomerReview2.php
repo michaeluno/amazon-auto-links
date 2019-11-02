@@ -69,10 +69,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
          */
         private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
 
-            $_oScraper = new AmazonAutoLinks_ScraperPSHDP_CustomerReview2( $sHTML );
-            if ( ! $_oScraper->oSimpleDOM ) {
-                return array();
-            }
+            $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $sHTML );
             $_iRating       = $_oScraper->getRating();
             $_inReviewCount = $_oScraper->getNumberOfReviews();
             $_aRow = array(

@@ -609,7 +609,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             $sString,   // subject
             $_aMatches
         );
-        return is_numeric( $_aMatches[ 0 ] )
+        return isset( $_aMatches[ 0 ] ) && is_numeric( $_aMatches[ 0 ] )
             ? ( integer ) ( $_aMatches[ 0 ] * 10 )
             : null;
     }
