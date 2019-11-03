@@ -90,7 +90,9 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'type'          => 'number',
                 'title'         => __( 'Minimum Percentage Off', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
                 'attributes'    => array(
-                    'max' => 100,
+                    'max'  => 100,
+                    'min'  => 0,
+                    'step' => 1,
                 ),
                 'description'   => __( 'Specifies the minimum percentage off for the items to return.', 'amazon-auto-links' ),
             ),    
@@ -112,7 +114,23 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'type'          => 'text',
                 'title'         => __( 'Merchant ID', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
                 'description'   => __( 'Filter search results and offer listings to only include items sold by Amazon. By default, Product Advertising API returns items sold by various merchants including Amazon. Use the Amazon to limit the response to only items sold by Amazon. Case sensitive. e.g.<code>Amazon</code>', 'amazon-auto-links' ),
-            ),              
+            ),
+            // 3.9.1
+            array(
+                'field_id'      => $sFieldIDPrefix . 'MinReviewsRating',
+                'type'          => 'select',
+                'title'         => __( 'Minimum Review Rating', 'amazon-auto-links' ),
+                'label'         => array(
+                    0 => __( 'None', 'amazon-auto-links' ),
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                    5 => 5,
+                ),
+                'default'       => 0,
+                'tip'   => __( 'Filters search results to items with customer review ratings above selected value.', 'amazon-auto-links' ),
+            ),
         );
         
         // Insert common field arguments.

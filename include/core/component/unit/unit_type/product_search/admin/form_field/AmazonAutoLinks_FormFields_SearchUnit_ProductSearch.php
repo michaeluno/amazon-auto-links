@@ -72,7 +72,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
                 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
                     . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
-            ),           
+            ),
             array(
                 // @see http://docs.aws.amazon.com/AWSECommerceService/latest/DG/SortingbyPopularityPriceorCondition.html
                 'field_id'      => $sFieldIDPrefix . 'Sort',
@@ -90,7 +90,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 ),
                 'default'       => 'Relevance',
 //                'description'   => __( 'When the search index is selected to <code>All</code>, this option does not take effect.', 'amazon-auto-links' ),
-            ),                              
+            ),
         );
         return $_aFields;
         

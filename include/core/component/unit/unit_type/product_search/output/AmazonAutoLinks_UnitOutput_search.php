@@ -461,12 +461,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             'MinPrice'              => $this->oUnitOption->get( 'MinimumPrice' )
                 ? $this->oUnitOption->get( 'MinimumPrice' )
                 : null,
-// @todo 3.9.0 add this in the unit option field
             'MinReviewsRating'      => $this->oUnitOption->get( 'MinReviewsRating' )
-                ? $this->oUnitOption->get( 'MinReviewsRating' )
+                ? ( integer ) $this->oUnitOption->get( 'MinReviewsRating' )
                 : null,
             'MinSavingPercent'      => $this->oUnitOption->get( 'MinPercentageOff' )
-                ? $this->oUnitOption->get( 'MinPercentageOff' )
+                ? ( integer ) $this->oUnitOption->get( 'MinPercentageOff' )
                 : null,
             'Merchant'            => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
                 ? 'Amazon'
@@ -488,8 +487,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         // not sure but it occurred an element without an empty key got inserted
         unset( $_aPayload[ '' ] );
-
         return $_aPayload;
+
     }
 
         /**

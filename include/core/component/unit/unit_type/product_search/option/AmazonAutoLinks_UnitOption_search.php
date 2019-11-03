@@ -48,8 +48,11 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'MinPercentageOff'      => null,
         'MerchantId'            => null,    // 2.0.7+
         'MarketplaceDomain'     => null,    // 2.1.0+
-        'ItemPage'              => null,        
+        'ItemPage'              => null,
 
+        'MinReviewsRating'      => 0,       // 3.9.1
+//        'MinSavingPercent'      => 0,       // 3.9.1 - same as `MinPercentageOff`
+//        'Merchant'              => null,    // 3.9.1 - same as `MerchantId`
     );
     
     /**
