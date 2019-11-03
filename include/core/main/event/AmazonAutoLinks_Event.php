@@ -79,7 +79,7 @@ class AmazonAutoLinks_Event {
                             'aal_action_api_transient_renewal',
                             'aal_action_api_get_product_info',
                             'aal_action_api_get_products_info', // 3.7.7+
-                            'aal_action_api_get_customer_review',
+//                            'aal_action_api_get_customer_review', // @deprecated 3.9.1
                             'aal_action_api_get_customer_review2',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',
@@ -89,7 +89,7 @@ class AmazonAutoLinks_Event {
                             'aal_action_unit_prefetch',
                             'aal_action_api_get_product_info',
                             'aal_action_api_get_products_info', // 3.7.7+
-                            'aal_action_api_get_customer_review',
+//                            'aal_action_api_get_customer_review', // @deprecated 3.9.1
                             'aal_action_api_get_customer_review2',
                             'aal_action_api_get_similar_products',  // 3.3.0+
                             'aal_action_http_cache_renewal',

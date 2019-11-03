@@ -185,6 +185,8 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
      * @remark          Accessed publicly.
      * @since           3.5.0       Removed the `$sLocale` parameter.
      * @return          boolean     True if scheduled; otherwise, false.
+     * @deprecated      3.9.0       No longer used.
+     * @todo if this method is supported again, make sure to pass the currency and the language.
      */
     public function scheduleInBackground( array $aAPIParameters, $iCacheDuration=3600 ) {
         return $this->scheduleSingleWPCronTask(

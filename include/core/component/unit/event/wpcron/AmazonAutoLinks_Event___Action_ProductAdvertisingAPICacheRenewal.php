@@ -13,13 +13,14 @@
  * @package      Amazon Auto Links
  * @since        3
  * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_ProductAdvertisingAPICacheRenewal`.
+ * @deprecated   3.9.0      No longer used as prefetch for searching products is now removed.
  */
 class AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName = 'aal_action_api_transient_renewal';
 
     /**
-     *
+     * @todo    Support the currency and the language.
      */
     protected function _doAction( /* $aRequestInfo */ ) {
         

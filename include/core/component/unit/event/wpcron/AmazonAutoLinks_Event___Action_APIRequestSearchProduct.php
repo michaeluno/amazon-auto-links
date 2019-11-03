@@ -128,11 +128,12 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
          * @return      void
          * @since       unknown
          * @since       3.7.7       Changed the visibility to `protected` to allow extended classes to access it.
+         * @deprecated  3.9.1       Should not be used
          */
         protected function _setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
             // Check if a customer review exists in the API response.
-            $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
+/*            $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
 
             if ( $_bCustomerReviewExists ) {
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
@@ -146,7 +147,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $iCacheDuration,
                     $bForceRenew
                 );
-            }   
+            }   */
                                    
             $_aRow             = $this->___getRowFormatted( 
                 $aAPIResponseProductData, 

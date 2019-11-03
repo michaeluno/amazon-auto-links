@@ -183,9 +183,6 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             $_sAssociateID = $sAssociateID
                 ? $sAssociateID
                 : $_oOption->get( array( 'authentication_keys', 'associates_test_tag' ), '' );
-            // @deprecated 3.9.0 PA-API 4.0 has been deprecated
-//            $_oAmazonAPI = new AmazonAutoLinks_ProductAdvertisingAPI( $_sLocale, $_sPublicKey, $_sPrivateKey, $_sAssociateID );
-//            $_bsStatus   = $_oAmazonAPI->test();
 
             // @since   3.9.0 Use PA-API5.0 as PA-API 4.0 has been deprecated
             $_oAmazonAPI = new AmazonAutoLinks_PAAPI50( $_sLocale, $_sPublicKey, $_sPrivateKey, $_sAssociateID );
