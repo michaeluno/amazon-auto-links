@@ -12,31 +12,22 @@
  * Provides methods to extract and construct category list of the given page.
  *
  * @sicne       3.5.7
- * @since       3.9.1   No longer uses PHP Simple DOM Parser.
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends AmazonAutoLinks_Form_CategorySelect__Utility {
 
-    /**
-     * @var string
-     */
+    private $___oSimpleDOM = null;
     private $___sPageURL   = '';    // used in an extended class
-    /**
-     * @var DOMDocument
-     */
-    private $___oDoc;
 
     protected $_sSelector = 'zg_browseRoot';
 
     /**
      *
-     * @param   DOMDocument $oDoc
+     * @param   $_oSimpleDOM
      * @since   3.5.7
-     * @since   3.9.1   No longer uses PHP Simple DOM Parser
      */
-    public function __construct( DOMDocument $oDoc, $sPageURL ) {
-
+    public function __construct( $_oSimpleDOM, $sPageURL ) {
+        $this->___oSimpleDOM = $_oSimpleDOM;
         $this->___sPageURL   = $sPageURL;
-        $this->___oDoc       = $oDoc;
     }
 
     /**
@@ -44,26 +35,20 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
      * @return  string
      */
     public function get() {
-        return $this->_getCategoryList( $this->___oDoc, $this->___sPageURL );
+        return $this->_getCategoryList( $this->___oSimpleDOM, $this->___sPageURL );
     }
         /**
-         * Generates the HTML fragment output of the node tree list.
+         * Generates the HTML output of the node tree list.
          *
          * @since           2.0.0
          * @since           3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
-         * @since           3.9.1       No longer uses PHP Simple DOM Parser
          * @return          string
          */
-        protected function _getCategoryList( DOMDocument $oDoc, $sPageURL ) {
+        protected function _getCategoryList( $oSimpleDOM, $sPageURL ) {
 
-            $_oNodeBrowseRoot = $oDoc->getElementById( $this->_sSelector );
-            if ( null === $_oNodeBrowseRoot ) {
-                return '';
-            }
+            $_oNodeBrowseRoot = $oSimpleDOM->getElementById( $this->_sSelector );
             $this->_setHrefs( $_oNodeBrowseRoot, $sPageURL );
-            $_sHTMLFragment = $oDoc->saveXml( $_oNodeBrowseRoot, LIBXML_NOEMPTYTAG );
-            $_sHTMLFragment = preg_replace( '/(?<=>)\s+|\s+(?=<)/', '', $_sHTMLFragment  );
-            return $_sHTMLFragment; // the sidebar html code
+            return $_oNodeBrowseRoot->outertext; // the sidebar html code
 
         }
             /**
@@ -75,14 +60,17 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
              * @since       3.5.7       Renamed from `modifyHref`.
              * @since       3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
              */
-            protected function _setHrefs( DOMElement $oNode, $sPageURL ) {
+            protected function _setHrefs( $oSimpleDOMNode, $sPageURL ) {
 
                 $_aURLParts = parse_url( $sPageURL );
                 $_sDomain   = $_aURLParts[ 'scheme' ] . '://' . $_aURLParts[ 'host' ];
-                foreach( $oNode->getElementsByTagName( 'a' ) as $_nodeA ) {
+
+                foreach( $oSimpleDOMNode->getElementsByTagName( 'a' ) as $_nodeA ) {
+
                     $_sHref = $_nodeA->getAttribute( 'href' );
                     $_sHref = $this->___getHrefSanitized( $_sHref, $_sDomain );
                     $_nodeA->setAttribute( 'href', $_sHref );
+
                 }
 
             }
@@ -111,5 +99,6 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
                     return $this->_getLinkURLFormatted( $sHref, array() );
 
                 }
+
 
 }

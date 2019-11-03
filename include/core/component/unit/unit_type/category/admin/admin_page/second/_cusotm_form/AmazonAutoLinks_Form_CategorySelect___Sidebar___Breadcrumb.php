@@ -15,19 +15,15 @@
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
-    private $___oSimpleDOM = null;
     private $___sLocale    = 'US';
-    private $___sRSSURL    = '';
-
+    private $___oDoc;
     /**
      * @since       3.5.7
      */
-    public function __construct( $oSimpleDOM, $sLocale, $sRSSURL ) {
+    public function __construct( DOMDocument $oDoc, $sLocale ) {
 
-        // Properties
-        $this->___oSimpleDOM = $oSimpleDOM;
         $this->___sLocale    = $sLocale;
-        $this->___sRSSURL    = $sRSSURL;
+        $this->___oDoc       = $oDoc;
 
     }
 
@@ -35,9 +31,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
      * @since       3.5.7
      */
     public function get() {
-        return $this->___sRSSURL
-            ? $this->___getBreadcrumb( $this->___oSimpleDOM, $this->___sLocale )
-            : __( 'None', 'amazon-auto-links' );
+        return $this->___getBreadcrumb( $this->___oDoc, $this->___sLocale );
     }
         /**
          * Creates a breadcrumb of the Amazon page sidebar.
@@ -48,32 +42,40 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
          * @since           2.0.0
          * @since           3.5.7   Changed the scope to private as this is only used in this class.
          * @since           3.5.7     Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since           3.9.1   No longer uses PHP Simple DOM Parser.
          * @return          string  The generated category breadcrumb.
          */
-        private function ___getBreadcrumb( $_oSimpleDOM, $sLocale='US' ) {
+        private function ___getBreadcrumb( DOMDocument $oDoc, $sLocale='US' ) {
 
             $aBreadcrumb    = array();
-            $nodeBrowseRoot = $_oSimpleDOM->getElementById( 'zg_browseRoot' );
-            $nodeSelected   = $nodeBrowseRoot->find( '.zg_selected', 0 );
-            if ( ! $nodeSelected ) {
+
+            $_oXpath        = new DOMXPath( $oDoc );
+            $_nodeSelected  = $_oXpath->query(
+                "//*[contains(@class, 'zg_selected')]"
+            )->item( 0 );
+
+            if ( ! $_nodeSelected ) {
                 return __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
             }
 
             // Current category
-            $aBreadcrumb[]  = trim( $nodeSelected->plaintext );
+            $aBreadcrumb[]  = trim( $_nodeSelected->nodeValue );
 
             // Climb up the node
-            $nodeClimb      = $nodeSelected->parentNode();
+            $_nodeClimb     = $_nodeSelected->parentNode;
             Do {
-                if ( $nodeClimb->nodeName() == 'ul' ) {
-                    $nodeUpperUl   = $nodeClimb->parentNode();
-                    $nodeLi        = $nodeUpperUl->getElementByTagName( 'li' );
-                    $nodeA         = $nodeLi->getElementByTagName( 'a' );
-                    $aBreadcrumb[] = trim( $nodeA->innertext );
+                if ( 'ul' === $_nodeClimb->tagName ) {
+                    $_nodeUpperUl  = $_nodeClimb->parentNode;
+                    $_nodeLi       = $_nodeUpperUl->getElementsByTagName( 'li' )->item( 0 );
+                    $_nodeA        = $_nodeLi->getElementsByTagName( 'a' )->item( 0 );
+                    $aBreadcrumb[] = trim( $_nodeA->nodeValue );
                 }
-                $nodeClimb = $nodeClimb->parentNode();
-
-            } While ( $nodeClimb && $nodeClimb->getAttribute( 'id' ) != 'zg_browseRoot' );
+                $_nodeClimb = $_nodeClimb->parentNode;
+            } While (
+                is_object( $_nodeClimb )
+                && method_exists( $_nodeClimb, 'getAttribute' ) // it can be the root DOMDocument object and in that case the method does not exist
+                && 'zg_browseRoot' !== $_nodeClimb->getAttribute( 'id' )
+            );
 
             array_pop( $aBreadcrumb );    // remove the last element
             $aBreadcrumb[] = strtoupper( $sLocale );    // set the last element to the country code
@@ -81,4 +83,5 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
             return implode( " > ", $aBreadcrumb );
 
         }
+
 }

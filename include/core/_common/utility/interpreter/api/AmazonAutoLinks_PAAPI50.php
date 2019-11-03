@@ -86,7 +86,6 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         if ( isset( $_aResponse[ 'Error' ] ) ) {
             $_sError = $this->getElement( $_aResponse, array( 'Error', 'Code' ) )
                 . ' ' . $this->getElement( $_aResponse, array( 'Error', 'Message' ) );
-//AmazonAutoLinks_Debug::log( $_sError );
             return $_sError;
         }
         return true;

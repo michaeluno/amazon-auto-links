@@ -73,10 +73,7 @@ class AmazonAutoLinks_Event___Query_Redirect {
             );
             
             // http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
-            $_sURL      = isset( AmazonAutoLinks_Property::$aCategoryRootURLs[ strtoupper( $aArgs[ 'locale' ] ) ] )
-                ? AmazonAutoLinks_Property::$aCategoryRootURLs[ strtoupper( $aArgs[ 'locale' ] ) ]
-                : AmazonAutoLinks_Property::$aCategoryRootURLs[ 'US' ];
-            
+            $_sURL          = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $aArgs[ 'locale' ] );
             $_aURLElements  = parse_url( $_sURL );
             $_sStoreURL     = $_aURLElements[ 'scheme' ] . '://' . $_aURLElements[ 'host' ]
                 . '/dp/ASIN/' . $sASIN . '/' 

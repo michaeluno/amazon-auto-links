@@ -35,22 +35,24 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'AE'        => 'eu-west-1',  // United Arab Emirates	webservices.amazon.ae
         'UK'        => 'eu-west-1',  // United Kingdom	webservices.amazon.co.uk
         'US'        => 'us-east-1',  // United States	webservices.amazon.com
+        'CN'        => 'us-west-2',  // Not set by API
     );
     public $aHosts = array(
-        'AU'        => 'webservices.amazon.com.au',  // Australia
-        'BR'        => 'webservices.amazon.com.br',  // Brazil
-        'CA'        => 'webservices.amazon.ca',  // Canada
-        'FR'        => 'webservices.amazon.fr',  // France
-        'DE'        => 'webservices.amazon.de',  // Germany
-        'IN'        => 'webservices.amazon.in',  // India
-        'IT'        => 'webservices.amazon.it',  // Italy
-        'JP'        => 'webservices.amazon.co.jp',  // Japan
-        'MX'        => 'webservices.amazon.com.mx',  // Mexico
-        'ES'        => 'webservices.amazon.es',  // Spain
-        'TR'        => 'webservices.amazon.com.tr',  // Turkey
-        'AE'        => 'webservices.amazon.ae',  // United Arab Emirates
-        'UK'        => 'webservices.amazon.co.uk',  // United Kingdom
-        'US'        => 'webservices.amazon.com',  // United States
+        'AU'        => 'webservices.amazon.com.au',     // Australia
+        'BR'        => 'webservices.amazon.com.br',     // Brazil
+        'CA'        => 'webservices.amazon.ca',         // Canada
+        'FR'        => 'webservices.amazon.fr',         // France
+        'DE'        => 'webservices.amazon.de',         // Germany
+        'IN'        => 'webservices.amazon.in',         // India
+        'IT'        => 'webservices.amazon.it',         // Italy
+        'JP'        => 'webservices.amazon.co.jp',      // Japan
+        'MX'        => 'webservices.amazon.com.mx',     // Mexico
+        'ES'        => 'webservices.amazon.es',         // Spain
+        'TR'        => 'webservices.amazon.com.tr',     // Turkey
+        'AE'        => 'webservices.amazon.ae',         // United Arab Emirates
+        'UK'        => 'webservices.amazon.co.uk',      // United Kingdom
+        'US'        => 'webservices.amazon.com',        // United States
+        'CN'        => 'webservices.amazon.cn',         // Not set by API
     );
 
     public $aMarketPlaces = array(
@@ -68,6 +70,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'AE'        => 'www.amazon.ae',
         'UK'        => 'www.amazon.co.uk',
         'US'        => 'www.amazon.com',
+        'CN'        => 'www.amazon.cn',
     );
     public $aDefaultLanguages = array(
         'AU'        => 'en_AU', // English - AUSTRALIA
@@ -84,6 +87,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'AE'        => 'en_AE', // English - UNITED ARAB EMIRATES
         'UK'        => 'en_GB', // English - UNITED KINGDOM
         'US'        => 'en_US', // English - UNITED STATES
+        'CN'        => 'zh_CN', // not set by API
     );
     public $aDefaultCurrencies = array(
         'AU'        => 'AUD',   // Australian Dollar
@@ -99,7 +103,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'TR'        => 'TRY',   // Turkish Lira
         'AE'        => 'AED',   // Arab Emirates Dirham
         'UK'        => 'GBP',   // British Pound
-        'US'        => 'USD',   // United States Dollar
+        'US'        => 'USD',   // United States Dolla
+        'CN'        => 'CNY',   // Chinese Yen
     );
 
     /**
@@ -170,6 +175,10 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             case 'UK':
                 return array(
                     'en_GB' => __( 'English - UNITED KINGDOM', 'amazon-auto-links' ),
+                );
+            case 'CN':  // not set by API
+                return array(
+                    'zh_CN' => __( 'Chinese - CHINA', 'amazon-auto-links' ),
                 );
             default:
             case 'US':
@@ -246,6 +255,10 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                 return array(
                     'GBP' => __( 'British Pound', 'amazon-auto-links' ),
                 );
+            case 'CN':
+                return array(
+                    'CNY' => __( 'Chinese Yuan Renminbi', 'amazon-auto-links' ),
+                );
             default:
             case 'US':
                 return array(
@@ -316,6 +329,67 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                     'ZAR' => __( 'South African Rand', 'amazon-auto-links' ),
                 );
         }
+    }
+
+    /**
+     * @return array
+     * @since   3.9.1
+     */
+    static public function getHostLabels() {
+        $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
+        $_aLabels  = array();
+        foreach( $_oLocales->aHosts as $_sKey => $_sHost ) {
+            $_aLabels[ $_sKey ] = $_sKey . ' - ' . $_sHost;
+        }
+        return $_aLabels;
+    }
+
+//    static public function getMarketPlaceLabels() {
+//        $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
+//        $_aLabels  = array();
+//        foreach( $_oLocales->aMarketPlaces as $_sKey => $_sHost ) {
+//            $_aLabels[ $_sKey ] = $_sKey . ' - ' . $_sHost;
+//        }
+//        return $_aLabels;
+//    }
+
+    /**
+     * @param $sLocale
+     *
+     * @return string   THe market-place URL.
+     * @since   3.9.1
+     */
+    static public function getMarketPlaceByLocale( $sLocale ) {
+        $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
+        $_sLocale  = strtoupper( $sLocale );
+        $_sScheme  = 'https://';
+        return isset( $_oLocales->aMarketPlaces[ $_sLocale ] )
+            ? $_sScheme . $_oLocales->aMarketPlaces[ $_sLocale ]
+            : $_sScheme . $_oLocales->aMarketPlaces[ 'US' ];    // default
+    }
+
+    /**
+     * @return array
+     * @since   3.9.1
+     */
+    static public function getCountryLabels() {
+        return array(
+            'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
+            'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
+            'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
+            'DE' => 'DE - ' . __( 'Germany', 'amazon-auto-links' ),
+            'IT' => 'IT - ' . __( 'Italy', 'amazon-auto-links' ),
+            'JP' => 'JP - ' . __( 'Japan', 'amazon-auto-links' ),
+            'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
+            'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
+            'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
+            'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
+            'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
+            'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
+            'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ), // 3.5.5+
+            'TR' => 'TR - ' . __( 'Turkey', 'amazon-auto-links' ), // 3.9.1
+            'AE' => 'AE - ' . __( 'United Arab Emirates', 'amazon-auto-links' ), // 3.9.1
+        );
     }
 
 }

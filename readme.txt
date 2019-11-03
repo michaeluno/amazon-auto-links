@@ -293,7 +293,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @TODO compress HTTP request caches as customer review caches are too large.
 
 == Changelog ==
-= 3.9.0 - 11/1/2019 =
+
+= 3.9.1 - 11/04/2019 =
+- Fixed a compatibility issue with PHP 7.3, occurred when browsing category lists.
+
+= 3.9.0 - 11/01/2019 =
 - Added support for PA-API 5 (deprecated the use of PA-API 4, which is no longer functional as of Oct 31, 2019 due to the termination by Amazon).
 - Added the ability for the category unit type not to require Product Advertising API keys.
 - Added the `Error Log` page (Tools -> Error Log) that displays plugin errors.

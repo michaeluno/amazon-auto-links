@@ -12,6 +12,7 @@
  * Provides methods to retrieve sidebar menu list elements of Amazon best selling products for R18 areas.
  *
  * @sicne       3.5.7
+ * @deprecated       3.9.1
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar__R18 extends AmazonAutoLinks_Form_CategorySelect___Sidebar {
 
@@ -21,16 +22,16 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar__R18 extends AmazonAutoLinks
 
     /**
      * @since       3.5.7
+     * @since       3.9.1       Removed the `$oHTTP` parameter.
      */
-    protected function _handleExceptionsToSetElements( $oHTTP, $oSimpleDOM, $sPageURL, $sLocale ) {
+    protected function _handleExceptionsToSetElements( DOMDocument $oDoc, $sPageURL, $sLocale ) {
 
         // For a new page layout design introduced around 2018/06,
-        if ( $oSimpleDOM->find( "#crown-category-nav", 0 ) ) {
-            $this->_setElementsBy( '#crown-category-nav', $oSimpleDOM, $sPageURL, $sLocale );
+        $_nodeCategory = $oDoc->getElementById( 'crown-category-nav' );
+        if ( $_nodeCategory ) {
+            $this->_aElements = $this->_getElements_crown_category_nav( $oDoc, $sPageURL, $sLocale );
             return;
         }
-
-        $oHTTP->deleteCache();
 
         // Otherwise, we have no more attempts.
         $this->_aElements[ 'Error' ] = sprintf(

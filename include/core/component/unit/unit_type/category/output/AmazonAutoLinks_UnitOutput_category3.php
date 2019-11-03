@@ -129,7 +129,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             $_aHTMLs          = $this->___getHTMLBodies( $aURLs );
             remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
             $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
-            $_sSiteDomain     = AmazonAutoLinks_Property::getStoreDomainByLocale( $this->oUnitOption->get( 'country' ) );
+            $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
             $_aProducts       = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sSiteDomain );
 
             // If no items found, no need to continue the rest.

@@ -11,6 +11,7 @@
  * Provides abstract members for scraping web contents using PHP Simple HTML DOM Parser.
  * 
  * @since        3
+ * @deprecated  3.9.1   PHP Simple DOM Parser is no longer used.
  */
 abstract class AmazonAutoLinks_ScraperPSHDP_Base extends AmazonAutoLinks_PluginUtility {
     

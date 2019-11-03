@@ -64,13 +64,12 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             $this->oUnitOption->get( 'country' )
         );
         $_oSidebar      = new AmazonAutoLinks_Form_CategorySelect___Sidebar( $sPageURL, $this->oUnitOption->get( 'country' ) );
-
         $this->_printPreviewTable(
             array(
                 'bNew'                          => isset( $this->aOptions[ 'mode' ] ) 
                     ? $this->aOptions[ 'mode' ]
                     : 0, // 0 : edit, 1 : new
-                'sPageURL'                      => $sPageURL,
+                'sPageURL'                      => $_oSidebar->get( 'PageURL' ),
                 'sRSSURL'                       => $_oSidebar->get( 'RSSURL' ), // $aSidebar['sRSSURL'],
                 'aSelectedRSSURLs'              => $this->___getSelectedRSSURLs( $this->oUnitOption->get( 'categories' ) ), // @deprecated 3.8.1
                 'aSelectedPageURLs'             => wp_list_pluck( $this->oUnitOption->get( 'categories' ), 'page_url' ),
@@ -238,14 +237,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             <td class="category-select-first-column">
                 <h3><?php _e( 'Select Category', 'amazon-auto-links' ); ?></h3>
                 <?php echo $sSelectArrow; ?>
-                <?php echo $aPageElements['sSidebarHTML']; ?>
+                <?php echo $aPageElements['sSidebarHTML'] ? $aPageElements['sSidebarHTML'] : "<p>" . __( 'Failed to generate the category list.', 'amazon-auto-links' ) . "</p>"; ?>
             </td>
             <td class="category-select-second-column category-select-preview-left">
                 <h3>
-                    <?php echo $aPageElements['sRSSURL']
-                        ? __( 'Preview of This Category', 'amazon-auto-links' )
-                        : __( 'No Preview', 'amazon-auto-links' );
-                    ?>
+                    <?php echo __( 'Preview of This Category', 'amazon-auto-links' ); ?>
                 </h3>
                 <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
 
@@ -342,10 +338,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             $_oEncrypt = new AmazonAutoLinks_Encrypt;
             $_sURL     = $sEncryptedURL
                 ? $_oEncrypt->decode( $sEncryptedURL  )
-                : ( isset( AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ] )
-                    ? AmazonAutoLinks_Property::$aCategoryRootURLs[ $sLocale ]
-                    : AmazonAutoLinks_Property::$aCategoryRootURLs[ 'US' ]
-                );
+                : AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $sLocale ) . '/gp/bestsellers/';
 
             // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
             $_sURL = str_replace("//gp/","/gp/", $_sURL );

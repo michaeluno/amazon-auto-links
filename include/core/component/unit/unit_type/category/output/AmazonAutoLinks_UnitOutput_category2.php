@@ -84,7 +84,7 @@ class AmazonAutoLinks_UnitOutput_category2 extends AmazonAutoLinks_UnitOutput_ur
     protected function _getFoundItems( $aHTMLs ) {
 
         $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
-        $_sSiteDomain     = AmazonAutoLinks_Property::getStoreDomainByLocale( $this->oUnitOption->get( 'country' ) );
+        $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
 
         $this->_aScraped  = $this->_aScraped + $this->___getProductsScraped( $aHTMLs, $_sAssociateID, $_sSiteDomain );
         $_aASINs          = array_keys( $this->_aScraped );

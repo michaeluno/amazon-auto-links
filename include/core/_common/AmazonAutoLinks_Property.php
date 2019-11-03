@@ -40,6 +40,7 @@ final class AmazonAutoLinks_Property {
      * @var array
      * @since   2?
      * @since   3.8.12      Changed the scheme to https from http.
+     * @deprecated   3.9.1
      */
     static public $aCategoryRootURLs = array(
         'CA'    => 'https://www.amazon.ca/gp/bestsellers/',
@@ -60,6 +61,7 @@ final class AmazonAutoLinks_Property {
     /**
      * @var array 
      * @since   3.8.12
+     * @deprecated  3.9.1
      */
     static public $aStoreDomains = array(
         'CA'    => 'www.amazon.ca',
@@ -81,15 +83,19 @@ final class AmazonAutoLinks_Property {
      * 
      * @since       3.8.12
      * @return  string the store domain including the URL scheme (https://).
+     * @deprecated  3.9.1
      */
-    static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
+/*    static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
         $_sLocale = strtoupper( $sLocale );
         $_sScheme = $bPrefixScheme ? 'https://' : '';
         return isset( self::$aStoreDomains[ $_sLocale ] )
             ? $_sScheme . self::$aStoreDomains[ $_sLocale ]
             : $_sScheme . self::$aStoreDomains[ 'US' ];    // default
     }    
-    
+    */
+    /**
+     * @var array
+     */
     static public $aCategoryBlackCurtainURLs = array(
         'CA'    => 'https://www.amazon.ca/gp/product/black-curtain-redirect.html',
         'CN'    => 'https://www.amazon.cn/gp/product/black-curtain-redirect.html',

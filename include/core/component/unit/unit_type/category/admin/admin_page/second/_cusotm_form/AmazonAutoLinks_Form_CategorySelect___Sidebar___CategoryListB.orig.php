@@ -21,29 +21,25 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB extends Amaz
      * Generates an HTML output of the node tree list.
      *
      * @since           3.5.7
-     * @since           3.9.1   No longer uses PHP Simple DOM Parser
      * @return          string
      */
-    protected function _getCategoryList( DOMDocument $oDoc, $sPageURL ) {
+    protected function _getCategoryList( $oSimpleDOM, $sPageURL ) {
 
-        $_oNodeBrowseRoot = $oDoc->getElementById( $this->_sSelector );
+        $_oNodeBrowseRoot = $oSimpleDOM->getElementById( $this->_sSelector );
         $this->_setHrefs( $_oNodeBrowseRoot, $sPageURL );
 
         // Remove headings
-        $_oXpath        = new DOMXPath( $oDoc );
-        foreach( $_oXpath->query( "//*/h3", $_oNodeBrowseRoot ) as $_nodeH3 ) {
-            $_nodeH3->parentNode->removeChild( $_nodeH3 );
+        foreach( $_oNodeBrowseRoot->find( 'h3' ) as $_nodeH3 ) {
+            $_nodeH3->outertext = '';
         }
 
         // Enclose each `<a>` in `<li>`.
-        foreach( $_oXpath->query( "//*/a", $_oNodeBrowseRoot ) as $_nodeA ) {
-            $_sNodeAHTML = $oDoc->saveXml( $_nodeA, LIBXML_NOEMPTYTAG );
-            $_nodeNewLi  = $oDoc->createElement('li', $_sNodeAHTML );
-            $oDoc->replaceChild( $_nodeNewLi, $_nodeA );
+        foreach( $_oNodeBrowseRoot->find( 'a' ) as $_nodeA ) {
+            $_nodeA->outertext = '<li>' . $_nodeA->outertext . '</li>';
         }
 
         return "<ul>"
-               . $oDoc->saveXml( $_oNodeBrowseRoot, LIBXML_NOEMPTYTAG ) // the sidebar html fragment
+                . $_oNodeBrowseRoot->outertext // the sidebar html code
             . "</ul>";
 
     }
