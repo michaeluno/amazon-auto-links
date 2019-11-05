@@ -297,6 +297,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that caused a PHP fatal error with advanced product filter options, introduced in v3.9.0.
 
 = 3.9.1 - 11/04/2019 =
+- Added the `Minimum Review Rating` advanced unit option for the search unit type.
 - Fixed a compatibility issue with PHP 7.3, occurred when browsing category lists.
 
 = 3.9.0 - 11/01/2019 =
