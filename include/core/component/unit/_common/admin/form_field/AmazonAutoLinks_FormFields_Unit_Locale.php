@@ -20,7 +20,6 @@ class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_
                 'field_id'          => $sFieldIDPrefix . 'country',
                 'type'              => 'select',
                 'title'             => __( 'Country', 'amazon-auto-links' ),
-                'type'              => 'select',
                 'label'             => array(
                     'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
                     'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
