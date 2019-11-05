@@ -455,6 +455,21 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'api_authentication_status' 
         );
     }
+
+    /**
+     * Checks whether the API keys are set.
+     *
+     * This is not checking the connectivity as connectivity can vary even the keys are set
+     * such as when too many requests are made.
+     *
+     * @return boolean
+     * @since   3.9.2
+     */
+    public function isAPIKeySet() {
+        $_sPublicKey = $this->get( 'authentication_keys', 'access_key' );
+        $_sSecretKey = $this->get( 'authentication_keys', 'access_key_secret' );
+        return ( boolean ) ( $_sPublicKey && $_sSecretKey );
+    }
     
     /**
      * Checks whether the plugin debug mode is on.

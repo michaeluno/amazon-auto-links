@@ -292,6 +292,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.9.2 =
+- Fixed a bug with some advanced product filter options that did not retrieve product data properly.
+- Fixed a bug that caused a PHP fatal error with advanced product filter options, introduced in v3.9.0.
+
 = 3.9.1 - 11/04/2019 =
 - Fixed a compatibility issue with PHP 7.3, occurred when browsing category lists.
 

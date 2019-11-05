@@ -93,11 +93,11 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      */
     protected function format( array $aUnitOptions ) {
 
-        $_oOption     = AmazonAutoLinks_Option::getInstance();        
+        $_oOption     = AmazonAutoLinks_Option::getInstance();
         $aUnitOptions = $aUnitOptions + $this->aDefault;
 
         $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
-        
+
         // the item lookup search unit type does not have a count field
         if( isset( $aUnitOptions[ 'count' ] ) ) {
             $aUnitOptions[ 'count' ] = $this->fixNumber(
@@ -105,21 +105,21 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 10,     // default
                 1,         // minimum
                 $_oOption->getMaximumProductLinkCount() // max
-            );            
+            );
         }
-        $aUnitOptions[ 'image_size' ] = $this->fixNumber( 
+        $aUnitOptions[ 'image_size' ] = $this->fixNumber(
             $aUnitOptions[ 'image_size' ],     // number to sanitize
             160,     // default
             0,         // minimum
             500     // max
-        );        
+        );
         if ( isset( $aUnitOptions[ 'column' ] ) ) {
-            $aUnitOptions[ 'column' ] = AmazonAutoLinks_Utility::fixNumber( 
+            $aUnitOptions[ 'column' ] = AmazonAutoLinks_Utility::fixNumber(
                 $aUnitOptions[ 'column' ],     // number to sanitize
                 4,     // default
                 1,         // minimum
                 $_oOption->getMaxSupportedColumnNumber()
-            );            
+            );
         }
 
         // Drop undefined keys.
@@ -129,7 +129,17 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             }
             unset( $aUnitOptions[ $_sKey ] );
         }
-        
+
+        // For hidden Item Format elements, '%_discount_rate%', '%_review_rate%'
+        $aUnitOptions[ 'item_format' ] = isset( $aUnitOptions[ 'item_format' ] )
+            ? ( string ) $aUnitOptions[ 'item_format' ]
+            : '';
+        if ( $this->getElement( $aUnitOptions, array( '_filter_by_rating', 'enabled' ) ) ) {
+            $aUnitOptions[ 'item_format' ] .= '<!-- %_review_rate% -->';
+        }
+        if ( $this->getElement( $aUnitOptions, array( '_filter_by_discount_rate', 'enabled' ) ) ) {
+            $aUnitOptions[ 'item_format' ] .= '<!-- %_discount_rate% -->';
+        }
         return $aUnitOptions;
         
     }   

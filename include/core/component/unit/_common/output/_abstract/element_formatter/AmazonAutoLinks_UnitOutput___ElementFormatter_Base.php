@@ -17,7 +17,7 @@
  */
 abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends AmazonAutoLinks_UnitOutput___Database_Product {
 
-    protected $_aProduct = array();
+    protected $_aProduct    = array();
 
     /**
      * Sets up properties.
@@ -52,6 +52,10 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
     protected function _getPendingMessage( $sMessage ) {
         if ( $this->_oUnitOption->get( '_no_pending_items' ) ) {
             throw new Exception( 'A product with a pending element is not allowed.' );
+        }
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( ! $_oOption->isAPIKeySet() ) {
+            $sMessage .= ' (' . __( 'API keys are not set.', 'amazon auto links' ) . ')';
         }
         return $this->_oUnitOption->get( 'show_now_retrieving_message' )
             ? '<p>' . $sMessage . '</p>'

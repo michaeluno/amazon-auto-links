@@ -92,7 +92,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @since       3.5.0
      * @var array
      */
-    protected $_aItemFormatDatabaseVariables = array( '%price%', '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%', '%prime%' );
+    protected $_aItemFormatDatabaseVariables = array(
+        '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%', '%prime%',
+        '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
+    );
 
     /**
      * Sets up properties.
@@ -201,12 +204,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             if ( $this->oUnitOption->get( '_no_pending_items' ) ) {
                 return true;
             }
-            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
-                return true;
-            }
-            if ( $this->oUnitOption->get( '_filter_by_discount_rate', 'enabled' ) ) {
-                return true;
-            }
+            // @deprecated 3.9.2 these are checked with the item format option, %_discount_rate%, $review_rate%.
+//            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
+//                return true;
+//            }
+//            if ( $this->oUnitOption->get( '_filter_by_discount_rate', 'enabled' ) ) {
+//                return true;
+//            }
             return false;
 
         }

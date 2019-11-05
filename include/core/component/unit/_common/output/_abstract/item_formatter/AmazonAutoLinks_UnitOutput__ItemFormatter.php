@@ -75,6 +75,8 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "%date%",           // 3.8.0  the date that the data is retrieved and updated
                 "%disclaimer%",     // 3.2.0
                 "%prime%",
+                "<!-- %_review_rate% -->", // 3.9.2
+                "<!-- %_discount_rate% -->", // 3.9.2
             ),
             array(
                 $aProduct[ 'product_url' ],
@@ -97,6 +99,8 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $_sUpdatedDate,    // 3.8.0+
                 $this->___getPricingDisclaimer( $_sUpdatedDate ), // 3.2.0+
                 $aProduct[ 'prime' ],     // 3.9.0+
+                '', // 3.9.2
+                '', // 3.9.2
             ),
             apply_filters(
                 'aal_filter_unit_item_format',

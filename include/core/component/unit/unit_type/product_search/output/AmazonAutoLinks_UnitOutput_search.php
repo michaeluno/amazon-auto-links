@@ -41,7 +41,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @since       3.5.0
      * @var array
      */
-    protected $_aItemFormatDatabaseVariables = array( '%review%', '%rating%', '%similar%', );
+    protected $_aItemFormatDatabaseVariables = array(
+        '%review%', '%rating%', '%similar%',
+        '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
+    );
 
     /**
      * Represents the array structure of the item array element of API response data.
@@ -649,7 +652,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 } catch ( Exception $_oException ) {
 
                     // Do a recursive call
-                    $_aAdditionalProducts = $this->___getProductsFromResponseItems(
+                    $_aAdditionalProducts = $this->_getProductsFromResponseItems(
                         $aItems,
                         $_sLocale,
                         $_sAssociateID,

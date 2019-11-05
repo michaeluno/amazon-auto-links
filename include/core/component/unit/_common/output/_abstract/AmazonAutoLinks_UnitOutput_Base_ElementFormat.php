@@ -69,7 +69,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          * @param   array $aASINLocales
          * @return  array
          * @since   3.5.0
-         * @todo 3.9.0 Implement a unit options for `preferred_currency` and `language`
          */
         private function ___getProductsRowsFromDatabase( array $aASINLocales ) {
             if ( ! $this->bDBTableAccess ) {
