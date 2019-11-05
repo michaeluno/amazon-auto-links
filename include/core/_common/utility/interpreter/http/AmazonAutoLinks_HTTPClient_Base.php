@@ -393,7 +393,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 'aal_filter_http_request_set_cache_duration_' . $_sCacheName,
                 $iCacheDuration,
                 $_sCacheName,
-                $sURL
+                $sURL,
+                $this->sRequestType // 3.9.2
             );
             $mData           = $this->___getCacheCompressed( $mData );  // 3.7.6+
             $_bResult        = $_oCacheTable->setCache(

@@ -53,16 +53,18 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
                 'aal_filter_http_request_set_cache_duration_' . $sCacheName,
                 array( $this, 'replyToGiveShortCacheDuration' ),
                 10,
-                3
+                4
             );
         }
 
         return $mData;
 
     }
-        public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL ) {
+        public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL, $sRequestType ) {
             remove_filter( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, array( $this, 'replyToGiveShortCacheDuration' ), 10 );
-            return 60 * 10; // 10 minutes
+            return 'api50_test' === $sRequestType
+                ? 0
+                : 60 * 10; // 10 minutes
         }
 
         /**
