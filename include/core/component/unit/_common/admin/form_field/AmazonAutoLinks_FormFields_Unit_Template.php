@@ -81,7 +81,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                         . "<code class='{$_sDel}'>%image_set%</code> - " . __( 'sub-images.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%description%</code> - " . __( 'a description with HTML tags', 'amazon-auto-links' ) . '<br />'
                         . "<code>%description_text%</code> - " . __( 'a description without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%price%</code> - " . __( 'a product price.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%price%</code> - " . __( 'a product price.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer reviews.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%button%</code> - " . __( 'a store link button.', 'amazon-auto-links' ) . '<br />'
