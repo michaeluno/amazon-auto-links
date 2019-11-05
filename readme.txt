@@ -284,7 +284,6 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Todo ==
-- @todo update PHP Simple HTML DOM Parser as it is not compatible with PHP 7.3.
 - @todo add the SubscriptionID parameter to product links when AWS keys are given.
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
@@ -292,9 +291,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.9.2 =
+= 3.9.2 - 11/06/2019 =
 - Fixed a bug with some advanced product filter options that did not retrieve product data properly.
 - Fixed a bug that caused a PHP fatal error with advanced product filter options, introduced in v3.9.0.
+- Fixed an issue that cached connectivity status was shown even when it is disconnected in the `Authentication` page.
 
 = 3.9.1 - 11/04/2019 =
 - Added the `Minimum Review Rating` advanced unit option for the search unit type.
@@ -310,6 +310,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that rating stars appeared in `category` units when the product did not have a review, started since v3.8.12.
 - Deprecated `Similarity Look-up` unit type as PA-API 5 does not support similarity look-up.
 - Deprecated `similar_product_image_size` and `similar_product_max_count` unit options.
+
+= 3.8.14 - 05/22/2019 =
+- Fixed an issue with the `Types` option of category units that lead to find no products.
+
+= 3.8.13 - 05/19/2019 =
+- Optimized the `category` and `url` unit types to reduce PA API requests when no items are found.
+- Fixed an issue that some products of the `Types` option of category units have been no longer available.
 
 = 3.8.12 - 03/30/2019 =
 - Fixed a bug that `Access Rights` -> `Capability` option did not take effect.
