@@ -211,8 +211,6 @@ Optionally, the following arguments may be set.
 - `credit_link` - (integer|boolean) whether to show the credit link. `1`/`true` to show, `0`/`false` to hide.
 - `subimage_size` - (integer) the sub-image size in pixels. Default: `100`.
 - `subimage_max_count` - (integer) the maximum number of sub-images to display.
-- `similar_product_image_size` - (integer) the image size of similar products in pixels. Default: `100`.
-- `similar_product_max_count` - (integer) the maximum number of similar products.
 - `customer_review_max_count` - (integer) the maximum number of customer reviews.
 - `show_now_retrieving_message` - (boolean|integer) whether to show the "Now retrieving..." message when sub-elements are pending to be fetched. `true`/`1` to show `false`/`0` to hide.
 - `button_type` - (integer) The type of buttons. The following values are accepted. Default: `1`.
