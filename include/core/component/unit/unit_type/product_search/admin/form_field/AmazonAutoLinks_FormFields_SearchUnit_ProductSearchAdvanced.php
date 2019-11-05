@@ -75,15 +75,15 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'field_id'      => $sFieldIDPrefix . 'MaximumPrice',
                 'type'          => 'number',
                 'title'         => __( 'Maximum Price', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
-                'description'   => __( 'Specifies the maximum price of the items in the response. Prices are in terms of the lowest currency denomination, for example, pennies. For example, 3241 represents $32.41.', 'amazon-auto-links' )
-                    . ' ' . __( 'This option will not take effect if the Category option is set to <code>All</code> or <code>Blended</code>', 'amazon-auto-links' ),
+                'description'   => __( 'Specifies the maximum price of the items in the response. Prices are in terms of the lowest currency denomination, for example, pennies. For example, 3241 represents $32.41.', 'amazon-auto-links' ),
+//                    . ' ' . __( 'This option will not take effect if the Category option is set to <code>All</code> or <code>Blended</code>', 'amazon-auto-links' ),
             ),                        
             array(
                 'field_id'      => $sFieldIDPrefix . 'MinimumPrice',
                 'type'          => 'number',
                 'title'         => __( 'Minimum Price', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
-                'description'   => __( 'Specifies the minimum price of the items to return. Prices are in terms of the lowest currency denomination, for example, pennies, for example, 3241 represents $32.41.', 'amazon-auto-links' )
-                    . ' ' . __( 'This option will not take effect if the Category option is set to <code>All</code> or <code>Blended</code>', 'amazon-auto-links' ),
+                'description'   => __( 'Specifies the minimum price of the items to return. Prices are in terms of the lowest currency denomination, for example, pennies, for example, 3241 represents $32.41.', 'amazon-auto-links' ),
+//                     . ' ' . __( 'This option will not take effect if the Category option is set to <code>All</code> or <code>Blended</code>', 'amazon-auto-links' ),
             ),                    
             array(
                 'field_id'      => $sFieldIDPrefix . 'MinPercentageOff',
