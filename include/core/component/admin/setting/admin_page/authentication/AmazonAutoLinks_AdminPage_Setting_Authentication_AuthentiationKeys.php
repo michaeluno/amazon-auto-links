@@ -251,13 +251,14 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
         if ( $aInputs[ 'api_authentication_status' ] ) {
             
             $aInputs[ 'api_authentication_status' ] = false;
-            $aInputs[ 'access_key' ] = '';
-            $aInputs[ 'access_key_secret' ] = '';
+            $aInputs[ 'access_key' ]                = '';
+            $aInputs[ 'access_key_secret' ]         = '';
             $oAdminPage->setSettingNotice( 
                 __( 'Disconnected.', 'amazon-auto-links' ),
                 'updated'
             );
             return $aInputs;
+
         }
         
         // Access Key must be 20 characters
@@ -289,6 +290,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             $aInputs[ 'associates_test_tag' ],
             $aInputs[ 'server_locale' ]
         );
+        
         if ( true !== $_bsConnectionStatus ) {
 
             $_aErrors[ $this->sSectionID ][ 'access_key' ]        = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPublicKey;
