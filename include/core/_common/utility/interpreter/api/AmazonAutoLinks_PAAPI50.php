@@ -72,16 +72,19 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         $this->___sRequestType = 'api50_test';
         $_aPayload    = array(
                 'Keywords'      => 'WordPress',
-//                'ItemPage'      => 1,
+    //                'ItemPage'      => 1,
                 'ItemCount'     => 1,
                 'Operation'     => 'SearchItems',
-//                'ItemIds' => array( '2016212594', ),
-//                'Operation' => 'GetItems',
+    //                'ItemIds' => array( '2016212594', ),
+    //                'Operation' => 'GetItems',
+//'Operation' => 'GetBrowseNodes',
+//"BrowseNodeIds" => array( '3040', '3045' ),
                 // 'LanguagesOfPreference' => array( 'en_US', ),
                 'Resources'     => array(),
             ) + $this->___aPayload;
 
         $_aResponse = $this->request( $_aPayload, 60 * 10 );
+
         $this->___sRequestType = $_sPrevRequestType;
         if ( isset( $_aResponse[ 'Error' ] ) ) {
             $_sError = $this->getElement( $_aResponse, array( 'Error', 'Code' ) )
