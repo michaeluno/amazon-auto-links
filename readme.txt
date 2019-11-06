@@ -295,7 +295,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that outputs with `%category%` and `%feature%` unit `Item Format` option variables were not properly formatted, stared since v3.9.0.
 - Fixed a bug with some advanced product filter options that did not retrieve product data properly.
 - Fixed a bug that caused a PHP fatal error with advanced product filter options, started since v3.9.0.
-- Fixed an issue that cached connectivity status was shown even when it is disconnected in the `Authentication` page.
+- Fixed a bug that cached connectivity status was shown in the `Authentication` page.
 
 = 3.9.1 - 11/04/2019 =
 - Added the `Minimum Review Rating` advanced unit option for the search unit type.

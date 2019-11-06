@@ -18,6 +18,7 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
     private $___aAPIRequestTypes = array(
         'api',
         'api_test',
+        'api50_test',
     );
 
     protected function _construct() {
