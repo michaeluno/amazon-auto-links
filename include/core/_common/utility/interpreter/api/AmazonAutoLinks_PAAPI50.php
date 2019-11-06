@@ -70,8 +70,16 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
 
         $_sPrevRequestType     = $this->___sRequestType;
         $this->___sRequestType = 'api50_test';
+        $_aKeywords   = array(
+            0 => 'WordPress',  1 => 'PHP',  2 => 'MySQL',
+            3 => 'JavaScript', 4 => 'HTML', 5 => 'CSS'
+        );
+        $_iDigit      = $this->___getFirstTwoDigitsOfCurrentMinute();
+        $_sKeyword    = isset( $_aKeywords[ $_iDigit ] )
+            ? $_aKeywords[ $_iDigit ]
+            : $_aKeywords[ 0 ];
         $_aPayload    = array(
-                'Keywords'      => 'WordPress',
+                'Keywords'      => $_sKeyword,
     //                'ItemPage'      => 1,
                 'ItemCount'     => 1,
                 'Operation'     => 'SearchItems',
@@ -94,6 +102,11 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         return true;
 
     }
+        private function ___getFirstTwoDigitsOfCurrentMinute() {
+            $_iCurrentMinute = ( integer ) date( 'i' );
+            $_dCurrentMinute = $_iCurrentMinute / 10;
+            return ( integer ) floor( $_dCurrentMinute );
+        }
 
     /**
      * Performs an API request from the given request API parameters and returns the result as associative array.
