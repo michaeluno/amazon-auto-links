@@ -561,7 +561,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             }
             $_sList .= "<li class='feature'>$_sFeature</li>";
         }
-        return "<ul class='features'>" . $_sList . "</ul>";
+        $_sOutput = "<ul class='features'>" . $_sList . "</ul>";
+        return $_sOutput;
     }
 
     /**

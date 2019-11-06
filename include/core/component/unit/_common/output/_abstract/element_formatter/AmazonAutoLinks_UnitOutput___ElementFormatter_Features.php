@@ -44,9 +44,14 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoL
             if ( '' === $_snEncodedHTML ) {
                 return '';
             }
-            return AmazonAutoLinks_Unit_Utility::getFeatures(
-                $this->getElementAsArray( $this->_aRow, 'features' )
-            );
+
+            $_asFeatures = $this->getElement( $this->_aRow, 'features', array() );
+            // If the data is already set in the plugin custom database table, it is stored as a string
+            if ( is_string( $_asFeatures ) ) {
+                return $_asFeatures;
+            }
+            // For backward compatibility for v3.8.14 or below
+            return AmazonAutoLinks_Unit_Utility::getFeatures( $_asFeatures );
         }
 
 

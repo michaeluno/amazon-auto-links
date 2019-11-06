@@ -141,6 +141,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
             $_aProduct[ 'feature' ]     = $_oFeatureFormatter->get();
+
             $_oCategoryFormatter         = new AmazonAutoLinks_UnitOutput___ElementFormatter_Categories(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );

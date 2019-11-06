@@ -44,9 +44,13 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
             if ( '' === $_snEncodedHTML ) {
                 return '';
             }
-            return AmazonAutoLinks_Unit_Utility::getCategories(
-                $this->getElementAsArray( $this->_aRow, 'categories' )
-            );
+            $_asCategories = $this->getElement( $this->_aRow, array( 'categories' ), array() );
+            // If the data is already set in the plugin custom database table, it is stored as a string
+            if ( is_string( $_asCategories ) ) {
+                return $_asCategories;
+            }
+            // For backward compatibility for v3.8.14 or below
+            return AmazonAutoLinks_Unit_Utility::getCategories( $_asCategories );
         }
 
 
