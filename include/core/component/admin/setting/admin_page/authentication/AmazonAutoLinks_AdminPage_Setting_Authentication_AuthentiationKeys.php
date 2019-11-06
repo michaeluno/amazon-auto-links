@@ -290,7 +290,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             $aInputs[ 'associates_test_tag' ],
             $aInputs[ 'server_locale' ]
         );
-        
+
         if ( true !== $_bsConnectionStatus ) {
 
             $_aErrors[ $this->sSectionID ][ 'access_key' ]        = __( 'Sent Value', 'amazon-auto-links' ) . ': ' . $_sPublicKey;
