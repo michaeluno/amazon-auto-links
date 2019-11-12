@@ -91,44 +91,6 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
         return $this->{$_sMethodName}( $_aProducts );
 
     }
-        /**
-         * @since       3.2.1
-         * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_url`.
-         */
-        private function _getItemsSorted_( $aProducts ) {
-            return $this->_getItemsSorted_raw( $aProducts );
-        }
-        private function _getItemsSorted_title( $aProducts ) {
-            uasort( $aProducts, array( $this, 'replyToSortProductsByTitle' ) );
-            return $aProducts;
-        }
-        private function _getItemsSorted_title_descending( $aProducts ) {
-            uasort( $aProducts, array( $this, 'replyToSortProductsByTitleDescending' ) );
-            return $aProducts;
-        }
-        private function _getItemsSorted_random( $aProducts ) {
-            shuffle( $aProducts );
-            return $aProducts;
-        }
-        private function _getItemsSorted_raw( $aProducts ) {
-            return $aProducts;
-        }
-            public function replyToSortProductsByTitle( $aProductA, $aProductB ) {
-                $_sTitleA = $this->getElement( $aProductA, 'title' );
-                $_sTitleB = $this->getElement( $aProductB, 'title' );
-                return strnatcasecmp(
-                    $_sTitleA,
-                    $_sTitleB
-                );
-            }
-            public function replyToSortProductsByTitleDescending( $aProductA, $aProductB ) {
-                $_sTitleA = $this->getElement( $aProductA, 'title' );
-                $_sTitleB = $this->getElement( $aProductB, 'title' );
-                return strnatcasecmp(
-                    $_sTitleB,
-                    $_sTitleA
-                );
-            }
 
     /**
      * Performs an Amazon Product API request.

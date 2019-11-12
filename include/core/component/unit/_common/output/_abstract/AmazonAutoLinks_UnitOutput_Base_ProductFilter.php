@@ -120,5 +120,39 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
             }
             return false;
         }
-    
+
+    /**
+     * @since       3.2.1
+     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_url`.
+     * @since       3.9.3       Changed the scope to `protected`. Moved from `AmazonAutoLinks_UnitOutput_item_lookup`.
+     */
+    protected function _getItemsSorted_( $aProducts ) {
+        return $this->_getItemsSorted_raw( $aProducts );
+    }
+    protected function _getItemsSorted_title( $aProducts ) {
+        uasort( $aProducts, array( $this, 'replyToSortProductsByTitle' ) );
+        return $aProducts;
+    }
+    protected function _getItemsSorted_title_descending( $aProducts ) {
+        uasort( $aProducts, array( $this, 'replyToSortProductsByTitleDescending' ) );
+        return $aProducts;
+    }
+    protected function _getItemsSorted_random( $aProducts ) {
+        shuffle( $aProducts );
+        return $aProducts;
+    }
+    protected function _getItemsSorted_raw( $aProducts ) {
+        return $aProducts;
+    }
+        public function replyToSortProductsByTitle( $aProductA, $aProductB ) {
+            $_sTitleA = $this->getElement( $aProductA, 'title' );
+            $_sTitleB = $this->getElement( $aProductB, 'title' );
+            return strnatcasecmp( $_sTitleA, $_sTitleB );
+        }
+        public function replyToSortProductsByTitleDescending( $aProductA, $aProductB ) {
+            $_sTitleA = $this->getElement( $aProductA, 'title' );
+            $_sTitleB = $this->getElement( $aProductB, 'title' );
+            return strnatcasecmp( $_sTitleB, $_sTitleA );
+        }
+
 }

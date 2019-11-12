@@ -291,6 +291,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.9.3 =
+- Fixed a bug that the `Sort` unit option of the category unit type did not take effect.
+
 = 3.9.2 - 11/06/2019 =
 - Fixed a bug that outputs with `%category%` and `%feature%` unit `Item Format` option variables were not properly formatted, stared since v3.9.0.
 - Fixed a bug with some advanced product filter options that did not retrieve product data properly.

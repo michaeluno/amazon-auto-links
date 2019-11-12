@@ -269,8 +269,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
          * Converts the sort order for the RSS client property.
          * @since       3
          * @return      string
+         * @since       3.9.3       Changed the scope to `protected`.
          */
-        private function _getSortOrder() {
+        protected function _getSortOrder() {
             
             // random', // date, title, title_descending    
             $_sSortOrder = $this->oUnitOption->get( 'sort' );
