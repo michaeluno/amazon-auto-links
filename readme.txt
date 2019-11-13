@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.2.4
-Stable tag:         3.9.2
+Stable tag:         3.9.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -291,13 +291,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.9.3 =
-- Fixed a bug that the `Sort` unit option of the category unit type did not take effect.
+= 3.9.3 - 11/13/2019 =
+- Fixed a bug that the `Sort` unit option of the category unit type did not take effect, which has started since v3.9.0.
 
 = 3.9.2 - 11/06/2019 =
-- Fixed a bug that outputs with `%category%` and `%feature%` unit `Item Format` option variables were not properly formatted, stared since v3.9.0.
+- Fixed a bug that outputs with `%category%` and `%feature%` unit `Item Format` option variables were not properly formatted, which has started since v3.9.0.
 - Fixed a bug with some advanced product filter options that did not retrieve product data properly.
-- Fixed a bug that caused a PHP fatal error with advanced product filter options, started since v3.9.0.
+- Fixed a bug that caused a PHP fatal error with advanced product filter options, which has started since v3.9.0.
 - Fixed a bug that cached connectivity status was shown in the `Authentication` page.
 
 = 3.9.1 - 11/04/2019 =
