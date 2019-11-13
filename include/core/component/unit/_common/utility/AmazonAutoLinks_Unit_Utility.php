@@ -444,20 +444,30 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * Returns the resized image url.
      *
-     * @rmark       Adjusts the image size. _SL160_ or _SS160_
+     * ## Example
+     * to adjust the image size to 350 pixels,
+     * https://images-na.ssl-images-amazon.com/images/I/81pFmoL7GVL._AC_UL200_SR200,200_.jpg -> https://images-na.ssl-images-amazon.com/images/I/81pFmoL7GVL._AC_UL350_SR350,350_.jpg
+     * https://m.media-amazon.com/images/I/31SSaevqVNL._SL160_.jpg -> https://m.media-amazon.com/images/I/31SSaevqVNL._SL350_.jpg
+     *
      * @return      string
      * @param       $sImgURL        string
      * @param       $iImageSize     integer     0 to 500.
      * @since       3
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
      * @since       3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`.
+     * @since       3.9.4       Supported more complex image URLs.
      */
     static public function getImageURLBySize( $sImgURL, $iImageSize ) {
-        return preg_replace(
-            '/(?<=_S)([LS])(\d{1,3})(?=_)/i',
-            '${1}'. $iImageSize,
-            $sImgURL
-       );
+
+        preg_match( "/.+\/(.+)$/i", $sImgURL, $_aMatches );
+        $_sAfterLastSlash = self::getElement( $_aMatches, array( 1 ), '' );
+        $_sDigitsReplaced = preg_replace(
+            '/(?<=[\w,])(\d{1,3})(?=[,_])/i',
+            '${2}'. $iImageSize,
+            $_sAfterLastSlash
+        );
+        return str_replace( $_sAfterLastSlash, $_sDigitsReplaced, $sImgURL );
+
     }
 
     /**

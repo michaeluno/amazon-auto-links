@@ -383,7 +383,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     $this->setParsedASIN( $_aProduct[ 'ASIN' ] );
 
                     // Thumbnail
-                    $_aProduct[ 'thumbnail_url' ] = $this->getProductLinkURLFormatted( $_aProduct[ 'thumbnail_url' ], $this->oUnitOption->get( 'image_size' ) );
+                    $_aProduct[ 'thumbnail_url' ]    = $this->getProductImageURLFormatted(
+                        $_aProduct[ 'thumbnail_url' ],
+                          $this->oUnitOption->get( 'image_size' ),
+                          strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
+                    );
 
                     // Check whether no-image should be skipped.
                     if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {

@@ -291,6 +291,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.9.4 =
+- Fixed a bug that thumbnails of the category unit type were not displayed properly, which has started since v3.9.0.
+
 = 3.9.3 - 11/13/2019 =
 - Fixed a bug that the `Sort` unit option of the category unit type did not take effect, which has started since v3.9.0.
 
