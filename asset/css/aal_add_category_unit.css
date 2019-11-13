@@ -112,3 +112,7 @@ td.category-select-third-column {
 	float: right;
 	vartical-align: top;
 }
+
+li.zg_browseUp a {
+    margin-left: 0.28em;
+}
