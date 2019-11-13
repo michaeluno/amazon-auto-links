@@ -43,7 +43,6 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_iCount       = ( integer ) $this->oUnitOption->get( 'count' );
         
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
-        $_aProducts          = $this->___getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
         /**
          * Sort items
@@ -54,10 +53,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
          */
         $_sSortType = $this->_getSortOrder();
         $_sMethodName = "_getItemsSorted_{$_sSortType}";
-        return $this->{$_sMethodName}( $_aProducts );
+        $_aProducts = $this->{$_sMethodName}( $_aProducts );
 
+        $_aProducts          = $this->___getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
-//        return $_aProducts;
+        return $_aProducts;
 
     }
         /**
