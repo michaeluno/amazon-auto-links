@@ -22,9 +22,10 @@ class AmazonAutoLinks_Output_Format_LinksStyle_5 extends AmazonAutoLinks_Output_
      */
     public function get( $sURL, $sASIN ) {
         
-        $sQueryKey = $this->oOption->get( 'query', 'cloak' );
+        $sQueryKey  = $this->oOption->get( 'query', 'cloak' );
         $_aURLParts = parse_url( trim( $sURL ) );
-        parse_str( $_aURLParts[ 'query' ], $_aQuery );
+        $_sQuery    = $this->getElement( $_aURLParts, array( 'query' ), '' );
+        parse_str( $_sQuery, $_aQuery );
         $_aQuery   = array(
             $sQueryKey   => $sASIN,
             'locale'     => $this->sLocale,
