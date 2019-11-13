@@ -224,7 +224,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * 
      * Example:
      * `
-     * $oDom->setAttributesByTagName( $oNode, 'a', array( 'target' => '_blank', 'rel' => 'nofollow' ) );
+     * $oDom->setAttributesByTagName( $oNode, 'a', array( 'target' => '_blank', 'rel' => 'nofollow noopener' ) );
      * `
      */
     public function setAttributesByTagName( $oNode, $sTagName, $aAttributes=array() ) {

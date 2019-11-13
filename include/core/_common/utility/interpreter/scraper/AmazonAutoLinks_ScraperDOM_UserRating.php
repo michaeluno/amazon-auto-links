@@ -30,7 +30,7 @@ class AmazonAutoLinks_ScraperDOM_UserRating extends AmazonAutoLinks_ScraperDOM_B
             $this->oDoc, // node
             'a', // tag name
             array( 
-                'rel'    => 'nofollow',
+                'rel'    => 'nofollow noopener',
                 'target' => '_blank',
             ) 
         );        

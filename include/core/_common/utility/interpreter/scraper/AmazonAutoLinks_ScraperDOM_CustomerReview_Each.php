@@ -66,7 +66,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview_Each extends AmazonAutoLinks_Scr
             $this->oDoc, // node
             'a', // tag name
             array( 
-                'rel'    => 'nofollow',
+                'rel'    => 'nofollow noopener',
                 'target' => '_blank',
             ) 
         );        

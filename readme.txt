@@ -292,6 +292,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 3.9.4 =
+- Added the `noopener` rel attribute value for generated hyperlinks.
 - Fixed a bug that thumbnails of the category unit type were not displayed properly, which has started since v3.9.0.
 
 = 3.9.3 - 11/13/2019 =

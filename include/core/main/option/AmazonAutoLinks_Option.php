@@ -328,13 +328,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 ? $this->getDefaultItemFormatConnected()
                 : $this->getDefaultItemFormatDisconnected(),
             'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; min-height:%max_width%px;">' . PHP_EOL
-                . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">' . PHP_EOL 
+                . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">' . PHP_EOL
                 . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
                 . '    </a>' . PHP_EOL
                 . '</div>',
                 
             'title_format' => '<h5 class="amazon-product-title">' . PHP_EOL
-                . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow" target="_blank">%title_text%</a>' . PHP_EOL 
+                . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">%title_text%</a>' . PHP_EOL
                 . '</h5>',    
                 
         );

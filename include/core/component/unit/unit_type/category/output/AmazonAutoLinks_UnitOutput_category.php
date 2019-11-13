@@ -549,7 +549,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $this->formatLinks(
                     $_oNodeDiv,
                     array(
-                        'rel'       => 'nofollow',
+                        'rel'       => 'nofollow noopener',
                         'target'    => '_blank',
                         'title'     => $_aProduct[ 'title' ] . " - " . $_aProduct[ 'text_description' ]
                     ),
@@ -708,7 +708,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     protected function formatLinks( $oNode, $aAttributes=array(), $sASIN ) {
 
         $aAttributes = ( ( array ) $aAttributes ) + array(
-            'rel'   => 'nofollow',
+            'rel'   => 'nofollow noopener',
             'title' => '',
         );
     

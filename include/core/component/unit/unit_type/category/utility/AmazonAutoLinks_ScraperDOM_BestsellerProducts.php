@@ -153,12 +153,12 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                     . "<div class='crIFrameNumCustReviews'>"
                         . "<span class='crAvgStars' style='white-space:no-wrap;'>"
                             . "<span class='asinReviewsSummary' name='{$sASIN}'>"
-                                . "<a href='" . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow'>"
+                                . "<a href='" . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
                                      . "<img src='" . esc_url( $_sStarImage ) . "'/>"
                                 . "</a>&nbsp;"
                             . "</span>"
                             . "("
-                               . "<a href='"  . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow'>"
+                               . "<a href='"  . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
                                     . $iReviewCount
                                 . "</a>"
                             . ")"
@@ -185,7 +185,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                     $_sURLMaybeRelative = $_oANode->getAttribute( 'href' );
                     $_sURL              = $this->_getURLResolved( $_sURLMaybeRelative, $sSiteDomain, $sAssociateID );
                     $_oANode->setAttribute( 'href', $_sURL );
-                    $_oANode->setAttribute( 'rel', 'nofollow' );
+                    $_oANode->setAttribute( 'rel', 'nofollow noopener' );
                     $_oANode->setAttribute( 'target', '_blank' );
                 }
                 return $_oRatingNode;

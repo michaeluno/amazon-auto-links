@@ -315,7 +315,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         if ( ! $_sText ) {
             return '';
         }
-        return " <a href='{$sReadMoreURL}' target='_blank' rel='nofollow' style='display:inline;'>" 
+        return " <a href='{$sReadMoreURL}' target='_blank' rel='nofollow noopener' style='display:inline;'>"
                 . $_sText
             . "</a>";
         
@@ -398,7 +398,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          */
         protected function _getLinkButton( $iButtonType, $isButtonID, $sProductURL ) {
             $sProductURL = esc_url( $sProductURL );
-            return "<a href='{$sProductURL}' target='_blank' rel='nofollow'>"
+            return "<a href='{$sProductURL}' target='_blank' rel='nofollow noopener'>"
                     . $this->getButton( $isButtonID )
                 . "</a>";            
             
@@ -425,7 +425,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     $_sScheme . '://' . $_sURL
                 )
             );
-            return "<a href='{$_sGETFormURL}' target='_blank' rel='nofollow'>"
+            return "<a href='{$_sGETFormURL}' target='_blank' rel='nofollow noopener'>"
                     . $this->getButton( $isButtonID )
                 . "</a>";            
       
