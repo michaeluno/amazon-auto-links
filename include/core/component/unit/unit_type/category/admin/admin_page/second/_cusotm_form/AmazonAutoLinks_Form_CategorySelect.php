@@ -40,7 +40,6 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $_aParams           = func_get_args() + array( 0 => array(), 1 => array() );
         // $_aUnitOptions      = $_aParams[ 0 ]; // @deprecated unused
         $_aFormOptions      = $_aParams[ 1 ];
-
         $this->aOptions     = array(
             'template_path' => AmazonAutoLinks_Registry::$sDirPath . '/template/preview/template.php',
             'is_preview'    => true, // this disables the global ASIN blacklist.
@@ -125,16 +124,17 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             if ( $this->isEmpty( $aCategories ) ) {
                 return "<p>" . __( 'No categories added.', ' amazon-auto-links' ) . "</p>"; 
             }
-                
+
             $_aOutput = array();
             foreach( $aCategories as $sKey => $aCategory ) {
                 
-                $sName      = md5( $aCategory[ 'feed_url' ] );
+                // $_sName      = md5( $aCategory[ 'feed_url' ] ); // @deprecated the `feed_url` element does not contain a value as of v3.9.0
+                $_sName      = md5( $aCategory[ 'page_url' ] );
                 $sPageURL   = $this->_getLinkURLFormatted( $aCategory[ 'page_url' ] );
                 $_aOutput[] = "<div class='category-select-selected-category'>" 
-                        . "<label for='cb-{$sName}'>"
-                            . "<input type='checkbox' name='amazon_auto_links_cat_select[checkboxes][{$sKey}]' value='{$sName}' id='cb-{$sName}' />"
-                            . "<a href='{$sPageURL}'>{$aCategory['breadcrumb']}</a>"
+                        . "<label for='cb-{$_sName}'>"
+                            . "<input type='checkbox' name='amazon_auto_links_cat_select[checkboxes][{$sKey}]' value='{$_sName}' id='cb-{$_sName}' />"
+                            . "<a href='{$sPageURL}'>{$aCategory[ 'breadcrumb' ]}</a>"
                         . "</label>"
                     . "</div>";
                 
@@ -227,9 +227,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 </div>
                 <div>
                     <h3><?php _e( 'Added Categories', 'amazon-auto-links' ); ?></h3>
-                    <?php echo $aPageElements['sSelectedCategories']; ?>
+                    <?php echo $aPageElements[ 'sSelectedCategories' ]; ?>
                     <h3><?php _e( 'Added Excluding Sub-categories', 'amazon-auto-links' ); ?></h3>
-                    <?php echo $aPageElements['sSelectedExcludingCategories']; ?>
+                    <?php echo $aPageElements[ 'sSelectedExcludingCategories' ]; ?>
                 </div>
             </td>
         </tr>
@@ -237,7 +237,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             <td class="category-select-first-column">
                 <h3><?php _e( 'Select Category', 'amazon-auto-links' ); ?></h3>
                 <?php echo $sSelectArrow; ?>
-                <?php echo $aPageElements['sSidebarHTML'] ? $aPageElements['sSidebarHTML'] : "<p>" . __( 'Failed to generate the category list.', 'amazon-auto-links' ) . "</p>"; ?>
+                <?php echo $aPageElements[ 'sSidebarHTML' ]
+                    ? $aPageElements[ 'sSidebarHTML' ]
+                    : "<p>" . __( 'Failed to generate the category list.', 'amazon-auto-links' ) . "</p>";
+                ?>
             </td>
             <td class="category-select-second-column category-select-preview-left">
                 <h3>
@@ -285,9 +288,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             if ( $_oOption->isDebug() ) {
                 echo "<h4>" . __( 'Debug Info', 'amazon-auto-links' ). "</h4>";
                 echo "<h5>" . __( 'Page URL', 'amazon-auto-links' ) . "</h5>";
-                AmazonAutoLinks_Debug::dump( $aPageElements['sPageURL'] );
+                AmazonAutoLinks_Debug::dump( $aPageElements[ 'sPageURL' ] );
                 echo "<h5>" . __( 'Feed URL', 'amazon-auto-links' ) . "</h5>";
-                AmazonAutoLinks_Debug::dump( $aPageElements['sRSSURL'] );
+                AmazonAutoLinks_Debug::dump( $aPageElements[ 'sRSSURL' ] );
             }
             
         }

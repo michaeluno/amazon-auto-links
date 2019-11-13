@@ -234,7 +234,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         
         // Check the limit
         if ( 
-            ( isset( $aPost['add'] ) || isset( $aPost['exclude'] ) ) 
+            ( isset( $aPost[ 'add' ] ) || isset( $aPost[ 'exclude' ] ) )
             && $this->___isNumberOfCategoryReachedLimit( $_iNumberOfCategories )
         ) {
             $oFactory->setSettingNotice(
@@ -243,43 +243,44 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             return $aInput;
         }
 
-        /*
+        /**
          * Structure of the category array
          * 
-         * md5( $aCurrentCategory['feed_url'] ) => array(
+         * md5( $aCurrentCategory[ 'page_url' ] ) => array(
          *         'breadcrumb' => 'US > Books',
-         *         'feed_url' => 'http://amazon....',    // the feed url of the category
-         *         'page_url' => 'http://...'        // the page url of the category
+         *         'feed_url'   => 'http://amazon....',    // the feed url of the category
+         *         'page_url'   => 'http://...'        // the page url of the category
          * 
          * );
+         *
+         * @since   unknown
+         * @since   3.9.4       The `feed_url` element is deprecated as of 3.9.0. So use the `page_url` element instead.
          */
         $_oEncrypt              = new AmazonAutoLinks_Encrypt;        
         $aCategories            = $aInput[ 'categories' ];
         $aExcludingCategories   = $aInput[ 'categories_exclude' ];
         $aCurrentCategory       = $aPost[ 'category' ];
-        $aCurrentCategory[ 'breadcrumb' ] = $_oEncrypt->decode( 
-            $aCurrentCategory[ 'breadcrumb' ] 
-        );
+        $aCurrentCategory[ 'breadcrumb' ] = $_oEncrypt->decode( $aCurrentCategory[ 'breadcrumb' ] );
                         
         // Check if the "Add Category" button is pressed
-        if ( isset( $aPost['add'] ) ) {
-            $aCategories[ md5( $aCurrentCategory['feed_url'] ) ] =  $aCurrentCategory;
+        if ( isset( $aPost[ 'add' ] ) ) {
+            $aCategories[ md5( $aCurrentCategory[ 'page_url' ] ) ] =  $aCurrentCategory;
         }
         
-        if ( isset( $aPost['exclude'] ) ) {
-            $aExcludingCategories[ md5( $aCurrentCategory['feed_url'] ) ] = $aCurrentCategory;
+        if ( isset( $aPost[ 'exclude' ] ) ) {
+            $aExcludingCategories[ md5( $aCurrentCategory[ 'page_url' ] ) ] = $aCurrentCategory;
         }
         
         // Check if the "Remove Checked" button is pressed
-        if ( isset( $aPost['remove'], $aPost[ 'checkboxes' ] ) ) {
+        if ( isset( $aPost[ 'remove' ], $aPost[ 'checkboxes' ] ) ) {
             foreach( $aPost[ 'checkboxes' ] as $_sKey => $_sName ) {
                 unset( $aCategories[ $_sName ] );
                 unset( $aExcludingCategories[ $_sName ] );
             }
         }
                     
-        $aInput['categories']         = $aCategories;
-        $aInput['categories_exclude'] = $aExcludingCategories;
+        $aInput[ 'categories' ]         = $aCategories;
+        $aInput[ 'categories_exclude' ] = $aExcludingCategories;
         return $aInput;
         
     }

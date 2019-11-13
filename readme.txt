@@ -293,6 +293,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.9.4 =
 - Added the `noopener` rel attribute value for generated hyperlinks.
+- Fixed a bug that multiple categories could not be added when creating a new category unit, which has started since v3.9.0.
 - Fixed a bug that caused the PHP fatal error, `Uncaught Error: Call to undefined method` in the category select page of the category unit type, which has started since v3.9.3.
 - Fixed a bug that thumbnails of the category unit type were not displayed properly, which has started since v3.9.0.
 
