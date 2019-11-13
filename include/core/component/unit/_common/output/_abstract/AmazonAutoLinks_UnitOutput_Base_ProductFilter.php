@@ -129,6 +129,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
     protected function _getItemsSorted_( $aProducts ) {
         return $this->_getItemsSorted_raw( $aProducts );
     }
+    protected function _getItemsSorted_title_ascending( $aProducts ) {
+        return $this->_getItemsSorted_title( $aProducts );
+    }
     protected function _getItemsSorted_title( $aProducts ) {
         uasort( $aProducts, array( $this, 'replyToSortProductsByTitle' ) );
         return $aProducts;
