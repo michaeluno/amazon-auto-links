@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.2.4
-Stable tag:         3.9.3
+Stable tag:         3.9.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -291,11 +291,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.9.4 =
+= 3.9.4 - 11/14/2019 =
 - Added the `noopener` rel attribute value for generated hyperlinks.
-- Fixed a bug for category units that the same list of products were shown even when multiple categories are added.
-- Fixed a bug that multiple categories could not be added when creating a new category unit, which has started since v3.9.0.
 - Fixed a bug that caused the PHP fatal error, `Uncaught Error: Call to undefined method` in the category select page of the category unit type, which has started since v3.9.3.
+- Fixed a bug for category units that the same list of products were shown even when multiple categories are added, which has started since v3.9.0.
+- Fixed a bug that multiple categories could not be added when creating a new category unit, which has started since v3.9.0.
 - Fixed a bug that thumbnails of the category unit type were not displayed properly, which has started since v3.9.0.
 
 = 3.9.3 - 11/13/2019 =
