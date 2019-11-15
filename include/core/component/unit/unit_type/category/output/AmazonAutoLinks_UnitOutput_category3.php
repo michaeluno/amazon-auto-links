@@ -157,12 +157,17 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
             // Make sure to fill the set number of item count
             $_iPage         = 2;    // starts from 2
-            while( count( $_aProducts ) < $iItemCount ) {
-                $_aURLs         = $this->___getURLsPageIncremented( $aURLs, $_iPage );
-                $_aExcludeURLs  = $this->___getURLsPageIncremented( $aExcludeURLs, $_iPage );
-                $_aThisFound    = $this->___getFoundProducts( $_aURLs, $_aExcludeURLs, $iItemCount, $_aExcludeASINs );  // recursive call
+            $_iFoundCount   = count( $_aProducts );
+            while( $_iFoundCount < $iItemCount ) {
+                $_aURLs          = $this->___getURLsPageIncremented( $aURLs, $_iPage );
+                $_aExcludeURLs   = $this->___getURLsPageIncremented( $aExcludeURLs, $_iPage );
+                $_aThisFound     = $this->___getFoundProducts( $_aURLs, $_aExcludeURLs, $_iFoundCount - $iItemCount, $_aExcludeASINs );  // recursive call
                 if ( empty( $_aThisFound ) ) {
                     break;
+                }
+                $_aNewFoundItems = array_diff( array_keys( $_aThisFound ), array_keys( $_aProducts ) );
+                if ( empty( $_aNewFoundItems ) ) {
+                    break;  // if the previous found items cover the the newly found items, then it could be a page that does not support pagination.
                 }
                 $_aProducts     = $_aProducts + $_aThisFound;
                 if ( $_iPage > 10 ) {

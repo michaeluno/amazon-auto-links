@@ -291,6 +291,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.9.5 =
+- Fixed a bug with the category unit type that caused excessive nested function calls when setting a large number of item count.
+
 = 3.9.4 - 11/14/2019 =
 - Added the `noopener` rel attribute value for generated hyperlinks.
 - Fixed a bug that caused the PHP fatal error, `Uncaught Error: Call to undefined method` in the category select page of the category unit type, which has started since v3.9.3.
