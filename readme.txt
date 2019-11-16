@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.2.4
-Stable tag:         3.9.4
+Stable tag:         3.9.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -287,12 +287,16 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add the SubscriptionID parameter to product links when AWS keys are given.
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
-- @TODO compress HTTP request caches as customer review caches are too large.
+- @todo compress HTTP request caches as customer review caches are too large.
+- @todo support language preference for units
+- @todo support currency preference for units
+- @todo support the ability to filter items with delivery information
+- @todo support the ability to filter items with prime eligibility
 
 == Changelog ==
 
-= 3.9.5 =
-- Fixed a bug with the category unit type that caused excessive nested function calls when setting a large number of item count.
+= 3.9.5 - 11/16/2019 =
+- Fixed a bug with the category unit type that caused excessive nested function calls when setting a large number of item count, which has started since 3.9.0.
 
 = 3.9.4 - 11/14/2019 =
 - Added the `noopener` rel attribute value for generated hyperlinks.
