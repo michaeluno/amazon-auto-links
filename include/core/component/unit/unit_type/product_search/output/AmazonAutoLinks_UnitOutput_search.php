@@ -486,8 +486,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         $_aPayload = $iItemPage
             ? $_aPayload + array( 'ItemPage' => $iItemPage )
             : $_aPayload;
-AmazonAutoLinks_Debug::log( 'payload' );
-AmazonAutoLinks_Debug::log( $_aPayload );
+
         // not sure but it occurred an element without an empty key got inserted
         unset( $_aPayload[ '' ] );
         return $_aPayload;
@@ -845,8 +844,6 @@ AmazonAutoLinks_Debug::log( $_aPayload );
                     $this->oUnitOption->get( 'subimage_max_count' )
                 );
 
-                $_aProduct[ 'prime' ] = $this->___getPrimeMark( $_aProduct );
-
                 // Add meta data to the description
                 $_aProduct[ 'meta' ]        = $this->___getProductMetaFormatted( $_aProduct );
                 $_aProduct[ 'description' ] = $this->___getProductDescriptionFormatted( $_aProduct );
@@ -919,36 +916,6 @@ AmazonAutoLinks_Debug::log( $_aPayload );
                         }
                     }
                     return implode( ", ", $_aAuthors );
-                }
-                /**
-                 * @since   3.9.0
-                 */
-                private function ___getPrimeMark( array $aProduct ) {
-                    if ( ! $this->getElement( $aProduct, 'is_prime' ) ) {
-                        return '';
-                    }
-                    $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/unit/prime.gif' );
-                    $_aAttributes    = array(
-                        'role'  => 'img',
-                        'class' => 'prime-icon',
-//                        'style' => $this->getInlineCSS(
-//                            array(
-//                                'display'               => 'inline-block',
-//                                'width'                 => '60px',
-//                                'height'                => '12px',
-//                                'background-image'      => 'url(' . esc_url( $_sPrimeImageURL ) . ')',
-//                                'background-size'       => 'contain',
-//                                'background-repeat'     => 'no-repeat',
-//                                'background-position'   => 'bottom',
-//                            )
-//                        ),
-                    );
-                    return "<span class='amazon-prime'>"
-                            . "<i " . $this->getAttributes( $_aAttributes ) . "></i>"
-                        . "</span>";
-
-    // <span style="position: relative; top: 2px;">
-
                 }
 
             /**

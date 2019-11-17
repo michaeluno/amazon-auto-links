@@ -71,12 +71,12 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "%similar%",        // 3.3.0
                 "%category%",       // 3.8.0
                 "%feature%",        // 3.8.0
-                "%rank%",     // 3.8.0
+                "%rank%",           // 3.8.0
                 "%date%",           // 3.8.0  the date that the data is retrieved and updated
                 "%disclaimer%",     // 3.2.0
                 "%prime%",
-                "<!-- %_review_rate% -->", // 3.9.2
-                "<!-- %_discount_rate% -->", // 3.9.2
+                "<!-- %_review_rate% -->",      // 3.9.2
+                "<!-- %_discount_rate% -->",    // 3.9.2
             ),
             array(
                 $aProduct[ 'product_url' ],
@@ -98,7 +98,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $aProduct[ 'sales_rank' ],     // 3.8.0+
                 $_sUpdatedDate,    // 3.8.0+
                 $this->___getPricingDisclaimer( $_sUpdatedDate ), // 3.2.0+
-                $aProduct[ 'prime' ],     // 3.9.0+
+                $this->getPrimeMark( $aProduct ),  // 3.9.0+
                 '', // 3.9.2
                 '', // 3.9.2
             ),

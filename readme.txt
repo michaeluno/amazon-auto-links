@@ -297,6 +297,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.10.1 =
 - Added the `Delivery Flags` unit option for the search unit type.
+- Fixed a bug that the `%prime%` Item Format variable did not show the prime mark.
 - Fixed a bug that the advanced filter unit option for adult products caused some overhead.
 
 = 3.9.5 - 11/16/2019 =

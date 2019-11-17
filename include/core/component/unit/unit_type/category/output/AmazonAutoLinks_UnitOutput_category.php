@@ -62,7 +62,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'sales_rank'   => null,
 
         // 3.9.0
-        'prime'         => null,
+        'is_prime'         => null,
     );
     
     

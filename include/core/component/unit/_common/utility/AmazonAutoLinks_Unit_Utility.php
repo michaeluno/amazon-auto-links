@@ -693,4 +693,27 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                . "</div>";
     }
 
+    /**
+     * @param array $aProduct
+     *
+     * @return string
+     * @since   3.9.0
+     * @since   3.10.1  Moved from `AmazonAutoLinks_UnitOutput_search`.
+     */
+    static public function getPrimeMark( array $aProduct ) {
+        if ( ! self::getElement( $aProduct, 'is_prime' ) ) {
+            return '';
+        }
+        $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/unit/prime.gif' );
+        $_aAttributes    = array(
+            'role'  => 'img',
+            'class' => 'prime-icon',
+            'style' => 'background-image: url(' . esc_url( $_sPrimeImageURL ) . ');'
+        );
+        return "<span class='amazon-prime'>"
+                . "<i " . self::getAttributes( $_aAttributes ) . "></i>"
+            . "</span>";
+    }
+
+
 }
