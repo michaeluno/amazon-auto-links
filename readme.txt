@@ -295,6 +295,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.10.1 =
+- Added the `Delivery Flags` unit option for the search unit type.
+- Fixed a bug that the advanced filter unit option for adult products caused some overhead.
+
 = 3.9.5 - 11/16/2019 =
 - Fixed a bug with the category unit type that caused excessive nested function calls when setting a large number of item count, which has started since 3.9.0.
 

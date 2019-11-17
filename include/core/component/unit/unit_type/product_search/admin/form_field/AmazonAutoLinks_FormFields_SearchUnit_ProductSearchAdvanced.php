@@ -119,7 +119,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
             array(
                 'field_id'      => $sFieldIDPrefix . 'MinReviewsRating',
                 'type'          => 'select',
-                'title'         => __( 'Minimum Review Rating', 'amazon-auto-links' ),
+                'title'         => __( 'Minimum Review Rating', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
                 'label'         => array(
                     0 => __( 'None', 'amazon-auto-links' ),
                     1 => 1,
@@ -130,6 +130,20 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 ),
                 'default'       => 0,
                 'tip'   => __( 'Filters search results to items with customer review ratings above selected value.', 'amazon-auto-links' ),
+            ),
+            // 3.10.1
+            array(
+                'field_id'      => $sFieldIDPrefix . 'DeliveryFlags',
+                'type'          => 'checkbox',
+                'title'         => __( 'Delivery Flags', 'amazon-auto-links' ) . ' <span class="description">(' . __( 'optional', 'amazon-auto-links' ) . ')</span>',
+                'label'         => array(
+                    'AmazonGlobal'      => __( 'Amazon Global', 'amazon-auto-links' ) . ' - ' . __( 'A delivery program featuring international shipping to certain Exportable Countries.', 'amazon-auto-links' ),
+                    'FreeShipping'      => __( 'Free Shipping', 'amazon-auto-links' ) . ' - ' . __( 'A delivery program featuring free shipping of an item.', 'amazon-auto-links' ),
+                    'FulfilledByAmazon' => __( 'Fulfilled by Amazon', 'amazon-auto-links' ) . ' - ' . __( 'Fulfilled by Amazon indicates that products are stored, packed and dispatched by Amazon.', 'amazon-auto-links' ),
+                    'Prime'             => __( 'Prime', 'amazon-auto-links' ) . ' - ' . __( 'An offer for an item which is eligible for Prime Program.', 'amazon-auto-links' ),
+                ),
+//                'default'       => 0,
+                'description'   => __( 'This option filters items which satisfy a certain delivery program promoted by the specific Amazon Marketplace. For example, Prime will return items having at least one offer which is Prime Eligible.', 'amazon-auto-links' ),
             ),
         );
         

@@ -474,8 +474,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 ? 'Amazon'
                 : null,
 
-// @todo 3.9.0 add this in the unit option field
-            'DeliveryFlags'         => $this->oUnitOption->get( 'DeliveryFlags' ),
+            'DeliveryFlags'         => array_keys( array_filter( ( array ) $this->oUnitOption->get( 'DeliveryFlags' ) ) ),
             'CurrencyOfPreference'  => $this->oUnitOption->get( 'CurrencyOfPreference' )
                 ? $this->oUnitOption->get( 'CurrencyOfPreference' )
                 : null,
@@ -487,7 +486,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         $_aPayload = $iItemPage
             ? $_aPayload + array( 'ItemPage' => $iItemPage )
             : $_aPayload;
-
+AmazonAutoLinks_Debug::log( 'payload' );
+AmazonAutoLinks_Debug::log( $_aPayload );
         // not sure but it occurred an element without an empty key got inserted
         unset( $_aPayload[ '' ] );
         return $_aPayload;

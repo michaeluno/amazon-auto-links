@@ -53,6 +53,7 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'MinReviewsRating'      => 0,       // 3.9.1
 //        'MinSavingPercent'      => 0,       // 3.9.1 - same as `MinPercentageOff`
 //        'Merchant'              => null,    // 3.9.1 - same as `MerchantId`
+        'DeliveryFlags'         => null,    // (array) 3.10.1
     );
     
     /**
