@@ -9,11 +9,11 @@
  */
 
 /**
- * A class that filters out adult products.
+ * A class that filters out items that are not Amazon Prime eligible.
  *
- * @since   3.9.0
+ * @since   3.10.1
  */
-class AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts extends AmazonAutoLinks_UnitOutput__ProductFilter_Base {
+class AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility extends AmazonAutoLinks_UnitOutput__ProductFilter_Base {
 
     /**
      * @return boolean
@@ -22,7 +22,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts extends AmazonAuto
         if ( ! $this->_oUnitOutput->bDBTableAccess ) {
             return false;
         }
-        return ( boolean ) $this->_oUnitOutput->oUnitOption->get( '_filter_adult_products' );
+        return ( boolean ) $this->_oUnitOutput->oUnitOption->get( '_filter_by_prime_eligibility' );
     }
 
     /**
@@ -36,10 +36,10 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts extends AmazonAuto
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
         // Search units already have this value.
-        if ( isset( $aProduct[ 'is_adult' ] ) ) {
-            return ( boolean ) $aProduct[ 'is_adult' ]
-                ? array()
-                : $aProduct;
+        if ( isset( $aProduct[ 'is_prime' ] ) ) {
+            return ( boolean ) $aProduct[ 'is_prime' ]
+                ? $aProduct
+                : array();
         }
 
         $_sCurrentVersion = get_option( "aal_products_version", '0' );
@@ -54,9 +54,9 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts extends AmazonAuto
             $aRow,
             $this->_oUnitOutput->oUnitOption
         );
-        return ( boolean ) $_oRow->getCell( 'is_adult' )
-            ? array()
-            : $aProduct;
+        return ( boolean ) $_oRow->getCell( 'is_prime' )
+            ? $aProduct
+            : array();
 
     }
 

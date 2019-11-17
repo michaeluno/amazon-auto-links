@@ -264,6 +264,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             // 3.7.5+
             '_custom_url_query_string'      => array(),
 
+            // 3.10.1
+            '_filter_by_prime_eligibility'  => false,
         )
         
     );

@@ -256,6 +256,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
         $_oFilterByRating      = new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this );
         $_oFilterAdultProducts = new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this );
+        $_oFilterByPrime       = new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ); // 3.10.1
         $_oFilterByDiscount    = new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this );
         $_oDebugInfoProduct    = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
         $_oDebugInfoUnit       = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
@@ -313,6 +314,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
         $_oFilterByRating->__destruct();
         $_oFilterAdultProducts->__destruct();
+        $_oFilterByPrime->__destruct();
         $_oFilterByDiscount->__destruct();
         $_oDebugInfoProduct->__destruct();
         $_oDebugInfoUnit->__destruct();

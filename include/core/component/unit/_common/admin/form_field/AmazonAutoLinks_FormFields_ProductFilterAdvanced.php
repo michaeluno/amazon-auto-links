@@ -39,6 +39,12 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                 'label'         => sprintf( __( 'Do not show adult products', 'amazon-auto-links' ), '' ),
             ),
             array(
+                'field_id'      => '_filter_by_prime_eligibility',
+                'type'          => 'checkbox',
+                'title'         => __( 'Prime Eligibility', 'amazon-auto-links' ),
+                'label'         => __( 'Show items only eligible for the Amazon Prime service.', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'      => '_filter_by_rating',
                 'type'          => 'inline_mixed',
                 'title'         => __( 'Customer Rating', 'amazon-auto-links' ),
