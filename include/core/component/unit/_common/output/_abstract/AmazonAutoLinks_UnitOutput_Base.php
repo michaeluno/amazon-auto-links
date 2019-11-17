@@ -204,6 +204,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             if ( $this->oUnitOption->get( '_no_pending_items' ) ) {
                 return true;
             }
+            if ( $this->oUnitOption->get( '_filter_adult_products' ) ) {
+                return true;
+            }
             // @deprecated 3.9.2 these are checked with the item format option, %_discount_rate%, $review_rate%.
 //            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
 //                return true;
