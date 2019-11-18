@@ -26,7 +26,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common extends Amazo
         $this->addSettingFields( $this->_sSectionID );        
         
         $_aClasses = array(
-            'AmazonAutoLinks_FormFields_Unit_Locale',
+            'AmazonAutoLinks_FormFields_Unit_Country',
             'AmazonAutoLinks_FormFields_Unit_Common',
         );
         foreach( $_aClasses as $_sClassName ) {

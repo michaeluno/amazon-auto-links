@@ -3,8 +3,9 @@
  * Provides methods to retrieve field definitions.
  * 
  * @since           3.4.0
+ * @since           3.10.1  Changed the name from `AmazonAutoLinks_FormFields_Unit_Locale`.
  */
-class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Country extends AmazonAutoLinks_FormFields_Base {
 
     /**
      * Returns field definition arrays.
