@@ -44,6 +44,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%rating%', '%similar%',
         '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
+        '%price%'   // 3.10.1   - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
     );
 
     /**
