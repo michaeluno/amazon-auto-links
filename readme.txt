@@ -298,6 +298,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 3.10.1 =
 - Added the ability to specify preferred language and currency for units.
 - Added the ability to filter items by Amazon Prime service eligibility.
+- Added the ability to filter items by free shipping and FBA delivery eligibility.
 - Added the `Delivery Flags` unit option for the search unit type.
 - Fixed a bug that the `%prime%` Item Format variable did not show the prime mark.
 - Fixed a bug that the advanced filter unit option for adult products caused some overhead.

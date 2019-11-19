@@ -596,16 +596,34 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since   3.9.0
      */
     static public function isPrime( array $aItem ) {
+        return self::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsPrimeEligible' ) );
+//        $_bHasPrime     = false;
+//        $_aOfferListing = self::getElementAsArray( $aItem, array( 'Offers', 'Listings' ) );
+//        foreach( $_aOfferListing as $_aOffer ) {
+//            if ( self::getElement( $_aOffer, array( 'DeliveryInfo', 'IsPrimeEligible' ), false ) ) {
+//                return true;
+//            }
+//        }
+//        return $_bHasPrime;
+    }
+
+    /**
+     * @param array $aItem
+     * @param array $aKeys
+     *
+     * @return bool
+     * @since   3.10.1
+     */
+    static public function isDeliveryEligible( array $aItem, array $aKeys=array( 'DeliveryInfo', 'IsPrimeEligible' ) ) {
         $_bHasPrime     = false;
         $_aOfferListing = self::getElementAsArray( $aItem, array( 'Offers', 'Listings' ) );
         foreach( $_aOfferListing as $_aOffer ) {
-            if ( self::getElement( $_aOffer, array( 'DeliveryInfo', 'IsPrimeEligible' ), false ) ) {
+            if ( self::getElement( $_aOffer, $aKeys, false ) ) {
                 return true;
             }
         }
         return $_bHasPrime;
     }
-
     /**
      * Extracts a rating from a given string.
      * e.g. 4.5 out of 5 stars -> 4.5

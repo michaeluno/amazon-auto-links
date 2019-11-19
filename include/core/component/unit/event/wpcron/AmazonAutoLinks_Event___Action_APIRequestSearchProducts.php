@@ -316,7 +316,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                                 : '';
                         }
 
+                        // 3.10.0+
+                        if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=')) {
+                            $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
+                            $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );;
+                        }
+
                         return $_aRow;
+
                     }
 
 }

@@ -67,6 +67,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'language'                      => null,   // (string) 3.9.0 displaying language,  e.g. de_DE
         'preferred_currency'            => null,   // (string) 3.9.0
         'error'                         => null,   // (string) 3.9.0
+        'delivery_free_shipping'        => null,   // (boolean) 3.10.1
+        'delivery_fba'                  => null,   // (boolean) 3.10.1
     );
    
     /**
@@ -115,6 +117,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             is_prime tinyint(1),            
             is_adult tinyint(1),
             error varchar(800),
+            delivery_free_shipping tinyint(1),            
+            delivery_fba tinyint(1),                            
             PRIMARY KEY  (object_id) 
         ) " . $this->_getCharactersetCollation() . ";";
     }

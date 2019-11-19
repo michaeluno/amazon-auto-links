@@ -41,8 +41,20 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
             array(
                 'field_id'      => '_filter_by_prime_eligibility',
                 'type'          => 'checkbox',
-                'title'         => __( 'Prime Eligibility', 'amazon-auto-links' ),
-                'label'         => __( 'Show items only eligible for the Amazon Prime service.', 'amazon-auto-links' ),
+                'title'         => __( 'Delivery Eligibility', 'amazon-auto-links' ),
+                'label'         => __( 'Do not show items ineligible for the Amazon Prime service.', 'amazon-auto-links' ),
+            ),
+            array(
+                'field_id'      => '_filter_by_free_shipping',
+                'type'          => 'checkbox',
+                'show_title_column' => false,
+                'label'         => __( 'Do not show items ineligible for free shipping.', 'amazon-auto-links' ),
+            ),
+            array(
+                'field_id'      => '_filter_by_fba',
+                'type'          => 'checkbox',
+                'show_title_column' => false,
+                'label'         => __( 'Do not show items ineligible for FBA (Fulfilled by Amazon).', 'amazon-auto-links' ),
             ),
             array(
                 'field_id'      => '_filter_by_rating',

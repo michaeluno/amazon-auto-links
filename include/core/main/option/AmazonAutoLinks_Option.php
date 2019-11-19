@@ -266,6 +266,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
             // 3.10.1
             '_filter_by_prime_eligibility'  => false,
+            '_filter_by_free_shipping'      => false,
+            '_filter_by_fba'                => false,
             'preferred_currency'            => null,
             'language'                      => null,
         )

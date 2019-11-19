@@ -208,6 +208,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             if ( $this->oUnitOption->get( '_filter_adult_products' ) ) {
                 return true;
             }
+            if ( $this->oUnitOption->get( '_filter_by_free_shipping' ) ) {
+                return true;
+            }
+            if ( $this->oUnitOption->get( '_filter_by_fba' ) ) {
+                return true;
+            }
             // @deprecated 3.9.2 these are checked with the item format option, %_discount_rate%, $review_rate%.
 //            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
 //                return true;
@@ -255,14 +261,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         // Hooks of function-call basis.
         add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-        $_oFilterByRating      = new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this );
-        $_oFilterAdultProducts = new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this );
-        $_oFilterByPrime       = new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ); // 3.10.1
-        $_oFilterByDiscount    = new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this );
-        $_oDebugInfoProduct    = new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this );
-        $_oDebugInfoUnit       = new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this );
-        $_oCredit              = new AmazonAutoLinks_UnitOutput__Credit( $this );
-        $_oFoundItemCount      = new AmazonAutoLinks_UnitOutput__ErrorChecker( $this );
+        $_aHooks = array(
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
+            new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.1
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.1
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.1
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
+            new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this ),
+            new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this ),
+            new AmazonAutoLinks_UnitOutput__Credit( $this ),
+            new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
+        );
 
         // 3.7.5+
         if ( $this->___hasCustomProductLinkURLQuery() ) {
@@ -313,14 +323,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // Remove hooks of function-call basis.
         remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
         remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
-        $_oFilterByRating->__destruct();
-        $_oFilterAdultProducts->__destruct();
-        $_oFilterByPrime->__destruct();
-        $_oFilterByDiscount->__destruct();
-        $_oDebugInfoProduct->__destruct();
-        $_oDebugInfoUnit->__destruct();
-        $_oCredit->__destruct();
-        $_oFoundItemCount->__destruct();
+        foreach( $_aHooks as $_aHook ) {
+            $_aHook->__destruct();
+        }
 
         return $_sContent;
 
