@@ -266,6 +266,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
             // 3.10.1
             '_filter_by_prime_eligibility'  => false,
+            'preferred_currency'            => null,
+            'language'                      => null,
         )
         
     );

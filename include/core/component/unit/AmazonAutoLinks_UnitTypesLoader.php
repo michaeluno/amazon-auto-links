@@ -99,7 +99,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             'side', // context - e.g. 'normal', 'advanced', or 'side'
             'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
         );                    
-        
+
         new AmazonAutoLinks_UnitPostMetaBox_Common(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
             __( 'Common', 'amazon-auto-links' ), // title
@@ -109,7 +109,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             'normal',   // context - e.g. 'normal', 'advanced', or 'side'
             'core'      // priority - e.g. 'high', 'core', 'default' or 'low'
         );                   
-        
+
         new AmazonAutoLinks_UnitPostMetaBox_Template(
             null,       // meta box ID - null to auto-generate
             __( 'Template', 'amazon-auto-links' ), // title
@@ -141,6 +141,17 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         );
 
         // Common meta boxes
+
+        new AmazonAutoLinks_UnitPostMetaBox_Locale(
+            null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+            __( 'Locale', 'amazon-auto-links' ), // title
+            array(      // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'side',   // context - e.g. 'normal', 'advanced', or 'side'
+            'default'      // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
+
         new AmazonAutoLinks_UnitPostMetaBox_Cache(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
             __( 'Cache', 'amazon-auto-links' ), // title
@@ -148,7 +159,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
             ), 
             'side',     // context - e.g. 'normal', 'advanced', or 'side'
-            'default'   // priority - e.g. 'high', 'core', 'default' or 'low'
+            'core'   // priority - e.g. 'high', 'core', 'default' or 'low'
         );                   
 
         new AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced(
@@ -159,8 +170,8 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             ), 
             'side',     // context - e.g. 'normal', 'advanced', or 'side'
             'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
-        );            
-        
+        );
+
         new AmazonAutoLinks_UnitPostMetaBox_DebugInfo(
             null,       // meta box ID - null to auto-generate
             __( 'Debug Information', 'amazon-auto-links' ),

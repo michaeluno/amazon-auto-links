@@ -23,29 +23,15 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'type'          => 'hidden',
                 'value'         => 'category',
                 'hidden'        => true,            // hides the field row as well.
-            ),                    
-            array(
-                'field_id'      => 'country',
-                'title'         => __( 'Country', 'amazon-auto-links' ),
-                'type'          => 'select',
-//                'label'         => array(
-//                    'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
-//                    'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
-//                    'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
-//                    'DE' => 'DE - ' . __( 'Germany', 'amazon-auto-links' ),
-//                    'IT' => 'IT - ' . __( 'Italy', 'amazon-auto-links' ),
-//                    'JP' => 'JP - ' . __( 'Japan', 'amazon-auto-links' ),
-//                    'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
-//                    'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
-//                    'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
-//                    'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
-//                    'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
-//                    'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
-//                    'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ), // 3.5.5+
-//                ),
-                'label'         => AmazonAutoLinks_PAAPI50___Locales::getCountryLabels(),
-                'default'       => 'US',
-            ),              
+            ),
+// @deprecated 3.10.1 Moved to the Locale class.
+//            array(
+//                'field_id'      => 'country',
+//                'title'         => __( 'Country', 'amazon-auto-links' ),
+//                'type'          => 'select',
+//                'label'         => AmazonAutoLinks_PAAPI50___Locales::getCountryLabels(),
+//                'default'       => 'US',
+//            ),
             array(
                 'field_id'      => 'sort',
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),

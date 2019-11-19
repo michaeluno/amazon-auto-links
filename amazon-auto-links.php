@@ -205,7 +205,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static public $aDatabaseTables = array(
          'aal_products'        => array(
              'name'              => 'aal_products', // serves as the table name suffix
-             'version'           => '1.2.0',
+             'version'           => '1.2.1b14',
              'across_network'    => true,
              'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_products',
          ),

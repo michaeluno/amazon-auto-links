@@ -26,10 +26,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
         
         $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocales );
-        $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
-        $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
-        $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
-        $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );
+        $_sLocale        = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) ); // @todo use the third parameter value
+        $_sCurrency      = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+        $_sLanguage      = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
         // Second Iteration - format items and access custom database table.
         foreach( $aProducts as $_iIndex => &$_aProduct ) {

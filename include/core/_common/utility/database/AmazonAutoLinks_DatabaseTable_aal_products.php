@@ -75,6 +75,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
      * @since       3
      */
     public function getCreationQuery() {
+        // asin_locale varchar(13) UNIQUE NOT NULL,
+        // asin_locale varchar(13) NOT NULL,
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             object_id bigint(20) unsigned NOT NULL auto_increment,
             asin_locale varchar(13) NOT NULL,
@@ -145,13 +147,11 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         } 
         // If it is a new item,
         else {
-
             $_iCountSetRows = $this->replace(
                 $aRow,
                 $asFormat
             );
             $_iID  = $this->getIDByASINLocale( $sASINLocale, $sCurrency, $sLanguage );
-
         }     
         // This method is supposed to edit only one row 
         // so when the method returns a value that yields true, return the object ID.

@@ -72,7 +72,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'www.amazon.com',
         'CN'        => 'www.amazon.cn',
     );
-    public $aDefaultLanguages = array(
+    static public $aDefaultLanguages = array(
         'AU'        => 'en_AU', // English - AUSTRALIA
         'BR'        => 'pt_BR', // Portuguese - BRAZIL
         'CA'        => 'en_CA', // English - CANADA
@@ -89,7 +89,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'en_US', // English - UNITED STATES
         'CN'        => 'zh_CN', // not set by API
     );
-    public $aDefaultCurrencies = array(
+    static public $aDefaultCurrencies = array(
         'AU'        => 'AUD',   // Australian Dollar
         'BR'        => 'BRL',   // Brazilian Real
         'CA'        => 'CAD',   // Canadian Dollar
@@ -106,6 +106,17 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'USD',   // United States Dolla
         'CN'        => 'CNY',   // Chinese Yen
     );
+
+    static public function getDefaultLanguageByLocale( $sLocale ) {
+        if ( isset( self::$aDefaultLanguages[ $sLocale ] ) ) {
+            return self::$aDefaultLanguages[ $sLocale ];
+        }
+        $_aLanguages = self::getLanguagesByLocale( $sLocale );
+        foreach( $_aLanguages as $_sLanguageCode => $_sLabel ) {
+            return $_sLanguageCode;
+        }
+        return '';
+    }
 
     /**
      * Returns an array of the supported languages for the locale.
@@ -126,6 +137,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             case 'CA':
                 return array(
                     'en_CA' => __( 'English - CANADA', 'amazon-auto-links' ),
+                    // ---
                     'fr_CA' => __( 'French - CANADA', 'amazon-auto-links' ),
                 );
             case 'FR':
@@ -134,8 +146,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                 );
             case 'DE':
                 return array(
-                    'cs_CZ' => __( 'Czech - CZECHIA', 'amazon-auto-links' ),
                     'de_DE' => __( 'German - GERMANY', 'amazon-auto-links' ),
+                    // ---
+                    'cs_CZ' => __( 'Czech - CZECHIA', 'amazon-auto-links' ),
                     'en_GB' => __( 'English - UNITED KINGDOM', 'amazon-auto-links' ),
                     'nl_NL' => __( 'Dutch - NETHERLANDS', 'amazon-auto-links' ),
                     'pl_PL' => __( 'Polish - POLAND', 'amazon-auto-links' ),
@@ -151,8 +164,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                 );
             case 'JP':
                 return array(
-                    'en_US' => __( 'English - UNITED STATES', 'amazon-auto-links' ),
                     'ja_JP' => __( 'Japanese - JAPAN', 'amazon-auto-links' ),
+                    // ----
+                    'en_US' => __( 'English - UNITED STATES', 'amazon-auto-links' ),
                     'zh_CN' => __( 'Chinese - CHINA', 'amazon-auto-links' ),
                 );
             case 'MX':
@@ -170,6 +184,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             case 'AE':
                 return array(
                     'en_AE' => __( 'English - UNITED ARAB EMIRATES', 'amazon-auto-links' ),
+                    // ---
                     'ar_AE' => __( 'Arabic - UNITED ARAB EMIRATES', 'amazon-auto-links' ),
                 );
             case 'UK':
@@ -183,8 +198,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             default:
             case 'US':
                 return array(
-                    'de_DE' => __( 'German - GERMANY', 'amazon-auto-links' ),
                     'en_US' => __( 'English - UNITED STATES', 'amazon-auto-links' ),
+                    // ---
+                    'de_DE' => __( 'German - GERMANY', 'amazon-auto-links' ),
                     'es_US' => __( 'Spanish - UNITED STATES', 'amazon-auto-links' ),
                     'ko_KR' => __( 'Korean - KOREA', 'amazon-auto-links' ),
                     'pt_BR' => __( 'Portuguese - BRAZIL', 'amazon-auto-links' ),
@@ -194,6 +210,25 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         }
     }
 
+
+    /**
+     * @param $sLocale
+     *
+     * @return string
+     * @since   3.10.1
+     */
+    static public function getDefaultCurrencyByLocale( $sLocale ) {
+
+        if ( isset( self::$aDefaultCurrencies[ $sLocale ] ) ) {
+            return self::$aDefaultCurrencies[ $sLocale ];
+        }
+        $_aCurrencies = self::getCurrenciesByLocale( $sLocale );
+        foreach( $_aCurrencies as $_sCurrency => $_sLabel ) {
+            return $_sCurrency;
+        }
+        return '';
+
+    }
 
     /**
      * Returns an array of the supported currencies for the locale.
@@ -262,6 +297,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             default:
             case 'US':
                 return array(
+                    'USD' => __( 'United States Dollar', 'amazon-auto-links' ), // the default one is at the top
                     'AED' => __( 'United Arab Emirates Dirham', 'amazon-auto-links' ),
                     'AMD' => __( 'Armenian Dram', 'amazon-auto-links' ),
                     'ARS' => __( 'Argentine Peso', 'amazon-auto-links' ),
@@ -322,7 +358,6 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                     'TTD' => __( 'Trinidadian Dollar', 'amazon-auto-links' ),
                     'TWD' => __( 'Taiwan New Dollar', 'amazon-auto-links' ),
                     'TZS' => __( 'Tanzanian Shilling', 'amazon-auto-links' ),
-                    'USD' => __( 'United States Dollar', 'amazon-auto-links' ),
                     'UYU' => __( 'Uruguayan Peso', 'amazon-auto-links' ),
                     'VND' => __( 'Vietnamese Dong', 'amazon-auto-links' ),
                     'XCD' => __( 'Eastern Caribbean Dollar', 'amazon-auto-links' ),

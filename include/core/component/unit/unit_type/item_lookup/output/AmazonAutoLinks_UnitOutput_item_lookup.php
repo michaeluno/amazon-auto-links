@@ -50,8 +50,8 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
         'Merchant'              => null,    // string
         'OfferCount'            => null,    // integer
         'Resources'             => null,    // array
-        'CurrencyOfPreference'  => null,    // string
-        'LanguagesOfPreference' => null,    // array
+//        'CurrencyOfPreference'  => null,    // string
+//        'LanguagesOfPreference' => null,    // array
         // @deprecated 3.9.0    The below parameters are not supported in PA-API 5
 //        'IdType'                => null,
 //        'IncludeReviewsSummary' => null,
@@ -170,11 +170,11 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             'Merchant'              => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
                 ? 'Amazon'
                 : null,
-            'CurrencyOfPreference'  => $_aUnitOptions[ 'CurrencyOfPreference' ]
-                ? $_aUnitOptions[ 'CurrencyOfPreference' ]
+            'CurrencyOfPreference'  => $_aUnitOptions[ 'preferred_currency' ]
+                ? $_aUnitOptions[ 'preferred_currency' ]
                 : null,
-            'LanguagesOfPreference' => $_aUnitOptions[ 'LanguagesOfPreference' ]
-                ? array( $_aUnitOptions[ 'LanguagesOfPreference' ] )
+            'LanguagesOfPreference' => $_aUnitOptions[ 'language' ]
+                ? array( $_aUnitOptions[ 'language' ] )
                 : null,
             'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );

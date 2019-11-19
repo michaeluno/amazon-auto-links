@@ -475,11 +475,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 : null,
 
             'DeliveryFlags'         => array_keys( array_filter( ( array ) $this->oUnitOption->get( 'DeliveryFlags' ) ) ),
-            'CurrencyOfPreference'  => $this->oUnitOption->get( 'CurrencyOfPreference' )
-                ? $this->oUnitOption->get( 'CurrencyOfPreference' )
+            'CurrencyOfPreference'  => $this->oUnitOption->get( 'preferred_currency' )
+                ? $this->oUnitOption->get( 'preferred_currency' )
                 : null,
-            'LanguagesOfPreference' => $this->oUnitOption->get( 'LanguagesOfPreference' )
-                ? array( $this->oUnitOption->get( 'LanguagesOfPreference' ) )
+            'LanguagesOfPreference' => $this->oUnitOption->get( 'language' )
+                ? $this->getAsArray( $this->oUnitOption->get( 'language' ) )
                 : null,
             'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );
@@ -562,10 +562,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
             $_aProducts           = array();
 
-            $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
             $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );            
-            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
-            $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );            
+            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+            $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
             
             // First Iteration - Extract displaying ASINs.
             foreach ( $aItems as $_iIndex => $_aItem ) {

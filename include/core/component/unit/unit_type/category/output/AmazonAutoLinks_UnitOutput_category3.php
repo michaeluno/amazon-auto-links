@@ -273,10 +273,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
                 $_aProducts    = array();
 
-                $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
                 $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
-                $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), $_oLocale->aDefaultCurrencies[ $_sLocale ] );
-                $_sLanguage = $this->oUnitOption->get( array( 'language' ), $_oLocale->aDefaultLanguages[ $_sLocale ] );
+                $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+                $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
                 foreach ( $aItems as $_sASIN => $_aItem ) {
 

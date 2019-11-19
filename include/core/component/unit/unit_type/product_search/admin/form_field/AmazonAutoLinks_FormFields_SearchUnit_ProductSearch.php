@@ -54,15 +54,16 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'type'          => 'hidden',
                 'title'         => __( 'Operation', 'amazon-auto-links' ),
                 'hidden'        => true,
-            ),                
-            array(
-                'field_id'      => $sFieldIDPrefix . 'country',
-                'type'          => 'text',
-                'title'         => __( 'Locale', 'amazon-auto-links' ),
-                'attributes'    => array(
-                    'readonly'=> 'readonly',
-                ),
-            ),                         
+            ),
+// @deprecated 3.10.1 Moved to the Locale class
+//            array(
+//                'field_id'      => $sFieldIDPrefix . 'country',
+//                'type'          => 'text',
+//                'title'         => __( 'Locale', 'amazon-auto-links' ),
+//                'attributes'    => array(
+//                    'readonly'=> 'readonly',
+//                ),
+//            ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'SearchIndex',
                 'type'          => 'select',
