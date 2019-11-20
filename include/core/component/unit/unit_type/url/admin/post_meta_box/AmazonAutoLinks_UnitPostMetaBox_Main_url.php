@@ -25,7 +25,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_url extends AmazonAutoLinks_UnitPostM
         
         $_oFields = new AmazonAutoLinks_FormFields_URLUnit_Main;
         foreach( $_oFields->get() as $_aField ) {
-            if ( 'unit_title' === $_aField[ 'field_id' ] ) {
+            if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
                 continue;
             }
             $this->addSettingFields( $_aField );

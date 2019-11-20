@@ -25,7 +25,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
         foreach( $this->___getFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName;
             foreach ( $_oFields->get() as $_aField ) {
-                if ( 'unit_title' === $_aField[ 'field_id' ] ) {
+                if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
                     continue;
                 }
                 $this->addSettingFields( $_aField );

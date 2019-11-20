@@ -24,14 +24,13 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'value'         => 'category',
                 'hidden'        => true,            // hides the field row as well.
             ),
-// @deprecated 3.10.1 Moved to the Locale class.
-//            array(
-//                'field_id'      => 'country',
-//                'title'         => __( 'Country', 'amazon-auto-links' ),
-//                'type'          => 'select',
-//                'label'         => AmazonAutoLinks_PAAPI50___Locales::getCountryLabels(),
-//                'default'       => 'US',
-//            ),
+            array(
+                'field_id'      => 'country',
+                'title'         => __( 'Country', 'amazon-auto-links' ),
+                'type'          => 'select',
+                'label'         => AmazonAutoLinks_PAAPI50___Locales::getCountryLabels(),
+                'default'       => 'US',
+            ),
             array(
                 'field_id'      => 'sort',
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),

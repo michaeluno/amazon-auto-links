@@ -24,7 +24,10 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_category extends AmazonAutoLinks_Unit
     public function setUp() {
         
         $_oFields = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
-        foreach( $_oFields->get() as $_aField ) {           
+        foreach( $_oFields->get() as $_aField ) {
+            if ( 'country' === $_aField[ 'field_id' ] ) {
+                continue;
+            }
             $this->addSettingFields( $_aField );
         }
                     

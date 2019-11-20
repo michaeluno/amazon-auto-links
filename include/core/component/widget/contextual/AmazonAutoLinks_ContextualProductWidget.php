@@ -113,6 +113,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         $_aClasses = array(
             'AmazonAutoLinks_FormFields_Widget_ContextualProduct',
             'AmazonAutoLinks_FormFields_Unit_Common',
+//            'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
