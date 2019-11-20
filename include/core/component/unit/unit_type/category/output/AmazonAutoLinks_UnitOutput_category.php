@@ -276,6 +276,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             // random', // date, title, title_descending    
             $_sSortOrder = $this->oUnitOption->get( 'sort' );
             switch( $_sSortOrder ) {
+                case 'raw':
+                    return 'raw';
                 case 'date':
                     return 'date_descending';
                 case 'title':

@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.2.4
-Stable tag:         3.9.5
+Stable tag:         3.9.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -294,6 +294,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo support the ability to filter items with prime eligibility
 
 == Changelog ==
+
+= 3.9.6 - 11/20/2019 =
+- Fixed a bug that the `Raw` sort unit option for the category unit type was treated as `Random`, which has started since v3.9.3.
 
 = 3.9.5 - 11/16/2019 =
 - Fixed a bug with the category unit type that caused excessive nested function calls when setting a large number of item count, which has started since 3.9.0.
