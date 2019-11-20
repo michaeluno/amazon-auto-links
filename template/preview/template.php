@@ -24,12 +24,12 @@
 	
 	<div class="product-container">
 		<h4 class="product-title">
-			<a href="<?php echo $_aProduct[ 'product_url' ]; ?>" title="<?php echo $_aProduct[ 'text_description' ]; ?>" target="_blank" rel="nofollow">
+			<a href="<?php echo esc_url( $_aProduct[ 'product_url' ] ); ?>" title="<?php echo $_aProduct[ 'text_description' ]; ?>" target="_blank" rel="nofollow">
 				<?php echo $_aProduct[ 'title' ]; ?>
 			</a>
 		</h4>
 		<div class="product-thumbnail" style="width:<?php echo $aArguments['image_size']; ?>px;">
-			<a href="<?php echo $_aProduct[ 'product_url' ]; ?>" title="<?php echo $_aProduct['text_description']; ?>" target="_blank" rel="nofollow">
+			<a href="<?php echo esc_url( $_aProduct[ 'product_url' ] ); ?>" title="<?php echo $_aProduct['text_description']; ?>" target="_blank" rel="nofollow">
 				<img src="<?php echo $_aProduct[ 'thumbnail_url' ]; ?>" style="max-width:<?php echo $aArguments['image_size'];?>px;" alt="<?php echo $_aProduct[ 'text_description' ]; ?>" />
 			</a>
 		</div>

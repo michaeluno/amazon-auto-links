@@ -20,10 +20,20 @@ class AmazonAutoLinks_Output_Format_LinksStyle_2 extends AmazonAutoLinks_Output_
      * @return      string
      * @remark      http://www.amazon.[domain-suffix]/exec/obidos/ASIN/[asin]/[associate-id]/ref=[...]
      */
-    public function get( $sURL, $sASIN ) {
+    public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
         
         $_aURLParts = parse_url( trim( $sURL ) );
+
+        // Query
         parse_str( $_aURLParts[ 'query' ], $_aQuery );
+        $_aQuery = $_aQuery + array(
+            'language' => $sLanguageCode,
+            'currency' => $sCurrency,
+        );
+        $_aQuery = array_filter( $_aQuery ); // drop non-true values
+        unset( $_aQuery[ 'tag' ] ); // already inserted
+
+        // URL
         $_sURL      = $_aURLParts[ 'scheme' ] . '://' . $_aURLParts[ 'host' ]
             . '/exec/obidos/ASIN/' . $sASIN 
             . '/' . $this->getAssociateID() 
@@ -32,7 +42,7 @@ class AmazonAutoLinks_Output_Format_LinksStyle_2 extends AmazonAutoLinks_Output_
                     ? '' 
                     : '/ref=nosim' 
             );    // ref=nosim
-        unset( $_aQuery[ 'tag' ] ); // already inserted
+
         return add_query_arg( $_aQuery, $_sURL );
 
     }

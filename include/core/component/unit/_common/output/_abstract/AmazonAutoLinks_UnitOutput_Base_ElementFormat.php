@@ -150,6 +150,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
             $_aProduct[ 'sales_rank' ]   = $_oSalesRankFormatter->get();
 
+            // 3.10.1
+            $_sNativeTitle = $_aProduct[ 'title' ];
+            $_oTitleFormatter            = new AmazonAutoLinks_UnitOutput___ElementFormatter_Title(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'title' ]        = $_oTitleFormatter->get();
+            if ( $_sNativeTitle !== $_aProduct[ 'title' ] ) {
+                $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
+                $_aProduct[ 'formed_title' ]  = $_aProduct[ 'formatted_title' ];  // backward compatibility
+            }
+
             // Let unit types that need to use the data from database rows access them.
             $_aProduct = apply_filters(
                 'aal_filter_unit_each_product_with_database_row',
@@ -224,8 +235,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductTitle()`.
      * @return      string
+     * @deprecated  3.10.1
      */
-    protected function _getProductTitleFormatted( array $aProduct ) {
+/*    protected function _getProductTitleFormatted( array $aProduct ) {
         return str_replace( 
             array( 
                 "%href%", 
@@ -239,7 +251,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             ),
             $this->oUnitOption->get( 'title_format' ) 
         );        
-    }        
+    }*/
     
     /**
      * Returns the formatted product thumbnail HTML block.
@@ -260,11 +272,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     "%description_text%" 
                 ),
                 array( 
-                    $aProduct[ 'product_url' ], 
-                    $aProduct[ 'title' ], 
+                    esc_url( $aProduct[ 'product_url' ] ),
+                    esc_attr( strip_tags( $aProduct[ 'title' ] ) ),
                     $aProduct[ 'thumbnail_url' ], 
                     $this->oUnitOption->get( 'image_size' ), 
-                    $aProduct[ 'text_description' ] 
+                    esc_attr( $aProduct[ 'text_description' ] )
                 ),
                 $this->oUnitOption->get( 'image_format' )
             ) 
@@ -340,30 +352,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             
             
     }
-    
-    /**
-     * Strips HTML tags and sanitizes the product title.
-     * @return  string
-     */
-    protected function _getTitleSanitized( $sTitle ) {
-
-        $sTitle = apply_filters( 'aal_filter_unit_product_raw_title', $sTitle );
-        
-        // Title character length
-        if ( 0 == $this->oUnitOption->get( 'title_length' ) ) {
-            return '';
-        }
-        if ( 
-            $this->oUnitOption->get( 'title_length' ) > 0 
-            && $this->getStringLength( $sTitle ) > $this->oUnitOption->get( 'title_length' ) 
-        ) {
-            $sTitle = $this->getSubstring( $sTitle, 0, $this->oUnitOption->get( 'title_length' ) ) . '...';
-        }
-
-        // @todo Examine whether escaping is needed here. The returned value may be used in an attribute.
-         return esc_attr( $sTitle );
-
-    }
 
     /**
      * Formats a button.
@@ -437,8 +425,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       unknown
      * @since       3.5.0       Changed the visibility scope from protected.
      * @remark      The similarity product formatter class accesses it.
+     * @since       3.10.1      Added the `$sLanguageCode` and `$sCurrency` parameter.
      */
-    public function getProductLinkURLFormatted( $sURL, $sASIN ) {
+    public function getProductLinkURLFormatted( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
 
         $_sStyledURL = $this->___getFormattedProductLinkByStyle(
             $sURL, 
@@ -446,7 +435,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $this->oUnitOption->get( 'link_style' ), 
             $this->oUnitOption->get( 'ref_nosim' ), 
             $this->oUnitOption->get( 'associate_id' ), 
-            $this->oUnitOption->get( 'country' )
+            $this->oUnitOption->get( 'country' ),
+            $sLanguageCode,
+            $sCurrency
         );
         // 3.6.4+   Allows third parties to modify the link.
         $_sStyledURL = apply_filters(
@@ -457,8 +448,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $this->oUnitOption->get()    // 3rd param
         );
 
-        // @todo Examine whether escaping here is needed
-        return esc_url( $_sStyledURL );
+        // @remark 3.10.1 not escaping to avoid multiple escaping.
+        return $_sStyledURL;
             
     }
         /**
@@ -467,7 +458,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          * @remark      $iStyle should be 1 to 5 indicating the url style of the link.
          * @return      string
          */
-        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
+        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US', $sLanguageCode='', $sCurrency='' ) {
             
             $iStyle      = $iStyle ? ( integer ) $iStyle : 1;
             $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
@@ -476,7 +467,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $sAssociateID,
                 $sLocale
             );
-            $_sURL = $_oLinkStyle->get( $sURL, $sASIN );
+            $_sURL = $_oLinkStyle->get( $sURL, $sASIN, $sLanguageCode, $sCurrency );
             return str_replace(
                 'amazon-auto-links-20',  // dummy url used for a request
                 $sAssociateID,

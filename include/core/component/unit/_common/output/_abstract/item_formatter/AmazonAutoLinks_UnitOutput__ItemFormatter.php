@@ -79,7 +79,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "<!-- %_discount_rate% -->",    // 3.9.2
             ),
             array(
-                $aProduct[ 'product_url' ],
+                esc_url( $aProduct[ 'product_url' ] ),
                 $aProduct[ 'title' ],
                 $aProduct[ 'text_description' ],
                 $aProduct[ 'formatted_title' ],

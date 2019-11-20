@@ -20,7 +20,7 @@ class AmazonAutoLinks_Output_Format_LinksStyle_1 extends AmazonAutoLinks_Output_
      * @return      string
      * @remark      www.amazon.[domain-suffix]/[product-name]/dp/[asin]/ref=[...]?tag=[associate-id]
      */
-    public function get( $sURL, $sASIN ) {
+    public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
 
         // ref=nosim
         if ( ! empty( $this->bRefNosim ) ) {
@@ -32,10 +32,13 @@ class AmazonAutoLinks_Output_Format_LinksStyle_1 extends AmazonAutoLinks_Output_
         }
             
         // http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&amp;tag=miunosoft-20 -> http://.../ref=pd_zg_rss_ts_bt_beauty_8?ie=UTF8&tag=miunosoft-20
+        $_aQuery = array(
+            'tag' => $this->getAssociateID(),
+            'language' => $sLanguageCode,
+            'currency' => $sCurrency,
+        );
         return add_query_arg( 
-            array( 
-                'tag' => $this->getAssociateID(),
-            ), 
+            array_filter( $_aQuery ),
             htmlspecialchars_decode( $sURL )
         );       
         

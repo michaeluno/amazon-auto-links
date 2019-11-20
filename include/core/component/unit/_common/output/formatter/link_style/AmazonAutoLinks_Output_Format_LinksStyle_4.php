@@ -20,14 +20,17 @@ class AmazonAutoLinks_Output_Format_LinksStyle_4 extends AmazonAutoLinks_Output_
      * @return      string
      * @remark      http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
      */
-    public function get( $sURL, $sASIN ) {
+    public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
 
         $_aURLParts = parse_url( trim( $sURL ) );
         parse_str( $_aURLParts[ 'query' ], $_aQuery );
         unset( $_aQuery[ 'tag' ] ); // prevent duplicates
         $_aQuery    = $_aQuery + array(
-            'tag' => $this->getAssociateID(),
+            'tag'      => $this->getAssociateID(),
+            'language' => $sLanguageCode,
+            'currency' => $sCurrency,
         );
+        $_aQuery = array_filter( $_aQuery ); // drop non-true values
         return add_query_arg( 
             $_aQuery,
             $_aURLParts[ 'scheme' ]

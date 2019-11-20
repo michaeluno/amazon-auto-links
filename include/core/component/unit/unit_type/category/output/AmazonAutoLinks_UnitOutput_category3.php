@@ -38,9 +38,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
         $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
 
-        $_sLocale      = ( string ) $this->oUnitOption->get( 'country' );
-        $_sAssociateID = ( string ) $this->oUnitOption->get( 'associate_id' );
-        $_iCount       = ( integer ) $this->oUnitOption->get( 'count' );
+        $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
+        $_sAssociateID       = ( string ) $this->oUnitOption->get( 'associate_id' );
+        $_iCount             = ( integer ) $this->oUnitOption->get( 'count' );
         
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
 
@@ -51,9 +51,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
          * 'random'            => __( 'Random', 'amazon-auto-links' ),
          * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
          */
-        $_sSortType = $this->_getSortOrder();
-        $_sMethodName = "_getItemsSorted_{$_sSortType}";
-        $_aProducts = $this->{$_sMethodName}( $_aProducts );
+        $_sSortType          = $this->_getSortOrder();
+        $_sMethodName        = "_getItemsSorted_{$_sSortType}";
+        $_aProducts          = $this->{$_sMethodName}( $_aProducts );
 
         $_aProducts          = $this->___getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
@@ -364,15 +364,17 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
                     $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
                         $_aProduct[ 'product_url' ],
-                        $_aProduct[ 'ASIN' ]
+                        $_aProduct[ 'ASIN' ],
+                        $this->oUnitOption->get( 'language' ),
+                        $this->oUnitOption->get( 'preferred_currency' )
                     );
 
                     // Title
                     $_aProduct[ 'raw_title' ] = $this->getElement( $_aProduct, 'title' );
-                    $_aProduct[ 'title' ]     = $this->_getTitleSanitized( $_aProduct[ 'raw_title' ] );
-                    if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) {
-                        throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'title' ] );
+                    if ( $this->isTitleBlocked( $_aProduct[ 'raw_title' ] ) ) {
+                        throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'raw_title' ] );
                     }
+                    $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
 
                     // Description - plain text and HTML versions
                     // @remark The description (content) element is retrieved later from the database
@@ -411,7 +413,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ];  // backward compatibility
 
                     // Title
-                    $_aProduct[ 'formatted_title' ]     = $this->_getProductTitleFormatted( $_aProduct );
+                    $_aProduct[ 'formatted_title' ]     = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
                     $_aProduct[ 'formed_title' ]        = $_aProduct[ 'formatted_title' ];  // backward compatibility
 
                     // Button - check if the %button% variable exists in the item format definition.

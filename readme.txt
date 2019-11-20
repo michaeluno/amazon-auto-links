@@ -288,10 +288,6 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
 - @todo compress HTTP request caches as customer review caches are too large.
-- @todo support language preference for units
-- @todo support currency preference for units
-- @todo support the ability to filter items with delivery information
-- @todo support the ability to filter items with prime eligibility
 
 == Changelog ==
 

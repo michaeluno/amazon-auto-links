@@ -507,7 +507,9 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
                 $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
                     $_sPermalink,
-                    $_aProduct[ 'ASIN' ]
+                    $_aProduct[ 'ASIN' ],
+                    $this->oUnitOption->get( 'language' ),
+                    $this->oUnitOption->get( 'preferred_currency' )
                 );
 
                 // Title
@@ -573,7 +575,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ];  // backward compatibility
 
                 // Title
-                $_aProduct[ 'formatted_title' ]     = $this->_getProductTitleFormatted( $_aProduct );
+                $_aProduct[ 'formatted_title' ]     = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
                 $_aProduct[ 'formed_title' ]        = $_aProduct[ 'formatted_title' ];  // backward compatibility
 
                 // Button - check if the %button% variable exists in the item format definition.
@@ -721,10 +723,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             if ( empty( $_sHref ) ) {
                 continue;
             }
-            $_sHref = $this->getProductLinkURLFormatted( $_sHref, $sASIN );
+            $_sHref = $this->getProductLinkURLFormatted(
+                $_sHref,
+                $sASIN,
+                $this->oUnitOption->get( 'language' ),
+                $this->oUnitOption->get( 'preferred_currency' )
+            );
 
             // Reported Issue: Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8
-            $_bResult = @$_nodeA->setAttribute( 'href', $_sHref );
+            $_bResult = @$_nodeA->setAttribute( 'href', esc_url( $_sHref ) );
             
             // if ( empty( $_bResult ) ) echo "error setting the url: " . $_sHref;
             foreach( $aAttributes as $_sAttribute => $_sProperty ) {

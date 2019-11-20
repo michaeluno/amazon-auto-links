@@ -20,7 +20,7 @@ class AmazonAutoLinks_Output_Format_LinksStyle_5 extends AmazonAutoLinks_Output_
      * @return      string
      * @remark      http://[yoursite]?[costom_query_key]=[ASIN]
      */
-    public function get( $sURL, $sASIN ) {
+    public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
         
         $sQueryKey  = $this->oOption->get( 'query', 'cloak' );
         $_aURLParts = parse_url( trim( $sURL ) );
@@ -31,6 +31,8 @@ class AmazonAutoLinks_Output_Format_LinksStyle_5 extends AmazonAutoLinks_Output_
             'locale'     => $this->sLocale,
             'ref'        => 'nosim',
             'tag'        => $this->getAssociateID(),
+            'language'   => $sLanguageCode,
+            'currency'   => $sCurrency,
         ) + $_aQuery;
         if ( ! $this->bRefNosim ) {
             unset( $_aQuery[ 'ref' ] );

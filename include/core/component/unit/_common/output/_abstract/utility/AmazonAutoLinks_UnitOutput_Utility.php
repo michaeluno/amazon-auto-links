@@ -54,5 +54,55 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
         );
     }
 
+    /**
+     * Strips HTML tags and sanitizes the product title.
+     * @return  string
+     * @since   unknown 
+     * @since   3.10.1  Renamed from `_getTitleSanitized()`
+     * @since   3.10.1  Moved from `AmazonAutoLinks_UnitOutput_Base`.
+     * @since   3.10.1  Added the `$iTitleLength` parameter.
+     */
+    static public function getTitleSanitized( $sTitle, $iTitleLength ) {
+
+        $sTitle = apply_filters( 'aal_filter_unit_product_raw_title', $sTitle );
+        
+        // Title character length
+        if ( 0 == $iTitleLength ) {
+            return '';
+        }
+        if (
+            $iTitleLength > 0
+            && self::getStringLength( $sTitle ) > $iTitleLength
+        ) {
+            $sTitle = self::getSubstring( $sTitle, 0, $iTitleLength ) . '...';
+        }
+
+        // @remark 3.10.0 Removed `esc_attr()` for this function to be used in different places. If any side effects are found by this, apply `esc_attr()` outside this function.
+         return $sTitle;
+
+    }
+
+    /**
+     * Returns the formatted product title HTML Block.
+     * @since       2.1.1
+     * @since       3.5.0       Renamed from `_formatProductTitle()`.
+     * @since       3.10.1      Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @return      string
+     */
+    static public function getProductTitleFormatted( array $aProduct, $sFormat ) {
+        return str_replace(
+            array(
+                "%href%",
+                "%title_text%",
+                "%description_text%"
+            ),
+            array(
+                esc_url( $aProduct[ 'product_url' ] ),
+                strip_tags( $aProduct[ 'title' ] ),
+                $aProduct[ 'text_description' ]
+            ),
+            $sFormat
+        );
+    }
 
 }

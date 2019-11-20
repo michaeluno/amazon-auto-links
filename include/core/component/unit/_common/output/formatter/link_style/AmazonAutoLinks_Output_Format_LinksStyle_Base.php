@@ -39,7 +39,7 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
      * @remark      Override this method in an extended class.
      * @return      string
      */
-    public function get( $sURL, $sASIN ) {
+    public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
         return trim( $sURL );
     }
     

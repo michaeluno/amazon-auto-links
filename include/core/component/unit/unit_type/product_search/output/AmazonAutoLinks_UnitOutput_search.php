@@ -578,7 +578,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $_aItem         = $this->___getItemStructured( $_aItem );
                     $_sTitle        = $this->___getTitle( $_aItem );
                     $_sThumbnailURL = $this->___getThumbnailURL( $_aItem );
-                    $_sProductURL   = $this->getProductLinkURLFormatted( rawurldecode( $_aItem[ 'DetailPageURL' ] ), $_aItem[ 'ASIN' ] );
+                    $_sProductURL   = $this->getProductLinkURLFormatted(
+                        rawurldecode( $_aItem[ 'DetailPageURL' ] ),
+                        $_aItem[ 'ASIN' ],
+                        $this->oUnitOption->get( 'language' ),
+                        $this->oUnitOption->get( 'preferred_currency' )
+                    );
                     $_sContent      = $this->getContent( $_aItem );
                     $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
     
@@ -694,20 +699,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              */
             private function ___getTitle( $aItem ) {
                 $_sTitle = $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
-                $_sTitle = $this->_getTitleSanitized( $_sTitle );
-                $this->___checkTitleBlocked( $_sTitle );
-                return $_sTitle;
-            }
-                /**
-                 * @since   3.5.0
-                 * @throws  Exception
-                 */
-                private function ___checkTitleBlocked( $sTitle ) {
-                    if ( $this->isTitleBlocked( $sTitle ) ) {
-                        throw new Exception( 'The title is black-listed: ' . $sTitle );
-                    }
+                if ( $this->isTitleBlocked( $_sTitle ) ) {
+                    throw new Exception( 'The title is black-listed: ' . $_sTitle );
                 }
-    
+                return $this->getTitleSanitized( $_sTitle, $this->oUnitOption->get( 'title_length' ) );
+            }
+
             /**
              * @param       array       $aItem
              * @return      string
@@ -853,7 +850,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProduct[ 'formed_thumbnail' ]    = $_aProduct[ 'formatted_thumbnail' ]; // backward compatibility
     
                 // Title
-                $_aProduct[ 'formatted_title' ] = $this->_getProductTitleFormatted( $_aProduct );
+                $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
                 $_aProduct[ 'formed_title' ]    = $_aProduct[ 'formatted_title' ]; // backward compatibility
     
     

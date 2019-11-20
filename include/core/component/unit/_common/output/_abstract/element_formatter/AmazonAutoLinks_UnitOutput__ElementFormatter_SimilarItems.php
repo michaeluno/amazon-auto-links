@@ -150,7 +150,9 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
                 
                 $_sProductURL   = $this->_oUnitOutput->getProductLinkURLFormatted(
                     rawurldecode( $this->getElement( $_aProduct, 'DetailPageURL' ) ),
-                    $_sASIN
+                    $_sASIN,
+                    $this->_oUnitOption->get( 'language' ),
+                    $this->_oUnitOption->get( 'preferred_currency' )
                 );
 
                 $_sProductURL   = esc_url( $_sProductURL );
