@@ -99,6 +99,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     );
 
     /**
+     * Search unit types needs this property to determine and extract errors from API responses.
+     * @var string
+     * @since   3.10.1  This was actually added in 3.9.0 but not in the base class.
+     */
+    protected $_sResponseItemsParentKey = '';
+
+    /**
      * Sets up properties.
      */
     public function __construct( $aoUnitOptions, $sUnitType='' ) {
@@ -281,6 +288,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         $_aOptions          = $this->oOption->aOptions;
         $_aArguments        = $this->oUnitOption->get();
+        $_iUnitID           = $this->oUnitOption->get( 'id' ); // there are cases that called dynamically without units like the shortcode
+        $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
         $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
         $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
         $_aProducts         = $this->fetch( $aURLs );
@@ -291,6 +300,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             $_sError            = $this->_getError( $_aProducts );
             if ( $_sError ) {
                 throw new Exception( $_sError );
+            }
+
+            // This time, there is no error so if there is a previous unit error, update it to normal.
+            if ( $_bHasPreviousError && $_iUnitID ) {
+                update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
             $_sContent          = $this->getOutputBuffer(
@@ -304,11 +318,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             );
 
         } catch ( Exception $_oException ) {
-            $_sContent   = $this->oUnitOption->get( 'show_errors' )
+            $_sErrorMessage = $_oException->getMessage();
+            $_sContent      = $this->oUnitOption->get( 'show_errors' )
                 ? "<div class='warning'><p>"
-                  . AmazonAutoLinks_Registry::NAME. ': ' . $_oException->getMessage()
+                  . AmazonAutoLinks_Registry::NAME. ': ' . $_sErrorMessage
                   . "</p></div>"
                 : '';
+            if ( ! $_bHasPreviousError && $_iUnitID ) {
+                update_post_meta( $_iUnitID, '_error', $_sErrorMessage );
+            }
         }
 
         $_sContent          = apply_filters(
@@ -323,13 +341,30 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // Remove hooks of function-call basis.
         remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
         remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
-        foreach( $_aHooks as $_aHook ) {
-            $_aHook->__destruct();
+        foreach( $_aHooks as $_oHook ) {
+            $_oHook->__destruct();
         }
 
         return $_sContent;
 
     }
+        /**
+         * @return bool
+         * @since   3.10.1
+         */
+        private function ___hasPreviousUnitError( $iUnitID ) {
+            if ( ! $iUnitID ) {
+                return false;
+            }
+            $_snPreviousError   = $this->oUnitOption->get( '_error' );
+            if ( is_null( $_snPreviousError ) ) {
+                return false;
+            }
+            if ( 'normal' === $_snPreviousError ) {
+                return false;
+            }
+            return true;
+        }
         /**
          * @param       array       $aOptions
          * @param       array       $aArguments
@@ -376,6 +411,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
     /**
+     * Updates unit status.
+     *
      * Called when the unit HTTP request cache is set.
      *
      * Cases:
@@ -389,7 +426,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @param       array   $aProducts
      * @param       integer $iUnitID        The unit (post) ID.
      * @callback    aal_filter_products
-     * @remark      Although this hook into a filter hook but called within an another outer callback method and this does not require a return value.
+     * @remark      Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
      * @retuen      void
      * @since       3.7.0
      */
@@ -401,7 +438,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             update_post_meta(
                 $iUnitID, // post id
                 $_sUnitStatusMetaKey, // meta key
-                $_sError
+                $_sError    // value
             );
             return;
         }
@@ -412,7 +449,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             update_post_meta(
                 $iUnitID, // post id
                 $_sUnitStatusMetaKey, // meta key
-                'normal'
+                'normal' // value
             );
         }
 
@@ -430,27 +467,40 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Returns the error message if found.
+     *
+     * Cases:
+     * a: no items -> error
+     * b: items and errors are returned -> fine
+     * c: only errors -> error
+     * d: no errors -> fine
+     *
      * @since       3.7.0
      * @remark      Override this method in each extended class.
      * @return      string  The found error.
      * @return      string  The error message.
      */
     protected function _getError( $aProducts ) {
+
+        // a: No items
         if ( empty( $aProducts ) ) {
             return __( 'No products found.', 'amazon-auto-links' );
         }
-        if ( isset( $aProducts[ 'Error' ][ 'Message' ], $aProducts[ 'Error' ][ 'Code' ] ) ) {
-            return $aProducts[ 'Error' ][ 'Code' ] . ': ' . $aProducts[ 'Error' ][ 'Message' ];
+
+        // b: items and errors
+        $_aError    = $this->getElement( $aProducts, array( 'Error' ), array() );
+        if (
+            ! empty( $_aError )
+            && isset( $aProducts[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
+        ) {
+            return '';
         }
-        // @todo deprecate below as PA-API 5 changed the data structure but they may need to be kept for backward compatibility
-        if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ] ) ) {
-            return $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Code' ]
-                . ': ' . $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 'Message' ];
+
+        // c: only errors
+        if ( isset( $_aError[ 'Message' ], $_aError[ 'Code' ] ) ) {
+            return $_aError[ 'Code' ] . ': ' . $_aError[ 'Message' ];
         }
-        if ( isset( $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ] ) ) {
-            return $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ][ 'Code' ]
-                . ': ' . $aProducts[ 'Items' ][ 'Request' ][ 'Errors' ][ 0 ][ 'Message' ];
-        }
+
+        // d: no error
         return '';
     }
 
