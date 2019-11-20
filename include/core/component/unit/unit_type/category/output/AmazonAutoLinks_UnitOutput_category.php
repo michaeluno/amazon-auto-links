@@ -276,6 +276,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             // random', // date, title, title_descending    
             $_sSortOrder = $this->oUnitOption->get( 'sort' );
             switch( $_sSortOrder ) {
+                case 'raw':
+                    return 'raw';
                 case 'date':
                     return 'date_descending';
                 case 'title':
@@ -286,6 +288,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 default:
                     return 'random';
             }
+
         }
     /**
      * Formats the given RSS urls.
@@ -509,7 +512,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 // Title
                 $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
-                $_aProduct[ 'title' ]     = $this->_getTitleSanitized( $_aProduct[ 'raw_title' ] );
+                $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
                 if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) {
                     throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'title' ] );
                 }
@@ -715,15 +718,17 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         foreach( $oNode->getElementsByTagName( 'a' ) as $_nodeA ) {
             
             $_sHref = $_nodeA->getAttribute( 'href' );
-            if ( empty( $_sHref ) ) { continue; }
+            if ( empty( $_sHref ) ) {
+                continue;
+            }
             $_sHref = $this->getProductLinkURLFormatted( $_sHref, $sASIN );
 
             // Reported Issue: Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8
             $_bResult = @$_nodeA->setAttribute( 'href', $_sHref );
             
             // if ( empty( $_bResult ) ) echo "error setting the url: " . $_sHref;
-            foreach( $aAttributes as $strAttr => $strProperty ) {
-                @$_nodeA->setAttribute( $strAttr, $strProperty );
+            foreach( $aAttributes as $_sAttribute => $_sProperty ) {
+                @$_nodeA->setAttribute( $_sAttribute, esc_attr( $_sProperty ) );
             }
         
         }
