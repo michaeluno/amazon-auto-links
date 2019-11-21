@@ -2,6 +2,7 @@
 $_aClassFiles = array( 
     "AmazonAutoLinks_HelpAdminPage"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage.php", 
     "AmazonAutoLinks_HelpAdminPage_Help"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help.php", 
+    "AmazonAutoLinks_HelpAdminPage_Help_About"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_ChangeLog"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_FAQ"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_FAQ.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_GetPro"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php", 

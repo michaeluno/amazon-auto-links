@@ -65,7 +65,16 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
                     'title'     => __( 'Get Pro', 'amazon-auto-links' ),
                 )
             );       
-        }        
+        }
+
+        new AmazonAutoLinks_HelpAdminPage_Help_About(
+            $this->oFactory,
+            $this->sPageSlug,
+            array(
+                'tab_slug'  => 'about',
+                'title'     => __( 'About', 'amazon-auto-links' ),
+            )
+        );
         
         $this->_doPageSettings( $oFactory );
         

@@ -85,11 +85,14 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         if ( ! $_oOption->isDebug() ) {
             return;
         }
-        echo "<h3 style='display:block; clear:both;'>" 
+        echo "<h3 style='display:block; clear:both;'>"
                 . __( 'Debug Info', 'amazon-auto-links' ) 
-            .  "</h3>";
+            . "</h3>"
+            . "<h4 style='display:block; clear:both;'>"
+                . __( 'Saved Options', 'amazon-auto-links' )
+                .  "</h4>";
         $oFactory->oDebug->dump( $oFactory->getValue() );
-        
+
     }
         
 }

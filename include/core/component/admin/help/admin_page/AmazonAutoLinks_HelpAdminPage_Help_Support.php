@@ -21,10 +21,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Support extends AmazonAutoLinks_AdminPa
      * 
      * @callback        action      load_{page slug}_{tab slug}
      */
-    public function replyToLoadTab( $oAdminPage ) {
-        
-        
-    }
+    public function replyToLoadTab( $oAdminPage ) {}
     
     /**
      * 
