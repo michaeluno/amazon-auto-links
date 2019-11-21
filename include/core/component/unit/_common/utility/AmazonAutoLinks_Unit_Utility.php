@@ -733,5 +733,4 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             . "</span>";
     }
 
-
 }
