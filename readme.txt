@@ -295,6 +295,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the ability to specify preferred language and currency for units.
 - Added the ability to filter items by Amazon Prime service eligibility.
 - Added the ability to filter items by free shipping and FBA delivery eligibility.
+- Tweaked the styling of templates regarding prices and rating stars.
 - Added the `Delivery Flags` unit option for the search unit type.
 - Fixed an issue that unit status was not updated when an error occurred until the cache was renewed.
 - Fixed a bug that the `Raw` `Sort` unit option for the category unit type treated as `Random`.

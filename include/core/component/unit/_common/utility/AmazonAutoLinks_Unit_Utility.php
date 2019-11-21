@@ -69,11 +69,11 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             : $sLowestNewFormatted;
         $_bDiscounted          = $_sLowestFormatted && ( $sPriceFormatted !== $_sLowestFormatted );
         return $_bDiscounted
-            ? '<span class="proper-price"><s>' . $sPriceFormatted . '</s></span> '
-                . '<span class="offered-price">' . $_sLowestFormatted . '</span>'
+            ? '<span class="amazon-prices"><span class="proper-price"><s>' . $sPriceFormatted . '</s></span> '
+                . '<span class="offered-price">' . $_sLowestFormatted . '</span></span>'
             : ( '' === $sPriceFormatted
                 ? ''
-                : '<span class="offered-price">' . $sPriceFormatted . '</span>'
+                : '<span class="amazon-prices"><span class="offered-price">' . $sPriceFormatted . '</span></span>'
             );
 
     }
@@ -675,6 +675,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             array(
                 'href'     => $sReviewURL,
                 'target'   => '_blank',
+                'rel'      => 'nofollow noopener',
             )
         );
         $_dRating   = number_format( $iRating / 10, 1, '.', '');
@@ -698,7 +699,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             : '';
         return "<div class='crIFrameNumCustReviews'>"
                    . "<span class='crAvgStars'>"
-                       . "<span style='display:inline-block;'>"
+                       . "<span class='review-stars' style='display:inline-block;'>"
                             . ( $sReviewURL
                                 ? "<a " . $_sAAttributes . ">"
                                     . "<img " . $_sImgAttributes . "/>"
@@ -706,7 +707,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                                 : "<img " . $_sImgAttributes . "/>"
                             )
                        . "</span>"
-                       . $_sReviewCount
+                       . "<span class='review-count'>"
+                            . $_sReviewCount
+                       . "</span>"
                    . "</span>"
                . "</div>";
     }

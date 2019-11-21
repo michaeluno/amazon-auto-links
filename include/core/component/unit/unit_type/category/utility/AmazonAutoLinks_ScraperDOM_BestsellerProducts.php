@@ -14,7 +14,6 @@
  */
 class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base {
 
-
     protected $_aProduct = array(
         // mandatory
         'product_url'   => null,
@@ -97,8 +96,10 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         protected function _getPrice( DOMXPath $oXPath, $oItemNode ) {
             $_oNodes = $oXPath->query( './/span[contains(@class, "p13n-sc-price")]', $oItemNode );
             foreach( $_oNodes as $_oNode ) {
-                return "<span class='offered-price'>"
-                        . trim( $_oNode->nodeValue )
+                return "<span class='amazon-prices'>"
+                        . "<span class='offered-price'>"
+                            . trim( $_oNode->nodeValue )
+                        . "</span>"
                     . "</span>";
             }
             return '';
@@ -139,32 +140,38 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          * @return  string
          */
         protected function _getRatingHTML( DOMXPath $oXPath, $oRatingNode, $iRatingPoint, $iReviewCount, $sASIN, $sSiteDomain, $sAssociateID ) {
-
             if ( ! $iReviewCount || ! $iRatingPoint ) {
                 return '';
             }
-            $_sReviewLink = $this->_getURLResolved( "/product-reviews/{$sASIN}", $sSiteDomain, $sAssociateID );
-            $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
-            $_iFirstDigit  = $_sRatingRound[ 0 ];
-            $_iSecondDigit = isset( $_sRatingRound[ 1 ] ) ? $_sRatingRound[ 1 ] : 0;
-            $_sRatingStar  = $_iFirstDigit . "-" . $_iSecondDigit;
-            $_sStarImage   = "https://images-eu.ssl-images-amazon.com/images/G/08/x-locale/common/customer-reviews/ratings/stars-{$_sRatingStar}.gif";
-            return "<div class='amazon-customer-rating-stars'>"
-                    . "<div class='crIFrameNumCustReviews'>"
-                        . "<span class='crAvgStars' style='white-space:no-wrap;'>"
-                            . "<span class='asinReviewsSummary' name='{$sASIN}'>"
-                                . "<a href='" . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
-                                     . "<img src='" . esc_url( $_sStarImage ) . "'/>"
-                                . "</a>&nbsp;"
-                            . "</span>"
-                            . "("
-                               . "<a href='"  . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
-                                    . $iReviewCount
-                                . "</a>"
-                            . ")"
-                        . "</span>"
-                    . "</div>"
-                 . "</div>";
+            $_sReviewLink  = $this->_getURLResolved( "/product-reviews/{$sASIN}", $sSiteDomain, $sAssociateID );
+            return AmazonAutoLinks_Unit_Utility::getRatingOutput(
+                $iRatingPoint,
+                $_sReviewLink,
+                $iReviewCount
+            );
+
+            // @deprecated 3.10.1
+//            $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
+//            $_iFirstDigit  = $_sRatingRound[ 0 ];
+//            $_iSecondDigit = isset( $_sRatingRound[ 1 ] ) ? $_sRatingRound[ 1 ] : 0;
+//            $_sRatingStar  = $_iFirstDigit . "-" . $_iSecondDigit;
+//            $_sStarImage   = "https://images-eu.ssl-images-amazon.com/images/G/08/x-locale/common/customer-reviews/ratings/stars-{$_sRatingStar}.gif";
+//            return "<div class='amazon-customer-rating-stars'>"
+//                    . "<div class='crIFrameNumCustReviews'>"
+//                        . "<span class='crAvgStars' style='white-space:no-wrap;'>"
+//                            . "<span class='asinReviewsSummary' name='{$sASIN}'>"
+//                                . "<a href='" . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
+//                                     . "<img src='" . esc_url( $_sStarImage ) . "'/>"
+//                                . "</a>&nbsp;"
+//                            . "</span>"
+//                            . "("
+//                               . "<a href='"  . esc_url( $_sReviewLink ) . "' target='_blank' rel='nofollow noopener'>"
+//                                    . $iReviewCount
+//                                . "</a>"
+//                            . ")"
+//                        . "</span>"
+//                    . "</div>"
+//                 . "</div>";
             // This output uses CSS images and only shows text
             // return $this->oDoc->saveXml( $oRatingNode, LIBXML_NOEMPTYTAG );
         }

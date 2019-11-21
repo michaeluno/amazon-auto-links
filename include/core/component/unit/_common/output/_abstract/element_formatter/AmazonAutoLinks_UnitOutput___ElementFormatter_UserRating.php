@@ -61,12 +61,15 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
 
             $_iReviewCount  = ( integer ) $this->_getCell( 'number_of_reviews' );
             $_sReviewURL    = ( string )  $this->_getCell( 'customer_review_url' );
-            return AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRating, $_sReviewURL, $_iReviewCount );
+            return "<div class='amazon-customer-rating-stars'>"
+                    . AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRating, $_sReviewURL, $_iReviewCount )
+                . "</div>";
 
         }
         /**
          * @since   3.5.0
          * @return  string
+         * @remark  kept for backward compatibility
          */
         private function ___getFormattedOutput( $_snEncodedHTML ) {
             if ( '' === $_snEncodedHTML ) {
