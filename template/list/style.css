@@ -42,18 +42,11 @@
 .amazon-products-container-list .amazon-auto-links-credit {
 	font-size: smaller;
 }
-.amazon-products-container-list .amazon-product-author,
-.amazon-products-container-list .amazon-product-price,
-.amazon-products-container-list .amazon-product-discounted-price,
-.amazon-products-container-list .amazon-product-lowest-new-price,
-.amazon-products-container-list .amazon-product-lowest-used-price {
+.amazon-products-container-list .amazon-product-author
+{
 	font-size: 0.92em;
 }
-.amazon-products-container-list .amazon-product-lowest-new-price-value,
-.amazon-products-container-list span.offered-price {
-    color: #B12704;
-    font-weight: bold;
-}
+
 /* Description Word-wrap */
 .amazon-products-container-list > .amazon-product-container .amazon-product-description {
     /* These are technically the same, but use both */
@@ -90,6 +83,7 @@
 }
 .amazon-products-container-list .crIFrameNumCustReviews {
     display: inline-block;
+    vertical-align: middle;
 }
 .amazon-products-container-list .amazon-customer-reviews .review-date {
     font-size: smaller;
@@ -124,6 +118,7 @@
 .amazon-products-container-list .amazon-customer-rating-stars {
     display: inline-block;
     margin: 0 0.2em 0 0;
+    vertical-align: middle;
 }
 .amazon-products-container-list .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -131,7 +126,24 @@
     /* In some themes the rating number and the star image do not align. This is for the fix.  */
     vertical-align: text-top;
 }
-
+.amazon-products-container-list .amazon-customer-rating-stars img,
+.amazon-products-container-list .amazon-customer-rating-stars .review-stars,
+.amazon-products-container-list .amazon-customer-rating-stars .review-count
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.amazon-products-container-list .amazon-customer-rating-stars .review-stars {
+    margin-right: -6px;
+}
+.amazon-products-container-list .amazon-customer-rating-stars img
+{
+    margin-left: -4px;
+}
+.amazon-products-container-list .amazon-customer-rating-stars .review-count {
+    margin-top: 2px;
+    margin-left: -2px;
+}
 
 /* Sub-images */
 .amazon-products-container-list .sub-image-container {
@@ -268,6 +280,10 @@
 }
 
 /* Prime Icon */
+.amazon-products-container-list .amazon-prime {
+    display: inline-block;
+    vertical-align: middle;
+}
 .amazon-products-container-list .prime-icon {
     display: inline-block;
     width: 48px;
@@ -276,5 +292,26 @@
     background-repeat: no-repeat;
     background-position: bottom;
     position: relative;
-    top: 2px;
+    top: 3px;
+    left: -2px;
+}
+
+/* Prices */
+.amazon-products-container-list .amazon-prices,
+.amazon-products-container-list .amazon-product-price,
+.amazon-products-container-list .amazon-product-discounted-price,
+.amazon-products-container-list .amazon-product-lowest-new-price,
+.amazon-products-container-list .amazon-product-lowest-used-price,
+.amazon-products-container-list .amazon-prices .proper-price,
+.amazon-products-container-list .amazon-prices .offered-price
+{
+	font-size: small;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.amazon-products-container-list .amazon-product-lowest-new-price-value,
+.amazon-products-container-list span.offered-price {
+    color: #B12704;
+    font-weight: bold;
 }

@@ -144,11 +144,9 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                 return '';
             }
             $_sReviewLink  = $this->_getURLResolved( "/product-reviews/{$sASIN}", $sSiteDomain, $sAssociateID );
-            return AmazonAutoLinks_Unit_Utility::getRatingOutput(
-                $iRatingPoint,
-                $_sReviewLink,
-                $iReviewCount
-            );
+            return "<div class='amazon-customer-rating-stars'>"
+                   . AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRatingPoint, $_sReviewLink, $iReviewCount )
+                . "</div>";
 
             // @deprecated 3.10.1
 //            $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
