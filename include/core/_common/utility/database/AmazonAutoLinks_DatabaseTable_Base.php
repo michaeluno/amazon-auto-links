@@ -58,16 +58,24 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         }
 
     /**
+     * @return string
+     * @since  3.10.1
+     */
+    public function getVersion() {
+        return get_option(
+            $this->aArguments[ 'name' ]  . '_version',
+            '0'
+        );
+    }
+
+    /**
      * Upgrade the table.
      * @return      array       Strings containing the results of the various update queries.
      * @since       1.1.0
      */
     public function upgrade() {
 
-        $_sExistingVersion = get_option(
-            $this->aArguments[ 'name' ]  . '_version',
-            '0'
-        );
+        $_sExistingVersion = $this->getVersion();
 
         // If the existent version is above or equal to the set version in the argument, do not upgrade.
         if ( version_compare( $_sExistingVersion, $this->aArguments[ 'version' ], '>=' ) ) {
