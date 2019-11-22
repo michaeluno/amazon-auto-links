@@ -23,14 +23,8 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
      */
     public function replyToLoadTab( $oAdminPage ) {
 
-        $_oReflection = new ReflectionClass('AmazonAutoLinks_Registry');
-//        . "<h4 style='display:block; clear:both;'>"
-//            . __( 'Database Table Versions', 'amazon-auto-links' )
-//        .  "</h4>"
-//        . "<p>aal_products: " . $_oProductTable->getVersion() . "</p>"
-//        . "<p>aal_request_cache: " . $_oHTTPRequestTable->getVersion() . "</p>"
-//
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+        $_oReflection       = new ReflectionClass('AmazonAutoLinks_Registry');//
+        $_oProductTable     = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_oHTTPRequestTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $oAdminPage->addSettingFields(
             '_default', // the target section id
@@ -77,14 +71,27 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 ),
             ),
             array(
-                'title'     => __( 'Saved Options', 'amazon-auto-links' ),
-                'field_id'  => 'saved_options',
+                'title'     => __( 'Plugin Options', 'amazon-auto-links' ),
+                'field_id'  => 'plugin_options',
                 'type'      => 'system',
                 'data'      => array(
                                    'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
                                    'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
                                    'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
                 ) + $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], array() ) ),
+                'attributes' => array(
+                    'style' => 'height: 300px;',
+                ),
+            ),
+            array(
+                'title'     => __( 'Template Options', 'amazon-auto-links' ),
+                'field_id'  => 'template_options',
+                'type'      => 'system',
+                'data'      => array(
+                                   'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+                                   'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
+                                   'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
+                ) + $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ], array() ) ),
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
