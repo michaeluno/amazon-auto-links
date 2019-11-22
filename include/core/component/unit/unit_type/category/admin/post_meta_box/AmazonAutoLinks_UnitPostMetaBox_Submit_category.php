@@ -25,7 +25,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
         }        
         add_action(
             "do_" . $this->oProp->sClassName,
-            array( $this, 'printMetaBoxConetnt' )
+            array( $this, 'printMetaBoxContent' )
         );
         
     }
@@ -33,7 +33,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
     /**
      * Draws the Select Category submit button and some other links.
      */
-    public function printMetaBoxConetnt( $sContent ) {
+    public function printMetaBoxContent( $sContent ) {
         
         $_sViewLink              = esc_url( get_permalink( $_GET[ 'post' ] ) );
         $_sSelectCategoryPageURL = add_query_arg( 
