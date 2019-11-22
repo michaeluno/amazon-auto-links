@@ -513,25 +513,53 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         /**
          * @param $oUnitOption
          *
+         * Accepted parameter values:
+         *  AvgCustomerReviews 	Sorts results according to average customer reviews
+         *  Featured 	        Sorts results with featured items having higher rank
+         *  NewestArrivals 	    Sorts results with according to newest arrivals
+         *  Price:HighToLow 	Sorts results according to most expensive to least expensive
+         *  Price:LowToHigh 	Sorts results according to least expensive to most expensive
+         *  Relevance 	        Sorts results with relevant items having higher rank
+         * @see https://webservices.amazon.com/paapi5/documentation/search-items.html#sortby-parameter
          * @return string
          * @since   3.9.0
          */
         private function ___getParameterSortBy( $oUnitOption ) {
+
             $_sSortOption = $oUnitOption->get( 'Sort' );
+
+            // First, check if it is a valid values. If so, just return it.
+            if ( in_array( $_sSortOption, array( 'AvgCustomerReviews', 'Featured', 'NewestArrivals', 'Relevance', 'Price:HighToLow', 'Price:LowToHigh' ) ) ) {
+                return $_sSortOption;
+            }
+
+            // Check backward compatible values.
             if ( in_array( $_sSortOption, array( 'price', 'pricerank' ) ) ) {
                 return 'Price:LowToHigh';
             }
             if ( in_array( $_sSortOption, array( '-price', 'inversepricerank' ) ) ) {
                 return 'Price:HighToLow';
             }
-            // sales rank option is not available in PA-API 5.0
-            if ( in_array( $_sSortOption, array( 'relevancerank', 'salesrank' ) ) ) {
-                return 'Relevance';
-            }
             if ( in_array( $_sSortOption, array( 'reviewrank' ) ) ) {
                 return 'AvgCustomerReviews';
             }
-            return $_sSortOption;
+
+            // Other values will be treated as Relevance as default.
+            return 'Relevance';
+            // sales rank option is not available in PA-API 5.0
+            // @deprecated 3.10.1
+//            if (
+//                in_array(
+//                    strtolower( $_sSortOption ),
+//                    array(
+//                        'relevancerank', 'salesrank',
+//                        'all', 'raw'    // not sure how these get passed in the search unit type but there is a report of an error with these
+//                    )
+//                )
+//            ) {
+//                return 'Relevance';
+//            }
+//            return $_sSortOption;
         }
 
 

@@ -298,6 +298,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `About` tab in the `Help` admin page which displays plugin information.
 - Tweaked the styling of templates regarding prices, the prime mark, and rating stars.
 - Added the `Delivery Flags` unit option for the search unit type.
+- Fixed a bug that API requests did not go through with some custom sort options.
 - Fixed an issue that the `%description%` output created an empty element when the product description was not available.
 - Fixed an issue that unit status was not updated when an error occurred until the cache was renewed.
 - Fixed a bug that the `Raw` `Sort` unit option for the category unit type treated as `Random`.
