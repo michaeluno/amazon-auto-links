@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the category unit type.
-    Version:        1.0.8
+    Version:        1.1.0
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -25,6 +25,7 @@
 	display:table; 
 	clear:both;
 	margin-bottom: 20px;
+    font-size: medium;
 }
 .amazon-products-container .amazon-product-title {
 }
@@ -44,7 +45,8 @@
 	font-size: smaller;
 }
 
-/* Description Word-wrap */
+/* Descriptions */
+/* Word wrap */
 .amazon-products-container > .amazon-product-container .amazon-product-description {
     /* These are technically the same, but use both */
     overflow-wrap: break-word;
@@ -93,10 +95,11 @@
 }
 .amazon-products-container .amazon-customer-reviews .review-image-tile {
     display: inline-block;
-    max-height: 140px;
-    max-width: 200px;
+    max-height: 120px;
+    max-width: 180px;
     margin: 0.2em;
 }
+
 /* Rating stars */
 .amazon-product-container span.asinReviewsSummary > a > img,
 .amazon-product-container .amazon-customer-reviews img,
@@ -114,7 +117,8 @@
 }
 .amazon-products-container .amazon-customer-rating-stars {
     display: inline-block;
-    margin: 0.4em 0;
+    /*margin: 0.4em 0;*/
+    vertical-align: text-bottom;
 }
 .amazon-products-container .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -134,13 +138,6 @@
 }
 .widget-area .amazon-products-container .sub-image-container { 
     margin: 0.4em 0.4em 0 0;
-}
-
-/* Prices */
-.amazon-products-container .amazon-product-lowest-new-price-value,
-.amazon-products-container span.offered-price {
-    color: #B12704;
-    font-weight: bold;
 }
 
 /* Button */
@@ -237,6 +234,10 @@
 }
 
 /* Prime Icon */
+.amazon-products-container .amazon-prime {
+    display: inline-block;
+    vertical-align: middle;
+}
 .amazon-products-container .prime-icon {
     display: inline-block;
     width: 68px;
@@ -245,5 +246,34 @@
     background-repeat: no-repeat;
     background-position: bottom;
     position: relative;
-    top: 2px;
+    /*top: 2px;*/
+}
+
+/* Prices */
+.amazon-products-container .amazon-product-lowest-new-price-value,
+.amazon-products-container span.offered-price {
+    color: #B12704;
+    font-weight: bold;
+}
+.amazon-products-container .amazon-prices,
+.amazon-products-container .amazon-product-price,
+.amazon-products-container .amazon-product-discounted-price,
+.amazon-products-container .amazon-product-lowest-new-price,
+.amazon-products-container .amazon-product-lowest-used-price,
+.amazon-products-container .amazon-prices .proper-price,
+.amazon-products-container .amazon-prices .offered-price
+{
+	/*font-size: small;*/
+    display: inline-block;
+    /*vertical-align: middle;*/
+}
+
+/* Categories */
+.amazon-products-container ul.categories {
+    list-style-type: none;
+    margin: 0.4em 0;
+}
+/* Features */
+.amazon-products-container ul.features {
+    margin: 0.4em 0;
 }

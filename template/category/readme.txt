@@ -1,5 +1,10 @@
 == Change log ==
 
+= 1.1.0 =
+- Made the overall font-size medium.
+- Fixed extra bottom-margins of categories and features.
+- Fixed issues of vertical alignment of prices, the prime mark, rating stars.
+
 = 1.0.8 =
 - Made the pricing disclaimer element font-size smallest.
 - Fixed an issue that customer the rating element was text-wrapped in some themes.

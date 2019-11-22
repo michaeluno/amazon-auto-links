@@ -296,7 +296,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the ability to filter items by Amazon Prime service eligibility.
 - Added the ability to filter items by free shipping and FBA delivery eligibility.
 - Added the `About` tab in the `Help` admin page which displays plugin information.
-- Tweaked the styling of templates regarding prices, the prime mark, and rating stars.
+- Tweaked the styling of templates regarding prices, the prime mark, and rating stars, and margins of features and categories.
 - Added the `Delivery Flags` unit option for the search unit type.
 - Fixed an issue that `%content%` and `%description%` outputs were no longer available for category units since v3.9.0 due to the use of PA-API5.
 - Fixed a bug in the template listing table that information of listed templates were showing outdated information even they were updated.

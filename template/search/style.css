@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.0.9
+    Version:        1.1.0
     License:        GNU General Public License v2 or later
     Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -24,6 +24,7 @@
 	display:table; 
 	clear:both;
 	margin-bottom: 20px;
+    font-size: medium;
 }
 .amazon-products-container-search .amazon-product-title {
 }
@@ -119,7 +120,8 @@
 }
 .amazon-products-container-search .amazon-customer-rating-stars {
     display: inline-block;
-    margin: 0.4em 0;
+    /*margin: 0.4em 0;*/
+    vertical-align: text-bottom;
 }
 .amazon-products-container-search .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -236,6 +238,10 @@
 }
 
 /* Prime Icon */
+.amazon-products-container-search .amazon-prime {
+    display: inline-block;
+    vertical-align: middle;
+}
 .amazon-products-container-search .prime-icon {
     display: inline-block;
     width: 68px;
@@ -244,6 +250,19 @@
     background-repeat: no-repeat;
     background-position: bottom;
     position: relative;
-    top: 2px;
+    /*top: 2px;*/
 }
 
+/* Customer Reviews */
+/* Rating Stars */
+/* Prices */
+
+/* Categories */
+.amazon-products-container-search ul.categories {
+    list-style-type: none;
+    margin: 0.4em 0;
+}
+/* Features */
+.amazon-products-container-search ul.features {
+    margin: 0.4em 0;
+}
