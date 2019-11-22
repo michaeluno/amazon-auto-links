@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.1.0 =
+- Tweaked the styling of features, categories, the prime mark.
+
 = 1.0.2 =
 - Made the pricing disclaimer element font-size smallest.
 - Fixed an issue that customer the rating element was text-wrapped in some themes.
