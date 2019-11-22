@@ -49,14 +49,37 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
             }
             $_oTemplateOption->aOptions = $_aTemplates;
             $_oTemplateOption->save();
+
         }
+            /**
+             * @param $sID
+             * @param array $aTemplates
+             * @param $bActivate
+             * @param $bForce
+             *
+             * @return array
+             */
             private function ___getTemplateStatusToggled( $sID, array $aTemplates, $bActivate, $bForce ) {
+
+                $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
+                $_aTemplate         = array();
 
                 if ( isset( $aTemplates[ $sID ] )  ) {
                     if ( $bForce ) {
+                        // @since 3.10.1 If activating, renew the template information.
+                        if ( $bActivate ) {
+                            $_sDirPath  = $this->getAbsolutePathFromRelative( $sID );
+                            $_aTemplate = file_exists( $_sDirPath )
+                                ? $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath )
+                                : array();
+                            $_aTemplate = $this->getAsArray( $_aTemplate );
+                        }
+
                         $aTemplates[ $sID ] = array(
                             'is_active' => $bActivate,
-                        ) + $this->getElementAsArray( $aTemplates, $sID );
+                        )
+                            + $_aTemplate
+                            + $this->getElementAsArray( $aTemplates, $sID );
                     }
                     return $aTemplates;
                 }
@@ -68,8 +91,8 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                 if ( ! file_exists( $_sDirPath ) ) {
                     return $aTemplates;
                 }
-                $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-                $_aTemplate = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
+
+                $_aTemplate         = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
                 $aTemplates[ $sID ] = array(
                     'is_active' => $bActivate,
                 ) + $_aTemplate;
