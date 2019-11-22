@@ -298,6 +298,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `About` tab in the `Help` admin page which displays plugin information.
 - Tweaked the styling of templates regarding prices, the prime mark, and rating stars.
 - Added the `Delivery Flags` unit option for the search unit type.
+- Fixed an issue that `%content%` and `%description%` outputs were no longer available for category units since v3.9.0 due to the use of PA-API5.
 - Fixed a bug in the template listing table that information of listed templates were showing outdated information even they were updated.
 - Fixed a bug that API requests did not go through with some custom sort options.
 - Fixed an issue that the `%description%` output created an empty element when the product description was not available.

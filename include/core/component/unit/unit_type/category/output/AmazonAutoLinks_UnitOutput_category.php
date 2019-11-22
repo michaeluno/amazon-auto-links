@@ -180,11 +180,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $this->oUnitOption->get( 'description_length' ),
             $this->_getReadMoreText( $aProduct[ 'product_url' ] )
         );
-        $_sDescription              = ( $aProduct[ 'description' ] && $_sDescriptionExtracted )
-            ? $aProduct[ 'description' ] . " "  // only the meta is added by default
-                . "<div class='amazon-product-description'>"
-                    . $_sDescriptionExtracted
-                . "</div>"
+        $_sDescriptionExtracted     = $_sDescriptionExtracted
+            ? "<div class='amazon-product-description'>"
+                . $_sDescriptionExtracted
+            . "</div>"
+            : '';
+        $_sDescription              = ( $aProduct[ 'description' ] || $_sDescriptionExtracted )
+            ? trim( $aProduct[ 'description' ] . " " . $_sDescriptionExtracted ) // only the meta is added by default
             : ''; // 3.10.1 If there is no description, do not even add the div element, which cause an extra margin as a block element.
         $aProduct[ 'description' ]  = $_sDescription;
         return $aProduct;
@@ -210,25 +212,40 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $aDBRow,
             $this->oUnitOption
         );
+
         $_anReviews = $_oRow->getCell( 'editorial_reviews', array() );
-
-        // if null, the product data is not inserted in the plugin's database table.
-        if ( is_null( $_anReviews ) ) {
-            $_sContents = '';
+        if ( $this->___hasEditorialReviews( $_anReviews ) ) {
+            $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content(
+                $this->getAsArray( $_anReviews ),
+                $this->oDOM,
+                $this->oUnitOption
+            );
+            $_sContents = $_oContentFormatter->get();
+            return "<div class='amazon-product-content'>"
+                    . $_sContents
+                . "</div>";
         }
-
-        $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
-            $this->getAsArray( $_anReviews ),
-            $this->oDOM,
-            $this->oUnitOption
-        );
-        $_sContents = $_oContentFormatter->get();
-                
-        return "<div class='amazon-product-content'>"
-                . $_sContents
-            . "</div>";
+        $_snFeatures = $_oRow->getCell( 'features', '' );
+        return $_snFeatures
+            ? "<div class='amazon-product-content'>"
+                . $_snFeatures
+            . "</div>"
+            : '';
 
     }
+        /**
+         * For backward compatibility of a case that still the editorial reviews are stored in the cache.
+         * @param  $anReviews
+         * @return bool
+         * @since  3.10.1
+         */
+        private function ___hasEditorialReviews( $anReviews ) {
+            // if null, the product data is not inserted in the plugin's database table.
+            if ( is_null( $anReviews ) ) {
+                return false;
+            }
+            return is_array( $anReviews );
+        }
 
     /**
      * Fetches and returns the associative array containing the output of product links.

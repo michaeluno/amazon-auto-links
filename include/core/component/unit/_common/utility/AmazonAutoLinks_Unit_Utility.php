@@ -584,9 +584,11 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     static public function getContent( array $aItem ) {
         $_aFeatures = self::getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
         $_sContents = implode( ' ', $_aFeatures );
-        return "<div class='amazon-product-content'>"
+        return trim( $_sContents )
+            ? "<div class='amazon-product-content'>"
                 . $_sContents
-            . "</div>";
+            . "</div>"
+            : '';
     }
 
     /**
