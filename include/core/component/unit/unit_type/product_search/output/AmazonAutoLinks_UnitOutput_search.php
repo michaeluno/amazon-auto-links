@@ -1002,9 +1002,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since       3.9.0       Removed the `meta` element.
              */        
             private function ___getProductDescriptionFormatted( array $aProduct ) {
-                return "<div class='amazon-product-description'>"
-                        . $aProduct[ 'description' ] 
-                    . "</div>";
+                return $aProduct[ 'description' ]
+                    ? "<div class='amazon-product-description'>"
+                            . $aProduct[ 'description' ]
+                        . "</div>"
+                    : ''; // 3.10.1 In case of no description, do not even add the div element.
             }
 
 }

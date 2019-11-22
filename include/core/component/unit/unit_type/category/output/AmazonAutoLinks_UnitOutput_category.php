@@ -175,14 +175,18 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         }
 
         $aProduct[ 'content' ]      = $this->_getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
-        $aProduct[ 'description' ]  = $aProduct[ 'description' ] . " "  // only the meta is added by default
-            . "<div class='amazon-product-description'>"
-                . $this->_getDescriptionSanitized(
-                    $aProduct[ 'content' ], 
-                    $this->oUnitOption->get( 'description_length' ), 
-                    $this->_getReadMoreText( $aProduct[ 'product_url' ] )
-                )
-            . "</div>";
+        $_sDescriptionExtracted     = $this->_getDescriptionSanitized(
+            $aProduct[ 'content' ],
+            $this->oUnitOption->get( 'description_length' ),
+            $this->_getReadMoreText( $aProduct[ 'product_url' ] )
+        );
+        $_sDescription              = ( $aProduct[ 'description' ] && $_sDescriptionExtracted )
+            ? $aProduct[ 'description' ] . " "  // only the meta is added by default
+                . "<div class='amazon-product-description'>"
+                    . $_sDescriptionExtracted
+                . "</div>"
+            : ''; // 3.10.1 If there is no description, do not even add the div element, which cause an extra margin as a block element.
+        $aProduct[ 'description' ]  = $_sDescription;
         return $aProduct;
     
     }
