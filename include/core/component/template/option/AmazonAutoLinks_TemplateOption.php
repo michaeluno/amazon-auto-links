@@ -79,7 +79,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * 
      * @remark      To support PHP 5.2, this method needs to be defined in each extended class 
      * as in static methods, it is not possible to retrieve the extended class name in a base class in PHP 5.2.x.
-     * @return      object
+     * @return      AmazonAutoLinks_TemplateOption
      */
     static public function getInstance( $sOptionKey='' ) {
         

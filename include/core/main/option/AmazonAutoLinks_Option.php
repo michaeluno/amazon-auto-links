@@ -298,6 +298,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * This is to ensure only one instance exists.
      * 
      * @since      3
+     * @return     AmazonAutoLinks_Option
      */
     static public function getInstance( $sOptionKey='' ) {
         
