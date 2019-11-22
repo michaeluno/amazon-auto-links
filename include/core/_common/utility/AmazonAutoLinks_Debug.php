@@ -15,19 +15,20 @@
  * @since       3       Made it extend `AmazonAutoLinks_AdminPageFramework_Debug`.
  */
 class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
-    
+
     /**
      * Prints out the given array contents
      * 
-     * If a file pass is given, it saves the output in the file.
+     * If a file path is given, it saves the output in the file.
      * 
      * @remark      An alias of the dumpArray() method.
      * @since       3.2.0
      */
     static public function dump( $asArray, $sFilePath=null ) {
-        if ( ! self::isDebugModeEnabled() ) {
-            return;
-        }        
+        // @deprecated 3.10.1 Give more freedom to the user
+//        if ( ! self::isDebugModeEnabled() ) {
+//            return;
+//        }
         parent::dump( $asArray, $sFilePath );
     }        
     
@@ -40,9 +41,10 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @since       3.2.0
      */
     static public function get( $asArray, $sFilePath=null, $bEscape=true ) {
-        if ( ! self::isDebugModeEnabled() ) {
-            return null;
-        }        
+        // @deprecated 3.10.1 Give more freedom to the user
+//        if ( ! self::isDebugModeEnabled() ) {
+//            return null;
+//        }
         return parent::get( $asArray, $sFilePath, $bEscape );        
     }
     
@@ -53,11 +55,13 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @param       string      $sFilePath      The log file path.
      * @return      void
      **/
-    static public function log( $mValue, $sFilePath=null ) {    
-        if ( ! self::isDebugModeEnabled() ) {
-            return;
-        }
+    static public function log( $mValue, $sFilePath=null ) {
+        // @deprecated 3.10.1 Give more freedom to the user
+//        if ( ! self::isDebugModeEnabled() ) {
+//            return;
+//        }
         self::$iLegibleStringCharacterLimit = PHP_INT_MAX;
+        self::$iLegibleArrayDepthLimit = PHP_INT_MAX;
         parent::log( $mValue, $sFilePath );
     }
 }
