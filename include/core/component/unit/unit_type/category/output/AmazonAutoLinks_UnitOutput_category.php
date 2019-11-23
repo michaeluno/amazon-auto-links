@@ -187,7 +187,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             : '';
         $_sDescription              = ( $aProduct[ 'description' ] || $_sDescriptionExtracted )
             ? trim( $aProduct[ 'description' ] . " " . $_sDescriptionExtracted ) // only the meta is added by default
-            : ''; // 3.10.1 If there is no description, do not even add the div element, which cause an extra margin as a block element.
+            : ''; // 3.10.0 If there is no description, do not even add the div element, which cause an extra margin as a block element.
         $aProduct[ 'description' ]  = $_sDescription;
         return $aProduct;
     
@@ -237,7 +237,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
          * For backward compatibility of a case that still the editorial reviews are stored in the cache.
          * @param  $anReviews
          * @return bool
-         * @since  3.10.1
+         * @since  3.10.0
          */
         private function ___hasEditorialReviews( $anReviews ) {
             // if null, the product data is not inserted in the plugin's database table.

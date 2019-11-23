@@ -291,7 +291,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.10.1 =
+= 3.10.0 - 11/23/2019 =
 - Added the ability to specify preferred language and currency for units.
 - Added the ability to filter items by Amazon Prime service eligibility.
 - Added the ability to filter items by free shipping and FBA delivery eligibility.

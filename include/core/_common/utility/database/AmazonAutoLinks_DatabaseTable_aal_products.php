@@ -67,8 +67,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'language'                      => null,   // (string) 3.9.0 displaying language,  e.g. de_DE
         'preferred_currency'            => null,   // (string) 3.9.0
         'error'                         => null,   // (string) 3.9.0
-        'delivery_free_shipping'        => null,   // (boolean) 3.10.1
-        'delivery_fba'                  => null,   // (boolean) 3.10.1
+        'delivery_free_shipping'        => null,   // (boolean) 3.10.0
+        'delivery_fba'                  => null,   // (boolean) 3.10.0
     );
    
     /**

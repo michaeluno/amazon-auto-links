@@ -11,14 +11,14 @@
 /**
  * A class that provides methods to format title outputs.
  *
- * @since       3.10.1
+ * @since       3.10.0
  */
 class AmazonAutoLinks_UnitOutput___ElementFormatter_Title extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
     /**
      * @return      string
      * @throws      Exception
-     * @since       3.10.1
+     * @since       3.10.0
      */
     public function get() {
 

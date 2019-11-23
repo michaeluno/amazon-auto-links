@@ -55,7 +55,7 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
             $_sClassName    = "AmazonAutoLinks_DatabaseTable_{$sTableName}";
             $_oTable        = new $_sClassName;
             $_aResult       = $_oTable->install( true );
-            do_action( 'aal_action_updated_plugin_database_table', $sTableName, $_sCurrentVersion, $sVersionTo, $_aResult ); // 3.10.1
+            do_action( 'aal_action_updated_plugin_database_table', $sTableName, $_sCurrentVersion, $sVersionTo, $_aResult ); // 3.10.0
             return empty( $_aResult ) ? false : true;
         }
 

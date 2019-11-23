@@ -23,7 +23,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
     public function get() {
 
         // For search-type units, this value is already set with API response.
-        // @deprecated 3.10.1 - The API SearchItems and GetItems operations give different results and GetItems is more up-to-date.
+        // @deprecated 3.10.0 - The API SearchItems and GetItems operations give different results and GetItems is more up-to-date.
 //        if ( $this->_aProduct[ 'price' ] ) {
 //            return $this->_aProduct[ 'price' ];
 //        }

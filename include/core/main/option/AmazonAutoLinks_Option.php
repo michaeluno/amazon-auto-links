@@ -264,7 +264,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             // 3.7.5+
             '_custom_url_query_string'      => array(),
 
-            // 3.10.1
+            // 3.10.0
             '_filter_by_prime_eligibility'  => false,
             '_filter_by_free_shipping'      => false,
             '_filter_by_fba'                => false,
@@ -484,7 +484,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return      boolean
      */
     public function isDebug() {
-        // @deprecated 3.10.1
+        // @deprecated 3.10.0
 //        if ( ! self::isDebugModeEnabled() ) {
 //            return false;
 //        }

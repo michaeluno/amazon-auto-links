@@ -55,7 +55,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'title'         => __( 'Operation', 'amazon-auto-links' ),
                 'hidden'        => true,
             ),
-// @deprecated 3.10.1 Moved to the Locale class
+// @deprecated 3.10.0 Moved to the Locale class
 //            array(
 //                'field_id'      => $sFieldIDPrefix . 'country',
 //                'type'          => 'text',

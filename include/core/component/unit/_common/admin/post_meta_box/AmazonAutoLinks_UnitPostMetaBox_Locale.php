@@ -11,7 +11,7 @@
 /**
  * Defines the meta box that contains locale unit options.
  * 
- * @since       3.10.1
+ * @since       3.10.0
  */
 class AmazonAutoLinks_UnitPostMetaBox_Locale extends AmazonAutoLinks_UnitPostMetaBox_Base {
         

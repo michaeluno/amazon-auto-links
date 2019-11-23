@@ -131,7 +131,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                 'default'       => 0,
                 'tip'   => __( 'Filters search results to items with customer review ratings above selected value.', 'amazon-auto-links' ),
             ),
-            // 3.10.1
+            // 3.10.0
             array(
                 'field_id'      => $sFieldIDPrefix . 'DeliveryFlags',
                 'type'          => 'checkbox',

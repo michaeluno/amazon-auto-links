@@ -59,7 +59,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      * @return string
-     * @since  3.10.1
+     * @since  3.10.0
      */
     public function getVersion() {
         return get_option(

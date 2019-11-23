@@ -25,7 +25,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @since       3.2.0
      */
     static public function dump( $asArray, $sFilePath=null ) {
-        // @deprecated 3.10.1 Give more freedom to the user
+        // @deprecated 3.10.0 Give more freedom to the user
 //        if ( ! self::isDebugModeEnabled() ) {
 //            return;
 //        }
@@ -41,7 +41,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @since       3.2.0
      */
     static public function get( $asArray, $sFilePath=null, $bEscape=true ) {
-        // @deprecated 3.10.1 Give more freedom to the user
+        // @deprecated 3.10.0 Give more freedom to the user
 //        if ( ! self::isDebugModeEnabled() ) {
 //            return null;
 //        }
@@ -56,7 +56,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @return      void
      **/
     static public function log( $mValue, $sFilePath=null ) {
-        // @deprecated 3.10.1 Give more freedom to the user
+        // @deprecated 3.10.0 Give more freedom to the user
 //        if ( ! self::isDebugModeEnabled() ) {
 //            return;
 //        }

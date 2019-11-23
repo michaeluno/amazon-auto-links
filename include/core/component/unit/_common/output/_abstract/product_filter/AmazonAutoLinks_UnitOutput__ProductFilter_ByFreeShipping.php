@@ -11,7 +11,7 @@
 /**
  * A class that filters out items that are not eligible for free shipping.
  *
- * @since   3.10.1
+ * @since   3.10.0
  */
 class AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping extends AmazonAutoLinks_UnitOutput__ProductFilter_Base {
 

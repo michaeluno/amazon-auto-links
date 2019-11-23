@@ -29,7 +29,7 @@ class AmazonAutoLinks_DatabaseUpdater_Loader {
             AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_products' ][ 'version' ]   //
         );
 
-        // 3.10.1
+        // 3.10.0
         new AmazonAutoLinks_DatabaseUpdater_aal_products_121;
 
     }

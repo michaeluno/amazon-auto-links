@@ -614,7 +614,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param array $aKeys
      *
      * @return bool
-     * @since   3.10.1
+     * @since   3.10.0
      */
     static public function isDeliveryEligible( array $aItem, array $aKeys=array( 'DeliveryInfo', 'IsPrimeEligible' ) ) {
         $_bHasPrime     = false;
@@ -721,7 +721,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      *
      * @return string
      * @since   3.9.0
-     * @since   3.10.1  Moved from `AmazonAutoLinks_UnitOutput_search`.
+     * @since   3.10.0  Moved from `AmazonAutoLinks_UnitOutput_search`.
      */
     static public function getPrimeMark( array $aProduct ) {
         if ( ! self::getElement( $aProduct, 'is_prime' ) ) {

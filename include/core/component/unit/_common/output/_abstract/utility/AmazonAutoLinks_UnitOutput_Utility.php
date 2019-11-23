@@ -58,9 +58,9 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      * Strips HTML tags and sanitizes the product title.
      * @return  string
      * @since   unknown 
-     * @since   3.10.1  Renamed from `_getTitleSanitized()`
-     * @since   3.10.1  Moved from `AmazonAutoLinks_UnitOutput_Base`.
-     * @since   3.10.1  Added the `$iTitleLength` parameter.
+     * @since   3.10.0  Renamed from `_getTitleSanitized()`
+     * @since   3.10.0  Moved from `AmazonAutoLinks_UnitOutput_Base`.
+     * @since   3.10.0  Added the `$iTitleLength` parameter.
      */
     static public function getTitleSanitized( $sTitle, $iTitleLength ) {
 
@@ -86,7 +86,7 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      * Returns the formatted product title HTML Block.
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductTitle()`.
-     * @since       3.10.1      Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @since       3.10.0      Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
      * @return      string
      */
     static public function getProductTitleFormatted( array $aProduct, $sFormat ) {

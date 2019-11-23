@@ -150,7 +150,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
             $_aProduct[ 'sales_rank' ]   = $_oSalesRankFormatter->get();
 
-            // 3.10.1
+            // 3.10.0
             $_sNativeTitle = $_aProduct[ 'title' ];
             $_oTitleFormatter            = new AmazonAutoLinks_UnitOutput___ElementFormatter_Title(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
@@ -235,7 +235,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductTitle()`.
      * @return      string
-     * @deprecated  3.10.1
+     * @deprecated  3.10.0
      */
 /*    protected function _getProductTitleFormatted( array $aProduct ) {
         return str_replace( 
@@ -425,7 +425,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       unknown
      * @since       3.5.0       Changed the visibility scope from protected.
      * @remark      The similarity product formatter class accesses it.
-     * @since       3.10.1      Added the `$sLanguageCode` and `$sCurrency` parameter.
+     * @since       3.10.0      Added the `$sLanguageCode` and `$sCurrency` parameter.
      */
     public function getProductLinkURLFormatted( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
 
@@ -448,7 +448,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $this->oUnitOption->get()    // 3rd param
         );
 
-        // @remark 3.10.1 not escaping to avoid multiple escaping.
+        // @remark 3.10.0 not escaping to avoid multiple escaping.
         return $_sStyledURL;
             
     }

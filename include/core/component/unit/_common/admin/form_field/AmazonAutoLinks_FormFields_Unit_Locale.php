@@ -2,7 +2,7 @@
 /**
  * Provides methods to retrieve field definitions for locales.
  *
- * @since           3.10.1
+ * @since           3.10.0
  */
 class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_Base {
 

@@ -148,7 +148,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                    . AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRatingPoint, $_sReviewLink, $iReviewCount )
                 . "</div>";
 
-            // @deprecated 3.10.1
+            // @deprecated 3.10.0
 //            $_sRatingRound = ( string ) ( round( ( ( integer ) $iRatingPoint ) * 2, -1 ) / 2 );
 //            $_iFirstDigit  = $_sRatingRound[ 0 ];
 //            $_iSecondDigit = isset( $_sRatingRound[ 1 ] ) ? $_sRatingRound[ 1 ] : 0;

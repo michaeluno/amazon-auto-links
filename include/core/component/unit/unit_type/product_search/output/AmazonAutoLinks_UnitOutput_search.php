@@ -44,7 +44,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%rating%', '%similar%',
         '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
-        '%price%'   // 3.10.1   - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
+        '%price%'   // 3.10.0   - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
     );
 
     /**
@@ -547,7 +547,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             // Other values will be treated as Relevance as default.
             return 'Relevance';
             // sales rank option is not available in PA-API 5.0
-            // @deprecated 3.10.1
+            // @deprecated 3.10.0
 //            if (
 //                in_array(
 //                    strtolower( $_sSortOption ),
@@ -1034,7 +1034,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     ? "<div class='amazon-product-description'>"
                             . $aProduct[ 'description' ]
                         . "</div>"
-                    : ''; // 3.10.1 In case of no description, do not even add the div element.
+                    : ''; // 3.10.0 In case of no description, do not even add the div element.
             }
 
 }

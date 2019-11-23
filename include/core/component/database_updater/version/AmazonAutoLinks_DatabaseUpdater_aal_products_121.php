@@ -11,7 +11,7 @@
 /**
  * Updates the plugin options.
  *
- * @since       3.10.1
+ * @since       3.10.0
  */
 class AmazonAutoLinks_DatabaseUpdater_aal_products_121 extends AmazonAutoLinks_PluginUtility {
 

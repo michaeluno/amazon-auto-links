@@ -66,7 +66,7 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
 
                 if ( isset( $aTemplates[ $sID ] )  ) {
                     if ( $bForce ) {
-                        // @since 3.10.1 If activating, renew the template information.
+                        // @since 3.10.0 If activating, renew the template information.
                         if ( $bActivate ) {
                             $_sDirPath  = $this->getAbsolutePathFromRelative( $sID );
                             $_aTemplate = file_exists( $_sDirPath )

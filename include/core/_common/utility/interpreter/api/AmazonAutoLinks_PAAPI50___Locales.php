@@ -215,7 +215,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      * @param $sLocale
      *
      * @return string
-     * @since   3.10.1
+     * @since   3.10.0
      */
     static public function getDefaultCurrencyByLocale( $sLocale ) {
 

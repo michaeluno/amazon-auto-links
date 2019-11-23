@@ -95,13 +95,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%', '%prime%',
         '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
-        '%price%',     // 3.10.1 - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
+        '%price%',     // 3.10.0 - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
     );
 
     /**
      * Search unit types needs this property to determine and extract errors from API responses.
      * @var string
-     * @since   3.10.1  This was actually added in 3.9.0 but not in the base class.
+     * @since   3.10.0  This was actually added in 3.9.0 but not in the base class.
      */
     protected $_sResponseItemsParentKey = '';
 
@@ -271,9 +271,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aHooks = array(
             new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
             new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.1
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.1
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.1
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
+            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
             new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
             new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this ),
             new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this ),
@@ -350,7 +350,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     }
         /**
          * @return bool
-         * @since   3.10.1
+         * @since   3.10.0
          */
         private function ___hasPreviousUnitError( $iUnitID ) {
             if ( ! $iUnitID ) {

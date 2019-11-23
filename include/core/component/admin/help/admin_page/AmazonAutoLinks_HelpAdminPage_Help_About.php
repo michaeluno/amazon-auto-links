@@ -11,7 +11,7 @@
 /**
  * Adds an in-page tab to an admin page.
  * 
- * @since       3.10.1
+ * @since       3.10.0
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage_Tab_Base {
