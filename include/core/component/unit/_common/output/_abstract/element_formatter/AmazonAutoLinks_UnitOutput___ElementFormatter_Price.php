@@ -40,6 +40,12 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
                 __( 'Now retrieving the price.', 'amazon-auto-links' )
             );
         }
+
+        // 3.10.1 Not sure but there are reported cases that prices do not show up
+        if ( ! $_sPriceFormatted ) {
+            return $this->_aProduct[ 'price' ];
+        }
+
         return $this->___getFormattedOutput( $_sPriceFormatted );
 
     }
