@@ -61,7 +61,6 @@ final class AmazonAutoLinks_Property {
     /**
      * @var array 
      * @since   3.8.12
-     * @deprecated  3.9.1
      */
     static public $aStoreDomains = array(
         'CA'    => 'www.amazon.ca',
@@ -77,22 +76,52 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'www.amazon.com.br',
         'MX'    => 'www.amazon.com.mx',
         'AU'    => 'www.amazon.com.au',
+        'TR'    => 'www.amazon.com.tr',
+        'AE'    => 'www.amazon.ae',
+        'SG'    => 'www.amazon.sg', // 3.10.1
     );    
     /**
      * Returns the market place domain url by the given locale.
      * 
      * @since       3.8.12
-     * @return  string the store domain including the URL scheme (https://).
-     * @deprecated  3.9.1
+     * @return      string the store domain including the URL scheme (https://).
      */
-/*    static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
+    static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
         $_sLocale = strtoupper( $sLocale );
         $_sScheme = $bPrefixScheme ? 'https://' : '';
         return isset( self::$aStoreDomains[ $_sLocale ] )
             ? $_sScheme . self::$aStoreDomains[ $_sLocale ]
             : $_sScheme . self::$aStoreDomains[ 'US' ];    // default
-    }    
-    */
+    }
+
+    /**
+     * Returns an array of locale labels.
+     * This is for `select` input elements.
+     * For the category unit type, use this method and avoid using the one provided by PAAPI class
+     * as API supported locales and the actual stores are different.
+     * @sinec       3.10.1
+     */
+    static public function getLocaleLabels() {
+        return array(
+            'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
+            'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
+            'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
+            'DE' => 'DE - ' . __( 'Germany', 'amazon-auto-links' ),
+            'IT' => 'IT - ' . __( 'Italy', 'amazon-auto-links' ),
+            'JP' => 'JP - ' . __( 'Japan', 'amazon-auto-links' ),
+            'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
+            'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
+            'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
+            'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
+            'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
+            'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
+            'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ), // 3.5.5+
+            'TR' => 'TR - ' . __( 'Turkey', 'amazon-auto-links' ), // 3.9.1
+            'AE' => 'AE - ' . __( 'United Arab Emirates', 'amazon-auto-links' ), // 3.9.1
+            'SG' => 'SG - ' . __( 'Singapore', 'amazon-auto-links' ), // 3.10.1
+        );
+    }
+
     /**
      * @var array
      */

@@ -31,7 +31,7 @@ As of 2019/10/31, Amazon ended PA-API v4 and your site may no longer be able to 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates and Brazil.
+Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates and Brazil. China and Singapore are supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -145,6 +145,9 @@ Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off
 
 = My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? =
 Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure your keys work there as well.
+
+= Are the China and Singapore locales supported? =
+For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support them.
 
 
 == Other Notes ==
@@ -291,6 +294,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo introduce a new unit type Comparision Table
 
 == Changelog ==
+
+= 3.10.1 =
+- Added the `Singapore` locale for the category unit type.
 
 = 3.10.0 - 11/23/2019 =
 - Added the ability to specify preferred language and currency for units.
