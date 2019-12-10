@@ -297,6 +297,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.10.1 =
 - Added the `Singapore` locale for the category unit type.
+- Fixed a bug with RSS feeds that caused a validation error.
 - Fixed an issue that for some rare cases, prices did not show up.
 
 = 3.10.0 - 11/23/2019 =

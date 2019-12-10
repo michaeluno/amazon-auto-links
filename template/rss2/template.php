@@ -58,7 +58,7 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
     ?>    
     <item>
         <title><![CDATA[<?php echo $_aProduct[ 'title' ]; ?>]]></title>
-        <link><?php echo $_aProduct[ 'product_url' ]; ?></link>
+        <link><?php echo esc_url( $_aProduct[ 'product_url' ] ); ?></link>
         <!--<comments></comments>-->
         <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', $_aProduct[ 'updated_date' ], false ); ?></pubDate>
         <!--<dc:creator><![CDATA[]]></dc:creator>-->
