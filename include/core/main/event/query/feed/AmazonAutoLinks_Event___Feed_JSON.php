@@ -21,7 +21,11 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
      */
     public function __construct() {
 
-        add_filter( 'aal_filter_unit_output', array( $this, 'replyToRemoveCredit' ) );
+        add_filter(
+            'aal_filter_unit_output',
+            array( $this, 'replyToRemoveCredit' ),
+            PHP_INT_MAX // the priority of the credit comment insertion callback is `100` so it must be larger than that.
+        );
         add_action( 'init', array( $this, 'replyToLoadJSONFeed' ), 999 );
 
     }
