@@ -4,8 +4,8 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.3
-Stable tag:         3.10.0
+Tested up to:       5.3.1
+Stable tag:         3.10.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -295,7 +295,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.10.1 =
+= 3.10.1 - 12/13/2019 =
 - Added the `Singapore` locale for the category unit type.
 - Fixed a bug with JSON feeds that caused a JSON syntax error.
 - Fixed a bug with RSS feeds that caused a validation error.
