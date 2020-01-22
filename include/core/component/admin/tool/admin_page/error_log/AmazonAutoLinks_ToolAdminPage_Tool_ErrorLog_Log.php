@@ -36,12 +36,14 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                 'field_id'        => '_log',
                 'title'           => __( 'Log', 'amazon-auto-links' ),
                 'type'            => 'system',
+                'show_title_column' => false,
                 'value'           => $this->___getErrorLog(),
             ),
             array(
                 'field_id'        => '_clear',
                 'title'           => __( 'Clear', 'amazon-auto-links' ),
                 'type'            => 'submit',
+                'show_title_column' => false,
                 'value'           => __( 'Clear', 'amazon-auto-links' ),
             ),
             array()

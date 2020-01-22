@@ -295,6 +295,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.11.0 =
+- Tweaked the layout of the Error Log screen.
+
 = 3.10.1 - 12/13/2019 =
 - Added the `Singapore` locale for the category unit type.
 - Fixed a bug with JSON feeds that caused a JSON syntax error.
