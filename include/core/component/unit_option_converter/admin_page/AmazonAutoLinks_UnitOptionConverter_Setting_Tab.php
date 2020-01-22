@@ -24,6 +24,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
         return array(
             'tab_slug'  => 'unit_option_converter',
             'title'     => __( 'Unit Option Converter', 'amazon-auto-links' ),
+            'order'     => 20,
         );
     }
 
