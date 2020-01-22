@@ -5,7 +5,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2019 Michael Uno
+ * Copyright (c) 2013-2020 Michael Uno
  */
 
 /**
@@ -49,7 +49,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI___URIBuilder {
          * The aws_signed_request() function, Modified by Michael Uno.
          *
          * @see                  http://www.ulrichmierendorff.com/software/aws_hmac_signer.html
-         * @copyright            Copyright (c) 2013-2019, Michael Uno
+         * @copyright            Copyright (c) 2013-2020, Michael Uno
          * @copyright            Copyright (c) 2009-2012 Ulrich Mierendorff
 
         Copyright (c) 2009-2012 Ulrich Mierendorff

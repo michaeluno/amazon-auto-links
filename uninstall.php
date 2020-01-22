@@ -3,7 +3,7 @@
  * Cleans up the plugin options.
  *    
  * @package      Amazon Auto Links
- * @copyright    Copyright (c) 2013-2015, <Michael Uno>
+ * @copyright    Copyright (c) 2013-2020, <Michael Uno>
  * @author       Michael Uno
  * @authorurl    http://michaeluno.jp
  * @since        3
@@ -28,9 +28,9 @@ if ( ! defined( 'DOING_PLUGIN_UNINSTALL' ) ) {
 /**
  * Set the main plugin file name here.
  */
-$_sMaingPluginFileName  = 'amazon-auto-links.php';
-if ( file_exists( dirname( __FILE__ ). '/' . $_sMaingPluginFileName ) ) {
-   include( $_sMaingPluginFileName );
+$_sMainPluginFileName  = 'amazon-auto-links.php';
+if ( file_exists( dirname( __FILE__ ). '/' . $_sMainPluginFileName ) ) {
+   include( $_sMainPluginFileName );
 }
 
 if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {

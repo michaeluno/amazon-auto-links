@@ -3,7 +3,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013-2019, Michael Uno
+ * @copyright   Copyright (c) 2013-2020, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
