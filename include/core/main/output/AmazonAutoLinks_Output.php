@@ -76,7 +76,6 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             return $_sOutputForAjax;
         }
 
-// return '<h3>Testing: normal output will be rendered here.</h3>';
         $_sOutput = $this->___getOutput();
         $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
         return $_bNoOuterContainer

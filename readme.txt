@@ -296,6 +296,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 3.11.0 - 01/23/2019 =
+- Optimized item look-up (GetItems) PA-API requests.
 - Added the ability to capture Amazon Associates Link Builder block contents and shortcodes.
 - Tweaked the layout of the Error Log screen.
 

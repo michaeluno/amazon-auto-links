@@ -45,7 +45,6 @@ class AmazonAutoLinks_OptionConverter_V1ToV3 extends AmazonAutoLinks_OptionConve
         $this->oOption->arrOptions[ AmazonAutoLinks_Registry::PageSettingsSlug ]['query']['cloak'] = $arrGeneral['cloakquery'];
         $this->oOption->arrOptions[ AmazonAutoLinks_Registry::PageSettingsSlug ]['capabilities']['setting_page_capability'] = $arrGeneral['capability'];        
         $this->oOption->arrOptions[ AmazonAutoLinks_Registry::PageSettingsSlug ][ AmazonAutoLinks_Registry::SectionID_License ][ AmazonAutoLinks_Registry::FieldID_LicenseKey ] = isset( $arrGeneral['license'] ) ? $arrGeneral['license'] : '';
-// AmazonAutoLinks_Debug::logArray( $this->oOption->arrOptions );        
         $this->oOption->save();
         
         return $this->aOptions;

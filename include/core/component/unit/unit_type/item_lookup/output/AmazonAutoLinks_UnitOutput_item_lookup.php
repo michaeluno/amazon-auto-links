@@ -179,7 +179,6 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );
         return $_aPayload;
-
         
     }
     

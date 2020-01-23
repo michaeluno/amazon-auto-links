@@ -119,7 +119,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return      void
              */
             private function ___setSearchTerms() {
-                
+
                 $_sTerms    = trim( $this->oUnitOption->get( $this->sSearchTermKey ) );
                 if ( ! $_sTerms ) {
                     $this->oUnitOption->set( 'search_per_keyword', false );
@@ -147,7 +147,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     // Auto-truncate search terms to 10 as the Amazon API does not allow more than 10 terms to be set per request.
                     $this->oUnitOption->set( 'search_per_keyword', true );
                     
-                    // The above 'search_per_keyword' = false will trigger `___getResponsesByMultipleKeywords()` 
+                    // The above 'search_per_keyword' = true will trigger `___getResponsesByMultipleKeywords()`
                     // so an array can be set for the terms. 
                     $this->oUnitOption->set( 
                         $this->sSearchTermKey,  // ItemId | Keywords
