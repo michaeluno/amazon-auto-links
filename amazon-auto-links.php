@@ -281,7 +281,29 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         // array(
             // e.g. 'home/my_user_name/my_dir/scripts/my_scripts.php' => 'The required script could not be found.',
         // ),
-    );        
+    );
+
+    /**
+     * @param   string $sMessage
+     * @param   string $sType
+     * @since   3.11.0
+     */
+    static public function setAdminNotice( $sMessage, $sType='error' ) {
+        self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType );
+        add_action( 'admin_notices', array( __CLASS__, 'replyToShowAdminNotices' ) );
+    }
+        static public $aAdminNotices = array();
+        static public function replyToShowAdminNotices() {
+            foreach( self::$aAdminNotices as $_aNotice ) {
+                $_sType = esc_attr( $_aNotice[ 'type' ] );
+                echo "<div class='{$_sType}'>"
+                     . "<p>"
+                        . '<strong>' . self::NAME . '</strong>: '
+                        . $_aNotice[ 'message' ]
+                     . "</p>"
+                     . "</div>";
+            }
+        }
 	
 }
 AmazonAutoLinks_Registry::setUp( __FILE__ );

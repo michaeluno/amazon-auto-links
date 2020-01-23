@@ -64,7 +64,15 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
                 'tab_slug'  => 'misc',
                 'title'     => __( 'Misc', 'amazon-auto-links' ),
             )
-        );        
+        );
+        new AmazonAutoLinks_AdminPage_Setting_3rdParty(
+            $this->oFactory,
+            $this->sPageSlug,
+            array(
+                'tab_slug'  => '3rd_party',
+                'title'     => __( '3rd Party', 'amazon-auto-links' ),
+            )
+        );
         new AmazonAutoLinks_AdminPage_Setting_Reset( 
             $this->oFactory,
             $this->sPageSlug,
@@ -72,7 +80,7 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
                 'tab_slug'  => 'reset',
                 'title'     => __( 'Reset', 'amazon-auto-links' ),
             )
-        );    
+        );
       
     }
     

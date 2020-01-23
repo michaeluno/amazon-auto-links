@@ -46,18 +46,19 @@ class AmazonAutoLinks_LinkConverter_Setting_Tab extends AmazonAutoLinks_AdminPag
         $_oOption       = AmazonAutoLinks_Option::getInstance();
         $_sAssociateID  = trim( ( string ) $_oOption->get( 'unit_default', 'associate_id' ) );
         if ( ! $_sAssociateID ) {
-            $_sMessage = __( 'The default Associate ID needs to be set.', 'amazon-auto-links' ) . ' '
-                    . sprintf(
-                        __( 'Go to <a href="%1$s">set</a>.', 'amazon-auto-links' ),
-                        esc_url( add_query_arg(
-                            array(
-                                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                                'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                                'tab'       => 'default',
-                            ),
-                            'edit.php'
-                        ) )
-                    );
+            $_sMessage = "<strong>" . AmazonAutoLinks_Registry::NAME . "</strong>: "
+                . __( 'A default Associate ID needs to be set.', 'amazon-auto-links' ) . ' '
+                . sprintf(
+                    __( 'Go to <a href="%1$s">set</a>.', 'amazon-auto-links' ),
+                    esc_url( add_query_arg(
+                        array(
+                            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                            'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+                            'tab'       => 'default',
+                        ),
+                        'edit.php'
+                    ) )
+                );
             $oAdminPage->setAdminNotice( $_sMessage );
         }
     }

@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.3.1
+Tested up to:       5.3.2
 Stable tag:         3.10.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -295,7 +295,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.11.0 =
+= 3.11.0 - 01/23/2019 =
+- Added the ability to capture Amazon Associates Link Builder block contents and shortcodes.
 - Tweaked the layout of the Error Log screen.
 
 = 3.10.1 - 12/13/2019 =

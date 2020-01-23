@@ -140,6 +140,12 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'by_unit'       => true,
             )
         ),
+
+        // 3.11.0+
+        'aalb'      => array(
+            'support' => 0,
+            'template_conversion_map' => array(),
+        ),
     
         // 3.4.0+
         'unit_default'  => array(
