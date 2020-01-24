@@ -26,6 +26,11 @@ Display affiliate links along with your posts with this plugin to generate actua
 = Compatible with PA-API 5! =
 As of 2019/10/31, Amazon ended PA-API v4 and your site may no longer be able to display Amazon products with old API keys. In that case, regenerate keys on the Amazon Associates member's area and you are good to go!
 
+= Migrate from Amazon Associates Link Builder =
+Are you looking for an alternative to the discontinued Amazon Associates Link Builder plugin? If so, this plugin can take care of their shortcodes inserted with their Gutenberg block.
+
+Just enable the option and you don't have to edit thousands of posts to replace the shortcode.
+
 = See How Amazon Affiliate Links are Displayed =
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
@@ -116,6 +121,11 @@ More detailed instruction, please refer to the [To register as a Product Adverti
 
 = Is the plugin compatible with PA-API 5? =
 Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0.
+
+= I'm migrating from Amazon Associates Link Builder (AALB). Can this plugin display products with their shortcodes? =
+Yes, enable the option by going to `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `3rd Party` -> `Amazon Associates Link Builder`.
+
+There you also want to set the __Template Conversion__ option. Make sure you enable your desired Amazon Auto Links templates in `Dashboard` -> `Amazon Auto Links` -> `Templates`. Then reload the `3rd Party` screen. There you'll see active templates are listed for the conversion option.
 
 = What does a Unit mean? =
 
