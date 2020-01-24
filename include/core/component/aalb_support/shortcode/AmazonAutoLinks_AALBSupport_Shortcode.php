@@ -27,7 +27,7 @@ class AmazonAutoLinks_AALBSupport_Shortcode extends AmazonAutoLinks_WPUtility {
     public function __construct() {
         foreach( $this->getAsArray( $this->aShortcodes ) as $_sShortCode ) {
             add_shortcode( $_sShortCode, array( $this, 'replyToGetOutput' ) );
-            add_filter( 'amazon_auto_links_filter_shortcode_' . $_sShortCode, array( $this, 'replyToFilterShortcodeContents' ), 10, 2 );
+            add_filter( 'aal_filter_shortcode_' . $_sShortCode, array( $this, 'replyToFilterShortcodeContents' ), 10, 2 );
         }
     }
 
@@ -36,8 +36,8 @@ class AmazonAutoLinks_AALBSupport_Shortcode extends AmazonAutoLinks_WPUtility {
      *
      * Those contents come with their shortcodes and the second parameter receives the shortcode attributes.
      * @return      string
-     * @callback    filter  amazon_auto_links_filter_shortcode_amazon_link
-     * @callback    filter  amazon_auto_links_filter_shortcode_amazon_textlink
+     * @callback    filter  aal_filter_shortcode_amazon_link
+     * @callback    filter  aal_filter_shortcode_amazon_textlink
      */
     public function replyToFilterShortcodeContents( $sContent, $aAttributes ) {
         return $sContent . $this->replyToGetOutput( $aAttributes );

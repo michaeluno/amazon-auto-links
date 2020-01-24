@@ -88,7 +88,7 @@ class AmazonAutoLinks_AALBSupport_GutenbergBlock extends AmazonAutoLinks_WPUtili
             return null;
         }
         $_aAttributes = $_asShortcodeAttributes;
-        return apply_filters( 'amazon_auto_links_filter_shortcode_' . $_aAttributes[ 0 ], '', $_aAttributes );
+        return apply_filters( 'aal_filter_shortcode_' . $_aAttributes[ 0 ], '', $_aAttributes );
 
     }
 
