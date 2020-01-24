@@ -36,14 +36,15 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
      * Alternatively use the `content_{instantiated class name}` method instead.
      */
     public function content( $sContent ) {
-        return $this->_getProInfo()
-            . $this->_getAffiliateInfo()
+        return $this->___getProInfo()
+            . $this->___getAffiliateInfo()
+            . $this->___getAnnouncements()
             ;        
     }
         /**
          * @return      string
          */    
-        private function _getProInfo() {
+        private function ___getProInfo() {
             $_sProImage = esc_url( 
                 AmazonAutoLinks_Registry::getPluginURL( 'asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg' ) 
             );            
@@ -57,7 +58,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
         /**
          * @return      string
          */
-        private function _getAffiliateInfo() {
+        private function ___getAffiliateInfo() {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );            
             $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/';
@@ -79,6 +80,20 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
                         . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>"
                     . "</a>"
                     ;
+        }
+
+        /**
+         * 
+         */
+        private function ___getAnnouncements() {
+            $_sOutput = '';
+            $_oRSS = new AmazonAutoLinks_RSSClient( 'http://feeds.feedburner.com/AmazonAutoLinks_Announcements?1=1' );
+            $_aItems = $_oRSS->get();
+            foreach( $_aItems as $_aItem ) {
+                $_sOutput .= "<h4>" . $_aItem[ 'title' ] . "</h4>"
+                    . $_aItem[ 'description' ];
+            }
+            return $_sOutput;
         }
  
 }
