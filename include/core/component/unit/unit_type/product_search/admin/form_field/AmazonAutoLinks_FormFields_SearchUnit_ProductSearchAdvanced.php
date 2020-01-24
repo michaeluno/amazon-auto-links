@@ -94,7 +94,9 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
                     'min'  => 0,
                     'step' => 1,
                 ),
-                'description'   => __( 'Specifies the minimum percentage off for the items to return.', 'amazon-auto-links' ),
+                'after_input'   => ' %',
+                'description'   => __( 'Specifies the minimum percentage off for the items to return.', 'amazon-auto-links' )
+                    . ' e.g. ' . __( '<code>10</code> for 10%.', 'amazon-auto-links' ),
             ),    
             array(
                 'field_id'      => $sFieldIDPrefix . 'BrowseNode',
