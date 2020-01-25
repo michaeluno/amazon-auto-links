@@ -52,8 +52,35 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         $_iRequestCount    = $_oCacheTable->getTotalItemCount();
         $_iExpiredRequests = $_oCacheTable->getExpiredItemCount();
 
+        $_bCacheWritable   = wp_is_writable( WP_CONTENT_DIR );;
+
         $oFactory->addSettingFields(
-            $sSectionID, // the target section id   
+            $sSectionID, // the target section id
+            array(
+                'field_id'          => 'cache_method',
+                'type'              => 'radio',
+                'title'             => __( 'Cache Method', 'amazon-auto-links' ),
+                'capability'        => 'manage_options',
+                'label' => array(
+                    'database'   => __( 'Database', 'amazon-auto-links' ) . ' - ' . __( 'store caches in the database.', 'amazon-auto-links' ) . '<br />',
+                    'file'       => __( 'File', 'amazon-auto-links' ) . ' - ' . __( 'store caches in a directory as actual files.', 'amazon-auto-links' ) . '<br />',
+                ),
+                'description'       => array(
+                    $_bCacheWritable
+                        ? null
+                        : "<span class='field-error'>" . __( 'The File caching type cannot be set as the <strong>wp-content</strong> directory is not writable.' ) . "</span>"
+                ),
+                'default' => 'database',
+                'attributes' => array(
+                    // 'disabled' => 'disabled',
+                    'file' => array(
+                        'disabled' => $_bCacheWritable ? null : 'disabled',
+                    ),
+                    'input' => array(
+                        'disabled' => 'disabled',
+                    ),
+                ),
+            ),
             array( 
                 'field_id'        => '_table_sizes',
                 'title'           => __( 'Sizes', 'amazon-auto-links' ),
@@ -66,44 +93,50 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                             . $_oCacheTable->getTableSize()
                     . '</p>',
-            ),                   
+            ),
+            array(
+                'field_id'        => 'submit_clear_all_caches_types',
+                'type'            => 'checkbox',
+                'save'            => false,
+                'title'           => __( 'Clear Caches', 'amazon-auto-links' ),
+                'label'           => array(
+                    'products'    => '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: '
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iProductCount ),
+                    'http_requests' => '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iRequestCount ),
+                ),
+            ),
             array( 
                 'field_id'        => 'submit_clear_all_caches',
                 'type'            => 'submit',
-                'title'           => __( 'Clear All Caches', 'amazon-auto-links' ),
+                'save'            => false,
                 'label_min_width' => 0,
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
                     'class' => 'button button-secondary',
                 ),
-                'before_fieldset' => ''
-                    . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' 
-                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iProductCount )
-                    . '</p>'
-                    . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
-                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iRequestCount )
-                    . '</p>',
-            ),            
+            ),
+            array(
+                'field_id'        => 'submit_clear_expired_caches_types',
+                'type'            => 'checkbox',
+                'save'            => false,
+                'title'           => __( 'Clear Expired Caches', 'amazon-auto-links' ),
+                'label'           => array(
+                    'products'    => '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: '
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredProducts ),
+                    'http_requests' => '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
+                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredRequests ),
+                ),
+            ),
             array( 
                 'field_id'        => 'submit_clear_expired_caches',
                 'type'            => 'submit',
-                'title'           => __( 'Clear Expired Caches', 'amazon-auto-links' ),
+                'save'            => false,
                 'label_min_width' => 0,
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
                     'class' => 'button button-secondary',
                 ),
-                'before_fieldset' => ''
-                    . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'Products', 'amazon-auto-links' ) . '</strong>: ' 
-                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredProducts )
-                    . '</p>'
-                    . "<p style='margin-bottom: 1em;'>" 
-                        . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
-                        . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredRequests )
-                    . '</p>',                
             ),
             array(
                 'field_id'          => 'caching_mode',
@@ -205,20 +238,19 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
-        $_bVerified = true;
+
         $_aErrors   = array();
         
         if ( 'submit_clear_all_caches' === $aSubmitInfo[ 'field_id' ] ) {
-            $this->_clearAllCaches( $oAdminPage );
-            return $aOldInputs;            
+            $_aErrors = $this->___clearAllCaches( $oAdminPage, $aInputs );
+
         }
         if ( 'submit_clear_expired_caches' === $aSubmitInfo[ 'field_id' ] ) {
-            $this->_clearExpiredCaches( $oAdminPage );
-            return $aOldInputs;
+            $_aErrors = $this->___clearExpiredCaches( $oAdminPage, $aInputs );
         }
                 
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
-        if ( ! $_bVerified ) {
+        if ( count( $_aErrors ) ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
             return $aOldInputs;
@@ -236,28 +268,6 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         return $aInputs;     
         
     }
-        /**
-         * @param $aInputs
-         * @param $oAdminPage
-         * @since   3.7.3
-         * @deprecated  3.8.12
-         */
-/*        private function ___truncateCacheTableBySize( $aInputs, $oAdminPage ) {
-            $_isProductTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'products' ), '' );
-            $_isRequestTableSize = $oAdminPage->oUtil->getElement( $aInputs, array( 'table_size', 'requests' ), '' );
-            $_aTableSizes = array(
-                'AmazonAutoLinks_DatabaseTable_aal_products'      => $_isProductTableSize,
-                'AmazonAutoLinks_DatabaseTable_aal_request_cache' => $_isRequestTableSize,
-            );
-            foreach( $_aTableSizes as $_sClassName => $_isSizeMB ) {
-                // An empty string is for unlimited (do not truncate).
-                if ( '' === $_isSizeMB || null === $_isSizeMB ) {
-                    continue;
-                }
-                $_oTable = new $_sClassName;
-                $_oTable->truncateBySize( ( integer ) $_isSizeMB );
-            }
-        }*/
 
         /**
          * Update the scheduled task if the interval for deleting expired caches changes, 
@@ -292,31 +302,39 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         /**
          * Clears all the plugin caches.
          * @since       3
-         * @return      void
+         * @return      array   field error array
          */
-        private function _clearAllCaches( $oFactory ) {
+        private function ___clearAllCaches( $oFactory, $aInputs ) {
 
             $this->___deleteUnitStatusOfAllUnits();
 
             // Clear transients.
-            AmazonAutoLinks_WPUtility::cleanTransients( 
-                AmazonAutoLinks_Registry::TRANSIENT_PREFIX
-            );
-            AmazonAutoLinks_WPUtility::cleanTransients( 
-                'apf_'
-            );            
-            
-            $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-            $_oCacheTable->delete(
-                // delete all rows by passing nothing.
-            );    
+            AmazonAutoLinks_WPUtility::cleanTransients( AmazonAutoLinks_Registry::TRANSIENT_PREFIX );
+            AmazonAutoLinks_WPUtility::cleanTransients( 'apf_' );
 
-            $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
-            $_oProductTable->delete(
-                // delete all rows.
-            ); 
-            
-            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
+            $_bProducts = $this->getElement( $aInputs, array( 'submit_clear_all_caches_types', 'products' ) );
+            if ( $_bProducts ) {
+                $_oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
+                $_oProductTable->delete(); // delete all rows.
+            }
+
+            $_bHTTPRequests = $this->getElement( $aInputs, array( 'submit_clear_all_caches_types', 'http_requests' ) );
+            if ( $_bHTTPRequests ) {
+                $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+                $_oCacheTable->delete();  // delete all rows by passing nothing.
+            }
+
+            if ( $_bProducts || $_bHTTPRequests ) {
+                $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
+                return array();
+            }
+
+            return array(
+                $this->sSectionID => array(
+                    'submit_clear_all_caches_types' => __( 'Select at least one.', 'amazon-auto-links' ),
+                )
+            );
+
         }
             /**
              * @since       3.7.7
@@ -345,12 +363,32 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         /**
          * Clears expired caches.
          * @since       3
-         * @return      void
+         * @return      array   A field error array.
          */
-        private function _clearExpiredCaches( $oFactory ) {
+        private function ___clearExpiredCaches( $oFactory, $aInputs ) {
 
-            AmazonAutoLinks_PluginUtility::deleteExpiredTableItems();
-            $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
+            $_bProducts = $this->getElement( $aInputs, array( 'submit_clear_expired_caches_types', 'products' ) );
+            if ( $_bProducts ) {
+                $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+                $_oProductTable->deleteExpired();
+            }
+
+            $_bHTTPRequests = $this->getElement( $aInputs, array( 'submit_clear_expired_caches_types', 'http_requests' ) );
+            if ( $_bHTTPRequests ) {
+                $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+                $_oCacheTable->deleteExpired();
+            }
+
+            if ( $_bProducts || $_bHTTPRequests ) {
+                $oFactory->setSettingNotice( __( 'Caches have been cleared.', 'amazon-auto-links' ), 'updated' );
+                return array();
+            }
+
+            return array(
+                $this->sSectionID => array(
+                    'submit_clear_expired_caches_types' => __( 'Select at least one.', 'amazon-auto-links' ),
+                )
+            );
             
         }   
         
