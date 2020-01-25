@@ -14,16 +14,30 @@
  * @since       3.11.0
  */
 class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @since   3.12.0
+     * @return array
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => '3rd_party',
+            'section_id'    => 'aalb',       // avoid hyphen(dash), dots, and white spaces
+            'capability'    => 'manage_options',
+            'title'         => __( 'Amazon Associates Link Builder', 'amazon-auto-links' ),
+            'description'   => array(
+                __( 'Parse the shortcode and the Gutenberg block contents of Amazon Associates Link Builder (AALB) as the plugin is discontinued as of Feb 11, 2020.', 'amazon-auto-links' ),
+            ),
+        );
+    }
+
     /**
      * A user constructor.
      * 
      * @since       3.11.0
      * @return      void
      */
-    protected function _construct( $oFactory ) {
-
-    }
+    protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.

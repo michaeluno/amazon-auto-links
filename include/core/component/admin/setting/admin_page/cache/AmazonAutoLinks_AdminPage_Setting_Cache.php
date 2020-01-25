@@ -15,7 +15,18 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_Cache extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'cache',
+            'title'     => __( 'Cache', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
@@ -24,14 +35,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache extends AmazonAutoLinks_AdminPage_
         // Form sections
         new AmazonAutoLinks_AdminPage_Setting_Cache_Cache( 
             $oAdminPage,
-            $this->sPageSlug, 
+            $this->sPageSlug,
             array(
-                'section_id'    => 'cache',
                 'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Caches', 'amazon-auto-links' ),
-                // 'description'   => array(
-                    // __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
-                // ),
             )
         );
         

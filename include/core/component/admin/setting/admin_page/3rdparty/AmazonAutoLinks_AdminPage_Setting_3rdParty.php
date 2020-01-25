@@ -15,13 +15,24 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_3rdParty extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => '3rd_party',
+            'title'     => __( '3rd Party', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {}
+    protected function _loadTab( $oAdminPage ) {}
             
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oAdminPage ) {
         echo "<div class='right-submit-button'>"
                 . get_submit_button()  
             . "</div>";

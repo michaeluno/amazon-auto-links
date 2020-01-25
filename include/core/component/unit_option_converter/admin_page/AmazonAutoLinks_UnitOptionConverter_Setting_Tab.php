@@ -20,7 +20,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
      * @return  array
      * @since   3.7.9
      */
-    protected function _getTab() {
+    protected function _getArguments() {
         return array(
             'tab_slug'  => 'unit_option_converter',
             'title'     => __( 'Unit Option Converter', 'amazon-auto-links' ),

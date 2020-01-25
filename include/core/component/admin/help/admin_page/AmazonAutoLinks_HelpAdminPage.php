@@ -14,7 +14,6 @@
  * @since       3
  */
 class AmazonAutoLinks_HelpAdminPage  {
-// class AmazonAutoLinks_HelpAdminPage extends AmazonAutoLinks_AdminPageFramework {
 
     public function __construct() {
         
@@ -29,20 +28,9 @@ class AmazonAutoLinks_HelpAdminPage  {
      * Sets up admin pages.
      */
     public function replyToSetUp( $oFactory ) {
-        
-        new AmazonAutoLinks_HelpAdminPage_Help( 
-            $oFactory,
-            array(
-                'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
-                'title'     => __( 'Help', 'amazon-auto-links' ),
-                'order'     => 1000, // to be the last menu item
-                'style'     => array(
-                    AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
-                    AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ),
-                ),
-            )                
-        );          
-        
+
+        new AmazonAutoLinks_HelpAdminPage_Help( $oFactory );
+
     }
    
 }

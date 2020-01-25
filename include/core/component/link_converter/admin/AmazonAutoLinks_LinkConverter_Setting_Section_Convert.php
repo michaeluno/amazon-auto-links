@@ -16,7 +16,7 @@
  */
 class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLinks_AdminPage_Section_Base {
 
-    protected function _getSection() {
+    protected function _getArguments() {
         return array(
             'section_id'    => 'convert_links',
             'tab_slug'      => $this->sTabSlug,

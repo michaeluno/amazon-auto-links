@@ -20,7 +20,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog extends AmazonAutoLinks_AdminP
      * @return  array
      * @since   3.9.0
      */
-    protected function _getTab() {
+    protected function _getArguments() {
         return array(
             'tab_slug'  => 'error_log',
             'title'     => __( 'Error Log', 'amazon-auto-links' ),

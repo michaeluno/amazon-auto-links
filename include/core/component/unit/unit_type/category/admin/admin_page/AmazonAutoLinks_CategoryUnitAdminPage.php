@@ -86,21 +86,11 @@ class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizard
      */
     public function setUp() {
         
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
+        $this->setRootMenuPageBySlug( 'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
                     
         // Add pages
-        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect( 
-            $this,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
-                'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-                // 'show_in_menu'  => false,
-            )
-        );        
-        
+        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect( $this );
+
     }
 
     /**

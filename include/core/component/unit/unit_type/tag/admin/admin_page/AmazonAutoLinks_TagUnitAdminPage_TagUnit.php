@@ -15,7 +15,19 @@
  * @action      schedule        aal_action_unit_prefetch
  */
 class AmazonAutoLinks_TagUnitAdminPage_TagUnit extends AmazonAutoLinks_AdminPage_Page_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'tag_unit' ],
+            'title'         => __( 'Add Unit by Tag', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+        );
+    }
+
     /**
      * 
      * @callback        action      load_{page slug}

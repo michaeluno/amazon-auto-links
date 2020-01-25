@@ -15,19 +15,30 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_HelpAdminPage_Help_Support extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'support',
+            'title'     => __( 'Support', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * 
      * @callback        action      load_{page slug}_{tab slug}
      */
-    public function replyToLoadTab( $oAdminPage ) {}
+    protected function _loadTab( $oAdminPage ) {}
     
     /**
      * 
      * @callback        action      do_{page slug}_{tab slug}
      */
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oFactory ) {
         
         echo "<h3>" 
                 . __( 'Support Forum', 'amazon-auto-links' )

@@ -125,15 +125,7 @@ class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWizardAd
         );
                     
         // Add pages
-        new AmazonAutoLinks_AutoInsertAdminPage_AutoInsert( 
-            $this,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'auto_insert' ],
-                'title'         => __( 'Add/Edit Auto-insert', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-                'show_in_menu'  => false,
-            )
-        );        
+        new AmazonAutoLinks_AutoInsertAdminPage_AutoInsert( $this );
         
     }
     /**

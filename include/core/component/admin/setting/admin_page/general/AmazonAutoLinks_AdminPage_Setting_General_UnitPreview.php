@@ -14,7 +14,18 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'unit_preview',
+            'title'         => __( 'Unit Preview', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

@@ -14,7 +14,20 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'debug',
+            'capability'    => 'manage_options',
+            'title'         => __( 'Debug', 'amazon-auto-links' ),
+            'description'   => __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

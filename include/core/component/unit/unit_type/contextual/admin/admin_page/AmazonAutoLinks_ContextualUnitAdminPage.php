@@ -42,15 +42,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_SimpleWiza
         );
                     
         // Add pages
-        new AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit(
-            $this,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'contextual_unit' ],
-                'title'         => __( 'Add Contextual Unit', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-                'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
-            )
-        );        
+        new AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit( $this );
      
     }
         

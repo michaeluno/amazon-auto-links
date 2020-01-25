@@ -15,11 +15,22 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_ReadMeBase
  */
 class AmazonAutoLinks_HelpAdminPage_Help_FAQ extends AmazonAutoLinks_AdminPage_Tab_ReadMeBase {
-       
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'faq',
+            'title'     => __( 'FAQ', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
             
         $_aItems     = $this->getContentsByHeader( $this->_getReadmeContentsBySection(), 4 );
         $_iLastIndex = count( $_aItems ) - 1;

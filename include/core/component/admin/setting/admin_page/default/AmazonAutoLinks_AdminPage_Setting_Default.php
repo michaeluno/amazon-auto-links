@@ -15,14 +15,25 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'default',
+            'title'     => __( 'Default', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * 
      * @callback        action      load_{page slug}_{tab slug}
      * @return          void
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
                 
         // Page meta boxes.        
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common(
@@ -115,7 +126,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
      * @callback    action     do_{page slug}
      * @return      void
      */
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oFactory ) {
         
         echo "<h3>" 
                 . __( 'Default Unit Options', 'amazon-auto-links' )

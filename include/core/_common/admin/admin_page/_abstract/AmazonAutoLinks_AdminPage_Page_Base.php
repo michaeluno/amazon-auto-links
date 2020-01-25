@@ -28,25 +28,23 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     /**
      * Sets up hooks and properties.
      */
-    public function __construct( $oFactory, array $aPageArguments ) {
+    public function __construct( $oFactory, array $aPageArguments=array() ) {
         
         $this->oFactory     = $oFactory;
-        $this->sPageSlug    = $aPageArguments[ 'page_slug' ];
-        $this->___addPage( $aPageArguments );
+        $_aPageArguments    = $this->_getArguments() + $aPageArguments + array(
+            'page_slug'     => null,
+            'title'         => null,
+            'screen_icon'   => null,
+        );
+        $this->sPageSlug    = $_aPageArguments[ 'page_slug' ];
+        $this->___addPage( $_aPageArguments );
         $this->_construct( $oFactory );
                 
     }
     
     private function ___addPage( array $aPageArguments ) {
         
-        $this->oFactory->addSubMenuItems(
-            $aPageArguments
-            + array(
-                'page_slug'     => null,
-                'title'         => null,
-                'screen_icon'   => null,
-            )                
-        );
+        $this->oFactory->addSubMenuItems( $aPageArguments );
         add_action( "load_{$this->sPageSlug}", array( $this, 'replyToSetResources' ) );
         add_action( "load_{$this->sPageSlug}", array( $this, 'replyToLoadPage' ) );
         add_action( "do_{$this->sPageSlug}", array( $this, 'replyToDoPage' ) );

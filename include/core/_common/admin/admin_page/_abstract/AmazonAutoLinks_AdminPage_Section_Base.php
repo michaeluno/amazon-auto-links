@@ -47,7 +47,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
         
         $this->oFactory     = $oFactory;
         $this->sPageSlug    = $sPageSlug;
-        $aSectionDefinition = $aSectionDefinition + $this->_getSection() + $this->___aSection;
+        $aSectionDefinition = $aSectionDefinition + $this->_getArguments() + $this->___aSection;
         $this->sTabSlug     = $aSectionDefinition[ 'tab_slug' ];
         $this->sSectionID   = $aSectionDefinition[ 'section_id' ];
         
@@ -61,12 +61,22 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
     }
 
     /**
+     * @since   3.12.0
      * @return array
-     * @since   3.7.9
      */
-    protected function _getSection() {
-        return array();
+    protected function _getArguments() {
+        return array()
+               + $this->_getSection(); // for backward compatibility;
     }
+        /**
+         * @return array
+         * @since   3.7.9
+         *
+         * @deprecated 3.12.0   Use getArguments().
+         */
+        protected function _getSection() {
+            return array();
+        }
 
     private function _addSection( $oFactory, $sPageSlug, array $aSectionDefinition ) {
         

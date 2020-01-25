@@ -15,7 +15,20 @@
  * @action      schedule        aal_action_unit_prefetch
  */
 class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage_Page_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'url_unit' ],
+            'title'         => __( 'Add Unit by URL', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+        );
+    }
+
     /**
      * 
      * @callback        action      load_{page slug}

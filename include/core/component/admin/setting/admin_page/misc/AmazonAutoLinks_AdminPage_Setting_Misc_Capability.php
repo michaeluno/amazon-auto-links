@@ -14,7 +14,22 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'capabilities',       // avoid hyphen(dash), dots, and white spaces
+            'capability'    => 'manage_options',
+            'title'         => __( 'Access Rights', 'amazon-auto-links' ),
+            'description'   => array(
+                __( 'Set the access levels to the plugin setting pages.', 'amazon-auto-links' ),
+            ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

@@ -16,6 +16,19 @@
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
+     * @return array
+     * @since 3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
+            'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            // 'show_in_menu'  => false,
+        );
+    }
+
+    /**
      * A user constructor.
      * 
      * @since       3

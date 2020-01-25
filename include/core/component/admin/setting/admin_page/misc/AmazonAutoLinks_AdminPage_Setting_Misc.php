@@ -15,11 +15,22 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'misc',
+            'title'     => __( 'Misc', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
         
         // Form sections
         new AmazonAutoLinks_AdminPage_Setting_Misc_Capability( 
@@ -27,12 +38,6 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
             $this->sPageSlug, 
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => 'capabilities',       // avoid hyphen(dash), dots, and white spaces
-                'capability'    => 'manage_options',
-                'title'         => __( 'Access Rights', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Set the access levels to the plugin setting pages.', 'amazon-auto-links' ),
-                ),
             )
         );           
         new AmazonAutoLinks_AdminPage_Setting_Misc_FormOption( 
@@ -40,10 +45,6 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
             $this->sPageSlug, 
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => 'form_options',       // avoid hyphen(dash), dots, and white spaces
-                'capability'    => 'manage_options',
-                'title'         => __( 'Form', 'amazon-auto-links' ),
-                'description'   => __( 'Set allowed HTML tags etc.', 'amazon-auto-links' ),
             )
         );        
         new AmazonAutoLinks_AdminPage_Setting_Misc_Debug( 
@@ -51,16 +52,12 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
             $this->sPageSlug, 
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => 'debug', 
-                'capability'    => 'manage_options',
-                'title'         => __( 'Debug', 'amazon-auto-links' ),
-                'description'   => __( 'For developers who need to see the internal workings of the plugin.', 'amazon-auto-links' ),
             )
         );
         
     }
             
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oFactory ) {
         echo "<div class='right-submit-button'>"
                 . get_submit_button()  
             . "</div>";

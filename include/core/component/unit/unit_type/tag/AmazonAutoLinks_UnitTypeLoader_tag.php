@@ -13,6 +13,7 @@
  *  
  * @package     Amazon Auto Links
  * @since       3.3.0
+ * @deprecated
 */
 class AmazonAutoLinks_UnitTypeLoader_tag extends AmazonAutoLinks_UnitTypeLoader_Base {
         

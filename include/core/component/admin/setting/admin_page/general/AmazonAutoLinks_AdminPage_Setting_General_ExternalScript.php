@@ -14,7 +14,18 @@
  * @since       3.1.0
  */
 class AmazonAutoLinks_AdminPage_Setting_General_ExternalScript extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'external_scripts',
+            'title'         => __( 'External Scripts', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

@@ -14,7 +14,18 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_General_Feed extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'feed',
+            'title'         => __( 'Feed', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

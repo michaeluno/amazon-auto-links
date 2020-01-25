@@ -16,6 +16,18 @@
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ],
+            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+        );
+    }
+
+    /**
      * A user constructor.
      * 
      * @since       3

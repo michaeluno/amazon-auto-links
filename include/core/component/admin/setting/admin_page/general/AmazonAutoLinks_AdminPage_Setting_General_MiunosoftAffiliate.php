@@ -14,7 +14,18 @@
  * @since       3.2.0
  */
 class AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'miunosoft_affiliate',
+            'title'         => __( 'miunosoft Affiliate', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

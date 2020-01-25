@@ -20,7 +20,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Tab extends AmazonAutoLinks_AdminPag
      * @return  array
      * @since   3.8.0
      */
-    protected function _getTab() {
+    protected function _getArguments() {
         return array(
             'tab_slug'  => 'link_converter',
             'title'     => __( 'Converter', 'amazon-auto-links' ),

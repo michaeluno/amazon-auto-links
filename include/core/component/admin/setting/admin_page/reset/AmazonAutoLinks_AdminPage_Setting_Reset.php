@@ -15,7 +15,19 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'reset',
+            'title'     => __( 'Reset', 'amazon-auto-links' ),
+        );
+    }
+
+
     /**
      * Triggered when the tab is loaded.
      */
@@ -27,11 +39,6 @@ class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_
             $this->sPageSlug, 
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => 'reset_settings',
-                'title'         => __( 'Reset Settings', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'If you get broken options, initialize them by performing reset.', 'amazon-auto-links' ),
-                ),
             )
         );
 
@@ -41,12 +48,6 @@ class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_
             $this->sPageSlug,
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => 'data',
-                'title'         => __( 'Data', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Handles export/import plugin options.', 'amazon-auto-links' )
-                    . ' ' . __( 'Units, auto-insert and buttons are not included.', 'amazon-auto-links' ),
-                ),
             )
         );
      

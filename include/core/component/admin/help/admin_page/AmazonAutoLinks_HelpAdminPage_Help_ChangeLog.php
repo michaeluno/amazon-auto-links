@@ -15,31 +15,37 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_HelpAdminPage_Help_ChangeLog extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'change_log',
+            'title'     => __( 'Change Log', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * 
      * @callback        action      load_{page slug}_{tab slug}
      */
-    public function replyToLoadTab( $oFactory ) {
-        
-        // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-    }
+    protected function _loadTab( $oFactory ) {}
     
     /**
      * 
      * @callback        action      do_{page slug}_{tab slug}
      */
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oFactory ) {
 
         $_oWPReadmeParser = new AmazonAutoLinks_AdminPageFramework_WPReadmeParser( 
             AmazonAutoLinks_Registry::$sDirPath . '/readme.txt'
         );    
         echo "<h3>" . __( 'Change Log', 'amazon-auto-links' ) . "</h3>"
             . $_oWPReadmeParser->getSection( 'Changelog' );    
-            
-       
-    
-    }    
+
+    }
             
 }

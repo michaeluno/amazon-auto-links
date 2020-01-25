@@ -44,14 +44,7 @@ class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAd
         );
                     
         // Add pages
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit( 
-            $this,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ],
-                'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-            )
-        );        
+        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit( $this );
         
     }
     /**

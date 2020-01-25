@@ -16,6 +16,18 @@
 class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
+            'title'     => __( 'Templates', 'amazon-auto-links' ),
+            'order'     => 60,
+        );
+    }
+
+    /**
      * @callback        action      load_{page slug}
      */
     public function replyToLoadPage( $oFactory ) {

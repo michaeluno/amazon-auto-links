@@ -16,6 +16,22 @@
 class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
+            'title'     => __( 'Help', 'amazon-auto-links' ),
+            'order'     => 1000, // to be the last menu item
+            'style'     => array(
+                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+                AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ),
+            ),
+        );
+    }
+
+    /**
      * 
      * @callback        action      load_{page slug}
      */    
@@ -24,57 +40,16 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
         $_oOption = AmazonAutoLinks_Option::getInstance();
         
         // Tabs
-        new AmazonAutoLinks_HelpAdminPage_Help_Support( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'support',
-                'title'     => __( 'Support', 'amazon-auto-links' ),
-            )
-        );        
-        new AmazonAutoLinks_HelpAdminPage_Help_FAQ( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'faq',
-                'title'     => __( 'FAQ', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_HelpAdminPage_Help_Tips( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'tips',
-                'title'     => __( 'Tips', 'amazon-auto-links' ),
-            )
-        );   
-        new AmazonAutoLinks_HelpAdminPage_Help_ChangeLog(
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'change_log',
-                'title'     => __( 'Change Log', 'amazon-auto-links' ),
-            )        
-        );
+        new AmazonAutoLinks_HelpAdminPage_Help_Support( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_HelpAdminPage_Help_FAQ( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_HelpAdminPage_Help_Tips( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_HelpAdminPage_Help_ChangeLog( $this->oFactory, $this->sPageSlug );
+
         if ( ! $_oOption->isAdvancedAllowed() ) {            
-            new AmazonAutoLinks_HelpAdminPage_Help_GetPro( 
-                $this->oFactory,
-                $this->sPageSlug,
-                array( 
-                    'tab_slug'  => 'get_pro',
-                    'title'     => __( 'Get Pro', 'amazon-auto-links' ),
-                )
-            );       
+            new AmazonAutoLinks_HelpAdminPage_Help_GetPro( $this->oFactory, $this->sPageSlug );
         }
 
-        new AmazonAutoLinks_HelpAdminPage_Help_About(
-            $this->oFactory,
-            $this->sPageSlug,
-            array(
-                'tab_slug'  => 'about',
-                'title'     => __( 'About', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_HelpAdminPage_Help_About( $this->oFactory, $this->sPageSlug );
         
         $this->_doPageSettings( $oFactory );
         

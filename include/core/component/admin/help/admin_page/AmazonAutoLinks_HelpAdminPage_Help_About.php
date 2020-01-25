@@ -15,13 +15,24 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'about',
+            'title'     => __( 'About', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * 
      * @callback        action      load_{page slug}_{tab slug}
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
 
         $_oReflection       = new ReflectionClass('AmazonAutoLinks_Registry');//
         $_oProductTable     = new AmazonAutoLinks_DatabaseTable_aal_products;
@@ -117,8 +128,8 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
      * 
      * @callback        action      do_{page slug}_{tab slug}
      */
-    public function replyToDoTab( $oFactory ) {
-
-    }    
+    protected function _doTab( $oFactory ) {
+        parent::_doTab( $oFactory );
+    }
             
 }

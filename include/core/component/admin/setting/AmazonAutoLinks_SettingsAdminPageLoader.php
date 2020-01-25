@@ -34,15 +34,7 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
      */
     public function replyToSetUpAdminPage( $oFactory ) {
        
-        new AmazonAutoLinks_AdminPage_Setting( 
-            $oFactory,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                'title'         => __( 'Settings', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-                'order'         => 50,
-            )
-        );
+        new AmazonAutoLinks_AdminPage_Setting( $oFactory );
         
         if ( 'plugins.php' === $oFactory->oProp->sPageNow ) {
             $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.      

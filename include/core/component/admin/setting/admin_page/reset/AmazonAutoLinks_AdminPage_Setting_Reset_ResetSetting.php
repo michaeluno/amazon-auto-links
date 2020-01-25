@@ -14,7 +14,21 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'reset_settings',
+            'title'         => __( 'Reset Settings', 'amazon-auto-links' ),
+            'description'   => array(
+                __( 'If you get broken options, initialize them by performing reset.', 'amazon-auto-links' ),
+            ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

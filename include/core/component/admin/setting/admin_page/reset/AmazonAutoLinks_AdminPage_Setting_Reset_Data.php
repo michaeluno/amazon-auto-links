@@ -16,7 +16,22 @@
  * @since       3.6.6
  */
 class AmazonAutoLinks_AdminPage_Setting_Reset_Data extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'data',
+            'title'         => __( 'Data', 'amazon-auto-links' ),
+            'description'   => array(
+                __( 'Handles export/import plugin options.', 'amazon-auto-links' )
+                . ' ' . __( 'Units, auto-insert and buttons are not included.', 'amazon-auto-links' ),
+            ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

@@ -15,7 +15,20 @@
  * @action      schedule        aal_action_unit_prefetch
  */
 class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoLinks_AdminPage_Page_Base {
-    
+
+    /**
+     * @return  array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'contextual_unit' ],
+            'title'         => __( 'Add Contextual Unit', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+        );
+    }
+
     /**
      * 
      * @callback        action      load_{page slug}

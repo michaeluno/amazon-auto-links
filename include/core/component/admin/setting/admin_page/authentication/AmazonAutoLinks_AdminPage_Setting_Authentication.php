@@ -15,31 +15,29 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_Authentication extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'authentication',
+            'title'     => __( 'Authentication', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {
-        
-        new AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys( 
+    protected function _loadTab( $oAdminPage ) {
+
+        // Sections
+        new AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys(
             $oAdminPage,
-            $this->sPageSlug, 
+            $this->sPageSlug,
             array(
-                'section_id'    => 'authentication_keys', 
                 'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'AWS Access Key Identifiers', 'amazon-auto-links' ),
-                'description'   => sprintf( 
-                        __( 'Credentials are required to perform search requests with Amazon <a href="%1$s" target="_blank">Product Advertising API</a>.', 'amazon-auto-links' ),
-                        'https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html' 
-                    )
-                    . ' ' . sprintf( 
-                        __( 'The keys can be obtained by logging in to the <a href="%1$s" target="_blank">Amazon Web Services web site</a>.', 'amazon-auto-links' ), 
-                        'http://aws.amazon.com/' 
-                    )
-                    . ' ' . sprintf( 
-                        __( 'The instruction is documented <a href="%1$s" target="_blank">here</a>.', 'amazon-auto-links' ), 
-                        '?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] . '&page=aal_help&tab=tips#How_to_Obtain_Access_Key_and_Secret_Key'
-                    ),
             )
         );
         

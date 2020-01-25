@@ -30,6 +30,14 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
     );
 
     /**
+     * @since   3.12.0
+     * @return array
+     */
+    protected function _getArguments() {
+        return array();
+    }
+
+    /**
      * Handles callback methods.
      * @since       3
      * @return      mixed

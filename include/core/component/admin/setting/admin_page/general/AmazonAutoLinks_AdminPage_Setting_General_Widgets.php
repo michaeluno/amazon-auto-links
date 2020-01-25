@@ -14,7 +14,18 @@
  * @since       3.9.0
  */
 class AmazonAutoLinks_AdminPage_Setting_General_Widgets extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'widget',
+            'title'         => __( 'Widgets', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

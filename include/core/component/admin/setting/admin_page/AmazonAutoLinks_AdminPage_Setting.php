@@ -14,7 +14,20 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+            'title'         => __( 'Settings', 'amazon-auto-links' ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'order'         => 50,
+        );
+    }
+
     /**
      * Gets load when the page starts loading.
      * @callback    load_{page slug}
@@ -25,69 +38,20 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
 
         // Tabs
-        new AmazonAutoLinks_AdminPage_Setting_Authentication( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'authentication',
-                'title'     => __( 'Authentication', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_AdminPage_Setting_General( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'general',
-                'title'     => __( 'General', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_AdminPage_Setting_Default(
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'default',
-                'title'     => __( 'Default', 'amazon-auto-links' ),
-            )        
-        );
-        new AmazonAutoLinks_AdminPage_Setting_Cache( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'cache',
-                'title'     => __( 'Cache', 'amazon-auto-links' ),
-            )
-        );        
-        new AmazonAutoLinks_AdminPage_Setting_Misc( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'misc',
-                'title'     => __( 'Misc', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_AdminPage_Setting_3rdParty(
-            $this->oFactory,
-            $this->sPageSlug,
-            array(
-                'tab_slug'  => '3rd_party',
-                'title'     => __( '3rd Party', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_AdminPage_Setting_Reset( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'reset',
-                'title'     => __( 'Reset', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_AdminPage_Setting_Authentication( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_General( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_Default( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_Cache( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_Misc( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_3rdParty( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Setting_Reset( $this->oFactory, $this->sPageSlug );
       
     }
     
     /**
      * Prints debug information at the bottom of the page.
      */
-    public function replyToDoAfterPage( $oFactory ) {
+    protected function _doAfterPage( $oFactory ) {
             
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isDebug() ) {

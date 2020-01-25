@@ -47,7 +47,9 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
         
         $this->oFactory     = $oFactory;
         $this->sPageSlug    = $sPageSlug;
-        $aTabDefinition     = $aTabDefinition + $this->_getTab();
+        $aTabDefinition     = $aTabDefinition
+            + $this->_getArguments()
+            + $this->_getTab();
         $this->sTabSlug     = isset( $aTabDefinition['tab_slug'] )
             ? $aTabDefinition['tab_slug'] 
             : '';
@@ -63,6 +65,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
         /**
          * @since   3.7.9
          * @return  array A tab definition array.
+         * @deprecated  use `_getArguments()`.
          */
         protected function _getTab() {
             return array();

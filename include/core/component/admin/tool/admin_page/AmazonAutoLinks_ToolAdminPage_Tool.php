@@ -16,6 +16,18 @@
 class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
+            'title'     => __( 'Tools', 'amazon-auto-links' ),
+            'order'     => 900,
+        );
+    }
+
+    /**
      * 
      * @callback        action      load_{page slug}
      */    

@@ -55,19 +55,7 @@ class AmazonAutoLinks_AALBSupport_Setting {
         }
 
         // Form sections
-        new AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB(
-            $oFactory,
-            AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-            array(
-                'tab_slug'      => '3rd_party',
-                'section_id'    => 'aalb',       // avoid hyphen(dash), dots, and white spaces
-                'capability'    => 'manage_options',
-                'title'         => __( 'Amazon Associates Link Builder', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Parse the shortcode and the Gutenberg block contents of Amazon Associates Link Builder (AALB) as the plugin is discontinued as of Feb 11, 2020.', 'amazon-auto-links' ),
-                ),
-            )
-        );
+        new AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
 
     }
 

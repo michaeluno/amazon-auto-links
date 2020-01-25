@@ -40,14 +40,7 @@ class AmazonAutoLinks_TagUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
         );
                     
         // Add pages
-        new AmazonAutoLinks_TagUnitAdminPage_TagUnit( 
-            $this,
-            array(
-                'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'tag_unit' ],
-                'title'         => __( 'Add Unit by Tag', 'amazon-auto-links' ),
-                'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-            )
-        );        
+        new AmazonAutoLinks_TagUnitAdminPage_TagUnit( $this );
         
     }
     /**

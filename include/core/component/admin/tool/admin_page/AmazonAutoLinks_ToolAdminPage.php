@@ -30,14 +30,7 @@ class AmazonAutoLinks_ToolAdminPage extends AmazonAutoLinks_AdminPageFramework {
             'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
         );
     
-        new AmazonAutoLinks_ToolAdminPage_Tool( 
-            $this,
-            array(
-                'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
-                'title'     => __( 'Tools', 'amazon-auto-links' ),
-                'order'     => 900,
-            )                
-        );          
+        new AmazonAutoLinks_ToolAdminPage_Tool( $this );
         
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.      
         

@@ -14,7 +14,20 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'form_options',       // avoid hyphen(dash), dots, and white spaces
+            'capability'    => 'manage_options',
+            'title'         => __( 'Form', 'amazon-auto-links' ),
+            'description'   => __( 'Set allowed HTML tags etc.', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

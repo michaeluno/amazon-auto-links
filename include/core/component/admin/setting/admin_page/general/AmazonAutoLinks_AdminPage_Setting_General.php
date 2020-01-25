@@ -15,89 +15,71 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'general',
+            'title'     => __( 'General', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_AdminPage_Setting_General_ProductFilters( 
+        new AmazonAutoLinks_AdminPage_Setting_General_ProductFilters(
             $oAdminPage,
-            $this->sPageSlug, 
-            array(
-                'section_id'    => 'product_filters',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Global Product Filters', 'amazon-auto-links' ),
-                'description'   => array(
-                    __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
-                ),
-            )
+            $this->sPageSlug,
+            array( 'tab_slug' => $this->sTabSlug, )
         );
         
         // 3.3.0+
         new AmazonAutoLinks_AdminPage_Setting_General_Feed( 
             $oAdminPage,
-            $this->sPageSlug, 
-            array(
-                'section_id'    => 'feed',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Feed', 'amazon-auto-links' ),
-            )
+            $this->sPageSlug,
+            array( 'tab_slug' => $this->sTabSlug, )
         );
 
         // 3.9.0+
         new AmazonAutoLinks_AdminPage_Setting_General_Widgets(
             $oAdminPage,
             $this->sPageSlug,
-            array(
-                'section_id'    => 'widget',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Widgets', 'amazon-auto-links' ),
-            )
+            array( 'tab_slug' => $this->sTabSlug, )
         );
 
         new AmazonAutoLinks_AdminPage_Setting_General_UnitPreview( 
             $oAdminPage,
-            $this->sPageSlug, 
-            array(
-                'section_id'    => 'unit_preview',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Unit Preview', 'amazon-auto-links' ),
-            )
-        );        
+            $this->sPageSlug,
+            array( 'tab_slug' => $this->sTabSlug, )
+        );
+
         new AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey( 
             $oAdminPage,
-            $this->sPageSlug, 
-            array(
-                'section_id'    => 'query',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Custom Query Key', 'amazon-auto-links' ),
-            )
-        );         
+            $this->sPageSlug,
+            array( 'tab_slug' => $this->sTabSlug, )
+        );
+
         new AmazonAutoLinks_AdminPage_Setting_General_ExternalScript( 
             $oAdminPage,
             $this->sPageSlug, 
-            array(
-                'section_id'    => 'external_scripts',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'External Scripts', 'amazon-auto-links' ),
-            )
+            array( 'tab_slug' => $this->sTabSlug, )
         );              
      
         new AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate( 
             $oAdminPage,
             $this->sPageSlug, 
-            array(
-                'section_id'    => 'miunosoft_affiliate',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'miunosoft Affiliate', 'amazon-auto-links' ),
-            )
+            array( 'tab_slug' => $this->sTabSlug, )
         );         
      
     }
     
-    public function replyToDoTab( $oFactory ) {
+    protected function _doTab( $oFactory ) {
         echo "<div class='right-submit-button'>"
                 . get_submit_button()  
             . "</div>";

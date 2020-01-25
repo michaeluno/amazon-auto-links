@@ -40,14 +40,7 @@ class AmazonAutoLinks_TemplateLoader {
      */
     public function replyToSetUpAdminPage( $oFactory ) {
        
-        new AmazonAutoLinks_AdminPage_Template(
-            $oFactory,
-            array(
-                'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
-                'title'     => __( 'Templates', 'amazon-auto-links' ),
-                'order'     => 60,
-            )                
-        );
+        new AmazonAutoLinks_AdminPage_Template( $oFactory );
         
         if ( 'plugins.php' === $oFactory->oProp->sPageNow ) {
             

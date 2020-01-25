@@ -14,7 +14,21 @@
  * @since       3
  */
 class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    /**
+     * @since   3.12.0
+     * @return array
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'cache',
+            'title'         => __( 'Caches', 'amazon-auto-links' ),
+            // 'description'   => array(
+                // __( 'Set the criteria to filter fetched items.', 'amazon-auto-links' ),
+            // ),
+        );
+    }
+
     /**
      * A user constructor.
      * 
@@ -22,7 +36,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
      * @return      void
      */
     protected function _construct( $oFactory ) {}
-    
+
     /**
      * Adds form fields.
      * @since       3
