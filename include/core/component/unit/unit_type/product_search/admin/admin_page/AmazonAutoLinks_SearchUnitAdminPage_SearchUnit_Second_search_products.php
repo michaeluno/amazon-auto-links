@@ -15,13 +15,26 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => 'search_products',
+            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
+                . ' - ' . __( 'Product Search', 'amazon-auto-links' ),
+            'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
+        );
+    }
+
     protected function _construct( $oFactory ) {}
     
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oFactory ) {
+    protected function _loadTab( $oFactory ) {
       
         // Add form fields
         $oFactory->addSettingSections(
@@ -37,7 +50,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products exte
         
         // Add Fields
         $_aValues = $oFactory->getValue();
-        foreach( $this->_getFormFieldClasses() as $_sClassName ) {
+        foreach( $this->___getFormFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName;
             foreach( $_oFields->get( '', $_aValues ) as $_aField ) {
                 $oFactory->addSettingFields(
@@ -51,7 +64,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products exte
         /**
          * @return  array
          */
-        private function _getFormFieldClasses() {
+        private function ___getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
                 'AmazonAutoLinks_FormFields_Unit_Common',

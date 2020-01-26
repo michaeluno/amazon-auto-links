@@ -68,10 +68,15 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
          * @return      array
          */
         private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
-
+//AmazonAutoLinks_Debug::log( 'review html' );
+//AmazonAutoLinks_Debug::log( $sHTML );
             $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $sHTML );
             $_iRating       = $_oScraper->getRating();
             $_inReviewCount = $_oScraper->getNumberOfReviews();
+AmazonAutoLinks_Debug::log( 'ratings' );
+AmazonAutoLinks_Debug::log(
+    array( $_iRating, $_inReviewCount )
+);
             $_aRow = array(
                 'rating'                  => $_iRating,
                 'rating_image_url'        => AmazonAutoLinks_Unit_Utility::getRatingStarImageURL( $_iRating ),
@@ -84,7 +89,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
                 'modified_time'           => date( 'Y-m-d H:i:s' ),
             );
 
-            // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
+            // if `0` is passed for the cache duration, it just renews the cache and does not update the expiration time.
             if ( $iCacheDuration ) {
                 $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
             }

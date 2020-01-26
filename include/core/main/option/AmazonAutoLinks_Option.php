@@ -62,6 +62,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'agreed' => false,        // hidden
         ),
         'cache'    =>    array(
+
+            'caching_method'                   => 'database', // 3.12.0
             'caching_mode'                     => 'normal',
             
             // 3.4.0+

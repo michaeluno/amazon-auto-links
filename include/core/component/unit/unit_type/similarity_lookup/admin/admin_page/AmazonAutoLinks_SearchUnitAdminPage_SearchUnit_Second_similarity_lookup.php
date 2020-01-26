@@ -15,7 +15,20 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => 'similarity_lookup',
+            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
+                . ' - ' . __( 'Similarity Look-up', 'amazon-auto-links' ),
+            'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
+        );
+    }
+
     protected function _construct( $oFactory ) {}
     
     /**

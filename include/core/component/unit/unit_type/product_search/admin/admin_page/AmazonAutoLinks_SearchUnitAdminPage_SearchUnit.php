@@ -39,57 +39,21 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
      * 
      * @callback        action      load_{page slug}
      */
-    public function replyToLoadPage( $oFactory ) {
-        
-//        $this->_checkAPIKeys();   // @deprecated  3.9.0
+    protected function _loadPage( $oFactory ) {
+
         AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $oFactory );
         
         // Tabs
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'first',
-                'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
-                'description'   => __( 'Select the search type.', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'search_products',
-                'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
-                    . ' - ' . __( 'Product Search', 'amazon-auto-links' ),
-                'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
-            )
-        );        
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'item_lookup',
-                'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
-                    . ' - ' . __( 'Item Look-up', 'amazon-auto-links' ),
-                'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'similarity_lookup',
-                'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
-                    . ' - ' . __( 'Similarity Look-up', 'amazon-auto-links' ),                
-                'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
-            )
-        );        
+        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup( $this->oFactory, $this->sPageSlug );
  
-        $this->_doPageSettings();
+        $this->___doPageSettings();
         
     }
     
-        private function _doPageSettings() {
+        private function ___doPageSettings() {
             
             $this->oFactory->setPageHeadingTabsVisibility( false );
             $this->oFactory->setPageTitleVisibility( false ); 
@@ -97,28 +61,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             
         }
 
-        /**
-         * @deprecated  3.9.0
-         */
-/*        private function _checkAPIKeys() {
-            
-            $_oOption = AmazonAutoLinks_Option::getInstance();    
-            if ( $_oOption->isAPIConnected() ) {
-                return;
-            }
-            
-            $this->oFactory->setSettingNotice( 
-                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
-                'updated'
-            );
-            
-            // Go to the Authentication tab of the Settings page.
-            AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
-            
-        }*/
         
-        
-    public function replyToDoAfterPage( $oFactory ) {
+    protected function _doAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isDebug() ) {
             return;

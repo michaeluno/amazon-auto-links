@@ -15,7 +15,19 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @return array
+     * @since   3.12.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => 'first',
+            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
+            'description'   => __( 'Select the search type.', 'amazon-auto-links' ),
+        );
+    }
+
     protected function _construct( $oFactory ) {}
     
     /**
@@ -105,7 +117,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         ) {
             // Will exit the script.
             unset( $aInput[ 'submit_proceed' ] );
-            $this->_goToNextPage( $aInput );
+            $this->___goToNextPage( $aInput );
         }
         
         return $aInput;
@@ -117,7 +129,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
          * 
          * @remark      Will redirect the user to the next page and exits the script.
          */
-        private function _goToNextPage( $aInput ) {
+        private function ___goToNextPage( $aInput ) {
             
             // Set the unit type based on the chosen one.
             // Redirect to the appropriate page by the search type.
@@ -133,8 +145,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
                     $_sTabSlug = 'similarity_lookup';
                     break;
             }                
- 
-            AmazonAutoLinks_PluginUtility::setTransient(
+
+            $this->setTransient(
                 $aInput[ 'transient_id' ],  // key
                 $aInput, // data
                 60*10*6*24 // seconds 
@@ -153,6 +165,5 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
                 )
             );
         }    
- 
-    
+
 }

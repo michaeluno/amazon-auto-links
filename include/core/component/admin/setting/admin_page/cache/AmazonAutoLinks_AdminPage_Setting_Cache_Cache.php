@@ -57,13 +57,18 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
-                'field_id'          => 'cache_method',
-                'type'              => 'radio',
+                'field_id'          => 'caching_method',
+                'type'              => 'revealer',
+                'select_type'       => 'radio',
                 'title'             => __( 'Cache Method', 'amazon-auto-links' ),
                 'capability'        => 'manage_options',
                 'label' => array(
                     'database'   => __( 'Database', 'amazon-auto-links' ) . ' - ' . __( 'store caches in the database.', 'amazon-auto-links' ) . '<br />',
                     'file'       => __( 'File', 'amazon-auto-links' ) . ' - ' . __( 'store caches in a directory as actual files.', 'amazon-auto-links' ) . '<br />',
+                ),
+                'selectors'         => array(
+                    'database'   => '.caching_method_database',
+                    'file'       => '.caching_method_file',
                 ),
                 'description'       => array(
                     $_bCacheWritable
@@ -93,6 +98,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         . '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                             . $_oCacheTable->getTableSize()
                     . '</p>',
+                'class'         => array(
+                    'fieldrow'  => 'caching_method_database',
+                ),
             ),
             array(
                 'field_id'        => 'submit_clear_all_caches_types',
@@ -105,6 +113,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                     'http_requests' => '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iRequestCount ),
                 ),
+                'class'         => array(
+                    'fieldrow'  => 'caching_method_database',
+                ),
             ),
             array( 
                 'field_id'        => 'submit_clear_all_caches',
@@ -114,6 +125,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
                     'class' => 'button button-secondary',
+                ),
+                'class'         => array(
+                    'fieldrow'  => 'caching_method_database',
                 ),
             ),
             array(
@@ -127,6 +141,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                     'http_requests' => '<strong>' . __( 'HTTP Requests', 'amazon-auto-links' ) . '</strong>: '
                         . sprintf( __( '%1$s item(s).', 'amazon-auto-links' ), $_iExpiredRequests ),
                 ),
+                'class'         => array(
+                    'fieldrow'  => 'caching_method_database',
+                ),
             ),
             array( 
                 'field_id'        => 'submit_clear_expired_caches',
@@ -136,6 +153,9 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 'label'           => __( 'Clear', 'amazon-auto-links' ),
                 'attributes'      => array(
                     'class' => 'button button-secondary',
+                ),
+                'class'         => array(
+                    'fieldrow'  => 'caching_method_database',
                 ),
             ),
             array(
