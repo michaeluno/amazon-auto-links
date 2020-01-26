@@ -75,8 +75,7 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
         
         $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
         $_bDoAutoInsert     = $aInputs[ 'auto_insert' ];
-AmazonAutoLinks_Debug::log( 'inputs' );
-AmazonAutoLinks_Debug::log( $aInputs );
+
         // Sanitize the unit options
         $_sClassName        = "AmazonAutoLinks_UnitOption_{$aInputs[ 'unit_type' ]}";
         $_oUnitOptions      = new $_sClassName(
@@ -87,8 +86,6 @@ AmazonAutoLinks_Debug::log( $aInputs );
         $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 
             $aInputs[ 'unit_type' ]
         );                
-AmazonAutoLinks_Debug::log( 'unit options' );
-AmazonAutoLinks_Debug::log( $aInputs );
 
         // Create a post.            
         $_iNewPostID = $this->insertPost(

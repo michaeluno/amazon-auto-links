@@ -628,7 +628,10 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     }
     /**
      * Extracts a rating from a given string.
-     * e.g. 4.5 out of 5 stars -> 4.5
+     * e.g.
+     * 4.5 out of 5 stars -> 4.5 -> 45
+     * 4,7 su 5 stelle -> 4.7 -> 47
+     *
      * @param $sString
      *
      * @return int|null
@@ -636,12 +639,16 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      */
     static public function getRatingExtracted( $sString ) {
         preg_match(
-            '/\d\.\d/', // needle
+            '/\d[\.,]\d/', // needle
             $sString,   // subject
             $_aMatches
         );
-        return isset( $_aMatches[ 0 ] ) && is_numeric( $_aMatches[ 0 ] )
-            ? ( integer ) ( $_aMatches[ 0 ] * 10 )
+        if ( ! isset( $_aMatches[ 0 ] ) ) {
+            return null;
+        }
+        $_sRating = str_replace( ',', '.', $_aMatches[ 0 ] );
+        return is_numeric( $_sRating )
+            ? ( integer ) ( $_sRating * 10 )
             : null;
     }
 

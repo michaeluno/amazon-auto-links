@@ -307,6 +307,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.11.1 =
 - Added options to select cache tables when clearing caches from the `Cache` screen.
+- Fixed a bug with some locales that rating stars were not displayed.
 - Fixed a bug that `Country` unit option was not property set for some cases.
 
 = 3.11.0 - 01/25/2019 =
