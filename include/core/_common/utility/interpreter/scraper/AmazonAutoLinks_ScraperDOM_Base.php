@@ -13,9 +13,21 @@
  * @since        3
  */
 abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUtility {
-        
+
+    /**
+     * Indicates whether the site uses https or not.
+     * @var bool
+     */
+    public $bIsSSL;
+
+    /**
+     * @var AmazonAutoLinks_DOM
+     */
+    public $oDOM;
+
     /**
      * Stores a DOM document object.
+     * @var DOMDocument
      */
     public $oDoc;    
         
@@ -55,11 +67,13 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
         }        
 
     }
-    
+
     /**
      * Converts the url scheme to https:// from http:// and uses the amazon's secure image server.
+     *
+     * @param DOMDocument $oDoc
      */
-    protected function setSSLImagesByDOM( $oDoc ) {        
+    protected function setSSLImagesByDOM( DOMDocument $oDoc ) {
         foreach ( $oDoc->getElementsByTagName( 'img' ) as $_oNodeImg ) {
             $_oNodeImg->attributes->getNamedItem( "src" )->value = $this->getAmazonSSLImageURL(
                 $_oNodeImg->attributes->getNamedItem( "src" )->value

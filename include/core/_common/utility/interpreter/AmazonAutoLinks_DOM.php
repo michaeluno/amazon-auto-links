@@ -16,7 +16,32 @@
  * @since       3       Extends `AmazonAutoLinks_WPUtility`.
  */
 class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
-    
+
+    /**
+     * @var string
+     */
+    public $sCharEncoding;
+
+    /**
+     * @var AmazonAutoLinks_Encrypt
+     */
+    public $oEncrypt;
+
+    /**
+     * @var string
+     */
+    public $sHTMLCachePrefix;
+
+    /**
+     * @var bool
+     */
+    public $bIsMBStringInstalled;
+
+    /**
+     * @var bool
+     */
+    public $bLoadHTMLFix;
+
     /**
      * Sets up properties.
      */
@@ -40,10 +65,9 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * `
      * $_oDoc->saveXML( $_oDoc->documentElement, LIBXML_NOEMPTYTAG );
      * `
-     * @return      object      DOM object
+     * @return      DOMDocument
      */
     public function loadDOMFromHTMLElement( $sHTMLElements, $sMBLang='uni', $sSourceCharSet='' ) {
-
         return $this->loadDOMFromHTML( 
             // Enclosing in a div tag prevents from inserting the comment <!-- xml version .... --> when using saveXML() later.
             '<div>' 
@@ -52,16 +76,14 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             $sMBLang,
             $sSourceCharSet 
         );
-        
     }    
     /**
      * Creates a DOM object from a given url.
-     * @return      object      DOM object
+     * @return      DOMDocument
      * @since       unknown
      * @since       3.2.0       Added the cache duration parameter.
      */
     public function loadDOMFromURL( $sURL, $sMBLang='uni', $bUseFileGetContents=false, $sSourceCharSet='', $iCacheDuration=86400 ) {
-            
         return $this->loadDOMFromHTML( 
             $this->getHTML( 
                 $sURL, 
@@ -71,14 +93,15 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             $sMBLang,
             $sSourceCharSet
         );
+    }
 
-    }    
     /**
      * 
      * @param       string          $sHTML     
      * @param       string          $sMBLang     
      * @param       string          $sSourceCharSet     If true, it auto-detects the character set. If a string is given, 
      * the HTML string will be converted to the given character set. If false, the HTML string is treated as it is.
+     * @return      DOMDocument
      */
     public function loadDOMFromHTML( $sHTML, $sMBLang='uni', $sSourceCharSet='' ) {
         

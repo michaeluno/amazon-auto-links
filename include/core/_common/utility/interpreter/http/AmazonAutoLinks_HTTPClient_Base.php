@@ -283,16 +283,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     continue;
                 }
 
-                // 3.7.6+
+                /**
+                 * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
+                 * @since      3.12.0    Re-added
+                 */
                 if ( ! is_wp_error( $_aCache[ 'data' ] ) ) {
-/* @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                    $_bsUncompressed = function_exists( 'gzuncompress' )
-                        ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
-                        : false;
-                    if ( $_bsUncompressed ) {
-                        $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
-                    }
-*/
+//                    $_bsUncompressed = function_exists( 'gzuncompress' )
+//                        ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
+//                        : false;
+//                    if ( $_bsUncompressed ) {
+//                        $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
+//                    }
                     unset( $_aCache[ 'data' ][ 'http_response' ] );
                 }
 
@@ -429,15 +430,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 // this cause the data to be excessive large
                 unset( $mData[ 'http_response' ] );
 
-                // gz compress
-/* @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                  if ( function_exists( 'gzcompress' ) ) {
-                    $_bsCompressed = gzcompress( $mData[ 'body' ] );
-                    if ( $_bsCompressed ) {
-                        $mData[ 'body' ] = $_bsCompressed ;
-
-                    }
-                }*/
+                /**
+                 * gz compress
+                 * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
+                 * @since   3.12.0  Re-added
+                 */
+//                if ( function_exists( 'gzcompress' ) ) {
+//                    $_bsCompressed = gzcompress( $mData[ 'body' ] );
+//                    if ( $_bsCompressed ) {
+//                        $mData[ 'body' ] = $_bsCompressed ;
+//                    }
+//                }
 
                 return $mData;
 
