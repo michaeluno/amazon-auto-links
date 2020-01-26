@@ -17,7 +17,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
 
     /**
      * @return array
-     * @since   3.12.0
+     * @since   3.11.1
      */
     protected function _getArguments() {
         return array(

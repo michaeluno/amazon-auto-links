@@ -18,7 +18,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
 
     /**
      * @return array
-     * @since   3.12.0
+     * @since   3.11.1
      */
     protected function _getArguments() {
         return array(

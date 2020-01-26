@@ -16,7 +16,7 @@
 class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
-     * @since   3.12.0
+     * @since   3.11.1
      * @return array
      */
     protected function _getArguments() {

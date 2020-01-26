@@ -30,7 +30,7 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
     );
 
     /**
-     * @since   3.12.0
+     * @since   3.11.1
      * @return array
      */
     protected function _getArguments() {

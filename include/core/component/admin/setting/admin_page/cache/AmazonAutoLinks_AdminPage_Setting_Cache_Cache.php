@@ -16,7 +16,7 @@
 class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
-     * @since   3.12.0
+     * @since   3.11.1
      * @return array
      */
     protected function _getArguments() {
@@ -56,7 +56,8 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
 
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
-            array(
+// From 3.12.0 not implemented yet
+/*            array(
                 'field_id'          => 'caching_method',
                 'type'              => 'revealer',
                 'select_type'       => 'radio',
@@ -85,7 +86,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                         'disabled' => 'disabled',
                     ),
                 ),
-            ),
+            ),*/
             array( 
                 'field_id'        => '_table_sizes',
                 'title'           => __( 'Sizes', 'amazon-auto-links' ),

@@ -17,7 +17,7 @@ class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_
 
     /**
      * @return array
-     * @since   3.12.0
+     * @since   3.11.1
      */
     protected function _getArguments() {
         return array(

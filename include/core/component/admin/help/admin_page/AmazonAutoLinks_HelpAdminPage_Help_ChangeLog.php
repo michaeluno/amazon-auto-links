@@ -18,7 +18,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_ChangeLog extends AmazonAutoLinks_Admin
 
     /**
      * @return array
-     * @since   3.12.0
+     * @since   3.11.1
      */
     protected function _getArguments() {
         return array(

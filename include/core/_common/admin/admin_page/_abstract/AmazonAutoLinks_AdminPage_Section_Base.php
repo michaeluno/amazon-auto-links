@@ -61,7 +61,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
     }
 
     /**
-     * @since   3.12.0
+     * @since   3.11.1
      * @return array
      */
     protected function _getArguments() {
@@ -72,7 +72,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
          * @return array
          * @since   3.7.9
          *
-         * @deprecated 3.12.0   Use getArguments().
+         * @deprecated 3.11.1   Use getArguments().
          */
         protected function _getSection() {
             return array();

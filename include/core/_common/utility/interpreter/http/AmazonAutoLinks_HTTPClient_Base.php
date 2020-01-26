@@ -285,7 +285,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
                 /**
                  * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                 * @since      3.12.0    Re-added
+                 * @since      3.11.1    Re-added
                  */
                 if ( ! is_wp_error( $_aCache[ 'data' ] ) ) {
 //                    $_bsUncompressed = function_exists( 'gzuncompress' )
@@ -433,7 +433,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 /**
                  * gz compress
                  * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                 * @since   3.12.0  Re-added
+                 * @since   3.11.1  Re-added
                  */
 //                if ( function_exists( 'gzcompress' ) ) {
 //                    $_bsCompressed = gzcompress( $mData[ 'body' ] );
