@@ -20,7 +20,7 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
      * 
      * @callback        filter      validation_{page slug}_{tab slug}
      */            
-    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
         $_bVerified = ! $oFactory->hasFieldError();
         $_aErrors   = array();
@@ -30,22 +30,22 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
         if ( ! $_bVerified ) {
             $oFactory->setFieldErrors( $_aErrors );     
             $oFactory->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aInput;
+            return $aInputs;
         }        
 
         // Create a unit - the method will take care of data sanitization.    
-        $_iNewPostID = $this->_createSearchUnit( $aInput );
+        $_iNewPostID = $this->___createSearchUnit( $aInputs );
         
         // Store the inputs for the next time.
         update_option( 
             AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInput,
+            $aInputs,
             false       // disable auto-load 
         );            
         
         $this->_goToNextPage( $_iNewPostID );
         
-        return $aInput;
+        return $aInputs;
         
     }      
       
@@ -71,11 +71,12 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
      * @since       2.0.2
      * @return      integer     A newly created post id.
      */
-    protected function _createSearchUnit( $aInputs ) {
+    private function ___createSearchUnit( $aInputs ) {
         
         $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
         $_bDoAutoInsert     = $aInputs[ 'auto_insert' ];
-      
+AmazonAutoLinks_Debug::log( 'inputs' );
+AmazonAutoLinks_Debug::log( $aInputs );
         // Sanitize the unit options
         $_sClassName        = "AmazonAutoLinks_UnitOption_{$aInputs[ 'unit_type' ]}";
         $_oUnitOptions      = new $_sClassName(
@@ -86,6 +87,8 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
         $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 
             $aInputs[ 'unit_type' ]
         );                
+AmazonAutoLinks_Debug::log( 'unit options' );
+AmazonAutoLinks_Debug::log( $aInputs );
 
         // Create a post.            
         $_iNewPostID = $this->insertPost(

@@ -15,7 +15,6 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
 
-        $_oOption   = $this->oOption;
         $_aFields   = array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',
@@ -55,15 +54,19 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'title'         => __( 'Operation', 'amazon-auto-links' ),
                 'hidden'        => true,
             ),
-// @deprecated 3.10.0 Moved to the Locale class
-//            array(
-//                'field_id'      => $sFieldIDPrefix . 'country',
-//                'type'          => 'text',
+            // @deprecated 3.10.0 Moved to the Locale class
+            // 3.12.0 Re-added and made it hidden. This is needed as without this, the Create Search wizard loses the country value which results in respecting the default country unit option.
+            array(
+                'field_id'      => $sFieldIDPrefix . 'country',
+                'type'          => 'hidden',
 //                'title'         => __( 'Locale', 'amazon-auto-links' ),
-//                'attributes'    => array(
-//                    'readonly'=> 'readonly',
-//                ),
-//            ),
+                'attributes'    => array(
+                    'readonly'=> 'readonly',
+                    'fieldrow' => array(
+                        'style' => 'display: none;'
+                    ),
+                ),
+            ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'SearchIndex',
                 'type'          => 'select',
@@ -71,8 +74,8 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'label'         => $this->_getSearchIndex( $aUnitOptions ),
                 'default'       => 'All',
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
-                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
-                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
+//                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
+//                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
             ),
             array(
                 // @see http://docs.aws.amazon.com/AWSECommerceService/latest/DG/SortingbyPopularityPriceorCondition.html
