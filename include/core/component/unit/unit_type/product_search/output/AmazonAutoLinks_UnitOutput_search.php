@@ -460,10 +460,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 : 'IncludeOutOfStock',
             'Condition'             => $this->oUnitOption->get( 'Condition' ),
             'MaxPrice'              => $this->oUnitOption->get( 'MaximumPrice' )
-                ? $this->oUnitOption->get( 'MaximumPrice' )
+                ? ( integer ) $this->oUnitOption->get( 'MaximumPrice' )
                 : null,
             'MinPrice'              => $this->oUnitOption->get( 'MinimumPrice' )
-                ? $this->oUnitOption->get( 'MinimumPrice' )
+                ? ( integer ) $this->oUnitOption->get( 'MinimumPrice' )
                 : null,
             'MinReviewsRating'      => $this->oUnitOption->get( 'MinReviewsRating' )
                 ? ( integer ) $this->oUnitOption->get( 'MinReviewsRating' )

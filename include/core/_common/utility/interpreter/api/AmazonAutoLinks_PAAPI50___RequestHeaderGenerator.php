@@ -98,6 +98,7 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
         $this->___sOperation = isset( $aPayload[ 'Operation' ] )
             ? $aPayload[ 'Operation' ]
             : '';
+
     }
         private function ___getMarketplaceByLocale( $sLocale ) {
             $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
