@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         3.11.0
+Stable tag:         3.11.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -305,7 +305,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.11.1 =
+= 3.11.1 - 01/29/2019 =
 - Added options to select cache tables when clearing caches from the `Cache` screen.
 - Fixed a bug with some locales that rating stars were not displayed.
 - Fixed a bug that `Country` unit option was not property set for some cases.
