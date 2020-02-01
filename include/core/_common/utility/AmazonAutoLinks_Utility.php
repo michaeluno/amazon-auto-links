@@ -264,6 +264,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * Each element should represent the glue of the dimension corresponding to the depth of the array.
      * e.g. array( ',', ':' ) will glue the elements of first dimension with comma and second dimension with colon.
      * @return            string
+     * @todo    deprecated this as it seems not used anywhere
      */
     static public function implodeRecursive( $arrInput, $arrGlues ) {    
         
@@ -276,7 +277,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
                 continue;
             }
                 
-            $vElem = $this->ImplodeRecursive( $vElem, ( ( array ) $arrGlues_[0] ) );
+            $vElem = self::ImplodeRecursive( $vElem, ( ( array ) $arrGlues_[0] ) );
         
         }
         
