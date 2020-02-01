@@ -20,6 +20,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
 
     public $aCriteria           = array();
     public $sAdditionalKeywords = '';
+    public $sExcludingKeywords = '';        // 3.12.0
 
     private $___oPost;
     private $___aGET = array();
@@ -27,10 +28,11 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
     /**
      * Sets up properties.
      */
-    public function __construct( array $aCriteria, $sAdditionalKeywords='' ) {
+    public function __construct( array $aCriteria, $sAdditionalKeywords='', $sExcludingKeywords='' ) {
 
         $this->aCriteria           = $aCriteria;
         $this->sAdditionalKeywords = $sAdditionalKeywords;
+        $this->sExcludingKeywords  = $sExcludingKeywords;
 
         // Allow ajax unit loading to set referrer's request
         $this->___oPost            = apply_filters(
@@ -42,31 +44,23 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
     
     /**
      * 
-     * @return      string       The search keywords.
-     * @todo        If nothing uses the `$bReturnType` parameter, deprecate it.
+     * @return      array       The search keywords.
      */
-    public function get( $bReturnType=true ) {
+    public function get() {
         
-        $_aKeywords    = $this->___getSearchKeywordsByCriteria( $this->aCriteria );
-        $_aKeywords    = array_merge(
-            $_aKeywords,
-            $this->___getSiteSearchKeywords()
-        );
-        $_aKeywords    = $this->___getFormattedSearchKeywordsArray( $_aKeywords );
-        $_sAdditionals = $this->trimDelimitedElements(
-            trim( $this->sAdditionalKeywords ), // subject string
-            ',',  // delimiter
-            false // add a space with the delimiter
-        );
-        $_sAdditionals = $_sAdditionals
-            ? ',' . $_sAdditionals
-            : '';
-        $_sKeywords    = implode( ',', $_aKeywords )
-            . $_sAdditionals;
-        return $bReturnType
-            ? explode( ',', $_sKeywords )
-            : $_sKeywords;
-            
+        $_aKeywords        = $this->___getSearchKeywordsByCriteria( $this->aCriteria );
+        $_aKeywords        = array_merge( $_aKeywords, $this->___getSiteSearchKeywords() );
+        $_aKeywords        = $this->___getFormattedSearchKeywordsArray( $_aKeywords );
+
+        $_aAdditionalWords = $this->getStringIntoArray( $this->sAdditionalKeywords, ',' );
+        $_aKeywords        = array_merge( $_aKeywords, $_aAdditionalWords );
+
+        $_aExcludeWords    = $this->getStringIntoArray( $this->sExcludingKeywords, ',' );
+        $_aKeywords        = array_udiff( $_aKeywords, $_aExcludeWords, 'strcasecmp' ); // case-insensitive
+
+        $_aKeywords        = array_unique( $_aKeywords );
+        return $_aKeywords;
+
     }
         
         /**

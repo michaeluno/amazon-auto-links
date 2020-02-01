@@ -44,14 +44,26 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 'title'         => __( 'Additional Keywords', 'amazon-auto-links' ),
                 'type'          => 'text',
                 'attributes'    => array(
-                    'style' => 'width: 80%',
+                    'style' => 'width: 100%',
                 ),
                 'tip'           => array(
                     __( 'Add additional search keywords, separated by commas.', 'amazon-auto-links' ),
                     ' e.g. <code>' . __( 'laptop, desktop', 'amazon-auto-links' ) . '</code>',
                 ),
             ),
-           array(
+            array( // 3.12.0
+                'field_id'      => $sFieldIDPrefix . 'excluding_keywords',
+                'title'         => __( 'Keywords to Exclude', 'amazon-auto-links' ),
+                'type'          => 'text',
+                'attributes'    => array(
+                    'style' => 'width: 100%',
+                ),
+                'tip'           => array(
+                    __( 'Specify keywords to exclude from search keywords, separated by commas.', 'amazon-auto-links' ),
+                    ' e.g. <code>' . __( 'test, demo', 'amazon-auto-links' ) . '</code>',
+                ),
+            ),
+            array(
                 'field_id'          => $sFieldIDPrefix . 'country',
                 'type'              => 'select',
                 'title'             => __( 'Country', 'amazon-auto-links' ),

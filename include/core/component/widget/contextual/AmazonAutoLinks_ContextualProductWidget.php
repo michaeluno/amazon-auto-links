@@ -296,6 +296,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     'taxonomy_terms'        => null,
                 ),
                 'additional_keywords'       => '',
+                'excluding_keywords'        => '',  // 3.12.0
                 'width'                     => 100,
                 'width_unit'                => '%',
                 'height'                    => 400,

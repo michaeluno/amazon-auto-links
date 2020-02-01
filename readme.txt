@@ -305,6 +305,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 3.12.0 =
+- Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
+- Optimized the caching mechanism to compress data.
+
 = 3.11.1 - 01/29/2019 =
 - Added options to select cache tables when clearing caches from the `Cache` screen.
 - Fixed a bug with some locales that rating stars were not displayed.

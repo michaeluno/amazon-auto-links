@@ -31,6 +31,7 @@ class AmazonAutoLinks_UnitOption_contextual extends AmazonAutoLinks_UnitOption_s
             'breadcrumb'        => false,
          ),
         'additional_keywords'   => '',
+        'excluding_keywords'    => '',  // 3.12.0
         'country'               => 'US',
 
 //        'search_per_keyword'    => true,

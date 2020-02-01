@@ -42,7 +42,8 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
 
         $_oContextualSearch = new AmazonAutoLinks_ContextualUnit_SearchKeyword(
             $this->___aArguments[ 'criteria' ],
-            $this->___aArguments[ 'additional_keywords' ]
+            $this->___aArguments[ 'additional_keywords' ],
+            $this->___aArguments[ 'excluding_keywords' ]
         );
         $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
         if ( empty( $_aSearchKeywords ) ) {
@@ -77,8 +78,8 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
                 // The `Power` parameter will not be used as it only works with the Books category.
 
                 // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
-                // The Amazon API does not provide an OR operator for the Keywords parameter. Power cannot be used for categories other than Books.
-                // So here we set a plugin specific option here to perform search by each keyword.
+                // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
+                // So here we set a plugin specific option to perform search by each keyword.
                 'search_per_keyword'    => true,
 
                 // 3.6.0+ This avoids dabble nested containers.
@@ -90,6 +91,5 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
         );
 
     }
-
 
 }
