@@ -246,7 +246,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     protected function _getButtonID() {
         
-        $_iButtonID = $this->oUnitOption->get( 'button_id' );
+        $_iButtonID = ( integer ) $this->oUnitOption->get( 'button_id' );
         
         // Consider cases that options are deleted by external means.
         $_sCSS = AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS();
@@ -260,35 +260,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Gets the output of product links by specifying a template.
-     * 
+     *
      * @remark      The local variables defined in this method will be accessible in the template file.
+     *
+     * @param array $aURLs
+     * @param null|string $sTemplatePath
+     *
      * @return      string
      */
     public function get( $aURLs=array(), $sTemplatePath=null ) {
 
-        // Hooks of function-call basis.
-        add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-        $_aHooks = array(
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
-            new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
-            new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
-            new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this ),
-            new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this ),
-            new AmazonAutoLinks_UnitOutput__Credit( $this ),
-            new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
-        );
-
-        // 3.7.5+
-        if ( $this->___hasCustomProductLinkURLQuery() ) {
-            add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
-        }
+        $_aHooks = $this->___getHooksSetPerOutput();
 
         $_aOptions          = $this->oOption->aOptions;
         $_aArguments        = $this->oUnitOption->get();
-        $_iUnitID           = $this->oUnitOption->get( 'id' ); // there are cases that called dynamically without units like the shortcode
+        $_iUnitID           = ( integer ) $this->oUnitOption->get( 'id' ); // there are cases that called dynamically without units like the shortcode
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
         $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
         $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
@@ -297,7 +283,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         try {
 
-            $_sError            = $this->_getError( $_aProducts );
+            $_sError = $this->_getError( $_aProducts );
             if ( $_sError ) {
                 throw new Exception( $_sError );
             }
@@ -307,17 +293,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
-            $_sContent          = $this->getOutputBuffer(
-                array( $this, 'replyToGetOutput' ),
-                array(
-                    $_aOptions,
-                    $_aArguments,
-                    $_aProducts,
-                    $_sTemplatePath
-                )
-            );
+            $_sContent  = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
         } catch ( Exception $_oException ) {
+
             $_sErrorMessage = $_oException->getMessage();
             $_sContent      = $this->oUnitOption->get( 'show_errors' )
                 ? "<div class='warning'><p>"
@@ -327,27 +306,60 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             if ( ! $_bHasPreviousError && $_iUnitID ) {
                 update_post_meta( $_iUnitID, '_error', $_sErrorMessage );
             }
+
         }
 
-        $_sContent          = apply_filters(
-            'aal_filter_unit_output',
-            $_sContent,
-            $_aArguments,
-            $_sTemplatePath, // [3+]
-            $_aOptions,      // [3+]
-            $_aProducts      // [3+]
-        );
+        $_sContent          = apply_filters( 'aal_filter_unit_output', $_sContent, $_aArguments, $_sTemplatePath, $_aOptions, $_aProducts );
 
-        // Remove hooks of function-call basis.
-        remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-        remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
-        foreach( $_aHooks as $_oHook ) {
-            $_oHook->__destruct();
-        }
-
+        $this->___removeHooksPerOutput( $_aHooks );
         return $_sContent;
 
     }
+
+        /**
+         * Sets up hooks per output basis.
+         * @since   4.0.0
+         * @return  array   An array holding hook objects.
+         */
+        private function ___getHooksSetPerOutput() {
+
+            add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
+            $_aHooks = array(
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
+                new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
+                new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this ),
+                new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this ),
+                new AmazonAutoLinks_UnitOutput__Credit( $this ),
+                new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
+            );
+
+            // 3.7.5+
+            if ( $this->___hasCustomProductLinkURLQuery() ) {
+                add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
+            }
+            return $_aHooks;
+
+        }
+
+        /**
+         * Removes hooks per output basis.
+         *
+         * @param array $aHooks An array holding hook objects set by the ___getHooksSetPerOutput() method.
+         * @see ___getHooksSetPerOutput()
+         * @since 4.0.0
+         */
+        private function ___removeHooksPerOutput( array $aHooks ) {
+            remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
+            remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
+            foreach( $aHooks as $_oHook ) {
+                $_oHook->__destruct();
+            }
+        }
+
         /**
          * @return bool
          * @since   3.10.0
@@ -384,15 +396,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 $arrOptions    = $aOptions;
                 $arrProducts   = $aProducts;
 
-                defined( 'WP_DEBUG' ) && WP_DEBUG
-                    ? include( $sTemplatePath )
-                    : @include( $sTemplatePath );
+                // Include the template
+                defined( 'WP_DEBUG' ) && WP_DEBUG ? include( $sTemplatePath ) : @include( $sTemplatePath );
 
                 // Enqueue the impression counter script.
-                $this->oImpressionCounter->add(
-                    $this->oUnitOption->get( 'country' ),
-                    $this->oUnitOption->get( 'associate_id' )
-                );
+                $this->oImpressionCounter->add( $this->oUnitOption->get( 'country' ), $this->oUnitOption->get( 'associate_id' ) );
                 return;
             }
             echo '<p>'
@@ -425,7 +433,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      *
      * @param       array   $aProducts
      * @param       integer $iUnitID        The unit (post) ID.
-     * @callback    aal_filter_products
+     * @callback    filter  aal_filter_products
      * @remark      Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
      * @retuen      void
      * @since       3.7.0
@@ -442,6 +450,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             );
             return;
         }
+
         // At this point, the response has no error.
 
         $_snStoredError = get_post_meta( $iUnitID, $_sUnitStatusMetaKey, true );
@@ -454,16 +463,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
     }
-
-    /**
-     * Checks whether response has an error.
-     * @since       3
-     * @return      boolean
-     * @deprecated  3.7.0   Use _getError() instead
-     */
-//    protected function _isError( $aProducts ) {
-//        return empty( $aProducts );
-//    }
 
     /**
      * Returns the error message if found.
