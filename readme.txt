@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         3.11.1
+Stable tag:         3.12.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -300,12 +300,15 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add the SubscriptionID parameter to product links when AWS keys are given.
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
-- @todo compress HTTP request caches as customer review caches are too large.
 - @todo introduce a new unit type Comparision Table
+- @todo add a card template.
+- @todo add the ability to display products with oEmbed.
+- @todo add the ability to select a caching type from either database or file.
+- @todo remove legacy code older than v3.
 
 == Changelog ==
 
-= 3.12.0 =
+= 3.12.0 - 02/05/2019 =
 - Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
 - Optimized the caching mechanism to compress data.
 
