@@ -44,12 +44,11 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
 
         $_sIFrameURL = add_query_arg(
             array(
-                "oembed" => 'amazon-auto-links',
-                'frame'  => true,
-                // 'url'    => urlencode( $_GET[ 'url' ] ), // the key `url` does not seem to be passed to iframe page.
+                'embed'  => 'amazon-auto-links',    // usually the value is 1 for normal oEmbed posts but here we use a custom value to differentiate the request to process own custom outputs
+                // 'url'    => urlencode( $_GET[ 'url' ] ), // the key is reserved by the core for oEmbed discovery routine and when used, it causes recursive requests.
                 'uri'    => urlencode( $_GET[ 'url' ] ),
-            ), // + $_GET,
-            site_url()
+            ),
+            untrailingslashit( site_url() ) . '/amazon-auto-links/embed/'   // using a custom non-existent url so when the plugin is deactivated, the iframe displays the 404 embedded page.
         );
         $_aAttributes = array(
             'src'           => esc_url( $_sIFrameURL ),

@@ -23,14 +23,12 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
      */
     public function __construct() {
 
-
-        if ( ! isset( $_GET[ 'oembed' ], $_GET[ 'frame' ] ) ) {
+        if ( ! isset( $_GET[ 'embed' ] ) ) {
             return;
         }
-        if ( $_GET[ 'oembed' ] !== 'amazon-auto-links' ) {
+        if ( $_GET[ 'embed' ] !== 'amazon-auto-links' ) {
             return;
         }
-
         add_action( 'init', array( $this, 'replyToLoadFrame' ) );
 
     }
@@ -179,7 +177,7 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
             return;
         }
         $_aArguments = $this->___getArgumentsFromURL( urldecode( $_GET[ 'uri' ] ) );
-        AmazonAutoLinks_Debug::dump( $_aArguments );
+        // AmazonAutoLinks_Debug::dump( $_aArguments );
         AmazonAutoLinks( $_aArguments );
 
     }
