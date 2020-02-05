@@ -178,7 +178,9 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
             AmazonAutoLinks_Debug::dump( $_REQUEST );
             return;
         }
-        AmazonAutoLinks( $this->___getArgumentsFromURL( urldecode( $_GET[ 'uri' ] ) ) );
+        $_aArguments = $this->___getArgumentsFromURL( urldecode( $_GET[ 'uri' ] ) );
+        AmazonAutoLinks_Debug::dump( $_aArguments );
+        AmazonAutoLinks( $_aArguments );
 
     }
         /**
@@ -202,19 +204,13 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
                 return AmazonAutoLinks_Unit_Utility::getASINFromURL( $sURL );
             }
             private function ___getLocaleFromURL( $sURL ) {
-//                $_aSearch = array(
-//                    'www.', 'amazon.'
-//                );
-                //                $_sDomain = str_ireplace($_aSearch, '', parse_url( $sURL, PHP_URL_HOST ) );
                 $_sDomain = parse_url( $sURL, PHP_URL_HOST );
                 $_bisKey  = array_search( $_sDomain, AmazonAutoLinks_Property::$aStoreDomains );
                 $_oOption = AmazonAutoLinks_Option::getInstance();
                 $_sDefaultLocale = $_oOption->get( array( 'unit_default', 'country' ), 'US' );
                 return false === $_bisKey
                     ? $_sDefaultLocale
-                    : AmazonAutoLinks_Property::$aStoreDomains[ $_bisKey ];
-
-
+                    : $_bisKey;
             }
 
 }
