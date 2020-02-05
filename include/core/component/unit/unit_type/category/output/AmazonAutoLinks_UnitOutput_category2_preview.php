@@ -16,6 +16,7 @@
  *
  * @package     Amazon Auto Links
  * @sicne  3.8.1
+ * @deprecated
  */
 class AmazonAutoLinks_UnitOutput_category2_preview extends AmazonAutoLinks_UnitOutput_category2 {
 
