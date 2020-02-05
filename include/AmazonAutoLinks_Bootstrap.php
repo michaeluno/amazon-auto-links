@@ -258,6 +258,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             new AmazonAutoLinks_Loader_LinkConverter;
             new AmazonAutoLinks_DatabaseUpdater_Loader;
 
+            // 4.0.0
+            new AmazonAutoLinks__CustomOEmbed_Loader;
+
         }
             /**
              * @since       3.3.0
