@@ -171,7 +171,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * Returns the all associated options if no key is set; otherwise, the value of the specified key.
      *
      * @since       3
-     * @return
+     * @return mixed
      */
     public function get( /* $sKey1, $sKey2, $sKey3, ... OR $aKeys, $vDefault */ ) {
 

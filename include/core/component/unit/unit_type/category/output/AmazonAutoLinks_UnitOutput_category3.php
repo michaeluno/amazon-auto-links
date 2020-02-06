@@ -55,7 +55,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_sMethodName        = "_getItemsSorted_{$_sSortType}";
         $_aProducts          = $this->{$_sMethodName}( $_aProducts );
 
-        $_aProducts          = $this->___getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
+        $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
         return $_aProducts;
 
@@ -265,15 +265,16 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             /**
              * @param       array   $aItems
              * @since       3.9.0
+             * @since       4.0.0   Changed the scope to protected for the Embed unit type to extend this class.
              * @return      array
              */
-            private function ___getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
+            protected function _getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
 
                 // First Iteration - Extract displaying ASINs.
                 $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
                 $_aProducts    = array();
 
-                $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sLocale   = $sLocale ? $sLocale : strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
