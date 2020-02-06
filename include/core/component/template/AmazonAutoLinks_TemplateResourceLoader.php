@@ -61,11 +61,19 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         add_action( 
             'wp_enqueue_scripts', 
             array( $this, '_replyToEnqueueActiveTemplateStyles' ) 
-        );    
+        );
+        add_action(
+            'enqueue_embed_scripts',
+            array( $this, '_replyToEnqueueActiveTemplateStyles' )
+        ); // 4.0.0
         add_action(
             'wp_head',
             array( $this, '_replyToPrintActiveTemplateCustomCSSRules' )
         );
+        add_action(
+            'embed_head',
+            array( $this, '_replyToPrintActiveTemplateCustomCSSRules' )
+        ); // 4.0.0
     }
         /**
          * Enqueues activated templates' CSS file.
