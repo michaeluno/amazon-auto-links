@@ -52,13 +52,11 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
         );
         $_aAttributes = array(
             'src'           => esc_url( $_sIFrameURL ),
-            'sandbox'       => "allow-scripts",
-            'security'      => "restricted",
+            'sandbox'       => "allow-scripts allow-popups",
             'width'         => 600,
             'height'        => 200,
             'frameborder'   => '0',
             'scrolling'     => 'no',
-            'seamless'      => 'seamless',
             'marginwidth'   => '0',
             'marginheight'  => '0',
             'class'         => 'wp-embedded-content',
@@ -75,7 +73,6 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
             'author_url'    => 'https://en.michaeluno.jp',
             'provider_name' => 'Amazon Auto Links',
             'provider_url'  => site_url(),
-//            'html'  => "<figure>" . $_sIFrame . "</figure>",
             'html'  => $_sIFrame,
         );
 
