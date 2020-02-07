@@ -29,13 +29,11 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
     }
 
     public function get( $sTemplatePath=null ) {
-        return apply_filters(
-            "aal_filter_template_path",
-            isset( $sTemplatePath )
-                ? $sTemplatePath
-                : $this->___getTemplatePath( $this->___aUnitArguments ),
-            $this->___aUnitArguments
-        );
+        $_sTemplatePath = isset( $sTemplatePath )
+            ? $sTemplatePath
+            : $this->___getTemplatePath( $this->___aUnitArguments );
+        $_sTemplatePath = wp_normalize_path( $_sTemplatePath );
+        return apply_filters( "aal_filter_template_path", $_sTemplatePath, $this->___aUnitArguments );
     }
     /**
      * Finds the template path from the given arguments(unit options).
