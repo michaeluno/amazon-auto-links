@@ -270,7 +270,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     public function get( $aURLs=array(), $sTemplatePath=null ) {
 
-        $_aHooks = $this->___getHooksSetPerOutput();
+        $_aHooks            = $this->___getHooksSetPerOutput();
 
         $_aOptions          = $this->oOption->aOptions;
         $_aArguments        = $this->oUnitOption->get();
