@@ -80,25 +80,35 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
-        
+        $_aASINs = self::getASINs( $sText );
+        return empty( $_aASINs )
+            ? ''
+            : implode( $sDelimiter, $_aASINs );
+    }
+
+    /**
+     * @param string $sText
+     *
+     * @return array    An array holding found ASINs.
+     * @since   4.0.0
+     */
+    static public function getASINs( $sText ) {
         $sText = preg_replace(
             array(
                 '/[A-Z0-9]{11,}/',      // Remove strings like an ASIN but with more than 10 characters.
-                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers.
-            ), 
-            '', 
+                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers with heading `qid=`.
+            ),
+            '',
             $sText
         );
-                               
-        $_biResult = preg_match_all( 
+        $_biResult = preg_match_all(
             '/[A-Z0-9]{10}/', // needle - [A-Z0-9]{10} is the ASIN
             $sText,           // subject
             $_aMatches        // match container
         );
         return $_biResult && isset( $_aMatches[ 0 ] ) && is_array( $_aMatches[ 0 ] )
-            ? implode( $sDelimiter, array_unique( $_aMatches[ 0 ] ) )
-            : '';
-        
+            ? $_aMatches[ 0 ]
+            : array();
     }
     
     /**
