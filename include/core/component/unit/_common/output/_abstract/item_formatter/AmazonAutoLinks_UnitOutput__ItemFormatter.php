@@ -119,19 +119,22 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     }
 
         /**
-         * @param $sResponseDate
+         * @param integer|string $isResponseDate
          *
          * @return  int
          * @since   3.8.0
          */
-        private function ___getProductUpdatedTime( $sResponseDate ) {
-            if ( $sResponseDate ) {
-                return ( integer ) strtotime( $sResponseDate );
+        private function ___getProductUpdatedTime( $isResponseDate ) {
+            if ( is_numeric( $isResponseDate ) ) {
+                return ( integer ) $isResponseDate;
+            }
+            if ( $isResponseDate ) {
+                return ( integer ) strtotime( $isResponseDate );
             }
             $_sCacheModTime = $this->getElement( $this->___aCacheDBRow, 'modified_time' );
             $_iTime         = $this->___oUnitOutput->bDBTableAccess && $_sCacheModTime
                 ? strtotime( $_sCacheModTime )
-                : strtotime( $sResponseDate );
+                : strtotime( $isResponseDate );
             return ( integer ) $_iTime;
         }
 

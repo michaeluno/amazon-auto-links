@@ -19,9 +19,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
     /**
      * Stores modified dates for HTTP requests so these can be applied to the product updated date.
+     * @since   3.9.0
+     * @since   4.0.0   Changed the scope to protected as the Embed unit type extends this class and uses this property.
      * @var array
      */
-    private $___aModifiedDates = array();
+    protected $_aModifiedDates = array();
 
     /**
      * Fetches and returns the associative array containing the output of product links.
@@ -183,8 +185,8 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
              * @return      array
              */
             public function replyToCaptureUpdatedDate( $aCache, $iCacheDuration, $aArguments, $sRequestType ) {
-
-                $this->___aModifiedDates[ $aCache[ 'request_uri' ]  ] = $aCache[ '_modified_timestamp' ];
+                
+                $this->_aModifiedDates[ $aCache[ 'request_uri' ]  ] = $aCache[ '_modified_timestamp' ];
                 return $aCache;
 
             }
@@ -238,10 +240,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 foreach( $aHTMLs as $_sURL => $_sHTML ) {
                     $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
                     $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
-                    $_sModifiedDate   = $this->getElement( $this->___aModifiedDates, $_sURL );
+                    $_sModifiedDate   = $this->getElement( $this->_aModifiedDates, $_sURL );
                     foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
-                        // @todo the time may need to be formatted from the timestamp format,
-                        $_aFoundProducts[ $_sASIN ][ 'modified_date' ] = $_sModifiedDate;
+                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
                     }
                     $_aProducts       = $_aProducts + $_aFoundProducts;
                 }

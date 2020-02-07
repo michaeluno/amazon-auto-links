@@ -308,6 +308,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.0.0 =
+- Fixed a bug that category units did not show the updated date in the price disclaimer text.
+
 = 3.12.0 - 02/05/2019 =
 - Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
 - Optimized the caching mechanism to compress data.
