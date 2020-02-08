@@ -47,14 +47,12 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
 
-
-
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
                 'field_id'              => 'enabled',
                 'type'                  => 'revealer',
-                'title'                 => __( 'Enabled', 'amaozn-auto-links' ),
+                'title'                 => __( 'Enable', 'amaozn-auto-links' ),
                 'select_type'           => 'radio',
                 // 'show_title_column'     => false,
                 'label'                 => array(
