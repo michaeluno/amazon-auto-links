@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         return array(
             'tab_slug'  => 'default',
             'title'     => __( 'Default', 'amazon-auto-links' ),
+            'order'     => 30,
         );
     }
 

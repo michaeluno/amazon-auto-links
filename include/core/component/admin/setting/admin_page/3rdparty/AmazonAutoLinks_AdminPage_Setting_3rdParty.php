@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_3rdParty extends AmazonAutoLinks_AdminPa
         return array(
             'tab_slug'  => '3rd_party',
             'title'     => __( '3rd Party', 'amazon-auto-links' ),
+            'order'     => 60,
         );
     }
 

@@ -24,7 +24,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Tab extends AmazonAutoLinks_AdminPag
         return array(
             'tab_slug'  => 'link_converter',
             'title'     => __( 'Converter', 'amazon-auto-links' ),
-            'order'     => 13,
+            'order'     => 30,
         );
     }
 

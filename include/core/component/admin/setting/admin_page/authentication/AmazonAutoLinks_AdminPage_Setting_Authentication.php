@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication extends AmazonAutoLinks_A
         return array(
             'tab_slug'  => 'authentication',
             'title'     => __( 'Authentication', 'amazon-auto-links' ),
+            'order'     => 10,
         );
     }
 

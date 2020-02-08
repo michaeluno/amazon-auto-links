@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
         return array(
             'tab_slug'  => 'general',
             'title'     => __( 'General', 'amazon-auto-links' ),
+            'order'     => 20,
         );
     }
 

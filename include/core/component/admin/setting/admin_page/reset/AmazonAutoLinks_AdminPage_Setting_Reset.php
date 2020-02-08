@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_
         return array(
             'tab_slug'  => 'reset',
             'title'     => __( 'Reset', 'amazon-auto-links' ),
+            'order'     => 70,
         );
     }
 

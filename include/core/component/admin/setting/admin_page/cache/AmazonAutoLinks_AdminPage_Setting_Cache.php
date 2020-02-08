@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache extends AmazonAutoLinks_AdminPage_
         return array(
             'tab_slug'  => 'cache',
             'title'     => __( 'Cache', 'amazon-auto-links' ),
+            'order'     => 40,
         );
     }
 

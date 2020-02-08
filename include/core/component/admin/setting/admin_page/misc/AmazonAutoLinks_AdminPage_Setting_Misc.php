@@ -24,6 +24,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
         return array(
             'tab_slug'  => 'misc',
             'title'     => __( 'Misc', 'amazon-auto-links' ),
+            'order'     => 50,
         );
     }
 
