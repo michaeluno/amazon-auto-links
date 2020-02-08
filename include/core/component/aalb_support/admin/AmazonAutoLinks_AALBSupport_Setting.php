@@ -30,7 +30,7 @@ class AmazonAutoLinks_AALBSupport_Setting {
     
     /**
      * @return      void
-     * @callback    action      load_{page slug_{tab slug}
+     * @callback    action      load_{page slug}_{tab slug}
      */
     public function replyToLoadPage( $oFactory ) {
 
