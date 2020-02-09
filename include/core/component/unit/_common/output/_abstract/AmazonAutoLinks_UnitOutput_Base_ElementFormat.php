@@ -313,6 +313,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     }
 
     /**
+     * @param       string  The url to be linked.
      * @return      string
      * @since       3.3.0
      */

@@ -170,6 +170,7 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
      * Returns the specified option value.
      * 
      * @since       3
+     * @return      mixed
      */
     public function get( /* $sKey1, $sKey2, $sKey3, ... OR $aKeys, $vDefault */ ) {
         

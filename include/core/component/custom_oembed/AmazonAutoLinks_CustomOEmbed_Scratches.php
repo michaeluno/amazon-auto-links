@@ -13,8 +13,10 @@
  *
  * This enables the feature of oEmbed for links of Amazon stores.
  *
+ * @remark       This is for debugging. Should be removed.
  * @package      Amazon Auto Links
  * @since        4.0.0
+ * @deprecated
  */
 class AmazonAutoLinks_CustomOEmbed_Scratches {
 
@@ -54,7 +56,22 @@ class AmazonAutoLinks_CustomOEmbed_Scratches {
 
 //         add_filter( 'pre_oembed_result', array( $this, 'replyToGetCustomOutput' ), 10, 3 );
 
+//        add_filter( 'oembed_response_data', array( $this, 'debugOEmbedResponseData' ), 10, 4 );
+
+
     }
+
+    /**
+	 * @param array   $data   The response data.
+	 * @param WP_Post $post   The post object.
+	 * @param int     $width  The requested width.
+	 * @param int     $height The calculated height.
+     */
+    public function debugOEmbedResponseData( $data, $post, $width, $height ) {
+//AmazonAutoLinks_Debug::log( func_get_args() );
+        return $data;
+    }
+
 
     public function getOutputOfSomewhere( $aMatches, $aAttributes, $sURL, $aAttributesRaw ) {
         return $this->getDummyContent();

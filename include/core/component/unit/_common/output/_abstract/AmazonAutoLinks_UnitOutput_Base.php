@@ -32,6 +32,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     
     /**
      * Stores a plugin option object.
+     * @var AmazonAutoLinks_Option
      */ 
     public $oOption;
     

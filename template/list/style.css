@@ -328,9 +328,9 @@
 
 /* For Embedded Pages - amazon-auto-links/embed */
 .wp-embed .amazon-products-container-list .amazon-product-title {
-    font-size: 1.4em;
+    font-size: 1.36em;
     margin-top: 0;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
 }
 .wp-embed .amazon-products-container-list > .amazon-product-container .amazon-product-description {
     display: block;
@@ -340,4 +340,7 @@
 }
 .wp-embed .amazon-products-container-list .amazon-customer-rating-stars .review-stars {
     line-height: 2em;
+}
+.wp-embed .amazon-products-container-list > :last-child {
+    margin-bottom: 0;
 }

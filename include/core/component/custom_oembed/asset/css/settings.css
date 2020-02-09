@@ -1,0 +1,17 @@
+.country-flag {
+    margin-right: 0.6em;
+    vertical-align: middle;
+}
+.store-domain {
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* Tweak Admin Page Framework Style */
+.amazon-auto-links-section .form-table td .amazon-auto-links-field label {
+    display: inline-block;
+}
+
+.amazon-auto-links-section input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week] {
+    vertical-align: middle;
+}

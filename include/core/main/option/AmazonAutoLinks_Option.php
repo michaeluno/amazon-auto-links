@@ -148,6 +148,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'support' => 0,
             'template_conversion_map' => array(),
         ),
+
+        // 4.0.0
+        'custom_oembed' => array(
+            'enabled'               => true,
+            'use_iframe'            => true,
+            'external_provider'     => '',
+            'prioritize_associates_id_of_url' => true,
+        ),
     
         // 3.4.0+
         'unit_default'  => array(

@@ -11,11 +11,12 @@
 /**
  * Outputs for plugin custom oEmbed iframe requests.
  *
+ * This is necessary for Gutenberg embed blocks to render previews.
  *
  * @package      Amazon Auto Links
  * @since        4.0.0
  */
-class AmazonAutoLinks_CustomOEmbed_iFrame {
+class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
 
     /**
      *
@@ -53,6 +54,9 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
 
         if ( ! headers_sent() ) {
             header( 'X-WP-embed: true' );
+
+            // @todo if external site option is enabled add this
+            // header('Access-Control-Allow-Origin: *' );
         }
         ?>
         <!DOCTYPE html>
@@ -67,7 +71,7 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
             do_action( 'embed_head' );
             ?>
 
-            <base target="_blank">
+            <!--<base target="_blank">-->
         </head>
         <body <?php // body_class(); ?>>
         <?php
@@ -80,12 +84,6 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
     ?>
 	<div <?php post_class( 'wp-embed' ); ?>>
 
-<!--		<p class="wp-embed-heading">
-			<a href="<?php /*echo 'https://www.google.com'; */?>" target="_top">
-				<?php /*echo "TEST TITLE"; */?>
-			</a>
-		</p>-->
-
 		<div class="wp-embed-excerpt"><?php $this->___printProductOutput(); ?></div>
 
 		<?php
@@ -93,10 +91,8 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
 		 * Prints additional content after the embed excerpt.
 		 *
 		 */
-	//	do_action( 'embed_content' );
+		do_action( 'embed_content' );
 		?>
-
-
 	</div>
 <?php
     }
@@ -140,11 +136,14 @@ class AmazonAutoLinks_CustomOEmbed_iFrame {
      * @see print_embed_scripts()
      */
     public function printEmbedScripts() {
-        $type_attr = current_theme_supports( 'html5', 'script' ) ? '' : ' type="text/javascript"';
+        $_sTypeAttribute = current_theme_supports( 'html5', 'script' )
+            ? ''
+            : ' type="text/javascript"';
         ?>
-        <script<?php echo $type_attr; ?>>
+        <script<?php echo $_sTypeAttribute; ?>>
         <?php
-            readfile( dirname( __FILE__ ) . '/asset/js/wp-embed-template-lite.js' );
+            $_sComponentDirPath = AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath;
+            readfile( $_sComponentDirPath . '/asset/js/wp-embed-template-lite.js' );
         ?>
         </script>
         <?php

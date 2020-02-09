@@ -332,26 +332,19 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         ); 
         return $_sFormattedPrice;
 
-    }    
-    
+    }
+
     /**
-     * Extract the sub-image (image-set) information from PA API response and generates the output.
+     * @param array     $aImageURLs     A numerically index array holding sub-image URLs.
+     * @param string    $sTitle         The product title.
+     * @param string    $sProductURL    The product URL.
      *
-     * @since       3           Originally defined in `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
-     * @since       3.8.11      Renamed from `___getFormattedOutput()` and moved from `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
-     * @return      string
+     * @return      string  An HTML portion of a set of sub-images.
+     * @since       4.0.0
      */
-    static public function getSubImages( array $aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
-
-        if ( empty( $aImages ) ) {
-            return '';
-        }
-        $sTitle    = strip_tags( $sTitle );
-
-        // Extract image urls
-        $_aImageURLs    = self::___getSubImageURLs( $aImages, $iMaxImageSize, $iMaxNumberOfImages );
+    static public function getSubImageOutput( array $aImageURLs, $sTitle, $sProductURL ) {
         $_aSubImageTags = array();
-        foreach( $_aImageURLs as $_sImageURL ) {
+        foreach( $aImageURLs as $_sImageURL ) {
             $_sImageTag = self::getHTMLTag(
                 'img',
                 array(
@@ -378,6 +371,31 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             );
         }
         return "<div class='sub-images'>" . implode( '', $_aSubImageTags ) . "</div>";
+    }
+
+    /**
+     * Extract the sub-image (image-set) information from PA API response and generates the output.
+     *
+     * @param array   $aImages         The extracted image array from a PA-API response.
+     * @param string  $sProductURL
+     * @param string  $sTitle
+     * @param integer $iMaxImageSize
+     * @param integer $iMaxNumberOfImages
+     *
+     * @return      string
+     * @since       3           Originally defined in `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
+     * @since       3.8.11      Renamed from `___getFormattedOutput()` and moved from `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
+     */
+    static public function getSubImages( array $aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
+
+        if ( empty( $aImages ) ) {
+            return '';
+        }
+        return self::getSubImageOutput(
+            self::___getSubImageURLs( $aImages, $iMaxImageSize, $iMaxNumberOfImages ),  // extract image urls
+            strip_tags( $sTitle ),
+            $sProductURL
+        );
 
     }
 

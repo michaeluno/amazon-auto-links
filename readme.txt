@@ -309,6 +309,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.0 =
+- Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Changed the default template to `List` for all the unit types.
 - Fixed a bug that category units did not show the updated date in the price disclaimer text.
 
