@@ -26,14 +26,14 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         'ASIN'          => '',
 
         // optional
-        'thumbnail_url' => '',
-        'image_set'     => '',    // (string) sub-image set output
+        'thumbnail_url' => null,
+        'image_set'     => null,    // (string) sub-image set output
         'title'         => '',
-        'rating'        => '',    // (string) partial HTML string
+        'rating'        => null,    // (string) partial HTML string
         'rating_point'  => null,  // (integer)
         'review_count'  => null,  // (integer)
-        'price'         => '',    // (string) formatted price e.g. $35.43
-        'feature'       => '',    // (string) a list of product features
+        'price'         => null,    // (string) formatted price e.g. $35.43
+        'feature'       => null,    // (string) a list of product features
 
         // internal
         '_features'     => array(), // (array) the product features
@@ -290,17 +290,14 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          */
         private function ___getProductImages( DOMXPath $oXPath, DOMNode $oItemNode ) {
             $_aImages           = array();
-            $_oImageContainers  = $oXPath->query( './/div[@id="altImages"]', $oItemNode );
-            $_noImageContainer  = $_oImageContainers->item( 0 );
-            if ( null === $_noImageContainer ) {
-                $_noImageContainer  = $oXPath->query( './/div[@id="imageBlock"]', $oItemNode )->item( 0 );
-                if ( null === $_noImageContainer ) {
-                    return $_aImages;
-                }
+            $_oSRCs             = $oXPath->query( './/div[@id="altImages"]//img/@src', $oItemNode );
+            if ( ! $_oSRCs->length  ) {
+                $_oSRCs = $oXPath->query( './/div[@id="imageBlock"]//img/@src', $oItemNode );
             }
-            $_oSRCs             = $oXPath->query( './/img/@src', $_noImageContainer );
+//            $_oNodes = $oXPath->query( './/div[@id="altImages"]' );
+//AmazonAutoLinks_Debug::log( $_oNodes->length );
             foreach( $_oSRCs as $_oAttribute ) {
-                $_aImages[] = $_oAttribute->nodeValue;
+                $_aImages[] = trim( $_oAttribute->nodeValue );
             }
             return $_aImages;
         }

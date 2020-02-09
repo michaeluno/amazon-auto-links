@@ -370,7 +370,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                 $_sATag
             );
         }
-        return "<div class='sub-images'>" . implode( '', $_aSubImageTags ) . "</div>";
+        return empty( $aImageURLs )
+            ? ''
+            : "<div class='sub-images'>" . implode( '', $_aSubImageTags ) . "</div>";
     }
 
     /**
@@ -589,8 +591,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             }
             $_sList .= "<li class='feature'>$_sFeature</li>";
         }
-        $_sOutput = "<ul class='features'>" . $_sList . "</ul>";
-        return $_sOutput;
+        return $_sList
+            ? "<ul class='features'>" . $_sList . "</ul>"
+            : '';
     }
 
     /**
