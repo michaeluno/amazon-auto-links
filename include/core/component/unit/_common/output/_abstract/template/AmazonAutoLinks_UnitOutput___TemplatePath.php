@@ -52,14 +52,14 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
      */
     private function ___getTemplatePath( $aArguments ) {
 
-        // If it is set in a request, use it.
+        // Case: a template path is given.
         if ( isset( $aArguments[ 'template_path' ] ) && file_exists( $aArguments[ 'template_path' ] ) ) {
             return $aArguments[ 'template_path' ];
         }
 
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
 
-        // If a template name is given in a request
+        // Case: a template name is given.
         if ( isset( $aArguments[ 'template' ] ) && $aArguments[ 'template' ] ) {
             foreach( $_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
                 if ( strtolower( $_aTemplate[ 'name' ] ) == strtolower( trim( $aArguments[ 'template' ] ) ) ) {
@@ -68,19 +68,40 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
             }
         }
 
-        // If a template ID is given,
+        // Case: a template ID is given.
         if ( isset( $aArguments[ 'template_id' ] ) && $aArguments[ 'template_id' ] ) {
-            foreach( $_oTemplateOption->getActiveTemplates() as $_sID => $_aTemplate ) {
-                if ( $_sID == trim( $aArguments[ 'template_id' ] ) ) {
-                    return $_aTemplate[ 'template_path' ];
-                }
+            $_sTemplatePath = $this->___getTemplatePathFromID( $aArguments[ 'template_id' ], $_oTemplateOption );
+            if ( $_sTemplatePath ) {
+                return $_sTemplatePath;
             }
         }
 
         // Not found. In that case, use the default one.
-        return $this->___getDefaultTemplatePath();
+        $_sUnitType   = $this->getElement( $aArguments, 'unit_type' );
+        $_oOption     = AmazonAutoLinks_Option::getInstance();
+        $_sTemplateID = $_oOption->get( array( 'unit_default', 'template_id' ), '' );
+        $_sTemplateID = $_sTemplateID
+            ? $_sTemplateID
+            : $_oTemplateOption->getDefaultTemplateIDByUnitType( $_sUnitType );
+        return $this->___getTemplatePathFromID( $_sTemplateID, $_oTemplateOption );
 
     }
+
+        /**
+         * @param string $sTemplateID
+         * @param AmazonAutoLinks_TemplateOption $oTemplateOption
+         *
+         * @return string
+         * @since   4.0.0
+         */
+        private function ___getTemplatePathFromID( $sTemplateID, AmazonAutoLinks_TemplateOption $oTemplateOption ) {
+            foreach( $oTemplateOption->getActiveTemplates() as $_sID => $_aTemplate ) {
+                if ( $_sID === trim( $sTemplateID ) ) {
+                    return $_aTemplate[ 'template_path' ];
+                }
+            }
+            return '';
+        }
         /**
          *
          * @remark      Each unit has to define its own default template.
@@ -88,6 +109,7 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
          * @since       3.5.0       Renamed from `getDefaultTemplatePath()`.
          * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base`.
          * @return      string
+         * @deprecated  4.0.0
          */
         private function ___getDefaultTemplatePath() {
             $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
