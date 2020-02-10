@@ -308,17 +308,17 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 3.12.0 - 02/05/2019 =
+= 3.12.0 - 02/05/2020 =
 - Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
 - Optimized the caching mechanism to compress data.
 
-= 3.11.1 - 01/29/2019 =
+= 3.11.1 - 01/29/2020 =
 - Added options to select cache tables when clearing caches from the `Cache` screen.
 - Fixed a bug with some locales that rating stars were not displayed.
 - Fixed a bug that `Country` unit option was not property set for some cases.
 - Fixed a bug with some unit options for the `Product Search` unit type.
 
-= 3.11.0 - 01/25/2019 =
+= 3.11.0 - 01/25/2020 =
 - Optimized item look-up (GetItems) PA-API requests.
 - Added the ability to capture Amazon Associates Link Builder block contents and shortcodes.
 - Tweaked the layout of the Error Log screen.
