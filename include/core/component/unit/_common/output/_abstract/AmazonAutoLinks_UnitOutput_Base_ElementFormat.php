@@ -55,7 +55,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_aDBProductRow
             );
             $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
-            $_aProduct[ 'formed_item' ]    = $_aProduct[ 'formatted_item' ];   // backward compatibility
 
         }
         return $aProducts;
@@ -159,7 +158,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_aProduct[ 'title' ]        = $_oTitleFormatter->get();
             if ( $_sNativeTitle !== $_aProduct[ 'title' ] ) {
                 $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
-                $_aProduct[ 'formed_title' ]  = $_aProduct[ 'formatted_title' ];  // backward compatibility
             }
 
             // Let unit types that need to use the data from database rows access them.

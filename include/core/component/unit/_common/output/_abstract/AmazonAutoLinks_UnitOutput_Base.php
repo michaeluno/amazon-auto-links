@@ -385,17 +385,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @param       string      $sTemplatePath
          * @since       3.5.0
          * @return      void
-         * @callback    self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
+         * @callback    method      self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
          * @remark      Not using include_once() because templates can be loaded multiple times.
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
 
             if ( file_exists( $sTemplatePath ) ) {
-
-                // Backward compatibility (old format variable names)
-                $arrArgs       = $aArguments;
-                $arrOptions    = $aOptions;
-                $arrProducts   = $aProducts;
 
                 // Include the template
                 defined( 'WP_DEBUG' ) && WP_DEBUG ? include( $sTemplatePath ) : @include( $sTemplatePath );
