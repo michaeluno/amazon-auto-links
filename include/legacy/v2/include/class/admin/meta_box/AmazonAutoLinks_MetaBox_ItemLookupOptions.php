@@ -1,2 +1,0 @@
-<?php
-class AmazonAutoLinks_MetaBox_ItemLookupOptions extends AmazonAutoLinks_MetaBox_ItemLookupOptions_  {}

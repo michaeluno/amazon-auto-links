@@ -308,23 +308,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 }
 AmazonAutoLinks_Registry::setUp( __FILE__ );
 
-
-/**
- * Determine whether to load v2 or v3.
- * 
- * If the v3 option array does not exist and v2 option array exists, include v2.
- * If the user installs v3 for the first time, v3 will be loaded.
- * If the user updated from v2, v2 will loaded and if the user updates the option, then v3 will be loaded.
- */
-if ( 
-    false === get_option( 'amazon_auto_links', false ) 
-    && false !== get_option( 'amazon_auto_links_admin', false )
-) {
-    include( dirname( __FILE__ ) . '/include/legacy/v2/amazon-auto-links.php' );
-    return;
-}
-
-// Otherwise, load v3 - run the bootstrap script.    
+// Otherwise, load v3 - run the bootstrap script.
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
 include( dirname( __FILE__ ).'/include/AmazonAutoLinks_Bootstrap.php' );
 new AmazonAutoLinks_Bootstrap(

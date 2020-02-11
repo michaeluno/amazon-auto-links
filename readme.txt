@@ -312,6 +312,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Changed the default template to `List` for all the unit types.
 - Fixed a bug that category units did not show the updated date in the price disclaimer text.
+- Removed legacy code for v2 or earlier.
 
 = 3.12.0 - 02/05/2019 =
 - Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
