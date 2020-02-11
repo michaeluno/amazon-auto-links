@@ -64,6 +64,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_sLocale      = $this->___getLocaleFromURL( $_sURL );
         $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
         $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
+        $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
         return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
     }
