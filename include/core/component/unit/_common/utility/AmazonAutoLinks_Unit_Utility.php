@@ -339,7 +339,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param string    $sTitle         The product title.
      * @param string    $sProductURL    The product URL.
      *
-     * @return      string  An HTML portion of a set of sub-images.
+     * @return      string|null  An HTML portion of a set of sub-images.
      * @since       4.0.0
      */
     static public function getSubImageOutput( array $aImageURLs, $sTitle, $sProductURL ) {
@@ -371,7 +371,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             );
         }
         return empty( $aImageURLs )
-            ? ''
+            ? null
             : "<div class='sub-images'>" . implode( '', $_aSubImageTags ) . "</div>";
     }
 

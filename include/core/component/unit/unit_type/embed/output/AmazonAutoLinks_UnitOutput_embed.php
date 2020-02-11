@@ -85,7 +85,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
             $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sURL );
             $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
-                implode( ' ', $_aProduct[ '_features' ] ),
+                isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : implode( ' ', $_aProduct[ '_features' ] ),
                 $this->oUnitOption->get( 'description_length' ),
                 $this->_getReadMoreText( $_aProduct[ 'product_url' ] )
             );
