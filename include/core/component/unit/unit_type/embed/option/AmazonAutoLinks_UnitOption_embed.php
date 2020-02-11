@@ -21,8 +21,9 @@ class AmazonAutoLinks_UnitOption_embed extends AmazonAutoLinks_UnitOption_Base {
      */
     static public $aStructure_Default = array(
         'uri'                  => '',   // (string) The URL passed to oEmbed iframe request.
-        'maxwidth'             => 600,  // (integer) the iframe width in pixel
-        'maxheight'            => 320,  // (integer) the iframe height in pixel
+        // @deprecated not used at the moment
+//        'maxwidth'             => 600,  // (integer) the iframe width in pixel
+//        'maxheight'            => 320,  // (integer) the iframe height in pixel
     );
 
 }
