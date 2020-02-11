@@ -53,7 +53,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             if ( $_iIndex > $_iCount ) {
                 break;
             }
-            // multiple ASINs can be embeded in a single URL like https://amazon.com/dp/ABCDEFGHIJ?tag=my-associate-21,ABCDEFGHI2,ABCDEFGHI3
+            // multiple ASINs can be embedded in a single URL like https://amazon.com/dp/ABCDEFGHIJ?tag=my-associate-21,ABCDEFGHI2,ABCDEFGHI3
             $_aASINs       = $this->getASINs( $_sURL );
             $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
             foreach( $_aASINs as $_sASIN ) {

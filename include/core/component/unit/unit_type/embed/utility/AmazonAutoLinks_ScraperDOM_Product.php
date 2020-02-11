@@ -37,6 +37,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
 
         // internal
         '_features'     => array(), // (array) the product features
+
     );
 
     /**
@@ -66,15 +67,14 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         $this->_aProduct[ 'product_url' ] = $sURL;
 
     }
-
-    /**
-     * @param array $aArguments
-     * @return array
-     */
-    public function replyToGetHTTPRequestArguments( $aArguments ) {
-        $aArguments[ 'timeout' ] = 15; // the default is 5 (seconds) and it often times out
-        return $aArguments;
-    }
+        /**
+         * @param array $aArguments
+         * @return array
+         */
+        public function replyToGetHTTPRequestArguments( $aArguments ) {
+            $aArguments[ 'timeout' ] = 15; // the default is 5 (seconds) and it often times out
+            return $aArguments;
+        }
 
     /**
      * @param string $sAssociateID
@@ -85,9 +85,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
     public function get( $sAssociateID, $sSiteDomain ) {
 
         $_aProduct   = $this->_aProduct;
-
         $_oXPath     = $this->_oXPath;
-
 
         $_noItemNode = $this->oDoc->getElementsByTagName( 'body' )->item( 0 );
         if ( ! $_noItemNode ) {
@@ -101,7 +99,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         // Optional
         $_aProduct[ 'title' ]               = $this->___getProductTitle( $_oXPath, $_oItemNode );
         $_aImages                           = $this->___getProductImages( $_oXPath, $_oItemNode );
-        $_aProduct[ 'thumbnail_url' ]       = array_shift($_aImages );  // extract the first array item
+        $_aProduct[ 'thumbnail_url' ]       = $this->___getThumbnailURLFormatted( array_shift($_aImages ) );  // extract the first array item
         $_aProduct[ 'image_set' ]           = $this->_oUtil->getSubImageOutput( $_aImages, $_aProduct[ 'title' ], $_aProduct[ 'product_url' ] );
 
         $_aProduct[ '_features' ]           = $this->___getFeatures( $_oXPath, $_oItemNode );   // internal element which will be unset later on
@@ -126,19 +124,6 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         return $_aProduct;
 
     }
-        /**
-         * @param DOMXPath $oXPath
-         *
-         * @return DOMNode|null
-         */
-        private function ___getItemNode( DOMXPath $oXPath ) {
-
-            $_oContainerNodes = $oXPath->query( '//body' );
-            if ( ! $_oContainerNodes->length ) {
-                return null;
-            }
-            return $_oContainerNodes->item( 0 );
-        }
 
         /**
          * @param $_sRelativeURL
@@ -155,13 +140,13 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             );
         }
 
-    /**
-     *
-     * @param DOMXPath $oXPath
-     * @param DOMNode $oItemNode
-     *
-     * @return  string
-     */
+        /**
+         *
+         * @param DOMXPath $oXPath
+         * @param DOMNode $oItemNode
+         *
+         * @return  string
+         */
         protected function _getPrice( DOMXPath $oXPath, DOMNode $oItemNode ) {
             $_noNode = $oXPath->query( './/span[@id="priceblock_ourprice"]', $oItemNode )->item( 0 );
             if ( null === $_noNode ) {
@@ -176,23 +161,14 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                     . "</span>"
                 . "</span>";
 
-            // @deprecated
-//            foreach( $_oNodes as $_oNode ) {
-//                return "<span class='amazon-prices'>"
-//                        . "<span class='offered-price'>"
-//                            . trim( $_oNode->nodeValue )
-//                        . "</span>"
-//                    . "</span>";
-//            }
-//            return '';
         }
 
-    /**
-     * @param DOMXPath $oXPath
-     * @param DOMNode $oRatingNode
-     *
-     * @return int|null
-     */
+        /**
+         * @param DOMXPath $oXPath
+         * @param DOMNode $oRatingNode
+         *
+         * @return int|null
+         */
         protected function _getReviewCount( DOMXPath $oXPath, DOMNode $oRatingNode ) {
             $_oNodes = $oXPath->query( './/a[not(contains(@title, "5"))]', $oRatingNode );
             foreach( $_oNodes as $_oNode ) {
@@ -283,6 +259,21 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         }
 
         /**
+         * `CR..._` part in the URL needs to be removed.
+         * e.g. https://images-na.ssl-images-amazon.com/images/I/41KBEESJReL._AC_SX150_SY150_CR,0,0,150,150_.jpg
+         *  -> https://images-na.ssl-images-amazon.com/images/I/41KBEESJReL._AC_SX150_SY150_.jpg
+         * @param   string  $sThumbnailURL
+         * @return  string
+         * @todo    Handle cases that a base64 encoded string is passed.
+         */
+        private function ___getThumbnailURLFormatted( $sThumbnailURL ) {
+            $_sFileName = basename( $sThumbnailURL );
+            $_sURLWithoutFileName = str_replace( $_sFileName, '', $sThumbnailURL );
+            $_sFileName = preg_replace( '/_\KCR.+_/', '', $_sFileName );
+            return $_sURLWithoutFileName . $_sFileName;
+        }
+
+        /**
          * @param $oXPath
          * @param $oItemNode
          *
@@ -294,8 +285,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             if ( ! $_oSRCs->length  ) {
                 $_oSRCs = $oXPath->query( './/div[@id="imageBlock"]//img/@src', $oItemNode );
             }
-//            $_oNodes = $oXPath->query( './/div[@id="altImages"]' );
-//AmazonAutoLinks_Debug::log( $_oNodes->length );
+
             foreach( $_oSRCs as $_oAttribute ) {
                 $_aImages[] = trim( $_oAttribute->nodeValue );
             }
