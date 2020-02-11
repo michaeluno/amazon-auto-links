@@ -84,6 +84,10 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
             remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
 
+            if ( empty( $_aProduct ) ) {
+                return $_aProduct;
+            }
+
             $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sURL );
             $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
                 isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : implode( ' ', $_aProduct[ '_features' ] ),

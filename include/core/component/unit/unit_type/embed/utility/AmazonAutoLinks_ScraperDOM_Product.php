@@ -90,9 +90,13 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
 
         $_noItemNode = $this->oDoc->getElementsByTagName( 'body' )->item( 0 );
         if ( ! $_noItemNode ) {
-            return $_aProduct;
+            return array();
         }
         $_oItemNode  = $_noItemNode;
+
+        if ( $this->___isBlockedByCaptcha( $_oXPath, $_oItemNode ) ) {
+            return array();
+        }
 
         // Mandatory Elements
         $_aProduct[ 'ASIN' ]                = $this->_oUtil->getASINFromURL( $_aProduct[ 'product_url' ] );
@@ -145,6 +149,17 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                 array( 'tag' => $sAssociateID ),
                 $_sURL
             );
+        }
+
+        /**
+         * @param DOMXPath $oXPath
+         * @param DOMNode $oItemNode
+         *
+         * @return bool
+         */
+        private function ___isBlockedByCaptcha( DOMXPath $oXPath, DOMNode $oItemNode ) {
+            $_noNode = $oXPath->query( './/form[@action="/errors/validateCaptcha"]', $oItemNode )->item( 0 );
+            return null !== $_noNode;
         }
 
         /**
