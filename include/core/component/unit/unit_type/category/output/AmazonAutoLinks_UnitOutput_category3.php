@@ -459,32 +459,6 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                 }
 
-                    /**
-                     * Formats the thumbnail URL
-                     * @param $sRawImageURL
-                     * @param $iImageSize
-                     * @return string
-                     * @deprecated
-                     */
-//                    private function ___getThumbnailURL( $sRawImageURL, $iImageSize ) {
-                        // return $this->getProductLinkURLFormatted( $sURL, $sASIN );
-//                        return $this->getImageURLBySize( $sRawImageURL, $iImageSize );
-                        // return $sRawImageURL;
-//                        $this->formatImages(
-//                            $_oDoc,
-//                            array(
-//                                'alt'   => $_aProduct[ 'title' ],
-//                                'title' => $_aProduct[ 'text_description' ]
-//                            )
-//                        );
-
-                        // Thumbnail image
-//                        $_aProduct[ 'thumbnail_url' ] = $this->getThumbnail(
-//                            $_oDoc,
-//                            $this->oUnitOption->get( 'image_size' )
-//                        );
-//                    }
-
 
     /**
      * Called when the unit has access to the plugin custom database table.
