@@ -224,8 +224,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     ),
                     $this->sUnitType . '_unit_type' // request type
                 );
-                $_aHTMLs = $_oHTTP->get();
-                return $_aHTMLs;
+                return $_oHTTP->get();
             }
 
             /**
@@ -264,10 +263,14 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             }
 
             /**
-             * @param       array   $aItems
+             * @param array   $aItems
+             * @param string  $sLocale       The `country` unit argument value
+             * @param string  $sAssociateID
+             * @param integer $iCount
+             *
+             * @return      array
              * @since       3.9.0
              * @since       4.0.0   Changed the scope to protected for the Embed unit type to extend this class.
-             * @return      array
              */
             protected function _getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
 
@@ -337,7 +340,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     } catch ( Exception $_oException ) {
 
                         // Recursive call
-                        $_aAdditionalProducts = $this->___getProducts(
+                        $_aAdditionalProducts = $this->_getProducts(
                             $aItems,
                             $_sLocale,
                             $_sAssociateID,
@@ -458,6 +461,32 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     return $_aProduct;
 
                 }
+
+                    /**
+                     * Formats the thumbnail URL
+                     * @param $sRawImageURL
+                     * @param $iImageSize
+                     * @return string
+                     * @deprecated
+                     */
+//                    private function ___getThumbnailURL( $sRawImageURL, $iImageSize ) {
+                        // return $this->getProductLinkURLFormatted( $sURL, $sASIN );
+//                        return $this->getImageURLBySize( $sRawImageURL, $iImageSize );
+                        // return $sRawImageURL;
+//                        $this->formatImages(
+//                            $_oDoc,
+//                            array(
+//                                'alt'   => $_aProduct[ 'title' ],
+//                                'title' => $_aProduct[ 'text_description' ]
+//                            )
+//                        );
+
+                        // Thumbnail image
+//                        $_aProduct[ 'thumbnail_url' ] = $this->getThumbnail(
+//                            $_oDoc,
+//                            $this->oUnitOption->get( 'image_size' )
+//                        );
+//                    }
 
 
     /**
