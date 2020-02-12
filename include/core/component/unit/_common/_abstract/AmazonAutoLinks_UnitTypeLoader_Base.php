@@ -37,6 +37,8 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
      * Determines whether the unit type requires the PA API access.
      * @var bool
      * @since   3.9.0
+     * @todo    Research: callbacks for the filter, `aal_filter_unit_type_is_api_access_required_{unit type slug}`, seems to access this property but the filter does not seem to be applied anywhere.
+     * Although the `category` unit type set this value to `false`, it also uses PA-API when API keys are set and encounters null value elements.
      */
     public $bRequirePAAPI = true;
     
