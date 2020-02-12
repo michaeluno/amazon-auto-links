@@ -39,7 +39,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     /**
      * Fetches product data and returns the associative array containing the output of product links.
      *
-     *AmazonAutoLinks_ScraperDOM_Product @param array $aURLs
+     * @param array $aURLs
      * @return            array            An array contains products.
      */
     public function fetch( $aURLs=array() ) {
