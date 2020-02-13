@@ -246,7 +246,7 @@ Remove the files besides `style.css` and `template.php` as other files are optio
 
 <h5><strong>Step 3</strong></h5>
 
-Edit `style.css` and `template.php` to customize the layout.
+Edit `style.css` and `telease upgrademplate.php` to customize the layout.
 
 <h5><strong>Step 4</strong></h5>
 
