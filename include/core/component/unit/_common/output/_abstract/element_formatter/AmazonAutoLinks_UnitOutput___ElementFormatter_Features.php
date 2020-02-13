@@ -22,8 +22,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoL
      */
     public function get() {
 
-        // For search-type units, this value is already set with API response.
-        if ( $this->_aProduct[ 'feature' ] ) {
+        // For search-type and feed units, this value is already set.
+        if ( isset ( $this->_aProduct[ 'feature' ] ) ) {
             return $this->_aProduct[ 'feature' ];
         }
 

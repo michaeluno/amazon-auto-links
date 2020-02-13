@@ -129,7 +129,6 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {
                     return;
                 }
-
                 $_sLocale   = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sCurrency = $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage = $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );

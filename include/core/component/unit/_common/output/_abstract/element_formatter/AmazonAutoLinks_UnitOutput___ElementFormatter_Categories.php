@@ -22,8 +22,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
      */
     public function get() {
 
-        // For search-type units, this value is already set with the API response.
-        if ( $this->_aProduct[ 'category' ] ) {
+        // For search-type and feed units, this value is already set.
+        if ( isset( $this->_aProduct[ 'category' ] ) ) {
             return $this->_aProduct[ 'category' ];
         }
 

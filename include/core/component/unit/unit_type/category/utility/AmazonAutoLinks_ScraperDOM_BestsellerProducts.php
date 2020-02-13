@@ -25,7 +25,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         'rating'            => null,    // (string) partial HTML string
         'rating_point'      => null,    // (integer)
         'review_count'      => null,    // (integer)
-        'formatted_price'   => null,
+        'formatted_price'   => null,    // (string) HTML formatted price
         'is_prime'          => null,
     );
 

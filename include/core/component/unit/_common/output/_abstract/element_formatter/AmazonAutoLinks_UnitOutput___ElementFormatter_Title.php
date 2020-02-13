@@ -22,6 +22,11 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Title extends AmazonAutoLink
      */
     public function get() {
 
+        // For feed units, the database should not be accessed.
+        if ( isset( $this->_aProduct[ 'formatted_title' ] ) ) {
+            return $this->getTitleSanitized( $this->_aProduct[ 'title' ], $this->_oUnitOption->get( 'title_length' ) );
+        }
+
         // Check if the preferred language is the default language for the locale.
         // If not, try to use the title value set in the database as it can written in the preferred language.
         $_sPreferredLanguage = $this->_oUnitOption->get( 'language' );

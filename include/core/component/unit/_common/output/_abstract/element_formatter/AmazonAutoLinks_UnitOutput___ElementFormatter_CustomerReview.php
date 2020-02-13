@@ -30,6 +30,11 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview extends Amazo
             return '';
         }
 
+        // 4.0.0 Feed units already has the value.
+        if ( isset( $this->_aProduct[ 'customer_reviews' ] ) ) {
+            return $this->_aProduct[ 'customer_reviews' ];
+        }
+
         $_snEncodedHTML = $this->_getCell( 'customer_reviews' );
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(

@@ -23,7 +23,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet extends AmazonAutoL
     public function get() {
 
         // 3.8.11 For search-type units, this value is already set with API response.
-        if ( $this->_aProduct[ 'image_set' ] ) {
+        // 4.0.0 Also the feed units have the value already
+        if ( isset( $this->_aProduct[ 'image_set' ] ) ) {
             return $this->_aProduct[ 'image_set' ];
         }
 
