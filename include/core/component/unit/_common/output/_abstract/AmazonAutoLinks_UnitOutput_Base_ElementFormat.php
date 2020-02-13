@@ -367,9 +367,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
     /**
      * Formats a button.
-     * 
-     * @since       3
+     *
+     * @param integer        $iButtonType
+     * @param integer|string $isButtonID
+     * @param string         $sProductURL
+     * @param string         $sASIN
+     * @param string         $sLocale
+     * @param string         $sAssociateID
+     * @param string         $sAccessKey
+     *
      * @return      string
+     * @since       3
      */
     protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey ) {
         switch( ( integer ) $iButtonType ) {
@@ -385,25 +393,37 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             default:
             case 0:
                 return $this->_getLinkButton(
-                    $iButtonType, 
-                    $isButtonID, 
-                    $sProductURL
+                    $isButtonID, $sProductURL
                 );
             
         }
-    }    
+    }
+
         /**
+         * @param string|integer $isButtonID
+         * @param string         $sProductURL
+         *
+         * @return string
          * @since       3.1.0
          */
-        protected function _getLinkButton( $iButtonType, $isButtonID, $sProductURL ) {
+        protected function _getLinkButton( $isButtonID, $sProductURL ) {
             $sProductURL = esc_url( $sProductURL );
             return "<a href='{$sProductURL}' target='_blank' rel='nofollow noopener'>"
                     . $this->getButton( $isButtonID )
                 . "</a>";            
             
         }
+
         /**
          * Returns an add to cart button.
+         *
+         * @param string $sASIN
+         * @param string $sLocale
+         * @param string $sAssociateID
+         * @param string|integer $isButtonID
+         * @param string $sAccessKey
+         *
+         * @return string
          * @since       3.1.0
          */
         protected function _getAddToCartButton( $sASIN, $sLocale, $sAssociateID, $isButtonID, $sAccessKey='' ) {            
@@ -432,7 +452,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
     /**
      * Formats the given url such as adding associate ID, ref=nosim, and link style.
-     * 
+     *
+     * @param string $sURL
+     * @param string $sASIN
+     * @param string $sLanguageCode
+     * @param string $sCurrency
+     *
      * @return      string
      * @since       unknown
      * @since       3.5.0       Changed the visibility scope from protected.

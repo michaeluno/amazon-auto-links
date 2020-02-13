@@ -114,44 +114,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
         return $_aResponse;
                  
     }
-        /**
-         * Sometimes Author data is found with an un-accessible url.
-         * In that case drop those items.
-         * @since       3.2.1
-         * @return      array
-         * @deprecated  3.9.0
-         */
-        private function ___getValidResponse( $aResponse ) {
-            
-            $_aItems = $this->getElement(
-                $aResponse,
-                array( 'Items', 'Item' )
-            );
-            if ( ! isset( $_aItems[ 0 ] ) ) {
-                $_aItems = array( $_aItems );
-            }
-            
-            foreach( $_aItems as $_iIndex => $_aItem ) {
-            
-                $_sProductType = $this->getElement(
-                    $_aItem,
-                    array( 'ItemAttributes', 'ProductTypeName' )
-                );            
 
-                // These product links are broken
-                // e.g. http://www.amazon.com/Amanda-Jaffe-Series/dp/B00CIZP3M0%3FSubscriptionId%3DAKIAIUOXXAXPYUKNVPVA%26tag%3Dmiunosoft-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00CIZP3M0
-                if ( in_array( $_sProductType, array( 'LITERARY_SERIES', 'CONTRIBUTOR_AUTHORITY_SET' ) ) ) {
-                    unset( $_aItems[ $_iIndex ] );
-                }
-                
-            }
-
-            // Reindex - important as some sob-routines check with `isAssociative()`.
-            $aResponse[ 'Items' ][ 'Item' ] = array_values( $_aItems );
-            return $aResponse;
-            
-        }
-    
     /**
      *
      * @see              http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html

@@ -38,7 +38,7 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
      */
     protected function getDefaultOptionStructure() {
         return array(
-                '_found_items' => __( 'Retriving items...', 'amazon-auto-links' ),
+                '_found_items' => __( 'Retrieving items...', 'amazon-auto-links' ),
             )
             + self::$aStructure_Default
             + parent::getDefaultOptionStructure();       

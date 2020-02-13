@@ -496,7 +496,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         /**
          * For backward compatibility for PA-API 4
-         * @param $sOperation
+         *
+         * @param string $sOperation
+         *
+         * @return string
          * @since   3.9.0
          */
         protected function _getOperation( $sOperation ) {
@@ -719,11 +722,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         throw new Exception( 'The product ASIN is black-listed: ' . $_sASIN );
                     }
                 }
-    
+
             /**
-             * @param   array   $aItem
-             * @since   3.5.0
+             * @param array $aItem
+             *
              * @return  string
+             * @throws Exception
+             * @since   3.5.0
              */
             private function ___getTitle( $aItem ) {
                 $_sTitle = $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
@@ -734,8 +739,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }
 
             /**
-             * @param       array       $aItem
+             * @param array $aItem
+             *
              * @return      string
+             * @throws Exception
              * @since       3.5.0
              */
             private function ___getThumbnailURL( $aItem ) {
@@ -763,10 +770,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         throw new Exception( 'No image is allowed: ' . $sThumbnailURL );
                     }
                 }
+
             /**
-             * @param $sContent
-             * @param $sProductURL
+             * @param string $sContent
+             * @param string $sProductURL
+             *
              * @return  string
+             * @throws Exception
              * @since   3.5.0
              */
             private function ___getDescription( $sContent, $sProductURL ) {
