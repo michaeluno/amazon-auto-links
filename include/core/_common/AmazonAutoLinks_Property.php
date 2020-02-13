@@ -257,7 +257,7 @@ final class AmazonAutoLinks_Property {
                     'EverythingElse' => __( 'Everything Else', 'amazon-auto-links' ),
                     'Fashion' => __( 'Clothing & Shoes', 'amazon-auto-links' ), 
                     'GiftCards' => __( 'Gift Cards', 'amazon-auto-links' ), 
-                    'HealthPersonalCare' =>	__( 'Health,  Household & Personal Care', 'amazon-auto-links' ),
+                    'HealthPersonalCare' =>    __( 'Health,  Household & Personal Care', 'amazon-auto-links' ),
                     'HomeAndKitchen' => __( 'Home & Kitchen', 'amazon-auto-links' ), 
                     'KindleStore' => __( 'Kindle Store', 'amazon-auto-links' ), 
                     'Lighting' => __( 'Lighting', 'amazon-auto-links' ), 

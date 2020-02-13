@@ -93,13 +93,13 @@ class AmazonAutoLinks_PostType_UnitPreview {
     }
       
     /**
-	 * @param       string      $output     The adjacent post link.
-	 * @param       string      $format     Link anchor format.
-	 * @param       string      $link       Link permalink format.
-	 * @param       WP_Post     $post       The adjacent post.
+     * @param       string      $output     The adjacent post link.
+     * @param       string      $format     Link anchor format.
+     * @param       string      $link       Link permalink format.
+     * @param       WP_Post     $post       The adjacent post.
      * @callback    filter      previous_post_link
      * @callback    filter      next_post_link
-	 */
+     */
     public function _replyToModifyPostLink( $sOutput, $format, $link, $oPost ) {
         
         if ( ! isset( $oPost->post_type ) ) {

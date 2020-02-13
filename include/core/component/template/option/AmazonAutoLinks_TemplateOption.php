@@ -294,16 +294,16 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             /**
              * Make the passed template array compatible with the format of v2.x or below.
              *
-             * @return			array|false			The formatted template array or false if the necessary file paths do not exist.
+             * @return            array|false            The formatted template array or false if the necessary file paths do not exist.
              */
             private function _formatTemplateArrayLegacy( array $aTemplate ) {
                                 
                 $aTemplate = $aTemplate + self::$aStructure_Template_Legacy;                
-                $aTemplate['strDirPath'] = $aTemplate['strDirPath']	// check if it's not missing
+                $aTemplate['strDirPath'] = $aTemplate['strDirPath']    // check if it's not missing
                     ? $aTemplate['strDirPath']
                     : dirname( $aTemplate['strCSSPath'] );
                             
-                $aTemplate['strTemplatePath'] = $aTemplate['strTemplatePath']	// check if it's not missing
+                $aTemplate['strTemplatePath'] = $aTemplate['strTemplatePath']    // check if it's not missing
                     ? $aTemplate['strTemplatePath']
                     : dirname( $aTemplate['strCSSPath'] ) . DIRECTORY_SEPARATOR . 'template.php';
                             

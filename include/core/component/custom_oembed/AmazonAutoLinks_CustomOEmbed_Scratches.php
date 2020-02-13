@@ -62,10 +62,10 @@ class AmazonAutoLinks_CustomOEmbed_Scratches {
     }
 
     /**
-	 * @param array   $data   The response data.
-	 * @param WP_Post $post   The post object.
-	 * @param int     $width  The requested width.
-	 * @param int     $height The calculated height.
+     * @param array   $data   The response data.
+     * @param WP_Post $post   The post object.
+     * @param int     $width  The requested width.
+     * @param int     $height The calculated height.
      */
     public function debugOEmbedResponseData( $data, $post, $width, $height ) {
 //AmazonAutoLinks_Debug::log( func_get_args() );

@@ -161,8 +161,8 @@ class AmazonAutoLinks_Output___Ajax extends AmazonAutoLinks_PluginUtility {
                 array( 'jquery' )
             );
 
-           	// in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
-           	wp_localize_script(
+               // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
+               wp_localize_script(
                 $_sScriptHandle,
                 'aal_ajax_unit_loading',        // variable name
                 $_aScriptData

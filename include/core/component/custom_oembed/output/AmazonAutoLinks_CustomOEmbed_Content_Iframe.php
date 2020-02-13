@@ -82,18 +82,18 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      */
     private function ___printContent() {
     ?>
-	<div <?php post_class( 'wp-embed' ); ?>>
+    <div <?php post_class( 'wp-embed' ); ?>>
 
-		<div class="wp-embed-excerpt"><?php $this->___printProductOutput(); ?></div>
+        <div class="wp-embed-excerpt"><?php $this->___printProductOutput(); ?></div>
 
-		<?php
-		/**
-		 * Prints additional content after the embed excerpt.
-		 *
-		 */
-		do_action( 'embed_content' );
-		?>
-	</div>
+        <?php
+        /**
+         * Prints additional content after the embed excerpt.
+         *
+         */
+        do_action( 'embed_content' );
+        ?>
+    </div>
 <?php
     }
 

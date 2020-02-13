@@ -517,12 +517,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          * @param $oUnitOption
          *
          * Accepted parameter values:
-         *  AvgCustomerReviews 	Sorts results according to average customer reviews
-         *  Featured 	        Sorts results with featured items having higher rank
-         *  NewestArrivals 	    Sorts results with according to newest arrivals
-         *  Price:HighToLow 	Sorts results according to most expensive to least expensive
-         *  Price:LowToHigh 	Sorts results according to least expensive to most expensive
-         *  Relevance 	        Sorts results with relevant items having higher rank
+         *  AvgCustomerReviews     Sorts results according to average customer reviews
+         *  Featured             Sorts results with featured items having higher rank
+         *  NewestArrivals         Sorts results with according to newest arrivals
+         *  Price:HighToLow     Sorts results according to most expensive to least expensive
+         *  Price:LowToHigh     Sorts results according to least expensive to most expensive
+         *  Relevance             Sorts results with relevant items having higher rank
          * @see https://webservices.amazon.com/paapi5/documentation/search-items.html#sortby-parameter
          * @return string
          * @since   3.9.0

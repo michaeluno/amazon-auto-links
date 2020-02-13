@@ -21,20 +21,20 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      * @remark  The CN locale is missing
      */
     public $aRegionNames = array(
-        'AU'        => 'us-west-2',  // Australia	webservices.amazon.com.au
-        'BR'        => 'us-east-1',  // Brazil	webservices.amazon.com.br
-        'CA'        => 'us-east-1',  // Canada	webservices.amazon.ca
-        'FR'        => 'eu-west-1',  // France	webservices.amazon.fr
-        'DE'        => 'eu-west-1',  // Germany	webservices.amazon.de
-        'IN'        => 'eu-west-1',  // India	webservices.amazon.in
-        'IT'        => 'eu-west-1',  // Italy	webservices.amazon.it
-        'JP'        => 'us-west-2',  // Japan	webservices.amazon.co.jp
-        'MX'        => 'us-east-1',  // Mexico	webservices.amazon.com.mx
-        'ES'        => 'eu-west-1',  // Spain	webservices.amazon.es
-        'TR'        => 'eu-west-1',  // Turkey	webservices.amazon.com.tr
-        'AE'        => 'eu-west-1',  // United Arab Emirates	webservices.amazon.ae
-        'UK'        => 'eu-west-1',  // United Kingdom	webservices.amazon.co.uk
-        'US'        => 'us-east-1',  // United States	webservices.amazon.com
+        'AU'        => 'us-west-2',  // Australia    webservices.amazon.com.au
+        'BR'        => 'us-east-1',  // Brazil    webservices.amazon.com.br
+        'CA'        => 'us-east-1',  // Canada    webservices.amazon.ca
+        'FR'        => 'eu-west-1',  // France    webservices.amazon.fr
+        'DE'        => 'eu-west-1',  // Germany    webservices.amazon.de
+        'IN'        => 'eu-west-1',  // India    webservices.amazon.in
+        'IT'        => 'eu-west-1',  // Italy    webservices.amazon.it
+        'JP'        => 'us-west-2',  // Japan    webservices.amazon.co.jp
+        'MX'        => 'us-east-1',  // Mexico    webservices.amazon.com.mx
+        'ES'        => 'eu-west-1',  // Spain    webservices.amazon.es
+        'TR'        => 'eu-west-1',  // Turkey    webservices.amazon.com.tr
+        'AE'        => 'eu-west-1',  // United Arab Emirates    webservices.amazon.ae
+        'UK'        => 'eu-west-1',  // United Kingdom    webservices.amazon.co.uk
+        'US'        => 'us-east-1',  // United States    webservices.amazon.com
         'CN'        => 'us-west-2',  // Not set by API
     );
     public $aHosts = array(

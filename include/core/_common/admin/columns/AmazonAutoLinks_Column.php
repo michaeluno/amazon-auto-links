@@ -81,105 +81,105 @@ return <<<CSS
 
 /* Extension Listing Table */
 .{$this->sSelectorPrefix}columns_container{
-	padding-right: 30px;
-	padding-left: 10px;
-	margin-top: 10px;
-	text-align: center;
+    padding-right: 30px;
+    padding-left: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .{$this->sSelectorPrefix}columns {
-	padding: 4px;
-	line-height: 1.5em;
+    padding: 4px;
+    line-height: 1.5em;
 }
 .{$this->sSelectorPrefix}columns_first_col {
-	margin-left: 0px;
-	clear: left;
+    margin-left: 0px;
+    clear: left;
 }
 /*  SECTIONS  ============================================================================= */
 .{$this->sSelectorPrefix}columns_row {
-	clear: both;
-	padding: 0px;
-	margin: 0px;
+    clear: both;
+    padding: 0px;
+    margin: 0px;
 }
 /*  GROUPING  ============================================================================= */
 .{$this->sSelectorPrefix}columns_box:before,
 .{$this->sSelectorPrefix}columns_box:after {
-	content:"";
-	display:table;
+    content:"";
+    display:table;
 }
 .{$this->sSelectorPrefix}columns_box:after {
-	clear:both;
+    clear:both;
 }
 .{$this->sSelectorPrefix}columns_box {
-	float: none;
-	width: 100%;		
-	zoom:1; /* For IE 6/7 (trigger hasLayout) */
+    float: none;
+    width: 100%;        
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
 /*  GRID COLUMN SETUP   ==================================================================== */
 .{$this->sSelectorPrefix}columns_col {
-	display: block;
-	float:left;
-	margin: 1% 0 1% 1.6%;
+    display: block;
+    float:left;
+    margin: 1% 0 1% 1.6%;
 }
 .{$this->sSelectorPrefix}columns_col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
 /*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 800 PIXELS */
 @media only screen and (max-width: 800px) {
-	.{$this->sSelectorPrefix}columns_col { 
-		margin: 1% 0 1% 0%;
-	}
+    .{$this->sSelectorPrefix}columns_col { 
+        margin: 1% 0 1% 0%;
+    }
 }
 /*  GRID OF TWO   ============================================================================= */
 .{$this->sSelectorPrefix}col_element_of_1 {
-	width: 100%;
+    width: 100%;
 }
 .{$this->sSelectorPrefix}col_element_of_2 {
-	width: 49.2%;
+    width: 49.2%;
 }
 .{$this->sSelectorPrefix}col_element_of_3 {
-	width: 32.2%; 
+    width: 32.2%; 
 }
 .{$this->sSelectorPrefix}col_element_of_4 {
-	width: 23.8%;
+    width: 23.8%;
 }
 .{$this->sSelectorPrefix}col_element_of_5 {
-	width: 18.72%;
+    width: 18.72%;
 }
 .{$this->sSelectorPrefix}col_element_of_6 {
-	width: 15.33%;
+    width: 15.33%;
 }
 .{$this->sSelectorPrefix}col_element_of_7 {
-	width: 12.91%;
+    width: 12.91%;
 }
 .{$this->sSelectorPrefix}col_element_of_8 {
-	width: 11.1%; 
+    width: 11.1%; 
 }
 .{$this->sSelectorPrefix}col_element_of_9 {
-	width: 9.68%; 
+    width: 9.68%; 
 }
 .{$this->sSelectorPrefix}col_element_of_10 {
-	width: 8.56%; 
+    width: 8.56%; 
 }
 .{$this->sSelectorPrefix}col_element_of_11 {
-	width: 7.63%; 
+    width: 7.63%; 
 }
 .{$this->sSelectorPrefix}col_element_of_12 {
-	width: 6.86%;
+    width: 6.86%;
 }
 
 /*  GO FULL WIDTH AT LESS THAN 800 PIXELS */
 @media only screen and (max-width: 800px) {
-	.{$this->sSelectorPrefix}col_element_of_2,
-	.{$this->sSelectorPrefix}col_element_of_3,
-	.{$this->sSelectorPrefix}col_element_of_4,
-	.{$this->sSelectorPrefix}col_element_of_5,
-	.{$this->sSelectorPrefix}col_element_of_6,
-	.{$this->sSelectorPrefix}col_element_of_7,
-	.{$this->sSelectorPrefix}col_element_of_8,
-	.{$this->sSelectorPrefix}col_element_of_9,
-	.{$this->sSelectorPrefix}col_element_of_10,
-	.{$this->sSelectorPrefix}col_element_of_11,
-	.{$this->sSelectorPrefix}col_element_of_12
-	{	width: 49.2%;  }			
+    .{$this->sSelectorPrefix}col_element_of_2,
+    .{$this->sSelectorPrefix}col_element_of_3,
+    .{$this->sSelectorPrefix}col_element_of_4,
+    .{$this->sSelectorPrefix}col_element_of_5,
+    .{$this->sSelectorPrefix}col_element_of_6,
+    .{$this->sSelectorPrefix}col_element_of_7,
+    .{$this->sSelectorPrefix}col_element_of_8,
+    .{$this->sSelectorPrefix}col_element_of_9,
+    .{$this->sSelectorPrefix}col_element_of_10,
+    .{$this->sSelectorPrefix}col_element_of_11,
+    .{$this->sSelectorPrefix}col_element_of_12
+    {    width: 49.2%;  }            
 }
 CSS;
             

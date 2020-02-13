@@ -1,13 +1,13 @@
 <?php
 /**
- *	Plugin Name:    Amazon Auto Links
- *	Plugin URI:     http://en.michaeluno.jp/amazon-auto-links
- *	Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
- *	Author:         Michael Uno (miunosoft)
- *	Author URI:     http://michaeluno.jp
- *	Version:        4.0.0b05
- *  Text Domain:    amazon-auto-links
- *  Domain Path:    /language
+ *    Plugin Name:    Amazon Auto Links
+ *    Plugin URI:     http://en.michaeluno.jp/amazon-auto-links
+ *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *    Author:         Michael Uno (miunosoft)
+ *    Author URI:     http://michaeluno.jp
+ *    Version:        4.0.0b05
+ *    Text Domain:    amazon-auto-links
+ *    Domain Path:    /language
  */
 
 /**
@@ -18,16 +18,16 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-	const VERSION        = '4.0.0b05';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
-	const NAME           = 'Amazon Auto Links';
-	const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
-	const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
-	const AUTHOR         = 'miunosoft (Michael Uno)';
-	const AUTHOR_URI     = 'http://en.michaeluno.jp/';
-	const PLUGIN_URI     = 'http://en.michaeluno.jp/amazon-auto-links';
-	const COPYRIGHT      = 'Copyright (c) 2013-2020, Michael Uno';
-	const LICENSE        = 'GPL v2 or later';
-	const CONTRIBUTORS   = '';
+    const VERSION        = '4.0.0b05';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const NAME           = 'Amazon Auto Links';
+    const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+    const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
+    const AUTHOR         = 'miunosoft (Michael Uno)';
+    const AUTHOR_URI     = 'http://en.michaeluno.jp/';
+    const PLUGIN_URI     = 'http://en.michaeluno.jp/amazon-auto-links';
+    const COPYRIGHT      = 'Copyright (c) 2013-2020, Michael Uno';
+    const LICENSE        = 'GPL v2 or later';
+    const CONTRIBUTORS   = '';
  
 }
 
@@ -43,22 +43,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * @package     Amazon Auto Links
  * @copyright   Copyright (c) 2013-2020, Michael Uno
- * @authorurl	http://michaeluno.jp
+ * @authorurl   http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since		2.0.0
+ * @since       2.0.0
  * @since       3           Changed the name from `AmazonAutoLinks_Commons`.
 */
 final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     
-	const TEXT_DOMAIN               = 'amazon-auto-links';
-	const TEXT_DOMAIN_PATH          = '/language';
+    const TEXT_DOMAIN               = 'amazon-auto-links';
+    const TEXT_DOMAIN_PATH          = '/language';
     
     /**
      * The hook slug used for the prefix of action and filter hook names.
      * 
      * @remark      The ending underscore is not necessary.
      */    
-	const HOOK_SLUG                 = 'aal';    // without trailing underscore
+    const HOOK_SLUG                 = 'aal';    // without trailing underscore
     
     /**
      * The transient prefix. 
@@ -66,12 +66,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * @remark      This is also accessed from uninstall.php so do not remove.
      * @remark      Up to 8 characters as transient name allows 45 characters or less ( 40 for site transients ) so that md5 (32 characters) can be added
      */    
-	const TRANSIENT_PREFIX          = 'AAL';
+    const TRANSIENT_PREFIX          = 'AAL';
     
    
-	// const SectionID_License         = 'pro_license';
-	// const FieldID_LicenseKey        = 'pro_license_key';
-	    
+    // const SectionID_License         = 'pro_license';
+    // const FieldID_LicenseKey        = 'pro_license_key';
+
     /**
      * @since       3.2.0
      */ 
@@ -162,7 +162,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         
         // 3+
         'button'      => 'aal_button',
-	
+
     );
     
     /**
@@ -222,13 +222,13 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * Sets up class properties.
      * @return      void
      */
-	static function setUp( $sPluginFilePath ) {
-		
+    static function setUp( $sPluginFilePath ) {
+
         self::$sFilePath = $sPluginFilePath; 
         self::$sDirPath  = dirname( self::$sFilePath );  
         
-	}	
-	
+    }
+
     /**
      * @return      string
      * @since       ?
@@ -305,7 +305,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
                      . "</div>";
             }
         }
-	
+
 }
 AmazonAutoLinks_Registry::setUp( __FILE__ );
 
