@@ -31,11 +31,10 @@ class AmazonAutoLinks_AALBSupportLoader {
             return;
         }
 
-        new AmazonAutoLinks_AALBSupport_Shortcode;
+        new AmazonAutoLinks_AALBSupport_Shortcode_amazon_link;
+        new AmazonAutoLinks_AALBSupport_Shortcode_amazon_textlink;
         new AmazonAutoLinks_AALBSupport_GutenbergBlock;
 
-
     }
-
 
 }

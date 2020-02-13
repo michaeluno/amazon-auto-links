@@ -313,6 +313,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Added the `product_title` shortcode parameter which alters the product title and serves as anchor text.
+- Added the ability to convert the `[amazon_textlink]` shortcode of Amazon Associates Link Builder into a simple text link.
 - Changed the default template to `List` for all the unit types.
 - Fixed PHP warnings of deprecation when displaying buttons.
 - Fixed a bug that some URL query parameters of buttons were not properly set.

@@ -14,21 +14,18 @@
  * @package     Amazon Auto Links
  * @since       3.11.0
  */
-class AmazonAutoLinks_AALBSupport_Shortcode extends AmazonAutoLinks_WPUtility {
+class AmazonAutoLinks_AALBSupport_Shortcode_amazon_link extends AmazonAutoLinks_WPUtility {
 
-    public $aShortcodes = array(
-        'amazon_link',
-        'amazon_textlink',
-    );
+    public $sShortcode = 'amazon_link';
 
     /**
      * Registers the shortcode(s).
      */
     public function __construct() {
-        foreach( $this->getAsArray( $this->aShortcodes ) as $_sShortCode ) {
-            add_shortcode( $_sShortCode, array( $this, 'replyToGetOutput' ) );
-            add_filter( 'aal_filter_shortcode_' . $_sShortCode, array( $this, 'replyToFilterShortcodeContents' ), 10, 2 );
-        }
+
+        add_shortcode( $this->sShortcode, array( $this, 'replyToGetOutput' ) );
+        add_filter( 'aal_filter_shortcode_' . $this->sShortcode, array( $this, 'replyToFilterShortcodeContents' ), 10, 2 );
+
     }
 
     /**
@@ -37,7 +34,6 @@ class AmazonAutoLinks_AALBSupport_Shortcode extends AmazonAutoLinks_WPUtility {
      * Those contents come with their shortcodes and the second parameter receives the shortcode attributes.
      * @return      string
      * @callback    filter  aal_filter_shortcode_amazon_link
-     * @callback    filter  aal_filter_shortcode_amazon_textlink
      */
     public function replyToFilterShortcodeContents( $sContent, $aAttributes ) {
         return $sContent . $this->replyToGetOutput( $aAttributes );
@@ -99,9 +95,14 @@ class AmazonAutoLinks_AALBSupport_Shortcode extends AmazonAutoLinks_WPUtility {
         $aArguments[ 'associate_id' ] = $_sAssociateID;
         unset( $aArguments[ 'store' ] );
 
+        // text -> product_title
+        $_sProductTitle = $this->getElement( $aArguments, array( 'text' ) );
+        $aArguments[ 'product_title' ] = $_sProductTitle;
+        unset( $aArguments[ 'text' ] );
+
         // Drop empty string and null.
         $aArguments = array_filter( $aArguments, 'strlen' );
-        return '' . AmazonAutoLinks( $aArguments, false );
+        return AmazonAutoLinks( $aArguments, false );
 
     }    
 
