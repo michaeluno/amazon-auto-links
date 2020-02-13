@@ -41,7 +41,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         // 3+
         'formatted_price'       => null, // 4.0.0+ (string|null) HTML formatted price. Changed from the name, `price` to be compatible with merged database table column key names.
         'review'                => null,
-        'rating'                => null,
+        'formatted_rating'      => null, // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
         'image_set'             => null,
         'button'                => null,
 
@@ -612,7 +612,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                         $_aProduct[ 'ASIN' ],
                         $_sLocale,
                         $_sAssociateID,
-                        $this->_getButtonID(),
                         $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
                     );
 

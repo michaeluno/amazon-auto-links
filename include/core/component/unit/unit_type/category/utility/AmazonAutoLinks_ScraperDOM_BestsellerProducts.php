@@ -22,7 +22,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         // optional
         'thumbnail_url'     => null,
         'title'             => null,
-        'rating'            => null,    // (string) partial HTML string
+        'formatted_rating'  => null,    // (string) partial HTML string, [4.0.0+] changed the name from `rating` to distinguish the table column key name
         'rating_point'      => null,    // (integer)
         'review_count'      => null,    // (integer)
         'formatted_price'   => null,    // (string) HTML formatted price
@@ -55,7 +55,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
 
             $_aProduct[ 'rating_point' ]        = $this->_getRatingPoint( $_oXPath, $_oNodeRating );
             $_aProduct[ 'review_count' ]        = $this->_getReviewCount( $_oXPath, $_oNodeRating );
-            $_aProduct[ 'rating' ]              = $this->_getRatingHTML(
+            $_aProduct[ 'formatted_rating' ]    = $this->_getRatingHTML(
                 $_oXPath,
                 $_oNodeRating,
                 $_aProduct[ 'rating_point' ],

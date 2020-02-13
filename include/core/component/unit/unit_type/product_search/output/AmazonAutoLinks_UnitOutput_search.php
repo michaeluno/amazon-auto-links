@@ -816,14 +816,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_sResponseDate
             ) {
 
-                // Construct a product array. This will be passed to a template.
+                // Construct a product array. This will be passed to a template.\
+                // @remark  For values that could not retrieved, leave it null so that later it will be filled with formatting routine or triggers a background routine to retrieve product data
                 $_aProduct = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
-                    'title'              => $_sTitle,
+                    'title'              => $this->oUnitOption->get( array( 'title' ), $_sTitle ), // the shortcode parameter 'title' can suppress the title in the parsed data
                     'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                     'description'        => $_sDescription, // reflects the user set character length. Additional meta data will be prepended.
-                    'meta'               => '',
+                    'meta'               => '', // @todo maybe deprecated?
                     'content'            => $_sContent,
                     'image_size'         => $this->oUnitOption->get( 'image_size' ),
                     'thumbnail_url'      => $this->getProductImageURLFormatted(
@@ -848,19 +849,20 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     // @see https://webservices.amazon.com/paapi5/documentation/use-cases/organization-of-items-on-amazon/browse-nodes/browse-nodes-and-sales-ranks.html#how-to-get-salesrank-information-for-an-item
                     'sales_rank'          => $this->getElement(
                         $_aItem,
-                        array( 'BrowseNodeInfo', 'WebsiteSalesRank', 'SalesRank' ), 0
+                        array( 'BrowseNodeInfo', 'WebsiteSalesRank', 'SalesRank' ),
+                        0
                     ), // 3.8.0
                     'is_prime'            => $this->isPrime( $_aItem ),
                     'feature'             => $this->___getFeatures( $_aItem ),
                     'category'            => $this->___getCategories( $_aItem ),
 
                     // These must be retrieved separately
-                    'review'              => '',  // customer reviews
-                    'rating'              => '',  // 3+
+                    'review'              => null,  // customer reviews
+                    'formatted_rating'    => null,  // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
 
                     // These will be assigned below
-                    'image_set'           => '',
-                    'button'              => '',  // 3+
+                    'image_set'           => null,
+                    'button'              => null,  // 3+
 
                     // @deprecated 3.9.0 PA-API 5 does not support below
                     'editorial_review'    => '',  // 3+ // @todo add a format method for editorial reviews.
@@ -905,12 +907,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $_aProduct[ 'ASIN' ],
                         $_sLocale,
                         $_sAssociateID,
-                        $this->_getButtonID(),
                         $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
                     );
     
                 }
-    
+
                 /**
                  * Let third-parties filter products.
                  * @since 3.4.13

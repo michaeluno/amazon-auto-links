@@ -85,7 +85,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $aProduct[ 'formatted_title' ],
                 $aProduct[ 'formatted_thumbnail' ],
                 $aProduct[ 'description' ],
-                $aProduct[ 'rating' ],
+                $aProduct[ 'formatted_rating' ],
                 $aProduct[ 'review' ],
                 $aProduct[ 'formatted_price' ],
                 $aProduct[ 'button' ],

@@ -123,7 +123,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_oUserRatingFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
-            $_aProduct[ 'rating' ]           = $_oUserRatingFormatter->get();
+            $_aProduct[ 'formatted_rating' ] = $_oUserRatingFormatter->get();
             $_oImageSetFormatter             = new AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );

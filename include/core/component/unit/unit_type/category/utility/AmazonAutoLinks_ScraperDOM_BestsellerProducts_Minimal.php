@@ -21,7 +21,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Minimal extends AmazonAutoLi
         'ASIN'              => null,
 
         // optional
-        'rating'            => null,
+        'formatted_rating'  => null,
         'formatted_price'   => null,
 
     );
@@ -48,7 +48,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Minimal extends AmazonAutoLi
             $_oNodeRating                       = $this->_getRatingNode( $_oXPath, $_oItemNode, $sSiteDomain, $sAssociateID );
             $_aProduct[ 'rating_point' ]        = $this->_getRatingPoint( $_oXPath, $_oNodeRating );
             $_aProduct[ 'review_count' ]        = $this->_getReviewCount( $_oXPath, $_oNodeRating );
-            $_aProduct[ 'rating' ]              = $this->_getRatingHTML(
+            $_aProduct[ 'formatted_rating' ]    = $this->_getRatingHTML(
                 $_oXPath,
                 $_oNodeRating,
                 $_aProduct[ 'rating_point' ],

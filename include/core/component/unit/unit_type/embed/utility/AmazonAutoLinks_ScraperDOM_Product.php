@@ -29,7 +29,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         'thumbnail_url'     => null,
         'image_set'         => null,    // (string) sub-image set output
         'title'             => '',
-        'rating'            => null,    // (string) partial HTML string
+        'formatted_rating'  => null,    // (string) partial HTML string
         'rating_point'      => null,    // (integer)
         'review_count'      => null,    // (integer)
         'formatted_price'   => null,    // (string) HTML formatted price with currency e.g. <span class='proper-price'>$35.43</span>
@@ -121,7 +121,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         if ( $_oNodeRating ) {
             $_aProduct[ 'rating_point' ]        = $this->_getRatingPoint( $_oXPath, $_oNodeRating );
             $_aProduct[ 'review_count' ]        = $this->_getReviewCount( $_oXPath, $_oNodeRating );
-            $_aProduct[ 'rating' ]              = $this->_getRatingHTML(
+            $_aProduct[ 'formatted_rating' ]    = $this->_getRatingHTML(
                 $_oXPath,
                 $_oNodeRating,
                 $_aProduct[ 'rating_point' ],
@@ -198,9 +198,12 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             }
             return null;
         }
+
         /**
          * @param DOMXPath $oXPath
-         * @param $oItemNode
+         * @param $oRatingNode
+         *
+         * @return int|null
          */
         protected function _getRatingPoint( DOMXPath $oXPath, $oRatingNode ) {
             $_oNodes = $oXPath->query( './/a[contains(@title, "5")]', $oRatingNode );
