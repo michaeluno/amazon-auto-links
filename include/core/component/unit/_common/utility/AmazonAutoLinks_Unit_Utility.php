@@ -165,7 +165,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             'discounted_price_formatted'    => $_sDiscountedPrice, // discounted_price_formatted
         );
 
-        $_aPrices[ 'price' ] = self::getPrice(
+        $_aPrices[ 'formatted_price' ] = self::getPrice(
             $_sProperPrice,                 // string
             $_inDiscountedPrice,            // integer|null
             $_aLowests[ 'new_amount' ],     // integer|null

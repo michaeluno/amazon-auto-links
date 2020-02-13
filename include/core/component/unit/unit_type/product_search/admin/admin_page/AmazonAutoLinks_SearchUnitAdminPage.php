@@ -14,24 +14,7 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
-          
-    /**
-     * Sets the default option values for the setting form.
-     * @callback    filter      options_{class name}
-     * @return      array       The options array.
-     */
-    public function setOptions( $aOptions ) {
-
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        return $aOptions 
-            + $this->_getLastUnitInputs()
-            + $_oOption->get( 'unit_default' )  // 3.4.0+
-            ;
-        
-    }
-    
-    
+final class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
      * Sets up admin pages.
@@ -63,8 +46,7 @@ class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAd
         $this->setInPageTabTag( 'h2' );                
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
         $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-        
-                    
+
     }
         
 }

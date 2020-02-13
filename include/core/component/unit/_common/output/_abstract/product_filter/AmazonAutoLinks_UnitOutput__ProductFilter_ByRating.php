@@ -35,14 +35,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
-        $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
-            $aRowIdentifier[ 'asin' ],
-            $aRowIdentifier[ 'locale' ],
-            $aRowIdentifier[ 'associate_id' ],
-            $aRow,
-            $this->_oUnitOutput->oUnitOption
-        );
-        $_iRating = ( integer ) $_oRow->getCell( 'rating' );
+        $_iRating = $this->___getRating( $aProduct, $aRow, $aRowIdentifier );
 
         // The value is two digits such as 30 for 3.0.
         $_iAcceptedRate = ( integer ) ( $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'amount' ) * 10 );
@@ -61,5 +54,37 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
         }
 
     }
+        /**
+         * @param array $aProduct
+         * @param array $aRow
+         * @param array $aRowIdentifier
+         *
+         * @return  integer     The product rating in a format of two digits. e.g. 35 for 3.5  40 for 4.0
+         * @since   4.0.0
+         */
+        private function ___getRating( $aProduct, $aRow, $aRowIdentifier ) {
+
+            // Case: the product array already holds the value. This happens especially for the feed unit type.
+            $_insRating = $this->getElement( $aProduct, 'rating' );
+            if ( is_numeric( $_insRating ) ) {
+                // Case: 4.5, 5, 2, 3.5, 1 etc.
+                if ( 5 >= $_insRating ) {
+                    return $_insRating * 10;
+                }
+                // Case: 45, 50, 20, 35, 10 etc.
+                if ( 50 >= $_insRating ) {
+                    return ( integer ) $_insRating;
+                }
+            }
+
+            $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
+                $aRowIdentifier[ 'asin' ],
+                $aRowIdentifier[ 'locale' ],
+                $aRowIdentifier[ 'associate_id' ],
+                $aRow,
+                $this->_oUnitOutput->oUnitOption
+            );
+            return ( integer ) $_oRow->getCell( 'rating' );
+        }
 
 }

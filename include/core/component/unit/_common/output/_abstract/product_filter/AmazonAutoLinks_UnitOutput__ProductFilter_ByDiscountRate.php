@@ -35,31 +35,42 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
-        $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
-            $aRowIdentifier[ 'asin' ],
-            $aRowIdentifier[ 'locale' ],
-            $aRowIdentifier[ 'associate_id' ],
-            $aRow,
-            $this->_oUnitOutput->oUnitOption
-        );
+        // Case: Already set. This can occur with feed units.
+        if ( isset( $aProduct[ 'price' ], $aProduct[ 'discounted_price' ], $aProduct[ 'lowest_new_price' ] ) && is_numeric( $aProduct[ 'price' ] ) ) {
 
-        $_inPrice      = $_oRow->getCell( 'price' );
-        $_inDiscounted = $_oRow->getCell( 'discounted_price' );
-        $_inLowestNew  = $_oRow->getCell( 'lowest_new_price' );
+            $_iPrice      = ( integer ) $aProduct[ 'price' ];
+            $_iLowestNew  = ( integer ) $aProduct[ 'discounted_price' ];
+            $_iDiscounted = ( integer ) $aProduct[ 'lowest_new_price' ];
 
-        // If the data is not ready, do not show them.
-        if ( ! $this->___isProductReady( $_inPrice, $_inDiscounted, $_inLowestNew ) ) {
-            return array();
+        } else {
+
+            $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
+                $aRowIdentifier[ 'asin' ],
+                $aRowIdentifier[ 'locale' ],
+                $aRowIdentifier[ 'associate_id' ],
+                $aRow,
+                $this->_oUnitOutput->oUnitOption
+            );
+
+            $_inPrice      = $_oRow->getCell( 'price' );
+            $_inDiscounted = $_oRow->getCell( 'discounted_price' );
+            $_inLowestNew  = $_oRow->getCell( 'lowest_new_price' );
+
+            // If the data is not ready, do not show them.
+            if ( ! $this->___isProductReady( $_inPrice, $_inDiscounted, $_inLowestNew ) ) {
+                return array();
+            }
+
+            $_iPrice      = ( integer ) $_inPrice;
+            $_iLowestNew  = ( integer ) $_inLowestNew;
+            $_iDiscounted = ( integer ) $_inDiscounted;
+
         }
 
-        $_iPrice      = ( integer ) $_inPrice;
-        $_iLowestNew  = ( integer ) $_inLowestNew;
-        $_iDiscounted = ( integer ) $_inDiscounted;
-        $_iLowest     = min( $_iLowestNew, $_iDiscounted );
-
+        $_iLowest               = min( $_iLowestNew, $_iDiscounted );
         $_dDiscountPercentage   = 100 - round( ( $_iLowest / $_iPrice ) * 100, 2 );
         $_dAcceptedDiscountRate = ( double ) $this->_oUnitOutput->oUnitOption->get( '_filter_by_discount_rate', 'amount' );
-        $_sCase = $this->_oUnitOutput->oUnitOption->get( '_filter_by_discount_rate', 'case' );
+        $_sCase                 = $this->_oUnitOutput->oUnitOption->get( '_filter_by_discount_rate', 'case' );
         switch ( $_sCase ) {
             case 'below':
                 return ( $_dAcceptedDiscountRate >= $_dDiscountPercentage )

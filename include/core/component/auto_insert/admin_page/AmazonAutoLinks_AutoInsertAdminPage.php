@@ -14,7 +14,7 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
      * User constructor.

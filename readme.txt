@@ -309,8 +309,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.0 =
+- Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Changed the default template to `List` for all the unit types.
+- Fixed a bug that last inputs for creating units were not stored properly for some unit types.
 - Fixed a bug that category units did not show the updated date in the price disclaimer text.
 - Removed some array key elements and local variables passed to the template file which has been kept for backward-compatibility.
 - Removed legacy code for v2 or earlier.

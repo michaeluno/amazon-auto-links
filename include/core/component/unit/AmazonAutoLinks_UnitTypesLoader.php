@@ -60,6 +60,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         new AmazonAutoLinks_UnitTypeLoader_url( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_contextual( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_embed( $sScriptPath ); // 4.0.0
+        new AmazonAutoLinks_UnitTypeLoader_feed( $sScriptPath );  // 4.0.0
 
         // Unit specific events
         add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
@@ -143,7 +144,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         // Common meta boxes
 
         new AmazonAutoLinks_UnitPostMetaBox_Locale(
-            null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+            'amazon_auto_links_locale',       // meta box ID is given so that the Feed unit type can remove this meta box using this ID
             __( 'Locale', 'amazon-auto-links' ), // title
             array(      // post type slugs: post, page, etc.
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]

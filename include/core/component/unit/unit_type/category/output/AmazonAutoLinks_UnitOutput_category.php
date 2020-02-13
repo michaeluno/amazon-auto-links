@@ -39,7 +39,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'text_description'      => null,    // the non-html description
             
         // 3+
-        'price'                 => null,
+        'formatted_price'       => null, // 4.0.0+ (string|null) HTML formatted price. Changed from the name, `price` to be compatible with merged database table column key names.
         'review'                => null,
         'rating'                => null,
         'image_set'             => null,

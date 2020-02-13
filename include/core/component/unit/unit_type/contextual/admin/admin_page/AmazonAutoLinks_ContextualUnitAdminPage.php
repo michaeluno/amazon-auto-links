@@ -14,22 +14,7 @@
  * 
  * @since       3.5.0
  */
-class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
-          
-    /**
-     * Sets the default option values for the setting form.
-     * @callback    filter      options_{class name}
-     * @return      array       The options array.
-     */
-    public function setOptions( $aOptions ) {
-        
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        return $aOptions 
-            + $this->_getLastUnitInputs()
-            + $_oOption->get( 'unit_default' )
-            ;
-            
-    }
+final class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
      * Sets up admin pages.

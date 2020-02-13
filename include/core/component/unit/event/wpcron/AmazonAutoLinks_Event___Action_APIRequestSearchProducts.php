@@ -266,7 +266,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                             'discounted_price'   => $_aPrices[ 'discounted_price_amount' ],
                             'discounted_price_formatted'   => $_aPrices[ 'discounted_price_formatted' ],
 
-                            // Similar products will be set with a separate routine.
+                            // Similar products will be set with a separate routine. <--- @deprecated
                             // Once an empty value is set, it will no longer trigger the value retrieval background routine
                             // 'similar_products'   => '',
                             // 'description'        => null,   // (string) product details
@@ -279,10 +279,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
                         // With PA-API5, we don't know whether a customer review exists or not.
                         // Regardless, fill these elements with an empty value.
-                        // When an element value is null when retrieved from the front-end,
-                        // It schedules the background task. So in order to avoid it, set a value.
+                        // If the element value is null when retrieved from the front-end,
+                        // it schedules a background task. So in order to avoid it, set a value.
                         // @deprecated  3.9.0   Now when %review% or %rating% is not set, it won't trigger the background routine.
-                        // If these are set, even the user places those variables later on, the background routine won't be triggered and the values will not be shown.
+                        // If these are set, even the user places those variables later on,
+                        // the background routine won't be triggered and the values will not be shown.
 //                        $_aRow[ 'rating' ]                  = 0;
 //                        $_aRow[ 'rating_image_url' ]        = '';
 //                        $_aRow[ 'rating_html' ]             = '';
@@ -291,7 +292,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 //                        $_aRow[ 'customer_review_charset' ] = '';
 //                        $_aRow[ 'customer_reviews' ]        = '';
 
-                        // 3.8.0+ If the table version is above 1.1.0b01 or above,
+                        // 3.8.0+ If the table version is 1.1.0b01 or above,
                         $_sCurrentVersion = get_option( "aal_products_version", '0' );
                         if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=')) {
                             $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
@@ -300,7 +301,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                             $_aRow[ 'categories' ] = AmazonAutoLinks_Unit_Utility::getCategories( $_aNodes );
                         }
 
-                        // 3.9.0+ If the table version is above 1.2.0b01 or above,
+                        // 3.9.0+ If the table version is 1.2.0b01 or above,
                         if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=')) {
                             $_aRow[ 'is_prime' ] = AmazonAutoLinks_Unit_Utility::isPrime( $aItem );
                             $_aRow[ 'is_adult' ] = ( boolean ) $this->getElement(

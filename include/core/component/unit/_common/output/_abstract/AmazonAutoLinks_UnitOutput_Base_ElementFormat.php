@@ -113,7 +113,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
-            $_aProduct[ 'price' ]            = $_oPriceFormatter->get();
+            // @deprecated 4.0.0 the key `price` is replaced with `formatted_price`, to be compatible with database table column keys.
+            $_aProduct[ 'formatted_price' ]  = $_oPriceFormatter->get(); // 4.0.0
 
             $_oUserReviewFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
@@ -160,6 +161,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
             }
 
+            /**
+             * Merge the product array with the database product row
+             * This is mainly for the feed unit type that helps sites without API access to reuse data from external sites with API access.
+             * @since   4.0.0
+             * @todo    Some elements such as `category` and `feature` are different from the database table keys and they hold the same values.
+             * So the array structure needs to be redesigned and reconstructed.
+             */
+            $_aProduct = array_filter( $_aProduct, array( $this, 'isNotNull' ) )
+                + $_aDBProductRow
+                + $_aProduct;   // refill null elements so that it prevents undefined index warning in further processing.
+
             // Let unit types that need to use the data from database rows access them.
             $_aProduct = apply_filters(
                 'aal_filter_unit_each_product_with_database_row',
@@ -172,7 +184,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 )
             );
 
-            // 3.5.0+ the product can be filtered out.
+            // 3.5.0+ the product can be filtered out with the above applied filters.
             if ( empty( $_aProduct ) ) {
                 throw new Exception( 'The product array is empty. Most likely it is filtered out.' );
             }

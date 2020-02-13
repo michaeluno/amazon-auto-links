@@ -37,7 +37,7 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         }
                 
         $this->aUnitTypes = empty( $this->aUnitTypes )
-            ? apply_filters( 'aal_filter_registered_unit_types', $this->aUnitTypes )
+            ? apply_filters( 'aal_filter_registered_unit_types', $this->aUnitTypes ) // to allow all unit types so that common unit meta boxes can leave the property empty
             : $this->aUnitTypes;
                 
         // At this point, it is TRUE evaluated by the framework.

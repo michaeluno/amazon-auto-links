@@ -11,82 +11,51 @@
 /**
  * Adds a setting page for creating tag units.
  * 
- * @since       3.5.0
+ * @since       4.0.0
  * @action      schedule        aal_action_unit_prefetch
  */
-class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoLinks_AdminPage_Page_Base {
+class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
 
     /**
      * @return  array
-     * @since   3.11.1
+     * @since   4.0.0
      */
     protected function _getArguments() {
         return array(
-            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'contextual_unit' ],
-            'title'         => __( 'Add Contextual Unit', 'amazon-auto-links' ),
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'feed_unit' ],
+            'title'         => __( 'Add Feed Unit', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
         );
     }
 
     /**
-     * 
-     * @callback        action      load_{page slug}
-     */ 
-    public function replyToLoadPage( $oFactory ) {
-        
-        // Form Section - we use the default one ('_default'), meaning no section.
-        $oFactory->addSettingSections(
-            $this->sPageSlug, // target page slug
-            array(
-                // 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => '_default', 
-                'description'   => array(
-                    __( 'The contextual units display products related to currently displayed page contents.', 'amazon-auto-links' ),
-                ),
-            )
-        );        
-        
-        // Add Fields
-        foreach( $this->_getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
-            foreach( $_oFields->get() as $_aField ) {
-                $oFactory->addSettingFields(
-                    '_default', // the target section id    
-                    $_aField
-                );
-            }                    
-        }
-
-    }
-        /**
-         * @since       3.5.0
-         * @return      array
-         */
-        private function _getFormFieldClasses() {
-            return array(
-                'AmazonAutoLinks_FormFields_ContextualUnit_Basic',
-                'AmazonAutoLinks_FormFields_ContextualUnit_Main',
-                'AmazonAutoLinks_FormFields_Unit_Common',
-                'AmazonAutoLinks_FormFields_Unit_Credit',
-                'AmazonAutoLinks_FormFields_Unit_AutoInsert',
-                'AmazonAutoLinks_FormFields_ContextualUnit_Submit',
-            );
-        }
-    
-    /**
-     * 
-     * @callback        action      do_after_{page slug}
+     * @return  array
+     * @since   4.0.0
      */
-    public function replyToDoAfterPage( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
-            return;
-        }
-        echo "<p>Debug</p>"
-            . $oFactory->oDebug->get( 
-                $oFactory->oProp->aOptions 
-            );       
+    protected function _getSectionArguments() {
+        return array(
+            // 'tab_slug'      => $this->sTabSlug,
+            'section_id'    => '_default',
+            'description'   => array(
+                __( 'The feed unit type allows you to import unit data of external sites that set up Amazon Auto Links. Make use of this unit to save API calls.', 'amazon-auto-links' ),
+                __( 'After creating a unit on another site, copy the JSON feed URL found in the Manage Units page. Then paste the URL in the option field here.', 'amazon-auto-links' ),
+            ),
+        );
+    }
+
+    /**
+     * @since       4.0.0
+     * @return      array
+     */
+    protected function _getFormFieldClasses() {
+        return array(
+            'AmazonAutoLinks_FormFields_FeedUnit_Main',
+            'AmazonAutoLinks_FormFields_Unit_Common',
+            'AmazonAutoLinks_FormFields_Unit_Credit',
+            'AmazonAutoLinks_FormFields_Unit_AutoInsert',
+            'AmazonAutoLinks_FormFields_FeedUnit_Submit',
+        );
     }
     
     /**
@@ -99,7 +68,6 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         $_aErrors         = array();
         $_oOption         = AmazonAutoLinks_Option::getInstance();
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        $_oUtil           = new AmazonAutoLinks_PluginUtility;
 
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
@@ -108,7 +76,13 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
             return $aOldInputs;
         }        
         
-
+        // Check if a url is set.
+        $aInputs[ 'feed_urls' ] = $this->getAsArray( $aInputs[ 'feed_urls' ] );
+        if ( empty( $aInputs[ 'feed_urls' ] ) ) {
+            $_aErrors[ 'feed_urls' ] = __( 'Please set a url.', 'amazon-auto-links' );
+            $_bVerified = false;
+        }
+                
         if ( empty( $aInputs[ 'associate_id' ] ) ) {
             $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
             $_bVerified = false;
@@ -134,26 +108,26 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         );
 
         // Format the unit options to sanitize the data.
-        $_oUnitOptions = new AmazonAutoLinks_UnitOption_contextual(
+        $_oUnitOptions = new AmazonAutoLinks_UnitOption_feed(
             null,   // unit id
             $aInputs
         );
         $aInputs                  = $_oUnitOptions->get();
-        $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 'contextual' );
+        $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 'feed' );
 
         // Create a unit post
-        $_iNewPostID = $_oUtil->insertPost( 
+        $_iNewPostID = $this->insertPost( 
             $aInputs,
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
         );
                 
         // Create an auto insert
         if ( $_bDoAutoInsert ) {
-            $_oUtil->createAutoInsert( $_iNewPostID );
+            $this->createAutoInsert( $_iNewPostID );
         }
         
         // Clean the temporary form options data.
-        $_oUtil->deleteTransient(
+        $this->deleteTransient(
             $GLOBALS[ 'aal_transient_id' ]
         );
         
@@ -162,7 +136,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         AmazonAutoLinks_Event_Scheduler::prefetch( $_iNewPostID );
 
         // Go to the post editing page and exit. This way the framework won't create a new form transient row.
-        $_oUtil->goToPostDefinitionPage(
+        $this->goToPostDefinitionPage(
             $_iNewPostID,
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
         );        

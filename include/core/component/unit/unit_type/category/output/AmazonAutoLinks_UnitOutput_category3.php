@@ -324,14 +324,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 private function ___getProductsFormatted( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount ) {
 
                     try {
-                        $_iResultCount = count( $_aProducts );
+                        $_iResultCount          = count( $_aProducts );
                         // Format products with database data
-                        $_aProducts = $this->_getProductsFormatted(
-                            $_aProducts,
-                            $_aASINLocales,
-                            $_sLocale,
-                            $_sAssociateID
-                        );
+                        $_aProducts             = $this->_getProductsFormatted( $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID );
                         $_iCountAfterFormatting = count( $_aProducts );
                         if ( $_iResultCount > $_iCountAfterFormatting ) {
                             throw new Exception( $_iCount - $_iCountAfterFormatting );

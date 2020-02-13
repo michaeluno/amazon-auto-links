@@ -17,12 +17,12 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Minimal extends AmazonAutoLi
 
     protected $_aProduct = array(
         // mandatory
-        'product_url'   => null,
-        'ASIN'          => null,
+        'product_url'       => null,
+        'ASIN'              => null,
 
         // optional
-        'rating'        => null,
-        'price'         => null,
+        'rating'            => null,
+        'formatted_price'   => null,
 
     );
 
@@ -57,7 +57,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Minimal extends AmazonAutoLi
                 $sSiteDomain,
                 $sAssociateID
             );
-            $_aProduct[ 'price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
+            $_aProduct[ 'formatted_price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
 
             // Set an array
             $_aProducts[ $_aProduct[ 'ASIN' ] ] = $_aProduct + $this->_aProduct;

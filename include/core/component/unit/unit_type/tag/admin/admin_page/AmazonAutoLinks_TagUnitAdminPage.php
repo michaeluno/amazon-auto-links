@@ -14,7 +14,7 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_TagUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_TagUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
           
     /**
      * Sets the default option values for the setting form.
@@ -22,11 +22,7 @@ class AmazonAutoLinks_TagUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
      * @return      array       The options array.
      */
     public function setOptions( $aOptions ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        return $aOptions 
-            + $this->_getLastUnitInputs()
-            + $_oOption->get( 'unit_default' )  // 3.4.0+
-            + AmazonAutoLinks_UnitOption_tag::$aStructure_Default;
+        return parent::setOptions( $aOptions ) + AmazonAutoLinks_UnitOption_tag::$aStructure_Default;
     }
 
     /**

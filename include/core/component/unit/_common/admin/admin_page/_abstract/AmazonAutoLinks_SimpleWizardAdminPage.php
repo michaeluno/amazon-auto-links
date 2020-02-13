@@ -52,8 +52,14 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
      * @return      array       The options array.
      */
     public function setOptions( $aOptions ) {
-        return $aOptions;
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        return $aOptions
+            + $this->_getLastUnitInputs()
+            + $_oOption->get( 'unit_default' );
     }
+
+
+
     /**
      * @return      array
      * @since       3.2.0

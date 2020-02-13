@@ -9,60 +9,59 @@
  */
 
 /**
- * Defines the meta box added to the 'url' unit definition page.
+ * Defines the meta box added to the 'feed' unit definition page.
+ * @since       4.0.0
  */
-class AmazonAutoLinks_UnitPostMetaBox_Main_url extends AmazonAutoLinks_UnitPostMetaBox_Base {
+class AmazonAutoLinks_UnitPostMetaBox_Main_feed extends AmazonAutoLinks_UnitPostMetaBox_Base {
     
     /**
      * Stores the unit type slug(s). 
      */    
-    protected $aUnitTypes = array( 'url' );
+    protected $aUnitTypes = array( 'feed' );
     
     /**
      * Sets up form fields.
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_URLUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_FeedUnit_Main;
         foreach( $_oFields->get() as $_aField ) {
             if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
                 continue;
             }
             $this->addSettingFields( $_aField );
         }
-        // Add meta box only fields.
-        $this->addSettingFields(
-            array(
-                'field_id'      => '_found_items',
-                'title'         => __( 'Found Products', 'amazon-auto-links' ),
-                'type'          => 'textarea',
-                'attributes'    => array(
-                    'readonly' => 'readonly',
-                ),
-                'order'         => 14,
-            )        
-        );
+
     }
-    
+
+    public function load() {
+        add_action( 'do_meta_boxes', array( $this, 'replyToRemoveMetaBoxes' ) );
+    }
+        public function replyToRemoveMetaBoxes() {
+            remove_meta_box(
+                'amazon_auto_links_locale',
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], // screen: post type slug
+                'side'
+            );
+        }
+
+
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInput, $aOriginal, $oFactory ) {    
+    public function validate( $aInputs, $aOriginal, $oFactory ) {    
         
         $_aErrors   = array();
         $_bVerified = true;
         
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_url(
-            null,
-            $aInput
-        );
-        $_aFormatted = $_oUnitOption->get();
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_feed(null, $aInputs );
+        $_aFormatted  = $_oUnitOption->get();
         
-        // Check if a url is set.
-        $aInput[ 'urls' ] = $this->oUtil->getAsArray( $aInput[ 'urls' ] );
-        if ( empty( $aInput[ 'urls' ] ) ) {
-            $_aErrors[ 'urls' ] = __( 'Please set a url.', 'amazon-auto-links' );
+        // Check if a feed url is set.
+        $aInputs[ 'feed_urls' ] = $this->oUtil->getAsArray( $aInputs[ 'feed_urls' ] );
+        if ( empty( $aInputs[ 'feed_urls' ] ) ) {
+            $_aErrors[ 'feed_urls' ] = __( 'Please set a url.', 'amazon-auto-links' );
             $_bVerified = false;
         }        
         
@@ -72,31 +71,31 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_url extends AmazonAutoLinks_UnitPostM
             // Set the error array for the input fields.
             $oFactory->setFieldErrors( $_aErrors );        
             $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
-            return $aInput;
+            return $aInputs;
             
         }       
 
         // Sanitize
-        foreach ( $aInput[ 'urls' ] as $_iIndex => $_sURL ) {
-            $aInput[ 'urls' ][ $_iIndex ] = trim( $_sURL );
+        foreach ( $aInputs[ 'feed_urls' ] as $_iIndex => $_sURL ) {
+            $aInputs[ 'feed_urls' ][ $_iIndex ] = trim( $_sURL );
         }
         
         
         // Drop unsent keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {
-            if ( ! array_key_exists( $_sKey, $aInput ) ) {
+            if ( ! array_key_exists( $_sKey, $aInputs ) ) {
                 unset( $_aFormatted[ $_sKey ] );
             }
         }
         
         // Schedule pre-fetch for the unit if the options have been changed.
-        if ( $aInput !== $aOriginal ) {
+        if ( $aInputs !== $aOriginal ) {
             AmazonAutoLinks_Event_Scheduler::prefetch(
                 AmazonAutoLinks_PluginUtility::getCurrentPostID()
             );
         }
         
-        return $_aFormatted + $aInput;
+        return $_aFormatted + $aInputs;
         
     }
     

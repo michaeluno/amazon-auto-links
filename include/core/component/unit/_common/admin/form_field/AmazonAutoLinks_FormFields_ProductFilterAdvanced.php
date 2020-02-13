@@ -24,7 +24,7 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
      */
     public function get( $sFieldIDPrefix='' ) {
 
-        $_aFields = array(
+        $_aFields      = array(
             array(
                 'field_id'      => '_no_pending_items',
                 'type'          => 'checkbox',

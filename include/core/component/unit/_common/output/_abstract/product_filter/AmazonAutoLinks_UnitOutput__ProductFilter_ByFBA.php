@@ -39,6 +39,13 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA extends AmazonAutoLinks_Un
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
+        // Case: already set. Feed units can have this value already.
+        if ( isset( $aProduct[ 'delivery_fba' ] ) ) {
+            return ( boolean ) $aProduct[ 'delivery_fba' ]
+                ? $aProduct
+                : array();
+        }
+
         $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
             $aRowIdentifier[ 'asin' ],
             $aRowIdentifier[ 'locale' ],

@@ -13,13 +13,17 @@
  * 
  * @since           3  
  */
-abstract class AmazonAutoLinks_FormFields_Base extends AmazonAutoLinks_WPUtility {
+abstract class AmazonAutoLinks_FormFields_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores the option object.
+     * @var AmazonAutoLinks_Option
      */
     public $oOption;
-    
+
+    /**
+     * @var AmazonAutoLinks_TemplateOption
+     */
     public $oTemplateOption;
     
     public function __construct() {

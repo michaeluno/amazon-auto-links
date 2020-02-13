@@ -39,6 +39,13 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping extends AmazonAut
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
+        // Case: already set. Feed units can have this value already.
+        if ( isset( $aProduct[ 'delivery_free_shipping' ] ) ) {
+            return ( boolean ) $aProduct[ 'delivery_free_shipping' ]
+                ? $aProduct
+                : array();
+        }
+
         $_oRow = new AmazonAutoLinks_UnitOutput___Database_Product(
             $aRowIdentifier[ 'asin' ],
             $aRowIdentifier[ 'locale' ],

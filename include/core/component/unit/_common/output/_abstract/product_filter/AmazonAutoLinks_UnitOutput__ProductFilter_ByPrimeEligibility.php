@@ -35,7 +35,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility extends Amazo
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
-        // Search units already have this value.
+        // Case: already set. Search units already have this value. Also, feed units can already have this value.
         if ( isset( $aProduct[ 'is_prime' ] ) ) {
             return ( boolean ) $aProduct[ 'is_prime' ]
                 ? $aProduct

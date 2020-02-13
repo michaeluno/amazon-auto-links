@@ -13,23 +13,10 @@
  * Deals with the plugin admin pages.
  * 
  * @since       3.2.0
+ * @remark      This class is not final as being extended by the feed unit type admin page class.
+ * @see         AmazonAutoLinks_FeedUnitAdminPage
  */
 class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
-          
-    /**
-     * Sets the default option values for the setting form.
-     * @callback    filter      options_{class name}
-     * @return      array       The options array.
-     */
-    public function setOptions( $aOptions ) {
-        
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        return $aOptions 
-            + $this->_getLastUnitInputs()
-            + $_oOption->get( 'unit_default' )  // 3.4.0+
-            ;
-            
-    }
 
     /**
      * Sets up admin pages.
@@ -42,9 +29,17 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
         );
                     
         // Add pages
-        new AmazonAutoLinks_URLUnitAdminPage_URLUnit( $this );
+        $this->_addPages();
      
     }
+
+        /**
+         * @remark      Added for extended classes.
+         * @since       4.0.0
+         */
+        protected function _addPages() {
+            new AmazonAutoLinks_URLUnitAdminPage_URLUnit( $this );
+        }
         
     /**
      * Page styling
@@ -56,25 +51,7 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
     }
 
     public function load() {
-//        $this->___checkAPIKeys(); // @deprecated  3.9.0
         AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
     }
-    /**
-     * @deprecated  3.9.0
-     */
-/*        private function ___checkAPIKeys() {
-            $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( $_oOption->isAPIConnected() ) {
-                return;
-            }
 
-            $this->setSettingNotice(
-                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
-                'updated'
-            );
-
-            // Go to the Authentication tab of the Settings page.
-            AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
-        }*/
-        
 }

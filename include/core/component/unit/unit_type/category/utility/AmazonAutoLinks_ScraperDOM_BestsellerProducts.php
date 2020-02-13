@@ -16,17 +16,17 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
 
     protected $_aProduct = array(
         // mandatory
-        'product_url'   => null,
-        'ASIN'          => null,
+        'product_url'       => null,
+        'ASIN'              => null,
 
         // optional
-        'thumbnail_url' => null,
-        'title'         => null,
-        'rating'        => null,    // (string) partial HTML string
-        'rating_point'  => null,    // (integer)
-        'review_count'  => null,    // (integer)
-        'price'         => null,
-        'is_prime'      => null,
+        'thumbnail_url'     => null,
+        'title'             => null,
+        'rating'            => null,    // (string) partial HTML string
+        'rating_point'      => null,    // (integer)
+        'review_count'      => null,    // (integer)
+        'formatted_price'   => null,
+        'is_prime'          => null,
     );
 
 
@@ -64,7 +64,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                 $sSiteDomain,
                 $sAssociateID
             );
-            $_aProduct[ 'price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
+            $_aProduct[ 'formatted_price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
 
             // Set an array
             $_aProducts[ $_aProduct[ 'ASIN' ] ] = $_aProduct + $this->_aProduct;

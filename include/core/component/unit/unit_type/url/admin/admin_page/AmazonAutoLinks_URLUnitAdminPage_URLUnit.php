@@ -38,13 +38,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         // Form Section - we use the default one ('_default'), meaning no section.
         $oFactory->addSettingSections(
             $this->sPageSlug, // target page slug
-            array(
-                // 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => '_default', 
-                'description'   => array(
-                    __( 'The URL unit type allows you to search products found in the page with specified urls.', 'amazon-auto-links' ),
-                ),
-            )     
+            $this->_getSectionArguments()
         );        
         
         // Add Fields
@@ -69,10 +63,24 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         
     }
         /**
+         * @return  array
+         * @since   4.0.0
+         */
+        protected function _getSectionArguments() {
+            return array(
+                // 'tab_slug'      => $this->sTabSlug,
+                'section_id'    => '_default',
+                'description'   => array(
+                    __( 'The URL unit type allows you to search products found in the page with specified urls.', 'amazon-auto-links' ),
+                ),
+            );
+        }
+        /**
          * @since       3
+         * @since       4.0.0   Changed the scope to protected as the feed unit type extends this class and uses this method.
          * @return      array
          */
-        private function _getFormFieldClasses() {
+        protected function _getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_URLUnit_Main',
                 'AmazonAutoLinks_FormFields_Unit_Common',
@@ -112,13 +120,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
             $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
-            $oFactory->setSettingNotice( 
-                sprintf( 
-                    __( 'Please upgrade to <a href="%1$s">Pro</a> to add more units!', 'amazon-auto-links' ) . ' ' . __( 'Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ),
-                    'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/',
-                    admin_url( 'edit.php?post_status=trash&post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] )
-                )
-            );
+            $oFactory->setSettingNotice( $this->getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInput;
         }        
         
@@ -145,7 +147,14 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         }        
         
         $_bDoAutoInsert = $aInput[ 'auto_insert' ];
-   
+
+        // Store the inputs for the next time.
+        update_option(
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
+            $aInput,
+            false       // disable auto-load
+        );
+
         // Format the unit options to sanitize the data.
         $_oUnitOptions = new AmazonAutoLinks_UnitOption_url(
             null,   // unit id
@@ -175,14 +184,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         // Schedule pre-fetching the unit feed in the background
         // so that by the time the user opens the unit page, the cache will be ready.
         AmazonAutoLinks_Event_Scheduler::prefetch( $_iNewPostID );
-        
-        // Store the inputs for the next time.
-        update_option( 
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInput,
-            false       // disable auto-load 
-        );             
-        
+
         // Go to the post editing page and exit. This way the framework won't create a new form transient row.
         $_oUtil->goToPostDefinitionPage(
             $_iNewPostID,

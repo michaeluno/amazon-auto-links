@@ -22,19 +22,19 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
     protected $_aProduct = array(
 
         // required
-        'product_url'   => '',    // (string) gets set in the constructor
-        'ASIN'          => '',
+        'product_url'       => '',    // (string) gets set in the constructor
+        'ASIN'              => '',
 
         // optional
-        'thumbnail_url' => null,
-        'image_set'     => null,    // (string) sub-image set output
-        'title'         => '',
-        'rating'        => null,    // (string) partial HTML string
-        'rating_point'  => null,    // (integer)
-        'review_count'  => null,    // (integer)
-        'price'         => null,    // (string) formatted price e.g. $35.43
-        'feature'       => null,    // (string) a list of product features
-        'description'   => null,    // (string) a product description
+        'thumbnail_url'     => null,
+        'image_set'         => null,    // (string) sub-image set output
+        'title'             => '',
+        'rating'            => null,    // (string) partial HTML string
+        'rating_point'      => null,    // (integer)
+        'review_count'      => null,    // (integer)
+        'formatted_price'   => null,    // (string) HTML formatted price with currency e.g. <span class='proper-price'>$35.43</span>
+        'feature'           => null,    // (string) a list of product features
+        'description'       => null,    // (string) a product description
 
         // internal
         '_features'     => array(), // (array) the product features
@@ -131,7 +131,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                 $sAssociateID
             );
         }
-        $_aProduct[ 'price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
+        $_aProduct[ 'formatted_price' ]               = $this->_getPrice( $_oXPath, $_oItemNode );
         return $_aProduct;
 
     }

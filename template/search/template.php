@@ -19,7 +19,7 @@ $_aStructure_Product = array(
 	'ASIN'              => '',
 	'date'              => '',
 	'is_adult' 	        => '',
-	'price'             => '',
+	'formatted_price'   => '',
 	'lowest_new_price'  => '', 
 	'lowest_used_price' => '',
 ); 

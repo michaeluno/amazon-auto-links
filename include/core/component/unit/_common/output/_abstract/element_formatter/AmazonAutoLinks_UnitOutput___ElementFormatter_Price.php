@@ -24,16 +24,17 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
 
         // For search-type units, this value is already set with API response.
         // @deprecated 3.10.0 - The API SearchItems and GetItems operations give different results and GetItems is more up-to-date.
-//        if ( $this->_aProduct[ 'price' ] ) {
-//            return $this->_aProduct[ 'price' ];
+//        if ( $this->_aProduct[ 'formatted_price' ] ) {
+//            return $this->_aProduct[ 'formatted_price' ];
 //        }
 
         $_sPriceFormatted = $this->_getCell( 'price_formatted' );
         if ( null === $_sPriceFormatted ) {
 
-            // In a case that the price is already set,
-            if ( $this->_aProduct[ 'price' ] ) {
-                return $this->_aProduct[ 'price' ];
+            // In a case that the price is already set.
+            // @remark The key name is a bit confusing `formatted_price` is a native product array element key for HTML formatted price. `price_formatted` is a string value with the currency character.
+            if ( $this->_aProduct[ 'formatted_price' ] ) {
+                return $this->_aProduct[ 'formatted_price' ];
             }
 
             return $this->_getPendingMessage(
@@ -43,7 +44,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
 
         // 3.10.1 Not sure but there are reported cases that prices do not show up
         if ( ! $_sPriceFormatted ) {
-            return $this->_aProduct[ 'price' ];
+            return $this->_aProduct[ 'formatted_price' ];
         }
 
         return $this->___getFormattedOutput( $_sPriceFormatted );
