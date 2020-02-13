@@ -39,6 +39,8 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
         'search_per_keyword'    => false,    // 3.2.0+ // 3.11.0 changed it to false to reduce API calls
 
         '_sort'          => 'raw',  // 3.5.0+ (string) or `random`
+
+        'product_title'  => null,   // 4.0.0+ (string) Alter the product title.
     );
 
     /**

@@ -230,6 +230,7 @@ Optionally, the following arguments may be set.
     - `0` - Link to the product page.
     - `1` - Add to cart.
 - `load_with_javascript` - [3.6.0+] (boolean|integer) whether to load the unit with JavaScript. `true`/`1` to yes, `false`/`0` to no.
+- `product_title` - [4.0.0+] (string) An alternative text to alter the product title for anchor text. This is only supported when the `asin` argument is set.
 
 These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
 If these arguments are omitted, the values set in the setting page will be used.
@@ -311,6 +312,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.0.0 =
 - Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
+- Added the `product_title` shortcode parameter which alters the product title and serves as anchor text.
 - Changed the default template to `List` for all the unit types.
 - Fixed PHP warnings of deprecation when displaying buttons.
 - Fixed a bug that some URL query parameters of buttons were not properly set.

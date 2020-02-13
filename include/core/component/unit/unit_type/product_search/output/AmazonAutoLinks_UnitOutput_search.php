@@ -821,7 +821,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProduct = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
-                    'title'              => $this->oUnitOption->get( array( 'title' ), $_sTitle ), // the shortcode parameter 'title' can suppress the title in the parsed data
+                    'title'              => $this->oUnitOption->get( array( 'product_title' ), $_sTitle ), // the shortcode parameter 'title' can suppress the title in the parsed data
                     'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                     'description'        => $_sDescription, // reflects the user set character length. Additional meta data will be prepended.
                     'meta'               => '', // @todo maybe deprecated?
