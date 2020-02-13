@@ -251,7 +251,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         
         // Consider cases that options are deleted by external means.
         $_sCSS = AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS();
-        if ( $_iButtonID && false !== strpos( $_sCSS, $_iButtonID ) ) {
+        if ( $_iButtonID && false !== strpos( $_sCSS, '-' . ( string ) $_iButtonID ) ) {
             return $_iButtonID;
         }
         

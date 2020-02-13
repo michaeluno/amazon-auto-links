@@ -312,6 +312,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Changed the default template to `List` for all the unit types.
+- Fixed PHP warnings of deprecation when displaying buttons.
 - Fixed a bug that some URL query parameters of buttons were not properly set.
 - Fixed a bug that last inputs for creating units were not stored properly for some unit types.
 - Fixed a bug that category units did not show the updated date in the price disclaimer text.
