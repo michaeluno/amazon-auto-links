@@ -2,9 +2,9 @@
 /*
  * Available variables:
  * 
- * $arrOptions - the plugin options
- * $arrProducts - the fetched product links
- * $arrArgs - the user defined arguments such as image size and count etc.
+ * $aOptions - the plugin options
+ * $aProducts - the fetched product links
+ * $aArgs - the user defined arguments such as image size and count etc.
  */
 
 $_aScopeVariables = array();
