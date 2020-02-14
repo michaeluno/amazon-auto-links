@@ -34,11 +34,12 @@ class AmazonAutoLinks_AALBSupport_Shortcode_amazon_textlink extends AmazonAutoLi
      */
     public function replyToGetOutput( $aArguments ) {
 
-        $aArguments[ 'item_format' ] = '<div class="amazon-product converted-aalb">'
-                . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
+        $aArguments[ 'item_format' ] = '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
                     . '%title_text%'
                 . '</a>'
-            . '</div>';
+               ;
+
+        $aArguments[ '_no_outer_container' ] = true;
         return parent::replyToGetOutput( $aArguments );
 
     }    
