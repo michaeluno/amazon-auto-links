@@ -69,9 +69,12 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
         }
 
         // Case: a template ID is given.
-        if ( isset( $aArguments[ 'template_id' ] ) && $aArguments[ 'template_id' ] ) {
-            $_sTemplatePath = $this->___getTemplatePathFromID( $aArguments[ 'template_id' ], $_oTemplateOption );
-            if ( $_sTemplatePath ) {
+        // @remark even if the template is found, if it is not activated, return the default template
+        // For JSON and RSS feed outputs, they are given the path with the `template_path` argument, in that case, it does not matter whether the template is activated via the UI.
+        $_snTemplateID = $this->getElement( $aArguments, array( 'template_id' ) );
+        if ( $_oTemplateOption->isActive( $_snTemplateID ) ) {
+            $_sTemplatePath = $_oTemplateOption->getPathFromID( $_snTemplateID );
+            if ( $_sTemplatePath && file_exists( $_sTemplatePath ) ) {
                 return $_sTemplatePath;
             }
         }
@@ -83,25 +86,11 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
         $_sTemplateID = $_sTemplateID
             ? $_sTemplateID
             : $_oTemplateOption->getDefaultTemplateIDByUnitType( $_sUnitType );
-        return $this->___getTemplatePathFromID( $_sTemplateID, $_oTemplateOption );
+        return $_oTemplateOption->getPathFromID( $_sTemplateID );
 
     }
 
-        /**
-         * @param string $sTemplateID
-         * @param AmazonAutoLinks_TemplateOption $oTemplateOption
-         *
-         * @return string
-         * @since   4.0.0
-         */
-        private function ___getTemplatePathFromID( $sTemplateID, AmazonAutoLinks_TemplateOption $oTemplateOption ) {
-            foreach( $oTemplateOption->getActiveTemplates() as $_sID => $_aTemplate ) {
-                if ( $_sID === trim( $sTemplateID ) ) {
-                    return $_aTemplate[ 'template_path' ];
-                }
-            }
-            return '';
-        }
+
         /**
          *
          * @remark      Each unit has to define its own default template.

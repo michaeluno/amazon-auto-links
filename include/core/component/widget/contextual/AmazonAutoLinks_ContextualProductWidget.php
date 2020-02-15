@@ -117,7 +117,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
-            'AmazonAutoLinks_FormFields_Unit_Template',
+            // 'AmazonAutoLinks_FormFields_Unit_Template', @deprecated 4.0.0
+            'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport',   // 4.0.0+
             'AmazonAutoLinks_FormFields_Widget_Visibility',
         );
         $this->_addFieldsByFieldClass( $_aClasses );
@@ -195,9 +196,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @return      void
          */
         private function _addFieldsByFieldClass( $aClassNames ) {     
-            foreach( $aClassNames as $_sClsssName ) {            
-                $_oFields = new $_sClsssName;
-                $_aFields = 'AmazonAutoLinks_FormFields_Unit_Template' === $_sClsssName
+            foreach( $aClassNames as $_sClassName ) {            
+                $_oFields = new $_sClassName;
+                $_aFields = 'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport' === $_sClassName
                     ? $_oFields->get( '', 'contextual_widget' )
                     : $_oFields->get();
                 foreach( $_aFields as $_aField ) {

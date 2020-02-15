@@ -61,11 +61,12 @@ class AmazonAutoLinks_UnitOption_similarity_lookup extends AmazonAutoLinks_UnitO
     /**
      * 
      * @since       3.4.6
+     * @since       4.0.0       Renamed from format() as it was too general.
      */
-    protected function format( array $aUnitOptions ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
 
-        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
-        return parent::format( $aUnitOptions );
+        $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults );
         
     }        
     

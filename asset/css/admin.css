@@ -8,6 +8,11 @@
     font-size: 0.8em;
 }
 
+
+.amazon-auto-links-fieldset.child-fieldset > label.amazon-auto-links-child-field-title {
+	font-size: 13px;
+}
+
 /* Debug output */
 pre.dump-array {
     width: inherit !important;   

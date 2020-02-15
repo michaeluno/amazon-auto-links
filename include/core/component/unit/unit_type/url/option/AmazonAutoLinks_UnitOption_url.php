@@ -46,11 +46,13 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
     
     /**
      * 
-     * @since       3 
+     * @since       3
+     * @since       4.0.0   Renamed from format() as it was too general.
+     * @return      array
      */
-    protected function format( array $aUnitOptions ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
 
-        $aUnitOptions = parent::format( $aUnitOptions );
+        $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults );
         
         $aUnitOptions[ 'urls' ]  = $this->getAsArray( $aUnitOptions[ 'urls' ] );
                 

@@ -310,10 +310,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.0 =
+- Added the `Output Formats` unit options that support `Item Format`, `Image Format`, and `Title Format` options for each template.
 - Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Added the `product_title` shortcode parameter which alters the product title and serves as anchor text.
-- Added the ability to convert the `[amazon_textlink]` shortcode of Amazon Associates Link Builder into a simple text link.
+- Added the new `Text` template.
+- Tweaked the styling of the `List` template for widget areas.
+- Optimized the outputs of the `[amazon_textlink]` shortcode of Amazon Associates Link Builder to remove some outer container.
+- Changed the `Category` and `Search` templates not to be the default activated templates.
 - Changed the default template to `List` for all the unit types.
 - Fixed PHP warnings of deprecation when displaying buttons.
 - Fixed a bug that some URL query parameters of buttons were not properly set.
@@ -321,8 +325,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that category units did not show the updated date in the price disclaimer text.
 - Removed some array key elements and local variables passed to the template file which has been kept for backward-compatibility.
 - Removed legacy code for v2 or earlier.
+- Deprecated the `Item Format` unit option for the new `Output Formats` unit option that support item format option per template.
 
-= 3.12.0 - 02/05/2020 =- Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
+= 3.12.0 - 02/05/2020 =
+- Added the `Keywords to Exclude` unit option for the `Contextual` unit type.
 - Optimized the caching mechanism to compress data.
 
 = 3.11.1 - 01/29/2020 =

@@ -297,7 +297,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @since       2.0.0
      * @since       3.1.0       Added the $aAllowedAttributes parameter.
      */
-    static public function escapeKSESFilter( $sString, $aAllowedTags = array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
+    static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
         foreach( $aAllowedTags as $sTag ) {
             $aFormatAllowedTags[ $sTag ] = array();    // activate the inline style attribute.

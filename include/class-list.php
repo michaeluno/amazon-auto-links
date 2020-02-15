@@ -249,6 +249,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_FormFields_Unit_Credit"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php", 
     "AmazonAutoLinks_FormFields_Unit_Locale"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php", 
     "AmazonAutoLinks_FormFields_Unit_Template"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php", 
+    "AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php", 
     "AmazonAutoLinks_FormFields_Unit_WizardSubmit"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_WizardSubmit.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Cache"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Cache.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Common"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Common.php", 

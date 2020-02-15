@@ -46,11 +46,12 @@ class AmazonAutoLinks_UnitOption_category extends AmazonAutoLinks_UnitOption_Bas
 
     /**
      * 
-     * @since       3 
+     * @since   3
+     * @since   4.0.0   Renamed from `format()` as it was too general.
      */
-    protected function format( array $aUnitOptions ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
 
-        $aUnitOptions = parent::format( $aUnitOptions );
+        $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults );
         
         // If nothing is checked for the feed type, enable the bestseller item.
         $_aCheckedFeedTypes = array_filter( $aUnitOptions[ 'feed_type' ] );

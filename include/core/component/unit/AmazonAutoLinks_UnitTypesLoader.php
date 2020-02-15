@@ -20,7 +20,8 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
      * Stores class names of common form fields among all the unit types.
      */
     public $aFieldClasses = array(
-        'AmazonAutoLinks_FormFields_Unit_Template',
+        'AmazonAutoLinks_FormFields_Unit_Template', // kept for backward-compatibility
+        'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport', // 4.0.0+
         'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
         'AmazonAutoLinks_FormFields_Button_Selector',
         'AmazonAutoLinks_FormFields_Unit_Common',    

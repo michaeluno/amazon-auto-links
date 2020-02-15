@@ -32,32 +32,34 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         
         $this->_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         
-        $this->_loadFunctionsOfActiveTemplates();
-        $this->_loadStylesOfActiveTemplates();        
-        $this->_loadSettingsOfActiveTemplates();             
+        $this->___loadFunctionsOfActiveTemplates();
+        $this->___loadStylesOfActiveTemplates();
+        $this->___loadSettingsOfActiveTemplates();
         
     }
 
     /**
      * Includes activated templates' `functions.php` files.
      * @since       3
+     * @since       4.0.0   Changed the timing to the init action hook.
      */    
-    private function _loadFunctionsOfActiveTemplates() {    
-        foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-            if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
-                continue;
-            }            
-            $this->includeOnce(
-                $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php'
-            );
-        }    
+    private function ___loadFunctionsOfActiveTemplates() {
+        add_action( 'init', array( $this, 'replyToLoadFunctions' ) );
     }
+        public function replyToLoadFunctions() {
+            foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+                if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
+                    continue;
+                }
+                $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php' );
+            }
+        }
     
     /**
      * 
      * @since       3
      */
-    private function _loadStylesOfActiveTemplates() {
+    private function ___loadStylesOfActiveTemplates() {
         add_action( 
             'wp_enqueue_scripts', 
             array( $this, '_replyToEnqueueActiveTemplateStyles' ) 
@@ -101,12 +103,12 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
          */
         public function _replyToPrintActiveTemplateCustomCSSRules() {
             
-            $_aCSSRUles = array();
+            $_aCSSRules = array();
             
             // Retrieve 'custom_css' option value from all the active templates.
 // @todo Add 'custom_css' field to all the template options.
             foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {   
-                $_aCSSRUles[] = $this->getElement(
+                $_aCSSRules[] = $this->getElement(
                     $_aTemplate,
                     'custom_css',
                     ''
@@ -115,7 +117,7 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
                         
             $_sCSSRules = apply_filters(
                 'aal_filter_template_custom_css',
-                trim( implode( PHP_EOL, array_filter( $_aCSSRUles ) ) )
+                trim( implode( PHP_EOL, array_filter( $_aCSSRules ) ) )
             );
             if ( $_sCSSRules ) {
                 echo "<style type='text/css' id='amazon-auto-links-template-custom-css'>"
@@ -127,24 +129,29 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         
     /**
      * Stores loaded file paths so that PHP errors of including the same file multiple times can be avoided.
+     * @deprecated  4.0.0   Not used anywhere.
      */
-    static public $_aLoadedFiles = array();
+//    static public $_aLoadedFiles = array();
     
     /**
      * Includes activated templates' settings.php files.
      * @since       3
+     * @since       4.0.0   Changed the timing to the `init` hook.
      */    
-    private function _loadSettingsOfActiveTemplates() {
-        if ( ! is_admin() ) {
-            return;
-        }
-        foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-            if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
-                continue;
+    private function ___loadSettingsOfActiveTemplates() {
+        add_action( 'init', array( $this, 'replyToLoadSettings' ) );
+    }
+        public function replyToLoadSettings() {
+            if ( ! is_admin() ) {
+                return;
             }
-            $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' );
-        }        
-    }    
+            foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+                if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
+                    continue;
+                }
+                $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' );
+            }
+        }
         
 
   

@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.1 =
+- Tweaked the styling for widget areas.
+
 = 1.2.0 =
 - Added styling for embedded contents including making the product title larger.
 - Made the image width `auto` in widget areas.

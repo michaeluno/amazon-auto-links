@@ -51,9 +51,10 @@ class AmazonAutoLinks_UnitOption_contextual extends AmazonAutoLinks_UnitOption_s
     /**
      * 
      * @since       3.5.0
+     * @since       4.0.0   Renamed from `format()` as it was too general.
      */
-    protected function format( array $aUnitOptions ) {
-        return parent::format( $aUnitOptions );
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
+        return parent::_getUnitOptionsFormatted( $aUnitOptions, array $aDefaults );
     }
 
 }

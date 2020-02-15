@@ -112,8 +112,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         private function _getDefaultTemplates() {
             
             $_aDirPaths = array(
-                AmazonAutoLinks_Registry::$sDirPath . '/template/category',
-                AmazonAutoLinks_Registry::$sDirPath . '/template/search',
+//                AmazonAutoLinks_Registry::$sDirPath . '/template/category',   // @deprecated 4.0.0    Now use list
+//                AmazonAutoLinks_Registry::$sDirPath . '/template/search',     // @deprecated 4.0.0    Now use list
                 AmazonAutoLinks_Registry::$sDirPath . '/template/list'  // 3.8.0
             );
             $_iIndex     = 0;
@@ -144,7 +144,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             return self::$_aActiveTemplates;
         }
                 
-        $_aActiveTemplates = $this->_getActiveTemplatesExtracted( 
+        $_aActiveTemplates = $this->___getActiveTemplatesExtracted(
             $this->get()    // saved all templates
         );
 
@@ -153,13 +153,15 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return $_aActiveTemplates;
         
     }
+
         /**
-         * @since       3.3.0
+         * @param array $aTemplates
+         *
          * @return      array
+         * @since       3.3.0
          */
-        private function _getActiveTemplatesExtracted( array $aTemplates ) {
-            
-            // $_aActive = array();
+        private function ___getActiveTemplatesExtracted( array $aTemplates ) {
+
             foreach( $aTemplates as $_sID => $_aTemplate ) {
                 
                 $_aTemplate = $this->_formatTemplateArray( $_aTemplate );
@@ -239,7 +241,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             }                   
             
             // Other elements
-            $aTemplate['template_path']      = $this->getElement(
+            $aTemplate[ 'template_path' ]      = $this->getElement(
                 $aTemplate,
                 'template_path',
                 $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'template.php'
@@ -299,13 +301,13 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             private function _formatTemplateArrayLegacy( array $aTemplate ) {
                                 
                 $aTemplate = $aTemplate + self::$aStructure_Template_Legacy;                
-                $aTemplate['strDirPath'] = $aTemplate['strDirPath']    // check if it's not missing
-                    ? $aTemplate['strDirPath']
-                    : dirname( $aTemplate['strCSSPath'] );
+                $aTemplate[ 'strDirPath' ] = $aTemplate[ 'strDirPath' ]    // check if it's not missing
+                    ? $aTemplate[ 'strDirPath' ]
+                    : dirname( $aTemplate[ 'strCSSPath' ] );
                             
-                $aTemplate['strTemplatePath'] = $aTemplate['strTemplatePath']    // check if it's not missing
-                    ? $aTemplate['strTemplatePath']
-                    : dirname( $aTemplate['strCSSPath'] ) . DIRECTORY_SEPARATOR . 'template.php';
+                $aTemplate[ 'strTemplatePath' ] = $aTemplate[ 'strTemplatePath' ]    // check if it's not missing
+                    ? $aTemplate[ 'strTemplatePath' ]
+                    : dirname( $aTemplate[ 'strCSSPath' ] ) . DIRECTORY_SEPARATOR . 'template.php';
                             
                 return $aTemplate;
                 
@@ -336,7 +338,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return $_aLabels;
     }
     /**
-     * 
+     * Returns the plugin default template unit ID by unit type regardless of whether it is activated or not.
      * @since       3
      * @return      string
      */
@@ -415,17 +417,17 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return $_aTemplates;
         
     }
+
         /**
          * Returns the template array by the given directory path.
          * @since       3
          * @since       3.7.4       Added the `$bAbsolutePath` parameter.
-         * @scope       public       The unit class also accesses this.
+         * @sinc        4.0.0       Deprecated the third parameter $bAbsolutePath as it is not used anywhere.
+         * @scope       public      The unit class also accesses this.
          */
-        public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true, $bAbsolutePath=true ) {
+        public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true ) {
 
-            $_sRelativePath = $bAbsolutePath
-                ? str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $sDirPath ) ) )
-                : $sDirPath;
+            $_sRelativePath = $this->getTemplateID( $sDirPath ); // at the moment, the ID serves as a relative path
             $_aData         = array(
                 'dir_path'              => $sDirPath,
                 'relative_dir_path'     => $_sRelativePath,
@@ -445,6 +447,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 );
             }
             return $this->_formatTemplateArray( $_aData );
+
         }
             /**
              * @return  string|null
@@ -509,17 +512,19 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $_aTemplateContainerDirs    = array_filter( $_aTemplateContainerDirs );    // drop elements of empty values.
                 return array_unique( $_aTemplateContainerDirs );
                 
-            }       
-    
- 
+            }
+
+
     /**
      * A helper function for the getUploadedTemplates() method.
-     * 
+     *
      * Used when rendering the template listing table.
      * An alternative to get_plugin_data() as some users change the location of the wp-admin directory.
-     * 
+     *
+     * @param string $sCSSPath
+     *
      * @return      array       an array of template detail information from the given file path.
-     * */
+     */
     protected function getTemplateData( $sCSSPath )    {
 
         return file_exists( $sCSSPath )
@@ -537,6 +542,42 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             )
             : array();
         
-    }                     
+    }
+
+    /**
+     * @param   string $sDirPath
+     *
+     * @return  string
+     * @since   4.0.0
+     * @scope   public  Each template accesses this method to get the ID for filters.
+     */
+    public function getTemplateID( $sDirPath ) {
+        $sDirPath = wp_normalize_path( $sDirPath );
+        $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        return untrailingslashit( $sDirPath );
+    }
+
+    /**
+     * @param   string $sTemplateID
+     * @return  boolean
+     * @since   4.0.0
+     */
+    public function isActive( $sTemplateID ) {
+        return in_array( $sTemplateID, array_keys( $this->getActiveTemplates() ), true );
+    }
+
+    /**
+     * @param string $sTemplateID
+     * @return string
+     * @since   4.0.0
+     */
+    public function getPathFromID( $sTemplateID ) {
+        foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
+            if ( $_sID === trim( $sTemplateID ) ) {
+                return $_aTemplate[ 'template_path' ];
+            }
+        }
+        return '';
+    }
         
 }

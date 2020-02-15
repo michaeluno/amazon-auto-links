@@ -286,6 +286,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             '_filter_by_fba'                => false,
             'preferred_currency'            => null,
             'language'                      => null,
+
+            // 4.0.0
+            'output_formats'                => array(), // (array) holds item_format, image_format, title_format for each active template
         )
         
     );

@@ -30,18 +30,14 @@ class AmazonAutoLinks_AALBSupport_Shortcode_amazon_textlink extends AmazonAutoLi
      *      link_id='f863a353-cea3-11e7-a36d-bbeba5c8a631'
      * ]
      *
+     * @param array $aArguments The shortcode arguments.
+     *
+     * @return string|void
      * @since       4.0.0
      */
     public function replyToGetOutput( $aArguments ) {
-
-        $aArguments[ 'item_format' ] = '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
-                    . '%title_text%'
-                . '</a>'
-               ;
-
-        $aArguments[ '_no_outer_container' ] = true;
+        $aArguments[ '_no_outer_container' ] = true;    // when the Text template is selected, this is redundant but kept for cases of other templates.
         return parent::replyToGetOutput( $aArguments );
-
-    }    
+    }
 
 }

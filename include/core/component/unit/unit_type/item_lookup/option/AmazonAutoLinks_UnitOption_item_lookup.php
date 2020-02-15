@@ -67,12 +67,13 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
 
     /**
      * 
-     * @since       3 
+     * @since   3
+     * @since   4.0.0       Renamed from `format()` as it was too general.
      */
-    protected function format( array $aUnitOptions ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
 
-        $aUnitOptions = $this->getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
-        $aUnitOptions = parent::format( $aUnitOptions )
+        $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults )
             + AmazonAutoLinks_UnitOutput_similarity_lookup::$aStructure_APIParameters;
         $aUnitOptions = $this->sanitize( $aUnitOptions );
         return $aUnitOptions;

@@ -58,6 +58,9 @@ class AmazonAutoLinks_AALBSupport_Shortcode_amazon_link extends AmazonAutoLinks_
      *      link_id='f863a353-cea3-11e7-a36d-bbeba5c8a631'
      * ]
      *
+     * @param array $aArguments The shortcode arguments.
+     *
+     * @return string|void
      * @since       3.11.0
      */
     public function replyToGetOutput( $aArguments ) {

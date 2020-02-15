@@ -11,7 +11,9 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
 
     /**
      * Sets up properties.
-     * 
+     *
+     * @param array $aInputs
+     * @param array $aOldInputs
      */
     public function __construct( $aInputs, $aOldInputs ) {
         $this->aInputs      = $aInputs;
@@ -24,21 +26,22 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
      * @return      array
      */    
     public function get() {
-        
-        return $this->_getItemFormatsSanitized( $this->aInputs, $this->aOldInputs );
-        
+        return $this->___getItemFormatsSanitized( $this->aInputs, $this->aOldInputs );
     }
+
         /**
+         * @param array $aInputs
+         * @param array $aOldInputs
+         *
          * @return      array
          * @since       3.2.4
          */
-        private function _getItemFormatsSanitized( $aInputs, $aOldInputs ) {
+        private function ___getItemFormatsSanitized( $aInputs, $aOldInputs ) {
             
             $_oOption = AmazonAutoLinks_Option::getInstance();    
-            $_oUtil   = new AmazonAutoLinks_WPUtility;
-            
+
             add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-            $_aAllowedHTMLTags = $_oUtil->getStringIntoArray(
+            $_aAllowedHTMLTags = $this->getStringIntoArray(
                 str_replace(
                     PHP_EOL,            // search
                     ',',                // replace
@@ -49,7 +52,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 ), 
                 ',' 
             );
-            $_aAllowedAttributes = $_oUtil->getStringIntoArray(
+            $_aAllowedAttributes = $this->getStringIntoArray(
                 str_replace(
                     PHP_EOL,            // search
                     ',',                // replace
@@ -60,23 +63,52 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 ), 
                 ',' 
             );
-            
-            $aInputs[ 'item_format' ]  = $_oUtil->escapeKSESFilter( $aInputs[ 'item_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
-            $aInputs[ 'image_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'image_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
-            $aInputs[ 'title_format' ] = $_oUtil->escapeKSESFilter( $aInputs[ 'title_format' ], $_aAllowedHTMLTags, array(), array(), $_aAllowedAttributes );
+
+            // For backward compatibility for v3 or below
+            $aInputs = $this->___getInputEscapedForKSES( $aInputs, $_aAllowedHTMLTags, $_aAllowedAttributes );
+
+            // The option added since v4.0.0 in place of `item_format`.
+            $aInputs[ 'output_formats' ] = $this->___getInputEscapedForKSES(
+                $this->getElementAsArray( $aInputs, array( 'output_formats' ) ),
+                $_aAllowedHTMLTags,
+                $_aAllowedAttributes
+            );
+
             remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-            
             return $aInputs;
             
-        }    
+        }
+
+            /**
+             * @param array $aOutputFormat
+             * @param array $aAllowedHTMLTags
+             * @param array $aAllowedAttributes
+             *
+             * @return array    Sanitized array with escaped form values.
+             */
+            private function ___getInputEscapedForKSES( array $aOutputFormat, array $aAllowedHTMLTags, array $aAllowedAttributes ) {
+                $_sKeysToCheck = array( 'item_format', 'image_format', 'title_format' );
+                foreach( $_sKeysToCheck as $_sLegacyKey ) {
+                    if ( ! isset( $aInputs[ $_sLegacyKey ] ) ) {
+                        continue;
+                    }
+                    $aOutputFormat[ $_sLegacyKey ] = $this->escapeKSESFilter(
+                        $aOutputFormat[ $_sLegacyKey ],
+                        $aAllowedHTMLTags,
+                        array(),
+                        array(),
+                        $aAllowedAttributes
+                    );
+                }
+                return $aOutputFormat;
+            }
             /**
              * @return      array
              */
             public function replyToAddAllowedInlineCSSProperties( $aProperty ) {
                 
-                $_oOption = AmazonAutoLinks_Option::getInstance();    
-                $_oUtil   = new AmazonAutoLinks_WPUtility;
-                $_aAllowedCSSProperties = $_oUtil->getStringIntoArray(
+                $_oOption = AmazonAutoLinks_Option::getInstance();
+                $_aAllowedCSSProperties = $this->getStringIntoArray(
                     str_replace(
                         PHP_EOL,            // search
                         ',',                // replace
@@ -89,16 +121,8 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                 ) + array(
                     'max-width', 'min-width', 'max-height', 'min-height'
                 );
+                return array_unique( array_merge( $aProperty, $_aAllowedCSSProperties ) );
 
-                $_aResult = array_unique( 
-                    array_merge( 
-                        $aProperty, 
-                        $_aAllowedCSSProperties 
-                    ) 
-                );
-
-                return $_aResult;                  
-                
             }        
       
 }

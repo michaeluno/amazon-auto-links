@@ -13,7 +13,8 @@
  * 
  * It has a caching system built-in.
  * 
- * @since       3       
+ * @since       3
+ * @deprecated  Not used anymore and has some critical errors.
  */
 class AmazonAutoLinks_HTTPClient_FileGetContents extends AmazonAutoLinks_HTTPClient_Base {
        

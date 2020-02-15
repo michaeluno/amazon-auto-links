@@ -16,8 +16,10 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template extends A
      * Sets up form fields.
      */ 
     public function setUp() {
-        
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
+
+        // @deprecated 4.0.0
+        // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport;
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );

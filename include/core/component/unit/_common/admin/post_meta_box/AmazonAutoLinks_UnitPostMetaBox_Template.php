@@ -17,9 +17,11 @@ class AmazonAutoLinks_UnitPostMetaBox_Template extends AmazonAutoLinks_UnitPostM
      * Sets up form fields.
      */ 
     public function setUp() {
-        
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
-        $_aFields = $_oFields->get( 
+
+        // @deprecated 4.0.0
+        // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport;
+        $_aFields = $_oFields->get(
             '',     // field id prefix
             'category'  // unit type
         );

@@ -78,6 +78,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
         $_sOutput = $this->___getOutput();
         $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
+        $_bNoOuterContainer = apply_filters( 'aal_filter_output_is_without_outer_container', $_bNoOuterContainer, $this->aArguments );
         return $_bNoOuterContainer
             ? $_sOutput
             : "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
@@ -158,6 +159,9 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
                 if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
+                    /**
+                     * Each unit type hooks into this filter hook and generates their outputs.
+                     */
                     return trim( apply_filters( 'aal_filter_unit_output_' . $sUnitType, '', $_aUnitOptions ) );
                 }
 

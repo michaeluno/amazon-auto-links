@@ -25,8 +25,10 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template extends Ama
             )
         );        
         $this->addSettingFields( $this->_sSectionID );         
-        
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
+
+        // @deprecated 4.0.0 To support default item format options for each template
+        // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport; // 4.0.0+
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );
@@ -38,8 +40,8 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template extends Ama
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInput, $aOriginal, $oFactory ) {    
-        return $aInput;        
+    public function validate( $aInputs, $aOriginal, $oFactory ) {
+        return $aInputs;
     }
     
 }
