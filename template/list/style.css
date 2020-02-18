@@ -16,6 +16,7 @@
     width: 100%;
 }
 .amazon-products-container-list a {
+    color: inherit; /* this prevents a theme native text color for button text in .wp-embed elements */
 	text-decoration: none;
 }
 .amazon-products-container-list .amazon-product-container {

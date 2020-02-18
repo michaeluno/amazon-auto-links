@@ -33,7 +33,11 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_PluginUtility
             add_action( 
                 'wp_head', 
                 array( $this, 'replyToPrintStyleTag' ) 
-            );    
+            );
+            add_action(
+                'embed_head',
+                array( $this, 'replyToPrintStyleTag' )
+            ); // 4.0.0
             return;
         } 
         
