@@ -31,6 +31,9 @@ Are you looking for an alternative to the discontinued Amazon Associates Link Bu
 
 Just enable the option and you don't have to edit thousands of posts to replace the shortcode.
 
+= Want to display a selected product in a post? =
+If you want to simply display your desired specific product in a post, don't worry. You can do that too. Just paste the product URL in the post editor. No shortcode is required.
+
 = See How Amazon Affiliate Links are Displayed =
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
@@ -303,9 +306,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
 - @todo introduce a new unit type Comparision Table
 - @todo add a card template.
-- @todo add the ability to display products with oEmbed.
 - @todo add the ability to select a caching type from either database or file.
-- @todo remove legacy code older than v3.
 
 == Changelog ==
 
