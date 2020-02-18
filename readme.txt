@@ -316,7 +316,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Added the `product_title` shortcode parameter which alters the product title and serves as anchor text.
 - Added the new `Text` template.
-- Tweaked the styling of the `List` template for widget areas.
+- Tweaked the styling of the `List` template for widget areas and relatively small thumbnail sizes.
 - Optimized the outputs of the `[amazon_textlink]` shortcode of Amazon Associates Link Builder to remove some outer container.
 - Changed the `Category` and `Search` templates not to be the default activated templates.
 - Changed the default template to `List` for all the unit types.
