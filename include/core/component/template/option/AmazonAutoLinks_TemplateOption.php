@@ -337,10 +337,14 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         }
         return $_aLabels;
     }
+
     /**
      * Returns the plugin default template unit ID by unit type regardless of whether it is activated or not.
-     * @since       3
+     *
+     * @param string $sUnitType
+     *
      * @return      string
+     * @since       3
      */
     public function getDefaultTemplateIDByUnitType( $sUnitType ) {
         switch ( $sUnitType ) {

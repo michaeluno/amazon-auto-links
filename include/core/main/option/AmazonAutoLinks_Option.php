@@ -154,7 +154,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'enabled'               => true,
             'use_iframe'            => true,
             'external_provider'     => '',
-            'prioritize_associates_id_of_url' => true,
+            'override_associates_id_of_url' => false,
+            'template_id'           => null,            // (string) will be set via the UI
         ),
     
         // 3.4.0+

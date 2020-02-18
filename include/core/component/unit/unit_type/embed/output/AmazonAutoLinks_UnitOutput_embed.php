@@ -116,8 +116,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
              */
             private function ___getAssociateIDFromURL( $sURL ) {
 
-                $_bUseAssociatesIDOfURL = $this->oOption->get( 'custom_oembed', 'prioritize_associates_id_of_url' );
-                if ( $_bUseAssociatesIDOfURL ) {
+                $_bOverrideAssociatesIDOfURL = ( boolean ) $this->oOption->get( 'custom_oembed', 'override_associates_id_of_url' );
+                if ( ! $_bOverrideAssociatesIDOfURL ) {
                     $_sQuery = parse_url( $sURL, PHP_URL_QUERY );
                     parse_str( $_sQuery, $_aQuery );
                     if ( isset( $_aQuery[ 'tag' ] ) ) {

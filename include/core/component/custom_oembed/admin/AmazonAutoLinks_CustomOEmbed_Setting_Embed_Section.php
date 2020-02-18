@@ -42,43 +42,63 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
+        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
                 'field_id'              => 'enabled',
                 'type'                  => 'radio',
                 'title'                 => __( 'Enable', 'amazon-auto-links' ),
-//                'select_type'           => 'radio',
-                // 'show_title_column'     => false,
                 'label'                 => array(
                     1 => __( 'On', 'amazon-auto-links' ),
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'selectors'         => array(
-                    1   => '#fieldrow-convert_links_where,#fieldrow-convert_links_custom_filter_hooks',
-                ),
+            ),
+            array(
+                'field_id'          => 'template_id',
+                'type'              => 'select',
+                'title'             => __( 'Template Name', 'amazon-auto-links' ),
+                'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
+                'label'             => $_oTemplateOption->getActiveTemplateLabels(),
+                'default'           => $_oTemplateOption->getDefaultTemplateIDByUnitType( 'embed' ),
+                'description'       => __( 'Choose the template used for embedded outputs.', 'amazon-auto-links' ),
             ),
             array(
                 'field_id'              => 'use_iframe',
-                'type'                  => 'revealer',
+                'type'                  => 'checkbox',
                 'title'                 => __( 'Use iframe', 'amazon-auto-links' ),
                 'description'           => __( 'When enabling this option, product links will be displayed in iframe. Otherwise, they will be directly rendered.', 'amazon-auto-links' ),
-                'select_type'           => 'checkbox',
                 'label'                 => __( 'Show product links in iframe', 'amazon-auto-links' ),
             ),
             array(
-                'field_id'       => 'prioritize_associates_id_of_url',
-                'type'           => 'checkbox',
-                'title'          => __( 'Prioritize Associates ID Used in URL', 'amazon-auto-links' ),
-                'label'          => __( 'Respect the one set in the pasted URL in the editor.', 'amazon-auto-links' ),
-                'description'    => __( 'For example, if <code>https://amazon.com/dp/B07PCMWTSG?tag=myasscoaiteid-21</code> is pasted in the post editor, the ID, <code>myassociateid-21</code> will be used. To use a preset ID, set it in the below option.', 'amazon-auto-links' ),
+                'field_id'       => 'override_associates_id_of_url',
+                'type'           => 'revealer',
+                'select_type'    => 'radio',
+                'title'          => __( 'Override Associates ID Used in URL', 'amazon-auto-links' ),
+                'label'                 => array(
+                    1 => __( 'Yes', 'amazon-auto-links' ),
+                    0 => __( 'No', 'amazon-auto-links' ),
+                ),
+                'description'    => array(
+                    __( 'Override the Associates ID set in the pasted URL in the post editor.', 'amazon-auto-links' ),
+                    __( 'For example, if <code>https://amazon.com/dp/B07PCMWTSG?tag=myasscoaiteid-21</code> is pasted in the post editor, the ID, <code>myassociateid-21</code> will be used without this option enabled. To use a preset ID, set it in the below option.', 'amazon-auto-links' ),
+                    __( 'If this option is not enabled and there is no Associates ID in the pasted URL, the default Associates ID set in the Default section will be used.', 'amazon-auto-links' ),
+                ),
+                'selectors'      => array(
+                    1 => '.oembed_associate_ids',
+                ),
+                // 'default'        => false,
             ),
             array(
                 'field_id'       => 'associates_ids',
                 'type'           => 'text',
                 'title'          => __( 'Associates IDs', 'amazon-auto-links' ),
                 'label'          => $this->___getCountryLabels(),
-                'description'    => __( 'When an Associates ID is not found in the pasted URL in the editor, the value set in this option will be used unless the above option is enabled.', 'amazon-auto-links' ),
+                'description'    => __( 'When an Associates ID is not found in the pasted URL in the editor, the value set in this option will be used when the above option is enabled.', 'amazon-auto-links' ),
+                'class'          => array(
+                    'fieldrow' => 'oembed_associate_ids',
+                ),
             ),
             array(
                 'field_id'              => 'external_provider',

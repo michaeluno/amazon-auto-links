@@ -125,7 +125,12 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
             return;
         }
 
-        AmazonAutoLinks( array( 'uri' => urldecode( $_GET[ 'uri' ] ) ) );
+        $_oOption      = AmazonAutoLinks_Option::getInstance();
+        $_aArguments   = array(
+            'uri'         => urldecode( $_GET[ 'uri' ] ),
+            'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
+        );
+        AmazonAutoLinks( $_aArguments );
 
     }
 

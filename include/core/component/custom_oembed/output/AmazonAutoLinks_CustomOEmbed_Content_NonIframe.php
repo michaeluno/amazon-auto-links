@@ -43,8 +43,10 @@ class AmazonAutoLinks_CustomOEmbed_Content_NonIframe {
      * @callback function wp_embed_register_handler
      */
     public function replyToSimulateWPPost( $aMatches, $aAttributes, $sURL, $aAttributesRaw ) {
-        $_aArguments = array(
-            'uri' => $sURL,
+        $_oOption      = AmazonAutoLinks_Option::getInstance();
+        $_aArguments   = array(
+            'uri'         => $sURL,
+            'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
         );
         return AmazonAutoLinks( $_aArguments, false );
     }
