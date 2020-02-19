@@ -307,6 +307,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo introduce a new unit type Comparision Table
 - @todo add a card template.
 - @todo add the ability to select a caching type from either database or file.
+- @todo add the ability to get caches from shared cache servers.
+- @todo add the ability to submit caches to shared cache servers.
+- @todo add the ability to make the site a shared cache server.
 
 == Changelog ==
 
