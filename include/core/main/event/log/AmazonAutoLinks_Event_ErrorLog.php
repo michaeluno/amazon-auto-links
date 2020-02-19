@@ -13,7 +13,7 @@
  *
  * @since        4.0.0
  */
-class AmazonAutoLinks_Log_Errors extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores error logs;
@@ -23,7 +23,7 @@ class AmazonAutoLinks_Log_Errors extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
 
-        add_filter( 'aal_action_error_http_request_cache_data', array( $this, 'replyToLogErrorHTTPRequestCache' ), 10, 2 );
+        add_action( 'aal_action_error_http_request_cache_data', array( $this, 'replyToLogErrorHTTPRequestCache' ), 10, 2 );
 
     }
 

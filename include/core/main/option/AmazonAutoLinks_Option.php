@@ -80,6 +80,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'products' => '',   // (string|integer) blank string for unlimited. For integer values, mega bytes.
                 'requests' => '',   // (string|integer) blank string for unlimited. For integer values, mega bytes.
             ),
+
+            // 4.0.0+
+            'compress'  => false, // (boolean) whether to compress caches
         ),
         'query' => array(
             'cloak' => 'productlink'

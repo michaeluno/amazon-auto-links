@@ -311,13 +311,16 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.0 =
+- Added the `Compress` option in the `Cache` section.
 - Added the `Output Formats` unit options that support `Item Format`, `Image Format`, and `Title Format` options for each template.
 - Added the `Feed` unit type that imports unit data from external sites and display them.
 - Added the ability to automatically embed product links when an Amazon URL is pasted in a post editor.
 - Added the `product_title` shortcode parameter which alters the product title and serves as anchor text.
 - Added the new `Text` template.
 - Tweaked the styling of the `List` template for widget areas and relatively small thumbnail sizes.
+- Optimized the process of saving error log entries.
 - Optimized the outputs of the `[amazon_textlink]` shortcode of Amazon Associates Link Builder to remove some outer container.
+- Changed the default behavior of compressing caches.
 - Changed the `Category` and `Search` templates not to be the default activated templates.
 - Changed the default template to `List` for all the unit types.
 - Fixed PHP warnings of deprecation when displaying buttons.

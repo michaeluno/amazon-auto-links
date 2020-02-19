@@ -160,6 +160,13 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
                 ),
             ),
             array(
+                'field_id'          => 'compress',
+                'type'              => 'checkbox',
+                'title'             => __( 'Compress', 'amazon-auto-links' ),
+                'capability'        => 'manage_options',
+                'label'             => __( 'Compress caches', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'          => 'caching_mode',
                 'type'              => 'radio',
                 'title'             => __( 'Caching Mode', 'amazon-auto-links' ),

@@ -74,10 +74,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
      * Specific arguments to this class.
      */
     public $aCustomArguments = array(
-        'raw'         => false,  // (boolean) return the raw HTTP response
-
+        'raw'                    => false,   // (boolean) return the raw HTTP response
         'constructor_parameters' => array(),
-        'api_parameters' => array(),
+        'api_parameters'         => array(),
+        'compress_cache'         => true,    // 4.0.0+ (boolean) whether to compress cache data
     );
 
     /**
@@ -116,10 +116,13 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $this->aArguments + $this->aCustomArguments    // model to be compared with
             );
 
-            return apply_filters(
-                'aal_filter_http_request_arguments',
-                $aArguments
-            );
+            $aArguments = apply_filters( 'aal_filter_http_request_arguments', $aArguments );
+
+            // 4.0.0+ If the gzcompress function is not available, disable the argument
+            if ( ! function_exists( 'gzcompress' )  ) {
+                $aArguments[ 'compress_cache' ] = false;
+            }
+            return $aArguments;
         }
         /**
          * 
@@ -335,7 +338,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                                 
                 // Perform an HTTP request.
                 $_aData[ $_sURL ] = $this->_getHTTPResponse( $_sURL, $aArguments );
-                $this->_setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration );
+                $this->___setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration );
             }
             return $_aData;
             
@@ -381,12 +384,11 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @since       3.7.5   Added the `aal_filter_http_request_set_cache` filter so that third parties can modify set cache contents.
          * @since       3.7.7   deprecated the `aal_filter_http_request_set_cache` filter and introduced `aal_filter_http_request_set_cache_{request type}`.
          */
-        private function _setCache( $sURL, $mData, $iCacheDuration=86400 ) {
+        private function ___setCache( $sURL, $mData, $iCacheDuration=86400 ) {
             
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-            // @deprecated 3.7.7    $mData           = apply_filters( 'aal_filter_http_request_set_cache', $mData, $this->sRequestType, $_sCacheName, $_sCharSet, $iCacheDuration );
             $mData           = apply_filters(
                 'aal_filter_http_request_set_cache_' . $this->sRequestType,
                 $mData,
@@ -395,7 +397,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $iCacheDuration,
                 $sURL   // 3.9.0
             );
-            // 3.9.0 - gives a change to change the cache duration, depending on the cached data content, checked in the above filter hook callbacks
+            // 3.9.0 - gives a chance to change the cache duration, depending on the cached data content, checked in the above filter hook callbacks
             // this is useful when an error is returned which should not be kept so long
             $iCacheDuration  = apply_filters(
                 'aal_filter_http_request_set_cache_duration_' . $_sCacheName,
@@ -442,7 +444,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                  * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
                  * @since   3.12.0  Re-added
                  */
-                if ( function_exists( 'gzcompress' ) ) {
+                if ( $this->aArguments[ 'compress_cache' ] ) {
                     $_bsCompressed = gzcompress( $mData[ 'body' ] );
                     if ( $_bsCompressed ) {
                         $mData[ 'body' ] = $_bsCompressed ;

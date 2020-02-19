@@ -127,7 +127,8 @@ class AmazonAutoLinks_Event {
              * @since       4.0.0
              */
             private function ___handleNormalActions() {
-                new AmazonAutoLinks_Log_Errors;
+                new AmazonAutoLinks_Event_ErrorLog;
+                new AmazonAutoLinks_Event_HTTPClientArguments;
             }
     
 }
