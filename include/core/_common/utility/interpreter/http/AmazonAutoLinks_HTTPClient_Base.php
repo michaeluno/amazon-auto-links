@@ -276,10 +276,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     'charset'       => null,
                     'data'          => null,
                     'request_uri'   => null,
-                    'name'          => null,
+                    'name'          => $_sCacheName,
                 );
                 
                 if ( ! isset( $_aCache[ 'data' ] ) ) {
+                    continue;
+                }
+
+                // 4.0.0+ There is a reported case that the `data` element is either an array nor null.
+                // @todo the reason of corrupt data is unknown. It could be that the compressed data can be treated as a string when the WordPress core sanitizes the data when retrieving from the database table.
+                if ( ! is_array( $_aCache[ 'data' ] ) ) {
+                    do_action( 'aal_action_error_http_request_cache_data', 'The cache data is corrupted.', $_aCache );
                     continue;
                 }
 

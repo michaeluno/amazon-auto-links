@@ -43,6 +43,7 @@ class AmazonAutoLinks_Event {
 
             $this->___handleQueryURL();
 
+            $this->___handleNormalActions();
             
         }
             private function ___handleAjaxEvents() {
@@ -120,6 +121,13 @@ class AmazonAutoLinks_Event {
                 new AmazonAutoLinks_Event___Query_Feed( $_sQueryKey );
                 new AmazonAutoLinks_Event___Query_Redirect( $_sQueryKey );
                 
-            }    
+            }
+
+            /**
+             * @since       4.0.0
+             */
+            private function ___handleNormalActions() {
+                new AmazonAutoLinks_Log_Errors;
+            }
     
 }

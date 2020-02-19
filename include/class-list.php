@@ -345,6 +345,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_Event___Action_DeleteExpiredCaches"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_DeleteExpiredCaches.php", 
     "AmazonAutoLinks_Event___Action_HTTPCacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal.php", 
+    "AmazonAutoLinks_Event_Log_Errors"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/log/AmazonAutoLinks_Event_Log_Errors.php", 
     "AmazonAutoLinks_Event___Query_Feed"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Feed.php", 
     "AmazonAutoLinks_Event___Query_Redirect"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Redirect.php", 
     "AmazonAutoLinks_Event___Feed_JSON"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_JSON.php", 
@@ -420,6 +421,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup .php", 
     "AmazonAutoLinks_UnitOutput__TemplatePath"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/template/AmazonAutoLinks_UnitOutput___TemplatePath.php", 
     "AmazonAutoLinks_FormFields_Widget_ContextualProduct"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContxtualProduct.php", 
+    "AmazonAutoLinks_Log_Errors"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/log/AmazonAutoLinks_Event_Log_Errors.php", 
     "AmazonAutoLinks_SimplePie_Cache"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/rss/custom_simple_pie/AmazonAutoLinks_SimplePie.php", 
     "AmazonAutoLinks_SimplePie_Cache_Transient"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/rss/custom_simple_pie/AmazonAutoLinks_SimplePie.php", 
 );

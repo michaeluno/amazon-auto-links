@@ -32,10 +32,12 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
 
     /**
      * Called when an API HTTP response is about to be cached.
-     * @param $mData
-     * @param $sCacheName
-     * @param $sCharSet
-     * @param $iCacheDuration
+     *
+     * @param mixed     $mData
+     * @param string    $sCacheName
+     * @param string    $sCharSet
+     * @param integer   $iCacheDuration
+     * @param string    $sURL
      *
      * @return mixed
      * @since   3.9.0
@@ -44,7 +46,13 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
 
         $_sError = $this->___getError( $mData );
         if ( $_sError ) {
-            $this->___setAPIErrorLog( $_sError, $sCacheName, $sURL );
+            AmazonAutoLinks_Log_Errors::setErrorLogItem(
+                $_sError,
+                array(
+                    'url'        => $sURL,
+                    'cache_name' => $sCacheName,
+                )
+            );
         }
 
         // If it is the TooManyRequests error, give a cache short lifespan
@@ -128,9 +136,9 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             }
         /**
          * @param $mData
+         * @deprecated 4.0.0
          */
-        private function ___setAPIErrorLog( $sErrorItem, $sCacheName, $sURL ) {
-
+        /*private function ___setAPIErrorLog( $sErrorItem, $sCacheName, $sURL ) {
             $_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
             $_aErrorLog  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
             $_aErrorLog[ microtime( true ) ] = array(
@@ -145,6 +153,6 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             $_aErrorLog = array_slice( $_aErrorLog, -300, 300, true );
             update_option( $_sOptionKey, $_aErrorLog );
 
-        }
+        }*/
 
 }

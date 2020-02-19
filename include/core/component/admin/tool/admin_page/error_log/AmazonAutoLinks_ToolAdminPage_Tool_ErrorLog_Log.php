@@ -57,17 +57,29 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
             $_aErrorLog  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
             $_sErrorLog  = '';
             foreach( $_aErrorLog as $_dMicrosecond => $_aLogItem ) {
-                if ( ! isset( $_aLogItem[ 'time' ] ) ) {
-                    continue;
-                }
-                $_sErrorLog .= $this->getSiteReadableDate( $_aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ' . $_aLogItem[ 'cache_name' ] . ' ' . $_aLogItem[ 'url' ] . "\r\n"
-                    . $this->getElement( $_aLogItem, array( 'current_url' ) ) . "\r\n"
-                    . $_aLogItem[ 'message' ] . "\r\n";
+                $_sErrorLog .= $this->___getLogEntry( $_aLogItem );
             }
             return $_sErrorLog
                 ? $_sErrorLog
                 : __( 'No items found.', 'amazon-auto-links' );
+
         }
+            /**
+             * @since   4.0.0
+             */
+            private function ___getLogEntry( array $aLogItem ) {
+                $_aRequired = array(
+                    'time'          => 0,
+                    'message'       => '',
+                    'current_url'   => '',
+                );
+                $aLogItem = $aLogItem + $_aRequired;
+                $_aExtra  = array_diff_key( $aLogItem, $_aRequired );
+                $_sTime   = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true );
+                return $_sTime . ' ' . implode( ' ', $_aExtra ) . "\r\n"
+                    . $this->getElement( $aLogItem, array( 'current_url' ) ) . "\r\n"
+                    . $aLogItem[ 'message' ] . "\r\n";
+            }
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
         $oAdminPage->setSettingNotice( __( 'Log items have been cleared.', 'amazon-auto-links' ), 'updated' );
