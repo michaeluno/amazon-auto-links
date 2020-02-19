@@ -77,7 +77,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'raw'                    => false,   // (boolean) return the raw HTTP response
         'constructor_parameters' => array(),
         'api_parameters'         => array(),
-        'compress_cache'         => true,    // 4.0.0+ (boolean) whether to compress cache data
+        'compress_cache'         => false,    // 4.0.0+ (boolean) whether to compress cache data
     );
 
     /**
