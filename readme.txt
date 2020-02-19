@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         3.12.0
+Stable tag:         4.0.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -310,10 +310,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add the ability to get caches from shared cache servers.
 - @todo add the ability to submit caches to shared cache servers.
 - @todo add the ability to make the site a shared cache server.
+- @todo add the ability to create actual posts from units.
 
 == Changelog ==
 
-= 4.0.0 =
+= 4.0.0 - 02/20/2020 =
 - Added the `Compress` option in the `Cache` section.
 - Added the `Output Formats` unit options that support `Item Format`, `Image Format`, and `Title Format` options for each template.
 - Added the `Feed` unit type that imports unit data from external sites and display them.
