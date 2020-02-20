@@ -315,6 +315,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.1 =
+- Tweaked the default `Image Format` option layout value.
 - Tweaked the process of retrieving ratings.
 
 = 4.0.0 - 02/20/2020 =
