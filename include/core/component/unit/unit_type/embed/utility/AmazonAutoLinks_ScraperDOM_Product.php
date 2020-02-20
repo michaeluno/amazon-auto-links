@@ -59,9 +59,9 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
      */
     public function __construct( $sURL, $sCharset='' ) {
 
-        add_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ) );
+        add_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ), 10, 2 );
         parent::__construct( $sURL, $sCharset );
-        remove_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ) );
+        remove_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ), 10 );
 
         $this->_oXPath       = new DOMXPath( $this->oDoc );
         $this->_oUtil        = new AmazonAutoLinks_Unit_Utility;
@@ -70,9 +70,12 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
     }
         /**
          * @param array $aArguments
+         * @param string $sRequestType
          * @return array
+         * @since   4.0.0
+         * @since   4.0.1   Added The `$sRequestType` parameter`
          */
-        public function replyToGetHTTPRequestArguments( $aArguments ) {
+        public function replyToGetHTTPRequestArguments( $aArguments, $sRequestType ) {
             $aArguments[ 'timeout' ] = 15; // the default is 5 (seconds) and it often times out
             return $aArguments;
         }

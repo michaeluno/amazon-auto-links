@@ -34,7 +34,15 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
         $_sCurrency      = $_aArguments[ 5 ];
         $_sLanguage      = $_aArguments[ 6 ];
 
-        $_oHTTP          = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, null, 'customer_review2' );
+        $_oHTTP          = new AmazonAutoLinks_HTTPClient(
+            $_sURL,
+            $_iCacheDuration,
+            array(  // http arguments
+                'timeout'     => 20,
+                'redirection' => 20,
+            ),
+            'customer_review2'
+        );
         if ( $_bForceRenew ) {
             $_oHTTP->deleteCache();
         }

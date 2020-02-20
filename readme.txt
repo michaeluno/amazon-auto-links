@@ -314,6 +314,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.0.1 =
+- Tweaked the process of retrieving ratings.
+
 = 4.0.0 - 02/20/2020 =
 - Added the `Compress` option in the `Cache` section.
 - Added the `Output Formats` unit options that support `Item Format`, `Image Format`, and `Title Format` options for each template.

@@ -52,6 +52,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
     
     /**
      * HTTP request, wp_remote_get() arguments.
+     * @see WP_Http::request()
      */
     public $aArguments =  array(
         'timeout'     => 5,
@@ -116,7 +117,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $this->aArguments + $this->aCustomArguments    // model to be compared with
             );
 
-            $aArguments = apply_filters( 'aal_filter_http_request_arguments', $aArguments );
+            $aArguments = apply_filters( 'aal_filter_http_request_arguments', $aArguments, $this->sRequestType );
 
             // 4.0.0+ If the gzcompress function is not available, disable the argument
             if ( ! function_exists( 'gzcompress' )  ) {
