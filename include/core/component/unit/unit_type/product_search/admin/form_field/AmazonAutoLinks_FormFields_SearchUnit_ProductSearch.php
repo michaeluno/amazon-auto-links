@@ -53,6 +53,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'type'          => 'hidden',
                 'title'         => __( 'Operation', 'amazon-auto-links' ),
                 'hidden'        => true,
+                'value'         => 'SearchItems', // 4.0.1
             ),
             // @deprecated 3.10.0 Moved to the Locale class
             // 3.11.1 Re-added and made it hidden. This is needed as without this, the Create Search wizard loses the country value which results in respecting the default country unit option.
