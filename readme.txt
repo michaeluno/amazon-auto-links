@@ -311,10 +311,16 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add the ability to submit caches to shared cache servers.
 - @todo add the ability to make the site a shared cache server.
 - @todo add the ability to create actual posts from units.
+- @todo add a button with an icon.
+- @todo add an orange button.
+- @todo add an gray button.
+- @todo add a button with a background image.
+- @todo add a clone action link to buttons.
 
 == Changelog ==
 
 = 4.0.1 =
+- Tweaked the styling for the default button.
 - Tweaked the default `Image Format` option layout value.
 - Tweaked the process of retrieving ratings.
 

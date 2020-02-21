@@ -360,27 +360,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         return '';
     }    
 
-    /**
-     * Returns all CSS rules of active buttons.
-     * 
-     * @return      string
-     * @since       3
-     */
-    static public function getCSSRulesOfActiveButtons() {
-        
-        $_aCSSRules = array();
-        foreach( self::getActiveButtonIDs() as $_iID ) {
-            $_aCSSRules[]  = str_replace(
-                '___button_id___',
-                $_iID,
-                trim( get_post_meta( $_iID, 'button_css', true ) )
-            );
-            $_aCSSRules[] = trim( get_post_meta( $_iID, 'custom_css', true ) );
-        }
-        return trim( implode( PHP_EOL, array_filter( $_aCSSRules ) ) );
-        
-    }    
-    
+
     /**
      * 
      * @return      array       An array holding button IDs.

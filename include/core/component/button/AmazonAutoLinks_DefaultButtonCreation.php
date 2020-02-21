@@ -15,7 +15,7 @@
  * @package     Amazon Auto Links
  * @since       3
  */
-class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_ButtonUtility {
 
     /**
      * Triggers event actions.
@@ -45,7 +45,7 @@ class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_PluginUtilit
         if ( $_iPostID ) {
             update_option(
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-                AmazonAutoLinks_PluginUtility::getCSSRulesOfActiveButtons() // data
+                $this->getCSSRulesOfActiveButtons() // data
             );
         }
 

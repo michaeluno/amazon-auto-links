@@ -17,7 +17,7 @@
  *  @package    Amazon Auto Links
  *  @since      3
  */
-class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility {
   
     /**
      * Sets up hooks and properties.
@@ -198,7 +198,16 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_PluginUtility
             background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
             background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
             text-decoration: none;
-        }";
+        }
+        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a {
+            color: inherit; 
+            border-bottom: none;
+            text-decoration: none;
+        }
+        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a:hover {
+            color: inherit;
+        }        
+        ";
         
     }
 

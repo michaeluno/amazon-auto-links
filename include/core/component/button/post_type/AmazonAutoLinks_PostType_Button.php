@@ -149,7 +149,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
         public function replyToUpdateButtonCSSOnShutdown() {
             update_option(
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-                AmazonAutoLinks_PluginUtility::getCSSRulesOfActiveButtons()    // data
+                AmazonAutoLinks_ButtonUtility::getCSSRulesOfActiveButtons()    // data
             );
         }
 

@@ -96,6 +96,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_FormFields_Button_Text"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php", 
     "AmazonAutoLinks_PostType_Button"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php", 
     "AmazonAutoLinks_PostType_Button_ListTable"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php", 
+    "AmazonAutoLinks_ButtonUtility"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/utility/AmazonAutoLinks_ButtonUtility.php", 
     "AmazonAutoLinks_CustomOEmbed_Loader"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/AmazonAutoLinks_CustomOEmbed_Loader.php", 
     "AmazonAutoLinks_CustomOEmbed_Scratches"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/AmazonAutoLinks_CustomOEmbed_Scratches.php", 
     "AmazonAutoLinks_CustomOEmbed_Setting"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting.php", 
