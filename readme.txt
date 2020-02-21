@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.1 =
+- Fixed a bug that the `ASINs` option for the `Item Look-up` unit type was sanitized properly when saved, started in 3.9.0.
 - Tweaked the styling of the `List` template for widget areas.
 - Tweaked the styling for the default button.
 - Tweaked the default `Image Format` option layout value.

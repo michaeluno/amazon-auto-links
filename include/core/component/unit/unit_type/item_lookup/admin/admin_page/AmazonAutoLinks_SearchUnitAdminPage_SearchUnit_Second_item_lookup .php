@@ -81,7 +81,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
         
         // Find ASINs from the user input.
-        $aInputs[ 'ItemId' ] = $this->_getItemIdSanitized( $aInputs, $oFactory );        
+        $aInputs[ 'ItemId' ] = $this->___getItemIdSanitized( $aInputs, $oFactory );
         
         return parent::validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
         
@@ -90,15 +90,10 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
          * @since       3.4.0
          * @return      string
          */
-        private function _getItemIdSanitized( $aInputs, $oFactory ) {
-            
-            $_sIdType = $oFactory->oUtil->getElement( $aInputs, array( 'IdType' ), '' );
+        private function ___getItemIdSanitized( $aInputs, $oFactory ) {
+
             $_sItemId = $oFactory->oUtil->getElement( $aInputs, array( 'ItemId' ), '' );
-            
-            if ( 'ASIN' !== $_sIdType ) {
-                return $_sItemId;
-            }
-            return AmazonAutoLinks_PluginUtility::getASINsExtracted( $_sItemId, PHP_EOL );
+            return $this->getASINsExtracted( $_sItemId, PHP_EOL );
             
         }
     

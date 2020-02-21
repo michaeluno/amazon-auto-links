@@ -27,7 +27,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
 
         $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main;
         foreach( $_oFields->get() as $_aField ) {
-            if ( 'unit_title' === $_aField[ 'field_id' ] ) {
+            if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ), true ) ) {
                 continue;
             }
             $this->addSettingFields( $_aField );
@@ -89,7 +89,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
     public function validate( $aInputs, $aOriginal, $oFactory ) {    
 
         // 3.4.0+ Find ASINs from the user input.
-        $aInputs[ 'ItemId' ] = $this->_getItemIdSanitized( $aInputs, $oFactory );
+        $aInputs[ 'ItemId' ] = $this->___getItemIdSanitized( $aInputs, $oFactory );
     
         // Formats the options
         $_oUnitOption = new AmazonAutoLinks_UnitOption_item_lookup(
@@ -120,14 +120,9 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
          * @since       3.4.0
          * @return      string
          */
-        private function _getItemIdSanitized( $aInputs, $oFactory ) {
-            
-            $_sIdType = $oFactory->oUtil->getElement( $aInputs, array( 'IdType' ), '' );
+        private function ___getItemIdSanitized( $aInputs, $oFactory ) {
+
             $_sItemId = $oFactory->oUtil->getElement( $aInputs, array( 'ItemId' ), '' );
-            
-            if ( 'ASIN' !== $_sIdType ) {
-                return $_sItemId;
-            }
             return AmazonAutoLinks_PluginUtility::getASINsExtracted( $_sItemId, PHP_EOL );
             
         }    
