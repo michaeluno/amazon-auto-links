@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.2 =
+- Tweaked the styling for widget areas especially to center the thumbnail.
+
 = 1.2.1 =
 - Tweaked the styling for widget areas.
 

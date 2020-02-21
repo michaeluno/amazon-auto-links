@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.1 =
+- Tweaked the styling of the `List` template for widget areas.
 - Tweaked the styling for the default button.
 - Tweaked the default `Image Format` option layout value.
 - Tweaked the process of retrieving ratings.
