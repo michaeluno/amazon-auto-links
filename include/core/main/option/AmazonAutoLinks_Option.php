@@ -493,13 +493,26 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * This is not checking the connectivity as connectivity can vary even the keys are set
      * such as when too many requests are made.
      *
-     * @return boolean
+     * @param   string      $sLocale        The locale to check. If this value is given, the method checks if the PA-API keys are set for this locale
+     * and returns false if the keys are not for that locale.
+     * @return  boolean
      * @since   3.9.2
+     * @since   4.0.1       Added the `$sLocale` parameter.
      */
-    public function isAPIKeySet() {
+    public function isAPIKeySet( $sLocale='' ) {
+
         $_sPublicKey = $this->get( 'authentication_keys', 'access_key' );
         $_sSecretKey = $this->get( 'authentication_keys', 'access_key_secret' );
-        return ( boolean ) ( $_sPublicKey && $_sSecretKey );
+
+        if ( ! $sLocale ) {
+            return ( boolean ) ( $_sPublicKey && $_sSecretKey );
+        }
+
+        // At this point, the locale is specified.
+        $_sStoredLocale = strtoupper( ( string ) $this->get( 'authentication_keys', 'server_locale' ) );
+        $sLocale        = strtoupper( ( string ) $sLocale );
+        return $sLocale === $_sStoredLocale;
+
     }
     
     /**

@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.1 =
+- Optimized the process of performing PA-API requests.
 - Fixed a bug that last inputs were not properly restored when creating search type units.
 - Fixed a bug that the `ASINs` option for the `Item Look-up` unit type was sanitized properly when saved, started in 3.9.0.
 - Tweaked the styling of the `List` template for widget areas.
