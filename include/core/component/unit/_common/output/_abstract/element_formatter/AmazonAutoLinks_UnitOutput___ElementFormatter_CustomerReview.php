@@ -38,7 +38,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview extends Amazo
         $_snEncodedHTML = $this->_getCell( 'customer_reviews' );
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(
-                __( 'Now retrieving customer reviews.', 'amazon-auto-links' )
+                __( 'Now retrieving customer reviews.', 'amazon-auto-links' ),
+                $this->_sLocale
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );

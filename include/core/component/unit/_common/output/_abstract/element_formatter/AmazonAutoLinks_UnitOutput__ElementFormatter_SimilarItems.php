@@ -46,7 +46,8 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
         $_snEncodedHTML = $this->_getCell( 'similar_products' );
         if ( null === $_snEncodedHTML && $this->_oUnitOption->get( '_search_similar_products' ) ) {
             return $this->_getPendingMessage(
-                __( 'Now retrieving similar products.', 'amazon-auto-links' )
+                __( 'Now retrieving similar products.', 'amazon-auto-links' ),
+                $this->_sLocale
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );

@@ -39,7 +39,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
             }
 
             return $this->_getPendingMessage(
-                __( 'Now retrieving the price.', 'amazon-auto-links' )
+                __( 'Now retrieving the price.', 'amazon-auto-links' ),
+                $this->_sLocale
             );
         }
 

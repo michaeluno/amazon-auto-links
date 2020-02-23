@@ -31,7 +31,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet extends AmazonAutoL
         $_anImages = $this->_getCell( 'images' );
         if ( null === $_anImages ) {
             return $this->_getPendingMessage(
-                __( 'Now retrieving an image set.', 'amazon-auto-links' )
+                __( 'Now retrieving an image set.', 'amazon-auto-links' ),
+                $this->_sLocale
             );
         }
         return AmazonAutoLinks_Unit_Utility::getSubImages(

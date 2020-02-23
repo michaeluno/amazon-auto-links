@@ -45,17 +45,20 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
     }
 
     /**
+     * @param       string  $sMessage
+     * @param       string  $sLocale        If this is given, it checks whether the PA-API keys are set for that locale. Otherwise, the message will not be shown.
      * @return      string
      * @since       3.5.0
+     * @since       4.0.1       Added the `$sLocale` parameter.
      * @throws      Exception
      */
-    protected function _getPendingMessage( $sMessage ) {
+    protected function _getPendingMessage( $sMessage, $sLocale='' ) {
         if ( $this->_oUnitOption->get( '_no_pending_items' ) ) {
             throw new Exception( 'A product with a pending element is not allowed.' );
         }
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isAPIKeySet() ) {
-            $sMessage .= ' (' . __( 'API keys are not set.', 'amazon auto links' ) . ')';
+        if ( ! $_oOption->isAPIKeySet( $sLocale ) ) {
+            return '';
         }
         return $this->_oUnitOption->get( 'show_now_retrieving_message' )
             ? '<p>' . $sMessage . '</p>'
