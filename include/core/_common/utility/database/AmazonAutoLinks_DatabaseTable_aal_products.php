@@ -136,10 +136,10 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
 
         $sCurrency = $sCurrency
             ? $sCurrency
-            : $this->getElement( $aRow, array( 'preferred_currency' ), '' );
+            : ( isset( $aRow[ 'preferred_currency' ] ) ? $aRow[ 'preferred_currency' ] : '' );
         $sLanguage = $sLanguage
             ? $sLanguage
-            : $this->getElement( $aRow, array( 'language' ), '' );
+            : ( isset( $aRow[ 'language' ] ) ? $aRow[ 'language' ] : '' );
         $_iID  = $this->getIDByASINLocale( $sASINLocale, $sCurrency, $sLanguage );
         if ( $_iID ) {
             $_iCountSetRows = $this->update( 
