@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         4.0.0
+Stable tag:         4.0.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -306,6 +306,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
 - @todo introduce a new unit type Comparision Table
 - @todo add a card template.
+- @todo add an image-only template.
 - @todo add the ability to select a caching type from either database or file.
 - @todo add the ability to get caches from shared cache servers.
 - @todo add the ability to submit caches to shared cache servers.
@@ -319,7 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.0.1 =
+= 4.0.1 - 02/24/2020 =
 - Changed the `Now retrieving...` message not to show when API keys are not set.
 - Optimized the process of performing PA-API requests.
 - Fixed a bug that last inputs were not properly restored when creating search type units.
