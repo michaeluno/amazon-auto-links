@@ -265,11 +265,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @remark      The local variables defined in this method will be accessible in the template file.
      *
      * @param array $aURLs
-     * @param null|string $sTemplatePath
      *
      * @return      string
+     * @since
+     * @since       4.0.2   Deprecated the second $sTemplatePath parameter.
      */
-    public function get( $aURLs=array(), $sTemplatePath=null ) {
+    public function get( $aURLs=array() ) {
 
         $_aHooks            = $this->___getHooksSetPerOutput();
 
@@ -277,8 +278,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aArguments        = $this->oUnitOption->get();
         $_iUnitID           = ( integer ) $this->oUnitOption->get( 'id' ); // there are cases that called dynamically without units like the shortcode
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
-        $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
-        $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
+
+        $_sTemplatePath     = $this->___getTemplatePath();
+
         $_aProducts         = $this->fetch( $aURLs );
         $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
@@ -316,6 +318,27 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         return $_sContent;
 
     }
+
+        /**
+         * @since       4.0.2
+         * @return      string  The template path.
+         */
+        private function ___getTemplatePath() {
+            // @deprecated 4.0.2 The `template_id` is determined in the unit option class now so use the template id to get the path.
+    //        $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
+    //        $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
+            $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
+            $_sTemplatePath     = $_oTemplateOption->getPathFromID( $this->oUnitOption->get( 'template_id' ) );
+            $_sTemplatePath     = apply_filters( "aal_filter_template_path", $_sTemplatePath, $this->oUnitOption->get() );
+
+            if ( ! file_exists( $_sTemplatePath ) ) {
+                // use the default one
+                $_sDefaultTemplateID = $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->oUnitOption->sUnitType );
+                return $_oTemplateOption->getPathFromID( $_sDefaultTemplateID );
+
+            }
+            return $_sTemplatePath;
+        }
 
         /**
          * Sets up hooks per output basis.
@@ -390,7 +413,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
 
-            if ( file_exists( $sTemplatePath ) ) {
+//            if ( file_exists( $sTemplatePath ) ) {
 
                 // Include the template
                 defined( 'WP_DEBUG' ) && WP_DEBUG ? include( $sTemplatePath ) : @include( $sTemplatePath );
@@ -398,11 +421,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 // Enqueue the impression counter script.
                 $this->oImpressionCounter->add( $this->oUnitOption->get( 'country' ), $this->oUnitOption->get( 'associate_id' ) );
                 return;
-            }
-            echo '<p>'
-                    . AmazonAutoLinks_Registry::NAME
-                    . ': ' . __( 'the template could not be found. Try re-selecting the template in the unit option page.', 'amazon-auto-links' )
-                . '</p>';
+//            }
+
+            /**
+             * @deprecated 4.0.2 The file existent check is done above @see $this::___getTemplatePath()
+             */
+//            echo '<p>'
+//                    . AmazonAutoLinks_Registry::NAME
+//                    . ': ' . __( 'the template could not be found. Try re-selecting the template in the unit option page.', 'amazon-auto-links' )
+//                . '</p>';
 
         }
 

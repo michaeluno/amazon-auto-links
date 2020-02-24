@@ -306,7 +306,6 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo implement a mechanism for unit types to determine whether it requires PA API or not.
 - @todo introduce a new unit type Comparision Table
 - @todo add a card template.
-- @todo add an image-only template.
 - @todo add the ability to select a caching type from either database or file.
 - @todo add the ability to get caches from shared cache servers.
 - @todo add the ability to submit caches to shared cache servers.
@@ -319,6 +318,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.0.2 =
+- Added the `Image` template.
+- Changed the behavior for a case when a template path is not found to apply the default template.
+- Fixed a bug that templates were not properly loaded with the `template` argument, started from v4.0.0.
 
 = 4.0.1 - 02/24/2020 =
 - Changed the `Now retrieving...` message not to show when API keys are not set.

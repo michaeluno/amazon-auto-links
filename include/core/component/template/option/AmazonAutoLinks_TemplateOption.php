@@ -245,26 +245,27 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $aTemplate,
                 'template_path',
                 $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'template.php'
-            );                        
+            );
+            $aTemplate[ 'template_path' ]      = wp_normalize_path( $aTemplate[ 'template_path' ] );
 
-            $aTemplate[ 'id' ]                = $this->getElement(
+            $aTemplate[ 'id' ]                 = $this->getElement(
                 $aTemplate,
                 'id',
                 $aTemplate[ 'relative_dir_path' ]
             );     
-            $aTemplate[ 'old_id' ]            = $this->getElement(
+            $aTemplate[ 'old_id' ]             = $this->getElement(
                 $aTemplate,
                 'old_id',
                 $aTemplate[ 'strID' ]
             );     
             
             // For uploaded templates
-            $aTemplate[ 'name' ]              = $this->getElement(
+            $aTemplate[ 'name' ]               = $this->getElement(
                 $aTemplate,
                 'name',
                 $aTemplate[ 'strName' ]
             );     
-            $aTemplate[ 'description' ]       = $this->getElement(
+            $aTemplate[ 'description' ]        = $this->getElement(
                 $aTemplate,
                 'description',
                 $aTemplate[ 'strDescription' ]
@@ -578,7 +579,36 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     public function getPathFromID( $sTemplateID ) {
         foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
             if ( $_sID === trim( $sTemplateID ) ) {
-                return $_aTemplate[ 'template_path' ];
+                return wp_normalize_path( $_aTemplate[ 'template_path' ] );
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @param   string $sPath
+     * @return  string the template ID
+     * @since   4.0.2
+     */
+    public function getIDFromPath( $sPath ) {
+        foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
+            $_sTemplatePath = wp_normalize_path( $_aTemplate[ 'template_path' ] );
+            if ( $_sTemplatePath === $sPath ) {
+                return $_sID;
+            }
+        }
+        return '';
+    }
+
+    /**
+     * @param   string $sName
+     * @return  string the template ID
+     * @since   4.0.2
+     */
+    public function getIDFromName( $sName ) {
+        foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
+            if ( strtolower( $_aTemplate[ 'name' ] ) === strtolower( trim( $sName ) ) ) {
+                return $_sID;
             }
         }
         return '';

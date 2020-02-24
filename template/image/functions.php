@@ -1,9 +1,9 @@
 <?php
 
-/**
- *
- */
-class AmazonAutoLinks_Template_Text {
+
+
+
+class AmazonAutoLinks_Template_Image {
 
     public function __construct() {
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
@@ -13,9 +13,9 @@ class AmazonAutoLinks_Template_Text {
 
     public function replyToGetDefaultItemFormat( $sItemFormat ) {
         return  '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
-                    . '%title_text%'
+                    . '%image%'
                 . '</a>';
     }
 
 }
-new AmazonAutoLinks_Template_Text;
+new AmazonAutoLinks_Template_Image;

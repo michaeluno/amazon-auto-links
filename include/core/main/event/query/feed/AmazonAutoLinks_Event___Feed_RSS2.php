@@ -30,7 +30,7 @@ class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_PluginUtility {
     public function replyToLoadRSS2Feed() {
 
         $_aArguments = $_GET;
-        $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php';
+        $_aArguments[ 'template_path' ]        = wp_normalize_path( AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php' );
         $_aArguments[ 'credit_link' ]          = false;
         $_aArguments[ '_no_outer_container' ]  = true;
         $_aArguments[ 'show_errors' ]          = false;

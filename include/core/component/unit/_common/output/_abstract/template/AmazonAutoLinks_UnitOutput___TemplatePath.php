@@ -12,6 +12,7 @@
  * A class that provides method to retrieve the template path.
  *
  * @since       3.5.0
+ * @deprecated  4.0.2   Use `AmazonAutoLinks_UnitOutput__Template` instead.
  */
 class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUtility {
 
@@ -62,7 +63,7 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
         // Case: a template name is given.
         if ( isset( $aArguments[ 'template' ] ) && $aArguments[ 'template' ] ) {
             foreach( $_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-                if ( strtolower( $_aTemplate[ 'name' ] ) == strtolower( trim( $aArguments[ 'template' ] ) ) ) {
+                if ( strtolower( $_aTemplate[ 'name' ] ) === strtolower( trim( $aArguments[ 'template' ] ) ) ) {
                     return $_aTemplate[ 'template_path' ];
                 }
             }
@@ -90,25 +91,5 @@ class AmazonAutoLinks_UnitOutput__TemplatePath extends AmazonAutoLinks_PluginUti
 
     }
 
-
-        /**
-         *
-         * @remark      Each unit has to define its own default template.
-         * @since       3
-         * @since       3.5.0       Renamed from `getDefaultTemplatePath()`.
-         * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base`.
-         * @return      string
-         * @deprecated  4.0.0
-         */
-        private function ___getDefaultTemplatePath() {
-            $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-            $_aTemplate = $_oTemplateOption->getTemplateArrayByDirPath(
-                AmazonAutoLinks_Registry::$sDirPath
-                . DIRECTORY_SEPARATOR . 'template'
-                . DIRECTORY_SEPARATOR . 'category',
-                false       // no extra info
-            );
-            return $_aTemplate[ 'dir_path' ] . '/template.php' ;
-        }
 
 }

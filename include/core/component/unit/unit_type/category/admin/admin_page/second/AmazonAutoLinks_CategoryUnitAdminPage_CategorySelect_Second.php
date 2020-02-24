@@ -119,14 +119,14 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             // If the 'Save' or 'Create' button is pressed, save the data to the post.
             // The key is set in `AmazonAutoLinks_Form_CategorySelect` when rendering the form.
             if ( isset( $aPost[ 'save' ] ) ) {
-                $_oUnit = new AmazonAutoLinks_UnitOption_category(
+                $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
                     isset( $_GET[ 'post' ] )
                         ? $_GET[ 'post' ]
                         : null,
                     $aInput // unit options
                 );
                 $_iPostID = $this->___postUnitByCategory(
-                    $_oUnit->get(), // sanitized
+                    $_oUnitOption->get(), // sanitized
                     $aInput // not sanitized, contains keys not needed for the unit options
                 );
                 if ( $_iPostID ) {

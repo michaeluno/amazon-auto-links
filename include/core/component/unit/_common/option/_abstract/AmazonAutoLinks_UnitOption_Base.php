@@ -137,11 +137,16 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             unset( $aUnitOptions[ $_sKey ] );
         }
 
-        $_sTemplateID        = $this->getElement( $aUnitOptions, array( 'template_id' ), '' );
-        $_oTemplateOption    = AmazonAutoLinks_TemplateOption::getInstance();
-        $_sTemplateID        = $_oTemplateOption->isActive( $_sTemplateID )
-            ? $_sTemplateID
-            : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->getElement( $aUnitOptions, 'unit_type' ) );
+        $_oTemplateDeterminer = new AmazonAutoLinks_UnitOutput__Template( $this );
+        $_sTemplateID         = $_oTemplateDeterminer->get();
+        $aUnitOptions[ 'template_id' ] = $_sTemplateID;
+
+        // @deprecated 4.0.2    This misses a case that the `template` argument is given
+//        $_sTemplateID         = $this->getElement( $aUnitOptions, array( 'template_id' ), '' );
+//        $_oTemplateOption    = AmazonAutoLinks_TemplateOption::getInstance();
+//        $_sTemplateID        = $_oTemplateOption->isActive( $_sTemplateID )
+//            ? $_sTemplateID
+//            : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->getElement( $aUnitOptions, 'unit_type' ) );
         $_sTemplateFieldKey  = str_replace( array( '.', '/', '\\', '-' ), '_', $_sTemplateID ); // the field id (name) gets automatically converted by Admin Page Framework.
         $_aOutputFormats     = $this->getElementAsArray( $aUnitOptions, array( 'output_formats', $_sTemplateFieldKey ) );
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );

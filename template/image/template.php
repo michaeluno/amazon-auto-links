@@ -7,7 +7,6 @@
  * $aArguments - the user defined arguments such as image size and count etc.
  */
 
-
 new AmazonAutoLinks_TemplateUtility_NoOuterContainer;
 
 foreach( $aProducts as $_aProduct ) : ?>
