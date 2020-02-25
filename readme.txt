@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.2 =
+- Tweaked the `List` template regarding the width of sub-image container elements.
 - Tweaked the default `Image Format` option layout value.
 - Added the `Image` template.
 - Changed the behavior of when the template path is not found to apply the default template instead of showing an error.

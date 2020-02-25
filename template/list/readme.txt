@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.3 =
+- Tweaked the styling for sub-images to fit its width to the parent container.
+
 = 1.2.2 =
 - Tweaked the styling for widget areas especially to center the thumbnail.
 

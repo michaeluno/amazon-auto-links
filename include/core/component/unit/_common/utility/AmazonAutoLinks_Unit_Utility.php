@@ -344,13 +344,14 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      */
     static public function getSubImageOutput( array $aImageURLs, $sTitle, $sProductURL ) {
         $_aSubImageTags = array();
-        foreach( $aImageURLs as $_sImageURL ) {
+        foreach( $aImageURLs as $_iIndex => $_sImageURL ) {
+            $_sTitle    = trim( $sTitle ) . ' #' . ( $_iIndex + 1 );
             $_sImageTag = self::getHTMLTag(
                 'img',
                 array(
                     'src'   => esc_url( $_sImageURL ),
                     'class' => 'sub-image',
-                    'alt'   => $sTitle,
+                    'alt'   => $_sTitle,
                 )
             );
             $_sATag     = self::getHTMLTag(
@@ -358,7 +359,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                 array(
                     'href'   => esc_url( $sProductURL ),
                     'target' => '_blank',
-                    'title'  => $sTitle,
+                    'title'  => $_sTitle,
                 ),
                 $_sImageTag
             );
@@ -381,7 +382,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param array   $aImages         The extracted image array from a PA-API response.
      * @param string  $sProductURL
      * @param string  $sTitle
-     * @param integer $iMaxImageSize
+     * @param integer $iMaxImageSize    The maximum size of each sub-image.
      * @param integer $iMaxNumberOfImages
      *
      * @return      string

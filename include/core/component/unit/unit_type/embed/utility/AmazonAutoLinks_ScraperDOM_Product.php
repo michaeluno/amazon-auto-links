@@ -110,7 +110,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         $_aProduct[ 'thumbnail_url' ]       = $this->___getThumbnailURLFormatted( array_shift($_aImages ) );  // extract the first array item
         $_aProduct[ 'image_set' ]           = $this->_oUtil->getSubImageOutput( $_aImages, $_aProduct[ 'title' ], $_aProduct[ 'product_url' ] );
         if ( $_aProduct[ 'thumbnail_url' ] && ! $_aProduct[ 'image_set' ] ) {
-            $_aProduct[ 'image_set' ] = "<div class='sub-images'></div>"; // change the value from null to an empty tag so that further data inspection will not be continued
+            $_aProduct[ 'image_set' ] = "<div class='sub-images'></div>"; // change the value from null to an empty tag so that further data inspection will not continue
         }
 
         $_aProduct[ '_features' ]           = $this->___getFeatures( $_oXPath, $_oItemNode );   // internal element which will be unset later on
