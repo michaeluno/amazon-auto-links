@@ -103,13 +103,13 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     protected function _getFormattedOptions( $sOptionKey ) {
 
         $_aOptions = parent::_getFormattedOptions( $sOptionKey );
-        return $_aOptions + $this->_getDefaultTemplates();
+        return $_aOptions + $this->___getDefaultTemplates();
         
     }    
         /**
          * @return      array       plugin default templates which should be activated upon installation / restoring factory default.
          */
-        private function _getDefaultTemplates() {
+        private function ___getDefaultTemplates() {
             
             $_aDirPaths = array(
 //                AmazonAutoLinks_Registry::$sDirPath . '/template/category',   // @deprecated 4.0.0    Now use list
@@ -164,7 +164,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 
             foreach( $aTemplates as $_sID => $_aTemplate ) {
                 
-                $_aTemplate = $this->_formatTemplateArray( $_aTemplate );
+                $_aTemplate = $this->___getTemplateArrayFormatted( $_aTemplate );
 
                 // Remove inactive templates.
                 if ( ! $this->getElement( $_aTemplate, 'is_active' ) ) {
@@ -202,18 +202,19 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          * 
          * Takes care of formatting change through version updates.
          * 
-         * @since       3              
+         * @since       3
+         * @since       4.0.2   Changed the scope to private. Renamed from `_formatTemplateArray()`.
          * @return      array|boolean       Formatted template array. If the passed value is not an array 
          * or something wrong with the template array, false will be returned.
          */
-        protected function _formatTemplateArray( $aTemplate ) {
+        private function ___getTemplateArrayFormatted( $aTemplate ) {
          
             if ( ! is_array( $aTemplate ) ) { 
                 return false; 
             }
             
             $aTemplate = $aTemplate + self::$aStructure_Template;
-            $aTemplate = $this->_formatTemplateArrayLegacy( $aTemplate );
+            $aTemplate = $this->___getTemplateArrayFormattedLegacy( $aTemplate );
                        
             // Format elements
             $aTemplate[ 'relative_dir_path' ] = $this->getElement(
@@ -221,7 +222,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 'relative_dir_path',
                 str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $aTemplate[ 'strDirPath' ] ) ) )
             );                        
-            
+            $aTemplate[ 'relative_dir_path' ] = wp_normalize_path( $aTemplate[ 'relative_dir_path' ] );
             
             // Set the directory path every time the page loads. Do not store in the data base. 
             // This path is absolute so when the user moves the site, the value will be different.
@@ -252,7 +253,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $aTemplate,
                 'id',
                 $aTemplate[ 'relative_dir_path' ]
-            );     
+            );
             $aTemplate[ 'old_id' ]             = $this->getElement(
                 $aTemplate,
                 'old_id',
@@ -298,8 +299,10 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
              * Make the passed template array compatible with the format of v2.x or below.
              *
              * @return            array|false            The formatted template array or false if the necessary file paths do not exist.
+             * @since       unknown
+             * @since       4.0.0       Renamed from `_formatTemplateArrayLegacy()`.
              */
-            private function _formatTemplateArrayLegacy( array $aTemplate ) {
+            private function ___getTemplateArrayFormattedLegacy( array $aTemplate ) {
                                 
                 $aTemplate = $aTemplate + self::$aStructure_Template_Legacy;                
                 $aTemplate[ 'strDirPath' ] = $aTemplate[ 'strDirPath' ]    // check if it's not missing
@@ -339,15 +342,13 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return $_aLabels;
     }
 
+
     /**
-     * Returns the plugin default template unit ID by unit type regardless of whether it is activated or not.
-     *
-     * @param string $sUnitType
-     *
-     * @return      string
-     * @since       3
+     * @param   string $sUnitType
+     * @since   4.0.2
+     * @return  string  The default template path
      */
-    public function getDefaultTemplateIDByUnitType( $sUnitType ) {
+    public function getDefaultTemplatePathByUnitType( $sUnitType ) {
         switch ( $sUnitType ) {
             // @deprecated 4.0.0
             // Now all unit types default to the List template
@@ -367,15 +368,38 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 //            case 'embed':   // 4.0.0
             default:
                 $_sTemplateDirectoryName = 'list';
-                break;                
+                break;
         }
-        $_aTemplate = $this->getTemplateArrayByDirPath(
-            AmazonAutoLinks_Registry::$sDirPath 
+        $_sPath = AmazonAutoLinks_Registry::$sDirPath
             . DIRECTORY_SEPARATOR . 'template'
-            . DIRECTORY_SEPARATOR . $_sTemplateDirectoryName,
+            . DIRECTORY_SEPARATOR . $_sTemplateDirectoryName
+            . DIRECTORY_SEPARATOR . 'template.php';
+        return wp_normalize_path( $_sPath );
+    }
+
+    /**
+     * @param string $sUnitType
+     * @since   4.0.2
+     * @return  array   The template data array
+     */
+    public function getDefaultTemplateByUnitType( $sUnitType ) {
+        return $this->getTemplateArrayByDirPath(
+            dirname( $this->getDefaultTemplatePathByUnitType( $sUnitType ) ),
             false       // no extra info
         );
-        return $_aTemplate[ 'id' ];
+    }
+
+    /**
+     * Returns the plugin default template unit ID by unit type regardless of whether it is activated or not.
+     *
+     * @param string $sUnitType
+     *
+     * @return      string
+     * @since       3
+     */
+    public function getDefaultTemplateIDByUnitType( $sUnitType ) {
+        $_aDefaultTemplate = $this->getDefaultTemplateByUnitType( $sUnitType );
+        return $this->getElement( $_aDefaultTemplate, array( 'id' ), '' );
     }
 
     /**
@@ -446,12 +470,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 
             if ( $bExtraInfo ) {
                 $_aData[ 'thumbnail_path' ] = $this->_getScreenshotPath( $_aData[ 'dir_path' ] );
-                return $this->_formatTemplateArray(
+                return $this->___getTemplateArrayFormatted(
                     $this->getTemplateData( $_aData[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css' )
                     + $_aData
                 );
             }
-            return $this->_formatTemplateArray( $_aData );
+            return $this->___getTemplateArrayFormatted( $_aData );
 
         }
             /**
@@ -557,9 +581,9 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @scope   public  Each template accesses this method to get the ID for filters.
      */
     public function getTemplateID( $sDirPath ) {
+        $sDirPath = untrailingslashit( $sDirPath );
         $sDirPath = wp_normalize_path( $sDirPath );
-        $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
-        return untrailingslashit( $sDirPath );
+        return $this->getRelativePath( ABSPATH, $sDirPath );
     }
 
     /**
@@ -586,18 +610,28 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     }
 
     /**
-     * @param   string $sPath
+     * Returns an template ID from the given path.
+     *
+     * Unlike the other methods, this does not care whether the template is activated or not
+     * as mostly used when the `template_path` unit argument is given and override the preset template such as `Preview`, `JSON`, and `RSS`.
+     *
+     * @param   string $sTemplatePath       The `template.php` file path.
      * @return  string the template ID
      * @since   4.0.2
      */
-    public function getIDFromPath( $sPath ) {
-        foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
-            $_sTemplatePath = wp_normalize_path( $_aTemplate[ 'template_path' ] );
-            if ( $_sTemplatePath === $sPath ) {
-                return $_sID;
-            }
+    public function getIDFromPath( $sTemplatePath ) {
+        if ( is_dir( $sTemplatePath ) ) {
+            return $this->getTemplateID( $sTemplatePath );
         }
-        return '';
+        return $this->getTemplateID( dirname( $sTemplatePath ) );
+        // @deprecated 4.0.2 As non-active template path can be specified
+//        foreach( $this->getActiveTemplates() as $_sID => $_aTemplate ) {
+//            $_sTemplatePath = wp_normalize_path( $_aTemplate[ 'template_path' ] );
+//            if ( $_sTemplatePath === $sTemplatePath ) {
+//                return $_sID;
+//            }
+//        }
+//        return '';
     }
 
     /**

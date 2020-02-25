@@ -6,6 +6,7 @@
  * $aProducts  - the fetched product links
  * $aArguments - the user defined unit arguments such as image size and count etc.
  */
+
 ?>
 <?php if ( empty( $aProducts ) ) : ?>
     <div><p><?php _e( 'No products found.', 'amazon-auto-links' ); ?></p></div>

@@ -320,9 +320,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.2 =
+- Tweaked the default `Image Format` option layout value.
 - Added the `Image` template.
-- Changed the behavior for a case when a template path is not found to apply the default template.
-- Fixed a bug that templates were not properly loaded with the `template` argument, started from v4.0.0.
+- Changed the behavior of when the template path is not found to apply the default template instead of showing an error.
+- Fixed a bug that templates were not properly loaded with some cases, started from v4.0.0.
 
 = 4.0.1 - 02/24/2020 =
 - Changed the `Now retrieving...` message not to show when API keys are not set.

@@ -152,7 +152,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'image_format' ] = $this->___getImageFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'title_format' ] = $this->___getTitleFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
-
         return $aUnitOptions;
         
     }

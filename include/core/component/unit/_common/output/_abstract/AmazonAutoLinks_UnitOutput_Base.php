@@ -324,18 +324,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @return      string  The template path.
          */
         private function ___getTemplatePath() {
-            // @deprecated 4.0.2 The `template_id` is determined in the unit option class now so use the template id to get the path.
-    //        $_oTemplatePath     = new AmazonAutoLinks_UnitOutput__TemplatePath( $_aArguments );
-    //        $_sTemplatePath     = $_oTemplatePath->get( $sTemplatePath );
+
             $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
-            $_sTemplatePath     = $_oTemplateOption->getPathFromID( $this->oUnitOption->get( 'template_id' ) );
+            $_sTemplatePath     = $this->oUnitOption->get( 'template_path' );   // if directly specified, use it
+            $_sTemplatePath     = $_sTemplatePath
+                ? $_sTemplatePath
+                : $_oTemplateOption->getPathFromID( $this->oUnitOption->get( 'template_id' ) ); // this method only returns from active templates
+
             $_sTemplatePath     = apply_filters( "aal_filter_template_path", $_sTemplatePath, $this->oUnitOption->get() );
 
             if ( ! file_exists( $_sTemplatePath ) ) {
                 // use the default one
-                $_sDefaultTemplateID = $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->oUnitOption->sUnitType );
-                return $_oTemplateOption->getPathFromID( $_sDefaultTemplateID );
-
+                return $_oTemplateOption->getDefaultTemplatePathByUnitType( $this->oUnitOption->sUnitType );
             }
             return $_sTemplatePath;
         }
