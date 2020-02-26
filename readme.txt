@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         4.0.1
+Stable tag:         4.0.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -319,7 +319,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.0.2 =
+= 4.0.2 - 02/26/2020 =
 - Tweaked the `List` template regarding the width of sub-image container elements.
 - Tweaked the default `Image Format` option layout value.
 - Added the `Image` template.
