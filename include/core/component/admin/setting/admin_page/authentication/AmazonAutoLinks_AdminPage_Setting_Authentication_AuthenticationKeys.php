@@ -85,7 +85,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
             array(
                 'field_id'          => 'access_key_secret',
                 'title'             => __( 'Secret Access Key', 'amazon-auto-links' ),
-                'type'              => 'text',
+                'type'              => 'password',
                 'tip'               => __( 'The private key consisting of 40 alphabetic characters.', 'amazon-auto-links' ),
                 'description'       => 'e.g.<code>kWcrlUX5JEDGM/LtmEENI/aVmYvHNif5zB+d9+ct</code>',
                 'attributes'        => array(
