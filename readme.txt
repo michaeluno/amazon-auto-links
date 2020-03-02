@@ -319,6 +319,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.0.3 =
+- Fixed a bug that cased the fatal PHP error in setting pages.
+
 = 4.0.2 - 02/26/2020 =
 - Tweaked the `List` template regarding the width of sub-image container elements.
 - Tweaked the default `Image Format` option layout value.

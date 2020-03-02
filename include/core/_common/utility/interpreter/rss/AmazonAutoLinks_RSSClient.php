@@ -64,7 +64,7 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
         foreach( $_oHTTP->get() as $_sHTTPBody ) {
             $_aItems = array_merge(
                 $_aItems,
-                $this->_getRSSItems( $_sHTTPBody )
+                $this->___getRSSItems( $_sHTTPBody )
             );
         }
         
@@ -136,23 +136,18 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
         /**
          * 
          * @return      array
+         * @param   string $sHTTPBody
          */
-        private function _getRSSItems( $_sHTTPBody ) {
+        private function ___getRSSItems( $sHTTPBody ) {
    
-            $_boXML = $this->getXMLObject( 
-                $_sHTTPBody, 
-                false // do not strip HTML/XML tags
-            );            
+            $_boXML = $this->getXMLObject( $sHTTPBody );
             if ( false === $_boXML ) {
                 return array();
             }
             $_oXML   = $_boXML;
             $_aXML   = $this->convertXMLtoArray( $_oXML );
 
-            $_aItems = $this->getElement(
-                $_aXML,
-                array( 'channel', 'item' )
-            );
+            $_aItems = $this->getElementAsArray( $_aXML, array( 'channel', 'item' ) );
             return $this->isAssociative( $_aItems )
                 ? array( 0 => $_aItems )
                 : $_aItems;

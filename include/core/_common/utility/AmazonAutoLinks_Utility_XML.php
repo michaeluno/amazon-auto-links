@@ -20,7 +20,7 @@ class AmazonAutoLinks_Utility_XML extends AmazonAutoLinks_Utility_String {
      * 
      * Returns a tag-stripped string on error.
      * 
-     * @return      object|boolean
+     * @return      SimpleXMLElement|boolean        False or a SimpleXMLElement object.
      */
     static public function getXMLObject( $sXML ) {
         
@@ -35,7 +35,7 @@ class AmazonAutoLinks_Utility_XML extends AmazonAutoLinks_Utility_String {
         // Restore the error setting.
         libxml_use_internal_errors( $bDOMError );    
         
-        // Result - false or object
+        // Result - false or a SimpleXMLElement instance.
         return $_boXML;
             
     }
