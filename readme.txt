@@ -321,6 +321,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.0.3 =
 - Changed the `Secret Access Key` option input field to be masked.
+- Fixed a bug that templates were doubled in the `Templates` setting screen.
 - Fixed a bug that cased the fatal PHP error in setting pages.
 
 = 4.0.2 - 02/26/2020 =

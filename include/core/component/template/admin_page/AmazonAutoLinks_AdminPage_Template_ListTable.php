@@ -15,31 +15,34 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+    /**
+     * @var AmazonAutoLinks_ListTable_Template
+     */
+    private $___oTemplateListTable;
+
     /**
      * Triggered when the tab is loaded.
-     * 
+     *
      * @callback        load_{page slug}_{tab slug}
      */
     public function replyToLoadTab( $oAdminPage ) {
-            
+
         // Set the list table data.
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        $this->oTemplateListTable = new AmazonAutoLinks_ListTable_Template( 
+        $this->___oTemplateListTable = new AmazonAutoLinks_ListTable_Template(
             $_oTemplateOption->getActiveTemplates() // precedence
-            + $_oTemplateOption->getUploadedTemplates() // merge 
+            + $_oTemplateOption->getUploadedTemplates() // merge
         );
-        $this->oTemplateListTable->process_bulk_action();
-        
+        $this->___oTemplateListTable->process_bulk_action();
     }
 
     /**
-     * 
+     *
      * @callback        do_{page slug}_{tab slug}
      */
     public function replyToDoTab( $oFactory ) {
-        
-        $this->oTemplateListTable->prepare_items();
+
+        $this->___oTemplateListTable->prepare_items();
         ?>
         <form id="template-filter" method="get">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
@@ -47,7 +50,7 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
             <input type="hidden" name="tab" value="<?php echo isset( $_REQUEST['tab'] ) ? $_REQUEST['tab'] : 'table'; ?>" />
             <input type="hidden" name="post_type" value="<?php echo isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]; ?>" />
             <!-- Now we can render the completed list table -->
-            <?php $this->oTemplateListTable->display() ?>
+            <?php $this->___oTemplateListTable->display() ?>
         </form>        
         <?php
                 

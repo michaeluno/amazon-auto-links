@@ -162,25 +162,24 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          */
         private function ___getActiveTemplatesExtracted( array $aTemplates ) {
 
-            foreach( $aTemplates as $_sID => $_aTemplate ) {
-                
-                $_aTemplate = $this->___getTemplateArrayFormatted( $_aTemplate );
+            $_aActiveTemplates = array();
 
-                // Remove inactive templates.
+            foreach( $aTemplates as $_sID => $_aTemplate ) {
+
+                // Skip inactive templates.
                 if ( ! $this->getElement( $_aTemplate, 'is_active' ) ) {
-                    unset( $aTemplates[ $_sID ] );
                     continue;
                 }
+
+                $_sID       = wp_normalize_path( untrailingslashit( $_sID ) );
+                $_aTemplate = $this->___getTemplateArrayFormatted( $_aTemplate );
                 
                 // Backward compatibility for the v2 options structure.
                 // If the id is not a relative dir path,
                 if ( 
                     $_sID !== $_aTemplate[ 'relative_dir_path' ] 
                 ) {
-                    
-                    // Remove the old item.
-                    unset( $aTemplates[ $_sID ] );
-                    
+
                     // If the same ID already exists, set the old id.
                     if ( isset( $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ] ) ) {
                         $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ][ 'old_id' ] = $_sID;
@@ -189,11 +188,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                     }
                     
                 }
-                
-                $aTemplates[ $_aTemplate[ 'relative_dir_path' ] ][ 'is_active' ] = true;
+
+                $_aTemplate[ 'is_active' ]  = true;
+                $_aActiveTemplates[ $_sID ] = $_aTemplate;
                 
             }
-            return $aTemplates;
+            return $_aActiveTemplates;
             
         }
        
@@ -226,11 +226,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             
             // Set the directory path every time the page loads. Do not store in the data base. 
             // This path is absolute so when the user moves the site, the value will be different.
-            $aTemplate[ 'dir_path' ]           = $this->getElement(
+            $aTemplate[ 'dir_path' ]          = $this->getElement(
                 $aTemplate,
                 'dir_path',
                 $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ] )
             );
+            $aTemplate[ 'dir_path' ]          = untrailingslashit( $aTemplate[ 'dir_path' ] );
             
             // Check required files. Consider the possibility that the user may directly delete the template files/folders.
             $_aRequiredFiles = array(
@@ -254,6 +255,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 'id',
                 $aTemplate[ 'relative_dir_path' ]
             );
+            $aTemplate[ 'id' ]                 = untrailingslashit( $aTemplate[ 'id' ] );
             $aTemplate[ 'old_id' ]             = $this->getElement(
                 $aTemplate,
                 'old_id',
