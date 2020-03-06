@@ -39,7 +39,9 @@ class AmazonAutoLinks_UnitOutput__Template extends AmazonAutoLinks_PluginUtility
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
 
         // Case: `template_path` is specified.
-        $_sTemplatePath = $this->___oUnitOption->get( 'template_path' );
+        $_sTemplatePath = isset( $this->___oUnitOption->aUnitOptions[ 'template_path' ] )
+            ? $this->___oUnitOption->aUnitOptions[ 'template_path' ]
+            : '';
         if ( $_sTemplatePath ) {
             $_sTemplateID = $_oTemplateOption->getIDFromPath( $_sTemplatePath );
             if ( $_sTemplateID ) {
@@ -48,7 +50,9 @@ class AmazonAutoLinks_UnitOutput__Template extends AmazonAutoLinks_PluginUtility
         }
 
         // Case: a template name is given.
-        $_sTemplateName = $this->___oUnitOption->get( 'template' );
+        $_sTemplateName = isset( $this->___oUnitOption->aUnitOptions[ 'template' ] )
+            ? $this->___oUnitOption->aUnitOptions[ 'template' ]
+            : '';
         if ( $_sTemplateName ) {
             $_sTemplateID = $_oTemplateOption->getIDFromName(  $_sTemplateName );
             if ( $_sTemplateID ) {
@@ -60,16 +64,19 @@ class AmazonAutoLinks_UnitOutput__Template extends AmazonAutoLinks_PluginUtility
         // @remark even if the template is found, if it is not activated, return the default template
         // For JSON and RSS feed outputs, they are given the path with the `template_path` argument,
         // in that case, it does not matter whether the template is activated via the UI.
-        $_snTemplateID = $this->___oUnitOption->get( 'template_id' );
-        if ( $_oTemplateOption->isActive( $_snTemplateID ) ) {
-            return $_snTemplateID;
+        $_sTemplateID  = isset( $this->___oUnitOption->aUnitOptions[ 'template_id' ] )
+            ? ( string ) $this->___oUnitOption->aUnitOptions[ 'template_id' ]
+            : '';
+        $_sTemplateID  = untrailingslashit( $_sTemplateID );     // for backward comatibility
+        if ( $_oTemplateOption->isActive( $_sTemplateID ) ) {
+            return $_sTemplateID;
         }
 
         // Not found. In that case, use the default one.
         $_oOption     = AmazonAutoLinks_Option::getInstance();
         $_sTemplateID = $_oOption->get( array( 'unit_default', 'template_id' ), '' );
         return $_sTemplateID
-            ? $_sTemplateID
+            ? untrailingslashit( $_sTemplateID )    // for backward comatibility
             : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->___oUnitOption->sUnitType );
 
     }

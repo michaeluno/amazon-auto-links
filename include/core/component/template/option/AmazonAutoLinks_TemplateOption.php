@@ -612,9 +612,9 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @scope   public  Each template accesses this method to get the ID for filters.
      */
     public function getTemplateID( $sDirPath ) {
-        $sDirPath = untrailingslashit( $sDirPath );
         $sDirPath = wp_normalize_path( $sDirPath );
-        return $this->getRelativePath( ABSPATH, $sDirPath );
+        $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        return untrailingslashit( $sDirPath );
     }
 
     /**

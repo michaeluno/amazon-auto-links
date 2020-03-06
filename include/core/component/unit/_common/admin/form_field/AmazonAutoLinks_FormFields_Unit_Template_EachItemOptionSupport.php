@@ -81,6 +81,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
         private function ___getRevealerSelectorsForItemFormatFields( array $aActiveTemplateLabels ) {
             $_aSelectors = array();
             foreach( $aActiveTemplateLabels as $_sTemplateID => $_sLabel ) {
+                $_sTemplateID = untrailingslashit( $_sTemplateID );
                 $_aSelectors[ $_sTemplateID ] = '.' . $this->___getClassAttributeNameFromTemplateIDGenerated( $_sTemplateID );
             }
             return $_aSelectors;
@@ -92,8 +93,9 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
              * @return string
              */
             private function ___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ) {
-                $_sSelector = wp_normalize_path( $sTemplateID );
-                $_sSelector = ltrim( $_sSelector, '.' );
+                $sTemplateID = untrailingslashit( $sTemplateID );
+                $_sSelector  = wp_normalize_path( $sTemplateID );
+                $_sSelector  = ltrim( $_sSelector, '.' );
                 return str_replace( '/', '_', $_sSelector );
             }
 
