@@ -15,9 +15,16 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
 
-        $_aActiveTemplateLabels = $this->oTemplateOption->getActiveTemplateLabels();
+        $_aActiveTemplateLabels = $this->oTemplateOption->getUsableTemplateLabels();
         $_iMaxCol               = $this->oOption->getMaxSupportedColumnNumber();
         $_aItemFormat           = $this->oOption->getDefaultItemFormat();
+        $_sTemplateScreenURL    = add_query_arg(
+            array(
+                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
+            ),
+            admin_url( 'edit.php' )
+        );
         $_aFields               = array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'template_id',
@@ -28,7 +35,11 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
                 'label'             => $_aActiveTemplateLabels,
                 'default'           => $this->oTemplateOption->getDefaultTemplateIDByUnitType( $sUnitType ),
-//                'description'       => AmazonAutoLinks_Debug::get( $this->___getRevealerSelectorsForItemFormatFields( $_aActiveTemplateLabels ) ),
+                'description'       => sprintf(
+                    __( 'If the template you like to use is not listed here, make sure it is activated in the <a href="%1$s">%2$s</a> screen.', 'amazon-auto-links' ),
+                    esc_url( $_sTemplateScreenURL ),
+                    __( 'Templates', 'amazon-auto-links' )
+                ),
             ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'column',

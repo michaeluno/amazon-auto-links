@@ -60,7 +60,7 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
                 'type'              => 'select',
                 'title'             => __( 'Template Name', 'amazon-auto-links' ),
                 'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
-                'label'             => $_oTemplateOption->getActiveTemplateLabels(),
+                'label'             => $_oTemplateOption->getUsableTemplateLabels(),
                 'default'           => $_oTemplateOption->getDefaultTemplateIDByUnitType( 'embed' ),
                 'description'       => __( 'Choose the template used for embedded outputs.', 'amazon-auto-links' ),
             ),

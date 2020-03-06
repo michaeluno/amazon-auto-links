@@ -114,7 +114,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $_aDirPaths = array(
 //                AmazonAutoLinks_Registry::$sDirPath . '/template/category',   // @deprecated 4.0.0    Now use list
 //                AmazonAutoLinks_Registry::$sDirPath . '/template/search',     // @deprecated 4.0.0    Now use list
-                AmazonAutoLinks_Registry::$sDirPath . '/template/list'  // 3.8.0
+//                AmazonAutoLinks_Registry::$sDirPath . '/template/list'  // 3.8.0
+                dirname( $this->getDefaultTemplatePathByUnitType( '' ) ),
             );
             $_iIndex     = 0;
             $_aTemplates = array();
@@ -344,6 +345,25 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return $_aLabels;
     }
 
+    /**
+     * Returns an array holding usable template labels,
+     * mainly consisting of the active templates but the default template in addition.
+     *
+     * @remark      Used for template select option field.
+     *
+     * @since       4.0.4
+     * @retun       array
+     */
+    public function getUsableTemplateLabels() {
+        $_aLabels = $this->getActiveTemplateLabels();
+        if ( ! empty( $_aLabels ) ) {
+            return $_aLabels;
+        }
+        $_aDefaultTemplate = $this->getDefaultTemplateByUnitType( '', true );
+        $_aLabels[ $_aDefaultTemplate[ 'id' ] ] = $_aDefaultTemplate[ 'name' ];
+        return $_aLabels;
+    }
+
 
     /**
      * @param   string $sUnitType
@@ -351,6 +371,18 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @return  string  The default template path
      */
     public function getDefaultTemplatePathByUnitType( $sUnitType ) {
+        $_sPath = AmazonAutoLinks_Registry::$sDirPath
+            . DIRECTORY_SEPARATOR . 'template'
+            . DIRECTORY_SEPARATOR . $this->getDefaultTemplateDirectoryBaseName( $sUnitType )
+            . DIRECTORY_SEPARATOR . 'template.php';
+        return wp_normalize_path( $_sPath );
+    }
+
+    /**
+     * @since   4.0.4
+     * @return  string the directory base name of the default template.
+     */
+    public function getDefaultTemplateDirectoryBaseName( $sUnitType='' ) {
         switch ( $sUnitType ) {
             // @deprecated 4.0.0
             // Now all unit types default to the List template
@@ -372,22 +404,19 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $_sTemplateDirectoryName = 'list';
                 break;
         }
-        $_sPath = AmazonAutoLinks_Registry::$sDirPath
-            . DIRECTORY_SEPARATOR . 'template'
-            . DIRECTORY_SEPARATOR . $_sTemplateDirectoryName
-            . DIRECTORY_SEPARATOR . 'template.php';
-        return wp_normalize_path( $_sPath );
+        return $_sTemplateDirectoryName;
     }
 
     /**
      * @param string $sUnitType
+     * @param boolean $bExtraInfo   Whether to retrieve extra information
      * @since   4.0.2
      * @return  array   The template data array
      */
-    public function getDefaultTemplateByUnitType( $sUnitType ) {
+    public function getDefaultTemplateByUnitType( $sUnitType, $bExtraInfo=false ) {
         return $this->getTemplateArrayByDirPath(
             dirname( $this->getDefaultTemplatePathByUnitType( $sUnitType ) ),
-            false       // no extra info
+            $bExtraInfo       // no extra info
         );
     }
 

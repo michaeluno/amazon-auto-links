@@ -37,7 +37,7 @@ class AmazonAutoLinks_FormFields_Unit_Template extends AmazonAutoLinks_FormField
                 'type'              => 'select',            
                 'title'             => __( 'Template Name', 'amazon-auto-links' ),
                 'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
-                'label'             => $this->oTemplateOption->getActiveTemplateLabels(),
+                'label'             => $this->oTemplateOption->getUsableTemplateLabels(),
                 'default'           => $this->oTemplateOption->getDefaultTemplateIDByUnitType( $sUnitType ),
             ),
             array(

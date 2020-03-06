@@ -77,7 +77,7 @@ class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_
                         'field_id'      => 'aal',
                         'title'         => 'AAL',
                         'type'          => 'select',
-                        'label'         => AmazonAutoLinks_TemplateOption::getInstance()->getActiveTemplateLabels(),
+                        'label'         => AmazonAutoLinks_TemplateOption::getInstance()->getUsableTemplateLabels(),
                     ),
                 ),
 

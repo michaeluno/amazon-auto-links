@@ -319,6 +319,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.0.4 =
+- Fixed a bug that the default template was not listed in the `Template` unit option when no template was activated, started from v4.0.0.
+
 = 4.0.3 - 03/03/2020 =
 - Changed the `Secret Access Key` option input field to be masked.
 - Fixed a bug that templates were doubled in the `Templates` setting screen.
