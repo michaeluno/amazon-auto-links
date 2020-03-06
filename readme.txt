@@ -320,7 +320,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.4 =
-- Fixed an issue that a PHP fatal error "Uncaught Error: Call to undefined function register_block_type()" occurred in some rare occasions.
+- Fixed a bug that template names were not displayed in Manage Units screen.
+- Fixed a bug that caused a PHP fatal error "Uncaught Error: Call to undefined function register_block_type()" for WordPress v4.9.x or below.
 - Fixed a bug that the default template was not listed in the `Template` unit option when no template was activated, started from v4.0.0.
 
 = 4.0.3 - 03/03/2020 =

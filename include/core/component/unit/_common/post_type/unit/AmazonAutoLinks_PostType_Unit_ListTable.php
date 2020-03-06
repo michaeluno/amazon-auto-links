@@ -124,8 +124,8 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function cell_amazon_auto_links_template( $sCell, $iPostID ) {
         return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID( 
-            get_post_meta( $iPostID, 'template_id', true ) // template id
-        );        
+            untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
+        );
     }    
     
     /**

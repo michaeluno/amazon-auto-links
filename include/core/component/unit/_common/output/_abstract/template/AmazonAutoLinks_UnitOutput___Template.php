@@ -67,7 +67,7 @@ class AmazonAutoLinks_UnitOutput__Template extends AmazonAutoLinks_PluginUtility
         $_sTemplateID  = isset( $this->___oUnitOption->aUnitOptions[ 'template_id' ] )
             ? ( string ) $this->___oUnitOption->aUnitOptions[ 'template_id' ]
             : '';
-        $_sTemplateID  = untrailingslashit( $_sTemplateID );     // for backward comatibility
+        $_sTemplateID  = untrailingslashit( $_sTemplateID );     // for backward compatibility
         if ( $_oTemplateOption->isActive( $_sTemplateID ) ) {
             return $_sTemplateID;
         }
@@ -76,7 +76,7 @@ class AmazonAutoLinks_UnitOutput__Template extends AmazonAutoLinks_PluginUtility
         $_oOption     = AmazonAutoLinks_Option::getInstance();
         $_sTemplateID = $_oOption->get( array( 'unit_default', 'template_id' ), '' );
         return $_sTemplateID
-            ? untrailingslashit( $_sTemplateID )    // for backward comatibility
+            ? untrailingslashit( $_sTemplateID )    // for backward compatibility
             : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->___oUnitOption->sUnitType );
 
     }
