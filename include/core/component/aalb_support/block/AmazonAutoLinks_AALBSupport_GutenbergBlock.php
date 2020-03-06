@@ -24,12 +24,12 @@ class AmazonAutoLinks_AALBSupport_GutenbergBlock extends AmazonAutoLinks_WPUtili
     /**
      * @see AmazonAssociatesLinkBuilder\constants\GB_Block_Constants
      */
-    const GB_SCRIPT_HANDLE = 'amazon-associates-link-builder-gb-block';
+    // const GB_SCRIPT_HANDLE = 'amazon-associates-link-builder-gb-block'; // @deprecated 4.0.4 Not used anywhere.
     const SHORTCODE_ATTR = 'shortCodeContent';
     const SHORTCODE_ATTR_TYPE = 'string';
     const SEARCH_KEYWORD = 'searchKeyword';
     const SEARCH_KEYWORD_TYPE = 'string';
-    const GB_SUPPORTED_IDENTIFIER_METHOD = 'register_block_type';
+    // const GB_SUPPORTED_IDENTIFIER_METHOD = 'register_block_type'; // @deprecated 4.0.4 Not used anywhere
 
     /**
      * @see AmazonAssociatesLinkBuilder\includes\GB_Block_Manager
@@ -54,7 +54,15 @@ class AmazonAutoLinks_AALBSupport_GutenbergBlock extends AmazonAutoLinks_WPUtili
             );
             return;
         }
-    
+
+        /**
+         * There is a report that caused Fatal error: Uncaught Error: Call to undefined function register_block_type().
+         * @since   4.0.4
+         */
+        if ( ! function_exists( 'register_block_type' ) ) {
+            return;
+        }
+
         register_block_type(self::BLOCK_ID, array(
             'attributes' => array(
                 self::SHORTCODE_ATTR => array(
