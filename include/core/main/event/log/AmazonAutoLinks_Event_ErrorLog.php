@@ -77,7 +77,7 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
         $_aExtra = array(
             'cache_name' => $aCache[ 'name' ],
             'url'        => $aCache[ 'request_uri' ],
-            'data_type'  => gettype( $aCache[ 'data' ] ),
+            'data_type'  => gettype( $aCache[ 'data' ] ) . ( is_object( $aCache[ 'data' ] ) ? ':' . get_class( $aCache[ 'data' ] ) : '' ),
             'length'     => is_scalar( $aCache[ 'data' ] ) ? strlen( $aCache[ 'data' ] ) : 'n/a',
         );
         $this->setErrorLogItem( $sErrorMessage, $_aExtra );
