@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.4 =
+- Tweaked the default `Image Format` option layout value.
 - Fixed an issue that units with No Duplicate unit option is enabled returned no results in the preview page when some third-party plugins that calls the `the_content` filters in prior to rendering the post.
 - Fixed a bug that the `Output Format` unit options were not loaded properly for some cases.
 - Fixed a bug that template names were not displayed in Manage Units screen.
