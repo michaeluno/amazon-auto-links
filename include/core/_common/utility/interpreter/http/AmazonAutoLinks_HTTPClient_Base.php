@@ -287,18 +287,19 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     continue;
                 }
 
-                // 4.0.0+ There is a reported case that the `data` element is neither an array nor null.
-                // @todo the reason of corrupt data is unknown. It could be that the compressed data can be treated as a string when the WordPress core sanitizes the data when retrieving from the database table.
-                if ( ! is_array( $_aCache[ 'data' ] ) ) {
-                    do_action( 'aal_action_error_http_request_cache_data', 'The cache data is corrupted.', $_aCache );
-                    continue;
-                }
-
-                /**
-                 * @deprecated 3.7.6b01  Causes unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                 * @since      3.12.0    Re-added
-                 */
                 if ( ! is_wp_error( $_aCache[ 'data' ] ) ) {
+
+                    // 4.0.0+ There is a reported case that the `data` element is neither an array nor null.
+                    // @todo the reason of corrupt data is unknown. It could be that the compressed data can be treated as a string when the WordPress core sanitizes the data when retrieving from the database table.
+                    if ( ! is_array( $_aCache[ 'data' ] ) ) {
+                        do_action( 'aal_action_error_http_request_cache_data', 'The cache data is corrupted.', $_aCache );
+                        continue;
+                    }
+
+                    /**
+                     * @since      3.7.6b01  Deprecated as this seemed to cause unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
+                     * @since      3.12.0    Re-added
+                     */
                     $_bsUncompressed = function_exists( 'gzuncompress' )
                         ? @gzuncompress( $this->getElement( $_aCache, array( 'data', 'body' ), '' ) )    // returns string|false
                         : false;
@@ -306,6 +307,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                         $_aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
                     }
                     unset( $_aCache[ 'data' ][ 'http_response' ] );
+
                 }
 
                 /**
