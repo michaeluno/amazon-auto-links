@@ -19,7 +19,8 @@ class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType
     
     /**
      * Prints out the fetched product links.
-     * 
+     *
+     * @param       string  $sContent       The post content to filter.
      * @remark          Used for the post type single page that functions as preview the result.
      * @since           3       Changed the name from `_replytToPrintPreviewProductLinks()`.
      * */
@@ -30,8 +31,12 @@ class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType
             return $sContent;
         }
 
+        if ( ! in_the_loop() ) {
+            return $sContent;
+        }
+
         return $sContent
-            . AmazonAutoLinks( array( 'id' => $GLOBALS['post']->ID ), false );
+            . AmazonAutoLinks( array( 'id' => $GLOBALS[ 'post' ]->ID ), false );
 
     }    
    
