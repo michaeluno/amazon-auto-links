@@ -147,14 +147,32 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 //        $_sTemplateID        = $_oTemplateOption->isActive( $_sTemplateID )
 //            ? $_sTemplateID
 //            : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->getElement( $aUnitOptions, 'unit_type' ) );
-        $_sTemplateFieldKey  = str_replace( array( '.', '/', '\\', '-' ), '_', $_sTemplateID ); // the field id (name) gets automatically converted by Admin Page Framework.
-        $_aOutputFormats     = $this->getElementAsArray( $aUnitOptions, array( 'output_formats', $_sTemplateFieldKey ) );
+
+        $_aOutputFormats                = $this->___getOutputFormats( $aUnitOptions, $_sTemplateID );
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'image_format' ] = $this->___getImageFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'title_format' ] = $this->___getTitleFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         return $aUnitOptions;
         
     }
+
+        /**
+         * Extracts the Output Formats unit option from the unit options array.
+         * @param   array $aUnitOptions
+         * @param   string $sTemplateID
+         *
+         * @return  array
+         * @since   4.0.4
+         */
+        private function ___getOutputFormats( array $aUnitOptions, $sTemplateID ) {
+            $_sTemplateFieldKey  = str_replace( array( '.', '/', '\\', '-' ), '_', $sTemplateID ); // the field id (name) gets automatically converted by Admin Page Framework.
+            $_aOutputFormats     = $this->getElementAsArray( $aUnitOptions, array( 'output_formats', $_sTemplateFieldKey ) );
+            if ( ! empty( $_aOutputFormats )  ) {
+                return $_aOutputFormats;
+            }
+            // For backward compatibility for a case the ID has a trailing slash
+            return $this->getElementAsArray( $aUnitOptions, array( 'output_formats', $_sTemplateFieldKey . '_' ) );
+        }
 
         /**
          * Returns the `item_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
