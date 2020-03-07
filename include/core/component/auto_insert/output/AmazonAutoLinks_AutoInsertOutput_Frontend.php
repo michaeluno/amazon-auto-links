@@ -133,7 +133,12 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
         if ( ! is_string( $sContent ) ) {
             return $sContent;        
         }
-        
+
+        // 4.0.4+ The `the_content` filter should be applied only in the main loop. Otherwise, Prevent Duplicates option takes effect in unknown calls.
+        if ( 'the_content' === $sFilterName && ! in_the_loop() ) {
+            return $sContent;
+        }
+
         $aSubjectPageInfo = array(
             'post_id'   => $this->iPostID,
             'post_type' => $this->sPostType,

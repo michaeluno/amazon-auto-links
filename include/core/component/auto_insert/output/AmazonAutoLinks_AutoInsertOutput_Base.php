@@ -182,8 +182,8 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
         // Apply filters.
         if ( $this->hasPrefix( 'callback_filter_', $sMethodName ) ) {            
             $_iLength     = strlen( 'callback_filter_' );
-            $_sFiletrName = substr( $sMethodName, $_iLength );
-            return $this->_getFiltersApplied( $_sFiletrName, $aArguments );            
+            $_sFilterName = substr( $sMethodName, $_iLength );
+            return $this->_getFiltersApplied( $_sFilterName, $aArguments );
         }
             
         // Do actions.
