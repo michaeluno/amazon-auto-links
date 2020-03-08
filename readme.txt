@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         4.0.3
+Stable tag:         4.0.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -319,7 +319,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.0.4 =
+= 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.
 - Fixed an issue that units with `Prevent Duplicates` unit option enabled produced no results in the unit preview page when some third-party plugins that calls the `the_content` filters in prior to rendering the post.
 - Fixed a bug that the `Output Format` unit options were not loaded properly for some cases.
