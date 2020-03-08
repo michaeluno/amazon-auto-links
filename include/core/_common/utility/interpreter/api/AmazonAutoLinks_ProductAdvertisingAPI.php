@@ -209,7 +209,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
      * @since       unknown
      * @since       3.5.0       Removed the $sLocale, $sType, $iTimeout, $iRedirection, $sHeaders, $sUserAgent parameters.
      */
-    public function request( array $aAPIParameters, $iCacheDuration=3600, $bForceCaching=false ) {
+    public function request( array $aAPIParameters, $iCacheDuration=3600, $bForceRenew=false ) {
 
         $_oAPIRequestURIBuilder = new AmazonAutoLinks_ProductAdvertisingAPI___URIBuilder(
             $aAPIParameters + $this->___aAPIParameters,
@@ -227,7 +227,7 @@ class AmazonAutoLinks_ProductAdvertisingAPI extends AmazonAutoLinks_PluginUtilit
             $_sRequestURI,
             $_aHTTPArguments,
             $iCacheDuration,
-            $bForceCaching,
+            $bForceRenew,
             $this->___sRequestType
         );
         $_asResponse = $_oAPIRequestCache->get();

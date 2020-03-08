@@ -115,7 +115,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
      * @since       3.9.0
      * @return      array
      */
-    public function request( array $aPayload, $iCacheDuration=86400, $bForceCaching=false ) {
+    public function request( array $aPayload, $iCacheDuration=86400, $bForceRenew=false ) {
         $aPayload     = $aPayload + $this->___aPayload;
         $_oAPIHeader  = new AmazonAutoLinks_PAAPI50___RequestHeaderGenerator(
             $this->___sPublicKey,
@@ -141,7 +141,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             $_sRequestURI,
             $_aHTTPArguments,
             $iCacheDuration,
-            $bForceCaching,
+            $bForceRenew,
             $this->___sRequestType
         );
         $_aoResponse = $_oAPIRequestCache->get();

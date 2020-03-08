@@ -18,7 +18,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
     private $___sRequestURI           = '';
     private $___aHTTPArguments        = array();
     private $___iCacheDuration        = 84000;
-    private $___bForceCaching         = false;
+    private $___bForceRenew           = false;
     private $___sRequestType          = 'api';
 
     /**
@@ -26,11 +26,11 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
      *
      * @param       array   $aConstructorArguments      Parameters passed to the constructor of the API class. This is used for background cache renewal events.
      */
-    public function __construct( $sRequestURI, array $aHTTPArguments, $iCacheDuration, $bForceCaching, $sRequestType='api' ) {
+    public function __construct( $sRequestURI, array $aHTTPArguments, $iCacheDuration, $bForceRenew, $sRequestType='api' ) {
         $this->___sRequestURI    = $sRequestURI;
         $this->___aHTTPArguments = $aHTTPArguments;
         $this->___iCacheDuration = $iCacheDuration;
-        $this->___bForceCaching  = $bForceCaching;
+        $this->___bForceRenew    = $bForceRenew;
         $this->___sRequestType   = $sRequestType;
     }
 
@@ -43,7 +43,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
             $this->___sRequestURI,
             $this->___aHTTPArguments,
             $this->___iCacheDuration,
-            $this->___bForceCaching
+            $this->___bForceRenew
         );
     }
         /**
@@ -53,7 +53,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
          * @since           3.9.0
          * @return          string|array    Returns the retrieved HTML body string, and an error array on failure.
          */
-        private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceCaching=false ) {
+        private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceRenew=false ) {
 
             add_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100, 3 );
 
@@ -68,7 +68,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                 ),
                 $this->___sRequestType // request type
             );
-            if ( $bForceCaching ) {
+            if ( $bForceRenew ) {
                 $_oHTTP->deleteCache();
             }
             $_asResponse =  $_oHTTP->get();
