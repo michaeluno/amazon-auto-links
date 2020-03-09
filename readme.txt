@@ -39,7 +39,7 @@ If you want to simply display your desired specific product in a post, don't wor
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates and Brazil. China and Singapore are supported for the category unit type.
+Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates, Brazil and Singapore. China is supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -159,9 +159,8 @@ Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off
 = My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? =
 Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure your keys work there as well.
 
-= Are the China and Singapore locales supported? =
-For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support them.
-
+= Is the China locales supported? =
+For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support it.
 
 == Other Notes ==
 
@@ -318,6 +317,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.0.5 =
+- Added the Singapore locale for search unit types.
 
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.

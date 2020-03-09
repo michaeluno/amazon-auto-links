@@ -109,7 +109,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'type'              => 'select',
                 'description'       => __( 'The region of the API server. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
                 'label'             => AmazonAutoLinks_PAAPI50___Locales::getHostLabels(),
-                 'default'           => 'US',
+                'default'           => 'US',
             ),                
             array(
                 'field_id'          => 'disclaimer',

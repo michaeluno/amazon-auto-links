@@ -35,6 +35,7 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'uni',
         'MX'    => 'uni',
         'AU'    => 'uni',   // 3.5.5+
+        'SG'    => 'uni',   // 4.0.5+
     );
     /**
      * @var array
@@ -42,7 +43,7 @@ final class AmazonAutoLinks_Property {
      * @since   3.8.12      Changed the scheme to https from http.
      * @deprecated   3.9.1
      */
-    static public $aCategoryRootURLs = array(
+/*    static public $aCategoryRootURLs = array(
         'CA'    => 'https://www.amazon.ca/gp/bestsellers/',
         'CN'    => 'https://www.amazon.cn/gp/bestsellers/',
         'FR'    => 'https://www.amazon.fr/gp/bestsellers/',
@@ -56,7 +57,7 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'https://www.amazon.com.br/gp/bestsellers/',
         'MX'    => 'https://www.amazon.com.mx/gp/bestsellers/',
         'AU'    => 'https://www.amazon.com.au/gp/bestsellers/',
-    );
+    );*/
 
     /**
      * @var array 
@@ -217,7 +218,11 @@ final class AmazonAutoLinks_Property {
         'AU' => 'www.amazon.com.au/gp/aws/cart/add.html',   // 3.5.5+
     );
 
-    static public $aTokens = array(
+    /**
+     * @var array
+     * @deprecated
+     */
+/*    static public $aTokens = array(
         'CA' => 'bWl1bm9zb2Z0Y2EtMjA=',
         'CN' => 'bWl1bm9zb2Z0LTIz',
         'FR' => 'bWl1bm9zb2Z0ZnItMjE=',
@@ -229,7 +234,7 @@ final class AmazonAutoLinks_Property {
         'US' => 'bWl1bm9zb2Z0LTIw',
         'MX' => 'bWl1bm9zb2Z0LTIw', // 3.5.5+
         'AU' => 'bWl1bm9zb2Z0LTIw', // 3.5.5+
-    );
+    );*/
 
     /**
      * Returns an array of search index of the specified locale.
@@ -725,6 +730,26 @@ final class AmazonAutoLinks_Property {
                     'VideoGames'            => __( 'Video Games', 'amazon-auto-links' ),
                     'Watches'               => __( 'Watches', 'amazon-auto-links' ),
                 );
+            case 'SG':
+                // @since 4.0.5
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/singapore.html#search-index
+                return array(
+                    'All'	                    => __( 'All Departments', 'amazon-auto-links' ),
+                    'Automotive'	            => __( 'Automotive', 'amazon-auto-links' ),
+                    'Baby'	                    => __( 'Baby', 'amazon-auto-links' ),
+                    'Beauty'	                => __( 'Beauty & Personal Care', 'amazon-auto-links' ),
+                    'Computers' 	            => __( 'Computers', 'amazon-auto-links' ),
+                    'Electronics'	            => __( 'Electronics', 'amazon-auto-links' ),
+                    'GroceryAndGourmetFood'     => __( 'Grocery', 'amazon-auto-links' ),
+                    'HealthPersonalCare'        => __( 'Health, Household & Personal Care', 'amazon-auto-links' ),
+                    'HomeAndKitchen'            => __( 'Home, Kitchen & Dining', 'amazon-auto-links' ),
+                    'OfficeProducts'            => __( 'Office Products', 'amazon-auto-links' ),
+                    'PetSupplies'               => __( 'Pet Supplies', 'amazon-auto-links' ),
+                    'SportsAndOutdoors'         => __( 'Sports & Outdoors', 'amazon-auto-links' ),
+                    'ToolsAndHomeImprovement'   => __( 'Tools & Home Improvement', 'amazon-auto-links' ),
+                    'ToysAndGames'              => __( 'Toys & Games', 'amazon-auto-links' ),
+                    'VideoGames'                => __( 'Video Games', 'amazon-auto-links' ),
+                );                
             default:
             case 'US':
                 // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html
@@ -784,11 +809,11 @@ final class AmazonAutoLinks_Property {
     }
 
     /**
-     * @todo    Confirm if this property is being used.
      * @remark  Seems not used. And the documentation of the below url does not include the `AU` locale.
      * @see     https://docs.aws.amazon.com/AWSECommerceService/latest/DG/localevalues.html
+     * @deprecated 4.0.5 not used anywhere
      */
-    static public $aSearchIndex = array(
+/*    static public $aSearchIndex = array(
         'CA' => array(
             "All","Baby","Beauty","Blended","Books","Classical","DVD","Electronics","ForeignBooks",
             "HealthPersonalCare","KindleStore","LawnAndGarden","Music","PetSupplies","Software",
@@ -847,15 +872,15 @@ final class AmazonAutoLinks_Property {
         'MX' => array(),
         'AU' => array(),
 
-    );
+    );*/
 
     /**
      * 
      * @remark          These IDs were valid as of the publication date of this guide. API Version 2011-08-01
      * @see             http://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDs.html
-     * @todo            Confirm if this property is used or not. The caller method may not be used.
+     * @deprecated      4.0.5
      */
-    static public $aRootNodes = array(
+/*    static public $aRootNodes = array(
         'CA' => array(
             3561346011,6205124011,927726,962454,14113311,677211011,927726,6205177011,2972705011,2206275011,
             6205499011,962454,6205514011,3234171,3323751,962072,962454,110218011,
@@ -904,15 +929,16 @@ final class AmazonAutoLinks_Property {
         ),    // caused error: 195208011, 3580501, 285080, 195211011, 404272, 508494
         'MX' => array(),
         'AU' => array(),
-    );
+    );*/
     
     /**
      * Returns an array of root node IDs of the specified locale.
      * 
      * The nodes are divided up to 10 elements for the API request.
      * @remark      Not used at the moment.
+     * @deprecated  4.0.5
      */
-    static public function getRootNodes( $sLocale ) {
+/*    static public function getRootNodes( $sLocale ) {
         
         if ( ! isset( self::$aRootNodes[ strtoupper( $sLocale ) ] ) ) {
             return array();
@@ -922,7 +948,7 @@ final class AmazonAutoLinks_Property {
             10 
         );
         
-    }
+    }*/
     
     /**
      * The list of marketplace domains.
@@ -930,26 +956,28 @@ final class AmazonAutoLinks_Property {
      * This is used when the search API request has the category of 'Marketplace', the domain needs to be specified.
      * @since       2.1.0
      * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/MarketplaceDomainParameter.html
+     * @deprecated  4.0.5   Not used in anywhere
      */
-    static public $aMarketplaceDomain = array(
+    /*static public $aMarketplaceDomain = array(
         'DE' => 'www.javari.de',
         'JP' => 'www.javari.jp',
         'UK' => 'www.javari.co.uk',
         'US' => 'www.amazonsupply.com',
-    );
+    );*/
     
     /**
      * Returns the market place domain url by the given locale.
      * 
      * @since       2.1.0
+     * @deprecated  4.0.5   Not used in anywhere
      */
-    static public function getMarketplaceDomainByLocale( $sLocale ) {
+/*    static public function getMarketplaceDomainByLocale( $sLocale ) {
         
         return isset( self::$aMarketplaceDomain[ $sLocale ]  )
             ? self::$aMarketplaceDomain[ $sLocale ]
             : self::$aMarketplaceDomain[ 'US' ];    // default
         
-    }
+    }*/
     
     /**
      * Returns the JavaScript script of the impression counter.
