@@ -382,6 +382,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * Sets a cache by url.
          * It internally sets a cache name.
          * @remark      To renew its cache, use the `deleteCache()` method prior to call the `get()` method.
+         * @remark      The cache duration here is for the value set to the database `expiration_time` column value.
+         * However, the default behavior of this plugin suppresses the set value in the database with the passed cache duration argument value.
          * @return      boolean     
          * @todo        Examine the return value as it is not tested.
          * @since       3.7.5   Added the `aal_filter_http_request_set_cache` filter so that third parties can modify set cache contents.
