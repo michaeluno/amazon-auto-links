@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2020-02-20 08:41+0900\n"
+"POT-Creation-Date: 2020-03-10 21:43+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
@@ -25,40 +26,35 @@ msgstr ""
 msgid "Deactivating the plugin"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:145
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:412
+#: include/core/_common/AmazonAutoLinks_Property.php:146
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:71
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:31
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:38
 msgid "Canada"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:146
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:413
+#: include/core/_common/AmazonAutoLinks_Property.php:147
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:72
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:32
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:39
 msgid "China"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:147
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:414
+#: include/core/_common/AmazonAutoLinks_Property.php:148
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:73
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:33
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:40
 msgid "France"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:148
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:415
+#: include/core/_common/AmazonAutoLinks_Property.php:149
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:74
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:34
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:41
 msgid "Germany"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:149
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:416
+#: include/core/_common/AmazonAutoLinks_Property.php:150
 #: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:38
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:75
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:35
@@ -66,24 +62,21 @@ msgstr ""
 msgid "Italy"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:150
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:417
+#: include/core/_common/AmazonAutoLinks_Property.php:151
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:76
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:36
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:43
 msgid "Japan"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:151
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:418
+#: include/core/_common/AmazonAutoLinks_Property.php:152
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:77
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:37
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:44
 msgid "United Kingdom"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:152
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:419
+#: include/core/_common/AmazonAutoLinks_Property.php:153
 #: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:40
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:78
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:38
@@ -91,8 +84,7 @@ msgstr ""
 msgid "Spain"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:153
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:420
+#: include/core/_common/AmazonAutoLinks_Property.php:154
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:79
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:39
 #: include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:32
@@ -100,24 +92,21 @@ msgstr ""
 msgid "United States"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:154
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:421
+#: include/core/_common/AmazonAutoLinks_Property.php:155
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:80
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:40
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:47
 msgid "India"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:155
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:422
+#: include/core/_common/AmazonAutoLinks_Property.php:156
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:81
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:41
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:48
 msgid "Brazil"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:156
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:423
+#: include/core/_common/AmazonAutoLinks_Property.php:157
 #: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:41
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:82
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:42
@@ -125,8 +114,7 @@ msgstr ""
 msgid "Mexico"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:157
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:424
+#: include/core/_common/AmazonAutoLinks_Property.php:158
 #: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:39
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:83
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:43
@@ -134,1384 +122,658 @@ msgstr ""
 msgid "Australia"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:158
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:425
+#: include/core/_common/AmazonAutoLinks_Property.php:159
 msgid "Turkey"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:159
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:426
+#: include/core/_common/AmazonAutoLinks_Property.php:160
 msgid "United Arab Emirates"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:160
+#: include/core/_common/AmazonAutoLinks_Property.php:161
 msgid "Singapore"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:250
-#: include/core/_common/AmazonAutoLinks_Property.php:502
-#: include/core/_common/AmazonAutoLinks_Property.php:637
-#: include/core/_common/AmazonAutoLinks_Property.php:654
-#: include/core/_common/AmazonAutoLinks_Property.php:732
-msgid "All Departments"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:251
-#: include/core/_common/AmazonAutoLinks_Property.php:294
-#: include/core/_common/AmazonAutoLinks_Property.php:700
-msgid "Automotive"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:252
-#: include/core/_common/AmazonAutoLinks_Property.php:295
-#: include/core/_common/AmazonAutoLinks_Property.php:379
-#: include/core/_common/AmazonAutoLinks_Property.php:425
-#: include/core/_common/AmazonAutoLinks_Property.php:639
-#: include/core/_common/AmazonAutoLinks_Property.php:659
-#: include/core/_common/AmazonAutoLinks_Property.php:701
-#: include/core/_common/AmazonAutoLinks_Property.php:738
-msgid "Baby"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:253
-#: include/core/_common/AmazonAutoLinks_Property.php:296
-#: include/core/_common/AmazonAutoLinks_Property.php:380
-#: include/core/_common/AmazonAutoLinks_Property.php:426
-#: include/core/_common/AmazonAutoLinks_Property.php:508
-#: include/core/_common/AmazonAutoLinks_Property.php:660
-#: include/core/_common/AmazonAutoLinks_Property.php:702
-msgid "Beauty"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:254
-#: include/core/_common/AmazonAutoLinks_Property.php:297
-#: include/core/_common/AmazonAutoLinks_Property.php:427
-#: include/core/_common/AmazonAutoLinks_Property.php:641
-#: include/core/_common/AmazonAutoLinks_Property.php:661
-#: include/core/_common/AmazonAutoLinks_Property.php:703
-#: include/core/_common/AmazonAutoLinks_Property.php:740
-msgid "Books"
-msgstr ""
-
 #: include/core/_common/AmazonAutoLinks_Property.php:255
+#: include/core/_common/AmazonAutoLinks_Property.php:507
 #: include/core/_common/AmazonAutoLinks_Property.php:642
-#: include/core/_common/AmazonAutoLinks_Property.php:743
-msgid "Computers"
+#: include/core/_common/AmazonAutoLinks_Property.php:659
+#: include/core/_common/AmazonAutoLinks_Property.php:737
+#: include/core/_common/AmazonAutoLinks_Property.php:757
+msgid "All Departments"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:256
 #: include/core/_common/AmazonAutoLinks_Property.php:299
-#: include/core/_common/AmazonAutoLinks_Property.php:430
-#: include/core/_common/AmazonAutoLinks_Property.php:643
-#: include/core/_common/AmazonAutoLinks_Property.php:704
-#: include/core/_common/AmazonAutoLinks_Property.php:745
-msgid "Electronics"
+#: include/core/_common/AmazonAutoLinks_Property.php:705
+#: include/core/_common/AmazonAutoLinks_Property.php:738
+msgid "Automotive"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:257
 #: include/core/_common/AmazonAutoLinks_Property.php:300
-#: include/core/_common/AmazonAutoLinks_Property.php:431
-#: include/core/_common/AmazonAutoLinks_Property.php:515
+#: include/core/_common/AmazonAutoLinks_Property.php:430
 #: include/core/_common/AmazonAutoLinks_Property.php:644
-#: include/core/_common/AmazonAutoLinks_Property.php:666
-#: include/core/_common/AmazonAutoLinks_Property.php:746
-msgid "Everything Else"
+#: include/core/_common/AmazonAutoLinks_Property.php:664
+#: include/core/_common/AmazonAutoLinks_Property.php:706
+#: include/core/_common/AmazonAutoLinks_Property.php:739
+#: include/core/_common/AmazonAutoLinks_Property.php:763
+msgid "Baby"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:258
-msgid "Clothing & Shoes"
+#: include/core/_common/AmazonAutoLinks_Property.php:301
+#: include/core/_common/AmazonAutoLinks_Property.php:431
+#: include/core/_common/AmazonAutoLinks_Property.php:513
+#: include/core/_common/AmazonAutoLinks_Property.php:665
+#: include/core/_common/AmazonAutoLinks_Property.php:707
+msgid "Beauty"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:259
-#: include/core/_common/AmazonAutoLinks_Property.php:303
-#: include/core/_common/AmazonAutoLinks_Property.php:435
-#: include/core/_common/AmazonAutoLinks_Property.php:521
-#: include/core/_common/AmazonAutoLinks_Property.php:669
-#: include/core/_common/AmazonAutoLinks_Property.php:754
-msgid "Gift Cards"
+#: include/core/_common/AmazonAutoLinks_Property.php:302
+#: include/core/_common/AmazonAutoLinks_Property.php:432
+#: include/core/_common/AmazonAutoLinks_Property.php:646
+#: include/core/_common/AmazonAutoLinks_Property.php:666
+#: include/core/_common/AmazonAutoLinks_Property.php:708
+#: include/core/_common/AmazonAutoLinks_Property.php:765
+msgid "Books"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:260
-msgid "Health,  Household & Personal Care"
+#: include/core/_common/AmazonAutoLinks_Property.php:647
+#: include/core/_common/AmazonAutoLinks_Property.php:741
+#: include/core/_common/AmazonAutoLinks_Property.php:768
+msgid "Computers"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:261
-#: include/core/_common/AmazonAutoLinks_Property.php:307
-#: include/core/_common/AmazonAutoLinks_Property.php:438
-#: include/core/_common/AmazonAutoLinks_Property.php:646
-#: include/core/_common/AmazonAutoLinks_Property.php:673
-#: include/core/_common/AmazonAutoLinks_Property.php:758
-msgid "Home & Kitchen"
+#: include/core/_common/AmazonAutoLinks_Property.php:304
+#: include/core/_common/AmazonAutoLinks_Property.php:435
+#: include/core/_common/AmazonAutoLinks_Property.php:648
+#: include/core/_common/AmazonAutoLinks_Property.php:709
+#: include/core/_common/AmazonAutoLinks_Property.php:742
+#: include/core/_common/AmazonAutoLinks_Property.php:770
+msgid "Electronics"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:262
-#: include/core/_common/AmazonAutoLinks_Property.php:310
-#: include/core/_common/AmazonAutoLinks_Property.php:441
-#: include/core/_common/AmazonAutoLinks_Property.php:482
-#: include/core/_common/AmazonAutoLinks_Property.php:528
-#: include/core/_common/AmazonAutoLinks_Property.php:676
-#: include/core/_common/AmazonAutoLinks_Property.php:710
-#: include/core/_common/AmazonAutoLinks_Property.php:761
-msgid "Kindle Store"
+#: include/core/_common/AmazonAutoLinks_Property.php:305
+#: include/core/_common/AmazonAutoLinks_Property.php:436
+#: include/core/_common/AmazonAutoLinks_Property.php:520
+#: include/core/_common/AmazonAutoLinks_Property.php:649
+#: include/core/_common/AmazonAutoLinks_Property.php:671
+#: include/core/_common/AmazonAutoLinks_Property.php:771
+msgid "Everything Else"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:263
-#: include/core/_common/AmazonAutoLinks_Property.php:647
-#: include/core/_common/AmazonAutoLinks_Property.php:677
-msgid "Lighting"
+msgid "Clothing & Shoes"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:264
-#: include/core/_common/AmazonAutoLinks_Property.php:763
-msgid "Luggage & Travel Gear"
+#: include/core/_common/AmazonAutoLinks_Property.php:308
+#: include/core/_common/AmazonAutoLinks_Property.php:440
+#: include/core/_common/AmazonAutoLinks_Property.php:526
+#: include/core/_common/AmazonAutoLinks_Property.php:674
+#: include/core/_common/AmazonAutoLinks_Property.php:779
+msgid "Gift Cards"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:265
-#: include/core/_common/AmazonAutoLinks_Property.php:313
-#: include/core/_common/AmazonAutoLinks_Property.php:444
-#: include/core/_common/AmazonAutoLinks_Property.php:529
-#: include/core/_common/AmazonAutoLinks_Property.php:679
-#: include/core/_common/AmazonAutoLinks_Property.php:767
-msgid "Apps & Games"
+msgid "Health,  Household & Personal Care"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:266
-#: include/core/_common/AmazonAutoLinks_Property.php:314
-#: include/core/_common/AmazonAutoLinks_Property.php:530
-#: include/core/_common/AmazonAutoLinks_Property.php:768
-msgid "Movies & TV"
+#: include/core/_common/AmazonAutoLinks_Property.php:312
+#: include/core/_common/AmazonAutoLinks_Property.php:443
+#: include/core/_common/AmazonAutoLinks_Property.php:651
+#: include/core/_common/AmazonAutoLinks_Property.php:678
+#: include/core/_common/AmazonAutoLinks_Property.php:783
+msgid "Home & Kitchen"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:267
+#: include/core/_common/AmazonAutoLinks_Property.php:315
+#: include/core/_common/AmazonAutoLinks_Property.php:446
+#: include/core/_common/AmazonAutoLinks_Property.php:533
 #: include/core/_common/AmazonAutoLinks_Property.php:681
-#: include/core/_common/AmazonAutoLinks_Property.php:769
-msgid "CDs & Vinyl"
+#: include/core/_common/AmazonAutoLinks_Property.php:715
+#: include/core/_common/AmazonAutoLinks_Property.php:786
+msgid "Kindle Store"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:268
-msgid "Stationery & Office Products"
+#: include/core/_common/AmazonAutoLinks_Property.php:652
+#: include/core/_common/AmazonAutoLinks_Property.php:682
+msgid "Lighting"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:269
+#: include/core/_common/AmazonAutoLinks_Property.php:788
+msgid "Luggage & Travel Gear"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:270
 #: include/core/_common/AmazonAutoLinks_Property.php:318
 #: include/core/_common/AmazonAutoLinks_Property.php:449
 #: include/core/_common/AmazonAutoLinks_Property.php:534
 #: include/core/_common/AmazonAutoLinks_Property.php:684
-#: include/core/_common/AmazonAutoLinks_Property.php:718
-#: include/core/_common/AmazonAutoLinks_Property.php:772
-msgid "Pet Supplies"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:270
-#: include/core/_common/AmazonAutoLinks_Property.php:320
-#: include/core/_common/AmazonAutoLinks_Property.php:410
-#: include/core/_common/AmazonAutoLinks_Property.php:451
-#: include/core/_common/AmazonAutoLinks_Property.php:492
-#: include/core/_common/AmazonAutoLinks_Property.php:536
-#: include/core/_common/AmazonAutoLinks_Property.php:568
-#: include/core/_common/AmazonAutoLinks_Property.php:609
-#: include/core/_common/AmazonAutoLinks_Property.php:686
-#: include/core/_common/AmazonAutoLinks_Property.php:721
-#: include/core/_common/AmazonAutoLinks_Property.php:775
-msgid "Software"
+#: include/core/_common/AmazonAutoLinks_Property.php:792
+msgid "Apps & Games"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:271
-msgid "Sports,  Fitness & Outdoors"
+#: include/core/_common/AmazonAutoLinks_Property.php:319
+#: include/core/_common/AmazonAutoLinks_Property.php:535
+#: include/core/_common/AmazonAutoLinks_Property.php:793
+msgid "Movies & TV"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:272
-#: include/core/_common/AmazonAutoLinks_Property.php:708
-msgid "Home Improvement"
+#: include/core/_common/AmazonAutoLinks_Property.php:686
+#: include/core/_common/AmazonAutoLinks_Property.php:794
+msgid "CDs & Vinyl"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:273
-#: include/core/_common/AmazonAutoLinks_Property.php:323
-#: include/core/_common/AmazonAutoLinks_Property.php:454
-#: include/core/_common/AmazonAutoLinks_Property.php:648
-#: include/core/_common/AmazonAutoLinks_Property.php:689
-#: include/core/_common/AmazonAutoLinks_Property.php:778
-msgid "Toys & Games"
+msgid "Stationery & Office Products"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:274
+#: include/core/_common/AmazonAutoLinks_Property.php:323
+#: include/core/_common/AmazonAutoLinks_Property.php:454
+#: include/core/_common/AmazonAutoLinks_Property.php:539
+#: include/core/_common/AmazonAutoLinks_Property.php:689
+#: include/core/_common/AmazonAutoLinks_Property.php:723
+#: include/core/_common/AmazonAutoLinks_Property.php:747
+#: include/core/_common/AmazonAutoLinks_Property.php:797
+msgid "Pet Supplies"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:275
 #: include/core/_common/AmazonAutoLinks_Property.php:325
-#: include/core/_common/AmazonAutoLinks_Property.php:455
-#: include/core/_common/AmazonAutoLinks_Property.php:649
-#: include/core/_common/AmazonAutoLinks_Property.php:725
-#: include/core/_common/AmazonAutoLinks_Property.php:780
-msgid "Video Games"
+#: include/core/_common/AmazonAutoLinks_Property.php:456
+#: include/core/_common/AmazonAutoLinks_Property.php:541
+#: include/core/_common/AmazonAutoLinks_Property.php:691
+#: include/core/_common/AmazonAutoLinks_Property.php:726
+#: include/core/_common/AmazonAutoLinks_Property.php:800
+msgid "Software"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:276
+msgid "Sports,  Fitness & Outdoors"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:277
+#: include/core/_common/AmazonAutoLinks_Property.php:713
+msgid "Home Improvement"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:278
-msgid "Todos os departamentos"
+#: include/core/_common/AmazonAutoLinks_Property.php:328
+#: include/core/_common/AmazonAutoLinks_Property.php:459
+#: include/core/_common/AmazonAutoLinks_Property.php:653
+#: include/core/_common/AmazonAutoLinks_Property.php:694
+#: include/core/_common/AmazonAutoLinks_Property.php:750
+#: include/core/_common/AmazonAutoLinks_Property.php:803
+msgid "Toys & Games"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:279
-msgid "Livros"
+#: include/core/_common/AmazonAutoLinks_Property.php:330
+#: include/core/_common/AmazonAutoLinks_Property.php:460
+#: include/core/_common/AmazonAutoLinks_Property.php:654
+#: include/core/_common/AmazonAutoLinks_Property.php:730
+#: include/core/_common/AmazonAutoLinks_Property.php:751
+#: include/core/_common/AmazonAutoLinks_Property.php:805
+msgid "Video Games"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:280
-msgid "Computadores e Informática"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:281
-msgid "Eletrônicos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:282
-msgid "Casa e Cozinha"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:283
-msgid "Loja Kindle"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:284
-msgid "Apps e Jogos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:285
-msgid "Material para Escritório e Papelaria"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:286
-msgid "Ferramentas e Materiais de Construção"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:287
-#: include/core/_common/AmazonAutoLinks_Property.php:415
-msgid "Games"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:292
+#: include/core/_common/AmazonAutoLinks_Property.php:297
 msgid "All Department"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:293
-#: include/core/_common/AmazonAutoLinks_Property.php:422
-#: include/core/_common/AmazonAutoLinks_Property.php:504
-#: include/core/_common/AmazonAutoLinks_Property.php:734
+#: include/core/_common/AmazonAutoLinks_Property.php:298
+#: include/core/_common/AmazonAutoLinks_Property.php:427
+#: include/core/_common/AmazonAutoLinks_Property.php:509
+#: include/core/_common/AmazonAutoLinks_Property.php:759
 msgid "Clothing & Accessories"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:298
-#: include/core/_common/AmazonAutoLinks_Property.php:662
+#: include/core/_common/AmazonAutoLinks_Property.php:303
+#: include/core/_common/AmazonAutoLinks_Property.php:667
 msgid "Classical Music"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:301
-#: include/core/_common/AmazonAutoLinks_Property.php:520
+#: include/core/_common/AmazonAutoLinks_Property.php:306
+#: include/core/_common/AmazonAutoLinks_Property.php:525
 msgid "English Books"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:302
+#: include/core/_common/AmazonAutoLinks_Property.php:307
 msgid "Patio, Lawn & Garden"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:304
-#: include/core/_common/AmazonAutoLinks_Property.php:755
+#: include/core/_common/AmazonAutoLinks_Property.php:309
+#: include/core/_common/AmazonAutoLinks_Property.php:780
 msgid "Grocery & Gourmet Food"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:305
-#: include/core/_common/AmazonAutoLinks_Property.php:347
-#: include/core/_common/AmazonAutoLinks_Property.php:392
-#: include/core/_common/AmazonAutoLinks_Property.php:477
-#: include/core/_common/AmazonAutoLinks_Property.php:594
-#: include/core/_common/AmazonAutoLinks_Property.php:671
-#: include/core/_common/AmazonAutoLinks_Property.php:756
+#: include/core/_common/AmazonAutoLinks_Property.php:310
+#: include/core/_common/AmazonAutoLinks_Property.php:676
+#: include/core/_common/AmazonAutoLinks_Property.php:781
 msgid "Handmade"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:306
-#: include/core/_common/AmazonAutoLinks_Property.php:437
-#: include/core/_common/AmazonAutoLinks_Property.php:523
-#: include/core/_common/AmazonAutoLinks_Property.php:672
-msgid "Health & Personal Care"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:308
-#: include/core/_common/AmazonAutoLinks_Property.php:439
-#: include/core/_common/AmazonAutoLinks_Property.php:526
-#: include/core/_common/AmazonAutoLinks_Property.php:674
-#: include/core/_common/AmazonAutoLinks_Property.php:759
-msgid "Industrial & Scientific"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:309
-#: include/core/_common/AmazonAutoLinks_Property.php:527
-#: include/core/_common/AmazonAutoLinks_Property.php:709
-#: include/core/_common/AmazonAutoLinks_Property.php:760
-msgid "Jewelry"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:311
 #: include/core/_common/AmazonAutoLinks_Property.php:442
-msgid "Luggage & Bags"
+#: include/core/_common/AmazonAutoLinks_Property.php:528
+#: include/core/_common/AmazonAutoLinks_Property.php:677
+msgid "Health & Personal Care"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:312
-#: include/core/_common/AmazonAutoLinks_Property.php:400
-#: include/core/_common/AmazonAutoLinks_Property.php:443
-#: include/core/_common/AmazonAutoLinks_Property.php:678
-#: include/core/_common/AmazonAutoLinks_Property.php:764
-msgid "Luxury Beauty"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:315
-#: include/core/_common/AmazonAutoLinks_Property.php:446
+#: include/core/_common/AmazonAutoLinks_Property.php:313
+#: include/core/_common/AmazonAutoLinks_Property.php:444
 #: include/core/_common/AmazonAutoLinks_Property.php:531
+#: include/core/_common/AmazonAutoLinks_Property.php:679
+#: include/core/_common/AmazonAutoLinks_Property.php:784
+msgid "Industrial & Scientific"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:314
+#: include/core/_common/AmazonAutoLinks_Property.php:532
 #: include/core/_common/AmazonAutoLinks_Property.php:714
-msgid "Music"
+#: include/core/_common/AmazonAutoLinks_Property.php:785
+msgid "Jewelry"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:316
-msgid "Musical Instruments, Stage & Studio"
+#: include/core/_common/AmazonAutoLinks_Property.php:447
+msgid "Luggage & Bags"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:317
 #: include/core/_common/AmazonAutoLinks_Property.php:448
-#: include/core/_common/AmazonAutoLinks_Property.php:716
-#: include/core/_common/AmazonAutoLinks_Property.php:771
-msgid "Office Products"
+#: include/core/_common/AmazonAutoLinks_Property.php:683
+#: include/core/_common/AmazonAutoLinks_Property.php:789
+msgid "Luxury Beauty"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:319
-#: include/core/_common/AmazonAutoLinks_Property.php:450
-msgid "Shoes & Handbags"
+#: include/core/_common/AmazonAutoLinks_Property.php:320
+#: include/core/_common/AmazonAutoLinks_Property.php:451
+#: include/core/_common/AmazonAutoLinks_Property.php:536
+#: include/core/_common/AmazonAutoLinks_Property.php:719
+msgid "Music"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:321
-#: include/core/_common/AmazonAutoLinks_Property.php:687
-#: include/core/_common/AmazonAutoLinks_Property.php:776
-msgid "Sports & Outdoors"
+msgid "Musical Instruments, Stage & Studio"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:322
 #: include/core/_common/AmazonAutoLinks_Property.php:453
-#: include/core/_common/AmazonAutoLinks_Property.php:777
-msgid "Tools & Home Improvement"
+#: include/core/_common/AmazonAutoLinks_Property.php:721
+#: include/core/_common/AmazonAutoLinks_Property.php:746
+#: include/core/_common/AmazonAutoLinks_Property.php:796
+msgid "Office Products"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:324
-#: include/core/_common/AmazonAutoLinks_Property.php:367
-#: include/core/_common/AmazonAutoLinks_Property.php:414
-#: include/core/_common/AmazonAutoLinks_Property.php:690
-#: include/core/_common/AmazonAutoLinks_Property.php:779
-msgid "VHS"
+#: include/core/_common/AmazonAutoLinks_Property.php:455
+msgid "Shoes & Handbags"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:326
-#: include/core/_common/AmazonAutoLinks_Property.php:456
-#: include/core/_common/AmazonAutoLinks_Property.php:541
 #: include/core/_common/AmazonAutoLinks_Property.php:692
-#: include/core/_common/AmazonAutoLinks_Property.php:726
-#: include/core/_common/AmazonAutoLinks_Property.php:781
-msgid "Watches"
+#: include/core/_common/AmazonAutoLinks_Property.php:748
+#: include/core/_common/AmazonAutoLinks_Property.php:801
+msgid "Sports & Outdoors"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:327
+#: include/core/_common/AmazonAutoLinks_Property.php:458
+#: include/core/_common/AmazonAutoLinks_Property.php:749
+#: include/core/_common/AmazonAutoLinks_Property.php:802
+msgid "Tools & Home Improvement"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:329
+#: include/core/_common/AmazonAutoLinks_Property.php:695
+#: include/core/_common/AmazonAutoLinks_Property.php:804
+msgid "VHS"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:331
-msgid "Toutes nos catégories"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:332
-msgid "Vêtements et accessoires"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:333
-msgid "Gros électroménager"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:334
-msgid "Auto et Moto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:335
-msgid "Bébés & Puériculture"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:336
-msgid "Beauté et Parfum"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:337
-msgid "Livres en français"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:338
-msgid "Informatique"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:339
-msgid "Téléchargement de musique"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:340
-msgid "High-Tech"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:341
-msgid "Autres"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:342
-msgid "Mode"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:343
-msgid "Livres anglais et étrangers"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:344
-msgid "Jardin"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:345
-msgid "Boutique chèques-cadeaux"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:346
-msgid "Epicerie"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:348
-msgid "Hygiène et Santé"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:349
-msgid "Cuisine & Maison"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:350
-msgid "Secteur industriel & scientifique"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:351
-msgid "Bijoux"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:352
-msgid "Boutique Kindle"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:353
-msgid "Luminaires et Eclairage"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:354
-msgid "Bagages"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:355
-msgid "Beauté Prestige"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:356
-msgid "Applis & Jeux"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:357
-#: include/core/_common/AmazonAutoLinks_Property.php:403
-#: include/core/_common/AmazonAutoLinks_Property.php:680
-msgid "DVD & Blu-ray"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:358
-msgid "Musique : CD & Vinyles"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:359
-msgid "Instruments de musique & Sono"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:360
-msgid "Fournitures de bureau"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:361
-msgid "Animalerie"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:362
-msgid "Chaussures et Sacs"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:363
-msgid "Logiciels"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:364
-msgid "Sports et Loisirs"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:365
-msgid "Bricolage"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:366
-msgid "Jeux et Jouets"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:368
-msgid "Jeux vidéo"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:369
-msgid "Montres"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:374
-msgid "Alle Kategorien"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:375
-#: include/core/_common/AmazonAutoLinks_Property.php:503
-#: include/core/_common/AmazonAutoLinks_Property.php:733
-msgid "Prime Video"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:376
-msgid "Bekleidung"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:377
-msgid "Elektro-Großgeräte"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:378
-msgid "Auto & Motorrad"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:381
-msgid "Bücher"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:382
-msgid "Klassik"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:383
-msgid "Computer & Zubehör"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:384
-msgid "Musik-Downloads"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:385
-msgid "Elektronik & Foto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:386
-msgid "Sonstiges"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:387
-#: include/core/_common/AmazonAutoLinks_Property.php:516
-#: include/core/_common/AmazonAutoLinks_Property.php:667
-msgid "Fashion"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:388
-msgid "Bücher (Fremdsprachig)"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:389
-msgid "Garten"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:390
-msgid "Geschenkgutscheine"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:391
-msgid "Lebensmittel & Getränke"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:393
-msgid "Drogerie & Körperpflege"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:394
-msgid "Küche, Haushalt & Wohnen"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:395
-msgid "Gewerbe, Industrie & Wissenschaft"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:396
-msgid "Schmuck"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:397
-msgid "Kindle-Shop"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:398
-msgid "Beleuchtung"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:399
-msgid "Koffer, Rucksäcke & Taschen"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:401
-msgid "Zeitschriften"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:402
-msgid "Apps & Spiele"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:404
-msgid "Musik-CDs & Vinyl"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:405
-msgid "Musikinstrumente & DJ-Equipment"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:406
-msgid "Bürobedarf & Schreibwaren"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:407
-msgid "Haustier"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:408
-msgid "Kamera & Foto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:409
-msgid "Schuhe & Handtaschen"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:411
-msgid "Sport & Freizeit"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:412
-msgid "Baumarkt"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:413
-msgid "Spielzeug"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:416
-msgid "Uhren"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:421
+#: include/core/_common/AmazonAutoLinks_Property.php:461
+#: include/core/_common/AmazonAutoLinks_Property.php:546
+#: include/core/_common/AmazonAutoLinks_Property.php:697
+#: include/core/_common/AmazonAutoLinks_Property.php:731
+#: include/core/_common/AmazonAutoLinks_Property.php:806
+msgid "Watches"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:426
 msgid "All Categories"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:423
-#: include/core/_common/AmazonAutoLinks_Property.php:699
-#: include/core/_common/AmazonAutoLinks_Property.php:735
+#: include/core/_common/AmazonAutoLinks_Property.php:428
+#: include/core/_common/AmazonAutoLinks_Property.php:704
+#: include/core/_common/AmazonAutoLinks_Property.php:760
 msgid "Appliances"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:424
-#: include/core/_common/AmazonAutoLinks_Property.php:658
+#: include/core/_common/AmazonAutoLinks_Property.php:429
+#: include/core/_common/AmazonAutoLinks_Property.php:663
 msgid "Car & Motorbike"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:428
+#: include/core/_common/AmazonAutoLinks_Property.php:433
 msgid "Collectibles"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:429
-#: include/core/_common/AmazonAutoLinks_Property.php:511
-#: include/core/_common/AmazonAutoLinks_Property.php:663
+#: include/core/_common/AmazonAutoLinks_Property.php:434
+#: include/core/_common/AmazonAutoLinks_Property.php:516
+#: include/core/_common/AmazonAutoLinks_Property.php:668
 msgid "Computers & Accessories"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:432
+#: include/core/_common/AmazonAutoLinks_Property.php:437
 msgid "Amazon Fashion"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:433
+#: include/core/_common/AmazonAutoLinks_Property.php:438
 msgid "Furniture"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:434
-#: include/core/_common/AmazonAutoLinks_Property.php:668
+#: include/core/_common/AmazonAutoLinks_Property.php:439
+#: include/core/_common/AmazonAutoLinks_Property.php:673
 msgid "Garden & Outdoors"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:436
+#: include/core/_common/AmazonAutoLinks_Property.php:441
 msgid "Grocery & Gourmet Foods"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:440
-#: include/core/_common/AmazonAutoLinks_Property.php:675
+#: include/core/_common/AmazonAutoLinks_Property.php:445
+#: include/core/_common/AmazonAutoLinks_Property.php:680
 msgid "Jewellery"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:445
+#: include/core/_common/AmazonAutoLinks_Property.php:450
 msgid "Movies & TV Shows"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:447
-#: include/core/_common/AmazonAutoLinks_Property.php:532
-#: include/core/_common/AmazonAutoLinks_Property.php:770
+#: include/core/_common/AmazonAutoLinks_Property.php:452
+#: include/core/_common/AmazonAutoLinks_Property.php:537
+#: include/core/_common/AmazonAutoLinks_Property.php:795
 msgid "Musical Instruments"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:452
+#: include/core/_common/AmazonAutoLinks_Property.php:457
 msgid "Sports, Fitness & Outdoors"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:461
-msgid "Tutte le categorie"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:462
-msgid "Abbigliamento"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:463
-msgid "Grandi elettrodomestici"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:464
-msgid "Auto e Moto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:465
-msgid "Prima infanzia"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:466
-msgid "Bellezza"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:467
-msgid "Libri"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:468
-msgid "Informatica"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:469
-msgid "Musica Digitale"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:470
-msgid "Elettronica"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:471
-msgid "Altro"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:472
-#: include/core/_common/AmazonAutoLinks_Property.php:589
-#: include/core/_common/AmazonAutoLinks_Property.php:626
-msgid "Moda"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:473
-msgid "Libri in altre lingue"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:474
-msgid "Giardino e giardinaggio"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:475
-msgid "Buoni Regalo"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:476
-msgid "Alimentari e cura della casa"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:478
-msgid "Salute e cura della persona"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:479
-msgid "Casa e cucina"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:480
-msgid "Industria e Scienza"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:481
-msgid "Gioielli"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:483
-msgid "Illuminazione"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:484
-msgid "Valigeria"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:485
-msgid "App e Giochi"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:486
-msgid "Film e TV"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:487
-msgid "CD e Vinili"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:488
-msgid "Strumenti musicali e DJ"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:489
-msgid "Cancelleria e prodotti per ufficio"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:490
-msgid "Prodotti per animali domestici"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:491
-msgid "Scarpe e borse"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:493
-msgid "Sport e tempo libero"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:494
-msgid "Fai da te"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:495
-msgid "Giochi e giocattoli"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:496
-msgid "Videogiochi"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:497
-msgid "Orologi"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:505
-#: include/core/_common/AmazonAutoLinks_Property.php:657
-msgid "Large Appliances"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:506
-msgid "Car & Bike Products"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:507
-msgid "Baby & Maternity"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:509
-msgid "Japanese Books"
+#: include/core/_common/AmazonAutoLinks_Property.php:508
+#: include/core/_common/AmazonAutoLinks_Property.php:758
+msgid "Prime Video"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:510
-#: include/core/_common/AmazonAutoLinks_Property.php:741
-msgid "Classical"
+#: include/core/_common/AmazonAutoLinks_Property.php:662
+msgid "Large Appliances"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:511
+msgid "Car & Bike Products"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:512
-msgid "Credit Cards"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:513
-#: include/core/_common/AmazonAutoLinks_Property.php:664
-#: include/core/_common/AmazonAutoLinks_Property.php:744
-msgid "Digital Music"
+msgid "Baby & Maternity"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:514
-msgid "Electronics & Cameras"
+msgid "Japanese Books"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:515
+#: include/core/_common/AmazonAutoLinks_Property.php:766
+msgid "Classical"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:517
-msgid "Kids & Baby"
+msgid "Credit Cards"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:518
-msgid "Men"
+#: include/core/_common/AmazonAutoLinks_Property.php:669
+#: include/core/_common/AmazonAutoLinks_Property.php:769
+msgid "Digital Music"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:519
-msgid "Women"
+msgid "Electronics & Cameras"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:521
+#: include/core/_common/AmazonAutoLinks_Property.php:672
+msgid "Fashion"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:522
-msgid "Food & Beverage"
+msgid "Kids & Baby"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:523
+msgid "Men"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:524
+msgid "Women"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:527
+msgid "Food & Beverage"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:529
 msgid "Hobby"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:525
+#: include/core/_common/AmazonAutoLinks_Property.php:530
 msgid "Kitchen & Housewares"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:533
+#: include/core/_common/AmazonAutoLinks_Property.php:538
 msgid "Stationery and Office Products"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:535
-#: include/core/_common/AmazonAutoLinks_Property.php:685
+#: include/core/_common/AmazonAutoLinks_Property.php:540
+#: include/core/_common/AmazonAutoLinks_Property.php:690
 msgid "Shoes & Bags"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:537
+#: include/core/_common/AmazonAutoLinks_Property.php:542
 msgid "Sports"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:538
+#: include/core/_common/AmazonAutoLinks_Property.php:543
 msgid "DIY, Tools & Garden"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:539
-#: include/core/_common/AmazonAutoLinks_Property.php:723
+#: include/core/_common/AmazonAutoLinks_Property.php:544
+#: include/core/_common/AmazonAutoLinks_Property.php:728
 msgid "Toys"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:540
+#: include/core/_common/AmazonAutoLinks_Property.php:545
 msgid "Computer & Video Games"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:546
-#: include/core/_common/AmazonAutoLinks_Property.php:578
-msgid "Todos los departamentos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:547
-msgid "Auto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:548
-#: include/core/_common/AmazonAutoLinks_Property.php:582
-msgid "Bebé"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:549
-#: include/core/_common/AmazonAutoLinks_Property.php:584
-msgid "Libros"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:550
-msgid "Electrónicos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:551
-msgid "Ropa, Zapatos y Accesorios"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:552
-msgid "Ropa, Zapatos y Accesorios Bebé"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:553
-msgid "Ropa, Zapatos y Accesorios Niños"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:554
-msgid "Ropa, Zapatos y Accesorios Niñas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:555
-msgid "Ropa, Zapatos y Accesorios Hombres"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:556
-msgid "Ropa, Zapatos y Accesorios Mujeres"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:557
-msgid "Alimentos y Bebidas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:558
-msgid "Productos Handmade"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:559
-msgid "Salud, Belleza y Cuidado Personal"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:560
-msgid "Hogar y Cocina"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:561
-#: include/core/_common/AmazonAutoLinks_Property.php:597
-msgid "Industria y ciencia"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:562
-#: include/core/_common/AmazonAutoLinks_Property.php:599
-msgid "Tienda Kindle"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:563
-msgid "Películas y Series de TV"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:564
-msgid "Música"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:565
-#: include/core/_common/AmazonAutoLinks_Property.php:605
-msgid "Instrumentos musicales"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:566
-msgid "Oficina y Papelería"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:567
-msgid "Mascotas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:569
-msgid "Deportes y Aire Libre"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:570
-msgid "Herramientas y Mejoras del Hogar"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:571
-msgid "Juegos y juguetes"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:572
-#: include/core/_common/AmazonAutoLinks_Property.php:614
-msgid "Videojuegos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:573
-#: include/core/_common/AmazonAutoLinks_Property.php:615
-msgid "Relojes"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:579
-msgid "Ropa y accesorios"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:580
-msgid "Grandes electrodomésticos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:581
-msgid "Coche y moto"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:583
-msgid "Belleza"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:585
-msgid "Informática"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:586
-msgid "Música Digital"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:587
-msgid "Electrónica"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:588
-msgid "Otros Productos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:590
-msgid "Libros en idiomas extranjeros"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:591
-msgid "Jardín"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:592
-msgid "Cheques regalo"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:593
-msgid "Alimentación y bebidas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:595
-msgid "Salud y cuidado personal"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:596
-msgid "Hogar y cocina"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:598
-msgid "Joyería"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:600
-msgid "Iluminación"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:601
-msgid "Equipaje"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:602
-msgid "Appstore para Android"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:603
-msgid "Películas y TV"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:604
-msgid "Música: CDs y vinilos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:606
-msgid "Oficina y papelería"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:607
-msgid "Productos para mascotas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:608
-msgid "Zapatos y complementos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:610
-msgid "Deportes y aire libre"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:611
-msgid "Bricolaje y herramientas"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:612
-msgid "Juguetes y juegos"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:613
-msgid "Coche - renting"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:620
-msgid "Tüm Kategoriler"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:621
-msgid "Bebek"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:622
-msgid "Kitaplar"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:623
-msgid "Bilgisayarlar"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:624
-msgid "Elektronik"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:625
-msgid "Diğer Her Şey"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:627
-msgid "Ev ve Mutfak"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:628
-msgid "Ofis Ürünleri"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:629
-msgid "Spor"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:630
-msgid "Yapı Market"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:631
-msgid "Oyuncaklar ve Oyunlar"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:632
-msgid "PC ve Video Oyunları"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:638
-#: include/core/_common/AmazonAutoLinks_Property.php:737
+#: include/core/_common/AmazonAutoLinks_Property.php:643
+#: include/core/_common/AmazonAutoLinks_Property.php:762
 msgid "Automotive Parts & Accessories"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:640
-#: include/core/_common/AmazonAutoLinks_Property.php:739
+#: include/core/_common/AmazonAutoLinks_Property.php:645
+#: include/core/_common/AmazonAutoLinks_Property.php:740
+#: include/core/_common/AmazonAutoLinks_Property.php:764
 msgid "Beauty & Personal Care"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:645
-#: include/core/_common/AmazonAutoLinks_Property.php:747
+#: include/core/_common/AmazonAutoLinks_Property.php:650
+#: include/core/_common/AmazonAutoLinks_Property.php:772
 msgid "Clothing, Shoes & Jewelry"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:655
+#: include/core/_common/AmazonAutoLinks_Property.php:660
 msgid "Amazon Video"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:656
+#: include/core/_common/AmazonAutoLinks_Property.php:661
 msgid "Clothing"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:665
+#: include/core/_common/AmazonAutoLinks_Property.php:670
 msgid "Electronics & Photo"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:670
-#: include/core/_common/AmazonAutoLinks_Property.php:705
+#: include/core/_common/AmazonAutoLinks_Property.php:675
+#: include/core/_common/AmazonAutoLinks_Property.php:710
+#: include/core/_common/AmazonAutoLinks_Property.php:743
 msgid "Grocery"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:682
+#: include/core/_common/AmazonAutoLinks_Property.php:685
+msgid "DVD & Blu-ray"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:687
 msgid "Musical Instruments & DJ"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:683
+#: include/core/_common/AmazonAutoLinks_Property.php:688
 msgid "Stationery & Office Supplies"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:688
+#: include/core/_common/AmazonAutoLinks_Property.php:693
 msgid "DIY & Tools"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:691
+#: include/core/_common/AmazonAutoLinks_Property.php:696
 msgid "PC & Video Games"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:697
+#: include/core/_common/AmazonAutoLinks_Property.php:702
 msgid "All"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:698
+#: include/core/_common/AmazonAutoLinks_Property.php:703
 msgid "Apparel"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:706
+#: include/core/_common/AmazonAutoLinks_Property.php:711
 msgid "Health Personal Care"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:707
+#: include/core/_common/AmazonAutoLinks_Property.php:712
 msgid "Home"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:711
+#: include/core/_common/AmazonAutoLinks_Property.php:716
 msgid "Miscellaneous"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:712
+#: include/core/_common/AmazonAutoLinks_Property.php:717
 msgid "Kitchen"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:713
+#: include/core/_common/AmazonAutoLinks_Property.php:718
 msgid "Mobile Apps"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:715
+#: include/core/_common/AmazonAutoLinks_Property.php:720
 msgid "MusicalInstruments"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:717
-msgid "PCHardware"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:719
-msgid "Photo"
-msgstr ""
-
-#: include/core/_common/AmazonAutoLinks_Property.php:720
-#: include/core/_common/AmazonAutoLinks_Property.php:774
-msgid "Shoes"
-msgstr ""
-
 #: include/core/_common/AmazonAutoLinks_Property.php:722
-msgid "Sporting Goods"
+msgid "PC Hardware"
 msgstr ""
 
 #: include/core/_common/AmazonAutoLinks_Property.php:724
+msgid "Photo"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:725
+#: include/core/_common/AmazonAutoLinks_Property.php:799
+msgid "Shoes"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:727
+msgid "Sporting Goods"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:729
 msgid "Video"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:736
+#: include/core/_common/AmazonAutoLinks_Property.php:744
+msgid "Health, Household & Personal Care"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:745
+msgid "Home, Kitchen & Dining"
+msgstr ""
+
+#: include/core/_common/AmazonAutoLinks_Property.php:761
 msgid "Arts, Crafts & Sewing"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:742
+#: include/core/_common/AmazonAutoLinks_Property.php:767
 msgid "Collectibles & Fine Art"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:748
+#: include/core/_common/AmazonAutoLinks_Property.php:773
 msgid "Clothing, Shoes & Jewelry Baby"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:749
+#: include/core/_common/AmazonAutoLinks_Property.php:774
 msgid "Clothing, Shoes & Jewelry Boys"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:750
+#: include/core/_common/AmazonAutoLinks_Property.php:775
 msgid "Clothing, Shoes & Jewelry Girls"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:751
+#: include/core/_common/AmazonAutoLinks_Property.php:776
 msgid "Clothing, Shoes & Jewelry Men"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:752
+#: include/core/_common/AmazonAutoLinks_Property.php:777
 msgid "Clothing, Shoes & Jewelry Women"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:753
+#: include/core/_common/AmazonAutoLinks_Property.php:778
 msgid "Garden & Outdoor"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:757
+#: include/core/_common/AmazonAutoLinks_Property.php:782
 msgid "Health, Household & Baby Care"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:762
+#: include/core/_common/AmazonAutoLinks_Property.php:787
 msgid "Home & Business Services"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:765
+#: include/core/_common/AmazonAutoLinks_Property.php:790
 msgid "Magazine Subscriptions"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:766
+#: include/core/_common/AmazonAutoLinks_Property.php:791
 msgid "Cell Phones & Accessories"
 msgstr ""
 
-#: include/core/_common/AmazonAutoLinks_Property.php:773
+#: include/core/_common/AmazonAutoLinks_Property.php:798
 msgid "Camera & Photo"
 msgstr ""
 
@@ -1553,7 +815,7 @@ msgid "Could not get a user ID."
 msgstr ""
 
 #: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:140
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:447
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:427
 #: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:67
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
 msgid "Buy Now"
@@ -1570,19 +832,19 @@ msgstr ""
 msgid "Please consider upgrading to Pro to enable this feature."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:529
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:509
 #, php-format
 msgid ""
 "<a href=\"%1$s\">Amazon Product Advertising API keys</a> must be set to "
 "enable this option."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:541
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:521
 #, php-format
 msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more units!"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:541
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:521
 #, php-format
 msgid ""
 "Make sure to empty the <a href=\"%2$s\">trash box</a> to delete the units "
@@ -1620,379 +882,384 @@ msgstr ""
 msgid "inserts product links into the database so they will be static."
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:131
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:139
 msgid "English - AUSTRALIA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:135
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:206
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:143
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:218
 msgid "Portuguese - BRAZIL"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:139
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:147
 msgid "English - CANADA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:141
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:149
 msgid "French - CANADA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:145
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:153
 msgid "French - FRANCE"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:149
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:203
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:157
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:215
 msgid "German - GERMANY"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:151
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:159
 msgid "Czech - CZECHIA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:152
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:192
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:160
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:200
 msgid "English - UNITED KINGDOM"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:153
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:161
 msgid "Dutch - NETHERLANDS"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:154
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:162
 msgid "Polish - POLAND"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:155
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:182
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:163
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:190
 msgid "Turkish - TURKEY"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:159
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:167
 msgid "English - INDIA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:163
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:171
 msgid "Italian - ITALY"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:167
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:175
 msgid "Japanese - JAPAN"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:169
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:201
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:177
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:213
 msgid "English - UNITED STATES"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:170
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:196
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:207
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:178
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:204
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:219
 msgid "Chinese - CHINA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:174
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:182
 msgid "Spanish - MEXICO"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:178
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:186
 msgid "Spanish - SPAIN"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:186
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:194
 msgid "English - UNITED ARAB EMIRATES"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:188
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:196
 msgid "Arabic - UNITED ARAB EMIRATES"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:204
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:208
+msgid "English - SINGAPORE"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:216
 msgid "Spanish - UNITED STATES"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:205
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:217
 msgid "Korean - KOREA"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:208
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:220
 msgid "Chinese - TAIWAN"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:243
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:304
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:255
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:320
 msgid "Australian Dollar"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:247
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:310
-msgid "Brazilian Real"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:251
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:313
-msgid "Canadian Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:255
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:259
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:267
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:279
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:320
-msgid "Euro"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:326
+msgid "Brazilian Real"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:263
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:329
-msgid "Indian Rupee"
+msgid "Canadian Dollar"
 msgstr ""
 
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:267
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:271
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:331
-msgid "Japanese Yen"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:279
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:291
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:336
+msgid "Euro"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:275
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:342
-msgid "Mexican Peso"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:345
+msgid "Indian Rupee"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:283
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:357
-msgid "Turkish Lira"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:347
+msgid "Japanese Yen"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:287
-msgid "Arab Emirates Dirham"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:291
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:321
-msgid "British Pound"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:358
+msgid "Mexican Peso"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:295
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:315
-msgid "Chinese Yuan Renminbi"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:373
+msgid "Turkish Lira"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:300
-msgid "United States Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:301
-msgid "United Arab Emirates Dirham"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:302
-msgid "Armenian Dram"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:299
+msgid "Arab Emirates Dirham"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:303
-msgid "Argentine Peso"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:305
-msgid "Aruban Florin"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:306
-msgid "Azerbaijani Manat"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:337
+msgid "British Pound"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:307
-msgid "Bulgarian Lev"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:308
-msgid "Bruneian Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:309
-msgid "Bolivian Boliviano"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:331
+msgid "Chinese Yuan Renminbi"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:311
-msgid "Bahamian Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:312
-msgid "Belize Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:314
-msgid "Chilean Peso"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:316
-msgid "Colombian Peso"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:317
-msgid "Costa Rican Colon"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:318
-msgid "Dominican Peso"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:319
-msgid "Egyptian Pound"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:322
-msgid "Ghanaian Cedi"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:323
-msgid "Guatemalan Quetzal"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:324
-msgid "Hong Kong Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:325
-msgid "Honduran Lempira"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:326
-msgid "Hungarian Forint"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:327
-msgid "Indonesian Rupiah"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:328
-msgid "Israeli Shekel"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:330
-msgid "Jamaican Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:332
-msgid "Kenyan Shilling"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:333
-msgid "Cambodian Riel"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:334
-msgid "South Korean Won"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:335
-msgid "Caymanian Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:336
-msgid "Kazakhstani Tenge"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:337
-msgid "Lebanese Pound"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:338
-msgid "Moroccan Dirham"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:339
-msgid "Mongolian Tughrik"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:340
-msgid "Macanese Pataca"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:341
-msgid "Mauritian Rupee"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:343
-msgid "Malaysian Ringgit"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:344
-msgid "Namibian Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:345
-msgid "Nigerian Naira"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:346
-msgid "Norwegian Krone"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:347
-msgid "New Zealand Dollar"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:348
-msgid "Panamanian Balboa"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:349
-msgid "Peruvian Sol"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:350
-msgid "Philippine Peso"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:351
-msgid "Paraguayan Guaraní"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:352
-msgid "Qatari Riyal"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:353
-msgid "Russian Ruble"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:354
-msgid "Saudi Arabian Riyal"
-msgstr ""
-
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:355
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:371
 msgid "Singapore Dollar"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:356
-msgid "Thai Baht"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:316
+msgid "United States Dollar"
 msgstr ""
 
-#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:358
-msgid "Trinidadian Dollar"
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:317
+msgid "United Arab Emirates Dirham"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:318
+msgid "Armenian Dram"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:319
+msgid "Argentine Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:321
+msgid "Aruban Florin"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:322
+msgid "Azerbaijani Manat"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:323
+msgid "Bulgarian Lev"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:324
+msgid "Bruneian Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:325
+msgid "Bolivian Boliviano"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:327
+msgid "Bahamian Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:328
+msgid "Belize Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:330
+msgid "Chilean Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:332
+msgid "Colombian Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:333
+msgid "Costa Rican Colon"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:334
+msgid "Dominican Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:335
+msgid "Egyptian Pound"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:338
+msgid "Ghanaian Cedi"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:339
+msgid "Guatemalan Quetzal"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:340
+msgid "Hong Kong Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:341
+msgid "Honduran Lempira"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:342
+msgid "Hungarian Forint"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:343
+msgid "Indonesian Rupiah"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:344
+msgid "Israeli Shekel"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:346
+msgid "Jamaican Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:348
+msgid "Kenyan Shilling"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:349
+msgid "Cambodian Riel"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:350
+msgid "South Korean Won"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:351
+msgid "Caymanian Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:352
+msgid "Kazakhstani Tenge"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:353
+msgid "Lebanese Pound"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:354
+msgid "Moroccan Dirham"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:355
+msgid "Mongolian Tughrik"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:356
+msgid "Macanese Pataca"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:357
+msgid "Mauritian Rupee"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:359
-msgid "Taiwan New Dollar"
+msgid "Malaysian Ringgit"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:360
-msgid "Tanzanian Shilling"
+msgid "Namibian Dollar"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:361
-msgid "Uruguayan Peso"
+msgid "Nigerian Naira"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:362
-msgid "Vietnamese Dong"
+msgid "Norwegian Krone"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:363
-msgid "Eastern Caribbean Dollar"
+msgid "New Zealand Dollar"
 msgstr ""
 
 #: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:364
+msgid "Panamanian Balboa"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:365
+msgid "Peruvian Sol"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:366
+msgid "Philippine Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:367
+msgid "Paraguayan Guaraní"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:368
+msgid "Qatari Riyal"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:369
+msgid "Russian Ruble"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:370
+msgid "Saudi Arabian Riyal"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:372
+msgid "Thai Baht"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:374
+msgid "Trinidadian Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:375
+msgid "Taiwan New Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:376
+msgid "Tanzanian Shilling"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:377
+msgid "Uruguayan Peso"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:378
+msgid "Vietnamese Dong"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:379
+msgid "Eastern Caribbean Dollar"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php:380
 msgid "South African Rand"
 msgstr ""
 
@@ -2148,7 +1415,7 @@ msgstr ""
 #: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:36
 #: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:82
 #: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:109
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:83
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:84
 #: include/core/component/unit/unit_type/tag/admin/form_field/AmazonAutoLinks_FormFields_TagUnit_Main.php:95
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:83
 msgid "Sort Order"
@@ -2822,7 +2089,7 @@ msgid "Subscriber"
 msgstr ""
 
 #: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
-#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:64
+#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:67
 #: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:78
 #: include/core/main/output/AmazonAutoLinks_Output.php:172
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
@@ -3718,13 +2985,13 @@ msgstr ""
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:61
 #: include/core/component/template/admin_page/list_table/AmazonAutoLinks_ListTable_Template.php:64
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:38
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:27
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:34
 msgid "Template Name"
 msgstr ""
 
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:62
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:39
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:28
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:35
 msgid "Sets a default template for this unit."
 msgstr ""
 
@@ -3870,6 +3137,7 @@ msgstr ""
 #: include/core/component/template/AmazonAutoLinks_TemplateLoader.php:56
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template.php:25
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_GetNew.php:55
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:41
 msgid "Templates"
 msgstr ""
 
@@ -3895,11 +3163,11 @@ msgstr ""
 msgid "Get it Now"
 msgstr ""
 
-#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
+#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:71
 msgid "Raw Template Option Values"
 msgstr ""
 
-#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:79
+#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:82
 msgid "Data of Active Templates"
 msgstr ""
 
@@ -4358,194 +3626,201 @@ msgid ""
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:45
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:35
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:46
 msgid "Number of Columns"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:57
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:47
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:58
 msgid "The number of columns"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:58
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:48
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:59
 msgid "This option requires a column supported template to be activated."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:61
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:51
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:62
 #, php-format
 msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:68
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:141
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:154
 msgid "Item Format"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:76
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:154
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:167
 msgid "Sets the layout of the product. The following variables are available."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:77
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:155
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:168
 msgid "a product link url"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:78
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:156
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:169
 msgid "a title with HTML tags defined in the Title Format option"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:79
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:157
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:170
 msgid "a title without HTML tags"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:80
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:158
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:171
 msgid "a thumbnail with HTML tags defined in the Image Format option"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:81
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:159
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:172
 msgid "sub-images."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:82
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:160
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:173
 msgid "a description with HTML tags"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:83
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:161
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:174
 msgid "a description without HTML tags"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:84
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:162
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:175
 msgid "a product price."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:85
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:163
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:176
 msgid "user rating."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:86
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:164
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:177
 msgid "customer reviews."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:87
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:165
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:178
 msgid "a store link button."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:88
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:166
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:179
 msgid "a disclaimer for the product information."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:89
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:167
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:180
 msgid "a full product HTML description."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:91
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:169
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:182
 msgid "meta data of the product."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:92
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:170
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:183
 msgid "categories that the product belongs to."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:93
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:171
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:184
 msgid "list of product features."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:94
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:172
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:185
 msgid "sales rank of the product."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:95
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:173
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:186
 msgid "the updated date."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:96
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:174
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:187
 msgid "prime mark."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:101
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:179
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:192
 #, php-format
 msgid "Some items need <a href=\"%1$s\">API</a> to be set up."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:107
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:185
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:198
 msgid "Some variables require the plugin database table to be updated."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:113
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:202
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:215
 msgid "Title Format"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:120
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:209
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:222
 msgid "Sets the layout of the title."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:121
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:135
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:210
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:238
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:223
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:251
 msgid "product link url"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:122
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:136
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:211
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:239
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:224
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:252
 msgid "title"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:123
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:139
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:212
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:242
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:225
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:255
 msgid "description without HTML tags"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:127
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:230
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:243
 msgid "Image Format"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:134
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:237
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:250
 msgid "Sets the layout of the image."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:137
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:240
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:253
 msgid "image url"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template.php:138
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:241
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:254
 msgid "image size"
 msgstr ""
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:57
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:39
+#, php-format
+msgid ""
+"If the template you like to use is not listed here, make sure it is "
+"activated in the <a href=\"%1$s\">%2$s</a> screen."
+msgstr ""
+
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:68
 msgid "Output Formats"
 msgstr ""
 
@@ -4565,16 +3840,10 @@ msgstr ""
 msgid "View Unit"
 msgstr ""
 
-#: include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base.php:404
-msgid ""
-"the template could not be found. Try re-selecting the template in the unit "
-"option page."
-msgstr ""
-
-#: include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base.php:481
+#: include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base.php:508
 #: include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php:68
 #: template/category/template.php:35 template/list/template.php:35
-#: template/preview/template.php:11 template/search/template.php:44
+#: template/preview/template.php:12 template/search/template.php:44
 msgid "No products found."
 msgstr ""
 
@@ -4588,10 +3857,6 @@ msgstr ""
 
 #: include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems.php:49
 msgid "Now retrieving similar products."
-msgstr ""
-
-#: include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_Base.php:58
-msgid "API keys are not set."
 msgstr ""
 
 #: include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_Categories.php:33
@@ -4812,7 +4077,7 @@ msgstr ""
 msgid "You need to set API keys first."
 msgstr ""
 
-#: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:712
+#: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:713
 #, php-format
 msgid "%1$s out of 5 stars"
 msgstr ""
@@ -4832,7 +4097,7 @@ msgid "Added Categories"
 msgstr ""
 
 #: include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php:127
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:73
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:74
 msgid "Category"
 msgstr ""
 
@@ -5346,59 +4611,59 @@ msgstr ""
 msgid "Operation"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:76
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:77
 msgid "Select the category to limit the searching area."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:87
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:88
 msgid "Price Ascending"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:87
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:88
 msgid "Sorts items from the cheapest to the most expensive."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:88
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:89
 msgid "Price Descending"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:88
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:89
 msgid "Sorts items from the most expensive to the cheapest."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:90
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:91
 msgid "Relevance Rank"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:90
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:91
 msgid ""
 "Sorts items based on how often the keyword appear in the product description."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:91
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
 msgid "Review Rank"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:91
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
 msgid ""
 "Sorts items based on how highly rated the item was reviewed by customers "
 "where the highest ranked items are listed first and the lowest ranked items "
 "are listed last."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:93
 msgid "Featured"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:93
 msgid "Sorts results with featured items having higher rank."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:93
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:94
 msgid "Newest Arrivals"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:93
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:94
 msgid "Sorts results with according to newest arrivals."
 msgstr ""
 
