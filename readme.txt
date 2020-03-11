@@ -330,6 +330,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Tweaked the default `Item Format` option to set `min-width` for the thumbnail container.
 - Tweaked the UI regarding the admin bar menu items.
 - Renewed the base translation file.
+- Fixed a bug that activated templates which are no longer exist were still loaded and caused PHP warnings in the template listing screen.
 
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.

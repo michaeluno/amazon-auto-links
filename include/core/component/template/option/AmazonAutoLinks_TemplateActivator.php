@@ -95,7 +95,7 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                 $_aTemplate         = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
                 $aTemplates[ $sID ] = array(
                     'is_active' => $bActivate,
-                ) + $_aTemplate;
+                ) + $this->getAsArray( $_aTemplate );
                 return $aTemplates;
 
             }

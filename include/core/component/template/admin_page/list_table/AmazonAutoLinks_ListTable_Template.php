@@ -30,10 +30,10 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
     /**
      * Sets up properties and hooks.
      */
-    public function __construct( $aData ){
-              
+    public function __construct( array $aData ){
+
         $this->aData = $aData;
-        
+
         // Set parent defaults
         $this->aArguments = array(
             'singular'  => 'template',     // singular name of the listed items
@@ -48,6 +48,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
         
     }
+
         /**
          * @callback        action      admin_notices
          */
@@ -98,7 +99,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
     public function column_cb( $aItem ){    
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
-            $this->_args['singular'],  /*$1%s*/
+            $this->_args[ 'singular' ],  /*$1%s*/
             $aItem[ 'id' ]  /*$2%s*/ // The value of the checkbox should be the record's id
         );
     }    
@@ -329,8 +330,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         public function usort_reorder( $a, $b ) {
             
             // If no sort, default to title
-            $sOrderBy = ( ! empty( $_REQUEST['orderby'] ) ) 
-                ? $_REQUEST['orderby'] 
+            $sOrderBy = ( ! empty( $_REQUEST[ 'orderby' ] ) )
+                ? $_REQUEST[ 'orderby' ]
                 : 'name'; 
             if ( 'description' === $sOrderBy ) {
                 $sOrderBy = 'description';
@@ -344,7 +345,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 : $_REQUEST['order'];
                 
             // Determine sort order
-            $result = strcmp( $a[ $sOrderBy ], $b[ $sOrderBy ] ); 
+            $result = isset( $a[ $sOrderBy ], $b[ $sOrderBy ] )
+                ? strcmp( $a[ $sOrderBy ], $b[ $sOrderBy ] )
+                : 0;
 
             // Send final sort direction to usort
             return ( 'asc' === $sOrder ) 

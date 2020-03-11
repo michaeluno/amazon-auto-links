@@ -31,9 +31,10 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         $this->___oTemplateListTable = new AmazonAutoLinks_ListTable_Template(
             $_oTemplateOption->getActiveTemplates() // precedence
-            + $_oTemplateOption->getUploadedTemplates() // merge
+            + $_oTemplateOption->getUploadedTemplates()   // unite
         );
         $this->___oTemplateListTable->process_bulk_action();
+
     }
 
     /**

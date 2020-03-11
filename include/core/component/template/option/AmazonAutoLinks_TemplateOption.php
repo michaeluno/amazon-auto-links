@@ -174,7 +174,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 
                 $_sID       = wp_normalize_path( untrailingslashit( $_sID ) );
                 $_aTemplate = $this->___getTemplateArrayFormatted( $_aTemplate );
-                
+
+                // 4.1.0 there are cases that while the template is still active, a custom template directory is deleted manually via FTP or whatever
+                if ( ! file_exists( $_aTemplate[ 'dir_path' ] ) ) {
+                    continue;
+                }
+
                 // Backward compatibility for the v2 options structure.
                 // If the id is not a relative dir path,
                 if ( 
@@ -460,7 +465,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         foreach( $this->_getTemplateDirs() as $_sDirPath ) {
             
             $_aTemplate = $this->getTemplateArrayByDirPath( $_sDirPath );
-            if ( ! $_aTemplate ) {
+            if ( empty( $_aTemplate ) ) {
                 continue;
             }
             
@@ -484,6 +489,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          * @since       3.7.4       Added the `$bAbsolutePath` parameter.
          * @sinc        4.0.0       Deprecated the third parameter $bAbsolutePath as it is not used anywhere.
          * @scope       public      The unit class also accesses this.
+         * @return  false|array
          */
         public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true ) {
 
