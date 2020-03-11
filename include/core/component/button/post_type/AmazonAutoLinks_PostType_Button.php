@@ -99,9 +99,27 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 10,  // priority
                 3   // number of parameter
             );
-        }        
-                    
+
+        }
+
+        // 4.0.5+
+        add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
+
     }
+
+    /**
+     * @since   4.0.5
+     */
+    public function replyToModifyAdminBar() {
+        $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );
+    }
+        /**
+         * @param WP_Admin_Bar $oWPAdminBar
+         */
+        private function ___removeNewLinkInAdminBar( WP_Admin_Bar $oWPAdminBar ) {
+            $oWPAdminBar->remove_node( 'new-' . $this->oProp->sPostType );
+        }
+
         /**
          * @callback        action      transition_post_status
          */    

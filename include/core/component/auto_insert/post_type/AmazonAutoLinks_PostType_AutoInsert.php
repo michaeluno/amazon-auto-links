@@ -79,11 +79,26 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
                 ) 
             );
         }
+
+        // 4.0.5+
+        add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
         
         parent::setUp();
         
     }        
 
+        /**
+         * @since   4.0.5
+         */
+        public function replyToModifyAdminBar() {
+            $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );
+        }
+            /**
+             * @param WP_Admin_Bar $oWPAdminBar
+             */
+            private function ___removeNewLinkInAdminBar( WP_Admin_Bar $oWPAdminBar ) {
+                $oWPAdminBar->remove_node( 'new-' . $this->oProp->sPostType );
+            }
     
     /**
      * Indicates whether the callback is added at the shutdown event to delete empty auto-insert items.

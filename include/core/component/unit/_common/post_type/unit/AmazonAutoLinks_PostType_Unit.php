@@ -82,9 +82,26 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             $this->_sNonce = wp_create_nonce( $this->_sNonceKey );
         }
 
+        // 4.0.5+
+        add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
+
         parent::setUp();
            
     }
+
+        /**
+         * @since   4.0.5
+         */
+        public function replyToModifyAdminBar() {
+            $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );
+        }
+            /**
+             * @param WP_Admin_Bar $oWPAdminBar
+             */
+            private function ___removeNewLinkInAdminBar( WP_Admin_Bar $oWPAdminBar ) {
+                $oWPAdminBar->remove_node( 'new-' . $this->oProp->sPostType );
+            }
+
         /**
          * @return      array       Label arguments.
          */
