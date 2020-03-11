@@ -22,6 +22,17 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
             : "delete-line";
         $_iMaxCol       = $this->oOption->getMaxSupportedColumnNumber();
         $_aFields       = array(
+            array(                  // 4.1.0
+                'field_id'          => $sFieldIDPrefix . 'show_errors',
+                'type'              => 'radio',
+                'title'             => __( 'Show Errors', 'amazon-auto-links' ),
+                'label'             => array(
+                    0 => __( 'Do not show errors.', 'amazon-auto-links' ),
+                    1 => __( 'Show errors.', 'amazon-auto-links' ),
+                    2 => __( 'Show errors as an HTML comment.', 'amazon-auto-links' ),
+                ),
+                'default'           => 2,
+            ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'load_with_javascript',
                 'type'              => 'checkbox',

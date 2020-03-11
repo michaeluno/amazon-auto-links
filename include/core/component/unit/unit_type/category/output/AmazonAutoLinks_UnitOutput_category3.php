@@ -295,6 +295,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     } catch ( Exception $_oException ) {
                         // When the items is filtered, this is reached
                         // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+                        if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
+                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN;
+                        }
                         continue;   // skip
                     }
 
@@ -358,7 +361,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                     // ASIN - required to detect duplicated items.
                     if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
-                        throw new Exception( 'The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
+                        throw new Exception( '(product filter) The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
                     }
 
                     // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
@@ -372,7 +375,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     // Title
                     $_aProduct[ 'raw_title' ] = $this->getElement( $_aProduct, 'title' );
                     if ( $this->isTitleBlocked( $_aProduct[ 'raw_title' ] ) ) {
-                        throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'raw_title' ] );
+                        throw new Exception( '(product filter) The title is black-listed: ' . $_aProduct[ 'raw_title' ] );
                     }
                     $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
 
@@ -397,7 +400,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                     // Check whether no-image should be skipped.
                     if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
-                        throw new Exception( 'No image is allowed: ' );
+                        throw new Exception( '(product filter) No image is allowed: ' );
                     }
 
                     // @todo complete the `meta` and `description` elements
@@ -503,6 +506,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_aProduct = parent::replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier );
         $_aProduct[ 'text_description' ] = strip_tags( $_aProduct[ 'description' ] );
         if ( $this->isDescriptionBlocked( $_aProduct[ 'text_description' ] ) ) {
+            $this->aBlockedASINs[ $_aProduct[ 'ASIN' ] ] = $_aProduct[ 'ASIN' ];
             return array(); // will be dropped
         }
         return $_aProduct;

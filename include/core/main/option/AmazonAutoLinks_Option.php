@@ -227,11 +227,19 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'width_unit'    => '%',
             'height'        => null,
             'height_unit'   => 'px',
-            
-            // Whether to show an error message.
-            // When an error occurs, the error message will be shown and the template is not applied.
-            // Currently, no unit option meta box input field for this option.
-            'show_errors'   => true,
+
+            /**
+             * Whether to show an error message.
+             *
+             * When an error occurs, the error message will be shown and the template is not applied.
+             * Currently, no unit option meta box input field for this option.
+             *
+             * 0: completely hide the error
+             * 1: show the error
+             * 2: show the error as an HTML comment
+             * @since   4.1.0   Changed the type to integer from boolean
+             */
+            'show_errors'   => 2,
 
             // 3.2.0+
             'show_now_retrieving_message'   => true,

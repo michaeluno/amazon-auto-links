@@ -53,7 +53,7 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
             array(
                 'field_id'          => $sFieldIDPrefix . 'button_type',
                 'type'              => 'radio',            
-                'title'             => __( 'Button Type', 'amazon-auto-links' ),            
+                'title'             => __( 'Button Link Type', 'amazon-auto-links' ),
                 'label'             => array(
                     0   => __( 'Link to the product page.', 'amazon-auto-links' ),
                     1   => __( 'Add to cart.', 'amazon-auto-links' ),

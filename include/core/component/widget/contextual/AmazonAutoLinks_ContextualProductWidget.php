@@ -317,9 +317,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             $aFormData[ 'available_page_types' ] = array_keys( 
                 array_filter( $aFormData[ 'available_page_types' ] ) 
             );
-            
-            // $_oOption = AmazonAutoLinks_Option::getInstance();
-            $aFormData[ 'show_errors' ] = false; // $_oOption->isDebug();
+
+            // $aFormData[ 'show_errors' ] = 0;
             
             return $aFormData;
             

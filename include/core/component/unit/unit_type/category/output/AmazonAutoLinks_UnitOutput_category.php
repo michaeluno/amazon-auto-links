@@ -434,8 +434,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     );
 
                 } catch ( Exception $_oException ) {
-                    // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+
+                    if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
+                        $_sASIN = $this->getASINFromURL( $this->getElement( $_aItem, 'link' ) );
+                        $this->aBlockedASINs[ $_sASIN ] = $_sASIN;
+                    }
                     continue;   // skip
+
                 }
 
                 // Store the product output
@@ -522,7 +527,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_sPermalink         = trim( $this->getElement( $_aItem, 'link' ) );
                 $_aProduct[ 'ASIN' ] = $this->getASINFromURL( $_sPermalink );
                 if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
-                    throw new Exception( 'The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
+                    throw new Exception( '(product filter) The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
                 }
 
                 // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
@@ -537,7 +542,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_aProduct[ 'raw_title' ] = $this->getElement( $_aItem, 'title' );
                 $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
                 if ( $this->isTitleBlocked( $_aProduct[ 'title' ] ) ) {
-                    throw new Exception( 'The title is black-listed: ' . $_aProduct[ 'title' ] );
+                    throw new Exception( '(product filter) The title is black-listed: ' . $_aProduct[ 'title' ] );
                 }
 
                 // Description ( creates $htmldescription and $textdescription )
@@ -545,7 +550,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $this->oDOM->removeNodeByTagAndClass( $_oNodeDiv, 'span', 'riRssTitle', 0 );
                 $_aProduct[ 'text_description' ] = $this->getTextDescription( $_oNodeDiv );
                 if ( $this->isDescriptionBlocked( $_aProduct[ 'text_description' ] ) ) {
-                    throw new Exception( 'The description is black-listed: ' . $_aProduct[ 'text_description' ] );
+                    throw new Exception( '(product filter) The description is black-listed: ' . $_aProduct[ 'text_description' ] );
                 }
 
                 // At this point, update the black&white lists as this item is parsed.
@@ -568,7 +573,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 // Check whether no-image should be skipped.
                 if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
-                    throw new Exception( 'No image is allowed: ' );
+                    throw new Exception( '(product filter) No image is allowed: ' );
                 }
 
                 // Links - a tags

@@ -233,6 +233,10 @@ Optionally, the following arguments may be set.
     - `1` - Add to cart.
 - `load_with_javascript` - [3.6.0+] (boolean|integer) whether to load the unit with JavaScript. `true`/`1` to yes, `false`/`0` to no.
 - `product_title` - [4.0.0+] (string) An alternative text to alter the product title for anchor text. This is only supported when the `asin` argument is set.
+- `show_errors` - [4.1.0+] (integer) Whether to show the output error. Default: `2`.
+    - `0`: do not show error.
+    - `1`: show the error.
+    - `2`: show the error in an HTML comment.
 
 These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
 If these arguments are omitted, the values set in the setting page will be used.
@@ -249,7 +253,7 @@ Remove the files besides `style.css` and `template.php` as other files are optio
 
 <h5><strong>Step 3</strong></h5>
 
-Edit `style.css` and `telease upgrademplate.php` to customize the layout.
+Edit `style.css` and `template.php` to customize the layout.
 
 <h5><strong>Step 4</strong></h5>
 
@@ -319,12 +323,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.5 =
-- Tweaked the default Item Format option to set `min-width` for the thumbnail container.
+- Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
 - Added the `%image_size%` Item Format option tag.
-- Tweaked the UI regarding the admin bar menu items.
-- Renewed the base translation file.
 - Added new translated items for the Japanese translation.
 - Added the Singapore locale for search unit types.
+- Tweaked the default `Item Format` option to set `min-width` for the thumbnail container.
+- Tweaked the UI regarding the admin bar menu items.
+- Renewed the base translation file.
 
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.

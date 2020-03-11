@@ -46,6 +46,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     public $oGlobalProductFilter;
     public $oUnitProductFilter;
+
+    /**
+     * Stores blocked product ASINs by filters.
+     * Used to insert these in an output error of No Products Found so that it will be
+     * @var array
+     * @since   4.1.0
+     */
+    public $aBlockedASINs = array();
     
     /**
      * Stores DOM parser object.
@@ -300,12 +308,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         } catch ( Exception $_oException ) {
 
-            $_sErrorMessage = $_oException->getMessage();
-            $_sContent      = $this->oUnitOption->get( 'show_errors' )
-                ? "<div class='warning'><p>"
-                  . AmazonAutoLinks_Registry::NAME. ': ' . $_sErrorMessage
-                  . "</p></div>"
-                : '';
+            $_sErrorMessage  = $_oException->getMessage();
+            $_iShowErrorMode = ( integer ) $this->oUnitOption->get( 'show_errors' );
+            $_sContent       = $this->___getErrorOutput( $_iShowErrorMode, $_sErrorMessage );
+
             if ( ! $_bHasPreviousError && $_iUnitID ) {
                 update_post_meta( $_iUnitID, '_error', $_sErrorMessage );
             }
@@ -318,6 +324,29 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         return $_sContent;
 
     }
+
+        /**
+         * @param   $iShowErrorMode
+         * @param   $sErrorMessage
+         *
+         * @return  string
+         * @since   4.1.0
+         */
+        private function ___getErrorOutput( $iShowErrorMode, $sErrorMessage ) {
+            if ( ! $iShowErrorMode ) {
+                return '';
+            }
+            $_iFilteredOut = count( $this->aBlockedASINs );
+            return 2 === $iShowErrorMode
+                ? "<!-- "
+                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
+                    . ' ' . $_iFilteredOut . ' items are filtered out: [' . implode( ', ', $this->aBlockedASINs ) . ']'
+                  . " -->"
+                : "<div class='warning'><p>"
+                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
+                    . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
+                  . "</p></div>";
+        }
 
         /**
          * @since       4.0.2

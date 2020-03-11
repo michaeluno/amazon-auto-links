@@ -242,29 +242,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 }
 
     /**
-     * Returns the formatted product title HTML Block.
-     * @since       2.1.1
-     * @since       3.5.0       Renamed from `_formatProductTitle()`.
-     * @return      string
-     * @deprecated  3.10.0
-     */
-/*    protected function _getProductTitleFormatted( array $aProduct ) {
-        return str_replace( 
-            array( 
-                "%href%", 
-                "%title_text%", 
-                "%description_text%" 
-            ),
-            array( 
-                $aProduct[ 'product_url' ], 
-                $aProduct[ 'title' ], 
-                $aProduct[ 'text_description' ]
-            ),
-            $this->oUnitOption->get( 'title_format' ) 
-        );        
-    }*/
-    
-    /**
      * Returns the formatted product thumbnail HTML block.
      * 
      * @since       2.1.1

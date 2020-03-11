@@ -591,12 +591,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          */
         protected function _getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_sResponseDate, $_iCount ) {
 
-            $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
-            $_aProducts           = array();
+            $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
+            $_aProducts     = array();
 
-            $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );            
-            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
-            $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
+            $_sLocale       = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+            $_sCurrency     = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+            $_sLanguage     = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
             
             // First Iteration - Extract displaying ASINs.
             foreach ( $aItems as $_iIndex => $_aItem ) {
@@ -634,6 +634,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     );
 
                 } catch ( Exception $_oException ) {
+                    // Blocked by product filters
+                    if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
+                        $this->aBlockedASINs[ $_aItem[ 'ASIN' ] ] = $_aItem[ 'ASIN' ];
+                    }
                     continue;   // skip
                 }
 
@@ -717,10 +721,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  * @throws  Exception
                  * @since   3.5.0
                  */
-                private function ___checkASINBlocked( $_sASIN ) {
-                    if ( $this->isASINBlocked( $_sASIN ) ) {
-                        throw new Exception( 'The product ASIN is black-listed: ' . $_sASIN );
+                private function ___checkASINBlocked( $sASIN ) {
+                    if ( ! $this->isASINBlocked( $sASIN ) ) {
+                        return;
                     }
+                    throw new Exception( '(product filter) The product ASIN is black-listed: ' . $sASIN );
                 }
 
             /**
@@ -733,7 +738,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             private function ___getTitle( $aItem ) {
                 $_sTitle = $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
                 if ( $this->isTitleBlocked( $_sTitle ) ) {
-                    throw new Exception( 'The title is black-listed: ' . $_sTitle );
+                    throw new Exception( '(product filter) The title is black-listed: ' . $_sTitle );
                 }
                 return $this->getTitleSanitized( $_sTitle, $this->oUnitOption->get( 'title_length' ) );
             }
@@ -767,7 +772,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  */
                 private function ___checkImageAllowed( $sThumbnailURL ) {
                     if ( ! $this->isImageAllowed( $sThumbnailURL ) ) {
-                        throw new Exception( 'No image is allowed: ' . $sThumbnailURL );
+                        throw new Exception( '(product filter) No image is allowed: ' . $sThumbnailURL );
                     }
                 }
 
@@ -778,6 +783,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return  string
              * @throws Exception
              * @since   3.5.0
+             * @since   4.1.0   Added the `$sASIN` parameter.
              */
             private function ___getDescription( $sContent, $sProductURL ) {
                 $_sDescription  = $this->_getDescriptionSanitized(
@@ -794,7 +800,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  */
                 private function ___checkDescriptionBlocked( $sDescription ) {
                     if ( $this->isDescriptionBlocked( $sDescription ) ) {
-                        throw new Exception( 'The description is not allowed: ' . $sDescription );
+                        throw new Exception( '(product filter) The description is not allowed: ' . $sDescription );
                     }
                 }
     
