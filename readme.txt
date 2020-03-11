@@ -319,6 +319,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.5 =
+- Tweaked the default Item Format option to set `min-width` for the thumbnail container.
+- Added the `%image_size%` Item Format option tag.
 - Tweaked the UI regarding the admin bar menu items.
 - Renewed the base translation file.
 - Added new translated items for the Japanese translation.

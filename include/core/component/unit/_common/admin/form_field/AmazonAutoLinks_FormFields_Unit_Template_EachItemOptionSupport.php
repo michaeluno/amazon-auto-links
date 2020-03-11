@@ -169,22 +169,23 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
                         . "<code>%image%</code> - " . __( 'a thumbnail with HTML tags defined in the Image Format option', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%image_set%</code> - " . __( 'sub-images.', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%image_set%</code> - " . __( 'sub-images', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%image_size%</code> - " . __( 'the thumbnail size set in the Image Size option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%description%</code> - " . __( 'a description with HTML tags', 'amazon-auto-links' ) . '<br />'
                         . "<code>%description_text%</code> - " . __( 'a description without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%price%</code> - " . __( 'a product price.', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating.', 'amazon-auto-links' ) . '<br />'
+                        . "<code>%price%</code> - " . __( 'a product price', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating', 'amazon-auto-links' ) . '<br />'
                         . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer reviews.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%button%</code> - " . __( 'a store link button.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%disclaimer%</code> - " . __( 'a disclaimer for the product information.', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
+                        . "<code>%disclaimer%</code> - " . __( 'a disclaimer for the product information', 'amazon-auto-links' ) . '<br />'
+                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         // . "<code class='{$_sDel}'>%similar%</code> - " . __( 'similar products.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+ // @deprecated 3.9.0
-                        . "<code class='{$_sDel}'>%meta%</code> - " . __( 'meta data of the product.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
-                        . "<code class='{$_sDel}'>%category%</code> - " . __( 'categories that the product belongs to.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code class='{$_sDel}'>%feature%</code> - " . __( 'list of product features.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code class='{$_sDel}'>%rank%</code> - " . __( 'sales rank of the product.', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code>%date%</code> - " . __( 'the updated date.', 'amazon-auto-links' ) . '<br />' // 3.8.0+
-                        . "<code class='{$_sDel}'>%prime%</code> - " . __( 'prime mark.', 'amazon-auto-links' ) . '<br />'    // 3.9.0+
+                        . "<code class='{$_sDel}'>%meta%</code> - " . __( 'meta data of the product', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
+                        . "<code class='{$_sDel}'>%category%</code> - " . __( 'categories that the product belongs to', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
+                        . "<code class='{$_sDel}'>%feature%</code> - " . __( 'list of product features', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
+                        . "<code class='{$_sDel}'>%rank%</code> - " . __( 'sales rank of the product', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
+                        . "<code>%date%</code> - " . __( 'the updated date', 'amazon-auto-links' ) . '<br />' // 3.8.0+
+                        . "<code class='{$_sDel}'>%prime%</code> - " . __( 'prime mark', 'amazon-auto-links' ) . '<br />'    // 3.9.0+
                         . ( $_bAPIConnected
                             ? null
                             : sprintf(
@@ -251,7 +252,8 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />'
+                    // . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />' // @deprecated 4.0.5
+                    . '<code>%image_size%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />'
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),

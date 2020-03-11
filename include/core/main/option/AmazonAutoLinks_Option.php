@@ -357,9 +357,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'item_format' => $_bAPIConnected
                 ? $this->getDefaultItemFormatConnected()
                 : $this->getDefaultItemFormatDisconnected(),
-            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%max_width%px; max-height:%max_width%px; ">' . PHP_EOL
+            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%image_size%px; max-height:%image_size%px; ">' . PHP_EOL
                 . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">' . PHP_EOL
-                . '        <img src="%src%" alt="%description_text%" style="max-height:%max_width%px;" />' . PHP_EOL
+                . '        <img src="%src%" alt="%description_text%" style="max-height:%image_size%px;" />' . PHP_EOL
                 . '    </a>' . PHP_EOL
                 . '</div>',
                 
@@ -377,7 +377,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultItemFormatConnected() {
         return '<div class="amazon-auto-links-product">' . PHP_EOL
-            . '    <div class="amazon-auto-links-product-image">' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-image" style="min-width: %image_size%px;">' . PHP_EOL
             . '        %image%' . PHP_EOL
             . '        %image_set%' . PHP_EOL
             . '    </div>' . PHP_EOL
@@ -395,7 +395,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultItemFormatDisconnected() {
         return '<div class="amazon-auto-links-product">' . PHP_EOL
-            . '    <div class="amazon-auto-links-product-image">' . PHP_EOL
+            . '    <div class="amazon-auto-links-product-image" style="min-width: %image_size%px;">' . PHP_EOL
             . '        %image%' . PHP_EOL
             . '    </div>' . PHP_EOL
             . '    <div class="amazon-auto-links-product-body">' . PHP_EOL

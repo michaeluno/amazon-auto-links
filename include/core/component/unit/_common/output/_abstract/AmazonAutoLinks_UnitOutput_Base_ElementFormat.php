@@ -272,22 +272,25 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @return      string
      */
     protected function _getProductThumbnailFormatted( array $aProduct ) {
-        
+
+        $_iImageSize = $this->oUnitOption->get( 'image_size' );
         return isset( $aProduct[ 'thumbnail_url' ] )
             ? str_replace( 
                 array( 
                     "%href%", 
                     "%title_text%", 
                     "%src%", 
-                    "%max_width%", 
-                    "%description_text%" 
+                    "%max_width%",          // @deprecated 4.0.5 Kept for backward-compatibility
+                    "%description_text%",
+                    "%image_size%",         // 4.0.5
                 ),
                 array( 
                     esc_url( $aProduct[ 'product_url' ] ),
                     esc_attr( strip_tags( $aProduct[ 'title' ] ) ),
                     $aProduct[ 'thumbnail_url' ], 
-                    $this->oUnitOption->get( 'image_size' ), 
-                    esc_attr( $aProduct[ 'text_description' ] )
+                    $_iImageSize,
+                    esc_attr( $aProduct[ 'text_description' ] ),
+                    $_iImageSize    // 4.0.5
                 ),
                 $this->oUnitOption->get( 'image_format' )
             ) 
