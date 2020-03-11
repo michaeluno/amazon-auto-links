@@ -89,7 +89,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     public $sCallID;
 
     /**
-     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
      * @since       3.5.0
      * @var array
      */
@@ -195,7 +195,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         /**
          * Checks whether the unit needs to access the plugin custom database table.
          * 
-         * @remark      For the category unit type, the %description%, %content%, and %price% variables need to access the database table 
+         * @remark      For the category unit type, the %description%, %content%, and %price% tags (variables) need to access the database table
          * and it requires the API to be connected.
          * @since       3.3.0
          * @since       3.5.0       Changed the visibility scope from protected.

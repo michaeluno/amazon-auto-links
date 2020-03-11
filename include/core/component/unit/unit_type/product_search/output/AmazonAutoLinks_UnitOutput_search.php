@@ -37,7 +37,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     protected $_sResponseItemsParentKey = 'SearchResult';
 
     /**
-     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
      * @since       3.5.0
      * @var array
      */

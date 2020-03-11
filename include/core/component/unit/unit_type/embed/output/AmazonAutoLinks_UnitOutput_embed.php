@@ -22,7 +22,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     public $sUnitType = 'embed';
 
     /**
-     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
      * @var array
      */
     protected $_aItemFormatDatabaseVariables = array(

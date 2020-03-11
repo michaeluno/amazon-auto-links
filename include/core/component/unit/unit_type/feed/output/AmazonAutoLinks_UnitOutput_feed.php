@@ -22,7 +22,7 @@ class AmazonAutoLinks_UnitOutput_feed extends AmazonAutoLinks_UnitOutput_categor
     public $sUnitType = 'feed';
 
     /**
-     * Lists the variables used in the Item Format unit option that require to access the custom database.
+     * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
      * @remark  For this `feed` unit type, this must be empty not to trigger unnecessary database access.
      * @see AmazonAutoLinks_UnitOutput_Base::___hasCustomDBTableAccess()
      * @var array

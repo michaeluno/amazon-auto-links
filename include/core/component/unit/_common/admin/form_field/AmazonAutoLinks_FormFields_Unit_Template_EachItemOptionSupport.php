@@ -164,7 +164,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
                 ),
                 'description'       => array(
-                    __( 'Sets the layout of the product. The following variables are available.', 'amazon-auto-links' ) . '<br />'
+                    __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -196,7 +196,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                             )
                         ),
                         $_bTableUpdateRequired
-                            ? '<span style="color: red;">' . __( 'Some variables require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
+                            ? '<span style="color: red;">' . __( 'Some tags require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
                             : '',
                     ),
             );

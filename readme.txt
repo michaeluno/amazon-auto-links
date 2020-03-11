@@ -328,7 +328,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.
-- Fixed an issue that units with `Prevent Duplicates` unit option enabled produced no results in the unit preview page when some third-party plugins that calls the `the_content` filters in prior to rendering the post.
+- Fixed an issue that units with the `Prevent Duplicates` unit option enabled produced no results in the unit preview page when some third-party plugins call the `the_content` filters in prior to rendering the post.
 - Fixed a bug that the `Output Format` unit options were not loaded properly for some cases.
 - Fixed a bug that template names were not displayed in Manage Units screen.
 - Fixed a bug that caused a PHP fatal error "Uncaught Error: Call to undefined function register_block_type()" for WordPress v4.9.x or below.
