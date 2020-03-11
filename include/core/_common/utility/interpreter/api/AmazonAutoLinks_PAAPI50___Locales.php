@@ -36,7 +36,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'UK'        => 'eu-west-1',  // United Kingdom    webservices.amazon.co.uk
         'US'        => 'us-east-1',  // United States    webservices.amazon.com
         'CN'        => 'us-west-2',  // Not set by API
-        'SG'        => 'us-west-2',  // 4.0.5
+        'SG'        => 'us-west-2',  // 4.1.0
     );
     /**
      * @var array
@@ -57,7 +57,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'UK'        => 'webservices.amazon.co.uk',      // United Kingdom
         'US'        => 'webservices.amazon.com',        // United States
 //        'CN'        => 'webservices.amazon.cn',         // Not set by API - not available in ScratchPad.
-        'SG'        => 'webservices.amazon.sg',         // 4.0.5+
+        'SG'        => 'webservices.amazon.sg',         // 4.1.0+
     );
 
     public $aMarketPlaces = array(
@@ -112,7 +112,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'UK'        => 'GBP',   // British Pound
         'US'        => 'USD',   // United States Dolla
         'CN'        => 'CNY',   // Chinese Yen
-        'SG'        => 'SGD',   // 4.0.5+ Singapore Dollar
+        'SG'        => 'SGD',   // 4.1.0+ Singapore Dollar
     );
 
     static public function getDefaultLanguageByLocale( $sLocale ) {
@@ -422,7 +422,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
     /**
      * @return array
      * @since   3.9.1
-     * @deprecated 4.0.5    Not used in anywhere
+     * @deprecated 4.1.0    Not used in anywhere
      */
 /*    static public function getCountryLabels() {
         return array(

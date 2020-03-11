@@ -102,13 +102,13 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
 
         }
 
-        // 4.0.5+
+        // 4.1.0+
         add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
 
     }
 
     /**
-     * @since   4.0.5
+     * @since   4.1.0
      */
     public function replyToModifyAdminBar() {
         $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );

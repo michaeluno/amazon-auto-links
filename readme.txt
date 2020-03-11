@@ -322,7 +322,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.0.5 =
+= 4.1.0 =
 - Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
 - Added the `%image_size%` Item Format option tag.
 - Added new translated items for the Japanese translation.

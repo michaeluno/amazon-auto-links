@@ -35,7 +35,7 @@ final class AmazonAutoLinks_Property {
         'BR'    => 'uni',
         'MX'    => 'uni',
         'AU'    => 'uni',   // 3.5.5+
-        'SG'    => 'uni',   // 4.0.5+
+        'SG'    => 'uni',   // 4.1.0+
     );
     /**
      * @var array
@@ -731,7 +731,7 @@ final class AmazonAutoLinks_Property {
                     'Watches'               => __( 'Watches', 'amazon-auto-links' ),
                 );
             case 'SG':
-                // @since 4.0.5
+                // @since 4.1.0
                 // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/singapore.html#search-index
                 return array(
                     'All'	                    => __( 'All Departments', 'amazon-auto-links' ),
@@ -811,7 +811,7 @@ final class AmazonAutoLinks_Property {
     /**
      * @remark  Seems not used. And the documentation of the below url does not include the `AU` locale.
      * @see     https://docs.aws.amazon.com/AWSECommerceService/latest/DG/localevalues.html
-     * @deprecated 4.0.5 not used anywhere
+     * @deprecated 4.1.0 not used anywhere
      */
 /*    static public $aSearchIndex = array(
         'CA' => array(
@@ -878,7 +878,7 @@ final class AmazonAutoLinks_Property {
      * 
      * @remark          These IDs were valid as of the publication date of this guide. API Version 2011-08-01
      * @see             http://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDs.html
-     * @deprecated      4.0.5
+     * @deprecated      4.1.0
      */
 /*    static public $aRootNodes = array(
         'CA' => array(
@@ -936,7 +936,7 @@ final class AmazonAutoLinks_Property {
      * 
      * The nodes are divided up to 10 elements for the API request.
      * @remark      Not used at the moment.
-     * @deprecated  4.0.5
+     * @deprecated  4.1.0
      */
 /*    static public function getRootNodes( $sLocale ) {
         
@@ -956,7 +956,7 @@ final class AmazonAutoLinks_Property {
      * This is used when the search API request has the category of 'Marketplace', the domain needs to be specified.
      * @since       2.1.0
      * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/MarketplaceDomainParameter.html
-     * @deprecated  4.0.5   Not used in anywhere
+     * @deprecated  4.1.0   Not used in anywhere
      */
     /*static public $aMarketplaceDomain = array(
         'DE' => 'www.javari.de',
@@ -969,7 +969,7 @@ final class AmazonAutoLinks_Property {
      * Returns the market place domain url by the given locale.
      * 
      * @since       2.1.0
-     * @deprecated  4.0.5   Not used in anywhere
+     * @deprecated  4.1.0   Not used in anywhere
      */
 /*    static public function getMarketplaceDomainByLocale( $sLocale ) {
         

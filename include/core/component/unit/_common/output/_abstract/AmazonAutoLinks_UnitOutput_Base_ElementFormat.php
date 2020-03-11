@@ -257,9 +257,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     "%href%", 
                     "%title_text%", 
                     "%src%", 
-                    "%max_width%",          // @deprecated 4.0.5 Kept for backward-compatibility
+                    "%max_width%",          // @deprecated 4.1.0 Kept for backward-compatibility
                     "%description_text%",
-                    "%image_size%",         // 4.0.5
+                    "%image_size%",         // 4.1.0
                 ),
                 array( 
                     esc_url( $aProduct[ 'product_url' ] ),
@@ -267,7 +267,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     $aProduct[ 'thumbnail_url' ], 
                     $_iImageSize,
                     esc_attr( $aProduct[ 'text_description' ] ),
-                    $_iImageSize    // 4.0.5
+                    $_iImageSize    // 4.1.0
                 ),
                 $this->oUnitOption->get( 'image_format' )
             ) 

@@ -252,7 +252,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'
-                    // . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />' // @deprecated 4.0.5
+                    // . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />' // @deprecated 4.1.0
                     . '<code>%image_size%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />'
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
                 'class'         => array(

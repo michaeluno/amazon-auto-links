@@ -82,7 +82,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             $this->_sNonce = wp_create_nonce( $this->_sNonceKey );
         }
 
-        // 4.0.5+
+        // 4.1.0+
         add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
 
         parent::setUp();
@@ -90,7 +90,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
     }
 
         /**
-         * @since   4.0.5
+         * @since   4.1.0
          */
         public function replyToModifyAdminBar() {
             $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );
