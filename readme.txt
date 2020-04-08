@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.3.2
-Stable tag:         4.0.4
+Stable tag:         4.0.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -318,6 +318,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.0.5 - 04/09/2020 =
+- Fixed a bug that caused a PHP error saying class not found in the post editing screen.
 
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.
