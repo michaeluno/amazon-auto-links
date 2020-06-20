@@ -320,6 +320,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.0.6 =
+- Fixed a bug that the Item look-up unit creation screen was unreachable.
 - Fixed a bug that caused an undefined index warning when a custom template is unexpectedly removed.
 
 = 4.0.5 - 04/09/2020 =
