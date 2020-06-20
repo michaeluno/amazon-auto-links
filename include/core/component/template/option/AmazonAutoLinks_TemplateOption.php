@@ -190,6 +190,11 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                     
                 }
 
+                // 4.0.6+ Broken custom templates misses some necessary array elements
+                if ( ! isset( $_aTemplate[ 'name' ] ) ) {
+                    continue;
+                }
+
                 $_aTemplate[ 'is_active' ]  = true;
                 $_aActiveTemplates[ $_sID ] = $_aTemplate;
                 
