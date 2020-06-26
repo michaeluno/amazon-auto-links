@@ -130,9 +130,11 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
             switch( $aInput[ 'Operation' ] ) {
                 default:
                 case 'ItemSearch':
+                case 'SearchItems':
                     $_sTabSlug = 'search_products';                
                     break;
                 case 'ItemLookup':
+                case 'GetItems':        // 4.0.6 - fix a bug that did not let the user reach the Item Look-up option screen.
                     $_sTabSlug = 'item_lookup';
                     break;
                 case 'SimilarityLookup':
