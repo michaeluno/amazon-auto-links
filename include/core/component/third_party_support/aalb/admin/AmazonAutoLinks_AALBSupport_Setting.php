@@ -55,7 +55,7 @@ class AmazonAutoLinks_AALBSupport_Setting {
         }
 
         // Form sections
-        new AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
+        new AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
 
     }
 

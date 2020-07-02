@@ -9,24 +9,24 @@
  */
 
 /**
- * Adds the 'AALB' form section to the '3rd Party' tab.
+ * Adds the 'PhpZon' form section to the '3rd Party' tab.
  * 
- * @since       3.11.0
+ * @since       4.1.0
  */
-class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
-     * @since   3.11.1
+     * @since  4.1.0
      * @return array
      */
     protected function _getArguments() {
         return array(
             'tab_slug'      => '3rd_party',
-            'section_id'    => 'aalb',       // avoid hyphen(dash), dots, and white spaces
+            'section_id'    => 'phpzon',       // avoid hyphen(dash), dots, and white spaces
             'capability'    => 'manage_options',
-            'title'         => __( 'Amazon Associates Link Builder', 'amazon-auto-links' ),
+            'title'         => 'PhpZon',
             'description'   => array(
-                __( 'Parse the shortcode and the Gutenberg block contents of Amazon Associates Link Builder (AALB) as the plugin is discontinued as of Feb 11, 2020.', 'amazon-auto-links' ),
+                __( 'Parse the shortcode of the PhpZon plugin.', 'amazon-auto-links' ),
             ),
         );
     }
@@ -34,14 +34,14 @@ class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_
     /**
      * A user constructor.
      * 
-     * @since       3.11.0
+     * @since       4.1.0
      * @return      void
      */
     protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
-     * @since       3.11.0
+     * @since       4.1.0
      * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
@@ -49,12 +49,15 @@ class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_
         $oFactory->addSettingFields(
             $sSectionID, // the target section id    
             array(
-                'field_id'      => 'support',
+                'field_id'      => 'shortcodes',
                 'type'          => 'checkbox',
-                'title'         => __( 'Enable', 'amazon-auto-links' ),
+                'title'         => __( 'Shortcodes', 'amazon-auto-links' ),
+                'description'   => __( 'Check the shortcode of PhpZon to convert its outputs into Amazon Auto Links\'.', 'amazon-auto-links' ),
                 'capability'    => 'manage_options',
-                'label'         => __( 'Attempts to display product links of the Amazon Associate Link Builder block contents and shortcode, <code>[amazon_link ...]</code>', 'amazon-auto-links' ),
-                'default'       => 0,
+                'label'         => array(
+                    'phpzon'    => '<code>phpzon</code>',
+                    'phpbay'    => '<code>phpbay</code>',
+                ),
             ),
             array(
                 'field_id'      => 'template_conversion',
@@ -66,7 +69,7 @@ class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_
                         'field_id'      => 'aalb',
                         'title'         => 'AALB',
                         'type'          => 'select',
-                        'label'         => $this->___getAALBTemplateList(),
+                        'label'         => $this->___getTemplateList(),
                     ),
                     array(
                         'field_id'  => '_arrow',
@@ -86,29 +89,24 @@ class AmazonAutoLinks_AALBSupport_Setting_3RdParty_AALB extends AmazonAutoLinks_
     
     }
 
-    /**
-     * @return array
-     */
-    private function ___getAALBTemplateList() {
-        $_aTemplates = $this->getAsArray( get_option( 'aalb_template_names', array() ) );
-        foreach( $_aTemplates as $_i => $_sName ) {
-            unset( $_aTemplates[ $_i ] );
-            $_aTemplates[ $_sName ] = $_sName;
+        /**
+         * @return array
+         */
+        private function ___getTemplateList() {
+            return array(
+                'asin'          => 'asin',
+                'asin-tabs'     => 'asin-tabs',
+                'columns'       => 'columns',
+                'default'       => 'default',
+                'default_'      => 'default_',
+            );
         }
-        return $_aTemplates + array(
-            'PriceLink'       => 'PriceLink',
-            'ProductAd'       => 'ProductAd',
-            'ProductCarousel' => 'ProductCarousel',
-            'ProductGrid'     => 'ProductGrid',
-            'ProductLink'     => 'ProductLink',
-        );
-    }
 
 
     /**
      * Validates the submitted form data.
      * 
-     * @since       3.11.0
+     * @since       4.1.0
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     

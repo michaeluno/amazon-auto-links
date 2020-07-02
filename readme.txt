@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.3.2
+Tested up to:       5.4.2
 Stable tag:         4.0.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -323,6 +323,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.1.0 =
+- Added support for `PhpZon` shortcodes.
 - Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
 - Added the `%image_size%` Item Format option tag.
 - Added new translated items for the Japanese translation.
