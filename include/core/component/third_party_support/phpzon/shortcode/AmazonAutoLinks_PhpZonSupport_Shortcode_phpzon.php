@@ -53,11 +53,7 @@ class AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon extends AmazonAutoLinks_WPU
         // `keywords` -> `count`
         $_sSearchIndex = $this->getElement( $aArguments, array( 'keywords' ), '' );
         if ( $_sSearchIndex ) {
-            $aArguments[ 'Keywords' ] = $_sSearchIndex;
-
-            // Specifies the operation
-            $aArguments[ 'Operation' ] = 'SearchItems';
-
+            $aArguments[ 'search' ] = $_sSearchIndex;
         }
         unset( $aArguments[ 'keywords' ] );
 
