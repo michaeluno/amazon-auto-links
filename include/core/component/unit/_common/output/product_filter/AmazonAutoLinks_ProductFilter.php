@@ -216,7 +216,10 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
                 ? 'strpos' 
                 : 'stripos';
             
-            foreach( $aList as $_sNeedle ) {            
+            foreach( $aList as $_sNeedle ) {
+                if ( '*' === $_sNeedle ) {
+                    return true;
+                }
                 $_biFoundPosition = call_user_func_array( 
                     $_sFunctionName, // strpos or stripos
                     array( $sSubject, $_sNeedle )

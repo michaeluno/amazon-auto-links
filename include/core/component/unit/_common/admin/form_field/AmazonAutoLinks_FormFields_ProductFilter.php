@@ -67,8 +67,10 @@ class AmazonAutoLinks_FormFields_ProductFilter extends AmazonAutoLinks_FormField
                 ),
                 'after_input' => array(
                     'asin'          => '<p><span class="description">e.g. <code>020530902X, BO0000000X</code></span></p>',
-                    'title'         => '<p><span class="description">e.g. <code>xxx, adult</code></span></p>',
-                    'description'   => '<p><span class="description">e.g. <code>xxx, $0.</code></span></p>',
+                    'title'         => '<p><span class="description">e.g. <code>xxx, adult</code></span></p>'
+                        . __( 'Accepts <code>*</code> to apply to all products.', 'amazon-auto-links' ),
+                    'description'   => '<p><span class="description">e.g. <code>xxx, $0.</code></span></p>'
+                        . __( 'Accepts <code>*</code> to apply to all products.', 'amazon-auto-links' ),
                 ),
             ),
             array(
