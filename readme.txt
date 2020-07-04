@@ -335,6 +335,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Renewed the base translation file.
 - Fixed a bug that activated templates which are no longer exist were still loaded and caused PHP warnings in the template listing screen.
 
+= 4.0.6 – 06/26/20 =
+- Fixed a bug that the Item look-up unit creation screen was unreachable.
+- Fixed a bug that caused an undefined index warning when a custom template is unexpectedly removed.
+
+= 4.0.5 – 04/09/2020 =
+- Fixed a bug that caused a PHP error saying class not found in the post editing screen.
+
 = 4.0.4 - 03/08/2020 =
 - Tweaked the default `Image Format` option layout value.
 - Fixed an issue that units with the `Prevent Duplicates` unit option enabled produced no results in the unit preview page when some third-party plugins call the `the_content` filters in prior to rendering the post.
