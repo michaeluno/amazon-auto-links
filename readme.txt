@@ -327,6 +327,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
 - Added the `%image_size%` Item Format option tag.
 - Added new translated items for the Japanese translation.
+- Added the Netherlands locale for search and category unit types.
 - Added the Singapore locale for search unit types.
 - Tweaked the default `Item Format` option to set `min-width` for the thumbnail container.
 - Tweaked the UI regarding the admin bar menu items.

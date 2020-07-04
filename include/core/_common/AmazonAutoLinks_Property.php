@@ -36,6 +36,7 @@ final class AmazonAutoLinks_Property {
         'MX'    => 'uni',
         'AU'    => 'uni',   // 3.5.5+
         'SG'    => 'uni',   // 4.1.0+
+        'NL'    => 'uni',   // 4.1.0+
     );
     /**
      * @var array
@@ -80,7 +81,8 @@ final class AmazonAutoLinks_Property {
         'TR'    => 'www.amazon.com.tr',
         'AE'    => 'www.amazon.ae',
         'SG'    => 'www.amazon.sg', // 3.10.1
-    );    
+        'NL'    => 'www.amazon.nl', // 4.1.0
+    );
     /**
      * Returns the market place domain url by the given locale.
      * 
@@ -132,6 +134,7 @@ final class AmazonAutoLinks_Property {
         'TR'    => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAADPklEQVRIS8VWTSxjURT+XrVT1F8HM0ZKMkgkiMTCRiLEUjIWNjYkmEwyQSIssJIICSsjsSAZs2DFEgssRCIRFjZCYiExxlSp/7+Wtk/fnHPrlZmJ1x8JJznNu+/de7/vnvOd0yuNAJ8g4TuA9+QvaXYo+CKNSDh4BXD1oHYmoPDos/h9Ofsh+bBCJuC552h4JteQCLgI7Iz86h/QWBqbyY1hkAmawCFtfqECSBIMGRmAokDe2YHi9Yov8eTvQiQRFAE/OAEnNDbC3N4OvcUioGSrFae9vbgYGhKEQiURkMA1geyzSPR6pExMIKay0n9Gz/Y25N1dSNHRcK+v47ChAYrbHRKJgAR+E9wteXJ/PxJaWgQ4Ax9UV+N2efkh4BQdyUCSpHQosiyaCWvjXuRPJkaTgHp6Y0EB0ldXAZ1ObL6bnw/35ia4AtRqYARjXh4SWlthr6/3AwZKiSaBI9rmnIU1OIj4piaxqWN6GraKCkTTs5NPSKQkkwne62tYFhYQVVwMa0kJ3Bsb8DqdIiVZGpHQJLB3D2KZn0dUWZkgcNLZidPubiTyM79gYTY3I6mvD5LxoRAdU1MiTd6rK2TSNN0TSdAkYKVFN+RpS0uILCoSWxxRiM+/fUMyPbvJ1dI0UVRSJyfFHOfsLPbKy0VVxNFY689Fk4CdFl+Sp4yNIbamRmx+OToKe22taDpMggV6TG7u6EBiV5dPG5mZ+JWdDdlmw0f6pn/i9PxakwCfjntAbFUVUsbHxTaKywVraSluV1bEmIlwh4yrq8MNpcpDZRlZWIiIpCQ4ZmaQSt9M4RKQaeFPcu4B6WtreJOT4yNB4jrt6cHF8DDuzrg5P5hKiN9wlaSTP5X/gBHgCWoX5BKzLC5CZ+au7zMuSW5Anq0t3J2cCHHK+/tIo2935FEBwIMiwJNUMRqyspA8MAATC4zUL4waj3NuDsdtbXBR6cXQqw9/xUR7ELAT8nJOBQuS655Nn5YGY24uiVyBm1IjH/Bdxndi3z9E8BYUAXU7zraDnEvzsTEwN6a3weP6Z4ZEQF3FEeEewMaiiwgDWF0SFoFn4P239DGB17yU2iS+lpOwR+hOGuql5rkBsdF1+OsfSE5HMaBO96YAAAAASUVORK5CYII=',
         'AE'    => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAo0lEQVRIS2Ncxs0t/vcP0x4GRgYdBiwgNtYAmzDlYoz/rzD8++3CuJid9zIuy0G20MwBIMOBjmBczMH7H8T2EZPA6ivBTKwBQ3kI3HsDNmPUAaMhMPhDgO3WNcpTPBYTemcuIi4XjDpgNARGQ2DAQ8BRiJsm5cCFCxeIKwdGHTAaArQPAUKN0h+faZILoIaeZ4Q2y/cBW8ZaWJvltHPAeaB9ngBB+oBdtS5TjgAAAABJRU5ErkJggg==',
         'SG'    => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAABmElEQVRIS2PcyMur/uLb1/2//v6TZKAjYGNmei7Bxe3IOJOZ6RkuyznFxBg4RUQYfn78yPD16VOqOw/kCMbJDAz/QSZ7qUpDLGBkZOCLimPgT0pnYBYUYng/sYfh87qVDBKzF4HlnoUHUMUh225DPIThAMGcQgbBvGKGPy9fMDyPDWP4/eAeWKHUyg0g5UAH+NPOAYwcHAzyxy8wMHHzMDyPj2D4fvwIg9SK9Sg+R+eT6xqsIcCmqs4gs3Uvw5/nzxge2Zth9Tm1QgKrA1jlFRhkdx9h+PfpI8NDC32G/3/+wD1ILZ/DDMSeBpiYGOT2HWdgkZJm+DB9EsO7/i6EA+iRBkC28fgGMoh1TWBgYGZm+LRkAcPb7laG/9+/kxvVOPXhzAUgHZzmVgz8KRkM7Nq6DP9//WR401TL8G3fbqo6Aq8DqGoTDsMGjwOaJs4Fl4TF6XH08Djcjt6ZwJIVVLSNOmA0BEZDYDQEBjwEemYtffbt+w+6tohhxSEXJ8cTxo37jqjfuv3gwPcfPyXoWRaDLFdVkXcBADb54CECOnhyAAAAAElFTkSuQmCC',
+        'NL'    => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAoElEQVRIS2OcwMAg/p+Bdc9/BgYdBjoCRgaGK4wMv10Y+xlYL9Pbcpg/wY7oY2AF2s/A4CfES0f/MzBsevcZbN+oA0ZDYOBDoGni3P/sbGwMOYkRdM0FvTMXQXLBqANGQ2A0BAY8BEQs28C1oZKmJV3LgXvXj0PKgVEHjIbAgIeAqGXbQDZKzzOKmbeK/2Ni3AfMEVr0zIfAFvF5xn//PQFO/XiCv4AWHQAAAABJRU5ErkJggg==',
     );
 
     /**
@@ -159,6 +162,7 @@ final class AmazonAutoLinks_Property {
             'TR' => 'TR - ' . __( 'Turkey', 'amazon-auto-links' ), // 3.9.1
             'AE' => 'AE - ' . __( 'United Arab Emirates', 'amazon-auto-links' ), // 3.9.1
             'SG' => 'SG - ' . __( 'Singapore', 'amazon-auto-links' ), // 3.10.1
+            'NL' => 'NL - ' . __( 'Netherlands', 'amazon-auto-links' ), // 4.1.0
         );
     }
 
@@ -749,7 +753,34 @@ final class AmazonAutoLinks_Property {
                     'ToolsAndHomeImprovement'   => __( 'Tools & Home Improvement', 'amazon-auto-links' ),
                     'ToysAndGames'              => __( 'Toys & Games', 'amazon-auto-links' ),
                     'VideoGames'                => __( 'Video Games', 'amazon-auto-links' ),
-                );                
+                );
+            case 'NL':
+                // @since 4.1.0
+                // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/singapore.html#search-index
+                return array(
+                    'All'	                           => 'Alle afdelingen',
+                    'Baby'                             => 'Babyproducten',
+                    'Beauty'	                       => 'Beauty en persoonlijke verzorging',
+                    'Computers' 	                   => 'Boeken',
+                    'Electronics'	                   => 'Elektronica',
+                    'EverythingElse'                   => 'Overig',
+                    'Fashion'                          => 'Kleding, schoenen en sieraden',
+                    'GardenAndOutdoor'                 => 'Tuin, terras en gazon',
+                    'GiftCards'                        => 'Cadeaubonnen',
+                    'GroceryAndGourmetFood'            => 'Levensmiddelen',
+                    'HealthPersonalCare'               => 'Gezondheid en persoonlijke verzorging',
+                    'HomeAndKitchen'                   => 'Wonen en keuken',
+                    'Industrial'                       => 'Zakelijk, industrie en wetenschap',
+                    'KindleStore'                      => 'Kindle Store',
+                    'MoviesAndTV'                      => 'Films en tv',
+                    'Music'                            => "Cd's en lp's",
+                    'MusicalInstruments'               => 'Muziekinstrumenten',
+                    'OfficeProducts'                   => 'Huisdierbenodigdheden',
+                    'Software'                         => 'Software',
+                    'SportsAndOutdoors'                => 'Sport en outdoor',
+                    'ToolsAndHomeImprovement'          => 'Klussen en gereedschap',
+                    'ToysAndGames'                     => 'Speelgoed en spellen',
+                );
             default:
             case 'US':
                 // @see https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html

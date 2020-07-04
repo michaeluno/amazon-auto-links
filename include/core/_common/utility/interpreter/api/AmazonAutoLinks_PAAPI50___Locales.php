@@ -37,6 +37,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'us-east-1',  // United States    webservices.amazon.com
         'CN'        => 'us-west-2',  // Not set by API
         'SG'        => 'us-west-2',  // 4.1.0
+        'NL'        => 'eu-west-1',  // 4.1.0
     );
     /**
      * @var array
@@ -58,6 +59,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'webservices.amazon.com',        // United States
 //        'CN'        => 'webservices.amazon.cn',         // Not set by API - not available in ScratchPad.
         'SG'        => 'webservices.amazon.sg',         // 4.1.0+
+        'NL'        => 'webservices.amazon.nl',         // 4.1.0+
     );
 
     public $aMarketPlaces = array(
@@ -77,6 +79,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'www.amazon.com',
         'CN'        => 'www.amazon.cn',
         'SG'        => 'www.amazon.sg',
+        'NL'        => 'www.amazon.nl',     // 4.1.0
     );
     static public $aDefaultLanguages = array(
         'AU'        => 'en_AU', // English - AUSTRALIA
@@ -95,6 +98,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'en_US', // English - UNITED STATES
         'CN'        => 'zh_CN', // not set by API
         'SG'        => 'en_SG', // English - SINGAPORE
+        'NL'        => 'nl_NL', // 4.1.0 Dutch - NETHERLANDS
     );
     static public $aDefaultCurrencies = array(
         'AU'        => 'AUD',   // Australian Dollar
@@ -113,6 +117,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'US'        => 'USD',   // United States Dolla
         'CN'        => 'CNY',   // Chinese Yen
         'SG'        => 'SGD',   // 4.1.0+ Singapore Dollar
+        'NL'        => 'EUR',   // 4.1.0+ Euro
     );
 
     static public function getDefaultLanguageByLocale( $sLocale ) {
@@ -203,9 +208,13 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
                 return array(
                     'zh_CN' => __( 'Chinese - CHINA', 'amazon-auto-links' ),
                 );
-            case 'SG':  // not set by API
+            case 'SG':
                 return array(
                     'en_SG' => __( 'English - SINGAPORE', 'amazon-auto-links' ),
+                );
+            case 'NL':
+                return array(
+                    'nl_NL' => __( 'Dutch - NETHERLANDS', 'amazon-auto-links' ),
                 );
             default:
             case 'US':
@@ -309,6 +318,10 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             case 'SG':
                 return array(
                     'SGD' => __( 'Singapore Dollar', 'amazon-auto-links' ),
+                );
+            case 'NL': // 4.1.0
+                return array(
+                    'EUR' => __( 'Euro', 'amazon-auto-links' ),
                 );
             default:
             case 'US':
