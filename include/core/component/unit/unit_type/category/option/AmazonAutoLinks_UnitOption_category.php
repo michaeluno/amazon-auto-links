@@ -16,6 +16,12 @@
 class AmazonAutoLinks_UnitOption_category extends AmazonAutoLinks_UnitOption_Base {
 
     /**
+     * Stores the unit type.
+     * @remark      Should be overridden in an extended class.
+     */
+    public $sUnitType = 'category';
+
+    /**
      * Stores the default structure and key-values of the unit.
      * @remark      Accessed from the base class constructor to construct a default option array.
      */

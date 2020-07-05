@@ -16,6 +16,11 @@
 class AmazonAutoLinks_UnitOption_embed extends AmazonAutoLinks_UnitOption_Base {
 
     /**
+     * Stores the unit type.
+     */
+    public $sUnitType = 'embed';
+
+    /**
      * Stores the default structure and key-values of the unit.
      * @remark      Accessed from the base class constructor to construct a default option array.
      */
