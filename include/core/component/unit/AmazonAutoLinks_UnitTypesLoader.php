@@ -62,6 +62,7 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
         new AmazonAutoLinks_UnitTypeLoader_contextual( $sScriptPath );
         new AmazonAutoLinks_UnitTypeLoader_embed( $sScriptPath ); // 4.0.0
         new AmazonAutoLinks_UnitTypeLoader_feed( $sScriptPath );  // 4.0.0
+        new AmazonAutoLinks_UnitTypeLoader_scratchpad_payload( $sScriptPath );  // 4.1.0
 
         // Unit specific events
         add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );

@@ -29,7 +29,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     public $sSearchTermKey = 'Keywords';
 
     /**
-     * The array element key name that containes `Items` element.
+     * The array element key name that contains `Items` element.
      * PA-API 5 operations such as `GetItems`, `SearchItems` have different key names such as `ItemsResult` abd `SearchResult`.
      * @var string
      * @since   3.9.0

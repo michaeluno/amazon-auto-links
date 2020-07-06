@@ -323,6 +323,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.1.0 =
+- Added the `ScratchPad Payload` unit type that allows custom API queries generated on [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/).
 - Added the ability to accept `*` for the `Product Filters` options to apply to everything.
 - Added support for `PhpZon` shortcodes.
 - Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
