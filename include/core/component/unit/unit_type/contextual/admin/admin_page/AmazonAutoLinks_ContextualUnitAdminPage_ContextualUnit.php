@@ -48,7 +48,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         );        
         
         // Add Fields
-        foreach( $this->_getFormFieldClasses() as $_sClassName ) {
+        foreach( $this->___getFormFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName;
             foreach( $_oFields->get() as $_aField ) {
                 $oFactory->addSettingFields(
@@ -63,7 +63,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
          * @since       3.5.0
          * @return      array
          */
-        private function _getFormFieldClasses() {
+        private function ___getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_ContextualUnit_Basic',
                 'AmazonAutoLinks_FormFields_ContextualUnit_Main',

@@ -65,6 +65,16 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_UnitType
             'high'    // priority - e.g. 'high', 'core', 'default' or 'low'
         );
 
+        new AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual(
+            null,
+            __( 'Advanced', 'amazon-auto-links' ), // meta box title
+            array(     // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'normal', // context (what kind of metabox this is)
+            'default'    // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
+
     }
 
     /**

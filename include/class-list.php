@@ -175,6 +175,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_FormFields_ContextualUnit_Basic"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Basic.php", 
     "AmazonAutoLinks_FormFields_ContextualUnit_Main"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php", 
     "AmazonAutoLinks_FormFields_ContextualUnit_Submit"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Submit.php", 
+    "AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Main_contextual"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_contextual.php", 
     "AmazonAutoLinks_UnitOption_contextual"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/option/AmazonAutoLinks_UnitOption_contextual.php", 
     "AmazonAutoLinks_ContextualUnit_Breadcrumb"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/contextual/output/AmazonAutoLinks_ContextualUnit_Breadcrumb.php", 

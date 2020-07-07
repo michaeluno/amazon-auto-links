@@ -22,7 +22,8 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
      * Sets up form fields.
      */ 
     public function setUp() {
-        foreach( $this->___getFieldClasses() as $_sClassName ) {
+
+        foreach( $this->_getFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName;
             foreach ( $_oFields->get() as $_aField ) {
                 if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
@@ -31,12 +32,13 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
                 $this->addSettingFields( $_aField );
             }
         }
+
     }
 
         /**
          * @return      array
          */
-        private function ___getFieldClasses() {
+        protected function _getFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_ContextualUnit_Basic',
                 'AmazonAutoLinks_FormFields_ContextualUnit_Main',
@@ -67,13 +69,6 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
             return $aInputs;
             
         }       
-
-        // Schedule pre-fetch for the unit if the options have been changed.
-        if ( $aInputs !== $aOldInputs ) {
-            AmazonAutoLinks_Event_Scheduler::prefetch(
-                AmazonAutoLinks_PluginUtility::getCurrentPostID()
-            );
-        }
 
         // Drop unset keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {

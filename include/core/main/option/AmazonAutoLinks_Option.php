@@ -459,6 +459,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     public function isAdvancedAllowed() {
         return false;
     }
+    public function isAdvancedContextualAllowed() {
+        return false;
+    }
     
     public function canExport() {
         return false;

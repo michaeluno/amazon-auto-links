@@ -102,3 +102,11 @@ textarea.read-only {
 span.warning {
     color: red;
 }
+
+
+/* Fixing radio box alignment */
+.amazon-auto-links-field-radio .amazon-auto-links-input-label-container {
+    padding-right: 1em;
+    display: inline-block;
+    width: 100%;
+}

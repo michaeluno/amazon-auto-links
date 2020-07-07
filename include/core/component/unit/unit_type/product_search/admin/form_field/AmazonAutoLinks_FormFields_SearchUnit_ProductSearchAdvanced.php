@@ -150,31 +150,35 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced extends Amazon
         );
         
         // Insert common field arguments.
-        $_bIsDisabled  = ! $_oOption->isAdvancedAllowed();
-        $_sOpeningTag  = $_bIsDisabled 
-            ? "<div class='upgrade-to-pro' style='margin:0; padding:0; display: inline-block;' title='" . __( 'Please consider upgrading to Pro to use this feature!', 'amazon-auto-links' ) . "'>" 
-            : "";
-        $_sClosingTag  = $_bIsDisabled 
-            ? "</div>" 
-            : "";        
-        foreach( $_aFields as &$_aField ) {
-            $_aField = array(
-                    'before_field' => $_sOpeningTag,
-                    'after_field'  => $_sClosingTag,
-                )
-                + $_aField
-                + array( 'attributes' => array() )
-            ;
-            $_aField[ 'attributes' ] = array(
-                'disabled' => $_bIsDisabled
-                    ? 'disabled'
-                    : null,
-                'class' => $_bIsDisabled 
-                    ? 'disabled read-only' 
-                    : '',
-            ) + $_aField[ 'attributes' ];
-            
-        }        
+
+        $_bIsDisabled = ! $_oOption->isAdvancedAllowed();
+        if ( $_bIsDisabled ) {
+            $_aFields = AmazonAutoLinks_Unit_Admin_Utility::getFieldsDisabled( $_aFields );
+        }
+//        $_sOpeningTag  = $_bIsDisabled
+//            ? "<div class='upgrade-to-pro' style='margin:0; padding:0; display: inline-block;' title='" . __( 'Please consider upgrading to Pro to use this feature!', 'amazon-auto-links' ) . "'>"
+//            : "";
+//        $_sClosingTag  = $_bIsDisabled
+//            ? "</div>"
+//            : "";
+//        foreach( $_aFields as &$_aField ) {
+//            $_aField = array(
+//                    'before_field' => $_sOpeningTag,
+//                    'after_field'  => $_sClosingTag,
+//                )
+//                + $_aField
+//                + array( 'attributes' => array() )
+//            ;
+//            $_aField[ 'attributes' ] = array(
+//                'disabled' => $_bIsDisabled
+//                    ? 'disabled'
+//                    : null,
+//                'class' => $_bIsDisabled
+//                    ? 'disabled read-only'
+//                    : '',
+//            ) + $_aField[ 'attributes' ];
+//
+//        }
         return $_aFields;
         
     }

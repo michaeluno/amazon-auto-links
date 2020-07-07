@@ -15,6 +15,32 @@
 class AmazonAutoLinks_Unit_Admin_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Makes the fields disabled.
+     * @since   4.1.0
+     * @retun   array
+     */
+    static public function getFieldsDisabled( array $aFields ) {
+
+        $_sOpeningTag  = "<div class='upgrade-to-pro' style='margin:0; padding:0; display: inline-block;' title='" . __( 'Please consider upgrading to Pro to use this feature!', 'amazon-auto-links' ) . "'>";
+        $_sClosingTag  = "</div>";
+        foreach( $aFields as &$_aField ) {
+            $_aField = array(
+                    'before_field' => $_sOpeningTag,
+                    'after_field'  => $_sClosingTag,
+                )
+                + $_aField
+                + array( 'attributes' => array() )
+            ;
+            $_aField[ 'attributes' ] = array(
+                'disabled'  => 'disabled',
+                'class'     => 'disabled read-only',
+            ) + $_aField[ 'attributes' ];
+        }
+        return $aFields;
+
+    }
+
+    /**
      * Redirect the user to the API connect page.
      *
      * @param $oFactory
