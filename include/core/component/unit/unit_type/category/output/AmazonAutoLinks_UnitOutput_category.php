@@ -57,12 +57,15 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         'similar_products'      => null,
 
         // 3.8.0
-        'category'     => null,
-        'feature'      => null,
-        'sales_rank'   => null,
+        'category'              => null,
+        'feature'               => null,
+        'sales_rank'            => null,
 
         // 3.9.0
-        'is_prime'         => null,
+        'is_prime'              => null,
+
+        // 4.1.0
+        'author'                => null,
     );
     
     

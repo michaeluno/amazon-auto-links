@@ -78,6 +78,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 "<!-- %_review_rate% -->",      // 3.9.2
                 "<!-- %_discount_rate% -->",    // 3.9.2
                 "%image_size%",     // 4.1.0
+                "%author%",         // 4.1.0
             ),
             array(
                 esc_url( $aProduct[ 'product_url' ] ),
@@ -102,7 +103,8 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $this->getPrimeMark( $aProduct ),  // 3.9.0+
                 '', // 3.9.2
                 '', // 3.9.2
-                $this->___oUnitOutput->oUnitOption->get( 'image_size' ), // 4.1.0
+                $this->___oUnitOutput->oUnitOption->get( 'image_size' ),        // 4.1.0
+                isset( $aProduct[ 'author' ] ) ? $aProduct[ 'author' ] : '',    // 4.1.0
             ),
             apply_filters(
                 'aal_filter_unit_item_format',
@@ -111,7 +113,6 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 $this->___oUnitOutput->oUnitOption->get()
             )
         );
-
         return apply_filters(
             'aal_filter_unit_product_formatted_html',    // filter hook name
             $_sOutput, // 1. filtering value

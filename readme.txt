@@ -327,6 +327,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the ability to accept `*` for the `Product Filters` options to apply to everything.
 - Added support for `PhpZon` shortcodes.
 - Added the `Show Errors` unit option under the `Common Advanced` section that allows the user to decide whether to display output errors.
+- Added the `%author%` tag that displays product authors for the `Item Format` unit option.
 - Added the `%image_size%` Item Format option tag.
 - Added new translated items for the Japanese translation.
 - Added the Netherlands locale for search and category unit types.
