@@ -319,10 +319,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add an gray button.
 - @todo add a button with a background image.
 - @todo add a clone action link to buttons.
+- @todo add the ability to perform HTTP requests with proxies.
 
 == Changelog ==
 
-= 4.1.0 =
+= 4.1.0 - 07/11/2020 =
 - Added the `ScratchPad Payload` unit type that allows custom API queries generated on [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/).
 - Added the ability to accept `*` for the `Product Filters` options to apply to everything.
 - Added support for `PhpZon` shortcodes.
@@ -337,7 +338,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Renewed the base translation file.
 - Fixed a bug that activated templates which are no longer exist were still loaded and caused PHP warnings in the template listing screen.
 
-= 4.0.6 – 06/26/20 =
+= 4.0.6 – 06/26/2020 =
 - Fixed a bug that the Item look-up unit creation screen was unreachable.
 - Fixed a bug that caused an undefined index warning when a custom template is unexpectedly removed.
 
