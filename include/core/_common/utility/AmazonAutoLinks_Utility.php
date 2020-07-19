@@ -74,12 +74,15 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         if ( is_string( $asHeaderResponse ) ) {
             $_sContentType = $asHeaderResponse;
         } 
-        // It shuld be an array then.
+        // It should be an array then.
         else if ( isset( $asHeaderResponse[ 'content-type' ] ) ) {
             $_sContentType = $asHeaderResponse[ 'content-type' ];
         } 
         else {
             foreach( $asHeaderResponse as $_iIndex => $_sHeaderElement ) {
+                if ( ! is_scalar( $_sHeaderElement ) ) {    // 4.2.0 - with a proxy, there is a case that this element is an array
+                    continue;
+                }
                 if ( false !== stripos( $_sHeaderElement, 'charset=' ) ) {
                     $_sContentType = $asHeaderResponse[ $_iIndex ];
                 }
