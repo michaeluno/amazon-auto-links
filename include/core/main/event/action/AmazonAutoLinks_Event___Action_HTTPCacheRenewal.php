@@ -46,7 +46,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     }
 
     /**
-     * Checks whether the given request type is accepted for caching.
+     * Checks whether the given request type is accepted for background caching.
      * @since       3.5.0
      * @return      boolean
      */

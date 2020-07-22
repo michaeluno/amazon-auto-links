@@ -38,7 +38,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
             $this->sPageSlug
         );
 
-        $this->_doPageSettings( $oFactory );
+        $this->___doPageSettings( $oFactory );
         
     }
         /**
@@ -46,7 +46,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
          * @since       3
          * @return      void
          */
-        private function _doPageSettings( $oFactory ) {
+        private function ___doPageSettings( $oFactory ) {
                         
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $oFactory->setInPageTabTag( 'h2' );                

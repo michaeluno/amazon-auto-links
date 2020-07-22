@@ -246,6 +246,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // Tools - Unit option converter. This component has an event handler so needs to be loaded in the front-end as well.
             new AmazonAutoLinks_UnitOptionConverterLoader;
 
+            /// 4.2.0
+            new AmazonAutoLinks_Proxy_Loader;
+
             // 4.1.0
             new AmazonAutoLinks_ThirdPartySupportLoader;
             

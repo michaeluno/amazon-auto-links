@@ -82,7 +82,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 ),
             ),
             array(
-                'title'     => __( 'Plugin Options', 'amazon-auto-links' ),
+                'title'     => __( 'General Options', 'amazon-auto-links' ),
                 'field_id'  => 'plugin_options',
                 'type'      => 'system',
                 'data'      => array(
@@ -90,6 +90,19 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                                    'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
                                    'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
                 ) + $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], array() ) ),
+                'attributes' => array(
+                    'style' => 'height: 300px;',
+                ),
+            ),
+            array(
+                'title'     => __( 'Tools Options', 'amazon-auto-links' ),
+                'field_id'  => 'tools_options',
+                'type'      => 'system',
+                'data'      => array(
+                                   'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+                                   'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
+                                   'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
+                ) + $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ], array() ) ),
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),

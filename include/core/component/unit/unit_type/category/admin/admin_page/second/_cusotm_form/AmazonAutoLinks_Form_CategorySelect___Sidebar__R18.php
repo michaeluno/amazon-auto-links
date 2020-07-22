@@ -16,7 +16,11 @@
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar__R18 extends AmazonAutoLinks_Form_CategorySelect___Sidebar {
 
-    // for redirected pages, `AmazonAutoLinks_HTTPClient_FileGetContents` needed to be used but it seems to work fine with `AmazonAutoLinks_HTTPClient`.
+    /**
+     * For redirected pages, `AmazonAutoLinks_HTTPClient_FileGetContents` needed to be used but it seems to work fine with `AmazonAutoLinks_HTTPClient`.
+     * @var string
+     * @deprecated 4.2.0
+     */
     protected $_sHTTPClientClass = 'AmazonAutoLinks_HTTPClient';
 
 

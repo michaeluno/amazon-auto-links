@@ -170,19 +170,19 @@ final class AmazonAutoLinks_Property {
      * @var array
      */
     static public $aCategoryBlackCurtainURLs = array(
-        'CA'    => 'https://www.amazon.ca/gp/product/black-curtain-redirect.html',
-        'CN'    => 'https://www.amazon.cn/gp/product/black-curtain-redirect.html',
-        'FR'    => 'https://www.amazon.fr/gp/product/black-curtain-redirect.html',
-        'DE'    => 'https://www.amazon.de/gp/product/black-curtain-redirect.html',
-        'IT'    => 'https://www.amazon.it/gp/product/black-curtain-redirect.html',
+        'CA'    => '',
+        'CN'    => '',
+        'FR'    => '',
+        'DE'    => '',
+        'IT'    => '',
         'JP'    => 'https://www.amazon.co.jp/gp/product/black-curtain-redirect.html',
-        'UK'    => 'https://www.amazon.co.uk/gp/product/black-curtain-redirect.html',
-        'ES'    => 'https://www.amazon.es/gp/product/black-curtain-redirect.html',
-        'US'    => 'https://www.amazon.com/gp/product/black-curtain-redirect.html',
-        'IN'    => 'https://www.amazon.in/gp/product/black-curtain-redirect.html',
-        'BR'    => 'https://www.amazon.com.br/gp/product/black-curtain-redirect.html',
-        'MX'    => 'https://www.amazon.com.mx/gp/product/black-curtain-redirect.html',
-        'AU'    => 'https://www.amazon.com.au/gp/product/black-curtain-redirect.html',   // 3.5.5+
+        'UK'    => '',
+        'ES'    => '',
+        'US'    => '',
+        'IN'    => '',
+        'BR'    => '',
+        'MX'    => '',
+        'AU'    => '',
     );
 
     static public $aNoImageAvailable = array(    // the domain can be g-ecx.images-amazon.com

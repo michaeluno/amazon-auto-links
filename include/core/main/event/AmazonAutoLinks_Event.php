@@ -127,8 +127,10 @@ class AmazonAutoLinks_Event {
              * @since       4.0.0
              */
             private function ___handleNormalActions() {
-                new AmazonAutoLinks_Event_ErrorLog;
+                new AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache;
                 new AmazonAutoLinks_Event_HTTPClientArguments;
+                new AmazonAutoLinks_Event_ErrorLog_General;  // 4.2.0
+                new AmazonAutoLinks_Event_Event_Log_HTTPRequestErrors;  // 4.2.0
             }
     
 }

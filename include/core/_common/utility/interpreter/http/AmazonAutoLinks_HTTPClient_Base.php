@@ -79,6 +79,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         'constructor_parameters' => array(),
         'api_parameters'         => array(),
         'compress_cache'         => false,    // 4.0.0+ (boolean) whether to compress cache data
+        'proxy'                  => null,     // 4.2.0
+        'attempts'               => 0,     // 4.2.0  - for multiple attempts for requests, especially for cases with proxies.
     );
 
     /**
@@ -90,7 +92,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         $this->iCacheDuration = $iCacheDuration;
         $this->sSiteCharSet   = get_bloginfo( 'charset' );
         $this->sRequestType   = $sRequestType;
-        $this->aArguments     = $this->_getFormattedArguments( $aArguments );
+        $this->aArguments     = $this->_getFormattedArguments( $aArguments, $asURLs );
         $this->aURLs          = $this->_getFormattedURLContainer( 
             $this->getAsArray( $asURLs ) 
         );
@@ -99,14 +101,11 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         /**
          * @return      array
          */
-        private function _getFormattedArguments( $aArguments ) {
+        private function _getFormattedArguments( $aArguments, $asURLs ) {
             $aArguments     = null === $aArguments
                 ? $this->aArguments
                 : $this->getAsArray( $aArguments ) + $this->aArguments;
             $aArguments     = $aArguments + $this->aCustomArguments;
-
-            // @deprecated 3.7.4 Use the WordPress default user agent.
-            // $aArguments[ 'user-agent' ] = 'Amazon Auto Links/' . AmazonAutoLinks_Registry::VERSION . '; ' . get_bloginfo( 'url' );
 
             // WordPress v3.7 or later, it should be true.
             $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
@@ -117,7 +116,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $this->aArguments + $this->aCustomArguments    // model to be compared with
             );
 
-            $aArguments = apply_filters( 'aal_filter_http_request_arguments', $aArguments, $this->sRequestType );
+            // 4.2.0
+            $aArguments[ 'user-agent' ] = $aArguments[ 'user-agent' ]
+                ? $aArguments[ 'user-agent' ]
+                : 'WordPress/' . $GLOBALS[ 'wp_version' ];
+
+            $aArguments = apply_filters(
+                'aal_filter_http_request_arguments',
+                $aArguments,
+                $this->sRequestType,
+                $asURLs     // 4.2.0
+            );
 
             // 4.0.0+ If the gzcompress function is not available, disable the argument
             if ( ! function_exists( 'gzcompress' )  ) {
@@ -170,25 +179,29 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
      * @return      string|array
      */
     public function get() {
-        
+
+        $_bRaw       = ( boolean ) $this->aArguments[ 'raw' ];
         $_aData      = array();
         foreach( $this->getResponses() as $_sURL => $_aoResponse ) {
 
-            $_asHTTPResponse    = $this->_getResponseItem( $_aoResponse );
+            $_sHTTPBody         = $this->_getResponseBody( $_aoResponse );
             $_sCharSetFrom      = $this->_getCharacterSet( $_aoResponse );
             $_sCharSetTo        = $this->sSiteCharSet;
 
             // Encode the document from the source character set to the site character set.
-            if ( $_sCharSetFrom && ( strtoupper( $_sCharSetTo ) <> strtoupper( $_sCharSetFrom ) ) ) {
-                $_asHTTPResponse = $this->convertCharacterEncoding(
-                    $_asHTTPResponse,
+            if ( $_sCharSetFrom && ( strtoupper( $_sCharSetTo ) <> strtoupper( $_sCharSetFrom ) ) && ! $_bRaw ) {
+                $_sHTTPBody = $this->convertCharacterEncoding(
+                    $_sHTTPBody,
                     $_sCharSetTo,  // to
                     $_sCharSetFrom, // from
                     false // no html-entities conversion
                 );
             }
-            $_aData[ $_sURL ] = $_asHTTPResponse;
-            
+
+            $_aData[ $_sURL ] = $_bRaw
+                ? $_aoResponse
+                : $_sHTTPBody;
+
             if ( $this->bIsSingle ) {
                 return $_aData[ $_sURL ];
             }
@@ -197,18 +210,15 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         
     }
         /**
-         * @return      string|array
+         * @return      string
+         * @since       unknown
+         * @since       4.2.0   Changed not to return raw.
          */
-        private function _getResponseItem( $aoResponse ) {
-
-            if ( $this->aArguments[ 'raw' ] ) {
-                return $aoResponse;
-            }
+        private function _getResponseBody( $aoResponse ) {
 
             if ( is_wp_error( $aoResponse ) ) {
                 return $aoResponse->get_error_message();
             }
-
             return wp_remote_retrieve_body( $aoResponse );
 
         }
@@ -311,7 +321,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 }
 
                 /**
-                 * Filters - this allows external components to modify the remained time,
+                 * Filters - this allows other components to modify the remained time,
                  * which can be used to trick the below check and return the stored data anyway.
                  * So the cache renewal event can be scheduled in the background.
                  */
@@ -341,7 +351,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                                 
                 // Perform an HTTP request.
                 $_aData[ $_sURL ] = $this->_getHTTPResponse( $_sURL, $aArguments );
-                $this->___setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration );
+                $this->___setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration, $aArguments );
+
             }
             return $_aData;
             
@@ -361,21 +372,180 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
         /**
          * 
-         * @remark      this does not set cache
+         * @param   string  $sURL
+         * @param   array   $aArguments
+         * @return  array|WP_Error The response or WP_Error on failure.
          */
         protected function _getHTTPResponse( $sURL, array $aArguments ) {
+
             do_action( 'aal_action_http_remote_get', $sURL, $aArguments, $this->sRequestType ); // 3.5.0
-            return function_exists( 'wp_safe_remote_get' )
-                ? wp_safe_remote_get( $sURL, $aArguments )
-                : wp_remote_get( $sURL, $aArguments );
+            $_oaResult = $this->___getHTTPResponse( $sURL, $aArguments );
+
+            /**
+             * Allows the response to be modified, mainly for multiple attempts with different proxies.
+             *
+             * @since   4.2.0
+             */
+            $_oaResult = apply_filters( 'aal_filter_http_request_response', $_oaResult, $sURL, $aArguments, $this->sRequestType, $this->iCacheDuration );
+
+            return $_oaResult;
+
         }
+            /**
+             * @param $sURL
+             * @param array $aArguments
+             *
+             * @return array|WP_Error
+             * @since   4.2.0
+             */
+            private function ___getHTTPResponse( $sURL, array $aArguments ) {
+
+                // If the proxy option is set, do with Curl.
+                if ( isset( $aArguments[ 'proxy' ] ) && $aArguments[ 'proxy' ] ) {
+                    $_aoResult = $this->___getHTTPResponseByCurl( $sURL, $aArguments );
+                    return $_aoResult;
+                }
+                return function_exists( 'wp_safe_remote_get' )
+                    ? wp_safe_remote_get( $sURL, $aArguments )
+                    : wp_remote_get( $sURL, $aArguments );
+
+            }
+
+
+
+            /**
+             * @param $sURL
+             * @param array $aArguments
+             * @return array|WP_Error The response or WP_Error on failure.
+             */
+            private function ___getHTTPResponseByCurl( $sURL, array $aArguments, $sMethod='GET', $sPostFields=null  ) {
+
+                $this->___aCurlHeader = array();
+                $_oCurl            = curl_init();
+
+                // Is proxy set?
+                $_aProxy   = $this->getElementAsArray( $aArguments, array( 'proxy' ) );
+                $_bProxySet = ! empty( $_aProxy ) && isset( $_aProxy[ 'host' ] );
+
+                // Curl settings
+                $_sUserAgent   = $this->getElement( $aArguments, 'user-agent' );
+                if ( ! empty( $_sUserAgent ) ) {
+                    curl_setopt( $_oCurl, CURLOPT_USERAGENT, $_sUserAgent );
+                }
+
+                $_iTimeout     = $this->getElement( $aArguments, 'timeout' );
+                if ( ! empty( $_iTimeout ) ) {
+                    curl_setopt( $_oCurl, CURLOPT_TIMEOUT, $_iTimeout );
+                }
+                curl_setopt( $_oCurl, CURLOPT_CONNECTTIMEOUT, 30 );
+
+                $_bSSLVerify   = ( boolean ) $this->getElement( $aArguments, 'sslverify' );
+                curl_setopt( $_oCurl, CURLOPT_SSL_VERIFYPEER, $_bSSLVerify );
+
+                curl_setopt( $_oCurl, CURLOPT_RETURNTRANSFER, true );
+
+                /// Headers
+                $_aHeaders  = $this->getElementAsArray( $aArguments, array( 'headers' ) );
+                $_aHeaders[] = 'Content-Type: text/html; charset=' . get_bloginfo( 'charset' );;
+                $_aHeaders   = array_unique( $_aHeaders );
+                curl_setopt( $_oCurl, CURLOPT_HTTPHEADER, $_aHeaders );
+                curl_setopt( $_oCurl, CURLOPT_HEADERFUNCTION, array( $this, 'replyToGetCurlHeader' ) );
+                curl_setopt( $_oCurl, CURLOPT_HEADER, false ); // whether to output the header contents in the response body
+
+                // Encoding
+                curl_setopt( $_oCurl, CURLOPT_ENCODING, 'identity' );
+
+                if ( $_bProxySet ) {
+
+                    $_aProxy = $_aProxy + array(
+                        'host'      => null,
+                        'port'      => null,
+                        'username'  => null,
+                        'password'  => null,
+                    );
+                    curl_setopt( $_oCurl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP );
+                    curl_setopt( $_oCurl, CURLOPT_PROXY, $_aProxy[ 'host' ] );
+                    if ( $_aProxy[ 'port' ] ) {
+                        curl_setopt( $_oCurl, CURLOPT_PROXYPORT, $_aProxy[ 'port' ] );
+                    }
+
+                    if ( $_aProxy[ 'username' ] && $_aProxy[ 'password' ] ) {
+                        curl_setopt( $_oCurl, CURLOPT_PROXYAUTH, CURLAUTH_ANY );
+                        curl_setopt( $_oCurl, CURLOPT_PROXYUSERPWD, $_aProxy[ 'username' ] . ':' . $_aProxy[ 'password' ] );
+                    }
+                    
+                }
+
+                switch( $sMethod ) {
+                    case 'POST':
+                        curl_setopt( $_oCurl, CURLOPT_POST, true );
+                        if ( ! empty( $sPostFields ) ) {
+                            curl_setopt( $_oCurl, CURLOPT_POSTFIELDS, $sPostFields );
+                        }
+                    break;
+                    case 'DELETE':
+                        curl_setopt( $_oCurl, CURLOPT_CUSTOMREQUEST, 'DELETE' );
+                        if ( ! empty( $sPostFields )) {
+                            $sURL = "{$sURL}?{$sPostFields}";
+                        }
+                    break;
+                }
+
+                curl_setopt( $_oCurl, CURLOPT_URL, $sURL );
+                $_bsResponse      = curl_exec( $_oCurl );
+                $_sHTTPCode       = curl_getinfo( $_oCurl, CURLINFO_HTTP_CODE );
+                $_aHTTPHeaders    = ( array ) curl_getinfo( $_oCurl ) + $this->___aCurlHeader;
+                curl_close( $_oCurl );
+
+                // Error handling
+                if ( ! $_bsResponse ) {
+                    $_aErrorData = array( 'url' => $sURL ) + $_aProxy;
+                    $_sHTTPCode  = $_sHTTPCode ? $_sHTTPCode : 'CURL_CONNECTION_FAILURE';
+                    return new WP_Error( $_sHTTPCode, sprintf( 'The cURL connection failed with a proxy: %1$s.', $_aProxy[ 'raw' ] ), $_aErrorData );
+                }
+                $_iResponseCode   = ( integer ) $_sHTTPCode;
+                if ( $_iResponseCode >= 400 ) {
+                    $_aErrorData = array( 'url' => $sURL ) + $_aProxy;
+                    return new WP_Error( $_iResponseCode, sprintf( 'The cURL response returned an error with a proxy: %1$s.', $_aProxy[ 'raw' ] ), $_aErrorData );
+                }
+
+                // Format the response to be compatible with wp_remote_get().
+                return array(
+                    'headers'       => $_aHTTPHeaders,
+                    'body'          => $_bsResponse,
+                    'response'      => array(
+                        'code'    => $_sHTTPCode,
+                        'message' => false,
+                    ),
+                    'cookies'       => array(),
+                    'http_response' => null,
+                );                
+
+            }
+
+            private $___aCurlHeader = array();
+            /**
+             * Get the header info to store.
+             * @param   resourse    $ch
+             * @param   string      $sHeader
+             */
+            public function replyToGetCurlHeader( $ch, $sHeader ) {
+                $_iPos = strpos( $sHeader, ':' );
+                if ( ! empty( $_iPos ) ) {
+                    $_sKey   = str_replace('-', '_', strtolower( substr( $sHeader, 0, $_iPos ) ) );
+                    $_sValue = trim( substr( $sHeader, $_iPos + 2 ) );
+                    $this->___aCurlHeader[ $_sKey ] = $_sValue;
+                }
+                return strlen( $sHeader );
+            }    
+            
         /**
          * 
          * @return      string
          */
-        protected function _getCharacterSet( $aHTTPResponseBody ) {
+        protected function _getCharacterSet( $aoHTTPResponseBody ) {
             return $this->getCharacterSetFromResponseHeader(
-                wp_remote_retrieve_headers( $aHTTPResponseBody ) 
+                wp_remote_retrieve_headers( $aoHTTPResponseBody )
             );
         }
         /**
@@ -384,16 +554,17 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
          * @remark      To renew its cache, use the `deleteCache()` method prior to call the `get()` method.
          * @remark      The cache duration here is for the value set to the database `expiration_time` column value.
          * However, the default behavior of this plugin suppresses the set value in the database with the passed cache duration argument value.
-         * @return      boolean     
          * @todo        Examine the return value as it is not tested.
          * @since       3.7.5   Added the `aal_filter_http_request_set_cache` filter so that third parties can modify set cache contents.
          * @since       3.7.7   deprecated the `aal_filter_http_request_set_cache` filter and introduced `aal_filter_http_request_set_cache_{request type}`.
+         * @since       4.2.0   Removed the return value as it is not used anywhere
+         * @since       4.2.0   Revived the `aal_filter_http_request_set_cache` filter.
          */
-        private function ___setCache( $sURL, $mData, $iCacheDuration=86400 ) {
+        private function ___setCache( $sURL, $mData, $iCacheDuration=86400, $aArguments=array() ) {
             
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
-            $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+
             $mData           = apply_filters(
                 'aal_filter_http_request_set_cache_' . $this->sRequestType,
                 $mData,
@@ -401,6 +572,16 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $_sCharSet,
                 $iCacheDuration,
                 $sURL   // 3.9.0
+            );
+            // 4.2.0 Applies to all request types. This is for requests with proxies and they are failed
+            $mData           = apply_filters(
+                'aal_filter_http_request_set_cache',
+                $mData,
+                $_sCacheName,
+                $_sCharSet,
+                $iCacheDuration,
+                $sURL,
+                $aArguments
             );
             // 3.9.0 - gives a chance to change the cache duration, depending on the cached data content, checked in the above filter hook callbacks
             // this is useful when an error is returned which should not be kept so long
@@ -411,7 +592,14 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $sURL,
                 $this->sRequestType // 3.9.2
             );
+
+            // 4.2.0 - if the cache duration is 0, do not set a cache. This is important when a request is made with a proxy and it has an errors.
+            if ( ! $iCacheDuration ) {
+                return;
+            }
+
             $mData           = $this->___getCacheCompressed( $mData );  // 3.7.6+
+            $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
             $_bResult        = $_oCacheTable->setCache(
                 $_sCacheName, // name
                 $mData,
@@ -421,12 +609,12 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                     'type'        => $this->sRequestType,
                     'charset'     => $_sCharSet,
                 )
-            );        
+            );
             $this->sLastCharSet = $_sCharSet;
             if ( $_bResult ) {
                 do_action( 'aal_action_set_http_request_cache', $_sCacheName, $sURL, $mData, $iCacheDuration, $_sCharSet );
             }
-            return $_bResult;
+
             
         }
             /**

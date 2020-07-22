@@ -18,7 +18,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-    const VERSION        = '4.1.0';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION        = '4.2.0b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME           = 'Amazon Auto Links';
     const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -108,7 +108,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'active_auto_inserts'   => 'amazon_auto_links_active_auto_inserts',
         'active_buttons'        => 'amazon_auto_links_active_buttons',
         
-        // 3.3.0+ The Tools page - to remember last inputs
+        // 3.3.0+ The Tools page
         'tools'                 => 'amazon_auto_links_tools',
         
         // 3.2.0+

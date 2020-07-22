@@ -95,8 +95,13 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
         delete_option(
             AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ]
         );
+
+        // Tools
+        // Last inputs
+        delete_option(
+            AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ]
+        );
     
     }
-    
    
 }

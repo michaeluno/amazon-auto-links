@@ -14,7 +14,10 @@
  * @sicne       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUtility {
-    
+
+    /**
+     * @deprecated 4.2.0
+     */
     protected $_sHTTPClientClass = 'AmazonAutoLinks_HTTPClient';
 
     protected $_aElements = array(
@@ -60,7 +63,6 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                     false // detect encoding
                 );
 
-                // $this->_setElementsBy( "#zg_browseRoot", $_oDoc, $sPageURL, $sLocale );
                 // The existing page layout.
                 $this->_aElements = $this->___getElements_zg_browseRoot( $_oDoc, $sPageURL, $sLocale );
                 return;
@@ -73,13 +75,20 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
         }
             /**
              * Fetches page HTML source contents.
-             * @param $sPageURL
+             * @param string $sPageURL
              * @sicne   3.9.1
+             * @return string
              */
             private function ___getPageHTML( $sPageURL ) {
-                $_sClassName = $this->_sHTTPClientClass;
-                $_oHTTP = new $_sClassName( $sPageURL ); // has caching ability
-                return trim( $_oHTTP->get() );
+                // $_sClassName = $this->_sHTTPClientClass; // @deprecated 4.2.0
+                $_oHTTP = new AmazonAutoLinks_HTTPClient(
+                    $sPageURL,
+                    86400,
+                    array(
+                        'timeout'   => 10,
+                    )
+                );
+                return $_oHTTP->get();
             }
             /**
              * Called when the default sidebar container element does not exist.
@@ -100,6 +109,18 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                 }
 
                 // Try with a R18 confirmation redirect
+                /// 4.2.0 if the redirect page is not supported, return an error
+                if ( ! AmazonAutoLinks_Property::$aCategoryBlackCurtainURLs[ $sLocale ] ) {
+                    $this->_aElements = array(
+                        'PageURL'      => $sPageURL,
+                        'RSSURL'       => '',
+                        'CategoryList' => '',
+                        'Breadcrumb'   => $sLocale, // at the moment, this page layout is only used in the top root category (All Category). So just show the locale.
+                        'Error'        => __( 'Failed to load a category list.', 'amazon-auto-links' ),
+                    );
+                    return;
+                }
+
                 $_sRedirectURL = AmazonAutoLinks_Property::$aCategoryBlackCurtainURLs[ $sLocale ]
                     . '?redirect=true&redirectUrl=' . urlencode( $sPageURL );
                 $_oSidebarR18  = new AmazonAutoLinks_Form_CategorySelect___Sidebar__R18( $_sRedirectURL, $sLocale );
@@ -111,13 +132,13 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
 
                     /**
                      * Extracts and set sidebar elements.
-                     * @param   string  DOMDocument $oDoc
+                     * @param   DOMDocument $oDoc
                      * @param   string  $sPageURL
                      * @param   string  $sLocale
-                     * @param   string  $sRSSURL
                      * @since   3.5.7
                      * @since   3.9.1   Deprecated the use of PHP Simple DOM Parser
                      * @return  array
+                     * @throws  Exception
                      */
                     private function ___getElements_zg_browseRoot( DOMDocument $oDoc, $sPageURL, $sLocale ) {
 
