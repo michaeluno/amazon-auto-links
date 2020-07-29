@@ -4,8 +4,12 @@
     var bProcessing   = false;
     var sCurrentURL   = '';
     var bWarnedAddingCategories = false;
+    var oSelectArrow;
+    var bShowArrows   = true;
 
     $( document ).ready( function() {
+
+        handleGuidingArrows();
 
         // First retrieve the category list and hook the click event on the category list
         handleCategoryList( aalCategorySelection.rootURL );
@@ -20,6 +24,63 @@
 
     // Unit preview event
     $( document ).on( "aalUnitPreview", {}, renderUnitPreview );
+
+    function handleGuidingArrows() {
+        bShowArrows  = parseInt( aalCategorySelection.postID ) ? false : true;
+        oSelectArrow = $( '#arrow-select' );
+        oSelectArrow.detach(); // this arrow element is inside the div element overridden by the Ajax response so evacuate.
+    }
+
+        /**
+         * Called after the main dynamic elements (breadcrumb, category list, category preview) are rendered.
+         * There are three arrows:
+         * 1. Create
+         * 2. Select
+         * 3. Add
+         * @private
+         */
+        function ___setArrows() {
+
+            // For the edit screen, do not show them.
+            if ( ! bShowArrows ) {
+                return;
+            }
+
+            // If any categories are already added
+            var _bCategoriesAdded = $( '#selected-categories' ).find( 'input[tupe=checkbox]' ).length ? true : false;
+
+            // 1: the create arrow
+            if ( _bCategoriesAdded ) {
+
+                // 1: the create arrow
+                $( '#arrow-create' ).show();
+
+                // 2: the select arrow
+                oSelectArrow.hide();
+
+                // 3: the add arrow
+                $( '#arrow-add' ).show();
+
+                return;
+            }
+
+            // At this point, no categories are added yet.
+
+            // For the root category (when the page is loaded)
+            if ( aalCategorySelection.rootURL === sCurrentURL ) {
+                // 2: the select arrow
+                $( '#category-list' ).prepend( oSelectArrow.show() );
+
+                // 3: the add arrow
+                $( '#arrow-add' ).hide();
+                return;
+            }
+
+            // At this point, it is a sub-category.
+            oSelectArrow.hide();
+            $( '#arrow-add' ).show();
+
+        }
 
     function handleButton_RemoveChecked() {
         $( '#button-remove-checked' ).click( function( event ) {
@@ -51,8 +112,17 @@
 
             // Case: no category exists so the Create/Save button should be disabled
             if ( ! $( '#selected-categories' ).find( 'input[type=checkbox]' ).length ) {
+
                 $( '#button-save-unit' ).attr( 'disabled', 'disabled' );
+
+                // The guide arrow may need to appear or disappear.
+                if ( bShowArrows ) {
+                    $( '#arrow-create' ).hide();
+                    $( '#arrow-add' ).show();
+                }
+
             }
+
 
         }
 
@@ -149,6 +219,12 @@
             // Enable the Remove Checkbox and Create buttons
             $( '#button-remove-checked' ).removeAttr( 'disabled' );
             $( '#button-save-unit' ).removeAttr( 'disabled' );
+
+            // Guiding arrow: Create
+            if ( bShowArrows ) {
+                $( '#arrow-create' ).show();
+                $( '#arrow-add, #arrow-select' ).hide();
+            }
 
         }
 
@@ -307,6 +383,9 @@
                 $( '#button-add-excluding-category' ).removeAttr( 'disabled' );
                 return false;
             } );
+
+            // Handle guiding arrow visibilities.
+            ___setArrows();
 
         }
             /**
