@@ -227,34 +227,10 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          * @since   3.8.12
          */
         private function ___getCacheCleanupScheduledTime() {
-
-            $_oOption = AmazonAutoLinks_Option::getInstance();
-            $_biNextScheduledCheck = wp_next_scheduled( 'aal_action_delete_expired_caches', array() );
-            $_iLastRunTime  = ( integer ) $_oOption->get( array( 'cache', 'cache_removal_event_last_run_time' ) );
-            $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
-            $_sLastRunTime .= $_iLastRunTime
-                ? $this->getSiteReadableDate( $_iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
-                : __( 'n/a', 'amazon-auto-links' );
-            $_sOutput = false === $_biNextScheduledCheck
-                ? "<div>"
-                        . "<p class='field-error'>* "
-                            . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
-                            . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
-                            . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
-                        . "</p>"
-                        . "<p>" . $_sLastRunTime . "</p>"
-                    . "</div>"
-                : "<div>"
-                        . "<p>"
-                            . sprintf(
-                                __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
-                                $this->getSiteReadableDate( $_biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
-                            )
-                        . "</p>"
-                        . "<p>" . $_sLastRunTime . "</p>"
-                    . "</div>";
-            return $_sOutput;
-
+            return $this->getIntervalScheduleInfo(
+                wp_next_scheduled( 'aal_action_delete_expired_caches', array() ),
+                ( integer ) AmazonAutoLinks_Option::getInstance()->get( array( 'cache', 'cache_removal_event_last_run_time' ) )
+            );
         }
     
     /**

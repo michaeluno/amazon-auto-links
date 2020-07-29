@@ -36,9 +36,8 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
 
 
         // Check if the proxy option is enabled
-        $_aToolsOptions  = $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ], array() ) );
-        $_bEnabled       = $this->getElement( $_aToolsOptions, array( 'proxies', 'enable' ), false );
-        if ( ! $_bEnabled ) {
+        $_oToolOption    = AmazonAutoLinks_ToolOption::getInstance();
+        if ( ! $_oToolOption->get( array( 'proxies', 'enable' ), false ) ) {
             return;
         }
 
@@ -46,6 +45,11 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts;
         new AmazonAutoLinks_Proxy_Event_Action_UnusableProxy;
         new AmazonAutoLinks_Proxy_Event_Filter_PreventCaching;
+
+        if ( ! $_oToolOption->get( array( 'proxies', 'automatic_updates' ), false ) ) {
+            return;
+        }
+        new AmazonAutoLinks_Proxy_Event_WPCronAction_ProxyUpdate;
 
     }
 

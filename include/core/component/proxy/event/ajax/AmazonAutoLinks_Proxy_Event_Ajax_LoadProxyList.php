@@ -37,7 +37,7 @@ class AmazonAutoLinks_Proxy_Event_Ajax_LoadProxyList extends AmazonAutoLinks_Aja
          */
         $_aProxies = apply_filters( 'aal_filter_imported_proxies', array() );
         $_aProxies = array_unique( $_aProxies );
-        return implode( PHP_EOL, $_aProxies );
+        return trim( implode( PHP_EOL, $_aProxies ) );
 
     }
 

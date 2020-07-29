@@ -25,7 +25,7 @@ class AmazonAutoLinks_Event_ErrorLog_General extends AmazonAutoLinks_Event_Error
      * @return  void
      * @since   4.2.0
      */
-    public function replyToLogErrors( $isCode, $sErrorMessage, array $aData ) {
+    public function replyToLogErrors( $isCode, $sErrorMessage, $aData ) {
 
         $sErrorMessage = $sErrorMessage
             ? $sErrorMessage

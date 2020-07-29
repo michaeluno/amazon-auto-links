@@ -414,7 +414,15 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             . '    </div>' . PHP_EOL
             . '</div>';
     }
-            
+
+    /**
+     * @since    4.2.0
+     * @return   boolean
+     */
+    public function isAdvancedProxyOptionSupported() {
+        return false;
+    }
+
     /**
      * @return      boolean
      */

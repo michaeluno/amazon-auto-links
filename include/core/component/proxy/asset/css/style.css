@@ -12,3 +12,7 @@
 .ajax-spinner {
     margin-left: 1em;
 }
+
+#sections-proxies .amazon-auto-links-section .form-table td .amazon-auto-links-field-size label {
+    width: auto;
+}

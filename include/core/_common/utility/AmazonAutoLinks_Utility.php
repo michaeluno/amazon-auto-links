@@ -16,6 +16,25 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
     /**
+     * Retrieves the topmost items in an array.
+     *
+     * Used to cut off too many items.
+     *
+     * @remark  The array should be numerically indexed, not associative.
+     * @param array $aItems
+     * @param $iCount
+     *
+     * @return array
+     * @since   4.2.0
+     */
+    static public function getTopmostItems( array $aItems, $iCount ) {
+        $iCount = ( integer ) $iCount;
+        $aItems = array_reverse( $aItems );
+        $aItems = array_slice( $aItems, $iCount * -1, $iCount, true );
+        return array_reverse( $aItems );
+    }
+
+    /**
      * @remark  used upon plugin uninstall.
      * @param   string $sDirectoryPath
      * @return  bool|null

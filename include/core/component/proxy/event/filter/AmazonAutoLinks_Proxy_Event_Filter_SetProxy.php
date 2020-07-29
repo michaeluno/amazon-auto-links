@@ -41,8 +41,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_SetProxy extends AmazonAutoLinks_Proxy_
             }
 
             // The proxy list saved in the options and pick random one
-            $_aToolsOptions  = $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ], array() ) );
-            $_sProxyList     = $this->getElement( $_aToolsOptions, array( 'proxies', 'proxy_list' ), '' );
+            $_sProxyList     = AmazonAutoLinks_ToolOption::getInstance()->get( array( 'proxies', 'proxy_list' ), '' );
             $_aProxies       = ( array ) preg_split( "/\s+/", trim( ( string ) $_sProxyList ), 0, PREG_SPLIT_NO_EMPTY );
 
             /// For multiple attempts, avoid using the previous proxy.
@@ -53,7 +52,9 @@ class AmazonAutoLinks_Proxy_Event_Filter_SetProxy extends AmazonAutoLinks_Proxy_
             }
 
             /// Pick random one
-            $_iRandomIndex   = array_rand( $_aProxies, 1 );
+            $_iRandomIndex   = empty( $_aProxies )
+                ? 0
+                : array_rand( $_aProxies, 1 );
             if ( empty( $_aProxies[ $_iRandomIndex ] ) ) {
                 new AmazonAutoLinks_Error( 'PROXY_SET_FAILURE', 'The proxy option is enabled but there is no proxy available.' );
                 return $aArguments;

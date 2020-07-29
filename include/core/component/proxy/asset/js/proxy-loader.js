@@ -33,10 +33,14 @@
                     if ( response.success ) {
                         var _oProxyListTextArea = $( 'textarea.proxy-list' );
                         if ( _oProxyListTextArea.length ) {
-                            var _sCurrentValue = $.trim( _oProxyListTextArea.val() );
-                            _oProxyListTextArea.val( _sCurrentValue + '\r\n' + $.trim( response.result ) );
+                            var _sCurrentValue =  _oProxyListTextArea.val();
+                            _sCurrentValue = _sCurrentValue.replace( /^\s+|\s+$/g, "" ); // trim line feeds
+                            _sCurrentValue = $.trim( _sCurrentValue ); // trim white spaces
+                            _sCurrentValue = _sCurrentValue
+                                ? _sCurrentValue + '\r\n'
+                                : '';
+                            _oProxyListTextArea.val( _sCurrentValue + $.trim( response.result ) );
                         }
-
                     } else {
                     }
                 },

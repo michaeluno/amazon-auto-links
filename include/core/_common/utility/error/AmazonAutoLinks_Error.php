@@ -24,7 +24,7 @@ class AmazonAutoLinks_Error extends WP_Error {
      */
     public function __construct( $isCode='', $sMessage='', $mData='' ) {
         parent::__construct( $isCode, $sMessage, $mData );
-        do_action( 'aal_action_error', $isCode, $sMessage, $mData );
+        do_action( 'aal_action_error', $isCode, $sMessage, AmazonAutoLinks_PluginUtility::getAsArray( $mData ) );
     }
 
 }

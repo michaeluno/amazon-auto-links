@@ -60,11 +60,11 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
      */
     public function replyToSaveUnusableProxies() {
 
-        $_sOptionKey     = AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ];
-        $_aToolsOptions  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
-        $_sProxyList     = $this->getElement( $_aToolsOptions, array( 'proxies', 'proxy_list' ), '' );
+        $_oToolOption    = AmazonAutoLinks_ToolOption::getInstance();
+
+        $_sProxyList     = $_oToolOption->get( array( 'proxies', 'proxy_list' ), '' );
         $_aProxies       = ( array ) preg_split( "/\s+/", trim( ( string ) $_sProxyList ), 0, PREG_SPLIT_NO_EMPTY );
-        $_sUnusable      = $this->getElement( $_aToolsOptions, array( 'proxies', 'unusable' ), '' );
+        $_sUnusable      = $_oToolOption->get( array( 'proxies', 'unusable' ), '' );
         $_aUnusables     = ( array ) preg_split( "/\s+/", trim( ( string ) $_sUnusable ), 0, PREG_SPLIT_NO_EMPTY );
 
         foreach( $this->___aUnusableProxies as $_sProxy ) {
@@ -82,12 +82,9 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
         $_aUnusables     = array_unique( $_aUnusables );
 
         // Save
-        if ( ! is_array( $_aToolsOptions[ 'proxies' ] ) ) {
-            $_aToolsOptions[ 'proxies' ] = array();
-        }
-        $_aToolsOptions[ 'proxies' ][ 'proxy_list' ] = implode( PHP_EOL, $_aProxies );
-        $_aToolsOptions[ 'proxies' ][ 'unusable' ]   = implode( PHP_EOL, $_aUnusables );
-        update_option( $_sOptionKey, $_aToolsOptions );
+        $_oToolOption->set( array( 'proxies', 'proxy_list' ), implode( PHP_EOL, $_aProxies ) );
+        $_oToolOption->set( array( 'proxies', 'unusable' ), implode( PHP_EOL, $_aUnusables ) );
+        $_oToolOption->save();
 
     }
 

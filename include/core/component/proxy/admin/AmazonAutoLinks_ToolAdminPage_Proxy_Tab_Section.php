@@ -30,6 +30,12 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
+        $_oOption           = AmazonAutoLinks_Option::getInstance();
+        $_aAttributesForPro = $_oOption->isAdvancedProxyOptionSupported()
+            ? array()
+            : array(
+                'disabled' => 'disabled',
+            );
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -37,12 +43,6 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'title'           => __( 'Enable', 'amazon-auto-links' ),
                 'type'            => 'checkbox',
                 'label'           => __( 'Enable proxies for regular HTTP requests that this plugin performs. API requests will not use proxies.', 'amazon-auto-links' ),
-//                'attributes'      => array(
-//                    'disabled'  => defined( 'WP_PROXY_HOST' ) ? 'disabled' : null,
-//                ),
-//                'description'     => defined( 'WP_PROXY_HOST' )
-//                    ? '<span class="warning">' . __( 'This option cannot be enabled as the site global proxy is set.', 'amazon-auto-links' ) . '</span>'
-//                    : null,
             ),
             array( 
                 'field_id'        => 'proxy_list',
@@ -92,17 +92,27 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'field_id'        => 'automatic_updates',
                 'title'           => __( 'Automatic Updates', 'amazon-auto-links' ),
                 'type'            => 'checkbox',
-                'select_type'     => 'checkbox',
                 'label'           => __( 'Enable automatic updates for the proxy list.', 'amazon-auto-links' ),
+                'attributes'      => array(
+                ) + $_aAttributesForPro,
+                'description'     => array(
+                    '<span class="warning">' . __( 'This is available in Pro.', 'amazon-auto-links' ) . '</span>'
+                ),
             ),
             array(
-                'field_id'        => '_last_updated',
-                'title'           => __( 'Last Updated', 'amazon-auto-links' ),
-                'type'            => 'text',
-                'save'            => false,
-                'attributes'      => array(
-                    'readonly'  => 'readonly',
+                'field_id'        => 'proxy_update_interval',
+                'title'           => __( 'Update Interval', 'amazon-auto-links' ),
+                'type'            => 'size',
+                'units'             => array(
+                    86400    => __( 'day(s)', 'amazon-auto-links' ),
+                    604800   => __( 'week(s)', 'amazon-auto-links' ),
                 ),
+                'attributes'        => array(
+                    'size'      => array(
+                        'step' => 0.1
+                    ),
+                ) + $_aAttributesForPro,
+                'after_fieldset'  => $this->___getUpdateScheduleText(),
             ),
             array(
                 'field_id'        => '_save',
@@ -114,7 +124,16 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
         );
 
     }
-
+        /**
+         * @return  string
+         * @since   4.2.0
+         */
+        private function ___getUpdateScheduleText() {
+            return $this->getIntervalScheduleInfo(
+                wp_next_scheduled( 'aal_action_proxy_update', array() ),
+                AmazonAutoLinks_ToolOption::getInstance()->get( array( 'proxies', 'update_last_run_time' ) )
+            );
+        }
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
 
@@ -130,6 +149,16 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
 
         // Sanitize the proxy list.
         $aInputs = $this->___getProxiesSanitized( $aInputs );
+
+        // If the automatic update is not enabled, unschedule the event.
+        if ( $this->getElement( $aInputs, array( 'automatic_updates' ), false ) ) {
+            $_oiTimeStamp = wp_get_scheduled_event( 'aal_action_proxy_update', array() );
+            $_iTimeStamp  = is_integer( $_oiTimeStamp )
+                ? is_integer( $_oiTimeStamp )
+                : 0;
+            wp_unschedule_event( $_iTimeStamp, 'aal_action_proxy_update', array() );
+        }
+
 
         // Return the saving data.
         return $aInputs;
@@ -150,7 +179,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
             $_aSanitized = array_unique( $_aSanitized );
 
             // Keep up to 10000
-            $_aSanitized = array_slice( $_aSanitized, -10000, 10000, true );
+            $_aSanitized = $this->getTopmostItems( $_aSanitized, 10000 );
 
             $_sProxies   = implode( PHP_EOL, $_aSanitized );
             $aInputs[ 'proxy_list' ] = $_sProxies;
