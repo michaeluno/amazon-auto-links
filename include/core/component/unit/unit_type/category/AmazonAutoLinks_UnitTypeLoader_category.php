@@ -15,7 +15,17 @@
  * @since       3.3.0
 */
 class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLoader_Base {
-        
+
+    /**
+     * Stores each unit type component directory path.
+     *
+     * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
+     * @remark  Without this declaration, the value refers to the parent one.
+     * @var string
+     * @since   4.2.0
+     */
+    static public $sDirPath = '';
+
     /**
      * Stores the unit type slug.
      * @remark      Each extended class should assign own unique unit type slug here.
@@ -45,14 +55,16 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
      */
     public $bRequirePAAPI = false;
 
-
     /**
      * @param $sScriptPath
      * @since   3.7.6
      */
     protected function _construct( $sScriptPath ) {
-          // Category unit specific event callbacks
+        // Category unit specific event callbacks
         new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
+
+        self::$sDirPath = dirname( __FILE__ );
+
 
     }
 
@@ -103,7 +115,10 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
             'side', // context - e.g. 'normal', 'advanced', or 'side'
             'high' // priority - e.g. 'high', 'core', 'default' or 'low'
         );              
-        
+
+        // 4.2.0
+        new AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection;
+        new AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview;
     }
 
     /**

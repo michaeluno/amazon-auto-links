@@ -18,7 +18,17 @@
  * @since       4.0.0
 */
 class AmazonAutoLinks_UnitTypeLoader_embed extends AmazonAutoLinks_UnitTypeLoader_Base {
-        
+
+    /**
+     * Stores each unit type component directory path.
+     *
+     * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
+     * @remark  Without this declaration, the value refers to the parent one.
+     * @var string
+     * @since   4.2.0
+     */
+    static public $sDirPath = '';
+
     /**
      * Stores the unit type slug.
      * @remark      Each extended class should assign own unique unit type slug here.

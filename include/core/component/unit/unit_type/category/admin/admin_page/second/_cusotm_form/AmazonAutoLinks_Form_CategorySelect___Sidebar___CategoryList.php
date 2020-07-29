@@ -80,15 +80,20 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
                 $_aURLParts = parse_url( $sPageURL );
                 $_sDomain   = $_aURLParts[ 'scheme' ] . '://' . $_aURLParts[ 'host' ];
                 foreach( $oNode->getElementsByTagName( 'a' ) as $_nodeA ) {
-                    $_sHref = $_nodeA->getAttribute( 'href' );
-                    $_sHref = $this->___getHrefSanitized( $_sHref, $_sDomain );
-                    $_nodeA->setAttribute( 'href', $_sHref );
+                    $_sHref    = $_nodeA->getAttribute( 'href' );
+                    $_sHref    = $this->___getHrefSanitized( $_sHref, $_sDomain );
+                    $_sEncrypt = $this->_getLinkURLFormatted( $_sHref, array() );
+                    $_nodeA->setAttribute( 'href', $_sEncrypt );
+
+                    // 4.2.0 Set additional data attribute for JavaScript handling
+                    $_nodeA->setAttribute( 'data-url', $_sHref );
                 }
 
             }
                 /**
                  * @remark
                  * @since       3.5.7
+                 * @since       4.2.0   No longer encrypts the URL.
                  * @return      string
                  */
                 private function ___getHrefSanitized( $sHref, $sDomain ) {
@@ -107,8 +112,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
                         ? $sHref
                         : $sDomain . '/' . $sHref;   // add the domain
 
-                    // Encrypt
-                    return $this->_getLinkURLFormatted( $sHref, array() );
+                    return $sHref;
 
                 }
 

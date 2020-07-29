@@ -27,6 +27,9 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB extends Amaz
     protected function _getCategoryList( DOMDocument $oDoc, $sPageURL ) {
 
         $_oNodeBrowseRoot = $oDoc->getElementById( $this->_sSelector );
+        if ( null === $_oNodeBrowseRoot ) {
+            return '';
+        }
         $this->_setHrefs( $_oNodeBrowseRoot, $sPageURL );
 
         // Remove headings

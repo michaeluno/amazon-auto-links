@@ -17,7 +17,18 @@
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonAutoLinks_AdminPage_Tab_Base {
     
     protected function _construct( $oFactory ) {}
-    
+
+    /**
+     * @return array
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => 'first',
+            'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
+            'description'   => __( 'Fill basic information', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      */
@@ -86,11 +97,13 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
             ) 
             + $_GET,
             admin_url( $GLOBALS[ 'pagenow' ] )
-        );        
-        $oFactory->setSettingNotice( 
-            __( 'Select a category from the below list.', 'amazon-auto-links' ),
-            'updated'
-         );
+        );
+        // @deprecated 4.2.0 Not necessary
+//        $oFactory->setSettingNotice(
+//            __( 'Select a category from the below list.', 'amazon-auto-links' ),
+//            'updated'
+//         );
+        $oFactory->setSettingNotice( '' ); // disable the message
          
         // Store the inputs for the next time.
         update_option( 

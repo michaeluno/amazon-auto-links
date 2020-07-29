@@ -50,8 +50,8 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
         $aTabDefinition     = $aTabDefinition
             + $this->_getArguments()
             + $this->_getTab();
-        $this->sTabSlug     = isset( $aTabDefinition['tab_slug'] )
-            ? $aTabDefinition['tab_slug'] 
+        $this->sTabSlug     = isset( $aTabDefinition[ 'tab_slug' ] )
+            ? $aTabDefinition[ 'tab_slug' ]
             : '';
         
         if ( ! $this->sTabSlug ) {

@@ -36,7 +36,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'field_id'        => 'enable',
                 'title'           => __( 'Enable', 'amazon-auto-links' ),
                 'type'            => 'checkbox',
-                'label'           => __( 'Enable proxies for regular HTTP requests. API requests will not use proxies.', 'amazon-auto-links' ),
+                'label'           => __( 'Enable proxies for regular HTTP requests that this plugin performs. API requests will not use proxies.', 'amazon-auto-links' ),
 //                'attributes'      => array(
 //                    'disabled'  => defined( 'WP_PROXY_HOST' ) ? 'disabled' : null,
 //                ),

@@ -22,6 +22,7 @@ class AmazonAutoLinks_UnitTypeLoader_feed extends AmazonAutoLinks_UnitTypeLoader
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
+     * @remark  Without this declaration, the value refers to the parent one.
      * @var string
      * @since   4.0.0
      */

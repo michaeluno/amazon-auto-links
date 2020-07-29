@@ -18,6 +18,10 @@ class AmazonAutoLinks_Proxy_Event_Ajax_LoadProxyList extends AmazonAutoLinks_Aja
 
     protected $_sActionHookName = 'wp_ajax_aal_proxy_loader';
 
+    /**
+     * The nonce key passed to the `wp_create_nonce()`
+     * @var string
+     */
     protected $_sNonceKey = 'aal_nonce_ajax_aal_proxy_loader';
 
     /**

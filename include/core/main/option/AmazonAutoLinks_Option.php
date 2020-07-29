@@ -443,6 +443,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         return 3 - $iNumberOfUnits;
         
     }
+    public function getMaximumNumberOfCategories() {
+        return 3;
+    }
     public function isReachedCategoryLimit( $iNumberOfCategories ) {
         return ( boolean ) ( $iNumberOfCategories >= 3 );
     }    

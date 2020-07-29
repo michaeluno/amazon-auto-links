@@ -37,24 +37,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
     protected function _construct( $oFactory ) {
         
         // Tabs
-        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'first',
-                'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
-                'description'   => __( 'Fill basic information', 'amazon-auto-links' ),
-            )
-        );
-        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'      => 'second',
-                'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
-                'description'   => __( 'Select categories.', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second( $this->oFactory, $this->sPageSlug );
        
         $this->_doPageSettings();
         

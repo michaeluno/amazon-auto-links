@@ -15,9 +15,32 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @remark  This also serves as the variable name on the JavaScript side.
+     * @var string
+     */
+    private $___sAjaxScriptHandle1 = 'aalCategorySelection';
+
+    /**
+     * @return array
+     * @since   4.2.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'      => 'second',
+            'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
+            'description'   => __( 'Select categories.', 'amazon-auto-links' ),
+            'style'         => array(
+                AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ), // the Preview template CSS file.
+                AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/css/category_selection.css',  // 4.2.0
+            ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback        action      load_{$sPageSlug}_{$this->sTabSlug}
      */
     public function replyToLoadTab( $oFactory ) {
@@ -35,18 +58,74 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                 ),
             )
         );
-        
-        // Load the Preview template CSS file.
-        $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ) );
-        
+
+        // Get the user's set locale
+        $_aUnitOptions      = $this->___getUnitOptions();
+        $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
+        $_sRootCategoryURL  = AmazonAutoLinks_Unit_Utility_category::getCategoryListRootURL( $_sLocale );
+
+        // Ajax script
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script(
+            $this->___sAjaxScriptHandle1,    // handle
+            $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/js/category-selection.js' ), // 4.2.0
+            array( 'jquery' ),
+            true
+        );
+        wp_localize_script(
+            $this->___sAjaxScriptHandle1,
+            $this->___sAjaxScriptHandle1,        // variable name on JavaScript side
+            array(
+                'ajaxURL'                           => admin_url( 'admin-ajax.php' ),
+                'nonce'                             => wp_create_nonce( 'aalNonceCategorySelection' ),
+                'action_hook_suffix_category_list'  => 'aal_category_selection', // WordPress action hook name which follows after `wp_ajax_`
+                'action_hook_suffix_unit_preview'   => 'aal_unit_preview',
+                'spinnerURL'                        => admin_url( 'images/loading.gif' ),
+                'transientID'                       => $GLOBALS[ 'aal_transient_id' ],
+                'postID'                            => $this->getElement( $_GET, array( 'post' ), 0 ), // for editing category selection, a post id is passed
+                'maxNumberOfCategories'             => 3, //( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
+                'rootURL'                           => $_sRootCategoryURL,
+                'translation'                       => array(
+                    'category_not_selected' => __( 'Please select a category.', 'amazon-auto-links' ),
+                    'too_many_categories'   => __( 'Please be aware that adding too many categories slows down the performance.', 'amazon-auto-links' ),
+                    'already_added'         => __( 'The category is already added.', 'amazon-auto-links' ),
+                ),
+
+
+            )
+        );
+
     }
+
+        /**
+         * There are two cases:
+         *  1. Creating a new unit
+         *  2. Editing the category selection of an already created unit
+         * For the second case, `$_GET[ 'post ]` is set.
+         * @return array
+         */
+        private function ___getUnitOptions() {
+
+            if ( ! isset( $_GET[ 'post' ] ) ) {
+                return $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+            }
+
+            $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
+                ( integer ) $_GET[ 'post' ], // unit id
+                array() // unit options
+            );
+            return $_oUnitOption->get();
+
+        }
     
     /**
-     * 
+     *
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback        action      do_{$this->sPageSlug}_{$this->sTabSlug} 
      */
     public function replyToDoTab( $oFactory ) {
 
+        $_aData = $oFactory->getSavedOptions();
         /**
          * Renders a custom form for category selection.
          * 
@@ -55,8 +134,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * Then in the do_{...} callback, the form will be rendered.        
          */
         $_oCategorySelectForm = new AmazonAutoLinks_Form_CategorySelect(
-            $oFactory->getSavedOptions(),     // unit options   // $oFactory->oProp->aOptions,     // unit options            
-            $oFactory->getSavedOptions()      // form options   // $oFactory->oProp->aOptions      // form options
+            $_aData,     // unit options   // $oFactory->oProp->aOptions,     // unit options
+            $_aData      // form options   // $oFactory->oProp->aOptions      // form options
         );            
         $_oCategorySelectForm->render();
 
@@ -84,29 +163,32 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             );
             
         }
-    
-    /**
-     * 
-     * @callback        filter      validation_{page slug}_{tab slug}
-     */
-    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
 
-        $_bVerified = ! $oFactory->hasFieldError();
+    /**
+     *
+     * @callback        filter      validation_{page slug}_{tab slug}
+     *
+     * @param array $aInputs
+     * @param array $aOldInputs
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param $aSubmitInfo
+     *
+     * @return array
+     */
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
         
         // Disable the setting notice in the next page load.
         $oFactory->setSettingNotice( '' );        
-               
-        // If the user presses one of the custom form submit buttons, 
-        if ( isset( $_POST[ 'amazon_auto_links_cat_select' ] ) ) {
-            return $this->___getCategorySelectFormInput(
-                $_POST[ 'amazon_auto_links_cat_select' ],
-                $oFactory->getSavedOptions(),    // $aOldInput,
-                $oFactory
-            );
-        }   
+
+        if ( ! isset( $_POST[ 'amazon_auto_links_cat_select' ] ) ) {
+            return $aOldInputs;    
+        }
         
-        // $aInput just contains dummy items so do not use it.
-        return $aOldInput;
+        return $this->___getCategorySelectFormInput(
+            $this->getAsArray( $_POST ),
+            $oFactory->getSavedOptions(),    // $aOldInput,
+            $oFactory
+        );
         
     }    
     
@@ -114,53 +196,66 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * Called when the user submits the form of the category select page.
          * @return      array
          */
-        private function ___getCategorySelectFormInput( array $aPost, $aInput, $oFactory ) {
+        private function ___getCategorySelectFormInput( array $aPost, array $aInputs, $oFactory ) {
 
-            // If the 'Save' or 'Create' button is pressed, save the data to the post.
-            // The key is set in `AmazonAutoLinks_Form_CategorySelect` when rendering the form.
-            if ( isset( $aPost[ 'save' ] ) ) {
-                $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
-                    isset( $_GET[ 'post' ] )
-                        ? $_GET[ 'post' ]
-                        : null,
-                    $aInput // unit options
-                );
-                $_iPostID = $this->___postUnitByCategory(
-                    $_oUnitOption->get(), // sanitized
-                    $aInput // not sanitized, contains keys not needed for the unit options
-                );
-                if ( $_iPostID ) {
-                    $oFactory->setSettingNotice( 
-                        __( 'A unit has been created.', 'amazon-auto=links' ),
-                        'updated'
-                    );
-                }
-                
-                $_oUtil = new AmazonAutoLinks_PluginUtility;
-                
-                // Clean temporary options.
-                $_oUtil->deleteTransient(
-                    $GLOBALS[ 'aal_transient_id' ]
-                );
-                
-                // Schedule pre-fetch.
-                AmazonAutoLinks_Event_Scheduler::prefetch( $_iPostID );
-                
-                // Will exit the script.
-                $_oUtil->goToPostDefinitionPage(
-                    $_iPostID,
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-                );
-            }  
-                                
-            // Otherwise, update the form data.
-            return $this->___getUpdatedUnitOptions(
-                $aPost,
-                $aInput,
-                $oFactory
+            /**
+             * Structure of the category array
+             *
+             * ```
+             * md5( $aCurrentCategory[ 'page_url' ] ) => array(
+             *         'breadcrumb' => 'US > Books',
+             *         'page_url'   => 'http://...'        // the page url of the categor
+             * );
+             * ```
+             */
+            $_aAdded    = $this->getElementAsArray( $aPost, array( 'added' ) );
+            $_aExcluded = $this->getElementAsArray( $aPost, array( 'excluded' ) );
+            $aInputs[ 'categories' ]         = $this->getCategoryArgumentsFormatted( $_aAdded );
+            $aInputs[ 'categories_exclude' ] = $this->getCategoryArgumentsFormatted( $_aExcluded );
+
+            $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
+                ( integer ) $this->getElement( $_GET, array( 'post' ), 0 ), // unit id
+                $aInputs // unit options
             );
-            
+            $_iPostID = $this->___postUnitByCategory(
+                $_oUnitOption->get(), // sanitized
+                $aInputs // not sanitized, contains keys not needed for the unit options
+            );
+            // @deprecated 4.2.0 Even if the user returns to the category selection page right after creating a category unit, this message pops up and is not necessary.
+//            if ( $_iPostID ) {
+//                $oFactory->setSettingNotice(
+//                    __( 'A unit has been created.', 'amazon-auto=links' ),
+//                    'updated'
+//                );
+//            }
+
+            // Clean temporary options.
+            $this->deleteTransient( $GLOBALS[ 'aal_transient_id' ] );
+
+            // Schedule pre-fetch.
+            AmazonAutoLinks_Event_Scheduler::prefetch( $_iPostID );
+
+            // Will exit the script.
+            $this->goToPostDefinitionPage( $_iPostID, AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
+
+            // Dummy return
+            return array();
         }
+            /**
+             * @param array $aCategories
+             *
+             * @return array
+             */
+            private function getCategoryArgumentsFormatted( array $aCategories ) {
+                $_oEncrypt              = new AmazonAutoLinks_Encrypt;
+                $_aFormatted = array();
+                foreach( $aCategories as $_sMD5 => $_aCategory ) {
+                    $_aFormatted[ $_sMD5 ] = array(
+                        'breadcrumb' => $_oEncrypt->decode( $_aCategory[ 'breadcrumb' ] ),
+                        'page_url'   => $_oEncrypt->decode( $_aCategory[ 'page_url' ] ),                  );
+                }
+                return $_aFormatted;
+            }
  
         /**
          * Creates a post of amazon_auto_links custom post type with unit option meta fields.
@@ -172,7 +267,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             $_iPostID = 0;
             
             // Create a custom post if it's a new unit.
-            if ( ! isset( $_GET['post'] ) || ! $_GET['post'] ) {
+            if ( ! isset( $_GET[ 'post' ] ) || ! $_GET[ 'post' ] ) {
                 $_iPostID = wp_insert_post(
                     array(
                         'comment_status'    => 'closed',
@@ -226,14 +321,16 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
      * Processes the user submitted form data in the Category Select page.
      * 
      * @return      array      The (un)updated data.
+     * @deprecated  4.2.0
      */
     private function ___getUpdatedUnitOptions( $aPost, array $aInput, $oFactory ) {
 
         $_iNumberOfCategories = count( $aInput[ 'categories' ] )  
             + count( $aInput[ 'categories_exclude' ] );
-        
+
+        // @deprecated 4.2.0 No longer checked here.
         // Check the limit
-        if ( 
+        /*if (
             ( isset( $aPost[ 'add' ] ) || isset( $aPost[ 'exclude' ] ) )
             && $this->___isNumberOfCategoryReachedLimit( $_iNumberOfCategories )
         ) {
@@ -241,7 +338,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                 $this->___getLimitNotice( true )
             );
             return $aInput;
-        }
+        }*/
 
         /**
          * Structure of the category array
@@ -287,6 +384,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         /**
          * Checks whether the category item limit is reached.
          * @return      boolean
+         * @deprecated  4.2.0
          */
         private function ___isNumberOfCategoryReachedLimit( $iNumberOfCategories ) {
             $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -298,6 +396,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         /**
          * Returns the admin message.
          * @return      string
+         * @deprecated 4.2.0
          */
         private function ___getLimitNotice( $bIsReachedLimit, $bEnableHTMLTag=true ) {
             if ( ! $bIsReachedLimit ) {

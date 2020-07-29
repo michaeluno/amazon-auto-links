@@ -319,9 +319,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add an gray button.
 - @todo add a button with a background image.
 - @todo add a clone action link to buttons.
-- @todo add the ability to perform HTTP requests with proxies.
 
 == Changelog ==
+
+= 4.2.0 =
+- Added the proxy option.
+- Refined the category selection screen.
 
 = 4.1.0 - 07/11/2020 =
 - Added the `ScratchPad Payload` unit type that allows custom API queries generated on [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/).

@@ -26,6 +26,14 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
     protected $_aModifiedDates = array();
 
     /**
+     * Override the parent method that accesses the duplicate properties.
+     * @since   4.2.0
+     */
+    protected function _setProperties() {
+        // do nothing.
+    }
+
+    /**
      * Fetches and returns the associative array containing the output of product links.
      * 
      * If the first parameter is not given, 
@@ -43,7 +51,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID       = ( string ) $this->oUnitOption->get( 'associate_id' );
         $_iCount             = ( integer ) $this->oUnitOption->get( 'count' );
-        
+
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
 
         /**
@@ -282,7 +290,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
-                foreach ( $aItems as $_sASIN => $_aItem ) {
+                foreach ( $aItems as $_iIndex => $_aItem ) {
+
+                    $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
 
                     // This parsed item is no longer needed and must be removed once it is parsed
                     // as this method is called recursively.
@@ -332,7 +342,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                         $_aProducts             = $this->_getProductsFormatted( $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID );
                         $_iCountAfterFormatting = count( $_aProducts );
                         if ( $_iResultCount > $_iCountAfterFormatting ) {
-                            throw new Exception( $_iCount - $_iCountAfterFormatting );
+                            throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
                         }
 
                     } catch ( Exception $_oException ) {

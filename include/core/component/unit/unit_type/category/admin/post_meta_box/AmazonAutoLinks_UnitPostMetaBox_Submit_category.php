@@ -34,8 +34,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
      * Draws the Select Category submit button and some other links.
      */
     public function printMetaBoxContent( $sContent ) {
-        
-        $_sViewLink              = esc_url( get_permalink( $_GET[ 'post' ] ) );
+
         $_sSelectCategoryPageURL = add_query_arg( 
             array( 
                 'mode'          => 0,
@@ -53,7 +52,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
         <div style="padding: 1.5em 0">
             <div style="text-align: center;">
                 <a class="button button-primary button-large" href="<?php echo esc_url( $_sSelectCategoryPageURL ); ?>">
-                    <?php _e( 'Select Categories', 'amazon-auto-links' ); ?>
+                    <?php _e( 'Edit Categories', 'amazon-auto-links' ); ?>
                 </a>
             </div>        
         </div>
@@ -84,7 +83,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
         $_aExcludingCategoryList = array();
         foreach( $_aExcludingCategories as $_aCategory ) {
             $_aExcludingCategoryList[] = "<li style=''>" 
-                    . $_aCategory['breadcrumb'] 
+                    . $_aCategory[ 'breadcrumb' ]
                 . "</li>";            
         }
         

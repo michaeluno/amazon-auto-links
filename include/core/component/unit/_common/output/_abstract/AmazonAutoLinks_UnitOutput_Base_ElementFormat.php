@@ -24,7 +24,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       3.5.0       Renamed from `_formatProducts()`.
      */
     protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
-        
+
         $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocales );
         $_sLocale        = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) ); // @todo use the third parameter value
         $_sCurrency      = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );

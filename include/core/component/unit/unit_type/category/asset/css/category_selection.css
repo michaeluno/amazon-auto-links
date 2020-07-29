@@ -1,0 +1,36 @@
+.now-loading {
+	display: inline-block;
+}
+.now-loading img {
+	margin-right: 0.4em;
+	vertical-align: text-bottom;
+}
+.ajax-spinner {
+	display: inline-block;
+    vertical-align: bottom;
+    margin-left: 0.4em;
+	height: 1em;
+}
+
+.category-select-breadcrumb {
+	display: inline-block;
+}
+
+.button.button-reload {
+	margin-top: 0.4em;
+	margin-left: 0.2em;
+}
+
+
+/* Added/Excluding Checkbox */
+#added-categories a, #excluding-categories a {
+	text-decoration: none;
+}
+#selected-categories p {
+	margin: 0 0 0.5em 0;
+}
+
+/* General Rules */
+.hidden {
+	display: none;
+}

@@ -57,10 +57,10 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
     
     /**
      * Indicates whether allowed ASINs are set. 
-     * If this value is true, prodcuts not listed here will not be returned.
+     * If this value is true, products not listed here will not be returned.
      * @since       3.2.1
      */
-    public $bASINRestrictced       = false;
+    public $bASINRestricted       = false;
     
     /**
      * Sets up properties.
@@ -109,7 +109,7 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
             $aArguments,
             '_allowed_ASINs'
         );
-        $this->bASINRestrictced        = ! empty( $this->aAllowedASINs );
+        $this->bASINRestricted         = ! empty( $this->aAllowedASINs );
         $this->aAllowedASINs           = array_unique(
             array_merge(
                 $this->aAllowedASINs,
@@ -156,7 +156,7 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
      * @return      boolean
      */
     public function isASINAllowed( $sASIN ) {
-        if ( $this->bASINRestrictced ) {
+        if ( $this->bASINRestricted ) {
             return in_array(
                 $sASIN,
                 $this->aAllowedASINs
@@ -168,7 +168,7 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
         );
     }
     public function isASINBlocked( $sASIN ) {
-        if ( $this->bASINRestrictced ) {
+        if ( $this->bASINRestricted ) {
             return ! in_array(
                 $sASIN,
                 $this->aAllowedASINs
