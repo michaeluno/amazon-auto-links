@@ -69,7 +69,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
             $sURL,
             $iCacheDuration,
             array( 'raw' => true ) + $aArguments,   // setting `raw` because the response format must be an array or an instance of WP_Error
-            $sRequestType,
+            $sRequestType
         );
         $_osResponse = $_oHTTP->get();
         return is_wp_error( $_osResponse )
