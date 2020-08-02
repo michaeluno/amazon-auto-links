@@ -83,7 +83,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                 'spinnerURL'                        => admin_url( 'images/loading.gif' ),
                 'transientID'                       => $GLOBALS[ 'aal_transient_id' ],
                 'postID'                            => $this->getElement( $_GET, array( 'post' ), 0 ), // for editing category selection, a post id is passed
-                'maxNumberOfCategories'             => 3, //( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
+                'maxNumberOfCategories'             => ( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
                 'rootURL'                           => $_sRootCategoryURL,
                 'translation'                       => array(
                     'category_not_selected' => __( 'Please select a category.', 'amazon-auto-links' ),
