@@ -322,9 +322,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.1 =
+- Optimized performance in the category selection screen of the category unit type.
+
 = 4.2.0 - 08/03/2020 =
 - Added the proxy option.
-- Refined the category selection screen.
+- Refined the category selection screen of the category unit type.
 
 = 4.1.0 - 07/11/2020 =
 - Added the `ScratchPad Payload` unit type that allows custom API queries generated on [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/).

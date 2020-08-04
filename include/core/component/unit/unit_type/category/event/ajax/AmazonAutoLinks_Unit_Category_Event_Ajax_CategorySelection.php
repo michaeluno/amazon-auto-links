@@ -43,9 +43,9 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
         // Access the Amazon store site and retrieve the category list.
 
-        $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sCategoryListURL, 86400, array( 'timeout'   => 10, ) );
+        $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sCategoryListURL, 86400 * 7, array( 'timeout'   => 10, ) );
         if ( $this->getElement( $aPost, array( 'reload' ) ) ) {
-            // Case: the user first got a captcha error and enabled a proxy option then clicked the Reload button.
+            // Case: the user first got a captcha error and enabled the proxy option then clicked the Reload button.
             // In that case, the previous cache with the captcha error should be cleared. Otherwise, the cache of the captcha error keeps to be returned.
             $_oHTTP->deleteCache();
         }
