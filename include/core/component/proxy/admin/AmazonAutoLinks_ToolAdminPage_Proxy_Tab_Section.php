@@ -154,14 +154,11 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
         $aInputs = $this->___getProxiesSanitized( $aInputs );
 
         // If the automatic update is not enabled, unschedule the event.
-        if ( $this->getElement( $aInputs, array( 'automatic_updates' ), false ) ) {
-            $_oiTimeStamp = wp_get_scheduled_event( 'aal_action_proxy_update', array() );
-            $_iTimeStamp  = is_integer( $_oiTimeStamp )
-                ? is_integer( $_oiTimeStamp )
-                : 0;
+        if ( ! $this->getElement( $aInputs, array( 'automatic_updates' ), false ) ) {
+            $_biTimeStamp = wp_next_scheduled( 'aal_action_proxy_update', array() );
+            $_iTimeStamp  = ( integer ) $_biTimeStamp;
             wp_unschedule_event( $_iTimeStamp, 'aal_action_proxy_update', array() );
         }
-
 
         // Return the saving data.
         return $aInputs;

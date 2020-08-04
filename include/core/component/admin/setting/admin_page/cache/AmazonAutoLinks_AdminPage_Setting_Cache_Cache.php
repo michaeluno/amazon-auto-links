@@ -227,7 +227,7 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          * @since   3.8.12
          */
         private function ___getCacheCleanupScheduledTime() {
-            return $this->getIntervalScheduleInfo(
+            return $this->getIntervalScheduleInfoCache(
                 wp_next_scheduled( 'aal_action_delete_expired_caches', array() ),
                 ( integer ) AmazonAutoLinks_Option::getInstance()->get( array( 'cache', 'cache_removal_event_last_run_time' ) )
             );
