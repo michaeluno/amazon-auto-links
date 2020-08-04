@@ -247,7 +247,7 @@
      *
      * @param sURL
      */
-    function handleCategoryList( sURL ) {
+    function handleCategoryList( sURL, bReload ) {
 
         if ( bProcessing ) {
             return;
@@ -283,6 +283,7 @@
                 transientID: aalCategorySelection.transientID,
                 postID: aalCategorySelection.postID,
                 selected_url: sURL,   // the link url that the user clicks on the link of the category list. Here it is empty because of the first time of loading
+                reload: ( typeof bReload !== 'undefined' && bReload ),    // whether the request if from the Reload button. In this case, the previous cache should be cleared upon a new request.
                 // urls_added: ___getURLsAdded( sURL ),
                 // urls_excluded: ___getURLsExcluded( sURL ),
             },
@@ -300,7 +301,7 @@
                     // Reload button event
                     $( '.button-reload' ).click( function( event ) {
                         event.preventDefault();
-                        handleCategoryList( sURL ); // recursive call
+                        handleCategoryList( sURL, true ); // recursive call
                         return false;
                     } );
                     return;
