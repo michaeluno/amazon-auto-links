@@ -44,7 +44,9 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         // Access the Amazon store site and retrieve the category list.
 
         $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sCategoryListURL, 86400 * 7, array( 'timeout'   => 10, ) );
-        if ( $this->getElement( $aPost, array( 'reload' ) ) ) {
+        // be careful that the $_POST values are passed as a string due to the JavaScript Ajax data handling
+        // @see https://stackoverflow.com/questions/7408976/bool-parameter-from-jquery-ajax-received-as-literal-string-false-true-in-php
+        if ( ( boolean ) $this->getElement( $aPost, array( 'reload' ) ) ) {
             // Case: the user first got a captcha error and enabled the proxy option then clicked the Reload button.
             // In that case, the previous cache with the captcha error should be cleared. Otherwise, the cache of the captcha error keeps to be returned.
             $_oHTTP->deleteCache();

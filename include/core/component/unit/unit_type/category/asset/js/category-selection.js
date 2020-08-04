@@ -279,13 +279,11 @@
                 // Required
                 action: aalCategorySelection.action_hook_suffix_category_list,  // WordPress action hook name which follows after `wp_ajax_`
                 aal_nonce: aalCategorySelection.nonce,   // the nonce value set in template.php
-                // unit_options: aalCategorySelection.unit_options, // @deprecated
+
                 transientID: aalCategorySelection.transientID,
                 postID: aalCategorySelection.postID,
                 selected_url: sURL,   // the link url that the user clicks on the link of the category list. Here it is empty because of the first time of loading
-                reload: ( typeof bReload !== 'undefined' && bReload ),    // whether the request if from the Reload button. In this case, the previous cache should be cleared upon a new request.
-                // urls_added: ___getURLsAdded( sURL ),
-                // urls_excluded: ___getURLsExcluded( sURL ),
+                reload: ( typeof bReload !== 'undefined' && bReload ) ? 1 : 0,    // whether the request if from the Reload button. In this case, the previous cache should be cleared upon a new request.
             },
             success: function ( response ) {
 
