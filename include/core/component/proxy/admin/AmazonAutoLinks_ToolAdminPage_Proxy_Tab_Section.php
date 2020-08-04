@@ -31,7 +31,8 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
     protected function _addFields( $oFactory, $sSectionID ) {
 
         $_oOption           = AmazonAutoLinks_Option::getInstance();
-        $_aAttributesForPro = $_oOption->isAdvancedProxyOptionSupported()
+        $_bAdvanced         = $_oOption->isAdvancedProxyOptionSupported();
+        $_aAttributesForPro = $_bAdvanced
             ? array()
             : array(
                 'disabled' => 'disabled',
@@ -96,7 +97,9 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'attributes'      => array(
                 ) + $_aAttributesForPro,
                 'description'     => array(
-                    '<span class="warning">' . __( 'This is available in Pro.', 'amazon-auto-links' ) . '</span>'
+                    $_bAdvanced
+                        ? ''
+                        : '<span class="warning">' . __( 'This is available in Pro.', 'amazon-auto-links' ) . '</span>'
                 ),
             ),
             array(
