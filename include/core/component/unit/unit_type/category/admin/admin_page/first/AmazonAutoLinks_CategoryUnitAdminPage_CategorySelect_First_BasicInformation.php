@@ -49,7 +49,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
                     'type'          => 'text',
                     'description'   => 'e.g. <code>My Unit</code>',
                     // the previous value should not appear
-                    'value'         => isset( $_GET[ 'trnsient_id' ] )
+                    'value'         => isset( $_GET[ 'transient_id' ] )
                         ? ''
                         : null,
                 ),                       
