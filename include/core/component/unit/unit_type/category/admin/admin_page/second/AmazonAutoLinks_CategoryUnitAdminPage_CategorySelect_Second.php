@@ -117,7 +117,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             return $_oUnitOption->get();
 
         }
-    
+
     /**
      *
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
@@ -141,27 +141,28 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
 
         // Debug
         $this->___printDebugInformation( $oFactory );
-        
+
     }
         /**
          * Debug information
          * @since       3
          * @since       3.5.0       Renamed from `_printDebugInfo()`.
+         * @since       4.2.1  deprecated duplicated data.
          * @return      void
+         * @param AmazonAutoLinks_AdminPageFramework $oFactory
          */
         private function ___printDebugInformation( $oFactory ) {
-                    
+
             $_oOption = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isDebug() ) {
                 return;
-            }                
-            echo "<h3>"     
-                    . __( 'Form Options', 'amazon-auto-links' ) 
+            }
+            echo "<h3>"
+                    . __( 'Transients', 'amazon-auto-links' )
                 . "</h3>";
-            $oFactory->oDebug->dump(
-                $oFactory->getValue()
-            );
-            
+            $oFactory->oDebug->dump( array( 'key' => $GLOBALS[ 'aal_transient_id' ] ) );
+            $oFactory->oDebug->dump( $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) ) );
+
         }
 
     /**

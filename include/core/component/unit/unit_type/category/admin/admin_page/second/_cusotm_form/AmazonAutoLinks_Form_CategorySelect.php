@@ -319,16 +319,6 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     </tbody>
 </table>    
             <?php
-                
-            // Debug info
-            $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( $_oOption->isDebug() ) {
-                echo "<h4>" . __( 'Debug Info', 'amazon-auto-links' ). "</h4>";
-                echo "<h5>" . __( 'Page URL', 'amazon-auto-links' ) . "</h5>";
-                AmazonAutoLinks_Debug::dump( $aPageElements[ 'sPageURL' ] );
-                echo "<h5>" . __( 'Feed URL', 'amazon-auto-links' ) . "</h5>";
-                AmazonAutoLinks_Debug::dump( $aPageElements[ 'sRSSURL' ] );
-            }
             
         }
 
