@@ -140,9 +140,16 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             }
 
             // Otherwise, unit options are stored in a transient for creating a new unit.
-            return $this->getAsArray(
+            $_aUnitOptions = $this->getAsArray(
                 get_transient( $this->getElement( $aPost, array( 'transientID' ), '' ) )
             );
+
+            // There is a reported case that the locale is not retrieved which seems to be failing to retrieve the transient.
+            if ( empty( $_aUnitOptions ) ) {
+                new AmazonAutoLinks_Error( 'CATEGORY_UNIT_CREATION', 'The unit options generated from a transient are empty.', $_aUnitOptions );
+            }
+
+            return $_aUnitOptions;
 
         }
         /**
