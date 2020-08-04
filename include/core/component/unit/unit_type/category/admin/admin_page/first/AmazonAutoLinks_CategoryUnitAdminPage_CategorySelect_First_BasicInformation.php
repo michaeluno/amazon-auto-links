@@ -13,7 +13,7 @@
  * 
  * @since       3
  */
-class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation extends AmazonAutoLinks_AdminPage_Section_Base {
     
     /**
      * A user constructor.

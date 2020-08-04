@@ -35,7 +35,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
     public function replyToLoadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInormation( 
+        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation(
             $oAdminPage,
             $this->sPageSlug, 
             array(
