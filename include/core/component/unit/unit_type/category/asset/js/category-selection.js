@@ -354,7 +354,8 @@
         function ___renderOutputs( sURL, oResponse ) {
 
             // Set the outputs.
-            $( '#category-select-breadcrumb' ).html( oResponse[ 'breadcrumb' ] );
+            $( '#category-select-breadcrumb' ).html( oResponse[ 'breadcrumb' ] )
+                .append( '<span id="current-url" class="hidden">' + sURL + '</span>' );
             $( '#category-list' ).html( oResponse[ 'category_list' ] );
             $( '#category-preview' ).html( oResponse[ 'category_preview' ] );
 
