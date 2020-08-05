@@ -99,15 +99,19 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
 
         /**
          * There are two cases:
-         *  1. Creating a new unit
-         *  2. Editing the category selection of an already created unit
+         *  a) Creating a new unit
+         *  b) Editing the category selection of an already created unit
          * For the second case, `$_GET[ 'post ]` is set.
          * @return array
          */
         private function ___getUnitOptions() {
 
             if ( ! isset( $_GET[ 'post' ] ) ) {
-                return $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+                $_aUnitOptions = $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+                if ( empty( $_aUnitOptions ) ) {
+                    new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options generated from a transient are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
+                }
+                return $_aUnitOptions;
             }
 
             $_oUnitOption = new AmazonAutoLinks_UnitOption_category(

@@ -35,7 +35,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         // Passing the unit options via transient as passing through JS results in escaped characters and causes errors.
         $_aUnitOptions      = $this->_getUnitOptions( $aPost );
         $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
-        $_sCategoryListURL  = $this->___getCategoryListURL( $aPost, $_sLocale );;
+        $_sCategoryListURL  = $this->___getCategoryListURL( $aPost, $_sLocale );
 
         if ( ! $_sCategoryListURL ) {
             throw new Exception( __( 'Could not load the page as no URL is given.', 'amazon-auto-links' ) );
@@ -91,37 +91,10 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             'checkbox_added'    => AmazonAutoLinks_Unit_Utility_category::getCategoryCheckbox( $_sCategoryListURL, $_sBreadcrumb, 'added' ),
             'checkbox_excluded' => AmazonAutoLinks_Unit_Utility_category::getCategoryCheckbox( $_sCategoryListURL, $_sBreadcrumb, 'excluded' ),
             'category_preview'  => $_sUnitOutput,
-//            'unit_preview'      => $this->___getUnitPreview( $aPost, $_aUnitOptions ),
         );
 
     }
-        private function ___getUnitPreview( array $aPost, array $aUnitOptions ) {
 
-            $_aAddedCategories     = $this->getElementAsArray( $aPost, array( 'urls_added' ) );
-            $_aExcludingCategories = $this->getElementAsArray( $aPost, array( 'urls_excluded' ) );
-            $aUnitOptions = array(
-                'categories'         => $this->___getCategoriesFormatted( $_aAddedCategories ),
-                'categories_exclude' => $this->___getCategoriesFormatted( $_aExcludingCategories ),
-            ) + $aUnitOptions;
-            $_oUnitPreview         = new AmazonAutoLinks_UnitOutput_category3( $aUnitOptions );
-            return $_oUnitPreview->get();
-
-        }
-            /**
-             * @param array $aCategories
-             *
-             * @return array
-             */
-            private function ___getCategoriesFormatted( array $aCategories ) {
-                $_aFormatted = array();
-                foreach( $aCategories as $_iIndex => $_sURL ) {
-                    $_aFormatted[ md5( $_sURL ) ] = array(
-                        'breadcrumb'    => '', // no need to have a valid value just for preview outputs
-                        'page_url'      => $_sURL,
-                    );
-                }
-                return $_aFormatted;
-            }
         /**
          * @param array $aPost
          *
@@ -146,7 +119,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
             // There is a reported case that the locale is not retrieved which seems to be failing to retrieve the transient.
             if ( empty( $_aUnitOptions ) ) {
-                new AmazonAutoLinks_Error( 'CATEGORY_UNIT_CREATION', 'The unit options generated from a transient are empty.', $_aUnitOptions );
+                new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_RESPONSE', 'The unit options generated from a transient are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
             }
 
             return $_aUnitOptions;
