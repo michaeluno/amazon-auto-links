@@ -20,6 +20,12 @@
         handleButton_AddExcludingCategory();
         handleButton_RemoveChecked();
 
+        // Debugging
+        if ( aalCategorySelection.debugMode ) {
+            console.log( 'Amazon Auto Links - arguments', aalCategorySelection );
+        }
+
+
     });
 
     // Unit preview event

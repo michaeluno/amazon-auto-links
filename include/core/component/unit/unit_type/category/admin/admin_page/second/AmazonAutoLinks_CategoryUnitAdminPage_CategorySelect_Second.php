@@ -90,7 +90,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                     'too_many_categories'   => __( 'Please be aware that adding too many categories slows down the performance.', 'amazon-auto-links' ),
                     'already_added'         => __( 'The category is already added.', 'amazon-auto-links' ),
                 ),
-
+                'debugMode'                         => AmazonAutoLinks_Option::getInstance()->isDebug(),
 
             )
         );
