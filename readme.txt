@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.4.2
-Stable tag:         4.2.0
+Stable tag:         4.2.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,7 +322,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.2.1 =
+= 4.2.1 - 08/06/2020 =
 - Optimized performance in the category selection screen of the category unit type.
 
 = 4.2.0 - 08/03/2020 =
