@@ -39,7 +39,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
             'section_id'    => '_default',
             'description'   => array(
                 sprintf(
-                    __( 'The ScratchPad payload unit type allows you to import PA-API queries generated on <a href="%1$s" target="_blank">ScratchPad.', 'amazon-auto-links' ),
+                    __( 'The ScratchPad payload unit type allows you to import PA-API queries generated on <a href="%1$s" target="_blank">ScratchPad</a>.', 'amazon-auto-links' ),
                     'https://webservices.amazon.com/paapi5/scratchpad/'
                 ),
             ),
