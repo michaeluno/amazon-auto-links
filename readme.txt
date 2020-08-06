@@ -322,6 +322,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.2 =
+- Added the Spanish translation.
+- Updated the translation files.
+
 = 4.2.1 - 08/06/2020 =
 - Optimized performance in the category selection screen of the category unit type.
 
