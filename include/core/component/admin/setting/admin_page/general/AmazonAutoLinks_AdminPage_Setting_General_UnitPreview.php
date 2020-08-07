@@ -99,7 +99,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
         
         // Sanitize the custom preview slug.
         $aInputs[ 'preview_post_type_slug' ] = AmazonAutoLinks_Utility::sanitizeCharsForURLQueryKey(
-            AmazonAutoLinks_Utility::getTrancatedString(
+            AmazonAutoLinks_Utility::getTruncatedString(
                 $aInputs[ 'preview_post_type_slug' ],
                 20, // character length
                 ''  // suffix

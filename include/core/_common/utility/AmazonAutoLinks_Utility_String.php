@@ -46,9 +46,10 @@ class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_
      * Returns a truncated string.
      * @since       2.2.0
      * @since       3           Moved from `AmazonAutoLinks_Utility`
+     * @since       4.2.2       Fixed a typo in a method name
      * @return      string
      */
-    static public function getTrancatedString( $sString, $iLength, $sSuffix='...' ) {
+    static public function getTruncatedString( $sString, $iLength, $sSuffix='...' ) {
         
         return ( self::getStringLength( $sString ) > $iLength )
             ? self::getSubstring( 

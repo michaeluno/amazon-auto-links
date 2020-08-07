@@ -9,7 +9,7 @@
  */
 
 /**
- * Provides plugin specific utility methods that uses WordPerss built-in functions.
+ * Provides plugin specific utility methods that uses WordPress built-in functions.
  *
  * @package     Amazon Auto Links
  * @since       3
