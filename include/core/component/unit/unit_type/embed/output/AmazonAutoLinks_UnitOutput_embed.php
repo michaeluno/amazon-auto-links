@@ -57,7 +57,11 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $_aASINs       = $this->getASINs( $_sURL );
             $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
             foreach( $_aASINs as $_sASIN ) {
-                $_aProducts[] = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID );
+                $_aProduct = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID );
+                if ( empty( $_aProduct ) ) {
+                    continue;
+                }
+                $_aProducts[] = $_aProduct;
             }
 
         }
