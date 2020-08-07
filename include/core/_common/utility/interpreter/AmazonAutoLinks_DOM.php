@@ -104,14 +104,14 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * @return      DOMDocument
      */
     public function loadDOMFromHTML( $sHTML, $sMBLang='uni', $sSourceCharSet='' ) {
-        
-        // without this, the characters get broken    
+
+        // without this, the characters get broken
         if ( ! empty( $sMBLang ) && $this->bIsMBStringInstalled ) {
             mb_language( $sMBLang ); 
         }
        
         if ( false !== $sSourceCharSet ) {
-            $sHTML       = $this->convertCharacterEncoding( 
+            $sHTML       = $this->convertCharacterEncoding(
                 $sHTML, // subject
                 $this->sCharEncoding, // to
                 $sSourceCharSet, // from
