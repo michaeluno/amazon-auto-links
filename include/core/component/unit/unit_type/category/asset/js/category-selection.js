@@ -22,6 +22,8 @@
 
         // Debugging
         if ( aalCategorySelection.debugMode ) {
+            console.log( 'Amazon Auto Links - debug', aalCategorySelection.debug );
+            delete aalCategorySelection.debug;
             console.log( 'Amazon Auto Links - arguments', aalCategorySelection );
         }
 

@@ -80,7 +80,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         wp_localize_script(
             $this->___sAjaxScriptHandle1,
             $this->___sAjaxScriptHandle1,        // variable name on JavaScript side
-            array(
+            $this->___getDebugInformation( $_sLocale, $_aUnitOptions )
+            + array(
                 'ajaxURL'                           => admin_url( 'admin-ajax.php' ),
                 'nonce'                             => wp_create_nonce( 'aalNonceCategorySelection' ),
                 'action_hook_suffix_category_list'  => 'aal_category_selection', // WordPress action hook name which follows after `wp_ajax_`
@@ -95,16 +96,55 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                     'too_many_categories'   => __( 'Please be aware that adding too many categories slows down the performance.', 'amazon-auto-links' ),
                     'already_added'         => __( 'The category is already added.', 'amazon-auto-links' ),
                 ),
-                'debugMode'                         => AmazonAutoLinks_Option::getInstance()->isDebug(),
-
-                // Not used but for debugging
-                '_locale'                           => $_sLocale,
-                '_countUnitOptions'                 => count( $_aUnitOptions ),
-                '_callerURL'                        => $this->getCurrentURL(),
             )
         );
 
     }
+
+        /**
+         * Returns an array holding debug information.
+         * @param string $sLocale
+         * @param array $aUnitOptions
+         *
+         * @return array
+         * @since   4.2.2
+         */
+        private function ___getDebugInformation( $sLocale, array $aUnitOptions ) {
+            $_bPluginDebugMode  = AmazonAutoLinks_Option::getInstance()->isDebug();
+            $_aDebugInformation = array(
+                'debugMode' => $_bPluginDebugMode,
+            );
+            if ( ! $_bPluginDebugMode ) {
+                return $_aDebugInformation;
+            }
+            return $_aDebugInformation + array(
+                'debug' => array(
+                    'locale'            => $sLocale,
+                    'localeRaw'         => $this->getElement( $aUnitOptions, array( 'country' ), '' ), // raw - no default value passed
+                    'countUnitOptions'  => count( $aUnitOptions ),
+                    'callerURL'         => $this->getCurrentURL(),
+                    'referrerURL'       => $this->getElement( $_SERVER, array( 'HTTP_REFERER' ) ),
+                    'versionWP'         => $this->getElement( $GLOBALS, array( 'wp_version' ) ),
+                    'versionAAL'        => AmazonAutoLinks_Registry::VERSION,
+                    'activePlugins'     => $this->getAsArray( get_option( 'active_plugins' ) ),
+                    'activeTheme'       => $this->___getThemeInfo(),
+                    'hasTransient'      => ! empty( get_transient( $GLOBALS[ 'aal_transient_id' ] ) ),
+                ),
+            );
+        }
+            /**
+             * @return string
+             * @since 4.2.2
+             */
+            private function ___getThemeInfo() {
+
+                $_oTheme = wp_get_theme( );
+                if ( ! $_oTheme->exists() ) {
+                    return 'The current theme could not be detected.';
+                }
+                return esc_html( $_oTheme->get( 'Name' ) . ' ' . $_oTheme->get( 'Version' ) );
+                        
+            }
 
         /**
          * There are two cases:
