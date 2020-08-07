@@ -332,8 +332,7 @@
             }, // success:
             error: function( response ) {
                 console.log( 'error', response );
-                $( '.now-loading-breadcrumb' ).append( '<p class="response-error">' + response.responseText + '</p>' );
-                // $( '.now-loading-category-list' ).replaceWith( _aResult.category_list );
+                $( '.now-loading-breadcrumb' ).html( '<p class="response-error">' + response.responseText + '</p>' );
             },
             complete: function() {
 
