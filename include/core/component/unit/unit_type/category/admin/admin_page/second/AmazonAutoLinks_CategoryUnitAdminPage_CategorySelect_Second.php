@@ -97,6 +97,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                 ),
                 'debugMode'                         => AmazonAutoLinks_Option::getInstance()->isDebug(),
 
+                // Not used but for debugging
+                '_locale'                           => $_sLocale,
+                '_countUnitOptions'                 => count( $_aUnitOptions ),
+                '_callerURL'                        => $this->getCurrentURL(),
             )
         );
 
