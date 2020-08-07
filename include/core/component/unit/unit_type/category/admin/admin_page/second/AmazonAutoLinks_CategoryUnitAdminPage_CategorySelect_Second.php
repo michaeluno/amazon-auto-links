@@ -22,6 +22,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
      */
     private $___sAjaxScriptHandle1 = 'aalCategorySelection';
 
+    protected function _construct( $oFactory ) {}
+
     /**
      * @return array
      * @since   4.2.0
@@ -64,42 +66,50 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             return;
         }
 
-        // Get the user's set locale
-        $_aUnitOptions      = $this->___getUnitOptions();
-        $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
-        $_sRootCategoryURL  = AmazonAutoLinks_Unit_Utility_category::getCategoryListRootURL( $_sLocale );
-
-        // Ajax script
-        wp_enqueue_script( 'jquery' );
-        wp_enqueue_script(
-            $this->___sAjaxScriptHandle1,    // handle
-            $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/js/category-selection.js' ), // 4.2.0
-            array( 'jquery' ),
-            true
-        );
-        wp_localize_script(
-            $this->___sAjaxScriptHandle1,
-            $this->___sAjaxScriptHandle1,        // variable name on JavaScript side
-            $this->___getDebugInformation( $_sLocale, $_aUnitOptions )
-            + array(
-                'ajaxURL'                           => admin_url( 'admin-ajax.php' ),
-                'nonce'                             => wp_create_nonce( 'aalNonceCategorySelection' ),
-                'action_hook_suffix_category_list'  => 'aal_category_selection', // WordPress action hook name which follows after `wp_ajax_`
-                'action_hook_suffix_unit_preview'   => 'aal_unit_preview',
-                'spinnerURL'                        => admin_url( 'images/loading.gif' ),
-                'transientID'                       => $GLOBALS[ 'aal_transient_id' ],
-                'postID'                            => $this->getElement( $_GET, array( 'post' ), 0 ), // for editing category selection, a post id is passed
-                'maxNumberOfCategories'             => ( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
-                'rootURL'                           => $_sRootCategoryURL,
-                'translation'                       => array(
-                    'category_not_selected' => __( 'Please select a category.', 'amazon-auto-links' ),
-                    'too_many_categories'   => __( 'Please be aware that adding too many categories slows down the performance.', 'amazon-auto-links' ),
-                    'already_added'         => __( 'The category is already added.', 'amazon-auto-links' ),
-                ),
-            )
-        );
+        // For unknown reasons, `wp_enqueue_scripts` does not work.
+        add_action( 'admin_head', array( $this, 'replyToEnqueueScripts' ) );
 
     }
+
+        public function replyToEnqueueScripts() {
+
+            // Get the user's set locale
+            $_aUnitOptions      = $this->___getUnitOptions();
+            $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
+            $_sRootCategoryURL  = AmazonAutoLinks_Unit_Utility_category::getCategoryListRootURL( $_sLocale );
+
+            // Ajax script
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script(
+                $this->___sAjaxScriptHandle1,    // handle
+                $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/js/category-selection.js' ), // 4.2.0
+                array( 'jquery' ),
+                false,
+                true
+            );
+            wp_localize_script(
+                $this->___sAjaxScriptHandle1,
+                $this->___sAjaxScriptHandle1,        // variable name on JavaScript side
+                $this->___getDebugInformation( $_sLocale, $_aUnitOptions )
+                + array(
+                    'ajaxURL'                           => admin_url( 'admin-ajax.php' ),
+                    'nonce'                             => wp_create_nonce( 'aalNonceCategorySelection' ),
+                    'action_hook_suffix_category_list'  => 'aal_category_selection', // WordPress action hook name which follows after `wp_ajax_`
+                    'action_hook_suffix_unit_preview'   => 'aal_unit_preview',
+                    'spinnerURL'                        => admin_url( 'images/loading.gif' ),
+                    'transientID'                       => $GLOBALS[ 'aal_transient_id' ],
+                    'postID'                            => $this->getElement( $_GET, array( 'post' ), 0 ), // for editing category selection, a post id is passed
+                    'maxNumberOfCategories'             => ( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
+                    'rootURL'                           => $_sRootCategoryURL,
+                    'translation'                       => array(
+                        'category_not_selected' => __( 'Please select a category.', 'amazon-auto-links' ),
+                        'too_many_categories'   => __( 'Please be aware that adding too many categories slows down the performance.', 'amazon-auto-links' ),
+                        'already_added'         => __( 'The category is already added.', 'amazon-auto-links' ),
+                    ),
+                )
+            );
+
+        }
 
         /**
          * Returns an array holding debug information.
@@ -156,9 +166,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         private function ___getUnitOptions() {
 
             if ( ! isset( $_GET[ 'post' ] ) ) {
-                $_aUnitOptions = $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+//                $_aUnitOptions = $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+                $_aUnitOptions = $this->oFactory->getSavedOptions();
                 if ( empty( $_aUnitOptions ) ) {
-                    new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options generated from a transient are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
+                    new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
                 }
                 return $_aUnitOptions;
             }
@@ -179,6 +190,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
     public function replyToDoTab( $oFactory ) {
 
         $_aData = $oFactory->getSavedOptions();
+
         /**
          * Renders a custom form for category selection.
          * 

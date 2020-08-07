@@ -17,6 +17,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
     
     /**
      * Stores the caller object.
+     * @var AmazonAutoLinks_AdminPageFramework
      */
     public $oFactory;
 
