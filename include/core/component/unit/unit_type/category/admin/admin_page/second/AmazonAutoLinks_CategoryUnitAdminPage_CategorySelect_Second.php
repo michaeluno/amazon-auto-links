@@ -59,6 +59,11 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             )
         );
 
+        // If doing Ajax do nothing
+        if ( apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+            return;
+        }
+
         // Get the user's set locale
         $_aUnitOptions      = $this->___getUnitOptions();
         $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
