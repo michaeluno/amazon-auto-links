@@ -17,6 +17,26 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
+     * @param   string $sHTML
+     * @param   string $sURL
+     * @since   4.2.2
+     * @return  boolean
+     */
+    static public function isBlockedByAmazonCaptcha( $sHTML, $sURL ) {
+
+        if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
+            return false;
+        }
+        $_oDOM      = new AmazonAutoLinks_DOM;
+        $_oDoc      = $_oDOM->loadDOMFromHTML( $sHTML );
+        $_oXPath    = new DOMXPath( $_oDoc );
+        $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
+        return null !== $_noNode;
+
+    }
+
+
+    /**
      * Returns a schedule information of an interval option.
      * @since   4.2.1
      * @return  string

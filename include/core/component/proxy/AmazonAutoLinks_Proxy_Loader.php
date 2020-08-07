@@ -45,6 +45,7 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts;
         new AmazonAutoLinks_Proxy_Event_Action_UnusableProxy;
         new AmazonAutoLinks_Proxy_Event_Filter_PreventCaching;
+        new AmazonAutoLinks_Proxy_Event_Filter_CheckExistentCaptchaErrors; // 4.2.2
 
         if ( ! $_oToolOption->get( array( 'proxies', 'automatic_updates' ), false ) ) {
             return;

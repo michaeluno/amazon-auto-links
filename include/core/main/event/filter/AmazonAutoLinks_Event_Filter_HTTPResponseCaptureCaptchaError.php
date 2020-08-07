@@ -42,30 +42,11 @@ class AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError extends Amazo
             return $oaResult;
         }
         $_sBody = $this->getElement( $oaResult, array( 'body' ) );
-        if ( $this->___isBlockedByAmazonCaptcha( $_sBody, $sURL ) ) {
+        if ( $this->isBlockedByAmazonCaptcha( $_sBody, $sURL ) ) {
             return new WP_Error( 'BLOCKED_BY_CAPTCHA', 'Blocked by captcha.' );
         }
         return $oaResult;
 
     }
-
-        /**
-         * @param   string $sHTML
-         * @param   string $sURL
-         * @since   4.2.2
-         * @return  boolean
-         */
-        static public function ___isBlockedByAmazonCaptcha( $sHTML, $sURL ) {
-
-            if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
-                return false;
-            }
-            $_oDOM      = new AmazonAutoLinks_DOM;
-            $_oDoc      = $_oDOM->loadDOMFromHTML( $sHTML );
-            $_oXPath    = new DOMXPath( $_oDoc );
-            $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
-            return null !== $_noNode;
-
-        }
 
 }

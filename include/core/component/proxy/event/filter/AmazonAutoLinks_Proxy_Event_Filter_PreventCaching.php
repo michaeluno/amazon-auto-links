@@ -54,7 +54,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_PreventCaching extends AmazonAutoLinks_
         }
 
         // If the body contains a Captcha result
-        if ( $this->___isBlockedByCaptcha( $_sHTTPBody, $sURL ) ) {
+        if ( $this->isBlockedByAmazonCaptcha( $_sHTTPBody, $sURL ) ) {
             $this->___setFilterToSetCacheDuration( $sCacheName );
             return $mData;
         }
@@ -71,24 +71,6 @@ class AmazonAutoLinks_Proxy_Event_Filter_PreventCaching extends AmazonAutoLinks_
             );
         }
 
-        /**
-         * @param   string $sHTML
-         * @param   string $sURL
-         * @since   4.0.1
-         * @return  boolean
-         * @remark  duplicated code: copied from AmazonAutoLinks_Unit_Log_PAAPIErrors
-         */
-        private function ___isBlockedByCaptcha( $sHTML, $sURL ) {
-            if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
-                return false;
-            }
-            // At this point, it is an access to an Amazon site.
-            $_oDOM      = new AmazonAutoLinks_DOM;
-            $_oDoc      = $_oDOM->loadDOMFromHTML( $sHTML );
-            $_oXPath    = new DOMXPath( $_oDoc );
-            $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
-            return null !== $_noNode;
-        }
 
     /**
      * @param integer $iCacheDuration
