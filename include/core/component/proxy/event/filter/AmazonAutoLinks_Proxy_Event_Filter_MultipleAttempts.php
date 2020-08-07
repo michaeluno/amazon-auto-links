@@ -22,7 +22,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
      */
     public function __construct() {
 
-        add_action( 'aal_filter_http_request_response', array( $this, 'replyToAttemptHTTPRequestsMultipleTimes' ), 10, 5 );
+        add_filter( 'aal_filter_http_request_response', array( $this, 'replyToAttemptHTTPRequestsMultipleTimes' ), 10, 5 );
 
     }
 

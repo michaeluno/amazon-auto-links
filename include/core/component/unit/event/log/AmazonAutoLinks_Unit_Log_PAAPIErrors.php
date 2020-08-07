@@ -100,37 +100,10 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
             // At this point, it is not JSON.
 
             // If there is an HTTP Status error, return it.
-            $_sError = trim( $_sError );
-            if ( $_sError ) {
-                return $_sError;
-            }
-
-            // At this point, it seems to be fine.
-
-            // At last, check if it is blocked by Captcha.
-            $_bBlockedByCaptcha = $this->___isBlockedByCaptcha( $_sBody, $sURL );
-            return $_bBlockedByCaptcha
-                ? 'Blocked by captcha'
-                : '';
+            // Otherwise, it should be fine.
+            return trim( $_sError );
 
         }
-            /**
-             * @param   string $sHTML
-             * @param   string $sURL
-             * @since   4.0.1
-             * @return  boolean
-             */
-            private function ___isBlockedByCaptcha( $sHTML, $sURL ) {
-                if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
-                    return false;
-                }
-                // At this point, it is an access to an Amazon site.
-                $_oDOM      = new AmazonAutoLinks_DOM;
-                $_oDoc      = $_oDOM->loadDOMFromHTML( $sHTML );
-                $_oXPath    = new DOMXPath( $_oDoc );
-                $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
-                return null !== $_noNode;
-            }
 
             private function ___getAPIResponseFailure( $_aResponse ) {
                 if ( ! isset( $_aResponse[ '__type' ], $_aResponse[ 'message' ] ) ) {

@@ -66,42 +66,9 @@ class AmazonAutoLinks_Event_Event_Log_HTTPRequestErrors extends AmazonAutoLinks_
             }
 
             // HTTP Status Error
-            $_sError  = $this->___getHTTPStatusError( $mData ) . ' ';
-
-            // If there is an HTTP Status error, return it.
-            $_sError = trim( $_sError );
-            if ( $_sError ) {
-                return $_sError;
-            }
-
-            // At this point, it seems to be fine.
-
-            // At last, check if it is blocked by Captcha.
-            if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
-                return false;
-            }
-
-            /// At this point. the url is of Amazon
-            $_sBody             = $this->getElement( $mData, array( 'body' ) );
-            $_bBlockedByCaptcha = $this->___isBlockedByCaptcha( $_sBody, $sURL );
-            return $_bBlockedByCaptcha
-                ? 'Blocked by captcha'
-                : '';
+            return $this->___getHTTPStatusError( $mData );
 
         }
-            /**
-             * @param   string $sHTML
-             * @param   string $sURL
-             * @since   4.0.1
-             * @return  boolean
-             */
-            private function ___isBlockedByCaptcha( $sHTML, $sURL ) {
-                $_oDOM      = new AmazonAutoLinks_DOM;
-                $_oDoc      = $_oDOM->loadDOMFromHTML( $sHTML );
-                $_oXPath    = new DOMXPath( $_oDoc );
-                $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
-                return null !== $_noNode;
-            }
 
             private function ___getHTTPStatusError( array $mData ) {
                 $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
