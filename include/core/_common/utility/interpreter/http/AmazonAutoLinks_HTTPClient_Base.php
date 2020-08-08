@@ -254,19 +254,23 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
     /**
      * Returns raw HTTP response.
      * 
-     * @return      array|object        An array holding response arrays or WP Error object.
+     * @return      array        An array holding response arrays.
      */
     public function getResponses() {
-        return $this->_getHTTPResponseWithCache( 
-            $this->aURLs, 
-            $this->aArguments, 
-            $this->iCacheDuration
-        );        
+
+        $_aResponses = $this->_getHTTPResponseWithCache( $this->aURLs, $this->aArguments, $this->iCacheDuration );
+        /**
+         * This filter passes the value of the both cached one and the newly fetched one.
+         * This is useful to check errors.
+         * @since   4.2.2
+         */
+        return apply_filters( 'aal_filter_http_request_result', $_aResponses, $this->aURLs, $this->aArguments, $this->iCacheDuration );
+        
     }    
         /**
          *
          * @param       array       $aURLs      The URLs to be requested. The array keys must be indexed with cache names.
-         * @return      object|array        Response array or WP Error object.
+         * @return      array       Response array
          */
         protected function _getHTTPResponseWithCache( array $aURLs, $aArguments=array(), $iCacheDuration=86400 ) {
 
@@ -614,7 +618,6 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             if ( $_bResult ) {
                 do_action( 'aal_action_set_http_request_cache', $_sCacheName, $sURL, $mData, $iCacheDuration, $_sCharSet );
             }
-
             
         }
             /**

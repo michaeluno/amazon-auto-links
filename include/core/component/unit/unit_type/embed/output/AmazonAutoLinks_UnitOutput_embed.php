@@ -85,11 +85,15 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
             add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
+            add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10, 4 );
 
             $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sURL );
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
+
             remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
             remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+            remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10 );
+
 
             if ( empty( $_aProduct ) ) {
                 return $_aProduct;
@@ -154,5 +158,44 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                     : $_bisKey;
             }
 
+
+    /**
+     * Overrides parent method to return errors specific to this embed unit type.
+     * @param array $aProducts
+     *
+     * @return string
+     * @since   4.2.2
+     */
+    protected function _getError( $aProducts ) {
+        if ( ! empty( $this->___aErrors ) ) {
+            return implode( ' ', $this->___aErrors );
+        }
+        return parent::_getError( $aProducts );
+    }
+
+    /**
+     * Stores captured HTTP errors.
+     * @var array
+     */
+    private $___aErrors = array();
+
+    /**
+     * @param $aResponses
+     * @param $aURLs
+     * @param $aArguments
+     * @param $iCacheDuration
+     *
+     * @return array
+     * @since   4.2.2
+     */
+    public function replyToCaptureErrors( $aResponses, $aURLs, $aArguments, $iCacheDuration ) {
+        foreach( $aResponses as $_sURL => $_aoResponse ) {
+            if ( ! is_wp_error( $_aoResponse ) ) {
+                continue;
+            }
+            $this->___aErrors[ $_sURL ] = $_aoResponse->get_error_message();
+        }
+        return $aResponses;
+    }
 
 }

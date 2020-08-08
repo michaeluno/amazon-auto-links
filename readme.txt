@@ -326,6 +326,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the Spanish translation.
 - Updated the translation files.
 - Added debug information in the console.log of the category selection screen.
+- Added more precise error messages to appear in the `embed` unit type outputs.
 - Fixed a bug that modified date of the product was not retrieved for non-cached results.
 
 = 4.2.1 - 08/06/2020 =
