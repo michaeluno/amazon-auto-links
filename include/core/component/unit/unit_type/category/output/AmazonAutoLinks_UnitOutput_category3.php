@@ -148,8 +148,10 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
             // Find products
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
+            add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
             $_aHTMLs          = $this->___getHTMLBodies( $aURLs );
             remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+            remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
             $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
             $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
             $_aProducts       = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sSiteDomain );
@@ -193,10 +195,17 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
              * @return      array
              */
             public function replyToCaptureUpdatedDate( $aCache, $iCacheDuration, $aArguments, $sRequestType ) {
-                
                 $this->_aModifiedDates[ $aCache[ 'request_uri' ]  ] = $aCache[ '_modified_timestamp' ];
                 return $aCache;
-
+            }
+            /**
+             * @callback    filter
+             * @since   4.2.2
+             * @return  array|WP_Error
+             */
+            public function replyToCaptureUpdatedDateForNewRequest( $oaResult, $sURL, $aArguments, $sRequestType, $iCacheDuration ) {
+                $this->_aModifiedDates[ $sURL  ] = time();
+                return $oaResult;
             }
 
             /**

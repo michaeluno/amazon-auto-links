@@ -82,11 +82,14 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 $_sDomain . '/dp/' . $sASIN . '/'
             );
 
+
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
+            add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
 
             $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sURL );
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
             remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+            remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
 
             if ( empty( $_aProduct ) ) {
                 return $_aProduct;
@@ -150,5 +153,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                     ? $_sDefaultLocale
                     : $_bisKey;
             }
+
 
 }
