@@ -168,7 +168,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      */
     protected function _getError( $aProducts ) {
         if ( ! empty( $this->___aErrors ) ) {
-            return implode( ' ', $this->___aErrors );
+            $_sErrors =  implode( ' ', $this->___aErrors );
+            $this->___aErrors = array();
+            return $_sErrors;
         }
         return parent::_getError( $aProducts );
     }
