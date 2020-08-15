@@ -93,15 +93,30 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
 
                 $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
                 $_iIteration      = 0;
-                while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
+                $_oLock           = new AmazonAutoLinks_VersatileFileManager( __METHOD__, 1, $_sAPIRequestLock . '_' );
+                while( $_oLock->isLocked() || $this->getTransient( $_sAPIRequestLock ) ) {
                     sleep( 1 );
                     $_iIteration++;
+                    if ( $_iIteration > 10 ) {
+                        break;
+                    }
                 }
                 $this->setTransient(
                     $_sAPIRequestLock,
                     $sRequestURL, // any data will be sufficient
                     1  // one second
                 );
+
+                // @deprecated 4.3.0 - changed the method to versatile lock file.
+//                while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
+//                    sleep( 1 );
+//                    $_iIteration++;
+//                }
+//                $this->setTransient(
+//                    $_sAPIRequestLock,
+//                    $sRequestURL, // any data will be sufficient
+//                    1  // one second
+//                );
 
             }
 
