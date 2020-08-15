@@ -58,9 +58,10 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
             foreach( $_aASINs as $_sASIN ) {
                 $_aProduct = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID );
-                if ( empty( $_aProduct ) ) {
-                    continue;
-                }
+                // @deprecated 4.2.2 A structure array is returned on failure instead of an empty array.
+//                if ( empty( $_aProduct ) ) {
+//                    continue;
+//                }
                 $_aProducts[] = $_aProduct;
             }
 
@@ -94,8 +95,19 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
             remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10 );
 
+            // @deprecated 4.2.2 Even if it fails to retrieve product data, a structure array will be returned and it's not empty
+//            if ( empty( $_aProduct ) ) {
+//                return $_aProduct;
+//            }
 
-            if ( empty( $_aProduct ) ) {
+            // If the thumbnail is not set, it means failure of retrieving the product data.
+            if ( ! isset( $_aProduct[ 'thumbnail_url' ] ) ) {
+                // @deprecated 4.2.2
+//                $_aProduct[ 'thumbnail_url' ] = $this->getThumbnailURLFromASIN(
+//                    $_aProduct[ 'ASIN' ],
+//                    $this->___getLocaleFromURL( $_aProduct[ 'product_url' ] ),
+//                    $this->oUnitOption->get( 'image_size' )
+//                );
                 return $_aProduct;
             }
 
@@ -120,6 +132,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_aProduct;
 
         }
+
+
             /**
              * @param string $sURL
              *
@@ -167,7 +181,11 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @since   4.2.2
      */
     protected function _getError( $aProducts ) {
-        if ( ! empty( $this->___aErrors ) ) {
+        /**
+         * For users not using PA-API keys, errors should be displayed.
+         * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
+         */
+        if ( ! $this->oOption->isAPIConnected() && ! empty( $this->___aErrors ) ) {
             $_sErrors =  implode( ' ', $this->___aErrors );
             $this->___aErrors = array();
             return $_sErrors;

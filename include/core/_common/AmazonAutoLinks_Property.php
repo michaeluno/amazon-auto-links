@@ -202,6 +202,28 @@ final class AmazonAutoLinks_Property {
     );
 
     /**
+     * Stores the locale (country) number used for image URLs.
+     * @remark  This is still not accurate and needs to be improved.
+     * @var array
+     * @since 4.2.2
+     */
+    static public $aLocaleNumbers = array(
+        'CA'    => '01',
+        'CN'    => '28',
+        'FR'    => '08',
+        'DE'    => '03',
+        'IT'    => '29',
+        'JP'    => '09',
+        'UK'    => '02',
+        'ES'    => '30',
+        'US'    => '01',
+        'IN'    => '01',
+        'BR'    => '01',
+        'MX'    => '30',
+        'AU'    => '01',
+    );
+
+    /**
      * @since       3.1.0
      * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/AddToCartForm.html
      */

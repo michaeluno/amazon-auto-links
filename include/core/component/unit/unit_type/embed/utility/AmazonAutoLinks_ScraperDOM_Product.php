@@ -85,24 +85,27 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
      * @param string $sSiteDomain       The store URL of the domain part with scheme without trailing slash. e.g. https://www.amazon.com
      *
      * @return array    Returns a single product array.
+     * @since   4.0.0
+     * @since   4.2.2 When failing to retrieve the product information, return a structure array instead of an empty array.
      */
     public function get( $sAssociateID, $sSiteDomain ) {
 
         $_aProduct   = $this->_aProduct;
         $_oXPath     = $this->_oXPath;
 
+        // Mandatory Elements
+        $_aProduct[ 'ASIN' ]                = $this->_oUtil->getASINFromURL( $_aProduct[ 'product_url' ] );
+
         $_noItemNode = $this->oDoc->getElementsByTagName( 'body' )->item( 0 );
         if ( ! $_noItemNode ) {
-            return array();
+            return $_aProduct;
         }
         $_oItemNode  = $_noItemNode;
 
         if ( $this->___isBlockedByCaptcha( $_oXPath, $_oItemNode ) ) {
-            return array();
+            return $_aProduct;
         }
 
-        // Mandatory Elements
-        $_aProduct[ 'ASIN' ]                = $this->_oUtil->getASINFromURL( $_aProduct[ 'product_url' ] );
 
         // Optional
         $_aProduct[ 'title' ]               = $this->___getProductTitle( $_oXPath, $_oItemNode );

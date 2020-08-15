@@ -15,6 +15,54 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Generates a thumbnail URL from a given ASIN.
+     *
+     *
+     * ## Examples
+     * ### HTTP
+     * http://images-jp.amazon.com/images/P/{ASIN,ISBN}.{COUNTRY_NUMBER}.{SIZE}.jpg
+     * http://images.amazon.com/images/P/{ASIN,ISBN}.{COUNTRY_NUMBER}._{DISCOUNT_RATE}_PI_SC{SIZE}_.jpg
+     * http://images.amazon.com/images/P/{ASIN,ISBN}.{COUNTRY_NUMBER}._SCL_SX{PIXELSIZE}_.jpg
+     *
+     * ### HTTPS (SSL)
+     * https://images-na.ssl-images-amazon.com/images/P/{ASIN,ISBN}.{COUNTRY_NUMBER}.{SIZE}.jpg
+     *
+     * #### COUNTRY_NUMBER (optional)
+     * US: 01
+     * UK:
+     * JP: 09
+     *
+     * #### SIZE - Image Sizes
+     * - THUMBZZZ	tiny	75x75	52x75
+     * - TZZZZZZZ	small	110x110	77x110
+     * - MZZZZZZZ	medium	160x160	112x160
+     * - LZZZZZZZ	large	500x500	349x500
+     *
+     * ### DISCOUNT_RATE - discount mark
+     * - PE{*}
+     * e.g. `PE30` for 30% off
+     *
+     * ### Widget Method
+     * @see https://stackoverflow.com/questions/58142293/fetching-amazon-product-image-by-asin
+     *
+     * @param string $sASIN
+     * @param string $sLocale
+     * @return  string
+     * @since   4.2.2
+     * @see https://www.oreilly.com/library/view/amazon-hacks/0596005423/ch01s07.html
+     * @see https://www.ipentec.com/document/internet-get-amazon-product-image
+     * @remark      This method is not reliable as the locale code is unknown.
+     * @deprecated 4.2.2    Not used at the moment.
+     */
+    static public function getThumbnailURLFromASIN( $sASIN, $sLocale, $iImageSize ) {
+        $_sLocaleNumber = self::getElement( AmazonAutoLinks_Property::$aLocaleNumbers, array( strtoupper( $sLocale ) ), '01' );
+        return is_ssl()
+            ? "https://images-na.ssl-images-amazon.com/images/P/{$sASIN}.{$_sLocaleNumber}._SCL_SX{$iImageSize}_.jpg"
+            : "http://images.amazon.com/images/P/{$sASIN}.{$_sLocaleNumber}._SCL_SX{$iImageSize}_.jpg";
+    }
+
+
+    /**
      * Extracts ASIN from the given url.
      *
      * ASIN is a product ID consisting of 10 characters.
