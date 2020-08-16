@@ -327,6 +327,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Updated the translation files.
 - Added debug information in the console.log of the category selection screen.
 - Added more precise error messages to appear in the `embed` unit type outputs.
+- Fixed incompatibility with WordPress 5.5 regarding input radio boxes that caused the unchecked state while selecting them.
 - Fixed a bug that modified date of the product was not retrieved for non-cached results.
 
 = 4.2.1 - 08/06/2020 =
