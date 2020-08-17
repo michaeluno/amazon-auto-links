@@ -28,9 +28,12 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
             ),        
             array(
                 'field_id'      => 'count',
-                'title'         => __( 'Number of Items', 'amazon-auto-links' ),
+                'title'         => __( 'Maximum Number of Items', 'amazon-auto-links' ),
                 'type'          => 'number',
-                'tip'           => __( 'The number of product links to display.', 'amazon-auto-links' ),
+                'description'   => array(
+                    __( 'A maximum number of products to display.', 'amazon-auto-links' )
+                    . ' ' . __( 'When the number of items fetched from the resource does not reach the set count or items are filtered out by filter options, the result count can be less than this set count.', 'amazon-auto-links' )
+                ),
                 'default'       => 10,
                 'attributes'    => array(
                     'min' => 1,
