@@ -39,10 +39,11 @@ class AmazonAutoLinks_VersatileFileManager {
      * @return bool
      */
     public function isLocked() {
-        if ( $this->exist() ) {
+        if ( $this->___isAlive() ) {
             return true;
         }
-        $this->set();
+        // At this point, the file does not exist or timed out
+        $this->___set();
         return false;
     }
 
@@ -52,36 +53,45 @@ class AmazonAutoLinks_VersatileFileManager {
      * This method ensures it only runs once by checking a lock file.
      * Checks 30 seconds.
      * @since   3.7.7
+     * @since   4.3.0       Changed the name from `exist()` to `___isAlive()`
      * @return boolean  True if the file is not timed out; otherwise, false.
      */
-    public function exist() {
+    private function ___isAlive() {
 
         $_sLockFilePath = $this->___getActionLockFilePath();
         if ( ! file_exists( $_sLockFilePath ) ) {
-            return false;
+            return false; // not alive (not created yet)
         }
         $_iModifiedTime  = ( integer ) filemtime( $_sLockFilePath );
         if ( $_iModifiedTime + $this->___iTimeout > time() ) {
             // the file is not timed-out yet
-            return true;
+            return true; // alive
         }
         // lock file is timed-out
-        return false;
+        return false;   // not alive
 
     }
 
-    public function set() {
+    /**
+     * Sets the lock file.
+     * @since   3.7.7
+     * @since   4.3.0   Changed the scope to private form public.
+     * @since   4.3.0   Changed the ame from `set()` to `___set()`.
+     */
+    private function ___set() {
 
         if ( ! is_dir( $this->___sTempDirPath ) ) {
             mkdir( $this->___sTempDirPath, 0777, true );
         }
-        file_put_contents(
-            $this->___getActionLockFilePath( ),
-            microtime( true ),
-            LOCK_EX
-        );
-        // Schedule cleaning up files
-        add_action( 'shutdown', array( $this, 'replyToCleanFiles' ) );
+        $_sLockFilePath = $this->___getActionLockFilePath();
+        if ( file_exists( $_sLockFilePath ) ) {
+            // Update the modification time
+            touch( $_sLockFilePath );
+            return;
+        }
+
+        // At this point, the file does not exist so creat it.
+        file_put_contents( $_sLockFilePath, microtime( true ), LOCK_EX );
 
     }
         /**
@@ -92,21 +102,6 @@ class AmazonAutoLinks_VersatileFileManager {
             return $this->___sTempDirPath . '/'
                 . $this->___sFileNamePrefix . md5(site_url() . $this->___sIdentifier )
                 . '.txt';
-        }
-        /**
-         * The created file will not be deleted because in the situation there are two simultaneously spawned actions,
-         * at the time that the one finishes immediately and after that the other starts, the other one thinks it is not locked
-         * and does the same routine again, which is redundant and consumes the server resource.
-         * So here just cleans up left files with the set timeout.
-         */
-        public function replyToCleanFiles() {
-            $_sPattern = $this->___sTempDirPath . DIRECTORY_SEPARATOR
-                . $this->___sFileNamePrefix . "*.txt";
-            foreach ( glob( $_sPattern ) as $_sFilePath ) {
-                if ( time() - filectime( $_sFilePath ) > $this->___iTimeout ) {
-                    unlink( $_sFilePath );
-                }
-            }
         }
 
 }
