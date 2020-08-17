@@ -107,7 +107,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                     1  // one second
                 );
 
-                // @deprecated 4.3.0 - changed the method to versatile lock file.
+                // @deprecated 4.2.3 - changed the method to versatile lock file.
 //                while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
 //                    sleep( 1 );
 //                    $_iIteration++;

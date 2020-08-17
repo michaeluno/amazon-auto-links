@@ -53,7 +53,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * This method ensures it only runs once by checking a lock file.
      * Checks 30 seconds.
      * @since   3.7.7
-     * @since   4.3.0       Changed the name from `exist()` to `___isAlive()`
+     * @since   4.2.3       Changed the name from `exist()` to `___isAlive()`
      * @return boolean  True if the file is not timed out; otherwise, false.
      */
     private function ___isAlive() {
@@ -75,8 +75,8 @@ class AmazonAutoLinks_VersatileFileManager {
     /**
      * Sets the lock file.
      * @since   3.7.7
-     * @since   4.3.0   Changed the scope to private form public.
-     * @since   4.3.0   Changed the ame from `set()` to `___set()`.
+     * @since   4.2.3   Changed the scope to private form public.
+     * @since   4.2.3   Changed the ame from `set()` to `___set()`.
      */
     private function ___set() {
 
