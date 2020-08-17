@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.4.2
-Stable tag:         4.2.2
+Stable tag:         4.2.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.2.3 - 08/18/2020 =
+- Optimized PA-API requests.
 
 = 4.2.2 - 08/16/2020 =
 - Added the Spanish translation.
