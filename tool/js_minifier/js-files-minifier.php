@@ -6,7 +6,10 @@
 
 /* Set necessary paths */
 $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
-$sTargetDir			= $sTargetBaseDir . '/asset/js/';
+$aTargetDirs        = array(
+    $sTargetBaseDir . '/asset/js/',
+    $sTargetBaseDir . '/include/core/',
+);
 
 /* If accessed from a browser, exit. */
 $bIsCLI				= php_sapi_name() == 'cli';
@@ -21,7 +24,7 @@ require( dirname( __FILE__ ) . '/class/JS_Files_Minifier.php' );
 /* Create a minified version of the framework. */
 echo 'Started...' . $sCarriageReturn;
 new JS_Files_Minifier( 
-	$sTargetDir, 
+	$aTargetDirs,
 	'',     // the same directory to the target file.
 	array(
 		'header_class_name'	=>	'AmazonAutoLinks_Registry_Base',
