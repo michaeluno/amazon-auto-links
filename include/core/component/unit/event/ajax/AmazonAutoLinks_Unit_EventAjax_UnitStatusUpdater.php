@@ -13,7 +13,7 @@
  * @since   3.7.6
  *
  */
-class AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater extends AmazonAutoLinks_AjaxEvent_Base {
+class AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater extends AmazonAutoLinks_AjaxEvent_Base {
 
     protected $_sActionHookName = 'wp_ajax_aal_action_update_unit_status';
 

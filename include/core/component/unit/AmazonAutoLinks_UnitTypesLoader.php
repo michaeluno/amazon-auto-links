@@ -15,7 +15,17 @@
  * @since       3.3.0
 */
 class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Base {
-    
+
+    /**
+     * Stored the component directory path.
+     *
+     * Referred to enqueue resources.
+     *
+     * @var string
+     * @since   4.3.0
+     */
+    static public $sDirPath = '';
+
     /**
      * Stores class names of common form fields among all the unit types.
      */
@@ -34,15 +44,13 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
     public $aProtectedMetaKeys = array(
         'product_filters',      // section id
     );
-    
-    
+
     /**
      * 
      */
     protected function _construct( $sScriptPath ) {
 
-        // Overall Unit Events
-        new AmazonAutoLinks_Unit_AjaxEvent_UnitStatusUpdater;
+        self::$sDirPath = dirname( __FILE__ );
 
         // Post types
         new AmazonAutoLinks_PostType_Unit( 
@@ -84,6 +92,10 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+
 
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
+
+            new AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater;
+
+            new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // 4.3.0
 
         }
         

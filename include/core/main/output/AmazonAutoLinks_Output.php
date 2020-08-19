@@ -48,7 +48,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @since       2.0.0
      */
     public function __construct( $aArguments ) {
-        $this->___aRawArguments = $aArguments; // 3.6.0+
+        $this->___aRawArguments = $this->getAsArray( $aArguments ); // 3.6.0+
         $_oFormatter            = new AmazonAutoLinks_Output___ArgumentFormatter( $aArguments );
         $this->aArguments       = $_oFormatter->get();
     }
@@ -69,11 +69,13 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      */
     public function get() {
 
-        // 3.6.0+
-        $_oAjaxOutput = new AmazonAutoLinks_Output___Ajax( $this->aArguments, $this->___aRawArguments );
-        $_sOutputForAjax = $_oAjaxOutput->get();
-        if ( $_sOutputForAjax ) {
-            return $_sOutputForAjax;
+        /**
+         * Allows the Ajax output to be returned.
+         * @since   4.3.0
+         */
+        $_sPreOutput = apply_filters( 'aal_filter_pre_unit_output', $this->aArguments, $this->___aRawArguments );
+        if ( $_sPreOutput ) {
+            return $_sPreOutput;
         }
 
         $_sOutput = $this->___getOutput();
