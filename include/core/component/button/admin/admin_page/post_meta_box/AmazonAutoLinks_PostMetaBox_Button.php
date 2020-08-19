@@ -27,32 +27,19 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
         );
 
     }
-        
-    /**
-     * Indicates whether the custom style tag was inserted in the head tag or not.
-     */
-    static $bCustomStyleLoaded = false;
-    
+
     /**
      * 
      * @callback        action      set_up_{instantiated class name}
      */
     public function replyToInsertCustomStyleTag() {
-                    
-        if ( self::$bCustomStyleLoaded ) {
+
+        if ( $this->oUtil->hasBeenCalled( __METHOD__ ) ) {
             return;
         }
-        self::$bCustomStyleLoaded = true;
         
-        add_action( 
-            'admin_head',  
-            array( $this, 'replyToPrintCustomStyleTag' )
-        );
-          
-        add_action( 
-            'admin_head', 
-            array( $this, 'replyToSetScripts' )
-        );
+        add_action( 'admin_head', array( $this, 'replyToPrintCustomStyleTag' ) );
+        add_action( 'admin_head', array( $this, 'replyToSetScripts' ) );
         
     }
         /**
@@ -77,28 +64,30 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
                 ? 'button-preview-event-binder.js'
                 : 'button-preview-event-binder.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
+                AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
                     'handle_id'    => 'aal_button_script_event_binder',                
-                    'dependencies' => array( 'jquery' )
+                    'dependencies' => array( 'jquery' ),
+                    'in_footer'    => true,
                 )
             );
 
             $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? 'button-preview-updator.js'
-                : 'button-preview-updator.min.js';
+                ? 'button-preview-updater.js'
+                : 'button-preview-updater.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
+                AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
-                    'handle_id'    => 'aal_button_script_preview_updator',
+                    'handle_id'    => 'aal_button_script_preview_updater',
                     'dependencies' => array( 'jquery' ),
                     'translation'  => array(
                         'post_id' => isset( $_GET[ 'post' ] )
                             ? $_GET[ 'post' ]
                             : '___button_id___',
                     ),
+                    'in_footer'    => true,
                 )
             ); 
                         

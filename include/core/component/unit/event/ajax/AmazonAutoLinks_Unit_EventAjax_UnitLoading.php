@@ -16,8 +16,9 @@
  *
  * @package      Amazon Auto Links
  * @since        3.6.0
+ * @since        4.3.0 Renamed from `AmazonAutoLinks_Event___Action_AjaxUnitLoading`
  */
-class AmazonAutoLinks_Event___Action_AjaxUnitLoading extends AmazonAutoLinks_Event___Action_Base {
+class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName     = 'wp_ajax_nopriv_aal_unit_ajax_loading';
 

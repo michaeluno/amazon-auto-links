@@ -202,8 +202,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * @since       3.4.0
      * @return      array
+     * @deprecated  4.3.0
      */
-    static public function getActiveButtonLabelsForJavaScript() {
+/*    static public function getActiveButtonLabelsForJavaScript() {
         
         $_aButtonIDs = self::getActiveButtonIDs();
         $_aLabels    = array();
@@ -216,7 +217,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         }
         return $_aLabels;
         
-    }        
+    }*/
     
     /**
      * Returns the active auto-insert ids.

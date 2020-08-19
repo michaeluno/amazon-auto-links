@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.3.0 =
+- Minified JavaScript scripts.
+
 = 4.2.3 - 08/18/2020 =
 - Optimized PA-API requests.
 

@@ -166,16 +166,25 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         }
         add_thickbox();
         wp_enqueue_script( 'jquery' );
+
         $this->enqueueScripts(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/manage-units.js'
+            $this->oUtil->isDebugMode()
+                ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.js'
+                : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
+            array(
+                'in_footer'     => true,
+            ),
         );
         $this->enqueueScripts(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/manage-units-unit-status-updater.js',
+            $this->oUtil->isDebugMode()
+                ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
+                : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
             array(
-                'handle_id' => 'aalManageUnits',
+                'handle_id'     => 'aalManageUnits',
                 'translation'   => array(
                     'ajaxURL' => admin_url( 'admin-ajax.php' ),
                 ),
+                'in_footer'     => true,
             )
         );
 

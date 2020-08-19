@@ -9,12 +9,12 @@
  */
 
 /**
- * Loads the units component.
+ * Loads the unit component.
  *  
  * @package     Amazon Auto Links
- * @since       3.3.0
+ * @since       4.3.0
 */
-class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Base {
+class AmazonAutoLinks_UnitLoader {
 
     /**
      * Stored the component directory path.
@@ -27,55 +27,35 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
     static public $sDirPath = '';
 
     /**
-     * Stores class names of common form fields among all the unit types.
+     * AmazonAutoLinks_UnitLoader constructor.
+     *
+     * @param string $sScriptPath the plugin main file path.
      */
-    public $aFieldClasses = array(
-        // 'AmazonAutoLinks_FormFields_Unit_Template', // kept for backward-compatibility -> 4.0.5 Removed completely to avoid the error saying the class not found.
-        'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport', // 4.0.0+
-        'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
-        'AmazonAutoLinks_FormFields_Button_Selector',
-        'AmazonAutoLinks_FormFields_Unit_Common',    
-        'AmazonAutoLinks_FormFields_Unit_Cache',
-    );      
-    
-    /**
-     * Stores protected meta key names.
-     */    
-    public $aProtectedMetaKeys = array(
-        'product_filters',      // section id
-    );
-
-    /**
-     * 
-     */
-    protected function _construct( $sScriptPath ) {
+    public function __construct( $sScriptPath ) {
 
         self::$sDirPath = dirname( __FILE__ );
 
         // Post types
-        new AmazonAutoLinks_PostType_Unit( 
+        new AmazonAutoLinks_PostType_Unit(
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],  // slug
             null,          // post type argument. This is defined in the class.
             $sScriptPath   // script path
-        );            
-        new AmazonAutoLinks_PostType_UnitPreview;            
+        );
+        new AmazonAutoLinks_PostType_UnitPreview;
 
-        // Unit types
-        new AmazonAutoLinks_UnitTypeLoader_category( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_tag( $sScriptPath );  
-        new AmazonAutoLinks_UnitTypeLoader_search( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_item_lookup( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_similarity_lookup( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_url( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_contextual( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_embed( $sScriptPath ); // 4.0.0
-        new AmazonAutoLinks_UnitTypeLoader_feed( $sScriptPath );  // 4.0.0
-        new AmazonAutoLinks_UnitTypeLoader_scratchpad_payload( $sScriptPath );  // 4.1.0
+        // Unit Types
+        new AmazonAutoLinks_UnitTypesLoader( $sScriptPath );
 
-        // Unit specific events
+        // Admin
+        if ( is_admin() ) {
+            $this->___loadAdminComponents();
+        }
+
+        // Events
         add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
-        
+
     }
+
     
         /**
          * @callback        action      aal_action_events
@@ -91,19 +71,23 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
             new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+
 
+            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // 3.6.0+
+
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
 
             new AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater;
 
             new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // 4.3.0
 
+
+
         }
         
     
     /**
-     * Loads necessary components.
+     * Loads admin components.
      */
-    protected function _loadAdminComponents( $sScriptPath ) {
+    private function ___loadAdminComponents() {
                 
         new AmazonAutoLinks_UnitPostMetaBox_ViewLink(
             null,

@@ -62,7 +62,11 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab extends AmazonAutoLinks_AdminPage_
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script(
                 $_sScriptHandle,    // handle
-                $this->getSRCFromPath( AmazonAutoLinks_Proxy_Loader::$sDirPath . '/asset/js/proxy-loader.js' ),
+                $this->getSRCFromPath(
+                    $this->isDebugMode()
+                        ? AmazonAutoLinks_Proxy_Loader::$sDirPath . '/asset/js/proxy-loader.js'
+                        : AmazonAutoLinks_Proxy_Loader::$sDirPath . '/asset/js/proxy-loader.min.js'
+                ),
                 array( 'jquery' ),
                 true
             );

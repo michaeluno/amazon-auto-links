@@ -148,7 +148,10 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
         <script<?php echo $_sTypeAttribute; ?>>
         <?php
             $_sComponentDirPath = AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath;
-            readfile( $_sComponentDirPath . '/asset/js/wp-embed-template-lite.js' );
+            $_sFilePath         = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? $_sComponentDirPath . '/asset/js/wp-embed-template-lite.js'
+                : $_sComponentDirPath . '/asset/js/wp-embed-template-lite.min.js';
+            readfile( $_sFilePath );
         ?>
         </script>
         <?php

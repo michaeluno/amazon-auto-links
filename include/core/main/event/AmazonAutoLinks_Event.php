@@ -37,8 +37,6 @@ class AmazonAutoLinks_Event {
 
             $this->___handleWPCronEvents();
 
-            $this->___handleAjaxEvents();
-
             $this->___handleBackgroundRoutines();
 
             $this->___handleQueryURL();
@@ -47,9 +45,7 @@ class AmazonAutoLinks_Event {
             $this->___handleFilters();
 
         }
-            private function ___handleAjaxEvents() {
-                new AmazonAutoLinks_Event___Action_AjaxUnitLoading; // 3.6.0+
-            }
+
             /**
              * @since       3.5.0
              * @return      void

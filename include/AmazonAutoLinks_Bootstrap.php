@@ -227,7 +227,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             new AmazonAutoLinks_TemplateLoader( $this->sFilePath );
 
             // Units
-            new AmazonAutoLinks_UnitTypesLoader( $this->sFilePath );
+            new AmazonAutoLinks_UnitLoader( $this->sFilePath );
 
             // Buttons
             new AmazonAutoLinks_ButtonLoader( $this->sFilePath );

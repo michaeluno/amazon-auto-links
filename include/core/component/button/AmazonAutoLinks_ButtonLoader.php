@@ -18,6 +18,11 @@
 class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @var string
+     */
+    static public $sDirPath = '';
+
+    /**
      * Sets up hooks and properties.
      */
     public function __construct( $sScriptPath ) {
@@ -25,7 +30,9 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return;
         }
-        
+
+        self::$sDirPath = dirname( __FILE__ );
+
         // Front-end
         
         /// Resource loader
@@ -45,7 +52,10 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             $this->_registerPostMetaBoxes();
             
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
-            
+
+            add_filter( 'aal_filter_admin_button_js_translation', array( $this, 'replyToGetJSButtonTranslation' ) );
+            add_filter( 'aal_filter_admin_button_js_preview_src', array( $this, 'replyToGetJSButtonPreviewPath' ) );
+
         }        
 
         // Update button post status change
@@ -179,5 +189,34 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             );              
             
         }
- 
+
+    /**
+     * Returns the JavaScript script path of the button preview.
+     * @since   4.3.0
+     */
+    public function replyToGetJSButtonPreviewPath() {
+        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? 'button-preview-in-unit-definition-page.js'
+            : 'button-preview-in-unit-definition-page.min.js';
+        return AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName;
+    }
+
+    /**
+     * @since   4.3.0
+     * @return array
+     */
+    public function replyToGetJSButtonTranslation( $aLabels ) {
+        $_aButtonIDs = $this->getActiveButtonIDs();
+        $_aLabels    = $this->getAsArray( $aLabels );
+        foreach( $_aButtonIDs as $_iButtonID ) {
+            $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
+            $_sButtonLabel = $_sButtonLabel
+                ? $_sButtonLabel
+                : __( 'Buy Now', 'amazon-auto-links' );
+            $_aLabels[ $_iButtonID ] = $_sButtonLabel;
+        }
+        return $_aLabels;
+    }
+
+
 }

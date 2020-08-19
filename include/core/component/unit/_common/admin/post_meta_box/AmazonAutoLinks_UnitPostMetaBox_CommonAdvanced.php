@@ -30,16 +30,14 @@ class AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced extends AmazonAutoLinks_Uni
             }            
         }            
 
-        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
-            ? 'button-preview-in-unit-definition-page.js'
-            : 'button-preview-in-unit-definition-page.min.js';
         $this->enqueueScript(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
+            apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             $this->oProp->aPostTypes,
             array(  
                 'handle_id'    => 'aal_button_preview_labels',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                'translation'  => apply_filters( 'aal_filter_admin_button_js_translation', array() ),
+                'in_footer'    => true,
             )
         );         
         

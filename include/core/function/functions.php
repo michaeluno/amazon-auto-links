@@ -12,6 +12,7 @@
  * Echoes or returns the output of Amazon product links.
  * @since       1
  * @since       3       Added the second parameter to let the user choose whether it should echo or return the output.
+ * @return  string|void
  */
 function AmazonAutoLinks( $aArguments, $bEcho=true ) {
 

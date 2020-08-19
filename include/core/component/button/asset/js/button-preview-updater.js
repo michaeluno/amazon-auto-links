@@ -226,7 +226,7 @@
           oPreviewButton.styles_markup += oPreviewButton.getStyleByLine( 'text-decoration', 'none' );
 
           // wrap the style markups in proper css calls
-          var _isButtonID = aal_button_script_preview_updator[ 'post_id' ];          
+          var _isButtonID = aal_button_script_preview_updater[ 'post_id' ];
           oPreviewButton.styles_markup = '.amazon-auto-links-button.amazon-auto-links-button-' + _isButtonID + ' {\n' + oPreviewButton.styles_markup + '}';
           oPreviewButton.styles_hover_markup += oPreviewButton.getStyleByLine( 'text-decoration', 'none' );
           oPreviewButton.styles_hover_markup = '\n\n.amazon-auto-links-button.amazon-auto-links-button-' + _isButtonID + ':hover {\n'
@@ -270,9 +270,6 @@
     // Initial button update.
     $( document ).ready( function() {
         oPreviewButton.updateStyles();  
-        
-// console.log( 'started' );
-// console.log( aal_button_script_preview_updator );
 
     });
 

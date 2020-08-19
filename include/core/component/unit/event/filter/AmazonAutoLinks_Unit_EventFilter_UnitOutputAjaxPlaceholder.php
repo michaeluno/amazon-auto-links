@@ -157,7 +157,7 @@ class AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder extends AmazonA
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script(
                 $_sScriptHandle,
-                $this->getSRCFromPath( AmazonAutoLinks_UnitTypesLoader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
+                $this->getSRCFromPath( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
                 array( 'jquery' ),
                 false,
                 true

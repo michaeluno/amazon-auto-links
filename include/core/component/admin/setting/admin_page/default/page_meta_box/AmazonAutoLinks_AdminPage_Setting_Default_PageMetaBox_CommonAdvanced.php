@@ -47,17 +47,15 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
         );
         
         // Resources for the button preview
-        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
-            ? 'button-preview-in-unit-definition-page.js'
-            : 'button-preview-in-unit-definition-page.min.js';
         $this->enqueueScript(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/js/' . $_sFileBaseName,
+            apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             $this->oProp->sPageSlug,
             'default',
             array(  
                 'handle_id'    => 'aal_button_preview_labels',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                'translation'  => apply_filters( 'aal_filter_admin_button_js_translation', array() ),
+                'in_footer'    => true,
             )
         );   
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToSetStyle' ) );

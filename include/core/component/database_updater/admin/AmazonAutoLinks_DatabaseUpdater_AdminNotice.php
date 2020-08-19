@@ -74,7 +74,10 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script(
             $_sScriptHandle,    // handle
-            $this->getSRCFromPath( AmazonAutoLinks_DatabaseUpdater_Loader::$sComponentDirPath . '/asset/plugin-database-updater.js' ),
+            $this->getSRCFromPath( $this->isDebugMode()
+                ? AmazonAutoLinks_DatabaseUpdater_Loader::$sComponentDirPath . '/asset/plugin-database-updater.js'
+                : AmazonAutoLinks_DatabaseUpdater_Loader::$sComponentDirPath . '/asset/plugin-database-updater.min.js'
+            ),
             array( 'jquery' ),
             true
         );

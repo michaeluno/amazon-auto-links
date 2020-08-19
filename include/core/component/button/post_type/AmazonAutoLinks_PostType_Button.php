@@ -74,12 +74,12 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             add_filter( 'post_updated_messages', array( $this, 'replyToModifyPostUpdatedMessages' ) );        
             
             $this->enqueueStyles(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
+                array(
+                    AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css',
+                    AmazonAutoLinks_Registry::$sDirPath . '/asset/css/edit.aal-button.css',
+                )
             );
-            $this->enqueueStyles(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/css/edit.aal-button.css'
-            );
-            
+
             // unit listing table columns
             add_filter(    
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
