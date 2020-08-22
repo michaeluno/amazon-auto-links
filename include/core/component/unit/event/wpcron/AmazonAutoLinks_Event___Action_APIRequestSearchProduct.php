@@ -147,8 +147,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
                     $iCacheDuration,
                     $bForceRenew
                 );
-            }   */
-                                   
+            }
+*/
+            $_bCustomerReviewExists = false;
             $_aRow             = $this->___getRowFormatted( 
                 $aAPIResponseProductData, 
                 $sASIN, 
