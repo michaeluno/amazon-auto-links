@@ -1,0 +1,47 @@
+<?php
+/**
+ * Amazon Auto Links
+ *
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *
+ * http://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2020 Michael Uno
+ */
+
+/**
+ * Adds an in-page tab to an admin page.
+ * 
+ * @since       4.3.0
+ * @extends     AmazonAutoLinks_AdminPage_Tab_Base
+ */
+class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_AdminPage_Tab_Base {
+
+    /**
+     * @return  array
+     * @since   4.3.0
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'scratch',
+            'title'     => 'Scratch',
+        );
+    }
+
+    /**
+     * Triggered when the tab is loaded.
+     * 
+     * @callback        action      load_{page slug}_{tab slug}
+     */
+    protected function _loadTab( $oAdminPage ) {}
+    
+    /**
+     * Write scratches here to test something.
+     * @callback        action      do_{page slug}_{tab slug}
+     */
+    protected function _doTab( $oFactory ) {
+        
+        echo "<h3>Scratches for Tests</h3>";
+
+    }    
+            
+}

@@ -148,6 +148,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'template'           => 'aal_templates',
         'tool'               => 'aal_tools',
         'help'               => 'aal_help',
+        'test'               => 'aal_tests',                         // 4.3.0+
     );
     
     /**
