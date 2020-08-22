@@ -203,7 +203,6 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
     /**
      * Checks whether a row exists or not by ASIN and locale.
      * @return      boolean
-     * @todo    Support language and currency
      */
     public function doesRowExist( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
         return ( boolean ) $this->getID( $sASIN, $sLocale, $sCurrency, $sLanguage );
