@@ -21,6 +21,10 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
     protected $_sLocale         = '';
     protected $_sAssociateID    = '';
     protected $_aRow            = array();
+
+    /**
+     * @var AmazonAutoLinks_UnitOption_Base
+     */
     protected $_oUnitOption;
     
     /**
