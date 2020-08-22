@@ -40,7 +40,16 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Title extends AmazonAutoLink
             return $this->_aProduct[ 'title' ];
         }
 
-        return $this->getTitleSanitized( $this->_getCell( 'title' ), $this->_oUnitOption->get( 'title_length' ) );
+        $_snTitle = $this->_getCell( 'title' );
+        // For the `embed` unit type, the title can be null
+        if ( null === $_snTitle ) {
+            return $this->_getPendingMessage(
+                __( 'Now retrieving the title.', 'amazon-auto-links' ),
+                $this->_sLocale,
+                'title'
+            );
+        }
+        return $this->getTitleSanitized( $_snTitle, $this->_oUnitOption->get( 'title_length' ) );
 
     }
 

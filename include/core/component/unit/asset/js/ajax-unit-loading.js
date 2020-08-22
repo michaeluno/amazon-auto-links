@@ -8,45 +8,61 @@
  */
 (function($){
     $( document ).ready( function() {
-        // `aal_ajax_unit_loading` is defined in PHP
+
         var _loadAmazonAutoLinksAjax = function() {
             jQuery( '.amazon-auto-links.aal-js-loading' ).each( function (index, value) {
                 var _aData = {
 
                     // Required
-                    action: aal_ajax_unit_loading.action_hook_suffix,
-                    aal_ajax_unit_loading_security: aal_ajax_unit_loading.nonce,
+                    action: aalAjaxUnitLoading.actionHookSuffix,
+                    aalAjaxUnitLoading_security: aalAjaxUnitLoading.nonce,
+                    aal_nonce: aalAjaxUnitLoading.nonce,   // the nonce value
 
                     // Unit arguments embedded in HTML data attributes
                     data: $( this ).data(),
 
                     // For the contextual unit type
-                    post_id: aal_ajax_unit_loading.post_id,
-                    page_type: aal_ajax_unit_loading.page_type,
-                    author_name: aal_ajax_unit_loading.author_name,
-                    term_id: aal_ajax_unit_loading.term_id,
-                    REQUEST: aal_ajax_unit_loading.REQUEST,
+                    post_id: aalAjaxUnitLoading.post_id,
+                    page_type: aalAjaxUnitLoading.page_type,
+                    author_name: aalAjaxUnitLoading.author_name,
+                    term_id: aalAjaxUnitLoading.term_id,
+                    REQUEST: aalAjaxUnitLoading.REQUEST,
 
                     // Not used at the moment
                     referrer: window.location.href,                 // the current page URL
                 };
                 var _oThis = this;
+
+                var _oSpinner = $( '<img src="' + aalAjaxUnitLoading.spinnerURL + '" />' );
+                _oSpinner.css( { margin: '0 0.5em', 'vertical-align': 'middle', 'display': 'inline-block' } );
+                $( this ).find( '.now-loading-placeholder' ).append( _oSpinner );
+
                 $.ajax( {
-                    type: 'POST',
+                    type: 'post',
+                    dataType: 'json',
                     async: true,
-                    url: aal_ajax_unit_loading.ajax_url,
+                    url: aalAjaxUnitLoading.ajaxURL,
                     data: _aData,
                     success: function( response ) {
-                        var _oReplacement = $( response );
-                        $( _oThis ).replaceWith( _oReplacement );
-                        _oReplacement.trigger( 'aal_ajax_loaded_unit', [] ); // @since 3.8.8
+
+                        if ( response.success ) {
+                            var _oReplacement = $( response.result );
+                            $( _oThis ).replaceWith( _oReplacement );
+                            _oReplacement.trigger( 'aal_ajax_loaded_unit', [] ); // @since 3.8.8
+                        } else {
+                            $( _oThis ).replaceWith( '<p>' + response.result + '<p>');
+                        }
+
                     },
                     error: function (xhr) {
-                        $( _oThis ).replaceWith( '<p>' + aal_ajax_unit_loading.messages.ajax_error + '<p>');
+                        $( _oThis ).replaceWith( '<p>' + aalAjaxUnitLoading.messages.ajax_error + '<p>');
+                    },
+                    complete: function() {
+                        _oSpinner.remove();
                     }
                 });
             });
-        }
+        }; // _loadAmazonAutoLinksAjax
         setTimeout( _loadAmazonAutoLinksAjax, 1000 );
     });
 }(jQuery));

@@ -31,7 +31,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the categories.', 'amazon-auto-links' ),
-                $this->_sLocale
+                $this->_sLocale,
+                'category'
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );

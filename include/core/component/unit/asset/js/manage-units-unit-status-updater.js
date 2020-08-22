@@ -41,7 +41,7 @@
                     type: "post",
                     dataType: 'json',
                     url: aalManageUnits.ajaxURL,
-                    // Data set to $_POSt and $_REQUEST
+                    // Data set to $_POST and $_REQUEST
                     data: {
                         action: 'aal_action_update_unit_status',   // WordPress action hook name which follows after `wp_ajax_`
                         aal_nonce: $( '#amazon-auto-links-nonce' ).val(),   // the nonce value set in template.php

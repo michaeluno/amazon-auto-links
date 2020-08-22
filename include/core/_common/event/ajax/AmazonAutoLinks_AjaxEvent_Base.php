@@ -21,6 +21,51 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
      */
     protected $_sNonceKey = '';
 
+    /**
+     * The action hook name suffix.
+     *
+     * The action hook names will be:
+     *  - for guests:  `wp_ajax_nopriv_{...}`
+     *  - for logged-in users: `wp_ajax_{...}`
+     *
+     * The part `{...}` is where the suffix resides.
+     *
+     * @var string
+     */
+    protected $_sActionHookSuffix = '';
+
+    /**
+     * Whether to be accessible for logged-in users.
+     * @var bool
+     */
+    protected $_bLoggedIn = true;
+    /**
+     * Whether to be accessible for non-logged-in users (guests).
+     * @var bool
+     */
+    protected $_bGuest    = true;
+
+    public function __construct() {
+
+        // Set up action hook names
+        if ( $this->_sActionHookSuffix ) {
+            if ( $this->_bLoggedIn ) {
+                $this->_aActionHookNames[] = 'wp_ajax_' . $this->_sActionHookSuffix;
+            }
+            if ( $this->_bGuest ) {
+                $this->_aActionHookNames[] = 'wp_ajax_nopriv_' . $this->_sActionHookSuffix;
+            }
+            $this->_sNonceKey = $this->_sNonceKey
+                ? $this->_sNonceKey
+                : $this->_sActionHookSuffix;
+        }
+
+
+        parent::__construct();
+
+    }
+
+
     protected function _doAction() {
 
         check_ajax_referer(
@@ -34,7 +79,7 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
 
             $_iUserID = get_current_user_id();
             if ( ! $_iUserID ) {
-                throw new Exception( __( 'Could not get a user ID.', 'feed-zapper' ) );
+                throw new Exception( __( 'Could not get a user ID.', 'amazon-auto-links' ) );
             }
             $_asMessage = $this->_getResponse( $_POST );
 

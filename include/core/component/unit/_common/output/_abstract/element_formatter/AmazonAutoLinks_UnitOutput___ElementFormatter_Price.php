@@ -33,14 +33,17 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
         if ( null === $_sPriceFormatted ) {
 
             // In a case that the price is already set.
-            // @remark The key name is a bit confusing `formatted_price` is a native product array element key for HTML formatted price. `price_formatted` is a string value with the currency character.
+            // @remark The key name is a bit confusing
+            // `formatted_price` is a native product array element key for HTML formatted price.
+            // `price_formatted` is a string value with the currency character.
             if ( $this->_aProduct[ 'formatted_price' ] ) {
                 return $this->_aProduct[ 'formatted_price' ];
             }
 
             return $this->_getPendingMessage(
                 __( 'Now retrieving the price.', 'amazon-auto-links' ),
-                $this->_sLocale
+                $this->_sLocale,
+                'formatted_price'
             );
         }
 

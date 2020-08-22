@@ -13,6 +13,7 @@
  *
  * @remark      The class name uses double underscores instead of triple underscores to indicate that this is a delegation class.
  * @since       3.5.0
+ * @deprecated  3.9.0
  */
 class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
@@ -47,7 +48,8 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
         if ( null === $_snEncodedHTML && $this->_oUnitOption->get( '_search_similar_products' ) ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving similar products.', 'amazon-auto-links' ),
-                $this->_sLocale
+                $this->_sLocale,
+                'similar_items'
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );

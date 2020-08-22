@@ -48,7 +48,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
         if ( null === $_snEncodedHTML && null === $_inRating ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the rating.', 'amazon-auto-links' ),
-                $this->_sLocale
+                $this->_sLocale,
+                'formatted_rating'
             );
         }
         return '';

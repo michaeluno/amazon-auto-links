@@ -47,12 +47,14 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
     /**
      * @param       string  $sMessage
      * @param       string  $sLocale        If this is given, it checks whether the PA-API keys are set for that locale. Otherwise, the message will not be shown.
+     * @param  string $sContext A hint for the JavaScript script to know what element this is for, to update an image-set, rating, or price etc.
      * @return      string
      * @since       3.5.0
      * @since       4.0.1       Added the `$sLocale` parameter.
      * @throws      Exception
      */
-    protected function _getPendingMessage( $sMessage, $sLocale='' ) {
+    protected function _getPendingMessage( $sMessage, $sLocale, $sContext ) {
+
         if ( $this->_oUnitOption->get( '_no_pending_items' ) ) {
             throw new Exception( 'A product with a pending element is not allowed.' );
         }
@@ -61,8 +63,30 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
             return '';
         }
         return $this->_oUnitOption->get( 'show_now_retrieving_message' )
-            ? '<p>' . $sMessage . '</p>'
+            ? '<p ' . $this->___getAttributes( $sContext ) . '">'
+                    . $sMessage
+                . '</p>'
             : '';
     }
+
+        /**
+         * @param  string $sContext A hint for the JavaScript script to know what element this is for, to update an image-set, rating, or price etc.
+         * @return string
+         * @since  4.3.0
+         */
+        private function ___getAttributes( $sContext ) {
+            return $this->getAttributes(
+                array(
+                    'class'           => 'now-retrieving',
+                    'data-locale'     => $this->_sLocale,
+                    'data-currency'   => $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $this->_sLocale ) ),
+                    'data-language'   => $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $this->_sLocale ) ),
+                    'data-asin'       => $this->_sASIN,
+                    'data-tag'        => $this->_sAssociateID,
+                    'data-context'    => $sContext,
+                    'data-id'         => $this->_oUnitOption->get( array( 'id' ), 0 ),
+                )
+            );
+        }
 
 }

@@ -17,35 +17,33 @@
  * @package      Amazon Auto Links
  * @since        3.6.0
  * @since        4.3.0 Renamed from `AmazonAutoLinks_Event___Action_AjaxUnitLoading`
+ * @since        4.3.0 Changed the base class from `AmazonAutoLinks_Event___Action_Base`.
  */
-class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_Event___Action_Base {
+class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEvent_Base {
 
-    protected $_sActionHookName     = 'wp_ajax_nopriv_aal_unit_ajax_loading';
+    /**
+     * The part after `wp_ajax_` or `wp_ajax_nopriv_`.
+     * @var string
+     */
+    protected $_sActionHookSuffix = 'aal_unit_ajax_loading';
+
+    protected $_bLoggedIn = true;
+    protected $_bGuest    = true;
 
     protected function _construct() {
-        /**
-         * The both `wp_ajax_nopriv_{...}` and `wp_ajax_{...}` need to be hooked.
-         * `wp_ajax_{...}` is for logged-in users
-         * and `wp_ajax_nopriv_{...}` is for non-logged-in users.
-         */
-        add_action(
-            'wp_ajax_aal_unit_ajax_loading',
-            array( $this, 'replyToDoAction' )   // defined in the base class
-        );
-
+        add_action( 'aal_action_enqueue_scripts_ajax_unit_loading', array( $this, 'replyToEnqueueScripts' ) );
     }
 
     /**
-     * @since       3.6.0
+     * @param array $aPost
+     *
+     * @return string|array
+     * @throws Exception        Throws a string value of an error message.
      */
-    protected function _doAction() {
+    protected function _getResponse( array $aPost ) {
 
-        check_ajax_referer( 'aal_nonce_ajax_unit_loading', 'aal_ajax_unit_loading_security' );
-
-        if ( ! isset( $_POST[ 'data' ] ) ) {
-            echo "<div class='amazon-auto-links'>"
-                . __( 'Failed to load the unit.', 'amazon-auto-links' )
-                . "</div>";
+        if ( ! isset( $aPost[ 'data' ] ) ) {
+            throw new Exception( __( 'Failed to load the unit.', 'amazon-auto-links' ) );
         }
 
         // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_nopriv_}aal_unit_ajax_loading` action hook )
@@ -57,7 +55,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_Event__
         add_filter( 'aal_filter_current_queried_term_object', array( $this, 'replyToSetReferrerTermObject' ) );
         add_filter( 'aal_filter_current_queried_author', array( $this, 'replyToSetReferrerAuthor' ) );
 
-        $_aData = $_POST[ 'data' ];
+        $_aData = $aPost[ 'data' ];
 
         // For widget outputs, retrieve the widget instance options.
         if ( isset( $_aData[ '_widget_option_name' ] ) ) {
@@ -65,8 +63,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_Event__
             $_aData           = $this->getElement( $_aWidgetOptions, $_aData[ '_widget_number' ] );
         }
 
-        echo $this->___getOutput( $_aData );
-        die(); // this is required to return a proper result
+        return $this->___getOutput( $_aData );
 
     }
         /**
@@ -131,6 +128,76 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_Event__
             ? $_POST[ 'author_name' ]
             : $sAuthor;
     }
+
+    /**
+     * @since   4.3.0
+     */
+    public function replyToEnqueueScripts() {
+
+        // Do only once per page load
+        if ( $this->hasBeenCalled( __METHOD__ ) ) {
+            return;
+        }
+
+        $_sScriptHandle = 'aal-ajax-unit-loading';
+        $_aScriptData   = array(
+            'ajaxURL'            => admin_url( 'admin-ajax.php' ),
+            'spinnerURL'         => admin_url( 'images/loading.gif' ),
+            'nonce'              => wp_create_nonce( $this->_sNonceKey ), // when not declared in class properties, the value will be the action name suffix
+            'actionHookSuffix'   => $this->_sActionHookSuffix,
+            'messages'           => array(
+                'ajax_error'     => __( 'Failed to load product links.', 'amazon-auto-links' ),
+            ),
+        ) + $this->___getPageTypeInformationForContextualUnits();
+
+        $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
+            ? 'ajax-unit-loading.js'
+            : 'ajax-unit-loading.min.js';
+        wp_enqueue_script( 'jquery' );
+        wp_enqueue_script(
+            $_sScriptHandle,
+            $this->getSRCFromPath( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
+            array( 'jquery' ),
+            false,
+            true
+        );
+
+        // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
+        wp_localize_script(
+            $_sScriptHandle,
+            'aalAjaxUnitLoading ', // variable name
+            $_aScriptData
+        );
+    }
+
+        /**
+         * @return  array
+         */
+        private function ___getPageTypeInformationForContextualUnits() {
+            $_sPageType     = $this->getCurrentPageType();
+            $_aPageTypeInfo = array(
+                'term_id'       => 0,
+                'author_name'   => '',
+                'page_type'     => $_sPageType,
+                'post_id'       => get_the_ID(),
+                'REQUEST'       => $_REQUEST,
+            );
+            if ( 'taxonomy' === $_sPageType ) {
+                $_oTerm = $this->getCurrentQueriedObject();
+                $_aPageTypeInfo[ 'term_id' ] = isset( $_oTerm->term_id )
+                    ? $_oTerm->term_id
+                    : 0;
+                return $_aPageTypeInfo;
+            }
+            if ( 'author' === $_sPageType ) {
+                $_oAuthor = $this->getCurrentQueriedObject();
+                $_aPageTypeInfo[ 'author_name' ] = isset( $_oAuthor->display_name )
+                    ? $_oAuthor->display_name
+                    : '';
+                return $_aPageTypeInfo;
+            }
+            return $_aPageTypeInfo;
+        }
 
 
 }

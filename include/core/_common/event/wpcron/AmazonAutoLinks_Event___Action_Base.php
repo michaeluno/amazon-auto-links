@@ -21,17 +21,35 @@ abstract class AmazonAutoLinks_Event___Action_Base extends AmazonAutoLinks_Plugi
     protected $_iHookPriority       = 10;
 
     /**
+     * Stores action hook names for multiple actions.
+     * @var array
+     * @since   4.3.0
+     */
+    protected $_aActionHookNames    = array();
+
+    /**
      * Sets up hooks.
      * @since       3.5.0
      */
     public function __construct() {
 
-        add_action(
-            $this->_sActionHookName,
-            array( $this, 'replyToDoAction' ),
-            $this->_iHookPriority, // priority
-            $this->_iCallbackParameters
-        );
+        if ( $this->_sActionHookName ) {
+            add_action(
+                $this->_sActionHookName,
+                array( $this, 'replyToDoAction' ),
+                $this->_iHookPriority, // priority
+                $this->_iCallbackParameters
+            );
+        }
+
+        foreach( $this->_aActionHookNames as $_sActionHookName ) {
+            add_action(
+                $_sActionHookName,
+                array( $this, 'replyToDoAction' ),
+                $this->_iHookPriority, // priority
+                $this->_iCallbackParameters
+            );
+        }
 
         $this->_construct();
 

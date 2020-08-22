@@ -104,11 +104,12 @@ class AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder extends AmazonA
         $_aAttributes     = $this->getDataAttributeArray( $_aDataAttributes );
         $_aAttributes[ 'class' ]       = 'amazon-auto-links aal-js-loading';
 
-        $this->___enqueueScript();
+        // Enqueues scripts for Ajax unit loading
+        do_action( 'aal_action_enqueue_scripts_ajax_unit_loading' );
 
         $_sNowLoadingText = $this->___getNowLoadingText( $aArguments );
         $_sPNowLoading    = $_sNowLoadingText
-            ? "<p>" . $_sNowLoadingText . "</p>"
+            ? "<p class='now-loading-placeholder'>" . $_sNowLoadingText . "</p>"
             : '';
 
         return "<div " . $this->getAttributes( $_aAttributes ) . ">"
@@ -133,72 +134,6 @@ class AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder extends AmazonA
 
         }
 
-        private function ___enqueueScript() {
-
-            // Do only once per page load
-            if ( $this->hasBeenCalled( __METHOD__ ) ) {
-                return;
-            }
-
-            $_sScriptHandle = 'aal-ajax-unit-loading';
-            $_sAjaxNonce    = wp_create_nonce( 'aal_nonce_ajax_unit_loading' );
-            $_aScriptData   = array(
-                'ajax_url'           => admin_url( 'admin-ajax.php' ),
-                'nonce'              => $_sAjaxNonce,
-                'action_hook_suffix' => 'aal_unit_ajax_loading',
-                'messages'           => array(
-                    'ajax_error'    => __( 'Failed to load product links.', 'amazon-auto-links' ),
-                ),
-            ) + $this->___getPageTypeInformationForContextualUnits();
-
-            $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? 'ajax-unit-loading.js'
-                : 'ajax-unit-loading.min.js';
-            wp_enqueue_script( 'jquery' );
-            wp_enqueue_script(
-                $_sScriptHandle,
-                $this->getSRCFromPath( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
-                array( 'jquery' ),
-                false,
-                true
-            );
-
-            // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
-            wp_localize_script(
-                $_sScriptHandle,
-                'aal_ajax_unit_loading', // variable name
-                $_aScriptData
-            );
-        }
-
-            /**
-             * @return  array
-             */
-            private function ___getPageTypeInformationForContextualUnits() {
-                $_sPageType     = $this->getCurrentPageType();
-                $_aPageTypeInfo = array(
-                    'term_id'       => 0,
-                    'author_name'   => '',
-                    'page_type'     => $_sPageType,
-                    'post_id'       => get_the_ID(),
-                    'REQUEST'       => $_REQUEST,
-                );
-                if ( 'taxonomy' === $_sPageType ) {
-                    $_oTerm = $this->getCurrentQueriedObject();
-                    $_aPageTypeInfo[ 'term_id' ] = isset( $_oTerm->term_id )
-                        ? $_oTerm->term_id
-                        : 0;
-                    return $_aPageTypeInfo;
-                }
-                if ( 'author' === $_sPageType ) {
-                    $_oAuthor = $this->getCurrentQueriedObject();
-                    $_aPageTypeInfo[ 'author_name' ] = isset( $_oAuthor->display_name )
-                        ? $_oAuthor->display_name
-                        : '';
-                    return $_aPageTypeInfo;
-                }
-                return $_aPageTypeInfo;
-            }
 
 
 }

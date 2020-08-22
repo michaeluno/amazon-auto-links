@@ -113,25 +113,24 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
-            // @deprecated 4.0.0 the key `price` is replaced with `formatted_price`, to be compatible with database table column keys.
+            // @since 4.0.0 the key `price` is deprecated and replaced with `formatted_price`, to be compatible with database table column keys.
             $_aProduct[ 'formatted_price' ]  = $_oPriceFormatter->get(); // 4.0.0
 
             $_oUserReviewFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
             );
             $_aProduct[ 'review' ]           = $_oUserReviewFormatter->get();
+
             $_oUserRatingFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
             $_aProduct[ 'formatted_rating' ] = $_oUserRatingFormatter->get();
+
             $_oImageSetFormatter             = new AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet(
                 $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
             );
             $_aProduct[ 'image_set' ]        = $_oImageSetFormatter->get();
-//            $_oSimilarItemsFormatter         = new AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems(
-//                $this, $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow
-//            );
-//            $_aProduct[ 'similar_products' ] = $_oSimilarItemsFormatter->get();
+
             // 3.9.0 Deprecated
             $_aProduct[ 'similar_products' ] = '';
 

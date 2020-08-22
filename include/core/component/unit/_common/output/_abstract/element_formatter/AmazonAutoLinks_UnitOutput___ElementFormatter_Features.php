@@ -31,7 +31,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Features extends AmazonAutoL
         if ( null === $_snEncodedHTML ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the features.', 'amazon-auto-links' ),
-                $this->_sLocale
+                $this->_sLocale,
+                'feature'
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );
