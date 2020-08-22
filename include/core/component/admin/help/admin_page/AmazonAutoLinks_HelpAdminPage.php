@@ -9,7 +9,7 @@
  */
 
 /**
- * Adds the `Tools` page.
+ * Adds the `Help` page.
  * 
  * @since       3
  */
