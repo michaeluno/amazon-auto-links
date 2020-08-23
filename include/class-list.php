@@ -434,6 +434,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_DatabaseTable_aal_request_cache"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_request_cache.php", 
     "AmazonAutoLinks_Error"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/error/AmazonAutoLinks_Error.php", 
     "AmazonAutoLinks_VersatileFileManager"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager.php", 
+    "AmazonAutoLinks_VersatileFileManager_DeleteMode"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager_DeleteMode.php", 
     "AmazonAutoLinks_DOM"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_DOM.php", 
     "AmazonAutoLinks_Encrypt"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_Encrypt.php", 
     "AmazonAutoLinks_HTMLCleaner"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_HTMLCleaner.php", 

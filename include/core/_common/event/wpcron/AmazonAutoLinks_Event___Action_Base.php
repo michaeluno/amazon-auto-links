@@ -68,7 +68,7 @@ abstract class AmazonAutoLinks_Event___Action_Base extends AmazonAutoLinks_Plugi
             . $this->_iCallbackParameters
             . $this->_iHookPriority
             . serialize( $aoData );
-        $_oLock = new AmazonAutoLinks_VersatileFileManager( $_sIdentifier );
+        $_oLock = new AmazonAutoLinks_VersatileFileManager_DeleteMode( $_sIdentifier );
         return $_oLock->isLocked();
 
     }
