@@ -16,30 +16,22 @@
  */
 class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_PluginUtility {
 
-    private $___sTableName = '';
-    private $___sVersionTo = '';
     /**
      * Performs necessary set-ups.
      * @param   string  The database table name. The option key is assumed to be `{name}_version`.
      * @param   string  The version that upgrade to.
+     * @since   3.8.0
+     * @since   4.3.0       Removed the parameters.
      */
-    public function __construct( $sName, $sToVersion ) {
+    public function __construct() {
 
         if ( ! $this->isPluginAdminPage() ) {
             return;
         }
 
-        $_sCurrentVersion = get_option( "{$sName}_version", 0 );
-        if ( version_compare($_sCurrentVersion, $sToVersion, '>=')) {
+        if ( ! $this->___hasTableUpdate() ) {
             return;
         }
-
-        // Properties
-        $this->___sTableName = $sName;
-        $this->___sVersionTo = $sToVersion;
-
-        // Add the script
-        add_action( 'admin_enqueue_scripts', array( $this, 'replyToSetScript' ) );
 
         new AmazonAutoLinks_AdminPageFramework_AdminNotice(
             sprintf(
@@ -54,39 +46,18 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
         );
 
     }
-
-    /**
-     * @since   3.8.0
-     * @callback    action      admin_enqueue_scripts
-     */
-    public function replyToSetScript() {
-
-        $_sScriptHandle = 'aal_database_update';
-        $_aScriptData   = array(
-            'ajaxURL'       => admin_url( 'admin-ajax.php' ),
-            'nonce'         => wp_create_nonce( 'aal_nonce_ajax_database_updater' ),
-            'versionTo'     => $this->___sVersionTo,
-            'tableName'     => $this->___sTableName,
-            'spinnerURL'    => admin_url( 'images/loading.gif' ),
-            'pluginName'    => AmazonAutoLinks_Registry::NAME,
-            'requestFailed' => __( 'Something went wrong with the Ajax request.', 'amazon-auto-links' ),
-        );
-        wp_enqueue_script( 'jquery' );
-        wp_enqueue_script(
-            $_sScriptHandle,    // handle
-            $this->getSRCFromPath( $this->isDebugMode()
-                ? AmazonAutoLinks_DatabaseUpdater_Loader::$sComponentDirPath . '/asset/plugin-database-updater.js'
-                : AmazonAutoLinks_DatabaseUpdater_Loader::$sComponentDirPath . '/asset/plugin-database-updater.min.js'
-            ),
-            array( 'jquery' ),
-            true
-        );
-        wp_localize_script(
-            $_sScriptHandle,
-            'aalDBUpdater',        // variable name on JavaScript side
-            $_aScriptData
-        );
-
-    }
+        /**
+         * @return bool
+         */
+        private function ___hasTableUpdate() {
+            foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sTableName => $_aTableInfo ) {
+                $_sCurrentVersion = get_option( "{$_aTableInfo[ 'name' ]}_version", 0 );
+                $_sToVersion      = $_aTableInfo[ 'version' ];
+                if ( version_compare( $_sCurrentVersion, $_sToVersion, '<' ) ) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 }

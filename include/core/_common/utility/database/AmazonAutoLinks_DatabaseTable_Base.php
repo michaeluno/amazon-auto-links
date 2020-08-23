@@ -124,7 +124,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             // The method should be overridden in the extended class.
             $_sSQLQuery = $this->getCreationQuery();
             if ( ! $_sSQLQuery ) {
-                return;
+                return array();
             }
 
             require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -151,7 +151,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         }
 
         $GLOBALS[ 'wpdb' ]->query(
-            "DROP  TABLE IF EXISTS " . $this->aArguments[ 'table_name' ]
+            "DROP TABLE IF EXISTS " . $this->aArguments[ 'table_name' ]
         );
     }
 
@@ -245,11 +245,12 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      *
+     * All columns must be set; otherwise, an error occurs.
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
      * @since   1.1.0
      */
     public function replace( $aRow, $asFormat=null ) {
-        $aRow = $this->_getSanitizedRow( $aRow );
+        $aRow = $this->___getSanitizedRow( $aRow );
         return $GLOBALS[ 'wpdb' ]->replace(
             $this->aArguments[ 'table_name' ],
             $aRow,
@@ -260,12 +261,102 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
 
     /**
+     * Override/insert a single row.
+     *
+     * @remark  The table MUST have a primary or unique column.
+     * @param array $aRow Key value pairs that corresponds to the column name and the value. In order to update existent row, at least one of the columns must be unique or primary. e.g. array( 'asin' => 'aaa', 'locale' => 'bbb', 'currency' => 'ccc' )
+     * @return bool|int
+     * @since   4.3.0
+     * @see     wpdb
+     */
+    public function setRow( array $aRow ) {
+        return $this->setRows( array( $aRow ) );
+    }
+
+    /**
+     * Override/insert multiple rows.
+     * @remark  One of the given columns must be either PRIMARY or UNIQUE.
+     * @remark  Each row element must consists of the same keys with the other rows.
+     * @param   array   $aRows
+     * @see     wpdb
+     * @since   4.3.0
+     * @return mixed|void
+     */
+    public function setRows( array $aRows ) {
+
+        $_sTableName     = $this->getTableName();
+        $_aFirstRow      = reset($aRows );
+        if ( empty( $_aFirstRow ) ) {
+            return;
+        }
+        $_aColumnNames   = array_keys( $_aFirstRow );
+        $_sColumnNames   = implode( ', ', $_aColumnNames );
+        $_sColumnsValues = $this->___getQueryStatementColumnsValues( $aRows );
+        $_sRowToUpdate   = $this->___getQueryStatementUpdateRow( $_aColumnNames );
+        
+        /**
+         * @var wpdb $_oWPDB
+         */
+        $_oWPDB   = $GLOBALS[ 'wpdb' ];
+        $sDBQuery = "INSERT INTO {$_sTableName} ({$_sColumnNames})"
+            . " VALUES {$_sColumnsValues}"
+            . " ON DUPLICATE KEY UPDATE {$_sRowToUpdate}";
+        return $_oWPDB->query( $sDBQuery );
+
+    }
+        /**
+         * @param array $aValues
+         *
+         * @return array
+         * @since   4.3.0
+         */
+        private function ___getValuesFormatted( array $aValues ) {
+            $_aValuesFormatted = array();
+            foreach( $aValues as $_iIndex => $_snValue ) {
+                $_aValuesFormatted[ $_iIndex ] = is_integer( $_snValue ) || is_float( $_snValue )
+                    ? $_snValue
+                    : "'{$_snValue}'";
+            }
+            return $_aValuesFormatted;
+        }
+        /**
+         * @param array $aColumnNames e.g. array( 'object_id', 'title', 'asin' )
+         * @return string
+         * @sicne   4.3.0
+         */
+        private function ___getQueryStatementUpdateRow( array $aColumnNames ) {
+            $_aKeyValues     = array();
+            foreach( $aColumnNames as $_sColumnName ) {
+                $_aKeyValues[] = "{$_sColumnName}=VALUES({$_sColumnName})";
+            }
+            return implode( ', ', $_aKeyValues );
+        }
+        /**
+         * @param array $aRows
+         * @return string
+         */
+        private function ___getQueryStatementColumnsValues( array $aRows ) {
+            $_aColumnsValues = array();
+            foreach( $aRows as $_aRow ) {
+                $_aRow           = $this->___getSanitizedRow( $_aRow );
+                $_aColumnsValues[] = '('
+                    . implode( ', ', $this->___getValuesFormatted( array_values( $_aRow ) ) )
+                    . ')';
+            }
+            return implode( ', ', $_aColumnsValues );
+        }
+
+    /**
+     * Updates a row.
+     *
+     * If a row does not exists, an error occurs.
      *
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
+     * @see     wpdb
      * @since   1.1.0
      */
     public function update( $aRow, $aWhere=array(), $asFormat=null, $asWhereFormat=null ) {
-        $aRow = $this->_getSanitizedRow( $aRow );
+        $aRow = $this->___getSanitizedRow( $aRow );
         return $GLOBALS[ 'wpdb' ]->update(
             $this->aArguments[ 'table_name' ],
             $aRow, // the new data to update
@@ -282,7 +373,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
          * @return      array
          * @since       1.1.0
          */
-        private function _getSanitizedRow( array $aRow ) {
+        private function ___getSanitizedRow( array $aRow ) {
             foreach( $aRow as $_sColumnName => $_mValue ) {
                 $aRow[ $_sColumnName ] = maybe_serialize( $_mValue );
             }

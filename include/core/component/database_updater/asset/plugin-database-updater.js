@@ -13,6 +13,7 @@
             event.preventDefault();
             var _oNotice = $( this ).closest( '.aal_db_update' );
             var _oSpinner = $( '<img src="' + aalDBUpdater.spinnerURL + '" />' );
+            _oSpinner.css( { 'vertical-align': 'middle', 'display': 'inline-block', 'height': 'auto', 'margin-left': '0.5em' } );
             _oNotice.find( 'p' ).append( _oSpinner );
             jQuery.ajax( {
                 type: "post",
@@ -20,10 +21,11 @@
                 url: aalDBUpdater.ajaxURL,
                 // Data set to $_POSt and $_REQUEST
                 data: {
-                    action: 'aal_action_update_database_table',   // WordPress action hook name which follows after `wp_ajax_`
+                    action: aalDBUpdater.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalDBUpdater.nonce,   // the nonce value set in template.php
-                    versionTo: aalDBUpdater.versionTo,
-                    tableName: aalDBUpdater.tableName
+                    // @deprecated 4.3.0
+                    // versionTo: aalDBUpdater.versionTo,
+                    // tableName: aalDBUpdater.tableName
                 },
                 success: function ( response ) {
                     if ( response.success ) {
@@ -35,14 +37,10 @@
                 },
                 error: function( response ) {
                     _oNotice.removeClass( 'notice-info' ).addClass( 'error' );
-                    _oNotice.find( 'p' ).html( '<b>' + aalDBUpdater.pluginName + '</b>: ' + aalDBUpdater.requestFailed  );
+                    _oNotice.find( 'p' ).html( '<b>' + aalDBUpdater.pluginName + '</b>: ' + response.responseText );
                 },
                 complete: function() {
                     _oSpinner.remove();
-                    // if ( $( element ).hasClass( 'done' ) ) {
-                    //     return;
-                    // }
-                    // $( element ).removeClass( 'loading' ).addClass( 'gray' );
                 }
             } ); // ajax
 

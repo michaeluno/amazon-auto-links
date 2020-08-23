@@ -18,7 +18,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-    const VERSION        = '4.3.0b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION        = '4.3.0b04';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME           = 'Amazon Auto Links';
     const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -118,6 +118,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             // $aDatabaseTables property key => {table name}_version
             'product'       => 'aal_products_version',
             'request_cache' => 'aal_request_cache_version',
+            'tasks'         => 'aal_tasks_version',
         ),
 
         // 3.9.0
@@ -204,11 +205,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * )
      * @since       3.5.0
      * @since       3.8.0       Changed the version from 1.0.0 to 1.1.0.
+     * @since       4.3.0       Changed the `aal_products` table version from 1.3.0 to 1.4.0.
      */
     static public $aDatabaseTables = array(
          'aal_products'        => array(
              'name'              => 'aal_products', // serves as the table name suffix
-             'version'           => '1.3.0',
+             'version'           => '1.4.0b06',
              'across_network'    => true,
              'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_products',
          ),
@@ -217,6 +219,13 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'version'           => '1.0.0',
             'across_network'    => true,
             'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_request_cache',
+        ),
+        // 4.3.0
+        'aal_tasks'            => array(
+            'name'              => 'aal_tasks',  // serves as the table name suffix
+            'version'           => '1.0.0',
+            'across_network'    => true,
+            'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_tasks',
         ),
     );
 

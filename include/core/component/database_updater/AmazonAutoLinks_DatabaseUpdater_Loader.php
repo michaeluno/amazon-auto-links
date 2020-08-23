@@ -23,14 +23,9 @@ class AmazonAutoLinks_DatabaseUpdater_Loader {
         self::$sComponentDirPath = dirname( __FILE__ );
 
         new AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater;
-
-        new AmazonAutoLinks_DatabaseUpdater_AdminNotice(
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_products' ][ 'name' ],     // aal_products
-            AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_products' ][ 'version' ]   //
-        );
-
-        // 3.10.0
-        new AmazonAutoLinks_DatabaseUpdater_aal_products_121;
+        new AmazonAutoLinks_DatabaseUpdater_AdminNotice;
+        new AmazonAutoLinks_DatabaseUpdater_aal_products_121;   // 3.10.0
+        new AmazonAutoLinks_DatabaseUpdater_aal_products_140;   // 4.3.0
 
     }
 

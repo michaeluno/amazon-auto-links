@@ -15,52 +15,57 @@
  */
 class AmazonAutoLinks_OptionUpdater_To380 extends AmazonAutoLinks_PluginUtility {
 
+    /**
+     * @since   3.8.0
+     * @since   4.3.0       Changed the action hook from `aal_action_update_plugin_database_table` to `aal_action_update_plugin_database_tables`.
+     */
     public function __construct() {
-        add_action( 'aal_action_update_plugin_database_table', array( $this, 'replyToUpdateOptions' ), 10, 3 );
+        add_action( 'aal_action_update_plugin_database_tables', array( $this, 'replyToUpdateOptions' ) );
     }
 
     /**
      * This is called when the user clicks on the database table update link in the notification message
      * and the action hook is fired.
-     * @param $sTableName
-     * @param $sVersionFrom
-     * @param $sVersionTo
      */
-    public function replyToUpdateOptions( $sTableName, $sVersionFrom, $sVersionTo ) {
-
-//        if ( version_compare( '1.1.0b01', $sVersionTo, '<' ) ) {
-//            return;
-//        }
-
+    public function replyToUpdateOptions() {
+        
+        // If options are not set, do nothing.
         $_baOptions          = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
         if ( ! $_baOptions ) {
-            // If options are not set, do nothing.
             return;
         }
 
+        // If the subject key is not set, do nothing.
         $_aOptions           = $this->getAsArray( $_baOptions );
         if ( ! isset( $_aOptions[ 'unit_default' ] ) ) {
-            // If the subject key is not set, do nothing.
             return;
         }
 
         // At this point, the user has already saved the options.
         $_sItemFormat        = $this->getElement( $_aOptions, array( 'unit_default', 'item_format' ), '' );
         $_aLegacyItemFormats = $this->___getLegacyDefaultItemFormats();
-        foreach( $_aLegacyItemFormats as $_iIndex => $_sThisItemFormat ) {
+        $_iEdited            = 0;
+        foreach( $_aLegacyItemFormats as $_iIndex => $_sLegacyItemFormat ) {
             // Remove line feeds as Windows and Unix handles PHP_EOL differently.
-            $_sThisItemFormat = str_replace( array( "\r", "\n", ), '', $_sThisItemFormat );
-            $_sItemFormat     = str_replace( array( "\r", "\n", ), '', $_sItemFormat );
-            if ( $_sThisItemFormat !== $_sItemFormat ) {
+            $_sLegacyItemFormat = str_replace( array( "\r", "\n", ), '', $_sLegacyItemFormat );
+            $_sItemFormat       = str_replace( array( "\r", "\n", ), '', $_sItemFormat );
+            if ( $_sLegacyItemFormat !== $_sItemFormat ) {
                 continue;
             }
             // If they equal each other, update the option
             $_aOptions[ 'unit_default' ][ 'item_format' ] = $this->___getNewItemFormat( $_iIndex );
+            $_iEdited++;
         }
+        
+        if ( ! $_iEdited ) {
+            return;
+        }
+        
+        // Finally update the option.
         update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], $_aOptions );
+        
     }
         /**
-         * @param string $sOldItemFormat
          * @param integer $iIndex
          * @return string
          */

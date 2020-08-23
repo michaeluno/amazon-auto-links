@@ -16,7 +16,9 @@
 class AmazonAutoLinks_DatabaseUpdater_aal_products_121 extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
-        add_action( 'aal_action_updated_plugin_database_table', array( $this, 'replyToUpdateDatabase' ), 10, 4 );
+
+        // aal_action_updated_plugin_database_table_ + {table name suffix}
+        add_action( 'aal_action_updated_plugin_database_table_aal_products', array( $this, 'replyToUpdateDatabase' ), 10, 3 );
     }
 
     /**
@@ -26,12 +28,11 @@ class AmazonAutoLinks_DatabaseUpdater_aal_products_121 extends AmazonAutoLinks_P
      * Removes an index for the `asin_locale` column which has been present as it has been a unique value constraint.
      * As of v3.9.0, that constraint has been removed. So the index must be deleted as well.
      *
-     * @param string $sTableName
      * @param string $sVersionFrom
      * @param string $sVersionTo
      * @param array $aResult
      */
-    public function replyToUpdateDatabase( $sTableName, $sVersionFrom, $sVersionTo, $aResult ) {
+    public function replyToUpdateDatabase( $sVersionFrom, $sVersionTo, $aResult ) {
 
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
 

@@ -22,23 +22,25 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
      */
     protected function _getArguments() {
         return AmazonAutoLinks_Registry::$aDatabaseTables[ 'aal_products' ];
-    }    
+    }
 
     /**
      * Represents the structure of a row of the table.
-     * 
+     *
      * @remark      accessed from outside to construct a row array to insert data into the table.
      */
     static public $aStructure_Row = array(
         'object_id'                     => null,   // (integer)
+        'product_id'                    => null,   // (string) 4.3.0 XXXXXXXXXX_XX|XXX|xx-XX
+        'title'                         => null,   // (string) The product name.
         'asin_locale'                   => null,   // (string) XXXXXXXXXX_XX
         'locale'                        => null,   // (string) XX      e.g. US
         'modified_time'                 => null,   // (string) dddd-dd-dd dd:dd:dd
         'expiration_time'               => null,   // (string) dddd-dd-dd dd:dd:dd
-        'links'                         => null,   // (string) 
+        'links'                         => null,   // (string)
         'rating'                        => null,   // (integer)    e.g. 45
-        'rating_image_url'              => null,   // (string) 
-        'rating_html'                   => null,   // (string)   
+        'rating_image_url'              => null,   // (string)
+        'rating_html'                   => null,   // (string)
         'price'                         => null,   // (integer)    Listed price. e.g. 46.56
         'price_formatted'               => null,   // (string)
         'currency'                      => null,   // (string)  e.g. USD
@@ -51,13 +53,13 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'discounted_price_formatted'    => null,
         'count_new'                     => null,   // (integer)
         'count_used'                    => null,   // (integer)
-        'title'                         => null,   // (string) The product name.
+//        'title'                         => null,   // (string) The product name.
         'description'                   => null,   // (string) product details
         'images'                        => null,   // (string) serialized array containing product lists
         'similar_products'              => null,   // (string) serialized array containing product lists
         'editorial_reviews'             => null,   // (string) serialized array containing editorial review text.
-        'customer_review_url'           => null,   // (string) 
-        'customer_review_charset'       => null,   // (string) 
+        'customer_review_url'           => null,   // (string)
+        'customer_review_charset'       => null,   // (string)
         'customer_reviews'              => null,   // (string) serialized array containing user reviews.
         'number_of_reviews'             => null,   // (integer) number of customer reviews.
         'features'                      => null,   // (string) 3.8.0
@@ -70,9 +72,9 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'delivery_free_shipping'        => null,   // (boolean) 3.10.0
         'delivery_fba'                  => null,   // (boolean) 3.10.0
     );
-   
+
     /**
-     * 
+     *
      * @return      string
      * @since       3
      */
@@ -81,6 +83,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         // asin_locale varchar(13) NOT NULL,
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             object_id bigint(20) unsigned NOT NULL auto_increment,
+            product_id varchar(128) UNIQUE,
+            title text,
             asin_locale varchar(13) NOT NULL,
             locale varchar(4),            
             language varchar(10),            
@@ -103,7 +107,6 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             discounted_price_formatted tinytext,
             count_new bigint(20) unsigned,
             count_used bigint(20) unsigned,
-            title text,
             description mediumtext,
             images mediumtext,
             similar_products mediumtext,
@@ -122,7 +125,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             PRIMARY KEY  (object_id) 
         ) " . $this->_getCharactersetCollation() . ";";
     }
-        
+
     /**
      * Sets a row.
      * @param       string       $sASINLocale    A combination of ASIN + underscore + upper case locale notation.
