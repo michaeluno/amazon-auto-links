@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.3
+    Version:        1.2.4
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -81,6 +81,8 @@
     display: inline;
     margin-right: 0.2em;
 
+    /* To align with other elements */
+    vertical-align: middle;
 }
 /* Meta */
 .amazon-products-container-list > .amazon-product-container  .amazon-product-meta {
@@ -117,6 +119,10 @@
 }
 .amazon-products-container-list .reviews-voting-stripe {
     border-right: 0 !important;
+}
+.amazon-products-container-list .crAvgStars {
+    white-space: nowrap;
+    margin-right: 0.4em;
 }
 .amazon-products-container-list span.crAvgStars a {
     text-decoration: none;
@@ -280,7 +286,7 @@
 .amazon-products-container-list .prime-icon {
     display: inline-block;
     width: 48px;
-    height: 12px;
+    height: 1em;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -371,6 +377,7 @@
 }
 .wp-embed .amazon-products-container-list > .amazon-product-container .amazon-product-description {
     display: block;
+    vertical-align: middle;
 }
 .wp-embed .amazon-products-container-list .amazon-auto-links-product-body {
     font-size: medium;

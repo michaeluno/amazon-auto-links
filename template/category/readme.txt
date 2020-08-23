@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.1.1 =
+- Tweaked the style of rating stars and description.
+
 = 1.1.0 =
 - Made the overall font-size medium.
 - Fixed extra bottom-margins of categories and features.
