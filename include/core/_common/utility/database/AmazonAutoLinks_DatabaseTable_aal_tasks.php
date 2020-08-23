@@ -35,8 +35,8 @@ class AmazonAutoLinks_DatabaseTable_aal_tasks extends AmazonAutoLinks_DatabaseTa
             name varchar(255) UNIQUE,
             context varchar(32),    
             arguments text,
-            modified_time datetime NOT NULL default '0000-00-00 00:00:00',
-            expiration_time datetime NOT NULL default '0000-00-00 00:00:00',
+            creation_time datetime NOT NULL default '0000-00-00 00:00:00',
+            next_run_time datetime NOT NULL default '0000-00-00 00:00:00',
             PRIMARY KEY  (name)
         ) " . $this->_getCharactersetCollation() . ";";    
     }
