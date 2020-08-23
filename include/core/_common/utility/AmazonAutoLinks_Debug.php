@@ -56,12 +56,27 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @return      void
      **/
     static public function log( $mValue, $sFilePath=null ) {
-        // @deprecated 3.10.0 Give more freedom to the user
-//        if ( ! self::isDebugModeEnabled() ) {
-//            return;
-//        }
+
         self::$iLegibleStringCharacterLimit = PHP_INT_MAX;
         self::$iLegibleArrayDepthLimit = PHP_INT_MAX;
-        parent::log( $mValue, $sFilePath );
+        parent::log( $mValue, self::___getDebugLogFilePath( $sFilePath ) );
+
     }
+
+    static private function ___getDebugLogFilePath( $sFilePath ) {
+        if ( $sFilePath ) {
+            return $sFilePath;
+        }
+        $_oCallerInfo      = debug_backtrace();
+        $_sCallerFuncName  = self::getElement( $_oCallerInfo, array( 2, 'function' ), '' );
+        $_sCallerClassName = self::getElement( $_oCallerInfo, array( 2, 'class' ), '' );
+        if ( ! $_sCallerFuncName && ! $_sCallerClassName ) {
+            return $sFilePath;
+        }
+        $_sFileBaseName    = $_sCallerClassName
+            ? $_sCallerClassName . '.log'
+            : $_sCallerFuncName . '.log';
+        return WP_CONTENT_DIR . '/' . $_sFileBaseName;
+    }
+
 }
