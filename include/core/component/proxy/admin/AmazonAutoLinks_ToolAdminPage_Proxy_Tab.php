@@ -57,7 +57,6 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab extends AmazonAutoLinks_AdminPage_
                 'nonce'                 => wp_create_nonce( 'aal_nonce_ajax_' . $_sScriptHandle ),
                 'action_hook_suffix'    => $_sScriptHandle, // WordPress action hook name which follows after `wp_ajax_`
                 'spinnerURL'            => admin_url( 'images/loading.gif' ),
-                'requestFailed'         => __( 'Something went wrong with the Ajax request.', 'amazon-auto-links' ),
             );
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script(
