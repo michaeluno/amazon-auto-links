@@ -128,7 +128,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->oUnitOption          = is_object( $aoUnitOptions )
             ? $aoUnitOptions
             : new $_sUnitOptionClassName(
-                null,
+                null, // id is omitted as it is already set in the argument
                 $aoUnitOptions
             );
 
