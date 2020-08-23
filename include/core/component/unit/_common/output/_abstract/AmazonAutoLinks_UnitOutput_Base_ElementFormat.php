@@ -206,7 +206,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
              * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
              * @since       3.9.0       Added the $_sCurrency, $_sLanguage parameters.
              */
-            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID='', $_sCurrency, $_sLanguage ) {
+            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID, $_sCurrency, $_sLanguage ) {
 
                 if ( ! $this->bDBTableAccess ) {
                     return array();
