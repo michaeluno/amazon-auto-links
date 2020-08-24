@@ -315,7 +315,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             foreach( $aValues as $_iIndex => $_snValue ) {
                 $_aValuesFormatted[ $_iIndex ] = is_integer( $_snValue ) || is_float( $_snValue )
                     ? $_snValue
-                    : "'{$_snValue}'";
+                    : "'" . esc_sql( $_snValue ) . "'";
             }
             return $_aValuesFormatted;
         }
@@ -327,7 +327,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         private function ___getQueryStatementUpdateRow( array $aColumnNames ) {
             $_aKeyValues     = array();
             foreach( $aColumnNames as $_sColumnName ) {
-                $_aKeyValues[] = "{$_sColumnName}=VALUES({$_sColumnName})";
+                $_sEscapedName = esc_sql( $_sColumnName );
+                $_aKeyValues[] = "{$_sColumnName}=VALUES({$_sEscapedName})";
             }
             return implode( ', ', $_aKeyValues );
         }

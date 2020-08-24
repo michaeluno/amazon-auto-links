@@ -78,24 +78,27 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
     }
         /**
          * Sets a row.
+         * @param       array $aRow
          * @return      boolean     Whether it is set or not.
          */
-        public function setRow( $aRow ) {
-            
+        public function setRow( array $aRow ) {
+
             if ( ! isset( $aRow[ 'name' ] ) ) {
                 return false;
             }
-         
-            if ( $this->doesRowExist( $aRow[ 'name' ] ) ) {
-                $_iCountSetRows = $this->update( 
-                    $aRow, // data
-                    array( // where
-                        'name' => $aRow[ 'name' ],
-                    )
-                );
-            } else {
-                $_iCountSetRows = $this->replace( $aRow );
-            }     
+            $_iCountSetRows = parent::setRow( $aRow );
+
+            // @deprecated 4.3.0
+//            if ( $this->doesRowExist( $aRow[ 'name' ] ) ) {
+//                $_iCountSetRows = $this->update(
+//                    $aRow, // data
+//                    array( // where
+//                        'name' => $aRow[ 'name' ],
+//                    )
+//                );
+//            } else {
+//                $_iCountSetRows = $this->replace( $aRow );
+//            }
             return $_iCountSetRows
                 ? true
                 : false;
