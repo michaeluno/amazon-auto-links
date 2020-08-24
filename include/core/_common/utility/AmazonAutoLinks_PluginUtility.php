@@ -325,10 +325,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
+     * @param string $sDegreeType
+     * @param array $aArguments
+     *
      * @return  string
      * @since   3
      */
-    static public function getDegree( $sDegreeType='width', $aArguments ) {
+    static public function getDegree( $sDegreeType, $aArguments ) {
         $_iDegree = self::getElement(
             $aArguments,
             $sDegreeType,
