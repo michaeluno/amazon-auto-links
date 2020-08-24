@@ -120,6 +120,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
     }
 
     /**
+     * @remark      Be careful when the meta key does not exist, an empty string is returned instead of null, which can cause an unexpected behavior when merging a resulting array.
      * @return      array|string       If no key is specified, an associative array holding meta values of the specified post by post ID. 
      * If a meta key is specified, it returns the value of the meta.
      */

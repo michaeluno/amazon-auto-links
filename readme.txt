@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Requires MySQL:     5.6
 Tested up to:       5.4.2
-Stable tag:         4.2.3
+Stable tag:         4.2.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -325,6 +325,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.3.0 =
 - Minified JavaScript scripts.
+
+= 4.2.4 - 08/24/2020 =
+- Tweaked styling of `List`, `Category`, `Search` templates.
+- Fixed a bug that in some cases `preferred_currency` and `language` unit options were not set.
 
 = 4.2.3 - 08/18/2020 =
 - Optimized PA-API requests.

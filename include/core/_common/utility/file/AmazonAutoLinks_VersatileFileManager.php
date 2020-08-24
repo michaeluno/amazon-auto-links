@@ -20,19 +20,19 @@ class AmazonAutoLinks_VersatileFileManager {
     /**
      * @var string
      */
-    private $___sFileNamePrefix = '';
+    protected $_sFileNamePrefix = '';
 
-    private $___sIdentifier = '';
+    protected $_sIdentifier = '';
 
-    private $___sTempDirPath = '';
+    protected $_sTempDirPath = '';
 
-    private $___iTimeout;
+    protected $_iTimeout;
 
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
-        $this->___sIdentifier       = $sIdentifier;
-        $this->___sTempDirPath      = trailingslashit( sys_get_temp_dir() ) . AmazonAutoLinks_Registry::$sTempDirName . '/' . md5( site_url() );
-        $this->___iTimeout          = $iTimeout;
-        $this->___sFileNamePrefix   = $sFileNamePrefix;
+        $this->_sIdentifier       = $sIdentifier;
+        $this->_sTempDirPath      = trailingslashit( sys_get_temp_dir() ) . AmazonAutoLinks_Registry::$sTempDirName . '/' . md5( site_url() );
+        $this->_iTimeout          = $iTimeout;
+        $this->_sFileNamePrefix   = $sFileNamePrefix;
     }
 
     /**
@@ -63,7 +63,7 @@ class AmazonAutoLinks_VersatileFileManager {
             return false; // not alive (not created yet)
         }
         $_iModifiedTime  = ( integer ) filemtime( $_sLockFilePath );
-        if ( $_iModifiedTime + $this->___iTimeout > time() ) {
+        if ( $_iModifiedTime + $this->_iTimeout > time() ) {
             // the file is not timed-out yet
             return true; // alive
         }
@@ -80,8 +80,8 @@ class AmazonAutoLinks_VersatileFileManager {
      */
     private function ___set() {
 
-        if ( ! is_dir( $this->___sTempDirPath ) ) {
-            mkdir( $this->___sTempDirPath, 0777, true );
+        if ( ! is_dir( $this->_sTempDirPath ) ) {
+            mkdir( $this->_sTempDirPath, 0777, true );
         }
         $_sLockFilePath = $this->___getActionLockFilePath();
         if ( file_exists( $_sLockFilePath ) ) {
@@ -99,8 +99,8 @@ class AmazonAutoLinks_VersatileFileManager {
          * @return string
          */
         private function ___getActionLockFilePath() {
-            return $this->___sTempDirPath . '/'
-                . $this->___sFileNamePrefix . md5(site_url() . $this->___sIdentifier )
+            return $this->_sTempDirPath . '/'
+                . $this->_sFileNamePrefix . md5(site_url() . $this->_sIdentifier )
                 . '.txt';
         }
 

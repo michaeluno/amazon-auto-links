@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.4 =
+- Tweaked the styling for rating stars, description, and the prime icon.
+
 = 1.2.3 =
 - Tweaked the styling for sub-images to fit its width to the parent container.
 

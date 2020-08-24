@@ -146,7 +146,7 @@ class AmazonAutoLinks_Event_Scheduler {
             return;
         }
 
-        // 4.0.1+ Case: the PA-API keys are set but not for the requested locale. This occurs with embedded links.
+        // 4.0.1 Case: the PA-API keys are set but not for the requested locale. This occurs with embedded links.
         $_aRequestBaseInfo = explode( '|', $sAssociateIDLocaleCurLang );
         $_sLocale          = $_aRequestBaseInfo[ 1 ]; // the 2nd item
         if ( ! $_oOption->isAPIKeySet( $_sLocale ) ) {

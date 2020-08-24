@@ -58,7 +58,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * @param       array       $aUnitOptions   (optional) The unit option to set. Used to sanitize unit options.
      */
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
-        
+
         $_oOption = AmazonAutoLinks_Option::getInstance();
         
         $this->iUnitID      = $iUnitID;
@@ -75,8 +75,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 + $this->getPostMeta( $iUnitID )
             : $aUnitOptions;
         $this->aUnitOptions = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
-
-    }    
+    }
         /**
          * @return      array
          */
@@ -141,12 +140,15 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $_sTemplateID         = $_oTemplateDeterminer->get();
         $aUnitOptions[ 'template_id' ] = $_sTemplateID;
 
-        // @deprecated 4.0.2    This misses a case that the `template` argument is given
-//        $_sTemplateID         = $this->getElement( $aUnitOptions, array( 'template_id' ), '' );
-//        $_oTemplateOption    = AmazonAutoLinks_TemplateOption::getInstance();
-//        $_sTemplateID        = $_oTemplateOption->isActive( $_sTemplateID )
-//            ? $_sTemplateID
-//            : $_oTemplateOption->getDefaultTemplateIDByUnitType( $this->getElement( $aUnitOptions, 'unit_type' ) );
+        // 4.2.4 - if the user does not save the unit by hand, these are not set.
+        $_sLocale   = $this->getElement( $aUnitOptions, array( 'country' ), 'US' );
+        /// Using ternary instead of getElement() as 'preferred_currency' and 'language' seem to have an empty value when the unit is not saved
+        $aUnitOptions[ 'preferred_currency' ] = $aUnitOptions[ 'preferred_currency' ]
+            ? $aUnitOptions[ 'preferred_currency' ]
+            : AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
+        $aUnitOptions[ 'language' ]           = $aUnitOptions[ 'language' ]
+            ? $aUnitOptions[ 'language' ]
+            : AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
 
         $_aOutputFormats                = $this->___getOutputFormats( $aUnitOptions, $_sTemplateID );
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
