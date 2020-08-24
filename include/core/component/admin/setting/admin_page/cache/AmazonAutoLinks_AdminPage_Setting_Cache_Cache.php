@@ -227,11 +227,41 @@ class AmazonAutoLinks_AdminPage_Setting_Cache_Cache extends AmazonAutoLinks_Admi
          * @since   3.8.12
          */
         private function ___getCacheCleanupScheduledTime() {
-            return $this->getIntervalScheduleInfoCache(
+            return $this->___getIntervalScheduleInfoCache(
                 wp_next_scheduled( 'aal_action_delete_expired_caches', array() ),
                 ( integer ) AmazonAutoLinks_Option::getInstance()->get( array( 'cache', 'cache_removal_event_last_run_time' ) )
             );
         }
+            /**
+             * Returns a schedule information of an interval option.
+             * @since   4.2.1
+             * @since   4.3.0   Moved from AmazonAutoLinks_PluginUtility
+             * @return  string
+             */
+            private function ___getIntervalScheduleInfoCache( $biNextScheduledCheck, $iLastRunTime ) {
+                $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
+                $_sLastRunTime .= $iLastRunTime
+                    ? self::getSiteReadableDate( $iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
+                    : __( 'n/a', 'amazon-auto-links' );
+                return false === $biNextScheduledCheck
+                    ? "<div>"
+                            . "<p class='field-error'>* "
+                                . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
+                                . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
+                                . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
+                            . "</p>"
+                            . "<p>" . $_sLastRunTime . "</p>"
+                        . "</div>"
+                    : "<div>"
+                            . "<p>"
+                                . sprintf(
+                                    __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
+                                    self::getSiteReadableDate( $biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
+                                )
+                            . "</p>"
+                            . "<p>" . $_sLastRunTime . "</p>"
+                        . "</div>";
+            }
     
     /**
      * Validates the submitted form data.

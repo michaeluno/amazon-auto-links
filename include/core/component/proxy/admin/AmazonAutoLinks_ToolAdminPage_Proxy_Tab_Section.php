@@ -132,11 +132,36 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
          * @since   4.2.0
          */
         private function ___getUpdateScheduleText() {
-            return $this->getIntervalScheduleInfo(
+            return $this->___getIntervalScheduleInfo(
                 wp_next_scheduled( 'aal_action_proxy_update', array() ),
                 AmazonAutoLinks_ToolOption::getInstance()->get( array( 'proxies', 'update_last_run_time' ) )
             );
         }
+            /**
+             * Returns a schedule information of an interval option.
+             * @param   integer The `time()` result value in seconds.
+             * @param   integer|boolean
+             * @since   4.2.0
+             * @since   4.2.1   Removed the warning message for the cache option field and separated the part into another method.
+             * @since   4.3.0   Moved from `AmazonAutoLinks_PluginUtility`.
+             * @return  string
+             */
+            private function ___getIntervalScheduleInfo( $biNextScheduledCheck, $iLastRunTime ) {
+                $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
+                $_sLastRunTime .= $iLastRunTime
+                    ? self::getSiteReadableDate( $iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
+                    : __( 'n/a', 'amazon-auto-links' );
+                return "<div>"
+                            . "<p>"
+                                . sprintf(
+                                    __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
+                                    self::getSiteReadableDate( $biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
+                                )
+                            . "</p>"
+                            . "<p>" . $_sLastRunTime . "</p>"
+                        . "</div>";
+            }
+
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
 

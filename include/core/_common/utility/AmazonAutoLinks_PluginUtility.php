@@ -35,61 +35,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     }
 
-
-    /**
-     * Returns a schedule information of an interval option.
-     * @since   4.2.1
-     * @return  string
-     */
-    static public function getIntervalScheduleInfoCache( $biNextScheduledCheck, $iLastRunTime ) {
-        $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
-        $_sLastRunTime .= $iLastRunTime
-            ? self::getSiteReadableDate( $iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
-            : __( 'n/a', 'amazon-auto-links' );
-        return false === $biNextScheduledCheck
-            ? "<div>"
-                    . "<p class='field-error'>* "
-                        . __( 'The periodic check of cache removal is not scheduled.', 'amazon-auto-links' ) . ' '
-                        . __( 'It could be a WP Cron issue. Please consult the site administrator.', 'amazon-auto-links' ) . ' '
-                        . __( 'If this is left unfixed, caches will not be cleared.', 'amazon-auto-links' )
-                    . "</p>"
-                    . "<p>" . $_sLastRunTime . "</p>"
-                . "</div>"
-            : "<div>"
-                    . "<p>"
-                        . sprintf(
-                            __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
-                            self::getSiteReadableDate( $biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
-                        )
-                    . "</p>"
-                    . "<p>" . $_sLastRunTime . "</p>"
-                . "</div>";
-    }
-
-    /**
-     * Returns a schedule information of an interval option.
-     * @param   integer The `time()` result value in seconds.
-     * @param   integer|boolean
-     * @since   4.2.0
-     * @since   4.2.1   Removed the warning message for the cache option field and separated the part into another method.
-     * @return  string
-     */
-    static public function getIntervalScheduleInfo( $biNextScheduledCheck, $iLastRunTime ) {
-        $_sLastRunTime  = __( 'Last Run', 'amazon-auto-links' ) . ': ';
-        $_sLastRunTime .= $iLastRunTime
-            ? self::getSiteReadableDate( $iLastRunTime , get_option( 'date_format' ) . ' g:i a', true )
-            : __( 'n/a', 'amazon-auto-links' );
-        return "<div>"
-                    . "<p>"
-                        . sprintf(
-                            __( 'Next scheduled at %1$s.', 'amazon-auto-links' ),
-                            self::getSiteReadableDate( $biNextScheduledCheck , get_option( 'date_format' ) . ' g:i a', true )
-                        )
-                    . "</p>"
-                    . "<p>" . $_sLastRunTime . "</p>"
-                . "</div>";
-    }
-
     /**
      * @param integer|string $iProductTableSize    Size in megabytes
      * @param integer|string $iRequestTableSize    Size in megabytes
