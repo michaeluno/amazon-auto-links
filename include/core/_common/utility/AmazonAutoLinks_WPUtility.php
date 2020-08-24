@@ -283,7 +283,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     public static function getCurrentAdminURL() {
         return add_query_arg( 
             $_GET, 
-            admin_url( $GLOBALS['pagenow'] ) 
+            admin_url( $GLOBALS[ 'pagenow' ] )
         );
     }
         
