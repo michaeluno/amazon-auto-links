@@ -127,6 +127,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             if ( ! $_bPluginDebugMode ) {
                 return $_aDebugInformation;
             }
+            $_mTransient = get_transient( $GLOBALS[ 'aal_transient_id' ] );
             return $_aDebugInformation + array(
                 'debug' => array(
                     'locale'            => $sLocale,
@@ -138,7 +139,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                     'versionAAL'        => AmazonAutoLinks_Registry::VERSION,
                     'activePlugins'     => $this->getAsArray( get_option( 'active_plugins' ) ),
                     'activeTheme'       => $this->___getThemeInfo(),
-                    'hasTransient'      => ! empty( get_transient( $GLOBALS[ 'aal_transient_id' ] ) ),
+                    'hasTransient'      => ! empty( $_mTransient ),
                 ),
             );
         }

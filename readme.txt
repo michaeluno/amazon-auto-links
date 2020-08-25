@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.5 =
+- Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
+
 = 4.2.4 - 08/24/2020 =
 - Tweaked styling of `List`, `Category`, `Search` templates.
 - Fixed a bug that in some cases `preferred_currency` and `language` unit options were not set.
