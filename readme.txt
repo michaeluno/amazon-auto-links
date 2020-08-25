@@ -211,7 +211,7 @@ The `id`, `asin` and `search` arguments cannot be used together.
 
 Optionally, the following arguments may be set.
 
-- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, and `MX`.
+- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, `MX`, `AU`, `TR`, `AE`, `SG` and `NL`.
 - `associate_id` - (string) the Amazon Associates ID for the affiliate.
 - `count` - (integer) determines how many items should be displayed.
 - `image_size` - (integer) the image size in pixels.
