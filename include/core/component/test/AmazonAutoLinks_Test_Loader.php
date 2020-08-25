@@ -34,18 +34,24 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
 
         self::$sDirPath = dirname( __FILE__ );
 
-        // Admin
-        if ( is_admin() ) {
-            $this->___loadAdminComponents();
+        if ( ! is_admin() ) {
+            return;
         }
 
+        $this->___loadAdminComponents();
+
+        // Events
+        new AmazonAutoLinks_Test_Event_Ajax_Tests;
+        new AmazonAutoLinks_Test_Event_Ajax_Scratches;
 
     }
         /**
          * Loads admin components.
          */
         private function ___loadAdminComponents() {
+
             add_action( 'set_up_' .  'AmazonAutoLinks_AdminPage', array( $this, 'replyToSetUpAdminPage' ) );
+
         }
             /**
              * @param AmazonAutoLinks_AdminPageFramework $oFactory

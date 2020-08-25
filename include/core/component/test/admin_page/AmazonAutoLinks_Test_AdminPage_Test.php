@@ -38,6 +38,7 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
     public function replyToLoadPage( $oFactory ) {
 
         // Tabs
+        new AmazonAutoLinks_Test_AdminPage_Test_Tests( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_Test_AdminPage_Test_Scratch( $this->oFactory, $this->sPageSlug );
 
         $this->_doPageSettings( $oFactory );
@@ -60,5 +61,13 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
             // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
 
         }    
-            
+
+
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+
+        // Disable the setting notice in the next page load.
+        $oFactory->setSettingNotice( '' );
+        return $aOldInputs;
+
+    }
 }

@@ -14,7 +14,7 @@
  * @since       4.3.0
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
-class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_AdminPage_Tab_Base {
+class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_AdminPage_Test_Tests {
 
     /**
      * @return  array
@@ -22,8 +22,8 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_AdminP
      */
     protected function _getArguments() {
         return array(
-            'tab_slug'  => 'scratch',
-            'title'     => 'Scratch',
+            'tab_slug'  => 'scratches',
+            'title'     => 'Scratches',
         );
     }
 
@@ -32,19 +32,29 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_AdminP
      * 
      * @callback        action      load_{page slug}_{tab slug}
      */
-    protected function _loadTab( $oAdminPage ) {}
-    
+    protected function _loadTab( $oAdminPage ) {
+        parent::_loadTab( $oAdminPage );
+    }
+
+    /**
+     * @return array
+     */
+    protected function _getTagLabelsForCheckBox() {
+        return $this->_getTagLabels( AmazonAutoLinks_Test_Loader::$sDirPath . '/scratches', array( 'AmazonAutoLinks_Scratch_Base' ) );
+    }
+
+
     /**
      * Write scratches here to test something.
      * @callback        action      do_{page slug}_{tab slug}
      */
     protected function _doTab( $oFactory ) {
-        
-        echo "<h3>Scratches for Tests</h3>";
+        parent::_doTab( $oFactory );
+//        echo "<h3>Scratches for Tests</h3>";
 
-        $this->___testOverrideRow();
+//        $this->___testOverrideRow();
 //        $this->___testOverrideRows();
-        $this->___testGetRows();
+//        $this->___testGetRows();
 
     }
         private function ___testOverrideRows() {
