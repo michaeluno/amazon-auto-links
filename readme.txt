@@ -322,7 +322,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.2.5 - 08/26/2020 =- Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
+= 4.3.0 =
+- Added the `[aal_button ...]` short code to display buttons.
+- Tweaked the button style.
+
+= 4.2.5 - 08/26/2020 =
+- Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
 
 = 4.2.4 - 08/24/2020 =
 - Tweaked styling of `List`, `Category`, `Search` templates.
