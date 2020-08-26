@@ -322,6 +322,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.3.0 =
+- Added the shortcode `[aal_button ...]` to display buttons.
+- Tweaked the button style.
+
 = 4.2.5 =
 - Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
 

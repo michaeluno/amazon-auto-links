@@ -20,8 +20,12 @@ class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
     /**
      * Registers the shortcode(s).
      */
-    public function __construct( $asShortCode ) {
-        foreach( $this->getAsArray( $asShortCode ) as $_sShortCode ) {            
+    public function __construct() {
+        $_aShortcodes = array(
+            AmazonAutoLinks_Registry::$aShortcodes[ 'main' ],
+            AmazonAutoLinks_Registry::$aShortcodes[ 'v1' ],
+        );
+        foreach( $this->getAsArray( $_aShortcodes ) as $_sShortCode ) {
             add_shortcode( 
                 $_sShortCode, 
                 array( $this, '_replyToGetOutput' ) 

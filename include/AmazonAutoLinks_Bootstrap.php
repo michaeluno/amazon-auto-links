@@ -236,9 +236,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             new AmazonAutoLinks_AutoInsertLoader( $this->sFilePath );                        
                         
             // Shortcode
-            new AmazonAutoLinks_Shortcode( 
-                AmazonAutoLinks_Registry::$aShortcodes  // e.g. [amazon_auto_links id="143"]
-            );
+            new AmazonAutoLinks_Shortcode;
                 
             // Widgets
             new AmazonAutoLinks_WidgetsLoader;                 

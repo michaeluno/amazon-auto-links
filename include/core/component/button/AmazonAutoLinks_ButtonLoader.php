@@ -36,7 +36,14 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],  // slug
             null,   // post type argument. This is defined in the class.
             $sScriptPath   // script path               
-        );                
+        );
+
+        /// Shortcode   4.3.0
+        new AmazonAutoLinks_Button_Shortcode;
+
+        /// Events      4.3.0
+        new AmazonAutoLinks_Button_Event_Filter_Output;
+
         
         // Back-end
         if ( is_admin() ) {
