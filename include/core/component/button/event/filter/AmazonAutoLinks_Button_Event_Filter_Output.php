@@ -104,7 +104,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
                     $sASIN,
                     $_aDefaults,
                     $this->getElement( $_aDefaults, array( 'language' ), '' ),
-                    $this->getElement( $_aDefaults, array( 'preferred_currency' ), '' ),
+                    $this->getElement( $_aDefaults, array( 'preferred_currency' ), '' )
                 );
             }
 
