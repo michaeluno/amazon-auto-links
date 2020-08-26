@@ -49,9 +49,9 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             'type'         => $_oOption->get( array( 'unit_default', 'button_type' ), 1 ),
             'id'           => 0,   // can be omitted
             'asin'         => '',  // comma delimited ASINs
-            'country'      => '',
+            'country'      => $_oOption->get( array( 'unit_default', 'country' ), 1 ),
             'associate_id' => $_oOption->get( array( 'unit_default', 'associate_id' ), '' ),  // Associate ID
-            'access_key'   => '',
+            'access_key'   => $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ),
         ) + $this->_aArguments;
         return $this->___getButtonOutput( $aArguments );
 
@@ -150,10 +150,11 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
                 'AssociateTag'      => $sAssociateID,
                 'SubscriptionId'    => $sAccessKey,
                 'AWSAccessKeyId'    => $sAccessKey,
-                'OfferListingId'    => '',
+                'OfferListingId'    => $sOfferListingID,
             );
-            $_aASINs      = $this->getStringIntoArray( $sASINs, ',' );
-            $_aQuantities = $this->getStringIntoArray( $sQuantities, ',' );
+            $_aQuery        = array_filter( $_aQuery );
+            $_aASINs        = $this->getStringIntoArray( $sASINs, ',' );
+            $_aQuantities   = $this->getStringIntoArray( $sQuantities, ',' );
             foreach( $_aASINs as $iIndex => $_sASIN ) {
                 $_iItem = $iIndex + 1;
                 $_aQuery[ 'ASIN.' . $_iItem ]     = $_sASIN;
