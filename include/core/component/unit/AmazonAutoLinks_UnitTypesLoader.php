@@ -85,6 +85,8 @@ class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_UnitTypeLoader_Bas
 
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
 
+            new AmazonAutoLinks_Event_Filter_ProductLinks;  // 4.3.0
+
         }
         
     

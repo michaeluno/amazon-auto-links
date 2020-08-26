@@ -104,7 +104,7 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
      */
     public function replyToPrintStyleTag() {
         
-        $_sCSSRules = $this-> getButtonsCSS();
+        $_sCSSRules = $this->getButtonsCSS();
         if ( ! $_sCSSRules ) {
             return;
         }     
@@ -147,17 +147,23 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
                 );
             }
         }        
-                
-        $_sCSSRules = apply_filters(
-            'aal_filter_button_css',
-            self::getDefaultButtonCSS() . PHP_EOL
-                . $_sCSSStored
-        );     
+
+        $_sStoredCSS = self::getDefaultButtonCSS() . PHP_EOL
+               . self::getOverallButtonCSS(). PHP_EOL
+               . $_sCSSStored;
+        $_sCSSRules  = apply_filters( 'aal_filter_button_css', $_sStoredCSS );
         
         // Cache for later use.
         self::$sButtonsCSS = $_sCSSRules;
         return self::$sButtonsCSS;
         
+    }
+    static public function getOverallButtonCSS() {
+        return ".amazon-auto-links-button > a, .amazon-auto-links-button > a:hover {
+            -webkit-box-shadow: none;
+            box-shadow none;
+            color: inherit;
+        }";
     }
     /**
      * 
@@ -202,11 +208,11 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
         .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a {
             color: inherit; 
             border-bottom: none;
-            text-decoration: none;
+            text-decoration: none;             
         }
         .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a:hover {
             color: inherit;
-        }        
+        }
         ";
         
     }

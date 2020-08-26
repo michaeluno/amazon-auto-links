@@ -483,38 +483,17 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Returns a button output by a given button (custom post) ID.
-     * @return      string
-     * @since       3
+     *
+     * @param   integer|string $isButtonID
+     * @param   string $sLabel
+     * @param   bool $bVisible
+     * @return  string
+     * @since   3
      */
     static public function getButton( $isButtonID, $sLabel='', $bVisible=true ) {
-        
-        $_sButtonLabel      = $sLabel
-            ? $sLabel
-            : ( 
-                is_numeric( $isButtonID ) && $isButtonID
-                    ? get_post_meta( $isButtonID, 'button_label', true )
-                    : ''
-            );
+        return apply_filters( 'aal_filter_button', '', $isButtonID, $sLabel, $bVisible );
+    }
 
-        $_sButtonLabel      = $_sButtonLabel
-            ? $_sButtonLabel
-            : __( 'Buy Now', 'amazon-auto-links' );
-            
-        $_sButtonIDSelector = $isButtonID
-            ? "amazon-auto-links-button-$isButtonID"
-            : "amazon-auto-links-button-___button_id___";
-        $_sNone   = 'none';
-        $bVisible = $bVisible
-            ? ''
-            : "display:{$_sNone};";
-        return "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-                . "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
-                    . $_sButtonLabel
-                . "</div>"
-            . "</div>";
-            
-    } 
-    
     /**
      * Returns the url using the Amazon SSL image server.
      * @since       3

@@ -30,7 +30,7 @@ class AmazonAutoLinks_FormFields_Button_Preview extends AmazonAutoLinks_FormFiel
                         . AmazonAutoLinks_PluginUtility::getButton(
                                 isset( $_GET[ 'post' ] ) 
                                     ? $_GET[ 'post' ] 
-                                    : 0
+                                    : -1    // must have a value; otherwise, the button tag type, <button>, will be displayed 4.3.0
                             )
                     . "</div>"
                 . "</div>",
