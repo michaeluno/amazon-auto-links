@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5
-Stable tag:         4.2.5
+Stable tag:         4.2.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,7 +322,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.2.6 =
+= 4.2.6 - 08/29/2020 =
 - Fixed a bug that Item Look-up and Contextual unit types could not display product titles, which started since v4.0.0.
 
 = 4.2.5 - 08/26/2020 =
