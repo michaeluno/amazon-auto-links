@@ -43,7 +43,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
 
         /// Events      4.3.0
         new AmazonAutoLinks_Button_Event_Filter_Output;
-
+        new AmazonAutoLinks_Button_Event_Query_ButtonPreview;
         
         // Back-end
         if ( is_admin() ) {

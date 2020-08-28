@@ -55,9 +55,12 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
             $this->oProp->sPageSlug,
             'default',
             array(  
-                'handle_id'    => 'aal_button_preview_labels',
+                'handle_id'    => 'aalButtonPreview',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                'translation'  => array(
+                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+                ),
             )
         );   
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToSetStyle' ) );
@@ -80,26 +83,10 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
          * @since       3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
-            
-            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
             return $aFieldset;
-            
         }
-            /**
-             * @return      array
-             * @since       3.3.0
-             */
-            private function _getActiveButtonLabelsForFields() {
-                
-                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-                $_aLabels    = array();
-                foreach( $_aButtonIDs as $_iButtonID ) {
-                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
-                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
-                }
-                return $_aLabels;           
-                
-            }
+
      
     /**
      * Validates submitted form data.

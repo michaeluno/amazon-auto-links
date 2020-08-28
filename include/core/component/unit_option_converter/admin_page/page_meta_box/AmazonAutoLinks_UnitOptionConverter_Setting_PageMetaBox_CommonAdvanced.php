@@ -39,26 +39,9 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_CommonAdvanced ext
          * @since       3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
-            
-            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
             return $aFieldset;
-            
         }
-            /**
-             * @return      array
-             * @since       3.3.0
-             */
-            private function _getActiveButtonLabelsForFields() {
-                
-                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-                $_aLabels    = array();
-                foreach( $_aButtonIDs as $_iButtonID ) {
-                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
-                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
-                }
-                return $_aLabels;           
-                
-            }
      
     /**
      * Validates submitted form data.

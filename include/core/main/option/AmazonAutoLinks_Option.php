@@ -26,7 +26,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     );
         
     /**
-     * Stores the default values.
+     * Stores default values.
      */
     public $aDefault = array(
     
@@ -179,8 +179,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'credit_link'                   => 0,   // 1 or 0   // 3.5.3+ disabled by default
             'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
 
-        // @todo not sure about this         
-        'title'                 => '',      // won't be used to fetch links. Used to create a unit.
+            // @todo not sure about this
+            'title'                 => '',      // won't be used to fetch links. Used to create a unit.
             
             'template'              => '',      // the template name - if multiple templates with a same name are registered, the first found item will be used.
             'template_id'           => null,    // the template ID: md5( dir path )
@@ -191,9 +191,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             // stores labels associated with the units (the plugin custom taxonomy). Used by the RSS2 template.
             '_labels'               => array(),    
             
-    // this is for fetching by label. AND, IN, NOT IN can be used
-    'operator'              => 'AND',   
-
+            // this is for fetching by label. AND, IN, NOT IN can be used
+            'operator'              => 'AND',
             
             // 3+
             'subimage_size'                 => 100,
@@ -201,10 +200,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'customer_review_max_count'     => 2,
             'customer_review_include_extra' => false,
             
-            'button_id'                     => null, // a button (post) id will be assigned
-            // 3.1.0+
-            'button_type'                   => 1,   // 0: normal link, 1: add to cart
-            
+            'button_id'                     => null,    // a button (post) id will be assigned
+            'button_type'                   => 1,       // 3.1.0 0: normal link, 1: add to cart
+            'button_label'                  => '',      // 4.3.0
+            'override_button_label'         => false,   // 4.3.0
+
             'product_filters'               => array(
                 'white_list'    => array(
                     'asin'          => '',
@@ -313,14 +313,19 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     public function __construct( $sOptionKey ) {
                 
         $this->aDefault[ 'unit_default' ][ 'description_suffix' ] = __( 'read more', 'amazon-auto-links' );
-        
+        $this->aDefault[ 'unit_default' ][ 'button_label' ]       = __( 'Buy Now', 'amazon-auto-links' );   // 4.3.0
+
         // The `$this->aOptions` property will be established.
         parent::__construct( $sOptionKey );
         
         // After `this->aOptions` is created. Set the default Item Format option.
         $this->aOptions[ 'unit_default' ] = $this->aOptions[ 'unit_default' ] 
             + $this->getDefaultItemFormat();  // needs to check API is connected
-        
+
+        if ( ! $this->aOptions[ 'unit_default' ][ 'override_button_label' ] ) {
+            $this->aOptions[ 'unit_default' ][ 'button_label' ] = __( 'Buy Now', 'amazon-auto-links' );
+        }
+
     }
        
     /**

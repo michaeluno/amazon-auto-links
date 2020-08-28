@@ -355,11 +355,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @param string         $sLocale
      * @param string         $sAssociateID
      * @param string         $sAccessKey
+     * @param string         $sButtonLabelToOverride
      *
      * @return      string
      * @since       3
      */
-    protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey ) {
+    protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey, $nsButtonLabelToOverride=null ) {
         $_aButtonArguments = array(
             'type'          => ( integer ) $iButtonType,
             'id'            => ( integer ) $isButtonID,
@@ -368,6 +369,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             'associate_id'  => $sAssociateID,
             'access_key'    => $sAccessKey,
         );
+        if ( null !== $nsButtonLabelToOverride ) {
+            $_aButtonArguments[ 'label' ] = $nsButtonLabelToOverride;
+        }
         return apply_filters( 'aal_filter_linked_button', '', $_aButtonArguments );
     }
 

@@ -301,7 +301,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     /**
      * Removes specified tags from the given dom node.
      */
-    public function removeTags( $oDom, array $aTags ) {
+    public function removeTags( DOMDocument $oDom, array $aTags ) {
         
         foreach( $aTags as $_sTag ) {
             
@@ -320,7 +320,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * @return      string       Returns an outer HTML output of a specified tag.       
      * @since       3.2.0
      */
-    public function getTagOuterHTML( $oDoc, $sTag, $iIndex=0 ) {
+    public function getTagOuterHTML( DOMDocument $oDoc, $sTag, $iIndex=0 ) {
         $_oXpath           = new DOMXPath( $oDoc );               
         $_oTags            = $_oXpath->query( "/html/{$sTag}" );
         $_oTag             = $_oTags->item( $iIndex );

@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.5 =
+- Added rules for buttons.
+
 = 1.2.4 =
 - Tweaked the styling for rating stars, description, and the prime icon.
 

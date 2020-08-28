@@ -34,7 +34,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
      */
     public function __construct() {
         add_filter( 'aal_filter_linked_button', array( $this, 'replyToGetLinkedButton' ), 10, 2 );
-        add_filter( 'aal_filter_button', array( $this, 'replyToGetButton' ), 10, 4 );
+        add_filter( 'aal_filter_button', array( $this, 'replyToGetButton' ), 10, 5 );
     }
 
     /**
@@ -177,48 +177,64 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
      * @param   integer|string $isButtonID
      * @param   string $sLabel
      * @param   bool $bVisible
+     * @param   bool $bOuterContainer
      * @return  string
      * @since   3
      */
-    public function replyToGetButton( $sOutput, $isButtonID, $sLabel='', $bVisible=true ) {
+    public function replyToGetButton( $sOutput, $isButtonID, $sLabel='', $bVisible=true, $bOuterContainer=true ) {
 
-        $_sButtonLabel      = $this->___getButtonlabel( $isButtonID, $sLabel );
-        $_sNone   = 'none';
-        $bVisible = $bVisible
-            ? ''
-            : "display:{$_sNone};";
+        $_sButtonLabel = $this->___getButtonLabel( $isButtonID, $sLabel );
+        $_sNone        = 'none';
+        $bVisible      = $bVisible ? '' : "display:{$_sNone};";
 
         if ( ! $isButtonID ) {
-            return "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-                    . "<button type='button' class='amazon-auto-links-button'>"
+            $_sButton = "<button type='button' class='amazon-auto-links-button'>"
                         . $_sButtonLabel
-                    . "</button>"
-                . "</div>";
+                    . "</button>";
+            return $bOuterContainer
+                ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
+                        . $_sButton
+                    . "</div>"
+                : $_sButton;
         }
         $_iButtonID = ( integer ) $isButtonID;
         $_sButtonIDSelector = $_iButtonID > 0   // preview sets it to -1
             ? "amazon-auto-links-button-$isButtonID"
             : "amazon-auto-links-button-___button_id___";
-        return "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-                . "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
+        $_sButton = "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
                     . $_sButtonLabel
-                . "</div>"
-            . "</div>";
+                . "</div>";
+        return $bOuterContainer
+            ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
+                . $_sButton
+            . "</div>"
+            : $_sButton;
 
     }
+
         /**
-         * @since   4.3.0
+         * @param integer|string $isButtonID
+         * @param string $sLabel
+         *
          * @return string
+         * @since   4.3.0
          */
         private function ___getButtonLabel( $isButtonID, $sLabel ) {
-            $_sButtonLabel      = $sLabel
+            $_sButtonLabel = $sLabel
                 ? $sLabel
                 : (
                     is_numeric( $isButtonID ) && ( $isButtonID > 0 )  // preview sets it to -1
                         ? get_post_meta( $isButtonID, 'button_label', true )
                         : ''
                 );
-            return $_sButtonLabel ? $_sButtonLabel : __( 'Buy Now', 'amazon-auto-links' );
+            if ( $_sButtonLabel ) {
+                return $_sButtonLabel;
+            }
+            $_oOption      = AmazonAutoLinks_Option::getInstance();
+            return $_oOption->get( array( 'unit_default', 'override_button_label' ), false )
+                ? $_oOption->get( array( 'unit_default', 'button_label' ), '' )
+                : __( 'Buy Now', 'amazon-auto-links' );
+
         }
 
 }

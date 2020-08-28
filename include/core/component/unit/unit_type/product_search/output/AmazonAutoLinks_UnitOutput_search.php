@@ -913,7 +913,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $_aProduct[ 'ASIN' ],
                         $_sLocale,
                         $_sAssociateID,
-                        $this->oOption->get( 'authentication_keys', 'access_key' ) // public access key
+                        $this->oOption->get( 'authentication_keys', 'access_key' ), // public access key
+                        $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                     );
     
                 }

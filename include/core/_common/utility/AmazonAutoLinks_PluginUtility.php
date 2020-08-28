@@ -198,26 +198,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         $_oProductTable->deleteExpired();        
         
     }
-    
-    /**
-     * @since       3.4.0
-     * @return      array
-     */
-    static public function getActiveButtonLabelsForJavaScript() {
-        
-        $_aButtonIDs = self::getActiveButtonIDs();
-        $_aLabels    = array();
-        foreach( $_aButtonIDs as $_iButtonID ) {
-            $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
-            $_sButtonLabel = $_sButtonLabel
-                ? $_sButtonLabel
-                : __( 'Buy Now', 'amazon-auto-links' );
-            $_aLabels[ $_iButtonID ] = $_sButtonLabel;
-        }
-        return $_aLabels;
-        
-    }        
-    
+
     /**
      * Returns the active auto-insert ids.
      * @sine        3.3.0
@@ -434,6 +415,51 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         return '';
     }    
 
+/**
+     * @since       3.4.0
+     * @return      array
+     */
+    static public function getActiveButtonLabelsForJavaScript() {
+
+        $_aButtonIDs    = self::getActiveButtonIDs();
+        $_aLabels       = array();
+        $_sDefaultLabel = AmazonAutoLinks_Option::getInstance()->get( array( 'unit_default', 'button_label' ), 'DEBUG' );
+        $_sDefaultLabel = $_sDefaultLabel ? $_sDefaultLabel : __( 'Buy Now', 'amazon-auto-inks' );
+        foreach( $_aButtonIDs as $_iButtonID ) {
+            if ( ! $_iButtonID ) {
+                $_aLabels[ $_iButtonID ] = $_sDefaultLabel;
+                continue;
+            }
+            $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
+            $_aLabels[ $_iButtonID ] = $_sButtonLabel ? $_sButtonLabel : $_sDefaultLabel;
+        }
+        return $_aLabels;
+
+    }
+
+    /**
+     * @since   4.3.0
+     * @return  array
+     */
+    static public function getActiveButtonLabelsForFields() {
+
+        static $_aCached = array();
+        if ( ! empty( $_aCached ) ) {
+            return $_aCached;
+        }
+        $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
+        $_aLabels    = array();
+        foreach( $_aButtonIDs as $_iButtonID ) {
+            if ( 0 == $_iButtonID ) {
+                $_aLabels[ $_iButtonID ] = __( 'Theme button', 'amazon-auto-links' );
+                continue;
+            }
+            $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID );
+        }
+        $_aCached = $_aLabels;
+        return $_aCached;
+
+    }
 
     /**
      * 
@@ -448,7 +474,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
         $_abActiveIDs = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'active_buttons' ] );
         if ( false !== $_abActiveIDs ) {
-            $_aCache = self::getAsArray( $_abActiveIDs );
+            $_aCache   = self::getAsArray( $_abActiveIDs );
+            $_aCache[] = 0; // the normal <button> tag
             return $_aCache;
         }
         
@@ -459,11 +486,12 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $_aActiveIDs,
             true   // enable auto-load
         );      
-        $_aCache = $_aActiveIDs;
+        $_aCache   = $_aActiveIDs;
+        $_aCache[] = 0; // the normal <button> tag
         return $_aCache;
         
-    }  
-    
+    }
+
     /**
      * Queries active buttons without caches.
      * @since       3.3.0
@@ -487,11 +515,12 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @param   integer|string $isButtonID
      * @param   string $sLabel
      * @param   bool $bVisible
+     * @param   bool $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
      * @return  string
      * @since   3
      */
-    static public function getButton( $isButtonID, $sLabel='', $bVisible=true ) {
-        return apply_filters( 'aal_filter_button', '', $isButtonID, $sLabel, $bVisible );
+    static public function getButton( $isButtonID, $sLabel='', $bVisible=true, $bOuterContainer=true ) {
+        return apply_filters( 'aal_filter_button', '', $isButtonID, $sLabel, $bVisible, $bOuterContainer );
     }
 
     /**

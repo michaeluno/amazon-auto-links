@@ -89,6 +89,7 @@ $_aClassFiles = array(
     "AmazonAutoLinks_FormFields_Button_Selector"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Selector.php", 
     "AmazonAutoLinks_FormFields_Button_Text"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php", 
     "AmazonAutoLinks_Button_Event_Filter_Output"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php", 
+    "AmazonAutoLinks_Button_Event_Query_ButtonPreview"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/query/AmazonAutoLinks_Button_Event_Query_ButtonPreview.php", 
     "AmazonAutoLinks_PostType_Button"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php", 
     "AmazonAutoLinks_PostType_Button_ListTable"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php", 
     "AmazonAutoLinks_Button_Shortcode"=> AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/shortcode/AmazonAutoLinks_Button_Shortcode.php", 

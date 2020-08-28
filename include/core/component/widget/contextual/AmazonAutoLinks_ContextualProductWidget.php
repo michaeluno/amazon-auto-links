@@ -162,34 +162,10 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @since       3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
-            
-            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
             return $aFieldset;
-            
         }
-            /**
-             * @return      array
-             * @since       3.3.0
-             */
-            private function _getActiveButtonLabelsForFields() {
-                
-                static $_aCache;
-                
-                if ( isset( $_aCache ) ) {
-                    return $_aCache;
-                }
-                
-                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-                $_aLabels    = array();
-                foreach( $_aButtonIDs as $_iButtonID ) {
-                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
-                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
-                }
-                $_aCache = $_aLabels;           
-                return $_aCache;
-                
-            }
-            
+
         /**
          * Adds form fields by the given class names.
          * @since       3.0.3

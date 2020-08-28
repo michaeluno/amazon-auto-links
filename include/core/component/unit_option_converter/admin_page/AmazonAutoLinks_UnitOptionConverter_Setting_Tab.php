@@ -50,9 +50,12 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], // page slug
             '', // tab slug
             array(  
-                'handle_id'    => 'aal_button_preview_labels',
+                'handle_id'    => 'aalButtonPreview',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                'translation'  => array(
+                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+                ),
             )
         );      
 
@@ -60,25 +63,6 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
         
     }
 
-        /**
-         * @return      array
-         * @deprecated  3.4.0
-         */
-/*         private function _getActiveButtonLabelsForJavaScript() {
-            
-            $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-            $_aLabels    = array();
-            foreach( $_aButtonIDs as $_iButtonID ) {
-                $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
-                $_sButtonLabel = $_sButtonLabel
-                    ? $_sButtonLabel
-                    : __( 'Buy Now', 'amazon-auto-links' );
-                $_aLabels[ $_iButtonID ] = $_sButtonLabel;
-            }
-            return $_aLabels;
-            
-        }  */      
-        
         /**
          * @return      string
          * @callback    action      style_{class name}
