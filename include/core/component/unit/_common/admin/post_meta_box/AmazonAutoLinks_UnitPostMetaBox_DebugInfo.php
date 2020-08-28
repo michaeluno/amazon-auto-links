@@ -27,11 +27,12 @@ class AmazonAutoLinks_UnitPostMetaBox_DebugInfo extends AmazonAutoLinks_UnitPost
         
     }
     
-    public function content( $sOutput ) {        
+    public function content( $sOutput ) {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return $sOutput 
             . "<h4>" . __( 'Unit Options', 'amazon-auto-links' ) . "</h4>"
             . $this->oDebug->get(
-                AmazonAutoLinks_WPUtility::getPostMeta( $GLOBALS['post']->ID )
+                AmazonAutoLinks_WPUtility::getPostMeta( $GLOBALS['post']->ID, '', $_oOption->get( 'unit_default' ) )
             );
     }
     

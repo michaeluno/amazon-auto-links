@@ -54,7 +54,8 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
 
         $_aUnitOptions = array();
         if ( isset( $_GET[ 'post' ] ) ) {
-            $_aUnitOptions = AmazonAutoLinks_WPUtility::getPostMeta( $_GET[ 'post' ] );
+            $_oOption      = AmazonAutoLinks_Option::getInstance();
+            $_aUnitOptions = AmazonAutoLinks_WPUtility::getPostMeta( $_GET[ 'post' ], '', $_oOption->get( 'unit_default' ) );
         }
         
         // Set some items for the edit mode.
