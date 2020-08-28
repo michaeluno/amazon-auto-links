@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.6 =
+- Fixed a bug that Item Look-up and Contextual unit types could not display product titles, which started since v4.0.0.
+
 = 4.2.5 - 08/26/2020 =
 - Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
 
