@@ -326,8 +326,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `[aal_button ...]` short code to display buttons.
 - Added the `Override the button label.` unit option that allows the user override a button label.
 - Added the theme button option for the `Select Button` option.
-- Tweaked the button style.= 4.2.5 - 08/26/2020 =
-- Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
+- Tweaked the button style.
+
+= 4.2.6 – 08/29/2020 =
+- Fixed a bug that Item Look-up and Contextual unit types could not display product titles, which started since v4.0.0.
+
+= 4.2.5 – 08/26/2020 =
+- Fixed an incompatibility issue with PHP 5.4.x or below regarding the empty() language construct.
 
 = 4.2.4 - 08/24/2020 =
 - Tweaked styling of `List`, `Category`, `Search` templates.
