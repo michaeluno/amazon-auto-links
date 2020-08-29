@@ -736,11 +736,16 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.5.0
              */
             private function ___getTitle( $aItem ) {
-                $_sTitle = $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
+
+                $_sTitle = $this->oUnitOption->get( array( 'product_title' ) );
+                $_sTitle = $_sTitle
+                    ? $_sTitle
+                    : $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
                 if ( $this->isTitleBlocked( $_sTitle ) ) {
                     throw new Exception( '(product filter) The title is black-listed: ' . $_sTitle );
                 }
                 return $this->getTitleSanitized( $_sTitle, $this->oUnitOption->get( 'title_length' ) );
+
             }
 
             /**
@@ -812,7 +817,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              */
             private function ___getProduct(
                 $_aItem,
-                $_sTitle,
+                $sTitle,
                 $_sThumbnailURL,
                 $_sProductURL,
                 $_sContent,
@@ -822,12 +827,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_sResponseDate
             ) {
 
-                // Construct a product array. This will be passed to a template.\
+                // Construct a product array. This will be passed to a template.
                 // @remark  For values that could not retrieved, leave it null so that later it will be filled with formatting routine or triggers a background routine to retrieve product data
                 $_aProduct = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
-                    'title'              => $this->oUnitOption->get( array( 'product_title' ), $_sTitle ), // the shortcode parameter 'title' can suppress the title in the parsed data
+                    'title'              => $sTitle, // the shortcode parameter 'title' can suppress the title in the parsed data but an empty string is not accepted. To remove a title, use the `Title Length` / `Item Format` option.
                     'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                     'description'        => $_sDescription, // reflects the user set character length. Additional meta data will be prepended.
                     'meta'               => '', // @todo maybe deprecated?
@@ -882,7 +887,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProduct[ 'image_set' ] = $this->___getImageSet(
                     $_aItem,
                     $_sProductURL,
-                    $_sTitle,
+                    $sTitle,
                     $this->oUnitOption->get( 'subimage_size' ),
                     $this->oUnitOption->get( 'subimage_max_count' )
                 );

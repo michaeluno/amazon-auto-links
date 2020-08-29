@@ -60,7 +60,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        
+
         $this->iUnitID      = $iUnitID;
         $this->aDefault     = array(
                 'unit_type' => $this->sUnitType,
@@ -72,7 +72,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $this->aUnitOptions = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
-                + $this->getPostMeta( $iUnitID )
+                + $this->getPostMeta( $iUnitID, '', $_oOption->get( 'unit_default' ) )
             : $aUnitOptions;
         $this->aUnitOptions = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
     }

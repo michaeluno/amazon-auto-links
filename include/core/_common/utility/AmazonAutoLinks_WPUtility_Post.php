@@ -120,18 +120,25 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
     }
 
     /**
+     *
      * @remark      Be careful when the meta key does not exist, an empty string is returned instead of null, which can cause an unexpected behavior when merging a resulting array.
-     * @return      array|string       If no key is specified, an associative array holding meta values of the specified post by post ID. 
+     *
+     * @param integer $iPostID
+     * @param string $sKey
+     * @param array|string $asDefaults      Default values for when the meta value does not exist.
+     *
+     * @return      array|string       If no key is specified, an associative array holding meta values of the specified post by post ID.
      * If a meta key is specified, it returns the value of the meta.
+     * @since   3
+     * @since   4.2.6   Added the $asDefaults parameter.
      */
-    static public function getPostMeta( $iPostID, $sKey='' ) {
-        
+    static public function getPostMeta( $iPostID, $sKey='', $asDefaults=array() ) {
+
+        self::$___aDefaults_getPostMeta = self::getAsArray( $asDefaults );
         if ( $sKey ) {
-            return get_post_meta( 
-                $iPostID, 
-                $sKey, 
-                true 
-            );       
+            self::$___aDefaults_getPostMeta = array( $sKey => $asDefaults );
+            add_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10, 5 );
+            return get_post_meta( $iPostID, $sKey, true );
         }
 
         $_aPostMeta = array();        
@@ -139,6 +146,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
         // There are cases that post id is not set, called from the constructor of a unit option class
         // only to use the format method.
         if ( ! $iPostID ) {
+            self::$___aDefaults_getPostMeta = array();
             return $_aPostMeta;
         }
 
@@ -146,17 +154,34 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient
         $_aMetaKeys = empty( $_aMetaKeys )
             ? array()
             : ( array ) $_aMetaKeys;
+
         foreach( $_aMetaKeys  as $_sKey ) {
+            add_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10, 5 );
             $_aPostMeta[ $_sKey ] = get_post_meta( 
                 $iPostID, 
                 $_sKey, 
                 true 
             );        
         }
+        self::$___aDefaults_getPostMeta = array();
         return $_aPostMeta;                
         
     }
-
+        static private $___aDefaults_getPostMeta = array();
+        /**
+         * @param mixed $mValue
+         * @param integer $iObjectID
+         * @param string $sMetaKey
+         * @param boolean $bSingle
+         * @param string $sMetaType
+         */
+        static public function replyToSetMetaDefaultValue( $mValue, $iObjectID, $sMetaKey, $bSingle, $sMetaType ) {
+            if ( isset( self::$___aDefaults_getPostMeta[ $sMetaKey ] ) ) {
+                return self::$___aDefaults_getPostMeta[ $sMetaKey ];
+            }
+            remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
+            self::$___aDefaults_getPostMeta = array();
+        }
     /**
      * Creates a post.
      * 

@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5
-Stable tag:         4.2.5
+Stable tag:         4.2.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -326,9 +326,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `[aal_button ...]` short code to display buttons.
 - Added the `Override the button label.` unit option that allows the user override a button label.
 - Added the theme button option for the `Select Button` option.
-- Tweaked the button style.
-
-= 4.2.5 - 08/26/2020 =
+- Tweaked the button style.= 4.2.5 - 08/26/2020 =
 - Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
 
 = 4.2.4 - 08/24/2020 =

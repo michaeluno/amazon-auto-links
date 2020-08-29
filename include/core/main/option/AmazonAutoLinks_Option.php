@@ -300,6 +300,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'language'                      => null,
 
             // 4.0.0
+            'product_title'                 => null,    // 4.0.0    Overrides product titles.
             'output_formats'                => array(), // (array) holds item_format, image_format, title_format for each active template
         )
         
