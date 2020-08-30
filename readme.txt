@@ -323,6 +323,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.0 =
+- Added the ability to toggle the status of buttons.
 - Added the `[aal_button ...]` short code to display buttons.
 - Added the `Override the button label.` unit option that allows the user override a button label.
 - Added the theme button option for the `Select Button` option.

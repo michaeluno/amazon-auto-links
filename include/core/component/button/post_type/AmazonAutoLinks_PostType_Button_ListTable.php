@@ -25,7 +25,8 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
     public function replyToModifyColumnHeader( $aHeaderColumns ) {    
         return array(
             'cb'                    => '<input type="checkbox" />',   
-            'title'                 => __( 'Label', 'amazon-auto-links' ),    
+            'title'                 => __( 'Label', 'amazon-auto-links' ),
+            'status'                => __( 'Status', 'amazon-auto-links' ),
             'shortcode'             => __( 'Shortcode', 'amazon-auto-links' ),
             'preview'               => __( 'Preview', 'amazon-auto-links' ),
             // 'template'              => __( 'Template', 'amazon-auto-links' ),

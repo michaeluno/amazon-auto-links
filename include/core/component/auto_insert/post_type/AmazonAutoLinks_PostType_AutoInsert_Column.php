@@ -15,9 +15,10 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
 
     /**
      * Stores a custom nonce.
+     * @deprecated 4.3.0
      */
-    protected $_sCustomNonce;
-    protected $_sNonceKey = 'aal_nonce_auto_insert';
+//    protected $_sCustomNonce;
+//    protected $_sNonceKey = 'aal_nonce_auto_insert';
 
     /**
      * Sets up hooks.
@@ -26,7 +27,8 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
             
         if ( $this->_isInThePage() ) {
 
-            $this->_sCustomNonce = wp_create_nonce( 'aal_nonce_auto_insert' );
+            // @deprecated 4.3.0
+//            $this->_sCustomNonce = wp_create_nonce( 'aal_nonce_auto_insert' );
 
             // unit listing table columns
             add_filter(    
@@ -40,7 +42,6 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
         
     }
 
-     
     /**
      * Defines the column header of the unit listing table.
      * 
@@ -109,36 +110,6 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
             
         }
 
-    /**
-     * @param $sCell
-     * @param $iPostID
-     *
-     * @return mixed
-     * @deprecated  3.7.8   Moved the action link class, `AmazonAutoLinks_PostType__AutoInsert___ActionLink_Status`.
-     */
-    public function _cell_aal_auto_insert_status( $sCell, $iPostID ) {
-
-        $sToggleStatusURL = add_query_arg(
-            array(
-                'post_type'     => AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],
-                'custom_action' => 'toggle_status',
-                'post'          => $iPostID,
-                'nonce'         => $this->_sCustomNonce,
-            ),
-            admin_url( 'edit.php' )
-        );
-
-        $fIsEnabled         = get_post_meta( $iPostID, 'status', true );
-        $sStatus          = $fIsEnabled ? "<strong>" . __( 'On', 'amazon-auto-links' ) . "</strong>" : __( 'Off', 'amazon-auto-links' );
-        $sOppositeStatus  = $fIsEnabled ? __( 'Off', 'amazon-auto-links' ) : __( 'On', 'amazon-auto-links' );
-        $sActions         = "<div class='row-actions'>"
-                . "<span class='toggle-status'>"
-                    . "<a href='{$sToggleStatusURL}' title='" . __( 'Toggle the status', 'amazon-auto-links' ) . "'>" . sprintf( __( 'Set it %1$s', 'amazon-auto-links' ), $sOppositeStatus ) . "</a>"
-                . "</span>"
-            . "</div>";
-        return $sStatus . $sActions;
-
-    }
 
     public function cell_aal_auto_insert_area( $sCell, $iPostID ) {
         $_oUtil = new AmazonAutoLinks_WPUtility;
@@ -162,6 +133,5 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
             . '</p>';
         
     }
-        
 
 }

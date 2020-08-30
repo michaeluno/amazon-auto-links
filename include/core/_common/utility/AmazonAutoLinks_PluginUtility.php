@@ -237,7 +237,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * so the plugin triggers another callback after the post is completely published. So in that case, the method gets called twice. 
      * The callback for the `transition_post_status` hook is needed for user's trashing/restoring posts.
      * @since       3.3.0
-     * @return      array
+     * @return      array   An numerically indexed array holding active auto-insert IDs.
      */
     static public function getActiveAutoInsertIDsQueried() {
         $_oQuery = new WP_Query(
@@ -247,7 +247,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
                 'posts_per_page' => -1, // ALL posts
                 'fields'         => 'ids',  // return an array of post IDs
                 'meta_query'        => array(
-                    array(    // do not select tasks of empty values of the _next_run_time key.
+                    array(
                         'key'       => 'status',
                         'value'     => true,
                     ),                            
@@ -498,15 +498,31 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      array
      */
     static public function getActiveButtonIDsQueried() {
+
         $_oQuery = new WP_Query(
             array(
                 'post_status'    => 'publish',     // optional
                 'post_type'      => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], 
                 'posts_per_page' => -1, // ALL posts
                 'fields'         => 'ids',  // return an array of post IDs
+
+                // Also searching for items that the '_status' meta key does not exist for backward compatibility with v4.2.x or below which do not have this meta key.
+                'meta_query'     => array(
+                    'relation'  => 'OR',
+                    array(
+                        'key'       => '_status',
+                        'value'     => true,
+                    ),
+                    array(
+                        'key'       => '_status',
+                        'value'     => '',
+                        'compare'   => 'NOT EXISTS',
+                    ),
+                ),
             )
-        );       
+        );
         return $_oQuery->posts;
+
     }
 
     /**

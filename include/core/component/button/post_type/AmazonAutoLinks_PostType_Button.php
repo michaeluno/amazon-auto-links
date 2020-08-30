@@ -85,6 +85,9 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
                 array( $this, 'replyToModifyColumnHeader' )
             );
+
+            // 4.3.0
+            new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );
                      
         }
         
