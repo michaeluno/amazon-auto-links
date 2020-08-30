@@ -326,6 +326,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `[aal_button ...]` short code to display buttons.
 - Added the `Override the button label.` unit option that allows the user override a button label.
 - Added the theme button option for the `Select Button` option.
+- Added `target="_blank"` to the unit view links to open the link in a new tab
 - Tweaked the button style.
 
 = 4.2.6 – 08/29/2020 =

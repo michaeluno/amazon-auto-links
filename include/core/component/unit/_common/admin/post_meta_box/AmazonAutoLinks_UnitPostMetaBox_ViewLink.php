@@ -20,7 +20,7 @@ class AmazonAutoLinks_UnitPostMetaBox_ViewLink extends AmazonAutoLinks_UnitPostM
         }        
         add_action(
             "do_" . $this->oProp->sClassName,
-            array( $this, 'replyToPrintMetaBoxConetnt' )
+            array( $this, 'replyToPrintMetaBoxContent' )
         );
         
     }
@@ -28,13 +28,13 @@ class AmazonAutoLinks_UnitPostMetaBox_ViewLink extends AmazonAutoLinks_UnitPostM
     /**
      * Draws the Select Category submit button and some other links.
      */
-    public function replyToPrintMetaBoxConetnt( $oFactory ) {
+    public function replyToPrintMetaBoxContent( $oFactory ) {
         
         $_sViewLink    = esc_url( get_permalink( $this->_iPostID ) );
         ?>
         <div style="padding: 0.8em 0 1.5em; ">
             <div style="text-align: center;">
-                <p style="font-size: 1.2em; margin-bottom: 1.5em;"><a style="text-decoration: none;" href="<?php echo $_sViewLink; ?>"><?php _e( 'View Unit', 'amazon-auto-links' ); ?></a></p>
+                <p style="font-size: 1.2em; margin-bottom: 1.5em;"><a style="text-decoration: none;" target="_blank" href="<?php echo $_sViewLink; ?>"><?php _e( 'View Unit', 'amazon-auto-links' ); ?></a></p>
             </div>
         </div>
         <?php

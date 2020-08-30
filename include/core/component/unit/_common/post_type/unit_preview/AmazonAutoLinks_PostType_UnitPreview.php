@@ -84,9 +84,9 @@ class AmazonAutoLinks_PostType_UnitPreview {
         }    
         
         $_sLink = $this->_replaceWithUserSetPostTypeSlug( get_permalink( $oPost->ID ) );
-        $aActions[ 'view' ] = '<a href="' 
+        $aActions[ 'view' ] = '<a target="_blank" href="'
             . $_sLink . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $oPost->post_title ) ) . '" rel="permalink">' 
-                . __( 'View' ) 
+                . __( 'View' )
             . '</a>';
         return $aActions;
         

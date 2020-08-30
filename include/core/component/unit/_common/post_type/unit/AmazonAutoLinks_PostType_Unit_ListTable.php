@@ -33,9 +33,26 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
                 array( $this, 'replyToModifyColumnHeader' )
             );
+
+            add_filter( "post_row_actions", array( $this, 'replyToModifyActionLinks' ), 10, 2 );
+
             
         }
     
+    }
+
+    /**
+     * @param $aActions
+     * @param WP_Post $oPost
+     * @return array
+     * @since   4.3.0
+     */
+    public function replyToModifyActionLinks( $aActions, $oPost ) {
+        if ( $oPost->post_type !== $this->oProp->sPostType ) {
+            return $aActions;
+        }
+        $aActions[ 'view' ] = links_add_target( $aActions[ 'view' ] );
+        return $aActions;
     }
         
     /**
