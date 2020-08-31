@@ -17,7 +17,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
 
         $_aActiveTemplateLabels = $this->oTemplateOption->getUsableTemplateLabels();
         $_iMaxCol               = $this->oOption->getMaxSupportedColumnNumber();
-        $_aItemFormat           = $this->oOption->getDefaultItemFormat();
+        $_aOutputFormats        = $this->oOption->getDefaultOutputFormats();
         $_sTemplateScreenURL    = add_query_arg(
             array(
                 'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
@@ -25,7 +25,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             ),
             admin_url( 'edit.php' )
         );
-        $_aFields               = array(
+        return array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'template_id',
                 'type'              => 'revealer',
@@ -64,13 +64,23 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'delimiter'         => '',
             ),
             array(
+                'field_id'          => $sFieldIDPrefix . 'custom_text',
+                'title'             => __( 'Custom Text', 'amazon-auto-links' ),
+                'description'       => __( 'The text replaced with the <code>%text%</code> tag in the <b>Unit Format<b> option.', 'amazon-auto-links' ),
+                'type'              => 'textarea',
+                'rich'              => true,
+                'class'             => array(
+                    'field' => 'width-full',
+                    'input' => 'width-full',
+                ),
+            ),
+            array(
                 'field_id'          => $sFieldIDPrefix . 'output_formats',
                 'title'             => __( 'Output Formats', 'amazon-auto-links' ),
-                'content'           => $this->___getTemplateFormatFields( $_aActiveTemplateLabels, $sFieldIDPrefix, $_aItemFormat ),
+                'content'           => $this->___getTemplateFormatFields( $_aActiveTemplateLabels, $sFieldIDPrefix, $_aOutputFormats ),
             )
         );
-        return $_aFields;
-        
+
     }
 
         /**
@@ -88,7 +98,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
         }
 
             /**
-             * @param sring $sTemplateID
+             * @param string $sTemplateID
              *
              * @return string
              */
@@ -112,6 +122,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 $_aFormatFields[] = array(
                     'field_id' => $_sTemplateID,
                     'content'   => array(
+                        $this->___getField_UnitFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'unit_format' ], $_sTemplateID ),
                         $this->___getField_ItemFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'item_format' ], $_sTemplateID ),
                         $this->___getField_TitleFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'title_format' ], $_sTemplateID ),
                         $this->___getField_ImageFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'image_format' ], $_sTemplateID )
@@ -204,6 +215,33 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             );
         }
 
+        /**
+         * @param   string  $sFieldIDPrefix
+         * @param   string  $sDefault
+         * @param   string  $sTemplateID
+         * @return  array
+         * @since   4.3.0
+         */
+        private function ___getField_UnitFormat( $sFieldIDPrefix, $sDefault, $sTemplateID ) {
+            $sDefault       = apply_filters( 'aal_filter_template_default_unit_format_' . $sTemplateID, $sDefault );
+            return array(
+                'field_id'          => $sFieldIDPrefix . 'unit_format',
+                'title'             => __( 'Unit Format', 'amazon-auto-links' ),
+                'type'              => 'textarea',
+                'default'           => $sDefault,
+                'attributes'        => array(
+                    'rows'      => 6,
+                ),
+                'description'        => __( 'Sets the layout of the unit.', 'amazon-auto-links' ) . '<br />'
+                    . '<code>%text%</code> - ' . __( 'the custom text set in the <b>Custom Text</b> option.', 'amazon-auto-links' ) . '<br />'
+                    . '<code>%products%</code> - ' . __( 'products', 'amazon-auto-links' ),
+                'class'         => array(
+                    'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
+                    'field'     => 'width-full',
+                    'input'     => 'width-full',
+                ),
+            );
+        }
         /**
          * @param string $sFieldIDPrefix
          * @param string $sDefault

@@ -323,6 +323,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.0 =
+- Added the `Custom Text` unit option.
+- Added the `Unit Format` option under the `Output Format` unit option.
 - Added the ability to toggle the status of buttons.
 - Added the `[aal_button ...]` short code to display buttons.
 - Added the `Override the button label.` unit option that allows the user override a button label.

@@ -301,7 +301,10 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
             // 4.0.0
             'product_title'                 => null,    // 4.0.0    Overrides product titles.
-            'output_formats'                => array(), // (array) holds item_format, image_format, title_format for each active template
+            'output_formats'                => array(), // (array) holds item_format, image_format, title_format, unit format for each active template
+
+            // 4.3.0
+            'custom_text'                   => '',
         )
         
     );
@@ -321,7 +324,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         
         // After `this->aOptions` is created. Set the default Item Format option.
         $this->aOptions[ 'unit_default' ] = $this->aOptions[ 'unit_default' ] 
-            + $this->getDefaultItemFormat();  // needs to check API is connected
+            + $this->getDefaultOutputFormats();  // needs to check API is connected
 
         if ( ! $this->aOptions[ 'unit_default' ][ 'override_button_label' ] ) {
             $this->aOptions[ 'unit_default' ][ 'button_label' ] = __( 'Buy Now', 'amazon-auto-links' );
@@ -362,12 +365,15 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * so it cannot be done in the declaration.
      * @since       unknown
      * @since       3.4.0       Moved from `AmazonAutoLinks_UnitOption_Base`. Removed the static scope.
+     * @since       4.3.0       Renamed from `getDefaultItemFormat()`.
      * @return      array
      */
-    public function getDefaultItemFormat() {
+    public function getDefaultOutputFormats() {
 
         $_bAPIConnected = $this->isAPIConnected();
         return array(
+            'unit_format' => '%text%' . PHP_EOL
+                . '%products%',  // 4.3.0
             'item_format' => $_bAPIConnected
                 ? $this->getDefaultItemFormatConnected()
                 : $this->getDefaultItemFormatDisconnected(),
@@ -376,11 +382,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 . '        <img src="%src%" alt="%description_text%" style="max-height:%image_size%px;" />' . PHP_EOL
                 . '    </a>' . PHP_EOL
                 . '</div>',
-                
             'title_format' => '<h5 class="amazon-product-title">' . PHP_EOL
                 . '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">%title_text%</a>' . PHP_EOL
-                . '</h5>',    
-                
+                . '</h5>',
         );
         
     }

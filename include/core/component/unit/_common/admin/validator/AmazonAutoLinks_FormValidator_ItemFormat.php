@@ -26,7 +26,10 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
      * @return      array
      */    
     public function get() {
-        return $this->___getItemFormatsSanitized( $this->aInputs, $this->aOldInputs );
+
+        $this->aInputs[ 'custom_text' ] = wpautop( $this->getElement( $this->aInputs, array( 'custom_text' ), '' ) );  // 3.4.0
+        return $this->___getOutputFormatsSanitized( $this->aInputs, $this->aOldInputs );
+
     }
 
         /**
@@ -36,7 +39,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
          * @return      array
          * @since       3.2.4
          */
-        private function ___getItemFormatsSanitized( $aInputs, $aOldInputs ) {
+        private function ___getOutputFormatsSanitized( $aInputs, $aOldInputs ) {
             
             $_oOption = AmazonAutoLinks_Option::getInstance();    
 
@@ -87,7 +90,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
              * @return array    Sanitized array with escaped form values.
              */
             private function ___getInputEscapedForKSES( array $aOutputFormat, array $aAllowedHTMLTags, array $aAllowedAttributes ) {
-                $_sKeysToCheck = array( 'item_format', 'image_format', 'title_format' );
+                $_sKeysToCheck = array( 'item_format', 'image_format', 'title_format', 'unit_format' );
                 foreach( $_sKeysToCheck as $_sLegacyKey ) {
                     if ( ! isset( $aInputs[ $_sLegacyKey ] ) ) {
                         continue;

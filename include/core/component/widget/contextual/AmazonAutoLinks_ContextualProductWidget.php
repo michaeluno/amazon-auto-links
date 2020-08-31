@@ -181,15 +181,27 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     ? $_oFields->get( '', 'contextual_widget' )
                     : $_oFields->get();
                 foreach( $_aFields as $_aField ) {
-                    $this->_addField( $_aField );
+                    $this->_addField( $_aField, $_sClassName );
                 }
             }            
         }
+
             /**
+             * @param array $aField A fieldset definition array.
+             * @param string $sClassName The name of the class that defines the fieldset.
              * @since       3.1.2
+             * @since       4.3.0       Added the `$sClassName` parameter.
              */
-            private function _addField( $aField ) {
-                
+            private function _addField( $aField, $sClassName ) {
+
+                // 4.3.0
+                if (
+                    'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport' === $sClassName
+                    && 'custom_text' === $this->oUtil->getElement( $aField, array( 'field_id' ) )
+                ) {
+                    $aField[ 'rich' ] = false;
+                }
+
                 $_sFieldID = $this->oUtil->getElement( $aField, 'field_id' );
                 if ( $this->oUtil->hasSuffix( 'available_page_types', $_sFieldID ) ) {
                     $this->oUtil->setMultiDimensionalArray( $aField, array( 'default', 'search' ) , true );
