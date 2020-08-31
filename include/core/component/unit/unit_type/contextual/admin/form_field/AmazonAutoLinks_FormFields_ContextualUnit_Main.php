@@ -44,7 +44,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 'title'         => __( 'Additional Keywords', 'amazon-auto-links' ),
                 'type'          => 'text',
                 'attributes'    => array(
-                    'style' => 'width: 100%',
+                    'class' => 'width-full',
                 ),
                 'tip'           => array(
                     __( 'Add additional search keywords, separated by commas.', 'amazon-auto-links' ),
@@ -56,7 +56,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 'title'         => __( 'Keywords to Exclude', 'amazon-auto-links' ),
                 'type'          => 'text',
                 'attributes'    => array(
-                    'style' => 'width: 100%',
+                    'class' => 'width-full',
                 ),
                 'tip'           => array(
                     __( 'Specify keywords to exclude from search keywords, separated by commas.', 'amazon-auto-links' ),

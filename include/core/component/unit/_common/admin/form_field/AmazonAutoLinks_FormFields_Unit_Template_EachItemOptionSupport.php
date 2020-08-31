@@ -154,7 +154,6 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'title'             => __( 'Item Format', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'rows'     => 6,
-                    'style'    => 'width: 96%',
                     'fieldset' => array(
                         'style: margin-bottom: 0;',
                     ),
@@ -162,6 +161,8 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'default'           => $sDefault,
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
+                    'field'     => 'width-full',
+                    'input'     => 'width-full',
                 ),
                 'description'       => array(
                     __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
@@ -219,7 +220,6 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'default'           => $sDefault,
                 'attributes'        => array(
                     'rows'      => 6,
-                    'style'     => 'width: 96%',
                 ),
                 'description'        => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
@@ -227,6 +227,8 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
+                    'field'     => 'width-full',
+                    'input'     => 'width-full',
                 ),
             );
         }
@@ -246,7 +248,6 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'type'          => 'textarea',
                 'attributes'    => array(
                     'rows'      => 6,
-                    'style'     => 'width: 96%',
                 ),
                 'default'       => $sDefault,
                 'description'   => __( 'Sets the layout of the image.', 'amazon-auto-links' ) . '<br />'
@@ -258,6 +259,8 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
+                    'field'     => 'width-full',
+                    'input'     => 'width-full',
                 ),
             );
         }

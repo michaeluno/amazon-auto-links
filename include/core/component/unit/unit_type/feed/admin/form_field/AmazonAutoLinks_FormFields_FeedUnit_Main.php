@@ -28,6 +28,10 @@ class AmazonAutoLinks_FormFields_FeedUnit_Main extends AmazonAutoLinks_FormField
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                 'type'          => 'text',
                 'description'   => 'e.g. <code>My Feed Unit</code>',
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
                 'value'         => '',    // a previous value should not appear
             ),
 // @todo the URL unit type's this field definition needs to be updated to the latest supported locales by PA-API.
@@ -61,6 +65,10 @@ class AmazonAutoLinks_FormFields_FeedUnit_Main extends AmazonAutoLinks_FormField
                     'size'  => version_compare( $GLOBALS[ 'wp_version' ], '3.8', '>=' )
                         ? 40 
                         : 60,
+                ),
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-two-third',
                 ),
                 'repeatable'    => array(
                     'max'   => $_oOption->isAdvancedAllowed()

@@ -46,6 +46,12 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'title'             => __( 'Now Loading Text', 'amazon-auto-links' ),
                 'default'           => __( 'Now loading...', 'amazon-auto-links' ),
                 'tip'               => __( 'The text that appears while loading the unit in the background.', 'amazon-auto-links' ),
+                'attributes'        => array(
+                    'class' => 'width-full',
+                    'field'    => array(
+                        'class' => 'width-full',
+                    ),
+                ),
             ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'subimage_size',
@@ -103,6 +109,12 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'tip'               => __( 'Set the text appended to the description element when truncated. To disable it set an empty value.', 'amazon-auto-links' ),
                 'type'              => 'text',
                 'default'           => __( 'read more', 'amazon-auto-links' ),
+                'attributes'        => array(
+                    'class' => 'width-full',
+                    'field'    => array(
+                        'class' => 'width-full',
+                    ),
+                ),
             ),            
             array(
                 'field_id'          => $sFieldIDPrefix . 'customer_review_include_extra',

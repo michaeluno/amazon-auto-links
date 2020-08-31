@@ -36,6 +36,10 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Basic extends AmazonAutoLinks_Fo
                 'type'          => 'text',
                 'description'   => 'e.g. <code>' . __( 'My Contextual Unit', 'amazon-auto-links' ) . '</code>',
                 'value'         => '',    // a previous value should not appear
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),
         );
         return $_aFields;

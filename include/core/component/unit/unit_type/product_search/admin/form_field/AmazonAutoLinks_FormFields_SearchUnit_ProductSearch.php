@@ -26,6 +26,10 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
                 'type'          => 'text',
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),            
             array(
                 'field_id'      => $sFieldIDPrefix . 'Keywords',
@@ -39,6 +43,10 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'tip'           => __( 'Enter the keyword to search.', 'amazon-auto-links' ),
                 'description'   => __( 'For multiple items, separate them by commas.', 'amazon-auto-links' )
                     . ' e.g. <code>WordPress, PHP</code>',
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-two-third',
+                ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'search_per_keyword',

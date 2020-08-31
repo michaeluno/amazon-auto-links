@@ -29,6 +29,10 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 'type'          => 'text',
                 'description'   => 'e.g. <code>My URL Unit</code>',
                 'value'         => '',    // a previous value should not appear
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),        
             array(
                 'field_id'      => $sFieldIDPrefix . 'country',
@@ -68,6 +72,10 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 ),
                 'description'   => __( 'Enter URLs of the page to be parsed.', 'amazon-auto-links' )
                     . ' e.g. <code>http://www.amazon.com/gp/feature.html?docId=1000677541</code>',
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'two-third',
+                ),
             ),    
             array(
                 'field_id'      => $sFieldIDPrefix . 'search_per_keyword',

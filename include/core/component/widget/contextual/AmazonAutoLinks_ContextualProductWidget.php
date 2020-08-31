@@ -66,6 +66,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
 .widget .amazon-auto-links-section-title > h3 {
     margin: 0.2em 0;
 }
+.widget .amazon-auto-links-field-text .amazon-auto-links-input-label-container {
+    width: 98%;
+}
                 ';
             
         }
