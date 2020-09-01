@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Requires MySQL:     5.6
+Requires MySQL:     5.0.3
 Tested up to:       5.4.2
 Stable tag:         4.2.4
 License:            GPLv2 or later
@@ -212,7 +212,7 @@ The `id`, `asin` and `search` arguments cannot be used together.
 
 Optionally, the following arguments may be set.
 
-- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, and `MX`.
+- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, `MX`, `AU`, `TR`, `AE`, `SG` and `NL`.
 - `associate_id` - (string) the Amazon Associates ID for the affiliate.
 - `count` - (integer) determines how many items should be displayed.
 - `image_size` - (integer) the image size in pixels.
@@ -325,6 +325,21 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.3.0 =
 - Minified JavaScript scripts.
+- Added the `Custom Text` unit option.
+- Added the `Unit Format` option under the `Output Format` unit option.
+- Added the ability to toggle the status of buttons.
+- Added the `[aal_button ...]` short code to display buttons.
+- Added the `Override the button label.` unit option that allows the user override a button label.
+- Added the theme button option for the `Select Button` option.
+- Added `target="_blank"` to the unit view links to open the link in a new tab
+- Tweaked the style of setting form fields.
+- Tweaked the button style.
+
+= 4.2.6 – 08/29/2020 =
+- Fixed a bug that Item Look-up and Contextual unit types could not display product titles, which started since v4.0.0.
+
+= 4.2.5 – 08/26/2020 =
+- Fixed an incompatibility issue with PHP 5.4.x or below regarding the empty() language construct.
 
 = 4.2.4 - 08/24/2020 =
 - Tweaked styling of `List`, `Category`, `Search` templates.

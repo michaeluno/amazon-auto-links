@@ -122,16 +122,16 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * The auto-insert sets the 'id' as array storing multiple ids.
              * But this method is called per ID so the ID should be discarded.
              * If the unit gets deleted, auto-insert causes an error for not finding the options.
-             */            
+             */
+            $_oOption      = AmazonAutoLinks_Option::getInstance();
             $_aUnitOptions = array(
                     'id' => $iPostID,
                 )
                 + $this->aArguments
-                + $this->getPostMeta( $iPostID )
+                + $this->getPostMeta( $iPostID, '', $_oOption->get( 'unit_default' ) )
                 + array( 
                     'unit_type' => null,
-                );    
-
+                );
             return $this->___getOutputByUnitType(
                 $_aUnitOptions[ 'unit_type' ],
                 $_aUnitOptions

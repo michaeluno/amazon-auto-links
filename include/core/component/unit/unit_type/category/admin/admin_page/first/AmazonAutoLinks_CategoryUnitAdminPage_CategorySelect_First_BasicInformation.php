@@ -48,6 +48,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
                     'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                     'type'          => 'text',
                     'description'   => 'e.g. <code>My Unit</code>',
+                    'class'         => array(
+                        'input' => 'width-full',
+                        'field' => 'width-half',
+                    ),
                     // the previous value should not appear
                     'value'         => isset( $_GET[ 'transient_id' ] )
                         ? ''

@@ -318,13 +318,31 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         }
 
+        $_sContent          = $this->___getUnitFormatApplied( $_sContent );     // 4.3.0
         $_sContent          = apply_filters( 'aal_filter_unit_output', $_sContent, $_aArguments, $_sTemplatePath, $_aOptions, $_aProducts );
 
         $this->___removeHooksPerOutput( $_aHooks );
         return $_sContent;
 
     }
-
+        /**
+         * @param string $sUnitOutput
+         * @return  string
+         * @since   4.3.0
+         */
+        private function ___getUnitFormatApplied( $sUnitOutput ) {
+            return str_replace(
+                array(
+                    '%text%',
+                    '%products%'
+                ),
+                array(
+                    $this->oUnitOption->get( array( 'custom_text' ), '' ),
+                    $sUnitOutput
+                ),
+                $this->oUnitOption->get( array( 'unit_format' ), '' ),
+            );
+        }
         /**
          * @param   $iShowErrorMode
          * @param   $sErrorMessage
@@ -442,23 +460,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
 
-//            if ( file_exists( $sTemplatePath ) ) {
+            // Include the template
+            defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? include( $sTemplatePath )
+                : @include( $sTemplatePath );
 
-                // Include the template
-                defined( 'WP_DEBUG' ) && WP_DEBUG ? include( $sTemplatePath ) : @include( $sTemplatePath );
-
-                // Enqueue the impression counter script.
-                $this->oImpressionCounter->add( $this->oUnitOption->get( 'country' ), $this->oUnitOption->get( 'associate_id' ) );
-                return;
-//            }
-
-            /**
-             * @deprecated 4.0.2 The file existent check is done above @see $this::___getTemplatePath()
-             */
-//            echo '<p>'
-//                    . AmazonAutoLinks_Registry::NAME
-//                    . ': ' . __( 'the template could not be found. Try re-selecting the template in the unit option page.', 'amazon-auto-links' )
-//                . '</p>';
+            // Enqueue the impression counter script.
+            $this->oImpressionCounter->add( $this->oUnitOption->get( 'country' ), $this->oUnitOption->get( 'associate_id' ) );
 
         }
 

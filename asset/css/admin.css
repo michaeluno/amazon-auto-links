@@ -1,3 +1,25 @@
+/* General */
+.width-full,
+.postbox .amazon-auto-links-section .width-full
+{
+	width: 98%;
+}
+.width-half,
+.postbox .amazon-auto-links-section .width-half
+{
+	width: 50%;
+}
+.width-one-third,
+.postbox .amazon-auto-links-section .width-one-third
+{
+	width: 32%;
+}
+.width-two-third,
+.postbox .amazon-auto-links-section .width-two-third
+{
+	width: 76%;
+}
+
 /* Form fields */
 .links-style-label {
     font-size: 0.8em;
@@ -8,10 +30,20 @@
     font-size: 0.8em;
 }
 
-
 .amazon-auto-links-fieldset.child-fieldset > label.amazon-auto-links-child-field-title {
 	font-size: 13px;
 }
+
+.amazon-auto-links-field-text {
+	min-width: 50%;
+}
+.amazon-auto-links-field-text .amazon-auto-links-input-label-container,
+.amazon-auto-links-field-textarea .amazon-auto-links-input-label-container
+{
+    width: 100%;
+}
+
+
 
 /* Debug output */
 pre.dump-array {

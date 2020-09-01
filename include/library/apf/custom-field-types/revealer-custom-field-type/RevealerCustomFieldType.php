@@ -117,7 +117,7 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  * @since       1.0.0
  * @package     AmazonAutoLinks_AdminPageFrameworkFieldTypePack
  * @subpackage  CustomFieldType
- * @version     1.0.4
+ * @version     1.0.5
  */
 class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageFramework_FieldType {
         
@@ -272,25 +272,29 @@ JAVASCRIPTS;
                 
         $_aOutput   = array();        
         $aField     = $this->_sanitizeInnerFieldArray( $aField );
-        $_aOutput[] = $this->geFieldOutput( $aField );
+        $_aOutput[] = $this->getFieldOutput( $aField );
         $_aOutput[] = $this->_getRevealerScript( $aField[ 'input_id' ] );
         $_aLabels   = empty( $aField[ 'selectors' ] )
             ? $aField[ 'label' ] 
-            : array_flip( $aField[ 'selectors' ] );
+            : array_flip( $this->getAsArray( $aField[ 'selectors' ] ) );
         switch( $aField[ 'select_type' ] ) {
             default:
             case 'select':
             case 'radio':                          
                 $_aOutput[] = $this->_getConcealerScript( $aField[ 'input_id' ], $_aLabels, $aField[ 'value' ] );
                 break;
-                
             case 'checkbox':
-                $_aSelections = is_array( $aField[ 'value' ] )
-                    ? array_keys( array_filter( $aField[ 'value' ] ) )
-                    : $aField[ 'label' ];                  
+                if ( is_string( $aField[ 'label' ] ) ) {
+                    $_aSelections = empty( $aField[ 'value' ] )
+                        ? array()
+                        : $this->getAsArray( $aField[ 'selectors' ] );
+                } else {
+                    $_aSelections = is_array( $aField[ 'value' ] )
+                        ? array_keys( array_filter( $aField[ 'value' ] ) )
+                        : $aField[ 'label' ];
+                }
                 $_aOutput[] = $this->_getConcealerScript( $aField[ 'input_id' ], $_aLabels, $_aSelections );
                 break;
-  
         }
         return implode( PHP_EOL, $_aOutput );
         
@@ -330,7 +334,15 @@ JAVASCRIPTS;
                     break;
                 case 'radio': 
                 case 'checkbox':
-                    
+                    // for a single item
+                    if ( is_string( $aField[ 'label' ] ) ) {
+                        $_sSelector = $this->getElement( $_aSelectors, array( 0 ), '0' );
+                        $aField[ 'attributes' ] = array(
+                            'data-reveal'   => $_sSelector,
+                        ) + $aField[ 'attributes' ];
+                        break;
+                    }
+                    // for multiple items
                     foreach( $this->getAsArray( $aField[ 'label' ] ) as $_sKey => $_sLabel ) {
                         // If the user sets the 'selectors' argument, its value will be used; otherwise, the label key will be used.
                         $_sSelector = $this->getElement( $_aSelectors, array( $_sKey ), $_sKey );
@@ -366,7 +378,7 @@ JAVASCRIPTS;
             $aLabels            = $this->getAsArray( $aLabels );
             $_aCurrentSelection = $this->getAsArray( $asCurrentSelection );
             unset( $_aCurrentSelection[ 'undefined' ] );    // an internal reserved key    
-            if( ( $_sKey = array_search( 'undefined' , $_aCurrentSelection) ) !== false ) {
+            if( ( $_sKey = array_search( 'undefined' , $_aCurrentSelection ) ) !== false ) {
                 unset( $_aCurrentSelection[ $_sKey ] );
             }            
             $_sCurrentSelection = json_encode( $_aCurrentSelection );            
@@ -418,10 +430,7 @@ JAVASCRIPTS;
      * Binds the revealer event to the element.
      */
     $.fn.setAmazonAutoLinks_AdminPageFrameworkRevealer = function() {
-
-        var _sLastRevealedSelector;
-        this.unbind( 'change' ); // for repeatable fields
-        this.change( function() {
+        apfRevealerOnChange = function() {
             
             var _sTargetSelector        = $( this ).is( 'select' )
                 ? $( this ).children( 'option:selected' ).data( 'reveal' )
@@ -456,7 +465,10 @@ JAVASCRIPTS;
             }
             _oElementToReveal.fadeIn();                                       
             
-        });
+        }
+        var _sLastRevealedSelector;
+        this.unbind( 'change', apfRevealerOnChange ); // for repeatable fields               
+        this.change( apfRevealerOnChange );
         
     };
                 

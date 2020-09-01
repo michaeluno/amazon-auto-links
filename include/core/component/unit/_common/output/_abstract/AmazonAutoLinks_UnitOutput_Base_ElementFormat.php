@@ -354,143 +354,54 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @param string         $sLocale
      * @param string         $sAssociateID
      * @param string         $sAccessKey
+     * @param string         $sButtonLabelToOverride
      *
      * @return      string
      * @since       3
      */
-    protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey ) {
-        switch( ( integer ) $iButtonType ) {
-            case 1:
-                return $this->_getAddToCartButton( 
-                    $sASIN, 
-                    $sLocale, 
-                    $sAssociateID, 
-                    $isButtonID, 
-                    $sAccessKey
-                );
-            
-            default:
-            case 0:
-                return $this->_getLinkButton(
-                    $isButtonID, $sProductURL
-                );
-            
+    protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey, $nsButtonLabelToOverride=null ) {
+        $_aButtonArguments = array(
+            'type'          => ( integer ) $iButtonType,
+            'id'            => ( integer ) $isButtonID,
+            'asin'          => $sASIN,
+            'country'       => $sLocale,
+            'associate_id'  => $sAssociateID,
+            'access_key'    => $sAccessKey,
+        );
+        if ( null !== $nsButtonLabelToOverride ) {
+            $_aButtonArguments[ 'label' ] = $nsButtonLabelToOverride;
         }
+        return apply_filters( 'aal_filter_linked_button', '', $_aButtonArguments );
     }
-
-        /**
-         * @param string|integer $isButtonID
-         * @param string         $sProductURL
-         *
-         * @return string
-         * @since       3.1.0
-         */
-        protected function _getLinkButton( $isButtonID, $sProductURL ) {
-            $sProductURL = esc_url( $sProductURL );
-            return "<a href='{$sProductURL}' target='_blank' rel='nofollow noopener'>"
-                    . $this->getButton( $isButtonID )
-                . "</a>";            
-            
-        }
-
-        /**
-         * Returns an add to cart button.
-         *
-         * @param string $sASIN
-         * @param string $sLocale
-         * @param string $sAssociateID
-         * @param string|integer $isButtonID
-         * @param string $sAccessKey
-         *
-         * @return string
-         * @since       3.1.0
-         */
-        protected function _getAddToCartButton( $sASIN, $sLocale, $sAssociateID, $isButtonID, $sAccessKey='' ) {            
-        
-            $_sScheme       = is_ssl() ? 'https' : 'http';
-            $_sURL          = isset( AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ] )
-                ? AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ]
-                : AmazonAutoLinks_Property::$aAddToCartURLs[ 'US' ];        
-            $_sGETFormURL = esc_url(
-                add_query_arg(                  
-                    array(
-                        'AssociateTag'      => $sAssociateID,
-                        'SubscriptionId'    => $sAccessKey,
-                        'AWSAccessKeyId'    => $sAccessKey,
-                        'ASIN.1'            => $sASIN,
-                        'Quantity.1'        => 1,
-                    ),
-                    $_sScheme . '://' . $_sURL
-                )
-            );
-            return "<a href='{$_sGETFormURL}' target='_blank' rel='nofollow noopener'>"
-                    . $this->getButton( $isButtonID )
-                . "</a>";            
-      
-        }
 
     /**
      * Formats the given url such as adding associate ID, ref=nosim, and link style.
      *
+     * @remark      The similarity product formatter class accesses this method.
      * @param string $sURL
      * @param string $sASIN
      * @param string $sLanguageCode
      * @param string $sCurrency
-     *
      * @return      string
      * @since       unknown
      * @since       3.5.0       Changed the visibility scope from protected.
-     * @remark      The similarity product formatter class accesses it.
      * @since       3.10.0      Added the `$sLanguageCode` and `$sCurrency` parameter.
+     * @since       4.3.0       Moved major part to a separate class.
      */
     public function getProductLinkURLFormatted( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
 
-        $_sStyledURL = $this->___getFormattedProductLinkByStyle(
-            $sURL, 
-            $sASIN, 
-            $this->oUnitOption->get( 'link_style' ), 
-            $this->oUnitOption->get( 'ref_nosim' ), 
-            $this->oUnitOption->get( 'associate_id' ), 
-            $this->oUnitOption->get( 'country' ),
-            $sLanguageCode,
-            $sCurrency
-        );
         // 3.6.4+   Allows third parties to modify the link.
-        $_sStyledURL = apply_filters(
+        return apply_filters(
            'aal_filter_product_link', // filter hook name
-            $_sStyledURL,    // filtering value
-            $sURL,  // 1st param
-            $sASIN, // 2nd param
-            $this->oUnitOption->get()    // 3rd param
+            $sURL,    // filtering value
+            $sURL,    // raw URL
+            $sASIN,   //
+            $this->oUnitOption->get(),
+            $sLanguageCode,                             // 4.3.0
+            $sCurrency                                  // 4.3.0
         );
 
-        // @remark 3.10.0 not escaping to avoid multiple escaping.
-        return $_sStyledURL;
-            
     }
-        /**
-         * A helper function for the above `getProductLinkURLFormatted()` method.
-         * 
-         * @remark      $iStyle should be 1 to 5 indicating the url style of the link.
-         * @return      string
-         */
-        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US', $sLanguageCode='', $sCurrency='' ) {
-            
-            $iStyle      = $iStyle ? ( integer ) $iStyle : 1;
-            $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
-            $_oLinkStyle = new $_sClassName(
-                $bRefNosim,
-                $sAssociateID,
-                $sLocale
-            );
-            $_sURL = $_oLinkStyle->get( $sURL, $sASIN, $sLanguageCode, $sCurrency );
-            return str_replace(
-                'amazon-auto-links-20',  // dummy url used for a request
-                $sAssociateID,
-                $_sURL
-            );
-
-        }
 
     /**
      * @return      string

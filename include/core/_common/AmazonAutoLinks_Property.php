@@ -225,23 +225,27 @@ final class AmazonAutoLinks_Property {
 
     /**
      * @since       3.1.0
-     * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/AddToCartForm.html
+     * @see         https://webservices.amazon.com/paapi5/documentation/add-to-cart-form.html
      */
     static public $aAddToCartURLs = array(
         'CA' => 'www.amazon.ca/gp/aws/cart/add.html',
             'CN' => 'www.amazon.cn/gp/aws/cart/add.html',
         'FR' => 'www.amazon.fr/gp/aws/cart/add.html',
         'DE' => 'www.amazon.de/gp/aws/cart/add.html',
-            'IT' => 'www.amazon.it/gp/aws/cart/add.html',
+        'IT' => 'www.amazon.it/gp/aws/cart/add.html',
         'JP' => 'www.amazon.co.jp/gp/aws/cart/add.html',
         'UK' => 'www.amazon.co.uk/gp/aws/cart/add.html',
-            'ES' => 'www.amazon.es/gp/aws/cart/add.html',
+        'ES' => 'www.amazon.es/gp/aws/cart/add.html',
         'US' => 'www.amazon.com/gp/aws/cart/add.html',
-        'US' => 'www.amazon.com/gp/aws/cart/add.html',
-            'IN' => 'www.amazon.in/gp/aws/cart/add.html',
-            'BR'    => 'www.amazon.com.br/gp/aws/cart/add.html',
-            'MX'    => 'www.amazon.com.mx/gp/aws/cart/add.html',
-        'AU' => 'www.amazon.com.au/gp/aws/cart/add.html',   // 3.5.5+
+        'IN' => 'www.amazon.in/gp/aws/cart/add.html',
+        'BR' => 'www.amazon.com.br/gp/aws/cart/add.html',
+        'MX' => 'www.amazon.com.mx/gp/aws/cart/add.html',
+        'AU' => 'www.amazon.com.au/gp/aws/cart/add.html',   // 3.5.5
+        'NL' => 'www.amazon.nl/gp/aws/cart/add.html',       // 4.2.5
+        'SG' => 'www.amazon.sg/gp/aws/cart/add.html',       // 4.2.5
+        'SA' => 'www.amazon.sa/gp/aws/cart/add.html',       // 4.2.5
+        'TR' => 'www.amazon.com.tr/gp/aws/cart/add.html',   // 4.2.5
+        'AE' => 'www.amazon.ae/gp/aws/cart/add.html'        // 4.2.5
     );
 
     /**

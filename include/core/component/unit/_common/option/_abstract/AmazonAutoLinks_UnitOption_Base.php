@@ -60,7 +60,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        
+
         $this->iUnitID      = $iUnitID;
         $this->aDefault     = array(
                 'unit_type' => $this->sUnitType,
@@ -72,7 +72,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $this->aUnitOptions = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
-                + $this->getPostMeta( $iUnitID )
+                + $this->getPostMeta( $iUnitID, '', $_oOption->get( 'unit_default' ) )
             : $aUnitOptions;
         $this->aUnitOptions = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
     }
@@ -151,6 +151,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             : AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
 
         $_aOutputFormats                = $this->___getOutputFormats( $aUnitOptions, $_sTemplateID );
+        $aUnitOptions[ 'unit_format' ]  = $this->___getUnitFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'image_format' ] = $this->___getImageFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'title_format' ] = $this->___getTitleFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
@@ -174,6 +175,23 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             }
             // For backward compatibility for a case the ID has a trailing slash
             return $this->getElementAsArray( $aUnitOptions, array( 'output_formats', $_sTemplateFieldKey . '_' ) );
+        }
+
+        /**
+         * @param array  $aUnitOptions       The unit options to parse.
+         * @param array  $aOutputFormats     The `output_formats` element of unit options.
+         * @param string $sTemplateID        The set template ID.
+         * @since   4.3.0
+         * @return string
+         */
+        private function ___getUnitFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID  ) {
+            $_sFormat = $this->getElement( $aOutputFormats, array( 'unit_format' ) );
+            return isset( $_sFormat )
+                ? $_sFormat
+                : apply_filters(
+                    'aal_filter_template_default_unit_format_' . $sTemplateID,
+                    $this->getElement( $aUnitOptions, array( 'unit_format' ), '' )   // backward-compatibility for v3 or below
+                );
         }
 
         /**

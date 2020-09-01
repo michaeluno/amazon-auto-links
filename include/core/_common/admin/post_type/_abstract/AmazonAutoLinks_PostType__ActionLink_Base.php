@@ -37,12 +37,22 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
 
     /**
      * Sets up hooks and properties.
+     *
+     * @param AmazonAutoLinks_AdminPageFramework_PostType $oFactory
+     * @param string $sNonceKey
+     * @param string $sCustomNonce
      */
-    public function __construct( $oFactory, $sNonceKey, $sCustomNonce ) {
+    public function __construct( $oFactory, $sNonceKey='', $sCustomNonce='' ) {
 
         $this->_oFactory     = $oFactory;
-        $this->_sNonceKey    = $sNonceKey;
-        $this->_sCustomNonce = $sCustomNonce;
+        $this->_sNonceKey    = $sNonceKey ? $sNonceKey : $this->_sNonceKey;
+        $this->_sCustomNonce = $sCustomNonce
+            ? $sCustomNonce
+            : (
+                $this->_sCustomNonce
+                    ? $this->_sCustomNonce
+                    : wp_create_nonce( $this->_sNonceKey )
+            );
 
         if ( ! in_array( $this->getElement( $_REQUEST, 'post_status' ), $this->_aDisabledPostStatuses ) ) {
             add_filter(

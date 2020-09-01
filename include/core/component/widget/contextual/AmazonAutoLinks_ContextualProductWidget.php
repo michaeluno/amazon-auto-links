@@ -66,6 +66,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
 .widget .amazon-auto-links-section-title > h3 {
     margin: 0.2em 0;
 }
+.widget .amazon-auto-links-field-text .amazon-auto-links-input-label-container {
+    width: 98%;
+}
                 ';
             
         }
@@ -162,34 +165,10 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @since       3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
-            
-            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
             return $aFieldset;
-            
         }
-            /**
-             * @return      array
-             * @since       3.3.0
-             */
-            private function _getActiveButtonLabelsForFields() {
-                
-                static $_aCache;
-                
-                if ( isset( $_aCache ) ) {
-                    return $_aCache;
-                }
-                
-                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-                $_aLabels    = array();
-                foreach( $_aButtonIDs as $_iButtonID ) {
-                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
-                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
-                }
-                $_aCache = $_aLabels;           
-                return $_aCache;
-                
-            }
-            
+
         /**
          * Adds form fields by the given class names.
          * @since       3.0.3
@@ -202,15 +181,27 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     ? $_oFields->get( '', 'contextual_widget' )
                     : $_oFields->get();
                 foreach( $_aFields as $_aField ) {
-                    $this->_addField( $_aField );
+                    $this->_addField( $_aField, $_sClassName );
                 }
             }            
         }
+
             /**
+             * @param array $aField A fieldset definition array.
+             * @param string $sClassName The name of the class that defines the fieldset.
              * @since       3.1.2
+             * @since       4.3.0       Added the `$sClassName` parameter.
              */
-            private function _addField( $aField ) {
-                
+            private function _addField( $aField, $sClassName ) {
+
+                // 4.3.0
+                if (
+                    'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport' === $sClassName
+                    && 'custom_text' === $this->oUtil->getElement( $aField, array( 'field_id' ) )
+                ) {
+                    $aField[ 'rich' ] = false;
+                }
+
                 $_sFieldID = $this->oUtil->getElement( $aField, 'field_id' );
                 if ( $this->oUtil->hasSuffix( 'available_page_types', $_sFieldID ) ) {
                     $this->oUtil->setMultiDimensionalArray( $aField, array( 'default', 'search' ) , true );

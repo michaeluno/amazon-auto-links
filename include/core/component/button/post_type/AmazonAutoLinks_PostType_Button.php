@@ -85,6 +85,9 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
                 array( $this, 'replyToModifyColumnHeader' )
             );
+
+            // 4.3.0
+            new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );
                      
         }
         
@@ -171,20 +174,6 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             );
         }
 
-
-    /**
-     * @callback        filter      `enter_title_here`
-     */
-    // public function replyToModifyTitleMetaBoxFieldLabel( $strText ) {
-        // return __( 'Set the button label here.', 'amazon-auto-links' );        
-    // }
-    /**
-     * @callback        action       `edit_form_after_title`
-     */
-    public function replyToAddTextAfterTitle() {
-        //@todo insert plugin news text headline.
-    }
-       
     /**
      * 
      * @callback    filter      post_updated_messages
@@ -207,21 +196,19 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
      * Style for this custom post type pages
      * @callback        filter      style_{class name}
      */
-    public function style_AmazonAutoLinks_PostType() {
-        $_sNone = 'none';
-        return "#post-body-content {
-                margin-bottom: 10px;
-            }
-            #edit-slug-box {
-                display: {$_sNone};
-            }
-            #icon-edit.icon32.icon32-posts-" . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] . " {
-                background:url('" . AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ) . "') no-repeat;
-            }            
-            /* Hide the submit button for the post type drop-down filter */
-            #post-query-submit {
-                display: {$_sNone};
-            }            
-        ";
+    public function style_AmazonAutoLinks_PostType_Button() {
+        $_sCSS = <<<CSS
+td .shortcode {
+    font-size: 1em;
+}
+td .description {
+    font-style: italic;
+    font-size: smaller;
+}
+CSS;
+        return $this->oUtil->isDebugMode()
+            ? $this->oUtil->getCSSMinified( $_sCSS )
+            : trim( $_sCSS );
+
     }
 }

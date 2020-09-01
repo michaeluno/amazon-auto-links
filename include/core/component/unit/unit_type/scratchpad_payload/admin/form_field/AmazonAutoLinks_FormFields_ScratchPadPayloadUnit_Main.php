@@ -29,6 +29,10 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                 'type'          => 'text',
                 'description'   => 'e.g. <code>My ScratchPad Payload Unit</code>',
                 'value'         => '',    // a previous value should not appear
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'payload',
@@ -39,7 +43,7 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                     __( 'Set the payload value generated on <a href="%1$s" target="_blank">ScratchPad</a>.', 'amazon-auto-links' ),
                     'https://webservices.amazon.it/paapi5/scratchpad/index.html#'
                     ),
-                    'e.g. <pre><code>{
+                    'e.g. <pre style="width:75%"><code>{
  "Keywords": "WordPress",
  "PartnerTag": "testing-21",
  "PartnerType": "Associates",
@@ -50,6 +54,10 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                 'tip'           => '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_scratchpad_payload::$sDirPath . '/asset/image/payload_json.jpg' ) . '" style="width:100%"/>',
                 'attributes'    => array(
                     'style' => 'height: 200px; width: 100%; min-width: 400px;'
+                ),
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-two-third',
                 ),
             ),
         );

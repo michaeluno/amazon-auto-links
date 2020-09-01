@@ -53,7 +53,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
                         . AmazonAutoLinks_Registry::NAME
                     . '</code>',
                 'attributes'     => array(
-                    'style' => 'width: 400px;',
+                    'class' => 'width-full',
                 ),
                 'default'        => AmazonAutoLinks_Registry::NAME,
             ),            

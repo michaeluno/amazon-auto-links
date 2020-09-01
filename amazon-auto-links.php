@@ -5,7 +5,7 @@
  *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *    Author:         Michael Uno (miunosoft)
  *    Author URI:     http://michaeluno.jp
- *    Version:        4.3.0b04
+ *    Version:        4.3.0b07
  *    Text Domain:    amazon-auto-links
  *    Domain Path:    /language
  */
@@ -18,7 +18,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-    const VERSION        = '4.3.0b04';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION        = '4.3.0b07';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME           = 'Amazon Auto Links';
     const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -189,8 +189,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * Used shortcode slugs
      */
     static public $aShortcodes = array(
-        'main'  => 'amazon_auto_links',
-        'v1'    => 'amazonautolinks',   // backward compatibility for v1
+        'main'    => 'amazon_auto_links',
+        'button'  => 'aal_button',        // 4.3.0
+        'v1'      => 'amazonautolinks',   // backward compatibility for v1
     );
 
     /**
@@ -274,7 +275,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'error'     => 'The plugin requires the WordPress version %1$s or higher.',
         ),
         'mysql'             => array(
-            'version'   => '5.6', // v5.0.3 uses VARCHAR(2083) v5.6 uses SELECT FOR UPDATE
+            'version'   => '5.0.3', // v5.0.3 uses VARCHAR(2083)
             'error'     => 'The plugin requires the MySQL version %1$s or higher.',
         ),
         /**

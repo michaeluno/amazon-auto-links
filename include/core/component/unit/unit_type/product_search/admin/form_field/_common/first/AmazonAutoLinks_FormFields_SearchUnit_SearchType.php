@@ -22,6 +22,10 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
                 'type'          => 'text',
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                 'description'   => 'e.g. <code>My Search Unit</code>',
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'country',

@@ -34,9 +34,12 @@ class AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced extends AmazonAutoLinks_Uni
             apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             $this->oProp->aPostTypes,
             array(  
-                'handle_id'    => 'aal_button_preview_labels',
+                'handle_id'    => 'aalButtonPreview',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => apply_filters( 'aal_filter_admin_button_js_translation', array() ),
+                'translation'  => array(
+                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+                ),
                 'in_footer'    => true,
             )
         );         
@@ -50,45 +53,15 @@ class AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced extends AmazonAutoLinks_Uni
          * @since       3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
-            
-            $aFieldset[ 'label' ] = $this->_getActiveButtonLabelsForFields();
+            $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
             return $aFieldset;
-            
         }
-            /**
-             * @return      array
-             * @since       3.3.0
-             */
-            private function _getActiveButtonLabelsForFields() {
-                
-                $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-                $_aLabels    = array();
-                foreach( $_aButtonIDs as $_iButtonID ) {
-                    $_aLabels[ $_iButtonID ] = get_the_title( $_iButtonID )
-                        . ' - ' . get_post_meta( $_iButtonID, 'button_label', true );
-                }
-                return $_aLabels;           
-                
-            }
     
         /**
          * @return      array
          * @deprecated  3.4.0
          */
-/*         private function _getActiveButtonLabelsForJavaScript() {
-            
-            $_aButtonIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDs();
-            $_aLabels    = array();
-            foreach( $_aButtonIDs as $_iButtonID ) {
-                $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
-                $_sButtonLabel = $_sButtonLabel
-                    ? $_sButtonLabel
-                    : __( 'Buy Now', 'amazon-auto-links' );
-                $_aLabels[ $_iButtonID ] = $_sButtonLabel;
-            }
-            return $_aLabels;
-            
-        }    */ 
+
         
     /**
      * Validates submitted form data.

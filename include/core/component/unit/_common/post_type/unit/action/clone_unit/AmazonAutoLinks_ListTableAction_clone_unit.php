@@ -65,7 +65,8 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         private function ___cloneUnit( $iPostID ) {
 
             $_oSourcePost  = get_post( $iPostID );
-            $_aPostMeta    = $this->getPostMeta( $iPostID );
+            $_oOption      = AmazonAutoLinks_Option::getInstance();
+            $_aPostMeta    = $this->getPostMeta( $iPostID, '', $_oOption->get( 'unit_default' ) );
             // @deprecated  3.7.8 It is okay to leave the status as the clone one uses the same cache.
             // unset( $_aPostMeta[ '_error' ] );    // stores the unit status
             $_iNewPostID   = $this->createPost( 

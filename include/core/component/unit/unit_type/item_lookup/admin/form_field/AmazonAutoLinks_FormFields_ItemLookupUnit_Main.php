@@ -30,6 +30,10 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
                 'type'          => 'text',
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-half',
+                ),
             ),            
             array(
                 'field_id'      => $sFieldIDPrefix . 'ItemId',
@@ -42,6 +46,10 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 ),
                 'description'   => __( 'Paste text that includes ASINs.', 'amazon-auto-links' )
                     . ' e.g. <code>B009ZVO3H6, B0043D2DZA</code>',
+                'class'         => array(
+                    'input' => 'width-full',
+                    'field' => 'width-two-third',
+                ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'search_per_keyword',

@@ -79,7 +79,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
 
             new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // 4.3.0
 
-
+            new AmazonAutoLinks_Event_Filter_ProductLinks;  // 4.3.0
         }
         
     

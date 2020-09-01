@@ -65,8 +65,7 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $oFactory->setInPageTabTag( 'h2' );                
             $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
+
 
         }    
             

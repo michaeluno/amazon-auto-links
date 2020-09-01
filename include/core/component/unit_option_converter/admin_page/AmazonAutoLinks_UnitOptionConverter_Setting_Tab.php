@@ -47,9 +47,12 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], // page slug
             '', // tab slug
             array(  
-                'handle_id'    => 'aal_button_preview_labels',
+                'handle_id'    => 'aalButtonPreview',
                 'dependencies' => array( 'jquery' ),
-                'translation'  => apply_filters( 'aal_filter_admin_button_js_translation', array() ),
+                'translation'  => array(
+                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
+                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
+                ),
                 'in_footer'    => true,
             )
         );      

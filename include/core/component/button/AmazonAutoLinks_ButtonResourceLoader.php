@@ -104,7 +104,7 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
      */
     public function replyToPrintStyleTag() {
         
-        $_sCSSRules = $this-> getButtonsCSS();
+        $_sCSSRules = $this->getButtonsCSS();
         if ( ! $_sCSSRules ) {
             return;
         }     
@@ -147,17 +147,28 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
                 );
             }
         }        
-                
-        $_sCSSRules = apply_filters(
-            'aal_filter_button_css',
-            self::getDefaultButtonCSS() . PHP_EOL
-                . $_sCSSStored
-        );     
+
+        $_sStoredCSS = self::getDefaultButtonCSS() . PHP_EOL
+               . self::getOverallButtonCSS(). PHP_EOL
+               . $_sCSSStored;
+        $_sCSSRules  = apply_filters( 'aal_filter_button_css', $_sStoredCSS );
         
         // Cache for later use.
         self::$sButtonsCSS = $_sCSSRules;
         return self::$sButtonsCSS;
         
+    }
+    static public function getOverallButtonCSS() {
+        return <<<CSS
+.amazon-auto-links-button > a, .amazon-auto-links-button > a:hover {
+    -webkit-box-shadow: none;
+    box-shadow none;
+    color: inherit;            
+} 
+button.amazon-auto-links-button {
+    white-space: nowrap;
+}
+CSS;
     }
     /**
      * 
@@ -166,48 +177,49 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
      */
     static public function getDefaultButtonCSS( $isButtonID='default' ) {
                                         
-        return ".amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} {
-            background: #4997e5;
-            background-image: -webkit-linear-gradient(top, #4997e5, #3f89ba);
-            background-image: -moz-linear-gradient(top, #4997e5, #3f89ba);
-            background-image: -ms-linear-gradient(top, #4997e5, #3f89ba);
-            background-image: -o-linear-gradient(top, #4997e5, #3f89ba);
-            background-image: linear-gradient(to bottom, #4997e5, #3f89ba);
-            -webkit-border-radius: 4;
-            -moz-border-radius: 4;
-            border-radius: 4px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            white-space: nowrap;
-            color: #ffffff;
-            font-size: 13px;
-            text-shadow-color: transparent;
-            width: 100px;
-            box-shadow-color: #666666;
-            padding: 7px 8px 8px 8px;
-            background: #3498db;
-            border: solid #6891a5 1px;
-            text-decoration: none;
-        }
-        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID}:hover {
-            background: #3cb0fd;
-            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-            text-decoration: none;
-        }
-        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a {
-            color: inherit; 
-            border-bottom: none;
-            text-decoration: none;
-        }
-        .amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a:hover {
-            color: inherit;
-        }        
-        ";
+        return <<<CSS
+.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} {
+    background: #4997e5;
+    background-image: -webkit-linear-gradient(top, #4997e5, #3f89ba);
+    background-image: -moz-linear-gradient(top, #4997e5, #3f89ba);
+    background-image: -ms-linear-gradient(top, #4997e5, #3f89ba);
+    background-image: -o-linear-gradient(top, #4997e5, #3f89ba);
+    background-image: linear-gradient(to bottom, #4997e5, #3f89ba);
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    white-space: nowrap;
+    color: #ffffff;
+    font-size: 13px;
+    text-shadow-color: transparent;
+    width: 100px;
+    box-shadow-color: #666666;
+    padding: 7px 8px 8px 8px;
+    background: #3498db;
+    border: solid #6891a5 1px;
+    text-decoration: none;
+}
+.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID}:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a {
+    color: inherit; 
+    border-bottom: none;
+    text-decoration: none;             
+}
+.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} > a:hover {
+    color: inherit;
+}
+CSS;
         
     }
 
