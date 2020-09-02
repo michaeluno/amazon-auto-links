@@ -40,13 +40,22 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
 
         $_sError = $this->___getError( $mData, $sURL );
         if ( $_sError ) {
-            AmazonAutoLinks_Event_ErrorLog::setErrorLogItem(
+            new AmazonAUtoLinks_Error(
+                __METHOD__,
                 $_sError,
                 array(
                     'url'        => $sURL,
                     'cache_name' => $sCacheName,
                 )
             );
+            // @deprecated 4.3.0
+            /*AmazonAutoLinks_Event_ErrorLog::setErrorLogItem(
+                $_sError,
+                array(
+                    'url'        => $sURL,
+                    'cache_name' => $sCacheName,
+                )
+            );*/
         }
 
         // If it is the TooManyRequests error, give a cache short lifespan

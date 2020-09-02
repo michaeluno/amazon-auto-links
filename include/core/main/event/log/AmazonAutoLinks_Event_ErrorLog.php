@@ -19,45 +19,108 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
      * Stores error logs;
      * @var array
      */
-    static public $aErrorLog = array();
-
+    protected $_aErrorLog = array();
 
     /**
-     * @param string the error message
-     * @param array $aExtra
-     * @since   4.0.0
+     * Override in an extended class.
+     * @var string
      */
-    static public function setErrorLogItem( $sMessage, array $aExtra=array() ) {
+    protected $_sOptionKey = '';
 
-        // For the first time of calling this method in a page
-        if ( empty( self::$aErrorLog ) ) {
-            add_action( 'shutdown', array( __CLASS__, 'replyToUpdateErrorLog' ) );
+    /**
+     * The action hook name.
+     * @var string
+     */
+    protected $_sActionName = 'aal_action_error';
+
+    /**
+     * Sets how long the log entries are.
+     * @var integer
+     */
+    protected $_iLogLength = 300;
+
+    public function __construct() {
+
+        // Singleton
+        if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ ) ) {
+            return;
         }
-        $_iMicrotime = ( integer ) ( microtime( true ) * 1000 ); // as the float part will be omitted when assigned as a key, multiple by 1000
-        self::$aErrorLog[ $_iMicrotime ] = array(
-            // required keys
-            'time'           => time(),
-            'message'        => $sMessage,
-            'current_url'    => self::getCurrentURL(),
-        ) + $aExtra;
+
+        $this->_sOptionKey = $this->_getOptionKey();
+
+        add_action( $this->_sActionName, array( $this, 'replyToLogErrors' ), 10, 3 );
 
     }
+
+    /**
+     * @return string   The name of the option record that stores the log.
+     */
+    protected function _getOptionKey() {
+        return AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
+    }
+
+    /**
+     * Called when an error is detected and AmazonAutoLinks_Error is instantiated.
+     *
+     * @return  void
+     * @since   4.2.0
+     * @callback    action      aal_action_error
+     */
+    public function replyToLogErrors( $isCode, $sErrorMessage, $aData ) {
+
+        if ( ! $this->_sOptionKey ) {
+            AmazonAutoLinks_Debug::log( 'The option key is not set.', WP_CONTENT_DIR . '/aal_errors.log' );
+            return;
+        }
+
+        $sErrorMessage = trim( $sErrorMessage );
+        $sErrorMessage = $sErrorMessage
+            ? $sErrorMessage
+            : '(no error message)';
+        $_sCode        = trim( $isCode );
+        $sErrorMessage = $_sCode
+            ? $_sCode . ': ' . $sErrorMessage
+            : $sErrorMessage;
+        $this->___setErrorLogItem( $sErrorMessage, $aData );
+
+    }
+        /**
+         * @param string the error message
+         * @param array $aExtra
+         * @since   4.0.0
+         * @since   4.3.0   Changed the scope to `private` from `public`.
+         */
+        private function ___setErrorLogItem( $sMessage, array $aExtra=array() ) {
+
+            // For the first time of calling this method in a page
+            if ( empty( $this->_aErrorLog ) ) {
+                add_action( 'shutdown', array( $this, 'replyToUpdateErrorLog' ) );
+            }
+            $_iMicroTime = ( integer ) ( microtime( true ) * 1000 ); // as the float part will be omitted when assigned as a key, multiple by 1000
+            $this->_aErrorLog[ $_iMicroTime ] = array(
+                // required keys
+                'time'           => time(),
+                'message'        => $sMessage,
+                'current_url'    => $this->getCurrentURL(),
+            ) + $aExtra;
+
+        }
 
     /**
      * Updates the error log.
      * @callback    action      shutdown
      */
-    static public function replyToUpdateErrorLog() {
-        if ( empty( self::$aErrorLog ) ) {
+    public function replyToUpdateErrorLog() {
+
+        if ( empty( $this->_aErrorLog ) ) {
             return;
         }
-        $_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
-        $_aErrorLog  = self::getAsArray( get_option( $_sOptionKey, array() ) );
-        $_aErrorLog  = $_aErrorLog + self::$aErrorLog;
+        $_aErrorLog  = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
+        $_aErrorLog  = $_aErrorLog + $this->_aErrorLog;
 
         // Keep up to latest 300 items
-        $_aErrorLog = array_slice( $_aErrorLog, -300, 300, true );
-        update_option( $_sOptionKey, $_aErrorLog );
+        $_aErrorLog = array_slice( $_aErrorLog, $this->_iLogLength * -1, $this->_iLogLength, true );
+        update_option( $this->_sOptionKey, $_aErrorLog );
 
     }
 

@@ -13,18 +13,10 @@
  *
  * @since
  */
-class AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache extends AmazonAutoLinks_Event_ErrorLog {
-
-    /**
-     * Stores error logs;
-     * @var array
-     */
-    static public $aErrorLog = array();
+class AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache {
 
     public function __construct() {
-
         add_action( 'aal_action_error_http_request_cache_data', array( $this, 'replyToLogErrorHTTPRequestCache' ), 10, 2 );
-
     }
 
     /**
@@ -35,6 +27,7 @@ class AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache extends AmazonAutoLinks_Ev
      *
      * @return  void
      * @since   4.0.0
+     * @callback    action  aal_action_error_http_request_cache_data
      */
     public function replyToLogErrorHTTPRequestCache( $sErrorMessage, array $aCache=array() ) {
         $_aExtra = array(
@@ -43,7 +36,9 @@ class AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache extends AmazonAutoLinks_Ev
             'data_type'  => gettype( $aCache[ 'data' ] ) . ( is_object( $aCache[ 'data' ] ) ? ':' . get_class( $aCache[ 'data' ] ) : '' ),
             'length'     => is_scalar( $aCache[ 'data' ] ) ? strlen( $aCache[ 'data' ] ) : 'n/a',
         );
-        $this->setErrorLogItem( $sErrorMessage, $_aExtra );
+        // @deprecated 4.3.0
+//        $this->setErrorLogItem( $sErrorMessage, $_aExtra );
+        new AmazonAutoLinks_Error( __METHOD__, $sErrorMessage, $_aExtra );
     }
 
 }

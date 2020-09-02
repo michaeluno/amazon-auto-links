@@ -13,7 +13,7 @@
  *
  * @since        4.2.0
  */
-class AmazonAutoLinks_Event_Event_Log_HTTPRequestErrors extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Event_ErrorLog_HTTPRequestErrors extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
 
@@ -41,13 +41,22 @@ class AmazonAutoLinks_Event_Event_Log_HTTPRequestErrors extends AmazonAutoLinks_
 
         $_sError = $this->___getError( $mData, $sURL );
         if ( $_sError ) {
-            AmazonAutoLinks_Event_ErrorLog::setErrorLogItem(
+            new AmazonAutoLinks_Error(
+                __METHOD__,
                 $_sError,
                 array(
                     'url'        => $sURL,
                     'cache_name' => $sCacheName,
                 )
             );
+            // @deprecated 4.3.0
+            /*AmazonAutoLinks_Event_ErrorLog::setErrorLogItem(
+                $_sError,
+                array(
+                    'url'        => $sURL,
+                    'cache_name' => $sCacheName,
+                )
+            );*/
         }
         return $mData;
 
