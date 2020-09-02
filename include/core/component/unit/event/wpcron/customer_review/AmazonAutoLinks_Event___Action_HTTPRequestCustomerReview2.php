@@ -56,26 +56,42 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
             $_sURL,
             $_sHTMLBody,
             $_iCacheDuration,
-            $_oHTTP->getCharacterSet() // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
+            $_oHTTP->getCharacterSet(), // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
+            $_sASIN,
+            $_sLocale,
+            $_sCurrency,
+            $_sLanguage
         );
         if ( empty( $_aRow ) ) {
             return;
         }
 
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-        $_iSetObjectID  = $_oProductTable->setRowByASINLocale(
-            $_sASIN . '_' . strtoupper( $_sLocale ),
-            $_aRow,
-            $_sCurrency,
-            $_sLanguage
-        );  
+        if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '<' ) ) {
+            $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $_sLocale ), $_aRow, $_sCurrency, $_sLanguage );
+            return;
+        }
+        $_mResult = $_oProductTable->setRow( $_aRow );
 
-    }   
+
+    }
+
         /**
-         * 
+         *
+         * @param string $sURL
+         * @param string $sHTML
+         * @param integer $iCacheDuration
+         * @param string $sReviewCharSet
+         * @param string $sASIN
+         * @param string $sLocale
+         * @param string $sCurrency
+         * @param string $sLanguage
+         *
          * @return      array
+         * @since   3.9.0
+         * @since   4.3.0   Added the `$sASIN`, `$sLocale`, `$sCurrency`, and `$sLanguage` parameters.
          */
-        private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet ) {
+        private function ___getRowFormatted( $sURL, $sHTML, $iCacheDuration, $sReviewCharSet, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
 
             $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $sHTML );
             $_iRating       = $_oScraper->getRating();
@@ -92,6 +108,10 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
                 'customer_reviews'        => $_oScraper->getCustomerReviews(),
                 'modified_time'           => date( 'Y-m-d H:i:s' ),
             );
+
+            if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '>=' ) ) {
+                $_aRow[ 'product_id' ] = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
+            }
 
             // if `0` is passed for the cache duration, it just renews the cache and does not update the expiration time.
             if ( $iCacheDuration ) {

@@ -52,13 +52,79 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * - errors with found items
          * - only found items
          */
-        if ( isset( $_aResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
-            $this->___setItemsIntoDatabase( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage );
+        if ( ! isset( $_aResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
             return;
         }
+        $_sTableVersion = get_option( 'aal_products_version', '0' );
+        if ( ! $_sTableVersion ) {
+            new AmazonAutoLinks_Error( 'SETTING_DATABASE_TABLE_ROW', 'The products cache table does not seem to be installed.' );
+            return;
+        }
+        // @deprecated 4.3.0
+//            $this->___setItemsIntoDatabase( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage );
+        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
 
-        // @todo Create a temporary file that indicates that an API request got an error and further API requests should hold back.
     }
+        /**
+         * @since   4.3.0
+         */
+        private function ___setProductRows( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage, $sTableVersion ) {
+
+            $_aRows  = array();
+            $_aItems = $this->getElementAsArray( $aResponse, array( 'ItemsResult', 'Items' ) );
+
+            foreach( $_aItems as $_iIndex => $_aItem ) {
+
+                $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
+                if ( ! $_sASIN || ! isset( $aList[ $_sASIN ] ) ) {
+                    continue;
+                }
+
+                // Structure: array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
+                $_aParameters     = $aList[ $_sASIN ];
+                $_iCacheDuration  = ( integer ) $_aParameters[ 2 ];
+                $_bForceRenewal   = ( boolean ) $_aParameters[ 3 ];
+                $_sItemFormat     = $_aParameters[ 4 ];
+
+                $_sKey            = "{$_sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
+                $_aRows[ $_sKey ] = $this->___getRowFormatted( $_aItem, $_sASIN, $sLocale, $_iCacheDuration, $sCurrency, $sLanguage );
+
+                $this->___handleCustomerReview( $_sASIN, $sLocale, $_iCacheDuration, $_bForceRenewal, $sCurrency, $sLanguage, $_sItemFormat );
+
+            }
+
+            if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
+                foreach( $_aRows as $_sKey => $_aRow ) {
+                    $_aKey          = explode( '|', $_sKey );
+                    $_sASIN         = reset( $_aKey );
+                    $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+                    $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $sLocale ), $_aRow, $sCurrency, $sLanguage );
+                }
+                return;
+            }
+            $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            $_mResult       = $_oProductTable->setRows( $_aRows );
+
+        }
+            /**
+             * @since   4.3.0
+             * @return  void
+             */
+            private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
+
+                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%', '%rating%', '%_discount_rate%', '%_review_rate%' ) ) ) {
+                    return;
+                }
+                $_oLocale        = new AmazonAutoLinks_PAAPI50___Locales;
+                $_sMarketPlace   = isset( $_oLocale->aMarketPlaces[ $sLocale ] )
+                    ? $_oLocale->aMarketPlaces[ $sLocale ]
+                    : $_oLocale->aMarketPlaces[ 'US' ];
+                $_sReviewURL     = 'https://' . $_sMarketPlace . '/product-reviews/' . $sASIN;
+                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews2( $_sReviewURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage );
+
+            }
+
+
         private function ___setErroredItems( &$aResponse ) {
             $_aErroredItem = array();
             foreach( $this->getAsArray( $aResponse[ 'Errors' ] ) as $_aError ) {
@@ -90,6 +156,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * @remark  It is assumed that the passed list contains only up to 10 products
          * as the `ItemLookup` operation API parameter only accepts up to 10 items.
          * @param array &$aList
+         * @return array An array holding ASINs.
          */
         private function ___getASINs( &$aList ) {
             // Extract the ASINs
@@ -112,10 +179,10 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 }
             }
             $aList = $_aNewList;    // update the list
-            return implode( ',', $_aASINs );
+            return $_aASINs;
         }
 
-        private function ___getAPIResponse( $sASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
+        private function ___getAPIResponse( array $aASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
 
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             if ( ! $_oOption->isAPIConnected() ) {
@@ -134,7 +201,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
              */
             $_oAPI      = new AmazonAutoLinks_PAAPI50( $sLocale, $_sPublicKey, $_sPrivateKey, $sAssociateID );
             $_aPayload  = array(
-                'ItemIds'               => explode( ',', $sASINs ),
+                'ItemIds'               => $aASINs,
                 'Operation'             => 'GetItems',
                 'CurrencyOfPreference'  => $sCurrency,
                 'LanguagesOfPreference' => array( $sLanguage ),
@@ -148,19 +215,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * @param $aItems
          * @param $aList
          * @since   3.7.7
+         * @deprecated 4.3.0
          */
         private function ___setItemsIntoDatabase( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage ) {
-
             $_aItems = $this->getElementAsArray( $aResponse, array( 'ItemsResult', 'Items' ) );
             foreach ( $_aItems as $_iIndex => $_aItem ) {
                 $this->___setItemIntoDatabase( $_aItem, $aList, $sLocale, $sCurrency, $sLanguage );
             }
-
         }
+            /**
+             * @deprecated 4.3.0
+             */
             private function ___setItemIntoDatabase( array $aItem, array $aList, $sLocale, $sCurrency, $sLanguage ) {
 
                 $_sASIN = $this->getElement( $aItem, array( 'ASIN' ), '' );
-
                 if ( ! $_sASIN ) {
                     return;
                 }
@@ -197,6 +265,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 );
 
             }
+                /**
+                 * @deprecated 4.3.0
+                 */
                 private function ___setProductData( array $aItem, $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sItemFormat, $sCurrency, $sLanguage ) {
 
                     // Customer reviews
@@ -213,6 +284,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                     }
 
                     $_aRow          = $this->___getRowFormatted( $aItem, $sASIN, $sLocale, $iCacheDuration, $sCurrency, $sLanguage );
+
 
                     $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
                     $_oProductTable->setRowByASINLocale(
@@ -321,6 +393,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                         if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=')) {
                             $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
                             $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );;
+                        }
+
+                        // 4.3.0
+                        if ( version_compare( $_sCurrentVersion, '1.4.0b01', '>=' ) ) {
+                            $_aRow[ 'product_id' ]  = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
                         }
 
                         return $_aRow;
