@@ -24,24 +24,17 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog extends AmazonAutoLinks_AdminP
         return array(
             'tab_slug'  => 'error_log',
             'title'     => __( 'Error Log', 'amazon-auto-links' ),
+            'order'     => 5,
         );
     }
 
     /**
      * Triggered when the tab is loaded.
      */
-    public function replyToLoadTab( $oAdminPage ) {
+    protected function _loadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log(
-            $oAdminPage,
-            $this->sPageSlug,
-            array(
-                'section_id'    => 'Log',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'Errors', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, )  );
 
     }
         

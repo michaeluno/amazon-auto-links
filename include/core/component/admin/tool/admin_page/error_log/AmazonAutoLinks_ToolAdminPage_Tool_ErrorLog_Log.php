@@ -14,7 +14,14 @@
  * @since       3.9.0
  */
 class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
-    
+
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'log',
+            'title'         => __( 'Errors', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * A user constructor.
      * 

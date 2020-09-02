@@ -33,10 +33,8 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
      */    
     public function replyToLoadPage( $oFactory ) {
 
-        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog(
-            $oFactory,
-            $this->sPageSlug
-        );
+        // Tabs
+        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog( $oFactory, $this->sPageSlug );
 
         $this->___doPageSettings( $oFactory );
         
