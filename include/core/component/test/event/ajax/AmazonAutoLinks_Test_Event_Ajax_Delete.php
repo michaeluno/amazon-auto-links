@@ -9,13 +9,13 @@
  */
 
 /**
- * Performs scratches.
+ * Performs scratches regarding database.
  * @since   4.3.0
  *
  */
-class AmazonAutoLinks_Test_Event_Ajax_Scratches extends AmazonAutoLinks_Test_Event_Ajax_Tests {
+class AmazonAutoLinks_Test_Event_Ajax_Delete extends AmazonAutoLinks_Test_Event_Ajax_Tests {
 
-    protected $_sActionHookSuffix = 'aal_action_admin_do_scratches';
+    protected $_sActionHookSuffix = 'aal_action_admin_do_delete';
     protected $_bLoggedIn = true;
     protected $_bGuest    = false;
 
@@ -25,14 +25,14 @@ class AmazonAutoLinks_Test_Event_Ajax_Scratches extends AmazonAutoLinks_Test_Eve
      */
     protected function _construct() {
         // load_{page slug}_{tab slug}
-        add_action( 'load_aal_tests_scratches', array( $this, 'replyToEnqueueResources' ) );
+        add_action( 'load_aal_tests_delete', array( $this, 'replyToEnqueueResources' ) );
     }
         /**
          * @since       4.3.0
          * @return      void
          */
         public function replyToEnqueueResources() {
-            $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches', array( 'AmazonAutoLinks_Scratch_Base' ), 'scratch' );
+            $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete', array( 'AmazonAutoLinks_Scratch_Base' ), 'database' );
         }
 
     /**

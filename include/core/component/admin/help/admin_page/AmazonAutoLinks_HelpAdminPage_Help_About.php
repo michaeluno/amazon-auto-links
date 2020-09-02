@@ -37,6 +37,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
         $_oReflection       = new ReflectionClass('AmazonAutoLinks_Registry');//
         $_oProductTable     = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_oHTTPRequestTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+        $_oTaskTable        = new AmazonAutoLinks_DatabaseTable_aal_tasks;
         $oAdminPage->addSettingFields(
             '_default', // the target section id
             array(
@@ -74,6 +75,14 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                         'size'    => $_oHTTPRequestTable->getTableSize(),
                         'columns' => $_oHTTPRequestTable->getRows(
                             'DESCRIBE ' . $_oHTTPRequestTable->aArguments[ 'table_name' ]
+                        ),
+                    ),
+                    'aal_tasks' => array(
+                        'name'    => $_oTaskTable->getTableName(),
+                        'version' => $_oTaskTable->getVersion(),
+                        'size'    => $_oTaskTable->getTableSize(),
+                        'columns' => $_oTaskTable->getRows(
+                            'DESCRIBE ' . $_oTaskTable->aArguments[ 'table_name' ]
                         ),
                     ),
                 ),

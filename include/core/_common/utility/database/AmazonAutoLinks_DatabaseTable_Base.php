@@ -95,25 +95,13 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     public function install( $bForce=false ) {
 
         // If already exists, return.
-        if ( ! $bForce && $this->___hasTable() ) {
+        if ( ! $bForce && $this->tableExists() ) {
             return array();
         }
         return $this->___install();
 
     }
-        /**
-         * Checks whether the table exists or not.
-         * @return      boolean
-         * @since       1.1.0
-         */
-        private function ___hasTable() {
-            $_sExistingTableName = $GLOBALS[ 'wpdb' ]->get_var(
-                "SHOW TABLES LIKE '"
-                .  $this->aArguments[ 'table_name' ]
-                . "'"
-            );
-            return $_sExistingTableName === $this->aArguments[ 'table_name' ];
-        }
+
         /**
          * Installs the database table.
          * @return      array       Strings containing the results of the various update queries.
@@ -139,6 +127,21 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
             return $_aResult;
 
         }
+
+    /**
+     * Checks whether the table exists or not.
+     * @return      boolean
+     * @since       1.1.0
+     * @since       4.3.0   Made it public. Renamed from `___hasTable()`.
+     */
+    public function tableExists() {
+        $_sExistingTableName = $GLOBALS[ 'wpdb' ]->get_var(
+            "SHOW TABLES LIKE '"
+            .  $this->aArguments[ 'table_name' ]
+            . "'"
+        );
+        return $_sExistingTableName === $this->aArguments[ 'table_name' ];
+    }
 
     /**
      * Drops a table.

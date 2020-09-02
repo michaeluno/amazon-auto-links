@@ -40,6 +40,7 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
         // Tabs
         new AmazonAutoLinks_Test_AdminPage_Test_Tests( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_Test_AdminPage_Test_Scratch( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_Test_AdminPage_Test_Delete( $this->oFactory, $this->sPageSlug );
 
         $this->_doPageSettings( $oFactory );
         

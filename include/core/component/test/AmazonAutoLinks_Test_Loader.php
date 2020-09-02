@@ -43,6 +43,7 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
         // Events
         new AmazonAutoLinks_Test_Event_Ajax_Tests;
         new AmazonAutoLinks_Test_Event_Ajax_Scratches;
+        new AmazonAutoLinks_Test_Event_Ajax_Delete;
 
     }
         /**

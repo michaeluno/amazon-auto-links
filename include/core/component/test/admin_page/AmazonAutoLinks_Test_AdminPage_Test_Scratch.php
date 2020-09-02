@@ -40,7 +40,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
      * @return array
      */
     protected function _getTagLabelsForCheckBox() {
-        return $this->_getTagLabels( AmazonAutoLinks_Test_Loader::$sDirPath . '/scratches', array( 'AmazonAutoLinks_Scratch_Base' ) );
+        return $this->_getTagLabels( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches', array( 'AmazonAutoLinks_Scratch_Base' ) );
     }
 
 
@@ -57,6 +57,15 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
 //        $this->___testGetRows();
 
     }
+        protected function _printFiles() {
+            echo "<div class='files-container'>";
+            echo "<h4>Files</h4>";
+            $_oFinder = new AmazonAutoLinks_Test_ClassFinder( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches', array( 'AmazonAutoLinks_Scratch_Base' ) );
+            AmazonAutoLinks_Debug::dump( $_oFinder->getFiles() );
+            echo "</div>";
+        }
+
+
         private function ___testOverrideRows() {
             echo "<h3>DB Set Multiple Rows in a Single Query</h3>";
             $_oProducts      = new AmazonAutoLinks_DatabaseTable_aal_products;

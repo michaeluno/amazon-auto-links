@@ -20,6 +20,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
     protected $_bGuest    = false;
 
     protected function _construct() {
+        // load_{page slug}_{tab slug}
         add_action( 'load_aal_tests_tests', array( $this, 'replyToEnqueueResources' ) );
     }
 
@@ -160,7 +161,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     'purpose' => $sPurpose,
                 ) + $this->___aResultStructure;
                 if ( is_null( $mResult ) ) {
-                    $_aError = error_get_last() + array( 'type' => null, 'message' => null, 'file' => null, 'line' => null );
+                    $_aError = ( ( array ) error_get_last() ) + array( 'type' => null, 'message' => null, 'file' => null, 'line' => null );
                     return array(
                         'message' => $_aError[ 'message' ] . ' in' . $_aError[ 'file' ] . ' on line ' . $_aError[ 'line' ],
                     ) + $_aDefault;
@@ -230,7 +231,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
      * @return      void
      */
     public function replyToEnqueueResources() {
-        $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/tests', array( 'AmazonAutoLinks_UnitTest_Base' ), 'test' );
+        $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base' ), 'test' );
     }
 
         /**
