@@ -34,6 +34,10 @@ class AmazonAutoLinks_DatabaseUpdater_aal_products_121 extends AmazonAutoLinks_P
      */
     public function replyToUpdateDatabase( $sVersionFrom, $sVersionTo, $aResult ) {
 
+        if ( version_compare( $sVersionFrom, '1.2.1', '>=' ) ) {
+            return;
+        }
+
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
 
         // check if a unique index for the `asin_locale` column exists or not

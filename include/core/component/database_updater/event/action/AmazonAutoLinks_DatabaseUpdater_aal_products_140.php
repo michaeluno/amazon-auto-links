@@ -25,12 +25,19 @@ class AmazonAutoLinks_DatabaseUpdater_aal_products_140 extends AmazonAutoLinks_D
      */
     public function replyToUpdateDatabase( $sVersionFrom, $sVersionTo, $aResult ) {
 
+        if ( version_compare( $sVersionFrom, '1.4.0', '>=' ) ) {
+            return;
+        }
+
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_sTableName    = $_oProductTable->getTableName();
         $_sQuery = "UPDATE {$_sTableName}"
             . " SET product_id = CONCAT( SUBSTRING( asin_locale, 1, 10 ), '|', SUBSTRING( asin_locale, 12, 2 ), '|', preferred_currency, '|', language )"
             . " WHERE product_id IS NULL OR product_id = ''"
             . " ;";
+        $_oProductTable->getVariable( $_sQuery );
+
+        $_sQuery = "ALTER TABLE {$_sTableName} MODIFY product_id varchar(128) UNIQUE AFTER object_id";
         $_oProductTable->getVariable( $_sQuery );
 
     }
