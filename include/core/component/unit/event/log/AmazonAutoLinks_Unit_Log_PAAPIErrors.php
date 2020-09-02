@@ -40,7 +40,7 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
 
         $_sError = $this->___getError( $mData, $sURL );
         if ( $_sError ) {
-            new AmazonAUtoLinks_Error(
+            new AmazonAutoLinks_Error(
                 __METHOD__,
                 $_sError,
                 array(

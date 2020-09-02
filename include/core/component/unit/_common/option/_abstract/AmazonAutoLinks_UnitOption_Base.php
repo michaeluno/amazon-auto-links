@@ -149,7 +149,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $aUnitOptions[ 'language' ]           = $aUnitOptions[ 'language' ]
             ? $aUnitOptions[ 'language' ]
             : AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
-
         $_aOutputFormats                = $this->___getOutputFormats( $aUnitOptions, $_sTemplateID );
         $aUnitOptions[ 'unit_format' ]  = $this->___getUnitFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
         $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );

@@ -54,9 +54,11 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
         if ( ! $this->sSectionID ) {
             return;
         }
+
+        $this->_construct( $oFactory ); // 4.3.0 Moved above `_addSection()`.
+
         $this->_addSection( $oFactory, $sPageSlug, $aSectionDefinition );
-        
-        $this->_construct( $oFactory );
+
         
     }
 

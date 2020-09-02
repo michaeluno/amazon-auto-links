@@ -42,21 +42,13 @@ class AmazonAutoLinks_Event_ErrorLog_HTTPRequestErrors extends AmazonAutoLinks_P
         $_sError = $this->___getError( $mData, $sURL );
         if ( $_sError ) {
             new AmazonAutoLinks_Error(
-                __METHOD__,
+                'HTTP_REQUEST',
                 $_sError,
                 array(
                     'url'        => $sURL,
                     'cache_name' => $sCacheName,
                 )
             );
-            // @deprecated 4.3.0
-            /*AmazonAutoLinks_Event_ErrorLog::setErrorLogItem(
-                $_sError,
-                array(
-                    'url'        => $sURL,
-                    'cache_name' => $sCacheName,
-                )
-            );*/
         }
         return $mData;
 
@@ -71,7 +63,7 @@ class AmazonAutoLinks_Event_ErrorLog_HTTPRequestErrors extends AmazonAutoLinks_P
 
             // WP_Error
             if ( is_wp_error( $mData ) ) {
-                return '(' . get_class( $mData ) . ') ' . $mData ->get_error_code() . ': ' . $mData ->get_error_message();
+                return $mData ->get_error_code() . ': ' . $mData ->get_error_message();
             }
 
             // HTTP Status Error
