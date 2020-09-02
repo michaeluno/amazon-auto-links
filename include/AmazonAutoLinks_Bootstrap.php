@@ -54,12 +54,12 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     
     /**
      * Installs plugin custom database tables.
-     * @callback        plugins_loaded
+     * @callback        function    register_activation_hook()
+     * @callback        action      plugins_loaded
+     * @callback        action      activate_{plugin_basename($file)}
      */
     public function replyToInstallCustomTables() {
-        new AmazonAutoLinks_DatabaseTableInstall( 
-            true    // install
-        );        
+        new AmazonAutoLinks_DatabaseTableInstall( true ); // install
     }
         
     /**
