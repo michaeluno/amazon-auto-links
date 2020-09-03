@@ -173,7 +173,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
             array(
                 'in_footer'     => true,
-            ),
+            )
         );
         $this->enqueueScripts(
             $this->oUtil->isDebugMode()
