@@ -13,7 +13,7 @@
  * 
  * @since       4.3.0
  */
-class AmazonAutoLinks_ToolAdminPage_Tool_DebugLog_Log extends AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log {
+class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log extends AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log {
 
     protected function _getArguments() {
         return array(

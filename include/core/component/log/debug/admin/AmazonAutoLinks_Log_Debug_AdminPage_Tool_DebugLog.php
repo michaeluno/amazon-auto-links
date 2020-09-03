@@ -11,30 +11,34 @@
 /**
  * Adds an in-page tab to a setting page.
  * 
- * @since       3.9.0
+ * @since       4.3.0
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
-class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog extends AmazonAutoLinks_AdminPage_Tab_Base {
+class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog extends AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog {
 
     /**
      * @return  array
-     * @since   3.9.0
+     * @since   4.3.0
      */
     protected function _getArguments() {
         return array(
-            'tab_slug'  => 'error_log',
-            'title'     => __( 'Error Log', 'amazon-auto-links' ),
-            'order'     => 5,
+            'tab_slug'  => 'debug_log',
+            'title'     => 'Debug Log',
+            'order'     => 10,
         );
     }
 
     /**
      * Triggered when the tab is loaded.
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @since   4.3.0
      */
     protected function _loadTab( $oAdminPage ) {
-        
+
         // Form sections
-        new AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, )  );
+        new AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+
+        $this->_enqueueResources( $oAdminPage );
 
     }
         

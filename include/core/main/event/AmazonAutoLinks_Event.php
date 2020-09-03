@@ -124,14 +124,13 @@ class AmazonAutoLinks_Event {
              * @since       4.0.0
              */
             private function ___handleActions() {
-                new AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache;
-                new AmazonAutoLinks_Event_ErrorLog;  // 4.2.0
-
+                new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
+                new AmazonAutoLinks_Event_Error_Log;  // 4.2.0
             }
 
             private function ___handleFilters() {
                 new AmazonAutoLinks_Event_HTTPClientArguments;
-                new AmazonAutoLinks_Event_ErrorLog_HTTPRequestErrors;  // 4.2.0
+                new AmazonAutoLinks_Event_Error_Log_HTTPRequestErrors;  // 4.2.0
                 new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError; // 4.2.2
             }
 

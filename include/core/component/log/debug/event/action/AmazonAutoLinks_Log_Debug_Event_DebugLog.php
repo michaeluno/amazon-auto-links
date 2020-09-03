@@ -13,7 +13,7 @@
  *
  * @since        4.3.0
  */
-class AmazonAutoLinks_Debug_Event_DebugLog extends AmazonAutoLinks_Event_ErrorLog {
+class AmazonAutoLinks_Log_Debug_Event_DebugLog extends AmazonAutoLinks_Event_Error_Log {
 
     /**
      * The action hook name.

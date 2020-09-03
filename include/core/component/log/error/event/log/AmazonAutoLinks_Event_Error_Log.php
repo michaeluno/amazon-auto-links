@@ -13,7 +13,7 @@
  *
  * @since        4.0.0
  */
-class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores error logs;
@@ -48,7 +48,7 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
 
         $this->_sOptionKey = $this->_getOptionKey();
 
-        add_action( $this->_sActionName, array( $this, 'replyToLogErrors' ), 10, 3 );
+        add_action( $this->_sActionName, array( $this, 'replyToLogErrors' ), 10, 4 );
 
     }
 
@@ -62,11 +62,12 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
     /**
      * Called when an error is detected and AmazonAutoLinks_Error is instantiated.
      *
-     * @return  void
-     * @since   4.2.0
+     * @return      void
+     * @since       4.2.0
+     * @since       4.3.0       Added the `$sCurrentHook` parameter.
      * @callback    action      aal_action_error
      */
-    public function replyToLogErrors( $isCode, $sErrorMessage, $aData ) {
+    public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook ) {
 
         if ( ! $this->_sOptionKey ) {
             AmazonAutoLinks_Debug::log( 'The option key is not set.', WP_CONTENT_DIR . '/aal_errors.log' );
@@ -81,7 +82,7 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
         $sErrorMessage = $_sCode
             ? $_sCode . ': ' . $sErrorMessage
             : $sErrorMessage;
-        $this->___setErrorLogItem( $sErrorMessage, $aData );
+        $this->___setErrorLogItem( $sErrorMessage, $aData, $sCurrentHook );
 
     }
         /**
@@ -89,8 +90,9 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
          * @param array $aExtra
          * @since   4.0.0
          * @since   4.3.0   Changed the scope to `private` from `public`.
+         * @since   4.3.0   Added the `$sCurrentHook` parameter.
          */
-        private function ___setErrorLogItem( $sMessage, array $aExtra=array() ) {
+        private function ___setErrorLogItem( $sMessage, array $aExtra=array(), $sCurrentHook='' ) {
 
             // For the first time of calling this method in a page
             if ( empty( $this->_aErrorLog ) ) {
@@ -103,6 +105,7 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
                 'message'        => $sMessage,
                 'current_url'    => $this->getCurrentURL(),
                 'page_load_id'   => $this->getPageLoadID(),
+                'current_hook'   => $sCurrentHook,
             ) + $aExtra;
 
         }

@@ -13,7 +13,7 @@
  *
  * @since        4.3.0
  */
-class AmazonAutoLinks_Debug_Event_HTTPRequest extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Log_Debug_Event_HTTPRequest extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Performs necessary set-ups.
@@ -26,7 +26,7 @@ class AmazonAutoLinks_Debug_Event_HTTPRequest extends AmazonAutoLinks_PluginUtil
         $_aData = isset( $aArguments[ 'body' ] )
             ? $this->getAsArray( $aArguments[ 'body' ] )
             : array();
-        do_action( 'aal_action_debug_log', 'HTTPRequest::' . $sRequestType, $sURL, $_aData );
+        do_action( 'aal_action_debug_log', 'HTTP_REQUEST::' . $sRequestType, $sURL, $_aData );
     }
 
 }

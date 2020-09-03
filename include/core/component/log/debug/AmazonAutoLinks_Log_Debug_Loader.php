@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_Debug_Loader extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Log_Debug_Loader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stored the component directory path.
@@ -38,8 +38,8 @@ class AmazonAutoLinks_Debug_Loader extends AmazonAutoLinks_PluginUtility {
             return;
         }
 
-        new AmazonAutoLinks_Debug_Event_DebugLog;
-        new AmazonAutoLinks_Debug_Event_HTTPRequest;
+        new AmazonAutoLinks_Log_Debug_Event_DebugLog;
+        new AmazonAutoLinks_Log_Debug_Event_HTTPRequest;
 
         $this->___loadAdminComponents();
 
@@ -56,7 +56,7 @@ class AmazonAutoLinks_Debug_Loader extends AmazonAutoLinks_PluginUtility {
              */
             public function replyToLoadToolPage( $oFactory ) {
 
-                new AmazonAutoLinks_ToolAdminPage_Tool_DebugLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
+                new AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
 
             }
 

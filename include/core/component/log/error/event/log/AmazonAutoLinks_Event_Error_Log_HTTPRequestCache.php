@@ -13,7 +13,7 @@
  *
  * @since
  */
-class AmazonAutoLinks_Event_ErrorLog_HTTPRequestCache {
+class AmazonAutoLinks_Event_Error_Log_HTTPRequestCache {
 
     public function __construct() {
         add_action( 'aal_action_error_http_request_cache_data', array( $this, 'replyToLogErrorHTTPRequestCache' ), 10, 2 );

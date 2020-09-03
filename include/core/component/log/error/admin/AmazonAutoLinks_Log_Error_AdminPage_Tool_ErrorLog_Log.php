@@ -13,7 +13,7 @@
  * 
  * @since       3.9.0
  */
-class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @var string
@@ -45,9 +45,42 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
+        $_aLogTextAreaAttributes = array(
+            'readonly'  => 'readonly',
+            'style'     => 'min-height: 720px;',
+            'wrap'      => 'off',
+            'class'     => 'width-full log',
+        );
         $oFactory->addSettingFields(
-            $sSectionID, // the target section id   
-            array( 
+            $sSectionID, // the target section id
+            array(
+                'field_id'          => '_filters',
+                'title'             => __( 'Filters', 'amazon-auto-links' ),
+                'content'           => array(
+                    array(
+                        'field_id'          => 'include',
+                        'title'             => __( 'Include', 'amazon-auto-links' ),
+                        'type'              => 'text',
+                        'save'              => false,
+                        'class'             => array(
+                            'input' => 'width-full filter-include',
+                            'field' => 'width-full',
+                        ),
+                    ),
+                    array(
+                        'field_id'          => 'exclude',
+                        'title'             => __( 'Exclude', 'amazon-auto-links' ),
+                        'type'              => 'text',
+                        'save'              => false,
+                        'class'             => array(
+                            'input' => 'width-full filter-exclude',
+                            'field' => 'width-full',
+                        ),
+                    ),
+                ),
+                'description'       => __( 'Type characters that match log entries to include/exclude.', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'          => '_log',
                 'title'             => __( 'Log', 'amazon-auto-links' ),
                 'type'              => 'textarea',
@@ -60,7 +93,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                 ),
                 'class'             => array(
                     'field' => 'width-full',
-                    'input' => 'width-full',
+                    'input' => 'width-full log',
                 ),
                 'value'             => $this->___getErrorLog(),
             ),
@@ -77,7 +110,6 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
 
     }
         private function ___getErrorLog() {
-
             $_aErrorLog  = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
             $_sErrorLog  = '';
             foreach( $_aErrorLog as $_dMicrosecond => $_aLogItem ) {
@@ -86,7 +118,6 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
             return $_sErrorLog
                 ? $_sErrorLog
                 : __( 'No items found.', 'amazon-auto-links' );
-
         }
 
             /**
@@ -94,24 +125,24 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
              */
             private function ___getLogEntry( array $aLogItem ) {
                 $_aRequired = array(
-                    'time'          => 0,
-                    'message'       => '',
-                    'current_url'   => '',
-                    'page_load_id'  => '',
+                    'time'          => 0,   'message'       => '', 'current_hook'  => '',
+                    'current_url'   => '',  'page_load_id'  => '',
                 );
-                $aLogItem     = $aLogItem + $_aRequired;
-                $_aExtra      = array_diff_key( $aLogItem, $_aRequired );
-                $_sTime       = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ';
-                $_sPageLoadID = $this->getElement( $aLogItem, array( 'page_load_id' ), '' );
-                $_sPageLoadID = $_sPageLoadID ? $_sPageLoadID . ' ' : '';
-                return $_sTime . $_sPageLoadID . $this->getElement( $aLogItem, array( 'current_url' ) ) . PHP_EOL
+                $aLogItem      = $aLogItem + $_aRequired;
+                $_aExtra       = array_diff_key( $aLogItem, $_aRequired );
+                $_sTime        = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ';
+                $_sPageLoadID  = $this->getElement( $aLogItem, array( 'page_load_id' ), '' );
+                $_sPageLoadID  = $_sPageLoadID ? $_sPageLoadID . ' ' : '';
+                $_sCurrentHook = $this->getElement( $aLogItem, array( 'current_hook' ), '' );
+                $_sCurrentHook = $_sCurrentHook ? $_sCurrentHook . ' ' : '';
+                return $_sTime . $_sPageLoadID . $_sCurrentHook . $this->getElement( $aLogItem, array( 'current_url' ) ) . PHP_EOL
                     . '    ' . $aLogItem[ 'message' ] . PHP_EOL
                     . $this->___getArrayRepresentation( $_aExtra, '    ' )
                     ;
             }
                 private function ___getArrayRepresentation( array $aArray, $sPad='' ) {
 
-                    $_sOutput = '';
+                    $_sOutput  = '';
 
                     if ( empty( $aArray ) ) {
                         return $_sOutput;
@@ -130,24 +161,6 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                     return rtrim( $_sOutput ) . PHP_EOL;
 
                 }
-
-            /**
-             * @since   4.0.0
-             * @deprecated  4.3.0
-             */
-            /*private function ___getLogEntry( array $aLogItem ) {
-                $_aRequired = array(
-                    'time'          => 0,
-                    'message'       => '',
-                    'current_url'   => '',
-                );
-                $aLogItem = $aLogItem + $_aRequired;
-                $_aExtra  = array_diff_key( $aLogItem, $_aRequired );
-                $_sTime   = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true );
-                return $_sTime . ' ' . implode( ' ', $_aExtra ) . "\r\n"
-                    . $this->getElement( $aLogItem, array( 'current_url' ) ) . "\r\n"
-                    . $aLogItem[ 'message' ] . "\r\n";
-            }*/
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
         $oAdminPage->setSettingNotice( '' ); // disable the notice

@@ -262,11 +262,12 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // 4.0.0
             new AmazonAutoLinks_CustomOEmbed_Loader;
 
-            // 4.3.0
             if ( AmazonAutoLinks_WPUtility::isDebugMode() ) {
-                new AmazonAutoLinks_Test_Loader;
-                new AmazonAutoLinks_Debug_Loader;
+                new AmazonAutoLinks_Test_Loader;    // 4.3.0
+                new AmazonAutoLinks_Log_Debug_Loader;   // 4.3.0
             }
+
+            new AmazonAutoLinks_Log_Loader; // 4.3.0
 
         }
             /**
