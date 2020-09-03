@@ -320,8 +320,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             );
 
             return $aFormData;
-            
-        }        
+
+        }
         
         /**
          * Returns the output of the widget.
