@@ -55,7 +55,8 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                 'show_title_column' => false,
                 'attributes'        => array(
                     'readonly'  => 'readonly',
-                    'style'     => 'min-height: 720px;'
+                    'style'     => 'min-height: 720px;',
+                    'wrap'      => 'off',
                 ),
                 'class'             => array(
                     'field' => 'width-full',
@@ -96,11 +97,14 @@ class AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_Ad
                     'time'          => 0,
                     'message'       => '',
                     'current_url'   => '',
+                    'page_load_id'  => '',
                 );
-                $aLogItem = $aLogItem + $_aRequired;
-                $_aExtra  = array_diff_key( $aLogItem, $_aRequired );
-                $_sTime   = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true );
-                return $_sTime . ' ' . $this->getElement( $aLogItem, array( 'current_url' ) ) . PHP_EOL
+                $aLogItem     = $aLogItem + $_aRequired;
+                $_aExtra      = array_diff_key( $aLogItem, $_aRequired );
+                $_sTime       = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ';
+                $_sPageLoadID = $this->getElement( $aLogItem, array( 'page_load_id' ), '' );
+                $_sPageLoadID = $_sPageLoadID ? $_sPageLoadID . ' ' : '';
+                return $_sTime . $_sPageLoadID . $this->getElement( $aLogItem, array( 'current_url' ) ) . PHP_EOL
                     . '    ' . $aLogItem[ 'message' ] . PHP_EOL
                     . $this->___getArrayRepresentation( $_aExtra, '    ' )
                     ;

@@ -16,6 +16,16 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
     /**
+     * @return string
+     * @since   4.3.0
+     */
+    static public function getPageLoadID() {
+        static $_sPageLoadID;
+        $_sPageLoadID = $_sPageLoadID ? $_sPageLoadID : uniqid();
+        return $_sPageLoadID;
+    }
+
+    /**
      * Retrieves the topmost items in an array.
      *
      * Used to cut off too many items.

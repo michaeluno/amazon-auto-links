@@ -102,6 +102,7 @@ class AmazonAutoLinks_Event_ErrorLog extends AmazonAutoLinks_PluginUtility {
                 'time'           => time(),
                 'message'        => $sMessage,
                 'current_url'    => $this->getCurrentURL(),
+                'page_load_id'   => $this->getPageLoadID(),
             ) + $aExtra;
 
         }
