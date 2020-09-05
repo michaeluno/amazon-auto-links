@@ -116,6 +116,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
      * @return      array
      */
     public function request( array $aPayload, $iCacheDuration=86400, $bForceRenew=false ) {
+
         $aPayload     = $aPayload + $this->___aPayload;
         $_oAPIHeader  = new AmazonAutoLinks_PAAPI50___RequestHeaderGenerator(
             $this->___sPublicKey,

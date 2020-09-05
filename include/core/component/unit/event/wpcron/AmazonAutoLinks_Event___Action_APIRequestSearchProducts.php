@@ -26,6 +26,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
     protected function _doAction( /* $aArguments */ ) {
 
         $_aParams        = func_get_args() + array( array(), '', '' );
+
+        if ( $this->hasBeenCalled( serialize( $_aParams ) ) ) {
+            new AmazonAutoLinks_Error( 'GET_PRODUCTS_INFO', 'A same HTTP request is made.', $_aParams, true );
+            return;
+        }
         if ( $this->_isLocked( $_aParams ) ) {
             return;
         }
