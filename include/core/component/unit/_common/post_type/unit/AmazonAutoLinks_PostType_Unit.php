@@ -168,19 +168,45 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         wp_enqueue_script( 'jquery' );
 
         $this->enqueueScripts(
-            $this->oUtil->isDebugMode()
-                ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.js'
-                : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
             array(
+                $this->oUtil->isDebugMode()
+                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.js'
+                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
+            ),
+            array(
+                'handle_id'     => 'aalManageUnits',
+                'in_footer'     => true,
+                'translation'   => array(
+                    'labels' => array(
+                        'copied'    => __( 'Copied the text.', 'amazon-auto-links' ),
+                    ),
+                    'debugMode' => $this->oUtil->isDebugMode(),
+                ),
+            )
+        );
+        $this->enqueueScripts(
+            array(
+                $this->oUtil->isDebugMode()
+                    ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
+                    : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js',
+            ),
+            array(
+                'handle_id'     => 'aalUtility',
+                'dependencies'  => array( 'jquery', ),
                 'in_footer'     => true,
             )
         );
         $this->enqueueScripts(
-            $this->oUtil->isDebugMode()
-                ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
-                : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
             array(
-                'handle_id'     => 'aalManageUnits',
+                $this->oUtil->isDebugMode()
+                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
+                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
+            ),
+            array(
+                'handle_id'     => 'aalUnitStatusUpdater',
+                'dependencies'  => array(
+                    'jquery', 'aalUtility'
+                ),
                 'translation'   => array(
                     'ajaxURL' => admin_url( 'admin-ajax.php' ),
                 ),

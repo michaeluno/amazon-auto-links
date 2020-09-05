@@ -324,6 +324,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.0 =
+- Refined the Error Log screen.
 - Minified JavaScript scripts.
 - Added the `Custom Text` unit option.
 - Added the `Unit Format` option under the `Output Format` unit option.

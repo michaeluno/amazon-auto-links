@@ -40,7 +40,7 @@
                 jQuery.ajax( {
                     type: "post",
                     dataType: 'json',
-                    url: aalManageUnits.ajaxURL,
+                    url: aalUnitStatusUpdater.ajaxURL,
                     // Data set to $_POST and $_REQUEST
                     data: {
                         action: 'aal_action_update_unit_status',   // WordPress action hook name which follows after `wp_ajax_`

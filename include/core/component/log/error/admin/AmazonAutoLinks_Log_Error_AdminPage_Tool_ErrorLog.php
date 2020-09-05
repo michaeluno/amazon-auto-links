@@ -26,6 +26,10 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog extends AmazonAutoLinks_
             'tab_slug'  => 'error_log',
             'title'     => __( 'Error Log', 'amazon-auto-links' ),
             'order'     => 5,
+            'style'     => array(
+                AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.css',
+                AmazonAutoLinks_Log_Loader::$sDirPath . '/asset/css/log.css',
+            ),
         );
     }
 
@@ -46,7 +50,22 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog extends AmazonAutoLinks_
          * @since   4.3.0
          */
         protected function _enqueueResources( $oAdminPage ) {
-            $oAdminPage->enqueueScripts(
+
+            wp_enqueue_script( 'jquery' );
+
+            $oAdminPage->enqueueScript(
+                $oAdminPage->oUtil->isDebugMode()
+                    ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
+                    : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js',
+                $this->sPageSlug,
+                $this->sTabSlug,
+                array(
+                    'handle_id'     => 'aalUtility',
+                    'dependencies'  => array( 'jquery', ),
+                    'in_footer'     => true,
+                )
+            );
+            $oAdminPage->enqueueScript(
                 $oAdminPage->oUtil->isDebugMode()
                     ? AmazonAutoLinks_Log_Loader::$sDirPath . '/asset/js/log-item-filters.js'
                     : AmazonAutoLinks_Log_Loader::$sDirPath . '/asset/js/log-item-filters.min.js',
@@ -54,9 +73,13 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog extends AmazonAutoLinks_
                 $this->sTabSlug,
                 array(
                     'handle_id'     => 'aalLog',
-                    'dependencies'  => array( 'jquery' ),
+                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', 'aalUtility' ),
                     'translation'   => array(
                         'debugMode' => $oAdminPage->oUtil->isDebugMode(),
+                        'labels'    => array(
+                            'copied' => __( 'Copied the log to the clipboard.' ),
+                            'not_copied' => __( 'Failed to copied the log to the clipboard.' ),
+                        ),
                     ),
                     'in_footer'     => true,
                 )

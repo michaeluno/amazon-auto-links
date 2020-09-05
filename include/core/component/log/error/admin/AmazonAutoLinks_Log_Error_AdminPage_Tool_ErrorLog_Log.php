@@ -35,7 +35,9 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
      * @return      void
      */
     protected function _construct( $oFactory ) {
+
         $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
+
     }
 
     /**
@@ -78,25 +80,36 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
                         ),
                     ),
                 ),
-                'description'       => __( 'Type characters that match log entries to include/exclude.', 'amazon-auto-links' ),
+                'description'       => __( 'Type characters that match log entries to include/exclude separated commas.', 'amazon-auto-links' ),
             ),
             array(
                 'field_id'          => '_log',
-                'title'             => __( 'Log', 'amazon-auto-links' ),
-                'type'              => 'textarea',
                 'save'              => false,
                 'show_title_column' => false,
-                'attributes'        => array(
-                    'readonly'  => 'readonly',
-                    'style'     => 'min-height: 720px;',
-                    'wrap'      => 'off',
-                ),
                 'class'             => array(
                     'field' => 'width-full',
                     'input' => 'width-full log',
                 ),
-                'value'             => $this->___getErrorLog(),
+                'content'           => $this->___getCopyToClipboardButton()
+                    . $this->___getLogHTMLPart(),
             ),
+//            array(
+//                'field_id'          => '_log',
+//                'title'             => __( 'Log', 'amazon-auto-links' ),
+//                'type'              => 'textarea',
+//                'save'              => false,
+//                'show_title_column' => false,
+//                'attributes'        => array(
+//                    'readonly'  => 'readonly',
+//                    'style'     => 'min-height: 720px;',
+//                    'wrap'      => 'off',
+//                ),
+//                'class'             => array(
+//                    'field' => 'width-full',
+//                    'input' => 'width-full log',
+//                ),
+//                'value'             => $this->___getErrorLog(),
+//            ),
             array(
                 'field_id'          => '_clear',
                 'title'             => __( 'Clear', 'amazon-auto-links' ),
@@ -109,25 +122,25 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
         );
 
     }
-        private function ___getErrorLog() {
-            $_aErrorLog  = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
-            $_sErrorLog  = '';
-            foreach( $_aErrorLog as $_dMicrosecond => $_aLogItem ) {
-                $_sErrorLog .= $this->___getLogEntry( $_aLogItem );
-            }
-            return $_sErrorLog
-                ? $_sErrorLog
-                : __( 'No items found.', 'amazon-auto-links' );
+        private function ___getCopyToClipboardButton() {
+            return "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>";
         }
+        private function ___getLogHTMLPart() {
+            $_aLog          = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
+            $_sLogHTMLPart  = '';
+            foreach( array_reverse( $_aLog ) as $_aLogItem ) {
+                $_sLogHTMLPart .= $this->___getLogEntryHTMLPart( $this->getAsArray( $_aLogItem ) );
+            }
+            return "<div class='log'>" . $_sLogHTMLPart . "</div>";
 
-            /**
-             * @since   4.0.0
-             */
-            private function ___getLogEntry( array $aLogItem ) {
+        }
+            private function ___getLogEntryHTMLPart( array $aLogItem ) {
+
                 $_aRequired = array(
                     'time'          => 0,   'message'       => '', 'current_hook'  => '',
-                    'current_url'   => '',  'page_load_id'  => '',
+                    'current_url'   => '',  'page_load_id'  => '', 'stack_trace'   => '',
                 );
+                $_sPad         = '    ';
                 $aLogItem      = $aLogItem + $_aRequired;
                 $_aExtra       = array_diff_key( $aLogItem, $_aRequired );
                 $_sTime        = $this->getSiteReadableDate( $aLogItem[ 'time' ], 'Y-m-d H:i:s', true ) . ' ';
@@ -135,10 +148,33 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
                 $_sPageLoadID  = $_sPageLoadID ? $_sPageLoadID . ' ' : '';
                 $_sCurrentHook = $this->getElement( $aLogItem, array( 'current_hook' ), '' );
                 $_sCurrentHook = $_sCurrentHook ? $_sCurrentHook . ' ' : '';
-                return $_sTime . $_sPageLoadID . $_sCurrentHook . $this->getElement( $aLogItem, array( 'current_url' ) ) . PHP_EOL
-                    . '    ' . $aLogItem[ 'message' ] . PHP_EOL
-                    . $this->___getArrayRepresentation( $_aExtra, '    ' )
-                    ;
+
+                $_sStackTrace  = $this->getElement( $aLogItem, array( 'stack_trace' ), '' );
+                $_sDetails     = $this->___getArrayRepresentation( $_aExtra, $_sPad );
+                $_sDetails     = $_sDetails
+                    ? "<div class='extra'>" . $_sDetails . "</div>"
+                    : '';
+                $_sDetails    .= ( $_sStackTrace
+                    ? "<textarea class='stack-trace' wrap='off' readonly='readonly'>" . $_sStackTrace . "</textarea>"
+                    : '' );
+
+                return "<div class='log-item'>"
+                        . "<div class='log-item-head'>"
+                                . "<h5 class='log-item-title'>" . $_sTime . $_sPageLoadID . $_sCurrentHook . $this->getElement( $aLogItem, array( 'current_url' ) ) . "</h5>"
+                                . (
+                                    $aLogItem[ 'message' ]
+                                        ? "<p class='log-item-message'>" . $_sPad . $aLogItem[ 'message' ] . "</p>"
+                                        : ''
+                                )
+                            . "</div>"
+                        . (
+                            $_sDetails
+                                ? "<div class='log-item-body'>"
+                                    . $_sDetails
+                                . "</div>"
+                                : ''
+                        )
+                    . "</div>";
             }
                 private function ___getArrayRepresentation( array $aArray, $sPad='' ) {
 

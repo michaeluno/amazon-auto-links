@@ -18,13 +18,20 @@ class AmazonAutoLinks_Error extends WP_Error {
     /**
      * Triggers an action hook so that the error can be logged.
      *
-	 * @param string|int $isCode Error code
+	 * @param string|integer $isCode Error code
 	 * @param string $sMessage Error message
 	 * @param mixed $mData Optional. Error data.
+     * @param boolean whether to generate a stack trace.
      */
-    public function __construct( $isCode='', $sMessage='', $mData='' ) {
+    public function __construct( $isCode='', $sMessage='', $mData='', $bStackTrace=false ) {
+
         parent::__construct( $isCode, $sMessage, $mData );
-        do_action( 'aal_action_error', $isCode, $sMessage, AmazonAutoLinks_PluginUtility::getAsArray( $mData ), current_filter() );
+
+        $_sStackTrace = $bStackTrace
+            ? AmazonAutoLinks_PluginUtility::getStackTrace( new Exception, 2 )
+            : '';
+        do_action( 'aal_action_error', $isCode, $sMessage, AmazonAutoLinks_PluginUtility::getAsArray( $mData ), current_filter(), $_sStackTrace );
+
     }
 
 }

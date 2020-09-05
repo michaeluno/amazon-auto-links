@@ -25,7 +25,7 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog extends AmazonAutoLinks_
             'tab_slug'  => 'debug_log',
             'title'     => 'Debug Log',
             'order'     => 10,
-        );
+        ) + parent::_getArguments();
     }
 
     /**

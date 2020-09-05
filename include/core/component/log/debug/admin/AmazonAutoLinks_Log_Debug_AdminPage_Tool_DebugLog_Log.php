@@ -32,5 +32,4 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log extends AmazonAutoLi
         $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'debug_log' ];
     }
 
-
 }
