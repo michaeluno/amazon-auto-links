@@ -264,7 +264,6 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
 
             if ( AmazonAutoLinks_WPUtility::isDebugMode() ) {
                 new AmazonAutoLinks_Test_Loader;    // 4.3.0
-                new AmazonAutoLinks_Log_Debug_Loader;   // 4.3.0
             }
 
             new AmazonAutoLinks_Log_Loader; // 4.3.0
