@@ -15,16 +15,16 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
      */
     public function setUp() {
 
-        $_bProInstalled   = class_exists( 
+        $_bProInstalled    = class_exists(
             'AmazonAutoLinksPro_Registry', 
             false       // disable auto-load for performance
         );
         
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
+        $_oOption          = AmazonAutoLinks_Option::getInstance();
+        $_bJoinedAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
         
         // Disable the meta box if the Pro version exists.
-        if ( $_bProInstalled && $_bJoindAffiliate ) {
+        if ( $_bProInstalled && $_bJoinedAffiliate ) {
             $this->oProp->aPageSlugs = array();
         }        
         
@@ -60,9 +60,9 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
          */
         private function ___getAffiliateInfo() {
             $_oOption = AmazonAutoLinks_Option::getInstance();
-            $_bJoindAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );            
+            $_bJoinedAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );            
             $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/';
-            return $_bJoindAffiliate
+            return $_bJoinedAffiliate
                 ? ''
                 : "<h4>" 
                     . __( 'Join Affiliate Program ', 'admin-page-framework-loader' ) 
@@ -87,8 +87,8 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
          */
         private function ___getAnnouncements() {
             $_sOutput = '';
-            $_oRSS = new AmazonAutoLinks_RSSClient( 'http://feeds.feedburner.com/AmazonAutoLinks_Announcements?1=1' );
-            $_aItems = $_oRSS->get();
+            $_oRSS    = new AmazonAutoLinks_RSSClient( 'https://feeds.feedburner.com/AmazonAutoLinks_Announcements' );
+            $_aItems  = $_oRSS->get();
             foreach( $_aItems as $_aItem ) {
                 $_sOutput .= "<h4>" . $_aItem[ 'title' ] . "</h4>"
                     . $_aItem[ 'description' ];
