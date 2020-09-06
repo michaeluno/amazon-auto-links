@@ -37,6 +37,7 @@
     background-color: inherit;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-top: 0.6em;
 }
 
 .button-secondary.copy-to-clipboard {
