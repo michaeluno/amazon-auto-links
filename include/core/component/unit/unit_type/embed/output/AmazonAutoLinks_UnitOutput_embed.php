@@ -108,6 +108,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 //                    $this->___getLocaleFromURL( $_aProduct[ 'product_url' ] ),
 //                    $this->oUnitOption->get( 'image_size' )
 //                );
+                unset( $_aProduct[ '_features' ] );
                 return $_aProduct;
             }
 
