@@ -324,8 +324,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.0 =
-- Refined the Error Log screen.
-- Minified JavaScript scripts.
+- Added the `Reset` button in the `Default` setting screen.
 - Added the `Custom Text` unit option.
 - Added the `Unit Format` option under the `Output Format` unit option.
 - Added the ability to toggle the status of buttons.
@@ -333,6 +332,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the `Override the button label.` unit option that allows the user override a button label.
 - Added the theme button option for the `Select Button` option.
 - Added `target="_blank"` to the unit view links to open the link in a new tab
+- Refined the Error Log screen.
+- Minified JavaScript scripts.
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
 

@@ -20,3 +20,10 @@
     background-color: rgb(254, 255, 246);
         
 }
+
+.postbox .amazon-auto-links-sectionset {
+    margin-bottom: 0;
+}
+.postbox .amazon-auto-links-section {
+    margi-bottom: 1em;
+}

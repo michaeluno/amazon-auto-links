@@ -42,7 +42,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common extends Amazo
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInputs, $aOriginal, $oFactory ) {    
+    public function validate( $aInputs, $aOriginal, $oFactory, $aSubmitInfo ) {
         return $aInputs;
     }
  

@@ -15,12 +15,16 @@
  * @since       3.1.0
 */
 class AmazonAutoLinks_SettingsAdminPageLoader {
-    
+
+    static public $sDirPath = '';
+
     /**
      * Loads necessary components.
      */
     public function __construct() {
-        
+
+        self::$sDirPath = dirname( __FILE__ );
+
         add_action( 
             'set_up_' . 'AmazonAutoLinks_AdminPage',
             array( $this, 'replyToSetUpAdminPage' ),
