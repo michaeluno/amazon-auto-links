@@ -95,7 +95,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 return $_aProduct;
             }
 
-            // @todo even the API is disconnected, it should return the cache
+            // Even the API is disconnected, it should return the cache
 //            if ( ! $this->oOption->isAPIConnected() ) {
 //                return $_aProduct;
 //            }
@@ -159,6 +159,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_aProduct[ 'title' ]        = $_oTitleFormatter->get();
             if ( $_sNativeTitle !== $_aProduct[ 'title' ] ) {
                 $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
+            }
+
+            // 4.2.8
+            $_sNativeThumbnailURL         = $_aProduct[ 'thumbnail_url' ];
+            $_aProduct[ 'thumbnail_url' ] = isset( $_aProduct[ 'thumbnail_url' ] )
+                ? isset( $_aProduct[ 'thumbnail_url' ] )
+                : $this->getElement( $_aDBProductRow, array( 'images', 'main', 'MediumImage' ), '' );
+            if ( $_sNativeThumbnailURL !== $_aProduct[ 'thumbnail_url' ] ) {
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
             }
 
             /**

@@ -112,6 +112,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
          * @todo research what else image urls represent no-image.
          */
         private function ___isNoImage( $sImageURL ) {
+
             if ( empty( $sImageURL ) ) {
                 return true;
             }
@@ -119,6 +120,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
                return true;
             }
             return false;
+
         }
 
     /**
