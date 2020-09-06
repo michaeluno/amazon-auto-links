@@ -28,6 +28,8 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         );
     }
 
+    protected function _construct( $oFactory ) {}
+
     /**
      * Triggered when the tab is loaded.
      * 
@@ -35,16 +37,18 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
      * @return          void
      */
     protected function _loadTab( $oAdminPage ) {
-                
+
+        $_aPageSlugs = array( // page slugs
+            AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
+                'default'
+            ),
+        );
+
         // Page meta boxes.        
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Common', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'normal',                                       // context
             'core'                                     // priority                    
         );
@@ -52,11 +56,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Template', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'normal',                                     // context (what kind of metabox this is)
             'default'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );        
@@ -64,11 +64,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Product Filter', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'normal',                                     // context (what kind of metabox this is)
             'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
@@ -76,11 +72,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilterAdvanced(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Advanced Product Filter', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'normal',                                     // context (what kind of metabox this is)
             'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
@@ -88,38 +80,35 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit(
             null,
             __( 'Submit', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'side',                                       // context
             'high'                                     // priority                            
         );
-        
+
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Cache(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Cache', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'side',                                       // context
-            'high'                                     // priority                    
+            'default'
         );            
-        
+
+        // 4.3.0
+        new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Locale(
+            null,
+            __( 'Locale', 'amazon-auto-links' ),
+            $_aPageSlugs,
+            'side',
+            'default'
+        );
+
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Common Advanced', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] => array(
-                    'default'
-                ),
-            ),
+            $_aPageSlugs,
             'side',                                       // context
-            'high'                                     // priority                    
-        );        
+            'default'
+        );
 
     }
     
@@ -138,5 +127,5 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
             . "</p>";
         
     }
-            
+
 }

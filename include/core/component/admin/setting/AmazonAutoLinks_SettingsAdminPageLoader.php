@@ -31,6 +31,8 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
             5   // fairly higher priority so that the plugin action link points to this page
         );
 
+        new AmazonAutoLinks_Admin_Settings_Event_Ajax_LocaleSelect;
+
     }    
     
     /**

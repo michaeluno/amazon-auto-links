@@ -324,6 +324,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.0 =
+- Added the `Language` and `Currency` options in the `Default` setting screen.
 - Added the `Reset` button in the `Default` setting screen.
 - Added the `Custom Text` unit option.
 - Added the `Unit Format` option under the `Output Format` unit option.

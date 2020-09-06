@@ -36,7 +36,7 @@ class AmazonAutoLinks_InfoBoxLoader {
             __( 'Information', 'amazon-auto-links' ), // title
             $_aTargetPageSlugs,
             'side',                                       // context
-            'default'                                     // priority            
+            'low'                                     // priority
         );    
     
     }    
