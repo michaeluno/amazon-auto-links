@@ -22,6 +22,11 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Title extends AmazonAutoLink
      */
     public function get() {
 
+        // 4.2.8
+        if ( ! isset( $this->_aProduct[ 'title' ] ) ) {
+            return $this->getTitleSanitized( $this->_getCell( 'title' ), $this->_oUnitOption->get( 'title_length' ) );
+        }
+
         // For feed units, the database should not be accessed.
         if ( isset( $this->_aProduct[ 'formatted_title' ] ) ) {
             return $this->getTitleSanitized( $this->_aProduct[ 'title' ], $this->_oUnitOption->get( 'title_length' ) );

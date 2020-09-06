@@ -321,7 +321,6 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     }
 
                     // Store the product
-                    // @deprecated 3.9.0 $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $sLocale );
                     $_aASINLocaleCurLang    = $_aProduct[ 'ASIN' ] . '|' . strtoupper( $_sLocale ) . '|' . $_sCurrency . '|' . $_sLanguage;
                     $_aASINLocales[ $_aASINLocaleCurLang ] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
 
@@ -345,10 +344,12 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                  */
                 private function ___getProductsFormatted( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount ) {
 
+                    $_iResultCount          = count( $_aProducts );
                     try {
-                        $_iResultCount          = count( $_aProducts );
-                        // Format products with database data
+
+                        add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 3 );
                         $_aProducts             = $this->_getProductsFormatted( $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID );
+
                         $_iCountAfterFormatting = count( $_aProducts );
                         if ( $_iResultCount > $_iCountAfterFormatting ) {
                             throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
@@ -369,9 +370,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                     return $_aProducts;
 
                 }
+
                 /**
                  *
                  * @return     array
+                 * @throws Exception
                  * @since      3.9.0
                  */
                 private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
@@ -393,15 +396,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                     // Title
                     $_aProduct[ 'raw_title' ] = $this->getElement( $_aProduct, 'title' );
-                    if ( $this->isTitleBlocked( $_aProduct[ 'raw_title' ] ) ) {
-                        throw new Exception( '(product filter) The title is black-listed: ' . $_aProduct[ 'raw_title' ] );
-                    }
                     $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
 
                     // Description - plain text and HTML versions
                     // @remark The description (content) element is retrieved later from the database
 //                    $_aProduct[ 'text_description' ] = '';
-                    // @todo    apply the product filter for description
                     // @remark this is handled in the `replyToFormatProductWithDBRow()` method below.
 //                    if ( $this->isDescriptionBlocked( $_aProduct[ 'text_description' ] ) ) {
 //                        throw new Exception( 'The description is black-listed: ' . $_aProduct[ 'text_description' ] );
@@ -417,17 +416,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                           strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
                     );
 
-                    // Check whether no-image should be skipped.
-                    if ( ! $this->isImageAllowed( $_aProduct[ 'thumbnail_url' ] ) ) {
-                        throw new Exception( '(product filter) No image is allowed: ' );
-                    }
-
                     // @todo complete the `meta` and `description` elements
 //                    $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
 //                            . $this->getDescription( $_aProduct )
 //                        . "</div>";
 //                    $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
-
 
                     // Format the item
                     // Thumbnail
@@ -438,12 +431,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                     // Button - check if the %button% variable exists in the item format definition.
                     // It accesses the database, so if not found, the method should not be called.
-                    if (
-                        $this->hasCustomVariable(
-                            $this->oUnitOption->get( 'item_format' ),
-                            array( '%button%', )
-                        )
-                    ) {
+                    if ( $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%button%', ) ) ) {
                         $_aProduct[ 'button' ] = $this->_getButton(
                             $this->oUnitOption->get( 'button_type' ),
                             $this->_getButtonID(),
@@ -454,7 +442,6 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                             $this->oOption->get( 'authentication_keys', 'access_key' ), // public access key
                             $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                         );
-
                     }
 
                     /**
@@ -479,32 +466,26 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                 }
 
-                    /**
-                     * Formats the thumbnail URL
-                     * @param $sRawImageURL
-                     * @param $iImageSize
-                     * @return string
-                     * @deprecated
-                     */
-//                    private function ___getThumbnailURL( $sRawImageURL, $iImageSize ) {
-                        // return $this->getProductLinkURLFormatted( $sURL, $sASIN );
-//                        return $this->getImageURLBySize( $sRawImageURL, $iImageSize );
-                        // return $sRawImageURL;
-//                        $this->formatImages(
-//                            $_oDoc,
-//                            array(
-//                                'alt'   => $_aProduct[ 'title' ],
-//                                'title' => $_aProduct[ 'text_description' ]
-//                            )
-//                        );
-
-                        // Thumbnail image
-//                        $_aProduct[ 'thumbnail_url' ] = $this->getThumbnail(
-//                            $_oDoc,
-//                            $this->oUnitOption->get( 'image_size' )
-//                        );
-//                    }
-
+    /**
+     * @remark  The timing of filtering items by image and title is changed in order to support resuming with caches.
+     * @since   4.2.8
+     * @return array    A product array, empty when filtered out.
+     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     */
+    public function replyToFilterProducts( $aProduct, $aDBProductRow, $aAssociatesInfo ) {
+        remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
+        if ( empty( $aProduct ) ) {
+            return array();
+        }
+        if ( $this->isTitleBlocked( $this->getElement( $aProduct, array( 'raw_title' ) ) ) ) {
+            return array();
+        }
+        // Check whether no-image should be skipped.
+        if ( ! $this->isImageAllowed( $this->getElement( $aProduct, array( 'thumbnail_url' ) ) ) ) {
+            return array();
+        }
+        return $aProduct;
+    }
 
     /**
      * Called when the unit has access to the plugin custom database table.
@@ -532,7 +513,5 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         return $_aProduct;
 
     }
-
-
 
 }

@@ -28,7 +28,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         // optional
         'thumbnail_url'     => null,
         'image_set'         => null,    // (string) sub-image set output
-        'title'             => '',
+        'title'             => null,
         'formatted_rating'  => null,    // (string) partial HTML string
         'rating_point'      => null,    // (integer)
         'review_count'      => null,    // (integer)
@@ -357,7 +357,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             foreach( $_oTitleNodes as $_oTitleNode ) {
                 $_sTitle = trim( $_oTitleNode->nodeValue );
                 $_sTitle = preg_replace( '/\s+/', ' ', $_sTitle ); // remove doubled white spaces and line breaks
-                return $_sTitle;
+                return $_sTitle ? $_sTitle : null;
             }
             return null;
         }

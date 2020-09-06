@@ -210,14 +210,17 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          * @param $oXPath
          * @param $oItemNode
          *
-         * @return string
+         * @return string|null      `null` on failure so that it will be resumed with cache.
          */
         private function ___getProductThumbnail( DOMXPath $oXPath, $oItemNode ) {
             $_oSRCs = $oXPath->query( './/img/@src', $oItemNode );
             foreach( $_oSRCs as $_oAttribute ) {
+                if ( ! $_oAttribute->nodeValue ) {
+                    continue;
+                }
                 return $_oAttribute->nodeValue;
             }
-            return '';
+            return null;
         }
 
         /**
@@ -225,18 +228,19 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          * @param $oXPath
          * @param $oItemNode
          *
-         * @return string
+         * @return string|null  null on failure
          */
         private function ___getProductTitle( DOMXPath $oXPath, $oItemNode ) {
             // The class name `p13n-sc-truncated` is given by JavaScript; for plain HTML, `p13n-sc-truncate` is used.
             $_oTitleNodes = $oXPath->query( './/div[contains(@class, "p13n-sc-truncate")]', $oItemNode );
             foreach( $_oTitleNodes as $_oTitleNode ) {
                 $_sTitleAttribute = $_oTitleNode->getAttribute( 'title' ); // for cases of being truncated
+                $_sFallback       = trim( $_oTitleNode->nodeValue );
                 return $_sTitleAttribute
                     ? $_sTitleAttribute
-                    : trim( $_oTitleNode->nodeValue );
+                    : ( $_sFallback ? $_sFallback : null );
             }
-            return '';
+            return null;
         }
 
 

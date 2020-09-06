@@ -22,6 +22,11 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      */
     static public function getProductImageURLFormatted( $sImageURL, $isImageSize, $sLocale='US' ) {
 
+        // 4.2.8 If it is unset, let it be resumed by cache
+        if ( is_null( $sImageURL ) ) {
+            return null;
+        }
+
         // If no product image is found
         if ( ! $sImageURL ) {
             $sImageURL = isset( AmazonAutoLinks_Property::$aNoImageAvailable[ $sLocale ] )
@@ -56,13 +61,18 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
 
     /**
      * Strips HTML tags and sanitizes the product title.
-     * @return  string
+     * @return  string|null
      * @since   unknown 
      * @since   3.10.0  Renamed from `_getTitleSanitized()`
      * @since   3.10.0  Moved from `AmazonAutoLinks_UnitOutput_Base`.
      * @since   3.10.0  Added the `$iTitleLength` parameter.
      */
     static public function getTitleSanitized( $sTitle, $iTitleLength ) {
+
+        // 4.2.8 If the title is unset, let it be resumed with the cache data.
+        if ( is_null( $sTitle ) ) {
+            return null;
+        }
 
         $sTitle = apply_filters( 'aal_filter_unit_product_raw_title', $sTitle );
         
@@ -87,9 +97,13 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductTitle()`.
      * @since       3.10.0      Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-     * @return      string
+     * @return      string|null
      */
     static public function getProductTitleFormatted( array $aProduct, $sFormat ) {
+        // 4.2.8 Allow it to be null so that it will be resumed with caches.
+        if ( ! isset( $aProduct[ 'title' ] ) ) {
+            return null;
+        }
         return str_replace(
             array(
                 "%href%",
