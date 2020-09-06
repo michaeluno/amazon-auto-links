@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.8 =
+- Optimized PA-API requests.
+
 = 4.2.7 - 09/03/2020 =
 - Fixed a bug with the contextual widget that failed to retrieve products due to the incorrect currency and language arguments.
 
