@@ -44,7 +44,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Locale extends AmazonAutoLinks_UnitPostMet
         foreach( $_aFields as $_sFieldID => $_aField ) {
             if ( 'language' === $_sFieldID ) {
                 $_aFields[ 'language' ][ 'label'   ] = AmazonAutoLinks_PAAPI50___Locales::getLanguagesByLocale( $_sLocale );
-                $_aFields[ 'language' ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getLanguagesByLocale( $_sLocale );
+                $_aFields[ 'language' ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
                 continue;
             }
             if ( 'preferred_currency' === $_sFieldID ) {
