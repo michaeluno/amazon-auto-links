@@ -181,7 +181,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $_aMatches        // match container
         );
         return $_biResult && isset( $_aMatches[ 0 ] ) && is_array( $_aMatches[ 0 ] )
-            ? $_aMatches[ 0 ]
+            ? array_unique( $_aMatches[ 0 ] )
             : array();
     }
     
