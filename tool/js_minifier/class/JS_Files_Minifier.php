@@ -3,12 +3,13 @@
  * JS Files Minifier
  *
  * @author      Michael Uno <michael@michaeluno.jp>
- * @copyright   2015 (c) Michael Uno
+ * @copyright   2015-2020 (c) Michael Uno
  * @license     MIT    <http://opensource.org/licenses/MIT>
  */
 if ( ! class_exists( 'PHP_Class_Files_Script_Generator_Base' ) ) {
     require( dirname( dirname( dirname( __FILE__ ) ) ) . '/php_class_files_script_generator/PHP_Class_Files_Script_Generator_Base.php' );
 }
+
 
 /**
  * Creates a minified version of JavaScript files from the given directory.
@@ -129,11 +130,11 @@ class JS_Files_Minifier extends PHP_Class_Files_Script_Generator_Base {
          */
         private function _setUp() {
             
-            $_sPathJSMinPlus = dirname( __FILE__ ) . '/library/JSMinPlus.php';
-            if ( ! file_exists( $_sPathJSMinPlus ) ) {
-                exit( 'Error: The JSMinPlus library could not be located.' );
+            $_sLibraryPath = dirname( __FILE__ ) . '/vendor/autoload.php';
+            if ( ! file_exists( $_sLibraryPath ) ) {
+                exit( 'Error: The library could not be located.' );
             }
-            require( $_sPathJSMinPlus );            
+            require( $_sLibraryPath );
             
         }
         /**
@@ -198,9 +199,11 @@ class JS_Files_Minifier extends PHP_Class_Files_Script_Generator_Base {
     private function _minifyFiles( array $aFiles, array $aOptions, $sHeaderComment )  {
         
         foreach( $aFiles as $_iIndex => $_sFilePath ) {
-            
-            $_sContent = JSMinPlus::minify( file_get_contents( $_sFilePath ) );
-            
+
+            $_oMinifier = Asika\Minifier\MinifierFactory::create('js' );
+            $_oMinifier->addFile( $_sFilePath );
+            $_sContent  = $_oMinifier->minify();
+
             if ( ! $_sContent ) {
                 echo 'The content is empty: ' . $_sFilePath . $aOptions[ 'carriage_return' ];    
             }
