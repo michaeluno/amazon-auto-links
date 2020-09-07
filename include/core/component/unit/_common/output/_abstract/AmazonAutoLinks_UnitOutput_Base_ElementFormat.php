@@ -163,7 +163,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             // 4.2.8
             $_sNativeThumbnailURL         = $_aProduct[ 'thumbnail_url' ];
             $_aProduct[ 'thumbnail_url' ] = isset( $_aProduct[ 'thumbnail_url' ] )
-                ? isset( $_aProduct[ 'thumbnail_url' ] )
+                ? $_aProduct[ 'thumbnail_url' ]
                 : $this->getElement( $_aDBProductRow, array( 'images', 'main', 'MediumImage' ), '' );
             if ( $_sNativeThumbnailURL !== $_aProduct[ 'thumbnail_url' ] ) {
                 $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );

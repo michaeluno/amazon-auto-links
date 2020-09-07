@@ -43,13 +43,13 @@ class AmazonAutoLinks_UnitPostMetaBox_Locale extends AmazonAutoLinks_UnitPostMet
         $_aFields = $this->oUtil->getElementAsArray( $aAllFields, array( '_default' ) );
         foreach( $_aFields as $_sFieldID => $_aField ) {
             if ( 'language' === $_sFieldID ) {
-                $_aFields[ 'language' ][ 'label'   ] = AmazonAutoLinks_PAAPI50___Locales::getLanguagesByLocale( $_sLocale );
-                $_aFields[ 'language' ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
+                $_aFields[ $_sFieldID ][ 'label'   ] = AmazonAutoLinks_PAAPI50___Locales::getLanguagesByLocale( $_sLocale );
+                $_aFields[ $_sFieldID ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
                 continue;
             }
             if ( 'preferred_currency' === $_sFieldID ) {
-                $_aFields[ 'preferred_currency' ][ 'label' ]   = AmazonAutoLinks_PAAPI50___Locales::getCurrenciesByLocale( $_sLocale );
-                $_aFields[ 'preferred_currency' ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
+                $_aFields[ $_sFieldID ][ 'label' ]   = AmazonAutoLinks_PAAPI50___Locales::getCurrenciesByLocale( $_sLocale );
+                $_aFields[ $_sFieldID ][ 'default' ] = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
                 continue;
             }
         }
