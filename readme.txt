@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
-Stable tag:         4.2.7
+Stable tag:         4.2.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,7 +322,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.2.8 =
+= 4.2.8 - 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
 - Fixed a bug that the default value of the `Language` unit option was not set properly.
 - Fixed a bug that images and titles failed to show with the embed unit type in some cases.
