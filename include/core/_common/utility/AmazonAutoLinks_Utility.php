@@ -22,6 +22,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @return  string
      * @since   4.3.0
      * @see https://stackoverflow.com/questions/1949345/how-can-i-get-the-full-string-of-php-s-gettraceasstring/6076667#6076667
+     * @todo Use the framework one.
      */
     static public function getStackTrace( Exception $oException, $iSkip=0 ) {
 

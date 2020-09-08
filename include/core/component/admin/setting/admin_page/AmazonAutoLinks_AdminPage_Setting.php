@@ -34,7 +34,9 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
      * @return      void
      */
     public function replyToLoadPage( $oFactory ) {
-
+AmazonAutoLinks_Debug::log( $oFactory->oProp->getCurrentPageSlug() );
+$_oException = new Exception();
+AmazonAutoLinks_Debug::log( $_oException->getTraceAsString() );
         new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
 
         // Tabs

@@ -44,6 +44,10 @@
 }
 
 
+.amazon-auto-links-fields.repeatable .amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container {
+	width: auto;
+}
+
 
 /* Debug output */
 pre.dump-array {

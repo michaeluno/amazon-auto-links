@@ -334,6 +334,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the theme button option for the `Select Button` option.
 - Added `target="_blank"` to the unit view links to open the link in a new tab
 - Added the `Test` page and `Debug Log` tab which appear when the site debug mode is turned on.
+- Fixed an issue that the setting form could not be submitted after an hour passed.
+- Fixed a bug that caused overhead in `admin-ajax.php`.
+- Refined some setting form elements by updating Admin Page Framework.
 - Refined the Error Log screen.
 - Minified JavaScript scripts.
 - Tweaked the style of setting form fields.
