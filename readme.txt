@@ -342,7 +342,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
 
-= 4.2.8 =
+= 4.2.8 – 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
 - Fixed a bug that the default value of the `Language` unit option was not set properly.
 - Fixed a bug that images and titles failed to show with the embed unit type in some cases.
