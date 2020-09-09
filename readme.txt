@@ -342,6 +342,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Minified JavaScript scripts.
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
+- Optimized the embed unit type.
 
 = 4.2.8 – 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
