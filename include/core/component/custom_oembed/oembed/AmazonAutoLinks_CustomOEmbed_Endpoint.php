@@ -43,7 +43,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
     public function replyToPrintOEmbedInformation() {
 
         $_oOption           = AmazonAutoLinks_Option::getInstance();
-
+        $_sNonce            = wp_create_nonce( 'aal_custom_oembed' );
         $_sProviderSiteURL  = $_oOption->get( array( 'custom_oembed', 'external_provider' ), '' );
         $_sProviderEndpoint = filter_var( $_sProviderSiteURL, FILTER_VALIDATE_URL )
             ? untrailingslashit( $_sProviderSiteURL ) . '/amazon-auto-links/embed/'
@@ -54,7 +54,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
                 // 'url'    => urlencode( $_GET[ 'url' ] ), // the key is reserved by the core for oEmbed discovery routine and when used, it causes recursive requests.
                 'uri'    => urlencode( $_GET[ 'url' ] ),
             ),
-            $_sProviderEndpoint
+            $_sProviderEndpoint . "#secret={$_sNonce}" // referred by wp-embed.js and wp-embed-template-lite.js
         );
         $_aAttributes = array(
             'src'           => esc_url( $_sIFrameURL ),
@@ -65,6 +65,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
             'marginwidth'   => '0',
             'marginheight'  => '0',
             'class'         => 'wp-embedded-content',
+            'data-secret'   => $_sNonce,       // without this wp-embed.js adds the `src` attribute and it causes to load the frame source again which results in calling the unit output function twice in a very short period of time which causes duplicate API requests.
         );
         $_sIFrame = "<iframe " . AmazonAutoLinks_Utility::getAttributes( $_aAttributes ) . "></iframe>";
         $_aData = array(

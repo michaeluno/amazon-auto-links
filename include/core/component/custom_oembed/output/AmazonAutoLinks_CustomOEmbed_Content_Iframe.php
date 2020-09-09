@@ -39,7 +39,6 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      */
     public function replyToLoadFrame() {
 
-
         $this->___printHeader();
         $this->___printContent();
         $this->___printFooter();
