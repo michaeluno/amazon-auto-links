@@ -62,7 +62,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
 
         self::$iLegibleStringCharacterLimit = PHP_INT_MAX;
         self::$iLegibleArrayDepthLimit = PHP_INT_MAX;
-        parent::log( $mValue, $sFilePath, $iTrace + 4, $iStringLengthLimit, $iArrayDepthLimit );
+        parent::log( $mValue, $sFilePath, $iTrace + 1, $iStringLengthLimit, $iArrayDepthLimit );
 
     }
 
