@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.2.9 =
+- Fixed a bug with the embed unit type that iframe sources were loaded twice.
+
 = 4.2.8 - 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
 - Fixed a bug that the default value of the `Language` unit option was not set properly.
