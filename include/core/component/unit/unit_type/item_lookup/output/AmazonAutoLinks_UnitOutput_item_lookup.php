@@ -122,14 +122,18 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      */
     protected function getAPIParameterArray( $sOperation='GetItems', $iItemPage=null ) {
 
-        $_aUnitOptions = $this->oUnitOption->get()
-            + self::$aStructure_APIParameters;
-        $_aPayload = array(
+        $_aUnitOptions = $this->oUnitOption->get() + self::$aStructure_APIParameters;
+        return array(
             'Operation'             => 'ItemLookup' === $sOperation
-                ? 'GetItems' : $sOperation,
+                ? 'GetItems'
+                : $sOperation,
             'Condition'             => 'All' === $_aUnitOptions[ 'Condition' ]
-                ? 'Any' : $_aUnitOptions[ 'Condition' ],    // (optional) Used | Collectible | Refurbished, Any
-            'ItemIds'               => explode( ',', $_aUnitOptions[ 'ItemId' ] ),
+                ? 'Any'
+                : $_aUnitOptions[ 'Condition' ],    // (optional) Used | Collectible | Refurbished, Any
+            'ItemIds'               => array_filter( array_merge(
+                $_aUnitOptions[ 'ItemIds' ],
+                explode( ',', $_aUnitOptions[ 'ItemId' ] )
+            ) ),
             'Merchant'              => 'Amazon' === $this->oUnitOption->get( 'MerchantId' )
                 ? 'Amazon'
                 : null,
@@ -141,8 +145,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
                 : null,
             'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );
-        return $_aPayload;
-        
+
     }
     
 }

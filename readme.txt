@@ -323,6 +323,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.2.9 =
+- Optimized the `embed` unit type to display elements as much as possible in the first load when the API keys are set.
 - Fixed a bug with the embed unit type that iframe sources were loaded twice.
 
 = 4.2.8 - 09/08/2020 =

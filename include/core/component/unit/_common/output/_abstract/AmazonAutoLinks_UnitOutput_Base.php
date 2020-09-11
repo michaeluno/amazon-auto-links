@@ -40,7 +40,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * Stores a product database table object.
      */
     public $oProductTable;
-    
+
+    public $bIsSSL;
+
     /**
      * Stores a product filter object.
      */
