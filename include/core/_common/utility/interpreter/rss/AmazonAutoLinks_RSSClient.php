@@ -20,9 +20,9 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Supported sort order slugs.
      * 'date_ascending'
-     * 'date_decending' (default) 
+     * 'date_descending' (default)
      * 'title_ascending'
-     * 'title_decending'
+     * 'title_descending'
      * 'random' 
      */
     public $sSortOrder = 'date';

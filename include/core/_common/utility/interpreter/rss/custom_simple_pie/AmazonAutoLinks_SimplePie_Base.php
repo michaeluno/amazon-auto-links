@@ -13,8 +13,8 @@
 if ( version_compare( get_bloginfo( 'version' ) , '3.5', "<" ) ) {    
 
     abstract class AmazonAutoLinks_SimplePie_Base extends AmazonAutoLinks_SimplePie_Base_Base {
-        
-        public function sort_items( $a, $b ) {
+
+        public static function sort_items($a, $b ) {
 
             // Sort 
             // by date
