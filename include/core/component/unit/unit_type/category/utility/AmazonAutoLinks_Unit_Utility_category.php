@@ -28,9 +28,9 @@ class AmazonAutoLinks_Unit_Utility_category extends AmazonAutoLinks_Unit_Utility
         $_sSetURL   = $_oEncrypt->encode( $sCategoryURL );
         $_sSetBread = $_oEncrypt->encode( $sBreadcrumb );
         return "<label for='cb-{$_sName}'>"
-                . "<input type='checkbox' name='{$sInputName}[{$_sName}][name]'        value='{$_sName}' i   id='cb-{$_sName}' />"
-                . "<input type='hidden'   name='{$sInputName}[{$_sName}][breadcrumb]'  value='{$_sSetBread}' id='cb-{$_sName}' />"
-                . "<input type='hidden'   name='{$sInputName}[{$_sName}][page_url]'    value='{$_sSetURL}'   id='cb-{$_sName}' />"
+                . "<input type='checkbox' name='{$sInputName}[{$_sName}][name]'        value='{$_sName}' i   id='cb-name-{$_sName}' />"
+                . "<input type='hidden'   name='{$sInputName}[{$_sName}][breadcrumb]'  value='{$_sSetBread}' id='cb-breadcrumb-{$_sName}' />"
+                . "<input type='hidden'   name='{$sInputName}[{$_sName}][page_url]'    value='{$_sSetURL}'   id='cb-page-url-{$_sName}' />"
                 . "<a href='{$sPageURL}' data-url='" . esc_url( $sCategoryURL ) . "'>{$sBreadcrumb}</a>"
             . "</label>";
     }
