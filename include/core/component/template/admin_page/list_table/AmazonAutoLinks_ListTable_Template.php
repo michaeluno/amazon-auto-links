@@ -29,6 +29,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
 
     /**
      * Sets up properties and hooks.
+     *
+     * @param array $aData  The data to list.
      */
     public function __construct( array $aData ){
 
@@ -145,40 +147,31 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         );
         
     }
-        
+
     /**
-     * 
-     * @callback        filter      column_{$column_title}
-     */         
+     * @param array $aItem
+     * @callback add_filter column_{$column_title}
+     * @return string
+     */
     public function column_thumbnail( $aItem ) {
         
-        $_sThumbnailPath = $this->_getThumbnailPath( $aItem );
+        $_sThumbnailPath = $this->___getThumbnailPath( $aItem );
         if ( ! file_exists( $_sThumbnailPath ) ) {
             return '';
         }
-        $_sImageURL = esc_url(
-            AmazonAutoLinks_WPUtility::getSRCFromPath( $_sThumbnailPath )
-        );
-        $_sID = esc_attr( md5( $aItem[ 'id' ] ) );
+        $_sImageURL = esc_url( AmazonAutoLinks_WPUtility::getSRCFromPath( $_sThumbnailPath ) );
+        $_sID       = esc_attr( md5( $aItem[ 'id' ] ) );
         return "<a href='{$_sImageURL}' data-lightbox='{$_sID}' data-title='" . esc_attr( $aItem[ 'name' ] ) . "'>"
                 . "<img src='{$_sImageURL}' style='max-width:80px; max-height:80px;' />"
             . "</a>";
-        return "<a class='template-thumbnail' href='#thumb'>"
-                . "<img src='{$_sImageURL}' style='max-width:80px; max-height:80px;' />"
-                . "<span>"
-                    . "<div>"
-                        . "<img src='{$_sImageURL}' /><br />"
-                        . $aItem[ 'name' ]
-                    . "</div>"
-                . "</span>"
-            . "</a>";       
+
     }
         /**
          * @since       3.0.3
          * @return      string
          */
-        private function _getThumbnailPath( $aItem ) {
-            
+        private function ___getThumbnailPath( $aItem ) {
+
             if ( isset( $aItem[ 'thumbnail_path' ] ) ) {
                 return $aItem[ 'thumbnail_path' ];
             }

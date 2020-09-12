@@ -13,6 +13,7 @@
  *
  * @remark      The class name uses double underscores instead of triple underscores to indicate that this is a delegation class.
  * @since       3.5.0
+ * @deprecated
  */
 class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 

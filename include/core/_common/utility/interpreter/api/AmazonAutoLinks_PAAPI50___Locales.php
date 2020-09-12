@@ -16,7 +16,7 @@
 class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @var array
+     * @var string[]
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
      * @remark  The CN locale is missing
      */
@@ -62,6 +62,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'NL'        => 'webservices.amazon.nl',         // 4.1.0+
     );
 
+    /**
+     * @var string[]
+     */
     public $aMarketPlaces = array(
         'AU'        => 'www.amazon.com.au',
         'BR'        => 'www.amazon.com.br',
@@ -81,6 +84,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'SG'        => 'www.amazon.sg',
         'NL'        => 'www.amazon.nl',     // 4.1.0
     );
+    /**
+     * @var string[]
+     */
     static public $aDefaultLanguages = array(
         'AU'        => 'en_AU', // English - AUSTRALIA
         'BR'        => 'pt_BR', // Portuguese - BRAZIL
@@ -100,6 +106,9 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'SG'        => 'en_SG', // English - SINGAPORE
         'NL'        => 'nl_NL', // 4.1.0 Dutch - NETHERLANDS
     );
+    /**
+     * @var string[]
+     */
     static public $aDefaultCurrencies = array(
         'AU'        => 'AUD',   // Australian Dollar
         'BR'        => 'BRL',   // Brazilian Real
@@ -120,6 +129,10 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         'NL'        => 'EUR',   // 4.1.0+ Euro
     );
 
+    /**
+     * @param string $sLocale
+     * @return string
+     */
     static public function getDefaultLanguageByLocale( $sLocale ) {
         if ( isset( self::$aDefaultLanguages[ $sLocale ] ) ) {
             return self::$aDefaultLanguages[ $sLocale ];
@@ -136,6 +149,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      *
      * @since   3.9.0   Made it compatible with PA-API 5
      * @see     https://webservices.amazon.com/paapi5/documentation/locale-reference.html
+     * @param   string $sLocale
+     * @return  array
      */
     static public function getLanguagesByLocale( $sLocale ) {
         switch ( strtoupper( $sLocale ) ) {
@@ -234,9 +249,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @param $sLocale
-     *
      * @return string
-     * @since   3.10.0
+     * @since 3.10.0
      */
     static public function getDefaultCurrencyByLocale( $sLocale ) {
 
@@ -256,6 +270,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      *
      * @since   3.9.0   Made it compatible with PA-API 5
      * @see     https://webservices.amazon.com/paapi5/documentation/locale-reference.html
+     * @param   string  $sLocale
+     * @return  array
      */
     static public function getCurrenciesByLocale( $sLocale ) {
         switch ( strtoupper( $sLocale ) ) {
@@ -408,20 +424,10 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         return $_aLabels;
     }
 
-//    static public function getMarketPlaceLabels() {
-//        $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
-//        $_aLabels  = array();
-//        foreach( $_oLocales->aMarketPlaces as $_sKey => $_sHost ) {
-//            $_aLabels[ $_sKey ] = $_sKey . ' - ' . $_sHost;
-//        }
-//        return $_aLabels;
-//    }
-
     /**
-     * @param $sLocale
-     *
-     * @return string   THe market-place URL.
-     * @since   3.9.1
+     * @param  string $sLocale
+     * @return string THe market-place URL.
+     * @since  3.9.1
      */
     static public function getMarketPlaceByLocale( $sLocale ) {
         $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
@@ -432,29 +438,5 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             : $_sScheme . $_oLocales->aMarketPlaces[ 'US' ];    // default
     }
 
-    /**
-     * @return array
-     * @since   3.9.1
-     * @deprecated 4.1.0    Not used in anywhere
-     */
-/*    static public function getCountryLabels() {
-        return array(
-            'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
-            'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
-            'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
-            'DE' => 'DE - ' . __( 'Germany', 'amazon-auto-links' ),
-            'IT' => 'IT - ' . __( 'Italy', 'amazon-auto-links' ),
-            'JP' => 'JP - ' . __( 'Japan', 'amazon-auto-links' ),
-            'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
-            'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
-            'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
-            'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
-            'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
-            'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
-            'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ), // 3.5.5+
-            'TR' => 'TR - ' . __( 'Turkey', 'amazon-auto-links' ), // 3.9.1
-            'AE' => 'AE - ' . __( 'United Arab Emirates', 'amazon-auto-links' ), // 3.9.1
-        );
-    }*/
 
 }
