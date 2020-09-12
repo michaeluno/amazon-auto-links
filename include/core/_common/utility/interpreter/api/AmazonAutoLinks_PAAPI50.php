@@ -148,16 +148,21 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
 
         // Error Handling
         if ( is_wp_error( $_aoResponse ) ) {
+            /**
+             * @var WP_Error $_oWPError
+             */
+            $_oWPError = $_aoResponse;
             return array(
                 'Error' => array(
-                    'Message' => $_aoResponse->get_error_message(),
-                    'Code'    => $_aoResponse->get_error_code()
+                    'Message' => $_oWPError->get_error_message(),
+                    'Code'    => $_oWPError->get_error_code()
                 )
             );
         }
 
         $_sHTTPStatusError = $this->___getHTTPStatusError( $_aoResponse );
         if ( $_sHTTPStatusError ) {
+            $_sError    = '';
             $_sHTTPBody = wp_remote_retrieve_body( $_aoResponse );
             if ( $this->isJSON( $_sHTTPBody ) ) {
                 $_aResponse = json_decode( $_sHTTPBody, true );
