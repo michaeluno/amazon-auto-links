@@ -1,0 +1,5 @@
+- Optimized PA-API requests.
+- Fixed CSS rules that were possibly not taking effect.
+- Fixed duplicated id attribute values in HTML mark-ups in the category selection screen.
+- Fixed an incompatibility issue with PHP v5.3.x or below that caused a syntax error.
+- Fixed a mark-up error in an unit price disclaimer output element.

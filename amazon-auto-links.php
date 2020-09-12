@@ -5,7 +5,7 @@
  *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *    Author:         Michael Uno (miunosoft)
  *    Author URI:     http://michaeluno.jp
- *    Version:        4.2.9
+ *    Version:        4.2.10b01
  *    Text Domain:    amazon-auto-links
  *    Domain Path:    /language
  */
@@ -18,7 +18,7 @@
  */
 class AmazonAutoLinks_Registry_Base {
  
-    const VERSION        = '4.2.9';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION        = '4.2.10b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME           = 'Amazon Auto Links';
     const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
@@ -233,7 +233,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * @return      string
      * @since       ?
-     * @since       3.9.0       Added the `$bAbsolute` parameter.
+     * @since       3.9.0   Added the `$bAbsolute` parameter.
+     * @param       string  $sPath
+     * @param       boolean $bAbsolute
      */
     public static function getPluginURL( $sPath='', $bAbsolute=false ) {
         $_sRelativePath = $bAbsolute
