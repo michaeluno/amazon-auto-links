@@ -5,7 +5,7 @@
 Amazon Auto Links is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.
 
 ## Screenshots ##
-Coming soon..
+Coming soon...
 
 ## Installation ##
 

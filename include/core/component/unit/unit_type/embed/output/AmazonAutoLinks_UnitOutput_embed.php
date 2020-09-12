@@ -62,7 +62,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 //                if ( empty( $_aProduct ) ) {
 //                    continue;
 //                }
-                $_aProducts[] = $_aProduct;
+                $_aProducts[ $_sASIN ] = $_aProduct;
             }
 
         }
@@ -70,9 +70,46 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
         $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
         $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
+
+        $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ) );
+        $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
         return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
     }
+        /**
+         * @param array $aProductsByScraping
+         * @param array $aProductsByPAAPI
+         * @since 4.2.9
+         * @return array
+         */
+        private function ___getProductsMerged( array $aProductsByScraping, array $aProductsByPAAPI ) {
+            foreach( $aProductsByPAAPI as $_aProduct ) {
+                $_sASIN = $this->getElement( $_aProduct, array( 'ASIN' ) );
+                if ( ! isset( $aProductsByScraping[ $_sASIN ] ) ) {
+                    continue;
+                }
+                $aProductsByScraping[ $_sASIN ] = $_aProduct + $aProductsByScraping[ $_sASIN ];
+            }
+            return $aProductsByScraping;
+        }
+        /**
+         * @param array $aASINs A numerically indexed array of ASINs.
+         * @since 4.2.9
+         * @return array
+         */
+        private function ___getProductsByPAAPI( array $aASINs ) {
+
+            // If the API keys are set, perform an API request
+            if ( ! $this->oOption->isAPIKeySet() ) {
+                return array();
+            }
+            $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup(
+                array( 'ItemIds' => $aASINs ) + $this->oUnitOption->get()
+            );
+            return $_oUnit->fetch();
+
+        }
+
         private function ___getProduct( $sURL, $sASIN, $sAssociateID ) {
 
             $_sDomain      = parse_url( $sURL, PHP_URL_SCHEME ) . '://' . parse_url( $sURL, PHP_URL_HOST );

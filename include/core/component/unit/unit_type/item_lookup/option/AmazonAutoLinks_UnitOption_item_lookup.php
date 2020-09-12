@@ -32,6 +32,9 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
         'Operation'     => 'ItemLookup',
         'SearchIndex'   => 'All',
 
+        // For PA-API 5
+        'ItemIds'       => array(),
+
         // Advanced fields
         'MerchantId'    => 'All',
         'Condition'     => 'Any',

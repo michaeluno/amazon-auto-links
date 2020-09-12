@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.2.8
+Stable tag:         4.2.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -343,8 +343,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
 - Optimized the embed unit type.
-
-= 4.2.8 – 09/08/2020 =
+= 4.2.9 - 09/12/2020 =
+- Optimized the `embed` unit type to display elements as much as possible in the first load when the API keys are set.
+- Fixed a bug with the embed unit type that iframe sources were loaded twice.
+= 4.2.8 - 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
 - Fixed a bug that the default value of the `Language` unit option was not set properly.
 - Fixed a bug that images and titles failed to show with the embed unit type in some cases.
@@ -357,7 +359,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that Item Look-up and Contextual unit types could not display product titles, which started since v4.0.0.
 
 = 4.2.5 – 08/26/2020 =
-- Fixed an incompatibility issue with PHP 5.4.x or below regarding the empty() language construct.
+- Fixed an incompatibility issue with PHP 5.4.x or below regarding the `empty()` language construct.
 
 = 4.2.4 - 08/24/2020 =
 - Tweaked styling of `List`, `Category`, `Search` templates.
