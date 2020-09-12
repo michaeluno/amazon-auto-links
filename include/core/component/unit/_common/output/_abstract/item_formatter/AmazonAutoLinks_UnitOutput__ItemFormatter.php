@@ -184,7 +184,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                         . "<span class='amazon-disclaimer-tooltip-content'>"
                             . "<span class='amazon-disclaimer-tooltip-content-text'>"   // needed for widget CSS
                                 . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
-                            . "</span'>"
+                            . "</span>"
                         . "</span>"
                     . "</a>";
             }
