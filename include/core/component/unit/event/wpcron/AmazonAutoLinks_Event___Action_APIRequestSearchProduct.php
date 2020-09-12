@@ -133,6 +133,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProduct extends AmazonAutoL
         protected function _setProductData( array $aAPIResponseProductData, $sASIN, $sLocale, $iCacheDuration, $bForceRenew, $sItemFormat ) {
              
             // Check if a customer review exists in the API response.
+            $_bCustomerReviewExists = false;
 /*            $_bCustomerReviewExists = $this->___hasCustomerReview( $aAPIResponseProductData );
 
             if ( $_bCustomerReviewExists ) {
