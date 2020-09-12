@@ -139,14 +139,18 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
     /**
      * Validates the submitted form data.
      * 
-     * @since       3
+     * @since 3
+     * @param array $aInputs
+     * @param array $aOldInputs
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param array $aSubmitInfo
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
 
-        $_aCheckedUnitTypes = array_filter( $aInput[ 'unit_types' ] );
+        $_aCheckedUnitTypes = array_filter( $aInputs[ 'unit_types' ] );
         if ( empty( $_aCheckedUnitTypes ) ) {
             $_bVerified = false;
             $_aErrors[ $this->sSectionID ][ 'unit_types' ] = __( 'At least one item needs to be checked.', 'amazon-auto-links' );
@@ -155,22 +159,22 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
         $_oOption = AmazonAutoLinks_Option::getInstance();  
         if ( ! $_oOption->isAdvancedAllowed() ) {
             $oAdminPage->setSettingNotice( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage() );
-            return $aOldInput;
+            return $aOldInputs;
         }
         
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
+            return $aOldInputs;
         }
         
         $_aUnitTypes = array_keys( 
-            array_filter( $aInput[ 'unit_types' ] ) // drop non-true items
+            array_filter( $aInputs[ 'unit_types' ] ) // drop non-true items
         );
-        $aInput      = $this->_getSanitizedInputs( $aInput );
+        $aInputs     = $this->___getSanitizedInputs( $aInputs, $aOldInputs );
        
-        $_iScheduled = $this->_scheduleTasks( $_aUnitTypes, $aInput );
+        $_iScheduled = $this->___scheduleTasks( $_aUnitTypes, $aInputs );
         
         $oAdminPage->setSettingNotice( 
             sprintf( 
@@ -181,28 +185,28 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
                 ? 'updated'
                 : 'error'
         );       
-        return $aInput;     
+        return $aInputs;     
         
     }
     
         /**
          * @return      array
          */
-        private function _getSanitizedInputs( $aInput ) {
+        private function ___getSanitizedInputs( $aInputs, $aOldInputs ) {
             
             $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aInputs, $aOldInputs );
-            $aInputs = $_oItemFormatValidator->get();        
+            $aInputs               = $_oItemFormatValidator->get();
                                 
             // Drop unnecessary items.
             unset(
-                $aInput[ '_submit_convert' ],
-                $aInput[ '_show_unit_counts' ],
-                $aInput[ '_scheduled_tasks' ],
-                $aInput[ '_separator' ],
-                $aInput[ 'unit_types' ]
+                $aInputs[ '_submit_convert' ],
+                $aInputs[ '_show_unit_counts' ],
+                $aInputs[ '_scheduled_tasks' ],
+                $aInputs[ '_separator' ],
+                $aInputs[ 'unit_types' ]
             );
-                          
-            return $aInput;
+
+            return $aInputs;
             
         }
         
@@ -210,26 +214,25 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
          * 
          * @return      integer
          */
-        private function _scheduleTasks( array $aUnitTypes, array $aInput ) {
+        private function ___scheduleTasks( array $aUnitTypes, array $aInputs ) {
             
             $_iScheduledTasks = 0;
-            $_aUnitIDs = $this->_getUnitIDsByUnitTypes(
-                $aUnitTypes
-            );
+            $_aUnitIDs        = $this->_getUnitIDsByUnitTypes( $aUnitTypes );
             foreach( $_aUnitIDs as $_iUnitID ) {
-                $_bScheduled = $this->_scheduleEachTask( $_iUnitID, $aInput );
+                $_bScheduled = $this->___scheduleEachTask( $_iUnitID, $aInputs );
                 if ( $_bScheduled ) {
                     $_iScheduledTasks++;
                 }
             }
             return $_iScheduledTasks;
+
         }
             /**
              * 
              * @action      schedule        aal_action_event_convert_template_options
              * @return      boolean
              */
-            private function _scheduleEachTask( $iUnitID, $aInput ) {
+            private function ___scheduleEachTask( $iUnitID, $aInput ) {
 
                 static $_iSecondOffset = 0;
                 
