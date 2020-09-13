@@ -80,13 +80,13 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             : $_aKeywords[ 0 ];
         $_aPayload    = array(
                 'Keywords'      => $_sKeyword,
-    //                'ItemPage'      => 1,
+                // 'ItemPage'      => 1,
                 'ItemCount'     => 1,
                 'Operation'     => 'SearchItems',
-    //                'ItemIds' => array( '2016212594', ),
-    //                'Operation' => 'GetItems',
-//'Operation' => 'GetBrowseNodes',
-//"BrowseNodeIds" => array( '3040', '3045' ),
+                // 'ItemIds' => array( '2016212594', ),
+                // 'Operation' => 'GetItems',
+                // 'Operation' => 'GetBrowseNodes',
+                // "BrowseNodeIds" => array( '3040', '3045' ),
                 // 'LanguagesOfPreference' => array( 'en_US', ),
                 'Resources'     => array(),
             ) + $this->___aPayload;
@@ -95,9 +95,8 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
 
         $this->___sRequestType = $_sPrevRequestType;
         if ( isset( $_aResponse[ 'Error' ] ) ) {
-            $_sError = $this->getElement( $_aResponse, array( 'Error', 'Code' ) )
+            return $this->getElement( $_aResponse, array( 'Error', 'Code' ) )
                 . ' ' . $this->getElement( $_aResponse, array( 'Error', 'Message' ) );
-            return $_sError;
         }
         return true;
 
@@ -114,6 +113,9 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
      * @remark      Accessed publicly
      * @since       3.9.0
      * @return      array
+     * @param       array   $aPayload
+     * @param       integer $iCacheDuration
+     * @param       boolean $bForceRenew
      */
     public function request( array $aPayload, $iCacheDuration=86400, $bForceRenew=false ) {
 
@@ -125,10 +127,10 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             $aPayload,
             $this->___sHTTPMethod
         );
-        $_sRequestURI    = $_oAPIHeader->getRequestURI();
-        $_aConstructorParams = $this->___aConstructorParameters;
+        $_sRequestURI             = $_oAPIHeader->getRequestURI();
+        $_aConstructorParams      = $this->___aConstructorParameters;
         $_aConstructorParams[ 5 ] = $this->___sRequestType;
-        $_aHTTPArguments = array(
+        $_aHTTPArguments          = array(
             'method'    => $this->___sHTTPMethod,
             'headers'   => $_oAPIHeader->getHeaders(),
             'body'      => $_oAPIHeader->getPayload(),
@@ -138,7 +140,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             'api_parameters'         => $aPayload,
         );
 
-        $_oAPIRequestCache      = new AmazonAutoLinks_PAAPI50___Cache(
+        $_oAPIRequestCache        = new AmazonAutoLinks_PAAPI50___Cache(
             $_sRequestURI,
             $_aHTTPArguments,
             $iCacheDuration,
@@ -149,16 +151,21 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
 
         // Error Handling
         if ( is_wp_error( $_aoResponse ) ) {
+            /**
+             * @var WP_Error $_oWPError
+             */
+            $_oWPError = $_aoResponse;
             return array(
                 'Error' => array(
-                    'Message' => $_aoResponse->get_error_message(),
-                    'Code'    => $_aoResponse->get_error_code()
+                    'Message' => $_oWPError->get_error_message(),
+                    'Code'    => $_oWPError->get_error_code()
                 )
             );
         }
 
         $_sHTTPStatusError = $this->___getHTTPStatusError( $_aoResponse );
         if ( $_sHTTPStatusError ) {
+            $_sError    = '';
             $_sHTTPBody = wp_remote_retrieve_body( $_aoResponse );
             if ( $this->isJSON( $_sHTTPBody ) ) {
                 $_aResponse = json_decode( $_sHTTPBody, true );

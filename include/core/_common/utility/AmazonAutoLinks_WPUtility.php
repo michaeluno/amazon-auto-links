@@ -260,20 +260,14 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     /**
      * Returns an array of associated taxonomies of the given post.
      * 
-     * @param            string|integer|object            $isoPost            Either the post ID or the post object.
+     * @param       string|integer|object            $isoPost            Either the post ID or the post object.
+     * @return      array
      */
     public static function getPostTaxonomies( $isoPost ) {
-        
-        if ( is_integer( $isoPost ) || is_string( $isoPost ) ) {
-            $_oPost = get_post( $isoPost );
-        } else if ( is_object( $isoPost ) ) {
-            $_oPost = $isoPost;
-        }
-        return ( array ) get_object_taxonomies( 
-            $_oPost, 
-            'objects'
-        );
-
+        $_oPost = get_post( $isoPost );
+        return is_object( $_oPost )
+            ? ( array ) get_object_taxonomies( $_oPost, 'objects' )
+            : array();
     }    
     
     /**
@@ -299,6 +293,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      */
     static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
+        $aFormatAllowedTags = array();
         foreach( $aAllowedTags as $sTag ) {
             $aFormatAllowedTags[ $sTag ] = array();    // activate the inline style attribute.
         }

@@ -26,7 +26,7 @@ class AmazonAutoLinks_Proxy_Fetch_Base extends AmazonAutoLinks_PluginUtility {
         $_sOutput   = strip_tags( $_sResponse );
         $_aProxies  = preg_split( '/[\r\n]+/i', $_sOutput, -1, PREG_SPLIT_NO_EMPTY );
         if ( ! is_array( $_aProxies ) ) {
-            return [];
+            return array();
         }
         $_aProxies = array_unique( $_aProxies );
         foreach( $_aProxies as $_iIndex => $_sProxy ) {

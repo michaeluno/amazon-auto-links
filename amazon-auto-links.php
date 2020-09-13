@@ -247,7 +247,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * @return      string
      * @since       ?
-     * @since       3.9.0       Added the `$bAbsolute` parameter.
+     * @since       3.9.0   Added the `$bAbsolute` parameter.
+     * @param       string  $sPath
+     * @param       boolean $bAbsolute
      */
     public static function getPluginURL( $sPath='', $bAbsolute=false ) {
         $_sRelativePath = $bAbsolute

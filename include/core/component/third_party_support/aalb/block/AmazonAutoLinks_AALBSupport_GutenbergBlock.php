@@ -85,7 +85,7 @@ class AmazonAutoLinks_AALBSupport_GutenbergBlock extends AmazonAutoLinks_WPUtili
          */
         private function ___isPluginActive( $sPluginSlug ) {
             if ( ! function_exists('is_plugin_active' ) ) {
-                @include( ABSPATH . '/wp-admin/includes/plugin.php' );
+                @include( ABSPATH . 'wp-admin/includes/plugin.php' );
             }
             return is_plugin_active( $sPluginSlug );
         }

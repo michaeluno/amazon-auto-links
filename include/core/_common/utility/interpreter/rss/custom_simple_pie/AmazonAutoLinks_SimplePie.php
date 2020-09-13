@@ -9,7 +9,8 @@
  */
 
 /**
- * 
+ * @todo    Remove the files.
+ * @deprecated  Not used anymore.
  */ 
 class AmazonAutoLinks_SimplePie extends AmazonAutoLinks_SimplePie_Base {
         

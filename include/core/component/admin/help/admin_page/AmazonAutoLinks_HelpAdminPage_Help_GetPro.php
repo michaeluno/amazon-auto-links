@@ -141,22 +141,22 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
         <p><?php    _e( 'Get pro for unlimited units so that you can put ads as many as you want.', 'amazon-auto-links' ); ?></p>        
         
         <?php 
-            $this->_printBuyNowButton(); 
+            $this->___printBuyNowButton();
         
     }
-        private function _printBuyNowButton() {    
+        private function ___printBuyNowButton() {
         
-            $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/';
-            $_sLang = defined( 'WPLANG' ) 
-                ? WPLANG
-                : 'en';
+            $_sURL     = 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/';
+            $_sLang    = defined( 'WPLANG' ) ? WPLANG : 'en';
+            $_sMessage = __( 'Get Now!', 'amazon-auto-links' );
             ?>
             <div class="get-now-button">
-                <a target="_blank" href="<?php echo esc_url( $_sLink ); ?>?lang=<?php echo $_sLang; ?>" title="<?php _e( 'Get Now!', 'amazon-auto-links' ) ?>">
-                    <img src="<?php echo AmazonAutoLinks_Registry::getPluginURL( 'asset/image/buynowbutton.gif' ); ?>" />
+                <a target="_blank" href="<?php echo esc_url( $_sURL ); ?>?lang=<?php echo $_sLang; ?>" title="<?php echo esc_attr( $_sMessage ); ?>">
+                    <img src="<?php echo AmazonAutoLinks_Registry::getPluginURL( 'asset/image/buynowbutton.gif' ); ?>" alt="<?php echo esc_attr( $_sMessage ); ?>" />
                 </a>
             </div>    
             <?php
+
         }
         
             

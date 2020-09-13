@@ -24,7 +24,11 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
     /**
      * Sets up properties.
      *
-     * @param       array   $aConstructorArguments      Parameters passed to the constructor of the API class. This is used for background cache renewal events.
+     * @param string  $sRequestURI
+     * @param array   $aHTTPArguments
+     * @param integer $iCacheDuration
+     * @param boolean $bForceRenew
+     * @param string  $sRequestType
      */
     public function __construct( $sRequestURI, array $aHTTPArguments, $iCacheDuration, $bForceRenew, $sRequestType='api' ) {
         $this->___sRequestURI    = $sRequestURI;
@@ -94,29 +98,15 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                 $_sAPIRequestLock = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_APIREQUEST';
                 $_iIteration      = 0;
                 $_oLock           = new AmazonAutoLinks_VersatileFileManager( __METHOD__, 1, $_sAPIRequestLock . '_' );
-                while( $_oLock->isLocked() || $this->getTransient( $_sAPIRequestLock ) ) {
+                while( $_oLock->isLocked() || $this->getTransientWithoutCache( $_sAPIRequestLock ) ) {
                     sleep( 1 );
                     $_iIteration++;
                     if ( $_iIteration > 10 ) {
                         break;
                     }
                 }
-                $this->setTransient(
-                    $_sAPIRequestLock,
-                    $sRequestURL, // any data will be sufficient
-                    1  // one second
-                );
-
-                // @deprecated 4.2.3 - changed the method to versatile lock file.
-//                while( $this->getTransient( $_sAPIRequestLock ) && $_iIteration < 3 ) {
-//                    sleep( 1 );
-//                    $_iIteration++;
-//                }
-//                $this->setTransient(
-//                    $_sAPIRequestLock,
-//                    $sRequestURL, // any data will be sufficient
-//                    1  // one second
-//                );
+                // Storing any data will be sufficient. One second lifespan.
+                $this->setTransient( $_sAPIRequestLock, $sRequestURL, 1 );
 
             }
 

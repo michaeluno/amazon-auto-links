@@ -221,13 +221,17 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * Fetches HTML body with the specified URL with caching functionality.
      * 
      * @return      string
+     * @param       string      $sURL
+     * @param       boolean     $bUseFileGetContents    This is deprecated
+     * @param       integer     $iCacheDuration
      */
     public function getHTML( $sURL, $bUseFileGetContents=false, $iCacheDuration=86400 ) {
-    
-        if ( $bUseFileGetContents ) {
-            $_oHTML = new AmazonAutoLinks_HTTPClient_FileGetContents( $sURL, $iCacheDuration );
-            return $_oHTML->get();
-        }
+
+        // @deprecated 4.2.10
+//        if ( $bUseFileGetContents ) {
+//            $_oHTML = new AmazonAutoLinks_HTTPClient_FileGetContents( $sURL, $iCacheDuration );
+//            return $_oHTML->get();
+//        }
         $_oHTML = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration );
         return $_oHTML->get();    
     

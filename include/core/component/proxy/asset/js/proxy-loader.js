@@ -14,7 +14,7 @@
         // Load a proxy list.
         $( '.button_load_proxies' ).click( function( event ) {
 
-            var _oSpinner   = $( '<img src="' + aalProxyLoader.spinnerURL + '" />' );
+            var _oSpinner   = $( '<img src="' + aalProxyLoader.spinnerURL + '" alt="Spinner" />' );
             _oSpinner.addClass( 'ajax-spinner' );
             $( this ).parent().append( _oSpinner );
 

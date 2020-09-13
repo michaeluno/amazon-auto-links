@@ -53,22 +53,21 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                 return;
             }
 
-            try {
+            // DOM Helper creates a `DOMDocument` instance
+            $_oDOMHelper = new AmazonAutoLinks_DOM;
+            $_oDoc       = $_oDOMHelper->loadDOMFromHTMLElement(
+                $_sHTML,
+                '', // mb_lang
+                false // detect encoding
+            );
 
-                // DOM Helper creates a `DOMDocument` instance
-                $_oDOMHelper = new AmazonAutoLinks_DOM;
-                $_oDoc       = $_oDOMHelper->loadDOMFromHTMLElement(
-                    $_sHTML,
-                    '', // mb_lang
-                    false // detect encoding
-                );
+            try {
 
                 // The existing page layout.
                 $this->_aElements = $this->___getElements_zg_browseRoot( $_oDoc, $sPageURL, $sLocale );
                 return;
 
             } catch ( Exception $_oException ) {
-
                 $this->_handleExceptionsToSetElements( $_oDoc, $sPageURL, $sLocale );
             }
 
