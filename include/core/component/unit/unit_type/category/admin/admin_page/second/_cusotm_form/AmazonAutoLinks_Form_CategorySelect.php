@@ -327,9 +327,10 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
              * @since   4.2.0
              */
             private function ___getNowLoading() {
+                $_sMessage = __( 'Now loading...', 'amazon-auto-links' );
                 return '<span class="now-loading" >'
-                    . '<img src="' . esc_url( admin_url( 'images/loading.gif' ) ) . '" />'
-                    . __( 'Now loading...', 'amazon-auto-links' )
+                        . '<img src="' . esc_url( admin_url( 'images/loading.gif' ) ) . '" alt="' . esc_attr( $_sMessage ) . '" />'
+                        . $_sMessage
                     . '</span>';
             }
     

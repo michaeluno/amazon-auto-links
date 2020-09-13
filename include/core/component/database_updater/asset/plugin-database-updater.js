@@ -12,7 +12,7 @@
         $( '.aal_db_update a' ).click( function( event ) {
             event.preventDefault();
             var _oNotice = $( this ).closest( '.aal_db_update' );
-            var _oSpinner = $( '<img src="' + aalDBUpdater.spinnerURL + '" />' );
+            var _oSpinner = $( '<img src="' + aalDBUpdater.spinnerURL + '" alt="Spinner" />' );
             _oNotice.find( 'p' ).append( _oSpinner );
             jQuery.ajax( {
                 type: "post",

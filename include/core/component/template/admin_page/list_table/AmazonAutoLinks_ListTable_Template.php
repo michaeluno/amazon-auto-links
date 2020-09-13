@@ -161,8 +161,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
         $_sImageURL = esc_url( AmazonAutoLinks_WPUtility::getSRCFromPath( $_sThumbnailPath ) );
         $_sID       = esc_attr( md5( $aItem[ 'id' ] ) );
-        return "<a href='{$_sImageURL}' data-lightbox='{$_sID}' data-title='" . esc_attr( $aItem[ 'name' ] ) . "'>"
-                . "<img src='{$_sImageURL}' style='max-width:80px; max-height:80px;' />"
+        $_sTitle    = esc_attr( $aItem[ 'name' ] );
+        return "<a href='{$_sImageURL}' data-lightbox='{$_sID}' data-title='{$_sTitle}'>"
+                . "<img src='{$_sImageURL}' style='max-width:80px; max-height:80px;' alt='{$_sTitle}'/>"
             . "</a>";
 
     }

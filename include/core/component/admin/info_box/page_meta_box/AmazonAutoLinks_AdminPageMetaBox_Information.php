@@ -51,7 +51,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
                 : "<a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
-                    . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}'/>"
+                    . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}' alt='Amazon Auto Links Pro'/>"
                 . "</a>";            
         }
         

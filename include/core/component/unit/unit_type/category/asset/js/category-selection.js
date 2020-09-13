@@ -272,7 +272,7 @@
         }
 
         // Show a spinner
-        var _oSpinner   = $( '<span class="ajax-spinner"><img src="' + aalCategorySelection.spinnerURL + '" /></span>' );
+        var _oSpinner   = $( '<span class="ajax-spinner"><img src="' + aalCategorySelection.spinnerURL + '" alt="Spinner" /></span>' );
         $( '#category-select-title' ).append( _oSpinner );
 
         // Background processing
@@ -429,7 +429,7 @@
     function renderUnitPreview( event, sURL ) {
 
         // For unit previews
-        var _oSpinner   = $( '<span class="ajax-spinner"><img src="' + aalCategorySelection.spinnerURL + '" /></span>' );
+        var _oSpinner   = $( '<span class="ajax-spinner"><img src="' + aalCategorySelection.spinnerURL + '" alt="Spinner" /></span>' );
         $( '#unit-preview-title' ).append( _oSpinner );
         jQuery.ajax( {
             type: 'post',
