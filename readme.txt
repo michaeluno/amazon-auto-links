@@ -323,29 +323,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.3.0 =
-- Added the `Language` and `Currency` options in the `Default` setting screen.
-- Added the `Reset` button in the `Default` setting screen.
-- Added the `Custom Text` unit option.
-- Added the `Unit Format` option under the `Output Format` unit option.
-- Added the ability to toggle the status of buttons.
-- Added the `[aal_button ...]` short code to display buttons.
-- Added the `Override the button label.` unit option that allows the user override a button label.
-- Added the theme button option for the `Select Button` option.
-- Added `target="_blank"` to the unit view links to open the link in a new tab
-- Added the `Test` page and `Debug Log` tab which appear when the site debug mode is turned on.
-- Fixed a bug that some internal styles were duplicated in the `Manage Units` page.
-- Fixed an issue that the setting form could not be submitted after an hour passed.
-- Fixed a bug that caused overhead in `admin-ajax.php`.
-- Refined some setting form elements by updating Admin Page Framework.
-- Refined the Error Log screen.
-- Minified JavaScript scripts.
-- Tweaked the style of setting form fields.
-- Tweaked the button style.
-- Optimized the embed unit type.
 = 4.2.9 - 09/12/2020 =
 - Optimized the `embed` unit type to display elements as much as possible in the first load when the API keys are set.
 - Fixed a bug with the embed unit type that iframe sources were loaded twice.
+
 = 4.2.8 - 09/08/2020 =
 - Tweaked the default layout of the `List` template not to support the min width for the thumbnail.
 - Fixed a bug that the default value of the `Language` unit option was not set properly.
