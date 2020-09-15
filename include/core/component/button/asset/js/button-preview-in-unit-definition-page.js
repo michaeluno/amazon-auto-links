@@ -1,3 +1,7 @@
+/**
+ * @name Button Preview in Unit Definition Page
+ * @version 1.0.0
+ */
 (function($){
 
     var debugMode   = 'undefined' !== typeof aalButtonPreview.debugMode ? aalButtonPreview.debugMode : 0;

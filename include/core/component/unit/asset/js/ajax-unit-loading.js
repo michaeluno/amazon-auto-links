@@ -5,6 +5,8 @@
  *
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
+ * @name Ajax Unit Loading
+ * @version 1.0.0
  */
 (function($){
     $( document ).ready( function() {

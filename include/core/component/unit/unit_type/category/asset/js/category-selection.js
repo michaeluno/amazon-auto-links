@@ -1,3 +1,7 @@
+/*
+    @name Category Selection
+    @version 1.0.0
+ */
 (function($){
 
     var aCaches       = [];

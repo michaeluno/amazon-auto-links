@@ -1,3 +1,7 @@
+/**
+ * @name Utility
+ * @version 1.0.0
+ */
 (function($){
 
     aalCopyToClipboard = function( elem ) {

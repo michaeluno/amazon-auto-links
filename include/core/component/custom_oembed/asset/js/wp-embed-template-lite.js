@@ -2,6 +2,8 @@
  * A light version of wp-embed-template.js which causes clicks not working
  *
  * @see wp-includes/js/wp-embed-template.js
+ * @name WP Embed Template Lite
+ * @version 1.1.0
  */
 (function ( window, document ) {
 	'use strict';

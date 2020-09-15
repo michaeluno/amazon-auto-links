@@ -1,3 +1,7 @@
+/**
+ * @name Button Preview Event Binder
+ * @version 1.0.0
+ */
 (function($){
     $( document ).ready( function() {
 

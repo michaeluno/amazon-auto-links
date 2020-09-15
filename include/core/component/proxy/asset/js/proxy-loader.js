@@ -1,3 +1,7 @@
+/**
+ * @name Proxy Loader
+ * @version 1.0.0
+ */
 (function($){
     $( document ).ready( function() {
 

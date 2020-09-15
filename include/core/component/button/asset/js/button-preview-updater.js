@@ -1,3 +1,7 @@
+/**
+ * @name Button Preview Updater
+ * @version 1.0.0
+ */
 (function($){
     
     oPreviewButton = {};
