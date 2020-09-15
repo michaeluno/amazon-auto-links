@@ -33,7 +33,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'object_id'                     => null,   // (integer)
         'product_id'                    => null,   // (string) 4.3.0 XXXXXXXXXX_XX|XXX|xx-XX
         'title'                         => null,   // (string) The product name.
-        'asin_locale'                   => null,   // (string) XXXXXXXXXX_XX
+        'asin'                          => null,   // (string) XXXXXXXXXX
+        'asin_locale'                   => null,   // @deprecated 4.3.0 (string) XXXXXXXXXX_XX
         'locale'                        => null,   // (string) XX      e.g. US
         'modified_time'                 => null,   // (string) dddd-dd-dd dd:dd:dd
         'expiration_time'               => null,   // (string) dddd-dd-dd dd:dd:dd
@@ -85,6 +86,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
             object_id bigint(20) unsigned NOT NULL auto_increment,
             product_id varchar(128) UNIQUE,
             title text,
+            asin varchar(10),
             asin_locale varchar(13) NOT NULL,
             locale varchar(4),            
             language varchar(10),            
