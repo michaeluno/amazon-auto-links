@@ -100,7 +100,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             }
 
             if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
-                foreach( $_aRows as $_sKey => $_aRow ) {
+                foreach( $_aRows as $_sKey => $_aRow ) {                   
                     $_aKey          = explode( '|', $_sKey );
                     $_sASIN         = reset( $_aKey );
                     $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
@@ -403,7 +403,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
                         // 4.3.0
                         if ( version_compare( $_sCurrentVersion, '1.4.0b01', '>=' ) ) {
-                            $_aRow[ 'product_id' ]  = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
+                            $_aRow[ 'asin' ]       = $sASIN;
+                            $_aRow[ 'product_id' ] = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
                         }
 
                         return $_aRow;
