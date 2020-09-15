@@ -68,15 +68,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @since       3
      */
     public function getClasses() {
-        
-        // Include the include lists. The including file reassigns the list(array) to the $_aClassFiles variable.
-        $_aClassFiles   = array();
-        $_bLoaded       = include( dirname( $this->sFilePath ) . '/include/class-list.php' );
-        if ( ! $_bLoaded ) {
-            return $_aClassFiles;
-        }
-        return $_aClassFiles;
-                
+        return include( dirname( $this->sFilePath ) . '/include/class-map.php' );
     }
 
     /**
