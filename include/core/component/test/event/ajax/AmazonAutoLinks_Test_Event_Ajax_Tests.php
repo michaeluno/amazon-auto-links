@@ -81,31 +81,44 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 if ( ! $this->___canRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
+                $_aResults[]  = $this->___getMethodTested( $_oMethod, $sFilePath );
 
-                $_sPurpose    = $this->___getMethodAnnotation( $_oMethod, 'purpose' );
+            }
+            return $_aResults;
+        }
+            /**
+             * @return array
+             * @param ReflectionMethod $oMethod
+             * @param string $sFilePath
+             * @since 4.3.0
+             */
+            private function ___getMethodTested( ReflectionMethod $oMethod, $sFilePath ) {
+
+                $_sPurpose    = $this->___getMethodAnnotation( $oMethod, 'purpose' );
+                $_sClassName  = $oMethod->class;
+                $_sMethodName = $oMethod->getName();
 
                 try {
 
                     // Perform testing
                     ob_start(); // Capture start
-                    $_bsResult    = $this->___getEachMethodTested( $sClassName, $_oMethod->getName() );
+                    $_bsResult    = $this->___getEachMethodTested( $_sClassName, $_sMethodName );
                     $_sContent = ob_get_contents();
                     ob_end_clean(); // Capture end
                     if ( $_sContent ) {
                         throw new Exception( $_sContent, 1 );
                     }
 
-                    $_aResults[]  = $this->___getResultFormatted( $_bsResult, $sClassName, $_sMethodName, $_sPurpose, $sFilePath );
+                    $_aResult = $this->___getResultFormatted( $_bsResult, $_sClassName, $_sMethodName, $_sPurpose, $sFilePath );
 
                 }
                 // Tests can throw exceptions (Exception) so here caching them.
                 catch ( Exception $_oInnerException ) {
-                    $_aResults[] = $this->___getExceptionResult( $_oInnerException, $sClassName, $_sMethodName, $_sPurpose );
+                    $_aResult = $this->___getExceptionResult( $_oInnerException, $_sClassName, $_sMethodName, $_sPurpose );
                 }
+                return $_aResult;
 
             }
-            return $_aResults;
-        }
             /**
              * Checks if the test method can be run.
              * @param ReflectionMethod $oMethod
