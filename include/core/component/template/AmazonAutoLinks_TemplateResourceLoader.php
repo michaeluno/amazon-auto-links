@@ -88,9 +88,14 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
             foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
                 
                 $_sCSSPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
-                $_sCSSURL  = $this->getSRCFromPath( $_sCSSPath );
-                wp_register_style( "amazon-auto-links-{$_aTemplate[ 'id' ]}", $_sCSSURL );
-                wp_enqueue_style( "amazon-auto-links-{$_aTemplate[ 'id' ]}" );        
+                $_sMinPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
+                $_sCSSPath = ! $this->isDebugMode() && file_exists( $_sMinPath )
+                    ? $_sMinPath
+                    : $_sCSSPath;
+                $_sURL     = $this->getSRCFromPath( $_sCSSPath );
+                $_sHandle  = 'amazon-auto-links-' . strtolower( $_aTemplate[ 'id' ] );
+                wp_register_style( $_sHandle, $_sURL );
+                wp_enqueue_style( $_sHandle );
                 
             }
             

@@ -13,6 +13,7 @@
 - Fixed a bug that caused overhead in `admin-ajax.php`.
 - Refined some setting form elements by updating Admin Page Framework.
 - Refined the Error Log screen.
+- Minified CSS files.
 - Minified JavaScript scripts.
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
