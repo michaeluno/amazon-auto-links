@@ -215,7 +215,7 @@ class JsMinifier extends AbstractMinifier
 							if ($this->a === '/' && ($this->b === '\'' || $this->b === '"'))
 							{
 								$this->saveRegex();
-								continue;
+								break;
 							}
 
 							echo $this->a;
