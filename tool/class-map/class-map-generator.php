@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Class Map Generator Script
+ * @version 1.0.0
+ */
 /* Configuration */
 $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
 $sResultFilePath	= $sTargetBaseDir . '/include/class-map.php';
