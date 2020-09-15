@@ -23,16 +23,42 @@ class AmazonAutoLinks_UnitTest_aal_products extends AmazonAutoLinks_UnitTest_Bas
         return get_option( 'aal_products_version' );
     }
 
+    /**
+     * @return bool
+     * @purpose Checking whether the table exists.
+     */
     public function test_exist_aal_products() {
         $_oTable     = new AmazonAutoLinks_DatabaseTable_aal_products;
         return $_oTable->tableExists();
     }
 
+    /**
+     * @return mixed|string
+     * @purpose Checking whether the unique column exists.
+     */
     public function test_uniqueColumn() {
         $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_sTableName    = $_oTable->getTableName();
         $_sUniqueColumn = 'product_id';
         return $_oTable->getVariable( "SHOW INDEXES FROM {$_sTableName} WHERE Column_name='{$_sUniqueColumn}' AND NOT Non_unique" );
+    }
+
+    /**
+     * @purpose Checking whether the `product_id` column contains null values, which should not.
+     * @throws Exception
+     * @tags    column
+     */
+    public function test_productIDHaveNull() {
+        $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
+        $_sTableName    = $_oTable->getTableName();
+        $_sColumn       = 'product_id';
+        $_iCountRow     = $_oTable->getVariable(
+            "SELECT COUNT(*) FROM `{$_sTableName}` WHERE `{$_sColumn}` IS NULL OR `{$_sColumn}` = ' ';"
+        );
+        if ( $_iCountRow ) {
+            throw new Exception( 'The `product_id` column contains a null value.' );
+        }
+        return true;
     }
 
 }

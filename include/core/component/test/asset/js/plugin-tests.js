@@ -5,6 +5,8 @@
  *
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
+ * @name Plugin Tests
+ * @version 1.0.0
  */
 (function($){
 
@@ -18,13 +20,16 @@
             // Remove previous errors.
             $( '.item-select-error' ).remove();
 
+            // Get filter items of tags.
+            var _aTags         = $( '.test-tags' ).val().split( /,\s*/ ).filter( item => item );
+
             // Get checked items.
-            var _oCheckedTags = $( 'input.test-tags:checked' );
-            if ( ! _oCheckedTags.length ) {
+            var _oCheckedItems = $( 'input.test-categories:checked' );
+            if ( ! _oCheckedItems.length ) {
                 $( this ).parent().parent().append( '<span class="item-select-error">* Please select items.</span>' );
                 return false;
             }
-            _oCheckedTags.each( function() {
+            _oCheckedItems.each( function() {
 
                 var _sLabel = $( this ).closest( 'label' ).text();
                 if ( 'undefined' === typeof aalTests.files[ _sLabel ] ) {
@@ -43,7 +48,7 @@
 
                 var _aFiles = aalTests.files[ _sLabel ];
                 $.each( _aFiles, function( index, sFilePath ) {
-                    ___testFile( _sLabel, sFilePath );
+                    ___runFile( _sLabel, sFilePath, _aTags );
                 } );
 
             } );
@@ -51,7 +56,7 @@
 
         });
 
-        function ___testFile( sLabel, sFilePath ) {
+        function ___runFile( sLabel, sFilePath, aTags ) {
 
             var _oStartButton = $( '.aal-tests' );
             ajaxManager.addRequest( {
@@ -64,9 +69,10 @@
                     action: aalTests.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalTests.nonce,   // the nonce value set in template.php
                     file_path: sFilePath,
+                    tags: aTags,
                 },
                 // Custom properties.
-                spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" />' ),
+                spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" alt="Running..." />' ),
                 startButton: _oStartButton,
                 buttonLabel: _oStartButton.val(),
                 resultsArea: $( '*[class*="' + sLabel + '"]' ),

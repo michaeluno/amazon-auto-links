@@ -44,7 +44,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
             $_sFilePath = $this->getElement( $aPost, array( 'file_path' ), '' );
             if ( ! file_exists( $_sFilePath ) ) {
-                throw new Exception( 'The test file does not exist: ' . $_sFilePath  );
+                throw new Exception( 'The file does not exist: ' . $_sFilePath  );
             }
             $_sPHPCode   = AmazonAutoLinks_Test_Utility::getPHPCode( $_sFilePath );
             $_sClassName = AmazonAutoLinks_Test_Utility::getDefinedClass( $_sPHPCode );
@@ -53,7 +53,8 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 include_once( $_sFilePath );
             }
 
-            $_aResults = $this->_getResults( $_sClassName, $_sFilePath );
+            $_aTags    = $this->getElementAsArray( $aPost, array( 'tags' ) );
+            $_aResults = $this->_getResults( $_sClassName, $_sFilePath, $_aTags );
 
         } catch ( Exception $_oException ) {
             throw new Exception( $this->___getExceptionErrorMessage( $_oException ) );
@@ -65,24 +66,19 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         /**
          * @param string $sClassName The class name to test.
          * @param string $sFilePath The file path of the class.
+         * @param array $aTags Tags set in the `@tags` annotation in test method doc-blocks.
          * @param string $sMethodPrefix The prefix of methods to test.
          * @return array
          * @throws ReflectionException
          * @since   4.3.0
          */
-        protected function _getResults( $sClassName, $sFilePath, $sMethodPrefix='test' ) {
+        protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='test' ) {
 
             $_oReflect   = new ReflectionClass( $sClassName );
             $_aResults   = array();
             foreach( $_oReflect->getMethods( ReflectionMethod::IS_PUBLIC ) as $_oMethod ) {
 
-                // The method might be of its parent class. In that case, skip.
-                if ( strtolower( $_oMethod->class ) !== strtolower( $sClassName ) ) {
-                    continue;
-                }
-
-                $_sMethodName = $_oMethod->getName();
-                if ( ! $this->hasPrefix( $sMethodPrefix, $_sMethodName ) ) {
+                if ( ! $this->___canRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
 
@@ -92,7 +88,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
                     // Perform testing
                     ob_start(); // Capture start
-                    $_bsResult    = $this->___getEachMethodTested( $sClassName, $_sMethodName );
+                    $_bsResult    = $this->___getEachMethodTested( $sClassName, $_oMethod->getName() );
                     $_sContent = ob_get_contents();
                     ob_end_clean(); // Capture end
                     if ( $_sContent ) {
@@ -110,6 +106,34 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             }
             return $_aResults;
         }
+            /**
+             * Checks if the test method can be run.
+             * @param ReflectionMethod $oMethod
+             * @param string $sClassName
+             * @param array $aTags
+             * @param string $sMethodPrefix
+             * @return boolean
+             */
+            private function ___canRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
+
+                // The method might be of its parent class. In that case, skip.
+                if ( strtolower( $oMethod->class ) !== strtolower( $sClassName ) ) {
+                    return false;
+                }
+
+                if ( ! $this->hasPrefix( $sMethodPrefix, $oMethod->getName() ) ) {
+                    return false;
+                }
+
+                //  Check if tags are specified
+                $_aMethodTags = $this->getStringIntoArray( $this->___getMethodAnnotation( $oMethod, 'tags' ), ',' );
+                if ( ! empty( $aTags ) && $this->isEmpty( array_intersect( $aTags, $_aMethodTags ) ) ) {
+                    return false;
+                }
+
+                return true;
+
+            }
             /**
              * @param Exception $oException
              *

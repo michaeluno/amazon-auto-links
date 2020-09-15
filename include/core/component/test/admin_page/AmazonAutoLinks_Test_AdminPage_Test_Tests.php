@@ -39,18 +39,27 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
         $oAdminPage->addSettingFields(
             '_default',
             array(
-                'title'     => 'Tags',
-//                'show_title_column' => false,
-                'field_id'  => '_tags',
+                'title'     => 'Categories',
+                'field_id'  => '_categories',
                 'save'      => 'false',
                 'type'      => 'checkbox',
                 'label'     => $_aTagLabels,
                 'select_all_button'  => true,
                 'select_none_button' => true,
                 'attributes'        => array(
-                    'class' => 'test-tags',
+                    'class' => 'test-categories',
                 ),
                 'if'        => ! empty( $_aTagLabels ),
+            ),
+            array(
+                'title'     => 'Tags',
+                'field_id'  => '_tags',
+                'save'      => 'false',
+                'type'      => 'text',
+                'class'     => array(
+                    'input' => 'width-full test-tags',
+                ),
+                'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks.'
             ),
             array(
                 'title'     => 'Error',
