@@ -59,8 +59,11 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @callback        action      activate_{plugin_basename($file)}
      */
     public function replyToInstallCustomTables() {
+
         new AmazonAutoLinks_DatabaseTableInstall( true ); // install
+
     }
+
         
     /**
      * Register classes to be auto-loaded.
@@ -113,6 +116,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         $this->replyToInstallCustomTables();
 
         $this->replyToCreateDefaultButton();
+
+        do_action( 'aal_action_plugin_activated' );
         
     }
         

@@ -16,24 +16,22 @@
 class AmazonAutoLinks_DatabaseUpdater_aal_products_140 extends AmazonAutoLinks_DatabaseUpdater_Base_aal_products {
 
     /**
-     * @return boolean
      * @param string $sVersionFrom
      * @param string $sVersionTo
      * @param array $aResult
      * @since 4.3.0
+     * @return boolean
      */
     protected function _shouldProceed( $sVersionFrom, $sVersionTo, $aResult ) {
-        if ( version_compare( $sVersionFrom, '1.4.0', '>=' ) ) {
-            return false;
-        }
-        return true;
+        return ( boolean ) version_compare( $sVersionFrom, '1.4.0', '<' );
     }
 
     /**
      * @since 4.3.0
      * @return void
      */
-    protected function _doUpdates() {
+    protected function _doUpdate() {
+
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_sTableName    = $_oProductTable->getTableName();
         $_aQueries      = array(
@@ -42,13 +40,14 @@ class AmazonAutoLinks_DatabaseUpdater_aal_products_140 extends AmazonAutoLinks_D
             . " WHERE product_id IS NULL OR product_id = ''"
             . " ;",
             "UPDATE `{$_sTableName}`"
-            . " SET asin = CONCAT( SUBSTRING( asin_locale, 1, 10 )"
+            . " SET asin = CONCAT( SUBSTRING( asin_locale, 1, 10 ) )"
             . " WHERE asin IS NULL OR asin = ''"
             . " ;",
             "ALTER TABLE `{$_sTableName}` MODIFY product_id varchar(128) UNIQUE AFTER object_id",
+            "ALTER TABLE `{$_sTableName}` MODIFY asin varchar(10) AFTER product_id",
         );
-        foreach( $_aQueries as $_sQuery ) {
-            $_oProductTable->getVariable( $_sQuery );
+        foreach( $_aQueries as $_iIndex => $_sQuery ) {
+            $_bResult = $_oProductTable->getVariable( $_sQuery );
         }
     }
 

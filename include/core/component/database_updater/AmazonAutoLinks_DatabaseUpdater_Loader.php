@@ -27,6 +27,8 @@ class AmazonAutoLinks_DatabaseUpdater_Loader {
         new AmazonAutoLinks_DatabaseUpdater_aal_products_121;   // 3.10.0
         new AmazonAutoLinks_DatabaseUpdater_aal_products_140;   // 4.3.0
 
+        new AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140; // 4.3.0
+
     }
 
 }

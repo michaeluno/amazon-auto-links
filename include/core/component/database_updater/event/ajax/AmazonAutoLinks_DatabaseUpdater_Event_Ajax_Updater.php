@@ -87,6 +87,7 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
                     )
                 );
             }
+
             /**
              * Allows table specific routines to run.
              */

@@ -111,6 +111,7 @@ return array(
     "AmazonAutoLinks_CustomOEmbed_Content_NonIframe" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/output/AmazonAutoLinks_CustomOEmbed_Content_NonIframe.php", 
     "AmazonAutoLinks_DatabaseUpdater_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/AmazonAutoLinks_DatabaseUpdater_Loader.php", 
     "AmazonAutoLinks_DatabaseUpdater_AdminNotice" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/admin/AmazonAutoLinks_DatabaseUpdater_AdminNotice.php", 
+    "AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/event/action/AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140.php", 
     "AmazonAutoLinks_DatabaseUpdater_Base_aal_products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/event/action/AmazonAutoLinks_DatabaseUpdater_Base_aal_products.php", 
     "AmazonAutoLinks_DatabaseUpdater_aal_products_121" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/event/action/AmazonAutoLinks_DatabaseUpdater_aal_products_121.php", 
     "AmazonAutoLinks_DatabaseUpdater_aal_products_140" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/database_updater/event/action/AmazonAutoLinks_DatabaseUpdater_aal_products_140.php", 
