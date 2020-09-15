@@ -115,8 +115,6 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         
         $this->replyToInstallCustomTables();
 
-        $this->replyToCreateDefaultButton();
-
         do_action( 'aal_action_plugin_activated' );
         
     }
@@ -141,21 +139,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             }        
              
         }    
-        /**
-         *
-         */
-        public function replyToCreateDefaultButton() {
-            $_sButtonPostType = AmazonAutoLinks_Registry::$aPostTypes[ 'button' ];
-            if ( ! post_type_exists( $_sButtonPostType ) ) {
-                new AmazonAutoLinks_PostType_Button(
-                    $_sButtonPostType,  // slug
-                    null,   // post type argument. This is defined in the class.
-                    $this->sFilePath   // script path
-                );
-            }
-            new AmazonAutoLinks_DefaultButtonCreation;    
-        }        
-        
+
     /**
      * The plugin activation callback method.
      */    
