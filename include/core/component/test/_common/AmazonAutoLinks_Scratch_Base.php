@@ -25,12 +25,7 @@ class AmazonAutoLinks_Scratch_Base extends AmazonAutoLinks_PluginUtility {
     }
 
     protected function _getDetails( $mValue ) {
-        $_oClass = AmazonAutoLinks_AdminPageFramework_ClassTester::getInstance( 'AmazonAutoLinks_Debug' );
-        return AmazonAutoLinks_AdminPageFramework_ClassTester::call(
-            $_oClass,           // subject class object
-            '_getLegibleDetails',       // method name (private/protected supported)
-            array( $mValue )      // method parameters
-        );
+        return AmazonAutoLinks_Debug::getDetails( $mValue );
     }
 
 }

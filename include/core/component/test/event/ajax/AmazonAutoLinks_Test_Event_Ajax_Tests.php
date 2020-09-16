@@ -102,7 +102,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
                     // Perform testing
                     ob_start(); // Capture start
-                    $_bsResult    = $this->___getEachMethodTested( $_sClassName, $_sMethodName );
+                    $_bsResult = $this->___getEachMethodTested( $_sClassName, $_sMethodName );
                     $_sContent = ob_get_contents();
                     ob_end_clean(); // Capture end
                     if ( $_sContent ) {
@@ -228,7 +228,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 if ( is_array( $mResult ) ) {
                     return array(
                         'success' => true,
-                        'message' => AmazonAutoLinks_Debug::get( $mResult ),
+                        'message' => AmazonAutoLinks_Debug::getDetails( $mResult ),
                         'raw'     => true,
                     ) + $_aDefault;
                 }
