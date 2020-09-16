@@ -66,10 +66,22 @@ abstract class AmazonAutoLinks_Event___Action_Base extends AmazonAutoLinks_Plugi
      */
     public function replyToDoAction( /* $aArguments */ ) {
         $_aParameters = func_get_args();
+        if ( ! $this->_shouldProceed( $_aParameters ) ) {
+            return;
+        }
         call_user_func_array( array( $this, '_doAction' ), $_aParameters );
     }
 
+    /**
+     * @return bool
+     * @since 4.3.0
+     */
+    protected function _shouldProceed( array $aParameters ) {
+        return true;
+    }
+
     protected function _doAction() {}
+
 
 
     /**
