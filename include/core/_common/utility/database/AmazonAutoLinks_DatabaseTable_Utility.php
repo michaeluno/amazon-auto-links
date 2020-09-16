@@ -99,4 +99,13 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
 
         }
 
+    /**
+     * @remark  Used for unit tests to check the used table engine.
+     * @since 4.3.0
+     * @return array
+     */
+    public function getTableStatus() {
+        return $this->getRow( "SHOW TABLE STATUS FROM `{$GLOBALS[ 'wpdb' ]->dbname}` LIKE '{$this->aArguments[ 'table_name' ]}';" );
+    }
+
 }
