@@ -150,8 +150,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
             add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
             $_aHTMLs          = $this->___getHTMLBodies( $aURLs );
-            remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
-            remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+
             $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
             $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
             $_aProducts       = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sSiteDomain );
@@ -195,7 +194,8 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
              * @return      array
              */
             public function replyToCaptureUpdatedDate( $aCache, $iCacheDuration, $aArguments, $sRequestType ) {
-                $this->_aModifiedDates[ $aCache[ 'request_uri' ]  ] = $aCache[ '_modified_timestamp' ];
+                remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+                $this->_aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
                 return $aCache;
             }
             /**
@@ -204,9 +204,26 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
              * @return  array|WP_Error
              */
             public function replyToCaptureUpdatedDateForNewRequest( $oaResult, $sURL, $aArguments, $sRequestType, $iCacheDuration ) {
-                $this->_aModifiedDates[ $sURL  ] = time();
+                remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+                $this->_aModifiedDates[ $sURL  ] = $this->___getLastModified( $oaResult, time() );
                 return $oaResult;
             }
+                /**
+                 * Extracts the last-modified header item and convert it to the unix timestamp.
+                 * @since 4.3.0
+                 * @param   WP_Error|array  $aoResponse
+                 * @param   integer         $iDefault
+                 * @return  integer
+                 */
+                private function ___getLastModified( $aoResponse, $iDefault=0 ) {
+                    $_sResponseDate = wp_remote_retrieve_header( $aoResponse, 'last-modified' );
+                    $_sResponseDate = $_sResponseDate
+                        ? $_sResponseDate
+                        : wp_remote_retrieve_header( $aoResponse, 'date' );
+                    return $_sResponseDate
+                        ? strtotime( $_sResponseDate )
+                        : $iDefault;
+                }
 
             /**
              * @param array $aURLs
