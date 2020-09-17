@@ -1,7 +1,0 @@
-- Optimized PA-API requests.
-- Fixed a bug that descriptions were duplicated in `embed` unit type outputs, started from v4.2.9.
-- Fixed an issue that the `%date%` value was not accurate.
-- Fixed CSS rules that were possibly not taking effect.
-- Fixed duplicated id attribute values in HTML mark-ups in the category selection screen.
-- Fixed an incompatibility issue with PHP v5.3.x or below that caused a syntax error.
-- Fixed a mark-up error in an unit price disclaimer output element.

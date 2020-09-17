@@ -5,7 +5,7 @@ Tags:               amazon, amazon associate, amazon associates, amazon affiliat
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
-Stable tag:         4.2.9
+Stable tag:         4.2.10
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,15 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.2.10 - 09/18/2020 =
+- Optimized PA-API requests.
+- Fixed a bug that descriptions were duplicated in `embed` unit type outputs, started from v4.2.9.
+- Fixed an issue that the `%date%` value was not accurate.
+- Fixed CSS rules that were not taking effect.
+- Fixed duplicated id attribute values in HTML mark-ups in the category selection screen.
+- Fixed an incompatibility issue with PHP v5.3.x or below that caused a syntax error.
+- Fixed a mark-up error in an unit price disclaimer output element.
 
 = 4.2.9 - 09/12/2020 =
 - Optimized the `embed` unit type to display elements as much as possible in the first load when the API keys are set.
