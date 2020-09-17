@@ -30,8 +30,9 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
     /**
      * An array of raw item array extracted from the PA API response.
      * Used to pass to the background routine to save an API request.  
-     * @sicne   3.8.12
-     * @var array 
+     * @since   3.8.12
+     * @var array
+     * @deprecated Unused in anywhere.
      */
     protected $_aAPIRawItem    = array();
     
