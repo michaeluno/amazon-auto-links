@@ -1,29 +1,30 @@
 /**
  * @name Now-Retrieving Updater
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
+    /**
+     * @var aalNowRetrieving
+     */
     $( document ).ready( function() {
 
-// console.log( aalNowRetrieving );
-
+        if ( 'undefined' === typeof( aalNowRetrieving ) ) {
+            console.log( 'Amazon Auto Links', 'Now-Retrieving Updater', 'Failed to load.' );
+            return;
+        }
         processNowRetrieving( this );
-
 
     });
 
     $( 'body' ).on( 'aal_ajax_loaded_unit', function( event ) {
-
         processNowRetrieving( event.target );
-
-
     } );
 
     function processNowRetrieving( subject ) {
 
         // Spinner
-        var _oSpinner = $( '<img src="' + aalNowRetrieving.spinnerURL + '" />' );
+        var _oSpinner = $( '<img src="' + aalNowRetrieving.spinnerURL + '" alt="' + aalNowRetrieving.label.nowLoading + '"/>' );
         _oSpinner.css( { margin: '0 0.5em', 'vertical-align': 'middle', 'display': 'inline-block' } );
 
 

@@ -43,6 +43,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 $this->___getElementsByASINLocaleCurLang( $_sASINLocaleCurLang, $_aItems  )
             );
         }
+
         return $_aElements;
 
     }
@@ -118,6 +119,9 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 'nonce'              => wp_create_nonce( $this->_sNonceKey ), // _sNonceKey is same as the action hook suffix when it's not declared in properties.
                 'actionHookSuffix'   => 'aal_action_update_now_retrieving',
                 'spinnerURL'         => admin_url( 'images/loading.gif' ),
+                'label'              => array(
+                    'nowLoading'   => __( 'Now loading...', 'amazon-auto-links' ),
+                ),
             )
         );
 
