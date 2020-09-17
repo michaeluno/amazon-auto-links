@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_UnitTest_aal_tasks extends AmazonAutoLinks_UnitTest_Base {
+class AmazonAutoLinks_UnitTest_Database_aal_tasks extends AmazonAutoLinks_UnitTest_Base {
 
     /**
      * @return bool
@@ -34,5 +34,6 @@ class AmazonAutoLinks_UnitTest_aal_tasks extends AmazonAutoLinks_UnitTest_Base {
         $_sUniqueColumn = 'name';
         return $_oTable->getVariable( "SHOW INDEXES FROM {$_sTableName} WHERE Column_name='{$_sUniqueColumn}' AND NOT Non_unique" );
     }
+
 
 }

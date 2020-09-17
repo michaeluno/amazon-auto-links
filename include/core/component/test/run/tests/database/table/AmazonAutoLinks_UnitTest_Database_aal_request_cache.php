@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_UnitTest_aal_request_cache extends AmazonAutoLinks_UnitTest_Base {
+class AmazonAutoLinks_UnitTest_Database_aal_request_cache extends AmazonAutoLinks_UnitTest_Base {
 
     /**
      * @return bool
