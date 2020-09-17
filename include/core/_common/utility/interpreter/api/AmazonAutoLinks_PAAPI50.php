@@ -190,8 +190,10 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         }
 
         // Inject response date
-        $_sResponseDate = wp_remote_retrieve_header( $_aoResponse, 'date' );
-        $_aResponse[ '_ResponseDate' ] = $_sResponseDate;
+        $_sResponseDate = wp_remote_retrieve_header( $_aoResponse, 'last-modified' );
+        $_aResponse[ '_ResponseDate' ] = $_sResponseDate
+            ? $_sResponseDate
+            : wp_remote_retrieve_header( $_aoResponse, 'date' );
         return $_aResponse;
 
     }

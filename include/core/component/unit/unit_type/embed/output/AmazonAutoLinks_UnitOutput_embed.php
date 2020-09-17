@@ -128,10 +128,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sURL );
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
 
-            remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
-            remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
-            remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10 );
-
             // @deprecated 4.2.2 Even if it fails to retrieve product data, a structure array will be returned and it's not empty
 //            if ( empty( $_aProduct ) ) {
 //                return $_aProduct;
@@ -170,7 +166,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_aProduct;
 
         }
-
 
             /**
              * @param string $sURL
@@ -247,6 +242,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @since   4.2.2
      */
     public function replyToCaptureErrors( $aResponses, $aURLs, $aArguments, $iCacheDuration ) {
+        remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10 );
         foreach( $aResponses as $_sURL => $_aoResponse ) {
             if ( ! is_wp_error( $_aoResponse ) ) {
                 continue;
