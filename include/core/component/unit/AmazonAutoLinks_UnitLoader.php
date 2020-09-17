@@ -69,17 +69,22 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             // new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;   // @deprecated 3.9.0    Should be commented out once it is confirmed its unnecessity
             new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2;  // 3.9.0
             new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
-            new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0+
+            new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0
+
 
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
 
-            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // 3.6.0+
+            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // 3.6.0
             new AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater;
             new AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater; // 4.3.0
 
             new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // 4.3.0
 
             new AmazonAutoLinks_Event_Filter_ProductLinks;  // 4.3.0
+
+            new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // 4.3.0
+            new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // 4.3.0
+
         }
         
     

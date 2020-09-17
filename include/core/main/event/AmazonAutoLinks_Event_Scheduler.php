@@ -138,8 +138,9 @@ class AmazonAutoLinks_Event_Scheduler {
      * @since       3.8.12      Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
      * @since       3.9.0       Changed the first parameter to be associate_id|locale|currency|language from associate_id|locale.
      * @since       3.9.0       Removed the `$sLocale` parameter
+     * @since       4.3.0       Deprecated the `$aAPIRawItem` parameter as it was not used.
      */
-    static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='', $aAPIRawItem=array() ) {
+    static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isAPIConnected() ) {
@@ -180,21 +181,71 @@ class AmazonAutoLinks_Event_Scheduler {
          */
         static public function _replyToScheduleProductsInformation() {
 
-            foreach( self::$___aScheduledProductInformation as $_sAssociateIDLocaleCurLang => $_aFetchingItems ) {
-                self::___scheduleProductInformationAPIRequest( $_sAssociateIDLocaleCurLang, $_aFetchingItems );
+            $_sTaskTableVersion = get_option( 'aal_tasks_version', '0' );
+            if ( version_compare( $_sTaskTableVersion, '1.0.0b01', '>=' ) ) {
+                self::___setTasksForProductInformationAPIRequest( self::$___aScheduledProductInformation );
+            } else {
+                foreach( self::$___aScheduledProductInformation as $_sAssociateIDLocaleCurLang => $_aFetchingItems ) {
+                    self::___scheduleProductInformationAPIRequest( $_sAssociateIDLocaleCurLang, $_aFetchingItems );
+                }
             }
+
+            self::$___aScheduledProductInformation = array();   // clear
             AmazonAutoLinks_Shadow::see();  // loads the site in the background
 
         }
             /**
+             * Sets tasks in the plugin task table.
+             * @param   array $aScheduledProducts
+             * @since 4.3.0
+             */
+            static private function ___setTasksForProductInformationAPIRequest( array $aScheduledProducts ) {
+
+                if ( empty( $aScheduledProducts ) ) {
+                    return;
+                }
+
+                $_aTaskRows = array();
+                foreach( $aScheduledProducts as $_sAssociateIDLocaleCurLang => $_aItems ) {
+
+                    $_aRequestInfo = explode( '|', $_sAssociateIDLocaleCurLang ) + array( '', '', '', '' );
+                    $_sAssociateID = $_aRequestInfo[ 0 ];
+                    $_sLocale      = $_aRequestInfo[ 1 ];
+                    $_sCurrency    = $_aRequestInfo[ 2 ];
+                    $_sLanguage    = $_aRequestInfo[ 3 ];
+
+                    foreach( $_aItems as $_sASIN => $_aItem ) {
+                        $_aTaskRows[] = array(
+                            // ASIN|Locale|Currency|Language
+                            'name'          => $_aItem[ 1 ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,  // product_id
+                            'action'        => 'aal_action_api_get_products_info',
+                            'arguments'     => array( array( $_aItem ), $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage ),
+                            'creation_time' => date( 'Y-m-d H:i:s', time() ),
+                            'next_run_time' => date( 'Y-m-d H:i:s', time() ),
+                        );
+                    }
+
+                }
+                $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+                $_aChunks    = array_chunk( $_aTaskRows, 50 );    // having too many rows may fail to set
+                foreach( $_aChunks as $__aTaskRows ) {
+                    $_oTaskTable->insertRowsIgnore( $__aTaskRows );
+                }
+                self::___scheduleTask( 'aal_action_check_tasks' );
+
+            }
+
+            /**
              * @param string $sAssociateIDLocaleCurLang
              * @param array $aFetchingItems
              * @since   3.7.7
+             * @see https://webservices.amazon.com/paapi5/documentation/get-items.html
              */
             static private function ___scheduleProductInformationAPIRequest( $sAssociateIDLocaleCurLang, array $aFetchingItems ) {
 
-                // Sort the array in order to prevent unnecessary look-ups due to different orders
+                // Sort the array by key in order to prevent unnecessary look-ups due to different orders
                 // as `wp_next_scheduled()` stores and identify actions based on the serialized passed arguments.
+                // The keys are set by ASIN.
                 ksort( $aFetchingItems );
 
                 // Divide items by 10 as the `ItemLookup` operation API parameter accepts up to 10 items at a time.
@@ -249,8 +300,7 @@ class AmazonAutoLinks_Event_Scheduler {
              
             $_aParams       = func_get_args() + array( null, array() );
             $_sActionName   = array_shift( $_aParams ); // the first element
-
-            $_aArguments    = $_aParams; // the rest 
+            $_aArguments    = AmazonAutoLinks_Utility::getAsArray( $_aParams ); // the rest
 
             // If already scheduled, skip.
             if ( wp_next_scheduled( $_sActionName, $_aArguments ) ) {
@@ -260,7 +310,7 @@ class AmazonAutoLinks_Event_Scheduler {
             self::$_aCounters[ $_sActionName ] = isset( self::$_aCounters[ $_sActionName ] )
                 ? self::$_aCounters[ $_sActionName ] + 1
                 : 1;
-            $_bScheduled = wp_schedule_single_event(
+            wp_schedule_single_event(
                 time() + self::$_aCounters[ $_sActionName ] - 1, // now + registering counts, giving one second delay each to avoid timeouts when handling tasks and api rate limit run out.
                 $_sActionName,  // the AmazonAutoLinks_Event class will check this action hook and executes it with WP Cron.
                 $_aArguments    // must be enclosed in an array.

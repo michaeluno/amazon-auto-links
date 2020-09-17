@@ -264,6 +264,48 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
 
     /**
+     * Inserts a record of row into the table.
+     * @param   array $aRow
+     * @since 4.3.0
+     */
+    public function insertRow( array $aRow ) {
+        return $this->insertRows( array( $aRow ) );
+    }
+
+    /**
+     * Inserts a set of rows into the table using the SQL statement, `INSERT`.
+     * @param array $aRows
+     * @param bool $bIgnore Whether to add the `IGNORE` statement.
+     * @return bool|int
+     */
+    public function insertRows( array $aRows, $bIgnore=false ) {
+        $_sTableName     = $this->getTableName();
+        $_aFirstRow      = reset($aRows );
+        if ( empty( $_aFirstRow ) ) {
+            return 0;
+        }
+        $_aColumnNames   = array_keys( $_aFirstRow );
+        $_sColumnNames   = implode( ', ', $_aColumnNames );
+        $_sColumnsValues = $this->___getQueryStatementColumnsValues( $aRows );
+        $_sIgnore        = $bIgnore ? 'IGNORE' : '';
+        /**
+         * @var wpdb $_oWPDB
+         */
+        $_oWPDB   = $GLOBALS[ 'wpdb' ];
+        $sDBQuery = "INSERT {$_sIgnore} INTO `{$_sTableName}` ({$_sColumnNames})"
+            . " VALUES {$_sColumnsValues}";
+        return $_oWPDB->query( $sDBQuery );
+    }
+
+    public function insertRowIgnore( array $aRow ) {
+        return $this->insertRowsIgnore( array( $aRow ) );
+    }
+
+    public function insertRowsIgnore( array $aRows ) {
+        return $this->insertRows( $aRows, true );
+    }
+
+    /**
      * Override/insert a single row.
      *
      * @remark  The table MUST have a primary or unique column.

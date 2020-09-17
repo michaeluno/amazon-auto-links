@@ -143,8 +143,8 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                     $aScheduleTask[ 'asin' ],
                     ( integer ) $_iCacheDuration,
                     ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
-                    $this->_oUnitOption->get( 'item_format' ),
-                    $aAPIRawItem    // 3.8.12
+                    $this->_oUnitOption->get( 'item_format' )
+                    // $aAPIRawItem    // 3.8.12 @deprecated 4.3.0 Not used
                 );
             }
 

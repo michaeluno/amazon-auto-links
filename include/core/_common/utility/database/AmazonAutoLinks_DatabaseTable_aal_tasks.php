@@ -33,7 +33,7 @@ class AmazonAutoLinks_DatabaseTable_aal_tasks extends AmazonAutoLinks_DatabaseTa
         // request_id bigint(20) unsigned UNIQUE NOT NULL,
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             name varchar(255) UNIQUE,
-            context varchar(32),    
+            action varchar(255),    
             arguments text,
             creation_time datetime NOT NULL default '0000-00-00 00:00:00',
             next_run_time datetime NOT NULL default '0000-00-00 00:00:00',
@@ -43,20 +43,31 @@ class AmazonAutoLinks_DatabaseTable_aal_tasks extends AmazonAutoLinks_DatabaseTa
 
     /**
      * Deletes rows by given name(s).
+     *
+     * @param array|string $asNames
      */
     public function deleteRows( $asNames='' ) {
                 
-        $_aNames = is_array( $asNames )
-            ? $asNames
-            : array( 0 => $asNames );
+        $_aNames = is_array( $asNames ) ? $asNames : array( 0 => $asNames );
 
-        // 3.7.5+ To support multiple cache items to be processed at once,
+        // To support multiple cache items to be processed at once,
         $_sCacheNames = "'" . implode( "','", $_aNames ) . "'";
         $GLOBALS[ 'wpdb' ]->query(
             "DELETE FROM {$this->aArguments[ 'table_name' ]} "
             . "WHERE `name` IN( {$_sCacheNames} )"
         );
         
+    }
+
+    /**
+     * @return array
+     */
+    public function getDueItems() {
+        return $this->getRows(
+              "SELECT * FROM `{$this->aArguments[ 'table_name' ]}` "
+            . "WHERE next_run_time <= UTC_TIMESTAMP()"     // not using NOW() as NOW() is GMT compatible
+            . " ORDER BY next_run_time ASC;"
+        );
     }
 
 }
