@@ -355,7 +355,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                                 
                 // Perform an HTTP request.
                 $_aData[ $_sURL ] = $this->_getHTTPResponse( $_sURL, $aArguments );
-                $this->___setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration, $aArguments );
+                $_aOldCache       = $this->getElementAsArray( $_aCaches, array( $_sCacheName ) );
+                $this->___setCache( $_sURL, $_aData[ $_sURL ], $iCacheDuration, $aArguments, $_aOldCache );
 
             }
             return $_aData;
@@ -552,19 +553,26 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 wp_remote_retrieve_headers( $aoHTTPResponseBody )
             );
         }
+
         /**
          * Sets a cache by url.
          * It internally sets a cache name.
          * @remark      To renew its cache, use the `deleteCache()` method prior to call the `get()` method.
          * @remark      The cache duration here is for the value set to the database `expiration_time` column value.
          * However, the default behavior of this plugin suppresses the set value in the database with the passed cache duration argument value.
+         * @param $sURL
+         * @param $mData
+         * @param int $iCacheDuration
+         * @param array $aArguments
+         * @param array $aOldCache
          * @todo        Examine the return value as it is not tested.
          * @since       3.7.5   Added the `aal_filter_http_request_set_cache` filter so that third parties can modify set cache contents.
          * @since       3.7.7   deprecated the `aal_filter_http_request_set_cache` filter and introduced `aal_filter_http_request_set_cache_{request type}`.
          * @since       4.2.0   Removed the return value as it is not used anywhere
          * @since       4.2.0   Revived the `aal_filter_http_request_set_cache` filter.
+         * @since       4.3.0   Added the `$aOldCache` parameter.
          */
-        private function ___setCache( $sURL, $mData, $iCacheDuration=86400, $aArguments=array() ) {
+        private function ___setCache( $sURL, $mData, $iCacheDuration, $aArguments, array $aOldCache ) {
             
             $_sCharSet       = $this->_getCharacterSet( $mData );
             $_sCacheName     = $this->_getCacheName( $sURL );
@@ -585,7 +593,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
                 $_sCharSet,
                 $iCacheDuration,
                 $sURL,
-                $aArguments
+                $aArguments,
+                $aOldCache          // 4.3.0 Added so that it becomes possible to reuse old caches in case of errors.
             );
             // 3.9.0 - gives a chance to change the cache duration, depending on the cached data content, checked in the above filter hook callbacks
             // this is useful when an error is returned which should not be kept so long

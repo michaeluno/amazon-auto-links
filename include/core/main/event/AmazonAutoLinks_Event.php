@@ -130,7 +130,7 @@ class AmazonAutoLinks_Event {
 
             private function ___handleFilters() {
                 new AmazonAutoLinks_Event_HTTPClientArguments;
-                new AmazonAutoLinks_Event_Error_Log_HTTPRequestErrors;  // 4.2.0
+                new AmazonAutoLinks_Event_Filter_HTTPRequestCache;  // 4.2.0
                 new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError; // 4.2.2
             }
 

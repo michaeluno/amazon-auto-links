@@ -78,14 +78,25 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
          */
         private function ___getError( $mData, $sURL ) {
 
-            // WP_Error
+            $_sError = '';
+
+            /**
+             * WP_Error and HTTP Status Error will be checked in
+             * @see AmazonAutoLinks_Event_Error_Log_HTTPRequestErrors
+             * @deprecated 4.3.0
+             */
+            if ( is_wp_error( $mData ) ) {
+                return '';
+            }
+/*            // WP_Error
             if ( is_wp_error( $mData ) ) {
                 return '(' . get_class( $mData ) . ') ' . $mData ->get_error_code() . ': ' . $mData ->get_error_message();
             }
 
             // HTTP Status Error
             $_sError  = $this->___getHTTPStatusError( $mData ) . ' ';
-
+*/
+            $mData    = $this->getAsArray( $mData );
             $_sBody   = $this->getElement( $mData, array( 'body' ) );
 
             if ( $this->isJSON( $_sBody ) ) {
@@ -130,14 +141,15 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
                 return trim( $_sError );
             }
 
-            private function ___getHTTPStatusError( array $mData ) {
-                $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
-                $_s1stChar = substr( $_sCode, 0, 1 );
-                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
-                    return '';
-                }
-                return $_sCode . ': ' . $this->getElement( $mData, array( 'response', 'message' ) );
-            }
+            // @deprecated 4.3.0
+//            private function ___getHTTPStatusError( array $mData ) {
+//                $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
+//                $_s1stChar = substr( $_sCode, 0, 1 );
+//                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
+//                    return '';
+//                }
+//                return $_sCode . ': ' . $this->getElement( $mData, array( 'response', 'message' ) );
+//            }
         /**
          * @param $mData
          * @deprecated 4.0.0

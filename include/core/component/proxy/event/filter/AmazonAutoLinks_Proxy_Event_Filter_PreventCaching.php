@@ -21,7 +21,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_PreventCaching extends AmazonAutoLinks_
      * @since   4.2.0
      */
     public function __construct() {
-        add_action( 'aal_filter_http_request_set_cache', array( $this, 'replyToCaptureCacheName' ), 10, 6 );
+        add_filter( 'aal_filter_http_request_set_cache', array( $this, 'replyToCaptureCacheName' ), 10, 7 );
     }
 
     /**
@@ -31,10 +31,11 @@ class AmazonAutoLinks_Proxy_Event_Filter_PreventCaching extends AmazonAutoLinks_
      * @param integer $iCacheDuration
      * @param string $sURL
      * @param array $aArguments
+     * @param array $aOldCache
      * @since 4.2.0
      * @return mixed
      */
-    public function replyToCaptureCacheName( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL, array $aArguments ) {
+    public function replyToCaptureCacheName( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL, array $aArguments, array $aOldCache ) {
 
         // If a proxy is not set, do nothing.
         if ( empty( $aArguments[ 'proxy' ] ) ) {
