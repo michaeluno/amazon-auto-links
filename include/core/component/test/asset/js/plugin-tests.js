@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -48,6 +48,7 @@
 
                 var _aFiles = aalTests.files[ _sLabel ];
                 $.each( _aFiles, function( index, sFilePath ) {
+                     $( '*[class*="' + _sLabel + '"]' ).html( '' );  // clear previous results
                     ___runFile( _sLabel, sFilePath, _aTags );
                 } );
 
