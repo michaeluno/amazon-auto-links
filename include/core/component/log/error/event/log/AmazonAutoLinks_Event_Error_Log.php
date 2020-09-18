@@ -101,10 +101,11 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
             if ( empty( $this->_aErrorLog ) ) {
                 add_action( 'shutdown', array( $this, 'replyToUpdateErrorLog' ) );
             }
-            $_iMicroTime = ( integer ) ( microtime( true ) * 1000 ); // as the float part will be omitted when assigned as a key, multiple by 1000
-            $this->_aErrorLog[ $_iMicroTime ] = array(
+            $_iMicroTime = microtime( true );
+            $_iIndex     = ( integer ) ( $_iMicroTime * 1000 ); // as the float part will be omitted when assigned as a key, multiple by 1000
+            $this->_aErrorLog[ $_iIndex ] = array(
                 // required keys
-                'time'           => time(),
+                'time'           => $_iMicroTime,
                 'message'        => $sMessage,
                 'current_url'    => $this->getCurrentURL(),
                 'page_load_id'   => $this->getPageLoadID(),
