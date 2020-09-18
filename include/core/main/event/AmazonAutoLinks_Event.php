@@ -69,35 +69,25 @@ class AmazonAutoLinks_Event {
                 $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
 
                 // Force executing actions.
-                new AmazonAutoLinks_Shadow(
-                    $_bIsIntenseCachingMode
-                        ? array(
-                            'aal_action_unit_prefetch',
-                            'aal_action_simplepie_renew_cache',
-                            'aal_action_api_transient_renewal',
-                            'aal_action_api_get_product_info',
-                            'aal_action_api_get_products_info', // 3.7.7+
-//                            'aal_action_api_get_customer_review', // @deprecated 3.9.1
-                            'aal_action_api_get_customer_review2',
-                            'aal_action_api_get_similar_products',  // 3.3.0+
-                            'aal_action_http_cache_renewal',
-                            'aal_action_delete_expired_caches', // 3.4.0+
-                        )
-                        : array(
-                            'aal_action_unit_prefetch',
-                            'aal_action_api_get_product_info',
-                            'aal_action_api_get_products_info', // 3.7.7+
-//                            'aal_action_api_get_customer_review', // @deprecated 3.9.1
-                            'aal_action_api_get_customer_review2',
-                            'aal_action_api_get_similar_products',  // 3.3.0+
-                            'aal_action_http_cache_renewal',
-                        )
+                $_aHooksNormal  = array(
+                    'aal_action_unit_prefetch',
+                    'aal_action_api_get_products_info',         // 3.7.7
+                    'aal_action_api_get_customer_review2',
+                    'aal_action_http_cache_renewal',
+                    'aal_action_check_tasks',                   // 4.3.0
                 );
+                $_aHooksIntense = array_merge(
+                    $_aHooksNormal,
+                    array(
+                        'aal_action_simplepie_renew_cache',
+                        'aal_action_api_transient_renewal',
+                        'aal_action_delete_expired_caches',     // 3.4.0
+                    )
+                );
+                new AmazonAutoLinks_Shadow( $_bIsIntenseCachingMode ? $_aHooksIntense : $_aHooksNormal );
 
-                if ( ! $_bIsIntenseCachingMode ) {
-                    if ( AmazonAutoLinks_Shadow::isBackground() ) {
-                        exit;
-                    }
+                if ( ! $_bIsIntenseCachingMode && AmazonAutoLinks_Shadow::isBackground() ) {
+                    exit;
                 }
 
             }
