@@ -74,18 +74,21 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
          */
         protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='test' ) {
 
-            $_oReflect   = new ReflectionClass( $sClassName );
             $_aResults   = array();
-            foreach( $_oReflect->getMethods( ReflectionMethod::IS_PUBLIC ) as $_oMethod ) {
 
-                if ( ! $this->___canRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
+            $_oClass     = new ReflectionClass( $sClassName );
+            foreach( $_oClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $_oMethod ) {
+
+                if ( ! $this->___canMethodRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
                 $_aResults[]  = $this->___getMethodTested( $_oMethod, $sFilePath );
 
             }
             return $_aResults;
+
         }
+
             /**
              * @return array
              * @param ReflectionMethod $oMethod
@@ -94,7 +97,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
              */
             private function ___getMethodTested( ReflectionMethod $oMethod, $sFilePath ) {
 
-                $_sPurpose    = $this->___getMethodAnnotation( $oMethod, 'purpose' );
+                $_sPurpose    = $this->___getDocBlockAnnotation( $oMethod, 'purpose' );
                 $_sClassName  = $oMethod->class;
                 $_sMethodName = $oMethod->getName();
 
@@ -127,7 +130,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
              * @param string $sMethodPrefix
              * @return boolean
              */
-            private function ___canRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
+            private function ___canMethodRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
 
                 // The method might be of its parent class. In that case, skip.
                 if ( strtolower( $oMethod->class ) !== strtolower( $sClassName ) ) {
@@ -138,12 +141,34 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     return false;
                 }
 
-                //  Check if tags are specified
-                $_aMethodTags = $this->getStringIntoArray( $this->___getMethodAnnotation( $oMethod, 'tags' ), ',' );
-                if ( ! empty( $aTags ) && $this->isEmpty( array_intersect( $aTags, $_aMethodTags ) ) ) {
+                if ( $this->___hasAllowedTags( $oMethod->getDeclaringClass(), $aTags ) ) {
+                    return true;
+                }
+
+                if ( ! $this->___hasAllowedTags( $oMethod, $aTags ) ) {
                     return false;
                 }
 
+                return true;
+
+            }
+            /**
+             * @param ReflectionClass|ReflectionMethod $oSubject
+             * @param array $aSpecifiedTags
+             * @return bool `true` when tags are not specified or found. `false` when tags are specified and not found.
+             * @since 4.3.0
+             */
+            private function ___hasAllowedTags( $oSubject, array $aSpecifiedTags ) {
+
+                // Not specified, meaning all tags are allowed.
+                if ( empty( $aSpecifiedTags ) ) {
+                    return true;
+                }
+                // At this point there are specified tags that can only go through.
+                $_aDocBlockTags = $this->getStringIntoArray( $this->___getDocBlockAnnotation( $oSubject, 'tags' ), ',' );
+                if ( $this->isEmpty( array_intersect( $aSpecifiedTags, $_aDocBlockTags ) ) ) {
+                    return false;
+                }
                 return true;
 
             }
@@ -237,13 +262,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 ) + $_aDefault;
             }
         /**
-         * @param ReflectionMethod $oMethod
+         * @param ReflectionMethod|ReflectionClass $oSubject
          * @param $sAnnotation
          *
          * @return string
          */
-        private function ___getMethodAnnotation( ReflectionMethod $oMethod, $sAnnotation ) {
-            $_sDockBlock = $oMethod->getDocComment();
+        private function ___getDocBlockAnnotation( $oSubject, $sAnnotation ) {
+            $_sDockBlock = $oSubject->getDocComment();
             preg_match_all('/@\Q' . $sAnnotation . '\E\s+(.*?)\n/s', $_sDockBlock, $_aMatches );
             $_aAnnotations = $_aMatches[ 1 ];
             return implode( ' ', $_aAnnotations );
