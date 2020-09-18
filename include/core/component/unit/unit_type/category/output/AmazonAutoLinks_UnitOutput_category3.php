@@ -65,9 +65,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
         $_sMethodName        = "_getItemsSorted_{$_sSortType}";
         $_aProducts          = $this->{$_sMethodName}( $_aProducts );
 
-        $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
-
-        return $_aProducts;
+        return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
     }
         /**
@@ -210,7 +208,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             }
                 /**
                  * Extracts the last-modified header item and convert it to the unix timestamp.
-                 * @since 4.3.0
+                 * @since   4.2.10
                  * @param   WP_Error|array  $aoResponse
                  * @param   integer         $iDefault
                  * @return  integer
@@ -361,10 +359,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                  */
                 private function ___getProductsFormatted( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount ) {
 
+                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
+                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 3 );
                     $_iResultCount          = count( $_aProducts );
                     try {
 
-                        add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 3 );
                         $_aProducts             = $this->_getProductsFormatted( $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID );
 
                         $_iCountAfterFormatting = count( $_aProducts );
@@ -384,6 +383,11 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                         $_aProducts = array_merge( $_aProducts, $_aAdditionalProducts );
 
                     }
+
+                    // These removal are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
+                    remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
+                    remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
+
                     return $_aProducts;
 
                 }
@@ -514,6 +518,8 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
      * @callback    add_filter      aal_filter_unit_each_product_with_database_row
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
+
+        remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
 
         if ( empty( $aProduct ) ) {
             return array();

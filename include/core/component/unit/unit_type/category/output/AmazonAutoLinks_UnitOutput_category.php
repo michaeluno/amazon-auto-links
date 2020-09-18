@@ -80,10 +80,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     protected $_aExcludingRSSURLs = array();
 
     public function get( $aURLs=array(), $sTemplatePath=null ) {
-        $this->___setHooksForOutput();
-        $_sOutput = parent::get( $aURLs, $sTemplatePath );
-        $this->___removeHooksForOutput();
-        return $_sOutput;
+        return parent::get( $aURLs );
     }
 
     /**
@@ -128,28 +125,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
     }
         /**
-         * @since       3.3.0
-         */
-        private function ___setHooksForOutput() {
-            add_filter(
-                'aal_filter_unit_each_product_with_database_row', 
-                array( $this, 'replyToFormatProductWithDBRow' ), 
-                10, 
-                3
-            );
-        }
-        /**
-         * @since       3.5.0
-         */
-        private function ___removeHooksForOutput() {
-            remove_filter(
-                'aal_filter_unit_each_product_with_database_row',
-                array( $this, 'replyToFormatProductWithDBRow' ),
-                10
-            );
-        }
-
-        /**
          * @remark      The 'tag' unit type will extend this method.
          * @return      array
          */
@@ -173,6 +148,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
 
+        remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
+
         if ( empty( $aProduct ) ) {
             return array();
         }
@@ -183,6 +160,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $this->oUnitOption->get( 'description_length' ),
             $this->_getReadMoreText( $aProduct[ 'product_url' ] )
         );
+
         $_sDescriptionExtracted     = $_sDescriptionExtracted
             ? "<div class='amazon-product-description'>"
                 . $_sDescriptionExtracted
@@ -216,10 +194,10 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $this->oUnitOption
         );
 
-        $_anReviews = $_oRow->getCell( 'editorial_reviews', array() );
-        if ( $this->___hasEditorialReviews( $_anReviews ) ) {
+        $_ansReviews = $_oRow->getCell( 'editorial_reviews', array() );
+        if ( $this->___hasEditorialReviews( $_ansReviews ) ) {
             $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content(
-                $this->getAsArray( $_anReviews ),
+                $_ansReviews,
                 $this->oDOM,
                 $this->oUnitOption
             );
@@ -246,6 +224,10 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             // if null, the product data is not inserted in the plugin's database table.
             if ( is_null( $anReviews ) ) {
                 return false;
+            }
+
+            if ( is_string( $anReviews ) && $anReviews ) {
+                return true;
             }
             return is_array( $anReviews );
         }
@@ -285,7 +267,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             ( int ) $this->oUnitOption->get( 'cache_duration' ),
             ( boolean ) $this->oUnitOption->get( '_force_cache_renewal' )
         );
-        $_oRSS->sSortOrder = $this->_getSortOrder();        
+        $_oRSS->sSortOrder = $this->_getSortOrder();
+
         return $this->getProducts( $_oRSS->get() );
 
     }

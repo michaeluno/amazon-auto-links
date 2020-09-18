@@ -103,9 +103,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             if ( ! $this->oOption->isAPIKeySet() ) {
                 return array();
             }
-            $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup(
-                array( 'ItemIds' => $aASINs ) + $this->oUnitOption->get()
-            );
+
+            $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( array( 'ItemIds' => $aASINs ) + $this->oUnitOption->get() );
             return $_oUnit->fetch();
 
         }
@@ -250,6 +249,47 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $this->___aErrors[ $_sURL ] = $_aoResponse->get_error_message();
         }
         return $aResponses;
+    }
+
+    /**
+     * Called when the unit has access to the plugin custom database table.
+     *
+     * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
+     *
+     * @since       4.2.10
+     * @return      array
+     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     * @param   array $aProduct
+     * @param   array $aDBRow
+     * @param   array $aScheduleIdentifier
+     */
+    public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
+
+        remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
+
+        if ( empty( $aProduct ) ) {
+            return array();
+        }
+
+        $aProduct[ 'content' ]          = $this->_getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
+        $_sDescriptionExtracted         = $this->_getDescriptionSanitized(
+            $aProduct[ 'content' ],
+            $this->oUnitOption->get( 'description_length' ),
+            $this->_getReadMoreText( $aProduct[ 'product_url' ] )
+        );
+        $aProduct[ 'description' ]      = $_sDescriptionExtracted
+            ? "<div class='amazon-product-description'>"
+                    . $_sDescriptionExtracted
+                . "</div>"
+            : '';
+
+        $aProduct[ 'text_description' ] = strip_tags( $aProduct[ 'description' ] );
+        if ( $this->isDescriptionBlocked( $aProduct[ 'text_description' ] ) ) {
+            $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
+            return array(); // will be dropped
+        }
+        return $aProduct;
+
     }
 
 }

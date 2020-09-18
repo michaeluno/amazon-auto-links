@@ -16,7 +16,10 @@
 class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtility {
 
     public $aReviews    = array();
-    
+
+    // 4.2.10
+    public $sReview;
+
     public $oDOM;
     
     public $oUnitOption;
@@ -26,9 +29,13 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
      * @since       3
      * @since       3.9.0       Gave a type hint for the $aReviews parameter.
      */
-    public function __construct( array $aReviews, $oDOM, $oUnitOption ) {
-        
-        $this->aReviews    = $aReviews;
+    public function __construct( $asReviews, $oDOM, $oUnitOption ) {
+
+        // 4.2.10
+        if ( is_string( $asReviews ) ) {
+            $this->sReview = $asReviews;
+        }
+        $this->aReviews    = $asReviews;
         $this->oDOM        = $oDOM;
         $this->oUnitOption = $oUnitOption;
         
@@ -39,6 +46,10 @@ class AmazonAutoLinks_UnitOutput__Format_content extends AmazonAutoLinks_WPUtili
      * @return      string
      */
     public function get() {
+
+        if ( isset( $this->sReview ) ) {
+            return $this->sReview;
+        }
 
         $_sContents = $this->___getJoinedElements( $this->aReviews, 'Content' );
         $_sContents = $this->___getContentsSanitized( $_sContents );
