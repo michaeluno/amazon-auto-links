@@ -44,7 +44,7 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
 
         $_aTasks       = array();
         $_aPseudoLocks = array();
-        $_iNextRunTime = date( 'Y-m-d H:i:s', time() + $this->___getMaxExecutionTime() - 1 );
+        $_iNextRunTime = date( 'Y-m-d H:i:s', time() + $this->getAllowedMaxExecutionTime( 30, 300 ) - 1 );
         foreach( $this->___getDueTasks() as $_aTask ) {
             $_aPseudoLocks[] = array(
                 'name'          => $_aTask[ 'name' ],
@@ -70,21 +70,6 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         }
 
     }
-        /**
-         * @param integer $iDefault
-         * @return integer
-         * @since 4.3.0
-         */
-        private function ___getMaxExecutionTime( $iDefault=30 ) {
-            // Some servers disable this function for security purposes.
-            if ( ! function_exists( 'ini_get' ) ) {
-                return $iDefault;
-            }
-            $_iSetMaxExecutionTime = ini_get('max_execution_time' );
-            return $_iSetMaxExecutionTime
-                ? $_iSetMaxExecutionTime
-                : $iDefault;
-        }
         /**
          * Do actions by action name.
          * @param array $aActionTasks

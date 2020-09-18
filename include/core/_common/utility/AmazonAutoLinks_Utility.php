@@ -464,16 +464,18 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * Retrieves the server set allowed maximum PHP script execution time.
      * 
      * @since            2.0.4
+     * @param   integer $iDefault
+     * @param   integer $iMax
+     * @return  integer
      */
     static public function getAllowedMaxExecutionTime( $iDefault=30, $iMax=120 ) {
-        
-        $iSetTime = function_exists( 'ini_get' ) && ini_get( 'max_execution_time' ) 
-            ? ( int ) ini_get( 'max_execution_time' ) 
+
+        $_iSetTime = function_exists( 'ini_get' )
+            ? ( integer ) ini_get( 'max_execution_time' )
             : $iDefault;
-        
-        return $iSetTime > $iMax
-            ? $iMax
-            : $iSetTime;
+        $_iSetTime = 0 === $_iSetTime ? $iMax : $_iSetTime;
+        return $_iSetTime > $iMax
+            ? ( integer ) $iMax : ( integer ) $_iSetTime;
         
     }
     
