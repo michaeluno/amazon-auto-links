@@ -120,6 +120,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
     public function request( array $aPayload, $iCacheDuration=86400, $bForceRenew=false ) {
 
         $aPayload     = $aPayload + $this->___aPayload;
+        ksort( $aPayload ); // this is important for generating the id of caches.
         $_oAPIHeader  = new AmazonAutoLinks_PAAPI50___RequestHeaderGenerator(
             $this->___sPublicKey,
             $this->___sSecretKey,
