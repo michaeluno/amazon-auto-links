@@ -13,63 +13,65 @@ class AmazonAutoLinks_Shadow {
      * 
      * This is for preventing too many background calls to be performed.
      * 
-     * @since            1.0.0
+     * @since   1.0.0
+     * @var     integer
      */
-    static protected $_iLockBackgroundCallInterval = 10;
+    static private $___iLockInterval = 10;
         
     /**
      * The interval in seconds that locks the cron.
      * 
      * This is for preventing WordPress pseudo cron jobs from being performed too frequently. 
      * 
-     * @since            1.0.0
+     * @since   1.0.0
+     * @var     integer
      */
-    static protected $_iLockCronInterval = 10;    
-        
-    /**
-     * If this flag is true, the background process will be triggered even when the protection interval is not expired.
-     * 
-     * @since            1.0.0
-     */
-    static protected $_fIgnoreLock = false;
-    
+    static private $___iLockCronInterval = 10;    
+
+
     /**
      * The get method query array holding the key-value pairs.
+     * @var array
      */
-    static protected $_aGet = array();
+    static private $___aGet = array();
     
     /**
-      * Checks if the page load is performed in the background and if so, performs the given actions if scheduled.
+     * Checks if the page load is performed in the background
+     * and if so, performs the given actions if scheduled.
      * 
      * @since   1.0.0
      * @param   array   $aActionHooks
-      */ 
+     */
     public function __construct( array $aActionHooks ) {
 
         if ( empty( $aActionHooks ) ) {
             return;
         }
 
-        if ( self::___isDoingCron() ) {
+        if ( self::___isDoingWPCronOrAjax() ) {
             return;
         }
-        if ( self::___isDoingAjax() ) {
-            return;
-        }
-        if ( ! $this->isBackground() ) { 
+        if ( ! $this->___isBackground() ) {
             return;
         }
 
-        self::___setBackground();
+        // At this point, this is a background page load.
+
+        self::___setBackgroundFlags();
 
         // Do not process if a delay is not set.
-        if ( ! $this->isBackground( true ) ) {
-            $this->_loadBackgroundPageWithDelay(2, $_GET );
-            exit();
-        }
+        // @deprecated 4.3.0
+/*        if ( ! $this->___isBackgroundWithDelay() ) {
+            $_iDelay = 2;
+            $_aGet   = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? array( 'delay' => $_iDelay ) + $_GET
+                : $_GET;
+            $this->___loadSiteInBackgroundWithDelay( $_iDelay, $_aGet );
+            exit;
+        }*/
 
-        // At this point, the page is loaded in the background with some delays.
-        $this->_handleCronTasks( $aActionHooks );
+        $this->___handleCronTasks( $aActionHooks );
+        exit;
         
     }
     
@@ -77,18 +79,23 @@ class AmazonAutoLinks_Shadow {
      * Checks whether the page is loaded in the background.
      * 
      * @since   1.0.0
-     * @param   boolean $bIsDelayed
+     * @since   4.3.0       Deprecated the `$bIsDelayed` parameter.
      * @return  boolean
      */    
-    static public function isBackground( $bIsDelayed=false ) {
-        
+    static private function ___isBackground() {
         $_sKey = md5( get_class() );
-        if ( ! $bIsDelayed ) {
-            return isset( $_COOKIE[ $_sKey ] );
-        }
-        return isset( $_COOKIE[ 'delay' ], $_COOKIE[ $_sKey ] );
-        
+        return isset( $_COOKIE[ $_sKey ] );
     }
+
+    /**
+     * @return bool
+     * @since   4.3.0
+     * @deprecated 4.3.0
+     */
+/*    static private function ___isBackgroundWithDelay() {
+        $_sKey = md5( get_class() );
+        return isset( $_COOKIE[ 'delay' ], $_COOKIE[ $_sKey ] );
+    }*/
     
     /**
      * Handles plugin cron tasks.
@@ -98,42 +105,34 @@ class AmazonAutoLinks_Shadow {
      * @since    1.0.0
      * @param    array   $aActionHooks
      */
-    protected function _handleCronTasks( array $aActionHooks ) {
+    private function ___handleCronTasks( array $aActionHooks ) {
 
         $_sTransientName = md5( get_class() );
-        $_aTasks         = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
-        $_nNow           = microtime( true );
-        $_nCalledTime    = isset( $_aTasks[ 'called' ] ) ? $_aTasks[ 'called' ] : 0;
-        $_nLockedTime    = isset( $_aTasks[ 'locked' ] ) ? $_aTasks[ 'locked' ] : 0;
-        unset( $_aTasks[ 'called' ], $_aTasks[ 'locked' ] );    // leave only task elements.
-        
+        $_aFlags         = AmazonAutoLinks_WPUtility::getTransientWithoutCacheAsArray( $_sTransientName ) + array(
+            '_called'    => 0, '_locked'    => 0,
+        );
+        $_fNow           = microtime( true );
+
         // If it's still locked do nothing. Locked duration: 10 seconds.
-        if ( $_nLockedTime + self::$_iLockCronInterval > $_nNow ) {        
+        if ( $_aFlags[ '_locked' ] + self::$___iLockCronInterval > $_fNow ) {
             return;
-        }        
-        
-        // Retrieve the plugin cron scheduled tasks.
-        if ( empty( $_aTasks ) ) {
-            $_aTasks = $this->_getScheduledCronTasksByActionName( $aActionHooks );
         }
-        // If the task is still empty,
+
+        // Newly retrieve the plugin cron scheduled tasks since some may be already triggered by WP Cron.
+        $_aTasks = $this->___getScheduledWPCronTasksByActionName( $aActionHooks );
         if ( empty( $_aTasks ) ) {                    
             return;
         } 
-        
-        $aFlagKeys = array(
-            'locked'    => microtime( true ),    // set/renew the locked time
-            'called'    => $_nCalledTime,        // inherit the called time
-        );
-        AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $aFlagKeys + $_aTasks, $this->getAllowedMaxExecutionTime() ); // lock the process.
-        $this->_doTasks( $_aTasks );    
 
-        // remove tasks but leave the flag element.
-        AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $aFlagKeys, $this->getAllowedMaxExecutionTime() ); // lock the process.
-        exit;
-        
+        // Set/renew the locked time and leave `_called` to inherit the called time.
+        $_aFlags[ '_locked' ] = $_fNow;
+
+        // Lock the process.
+        AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $_aFlags, AmazonAutoLinks_Utility::getAllowedMaxExecutionTime() );
+        $this->___doTasks( $_aTasks );
+
     }
-            
+
     /**
      * Performs the plugin-specific scheduled tasks in the background.
      * 
@@ -142,11 +141,11 @@ class AmazonAutoLinks_Shadow {
      * @since 1.0.0
      * @param array $aTasks
      */
-    protected function _doTasks( array $aTasks ) {
+    private function ___doTasks( array $aTasks ) {
         
-        foreach( $aTasks as $iTimeStamp => $aCronHooks ) {
+        foreach( $aTasks as $_iTimeStamp => $aCronHooks ) {
 
-            // the 'locked' key flag element should be skipped
+            // the '_locked' key flag element should be skipped
             if ( ! is_array( $aCronHooks ) ) {
                 continue;
             }
@@ -157,10 +156,10 @@ class AmazonAutoLinks_Shadow {
                                                                         
                     $sSchedule = $aArgs[ 'schedule' ];
                     if ( $sSchedule != false ) {
-                        $aNewArgs = array( $iTimeStamp, $sSchedule, $sActionName, $aArgs[ 'args' ] );
+                        $aNewArgs = array( $_iTimeStamp, $sSchedule, $sActionName, $aArgs[ 'args' ] );
                         call_user_func_array( 'wp_reschedule_event', $aNewArgs );
                     }
-                    wp_unschedule_event( $iTimeStamp, $sActionName, $aArgs[ 'args' ] );
+                    wp_unschedule_event( $_iTimeStamp, $sActionName, $aArgs[ 'args' ] );
                     do_action_ref_array( $sActionName, $aArgs[ 'args' ] );
                 
                 }
@@ -175,9 +174,9 @@ class AmazonAutoLinks_Shadow {
      *  
      * @since 1.0.0
      * @param array $aActionHooks
-     * @return array A tasks array.
+     * @return array A array holding tasks registered for WP_Cron.
      */
-    protected function _getScheduledCronTasksByActionName( array $aActionHooks ) {
+    private function ___getScheduledWPCronTasksByActionName( array $aActionHooks ) {
         
         $_aTheTasks = array();        
         $_aTasks    = _get_cron_array();
@@ -185,7 +184,7 @@ class AmazonAutoLinks_Shadow {
         // if the cron tasks array is empty, do nothing.
         if ( ! $_aTasks ) {
             return $_aTheTasks;
-        };
+        }
 
         $_iGMTTime             = microtime( true );    // the current time stamp in micro seconds.
         $_aScheduledTimeStamps = array_keys( $_aTasks );
@@ -197,121 +196,96 @@ class AmazonAutoLinks_Shadow {
             if ( $_iTimeStamp > $_iGMTTime ) {
                 break; // see the definition of the wp_cron() function.
             }
-            foreach ( ( array ) $_aScheduledActionHooks as $_sScheduledActionHookName => $_aArgs ) {
+            foreach ( ( array ) $_aScheduledActionHooks as $_sScheduledActionHookName => $_aArguments ) {
                 if ( in_array( $_sScheduledActionHookName, $aActionHooks ) ) {
-                    $_aTheTasks[ $_iTimeStamp ][ $_sScheduledActionHookName ] = $_aArgs;
+                    $_aTheTasks[ $_iTimeStamp ][ $_sScheduledActionHookName ] = $_aArguments;
                 }
             }
         }
         return $_aTheTasks;
                 
     }
-    
-    /**
-     * Retrieves the server set allowed maximum PHP script execution time.
-     * 
-     */
-    static protected function getAllowedMaxExecutionTime( $iDefault=30, $iMax=120 ) {
-        $iSetTime = function_exists( 'ini_get' ) && ini_get( 'max_execution_time' ) 
-            ? ( int ) ini_get( 'max_execution_time' ) 
-            : $iDefault;
-        return $iSetTime > $iMax ? $iMax : $iSetTime;
-    }
-    
+
     /**
      * Accesses the site in the background.
      * 
      * @since   1.0.1
      * @param   array $aGet The GET HTTP method array.
+     * @deprecated 4.3.0    Not used anymore.
      */
-    static public function gaze( $aGet=array() ) {
-
-        if ( self::___isDoingCron() ) {
-            return;
-        }
-        if ( self::___isDoingAjax() ) {
-            return;
-        }
+/*    static public function gaze( $aGet=array() ) {
         
-        // Ensures the task is done only once per page load.
+        if ( self::___isDoingWPCronOrAjax() ) {
+            return;
+        }
         if ( AmazonAutoLinks_Utility::hasBeenCalled( __METHOD__ ) ) {
             return;
         }
 
-        self::_loadBackgroundPageWithDelay( 0, $aGet );
+        self::___loadSiteInBackgroundWithDelay( 0, $aGet );
         
-    }
+    }*/
     
     /**
      * Accesses the site in the background at the end of the script execution.
      * 
      * This is used to trigger cron events in the background and sets a static flag so that it ensures it is done only once per page load.
-     * 
-     * @since            1.0.0
+     *
+     * @since   1.0.0
+     * @since   4.3.0   Deprecated the `$fIgnoreLock` parameter.
+     * @param   array   $aGet
      */
-    static public function see( $aGet=array(), $fIgnoreLock=false ) {
+    static public function see( array $aGet=array() ) {
 
-        if ( self::___isDoingCron() ) {
+        // Prevent recursive calls.
+        if ( self::___isDoingWPCronOrAjax() ) {
             return;
         }
-        if ( self::___isDoingAjax() ) {
-            return;
-        }
-
-        // Ensures the task is done only once in a page load.
         if ( AmazonAutoLinks_Utility::hasBeenCalled( __METHOD__ ) ) {
             return;
         }
         
         // Store the static properties.
-        self::$_fIgnoreLock = $fIgnoreLock ? $fIgnoreLock : self::$_fIgnoreLock;
-        self::$_aGet        = ( array ) $aGet + self::$_aGet;
+        self::$___aGet = ( array ) $aGet + self::$___aGet;
 
         if ( did_action( 'shutdown' ) ) {
-            self::_replyToAccessSite();
+            self::replyToLoadSiteInBackground();
             return;    // important as what the action has performed does not mean the action never will be fired again.
         }
-        add_action( 'shutdown', array( __CLASS__, '_replyToAccessSite' ), 999 );
+        add_action( 'shutdown', array( __CLASS__, 'replyToLoadSiteInBackground' ), 999 );
 
     }    
         /**
-         * A callback for the accessSiteAtShutDown() method.
-         * 
-         * @since            1.0.0
+         * @since       1.0.0
+         * @callback    add_action  shutdown
          */
-        static public function _replyToAccessSite() {
+        static public function replyToLoadSiteInBackground() {
 
             // Retrieve the plugin scheduled tasks array.
             $_sTransientName = md5( get_class() );
-            $_aTasks         = AmazonAutoLinks_WPUtility::getTransient( $_sTransientName );
-            $_aTasks         = $_aTasks ? $_aTasks : array();
-            $_nNow           = microtime( true );
+            $_aFlags         = AmazonAutoLinks_WPUtility::getTransientWithoutCacheAsArray( $_sTransientName ) + array(
+                '_called' => 0,
+            );
+            $_fNow           = microtime( true );
             
-            // Check the excessive background call protection interval 
-            if ( ! self::$_fIgnoreLock ) {                
-                $_nCalled = isset( $_aTasks['called'] ) 
-                    ? $_aTasks['called'] 
-                    : 0;
-                if ( $_nCalled + self::$_iLockBackgroundCallInterval > $_nNow ) {    
-                    return;    // if it's called within 10 seconds from the last time of calling this method, do nothing to avoid excessive calls.
-                } 
-            }
+            // Prevent excessive background calls.
+            // If called within the set interval seconds from the last time of calling this method,
+            // do nothing to avoid excessive calls.
+            if ( $_aFlags[ '_called' ] + self::$___iLockInterval > $_fNow ) {
+                return;
+            } 
+            
             
             // Renew the called time.
-            $_aFlagKeys = array(
-                'called'    =>    $_nNow,
-            );
-            // set a locked key so it prevents duplicated function calls due to too many calls caused by simultaneous accesses.
-            AmazonAutoLinks_WPUtility::setTransient( 
-                $_sTransientName, 
-                $_aFlagKeys + $_aTasks, 
-                self::getAllowedMaxExecutionTime() 
-            );    
-            
-            // Compose a GET query array
-            $_aGet = self::$_aGet;
+            $_aFlags[ '_called' ] = $_fNow;
+
+            // Set a lock so to prevent duplicated function calls with simultaneous accesses.
+            AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $_aFlags, AmazonAutoLinks_Utility::getAllowedMaxExecutionTime() );
+
+            // $_GET
+            $_aGet = self::$___aGet;
             if ( defined( 'WP_DEBUG' ) ) {
-                $_aGet[ 'debug' ] = WP_DEBUG;
+                $_aGet[ 'debug' ] = 'aal_shadow';
             }
             unset( $_aGet[ 0 ] );
             
@@ -321,7 +295,9 @@ class AmazonAutoLinks_Shadow {
                 array( 
                     'timeout'    => 0.01,
                     'sslverify'  => false, 
-                    'cookies'    => $_aFlagKeys + array( $_sTransientName => true ),
+                    'cookies'    => $_aFlags + array(
+                        $_sTransientName => true
+                    ),
                 ) 
             );    
 
@@ -332,9 +308,12 @@ class AmazonAutoLinks_Shadow {
          * 
          * This gives the server enough time to store transients to the database in case massive simultaneous accesses occur.
          * 
-         * @since            1.0.0
+         * @since 1.0.0
+         * @param integer $iSecond   How many seconds to delay.
+         * @param array   $aGet      The HTTP GET method array.
+         * @deprecated 4.3.0
          */
-        static private function _loadBackgroundPageWithDelay( $iSecond=1, $aGet=array() ) {
+/*        static private function ___loadSiteInBackgroundWithDelay( $iSecond=1, array $aGet=array() ) {
             
             sleep( $iSecond );
             
@@ -342,21 +321,32 @@ class AmazonAutoLinks_Shadow {
                 $aGet[ 'debug' ] = WP_DEBUG;
             }            
             wp_remote_get(
-                site_url(  '?' . http_build_query( $aGet ) ), 
+                site_url( '?' . http_build_query( $aGet ) ),
                 array( 
                     'timeout'    => 0.01, 
                     'sslverify'  => false, 
-                    'cookies'    => array( md5( get_class() ) => true, 'delay' => true ),
+                    'cookies'    => array(
+                        md5( get_class() ) => true,
+                        'delay' => true
+                    ),
                 ) 
-            );                
-        }
+            );
 
+        }*/
 
     /**
-     * @return bool
+     * @return boolean
      * @since 4.3.0
      */
-    static private function ___isDoingCron() {
+    static private function ___isDoingWPCronOrAjax() {
+        return self::___isDoingWPCron() || self::___isDoingAjax();
+    }
+
+    /**
+     * @return boolean
+     * @since 4.3.0
+     */
+    static private function ___isDoingWPCron() {
         if ( isset( $_GET[ 'doing_wp_cron' ] ) ) {
             return true;
         }
@@ -384,7 +374,7 @@ class AmazonAutoLinks_Shadow {
      * Tells WordPress this is a background routine by setting the Cron flag.
      * @since   4.3.0
      */
-    static private function ___setBackground() {
+    static private function ___setBackgroundFlags() {
         if ( ! defined( 'DOING_CRON' ) ) {
             define( 'DOING_CRON', true );
         }
