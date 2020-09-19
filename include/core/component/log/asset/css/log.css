@@ -1,3 +1,7 @@
+/*
+    @name: Log Admin Screen
+    @version: 1.0.1
+*/
 .log {
     display: none;
     background-color: #eee;
@@ -24,6 +28,9 @@
 .log .log-item-body {
     display: none;
     white-space: nowrap;
+}
+.log .log-item-body .extra {
+    white-space: pre;
 }
 
 .log .log-item-head {
