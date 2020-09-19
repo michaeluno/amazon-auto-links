@@ -170,8 +170,18 @@ class AmazonAutoLinks_Event_Scheduler {
         if ( ! isset( self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] ) ) {
             self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] = array();
         }
-        self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = func_get_args();
 
+        self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = func_get_args() + (
+            defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? array(
+                    'debug' => array(
+                        'time'         => microtime( true ),
+                        'stacktrace'   => AmazonAutoLinks_Debug::getStackTrace( new Exception ),
+                        'page_load_id' => AmazonAutoLinks_Utility::getPageLoadID(),
+                    ),
+                )
+                : array()
+        );
 
     }
         /**
@@ -215,11 +225,12 @@ class AmazonAutoLinks_Event_Scheduler {
                     $_sLanguage    = $_aRequestInfo[ 3 ];
 
                     foreach( $_aItems as $_sASIN => $_aItem ) {
+                        $_aDebugInfo  = AmazonAutoLinks_Utility::getElementAsArray( $_aItem, array( 'debug' ) );
                         $_aTaskRows[] = array(
                             // ASIN|Locale|Currency|Language
                             'name'          => $_aItem[ 1 ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,  // product_id
                             'action'        => 'aal_action_api_get_products_info',
-                            'arguments'     => array( array( $_aItem ), $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage ),
+                            'arguments'     => array( array( $_aItem ), $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage, $_aDebugInfo ),
                             'creation_time' => date( 'Y-m-d H:i:s', time() ),
                             'next_run_time' => date( 'Y-m-d H:i:s', time() ),
                         );
