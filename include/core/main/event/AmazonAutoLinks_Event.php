@@ -27,101 +27,109 @@ class AmazonAutoLinks_Event {
     public function __construct() {
         add_action( 'aal_action_loaded_plugin', array( $this, 'replyToLoadEvents' ) );
     }
+
+    /**
+     * @return      void
+     * @since       3.3.0
+     */
+    public function replyToLoadEvents() {
+
+        do_action( 'aal_action_events' );
+
+        $this->___handleWPCronEvents();
+        $this->___handleQueryURL();
+        $this->___handleActions();
+        $this->___handleFilters();
+
+        // This must be called at last as hooks especially for WP Cron must be set up.
+        $this->___handleBackgroundRoutines();
+
+    }
+
         /**
+         * @since       3.5.0
          * @return      void
-         * @since       3.3.0
          */
-        public function replyToLoadEvents() {
+        private function ___handleWPCronEvents() {
 
-            do_action( 'aal_action_events' );
-
-            $this->___handleWPCronEvents();
-
-            $this->___handleBackgroundRoutines();
-
-            $this->___handleQueryURL();
-
-            $this->___handleActions();
-            $this->___handleFilters();
+            new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
+            new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
+            new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
 
         }
 
-            /**
-             * @since       3.5.0
-             * @return      void
-             */
-            private function ___handleWPCronEvents() {
+        /**
+         *
+         * @since       3.1.0
+         * @return      void
+         */
+        private function ___handleQueryURL() {
 
-                new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
-                new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
-                new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
-
+            $_oOption     = AmazonAutoLinks_Option::getInstance();
+            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
+            if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
+                return;
             }
 
-            /**
-             * @since       3.5.0
-             * @return      void
-             */
-            private function ___handleBackgroundRoutines() {
+            new AmazonAutoLinks_Event___Query_Feed( $_sQueryKey );
+            new AmazonAutoLinks_Event___Query_Redirect( $_sQueryKey );
 
-                // This must be called after the above action hooks.
-                $_oOption               = AmazonAutoLinks_Option::getInstance();
-                $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
+        }
 
-                // Force executing actions.
-                $_aHooksNormal  = array(
-                    'aal_action_unit_prefetch',
-                    'aal_action_api_get_products_info',         // 3.7.7
-                    'aal_action_api_get_customer_review2',
-                    'aal_action_http_cache_renewal',
-                    'aal_action_check_tasks',                   // 4.3.0
-                );
-                $_aHooksIntense = array_merge(
-                    $_aHooksNormal,
-                    array(
-                        'aal_action_simplepie_renew_cache',
-                        'aal_action_api_transient_renewal',
-                        'aal_action_delete_expired_caches',     // 3.4.0
-                    )
-                );
-                new AmazonAutoLinks_Shadow( $_bIsIntenseCachingMode ? $_aHooksIntense : $_aHooksNormal );
+        /**
+         * @since       4.0.0
+         */
+        private function ___handleActions() {
+            new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
+            new AmazonAutoLinks_Event_Error_Log;  // 4.2.0
+        }
 
-                if ( ! $_bIsIntenseCachingMode && AmazonAutoLinks_Shadow::isBackground() ) {
-                    exit;
-                }
+        private function ___handleFilters() {
+            new AmazonAutoLinks_Event_HTTPClientArguments;
+            new AmazonAutoLinks_Event_Filter_HTTPRequestCache;  // 4.2.0
+            new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError; // 4.2.2
+        }
 
-            }
+        /**
+         * Handling background routines should be done after all hooks and their callbacks are set up.
+         *
+         * As it reads and trigger WP Cron tasks, the callback functions associated with registered action names must be set up.
+         *
+         * @callback    add_action  aal_action_loaded_plugin
+         * @since       3.5.0
+         * @return      void
+         */
+        private function ___handleBackgroundRoutines() {
 
-            /**
-             * 
-             * @since       3.1.0
-             * @return      void
-             */
-            private function ___handleQueryURL() {
-                
-                $_oOption     = AmazonAutoLinks_Option::getInstance();
-                $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
-                if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
-                    return;
-                }
+            // This must be called after the above action hooks.
+            $_oOption               = AmazonAutoLinks_Option::getInstance();
+            $_bIsIntenseCachingMode = 'intense' === $_oOption->get( 'cache', 'caching_mode' );
 
-                new AmazonAutoLinks_Event___Query_Feed( $_sQueryKey );
-                new AmazonAutoLinks_Event___Query_Redirect( $_sQueryKey );
-                
-            }
+            // Force executing actions.
+            $_aHooksNormal  = array(
+                'aal_action_unit_prefetch',
+                'aal_action_api_get_products_info',         // 3.7.7
+                'aal_action_api_get_customer_review2',
+                'aal_action_http_cache_renewal',
+                'aal_action_check_tasks',                   // 4.3.0
+            );
+            $_aHooksIntense = array_merge(
+                $_aHooksNormal,
+                array(
+                    'aal_action_simplepie_renew_cache',
+                    'aal_action_api_transient_renewal',
+                    'aal_action_delete_expired_caches',     // 3.4.0
+                )
+            );
+            new AmazonAutoLinks_Shadow( $_bIsIntenseCachingMode ? $_aHooksIntense : $_aHooksNormal );
 
-            /**
-             * @since       4.0.0
-             */
-            private function ___handleActions() {
-                new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
-                new AmazonAutoLinks_Event_Error_Log;  // 4.2.0
-            }
+            // @deprecated 4.3.0
+            // If it is a background page load, exit() is performed via the constructor of AmazonAutoLinks_Shadow.
+    //                if ( ! $_bIsIntenseCachingMode && AmazonAutoLinks_Shadow::isBackground() ) {
+    //                    exit;
+    //                }
 
-            private function ___handleFilters() {
-                new AmazonAutoLinks_Event_HTTPClientArguments;
-                new AmazonAutoLinks_Event_Filter_HTTPRequestCache;  // 4.2.0
-                new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError; // 4.2.2
-            }
+        }
+
 
 }
