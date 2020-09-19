@@ -19,6 +19,7 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Sets up hooks and properties.
+     * @param string $sScriptPath
      */
     public function __construct( $sScriptPath ) {
         
