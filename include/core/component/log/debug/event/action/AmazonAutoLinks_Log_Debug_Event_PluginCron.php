@@ -28,7 +28,6 @@ class AmazonAutoLinks_Log_Debug_Event_PluginCron extends AmazonAutoLinks_PluginU
             'tasks'   => $aWPCronTasks,
         );
         do_action( 'aal_action_debug_log', 'PLUGIN_CRON', $this->getCurrentURL(), $_aData, current_filter() );
-
     }
 
 }
