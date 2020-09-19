@@ -127,6 +127,7 @@ return array(
     "AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/admin/AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log.php", 
     "AmazonAutoLinks_Log_Debug_Event_DebugLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_DebugLog.php", 
     "AmazonAutoLinks_Log_Debug_Event_HTTPRequest" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_HTTPRequest.php", 
+    "AmazonAutoLinks_Log_Debug_Event_PluginCron" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_PluginCron.php", 
     "AmazonAutoLinks_Log_Error_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/AmazonAutoLinks_Log_Error_Loader.php", 
     "AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog.php", 
     "AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php", 

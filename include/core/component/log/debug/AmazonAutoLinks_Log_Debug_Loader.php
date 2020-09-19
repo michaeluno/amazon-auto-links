@@ -40,6 +40,7 @@ class AmazonAutoLinks_Log_Debug_Loader extends AmazonAutoLinks_PluginUtility {
 
         new AmazonAutoLinks_Log_Debug_Event_DebugLog;
         new AmazonAutoLinks_Log_Debug_Event_HTTPRequest;
+        new AmazonAutoLinks_Log_Debug_Event_PluginCron;
 
         $this->___loadAdminComponents();
 
