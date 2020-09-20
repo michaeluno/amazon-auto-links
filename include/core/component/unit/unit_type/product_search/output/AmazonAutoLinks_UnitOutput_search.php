@@ -591,7 +591,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          */
         protected function _getProductsFromResponseItems( array $aItems, $_sLocale, $_sAssociateID, $_sResponseDate, $_iCount ) {
 
-            $_aASINLocales  = array();  // stores added product ASINs for performing a custom database query.
+            $_aASINLocaleCurLangs  = array();  // stores added product ASINs for performing a custom database query.
             $_aProducts     = array();
 
             $_sLocale       = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
@@ -641,9 +641,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     continue;   // skip
                 }
 
-                // @deprecated 3.9.0 $_aASINLocales[] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
-                $_aASINLocaleCurLang    = $_aProduct[ 'ASIN' ] . '|' . strtoupper( $_sLocale ) . '|' . $_sCurrency . '|' . $_sLanguage;
-                $_aASINLocales[ $_aASINLocaleCurLang ] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
+                $_aASINLocaleCurLang = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+                $_aASINLocaleCurLangs[ $_aASINLocaleCurLang ] = array(
+                    'asin'     => $_aProduct[ 'ASIN' ],
+                    'locale'   => $_sLocale,
+                    'currency' => $_sCurrency,
+                    'language' => $_sLanguage,
+                );
                 
                 $_aProducts[]    = $_aProduct;
                 
@@ -657,21 +661,28 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             return $this->___getProductsFormattedFromResponseItems(
                 $aItems,
                 $_aProducts,
-                $_aASINLocales,
+                $_aASINLocaleCurLangs,
                 $_sLocale,
                 $_sAssociateID,
                 $_iCount,
                 $_sResponseDate
             );
             
-        }    
-                
+        }
+
             /**
              *
-             * @return     array
-             * @since      3.5.0
+             * @param  array   $aItems
+             * @param  array   $_aProducts
+             * @param  array   $aASINLocaleCurLangs    Items for db queries.
+             * @param  string  $_sLocale
+             * @param  string  $_sAssociateID
+             * @param  integer $_iCount
+             * @param  string  $_sResponseDate
+             * @return array
+             * @since  3.5.0
              */
-            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount, $_sResponseDate ) {
+            private function ___getProductsFormattedFromResponseItems( $aItems, $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID, $_iCount, $_sResponseDate ) {
         
                 try {
 
@@ -679,7 +690,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     // Second iteration.
                     $_aProducts = $this->_getProductsFormatted(
                         $_aProducts,
-                        $_aASINLocales,
+                        $aASINLocaleCurLangs,
                         $_sLocale,
                         $_sAssociateID
                     );

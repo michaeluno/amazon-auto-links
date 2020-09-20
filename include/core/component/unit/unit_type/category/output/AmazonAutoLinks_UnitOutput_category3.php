@@ -13,7 +13,6 @@
  * 
  * @package     Amazon Auto Links
  * @since       3.9.0           Changed the name from `AmazonAutoLinks_UnitOutput_Category`.
-
  */
 class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_category {
 
@@ -38,8 +37,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
      * 
      * If the first parameter is not given, 
      * it will determine the RSS urls by the post IDs from the given arguments set in the constructor.
-     * 
-     * @return            array            The array contains product information.
+     *
+     * @param  array $aURLs
+     * @return array The array contains product information.
      */
     public function fetch( $aURLs=array() ) {
 
@@ -307,12 +307,12 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             protected function _getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
 
                 // First Iteration - Extract displaying ASINs.
-                $_aASINLocales = array();  // stores added product ASINs for performing a custom database query.
-                $_aProducts    = array();
+                $_aASINLocaleCurLangs = array();  // stores added product ASINs, locales, currencies and languages for performing a custom database query.
+                $_aProducts           = array();
 
-                $_sLocale   = $sLocale ? $sLocale : strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
-                $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
-                $_sLanguage = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
+                $_sLocale             = $sLocale ? strtoupper( $sLocale ) : strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sCurrency           = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+                $_sLanguage           = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
                 foreach ( $aItems as $_iIndex => $_aItem ) {
 
@@ -335,11 +335,17 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                         continue;   // skip
                     }
 
-                    // Store the product
-                    $_aASINLocaleCurLang    = $_aProduct[ 'ASIN' ] . '|' . strtoupper( $_sLocale ) . '|' . $_sCurrency . '|' . $_sLanguage;
-                    $_aASINLocales[ $_aASINLocaleCurLang ] = $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale );
 
-                    $_aProducts[]    = $_aProduct;
+                    $_aASINLocaleCurLang    = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+                    $_aASINLocaleCurLangs[ $_aASINLocaleCurLang ] = array(
+                        'asin'      => $_aProduct[ 'ASIN' ],
+                        'locale'    => $_sLocale,
+                        'currency'  => $_sCurrency,
+                        'language'  => $_sLanguage,
+                    );
+
+                    // Store the product
+                    $_aProducts[]           = $_aProduct;
 
                     // Max Number of Items
                     if ( count( $_aProducts ) >= $iCount ) {
@@ -349,23 +355,29 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 }
 
                 // Second iteration
-                return $this->___getProductsFormatted( $aItems, $_aProducts, $_aASINLocales, $sLocale, $sAssociateID, $iCount );
+                return $this->___getProductsFormatted( $aItems, $_aProducts, $_aASINLocaleCurLangs, $sLocale, $sAssociateID, $iCount );
 
             }
+
                 /**
                  * Second iteration
-                 * @return     array
-                 * @since      3.9.0
+                 * @param  array   $aItems
+                 * @param  array   $_aProducts
+                 * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
+                 * @param  string  $_sLocale
+                 * @param  string  $_sAssociateID
+                 * @param  integer $_iCount
+                 * @return array
+                 * @since  3.9.0
                  */
-                private function ___getProductsFormatted( $aItems, $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID, $_iCount ) {
+                private function ___getProductsFormatted( $aItems, $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID, $_iCount ) {
 
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 3 );
                     $_iResultCount          = count( $_aProducts );
                     try {
 
-                        $_aProducts             = $this->_getProductsFormatted( $_aProducts, $_aASINLocales, $_sLocale, $_sAssociateID );
-
+                        $_aProducts             = $this->_getProductsFormatted( $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID );
                         $_iCountAfterFormatting = count( $_aProducts );
                         if ( $_iResultCount > $_iCountAfterFormatting ) {
                             throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
@@ -394,9 +406,12 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                 /**
                  *
-                 * @return     array
+                 * @param  array  $_aItem
+                 * @param  string $_sLocale
+                 * @param  string $_sAssociateID
+                 * @return array
                  * @throws Exception
-                 * @since      3.9.0
+                 * @since  3.9.0
                  */
                 private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
 
@@ -436,12 +451,6 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                           $this->oUnitOption->get( 'image_size' ),
                           strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
                     );
-
-                    // @todo complete the `meta` and `description` elements
-//                    $_aProduct[ 'meta' ]                = "<div class='amazon-product-meta'>"
-//                            . $this->getDescription( $_aProduct )
-//                        . "</div>";
-//                    $_aProduct[ 'description' ]         = $_aProduct[ 'meta' ];
 
                     // Format the item
                     // Thumbnail

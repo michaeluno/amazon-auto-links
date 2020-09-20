@@ -23,13 +23,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @since       unknown
      * @since       3.5.0   Renamed from `_formatProducts()`.
      * @param       array   $aProducts
-     * @param       array   $aASINLocales
+     * @param       array   $aASINLocaleCurLangs
      * @param       string  $sLocale
      * @param       string  $sAssociateID
      */
-    protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
+    protected function _getProductsFormatted( array $aProducts, array $aASINLocaleCurLangs, $sLocale, $sAssociateID ) {
 
-        $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocales );
+        $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocaleCurLangs );
         $_sLocale        = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) ); // @todo use the third parameter value
         $_sCurrency      = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
         $_sLanguage      = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
@@ -68,23 +68,22 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
          * If the user wants elements which need to access the custom database table,
          * retrieve all the products at once to save the number of database queries.
          *
-         * @param   array $aASINLocales
+         * @param   array $aASINLocaleCurLangs
          * @return  array
          * @since   3.5.0
          */
-        private function ___getProductsRowsFromDatabase( array $aASINLocales ) {
+        private function ___getProductsRowsFromDatabase( array $aASINLocaleCurLangs ) {
+            
             if ( ! $this->bDBTableAccess ) {
                 return array();
             }
-//            $_oLocale   = new AmazonAutoLinks_PAAPI50___Locales;
-//            $_sLocale   = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
-            // Not setting a default value here for backward-compatibility with v3.8.x or below
-            // which do not have `preferred_currency` and `language` columns
-            // as the class queries with these columns while it doesn't when there isn't a value passed.
-            $_sCurrency = $this->oUnitOption->get( array( 'preferred_currency' ), '' );
-            $_sLanguage = $this->oUnitOption->get( array( 'language' ), '' );
-            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales, $_sLanguage, $_sCurrency );
+            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows(
+                $aASINLocaleCurLangs,
+                $this->oUnitOption->get( array( 'preferred_currency' ), '' ),
+                $this->oUnitOption->get( array( 'language' ), '' )
+            );
             return $_oProducts->get();
+
         }
 
         /**

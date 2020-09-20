@@ -10,14 +10,28 @@
 /**
  * Provides methods to retrieve rows stored in the plugin custom database table.
  *
+ * @remark      Retrieved data will be cached.
  * @since       3.4.13
  */
-class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDatabase_Base {
+class AmazonAutoLinks_ProductDatabase_Rows {
+
+    /**
+     * Stores items of ASIN|Locale|Currency|Language
+     *
+     * @var array Structure:
+     * ```
+     * array(
+     *      array( 'asin' => '...', 'locale' => '...', 'currency' => '...', 'language' => '...' ),
+     *      array( 'asin' => '...', 'locale' => '...', 'currency' => '...', 'language' => '...' ),
+     *      ...
+     * )
+     * ```
+     */
+    private $___aItems = array();
 
     /**
      * Stores row by asin_locale.
      *
-     * @todo    Support currency and language
      * @remark      This is accessed by the row class (`AmazonAutoLinks_ProductDatabase_Row`).
      * @var array
      */
@@ -27,101 +41,90 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
 
     /**
      * Stores the product plugin custom table object.
-     * @var object
+     * @var AmazonAutoLinks_DatabaseTable_aal_products
      */
     private $___oProductTable;
 
-    private $___sCurrency = '';     // the desired currency
-    private $___sLanguage = '';     // the desired language
+    /**
+     * @var string
+     */
+    private $___sTableVersion = '0';
+
+    // @deprecated
+//    private $___sCurrency     = '';     // the desired currency
+//    private $___sLanguage     = '';     // the desired language
+
+    /**
+     * @var string
+     */
     private $___sDefaultCurrency = '';  // the default currency for the locale
+    /**
+     * @var string
+     */
     private $___sDefaultLanguage = '';  // the default language for the locale
 
     /**
      * Performs necessary set-ups.
      * @since   unknown
-     * @since   3.9.0   Added the $sLanguage and $sCurrency parameters
-     * @param   array   $aArguments ASIN_locale items with the key of ASIN|locale|currency|language
-     * @param   string  $sLanguage
-     * @param   string  $sCurrency
+     * @since   3.9.0   Added the `$sLanguage` and `$sCurrency` parameters
+     * @since   4.3.0   Deprecated the `$sLanguage` and `$sCurrency` parameters. Renamed the first parameter to `$aItems` form `$aArguments`. Changed the structure of the first parameter.
+     * @param   array   $aItems    Retrieving products from the database table with the key of ASIN|locale|currency|language
+     * @param   string  $sCurrency The default currency.
+     * @param   string  $sLanguage The default language.
      */
-    public function __construct( array $aArguments, $sLanguage, $sCurrency ) {
-
-        parent::__construct( $aArguments );
-
-        $this->___oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-        $this->___sLanguage = $sLanguage;
-        $this->___sCurrency = $sCurrency;
-
-        $this->___setDefaultLanguageAndCurrency( $aArguments );
+    public function __construct( array $aItems, $sCurrency='', $sLanguage='' ) {
+        
+        $this->___aItems           = $aItems;
+        $this->___oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
+        $this->___sTableVersion    = $this->___oProductTable->getVersion();
+        $this->___setDefaultLanguageAndCurrency( reset( $aItems ), $sCurrency, $sLanguage );
 
     }
-        private function ___setDefaultLanguageAndCurrency( $aArguments ) {
-            foreach( $aArguments as $_sASINLocaleCurLang => $_sASINLocale ) {
-                $_aParts = explode( '|', $_sASINLocaleCurLang );
-                $this->___sDefaultCurrency = $_aParts[ 2 ];
-                $this->___sDefaultLanguage = $_aParts[ 3 ];
-                break;
-            }
+        /**
+         * @param array $aItem
+         * @param $sCurrency
+         * @param $sLanguage
+         */
+        private function ___setDefaultLanguageAndCurrency( array $aItem, $sCurrency, $sLanguage ) {
+            $this->___sDefaultCurrency = $sCurrency ? $sCurrency : $aItem[ 'currency' ];
+            $this->___sDefaultLanguage = $sLanguage ? $sLanguage : $aItem[ 'language' ];
         }
-
-    /**
-     * Retrieves cached rows.
-     * @param  string|array $asASINLocales
-     * @return array
-     * The caches will be messed up so a solution is needed.
-     */
-    static public function getCaches( $asASINLocales='' ) {
-
-        // If the keys are not specified, return all items.
-        if ( empty( $asASINLocales ) ) {
-            return self::$aCaches;
-        }
-
-        // If there are keys, retrieve them.
-        if ( is_array( $asASINLocales ) ) {
-            return self::getCachedRows( $asASINLocales );
-        }
-
-        // If a single key is specified, return its row.
-        return self::getCache( $asASINLocales );
-
-    }
 
     /**
      * Get cached rows stored in the `AmazonAutoLinks_ProductDatabase_Row` class.
+     * @param       array $aASINLocaleCurLangs
      * @return      array
+     * @since       3.4.13
+     * @since       4.3.0   Changed the scope to private.
      */
-    static public function getCachedRows( array $aASINLocales ) {
-        return array_intersect_key( self::$aCaches, $aASINLocales );
-//        $_aASINLocaleIndex = array_flip( $aASINLocales );
-//        return array_intersect_key(
-//            self::$aCaches,
-//            $_aASINLocaleIndex
-//        );
+    private function ___getCachedProductRows( array $aASINLocaleCurLangs ) {
+        return array_intersect_key( self::$aCaches, $aASINLocaleCurLangs );
     }
 
     /**
-     * Retrieves the cached item.
+     * Retrieves a single cached item.
      *
      * @param string $sASINLocaleCurLang
      * @return      array
+     * @since
+     * @since       4.3.0       Changed the scope to private.
      */
-    static public function getCache( $sASINLocaleCurLang ) {
+    private function ___getProductCache( $sASINLocaleCurLang ) {
         return isset( self::$aCaches[ $sASINLocaleCurLang ] )
             ? self::$aCaches[ $sASINLocaleCurLang ]
             : array();
     }
 
     /**
-     * @param
-     * @return array
+     * @param   array|string $asASINLocaleCurLangs
+     * @return  array
      */
-    public function get( $asASINLocales='' ) {
+    public function get( $asASINLocaleCurLangs='' ) {
 
-        if ( ! empty( $asASINLocales ) ) {
+        if ( ! empty( $asASINLocaleCurLangs ) ) {
             // Make sure all items are retrieved.
-            $this->get();   // no parameter - retrieve all.
-            return $this->getCaches( $asASINLocales );
+            $this->get();   // passing no parameter to retrieve all.
+            return $this->___getProductCaches( $asASINLocaleCurLangs );
         }
 
         $_aResult = $this->___get();
@@ -129,13 +132,30 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
         return $_aResult;
 
     }
+        /**
+         * Retrieves multiple cached rows.
+         * @param  string|array $asASINLocaleCurLangs
+         * @return array
+         * The caches will be messed up so a solution is needed.
+         */
+        private function ___getProductCaches( $asASINLocaleCurLangs='' ) {
 
+            // If the keys are not specified, return all items.
+            if ( empty( $asASINLocaleCurLangs ) ) {
+                return self::$aCaches;
+            }
+            return is_array( $asASINLocaleCurLangs )
+                ? $this->___getCachedProductRows( $asASINLocaleCurLangs )
+                : $this->___getProductCache( $asASINLocaleCurLangs );
+
+        }
         /**
          * Updates caches.
          * @return      void
+         * @param       array $aNewRows
          */
         private function ___setCaches( array $aNewRows ) {
-            self::$aCaches   = $aNewRows + self::$aCaches;
+            self::$aCaches = $aNewRows + self::$aCaches;
         }
 
         /**
@@ -143,75 +163,106 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
          * @return      array
          */
         private function ___get() {
-            $_aCaches              = $this->getCachedRows( $this->_aArguments );
-            $_aUncachedASINLocales = $this->___getUncached( $_aCaches, $this->_aArguments );
-            $_aResult              = $this->___getRowsFromDatabaseTable( $_aUncachedASINLocales );
-            return $_aResult + $_aCaches;
+            $_aCaches   = $this->___getCachedProductRows( $this->___aItems );
+            $_aUncached = $this->___getUncached( $_aCaches, $this->___aItems );
+            return $this->___getRowsFromDatabaseTable( $_aUncached ) + $_aCaches;
         }
 
         /**
-         * @param array $aCached    key of asin_locale_cur_lang and value of row
-         * @param array $aRequested key of asin_locale_cur_lang and value of asin_locale
-         * @return array    An array holding uncached ASIN_locale items.
-         * @todo    Test the method
+         * @param  array $aCached    key of asin_locale_cur_lang and value of row
+         * @param  array $aRequested key of asin_locale_cur_lang and value of asin_locale
+         * @return array An array holding uncached ASIN_locale items.
          */
         private function ___getUncached( array $aCached, array $aRequested ) {
             return array_diff_key( $aRequested, $aCached );
-//            $_aCachedIndex = array_keys( $aCached );
-//            return array_diff( $aRequested, $_aCachedIndex );
         }
 
         /**
          * Retrieve rows from the plugin custom product database table.
          *
          * @since       3
-         * @since       3.4.13      Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
-         * @since       3.5.0       Renamed from `_getProductsFromCustomDBTable()`.
+         * @since       3.4.13  Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
+         * @since       3.5.0   Renamed from `_getProductsFromCustomDBTable()`.
          * @return      array
+         * @param       array   $aASINLocaleCurLangs    array( 'asin' => '', 'locale' => '', 'currency' => '', 'language' => '' ),
          */
-        private function ___getRowsFromDatabaseTable( array $aASINLocales ) {
+        private function ___getRowsFromDatabaseTable( array $aASINLocaleCurLangs ) {
 
-            if ( empty( $aASINLocales ) ) {
+            if ( empty( $aASINLocaleCurLangs ) ) {
                 return array();
             }
-            $_sTableName   = $this->___oProductTable->getTableName();
-
-            $_sASINLocales = "('" . implode( "','", $aASINLocales ) . "')";
-            $_sQuery       = "SELECT * "
-                . "FROM {$_sTableName} "
-                . "WHERE asin_locale in {$_sASINLocales}";
-
-            // @since 3.9.0 Added `language` and `preferred_currency` columns
-            $_sCurrentVersion = get_option( "aal_products_version", '0' );
-            if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=')) {
-                if ( $this->___sLanguage ) {
-                    $_sQuery .= " AND language='{$this->___sLanguage}'";
-                }
-                if ( $this->___sCurrency ) {
-                    $_sQuery .= " AND preferred_currency='{$this->___sCurrency}'";
-                }
-            }
-
-
-            $_aResults     = $this->___oProductTable->getRows( $_sQuery );
-            return $this->___getRowsFormatted( $_aResults );
+            $_aASINLocales = $_aProductIDs = $_aCurrencies = $_aLanguages = array();
+            $this->___updateQueryElements( $aASINLocaleCurLangs, $_aProductIDs, $_aASINLocales, $_aCurrencies, $_aLanguages );
+            return version_compare( $this->___sTableVersion, '1.4.0b01', '<' )
+                ? $this->___oProductTable->getRowsByASINLocaleCurLang( $_aASINLocales, $_aCurrencies, $_aLanguages, array( $this, 'replyToFormatRow' ) )
+                : $this->___oProductTable->getRowsByProductID( $_aProductIDs, array( $this, 'replyToFormatRow' ) );
 
         }
             /**
-             * Modifies the array keys to asin_locale from numeric index.
-             * @return      array
+             * @param array $aASINLocaleCurLangs
+             * @param array $aProductIDs
+             * @param array $aASINLocales
+             * @param array $aCurrencies
+             * @param array $aLanguages
              */
-            private function ___getRowsFormatted( array $aRows ) {
-                $_aNewRows = array();
-                foreach( $aRows as $_iIndex => &$_aRow ) {
-                    if ( ! isset( $_aRow[ 'asin_locale' ] ) ) {
+            private function ___updateQueryElements( array &$aASINLocaleCurLangs, array &$aProductIDs, array &$aASINLocales, array &$aCurrencies, array &$aLanguages ) {
+                $_aErrors = array();
+                foreach( $aASINLocaleCurLangs as $_sASINLocaleCurLang => $_aItem ) {
+                    $_aItem         = array_filter( $_aItem );
+                    if ( ! isset( $_aItem[ 'asin' ], $_aItem[ 'locale' ], $_aItem[ 'currency' ], $_aItem[ 'language' ] ) ) {
+                        unset( $_sASINLocaleCurLang[ $_sASINLocaleCurLang ] );
+                        $_aErrors[] = $_sASINLocaleCurLang;
                         continue;
                     }
-                    $_aASINLocale = explode( '_', $_aRow[ 'asin_locale' ] );
-                    $_sKey = $_aASINLocale[ 0 ] . '|' . $_aASINLocale[ 1 ] . '|' . $this->___sDefaultCurrency . '|' . $this->___sDefaultLanguage;
-                    $_aNewRows[ $_sKey ] = $_aRow;
+                    $aProductIDs[]  = "{$_aItem[ 'asin' ]}|{$_aItem[ 'locale' ]}|{$_aItem[ 'currency' ]}|{$_aItem[ 'language' ]}";
+                    $aASINLocales[] = $_aItem[ 'asin' ] . '_' . $_aItem[ 'locale' ];
+                    $aCurrencies[]  = $_aItem[ 'currency' ];
+                    $aLanguages[]   = $_aItem[ 'language' ];
                 }
-                return $_aNewRows;
+                if ( ! empty( $_aErrors ) ) {
+                    new AmazonAutoLinks_Error( 'RETRIEVE_PRODUCTS', 'The array structure is not valid.', $aASINLocaleCurLangs, true );
+                }
             }
+
+        /**
+         * Formats each retrieved database row.
+         * @param  array   $aRow
+         * @param  array   &$aRows       Passed by reference so that the row (array element) can be unset.
+         * @param  integer $asIndex
+         * @param  integer &$aNewRows    Allows the method to inject new rows with a new index key.
+         * @callback       AmazonAutoLinks_DatabaseTable_aal_products::getRows()
+         * @return array   Although an array is returned, the element is unset so the returned value doesn't matter.
+         */
+        public function replyToFormatRow( array $aRow, &$aRows, $asIndex, &$aNewRows ) {
+
+            // Discard the raw row element.
+            unset( $aRows[ $asIndex ] );
+
+            // Required Keys
+            if ( ! isset( $aRow[ 'asin_locale' ] ) ) {
+                return array();
+            }
+
+            // Format the row.
+            $aRow = $aRow + array(
+                'product_id'         => null,    // the table version 1.4.0 or above
+                'asin'               => null,    // the table version 1.4.0 or above
+                'locale'             => null,
+                'preferred_currency' => null,
+                'language'           => null,
+            );
+
+            // Generate a new index key and update the new array.
+            $_aASINLocale        = explode( '_', $aRow[ 'asin_locale' ] );
+            $_sASIN              = $aRow[ 'asin' ] ? $aRow[ 'asin' ] : $_aASINLocale[ 0 ];
+            $_sLocale            = $aRow[ 'locale' ] ? $aRow[ 'locale' ] : $_aASINLocale[ 1 ];
+            $_sCurrency          = $aRow[ 'preferred_currency' ] ? $aRow[ 'preferred_currency' ] : $this->___sDefaultCurrency;
+            $_sLanguage          = $aRow[ 'language' ] ? $aRow[ 'language' ] : $this->___sDefaultLanguage;
+            $_sKey               = "{$_sASIN}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+            $aNewRows[ $_sKey ]  = $aRow;
+
+            return array();
+
+        }
 
 }
