@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_Scratch_Base extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Scratch_Base extends AmazonAutoLinks_Run_Base {
 
     /**
      * Override this method.
@@ -24,8 +24,5 @@ class AmazonAutoLinks_Scratch_Base extends AmazonAutoLinks_PluginUtility {
         return true;
     }
 
-    protected function _getDetails( $mValue ) {
-        return AmazonAutoLinks_Debug::getDetails( $mValue );
-    }
 
 }
