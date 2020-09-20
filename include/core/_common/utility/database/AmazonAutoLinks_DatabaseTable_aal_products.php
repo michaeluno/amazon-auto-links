@@ -32,12 +32,12 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
     static public $aStructure_Row = array(
         'object_id'                     => null,   // (integer)
         'product_id'                    => null,   // (string) 4.3.0 XXXXXXXXXX_XX|XXX|xx-XX
-        'title'                         => null,   // (string) The product name.
         'asin'                          => null,   // (string) XXXXXXXXXX
         'asin_locale'                   => null,   // @deprecated 4.3.0 (string) XXXXXXXXXX_XX
         'locale'                        => null,   // (string) XX      e.g. US
         'modified_time'                 => null,   // (string) dddd-dd-dd dd:dd:dd
         'expiration_time'               => null,   // (string) dddd-dd-dd dd:dd:dd
+        'title'                         => null,   // (string) The product name.
         'links'                         => null,   // (string)
         'rating'                        => null,   // (integer)    e.g. 45
         'rating_image_url'              => null,   // (string)
@@ -54,7 +54,6 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'discounted_price_formatted'    => null,
         'count_new'                     => null,   // (integer)
         'count_used'                    => null,   // (integer)
-//        'title'                         => null,   // (string) The product name.
         'description'                   => null,   // (string) product details
         'images'                        => null,   // (string) serialized array containing product lists
         'similar_products'              => null,   // (string) serialized array containing product lists
@@ -84,14 +83,14 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         // asin_locale varchar(13) NOT NULL,
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
             object_id bigint(20) unsigned NOT NULL auto_increment,
-            product_id varchar(128) UNIQUE,
-            title text,
+            product_id varchar(128) UNIQUE,            
             asin varchar(10),
             asin_locale varchar(13) NOT NULL,
             locale varchar(4),            
             language varchar(10),            
             modified_time datetime NOT NULL default '0000-00-00 00:00:00',
             expiration_time datetime NOT NULL default '0000-00-00 00:00:00',
+            title text,
             links text,
             rating tinyint unsigned,
             rating_image_url text,
@@ -130,12 +129,14 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
 
     /**
      * Sets a row.
-     * @param       string       $sASINLocale    A combination of ASIN + underscore + upper case locale notation.
-     * @param       array        $aRow           The row data.
-     * @param       array|string $asFormat       Placeholders that indicate row array element data types. Leave it `null` to apply auto-generated formats.
-     * @return      integer      The object id if successfully set; otherwise, 0;
-     * @since       unknown
-     * @since       3.9.0        Added the currency and language parameters. Moved the `$asFormat` parameter to the last.
+     * @param  string        $sASINLocale A combination of ASIN + underscore + upper case locale notation.
+     * @param  array         $aRow The row data.
+     * @param  string        $sCurrency
+     * @param  string        $sLanguage
+     * @param  array|string  $asFormat Placeholders that indicate row array element data types. Leave it `null` to apply auto-generated formats.
+     * @return integer       The object id if successfully set; otherwise, 0;
+     * @since  3
+     * @since  3.9.0         Added the currency and language parameters. Moved the `$asFormat` parameter to the last.
      */
     public function setRowByASINLocale( $sASINLocale, $aRow, $sCurrency='', $sLanguage='', $asFormat=null ) {
 
@@ -171,19 +172,22 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
     }
 
     /**
-     * @param $sASIN
-     * @param $sLocale
-     *
-     * @return mixed
+     * @param string $sASIN
+     * @param string $sLocale
+     * @param string $sCurrency
+     * @param string $sLanguage
+     * @return integer The object ID of the record.
+     * @deprecated 4.3.0 Unused.
      */
-    public function getID( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
+/*    public function getID( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
         $_sASINLocale = $sASIN . '_' . strtoupper( $sLocale );
         return $this->getIDByASINLocale( $_sASINLocale, $sCurrency, $sLanguage );
-    }
+    }*/
 
     /**
-     * @param $sASINLocale
-     *
+     * @param string $sASINLocale
+     * @param string $sCurrency
+     * @param string $sLanguage
      * @return mixed
      */
     public function getIDByASINLocale( $sASINLocale, $sCurrency='', $sLanguage='' ) {
@@ -205,12 +209,88 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
 
         return $this->getVariable( $_sQuery );
     }
+
     /**
      * Checks whether a row exists or not by ASIN and locale.
-     * @return      boolean
+     * @param  string $sASIN
+     * @param  string $sLocale
+     * @param  string $sCurrency
+     * @param  string $sLanguage
+     * @return boolean
+     * @deprecated 4.3.0 Unused.
      */
-    public function doesRowExist( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
+/*    public function doesRowExist( $sASIN, $sLocale, $sCurrency='', $sLanguage='' ) {
         return ( boolean ) $this->getID( $sASIN, $sLocale, $sCurrency, $sLanguage );
+    }*/
+
+    /**
+     * @param  array    $aProductIDs
+     * @param  callable $cCallable
+     * @return array    An array holding retrieved rows.
+     * @since  4.3.0
+     */
+    public function getRowsByProductID( array $aProductIDs, $cCallable=null ) {
+        $_sProductIDs = "('" . implode( "','", $aProductIDs ) . "')";
+        $_sQuery = "SELECT * "
+            . "FROM `" . $this->getTableName() . "` "
+            . "WHERE product_id in {$_sProductIDs}";
+        return $this->getRows( $_sQuery, 'ARRAY_A', $cCallable );
     }
+
+    /**
+     * @remark This is for backward-compatibility with the table version below 1.4.0.
+     * @param  array        $aASINLocales   Format: {ASIN}_{locale} e.g. XXXXXXXXXX_IT
+     * @param  array|string $asCurrencies
+     * @param  array|string $asLanguages
+     * @param  callable     $cCallable
+     * @since  4.3.0
+     * @return array
+     */
+    public function getRowsByASINLocaleCurLang( array $aASINLocales, $asCurrencies, $asLanguages, $cCallable=null ) {
+
+        $_sASINLocales = "('" . implode( "','", $aASINLocales ) . "')";
+        $_sQuery       = "SELECT * "
+            . "FROM `" . $this->getTableName() . "` "
+            . "WHERE asin_locale in {$_sASINLocales}";
+
+        // @since 3.9.0 Added `language` and `preferred_currency` columns
+        if ( version_compare( $this->getVersion(), '1.2.0b01', '>=' ) ) {
+            $_sQuery .= $this->___getQueryPartForCurrency( $asCurrencies );
+            $_sQuery .= $this->___getQueryPartForLanguage( $asLanguages );
+        }
+
+        return $this->getRows( $_sQuery, 'ARRAY_A', $cCallable );
+
+    }
+        /**
+         * @param array|string $asCurrencies
+         * @return string
+         * @since 4.3.0
+         */
+        private function ___getQueryPartForCurrency( $asCurrencies ) {
+            if ( empty( $asCurrencies ) ) {
+                return '';
+            }
+            $_aCurrencies  = ( array ) $asCurrencies;
+            $_sCurrencies  = "('" . implode( "','", $_aCurrencies ) . "')";
+            return ( 1 < count( $_aCurrencies ) )
+                ? " AND preferred_currency in '{$_sCurrencies}'"
+                : " AND preferred_currency='" . reset( $_aCurrencies ) . "'";
+        }
+        /**
+         * @param array|string $asLanguages
+         * @return string
+         * @since 4.3.0
+         */
+        private function ___getQueryPartForLanguage( $asLanguages ) {
+            if ( empty( $asLanguages ) ) {
+                return '';
+            }
+            $_aLanguages   = ( array ) $asLanguages;
+            $_sLanguages   = "('" . implode( "','", $_aLanguages ) . "')";
+            return ( 1 < count( $_aLanguages ) )
+                ? " AND language in '{$_sLanguages}'"
+                : " AND language='" . reset( $_aLanguages ) . "'";
+        }
 
 }
