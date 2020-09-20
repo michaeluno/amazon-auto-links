@@ -182,10 +182,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             }
             return false;
         }
+
         /**
-         * @return  string
-         * @since   3.7.5
-         * @callback    filter  aal_filter_product_link
+         * @param    string $sURL
+         * @param    string $sRawURL
+         * @param    string $sASIN
+         * @param    AmazonAutoLinks_UnitOption_Base $aUnitOptions
+         * @return   string
+         * @since    3.7.5
+         * @callback add_filter  aal_filter_product_link
          */
         public function replyToModifyProductURLs( $sURL, $sRawURL, $sASIN, $aUnitOptions ) {
             $_aQuery     = array();
@@ -200,6 +205,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * Sanitizes a raw product title.
          * @remark      Overridden by an extended class.
          * @return      string
+         * @param       string $sTitle
          */
         public function replyToModifyRawTitle( $sTitle ) {
             return $sTitle;
@@ -331,7 +337,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     }
         /**
-         * @param string $sUnitOutput
+         * @param   string $sUnitOutput
          * @return  string
          * @since   4.3.0
          */
@@ -351,7 +357,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         /**
          * @param   $iShowErrorMode
          * @param   $sErrorMessage
-         *
          * @return  string
          * @since   4.1.0
          */
@@ -437,8 +442,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         /**
-         * @return bool
+         * @return  bool
          * @since   3.10.0
+         * @param   integer $iUnitID
          */
         private function ___hasPreviousUnitError( $iUnitID ) {
             if ( ! $iUnitID ) {
@@ -478,9 +484,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         /**
          * @deprecated  Use `get()` instead.
          * @return      string
+         * @param       array $aURLs
+         * @param       string $sTemplatePath
          */
         public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
-            return $this->get( $aURLs, $sTemplatePath );
+            return $this->get( $aURLs );
         }
 
     /**
@@ -542,6 +550,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @remark      Override this method in each extended class.
      * @return      string  The found error.
      * @return      string  The error message.
+     * @param       array   $aProducts
      */
     protected function _getError( $aProducts ) {
 
@@ -570,7 +579,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Renders the product links.
-     * 
+     *
+     * @param       array $aURLs
      * @return      void
      */
     public function render( $aURLs=array() ) {
@@ -581,6 +591,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * Retrieves product link data from a remote server.
      * @remark      should be extended and must return an array.
      * @return      array
+     * @param       array $aURLs
      */
     public function fetch( $aURLs ) {
         return array(); 
