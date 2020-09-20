@@ -77,7 +77,7 @@ class AmazonAutoLinks_ProductDatabase_Rows {
         $this->___aItems           = $aItems;
         $this->___oProductTable    = new AmazonAutoLinks_DatabaseTable_aal_products;
         $this->___sTableVersion    = $this->___oProductTable->getVersion();
-        $this->___setDefaultLanguageAndCurrency( reset( $aItems ), $sCurrency, $sLanguage );
+        $this->___setDefaultLanguageAndCurrency( ( array ) reset( $aItems ), $sCurrency, $sLanguage );
 
     }
         /**
@@ -86,6 +86,7 @@ class AmazonAutoLinks_ProductDatabase_Rows {
          * @param $sLanguage
          */
         private function ___setDefaultLanguageAndCurrency( array $aItem, $sCurrency, $sLanguage ) {
+            $aItem = $aItem + array( 'currency' => '', 'language' => '' );
             $this->___sDefaultCurrency = $sCurrency ? $sCurrency : $aItem[ 'currency' ];
             $this->___sDefaultLanguage = $sLanguage ? $sLanguage : $aItem[ 'language' ];
         }
