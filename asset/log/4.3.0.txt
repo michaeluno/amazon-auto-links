@@ -19,3 +19,4 @@
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
 - Optimized the embed unit type.
+- Removed the deprecated unit types, `tag` and `similarity_lookup`.
