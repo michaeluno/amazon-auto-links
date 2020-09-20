@@ -15,7 +15,10 @@
  * @version     1.1.0
  */
 abstract class AmazonAutoLinks_DatabaseTable_Base {
-    
+
+    /**
+     * @var array
+     */
     public $aArguments = array(
         'name'              => '',      // the table name suffix
         'version'           => '1.0.0',
@@ -45,16 +48,15 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
          * Formats the arguments.
          * @since       1.1.0
          * @return      array
+         * @param       array   $aArguments
          */
         protected function _getArgumentsFormatted( array $aArguments ) {
-
             $aArguments[ 'table_name' ] = $aArguments[ 'across_network' ]
                 ? $GLOBALS[ 'wpdb' ]->base_prefix . $aArguments[ 'name' ]
                 : $GLOBALS[ 'wpdb' ]->prefix . $aArguments[ 'name' ];
             return $aArguments + array(
                 'name' => __CLASS__,
             );
-
         }
 
     /**
@@ -90,6 +92,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * Installs a table.
      *
      * @since       1.1.0
+     * @param       boolean     $bForce
      * @return      array       Strings containing the results of the various update queries.
      */
     public function install( $bForce=false ) {
@@ -156,6 +159,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         $GLOBALS[ 'wpdb' ]->query(
             "DROP TABLE IF EXISTS " . $this->aArguments[ 'table_name' ]
         );
+
     }
 
     /**
@@ -200,11 +204,18 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      *      )
      *  );
      * `
-     * @see     https://codex.wordpress.org/Class_Reference/wpdb#INSERT_rows
-     * @since   1.1.0
+     * @see   https://codex.wordpress.org/Class_Reference/wpdb#INSERT_rows
+     * @since 1.1.0
+     * @param array $aRow
+     * @param array|string $asFormat
+     * @return integer|false The number of rows inserted, or false on error.
      */
     public function insert( $aRow, $asFormat=null ) {
-        return $GLOBALS[ 'wpdb' ]->insert(
+        /**
+         * @var   wpdb $_oWPDB
+         */
+        $_oWPDB = $GLOBALS[ 'wpdb' ];
+        return $_oWPDB->insert(
             $this->aArguments[ 'table_name' ],
             $aRow,
             null === $asFormat  // row format
@@ -247,10 +258,11 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
 
     /**
-     *
-     * All columns must be set; otherwise, an error occurs.
-     * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
-     * @since   1.1.0
+     * @remark All columns must be set; otherwise, an error occurs.
+     * @see    https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
+     * @since  1.1.0
+     * @param  array         $aRow
+     * @param  array|string  $asFormat
      */
     public function replace( $aRow, $asFormat=null ) {
         $aRow = $this->___getSanitizedRow( $aRow );
@@ -265,8 +277,9 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      * Inserts a record of row into the table.
-     * @param   array $aRow
-     * @since 4.3.0
+     * @param  array $aRow
+     * @since  4.3.0
+     * @return integer|boolean
      */
     public function insertRow( array $aRow ) {
         return $this->insertRows( array( $aRow ) );
@@ -274,9 +287,9 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      * Inserts a set of rows into the table using the SQL statement, `INSERT`.
-     * @param array $aRows
-     * @param bool $bIgnore Whether to add the `IGNORE` statement.
-     * @return bool|int
+     * @param  array    $aRows
+     * @param  bool     $bIgnore    Whether to add the `IGNORE` statement.
+     * @return boolean|integer
      */
     public function insertRows( array $aRows, $bIgnore=false ) {
         $_sTableName     = $this->getTableName();
@@ -297,10 +310,18 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         return $_oWPDB->query( $sDBQuery );
     }
 
+    /**
+     * @param  array $aRow
+     * @return bool|int
+     */
     public function insertRowIgnore( array $aRow ) {
         return $this->insertRowsIgnore( array( $aRow ) );
     }
 
+    /**
+     * @param  array $aRows
+     * @return bool|int
+     */
     public function insertRowsIgnore( array $aRows ) {
         return $this->insertRows( $aRows, true );
     }
@@ -309,8 +330,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * Override/insert a single row.
      *
      * @remark  The table MUST have a primary or unique column.
-     * @param array $aRow Key value pairs that corresponds to the column name and the value. In order to update existent row, at least one of the columns must be unique or primary. e.g. array( 'asin' => 'aaa', 'locale' => 'bbb', 'currency' => 'ccc' )
-     * @return bool|int
+     * @param   array $aRow Key value pairs that corresponds to the column name and the value. In order to update existent row, at least one of the columns must be unique or primary. e.g. array( 'asin' => 'aaa', 'locale' => 'bbb', 'currency' => 'ccc' )
+     * @return  boolean|integer
      * @since   4.3.0
      * @see     wpdb
      */
@@ -325,7 +346,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * @param   array   $aRows
      * @see     wpdb
      * @since   4.3.0
-     * @return mixed|void
+     * @return  mixed|void
      */
     public function setRows( array $aRows ) {
 
@@ -400,6 +421,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * @see     https://codex.wordpress.org/Class_Reference/wpdb#REPLACE_row
      * @see     wpdb
      * @since   1.1.0
+     * @param   array $aRow
+     * @param   array $aWhere
+     * @param   array|string $asFormat
+     * @param   array|string $asWhereFormat
      */
     public function update( $aRow, $aWhere=array(), $asFormat=null, $asWhereFormat=null ) {
         $aRow = $this->___getSanitizedRow( $aRow );
@@ -418,6 +443,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         /**
          * @return      array
          * @since       1.1.0
+         * @param       array   $aRow
          */
         private function ___getSanitizedRow( array $aRow ) {
             foreach( $aRow as $_sColumnName => $_mValue ) {
@@ -427,9 +453,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         }
 
         /**
-         * @return      array       The placefolders such as %s, %d, %f for the format parameter of the above methods.
+         * @return      array       The placeholders such as %s, %d, %f for the format parameter of the above methods.
          * @see         https://codex.wordpress.org/Class_Reference/wpdb#Placeholders
          * @since       1.1.0
+         * @param       array   $aRow
          */
         private function _getPlaceHolders( $aRow ) {
             $_aPlaceHolders = array();
@@ -456,6 +483,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * Retrieves a value.
      * @remark      Returns `null` if no item is found.
      * @since       1.1.0
+     * @param       string  $sSQLQuery
+     * @param       integer $iColumnOffset
+     * @param       integer $iRowOffset
+     * @return      mixed
      */
     public function getVariable( $sSQLQuery, $iColumnOffset=0, $iRowOffset=0 ) {
         $_mResult = $GLOBALS[ 'wpdb' ]->get_var(
@@ -468,6 +499,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     /**
      * Selects a single row.
      * @since   1.1.0
+     * @param   string  $sSQLQuery
+     * @param   string  $sFormat
+     * @param   integer $iRowOffset
+     * @return  array   An array holding columns.
      */
     public function getRow( $sSQLQuery, $sFormat='ARRAY_A', $iRowOffset=0 ) {
         $_aRow = $GLOBALS[ 'wpdb' ]->get_row(
@@ -488,6 +523,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     /**
      * Selects multiple rows.
      * @since   1.1.0
+     * @param string $sSQLQuery
+     * @param string $sFormat
      */
     public function getRows( $sSQLQuery, $sFormat='ARRAY_A' ) {
         $_aRows = $GLOBALS[ 'wpdb' ]->get_results(
