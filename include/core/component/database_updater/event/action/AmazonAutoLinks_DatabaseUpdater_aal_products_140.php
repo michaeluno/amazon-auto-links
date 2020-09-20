@@ -43,8 +43,9 @@ class AmazonAutoLinks_DatabaseUpdater_aal_products_140 extends AmazonAutoLinks_D
             . " SET asin = CONCAT( SUBSTRING( asin_locale, 1, 10 ) )"
             . " WHERE asin IS NULL OR asin = ''"
             . " ;",
-            "ALTER TABLE `{$_sTableName}` MODIFY product_id varchar(128) UNIQUE AFTER object_id",
+            "ALTER TABLE `{$_sTableName}` MODIFY product_id varchar(128) AFTER object_id",
             "ALTER TABLE `{$_sTableName}` MODIFY asin varchar(10) AFTER product_id",
+            "ALTER TABLE `{$_sTableName}` MODIFY title TEXT AFTER expiration_time",
         );
         foreach( $_aQueries as $_iIndex => $_sQuery ) {
             $_bResult = $_oProductTable->getVariable( $_sQuery );
