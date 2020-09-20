@@ -117,9 +117,14 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
             echo "<h3>DB Override Row</h3>";
             $_aASINLocales = array(
                 // $_sASINLocaleCurLang => 'asin locale'
-                'B00VLN9IC6|IT|EUR|it_IT' => 'B00VLN9IC6_IT'
+                'B00VLN9IC6|IT|EUR|it_IT' => array(
+                    'asin'      => 'B00VLN9IC6',
+                    'locale'    => 'IT',
+                    'currency'  => 'EUR',
+                    'language'  => 'it_IT',
+                ),
             );
-            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $_aASINLocales, 'it_IT', 'EUR' );
+            $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $_aASINLocales, 'EUR', 'it_IT' );
             $_aResult = $_oProducts->get();
             var_dump( $_aResult );
         }

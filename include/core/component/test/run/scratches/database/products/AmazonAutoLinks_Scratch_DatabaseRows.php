@@ -9,11 +9,12 @@
  */
 
 /**
- * Tests for the plugin database.
+ * A scratch class for HTTP request cache database.
  *  
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_UnitTest_Database extends AmazonAutoLinks_UnitTest_Base {
+class AmazonAutoLinks_Scratch_DatabaseRows extends AmazonAutoLinks_Scratch_Base {
+
 
 }

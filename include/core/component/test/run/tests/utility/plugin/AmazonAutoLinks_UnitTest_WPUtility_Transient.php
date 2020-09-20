@@ -63,4 +63,14 @@ class AmazonAutoLinks_UnitTest_WPUtility_Transient extends AmazonAutoLinks_UnitT
         return false === $this->getTransientWithoutCache( $this->___sTransientKey, false );
     }
 
+    public function test_setAndGetTransient() {
+
+        $this->setTransient( $this->___sTransientKey, 'first', 100 );
+        $_sFirstValue = $this->getTransient( $this->___sTransientKey );
+        $this->setTransient( $this->___sTransientKey, 'second', 100 );
+        return $_sFirstValue !== $this->getTransient( $this->___sTransientKey );
+
+
+    }
+
 }
