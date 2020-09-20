@@ -12,7 +12,6 @@
  * Handles plugin options.
  * 
  * @since       3
- * @filter      apply       aal_filter_option_class_name
  */
 class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
@@ -313,6 +312,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * Set up default options values.
      * 
      * Deals with default option items that need to call functions.
+     *
+     * @param   string  $sOptionKey
      */
     public function __construct( $sOptionKey ) {
                 
@@ -339,6 +340,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * 
      * @since      3
      * @return     AmazonAutoLinks_Option
+     * @param      string $sOptionKey
+     * @filter     aal_filter_option_class_name
      */
     static public function getInstance( $sOptionKey='' ) {
         
@@ -434,7 +437,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
-     * @return      boolean
+     * @return  boolean
+     * @param   integer|null $iNumberOfUnits
      */
     public function isUnitLimitReached( $iNumberOfUnits=null ) {
         
@@ -510,13 +514,10 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     /**
      * Checks whether the API keys are set and it has been verified.
      * @since       3
-     * @return      boolean
+     * @return      boolean     true if connected; otherwise false.
      */
     public function isAPIConnected() {
-        return ( boolean ) $this->get( 
-            'authentication_keys', 
-            'api_authentication_status' 
-        );
+        return ( boolean ) $this->get( 'authentication_keys', 'api_authentication_status' );
     }
 
     /**
@@ -552,14 +553,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return      boolean
      */
     public function isDebug() {
-        // @deprecated 3.10.0
-//        if ( ! self::isDebugModeEnabled() ) {
-//            return false;
-//        }
-        return ( boolean ) $this->get( 
-            'debug', 
-            'debug_mode' 
-        );
+        return ( boolean ) $this->get( 'debug', 'debug_mode' );
     }
     
     /**
