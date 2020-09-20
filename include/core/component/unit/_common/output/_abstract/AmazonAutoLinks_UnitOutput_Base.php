@@ -118,6 +118,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Sets up properties.
+     *
+     * @param array|AmazonAutoLinks_UnitOption_Base $aoUnitOptions
+     * @param string $sUnitType
      */
     public function __construct( $aoUnitOptions, $sUnitType='' ) {
 
@@ -342,7 +345,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     $this->oUnitOption->get( array( 'custom_text' ), '' ),
                     $sUnitOutput
                 ),
-                $this->oUnitOption->get( array( 'unit_format' ), '' ),
+                $this->oUnitOption->get( array( 'unit_format' ), '' )
             );
         }
         /**
