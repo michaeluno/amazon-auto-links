@@ -60,14 +60,26 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         }
 
     /**
-     * @return string
+     * Retrieves the table version stored in the options table.
+     * @remark The returned value is different from the version set in the `$aArguments` property. As that one is for the latest version declared by the plugn, which does not mean that the actual table version espacially if the user has not updated it.
+     * @param  boolean $bUseCache Whether to use per-page load cache.
+     * @return string The retrieved table version. 
      * @since  3.10.0
+     * @since  4.3.0 Added the `$bUseCache` parameter.
      */
-    public function getVersion() {
-        return get_option(
+    public function getVersion( $bUseCache=true ) {
+
+        static $_sVersion;
+
+        if ( isset( $_sVersion ) && $bUseCache ) {
+            return $_sVersion;
+        }
+        $_sVersion = get_option(
             $this->aArguments[ 'name' ]  . '_version',
             '0'
         );
+        return $_sVersion;
+
     }
 
     /**
@@ -240,14 +252,18 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      */
     public function delete( $aWhere=array(), $asFormat=null ) {
 
+        /**
+         * @var wpdb $_oWPDB
+         */
+        $_oWPDB = $GLOBALS[ 'wpdb' ];
         if ( empty( $aWhere ) ) {
-            $GLOBALS[ 'wpdb' ]->query(
+            $_oWPDB->query(
                 "TRUNCATE TABLE `{$this->aArguments[ 'table_name' ]}`"
             );
             return;
         }
 
-        $GLOBALS[ 'wpdb' ]->delete(
+        $_oWPDB->delete(
             $this->aArguments[ 'table_name' ],
             $aWhere,
             null === $asFormat  // row format
@@ -522,21 +538,31 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     }
     /**
      * Selects multiple rows.
-     * @since   1.1.0
-     * @param string $sSQLQuery
-     * @param string $sFormat
+     * @since  1.1.0
+     * @since  4.3.0    Added the `$cCallable` parameter.
+     * @param  string   $sSQLQuery
+     * @param  string   $sFormat
+     * @param  callable $cCallable A callback function/method applied to each row.
+     * @return array    An array holding rows of arrays.
      */
-    public function getRows( $sSQLQuery, $sFormat='ARRAY_A' ) {
-        $_aRows = $GLOBALS[ 'wpdb' ]->get_results(
-            $sSQLQuery,
-            $sFormat
-        );
-        foreach( $_aRows as &$_aRow ) {
-            foreach( $_aRow as $_sColumnName => $_mValue ) {
-                $_aRow[ $_sColumnName ] = maybe_unserialize( $_mValue );
+    public function getRows( $sSQLQuery, $sFormat='ARRAY_A', $cCallable=null ) {
+
+        $_bCallable = is_callable( $cCallable );
+        /**
+         * @var wpdb $_oWPDB
+         */
+        $_oWPDB     = $GLOBALS[ 'wpdb' ];
+        $_aRows     = $_oWPDB->get_results( $sSQLQuery, $sFormat );
+        $_aNewRows  = array();  // allows the callback to insert new elements.
+        foreach( $_aRows as $_asIndex => &$_aRow ) {
+            $_aRow = array_map( 'maybe_unserialize', $_aRow );
+            if ( $_bCallable ) {
+                // Passing `$_aRows` as reference so that the callback can unset this element if necessary.
+                $_aRow = call_user_func_array( $cCallable, array( $_aRow, &$_aRows, $_asIndex, &$_aNewRows ) );
             }
         }
-        return $_aRows;
+        return $_aNewRows + $_aRows;
+
     }
 
     /**
