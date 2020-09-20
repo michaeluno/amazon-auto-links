@@ -39,8 +39,10 @@ class AmazonAutoLinks_ProductDatabase_Rows extends AmazonAutoLinks_ProductDataba
     /**
      * Performs necessary set-ups.
      * @since   unknown
-     * @since   3.9.0       Added the $sLanguage and $sCurrency parameters
+     * @since   3.9.0   Added the $sLanguage and $sCurrency parameters
      * @param   array   $aArguments ASIN_locale items with the key of ASIN|locale|currency|language
+     * @param   string  $sLanguage
+     * @param   string  $sCurrency
      */
     public function __construct( array $aArguments, $sLanguage, $sCurrency ) {
 

@@ -21,7 +21,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * @return      array
      * @since       unknown
-     * @since       3.5.0       Renamed from `_formatProducts()`.
+     * @since       3.5.0   Renamed from `_formatProducts()`.
+     * @param       array   $aProducts
+     * @param       array   $aASINLocales
+     * @param       string  $sLocale
+     * @param       string  $sAssociateID
      */
     protected function _getProductsFormatted( array $aProducts, array $aASINLocales, $sLocale, $sAssociateID ) {
 
@@ -82,12 +86,18 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $aASINLocales, $_sLanguage, $_sCurrency );
             return $_oProducts->get();
         }
+
         /**
-         * @param       array       $_aProduct
-         * @since       3.5.0
-         * @since       3.9.0       Added the $_sCurrency, $_sLanguage parameters.
-         * @throws      Exception
-         * @return      array
+         * @param  array     $_aProduct
+         * @param  array     $_aDBProductRows
+         * @param  string    $sLocale
+         * @param  string    $sAssociateID
+         * @param  string    $_sCurrency
+         * @param  string    $_sLanguage
+         * @return array
+         * @throws Exception
+         * @since  3.5.0
+         * @since  3.9.0       Added the $_sCurrency, $_sLanguage parameters.
          */
         private function ___getProductFormatted( $_aProduct, $_aDBProductRows, $sLocale, $sAssociateID, $_sCurrency, $_sLanguage ) {
 

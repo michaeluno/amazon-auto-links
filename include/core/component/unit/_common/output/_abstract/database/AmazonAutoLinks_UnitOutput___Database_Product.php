@@ -17,39 +17,47 @@
  */
 class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_UnitOutput_Utility {
 
+    /**
+     * @var string
+     */
     protected $_sASIN           = '';
+    /**
+     * @var string
+     */
     protected $_sLocale         = '';
+    /**
+     * @var string
+     */
     protected $_sAssociateID    = '';
+    /**
+     * @var array
+     */
     protected $_aRow            = array();
 
     /**
      * @var AmazonAutoLinks_UnitOption_Base
      */
     protected $_oUnitOption;
-    
-    /**
-     * An array of raw item array extracted from the PA API response.
-     * Used to pass to the background routine to save an API request.  
-     * @since   3.8.12
-     * @var array
-     * @deprecated Unused in anywhere.
-     */
-    protected $_aAPIRawItem    = array();
-    
+
     /**
      * Sets up properties.
+     * @param string $sASIN
+     * @param string $sLocale
+     * @param string $sAssociateID
+     * @param array $aRow
+     * @param AmazonAutoLinks_UnitOption_Base $oUnitOption
      */
-    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption, array $aAPIRawItem=array() ) {
+    public function __construct( $sASIN, $sLocale, $sAssociateID, array $aRow, $oUnitOption ) {
         $this->_sASIN           = $sASIN;
         $this->_sLocale         = $sLocale;
         $this->_sAssociateID    = $sAssociateID;
         $this->_aRow            = $aRow;
         $this->_oUnitOption     = $oUnitOption;
-        $this->_aAPIRawItem     = $aAPIRawItem;
     }
 
     /**
      * @param  string $sColumnName
+     * @param  mixed $mDefault
      *
      * @return integer|string|double|null
      * @since   3.5.0
@@ -60,6 +68,7 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
 
     /**
      * @param  string $sColumnName
+     * @param  mixed $mDefault
      *
      * @return integer|string|double|null
      * @since   3.5.0
@@ -73,19 +82,23 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 'asin'         => $this->_sASIN,
                 'locale'       => $this->_sLocale,
                 'associate_id' => $this->_sAssociateID,
-            ),
-            $this->_aAPIRawItem
+            )
         );
     }
 
         /**
-         *
-         * @since       3
-         * @sicne       3.5.0       Moved from `AmazonAutoLinks_UnitOutput__Base_CustomDBTable`.
-         * @sicne       3.5.0       Changed the scope from protected.
-         * @sicne       3.8.12      Added the `$aAPIRawItem` parameter.
+         * @param   string $sColumnName
+         * @param   array  $aRow
+         * @param   mixed  $mDefault
+         * @param   array  $aScheduleTask
+         * @since   3
+         * @sicne   3.5.0       Moved from `AmazonAutoLinks_UnitOutput__Base_CustomDBTable`.
+         * @sicne   3.5.0       Changed the scope from protected.
+         * @sicne   3.8.12      Added the `$aAPIRawItem` parameter.
+         * @since   4.3.0       Deprecated the `$aAPIRawItem` parameter as it is not used.
+         * @return  mixed
          */
-        private function ___getValueFromRow( $sColumnName, array $aRow, $mDefault=null, $aScheduleTask=array( 'locale' => '', 'asin' => '', 'associate_id' => '' ), $aAPIRawItem=array() ) {
+        private function ___getValueFromRow( $sColumnName, array $aRow, $mDefault=null, $aScheduleTask=array( 'locale' => '', 'asin' => '', 'associate_id' => '' ) ) {
 
             $_mValue        = $this->getElement(
                 $aRow, // subject array
@@ -107,7 +120,7 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_bIsExpired      = $this->isExpired( $_iExpirationTime );
             $_bShouldSchedule = $_bIsExpired || ! $_bIsSet; // 3.8.5 When the value is not set, schedule retrieving extra product information
 
-            $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration, $aAPIRawItem );
+            $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration );
             $this->___addDebugInformation(
                 $_bIsSet,
                 $sColumnName,
@@ -125,9 +138,10 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
              * @param boolean $bShouldSchedule
              * @param array   $aScheduleTask
              * @param integer $_iCacheDuration
-             * @param array   $aAPIRawItem
+             * @since 3.5.0
+             * @since 4.3.0   Deprecated the `$aAPIRawItem` parameter.
              */
-            private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $_iCacheDuration, $aAPIRawItem=array() ) {
+            private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $_iCacheDuration ) {
                 if ( ! $bShouldSchedule ) {
                     return;
                 }
@@ -144,21 +158,20 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                     ( integer ) $_iCacheDuration,
                     ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
                     $this->_oUnitOption->get( 'item_format' )
-                    // $aAPIRawItem    // 3.8.12 @deprecated 4.3.0 Not used
                 );
             }
 
             /**
              * Schedules debug information to be inserted at the bottom of the product output.
+             * @param  boolean $_bIsSet
+             * @param  string $sColumnName
+             * @param  integer $_iCacheDuration
+             * @param  integer $_iExpirationTime
+             * @param  boolean $_bIsExpired
+             * @param  array $aScheduleTask
+             * @return void
              */
-            private function ___addDebugInformation(
-                $_bIsSet,
-                $sColumnName,
-                $_iCacheDuration,
-                $_iExpirationTime,
-                $_bIsExpired,
-                $aScheduleTask
-            ) {
+            private function ___addDebugInformation( $_bIsSet, $sColumnName, $_iCacheDuration, $_iExpirationTime, $_bIsExpired, $aScheduleTask ) {
 
                 if ( $_bIsSet ) {
                     return;

@@ -21,6 +21,12 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
 
     /**
      * Sets up properties.
+     * @param string $sASIN
+     * @param string $sLocale
+     * @param string  $sAssociateID
+     * @param array $aRow
+     * @param AmazonAutoLinks_UnitOption_Base $oUnitOption
+     * @param array $aProduct
      * @since       3.5.0
      * @since       3.8.11      Added the `$aProduct` parameter so that some extended classes do not have to declare the their own constructor.
      */
@@ -47,7 +53,7 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
     /**
      * @param       string  $sMessage
      * @param       string  $sLocale        If this is given, it checks whether the PA-API keys are set for that locale. Otherwise, the message will not be shown.
-     * @param  string $sContext A hint for the JavaScript script to know what element this is for, to update an image-set, rating, or price etc.
+     * @param       string $sContext A hint for the JavaScript script to know what element this is for, to update an image-set, rating, or price etc.
      * @return      string
      * @since       3.5.0
      * @since       4.0.1       Added the `$sLocale` parameter.
@@ -63,7 +69,7 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
             return '';
         }
         return $this->_oUnitOption->get( 'show_now_retrieving_message' )
-            ? '<p ' . $this->___getAttributes( $sContext ) . '">'
+            ? '<p ' . $this->___getAttributes( $sContext, $this->_oUnitOption->get( 'unit_type' ) ) . '">'
                     . $sMessage
                 . '</p>'
             : '';
@@ -71,14 +77,16 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
 
         /**
          * @param  string $sContext A hint for the JavaScript script to know what element this is for, to update an image-set, rating, or price etc.
+         * @param  string $sUnitType
          * @return string
          * @since  4.3.0
          */
-        private function ___getAttributes( $sContext ) {
+        private function ___getAttributes( $sContext, $sUnitType ) {
             return $this->getAttributes(
                 array(
                     'class'           => 'now-retrieving',
                     'data-locale'     => $this->_sLocale,
+                    'data-type'       => $sUnitType,
                     'data-currency'   => $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $this->_sLocale ) ),
                     'data-language'   => $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $this->_sLocale ) ),
                     'data-asin'       => $this->_sASIN,
