@@ -70,8 +70,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     );
 
     /**
-     * 
-     * @return    array    The response array.
+     *
+     * @param     array $aURLs
+     * @return    array The response array.
      */
     public function fetch( $aURLs=array() ) {
 
@@ -94,9 +95,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         /**
          * @since       3.1.4
-         * @since       3.8.1           Added the $aURLs parameter.
-         * @param       array       $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
-         * @scope       protected       The 'url' unit type will extend this method.
+         * @since       3.8.1      Added the $aURLs parameter.
+         * @param       array      $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
+         * @scope       protected  The 'url' unit type will extend this method.
          * @return      array
          */
         protected function _getResponses( array $aURLs=array() ) {
@@ -216,7 +217,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }    
 
                 /**
-                 * @return      array
+                 * @return array
+                 * @param  array $aItems
+                 * @param  array $aResponse
                  */
                 private function ___getItemsMerged( array $aItems, array $aResponse ) {
                     
@@ -272,8 +275,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      *
      * This enables to retrieve more than 10 items. However, for it, it performs multiple requests, thus, it will be slow.
      *
-     * @since           2.0.1
-     * @return          array
+     * @since   2.0.1
+     * @return  array
+     * @param   integer $iCount
      */
     protected function getRequest( $iCount ) {
         
@@ -404,6 +408,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          *
          * @since       2.0.4.1
          * @since       3.9.0   Changed the scope to private.
+         * @param       array   $aMain
+         * @param       array   $aItems
+         * @return      array
          */
         private function ___addItems( $aMain, $aItems ) {
 
@@ -433,14 +440,17 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     /**
      *
      * @since   2.0.2
+     * @since   3.9.0   The parameter format has been changed in PA-API 5
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
-     * @since   3.9.0   The parameter format has been changed in PA-API 5
+     * @param   string $sOperation
+     * @param   integer|null $iItemPage
+     * @return  array
      */
     protected function getAPIParameterArray( $sOperation='SearchItems', $iItemPage=null ) {
 
         // @deprecated 3.9.0
-        $_bIsIndexAllOrBlended  = ( 'All' === $this->oUnitOption->get( 'SearchIndex' ) || 'Blended' === $this->oUnitOption->get( 'SearchIndex' ) );
+//        $_bIsIndexAllOrBlended  = ( 'All' === $this->oUnitOption->get( 'SearchIndex' ) || 'Blended' === $this->oUnitOption->get( 'SearchIndex' ) );
 
         $_sTitle                = $this->trimDelimitedElements( $this->oUnitOption->get( 'Title' ), ',', false );
         $_aPayload               = array(
@@ -568,7 +578,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
     /**
      * Constructs products array to be parsed in the template.
-     * 
+     *
+     * @param       array       $aResponse
      * @return      array
      */
     protected function getProducts( $aResponse ) {
@@ -585,6 +596,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
          * @param       string  $_sLocale
          * @param       string  $_sAssociateID
          * @param       string  $_sResponseDate
+         * @param       integer $_iCount
          * @since       3.5.0
          * @return      array
          * @since       3.9.0   Changed the scope to protected.
@@ -594,7 +606,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             $_aASINLocaleCurLangs  = array();  // stores added product ASINs for performing a custom database query.
             $_aProducts     = array();
 
-            $_sLocale       = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
             $_sCurrency     = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
             $_sLanguage     = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
             
@@ -719,6 +730,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             /**
              * @throws  Exception
              * @since   3.5.0
+             * @param   array $aItem
+             * @return  array
              */
             private function ___getItemStructured( $aItem ) {
                 if ( ! is_array( $aItem ) ) {
@@ -731,6 +744,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 /**
                  * @throws  Exception
                  * @since   3.5.0
+                 * @param   string $sASIN
                  */
                 private function ___checkASINBlocked( $sASIN ) {
                     if ( ! $this->isASINBlocked( $sASIN ) ) {
@@ -760,11 +774,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }
 
             /**
-             * @param array $aItem
-             *
-             * @return      string
+             * @param  array $aItem
+             * @return string
              * @throws Exception
-             * @since       3.5.0
+             * @since  3.5.0
              */
             private function ___getThumbnailURL( $aItem ) {
                 $_sThumbnailURL = $this->getElement( $aItem, array( 'Images', 'Primary', 'Medium', 'URL' ), '' );
@@ -785,6 +798,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 /**
                  * @since   3.5.0
                  * @throws  Exception
+                 * @param   string $sThumbnailURL
                  */
                 private function ___checkImageAllowed( $sThumbnailURL ) {
                     if ( ! $this->isImageAllowed( $sThumbnailURL ) ) {
@@ -793,13 +807,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 }
 
             /**
-             * @param string $sContent
-             * @param string $sProductURL
-             *
-             * @return  string
+             * @param  string $sContent
+             * @param  string $sProductURL
+             * @return string
              * @throws Exception
-             * @since   3.5.0
-             * @since   4.1.0   Added the `$sASIN` parameter.
+             * @since  3.5.0
+             * @since  4.1.0   Added the `$sASIN` parameter.
              */
             private function ___getDescription( $sContent, $sProductURL ) {
                 $_sDescription  = $this->_getDescriptionSanitized(
@@ -811,20 +824,30 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 return $_sDescription;
             }
                 /**
-                 * @since   3.5.0
-                 * @throws  Exception
+                 * @since  3.5.0
+                 * @throws Exception
+                 * @param  string $sDescription
                  */
                 private function ___checkDescriptionBlocked( $sDescription ) {
                     if ( $this->isDescriptionBlocked( $sDescription ) ) {
                         throw new Exception( '(product filter) The description is not allowed: ' . $sDescription );
                     }
                 }
-    
+
             /**
-             * @since   3.5.0
+             * @param array $_aItem
+             * @param string $sTitle
+             * @param string $_sThumbnailURL
+             * @param string $_sProductURL
+             * @param string $_sContent
+             * @param string $_sDescription
+             * @param string $_sLocale
+             * @param string $_sAssociateID
+             * @param string $_sResponseDate
              * @return array
              * @throws Exception
              * @compat PA-API5
+             * @since  3.5.0
              */
             private function ___getProduct(
                 $_aItem,
@@ -975,8 +998,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 }
 
             /**
-             * @return  string
-             * @since   3.8.11
+             * @param  array   $aItem
+             * @param  string  $sProductURL
+             * @param  string  $sTitle
+             * @param  integer $iMaxImageSize
+             * @param  integer $iMaxNumberOfImages
+             * @return string
+             * @since  3.8.11
              */
             private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
 //                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%image_set%', ) ) ) {
@@ -1013,53 +1041,55 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
             /**
              * Returns the formatted product meta HTML block.
-             * 
-             * @since       2.1.1
-             * @return      string
-             * @todo        3.9.0   Add `brand`, `manufacturer` etc
+             *
+             * @since   2.1.1
+             * @return  string
+             * @param   array $aProduct
+             * @todo    3.9.0   Add `brand`, `manufacturer` etc
              */
             private function ___getProductMetaFormatted( array $aProduct ) {
-                
+
                 $_aOutput = array();
                 if ( $aProduct[ 'author' ] ) {
-                    $_aOutput[] = "<span class='amazon-product-author'>" 
-                            . sprintf( __( 'by %1$s', 'amazon-auto-links' ) , $aProduct[ 'author' ] ) 
+                    $_aOutput[] = "<span class='amazon-product-author'>"
+                            . sprintf( __( 'by %1$s', 'amazon-auto-links' ) , $aProduct[ 'author' ] )
                         . "</span>";
                 }
                 if ( $aProduct[ 'proper_price' ] ) {
-                    $_aOutput[] = "<span class='amazon-product-price'>" 
+                    $_aOutput[] = "<span class='amazon-product-price'>"
                             . sprintf( __( 'for %1$s', 'amazon-auto-links' ), $aProduct[ 'proper_price' ] )
                         . "</span>";
                 }
                 if ( $aProduct[ 'discounted_price' ] ) {
-                    $_aOutput[] = "<span class='amazon-product-discounted-price'>" 
+                    $_aOutput[] = "<span class='amazon-product-discounted-price'>"
                             . $aProduct[ 'discounted_price' ]
                         . "</span>";
                 }
                 if ( $aProduct[ 'lowest_new_price' ] ) {
-                    $_aOutput[] = "<span class='amazon-product-lowest-new-price'>" 
+                    $_aOutput[] = "<span class='amazon-product-lowest-new-price'>"
                             . sprintf( __( 'New from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_new_price' ] )
                         . "</span>";
                 }
                 if ( $aProduct[ 'lowest_used_price' ] ) {
-                    $_aOutput[] = "<span class='amazon-product-lowest-used-price'>" 
-                            . sprintf( __( 'Used from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_used_price' ] ) 
+                    $_aOutput[] = "<span class='amazon-product-lowest-used-price'>"
+                            . sprintf( __( 'Used from %1$s', 'amazon-auto-links' ), $aProduct[ 'lowest_used_price' ] )
                         . "</span>";
                 }
                 return empty( $_aOutput )
                     ? ''
                     : "<div class='amazon-product-meta'>"
                         . implode( ' ', $_aOutput )
-                        . "</div>";          
-                        
+                        . "</div>";
+
             }
             /**
              * Returns the formatted product description HTML block.
-             * 
-             * @since       2.1.1
-             * @return      string
-             * @since       3.9.0       Removed the `meta` element.
-             */        
+             *
+             * @since   2.1.1
+             * @since   3.9.0  Removed the `meta` element.
+             * @param   array  $aProduct
+             * @return  string
+             */
             private function ___getProductDescriptionFormatted( array $aProduct ) {
                 return $aProduct[ 'description' ]
                     ? "<div class='amazon-product-description'>"
