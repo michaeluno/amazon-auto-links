@@ -47,7 +47,6 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
         new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup( $this->oFactory, $this->sPageSlug );
-        new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_similarity_lookup( $this->oFactory, $this->sPageSlug );
  
         $this->___doPageSettings();
         

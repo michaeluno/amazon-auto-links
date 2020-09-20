@@ -137,9 +137,6 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
                 case 'GetItems':        // 4.0.6 - fix a bug that did not let the user reach the Item Look-up option screen.
                     $_sTabSlug = 'item_lookup';
                     break;
-                case 'SimilarityLookup':
-                    $_sTabSlug = 'similarity_lookup';
-                    break;
             }                
 
             $this->setTransient(

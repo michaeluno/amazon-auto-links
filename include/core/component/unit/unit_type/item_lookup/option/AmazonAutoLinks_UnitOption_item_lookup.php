@@ -44,6 +44,7 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
         '_sort'          => 'raw',  // 3.5.0+ (string) or `random`
 
         'product_title'  => null,   // 4.0.0+ (string) Alter the product title.
+
     );
 
     /**
@@ -64,20 +65,21 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      */
     protected function getDefaultOptionStructure() {
         return self::$aStructure_Default 
-            + parent::$aStructure_Default
-            + AmazonAutoLinks_UnitOption_search::$aStructure_Default;
+            + parent::$aStructure_Default;
     }
 
     /**
      * 
      * @since   3
-     * @since   4.0.0       Renamed from `format()` as it was too general.
+     * @since   4.0.0 Renamed from `format()` as it was too general.
+     * @param   array $aUnitOptions
+     * @param   array $aDefaults
+     * @return  array
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
 
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
-        $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults )
-            + AmazonAutoLinks_UnitOutput_similarity_lookup::$aStructure_APIParameters;
+        $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults );
         $aUnitOptions = $this->sanitize( $aUnitOptions );
         return $aUnitOptions;
         
@@ -87,8 +89,9 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
          * Sanitizes the unit options of the item_lookup unit type.
          * 
          * @since       2.0.2
-         * @since       3           Moved from ``.
+         * @since       3      Moved from ``.
          * @return      array
+         * @param       array  $aUnitOptions
          */
         protected function sanitize( array $aUnitOptions ) {
             
