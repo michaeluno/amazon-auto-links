@@ -153,7 +153,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
         protected function _printFiles() {
             echo "<div class='files-container'>";
             echo "<h4>Test Files</h4>";
-            $_oFinder = new AmazonAutoLinks_Test_ClassFinder( AmazonAutoLinks_Test_Loader::$sDirPath . '/tests', array( 'AmazonAutoLinks_UnitTest_Base' ) );
+            $_oFinder = new AmazonAutoLinks_Test_ClassFinder( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base' ) );
             AmazonAutoLinks_Debug::dump( $_oFinder->getFiles() );
             echo "</div>";
         }
