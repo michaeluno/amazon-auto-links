@@ -37,8 +37,10 @@
                     return true;
                 }
 
-                $( '*[class*="' + _sLabel + '"]' ).remove();    // remove previous result
-                var _oSection = $( '<div class="' + _sLabel + '"></div>' );
+                var _sResultClass = 'result-' + _sLabel;
+                $( '*[class*="' + _sResultClass + '"]' ).remove();    // remove previous result
+
+                var _oSection = $( '<div class="' + _sResultClass + '"></div>' );
                 $( '.results' ).append( _oSection ); // create a result area
                 _oSection.accordion( {
                     collapsible: true,
@@ -48,7 +50,7 @@
 
                 var _aFiles = aalTests.files[ _sLabel ];
                 $.each( _aFiles, function( index, sFilePath ) {
-                     $( '*[class*="' + _sLabel + '"]' ).html( '' );  // clear previous results
+                     $( '*[class*="' + _sResultClass + '"]' ).html( '' );  // clear previous results
                     ___runFile( _sLabel, sFilePath, _aTags );
                 } );
 
@@ -76,7 +78,7 @@
                 spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" alt="Running..." />' ),
                 startButton: _oStartButton,
                 buttonLabel: _oStartButton.val(),
-                resultsArea: $( '*[class*="' + sLabel + '"]' ),
+                resultsArea: $( '*[class*="' + 'result-' + sLabel + '"]' ),
 
                 // Callbacks
                 beforeSend: function() {
@@ -102,7 +104,7 @@
                 complete: function( self ) {
                     self.startButton.val( self.buttonLabel );
                     self.spinnerImage.remove();
-                    $( '*[class*="' + sLabel + '"]' ).accordion( 'refresh' );
+                    $( '*[class*="' + 'result-' + sLabel + '"]' ).accordion( 'refresh' );
                 }
             } ); // ajax
         }
