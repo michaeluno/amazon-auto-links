@@ -71,19 +71,61 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                 'if'        => empty( $_aTagLabels ),
             ),
             array(
-                'title'     => '',
+                'title'             => '',
+                'field_id'          => '_buttons',
                 'show_title_column' => false,
-                'field_id'  => '_test',
-                'save'      => 'false',
-                'type'      => 'submit',
-                'value'     => 'Start',
-                'attributes'        => array(
-                    'class' => 'button-secondary aal-tests',
-                    'disabled' => empty( $_aTagLabels )
-                        ? 'disabled'
-                        : null,
+                'type'              => 'inline_mixed',
+                'save'              => false,
+                'content'           => array(
+                    array(
+                        'title'             => '',
+                        'show_title_column' => false,
+                        'field_id'          => '_copy',
+                        'save'              => 'false',
+                        'type'              => 'submit',
+                        'href'              => '#',
+                        'value'             => 'Copy Errors to Clipboard',
+                        'attributes'        => array(
+                            'class' => 'button button-secondary copy-to-clipboard',
+                        ),
+                    ),
+                    array(
+                        'title'             => '',
+                        'show_title_column' => false,
+                        'field_id'          => '_clear',
+                        'save'              => 'false',
+                        'type'              => 'submit',
+                        'href'              => '#',
+                        'value'             => 'Clear',
+                        'attributes'        => array(
+                            'class' => 'button button-secondary clear-log',
+                        ),
+                    ),
+                    array(
+                        'title'             => '',
+                        'show_title_column' => false,
+                        'field_id'          => '_test',
+                        'save'              => 'false',
+                        'type'              => 'submit',
+                        'value'             => 'Start',
+                        'attributes'        => array(
+                            'class' => 'button button-primary aal-tests',
+                            'disabled' => empty( $_aTagLabels )
+                                ? 'disabled'
+                                : null,
+                        ),
+                    ),
                 ),
-            )
+            ),
+            array(
+                'show_title_column' => false,
+                'field_id'          => '_results',
+                'save'              => false,
+                'content'           => "<div class='results-container'>"
+                        . "<h4 class='results-title'>Results</h4>"
+                        . "<div class='results'></div>"
+                    . "</div>",
+            ),
         );
     }
 
@@ -106,11 +148,6 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
      * @callback        action      do_{page slug}_{tab slug}
      */
     protected function _doTab( $oAdminPage ) {
-        echo "<div class='results-container'>";
-        echo "<h4>Results</h4>";
-        echo "<div class='results'>";
-        echo "</div>";
-        echo "</div>";
         $this->_printFiles();
     }
         protected function _printFiles() {

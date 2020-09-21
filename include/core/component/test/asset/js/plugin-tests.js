@@ -10,9 +10,41 @@
  */
 (function($){
 
+    /**
+     * @var aalTests
+     */
     $( document ).ready( function() {
 
+        if ( 'undefined' === typeof aalTests ) {
+            console.log( 'Amazon Auto Links', 'The test script failed to load' );
+            return;
+        }
+
         ajaxManager.run();
+
+        $( '.copy-to-clipboard' ).click( function( event ) {
+            event.preventDefault();
+            // var _oLogClone = $( '.log' ).clone();  // re-retrieve the element as it can be updated
+            // _oLogClone.find( 'p:empty, dif:empty' ).remove();   // remove empty elements
+            // _oLogClone.find( '.log-item-title, .log-item-message' ).append( '\n' );
+            var _oErrors = $( '.results' ).find( '*[data-success=0]' ).clone();
+            if ( ! _oErrors.html() ) {
+                alert( 'There is no error.' );
+                return;
+            }
+            var _oToCopy = $( "<div>" ).append( _oErrors );
+            _oToCopy.find( 'p:empty, dif:empty' ).remove();   // remove empty elements
+            _oToCopy.find( '.result-container, .result-header, .result-body' ).append( '\n' );
+            var _bCopied = aalCopyToClipboard( _oToCopy[ 0 ] );
+            alert( _bCopied ? 'Copied ' + _oErrors.length + ' error(s).' : 'Failed to copy the errors.' );
+            return false;
+        } );
+
+        $( '.clear-log' ).click( function( event ) {
+            event.preventDefault();
+            $( '.results' ).html( '' );
+            return false;
+        } );
 
         $( '.aal-tests' ).click( function( event ) {
             event.preventDefault();
@@ -26,7 +58,8 @@
             // Get checked items.
             var _oCheckedItems = $( 'input.test-categories:checked' );
             if ( ! _oCheckedItems.length ) {
-                $( this ).parent().parent().append( '<span class="item-select-error">* Please select items.</span>' );
+                // $( this ).parent().parent().append( '<span class="item-select-error">* Please select items.</span>' );
+                $( this ).closest( 'fieldset' ).after( '<span class="item-select-error">* Please select items.</span>' );
                 return false;
             }
             _oCheckedItems.each( function() {
@@ -42,11 +75,6 @@
 
                 var _oSection = $( '<div class="' + _sResultClass + '"></div>' );
                 $( '.results' ).append( _oSection ); // create a result area
-                _oSection.accordion( {
-                    collapsible: true,
-                    active: false,
-                    heightStyle: "content"
-                } );
 
                 var _aFiles = aalTests.files[ _sLabel ];
                 $.each( _aFiles, function( index, sFilePath ) {
@@ -75,7 +103,7 @@
                     tags: aTags,
                 },
                 // Custom properties.
-                spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" alt="Running..." />' ),
+                spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" alt="Now loading..." />' ),
                 startButton: _oStartButton,
                 buttonLabel: _oStartButton.val(),
                 resultsArea: $( '*[class*="' + 'result-' + sLabel + '"]' ),
@@ -102,11 +130,24 @@
                     );
                 },
                 complete: function( self ) {
+
                     self.startButton.val( self.buttonLabel );
                     self.spinnerImage.remove();
-                    $( '*[class*="' + 'result-' + sLabel + '"]' ).accordion( 'refresh' );
+
+                    // Accordion
+                    $( '*[class*="' + 'result-' + sLabel + '"]' ).find( '.result-header' )
+                        .off( 'click' )
+                        .click( _accordion );
+
                 }
             } ); // ajax
+        }
+
+        function _accordion( event ) {
+            event.preventDefault();
+            $( this ).closest( '.result-container' ).find( '.result-body' );
+            $( this ).next().slideToggle( 'slow' );
+            return false;
         }
 
         function ___setResponseOutput( _oTestTag, response, sFilePath ) {
@@ -125,8 +166,9 @@
                 var _sCurrentItem = '<p>File: ' + sFilePath + '</p>';
                 var _sDetails     = '';
                 var _sPurpose     = '';
+                var _iSucceed     = eachResult.success ? 1 : 0;
                 if ( eachResult.success ) {
-                    _sHeader  = '<h4 class="test-item-header">'
+                    _sHeader  = '<h4 class="result-header">'
                         + '<span class="test-success bold">OK</span> '
                         + eachResult.name
                         + '</h4>';
@@ -139,7 +181,7 @@
                             ? '<p class="">' + eachResult.message + '</p>'
                             : '';
                 } else {
-                    _sHeader  = '<h4 class="test-item-header">'
+                    _sHeader  = '<h4 class="result-header">'
                         + '<span class="test-error bold">Failed</span> '
                         + eachResult.name
                         + '</h4>';
@@ -152,8 +194,9 @@
                             ? '<p class="">' + eachResult.message + '</p>'
                             : '';
                 }
-                var _sBody = "<div class='result-body'>" + _sPurpose + _sDetails + _sCurrentItem + "</div>";
-                _oTestTag.append( _sHeader + _sBody );
+                var _sBody   = "<div class='result-body' style='display:none'>" + _sPurpose + _sDetails + _sCurrentItem + "</div>";
+                var _sResult = "<div class='result-container' data-success='" + _iSucceed + "'>" + _sHeader + _sBody + "</div>";
+                _oTestTag.append( _sResult );
 
             } );
 

@@ -306,6 +306,10 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         protected function _enqueueResources( $sScanDirPath, array $aBaseClasses, $sContext ) {
 
             $_oFinder = new AmazonAutoLinks_Test_ClassFinder( $sScanDirPath, $aBaseClasses );
+            $_sUtilityScriptPath = $this->isDebugMode()
+                ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
+                : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js';
+            wp_enqueue_script( 'aalUtility', $this->getSRCFromPath( $_sUtilityScriptPath ), array( 'jquery' ), true );
             $this->___enqueueAjaxScript(
                 'aalTests',
                 array(
@@ -334,10 +338,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 'actionHookSuffix' => $this->_sActionHookSuffix,
                 'nonce'            => wp_create_nonce( $this->_sNonceKey ),
                 'spinnerURL'       => admin_url( 'images/loading.gif' ),
+                // no labels set as tests are only available when the site debug mode is on.
+                // Also text regarding tests such as error messages should not be translated.
             );
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script( 'jquery-ui-accordion' );
-            wp_enqueue_script( $sScriptHandle, $sScriptSRC, array( 'jquery' ), true );
+            wp_enqueue_script( $sScriptHandle, $sScriptSRC, array( 'jquery', 'jquery-ui-accordion', 'aalUtility' ), true );
             wp_localize_script( $sScriptHandle, $sScriptHandle, $_aScriptData );
 
         }

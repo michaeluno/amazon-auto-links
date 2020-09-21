@@ -1,6 +1,6 @@
 /*
 	@name Tests
-	@version 1.0.0
+	@version 1.0.1
  */
 .test-success {
     color: green;
@@ -24,7 +24,22 @@ h4 {
     font-size: 14px;
 }
 
-.test-item-header {
+#fieldrow-_buttons > td {
+    padding-bottom: 0;
+}
+#fieldrow-_buttons .amazon-auto-links-input-button-container,
+#fieldrow-_buttons input
+{
+    margin: 0;
+}
+#fieldrow-_results > td {
+    padding-top: 0;
+}
+.results-title {
+    margin-top: 0;
+}
+
+.result-header {
     font-size: 1em;
     background-color: #fff;
     margin: 0.4em 0 0;
@@ -44,4 +59,9 @@ h4 {
 .results .ui-state-focus,
 .results .ui-accordion-header {
     outline: none;
+}
+
+/* Buttons */
+.button {
+    margin-right: 0.4em;
 }
