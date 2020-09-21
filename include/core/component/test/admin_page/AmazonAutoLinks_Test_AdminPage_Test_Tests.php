@@ -125,7 +125,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                         . "<h4 class='results-title'>Results</h4>"
                         . "<div class='results'></div>"
                     . "</div>",
-            ),
+            )
         );
     }
 
