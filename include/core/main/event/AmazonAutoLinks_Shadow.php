@@ -88,8 +88,9 @@ class AmazonAutoLinks_Shadow {
      * 
      * @since    1.0.0
      * @param    array   $aActionHooks
+     * @return   array   Executed WP Cron tasks.
      */
-    private function ___handleCronTasks( array $aActionHooks ) {
+    static private function ___handleCronTasks( array $aActionHooks ) {
 
         $_sTransientName = 'aal_' . md5( get_class() );
         $_aFlags         = AmazonAutoLinks_WPUtility::getTransientWithoutCacheAsArray( $_sTransientName ) + array(
@@ -99,13 +100,13 @@ class AmazonAutoLinks_Shadow {
 
         // If it's still locked do nothing. Locked duration: 10 seconds.
         if ( $_aFlags[ '_locked' ] + self::$___iLockCronInterval > $_fNow ) {
-            return;
+            return array();
         }
 
         // Newly retrieve the plugin cron scheduled tasks since some may be already triggered by WP Cron.
-        $_aWPCronTasks = $this->___getScheduledWPCronTasksByActionName( $aActionHooks );
+        $_aWPCronTasks = self::getScheduledWPCronTasksByActionName( $aActionHooks );
         if ( empty( $_aWPCronTasks ) ) {                    
-            return;
+            return array();
         } 
 
         // Set/renew the locked time and leave `_called` to inherit the called time.
@@ -113,7 +114,7 @@ class AmazonAutoLinks_Shadow {
 
         // Lock the process.
         AmazonAutoLinks_WPUtility::setTransient( $_sTransientName, $_aFlags, AmazonAutoLinks_Utility::getAllowedMaxExecutionTime() );
-        $this->___doTasks( $_aWPCronTasks );
+        return self::___doTasks( $_aWPCronTasks );
 
     }
         /**
@@ -123,8 +124,14 @@ class AmazonAutoLinks_Shadow {
          *
          * @since 1.0.0
          * @param array $aWPCronTasks
+         * @return array An array holding executed cron tasks.
          */
-        private function ___doTasks( array $aWPCronTasks ) {
+        static private function ___doTasks( array $aWPCronTasks ) {
+
+            $_aExecuted =array();
+            if ( empty( $aWPCronTasks ) ) {
+                return $_aExecuted;
+            }
 
             do_action( 'aal_action_do_plugin_cron', $aWPCronTasks );
 
@@ -143,14 +150,17 @@ class AmazonAutoLinks_Shadow {
                             $aNewArgs = array( $_iTimeStamp, $sSchedule, $sActionName, $aArgs[ 'args' ] );
                             call_user_func_array( 'wp_reschedule_event', $aNewArgs );
                         }
+
                         wp_unschedule_event( $_iTimeStamp, $sActionName, $aArgs[ 'args' ] );
                         do_action_ref_array( $sActionName, $aArgs[ 'args' ] );
+                        $_aExecuted[ $sActionName ] = $aArgs;
 
                     }
 
                 }
 
             }
+            return $_aExecuted;
 
         }
 
@@ -158,10 +168,10 @@ class AmazonAutoLinks_Shadow {
      * Sets plugin specific cron tasks by extracting plugin's cron jobs from the WP cron job array.
      *  
      * @since 1.0.0
-     * @param array $aActionHooks
+     * @param array $aActionHooks   Action hook names to trigger. If empty, all due cron tasks will be triggred.
      * @return array A array holding tasks registered for WP_Cron.
      */
-    private function ___getScheduledWPCronTasksByActionName( array $aActionHooks ) {
+    static public function getScheduledWPCronTasksByActionName( array $aActionHooks ) {
         
         $_aTheTasks     = array();
         $_aWPCronTasks  = _get_cron_array();
@@ -182,7 +192,7 @@ class AmazonAutoLinks_Shadow {
                 break; // see the definition of the wp_cron() function.
             }
             foreach ( ( array ) $_aScheduledActionHooks as $_sScheduledActionHookName => $_aArguments ) {
-                if ( in_array( $_sScheduledActionHookName, $aActionHooks ) ) {
+                if ( empty( $aActionHooks ) || in_array( $_sScheduledActionHookName, $aActionHooks ) ) {
                     $_aTheTasks[ $_iTimeStamp ][ $_sScheduledActionHookName ] = $_aArguments;
                 }
             }
@@ -325,5 +335,15 @@ class AmazonAutoLinks_Shadow {
         }
         ignore_user_abort( true );
     }
-                    
+
+    /**
+     * Manually triggers cron task actions.
+     * @param array $aActionHooks The names of action hooks to trigger. If empty, all due WP Cron tasks will be triggered.
+     * @since 4.3.0
+     * @return array Executed WP Cron tasks.
+     */
+    static public function doTasks( array $aActionHooks=array() ) {
+        return self::___handleCronTasks( $aActionHooks );
+    }
+
 }

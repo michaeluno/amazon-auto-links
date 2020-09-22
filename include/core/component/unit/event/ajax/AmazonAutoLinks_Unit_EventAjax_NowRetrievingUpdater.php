@@ -36,69 +36,164 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
      */
     protected function _getResponse( array $aPost ) {
 
-        $_aElements = array();
-        foreach( $this->getElementAsArray( $aPost, array( 'items' ) ) as $_sASINLocaleCurLang => $_aItems ) {
-            $_aElements = array_merge(
-                $_aElements,
-                $this->___getElementsByASINLocaleCurLang( $_sASINLocaleCurLang, $_aItems  )
-            );
+        // If there are pending plugin tasks, finish them now.
+        AmazonAutoLinks_Shadow::doTasks();
+        if ( ! did_action( 'aal_action_check_tasks' ) ) {
+            do_action( 'aal_action_check_tasks' );
         }
 
+        $_aAllItems           = $this->getElementAsArray( $aPost, array( 'items' ) );
+        $_aProducts           = $this->___getProducts( $_aAllItems );
+        $_aElements           = array();
+        foreach( $_aAllItems as $_sASINLocaleCurLang => $_aDueElements ) {
+            $_aElements = array_merge(
+                $_aElements,
+                $this->___getElementsByASINLocaleCurLang( $_aDueElements, $_aProducts )
+            );
+        }
         return $_aElements;
 
     }
+        /**
+         * @param array $aAllItems
+         * @return array
+         */
+        private function ___getProducts( array $aAllItems ) {
+            $_aASINLocaleCurLangs = array_keys( $aAllItems );
+            $_aUnitOptionSets     = $this->___getUnitOptionSets( $_aASINLocaleCurLangs );
+            $_aProducts           = array();
+            foreach( $_aUnitOptionSets as $_aUnitOptions ) {
+                $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( $_aUnitOptions );
+                $_aProducts  = $_aProducts + $this->___getProductsFormatted( $_oUnit->fetch(), $_oUnit->oUnitOption );
+            }
+            return $_aProducts;
+        }
+        /**
+         * @return array An array holding sets of unit options, separated by locale-currency-language.
+         * @param array $aASINLocaleCurLangs
+         */
+        private function ___getUnitOptionSets( array $aASINLocaleCurLangs ) {
+            $_aUnitOptionSets = array();
+            foreach( $aASINLocaleCurLangs as $_sASINLocaleCurLang ) {
+                $_aParts         = explode( '|', $_sASINLocaleCurLang );
+                $_sASIN          = $_aParts[ 0 ];
+                $_sLocale        = $_aParts[ 1 ];
+                $_sCurrency      = $_aParts[ 2 ];
+                $_sLanguage      = $_aParts[ 3 ];
+                $_sLocaleCurLang = "{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+                $_aUnitOptionSets[ $_sLocaleCurLang ] = isset( $_aUnitOptionSets[ $_sLocaleCurLang ] )
+                    ? $_aUnitOptionSets[ $_sLocaleCurLang ]
+                    : array(
+                        'country'            => $_sLocale,
+                        'preferred_currency' => $_sCurrency,
+                        'language'           => $_sLanguage,
+                        'show_now_retrieving_message'  => true,
+                        'ItemIds'            => array(),
+                    );
+                $_aUnitOptionSets[ $_sLocaleCurLang ][ 'ItemIds' ][] = $_sASIN;
+
+            }
+            return $_aUnitOptionSets;
+        }
 
         /**
-         * @param string $sASINLocaleCurLang ASIN|locale|currency|language
-         * @param array $aItems
-         * @return  array
+         * Converts numeric indices to associate keys.
+         * @param array $aProducts
+         * @param AmazonAutoLinks_UnitOption_Base $oUnitOption
+         * @return array A formatted products array.
          */
-        private function ___getElementsByASINLocaleCurLang( $sASINLocaleCurLang, array $aItems ) {
-
-            $_aProduct  = $this->___getProductByASINLocaleCurLang( $sASINLocaleCurLang );
-
-            // If the database is not updated yet,
-            // $_aProduct
-
-            $_aElements = array();
-            $_aElement  = array(
-                'context'   => '', 'asin'      => '', 'tag'       => '',
-                'locale'    => '', 'currency'  => '', 'language'  => '',
-                'output'    => '', 'id'        => 0,
-            );
-            foreach( $aItems as $_sContext => $_aItem ) {
-                $_sOutput = $this->___getElementOutput( $_aItem, $_aProduct );
-                if ( ! $_sOutput ) {
+        private function ___getProductsFormatted( array $aProducts, AmazonAutoLinks_UnitOption_Base $oUnitOption ) {
+            $_aNewProducts = array();
+            foreach( $aProducts as $_aProduct ) {
+                if ( ! is_array( $_aProduct ) ) {
                     continue;
                 }
-                $_aElements[] = array(
-                    'output' => $_sOutput,
-                ) + $_aItem + $_aElement;
+                $_aProduct = array(
+                    'locale'   => $oUnitOption->get( 'country' ),
+                    'currency' => $oUnitOption->get( 'preferred_currency' ),
+                    'language' => $oUnitOption->get( 'language' ),
+                ) + $_aProduct + array(
+                    'ASIN'     => '',
+                );
+                $_sKey = "{$_aProduct[ 'ASIN' ]}|{$_aProduct[ 'locale' ]}|{$_aProduct[ 'currency' ]}|{$_aProduct[ 'language' ]}";
+                $_aNewProducts[ $_sKey ] = $_aProduct;
+            }
+            return $_aNewProducts;
+        }
+
+        /**
+         * @param  array  $aDueElements
+         * @param  array  $aProducts
+         * @return array
+         */
+        private function ___getElementsByASINLocaleCurLang( array $aDueElements, array $aProducts ) {
+
+            // If the element is still pending, the 'output' element will be empty. Then it will be queued again.
+            $_aElements   = array();
+            $_aStructure  = array(
+                'context'   => '', 'asin'      => '', 'tag'       => '',
+                'locale'    => '', 'currency'  => '', 'language'  => '',
+                'output'    => '', 'id'        => 0,  'type'      => '',
+                'set'       => 0,
+            );
+            foreach( $aDueElements as $_sContext => $_aDueElement ) {
+                $_aDueElement = $_aDueElement + $_aStructure;
+                $_snOutput    = $this->___getElementOutput( $_aDueElement, $aProducts );
+                $_aUpdateItem = array(
+                    'output'    => $_snOutput,
+                    'set'       => ( integer ) $this->___isElementOutputSet( $_snOutput ),
+                ) + $_aDueElement;
+                $_aElements[] = $_aUpdateItem;
             }
             return $_aElements;
+
         }
             /**
-             * @param string $sASINLocaleCurLang
-             *
-             * @return array
+             * @param $snOutput
+             * @return bool
              */
-            private function ___getProductByASINLocaleCurLang( $sASINLocaleCurLang ) {
-                // @todo
-                return array();
+            private function ___isElementOutputSet( $snOutput ) {
+                if ( is_null( $snOutput ) ) {
+                    return false;
+                }
+                if (
+                    strpos( $snOutput, 'now-retrieving' )
+                    && strpos( $snOutput, 'data-locale' )
+                    && strpos( $snOutput, 'data-type' )
+                    && strpos( $snOutput, 'data-currency' )
+                    && strpos( $snOutput, 'data-language' )
+                    && strpos( $snOutput, 'data-asin' )
+                ) {
+                    return false;
+                }
+                return is_scalar( $snOutput );
             }
             /**
-             * @param array $aItem
-             * @return string
+             * @param array $aDueElement
+             * @param array $aProducts
+             * @return string|null       When the element is not set, null is returned. This is to cache up cases that an empty string is returned which means the database already stores the result of an empty string. This is different from a case of unset (null) that the API request has not been done yet.
              */
-            private function ___getElementOutput( array $aItem, array $aProduct ) {
-                // @todo
-                return '';
+            private function ___getElementOutput( array $aDueElement, array $aProducts ) {
+                $_sASINLocaleCurLang = "{$aDueElement[ 'asin' ]}|{$aDueElement[ 'locale' ]}|{$aDueElement[ 'currency' ]}|{$aDueElement[ 'language' ]}";
+                if ( ! isset( $aProducts[ $_sASINLocaleCurLang ] ) ) {
+                    return null;
+                }
+                $_aProduct = $aProducts[ $_sASINLocaleCurLang ];
+                if ( ! isset( $_aProduct[ $aDueElement[ 'context' ] ] ) ) {
+                    return null;
+                }
+                return $_aProduct[ $aDueElement[ 'context' ] ];
             }
+
     /**
      * Enqueues scripts and styles for unit outputs.
      */
     public function replyToEnqueueResources() {
 
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( ! $_oOption->isAPIConnected() ) {
+            return;
+        }
         $_sScriptHandle = 'aal-now-retrieving-updater';
         $_sFileBaseName = $this->isDebugMode()
             ? 'now-retrieving-updater.js'

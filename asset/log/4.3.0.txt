@@ -1,3 +1,4 @@
+- Added the ability to resume pending elements saying "Now retrieving..." with JavaScript.
 - Added the `Language` and `Currency` options in the `Default` setting screen.
 - Added the `Reset` button in the `Default` setting screen.
 - Added the `Custom Text` unit option.
