@@ -16,6 +16,7 @@
 - Refined the Error Log screen.
 - Minified CSS files.
 - Minified JavaScript scripts.
+- Tweaked the style of the default thumbnail layout to drop `max-height`.
 - Tweaked the style of setting form fields.
 - Tweaked the button style.
 - Optimized the embed unit type.
