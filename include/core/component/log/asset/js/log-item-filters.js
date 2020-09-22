@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Log Item Filters
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -67,7 +67,7 @@
                     'min-height': '320px',
                     'width': '100%',
                 } );
-                $( this ).next().toggle( 'slow' );
+                $( this ).next().slideToggle( 'slow' );
 
                 return false;
             }).next().hide();
