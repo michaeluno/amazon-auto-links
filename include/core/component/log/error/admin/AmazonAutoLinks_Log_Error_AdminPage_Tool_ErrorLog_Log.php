@@ -145,13 +145,12 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
                 $_aExtra       = array_diff_key( $aLogItem, $_aRequired );
                 $_iTime        = floor( $aLogItem[ 'time' ] );
                 $_sTime        = $this->getSiteReadableDate( $_iTime, 'Y-m-d H:i:s', true );
-                $_sFraction    = $this->getPrefixRemoved( ( string ) ( $aLogItem[ 'time' ] - $_iTime ), '0' );
+                $_sFraction    = $this->getPrefixRemoved( ( string ) round( $aLogItem[ 'time' ] - $_iTime, 4 ), '0' );
                 $_sTime        = $_sTime . $_sFraction . ' ';
                 $_sPageLoadID  = $this->getElement( $aLogItem, array( 'page_load_id' ), '' );
                 $_sPageLoadID  = $_sPageLoadID ? $_sPageLoadID . ' ' : '';
                 $_sCurrentHook = $this->getElement( $aLogItem, array( 'current_hook' ), '' );
                 $_sCurrentHook = $_sCurrentHook ? $_sCurrentHook . ' ' : '';
-
                 $_sStackTrace  = $this->getElement( $aLogItem, array( 'stack_trace' ), '' );
                 $_sDetails     = $this->___getArrayRepresentation( $_aExtra, $_sPad );
                 $_sDetails     = $_sDetails
