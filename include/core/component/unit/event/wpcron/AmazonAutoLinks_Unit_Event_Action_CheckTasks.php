@@ -31,6 +31,11 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         if ( $this->_isLocked() ) {
             return false;
         }
+
+        $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+        if ( version_compare( $_oTaskTable->getVersion(), '1.0.0b01', '<' ) ) {
+            return false;
+        }
         return true;
 
     }
