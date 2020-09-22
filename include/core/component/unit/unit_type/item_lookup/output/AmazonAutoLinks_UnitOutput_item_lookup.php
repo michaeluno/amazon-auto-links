@@ -17,30 +17,33 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
     
     /**
      * Stores the unit type.
-     * @remark      Note that the base constructor will create a unit option object based on this value.
+     * @remark Note that the base constructor will create a unit option object based on this value.
+     * @var    string
      */    
     public $sUnitType = 'item_lookup';
     
     /**
      * Stores the unit option key that is used for the search.
      * This is needed for the `search_per_keyword` option.
-     * @since       3.2.0
+     * @since 3.2.0
+     * @var   string
      */
     public $sSearchTermKey = 'ItemId';
 
     /**
-     * The array element key name that containes `Items` element.
+     * The array element key name that contains `Items` element.
      * PA-API 5 operations such as `GetItems`, `SearchItems` have different key names such as `ItemsResult` abd `SearchResult`.
-     * @var string
-     * @since   3.9.0
+     * @var   string
+     * @since 3.9.0
      */
     protected $_sResponseItemsParentKey = 'ItemsResult';
 
 
     /**
      * Represents the array structure of the API request arguments.
-     * @since            2.0.2
-     * @see https://webservices.amazon.com/paapi5/documentation/get-items.html
+     * @since 2.0.2
+     * @var   array
+     * @see   https://webservices.amazon.com/paapi5/documentation/get-items.html
      */
     public static $aStructure_APIParameters = array(    
         'Operation'             => 'GetItems',  // string
@@ -71,6 +74,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * @since       3.2.1
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_url`.
      * @return      array
+     * @param       array $aResponse
      */
     protected function getProducts( $aResponse ) {
 
@@ -95,7 +99,9 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
     /**
      * Performs an Amazon Product API request.
      * 
-     * @since            2.0.2
+     * @since  2.0.2
+     * @param  integer $iCount
+     * @return array
      */
     protected function getRequest( $iCount ) {
 
@@ -105,20 +111,21 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
             $this->oUnitOption->get( 'associate_id' )
         );
-        $_aResponse = $_oAPI->request(
+        return $_oAPI->request(
             $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
             $this->oUnitOption->get( 'cache_duration' ),
             $this->oUnitOption->get( '_force_cache_renewal' )
         );
 
-        return $_aResponse;
-                 
     }
 
     /**
      *
-     * @see              http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
-     * @since            2.0.2
+     * @see    http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
+     * @since  2.0.2
+     * @param  string       $sOperation
+     * @param  integer|null $iItemPage
+     * @return array
      */
     protected function getAPIParameterArray( $sOperation='GetItems', $iItemPage=null ) {
 
