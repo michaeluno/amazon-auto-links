@@ -24,9 +24,6 @@
 
         $( '.copy-to-clipboard' ).click( function( event ) {
             event.preventDefault();
-            // var _oLogClone = $( '.log' ).clone();  // re-retrieve the element as it can be updated
-            // _oLogClone.find( 'p:empty, dif:empty' ).remove();   // remove empty elements
-            // _oLogClone.find( '.log-item-title, .log-item-message' ).append( '\n' );
             var _oErrors = $( '.results' ).find( '*[data-success=0]' ).clone();
             if ( ! _oErrors.html() ) {
                 alert( 'There is no error.' );
