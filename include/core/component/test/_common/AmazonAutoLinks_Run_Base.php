@@ -25,7 +25,8 @@ class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @param $sErrorMessage
+     * @param string $sErrorMessage
+     * @param integer|string $isCode
      * @throws Exception
      */
     protected function _throwError( $sErrorMessage, $isCode=0 ) {

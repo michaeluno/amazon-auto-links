@@ -36,8 +36,8 @@ class AmazonAutoLinks_UnitTest_PluginUtility extends AmazonAutoLinks_UnitTest_Ba
     }
 
     /**
-     * @param $sDegreeType
-     * @param $aArguments
+     * @return boolean
+     * @throws Exception
      */
     public function test_getDegree() {
         $_sDegree = AmazonAutoLinks_PluginUtility::getDegree(
