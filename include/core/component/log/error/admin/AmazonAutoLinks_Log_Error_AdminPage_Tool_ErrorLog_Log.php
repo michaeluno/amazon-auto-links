@@ -159,10 +159,10 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
                 $_sDetails    .= ( $_sStackTrace
                     ? "<textarea class='stack-trace' wrap='off' readonly='readonly'>" . $_sStackTrace . "</textarea>"
                     : '' );
-
+                $_sURL         = urldecode( $this->getElement( $aLogItem, array( 'current_url' ) ) );
                 return "<div class='log-item'>"
                         . "<div class='log-item-head'>"
-                                . "<h5 class='log-item-title'>" . $_sTime . $_sPageLoadID . $_sCurrentHook . $this->getElement( $aLogItem, array( 'current_url' ) ) . "</h5>"
+                                . "<h5 class='log-item-title'>" . $_sTime . $_sPageLoadID . $_sCurrentHook . $_sURL . "</h5>"
                                 . (
                                     $aLogItem[ 'message' ]
                                         ? "<p class='log-item-message'>" . $_sPad . $aLogItem[ 'message' ] . "</p>"
