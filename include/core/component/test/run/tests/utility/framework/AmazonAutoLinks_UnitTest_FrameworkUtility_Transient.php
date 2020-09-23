@@ -15,7 +15,7 @@
  * @since       4.3.0
  * @tags        transient
 */
-class AmazonAutoLinks_UnitTest_WPUtility_Transient extends AmazonAutoLinks_UnitTest_Base {
+class AmazonAutoLinks_UnitTest_FrameworkUtility_Transient extends AmazonAutoLinks_UnitTest_Base {
 
     private $___sTransientKey = 'aal_test_transient_key';
 
@@ -70,7 +70,19 @@ class AmazonAutoLinks_UnitTest_WPUtility_Transient extends AmazonAutoLinks_UnitT
         $this->setTransient( $this->___sTransientKey, 'second', 100 );
         return $_sFirstValue !== $this->getTransient( $this->___sTransientKey );
 
+    }
 
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function test_cleanTransients() {
+        $this->cleanTransients( $this->___sTransientKey );
+        $_mValue = $this->getTransientWithoutCache( $this->___sTransientKey );
+        if ( null !== $_mValue ) {
+            $this->_throwError( $this->_getDetails( $_mValue ) );
+        }
+        return true;
     }
 
 }
