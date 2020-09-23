@@ -15,10 +15,28 @@
  *
  * @since       3.7.7
  */
-class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAutoLinks_Event___Action_APIRequestSearchProduct {
+class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName     = 'aal_action_api_get_products_info';
     protected $_iCallbackParameters = 5;
+
+    protected function _construct() {
+        add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
+    }
+        /**
+         * Adds the request type for excepted types.
+         *
+         * This way, cache renewal events of HTTP requests of the type do not get processed in the background.
+         * If the caches are expired, they will be fetched at the time the request is made.
+         *
+         * @return array
+         * @param  array $aExceptedRequestTypes
+         */
+        public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
+            $aExceptedRequestTypes[] = 'api';   // the HTTP request type used in PAAPI requests.
+            return $aExceptedRequestTypes;
+        }
+
 
     /**
      * @return bool
@@ -127,9 +145,17 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             $_oProductTable->setRows( $_aRows );
 
         }
+
             /**
-             * @since   4.3.0
+             * @param string $sASIN
+             * @param string $sLocale
+             * @param integer $iCacheDuration
+             * @param boolean $bForceRenewal
+             * @param string $sCurrency
+             * @param string $sLanguage
+             * @param string $sItemFormat
              * @return  void
+             * @since   4.3.0
              */
             private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
 
@@ -330,7 +356,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 // 3.10.0+
                 if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=')) {
                     $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
-                    $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );;
+                    $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );
                 }
 
                 // 4.3.0

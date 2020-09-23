@@ -41,33 +41,6 @@ class AmazonAutoLinks_Event_Scheduler {
     }
 
     /**
-     * @since       3.3.0
-     * @sicne       3.5.0           Renamed from `getSimliarProducts()`.
-     * @action      schedule        aal_action_api_get_similar_products
-     * @deprecated  Similar products are deprecated in v3.9.0.
-     */
-    static public function scheduleSimilarProducts( $aSimilarProductASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew ) {
-
-         // @deprecated 3.8.5 Even there is no item, schedule a background task
-         // so that an empty value will be set instead of `null` which prevents automatic task rescheduling.
-//        if ( empty( $aSimilarProductASINs ) ) {
-//            return false;
-//        }
-
-        $_bScheduled = self::___scheduleTask( 
-            'aal_action_api_get_similar_products',  // action name
-            array( $aSimilarProductASINs, $sASIN, $sLocale, $sAssociateID, $iCacheDuration, $bForceRenew )
-        );
-        if ( ! $_bScheduled ) {
-            return false;
-        }
-        
-        // Loads the site in the background. The method takes care of doing it only once in the entire page load.
-        AmazonAutoLinks_Shadow::see();
-        return true;
-    }
-    
-    /**
      * Schedule a background task to retrieve customer reviews.
      *
      * @action      schedule        aal_action_api_get_customer_review

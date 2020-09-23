@@ -15,7 +15,6 @@
  * @since        2.0.0
  * @action       aal_action_simplepie_renew_cache
  * @action       aal_action_unit_prefetch
- * @action       aal_action_api_transient_renewal    
  * @action       aal_action_event_convert_template_options    
  * @filter       aal_filter_store_redirect_url - [2.0.5+] receives the redirecting url of the Amazon store
  */
@@ -112,12 +111,12 @@ class AmazonAutoLinks_Event {
                 'aal_action_api_get_customer_review2',
                 'aal_action_http_cache_renewal',
                 'aal_action_check_tasks',                   // 4.3.0
+                'aal_action_proxy_update',
             );
             $_aHooksIntense = array_merge(
                 $_aHooksNormal,
                 array(
                     'aal_action_simplepie_renew_cache',
-                    'aal_action_api_transient_renewal',
                     'aal_action_delete_expired_caches',     // 3.4.0
                 )
             );

@@ -63,12 +63,8 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
         public function replyToLoadEvents() {
 
             new AmazonAutoLinks_Event___Action_UnitPrefetchByID;
-            new AmazonAutoLinks_Event___Action_ProductAdvertisingAPICacheRenewal;
-            new AmazonAutoLinks_Event___Action_APIRequestSearchProduct;
             new AmazonAutoLinks_Event___Action_APIRequestSearchProducts;    // 3.7.7+
-            // new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;   // @deprecated 3.9.0    Should be commented out once it is confirmed its unnecessity
             new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2;  // 3.9.0
-            new AmazonAutoLinks_Event___Action_APIRequestSimilarProducts;
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;  // 3.5.0
 
 
