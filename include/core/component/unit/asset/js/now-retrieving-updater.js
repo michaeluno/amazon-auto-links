@@ -1,6 +1,6 @@
 /**
  * @name Now-Retrieving Updater
- * @version 1.0.2
+ * @version 1.0.3
  */
 (function($){
 
@@ -109,7 +109,9 @@
 
                         // Wait for 1 seconds for the element to have its height.
                         setTimeout(function() {
-                            var _iHeight = _oOutput[ 0 ].offsetHeight;
+                            var _iHeight = 'undefined' !== typeof _oOutput[ 0 ] && 'undefined' !== typeof _oOutput[ 0 ].offsetHeight
+                                ? _oOutput[ 0 ].offsetHeight
+                                : 0;
                             _oOutput.remove();
                             _oElement.wrap( '<div></div>' );
                             _oElement.parent()
