@@ -71,7 +71,7 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
 
         if ( ! $this->_sOptionKey ) {
             AmazonAutoLinks_Debug::log(
-                'The option key is not set.' . PHP_EOL . $this->getStackTrace( new Exception ),
+                'The option key is not set.' . PHP_EOL . AmazonAutoLinks_Debug::getStackTrace(),
                 WP_CONTENT_DIR . '/aal_errors.log'
             );
             return;

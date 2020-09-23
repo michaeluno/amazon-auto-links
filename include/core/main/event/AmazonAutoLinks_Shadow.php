@@ -225,7 +225,7 @@ class AmazonAutoLinks_Shadow {
             self::$___aPost[ 'debug' ]   = isset( self::$___aPost[ 'debug' ] ) ? self::$___aPost[ 'debug' ] : array();
             self::$___aPost[ 'debug' ][] = array(
                 'time'          => microtime( true ),
-                'stacktrace'    => AmazonAutoLinks_Debug::getStackTrace( new Exception ),
+                'stacktrace'    => AmazonAutoLinks_Debug::getStackTrace(),
                 'page_load_id'  => AmazonAutoLinks_Utility::getPageLoadID(),
             );
         }

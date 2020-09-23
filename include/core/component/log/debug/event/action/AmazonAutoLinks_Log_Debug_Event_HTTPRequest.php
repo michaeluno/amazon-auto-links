@@ -27,7 +27,7 @@ class AmazonAutoLinks_Log_Debug_Event_HTTPRequest extends AmazonAutoLinks_Plugin
             ? array( 'body' => $aArguments[ 'body' ] )
             : array();
         $_sStackTrace = in_array( $sRequestType, array( 'api' ), true )
-            ? $this->getStackTrace( new Exception )
+            ? AmazonAutoLinks_Debug::getStackTrace()
             : '';
         do_action( 'aal_action_debug_log', 'HTTP_REQUEST::' . $sRequestType, $sURL, $_aData, current_filter(), $_sStackTrace );
     }

@@ -149,7 +149,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 ? array(
                     'debug' => array(
                         'time'         => microtime( true ),
-                        'stacktrace'   => AmazonAutoLinks_Debug::getStackTrace( new Exception ),
+                        'stacktrace'   => AmazonAutoLinks_Debug::getStackTrace(),
                         'page_load_id' => AmazonAutoLinks_Utility::getPageLoadID(),
                     ),
                 )

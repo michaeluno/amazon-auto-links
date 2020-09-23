@@ -28,7 +28,7 @@ class AmazonAutoLinks_Error extends WP_Error {
         parent::__construct( $isCode, $sMessage, $mData );
 
         $_sStackTrace = $bStackTrace
-            ? AmazonAutoLinks_PluginUtility::getStackTrace( new Exception, 2 )
+            ? AmazonAutoLinks_Debug::getStackTrace( 2 )
             : '';
         do_action( 'aal_action_error', $isCode, $sMessage, AmazonAutoLinks_PluginUtility::getAsArray( $mData ), current_filter(), $_sStackTrace );
 
