@@ -249,6 +249,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
              */
             $_oAPI      = new AmazonAutoLinks_PAAPI50( $sLocale, $_sPublicKey, $_sPrivateKey, $sAssociateID );
             $_aPayload  = array(
+                'Condition'             => 'Any',   // 4.3.0 to resemble the search unit API payloads so that the cache name can match.
                 'ItemIds'               => $aASINs,
                 'Operation'             => 'GetItems',
                 'CurrencyOfPreference'  => $sCurrency,
