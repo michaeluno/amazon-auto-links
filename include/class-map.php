@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.0b17 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.0b18 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -449,7 +449,6 @@ return array(
     "AmazonAutoLinks_WPUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility.php", 
     "AmazonAutoLinks_WPUtility_Path" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility_Path.php", 
     "AmazonAutoLinks_WPUtility_Post" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility_Post.php", 
-    "AmazonAutoLinks_WPUtility_Transient" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility_Transient.php", 
     "AmazonAutoLinks_DatabaseTableInstall" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTableInstall.php", 
     "AmazonAutoLinks_DatabaseTable_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_Base.php", 
     "AmazonAutoLinks_DatabaseTable_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_Utility.php", 

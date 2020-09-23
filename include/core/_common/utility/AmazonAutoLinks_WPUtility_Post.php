@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       3       
  */
-class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Transient {
+class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     
     /**
      * @since       3.1.0
