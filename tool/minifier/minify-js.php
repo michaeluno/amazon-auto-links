@@ -59,10 +59,7 @@ foreach( $_oGenerator->get() as $_sScriptPath ) {
     $_sDirPath       = dirname( $_sScriptPath );
     $_sBaseNameWOExt = pathinfo( $_sScriptPath, PATHINFO_FILENAME );
     $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.js';
-    if ( file_exists( $_sMinScriptPath ) ) {
-        unlink( $_sMinScriptPath );
-    }
-    file_put_contents( $_sMinScriptPath, $_sContent, FILE_APPEND | LOCK_EX );
+    file_put_contents( $_sMinScriptPath, $_sContent );
     echo 'Writing to ' . $_sMinScriptPath . $sCarriageReturn;
 }
 echo 'Done!' . $sCarriageReturn;

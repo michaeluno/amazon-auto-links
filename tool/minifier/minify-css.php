@@ -62,10 +62,7 @@ foreach( $_oGenerator->get() as $_sFilePath ) {
     $_sDirPath       = dirname( $_sFilePath );
     $_sBaseNameWOExt = pathinfo( $_sFilePath, PATHINFO_FILENAME );
     $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.css';
-    if ( file_exists( $_sMinScriptPath ) ) {
-        unlink( $_sMinScriptPath );
-    }
-    file_put_contents( $_sMinScriptPath, $_sContent, FILE_APPEND | LOCK_EX );
+    file_put_contents( $_sMinScriptPath, $_sContent );
     echo 'Writing to ' . $_sMinScriptPath . $sCarriageReturn;
 }
 echo 'Done!' . $sCarriageReturn;
