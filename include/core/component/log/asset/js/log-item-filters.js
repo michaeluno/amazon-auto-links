@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Log Item Filters
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -28,7 +28,7 @@
         $( '.copy-to-clipboard' ).click( function (event) {
             var _oLogClone = $( '.log' ).clone();  // re-retrieve the element as it can be updated
             _oLogClone.find( 'p:empty, dif:empty' ).remove();   // remove empty elements
-            _oLogClone.find( '.log-item-title, .log-item-message' ).append( '\n' );
+            _oLogClone.find( '.log-item, .log-item-title, .log-item-message' ).append( '\n' );
             var _bCopied = aalCopyToClipboard( _oLogClone[ 0 ] );
             alert( _bCopied ? aalLog.labels.copied : aalLog.labels.not_copied );
         });
