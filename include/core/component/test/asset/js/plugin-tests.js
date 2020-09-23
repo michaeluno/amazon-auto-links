@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -201,6 +201,17 @@
         } // ___setRequestOutput()
 
     }); // $( document ).ready()
+
+    /**
+     * Disallow the enter key in the form.
+     */
+    $( document ).on( 'keydown', 'input.test-tags', function( event ) {
+        if ( "Enter" !== event.key ) {
+            return true;
+        }
+        $( '.aal-tests' ).trigger( 'click' );
+        return false;
+    });
 
     /**
      * Queues Ajax requests.
