@@ -36,8 +36,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @param integer|string $iProductTableSize    Size in megabytes
-     * @param integer|string $iRequestTableSize    Size in megabytes
+     * @param integer|string $isProductTableSize    Size in megabytes
+     * @param integer|string $isRequestTableSize    Size in megabytes
      * @since   3.8.12
      */
     static public function truncateCacheTablesBySize( $isProductTableSize, $isRequestTableSize ) {
@@ -97,6 +97,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @since       3.4.0
      * @since       3.4.12      Changed it to return an empty string if no ASIN is found.
      * @return      string
+     * @param       string      $sText
+     * @param       string      $sDelimiter
      */
     static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
         $_aASINs = self::getASINs( $sText );
@@ -207,12 +209,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * @since       3.2.4
      * @return      string
+     * @param       boolean $bHasLink
      */
     static public function getUpgradePromptMessage( $bHasLink=true ) {        
         return $bHasLink
             ? sprintf(
                 __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
-                'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
+                esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' )
             )
             : __( 'Please consider upgrading to Pro to enable this feature.', 'amazon-auto-links' );
     }
@@ -230,6 +233,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * Returns a list of labels (unit taxonomy) associated with the given unit id.
      * @since       3.1.0
      * @return      string
+     * @param       integer     $iUnitID
      */
     static public function getReadableLabelsByUnitID( $iUnitID ) {
         $_aboTerms = get_the_terms( 
@@ -248,7 +252,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
      * @since       3.1.0
-     * @return      string      comma-delimited readable unit labels.
+     * @return      string       Comma-delimited readable unit labels.
+     * @param       array|string $asTermIDs
      */
     static public function getReadableLabelsByLabelID( $asTermIDs ) {
 
@@ -275,6 +280,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * 
      * @since       3.1.0
      * @return      string       comma-delimited unit label ids.
+     * @param       integer      $iUnitID
      */
     static public function getLabelIDsByUnitID( $iUnitID ) {
         
@@ -493,6 +499,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * Returns the url using the Amazon SSL image server.
      * @since       3
      * @return      string      The converted url.
+     * @param       string      $sImgURL
      */
     static public function getAmazonSSLImageURL( $sImgURL ) {
         return preg_replace(
@@ -505,6 +512,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Creates an auto-insert.
      * @since       3
+     * @param       integer     $iNewPostID
      */
     static public function createAutoInsert( $iNewPostID ) {
                 
