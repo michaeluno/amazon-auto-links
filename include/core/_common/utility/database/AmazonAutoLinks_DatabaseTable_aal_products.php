@@ -272,6 +272,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
                 return '';
             }
             $_aCurrencies  = ( array ) $asCurrencies;
+            $_aCurrencies  = array_unique( $_aCurrencies );
             $_sCurrencies  = "('" . implode( "','", $_aCurrencies ) . "')";
             return ( 1 < count( $_aCurrencies ) )
                 ? " AND preferred_currency in '{$_sCurrencies}'"
@@ -287,6 +288,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
                 return '';
             }
             $_aLanguages   = ( array ) $asLanguages;
+            $_aLanguages   = array_unique( $_aLanguages );
             $_sLanguages   = "('" . implode( "','", $_aLanguages ) . "')";
             return ( 1 < count( $_aLanguages ) )
                 ? " AND language in '{$_sLanguages}'"

@@ -220,6 +220,8 @@ class AmazonAutoLinks_ProductDatabase_Rows {
                     $aCurrencies[]  = $_aItem[ 'currency' ];
                     $aLanguages[]   = $_aItem[ 'language' ];
                 }
+                $aCurrencies  = array_unique( $aCurrencies );
+                $aLanguages   = array_unique( $aLanguages );
                 if ( ! empty( $_aErrors ) ) {
                     new AmazonAutoLinks_Error( 'RETRIEVE_PRODUCTS', 'The array structure is not valid.', $aASINLocaleCurLangs, true );
                 }
