@@ -59,8 +59,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * @return array
          */
         private function ___getProducts( array $aAllItems ) {
-            $_aASINLocaleCurLangs = array_keys( $aAllItems );
-            $_aUnitOptionSets     = $this->___getUnitOptionSets( $_aASINLocaleCurLangs );
+            $_aUnitOptionSets     = $this->___getUnitOptionSets( $aAllItems );
             $_aProducts           = array();
             foreach( $_aUnitOptionSets as $_aUnitOptions ) {
                 $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( $_aUnitOptions );
@@ -70,11 +69,15 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }
         /**
          * @return array An array holding sets of unit options, separated by locale-currency-language.
-         * @param array $aASINLocaleCurLangs
+         * @param array $aItems Due items to update.
          */
-        private function ___getUnitOptionSets( array $aASINLocaleCurLangs ) {
+        private function ___getUnitOptionSets( array $aItems ) {
+
             $_aUnitOptionSets = array();
-            foreach( $aASINLocaleCurLangs as $_sASINLocaleCurLang ) {
+            foreach( array_keys( $aItems ) as $_sASINLocaleCurLang ) {
+                $_aElements      = $this->getElementAsArray( $aItems, array( $_sASINLocaleCurLang ) );
+                $_aElement       = reset( $_aElements );
+                $_sAssociateTag  = $this->getElement( $_aElement, array( 'tag' ) );
                 $_aParts         = explode( '|', $_sASINLocaleCurLang );
                 $_sASIN          = $_aParts[ 0 ];
                 $_sLocale        = $_aParts[ 1 ];
@@ -89,9 +92,9 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                         'language'           => $_sLanguage,
                         'show_now_retrieving_message'  => true,
                         'ItemIds'            => array(),
+                        'associate_id'       => $_sAssociateTag,
                     );
                 $_aUnitOptionSets[ $_sLocaleCurLang ][ 'ItemIds' ][] = $_sASIN;
-
             }
             return $_aUnitOptionSets;
         }
