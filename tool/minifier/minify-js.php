@@ -55,7 +55,7 @@ foreach( $_oGenerator->get() as $_sScriptPath ) {
     $_sHeader        = $_sScriptName ? "/* {$_sScriptName} */" . PHP_EOL : '';
     $_oMinifier      = Asika\Minifier\MinifierFactory::create('js' );
     $_oMinifier->addFile( $_sScriptPath );
-    $_sContent       = $_sHeader . $_oMinifier->minify();
+    $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
     $_sDirPath       = dirname( $_sScriptPath );
     $_sBaseNameWOExt = pathinfo( $_sScriptPath, PATHINFO_FILENAME );
     $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.js';

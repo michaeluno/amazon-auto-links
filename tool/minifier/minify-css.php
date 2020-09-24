@@ -58,7 +58,7 @@ foreach( $_oGenerator->get() as $_sFilePath ) {
     $_sHeader        = $_sTitle ? "/* {$_sTitle} */" . PHP_EOL : '';
     $_oMinifier      = Asika\Minifier\MinifierFactory::create('css' );
     $_oMinifier->addFile( $_sFilePath );
-    $_sContent       = $_sHeader . $_oMinifier->minify();
+    $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
     $_sDirPath       = dirname( $_sFilePath );
     $_sBaseNameWOExt = pathinfo( $_sFilePath, PATHINFO_FILENAME );
     $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.css';
