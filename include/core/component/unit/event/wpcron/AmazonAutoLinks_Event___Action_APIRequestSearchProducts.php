@@ -242,21 +242,18 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 return array();
             }
 
-            /**
-             * @remark  A short cache duration is set here because this request is versatile.
-             * And the important information (product data) is stored in the products table with the expiration time which is checked when the item is drawn.
-             * -> [3.9.0+] Changed it to 1 day to save API calls.
-             */
-            $_oAPI      = new AmazonAutoLinks_PAAPI50( $sLocale, $_sPublicKey, $_sPrivateKey, $sAssociateID );
-            $_aPayload  = array(
-                'Condition'             => 'Any',   // 4.3.0 to resemble the search unit API payloads so that the cache name can match.
-                'ItemIds'               => $aASINs,
-                'Operation'             => 'GetItems',
-                'CurrencyOfPreference'  => $sCurrency,
-                'LanguagesOfPreference' => array( $sLanguage ),
-                'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
+            // Generate a payload of PA-API 5. It should be resemble to the one of the item_lookup unit. Otherwise, duplicated (almost the same with extra parameters such as Condition) API requests may occur.
+            $_oUnit          = new AmazonAutoLinks_UnitOutput_item_lookup(
+                array(
+                    'ItemIds'            => $aASINs,
+                    'preferred_currency' => $sCurrency,
+                    'language'           => $sLanguage,
+                )
             );
-            return $_oAPI->request( $_aPayload, 60 * 60 * 24, false );
+            $_iCacheDuration = $this->getNumberFixed( $_oUnit->oUnitOption->get( 'cache_duration' ), 86400, 600 );
+            $_iCacheDuration = ( integer ) round( $_iCacheDuration * 0.96 );  // a big less than the unit cache duration as this item look-up cache should expire by the next time called when the unit detected the item is expired.
+            $_oAPI           = new AmazonAutoLinks_PAAPI50( $sLocale, $_sPublicKey, $_sPrivateKey, $sAssociateID );
+            return $_oAPI->request( $_oUnit->getAPIParameters(), $_iCacheDuration, false );
 
         }
 

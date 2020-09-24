@@ -112,7 +112,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oUnitOption->get( 'associate_id' )
         );
         return $_oAPI->request(
-            $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
+            $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ) ),
             $this->oUnitOption->get( 'cache_duration' ),
             $this->oUnitOption->get( '_force_cache_renewal' )
         );
@@ -123,14 +123,15 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      *
      * @see    http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
      * @since  2.0.2
+     * @since  4.3.1        Renamed from `getAPIParameterArray()`. Made the scope public from protected. This is for the background routine of getting products data that need to replicate API payload of the item_lookup unit.
      * @param  string       $sOperation
-     * @param  integer|null $iItemPage
+     * @param  integer      $iItemPage
      * @return array
      */
-    protected function getAPIParameterArray( $sOperation='GetItems', $iItemPage=null ) {
+    public function getAPIParameters( $sOperation='GetItems', $iItemPage=0 ) {
 
         $_aUnitOptions = $this->oUnitOption->get() + self::$aStructure_APIParameters;
-        return array(
+        $_aPayload     = array(
             'Operation'             => 'ItemLookup' === $sOperation
                 ? 'GetItems'
                 : $sOperation,
@@ -152,6 +153,9 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
                 : null,
             'Resources'             => AmazonAutoLinks_PAAPI50___Payload::$aResources,
         );
+        $_aPayload = array_filter( $_aPayload, array( $this, 'isNotNull' ) ); // drop null elements.
+        ksort( $_aPayload );  // important to generate identical caches.
+        return $_aPayload;
 
     }
     

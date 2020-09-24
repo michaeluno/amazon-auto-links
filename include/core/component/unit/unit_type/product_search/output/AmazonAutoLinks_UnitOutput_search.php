@@ -291,7 +291,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         // First, perform the search for the first page regardless the specified count (number of items).
         // Keys with an empty value will be filtered out when performing the request.            
         $_aResponse = $_oAPI->request(
-            $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ) ),
+            $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ) ),
             $this->oUnitOption->get( 'cache_duration' ),
             $this->oUnitOption->get( '_force_cache_renewal' )
         );
@@ -331,7 +331,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 /*        $_iScheduled = 0;
         for ( $_i = $_iPage; $_i >= 2 ; $_i-- ) {
             $_iScheduled += ( integer ) $_oAPI->scheduleInBackground(
-                $this->getAPIParameterArray( $this->oUnitOption->get( 'Operation' ), $_i ),
+                $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ), $_i ),
                 $this->oUnitOption->get( 'cache_duration' )
             );
         }
@@ -344,7 +344,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         for ( $_i = 2; $_i <= $_iMaxPage; $_i++ ) {
 
             $_aResponse = $_oAPI->request( 
-                $this->getAPIParameterArray(
+                $this->getAPIParameters(
                     $this->oUnitOption->get( 'Operation' ), 
                     $_i // page number
                 ),
@@ -437,26 +437,25 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             return $aMain;
 
         }
+
     /**
      *
      * @since   2.0.2
      * @since   3.9.0   The parameter format has been changed in PA-API 5
+     * @since   4.3.1   Renamed from `getAPIParameterArray()`. Made it public.
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
      * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/PowerSearchSyntax.html
-     * @param   string $sOperation
-     * @param   integer|null $iItemPage
+     * @param   string  $sOperation
+     * @param   integer $iItemPage
      * @return  array
      */
-    protected function getAPIParameterArray( $sOperation='SearchItems', $iItemPage=null ) {
+    public function getAPIParameters( $sOperation='SearchItems', $iItemPage=0 ) {
 
-        // @deprecated 3.9.0
-//        $_bIsIndexAllOrBlended  = ( 'All' === $this->oUnitOption->get( 'SearchIndex' ) || 'Blended' === $this->oUnitOption->get( 'SearchIndex' ) );
-
-        $_sTitle                = $this->trimDelimitedElements( $this->oUnitOption->get( 'Title' ), ',', false );
+        $_sTitle                 = $this->trimDelimitedElements( $this->oUnitOption->get( 'Title' ), ',', false );
         $_aPayload               = array(
             'Keywords'              => $this->trimDelimitedElements( $this->oUnitOption->get( 'Keywords' ), ',', false ),
             'Title'                 => $_sTitle ? $_sTitle : null,
-            'Operation'             => $this->_getOperation( $this->oUnitOption->get( 'Operation' ) ),  // SearchItems
+            'Operation'             => $this->_getOperation( $sOperation ),
             'SearchIndex'           => $this->oUnitOption->get( 'SearchIndex' ),
             $this->oUnitOption->get( 'search_by' ) => $this->oUnitOption->get( 'additional_attribute' )
                 ? $this->oUnitOption->get( 'additional_attribute' )
@@ -498,8 +497,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             ? $_aPayload + array( 'ItemPage' => $iItemPage )
             : $_aPayload;
 
-        // not sure but it occurred an element without an empty key got inserted
+        // 'search_by' option might cause an empty element
         unset( $_aPayload[ '' ] );
+        $_aPayload = array_filter( $_aPayload, array( $this, 'isNotNull' ) ); // drop null elements.
+        ksort( $_aPayload ); // important to generate identical caches.
         return $_aPayload;
 
     }
