@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.7 =
+- Fixed thumbnail height sometimes exceeded the container.
+
 = 1.2.5 =
 - Added rules for buttons.
 
