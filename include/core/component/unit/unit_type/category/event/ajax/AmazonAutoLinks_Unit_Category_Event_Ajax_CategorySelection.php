@@ -119,7 +119,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
             // There is a reported case that the locale is not retrieved which seems to be failing to retrieve the transient.
             if ( empty( $_aUnitOptions ) ) {
-                new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_RESPONSE', 'The unit options generated from a transient are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
+                new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_RESPONSE', 'The unit options generated from a transient are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions, true );
             }
 
             return $_aUnitOptions;

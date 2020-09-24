@@ -44,9 +44,12 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
                 __METHOD__,
                 $_sError,
                 array(
-                    'url'        => $sURL,
-                    'cache_name' => $sCacheName,
-                )
+                    'url'            => $sURL,
+                    'cache_name'     => $sCacheName,
+                    'character_set'  => $sCharSet,
+                    'cache_duration' => $iCacheDuration,
+                ),
+                true
             );
 
         }

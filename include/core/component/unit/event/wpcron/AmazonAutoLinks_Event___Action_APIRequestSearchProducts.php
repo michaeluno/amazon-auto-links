@@ -47,7 +47,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_aParameters = func_get_args();
 
         if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ . '_' . serialize( $_aParameters ) ) ) {
-            new AmazonAutoLinks_Error( 'GET_PRODUCTS_INFO', 'A same HTTP request is made.' );
+            new AmazonAutoLinks_Error( 'GET_PRODUCTS_INFO', 'A same HTTP request is made.', $_aParameters, true );
             return false;
         }
         if ( $this->_isLocked( $_aParameters ) ) {
@@ -90,7 +90,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
         if ( ! $_sTableVersion ) {
-            new AmazonAutoLinks_Error( 'SETTING_DATABASE_TABLE_ROW', 'The products cache table does not seem to be installed.' );
+            new AmazonAutoLinks_Error( 'SETTING_DATABASE_TABLE_ROW', 'The products cache table does not seem to be installed.', array(), true );
             return;
         }
 

@@ -56,7 +56,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_SetProxy extends AmazonAutoLinks_Proxy_
                 ? 0
                 : array_rand( $_aProxies, 1 );
             if ( empty( $_aProxies[ $_iRandomIndex ] ) ) {
-                new AmazonAutoLinks_Error( 'PROXY_SET_FAILURE', 'The proxy option is enabled but there is no proxy available.' );
+                new AmazonAutoLinks_Error( 'PROXY_SET_FAILURE', 'The proxy option is enabled but there is no proxy available.', array( 'arguments' => $aArguments ), true );
                 return $aArguments;
             }
 

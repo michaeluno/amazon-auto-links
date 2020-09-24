@@ -36,7 +36,7 @@ class AmazonAutoLinks_Event_Error_Log_HTTPRequestCache {
             'data_type'  => gettype( $aCache[ 'data' ] ) . ( is_object( $aCache[ 'data' ] ) ? ':' . get_class( $aCache[ 'data' ] ) : '' ),
             'length'     => is_scalar( $aCache[ 'data' ] ) ? strlen( $aCache[ 'data' ] ) : 'n/a',
         );
-        new AmazonAutoLinks_Error( 'HTTP_REQUEST_CACHE', $sErrorMessage, $_aExtra );
+        new AmazonAutoLinks_Error( 'HTTP_REQUEST_CACHE', $sErrorMessage, $_aExtra, true );
     }
 
 }

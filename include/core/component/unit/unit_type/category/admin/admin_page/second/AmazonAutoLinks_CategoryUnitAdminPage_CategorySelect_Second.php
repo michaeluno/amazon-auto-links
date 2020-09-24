@@ -170,7 +170,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
 //                $_aUnitOptions = $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
                 $_aUnitOptions = $this->oFactory->getSavedOptions();
                 if ( empty( $_aUnitOptions ) ) {
-                    new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions );
+                    new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions, true );
                 }
                 return $_aUnitOptions;
             }

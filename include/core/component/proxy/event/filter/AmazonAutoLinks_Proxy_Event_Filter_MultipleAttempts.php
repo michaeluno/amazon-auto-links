@@ -58,7 +58,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
         // if there is a previous attempt, check the count and if it exceeds a certain number, bail
         $_iAttempts = ( integer ) $aArguments[ 'attempts' ];
         if ( 1 <= $_iAttempts ) {
-            new AmazonAutoLinks_Error( 'PROXY_FAILURE', 'HTTP requests failed with proxies.', array() );
+            new AmazonAutoLinks_Error( 'PROXY_FAILURE', 'HTTP requests failed with proxies.', array( 'arguments' => $aArguments ), true );
             return $osResponse;
         }
         $aArguments[ 'attempts' ] = $_iAttempts + 1;

@@ -84,7 +84,9 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
                         $sCurrentVersion
                             ? $sTableName . ' ' . $sCurrentVersion
                             : $sTableName
-                    )
+                    ),
+                    array(),
+                    true
                 );
             }
 

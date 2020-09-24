@@ -51,7 +51,17 @@ class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_Plug
 
         // Add it to the log.
         $_sError .= ' ' . $sCacheName . ' ' . $sURL;
-        new AmazonAutoLinks_Error( 'HTTP_REQUEST', $_sError, array( 'has_cache' => ! empty( $aOldCache ) ) );
+        new AmazonAutoLinks_Error(
+            'HTTP_REQUEST',
+            $_sError,
+            array(
+                'has_cache'      => ! empty( $aOldCache ),
+                'cache_duration' => $iCacheDuration,
+                'character_set'  => $sCharSet,
+                'arguments'      => $aArguments,
+            ),
+            true
+        );
 
         // Use the old cache if available
         $_mOldData = $this->getElement( $aOldCache, array( 'data' ) );
