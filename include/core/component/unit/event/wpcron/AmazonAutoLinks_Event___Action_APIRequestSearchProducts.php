@@ -242,18 +242,25 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 return array();
             }
 
-            // Generate a payload of PA-API 5. It should be resemble to the one of the item_lookup unit. Otherwise, duplicated (almost the same with extra parameters such as Condition) API requests may occur.
+            /**
+             * Perform a PA-API request.
+             * Here the item_lookup unit is used so that the payload should resemble the ones loaded in front-end. This prevents duplicated requests.
+             * Search unit types which includes PA-API requests do not allow default options to be set by the user so it's safe to use the unit payload rather than manually writing one here.
+             */
+            $_iCacheDuration = $_oOption->get( 'unit_default', 'cache_duration' );
+            $_iCacheDuration = ( integer ) round( $_iCacheDuration * 0.96 );  // a big shorter than the unit cache duration as this item look-up cache should expire by the next called time.
             $_oUnit          = new AmazonAutoLinks_UnitOutput_item_lookup(
                 array(
-                    'ItemIds'            => $aASINs,
-                    'preferred_currency' => $sCurrency,
-                    'language'           => $sLanguage,
+                    'ItemIds'              => $aASINs,
+                    'preferred_currency'   => $sCurrency,
+                    'language'             => $sLanguage,
+                    'county'               => $sLocale,
+                    'associate_id'         => $sAssociateID,
+                    'cache_duration'       => $_iCacheDuration,
+                    '_force_cache_renewal' => false,
                 )
             );
-            $_iCacheDuration = $this->getNumberFixed( $_oUnit->oUnitOption->get( 'cache_duration' ), 86400, 600 );
-            $_iCacheDuration = ( integer ) round( $_iCacheDuration * 0.96 );  // a big less than the unit cache duration as this item look-up cache should expire by the next time called when the unit detected the item is expired.
-            $_oAPI           = new AmazonAutoLinks_PAAPI50( $sLocale, $_sPublicKey, $_sPrivateKey, $sAssociateID );
-            return $_oAPI->request( $_oUnit->getAPIParameters(), $_iCacheDuration, false );
+            return $_oUnit->getRequest( PHP_INT_MAX );
 
         }
 

@@ -100,10 +100,11 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * Performs an Amazon Product API request.
      * 
      * @since  2.0.2
+     * @since  4.3.1   Changed the scope to public from protected. This is for the background routine to fetch products.
      * @param  integer $iCount
      * @return array
      */
-    protected function getRequest( $iCount ) {
+    public function getRequest( $iCount ) {
 
         $_oAPI = new AmazonAutoLinks_PAAPI50(
             $this->oUnitOption->get( 'country' ),

@@ -276,10 +276,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * This enables to retrieve more than 10 items. However, for it, it performs multiple requests, thus, it will be slow.
      *
      * @since   2.0.1
+     * @since   4.3.1   Changed the scope to public from protected. This is for the background routine to fetch products.
      * @return  array
      * @param   integer $iCount
      */
-    protected function getRequest( $iCount ) {
+    public function getRequest( $iCount ) {
         
         $_oAPI = new AmazonAutoLinks_PAAPI50(
             $this->oUnitOption->get( 'country' ), 
