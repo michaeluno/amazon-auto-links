@@ -174,7 +174,9 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             }
             /**
              * @param Exception $oException
-             *
+             * @param string $sClassName
+             * @param string $sMethodName
+             * @param string $sPurpose
              * @return array
              */
             private function ___getExceptionResult( Exception $oException, $sClassName, $sMethodName, $sPurpose ) {
@@ -202,7 +204,6 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                  * @return string
                  */
                 private function ___getExceptionErrorMessage( Exception $oException ) {
-                    $oException->getPrevious();
                     return $oException->getMessage()
                         . ' on the file, ' . $oException->getFile()
                         . ', Line: ' . $oException->getLine();
