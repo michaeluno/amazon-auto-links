@@ -18,7 +18,7 @@
 class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginUtility {
 
     protected $_aArguments = array(
-        'type'              => 1,
+        'type'              => 1,    // 0: Link to the product page, 1: Add to cart button.
         'id'                => 0,    // can be omitted
         'asin'              => '',   // comma delimited ASINs
         'quantity'          => '1',   // comma delimited ASINs
@@ -78,7 +78,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
 
                 default:
                 case 0:
-                    $_sProductURL = $this->___getProductURL( $aArguments[ 'asin' ], $aArguments[ 'country' ] );
+                    $_sProductURL = $this->___getProductURL( $aArguments );
                     return $this->___getLinkButton(
                         $aArguments[ 'id' ],
                         $_sProductURL,
@@ -87,21 +87,24 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             }
         }
             /**
-             * @param string $sASIN
-             * @param string $sLocale
+             * @param array $aArguments
              * @return string
              */
-            private function ___getProductURL( $sASIN, $sLocale ) {
-                $_sDomain   = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
-                $_sURL      = $_sDomain . '/dp/' . $sASIN;
-                $_oOption   = AmazonAutoLinks_Option::getInstance();
-                $_aDefaults = $this->getAsArray( $_oOption->get( 'unit_default' ) );
+            private function ___getProductURL( array $aArguments ) {
+                $_sLocale    = $aArguments[ 'country' ];
+                $_sASIN      = $aArguments[ 'asin' ];
+                $_aASINs     = $this->getStringIntoArray( $_sASIN, ',' ); // format it as it can be comma delimtted
+                $sASIN       = reset( $_aASINs );
+                $_sDomain    = AmazonAutoLinks_Property::getStoreDomainByLocale( $_sLocale ); // with http(s) prefixed
+                $_sURL       = $_sDomain . '/dp/' . $sASIN;
+                $_oOption    = AmazonAutoLinks_Option::getInstance();
+                $_aDefaults  = $this->getAsArray( $_oOption->get( 'unit_default' ) );
                 return apply_filters(
                     'aal_filter_product_link',
                     $_sURL,
                     $_sURL,
                     $sASIN,
-                    $_aDefaults,
+                    array_filter( $aArguments ) + $_aDefaults,
                     $this->getElement( $_aDefaults, array( 'language' ), '' ),
                     $this->getElement( $_aDefaults, array( 'preferred_currency' ), '' )
                 );
