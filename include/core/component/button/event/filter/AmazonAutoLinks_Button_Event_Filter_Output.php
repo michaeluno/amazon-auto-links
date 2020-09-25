@@ -92,9 +92,8 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
              * @return string
              */
             private function ___getProductURL( $sASIN, $sLocale ) {
-                $_sScheme   = is_ssl() ? 'https' : 'http';
-                $_sDomain   = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale );
-                $_sURL      = $_sScheme . '://' . $_sDomain . '/dp/' . $sASIN;
+                $_sDomain   = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
+                $_sURL      = $_sDomain . '/dp/' . $sASIN;
                 $_oOption   = AmazonAutoLinks_Option::getInstance();
                 $_aDefaults = $this->getAsArray( $_oOption->get( 'unit_default' ) );
                 return apply_filters(
