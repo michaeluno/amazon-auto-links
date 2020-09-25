@@ -70,6 +70,7 @@ abstract class AmazonAutoLinks_AdminPageFramework_Router extends AmazonAutoLinks
         if (strlen($sTabSlug)) {
             $this->_setShowDebugInfoProperty($sPageSlug, $sTabSlug);
             $this->oUtil->addAndDoActions($this, array("load_{$sPageSlug}_" . $sTabSlug), $this);
+            add_filter('admin_title', array($this, '_replyToSetAdminPageTitleForTab'), 1, 2);
         }
         $this->oUtil->addAndDoActions($this, array("load_after_{$this->oProp->sClassName}", "load_after_{$sPageSlug}",), $this);
     }
@@ -444,6 +445,13 @@ abstract class AmazonAutoLinks_AdminPageFramework_Router extends AmazonAutoLinks
         }
     }
     abstract class AmazonAutoLinks_AdminPageFramework_View_Page extends AmazonAutoLinks_AdminPageFramework_Model_Page {
+        public function _replyToSetAdminPageTitleForTab($sAdminTitle, $sTitle) {
+            $_sTabTitle = $this->oUtil->getElement($this->oProp->aInPageTabs, array($this->oProp->getCurrentPageSlug(), $this->oProp->getCurrentTabSlug(), 'title'));
+            if (!$_sTabTitle) {
+                return $sAdminTitle;
+            }
+            return $_sTabTitle . ' &lsaquo; ' . $sAdminTitle;
+        }
         public function _replyToEnablePageMetaBoxes() {
             new AmazonAutoLinks_AdminPageFramework_View__PageMetaboxEnabler($this);
         }
