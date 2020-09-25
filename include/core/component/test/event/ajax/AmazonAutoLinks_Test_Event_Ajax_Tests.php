@@ -30,6 +30,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         'name'    => '',
         'message' => '',
         'purpose' => '',
+        'line'    => 0,         // the line that triggered an error.
     );
 
     /**
@@ -183,6 +184,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 $_aDefault = array(
                         'name'    => $sClassName . '::' . $sMethodName . '()',
                         'purpose' => $sPurpose,
+                        'line'    => $oException->getLine(),
                     ) + $this->___aResultStructure;
                 if ( 1 === $oException->getCode() ) {
                     return array(
@@ -193,21 +195,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 }
                 return array(
                     'success' => false,
-                    'message' => $this->___getExceptionErrorMessage( $oException ),
+                    'message' => $oException->getMessage(),
                     'raw'     => false,
                 ) + $_aDefault;
 
             }
-                /**
-                 * @param Exception $oException
-                 *
-                 * @return string
-                 */
-                private function ___getExceptionErrorMessage( Exception $oException ) {
-                    return $oException->getMessage()
-                        . ' on the file, ' . $oException->getFile()
-                        . ', Line: ' . $oException->getLine();
-                }
+
             /**
              * @param string $mResult
              * @param string $sClassName
@@ -221,7 +214,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 $_sClassMethod = $sClassName . '::' . $sMethodName . '()';
                 $_aDefault     = array(
                     'name'    => $_sClassMethod,
-                    'purpose' => $sPurpose,
+                    'purpose' => $_sPurpose,
                 ) + $this->___aResultStructure;
                 if ( is_null( $mResult ) ) {
                     $_aError = ( ( array ) error_get_last() ) + array( 'type' => null, 'message' => null, 'file' => null, 'line' => null );

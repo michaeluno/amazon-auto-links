@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.0.2
+ * @version 1.0.3
  */
 (function($){
 
@@ -160,9 +160,13 @@
             $.each( response.result, function( sIndex, eachResult ) {
 
                 var _sHeader      = '';
-                var _sCurrentItem = '<p>File: ' + sFilePath + '</p>';
                 var _sDetails     = '';
                 var _sPurpose     = '';
+                var _sCurrentItem = '<p>File: ' + sFilePath + '</p>';
+                var _iLine        = eachResult.line ? eachResult.line : 0;
+                if ( _iLine ) {
+                    _sCurrentItem = _sCurrentItem + '<p>Line: ' + _iLine + '</p>';
+                }
                 var _iSucceed     = eachResult.success ? 1 : 0;
                 if ( eachResult.success ) {
                     _sHeader  = '<h4 class="result-header">'
@@ -191,8 +195,10 @@
                             ? '<p class="">' + eachResult.message + '</p>'
                             : '';
                 }
-                var _sBody   = "<div class='result-body' style='display:none'>" + _sPurpose + _sDetails + _sCurrentItem + "</div>";
-                var _sResult = "<div class='result-container' data-success='" + _iSucceed + "'>" + _sHeader + _sBody + "</div>";
+                var _sContent = _sPurpose + _sDetails;
+                _sContent     = _sContent ? _sContent + '<hr />' : '';
+                var _sBody    = "<div class='result-body' style='display:none'>" + _sContent + _sCurrentItem + "</div>";
+                var _sResult  = "<div class='result-container' data-success='" + _iSucceed + "'>" + _sHeader + _sBody + "</div>";
                 _oTestTag.append( _sResult );
 
             } );

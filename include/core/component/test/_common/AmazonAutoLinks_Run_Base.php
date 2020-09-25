@@ -26,11 +26,12 @@ class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @param string $sErrorMessage
-     * @param integer|string $isCode
+     * @param integer $iCode
      * @throws Exception
+     * @deprecated 4.3.1    The line and file given by the stacktrace are not accurate.
      */
-    protected function _throwError( $sErrorMessage, $isCode=0 ) {
-        throw new Exception( $sErrorMessage, $isCode );
+    protected function _throwError( $sErrorMessage, $iCode=0 ) {
+        throw new Exception( $sErrorMessage, ( integer ) $iCode );
     }
 
 }
