@@ -59,8 +59,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * ### Widget Method
      * @see https://stackoverflow.com/questions/58142293/fetching-amazon-product-image-by-asin
      *
-     * @param string $sASIN
-     * @param string $sLocale
+     * @param   string  $sASIN
+     * @param   string  $sLocale
+     * @param   integer $iImageSize
      * @return  string
      * @since   4.2.2
      * @see https://www.oreilly.com/library/view/amazon-hacks/0596005423/ch01s07.html
@@ -90,6 +91,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since       3.5.0       Renamed from `getASIN()`
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
      * @since       3.8.12      Moved from `AmazonAutoLinks_UnitOutput_Utility`
+     * @param       string      $sURL
      */
     static public function getASINFromURL( $sURL ) {
 
@@ -120,8 +122,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Generates price output.
-     * @since       3.8.11
+     * @param string $sPriceFormatted
+     * @param integer|null $inDiscounted
+     * @param integer|null $inLowestNew
+     * @param string $sDiscountedFormatted
+     * @param string $sLowestNewFormatted
      * @return      string  The price output. If a discount is available, the discounted price is also returned along with the proper price.
+     * @since       3.8.11
      */
     static public function getPrice( $sPriceFormatted, $inDiscounted, $inLowestNew, $sDiscountedFormatted, $sLowestNewFormatted ) {
 
@@ -163,6 +170,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * Extracts price information from a PA API response item element.
      * @param   array $aItem
      * @since   3.9.0
+     * @return  array
      */
     static public function getPrices( array $aItem ) {
         
@@ -276,11 +284,15 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                 }
             }
             return $_aLowests;
-        }    
-    
+        }
+
 
     /**
      *
+     * @param array $aOffer
+     * @param integer|double $nPrice
+     * @param string $sPriceFormatted
+     * @param integer|double $nDiscountedPrice
      * @return      string
      * @since       3
      * @since       3.8.11  Renamed from `___getFormattedDiscountPrice()` and moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
@@ -372,6 +384,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since       3.8.11  Moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
      * @param       array   $aProduct
      * @param       string  $sKey       FormattedPrice|Amount
+     * @param       mixed   $mDefault
      * @deprecated  3.9.0   PA-API5 changed the stricture
      */
     static public function getPriceByKey( array $aProduct, $sKey, $mDefault ) {
@@ -466,6 +479,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
         /**
          * @return      array       An array holding image urls.
+         * @param       array       $aImages
+         * @param       integer     $iMaxImageSize
+         * @param       integer     $iMaxNumberOfImages
          */
         static private function ___getSubImageURLs( array $aImages, $iMaxImageSize, $iMaxNumberOfImages ) {
 
@@ -501,6 +517,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
              * - Small
              * - Medium
              * - Large
+             * @param array $aImage
+             * @param integer $iImageSize
              */
             static private function ___getImageURLFromResponseElement( array $aImage, $iImageSize ) {
 
@@ -557,6 +575,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * Extracts image set (including the main thumbnail image and sub-images) from the product array.
      * @return      array
      * @since       3.8.11      Moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
+     * @param       array       $aItem
      */
     static public function getImageSet( array $aItem ) {
 
@@ -581,8 +600,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * Constructs the category output from an array of nested browse nodes.
      * @since       3.8.0
-     * @return      string
      * @since       3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`
+     * @return      string
+     * @param       array       $aBrowseNodes
      */
     static public function getCategories( array $aBrowseNodes ) {
         $_sList = '';
@@ -644,6 +664,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * Constructs the features list output from an array storing features.
      * @since       3.8.0
      * @since       3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`
+     * @param       array $aFeatures
      * @return      string
      */
     static public function getFeatures( array $aFeatures ) {
@@ -740,6 +761,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * e.g. https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/customer-reviews/stars-5-0.gif
      * @since   3.9.0
      * @param   integer     $iRating    IMPORTANT! Not a decimal number.  e.g. 45 (not 4.5)
+     * @return  string
      */
     static public function getRatingStarImageURL( $iRating ) {
 
@@ -758,9 +780,11 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @param   $iRating
-     * @param   $iReviewCount
+     * @param   integer $iRating
+     * @param   string $sReviewURL
+     * @param   integer $iReviewCount
      * @since   3.9.0
+     * @return  string
      */
     static public function getRatingOutput( $iRating, $sReviewURL='', $iReviewCount=null ) {
         $_sStarImageURL = self::getRatingStarImageURL( $iRating );
