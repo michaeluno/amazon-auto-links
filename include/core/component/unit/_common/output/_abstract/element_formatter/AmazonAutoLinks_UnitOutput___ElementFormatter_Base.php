@@ -84,16 +84,17 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
         private function ___getAttributes( $sContext, $sUnitType ) {
             return $this->getAttributes(
                 array(
-                    'class'           => "now-retrieving context-{$sContext}",
-                    'data-locale'     => $this->_sLocale,
-                    'data-type'       => $sUnitType,
-                    'data-currency'   => $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $this->_sLocale ) ),
-                    'data-language'   => $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $this->_sLocale ) ),
-                    'data-asin'       => $this->_sASIN,
-                    'data-tag'        => $this->_sAssociateID,
-                    'data-context'    => $sContext,
-                    'data-id'         => $this->_oUnitOption->get( array( 'id' ), 0 ),
-                    'data-attempt'    => 0, // indicates how many times that the Ajax request was made for this element
+                    'class'               => "now-retrieving context-{$sContext}",
+                    'data-locale'         => $this->_sLocale,
+                    'data-type'           => $sUnitType,
+                    'data-currency'       => $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $this->_sLocale ) ),
+                    'data-language'       => $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $this->_sLocale ) ),
+                    'data-asin'           => $this->_sASIN,
+                    'data-tag'            => $this->_sAssociateID,
+                    'data-context'        => $sContext,
+                    'data-id'             => $this->_oUnitOption->get( array( 'id' ), 0 ),
+                    'data-attempt'        => 0, // indicates how many times that the Ajax request was made for this element
+                    'data-cache_duration' => $this->_oUnitOption->get( 'cache_duration' ),
                 )
             );
         }

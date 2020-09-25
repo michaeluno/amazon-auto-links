@@ -15,6 +15,20 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param string $sASIN
+     * @param string $sLocale
+     * @return string
+     * @since 4.3.1
+     */
+    static public function getCustomerReviewURL( $sASIN, $sLocale ) {
+        $_oLocale        = new AmazonAutoLinks_PAAPI50___Locales;
+        $_sMarketPlace   = isset( $_oLocale->aMarketPlaces[ $sLocale ] )
+            ? $_oLocale->aMarketPlaces[ $sLocale ]
+            : $_oLocale->aMarketPlaces[ 'US' ];
+        return 'https://' . $_sMarketPlace . '/product-reviews/' . $sASIN;
+    }
+
+    /**
      * Generates a thumbnail URL from a given ASIN.
      *
      *

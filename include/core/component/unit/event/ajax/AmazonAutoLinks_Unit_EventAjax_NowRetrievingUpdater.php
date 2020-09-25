@@ -33,6 +33,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
      *
      * @return string|array
      * @throws Exception        Throws a string value of an error message.
+     * @since 4.3.0
      */
     protected function _getResponse( array $aPost ) {
 
@@ -51,12 +52,67 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 $this->___getElementsByASINLocaleCurLang( $_aDueElements, $_aProducts )
             );
         }
+        $this->___handleCustomerReviews( $_aElements );
         return $_aElements;
 
     }
         /**
+         * @param array $aResults
+         * @since 4.3.1
+         */
+        private function ___handleCustomerReviews( array $aResults ) {
+
+            // Extract only the review items.
+            $_aReviewItems = array();
+            foreach( $aResults as $_iIndex => $_aItem ) {
+                if ( 'formatted_rating' !== $_aItem[ 'context' ] ) {
+                    continue;
+                }
+                if ( $_aItem[ 'set' ] ) {
+                    continue;
+                }
+                $_aReviewItems[] = $_aItem;
+            }
+
+            // Perform an HTTP request only for the first item. Schedule fetching the rest. This is to give some interval between requests to avoid being blocked.
+            $_aFirstItem = array_shift($_aReviewItems );
+            if ( empty( $_aFirstItem ) ) {
+                return;
+            }
+            do_action(
+                'aal_action_api_get_customer_review2',
+                array(
+                    AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_aFirstItem[ 'asin' ], $_aFirstItem[ 'locale' ] ),
+                    $_aFirstItem[ 'asin' ],
+                    $_aFirstItem[ 'locale' ],
+                    $_aFirstItem[ 'cache_duration' ],
+                    false,
+                    $_aFirstItem[ 'currency' ],
+                    $_aFirstItem[ 'language' ],
+                )
+            );
+            foreach( $_aReviewItems as $_aItem ) {
+                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews2(
+                    AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_aItem[ 'asin' ], $_aItem[ 'locale' ] ),
+                    $_aItem[ 'asin' ],
+                    $_aItem[ 'locale' ],
+                    $_aItem[ 'cache_duration' ],
+                    false,
+                    $_aItem[ 'currency' ],
+                    $_aItem[ 'language' ]
+                );
+            }
+
+
+        }
+
+            private function ___getReviewPageURL() {
+            return '';
+            }
+        /**
          * @param array $aAllItems
          * @return array
+         * @since 4.3.0
          */
         private function ___getProducts( array $aAllItems ) {
             $_aUnitOptionSets     = $this->___getUnitOptionSets( $aAllItems );
@@ -70,6 +126,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         /**
          * @return array An array holding sets of unit options, separated by locale-currency-language.
          * @param array $aItems Due items to update.
+         * @since 4.3.0
          */
         private function ___getUnitOptionSets( array $aItems ) {
 
@@ -104,6 +161,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * @param array $aProducts
          * @param AmazonAutoLinks_UnitOption_Base $oUnitOption
          * @return array A formatted products array.
+         * @since 4.3.0
          */
         private function ___getProductsFormatted( array $aProducts, AmazonAutoLinks_UnitOption_Base $oUnitOption ) {
             $_aNewProducts = array();
@@ -128,6 +186,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * @param  array  $aDueElements
          * @param  array  $aProducts
          * @return array
+         * @since 4.3.0
          */
         private function ___getElementsByASINLocaleCurLang( array $aDueElements, array $aProducts ) {
 
@@ -137,7 +196,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 'context'   => '', 'asin'      => '', 'tag'       => '',
                 'locale'    => '', 'currency'  => '', 'language'  => '',
                 'output'    => '', 'id'        => 0,  'type'      => '',
-                'set'       => 0,
+                'set'       => 0,  'cache_duration' => 86400,
             );
             foreach( $aDueElements as $_sContext => $_aDueElement ) {
                 $_aDueElement = $_aDueElement + $_aStructure;
@@ -154,6 +213,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             /**
              * @param $snOutput
              * @return bool
+             * @since 4.3.0
              */
             private function ___isElementOutputSet( $snOutput ) {
                 if ( is_null( $snOutput ) ) {
@@ -175,6 +235,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
              * @param array $aDueElement
              * @param array $aProducts
              * @return string|null       When the element is not set, null is returned. This is to cache up cases that an empty string is returned which means the database already stores the result of an empty string. This is different from a case of unset (null) that the API request has not been done yet.
+             * @since 4.3.0
              */
             private function ___getElementOutput( array $aDueElement, array $aProducts ) {
                 $_sASINLocaleCurLang = "{$aDueElement[ 'asin' ]}|{$aDueElement[ 'locale' ]}|{$aDueElement[ 'currency' ]}|{$aDueElement[ 'language' ]}";
@@ -190,6 +251,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
 
     /**
      * Enqueues scripts and styles for unit outputs.
+     * @since 4.3.0
      */
     public function replyToEnqueueResources() {
 

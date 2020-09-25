@@ -20,6 +20,17 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
     protected function _construct() {}
 
     /**
+     * @return bool
+     * @since 4.3.0
+     */
+    protected function _shouldProceed( /* $aArguments */ ) {
+        if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ . '_' . serialize( func_get_args() ) ) ) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      *
      */
     protected function _doAction( /* $aArguments=array( 0 => url, 1 => asin, 2 => locale, 3 => cache_duration, 4 => force renew, 5 => currency, 6 => language  ) */ ) {
@@ -73,7 +84,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
         }
         $_mResult = $_oProductTable->setRow( $_aRow );
 
-
     }
 
         /**
@@ -120,6 +130,5 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
             return $_aRow;
             
         }
-
 
 }

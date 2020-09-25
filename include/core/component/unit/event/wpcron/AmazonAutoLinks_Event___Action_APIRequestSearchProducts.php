@@ -162,11 +162,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%', '%rating%', '%_discount_rate%', '%_review_rate%' ) ) ) {
                     return;
                 }
-                $_oLocale        = new AmazonAutoLinks_PAAPI50___Locales;
-                $_sMarketPlace   = isset( $_oLocale->aMarketPlaces[ $sLocale ] )
-                    ? $_oLocale->aMarketPlaces[ $sLocale ]
-                    : $_oLocale->aMarketPlaces[ 'US' ];
-                $_sReviewURL     = 'https://' . $_sMarketPlace . '/product-reviews/' . $sASIN;
+                $_sReviewURL = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $sASIN, $sLocale );
                 AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews2( $_sReviewURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage );
 
             }
