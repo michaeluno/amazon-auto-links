@@ -18,6 +18,7 @@ class AmazonAutoLinks_UnitTest_UnitOption extends AmazonAutoLinks_UnitTest_Base 
 
     /**
      * @return bool
+     * @throws Exception
      */
     public function test_Language() {
         $_oUnitOption = new AmazonAutoLinks_UnitOption_category( null );
@@ -26,8 +27,10 @@ class AmazonAutoLinks_UnitTest_UnitOption extends AmazonAutoLinks_UnitTest_Base 
         }
         return true;
     }
+
     /**
      * @return bool
+     * @throws Exception
      */
     public function test_PreferredCurrency() {
         $_oUnitOption = new AmazonAutoLinks_UnitOption_category( null );

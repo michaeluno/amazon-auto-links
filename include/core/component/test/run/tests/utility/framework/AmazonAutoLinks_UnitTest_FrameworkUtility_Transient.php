@@ -80,7 +80,7 @@ class AmazonAutoLinks_UnitTest_FrameworkUtility_Transient extends AmazonAutoLink
         $this->cleanTransients( $this->___sTransientKey );
         $_mValue = $this->getTransientWithoutCache( $this->___sTransientKey );
         if ( null !== $_mValue ) {
-            $this->_throwError( $this->_getDetails( $_mValue ) );
+            throw new Exception( $this->_getDetails( $_mValue ) );
         }
         return true;
     }

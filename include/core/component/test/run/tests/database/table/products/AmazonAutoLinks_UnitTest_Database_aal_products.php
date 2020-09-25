@@ -129,7 +129,7 @@ class AmazonAutoLinks_UnitTest_Database_aal_products extends AmazonAutoLinks_Uni
         );
         $_iRows = count( $_aRows );
         if ( ! $_iRows ) {
-            $this->_throwError( $this->_getDetails( $_aRows ) );
+            throw new Exception( $this->_getDetails( $_aRows ) );
         }
         return true;
     }
