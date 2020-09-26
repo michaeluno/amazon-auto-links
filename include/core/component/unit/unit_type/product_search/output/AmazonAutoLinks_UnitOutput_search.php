@@ -903,9 +903,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'feature'             => $this->___getFeatures( $_aItem ),
                     'category'            => $this->___getCategories( $_aItem ),
 
-                    // These must be retrieved separately
+                    // These must be retrieved separately -> There are cases that the review count and rating is returned.
                     'review'              => null,  // customer reviews
-                    'formatted_rating'    => null,  // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
+                    'formatted_rating'    => $this->___getFormattedRating( $_aItem, $_sLocale ),  // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
 
                     // These will be assigned below
                     'image_set'           => null,
@@ -1014,6 +1014,30 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 //                }
                 $_aImages = $this->getImageSet( $aItem );
                 return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages );
+            }
+
+            /**
+             * Generates a rating star output.
+             *
+             * There seems to be cases that the response contains rating information.
+             *
+             * @see https://stackoverflow.com/a/64002035
+             * @param array $aItem
+             * @param string $sLocale
+             * @since 4.3.1
+             * @return string|null
+             */
+            private function ___getFormattedRating( array $aItem, $sLocale ) {
+                $_aCustomerReview = $this->getElementAsArray( $aItem, array( 'CustomerReviews' ) );
+                $_iReviewCount    = ( integer ) $this->getElement( $_aCustomerReview, array( 'Count' ) );
+                if ( ! $_iReviewCount ) {
+                    return null;
+                }
+                $_sReviewURL      = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $aItem[ 'ASIN' ], $sLocale );
+                $_iRating         = ( integer ) ( ( double ) $this->getElement( $_aCustomerReview, array( 'StarRating', 'Value' ) ) * 10 ); // e.g. 4.5 -> 45
+                return "<div class='amazon-customer-rating-stars'>"
+                    . AmazonAutoLinks_Unit_Utility::getRatingOutput( $_iRating, $_sReviewURL, $_iReviewCount )
+                . "</div>";
             }
 
             /**
