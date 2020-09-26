@@ -101,7 +101,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_FormOption extends AmazonAutoLinks_
             $aInput[ 'allowed_html_tags' ]  // subject
         );
         $aInput[ 'allowed_html_tags' ] = trim( 
-            AmazonAutoLinks_Utility::trimDelimitedElements( 
+            AmazonAutoLinks_Utility::getEachDelimitedElementTrimmed(
                 $aInput['allowed_html_tags'], 
                 ',' 
             )

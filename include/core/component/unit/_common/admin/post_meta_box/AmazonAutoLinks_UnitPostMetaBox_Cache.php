@@ -36,7 +36,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Cache extends AmazonAutoLinks_UnitPostMeta
         
         $_aParams = func_get_args() + array( null, null, null );
         $aInput   = $_aParams[ 0 ];
-        $aInput[ 'cache_duration' ] = $this->oUtil->fixNumber(
+        $aInput[ 'cache_duration' ] = $this->oUtil->getNumberFixed(
                 $aInput[ 'cache_duration' ],     // number to sanitize
                 1200,     // default
                 0         // minimum

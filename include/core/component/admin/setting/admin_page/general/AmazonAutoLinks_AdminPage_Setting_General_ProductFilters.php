@@ -67,13 +67,13 @@ class AmazonAutoLinks_AdminPage_Setting_General_ProductFilters extends AmazonAut
         
         // Sanitize text inputs
         foreach( $aInput[ 'black_list' ] as &$_sElem ) {
-            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' );
-            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, PHP_EOL, false );
+            $_sElem = AmazonAutoLinks_Utility::getEachDelimitedElementTrimmed( $_sElem, ',' );
+            $_sElem = AmazonAutoLinks_Utility::getEachDelimitedElementTrimmed( $_sElem, PHP_EOL, false );
             $_sElem = trim( $_sElem );
         }
         foreach( $aInput[ 'white_list' ] as &$_sElem ) {
-            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, ',' );
-            $_sElem = AmazonAutoLinks_Utility::trimDelimitedElements( $_sElem, PHP_EOL, false );
+            $_sElem = AmazonAutoLinks_Utility::getEachDelimitedElementTrimmed( $_sElem, ',' );
+            $_sElem = AmazonAutoLinks_Utility::getEachDelimitedElementTrimmed( $_sElem, PHP_EOL, false );
             $_sElem = trim( $_sElem );
         }
        

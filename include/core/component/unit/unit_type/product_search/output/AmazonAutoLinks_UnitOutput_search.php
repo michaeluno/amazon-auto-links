@@ -452,9 +452,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      */
     public function getAPIParameters( $sOperation='SearchItems', $iItemPage=0 ) {
 
-        $_sTitle                 = $this->trimDelimitedElements( $this->oUnitOption->get( 'Title' ), ',', false );
+        $_sTitle                 = $this->getEachDelimitedElementTrimmed( $this->oUnitOption->get( 'Title' ), ',', false );
         $_aPayload               = array(
-            'Keywords'              => $this->trimDelimitedElements( $this->oUnitOption->get( 'Keywords' ), ',', false ),
+            'Keywords'              => $this->getEachDelimitedElementTrimmed( $this->oUnitOption->get( 'Keywords' ), ',', false ),
             'Title'                 => $_sTitle ? $_sTitle : null,
             'Operation'             => $this->_getOperation( $sOperation ),
             'SearchIndex'           => $this->oUnitOption->get( 'SearchIndex' ),

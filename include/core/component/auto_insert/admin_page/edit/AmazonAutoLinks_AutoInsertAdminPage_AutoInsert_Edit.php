@@ -168,10 +168,10 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
                 unset( $aMeta[ $_sKey ] );
             }
             
-            $aMeta[ 'filter_hooks' ]    = $_oUtil->trimDelimitedElements( $aMeta[ 'filter_hooks' ], ',' );
-            $aMeta[ 'action_hooks' ]    = $_oUtil->trimDelimitedElements( $aMeta[ 'action_hooks' ], ',' );
-            $aMeta[ 'enable_post_ids' ] = $_oUtil->trimDelimitedElements( $aMeta[ 'enable_post_ids' ], ',' );
-            $aMeta[ 'diable_post_ids' ] = $_oUtil->trimDelimitedElements( $aMeta[ 'diable_post_ids' ], ',' );
+            $aMeta[ 'filter_hooks' ]    = $_oUtil->getEachDelimitedElementTrimmed( $aMeta[ 'filter_hooks' ], ',' );
+            $aMeta[ 'action_hooks' ]    = $_oUtil->getEachDelimitedElementTrimmed( $aMeta[ 'action_hooks' ], ',' );
+            $aMeta[ 'enable_post_ids' ] = $_oUtil->getEachDelimitedElementTrimmed( $aMeta[ 'enable_post_ids' ], ',' );
+            $aMeta[ 'diable_post_ids' ] = $_oUtil->getEachDelimitedElementTrimmed( $aMeta[ 'diable_post_ids' ], ',' );
             
             return $aMeta;
             

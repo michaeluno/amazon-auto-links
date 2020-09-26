@@ -103,7 +103,7 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
                 $aUnitOptions[ 'SearchIndex' ] = 'Books';
             }
             $aUnitOptions[ 'ItemId' ] =  trim( 
-                $this->trimDelimitedElements( 
+                $this->getEachDelimitedElementTrimmed(
                     $aUnitOptions[ 'ItemId' ], 
                     ',' 
                 ) 

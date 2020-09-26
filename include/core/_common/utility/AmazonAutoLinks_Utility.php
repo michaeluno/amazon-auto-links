@@ -30,10 +30,9 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      *
      * Used to cut off too many items.
      *
-     * @remark  The array should be numerically indexed, not associative.
+     * @remark The array should be numerically indexed, not associative.
      * @param array $aItems
-     * @param $iCount
-     *
+     * @param integer $iCount
      * @return array
      * @since   4.2.0
      */
@@ -70,7 +69,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         $_aItems = scandir( $sDirectoryPath );
         foreach( $_aItems as $_sItem ) {
             if ( $_sItem !== "." && $_sItem !== ".." ) {
-                if (is_dir($sDirectoryPath . "/" . $_sItem ) ) {
+                if ( is_dir($sDirectoryPath . "/" . $_sItem ) ) {
                     self::removeDirectoryRecursive($sDirectoryPath . "/" . $_sItem );
                     continue;
                 }
@@ -84,20 +83,23 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     /**
      * Checks whether the given array is sequential or associative.
      * @return      boolean
+     * @param       array $aArray
+     * @deprecated 4.3.2    The same is defined in the framework. No need to override.
      */
-    static public function isAssociative( array $aArray ) {
+    /*static public function isAssociative( array $aArray ) {
         return array_keys( $aArray ) !== range( 0, count( $aArray ) - 1 );
-    }    
+    }*/
     
     /**
-     * 
-     * @return      string      The found character set.
+     *
      * e.g. ISO-8859-1, utf-8, Shift_JIS
      * 
      * @remark  The value set to the header charset should be case-insensitive.
      * @see     http://www.iana.org/assignments/character-sets/character-sets.xhtml
+     * @param   array|string $asHeaderResponse
+     * @return  string      The found character set.
      */
-    static public function getCharacterSetFromResponseHeader( $asHeaderResponse ) {
+    public function getCharacterSetFromResponseHeader( $asHeaderResponse ) {
         
         $_sContentType = '';
         if ( is_string( $asHeaderResponse ) ) {
@@ -118,13 +120,13 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
             }
         }
         
-        $_bFound = preg_match(
+        preg_match(
             '/charset=(.+?)($|[;\s])/i',  // needle
             $_sContentType, // haystack
             $_aMatches
         );
         return isset( $_aMatches[ 1 ] )
-            ? $_aMatches[ 1 ]
+            ? ( string ) $_aMatches[ 1 ]
             : '';
             
     }
@@ -132,20 +134,23 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     /**
      * 
      * @since       3
+     * @deprecated  4.3.2   Unused
+     * @param       array   $aSubject
      * @return      string
      */
-    static public function getKeyOfLowestElement( array $aSubject ) {
+/*    static public function getKeyOfLowestElement( array $aSubject ) {
         natsort( $aSubject );
         foreach( $aSubject as $_isKey => $_mValue ) {
             // return the key(index) of the first item.
             return $_isKey;
         }
-    }
+    }*/
     
     /**
      * Checks if the current time is over the given time.
      * @since       3
      * @remark      Assumed that the given time is not have any local time offset.
+     * @param       integer|double|string   $nsSetTime
      * @return      boolean
      */
     static public function isExpired( $nsSetTime ) {
@@ -165,65 +170,81 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * 
      * As it is said that include_once() is slow, let's check whether it is included by ourselves 
      * and use include().
-     * 
-     * @return      boolean     true on success; false on failure.
+     *
+     * @param       string          $sFilePath
+     * @return      false|mixed     false on failure. Otherwise, the return value of the included file.
      */
     static public function includeOnce( $sFilePath ) {
-            
-        if ( in_array( $sFilePath, self::$_aLoadedFiles ) ) {
+
+        if ( self::hasBeenCalled( __METHOD__ . '_' . $sFilePath ) ) {
             return false;
         }
-        self::$_aLoadedFiles[ $sFilePath ] = $sFilePath;
         if ( ! file_exists( $sFilePath ) ) {
             return false;
         }
-        return @include( $sFilePath );                        
+        return @include( $sFilePath );
         
-    }    
-    
+    }
+
     /**
      * Checks if the given value is empty or not.
-     * 
-     * @remark      This is useful when PHP throws an error ' Fatal error: Can't use method return value in write context.'.
-     * @since       3
-     * @retuen      boolean
+     *
+     * @remark  This is useful when PHP throws an error ' Fatal error: Can't use method return value in write context.'.
+     * @param   mixed $mValue
+     * @return  bool
+     * @since   3
      */
     static public function isEmpty( $mValue ) {
         return ( boolean ) empty( $mValue );
     }
-            
+
     /**
-     * Trims each delimited element of the given string with the specified delimiter. 
-     * 
-     * $str = trimDlimitedElements( '   a , bcd ,  e,f, g h , ijk ', ',' );
-     * 
-     * produces:
-     * 
-     * 'a, bcd, e, f, g h, ijk'
-     * 
-     * @remark            One left white space gets added in each element to be readable.
-     * @remark            Supports only one dimensional array.
+     * @param   string  $sToFix
+     * @param   string  $sDelimiter
+     * @param   boolean $bReadable
+     * @param   boolean $bUnique
+     * @return  string
+     * @deprecated 4.3.2    Use `getEachDelimitedElementTrimmed()`.
      */
-    static public function trimDelimitedElements( $strToFix, $strDelimiter, $fReadable=true, $fUnique=true ) {
-        
-        $strToFix    = ( string ) $strToFix;
-        $arrElems    = self::getStringIntoArray( $strToFix, $strDelimiter );
-        $arrNewElems = array();
-        foreach ( $arrElems as $strElem ) {
-            if ( ! is_array( $strElem ) || ! is_object( $strElem ) ) {
-                $arrNewElems[] = trim( $strElem );
+    static public function trimDelimitedElements( $sToFix, $sDelimiter, $bReadable=true, $bUnique=true ) {
+        return self::getEachDelimitedElementTrimmed( $sToFix, $sDelimiter, $bReadable, $bUnique );
+    }
+
+    /**
+     * Trims each delimited element of the given string with the specified delimiter.
+     *
+     * ```
+     * $str = getEachDelimitedElementTrimmed( '   a , bcd ,  e,f, g h , ijk ', ',' );
+     * ```
+     *
+     * produces:
+     * ```
+     * 'a, bcd, e, f, g h, ijk'
+     * ```
+     * @remark  One left white space gets added in each element to be readable.
+     * @remark  Supports only one dimensional array.
+     * @param   string  $sToFix
+     * @param   string  $sDelimiter
+     * @param   boolean $bReadable
+     * @param   boolean $bUnique
+     * @return  string
+     */
+    static public function getEachDelimitedElementTrimmed( $sToFix, $sDelimiter, $bReadable=true, $bUnique=true ) {
+        $sToFix        = ( string ) $sToFix;
+        $_aElements    = self::getStringIntoArray( $sToFix, $sDelimiter );
+        $_aNewElements = array();
+        foreach ( $_aElements as $sElement ) {
+            if ( ! is_array( $sElement ) || ! is_object( $sElement ) ) {
+                $_aNewElements[] = trim( $sElement );
             }
         }
-        
-        if ( $fUnique ) {
-            $arrNewElems = array_unique( $arrNewElems );
+        if ( $bUnique ) {
+            $_aNewElements = array_unique( $_aNewElements );
         }
-        
-        return $fReadable
-            ? implode( $strDelimiter . ' ' , $arrNewElems )
-            : implode( $strDelimiter, $arrNewElems );
-                
-    }    
+        return $bReadable
+            ? implode( $sDelimiter . ' ' , $_aNewElements )
+            : implode( $sDelimiter, $_aNewElements );
+    }
         
     /**
      * Converts the given string with delimiters to a multi-dimensional array.
@@ -231,49 +252,52 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * Parameters: 
      * 1: haystack string
      * 2, 3, 4...: delimiter
-     * e.g. $arr = getStringIntoArray( 'a-1,b-2,c,d|e,f,g', "|", ',', '-' );
      * 
+     * Example:
+     * ```
+     * $_aArray = getStringIntoArray( 'a-1,b-2,c,d|e,f,g', "|", ',', '-' );
+     * ```
+     * @return array
      */
     static public function getStringIntoArray() {
+
+        $_aArgs      = func_get_args();
+        $_sInput     = $_aArgs[ 0 ];            
+        $_sDelimiter = $_aArgs[ 1 ];
         
-        $intArgs      = func_num_args();
-        $arrArgs      = func_get_args();
-        $strInput     = $arrArgs[ 0 ];            
-        $strDelimiter = $arrArgs[ 1 ];
-        
-        if ( ! is_string( $strDelimiter ) || $strDelimiter == '' ) {
-            return $strInput;
+        if ( ! is_string( $_sDelimiter ) || $_sDelimiter == '' ) {
+            return $_sInput;
         }
-        if ( is_array( $strInput ) ) {
-            return $strInput;    // note that is_string( 1 ) yields false.
+        if ( is_array( $_sInput ) ) {
+            return $_sInput;    // note that is_string( 1 ) yields false.
         }
             
-        $arrElems = preg_split( "/[{$strDelimiter}]\s*/", trim( $strInput ), 0, PREG_SPLIT_NO_EMPTY );
-        if ( ! is_array( $arrElems ) ) {
+        $_aElements = preg_split( "/[{$_sDelimiter}]\s*/", trim( $_sInput ), 0, PREG_SPLIT_NO_EMPTY );
+        if ( ! is_array( $_aElements ) ) {
             return array();
         }
         
-        foreach( $arrElems as &$strElem ) {
+        foreach( $_aElements as &$_sElement ) {
             
-            $arrParams = $arrArgs;
-            $arrParams[0] = $strElem;
-            unset( $arrParams[ 1 ] );    // remove the used delimiter.
-            // now `$strElem` becomes an array.
+            $_aParams = $_aArgs;
+            $_aParams[0] = $_sElement;
+            unset( $_aParams[ 1 ] );    // remove the used delimiter.
+            // now `$_sElement` becomes an array.
             // if the delimiters are gone, 
-            if ( count( $arrParams ) > 1 ) {                
-                $strElem = call_user_func_array( 
+            if ( count( $_aParams ) > 1 ) {                
+                $_sElement = call_user_func_array( 
                     array( __CLASS__, 'getStringIntoArray' ),
-                    $arrParams 
+                    $_aParams 
                 );
             }
             
             // Added this because the function was not trimming the elements sometimes... not fully tested with multi-dimensional arrays. 
-            if ( is_string( $strElem ) ) {
-                $strElem = trim( $strElem );
+            if ( is_string( $_sElement ) ) {
+                $_sElement = trim( $_sElement );
             }
             
         }
-        return $arrElems;
+        return $_aElements;
 
     }        
         /**
@@ -298,7 +322,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @return            string
      * @todo    deprecated this as it seems not used anywhere
      */
-    static public function implodeRecursive( $arrInput, $arrGlues ) {    
+/*    static public function implodeRecursive( $arrInput, $arrGlues ) {
         
         $arrGlues_ = ( array ) $arrGlues;
         array_shift( $arrGlues_ );
@@ -315,30 +339,34 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         
         return implode( $arrGlues[0], $arrInput );
 
-    }    
+    }*/
 
 
     /**
      * For form validation
+     * @deprecated 4.3.2 The same as the framework one. No need to override.
      */
-    static public function fixNumber( $numToFix, $numDefault, $numMin="", $numMax="" ) {
+/*    static public function fixNumber( $numToFix, $numDefault, $numMin="", $numMax="" ) {
             
         if ( ! is_numeric( trim( $numToFix ) ) ) return $numDefault;
         if ( $numMin !== "" && $numToFix < $numMin ) return $numMin;
         if ( $numMax !== "" && $numToFix > $numMax ) return $numMax;
         return $numToFix;
         
-    }    
+    }*/
     
     /**
      * Calculates the relative path from the given path.
      * 
      * This function is used to generate a template path.
-     * 
-     * @author            Gordon
+     *
      * @see               http://stackoverflow.com/questions/2637945/getting-relative-path-from-absolute-path-in-php/2638272#2638272
+     * @param   string $from
+     * @param   string $to
+     * @return  string
+     * @deprecated 4.3.2 Same as the framework one. No need to override.
      */
-    static public function getRelativePath( $from, $to ) {
+/*    static public function getRelativePath( $from, $to ) {
         
         // some compatibility fixes for Windows paths
         $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
@@ -370,7 +398,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         }
         return implode('/', $relPath);
         
-    }    
+    } */
     
     /**
      * Retrieves the server set allowed maximum PHP script execution time.
@@ -384,7 +412,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
         $_iSetTime = function_exists( 'ini_get' )
             ? ( integer ) ini_get( 'max_execution_time' )
-            : $iDefault;
+            : ( integer ) $iDefault;
         $_iSetTime = 0 === $_iSetTime ? $iMax : $_iSetTime;
         return $_iSetTime > $iMax
             ? ( integer ) $iMax : ( integer ) $_iSetTime;
