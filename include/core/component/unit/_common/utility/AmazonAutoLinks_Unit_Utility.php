@@ -15,6 +15,32 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Generates a rating star output.
+     *
+     * There seems to be cases that the response contains rating information.
+     *
+     * @see https://stackoverflow.com/a/64002035
+     * @param array $aItem  A product array of a PA-API response.
+     * @param string $sLocale
+     * @since 4.3.2
+     * @return string|null
+     */
+    static public function getFormattedRating( array $aItem, $sLocale ) {
+        $_aCustomerReview = self::getElementAsArray( $aItem, array( 'CustomerReviews' ) );
+        $_inReviewCount   = self::getElement( $_aCustomerReview, array( 'Count' ) );
+        $_dnStarRating    = self::getElement( $_aCustomerReview, array( 'StarRating', 'Value' ) );
+        if ( null === $_inReviewCount || null === $_dnStarRating ) {
+            return null;
+        }
+        $_iReviewCount    = ( integer ) $_inReviewCount;
+        $_iRating         = ( integer ) ( ( ( double ) $_dnStarRating ) * 10 ); // e.g. 4.5 -> 45
+        $_sReviewURL      = self::getCustomerReviewURL( $aItem[ 'ASIN' ], $sLocale );
+        return "<div class='amazon-customer-rating-stars'>"
+            . self::getRatingOutput( $_iRating, $_sReviewURL, $_iReviewCount )
+        . "</div>";
+    }
+
+    /**
      * @param string $sASIN
      * @param string $sLocale
      * @return string

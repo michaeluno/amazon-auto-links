@@ -905,7 +905,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
                     // These must be retrieved separately -> There are cases that the review count and rating is returned.
                     'review'              => null,  // customer reviews
-                    'formatted_rating'    => $this->___getFormattedRating( $_aItem, $_sLocale ),  // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
+                    'formatted_rating'    => $this->getFormattedRating( $_aItem, $_sLocale ),  // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
 
                     // These will be assigned below
                     'image_set'           => null,
@@ -1026,6 +1026,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @param string $sLocale
              * @since 4.3.1
              * @return string|null
+             * @deprecated 4.3.2
              */
             private function ___getFormattedRating( array $aItem, $sLocale ) {
                 $_aCustomerReview = $this->getElementAsArray( $aItem, array( 'CustomerReviews' ) );
