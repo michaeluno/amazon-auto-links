@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.0
+Stable tag:         4.3.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,6 +322,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.3.1 - 09/26/2020 =
+- Tweaked the setting UI to include a current tab title in the `<title>` tag.
+- Optimized PA-API requests to prevent duplicated payloads.
+- Optimized the process of updating pending elements labeled "Now retrieving..."
+- Fixed an issue with the `List` template that some sub-images overlapped the thumbnail.
+- Fixed a bug that button links were broken since 4.3.0.
+- Reverted the change made in v4.3.0 regarding the default thumbnail layout to drop `max-height`.
 
 = 4.3.0 - 09/24/2020 =
 - Added the ability to resume pending elements saying "Now retrieving..." with JavaScript.
