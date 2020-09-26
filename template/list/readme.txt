@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.7 =
+- Fixed an issue that some thumbnail images (img) exceeded the height of its container.
+
 = 1.2.5 =
 - Added rules for buttons.
 
