@@ -85,6 +85,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
     /**
      * Sets up properties.
+     * @param array|string $asURLs
+     * @param int $iCacheDuration
+     * @param array $aArguments
+     * @param string $sRequestType
      */
     public function __construct( $asURLs, $iCacheDuration=86400, $aArguments=null, $sRequestType='wp_remote_get' ) {
                         
@@ -92,16 +96,18 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         $this->iCacheDuration = $iCacheDuration;
         $this->sSiteCharSet   = get_bloginfo( 'charset' );
         $this->sRequestType   = $sRequestType;
-        $this->aArguments     = $this->_getFormattedArguments( $aArguments, $asURLs );
-        $this->aURLs          = $this->_getFormattedURLContainer( 
+        $this->aArguments     = $this->___getFormattedArguments( $aArguments, $asURLs );
+        $this->aURLs          = $this->___getFormattedURLContainer(
             $this->getAsArray( $asURLs ) 
         );
 
-    }      
+    }
         /**
-         * @return      array
+         * @param  array        $aArguments
+         * @param  array|string $asURLs
+         * @return array
          */
-        private function _getFormattedArguments( $aArguments, $asURLs ) {
+        private function ___getFormattedArguments( $aArguments, $asURLs ) {
             $aArguments     = null === $aArguments
                 ? $this->aArguments
                 : $this->getAsArray( $aArguments ) + $this->aArguments;
@@ -135,10 +141,10 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             return $aArguments;
         }
         /**
-         * 
+         * @param       array       $aURLs
          * @return      array       The formatted array.
          */
-        private function _getFormattedURLContainer( $aURLs ) {
+        private function ___getFormattedURLContainer( $aURLs ) {
             $_aFormatted = array();
             foreach( $aURLs as $_sURL ) {
                 $_sURL = trim( $_sURL );
@@ -149,6 +155,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         }
             /**
              * Generates a cache name from the given url.
+             * @param       string  $sURL
              * @return      string
              */
             protected function _getCacheName( $sURL ) {
@@ -184,7 +191,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         $_aData      = array();
         foreach( $this->getResponses() as $_sURL => $_aoResponse ) {
 
-            $_sHTTPBody         = $this->_getResponseBody( $_aoResponse );
+            $_sHTTPBody         = $this->___getResponseBody( $_aoResponse );
             $_sCharSetFrom      = $this->_getCharacterSet( $_aoResponse );
             $_sCharSetTo        = $this->sSiteCharSet;
 
@@ -210,18 +217,18 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         
     }
         /**
+         * @param       array|WP_Error $aoResponse
          * @return      string
          * @since       unknown
          * @since       4.2.0   Changed not to return raw.
          */
-        private function _getResponseBody( $aoResponse ) {
-
+        private function ___getResponseBody( $aoResponse ) {
             if ( is_wp_error( $aoResponse ) ) {
                 return $aoResponse->get_error_message();
             }
             return wp_remote_retrieve_body( $aoResponse );
-
         }
+
     /**
      * Returns the response's character set by the url.
      * 
@@ -240,8 +247,9 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         return $this->___getCharacterSetFromCache( $_sCacheName );
     }
         /**
-         * 
-         * @return      string
+         *
+         * @param   string $sCacheName
+         * @return  string
          */
         private function ___getCharacterSetFromCache( $sCacheName ) {
             $_oCacheTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
@@ -365,6 +373,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             /**
              * @since       3.5.0
              * @return      boolean
+             * @param       array   $aCache
              */
             private function ___isCacheExpired( array $aCache ) {
 
@@ -407,8 +416,7 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
 
                 // If the proxy option is set, do with Curl.
                 if ( isset( $aArguments[ 'proxy' ] ) && $aArguments[ 'proxy' ] ) {
-                    $_aoResult = $this->___getHTTPResponseByCurl( $sURL, $aArguments );
-                    return $_aoResult;
+                    return $this->___getHTTPResponseByCurl( $sURL, $aArguments );
                 }
                 return function_exists( 'wp_safe_remote_get' )
                     ? wp_safe_remote_get( $sURL, $aArguments )
@@ -545,7 +553,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
             }    
             
         /**
-         * 
+         *
+         * @param       array|WP_Error
          * @return      string
          */
         protected function _getCharacterSet( $aoHTTPResponseBody ) {
