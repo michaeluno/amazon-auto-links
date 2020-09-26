@@ -25,13 +25,13 @@ class AmazonAutoLinks_Test_ClassFinder extends AmazonAutoLinks_AdminPageFramewor
      * Performs necessary set-ups.
      *
      * @param string $sScanDirPath
+     * @param array $aBaseClasses
+     * @param array $aOptions
      */
-    public function __construct( $sScanDirPath, array $aBaseClasses ) {
+    public function __construct( $sScanDirPath, array $aBaseClasses, array $aOptions=array() ) {
         $this->___sScanDirPath = $sScanDirPath;
         $this->___aBaseClasses = $aBaseClasses;
-        $_aOptions = self::$_aStructure_Options;
-        $_aOptions[ 'exclude_dir_names' ][] = '_common';
-        $_aOptions[ 'exclude_dir_names' ][] = '_common';
+        $_aOptions = $aOptions + self::$_aStructure_Options;
         $this->___aFilePaths = $this->___getTestFiles( $_aOptions );
     }
 
