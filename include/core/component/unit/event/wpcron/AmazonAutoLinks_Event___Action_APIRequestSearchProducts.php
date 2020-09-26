@@ -314,6 +314,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                     $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
                 }
 
+                // 4.3.2 There are cases that rating information is included.
+                $_inReviewCount = AmazonAutoLinks_Unit_Utility::getReviewCountFromItem( $aItem );
+                $_inRating      = AmazonAutoLinks_Unit_Utility::getRatingFromItem( $aItem );
+                if ( isset( $_inReviewCount, $_inRating ) ) {
+                    $_aRow[ 'rating' ]                  = $_inRating;
+                    $_aRow[ 'rating_image_url' ]        = AmazonAutoLinks_Unit_Utility::getRatingStarImageURL( $_inRating );
+                    $_aRow[ 'rating_html' ]             = ''; // deprecated 3.9.0
+                    $_aRow[ 'number_of_reviews' ]       = $_inReviewCount;
+                }
+
                 // With PA-API5, we don't know whether a customer review exists or not.
                 // Regardless, fill these elements with an empty value.
                 // If the element value is null when retrieved from the front-end,

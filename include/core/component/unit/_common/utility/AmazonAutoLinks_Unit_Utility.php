@@ -15,28 +15,51 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param array $aItem  A product array of a PA-API 5 response.
+     * @return null|integer The star rating with two digits like 45 for 4.5.
+     * @since 4.3.2
+     */
+    static public function getRatingFromItem( array $aItem ) {
+        $_dnStarRating = self::getElement( $aItem, array( 'CustomerReviews', 'StarRating', 'Value' ) );
+        return null === $_dnStarRating
+            ? null
+            : ( integer ) ( ( double ) $_dnStarRating * 10 );
+    }
+
+    /**
+     * @param array $aItem  A product array of a PA-API 5 response.
+     * @return null|integer The review count.
+     * @since 4.3.2
+     */
+    static public function getReviewCountFromItem( array $aItem ) {
+        $_aCustomerReview = self::getElementAsArray( $aItem, array( 'CustomerReviews' ) );
+        $_inReviewCount   = self::getElement( $_aCustomerReview, array( 'Count' ) );
+        if ( null === $_inReviewCount ) {
+            return null;
+        }
+        return ( integer ) $_inReviewCount;
+    }
+
+    /**
      * Generates a rating star output.
      *
      * There seems to be cases that the response contains rating information.
      *
      * @see https://stackoverflow.com/a/64002035
-     * @param array $aItem  A product array of a PA-API response.
+     * @param array $aItem  A product array of a PA-API 5 response.
      * @param string $sLocale
      * @since 4.3.2
      * @return string|null
      */
-    static public function getFormattedRating( array $aItem, $sLocale ) {
-        $_aCustomerReview = self::getElementAsArray( $aItem, array( 'CustomerReviews' ) );
-        $_inReviewCount   = self::getElement( $_aCustomerReview, array( 'Count' ) );
-        $_dnStarRating    = self::getElement( $_aCustomerReview, array( 'StarRating', 'Value' ) );
-        if ( null === $_inReviewCount || null === $_dnStarRating ) {
+    static public function getFormattedRatingFromItem( array $aItem, $sLocale ) {
+        $_inReviewCount   = self::getReviewCountFromItem( $aItem );
+        $_diStarRating    = self::getRatingFromItem( $aItem );
+        if ( ! isset( $_inReviewCount, $_diStarRating ) ) {
             return null;
         }
-        $_iReviewCount    = ( integer ) $_inReviewCount;
-        $_iRating         = ( integer ) ( ( ( double ) $_dnStarRating ) * 10 ); // e.g. 4.5 -> 45
         $_sReviewURL      = self::getCustomerReviewURL( $aItem[ 'ASIN' ], $sLocale );
         return "<div class='amazon-customer-rating-stars'>"
-            . self::getRatingOutput( $_iRating, $_sReviewURL, $_iReviewCount )
+            . self::getRatingOutput( $_diStarRating, $_sReviewURL, $_inReviewCount )
         . "</div>";
     }
 
@@ -341,97 +364,6 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             $nDiscountedPrice / 100,   // decimal,  // numeric price
             $sPriceFormatted // price format
         );
-
-    }
-
-    /**
-     * Extracts `Offers` element from the product item array given by the PAAPI.
-     * This element is needed to get price information.
-     * @return  array
-     * @since   3
-     * @since   3.8.11      Moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`. Renamed from `___getOfferArray()`.
-     * @deprecated  3.9.0       PA-API 5 changed the structure
-     */
-    static public function getOffers( array $aProduct, $nPrice=null ) {
-
-        $_iTotalOffers = self::getElement( $aProduct, array( 'Offers', 'TotalOffers' ), 0 );  
-        if ( 2 > $_iTotalOffers  ) {
-            return self::getElementAsArray( $aProduct, array( 'Offers', 'Offer', 'OfferListing' ) );
-        }
-        $_aOffers = self::getElementAsArray( $aProduct, array( 'Offers', 'Offer' ) );
-        
-        $_aDiscountedPrices = array();
-        foreach( $_aOffers as $_iIndex => $_aOffer ) {
-            if ( ! isset( $_aOffer[ 'OfferListing' ] ) ) {
-                continue;
-            }
-            $_aDiscountedPrices[ $_iIndex ] = self::getDiscountedPrice( $_aOffer[ 'OfferListing' ], $nPrice );
-        }
-        $_iIndex = self::getKeyOfLowestElement( $_aDiscountedPrices );
-        return $_aOffers[ $_iIndex ][ 'OfferListing' ];                    
-        
-    }   
-    /**
-     * Calculates the discounted price and returns the numeric value as an integer.
-     * @param       array       $aOffer     ListedOffer element in the Offer element array in the response product data.
-     * @param       mixed       $nPrice     The listed price.
-     * @since       3.8.11
-     * @since       3
-     * @return      integer
-     * @deprecated  3.9.0       PA-API5 changed the structure
-     */
-    static public function getDiscountedPrice( $aOffer, $nPrice ) {
-        
-        $_nDiscountedPrice = self::getElement( $aOffer, array( 'Price', 'Amount' ), null );
-        if ( null !== $_nDiscountedPrice ) {
-            return $_nDiscountedPrice;
-        }
-        
-        // If saving amount is set
-        $_nSavingAmount = self::getElement( $aOffer, array( 'AmountSaved', 'Amount' ), null );
-        if ( null !== $_nSavingAmount ) {
-            return $nPrice - $_nSavingAmount;
-        }
-        
-        // If discount percentage is set,
-        $_nDiscountPercentage = self::getElement( $aOffer, array( 'PercentageSaved' ), null );
-        if ( null !== $_nDiscountPercentage ) {
-            return $nPrice * ( ( 100 - $_nDiscountPercentage ) / 100 );
-        }                    
-        return 0;   // 3.8.5 changed the default value from null to 0 to avoid automatic background task of retrieving product details
-
-    }    
-    
-    
-    /**
-     * Extracts and returns the price from the product item array that PA API returns.
-     * @return      string
-     * @since       3
-     * @since       3.8.11  Moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
-     * @param       array   $aProduct
-     * @param       string  $sKey       FormattedPrice|Amount
-     * @param       mixed   $mDefault
-     * @deprecated  3.9.0   PA-API5 changed the stricture
-     */
-    static public function getPriceByKey( array $aProduct, $sKey, $mDefault ) {
-        
-        // There are cases the listed price is not set.
-        $_sFormattedPrice = self::getElement(
-            $aProduct,
-            array( 'ItemAttributes', 'ListPrice', $sKey ),
-            $mDefault // avoid null as in the front-end, when null is returned, it triggers a background task
-        );
-        if ( ! empty( $_sFormattedPrice ) ) {
-            return $_sFormattedPrice;
-        }
-
-        // Try to use a lowest new one.
-        $_sFormattedPrice = self::getElement(
-            $aProduct,
-            array( 'OfferSummary', 'LowestNewPrice', $sKey ),
-            $mDefault  // avoid null as in the front-end, when null is returned, it triggers a background task
-        ); 
-        return $_sFormattedPrice;
 
     }
 
