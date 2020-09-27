@@ -12,7 +12,7 @@
  * Retrieve rating information of the given product and updates the product cache.
  *
  * @package      Amazon Auto Links
- * @since        4.3.2
+ * @since        4.3.3
  * @remark       Not used at the moment and still being tested.
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 {
@@ -42,14 +42,14 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
 
     }
         /**
-         * @param $aParameters
-         * @param $sURL
-         * @param $sASIN
-         * @param $sLocale
-         * @param $sCurrency
-         * @param $sLanguage
-         * @param $iCacheDuration
-         * @param $bForceRenew
+         * @param array $aParameters
+         * @param string $sURL
+         * @param string $sASIN
+         * @param string $sLocale
+         * @param string $sCurrency
+         * @param string $sLanguage
+         * @param integer $iCacheDuration
+         * @param boolean $bForceRenew
          */
         private function ___setParameters( $aParameters, &$sURL, &$sASIN, &$sLocale, &$sCurrency, &$sLanguage, &$iCacheDuration, &$bForceRenew ) {
             $aParameters    = $aParameters + array( null, null, null, null, null, null, null );
@@ -76,6 +76,9 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 array(  // http arguments
                     'timeout'     => 20,
                     'redirection' => 20,
+                    'cookies' => array(
+                        'ubid-main' => $this->___getCookie_ubid_main(),
+                    ),
                 ),
                 'rating'
             );
@@ -85,6 +88,18 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
             return $_oHTTP->get();
 
         }
+            /**
+             * Generates a string for the `ubid-main` cookie item.
+             * @return string Format: XXX-XXXXXXX-XXXXXXX e.g. 001-0000000-0000000
+             * @since 4.3.3
+             */
+            private function ___getCookie_ubid_main() {
+                return sprintf( '%03d', mt_rand( 1, 999 ) )
+                    . '-'
+                    . sprintf( '%07d', mt_rand( 1, 9999999 ) )
+                    . '-'
+                    . sprintf( '%07d', mt_rand( 1, 9999999 ) );
+            }
         /**
          * @param string $sASIN
          * @param string $sLocale
@@ -96,15 +111,14 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
             return $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
         }
         /**
-         * @param string $sHTML
-         * @param integer $iCacheDuration
-         * @param string $sASIN
-         * @param string $sLocale
-         * @param string $sCurrency
-         * @param string $sLanguage
-         *
-         * @return      array
-         * @since   4.3.2
+         * @param  string  $sHTML
+         * @param  integer $iCacheDuration
+         * @param  string  $sASIN
+         * @param  string  $sLocale
+         * @param  string  $sCurrency
+         * @param  string  $sLanguage
+         * @return array
+         * @since  4.3.3
          */
         private function ___getRowFormatted( $sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
 

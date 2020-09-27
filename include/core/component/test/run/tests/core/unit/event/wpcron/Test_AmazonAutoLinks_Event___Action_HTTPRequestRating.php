@@ -11,7 +11,7 @@
 /**
  *
  * @package     Amazon Auto Links
- * @since       4.3.2
+ * @since       4.3.3
  * @tags        rating
 */
 class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_UnitTest_Base {
@@ -23,17 +23,23 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     }
     public function testRatingAndReviewCount() {
         $_oClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Event___Action_HTTPRequestRating' );
-        $_sURL  = $_oClass->call( '___getRatingWidgetPageURL', 'B08FWDGDS5', 'US' );
+        $_sURL   = $_oClass->call( '___getRatingWidgetPageURL', 'B087T7D45T', 'US' ); // B08FWDGDS5, B08HGKZC6T
         $_sHTML  = $_oClass->call( '___getDataFromWidgetPage', $_sURL, 86400, false );
-        // ___getDataFromWidgetPage( $sASIN, $sLocale, $iCacheDuration, $bForceRenew )
-return $_sHTML;
+        if ( false === stripos( $_sHTML, 'acr-average-stars-rating-text'  ) ) {
+            throw new Exception( 'It is not an html output.<hr />' . esc_html( $_sHTML ) );
+        }
+
         $_oScraper      = new AmazonAutoLinks_ScraperDOM_WidgetUserRating( $_sHTML );
         $_inRating       = $_oScraper->getRating();
+        if ( ! isset( $_inRating ) ) {
+            throw new Exception( 'Failed to retrieve the rating.' );
+        }
+        if ( 2 !== strlen( $_inRating ) ) {
+            throw new Exception( 'The rating value must consist of two digits.' );
+        }
         $_inReviewCount = $_oScraper->getNumberOfReviews();
-        return array(
-            'rating' => $_inRating,
-            'count' => $_inReviewCount,
-        );
+        return is_integer( $_inReviewCount );
+
     }
 
 }
