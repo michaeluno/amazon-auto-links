@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.0 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.1 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -195,10 +195,11 @@ return array(
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
+    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2.php", 
+    "AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
     "AmazonAutoLinks_Event___Action_UnitPrefetchByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_UnitPrefetchByID.php", 
+    "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
     "AmazonAutoLinks_Unit_Event_Action_CheckTasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Unit_Event_Action_CheckTasks.php", 
-    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/customer_review/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2.php", 
-    "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/customer_review/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
     "AmazonAutoLinks_UnitTypesLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/AmazonAutoLinks_UnitTypesLoader.php", 
     "AmazonAutoLinks_UnitTypeLoader_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage.php", 
@@ -483,5 +484,6 @@ return array(
     "AmazonAutoLinks_ScraperDOM_CustomerReview2_Each" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_CustomerReview2_Each.php", 
     "AmazonAutoLinks_ScraperDOM_CustomerReview_Each" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_CustomerReview_Each.php", 
     "AmazonAutoLinks_ScraperDOM_UserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_UserRating.php", 
+    "AmazonAutoLinks_ScraperDOM_WidgetUserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_WidgetUserRating.php", 
     "AmazonAutoLinks_TemplateUtility_NoOuterContainer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/template/AmazonAutoLinks_TemplateUtility_NoOuterContainer.php", 
 );

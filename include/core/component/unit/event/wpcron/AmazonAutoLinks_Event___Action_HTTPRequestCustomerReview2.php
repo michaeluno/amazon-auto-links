@@ -9,15 +9,13 @@
  */
 
 /**
- * Handles  SimplePie cache renewal events.
+ * Retrieves customer reviews and the rating of the given product and updates the product cache.
  * @package      Amazon Auto Links
  * @since        3.9.0
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName = 'aal_action_api_get_customer_review2';
-
-    protected function _construct() {}
 
     /**
      * @return bool
@@ -57,15 +55,9 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
         if ( $_bForceRenew ) {
             $_oHTTP->deleteCache();
         }
-        $_sHTMLBody      = $_oHTTP->get();
-
-        if ( ! $_sHTMLBody ) {
-            return;
-        }        
-
         $_aRow           = $this->___getRowFormatted(
             $_sURL,
-            $_sHTMLBody,
+            $_oHTTP->get(),
             $_iCacheDuration,
             $_oHTTP->getCharacterSet(), // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
             $_sASIN,
@@ -96,7 +88,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAu
          * @param string $sLocale
          * @param string $sCurrency
          * @param string $sLanguage
-         *
          * @return      array
          * @since   3.9.0
          * @since   4.3.0   Added the `$sASIN`, `$sLocale`, `$sCurrency`, and `$sLanguage` parameters.
