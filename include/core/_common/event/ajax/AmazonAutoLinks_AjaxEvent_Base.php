@@ -76,7 +76,7 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
         $_bSuccess  = true;
         try {
 
-            if ( $this->_bLoggedIn && ! get_current_user_id() ) {
+            if ( ! $this->_bGuest && ! get_current_user_id() ) {
                 throw new Exception( __( 'Could not get a user ID.', 'amazon-auto-links' ) );
             }
             $_asMessage = $this->_getResponse( $_POST );
