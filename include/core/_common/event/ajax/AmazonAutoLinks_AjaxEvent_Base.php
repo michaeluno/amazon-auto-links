@@ -11,7 +11,7 @@
 
 /**
  * Class AmazonAutoLinks_AjaxEvent_Base
- * @sinec       3.7.6
+ * @since       3.7.6
  */
 abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Action_Base {
 
@@ -74,11 +74,9 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
         );
 
         $_bSuccess  = true;
-        $_asMessage = '';
         try {
 
-            $_iUserID = get_current_user_id();
-            if ( ! $_iUserID ) {
+            if ( $this->_bLoggedIn && ! get_current_user_id() ) {
                 throw new Exception( __( 'Could not get a user ID.', 'amazon-auto-links' ) );
             }
             $_asMessage = $this->_getResponse( $_POST );
@@ -103,6 +101,7 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
 
     /**
      * Override this method to return a response.
+     * @param  array $aPost The $_POST array.
      * @return array|string
      */
     protected function _getResponse( array $aPost ) {
