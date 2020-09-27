@@ -44,11 +44,14 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_UnitTypeLoader_
      * Stores protected meta key names.
      */    
     public $aProtectedMetaKeys = array(
-    );    
+    );
 
+    /**
+     * URL unit specific event callbacks.
+     * @param $sScriptPath
+     */
     protected function _construct( $sScriptPath ) {
-        // URL unit specific event callbacks
-        new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher;
+        // new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher; // @deprecated 4.3.2
         new AmazonAutoLinks_Unit_URL_Event_RenewCacheAction;
     }
 

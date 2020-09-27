@@ -16,6 +16,7 @@
  * This class helps to just remove unnecessary elements from retrieved HTML outputs.
  *
  * @since       3.7.5
+ * @deprecated  4.3.2 Unused
  */
 class AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher extends AmazonAutoLinks_Event___Filter_CustomerReviewCache {
 
