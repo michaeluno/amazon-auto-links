@@ -44,7 +44,7 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
         $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
         $_oDOM         = new AmazonAutoLinks_DOM;
         $_oDoc         = $_oDOM->loadDOMFromHTML( $_sHeader );
-//        $_oDOM->removeTags( $_oDoc, array( 'script' ) );
+        $_oDOM->removeTags( $_oDoc, array( 'script' ) );    // in order to use jQuery, comment out this line.
         $_oXpath       = new DOMXPath( $_oDoc );
         $_oTags        = $_oXpath->query( "/html/head" );
         $_oTag         = $_oTags->item( 0 );
@@ -66,15 +66,6 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
     window.addEventListener( 'DOMContentLoaded', function( e ) {
         aalCallSetButtonPreviewIframeStyle(); 
     } );
-    /*(function($){
-        $( document ).ready( function() {
-            // aalCallSetButtonPreviewIframeStyle();
-            $( 'button.amazon-auto-links-button' ).on( 'change', function(){
-                console.log( 'button changed' ); 
-                aalCallSetButtonPreviewIframeStyle();        
-            } );
-        } );
-    }( jQuery ));*/
 </script>
 SCRIPT;
         $_sHead        = "<head>" . $_oDOM->getInnerHTML( $_oTag ) . $_sScript . "</head>";
