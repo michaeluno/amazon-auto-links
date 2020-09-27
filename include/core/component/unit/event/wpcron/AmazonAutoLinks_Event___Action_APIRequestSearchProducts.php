@@ -159,11 +159,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
              */
             private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
 
-                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%', '%rating%', '%_discount_rate%', '%_review_rate%' ) ) ) {
+                // Reviews
+                if ( AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%' ) ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
+                }
+
+                // Ratings
+                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.3 removed '%_discount_rate%' as it should be nothing to with ratings.
                     return;
                 }
-                $_sReviewURL = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $sASIN, $sLocale );
-                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews2( $_sReviewURL, $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage );
+                AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
 
             }
 

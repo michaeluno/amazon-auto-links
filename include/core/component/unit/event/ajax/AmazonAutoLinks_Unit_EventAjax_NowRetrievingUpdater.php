@@ -52,7 +52,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 $this->___getElementsByASINLocaleCurLang( $_aDueElements, $_aProducts )
             );
         }
-        $this->___handleCustomerReviews( $_aElements );
+        $this->___handleRatingsAndReviews( $_aElements );
         return $_aElements;
 
     }
@@ -60,55 +60,58 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * @param array $aResults
          * @since 4.3.1
          */
-        private function ___handleCustomerReviews( array $aResults ) {
+        private function ___handleRatingsAndReviews( array $aResults ) {
 
-            // Extract only the review items.
+            // Extract only the review and rating items.
+            $_aRatingItems = array();
             $_aReviewItems = array();
             foreach( $aResults as $_iIndex => $_aItem ) {
-                if ( 'formatted_rating' !== $_aItem[ 'context' ] ) {
-                    continue;
-                }
                 if ( $_aItem[ 'set' ] ) {
                     continue;
                 }
-                $_aReviewItems[] = $_aItem;
+                if ( 'formatted_rating' === $_aItem[ 'context' ] ) {
+                    $_aRatingItems[] = $_aItem;
+                    continue;
+                }
+                if ( 'review' === $_aItem[ 'context' ] ) {
+                    $_aReviewItems[] = $_aItem;
+                    continue;
+                }
             }
 
             // Perform an HTTP request only for the first item. Schedule fetching the rest. This is to give some interval between requests to avoid being blocked.
-            $_aFirstItem = array_shift($_aReviewItems );
+            $_aFirstItem = array_shift($_aRatingItems );
             if ( empty( $_aFirstItem ) ) {
                 return;
             }
             do_action(
-                'aal_action_api_get_customer_review2',
+                'aal_action_api_get_product_rating',
                 array(
-                    AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_aFirstItem[ 'asin' ], $_aFirstItem[ 'locale' ] ),
-                    $_aFirstItem[ 'asin' ],
-                    $_aFirstItem[ 'locale' ],
+                    "{$_aFirstItem[ 'asin' ]}|{$_aFirstItem[ 'locale' ]}|{$_aFirstItem[ 'currency' ]}|{$_aFirstItem[ 'language' ]}", // product id
                     $_aFirstItem[ 'cache_duration' ],
                     false,
-                    $_aFirstItem[ 'currency' ],
-                    $_aFirstItem[ 'language' ],
                 )
             );
-            foreach( $_aReviewItems as $_aItem ) {
-                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews2(
-                    AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_aItem[ 'asin' ], $_aItem[ 'locale' ] ),
-                    $_aItem[ 'asin' ],
-                    $_aItem[ 'locale' ],
+
+            // Rating
+            foreach( $_aRatingItems as $_aItem ) {
+                AmazonAutoLinks_Event_Scheduler::scheduleRating(
+                    "{$_aItem[ 'asin' ]}|{$_aItem[ 'locale' ]}|{$_aItem[ 'currency' ]}|{$_aItem[ 'language' ]}", // product id
                     $_aItem[ 'cache_duration' ],
-                    false,
-                    $_aItem[ 'currency' ],
-                    $_aItem[ 'language' ]
+                    false
+                );
+            }
+            // Reviews
+            foreach( $_aReviewItems as $_aItem ) {
+                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
+                    "{$_aItem[ 'asin' ]}|{$_aItem[ 'locale' ]}|{$_aItem[ 'currency' ]}|{$_aItem[ 'language' ]}", // product id
+                    $_aItem[ 'cache_duration' ],
+                    false
                 );
             }
 
-
         }
 
-            private function ___getReviewPageURL() {
-            return '';
-            }
         /**
          * @param array $aAllItems
          * @return array

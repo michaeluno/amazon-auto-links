@@ -17,15 +17,14 @@
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 {
 
-    protected $_sActionHookName = 'aal_action_api_get_rating';
+    protected $_sActionHookName = 'aal_action_api_get_product_rating';
 
     /**
      *
      */
-    protected function _doAction( /* $sURL, $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew */ ) {
-
-        $sURL   = $sASIN = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
-        $this->___setParameters( func_get_args(), $sURL, $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
+    protected function _doAction( /* $sProductID, $iCacheDuration, $bForceRenew */ ) {
+        $sASIN = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
+        $this->___setParameters( func_get_args(), $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
         $_sURL  = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
         $_sHTML = $this->___getDataFromWidgetPage( $_sURL, $iCacheDuration, $bForceRenew );
         $_aRow  = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );
@@ -42,24 +41,23 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
 
     }
         /**
-         * @param array $aParameters
-         * @param string $sURL
-         * @param string $sASIN
-         * @param string $sLocale
-         * @param string $sCurrency
-         * @param string $sLanguage
+         * @param array   $aParameters
+         * @param string  $sASIN
+         * @param string  $sLocale
+         * @param string  $sCurrency
+         * @param string  $sLanguage
          * @param integer $iCacheDuration
          * @param boolean $bForceRenew
          */
-        private function ___setParameters( $aParameters, &$sURL, &$sASIN, &$sLocale, &$sCurrency, &$sLanguage, &$iCacheDuration, &$bForceRenew ) {
-            $aParameters    = $aParameters + array( null, null, null, null, null, null, null );
-            $sURL           = $aParameters[ 0 ];
-            $sASIN          = $aParameters[ 1 ];
-            $sLocale        = $aParameters[ 2 ];
-            $sCurrency      = $aParameters[ 3 ];
-            $sLanguage      = $aParameters[ 4 ];
-            $iCacheDuration = $aParameters[ 5 ];
-            $bForceRenew    = $aParameters[ 6 ];
+        private function ___setParameters( $aParameters, &$sASIN, &$sLocale, &$sCurrency, &$sLanguage, &$iCacheDuration, &$bForceRenew ) {
+            $aParameters    = $aParameters + array( null, null, null );
+            $iCacheDuration = $aParameters[ 1 ];
+            $bForceRenew    = $aParameters[ 2 ];
+            $_aProductID    = explode( '|', $aParameters[ 0 ] ) + array( null, null, null, null );
+            $sASIN          = $_aProductID[ 0 ];
+            $sLocale        = $_aProductID[ 1 ];
+            $sCurrency      = $_aProductID[ 2 ];
+            $sLanguage      = $_aProductID[ 3 ];
         }
         /**
          * @param string $sURL

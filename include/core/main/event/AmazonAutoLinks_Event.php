@@ -109,6 +109,7 @@ class AmazonAutoLinks_Event {
                 'aal_action_unit_prefetch',
                 'aal_action_api_get_products_info',         // 3.7.7
                 'aal_action_api_get_customer_review2',
+                'aal_action_api_get_product_rating',
                 'aal_action_http_cache_renewal',
                 'aal_action_check_tasks',                   // 4.3.0
                 'aal_action_proxy_update',

@@ -15,7 +15,7 @@
 class AmazonAutoLinks_ScraperDOM_CustomerReview2 extends AmazonAutoLinks_ScraperDOM_Base {
 
     /**
-     * @return  integer
+     * @return  integer|null
      */
     public function getRating() {
 
@@ -31,7 +31,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2 extends AmazonAutoLinks_Scraper
     }
 
     /**
-     * @return integer
+     * @return integer|null
      */
     public function getNumberOfReviews() {
         $_oXpath                = new DOMXPath( $this->oDoc );
@@ -44,7 +44,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2 extends AmazonAutoLinks_Scraper
                 '', // replacement
                 $_oNode_NumberOfReviews->nodeValue   // subject
             )
-            : 0;
+            : null;
     }
 
     /**
