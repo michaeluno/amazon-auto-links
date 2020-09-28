@@ -48,7 +48,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2 extends AmazonAutoLinks_Scraper
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCustomerReviews() {
         $this->oDOM->removeTags( $this->oDoc, array( 'script' ) );
@@ -58,7 +58,6 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2 extends AmazonAutoLinks_Scraper
         )->item( 0 );
         return $_oReviewContainer
             ? $this->oDoc->saveXml( $_oReviewContainer, LIBXML_NOEMPTYTAG )
-            : '';
-
+            : null;
     }
 }
