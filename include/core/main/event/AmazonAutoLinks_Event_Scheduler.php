@@ -53,7 +53,7 @@ class AmazonAutoLinks_Event_Scheduler {
      */
     static public function scheduleCustomerReviews( $sProductID, $iCacheDuration, $bForceRenew ) {
 
-        $_bScheduled = self::___scheduleTask( 'aal_action_api_get_customer_review2', $sProductID, $iCacheDuration, $bForceRenew );
+        $_bScheduled = self::___scheduleTask( 'aal_action_api_get_customer_review', $sProductID, $iCacheDuration, $bForceRenew );
         if ( $_bScheduled ) {
             AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
         }
