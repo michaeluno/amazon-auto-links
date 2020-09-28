@@ -28,7 +28,8 @@ class AmazonAutoLinks_ScraperDOM_WidgetUserRating extends AmazonAutoLinks_Scrape
         $_sText = $_oSpan ? trim( $_oSpan->nodeValue ) : '';
 
         // Extract numbers. There should be two numbers. For example, 4.5 and 5 for "4.5 out of 5"
-        preg_match_all( '/\d[\.,]?\d?(?!$)/', $_sText, $_aMatches );
+        $_sText = trim( $_sText, '.' );
+        preg_match_all( '/\d[\.,]?\d?/', $_sText, $_aMatches );
         $_aMatches = $_aMatches[ 0 ];
         if ( empty( $_aMatches ) ) {
             return null;
