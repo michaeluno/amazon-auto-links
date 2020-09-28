@@ -47,7 +47,7 @@ class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 e
             "SELECT COUNT(*) FROM `{$_sTableName}` WHERE `{$_sColumn}` IS NULL OR `{$_sColumn}` = ' ';"
         );
         if ( $_iCountRow ) {
-            $_aQueries[] = "UPDATE `{$_sTableName}`"
+            $_aQueries[] = "UPDATE IGNORE `{$_sTableName}`"
                 . " SET product_id = CONCAT( SUBSTRING( asin_locale, 1, 10 ), '|', SUBSTRING( asin_locale, 12, 2 ), '|', preferred_currency, '|', language )"
                 . " WHERE product_id IS NULL OR product_id = ''"
                 . " ;";

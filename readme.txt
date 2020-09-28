@@ -323,6 +323,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.3.3 =
+- Fixed a bug that caused an error "database error Duplicate entry '...' for key 'product_id' for query ..." when activating a plugin after downgrading it.
+
 = 4.3.2 - 09/28/2020 =
 - Fixed a bug that caused a browser console error in the setting screens.
 - Fixed a bug that Ajax requests for non-logged-in visitors failed with the message, "Could not get a user ID".
