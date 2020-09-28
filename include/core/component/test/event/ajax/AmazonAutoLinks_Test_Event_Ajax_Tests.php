@@ -108,14 +108,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
                     // Perform testing
                     ob_start(); // Capture start
-                    $_bsResult = $this->___getEachMethodTested( $_sClassName, $_sMethodName );
+                    $_aResult  = $this->___getEachMethodTested( $_sClassName, $_sMethodName, $_sPurpose, $sFilePath );
                     $_sContent = ob_get_contents();
                     ob_end_clean(); // Capture end
                     if ( $_sContent ) {
                         throw new Exception( $_sContent, 1 );
                     }
-
-                    $_aResult = $this->___getResultFormatted( $_bsResult, $_sClassName, $_sMethodName, $_sPurpose, $sFilePath );
 
                 }
                 // Tests can throw exceptions (Exception) so here caching them.
@@ -215,6 +213,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 $_sPurpose     = $sPurpose ? $sPurpose . ' ' : '';
                 $_sClassMethod = $sClassName . '::' . $sMethodName . '()';
                 $_aDefault     = array(
+                    'message' => null,
                     'name'    => $_sClassMethod,
                     'purpose' => $_sPurpose,
                 ) + $this->___aResultStructure;
@@ -269,19 +268,26 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $_aAnnotations = $_aMatches[ 1 ];
             return implode( ' ', $_aAnnotations );
         }
+
         /**
-         * @param $sClassName
-         * @param $sMethodName
-         *
-         * @return mixed|void
-        */
-        private function ___getEachMethodTested( $sClassName, $sMethodName ) {
-            $_oClass = AmazonAutoLinks_AdminPageFramework_ClassTester::getInstance( $sClassName );
-            return AmazonAutoLinks_AdminPageFramework_ClassTester::call(
-                $_oClass,           // subject class object
-                $sMethodName,       // method name (private/protected supported)
-                array()      // method parameters
-            );
+         * @param string $sClassName
+         * @param string $sMethodName
+         * @param string $sPurpose
+         * @param string $sFilePath
+         * @return array
+         * @throws ReflectionException
+         */
+        private function ___getEachMethodTested( $sClassName, $sMethodName, $sPurpose, $sFilePath ) {
+
+            $_oMockClass = new AmazonAutoLinks_MockClass( $sClassName );
+            $_mResult    = $_oMockClass->call( $sMethodName );
+            $_aResult    = $this->___getResultFormatted( $_mResult, $sClassName, $sMethodName, $sPurpose, $sFilePath );
+            $_aOutputs   = $_oMockClass->get( 'aOutputs' );
+            if ( ! empty( $_aOutputs ) ) {
+                $_aResult[ 'message' ] .= implode( '<hr />', $_aOutputs );
+            }
+            return $_aResult;
+
         }
 
     /**

@@ -17,6 +17,12 @@
 class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Stores user outputs thrown in the middle of a test method.
+     * @var array
+     */
+    public $aOutputs = array();
+
+    /**
      * @param $mValue
      * @return string
      */
@@ -30,8 +36,16 @@ class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
      * @throws Exception
      * @deprecated 4.3.1    The line and file given by the stacktrace are not accurate.
      */
-    protected function _throwError( $sErrorMessage, $iCode=0 ) {
+/*    protected function _throwError( $sErrorMessage, $iCode=0 ) {
         throw new Exception( $sErrorMessage, ( integer ) $iCode );
+    }*/
+
+    /**
+     * @param string $sText
+     * @since 4.3.3
+     */
+    protected function _output( $sText ) {
+        $this->aOutputs[] = $sText;
     }
 
 }
