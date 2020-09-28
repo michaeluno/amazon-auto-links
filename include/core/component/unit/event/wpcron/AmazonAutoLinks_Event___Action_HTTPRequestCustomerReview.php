@@ -43,41 +43,47 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
         $_sCurrency      = $_aProductID[ 2 ];
         $_sLanguage      = $_aProductID[ 3 ];
         $_sURL           = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_sASIN, $_sLocale );
-        
-        $_oHTTP          = new AmazonAutoLinks_HTTPClient(
-            $_sURL,
-            $_iCacheDuration,
-            array(  // http arguments
-                'timeout'     => 20,
-                'redirection' => 20,
-            ),
-            'customer_review2'
-        );
-        if ( $_bForceRenew ) {
-            $_oHTTP->deleteCache();
-        }
-        $_aRow           = $this->___getRowFormatted(
-            $_sURL,
-            $_oHTTP->get(),
-            $_iCacheDuration,
-            $_oHTTP->getCharacterSet(), // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
-            $_sASIN,
-            $_sLocale,
-            $_sCurrency,
-            $_sLanguage
-        );
-        if ( empty( $_aRow ) ) {
-            return;
-        }
-
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-        if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '<' ) ) {
-            $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $_sLocale ), $_aRow, $_sCurrency, $_sLanguage );
-            return;
-        }
-        $_mResult = $_oProductTable->setRow( $_aRow );
+        $_sCharacterSet  = '';
+        $_sHTML          = $this->___getReviewPage( $_sURL, $_sCharacterSet, $_iCacheDuration, $_bForceRenew );
+        $_aRow           = $this->___getRowFormatted( $_sURL, $_sHTML, $_iCacheDuration, $_sCharacterSet, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
+        $this->___updateRow( $_aRow, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
 
     }
+        private function ___updateRow( array $aRow, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
+            if ( empty( $aRow ) ) {
+                return;
+            }
+            $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '<' ) ) {
+                $_oProductTable->setRowByASINLocale( $sASIN . '_' . strtoupper( $sLocale ), $aRow, $sCurrency, $sLanguage );
+                return;
+            }
+            $_oProductTable->setRow( $aRow );
+        }
+        /**
+         * @param  string  $sURL
+         * @param  string  $sCharacterSet
+         * @param  integer $iCacheDuration
+         * @param  boolean $bForceRenew
+         * @return string
+         * @since  4.3.3
+         */
+        private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew ) {
+            $_oHTTP          = new AmazonAutoLinks_HTTPClient(
+                $sURL,
+                $iCacheDuration,
+                array(  // http arguments
+                    'timeout'     => 20,
+                    'redirection' => 20,
+                ),
+                'customer_review2'
+            );
+            if ( $bForceRenew ) {
+                $_oHTTP->deleteCache();
+            }
+            $sCharacterSet = $_oHTTP->getCharacterSet(); // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
+            return $_oHTTP->get();
+        }
 
         /**
          *
@@ -98,11 +104,11 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
             $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $sHTML );
             $_inRating      = $_oScraper->getRating();
             $_inReviewCount = $_oScraper->getNumberOfReviews();
-
-            $_aRow = array(
+            $_snReviews     = $_oScraper->getCustomerReviews();
+            $_aRow          = array(
                 'customer_review_url'     => $sURL,
                 'customer_review_charset' => $sReviewCharSet,
-                'customer_reviews'        => $_oScraper->getCustomerReviews(),
+                'customer_reviews'        => is_null( $_snReviews ) ? '' : $_snReviews,
                 'modified_time'           => date( 'Y-m-d H:i:s' ),
             );
 
