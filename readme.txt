@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.1
+Stable tag:         4.3.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,6 +322,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - @todo add a clone action link to buttons.
 
 == Changelog ==
+
+= 4.3.2 - 09/28/2020 =
+- Fixed a bug that caused a browser console error in the setting screens.
+- Fixed a bug that Ajax requests for non-logged-in visitors failed with the message, "Could not get a user ID".
 
 = 4.3.1 - 09/26/2020 =
 - Tweaked the setting UI to include a current tab title in the `<title>` tag.
