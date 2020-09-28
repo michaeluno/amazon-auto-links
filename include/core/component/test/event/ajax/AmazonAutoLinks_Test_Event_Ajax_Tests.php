@@ -58,7 +58,9 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $_aResults = $this->_getResults( $_sClassName, $_sFilePath, $_aTags );
 
         } catch ( Exception $_oException ) {
-            throw new Exception( $this->___getExceptionErrorMessage( $_oException ) );
+            throw new Exception(
+                $_oException->getMessage() . ' on the file, ' . $_oException->getFile() . ', Line: ' . $_oException->getLine()
+            );
         }
 
         return $_aResults;
@@ -83,7 +85,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 if ( ! $this->___canMethodRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
-                $_aResults[]  = $this->___getMethodTested( $_oMethod, $sFilePath );
+                $_aResults[] = $this->___getMethodTested( $_oMethod, $sFilePath );
 
             }
             return $_aResults;
