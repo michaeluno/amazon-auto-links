@@ -26,7 +26,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
         $sASIN = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
         $this->___setParameters( func_get_args(), $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
         $_sURL  = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
-        $_sHTML = $this->___getDataFromWidgetPage( $_sURL, $iCacheDuration, $bForceRenew );
+        $_sHTML = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew );
         $_aRow  = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );
         if ( empty( $_aRow ) ) {
             return;
@@ -66,16 +66,21 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          * @see https://stackoverflow.com/questions/8279478/amazon-product-advertising-api-get-average-customer-rating/31329604#31329604
          * @return string
          */
-        private function ___getDataFromWidgetPage( $sURL, $iCacheDuration, $bForceRenew ) {
+        private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew ) {
 
-            $_oHTTP          = new AmazonAutoLinks_HTTPClient(
+            static $_sUbidMain;
+            $_sUbidMain = isset( $_sUbidMain ) ? $_sUbidMain : $this->___getCookie_ubid_main();
+            $_oHTTP     = new AmazonAutoLinks_HTTPClient(
                 $sURL,
                 $iCacheDuration,
                 array(  // http arguments
                     'timeout'     => 20,
                     'redirection' => 20,
                     'cookies' => array(
-                        'ubid-main' => $this->___getCookie_ubid_main(),
+                        'ubid-main'   => $_sUbidMain,
+                        'ubid-acbjp' => $_sUbidMain,
+//                        'ubid-acbjp' => '358-0279311-4309900',
+//                        'session-id'
                     ),
                 ),
                 'rating'
@@ -101,12 +106,21 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
         /**
          * @param string $sASIN
          * @param string $sLocale
+         * @param boolean $bTest    Enable this only for testing.
          * @return string a URL
          */
-        private function ___getRatingWidgetPageURL( $sASIN, $sLocale ) {
+        private function ___getRatingWidgetPageURL( $sASIN, $sLocale, $bTest=false ) {
             // e.g. https://www.amazon.com/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E
-            $_sSchemeDomain  = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
-            return $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
+            $_sSchemeDomain = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
+            $_sURL          = $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
+            return $bTest
+                ? add_query_arg(
+                    array(
+                        'test' => mt_rand( 1, PHP_INT_MAX )
+                    ),
+                    $_sURL
+                )
+                : $_sURL;
         }
         /**
          * @param  string  $sHTML

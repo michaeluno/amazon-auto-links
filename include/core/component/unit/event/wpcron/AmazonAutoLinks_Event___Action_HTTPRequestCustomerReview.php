@@ -42,13 +42,22 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
         $_sLocale        = $_aProductID[ 1 ];
         $_sCurrency      = $_aProductID[ 2 ];
         $_sLanguage      = $_aProductID[ 3 ];
-        $_sURL           = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_sASIN, $_sLocale );
+        $_sURL           = $this->___getReviewPageURL( $_sASIN, $_sLocale );
         $_sCharacterSet  = '';
         $_sHTML          = $this->___getReviewPage( $_sURL, $_sCharacterSet, $_iCacheDuration, $_bForceRenew );
         $_aRow           = $this->___getRowFormatted( $_sURL, $_sHTML, $_iCacheDuration, $_sCharacterSet, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
         $this->___updateRow( $_aRow, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
 
     }
+        /**
+         * @param $sASIN
+         * @param $sLocale
+         * @return string
+         * @since 4.3.3
+         */
+        private function ___getReviewPageURL( $sASIN, $sLocale ) {
+            return AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $sASIN, $sLocale );
+        }
         private function ___updateRow( array $aRow, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
             if ( empty( $aRow ) ) {
                 return;
