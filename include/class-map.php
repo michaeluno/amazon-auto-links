@@ -195,7 +195,7 @@ return array(
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
-    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2.php", 
+    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php",
     "AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
     "AmazonAutoLinks_Event___Action_UnitPrefetchByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_UnitPrefetchByID.php", 
     "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 

@@ -15,7 +15,7 @@
  * @since        4.3.3
  * @remark       Not used at the moment and still being tested.
  */
-class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 {
+class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview {
 
     protected $_sActionHookName = 'aal_action_api_get_product_rating';
 

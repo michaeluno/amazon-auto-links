@@ -12,8 +12,9 @@
  * Retrieves customer reviews and the rating of the given product and updates the product cache.
  * @package      Amazon Auto Links
  * @since        3.9.0
+ * @since        4.3.3  Renamed from `AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2`.
  */
-class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2 extends AmazonAutoLinks_Event___Action_Base {
+class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName = 'aal_action_api_get_customer_review2';
 
