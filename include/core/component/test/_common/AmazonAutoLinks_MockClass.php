@@ -43,6 +43,17 @@ class AmazonAutoLinks_MockClass {
     }
 
     /**
+     * @param string $sPropertyName
+     * @return mixed
+     * @throws ReflectionException
+     */
+    public function get( $sPropertyName ) {
+        $_oReflectionProperty = $this->oReflectionClass->getProperty( $sPropertyName );
+        $_oReflectionProperty->setAccessible(true );
+        return $_oReflectionProperty->getValue( $this->oClass );
+    }
+
+    /**
      * @param $sMethodName
      * @param mixed ...$aParameters
      * @return mixed
