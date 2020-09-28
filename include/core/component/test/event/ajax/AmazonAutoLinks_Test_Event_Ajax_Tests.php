@@ -59,7 +59,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
         } catch ( Exception $_oException ) {
             throw new Exception(
-                $_oException->getMessage() . ' on the file, ' . $_oException->getFile() . ', Line: ' . $_oException->getLine()
+                $_oException->getMessage() . '<hr />' . 'Line: ' . $_oException->getLine()
             );
         }
 
@@ -78,15 +78,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='test' ) {
 
             $_aResults   = array();
-
             $_oClass     = new ReflectionClass( $sClassName );
             foreach( $_oClass->getMethods( ReflectionMethod::IS_PUBLIC ) as $_oMethod ) {
-
                 if ( ! $this->___canMethodRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
                 $_aResults[] = $this->___getMethodTested( $_oMethod, $sFilePath );
-
             }
             return $_aResults;
 
@@ -174,32 +171,47 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
             }
             /**
-             * @param Exception $oException
+             * @param Exception|AmazonAutoLinks_Test_Exception $oException
              * @param string $sClassName
              * @param string $sMethodName
              * @param string $sPurpose
              * @return array
              */
             private function ___getExceptionResult( Exception $oException, $sClassName, $sMethodName, $sPurpose ) {
-                $_aDefault = array(
+                $_sClassName = get_class( $oException );
+                $_sMessage   = 'AmazonAutoLinks_Test_Exception' === $_sClassName
+                    ? implode( '<hr />', array_map( array( $this, '___replyToEncloseInP' ), $oException->getMessages() ) )
+                    : $oException->getMessage();
+                $_iLine      = 'AmazonAutoLinks_Test_Exception' === $_sClassName
+                    ? $oException->get( 'line' )
+                    : $oException->getLine();
+                $_aDefault   = array(
                         'name'    => $sClassName . '::' . $sMethodName . '()',
                         'purpose' => $sPurpose,
-                        'line'    => $oException->getLine(),
+                        'line'    => $_iLine,
                     ) + $this->___aResultStructure;
                 if ( 1 === $oException->getCode() ) {
                     return array(
                         'success' => false,
-                        'message' => $oException->getMessage(),
+                        'message' => $_sMessage,
                         'raw'     => true,
                     ) + $_aDefault;
                 }
                 return array(
                     'success' => false,
-                    'message' => $oException->getMessage(),
+                    'message' => $_sMessage,
                     'raw'     => false,
                 ) + $_aDefault;
 
             }
+                /**
+                 * @param $sMessage
+                 * @return string
+                 * @callback array_map()
+                 */
+                private function ___replyToEncloseInP( $sMessage ) {
+                    return "<p>" . $sMessage . "</p>";
+                }
 
             /**
              * @param string $mResult
@@ -276,17 +288,35 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
          * @param string $sFilePath
          * @return array
          * @throws ReflectionException
+         * @throws AmazonAutoLinks_Test_Exception
+         * @throws Exception
          */
         private function ___getEachMethodTested( $sClassName, $sMethodName, $sPurpose, $sFilePath ) {
 
-            $_oMockClass = new AmazonAutoLinks_MockClass( $sClassName );
-            $_mResult    = $_oMockClass->call( $sMethodName );
-            $_aResult    = $this->___getResultFormatted( $_mResult, $sClassName, $sMethodName, $sPurpose, $sFilePath );
-            $_aOutputs   = $_oMockClass->get( 'aOutputs' );
-            if ( ! empty( $_aOutputs ) ) {
-                $_aResult[ 'message' ] .= implode( '<hr />', $_aOutputs );
+            $_oTestClass = new $sClassName;
+            try {
+
+                $_mResult    = $_oTestClass->$sMethodName();
+                $_aResult    = $this->___getResultFormatted( $_mResult, $sClassName, $sMethodName, $sPurpose, $sFilePath );
+                $_aOutputs   = $_oTestClass->aOutputs;
+                if ( ! empty( $_aOutputs ) ) {
+                    $_aResult[ 'message' ] .= implode( '<hr />', $_aOutputs );
+                }
+                return $_aResult;
+
+            } catch ( Exception $_oException ) {
+
+                if ( 'AmazonAutoLinks_Test_Exception' !== get_class( $_oException ) ) {
+                    throw $_oException;
+                }
+                // Otherwise it is the AmazonAutoLinks_Test_Exception
+                $_aOutputs   = $_oTestClass->aOutputs;
+                if ( ! empty( $_aOutputs ) ) {
+                    $_oException->addMessage( implode( '<hr />', $_aOutputs ) );
+                }
+                throw $_oException;
+
             }
-            return $_aResult;
 
         }
 

@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.1 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.2 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -172,6 +172,7 @@ return array(
     "AmazonAutoLinks_MockClass" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_MockClass.php", 
     "AmazonAutoLinks_Run_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Run_Base.php", 
     "AmazonAutoLinks_Scratch_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Scratch_Base.php", 
+    "AmazonAutoLinks_Test_Exception" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Test_Exception.php", 
     "AmazonAutoLinks_UnitTest_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_UnitTest_Base.php", 
     "AmazonAutoLinks_ThirdPartySupportLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/AmazonAutoLinks_ThirdPartySupportLoader.php", 
     "AmazonAutoLinks_AALBSupportLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/aalb/AmazonAutoLinks_AALBSupportLoader.php", 
@@ -195,7 +196,7 @@ return array(
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
-    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php",
+    "AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php", 
     "AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
     "AmazonAutoLinks_Event___Action_UnitPrefetchByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_UnitPrefetchByID.php", 
     "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
