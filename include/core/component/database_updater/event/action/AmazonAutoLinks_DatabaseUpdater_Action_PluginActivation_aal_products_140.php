@@ -21,9 +21,7 @@ class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 e
      * @since   4.2.0
      */
     public function __construct() {
-
         add_action( 'aal_action_plugin_activated', array( $this, 'replyToDoAction' ), 10 );
-
     }
 
     /**
@@ -32,40 +30,59 @@ class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 e
      */
     public function replyToDoAction() {
 
-        $_sProductsTableVersion = get_option( 'aal_products_version', '0' );
-        if ( ! $_sProductsTableVersion ) {
+        if ( ! $this->___shouldProceed() ) {
             return;
         }
-        if ( version_compare( $_sProductsTableVersion, '1.4.0b', '<' ) ) {
-            return;
-        }
-        $_aQueries      = array();
+
         $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
-        $_sTableName    = $_oTable->getTableName();
-        $_sColumn       = 'product_id';
-        $_iCountRow     = $_oTable->getVariable(
-            "SELECT COUNT(*) FROM `{$_sTableName}` WHERE `{$_sColumn}` IS NULL OR `{$_sColumn}` = ' ';"
-        );
+        $_iCountRow     = $this->___getCountOfEmptyCell( $_oTable, 'product_id' );
         if ( $_iCountRow ) {
-            $_aQueries[] = "UPDATE `{$_sTableName}`"
-                . " SET product_id = CONCAT( SUBSTRING( asin_locale, 1, 10 ), '|', SUBSTRING( asin_locale, 12, 2 ), '|', preferred_currency, '|', language )"
-                . " WHERE product_id IS NULL OR product_id = ''"
-                . " ;";
+            $this->___updateProductIDColumn( $_oTable );
         }
-        $_sColumn       = 'asin';
-        $_iCountRow     = $_oTable->getVariable(
-            "SELECT COUNT(*) FROM `{$_sTableName}` WHERE `{$_sColumn}` IS NULL OR `{$_sColumn}` = ' ';"
-        );
+        $_iCountRow     = $this->___getCountOfEmptyCell( $_oTable, 'asin' );
         if ( $_iCountRow ) {
-            $_aQueries[] = "UPDATE `{$_sTableName}`"
-            . " SET asin = CONCAT( SUBSTRING( asin_locale, 1, 10 ) )"
-            . " WHERE asin IS NULL OR asin = ''"
-            . " ;";
-        }
-        foreach( $_aQueries as $_sQuery ) {
-            $_oTable->getVariable( $_sQuery );
+            $this->___updateASINColumn( $_oTable );
         }
 
     }
+        private function ___shouldProceed() {
+            $_sProductsTableVersion = get_option( 'aal_products_version', '0' );
+            if ( ! $_sProductsTableVersion ) {
+                return false;
+            }
+            if ( version_compare( $_sProductsTableVersion, '1.4.0b', '<' ) ) {
+                return false;
+            }
+            return true;
+        }
+
+        private function ___updateProductIDColumn( AmazonAutoLinks_DatabaseTable_aal_products $oTable ) {
+            $_sTableName = $oTable->getTableName();
+            $_sQuery     = "UPDATE IGNORE `{$_sTableName}`"
+                . " SET product_id = CONCAT( SUBSTRING( asin_locale, 1, 10 ), '|', SUBSTRING( asin_locale, 12, 2 ), '|', preferred_currency, '|', language )"
+                . " WHERE product_id IS NULL OR product_id = ''"
+                . " ;";
+            return $oTable->getVariable( $_sQuery );
+        }
+        private function ___updateASINColumn( AmazonAutoLinks_DatabaseTable_aal_products $oTable ) {
+            $_sTableName = $oTable->getTableName();
+            $_sQuery     = "UPDATE `{$_sTableName}`"
+                . " SET asin = CONCAT( SUBSTRING( asin_locale, 1, 10 ) )"
+                . " WHERE asin IS NULL OR asin = ''"
+                . " ;";
+            return $oTable->getVariable( $_sQuery );
+        }
+        /**
+         * @param AmazonAutoLinks_DatabaseTable_aal_products $oTable
+         * @param $sColumnName
+         * @return int
+         * @since 4.3.3
+         */
+        private function ___getCountOfEmptyCell( AmazonAutoLinks_DatabaseTable_aal_products $oTable, $sColumnName ) {
+            $_sTableName    = $oTable->getTableName();
+            return ( integer ) $oTable->getVariable(
+                "SELECT COUNT(*) FROM `{$_sTableName}` WHERE `{$sColumnName}` IS NULL OR `{$sColumnName}` = ' ';"
+            );
+        }
 
 }
