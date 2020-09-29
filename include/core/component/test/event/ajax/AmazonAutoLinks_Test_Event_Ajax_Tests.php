@@ -50,22 +50,48 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $_sPHPCode   = AmazonAutoLinks_Test_Utility::getPHPCode( $_sFilePath );
             $_sClassName = AmazonAutoLinks_Test_Utility::getDefinedClass( $_sPHPCode );
 
-            if ( ! class_exists( $_sClassName ) ) {
-                include_once( $_sFilePath );
-            }
+            $this->___include( $_sClassName, $_sFilePath );
 
             $_aTags    = $this->getElementAsArray( $aPost, array( 'tags' ) );
             $_aResults = $this->_getResults( $_sClassName, $_sFilePath, $_aTags );
 
         } catch ( Exception $_oException ) {
+            // throw new Exception( $_oException->getMessage() . '<hr />' . 'Line: ' . $_oException->getLine() )
+            // Format
+            $_sClassName = isset( $_sClassName ) ? $_sClassName : '';
             throw new Exception(
-                $_oException->getMessage() . '<hr />' . 'Line: ' . $_oException->getLine()
+                // results array
+                array(
+                    // each result array
+                    $this->___getExceptionResult( $_oException, $_sClassName, '', '' )
+                )
             );
         }
 
         return $_aResults;
 
     }
+
+        /**
+         * @param string $sClassName
+         * @param string $sFilePath
+         * @throws Exception
+         */
+        private function ___include( $sClassName, $sFilePath ) {
+            if ( class_exists( $sClassName ) ) {
+                return;
+            }
+            // In case of a PHP error
+            ob_start(); // Capture start
+            include_once( $sFilePath );
+            $_sPHPError = ob_get_contents();
+            ob_end_clean(); // Capture end
+            if ( ! $_sPHPError ) {
+                return;
+            }
+            throw new Exception( 'PHP Error occurred during a test.<hr />' . $_sPHPError );
+        }
+
         /**
          * @param string $sClassName The class name to test.
          * @param string $sFilePath The file path of the class.
@@ -186,7 +212,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     ? $oException->get( 'line' )
                     : $oException->getLine();
                 $_aDefault   = array(
-                        'name'    => $sClassName . '::' . $sMethodName . '()',
+                        'name'    => $sClassName . ( $sMethodName ? '::' . $sMethodName . '()' : '' ),
                         'purpose' => $sPurpose,
                         'line'    => $_iLine,
                     ) + $this->___aResultStructure;

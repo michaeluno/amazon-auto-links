@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.0.3
+ * @version 1.0.4
  */
 (function($){
 
@@ -116,15 +116,26 @@
 
                 },
                 success: function ( response ) {
+                    // Case: an exception thrown in the most outer try-catch block.
+
                     ___setResponseOutput( this.resultsArea, response, sFilePath );
                 },
+                // Reached when PHP parse error occurs
                 error: function( response ) {
-                    this.resultsArea.append(
-                        '<div class="response-error">'
-                        + '<span class="bold error">ERROR</span> '
-                        + response.responseText
-                        + '</div>'
-                    );
+                    response.result = [
+                        {
+                            'name': sFilePath.split(/[\\/]/).pop().split( '\.' ).shift(),  // file base name witout extension
+                            'line': 0,
+                            'success': false,
+                            'message': 'undefined' !== typeof response.responseText
+                                ? '<p>' + response.status + ': ' + response.statusText + '</p>'
+                                    + response.responseText
+                                : 'MISSING ERROR MESSAGE',
+                            'purpose': '',
+                            'raw': true,
+                        }
+                    ];
+                    ___setResponseOutput( this.resultsArea, response, sFilePath );
                 },
                 complete: function( self ) {
 
@@ -148,14 +159,6 @@
         }
 
         function ___setResponseOutput( _oTestTag, response, sFilePath ) {
-
-            if ( ! response.success ) {
-                _oTestTag.append( '<p class="test-error">'
-                        + '<span class="bold">ERROR</span> '
-                        + response.result
-                    + '</p>' );
-                return;
-            }
 
             $.each( response.result, function( sIndex, eachResult ) {
 
