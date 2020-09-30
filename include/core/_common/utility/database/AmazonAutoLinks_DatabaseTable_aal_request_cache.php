@@ -123,9 +123,9 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
 
     /**
      *
-     * @param array|string $asNames
-     * @param intger|null $iCacheDuration
-     * @return      array
+     * @param  array|string $asNames
+     * @param  integer|null $iCacheDuration
+     * @return array
      * The structure
      * array(
      *  'remained_time' => (integer)
@@ -143,6 +143,22 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
          * @param  array $aNames
          * @param  integer|null $iCacheDuration
          * @return array
+         * Structure:
+         *  array(
+         *      "{cache name}" => array(
+         *           'remained_time'          => 0,
+         *           'charset'                => '',
+         *           'data'                   => null,
+         *           'name'                   => '',
+         *           '_cache_duration'        => 0,
+         *           '_now'                   => time(),
+         *           '_modified_timestamp'    => strtotime( $aRow[ 'modified_time' ] ),
+         *           '_expiration_timestamp'  => strtotime( $aRow[ 'expiration_time' ] ),
+         *      ),
+         *      "{cache name}" => array(
+         *          ...
+         *       ),
+         * )
          */
         private function _getMultipleRows( $aNames, $iCacheDuration=null ) {
 
