@@ -62,7 +62,6 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
 
         $this->_addSection( $oFactory, $sPageSlug, $aSectionDefinition );
 
-        
     }
 
     /**
@@ -91,7 +90,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
             10, 
             4 
         );
-        
+
         $oFactory->addSettingSections(
             $sPageSlug,    // target page slug
             $aSectionDefinition
