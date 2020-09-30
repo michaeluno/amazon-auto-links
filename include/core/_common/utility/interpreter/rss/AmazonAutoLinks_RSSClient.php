@@ -32,12 +32,23 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
      * @since   3.7.6
      */
     public $bForceCacheClear = false;
+    /**
+     * @var array
+     */
+    private $aURLs;
+    /**
+     * @var int
+     */
+    private $iCacheDuration;
 
     /**
      * Sets up properties
      *
-     * @since       unknown
+     * @param array|string $asURLs
+     * @param int $iCacheDuration
+     * @param bool $bForceCacheClear
      * @since       3.7.6   Added the `$bForceCacheClear` parameter.
+     * @since       unknown
      */
     public function __construct( $asURLs, $iCacheDuration=86400, $bForceCacheClear=false ) {
         
