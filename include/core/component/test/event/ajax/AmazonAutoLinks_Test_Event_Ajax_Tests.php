@@ -114,6 +114,45 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             return $_aResults;
 
         }
+            /**
+             * Checks if the test method can be run.
+             * @param ReflectionMethod $oMethod
+             * @param string $sClassName
+             * @param array $aTags
+             * @param string $sMethodPrefix
+             * @return boolean
+             */
+            private function ___canMethodRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
+
+                // The method might be of its parent class. In that case, skip.
+                if ( strtolower( $oMethod->class ) !== strtolower( $sClassName ) ) {
+                    return false;
+                }
+
+                if ( ! $this->hasPrefix( $sMethodPrefix, $oMethod->getName() ) ) {
+                    return false;
+                }
+
+                if ( $this->___hasSkipAnnotation( $oMethod->getDeclaringClass() ) ) {
+                    return false;
+                }
+
+                if ( $this->___hasSkipAnnotation( $oMethod ) ) {
+                    return false;
+                }
+
+                if ( $this->___hasAllowedTags( $oMethod->getDeclaringClass(), $aTags ) ) {
+                    return true;
+                }
+
+                if ( ! $this->___hasAllowedTags( $oMethod, $aTags ) ) {
+                    return false;
+                }
+
+                return true;
+
+            }
+
 
             /**
              * @return array
@@ -146,36 +185,18 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 return $_aResult;
 
             }
+
             /**
-             * Checks if the test method can be run.
-             * @param ReflectionMethod $oMethod
-             * @param string $sClassName
-             * @param array $aTags
-             * @param string $sMethodPrefix
+             * If @skip or @deprecated annotations are present, it will be skipped.
+             * @param ReflectionClass|ReflectionMethod $oSubject
              * @return boolean
+             * @since 4.3.3
              */
-            private function ___canMethodRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
-
-                // The method might be of its parent class. In that case, skip.
-                if ( strtolower( $oMethod->class ) !== strtolower( $sClassName ) ) {
-                    return false;
-                }
-
-                if ( ! $this->hasPrefix( $sMethodPrefix, $oMethod->getName() ) ) {
-                    return false;
-                }
-
-                if ( $this->___hasAllowedTags( $oMethod->getDeclaringClass(), $aTags ) ) {
-                    return true;
-                }
-
-                if ( ! $this->___hasAllowedTags( $oMethod, $aTags ) ) {
-                    return false;
-                }
-
-                return true;
-
+            private function ___hasSkipAnnotation( $oSubject ) {
+                $_sDockBlock = $oSubject->getDocComment();
+                return ( boolean ) preg_match('/@(\Qskip\E)\s+.*?\n/s', $_sDockBlock );
             }
+
             /**
              * @param ReflectionClass|ReflectionMethod $oSubject
              * @param array $aSpecifiedTags
@@ -183,7 +204,6 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
              * @since 4.3.0
              */
             private function ___hasAllowedTags( $oSubject, array $aSpecifiedTags ) {
-
                 // Not specified, meaning all tags are allowed.
                 if ( empty( $aSpecifiedTags ) ) {
                     return true;
@@ -313,7 +333,6 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
          * @param string $sPurpose
          * @param string $sFilePath
          * @return array
-         * @throws ReflectionException
          * @throws AmazonAutoLinks_Test_Exception
          * @throws Exception
          */
@@ -326,7 +345,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 $_aResult    = $this->___getResultFormatted( $_mResult, $sClassName, $sMethodName, $sPurpose, $sFilePath );
                 $_aOutputs   = $_oTestClass->aOutputs;
                 if ( ! empty( $_aOutputs ) ) {
-                    $_aResult[ 'message' ] .= implode( '<hr />', $_aOutputs );
+                    $_aResult[ 'message' ] = implode( '<hr />', $_aOutputs ) . $_aResult[ 'message' ];
                 }
                 return $_aResult;
 
