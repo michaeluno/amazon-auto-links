@@ -278,6 +278,8 @@ abstract class AmazonAutoLinks_HTTPClient_Base extends AmazonAutoLinks_PluginUti
         /**
          *
          * @param       array       $aURLs      The URLs to be requested. The array keys must be indexed with cache names.
+         * @param       array       $aArguments
+         * @param       integer     $iCacheDuration
          * @return      array       Response array
          */
         protected function _getHTTPResponseWithCache( array $aURLs, $aArguments=array(), $iCacheDuration=86400 ) {
