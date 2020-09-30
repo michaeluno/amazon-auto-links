@@ -12,9 +12,13 @@
  * Adds the 'Log' form section to the 'Debug Log' tab.
  * 
  * @since       4.3.0
+ * @todo        Fix a bug that the Clear button does not take effect.
  */
 class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log extends AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log {
 
+    /**
+     * @return array|string[]
+     */
     protected function _getArguments() {
         return array(
             'section_id'    => 'log',
@@ -27,6 +31,7 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log extends AmazonAutoLi
      * 
      * @since       4.3.0
      * @return      void
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _construct( $oFactory ) {
         $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'debug_log' ];
