@@ -24,6 +24,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      */
     static public function isBlockedByAmazonCaptcha( $sHTML, $sURL ) {
 
+        if ( empty ( $sHTML ) ) {
+            return false;
+        }
         if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
             return false;
         }
