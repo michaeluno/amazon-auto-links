@@ -42,6 +42,9 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
 
     /**
      * Sets up hooks and properties.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param string $sPageSlug
+     * @param array $aSectionDefinition
      */
     public function __construct( $oFactory, $sPageSlug, array $aSectionDefinition=array() ) {
         
@@ -112,10 +115,15 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
  
     /**
      * Called upon form validation.
-     * 
+     *
+     * @param array $aInputs
+     * @param array $aOldInputs
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param array $aSubmitInfo
      * @callback        filter      'validation_{class name}_{section id}'
+     * @return array
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
@@ -124,12 +132,11 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
+            return $aOldInputs;
         }
                 
-        return $aInput;     
+        return $aInputs;
         
-    }        
-        
+    }
  
 }
