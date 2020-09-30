@@ -23,13 +23,10 @@ class AmazonAutoLinks_Log_Debug_Event_HTTPRequest extends AmazonAutoLinks_Plugin
     }
 
     public function replyToLog( $sURL, $aArguments, $sRequestType ) {
-        $_aData = isset( $aArguments[ 'body' ] )
-            ? array( 'body' => $aArguments[ 'body' ] )
-            : array();
         $_sStackTrace = in_array( $sRequestType, array( 'api' ), true )
             ? AmazonAutoLinks_Debug::getStackTrace()
             : '';
-        do_action( 'aal_action_debug_log', 'HTTP_REQUEST::' . $sRequestType, $sURL, $_aData, current_filter(), $_sStackTrace );
+        do_action( 'aal_action_debug_log', 'HTTP_REQUEST::' . $sRequestType, $sURL, $aArguments, current_filter(), $_sStackTrace );
     }
 
 }
