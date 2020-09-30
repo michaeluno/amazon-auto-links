@@ -42,9 +42,13 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
             PRIMARY KEY  (name)
         ) " . $this->_getCharactersetCollation() . ";";    
     }
-    
+
     /**
-     * 
+     *
+     * @param string $sName
+     * @param mixed $mData
+     * @param int $iDuration
+     * @param array $aExtra
      * @return  boolean     Whether it is set or not.
      */
     public function setCache( $sName, $mData, $iDuration=0, array $aExtra=array() ) {
@@ -106,6 +110,7 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
         }    
             /**
              * Checks whether the given cache exists or not by the given name.
+             * @param string $sName
              * @return      boolean
              */
             public function doesRowExist( $sName ) {
@@ -115,11 +120,13 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
                     WHERE name = '{$sName}'"
                 );             
             }
-    
+
     /**
-     * 
+     *
+     * @param array|string $asNames
+     * @param intger|null $iCacheDuration
      * @return      array
-     * The structure 
+     * The structure
      * array(
      *  'remained_time' => (integer)
      *  'data'          => (mixed)
@@ -131,9 +138,11 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
             : $this->_getCacheEach( $asNames, $iCacheDuration );
     }
         /**
-         * 
-         * @remark      Saves the number of MySQL queries by passing multiple items at once.
-         * @return      array
+         *
+         * @remark Saves the number of MySQL queries by passing multiple items at once.
+         * @param  array $aNames
+         * @param  integer|null $iCacheDuration
+         * @return array
          */
         private function _getMultipleRows( $aNames, $iCacheDuration=null ) {
 
@@ -155,9 +164,12 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
             return $_aRows;
             
         }
+
         /**
-         * 
-         * @return      array
+         *
+         * @param string $sName
+         * @param integer|null $iCacheDuration
+         * @return array
          */
         private function _getCacheEach( $sName, $iCacheDuration=null ) {
             
@@ -169,11 +181,11 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
             );                
             return $this->_getFormattedRow( $_aRow, $iCacheDuration );
 
-        }    
+        }
             /**
-             * @param       array       $aRow               The row array returned from the database.
-             * @param       integer     $iCacheDuraiton     The cache duration in seconds. If not set, the stored cache duration will be used.
-             * @return      array
+             * @param  array        $aRow               The row array returned from the database.
+             * @param  integer|null $iCacheDuration     The cache duration in seconds. If not set, the stored cache duration will be used.
+             * @return array
              */
             private function _getFormattedRow( $aRow, $iCacheDuration=null ) {
                 $_aRow = is_array( $aRow )
@@ -204,6 +216,7 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
     
     /**
      * Deletes the cache(s) by given cache name(s).
+     * @param array|string $asNames
      */
     public function deleteCache( $asNames='' ) {
                 
