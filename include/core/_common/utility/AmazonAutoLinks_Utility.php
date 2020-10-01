@@ -81,72 +81,6 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
-     * Checks whether the given array is sequential or associative.
-     * @return      boolean
-     * @param       array $aArray
-     * @deprecated 4.3.2    The same is defined in the framework. No need to override.
-     */
-    /*static public function isAssociative( array $aArray ) {
-        return array_keys( $aArray ) !== range( 0, count( $aArray ) - 1 );
-    }*/
-    
-    /**
-     *
-     * e.g. ISO-8859-1, utf-8, Shift_JIS
-     * 
-     * @remark  The value set to the header charset should be case-insensitive.
-     * @see     http://www.iana.org/assignments/character-sets/character-sets.xhtml
-     * @param   array|string $asHeaderResponse
-     * @return  string      The found character set.
-     */
-    public function getCharacterSetFromResponseHeader( $asHeaderResponse ) {
-        
-        $_sContentType = '';
-        if ( is_string( $asHeaderResponse ) ) {
-            $_sContentType = $asHeaderResponse;
-        } 
-        // It should be an array then.
-        else if ( isset( $asHeaderResponse[ 'content-type' ] ) ) {
-            $_sContentType = $asHeaderResponse[ 'content-type' ];
-        } 
-        else {
-            foreach( $asHeaderResponse as $_iIndex => $_sHeaderElement ) {
-                if ( ! is_scalar( $_sHeaderElement ) ) {    // 4.2.0 - with a proxy, there is a case that this element is an array
-                    continue;
-                }
-                if ( false !== stripos( $_sHeaderElement, 'charset=' ) ) {
-                    $_sContentType = $asHeaderResponse[ $_iIndex ];
-                }
-            }
-        }
-        
-        preg_match(
-            '/charset=(.+?)($|[;\s])/i',  // needle
-            $_sContentType, // haystack
-            $_aMatches
-        );
-        return isset( $_aMatches[ 1 ] )
-            ? ( string ) $_aMatches[ 1 ]
-            : '';
-            
-    }
-    
-    /**
-     * 
-     * @since       3
-     * @deprecated  4.3.2   Unused
-     * @param       array   $aSubject
-     * @return      string
-     */
-/*    static public function getKeyOfLowestElement( array $aSubject ) {
-        natsort( $aSubject );
-        foreach( $aSubject as $_isKey => $_mValue ) {
-            // return the key(index) of the first item.
-            return $_isKey;
-        }
-    }*/
-    
-    /**
      * Checks if the current time is over the given time.
      * @since       3
      * @remark      Assumed that the given time is not have any local time offset.
@@ -154,17 +88,10 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @return      boolean
      */
     static public function isExpired( $nsSetTime ) {
-        $_nSetTime = is_numeric( $nsSetTime )
-            ? $nsSetTime
-            : strtotime( $nsSetTime );
+        $_nSetTime = is_numeric( $nsSetTime ) ? $nsSetTime : strtotime( $nsSetTime );
         return ( $_nSetTime <= time() );
     }    
-    
-    /**
-     * Stores included file path using the `includeOnce()` method below.
-     * @since       3
-     */
-    public static $_aLoadedFiles = array();
+
     /**
      * Includes the given file.
      * 
@@ -196,18 +123,6 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      */
     static public function isEmpty( $mValue ) {
         return ( boolean ) empty( $mValue );
-    }
-
-    /**
-     * @param   string  $sToFix
-     * @param   string  $sDelimiter
-     * @param   boolean $bReadable
-     * @param   boolean $bUnique
-     * @return  string
-     * @deprecated 4.3.2    Use `getEachDelimitedElementTrimmed()`.
-     */
-    static public function trimDelimitedElements( $sToFix, $sDelimiter, $bReadable=true, $bUnique=true ) {
-        return self::getEachDelimitedElementTrimmed( $sToFix, $sDelimiter, $bReadable, $bUnique );
     }
 
     /**
@@ -245,7 +160,18 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
             ? implode( $sDelimiter . ' ' , $_aNewElements )
             : implode( $sDelimiter, $_aNewElements );
     }
-        
+        /**
+         * @param   string  $sToFix
+         * @param   string  $sDelimiter
+         * @param   boolean $bReadable
+         * @param   boolean $bUnique
+         * @return  string
+         * @deprecated 4.3.2    Use `getEachDelimitedElementTrimmed()`.
+         */
+        static public function trimDelimitedElements( $sToFix, $sDelimiter, $bReadable=true, $bUnique=true ) {
+            return self::getEachDelimitedElementTrimmed( $sToFix, $sDelimiter, $bReadable, $bUnique );
+        }
+
     /**
      * Converts the given string with delimiters to a multi-dimensional array.
      * 
@@ -311,99 +237,11 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
                 $_aParams
             );
         }        
-    
-    /**
-     * Implodes the given (multi-dimensional) array.
-     * 
-     * @param            array            $arrInput                The subject array to be imploded.
-     * @param            array            $arrGlues                An array numerically indexed with the values of glue. 
-     * Each element should represent the glue of the dimension corresponding to the depth of the array.
-     * e.g. array( ',', ':' ) will glue the elements of first dimension with comma and second dimension with colon.
-     * @return            string
-     * @todo    deprecated this as it seems not used anywhere
-     */
-/*    static public function implodeRecursive( $arrInput, $arrGlues ) {
-        
-        $arrGlues_ = ( array ) $arrGlues;
-        array_shift( $arrGlues_ );
 
-        foreach( $arrInput as $k => &$vElem ) {
-            
-            if ( ! is_array( $vElem ) ) { 
-                continue;
-            }
-                
-            $vElem = self::ImplodeRecursive( $vElem, ( ( array ) $arrGlues_[0] ) );
-        
-        }
-        
-        return implode( $arrGlues[0], $arrInput );
-
-    }*/
-
-
-    /**
-     * For form validation
-     * @deprecated 4.3.2 The same as the framework one. No need to override.
-     */
-/*    static public function fixNumber( $numToFix, $numDefault, $numMin="", $numMax="" ) {
-            
-        if ( ! is_numeric( trim( $numToFix ) ) ) return $numDefault;
-        if ( $numMin !== "" && $numToFix < $numMin ) return $numMin;
-        if ( $numMax !== "" && $numToFix > $numMax ) return $numMax;
-        return $numToFix;
-        
-    }*/
-    
-    /**
-     * Calculates the relative path from the given path.
-     * 
-     * This function is used to generate a template path.
-     *
-     * @see               http://stackoverflow.com/questions/2637945/getting-relative-path-from-absolute-path-in-php/2638272#2638272
-     * @param   string $from
-     * @param   string $to
-     * @return  string
-     * @deprecated 4.3.2 Same as the framework one. No need to override.
-     */
-/*    static public function getRelativePath( $from, $to ) {
-        
-        // some compatibility fixes for Windows paths
-        $from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
-        $to   = is_dir($to)   ? rtrim($to, '\/') . '/'   : $to;
-        $from = str_replace('\\', '/', $from);
-        $to   = str_replace('\\', '/', $to);
-
-        $from     = explode('/', $from);
-        $to       = explode('/', $to);
-        $relPath  = $to;
-
-        foreach($from as $depth => $dir) {
-            // find first non-matching dir
-            if($dir === $to[$depth]) {
-                // ignore this directory
-                array_shift($relPath);
-            } else {
-                // get number of remaining dirs to $from
-                $remaining = count($from) - $depth;
-                if($remaining > 1) {
-                    // add traversals up to first matching dir
-                    $padLength = (count($relPath) + $remaining - 1) * -1;
-                    $relPath = array_pad($relPath, $padLength, '..');
-                    break;
-                } else {
-                    $relPath[0] = './' . $relPath[0];
-                }
-            }
-        }
-        return implode('/', $relPath);
-        
-    } */
-    
     /**
      * Retrieves the server set allowed maximum PHP script execution time.
      * 
-     * @since            2.0.4
+     * @since   2.0.4
      * @param   integer $iDefault
      * @param   integer $iMax
      * @return  integer
