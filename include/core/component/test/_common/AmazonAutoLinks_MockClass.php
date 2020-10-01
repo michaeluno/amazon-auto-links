@@ -29,15 +29,11 @@ class AmazonAutoLinks_MockClass {
 
     /**
      * Sets up properties.
-     * @param $sClassName
-     * @param mixed ...$aParameters
+     * @param  string $sClassName
+     * @param  array  $aParameters
      * @throws ReflectionException
      */
-    public function __construct( $sClassName, ...$aParameters ) {
-        if (version_compare(phpversion(), '<', '5.6.0')) {
-            trigger_error('Amazon Auto Links: The class requires PHP 5.6 or above.', E_USER_WARNING);
-            return;
-        }
+    public function __construct( $sClassName, $aParameters=array() ) {
         $this->oReflectionClass = new ReflectionClass( $sClassName );
         $this->oClass = $this->oReflectionClass->newInstanceArgs( $aParameters );
     }
@@ -54,14 +50,14 @@ class AmazonAutoLinks_MockClass {
     }
 
     /**
-     * @param $sMethodName
-     * @param mixed ...$aParameters
+     * @param  string $sMethodName
+     * @param  array $aParameters    To pass a parameter as a reference, add a prefix of an ampersand. like array( &$first, $second, $third )
      * @return mixed
      * @throws ReflectionException
      */
-    public function call( $sMethodName, ...$aParameters ) {
-        $_oMethod = $this->___getMethodMocked( $this->oReflectionClass, $sMethodName );
-        return $_oMethod->invokeArgs( $this->oClass, $aParameters );
+    public function call( $sMethodName, $aParameters=array() ) {
+        $_oReflectionMethod = $this->___getMethodMocked( $this->oReflectionClass, $sMethodName );
+        return $_oReflectionMethod->invokeArgs( $this->oClass, $aParameters );
     }
         /**
          * @param ReflectionClass $oReflectionClass
