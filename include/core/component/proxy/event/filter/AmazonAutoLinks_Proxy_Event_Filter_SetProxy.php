@@ -22,17 +22,16 @@ class AmazonAutoLinks_Proxy_Event_Filter_SetProxy extends AmazonAutoLinks_Proxy_
      */
     public function __construct() {
 
-        add_action( 'aal_filter_http_request_arguments', array( $this, 'replyToGetProxySet' ), 10, 3 );
+        add_action( 'aal_filter_http_request_arguments', array( $this, 'replyToGetProxySet' ), 10, 2 );
 
     }
 
         /**
-         * @param array $aArguments
-         * @param $sRequestType
-         * @param array|string $asURLs
-         * @return  array
+         * @param  array $aArguments
+         * @param  string $sRequestType
+         * @return array
          */
-        public function replyToGetProxySet( array $aArguments, $sRequestType, $asURLs ) {
+        public function replyToGetProxySet( array $aArguments, $sRequestType ) {
 
             // HTTP Requests for PA-API and fetching proxy lists should not use proxies.
             $_aExceptedTypes  = apply_filters( 'aal_filter_excepted_http_request_types_for_requests', array( AmazonAutoLinks_Proxy_Loader::$sHTTPRequestType ) );

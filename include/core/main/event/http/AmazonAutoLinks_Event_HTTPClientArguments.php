@@ -18,18 +18,16 @@ class AmazonAutoLinks_Event_HTTPClientArguments extends AmazonAutoLinks_PluginUt
 
     public function __construct() {
 
-        add_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPClientArguments' ), 10, 2 );
+        add_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPClientArguments' ), 10, 1 );
 
     }
 
     /**
      * @param array  $aArguments
-     * @param string $sRequestType
      * @return array
      * @since   4.0.0
-     * @since   4.0.1   Added the `$sRequestType` parameter.
      */
-    public function replyToGetHTTPClientArguments( array $aArguments, $sRequestType ) {
+    public function replyToGetHTTPClientArguments( array $aArguments ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $aArguments[ 'compress_cache' ] = ( boolean ) $_oOption->get( 'cache', 'compress' );
