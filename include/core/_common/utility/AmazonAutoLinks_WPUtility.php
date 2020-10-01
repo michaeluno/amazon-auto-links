@@ -18,6 +18,51 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
 
     /**
+     * @param WP_Error|array $aoResponse
+     * @return array
+     * @since 4.3.3
+     */
+    static public function getHeaderFromResponse( $aoResponse ) {
+        if ( is_wp_error( $aoResponse ) ) {
+            return array();
+        }
+        if ( ! isset( $aoResponse[ 'headers' ] ) ) {
+            return array();
+        }
+        $_aoHeader   = $aoResponse[ 'headers' ];
+        // Since WordPress 4.6.0 The return value has changed from array to Requests_Utility_CaseInsensitiveDictionary.
+        $_aHeader    = ( $_aoHeader instanceof Requests_Utility_CaseInsensitiveDictionary )
+            ? reset( $_aoHeader )
+            : $_aoHeader;
+        return self::getAsArray( $_aHeader );
+    }
+
+    /**
+     * @param WP_Error|array $aoResponse
+     * @return array
+     * @since 4.3.3
+     */
+    static public function getCookiesFromResponse( $aoResponse ) {
+        if ( is_wp_error( $aoResponse ) ) {
+            return array();
+        }
+        if ( ! isset( $aoResponse[ 'cookies' ] ) ) {
+            return array();
+        }
+        $_aResponseCookies = array();
+        $_aCookieObjects   = $aoResponse[ 'cookies' ];
+        foreach( $_aCookieObjects as $_isNameOrIndex => $_oCookie ) {
+            // Below WP 4.6.0, the cookies elements are not object.
+            if ( is_scalar( $_oCookie ) ) {
+                $_aResponseCookies[ $_isNameOrIndex ] = $_oCookie;
+                continue;
+            }
+            $_aResponseCookies[ $_oCookie->name ] = $_oCookie->value;
+        }
+        return $_aResponseCookies;
+    }
+
+    /**
      * Schedules a WP Cron single event.
      * @since       3.5.0
      * @return      boolean     True if scheduled, false otherwise.
