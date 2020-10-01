@@ -50,7 +50,7 @@ class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
      * @since 4.3.3
      */
     protected function _throw( $sErrorMessage, $iCode=0 ) {
-        throw new AmazonAutoLinks_Test_Exception( $sErrorMessage, ( integer ) $iCode );
+        throw new AmazonAutoLinks_Test_Exception( $sErrorMessage, ( integer ) $iCode, array( 'file' => __FILE__ ) );
     }
 
     /**
