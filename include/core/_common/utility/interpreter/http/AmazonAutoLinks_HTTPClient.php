@@ -172,7 +172,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Retrieves the HTTP response body.
-     * This is public because for a case that the use calls `getRawResponse()` first to check inside the response then wants to convert the document encoding.
+     * This is public because for a case that the user calls `getRawResponse()` first to check inside the response then wants to convert the document encoding.
      * @param  WP_Error|array
      * @return string
      * @since  4.3.3
@@ -456,7 +456,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
                 /// Headers
                 $_aHeaders  = $this->getElementAsArray( $aArguments, array( 'headers' ) );
-                $_aHeaders[] = 'Content-Type: text/html; charset=' . get_bloginfo( 'charset' );;
+                $_aHeaders[] = 'Content-Type: text/html; charset=' . get_bloginfo( 'charset' );
                 $_aHeaders   = array_unique( $_aHeaders );
                 curl_setopt( $_oCurl, CURLOPT_HTTPHEADER, $_aHeaders );
                 curl_setopt( $_oCurl, CURLOPT_HEADERFUNCTION, array( $this, 'replyToGetCurlHeader' ) );
@@ -536,8 +536,9 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             private $___aCurlHeader = array();
             /**
              * Get the header info to store.
-             * @param   resourse    $ch
+             * @param   resource    $ch
              * @param   string      $sHeader
+             * @return  integer
              */
             public function replyToGetCurlHeader( $ch, $sHeader ) {
                 $_iPos = strpos( $sHeader, ':' );
@@ -562,7 +563,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
              *
              * @remark  The value set to the header charset should be case-insensitive.
              * @see     http://www.iana.org/assignments/character-sets/character-sets.xhtml
-             * @param   array|string|\Requests_Utility_CaseInsensitiveDictionary $asHeaderResponse
+             * @param   array|string|Requests_Utility_CaseInsensitiveDictionary $asHeaderResponse
              * @return  string      The found character set. e.g. ISO-8859-1, utf-8, Shift_JIS
              * @since 4.3.3 Moved from AmazonAutoLinks_PluginUtility
              */
@@ -578,7 +579,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                 }
                 else {
                     foreach( $asHeaderResponse as $_iIndex => $_sHeaderElement ) {
-                        if ( ! is_scalar( $_sHeaderElement ) ) {    // 4.2.0 - with a proxy, there is a case that this element is an array
+                        if ( ! is_scalar( $_sHeaderElement ) ) {    // [4.2.0] with a proxy, there is a case that this element is an array
                             continue;
                         }
                         if ( false !== stripos( $_sHeaderElement, 'charset=' ) ) {
