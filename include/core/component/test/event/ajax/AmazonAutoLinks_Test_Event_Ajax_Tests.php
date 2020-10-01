@@ -10,14 +10,21 @@
 
 /**
  * Performs tests.
- * @since   4.3.0
  *
+ * Supported annotations.
+ *
+ * - @tags   Only those test class/method with the doc-block annotation of @tag and its entries which were specified in the UI will run.
+ * - @break  To skip the rest of the tests.
+ *
+ * @since   4.3.0
  */
 class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Base {
 
     protected $_sActionHookSuffix = 'aal_action_admin_do_tests';
     protected $_bLoggedIn = true;
     protected $_bGuest    = false;
+
+    private $___bBreak = false;
 
     protected function _construct() {
         // load_{page slug}_{tab slug}
@@ -93,13 +100,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         }
 
         /**
-         * @param string $sClassName The class name to test.
-         * @param string $sFilePath The file path of the class.
-         * @param array $aTags Tags set in the `@tags` annotation in test method doc-blocks.
-         * @param string $sMethodPrefix The prefix of methods to test.
-         * @return array
+         * @param  string $sClassName    The class name to test.
+         * @param  string $sFilePath     The file path of the class.
+         * @param  array  $aTags         Tags set in the `@tags` annotation in test method doc-blocks.
+         * @param  string $sMethodPrefix The prefix of methods to test.
          * @throws ReflectionException
-         * @since   4.3.0
+         * @since  4.3.0
+         * @return array
          */
         protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='test' ) {
 
@@ -109,8 +116,10 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 if ( ! $this->___canMethodRun( $_oMethod, $sClassName, $aTags, $sMethodPrefix ) ) {
                     continue;
                 }
+                $this->___bBreak = $this->___hasAnnotation( $_oMethod, array( 'break' ) );
                 $_aResults[] = $this->___getMethodTested( $_oMethod, $sFilePath );
             }
+            $this->___bBreak = false;
             return $_aResults;
 
         }
@@ -124,7 +133,11 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
              */
             private function ___canMethodRun( ReflectionMethod $oMethod, $sClassName, array $aTags, $sMethodPrefix ) {
 
-                // The method might be of its parent class. In that case, skip.
+                if ( $this->___bBreak ) {
+                    return false;
+                }
+
+                // The method might be of its parent/ancestor class. In that case, skip.
                 if ( strtolower( $oMethod->class ) !== strtolower( $sClassName ) ) {
                     return false;
                 }
@@ -133,11 +146,11 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     return false;
                 }
 
-                if ( $this->___hasSkipAnnotation( $oMethod->getDeclaringClass() ) ) {
+                if ( $this->___hasAnnotation( $oMethod->getDeclaringClass(), array( 'skip', 'deprecated' ) ) ) {
                     return false;
                 }
 
-                if ( $this->___hasSkipAnnotation( $oMethod ) ) {
+                if ( $this->___hasAnnotation( $oMethod, array( 'skip', 'deprecated' ) ) ) {
                     return false;
                 }
 
@@ -189,12 +202,18 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             /**
              * If @skip or @deprecated annotations are present, it will be skipped.
              * @param ReflectionClass|ReflectionMethod $oSubject
+             * @param string|array  $asAnnotations
              * @return boolean
              * @since 4.3.3
              */
-            private function ___hasSkipAnnotation( $oSubject ) {
-                $_sDockBlock = $oSubject->getDocComment();
-                return ( boolean ) preg_match('/@(\Qskip\E)\s+.*?\n/s', $_sDockBlock );
+            private function ___hasAnnotation( $oSubject, $asAnnotations ) {
+                $_aAnnotations = array();
+                foreach( ( array ) $asAnnotations as $_sAnnotation ) {
+                    $_aAnnotations[] = "\Q{$_sAnnotation}\E";
+                }
+                $_sPattern     = implode( '|', $_aAnnotations );
+                $_sDockBlock   = $oSubject->getDocComment();
+                return ( boolean ) preg_match('/@(' . $_sPattern . ')\s+.*?\n/s', $_sDockBlock );
             }
 
             /**
