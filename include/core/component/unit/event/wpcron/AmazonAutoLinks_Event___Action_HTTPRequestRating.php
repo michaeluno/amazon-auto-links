@@ -88,7 +88,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
              * @return array|WP_Error
              */
             private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
-                $_aSendCookies    = $this->___getRequestCookiesByLocale( $sLocale );
+                $_aSendCookies    = $this->_getRequestCookiesByLocale( $sLocale )
+                    + $this->___getRequestCookiesByLocale2( $sLocale );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     $iCacheDuration,
@@ -135,18 +136,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 }
                 $oHTTP = $_oHTTP;
                 return $_aoResponse;
-            }
-            /**
-             * @param  string $sLocale
-             * @return array
-             * @since 4.3.3
-             */
-            private function ___getRequestCookiesByLocale( $sLocale ) {
-                $_sAssociatesURL  = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
-                $_oHTTP           = new AmazonAutoLinks_HTTPClient( $_sAssociatesURL, 86400 * 7 );
-                $_aoResponse      = $_oHTTP->getRawResponse();
-                return $this->getCookiesFromResponse( $_aoResponse )
-                     + $this->___getRequestCookiesByLocale2( $sLocale );
             }
 
             /**
