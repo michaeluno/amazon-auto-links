@@ -34,13 +34,13 @@ class AmazonAutoLinks_Unit_Category_Event_RenewCacheAction extends AmazonAutoLin
             delete_post_meta( $iPostID, '_error' );
 
             // Just delete caches. Renewing will be done when a prefetch is called.
-            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+            $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
                 $_aURLs,
                 $_iCacheDuration,
                 array(),    // http arguments
                 'category_unit_type'       // 3.8.1 Changed the value from `url_unit_type` as it appears to be a mistake.
             );
-            $_oHTTP->deleteCache();
+            $_oHTTP->deleteCaches();
 
         }
             /**

@@ -29,18 +29,19 @@ class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_Pl
     }
         private function ___deleteHTTPRequestCache( $iPostID ) {
 
-            $_aURLs          = get_post_meta( $iPostID, 'urls', true );
-            $_iCacheDuration = get_post_meta( $iPostID, 'cache_duration', true );
+            $_aURLs          = $this->getAsArray( get_post_meta( $iPostID, 'urls', true ) );
+            $_iCacheDuration = ( integer ) get_post_meta( $iPostID, 'cache_duration', true );
             delete_post_meta( $iPostID, '_error' );
 
             // Just delete caches. Renewing will be done when a prefetch is called.
-            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+            $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
                 $_aURLs,
                 $_iCacheDuration,
                 array(),    // http arguments
                 'url_unit_type'
             );
-            $_oHTTP->deleteCache();
+            $_oHTTP->deleteCaches();
 
         }
+
 }

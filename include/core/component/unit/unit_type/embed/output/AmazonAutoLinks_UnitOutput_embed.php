@@ -122,7 +122,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
             add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
-            add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10, 4 );
+            add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20, 2 );
 
             $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sURL );
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
@@ -232,23 +232,19 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     private $___aErrors = array();
 
     /**
-     * @param $aResponses
-     * @param $aURLs
-     * @param $aArguments
-     * @param $iCacheDuration
-     *
+     * @param  WP_Error|array $aoResponse
+     * @param  string $sURL
      * @return array
-     * @since   4.2.2
+     * @since  4.2.2
+     * @since  4.3.3 Changed the parameters to be singular.
      */
-    public function replyToCaptureErrors( $aResponses, $aURLs, $aArguments, $iCacheDuration ) {
-        remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureErrors' ), 10 );
-        foreach( $aResponses as $_sURL => $_aoResponse ) {
-            if ( ! is_wp_error( $_aoResponse ) ) {
-                continue;
-            }
-            $this->___aErrors[ $_sURL ] = $_aoResponse->get_error_message();
+    public function replyToCaptureError( $aoResponse, $sURL ) {
+        remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20 );
+        if ( ! is_wp_error( $aoResponse ) ) {
+            return $aoResponse;
         }
-        return $aResponses;
+        $this->___aErrors[ $sURL ] = $aoResponse->get_error_message();
+        return $aoResponse;
     }
 
     /**

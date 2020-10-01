@@ -137,17 +137,22 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             return array_unique( $_aAllURLs );
 
         }
+
         /**
-         * Fetches
+         * Fetches product data.
          *
-         * @return      array
+         * @param  array    $aURLs
+         * @param  array    $aExcludeURLs
+         * @param  integer  $iItemCount
+         * @param  array    $aExcludeASINs
+         * @return array
          */
         private function ___getFoundProducts( array $aURLs, array $aExcludeURLs, $iItemCount, array $aExcludeASINs=array() ) {
 
             // Find products
             add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
             add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
-            $_aHTMLs          = $this->___getHTMLBodies( $aURLs );
+            $_aHTMLs          = $this->___getHTTPBodies( $aURLs );
 
             $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
             $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
@@ -159,7 +164,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             }
 
             // Excluding Items
-            $_aExcludeHTMLs    = $this->___getHTMLBodies( $aExcludeURLs );
+            $_aExcludeHTMLs    = $this->___getHTTPBodies( $aExcludeURLs );
             $_aExcludeASINs    = array_unique( array_merge( $aExcludeASINs, $this->___getASINsExtracted( $_aExcludeHTMLs ) ) );
             $_aExcludeASINKeys = array_flip( $_aExcludeASINs );
             $_aProducts        = array_diff_key( $_aProducts, $_aExcludeASINKeys );
@@ -243,11 +248,10 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             }
             /**
              * @param array $aURLs
-             *
-             * @return array|string
+             * @return array
              */
-            private function ___getHTMLBodies( array $aURLs ) {
-                $_oHTTP = new AmazonAutoLinks_HTTPClient(
+            private function ___getHTTPBodies( array $aURLs ) {
+                $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
                     $aURLs,
                     $this->oUnitOption->get( 'cache_duration' ),
                     array(  // http arguments

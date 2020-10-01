@@ -109,11 +109,13 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
 
         /**
          *
+         * @param       array   $aURLs
          * @since       unknown
          * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
+         * @return      array
          */
         protected function _getHTMLBodies( array $aURLs ) {
-            $_oHTTP = new AmazonAutoLinks_HTTPClient( 
+            $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
                 $aURLs,
                 $this->oUnitOption->get( 'cache_duration' ),
                 array(  // http arguments
@@ -122,9 +124,8 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 ),
                 $this->sUnitType . '_unit_type' // request type
             );
-            
             $_aHTMLBodies = $_oHTTP->get();
-            
+
             // Set a debug output
             $this->___setDebugInfoForHTMLBodies( $_aHTMLBodies );
             
@@ -181,6 +182,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * @since       3.2.0
          * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
          * @return      array
+         * @param       array   $aHTMLs
          */
         protected function _getFoundItems( $aHTMLs ) {
 

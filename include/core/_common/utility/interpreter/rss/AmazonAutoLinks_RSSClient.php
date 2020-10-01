@@ -59,30 +59,34 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
     }
 
     public function get() {
-        
-        $_oHTTP     = new AmazonAutoLinks_HTTPClient(
-            $this->aURLs,
-            $this->iCacheDuration,
-            null, // arguments
-            'rss'   // response type - this just leaves a mark in the database table.
-        );
-
-        if ( $this->bForceCacheClear ) {
-            $_oHTTP->deleteCache();
-        }
 
         $_aItems = array();
-        foreach( $_oHTTP->get() as $_sHTTPBody ) {
-            $_aItems = array_merge(
-                $_aItems,
-                $this->___getRSSItems( $_sHTTPBody )
-            );
+        foreach( $this->___getHTTPBodies( $this->aURLs, $this->iCacheDuration, $this->bForceCacheClear ) as $_sHTTPBody ) {
+            $_aItems = array_merge( $_aItems, $this->___getRSSItems( $_sHTTPBody ) );
         }
-        
         $this->_sort( $_aItems );
         return $_aItems;
                             
     }
+        /**
+         * @param array $aURLs
+         * @param int $iCacheDuration
+         * @param bool $bForceRenew
+         * @return array
+         * @since 4.3.3
+         */
+        private function ___getHTTPBodies( array $aURLs, $iCacheDuration, $bForceRenew ) {
+            $_oHTTP     = new AmazonAutoLinks_HTTPClient_Multiple(
+                $this->aURLs,
+                $iCacheDuration,
+                array(), // arguments
+                'rss'   // response type - this just leaves a mark in the database table.
+            );
+            if ( $bForceRenew ) {
+                $_oHTTP->deleteCache();
+            }
+            return $_oHTTP->get();
+        }
         protected function _sort( &$aItems ) {
             if ( 'random' === $this->sSortOrder ) {
                 shuffle( $aItems );
