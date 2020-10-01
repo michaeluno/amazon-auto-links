@@ -43,18 +43,59 @@ class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     }
 
     /**
-     * @param $bBoolean
+     * @param boolean $bActual
+     * @param string $sMessage
+     * @param mixed $mData
+     * @sicne 4.3.3
+     */
+    protected function _assertTrue( $bActual, $sMessage='', $mData=array() ) {
+        $sMessage = $sMessage ? $sMessage : "Assert true.";
+        if ( true !== ( boolean ) $bActual ) {
+            $this->_setError( $sMessage, $bActual, $mData );
+            return;
+        }
+        $this->_setPass( $sMessage, $bActual );
+    }
+    /**
+     * @param boolean $bActual
+     * @param string $sMessage
+     * @param mixed $mData
+     * @sicne 4.3.3
+     */
+    protected function _assertFalse( $bActual, $sMessage='', $mData=array() ) {
+        $sMessage = $sMessage ? $sMessage : "Assert false.";
+        $this->_assertTrue( ! ( boolean ) $bActual, $sMessage, $mData );
+    }
+    /**
+     * @param mixed $mExpected
+     * @param mixed $mActual
      * @param $sMessage
      * @param $mData
      * @sicne 4.3.3
      */
-    protected function _assertTrue( $bBoolean, $sMessage='', $mData=array() ) {
-        $sMessage = $sMessage ? $sMessage : "Assert true.";
-        if ( true !== ( boolean ) $bBoolean ) {
-            $this->_setError( $sMessage, $bBoolean, $mData );
+    protected function _assertEqual( $mExpected, $mActual, $sMessage='', $mData=array() ) {
+        $sMessage = $sMessage ? $sMessage : "Assert equal.";
+        if ( $mExpected !== $mActual ) {
+            $this->_setError( $sMessage, $mActual, $mData );
             return;
         }
-        $this->_setPass( $sMessage, $bBoolean );
+        $this->_setPass( $sMessage, $mActual);
+    }
+
+    /**
+     * @param string $sPrefix The expected prefix.
+     * @param string $sHaystack The string to check.
+     * @param $sMessage
+     * @param $mData
+     * @sicne 4.3.3
+     */
+    protected function _assertPrefix( $sPrefix, $sHaystack, $sMessage='', $mData=array() ) {
+        $sMessage = $sMessage ? $sMessage : "Check if the string has the specified prefix.";
+        if ( ! $this->hasPrefix( $sPrefix, $sHaystack ) ) {
+            $this->_setError( $sMessage, $sHaystack, $mData );
+            return;
+        }
+        $this->_setPass( $sMessage, $sHaystack );
     }
 
     /**
@@ -64,7 +105,7 @@ class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @since 4.3.3
      */
     protected function _setPass( $sMessage, $mValue ) {
-        $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, 2 );
+        $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, array( 'file' => __FILE__ ) );
         $_iLine           = $_oTestException->get( 'line' );
         $this->aOutputs[] = "<p><span class='test-success bold'>OK</span> {$sMessage} Line: {$_iLine}.</p>"
             . $this->_getDetails( $mValue );
@@ -78,7 +119,7 @@ class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @since 4.3.3
      */
     protected function _setError( $sMessage, $mValue, $mData ) {
-        $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, 2 );
+        $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, array( 'file' => __FILE__ ) );
         $_oTestException->setData( 'data', $mData );
         $_iLine           = $_oTestException->get( 'line' );
         $this->aOutputs[] = "<p><span class='test-error bold'>Error</span> {$sMessage} Line: {$_iLine}.</p>"
