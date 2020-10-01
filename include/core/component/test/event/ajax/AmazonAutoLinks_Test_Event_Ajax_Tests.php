@@ -295,10 +295,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     'purpose' => $_sPurpose,
                 ) + $this->___aResultStructure;
                 if ( is_null( $mResult ) ) {
-                    $_aError = ( ( array ) error_get_last() ) + array( 'type' => null, 'message' => null, 'file' => null, 'line' => null );
                     return array(
-                        'message' => $_aError[ 'message' ] . ' in' . $_aError[ 'file' ] . ' on line ' . $_aError[ 'line' ],
+                        'success' => true,
                     ) + $_aDefault;
+//                    $_aError = ( ( array ) error_get_last() ) + array( 'type' => null, 'message' => null, 'file' => null, 'line' => null );
+//                    return array(
+//                        'message' => $_aError[ 'message' ] . ' in' . $_aError[ 'file' ] . ' on line ' . $_aError[ 'line' ],
+//                    ) + $_aDefault;
                 }
                 if ( is_bool( $mResult ) ) {
                     return $mResult
@@ -360,11 +363,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $_oTestClass = new $sClassName;
             try {
 
-                $_mResult    = $_oTestClass->$sMethodName();
+                $_mResult    = $_oTestClass->call( $sMethodName );
+                if ( ! empty( $_oTestClass->aErrors ) ) {
+                    $_mResult = false;
+                }
                 $_aResult    = $this->___getResultFormatted( $_mResult, $sClassName, $sMethodName, $sPurpose, $sFilePath );
-                $_aOutputs   = $_oTestClass->aOutputs;
-                if ( ! empty( $_aOutputs ) ) {
-                    $_aResult[ 'message' ] = implode( '<hr />', $_aOutputs ) . $_aResult[ 'message' ];
+                if ( ! empty( $_oTestClass->aOutputs ) ) {
+                    $_aResult[ 'message' ] = implode( '<hr />', $_oTestClass->aOutputs ) . $_aResult[ 'message' ];
                 }
                 return $_aResult;
 
