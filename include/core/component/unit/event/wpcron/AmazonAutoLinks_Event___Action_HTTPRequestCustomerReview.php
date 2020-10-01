@@ -79,27 +79,38 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @since  4.3.3
          */
         private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew, $sLocale ) {
-
-            $_oHTTP          = new AmazonAutoLinks_HTTPClient(
-                $sURL,
-                $iCacheDuration,
-                array(  // http arguments
-                    'timeout'     => 20,
-                    'redirection' => 20,
-                    'cookies'     => $this->_getRequestCookiesByLocale( $sLocale ),
-                ),
-                'customer_review2'
-            );
-            if ( $bForceRenew ) {
-                $_oHTTP->deleteCache();
-            }
-            if ( ! $_oHTTP->hasCache() ) {
-                sleep( 1 );
-            }
+            $_aoResponse   = $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew );
             $sCharacterSet = $_oHTTP->getCharacterSet(); // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
-            return $_oHTTP->get();
-
+            return $_oHTTP->getBody( $_aoResponse );
         }
+            /**
+             * @param  AmazonAutoLinks_HTTPClient $oHTTP
+             * @param  string  $sURL
+             * @param  string  $sLocale
+             * @param  integer $iCacheDuration
+             * @param  boolean $bForceRenew
+             * @return string
+             * @since  4.3.3
+             */
+            private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew ) {
+                $oHTTP          = new AmazonAutoLinks_HTTPClient(
+                    $sURL,
+                    $iCacheDuration,
+                    array(  // http arguments
+                        'timeout'     => 20,
+                        'redirection' => 20,
+                        'cookies'     => $this->_getRequestCookiesByLocale( $sLocale ),
+                    ),
+                    'customer_review2'
+                );
+                if ( $bForceRenew ) {
+                    $oHTTP->deleteCache();
+                }
+                if ( ! $oHTTP->hasCache() ) {
+                    sleep( 1 );
+                }
+                return $oHTTP->getResponse();
+            }
 
         /**
          *
