@@ -23,11 +23,12 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
      *
      */
     protected function _doAction( /* $sProductID, $iCacheDuration, $bForceRenew */ ) {
-        $sASIN = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
+
+        $sASIN       = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
         $this->___setParameters( func_get_args(), $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
-        $_sURL  = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
-        $_sHTML = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew );
-        $_aRow  = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );
+        $_sURL       = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
+        $_sHTML      = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew, $sLocale );
+        $_aRow       = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );
         if ( empty( $_aRow ) ) {
             return;
         }
@@ -63,46 +64,119 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          * @param string $sURL
          * @param integer $iCacheDuration
          * @param boolean $bForceRenew
+         * @param string $sLocale           This is needed to generate cookies.
          * @see https://stackoverflow.com/questions/8279478/amazon-product-advertising-api-get-average-customer-rating/31329604#31329604
          * @return string
          */
-        private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew ) {
+        private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
 
-            static $_sUbidMain;
-            $_sUbidMain = isset( $_sUbidMain ) ? $_sUbidMain : $this->___getCookie_ubid_main();
-            $_oHTTP     = new AmazonAutoLinks_HTTPClient(
-                $sURL,
-                $iCacheDuration,
-                array(  // http arguments
-                    'timeout'     => 20,
-                    'redirection' => 20,
-                    'cookies' => array(
-                        'ubid-main'   => $_sUbidMain,
-                        'ubid-acbjp' => $_sUbidMain,
-//                        'ubid-acbjp' => '358-0279311-4309900',
-//                        'session-id'
-                    ),
-                ),
-                'rating'
-            );
-            if ( $bForceRenew ) {
-                $_oHTTP->deleteCache();
-            }
-            return $_oHTTP->get();
+            $_oHTTP      = null;
+            $_aoResponse = $this->___getWidgetPageResponse( $_oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale );
+            /**
+             * This handles character encoding conversion.
+             * @var AmazonAutoLinks_HTTPClient $_oHTTP
+             */
+            return $_oHTTP->getBody( $_aoResponse );
 
         }
             /**
-             * Generates a string for the `ubid-main` cookie item.
-             * @return string Format: XXX-XXXXXXX-XXXXXXX e.g. 001-0000000-0000000
+             * @param null|AmazonAutoLinks_HTTPClient $oHTTP
+             * @param $sURL
+             * @param $iCacheDuration
+             * @param $bForceRenew
+             * @param $sLocale
+             * @return array|WP_Error
+             */
+            private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
+                $_aSendCookies    = $this->___getRequestCookiesByLocale( $sLocale );
+                $_oHTTP           = new AmazonAutoLinks_HTTPClient(
+                    $sURL,
+                    $iCacheDuration,
+                    array(  // http arguments
+                        'timeout'     => 20,
+                        'redirection' => 20,
+                        'cookies'     => $_aSendCookies,
+                    ),
+                    'rating'
+                );
+                if ( $bForceRenew ) {
+                    $_oHTTP->deleteCache();
+                }
+                if ( ! $_oHTTP->hasCache() ) {
+                    sleep( 1 ); // give some intervals
+                }
+                $_aoResponse = $_oHTTP->getRaw();
+
+                // Blocked due to lack of proper cookies.
+                if ( is_wp_error( $_aoResponse ) ) {
+
+                    /**
+                     * @var WP_Error $_aoResponse
+                     */
+                    if ( $this->hasPrefix( 'BLOCKED_BY_CAPTCHA', trim( $_aoResponse->get_error_code() ) ) ) {
+
+                        $_aResponseCookies = $this->getCookiesFromResponse( $_oHTTP->getRawResponse() );
+
+                        // Another try
+                        $_oHTTP            = new AmazonAutoLinks_HTTPClient(
+                            $sURL,
+                            $iCacheDuration,
+                            array(  // http arguments
+                                'timeout'     => 20,
+                                'redirection' => 20,
+                                'cookies'     => $_aResponseCookies + $this->___getRequestCookiesByLocale2( $sLocale ) + $_aSendCookies,
+                            ),
+                            'rating'
+                        );
+                        $_oHTTP->deleteCache();
+                        sleep( 1 );
+                        $_aoResponse = $_oHTTP->getRawResponse();
+                    }
+                }
+                $oHTTP = $_oHTTP;
+                return $_aoResponse;
+            }
+            /**
+             * @param  string $sLocale
+             * @return array
              * @since 4.3.3
              */
-            private function ___getCookie_ubid_main() {
-                return sprintf( '%03d', mt_rand( 1, 999 ) )
-                    . '-'
-                    . sprintf( '%07d', mt_rand( 1, 9999999 ) )
-                    . '-'
-                    . sprintf( '%07d', mt_rand( 1, 9999999 ) );
+            private function ___getRequestCookiesByLocale( $sLocale ) {
+                $_sAssociatesURL  = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
+                $_oHTTP           = new AmazonAutoLinks_HTTPClient( $_sAssociatesURL, 86400 * 7 );
+                $_aoResponse      = $_oHTTP->getRawResponse();
+                return $this->getCookiesFromResponse( $_aoResponse )
+                     + $this->___getRequestCookiesByLocale2( $sLocale );
             }
+
+            /**
+             * @return array
+             * @param $sLocale
+             * @since 4.3.3
+             */
+            private function ___getRequestCookiesByLocale2( $sLocale ) {
+                $_sToken  = $this->___getCookie_ubid_main();
+                $_aCookies = array(
+                    'ubid-main'         => $_sToken,
+                    'ubid-acb' . strtolower( $sLocale ) => $_sToken,
+                );
+                if ( 'US' !== $sLocale ) {
+                    unset( $_aCookies[ 'ubid-main' ] );
+                }
+                return $_aCookies;
+            }
+                /**
+                 * Generates a string for the `ubid-main` cookie item.
+                 * @return string Format: XXX-XXXXXXX-XXXXXXX e.g. 001-0000000-0000000
+                 * @since 4.3.3
+                 */
+                private function ___getCookie_ubid_main() {
+                    return sprintf( '%03d', mt_rand( 1, 999 ) )
+                        . '-'
+                        . sprintf( '%07d', mt_rand( 1, 9999999 ) )
+                        . '-'
+                        . sprintf( '%07d', mt_rand( 1, 9999999 ) );
+                }
         /**
          * @param string $sASIN
          * @param string $sLocale
