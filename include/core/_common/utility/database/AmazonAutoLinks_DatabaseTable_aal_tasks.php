@@ -32,8 +32,8 @@ class AmazonAutoLinks_DatabaseTable_aal_tasks extends AmazonAutoLinks_DatabaseTa
     public function getCreationQuery() {
         // request_id bigint(20) unsigned UNIQUE NOT NULL,
         return "CREATE TABLE " . $this->aArguments[ 'table_name' ] . " (
-            name varchar(255) UNIQUE,
-            action varchar(255),    
+            name varchar(191) UNIQUE,
+            action varchar(191),    
             arguments text,
             creation_time datetime NOT NULL default '0000-00-00 00:00:00',
             next_run_time datetime NOT NULL default '0000-00-00 00:00:00',
