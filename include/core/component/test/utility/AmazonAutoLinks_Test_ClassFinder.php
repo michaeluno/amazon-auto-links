@@ -44,6 +44,9 @@ class AmazonAutoLinks_Test_ClassFinder extends AmazonAutoLinks_AdminPageFramewor
             $_aFiles = $this->getFilePaths( $this->___sScanDirPath, $aOptions );
             $_aKept  = array();
             foreach( $_aFiles as $_sFilePath ) {
+
+                // @todo Use reflection class to check if the class is a sub-class of the specified base classes.
+                // For that, those test classes must be included with include() so create a class map for test files and register them for auto-load.
                 $_sPHPCode   = AmazonAutoLinks_Test_Utility::getPHPCode( $_sFilePath );
 //                $_sClassName = AmazonAutoLinks_Test_Utility::getDefinedClass( $_sPHPCode );
                 $_sBaseClass = $this->___getParentClass( $_sPHPCode );
