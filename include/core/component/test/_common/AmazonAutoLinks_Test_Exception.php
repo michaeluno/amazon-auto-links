@@ -15,10 +15,17 @@
 class AmazonAutoLinks_Test_Exception extends Exception {
 
     /**
-     * How many traces to skip.
-     * @var int
+     * @var array
      */
-    public $iSkip;
+    public $aSkip = array(
+        'frame'     => 0,        // (integer) how many trace frames to skip
+        'class'     => '',       // (string) a class name to skip
+        'classes'   => array(),  // (array) class names to skip
+        'function'  => '',       // (string) a function name to skip
+        'functions' => array(),  // (array) function names to skip
+        'file'      => '',       // (string) a file name to skip
+        'files'     => array(),  // (array) absolute file paths to skip
+    );
 
     /**
      * @var array
@@ -32,16 +39,35 @@ class AmazonAutoLinks_Test_Exception extends Exception {
     public $aData = array();
 
     /**
-     * AmazonAutoLinks_Test_Exception constructor.
+     * Sets up properties.
      * @param string $sMessage
-     * @param int $iCode
-     * @param int $iSkip
+     * @param integer $iCode
+     * @param array|integer  $aiSkip   If an integer is given, it represents how many trace frames to skip. If an array is given, it specifies the condition to skip.
      * @param throwable $oPrevious
      */
-    public function __construct( $sMessage='', $iCode=0, $iSkip=1, $oPrevious=null) {
-        $this->iSkip = $iSkip;
+    public function __construct( $sMessage='', $iCode=0, $aiSkip=1, $oPrevious=null ) {
+        
+        $this->aSkip = $this->___getSkipFormatted( $aiSkip, $this->aSkip );
         parent::__construct( $sMessage, $iCode, $oPrevious );
+
     }
+        /**
+         * @param $aiSkip
+         * @param $aStructure
+         * @return array
+         */
+        private function ___getSkipFormatted( $aiSkip, $aStructure ) {
+            $_aSkip                  = is_array( $aiSkip )
+                ? $aiSkip + $aStructure
+                : array( 'frame' => $aiSkip ) + $aStructure;
+            $_aSkip[ 'classes' ][]   = $_aSkip[ 'class' ];
+            $_aSkip[ 'functions' ][] = $_aSkip[ 'function' ];
+            $_aSkip[ 'files' ][]     = $_aSkip[ 'file' ];
+            $_aSkip[ 'classes' ]     = array_unique( array_filter( ( array ) $_aSkip[ 'classes' ] ) );
+            $_aSkip[ 'functions' ]   = array_unique( array_filter( ( array ) $_aSkip[ 'functions' ] ) );
+            $_aSkip[ 'files' ]       = array_unique( array_filter( ( array ) $_aSkip[ 'files' ] ) );
+            return $_aSkip;
+        }
 
     /**
      * @param $sKey
@@ -93,6 +119,7 @@ class AmazonAutoLinks_Test_Exception extends Exception {
             case 'trace':
                 return $this->___getTrace();
         }
+        return null;
     }
 
         /**
@@ -117,8 +144,27 @@ class AmazonAutoLinks_Test_Exception extends Exception {
          * @return array
          */
         private function ___getTrace() {
-            return array_slice( $this->getTrace(), $this->iSkip );
-        }
+            $_aFrames = array_slice( $this->getTrace(), $this->aSkip[ 'frame' ] );
+            if ( ! count( array_merge( $this->aSkip[ 'classes' ], $this->aSkip[ 'functions' ], $this->aSkip[ 'files' ] ) ) ) {
+                return $_aFrames;
+            }
+            foreach( $_aFrames as $_iIndex => $_aFrame ) {
+                $_aFrame = $_aFrame + array( 'function' => null, 'class' => null, );
+                if ( in_array( $_aFrame[ 'file' ], $this->aSkip[ 'files' ], true ) ) {
+                    unset( $_aFrames[ $_iIndex ] );
+                    continue;
+                }
+                if ( in_array( $_aFrame[ 'function' ], $this->aSkip[ 'functions' ], true ) ) {
+                    unset( $_aFrames[ $_iIndex ] );
+                    continue;
+                }
+                if ( in_array( $_aFrame[ 'class' ], $this->aSkip[ 'classes' ], true ) ) {
+                    unset( $_aFrames[ $_iIndex ] );
+                }
+                break;
+            }
+            return $_aFrames;
 
+        }
 
 }
