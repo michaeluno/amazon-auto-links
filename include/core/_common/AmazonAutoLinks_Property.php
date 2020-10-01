@@ -94,7 +94,7 @@ final class AmazonAutoLinks_Property {
      */
     static public function getAssociatesURLByLocale( $sLocale ) {
         $_sLocale = strtoupper( $sLocale );
-        return isset( self::$aStoreDomains[ $_sLocale ] ) ? self::$aStoreDomains[ $_sLocale ] : self::$aStoreDomains[ 'US' ];
+        return isset( self::$aAssociatesURLs[ $_sLocale ] ) ? self::$aAssociatesURLs[ $_sLocale ] : self::$aAssociatesURLs[ 'US' ];
     }
 
 
