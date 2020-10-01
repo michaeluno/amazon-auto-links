@@ -61,6 +61,44 @@ final class AmazonAutoLinks_Property {
     );*/
 
     /**
+     * @var array
+     * @since 4.3.3
+     */
+    static public $aAssociatesURLs = array(
+        'CA'    => 'https://associates.amazon.ca/',
+        'CN'    => 'https://associates.amazon.cn/',
+        'FR'    => 'https://partenaires.amazon.fr/',
+        'DE'    => 'https://partnernet.amazon.de/',
+        'IT'    => 'https://programma-affiliazione.amazon.it/',
+        'JP'    => 'https://affiliate.amazon.co.jp/',
+        'UK'    => 'https://affiliate-program.amazon.co.uk/',
+        'ES'    => 'https://afiliados.amazon.es/',
+        'US'    => 'https://affiliate-program.amazon.com/',
+        'IN'    => 'https://affiliate-program.amazon.in/',
+        'BR'    => 'https://associados.amazon.com.br/',
+        'MX'    => 'https://afiliados.amazon.com.mx/',
+        'AU'    => 'https://affiliate-program.amazon.com.au/',
+        'TR'    => 'https://gelirortakligi.amazon.com.tr/',
+        'AE'    => 'https://affiliate-program.amazon.ae/',
+        'SG'    => 'https://affiliate-program.amazon.sg/',
+        'NL'    => 'https://partnernet.amazon.nl/',
+        'SA'    => 'https://affiliate-program.amazon.sa/',
+    );
+
+    /**
+     * Returns the Amazon Associates URL.
+     *
+     * @param       string  $sLocale
+     * @since       4.3.3
+     * @return      string
+     */
+    static public function getAssociatesURLByLocale( $sLocale ) {
+        $_sLocale = strtoupper( $sLocale );
+        return isset( self::$aStoreDomains[ $_sLocale ] ) ? self::$aStoreDomains[ $_sLocale ] : self::$aStoreDomains[ 'US' ];
+    }
+
+
+    /**
      * @var array 
      * @since   3.8.12
      */
