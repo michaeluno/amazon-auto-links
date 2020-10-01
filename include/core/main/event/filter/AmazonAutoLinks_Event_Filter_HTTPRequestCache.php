@@ -38,7 +38,7 @@ class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_Plug
      * @param string    $sURL
      * @param array     $aArguments
      * @param array     $aOldCache
-     *
+     * @callback    add_filter() aal_filter_http_request_set_cache
      * @return mixed
      * @since 4.2.0
      */
@@ -84,9 +84,29 @@ class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_Plug
                 return $mData ->get_error_code() . ': ' . $mData ->get_error_message();
             }
 
-            return $this->___getHTTPStatusError( $mData );
+            $_sStatusError = $this->___getHTTPStatusError( $mData );
+            if ( $_sStatusError ) {
+                return $_sStatusError;
+            }
+            return $this->___getCaptchaError( $mData, $sURL );
 
         }
+
+            /**
+             *
+             * Since v4.3.3, the timing of creating captcha error WP_Error object has changed
+             * and therefore, the error needs to be captured here.
+             * @param $mData
+             * @param string $sURL
+             * @return string
+             * @since 4.3.3
+             */
+            private function ___getCaptchaError( $mData, $sURL ) {
+                if ( $this->isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $mData ), $sURL ) ) {
+                    return 'CAPTCHA: Blocked by Captcha';
+                }
+                return '';
+            }
             /**
              * @param array $mData
              * @return string

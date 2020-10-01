@@ -27,30 +27,36 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
     }
 
     /**
-     * @param WP_Error|array $osResponse
+     * @param WP_Error|array $aoResponse
      * @param string $sURL
      * @param array $aArguments
      * @param string $sRequestType
      * @param integer $iCacheDuration
-     *
+     * @callback add_filter() aal_filter_http_request_response
      * @return  array|WP_Error
      * @since   4.2.0
      */
-    public function replyToAttemptHTTPRequestsMultipleTimes( $osResponse, $sURL, array $aArguments, $sRequestType, $iCacheDuration ) {
-
+    public function replyToAttemptHTTPRequestsMultipleTimes( $aoResponse, $sURL, array $aArguments, $sRequestType, $iCacheDuration ) {
+        
         if ( empty( $aArguments[ 'proxy' ] ) ) {
-            return $osResponse;
+            return $aoResponse;
         }
 
         // At this point, the request is with a proxy
-
-        if ( ! is_wp_error( $osResponse ) ) {
-            return $osResponse;
+        
+        if ( ! $this->___hasError( $aoResponse, $sURL ) ) {
+            return $aoResponse;
         }
-
-        // At this point, the response is an error
-        /// Store the error object
-        $_oError = $osResponse;
+        /* @deprecated 4.3.3
+        $aoResponse = $this->___getError( $aoResponse, $sURL );        
+        if ( ! is_wp_error( $aoResponse ) ) {
+            return $aoResponse;
+        }
+        */
+        
+        // At this point, the response has an error
+        /// Store it as the previous response
+        $_aoPrevious = $aoResponse;
 
         // Let the unusable one to be saved.
         do_action( 'aal_action_detected_unusable_proxy', $aArguments );
@@ -59,23 +65,54 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
         $_iAttempts = ( integer ) $aArguments[ 'attempts' ];
         if ( 1 <= $_iAttempts ) {
             new AmazonAutoLinks_Error( 'PROXY_FAILURE', 'HTTP requests failed with proxies.', array( 'arguments' => $aArguments ), true );
-            return $osResponse;
+            return $aoResponse;
         }
         $aArguments[ 'attempts' ] = $_iAttempts + 1;
-
-        // At this point, the request returned an error
-
+        
         $_oHTTP = new AmazonAutoLinks_HTTPClient(
             $sURL,
             $iCacheDuration,
-            array( 'raw' => true ) + $aArguments,   // setting `raw` because the response format must be an array or an instance of WP_Error
+            $aArguments,   // setting `raw` because the response format must be an array or an instance of WP_Error
             $sRequestType
         );
-        $_osResponse = $_oHTTP->get();
-        return is_wp_error( $_osResponse )
-            ? $_oError  // the error of the previous attempt
-            : $_osResponse;
+        $_aoResponse = $_oHTTP->getRaw();
+        return $this->___hasError( $_aoResponse, $sURL )
+            ? $_aoPrevious  // the response of the previous attempt
+            : $_aoResponse;
 
     }
+        /**
+         * If a response contains an error, the result will be replaced with a WP_Error object.
+         * At the moment, only captcha errors are checked.
+         * @param $aoResponse
+         * @param $sURL
+         * @return WP_Error
+         * @deprecated 4.3.3    The timing of BLOCKED_BY_CAPTCHA WP_Error object has changed and caching the raw response instead of a WP_Error object. 
+         */
+/*        private function ___getError( $aoResponse, $sURL ) {
+            if ( is_wp_error( $aoResponse ) ) {
+                return $aoResponse;
+            }
+            $_sBody = wp_remote_retrieve_body( $aoResponse );
+            if ( $this->isBlockedByAmazonCaptcha( $_sBody, $sURL ) ) {
+                return new WP_Error( 'BLOCKED_BY_CAPTCHA', 'Blocked by captcha.' );
+            }
+            return $aoResponse;
+        }*/
+        /**
+         * @param $aoResponse
+         * @param $sURL
+         * @return bool
+         * @since 4.3.3
+         */
+        private function ___hasError( $aoResponse, $sURL ) {
+            if ( is_wp_error( $aoResponse ) ) {
+                return true;
+            }
+            return $this->isBlockedByAmazonCaptcha(
+                wp_remote_retrieve_body( $aoResponse ),
+                $sURL
+            );
+        }
 
 }
