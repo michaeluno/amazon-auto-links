@@ -227,7 +227,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         // 4.3.0
         'aal_tasks'            => array(
             'name'              => 'aal_tasks',  // serves as the table name suffix
-            'version'           => '1.0.0',
+            'version'           => '1.0.1',
             'across_network'    => true,
             'class_name'        => 'AmazonAutoLinks_DatabaseTable_aal_tasks',
         ),
