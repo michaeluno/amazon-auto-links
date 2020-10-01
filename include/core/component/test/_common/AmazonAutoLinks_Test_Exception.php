@@ -25,6 +25,11 @@ class AmazonAutoLinks_Test_Exception extends Exception {
      */
     public $aMessages = array();
 
+    /**
+     * Stores arbitrary data.
+     * @var array
+     */
+    public $aData = array();
 
     /**
      * AmazonAutoLinks_Test_Exception constructor.
@@ -36,6 +41,22 @@ class AmazonAutoLinks_Test_Exception extends Exception {
     public function __construct( $sMessage='', $iCode=0, $iSkip=1, $oPrevious=null) {
         $this->iSkip = $iSkip;
         parent::__construct( $sMessage, $iCode, $oPrevious );
+    }
+
+    /**
+     * @param $sKey
+     * @param $mData
+     */
+    public function setData( $sKey, $mData ) {
+        $this->aData[ $sKey ] = $mData;
+    }
+
+    /**
+     * @param $sKey
+     * @return mixed|null
+     */
+    public function getData( $sKey ) {
+        return isset( $this->aData[ $sKey ] ) ? $this->aData[ $sKey ] : null;
     }
 
     /**
