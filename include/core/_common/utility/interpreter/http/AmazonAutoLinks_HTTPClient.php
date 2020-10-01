@@ -155,10 +155,11 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @param string If a URL is given, it returns ,
      * @return array|WP_Error
      * @since 4.3.3
+     * @deprecated
      */
-    public function getRaw() {
-        return $this->getResponse();
-    }
+//    public function getRaw() {
+//        return $this->getResponse();
+//    }
 
     /**
      * Returns the HTTP body.
@@ -225,7 +226,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @return      string
      */
     public function getCharacterSet() {
-        return $this->___getCharacterSetFromResponse( $this->getRaw() );
+        return $this->___getCharacterSetFromResponse( $this->getResponse() );
     }
 
     /**

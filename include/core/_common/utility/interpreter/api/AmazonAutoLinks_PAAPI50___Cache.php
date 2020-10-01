@@ -74,7 +74,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
             if ( $bForceRenew ) {
                 $_oHTTP->deleteCache();
             }
-            $_asResponse =  $_oHTTP->getRaw(); // return errors as WP Error, not string
+            $_asResponse =  $_oHTTP->getResponse(); // return errors as WP Error, not string
 
             remove_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100 );
             return $_asResponse;

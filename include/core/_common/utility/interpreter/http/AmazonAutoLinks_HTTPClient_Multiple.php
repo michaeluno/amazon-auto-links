@@ -35,10 +35,10 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
     /**
      * Sets up properties.
      *
-     * @param array $aURLs Each element must be unique.
-     * @param int $iCacheDuration
-     * @param array $aArguments
-     * @param string $sRequestType
+     * @param array   $aURLs          Each element must be unique.
+     * @param integer $iCacheDuration
+     * @param array   $aArguments
+     * @param string  $sRequestType
      */
     public function __construct( array $aURLs, $iCacheDuration=86400, array $aArguments=array(), $sRequestType='wp_remote_get' ) {
 
@@ -82,11 +82,11 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
     /**
      * @return array
      */
-    public function getRaw() {
+    public function getResponses() {
         $this->___setRequestProperties();
         $_aResponses = array();
         foreach( $this->aHTTPs as $_sURL => $_oHTTP ) {
-            $_aResponses[ $_sURL ] = $_oHTTP->getRaw();
+            $_aResponses[ $_sURL ] = $_oHTTP->getResponse();
         }
         return $_aResponses;
     }

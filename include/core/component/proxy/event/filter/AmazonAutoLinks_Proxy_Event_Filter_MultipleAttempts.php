@@ -75,7 +75,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
             $aArguments,   // setting `raw` because the response format must be an array or an instance of WP_Error
             $sRequestType
         );
-        $_aoResponse = $_oHTTP->getRaw();
+        $_aoResponse = $_oHTTP->getResponse();
         return $this->___hasError( $_aoResponse, $sURL )
             ? $_aoPrevious  // the response of the previous attempt
             : $_aoResponse;

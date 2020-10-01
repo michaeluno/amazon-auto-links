@@ -106,7 +106,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 if ( ! $_oHTTP->hasCache() ) {
                     sleep( 1 ); // give some intervals
                 }
-                $_aoResponse = $_oHTTP->getRaw();
+                $_aoResponse = $_oHTTP->getResponse();
 
                 // Blocked due to lack of proper cookies.
                 if ( is_wp_error( $_aoResponse ) ) {
