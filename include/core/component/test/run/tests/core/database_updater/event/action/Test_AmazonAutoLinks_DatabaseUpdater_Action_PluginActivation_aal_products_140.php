@@ -41,21 +41,21 @@ class Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_
         );
         $this->oTable->setRows( $_aRows );
         $_oMockClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140' );
-        return 1 === $_oMockClass->call( '___getCountOfEmptyCell', $this->oTable, 'product_id' );
+        return 1 === $_oMockClass->call( '___getCountOfEmptyCell', array( $this->oTable, 'product_id' ) );
     }
     public function test____getCountOfEmptyCell_asin() {
         $_oMockClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140' );
-        return 1 === $_oMockClass->call( '___getCountOfEmptyCell', $this->oTable, 'asin' );
+        return 1 === $_oMockClass->call( '___getCountOfEmptyCell', array( $this->oTable, 'asin' ) );
     }
     public function test____updateColumn_product_id() {
         $_oMockClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140' );
-        $_mResult = $_oMockClass->call( '___updateProductIDColumn', $this->oTable );
+        $_mResult = $_oMockClass->call( '___updateProductIDColumn', array( $this->oTable ) );
 //        $this->_output( $this->_getDetails( $_mResult ) );
         return null === $_mResult;
     }
     public function test____updateColumn_asin() {
         $_oMockClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140' );
-        $_mResult = $_oMockClass->call( '___updateASINColumn', $this->oTable );
+        $_mResult = $_oMockClass->call( '___updateASINColumn', array( $this->oTable ) );
 //        $this->_output( $this->_getDetails( $_mResult ) );
         return null === $_mResult;
     }
@@ -67,7 +67,7 @@ class Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_
         $this->oTable->delete( array( 'product_id' => 'B00VLN9IC6|IT|EUR|it_IT' ) );
         $this->oTable->delete( array( 'asin_locale' => 'B00VLN9IC6_IT' ) );
         $_oMockClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140' );
-        return 0 === $_oMockClass->call( '___getCountOfEmptyCell', $this->oTable, 'product_id' );
+        return 0 === $_oMockClass->call( '___getCountOfEmptyCell', array( $this->oTable, 'product_id' ) );
     }
 
     public function test_replyToDoAction() {

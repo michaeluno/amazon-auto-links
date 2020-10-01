@@ -34,7 +34,7 @@ class Test_AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_Un
             'offer_listing_id'  => '',   // offer listing id that Amazon gives
         );
         $_oMockedClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Button_Event_Filter_Output' );
-        $_sButtonHTML  = $_oMockedClass->call( 'replyToGetLinkedButton', '', $_aButtonArguments );
+        $_sButtonHTML  = $_oMockedClass->call( 'replyToGetLinkedButton', array( '', $_aButtonArguments ) );
 
         if ( false === strpos( $_sButtonHTML, 'cart/add.html?' ) ) {
             throw new Exception( esc_html( $_sButtonHTML ), 'BUTTON_TYPE_NOT_MATCH' );
@@ -67,7 +67,7 @@ class Test_AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_Un
             'offer_listing_id'  => '',   // offer listing id that Amazon gives
         );
         $_oMockedClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Button_Event_Filter_Output' );
-        $_sButtonHTML  = $_oMockedClass->call( 'replyToGetLinkedButton', '', $_aButtonArguments );
+        $_sButtonHTML  = $_oMockedClass->call( 'replyToGetLinkedButton', array( '', $_aButtonArguments ) );
         if ( false === strpos( $_sButtonHTML, '<a ' ) ) {
             throw new Exception( 'The button is not a link.' . esc_html( $_sButtonHTML ) );
         }
@@ -91,7 +91,7 @@ class Test_AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_Un
      */
     public function test_getAddToCartButton() {
         $_oMockedClass = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Button_Event_Filter_Output' );
-        $_sButtonHTML  = $_oMockedClass->call( '___getAddToCartButton', 'B00QQ4EZNM, B00QQ4EZNL', '', 'US', 'tester-20', 0, '' );
+        $_sButtonHTML  = $_oMockedClass->call( '___getAddToCartButton', array( 'B00QQ4EZNM, B00QQ4EZNL', '', 'US', 'tester-20', 0, '' ) );
         $_oDOM         = new AmazonAutoLinks_DOM;
         $_oDoc         = $_oDOM->loadDOMFromHTMLElement( $_sButtonHTML );
         $_oAs          = $_oDoc->getElementsByTagName( 'a' );
@@ -116,7 +116,7 @@ class Test_AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_Un
             'asin'         => 'B00QQ4EZNM, B00QQ4EZNL',
             'country'      => 'US',
         );
-        $_sButtonURL  = $_oMockedClass->call( '___getProductURL', $_aArguments );
+        $_sButtonURL  = $_oMockedClass->call( '___getProductURL', array( $_aArguments ) );
 //        $_oDOM         = new AmazonAutoLinks_DOM;
 //        $_oDoc         = $_oDOM->loadDOMFromHTMLElement( $_sButtonHTML );
 //        $_oAs          = $_oDoc->getElementsByTagName( 'a' );
