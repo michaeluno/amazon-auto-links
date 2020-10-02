@@ -79,9 +79,9 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @since  4.3.3
          */
         private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew, $sLocale ) {
-            $_aoResponse   = $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew );
+            $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew );
             $sCharacterSet = $_oHTTP->getCharacterSet(); // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
-            return $_oHTTP->getBody( $_aoResponse );
+            return $_oHTTP->getBody();
         }
             /**
              * @param  AmazonAutoLinks_HTTPClient $oHTTP

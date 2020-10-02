@@ -70,13 +70,13 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          */
         private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
 
-            $_oHTTP      = null;
-            $_aoResponse = $this->___getWidgetPageResponse( $_oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale );
             /**
+             * Perform an HTTP request
              * This handles character encoding conversion.
              * @var AmazonAutoLinks_HTTPClient $_oHTTP
              */
-            return $_oHTTP->getBody( $_aoResponse );
+            $this->___getWidgetPageResponse( $_oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale );
+            return $_oHTTP->getBody();
 
         }
             /**

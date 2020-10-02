@@ -40,7 +40,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends Amaz
         $this->_assertFalse( is_wp_error( $_aoResponse ), 'Maybe blocked', $_aoResponse );
 
         // Get review elements
-        $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $_oHTTP->getBody( $_aoResponse ) );
+        $_oScraper      = new AmazonAutoLinks_ScraperDOM_CustomerReview2( $_oHTTP->getBody() );
         $_inRating      = $_oScraper->getRating();
         $this->_output( 'Rating: ' . $_inRating );
         $this->_assertTrue( 0 === $_inRating | 2 === strlen( $_inRating ) );

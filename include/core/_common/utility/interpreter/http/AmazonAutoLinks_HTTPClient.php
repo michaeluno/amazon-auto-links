@@ -164,21 +164,23 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Returns the HTTP body.
      *
+     * An alias of getBody().
      * @remark      Handles character encoding conversion.
      * @return      string
      */
     public function get() {
-        return $this->getBody( $this->getResponse() );
+        return $this->getBody();
     }
 
     /**
      * Retrieves the HTTP response body.
      * This is public because for a case that the user calls `getRawResponse()` first to check inside the response then wants to convert the document encoding.
-     * @param  WP_Error|array
+     * @param  WP_Error|array|null
      * @return string
      * @since  4.3.3
      */
-    public function getBody( $aoResponse ) {
+    public function getBody() {
+        $aoResponse    = $this->getResponse();
         $_sHTTPBody    = $this->___getResponseBody( $aoResponse );
         $_sCharSetFrom = $this->___getCharacterSetFromResponse( $aoResponse );
         return $this->___getResponseBodySanitized( $_sHTTPBody, $_sCharSetFrom );

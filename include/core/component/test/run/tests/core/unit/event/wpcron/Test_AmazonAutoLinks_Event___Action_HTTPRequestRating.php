@@ -168,7 +168,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             /**
              * @var AmazonAutoLinks_HTTPClient $_oHTTP
              */
-            $_sHTML       = $_oHTTP->getBody( $_aoResponse );
+            $_sHTML       = $_oHTTP->getBody();
             if ( false !== strpos( $_sHTML, '<html' ) ) {
                 $_oDOM    = new AmazonAutoLinks_DOM;
                 $_oDoc    = $_oDOM->loadDOMFromHTML( $_sHTML );
