@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
+abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores user outputs thrown in the middle of a test method.

@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
+abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
 
     /**
      * Stores exception objects.
