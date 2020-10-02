@@ -16,31 +16,9 @@
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http
 */
-class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_Base {
+class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPRequest_Base {
 
-//    public $sURL = 'https://www.amazon.com/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E&test=1';
-//    public $sURL  = 'https://www.amazon.com/';
-//    public $sURL  = 'https://www.amazon.co.uk/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E';
-//    public $sURL = 'https://wordpress.org?a=3';
-//    public $sURL2 = 'https://wordpress.org?a=2';
 
-    public $aoLastResponse;
-    public $aLastRequestArguments = array();
-    public $sLastRequestURL = '';
-
-    public function __construct() {
-        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestArguments' ), 10, 5 );
-    }
-        public function replyToCaptureWPRemoteRequestArguments( $aoResponse, $sType, $sType2, $aArguments, $sURL ) {
-            if (  'response' !== $sType || 'Requests' !== $sType2 ) {
-                return;
-            }
-            $this->sLastRequestURL = $sURL;
-            $this->aLastRequestArguments = $aArguments;
-            $this->aoLastResponse = $aoResponse;
-            $this->aoLastResponse[ 'headers' ] = $this->getHeaderFromResponse( $aoResponse );
-            $this->aoLastResponse[ 'cookies' ] = $this->getCookiesFromResponse( $aoResponse );
-        }
 
     /**
      * @return string
@@ -52,7 +30,7 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_Base {
         $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 0, $_aArguments );
         $this->_outputDetails( 'cache name', $_oHTTP->getCacheName() );
         $_aoResponse1 = $_oHTTP->getRawResponse();
-        $this->_outputDetails( 'AmazonAutoLinks_HTTPClient::getRawResponse()', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+        $this->_outputDetails( 'AmazonAutoLinks_HTTPClient::getRawResponse()', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
         $_bResult = $this->hasPrefix( '2', $this->getElement( $_aoResponse1, array( 'response', 'code' ) ) );
         $this->_outputDetails( 'result', $_bResult );
         return $_bResult;
@@ -68,7 +46,7 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_Base {
         $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, $_aArguments );
         $this->_outputDetails( 'cache name', $_oHTTP->getCacheName() );
         $_aoResponse1 = $_oHTTP->getRawResponse();
-        $this->_outputDetails( 'AmazonAutoLinks_HTTPClient::getRawResponse()', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+        $this->_outputDetails( 'AmazonAutoLinks_HTTPClient::getRawResponse()', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
         $this->_assertTrue( empty( $_aoResponse1[ 'body' ] ), 'Since the HEAD method, the body must be empty.', $this->aoLastResponse );
         $this->_assertPrefix( '2', $this->getElement( $_aoResponse1, array( 'response', 'code' ) ), 'The HTTP status code must begin with 2 such as 200.' );
 
@@ -101,13 +79,13 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_Base {
         $_oHTTP->deleteCache();
         $_aoResponse  = $_oHTTP->getRawResponse();
         $this->_outputDetails( 'is cache used', $_oHTTP->isCacheUsed(), $_oHTTP->getCacheName() );
-        $this->_outputDetails( '$_oHTTP->getRawResponse()', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+        $this->_outputDetails( '$_oHTTP->getRawResponse()', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
         $_aCookies    = $this->getCookiesFromResponse( $_aoResponse );
         $_sURL2       = $_sURL . '&a=' . uniqid();
         $_oHTTP2      = new AmazonAutoLinks_HTTPClient( $_sURL2, 0, array( 'cookies' => $_aCookies ) );
         $_aoResponse2 = $_oHTTP2->getRawResponse();
         $this->_outputDetails( 'is cache used', $_oHTTP2->isCacheUsed(), $_oHTTP2->getCacheName() );
-        $this->_outputDetails( '$_oHTTP2->getRawResponse()', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+        $this->_outputDetails( '$_oHTTP2->getRawResponse()', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
         return $this->hasPrefix( '2', $this->getElement( $_aoResponse2, array( 'response', 'code' ) ) );
 
     }
@@ -131,7 +109,7 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_Base {
         $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 0, array( 'cookies' => $_aCookies ) );
         $_oHTTP->deleteCache();
         $_aoResponse  = $_oHTTP->getRawResponse();
-        $this->_outputDetails( 'after setting cookies', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+        $this->_outputDetails( 'after setting cookies', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
         return $this->hasPrefix( '2', $this->getElement( $_aoResponse, array( 'response', 'code' ) ) );
     }
 

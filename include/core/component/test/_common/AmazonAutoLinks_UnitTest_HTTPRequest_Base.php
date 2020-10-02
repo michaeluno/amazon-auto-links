@@ -17,23 +17,24 @@
 abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks_UnitTest_Base {
 
     public $aoLastResponse;
-    public $aLastRequestArguments = array();
     public $sLastRequestURL = '';
     public $aLastArguments;
+    public $aLastHeader;
+    public $aLastCookies;
 
     public function __construct() {
-        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestArguments' ), 10, 5 );
+        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults' ), 10, 5 );
     }
-        public function replyToCaptureWPRemoteRequestArguments( $aoResponse, $sType, $sType2, $aArguments, $sURL ) {
+        public function replyToCaptureWPRemoteRequestResults( $aoResponse, $sType, $sType2, $aArguments, $sURL ) {
             if (  'response' !== $sType || 'Requests' !== $sType2 ) {
                 return;
             }
-            $this->sLastRequestURL = $sURL;
-            $this->aLastRequestArguments = $aArguments;
-            $this->aoLastResponse = $aoResponse;
-            $this->aoLastResponse[ 'headers' ] = $this->getHeaderFromResponse( $aoResponse );
-            $this->aoLastResponse[ 'cookies' ] = $this->getCookiesFromResponse( $aoResponse );
-            $this->aLastArguments = $aArguments;
+            remove_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults' ), 10 );
+            $this->sLastRequestURL             = $sURL;
+            $this->aoLastResponse              = $aoResponse;
+            $this->aLastHeader                 = $this->getHeaderFromResponse( $aoResponse );
+            $this->aLastCookies                = $this->getCookiesFromResponse( $aoResponse );
+            $this->aLastArguments              = $aArguments;
         }
 
 }

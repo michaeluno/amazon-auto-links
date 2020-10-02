@@ -16,26 +16,9 @@
  * @see     wp_remote_head()
  * @tags    http, wp_remote_head
 */
-class Test_wp_remote_head extends AmazonAutoLinks_UnitTest_Base {
+class Test_wp_remote_head extends AmazonAutoLinks_UnitTest_HTTPRequest_Base {
 
-    public $aoLastResponse;
-    public $aLastRequestArguments = array();
-    public $sLastRequestURL = '';
 
-    public function __construct() {
-        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestArguments' ), 10, 5 );
-    }
-        public function replyToCaptureWPRemoteRequestArguments( $aoResponse, $sType, $sType2, $aArguments, $sURL ) {
-            if (  'response' !== $sType || 'Requests' !== $sType2 ) {
-                return;
-            }
-            $this->sLastRequestURL = $sURL;
-            $this->aLastRequestArguments = $aArguments;
-            $this->aoLastResponse = $aoResponse;
-            $this->aoLastResponse[ 'headers' ] = reset( $this->aoLastResponse[ 'headers' ] );
-//            $this->aoLastResponse[ 'http_response' ] = $this->aoLastResponse[ 'http_response' ]->to_array();
-//            $this->aoLastResponse[ 'http_response' ][ 'headers' ] = reset( $this->aoLastResponse[ 'http_response' ][ 'headers' ] );
-        }
 
     /**
      * @return string
@@ -49,7 +32,7 @@ class Test_wp_remote_head extends AmazonAutoLinks_UnitTest_Base {
                 'user-agent'  => 'WordPress/5.5.1',
             );
             $_aoResponse3 = wp_remote_head( $sURL, $_aArguments );
-            $this->_outputDetails( 'wp_remote_head()', $this->sLastRequestURL, $this->aLastRequestArguments, $this->aoLastResponse );
+            $this->_outputDetails( 'wp_remote_head()', $this->sLastRequestURL, $this->aLastArguments, $this->aoLastResponse );
             return $this->hasPrefix( '2', $this->getElement( $_aoResponse3, array( 'response', 'code' ) ) );
         }
 
