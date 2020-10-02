@@ -122,10 +122,12 @@ final class AmazonAutoLinks_Property {
         'NL'    => 'www.amazon.nl', // 4.1.0
     );
     /**
-     * Returns the market place domain url by the given locale.
+     * Returns the market place domain/URL by the given locale.
      * 
      * @since       3.8.12
-     * @return      string the store domain including the URL scheme (https://).
+     * @param       string  $sLocale
+     * @param       boolean $bPrefixScheme
+     * @return      string  The store domain. If the `$PrefixScheme` parameter is true, it includes the URL scheme (https://).
      */
     static public function getStoreDomainByLocale( $sLocale, $bPrefixScheme=true ) {
         $_sLocale = strtoupper( $sLocale );
