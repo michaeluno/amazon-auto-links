@@ -9,12 +9,13 @@
  */
 
 /**
- * Utility tests.
+ * Tests the AmazonAutoLinks_WPUtility class.
  *  
  * @package     Amazon Auto Links
  * @since       4.3.0
+ * @see         AmazonAutoLinks_WPUtility
 */
-class AmazonAutoLinks_UnitTest_WPUtility extends AmazonAutoLinks_UnitTest_Base {
+class Test_AmazonAutoLinks_WPUtility extends AmazonAutoLinks_UnitTest_Base {
 
     /**
      * @purpose Checks if files exist;
@@ -37,5 +38,8 @@ class AmazonAutoLinks_UnitTest_WPUtility extends AmazonAutoLinks_UnitTest_Base {
         $_aClassFiles = include( AmazonAutoLinks_Registry::$sDirPath . '/include/class-map.php' );
         return AmazonAutoLinks_WPUtility::doFilesExist( $_aClassFiles );
     }
+
+
+
 
 }
