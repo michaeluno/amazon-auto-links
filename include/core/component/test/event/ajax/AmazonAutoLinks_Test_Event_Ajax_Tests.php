@@ -394,7 +394,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
      * @return      void
      */
     public function replyToEnqueueResources() {
-        $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base' ), 'test' );
+        $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base', 'AmazonAutoLinks_UnitTest_HTTPRequest_Base' ), 'test' );
     }
 
         /**
