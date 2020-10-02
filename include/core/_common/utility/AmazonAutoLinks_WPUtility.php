@@ -38,9 +38,93 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     }
 
     /**
+     * Converts the 'cookies' response element into an array for parsing.
+     * @remrak Do not use this to set cookies for wp_remote_request() as the structure is different.
+     * @param $aoResponse
+     * @return array
+     * @see WP_Http_Cookie
+     * @since 4.3.3
+     */
+    static public function getCookiesFromResponseToParse( $aoResponse ) {
+        $_aReadable = array();
+        $_aCookies  = self::getRequestCookiesFromResponse( $aoResponse );
+        foreach( $_aCookies as $_siNameOrIndex => $_soCookie ) {
+            if ( ! ( $_soCookie instanceof WP_Http_Cookie ) ) {
+                $_aReadable[] = array(
+                    'name'  => $_siNameOrIndex,
+                    'value' => $_soCookie,
+                );
+                continue;
+            }
+            $_aReadable[] = array(
+                'name'  => $_soCookie->name,
+                'value' => $_soCookie->value,
+            ) + $_soCookie->get_attributes();
+        }
+        return $_aReadable;
+    }
+
+    /**
+     * Retrieves cookies to perform HTTP requests form a `wp_remote_request()` response.
+     *
+     * Check 'set-cookie' entries directly from a given response header, not referring to the 'cookies' response element.
+     * This is to support multiple cookies with the same name. The 'cookies' response element does not support it.
+     * For WordPress 4.6.0 or below, it's not supported.
+     *
+     * @param  WP_Error|array $aoResponse
+     * @return WP_Http_Cookie[]
+     * @since  4.3.3
+     */
+    static public function getRequestCookiesFromResponse( $aoResponse ) {
+        if ( is_wp_error( $aoResponse ) ) {
+            return array();
+        }
+        if ( ! isset( $aoResponse[ 'cookies' ] ) ) {
+            return array();
+        }
+        $_aResponseCookies  = $aoResponse[ 'cookies' ];
+        if ( version_compare( $GLOBALS[ 'wp_version' ], '4.6.0', '<' ) ) {
+            return $_aResponseCookies;
+        }
+        // Extract 'set-cookie' element from header
+        $_aRequestCookies = array();
+        $_aHeader         = self::getHeaderFromResponse( $aoResponse );
+        $_aSetCookies     = self::getElementAsArray( $_aHeader, 'set-cookie' ); // there is a case that this is a string of a single entry
+        foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
+            if ( ! $_sSetCookieEntry ) {
+                continue;
+            }
+            $_aRequestCookies[] = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry );
+        }
+        return $_aRequestCookies;
+    }
+        /**
+         * Parses a given 'set-cookie' entry present in a HTTP header.
+         * @param string $sSetCookieEntry
+         * @return WP_Http_Cookie
+         * @since 4.3.3
+         */
+        static private function ___getSetCookieEntryConvertedToWPHTTPCookie( $sSetCookieEntry ) {
+            $_aParts     = self::getStringIntoArray( $sSetCookieEntry, ';', '=' );
+            $_aNameValue = array_shift( $_aParts ); // extract the first element
+            $_aCookie    = array(
+                'name'  => $_aNameValue[ 0 ],
+                'value' => $_aNameValue[ 1 ],
+            );
+            foreach( $_aParts as $_aElement ) {
+                if ( ! isset( $_aElement[ 0 ], $_aElement[ 1 ] ) ) {
+                    continue;
+                }
+                $_aCookie[ $_aElement[ 0 ] ] = $_aElement[ 1 ];
+            }
+            return new WP_Http_Cookie( $_aCookie );
+        }
+
+    /**
      * @param WP_Error|array $aoResponse
      * @return array
      * @since 4.3.3
+     * @deprecated This does not pick up cookies with duplicate names.
      */
     static public function getCookiesFromResponse( $aoResponse ) {
         if ( is_wp_error( $aoResponse ) ) {
@@ -64,8 +148,11 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
 
     /**
      * Schedules a WP Cron single event.
-     * @since       3.5.0
-     * @return      boolean     True if scheduled, false otherwise.
+     * @param  string  $sActionName
+     * @param  array   $aArguments
+     * @param  integer $iTime
+     * @return boolean True if scheduled, false otherwise.
+     * @since  3.5.0
      */
     static public function scheduleSingleWPCronTask( $sActionName, array $aArguments, $iTime=0 ) {
 
@@ -83,6 +170,10 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
 
     /**
      * Returns the readable date-time string.
+     * @param integer     $iTimeStamp
+     * @param null|string $sDateTimeFormat
+     * @param boolean     $bAdjustGMT
+     * @return string
      */
     static public function getSiteReadableDate( $iTimeStamp, $sDateTimeFormat=null, $bAdjustGMT=false ) {
                 
@@ -112,6 +203,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * Finds scheduled cron tasks by the given action name.
      *  
      * @since       3
+     * @param       string  $sActionHookName
      * @return      array
      */
     static public function getScheduledCronTasksByActionName( $sActionHookName ) {
@@ -188,9 +280,12 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         return $sText;
         
     }
+
     /**
-     * 
-     * @return      boolean|string      False when not found. Otherwise, the found encoding character set.
+     *
+     * @param       string          $sText
+     * @param       string          $sCandidateCharSet
+     * @return      boolean|string  False when not found. Otherwise, the found encoding character set.
      */
     static public function getDetectedCharacterSet( $sText, $sCandidateCharSet='' ) {
         
@@ -210,10 +305,14 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         );
         
     }
+
     /**
      * Redirect the user to a post definition edit page.
-     * @sine        3
-     * @return      void
+     * @sine   3
+     * @param  integer $iPostID
+     * @param  string  $sPostType
+     * @param  array   $aGET
+     * @return void
      */
     static public function goToPostDefinitionPage( $iPostID, $sPostType, array $aGET=array() ) {
         exit( 
@@ -226,10 +325,13 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
             ) 
         );        
     }
-    
+
     /**
      * Returns a url of a post definition edit page.
-     * @return      string
+     * @param  integer $iPostID
+     * @param  string  $sPostType
+     * @param  array   $aGET
+     * @return string
      */
     static public function getPostDefinitionEditPageURL( $iPostID, $sPostType, array $aGET=array() ) {
          // e.g. http://.../wp-admin/post.php?post=196&action=edit&post_type=amazon_auto_links
@@ -257,6 +359,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     }
     /**
      * Used by auto-insert form field definitions.
+     * @param       boolean $bDescription
      * @return      array
      */
     static public function getPredefinedFiltersForStatic( $bDescription=true ) {
@@ -270,10 +373,10 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         );        
     }
     
-    
     /**
      * Checks multiple file existence.
-     * 
+     *
+     * @param       array|string    $asFilePaths
      * @return      boolean
      */
     static public function doFilesExist( $asFilePaths ) {        
@@ -284,7 +387,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         }                
         return true;
     }
-
 
     /**
      * Returns an array of the installed taxonomies on the site.
@@ -330,11 +432,14 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * Escapes the given string for the KSES filter with the criteria of allowing/disallowing tags and the protocol.
      * 
      * @remark      Attributes are not supported at this moment.
+     * @param       string      $sString
      * @param       array       $aAllowedTags               e.g. array( 'noscript', 'style', )
+     * @param       array       $aAllowedProtocols
      * @param       array       $aDisallowedTags            e.g. array( 'table', 'tbody', 'thoot', 'thead', 'th', 'tr' )
      * @param       array       $aAllowedAttributes         e.g. array( 'rel', 'itemtype', 'style' )
      * @since       2.0.0
      * @since       3.1.0       Added the $aAllowedAttributes parameter.
+     * @return      string
      */
     static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
