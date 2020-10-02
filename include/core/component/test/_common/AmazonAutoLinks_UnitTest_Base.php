@@ -66,6 +66,33 @@ class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
         $sMessage = $sMessage ? $sMessage : "Assert false.";
         $this->_assertTrue( ! ( boolean ) $bActual, $sMessage, $mData );
     }
+
+    /**
+     * @param mixed $mActual
+     * @param string $sMessage
+     * @param array $mData
+     * @param false $bNegate
+     * @since 4.3.3
+     */
+    protected function _assertNotEmpty( $mActual, $sMessage='', $mData=array(), $bNegate=false ) {
+        $sMessage = $sMessage ? $sMessage : "Assert not empty.";
+        $_bEmpty  = empty( $mActual );
+        if ( $bNegate ? ! $_bEmpty : $_bEmpty ) {
+            $this->_setError( $sMessage, $mActual, $mData );
+            return;
+        }
+        $this->_setPass( $sMessage, $mActual );
+    }
+    /**
+     * @param mixed $mActual
+     * @param string $sMessage
+     * @param array $mData
+     * @since 4.3.3
+     */
+    protected function _assertEmpty( $mActual, $sMessage='', $mData=array() ) {
+        $sMessage = $sMessage ? $sMessage : "Assert empty.";
+        $this->_assertNotEmpty( $mActual, $sMessage, $mData, true );
+    }
     /**
      * @param mixed $mExpected
      * @param mixed $mActual
