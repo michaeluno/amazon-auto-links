@@ -54,7 +54,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
             $this->_setError( $sMessage, $bActual, $mData );
             return;
         }
-        $this->_setPass( $sMessage, $bActual );
+        $this->_setPass( $sMessage );
     }
     /**
      * @param boolean $bActual
@@ -103,10 +103,14 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     protected function _assertEqual( $mExpected, $mActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert equal.";
         if ( $mExpected !== $mActual ) {
-            $this->_setError( $sMessage, $mActual, $mData );
+            $_aDisplay = array(
+                'expected' => $mExpected,
+                'actual'   => $mActual,
+            );
+            $this->_setError( $sMessage, $_aDisplay, $mData );
             return;
         }
-        $this->_setPass( $sMessage, $mActual);
+        $this->_setPass( $sMessage, $mActual );
     }
 
     /**
@@ -128,14 +132,18 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     /**
      * Sets a success message that shows the test passed.
      * @param string $sMessage
-     * @param mixed $mValue
+     * @param mixed ...$aValues
      * @since 4.3.3
      */
-    protected function _setPass( $sMessage, $mValue ) {
+    protected function _setPass( $sMessage, ...$aValues ) {
         $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, array( 'file' => __FILE__ ) );
         $_iLine           = $_oTestException->get( 'line' );
+        $_sDetails        = '';
+        foreach( $aValues as $_mValue ) {
+            $_sDetails .= $this->_getDetails( $_mValue );
+        }
         $this->aOutputs[] = "<p><span class='test-success bold'>OK</span> {$sMessage} Line: {$_iLine}.</p>"
-            . $this->_getDetails( $mValue );
+            . $_sDetails;
     }
 
     /**
