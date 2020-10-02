@@ -15,6 +15,32 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Retrieves the category root URL of the given locale.
+     *
+     * Mainly used by the `category` unit type and the routines of retrieving ratings and reviews for cookies.
+     *
+     * @param  string $sLocale
+     * @return string
+     * @since  4.3.3  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
+     */
+    static public function getBestSellerURL( $sLocale ) {
+        return AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ) . '/gp/bestsellers/';
+
+        /*
+        * @deprecated 4.3.3 Redundant
+        // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
+        $_sURL = str_replace("//gp/","/gp/", $_sURL );
+
+        // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
+        // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
+        // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.
+        return trailingslashit( $_sURL );
+        */
+
+    }
+
+
+    /**
      * @param array $aItem  A product array of a PA-API 5 response.
      * @return null|integer The star rating with two digits like 45 for 4.5.
      * @since 4.3.2

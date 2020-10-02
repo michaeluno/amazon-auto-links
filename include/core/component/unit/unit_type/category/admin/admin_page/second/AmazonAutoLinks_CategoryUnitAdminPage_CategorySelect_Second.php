@@ -76,7 +76,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             // Get the user's set locale
             $_aUnitOptions      = $this->___getUnitOptions();
             $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
-            $_sRootCategoryURL  = AmazonAutoLinks_Unit_Utility_category::getCategoryListRootURL( $_sLocale );
+            $_sRootCategoryURL  = AmazonAutoLinks_Unit_Utility_category::getBestSellerURL( $_sLocale );
 
             // Ajax script
             wp_enqueue_script( 'jquery' );
