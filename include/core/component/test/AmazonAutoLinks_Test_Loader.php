@@ -45,6 +45,8 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_Test_Event_Ajax_Scratches;
         new AmazonAutoLinks_Test_Event_Ajax_Delete;
 
+        new AmazonAutoLinks_Test_Event_Query_Cookie;    // 4.3.3
+
     }
         /**
          * Loads admin components.
