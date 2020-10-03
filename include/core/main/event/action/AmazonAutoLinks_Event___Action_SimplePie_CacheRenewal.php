@@ -13,6 +13,8 @@
  *
  * @package      Amazon Auto Links
  * @since        3
+ * @tood         Removed this class and related lines and files.
+ * @deprecated   4.3.4
  */
 class AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal extends AmazonAutoLinks_Event___Action_Base {
 
