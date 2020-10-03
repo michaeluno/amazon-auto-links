@@ -11,6 +11,13 @@
 /**
  * Renews HTTP request caches in the background.
  *
+ * ### The workflow
+ * 1. An HTTP request is made.
+ * 2. The `aal_filter_http_response_cache` filter hook callbacks are called.
+ * 3. In the callback, if the cache is expired, schedule a renew background routine with the `aal_action_http_cache_renewal` action hook.
+ * And flag the cache as not expired to be loaded in front-end normally.
+ * 4. In the callback of the `aal_action_http_cache_renewal` action hook, perform the HTTP request by removing the existing cache.
+ *
  * @package      Amazon Auto Links
  * @since        3
  *
@@ -25,37 +32,27 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
      * @since       3.5.0
      */
     protected function _construct() {
-        add_filter(
-            'aal_filter_http_response_cache',  // filter hook name
-            array( $this, 'replyToModifyCacheRemainedTime' ), // callback
-            10, // priority
-            4 // number of parameters
-        );
+        add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToModifyCacheRemainedTime' ), 10, 4 );
     }
 
     /**
-     * Checks whether the given type is accepted for performing HTTP requests.
+     * Checks whether the given type is accepted for performing HTTP requests in the background.
      * @since       3.5.0
      * @param       string  $sType
      * @return      boolean
      */
     protected function _isType( $sType ) {
-        return ! in_array(
-            $sType,
-            $this->getAsArray( apply_filters( 'aal_filter_excepted_http_request_types_for_requests', array() ) )
-        );
+        return ! in_array( $sType, $this->getAsArray( apply_filters( 'aal_filter_excepted_http_request_types_for_requests', array() ) ) );
     }
 
     /**
      * Checks whether the given request type is accepted for background caching.
-     * @since       3.5.0
-     * @return      boolean
+     * @since  3.5.0
+     * @param  string  $sType
+     * @return boolean
      */
     protected function _isBackgroundCacheRenewalAllowed( $sType ) {
-        return ! in_array(
-            $sType,
-            $this->getAsArray( apply_filters( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array() ) )
-        );
+        return ! in_array( $sType, $this->getAsArray( apply_filters( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array() ) ) );
     }
 
     /**
@@ -70,7 +67,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     }
 
     /**
-     *
+     * @callback add_action() aal_action_http_cache_renewal
      */
     protected function _doAction( /* $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' */ ) {
 
@@ -87,12 +84,12 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
 
     /**
      *
-     * @callback add_filter()   aal_filter_http_response_cache
      * @param    array          $aCache
      * @param    integer        $iCacheDuration
      * @param    array          $aHTTPArguments
      * @param    string         $sType
      * @return   array
+     * @callback add_filter()   aal_filter_http_response_cache
      */
     public function replyToModifyCacheRemainedTime( $aCache, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
 
@@ -104,28 +101,27 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
             return $aCache;
         }
 
-        // Check if it is expired.
-        if ( 0 >= $aCache[ 'remained_time' ] ) {
-
-            // It is expired. So schedule a task that renews the cache in the background.
-            $_bScheduled = $this->scheduleSingleWPCronTask(
-                $this->_sActionHookName,    // aal_action_http_cache_renewal
-                array(
-                    $aCache[ 'request_uri' ],
-                    $iCacheDuration,
-                    $aHTTPArguments,
-                    $sType
-                )
-            );
-            if ( $_bScheduled ) {
-                AmazonAutoLinks_Shadow::see();
-            }
-
-            // Tell the plugin it is not expired. 
-            $aCache[ 'remained_time' ] = time();
-            
+        // Is it expired?
+        if ( 0 < $aCache[ 'remained_time' ] ) {
+            return $aCache;
         }
 
+        // At this point, it is expired. So schedule a task that renews the cache in the background.
+        $_bScheduled = $this->scheduleSingleWPCronTask(
+            $this->_sActionHookName,    // 'aal_action_http_cache_renewal'
+            array(
+                $aCache[ 'request_uri' ],
+                $iCacheDuration,
+                $aHTTPArguments,
+                $sType
+            )
+        );
+        if ( $_bScheduled ) {
+            AmazonAutoLinks_Shadow::see();
+        }
+
+        // Tell the plugin it is not expired.
+        $aCache[ 'remained_time' ] = time();
         return $aCache;
                 
     }
