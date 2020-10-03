@@ -27,16 +27,8 @@ class AmazonAutoLinks_Event_Scheduler {
         if ( empty( $iaArguments ) ) {
             return;
         }
-
-        $_aArguments = is_scalar( $iaArguments )
-            ? array( 'id' => $iaArguments )
-            : ( array ) $iaArguments;
-
-        // Otherwise, it's an argument.
-        $_bScheduled = self::___scheduleTask(
-            'aal_action_unit_prefetch',  // action name
-            $_aArguments // arguments
-        );
+        $_aArguments = is_scalar( $iaArguments ) ? array( 'id' => $iaArguments ) : ( array ) $iaArguments;
+        AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_unit_prefetch', array( $_aArguments ) );
 
     }
 
@@ -113,7 +105,7 @@ class AmazonAutoLinks_Event_Scheduler {
             foreach( $_aChunks as $__aTaskRows ) {
                 $_oTaskTable->insertRowsIgnore( $__aTaskRows );
             }
-            self::___scheduleTask( 'aal_action_check_tasks' );
+            AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks' );
             AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
 
         }
@@ -245,7 +237,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 foreach( $_aChunks as $__aTaskRows ) {
                     $_oTaskTable->insertRowsIgnore( $__aTaskRows );
                 }
-                self::___scheduleTask( 'aal_action_check_tasks' );
+                AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks' );
 
             }
 
@@ -308,6 +300,8 @@ class AmazonAutoLinks_Event_Scheduler {
         static protected $_aCounters = array();
 
         /**
+         * @remark      The difference between AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask() is
+         * that this adds a delay to scheduled WP Cron items if they have same action hook name already registered.
          * @return      boolean
          */
         static private function ___scheduleTask( /* $_sActionName, $mArgument1, $mArgument2, ... */ ) {
