@@ -15,6 +15,59 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param  string   $sLocale
+     * @param  string   $sLanguage
+     * @since  3.4.4
+     * @return array
+     */
+    static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
+
+        $_sURL       = self::getAssociatesURL( $sLocale );
+        $_oHTTP      = new AmazonAutoLinks_HTTPClient(
+            $_sURL,
+            86400 * 7,
+            array( 'method' => 'HEAD', 'cookies' => self::getAssociatesRequestCookies( $sLocale, $_sURL ) )
+        );
+        return self::getRequestCookiesFromResponse( $_oHTTP->getRawResponse() );
+
+    }
+
+    /**
+     * @param  string $sLocale
+     * @param  string $sURL
+     * @return WP_Http_Cookie[]
+     * @since  4.3.4
+     */
+    static public function getAssociatesRequestCookies( $sLocale, $sURL ) {
+        $_sLocaleKey = 'ubid-acb' . strtolower( $sLocale );
+        $_sToken     = sprintf( '%03d', mt_rand( 1, 999 ) ) . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) ) . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) );
+        $_iExpires   = time() + ( 86400 * 365 );
+        $_sDomain    = self::___getCookieDomain( $sURL );
+        return array(
+            new WP_Http_Cookie( array( 'name' => 'ubid-main',  'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
+            new WP_Http_Cookie( array( 'name' => $_sLocaleKey, 'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
+        );
+    }
+        /**
+         * @param  string $sURL
+         * @return string
+         * @since  4.3.4
+         */
+        static private function ___getCookieDomain( $sURL ) {
+            $_sHost   = parse_url( $sURL, PHP_URL_HOST );
+            return preg_replace( '/^www/', '', $_sHost );
+        }
+
+    /**
+     * @param  string $sLocale
+     * @return string
+     * @since  3.4.4
+     */
+    static public function getAssociatesURL( $sLocale ) {
+        return AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
+    }
+
+    /**
      * Retrieves the category root URL of the given locale.
      *
      * Mainly used by the `category` unit type and the routines of retrieving ratings and reviews for cookies.
