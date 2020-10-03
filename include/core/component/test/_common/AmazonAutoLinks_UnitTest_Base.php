@@ -44,12 +44,12 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
 
     /**
      * @param  boolean $bActual
-     * @param  string $sMessage
-     * @param  mixed $mData
+     * @param  string  $sMessage
+     * @param  mixed   $mData
      * @return boolean
      * @sicne  4.3.4
      */
-    protected function _assertTrue( $bActual, $sMessage='', $mData=array() ) {
+    protected function _assertTrue( $bActual, $sMessage='', $mData=array()) {
         $sMessage = $sMessage ? $sMessage : "Assert true.";
         if ( true !== ( boolean ) $bActual ) {
             $this->_setError( $sMessage, $bActual, $mData );
@@ -67,7 +67,12 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      */
     protected function _assertFalse( $bActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert false.";
-        return $this->_assertTrue( ! ( boolean ) $bActual, $sMessage, $mData );
+        if ( false !== ( boolean ) $bActual ) {
+            $this->_setError( $sMessage, $bActual, $mData );
+            return false;
+        }
+        $this->_setPass( $sMessage );
+        return true;
     }
 
     /**
