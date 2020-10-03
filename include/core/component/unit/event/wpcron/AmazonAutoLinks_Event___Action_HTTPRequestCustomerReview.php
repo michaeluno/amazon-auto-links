@@ -12,7 +12,7 @@
  * Retrieves customer reviews and the rating of the given product and updates the product cache.
  * @package      Amazon Auto Links
  * @since        3.9.0
- * @since        4.3.3  Renamed from `AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2`. Changed the action hook name from `aal_action_api_get_customer_review2`.
+ * @since        4.3.4  Renamed from `AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2`. Changed the action hook name from `aal_action_api_get_customer_review2`.
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAutoLinks_Event___Action_Base {
 
@@ -53,7 +53,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @param $sASIN
          * @param $sLocale
          * @return string
-         * @since 4.3.3
+         * @since 4.3.4
          */
         private function ___getReviewPageURL( $sASIN, $sLocale ) {
             return AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $sASIN, $sLocale );
@@ -76,7 +76,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @param  boolean $bForceRenew
          * @param  string  $sLocale
          * @return string
-         * @since  4.3.3
+         * @since  4.3.4
          */
         private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew, $sLocale ) {
             $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew );
@@ -90,7 +90,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
              * @param  integer $iCacheDuration
              * @param  boolean $bForceRenew
              * @return string
-             * @since  4.3.3
+             * @since  4.3.4
              */
             private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew ) {
                 $oHTTP          = new AmazonAutoLinks_HTTPClient(
@@ -164,7 +164,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
     /**
      * @param  string $sLocale
      * @return array
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _getRequestCookiesByLocale( $sLocale ) {
         $_sAssociatesURL  = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );

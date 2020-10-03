@@ -12,7 +12,7 @@
  * Retrieve rating information of the given product and updates the product cache.
  *
  * @package      Amazon Auto Links
- * @since        4.3.3
+ * @since        4.3.4
  * @remark       Not used at the moment and still being tested.
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview {
@@ -141,7 +141,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
             /**
              * @return array
              * @param $sLocale
-             * @since 4.3.3
+             * @since 4.3.4
              */
             private function ___getRequestCookiesByLocale2( $sLocale ) {
                 $_sToken  = $this->___getCookie_ubid_main();
@@ -157,7 +157,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 /**
                  * Generates a string for the `ubid-main` cookie item.
                  * @return string Format: XXX-XXXXXXX-XXXXXXX e.g. 001-0000000-0000000
-                 * @since 4.3.3
+                 * @since 4.3.4
                  */
                 private function ___getCookie_ubid_main() {
                     return sprintf( '%03d', mt_rand( 1, 999 ) )
@@ -193,7 +193,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          * @param  string  $sCurrency
          * @param  string  $sLanguage
          * @return array
-         * @since  4.3.3
+         * @since  4.3.4
          */
         private function ___getRowFormatted( $sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
 

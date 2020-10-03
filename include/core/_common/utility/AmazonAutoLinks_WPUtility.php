@@ -20,7 +20,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     /**
      * @param WP_Error|array $aoResponse
      * @return array
-     * @since 4.3.3
+     * @since 4.3.4
      */
     static public function getHeaderFromResponse( $aoResponse ) {
         if ( is_wp_error( $aoResponse ) ) {
@@ -43,7 +43,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @param $aoResponse
      * @return array
      * @see WP_Http_Cookie
-     * @since 4.3.3
+     * @since 4.3.4
      */
     static public function getCookiesFromResponseToParse( $aoResponse ) {
         $_aCookies = self::getRequestCookiesFromResponse( $aoResponse );
@@ -53,7 +53,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     /**
      * @param array $aCookies   The response 'cookies' element.
      * @return array
-     * @since 4.3.3
+     * @since 4.3.4
      */
     static public function getCookiesToParse( array $aCookies ) {
         $_aToParse = array();
@@ -82,7 +82,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      *
      * @param  WP_Error|array $aoResponse
      * @return WP_Http_Cookie[]
-     * @since  4.3.3
+     * @since  4.3.4
      */
     static public function getRequestCookiesFromResponse( $aoResponse ) {
         if ( is_wp_error( $aoResponse ) ) {
@@ -111,7 +111,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
          * Parses a given 'set-cookie' entry present in a HTTP header.
          * @param string $sSetCookieEntry
          * @return WP_Http_Cookie
-         * @since 4.3.3
+         * @since 4.3.4
          */
         static private function ___getSetCookieEntryConvertedToWPHTTPCookie( $sSetCookieEntry ) {
             $_aParts     = self::getStringIntoArray( $sSetCookieEntry, ';', '=' );
@@ -132,7 +132,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     /**
      * @param WP_Error|array $aoResponse
      * @return array
-     * @since 4.3.3
+     * @since 4.3.4
      * @deprecated This does not pick up cookies with duplicate names.
      */
     static public function getCookiesFromResponse( $aoResponse ) {

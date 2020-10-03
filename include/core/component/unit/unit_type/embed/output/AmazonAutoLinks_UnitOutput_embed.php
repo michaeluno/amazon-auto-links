@@ -236,7 +236,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @param  string $sURL
      * @return array
      * @since  4.2.2
-     * @since  4.3.3 Changed the parameters to be singular.
+     * @since  4.3.4 Changed the parameters to be singular.
      */
     public function replyToCaptureError( $aoResponse, $sURL ) {
         remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20 );

@@ -62,7 +62,7 @@ final class AmazonAutoLinks_Property {
 
     /**
      * @var array
-     * @since 4.3.3
+     * @since 4.3.4
      */
     static public $aAssociatesURLs = array(
         'CA'    => 'https://associates.amazon.ca/',
@@ -89,7 +89,7 @@ final class AmazonAutoLinks_Property {
      * Returns the Amazon Associates URL.
      *
      * @param       string  $sLocale
-     * @since       4.3.3
+     * @since       4.3.4
      * @return      string
      */
     static public function getAssociatesURLByLocale( $sLocale ) {

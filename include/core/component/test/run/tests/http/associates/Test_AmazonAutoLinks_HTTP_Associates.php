@@ -12,7 +12,7 @@
  * Tests Amazon Associates sites.
  *
  * @package Amazon Auto Links
- * @since   4.3.3
+ * @since   4.3.4
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http
 */

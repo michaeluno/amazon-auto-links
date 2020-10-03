@@ -66,7 +66,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Event___Action_APIRequestSearchProducts;    // 3.7.7+
             new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;  // 3.9.0
             new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;      // 3.5.0
-            new AmazonAutoLinks_Event___Action_HTTPRequestRating;           // 4.3.3
+            new AmazonAutoLinks_Event___Action_HTTPRequestRating;           // 4.3.4
 
 
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0

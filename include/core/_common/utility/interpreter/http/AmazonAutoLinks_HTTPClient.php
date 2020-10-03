@@ -14,7 +14,7 @@
  * @remark Has a caching system built-in.
  * @remark Handles auto-encoding of the document from the source character set to the site character set.
  * @since  3
- * @sicne  4.3.3 Deprecated the multiple URLs.  For multiple URLs to process at once, use `AmazonAutoLinks_HTTPClient_Multiple`.
+ * @sicne  4.3.4 Deprecated the multiple URLs.  For multiple URLs to process at once, use `AmazonAutoLinks_HTTPClient_Multiple`.
  */
 class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
@@ -49,14 +49,14 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Stores the processing URL.
      * @var string
-     * @sicne 4.3.3
+     * @sicne 4.3.4
      */
     public $sURL;
 
     /**
      * Stores the processing response cache name.
      * @var string
-     * @since 4.3.3
+     * @since 4.3.4
      */
     public $sCacheName;
 
@@ -85,7 +85,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'stream'             => false,
         'filename'           => null,
         'method'             => null,  // [3.9.0]
-        'reject_unsafe_urls' => true,  // [4.3.3]
+        'reject_unsafe_urls' => true,  // [4.3.4]
     );
 
     /**
@@ -97,7 +97,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'compress_cache'         => false,    // [4.0.0] (boolean) whether to compress cache data
         'proxy'                  => null,     // [4.2.0]
         'attempts'               => 0,        // [4.2.0] (integer) for multiple attempts for requests, especially for cases with proxies.
-        'skip_argument_format'   => false,    // [4.3.3] (boolean) whether to skip argument formatting. Used in the multiple mode.
+        'skip_argument_format'   => false,    // [4.3.4] (boolean) whether to skip argument formatting. Used in the multiple mode.
     );
 
     /**
@@ -114,7 +114,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @param string  $sRequestType
      * @param array   $aCache           A cache array to suppress the database cache. This is used for multiple URLs to query them for caches at once.
      * @sicne 3
-     * @sicne 4.3.3   Added the $aCache array.
+     * @sicne 4.3.4   Added the $aCache array.
      */
     public function __construct( $sURL, $iCacheDuration=86400, array $aArguments=array(), $sRequestType='wp_remote_get', array $aCache=array() ) {
 
@@ -154,7 +154,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * Even though it says _raw_, filters are applied to those responses. To get real raw responses, use `getRawResponse()`
      * @param string If a URL is given, it returns ,
      * @return array|WP_Error
-     * @since 4.3.3
+     * @since 4.3.4
      * @deprecated
      */
 //    public function getRaw() {
@@ -177,7 +177,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * This is public because for a case that the user calls `getRawResponse()` first to check inside the response then wants to convert the document encoding.
      * @param  WP_Error|array|null
      * @return string
-     * @since  4.3.3
+     * @since  4.3.4
      */
     public function getBody() {
         $aoResponse    = $this->getResponse();
@@ -192,7 +192,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * @remark Handles character encoding conversion. Encodes the document from the source character set to the site character set.
          * @param  string  $sHTTPBody    An HTTP body.
          * @param  string  $sCharSetFrom A character set of the HTTP body.
-         * @sicne  4.3.3
+         * @sicne  4.3.4
          * @return string
          */
         private function ___getResponseBodySanitized( $sHTTPBody, $sCharSetFrom ) {
@@ -236,7 +236,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @remark Stores the response into the property.
      * @remark Still `aal_filter_http_request_response` is applied.
      * @return WP_Error|array
-     * @since 4.3.3
+     * @since 4.3.4
      */
     public function getRawResponse() {
         $_aoResponse = ! empty( $this->aoResponse )
@@ -291,7 +291,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
              * @param  array   $aArguments
              * @param  string  $sRequestType
              * @return array   The cache array. If the data is corrupt or uncached, an empty array will be returned.
-             * @since 4.3.3
+             * @since 4.3.4
              */
             private function ___getHTTPResponseFromCache( array $aCache, $sCacheName, $iCacheDuration, $aArguments, $sRequestType ) {
 
@@ -347,7 +347,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
              * @param integer $iCacheDuration
              * @param array $aSetCache  The cache data passed to the constructor, used for the multiple mode.
              * @return array
-             * @since 4.3.3
+             * @since 4.3.4
              */
             private function ___getCacheFromDatabase( $sCacheName, $iCacheDuration, $aSetCache ) {
                 if ( 0 === ( integer ) $iCacheDuration ) {
@@ -568,7 +568,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
              * @see     http://www.iana.org/assignments/character-sets/character-sets.xhtml
              * @param   array|string|Requests_Utility_CaseInsensitiveDictionary $asHeaderResponse
              * @return  string      The found character set. e.g. ISO-8859-1, utf-8, Shift_JIS
-             * @since 4.3.3 Moved from AmazonAutoLinks_PluginUtility
+             * @since 4.3.4 Moved from AmazonAutoLinks_PluginUtility
              */
             private function ___getCharacterSetFromHeader( $asHeaderResponse ) {
 
@@ -619,7 +619,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * @since       4.2.0   Removed the return value as it is not used anywhere
          * @since       4.2.0   Revived the `aal_filter_http_request_set_cache` filter for requests with proxies and they are failed.
          * @since       4.3.0   Added the `$aOldCache` parameter and made it passed to the `aal_filter_http_request_set_cache` filter.
-         * @since       4.3.3   Added the `$sCacheName` and `$sRequestType` parameters.
+         * @since       4.3.4   Added the `$sCacheName` and `$sRequestType` parameters.
          */
         private function ___setCacheInDatabase( $sURL, $sCacheName, $aoResponse, $iCacheDuration, $aArguments, array $aOldCache, $sRequestType ) {
             
@@ -693,7 +693,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             + $this->aArgumentStructure
             + $this->aCustomArguments;
 
-        // [4.3.3] Skips formatting. This is used in the multiple mode.
+        // [4.3.4] Skips formatting. This is used in the multiple mode.
         if ( $aArguments[ 'skip_argument_format' ] ) {
             return $aArguments;
         }
@@ -712,7 +712,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             ? $aArguments[ 'user-agent' ]
             : 'WordPress/' . $GLOBALS[ 'wp_version' ];
 
-        // [4.3.3]
+        // [4.3.4]
         if ( ! empty( $aArguments[ 'body' ] ) ) {
             $aArguments[ 'method' ] = 'POST';
         }
@@ -729,12 +729,12 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             $aArguments[ 'compress_cache' ] = false;
         }
 
-        // [4.3.3] If the body is an array sort by key. This is important to generate identical cache names
+        // [4.3.4] If the body is an array sort by key. This is important to generate identical cache names
         if ( is_array( $aArguments[ 'body' ] ) ) {
             ksort( $aArguments[ 'body' ] );
         }
 
-        // [4.3.3]
+        // [4.3.4]
         if ( isset( $aArguments[ 'raw' ] ) ) {
             trigger_error( "The 'raw' argument has been deprecated. Use 'getRaw()' instead.", E_USER_WARNING );
         }
@@ -748,7 +748,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @param  string  $sRequestType
      * @return string
      * @since  3
-     * @since  4.3.3   Added the `$aArguments` parameter.
+     * @since  4.3.4   Added the `$aArguments` parameter.
      */
     protected function _getCacheName( $sURL, array $aArguments, $sRequestType ) {
 
@@ -776,7 +776,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Checks whether the response is a cache.
      * @return boolean
-     * @since 4.3.3
+     * @since  4.3.4
      */
     public function isCacheUsed() {
         return ! empty( $this->___aCache );
@@ -784,7 +784,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @return bool
-     * @since 4.3.3
+     * @since  4.3.4
      */
     public function hasCache() {
         $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $this->iCacheDuration, $this->___aCache );

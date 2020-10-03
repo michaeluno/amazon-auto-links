@@ -47,7 +47,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
         if ( ! $this->___hasError( $aoResponse, $sURL ) ) {
             return $aoResponse;
         }
-        /* @deprecated 4.3.3
+        /* @deprecated 4.3.4
         $aoResponse = $this->___getError( $aoResponse, $sURL );        
         if ( ! is_wp_error( $aoResponse ) ) {
             return $aoResponse;
@@ -87,7 +87,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
          * @param $aoResponse
          * @param $sURL
          * @return WP_Error
-         * @deprecated 4.3.3    The timing of BLOCKED_BY_CAPTCHA WP_Error object has changed and caching the raw response instead of a WP_Error object. 
+         * @deprecated 4.3.4    The timing of BLOCKED_BY_CAPTCHA WP_Error object has changed and caching the raw response instead of a WP_Error object.
          */
 /*        private function ___getError( $aoResponse, $sURL ) {
             if ( is_wp_error( $aoResponse ) ) {
@@ -103,7 +103,7 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
          * @param $aoResponse
          * @param $sURL
          * @return bool
-         * @since 4.3.3
+         * @since 4.3.4
          */
         private function ___hasError( $aoResponse, $sURL ) {
             if ( is_wp_error( $aoResponse ) ) {

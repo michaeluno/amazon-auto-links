@@ -11,7 +11,7 @@
 /**
  * Tests cookies.
  *
- * @since   4.3.3
+ * @since   4.3.4
  */
 class AmazonAutoLinks_Test_Event_Query_Cookie {
 

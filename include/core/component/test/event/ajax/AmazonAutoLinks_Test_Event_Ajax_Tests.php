@@ -211,7 +211,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
              * @param ReflectionClass|ReflectionMethod $oSubject
              * @param string|array  $asAnnotations
              * @return boolean
-             * @since 4.3.3
+             * @since 4.3.4
              */
             private function ___hasAnnotation( $oSubject, $asAnnotations ) {
                 $_aAnnotations = array();

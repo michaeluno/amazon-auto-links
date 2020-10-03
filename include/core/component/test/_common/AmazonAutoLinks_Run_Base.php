@@ -27,7 +27,7 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
      * @param $sMethodName
      * @param $aParameters
      * @return mixed
-     * @since 4.3.3
+     * @since 4.3.4
      */
     public function call( $sMethodName, ...$aParameters ) {
         $this->aOutputs = array();
@@ -47,7 +47,7 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
      * @param string $sErrorMessage
      * @param integer $iCode
      * @throws Exception
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _throw( $sErrorMessage, $iCode=0 ) {
         throw new AmazonAutoLinks_Test_Exception( $sErrorMessage, ( integer ) $iCode, array( 'file' => __FILE__ ) );
@@ -55,7 +55,7 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @param string $sText
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _output( $sText ) {
         $this->aOutputs[] = $sText;
@@ -64,7 +64,7 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
     /**
      * @param string sTitle
      * @param mixed ...$mValues
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _outputDetails( $sTitle, ...$mValues ) {
         $_aParams = func_get_args();

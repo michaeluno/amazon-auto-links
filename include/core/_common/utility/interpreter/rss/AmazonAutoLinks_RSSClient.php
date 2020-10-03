@@ -73,7 +73,7 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
          * @param int $iCacheDuration
          * @param bool $bForceRenew
          * @return array
-         * @since 4.3.3
+         * @since 4.3.4
          */
         private function ___getHTTPBodies( array $aURLs, $iCacheDuration, $bForceRenew ) {
             $_oHTTP     = new AmazonAutoLinks_HTTPClient_Multiple(

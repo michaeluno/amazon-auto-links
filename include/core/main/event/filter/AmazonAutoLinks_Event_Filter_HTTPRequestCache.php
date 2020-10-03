@@ -94,12 +94,12 @@ class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_Plug
 
             /**
              *
-             * Since v4.3.3, the timing of creating captcha error WP_Error object has changed
+             * Since v4.3.4, the timing of creating captcha error WP_Error object has changed
              * and therefore, the error needs to be captured here.
              * @param $mData
              * @param string $sURL
              * @return string
-             * @since 4.3.3
+             * @since 4.3.4
              */
             private function ___getCaptchaError( $mData, $sURL ) {
                 if ( $this->isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $mData ), $sURL ) ) {

@@ -165,7 +165,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 }
 
                 // Ratings
-                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.3 removed '%_discount_rate%' as it should be nothing to with ratings.
+                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to with ratings.
                     return;
                 }
                 AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );

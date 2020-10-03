@@ -12,7 +12,7 @@
  * A base class for testing HTTP requests.
  *
  * @package Amazon Auto Links
- * @since   4.3.3
+ * @since   4.3.4
 */
 abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks_UnitTest_Base {
 

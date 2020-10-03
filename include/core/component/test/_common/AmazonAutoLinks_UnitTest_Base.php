@@ -34,7 +34,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * Calls a given method by initializing class properties.
      * @param $sMethodName
      * @param mixed ...$aParameters
-     * @since 4.3.3
+     * @since 4.3.4
      * @return mixed
      */
     public function call( $sMethodName, ...$aParameters ) {
@@ -47,7 +47,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  string $sMessage
      * @param  mixed $mData
      * @return boolean
-     * @sicne  4.3.3
+     * @sicne  4.3.4
      */
     protected function _assertTrue( $bActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert true.";
@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  boolean $bActual
      * @param  string $sMessage
      * @param  mixed $mData
-     * @sicne  4.3.3
+     * @sicne  4.3.4
      * @return boolean
      */
     protected function _assertFalse( $bActual, $sMessage='', $mData=array() ) {
@@ -76,7 +76,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  array $mData
      * @param  false $bNegate
      * @return boolean
-     * @since  4.3.3
+     * @since  4.3.4
      */
     protected function _assertNotEmpty( $mActual, $sMessage='', $mData=array(), $bNegate=false ) {
         $sMessage = $sMessage ? $sMessage : "Assert not empty.";
@@ -93,14 +93,14 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  string $sMessage
      * @param  array $mData
      * @return boolean
-     * @since  4.3.3
+     * @since  4.3.4
      */
     protected function _assertEmpty( $mActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert empty.";
         return $this->_assertNotEmpty( $mActual, $sMessage, $mData, true );
     }
     /**
-     * @sicne  4.3.3
+     * @sicne  4.3.4
      * @param  mixed  $mExpected
      * @param  mixed  $mActual
      * @param  string $sMessage
@@ -127,7 +127,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  string  $sMessage
      * @param  mixed   $mData
      * @return boolean
-     * @sicne  4.3.3
+     * @sicne  4.3.4
      */
     protected function _assertPrefix( $sPrefix, $sHaystack, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Check if the string has the specified prefix.";
@@ -143,7 +143,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * Sets a success message that shows the test passed.
      * @param string $sMessage
      * @param mixed ...$aValues
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _setPass( $sMessage, ...$aValues ) {
         $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, array( 'file' => __FILE__ ) );
@@ -161,7 +161,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param string $sMessage
      * @param mixed $mValue
      * @param mixed $mData
-     * @since 4.3.3
+     * @since 4.3.4
      */
     protected function _setError( $sMessage, $mValue, $mData ) {
         $_oTestException  = new AmazonAutoLinks_Test_Exception( $sMessage, 0, array( 'file' => __FILE__ ) );

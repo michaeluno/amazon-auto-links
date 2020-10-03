@@ -18,10 +18,10 @@ class AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError extends Amazo
     /**
      * Sets up hooks.
      * @since 4.2.2
-     * @since 4.3.3 Changed the filter hook from `aal_filter_http_request_response`.
+     * @since 4.3.4 Changed the filter hook from `aal_filter_http_request_response`.
      */
     public function __construct() {
-        // @deprecated 4.3.3
+        // @deprecated 4.3.4
 //        add_filter(
 //            'aal_filter_http_request_response',
 //            array( $this, 'replyToCaptureCaptchaError' ),
@@ -40,7 +40,7 @@ class AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError extends Amazo
     /**
      * @param array|WP_Error $aoResponse
      * @param string   $sURL
-     * @since 4.3.3
+     * @since 4.3.4
      * @callback add_filter()    aal_filter_http_request_result
      * @return array|WP_Error
      */
@@ -67,7 +67,7 @@ class AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError extends Amazo
      * @param integer $iCacheDuration
      * @return  WP_Error|array
      * @since   4.2.2
-     * @deprecated 4.3.3
+     * @deprecated 4.3.4
      */
 /*    public function replyToCaptureCaptchaError( $oaResult, $sURL, $aArguments, $sRequestType, $iCacheDuration ) {
 

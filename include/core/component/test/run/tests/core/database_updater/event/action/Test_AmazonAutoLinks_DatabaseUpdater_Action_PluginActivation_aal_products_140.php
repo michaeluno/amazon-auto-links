@@ -9,7 +9,7 @@
  */
 
 /**
- * @since 4.3.3
+ * @since 4.3.4
  * @tags database product
  * @see AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140
  */

@@ -21,13 +21,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      *
      * @param  string $sLocale
      * @return string
-     * @since  4.3.3  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
+     * @since  4.3.4  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
      */
     static public function getBestSellerURL( $sLocale ) {
         return AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ) . '/gp/bestsellers/';
 
         /*
-        * @deprecated 4.3.3 Redundant
+        * @deprecated 4.3.4 Redundant
         // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
         $_sURL = str_replace("//gp/","/gp/", $_sURL );
 

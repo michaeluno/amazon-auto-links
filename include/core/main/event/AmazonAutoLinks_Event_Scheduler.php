@@ -48,7 +48,7 @@ class AmazonAutoLinks_Event_Scheduler {
      * @param  boolean $bForceRenew
      * @return boolean
      * @since  3.9.0
-     * @since  4.3.3 Deprecated the `$sURL`, `$sASIN`, `$sLocale`, `$sCurrency`, and `$sLanguage` parameter.
+     * @since  4.3.4 Deprecated the `$sURL`, `$sASIN`, `$sLocale`, `$sCurrency`, and `$sLanguage` parameter.
      * @todo use the task table
      */
     static public function scheduleCustomerReviews( $sProductID, $iCacheDuration, $bForceRenew ) {
@@ -63,7 +63,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
     /**
      * @var array Stores items holding product information including ASIN, locale, currency and language to update their ratings.
-     * @since 4.3.3
+     * @since 4.3.4
      */
     static private $___aRatingItems = array();
     /**
@@ -71,7 +71,7 @@ class AmazonAutoLinks_Event_Scheduler {
      * @param string $sProductID
      * @param integer $iCacheDuration
      * @param boolean $bForceRenew
-     * @since 4.3.3
+     * @since 4.3.4
      * @return boolean|void
      */
     static public function scheduleRating( $sProductID, $iCacheDuration, $bForceRenew ) {
@@ -94,7 +94,7 @@ class AmazonAutoLinks_Event_Scheduler {
     }
         /**
          * @callback add_action shutdown
-         * @since 4.3.3
+         * @since 4.3.4
          */
         static public function replyToQueueRatingRetrieval() {
 
