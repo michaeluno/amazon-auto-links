@@ -18,6 +18,28 @@
 class Test_AmazonAutoLinks_WPUtility extends AmazonAutoLinks_UnitTest_Base {
 
     /**
+     * @sine 4.3.4
+     * @purpose Tests scheduling and unscheduling WP Cron items.
+     * @tags cron
+     */
+    public function test_scheduleSingleWPCronTask(){
+
+        $_sTestActionName = 'test_' . uniqid();
+        $_aArguments      = array( 'foo', 'bar' );
+        $_iTimeStamp      = time() + 10;
+        $this->_assertFalse( wp_next_scheduled( $_sTestActionName, $_aArguments ), 'The action with a generated unique name should not be ever registered.' );
+
+        $_bScheduled      = AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( $_sTestActionName, $_aArguments, $_iTimeStamp );
+        $this->_assertTrue( $_bScheduled, 'Now it should be scheduled.' );
+
+        $_bUnscheduled    = wp_unschedule_event( $_iTimeStamp, $_sTestActionName, $_aArguments );
+        $this->_assertTrue( $_bUnscheduled, 'Now it should be unscheduled.' );
+        $this->_assertFalse( wp_next_scheduled( $_sTestActionName, $_aArguments ), 'It is now unscheduled.' );
+
+    }
+
+
+    /**
      * @purpose Checks if files exist;
      * @return bool
      */

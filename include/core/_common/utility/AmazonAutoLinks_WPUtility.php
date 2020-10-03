@@ -168,12 +168,8 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         if ( wp_next_scheduled( $sActionName, $aArguments ) ) {
             return false;
         }
-        $_bCancelled = wp_schedule_single_event(
-            $iTime ? $iTime : time(), // now
-            $sActionName,   // an action hook name which gets executed with WP Cron.
-            $aArguments     // must be enclosed in an array.
-        );
-        return false !== $_bCancelled;
+        $_iTime = $iTime ? $iTime : time();
+        return false !== wp_schedule_single_event( $_iTime, $sActionName, $aArguments );
 
     }
 
