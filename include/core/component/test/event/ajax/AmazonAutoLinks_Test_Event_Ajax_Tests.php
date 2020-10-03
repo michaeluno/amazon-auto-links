@@ -50,6 +50,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
         try {
 
+            // Auto-load classes.
+            new AmazonAutoLinks_AdminPageFramework_RegisterClasses(
+                array(),
+                array(),
+                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' )
+            );
+
             $_sFilePath = $this->getElement( $aPost, array( 'file_path' ), '' );
             if ( ! file_exists( $_sFilePath ) ) {
                 throw new Exception( 'The file does not exist: ' . $_sFilePath  );
