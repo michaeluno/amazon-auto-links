@@ -168,7 +168,7 @@ return array(
     "AmazonAutoLinks_Test_Event_Ajax_Scratches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Scratches.php", 
     "AmazonAutoLinks_Test_Event_Ajax_Tests" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Tests.php", 
     "AmazonAutoLinks_Test_Event_Query_Cookie" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_Cookie.php", 
-    "AmazonAutoLinks_Test_ClassFinder" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_ClassFinder.php", 
+    "AmazonAutoLinks_Test_ClassLister" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_ClassLister.php", 
     "AmazonAutoLinks_Test_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_Utility.php", 
     "AmazonAutoLinks_MockClass" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_MockClass.php", 
     "AmazonAutoLinks_Run_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Run_Base.php", 
