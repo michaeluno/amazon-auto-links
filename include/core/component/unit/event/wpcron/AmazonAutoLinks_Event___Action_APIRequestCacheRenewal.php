@@ -15,6 +15,9 @@
  */
 class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLinks_Event___Action_HTTPCacheRenewal {
 
+    /**
+     * @var string[]
+     */
     private $___aAPIRequestTypes = array(
         'api',
         'api_test',
@@ -33,6 +36,7 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
     /**
      * Checks whether the given type is accepted.
      * @since       3.5.0
+     * @param       string  $sType
      * @return      boolean
      */
     protected function _isType( $sType ) {
@@ -42,6 +46,7 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
     /**
      * Checks whether the given request type is accepted for caching.
      * @since       3.5.0
+     * @param       string  $sType
      * @return      boolean
      */
     protected function _isBackgroundCacheRenewalAllowed( $sType ) {
@@ -77,7 +82,7 @@ class AmazonAutoLinks_Event___Action_APIRequestCacheRenewal extends AmazonAutoLi
             $_aConstructorParameters[ 4 ],  // $aHTTPArguments
             $_aConstructorParameters[ 5 ]   // $sRequestType
         );
-        $_aResponse = $_oPAAPI5->request( $aHTTPArguments[ 'api_parameters' ], $iCacheDuration, true ); // force caching
+        $_oPAAPI5->request( $aHTTPArguments[ 'api_parameters' ], $iCacheDuration, true ); // force caching
 
     }
 
