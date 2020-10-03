@@ -17,6 +17,73 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
+     * @param  string  $sActionName
+     * @param  array   $aArguments
+     * @param  integer $iTime
+     * @return boolean
+     * @since  4.3.4
+     * @todo   Untested
+     */
+    static public function scheduleTask( $sActionName, array $aArguments=array(), $iTime=0 ) {
+
+        $iTime     = $iTime ? $iTime : time();
+        if ( version_compare( get_option( 'aal_tasks_version', '0' ), '1.0.0b01', '<' ) ) {
+            return self::scheduleSingleWPCronTask( $sActionName, $aArguments, $iTime );
+        }
+        $_sName    = md5( $sActionName . serialize( $aArguments ) );
+        $_aTaskRow = array(
+            'name'          => $_sName,  // (unique column)
+            'action'        => 'aal_action_api_get_product_rating',
+            'arguments'     => $aArguments,
+            'creation_time' => date( 'Y-m-d H:i:s', time() ),
+            'next_run_time' => date( 'Y-m-d H:i:s', $iTime ),
+        );
+        $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+        $_biResult   = $_oTaskTable->insertRowIgnore( $_aTaskRow );
+        if ( $_biResult ) {
+            self::scheduleSingleWPCronTask( 'aal_action_check_tasks' );
+            AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+        }
+        return ( boolean ) $_biResult;
+
+    }
+
+    /**
+     * @param  string $sActionName
+     * @param  array  $aArguments
+     * @param  string $sRowName     The row name of the aal_tasks table. If not specified, auto-generated name will be used.
+     * @return bool
+     * @todo   Untested
+     */
+    static public function isTaskScheduled( $sActionName, array $aArguments=array(), $sRowName='' ) {
+        if ( version_compare( get_option( 'aal_tasks_version', '0' ), '1.0.0b01', '<' ) ) {
+            return  ( boolean ) wp_next_scheduled( $sActionName, $aArguments );
+        }
+        $sRowName    = strlen( $sRowName )
+            ? $sRowName
+            : md5( $sActionName . serialize( $aArguments ) );
+        $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+        return $_oTaskTable->doesRowExist( array( 'name' => $sRowName ) );
+    }
+
+    /**
+     * @param  string  $sActionName
+     * @param  array   $aArguments
+     * @param  string  $sRowName     The row name of the aal_tasks table. If not specified, auto-generated name will be used.
+     * @return boolean true if successfully unscheduled. Otherwise, false.
+     * @since  4.3.4
+     * @todo   Untested
+     */
+    static public function unscheduleTask( $sActionName, array $aArguments=array(), $sRowName='' ) {
+        $sRowName    = strlen( $sRowName )
+            ? $sRowName
+            : md5( $sActionName . serialize( $aArguments ) );
+        $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+        $_oTaskTable->deleteRows( $sRowName );
+        return ! ( boolean ) self::isTaskScheduled( $sActionName, $aArguments, $sRowName );
+    }
+
+    /**
      * @param   string $sHTML
      * @param   string $sURL
      * @since   4.2.2
