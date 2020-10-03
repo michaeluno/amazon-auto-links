@@ -36,6 +36,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     /**
      * Checks whether the given type is accepted for performing HTTP requests.
      * @since       3.5.0
+     * @param       string  $sType
      * @return      boolean
      */
     protected function _isType( $sType ) {
@@ -58,6 +59,17 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     }
 
     /**
+     * @return boolean
+     * @since  4.3.4
+     */
+    protected function _shouldProceed() {
+        if ( ! $this->_isType( func_get_arg( 3 ) ) ) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      *
      */
     protected function _doAction( /* $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' */ ) {
@@ -67,17 +79,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
         $iCacheDuration = $_aArguments[ 1 ];
         $aArguments     = $_aArguments[ 2 ];
         $sType          = $_aArguments[ 3 ];
-
-        if ( ! $this->_isType( $sType ) ) {
-            return;
-        }
-
-        $_oHTTP = new AmazonAutoLinks_HTTPClient(
-            $sURL,
-            $iCacheDuration,
-            $aArguments,
-            $sType
-        );
+        $_oHTTP         = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $aArguments, $sType );
         $_oHTTP->deleteCache();
         $_oHTTP->get();
 
@@ -85,7 +87,12 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
 
     /**
      *
-     * @callback        add_filter      aal_filter_http_response_cache
+     * @callback add_filter()   aal_filter_http_response_cache
+     * @param    array          $aCache
+     * @param    integer        $iCacheDuration
+     * @param    array          $aHTTPArguments
+     * @param    string         $sType
+     * @return   array
      */
     public function replyToModifyCacheRemainedTime( $aCache, $iCacheDuration, $aHTTPArguments, $sType='wp_remote_get' ) {
 
