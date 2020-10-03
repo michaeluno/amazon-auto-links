@@ -43,62 +43,69 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     }
 
     /**
-     * @param boolean $bActual
-     * @param string $sMessage
-     * @param mixed $mData
-     * @sicne 4.3.3
+     * @param  boolean $bActual
+     * @param  string $sMessage
+     * @param  mixed $mData
+     * @return boolean
+     * @sicne  4.3.3
      */
     protected function _assertTrue( $bActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert true.";
         if ( true !== ( boolean ) $bActual ) {
             $this->_setError( $sMessage, $bActual, $mData );
-            return;
+            return false;
         }
         $this->_setPass( $sMessage );
+        return true;
     }
     /**
-     * @param boolean $bActual
-     * @param string $sMessage
-     * @param mixed $mData
-     * @sicne 4.3.3
+     * @param  boolean $bActual
+     * @param  string $sMessage
+     * @param  mixed $mData
+     * @sicne  4.3.3
+     * @return boolean
      */
     protected function _assertFalse( $bActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert false.";
-        $this->_assertTrue( ! ( boolean ) $bActual, $sMessage, $mData );
+        return $this->_assertTrue( ! ( boolean ) $bActual, $sMessage, $mData );
     }
 
     /**
-     * @param mixed $mActual
-     * @param string $sMessage
-     * @param array $mData
-     * @param false $bNegate
-     * @since 4.3.3
+     * @param  mixed $mActual
+     * @param  string $sMessage
+     * @param  array $mData
+     * @param  false $bNegate
+     * @return boolean
+     * @since  4.3.3
      */
     protected function _assertNotEmpty( $mActual, $sMessage='', $mData=array(), $bNegate=false ) {
         $sMessage = $sMessage ? $sMessage : "Assert not empty.";
         $_bEmpty  = empty( $mActual );
         if ( $bNegate ? ! $_bEmpty : $_bEmpty ) {
             $this->_setError( $sMessage, $mActual, $mData );
-            return;
+            return false;
         }
         $this->_setPass( $sMessage, $mActual );
+        return true;
     }
     /**
-     * @param mixed $mActual
-     * @param string $sMessage
-     * @param array $mData
-     * @since 4.3.3
+     * @param  mixed $mActual
+     * @param  string $sMessage
+     * @param  array $mData
+     * @return boolean
+     * @since  4.3.3
      */
     protected function _assertEmpty( $mActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert empty.";
-        $this->_assertNotEmpty( $mActual, $sMessage, $mData, true );
+        return $this->_assertNotEmpty( $mActual, $sMessage, $mData, true );
     }
     /**
-     * @param mixed $mExpected
-     * @param mixed $mActual
-     * @param $sMessage
-     * @param $mData
-     * @sicne 4.3.3
+     * @sicne  4.3.3
+     * @param  mixed  $mExpected
+     * @param  mixed  $mActual
+     * @param  string $sMessage
+     * @param  mixed $mData
+     * @return boolean
      */
     protected function _assertEqual( $mExpected, $mActual, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Assert equal.";
@@ -108,25 +115,28 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
                 'actual'   => $mActual,
             );
             $this->_setError( $sMessage, $_aDisplay, $mData );
-            return;
+            return false;
         }
         $this->_setPass( $sMessage, $mActual );
+        return true;
     }
 
     /**
-     * @param string $sPrefix The expected prefix.
-     * @param string $sHaystack The string to check.
-     * @param $sMessage
-     * @param $mData
-     * @sicne 4.3.3
+     * @param  string  $sPrefix     The expected prefix.
+     * @param  string  $sHaystack   The string to check.
+     * @param  string  $sMessage
+     * @param  mixed   $mData
+     * @return boolean
+     * @sicne  4.3.3
      */
     protected function _assertPrefix( $sPrefix, $sHaystack, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Check if the string has the specified prefix.";
         if ( ! $this->hasPrefix( $sPrefix, $sHaystack ) ) {
             $this->_setError( $sMessage, $sHaystack, $mData );
-            return;
+            return false;
         }
         $this->_setPass( $sMessage, $sHaystack );
+        return true;
     }
 
     /**
