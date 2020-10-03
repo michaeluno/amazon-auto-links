@@ -16,6 +16,29 @@
 abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_DatabaseTable_Base {
 
     /**
+     * Checks whether the given cache exists or not by the given name.
+     * @param  array $aColumnNameValuePairs e.g. array( 'asin' => '1234567890', 'locale' => 'US ) )
+     * @return boolean
+     * @since  4.3.4
+     * @todo   Untested.
+     */
+    public function doesRowExist( array $aColumnNameValuePairs=array() ) {
+        $_aFirstItem       = array_shift( $aColumnNameValuePairs );
+        $_aColumnNames     = array_keys( $_aFirstItem );
+        $_aValues          = array_values( $_aFirstItem );
+        $_aFirstColumnName = reset( $_aColumnNames );
+        $_aFirstValue      = reset( $_aValues );
+        $_sQuery           = "SELECT {$_aFirstColumnName} "
+            . " FROM {$this->aArguments[ 'table_name' ]} "
+            . " WHERE {$_aFirstColumnName} = '{$_aFirstValue}'";
+        foreach( $aColumnNameValuePairs as $_sName => $_sValue ) {
+            $_sQuery .= " AND {$_sName}='{$_sValue}'";
+        }
+        $_sQuery          .= " LIMIT 1;";
+        return ( boolean ) $this->getVariable( $_sQuery );
+    }
+
+    /**
      * Retrieves a count of expired rows.
      * @sine        3.5.0
      * @return      integer
