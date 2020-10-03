@@ -53,21 +53,6 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
     }
 
     /**
-     * @tags head, associates
-     */
-    public function test_CookiesOfAmazonAssociates() {
-        $_aURLs = AmazonAutoLinks_Property::$aAssociatesURLs;
-        foreach( $_aURLs as $_sLocale => $_sURL ) {
-            $_aArguments = array( 'method' => 'HEAD' );
-            $_oHTTP      = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, $_aArguments );
-            $_aCookies   = $this->getCookiesFromResponse( $_oHTTP->getRawResponse() );
-            $this->_outputDetails( 'Cookies', $_aCookies );
-            $this->_assertTrue( ! empty( $_aCookies ), 'They should return cookies.', $this->aoLastResponse );
-        }
-    }
-
-
-    /**
      * @return bool
      * @tags cookies
      * @see WP_HTTP_Requests_Response

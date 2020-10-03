@@ -46,22 +46,31 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @since 4.3.3
      */
     static public function getCookiesFromResponseToParse( $aoResponse ) {
-        $_aReadable = array();
-        $_aCookies  = self::getRequestCookiesFromResponse( $aoResponse );
-        foreach( $_aCookies as $_siNameOrIndex => $_soCookie ) {
+        $_aCookies = self::getRequestCookiesFromResponse( $aoResponse );
+        return self::getCookiesToParse( $_aCookies );
+    }
+
+    /**
+     * @param array $aCookies   The response 'cookies' element.
+     * @return array
+     * @since 4.3.3
+     */
+    static public function getCookiesToParse( array $aCookies ) {
+        $_aToParse = array();
+        foreach( $aCookies as $_siNameOrIndex => $_soCookie ) {
             if ( ! ( $_soCookie instanceof WP_Http_Cookie ) ) {
-                $_aReadable[] = array(
+                $_aToParse[] = array(
                     'name'  => $_siNameOrIndex,
                     'value' => $_soCookie,
                 );
                 continue;
             }
-            $_aReadable[] = array(
+            $_aToParse[] = array(
                 'name'  => $_soCookie->name,
                 'value' => $_soCookie->value,
             ) + $_soCookie->get_attributes();
         }
-        return $_aReadable;
+        return $_aToParse;
     }
 
     /**
