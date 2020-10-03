@@ -73,10 +73,10 @@ class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 e
             return $oTable->getVariable( $_sQuery );
         }
         /**
-         * @param AmazonAutoLinks_DatabaseTable_aal_products $oTable
-         * @param $sColumnName
-         * @return int
-         * @since 4.3.4
+         * @param  AmazonAutoLinks_DatabaseTable_aal_products $oTable
+         * @param  string $sColumnName
+         * @return integer
+         * @since  4.3.3
          */
         private function ___getCountOfEmptyCell( AmazonAutoLinks_DatabaseTable_aal_products $oTable, $sColumnName ) {
             $_sTableName    = $oTable->getTableName();
