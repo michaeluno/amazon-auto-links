@@ -44,14 +44,22 @@ class AmazonAutoLinks_Test_AdminPage_Test_Delete extends AmazonAutoLinks_Test_Ad
      * @return array
      */
     protected function _getTagLabelsForCheckBox() {
-        return $this->_getTagLabels( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete', array( 'AmazonAutoLinks_Scratch_Base' ) );
+        return $this->_getTagLabels(
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete',
+            include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+            array( 'AmazonAutoLinks_Scratch_Base' )
+        );
     }
 
     protected function _printFiles() {
         echo "<div class='files-container'>";
         echo "<h4>Files</h4>";
-        $_oFinder = new AmazonAutoLinks_Test_ClassFinder( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete', array( 'AmazonAutoLinks_Scratch_Base' ) );
-        AmazonAutoLinks_Debug::dump( $_oFinder->getFiles() );
+        $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/delete',
+            include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+            array( 'AmazonAutoLinks_Scratch_Base' )
+        );
+        AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
         echo "</div>";
     }
             

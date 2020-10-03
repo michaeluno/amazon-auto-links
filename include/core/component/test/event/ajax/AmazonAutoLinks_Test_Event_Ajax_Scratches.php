@@ -32,7 +32,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Scratches extends AmazonAutoLinks_Test_Eve
          * @return      void
          */
         public function replyToEnqueueResources() {
-            $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches', array( 'AmazonAutoLinks_Scratch_Base' ), 'scratch' );
+            $this->_enqueueResources(
+                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches',
+                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+                array( 'AmazonAutoLinks_Scratch_Base' ),
+                'scratch'
+            );
         }
 
     /**

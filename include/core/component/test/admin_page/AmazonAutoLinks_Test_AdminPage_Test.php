@@ -37,6 +37,11 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
      */    
     public function replyToLoadPage( $oFactory ) {
 
+        // Auto-load test classes. Even though these are not used,
+        // listing test classes requires to check parent classes
+        // and it involves instantiation of them with the reflection class.
+        new AmazonAutoLinks_AdminPageFramework_RegisterClasses( array(), array(), include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ) );
+
         // Tabs
         new AmazonAutoLinks_Test_AdminPage_Test_Tests( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_Test_AdminPage_Test_Scratch( $this->oFactory, $this->sPageSlug );

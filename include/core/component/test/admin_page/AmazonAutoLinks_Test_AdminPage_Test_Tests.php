@@ -133,12 +133,16 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
          * @return array
          */
         protected function _getTagLabelsForCheckBox() {
-            return $this->_getTagLabels( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base', 'AmazonAutoLinks_UnitTest_HTTPRequest_Base' ) );
+            return $this->_getTagLabels(
+                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests',
+                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+                array( 'AmazonAutoLinks_UnitTest_Base' )
+            );
         }
-            protected function _getTagLabels( $sScanDirPath, array $aBaseClassNames ) {
-                $_oFinder = new AmazonAutoLinks_Test_ClassFinder( $sScanDirPath, $aBaseClassNames );
-                $_aFiles  = $_oFinder->getFiles();
-                $_aKeys   = array_keys( $_aFiles );
+            protected function _getTagLabels( $sBaseDirPath, $aClassMap, array $aBaseClassNames ) {
+                $_oVerifier = new AmazonAutoLinks_Test_ClassLister( $sBaseDirPath, $aClassMap, $aBaseClassNames );
+                $_aFiles    = $_oVerifier->get();
+                $_aKeys     = array_keys( $_aFiles );
                 return ( array ) array_combine( $_aKeys, $_aKeys );
             }
 
@@ -153,8 +157,12 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
         protected function _printFiles() {
             echo "<div class='files-container'>";
             echo "<h4>Test Files</h4>";
-            $_oFinder = new AmazonAutoLinks_Test_ClassFinder( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base', 'AmazonAutoLinks_UnitTest_HTTPRequest_Base' ) );
-            AmazonAutoLinks_Debug::dump( $_oFinder->getFiles() );
+            $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
+                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests',
+                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+                array( 'AmazonAutoLinks_UnitTest_Base' )
+            );
+            AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
             echo "</div>";
         }
 

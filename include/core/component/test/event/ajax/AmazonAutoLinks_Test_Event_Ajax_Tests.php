@@ -401,19 +401,24 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
      * @return      void
      */
     public function replyToEnqueueResources() {
-        $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests', array( 'AmazonAutoLinks_UnitTest_Base', 'AmazonAutoLinks_UnitTest_HTTPRequest_Base' ), 'test' );
+        $this->_enqueueResources(
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests',
+            include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+            array( 'AmazonAutoLinks_UnitTest_Base' ),
+            'test'
+        );
     }
 
         /**
-         * @param $sScanDirPath
-         * @param array $aBaseClasses
-         * @param $sContext
-         *
-         * @return  void
+         * @param  string $sBaseDirPath
+         * @param  array  $aClassMap
+         * @param  array  $aBaseClasses
+         * @param  string $sContext
+         * @return void
          */
-        protected function _enqueueResources( $sScanDirPath, array $aBaseClasses, $sContext ) {
+        protected function _enqueueResources( $sBaseDirPath, $aClassMap, array $aBaseClasses, $sContext ) {
 
-            $_oFinder = new AmazonAutoLinks_Test_ClassFinder( $sScanDirPath, $aBaseClasses );
+            $_oVerifier = new AmazonAutoLinks_Test_ClassLister( $sBaseDirPath, $aClassMap, $aBaseClasses );
             $_sUtilityScriptPath = $this->isDebugMode()
                 ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
                 : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js';
@@ -421,7 +426,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $this->___enqueueAjaxScript(
                 'aalTests',
                 array(
-                    'files'     => $_oFinder->getFiles(),
+                    'files'     => $_oVerifier->get(),
                     'context'   => $sContext,
                 ),
                 $this->getSRCFromPath(

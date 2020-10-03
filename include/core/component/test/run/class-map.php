@@ -30,6 +30,7 @@ return array(
     "Test_AmazonAutoLinks_HTTPClient_Associates" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/associates/Test_AmazonAutoLinks_HTTP_Associates.php", 
     "Test_AmazonAutoLinks_HTTPClient_BestSellers" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/bestsellers/Test_AmazonAutoLinks_HTTP_BestSellers.php", 
     "Test_AmazonAutoLinks_HTTPClient_Cookie" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/cookie/Test_AmazonAutoLinks_HTTP_Cookie.php", 
+    "Test_AmazonAutoLinks_HTTPClient_SessionCookie" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/cookie/Test_AmazonAutoLinks_HTTP_SessionCookie.php", 
     "AmazonAutoLinks_UnitTest_WordPress" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress.php", 
     "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
     "Test_wp_remote_head" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/wp_remote_request/Test_wp_remote_head.php", 

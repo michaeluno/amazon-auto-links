@@ -32,7 +32,12 @@ class AmazonAutoLinks_Test_Event_Ajax_Delete extends AmazonAutoLinks_Test_Event_
          * @return      void
          */
         public function replyToEnqueueResources() {
-            $this->_enqueueResources( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete', array( 'AmazonAutoLinks_Scratch_Base' ), 'database' );
+            $this->_enqueueResources(
+                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete',
+                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+                array( 'AmazonAutoLinks_Scratch_Base' ),
+                'database'
+            );
         }
 
     /**
@@ -44,7 +49,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Delete extends AmazonAutoLinks_Test_Event_
      * @throws ReflectionException
      * @since   4.3.0
      */
-    protected function _getResults( $sClassName, $sFilePath, $aTags=array(), $sMethodPrefix='scratch' ) {
+    protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='scratch' ) {
         return parent::_getResults( $sClassName, $sFilePath, $aTags, 'scratch' );
     }
 
