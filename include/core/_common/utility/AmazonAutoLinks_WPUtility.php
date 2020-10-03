@@ -163,7 +163,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @return boolean True if scheduled, false otherwise.
      * @since  3.5.0
      */
-    static public function scheduleSingleWPCronTask( $sActionName, array $aArguments, $iTime=0 ) {
+    static public function scheduleSingleWPCronTask( $sActionName, array $aArguments=array(), $iTime=0 ) {
 
         if ( wp_next_scheduled( $sActionName, $aArguments ) ) {
             return false;
