@@ -9,12 +9,14 @@
  */
 
 /**
- * Utility tests.
+ * Tests the `AmazonAutoLinks_PluginUtility` class.
  *  
- * @package     Amazon Auto Links
- * @since       4.3.0
+ * @package Amazon Auto Links
+ * @see     AmazonAutoLinks_PluginUtility
+ * @since   4.3.0
 */
-class AmazonAutoLinks_UnitTest_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
+class Test_AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
+
 
     /**
      * @purpose Checks if the site debug mode is enabled.
