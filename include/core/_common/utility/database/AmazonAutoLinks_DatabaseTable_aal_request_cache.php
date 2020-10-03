@@ -110,16 +110,17 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
         }    
             /**
              * Checks whether the given cache exists or not by the given name.
-             * @param string $sName
-             * @return      boolean
+             * @param  string $sName
+             * @return boolean
+             * @deprecated 4.3.4 unused
              */
-            public function doesRowExist( $sName ) {
+            /*public function doesRowExist( $sName ) {
                 return ( boolean ) $this->getVariable(
                     "SELECT name
                     FROM {$this->aArguments[ 'table_name' ]}
                     WHERE name = '{$sName}'"
-                );             
-            }
+                );
+            }*/
 
     /**
      *
