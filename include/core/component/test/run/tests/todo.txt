@@ -1,0 +1,4 @@
+- test the 'aal_action_unit_prefetch' WP Cron action whether it is scheduled and passed proper arguments.
+- test the 'aal_action_check_tasks' WP Cron action whether it is scheduled and passed proper arguments.
+- test the AmazonAutoLinks_Event_Scheduler::scheduleRating() method or 'aal_action_api_get_product_rating' WP Cron action whether it is scheduled and passed proper arguments
+- test AmazonAutoLinks_PluginUtility::scheduleTask().
