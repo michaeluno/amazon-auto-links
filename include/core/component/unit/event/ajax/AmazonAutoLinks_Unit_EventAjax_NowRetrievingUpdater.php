@@ -121,8 +121,13 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             $_aUnitOptionSets     = $this->___getUnitOptionSets( $aAllItems );
             $_aProducts           = array();
             foreach( $_aUnitOptionSets as $_aUnitOptions ) {
-                $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( $_aUnitOptions );
-                $_aProducts  = $_aProducts + $this->___getProductsFormatted( $_oUnit->fetch(), $_oUnit->oUnitOption );
+                $_aItemIds   = $_aUnitOptions[ 'ItemIds' ];
+                $_aChunks    = array_chunk( $_aItemIds, 10 );
+                foreach( $_aChunks as $_aChunkedItemIds ) {
+                    $_aUnitOptions[ 'ItemIds' ] = $_aChunkedItemIds;
+                    $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( $_aUnitOptions );
+                    $_aProducts  = $_aProducts + $this->___getProductsFormatted( $_oUnit->fetch(), $_oUnit->oUnitOption );
+                }
             }
             return $_aProducts;
         }
