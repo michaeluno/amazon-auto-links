@@ -52,7 +52,7 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
      * @return boolean
      */
     protected function _isBackgroundCacheRenewalAllowed( $sType ) {
-        return ! in_array( $sType, $this->getAsArray( apply_filters( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array() ) ) );
+        return ! in_array( $sType, $this->getAsArray( apply_filters( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array() ) ), true );
     }
 
     /**
@@ -107,17 +107,15 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
         }
 
         // At this point, it is expired. So schedule a task that renews the cache in the background.
-        $_bScheduled = $this->scheduleSingleWPCronTask(
-            $this->_sActionHookName,    // 'aal_action_http_cache_renewal'
-            array(
-                $aCache[ 'request_uri' ],
-                $iCacheDuration,
-                $aHTTPArguments,
-                $sType
-            )
+        $_aArguments = array(
+            $aCache[ 'request_uri' ],
+            $iCacheDuration,
+            $aHTTPArguments,
+            $sType
         );
-        if ( $_bScheduled ) {
-            AmazonAutoLinks_Shadow::see();
+        $_bScheduled = $this->scheduleTask( $this->_sActionHookName, $_aArguments );
+        if ( ! $_bScheduled ) {
+            new AmazonAutoLinks_Error( 'CACHE_RENEWAL_EVENT', 'Failed to schedule a background cache renewal event. Action: ' . $this->_sActionHookName, $_aArguments, true );
         }
 
         // Tell the plugin it is not expired.
