@@ -87,20 +87,20 @@ abstract class AmazonAutoLinks_Event___Action_Base extends AmazonAutoLinks_Plugi
     /**
      * Checks whether the action is locked.
      * By calling this method, a lock temporary file (which will be deleted at the end of script) will be created on a disk if it does not exist.
-     * @return  bool
      * @since   3.7.7
-     * @param   array       $aoData      The data to identify the call, usually the callback parameters.
+     * @since   4.3.4       Added the `$iTimeout` parameter.
+     * @param   mixed       $mData      The data to identify the call, usually the callback parameters.
+     * @param   integer     $iTimeout    The lock. timeout.
+     * @return  boolean
      */
-    protected function _isLocked( $aoData=array() ) {
-
+    protected function _isLocked( $mData=array(), $iTimeout=30 ) {
         $_sIdentifier = get_class( $this )
             . $this->_sActionHookName
             . $this->_iCallbackParameters
             . $this->_iHookPriority
-            . serialize( $aoData );
-        $_oLock = new AmazonAutoLinks_VersatileFileManager_DeleteMode( $_sIdentifier );
+            . serialize( $mData );
+        $_oLock = new AmazonAutoLinks_VersatileFileManager_DeleteMode( $_sIdentifier, $iTimeout );
         return $_oLock->isLocked();
-
     }
 
 }
