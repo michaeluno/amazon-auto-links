@@ -28,7 +28,7 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return false;
         }
-        if ( $this->_isLocked() ) {
+        if ( $this->_isLocked( func_get_args(), 1 ) ) {
             return false;
         }
 
@@ -63,7 +63,7 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         }
 
         $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
-        $_oTaskTable->setRows( $_aPseudoLocks );  // expanding the `next_run_time` values so that they won't be checked
+        $_oTaskTable->setRows( $_aPseudoLocks );  // extending the `next_run_time` time so that they won't be checked
 
         foreach( $_aTasks as $_sActionName => $_aActionTasks ) {
 
