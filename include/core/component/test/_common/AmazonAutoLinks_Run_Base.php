@@ -31,8 +31,25 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_PluginUtility {
      */
     public function call( $sMethodName, ...$aParameters ) {
         $this->aOutputs = array();
-        return call_user_func_array( array( $this, $sMethodName ), $aParameters );
+        $this->_doBefore();
+        $_mResult       = call_user_func_array( array( $this, $sMethodName ), $aParameters );
+        $this->_doAfter();
+        return $_mResult;
     }
+
+    /**
+     * Called right before a test method is invoked.
+     * @remark Override this method to do some set-ups per method call basis.
+     * @since 4.3.4
+     */
+    protected function _doBefore() {}
+
+    /**
+     * Called right after a test method is invoked.
+     * @remark Override this method to do some set-ups per method call basis.
+     * @since 4.3.4
+     */
+    protected function _doAfter() {}
 
     /**
      * @param $mValue
