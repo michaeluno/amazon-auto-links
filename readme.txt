@@ -324,6 +324,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.3 - 10/04/2020 =
+- Fixed a bug that updating now-retrieving elements failed with a certain number of items.
 - Fixed an issue that on some sites with a database of the utf8-mb4 type collation got an error " Specified key was too long; max key length is 1000 bytes...".
 - Fixed a bug that caused an error "database error Duplicate entry '...' for key 'product_id' for query ..." when activating a plugin after downgrading it.
 
