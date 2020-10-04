@@ -20,12 +20,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
      * @param  array $aColumnNameValuePairs e.g. array( 'asin' => '1234567890', 'locale' => 'US ) )
      * @return boolean
      * @since  4.3.4
-     * @todo   Untested.
      */
     public function doesRowExist( array $aColumnNameValuePairs=array() ) {
-        $_aFirstItem       = array_shift( $aColumnNameValuePairs );
-        $_aColumnNames     = array_keys( $_aFirstItem );
-        $_aValues          = array_values( $_aFirstItem );
+        $_aColumnNames     = array_keys( $aColumnNameValuePairs );
+        $_aValues          = array_values( $aColumnNameValuePairs );
         $_aFirstColumnName = reset( $_aColumnNames );
         $_aFirstValue      = reset( $_aValues );
         $_sQuery           = "SELECT {$_aFirstColumnName} "
