@@ -14,7 +14,8 @@
  * @package Amazon Auto Links
  * @since   4.3.4
 */
-abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks_UnitTest_Base {
+abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks_UnitTest_Base
+{
 
     public $aoLastResponse;
     public $sLastRequestURL = '';
@@ -22,19 +23,23 @@ abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks
     public $aLastHeader;
     public $aLastCookies;
 
-    public function __construct() {
-        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults' ), 10, 5 );
+    protected function _doBefore() {
+        add_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults'), 10, 5 );
     }
-        public function replyToCaptureWPRemoteRequestResults( $aoResponse, $sType, $sType2, $aArguments, $sURL ) {
-            if (  'response' !== $sType || 'Requests' !== $sType2 ) {
-                return;
-            }
-            remove_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults' ), 10 );
-            $this->sLastRequestURL             = $sURL;
-            $this->aoLastResponse              = $aoResponse;
-            $this->aLastHeader                 = $this->getHeaderFromResponse( $aoResponse );
-            $this->aLastCookies                = $this->getCookiesFromResponse( $aoResponse );
-            $this->aLastArguments              = $aArguments;
+    protected function _doAfter() {
+        remove_action( 'http_api_debug', array( $this, 'replyToCaptureWPRemoteRequestResults' ), 10 );
+    }
+
+    public function replyToCaptureWPRemoteRequestResults( $aoResponse, $sType, $sType2, $aArguments, $sURL )
+    {
+        if ( 'response' !== $sType || 'Requests' !== $sType2 ) {
+            return;
         }
+        $this->sLastRequestURL = $sURL;
+        $this->aoLastResponse  = $aoResponse;
+        $this->aLastHeader     = $this->getHeaderFromResponse( $aoResponse );
+        $this->aLastCookies    = $this->getCookiesFromResponseToParse( $aoResponse );
+        $this->aLastArguments  = $aArguments;
+    }
 
 }
