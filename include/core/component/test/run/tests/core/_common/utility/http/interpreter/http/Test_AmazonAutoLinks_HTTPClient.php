@@ -18,8 +18,6 @@
 */
 class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPRequest_Base {
 
-
-
     /**
      * @return string
      * @tags head
@@ -56,12 +54,49 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
      * @tags wordpress.org
      */
     public function test_headMethodToWordPressDotORG() {
-        $_sURL  = 'https://wordpress.org';
+        $_sURL        = 'https://wordpress.org';
         $_aArguments  = array( 'method' => 'HEAD' );
         $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 0, $_aArguments );
         $_aoResponse  = $_oHTTP->getResponse();
         $this->_assertEmpty( wp_remote_retrieve_body( $_aoResponse ), 'With the HEAD method, the body should be empty.' );
     }
+
+    /**
+     * @tags arguments
+     */
+    public function test_CustomArguments(){
+
+        $_sURL        = admin_url();
+        $_aArguments  = array(
+            'method' => 'HEAD',
+            'foo'    => 'bar',  // custom argument
+        );
+        // Perform an HTTP request and create a cache
+        $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 100, $_aArguments );
+        $_oHTTP->getResponse();
+
+        // Now a cache should be created and it triggers the filter hook, `aal_filter_http_response_cache`.
+        $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 100, $_aArguments );
+        add_filter( "aal_filter_http_response_cache", array( $this, 'replyToCaptureCustomArguments' ), 10, 4 );
+        $_oHTTP->getResponse();
+
+        $this->_assertTrue( $this->bCalled, 'Is the callback method called?' );
+        $this->_assertTrue(
+            isset( $this->aLastCustomArguments[ 'foo' ] ) && 'bar' === $this->aLastCustomArguments[ 'foo' ],
+            'The custom argument should be passed.',
+            $this->aLastCustomArguments
+        );
+        $_oHTTP->deleteCache();
+    }
+        public $aLastCustomArguments = array();
+        public $bCalled = false;
+        public function replyToCaptureCustomArguments( $aCache, $iCacheDuration, $aArguments, $sRequestType ) {
+            $this->aLastCustomArguments = $aArguments;
+            $this->bCalled = true;
+            remove_filter( "aal_filter_http_response_cache", array( $this, 'replyToCaptureCustomArguments' ), 10 );
+            return $aCache;
+        }
+
 
     /**
      * @return bool

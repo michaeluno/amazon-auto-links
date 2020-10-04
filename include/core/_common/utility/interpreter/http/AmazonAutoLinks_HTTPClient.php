@@ -622,7 +622,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * @since       4.3.4   Added the `$sCacheName` and `$sRequestType` parameters.
          */
         private function ___setCacheInDatabase( $sURL, $sCacheName, $aoResponse, $iCacheDuration, $aArguments, array $aOldCache, $sRequestType ) {
-            
+
             $_sCharSet       = $this->___getCharacterSetFromResponse( $aoResponse );
             $aoResponse      = apply_filters( "aal_filter_http_request_set_cache_{$sRequestType}", $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL );
             $aoResponse      = apply_filters( 'aal_filter_http_request_set_cache', $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache );
@@ -702,10 +702,11 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
 
         // Drop unsupported arguments
-        $aArguments = array_intersect_key(
-            $aArguments,    // subject that its elements get extracted
-            $this->aArguments + $this->aArgumentStructure + $this->aCustomArguments    // model to be compared with
-        );
+        // @deprecated 4.3.4 Support custom arguments. Can be used to pass data to the background routine.
+//        $aArguments = array_intersect_key(
+//            $aArguments,    // subject that its elements get extracted
+//            $this->aArguments + $this->aArgumentStructure + $this->aCustomArguments    // model to be compared with
+//        );
 
         // [4.2.0]
         $aArguments[ 'user-agent' ] = $aArguments[ 'user-agent' ]
