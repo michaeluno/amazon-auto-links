@@ -53,6 +53,17 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
     }
 
     /**
+     * @tags wordpress.org
+     */
+    public function test_headMethodToWordPressDotORG() {
+        $_sURL  = 'https://wordpress.org';
+        $_aArguments  = array( 'method' => 'HEAD' );
+        $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 0, $_aArguments );
+        $_aoResponse  = $_oHTTP->getResponse();
+        $this->_assertEmpty( wp_remote_retrieve_body( $_aoResponse ), 'With the HEAD method, the body should be empty.' );
+    }
+
+    /**
      * @return bool
      * @tags cookies
      * @see WP_HTTP_Requests_Response
