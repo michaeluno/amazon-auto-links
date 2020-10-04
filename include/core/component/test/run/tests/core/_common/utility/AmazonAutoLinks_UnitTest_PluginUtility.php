@@ -18,6 +18,26 @@
 class Test_AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
 
 
+    public function __construct() {
+        // add_action();
+    }
+
+    /**
+     * @see AmazonAutoLinks_PluginUtility::scheduleTask()
+     * @tags task
+     */
+    public function test_scheduleTask() {
+
+        $_sActionName = 'aal_action_test';
+        $_aArguments  = array( 'foo', 'bar' );
+        $_bScheduled  = AmazonAutoLinks_PluginUtility::scheduleTask( $_sActionName, $_aArguments, time() );
+        $this->_assertTrue( $_bScheduled, 'The task should be scheduled' );
+        $this->_assertTrue( AmazonAutoLinks_PluginUtility::isTaskScheduled( $_sActionName, $_aArguments ), 'Check if the task is scheduled.' );
+        AmazonAutoLinks_PluginUtility::unscheduleTask( $_sActionName, $_aArguments );
+        $this->_assertFalse( AmazonAutoLinks_PluginUtility::isTaskScheduled( $_sActionName, $_aArguments ), 'Check if the task is removed.' );
+    }
+
+
     /**
      * @purpose Checks if the site debug mode is enabled.
      * @return  bool
