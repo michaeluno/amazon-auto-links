@@ -22,7 +22,7 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
     protected function _getArguments() {
         return array(
             'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'test' ],
-            'title'     => 'Test',
+            'title'     => 'Tests',
             'order'     => 99999, // to be the last menu item
 //            'style'     => array(
 //                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
