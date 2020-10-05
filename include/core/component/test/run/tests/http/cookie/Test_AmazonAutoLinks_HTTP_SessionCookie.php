@@ -68,7 +68,7 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends Test_AmazonAutoLinks
             private function ___getAssociatesResponse( $sLocale ) {
                 $_sURL = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
                 $this->_output( "URL ({$sLocale}): " . $_sURL );
-                $_aRequestCookies = $this->_getAssociatesRequestCookies( $sLocale, $_sURL );
+                $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAssociatesRequestCookies( $sLocale );
                 $this->_outputDetails( "1st Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aRequestCookies ) );
                 $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies, 'method' => 'HEAD' ) );
                 $_oHTTP->deleteCache();

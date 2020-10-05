@@ -26,24 +26,30 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         $_sURL       = self::getAssociatesURL( $sLocale );
         $_oHTTP      = new AmazonAutoLinks_HTTPClient(
             $_sURL,
-            86400 * 7,
-            array( 'method' => 'HEAD', 'cookies' => self::getAssociatesRequestCookies( $sLocale, $_sURL ) )
+            86400 * 7,  // 7 days
+            array(
+                'method' => 'HEAD',
+                'cookies' => self::getAssociatesRequestCookies( $sLocale ),
+            )
         );
         return self::getRequestCookiesFromResponse( $_oHTTP->getRawResponse() );
 
     }
 
     /**
+     * Retrieves cookies given by a Amazon Associates site of the given locale.
      * @param  string $sLocale
-     * @param  string $sURL
      * @return WP_Http_Cookie[]
      * @since  4.3.4
      */
-    static public function getAssociatesRequestCookies( $sLocale, $sURL ) {
+    static public function getAssociatesRequestCookies( $sLocale ) {
+        $_sURL       = self::getAssociatesURL( $sLocale );
         $_sLocaleKey = 'ubid-acb' . strtolower( $sLocale );
-        $_sToken     = sprintf( '%03d', mt_rand( 1, 999 ) ) . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) ) . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) );
+        $_sToken     = sprintf( '%03d', mt_rand( 1, 999 ) )
+            . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) )
+            . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) );
         $_iExpires   = time() + ( 86400 * 365 );
-        $_sDomain    = self::___getCookieDomain( $sURL );
+        $_sDomain    = self::___getCookieDomain( $_sURL );
         return array(
             new WP_Http_Cookie( array( 'name' => 'ubid-main',  'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
             new WP_Http_Cookie( array( 'name' => $_sLocaleKey, 'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
