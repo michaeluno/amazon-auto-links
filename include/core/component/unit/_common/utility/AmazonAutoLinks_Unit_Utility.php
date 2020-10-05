@@ -17,8 +17,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * @param  string   $sLocale
      * @param  string   $sLanguage
-     * @since  3.4.4
+     * @since  4.3.4
      * @return array
+     * @todo There is a cookie to specify a preferred language and set it with the `$sLanguage` parameter.
      */
     static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
 
@@ -439,7 +440,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
         // Otherwise, replace the price part of the listed price with the discounted one.
         return preg_replace(
-            '/[\d\.,]+/',
+            '/[\d.,]+/',
             $nDiscountedPrice / 100,   // decimal,  // numeric price
             $sPriceFormatted // price format
         );
@@ -550,12 +551,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         }
             /**
              *
-             * @remark      available key names
+             * @remark Available key names
              * - Small
              * - Medium
              * - Large
-             * @param array $aImage
-             * @param integer $iImageSize
+             * @param  array $aImage
+             * @param  integer $iImageSize
+             * @return string
              */
             static private function ___getImageURLFromResponseElement( array $aImage, $iImageSize ) {
 
@@ -570,8 +572,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                         break;
                     }
                 }
-                $_sURL = self::getImageURLBySize( $_sURL, $iImageSize );
-                return $_sURL;
+                return self::getImageURLBySize( $_sURL, $iImageSize );
+
                 // @deprecated 3.9.0 All Amazon images now start from https
 //                return is_ssl()
 //                    ? self::getAmazonSSLImageURL( $_sURL )
@@ -671,11 +673,12 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             return $_aList;
         }
             /**
-             * @param array $aBrowseNode
-             * @param string $sBreadcrumb
-             * @since 3.8.0
-             * @since 3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`
+             * @param  array  $aBrowseNode
+             * @param  string $sBreadcrumb
+             * @param  string $sDelimiter
              * @return string
+             * @since  3.8.0
+             * @since  3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`
              */
             static private function ___getNodeBreadcrumb( array $aBrowseNode, $sBreadcrumb, $sDelimiter=' > ' ) {
 
@@ -781,7 +784,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      */
     static public function getRatingExtracted( $sString ) {
         preg_match(
-            '/\d[\.,]\d/', // needle
+            '/\d[.,]\d/', // needle
             $sString,   // subject
             $_aMatches
         );
@@ -856,7 +859,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                        . "<span class='review-stars' style='display:inline-block;'>"
                             . ( $sReviewURL
                                 ? "<a " . $_sAAttributes . ">"
-                                    . "<img " . $_sImgAttributes . "/>"
+                                    . "<img " . $_sImgAttributes . " alt='" . __( 'Rating stars', 'amazon-auto-links' ) . "'/>"
                                 . "</a>"
                                 : "<img " . $_sImgAttributes . "/>"
                             )
