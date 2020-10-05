@@ -44,7 +44,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
         $_sLanguage      = $_aProductID[ 3 ];
         $_sURL           = $this->___getReviewPageURL( $_sASIN, $_sLocale );
         $_sCharacterSet  = '';
-        $_sHTML          = $this->___getReviewPage( $_sURL, $_sCharacterSet, $_iCacheDuration, $_bForceRenew, $_sLocale );
+        $_sHTML          = $this->___getReviewPage( $_sURL, $_sCharacterSet, $_iCacheDuration, $_bForceRenew, $_sLocale, $_sLanguage );
         $_aRow           = $this->___getRowFormatted( $_sURL, $_sHTML, $_iCacheDuration, $_sCharacterSet, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
         $this->___updateRow( $_aRow, $_sASIN, $_sLocale, $_sCurrency, $_sLanguage );
 
@@ -75,11 +75,12 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @param  integer $iCacheDuration
          * @param  boolean $bForceRenew
          * @param  string  $sLocale
+         * @param  string  $sLanguage
          * @return string
          * @since  4.3.4
          */
-        private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew, $sLocale ) {
-            $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew );
+        private function ___getReviewPage( $sURL, &$sCharacterSet, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage ) {
+            $this->___getReviewPageResponse( $_oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew, $sLanguage );
             $sCharacterSet = $_oHTTP->getCharacterSet(); // empty parameter value will retrieve the last set character set. This works as only one USL is parsed.
             return $_oHTTP->getBody();
         }
@@ -89,19 +90,20 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
              * @param  string  $sLocale
              * @param  integer $iCacheDuration
              * @param  boolean $bForceRenew
+             * @param  string  $sLanguage
              * @return string
              * @since  4.3.4
              */
-            private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew ) {
+            private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew, $sLanguage ) {
                 $oHTTP          = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     $iCacheDuration,
                     array(  // http arguments
                         'timeout'     => 20,
                         'redirection' => 20,
-                        'cookies'     => $this->_getRequestCookiesByLocale( $sLocale ),
+                        'cookies'     => AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage ),
                     ),
-                    'customer_review2'
+                    'customer_review'
                 );
                 if ( $bForceRenew ) {
                     $oHTTP->deleteCache();
@@ -160,18 +162,5 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
             return $_aRow;
             
         }
-
-    /**
-     * @param  string $sLocale
-     * @return array
-     * @since 4.3.4
-     */
-    protected function _getRequestCookiesByLocale( $sLocale ) {
-        $_sAssociatesURL  = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
-        $_oHTTP           = new AmazonAutoLinks_HTTPClient( $_sAssociatesURL, 86400 * 7 );
-        $_aoResponse      = $_oHTTP->getRawResponse();
-        return $this->getCookiesFromResponse( $_aoResponse );
-    }
-
 
 }

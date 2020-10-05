@@ -27,7 +27,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
         $sASIN       = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
         $this->___setParameters( func_get_args(), $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
         $_sURL       = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
-        $_sHTML      = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew, $sLocale );
+        $_sHTML      = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage );
         $_aRow       = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );
         if ( empty( $_aRow ) ) {
             return;
@@ -61,50 +61,46 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
             $sLanguage      = $_aProductID[ 3 ];
         }
         /**
-         * @param string $sURL
-         * @param integer $iCacheDuration
-         * @param boolean $bForceRenew
-         * @param string $sLocale           This is needed to generate cookies.
-         * @see https://stackoverflow.com/questions/8279478/amazon-product-advertising-api-get-average-customer-rating/31329604#31329604
+         * @param  string  $sURL
+         * @param  integer $iCacheDuration
+         * @param  boolean $bForceRenew
+         * @param  string  $sLocale           This is needed to generate cookies.
+         * @param  string  $sLanguage         This is also needed to generate cookies.           
+         * @see    https://stackoverflow.com/questions/8279478/amazon-product-advertising-api-get-average-customer-rating/31329604#31329604
          * @return string
          */
-        private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
+        private function ___getWidgetPage( $sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage ) {
 
             /**
              * Perform an HTTP request
              * This handles character encoding conversion.
              * @var AmazonAutoLinks_HTTPClient $_oHTTP
              */
-            $this->___getWidgetPageResponse( $_oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale );
+            $this->___getWidgetPageResponse( $_oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage );
             return $_oHTTP->getBody();
 
         }
             /**
-             * @param null|AmazonAutoLinks_HTTPClient $oHTTP
-             * @param $sURL
-             * @param $iCacheDuration
-             * @param $bForceRenew
-             * @param $sLocale
+             * @param  null|AmazonAutoLinks_HTTPClient $oHTTP
+             * @param  string  $sURL
+             * @param  boolean $iCacheDuration
+             * @param  boolean $bForceRenew
+             * @param  string  $sLocale
+             * @param  string  $sLanguage
              * @return array|WP_Error
              */
-            private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale ) {
-                $_aSendCookies    = $this->_getRequestCookiesByLocale( $sLocale )
-                    + $this->___getRequestCookiesByLocale2( $sLocale );
-                $_oHTTP           = new AmazonAutoLinks_HTTPClient(
-                    $sURL,
-                    $iCacheDuration,
-                    array(  // http arguments
-                        'timeout'     => 20,
-                        'redirection' => 20,
-                        'cookies'     => $_aSendCookies,
-                    ),
-                    'rating'
+            private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage ) {
+
+                $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage );
+                $_aArguments      = array(
+                    'timeout'     => 20,
+                    'redirection' => 20,
+                    'cookies'     => $_aRequestCookies,
+                    'interval'    => 1,
                 );
+                $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
                 if ( $bForceRenew ) {
                     $_oHTTP->deleteCache();
-                }
-                if ( ! $_oHTTP->hasCache() ) {
-                    sleep( 1 ); // give some intervals
                 }
                 $_aoResponse = $_oHTTP->getResponse();
 
@@ -112,60 +108,30 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 if ( is_wp_error( $_aoResponse ) ) {
 
                     /**
+                     * If it is blocked by captcha, try another request with the response cookies.
                      * @var WP_Error $_aoResponse
                      */
                     if ( $this->hasPrefix( 'BLOCKED_BY_CAPTCHA', trim( $_aoResponse->get_error_code() ) ) ) {
 
-                        $_aResponseCookies = $this->getCookiesFromResponse( $_oHTTP->getRawResponse() );
-
-                        // Another try
+                        $_aArguments[ 'cookies' ] = $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() )
+                            + AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage )
+                            + $_aRequestCookies;
                         $_oHTTP            = new AmazonAutoLinks_HTTPClient(
                             $sURL,
                             $iCacheDuration,
-                            array(  // http arguments
-                                'timeout'     => 20,
-                                'redirection' => 20,
-                                'cookies'     => $_aResponseCookies + $this->___getRequestCookiesByLocale2( $sLocale ) + $_aSendCookies,
-                            ),
+                            $_aArguments,
                             'rating'
                         );
                         $_oHTTP->deleteCache();
-                        sleep( 1 );
                         $_aoResponse = $_oHTTP->getRawResponse();
+
                     }
                 }
                 $oHTTP = $_oHTTP;
                 return $_aoResponse;
+
             }
 
-            /**
-             * @return array
-             * @param $sLocale
-             * @since 4.3.4
-             */
-            private function ___getRequestCookiesByLocale2( $sLocale ) {
-                $_sToken  = $this->___getCookie_ubid_main();
-                $_aCookies = array(
-                    'ubid-main'         => $_sToken,
-                    'ubid-acb' . strtolower( $sLocale ) => $_sToken,
-                );
-                if ( 'US' !== $sLocale ) {
-                    unset( $_aCookies[ 'ubid-main' ] );
-                }
-                return $_aCookies;
-            }
-                /**
-                 * Generates a string for the `ubid-main` cookie item.
-                 * @return string Format: XXX-XXXXXXX-XXXXXXX e.g. 001-0000000-0000000
-                 * @since 4.3.4
-                 */
-                private function ___getCookie_ubid_main() {
-                    return sprintf( '%03d', mt_rand( 1, 999 ) )
-                        . '-'
-                        . sprintf( '%07d', mt_rand( 1, 9999999 ) )
-                        . '-'
-                        . sprintf( '%07d', mt_rand( 1, 9999999 ) );
-                }
         /**
          * @param string $sASIN
          * @param string $sLocale
