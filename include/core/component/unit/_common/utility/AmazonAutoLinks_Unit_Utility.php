@@ -29,7 +29,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             86400 * 7,  // 7 days
             array(
                 'method' => 'HEAD',
-                'cookies' => self::getAssociatesRequestCookies( $sLocale ),
+                'cookies' => self::getAssociatesRequestCookies( $sLocale, $sLanguage ),
             )
         );
         return self::getRequestCookiesFromResponse( $_oHTTP->getRawResponse() );
@@ -39,21 +39,29 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * Retrieves cookies given by a Amazon Associates site of the given locale.
      * @param  string $sLocale
+     * @param  string $sLanguage
      * @return WP_Http_Cookie[]
      * @since  4.3.4
      */
-    static public function getAssociatesRequestCookies( $sLocale ) {
-        $_sURL       = self::getAssociatesURL( $sLocale );
-        $_sLocaleKey = 'ubid-acb' . strtolower( $sLocale );
-        $_sToken     = sprintf( '%03d', mt_rand( 1, 999 ) )
+    static public function getAssociatesRequestCookies( $sLocale, $sLanguage ) {
+        $_sURL        = self::getAssociatesURL( $sLocale );
+        $_sLocaleKey  = 'ubid-acb' . strtolower( $sLocale );
+        $_sToken      = sprintf( '%03d', mt_rand( 1, 999 ) )
             . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) )
             . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) );
-        $_iExpires   = time() + ( 86400 * 365 );
-        $_sDomain    = self::___getCookieDomain( $_sURL );
-        return array(
-            new WP_Http_Cookie( array( 'name' => 'ubid-main',  'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
-            new WP_Http_Cookie( array( 'name' => $_sLocaleKey, 'value' => $_sToken, 'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/' ) ),
+        $_iExpires    = time() + ( 86400 * 365 ); // one year
+        $_sDomain     = self::___getCookieDomain( $_sURL );
+        $_aAttributes = array(
+            'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/',
         );
+        $_aCookies    = array(
+            new WP_Http_Cookie( array( 'name' => 'ubid-main',  'value' => $_sToken,  ) + $_aAttributes ),
+            new WP_Http_Cookie( array( 'name' => $_sLocaleKey, 'value' => $_sToken,  ) + $_aAttributes ),
+        );
+        if ( $sLanguage ) {
+            $_aCookies[] = new WP_Http_Cookie( array( 'name' => 'ac-language-preference', 'value' => $sLanguage, ) + $_aAttributes );
+        }
+        return $_aCookies;
     }
         /**
          * @param  string $sURL
@@ -61,7 +69,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
          * @since  4.3.4
          */
         static private function ___getCookieDomain( $sURL ) {
-            $_sHost   = parse_url( $sURL, PHP_URL_HOST );
+            $_sHost = parse_url( $sURL, PHP_URL_HOST );
             return preg_replace( '/^www/', '', $_sHost );
         }
 
