@@ -66,7 +66,7 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
      */
     public function test_CustomArguments(){
 
-        $_sURL        = admin_url();
+        $_sURL        = add_query_arg( array( 'aal_test' => __METHOD__ ), admin_url() );
         $_aArguments  = array(
             'method' => 'HEAD',
             'foo'    => 'bar',  // custom argument
@@ -97,6 +97,34 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
             return $aCache;
         }
 
+    /**
+     * @purpose Tests the `interval` argument.
+     * @tags interval
+     */
+    public function test_Argument_interval() {
+
+        $_sURL        = add_query_arg( array( 'aal_test' => __METHOD__ ), admin_url() );
+        $_aArguments  = array(
+            'method'    => 'HEAD',
+        );
+        $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 0, $_aArguments );
+        $_oHTTP->deleteCache();
+        $_oHTTP->getResponse();
+
+        $_fMicroTime1 = microtime( true );
+        $_iInterval   = 2;
+        $_aArguments  = $_aArguments + array(
+            'interval'  => $_iInterval,
+        );
+        $_oHTTP       = new AmazonAutoLinks_HTTPClient( $_sURL, 100, $_aArguments );
+        $_oHTTP->getResponse();
+        $_oHTTP->deleteCache();
+        $_fMicroTime2 = microtime( true );
+        $_fElapsed    = $_fMicroTime2 - $_fMicroTime1;
+        $this->_output( 'Elapsed: ' . $_fElapsed );
+        $this->_assertTrue( $_fElapsed > $_iInterval, "More than {$_iInterval} second(s) should have passed.", array( 'start' => $_fMicroTime1, 'end' => $_fMicroTime2 ) );
+
+    }
 
     /**
      * @return bool

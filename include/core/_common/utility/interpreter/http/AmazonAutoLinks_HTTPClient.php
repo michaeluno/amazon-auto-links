@@ -98,6 +98,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'proxy'                  => null,     // [4.2.0]
         'attempts'               => 0,        // [4.2.0] (integer) for multiple attempts for requests, especially for cases with proxies.
         'skip_argument_format'   => false,    // [4.3.4] (boolean) whether to skip argument formatting. Used in the multiple mode.
+        'interval'               => 0,        // [4.3.4] (integer) An interval in seconds between request with the same request type.
     );
 
     /**
@@ -402,6 +403,9 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
              */
             private function ___getHTTPRequested( $sURL, array $aArguments ) {
 
+                // Give intervals.
+                $this->___haveInterval( $aArguments[ 'interval' ] );
+
                 // If the proxy option is set, do with Curl.
                 if ( isset( $aArguments[ 'proxy' ] ) && $aArguments[ 'proxy' ] ) {
                     return $this->___getHTTPResponseByCurl( $sURL, $aArguments );
@@ -423,6 +427,24 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                 return wp_remote_get( $sURL, $aArguments );
 
             }
+                static private $___aRequestTimes = array();
+                /**
+                 * @param integer $iInterval In seconds.
+                 * @since 4.3.4
+                 */
+                private function ___haveInterval( $iInterval ) {
+                    $iInterval = ( integer ) $iInterval;
+                    if ( ! $iInterval ) {
+                        return;
+                    }
+                    self::$___aRequestTimes[ $this->sRequestType ] = isset( self::$___aRequestTimes[ $this->sRequestType ] ) ? self::$___aRequestTimes[ $this->sRequestType ] : microtime( true );
+                    $_fElapsed = microtime( true ) - self::$___aRequestTimes[ $this->sRequestType ];
+                    if ( $_fElapsed > $iInterval  ) {
+                        return;
+                    }
+                    $_iSleep = (integer) floor( $iInterval - $_fElapsed );
+                    sleep( $_iSleep );
+                }
 
             /**
              * @param $sURL
