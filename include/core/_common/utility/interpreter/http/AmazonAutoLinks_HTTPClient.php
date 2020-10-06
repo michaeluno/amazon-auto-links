@@ -79,13 +79,13 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'headers'            => array(),
         'cookies'            => array(),
         'body'               => null,
-        'compress'           => false, // does not seem to take effect
+        'compress'           => false,      // does not seem to take effect
         'decompress'         => true,
         'sslverify'          => true,
         'stream'             => false,
         'filename'           => null,
-        'method'             => null,  // [3.9.0]
-        'reject_unsafe_urls' => true,  // [4.3.4]
+        'method'             => null,       // [3.9.0]
+        'reject_unsafe_urls' => true,       // [4.3.4]
     );
 
     /**
@@ -99,6 +99,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'attempts'               => 0,        // [4.2.0] (integer) for multiple attempts for requests, especially for cases with proxies.
         'skip_argument_format'   => false,    // [4.3.4] (boolean) whether to skip argument formatting. Used in the multiple mode.
         'interval'               => 0,        // [4.3.4] (integer) An interval in seconds between request with the same request type.
+        'renew_cache'            => false,    // [4.3.4] (boolean) Whether to renew the cache.
     );
 
     /**
@@ -273,7 +274,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          */
         private function ___getHTTPResponseWithCache( $sURL, $aArguments, $iCacheDuration ) {
 
-            $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $iCacheDuration, $this->___aCache );
+            $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $iCacheDuration, $this->___aCache, $aArguments );
             $_aoResponse     = $this->___getHTTPResponseFromCache( $this->___aCache, $this->sCacheName, $iCacheDuration, $aArguments, $this->sRequestType );
             if ( ! empty( $_aoResponse ) ) {
                 return $_aoResponse;
@@ -344,14 +345,18 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             }
             /**
              * Retrieves a cache from the database table.
-             * @param string $sCacheName
-             * @param integer $iCacheDuration
-             * @param array $aSetCache  The cache data passed to the constructor, used for the multiple mode.
+             * @param  string  $sCacheName
+             * @param  integer $iCacheDuration
+             * @param  array   $aSetCache       The cache data passed to the constructor, used for the multiple mode.
+             * @param  array   $aArguments      The cache data passed to the constructor, used for the multiple mode.
              * @return array
-             * @since 4.3.4
+             * @since  4.3.4
              */
-            private function ___getCacheFromDatabase( $sCacheName, $iCacheDuration, $aSetCache ) {
+            private function ___getCacheFromDatabase( $sCacheName, $iCacheDuration, array $aSetCache, array $aArguments ) {
                 if ( 0 === ( integer ) $iCacheDuration ) {
+                    return array();
+                }
+                if ( $aArguments[ 'renew_cache' ] ) {
                     return array();
                 }
                 if ( ! empty( $aSetCache ) ) {
@@ -456,11 +461,11 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             private function ___getHTTPResponseByCurl( $sURL, array $aArguments, $sMethod='GET', $sPostFields=null  ) {
 
                 $this->___aCurlHeader = array();
-                $_oCurl            = curl_init();
+                $_oCurl               = curl_init();
 
                 // Is proxy set?
-                $_aProxy   = $this->getElementAsArray( $aArguments, array( 'proxy' ) );
-                $_bProxySet = ! empty( $_aProxy ) && isset( $_aProxy[ 'host' ] );
+                $_aProxy       = $this->getElementAsArray( $aArguments, array( 'proxy' ) );
+                $_bProxySet    = ! empty( $_aProxy ) && isset( $_aProxy[ 'host' ] );
 
                 // Curl settings
                 $_sUserAgent   = $this->getElement( $aArguments, 'user-agent' );
@@ -810,7 +815,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @since  4.3.4
      */
     public function hasCache() {
-        $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $this->iCacheDuration, $this->___aCache );
+        $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $this->iCacheDuration, $this->___aCache, $this->aArguments );
         if ( empty( $this->___aCache ) ) {
             return false;
         }
