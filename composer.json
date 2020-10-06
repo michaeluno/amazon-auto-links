@@ -1,0 +1,17 @@
+{
+  "name": "michaeluno/amazon-auto-links",
+  "description": "Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.",
+  "minimum-stability": "stable",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Michael Uno",
+      "email": "michael2@micaheluno.jp"
+    }
+  ],
+  "require": {
+    "ext-dom": "*",
+    "ext-mbstring": "*",
+    "ext-json": "*"
+  }
+}
