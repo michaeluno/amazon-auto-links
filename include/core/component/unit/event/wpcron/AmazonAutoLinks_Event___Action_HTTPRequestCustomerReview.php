@@ -101,15 +101,13 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                     array(  // http arguments
                         'timeout'     => 20,
                         'redirection' => 20,
+                        'interval'    => 1,
                         'cookies'     => AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage ),
                     ),
                     'customer_review'
                 );
                 if ( $bForceRenew ) {
                     $oHTTP->deleteCache();
-                }
-                if ( ! $oHTTP->hasCache() ) {
-                    sleep( 1 );
                 }
                 return $oHTTP->getResponse();
             }
