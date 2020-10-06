@@ -40,7 +40,7 @@ class Test_AmazonAutoLinks_HTTPClient_Cookie extends AmazonAutoLinks_UnitTest_HT
         $_aHeader    = $this->getHeaderFromResponse( $_aoResponse );
         $this->_assertNotEmpty( $_aHeader );
         $this->_output( $_oHTTP->getBody() );
-        $_aCookiesToParse = $this->getCookiesFromResponseToParse( $_aoResponse );
+        $_aCookiesToParse = $this->getCookiesToParseFromResponse( $_aoResponse );
         $_bFound = false;
         foreach( $_aCookiesToParse as $_aCookieToParse ) {
             if ( 'boo' !== $_aCookieToParse[ 'name' ] ) {

@@ -45,7 +45,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @see WP_Http_Cookie
      * @since 4.3.4
      */
-    static public function getCookiesFromResponseToParse( $aoResponse ) {
+    static public function getCookiesToParseFromResponse( $aoResponse ) {
         $_aCookies = self::getRequestCookiesFromResponse( $aoResponse );
         return self::getCookiesToParse( $_aCookies );
     }

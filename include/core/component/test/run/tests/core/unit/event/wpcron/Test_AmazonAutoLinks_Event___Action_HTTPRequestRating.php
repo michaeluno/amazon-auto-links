@@ -183,7 +183,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             $this->_output( 'HTML<hr />' . $_sHTML );
             $_bPassed = $this->_assertTrue( false !== stripos( $_sHTML, 'acr-average-stars-rating-text'  ), 'Maybe blocked.', $_sHTML );
             if ( ! $_bPassed ) {
-                $this->_outputDetails( 'Response Cookies', $this->getCookiesFromResponseToParse( $_oHTTP->getRawResponse() ) );
+                $this->_outputDetails( 'Response Cookies', $this->getCookiesToParseFromResponse( $_oHTTP->getRawResponse() ) );
                 return false;
             }
 

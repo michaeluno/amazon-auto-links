@@ -38,7 +38,7 @@ abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks
         $this->sLastRequestURL = $sURL;
         $this->aoLastResponse  = $aoResponse;
         $this->aLastHeader     = $this->getHeaderFromResponse( $aoResponse );
-        $this->aLastCookies    = $this->getCookiesFromResponseToParse( $aoResponse );
+        $this->aLastCookies    = $this->getCookiesToParseFromResponse( $aoResponse );
         $this->aLastArguments  = $aArguments;
     }
 
