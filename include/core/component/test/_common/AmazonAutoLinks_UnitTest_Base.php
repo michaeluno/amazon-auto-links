@@ -76,6 +76,22 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     }
 
     /**
+     * @param  mixed   $mThing
+     * @param  string  $sMessage
+     * @return boolean
+     * @since  4.3.4
+     */
+    protected function _assertNotWPError( $mThing, $sMessage='' ) {
+        $sMessage = $sMessage ? $sMessage : "Assert not WP_Error.";
+        if ( $mThing instanceof WP_Error ) {
+            $this->_setError( $sMessage, $mThing->get_error_code() . ' : ' . $mThing->get_error_message(), $mThing->get_error_data() );
+            return false;
+        }
+        $this->_setPass( $sMessage );
+        return true;
+    }
+
+    /**
      * @param  mixed $mActual
      * @param  string $sMessage
      * @param  array $mData
