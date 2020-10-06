@@ -12,6 +12,8 @@
   "require": {
     "ext-dom": "*",
     "ext-mbstring": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-zlib": "*",
+    "ext-curl": "*"
   }
 }
