@@ -19,7 +19,6 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  string   $sLanguage
      * @since  4.3.4
      * @return array
-     * @todo There is a cookie to specify a preferred language and set it with the `$sLanguage` parameter.
      */
     static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
 
@@ -432,15 +431,16 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
      *
-     * @param array $aOffer
-     * @param integer|double $nPrice
-     * @param string $sPriceFormatted
-     * @param integer|double $nDiscountedPrice
-     * @return      string
-     * @since       3
-     * @since       3.8.11  Renamed from `___getFormattedDiscountPrice()` and moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
+     * @param   array          $aOffer
+     * @param   integer|double $nPrice
+     * @param   string         $sPriceFormatted
+     * @param   integer|double $nDiscountedPrice
+     * @return  string
+     * @since   3
+     * @since   3.8.11         Renamed from `___getFormattedDiscountPrice()` and moved from `AmazonAutoLinks_Event___Action_APIRequestSearchProduct`.
+     * @deprecated 4.3.4 Unused.
      */
-    static public function getFormattedDiscountPrice( array $aOffer, $nPrice, $sPriceFormatted, $nDiscountedPrice ) {
+/*    static public function getFormattedDiscountPrice( array $aOffer, $nPrice, $sPriceFormatted, $nDiscountedPrice ) {
 
         // If the formatted price is set in the Offer element, use it.
         $_sDiscountedPriceFormatted = self::getElement(
@@ -459,7 +459,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             $sPriceFormatted // price format
         );
 
-    }
+    }*/
 
     /**
      * @param array     $aImageURLs     A numerically index array holding sub-image URLs.
