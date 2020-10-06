@@ -95,7 +95,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 $_aArguments      = array(
                     'timeout'     => 20,
                     'redirection' => 20,
-                    'cookies'     => $_aRequestCookies,
+                    'cookies'     => array_reverse( $_aRequestCookies ),    // duplicate name cookies seem to be parsed from the last
                     'interval'    => 1,
                 );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
@@ -113,9 +113,13 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                      */
                     if ( $this->hasPrefix( 'BLOCKED_BY_CAPTCHA', trim( $_aoResponse->get_error_code() ) ) ) {
 
-                        $_aArguments[ 'cookies' ] = $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() )
-                            + AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage )
-                            + $_aRequestCookies;
+                        $_aArguments[ 'cookies' ] = array_reverse(
+                            array_merge(
+                                $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() ),
+                                AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage ),
+                                $_aRequestCookies
+                            )
+                        );
                         $_oHTTP            = new AmazonAutoLinks_HTTPClient(
                             $sURL,
                             $iCacheDuration,

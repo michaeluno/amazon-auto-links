@@ -102,7 +102,9 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                         'timeout'     => 20,
                         'redirection' => 20,
                         'interval'    => 1,
-                        'cookies'     => AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage ),
+                        'cookies'     => array_reverse( // cookies with duplicate name seem to be parsed from last.
+                            AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage )
+                        ),
                     ),
                     'customer_review'
                 );

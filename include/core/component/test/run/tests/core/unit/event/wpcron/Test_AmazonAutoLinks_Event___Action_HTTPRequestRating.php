@@ -36,7 +36,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
-     * @tags italy, blocked
+     * @tags IT, blocked
      */
     public function testRatingAndReviewCount_IT() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'IT' ) );
@@ -44,6 +44,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
+     * @tags ES, blocked
      */
     public function testRatingAndReviewCount_ES() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'ES' ) );
@@ -51,7 +52,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
-     * @tags france, blocked
+     * @tags FR, blocked
      */
     public function testRatingAndReviewCount_FR() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'FR' ) );
@@ -59,7 +60,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
-     * @tags german, blocked
+     * @tags DE, blocked
      */
     public function testRatingAndReviewCount_DE() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'DE' ) );
@@ -67,7 +68,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
-     * @tags uk, blocked
+     * @tags UK
      */
     public function testRatingAndReviewCount_UK() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'UK' ) );
@@ -75,6 +76,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
     /**
      * @return bool
      * @throws ReflectionException
+     * @tags JP, blocked
      */
     public function testRatingAndReviewCount_JP() {
         return is_integer( $this->___testRatingByLocale( $this->sASIN, 'JP' ) );
@@ -159,16 +161,16 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             $_sURL     = $_oMock->call( '___getRatingWidgetPageURL', array( $sASIN, $sLocale, true ) ); // B08FWDGDS5, B08HGKZC6T
             $this->_output( 'URL: ' . $_sURL );
 
-            $_aCookies = $_oMock->call( '___getRequestCookiesByLocale', array( $sLocale ) );
-            $this->_outputDetails( 'Request Cookies', $_aCookies );
+            $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale );
+            $_aParseCookies   = $this->getCookiesToParse( $_aRequestCookies );
+            $this->_outputDetails( 'Request Cookies', $_aParseCookies );
 
-            $_oHTTP       = null;
-            $_aoResponse  = $_oMock->call( '___getWidgetPageResponse', array( &$_oHTTP, $_sURL, 86400, false, $sLocale ) );
-            $this->_assertFalse( is_wp_error( $_aoResponse ), 'Check if the response contains an error.', $_aoResponse );
+            $_aoResponse  = $_oMock->call( '___getWidgetPageResponse', array( &$_oHTTP, $_sURL, 86400, false, $sLocale, '' ) );
+            $this->_assertFalse( is_wp_error( $_aoResponse ), 'Check if the response contains an error.', $_oHTTP->getRawResponse() );
             /**
              * @var AmazonAutoLinks_HTTPClient $_oHTTP
              */
-            $_sHTML       = $_oHTTP->getBody();
+            $_sHTML       = wp_remote_retrieve_body( $_oHTTP->getRawResponse() );
             if ( false !== strpos( $_sHTML, '<html' ) ) {
                 $_oDOM    = new AmazonAutoLinks_DOM;
                 $_oDoc    = $_oDOM->loadDOMFromHTML( $_sHTML );
@@ -179,7 +181,11 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             }
 
             $this->_output( 'HTML<hr />' . $_sHTML );
-            $this->_assertTrue( false !== stripos( $_sHTML, 'acr-average-stars-rating-text'  ), 'Maybe blocked.', esc_html( $_sHTML ) );
+            $_bPassed = $this->_assertTrue( false !== stripos( $_sHTML, 'acr-average-stars-rating-text'  ), 'Maybe blocked.', $_sHTML );
+            if ( ! $_bPassed ) {
+                $this->_outputDetails( 'Response Cookies', $this->getCookiesFromResponseToParse( $_oHTTP->getRawResponse() ) );
+                return false;
+            }
 
             $_oScraper      = new AmazonAutoLinks_ScraperDOM_WidgetUserRating( $_sHTML );
             $_inRating      = $_oScraper->getRating();
