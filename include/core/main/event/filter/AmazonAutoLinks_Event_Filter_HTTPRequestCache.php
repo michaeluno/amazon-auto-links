@@ -31,16 +31,16 @@ class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_Plug
     /**
      * Called when an API HTTP response is about to be cached.
      *
-     * @param mixed     $mData
-     * @param string    $sCacheName
-     * @param string    $sCharSet
-     * @param integer   $iCacheDuration
-     * @param string    $sURL
-     * @param array     $aArguments
-     * @param array     $aOldCache
-     * @callback    add_filter() aal_filter_http_request_set_cache
-     * @return mixed
-     * @since 4.2.0
+     * @param    mixed     $mData
+     * @param    string    $sCacheName
+     * @param    string    $sCharSet
+     * @param    integer   $iCacheDuration
+     * @param    string    $sURL
+     * @param    array     $aArguments
+     * @param    array     $aOldCache
+     * @callback add_filter() aal_filter_http_request_set_cache
+     * @return   mixed
+     * @since    4.2.0
      */
     public function replyToCheckAPIHTTPCacheResponse( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache ) {
 
