@@ -14,9 +14,9 @@
  * @package Amazon Auto Links
  * @since   4.3.4
  * @see     AmazonAutoLinks_HTTPClient
- * @tags    http, cookie
+ * @tags    http, cookie, session-id
 */
-class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends Test_AmazonAutoLinks_HTTPClient_BestSellers {
+class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_UnitTest_HTTPRequest_Base {
 
     /**
      * @break
@@ -57,28 +57,42 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends Test_AmazonAutoLinks
         $this->___testSessionMatch( 'UK' );
     }
         private function ___testSessionMatch( $sLocale ) {
-            $_aoResponseAssociates  = $this->___getAssociatesResponse( $sLocale );
-            $_aRequestCookies2      = $this->getRequestCookiesFromResponse( $_aoResponseAssociates );
-            $this->_outputDetails( "2nd Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aRequestCookies2 ) );
-            $_sSessionID1           = $this->_getSessionIDExtracted( $_aoResponseAssociates );
-            $_aoResponseBestSellers = $this->___getBestSellerResponse( $sLocale, $_aRequestCookies2 );
-            $_sSessionID2           = $this->_getSessionIDExtracted( $_aoResponseBestSellers );
-            $this->_assertEqual( $_sSessionID1, $_sSessionID2, "The session ID must match ({$sLocale}).", array( '1st' => $this->getHeaderFromResponse( $_aoResponseAssociates ), '2nd' => $this->getHeaderFromResponse( $_aoResponseBestSellers ) ) );
+
+            $_oMock                 = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Unit_Utility' );
+            $_aAssociatesCookies    = $_oMock->call( '___getAssociatesResponseCookies', array( $sLocale, '' ) );
+            $_sAssociatesURL        = AmazonAutoLinks_Unit_Utility::getAssociatesURL( $sLocale );
+
+            $_sSessionID1           = $_oMock->call( '___getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
+
+            $this->_outputDetails( "2nd Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aAssociatesCookies ) );
+
+            $_aBestSellersCookies1  = $_oMock->call( '___getBestSellersResponseCookies', array( $sLocale, $_aAssociatesCookies, false ) );
+            $_sBestSellerURL        = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $sLocale );
+            $_sSessionID2           = $_oMock->call( '___getSessionIDCookie', array( $_aBestSellersCookies1, $_sBestSellerURL ) );
+
+            if ( $_sSessionID1 === $_sSessionID2 ) {
+                $this->_output( 'Matched: ' . $_sSessionID2 );
+                return;
+            }
+            $_aBestSellersCookies2  = $_oMock->call( '___getBestSellersResponseCookies', array( $sLocale, $_aAssociatesCookies, true ) );
+            $_sSessionID3           = $_oMock->call( '___getSessionIDCookie', array( $_aBestSellersCookies2, $_sBestSellerURL ) );
+
+            if ( $_sSessionID2 === $_sSessionID3 ) {
+                $this->_output( 'Matched: ' . $_sSessionID2 );
+                return;
+            }
+            // Last attempt
+            $this->_assertEqual(
+                $_sSessionID1,
+                $_sSessionID3,
+                "The session IDs must match ({$sLocale}).",
+                array(
+                    '1st' => $this->getCookiesToParse( $_aAssociatesCookies ),
+                    '2nd' => $this->getCookiesToParse( $_aBestSellersCookies1 ),
+                    '3nd' => $this->getCookiesToParse( $_aBestSellersCookies2 ),
+                )
+            );
+
         }
-            private function ___getAssociatesResponse( $sLocale ) {
-                $_sURL = AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
-                $this->_output( "URL ({$sLocale}): " . $_sURL );
-                $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAssociatesRequestCookies( $sLocale );
-                $this->_outputDetails( "1st Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aRequestCookies ) );
-                $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies, 'method' => 'HEAD' ) );
-                $_oHTTP->deleteCache();
-                return $_oHTTP->getResponse();
-            }
-            private function ___getBestSellerResponse( $sLocale, $aRequestCookies ) {
-                $_sURL  = AmazonAutoLinks_Unit_Utility::getBestSellerURL( $sLocale );
-                $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $aRequestCookies ) );
-                $_oHTTP->deleteCache();
-                return $_oHTTP->getResponse();
-            }
 
 }

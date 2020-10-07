@@ -143,9 +143,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          * @return string a URL
          */
         private function ___getRatingWidgetPageURL( $sASIN, $sLocale, $bTest=false ) {
-            // e.g. https://www.amazon.com/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E
-            $_sSchemeDomain = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
-            $_sURL          = $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
+            $_sURL = AmazonAutoLinks_Unit_Utility::getWidgetPageURL( $sASIN, $sLocale );
             return $bTest
                 ? add_query_arg(
                     array(

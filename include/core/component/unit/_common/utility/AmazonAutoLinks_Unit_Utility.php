@@ -15,25 +15,132 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param  string $sASIN
+     * @param  string $sLocale
+     * @return string e.g. https://www.amazon.com/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E
+     * @since  4.3.4
+     */
+    static public function getWidgetPageURL( $sASIN, $sLocale ) {
+        $_sSchemeDomain = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
+        return $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
+    }
+
+    /**
+     * @since  4.3.4
+     * @remark Be aware that this method takes time, meaning slow as this performs two HTTP requests if not cached.
      * @param  string   $sLocale
      * @param  string   $sLanguage
-     * @since  4.3.4
-     * @return array
+     * @return array    Request cookies for Amazon sites.
      */
     static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
-
-        $_sURL       = self::getAssociatesURL( $sLocale );
-        $_oHTTP      = new AmazonAutoLinks_HTTPClient(
-            $_sURL,
-            86400 * 7,  // 7 days
-            array(
-                'method' => 'HEAD',
-                'cookies' => self::getAssociatesRequestCookies( $sLocale, $sLanguage ),
-            )
-        );
-        return self::getRequestCookiesFromResponse( $_oHTTP->getRawResponse() );
-
+        $_aAssociatesCookies  = self::___getAssociatesResponseCookies( $sLocale, $sLanguage );
+        $_sAssociatesURL      = self::getAssociatesURL( $sLocale );
+        $_sSessionID1         = self::___getSessionIDCookie( $_aAssociatesCookies, $_sAssociatesURL );
+        $_aBestSellersCookies = self::___getBestSellersResponseCookies( $sLocale, $_aAssociatesCookies, false );
+        $_sBestSellerURL      = self::getBestSellersURL( $sLocale );
+        $_sSessionID2         = self::___getSessionIDCookie( $_aBestSellersCookies, $_sBestSellerURL );
+        if ( $_sSessionID1 === $_sSessionID2 ) {
+            return $_aBestSellersCookies;
+        }
+        return self::___getBestSellersResponseCookies( $sLocale, $_aBestSellersCookies, true );
     }
+        /**
+         * @param  array $aCookies
+         * @param  string $sURL
+         * @return string
+         * @since  4.3.4
+         */
+        static private function ___getSessionIDCookie( array $aCookies, $sURL ) {
+            $_sCookieDomain = self::___getCookieDomain( $sURL );
+            $_aSessionIDs   = array(); // consider a case of multiple cookies with the same name.
+            foreach( $aCookies as $_isIndexOrName => $_soValueOrWPHttpCookie ) {
+                $_bObject = ( $_soValueOrWPHttpCookie instanceof WP_Http_Cookie );  // backward compatibility for below WP 4.6.0.
+                $_sName   = $_bObject ? $_soValueOrWPHttpCookie->name : $_isIndexOrName;
+                if (
+                    $_bObject
+                    && isset( $_soValueOrWPHttpCookie->domain )
+                    && $_soValueOrWPHttpCookie->domain !== $_sCookieDomain
+                ) {
+                    continue;
+                }
+                if ( 'session-id' !== $_sName ) {
+                    continue;
+                }
+                $_aSessionIDs[] = $_bObject
+                    ? $_soValueOrWPHttpCookie->value
+                    : $_soValueOrWPHttpCookie;
+            }
+            if ( empty( $_aSessionIDs ) ) {
+                return '';
+            }
+            if ( count( $_aSessionIDs ) === 1 ) {
+                return reset( $_aSessionIDs );
+            }
+            // At this point, multiple `session-id` cookie entry exist.
+            $_iIndex = array_search( '-', $_aSessionIDs ); // remove the entry with the value '-'
+            unset( $_aSessionIDs[ $_iIndex ] );
+            return reset( $_aSessionIDs ); // the first found item
+
+        }
+        /**
+         * @param  string  $sLocale
+         * @param  array   $aRequestCookies
+         * @param  boolean $bForceRenew
+         * @return WP_Http_Cookie[]
+         * @since  4.3.4
+         */
+        static private function ___getBestSellersResponseCookies( $sLocale, array $aRequestCookies, $bForceRenew=false ) {
+            $_aoResponse = self::___getBestSellersResponse( $sLocale, $aRequestCookies, $bForceRenew );
+            return self::getRequestCookiesFromResponse( $_aoResponse );
+        }
+        /**
+         * @param  string  $sLocale
+         * @param  array   $aRequestCookies
+         * @param  boolean $bForceRenew
+         * @return array|WP_Error
+         * @since  4.3.4
+         */
+        static private function ___getBestSellersResponse( $sLocale, array $aRequestCookies, $bForceRenew=false ) {
+            $_sURL  = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $sLocale );
+            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+                $_sURL,
+                86400 * 7,
+                array(
+                    // The GET method is used as those pages do not accept the HEAD method.
+                    'cookies'     => $aRequestCookies,
+                    'renew_cache' => $bForceRenew,
+                )
+            );
+            return $_oHTTP->getRawResponse();
+        }
+        /**
+         * @param  string $sLocale
+         * @param  string $sLanguage
+         * @return array|WP_Error
+         * @since  4.3.4
+         */
+        static private function ___getAssociatesResponseCookies( $sLocale, $sLanguage ) {
+            $_aoResponse = self::___getAssociatesResponse( $sLocale, $sLanguage );
+            return self::getRequestCookiesFromResponse( $_aoResponse );
+        }
+        /**
+         * @param  string $sLocale
+         * @param  string $sLanguage
+         * @return array|WP_Error
+         * @since  4.3.4
+         */
+        static private function ___getAssociatesResponse( $sLocale, $sLanguage ) {
+            $_sURL  = self::getAssociatesURL( $sLocale );
+            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+                $_sURL,
+                86400 * 7,  // 7 days
+                array(
+                    'method'  => 'HEAD',
+                    'cookies' => self::getAssociatesRequestCookies( $sLocale, $sLanguage ),
+                )
+            );
+            return $_oHTTP->getRawResponse();
+        }
 
     /**
      * Retrieves cookies given by a Amazon Associates site of the given locale.
@@ -63,13 +170,27 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         return $_aCookies;
     }
         /**
+         * Returns the domain part of the given URL for a cookie, allowing the sub-domain part.
+         * e.g. https://affiliate-program.amazon.com/ -> .affiliate-program.amazon.com
+         * @param  string $sURL
+         * @return string
+         * @since  4.3.4
+         * @deprecated unused
+         */
+/*        static private function ___getCookieSubDomain( $sURL ) {
+            $_sHost = parse_url( $sURL, PHP_URL_HOST );
+            return preg_replace( '/^www/', '', $_sHost );
+        }*/
+        /**
+         * Returns the domain part of the given URL for a cookie.
+         * e.g. https://affiliate-program.amazon.com/ -> .amazon.com
          * @param  string $sURL
          * @return string
          * @since  4.3.4
          */
-        static private function ___getCookieDomain( $sURL ) {
+        static public function ___getCookieDomain( $sURL ) {
             $_sHost = parse_url( $sURL, PHP_URL_HOST );
-            return preg_replace( '/^www/', '', $_sHost );
+            return preg_replace("/^(.+\.)?(.+\..+)$/",".$2", $_sHost );
         }
 
     /**
@@ -90,7 +211,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @return string
      * @since  4.3.4  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
      */
-    static public function getBestSellerURL( $sLocale ) {
+    static public function getBestSellersURL( $sLocale ) {
         return AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ) . '/gp/bestsellers/';
 
         /*
@@ -506,15 +627,14 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * Extract the sub-image (image-set) information from PA API response and generates the output.
      *
-     * @param array   $aImages         The extracted image array from a PA-API response.
-     * @param string  $sProductURL
-     * @param string  $sTitle
-     * @param integer $iMaxImageSize    The maximum size of each sub-image.
-     * @param integer $iMaxNumberOfImages
-     *
-     * @return      string
-     * @since       3           Originally defined in `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
-     * @since       3.8.11      Renamed from `___getFormattedOutput()` and moved from `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
+     * @param  array   $aImages         The extracted image array from a PA-API response.
+     * @param  string  $sProductURL
+     * @param  string  $sTitle
+     * @param  integer $iMaxImageSize    The maximum size of each sub-image.
+     * @param  integer $iMaxNumberOfImages
+     * @return string
+     * @since  3       Originally defined in `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
+     * @since  3.8.11  Renamed from `___getFormattedOutput()` and moved from `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
      */
     static public function getSubImages( array $aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
 
@@ -828,9 +948,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         $_sRating = str_replace( '.', '-', $_dRating );
 
         // https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/customer-reviews/stars-5-0.gif
-        $_sRatingStarImageURL = 'https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/customer-reviews/stars-'
+        return 'https://images-na.ssl-images-amazon.com/images/G/01/x-locale/common/customer-reviews/stars-'
             . $_sRating . '.gif';
-        return $_sRatingStarImageURL;
+
     }
 
     /**
