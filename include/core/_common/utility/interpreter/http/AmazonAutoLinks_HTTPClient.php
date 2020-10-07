@@ -822,4 +822,14 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         return ! $this->___isCacheExpired( $this->___aCache );
     }
 
+    /**
+     * Returns a response status code such as 404, 200 etc.
+     * @remark Assumes to be called after performing get(), getBody(), getRawResponse(), or getResponse().
+     * @return integer
+     * @since  4.3.4
+     */
+    public function getStatusCode() {
+        return ( integer ) $this->getElement( $this->aoResponse, array( 'response', 'code' ) );
+    }
+
 }
