@@ -31,7 +31,7 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
      */
     public $oDoc;    
         
-    public function __construct( $sURLOrFIlePathOrHTML, $sCharset='' ) {
+    public function __construct( $sURLOrFilePathOrHTML, $sCharset='' ) {
         
         $this->bIsSSL        = is_ssl();
         $this->oDOM          = new AmazonAutoLinks_DOM;
@@ -40,9 +40,9 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
             : false;
         
         // If a given value is a url,
-        if ( filter_var( $sURLOrFIlePathOrHTML, FILTER_VALIDATE_URL ) ){ 
+        if ( filter_var( $sURLOrFilePathOrHTML, FILTER_VALIDATE_URL ) ){ 
             $this->oDoc = $this->oDOM->loadDOMFromURL( 
-                $sURLOrFIlePathOrHTML, 
+                $sURLOrFilePathOrHTML, 
                 '',  // mb_lang
                 false, // use file_get_contents()
                 $_bsCharSetFrom // detect encoding
@@ -50,9 +50,9 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
         }        
         // Else if it is a file path, 
         // disable warnings here as in PHP 5.3 or above, PHP_MAXPATHLEN is defined and it may cause warnings
-        else if ( @file_exists( $sURLOrFIlePathOrHTML ) ) {
+        else if ( @file_exists( $sURLOrFilePathOrHTML ) ) {
             $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
-                file_get_contents( $sURLOrFIlePathOrHTML ),
+                file_get_contents( $sURLOrFilePathOrHTML ),
                 '', // mb_lang
                 $_bsCharSetFrom
             );            
@@ -60,7 +60,7 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
         // Else, treat it as HTML contents.
         else {
             $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
-                $sURLOrFIlePathOrHTML,
+                $sURLOrFilePathOrHTML,
                 '', // mb_lang
                 $_bsCharSetFrom // detect encoding
             );
