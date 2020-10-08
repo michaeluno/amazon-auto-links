@@ -548,8 +548,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      *
      * @since       3.7.0
      * @remark      Override this method in each extended class.
-     * @return      string  The found error.
-     * @return      string  The error message.
+     * @return      string  The found error message. An empty string if no error is found.
      * @param       array   $aProducts
      */
     protected function _getError( $aProducts ) {
