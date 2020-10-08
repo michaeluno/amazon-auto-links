@@ -20,8 +20,9 @@ final class AmazonAutoLinks_Property {
     /**
      * 
      * @see                http://php.net/manual/en/function.mb-language.php
+     * @deprecated 4.3.4  Unused.
      */
-    static public $aCategoryPageMBLanguages = array(
+/*    static public $aCategoryPageMBLanguages = array(
         'CA'    => 'uni',
         'CN'    => 'uni',
         'FR'    => 'uni',
@@ -37,7 +38,7 @@ final class AmazonAutoLinks_Property {
         'AU'    => 'uni',   // 3.5.5+
         'SG'    => 'uni',   // 4.1.0+
         'NL'    => 'uni',   // 4.1.0+
-    );
+    );*/
     /**
      * @var array
      * @since   2?
@@ -269,7 +270,7 @@ final class AmazonAutoLinks_Property {
      */
     static public $aAddToCartURLs = array(
         'CA' => 'www.amazon.ca/gp/aws/cart/add.html',
-            'CN' => 'www.amazon.cn/gp/aws/cart/add.html',
+        'CN' => 'www.amazon.cn/gp/aws/cart/add.html',
         'FR' => 'www.amazon.fr/gp/aws/cart/add.html',
         'DE' => 'www.amazon.de/gp/aws/cart/add.html',
         'IT' => 'www.amazon.it/gp/aws/cart/add.html',
