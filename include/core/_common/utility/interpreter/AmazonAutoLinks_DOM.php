@@ -199,24 +199,26 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
                 ); 
             } 
 
-            // 3.4.1+ Sometimes <html><body> tags get inserted.
-            $sInnerHTML .= $this->_getAutoInjectedWrapperTagsRemoved( @$_oTempDom->saveHTML() );
+            // [4.3.4] Clean HTML.
+            $_oTempDom->preserveWhiteSpace = false;
+            $_oTempDom->formatOutput       = true;
+            // [3.4.1] Sometimes <html><body> tags get inserted.
+            $sInnerHTML .= $this->___getAutoInjectedWrapperTagsRemoved( @$_oTempDom->saveHTML() );
             
         } 
         return $sInnerHTML;     
         
     }
-
-    /**
-     * Removes wrapped `<html>` and `<body>`tags from a given string.
-     *
-     * Sometimes $oDOM->saveHTML() returns a string with <html><body> wrapped. Use this method to remove those.
-     *
-     * @param  string $sHTML
-     * @return string
-     * @since  2.4.1
-     */
-        private function _getAutoInjectedWrapperTagsRemoved( $sHTML ) {
+        /**
+         * Removes wrapped `<html>` and `<body>`tags from a given string.
+         *
+         * Sometimes $oDOM->saveHTML() returns a string with <html><body> wrapped. Use this method to remove those.
+         *
+         * @param  string $sHTML
+         * @return string
+         * @since  2.4.1
+         */
+        private function ___getAutoInjectedWrapperTagsRemoved( $sHTML ) {
             
             $sHTML = trim( $sHTML );
             
@@ -266,15 +268,15 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      *
      * Example:
      * `
-     * $oDom->setAttributesByTagName( $oNode, 'a', array( 'target' => '_blank', 'rel' => 'nofollow noopener' ) );
+     * $oDom->setAttributesByTagName( $oDoc, 'a', array( 'target' => '_blank', 'rel' => 'nofollow noopener' ) );
      * `
-     * @param DOMNode $oNode
-     * @param string  $sTagName
-     * @param array   $aAttributes
+     * @param DOMDocument $oDoc
+     * @param string      $sTagName
+     * @param array       $aAttributes
      */
-    public function setAttributesByTagName( $oNode, $sTagName, $aAttributes=array() ) {
+    public function setAttributesByTagName( $oDoc, $sTagName, $aAttributes=array() ) {
         
-        foreach( $oNode->getElementsByTagName( $sTagName ) as $_oSelectedNode ) {
+        foreach( $oDoc->getElementsByTagName( $sTagName ) as $_oSelectedNode ) {
             foreach( $this->getAsArray( $aAttributes ) as $_sAttribute => $_sProperty ) {
                 if ( in_array( $_sAttribute, array( 'src', 'href' ) ) ) {
                     $_sProperty = esc_url( $_sProperty );
@@ -295,14 +297,15 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * `
      * $this->oDOM->removeNodeByTagAndClass( $nodeDiv, 'span', 'riRssTitle' );
      * `
-     * @param DOMNode $oNode
-     * @param string  $sTagName
-     * @param string  $sClassName
-     * @param string  $iIndex
+     * @param DOMDocument $oDoc
+     * @param string      $sTagName
+     * @param string      $sClassName
+     * @param string      $iIndex
+     * @deprecated 4.3.4 Unused.
      */
-    public function removeNodeByTagAndClass( $oNode, $sTagName, $sClassName, $iIndex='' ) {
+/*    public function removeNodeByTagAndClass( $oDoc, $sTagName, $sClassName, $iIndex='' ) {
         
-        $oNodes = $oNode->getElementsByTagName( $sTagName );
+        $oNodes = $oDoc->getElementsByTagName( $sTagName );
         
         // If the index is specified,
         if ( 0 === $iIndex || is_integer( $iIndex ) ) {
@@ -322,7 +325,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             }
         }
         
-    }
+    } */
 
     /**
      * Removes specified tags from the given dom node.
@@ -346,6 +349,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
 
     /**
      * @param DOMDocument $oDoc
+     * @since 4.3.4
      */
     public function removeComments( DOMDocument $oDoc ) {
         $_oXPath = new DOMXPath( $oDoc );
