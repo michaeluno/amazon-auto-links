@@ -9,24 +9,24 @@
  */
 
 /**
- * Tests accessing widget pages.
+ * Tests accessing review pages.
  *
  * @package Amazon Auto Links
  * @since   4.3.4
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http
 */
-class Test_AmazonAutoLinks_HTTP_WidgetPages extends Test_AmazonAutoLinks_HTTPClient_BestSellers {
+class Test_AmazonAutoLinks_HTTPClient_Reviews extends Test_AmazonAutoLinks_HTTPClient_BestSellers {
 
     /**
-     * @tags  widget
+     * @tags  review
      * @break
      */
     public function test_allLocales() {
-        $_sASIN    = 'B07FKR6KXF';
+        $_sASIN    = 'B08JVQDV6W'; // B07FKR6KXF // B085M66LH1
         $_aLocales = array_keys( AmazonAutoLinks_Property::$aStoreDomains );
         foreach( $_aLocales as $_iIndex => $_sLocale ) {
-            $_sURL = AmazonAutoLinks_Unit_Utility::getWidgetPageURL( $_sASIN, $_sLocale );
+            $_sURL = AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $_sASIN, $_sLocale );
             $this->_testUnblocked( $_sURL, $_sLocale );
         }
     }
