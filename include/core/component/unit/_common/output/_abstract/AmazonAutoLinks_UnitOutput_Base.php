@@ -12,21 +12,13 @@
  * A base class for unit classes, search, tag, and category.
  * 
  * Provides shared methods and properties for those classes.
- * 
- * @filter          aal_filter_template_path
- *  parameter 1:    (string) template path
- *  parameter 2:    (array) arguments(unit options) 
- * @filter          aal_filter_unit_output
- *  parameter 1:    (string) unit output
- *  parameter 2:    (array)    arguments(unit options)
- * 
- * @filter      add     aal_filter_unit_product_raw_title
+ *
  */
 abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutput_Utility {
 
     /**
      * Stores the unit type.
-     * @remark      The constructor will create a unit option object based on this value.
+     * @remark The constructor will create a unit option object based on this value.
      */
     public $sUnitType = '';
     
@@ -52,8 +44,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     /**
      * Stores blocked product ASINs by filters.
      * Used to insert these in an output error of No Products Found so that it will be
-     * @var array
-     * @since   4.1.0
+     * @var   array
+     * @since 4.1.0
      */
     public $aBlockedASINs = array();
     
@@ -74,8 +66,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     
     /**
      * Indicates whether the unit needs to access custom database table.
-     * @remark      Accessed from delegation classes publicly.
-     * @since       3
+     * @remark Accessed from delegation classes publicly.
+     * @since  3
      */
     public $bDBTableAccess = false;
 
@@ -166,7 +158,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->_setProperties();
 
     }
-
         /**
          * @since   3.7.5
          * @return  boolean
@@ -190,7 +181,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @param    AmazonAutoLinks_UnitOption_Base $aUnitOptions
          * @return   string
          * @since    3.7.5
-         * @callback add_filter  aal_filter_product_link
+         * @callback add_filter()  aal_filter_product_link
          */
         public function replyToModifyProductURLs( $sURL, $sRawURL, $sASIN, $aUnitOptions ) {
             $_aQuery     = array();
@@ -497,16 +488,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * Called when the unit HTTP request cache is set.
      *
      * Cases:
-     * - An entirely new request is made and has no error. -> do nothing
-     * - An entirely new request is made and has an error. -> save an error
-     * - A cached request had no error and it is renewed and has no error. -> do nothing
-     * - A cached request had no error and it is renewed and has an error. -> save an error
-     * - A cached request had an error and it is renewed and has no error. -> delete an error
-     * - A cached request had an error and it is renewed and has an error. -> override an error
+     * - An entirely new request is made and has no error. -> do nothing.
+     * - An entirely new request is made and has an error. -> save the error.
+     * - A cached request had no error and it is renewed and has no error. -> do nothing.
+     * - A cached request had no error and it is renewed and has an error. -> save the error.
+     * - A cached request had an error and it is renewed and has no error. -> delete the error.
+     * - A cached request had an error and it is renewed and has an error. -> override the error.
      *
      * @param       array   $aProducts
      * @param       integer $iUnitID        The unit (post) ID.
      * @callback    filter  aal_filter_products
+     * @see         AmazonAutoLinks_UnitOutput__ErrorChecker::_replyToCheckErrors()
      * @remark      Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
      * @retuen      void
      * @since       3.7.0
