@@ -17,19 +17,25 @@
 class AmazonAutoLinks_Run_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @param  string $sHTML
-     * @param  array  $aRemoveTags  HTML tags to remove.
+     * @param  string  $sHTML
+     * @param  array   $aRemoveTags     HTML tags to remove.
+     * @param  boolean $bRemoveComment  Whether to remove HTML comments.
      * @return string
      * @since  4.3.4
      */
-    static public function getHTMLBody( $sHTML, $aRemoveTags=array( 'script', 'style' ) ) {
+    static public function getHTMLBody( $sHTML, $aRemoveTags=array( 'script', 'style' ), $bRemoveComment=true ) {
 
-        $_oDOM    = new AmazonAutoLinks_DOM;
-        $_oDoc    = $_oDOM->loadDOMFromHTML( $sHTML );
-        $_oXPath  = new DOMXPath( $_oDoc );
-        $_oDOM->removeTags( $_oDoc, $aRemoveTags );
+        $_oDOMHelper = new AmazonAutoLinks_DOM;
+        $_oDoc       = $_oDOMHelper->loadDOMFromHTML( $sHTML );
+        $_oXPath     = new DOMXPath( $_oDoc );
+        $_oDOMHelper->removeTags( $_oDoc, $aRemoveTags );
+        if ( $bRemoveComment ) {
+            $_oDOMHelper->removeComments( $_oDoc );
+        }
+
         $_noNode  = $_oXPath->query( './/body' )->item( 0 );
-        return $_oDOM->getInnerHTML( $_noNode );
+        $_sHTML   = $_oDOMHelper->getInnerHTML( $_noNode );
+        return preg_replace('/([\r\n]+\s*){2,}/', '$1', $_sHTML );
 
     }
 
