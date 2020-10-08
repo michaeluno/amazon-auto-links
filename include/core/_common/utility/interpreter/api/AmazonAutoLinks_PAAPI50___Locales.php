@@ -428,6 +428,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      * @param  string $sLocale
      * @return string THe market-place URL.
      * @since  3.9.1
+     * @todo   Use the AmazonAutoLinks_Property::getStoreDomainByLocale()
+     * @see AmazonAutoLinks_Property::getStoreDomainByLocale()
      */
     static public function getMarketPlaceByLocale( $sLocale ) {
         $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
