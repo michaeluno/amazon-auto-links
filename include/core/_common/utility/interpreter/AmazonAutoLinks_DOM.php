@@ -57,15 +57,18 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             && ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 );
         
     }
-    
+
     /**
      * Creates a DOM object from a given HTML string.
-     * 
-     * @remark      To output the modified HTML, perform 
+     *
+     * @remark      To output the modified HTML, perform
      * `
      * $_oDoc->saveXML( $_oDoc->documentElement, LIBXML_NOEMPTYTAG );
      * `
-     * @return      DOMDocument
+     * @param  string $sHTMLElements
+     * @param  string $sMBLang
+     * @param  string $sSourceCharSet
+     * @return DOMDocument
      */
     public function loadDOMFromHTMLElement( $sHTMLElements, $sMBLang='uni', $sSourceCharSet='' ) {
         return $this->loadDOMFromHTML( 
@@ -76,12 +79,18 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             $sMBLang,
             $sSourceCharSet 
         );
-    }    
+    }
+
     /**
      * Creates a DOM object from a given url.
-     * @return      DOMDocument
-     * @since       unknown
-     * @since       3.2.0       Added the cache duration parameter.
+     * @param  string  $sURL
+     * @param  string  $sMBLang
+     * @param  boolean $bUseFileGetContents
+     * @param  string  $sSourceCharSet
+     * @param  integer $iCacheDuration
+     * @return DOMDocument
+     * @since  2.0.0
+     * @since  3.2.0       Added the cache duration parameter.
      */
     public function loadDOMFromURL( $sURL, $sMBLang='uni', $bUseFileGetContents=false, $sSourceCharSet='', $iCacheDuration=86400 ) {
         return $this->loadDOMFromHTML( 
@@ -139,10 +148,13 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         return $oDOM;
         
     }
+
         /**
          * Performs the `loadHTML()` DOMDocument method with some additional checks and sanitization.
-         * @return      void
-         * @since       3.4.1
+         * @param  DOMDocument $oDOM
+         * @param  string $sHTML
+         * @return void
+         * @since  3.4.1
          */
         private function _loadHTML( $oDOM, $sHTML ) {
             
@@ -162,10 +174,11 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             );               
             
         }
-    
+
     /**
-     * 
-     * @return      string
+     *
+     * @param  DOMNode $oNode
+     * @return string
      */
     public function getInnerHTML( $oNode ) {
         $sInnerHTML  = ""; 
@@ -193,14 +206,16 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         return $sInnerHTML;     
         
     }
-        /**
-         * Removes wrapped `<html>` and `<body>`tags from a given string.
-         * 
-         * Sometimes $oDOM->saveHTML() returns a string with <html><body> wrapped. Use this method to remove those.
-         * 
-         * @since       2.4.1
-         * @return      string
-         */
+
+    /**
+     * Removes wrapped `<html>` and `<body>`tags from a given string.
+     *
+     * Sometimes $oDOM->saveHTML() returns a string with <html><body> wrapped. Use this method to remove those.
+     *
+     * @param  string $sHTML
+     * @return string
+     * @since  2.4.1
+     */
         private function _getAutoInjectedWrapperTagsRemoved( $sHTML ) {
             
             $sHTML = trim( $sHTML );
@@ -236,23 +251,26 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         return $_oHTML->get();    
     
     }
-    
+
     /**
      * Deletes the cache of the provided URL.
+     * @param string $sURL
+     * @deprecated unused
      */
-    public function deleteCache( $sURL ) {
-// @todo delete the item of the custom database table.        
-// or deprecate this method.
+    /*public function deleteCache( $sURL ) {
         $this->deleteTransient( $this->sHTMLCachePrefix . md5( $sURL ) );
-    }
-    
+    }*/
+
     /**
      * Modifies the attributes of the given node elements by specifying a tag name.
-     * 
+     *
      * Example:
      * `
      * $oDom->setAttributesByTagName( $oNode, 'a', array( 'target' => '_blank', 'rel' => 'nofollow noopener' ) );
      * `
+     * @param DOMNode $oNode
+     * @param string  $sTagName
+     * @param array   $aAttributes
      */
     public function setAttributesByTagName( $oNode, $sTagName, $aAttributes=array() ) {
         
@@ -271,12 +289,16 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * Removes nodes by tag and class selector. 
-     * 
+     * Removes nodes by tag and class selector.
+     *
      * Example:
      * `
      * $this->oDOM->removeNodeByTagAndClass( $nodeDiv, 'span', 'riRssTitle' );
      * `
+     * @param DOMNode $oNode
+     * @param string  $sTagName
+     * @param string  $sClassName
+     * @param string  $iIndex
      */
     public function removeNodeByTagAndClass( $oNode, $sTagName, $sClassName, $iIndex='' ) {
         
@@ -300,10 +322,12 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             }
         }
         
-    }                
- 
+    }
+
     /**
      * Removes specified tags from the given dom node.
+     * @param DOMDocument $oDom
+     * @param array $aTags
      */
     public function removeTags( DOMDocument $oDom, array $aTags ) {
         
@@ -319,16 +343,29 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         
         }
     }
-    
+
     /**
-     * @return      string       Returns an outer HTML output of a specified tag.       
-     * @since       3.2.0
+     * @param DOMDocument $oDoc
+     */
+    public function removeComments( DOMDocument $oDoc ) {
+        $_oXPath = new DOMXPath( $oDoc );
+        foreach ( $_oXPath->query('//comment()' ) as $_oCommentNode ) {
+            $_oCommentNode->parentNode->removeChild( $_oCommentNode );
+        }
+    }
+
+    /**
+     * @param  DOMDocument $oDoc
+     * @param  string      $sTag
+     * @param  integer     $iIndex
+     * @return string      Returns an outer HTML output of a specified tag.
+     * @since  3.2.0
      */
     public function getTagOuterHTML( DOMDocument $oDoc, $sTag, $iIndex=0 ) {
-        $_oXpath           = new DOMXPath( $oDoc );               
-        $_oTags            = $_oXpath->query( "/html/{$sTag}" );
+        $_oXPath           = new DOMXPath( $oDoc );
+        $_oTags            = $_oXPath->query( "/html/{$sTag}" );
         $_oTag             = $_oTags->item( $iIndex );
         return $oDoc->saveXml( $_oTag, LIBXML_NOEMPTYTAG );                                    
     }    
- 
+
 }
