@@ -27,7 +27,7 @@ class AmazonAutoLinks_ScraperDOM_UserRating extends AmazonAutoLinks_ScraperDOM_B
 
         // Modify tags.
         $this->oDOM->setAttributesByTagName( 
-            $this->oDoc, // node
+            $this->oDoc,  // DOM document
             'a', // tag name
             array( 
                 'rel'    => 'nofollow noopener',

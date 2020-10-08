@@ -63,7 +63,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview_Each extends AmazonAutoLinks_Scr
 
         // Modify a tags.
         $this->oDOM->setAttributesByTagName( 
-            $this->oDoc, // node
+            $this->oDoc,  // DOM document
             'a', // tag name
             array( 
                 'rel'    => 'nofollow noopener',
