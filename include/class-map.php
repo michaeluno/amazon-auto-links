@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.4b01 by miunosoft (Michael Uno)
+    Amazon Auto Links v4.3.4b01 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -172,6 +172,7 @@ return array(
     "AmazonAutoLinks_Test_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_Utility.php", 
     "AmazonAutoLinks_MockClass" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_MockClass.php", 
     "AmazonAutoLinks_Run_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Run_Base.php", 
+    "AmazonAutoLinks_Run_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Run_Utility.php", 
     "AmazonAutoLinks_Scratch_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Scratch_Base.php", 
     "AmazonAutoLinks_Test_Exception" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_Test_Exception.php", 
     "AmazonAutoLinks_UnitTest_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_UnitTest_Base.php", 
