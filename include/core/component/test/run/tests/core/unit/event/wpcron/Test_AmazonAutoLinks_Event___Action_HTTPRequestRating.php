@@ -170,14 +170,9 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             /**
              * @var AmazonAutoLinks_HTTPClient $_oHTTP
              */
-            $_sHTML       = wp_remote_retrieve_body( $_oHTTP->getRawResponse() );
+            $_sHTML = wp_remote_retrieve_body( $_oHTTP->getRawResponse() );
             if ( false !== strpos( $_sHTML, '<html' ) ) {
-                $_oDOM    = new AmazonAutoLinks_DOM;
-                $_oDoc    = $_oDOM->loadDOMFromHTML( $_sHTML );
-                $_oXPath  = new DOMXPath( $_oDoc );
-                $_oDOM->removeTags( $_oDoc, array( 'script', 'style' ) );
-                $_noNode  = $_oXPath->query( './/body' )->item( 0 );
-                $_sHTML   = $_oDOM->getInnerHTML( $_noNode );
+                $_sHTML = $this->getHTMLBody( $_sHTML );
             }
 
             $this->_output( 'HTML<hr />' . $_sHTML );
