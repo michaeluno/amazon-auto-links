@@ -119,8 +119,8 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
         private function ___getCountryLabels() {
             $_aLabels = AmazonAutoLinks_Property::$aStoreDomains;
             foreach( $_aLabels as $_sLocale => $_sDomain ) {
-                $_sFlagImage = esc_url( AmazonAutoLinks_Property::$aCountryFlags[ $_sLocale ] );
-               $_sAlt       = esc_attr( 'Country Flag - ' . $_sLocale );
+                $_sFlagImage = AmazonAutoLinks_Property::$aCountryFlags[ $_sLocale ]; // do not escape
+                $_sAlt       = esc_attr( 'Country Flag - ' . $_sLocale );
                 $_aLabels[ $_sLocale ] = "<img class='country-flag' src='{$_sFlagImage}' alt='{$_sAlt}' />"
                     . "<span class='store-domain'>" . $_sDomain . "</span>";
             }

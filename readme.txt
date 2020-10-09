@@ -323,6 +323,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.3.4 =
+- Fixed a bug that country flags were not displayed in the `Embed` setting tab.
+
 = 4.3.3 - 10/04/2020 =
 - Fixed a bug that updating now-retrieving elements failed with a certain number of items.
 - Fixed an issue that on some sites with a database of the utf8-mb4 type collation got an error " Specified key was too long; max key length is 1000 bytes...".
