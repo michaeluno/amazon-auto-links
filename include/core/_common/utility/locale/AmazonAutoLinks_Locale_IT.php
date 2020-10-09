@@ -1,0 +1,51 @@
+<?php
+/**
+ * Amazon Auto Links
+ *
+ * http://en.michaeluno.jp/amazn-auto-links/
+ * Copyright (c) 2013-2020 Michael Uno
+ *
+ */
+
+/**
+ * The Italian locale class.
+ *
+ * @since       4.3.4
+ */
+class AmazonAutoLinks_Locale_IT extends AmazonAutoLinks_Locale_Base {
+
+    /**
+     * The locale code.
+     * @var string
+     */
+    public $sSlug = 'IT';
+
+    /**
+     * Two digits locale number.
+     * @var string
+     */
+    public $sLocaleNumber = '29';
+
+    /**
+     * @var string e.g. www.amazon.com
+     */
+    public $sDomain = 'www.amazon.it';
+
+    /**
+     * @var string
+     */
+    public $sAssociatesURL = 'https://programma-affiliazione.amazon.it';
+
+    /**
+     * @var string
+     */
+    public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAjUlEQVRIS2NkqPITZ2D4s4eBgUEHiHGCJvFgfNIYcpr5WXjVMzIwXPnFwOLCyFDldZmQ5SCTqO0AkJkgR4Ac8B/E0TfTxeviYx4tJIXAf29/vOq3790Llh91wGgIjIbAaAiMhsBoCIyGwGgIjIbAoAiBAWuUMjD8Pw8MAXCzfB+wfahFz2Y5yPLfDKyeAJLRsoJQI/N3AAAAAElFTkSuQmCC';
+
+    /**
+     * @return string
+     */
+    public function getLabel() {
+        return $this->sSlug . ' - ' . __( 'Italy', 'amazon-auto-links' );
+    }
+
+}

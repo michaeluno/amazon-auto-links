@@ -64,6 +64,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @var string[]
+     * @deprecated 4.3.4
+     * @see AmazonAutoLinks_Property::$aStoreDomains
      */
     public $aMarketPlaces = array(
         'AU'        => 'www.amazon.com.au',
@@ -429,7 +431,8 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
      * @return string THe market-place URL.
      * @since  3.9.1
      * @todo   Use the AmazonAutoLinks_Property::getStoreDomainByLocale()
-     * @see AmazonAutoLinks_Property::getStoreDomainByLocale()
+     * @see AmazonAutoLinks_Property::$aStoreDomains
+     * @deprecated 4.3.4
      */
     static public function getMarketPlaceByLocale( $sLocale ) {
         $_oLocales = new AmazonAutoLinks_PAAPI50___Locales;
