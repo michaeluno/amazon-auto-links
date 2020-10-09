@@ -249,7 +249,7 @@ final class AmazonAutoLinks_Property {
      * @since 4.2.2
      */
     static public $aLocaleNumbers = array(
-        'CA'    => '01',
+        'CA'    => '15',
         'CN'    => '28',
         'FR'    => '08',
         'DE'    => '03',
