@@ -14,52 +14,9 @@
  * @package     Amazon Auto Links
  * @since       2.0.0
  * @since       3       Changed the name from `AmazonAutoLinks_Properties`.
+ * @deprecated  4.3.4
 */
 final class AmazonAutoLinks_Property {
-    
-    /**
-     * 
-     * @see                http://php.net/manual/en/function.mb-language.php
-     * @deprecated 4.3.4  Unused.
-     */
-/*    static public $aCategoryPageMBLanguages = array(
-        'CA'    => 'uni',
-        'CN'    => 'uni',
-        'FR'    => 'uni',
-        'DE'    => 'uni',
-        'IT'    => 'uni',
-        'JP'    => 'ja',
-        'UK'    => 'en',
-        'ES'    => 'uni',
-        'US'    => 'en',    
-        'IN'    => 'uni',    
-        'BR'    => 'uni',
-        'MX'    => 'uni',
-        'AU'    => 'uni',   // 3.5.5+
-        'SG'    => 'uni',   // 4.1.0+
-        'NL'    => 'uni',   // 4.1.0+
-    );*/
-    /**
-     * @var array
-     * @since   2?
-     * @since   3.8.12      Changed the scheme to https from http.
-     * @deprecated   3.9.1
-     */
-/*    static public $aCategoryRootURLs = array(
-        'CA'    => 'https://www.amazon.ca/gp/bestsellers/',
-        'CN'    => 'https://www.amazon.cn/gp/bestsellers/',
-        'FR'    => 'https://www.amazon.fr/gp/bestsellers/',
-        'DE'    => 'https://www.amazon.de/gp/bestsellers/',
-        'IT'    => 'https://www.amazon.it/gp/bestsellers/',
-        'JP'    => 'https://www.amazon.co.jp/gp/bestsellers/',
-        'UK'    => 'https://www.amazon.co.uk/gp/bestsellers/',
-        'ES'    => 'https://www.amazon.es/gp/bestsellers/',
-        'US'    => 'https://www.amazon.com/gp/bestsellers/',
-        'IN'    => 'https://www.amazon.in/gp/bestsellers/',
-        'BR'    => 'https://www.amazon.com.br/gp/bestsellers/',
-        'MX'    => 'https://www.amazon.com.mx/gp/bestsellers/',
-        'AU'    => 'https://www.amazon.com.au/gp/bestsellers/',
-    );*/
 
     /**
      * @var array
@@ -157,6 +114,7 @@ final class AmazonAutoLinks_Property {
      * @var array Base 64 images of country flags.
      * @since   4.0.0
      * @see https://www.iconfinder.com/iconsets/142-mini-country-flags-16x16px
+     * @deprecated 4.3.4
      */
     static public $aCountryFlags = array(
         'CA'    => 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAB+UlEQVRIS2NcxsDg+5+BYTYDA4M4EGOAuxPnYhMmWkw5PxmX2peMDAypjEsZGF7gshykk4YOABn/EuQAYAAwMEThcud/sDT5gBHoTywAGPJgMOqAoRsCvx4/Znjb28HApW/AwGluxcAiKcnAJCiEGdu0SAMPstIYvmxaz8DKygLErGBapLWLgTMghD4O+H75EsNdLxcGVhZmsAM4ZGUYJHccZGAEsjEA1UMAmC3///7FcF1blYH5z2+wA7iNjBnEV6zHnlWp5YAv588xvN+xjeE3MO6ZgT7/vG41Igo4ORiESioZ2FTVGBi+fmFg+PSRgdU3iIGBhQWY0alUDtwpyGN4NXc2Aws43pExJA2AMEiOBeg4npZuBhZnD2hJQyUHXIsMZ/iwZRNRDmDT1mPgmjqPgYGdnXoh8OPhQ4bbSfEM38+fxRsCbApKDNz1bQzMOnrUDQGQaf9//2Z40trE8Gb6VKAjQDkAkQ1BbJ7waAbuglIGRk4uRIKkVhpATuK3vN0Zfl08h+IADiVlBtHNu+mQDYFWfNy5nYHx3z+Gd1MmMPx/eJ9BKDmNgZmbm4EnLZs+DoDZ8qKsiOH3pfMMsjv2466uaREFMNs+b93M8OfeHQbB3MKBcQBRrRRahsCwccBANkqfMUKb5XOAwSmGLUhp2Cp+BqwlMgD289zmzxe0NwAAAABJRU5ErkJggg==',
@@ -288,24 +246,6 @@ final class AmazonAutoLinks_Property {
         'TR' => 'www.amazon.com.tr/gp/aws/cart/add.html',   // 4.2.5
         'AE' => 'www.amazon.ae/gp/aws/cart/add.html'        // 4.2.5
     );
-
-    /**
-     * @var array
-     * @deprecated
-     */
-/*    static public $aTokens = array(
-        'CA' => 'bWl1bm9zb2Z0Y2EtMjA=',
-        'CN' => 'bWl1bm9zb2Z0LTIz',
-        'FR' => 'bWl1bm9zb2Z0ZnItMjE=',
-        'DE' => 'bWl1bm9zb2Z0ZGUtMjE=',
-        'IT' => 'bWl1bm9zb2Z0LTIx',
-        'JP' => 'bWl1bm9zb2Z0LTIy',
-        'UK' => 'bWl1bm9zb2Z0dWstMjE=',
-        'ES' => 'bWl1bm9zb2Z0ZXMtMjE=',
-        'US' => 'bWl1bm9zb2Z0LTIw',
-        'MX' => 'bWl1bm9zb2Z0LTIw', // 3.5.5+
-        'AU' => 'bWl1bm9zb2Z0LTIw', // 3.5.5+
-    );*/
 
     /**
      * Returns an array of search index of the specified locale.
@@ -906,177 +846,7 @@ final class AmazonAutoLinks_Property {
         }
     }
 
-    /**
-     * @remark  Seems not used. And the documentation of the below url does not include the `AU` locale.
-     * @see     https://docs.aws.amazon.com/AWSECommerceService/latest/DG/localevalues.html
-     * @deprecated 4.1.0 not used anywhere
-     */
-/*    static public $aSearchIndex = array(
-        'CA' => array(
-            "All","Baby","Beauty","Blended","Books","Classical","DVD","Electronics","ForeignBooks",
-            "HealthPersonalCare","KindleStore","LawnAndGarden","Music","PetSupplies","Software",
-            "SoftwareVideoGames","VHS","Video","VideoGames"
-        ),
-        'CN' => array(
-            "All","Apparel","Appliances","Automotive","Baby","Beauty","Books","Electronics","Grocery",
-            "HealthPersonalCare","Home","HomeImprovement","Jewelry","KindleStore","Miscellaneous","Music",
-            "OfficeProducts","PetSupplies","Photo","Shoes","Software","SportingGoods","Toys","Video","VideoGames",
-            "Watches"
-        ),
-        'DE' => array(
-            "All","Apparel","Automotive","Baby","Beauty","Blended","Books","Classical","DVD","Electronics",
-            "ForeignBooks","Grocery","HealthPersonalCare","HomeGarden","HomeImprovement","Jewelry","KindleStore",
-            "Kitchen","Lighting","Magazines","Marketplace","MP3Downloads","Music","MusicalInstruments",
-            "MusicTracks","OfficeProducts","OutdoorLiving","Outlet","PCHardware","Photo","Shoes","Software",
-            "SoftwareVideoGames","SportingGoods","Tools","Toys","VHS","Video","VideoGames","Watches"
-        ),
-        'ES' => array(
-            "All","Automotive","Baby","Books","DVD","Electronics","ForeignBooks","KindleStore","Kitchen",
-            "MP3Downloads","Music","Shoes","Software","Toys","VideoGames","Watches"
-        ),
-        'FR' => array(
-            "All","Apparel","Automotive","Baby","Beauty","Blended","Books","Classical","DVD","Electronics",
-            "ForeignBooks","HealthPersonalCare","Jewelry","KindleStore","Kitchen","Lighting","MP3Downloads",
-            "Music","MusicalInstruments","MusicTracks","OfficeProducts","PCHardware","PetSupplies","Shoes","Software",
-            "SoftwareVideoGames","SportingGoods","Toys","VHS","Video","VideoGames","Watches"
-        ),
-        'IN' => array( "All", "Books","DVD"    ),
-        'IT' => array(
-            "All","Automotive","Baby","Books","DVD","Electronics","ForeignBooks","Garden","KindleStore","Kitchen",
-            "Lighting","MP3Downloads","Music","Shoes","Software","Toys","VideoGames","Watches"
-        ),
-        'JP' => array(
-            "All","Apparel","Appliances","Automotive","Baby","Beauty","Blended","Books","Classical","DVD",
-            "Electronics","ForeignBooks","Grocery","HealthPersonalCare","Hobbies","HomeImprovement","Jewelry",
-            "KindleStore","Kitchen","Marketplace","MobileApps","MP3Downloads","Music","MusicalInstruments",
-            "MusicTracks","OfficeProducts","Shoes","Software","SportingGoods","Toys","VHS","Video","VideoGames"
-        ),
-        'UK' => array(
-            "All","Apparel","Automotive","Baby","Beauty","Blended","Books","Classical","DVD","Electronics",
-            "Grocery","HealthPersonalCare","HomeGarden","HomeImprovement","Jewelry","KindleStore","Kitchen",
-            "Lighting","Marketplace","MP3Downloads","Music","MusicalInstruments","MusicTracks","OfficeProducts",
-            "OutdoorLiving","Outlet","PCHardware","Shoes","Software","SoftwareVideoGames","SportingGoods","Tools",
-            "Toys","VHS","Video","VideoGames","Watches"
-        ),
-        'US' => array(
-            "All","Apparel","Appliances","ArtsAndCrafts","Automotive","Baby","Beauty","Blended","Books","Classical",
-            "Collectibles","DigitalMusic","DVD","Electronics","GourmetFood","Grocery","HealthPersonalCare",
-            "HomeGarden","Industrial","Jewelry","KindleStore","Kitchen","LawnAndGarden","Magazines","Marketplace",
-            "Miscellaneous","MobileApps","MP3Downloads","Music","MusicalInstruments","MusicTracks","OfficeProducts",
-            "OutdoorLiving","PCHardware","PetSupplies","Photo","Shoes","Software","SportingGoods","Tools","Toys",
-            "UnboxVideo","VHS","Video","VideoGames","Watches","Wireless","WirelessAccessories"
-        ),
-        // 3.5.5+
-        'MX' => array(),
-        'AU' => array(),
 
-    );*/
-
-    /**
-     * 
-     * @remark          These IDs were valid as of the publication date of this guide. API Version 2011-08-01
-     * @see             http://docs.aws.amazon.com/AWSECommerceService/latest/DG/BrowseNodeIDs.html
-     * @deprecated      4.1.0
-     */
-/*    static public $aRootNodes = array(
-        'CA' => array(
-            3561346011,6205124011,927726,962454,14113311,677211011,927726,6205177011,2972705011,2206275011,
-            6205499011,962454,6205514011,3234171,3323751,962072,962454,110218011,
-        ),
-        'CN' => array(
-            2016156051,80207071,1947899051,746776051,658390051,2016116051,2127215051,852803051,2016126051,
-            1952920051,816482051,116087071,899280051,754386051,2127221051,118863071 ,755653051,2029189051,
-            863872051,836312051,647070051,2016136051,897415051,1953164051,
-        ),
-        'DE' => array(
-            78689031,78191031,357577011,64257031,541686,542676,547664,569604,54071011,340846031,64257031,
-            10925241,327473011,530484031,3169011,213083031,1161658,77195031,542676,340849031,192416031,10925051,
-            569604,569604,542064,541708,16435121,12950661,547082,547664,541708,193708031,
-        ),
-        'ES' => array(
-            1951051031,1703495031,599364031,599379031,667049031,599367031,530484031,599391031,1748200031,
-            599373031,1571262031,599376031,599385031,599382031,599388031,        
-        ),
-        'FR' => array(
-            340855031,1571265031,206617031,197858031,468256,537366,578608,1058082,69633011,197861031,590748031,
-            193711031,818936031,57686031,213080031,206442031,537366,340862031,192420031,1571268031,215934031,
-            548012,548014,548014,578610,578608,548014,60937031,
-        ),
-        // 'IN' => array( 976389031, 976416031 ), 
-        // 2.1.0+ Updated the list to the API Version 2013-08-01) from API Version 2011-08-01
-        'IN' => array( 976389031, 976416031, 976419031, 976442031, 1951048031, 976392031, 1350380031, 1350387031 ),
-        'IT' => array(
-            1571280031,1571286031,411663031,412606031,412609031,433842031,635016031,818937031,524015031,
-            1571292031,1748203031,412600031,524006031,412612031,523997031,412603031,524009031,
-        ),
-        'JP' => array(
-            361299011,2277724051,2017304051,13331821,52391051,465610,562032,562002,3210991,388316011,57239051,
-            161669011,13331821,85896051,2250738051,3839151,2381130051,2128134051,562032,2123629051,2016926051,
-            637630,14304371,13331821,2130989051,561972,637872,324025011
-        ),
-        'UK' => array(
-            83451031,248877031,60032031,66280031,1025612,505510,283926,560800,340834031,66280031,11052591,
-            2016929051,193717031,341677031,11052591,213077031,77198031,505510,340837031,560800,11052591,1025614,
-            1025616,319530011,11052591,712832,283926,283926,1025616,595312
-        ),
-        'US' => array(
-            1036592, 2619525011, 2617941011, 15690151, 165796011, 11055981, 1000,301668, 4991425011, 
-            2625373011, 493964, 16310101,3760931, 228239, 3880591, 133141011, 1063498, 
-            2972638011, 599872, 10304191, 2350149011, 301668, 11091801, 1084128, 1063498, 493964, 
-            1063498, 493964, 409488, 3375251, 468240, 493964, 130, 493964, 377110011, 13900851        
-        ),    // caused error: 195208011, 3580501, 285080, 195211011, 404272, 508494
-        'MX' => array(),
-        'AU' => array(),
-    );*/
-    
-    /**
-     * Returns an array of root node IDs of the specified locale.
-     * 
-     * The nodes are divided up to 10 elements for the API request.
-     * @remark      Not used at the moment.
-     * @deprecated  4.1.0
-     */
-/*    static public function getRootNodes( $sLocale ) {
-        
-        if ( ! isset( self::$aRootNodes[ strtoupper( $sLocale ) ] ) ) {
-            return array();
-        }
-        return array_chunk( 
-            self::$aRootNodes[ strtoupper( $sLocale ) ], 
-            10 
-        );
-        
-    }*/
-    
-    /**
-     * The list of marketplace domains.
-     * 
-     * This is used when the search API request has the category of 'Marketplace', the domain needs to be specified.
-     * @since       2.1.0
-     * @see         http://docs.aws.amazon.com/AWSECommerceService/latest/DG/MarketplaceDomainParameter.html
-     * @deprecated  4.1.0   Not used in anywhere
-     */
-    /*static public $aMarketplaceDomain = array(
-        'DE' => 'www.javari.de',
-        'JP' => 'www.javari.jp',
-        'UK' => 'www.javari.co.uk',
-        'US' => 'www.amazonsupply.com',
-    );*/
-    
-    /**
-     * Returns the market place domain url by the given locale.
-     * 
-     * @since       2.1.0
-     * @deprecated  4.1.0   Not used in anywhere
-     */
-/*    static public function getMarketplaceDomainByLocale( $sLocale ) {
-        
-        return isset( self::$aMarketplaceDomain[ $sLocale ]  )
-            ? self::$aMarketplaceDomain[ $sLocale ]
-            : self::$aMarketplaceDomain[ 'US' ];    // default
-        
-    }*/
-    
     /**
      * Returns the JavaScript script of the impression counter.
      *
