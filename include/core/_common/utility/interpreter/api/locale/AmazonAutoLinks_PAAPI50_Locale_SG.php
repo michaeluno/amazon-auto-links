@@ -29,6 +29,13 @@ class AmazonAutoLinks_PAAPI50_Locale_SG extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sServerRegion = 'us-west-2';
 
     /**
+     * The host name of the market place.
+     * @var string
+     * @see https://webservices.amazon.com/paapi5/documentation/locale-reference.html#locale-reference-for-product-advertising-api
+     */
+    public $sMarketPlaceHost = 'www.amazon.sg';
+
+    /**
      * @var string
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
      */

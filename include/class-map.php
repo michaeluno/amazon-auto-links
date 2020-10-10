@@ -430,7 +430,6 @@ return array(
     "AmazonAutoLinks_Output___ArgumentFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_Base.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_UnitID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_UnitID.php", 
     "AmazonAutoLinks_Units" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/_deprecated/AmazonAutoLinks_Units.php", 
-    "AmazonAutoLinks_Property" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/AmazonAutoLinks_Property.php", 
     "AmazonAutoLinks_AdminPage_Page_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Page_Base.php", 
     "AmazonAutoLinks_AdminPage_RootBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_RootBase.php", 
     "AmazonAutoLinks_AdminPage_Section_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Section_Base.php", 
@@ -471,6 +470,7 @@ return array(
     "AmazonAutoLinks_PAAPI50___Locales" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Locales.php", 
     "AmazonAutoLinks_PAAPI50___Payload" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___Payload.php", 
     "AmazonAutoLinks_PAAPI50___RequestHeaderGenerator" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/AmazonAutoLinks_PAAPI50___RequestHeaderGenerator.php", 
+    "AmazonAutoLinks_PAAPI50_Locale" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale.php", 
     "AmazonAutoLinks_PAAPI50_Locale_AE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_AE.php", 
     "AmazonAutoLinks_PAAPI50_Locale_AU" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_AU.php", 
     "AmazonAutoLinks_PAAPI50_Locale_BR" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_BR.php", 
@@ -524,5 +524,6 @@ return array(
     "AmazonAutoLinks_Locale_TR" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_TR.php", 
     "AmazonAutoLinks_Locale_UK" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_UK.php", 
     "AmazonAutoLinks_Locale_US" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_US.php", 
+    "AmazonAutoLinks_Locales" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locales.php", 
     "AmazonAutoLinks_TemplateUtility_NoOuterContainer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/template/AmazonAutoLinks_TemplateUtility_NoOuterContainer.php", 
 );

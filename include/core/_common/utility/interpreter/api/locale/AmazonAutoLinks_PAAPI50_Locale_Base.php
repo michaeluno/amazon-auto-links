@@ -28,6 +28,15 @@ abstract class AmazonAutoLinks_PAAPI50_Locale_Base {
     public $sServerRegion = '';
 
     /**
+     * The host name of the market place.
+     * @var string
+     * @ramrark Override this.
+     * @see https://webservices.amazon.com/paapi5/documentation/locale-reference.html#locale-reference-for-product-advertising-api
+     */
+    public $sMarketPlaceHost = '';
+
+    /**
+     * The API server host name.
      * @var string
      * @remark Override this.
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
@@ -83,6 +92,13 @@ abstract class AmazonAutoLinks_PAAPI50_Locale_Base {
     /**
      * @return string
      */
+    public function getMarketPlaceHost() {
+        return $this->sMarketPlaceHost;
+    }
+
+    /**
+     * @return string
+     */
     public function getHost() {
         return $this->sHost;
     }
@@ -92,13 +108,27 @@ abstract class AmazonAutoLinks_PAAPI50_Locale_Base {
      * @return string
      */
     public function getServerRegion() {
-        return $this->sServerRegion = '';
+        return $this->sServerRegion;
     }
     /**
      * @return string
      */
     public function getHostLabel() {
        return $this->sSlug . ' - ' . $this->sHost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultLanguage() {
+        return $this->sDefaultLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultCurrency() {
+        return $this->sDefaultCurrency;
     }
 
 }

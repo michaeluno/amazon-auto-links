@@ -43,6 +43,7 @@ abstract class AmazonAutoLinks_Locale_Base {
     /**
      * @var string
      * @remark Override it.
+     * @see https://www.iconfinder.com/iconsets/142-mini-country-flags-16x16px
      */
     public $sFlagImg = '';
 
@@ -80,14 +81,18 @@ abstract class AmazonAutoLinks_Locale_Base {
     // No need to override these methods.
 
     /**
-     * @return string   e.g. https://amazon.com
+     * @param  string   $sPath  The URL path preceded by the store URL.
+     * @return string   The top store URL without a trailing slash. e.g. https://amazon.com
      */
-    public function getMarketPlaceURL() {
-        return 'https://' . $this->getDomain();
+    public function getMarketPlaceURL( $sPath='' ) {
+        $sPath = $sPath
+            ? '/' . ltrim( $sPath, '/' )
+            : '';
+        return 'https://' . untrailingslashit( $this->getDomain() ) . $sPath;
     }
 
     /**
-     * @return string   e.g. amazon.com
+     * @return string   e.g. www.amazon.com
      */
     public function getDomain() {
         return $this->sDomain;
@@ -98,7 +103,9 @@ abstract class AmazonAutoLinks_Locale_Base {
      * @return string Format: https://{host}/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin='{asin}
      */
     public function getProductRatingWidgetURL( $sASIN ) {
-        return $this->getMarketPlaceURL() . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
+        return $this->getMarketPlaceURL(
+            '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN
+        );
     }
 
     /**
@@ -109,7 +116,6 @@ abstract class AmazonAutoLinks_Locale_Base {
     }
 
     /**
-     * @remark It does not include the URL scheme like https:// or http://.
      * @return string
      */
     public function getAssociatesURL() {
@@ -134,6 +140,20 @@ abstract class AmazonAutoLinks_Locale_Base {
         return is_ssl()
             ? "https://images-na.ssl-images-amazon.com/{$_sPath}"
             : "http://g-images.amazon.com/{$_sPath}";
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocaleNumber() {
+        return $this->sLocaleNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFlagImg() {
+        return $this->sFlagImg;
     }
 
     /**
@@ -165,6 +185,9 @@ abstract class AmazonAutoLinks_Locale_Base {
         $_sURL    = esc_url( "https://ir-ca.amazon-adsystem.com/s/noscript?tag={$sAssociatesTag}" );
         $_sLabel  = esc_attr( __( 'Impression Counter', 'amazon-auto-links' ) );
         $_sScript = $this->_getImpressionCounterScript();
+        if ( ! $_sScript ) {
+            return '';
+        }
         return "<script class='{$_sClass}' type='text/javascript'>"
                 . $_sScript
             . "</script>"

@@ -29,6 +29,12 @@ class AmazonAutoLinks_PAAPI50_Locale_DE extends AmazonAutoLinks_PAAPI50_Locale_B
 
     /**
      * @var string
+     * @see https://webservices.amazon.com/paapi5/documentation/locale-reference.html#locale-reference-for-product-advertising-api
+     */
+    public $sMarketPlaceHost = 'www.amazon.de';
+
+    /**
+     * @var string
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
      */
     public $sHost = 'webservices.amazon.de';

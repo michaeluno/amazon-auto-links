@@ -28,6 +28,13 @@ class AmazonAutoLinks_PAAPI50_Locale_UK extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sServerRegion = 'eu-west-1';
 
     /**
+     * The host name of the market place.
+     * @var string
+     * @see https://webservices.amazon.com/paapi5/documentation/locale-reference.html#locale-reference-for-product-advertising-api
+     */
+    public $sMarketPlaceHost = 'www.amazon.co.uk';
+
+    /**
      * @var string
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
      */
