@@ -21,7 +21,7 @@ class AmazonAutoLinks_FormFields_Unit_Country extends AmazonAutoLinks_FormFields
                 'field_id'          => $sFieldIDPrefix . 'country',
                 'type'              => 'select',
                 'title'             => __( 'Country', 'amazon-auto-links' ),
-                'label'             => AmazonAutoLinks_Property::getLocaleLabels(),
+                'label'             => AmazonAutoLinks_Locales::getLabels(),
                 'default'           => 'US',
             ),          
         );

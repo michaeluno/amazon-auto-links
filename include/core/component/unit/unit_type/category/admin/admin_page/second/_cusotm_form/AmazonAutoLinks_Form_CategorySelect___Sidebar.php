@@ -109,7 +109,9 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
 
                 // Try with a R18 confirmation redirect
                 /// 4.2.0 if the redirect page is not supported, return an error
-                if ( ! AmazonAutoLinks_Property::$aCategoryBlackCurtainURLs[ $sLocale ] ) {
+                $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+                $_sBlackCurtainURL = $_oLocale->getBlackCurtainURL();
+                if ( ! $_sBlackCurtainURL ) {
                     $this->_aElements = array(
                         'PageURL'      => $sPageURL,
                         'RSSURL'       => '',
@@ -120,8 +122,13 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                     return;
                 }
 
-                $_sRedirectURL = AmazonAutoLinks_Property::$aCategoryBlackCurtainURLs[ $sLocale ]
-                    . '?redirect=true&redirectUrl=' . urlencode( $sPageURL );
+                $_sRedirectURL = add_query_arg(
+                    array(
+                        'redirect'    => 'true',
+                        'redirectUrl' => urlencode( $sPageURL ),
+                    ),
+                    $_sBlackCurtainURL
+                );
                 $_oSidebarR18  = new AmazonAutoLinks_Form_CategorySelect___Sidebar__R18( $_sRedirectURL, $sLocale );
                 $this->_aElements = $_oSidebarR18->get();
                 $this->_aElements[ 'PageURL' ] = $_sRedirectURL;

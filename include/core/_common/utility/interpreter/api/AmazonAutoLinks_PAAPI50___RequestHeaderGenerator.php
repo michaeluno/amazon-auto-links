@@ -57,19 +57,10 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
      * @param   string  $sLocale    Accepts 'AU', 'BR', 'CA', 'FR', 'DE', 'IN', 'IT', 'JP', 'MX', 'ES', 'TR', 'AE', 'UK', 'US'
      */
     public function setLocale( $sLocale ) {
-        $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
-        $_sRegion = isset( $_oLocale->aRegionNames[ $sLocale ] )
-            ? $_oLocale->aRegionNames[ $sLocale ]
-            : $_oLocale->aRegionNames[ 'US' ];
-        $this->setRegionName( $_sRegion );
-        $this->___sHost = $this->___getHostByLocale( $sLocale );
+        $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $sLocale );
+        $this->setRegionName( $_oLocale->getServerRegion() );
+        $this->___sHost = $_oLocale->getHost();
     }
-        private function ___getHostByLocale( $sLocale ) {
-            $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
-            return isset( $_oLocale->aHosts[ $sLocale ] )
-                ? $_oLocale->aHosts[ $sLocale ]
-                : $_oLocale->aHosts[ 'US' ];
-        }
 
     public function setPath( $sPath ) {
         $this->___sPath = $sPath;
@@ -101,11 +92,10 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
 
     }
         private function ___getMarketplaceByLocale( $sLocale ) {
-            $_oLocale = new AmazonAutoLinks_PAAPI50___Locales;
-            return isset( $_oLocale->aMarketPlaces[ $sLocale ] )
-                ? $_oLocale->aMarketPlaces[ $sLocale ]
-                : $_oLocale->aMarketPlaces[ 'US' ];
+            $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $sLocale );
+            return $_oLocale->getMarketPlaceHost();
         }
+
     public function setRequestMethod( $sMethod ) {
         $this->___sHTTPMethod = $sMethod;
     }

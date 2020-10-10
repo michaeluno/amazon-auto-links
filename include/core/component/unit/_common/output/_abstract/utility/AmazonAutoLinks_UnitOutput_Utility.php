@@ -15,10 +15,13 @@
 abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_Utility {
 
     /**
-     *
-     * @since       unknown
-     * @since       2.1.1       Changed the name from `formatImage()`. Changed the scope from protected to private.
-     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @param  string         $sImageURL
+     * @param  integer|string $isImageSize
+     * @param  string         $sLocale
+     * @return string|null
+     * @since  unknown
+     * @since  2.1.1          Changed the name from `formatImage()`. Changed the scope from protected to private.
+     * @since  3.5.0          Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
      */
     static public function getProductImageURLFormatted( $sImageURL, $isImageSize, $sLocale='US' ) {
 
@@ -29,9 +32,8 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
 
         // If no product image is found
         if ( ! $sImageURL ) {
-            $sImageURL = isset( AmazonAutoLinks_Property::$aNoImageAvailable[ $sLocale ] )
-                ? AmazonAutoLinks_Property::$aNoImageAvailable[ $sLocale ]
-                : AmazonAutoLinks_Property::$aNoImageAvailable[ 'US' ];
+            $_oLocale  = new AmazonAutoLinks_Locale( $sLocale );
+            $sImageURL = $_oLocale->getNoImageURL();
         }
 
         if ( is_ssl() ) {

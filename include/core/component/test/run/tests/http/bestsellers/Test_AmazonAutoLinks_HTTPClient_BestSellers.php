@@ -23,10 +23,8 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
      * @break
      */
     public function test_allLocales() {
-        $_aLocales = array_keys( AmazonAutoLinks_Property::$aStoreDomains );
-        foreach( $_aLocales as $_iIndex => $_sLocale ) {
-            $_sURL    = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $_sLocale );
-            $this->_testUnblocked( $_sURL, $_sLocale );
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_sLocale => $_oLocale ) {
+            $this->_testUnblocked( $_oLocale->getBestSellersURL(), $_sLocale );
         }
     }
 
@@ -35,16 +33,16 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
      */
     public function test_CA() {
         $_sLocale = 'CA';
-        $_sURL    = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $_sLocale );
-        $this->_testSessionMatch( $_sURL, 'CA' );
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), 'CA' );
     }
     /**
      * @tags IT
      */
     public function test_IT() {
         $_sLocale = 'IT';
-        $_sURL    = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $_sLocale );
-        $this->_testSessionMatch( $_sURL, $_sLocale );
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
     }
 
         protected function _testUnblocked( $_sURL, $_sLocale ) {

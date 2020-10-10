@@ -57,12 +57,16 @@ class AmazonAutoLinks_Event___Query_Redirect {
     
             exit( wp_redirect( $_sURL ) );
         }
-        
+
         /**
-         * 
+         *
          * For URL cloaking redirects.
-         * @since   3
-         * @since   3.8.10  Made it respect additional URL query parameters.
+         *
+         * @param string $sASIN
+         * @param array  $aArgs
+         * @param string $sQueryKey
+         * @since 3.8.10  Made it respect additional URL query parameters.
+         * @since 3
          */
         private function ___goToStore( $sASIN, $aArgs, $sQueryKey ) {
             
@@ -73,7 +77,8 @@ class AmazonAutoLinks_Event___Query_Redirect {
             );
             
             // http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
-            $_sURL          = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $aArgs[ 'locale' ] );
+            $_oLocale       = new AmazonAutoLinks_Locale( $aArgs[ 'locale' ] );
+            $_sURL          = $_oLocale->getMarketPlaceURL();
             $_aURLElements  = parse_url( $_sURL );
             $_sStoreURL     = $_aURLElements[ 'scheme' ] . '://' . $_aURLElements[ 'host' ]
                 . '/dp/ASIN/' . $sASIN . '/' 

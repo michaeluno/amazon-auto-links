@@ -23,7 +23,8 @@ class Test_AmazonAutoLinks_HTTPClient_Associates extends Test_AmazonAutoLinks_HT
      */
     public function test_sessionMatch_IT() {
         $_sLocale = 'IT';
-        $_sURL    = AmazonAutoLinks_Property::getAssociatesURLByLocale( $_sLocale );
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $_sURL    = $_oLocale->getAssociatesURL();
         $this->_testSessionMatch( $_sURL, $_sLocale );
     }
 
@@ -32,7 +33,8 @@ class Test_AmazonAutoLinks_HTTPClient_Associates extends Test_AmazonAutoLinks_HT
      */
     public function test_sessionMatch_UK() {
         $_sLocale = 'UK';
-        $_sURL    = AmazonAutoLinks_Property::getAssociatesURLByLocale( $_sLocale );
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $_sURL    = $_oLocale->getAssociatesURL();
         $this->_testSessionMatch( $_sURL, $_sLocale );
     }
 

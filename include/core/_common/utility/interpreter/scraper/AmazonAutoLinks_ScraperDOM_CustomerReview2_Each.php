@@ -27,13 +27,10 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2_Each extends AmazonAutoLinks_Sc
         $_aParameters  = func_get_args() + array( '', '' );
         $_sLocale      = $_aParameters[ 0 ];
         $_sAssociateID = $_aParameters[ 1 ];
-
-        $_oLocale      = new AmazonAutoLinks_PAAPI50___Locales;
-        $_sDomain      = $_oLocale->aMarketPlaces[ $_sLocale ];
-
-        $_oXpath = new DOMXPath( $this->oDoc );
-        $_oDIVs  = $_oXpath->query( "//div[@data-hook='review']" );
-        $_iCount = 0;
+        $_oLocale      = new AmazonAutoLinks_Locale( $_sLocale );
+        $_oXpath       = new DOMXPath( $this->oDoc );
+        $_oDIVs        = $_oXpath->query( "//div[@data-hook='review']" );
+        $_iCount       = 0;
         foreach( $_oDIVs as $_oDIV ) {
 
             // Remove inline CSS rules in the each review container.
@@ -52,7 +49,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview2_Each extends AmazonAutoLinks_Sc
                 $_sHref = $_oA->getAttribute( 'href' );
                 $_sURL  = 'http' === substr( $_sHref, 0, 4 )
                     ? $_sHref
-                    : 'https://' . $_sDomain . $_sHref;
+                    : $_oLocale->getMarketPlaceURL( $_sHref );
                 $_sURL  = add_query_arg(
                     array(
                         'tag'   => $_sAssociateID,

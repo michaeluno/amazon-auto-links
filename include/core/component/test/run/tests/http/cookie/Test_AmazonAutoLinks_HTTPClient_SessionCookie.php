@@ -22,7 +22,7 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_Unit
      * @break
      */
     public function test_SessionMatchWithDifferentSites_ALL() {
-        foreach( array_keys( AmazonAutoLinks_Property::$aAssociatesURLs ) as $_sLocale ) {
+        foreach( AmazonAutoLinks_Locales::getLocales() as $_sLocale ) {
             $this->___testSessionMatch( $_sLocale );
         }
     }
@@ -58,16 +58,17 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_Unit
     }
         private function ___testSessionMatch( $sLocale ) {
 
+            $_oLocale               = new AmazonAutoLinks_Locale( $sLocale );
             $_oMock                 = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Unit_Utility' );
             $_aAssociatesCookies    = $_oMock->call( '___getAssociatesResponseCookies', array( $sLocale, '' ) );
-            $_sAssociatesURL        = AmazonAutoLinks_Unit_Utility::getAssociatesURL( $sLocale );
+            $_sAssociatesURL        = $_oLocale->getAssociatesURL();
 
             $_sSessionID1           = $_oMock->call( '___getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
 
             $this->_outputDetails( "2nd Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aAssociatesCookies ) );
 
             $_aBestSellersCookies1  = $_oMock->call( '___getBestSellersResponseCookies', array( $sLocale, $_aAssociatesCookies, false ) );
-            $_sBestSellerURL        = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $sLocale );
+            $_sBestSellerURL        = $_oLocale->getBestSellersURL();
             $_sSessionID2           = $_oMock->call( '___getSessionIDCookie', array( $_aBestSellersCookies1, $_sBestSellerURL ) );
 
             if ( $_sSessionID1 === $_sSessionID2 ) {

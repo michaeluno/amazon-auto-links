@@ -116,15 +116,22 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
         );
 
     }
+        /**
+         * @return array
+         */
         private function ___getCountryLabels() {
-            $_aLabels = AmazonAutoLinks_Property::$aStoreDomains;
-            foreach( $_aLabels as $_sLocale => $_sDomain ) {
-                $_sFlagImage = AmazonAutoLinks_Property::$aCountryFlags[ $_sLocale ]; // do not escape
+
+            $_aLabels        = array();
+            $_aLocaleObjects = AmazonAutoLinks_Locales::getLocaleObjects();
+            foreach( $_aLocaleObjects as $_sLocale => $_oLocale ) {
+                $_sFlagImage = $_oLocale->getFlagImg();
+                $_sDomain    = $_oLocale->getDomain();
                 $_sAlt       = esc_attr( 'Country Flag - ' . $_sLocale );
                 $_aLabels[ $_sLocale ] = "<img class='country-flag' src='{$_sFlagImage}' alt='{$_sAlt}' />"
                     . "<span class='store-domain'>" . $_sDomain . "</span>";
             }
             return $_aLabels;
+
         }
 
     /**

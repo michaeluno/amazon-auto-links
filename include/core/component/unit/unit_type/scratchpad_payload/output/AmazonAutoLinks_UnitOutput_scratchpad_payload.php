@@ -75,7 +75,7 @@ class AmazonAutoLinks_UnitOutput_scratchpad_payload extends AmazonAutoLinks_Unit
                 + $this->getElementAsArray( $aPayload, 'Resources' );
 
             $_oAPI = new AmazonAutoLinks_PAAPI50(
-                AmazonAutoLinks_Property::getLocaleByDomain( $this->getElement( $aPayload, 'Marketplace' ) ),
+                AmazonAutoLinks_Locales::getLocaleByDomain( $this->getElement( $aPayload, 'Marketplace' ) ),
                 $this->oOption->get( 'authentication_keys', 'access_key' ),
                 $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
                 $_sAssociateID

@@ -23,11 +23,9 @@ class Test_AmazonAutoLinks_HTTPClient_WidgetPages extends Test_AmazonAutoLinks_H
      * @break
      */
     public function test_allLocales() {
-        $_sASIN    = 'B07FKR6KXF';
-        $_aLocales = array_keys( AmazonAutoLinks_Property::$aStoreDomains );
-        foreach( $_aLocales as $_iIndex => $_sLocale ) {
-            $_sURL = AmazonAutoLinks_Unit_Utility::getWidgetPageURL( $_sASIN, $_sLocale );
-            $this->_testUnblocked( $_sURL, $_sLocale );
+        $_sASIN = 'B07FKR6KXF';
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_sLocale => $_oLocale ) {
+            $this->_testUnblocked( $_oLocale->getProductRatingWidgetURL( $_sASIN ), $_sLocale );
         }
     }
 

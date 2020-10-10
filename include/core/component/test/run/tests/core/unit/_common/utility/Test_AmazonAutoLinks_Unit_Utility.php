@@ -93,9 +93,10 @@ class Test_AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_UnitTest_Base {
     public function test____getSessionIDCookie() {
 
         $_sLocale             = 'US';
+        $_oLocale             = new AmazonAutoLinks_Locale( $_sLocale );
         $_aAssociatesCookies  = $this->oMock->call( '___getAssociatesResponseCookies', array( $_sLocale, '' ) );
         $this->_assertNotEmpty( $this->getCookiesToParse( $_aAssociatesCookies ) );
-        $_sAssociatesURL      = $this->oUtil->getAssociatesURL( $_sLocale );
+        $_sAssociatesURL      = $_oLocale->getAssociatesURL();
         $this->_assertNotEmpty( $_sAssociatesURL, 'Associates URL' );
         $_sSessionID1         = $this->oMock->call( '___getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
         $this->_assertNotEmpty( $_sSessionID1 );
@@ -107,8 +108,7 @@ class Test_AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_UnitTest_Base {
      * @see  AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies()
      */
     public function test_getAmazonSitesRequestCookies() {
-        $_aLocales = array_keys( AmazonAutoLinks_Property::$aStoreDomains );
-        foreach( $_aLocales as $_sLocale ) {
+        foreach( AmazonAutoLinks_Locales::getLocales() as $_sLocale ) {
             $_aRequestCookies = $this->oUtil->getAmazonSitesRequestCookies( $_sLocale );
             $this->_assertNotEmpty( $this->getCookiesToParse( $_aRequestCookies ), 'If blocked, usually it is empty.' );
         }

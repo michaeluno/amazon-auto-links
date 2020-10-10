@@ -155,8 +155,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
             $_aHTMLs          = $this->___getHTTPBodies( $aURLs );
 
             $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
-            $_sSiteDomain     = AmazonAutoLinks_PAAPI50___Locales::getMarketPlaceByLocale( $this->oUnitOption->get( 'country' ) );
-            $_aProducts       = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sSiteDomain );
+            $_oLocale         = new AmazonAutoLinks_Locale( $this->oUnitOption->get( 'country' ) );
+            $_sMarketPlaceURL = $_oLocale->getMarketPlaceURL();
+            $_aProducts       = $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sMarketPlaceURL );
 
             // If no items found, no need to continue the rest.
             if ( empty( $_aProducts ) ) {

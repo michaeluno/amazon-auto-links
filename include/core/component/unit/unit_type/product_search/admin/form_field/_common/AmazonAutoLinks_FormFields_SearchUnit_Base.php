@@ -34,7 +34,8 @@ abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLink
         // If the unit options is directly given, use it.
         $_sLocale = $this->getElement( $aUnitOptions, 'country' );
         if ( $_sLocale ) {
-            return AmazonAutoLinks_Property::getSearchIndexByLocale( $_sLocale );
+            $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+            return $_oLocale->getSearchIndex();
         }
 
         // If the current page is the unit creation admin page, retrieve the value from the transient
@@ -43,21 +44,26 @@ abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLink
             $_aInputs = get_transient( $_sTransientID );
             $_sLocale = $this->getElement( $_aInputs, 'country' );
             if ( $_sLocale ) {
-                return AmazonAutoLinks_Property::getSearchIndexByLocale( $_sLocale );
+                $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+                return $_oLocale->getSearchIndex();
             }
         }
 
         // Check if it is a meta box. If so. use the stored locale.
         $_iPostID = AmazonAutoLinks_WPUtility::getCurrentPostID();
         if ( ! $_iPostID ) {
-            return AmazonAutoLinks_Property::getSearchIndexByLocale( $_sLocale );
+//            $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+//            return $_oLocale->getSearchIndex();
+            return array(); // not found
         }
         $_sLocale = get_post_meta(
             $_iPostID,
             'country', // meta key
             true
         );
-        return AmazonAutoLinks_Property::getSearchIndexByLocale( $_sLocale );
+        $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+        return $_oLocale->getSearchIndex();
+
     }
   
 }

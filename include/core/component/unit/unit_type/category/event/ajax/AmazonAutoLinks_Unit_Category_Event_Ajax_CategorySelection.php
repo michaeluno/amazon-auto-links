@@ -144,17 +144,19 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
         }
         /**
-         * @param $sLocale
+         * @param array  $aPost
+         * @param string $sLocale
          *
          * @return string
          * @since   4.2.0
          */
         private function ___getCategoryListURL( array $aPost, $sLocale ) {
 
+            $_oLocale           = new AmazonAutoLinks_Locale( $sLocale );
             $_sCategoryListURL  = $this->getElement( $aPost, array( 'selected_url' ), '' );
             $_sCategoryListURL  = $_sCategoryListURL
                 ? $_sCategoryListURL
-                : AmazonAutoLinks_Unit_Utility_category::getBestSellersURL( $sLocale );
+                : $_oLocale->getBestSellersURL();
 
             $_sQuery = parse_url( $_sCategoryListURL, PHP_URL_QUERY );
             parse_str( $_sQuery, $_aQuery );

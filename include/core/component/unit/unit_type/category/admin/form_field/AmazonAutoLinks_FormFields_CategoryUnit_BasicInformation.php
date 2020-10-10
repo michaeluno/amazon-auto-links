@@ -28,7 +28,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'field_id'      => 'country',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
                 'type'          => 'select',
-                'label'         => AmazonAutoLinks_Property::getLocaleLabels(),
+                'label'         => AmazonAutoLinks_Locales::getLabels(),
                 'default'       => 'US',
             ),
             array(

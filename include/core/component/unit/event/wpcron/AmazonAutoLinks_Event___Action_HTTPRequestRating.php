@@ -143,7 +143,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
          * @return string a URL
          */
         private function ___getRatingWidgetPageURL( $sASIN, $sLocale, $bTest=false ) {
-            $_sURL = AmazonAutoLinks_Unit_Utility::getWidgetPageURL( $sASIN, $sLocale );
+            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+            $_sURL    = $_oLocale->getProductRatingWidgetURL( $sASIN );
             return $bTest
                 ? add_query_arg(
                     array(

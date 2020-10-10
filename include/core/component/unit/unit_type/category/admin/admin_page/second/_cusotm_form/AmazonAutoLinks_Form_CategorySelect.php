@@ -377,10 +377,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          */
         private function ___getPageURL( $sEncryptedURL, $sLocale='US' ) {
 
+            $_oLocale  = new AmazonAutoLinks_Locale( $sLocale );
             $_oEncrypt = new AmazonAutoLinks_Encrypt;
             $_sURL     = $sEncryptedURL
                 ? $_oEncrypt->decode( $sEncryptedURL  )
-                : $this->getBestSellersURL( $sLocale );
+                : $_oLocale->getBestSellersURL();
 
             // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
             $_sURL = str_replace("//gp/","/gp/", $_sURL );

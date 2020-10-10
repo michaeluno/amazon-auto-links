@@ -15,17 +15,6 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @param  string $sASIN
-     * @param  string $sLocale
-     * @return string e.g. https://www.amazon.com/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E
-     * @since  4.3.4
-     */
-    static public function getWidgetPageURL( $sASIN, $sLocale ) {
-        $_sSchemeDomain = AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ); // with http(s) prefixed
-        return $_sSchemeDomain . '/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=' . $sASIN;
-    }
-
-    /**
      * @since  4.3.4
      * @remark Be aware that this method takes time, meaning slow as this performs two HTTP requests if not cached.
      * @param  string   $sLocale
@@ -33,11 +22,12 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @return array    Request cookies for Amazon sites.
      */
     static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
+        $_oLocale             = new AmazonAutoLinks_Locale( $sLocale );
         $_aAssociatesCookies  = self::___getAssociatesResponseCookies( $sLocale, $sLanguage );
-        $_sAssociatesURL      = self::getAssociatesURL( $sLocale );
+        $_sAssociatesURL      = $_oLocale->getAssociatesURL();
         $_sSessionID1         = self::___getSessionIDCookie( $_aAssociatesCookies, $_sAssociatesURL );
         $_aBestSellersCookies = self::___getBestSellersResponseCookies( $sLocale, $_aAssociatesCookies, false );
-        $_sBestSellerURL      = self::getBestSellersURL( $sLocale );
+        $_sBestSellerURL      = $_oLocale->getBestSellersURL();
         $_sSessionID2         = self::___getSessionIDCookie( $_aBestSellersCookies, $_sBestSellerURL );
         if ( $_sSessionID1 === $_sSessionID2 ) {
             return $_aBestSellersCookies;
@@ -101,8 +91,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
          * @since  4.3.4
          */
         static private function ___getBestSellersResponse( $sLocale, array $aRequestCookies, $bForceRenew=false ) {
-            $_sURL  = AmazonAutoLinks_Unit_Utility::getBestSellersURL( $sLocale );
-            $_oHTTP = new AmazonAutoLinks_HTTPClient(
+            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+            $_sURL    = $_oLocale->getBestSellersURL();
+            $_oHTTP   = new AmazonAutoLinks_HTTPClient(
                 $_sURL,
                 86400 * 7,
                 array(
@@ -130,9 +121,9 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
          * @since  4.3.4
          */
         static private function ___getAssociatesResponse( $sLocale, $sLanguage ) {
-            $_sURL  = self::getAssociatesURL( $sLocale );
-            $_oHTTP = new AmazonAutoLinks_HTTPClient(
-                $_sURL,
+            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+            $_oHTTP   = new AmazonAutoLinks_HTTPClient(
+                $_oLocale->getAssociatesURL(),
                 86400 * 7,  // 7 days
                 array(
                     'method'  => 'HEAD',
@@ -150,7 +141,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since  4.3.4
      */
     static public function getAssociatesRequestCookies( $sLocale, $sLanguage ) {
-        $_sURL        = self::getAssociatesURL( $sLocale );
+        $_oLocale     = new AmazonAutoLinks_Locale( $sLocale );
+        $_sURL        = $_oLocale->getAssociatesURL();
         $_sLocaleKey  = 'ubid-acb' . strtolower( $sLocale );
         $_sToken      = sprintf( '%03d', mt_rand( 1, 999 ) )
             . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) )
@@ -196,11 +188,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * @param  string $sLocale
      * @return string
-     * @since  3.4.4
+     * @since  4.3.4
+     * @deprecated 4.3.4 Use the locale object method.
      */
-    static public function getAssociatesURL( $sLocale ) {
-        return AmazonAutoLinks_Property::getAssociatesURLByLocale( $sLocale );
-    }
+/*    static public function getAssociatesURL( $sLocale ) {
+        $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+        return $_oLocale->getAssociatesURL();
+    }*/
 
     /**
      * Retrieves the category root URL of the given locale.
@@ -210,22 +204,23 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  string $sLocale
      * @return string
      * @since  4.3.4  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
+     * @deprecated 4.3.4    Use the locale object method.
      */
-    static public function getBestSellersURL( $sLocale ) {
-        return AmazonAutoLinks_Property::getStoreDomainByLocale( $sLocale ) . '/gp/bestsellers/';
-
-        /*
-        * @deprecated 4.3.4 Redundant
-        // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
-        $_sURL = str_replace("//gp/","/gp/", $_sURL );
-
-        // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
-        // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
-        // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.
-        return trailingslashit( $_sURL );
-        */
-
-    }
+//    static public function getBestSellersURL( $sLocale ) {
+//        $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+//        return $_oLocale->getBestSellersURL();
+//        /*
+//        * @deprecated 4.3.4 Redundant
+//        // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
+//        $_sURL = str_replace("//gp/","/gp/", $_sURL );
+//
+//        // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
+//        // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
+//        // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.
+//        return trailingslashit( $_sURL );
+//        */
+//
+//    }
 
 
     /**
@@ -284,11 +279,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since 4.3.1
      */
     static public function getCustomerReviewURL( $sASIN, $sLocale ) {
-        $_oLocale        = new AmazonAutoLinks_PAAPI50___Locales;
-        $_sMarketPlace   = isset( $_oLocale->aMarketPlaces[ $sLocale ] )
-            ? $_oLocale->aMarketPlaces[ $sLocale ]
-            : $_oLocale->aMarketPlaces[ 'US' ];
-        return 'https://' . $_sMarketPlace . '/product-reviews/' . $sASIN;
+        $_oLocale        = new AmazonAutoLinks_Locale( $sLocale );
+        return $_oLocale->getMarketPlaceURL( '/product-reviews/' . $sASIN );
     }
 
     /**
@@ -333,7 +325,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @deprecated 4.2.2    Not used at the moment.
      */
     static public function getThumbnailURLFromASIN( $sASIN, $sLocale, $iImageSize ) {
-        $_sLocaleNumber = self::getElement( AmazonAutoLinks_Property::$aLocaleNumbers, array( strtoupper( $sLocale ) ), '01' );
+        $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
+        $_sLocaleNumber = $_oLocale->getLocaleNumber();
         return is_ssl()
             ? "https://images-na.ssl-images-amazon.com/images/P/{$sASIN}.{$_sLocaleNumber}._SCL_SX{$iImageSize}_.jpg"
             : "http://images.amazon.com/images/P/{$sASIN}.{$_sLocaleNumber}._SCL_SX{$iImageSize}_.jpg";

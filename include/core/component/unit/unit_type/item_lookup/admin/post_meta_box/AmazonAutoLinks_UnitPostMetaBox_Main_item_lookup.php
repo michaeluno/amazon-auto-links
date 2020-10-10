@@ -70,16 +70,18 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
         }
         
         /**
+         * @param       array   $aField     A field definition array.
          * @return      array
          * @since       3.4.0
          */
         public function replyToModifyField_SearchIndex( $aField ) {
+            $_oLocale = new AmazonAutoLinks_PAAPI50_Locale(
+                isset( $this->oForm->aSavedData[ 'country' ] )
+                    ? $this->oForm->aSavedData[ 'country' ]
+                    : null
+            );
             return array(            
-                'label'         => AmazonAutoLinks_Property::getSearchIndexByLocale( 
-                    isset( $this->oForm->aSavedData[ 'country' ] ) 
-                        ? $this->oForm->aSavedData[ 'country' ] 
-                        : null 
-                    ),            
+                'label'         => $_oLocale->getSearchIndex(),
             ) + $aField;
         }
     

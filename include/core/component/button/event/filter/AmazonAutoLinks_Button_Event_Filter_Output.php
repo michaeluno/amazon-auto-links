@@ -95,8 +95,8 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
                 $_sASIN      = $aArguments[ 'asin' ];
                 $_aASINs     = $this->getStringIntoArray( $_sASIN, ',' ); // format it as it can be comma delimtted
                 $sASIN       = reset( $_aASINs );
-                $_sDomain    = AmazonAutoLinks_Property::getStoreDomainByLocale( $_sLocale ); // with http(s) prefixed
-                $_sURL       = $_sDomain . '/dp/' . $sASIN;
+                $_oLocale    = new AmazonAutoLinks_Locale( $_sLocale );
+                $_sURL       = $_oLocale->getMarketPlaceURL( '/dp/' . $sASIN );
                 $_oOption    = AmazonAutoLinks_Option::getInstance();
                 $_aDefaults  = $this->getAsArray( $_oOption->get( 'unit_default' ) );
                 return apply_filters(
@@ -144,10 +144,8 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
          */
         private function ___getAddToCartButton( $sASINs, $sQuantities, $sLocale, $sAssociateID, $isButtonID, $sOfferListingID, $sAccessKey='', $sLabel='Buy Now' ) {
 
-            $_sScheme       = is_ssl() ? 'https' : 'http';
-            $_sURL          = isset( AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ] )
-                ? $_sScheme . '://' . AmazonAutoLinks_Property::$aAddToCartURLs[ $sLocale ]
-                : $_sScheme . '://' . AmazonAutoLinks_Property::$aAddToCartURLs[ 'US' ];
+            $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
+            $_sURL          = $_oLocale->getAddToCartURL();
             $_aQuery        = array(
                 'AssociateTag'      => $sAssociateID,
                 'SubscriptionId'    => $sAccessKey,
