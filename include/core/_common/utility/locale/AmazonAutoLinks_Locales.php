@@ -95,4 +95,17 @@ class AmazonAutoLinks_Locales {
         return 'US';    // not found: default
     }
 
+    /**
+     * @param  string $sURL
+     * @param  string $sDefaultLocale The default locale.
+     * @return string
+     * @remark Moved from `AmazonAutoLinks_UnitOutput_embed`.
+     * @since  4.3.4
+     */
+    static public function getLocaleFromURL( $sURL, $sDefaultLocale='US' ) {
+        $_sDomain = parse_url( $sURL, PHP_URL_HOST );
+        $_sLocale = array_search( $_sDomain, self::getDomains() );
+        return false === $_sLocale ? $sDefaultLocale : $_sLocale;
+    }
+
 }
