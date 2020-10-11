@@ -115,7 +115,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
          */
         static private function ___getSetCookieEntryConvertedToWPHTTPCookie( $sSetCookieEntry ) {
             $_aParts     = self::getStringIntoArray( $sSetCookieEntry, ';', '=' );
-            $_aNameValue = array_shift( $_aParts ); // extract the first element
+            $_aNameValue = array_shift( $_aParts ) + array( null, null ); // extract the first element
             $_aCookie    = array(
                 'name'  => $_aNameValue[ 0 ],
                 'value' => $_aNameValue[ 1 ],
