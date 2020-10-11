@@ -225,12 +225,11 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Returns the response's character set by the url.
      *
-     * @remark      This should be used after performing getResponses().
      * @since       3
      * @return      string
      */
     public function getCharacterSet() {
-        return $this->___getCharacterSetFromResponse( $this->getResponse() );
+        return $this->___getCharacterSetFromResponse( $this->getRawResponse() );
     }
 
     /**
@@ -835,7 +834,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @since  4.3.4
      */
     public function getStatusCode() {
-        return ( integer ) $this->getElement( $this->aoResponse, array( 'response', 'code' ) );
+        return ( integer ) $this->getElement( $this->getRawResponse(), array( 'response', 'code' ) );
     }
 
 }
