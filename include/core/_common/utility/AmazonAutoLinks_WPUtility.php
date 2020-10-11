@@ -133,7 +133,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @param WP_Error|array $aoResponse
      * @return array
      * @since 4.3.4
-     * @deprecated This does not pick up cookies with duplicate names.
+     * @deprecated This does not pick up cookies with duplicate names. Use `getRequestCookiesFromResponse()`.
      */
     static public function getCookiesFromResponse( $aoResponse ) {
         if ( is_wp_error( $aoResponse ) ) {
