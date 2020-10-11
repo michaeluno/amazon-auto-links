@@ -274,12 +274,10 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          */
         private function ___getHTTPResponseWithCache( $sURL, $aArguments, $iCacheDuration ) {
 
-            $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $iCacheDuration, $this->___aCache, $aArguments );
-            $_aoResponse     = $this->___getHTTPResponseFromCache( $this->___aCache, $this->sCacheName, $iCacheDuration, $aArguments, $this->sRequestType );
+            $_aoResponse = $this->getResponseFromCache();
             if ( ! empty( $_aoResponse ) ) {
                 return $_aoResponse;
             }
-
             $_aoResponse = $this->___getHTTPResponse( $sURL, $aArguments );
             $this->___setCacheInDatabase( $sURL, $this->sCacheName, $_aoResponse, $iCacheDuration, $aArguments, $this->___aCache, $this->sRequestType );
             return $_aoResponse;
@@ -672,7 +670,6 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                     'charset'     => $_sCharSet,
                 )
             );
-
             if ( $_bResult ) {
                 do_action( 'aal_action_set_http_request_cache', $sCacheName, $sURL, $aoResponse, $iCacheDuration, $_sCharSet );
             }
@@ -820,6 +817,15 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             return false;
         }
         return ! $this->___isCacheExpired( $this->___aCache );
+    }
+
+    /**
+     * @return array
+     * @since  4.3.4
+     */
+    public function getResponseFromCache() {
+        $this->___aCache = $this->___getCacheFromDatabase( $this->sCacheName, $this->iCacheDuration, $this->___aCache, $this->aArguments );
+        return $this->___getHTTPResponseFromCache( $this->___aCache, $this->sCacheName, $this->iCacheDuration, $this->aArguments, $this->sRequestType );
     }
 
     /**
