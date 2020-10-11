@@ -837,4 +837,12 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         return ( integer ) $this->getElement( $this->getRawResponse(), array( 'response', 'code' ) );
     }
 
+    /**
+     * @return string
+     * @since  4.3.4
+     */
+    public function getStatusMessage() {
+        return $this->getElement( $this->getRawResponse(), array( 'response', 'message' ) );
+    }
+
 }
