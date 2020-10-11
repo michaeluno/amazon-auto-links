@@ -161,6 +161,27 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
     }
 
     /**
+     * @param  string $sSubString
+     * @param  string $sHaystack
+     * @param  string $sMessage
+     * @param  array  $mData
+     * @return bool
+     */
+    protected function _assertSubString( $sSubString, $sHaystack, $sMessage='', $mData=array() ) {
+        $sMessage   = $sMessage ? $sMessage : "Check if the string contains the given sub-string ";
+        $_biFound   = strpos( $sHaystack, $sSubString );
+        if ( false === $_biFound ) {
+            $this->_setError( $sMessage, $sHaystack, $mData );
+            return false;
+        }
+        $_sHaystack = ( 0 !== $_biFound ? '...' : '' )
+            . substr( $sHaystack, max( $_biFound - 20, 0 ),120 )
+            . '...';
+        $this->_setPass( $sMessage, $_sHaystack );
+        return true;
+    }
+
+    /**
      * Sets a success message that shows the test passed.
      * @param string $sMessage
      * @param mixed ...$aValues
