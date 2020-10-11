@@ -845,4 +845,23 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         return $this->getElement( $this->getRawResponse(), array( 'response', 'message' ) );
     }
 
+    /**
+     * @return WP_Http_Cookie[]
+     * @since  4.3.4
+     */
+    public function getCookies() {
+        return $this->getRequestCookiesFromResponse( $this->getRawResponse() );
+    }
+
+    /**
+     * Returns cookies to parse.
+     * Meant be used for parsing or displaying.
+     * @remark The structure is different from the request/response cookies.
+     * @return array
+     * @since 4.3.4
+     */
+    public function getCookiesParsable() {
+        return $this->getCookiesToParseFromResponse( $this->getRawResponse() );
+    }
+
 }
