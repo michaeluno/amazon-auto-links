@@ -28,11 +28,6 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
     public $oEncrypt;
 
     /**
-     * @var string
-     */
-    public $sHTMLCachePrefix;
-
-    /**
      * @var bool
      */
     public $bIsMBStringInstalled;
@@ -49,10 +44,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         
         $this->sCharEncoding    = get_bloginfo( 'charset' ); 
         $this->oEncrypt         = new AmazonAutoLinks_Encrypt;
-        $this->sHTMLCachePrefix = AmazonAutoLinks_Registry::TRANSIENT_PREFIX . "_HTML_";
-            
         $this->bIsMBStringInstalled = function_exists( 'mb_language' );
-        
         $this->bLoadHTMLFix     = defined( 'LIBXML_HTML_NOIMPLIED' ) && defined( 'LIBXML_HTML_NODEFDTD' ) 
             && ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 );
         
@@ -253,15 +245,6 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         return $_oHTML->get();    
     
     }
-
-    /**
-     * Deletes the cache of the provided URL.
-     * @param string $sURL
-     * @deprecated unused
-     */
-    /*public function deleteCache( $sURL ) {
-        $this->deleteTransient( $this->sHTMLCachePrefix . md5( $sURL ) );
-    }*/
 
     /**
      * Modifies the attributes of the given node elements by specifying a tag name.
