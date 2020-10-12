@@ -90,15 +90,18 @@ class AmazonAutoLinks_Event_Scheduler {
          */
         static public function replyToQueueRatingRetrieval() {
 
+            $_iCount    = 1;
             $_aTaskRows = array();
             foreach( self::$___aRatingItems as $_sProductID => $_aParameters ) {
+                $_iNow        = time();
                 $_aTaskRows[] = array(
                     'name'          => 'get_rating_' . $_sProductID,  // (unique column)
                     'action'        => 'aal_action_api_get_product_rating',
                     'arguments'     => $_aParameters,
-                    'creation_time' => date( 'Y-m-d H:i:s', time() ),
-                    'next_run_time' => date( 'Y-m-d H:i:s', time() ),
+                    'creation_time' => date( 'Y-m-d H:i:s', $_iNow ),
+                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * 10 ) ),
                 );
+                $_iCount++;
             }
             $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
             $_aChunks    = array_chunk( $_aTaskRows, 50 );    // having too many rows may fail to set

@@ -100,18 +100,15 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                 $oHTTP          = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     $iCacheDuration,
-                    array(  // http arguments
+                    array(
                         'timeout'     => 20,
                         'redirection' => 20,
-                        'interval'    => 1,
-                        // cookies with duplicate name seem to be parsed from last.
+                        'interval'    => 10,
+                        'renew_cache' => ( boolean ) $bForceRenew,
                         'cookies'     => $_oLocale->getHTTPRequestCookies(),
                     ),
                     'customer_review'
                 );
-                if ( $bForceRenew ) {
-                    $oHTTP->deleteCache();
-                }
                 return $oHTTP->getResponse();
             }
 

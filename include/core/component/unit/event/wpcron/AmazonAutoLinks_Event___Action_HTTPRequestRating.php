@@ -97,12 +97,10 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                     'timeout'     => 20,
                     'redirection' => 20,
                     'cookies'     => $_aRequestCookies,
-                    'interval'    => 1,
+                    'interval'    => 10,
+                    'renew_cache' => ( boolean ) $bForceRenew,
                 );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
-                if ( $bForceRenew ) {
-                    $_oHTTP->deleteCache();
-                }
                 $_aoResponse = $_oHTTP->getResponse();
 
                 // Blocked due to lack of proper cookies.
@@ -116,9 +114,9 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
 
                         $_aArguments[ 'cookies' ] = array_reverse(
                             array_merge(
-                                $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() ),
+                                $_aRequestCookies,
                                 $_oLocale->getHTTPRequestCookies( $sLanguage ),
-                                $_aRequestCookies
+                                $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() )
                             )
                         );
                         $_oHTTP            = new AmazonAutoLinks_HTTPClient(
