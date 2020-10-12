@@ -26,6 +26,16 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
+     * @tags URL
+     */
+    public function test_getSubDomain() {
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_oLocale ) {
+            $_sURL = $_oLocale->getMarketPlaceURL();
+            $this->_assertPrefix( 'amazon.', $this->oUtil->getSubDomain( $_sURL ) );
+        }
+    }
+
+    /**
      * @purpose The result of the second call must match the result of the first call.
      * @return bool
      */
