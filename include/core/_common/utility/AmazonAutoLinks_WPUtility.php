@@ -95,17 +95,39 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         if ( version_compare( $GLOBALS[ 'wp_version' ], '4.6.0', '<' ) ) {
             return $_aResponseCookies;
         }
+
+        // Sometimes response 'cookies' items and the header set-cookie items are different.
+        // Especially when there are multiple items with the same name, the response 'cookies' only picks one of them.
+
         // Extract 'set-cookie' element from header
         $_aRequestCookies = array();
+        $_aParsedNames    = array();
         $_aHeader         = self::getHeaderFromResponse( $aoResponse );
         $_aSetCookies     = self::getElementAsArray( $_aHeader, 'set-cookie' ); // there is a case that this is a string of a single entry
+
+        /// Convert each set-cookie entry to a WP_Http_Cookie object.
         foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
             if ( ! $_sSetCookieEntry ) {
                 continue;
             }
-            $_aRequestCookies[] = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry );
+            $_oWPCookie         = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry );
+            $_aParsedNames[]    = $_oWPCookie->name;
+            $_aRequestCookies[] = $_oWPCookie;
+        }
+
+        /// There is a case that the set-cookie entry is empty but the response 'cookies' element has items.
+        foreach( self::getAsArray( $aoResponse[ 'cookies' ] ) as $_isNameOrIndex => $_soCookie ) {
+            $_bObject = $_soCookie instanceof WP_Http_Cookie; 
+            $_sName   = $_bObject ? $_soCookie->name : $_isNameOrIndex;
+            if ( in_array( $_sName, $_aParsedNames, true ) ) {
+                continue;
+            }
+            $_aRequestCookies[] = $_bObject 
+                ? $_soCookie
+                : new WP_Http_Cookie( array( 'name' => $_isNameOrIndex, 'value' => $_soCookie ) );
         }
         return $_aRequestCookies;
+
     }
         /**
          * Parses a given 'set-cookie' entry present in a HTTP header.
