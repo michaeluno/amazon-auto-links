@@ -94,7 +94,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         if ( empty ( $sHTML ) ) {
             return false;
         }
-        if ( ! preg_match( '/https?:\/\/(www\.)?amazon\.[^"\' >]+/', $sURL ) ) {
+        if ( ! self::isAmazonURL( $sURL ) ) {
             return false;
         }
         $_oDOM      = new AmazonAutoLinks_DOM;
@@ -103,6 +103,16 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
         return null !== $_noNode;
 
+    }
+
+    /**
+     * Detects whether a given URL is of an Amazon site.
+     * @param  string  $sURL
+     * @return boolean
+     * @since  4.3.4
+     */
+    static public function isAmazonURL( $sURL ) {
+        return self::hasPrefix( 'amazon.', self::getSubDomain( $sURL ) );
     }
 
     /**

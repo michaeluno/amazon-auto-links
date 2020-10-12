@@ -17,9 +17,33 @@
 */
 class Test_AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
 
-
-    public function __construct() {
-        // add_action();
+    /**
+     * @see  AmazonAutoLinks_PluginUtility::isAmazonURL()
+     * @tags URL, url
+     */
+    public function test_isAmazonURL() {
+        $_sURL = 'https://www.amazon.com';
+        $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        $_sURL = 'https://www.amazon.co.uk';
+        $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        $_sURL = 'https://www.google.com';
+        $this->_assertFalse( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        $_sURL = 'https://www.foo.amazon';
+        $this->_assertFalse( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        $_sURL = 'https://amazon.com';
+        $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        $_sURL = 'http://amazon.com';
+        $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_oLocale ) {
+            $_sURL = $_oLocale->getMarketPlaceURL();
+            $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+            $_sURL = $_oLocale->getCustomerReviewURL( '1234567890' );
+            $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+            $_sURL = $_oLocale->getProductRatingWidgetURL( '1234567890' );
+            $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+            $_sURL = $_oLocale->getAssociatesURL();
+            $this->_assertTrue( AmazonAutoLinks_PluginUtility::isAmazonURL( $_sURL ), $_sURL );
+        }
     }
 
     /**
