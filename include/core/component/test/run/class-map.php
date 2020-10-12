@@ -33,6 +33,7 @@ return array(
     "Test_AmazonAutoLinks_HTTPClient_Associates" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/associates/Test_AmazonAutoLinks_HTTPClient_Associates.php", 
     "Test_AmazonAutoLinks_HTTPClient_BestSellers" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/bestsellers/Test_AmazonAutoLinks_HTTPClient_BestSellers.php", 
     "Test_AmazonAutoLinks_HTTPClient_Cookie" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/cookie/Test_AmazonAutoLinks_HTTPClient_Cookie.php", 
+    "Test_AmazonAutoLinks_HTTPClient_CookiePrefForm" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/cookie/Test_AmazonAutoLinks_HTTPClient_CookiePrefForm.php", 
     "Test_AmazonAutoLinks_HTTPClient_SessionCookie" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/cookie/Test_AmazonAutoLinks_HTTPClient_SessionCookie.php", 
     "Test_AmazonAutoLinks_HTTPClient_Referer" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/referer/Test_AmazonAutoLinks_HTTPClient_Referer.php", 
     "Test_AmazonAutoLinks_HTTPClient_Reviews" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/review/Test_AmazonAutoLinks_HTTPClient_Reviews.php", 

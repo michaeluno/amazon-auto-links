@@ -15,6 +15,7 @@
  * @since   4.3.4
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http, cookie, session-id
+ * @deprecated
 */
 class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_UnitTest_HTTPRequest_Base {
 
@@ -56,28 +57,34 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_Unit
     public function test_SessionMatchWithDifferentSites_UK() {
         $this->___testSessionMatch( 'UK' );
     }
+        /**
+         * @param  string $sLocale
+         * @throws ReflectionException
+         * @deprecated Used deprecated methods.
+         */
         private function ___testSessionMatch( $sLocale ) {
 
             $_oLocale               = new AmazonAutoLinks_Locale( $sLocale );
+            $_oLocale               = $_oLocale->get();
             $_oMock                 = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Unit_Utility' );
-            $_aAssociatesCookies    = $_oMock->call( '___getAssociatesResponseCookies', array( $sLocale, '' ) );
+            $_aAssociatesCookies    = $_oLocale->getHTTPRequestCookies();
             $_sAssociatesURL        = $_oLocale->getAssociatesURL();
 
-            $_sSessionID1           = $_oMock->call( '___getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
+            $_oMockCookieGetter     = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Locale_AmazonCookies', array( $_oLocale, '' ) );
+            $_sSessionID1           = $_oMockCookieGetter->call( '_getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
 
             $this->_outputDetails( "2nd Request Cookies ({$sLocale}): ", $this->getCookiesToParse( $_aAssociatesCookies ) );
 
             $_aBestSellersCookies1  = $_oMock->call( '___getBestSellersResponseCookies', array( $sLocale, $_aAssociatesCookies, false ) );
             $_sBestSellerURL        = $_oLocale->getBestSellersURL();
-            $_sSessionID2           = $_oMock->call( '___getSessionIDCookie', array( $_aBestSellersCookies1, $_sBestSellerURL ) );
+            $_sSessionID2           = $_oMockCookieGetter->call( '_getSessionIDCookie', array( $_aBestSellersCookies1, $_sBestSellerURL ) );
 
             if ( $_sSessionID1 === $_sSessionID2 ) {
                 $this->_output( 'Matched: ' . $_sSessionID2 );
                 return;
             }
             $_aBestSellersCookies2  = $_oMock->call( '___getBestSellersResponseCookies', array( $sLocale, $_aAssociatesCookies, true ) );
-            $_sSessionID3           = $_oMock->call( '___getSessionIDCookie', array( $_aBestSellersCookies2, $_sBestSellerURL ) );
-
+            $_sSessionID3           = $_oMockCookieGetter->call( '_getSessionIDCookie', array( $_aBestSellersCookies2, $_sBestSellerURL ) );
             if ( $_sSessionID2 === $_sSessionID3 ) {
                 $this->_output( 'Matched: ' . $_sSessionID2 );
                 return;

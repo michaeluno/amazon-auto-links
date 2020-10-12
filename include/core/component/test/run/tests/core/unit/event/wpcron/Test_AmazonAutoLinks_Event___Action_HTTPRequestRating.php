@@ -156,12 +156,13 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
          */
         private function ___testRatingByLocale( $sASIN, $sLocale ) {
 
+            $_oLocale  = new AmazonAutoLinks_Locale( $sLocale );
             $_oMock    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Event___Action_HTTPRequestRating' );
 
             $_sURL     = $_oMock->call( '___getRatingWidgetPageURL', array( $sASIN, $sLocale, true ) ); // B08FWDGDS5, B08HGKZC6T
             $this->_output( 'URL: ' . $_sURL );
 
-            $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale );
+            $_aRequestCookies = $_oLocale->getHTTPRequestCookies();
             $_aParseCookies   = $this->getCookiesToParse( $_aRequestCookies );
             $this->_outputDetails( 'Request Cookies', $_aParseCookies );
 

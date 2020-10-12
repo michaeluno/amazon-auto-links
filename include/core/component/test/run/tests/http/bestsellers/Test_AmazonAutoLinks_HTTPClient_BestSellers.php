@@ -44,24 +44,117 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
         $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
         $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
     }
-
+    /**
+     * @tags FR
+     */
+    public function test_FR() {
+        $_sLocale = 'FR';
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
+    }
+    /**
+     * @tags DE
+     */
+    public function test_DE() {
+        $_sLocale = 'DE';
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
+    }
+    /**
+     * @tags ES
+     */
+    public function test_ES() {
+        $_sLocale = 'ES';
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
+    }
+    /**
+     * @tags UK
+     */
+    public function test_UK() {
+        $_sLocale = 'UK';
+        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+        $this->_testSessionMatch( $_oLocale->getBestSellersURL(), $_sLocale );
+    }
+        /**
+         * @param $_sURL
+         * @param $_sLocale
+         */
         protected function _testUnblocked( $_sURL, $_sLocale ) {
 
+            $_oLocale           = new AmazonAutoLinks_Locale( $_sLocale );
             $this->_output( 'URL: ' . $_sURL );
             $this->_output( 'Locale: ' . $_sLocale );
 
-            $_aRequestCookies   = AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $_sLocale, '' );
-            $_oHTTP             = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies ) );
+            $_aRequestCookies   = $_oLocale->getHTTPRequestCookies();
+            $_oHTTP             = new AmazonAutoLinks_HTTPClient(
+                $_sURL,
+                86400,
+                array(
+                    'headers' => array( 'Referer' => '' ),
+                    'cookies' => $_aRequestCookies,
+                )
+            );
+            $_aCookies          = $_oHTTP->getCookies();
             $_aoResponse        = $_oHTTP->getResponse();
+            // If 404, try again
+            if ( 404 === $_oHTTP->getStatusCode() ) {
+                $this->_output( $_oHTTP->getStatusCode() . ' ' . $_oHTTP->getStatusMessage() );
+                $_oHTTP             = new AmazonAutoLinks_HTTPClient(
+                    $_sURL,
+                    86400,
+                    array(
+                        'headers'     => array( 'Referer' => '' ),
+                        'cookies'     => array_reverse( $_aCookies ),
+                        'renew_cache' => true,
+                    )
+                );
+                $_aoResponse        = $_oHTTP->getResponse();
+                $_aCookies          = $_oHTTP->getCookies();
+            }
+
+            // Retry
+            if ( is_wp_error( $_aoResponse ) ) {
+                $_oHTTP             = new AmazonAutoLinks_HTTPClient(
+                    $_sURL,
+                    86400,
+                    array(
+                        'headers'     => array( 'Referer' => '' ),
+                        'cookies'     => array_reverse( $_aCookies ),
+                        'renew_cache' => true,
+                    )
+                );
+                $_aoResponse        = $_oHTTP->getResponse();
+                $_aCookies          = $_oHTTP->getCookies();
+            }
+
             $_bResult = $this->_assertNotWPError( $_aoResponse, "{$_sLocale}: If blocked by Captcha, WP_Error will be returned." );
             if ( ! $_bResult ) {
+                $this->_outputDetails( 'Cookies', $this->getCookiesToParse( $_aCookies ) );
+                $this->_output( 'HTML RAW Body' );
+                $this->_output( $this->___getHTMLBody( wp_remote_retrieve_body( $_oHTTP->getRawResponse() ) ) );
                 return;
             }
-            $this->_assertPrefix( '2', $_oHTTP->getStatusCode(), 'The HTTP status code must begin with 2 such as 200.' );
-            $this->_assertNotEmpty( $this->getCookiesToParseFromResponse( $_oHTTP->getRawResponse() ),"{$_sLocale}: If blocked, cookies are empty." );
+            $this->_assertPrefix( '2', $_oHTTP->getStatusCode(), 'The HTTP status code must begin with 2 such as 200.', $_oHTTP->getStatusMessage() );
+            $this->_assertFalse( empty( $_oHTTP->getCookiesParsable() ),"{$_sLocale}: If blocked, cookies are empty." );
             $this->_assertNotEmpty( $this->getASINs( $_oHTTP->getBody() ), "{$_sLocale}: Find ASINs in the page." );
 
         }
+            /**
+             * @param $sHTML
+             *
+             * @return false|string
+             */
+            private function ___getHTMLBody( $sHTML ) {
+                $_oDOM       = new AmazonAutoLinks_DOM;
+                $_oDoc       = $_oDOM->loadDOMFromHTML( $sHTML );
+                $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'head' ) );
+                $_oXPath     = new DOMXPath( $_oDoc );
+                $_noBodyNode = $_oXPath->query( "/html/body" )->item( 0 );
+                return $_noBodyNode
+                    ? $_oDoc->saveXml( $_noBodyNode, LIBXML_NOEMPTYTAG )
+                    : '[EMPTY STRING]';
+            }
 
         protected function _testSessionMatch( $_sURL, $_sLocale ) {
 
@@ -69,7 +162,8 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
             $this->_output( 'URL: ' . $_sURL );
 
             // First request
-            $_aRequestCookies   = AmazonAutoLinks_Unit_Utility::getAssociatesRequestCookies( $_sLocale, '' );
+            $_oLocale           = new AmazonAutoLinks_Locale( $_sLocale );
+            $_aRequestCookies   = $_oLocale->getHTTPRequestCookies();
             $this->_outputDetails( '1st Request Cookies: ', $this->getCookiesToParse( $_aRequestCookies ) );
             $_oHTTP             = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies ) );
             $_oHTTP->deleteCache();

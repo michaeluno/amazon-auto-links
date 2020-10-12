@@ -60,58 +60,5 @@ class Test_AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_UnitTest_Base {
         return $this->oUtil->getFormattedRatingFromItem( $this->aItem, 'US' );
     }
 
-    public function test_getCustomerReviewURL() {
-        return 'https://www.amazon.com/product-reviews/1234567890'
-            === $this->oUtil->getCustomerReviewURL( '1234567890', 'US' );
-    }
-
-    /**
-     * @throws ReflectionException
-     * @tags   domain
-     * @see    WP_Http_Cookie
-     * @see    AmazonAutoLinks_Unit_Utility::___getCookieDomain()
-     */
-    public function test____getCookieDomain() {
-
-        $_sURL    = 'https://www.amazon.com/fajira/dp/reajfraera?tag=frjaifa';
-        $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
-        $this->_assertEqual( '.amazon.com', $_sDomain );
-        $_sURL    = 'https://amazon.com/';
-        $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
-        $this->_assertEqual( '.amazon.com', $_sDomain );
-        $_sURL    = 'https://affiliate-program.amazon.com/';
-        $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
-        $this->_assertEqual( '.amazon.com', $_sDomain );
-
-    }
-
-    /**
-     * @throws ReflectionException
-     * @tags session-id
-     * @see AmazonAutoLinks_Unit_Utility::___getSessionIDCookie()
-     */
-    public function test____getSessionIDCookie() {
-
-        $_sLocale             = 'US';
-        $_oLocale             = new AmazonAutoLinks_Locale( $_sLocale );
-        $_aAssociatesCookies  = $this->oMock->call( '___getAssociatesResponseCookies', array( $_sLocale, '' ) );
-        $this->_assertNotEmpty( $this->getCookiesToParse( $_aAssociatesCookies ) );
-        $_sAssociatesURL      = $_oLocale->getAssociatesURL();
-        $this->_assertNotEmpty( $_sAssociatesURL, 'Associates URL' );
-        $_sSessionID1         = $this->oMock->call( '___getSessionIDCookie', array( $_aAssociatesCookies, $_sAssociatesURL ) );
-        $this->_assertNotEmpty( $_sSessionID1 );
-
-    }
-
-    /**
-     * @tags cookies
-     * @see  AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies()
-     */
-    public function test_getAmazonSitesRequestCookies() {
-        foreach( AmazonAutoLinks_Locales::getLocales() as $_sLocale ) {
-            $_aRequestCookies = $this->oUtil->getAmazonSitesRequestCookies( $_sLocale );
-            $this->_assertNotEmpty( $this->getCookiesToParse( $_aRequestCookies ), 'If blocked, usually it is empty.' );
-        }
-    }
 
 }
