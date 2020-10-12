@@ -31,10 +31,13 @@ class AmazonAutoLinks_Test_Utility extends AmazonAutoLinks_PluginUtility {
      * Retrieves PHP code from the given path.
      *
      * @param   string $sFilePath
-     * @remark      Enclosing `<?php ?>` tags will be removed.
+     * @remark  Enclosing `<?php ?>` tags will be removed.
      * @return  string Found PHP code
      */
     static public function getPHPCode( $sFilePath ) {
+        if ( ! file_exists( $sFilePath ) ) {
+            return '';
+        }
         $_sCode = php_strip_whitespace( $sFilePath );
         $_sCode = preg_replace( '/^<\?php/', '', $_sCode );
         $_sCode = preg_replace( '/\?>\s+?$/', '', $_sCode );
