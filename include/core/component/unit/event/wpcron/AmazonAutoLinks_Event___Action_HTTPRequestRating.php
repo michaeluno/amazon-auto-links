@@ -91,11 +91,12 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
              */
             private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage ) {
 
-                $_aRequestCookies = AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage );
+                $_oLocale         = new AmazonAutoLinks_Locale( $sLocale );
+                $_aRequestCookies = $_oLocale->getHTTPRequestCookies( $sLanguage );
                 $_aArguments      = array(
                     'timeout'     => 20,
                     'redirection' => 20,
-                    'cookies'     => array_reverse( $_aRequestCookies ),    // duplicate name cookies seem to be parsed from the last
+                    'cookies'     => $_aRequestCookies,
                     'interval'    => 1,
                 );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
@@ -116,7 +117,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                         $_aArguments[ 'cookies' ] = array_reverse(
                             array_merge(
                                 $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() ),
-                                AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage ),
+                                $_oLocale->getHTTPRequestCookies( $sLanguage ),
                                 $_aRequestCookies
                             )
                         );

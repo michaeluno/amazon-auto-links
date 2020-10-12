@@ -907,7 +907,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'review'              => null,  // customer reviews
 
                     // 3+ // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
-                    'formatted_rating'    => $this->getFormattedRatingFromItem( $_aItem, $_sLocale ),
+                    'formatted_rating'    => $this->getFormattedRatingFromItem( $_aItem, $_sLocale, $_sAssociateID ),
 
                     // These will be assigned below
                     'image_set'           => null,

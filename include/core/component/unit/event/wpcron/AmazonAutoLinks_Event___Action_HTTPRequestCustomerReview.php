@@ -56,7 +56,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
          * @since 4.3.4
          */
         private function ___getReviewPageURL( $sASIN, $sLocale ) {
-            return AmazonAutoLinks_Unit_Utility::getCustomerReviewURL( $sASIN, $sLocale );
+            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
+            return $_oLocale->getCustomerReviewURL( $sASIN );
         }
         private function ___updateRow( array $aRow, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
             if ( empty( $aRow ) ) {
@@ -95,6 +96,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
              * @since  4.3.4
              */
             private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew, $sLanguage ) {
+                $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
                 $oHTTP          = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     $iCacheDuration,
@@ -102,9 +104,8 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                         'timeout'     => 20,
                         'redirection' => 20,
                         'interval'    => 1,
-                        'cookies'     => array_reverse( // cookies with duplicate name seem to be parsed from last.
-                            AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLocale, $sLanguage )
-                        ),
+                        // cookies with duplicate name seem to be parsed from last.
+                        'cookies'     => $_oLocale->getHTTPRequestCookies(),
                     ),
                     'customer_review'
                 );

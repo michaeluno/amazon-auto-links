@@ -15,215 +15,6 @@
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @since  4.3.4
-     * @remark Be aware that this method takes time, meaning slow as this performs two HTTP requests if not cached.
-     * @param  string   $sLocale
-     * @param  string   $sLanguage
-     * @return array    Request cookies for Amazon sites.
-     */
-    static public function getAmazonSitesRequestCookies( $sLocale, $sLanguage='' ) {
-        $_oLocale             = new AmazonAutoLinks_Locale( $sLocale );
-        $_aAssociatesCookies  = self::___getAssociatesResponseCookies( $sLocale, $sLanguage );
-        $_sAssociatesURL      = $_oLocale->getAssociatesURL();
-        $_sSessionID1         = self::___getSessionIDCookie( $_aAssociatesCookies, $_sAssociatesURL );
-        $_aBestSellersCookies = self::___getBestSellersResponseCookies( $sLocale, $_aAssociatesCookies, false );
-        $_sBestSellerURL      = $_oLocale->getBestSellersURL();
-        $_sSessionID2         = self::___getSessionIDCookie( $_aBestSellersCookies, $_sBestSellerURL );
-        if ( $_sSessionID1 === $_sSessionID2 ) {
-            return $_aBestSellersCookies;
-        }
-        return self::___getBestSellersResponseCookies( $sLocale, $_aBestSellersCookies, true );
-    }
-        /**
-         * @param  array $aCookies
-         * @param  string $sURL
-         * @return string
-         * @since  4.3.4
-         */
-        static private function ___getSessionIDCookie( array $aCookies, $sURL ) {
-            $_sCookieDomain = self::___getCookieDomain( $sURL );
-            $_aSessionIDs   = array(); // consider a case of multiple cookies with the same name.
-            foreach( $aCookies as $_isIndexOrName => $_soValueOrWPHttpCookie ) {
-                $_bObject = ( $_soValueOrWPHttpCookie instanceof WP_Http_Cookie );  // backward compatibility for below WP 4.6.0.
-                $_sName   = $_bObject ? $_soValueOrWPHttpCookie->name : $_isIndexOrName;
-                if (
-                    $_bObject
-                    && isset( $_soValueOrWPHttpCookie->domain )
-                    && $_soValueOrWPHttpCookie->domain !== $_sCookieDomain
-                ) {
-                    continue;
-                }
-                if ( 'session-id' !== $_sName ) {
-                    continue;
-                }
-                $_aSessionIDs[] = $_bObject
-                    ? $_soValueOrWPHttpCookie->value
-                    : $_soValueOrWPHttpCookie;
-            }
-            if ( empty( $_aSessionIDs ) ) {
-                return '';
-            }
-            if ( count( $_aSessionIDs ) === 1 ) {
-                return reset( $_aSessionIDs );
-            }
-            // At this point, multiple `session-id` cookie entry exist.
-            $_iIndex = array_search( '-', $_aSessionIDs ); // remove the entry with the value '-'
-            unset( $_aSessionIDs[ $_iIndex ] );
-            return reset( $_aSessionIDs ); // the first found item
-
-        }
-        /**
-         * @param  string  $sLocale
-         * @param  array   $aRequestCookies
-         * @param  boolean $bForceRenew
-         * @return WP_Http_Cookie[]
-         * @since  4.3.4
-         */
-        static private function ___getBestSellersResponseCookies( $sLocale, array $aRequestCookies, $bForceRenew=false ) {
-            $_aoResponse = self::___getBestSellersResponse( $sLocale, $aRequestCookies, $bForceRenew );
-            return self::getRequestCookiesFromResponse( $_aoResponse );
-        }
-        /**
-         * @param  string  $sLocale
-         * @param  array   $aRequestCookies
-         * @param  boolean $bForceRenew
-         * @return array|WP_Error
-         * @since  4.3.4
-         */
-        static private function ___getBestSellersResponse( $sLocale, array $aRequestCookies, $bForceRenew=false ) {
-            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
-            $_sURL    = $_oLocale->getBestSellersURL();
-            $_oHTTP   = new AmazonAutoLinks_HTTPClient(
-                $_sURL,
-                86400 * 7,
-                array(
-                    // The GET method is used as those pages do not accept the HEAD method.
-                    'cookies'     => $aRequestCookies,
-                    'renew_cache' => $bForceRenew,
-                )
-            );
-            return $_oHTTP->getRawResponse();
-        }
-        /**
-         * @param  string $sLocale
-         * @param  string $sLanguage
-         * @return array|WP_Error
-         * @since  4.3.4
-         */
-        static private function ___getAssociatesResponseCookies( $sLocale, $sLanguage ) {
-            $_aoResponse = self::___getAssociatesResponse( $sLocale, $sLanguage );
-            return self::getRequestCookiesFromResponse( $_aoResponse );
-        }
-        /**
-         * @param  string $sLocale
-         * @param  string $sLanguage
-         * @return array|WP_Error
-         * @since  4.3.4
-         */
-        static private function ___getAssociatesResponse( $sLocale, $sLanguage ) {
-            $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
-            $_oHTTP   = new AmazonAutoLinks_HTTPClient(
-                $_oLocale->getAssociatesURL(),
-                86400 * 7,  // 7 days
-                array(
-                    'method'  => 'HEAD',
-                    'cookies' => self::getAssociatesRequestCookies( $sLocale, $sLanguage ),
-                )
-            );
-            return $_oHTTP->getRawResponse();
-        }
-
-    /**
-     * Retrieves cookies given by a Amazon Associates site of the given locale.
-     * @param  string $sLocale
-     * @param  string $sLanguage
-     * @return WP_Http_Cookie[]
-     * @since  4.3.4
-     */
-    static public function getAssociatesRequestCookies( $sLocale, $sLanguage ) {
-        $_oLocale     = new AmazonAutoLinks_Locale( $sLocale );
-        $_sURL        = $_oLocale->getAssociatesURL();
-        $_sLocaleKey  = 'ubid-acb' . strtolower( $sLocale );
-        $_sToken      = sprintf( '%03d', mt_rand( 1, 999 ) )
-            . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) )
-            . '-' . sprintf( '%07d', mt_rand( 1, 9999999 ) );
-        $_iExpires    = time() + ( 86400 * 365 ); // one year
-        $_sDomain     = self::___getCookieDomain( $_sURL );
-        $_aAttributes = array(
-            'expires' => $_iExpires, 'domain' => $_sDomain, 'path' => '/',
-        );
-        $_aCookies    = array(
-            new WP_Http_Cookie( array( 'name' => 'ubid-main',  'value' => $_sToken,  ) + $_aAttributes ),
-            new WP_Http_Cookie( array( 'name' => $_sLocaleKey, 'value' => $_sToken,  ) + $_aAttributes ),
-        );
-        if ( $sLanguage ) {
-            $_aCookies[] = new WP_Http_Cookie( array( 'name' => 'ac-language-preference', 'value' => $sLanguage, ) + $_aAttributes );
-        }
-        return $_aCookies;
-    }
-        /**
-         * Returns the domain part of the given URL for a cookie, allowing the sub-domain part.
-         * e.g. https://affiliate-program.amazon.com/ -> .affiliate-program.amazon.com
-         * @param  string $sURL
-         * @return string
-         * @since  4.3.4
-         * @deprecated unused
-         */
-/*        static private function ___getCookieSubDomain( $sURL ) {
-            $_sHost = parse_url( $sURL, PHP_URL_HOST );
-            return preg_replace( '/^www/', '', $_sHost );
-        }*/
-        /**
-         * Returns the domain part of the given URL for a cookie.
-         * e.g. https://affiliate-program.amazon.com/ -> .amazon.com
-         * @param  string $sURL
-         * @return string
-         * @since  4.3.4
-         */
-        static public function ___getCookieDomain( $sURL ) {
-            $_sHost = parse_url( $sURL, PHP_URL_HOST );
-            return preg_replace("/^(.+\.)?(.+\..+)$/",".$2", $_sHost );
-        }
-
-    /**
-     * @param  string $sLocale
-     * @return string
-     * @since  4.3.4
-     * @deprecated 4.3.4 Use the locale object method.
-     */
-/*    static public function getAssociatesURL( $sLocale ) {
-        $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
-        return $_oLocale->getAssociatesURL();
-    }*/
-
-    /**
-     * Retrieves the category root URL of the given locale.
-     *
-     * Mainly used by the `category` unit type and the routines of retrieving ratings and reviews for cookies.
-     *
-     * @param  string $sLocale
-     * @return string
-     * @since  4.3.4  Moved from `AmazonAutoLinks_Unit_Utility_category`. Renamed from `getCategoryListRootURL()`.
-     * @deprecated 4.3.4    Use the locale object method.
-     */
-//    static public function getBestSellersURL( $sLocale ) {
-//        $_oLocale = new AmazonAutoLinks_Locale( $sLocale );
-//        return $_oLocale->getBestSellersURL();
-//        /*
-//        * @deprecated 4.3.4 Redundant
-//        // @since 3.8.1 Sometimes part of url gets double slashed like https://www.amazon.xxx//gp/top-sellers/office-products/
-//        $_sURL = str_replace("//gp/","/gp/", $_sURL );
-//
-//        // Add a trailing slash; this is tricky, the uk and ca sites have an issue that they display a not-found(404) page when the trailing slash is missing.
-//        // e.g. http://www.amazon.ca/Bestsellers-generic/zgbs won't open but http://www.amazon.ca/Bestsellers-generic/zgbs/ does.
-//        // Note that this problem has started occurring after using wp_remote_get(). So it has something to do with the function.
-//        return trailingslashit( $_sURL );
-//        */
-//
-//    }
-
-
-    /**
      * @param array $aItem  A product array of a PA-API 5 response.
      * @return null|integer The star rating with two digits like 45 for 4.5.
      * @since 4.3.2
@@ -255,32 +46,24 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * There seems to be cases that the response contains rating information.
      *
      * @see https://stackoverflow.com/a/64002035
-     * @param array $aItem  A product array of a PA-API 5 response.
+     * @param array  $aItem  A product array of a PA-API 5 response.
      * @param string $sLocale
+     * @param string $sAssociateID
      * @since 4.3.2
+     * @since 4.3.4 Added the `$sAssociateID` parameter.
      * @return string|null
      */
-    static public function getFormattedRatingFromItem( array $aItem, $sLocale ) {
+    static public function getFormattedRatingFromItem( array $aItem, $sLocale, $sAssociateID ) {
         $_inReviewCount   = self::getReviewCountFromItem( $aItem );
         $_diStarRating    = self::getRatingFromItem( $aItem );
         if ( ! isset( $_inReviewCount, $_diStarRating ) ) {
             return null;
         }
-        $_sReviewURL      = self::getCustomerReviewURL( $aItem[ 'ASIN' ], $sLocale );
+        $_oLocale         = new AmazonAutoLinks_Locale( $sLocale );
+        $_sReviewURL      = $_oLocale->getCustomerReviewURL( $aItem[ 'ASIN' ], $sAssociateID );
         return "<div class='amazon-customer-rating-stars'>"
             . self::getRatingOutput( $_diStarRating, $_sReviewURL, $_inReviewCount )
         . "</div>";
-    }
-
-    /**
-     * @param string $sASIN
-     * @param string $sLocale
-     * @return string
-     * @since 4.3.1
-     */
-    static public function getCustomerReviewURL( $sASIN, $sLocale ) {
-        $_oLocale        = new AmazonAutoLinks_Locale( $sLocale );
-        return $_oLocale->getMarketPlaceURL( '/product-reviews/' . $sASIN );
     }
 
     /**
