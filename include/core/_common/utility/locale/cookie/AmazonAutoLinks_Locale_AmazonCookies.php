@@ -379,8 +379,7 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
          * @since  4.3.4
          */
         private function ___getCookieDomain( $sURL ) {
-            $_sHost = parse_url( $sURL, PHP_URL_HOST );
-            return preg_replace("/.*?([^.]+)(\.((co\.\w+)|\w+))$/i",'.$1$2', $_sHost  );   // strip sub-domain part
+            return '.' . ltrim( self::getSubDomain( $sURL ), '.' );
         }
 
     /**
