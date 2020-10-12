@@ -51,6 +51,13 @@ class AmazonAutoLinks_Locale {
         }
 
     /**
+     * @return AmazonAutoLinks_Locale_Base
+     */
+    public function get() {
+        return $this->oLocale;
+    }
+
+    /**
      * @return string
      */
     public function getDomain() {
@@ -115,11 +122,30 @@ class AmazonAutoLinks_Locale {
     }
 
     /**
+     * @param  string $sASIN
+     * @param  string $sAssociateID
+     * @param  string $sLanguage    A preferred language code.
+     * @return string
+     * @since  4.3.4
+     */
+    public function getCustomerReviewURL( $sASIN, $sAssociateID='', $sLanguage='' ) {
+        return $this->oLocale->getCustomerReviewURL( $sASIN, $sAssociateID, $sLanguage );
+    }
+
+    /**
      * @param  string   $sASIN
      * @return string
      */
     public function getProductRatingWidgetURL( $sASIN ) {
         return $this->oLocale->getProductRatingWidgetURL( $sASIN );
+    }
+
+    /**
+     * @param  string $sLanguage The preferred language.
+     * @return array  An array for the `cookies` argument of `wp_remote_request()`.
+     */
+    public function getHTTPRequestCookies( $sLanguage='' ) {
+        return $this->oLocale->getHTTPRequestCookies( $sLanguage );
     }
 
     /**

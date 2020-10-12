@@ -168,6 +168,7 @@ return array(
     "AmazonAutoLinks_Test_Event_Ajax_Scratches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Scratches.php", 
     "AmazonAutoLinks_Test_Event_Ajax_Tests" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Tests.php", 
     "AmazonAutoLinks_Test_Event_Query_Cookie" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_Cookie.php", 
+    "AmazonAutoLinks_Test_Event_Query_Referer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_Referer.php", 
     "AmazonAutoLinks_Test_ClassLister" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_ClassLister.php", 
     "AmazonAutoLinks_Test_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_Utility.php", 
     "AmazonAutoLinks_MockClass" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/_common/AmazonAutoLinks_MockClass.php", 
@@ -525,5 +526,7 @@ return array(
     "AmazonAutoLinks_Locale_UK" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_UK.php", 
     "AmazonAutoLinks_Locale_US" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_US.php", 
     "AmazonAutoLinks_Locales" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locales.php", 
+    "AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/cookie/AmazonAutoLinks_Locale_AmazonCookies.php", 
+    "AmazonAutoLinks_Locale_AmazonCookies_ViaAcceptForm" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/cookie/AmazonAutoLinks_Locale_AmazonCookies_ViaAcceptForm.php",
     "AmazonAutoLinks_TemplateUtility_NoOuterContainer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/template/AmazonAutoLinks_TemplateUtility_NoOuterContainer.php", 
 );

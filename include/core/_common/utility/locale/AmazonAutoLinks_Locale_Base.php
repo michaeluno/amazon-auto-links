@@ -83,6 +83,7 @@ abstract class AmazonAutoLinks_Locale_Base {
     /**
      * @param  string   $sPath  The URL path preceded by the store URL.
      * @return string   The top store URL without a trailing slash. e.g. https://amazon.com
+     * @since  4.3.4
      */
     public function getMarketPlaceURL( $sPath='' ) {
         $sPath = $sPath
@@ -93,6 +94,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string   e.g. www.amazon.com
+     * @since  4.3.4
      */
     public function getDomain() {
         return $this->sDomain;
@@ -101,6 +103,7 @@ abstract class AmazonAutoLinks_Locale_Base {
     /**
      * @param  string $sASIN
      * @return string Format: https://{host}/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin='{asin}
+     * @since  4.3.4
      */
     public function getProductRatingWidgetURL( $sASIN ) {
         return $this->getMarketPlaceURL(
@@ -109,7 +112,27 @@ abstract class AmazonAutoLinks_Locale_Base {
     }
 
     /**
+     * @param  string $sASIN
+     * @param  string $sAssociateID
+     * @param  string $sLanguage
      * @return string
+     * @since  4.3.4
+     */
+    public function getCustomerReviewURL( $sASIN, $sAssociateID='', $sLanguage='' ) {
+        $_aArguments = array(
+            'language' => $sLanguage,
+            'tag'      => $sAssociateID,
+        );
+        $_aArguments = array_filter( $_aArguments );
+        $_sURL       = $this->getMarketPlaceURL( '/product-reviews/' . $sASIN );
+        return empty( $_aArguments )
+            ? $_sURL
+            : add_query_arg( $_aArguments, $_sURL );
+    }
+
+    /**
+     * @return string
+     * @since  4.3.4
      */
     public function getBestSellersURL() {
         return $this->getMarketPlaceURL() . '/gp/bestsellers/';
@@ -117,6 +140,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getAssociatesURL() {
         return $this->sAssociatesURL;
@@ -124,6 +148,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getBlackCurtainURL() {
         return $this->sBlackCurtainURL;
@@ -131,6 +156,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getNoImageURL() {
         if ( false !== filter_var( $this->sNoImageURL, FILTER_VALIDATE_URL ) ) {
@@ -144,6 +170,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getLocaleNumber() {
         return $this->sLocaleNumber;
@@ -151,6 +178,7 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getFlagImg() {
         return $this->sFlagImg;
@@ -158,26 +186,31 @@ abstract class AmazonAutoLinks_Locale_Base {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getAddToCartURL() {
         return $this->getMarketPlaceURL() . '/gp/aws/cart/add.html';
     }
 
     /**
-     * @param  string $sLanguage
-     * @return array
-     * @todo   Move the method into this class.
+     * @see    WP_Http_Cookie
+     * @param  string $sLanguage The preferred language.
+     * @return array|WP_Http_Cookie[]  An array for the `cookies` argument of `wp_remote_request()`.
+     * @remark Be aware that this method takes time, meaning slow as this performs at least two HTTP requests if not cached.
+     * @since  4.3.4
      */
-    public function getRequestCookies( $sLanguage ) {
-        return AmazonAutoLinks_Unit_Utility::getAmazonSitesRequestCookies( $sLanguage );
+    public function getHTTPRequestCookies( $sLanguage='' ) {
+        $_oCookieGetter = new AmazonAutoLinks_Locale_AmazonCookies( $this, $sLanguage );
+        return $_oCookieGetter->get();
     }
 
     /**
      * @remark The supported locales: US, CA, FR, DE, UK, JP.
-     * @see https://www.assoc-amazon.com/s/impression-counter-common.js
-     * @see https://ir-na.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=15
+     * @see    https://www.assoc-amazon.com/s/impression-counter-common.js
+     * @see    https://ir-na.amazon-adsystem.com/s/impression-counter?tag=%ASSOCIATE_TAG%&o=15
      * @param  string $sAssociatesTag
      * @return string
+     * @since  4.3.4
      */
     public function getImpressionCounterScriptTag( $sAssociatesTag ) {
         $_sLocale = strtolower( $this->sSlug );
