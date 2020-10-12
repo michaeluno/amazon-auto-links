@@ -54,13 +54,16 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
     /**
      * Sets up properties.
      *
+     * @param string $sHTML
      * @param string $sURL
      * @param string $sCharset
+     * @since 4.0.0
+     * @since 4.3.4  Added the `$sHTML` parameter. As HTTP requests to Amazon sites requires cookies, the HTML document is retrieved outside the class.
      */
-    public function __construct( $sURL, $sCharset='' ) {
+    public function __construct( $sHTML, $sURL, $sCharset='' ) {
 
         add_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ), 10, 1 );
-        parent::__construct( $sURL, $sCharset );
+        parent::__construct( $sHTML, $sCharset );
         remove_filter( 'aal_filter_http_request_arguments', array( $this, 'replyToGetHTTPRequestArguments' ), 10 );
 
         $this->_oXPath       = new DOMXPath( $this->oDoc );
@@ -69,23 +72,27 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
 
     }
         /**
-         * @param array $aArguments
+         * Sets a longer timeout value.
+         * The default is 5 (seconds) and it often times out
+         * @param  array $aArguments
          * @return array
-         * @since   4.0.0
-         * @since   4.0.1   Added The `$sRequestType` parameter`
+         * @since  4.0.0
+         * @since  4.0.1 Added the `$sRequestType` parameter.
+         * @since  4.3.1 Removed the `$sRequestType` parameter.
          */
         public function replyToGetHTTPRequestArguments( $aArguments ) {
-            $aArguments[ 'timeout' ] = 15; // the default is 5 (seconds) and it often times out
+            $aArguments[ 'timeout' ] = $aArguments[ 'timeout' ] > 15
+                ? $aArguments[ 'timeout' ]
+                : 15;
             return $aArguments;
         }
 
     /**
-     * @param string $sAssociateID
-     * @param string $sSiteDomain       The store URL of the domain part with scheme without trailing slash. e.g. https://www.amazon.com
-     *
-     * @return array    Returns a single product array.
-     * @since   4.0.0
-     * @since   4.2.2 When failing to retrieve the product information, return a structure array instead of an empty array.
+     * @param  string $sAssociateID
+     * @param  string $sSiteDomain       The store URL of the domain part with scheme without trailing slash. e.g. https://www.amazon.com
+     * @return array  Returns a single product array.
+     * @since  4.0.0
+     * @since  4.2.2  When failing to retrieve the product information, returns a structure array instead of an empty array.
      */
     public function get( $sAssociateID, $sSiteDomain ) {
 
@@ -142,9 +149,10 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
     }
 
         /**
-         * @param $_sRelativeURL
-         * @param $sSiteDomain
-         * @param $sAssociateID
+         * @param  string $sURLMaybeRelative
+         * @param  string $sSiteDomain
+         * @param  string $sAssociateID
+         * @return string
          */
         protected function _getURLResolved( $sURLMaybeRelative, $sSiteDomain, $sAssociateID ) {
             $_sURL = $this->hasPrefix( 'http', $sURLMaybeRelative )
@@ -223,9 +231,17 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             }
             return null;
         }
+
         /**
          *
-         * @return  string
+         * @param  DOMXPath $oXPath
+         * @param  DOMNode  $oRatingNode
+         * @param  integer  $iRatingPoint
+         * @param  integer  $iReviewCount
+         * @param  string   $sASIN
+         * @param  string   $sSiteDomain
+         * @param  string   $sAssociateID
+         * @return string
          */
         protected function _getRatingHTML( DOMXPath $oXPath, $oRatingNode, $iRatingPoint, $iReviewCount, $sASIN, $sSiteDomain, $sAssociateID ) {
             if ( ! $iReviewCount || ! $iRatingPoint ) {
@@ -245,7 +261,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          * @param $sSiteDomain
          * @param $sAssociateID
          *
-         * @return mixed    void|DOMNode
+         * @return mixed    null|DOMNode
          */
         protected function _getRatingNode( DOMXPath $oXPath, $oItemNode, $sSiteDomain, $sAssociateID ) {
             // * is used to match `div` or `span`
@@ -262,12 +278,13 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                 }
                 return $_oRatingNode;
             }
+            return null;
         }
 
         /**
-         * @param DOMXPath $oXPath
-         * @param DOMNode $oItemNode
-         * @return  string|null
+         * @param  DOMXPath $oXPath
+         * @param  DOMNode $oItemNode
+         * @return string|null
          */
         private function ___getDescription( DOMXPath $oXPath, DOMNode $oItemNode ) {
             $_onDescriptions  = $oXPath->query( './/div[@id="productDescription"]//p', $oItemNode );

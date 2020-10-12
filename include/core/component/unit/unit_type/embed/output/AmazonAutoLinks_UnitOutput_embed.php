@@ -48,6 +48,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_aURLs     = array_merge( $aURLs, $_aURLs );
         $_aProducts = array();
         $_iCount    = ( integer ) $this->oUnitOption->get( 'count' );
+        $_sLanguage = $this->oUnitOption->get( 'language' );
         $_sURL      = '';
         foreach( $_aURLs as $_iIndex => $_sURL ) {
             if ( $_iIndex > $_iCount ) {
@@ -57,7 +58,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             $_aASINs       = $this->getASINs( $_sURL );
             $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
             foreach( $_aASINs as $_sASIN ) {
-                $_aProduct = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID );
+                $_aProduct = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID, $_sLanguage );
                 // @deprecated 4.2.2 A structure array is returned on failure instead of an empty array.
 //                if ( empty( $_aProduct ) ) {
 //                    continue;
@@ -66,7 +67,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
 
         }
-        $_sLocale      = $this->___getLocaleFromURL( $_sURL );
+        $_sLocale      = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
         $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
         $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
         $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
@@ -108,23 +109,26 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_oUnit->fetch();
 
         }
-
-        private function ___getProduct( $sURL, $sASIN, $sAssociateID ) {
+        /**
+         * @param  string $sURL
+         * @param  string $sASIN
+         * @param  string $sAssociateID
+         * @param  string $sLanguage
+         * @return array  A product array. Even if it fails to retrieve product data, a structure array will be returned and it's not empty.
+         */
+        private function ___getProduct( $sURL, $sASIN, $sAssociateID, $sLanguage ) {
 
             $_sDomain      = parse_url( $sURL, PHP_URL_SCHEME ) . '://' . parse_url( $sURL, PHP_URL_HOST );
             $_sURL         = add_query_arg(
                 array(
-                    'tag' => $sAssociateID,
+                    'tag'      => $sAssociateID,
+                    'language' => $sLanguage,
                 ),
                 $_sDomain . '/dp/' . $sASIN . '/'
             );
 
-
-            add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
-            add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
-            add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20, 2 );
-
-            $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sURL );
+            $_sHTML    = $this->___getProductPage( $_sURL, $sLanguage );
+            $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sURL );
             $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
 
             // @deprecated 4.2.2 Even if it fails to retrieve product data, a structure array will be returned and it's not empty
@@ -167,6 +171,39 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         }
 
             /**
+             * @param  string $sURL
+             * @param  string $sLanguage
+             * @return string
+             * @since  4.3.4
+             */
+            private function ___getProductPage( $sURL, $sLanguage ) {
+
+                add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
+                add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
+                add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20, 2 );
+
+                $_sLocale = AmazonAutoLinks_Locales::getLocaleFromURL( $sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
+                $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+                $_oHTTP   = new AmazonAutoLinks_HTTPClient(
+                    $sURL,
+                    86400,
+                    array(
+                        'timeout'     => 20,    // 20 seconds as the default is 5 seconds and it often times out
+                        'redirection' => 20,
+                        'cookies' => $_oLocale->getHTTPRequestCookies( $sLanguage ),
+                    ),
+                    $this->sUnitType . '_unit_type' // request type
+                );
+
+                $_sHTTPBody = $_oHTTP->getBody();
+                remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+                remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+                remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20 );
+
+                return $_sHTTPBody;
+
+            }
+            /**
              * @param string $sURL
              *
              * @return  string
@@ -183,27 +220,13 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 }
 
                 $_sHost   = parse_url( $sURL, PHP_URL_HOST ); // without https://
-                $_sLocale = AmazonAutoLinks_Property::getLocaleByDomain( $_sHost );
+                $_sLocale = AmazonAutoLinks_Locales::getLocaleByDomain( $_sHost );
                 $_sSetAssociatesID = $this->oOption->get( 'custom_oembed', 'associates_ids', $_sLocale );
                 return $_sSetAssociatesID
                     ? $_sSetAssociatesID
                     : ( string ) $this->oUnitOption->get( 'associate_id' );
 
             }
-            /**
-             * @param $sURL
-             *
-             * @return string
-             */
-            private function ___getLocaleFromURL( $sURL ) {
-                $_sDomain        = parse_url( $sURL, PHP_URL_HOST );
-                $_bisKey         = array_search( $_sDomain, AmazonAutoLinks_Property::$aStoreDomains );
-                $_sDefaultLocale = ( string ) $this->oUnitOption->get( array( 'country' ), 'US' );
-                return false === $_bisKey
-                    ? $_sDefaultLocale
-                    : $_bisKey;
-            }
-
 
     /**
      * Overrides parent method to return errors specific to this embed unit type.
@@ -218,7 +241,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
          */
         if ( ! $this->oOption->isAPIConnected() && ! empty( $this->___aErrors ) ) {
-            $_sErrors =  implode( ' ', $this->___aErrors );
+            $_sErrors = implode( ' ', $this->___aErrors );
             $this->___aErrors = array();
             return $_sErrors;
         }
