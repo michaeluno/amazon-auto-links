@@ -28,7 +28,8 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
      * 
      * @since       3.2.0
      * @since       3.8.1       Added the `$aURLs` parameter to accept direct URLs to be passsed.
-     * @scope       protected       The 'url' unit type will extend this method.
+     * @scope       protected   The 'url' unit type will extend this method.
+     * @param       array       $aURLs
      * @return      array
      */
     protected function _getResponses( array $aURLs=array() ) {
@@ -38,7 +39,6 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * Also updates the `_found_items` unit option.
          */
         $_aURLs  = array_merge( $aURLs, $this->getAsArray( $this->oUnitOption->get( 'urls' ) ) );
-        $_aURLs  = $this->_getURLs( $_aURLs );
         $_aHTMLs = $this->_getHTMLBodies( $_aURLs );
         
         // Retrieve ASINs from the given documents. Supports plain text.
@@ -97,17 +97,6 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
         }
 
         /**
-         * Returns the subject urls for this unit.
-         * @scope   protected   the category2 unit output class extends this method to set own URLs.
-         * @param   $asURLs
-         * @since   3.8.1
-         * @return  array
-         */
-        protected function _getURLs( $asURLs ) {
-            return $this->getAsArray( $asURLs );
-        }
-
-        /**
          *
          * @param       array   $aURLs
          * @since       unknown
@@ -115,21 +104,32 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          * @return      array
          */
         protected function _getHTMLBodies( array $aURLs ) {
-            $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
-                $aURLs,
-                $this->oUnitOption->get( 'cache_duration' ),
-                array(  // http arguments
-                    'timeout'     => 20,
-                    'redirection' => 20,
-                ),
-                $this->sUnitType . '_unit_type' // request type
-            );
-            $_aHTMLBodies = $_oHTTP->get();
 
+            $_aHTMLBodies    = array();
+            $_iCacheDuration = ( integer ) $this->oUnitOption->get( 'cache_duration' );
+            foreach( $aURLs as $_sURL ) {
+                $_aCookies = array();
+                if ( $this->isAmazonURL( $_sURL ) ) {
+                    $_sLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL );
+                    $_oLocale  = new AmazonAutoLinks_Locale( $_sLocale );
+                    $_aCookies = $_oLocale->getHTTPRequestCookies();
+                }
+                $_oHTTP    = new AmazonAutoLinks_HTTPClient(
+                    $_sURL,
+                    $_iCacheDuration,
+                    array(  // http arguments
+                        'timeout'     => 20,
+                        'redirection' => 20,
+                        'cookies'     => $_aCookies,
+                    ),
+                    $this->sUnitType . '_unit_type' // request type
+                );
+                $_aHTMLBodies[ $_sURL ] = $_oHTTP->getBody();
+            }
             // Set a debug output
             $this->___setDebugInfoForHTMLBodies( $_aHTMLBodies );
-            
             return $_aHTMLBodies;
+
         }
             
             /**
@@ -138,10 +138,11 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
              */
             private $_aHTMLs = array();
             /**
+             * @param      array $aHTMLs
              * @since      3.2.2
              * @return     void
              */
-            private function ___setDebugInfoForHTMLBodies( $aHTMLs ) {
+            private function ___setDebugInfoForHTMLBodies( array $aHTMLs ) {
                 if ( ! $this->oOption->isDebug() ) {
                     return;
                 }
