@@ -108,7 +108,7 @@ class AmazonAutoLinks_Event_Scheduler {
             foreach( $_aChunks as $__aTaskRows ) {
                 $_oTaskTable->insertRowsIgnore( $__aTaskRows );
             }
-            AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks' );
+            self::scheduleTaskCheck( time() );
             AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
 
         }
@@ -240,7 +240,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 foreach( $_aChunks as $__aTaskRows ) {
                     $_oTaskTable->insertRowsIgnore( $__aTaskRows );
                 }
-                AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks' );
+                self::scheduleTaskCheck( time() );
 
             }
 
@@ -328,6 +328,42 @@ class AmazonAutoLinks_Event_Scheduler {
             );
             return true;
             
-        }    
-    
+        }
+
+    /**
+     * Schedule a task check.
+     * @param  integer iTime The scheduling time.
+     * If a time is not given, it will schedule with the most closest scheduled time, regardless of whether a duplicate exists or not.
+     * @param  boolean $bDuplicateCheck
+     * @return boolean  true on success; otherwise, false.
+     */
+    static public function scheduleTaskCheck( $iTime=0, $bDuplicateCheck=true ) {
+
+        if ( version_compare( get_option( 'aal_tasks_version', '0' ), '1.0.0b01', '<' ) ) {
+            return false;
+        }
+
+        if ( $iTime ) {
+            $_aArguments = $bDuplicateCheck ? array() : array( $iTime );
+            return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks', $_aArguments, $iTime );
+        }
+
+        $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+        $_aDueItems  = AmazonAutoLinks_Utility::getAsArray( $_oTaskTable->getDueItems() );
+        $_aFirstTask = reset( $_aDueItems );
+        if ( empty( $_aFirstTask ) ) {
+            return false;
+        }
+        $_sTime = AmazonAutoLinks_Utility::getElement( $_aFirstTask, 'next_run_time', '' );
+        if ( empty( $_sTime ) ) {
+            return false;
+        }
+        $_iTime = strtotime( $_sTime );
+
+        // Giving a unique argument so the duplicate check will pass.
+        $_aArguments = $bDuplicateCheck ? array() : array( $_iTime );
+        return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks', $_aArguments, $_iTime );
+
+    }
+
 }
