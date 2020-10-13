@@ -32,15 +32,28 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
         if ( empty( $_aRow ) ) {
             return;
         }
-
-        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-        if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '<' ) ) {
-            $_oProductTable->setRowByASINLocale( $sASIN . '_' . strtoupper( $sLocale ), $_aRow, $sCurrency, $sLanguage );
-            return;
-        }
-        $_oProductTable->setRow( $_aRow );
+        $this->___setRow( $_aRow, $sASIN, $sLocale, $sCurrency, $sLanguage );
 
     }
+
+        /**
+         * @param array  $aRow
+         * @param string $sASIN
+         * @param string $sLocale
+         * @param string $sCurrency
+         * @param string $sLanguage
+         *
+         * @since 4.3.4
+         */
+        private function ___setRow( array $aRow, $sASIN, $sLocale, $sCurrency, $sLanguage ) {
+            $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            if ( version_compare( get_option( 'aal_products_version', '0' ), '1.4.0b01', '<' ) ) {
+                $_oProductTable->setRowByASINLocale( $sASIN . '_' . strtoupper( $sLocale ), $aRow, $sCurrency, $sLanguage );
+                return;
+            }
+            $_oProductTable->setRow( $aRow );
+        }
+
         /**
          * @param array   $aParameters
          * @param string  $sASIN
@@ -101,34 +114,19 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                     'renew_cache' => ( boolean ) $bForceRenew,
                 );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
-                $_aoResponse = $_oHTTP->getResponse();
+                $_aoResponse      = $_oHTTP->getResponse();
 
-                // Blocked due to lack of proper cookies.
-                if ( is_wp_error( $_aoResponse ) ) {
-
-                    /**
-                     * If it is blocked by captcha, try another request with the response cookies.
-                     * @var WP_Error $_aoResponse
-                     */
-                    if ( $this->hasPrefix( 'BLOCKED_BY_CAPTCHA', trim( $_aoResponse->get_error_code() ) ) ) {
-
-                        $_aArguments[ 'cookies' ] = array_reverse(
-                            array_merge(
-                                $_aRequestCookies,
-                                $_oLocale->getHTTPRequestCookies( $sLanguage ),
-                                $this->getRequestCookiesFromResponse( $_oHTTP->getRawResponse() )
-                            )
-                        );
-                        $_oHTTP            = new AmazonAutoLinks_HTTPClient(
-                            $sURL,
-                            $iCacheDuration,
-                            $_aArguments,
-                            'rating'
-                        );
-                        $_oHTTP->deleteCache();
-                        $_aoResponse = $_oHTTP->getRawResponse();
-
-                    }
+                // If 404, try again
+                if ( 404 === $_oHTTP->getStatusCode() ) {
+                    $_aArguments[ 'renew_cache' ] = true;
+                    $_aArguments[ 'cookies' ]     = array_merge( $_oHTTP->getCookies(), $_aRequestCookies );
+                    $_oHTTP                       = new AmazonAutoLinks_HTTPClient(
+                        $sURL,
+                        $iCacheDuration,
+                        $_aArguments,
+                        'rating'
+                    );
+                    $_aoResponse  = $_oHTTP->getResponse();
                 }
                 $oHTTP = $_oHTTP;
                 return $_aoResponse;
