@@ -28,14 +28,16 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return false;
         }
-        if ( $this->_isLocked( func_get_args(), 1 ) ) {
-            return false;
-        }
-
         $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
         if ( version_compare( $_oTaskTable->getVersion(), '1.0.0b01', '<' ) ) {
             return false;
         }
+
+        if ( $this->_isLocked( func_get_args(), 1 ) ) {
+            AmazonAutoLinks_Event_Scheduler::scheduleTaskCheck( time() + 1, false );
+            return false;
+        }
+
         return true;
 
     }
@@ -50,7 +52,9 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
         $_aTasks       = array();
         $_aPseudoLocks = array();
         $_iNextRunTime = date( 'Y-m-d H:i:s', time() + $this->getAllowedMaxExecutionTime( 30, 300 ) - 1 );
+        $_iResentTask  = 0;
         foreach( $this->___getDueTasks() as $_aTask ) {
+            $_iResentTask    = $_iResentTask ? $_iResentTask : $_aTask[ 'next_run_time' ];
             $_aPseudoLocks[] = array(
                 'name'          => $_aTask[ 'name' ],
                 'next_run_time' => $_iNextRunTime,
@@ -62,8 +66,12 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
             return;
         }
 
+        // In case if the current PHP script does not complete, another task check needs to be scheduled.
+        AmazonAutoLinks_Event_Scheduler::scheduleTaskCheck( $_iResentTask, false );
+
+        // Pseudo Lock - extending the `next_run_time` time so that they won't be checked by other processes.
         $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
-        $_oTaskTable->setRows( $_aPseudoLocks );  // extending the `next_run_time` time so that they won't be checked
+        $_oTaskTable->setRows( $_aPseudoLocks );
 
         foreach( $_aTasks as $_sActionName => $_aActionTasks ) {
 
