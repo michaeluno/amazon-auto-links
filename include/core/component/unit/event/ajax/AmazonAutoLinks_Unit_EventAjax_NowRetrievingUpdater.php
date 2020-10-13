@@ -52,15 +52,17 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 $this->___getElementsByASINLocaleCurLang( $_aDueElements, $_aProducts )
             );
         }
-        $this->___handleRatingsAndReviews( $_aElements );
+        // @deprecated 4.3.4
+        // $this->___handleRatingsAndReviews( $_aElements );
         return $_aElements;
 
     }
         /**
          * @param array $aResults
          * @since 4.3.1
+         * @deprecated 4.3.4    These request requires certain intervals so leave it to wp-cron.
          */
-        private function ___handleRatingsAndReviews( array $aResults ) {
+/*        private function ___handleRatingsAndReviews( array $aResults ) {
 
             // Extract only the review and rating items.
             $_aRatingItems = array();
@@ -110,7 +112,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 );
             }
 
-        }
+        }*/
 
         /**
          * @param array $aAllItems
