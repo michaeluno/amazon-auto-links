@@ -324,6 +324,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.4 =
+- Added the Saudi Arabia locale.
 - Fixed a bug that country flags were not displayed in the `Embed` setting tab.
 
 = 4.3.3 - 10/04/2020 =
