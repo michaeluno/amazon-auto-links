@@ -40,6 +40,7 @@ return array(
     "Test_AmazonAutoLinks_HTTPClient_Reviews" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/review/Test_AmazonAutoLinks_HTTPClient_Reviews.php", 
     "Test_AmazonAutoLinks_HTTPClient_WidgetPages" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/widget/Test_AmazonAutoLinks_HTTPClient_WidgetPages.php", 
     "AmazonAutoLinks_UnitTest_WordPress" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress.php", 
-    "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php",
+    "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
+    "AmazonAutoLinks_UnitTest_WordPress_add_action" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/add_action/AmazonAutoLinks_UnitTest_WordPress_add_action.php", 
     "Test_wp_remote_head" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/wp_remote_request/Test_wp_remote_head.php", 
 );
