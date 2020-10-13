@@ -18,6 +18,7 @@
 class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview {
 
     protected $_sActionHookName = 'aal_action_api_get_product_rating';
+    protected $_iCallbackParameters = 3;
 
     /**
      *

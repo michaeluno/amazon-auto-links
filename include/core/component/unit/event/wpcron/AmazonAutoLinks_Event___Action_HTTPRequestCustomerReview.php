@@ -16,8 +16,8 @@
  */
 class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAutoLinks_Event___Action_Base {
 
-    protected $_sActionHookName = 'aal_action_api_get_customer_review';
-
+    protected $_sActionHookName     = 'aal_action_api_get_customer_review';
+    protected $_iCallbackParameters = 3;
     /**
      * @return bool
      * @since 4.3.0
@@ -33,7 +33,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
      *
      */
     protected function _doAction( /* $sProductID, $iCacheDuration, $bForceRenew */ ) {
-        
+
         $_aParams        = func_get_args() + array( null, null, null );
         $_iCacheDuration = $_aParams[ 1 ];
         $_bForceRenew    = $_aParams[ 2 ];
