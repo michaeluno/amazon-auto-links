@@ -466,7 +466,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
                     // Button - check if the %button% variable exists in the item format definition.
                     // It accesses the database, so if not found, the method should not be called.
-                    if ( $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%button%', ) ) ) {
+                    if ( $this->oUnitOption->hasItemFormatTags( array( '%button%', ) ) ) {
                         $_aProduct[ 'button' ] = $this->_getButton(
                             $this->oUnitOption->get( 'button_type' ),
                             $this->_getButtonID(),

@@ -160,12 +160,12 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
 
                 // Reviews
-                if ( AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%' ) ) ) {
+                if ( AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%review%' ) ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleReview( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
                 }
 
                 // Ratings
-                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to with ratings.
+                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to with ratings.
                     return;
                 }
                 AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );

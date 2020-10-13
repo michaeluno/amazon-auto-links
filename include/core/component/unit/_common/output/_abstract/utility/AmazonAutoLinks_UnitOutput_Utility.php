@@ -46,16 +46,20 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
 
     /**
      * Checks if a given custom variable(s) exists in a subject string.
+     *
+     * If muliple tags are given, when at least one of them exists, true will be returned.
+     * @param       string      $sSubject
+     * @param       array       $aTags
      * @return      boolean
      * @since       3
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base`.
      */
-    static public function hasCustomVariable( $sSubject, array $aKeys = array( '%price%', '%rating%', '%review%', '%image_set%' ) ) {
+    static public function hasItemFormatTagsIn( $sSubject, array $aTags = array( '%price%', '%rating%', '%review%', '%image_set%' ) ) {
         $_aKeysNeedle = array();
-        foreach( $aKeys as $_sKey ) {
-            $_aKeysNeedle[] = '\Q' . $_sKey . '\E';
+        foreach( $aTags as $_sTag ) {
+            $_aKeysNeedle[] = '\Q' . $_sTag . '\E';
         }
-        return preg_match(
+        return ( boolean ) preg_match(
             '/(' . implode( '|', $_aKeysNeedle ) . ')/',  // '/(\Q%price%\E|\Q%rating%\E|\Q%review%\E|\Q%image_set%\E)/'
             $sSubject
         );

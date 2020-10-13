@@ -201,7 +201,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         public function replyToModifyRawTitle( $sTitle ) {
             return $sTitle;
         }
-    
+
         /**
          * Checks whether the unit needs to access the plugin custom database table.
          * 
@@ -213,10 +213,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___hasCustomDBTableAccess() {
 
-            $_bUseDatabaseVariables =  $this->hasCustomVariable(
-                $this->oUnitOption->get( 'item_format' ),
-                $this->_aItemFormatDatabaseVariables
-            );
+            $_bUseDatabaseVariables =  $this->oUnitOption->hasItemFormatTags( $this->_aItemFormatDatabaseVariables );
             if ( $_bUseDatabaseVariables ) {
                 return true;
             }

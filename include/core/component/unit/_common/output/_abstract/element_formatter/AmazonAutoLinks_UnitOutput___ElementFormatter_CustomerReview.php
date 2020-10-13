@@ -23,10 +23,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview extends Amazo
     public function get() {
 
         // Avoid accessing DB as it triggers a background routine when a value is not set
-        if ( ! ( boolean ) $this->hasCustomVariable(
-            $this->_oUnitOption->get( 'item_format' ),
-            array( '%review%' )
-        ) ) {
+        if ( ! $this->_oUnitOption->hasItemFormatTags( array( '%review%' ) ) ) {
             return '';
         }
 

@@ -942,13 +942,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
                 // Button - check if the %button% variable exists in the item format definition.
                 // It accesses the database, so if not found, the method should not be called.
-                if (
-                    $this->hasCustomVariable(
-                        $this->oUnitOption->get( 'item_format' ),
-                        array( '%button%', )
-                    )
-                ) {
-
+                if ( $this->oUnitOption->hasItemFormatTags( array( '%button%', ) ) ) {
                     $_aProduct[ 'button' ] = $this->_getButton(
                         $this->oUnitOption->get( 'button_type' ),
                         $this->_getButtonID(),
@@ -959,7 +953,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $this->oOption->get( 'authentication_keys', 'access_key' ), // public access key
                         $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                     );
-    
                 }
 
                 /**
@@ -1011,9 +1004,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since  3.8.11
              */
             private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
-//                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%image_set%', ) ) ) {
-//                    return '';
-//                }
                 $_aImages = $this->getImageSet( $aItem );
                 return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages );
             }
@@ -1025,9 +1015,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
              */
             private function ___getCategories( array $aItem ) {
-//                if ( ! $this->hasCustomVariable( $this->oUnitOption->get( 'item_format' ), array( '%category%', ) ) ) {
-//                    return '';
-//                }
                 $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
                 return $this->getCategories( $_aNodes );
             }

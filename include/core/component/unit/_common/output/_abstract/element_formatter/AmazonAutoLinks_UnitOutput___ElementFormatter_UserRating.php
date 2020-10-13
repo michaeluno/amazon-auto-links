@@ -28,10 +28,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
         }
 
         // Avoid accessing DB as it triggers a background routine when a value is not set
-        if ( ! ( boolean ) $this->hasCustomVariable(
-            $this->_oUnitOption->get( 'item_format' ),
-            array( '%rating%' )
-        ) ) {
+        if ( ! $this->_oUnitOption->hasItemFormatTags( array( '%rating%' ) ) ) {
             return '';
         }
 

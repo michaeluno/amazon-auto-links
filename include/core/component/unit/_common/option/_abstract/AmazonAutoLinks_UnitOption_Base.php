@@ -45,7 +45,14 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * @remark      Should be defined in an extended class.
      */
     public $aDefault = array();
-    
+
+    /**
+     * @var    array Stores tags in the `item_format` uint argument.
+     * @remark Used to check whether database access is required and for the now-retrieving updater to know which element to update.
+     * @since  4.3.4
+     */
+    public $aItemFormatTags = array();
+
     /**
      * Stores the associated options to the unit.
      */
@@ -61,21 +68,36 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
 
-        $this->iUnitID      = $iUnitID;
-        $this->aDefault     = array(
+        $this->iUnitID         = $iUnitID;
+        $this->aDefault        = array(
                 'unit_type' => $this->sUnitType,
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
             + $_oOption->get( 'unit_default' )      // 3.4.0+
             ;
-        $this->aUnitOptions = $iUnitID
+        $this->aUnitOptions    = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
                 + $this->getPostMeta( $iUnitID, '', $_oOption->get( 'unit_default' ) )
             : $aUnitOptions;
-        $this->aUnitOptions = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
+        $this->aUnitOptions    = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
+
+        // [4.3.4]
+        $this->aItemFormatTags = $this->___getItemFormatTags( $this->get( 'item_format' ) );
+
     }
+        /**
+         * Extracts tags from the `item format` unit argument.
+         * @param  string $sItemFormat
+         * @return array
+         * @since  4.3.4
+         */
+        private function ___getItemFormatTags( $sItemFormat ) {
+            preg_match_all( '/%[\w_]+%/', $sItemFormat, $_aMatches );
+            return $this->getAsArray( $_aMatches[ 0 ] );
+        }
+
         /**
          * @return      array
          */
@@ -333,9 +355,10 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     /**
      * Sets a value to the specified keys.
      * 
-     * @param       array|string        $asOptionKey        The key path. e.g. 'search_per_keyword'
-     * @return      void
-     * @since       3.1.4
+     * @param  array|string $asOptionKey The key path. e.g. 'search_per_keyword'
+     * @param  mixed        $mValue
+     * @return void
+     * @since  3.1.4
      */
     public function set( $asOptionKey, $mValue ) {
         $this->setMultiDimensionalArray( 
@@ -343,6 +366,18 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             $this->getAsArray( $asOptionKey ),
             $mValue
         );
+    }
+
+    /**
+     * @param  array   $aTagsToSearch The `item_format` unit argument tags to search.
+     * @since  4.3.4
+     * @return boolean
+     * @remark Similar to AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn() but not static and more efficient.
+     * @see AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn()
+     */
+    public function hasItemFormatTags( array $aTagsToSearch ) {
+        $_aIntersect = array_intersect( $this->aItemFormatTags, $aTagsToSearch );
+        return ! empty( $_aIntersect );
     }
     
 }

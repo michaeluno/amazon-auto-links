@@ -37,14 +37,14 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
      */
     public function get() {
 
-        if ( ! $this->___hasItemFormatVariable( array( '%similar%' ) ) ) {
+        if ( ! $this->_oUnitOption->hasItemFormatTags( array( '%similar%' ) ) ) {
             return '<!-- Similar products are not enabled -->';
         }
 
         // 3.9. this feature is deprecated
         return '';
 
-        $_snEncodedHTML = $this->_getCell( 'similar_products' );
+/*        $_snEncodedHTML = $this->_getCell( 'similar_products' );
         if ( null === $_snEncodedHTML && $this->_oUnitOption->get( '_search_similar_products' ) ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving similar products.', 'amazon-auto-links' ),
@@ -53,19 +53,9 @@ class AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems extends AmazonAu
             );
         }
         return $this->___getFormattedOutput( $_snEncodedHTML );
+*/
 
     }
-        /**
-         * @param array $aVariables
-         *
-         * @return boolean
-         */
-        private function ___hasItemFormatVariable( array $aVariables ) {
-            return ( boolean ) $this->hasCustomVariable(
-                $this->_oUnitOption->get( 'item_format' ),
-                $aVariables
-            );
-        }
 
         /**
          * @since   3.5.0
