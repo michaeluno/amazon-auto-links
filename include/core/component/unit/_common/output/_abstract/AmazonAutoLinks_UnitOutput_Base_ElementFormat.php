@@ -216,14 +216,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
              * In order to perform a background task scheduling when a row is not found,
              * pass the associate ID.
              *
-             * @remark      The keys of the database rows must be formatted to have {asin}_{locale}.
-             * @return      array
-             * @since       3
-             * @since       3.5.0       Changed the visibility scope from protected.
-             * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
-             * @since       3.9.0       Added the $_sCurrency, $_sLanguage parameters.
+             * @remark The keys of the database rows must be formatted to have {asin}_{locale}.
+             * @param  array  $aDBRows
+             * @param  string $sASIN
+             * @param  string $sLocale
+             * @param  string $sAssociateID
+             * @param  string $_sCurrency
+             * @param  string $_sLanguage
+             * @return array
+             * @since  3
+             * @since  3.5.0  Changed the visibility scope from protected.
+             * @since  3.5.0  Moved from `AmazonAutoLinks_UnitOutput_Base_CustomDBTable`.
+             * @since  3.9.0  Added the $_sCurrency, $_sLanguage parameters.
              */
-            private function ___getDBProductRow( $aDBRows, $sASIN, $sLocale, $sAssociateID, $_sCurrency, $_sLanguage ) {
+            private function ___getDBProductRow( array $aDBRows, $sASIN, $sLocale, $sAssociateID, $_sCurrency, $_sLanguage ) {
 
                 if ( ! $this->bDBTableAccess ) {
                     return array();
@@ -244,9 +250,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 return $_aDBProductRow;
 
             }
+
                 /**
-                 * @since       3.5.0
-                 * @return      boolean
+                 * @param  array   $aDBProductRow
+                 * @param  string  $sAssociateID
+                 * @return boolean
+                 * @since  3.5.0
                  */
                 private function ___shouldRenewRow( $aDBProductRow, $sAssociateID ) {
                     if ( empty( $aDBProductRow ) && $sAssociateID ) {
@@ -260,7 +269,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
     /**
      * Returns the formatted product thumbnail HTML block.
-     * 
+     *
+     * @param       array       $aProduct
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductThumbnail()`.
      * @return      string
@@ -294,7 +304,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
     /**
      * Strips tags and truncates the given string.
-     * 
+     *
+     * @param string $sDescription
+     * @param null|integer|double $nMaxLength   A numeric value that determines the length.
+     * @param string $sReadMoreText
+     *
+     * @return string
      * @since       unknown
      * @since       3.3.0       Renamed from `sanitizeDescription()`.
      */
@@ -345,7 +360,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * Sanitizes the raw title. 
      * 
      * This does not create a final result of the title as this method is called from sorting items as well.
-     * 
+     *
+     * @param       string  $sTitle
      * @remark      Used for sorting as well.
      * @since       3
      * @return      string
@@ -372,7 +388,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @param string         $sLocale
      * @param string         $sAssociateID
      * @param string         $sAccessKey
-     * @param string         $sButtonLabelToOverride
+     * @param string         $nsButtonLabelToOverride
      *
      * @return      string
      * @since       3
@@ -422,6 +438,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     }
 
     /**
+     * @param       array $aItem
      * @return      string
      * @since       3.3.0
      * @since       3.5.0   Renamed from `getContents()`.
