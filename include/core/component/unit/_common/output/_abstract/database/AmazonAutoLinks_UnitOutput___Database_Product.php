@@ -120,7 +120,7 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_bIsExpired      = $this->isExpired( $_iExpirationTime );
             $_bShouldSchedule = $_bIsExpired || ! $_bIsSet; // 3.8.5 When the value is not set, schedule retrieving extra product information
 
-            $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration );
+            $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration, $sColumnName );
             $this->___addDebugInformation(
                 $_bIsSet,
                 $sColumnName,
@@ -137,28 +137,50 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
              * Schedules a background task to retrieve product info.
              * @param boolean $bShouldSchedule
              * @param array   $aScheduleTask
-             * @param integer $_iCacheDuration
+             * @param integer $iCacheDuration
+             * @param string  $sColumnName
              * @since 3.5.0
              * @since 4.3.0   Deprecated the `$aAPIRawItem` parameter.
+             * @since 4.3.4   Added the `$sColumnName` parameter.
              */
-            private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $_iCacheDuration ) {
+            private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $iCacheDuration, $sColumnName ) {
                 if ( ! $bShouldSchedule ) {
                     return;
                 }
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {
                     return;
                 }
-                $_sLocale   = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
-                $_sCurrency = $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
-                $_sLanguage = $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
+                $iCacheDuration  = ( integer ) $iCacheDuration;
+                $_sLocale        = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sCurrency      = $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+                $_sLanguage      = $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
+                $_aRatingColumns = array( 'rating', 'rating_image_url', 'rating_html', 'number_of_reviews' );
+                $_aReviewColumns = array( 'customer_review_url', 'customer_review_charset', 'customer_reviews' );
+                if ( ! in_array( $sColumnName, array_merge( $_aRatingColumns, $_aReviewColumns ), true ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
+                        $aScheduleTask[ 'associate_id' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
+                        $aScheduleTask[ 'asin' ],
+                        ( integer ) $iCacheDuration,
+                        ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
+                        $this->_oUnitOption->get( 'item_format' )
+                    );
+                    return;
+                }
 
-                AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
-                    $aScheduleTask[ 'associate_id' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
-                    $aScheduleTask[ 'asin' ],
-                    ( integer ) $_iCacheDuration,
-                    ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
-                    $this->_oUnitOption->get( 'item_format' )
-                );
+                // Schedule review/rating routines.
+                if ( in_array( $sColumnName, $_aRatingColumns ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleRatingIfNoProductInformationRoutines( 
+                        $aScheduleTask[ 'asin' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
+                        ( integer ) $iCacheDuration, 
+                        ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ) 
+                    );
+                    return;
+                }
+
+                if ( in_array( $sColumnName, $_aReviewColumns ) ) {
+                    // @todo schedule a review background routine.
+                }
+
             }
 
             /**

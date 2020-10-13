@@ -57,10 +57,51 @@ class AmazonAutoLinks_Event_Scheduler {
      * @var array Stores items holding product information including ASIN, locale, currency and language to update their ratings.
      * @since 4.3.4
      */
+    static private $___aRatingItemsIfNoPIR = array();
+    /**
+     * Schedules a background task to retrieve a product rating if a product information routine is not scheduled.
+     * @param string  $sProductID       ASIN|locale|currency|language
+     * @param integer $iCacheDuration
+     * @param boolean $bForceRenew
+     * @since 4.3.4
+     * @return boolean|void
+     */
+    static public function scheduleRatingIfNoProductInformationRoutines( $sProductID, $iCacheDuration, $bForceRenew ) {
+        if ( ! AmazonAutoLinks_Utility::hasBeenCalled( __METHOD__ ) ) {
+            // must be called before `_replyToScheduleProductsInformation()`.
+            add_action( 'shutdown', array( __CLASS__, 'replyToQueueRatingRetrievalIfNoPIR' ), 1 );
+        }
+        self::$___aRatingItemsIfNoPIR[] = func_get_args();
+    }
+        /**
+         * Adds a background routine of product rating retrieval
+         * only IF a product information routine for the product is not added.
+         * @callback add_action() shutdown
+         */
+        static public function replyToQueueRatingRetrievalIfNoPIR() {
+            if ( empty( self::$___aRatingItemsIfNoPIR ) ) {
+                return;
+            }
+            foreach( self::$___aRatingItemsIfNoPIR as $_aParameters ) {
+                $_aParameters = $_aParameters + array( null, null, null );
+                $_sProductID = $_aParameters[ 0 ];
+                // If the product information routine is added for this product, do not schedule this routine.
+                if ( in_array( $_sProductID, self::$___aScheduledProductIDs ) ) {
+                    continue;
+                }
+                self::scheduleRating( $_sProductID, $_aParameters[ 1 ], $_aParameters[ 2 ] );
+            }
+            AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+        }
+
+    /**
+     * @var array Stores items holding product information including ASIN, locale, currency and language to update their ratings.
+     * @since 4.3.4
+     */
     static private $___aRatingItems = array();
     /**
      * Schedules a background task to retrieve a product rating.
-     * @param string $sProductID
+     * @param string  $sProductID       ASIN|locale|currency|language
      * @param integer $iCacheDuration
      * @param boolean $bForceRenew
      * @since 4.3.4
@@ -79,7 +120,7 @@ class AmazonAutoLinks_Event_Scheduler {
             return true;
         }
         if ( empty( self::$___aRatingItems ) ) {
-            add_action( 'shutdown', array( __CLASS__, 'replyToQueueRatingRetrieval' )  );
+            add_action( 'shutdown', array( __CLASS__, 'replyToQueueRatingRetrieval' ), 20 );
         }
         self::$___aRatingItems[ $sProductID ] = func_get_args();
         return;    // whether scheduled or not is unknown.
@@ -114,29 +155,34 @@ class AmazonAutoLinks_Event_Scheduler {
         }
 
     /**
-     * @var array
-     * @since   3.7.7
+     * @var   array
+     * @since 3.7.7
      */
     static private $___aScheduledProductInformation = array();
+    /**
+     * @var    array Stores product IDs of scheduled background routines of product information retrieval.
+     * @remark Referred by `...IfNoProductInformationRoutine()` methods.
+     * @since  4.3.4
+     */
+    static private $___aScheduledProductIDs = array();
 
     /**
      * Schedules an action of getting product information in the background.
      *
-     * @param string    $sAssociateIDLocaleCurLang
-     * @param string    $sASIN
-     * @param integer   $iCacheDuration
-     * @param boolean   $bForceRenew
-     * @param string    $sItemFormat
-     *
-     * @return      void
-     * @since       3
-     * @since       3.5.0       Renamed from `getProductInfo()`.
-     * @since       3.7.0       Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
-     * @since       3.7.7       Changed the return value to `void` as no calls use it and this method is going to schedule multiple items at once.
-     * @since       3.8.12      Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
-     * @since       3.9.0       Changed the first parameter to be associate_id|locale|currency|language from associate_id|locale.
-     * @since       3.9.0       Removed the `$sLocale` parameter
-     * @since       4.3.0       Deprecated the `$aAPIRawItem` parameter as it was not used.
+     * @param  string    $sAssociateIDLocaleCurLang
+     * @param  string    $sASIN
+     * @param  integer   $iCacheDuration
+     * @param  boolean   $bForceRenew
+     * @param  string    $sItemFormat
+     * @return void
+     * @since  3
+     * @since  3.5.0     Renamed from `getProductInfo()`.
+     * @since  3.7.0     Added the `$sItemFormat` parameter so that the background routine can check whether to perform optional HTTP API requests.
+     * @since  3.7.7     Changed the return value to `void` as no calls use it and this method is going to schedule multiple items at once.
+     * @since  3.8.12    Added the `$aAPIRawItem` parameter so that the background routine can skip an API request.
+     * @since  3.9.0     Changed the first parameter to be associate_id|locale|currency|language from associate_id|locale.
+     * @since  3.9.0     Removed the `$sLocale` parameter
+     * @since  4.3.0     Deprecated the `$aAPIRawItem` parameter as it was not used.
      */
     static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
 
@@ -157,7 +203,7 @@ class AmazonAutoLinks_Event_Scheduler {
             add_action(
                 'shutdown',
                 array( __CLASS__, '_replyToScheduleProductsInformation' ),
-                1   // higher priority
+                2   // higher priority
             );
         }
 
@@ -168,6 +214,11 @@ class AmazonAutoLinks_Event_Scheduler {
         if ( ! isset( self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] ) ) {
             self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ] = array();
         }
+
+        // [4.3.4]
+        $_sCurrency = $_aRequestBaseInfo[ 2 ];
+        $_sLanguage = $_aRequestBaseInfo[ 3 ];
+        self::$___aScheduledProductIDs[] = "{$sASIN}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
 
         self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = func_get_args() + (
             defined( 'WP_DEBUG' ) && WP_DEBUG
@@ -185,7 +236,7 @@ class AmazonAutoLinks_Event_Scheduler {
         /**
          * Schedules retrievals of product information at once.
          * @since       3.7.7
-         * @callback    action      shutdown        With the priority of `1`.
+         * @callback    action      shutdown        With the priority of `2`.
          */
         static public function _replyToScheduleProductsInformation() {
 
