@@ -37,7 +37,7 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
      * Sets how long the log entries are.
      * @var integer
      */
-    protected $_iLogLength = 300;
+    protected $_iLogLength = 100;
 
     public function __construct() {
 
