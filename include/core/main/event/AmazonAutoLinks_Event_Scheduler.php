@@ -33,25 +33,108 @@ class AmazonAutoLinks_Event_Scheduler {
     }
 
     /**
+     * @var  array
+     * @since 4.3.4
+     */
+    static private $___aReviewItemsIfNoPIR = array();
+
+    /**
+     * Schedules a background task to retrieve a product rating if a product information routine is not scheduled.
+     * @param string  $sProductID       ASIN|locale|currency|language
+     * @param integer $iCacheDuration
+     * @param boolean $bForceRenew
+     * @since 4.3.4
+     * @return boolean|void
+     */
+    static public function scheduleReviewIfNoProductInformationRoutines( $sProductID, $iCacheDuration, $bForceRenew ) {
+        if ( ! AmazonAutoLinks_Utility::hasBeenCalled( __METHOD__ ) ) {
+            // must be called before `_replyToScheduleProductsInformation()`.
+            add_action( 'shutdown', array( __CLASS__, 'replyToQueueReviewRetrievalIfNoPIR' ), 1 );
+        }
+        self::$___aReviewItemsIfNoPIR[] = func_get_args();
+    }
+        /**
+         * Adds a background routine of product rating retrieval
+         * only IF a product information routine for the product is not added.
+         * @callback add_action() shutdown
+         */
+        static public function replyToQueueReviewRetrievalIfNoPIR() {
+            if ( empty( self::$___aReviewItemsIfNoPIR ) ) {
+                return;
+            }
+            foreach( self::$___aReviewItemsIfNoPIR as $_aParameters ) {
+                $_aParameters = $_aParameters + array( null, null, null );
+                $_sProductID = $_aParameters[ 0 ];
+                // If the product information routine is added for this product, do not schedule this routine.
+                if ( in_array( $_sProductID, self::$___aScheduledProductIDs ) ) {
+                    continue;
+                }
+                self::scheduleReview( $_sProductID, $_aParameters[ 1 ], $_aParameters[ 2 ] );
+            }
+            AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+        }    
+    
+    /**
+     * @var   array
+     * @since 4.3.4
+     */
+    static private $___aReviewItems = array();
+
+    /**
      * Schedule a background task to retrieve customer reviews.
      *
      * @param  string  $sProductID  Format: {ASIN}|{locale}|{currency}|{language}
      * @param  integer $iCacheDuration
      * @param  boolean $bForceRenew
-     * @return boolean
+     * @return boolean|void true if scheduled. false if not scheduled. void when unknown whether scheduled or not.
      * @since  3.9.0
      * @since  4.3.4 Deprecated the `$sURL`, `$sASIN`, `$sLocale`, `$sCurrency`, and `$sLanguage` parameter.
-     * @todo use the task table
      */
-    static public function scheduleCustomerReviews( $sProductID, $iCacheDuration, $bForceRenew ) {
+    static public function scheduleReview( $sProductID, $iCacheDuration, $bForceRenew ) {
 
-        $_bScheduled = self::___scheduleTask( 'aal_action_api_get_customer_review', $sProductID, $iCacheDuration, $bForceRenew );
-        if ( $_bScheduled ) {
+        if ( version_compare( get_option( 'aal_tasks_version', '0' ), '1.0.0b01', '<' ) ) {
+            $_bScheduled = self::___scheduleTask( 'aal_action_api_get_customer_review', $sProductID, $iCacheDuration, $bForceRenew );
+            if ( ! $_bScheduled ) {
+                return false;
+            }
             AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+            return true;
         }
-        return $_bScheduled;
+        if ( empty( self::$___aReviewItems ) ) {
+            add_action( 'shutdown', array( __CLASS__, 'replyToQueueReviewRetrieval' ), 20 );
+        }
+        self::$___aReviewItems[ $sProductID ] = func_get_args();
+        return;    // whether scheduled or not is unknown.
 
     }
+        /**
+         * @callback add_action() shutdown
+         * @since 4.3.4
+         */
+        static public function replyToQueueReviewRetrieval() {
+
+            $_iCount    = 1;
+            $_aTaskRows = array();
+            foreach( self::$___aReviewItems as $_sProductID => $_aParameters ) {
+                $_iNow        = time();
+                $_aTaskRows[] = array(
+                    'name'          => 'get_review_' . $_sProductID,  // (unique column)
+                    'action'        => 'aal_action_api_get_customer_review',
+                    'arguments'     => $_aParameters,
+                    'creation_time' => date( 'Y-m-d H:i:s', $_iNow ),
+                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * 10 ) ),
+                );
+                $_iCount++;
+            }
+            $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
+            $_aChunks    = array_chunk( $_aTaskRows, 50 );    // having too many rows may fail to set
+            foreach( $_aChunks as $__aTaskRows ) {
+                $_oTaskTable->insertRowsIgnore( $__aTaskRows );
+            }
+            self::scheduleTaskCheck( time() );
+            AmazonAutoLinks_Shadow::see();  // Loads the site in the background.
+
+        }
 
     /**
      * @var array Stores items holding product information including ASIN, locale, currency and language to update their ratings.

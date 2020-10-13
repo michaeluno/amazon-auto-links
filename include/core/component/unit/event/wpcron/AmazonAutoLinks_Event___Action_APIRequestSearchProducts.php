@@ -161,7 +161,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
                 // Reviews
                 if ( AmazonAutoLinks_UnitOutput_Utility::hasCustomVariable( $sItemFormat, array( '%review%' ) ) ) {
-                    AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
+                    AmazonAutoLinks_Event_Scheduler::scheduleReview( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
                 }
 
                 // Ratings

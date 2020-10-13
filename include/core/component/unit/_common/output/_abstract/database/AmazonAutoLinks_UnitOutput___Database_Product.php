@@ -144,41 +144,52 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
              * @since 4.3.4   Added the `$sColumnName` parameter.
              */
             private function ___scheduleBackgroundTask( $bShouldSchedule, $aScheduleTask, $iCacheDuration, $sColumnName ) {
+
                 if ( ! $bShouldSchedule ) {
                     return;
                 }
                 if ( $this->isEmpty( array_filter( $aScheduleTask ) ) ) {
                     return;
                 }
+
                 $iCacheDuration  = ( integer ) $iCacheDuration;
+                $_bForceRenew    = ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' );
                 $_sLocale        = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sCurrency      = $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage      = $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
                 $_aRatingColumns = array( 'rating', 'rating_image_url', 'rating_html', 'number_of_reviews' );
                 $_aReviewColumns = array( 'customer_review_url', 'customer_review_charset', 'customer_reviews' );
+
                 if ( ! in_array( $sColumnName, array_merge( $_aRatingColumns, $_aReviewColumns ), true ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                         $aScheduleTask[ 'associate_id' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
                         $aScheduleTask[ 'asin' ],
-                        ( integer ) $iCacheDuration,
-                        ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ),
+                        $iCacheDuration,
+                        $_bForceRenew,
                         $this->_oUnitOption->get( 'item_format' )
                     );
                     return;
                 }
 
-                // Schedule review/rating routines.
-                if ( in_array( $sColumnName, $_aRatingColumns ) ) {
+                $_sProductID = $aScheduleTask[ 'asin' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage;
+
+                // Schedule a rating retrieval routine.
+                if ( in_array( $sColumnName, $_aRatingColumns, true ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleRatingIfNoProductInformationRoutines( 
-                        $aScheduleTask[ 'asin' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
-                        ( integer ) $iCacheDuration, 
-                        ( boolean ) $this->_oUnitOption->get( '_force_cache_renewal' ) 
+                        $_sProductID,
+                        $iCacheDuration,
+                        $_bForceRenew
                     );
                     return;
                 }
 
-                if ( in_array( $sColumnName, $_aReviewColumns ) ) {
-                    // @todo schedule a review background routine.
+                // Schedule a review retrieval background routine.
+                if ( in_array( $sColumnName, $_aReviewColumns, true ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleReviewIfNoProductInformationRoutines(
+                        $_sProductID,
+                        $iCacheDuration,
+                        $_bForceRenew
+                    );
                 }
 
             }

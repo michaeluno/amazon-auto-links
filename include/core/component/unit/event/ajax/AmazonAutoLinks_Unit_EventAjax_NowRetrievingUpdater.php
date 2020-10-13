@@ -105,7 +105,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             }
             // Reviews
             foreach( $_aReviewItems as $_aItem ) {
-                AmazonAutoLinks_Event_Scheduler::scheduleCustomerReviews(
+                AmazonAutoLinks_Event_Scheduler::scheduleReview(
                     "{$_aItem[ 'asin' ]}|{$_aItem[ 'locale' ]}|{$_aItem[ 'currency' ]}|{$_aItem[ 'language' ]}", // product id
                     $_aItem[ 'cache_duration' ],
                     false
