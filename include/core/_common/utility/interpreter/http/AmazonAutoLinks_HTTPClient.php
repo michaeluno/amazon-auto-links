@@ -439,13 +439,14 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                     if ( ! $iInterval ) {
                         return;
                     }
-                    self::$___aRequestTimes[ $this->sRequestType ] = isset( self::$___aRequestTimes[ $this->sRequestType ] ) ? self::$___aRequestTimes[ $this->sRequestType ] : microtime( true );
-                    $_fElapsed = microtime( true ) - self::$___aRequestTimes[ $this->sRequestType ];
-                    if ( $_fElapsed > $iInterval  ) {
+                    self::$___aRequestTimes[ $this->sRequestType ] = isset( self::$___aRequestTimes[ $this->sRequestType ] ) ? self::$___aRequestTimes[ $this->sRequestType ] : time();
+                    $_iElapsed = time() - self::$___aRequestTimes[ $this->sRequestType ];
+                    if ( $_iElapsed > $iInterval  ) {
                         return;
                     }
-                    $_iSleep = (integer) floor( $iInterval - $_fElapsed );
+                    $_iSleep = (integer) floor( $iInterval - $_iElapsed );
                     sleep( $_iSleep );
+                    self::$___aRequestTimes[ $this->sRequestType ] = time();
                 }
 
             /**
