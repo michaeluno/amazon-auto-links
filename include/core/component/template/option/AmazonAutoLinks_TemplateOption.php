@@ -100,11 +100,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * Returns the formatted options array.
      * @return  array
      */    
-    protected function _getFormattedOptions( $sOptionKey ) {
-
-        $_aOptions = parent::_getFormattedOptions( $sOptionKey );
-        return $_aOptions + $this->___getDefaultTemplates();
-        
+    protected function _getFormattedOptions() {
+        return parent::_getFormattedOptions() + $this->___getDefaultTemplates();
     }    
         /**
          * @return      array       plugin default templates which should be activated upon installation / restoring factory default.
