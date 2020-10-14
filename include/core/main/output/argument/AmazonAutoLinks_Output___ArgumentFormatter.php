@@ -52,7 +52,7 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
             }
             $_aASINs = $this->getStringIntoArray( $this->_aArguments[ 'asin' ], ',' );
             $this->_aArguments[ 'ItemId' ]         = implode( ',', $_aASINs );
-            $this->_aArguments[ 'Operation' ]      = 'ItemLookup';
+            $this->_aArguments[ 'Operation' ]      = 'GetItems';
             $this->_aArguments[ '_allowed_ASINs' ] = $_aASINs;
             $this->_aArguments[ 'unit_type' ]      = 'item_lookup';
         }

@@ -78,7 +78,8 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      * @since       3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return 'ItemLookup' === $this->_getOperationArgument( $aArguments )
+        $_sOperation = $this->_getOperationArgument( $aArguments );
+        return in_array( $_sOperation, array( 'ItemLookup', 'GetItems' ), true )  // ItemLookup for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }
