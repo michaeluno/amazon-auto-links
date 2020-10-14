@@ -11,9 +11,10 @@
 /**
  * Provides common methods for option objects.
  * 
- * @since       3
+ * @since   3
+ * @since   4.3.4   Made it abstract.
  */
-class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
+abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     
     /**
      * Stores the option values.
@@ -39,10 +40,11 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     /**
      * Stores whether the currently loading page is in the network admin area.
      */
-    protected $bIsNetworkAdmin = false;     
-         
+    protected $bIsNetworkAdmin = false;
+
     /**
      * Sets up properties.
+     * @param string $sOptionKey
      */
     public function __construct( $sOptionKey ) {
         
@@ -50,12 +52,14 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
         $this->sOptionKey       = $sOptionKey;
         $this->aOptions         = $this->_getFormattedOptions( $sOptionKey );
         
-    }     
+    }
+
         /**
          * Returns the formatted options array.
          * @remark  Override this method in an extended class.
+         * @param   string $sOptionKey
          * @return  array
-         */    
+         */
         protected function _getFormattedOptions( $sOptionKey ) {
             return $this->uniteArrays(
                 $this->getAsArray(
@@ -72,7 +76,7 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
      * 
      * @since       3
      * @return      boolean        True if yes; otherwise, false.
-     * @remrk       not used at the moment
+     * @deprecated  Not used.
      */
     public function hasUpgraded() {
         
@@ -87,6 +91,10 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     }
         /**
          * Returns a stating part of version by the given depth.
+         *
+         * @param  string $sVersion
+         * @param  int $iDepth
+         * @return string
          * @since       3
          */
         private function _getVersionByDepth( $sVersion, $iDepth=2 ) {
@@ -109,11 +117,11 @@ class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     
     /**
      * Saves the options.
-     * 
-     * @return      boolean     true on success; otherwise, false.
+     *
+     * @param   array|null
+     * @return  boolean     true on success; otherwise, false.
      */
     public function save( $aOptions=null ) {
-
         $_aOptions = $aOptions 
             ? $aOptions 
             : $this->aOptions;
