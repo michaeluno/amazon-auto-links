@@ -8,7 +8,7 @@
 
 /**
  * Provides methods to format the `id` output argument.
- * @since       3.5.0
+ * @since 3.5.0
  */
 class AmazonAutoLinks_Output___ArgumentFormatter_UnitID extends AmazonAutoLinks_Output___ArgumentFormatter_Base {
 
@@ -41,10 +41,11 @@ class AmazonAutoLinks_Output___ArgumentFormatter_UnitID extends AmazonAutoLinks_
 
     }
         /**
-         * Formates the `id` argument.
-         * @since       3.4.9
-         * @since       3.5.0       Moved from `AmazonAutoLinks_Output`.
-         * @return      array
+         * Formats the `id` argument.
+         * @param  array|integer|string $aisIDs
+         * @since  3.4.9
+         * @since  3.5.0 Moved from `AmazonAutoLinks_Output`.
+         * @return array
          */
         private function ___getIDsFormatted( $aisIDs ) {
             if ( is_scalar( $aisIDs ) ) {
@@ -59,7 +60,10 @@ class AmazonAutoLinks_Output___ArgumentFormatter_UnitID extends AmazonAutoLinks_
 
         /**
          * Retrieves the post (unit) IDs by the given unit label.
-         * @return      array
+         *
+         * @param  array $aLabels
+         * @param  string $sOperator
+         * @return array
          */
         private function ___getPostIDsByLabel( $aLabels, $sOperator ) {
 
@@ -78,9 +82,14 @@ class AmazonAutoLinks_Output___ArgumentFormatter_UnitID extends AmazonAutoLinks_
             return $this->___getPostIDsByTag( $_aTermSlugs, 'slug', $sOperator );
 
         }
+
             /**
              * Retrieves post (unit) IDs by the plugin tag taxonomy slug.
-             * @return      array       An array holding found post ids.
+             *
+             * @param  array  $aTermSlugs
+             * @param  string $sFieldType
+             * @param  string $sOperator
+             * @return array  An array holding found post ids.
              */
             private function ___getPostIDsByTag( $aTermSlugs, $sFieldType='slug', $sOperator='AND' ) {
 

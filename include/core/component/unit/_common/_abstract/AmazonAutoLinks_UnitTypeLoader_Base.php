@@ -20,15 +20,15 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
-     * @var string
-     * @since   4.0.0
+     * @var   string
+     * @since 4.0.0
      */
     static public $sDirPath = '';
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.3.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  3.3.0
      */
     public $sUnitTypeSlug = '';
     
@@ -44,7 +44,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
 
     /**
      * Determines whether the unit type requires the PA API access.
-     * @var bool
+     * @var     boolean
      * @since   3.9.0
      * @todo    Research: callbacks for the filter, `aal_filter_unit_type_is_api_access_required_{unit type slug}`, seems to access this property but the filter does not seem to be applied anywhere.
      * Although the `category` unit type set this value to `false`, it also uses PA-API when API keys are set and encounters null value elements.
@@ -53,6 +53,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
     
     /**
      * Loads necessary components.
+     * @param string $sScriptPath
      */
     public function __construct( $sScriptPath ) {
         
@@ -86,16 +87,17 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
     }
 
         /**
-         * @param $bRequired
-         * @since   3.9.0
-         * @callback    filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
-         * @return bool
+         * @param    $bRequired
+         * @since    3.9.0
+         * @callback filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
+         * @return   bool
          */
         public function replyToDetermineAPIRequirement( $bRequired ) {
             return $this->bRequirePAAPI;
         }
 
         /**
+         * @param       array   $aUnitOptions
          * @return      array
          * @sinec       3.3.0
          */
@@ -116,8 +118,9 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
     
         /**
          * @since       3.3.0
+         * @param       array      $aUnitTypeSlugs
          * @return      array
-         * @callback    add_filter      aal_filter_registered_unit_types
+         * @callback    add_filter aal_filter_registered_unit_types
          */
         public function replyToRegisterUnitTypeSlug( $aUnitTypeSlugs ) {
             if ( $this->sUnitTypeSlug ) {
@@ -127,9 +130,10 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         }
     
         /**
+         * @param       array           $aMetaKeys
          * @return      array
          * @since       3.3.0
-         * @callback    add_filter      aal_filter_custom_meta_keys
+         * @callback    add_filter()    aal_filter_custom_meta_keys
          * @remark      For field with a section, set keys in the $aProtectedMetaKeys property.
          */
         public function replyToGetProtectedMetaKeys( $aMetaKeys ) {                
@@ -143,17 +147,21 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
     /**
      * Loads admin components
      * 
-     * @since       3.3.0
-     * @since       3.5.0       Changed th visibility from public and renamed from `construct()`.
-     * @return      void
+     * @since   3.3.0
+     * @since   3.5.0  Changed th visibility from public and renamed from `construct()`.
+     * @param   string $sScriptPath
+     * @remark  Override this method in an extended class.
+     * @return  void
      */
     protected function _loadAdminComponents( $sScriptPath ) {}
     
     /**
      * User constructor.
-     * @since       3.3.0
-     * @since       3.5.0       Changed th visibility from public and renamed from `construct()`.
-     * @return      void
+     * @param   string $sScriptPath
+     * @since   3.3.0
+     * @since   3.5.0  Changed th visibility from public and renamed from `construct()`.
+     * @remark  Override this method in an extended class.
+     * @return  void
      */
     protected function _construct( $sScriptPath ) {}
 
@@ -184,20 +192,22 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         return $this->_getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments );
     }
         /**
-         * @param       string      $sUnitTypeSlug
-         * @param       array       $aArguments
-         * @return      string
-         * @since       3.5.0
+         * @param  string $sUnitTypeSlug
+         * @param  array  $aArguments
+         * @return string
+         * @since  3.5.0
+         * @remark Override this method in an extended class.
          */
         protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
             return $sUnitTypeSlug;
         }
 
         /**
-         * @remark      Shortcode argument keys are all lower-case.
-         * @since       3.4.6
-         * @since       3.5.0       Moved from `AmazonAutoLinks_Output`.
-         * @return      string
+         * @remark Shortcode argument keys are all lower-case.
+         * @since  3.4.6
+         * @since  3.5.0  Moved from `AmazonAutoLinks_Output`.
+         * @return string
+         * @param  array  $aArguments
          */
         protected function _getOperationArgument( $aArguments ) {
             $_sOperation = $this->getElement( $aArguments, 'Operation' );
@@ -208,12 +218,12 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
 
     /**
      * @callback    add_filter      aal_filter_registered_unit_type_labels
-     * @param       array           $aLables
+     * @param       array           $aLabels
      * @return      array
      * @since       3.5.0
      */
-    public function replyToAddLabel( $aLables ) {
-        return $aLables + array(
+    public function replyToAddLabel( $aLabels ) {
+        return $aLabels + array(
             $this->sUnitTypeSlug => $this->_getLabel(),
         );
     }

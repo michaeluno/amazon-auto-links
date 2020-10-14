@@ -16,6 +16,7 @@ class AmazonAutoLinks_Output___ArgumentFormatter_Base extends AmazonAutoLinks_Pl
 
     /**
      * Sets up properties.
+     * @param array $aArguments
      */
     public function __construct( $aArguments ) {
         $this->_aArguments = $this->getAsArray( $aArguments ) + $this->_aArguments;
