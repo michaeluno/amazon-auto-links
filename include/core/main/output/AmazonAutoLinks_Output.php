@@ -23,6 +23,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
     /**
      * Stores the raw arguments.
      * @remark      Used for JavaScript loading.
+     * Also, since v4.3.4 the unit option class accepts raw options to be passed. The 'item_format', 'image_format', 'title_format', 'unit_format' options need to use this to suppress the default.
      * @var         array
      * @sicne       3.6.0
      */
@@ -30,13 +31,15 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
     /**
      * Instantiates the class and returns the object.
-     * 
+     *
      * This is to enable a technique to call a method in one line like
      * <code>
      * $_sOutput = AmazonAutoLinks_Output::getInstance()->render();
      * </code>
-     * 
-     * @sicne       2.1.1
+     *
+     * @sicne  2.1.1
+     * @param  array $aArguments
+     * @return AmazonAutoLinks_Output
      */
     static public function getInstance( $aArguments ) {
         return new self( $aArguments );
@@ -44,11 +47,12 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
     /**
      * Sets up properties.
-     * 
-     * @since       2.0.0
+     *
+     * @param array $aArguments
+     * @since 2.0.0
      */
     public function __construct( $aArguments ) {
-        $this->___aRawArguments = $this->getAsArray( $aArguments ); // 3.6.0+
+        $this->___aRawArguments = $this->getAsArray( $aArguments ); // [3.6.0]
         $_oFormatter            = new AmazonAutoLinks_Output___ArgumentFormatter( $aArguments );
         $this->aArguments       = $_oFormatter->get();
     }
@@ -79,12 +83,20 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         }
 
         $_sOutput = $this->___getOutput();
-        $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
-        $_bNoOuterContainer = apply_filters( 'aal_filter_output_is_without_outer_container', $_bNoOuterContainer, $this->aArguments );
-        return $_bNoOuterContainer
+        return $this->___isWithoutOuterContainer()
             ? $_sOutput
             : "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
+
     }
+        /**
+         * @since  4.3.4
+         * @return boolean
+         * @remark Some templates use the filter.
+         */
+        private function ___isWithoutOuterContainer() {
+            $_bNoOuterContainer = $this->getElement( $this->aArguments, array( '_no_outer_container' ) );
+            return ( boolean ) apply_filters( 'aal_filter_output_is_without_outer_container', $_bNoOuterContainer, $this->aArguments );
+        }
 
         /**
          * @since       3.5.0
@@ -114,48 +126,50 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
         /**
          * Returns the unit output by post (unit) ID.
-         * @return      string
+         * @param  integer $iPostID
+         * @return string
+         * @remark The auto-insert sets the 'id' as array storing multiple ids.
+         * But this method is called per ID so the ID should be discarded.
+         * If the unit gets deleted, auto-insert causes an error for not finding the options.
          */
         private function ___getOutputByID( $iPostID ) {
 
-            /**
-             * The auto-insert sets the 'id' as array storing multiple ids.
-             * But this method is called per ID so the ID should be discarded.
-             * If the unit gets deleted, auto-insert causes an error for not finding the options.
-             */
-            $_oOption      = AmazonAutoLinks_Option::getInstance();
             $_aUnitOptions = array(
-                    'id' => $iPostID,
+                    // Required keys
+                    'id'        => $iPostID,
+                    'unit_type' => get_post_meta( $iPostID, 'unit_type', true ), // [4.3.4]
                 )
-                + $this->aArguments
-                + $this->getPostMeta( $iPostID, '', $_oOption->get( 'unit_default' ) )
-                + array( 
-                    'unit_type' => null,
-                );
-            return $this->___getOutputByUnitType(
-                $_aUnitOptions[ 'unit_type' ],
-                $_aUnitOptions
-            );
+                + $this->aArguments;
+                // @deprecated 4.3.4 This is handled in the unit option class.
+//                 + $this->getPostMeta( $iPostID, '', $_oOption->get( 'unit_default' ) )
+//                 + array(
+//                    'unit_type' => null,
+//                );
+
+            return $this->___getOutputByUnitType( $_aUnitOptions[ 'unit_type' ], $_aUnitOptions );
    
         }
 
             /**
              * Determines the unit type from the given argument array.
              * @since       3
-             * @return      string      The unit type slug.
+             * @return      string The unit type slug.
              * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
+             * @param       array  $aArguments
              */
             private function ___getUnitTypeFromArguments( $aArguments ) {
                 return isset( $aArguments[ 'unit_type' ] )
                     ? $aArguments[ 'unit_type' ]
                     : apply_filters( 'aal_filter_detected_unit_type_by_arguments', 'unknown', $aArguments );
             }
-            
+
             /**
              * Generates product outputs by the given unit type.
              *
-             * @remark      All the outputs go through this method.
-             * @return      string      The unit output
+             * @remark All the outputs go through this method.
+             * @param  string $sUnitType
+             * @param  array  $_aUnitOptions
+             * @return string The unit output
              */
             private function ___getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
 

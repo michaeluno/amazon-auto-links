@@ -79,15 +79,16 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      */
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
 
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-
-        $this->iUnitID         = $iUnitID;
+        $_oOption              = AmazonAutoLinks_Option::getInstance();
+        $this->iUnitID         = $iUnitID
+            ? absint( $iUnitID )
+            : absint( $this->getElement( $aUnitOptions, array( 'id' ) ) );
         $this->aDefault        = array(
                 'unit_type' => $this->sUnitType,
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
-            + $_oOption->get( 'unit_default' )      // 3.4.0+
+            + $_oOption->get( 'unit_default' )      // [3.4.0]
             ;
         $this->aRawOptions     = $aUnitOptions;
         $this->aUnitOptions    = $iUnitID
@@ -137,10 +138,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
 
-        $_oOption     = AmazonAutoLinks_Option::getInstance();
-        $aUnitOptions = $aUnitOptions + $aDefaults;
-
-        $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        $_oOption           = AmazonAutoLinks_Option::getInstance();
+        $aUnitOptions       = $aUnitOptions + $aDefaults;
+        $aUnitOptions       = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
 
         // the item lookup search unit type does not have a count field
         if( isset( $aUnitOptions[ 'count' ] ) ) {
@@ -187,11 +187,14 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $aUnitOptions[ 'language' ]           = $aUnitOptions[ 'language' ]
             ? $aUnitOptions[ 'language' ]
             : AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
+
+        // Output formats
         $_aOutputFormats                = $this->___getOutputFormats( $aUnitOptions, $_sTemplateID );
-        $aUnitOptions[ 'unit_format' ]  = $this->___getUnitFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
-        $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
-        $aUnitOptions[ 'image_format' ] = $this->___getImageFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
-        $aUnitOptions[ 'title_format' ] = $this->___getTitleFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID );
+        $aUnitOptions[ 'unit_format' ]  = $this->___getUnitFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID, $aRawOptions );
+        $aUnitOptions[ 'item_format' ]  = $this->___getItemFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID, $aRawOptions );
+        $aUnitOptions[ 'image_format' ] = $this->___getImageFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID, $aRawOptions );
+        $aUnitOptions[ 'title_format' ] = $this->___getTitleFormat( $aUnitOptions, $_aOutputFormats, $_sTemplateID, $aRawOptions );
+
         return $aUnitOptions;
         
     }
@@ -215,13 +218,20 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @param array  $aUnitOptions       The unit options to parse.
-         * @param array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param string $sTemplateID        The set template ID.
-         * @since   4.3.0
+         * @param  array  $aUnitOptions       The unit options to parse.
+         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
+         * @param  string $sTemplateID        The set template ID.
+         * @param  array  $aRawOptions
+         * @since  4.3.0
+         * @since  4.3.4  Added the `$aRawOptions` parameter.
          * @return string
          */
-        private function ___getUnitFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID  ) {
+        private function ___getUnitFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
+            // If directly set, use it.
+            $_sRawFormat = $this->getElement( $aRawOptions, array( 'unit_format' ) );
+            if ( isset( $_sRawFormat ) ) {
+                return $_sRawFormat;
+            }
             $_sFormat = $this->getElement( $aOutputFormats, array( 'unit_format' ) );
             return isset( $_sFormat )
                 ? $_sFormat
@@ -234,13 +244,21 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `item_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param array  $aUnitOptions       The unit options to parse.
-         * @param array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param string $sTemplateID        The set template ID.
-         * @return      string
-         * @since       4.0.0
+         * @param  array  $aUnitOptions       The unit options to parse.
+         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
+         * @param  string $sTemplateID        The set template ID.
+         * @param  array  $aRawOptions        The raw direct unit options. Used to suppress the option and to check the unit option structure for older versions.
+         * @return string
+         * @since  4.0.0
+         * @since  4.3.4  Added the `$aRawOptions` parameter.
          */
-        private function ___getItemFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID ) {
+        private function ___getItemFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
+
+             // If directly set, use it.
+            $_sRawItemFormat = $this->getElement( $aRawOptions, array( 'item_format' ) );
+            if ( isset( $_sRawItemFormat ) ) {
+                return $_sRawItemFormat;
+            }
 
             /**
              * Get the template specific item format option.
@@ -275,14 +293,20 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `image_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param array  $aUnitOptions       The unit options to parse.
-         * @param array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param string $sTemplateID        The set template ID.
-         *
-         * @return      string
-         * @since       4.0.0
+         * @param  array  $aUnitOptions       The unit options to parse.
+         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
+         * @param  string $sTemplateID        The set template ID.
+         * @param  array  $aRawOptions
+         * @return string
+         * @since  4.0.0
+         * @since  4.3.4  Added the `$aRawOptions` parameter.
          */
-        private function ___getImageFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID ) {
+        private function ___getImageFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
+            // If directly set, use it.
+            $_sRawFormat = $this->getElement( $aRawOptions, array( 'image_format' ) );
+            if ( isset( $_sRawFormat ) ) {
+                return $_sRawFormat;
+            }
             $_sImageFormat = $this->getElement( $aOutputFormats, array( 'image_format' ) );
             return isset( $_sImageFormat )
                 ? $_sImageFormat
@@ -295,14 +319,22 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `title_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param array  $aUnitOptions       The unit options to parse.
-         * @param array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param string $sTemplateID        The set template ID.
-         *
-         * @return      string
-         * @since       4.0.0
+         * @param  array  $aUnitOptions       The unit options to parse.
+         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
+         * @param  string $sTemplateID        The set template ID.
+         * @param  array  $aRawOptions
+         * @return string
+         * @since  4.0.0
+         * @since  4.3.4  Added the `$aRawOptions` parameter.
          */
-        private function ___getTitleFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID ) {
+        private function ___getTitleFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
+
+            // If directly set, use it.
+            $_sRawFormat = $this->getElement( $aRawOptions, array( 'title_format' ) );
+            if ( isset( $_sRawFormat ) ) {
+                return $_sRawFormat;
+            }
+
             $_sTitleFormat = $this->getElement( $aOutputFormats, array( 'title_format' ) );
             return isset( $_sTitleFormat )
                 ? $_sTitleFormat

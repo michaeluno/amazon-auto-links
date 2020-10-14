@@ -84,7 +84,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     public $oImpressionCounter;
 
     /**
-     * Stores an ID for the object instance.
+     * Stores a unique output ID per an object instance.
      * Used for debugging and to determine the caller object and checks whether unnecessary calls are made for hook callbacks.
      * @var string
      */
@@ -117,17 +117,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     public function __construct( $aoUnitOptions, $sUnitType='' ) {
 
         $this->sCallID              = uniqid();
-        $this->sUnitType            = $sUnitType
-            ? $sUnitType
-            : $this->sUnitType;
-
+        $this->sUnitType            = $sUnitType ? $sUnitType : $this->sUnitType;
         $_sUnitOptionClassName      = "AmazonAutoLinks_UnitOption_{$this->sUnitType}";
         $this->oUnitOption          = is_object( $aoUnitOptions )
             ? $aoUnitOptions
-            : new $_sUnitOptionClassName(
-                null, // id is omitted as it is already set in the argument
-                $aoUnitOptions
-            );
+            : new $_sUnitOptionClassName( $this->getElement( $aoUnitOptions, array( 'id' ) ), $aoUnitOptions );
+        $this->oUnitOption->sCallID = $this->sCallID;
 
         $this->oOption              = AmazonAutoLinks_Option::getInstance();
         $this->oProductTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
