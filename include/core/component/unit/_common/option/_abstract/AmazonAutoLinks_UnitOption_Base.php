@@ -57,7 +57,20 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * Stores the associated options to the unit.
      */
     public $aUnitOptions = array();
-        
+
+    /**
+     * Unformatted raw unit options passed directly.
+     * @var  array 
+     * @sine 4.3.4
+     */
+    public $aRawOptions = array();
+    
+    /**
+     * @remark Set from externally from the output class.
+     * @var string|null Stores a output call ID to distinguish output calls.
+     */
+    public $sCallID;
+
     /**
      * Sets up properties.
      * 
@@ -76,12 +89,13 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             + $this->getDefaultOptionStructure()
             + $_oOption->get( 'unit_default' )      // 3.4.0+
             ;
+        $this->aRawOptions     = $aUnitOptions;
         $this->aUnitOptions    = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
                 + $this->getPostMeta( $iUnitID, '', $_oOption->get( 'unit_default' ) )
             : $aUnitOptions;
-        $this->aUnitOptions    = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault );
+        $this->aUnitOptions    = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault, $this->aRawOptions );
 
         // [4.3.4]
         $this->aItemFormatTags = $this->___getItemFormatTags( $this->get( 'item_format' ) );
@@ -113,13 +127,15 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      *
      * @param array $aUnitOptions
      * @param array $aDefaults
+     * @param array $aRawOptions
      *
      * @return array|mixed
      * @since       3
      * @since       4.0.0   Changed the name from `format()` as it was too general.
-     * @since       4.0.0   Added the $aDefaults parameter.
+     * @since       4.0.0   Added the `$aDefaults` parameter.
+     * @since       4.3.4   Added the `$aRawOptions` parameter.
      */
-    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
 
         $_oOption     = AmazonAutoLinks_Option::getInstance();
         $aUnitOptions = $aUnitOptions + $aDefaults;
@@ -297,7 +313,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @remark      shortcode arguments are all converted to lower-cases but Amazon API keys are camel-calsed.
+         * @remark      shortcode arguments are all converted to lower-cases but Amazon API keys are camel-cased.
+         * @param       array       $aUnitOptions
+         * @param       array       $aShortcodeArgumentKeys
          * @since       3.4.6
          * @return      array
          */

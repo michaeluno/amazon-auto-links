@@ -79,15 +79,17 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
 
     /**
      * @param array $aUnitOptions
+     * @param array $aDefaults
+     * @param array $aRawOptions
      *
      * @return array
      * @since       3.4.6
      * @since       4.0.0   Renamed from format() as it is too general.
      */
-    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults ) {
+    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
 
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
-        return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults );
+        return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
         
     }
     
