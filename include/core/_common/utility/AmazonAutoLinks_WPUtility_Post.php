@@ -17,8 +17,8 @@
 class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     
     /**
-     * @since       3.1.0
-     * @return      boolean
+     * @since  3.1.0
+     * @return boolean
      */
     static public function isInPostEditingPage() {
         return in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ) );
@@ -26,7 +26,9 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
 
     /**
      * Returns a form field label array listing post titles.
-     * @return      array
+     *
+     * @param  string $sPostTypeSlug
+     * @return array
      */
     static public function getPostsLabelsByPostType( $sPostTypeSlug ) {
         
@@ -81,10 +83,13 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
 
     /**
      * Counts the posts of the specified post type.
-     * 
+     *
      * This is another version of wp_count_posts() without a filter.
-     * 
-     * @since             2.0.0
+     *
+     * @param  string $strPostType
+     * @param  string $perm
+     * @return false|mixed|object
+     * @since  2.0.0
      */
     static public function countPosts( $strPostType, $perm='' ) {
         
@@ -138,7 +143,9 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
         if ( $sKey ) {
             self::$___aDefaults_getPostMeta = array( $sKey => $asDefaults );
             add_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10, 5 );
-            return get_post_meta( $iPostID, $sKey, true );
+            $_mValue = get_post_meta( $iPostID, $sKey, true );
+            remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
+            return $_mValue;
         }
 
         $_aPostMeta = array();        
@@ -161,7 +168,8 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
                 $iPostID, 
                 $_sKey, 
                 true 
-            );        
+            );
+            remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
         }
         self::$___aDefaults_getPostMeta = array();
         return $_aPostMeta;                
@@ -169,11 +177,12 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     }
         static private $___aDefaults_getPostMeta = array();
         /**
-         * @param mixed $mValue
-         * @param integer $iObjectID
-         * @param string $sMetaKey
-         * @param boolean $bSingle
-         * @param string $sMetaType
+         * @param  mixed   $mValue
+         * @param  integer $iObjectID
+         * @param  string  $sMetaKey
+         * @param  boolean $bSingle
+         * @param  string  $sMetaType
+         * @return mixed
          */
         static public function replyToSetMetaDefaultValue( $mValue, $iObjectID, $sMetaKey, $bSingle, $sMetaType ) {
             if ( isset( self::$___aDefaults_getPostMeta[ $sMetaKey ] ) ) {
@@ -181,13 +190,19 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             }
             remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
             self::$___aDefaults_getPostMeta = array();
+            return $mValue;
         }
+
     /**
      * Creates a post.
-     * 
-     * @remark  another version of the `insertPost()` method below 
+     *
+     * @remark  another version of the `insertPost()` method below
      * as it mixes meta data array and post columns. This method separates them.
-     * @return      integer     The created post ID.
+     * @param  string  $sPostTypeSlug
+     * @param  array   $aPostColumns
+     * @param  array   $aPostMeta
+     * @param  array   $aTaxonomy
+     * @return integer The created post ID.
      */
     static public function createPost( $sPostTypeSlug, array $aPostColumns=array(), array $aPostMeta=array(), array $aTaxonomy=array() ) {
         
@@ -229,9 +244,15 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
         return $_iPostID;        
         
     }
-    
+
     /**
      * Creates a post of a specified custom post type with unit option meta fields.
+     *
+     * @param  array    $aUnitOptions
+     * @param  string   $sPostTypeSlug
+     * @param  array    $aTaxonomy
+     * @param  string[] $aIgnoreFields
+     * @return int|WP_Error
      */
     static public function insertPost( $aUnitOptions, $sPostTypeSlug, $aTaxonomy=array(), $aIgnoreFields=array( 'unit_title' ) ) {
         
