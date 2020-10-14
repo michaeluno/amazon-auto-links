@@ -61,15 +61,22 @@ abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
          * @return  array
          */
         protected function _getFormattedOptions( $sOptionKey ) {
-            return $this->uniteArrays(
-                $this->getAsArray(
-                    $this->bIsNetworkAdmin
-                        ? get_site_option( $sOptionKey, array() )
-                        : get_option( $sOptionKey, array() )
-                ),
-                $this->aDefault
-            );
+            return $this->uniteArrays( $this->getRawOptions( $sOptionKey ), $this->aDefault );
         }
+
+    /**
+     * @remark This is also called to check the options structure to know version compatibilities.
+     * @param  string $sOptionKey
+     * @since  4.3.4
+     * @return array  An array holding options stored in the options table without merging with the default values.
+     */
+    public function getRawOptions( $sOptionKey ) {
+        return $this->getAsArray(
+            $this->bIsNetworkAdmin
+                ? get_site_option( $sOptionKey, array() )
+                : get_option( $sOptionKey, array() )
+        );
+    }
         
     /**
      * Checks the version number
