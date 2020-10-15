@@ -20,6 +20,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
     protected $_sActionHookName     = 'aal_action_api_get_products_info';
     protected $_iCallbackParameters = 5;
 
+    /**
+     * Sets up hooks.
+     */
     protected function _construct() {
         add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
     }
@@ -39,8 +42,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
 
     /**
-     * @return bool
-     * @since 4.3.0
+     * @return boolean
+     * @since  4.3.0
      */
     protected function _shouldProceed() {
 
@@ -99,13 +102,13 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
     }
 
         /**
-         * @param array $aResponse
-         * @param array $aList
+         * @param array  $aResponse
+         * @param array  $aList
          * @param string $sLocale
          * @param string $sCurrency
          * @param string $sLanguage
          * @param string $sTableVersion
-         * @since   4.3.0
+         * @since 4.3.0
          */
         private function ___setProductRows( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage, $sTableVersion ) {
 
@@ -147,15 +150,15 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         }
 
             /**
-             * @param string $sASIN
-             * @param string $sLocale
-             * @param integer $iCacheDuration
-             * @param boolean $bForceRenewal
-             * @param string $sCurrency
-             * @param string $sLanguage
-             * @param string $sItemFormat
-             * @return  void
-             * @since   4.3.0
+             * @param  string  $sASIN
+             * @param  string  $sLocale
+             * @param  integer $iCacheDuration
+             * @param  boolean $bForceRenewal
+             * @param  string  $sCurrency
+             * @param  string  $sLanguage
+             * @param  string  $sItemFormat
+             * @return void
+             * @since  4.3.0
              */
             private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
 
@@ -165,14 +168,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 }
 
                 // Ratings
-                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to with ratings.
+                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to do with ratings.
                     return;
                 }
                 AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
 
             }
 
-
+        /**
+         * @param $aResponse
+         */
         private function ___setErroredItems( &$aResponse ) {
             $_aErroredItem = array();
             foreach( $this->getAsArray( $aResponse[ 'Errors' ] ) as $_aError ) {
@@ -201,11 +206,11 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         }
         /**
          * Constructs the ASIN parameter.
-         * @remark  It is assumed that the passed list contains only up to 10 products
+         * @remark It is assumed that the passed list contains only up to 10 products
          * as the `ItemLookup` operation API parameter only accepts up to 10 items.
-         * @param array &$aList
+         * @param  array &$aList
          * @return array An array holding ASINs.
-         * @see AmazonAutoLinks_Event_Scheduler::scheduleProductInformation()
+         * @see    AmazonAutoLinks_Event_Scheduler::scheduleProductInformation()
          */
         private function ___getASINs( &$aList ) {
             // Extract the ASINs
@@ -231,6 +236,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             return $_aASINs;
         }
 
+        /**
+         * @param  array  $aASINs
+         * @param  string $sAssociateID
+         * @param  string $sLocale
+         * @param  string $sCurrency
+         * @param  string $sLanguage
+         * @return array
+         */
         private function ___getAPIResponse( array $aASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
 
             $_oOption     = AmazonAutoLinks_Option::getInstance();
@@ -266,16 +279,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         }
 
             /**
-             * @param array $aItem
-             * @param $sASIN
-             * @param $sLocale
-             * @param $iCacheDuration
-             * @param $sCurrency
-             * @param $sLanguage
-             *
+             * @param  array $aItem
+             * @param  string  $sASIN
+             * @param  string  $sLocale
+             * @param  integer $iCacheDuration
+             * @param  string  $sCurrency
+             * @param  string  $sLanguage
              * @return array
-             * @since   3.9.0
-             * @todo    Test
+             * @since  3.9.0
              */
             private function ___getRowFormatted( array $aItem, $sASIN, $sLocale, $iCacheDuration, $sCurrency, $sLanguage ) {
 
