@@ -330,6 +330,22 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             }
         }
 
+    /**
+     * @return string A temporary directory path for the plugin
+     * @since  4.3.4
+     */
+    static public function getPluginTempDirPath() {
+        return trailingslashit( sys_get_temp_dir() ) . self::$sTempDirName;
+    }
+    /**
+     * @return string   A temporary directory path for the site.
+     * @remark Consider a case that the server hosts multiple WordPress sites. In that case, a temp directory needs to be created one per site.
+     * @since  4.3.4
+     */
+    static public function getPluginSiteTempDirPath() {
+        return self::getPluginTempDirPath() . '/' . md5( site_url() );
+    }
+
 }
 AmazonAutoLinks_Registry::setUp( __FILE__ );
 

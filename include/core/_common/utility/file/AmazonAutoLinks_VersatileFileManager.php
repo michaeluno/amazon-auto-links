@@ -30,7 +30,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
         $this->_sIdentifier       = $sIdentifier;
-        $this->_sTempDirPath      = trailingslashit( sys_get_temp_dir() ) . AmazonAutoLinks_Registry::$sTempDirName . '/' . md5( site_url() );
+        $this->_sTempDirPath      = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
         $this->_iTimeout          = $iTimeout;
         $this->_sFileNamePrefix   = $sFileNamePrefix;
     }
