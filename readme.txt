@@ -307,8 +307,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Todo ==
 - @todo add the SubscriptionID parameter to product links when AWS keys are given.
 - @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
-- @todo implement a mechanism for unit types to determine whether it requires PA API or not.
-- @todo introduce a new unit type Comparision Table
+- @todo introduce a new unit type Comparison Table.
 - @todo add a card template.
 - @todo add the ability to select a caching type from either database or file.
 - @todo add the ability to get caches from shared cache servers.
@@ -330,7 +329,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.3.3 - 10/04/2020 =
 - Fixed a bug that updating now-retrieving elements failed with a certain number of items.
 - Fixed an issue that on some sites with a database of the utf8-mb4 type collation got an error " Specified key was too long; max key length is 1000 bytes...".
-- Fixed a bug that caused an error "database error Duplicate entry '...' for key 'product_id' for query ..." when activating a plugin after downgrading it.
+- Fixed a bug that caused an error "database error Duplicate entry '...' for key 'product_id' for query ..." when activating the plugin after downgrading it.
 
 = 4.3.2 - 09/28/2020 =
 - Fixed a bug that caused a browser console error in the setting screens.
