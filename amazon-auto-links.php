@@ -335,7 +335,8 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * @since  4.3.4
      */
     static public function getPluginTempDirPath() {
-        return trailingslashit( sys_get_temp_dir() ) . self::$sTempDirName;
+        $_sSystemTempDir = wp_normalize_path( sys_get_temp_dir() );
+        return untrailingslashit( $_sSystemTempDir ) . '/' . self::$sTempDirName;
     }
     /**
      * @return string   A temporary directory path for the site.
