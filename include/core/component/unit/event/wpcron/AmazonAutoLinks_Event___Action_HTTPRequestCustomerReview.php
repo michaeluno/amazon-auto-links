@@ -33,7 +33,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
      *
      */
     protected function _doAction( /* $sProductID, $iCacheDuration, $bForceRenew */ ) {
-
         $_aParams        = func_get_args() + array( null, null, null );
         $_iCacheDuration = $_aParams[ 1 ];
         $_bForceRenew    = $_aParams[ 2 ];

@@ -115,9 +115,11 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }*/
 
         /**
-         * @param array $aAllItems
+         * @remark Fetches products as the item_lookup unit type regardless of passed unit types.
+         * This is because in a unit with a large number of item count with the random sort order, queried items become different.
+         * @param  array $aAllItems
          * @return array
-         * @since 4.3.0
+         * @since  4.3.0
          */
         private function ___getProducts( array $aAllItems ) {
             $_aUnitOptionSets     = $this->___getUnitOptionSets( $aAllItems );
@@ -135,36 +137,85 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }
         /**
          * @return array An array holding sets of unit options, separated by locale-currency-language.
-         * @param array $aItems Due items to update.
-         * @since 4.3.0
+         * @param  array $aAllItems Due items to update.
+         * @since  4.3.0
          */
-        private function ___getUnitOptionSets( array $aItems ) {
+        private function ___getUnitOptionSets( array $aAllItems ) {
 
-            $_aUnitOptionSets = array();
-            foreach( array_keys( $aItems ) as $_sASINLocaleCurLang ) {
-                $_aElements      = $this->getElementAsArray( $aItems, array( $_sASINLocaleCurLang ) );
-                $_aElement       = reset( $_aElements );
-                $_sAssociateTag  = $this->getElement( $_aElement, array( 'tag' ) );
-                $_aParts         = explode( '|', $_sASINLocaleCurLang );
-                $_sASIN          = $_aParts[ 0 ];
-                $_sLocale        = $_aParts[ 1 ];
-                $_sCurrency      = $_aParts[ 2 ];
-                $_sLanguage      = $_aParts[ 3 ];
-                $_sLocaleCurLang = "{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
-                $_aUnitOptionSets[ $_sLocaleCurLang ] = isset( $_aUnitOptionSets[ $_sLocaleCurLang ] )
-                    ? $_aUnitOptionSets[ $_sLocaleCurLang ]
-                    : array(
-                        'country'            => $_sLocale,
-                        'preferred_currency' => $_sCurrency,
-                        'language'           => $_sLanguage,
-                        'show_now_retrieving_message'  => true,
-                        'ItemIds'            => array(),
-                        'associate_id'       => $_sAssociateTag,
-                    );
-                $_aUnitOptionSets[ $_sLocaleCurLang ][ 'ItemIds' ][] = $_sASIN;
+            // Classify items first.
+            $_aSetsByUnitID   = array();
+            $_aSetsByCallID   = array();    // when unit id is not set, this will be used
+            foreach( $aAllItems as $_sProductID => $_aItemsByContext ) {
+                $_aItem = reset( $_aItemsByContext );
+                $_iID   = ( integer ) $this->getElement( $_aItem, array( 'id' ), 0 );
+                if ( $_iID ) {
+                    $_aSetsByUnitID[ $_iID ][ $_sProductID ] = $_aItemsByContext;
+                    unset( $aAllItems[ $_sProductID ] );
+                    continue;
+                }
+                $_sCallID = $this->getElement( $_aItem, array( 'call_id' ), '' );
+                if ( $_sCallID ) {
+                    $_aSetsByCallID[ $_sCallID ][ $_sProductID ] = $_aItemsByContext;
+                    unset( $aAllItems[ $_sProductID ] );
+                    continue;
+                }
             }
-            return $_aUnitOptionSets;
+
+            // Generate and merge.
+            return $this->___getUnitOptionSetsByItems( $_aSetsByUnitID )
+                + $this->___getUnitOptionSetsByItems( $_aSetsByCallID );
+            
         }
+            /**
+             * @param  array $aSetsByID
+             * @return array
+             * @since  4.3.4
+             */
+            private function ___getUnitOptionSetsByItems( array $aSetsByID ) {
+                $_aUnitOptions = array();
+                foreach( $aSetsByID as $_iID => $_aItemsByProductID ) {
+                    $_aUnitOptions = $_aUnitOptions
+                         + $this->___getUnitOptionSetsGeneratedWithID( $_iID, $_aItemsByProductID );
+                }
+                return $_aUnitOptions;
+            }
+                /**
+                 * Generates unit arguments with the first item and then add ASINs to the `ItemIDs` argument.
+                 * @param  integer|string $isID A call ID or unit ID 
+                 * @param  array $aItemsByProductID
+                 * @return array
+                 */
+                private function ___getUnitOptionSetsGeneratedWithID( $isID, $aItemsByProductID ) {
+                    
+                    $_aUnitOptionSets = array();
+                    foreach( array_keys( $aItemsByProductID ) as $_sASINLocaleCurLang ) {
+                        
+                        $_aElements      = $this->getElementAsArray( $aItemsByProductID, array( $_sASINLocaleCurLang ) );
+                        $_aElement       = reset( $_aElements );
+                        $_sAssociateTag  = $this->getElement( $_aElement, array( 'tag' ) );
+                        $_aParts         = explode( '|', $_sASINLocaleCurLang );
+                        $_sASIN          = $_aParts[ 0 ];
+                        $_sLocale        = $_aParts[ 1 ];
+                        $_sCurrency      = $_aParts[ 2 ];
+                        $_sLanguage      = $_aParts[ 3 ];
+                        $_sKey           = "{$isID}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+                        $_aUnitOptionSets[ $_sKey ] = isset( $_aUnitOptionSets[ $_sKey ] )
+                            ? $_aUnitOptionSets[ $_sKey ]
+                            : array(
+                                'country'            => $_sLocale,
+                                'preferred_currency' => $_sCurrency,
+                                'language'           => $_sLanguage,
+                                'show_now_retrieving_message'  => true,
+                                'ItemIds'            => array(),
+                                'associate_id'       => $_sAssociateTag,
+                                'item_format'        => str_replace( '&', '%', $this->getElement( $_aElement, array( 'item_format_tags' ) ) ),
+                            );
+                        $_aUnitOptionSets[ $_sKey ][ 'ItemIds' ][] = $_sASIN;
+                    }
+                    return $_aUnitOptionSets;                    
+                    
+                }
+
 
         /**
          * Converts numeric indices to associate keys.
@@ -206,7 +257,8 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 'context'   => '', 'asin'      => '', 'tag'       => '',
                 'locale'    => '', 'currency'  => '', 'language'  => '',
                 'output'    => '', 'id'        => 0,  'type'      => '',
-                'set'       => 0,  'cache_duration' => 86400,
+                'set'       => 0,  'cache_duration'   => 86400,
+                'call_id'   => '', 'item_format_tags' => '',
             );
             foreach( $aDueElements as $_sContext => $_aDueElement ) {
                 $_aDueElement = $_aDueElement + $_aStructure;

@@ -157,10 +157,11 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                 $_sLocale        = strtoupper( $this->_oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sCurrency      = $this->_oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage      = $this->_oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
-                $_aRatingColumns = array( 'rating', 'rating_image_url', 'rating_html', 'number_of_reviews' );
-                $_aReviewColumns = array( 'customer_review_url', 'customer_review_charset', 'customer_reviews' );
+                $_aRatingColumns = array( 'rating', 'rating_image_url', 'rating_html' );
+                $_aReviewColumns = array( 'customer_reviews', 'customer_review_url', 'customer_review_charset' );
+                $_aRatingReviewCommonColumns = array( 'number_of_reviews' );
 
-                if ( ! in_array( $sColumnName, array_merge( $_aRatingColumns, $_aReviewColumns ), true ) ) {
+                if ( ! in_array( $sColumnName, array_merge( $_aRatingColumns, $_aReviewColumns, $_aRatingReviewCommonColumns ), true ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleProductInformation(
                         $aScheduleTask[ 'associate_id' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,
                         $aScheduleTask[ 'asin' ],
@@ -173,16 +174,6 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
 
                 $_sProductID = $aScheduleTask[ 'asin' ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage;
 
-                // Schedule a rating retrieval routine.
-                if ( in_array( $sColumnName, $_aRatingColumns, true ) ) {
-                    AmazonAutoLinks_Event_Scheduler::scheduleRatingIfNoProductInformationRoutines( 
-                        $_sProductID,
-                        $iCacheDuration,
-                        $_bForceRenew
-                    );
-                    return;
-                }
-
                 // Schedule a review retrieval background routine.
                 if ( in_array( $sColumnName, $_aReviewColumns, true ) ) {
                     AmazonAutoLinks_Event_Scheduler::scheduleReviewIfNoProductInformationRoutines(
@@ -190,6 +181,39 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                         $iCacheDuration,
                         $_bForceRenew
                     );
+                }
+
+                // Schedule a rating retrieval routine.
+                if ( in_array( $sColumnName, $_aRatingColumns, true ) ) {
+                    AmazonAutoLinks_Event_Scheduler::scheduleRatingIfNoProductInformationRoutines(
+                        $_sProductID,
+                        $iCacheDuration,
+                        $_bForceRenew
+                    );
+                    return;
+                }
+
+                // At this point, the column could be 'number_of_reviews'.
+                // In this case, it can be retrieved by the rating or review routines.
+                // So if the `%review%` Item Format tag is present and `%rating%` is not, schedule a review routine and vice versa.
+                // Schedule a rating/review retrieval routine.
+                if ( in_array( $sColumnName, $_aRatingReviewCommonColumns, true ) ) {
+                    if ( $this->_oUnitOption->hasItemFormatTags( array( '%rating%' ) ) ) {
+                        AmazonAutoLinks_Event_Scheduler::scheduleRatingIfNoProductInformationRoutines(
+                            $_sProductID,
+                            $iCacheDuration,
+                            $_bForceRenew
+                        );
+                        return;
+                    }
+                    if ( $this->_oUnitOption->hasItemFormatTags( array( '%review%' ) ) ) {
+                        AmazonAutoLinks_Event_Scheduler::scheduleReviewIfNoProductInformationRoutines(
+                            $_sProductID,
+                            $iCacheDuration,
+                            $_bForceRenew
+                        );
+                        return;
+                    }
                 }
 
             }
