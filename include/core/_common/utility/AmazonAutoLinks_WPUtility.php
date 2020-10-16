@@ -51,13 +51,16 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     }
 
     /**
-     * @param array $aCookies   The response 'cookies' element.
+     * @param  array|WP_Http_Cookie $aoCookies   The response 'cookies' element can be single `WP_Http_Cookie` object.
      * @return array
-     * @since 4.3.4
+     * @since  4.3.4
      */
-    static public function getCookiesToParse( array $aCookies ) {
+    static public function getCookiesToParse( $aoCookies ) {
+        $_aCookies = $aoCookies instanceof WP_Http_Cookie
+            ? array( $aoCookies )
+            : self::getAsArray( $aoCookies );
         $_aToParse = array();
-        foreach( $aCookies as $_siNameOrIndex => $_soCookie ) {
+        foreach( $_aCookies as $_siNameOrIndex => $_soCookie ) {
             if ( ! ( $_soCookie instanceof WP_Http_Cookie ) ) {
                 $_aToParse[] = array(
                     'name'  => $_siNameOrIndex,
@@ -93,7 +96,9 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         }
         $_aResponseCookies  = $aoResponse[ 'cookies' ];
         if ( version_compare( $GLOBALS[ 'wp_version' ], '4.6.0', '<' ) ) {
-            return $_aResponseCookies;
+            return $_aResponseCookies instanceof WP_Http_Cookie
+                ? array( $_aResponseCookies )   // for a case of a single item
+                : self::getAsArray( $_aResponseCookies );
         }
 
         // Sometimes response 'cookies' items and the header set-cookie items are different.
@@ -116,7 +121,13 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         }
 
         /// There is a case that the set-cookie entry is empty but the response 'cookies' element has items.
-        foreach( self::getAsArray( $aoResponse[ 'cookies' ] ) as $_isNameOrIndex => $_soCookie ) {
+
+        /// Sometimes the 'cookies' element is not an array.
+        $_aResponseCookies = $aoResponse[ 'cookies' ] instanceof WP_Http_Cookie
+            ? array( $aoResponse[ 'cookies' ] )
+            : self::getAsArray( $aoResponse[ 'cookies' ] );
+
+        foreach( $_aResponseCookies as $_isNameOrIndex => $_soCookie ) {
             $_bObject = $_soCookie instanceof WP_Http_Cookie; 
             $_sName   = $_bObject ? $_soCookie->name : $_isNameOrIndex;
             if ( in_array( $_sName, $_aParsedNames, true ) ) {
