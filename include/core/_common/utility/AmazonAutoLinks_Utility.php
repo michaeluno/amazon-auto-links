@@ -21,8 +21,16 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @since  4.3.4
      */
     static public function getSubDomain( $sURL ) {
-        $_sHost = parse_url( $sURL, PHP_URL_HOST );
-        return preg_replace("/^.*?\.(\w+(\.\w+)+)$/i",'$1', $_sHost );
+        return self::getSubDomainFromHostName( parse_url( $sURL, PHP_URL_HOST ) );
+    }
+
+    /**
+     * @param  string $sHost
+     * @sicne  4.3.4
+     * @return string
+     */
+    static public function getSubDomainFromHostName( $sHost ) {
+        return preg_replace("/^.*?\.(\w+(\.\w+)+)$/i",'$1', $sHost );
     }
 
     /**

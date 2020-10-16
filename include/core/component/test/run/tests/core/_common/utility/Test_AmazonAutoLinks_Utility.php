@@ -36,6 +36,19 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
+     * @tags URL
+     */
+    public function test_getSubDomainFromHostName() {
+        $_sHost   = 'www.amazon.it';
+        $this->_assertEqual( 'amazon.it', $this->oUtil->getSubDomainFromHostName( $_sHost ) );
+        $_sHost   = '.amazon.it';
+        $this->_assertEqual( 'amazon.it', $this->oUtil->getSubDomainFromHostName( $_sHost ) );
+        $_sHost   = 'amazon.it';
+        $this->_assertEqual( 'amazon.it', $this->oUtil->getSubDomainFromHostName( $_sHost ) );
+    }
+
+
+    /**
      * @purpose The result of the second call must match the result of the first call.
      * @return bool
      */
