@@ -100,6 +100,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'skip_argument_format'   => false,    // [4.3.4] (boolean) whether to skip argument formatting. Used in the multiple mode.
         'interval'               => 0,        // [4.3.4] (integer) An interval in seconds between request with the same request type.
         'renew_cache'            => false,    // [4.3.4] (boolean) Whether to renew the cache.
+        'amazon_language'        => '',       // [4.3.4] (string)  preferred language code for Amazon sites. Used to generate cookies.
     );
 
     /**
@@ -157,7 +158,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @param string If a URL is given, it returns ,
      * @return array|WP_Error
      * @since 4.3.4
-     * @deprecated
+     * @deprecated Due to a confusing name.
      */
 //    public function getRaw() {
 //        return $this->getResponse();
@@ -237,7 +238,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @remark Stores the response into the property.
      * @remark Still `aal_filter_http_request_response` is applied.
      * @return WP_Error|array
-     * @since 4.3.4
+     * @since  4.3.4
      */
     public function getRawResponse() {
         $_aoResponse = ! empty( $this->aoResponse )

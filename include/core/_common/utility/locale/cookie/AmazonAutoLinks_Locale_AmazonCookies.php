@@ -16,28 +16,51 @@
 class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @var AmazonAutoLinks_Locale_Base
+     * @var   AmazonAutoLinks_Locale_Base
+     * @since 4.3.4
      */
     public $oLocale;
 
     /**
-     * @var string
+     * @var   string
+     * @since 4.3.4
      */
     public $sLocale;
 
     /**
-     * @var string
+     * @var   string
+     * @since 4.3.4
      */
     public $sLanguage;
 
     /**
-     * @var int
+     * @var   integer
+     * @since 4.3.4
      */
     public $iCacheDuration = 604800;    // ( 60 * 60 * 24 * 7 ) : 7 days
 
+    /**
+     * @var   string
+     * @since 4.3.4
+     */
     public $sTransientKey  = '';
 
+    /**
+     * @var   string
+     * @since 4.3.4
+     */
     public $sTransientKeyTimeout = '';
+
+    /**
+     * The request type passed to `AmazonAutoLinks_HTTPClient`.
+     *
+     * With this set, the cookies will not be suppressed by filters since the `amazon_cookie` type is excepted.
+     *
+     * @var   string
+     * @see   AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies
+     * @since 4.3.4
+     */
+    public $sRequestType = 'amazon_cookie';
 
     /**
      * Sets up properties and hooks.
@@ -88,7 +111,7 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
             while( method_exists( $this, $_sMethodName = "_getResponseCookiesWithHTTPRequest_" . sprintf( '%02d', $_iIndex ) ) ) {
 
                 $_aThisCookies = call_user_func_array( array( $this, $_sMethodName ), array( $_aLastCookies, &$_sThisSessionID ) );
-                $_aThisCookies = $this->___getCookieMerged( $_aThisCookies, $_aLastCookies );
+                $_aThisCookies = $this->getCookiesMerged( $_aThisCookies, $_aLastCookies );
                 if ( $_sLastSessionID === $_sThisSessionID ) {
                     return $_aThisCookies;
                 }
@@ -103,46 +126,6 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
             return $_aLastCookies;
 
         }
-            /**
-             * @param  array $aPrecede
-             * @param  array $aSub
-             * @return array
-             * @since  4.3.4
-             */
-            private function ___getCookieMerged( $aPrecede, $aSub ) {
-                foreach( $aSub as $_isIndexOrName => $_aoCookie ) {
-                    if ( $this->___hasSameCookie( $aPrecede, $_isIndexOrName, $_aoCookie ) ) {
-                        continue;
-                    }
-                    if ( $_aoCookie instanceof WP_Http_Cookie ) {
-                        $aPrecede[] =  $_aoCookie;
-                        continue;
-                    } 
-                    $aPrecede[ $_isIndexOrName ] = $_aoCookie;
-                }
-                return $aPrecede;
-            }
-                /**
-                 * @param  array $aCookies
-                 * @param  string|integer $isIndexOrName
-                 * @param  array $aoCookie
-                 * @return boolean
-                 * @since  4.3.4
-                 */
-                private function ___hasSameCookie( $aCookies, $isIndexOrName, $aoCookie ) {
-
-                    $_sSearchName   = $aoCookie instanceof WP_Http_Cookie ? $aoCookie->name   : $isIndexOrName;
-                    $_sSearchDomain = $aoCookie instanceof WP_Http_Cookie ? $aoCookie->domain : null;
-                    foreach( $aCookies as $_isIndexOrName => $_aoCookie ) {
-                        $_sThisName   = $_aoCookie instanceof WP_Http_Cookie ? $_aoCookie->name   : $_isIndexOrName;
-                        $_sThisDomain = $_aoCookie instanceof WP_Http_Cookie ? $_aoCookie->domain : null;
-                        if ( $_sSearchDomain === $_sThisDomain && $_sSearchName === $_sThisName ) {
-                            return true;
-                        }
-                    }
-                    return false;
-
-                }
 
         /**
          * @return WP_Http_Cookie[]
@@ -198,7 +181,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                         'headers' => array( 'Referer' => '' ),
                         'method'  => 'HEAD',
                         'cookies' => array_reverse( $aCookies ),
-                    )
+                    ),
+                    $this->sRequestType
                 );
                 $_aCookies   = $_oHTTP->getCookies();
                 $sSessionID  = $this->_getSessionIDCookie( $_aCookies, $_sURL );
@@ -219,7 +203,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                     array(
                         'headers' => array( 'Referer' => '' ),
                         'cookies' => array_reverse( $aCookies ),
-                    )
+                    ),
+                    $this->sRequestType
                 );
                 if ( ! $this->hasPrefix( '2', $_oHTTP->getStatusCode() ) ) {
                     return array();
@@ -239,7 +224,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                         'headers' => array( 'Referer' => $_sFormURL ),
                         'cookies' => array_reverse( $_oHTTP->getCookies() ),
                         'body'    => $_aPostBody,
-                    )
+                    ),
+                    $this->sRequestType
                 );
                 $_aCookies   = $_oHTTP2->getCookies();
                 $sSessionID  = $this->_getSessionIDCookie( $_aCookies, $_sFormURL );
@@ -289,7 +275,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                     array(
                         'headers' => array( 'Referer' => '' ),
                         'cookies' => array_reverse( $aCookies ),
-                    )
+                    ),
+                    $this->sRequestType
                 );
                 $_aCookies   = $_oHTTP->getCookies();
                 $sSessionID  = $this->_getSessionIDCookie( $_aCookies, $_sTopURL );
@@ -311,7 +298,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                     // The GET method is used as those pages do not accept the HEAD method.
                     'headers'     => array( 'Referer' => $this->oLocale->getMarketPlaceURL() ),
                     'cookies'     => array_reverse( $aCookies ),
-                )
+                ),
+                $this->sRequestType
             );
             $_aCookies   = $_oHTTP->getCookies();
             $sSessionID  = $this->_getSessionIDCookie( $_aCookies, $_sURL );
@@ -332,7 +320,8 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
                     'headers'     => array( 'Referer' => $this->oLocale->getMarketPlaceURL() ),
                     'cookies'     => array_reverse( $aCookies ),
                     'renew_cache' => true,
-                )
+                ),
+                $this->sRequestType
             );
             $_aCookies   = $_oHTTP->getCookies();
             $sSessionID  = $this->_getSessionIDCookie( $_aCookies, $_sURL );
@@ -379,7 +368,7 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
          * @since  4.3.4
          */
         private function ___getCookieDomain( $sURL ) {
-            return '.' . ltrim( self::getSubDomain( $sURL ), '.' );
+            return '.' . ltrim( $this->getSubDomain( $sURL ), '.' );
         }
 
     /**

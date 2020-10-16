@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.4b01 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.4b02 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -413,6 +413,7 @@ return array(
     "AmazonAutoLinks_Event___Action_DeleteExpiredCaches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_DeleteExpiredCaches.php", 
     "AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal.php", 
+    "AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies.php", 
     "AmazonAutoLinks_Event_Filter_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Event_Filter_HTTPRequestCache.php", 
     "AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError.php", 
     "AmazonAutoLinks_Event_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/http/AmazonAutoLinks_Event_HTTPClientArguments.php", 
@@ -460,6 +461,7 @@ return array(
     "AmazonAutoLinks_DatabaseTable_aal_tasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_tasks.php", 
     "AmazonAutoLinks_Error" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/error/AmazonAutoLinks_Error.php", 
     "AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager.php", 
+    "AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 
     "AmazonAutoLinks_VersatileFileManager_DeleteMode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager_DeleteMode.php", 
     "AmazonAutoLinks_DOM" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_DOM.php", 
     "AmazonAutoLinks_Encrypt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_Encrypt.php", 
@@ -527,6 +529,5 @@ return array(
     "AmazonAutoLinks_Locale_US" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_US.php", 
     "AmazonAutoLinks_Locales" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locales.php", 
     "AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/cookie/AmazonAutoLinks_Locale_AmazonCookies.php", 
-    "AmazonAutoLinks_Locale_AmazonCookies_ViaAcceptForm" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/cookie/AmazonAutoLinks_Locale_AmazonCookies_ViaAcceptForm.php",
     "AmazonAutoLinks_TemplateUtility_NoOuterContainer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/template/AmazonAutoLinks_TemplateUtility_NoOuterContainer.php", 
 );

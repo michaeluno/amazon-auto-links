@@ -11,12 +11,8 @@
 /**
  * Plugin event handler.
  * 
- * @package      Amazon Auto Links
- * @since        2.0.0
- * @action       aal_action_simplepie_renew_cache
- * @action       aal_action_unit_prefetch
- * @action       aal_action_event_convert_template_options    
- * @filter       aal_filter_store_redirect_url - [2.0.5+] receives the redirecting url of the Amazon store
+ * @package Amazon Auto Links
+ * @since   2.0.0
  */
 class AmazonAutoLinks_Event {
 
@@ -80,13 +76,14 @@ class AmazonAutoLinks_Event {
          */
         private function ___handleActions() {
             new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
-            new AmazonAutoLinks_Event_Error_Log;  // 4.2.0
+            new AmazonAutoLinks_Event_Error_Log;  // [4.2.0]
         }
 
         private function ___handleFilters() {
             new AmazonAutoLinks_Event_HTTPClientArguments;
-            new AmazonAutoLinks_Event_Filter_HTTPRequestCache;  // 4.2.0
-            new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError; // 4.2.2
+            new AmazonAutoLinks_Event_Filter_HTTPRequestCache;                  // [4.2.0]
+            new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError;   // [4.2.2]
+            new AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies; // [4.3.4]
         }
 
         /**
