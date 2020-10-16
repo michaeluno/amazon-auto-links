@@ -29,6 +29,7 @@ class AmazonAutoLinks_CustomOEmbed_Setting {
     }
     
     /**
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @return      void
      * @callback    action      load_{page slug}_{tab slug}
      */
