@@ -146,11 +146,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             $this->oUnitProductFilter->bNoDuplicate = false;
         }
 
+        // Let extended classes set their own properties.
+        // Must be called before `___hasCustomDBTableAccess()` as some extended classes adds properties to judge whether it requires db table access.
+        $this->_setProperties();
+
         // Properties set after the user constructor as some properties need to be updated in individual unit types.
         $this->bDBTableAccess    = $this->___hasCustomDBTableAccess();
-
-        // Let extended classes set their own properties.
-        $this->_setProperties();
 
     }
         /**
@@ -202,6 +203,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * 
          * @remark      For the category unit type, the %description%, %content%, and %price% tags (variables) need to access the database table
          * and it requires the API to be connected.
+         * @remark      MUST be called after `_setProperties()`. This is important as some extended classes modifies `_aItemFormatDatabaseVariable` property.
          * @since       3.3.0
          * @since       3.5.0       Changed the visibility scope from protected.
          * @return      boolean

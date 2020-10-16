@@ -1,7 +1,6 @@
 # Todos
 
 ## Minor
-- Fixe a bug that descriptions in the category unit only appears for the first product.
 - Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are either not set nor sent.
 - Fix a bug: the `Types` radio option is not selected in `Add Unit by Search` -> `Types`.
 - Add the data-unit-type or data-type attribute in the output container. This helps for technical support.
