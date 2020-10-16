@@ -29,14 +29,16 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
 
     /**
      * A user constructor.
-     * 
+     *
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @since       3
      * @return      void
      */
     protected function _construct( $oFactory ) {}
     
     /**
-     * 
+     *
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback        action      load_{page slug}
      */
     protected function _loadPage( $oFactory ) {
@@ -51,7 +53,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
         $this->___doPageSettings();
         
     }
-    
+
         private function ___doPageSettings() {
             
             $this->oFactory->setPageHeadingTabsVisibility( false );
@@ -60,16 +62,21 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             
         }
 
-        
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     */
     protected function _doAfterPage( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $oFactory->oUtil->isDebugMode() ) {
             return;
         }
-        echo "<p>Debug</p>"
+        echo "<h4>Debug</h4>"
             . $oFactory->oDebug->get( 
                 $oFactory->oProp->aOptions 
-            );       
+            );
+        echo "<h4>Last Inputs</h4>"
+            . $oFactory->oDebug->get(
+                get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ] )
+            );
     }
         
 }
