@@ -8,18 +8,21 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
 
     /**
      * Returns field definition arrays.
-     * 
-     * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
-     */    
+     *
+     * Pass an empty string to the parameter for meta box options.
+     *
+     * @param  string $sFieldIDPrefix
+     * @param  array  $aUnitOptions
+     * @return array
+     */
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
             
         $aUnitOptions  = $aUnitOptions + array( 'country' => null );
-        $_bUPCAllowed  = 'CA' !== $aUnitOptions[ 'country' ];
-        $_bISBNAllowed = 'US' === $aUnitOptions[ 'country' ];
+        // @deprecated PA-API 5 no longer supports these options,
+//        $_bUPCAllowed  = 'CA' !== $aUnitOptions[ 'country' ];
+//        $_bISBNAllowed = 'US' === $aUnitOptions[ 'country' ];
          
-        $_aFields       =  array(
+        return array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',
                 'type'          => 'hidden',
@@ -125,7 +128,6 @@ class AmazonAutoLinks_FormFields_ItemLookupUnit_Main extends AmazonAutoLinks_For
                 'default'           => 'raw',
             ),
         );
-        return $_aFields; 
         
     }
           
