@@ -11,15 +11,11 @@
 /**
  * Creates Amazon product links by category.
  * 
- * @package     Amazon Auto Links
- * @filter      apply       aal_filter_description_node
- *  first parameter:    the description node
- *  second parameter:   the AmazonAutoLinks_Core object
- * 
- * @since       unknown
- * @since       3           Changed the name from `AmazonAutoLinks_UnitOutput_Category`.
- * @since       3.8.1       deprecated
- * @since       3.9.0       Serves as a base class for `AmazonAutoLinks_UnitOutput_category3`
+ * @package Amazon Auto Links
+ * @since   unknown
+ * @since   3           Changed the name from `AmazonAutoLinks_UnitOutput_Category`.
+ * @since   3.8.1       deprecated
+ * @since   3.9.0       Serves as a base class for `AmazonAutoLinks_UnitOutput_category3`
  */
 class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
 
@@ -233,29 +229,44 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         }
 
         /**
-         * Converts the sort order for the RSS client property.
-         * @since       3
-         * @return      string
-         * @since       3.9.3       Changed the scope to `protected`.
+         * @param  $aProducts
+         * @return array
+         * @since  4.3.4
          */
-        protected function _getSortOrder() {
-            
-            // random', // date, title, title_descending    
-            $_sSortOrder = $this->oUnitOption->get( 'sort' );
-            switch( $_sSortOrder ) {
-                case 'raw':
-                    return 'raw';
-                case 'date':
-                    return 'date_descending';
-                case 'title':
-                    return 'title_ascending';
-                case 'title_descending':
-                case 'random':
-                    return $_sSortOrder;
-                default:
-                    return 'random';
-            }
-
+        protected function _getProductsSorted( $aProducts ) {
+            $_sSortType   = $this->___getSortOrder();
+            $_sMethodName = "_getItemsSorted_{$_sSortType}";
+            return $this->{$_sMethodName}( $aProducts );
         }
+            /**
+             * Gets the sort type.
+             *
+             * ### Accepted Values
+             * 'title'             => __( 'Title', 'amazon-auto-links' ),
+             * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
+             * 'random'            => __( 'Random', 'amazon-auto-links' ),
+             * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
+             *
+             * @since  3
+             * @return string
+             * @since  3.9.3  Changed the visibility to `protected`.
+             * @since  4.3.4  Changed the visibility to `private` as unused except by this class.
+             */
+            private function ___getSortOrder() {
+                $_sSortOrder = $this->oUnitOption->get( 'sort' );
+                switch( $_sSortOrder ) {
+                    case 'raw':
+                        return 'raw';
+                    case 'date':
+                        return 'date_descending';
+                    case 'title':
+                        return 'title_ascending';
+                    case 'title_descending':
+                    case 'random':
+                        return $_sSortOrder;
+                    default:
+                        return 'random';
+                }
+            }
 
 }

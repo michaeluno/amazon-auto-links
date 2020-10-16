@@ -54,16 +54,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
 
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
 
-        /**
-         * Sort items
-         * 'title'             => __( 'Title', 'amazon-auto-links' ),
-         * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
-         * 'random'            => __( 'Random', 'amazon-auto-links' ),
-         * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
-         */
-        $_sSortType          = $this->_getSortOrder();
-        $_sMethodName        = "_getItemsSorted_{$_sSortType}";
-        $_aProducts          = $this->{$_sMethodName}( $_aProducts );
+        $_aProducts          = $this->_getProductsSorted( $_aProducts );
 
         return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
@@ -203,9 +194,9 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 return $aCache;
             }
             /**
-             * @callback    filter
-             * @since   4.2.2
-             * @return  array|WP_Error
+             * @callback filter
+             * @since    4.2.2
+             * @return   array|WP_Error
              */
             public function replyToCaptureUpdatedDateForNewRequest( $oaResult, $sURL, $aArguments, $sRequestType, $iCacheDuration ) {
                 remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
@@ -378,7 +369,7 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 private function ___getProductsFormatted( $aItems, $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID, $_iCount ) {
 
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
-                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 3 );
+                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
                     $_iResultCount          = count( $_aProducts );
                     try {
 
@@ -502,12 +493,13 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
                 }
 
     /**
-     * @remark  The timing of filtering items by image and title is changed in order to support resuming with caches.
-     * @since   4.2.8
-     * @return array    A product array, empty when filtered out.
-     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     * @remark   The timing of filtering items by image and title is changed in order to support resuming with caches.
+     * @param    array $aProduct
+     * @return   array        A product array, empty when filtered out.
+     * @callback add_filter() aal_filter_unit_each_product_with_database_row
+     * @since    4.2.8
      */
-    public function replyToFilterProducts( $aProduct, $aDBProductRow, $aAssociatesInfo ) {
+    public function replyToFilterProducts( $aProduct ) {
         remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
         if ( empty( $aProduct ) ) {
             return array();
@@ -527,14 +519,16 @@ class AmazonAutoLinks_UnitOutput_category3 extends AmazonAutoLinks_UnitOutput_ca
      *
      * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
      *
-     * @since       3.9.0
-     * @return      array
-     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     * @param    array $aProduct
+     * @param    array $aDBRow
+     * @param    array $aScheduleIdentifier
+     * @return   array
+     * @callback add_filter      aal_filter_unit_each_product_with_database_row
+     * @since    3.9.0
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
 
         remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
-
         if ( empty( $aProduct ) ) {
             return array();
         }
