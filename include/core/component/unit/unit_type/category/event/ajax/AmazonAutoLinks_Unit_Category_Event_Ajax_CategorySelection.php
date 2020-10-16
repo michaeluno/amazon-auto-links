@@ -79,7 +79,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             'is_preview'    => true, // this disables the global ASIN blacklist.
             'show_errors'   => 1,
         ) + $_aUnitOptions;
-        $_oCategoryPreview  = new AmazonAutoLinks_UnitOutput_category3( $_aUnitOptions );
+        $_oCategoryPreview  = new AmazonAutoLinks_UnitOutput_category( $_aUnitOptions );
         $_sUnitOutput       = $_oCategoryPreview->get( array( $_sCategoryListURL ) );
 
         // The JavaScript script receives this response array

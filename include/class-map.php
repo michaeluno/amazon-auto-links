@@ -231,7 +231,6 @@ return array(
     "AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview.php", 
     "AmazonAutoLinks_UnitOption_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/option/AmazonAutoLinks_UnitOption_category.php", 
     "AmazonAutoLinks_UnitOutput_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category.php", 
-    "AmazonAutoLinks_UnitOutput_category3" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category3.php", 
     "AmazonAutoLinks_ScraperDOM_BestsellerProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/utility/AmazonAutoLinks_ScraperDOM_BestsellerProducts.php", 
     "AmazonAutoLinks_ScraperDOM_BestsellerProducts_ASIN" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/utility/AmazonAutoLinks_ScraperDOM_BestsellerProducts_ASIN.php", 
     "AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/utility/AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base.php", 

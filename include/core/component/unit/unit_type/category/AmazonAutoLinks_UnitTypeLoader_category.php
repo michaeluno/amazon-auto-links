@@ -149,7 +149,7 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
      * @return      string
      */
     public function replyToGetUnitOutput( $sOutput, $aArguments ) {
-        $_oUnit      = new AmazonAutoLinks_UnitOutput_category3( $aArguments );
+        $_oUnit      = new AmazonAutoLinks_UnitOutput_category( $aArguments );
         return $sOutput . trim( $_oUnit->get() );
     }
 

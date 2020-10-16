@@ -143,6 +143,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      *
      * @param  array $aURLs
      * @return array The array contains product information.
+     * @since  4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
      */
     public function fetch( $aURLs=array() ) {
 

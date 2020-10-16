@@ -174,8 +174,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $_aPreviewUnitOptions = $this->oUnitOption->get();
         $_aPreviewUnitOptions[ 'categories_exclude' ] = array();
         // @deprecated 4.2.0
-//        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category3( $_aPreviewUnitOptions );
-//        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category3( $this->oUnitOption );
+//        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $_aPreviewUnitOptions );
+//        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
 
         $_bNested          = false !== strpos( $aPageElements[ 'sBreadcrumb' ], '>' );
 

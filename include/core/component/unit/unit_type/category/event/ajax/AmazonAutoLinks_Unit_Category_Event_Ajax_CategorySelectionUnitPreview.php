@@ -57,7 +57,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview exte
                 'categories_exclude' => $this->___getCategoriesFormatted( $_aExcludingCategories ),
             ) + $aUnitOptions;
 
-            $_oUnitPreview         = new AmazonAutoLinks_UnitOutput_category3( $aUnitOptions );
+            $_oUnitPreview         = new AmazonAutoLinks_UnitOutput_category( $aUnitOptions );
             return $_oUnitPreview->get();
 
         }

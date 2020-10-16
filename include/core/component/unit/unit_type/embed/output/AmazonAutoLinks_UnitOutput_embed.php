@@ -13,7 +13,7 @@
  *
  * @since       4.0.0
  */
-class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_category3 {
+class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_category {
 
     /**
      * Stores the unit type.
