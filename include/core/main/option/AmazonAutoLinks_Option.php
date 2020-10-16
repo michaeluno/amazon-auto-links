@@ -380,7 +380,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'item_format' => $_bAPIConnected
                 ? $this->getDefaultItemFormatConnected()
                 : $this->getDefaultItemFormatDisconnected(),
-            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%image_size%px; max-height:%image_size%px; ">' . PHP_EOL
+            'image_format' => '<div class="amazon-product-thumbnail" style="max-width:%image_size%px; max-height:%image_size%px; width:%image_size%px;">' . PHP_EOL
                 . '    <a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">' . PHP_EOL
                 . '        <img src="%src%" alt="%description_text%" style="max-height:%image_size%px;" />' . PHP_EOL
                 . '    </a>' . PHP_EOL
