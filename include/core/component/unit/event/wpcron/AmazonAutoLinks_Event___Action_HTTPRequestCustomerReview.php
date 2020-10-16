@@ -95,7 +95,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
              * @since  4.3.4
              */
             private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew, $sLanguage ) {
-                $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
                 $oHTTP          = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     $iCacheDuration,
@@ -104,7 +103,6 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                         'redirection' => 20,
                         'interval'    => 10,
                         'renew_cache' => ( boolean ) $bForceRenew,
-                        'cookies'     => $_oLocale->getHTTPRequestCookies(),
                     ),
                     'customer_review'
                 );

@@ -162,7 +162,12 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLi
             $_sURL     = $_oMock->call( '___getRatingWidgetPageURL', array( $sASIN, $sLocale, true ) ); // B08FWDGDS5, B08HGKZC6T
             $this->_output( 'URL: ' . $_sURL );
 
-            $_aRequestCookies = $_oLocale->getHTTPRequestCookies();
+            $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $sLocale );
+            $_aRequestCookies   = $_oVersatileCookies->get();
+            $_aRequestCookies   = empty( $_aRequestCookies )
+                ? $_oLocale->getHTTPRequestCookies()
+                : $_aRequestCookies;
+
             $_aParseCookies   = $this->getCookiesToParse( $_aRequestCookies );
             $this->_outputDetails( 'Request Cookies', $_aParseCookies );
 

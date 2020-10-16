@@ -105,8 +105,13 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
              */
             private function ___getWidgetPageResponse( &$oHTTP, $sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage ) {
 
-                $_oLocale         = new AmazonAutoLinks_Locale( $sLocale );
-                $_aRequestCookies = $_oLocale->getHTTPRequestCookies( $sLanguage );
+                $_oLocale           = new AmazonAutoLinks_Locale( $sLocale );
+                $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $sLocale );
+                $_aRequestCookies   = $_oVersatileCookies->get();
+                $_aRequestCookies   = empty( $_aRequestCookies )
+                    ? $_oLocale->getHTTPRequestCookies()
+                    : $_aRequestCookies;
+
                 $_aArguments      = array(
                     'timeout'     => 20,
                     'redirection' => 20,

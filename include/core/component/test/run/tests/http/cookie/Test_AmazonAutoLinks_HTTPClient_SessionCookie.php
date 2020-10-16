@@ -67,7 +67,12 @@ class Test_AmazonAutoLinks_HTTPClient_SessionCookie extends AmazonAutoLinks_Unit
             $_oLocale               = new AmazonAutoLinks_Locale( $sLocale );
             $_oLocale               = $_oLocale->get();
             $_oMock                 = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Unit_Utility' );
-            $_aAssociatesCookies    = $_oLocale->getHTTPRequestCookies();
+            $_oVersatileCookies     = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $sLocale );
+            $_aRequestCookies       = $_oVersatileCookies->get();
+            $_aAssociatesCookies    = empty( $_aRequestCookies )
+                ? $_oLocale->getHTTPRequestCookies()
+                : $_aRequestCookies;
+
             $_sAssociatesURL        = $_oLocale->getAssociatesURL();
 
             $_oMockCookieGetter     = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Locale_AmazonCookies', array( $_oLocale, '' ) );

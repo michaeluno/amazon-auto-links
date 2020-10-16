@@ -182,15 +182,12 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
                 add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20, 2 );
 
-                $_sLocale = AmazonAutoLinks_Locales::getLocaleFromURL( $sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
-                $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
                 $_oHTTP   = new AmazonAutoLinks_HTTPClient(
                     $sURL,
                     86400,
                     array(
                         'timeout'     => 20,    // 20 seconds as the default is 5 seconds and it often times out
                         'redirection' => 20,
-                        'cookies' => $_oLocale->getHTTPRequestCookies( $sLanguage ),
                     ),
                     $this->sUnitType . '_unit_type' // request type
                 );

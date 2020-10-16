@@ -86,13 +86,11 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
             $this->_output( 'URL: ' . $_sURL );
             $this->_output( 'Locale: ' . $_sLocale );
 
-            $_aRequestCookies   = $_oLocale->getHTTPRequestCookies();
             $_oHTTP             = new AmazonAutoLinks_HTTPClient(
                 $_sURL,
                 86400,
                 array(
                     'headers' => array( 'Referer' => '' ),
-                    'cookies' => $_aRequestCookies,
                 )
             );
             $_aCookies          = $_oHTTP->getCookies();
@@ -163,7 +161,11 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
 
             // First request
             $_oLocale           = new AmazonAutoLinks_Locale( $_sLocale );
-            $_aRequestCookies   = $_oLocale->getHTTPRequestCookies();
+            $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $_sLocale );
+            $_aRequestCookies   = $_oVersatileCookies->get();
+            $_aRequestCookies   = empty( $_aRequestCookies )
+                ? $_oLocale->getHTTPRequestCookies()
+                : $_aRequestCookies;
             $this->_outputDetails( '1st Request Cookies: ', $this->getCookiesToParse( $_aRequestCookies ) );
             $_oHTTP             = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies ) );
             $_oHTTP->deleteCache();

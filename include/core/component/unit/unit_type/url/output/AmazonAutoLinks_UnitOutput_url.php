@@ -108,19 +108,12 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             $_aHTMLBodies    = array();
             $_iCacheDuration = ( integer ) $this->oUnitOption->get( 'cache_duration' );
             foreach( $aURLs as $_sURL ) {
-                $_aCookies = array();
-                if ( $this->isAmazonURL( $_sURL ) ) {
-                    $_sLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL );
-                    $_oLocale  = new AmazonAutoLinks_Locale( $_sLocale );
-                    $_aCookies = $_oLocale->getHTTPRequestCookies();
-                }
                 $_oHTTP    = new AmazonAutoLinks_HTTPClient(
                     $_sURL,
                     $_iCacheDuration,
                     array(  // http arguments
                         'timeout'     => 20,
                         'redirection' => 20,
-                        'cookies'     => $_aCookies,
                     ),
                     $this->sUnitType . '_unit_type' // request type
                 );
