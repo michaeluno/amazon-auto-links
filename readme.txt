@@ -304,22 +304,6 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 4. **Setting Page** (Creating New Category Unit)
 5. **Setting Page** (Selecting Templates)
 
-== Todo ==
-- @todo add the SubscriptionID parameter to product links when AWS keys are given.
-- @todo reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
-- @todo introduce a new unit type Comparison Table.
-- @todo add a card template.
-- @todo add the ability to select a caching type from either database or file.
-- @todo add the ability to get caches from shared cache servers.
-- @todo add the ability to submit caches to shared cache servers.
-- @todo add the ability to make the site a shared cache server.
-- @todo add the ability to create actual posts from units.
-- @todo add a button with an icon.
-- @todo add an orange button.
-- @todo add an gray button.
-- @todo add a button with a background image.
-- @todo add a clone action link to buttons.
-
 == Changelog ==
 
 = 4.3.4 =

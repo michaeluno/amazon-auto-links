@@ -1,0 +1,23 @@
+# Todos
+
+## Minor
+- Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are either not set nor sent.
+- Fix a bug: the `Types` radio option is not selected in `Add Unit by Search` -> `Types`.
+- Add the data-unit-type or data-type attribute in the output container. This helps for technical support.
+- Move the lines of unit debug outputs into a separate file for events with filter hooks.
+
+## Meager
+- Add the SubscriptionID parameter to product links when AWS keys are given.
+- Reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
+- Introduce a new unit type Comparison Table.
+- Add a card template.
+- Add the ability to select a caching type from either database or file.
+- Add the ability to get caches from shared cache servers.
+- Add the ability to submit caches to shared cache servers.
+- Add the ability to make the site a shared cache server.
+- Add the ability to create actual posts from units.
+- Add a button with an icon.
+- Add an orange button.
+- Add an gray button.
+- Add a button with a background image.
+- Add a clone action link to buttons.
