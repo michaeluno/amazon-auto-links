@@ -1,3 +1,7 @@
+/*
+	@name Embed Admin
+	@version 1.0.1
+ */
 .country-flag {
     margin-right: 0.6em;
     vertical-align: middle;
@@ -5,6 +9,11 @@
 .store-domain {
     min-width: 140px;
     display: inline-block;
+}
+
+/* Flag label bottom margins - even when right-side meta box is removed, the margin needs to be applied */
+#fieldset-custom_oembed_associates_ids .amazon-auto-links-input-label-string {
+    margin: 0.8em 0;
 }
 
 /* Tweak Admin Page Framework Style */
