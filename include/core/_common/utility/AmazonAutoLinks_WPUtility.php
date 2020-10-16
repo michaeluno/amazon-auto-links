@@ -77,6 +77,67 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
     }
 
     /**
+     * @param  array $aHaystackCookies
+     * @param  string|integer $isIndexOrName
+     * @param  string|WP_Http_Cookie $soSearchCookie A cookie value or a WP_Http_Cookie object.
+     * @return boolean
+     * @since  4.3.4
+     */
+    static public function hasSameCookie( array $aHaystackCookies, $isIndexOrName, $soSearchCookie ) {
+
+        $_bObject       = $soSearchCookie instanceof WP_Http_Cookie;
+        $_sSearchName   = $_bObject ? $soSearchCookie->name : $isIndexOrName;
+        $_sSearchDomain = $_bObject ? $soSearchCookie->domain : null;
+        $_sSearchPath   = $_bObject ? $soSearchCookie->path : null;
+
+        foreach( $aHaystackCookies as $_isIndexOrName => $_aoCookie ) {
+            $_bThisObject = $_aoCookie instanceof WP_Http_Cookie;
+            $_sThisName   = $_bThisObject ? $_aoCookie->name : $_isIndexOrName;
+            $_sThisDomain = $_bThisObject ? $_aoCookie->domain : null;
+            $_sThisPath   = $_bThisObject ? $_aoCookie->path : null;
+            if ( $_sSearchName !== $_sThisName ) {
+                continue;
+            }
+            $_aPaths      = in_array( $_sThisPath, array( null, '/' ), true )
+                ? array( $_sThisPath, null )
+                : array( $_sThisPath );
+            if ( ! in_array( $_sSearchPath, $_aPaths, true ) ) {
+                continue;
+            }
+            $_sDomain    = ltrim( $_sThisDomain, '.' ); // can be subdomain or main domain and either with a dot (.) prefixed or not.
+            $_sSubDomain = self::getSubDomainFromHostName( $_sDomain ); // possible sub-domain. If the given domain is already a sub domain,
+            $_aDomains   = array( $_sThisDomain, $_sDomain, "www.{$_sSubDomain}", ".www.{$_sSubDomain}", $_sSubDomain, ".{$_sSubDomain}" );
+            if ( ! in_array( $_sSearchDomain, $_aDomains, true ) ) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @remark Amazon servers seem to parse cookies from last.
+     * @param  array  $aPrecede
+     * @param  array  $aSub
+     * @return WP_Http_Cookie[]
+     * @since  4.3.4
+     */
+    static public function getCookiesMerged( array $aPrecede, array $aSub ) {
+        foreach( $aSub as $_isIndexOrName => $_aoCookie ) {
+            if ( self::hasSameCookie( $aPrecede, $_isIndexOrName, $_aoCookie ) ) {
+                continue;
+            }
+            if ( $_aoCookie instanceof WP_Http_Cookie ) {
+                $aPrecede[] = $_aoCookie;
+                continue;
+            }
+            $aPrecede[] = new WP_Http_Cookie( array( 'name' => $_isIndexOrName, 'value' => $_aoCookie ) );
+        }
+        return $aPrecede;
+    }
+
+
+    /**
      * Retrieves cookies to perform HTTP requests form a `wp_remote_request()` response.
      *
      * Check 'set-cookie' entries directly from a given response header, not referring to the 'cookies' response element.
