@@ -142,15 +142,4 @@ class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_UnitTypeLo
         return __( 'Category', 'amazon-auto-links' );
     }
 
-    /**
-     * Return the unit output.
-     *
-     * @since       3.8.1
-     * @return      string
-     */
-    public function replyToGetUnitOutput( $sOutput, $aArguments ) {
-        $_oUnit      = new AmazonAutoLinks_UnitOutput_category( $aArguments );
-        return $sOutput . trim( $_oUnit->get() );
-    }
-
 }
