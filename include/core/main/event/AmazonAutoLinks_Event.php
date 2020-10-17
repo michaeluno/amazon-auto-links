@@ -80,10 +80,10 @@ class AmazonAutoLinks_Event {
         }
 
         private function ___handleFilters() {
-            new AmazonAutoLinks_Event_HTTPClientArguments;
-            new AmazonAutoLinks_Event_Filter_HTTPRequestCache;                  // [4.2.0]
-            new AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError;   // [4.2.2]
-            new AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies; // [4.3.4]
+            new AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments;
+            new AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache;                  // [4.2.0]
+            new AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError;   // [4.2.2]
+            new AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies; // [4.3.4]
         }
 
         /**

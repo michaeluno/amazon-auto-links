@@ -12,7 +12,7 @@
  * Automatically sets cookies if the request URL is of Amazon.
  * @since 4.3.4
  */
-class AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @var string

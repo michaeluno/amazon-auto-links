@@ -13,7 +13,7 @@
  *
  * @since        4.0.0
  */
-class AmazonAutoLinks_Event_HTTPClientArguments extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments extends AmazonAutoLinks_PluginUtility {
 
 
     public function __construct() {

@@ -57,7 +57,7 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
      * With this set, the cookies will not be suppressed by filters since the `amazon_cookie` type is excepted.
      *
      * @var   string
-     * @see   AmazonAutoLinks_Event_Filter_HTTPClientArguments_AmazonCookies
+     * @see   AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies
      * @since 4.3.4
      */
     public $sRequestType = 'amazon_cookie';

@@ -13,7 +13,7 @@
  *
  * @since 4.2.2
  */
-class AmazonAutoLinks_Event_Filter_HTTPResponseCaptureCaptchaError extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Sets up hooks.

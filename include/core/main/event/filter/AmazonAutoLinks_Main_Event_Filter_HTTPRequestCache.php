@@ -13,7 +13,7 @@
  *
  * @since        4.2.0
  */
-class AmazonAutoLinks_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
 
