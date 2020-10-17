@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.3
+Stable tag:         4.3.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -306,9 +306,16 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.3.4 =
+= 4.3.4 10/17/2020 =
 - Added the Saudi Arabia locale.
+- Fixed a bug that descriptions in the category unit only appeared for the first product.
+- Fixed a bug that passing the `unit_format` direct arguments were not taking effects.
+- Fixed a bug that passing the `item_format`, `image_format`, `title_format`, `unit_format` direct arguments were not taking effects, started since v4.0.0.
 - Fixed a bug that country flags were not displayed in the `Embed` setting tab.
+- Tweaked the default `Image Format` unit option regarding widths.
+- Tweaked the style of Embed setting tab.
+- Optimized HTTP requests to Amazon sites.
+- Optimized PA-API requests.
 
 = 4.3.3 - 10/04/2020 =
 - Fixed a bug that updating now-retrieving elements failed with a certain number of items.
