@@ -20,17 +20,23 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     private $___aCacheDBRow = array();
 
     /**
+     * @var string
+     */
+    static private $___sSiteDateFormat;
+
+    /**
      * AmazonAutoLinks_UnitOutput__ItemFormatter constructor.
      *
-     * @param $oUnitOutput
+     * @param AmazonAutoLinks_UnitOutput_Base $oUnitOutput
      * @param array $aProduct
      * @param array $aCacheDBRow
-     * @since   3.7.5   Added the `$aCacheDBRow` parameter.
+     * @since 3.7.5 Added the `$aCacheDBRow` parameter.
      */
     public function __construct( $oUnitOutput, array $aProduct, array $aCacheDBRow ) {
         $this->___oUnitOutput = $oUnitOutput;
         $this->___aProduct    = $aProduct;
         $this->___aCacheDBRow = $aCacheDBRow;
+        self::$___sSiteDateFormat = isset( self::$___sSiteDateFormat ) ? self::$___sSiteDateFormat : get_option( 'date_format' );
     }
 
     /**
@@ -43,15 +49,16 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     /**
      * Returns the formatted product HTML block.
      * @since       2.1.1
-     * @since       3.5.0       Changed the visiblity scope from protected.
+     * @since       3.5.0       Changed the visibility scope from protected.
      * @since       3.5.0       Renamed from `_formatProductOutput()`.
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @param       array       $aProduct
      * @return      string
      */
     private function ___getProductOutputFormatted( array $aProduct ) {
 
         $_iUpdatedTime = $this->___getProductUpdatedTime( $aProduct[ 'updated_date' ] );
-        $_sUpdatedDate = $this->getSiteReadableDate( $_iUpdatedTime, get_option( 'date_format' ), true );
+        $_sUpdatedDate = $this->getSiteReadableDate( $_iUpdatedTime, self::$___sSiteDateFormat, true );
 
         $_sOutput      = str_replace(
             array(
@@ -121,8 +128,9 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
         );
     }
         /**
-         * @param array $aProduct
-         * @since   4.1.0
+         * @since  4.1.0
+         * @param  array $aProduct
+         * @return string
          */
         private function ___getAuthorOutput( array $aProduct ){
             if ( ! isset( $aProduct[ 'author' ] ) ) {
@@ -155,11 +163,12 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
         }
 
         /**
-         * @since       3.2.0
-         * @since       3.5.0       Changed the visibility scope from protected.
-         * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-         * @since       3.7.5       Made the date the cached time
-         * @return      string
+         * @since  3.2.0
+         * @since  3.5.0  Changed the visibility scope from protected.
+         * @since  3.5.0  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+         * @since  3.7.5  Made the date the cached time
+         * @param  string $sUpdatedDate
+         * @return string
          */
         private function ___getPricingDisclaimer( $sUpdatedDate ) {
             return "<span class='pricing-disclaimer'>"
@@ -188,6 +197,5 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                         . "</span>"
                     . "</a>";
             }
-
 
 }
