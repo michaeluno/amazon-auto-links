@@ -38,17 +38,19 @@ class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks
     }
 
     /**
-     * @param array $aNewCookies
+     * @param array  $aNewCookies
+     * @param string $sURL
      * @since 4.3.4
+     * @since 4.3.5  Added the `$sURL` parameter.
      */
-    public function setCache( array $aNewCookies ) {
+    public function setCache( array $aNewCookies, $sURL='' ) {
         $_aCached = $this->get();
         if ( $aNewCookies === $_aCached ) {
             return;
         }
         // Drop entries with the same name domain, and path.
         foreach( $_aCached as $_isIndexOrName => $_aoCookie ) {
-            if ( AmazonAutoLinks_WPUtility::hasSameCookie( $aNewCookies, $_isIndexOrName, $_aoCookie ) ) {
+            if ( AmazonAutoLinks_WPUtility::hasSameCookie( $aNewCookies, $_isIndexOrName, $_aoCookie, $sURL ) ) {
                 unset( $_aCached[ $_isIndexOrName ] );
             }
         }

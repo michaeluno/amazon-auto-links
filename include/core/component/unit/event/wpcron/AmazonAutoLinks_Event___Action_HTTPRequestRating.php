@@ -125,7 +125,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                 // If 404, try again
                 if ( 404 === $_oHTTP->getStatusCode() ) {
                     $_aArguments[ 'renew_cache' ] = true;
-                    $_aArguments[ 'cookies' ]     = array_merge( $_oHTTP->getCookies(), $_aRequestCookies );
+                    $_aArguments[ 'cookies' ]     = $this->getCookiesMerged( $_oHTTP->getCookies(), $_aRequestCookies, $sURL );
                     $_oHTTP                       = new AmazonAutoLinks_HTTPClient(
                         $sURL,
                         $iCacheDuration,

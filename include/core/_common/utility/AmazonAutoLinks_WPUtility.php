@@ -18,6 +18,7 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
 
     /**
+     * Extracts the 'set-cookie' element from header.
      * @param WP_Error|array $aoResponse
      * @return array
      * @since 4.3.4
@@ -80,33 +81,32 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * @param  array $aHaystackCookies
      * @param  string|integer $isIndexOrName
      * @param  string|WP_Http_Cookie $soSearchCookie A cookie value or a WP_Http_Cookie object.
+     * @param  string $sURL
      * @return boolean
      * @since  4.3.4
      */
-    static public function hasSameCookie( array $aHaystackCookies, $isIndexOrName, $soSearchCookie ) {
+    static public function hasSameCookie( array $aHaystackCookies, $isIndexOrName, $soSearchCookie, $sURL='' ) {
 
-        $_bObject       = $soSearchCookie instanceof WP_Http_Cookie;
-        $_sSearchName   = $_bObject ? $soSearchCookie->name : $isIndexOrName;
-        $_sSearchDomain = $_bObject ? $soSearchCookie->domain : null;
-        $_sSearchPath   = $_bObject ? $soSearchCookie->path : null;
-
+        $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
+        self::___setVariablesForHasSameCookie( $_sSearchName, $_sSearchPath, $_sSearchDomain, $isIndexOrName, $soSearchCookie, $_sDomain );
         foreach( $aHaystackCookies as $_isIndexOrName => $_aoCookie ) {
-            $_bThisObject = $_aoCookie instanceof WP_Http_Cookie;
-            $_sThisName   = $_bThisObject ? $_aoCookie->name : $_isIndexOrName;
-            $_sThisDomain = $_bThisObject ? $_aoCookie->domain : null;
-            $_sThisPath   = $_bThisObject ? $_aoCookie->path : null;
+            self::___setVariablesForHasSameCookie( $_sThisName, $_sThisPath, $_sThisDomain, $_isIndexOrName, $_aoCookie, $_sDomain );
+            // Check name
             if ( $_sSearchName !== $_sThisName ) {
                 continue;
             }
-            $_aPaths      = in_array( $_sThisPath, array( null, '/' ), true )
+            // Check path
+            $_aPaths = in_array( $_sThisPath, array( null, '/' ), true )
                 ? array( $_sThisPath, null )
                 : array( $_sThisPath );
             if ( ! in_array( $_sSearchPath, $_aPaths, true ) ) {
                 continue;
             }
-            $_sDomain    = ltrim( $_sThisDomain, '.' ); // can be subdomain or main domain and either with a dot (.) prefixed or not.
-            $_sSubDomain = self::getSubDomainFromHostName( $_sDomain ); // possible sub-domain. If the given domain is already a sub domain,
-            $_aDomains   = array( $_sThisDomain, $_sDomain, "www.{$_sSubDomain}", ".www.{$_sSubDomain}", $_sSubDomain, ".{$_sSubDomain}" );
+            // Check domain
+            $_sThisDomainWODot   = ltrim( $_sThisDomain, '.' ); // can be subdomain or main domain and either with a dot (.) prefixed or not.
+            $_sThisDomainWithDot = '.' . $_sThisDomainWODot;
+            $_sSubDomain         = self::getSubDomainFromHostName( $_sThisDomainWODot ); // possible sub-domain. If the given domain is already a sub domain,
+            $_aDomains           = array( $_sThisDomain, $_sThisDomainWODot, $_sThisDomainWithDot, $_sSubDomain, ".{$_sSubDomain}" ); // @since 4.3.5 removed "www.{$_sSubDomain}", ".www.{$_sSubDomain}" as in a real browser, they seem to be handled differently.
             if ( ! in_array( $_sSearchDomain, $_aDomains, true ) ) {
                 continue;
             }
@@ -115,27 +115,60 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         return false;
     }
 
+        /**
+         * Sets a value to the variables passed by reference.
+         * @param &$sName
+         * @param &$sPath
+         * @param &$sDomain
+         * @param $isIndexOrName
+         * @param $soCookie
+         * @param $sCookieDomain
+         * @since 4.3.5
+         */
+        static private function ___setVariablesForHasSameCookie( &$sName, &$sPath, &$sDomain, $isIndexOrName, $soCookie, $sCookieDomain ) {
+            $_bObject = $soCookie instanceof WP_Http_Cookie;
+            $sName    = $_bObject ? $soCookie->name : $isIndexOrName;
+            $sDomain  = $_bObject ? $soCookie->domain : $sCookieDomain;
+            $sDomain  = $sDomain ? $sDomain : $sCookieDomain;
+            $sPath    = $_bObject ? $soCookie->path : '/';
+            $sPath    = $sPath ? $sPath : '/';
+        }
+
     /**
      * @remark Amazon servers seem to parse cookies from last.
      * @param  array  $aPrecede
      * @param  array  $aSub
+     * @param  string $sURL
      * @return WP_Http_Cookie[]
      * @since  4.3.4
      */
-    static public function getCookiesMerged( array $aPrecede, array $aSub ) {
-        foreach( $aSub as $_isIndexOrName => $_aoCookie ) {
-            if ( self::hasSameCookie( $aPrecede, $_isIndexOrName, $_aoCookie ) ) {
+    static public function getCookiesMerged( array $aPrecede, array $aSub, $sURL='' ) {
+        foreach( $aSub as $_isIndexOrName => $_soCookie ) {
+            $_oCookie = self::___getWPHTTPCookieFromCookieItem( $_soCookie, $_isIndexOrName, $sURL );
+            if ( self::hasSameCookie( $aPrecede, $_isIndexOrName, $_oCookie, $sURL ) ) {
                 continue;
             }
-            if ( $_aoCookie instanceof WP_Http_Cookie ) {
-                $aPrecede[] = $_aoCookie;
-                continue;
-            }
-            $aPrecede[] = new WP_Http_Cookie( array( 'name' => $_isIndexOrName, 'value' => $_aoCookie ) );
+            $aPrecede[] = $_oCookie;
         }
         return $aPrecede;
     }
-
+        /**
+         * @param  string|WP_Http_Cookie $soCookie
+         * @param  integer|string $isIndexOrName
+         * @param  string $sURL Needed to calculate a domain.
+         * @return WP_Http_Cookie
+         * @since  4.3.5
+         */
+        static private function ___getWPHTTPCookieFromCookieItem( $soCookie, $isIndexOrName='', $sURL='' ) {
+            $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
+            if ( $soCookie instanceof WP_Http_Cookie ) {
+                $soCookie->domain = $soCookie->domain ? $soCookie->domain : $_sDomain; /* @see WP_Http_Cookie::__construct() */
+                $soCookie->path   = $soCookie->path ? $soCookie->path : '/';
+                return $soCookie;
+            }
+            // Not passing a URL for the second parameter because it overrides the path and domain arguments.
+            return new WP_Http_Cookie( array( 'name' => $isIndexOrName, 'value' => $soCookie, 'path' => '/', 'domain' => $_sDomain ) );
+        }
 
     /**
      * Retrieves cookies to perform HTTP requests form a `wp_remote_request()` response.
@@ -145,10 +178,11 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
      * For WordPress 4.6.0 or below, it's not supported.
      *
      * @param  WP_Error|array $aoResponse
+     * @param  string $sURL Needs to generate a cookie domain.
      * @return WP_Http_Cookie[]
      * @since  4.3.4
      */
-    static public function getRequestCookiesFromResponse( $aoResponse ) {
+    static public function getRequestCookiesFromResponse( $aoResponse, $sURL='' ) {
         if ( is_wp_error( $aoResponse ) ) {
             return array();
         }
@@ -163,23 +197,10 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         }
 
         // Sometimes response 'cookies' items and the header set-cookie items are different.
-        // Especially when there are multiple items with the same name, the response 'cookies' only picks one of them.
+        // Especially when there are multiple items with the same name, the response 'cookies' only picks one of them.//
 
-        // Extract 'set-cookie' element from header
-        $_aRequestCookies = array();
-        $_aParsedNames    = array();
-        $_aHeader         = self::getHeaderFromResponse( $aoResponse );
-        $_aSetCookies     = self::getElementAsArray( $_aHeader, 'set-cookie' ); // there is a case that this is a string of a single entry
-
-        /// Convert each set-cookie entry to a WP_Http_Cookie object.
-        foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
-            if ( ! $_sSetCookieEntry ) {
-                continue;
-            }
-            $_oWPCookie         = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry );
-            $_aParsedNames[]    = $_oWPCookie->name;
-            $_aRequestCookies[] = $_oWPCookie;
-        }
+        $_aHeader            = self::getHeaderFromResponse( $aoResponse );
+        $_aCookiesFromHeader = self::___getWPHTTPCookiesFromResponseHeader( $_aHeader, $sURL );
 
         /// There is a case that the set-cookie entry is empty but the response 'cookies' element has items.
 
@@ -187,27 +208,37 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
         $_aResponseCookies = $aoResponse[ 'cookies' ] instanceof WP_Http_Cookie
             ? array( $aoResponse[ 'cookies' ] )
             : self::getAsArray( $aoResponse[ 'cookies' ] );
-
-        foreach( $_aResponseCookies as $_isNameOrIndex => $_soCookie ) {
-            $_bObject = $_soCookie instanceof WP_Http_Cookie; 
-            $_sName   = $_bObject ? $_soCookie->name : $_isNameOrIndex;
-            if ( in_array( $_sName, $_aParsedNames, true ) ) {
-                continue;
-            }
-            $_aRequestCookies[] = $_bObject 
-                ? $_soCookie
-                : new WP_Http_Cookie( array( 'name' => $_isNameOrIndex, 'value' => $_soCookie ) );
-        }
-        return $_aRequestCookies;
+        return self::getCookiesMerged( $_aCookiesFromHeader, $_aResponseCookies, $sURL );
 
     }
         /**
-         * Parses a given 'set-cookie' entry present in a HTTP header.
-         * @param string $sSetCookieEntry
-         * @return WP_Http_Cookie
-         * @since 4.3.4
+         * Converts each set-cookie entry to a WP_Http_Cookie object.
+         * @param  array  $aResponseHeader
+         * @param  string $sURL
+         * @return WP_Http_Cookie[]
+         * @since  4.3.5
          */
-        static private function ___getSetCookieEntryConvertedToWPHTTPCookie( $sSetCookieEntry ) {
+        static private function ___getWPHTTPCookiesFromResponseHeader( array $aResponseHeader, $sURL='' ) {
+
+            $_aRequestCookies = array();
+            $_aSetCookies     = self::getElementAsArray( $aResponseHeader, 'set-cookie' ); // there is a case that this is a string of a single entry
+            foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
+                if ( ! $_sSetCookieEntry ) {
+                    continue;
+                }
+                $_aRequestCookies[] = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry, $sURL );
+            }
+            return $_aRequestCookies;
+
+        }
+        /**
+         * Parses a given 'set-cookie' entry present in a HTTP header.
+         * @param  string $sSetCookieEntry
+         * @param  string $sURL
+         * @return WP_Http_Cookie
+         * @since  4.3.4
+         */
+        static private function ___getSetCookieEntryConvertedToWPHTTPCookie( $sSetCookieEntry, $sURL='' ) {
             $_aParts     = self::getStringIntoArray( $sSetCookieEntry, ';', '=' );
             $_aNameValue = array_shift( $_aParts ) + array( null, null ); // extract the first element
             $_aCookie    = array(
@@ -220,7 +251,8 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_Post {
                 }
                 $_aCookie[ $_aElement[ 0 ] ] = $_aElement[ 1 ];
             }
-            return new WP_Http_Cookie( $_aCookie );
+            $_oCookie = new WP_Http_Cookie( $_aCookie );
+            return self::___getWPHTTPCookieFromCookieItem( $_oCookie, '', $sURL );
         }
 
     /**

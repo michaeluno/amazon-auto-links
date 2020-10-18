@@ -48,7 +48,7 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
         $_sDefaultLocale    = ( string ) $_oOption->get( array( 'unit_default', 'country' ), 'US' );
         $_sLocale           = AmazonAutoLinks_Locales::getLocaleFromURL( $sURL, $_sDefaultLocale );
         $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $_sLocale );
-        $_oVersatileCookies->setCache( $_aResponseCookies );
+        $_oVersatileCookies->setCache( $_aResponseCookies, $sURL );
         return $aoResponse;
 
     }
@@ -79,10 +79,24 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
         $_aPassedCookies = $this->getElementAsArray( $aArguments, 'cookies' );
         $_sLanguage      = $this->getElement( $aArguments, 'amazon_language' );
         $_aSavedCookies  = $this->___getSavedCookies( $_aLocales, $_sLanguage );
-        $aArguments[ 'cookies' ] = $this->getCookiesMerged( $_aSavedCookies, $_aPassedCookies );
+        $aArguments[ 'cookies' ] = $this->getCookiesMerged( $_aSavedCookies, $_aPassedCookies, $this->___getFirstFoundAmazonURL( $_aURLs ) );
         return $aArguments;
 
     }
+        /**
+         * @param  array $aURLs
+         * @return string
+         * @since  4.3.5
+         * @todo   This is not reliable when URLs with mixed domains are given. Maybe deprecate the multiple mode of HTTP requests.
+         */
+        private function ___getFirstFoundAmazonURL( array $aURLs ) {
+            foreach( $aURLs as $_sURL ) {
+                if ( $this->isAmazonURL( $_sURL ) ) {
+                    return $_sURL;
+                }
+            }
+            return '';
+        }
         /**
          * @param  array $aURLs
          * @return array
