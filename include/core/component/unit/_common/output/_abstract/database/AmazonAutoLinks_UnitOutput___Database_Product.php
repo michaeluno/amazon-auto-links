@@ -121,15 +121,6 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
             $_bShouldSchedule = $_bIsExpired || ! $_bIsSet; // 3.8.5 When the value is not set, schedule retrieving extra product information
 
             $this->___scheduleBackgroundTask( $_bShouldSchedule, $aScheduleTask, $_iCacheDuration, $sColumnName );
-            $this->___addDebugInformation(
-                $_bIsSet,
-                $sColumnName,
-                $_iCacheDuration,
-                $_iExpirationTime,
-                $_bIsExpired,
-                $aScheduleTask
-            );
-
             return $_mValue;
 
         }
@@ -215,42 +206,6 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
                         return;
                     }
                 }
-
-            }
-
-            /**
-             * Schedules debug information to be inserted at the bottom of the product output.
-             * @param  boolean $_bIsSet
-             * @param  string $sColumnName
-             * @param  integer $_iCacheDuration
-             * @param  integer $_iExpirationTime
-             * @param  boolean $_bIsExpired
-             * @param  array $aScheduleTask
-             * @return void
-             */
-            private function ___addDebugInformation( $_bIsSet, $sColumnName, $_iCacheDuration, $_iExpirationTime, $_bIsExpired, $aScheduleTask ) {
-
-                if ( $_bIsSet ) {
-                    return;
-                }
-
-                $_oOption = AmazonAutoLinks_Option::getInstance();
-                if ( ! $_oOption->isDebug() ) {
-                    return;
-                }
-
-                AmazonAutoLinks_UnitOutput__DebugInformation_Product::add(
-                    $sColumnName,
-                    $aScheduleTask[ 'asin' ] . '_' . $aScheduleTask[ 'locale' ],
-                    array(
-                        'column_name'    => $sColumnName,
-                        'value'          => 'NULL',
-                        'cache_duration' => $_iCacheDuration,
-                        'expiry_time'    => $_iExpirationTime,
-                        'now'            => time(),
-                        'is_expired'     => $_bIsExpired,
-                    ) + $aScheduleTask
-                );
 
             }
 
