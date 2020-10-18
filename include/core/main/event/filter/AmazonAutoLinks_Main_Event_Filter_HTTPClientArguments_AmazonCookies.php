@@ -65,6 +65,7 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
         // Do nothing for API requests.
         $_aExceptedTypes   = $this->getAsArray( apply_filters( 'aal_filter_excepted_http_request_types_for_requests', array() ) );
         $_aExceptedTypes[] = $this->___sCookieRequestType;
+        $_aExceptedTypes[] = 'test';
         if ( in_array( $sRequestType, $_aExceptedTypes, true ) ) {
             return $aArguments;
         }
