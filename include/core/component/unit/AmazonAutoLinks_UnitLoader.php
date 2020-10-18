@@ -82,7 +82,22 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // 4.3.0
             new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // 4.3.0
 
+            $this->___loadDebugEvents(); // [4.3.5]
+
         }
+            /**
+             * @since 4.3.5
+             */
+            private function ___loadDebugEvents() {
+
+                $_oOption = AmazonAutoLinks_Option::getInstance();
+                if ( ! $_oOption->isDebug() ) {
+                    return;
+                }
+                new AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput;
+                new AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput;
+
+            }
         
     
     /**

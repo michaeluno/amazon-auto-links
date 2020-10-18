@@ -121,10 +121,12 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
             )
         );
         return apply_filters(
-            'aal_filter_unit_product_formatted_html',    // filter hook name
-            $_sOutput, // 1. filtering value
-            $aProduct[ 'ASIN' ], // 2.
-            $this->___oUnitOutput->oUnitOption->get( 'country' ) // 3.
+            'aal_filter_unit_product_formatted_html',
+            $_sOutput,
+            $aProduct[ 'ASIN' ] . '|' . $this->___oUnitOutput->oUnitOption->get( 'country' ) . '|' . $this->___oUnitOutput->oUnitOption->get( 'preferred_currency' ) . '|' . $this->___oUnitOutput->oUnitOption->get( 'language' ), // product ID
+            $this->___oUnitOutput,
+            $aProduct,
+            $this->___aCacheDBRow,
         );
     }
         /**

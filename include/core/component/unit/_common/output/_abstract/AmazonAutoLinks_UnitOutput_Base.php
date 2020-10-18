@@ -397,8 +397,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
-                new AmazonAutoLinks_UnitOutput__DebugInformation_Product( $this ),
-                new AmazonAutoLinks_UnitOutput__DebugInformation_Unit( $this ),
                 new AmazonAutoLinks_UnitOutput__Credit( $this ),
                 new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
             );
