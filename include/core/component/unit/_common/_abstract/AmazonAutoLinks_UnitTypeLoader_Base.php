@@ -71,7 +71,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
         add_filter( 'aal_filter_default_unit_options_' . $this->sUnitTypeSlug, array( $this, 'replyToGetDefaultUnitOptions' ) );
 
         // 3.5.0+
-        add_filter( 'aal_filter_unit_output_' . $this->sUnitTypeSlug, array( $this, 'replyToGetUnitOutput' ), 10, 2 );
+        add_filter( 'aal_filter_unit_output_' . $this->sUnitTypeSlug, array( $this, 'replyToGetUnitOutput' ), 10, 3 );
 
         // 3.5.0+
         add_filter( 'aal_filter_detected_unit_type_by_arguments', array( $this, 'replyToDetermineUnitType' ), 10, 2 );
@@ -169,16 +169,24 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
      * Return the unit output.
      *
      * @remark      Override this method in each unit type loader class.
-     * @callback    add_filter      aal_filter_unit_output_{unit type slug}
+     * @callback    add_filter() aal_filter_unit_output_{unit type slug}
      * @param       string $sOutput
-     * @param       array $aArguments
+     * @param       array  $aArguments
+     * @param       AmazonAutoLinks_UnitOutput_Base|null $oUnitOption   null will be given by the caller but it be updated to an unit option object.
      * @since       3.5.0
+     * @since       4.3.5   Added the `$oUnitOption` parameter.
      * @return      string
      */
-    public function replyToGetUnitOutput( $sOutput, $aArguments ) {
-        $_sClassName = 'AmazonAutoLinks_UnitOutput_' . strtolower( $this->sUnitTypeSlug );
-        $_oUnit      = new $_sClassName( $aArguments );
+    public function replyToGetUnitOutput( $sOutput, $aArguments, &$oUnitOption ) {
+
+        /**
+         * @var AmazonAutoLinks_UnitOutput_Base $_oUnit
+         */
+        $_sClassName   = 'AmazonAutoLinks_UnitOutput_' . strtolower( $this->sUnitTypeSlug );
+        $_oUnit        = new $_sClassName( $aArguments );
+        $oUnitOption   = $_oUnit->oUnitOption;  // update the unit option parameter
         return $sOutput . trim( $_oUnit->get() );
+
     }
 
     /**

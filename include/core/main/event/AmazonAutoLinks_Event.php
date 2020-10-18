@@ -84,6 +84,7 @@ class AmazonAutoLinks_Event {
             new AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache;                  // [4.2.0]
             new AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError;   // [4.2.2]
             new AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies; // [4.3.4]
+            new AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType;             // [4.3.5]
         }
 
         /**

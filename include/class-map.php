@@ -412,6 +412,7 @@ return array(
     "AmazonAutoLinks_Event___Action_DeleteExpiredCaches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_DeleteExpiredCaches.php", 
     "AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal.php", 
+    "AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache.php", 

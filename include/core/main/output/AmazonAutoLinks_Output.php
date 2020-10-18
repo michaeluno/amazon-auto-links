@@ -168,32 +168,42 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              *
              * @remark All the outputs go through this method.
              * @param  string $sUnitType
-             * @param  array  $_aUnitOptions
+             * @param  array  $aUnitOptions
              * @return string The unit output
              */
-            private function ___getOutputByUnitType( $sUnitType, $_aUnitOptions ) {
+            private function ___getOutputByUnitType( $sUnitType, array $aUnitOptions ) {
 
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
                 if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
                     /**
                      * Each unit type hooks into this filter hook and generates their outputs.
                      */
-                    return trim( apply_filters( 'aal_filter_unit_output_' . $sUnitType, '', $_aUnitOptions ) );
+                    return trim( apply_filters_ref_array( 'aal_filter_unit_output_' . $sUnitType, array( '', $aUnitOptions, &$_oUnitOption ) ) );
                 }
-
-                // For undefined unit types,
-                $_oOption  = AmazonAutoLinks_Option::getInstance();
-                $_sMessage = AmazonAutoLinks_Registry::NAME . ': ' . __( 'Could not identify the unit type. Please make sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
-                return $_oOption->isDebug()
-                    ? "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>"
-                        . "<p>" . $_sMessage . "</p>"
-                        . "<h4>" . __( 'Unit Arguments', 'amazon-auto-links' ) . "</h4>"
-                        . "<div>"
-                            . AmazonAutoLinks_Debug::get( $_aUnitOptions )
-                        . "</div>"
-                    : "";
+                return apply_filters( 'aal_filter_unit_output_unknown', $this->___getUnknownUnitTypeMessage( $sUnitType ), $aUnitOptions );
 
             }
+                /**
+                 * @param  string $sUnitType
+                 * @return string
+                 * @since  4.3.5
+                 */
+                private function ___getUnknownUnitTypeMessage( $sUnitType ) {
+                    $_oOption    = AmazonAutoLinks_Option::getInstance();
+                    $_iShowError = ( integer ) $_oOption->get( 'unit_default', 'show_errors' ); // 0: do not show, 1: show, 2: show as HTML comment
+                    if ( ! $_iShowError ) {
+                        return '';
+                    }
+                    $_sMessage = AmazonAutoLinks_Registry::NAME . ': '
+                             . sprintf(
+                                 __( 'Could not resolve the given unit type, %1$s.', 'amazon-auto-links' ),
+                                $sUnitType
+                             )
+                             . ' ' . __( 'Please be sure to update the auto-insert definition if you have deleted the unit.', 'amazon-auto-links' );
+                    return 1 === $_iShowError
+                        ? "<p class='error'>{$_sMessage}</p>"
+                        : "<!-- {$_sMessage} -->";
+                }
 
     /* Deprecated Methods */
 
