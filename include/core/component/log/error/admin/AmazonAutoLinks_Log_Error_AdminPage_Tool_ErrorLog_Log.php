@@ -190,7 +190,8 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLi
                         if ( is_scalar( $mValue ) ) {
                             $_sValue   = '(' . gettype( $mValue ) . ') ' . ( string ) $mValue;
                         } else {
-                            $_sValue   = '(' . gettype( $mValue ) . ')' . PHP_EOL;
+                            $_sClass   = is_object( $mValue ) ? ': ' . get_class( $mValue ) : '';
+                            $_sValue   = '(' . gettype( $mValue ) . $_sClass . ')' . PHP_EOL;
                             $_sValue  .= $this->___getArrayRepresentation( ( array ) $mValue, $sPad . '    ' );
                             $_sValue   = trim( $_sValue );
                         }
