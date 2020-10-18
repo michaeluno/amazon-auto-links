@@ -35,11 +35,13 @@ class AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType extends AmazonAuto
      */
     public function replyToUnknownUnitTypeOutputs( $sOutput, array $aRawUnitOptions ) {
         return $sOutput
-            . "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>"
-                . "<h4>" . __( 'Unit Arguments', 'amazon-auto-links' ) . "</h4>"
+            . "<pre style='height: 300px; overflow-y: scroll; overflow-x: auto; padding: 1em'>"
+            . "<h4>" . 'Debug - Unknown Unit Type' . "</h4>"
+                . "<h5>" . __( 'Unit Arguments', 'amazon-auto-links' ) . "</h5>"
                 . "<div>"
                     . AmazonAutoLinks_Debug::getDetails( $aRawUnitOptions )
-                . "</div>";
+                . "</div>"
+            . "</pre>";
     }
 
 }
