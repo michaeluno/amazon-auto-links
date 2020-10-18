@@ -15,12 +15,14 @@
 class AmazonAutoLinks_Locale {
 
     /**
-     * @var array
+     * @var   array
+     * @since 4.3.4
      */
     static public $aCaches = array();
 
     /**
-     * @var AmazonAutoLinks_Locale_Base
+     * @var   AmazonAutoLinks_Locale_Base
+     * @since 4.3.4
      */
     public $oLocale;
 
@@ -35,6 +37,7 @@ class AmazonAutoLinks_Locale {
         /**
          * @param string $sLocale
          * @return AmazonAutoLinks_Locale_Base
+         * @since  4.3.4
          */
         private function ___getLocaleObject( $sLocale ) {
             $_sSlug      = strtoupper( $sLocale );
@@ -52,6 +55,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return AmazonAutoLinks_Locale_Base
+     * @since  4.3.4
      */
     public function get() {
         return $this->oLocale;
@@ -59,6 +63,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getDomain() {
         return $this->oLocale->getDomain();
@@ -66,6 +71,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getFlagImg() {
         return $this->oLocale->getFlagImg();
@@ -73,6 +79,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getNoImageURL() {
         return $this->oLocale->getNoImageURL();
@@ -80,6 +87,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getLocaleNumber() {
         return $this->oLocale->getLocaleNumber();
@@ -87,6 +95,7 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getAddToCartURL() {
         return $this->oLocale->getAddToCartURL();
@@ -94,28 +103,36 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @return string
+     * @since  4.3.4
      */
     public function getBlackCurtainURL() {
         return $this->oLocale->getBlackCurtainURL();
     }
 
     /**
+     * @param  string $sPath
      * @return string
+     * @since  4.3.4
+     * @since  4.3.5  Added the `$sPath` parameter.
      */
-    public function getAssociatesURL() {
-        return $this->oLocale->getAssociatesURL();
-    }
-
-    /**
-     * @return string
-     */
-    public function getBestSellersURL() {
-        return $this->oLocale->getBestSellersURL();
+    public function getAssociatesURL( $sPath='' ) {
+        return $this->oLocale->getAssociatesURL( $sPath );
     }
 
     /**
      * @param  string $sPath
      * @return string
+     * @since  4.3.4
+     * @since  4.3.5  Added the `$sPath` parameter.
+     */
+    public function getBestSellersURL( $sPath='' ) {
+        return $this->oLocale->getBestSellersURL( $sPath );
+    }
+
+    /**
+     * @param  string $sPath
+     * @return string
+     * @since  4.3.4
      */
     public function getMarketPlaceURL( $sPath='' ) {
         return $this->oLocale->getMarketPlaceURL( $sPath );
@@ -135,6 +152,7 @@ class AmazonAutoLinks_Locale {
     /**
      * @param  string   $sASIN
      * @return string
+     * @since  4.3.4
      */
     public function getProductRatingWidgetURL( $sASIN ) {
         return $this->oLocale->getProductRatingWidgetURL( $sASIN );
@@ -143,6 +161,7 @@ class AmazonAutoLinks_Locale {
     /**
      * @param  string $sLanguage The preferred language.
      * @return array  An array for the `cookies` argument of `wp_remote_request()`.
+     * @since  4.3.4
      */
     public function getHTTPRequestCookies( $sLanguage='' ) {
         return $this->oLocale->getHTTPRequestCookies( $sLanguage );
@@ -151,6 +170,7 @@ class AmazonAutoLinks_Locale {
     /**
      * @param  string
      * @return string
+     * @since  4.3.4
      */
     public function getImpressionCounterScriptTag( $sAssociatesTag ) {
         return $this->oLocale->getImpressionCounterScriptTag( $sAssociatesTag );
@@ -158,8 +178,9 @@ class AmazonAutoLinks_Locale {
 
     /**
      * @param  string $sMethodName
-     * @param  array $aArguments
+     * @param  array  $aArguments
      * @return mixed|void
+     * @since  4.3.4
      */
     public function __call( $sMethodName, array $aArguments ) {
         return call_user_func_array( array( $this->oLocale, $sMethodName ), $aArguments );

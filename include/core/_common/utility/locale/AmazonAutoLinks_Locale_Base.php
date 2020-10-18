@@ -131,19 +131,25 @@ abstract class AmazonAutoLinks_Locale_Base {
     }
 
     /**
+     * @param  string $sPath
      * @return string
      * @since  4.3.4
+     * @since  4.3.5  Added the `$sPath` parameter.
      */
-    public function getBestSellersURL() {
-        return $this->getMarketPlaceURL() . '/gp/bestsellers/';
+    public function getBestSellersURL( $sPath='' ) {
+        return $this->getMarketPlaceURL() . '/gp/bestsellers/' . ltrim( $sPath, '/' );
     }
 
     /**
+     * @param  string $sPath
      * @return string
      * @since  4.3.4
+     * @since  4.3.5  Added the `$sPath` parameter.
      */
-    public function getAssociatesURL() {
-        return $this->sAssociatesURL;
+    public function getAssociatesURL( $sPath='' ) {
+        return $sPath
+            ? untrailingslashit( $this->sAssociatesURL ) . '/' . $sPath
+            : $this->sAssociatesURL;
     }
 
     /**
