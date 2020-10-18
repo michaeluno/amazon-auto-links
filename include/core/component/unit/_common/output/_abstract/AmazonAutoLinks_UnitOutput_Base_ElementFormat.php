@@ -52,11 +52,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             }
 
             // Item
-            $_aDBProductRow  = $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '_' . $sLocale );
             $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
                 $this,
                 $_aProduct,
-                $_aDBProductRow
+                $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage )
             );
             $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
 
