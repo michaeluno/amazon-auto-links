@@ -1,3 +1,3 @@
 - Optimized HTTP requests.
+- Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type null in ...AmazonAutoLinks_DatabaseTable_aal_request_cache.php on line 227.".
 - Fixed a bug that caused the PHP fatal error, "Uncaught Error: Cannot use object of type WP_Error as array." when trying to retrieve HTTP status code. 
- 

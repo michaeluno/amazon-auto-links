@@ -518,23 +518,30 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * @param   string  $sSQLQuery
      * @param   string  $sFormat
      * @param   integer $iRowOffset
-     * @return  array   An array holding columns.
+     * @return  array|null|mixed   An array holding columns when ARRAY_A is given for the `$sFormat` parameter. null on failure on the format other than 'ARRAY_A'. For 'ARRAY_A' an empty array on failure. 
      */
     public function getRow( $sSQLQuery, $sFormat='ARRAY_A', $iRowOffset=0 ) {
-        $_aRow = $GLOBALS[ 'wpdb' ]->get_row(
-            $sSQLQuery,
-            $sFormat,
-            $iRowOffset
-        );
-        // A user can set own format with $sFormat so if it's not array, return as it is.
-        if ( ! is_array( $_aRow ) ) {
+        /**
+         * @var $_oWPDB wpdb
+         */
+        $_oWPDB  = $GLOBALS[ 'wpdb' ];
+        $_anoRow = $_oWPDB->get_row( $sSQLQuery, $sFormat, $iRowOffset );
+        
+        if ( in_array( $sFormat, array( ARRAY_A, 'ARRAY_A' ), true ) ) {
+            if ( is_null( $_anoRow ) ) {
+                return array();
+            }
+            $_aRow = $_anoRow;
+            // When an array is returned, unserialize serialized arrays.
+            foreach( $_aRow as $_sColumnName => $_mValue ) {
+                $_aRow[ $_sColumnName ] = maybe_unserialize( $_mValue );
+            }
             return $_aRow;
         }
-        // When an array is returned, unserialize serialized arrays.
-        foreach( $_aRow as $_sColumnName => $_mValue ) {
-            $_aRow[ $_sColumnName ] = maybe_unserialize( $_mValue );
-        }
-        return $_aRow;
+        
+        // A user can set own format with $sFormat so if it's not array, return as it is.
+        return $_anoRow;
+
     }
     /**
      * Selects multiple rows.

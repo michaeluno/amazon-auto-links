@@ -135,8 +135,8 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
      */
     public function getCache( $asNames, $iCacheDuration=null ) {
         return is_array( $asNames )
-            ? $this->_getMultipleRows( $asNames, $iCacheDuration )
-            : $this->_getCacheEach( $asNames, $iCacheDuration );
+            ? $this->___getMultipleRows( $asNames, $iCacheDuration )
+            : $this->___getCacheEach( $asNames, $iCacheDuration );
     }
         /**
          *
@@ -161,22 +161,21 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
          *       ),
          * )
          */
-        private function _getMultipleRows( $aNames, $iCacheDuration=null ) {
+        private function ___getMultipleRows( $aNames, $iCacheDuration=null ) {
 
             $_sNames   = "('" . implode( "','", $aNames ) . "')";
             $_aResults =  $this->getRows(
-                "SELECT cache,modified_time,expiration_time,charset,request_uri,name
-                FROM {$this->aArguments[ 'table_name' ]}
-                WHERE name in {$_sNames}"
+                "SELECT cache,modified_time,expiration_time,charset,request_uri,name"
+                . " FROM `{$this->aArguments[ 'table_name' ]}`"
+                . " WHERE name in {$_sNames};"
             );       
 
             $_aRows = array();
             foreach( $_aResults as $_aResult ) {
-
                 if ( ! is_array( $_aResult ) ) {
                     continue;
                 }
-                $_aRows[ $_aResult[ 'name' ] ] = $this->_getFormattedRow( $_aResult, $iCacheDuration );
+                $_aRows[ $_aResult[ 'name' ] ] = $this->___getRowFormatted( $_aResult, $iCacheDuration );
             }
             return $_aRows;
             
@@ -188,32 +187,30 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
          * @param integer|null $iCacheDuration
          * @return array
          */
-        private function _getCacheEach( $sName, $iCacheDuration=null ) {
-            
+        private function ___getCacheEach( $sName, $iCacheDuration=null ) {
             $_aRow = $this->getRow(
-                "SELECT cache,modified_time,expiration_time,charset,request_uri,name
-                FROM {$this->aArguments[ 'table_name' ]}
-                WHERE name = '{$sName}'",
-                'ARRAY_A' 
-            );                
-            return $this->_getFormattedRow( $_aRow, $iCacheDuration );
-
+                "SELECT cache,modified_time,expiration_time,charset,request_uri,name"
+                    . " FROM `{$this->aArguments[ 'table_name' ]}`"
+                    . " WHERE name = '{$sName}';"
+            );
+            return $this->___getRowFormatted( $_aRow, $iCacheDuration );
         }
             /**
              * @param  array        $aRow               The row array returned from the database.
              * @param  integer|null $iCacheDuration     The cache duration in seconds. If not set, the stored cache duration will be used.
              * @return array
              */
-            private function _getFormattedRow( $aRow, $iCacheDuration=null ) {
-                $_aRow = is_array( $aRow )
-                    ? array(
+            private function ___getRowFormatted( array $aRow, $iCacheDuration=null ) {
+                if ( empty( $aRow ) ) {
+                    return array();
+                }
+                $_aRow = array(
                         'remained_time' => null !== $iCacheDuration
                             ? strtotime( $aRow[ 'modified_time' ] ) + $iCacheDuration - time()
                             : strtotime( $aRow[ 'expiration_time' ] ) - time(),                        
                         'charset'       => $aRow[ 'charset' ],
                         'data'          => maybe_unserialize( $aRow[ 'cache' ] ), 
-                    ) + $aRow
-                    : array();
+                    ) + $aRow;
                 unset( $_aRow[ 'cache' ] );
                 return $_aRow + array(
                     'remained_time' => 0,
