@@ -832,11 +832,14 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
     /**
      * Returns a response status code such as 404, 200 etc.
      * @remark Assumes to be called after performing get(), getBody(), getRawResponse(), or getResponse().
-     * @return integer
+     * @return integer HTTP status code such as 404, 200. 0 for WP_Error.
      * @since  4.3.4
      */
     public function getStatusCode() {
-        return ( integer ) $this->getElement( $this->getRawResponse(), array( 'response', 'code' ) );
+        $_aoResponse = $this->getRawResponse();
+        return is_wp_error( $_aoResponse )
+            ? 0
+            : ( integer ) $this->getElement( ( array ) $_aoResponse, array( 'response', 'code' ) );
     }
 
     /**
