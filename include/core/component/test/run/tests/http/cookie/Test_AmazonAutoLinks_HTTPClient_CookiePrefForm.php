@@ -23,17 +23,17 @@ class Test_AmazonAutoLinks_HTTPClient_CookiePrefForm extends AmazonAutoLinks_Uni
      * @tags US
      */
     public function test_CookiePrefForm_US() {
-        // ___getAssociatesRequestCookiesGenerated( $sURL, $sLocale, $sLanguage ) {
+
         $_oLocale    = new AmazonAutoLinks_Locale( 'US' );
         $_sFormURL   = $_oLocale->getMarketPlaceURL( '/cookieprefs?ref_=portal_banner_all' );
         $_oHTTP      = new AmazonAutoLinks_HTTPClient(
             $_sFormURL,
             86400,
             array(
-                'headers' => array( 'Referer' => $_oLocale->getMarketPlaceURL() ),
-            )
+                'headers'       => array( 'Referer' => $_oLocale->getMarketPlaceURL() ),
+            ),
+            'test'
         );
-        $_oHTTP->deleteCache();
         $this->_assertPrefix( '4', $_oHTTP->getStatusCode(), 'Should be 404 not found.', $_oHTTP->getStatusMessage() );
         $this->_assertEmpty( $_oHTTP->getCookiesParsable() );
 
@@ -51,7 +51,8 @@ class Test_AmazonAutoLinks_HTTPClient_CookiePrefForm extends AmazonAutoLinks_Uni
             86400,
             array(
                 'headers' => array( 'Referer' => $_oLocale->getMarketPlaceURL() ),
-            )
+            ),
+            'test'
         );
         $this->_assertPrefix( '2', $_oHTTP->getStatusCode(), 'Checking response HTTP status.', $_oHTTP->getStatusMessage() );
         $this->_assertSubString( 'anti-csrftoken-a2z', $_oHTTP->getBody(), 'Checking if the form exists', $_oHTTP->getBody() );
