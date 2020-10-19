@@ -225,10 +225,10 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // Tools - Unit option converter. This component has an event handler so needs to be loaded in the front-end as well.
             new AmazonAutoLinks_UnitOptionConverterLoader;
 
-            /// 4.2.0
+            /// [4.2.0]
             new AmazonAutoLinks_Proxy_Loader;
 
-            // 4.1.0
+            // [4.1.0]
             new AmazonAutoLinks_ThirdPartySupportLoader;
             
             /// Admin only sub-components
@@ -236,18 +236,18 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 $this->___loadAdminComponents();
             }            
 
-            // 3.8.10
+            // [3.8.10]
             new AmazonAutoLinks_Loader_LinkConverter;
             new AmazonAutoLinks_DatabaseUpdater_Loader;
 
-            // 4.0.0
+            // [4.0.0]
             new AmazonAutoLinks_CustomOEmbed_Loader;
 
-            if ( AmazonAutoLinks_WPUtility::isDebugMode() ) {
-                new AmazonAutoLinks_Test_Loader;    // 4.3.0
-            }
 
-            new AmazonAutoLinks_Log_Loader; // 4.3.0
+            new AmazonAutoLinks_Test_Loader; // [4.3.0]
+
+
+            new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
         }
             /**

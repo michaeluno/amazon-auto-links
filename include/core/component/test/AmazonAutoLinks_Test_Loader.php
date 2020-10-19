@@ -34,7 +34,7 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
 
         self::$sDirPath = dirname( __FILE__ );
 
-        if ( ! is_admin() ) {
+        if ( ! $this->___shouldProceed() ) {
             return;
         }
 
@@ -46,7 +46,7 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_Test_Event_Ajax_Delete;
 
         new AmazonAutoLinks_Test_Event_Query_Cookie;    // [4.3.4]
-        new AmazonAutoLinks_Test_Event_Query_Referer;    // [4.3.4]
+        new AmazonAutoLinks_Test_Event_Query_Referer;   // [4.3.4]
 
     }
         /**
@@ -63,5 +63,23 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
             public function replyToSetUpAdminPage( $oFactory ) {
                 new AmazonAutoLinks_Test_AdminPage_Test( $oFactory );
             }
+
+        /**
+         * @return boolean
+         * @since  4.3.5 It allows if the plugin debug mode is turned on.
+         */
+        private function ___shouldProceed() {
+            if ( ! is_admin() ) {
+                return false;
+            }
+            if ( AmazonAutoLinks_WPUtility::isDebugMode() ) {
+                return true;
+            }
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            if ( $_oOption->isDebug() ) {
+                return true;
+            }
+            return false;
+        }
 
 }
