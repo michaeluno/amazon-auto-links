@@ -16,6 +16,12 @@
 class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks_VersatileFileManager {
 
     /**
+     * @var   string
+     * @since 4.3.5
+     */
+    public $sLocale = '';
+
+    /**
      * Sets up properties and create a temp directory.
      *
      * @param string  $sLocale          A Amazon locale.
@@ -23,6 +29,7 @@ class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks
      * @param string  $sFileNamePrefix  A prefix to prepend to the file name.
      */
     public function __construct( $sLocale, $iTimeout=604800, $sFileNamePrefix='AALCookies_' ) {
+        $this->sLocale = $sLocale;
         parent::__construct( "amazon-cookie:{$sLocale}", $iTimeout, $sFileNamePrefix );
     }
 
@@ -41,22 +48,48 @@ class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks
      * @param array  $aNewCookies
      * @param string $sURL
      * @since 4.3.4
-     * @since 4.3.5  Added the `$sURL` parameter.
+     * @since 4.3.5  Added the `$sURL` required parameter,
      */
-    public function setCache( array $aNewCookies, $sURL='' ) {
-        $_aCached = $this->get();
+    public function setCache( array $aNewCookies, $sURL ) {
+
+        $_aCached    = $this->get();
+        $aNewCookies = $this->___getCookiesSanitized( $aNewCookies, $sURL );
         if ( $aNewCookies === $_aCached ) {
             return;
         }
+
         // Drop entries with the same name domain, and path.
-        foreach( $_aCached as $_isIndexOrName => $_aoCookie ) {
-            if ( AmazonAutoLinks_WPUtility::hasSameCookie( $aNewCookies, $_isIndexOrName, $_aoCookie, $sURL ) ) {
+        foreach( $_aCached as $_isIndexOrName => $_soCookie ) {
+            if ( AmazonAutoLinks_WPUtility::hasSameCookie( $aNewCookies, $_isIndexOrName, $_soCookie, $sURL ) ) {
                 unset( $_aCached[ $_isIndexOrName ] );
             }
         }
-        $aNewCookies = array_reverse( $aNewCookies );
+
         $_aMerged    = array_merge( $_aCached, $aNewCookies );
         parent::set( serialize( $_aMerged ) );
+
     }
+        /**
+         * Sanitizes cookie items and drop entries with a different domain.
+         * @param  array  $aCookies
+         * @param  string $sURL
+         * @return WP_Http_Cookie[]
+         * @since  4.3.5
+         */
+        private function ___getCookiesSanitized( array $aCookies, $sURL ) {
+
+            $_sSubDomain = AmazonAutoLinks_WPUtility::getSubDomain( $sURL );
+            foreach( $aCookies as $_isIndexOrName => $_soCookie ) {
+                $_oCookie = $_soCookie instanceof WP_Http_Cookie
+                    ? $_soCookie
+                    : AmazonAutoLinks_WPUtility::getWPHTTPCookieFromCookieItem( $_soCookie, $_isIndexOrName, $sURL );
+                $aCookies[ $_isIndexOrName ] = $_oCookie;
+                if ( false === stripos( $_oCookie->domain, $_sSubDomain ) ) {
+                    unset( $aCookies[ $_isIndexOrName ] );
+                }
+            }
+            return array_reverse( array_values( $aCookies ) ); // drop associative keys
+        
+        }
 
 }

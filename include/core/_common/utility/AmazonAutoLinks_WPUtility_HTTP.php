@@ -143,7 +143,7 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
      */
     static public function getCookiesMerged( array $aPrecede, array $aSub, $sURL='' ) {
         foreach( $aSub as $_isIndexOrName => $_soCookie ) {
-            $_oCookie = self::___getWPHTTPCookieFromCookieItem( $_soCookie, $_isIndexOrName, $sURL );
+            $_oCookie = self::getWPHTTPCookieFromCookieItem( $_soCookie, $_isIndexOrName, $sURL );
             if ( self::hasSameCookie( $aPrecede, $_isIndexOrName, $_oCookie, $sURL ) ) {
                 continue;
             }
@@ -151,23 +151,24 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
         }
         return $aPrecede;
     }
-        /**
-         * @param  string|WP_Http_Cookie $soCookie
-         * @param  integer|string $isIndexOrName
-         * @param  string $sURL Needed to calculate a domain.
-         * @return WP_Http_Cookie
-         * @since  4.3.5
-         */
-        static private function ___getWPHTTPCookieFromCookieItem( $soCookie, $isIndexOrName='', $sURL='' ) {
-            $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
-            if ( $soCookie instanceof WP_Http_Cookie ) {
-                $soCookie->domain = $soCookie->domain ? $soCookie->domain : $_sDomain; /* @see WP_Http_Cookie::__construct() */
-                $soCookie->path   = $soCookie->path ? $soCookie->path : '/';
-                return $soCookie;
-            }
-            // Not passing a URL for the second parameter because it overrides the path and domain arguments.
-            return new WP_Http_Cookie( array( 'name' => $isIndexOrName, 'value' => $soCookie, 'path' => '/', 'domain' => $_sDomain ) );
+
+    /**
+     * @param  string|WP_Http_Cookie $soCookie
+     * @param  integer|string $isIndexOrName
+     * @param  string $sURL Needed to calculate a domain.
+     * @return WP_Http_Cookie
+     * @since  4.3.5
+     */
+    static public function getWPHTTPCookieFromCookieItem( $soCookie, $isIndexOrName='', $sURL='' ) {
+        $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
+        if ( $soCookie instanceof WP_Http_Cookie ) {
+            $soCookie->domain = $soCookie->domain ? $soCookie->domain : $_sDomain; /* @see WP_Http_Cookie::__construct() */
+            $soCookie->path   = $soCookie->path ? $soCookie->path : '/';
+            return $soCookie;
         }
+        // Not passing a URL for the second parameter because it overrides the path and domain arguments.
+        return new WP_Http_Cookie( array( 'name' => $isIndexOrName, 'value' => $soCookie, 'path' => '/', 'domain' => $_sDomain ) );
+    }
 
     /**
      * Retrieves cookies to perform HTTP requests form a `wp_remote_request()` response.
@@ -251,7 +252,7 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
                 $_aCookie[ $_aElement[ 0 ] ] = $_aElement[ 1 ];
             }
             $_oCookie = new WP_Http_Cookie( $_aCookie );
-            return self::___getWPHTTPCookieFromCookieItem( $_oCookie, '', $sURL );
+            return self::getWPHTTPCookieFromCookieItem( $_oCookie, '', $sURL );
         }
 
     /**

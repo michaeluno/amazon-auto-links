@@ -29,10 +29,11 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
     }
 
     /**
-     * @param  array|WP_Error $aoResponse
-     * @param  string         $sURL
-     * @return array|WP_Error
-     * @since  4.3.4
+     * @param    array|WP_Error $aoResponse
+     * @param    string         $sURL
+     * @return   array|WP_Error
+     * @since    4.3.4
+     * @callback add_filter() aal_filter_http_request_response
      */
     public function replyToSaveCookies( $aoResponse, $sURL ) {
 

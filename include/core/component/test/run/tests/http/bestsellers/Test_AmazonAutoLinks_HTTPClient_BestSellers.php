@@ -167,8 +167,14 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
                 ? $_oLocale->getHTTPRequestCookies()
                 : $_aRequestCookies;
             $this->_outputDetails( '1st Request Cookies: ', $this->getCookiesToParse( $_aRequestCookies ) );
-            $_oHTTP             = new AmazonAutoLinks_HTTPClient( $_sURL, 86400, array( 'cookies' => $_aRequestCookies ) );
-            $_oHTTP->deleteCache();
+            $_oHTTP             = new AmazonAutoLinks_HTTPClient(
+                $_sURL,
+                86400,
+                array(
+                    'cookies'     => $_aRequestCookies,
+                    'renew_cache' => true,
+                )
+            );
             $_aoResponse        = $_oHTTP->getResponse();
             $_aResponseCookies  = $this->getCookiesToParseFromResponse( $_aoResponse );
 
