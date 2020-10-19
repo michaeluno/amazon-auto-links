@@ -55,7 +55,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Delete extends AmazonAutoLinks_Test_Ad
         echo "<div class='files-container'>";
         echo "<h4>Files</h4>";
         $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
-            AmazonAutoLinks_Test_Loader::$sDirPath . '/delete',
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete',
             include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
             array( 'AmazonAutoLinks_Scratch_Base' )
         );
