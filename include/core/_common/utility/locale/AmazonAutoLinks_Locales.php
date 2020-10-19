@@ -79,6 +79,14 @@ class AmazonAutoLinks_Locales {
     }
 
     /**
+     * @return array
+     * @since  4.3.5
+     */
+    static public function getSubDomains() {
+        return array_map( 'AmazonAutoLinks_Utility::getSubDomainFromHostName', self::getDomains() );
+    }
+
+    /**
      * @param   string  $sDomain    The host.
      * @return  string  The locale code.
      * @since   4.3.4   Moved from `AmazonAutoLinks_Property`.
@@ -103,8 +111,8 @@ class AmazonAutoLinks_Locales {
      * @since  4.3.4
      */
     static public function getLocaleFromURL( $sURL, $sDefaultLocale='US' ) {
-        $_sDomain = parse_url( $sURL, PHP_URL_HOST );
-        $_sLocale = array_search( $_sDomain, self::getDomains() );
+        $_sSubDomain = AmazonAutoLinks_Utility::getSubDomain( $sURL );
+        $_sLocale = array_search( $_sSubDomain, self::getSubDomains() );
         return false === $_sLocale ? $sDefaultLocale : $_sLocale;
     }
 

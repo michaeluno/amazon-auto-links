@@ -29,6 +29,7 @@ return array(
     "Test_AmazonAutoLinks_WPUtility_HTTP" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_WPUtility_HTTP.php", 
     "Test_AmazonAutoLinks_DatabaseTable_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/database/Test_AmazonAutoLinks_DatabaseTable_Utility.php", 
     "Test_AmazonAutoLinks_HTTPClient" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/http/interpreter/http/Test_AmazonAutoLinks_HTTPClient.php", 
+    "Test_AmazonAutoLinks_Locales" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/locale/Test_AmazonAutoLinks_Locales.php", 
     "Test_AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/locale/cookie/Test_AmazonAutoLinks_Locale_AmazonCookies.php", 
     "AmazonAutoLinks_UnitTest_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/database/table/AmazonAutoLinks_UnitTest_Database_aal_request_cache.php", 
     "AmazonAutoLinks_UnitTest_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/database/table/AmazonAutoLinks_UnitTest_Database_aal_tasks.php", 
