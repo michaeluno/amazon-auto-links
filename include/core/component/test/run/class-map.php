@@ -1,5 +1,5 @@
 <?php 
-return array(
+return array( 
     "AmazonAutoLinks_Run_Database_Delete_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_products/AmazonAutoLinks_Run_Database_Delete_aal_products.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/AmazonAutoLinks_Run_Database_Delete_aal_request_cache.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_Delete_aal_tasks.php", 
@@ -26,6 +26,7 @@ return array(
     "Test_AmazonAutoLinks_PluginUtility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_PluginUtility.php", 
     "Test_AmazonAutoLinks_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_Utility.php", 
     "Test_AmazonAutoLinks_WPUtility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_WPUtility.php", 
+    "Test_AmazonAutoLinks_WPUtility_HTTP" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_WPUtility_HTTP.php", 
     "Test_AmazonAutoLinks_DatabaseTable_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/database/Test_AmazonAutoLinks_DatabaseTable_Utility.php", 
     "Test_AmazonAutoLinks_HTTPClient" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/http/interpreter/http/Test_AmazonAutoLinks_HTTPClient.php", 
     "Test_AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/locale/cookie/Test_AmazonAutoLinks_Locale_AmazonCookies.php", 
