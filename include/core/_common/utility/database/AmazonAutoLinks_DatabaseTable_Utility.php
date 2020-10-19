@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
             "DELETE FROM `{$this->aArguments[ 'table_name' ]}` "
             . "WHERE expiration_time < {$sExpiryTime}"
         );
-        $this->getVariable( "OPTIMIZE TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+        $this->optimize();
 
     }
 
@@ -100,7 +100,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
             "DELETE FROM `{$this->aArguments[ 'table_name' ]}` "
             . "ORDER BY modified_time ASC LIMIT {$_iNumToDelete};"
         );
-        $this->getVariable( "OPTIMIZE TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+        $this->optimize();
 
     }
         /**
@@ -172,16 +172,44 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
      */
     public function getTableInformation() {
         return array(
-            'set_name' => $this->getTableName(),
-            'version'  => $this->getVersion(),
-            'exists'   => $this->tableExists() ? 'Yes' : 'No',
-            'size'     => $this->getTableSize(),
-            'rows'     => $this->getTotalItemCount(),
+            'set_name'    => $this->getTableName(),
+            'set_version' => $this->getVersion(),
+            'exists'      => $this->tableExists() ? 'Yes' : 'No',
+            'size'        => $this->getTableSize(),
+            'rows'        => $this->getTotalItemCount(),
         )  + array_change_key_case( $this->getInformationSchema(), CASE_LOWER )
            + array_change_key_case( $this->getTableStatus(), CASE_LOWER )
            + array(
-            'columns' => $this->getColumnInformation(),
-        );
-    }    
-    
+               'checks'  => $this->check(),
+               'columns' => $this->getColumnInformation(),
+           );
+    }
+
+    /**
+     * @return array
+     * @since  4.3.5
+     */
+    public function check() {
+        return $this->getRow( "CHECK TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+    }
+
+    /**
+     * Performs optimization on the table.
+     * @since  4.3.5
+     * @remark The REPAIR TABLE method only effective on the MyISAM, ARCHIVE, or CSV table engine type.
+     * @return mixed
+     */
+    public function repair() {
+        return $this->getVariable( "REPAIR TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+    }
+
+    /**
+     * Performs optimization on the table.
+     * @since  4.3.5
+     * @return mixed
+     */
+    public function optimize() {
+        return $this->getVariable( "OPTIMIZE TABLE `{$this->aArguments[ 'table_name' ]}`;" );
+    }
+
 }

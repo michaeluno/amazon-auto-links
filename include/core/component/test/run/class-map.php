@@ -1,11 +1,15 @@
 <?php 
-return array( 
-    "AmazonAutoLinks_Run_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_aal_tasks.php", 
+return array(
+    "AmazonAutoLinks_Run_Database_Delete_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_products/AmazonAutoLinks_Run_Database_Delete_aal_products.php", 
+    "AmazonAutoLinks_Run_Database_Delete_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/AmazonAutoLinks_Run_Database_Delete_aal_request_cache.php", 
+    "AmazonAutoLinks_Run_Database_Delete_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_Delete_aal_tasks.php", 
     "AmazonAutoLinks_Scratch_Database" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/AmazonAutoLinks_Scratch_Database.php", 
-    "AmazonAutoLinks_Scratch_DatabaseRows" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/products/AmazonAutoLinks_Scratch_DatabaseRows.php", 
-    "AmazonAutoLinks_Scratch_Database_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/products/AmazonAutoLinks_Scratch_Database_aal_products.php", 
-    "AmazonAutoLinks_Scratch_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/requests/AmazonAutoLinks_Scratch_Database_aal_request_cache.php", 
-    "AmazonAutoLinks_Scratch_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/tasks/AmazonAutoLinks_Scratch_Database_aal_tasks.php", 
+    "AmazonAutoLinks_Scratch_Database_Optimize" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/optimize/AmazonAutoLinks_Scratch_Database_Optimize.php", 
+    "AmazonAutoLinks_Scratch_Database_Repair" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/repair/AmazonAutoLinks_Scratch_Database_Repair.php", 
+    "AmazonAutoLinks_Scratch_DatabaseRows" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_products/AmazonAutoLinks_Scratch_DatabaseRows.php", 
+    "AmazonAutoLinks_Scratch_Database_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_products/AmazonAutoLinks_Scratch_Database_aal_products.php", 
+    "AmazonAutoLinks_Scratch_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_request_cache/AmazonAutoLinks_Scratch_Database_aal_request_cache.php", 
+    "AmazonAutoLinks_Scratch_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_tasks/AmazonAutoLinks_Scratch_Database_aal_tasks.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 
     "AmazonAutoLinks_Scratch_Test2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test2.php", 
     "AmazonAutoLinks_Scratch_WordPress_Post" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/post/AmazonAutoLinks_Scratch_WordPress_Post.php", 

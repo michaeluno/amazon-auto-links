@@ -9,12 +9,12 @@
  */
 
 /**
- * A scratch class for WordPress posts.
+ * A scratch class to delete a database table.
  *  
  * @package     Amazon Auto Links
  * @since       4.3.0
 */
-class AmazonAutoLinks_Run_Database_aal_tasks extends AmazonAutoLinks_Scratch_Base {
+class AmazonAutoLinks_Run_Database_Delete_aal_tasks extends AmazonAutoLinks_Scratch_Base {
 
     /**
      * @purpose Deletes the task table and version option.
