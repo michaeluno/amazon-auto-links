@@ -18,7 +18,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -29,8 +29,9 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
 
     /**
      * Triggered when the tab is loaded.
-     * 
-     * @callback        action      load_{page slug}_{tab slug}
+     *
+     * @param     AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @callback  add_action()      load_{page slug}_{tab slug}
      */
     protected function _loadTab( $oAdminPage ) {
 
@@ -58,33 +59,12 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'field_id'  => 'database_tables',
                 'type'      => 'system',
                 'data'      => array(
-                    'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
-                    'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
-                    'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
-                    'aal_products' => array(
-                        'name'    => $_oProductTable->getTableName(),
-                        'version' => $_oProductTable->getVersion(),
-                        'size'    => $_oProductTable->getTableSize(),
-                        'columns' => $_oProductTable->getRows(
-                            'DESCRIBE ' . $_oProductTable->aArguments[ 'table_name' ]
-                        ),
-                    ),
-                    'aal_request_cache' => array(
-                        'name'    => $_oHTTPRequestTable->getTableName(),
-                        'version' => $_oHTTPRequestTable->getVersion(),
-                        'size'    => $_oHTTPRequestTable->getTableSize(),
-                        'columns' => $_oHTTPRequestTable->getRows(
-                            'DESCRIBE ' . $_oHTTPRequestTable->aArguments[ 'table_name' ]
-                        ),
-                    ),
-                    'aal_tasks' => array(
-                        'name'    => $_oTaskTable->getTableName(),
-                        'version' => $_oTaskTable->getVersion(),
-                        'size'    => $_oTaskTable->getTableSize(),
-                        'columns' => $_oTaskTable->getRows(
-                            'DESCRIBE ' . $_oTaskTable->aArguments[ 'table_name' ]
-                        ),
-                    ),
+                    'Current Time' => '', 'Admin Page Framework' => '', 'WordPress'     => '',
+                    'PHP'          => '', 'Server'               => '', 'PHP Error Log' => '',
+                    'MySQL'        => '', 'MySQL Error Log'      => '', 'Browser'       => '',
+                    'aal_products'      => $_oProductTable->getTableInformation(),
+                    'aal_request_cache' => $_oHTTPRequestTable->getTableInformation(),
+                    'aal_tasks'         => $_oTaskTable->getTableInformation(),
                 ),
                 'attributes' => array(
                     'style' => 'height: 300px;',
@@ -145,10 +125,10 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             array()
         );
     }
-    
+
     /**
-     * 
-     * @callback        action      do_{page slug}_{tab slug}
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback add_action() do_{page slug}_{tab slug}
      */
     protected function _doTab( $oFactory ) {
         parent::_doTab( $oFactory );
