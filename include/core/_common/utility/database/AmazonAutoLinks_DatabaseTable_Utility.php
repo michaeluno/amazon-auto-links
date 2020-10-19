@@ -50,7 +50,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
 
     /**
      * Removes expired items from the table.
-     * @since       3.5.0
+     * @param string $sExpiryTime
+     * @since 3.5.0
      */
     public function deleteExpired( $sExpiryTime='' ) {
 
@@ -77,7 +78,8 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
 
     /**
      * Removes rows from older ones to limit the size.
-     * @since       3.7.3
+     * @param integer $iMB  Megabytes in integer.
+     * @since 3.7.3
      */
     public function truncateBySize( $iMB ) {
 
@@ -102,8 +104,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
 
     }
         /**
-         * @since   3.8.12
-         * @return  integer
+         * @param  integer $iTableSize
+         * @param  integer $iSetSize
+         * @return integer
+         * @since  3.8.12
          */
         private function ___getNumberOfRowsToDelete( $iTableSize, $iSetSize ) {
 
@@ -121,12 +125,63 @@ abstract class AmazonAutoLinks_DatabaseTable_Utility extends AmazonAutoLinks_Dat
         }
 
     /**
-     * @remark  Used for unit tests to check the used table engine.
-     * @since 4.3.0
-     * @return array
+     * @remark Used for unit tests to check the used table engine.
+     * @since  4.3.0
+     * @param  string $sColumnName The status table column name.
+     * @return array|string|null   When the column name is specified, returns the value of the column (null when not found). Otherwise, the full status data as an array.
      */
-    public function getTableStatus() {
-        return $this->getRow( "SHOW TABLE STATUS FROM `{$GLOBALS[ 'wpdb' ]->dbname}` LIKE '{$this->aArguments[ 'table_name' ]}';" );
+    public function getTableStatus( $sColumnName='' ) {
+        $_aTableStatus = $this->getRow( "SHOW TABLE STATUS FROM `{$GLOBALS[ 'wpdb' ]->dbname}` LIKE '{$this->aArguments[ 'table_name' ]}';" );
+        return $sColumnName
+            ? ( isset( $_aTableStatus[ $sColumnName ] ) ? $_aTableStatus[ $sColumnName ] : null )
+            : $_aTableStatus;
     }
 
+    /**
+     * @param  string $sColumns
+     * @return array
+     * @since  4.3.5
+     */
+    public function getInformationSchema( $sColumns='*' ) {
+        $_sQuery = "SELECT {$sColumns} FROM INFORMATION_SCHEMA.TABLES "
+            . " WHERE table_schema = '{$GLOBALS[ 'wpdb' ]->dbname}'"
+            . " AND table_name ='{$this->aArguments[ 'table_name' ]}';";
+        return $this->getRow( $_sQuery );
+    }
+
+    /**
+     * @return array
+     * @since  4.3.5
+     */
+    public function getMySQLVersion() {
+        return $this->getVariable( "SELECT VERSION();" );
+    }
+
+    /**
+     * @return array
+     * @since  4.3.5
+     */
+    public function getColumnInformation() {
+        return $this->getRows( "DESCRIBE `{$this->aArguments[ 'table_name' ]}`;" );
+    }
+
+    /**
+     * Reurns the table information.
+     * @return array
+     * @since  4.3.5
+     */
+    public function getTableInformation() {
+        return array(
+            'set_name' => $this->getTableName(),
+            'version'  => $this->getVersion(),
+            'exists'   => $this->tableExists() ? 'Yes' : 'No',
+            'size'     => $this->getTableSize(),
+            'rows'     => $this->getTotalItemCount(),
+        )  + array_change_key_case( $this->getInformationSchema(), CASE_LOWER )
+           + array_change_key_case( $this->getTableStatus(), CASE_LOWER )
+           + array(
+            'columns' => $this->getColumnInformation(),
+        );
+    }    
+    
 }
