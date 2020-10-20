@@ -22,6 +22,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
 
     public function __construct( $aArguments ) {
         $this->___aArguments = $this->___getArgumentsFormatted( $aArguments );
+
     }
         /**
          * @param $aArguments

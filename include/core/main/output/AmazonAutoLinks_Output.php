@@ -107,7 +107,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             $_aIDs    = $this->getAsArray( $this->aArguments[ '_unit_ids' ] );
 
             // For cases without a unit
-            if ( empty( $_aIDs ) ) {
+            if ( empty( $_aIDs ) || ! empty( $this->aArguments[ 'unit_type' ] ) ) {
                 // By direct arguments
                 return $this->___getOutputByUnitType(
                     $this->___getUnitTypeFromArguments( $this->aArguments ),

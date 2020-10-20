@@ -184,7 +184,9 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
          */
         $_sClassName   = 'AmazonAutoLinks_UnitOutput_' . strtolower( $this->sUnitTypeSlug );
         $_oUnit        = new $_sClassName( $aArguments );
-        $oUnitOption   = $_oUnit->oUnitOption;  // update the unit option parameter
+        $oUnitOption   = isset( $_oUnit->oUnitOption ) // update the unit option parameter
+            ? $_oUnit->oUnitOption
+            : null;  // `AmazonAutoLinks_UnitOutput_contextual` does not have this property
         return $sOutput . trim( $_oUnit->get() );
 
     }
