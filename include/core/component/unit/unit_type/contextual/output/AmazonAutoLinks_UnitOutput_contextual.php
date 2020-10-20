@@ -18,11 +18,17 @@
  */
 class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtility {
 
+    /**
+     * @var array
+     */
     private $___aArguments = array();
 
+    /**
+     * Sets up properties.
+     * @param array $aArguments
+     */
     public function __construct( $aArguments ) {
         $this->___aArguments = $this->___getArgumentsFormatted( $aArguments );
-
     }
         /**
          * @param $aArguments
@@ -30,7 +36,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
          */
         private function ___getArgumentsFormatted( $aArguments ) {
             $_oUnitOptions = new AmazonAutoLinks_UnitOption_contextual(
-                null,   // unit id
+                $this->getElement( $aArguments, array( 'id' ) ),   // unit id
                 $aArguments
             );
             return $aArguments + $_oUnitOptions->get();
@@ -60,6 +66,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtilit
 
         $_aArguments = $this->___aArguments;
         unset( $_aArguments[ 'title' ] );   // this is a widget title field value and causes a conflict with the PA-API payload argument.
+
         return AmazonAutoLinks(
             array(
                 'Keywords'         => implode( ',', $_aSearchKeywords ),
