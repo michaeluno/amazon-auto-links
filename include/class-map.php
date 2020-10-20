@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.5b01 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.5b04 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -198,6 +198,7 @@ return array(
     "AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder.php", 
     "AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
+    "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
@@ -384,6 +385,7 @@ return array(
     "AmazonAutoLinks_PostType_UnitPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php", 
     "AmazonAutoLinks_Unit_Admin_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Admin_Utility.php", 
     "AmazonAutoLinks_Unit_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php", 
+    "AmazonAutoLinks_VersatileFileManager_PAAPILock" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/file/AmazonAutoLinks_VersatileFileManager_PAAPILock.php", 
     "AmazonAutoLinks_WebScraper_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/scraper/AmazonAutoLinks_WebScraper_Base.php", 
     "AmazonAutoLinks_UnitTypeLoader_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php", 
     "AmazonAutoLinks_UnitOptionConverterLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit_option_converter/AmazonAutoLinks_UnitOptionConverterLoader.php", 

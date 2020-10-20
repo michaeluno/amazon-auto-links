@@ -15,165 +15,27 @@
  */
 class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility {
 
-    public function __construct() {
-
-        // JSON
-        add_filter( 'aal_filter_http_request_set_cache_api_product_info', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-        add_filter( 'aal_filter_http_request_set_cache_api50_test', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-        add_filter( 'aal_filter_http_request_set_cache_api', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-
-    }
-
     /**
-     * Called when an API HTTP response is about to be cached.
-     *
-     * @param mixed     $mData
-     * @param string    $sCacheName
-     * @param string    $sCharSet
-     * @param integer   $iCacheDuration
-     * @param string    $sURL
-     *
-     * @return mixed
-     * @since   3.9.0
+     * Sets up properties and hooks.
      */
-    public function replyToCheckAPIHTTPCacheResponse( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL ) {
-
-        $_sError = $this->___getError( $mData, $sURL );
-        if ( $_sError ) {
+    public function __construct() {
+        add_action( 'aal_action_detected_paapi_errors', array( $this, 'replyToLogPAAPIErrors' ), 10, 6 );
+    }
+    
+    public function replyToLogPAAPIErrors( $aErrors, $sURL, $sCacheName, $sCharSet, $iCacheDuration, $aArguments ) {
+        foreach( $aErrors as $_sError ) {
             new AmazonAutoLinks_Error(
-                __METHOD__,
+                'PAAPI_ERROR',
                 $_sError,
                 array(
                     'url'            => $sURL,
                     'cache_name'     => $sCacheName,
                     'character_set'  => $sCharSet,
                     'cache_duration' => $iCacheDuration,
+                    'arguments'      => $aArguments,
                 ),
                 true
             );
-
         }
-
-        // If it is the TooManyRequests error, give a cache short lifespan
-        // @deprecated 4.3.5 requests resulted in errors may be counted in the rate limit so leave it as it is.
-//        if( false !== strpos( $_sError, 'TooManyRequests' ) ){
-//            add_filter(
-//                'aal_filter_http_request_set_cache_duration_' . $sCacheName,
-//                array( $this, 'replyToGiveShortCacheDuration' ),
-//                10,
-//                4
-//            );
-//        }
-
-        return $mData;
-
     }
-        /* @deprecated 4.3.5 Requests resulted in errors may be counted in the rate limit so leave it as it is. */
-        /*public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL, $sRequestType ) {
-            remove_filter( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, array( $this, 'replyToGiveShortCacheDuration' ), 10 );
-            return 'api50_test' === $sRequestType
-                ? 0
-                : 60 * 10; // 10 minutes
-        }*/
-
-        /**
-         * @param mixed $mData
-         * @param string $sURL
-         * @return  string
-         */
-        private function ___getError( $mData, $sURL ) {
-
-            $_sError = '';
-
-            /**
-             * WP_Error and HTTP Status Error will be checked in
-             * @see AmazonAutoLinks_Event_Error_Log_HTTPRequestErrors
-             * @deprecated 4.3.0
-             */
-            if ( is_wp_error( $mData ) ) {
-                return '';
-            }
-/*            // WP_Error
-            if ( is_wp_error( $mData ) ) {
-                return '(' . get_class( $mData ) . ') ' . $mData ->get_error_code() . ': ' . $mData ->get_error_message();
-            }
-
-            // HTTP Status Error
-            $_sError  = $this->___getHTTPStatusError( $mData ) . ' ';
-*/
-            $mData    = $this->getAsArray( $mData );
-            $_sBody   = $this->getElement( $mData, array( 'body' ) );
-
-            if ( $this->isJSON( $_sBody ) ) {
-
-                $_aResponse = json_decode( $_sBody, true );
-
-                // PA-API Error
-                $_sError .= $this->___getAPIResponseFailure( $_aResponse );
-                $_sError .= $this->___getAPIResponseError( $_aResponse );
-                return trim( $_sError );
-
-            }
-
-            // At this point, it is not JSON.
-
-            // If there is an HTTP Status error, return it.
-            // Otherwise, it should be fine.
-            return trim( $_sError );
-
-        }
-
-            private function ___getAPIResponseFailure( $_aResponse ) {
-                if ( ! isset( $_aResponse[ '__type' ], $_aResponse[ 'message' ] ) ) {
-                    return '';
-                }
-                $_sError = $_aResponse[ '__type' ] . ': ' . $_aResponse[ 'message' ];
-                if ( isset( $_aResponse[ 'response' ] ) ) {
-                    $_sError .= '; '
-                        . $this->getElement( $_aResponse, array( 'response', 'code' ) )
-                        . ': ' . $this->getElement( $_aResponse, array( 'response', 'message' ) );
-                }
-                return $_sError;
-            }
-            private function ___getAPIResponseError( $_aResponse ) {
-                if ( ! isset( $_aResponse[ 'Errors' ] ) ) {
-                    return '';
-                }
-                $_sError = '';
-                foreach( $_aResponse[ 'Errors' ] as $_aError ) {
-                    $_sError .= $_aError[ 'Code' ] . ': ' . $_aError[ 'Message' ] . ' ';
-                }
-                return trim( $_sError );
-            }
-
-            // @deprecated 4.3.0
-//            private function ___getHTTPStatusError( array $mData ) {
-//                $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
-//                $_s1stChar = substr( $_sCode, 0, 1 );
-//                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
-//                    return '';
-//                }
-//                return $_sCode . ': ' . $this->getElement( $mData, array( 'response', 'message' ) );
-//            }
-        /**
-         * @param $mData
-         * @deprecated 4.0.0
-         */
-        /*private function ___setAPIErrorLog( $sErrorItem, $sCacheName, $sURL ) {
-            $_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
-            $_aErrorLog  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
-            $_aErrorLog[ microtime( true ) ] = array(
-                'time'           => time(),
-                'cache_name'     => $sCacheName,
-                'url'            => $sURL,
-                'current_url'    => $this->getCurrentURL(),
-                // 'note'       => '',
-                'message'    => $sErrorItem,
-            );
-            // Keep up to latest 300 items
-            $_aErrorLog = array_slice( $_aErrorLog, -300, 300, true );
-            update_option( $_sOptionKey, $_aErrorLog );
-
-        }*/
-
 }

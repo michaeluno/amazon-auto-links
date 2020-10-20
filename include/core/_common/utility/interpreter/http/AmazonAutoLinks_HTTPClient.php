@@ -646,11 +646,12 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * @since       4.2.0   Revived the `aal_filter_http_request_set_cache` filter for requests with proxies and they are failed.
          * @since       4.3.0   Added the `$aOldCache` parameter and made it passed to the `aal_filter_http_request_set_cache` filter.
          * @since       4.3.4   Added the `$sCacheName` and `$sRequestType` parameters.
+         * @since       4.3.5   Added the `$aArguments` to the 'aal_filter_http_request_set_cache_{request type}' filter.
          */
         private function ___setCacheInDatabase( $sURL, $sCacheName, $aoResponse, $iCacheDuration, $aArguments, array $aOldCache, $sRequestType ) {
 
             $_sCharSet       = $this->___getCharacterSetFromResponse( $aoResponse );
-            $aoResponse      = apply_filters( "aal_filter_http_request_set_cache_{$sRequestType}", $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL );
+            $aoResponse      = apply_filters( "aal_filter_http_request_set_cache_{$sRequestType}", $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL, $aArguments );
             $aoResponse      = apply_filters( 'aal_filter_http_request_set_cache', $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache );
             $iCacheDuration  = apply_filters( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, $iCacheDuration, $sCacheName, $sURL, $sRequestType );
 
