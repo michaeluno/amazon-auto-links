@@ -50,12 +50,17 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
             $this->___bForceRenew
         );
     }
+
         /**
          * Performs an API request.
          *
-         * @since           unknown
-         * @since           3.9.0
-         * @return          string|array    Returns the retrieved HTML body string, and an error array on failure.
+         * @param string  $sRequestURI
+         * @param array   $aHTTPArguments
+         * @param integer $iDuration
+         * @param bool    $bForceRenew
+         * @return        array|WP_Error    Returns a wp_remote_request() response array or a WP_Error object.
+         * @since         3.9.0
+         * @since         unknown
          */
         private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceRenew=false ) {
 
@@ -67,14 +72,12 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                 $aHTTPArguments + array(
                     'timeout'       => 20,
                     'sslverify'     => false,
+                    'renew_cache'   => ( boolean ) $bForceRenew,
                     '_debug'        => __METHOD__,
                 ),
                 $this->___sRequestType // request type
             );
-            if ( $bForceRenew ) {
-                $_oHTTP->deleteCache();
-            }
-            $_asResponse =  $_oHTTP->getResponse(); // return errors as WP Error, not string
+            $_asResponse = $_oHTTP->getResponse(); // return errors as WP Error, not string
 
             remove_action( 'aal_action_http_remote_get', array( $this, 'replyToHaveHTTPRequestInterval' ), 100 );
             return $_asResponse;
