@@ -256,7 +256,8 @@ class AmazonAutoLinks_ProductDatabase_Rows {
             );
 
             // Generate a new index key and update the new array.
-            $_aASINLocale        = explode( '_', $aRow[ 'asin_locale' ] );
+            // @todo there seems to be a case that `$_aASINLocale` does not hold a proper value as causing $_aASINLocale[ 1 ] to be undefined offset: 1 of a PHP notice.
+            $_aASINLocale        = explode( '_', $aRow[ 'asin_locale' ] ) + array( null, null );
             $_sASIN              = $aRow[ 'asin' ] ? $aRow[ 'asin' ] : $_aASINLocale[ 0 ];
             $_sLocale            = $aRow[ 'locale' ] ? $aRow[ 'locale' ] : $_aASINLocale[ 1 ];
             $_sCurrency          = $aRow[ 'preferred_currency' ] ? $aRow[ 'preferred_currency' ] : $this->___sDefaultCurrency;
