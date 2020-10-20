@@ -66,7 +66,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     public $aRawOptions = array();
     
     /**
-     * @remark Set from externally from the output class.
+     * @remark Set externally from the output class.
      * @var string|null Stores a output call ID to distinguish output calls.
      */
     public $sCallID;
