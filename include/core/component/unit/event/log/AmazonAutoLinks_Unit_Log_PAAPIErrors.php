@@ -55,24 +55,26 @@ class AmazonAutoLinks_Unit_Log_PAAPIErrors extends AmazonAutoLinks_PluginUtility
         }
 
         // If it is the TooManyRequests error, give a cache short lifespan
-        if( false !== strpos( $_sError, 'TooManyRequests' ) ){
-            add_filter(
-                'aal_filter_http_request_set_cache_duration_' . $sCacheName,
-                array( $this, 'replyToGiveShortCacheDuration' ),
-                10,
-                4
-            );
-        }
+        // @deprecated 4.3.5 requests resulted in errors may be counted in the rate limit so leave it as it is.
+//        if( false !== strpos( $_sError, 'TooManyRequests' ) ){
+//            add_filter(
+//                'aal_filter_http_request_set_cache_duration_' . $sCacheName,
+//                array( $this, 'replyToGiveShortCacheDuration' ),
+//                10,
+//                4
+//            );
+//        }
 
         return $mData;
 
     }
-        public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL, $sRequestType ) {
+        /* @deprecated 4.3.5 Requests resulted in errors may be counted in the rate limit so leave it as it is. */
+        /*public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL, $sRequestType ) {
             remove_filter( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, array( $this, 'replyToGiveShortCacheDuration' ), 10 );
             return 'api50_test' === $sRequestType
                 ? 0
                 : 60 * 10; // 10 minutes
-        }
+        }*/
 
         /**
          * @param mixed $mData
