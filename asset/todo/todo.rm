@@ -1,6 +1,9 @@
 # Todos
 
 ## Minor
+- Add logic to lock PA-API requests when the Too Many Request error is given.
+- Add logic to avoid reaching maximum execution time during the background routines performing HTTP requests.
+- Add logic to avoid reaching maximum execution time during the background routines performing HTTP requests.
 - Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are either not set nor sent.
 - Add the data-unit-type or data-type attribute in the output container. This helps for technical support.
 - Move the lines of unit debug outputs into a separate file for events with filter hooks.
