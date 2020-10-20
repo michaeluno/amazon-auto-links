@@ -15,14 +15,10 @@
  */
 class AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache extends AmazonAutoLinks_PluginUtility {
 
+    /**
+     * Sets up hooks.
+     */
     public function __construct() {
-
-        // @deprecated 4.3.0
-//        add_filter( 'aal_filter_http_request_set_cache_customer_review', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-//        add_filter( 'aal_filter_http_request_set_cache_customer_review2', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-//        add_filter( 'aal_filter_http_request_set_cache_url_unit_type', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-//        add_filter( 'aal_filter_http_request_set_cache_wp_remote_get', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
-//        add_filter( 'aal_filter_http_request_set_cache_category_unit_type', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 5 );
 
         add_filter( 'aal_filter_http_request_set_cache', array( $this, 'replyToCheckAPIHTTPCacheResponse' ), 10, 7 );
 
@@ -31,7 +27,7 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache extends AmazonAutoLinks
     /**
      * Called when an API HTTP response is about to be cached.
      *
-     * @param    mixed     $mData
+     * @param    mixed     $aoResponse
      * @param    string    $sCacheName
      * @param    string    $sCharSet
      * @param    integer   $iCacheDuration
@@ -42,26 +38,28 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache extends AmazonAutoLinks
      * @return   mixed
      * @since    4.2.0
      */
-    public function replyToCheckAPIHTTPCacheResponse( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache ) {
+    public function replyToCheckAPIHTTPCacheResponse( $aoResponse, $sCacheName, $sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache ) {
 
-        $_sError = $this->___getError( $mData, $sURL );
-        if ( ! $_sError ) {
-            return $mData;
+        $_aErrors = $this->___getErrors( $aoResponse, $sURL );
+        if ( empty( $_aErrors ) ) {
+            return $aoResponse;
         }
 
         // Add it to the log.
-        $_sError .= ' ' . $sCacheName . ' ' . $sURL;
-        new AmazonAutoLinks_Error(
-            'HTTP_REQUEST',
-            $_sError,
-            array(
-                'has_cache'      => ! empty( $aOldCache ),
-                'cache_duration' => $iCacheDuration,
-                'character_set'  => $sCharSet,
-                'arguments'      => $aArguments,
-            ),
-            true
-        );
+        foreach( $_aErrors as $_sCode => $_sError ) {
+            $_sError .= ' ' . $sCacheName . ' ' . $sURL;
+            new AmazonAutoLinks_Error(
+                'HTTP_REQUEST ' . $_sCode,
+                $_sError,
+                array(
+                    'has_cache'      => ! empty( $aOldCache ),
+                    'cache_duration' => $iCacheDuration,
+                    'character_set'  => $sCharSet,
+                    'arguments'      => $aArguments,
+                ),
+                true
+            );
+        }
 
         // Use the old cache if available
         $_mOldData = $this->getElement( $aOldCache, array( 'data' ) );
@@ -69,55 +67,72 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache extends AmazonAutoLinks
             return $_mOldData;
         }
 
-        return $mData;
+        return $aoResponse;
 
     }
-
         /**
-         * @param mixed $mData
-         * @param string $sURL
-         * @return  string
+         * @param  WP_Error|array $aoResponse
+         * @param  string         $sURL
+         * @return string[]
          */
-        private function ___getError( $mData, $sURL ) {
+        private function ___getErrors( $aoResponse, $sURL ) {
 
-            if ( is_wp_error( $mData ) ) {
-                return $mData ->get_error_code() . ': ' . $mData ->get_error_message();
+            $_aErrors = $this->___getWPError( $aoResponse );
+            if ( ! empty( $_aErrors ) ) {
+                return $_aErrors;
             }
-
-            $_sStatusError = $this->___getHTTPStatusError( $mData );
-            if ( $_sStatusError ) {
-                return $_sStatusError;
+            $_aErrors = $this->___getHTTPStatusError( $aoResponse );
+            if ( ! empty( $_aErrors ) ) {
+                return $_aErrors;
             }
-            return $this->___getCaptchaError( $mData, $sURL );
+            return $this->___getCaptchaError( $aoResponse, $sURL );
 
         }
+            /**
+             * @param  WP_Error|array $aoResponse
+             * @return array
+             * @since  4.3.5
+             */
+            private function ___getWPError( $aoResponse ) {
+                if ( is_wp_error( $aoResponse ) ) {
+                    return array(
+                        '(WP_ERROR) ' . $aoResponse->get_error_code() => $aoResponse->get_error_message(),
+                    );
+                }
+                return array();
+            }
+            /**
+             * @param  array $aResponse
+             * @return array
+             */
+            private function ___getHTTPStatusError( array $aResponse ) {
+                $_sCode    = $this->getElement( $aResponse, array( 'response', 'code' ) );
+                $_s1stChar = substr( $_sCode, 0, 1 );
+                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
+                    return array();
+                }
+                return array(
+                    '(HTTP_STATUS_ERROR) ' . $_sCode => $this->getElement( $aResponse, array( 'response', 'message' ) )
+                );
+            }
 
             /**
              *
              * Since v4.3.4, the timing of creating captcha error WP_Error object has changed
              * and therefore, the error needs to be captured here.
-             * @param $mData
-             * @param string $sURL
-             * @return string
-             * @since 4.3.4
+             * @param  array  $aResponse
+             * @param  string $sURL
+             * @return array
+             * @since  4.3.4
              */
-            private function ___getCaptchaError( $mData, $sURL ) {
-                if ( $this->isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $mData ), $sURL ) ) {
-                    return 'CAPTCHA: Blocked by Captcha';
+            private function ___getCaptchaError( array $aResponse, $sURL ) {
+                if ( $this->isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $aResponse ), $sURL ) ) {
+                    return array(
+                        'CAPTCHA' => 'Blocked by Captcha',
+                    );
                 }
-                return '';
+                return array();
             }
-            /**
-             * @param array $mData
-             * @return string
-             */
-            private function ___getHTTPStatusError( array $mData ) {
-                $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
-                $_s1stChar = substr( $_sCode, 0, 1 );
-                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
-                    return '';
-                }
-                return $_sCode . ': ' . $this->getElement( $mData, array( 'response', 'message' ) );
-            }
+
 
 }
