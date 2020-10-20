@@ -172,8 +172,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $_sID       = wp_normalize_path( untrailingslashit( $_sID ) );
                 $_aTemplate = $this->___getTemplateArrayFormatted( $_aTemplate );
 
+                if ( empty( $_aTemplate ) ) {   // can be false
+                    continue;
+                }
+
                 // 4.1.0 there are cases that while the template is still active, a custom template directory is deleted manually via FTP or whatever
-                if ( ! file_exists( $_aTemplate[ 'dir_path' ] ) ) {
+                if ( ! isset( $_aTemplate[ 'dir_path' ] ) || ! file_exists( $_aTemplate[ 'dir_path' ] ) ) {
                     continue;
                 }
 
@@ -211,8 +215,9 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          * Takes care of formatting change through version updates.
          * 
          * @since       3
-         * @since       4.0.2   Changed the scope to private. Renamed from `_formatTemplateArray()`.
-         * @return      array|boolean       Formatted template array. If the passed value is not an array 
+         * @since       4.0.2         Changed the scope to private. Renamed from `_formatTemplateArray()`.
+         * @param       array         $aTemplate
+         * @return      array|boolean Formatted template array. If the passed value is not an array
          * or something wrong with the template array, false will be returned.
          */
         private function ___getTemplateArrayFormatted( $aTemplate ) {
