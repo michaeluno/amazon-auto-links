@@ -1,14 +1,13 @@
 # Todos
 
-## Minor
-- Add logic to lock PA-API requests when the Too Many Request error is given.
-- Add logic to avoid reaching maximum execution time during the background routines performing HTTP requests.
+## Minor 
 - Add logic to avoid reaching maximum execution time during the background routines performing HTTP requests.
 - Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are either not set nor sent.
-- Add the data-unit-type or data-type attribute in the output container. This helps for technical support.
-- Move the lines of unit debug outputs into a separate file for events with filter hooks.
+- Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve. 
 
 ## Meager
+- Add a PA-API request counter and its chart.
+- Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
 - Add the SubscriptionID parameter to product links when AWS keys are given.
 - Reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - Introduce a new unit type Comparison Table.
@@ -20,6 +19,7 @@
 - Add the ability to create actual posts from units.
 - Add a button with an icon.
 - Add an orange button.
-- Add an gray button.
+- Add a gray button.
 - Add a button with a background image.
+- Add a button with a SVG icon.
 - Add a clone action link to buttons.
