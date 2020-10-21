@@ -359,6 +359,7 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
         );
         if ( $sLanguage ) {
             $_aCookies[] = new WP_Http_Cookie( array( 'name' => 'ac-language-preference', 'value' => $sLanguage, ) + $_aAttributes );
+            $_aCookies[] = new WP_Http_Cookie( array( 'name' => 'lc-acb' . strtolower( $sLocale ), 'value' => $sLanguage, ) + $_aAttributes );
         }
         return $_aCookies;
 
