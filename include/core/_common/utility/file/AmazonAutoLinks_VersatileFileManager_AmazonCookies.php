@@ -29,7 +29,8 @@ class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks
      * @param string  $sFileNamePrefix  A prefix to prepend to the file name.
      */
     public function __construct( $sLocale, $iTimeout=604800, $sFileNamePrefix='AALCookies_' ) {
-        $this->sLocale = $sLocale;
+        $this->sLocale   = $sLocale;
+        $sFileNamePrefix = $sFileNamePrefix . $sLocale . '_';
         parent::__construct( "amazon-cookie:{$sLocale}", $iTimeout, $sFileNamePrefix );
     }
 
