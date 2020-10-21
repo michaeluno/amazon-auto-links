@@ -27,7 +27,7 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
     static public $sDirPath = '';
 
     /**
-     * AmazonAutoLinks_UnitLoader constructor.
+     * Loads the test component.
      *
      */
     public function __construct() {
@@ -47,6 +47,8 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
 
         new AmazonAutoLinks_Test_Event_Query_Cookie;    // [4.3.4]
         new AmazonAutoLinks_Test_Event_Query_Referer;   // [4.3.4]
+
+        add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
 
     }
         /**
@@ -81,5 +83,16 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
             }
             return false;
         }
+
+    /**
+     * Disables the background HTTP request cache renewal for the `test` request type.
+     * @param  array $aExceptedRequestTypes
+     * @return array 
+     * @since  4.3.5
+     */
+    public function replyToAddExceptedRequestType( $aExceptedRequestTypes ) {
+        $aExceptedRequestTypes[] = 'test';
+        return $aExceptedRequestTypes;
+    }
 
 }
