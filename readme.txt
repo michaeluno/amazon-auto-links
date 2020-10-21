@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.4
+Stable tag:         4.3.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ If you want to simply display your desired specific product in a post, don't wor
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates, Brazil and Singapore. China is supported for the category unit type.
+Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates, Brazil, Singapore and Saudi Arabia. China is supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -305,6 +305,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.3.5 10/21/2020 =
+- Optimized HTTP requests.
+- Fixed a bug that the contextual units were not finding products due to the wrong locale if the default unit options were not set, started since v4.3.4.
+- Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type bool in ...AmazonAutoLinks_TemplateOption.php on line 176."
+- Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type null in ...AmazonAutoLinks_DatabaseTable_aal_request_cache.php on line 227."
+- Fixed a bug that caused the PHP fatal error, "Uncaught Error: Cannot use object of type WP_Error as array." when trying to retrieve HTTP status code.
 
 = 4.3.4 10/17/2020 =
 - Added the Saudi Arabia locale.
