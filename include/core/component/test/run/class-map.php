@@ -46,6 +46,7 @@ return array(
     "Test_AmazonAutoLinks_HTTPClient_MarketPlace" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/marketplace/Test_AmazonAutoLinks_HTTPClient_MarketPlace.php", 
     "Test_AmazonAutoLinks_HTTPClient_Referer" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/referer/Test_AmazonAutoLinks_HTTPClient_Referer.php", 
     "Test_AmazonAutoLinks_HTTPClient_Reviews" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/review/Test_AmazonAutoLinks_HTTPClient_Reviews.php", 
+    "Test_AmazonAutoLinks_HTTPClient_Top" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/top/Test_AmazonAutoLinks_HTTPClient_Top.php", 
     "Test_AmazonAutoLinks_HTTPClient_WidgetPages" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/widget/Test_AmazonAutoLinks_HTTPClient_WidgetPages.php", 
     "AmazonAutoLinks_UnitTest_WordPress" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress.php", 
     "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
