@@ -27,7 +27,7 @@ class AmazonAutoLinks_VersatileFileManager_PAAPILock extends AmazonAutoLinks_Ver
     public function __construct( $sLocale, $iTimeout=1, $sFileNamePrefix='' ) {
         $sFileNamePrefix = $sFileNamePrefix
             ? $sFileNamePrefix
-            : AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_LOCK_PAAPI_REQUEST_';
+            : AmazonAutoLinks_Registry::TRANSIENT_PREFIX . "_LOCK_PAAPI_REQUEST_{$sLocale}_";
         parent::__construct( $sLocale, $iTimeout, $sFileNamePrefix );
     }
 

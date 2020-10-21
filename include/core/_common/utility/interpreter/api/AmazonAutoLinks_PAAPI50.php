@@ -146,7 +146,8 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             $_aHTTPArguments,
             $iCacheDuration,
             $bForceRenew,
-            $this->___sRequestType
+            $this->___sRequestType,
+            $this->___sLocale
         );
         $_aoResponse = $_oAPIRequestCache->get();
 

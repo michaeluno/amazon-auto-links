@@ -43,13 +43,13 @@ class AmazonAutoLinks_VersatileFileManager {
      */
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
         $this->_sIdentifier       = $sIdentifier;
-        $this->_sTempDirPath      = AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/versatile';
-        $this->_iTimeout          = $iTimeout;
-        $this->_sFileNamePrefix   = $sFileNamePrefix;
-        $this->_sFilePath         = $this->___getFilePath();
+        $this->_sTempDirPath      = $this->_getTemporaryDirectoryPath();
         if ( ! is_dir( $this->_sTempDirPath ) ) {
             mkdir( $this->_sTempDirPath, 0777, true );
         }
+        $this->_iTimeout          = $iTimeout;
+        $this->_sFileNamePrefix   = $sFileNamePrefix;
+        $this->_sFilePath         = $this->___getFilePath();
     }
         /**
          * @remark Consider the file resides in the server's shared temporary directory.
@@ -60,6 +60,15 @@ class AmazonAutoLinks_VersatileFileManager {
                 . $this->_sFileNamePrefix . md5(site_url() . $this->_sIdentifier )
                 . '.txt';
         }
+
+    /**
+     * @remark Override this in an extended class.
+     * @since  4.3.5
+     * @return string
+     */
+    protected function _getTemporaryDirectoryPath() {
+        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/versatile';
+    }
 
     /**
      * Returns the file contents if it is not expired.
@@ -73,7 +82,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @param  string $sText
-     * @return false|int
+     * @return false|integer The number of bytes that were written to the file, or false on failure.
      * @since  4.3.4
      */
     public function set( $sText ) {
@@ -82,13 +91,32 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @return boolean
+     * @since  4.3.5
+     */
+    public function delete() {
+        return unlink( $this->_sFilePath );
+    }
+
+    /**
+     * @param  integer  $iTime The time when the lock is unlocked. Default the current time.
+     * @return boolean  true if locked; otherwise, false.
+     * @since  4.3.5
+     */
+    public function lock( $iTime=0 ) {
+        $_inTime = $iTime ? $iTime - $this->_iTimeout : null;
+        return $this->___touch( $_inTime );
+    }
+
+    /**
+     * @remark When called, if not locked, it automatically locks.
+     * @return boolean
      */
     public function isLocked() {
         if ( $this->isAlive() ) {
             return true;
         }
         // At this point, the file does not exist or timed out
-        $this->___touch();
+        $this->lock();
         return false;
     }
 
@@ -110,7 +138,7 @@ class AmazonAutoLinks_VersatileFileManager {
         if ( ! file_exists( $this->_sFilePath ) ) {
             return false; // not alive (not created yet)
         }
-        $_iModifiedTime  = ( integer ) filemtime( $this->_sFilePath );
+        $_iModifiedTime = $this->getModificationTime();
         if ( $_iModifiedTime + $this->_iTimeout > time() ) {
             // the file is not timed-out yet
             return true; // alive
@@ -121,26 +149,61 @@ class AmazonAutoLinks_VersatileFileManager {
     }
 
     /**
+     * @since  4.3.5
+     * @return integer  The timestamp of the modification time of the lock file.
+     */
+    public function getModificationTime() {
+        clearstatcache( true, $this->_sFilePath );  // file functions such as filemtime() cache results.
+        return ( integer ) filemtime( $this->_sFilePath );
+    }
+
+    /**
+     * @since  4.3.5
+     * @return integer  The timestamp of the unlock time.
+     */
+    public function getUnlockTime() {
+        if ( ! file_exists( $this->_sFilePath ) ) {
+            $this->lock();
+        }
+        return $this->getModificationTime() + $this->_iTimeout;
+    }
+
+
+    /**
      * Touches a lock file.
      *
      * If a file does not exist, it will be crated.
      *
      * @since   3.7.7
-     * @since   4.2.3   Changed the scope to private form public.
-     * @since   4.2.3   Changed the ame from `set()` to `___set()`.
-     * @since   4.3.4   Renamed from `___set()`.
+     * @since   4.2.3  Changed the scope to private form public.
+     * @since   4.2.3  Changed the ame from `set()` to `___set()`.
+     * @since   4.3.4  Renamed from `___set()`.
+     * @since   4.3.5  Added the `$inTime` and `$inAccessTime` parameters.
+     * @param   null|integer $inTime       A timestamp of the time to set for the modification time.
+     * @param   null|integer $inAccessTime A timestamp of the time to set for the last access time.
+     * @return  boolean true if touched or created. Otherwise, false.
      */
-    private function ___touch() {
+    private function ___touch( $inTime=null, $inAccessTime=null ) {
 
         if ( file_exists( $this->_sFilePath ) ) {
-            // Update the modification time
-            touch( $this->_sFilePath );
-            return;
+            // Update the modification time - passing null or 0 value erases the timestamp set to the file. So dropping null but 0 is accepted for the user to intentionally erase the value.
+            $_aParams = array_filter( array( $this->_sFilePath, $inTime, $inAccessTime ), 'strlen' );
+            return call_user_func_array( 'touch', $_aParams );
         }
 
         // At this point, the file does not exist so creat it.
-        $this->set( microtime( true ) );
+        return ( boolean ) $this->set( $this->_getDefaultContent() );
 
     }
+
+    /**
+     * @remark Override this method in an extended class.
+     * @return string The default text to store in the file.
+     * @since  4.3.5
+     */
+    protected function _getDefaultContent() {
+        return ( string ) microtime( true );
+    }
+
 
 }
