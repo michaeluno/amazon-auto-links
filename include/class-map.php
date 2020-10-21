@@ -416,7 +416,7 @@ return array(
     "AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies.php", 
-    "AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPRequestCache.php", 
+    "AmazonAutoLinks_Main_Event_Filter_HTTPRequestError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPRequestError.php",
     "AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError.php", 
     "AmazonAutoLinks_Event___Query_Feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Feed.php", 
     "AmazonAutoLinks_Event___Query_Redirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Redirect.php", 
