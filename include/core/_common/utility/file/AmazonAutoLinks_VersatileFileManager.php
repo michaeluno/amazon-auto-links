@@ -43,7 +43,7 @@ class AmazonAutoLinks_VersatileFileManager {
      */
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
         $this->_sIdentifier       = $sIdentifier;
-        $this->_sTempDirPath      = $this->_getTemporaryDirectoryPath();
+        $this->_sTempDirPath      = $this->_getDirectoryPath();
         if ( ! is_dir( $this->_sTempDirPath ) ) {
             mkdir( $this->_sTempDirPath, 0777, true );
         }
@@ -66,7 +66,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.5
      * @return string
      */
-    protected function _getTemporaryDirectoryPath() {
+    protected function _getDirectoryPath() {
         return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/versatile';
     }
 
