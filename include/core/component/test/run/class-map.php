@@ -31,6 +31,7 @@ return array(
     "Test_AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager.php", 
     "Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 
     "Test_AmazonAutoLinks_HTTPClient" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/http/interpreter/http/Test_AmazonAutoLinks_HTTPClient.php", 
+    "Test_AmazonAutoLinks_HTTPClient_Part2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/http/interpreter/http/Test_AmazonAutoLinks_HTTPClient_Part2.php", 
     "Test_AmazonAutoLinks_Locales" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/locale/Test_AmazonAutoLinks_Locales.php", 
     "Test_AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/locale/cookie/Test_AmazonAutoLinks_Locale_AmazonCookies.php", 
     "AmazonAutoLinks_UnitTest_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/database/table/AmazonAutoLinks_UnitTest_Database_aal_request_cache.php", 

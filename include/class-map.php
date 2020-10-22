@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.5b04 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.5 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -167,6 +167,7 @@ return array(
     "AmazonAutoLinks_Test_Event_Ajax_Delete" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Delete.php", 
     "AmazonAutoLinks_Test_Event_Ajax_Scratches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Scratches.php", 
     "AmazonAutoLinks_Test_Event_Ajax_Tests" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/ajax/AmazonAutoLinks_Test_Event_Ajax_Tests.php", 
+    "AmazonAutoLinks_Test_Event_Query_CaptchaError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_CaptchaError.php", 
     "AmazonAutoLinks_Test_Event_Query_Cookie" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_Cookie.php", 
     "AmazonAutoLinks_Test_Event_Query_Referer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/event/query/AmazonAutoLinks_Test_Event_Query_Referer.php", 
     "AmazonAutoLinks_Test_ClassLister" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/utility/AmazonAutoLinks_Test_ClassLister.php", 
@@ -416,7 +417,7 @@ return array(
     "AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies.php", 
-    "AmazonAutoLinks_Main_Event_Filter_HTTPRequestError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPRequestError.php",
+    "AmazonAutoLinks_Main_Event_Filter_HTTPRequestError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPRequestError.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError.php", 
     "AmazonAutoLinks_Event___Query_Feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Feed.php", 
     "AmazonAutoLinks_Event___Query_Redirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Redirect.php", 
