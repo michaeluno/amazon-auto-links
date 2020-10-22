@@ -45,8 +45,9 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_Test_Event_Ajax_Scratches;
         new AmazonAutoLinks_Test_Event_Ajax_Delete;
 
-        new AmazonAutoLinks_Test_Event_Query_Cookie;    // [4.3.4]
-        new AmazonAutoLinks_Test_Event_Query_Referer;   // [4.3.4]
+        new AmazonAutoLinks_Test_Event_Query_Cookie;       // [4.3.4]
+        new AmazonAutoLinks_Test_Event_Query_Referer;      // [4.3.4]
+        new AmazonAutoLinks_Test_Event_Query_CaptchaError; // [4.3.5]
 
         add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
 
