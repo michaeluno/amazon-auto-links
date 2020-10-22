@@ -9,11 +9,9 @@
  */
 
 /**
- * Manages creation and deletion of temporary files.
+ * Manages a lock file of PA-API requests.
  *
- * Used to create lock files for event actions.
- *
- * @since   3.7.7
+ * @since   4.3.5
  */
 class AmazonAutoLinks_VersatileFileManager_PAAPILock extends AmazonAutoLinks_VersatileFileManager {
 
