@@ -310,8 +310,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Optimized HTTP requests.
 - Fixed a bug that the contextual units were not finding products due to the wrong locale if the default unit options were not set, started since v4.3.4.
 - Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type bool in ...AmazonAutoLinks_TemplateOption.php on line 176."
-- Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type null in ...AmazonAutoLinks_DatabaseTable_aal_request_cache.php on line 227."
-- Fixed a bug that caused the PHP fatal error, "Uncaught Error: Cannot use object of type WP_Error as array." when trying to retrieve HTTP status code.
+- Fixed a bug that caused the PHP notice, "Trying to access array offset on value of type null in ...AmazonAutoLinks_DatabaseTable_aal_request_cache.php on line 227." in PHP 7.4.
+- Fixed a bug that caused the PHP fatal error, "Uncaught Error: Cannot use object of type WP_Error as array." when trying to retrieve HTTP status code, started since v4.3.4.
 
 = 4.3.4 10/17/2020 =
 - Added the Saudi Arabia locale.
