@@ -215,4 +215,13 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     public function test_getAllowedMaxExecutionTime2() {
         return ( integer ) ini_get( 'max_execution_time' ) === $this->getAllowedMaxExecutionTime( 30, 999999 );
     }
+
+    /**
+     * @tags ini
+     */
+    public function test_getMaxExecutionTime() {
+        $_iMaxExecutionTime = $this->getMaxExecutionTime();
+        $this->_assertNotEmpty( $_iMaxExecutionTime );
+    }
+
 }
