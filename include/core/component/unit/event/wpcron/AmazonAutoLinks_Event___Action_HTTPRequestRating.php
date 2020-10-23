@@ -116,7 +116,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
                     'timeout'     => 20,
                     'redirection' => 20,
                     'cookies'     => $_aRequestCookies,
-                    'interval'    => 10,
+                    'interval'    => $this->_iHTTPRequestInterval,
                     'renew_cache' => ( boolean ) $bForceRenew,
                 );
                 $_oHTTP           = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $_aArguments, 'rating' );
