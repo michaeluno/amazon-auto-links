@@ -86,6 +86,10 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.4
      */
     public function set( $sText ) {
+        $_sDirPath = dirname( $this->_sFilePath );
+        if ( ! is_dir( $_sDirPath ) ) {
+            mkdir( $_sDirPath, 0777, true );
+        }
         return file_put_contents( $this->_sFilePath, $sText, LOCK_EX );
     }
 
