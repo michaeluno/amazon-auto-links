@@ -26,6 +26,25 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
+     * @tags cache
+     */
+    public function test_setObjectCache() {
+
+        $this->oUtil->setObjectCache( 'test', 'foo' );
+        $this->_assertEqual( 'foo', $this->oUtil->getObjectCache( 'test' ) );
+
+        $this->oUtil->setObjectCache( array( 'test', 'deep' ), 'bar' );
+        $this->_assertEqual( 'bar', $this->oUtil->getObjectCache( array( 'test', 'deep' ) ) );
+
+        $this->oUtil->setObjectCache( array( 'test', 'deep' ), 'bar' );
+        $this->_assertEqual( 'bar', AmazonAutoLinks_PluginUtility::getObjectCache( array( 'test', 'deep' ) ) );
+
+        $this->oUtil->unsetObjectCache( array( 'test', 'deep' ) );
+        $this->_assertEqual( null, $this->oUtil->getObjectCache( array( 'test', 'deep' ) ) );
+
+    }
+
+    /**
      * @tags URL
      */
     public function test_getSubDomain() {
