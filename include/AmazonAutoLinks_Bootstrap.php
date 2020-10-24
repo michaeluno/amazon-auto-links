@@ -266,7 +266,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                     $this->sFilePath 
                 );
                 
-                new AmazonAutoLinks_HelpAdminPage;                
+                new AmazonAutoLinks_HelpAdminPage;
+                new AmazonAutoLinks_ReportAdminPage;
                 new AmazonAutoLinks_InfoBoxLoader;
                 
             }

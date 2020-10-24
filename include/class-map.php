@@ -1,11 +1,11 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.5 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.6 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
  */
-return array(
+return array( 
     "AmazonAutoLinks_HelpAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage.php", 
     "AmazonAutoLinks_HelpAdminPage_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_About" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php", 
@@ -16,6 +16,8 @@ return array(
     "AmazonAutoLinks_HelpAdminPage_Help_Tips" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Tips.php", 
     "AmazonAutoLinks_InfoBoxLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php", 
     "AmazonAutoLinks_AdminPageMetaBox_Information" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php", 
+    "AmazonAutoLinks_ReportAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/report/AmazonAutoLinks_ReportAdminPage.php", 
+    "AmazonAutoLinks_ReportAdminPage_Report" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php", 
     "AmazonAutoLinks_SettingsAdminPageLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php", 
     "AmazonAutoLinks_AdminPage_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/AmazonAutoLinks_AdminPage_Setting.php", 
     "AmazonAutoLinks_AdminPage_Setting_3rdParty" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/setting/admin_page/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php", 

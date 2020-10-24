@@ -150,6 +150,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'contextual_unit'    => 'aal_add_contextual_unit',           // 3.5.0+
         'email_unit'         => 'aal_add_email_unit',                // 3.5.0+
         'template'           => 'aal_templates',
+        'report'             => 'aal_reports',                       // [4.4.0]
         'tool'               => 'aal_tools',
         'help'               => 'aal_help',
         'test'               => 'aal_tests',                         // 4.3.0+
