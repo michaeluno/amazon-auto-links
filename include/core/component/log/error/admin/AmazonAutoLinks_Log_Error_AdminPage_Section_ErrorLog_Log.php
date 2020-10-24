@@ -13,7 +13,7 @@
  * 
  * @since       3.9.0
  */
-class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @var string

@@ -12,9 +12,8 @@
  * Adds the 'Log' form section to the 'Debug Log' tab.
  * 
  * @since       4.3.0
- * @todo        Fix a bug that the Clear button does not take effect.
  */
-class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log extends AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log {
+class AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log extends AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log {
 
     /**
      * @return array|string[]

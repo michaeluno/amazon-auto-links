@@ -15,7 +15,7 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  * @since       4.3.0   Renamed from `AmazonAutoLinks_ToolAdminPage_Tool_ErrorLog`.
  */
-class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog extends AmazonAutoLinks_AdminPage_Tab_Base {
+class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_AdminPage_Tab_Base {
 
     /**
      * @return  array
@@ -40,7 +40,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog extends AmazonAutoLinks_
     protected function _loadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
 
         $this->_enqueueResources( $oAdminPage );
 

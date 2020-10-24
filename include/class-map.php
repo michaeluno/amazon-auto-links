@@ -5,7 +5,7 @@
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
  */
-return array( 
+return array(
     "AmazonAutoLinks_HelpAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage.php", 
     "AmazonAutoLinks_HelpAdminPage_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_About" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php", 
@@ -125,14 +125,14 @@ return array(
     "AmazonAutoLinks_LinkConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/output/AmazonAutoLinks_LinkConverter.php", 
     "AmazonAutoLinks_Log_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/AmazonAutoLinks_Log_Loader.php", 
     "AmazonAutoLinks_Log_Debug_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/AmazonAutoLinks_Log_Debug_Loader.php", 
-    "AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/admin/AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog.php", 
-    "AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/admin/AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log.php", 
+    "AmazonAutoLinks_Log_Debug_AdminPage_Tab_DebugLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/admin/AmazonAutoLinks_Log_Debug_AdminPage_Tab_DebugLog.php",
+    "AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/admin/AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log.php",
     "AmazonAutoLinks_Log_Debug_Event_DebugLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_DebugLog.php", 
     "AmazonAutoLinks_Log_Debug_Event_HTTPRequest" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_HTTPRequest.php", 
     "AmazonAutoLinks_Log_Debug_Event_PluginCron" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/debug/event/action/AmazonAutoLinks_Log_Debug_Event_PluginCron.php", 
     "AmazonAutoLinks_Log_Error_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/AmazonAutoLinks_Log_Error_Loader.php", 
-    "AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog.php", 
-    "AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php", 
+    "AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog.php",
+    "AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php",
     "AmazonAutoLinks_Event_Error_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log.php", 
     "AmazonAutoLinks_Event_Error_Log_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log_HTTPRequestCache.php", 
     "AmazonAutoLinks_Proxy_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/AmazonAutoLinks_Proxy_Loader.php", 
@@ -203,7 +203,6 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
-    "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
@@ -212,6 +211,9 @@ return array(
     "AmazonAutoLinks_Event___Action_UnitPrefetchByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_UnitPrefetchByID.php", 
     "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
     "AmazonAutoLinks_Unit_Event_Action_CheckTasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Unit_Event_Action_CheckTasks.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Filter_Counter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/filter/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Filter_Counter.php", 
+    "AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/_common/utility/file/AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter.php", 
     "AmazonAutoLinks_UnitTypesLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/AmazonAutoLinks_UnitTypesLoader.php", 
     "AmazonAutoLinks_UnitTypeLoader_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage.php", 
@@ -390,7 +392,6 @@ return array(
     "AmazonAutoLinks_Unit_Admin_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Admin_Utility.php", 
     "AmazonAutoLinks_Unit_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php", 
     "AmazonAutoLinks_VersatileFileManager_PAAPILock" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/file/AmazonAutoLinks_VersatileFileManager_PAAPILock.php", 
-    "AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/file/AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter.php", 
     "AmazonAutoLinks_WebScraper_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/scraper/AmazonAutoLinks_WebScraper_Base.php", 
     "AmazonAutoLinks_UnitTypeLoader_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php", 
     "AmazonAutoLinks_UnitOptionConverterLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit_option_converter/AmazonAutoLinks_UnitOptionConverterLoader.php", 

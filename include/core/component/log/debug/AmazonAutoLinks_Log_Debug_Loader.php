@@ -50,14 +50,14 @@ class AmazonAutoLinks_Log_Debug_Loader extends AmazonAutoLinks_PluginUtility {
          * Loads admin components.
          */
         private function ___loadAdminComponents() {
-            add_action( 'load_' .  AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], array( $this, 'replyToLoadToolPage' ) );
+            add_action( 'load_' .  AmazonAutoLinks_Registry::$aAdminPages[ 'report' ], array( $this, 'replyToLoadToolPage' ) );
         }
             /**
              * @param AmazonAutoLinks_AdminPageFramework $oFactory
              */
             public function replyToLoadToolPage( $oFactory ) {
 
-                new AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
+                new AmazonAutoLinks_Log_Debug_AdminPage_Tab_DebugLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
 
             }
 

@@ -14,7 +14,7 @@
  * @since       4.3.0
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
-class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog extends AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog {
+class AmazonAutoLinks_Log_Debug_AdminPage_Tab_DebugLog extends AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog {
 
     /**
      * @return  array
@@ -36,7 +36,7 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog extends AmazonAutoLinks_
     protected function _loadTab( $oAdminPage ) {
 
         // Form sections
-        new AmazonAutoLinks_Log_Debug_AdminPage_Tool_DebugLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
 
         $this->_enqueueResources( $oAdminPage );
 

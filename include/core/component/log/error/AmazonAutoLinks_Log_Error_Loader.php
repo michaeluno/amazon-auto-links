@@ -43,7 +43,7 @@ class AmazonAutoLinks_Log_Error_Loader extends AmazonAutoLinks_PluginUtility {
          * Loads admin components.
          */
         private function ___loadAdminComponents() {
-            add_action( 'load_' .  AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], array( $this, 'replyToLoadToolPage' ) );
+            add_action( 'load_' .  AmazonAutoLinks_Registry::$aAdminPages[ 'report' ], array( $this, 'replyToLoadToolPage' ) );
         }
             /**
              * @param AmazonAutoLinks_AdminPageFramework $oFactory
@@ -51,7 +51,7 @@ class AmazonAutoLinks_Log_Error_Loader extends AmazonAutoLinks_PluginUtility {
             public function replyToLoadToolPage( $oFactory ) {
 
                 // Tabs
-                new AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
+                new AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog( $oFactory, $oFactory->oProp->getCurrentPageSlug() );
 
             }
 
