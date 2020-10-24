@@ -1,2 +1,0 @@
-- Fixed a bug that some background routines often reached the PHP maximum execution time, started since v4.3.4.
-- Fixed a bug that background routines which remained due to an error of another routine did not resume smoothly.  
