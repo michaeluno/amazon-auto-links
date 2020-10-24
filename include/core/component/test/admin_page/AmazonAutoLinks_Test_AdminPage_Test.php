@@ -51,24 +51,6 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
         
     }
     
-        /**
-         * Page styling
-         *
-         * @param AmazonAutoLinks_AdminPageFramework $oFactory
-         * @since       4.3.0
-         * @return      void
-         */
-        private function _doPageSettings( $oFactory ) {
-                        
-            $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
-            $oFactory->setInPageTabTag( 'h2' );                
-            $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
-            // $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ) );
-
-        }    
-
-
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
         // Disable the setting notice in the next page load.

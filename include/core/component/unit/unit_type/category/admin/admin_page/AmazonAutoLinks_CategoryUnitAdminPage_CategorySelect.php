@@ -40,16 +40,18 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
         new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second( $this->oFactory, $this->sPageSlug );
        
-        $this->_doPageSettings();
+        $this->_doPageSettings( $this->oFactory );
         
-    }   
-    
-        private function _doPageSettings() {
+    }
+        /**
+         * @param AmazonAutoLinks_AdminPageFramework $oFactory
+         */
+        protected function _doPageSettings( $oFactory ) {
             
             $this->oFactory->setPageHeadingTabsVisibility( true );       
             $this->oFactory->setPageTitleVisibility( true ); 
             $this->oFactory->setInPageTabsVisibility( false );
-            
+
         }
  
     public function replyToDoPage( $oFactory ) {}

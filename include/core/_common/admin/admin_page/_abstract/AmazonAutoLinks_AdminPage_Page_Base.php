@@ -77,6 +77,21 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
          $this->_doAfterPage( $oFactory );
      }
 
+    /**
+     * Page styling
+     * @since   4.4.0
+     * @remark  Override this method in an extended class/
+     * @param   AmazonAutoLinks_AdminPageFramework $oFactory
+     * @return  void
+     */
+    protected function _doPageSettings( $oFactory ) {
+
+        $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
+        $oFactory->setInPageTabTag( 'h2' );
+        $oFactory->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
+
+    }
+
 
     /**
      * @param $oFactory
