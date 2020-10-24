@@ -465,13 +465,25 @@ class AmazonAutoLinks_Event_Scheduler {
         }
 
     /**
+     * @param  integer $iTime
+     * @param  boolean $bDuplicateCheck
+     * @return boolean
+     * @since  4.3.6
+     */
+    static public function scheduleTaskCheckResume( $iTime=0, $bDuplicateCheck=true ) {
+        return self::scheduleTaskCheck( $iTime, $bDuplicateCheck, 'aal_action_resume_check_tasks' );
+    }
+
+    /**
      * Schedule a task check.
      * @param  integer iTime The scheduling time.
      * If a time is not given, it will schedule with the most closest scheduled time, regardless of whether a duplicate exists or not.
      * @param  boolean $bDuplicateCheck
-     * @return boolean  true on success; otherwise, false.
+     * @param  string  $sActionName
+     * @return boolean true on success; otherwise, false.
+     * @see    wp_schedule_single_event()
      */
-    static public function scheduleTaskCheck( $iTime=0, $bDuplicateCheck=true ) {
+    static public function scheduleTaskCheck( $iTime=0, $bDuplicateCheck=true, $sActionName='aal_action_check_tasks' ) {
 
         if ( version_compare( get_option( 'aal_tasks_version', '0' ), '1.0.0b01', '<' ) ) {
             return false;
@@ -479,7 +491,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
         if ( $iTime ) {
             $_aArguments = $bDuplicateCheck ? array() : array( $iTime );
-            return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks', $_aArguments, $iTime );
+            return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( $sActionName, $_aArguments, $iTime );
         }
 
         $_oTaskTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
@@ -496,7 +508,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
         // Giving a unique argument so the duplicate check will pass.
         $_aArguments = $bDuplicateCheck ? array() : array( $_iTime );
-        return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( 'aal_action_check_tasks', $_aArguments, $_iTime );
+        return AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask( $sActionName, $_aArguments, $_iTime );
 
     }
 

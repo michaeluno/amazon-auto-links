@@ -18,6 +18,14 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
 
     protected $_sActionHookName     = 'aal_action_api_get_customer_review';
     protected $_iCallbackParameters = 3;
+
+
+    /**
+     * @var  integer
+     * @sine 4.3.6
+     */
+    protected $_iHTTPRequestInterval = 10;
+
     /**
      * @return bool
      * @since 4.3.0
@@ -26,6 +34,10 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
         if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ . '_' . serialize( func_get_args() ) ) ) {
             return false;
         }
+        if ( ! $this->_hasEnoughTime() ) {
+            $_bScheduled = AmazonAutoLinks_Event_Scheduler::scheduleTaskCheckResume( time(), true );
+            exit;   // avoid reaching the maximum execution time
+        }
         return true;
     }
 
@@ -33,6 +45,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
      *
      */
     protected function _doAction( /* $sProductID, $iCacheDuration, $bForceRenew */ ) {
+
         $_aParams        = func_get_args() + array( null, null, null );
         $_iCacheDuration = $_aParams[ 1 ];
         $_bForceRenew    = $_aParams[ 2 ];
@@ -101,7 +114,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
                     array(
                         'timeout'     => 20,
                         'redirection' => 20,
-                        'interval'    => 10,
+                        'interval'    => $this->_iHTTPRequestInterval,
                         'renew_cache' => ( boolean ) $bForceRenew,
                     ),
                     'customer_review'
@@ -157,5 +170,23 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
             return $_aRow;
             
         }
+
+    /**
+     * Checks if there is an enough time to perform an action that involves an HTTP request.
+     * @return boolean
+     * @since  4.3.6
+     */
+    protected function _hasEnoughTime() {
+
+        $_iMaxExecutionTime = $this->getMaxExecutionTime();
+        if ( ! $_iMaxExecutionTime ) {
+            return true;
+        }
+        $_fElapsed          = microtime( true ) - $this->getObjectCache( 'load_time' );
+        $_iRemained         = $_iMaxExecutionTime - round( $_fElapsed ); // remained seconds
+        $_iExpectedTime     = 5; // maybe 5 seconds to perform one HTTP request.
+        return $this->_iHTTPRequestInterval + $_iExpectedTime < $_iRemained;
+
+    }
 
 }

@@ -24,6 +24,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         if ( $this->bIsAdmin ) {
             $this->___checkCustomTables();
         }
+
+        // [4.3.6] Stores the plugin load time so that the remained execution time can be calculated.
+        AmazonAutoLinks_Utility::setObjectCache( 'load_time', microtime( true ) );
         
     }        
         
