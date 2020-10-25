@@ -54,13 +54,18 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     }
     
     /**
-     * @callback    action      load_{page slug}
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback add_action()      load_{page slug}
      */
     public function replyToSetResources( $oFactory ) {
 
-        $_sPageStyleSheetPath = AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . '.css';
-        $this->oFactory->enqueueStyle( $_sPageStyleSheetPath, $this->sPageSlug );
-        
+        $_sPageStyleSheetPath = $this->isDebugMode()
+            ? AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . '.css'
+            : AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . 'min.css';
+        if ( file_exists( $_sPageStyleSheetPath ) ) {
+            $this->oFactory->enqueueStyle( $_sPageStyleSheetPath, $this->sPageSlug );
+        }
+
     }
     
     /**
