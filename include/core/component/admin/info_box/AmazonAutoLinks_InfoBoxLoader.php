@@ -25,6 +25,7 @@ class AmazonAutoLinks_InfoBoxLoader {
             AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
             AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
+            AmazonAutoLinks_Registry::$aAdminPages[ 'report' ],
         );
                 
         if ( ! $this->_shouldProceed( $_aTargetPageSlugs ) ) {
