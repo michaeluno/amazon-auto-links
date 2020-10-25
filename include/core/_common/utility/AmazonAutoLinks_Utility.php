@@ -34,6 +34,9 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
+     * Caches values in the class property.
+     *
+     * @remark The stored data will be gone after the page load.
      * @param  array|string $asName The key of the object cache array. If an array is given, it represents the multi-dimensional keys.
      * @param  mixed $mDefault
      * @return mixed
