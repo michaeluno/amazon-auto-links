@@ -21,7 +21,6 @@
         var _oLog = $( '.log' );
         _oLog.css( {
             'display': 'block',
-            'width' : _oLog.parent().width() + 'px',
         } );
 
         // Clipboard

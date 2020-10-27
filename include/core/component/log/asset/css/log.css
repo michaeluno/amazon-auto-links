@@ -1,6 +1,6 @@
 /*
     @name: Log Admin Screen
-    @version: 1.0.1
+    @version: 1.0.3
 */
 .log {
     display: none;
@@ -11,18 +11,20 @@
     width: 100%;
     border: 1px solid #9a9a9a;
     border-radius: 0.32em;
-    padding: 0.6em;
 }
 .log .log-item {
-    margin: 0 0 0.32em;
+    margin: 0.32em 0 0 0.32em;
 }
 .log .log-item-title  {
     margin: 0;
     font-weight: normal;
     font-size: 1em;
+    line-height: 1.4; /* to be same as log-item-message */
 }
 .log .log-item-message {
     margin: 0;
+    white-space: normal; /* without this the log container sticks out */
+    line-height: 1.4; /* to be same as log-item-title */
 }
 
 .log .log-item-body {
@@ -30,7 +32,7 @@
     white-space: nowrap;
 }
 .log .log-item-body .extra {
-    white-space: pre;
+    white-space: pre-wrap;
 }
 
 .log .log-item-head {
