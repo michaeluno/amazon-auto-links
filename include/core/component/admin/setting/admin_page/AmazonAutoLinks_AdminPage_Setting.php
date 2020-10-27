@@ -50,20 +50,27 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
     
     /**
      * Prints debug information at the bottom of the page.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _doAfterPage( $oFactory ) {
             
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug() && ! $this->isDebugMode() ) {
             return;
         }
-        echo "<h3 style='display:block; clear:both;'>"
-                . __( 'Debug Info', 'amazon-auto-links' ) 
+        echo "<div class='debug'>"
+            . "<h3 style='display:block; clear:both;'>"
+                . 'Debug Info'
             . "</h3>"
             . "<h4 style='display:block; clear:both;'>"
+                . 'Options (formatted)'
+            .  "</h4>"
+            . $oFactory->oDebug->getDetails( $_oOption->get() )
+            . "<h4 style='display:block; clear:both;'>"
                 . __( 'Saved Options', 'amazon-auto-links' )
-                .  "</h4>";
-        $oFactory->oDebug->dump( $oFactory->getValue() );
+            .  "</h4>"
+            . $oFactory->oDebug->getDetails( $oFactory->getValue() )
+            . "</div>";
 
     }
         

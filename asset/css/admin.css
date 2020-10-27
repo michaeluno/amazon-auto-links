@@ -57,6 +57,9 @@
 
 
 /* Debug output */
+.debug {
+	max-width: 100%;
+}
 pre.dump-array {
     width: inherit !important;   
 }
