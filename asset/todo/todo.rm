@@ -1,10 +1,13 @@
 # Todos
 
 ## Minor 
+- Use files to store plugin error log and debug log.
 - Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve. 
 
 ## Meager
+- Make the General setting tab the default in the Settings page.
+- Deprecate the Authentication setting tab and add the PA-API setting tab which includes the today's request counts, test API keys input, recent PA-API errors, and last connected time.   
 - Add a PA-API request counter and its chart.
 - Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
 - Add the SubscriptionID parameter to product links when AWS keys are given.
