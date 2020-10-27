@@ -75,7 +75,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * @since       3.2.0
      */ 
-    const STORE_URI_PRO             = 'https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro/';
+    const STORE_URI_PRO             = 'https://store.michaeluno.jp/amazon-auto-links-pro';
         
     /**
      * 
