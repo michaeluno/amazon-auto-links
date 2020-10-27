@@ -323,5 +323,11 @@ $aClassFiles = array(
     "AmazonAutoLinks_AdminPageFramework_Factory_Model"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
     "AmazonAutoLinks_AdminPageFramework_Factory_View"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
     "AmazonAutoLinks_AdminPageFramework_Factory_Controller"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
+    "AmazonAutoLinks_DateCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/DateCustomFieldType.php",
+    "AmazonAutoLinks_DateRangeCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php",
+    "AmazonAutoLinks_DateTimeCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/DateTimeCustomFieldType.php",
+    "AmazonAutoLinks_DateTimeRangeCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php",
+    "AmazonAutoLinks_TimeCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/TimeCustomFieldType.php",
+    "AmazonAutoLinks_TimeRangeCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php",
     "AmazonAutoLinks_RevealerCustomFieldType" => AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php",
 );
