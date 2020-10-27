@@ -18,6 +18,45 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
 
     /**
+     * Determine time zone from WordPress options and return as object.
+     *
+     * @return integer The timezone offset in seconds.
+     * @see https://wordpress.stackexchange.com/a/283094
+     */
+    public static function getGMTOffset() {
+
+        $_iCache = self::getObjectCache( __METHOD__ );
+        if ( isset( $_iCache ) ) {
+            return $_iCache;
+        }
+        try {
+            $_sTimeZone     = self::___getSiteTimeZone();
+            $_oDateTimeZone = new DateTimeZone( $_sTimeZone );
+            $_oDateTime     = new DateTime("now", $_oDateTimeZone );
+        } catch ( Exception $oException ) {
+            self::setObjectCache( __METHOD__, 0 );
+            return 0;
+        }
+        $_iOffset = $_oDateTimeZone->getOffset( $_oDateTime );
+        self::setObjectCache( __METHOD__, $_iOffset );
+        return $_iOffset;
+
+    }
+        /**
+         * @return string Timezone string compatible with the DateTimeZone objects.
+         */
+        private static function ___getSiteTimeZone() {
+            $_sTimeZone = get_option( 'timezone_string' );
+            if ( ! empty( $_sTimeZone ) ) {
+                return $_sTimeZone;
+            }
+            $_fOffset   = get_option( 'gmt_offset' ); // e.g. 5.5
+            $_iHours    = ( integer ) $_fOffset;
+            $_fiMinutes = abs( ( $_fOffset - ( integer ) $_fOffset ) * 60 );
+            return sprintf( '%+03d:%02d', $_iHours, $_fiMinutes );
+        }
+
+    /**
      * Schedules a WP Cron single event.
      * @param  string  $sActionName
      * @param  array   $aArguments
@@ -30,6 +69,8 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
         if ( wp_next_scheduled( $sActionName, $aArguments ) ) {
             return false;
         }
+
+        // In previous WordPress versions, this function did not return true when scheduled. So checking false here.
         $_iTime = $iTime ? $iTime : time();
         return false !== wp_schedule_single_event( $_iTime, $sActionName, $aArguments );
 
@@ -47,7 +88,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
         static $_iOffsetSeconds, $_sDateFormat, $_sTimeFormat;
         $_iOffsetSeconds = $_iOffsetSeconds 
             ? $_iOffsetSeconds 
-            : get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
+            : self::getGMTOffset();
         $_sDateFormat = $_sDateFormat
             ? $_sDateFormat
             : get_option( 'date_format' );
