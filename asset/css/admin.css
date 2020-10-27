@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.0.0
+	@version 1.0.1
  */
 /* General */
 .width-full,
@@ -45,6 +45,9 @@
 .amazon-auto-links-field-textarea .amazon-auto-links-input-label-container
 {
     width: 100%;
+}
+.amazon-auto-links-section span.description {
+	font-style: italic;
 }
 
 
