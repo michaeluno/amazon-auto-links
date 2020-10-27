@@ -97,12 +97,23 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @param   string $sDirectoryPath
      * @return  bool|null
      * @since   3.7.10
+     * @see     https://stackoverflow.com/questions/7497733/how-can-i-use-php-to-check-if-a-directory-is-empty/7497848#7497848
      */
     static public function isDirectoryEmpty( $sDirectoryPath ) {
         if ( ! is_readable( $sDirectoryPath ) ) {
             return null;
         }
-        return ( count( scandir( $sDirectoryPath ) ) == 2 );
+        $_rDir = opendir( $sDirectoryPath );
+        while ( false !== ( $_bsEntry = readdir( $_rDir ) ) ) {
+            if ( $_bsEntry != "." && $_bsEntry != "..") {
+                closedir( $_rDir );
+                return false;
+            }
+        }
+        closedir( $_rDir );
+        return true;
+        // @deprecated As said inefficient.
+        // return ( count( scandir( $sDirectoryPath ) ) == 2 );
     }
 
     /**
