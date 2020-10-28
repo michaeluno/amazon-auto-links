@@ -65,7 +65,7 @@ class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
         $_sVendorURL = $this->_getVendorURL( $oOption );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width: 100%;'>"
-                . "<span style='margin: 1em 0.4em; float: right; clear: both; background-image: url(" . esc_url( AmazonAutoLinks_Registry::getPluginUrl( 'asset/image/menu_icon_16x16.png' ) ) . "); background-repeat:no-repeat; background-position: 0 50%; padding-left: 20px; font-size: smaller;'>"
+                . "<span style='margin: 1em 0.4em; float: right; clear: both; background-image: url(" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/menu_icon_16x16.png' ) ) . "); background-repeat:no-repeat; background-position: 0 50%; padding-left: 20px; font-size: smaller;'>"
                     ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author' target='_blank' style='border: none;'>"
                         . AmazonAutoLinks_Registry::NAME
                     . "</a>"
