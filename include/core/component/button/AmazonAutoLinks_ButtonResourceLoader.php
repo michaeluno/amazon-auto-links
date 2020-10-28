@@ -162,7 +162,7 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
         return <<<CSS
 .amazon-auto-links-button > a, .amazon-auto-links-button > a:hover {
     -webkit-box-shadow: none;
-    box-shadow none;
+    box-shadow: none;
     color: inherit;            
 } 
 button.amazon-auto-links-button {
@@ -185,8 +185,8 @@ CSS;
     background-image: -ms-linear-gradient(top, #4997e5, #3f89ba);
     background-image: -o-linear-gradient(top, #4997e5, #3f89ba);
     background-image: linear-gradient(to bottom, #4997e5, #3f89ba);
-    -webkit-border-radius: 4;
-    -moz-border-radius: 4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
     border-radius: 4px;
     margin-left: auto;
     margin-right: auto;
