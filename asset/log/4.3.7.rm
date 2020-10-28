@@ -1,0 +1,1 @@
+- Fixed a bug that caused the PHP error, "Parse error: syntax error, unexpected ')' in ...AmazonAutoLinks_UnitOutput__ItemFormatter.php on line 130" in below PHP 7.3.

@@ -126,7 +126,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
             $aProduct[ 'ASIN' ] . '|' . $this->___oUnitOutput->oUnitOption->get( 'country' ) . '|' . $this->___oUnitOutput->oUnitOption->get( 'preferred_currency' ) . '|' . $this->___oUnitOutput->oUnitOption->get( 'language' ), // product ID
             $this->___oUnitOutput,
             $aProduct,
-            $this->___aCacheDBRow,
+            $this->___aCacheDBRow
         );
     }
         /**
