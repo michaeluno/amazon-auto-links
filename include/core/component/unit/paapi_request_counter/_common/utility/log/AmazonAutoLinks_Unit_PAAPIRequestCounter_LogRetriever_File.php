@@ -44,7 +44,9 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonA
     private function ___getRaw( $sDirPath, $iTimeFrom, $iTimeTo, array &$aFilePaths ) {
 
         $_aCountLog        = array();
+        $_iNow             = time();
         $iTimeFrom         = $iTimeFrom ? $iTimeFrom : $this->___getFirstFoundItemTime( $sDirPath );
+        $iTimeTo           = $iTimeTo <= $_iNow ? $iTimeTo : $_iNow;
         $this->_setVariablesOfTime(
             $_sStartYear, $_sEndYear,
             $_sStartMonth, $_sEndMonth,
@@ -76,7 +78,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonA
             );
         }
         return $_aCountLog;
-
+        
     }
         /**
          * @param  string  $sDirPath
@@ -127,14 +129,27 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonA
 
         }
             private function ___getFirstFoundFileName( $sDirPath, array $aIgnoreNames=array() ) {
-                return $this->___getFirstFoundItemInFileSystem( $sDirPath, $aIgnoreNames, false );
+                return $this->___getMostEndItemInFileSystem( $sDirPath, $aIgnoreNames, false );
             }
             private function ___getFirstFoundDirName( $sDirPath, array $aIgnoreNames=array() ) {
-                return $this->___getFirstFoundItemInFileSystem( $sDirPath, $aIgnoreNames, true );
+                return $this->___getMostEndItemInFileSystem( $sDirPath, $aIgnoreNames, true );
             }
-            private function ___getFirstFoundItemInFileSystem( $sDirPath, array $aIgnoreNames, $bDir ) {
+
+            /**
+             * Finds the most end item either of the first or the last in a given directory.
+             *
+             * @param  string  $sDirPath
+             * @param  array   $aIgnoreNames
+             * @param  boolean $bDir            If true, a found directory base name will be returned. Otherwise, a found file base name will be returned.
+             * @param  boolean $bFindFirst      If true, tries to find the first item. Otherwise, last.
+             * @return mixed|string
+             * @since  4.4.0
+             */
+            private function ___getMostEndItemInFileSystem( $sDirPath, array $aIgnoreNames, $bDir, $bFindFirst=true ) {
                 $_aIgnoreNames = array_merge( $aIgnoreNames, array( '.', '..' ) );
-                foreach( scandir( $sDirPath ) as $_sFileOrDir )  {
+                $_aItems = scandir( $sDirPath );
+                $_aItems = $bFindFirst ? $_aItems : array_reverse( $_aItems );
+                foreach( $_aItems as $_sFileOrDir )  {
                     if ( in_array( $_sFileOrDir, $_aIgnoreNames, true ) ) {
                         continue;
                     }
@@ -148,6 +163,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonA
                 }
                 return '';
             }
+
         private function ___getLogByEachYear( $sYearDirectoryPath, $sStartMonth, $sEndMonth, $sStartDate, $sEndDate, $sStartHour, $sEndHour, $sThisYear, array &$aFilePaths=array() ) {
             $_sStartMonth     = null === $sStartMonth ? '01' : $sStartMonth;
             $_sEndMonth       = null === $sEndMonth   ? '12' : $sEndMonth;
