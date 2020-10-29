@@ -1,8 +1,9 @@
 <?php 
-return array( 
+return array(
     "AmazonAutoLinks_Run_Database_Delete_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_products/AmazonAutoLinks_Run_Database_Delete_aal_products.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/AmazonAutoLinks_Run_Database_Delete_aal_request_cache.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_Delete_aal_tasks.php", 
+    "AmazonAutoLinks_Run_PluginOption_amazon_auto_links_paapi_request_counts" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/option/paapi_request_counts/AmazonAutoLinks_Run_PluginOption_amazon_auto_links_paapi_request_counts.php", 
     "AmazonAutoLinks_Scratch_Database" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/AmazonAutoLinks_Scratch_Database.php", 
     "AmazonAutoLinks_Scratch_Database_Optimize" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/optimize/AmazonAutoLinks_Scratch_Database_Optimize.php", 
     "AmazonAutoLinks_Scratch_Database_Repair" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/repair/AmazonAutoLinks_Scratch_Database_Repair.php", 
@@ -10,6 +11,7 @@ return array(
     "AmazonAutoLinks_Scratch_Database_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_products/AmazonAutoLinks_Scratch_Database_aal_products.php", 
     "AmazonAutoLinks_Scratch_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_request_cache/AmazonAutoLinks_Scratch_Database_aal_request_cache.php", 
     "AmazonAutoLinks_Scratch_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_tasks/AmazonAutoLinks_Scratch_Database_aal_tasks.php", 
+    "AmazonAutoLinks_Scratch_PAAPIRequestCounter" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/paapi_request_counter/AmazonAutoLinks_Scratch_PAAPIRequestCounter.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 
     "AmazonAutoLinks_Scratch_Test2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test2.php", 
     "AmazonAutoLinks_Scratch_WordPress_Post" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/post/AmazonAutoLinks_Scratch_WordPress_Post.php", 
@@ -21,6 +23,10 @@ return array(
     "Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/event/action/Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
+    "Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/paapi_request_counter/common/utility/Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility.php", 
+    "Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/paapi_request_counter/common/utility/log/Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever.php", 
+    "Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/paapi_request_counter/common/utility/log/Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database.php", 
+    "Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/paapi_request_counter/common/utility/log/Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File.php", 
     "AmazonAutoLinks_UnitTest_UnitOption" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/unit_option/AmazonAutoLinks_UnitTest_UnitOption.php", 
     "Test_AmazonAutoLinks_Unit_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/_common/utility/Test_AmazonAutoLinks_Unit_Utility.php", 
     "Test_AmazonAutoLinks_PluginUtility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_PluginUtility.php", 
@@ -51,6 +57,7 @@ return array(
     "Test_AmazonAutoLinks_HTTPClient_WidgetPages" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/http/widget/Test_AmazonAutoLinks_HTTPClient_WidgetPages.php", 
     "AmazonAutoLinks_UnitTest_WordPress" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress.php", 
     "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
+    "AmazonAutoLinks_UnitTest_WordPress_Options" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Options.php", 
     "AmazonAutoLinks_UnitTest_WordPress_add_action" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/add_action/AmazonAutoLinks_UnitTest_WordPress_add_action.php", 
     "Test_wp_remote_head" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/wp_remote_request/Test_wp_remote_head.php", 
 );

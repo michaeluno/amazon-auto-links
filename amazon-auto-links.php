@@ -127,6 +127,27 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         // 4.3.0
         'debug_log'             => 'amazon_auto_links_debug_log',
 
+        // 4.4.0
+        'paapi_request_counter' => array(
+            'AE'    => 'aal_paapi_request_count_log_ae',
+            'AU'    => 'aal_paapi_request_count_log_au',
+            'BR'    => 'aal_paapi_request_count_log_br',
+            'CA'    => 'aal_paapi_request_count_log_ca',
+            'DE'    => 'aal_paapi_request_count_log_de',
+            'ES'    => 'aal_paapi_request_count_log_es',
+            'FR'    => 'aal_paapi_request_count_log_fr',
+            'IN'    => 'aal_paapi_request_count_log_in',
+            'IT'    => 'aal_paapi_request_count_log_it',
+            'JP'    => 'aal_paapi_request_count_log_jp',
+            'MX'    => 'aal_paapi_request_count_log_mx',
+            'NL'    => 'aal_paapi_request_count_log_nl',
+            'SA'    => 'aal_paapi_request_count_log_sa',
+            'SG'    => 'aal_paapi_request_count_log_sg',
+            'TR'    => 'aal_paapi_request_count_log_tr',
+            'US'    => 'aal_paapi_request_count_log_us',
+            'UK'    => 'aal_paapi_request_count_log_uk',
+        ),
+
         // Legacy option keys - not used and should be deleted on uninstall.
         'v1'                    => 'amazonautolinks',
         'v2'                    => 'amazon_auto_links_admin',

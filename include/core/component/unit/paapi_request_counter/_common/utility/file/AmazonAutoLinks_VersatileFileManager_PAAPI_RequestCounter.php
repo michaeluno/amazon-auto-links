@@ -31,6 +31,15 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
     }
 
     /**
+     * @remark Although there is the protected method of this, to display the log, the directory path needed to retrieve from outside.
+     * @return string
+     * @since  4.4.0
+     */
+    public function getDirectoryPath() {
+        return $this->_getDirectoryPath();
+    }
+
+    /**
      * @return string
      * @since  4.4.0
      */
@@ -43,13 +52,29 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
      * @since  4.4.0
      */
     public function increment() {
-        $this->_sFilePath = $this->___getFilePath();    // update the file path as it changes on the called time.
+        $this->_sFilePath = $this->getFilePath( time() );    // update the file path as it changes on the called time.
         $this->set( ( integer ) $this->get() + 1 );
+        $this->___scheduleSaveIntoDatabase();
     }
-        /**
-         * @since 4.4.0
-         */
-        private function ___getFilePath() {
-            return $this->_getDirectoryPath() . '/' . date( 'Y/m/d/H' ) . '.txt';
+        static private $___aLoaded = array();
+        private function ___scheduleSaveIntoDatabase() {
+            if ( isset( self::$___aLoaded[ $this->_sIdentifier ] ) ) {
+                return;
+            }
+            self::$___aLoaded[ $this->_sIdentifier ] = true;
+            AmazonAutoLinks_WPUtility::scheduleSingleWPCronTask(
+                'aal_action_paapi_request_counter_save_log',
+                array( $this->_sIdentifier ), // locale
+                time() + 86400
+            );
         }
+    /**
+     * @param  integer $iTime
+     * @return string  The file path generated based on the given/current time.
+     * @since  4.4.0
+     */
+    public function getFilePath( $iTime=0 ) {
+        $iTime = $iTime ? $iTime : time();
+        return $this->_getDirectoryPath() . '/' . date( 'Y/m/d/H', $iTime ) . '.txt';
+    }
 }

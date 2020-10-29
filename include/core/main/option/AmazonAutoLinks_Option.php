@@ -159,6 +159,15 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'override_associates_id_of_url' => false,
             'template_id'           => null,            // (string) will be set via the UI
         ),
+
+        // [4.4.0]
+        'paapi_request_counts' => array(
+            'enable'           => true,
+            'retention_period' => array(
+                'size'      => 7,
+                'unit'      => 86400,
+            ),
+        ),
     
         // 3.4.0+
         'unit_default'  => array(
@@ -492,6 +501,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         return false;
     }
     public function isSupported() {
+        return false;
+    }
+
+    /**
+     * @return false
+     * @since  4.4.0
+     */
+    public function isPAAPIRequestCountChartDateRangeSupported() {
         return false;
     }
     

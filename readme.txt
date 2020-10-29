@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.7
+Stable tag:         4.3.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -305,9 +305,6 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
-
-= 4.3.7 - 10/28/2020 =
-- Fixed a bug that caused the PHP error, "Parse error: syntax error, unexpected ')' in ...AmazonAutoLinks_UnitOutput__ItemFormatter.php on line 130" in below PHP 7.3.
 
 = 4.3.6 - 10/24/2020 =
 - Fixed a bug that some background routines often reached the PHP maximum execution time, started since v4.3.4.

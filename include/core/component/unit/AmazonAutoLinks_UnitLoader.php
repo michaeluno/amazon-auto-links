@@ -46,6 +46,9 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
         // Unit Types
         new AmazonAutoLinks_UnitTypesLoader( $sScriptPath );
 
+        // [4.4.0] PA-API Request Counter
+        new AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader;
+
         // Admin
         if ( is_admin() ) {
             $this->___loadAdminComponents();
@@ -83,8 +86,6 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // 4.3.0
 
             new AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors; // [4.3.5]
-
-            new AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount; // [4.4.0]
 
             $this->___loadDebugEvents(); // [4.3.5]
 

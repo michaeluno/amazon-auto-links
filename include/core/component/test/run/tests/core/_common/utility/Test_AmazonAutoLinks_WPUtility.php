@@ -18,6 +18,18 @@
 class Test_AmazonAutoLinks_WPUtility extends AmazonAutoLinks_UnitTest_Base {
 
     /**
+     * @throws Exception
+     * @tags timezone, gmt
+     */
+    public function test_getGMTOffset() {
+
+        $_iOffset = AmazonAutoLinks_WPUtility::getGMTOffset();
+        $this->_assertTrue( is_integer( $_iOffset ) );
+        $this->_assertNotEmpty( $_iOffset / 3600 );
+
+    }
+
+    /**
      * @sine 4.3.4
      * @purpose Tests scheduling and unscheduling WP Cron items.
      * @tags cron
