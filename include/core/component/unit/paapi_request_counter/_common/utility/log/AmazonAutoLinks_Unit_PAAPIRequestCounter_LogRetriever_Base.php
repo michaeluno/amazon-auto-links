@@ -44,14 +44,14 @@ abstract class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Base extend
      * @since 4.4.0
      */
     protected function _setVariablesOfTime( &$sStartYear, &$sEndYear, &$sStartMonth, &$sEndMonth, &$sStartDate, &$sEndDate, &$sStartHour, &$sEndHour, $iStartTime, $iEndTime ) {
-        $sStartYear  = date( 'Y', $iStartTime );
-        $sStartMonth = date( 'm', $iStartTime );
-        $sStartDate  = date( 'd', $iStartTime );
-        $sStartHour  = date( 'H', $iStartTime );
-        $sEndYear    = date( 'Y', $iEndTime );
-        $sEndMonth   = date( 'm', $iEndTime );
-        $sEndDate    = date( 'd', $iEndTime );
-        $sEndHour    = date( 'H', $iEndTime );
+        $sStartYear  = date( 'Y', ( integer ) $iStartTime );
+        $sStartMonth = date( 'm', ( integer ) $iStartTime );
+        $sStartDate  = date( 'd', ( integer ) $iStartTime );
+        $sStartHour  = date( 'H', ( integer ) $iStartTime );
+        $sEndYear    = date( 'Y', ( integer ) $iEndTime );
+        $sEndMonth   = date( 'm', ( integer ) $iEndTime );
+        $sEndDate    = date( 'd', ( integer ) $iEndTime );
+        $sEndHour    = date( 'H', ( integer ) $iEndTime );
     }
 
     /**
