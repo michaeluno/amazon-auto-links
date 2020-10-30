@@ -110,6 +110,19 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 ),
             ),
             array(
+                'title'     => __( 'File Permissions', 'amazon-auto-links' ),
+                'field_id'  => 'file_permissins',
+                'type'      => 'system',
+                'data'      => array(
+                    'Current Time' => '', 'Admin Page Framework' => '', 'WordPress'     => '',
+                    'PHP'          => '', 'Server'               => '', 'PHP Error Log' => '',
+                    'MySQL'        => '', 'MySQL Error Log'      => '', 'Browser'       => '',
+                ) + $this->___getFilePermissionInformation(),
+                'attributes' => array(
+                    'style' => 'height: 300px;',
+                ),
+            ),            
+            array(
                 'title'     => __( 'Server Information', 'amazon-auto-links' ),
                 'field_id'  => 'server_information',
                 'type'      => 'system',
@@ -125,7 +138,28 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             array()
         );
     }
-
+        /**
+         * @return array 
+         */
+        private function ___getFilePermissionInformation() {
+            $_sPluginTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
+            if ( ! file_exists( $_sPluginTempDirPath ) ) {
+                mkdir( $_sPluginTempDirPath, 0777, true );
+            }
+            $_sSystemTempDirPath = wp_normalize_path( sys_get_temp_dir() );
+            return array(
+                'System Temporary Directory' => array(
+                    'path'     => $_sSystemTempDirPath,
+                    'exist'    => file_exists( $_sSystemTempDirPath ) ? 'Yes' : 'No',
+                    'writable' => is_writable( $_sSystemTempDirPath ) ? 'Yes' : 'No',
+                ),
+                'Plugin Temporary Directory' => array(
+                    'path'     => $_sPluginTempDirPath,
+                    'exist'    => file_exists( $_sPluginTempDirPath ) ? 'Yes' : 'No',
+                    'writable' => is_writable( $_sPluginTempDirPath ) ? 'Yes' : 'No',
+                ),
+            );
+        }
     /**
      * @param    AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback add_action() do_{page slug}_{tab slug}
