@@ -72,7 +72,7 @@ abstract class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Base extend
      */
     protected function _getMaxDateOfThisMonth( $isTime ) {
         $_iTime = is_string( $isTime ) ? strtotime( $isTime ) : ( integer ) $isTime;
-        return ( integer ) date("t", $isTime );
+        return ( integer ) date( "t", $_iTime );
     }
 
 }
