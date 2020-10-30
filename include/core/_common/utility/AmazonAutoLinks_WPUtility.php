@@ -18,10 +18,20 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
 
     /**
+     * @return string e.g. +09:00 
+     * @since  4.4.0
+     */
+    public static function getGMTOffsetString() {
+        $_fGMTOffsetHours = ( self::getGMTOffset() / 3600 ); // * 100;
+        return self::___getNumberedOffsetString( $_fGMTOffsetHours );
+    }
+
+    /**
      * Determine time zone from WordPress options and return as object.
      *
      * @return integer The timezone offset in seconds.
-     * @see https://wordpress.stackexchange.com/a/283094
+     * @see    https://wordpress.stackexchange.com/a/283094
+     * @since  4.4.0
      */
     public static function getGMTOffset() {
 
@@ -44,15 +54,25 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
     }
         /**
          * @return string Timezone string compatible with the DateTimeZone objects.
+         * @since  4.4.0
          */
-        private static function ___getSiteTimeZone() {
+        static private function ___getSiteTimeZone() {
             $_sTimeZone = get_option( 'timezone_string' );
             if ( ! empty( $_sTimeZone ) ) {
                 return $_sTimeZone;
             }
-            $_fOffset   = get_option( 'gmt_offset' ); // e.g. 5.5
-            $_iHours    = ( integer ) $_fOffset;
-            $_fiMinutes = abs( ( $_fOffset - ( integer ) $_fOffset ) * 60 );
+            $_fOffset   = get_option( 'gmt_offset', 0 ); // e.g. 5.5
+            return self::___getNumberedOffsetString( $_fOffset );
+        }
+
+        /**
+         * @param  float  $fOffset
+         * @return string
+         * @since  4.4.0
+         */
+        static private function ___getNumberedOffsetString( $fOffset ) {
+            $_iHours    = ( integer ) $fOffset;
+            $_fiMinutes = abs( ( $fOffset - ( integer ) $fOffset ) * 60 );
             return sprintf( '%+03d:%02d', $_iHours, $_fiMinutes );
         }
 
