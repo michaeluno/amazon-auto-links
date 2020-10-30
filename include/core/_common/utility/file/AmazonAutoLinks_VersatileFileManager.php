@@ -35,6 +35,18 @@ class AmazonAutoLinks_VersatileFileManager {
     protected $_sFilePath = '';
 
     /**
+     * @var   integer Indicates whether the directory is created. 1: Created. 2: Already Exists. 3: Failed to create.
+     * @since 4.4.0
+     */
+    protected $_iDirectoryCreated = 0;
+
+    /**
+     * Tells whether the directory is accessible or not.
+     * @var   bool
+     * @sicne 4.4.0
+     */
+    protected $_bWritable = false;
+    /**
      * Sets up properties and create a temp directory.
      *
      * @param string  $sIdentifier      A string to identify the lock file.
@@ -44,13 +56,27 @@ class AmazonAutoLinks_VersatileFileManager {
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
         $this->_sIdentifier       = $sIdentifier;
         $this->_sTempDirPath      = $this->_getTemporaryDirectoryPath();
-        if ( ! is_dir( $this->_sTempDirPath ) ) {
-            mkdir( $this->_sTempDirPath, 0777, true );
-        }
+        $this->_iDirectoryCreated = $this->___getDirectoryCreated( $this->_sTempDirPath );
+        $this->_bWritable         = ( boolean ) $this->_iDirectoryCreated ? is_writable( $this->_sTempDirPath ) : false;
         $this->_iTimeout          = $iTimeout;
         $this->_sFileNamePrefix   = $sFileNamePrefix;
         $this->_sFilePath         = $this->___getFilePath();
     }
+        /**
+         * @param  string  $sDirPath
+         * @param  integer $iMode
+         * @return integer 2: already exists, 1: created, 0: failed to create.
+         */
+        private function ___getDirectoryCreated( $sDirPath, $iMode=0777 ) {
+            if ( is_dir( $sDirPath ) ) {
+                return 2;
+            }
+            $_bCreated = mkdir( $sDirPath, $iMode, true );
+            if ( $_bCreated ) {
+                return 1;
+            }
+            return ( integer ) mkdir( $sDirPath, 0766, true );
+        }
         /**
          * @remark Consider the file resides in the server's shared temporary directory.
          * @return string
@@ -71,6 +97,15 @@ class AmazonAutoLinks_VersatileFileManager {
     }
 
     /**
+     * Checks whether it is possible to access the directory and write files.
+     * @return bool
+     * @since  4.4.0
+     */
+    public function canWrite() {
+        return $this->_bWritable;
+    }
+
+    /**
      * Returns the file contents if it is not expired.
      * @since  4.3.4
      */
@@ -86,6 +121,9 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.4
      */
     public function set( $sText ) {
+        if ( ! $this->canWrite() ) {
+            return false;
+        }
         return file_put_contents( $this->_sFilePath, $sText, LOCK_EX );
     }
 
@@ -94,6 +132,9 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.5
      */
     public function delete() {
+        if ( ! $this->_iDirectoryCreated ) {
+            return false;
+        }
         return unlink( $this->_sFilePath );
     }
 
@@ -204,6 +245,5 @@ class AmazonAutoLinks_VersatileFileManager {
     protected function _getDefaultContent() {
         return ( string ) microtime( true );
     }
-
 
 }
