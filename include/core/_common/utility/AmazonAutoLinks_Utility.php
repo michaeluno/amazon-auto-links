@@ -124,11 +124,23 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
     /**
      * @param  string $sPath
-     * @return false|string
+     * @return string
      * @since  4.3.8
      */
     static public function getReadableCHMOD( $sPath ) {
-        return substr( sprintf( '%o', fileperms( $sPath ) ), -4 );
+        return self::getPaddedOctal( fileperms( $sPath ) );
+    }
+
+    /**
+     * Converts integer to octal representation like '0666' for 493, used to check CHMOD values.
+     * @remark Not same as decoct()
+     * @see    decoct()
+     * @param  integer $iInteger
+     * @return string
+     */
+    static public function getPaddedOctal( $iInteger ) {
+        $_bsOctal = substr( sprintf( '%o', $iInteger ), -4 );
+        return false === $_bsOctal ? '' : $_bsOctal;
     }
 
     /**
