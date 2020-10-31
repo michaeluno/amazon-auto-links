@@ -62,21 +62,28 @@ class AmazonAutoLinks_VersatileFileManager {
         $this->_sFileNamePrefix   = $sFileNamePrefix;
         $this->_sFilePath         = $this->___getFilePath();
     }
+
         /**
          * @param  string  $sDirPath
-         * @param  integer $iMode
          * @return integer 2: already exists, 1: created, 0: failed to create.
+         * @see    https://stackoverflow.com/questions/18352682/correct-file-permissions-for-wordpress
          */
-        private function ___getDirectoryCreated( $sDirPath, $iMode=0777 ) {
+        private function ___getDirectoryCreated( $sDirPath ) {
+            $_iMode    = 0755;
             if ( is_dir( $sDirPath ) ) {
+                if ( ! is_writable( $sDirPath ) ) {
+                    chmod( $sDirPath, $_iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
+                }
                 return 2;
             }
-            $_bCreated = mkdir( $sDirPath, $iMode, true );
+            $_bCreated = mkdir( $sDirPath, $_iMode, true );
             if ( $_bCreated ) {
+                chmod( $sDirPath, $_iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
                 return 1;
             }
-            return ( integer ) mkdir( $sDirPath, 0766, true );
+            return 0;
         }
+
         /**
          * @remark Consider the file resides in the server's shared temporary directory.
          * @return string
