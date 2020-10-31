@@ -12,7 +12,7 @@
 /**
  * Deals with the plugin admin pages.
  * 
- * @since       2.0.5
+ * @since 2.0.5
  */
 class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
 
@@ -24,25 +24,20 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         if ( ! $this->oProp->bIsAdmin ) {
             return;
         }     
-        add_filter( 
-            'options_' . $this->oProp->sClassName,
-            array( $this, 'replyToSetOptions' )
-        );
+        add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'replyToSetOptions' ) );
         
     }
         /**
          * Sets the default option values for the setting form.
-         * @return      array       The options array.
+         * @param  array $aOptions
+         * @return array       The options array.
          */
         public function replyToSetOptions( $aOptions ) {
 
             $_oOption    = AmazonAutoLinks_Option::getInstance();
             
-            // Merging recursively (3.4.0+) to cover newly added elements over new versions. 
-            return $this->oUtil->uniteArrays(
-                $aOptions,
-                $_oOption->aDefault
-            );
+            // [3.4.0] Merging recursively to cover newly added elements over new versions.
+            return $this->oUtil->uniteArrays( $aOptions, $_oOption->aDefault );
             
         }
         
@@ -51,14 +46,9 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
      */
     public function setUp() {
         
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
+        $this->setRootMenuPageBySlug( 'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
         
-        add_action( 
-            'load_' . $this->oProp->sClassName,
-            array( $this, 'replyToDoPageSettings' )
-        );
+        add_action( 'load_' . $this->oProp->sClassName, array( $this, 'replyToDoPageSettings' ) );
         
         if ( 'plugins.php' === $this->oProp->sPageNow ) {
             $this->addLinkToPluginDescription(
@@ -68,15 +58,16 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             );         
         }
 
-        $_oOption    = AmazonAutoLinks_Option::getInstance();
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
 
     }
         
         /**
-         * Page styling
-         * @since       3
-         * @return      void
+         * Do page styling.
+         * @since    3
+         * @return   void
+         * @callback add_action()    load_{class name}
          */
         public function replyToDoPageSettings() {
                         
