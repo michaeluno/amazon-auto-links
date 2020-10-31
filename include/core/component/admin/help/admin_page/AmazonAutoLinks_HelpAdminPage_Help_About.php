@@ -142,24 +142,28 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
          * @return array 
          */
         private function ___getFilePermissionInformation() {
-            $_sPluginTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
-            if ( ! file_exists( $_sPluginTempDirPath ) ) {
-                mkdir( $_sPluginTempDirPath, 0777, true );
-            }
-            $_sSystemTempDirPath = wp_normalize_path( sys_get_temp_dir() );
+            $_sSystemTempDirPath     = wp_normalize_path( sys_get_temp_dir() );
+            $_sPluginSiteTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
+            $this->getDirectoryCreated( $_sPluginSiteTempDirPath );
             return array(
-                'System Temporary Directory' => array(
-                    'path'     => $_sSystemTempDirPath,
-                    'exist'    => file_exists( $_sSystemTempDirPath ) ? 'Yes' : 'No',
-                    'writable' => is_writable( $_sSystemTempDirPath ) ? 'Yes' : 'No',
-                ),
-                'Plugin Temporary Directory' => array(
-                    'path'     => $_sPluginTempDirPath,
-                    'exist'    => file_exists( $_sPluginTempDirPath ) ? 'Yes' : 'No',
-                    'writable' => is_writable( $_sPluginTempDirPath ) ? 'Yes' : 'No',
-                ),
+                'System Temporary Directory'      =>  $this->___getDirectoryPermissionInformation( $_sSystemTempDirPath ),
+                'Plugin Temporary Directory'      => $this->___getDirectoryPermissionInformation( dirname( $_sPluginSiteTempDirPath ) ),
+                'Plugin Site Temporary Directory' => $this->___getDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
             );
         }
+            /**
+             * @param  string $sDirPath
+             * @return array
+             * @since  4.3.8
+             */
+            private function ___getDirectoryPermissionInformation( $sDirPath ) {
+                return array(
+                    'path'     => $sDirPath,
+                    'exist'    => file_exists( $sDirPath ) ? 'Yes' : 'No',
+                    'writable' => is_writable( $sDirPath ) ? 'Yes' : 'No',
+                    'chmod'    => $this->getReadableCHMOD( $sDirPath ),
+                );
+            }
     /**
      * @param    AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback add_action() do_{page slug}_{tab slug}
