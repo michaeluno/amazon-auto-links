@@ -103,6 +103,35 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
+     * @param  string  $sDirPath
+     * @param  integer $iMode
+     * @param  boolean $bRecursive
+     * @return integer 0: Failed, 1: Created, 2: Already exists.
+     * @since  4.3.8
+     */
+    static public function getDirectoryCreated( $sDirPath, $iMode=0755, $bRecursive=true ) {
+        if ( is_dir( $sDirPath ) ) {
+            return 2;
+        }
+        $_bCreated = mkdir( $sDirPath, $iMode, $bRecursive );
+        // For some shared servers, permissions are not set properly just by making a directory.
+        if ( $_bCreated ) {
+            chmod( $sDirPath, $iMode );
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * @param  string $sPath
+     * @return false|string
+     * @since  4.3.8
+     */
+    static public function getReadableCHMOD( $sPath ) {
+        return substr( sprintf( '%o', fileperms( $sPath ) ), -4 );
+    }
+
+    /**
      * @remark  used upon plugin uninstall.
      * @param   $sDirectoryPath
      * @since   3.7.10
