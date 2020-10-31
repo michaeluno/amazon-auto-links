@@ -35,17 +35,12 @@ class AmazonAutoLinks_VersatileFileManager {
     protected $_sFilePath = '';
 
     /**
-     * @var   integer Indicates whether the directory is created. 1: Created. 2: Already Exists. 3: Failed to create.
-     * @since 4.4.0
-     */
-    protected $_iDirectoryCreated = 0;
-
-    /**
      * Tells whether the directory is accessible or not.
      * @var   bool
      * @sicne 4.4.0
      */
     protected $_bWritable = false;
+
     /**
      * Sets up properties and create a temp directory.
      *
@@ -54,35 +49,13 @@ class AmazonAutoLinks_VersatileFileManager {
      * @param string  $sFileNamePrefix  A prefix to prepend to the file name.
      */
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
-        $this->_sIdentifier       = $sIdentifier;
-        $this->_sTempDirPath      = $this->_getTemporaryDirectoryPath();
-        $this->_iDirectoryCreated = $this->___getDirectoryCreated( $this->_sTempDirPath );
-        $this->_bWritable         = ( boolean ) $this->_iDirectoryCreated ? is_writable( $this->_sTempDirPath ) : false;
-        $this->_iTimeout          = $iTimeout;
-        $this->_sFileNamePrefix   = $sFileNamePrefix;
-        $this->_sFilePath         = $this->___getFilePath();
+        $this->_sIdentifier        = $sIdentifier;
+        $this->_sTempDirPath       = $this->_getTemporaryDirectoryPath();
+        $this->_bWritable          = AmazonAutoLinks_Utility::getDirectoryCreatedRecursive( $this->_sTempDirPath, $this->_getBaseTemporaryDirectoryPath() );
+        $this->_iTimeout           = $iTimeout;
+        $this->_sFileNamePrefix    = $sFileNamePrefix;
+        $this->_sFilePath          = $this->___getFilePath();
     }
-
-        /**
-         * @param  string  $sDirPath
-         * @return integer 2: already exists, 1: created, 0: failed to create.
-         * @see    https://stackoverflow.com/questions/18352682/correct-file-permissions-for-wordpress
-         */
-        private function ___getDirectoryCreated( $sDirPath ) {
-            $_iMode    = 0755;
-            if ( is_dir( $sDirPath ) ) {
-                if ( ! is_writable( $sDirPath ) ) {
-                    chmod( $sDirPath, $_iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
-                }
-                return 2;
-            }
-            $_bCreated = mkdir( $sDirPath, $_iMode, true );
-            if ( $_bCreated ) {
-                chmod( $sDirPath, $_iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
-                return 1;
-            }
-            return 0;
-        }
 
         /**
          * @remark Consider the file resides in the server's shared temporary directory.
@@ -100,7 +73,17 @@ class AmazonAutoLinks_VersatileFileManager {
      * @return string
      */
     protected function _getTemporaryDirectoryPath() {
-        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/versatile';
+        return $this->_getBaseTemporaryDirectoryPath() . '/versatile';
+    }
+
+    /**
+     * @remark This is needed to apply proper CHMOD to directories between the base directory and the subject directory.
+     * @remark Override this in an extended class.
+     * @sinec  4.3.8
+     * @return string 
+     */
+    protected function _getBaseTemporaryDirectoryPath() {
+        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath();   
     }
 
     /**
@@ -139,7 +122,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.5
      */
     public function delete() {
-        if ( ! $this->_iDirectoryCreated ) {
+        if ( ! $this->_bWritable ) {
             return false;
         }
         return unlink( $this->_sFilePath );

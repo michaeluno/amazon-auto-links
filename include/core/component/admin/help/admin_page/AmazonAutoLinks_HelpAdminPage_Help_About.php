@@ -169,7 +169,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
         private function ___getFilePermissionInformation() {
             $_sSystemTempDirPath     = wp_normalize_path( sys_get_temp_dir() );
             $_sPluginSiteTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
-            $this->getDirectoryCreated( $_sPluginSiteTempDirPath );
+            $this->getDirectoryCreatedRecursive( $_sPluginSiteTempDirPath, $_sSystemTempDirPath, 0755, true );
             return array(
                 'System Temporary Directory'      => $this->___getDirectoryPermissionInformation( $_sSystemTempDirPath ),
                 'Plugin Temporary Directory'      => $this->___getDirectoryPermissionInformation( dirname( $_sPluginSiteTempDirPath ) ),
