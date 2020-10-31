@@ -111,12 +111,17 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             ),
             array(
                 'title'     => __( 'File Permissions', 'amazon-auto-links' ),
-                'field_id'  => 'file_permissins',
+                'field_id'  => 'file_permissions',
                 'type'      => 'system',
                 'data'      => array(
                     'Current Time' => '', 'Admin Page Framework' => '', 'WordPress'     => '',
                     'PHP'          => '', 'Server'               => '', 'PHP Error Log' => '',
                     'MySQL'        => '', 'MySQL Error Log'      => '', 'Browser'       => '',
+                    'System' => array(
+                        'umask'   => $this->getPaddedOctal( umask() ),
+                        'user'    => get_current_user(),
+                        'user_id' => $this->___getSystemCurrentUserID(),
+                    ),
                 ) + $this->___getFilePermissionInformation(),
                 'attributes' => array(
                     'style' => 'height: 300px;',
@@ -127,9 +132,9 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'field_id'  => 'server_information',
                 'type'      => 'system',
                 'data'      => array(
-//                                   'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
-//                                   'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
-//                                   'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
+                      // 'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+                      // 'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
+                      // 'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
                 ),
                 'attributes' => array(
                     'style' => 'height: 300px;',
@@ -138,17 +143,38 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             array()
         );
     }
+
         /**
-         * @return array 
+         * @return int|string
+         * @since  4.3.8
+         */
+        private function ___getSystemCurrentUserID() {
+            $_sSystemTempDirPath = wp_normalize_path( untrailingslashit( sys_get_temp_dir() ) );
+            if ( ! is_writable( $_sSystemTempDirPath ) ) {
+                return 'n/a';
+            }
+            $_sFilePath = $_sSystemTempDirPath . '/' . uniqid() . '.txt';
+            file_put_contents( $_sFilePath, time() );
+            $_biUserID = fileowner($_sFilePath );
+            unlink( $_sFilePath );
+            return false === $_biUserID
+                ? 'n/a'
+                : $_biUserID;
+
+        }
+        /**
+         * @return array
+         * @since  4.3.8
          */
         private function ___getFilePermissionInformation() {
             $_sSystemTempDirPath     = wp_normalize_path( sys_get_temp_dir() );
             $_sPluginSiteTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
             $this->getDirectoryCreated( $_sPluginSiteTempDirPath );
             return array(
-                'System Temporary Directory'      =>  $this->___getDirectoryPermissionInformation( $_sSystemTempDirPath ),
+                'System Temporary Directory'      => $this->___getDirectoryPermissionInformation( $_sSystemTempDirPath ),
                 'Plugin Temporary Directory'      => $this->___getDirectoryPermissionInformation( dirname( $_sPluginSiteTempDirPath ) ),
                 'Plugin Site Temporary Directory' => $this->___getDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
+                'wp-content'                      => $this->___getDirectoryPermissionInformation( WP_CONTENT_DIR ),
             );
         }
             /**
@@ -162,8 +188,13 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                     'exist'    => file_exists( $sDirPath ) ? 'Yes' : 'No',
                     'writable' => is_writable( $sDirPath ) ? 'Yes' : 'No',
                     'chmod'    => $this->getReadableCHMOD( $sDirPath ),
+                    'owner_id' => fileowner( $sDirPath ),
+                    'owner'    => function_exists( 'posix_getpwuid' )
+                        ? posix_getpwuid( fileowner( $sDirPath ) )
+                        : 'n/a',
                 );
             }
+
     /**
      * @param    AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback add_action() do_{page slug}_{tab slug}
