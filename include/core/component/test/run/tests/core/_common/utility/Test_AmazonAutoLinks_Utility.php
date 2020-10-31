@@ -98,18 +98,15 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
-     * @return bool
      * @throws Exception
      * @tags file system, path
      */
     public function test_isDirectoryEmpty() {
-        if ( ! $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_empty' ) ) {
-            throw new Exception( 'the directory is empty but the method returned false.' );
-        }
-        if ( null !== $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_non_existent_path' ) ) {
-            throw new Exception( 'For non existent path, the method must return null.' );
-        }
-        return ! $this->isDirectoryEmpty( dirname( __FILE__ ) );
+        $_bnEmpty = $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_empty' );
+        $this->_assertTrue( $_bnEmpty, 'the actual directory is empty and this value should be true.' );
+        $_bnEmpty = $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_non_existent_path' );
+        $this->_assertTrue( is_null( $_bnEmpty ), 'Checking non-existing directory should yield null.' );
+        $this->_assertFalse( $this->isDirectoryEmpty( dirname( __FILE__ ) ), 'The test file directory so it must not yield true.' );
     }
 
     /**
