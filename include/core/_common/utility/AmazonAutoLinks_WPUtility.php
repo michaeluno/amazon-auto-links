@@ -18,7 +18,7 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
 
     /**
-     * @return string e.g. +09:00 
+     * @return string e.g. +09:00
      * @since  4.4.0
      */
     public static function getGMTOffsetString() {
