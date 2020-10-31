@@ -103,23 +103,99 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
-     * @param  string  $sDirPath
+     * @param  string  $sPath
      * @param  integer $iMode
-     * @param  boolean $bRecursive
-     * @return integer 0: Failed, 1: Created, 2: Already exists.
+     * @return boolean true if set; otherwise, false.
+     */
+    static public function getCHMODApplied( $sPath, $iMode ) {
+        $_iOldUmask = umask( 0 );
+        $_bSet      = chmod( $sPath, $iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
+        umask( $_iOldUmask );
+        return $_bSet;
+    }
+
+    /**
+     * Retrieves paths between the given base directory and the subject directory.
+     * @remark The paths must be normalized.
+     * @param  string  $sDirPath         The subject directory path.
+     * @param  string  $sDirPathAncestor The abase ancestor directory path that contains the subject directory path.
+     * @param  boolean $bExcludeSelf     Whether to exclude the subject directory.
+     * @return array
      * @since  4.3.8
      */
-    static public function getDirectoryCreated( $sDirPath, $iMode=0755, $bRecursive=true ) {
+    static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bExcludeSelf=false ) {
+        $_aNestedDirPaths = array();
+        $_sDirPth         = $bExcludeSelf ? dirname( $sDirPath ) : $sDirPath;
+        if ( false === strpos( $_sDirPth, $sDirPathAncestor ) ) {
+            return $_aNestedDirPaths;
+        }
+        while ( $sDirPathAncestor !== $_sDirPth ) {
+            $_aNestedDirPaths[] = $_sDirPth;
+            $_sDirPth = dirname( $_sDirPth );
+        }
+        return array_reverse( $_aNestedDirPaths );
+    }
+
+    /**
+     * @param  string  $sDirPath      The subject directory path to create.
+     * @param  string  $sBaseDirPath  The path of an ancestor base directory that contains the subject directory.
+     * @param  integer $iCHMODMode    The CHMOD mode.
+     * @param  boolean $bMakeWritable Attempt to make the directory writable.
+     * @return boolean true: the directory is writable, false: cannot create or not writable.
+     * @see    https://stackoverflow.com/questions/18352682/correct-file-permissions-for-wordpress
+     */
+    static public function getDirectoryCreatedRecursive( $sDirPath, $sBaseDirPath, $iCHMODMode=0755, $bMakeWritable=true ) {
+
         if ( is_dir( $sDirPath ) ) {
-            return 2;
+            if ( is_writable( $sDirPath ) ) {
+                return true;
+            }
+            if ( ! $bMakeWritable ) {
+                return false;
+            }
+            $_aNestedDirPaths = self::getNestedDirPaths( $sBaseDirPath, $sDirPath, false );
+            foreach( $_aNestedDirPaths as $_sNestedDirPath ) {
+                if ( is_writable( $_sNestedDirPath ) ) {
+                    continue;
+                }
+                if ( ! self::getCHMODApplied( $sDirPath, $iCHMODMode ) ) {
+                    return false;
+                }
+            }
+            return true;
         }
-        $_bCreated = mkdir( $sDirPath, $iMode, $bRecursive );
-        // For some shared servers, permissions are not set properly just by making a directory.
-        if ( $_bCreated ) {
-            chmod( $sDirPath, $iMode );
-            return 1;
+
+        // At this point, the directory does not exist.
+
+        // Ancestor directories can have the wrong file permissions so check each.
+        $_aNestedDirPaths = self::getNestedDirPaths( $sBaseDirPath, $sDirPath, false );
+        foreach( $_aNestedDirPaths as $_sNestedDirPath ) {
+            if ( is_writable( $_sNestedDirPath ) ) {
+                continue;
+            }
+            $_bWritable = self::getDirectoryCreated( $_sNestedDirPath, $iCHMODMode );
+            if ( ! $_bWritable ) {
+                return false;
+            }
         }
-        return 0;
+        return true;
+
+    }
+
+    /**
+     * @param  string  $sDirPath
+     * @param  integer $iCHMODMode
+     * @return boolean true if the created directory is writable; otherwise, false.
+     * @since  4.3.8
+     * @remark Recursive option is not supported as parent/ancestor directories can miss a specified CHMOD and causes troubles. So use getDirectoryCreatedRecursive() for that purpose.
+     */
+    static public function getDirectoryCreated( $sDirPath, $iCHMODMode ) {
+        $_bCreated = mkdir( $sDirPath, $iCHMODMode, false );
+        if ( ! $_bCreated ) {
+            return false;
+        }
+        self::getCHMODApplied( $sDirPath, $iCHMODMode );
+        return is_writable( $sDirPath );
     }
 
     /**
