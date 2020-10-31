@@ -18,6 +18,13 @@
 class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * Stores the directory path of this component. Used to refer to asset item locations.
+     * @var   string
+     * @since 4.4.0
+     */
+    static public $sDirPath;
+
+    /**
      * Sets up hooks and properties.
      * @param string $sScriptPath
      */
@@ -26,7 +33,9 @@ class AmazonAutoLinks_MainLoader extends AmazonAutoLinks_PluginUtility {
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return;
         }
-        
+
+        self::$sDirPath = dirname( __FILE__ );
+
         // Front-end
         
         /**
