@@ -235,7 +235,8 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
     /**
      * Sets up class properties.
-     * @return      void
+     * @param  string $sPluginFilePath
+     * @return void
      */
     static function setUp( $sPluginFilePath ) {
 
@@ -255,16 +256,16 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         $_sRelativePath = $bAbsolute
             ? str_replace('\\', '/', str_replace( self::$sDirPath, '', $sPath ) )
             : $sPath;
-        if ( isset( self::$_sPluginURLCache ) ) {
-            return self::$_sPluginURLCache . $_sRelativePath;
+        if ( isset( self::$___sPluginURLCache ) ) {
+            return self::$___sPluginURLCache . $_sRelativePath;
         }
-        self::$_sPluginURLCache = trailingslashit( plugins_url( '', self::$sFilePath ) );
-        return self::$_sPluginURLCache . $_sRelativePath;
+        self::$___sPluginURLCache = trailingslashit( plugins_url( '', self::$sFilePath ) );
+        return self::$___sPluginURLCache . $_sRelativePath;
     }
         /**
          * @since    3.9.0
          */
-        static private $_sPluginURLCache;
+        static private $___sPluginURLCache;
 
     /**
      * Requirements.
@@ -331,20 +332,41 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         }
 
     /**
+     * @var   string    Caches the plugin temporary directory path.
+     * @since 4.3.8
+     */
+    static private $___sPluginTempDirPath;
+
+    /**
      * @return string A temporary directory path for the plugin
      * @since  4.3.4
      */
     static public function getPluginTempDirPath() {
-        $_sSystemTempDir = wp_normalize_path( sys_get_temp_dir() );
-        return untrailingslashit( $_sSystemTempDir ) . '/' . self::$sTempDirName;
+        if ( isset( self::$___sPluginTempDirPath ) ) {
+            return self::$___sPluginTempDirPath;
+        }
+        $_sSystemTempDir             = wp_normalize_path( sys_get_temp_dir() );
+        self::$___sPluginTempDirPath = untrailingslashit( $_sSystemTempDir ) . '/' . self::$sTempDirName;
+        return self::$___sPluginTempDirPath;
     }
+    
     /**
-     * @return string   A temporary directory path for the site.
+     * @var   string    Caches the plugin site temporary directory path.
+     * @since 4.3.8
+     */
+    static private $___sPluginSiteTempDirPath;
+    
+    /**
      * @remark Consider a case that the server hosts multiple WordPress sites. In that case, a temp directory needs to be created one per site.
      * @since  4.3.4
+     * @return string   A temporary directory path for the site.
      */
     static public function getPluginSiteTempDirPath() {
-        return self::getPluginTempDirPath() . '/' . md5( site_url() );
+        if ( isset( self::$___sPluginSiteTempDirPath ) ) {
+            return self::$___sPluginSiteTempDirPath;
+        }
+        self::$___sPluginSiteTempDirPath = self::getPluginTempDirPath() . '/' . md5( site_url() );
+        return self::$___sPluginSiteTempDirPath;
     }
 
 }
