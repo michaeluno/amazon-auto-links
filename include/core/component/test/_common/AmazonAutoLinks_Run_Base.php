@@ -24,15 +24,15 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_Run_Utility {
 
     /**
      * Calls a given method by initializing class properties.
-     * @param $sMethodName
-     * @param $aParameters
      * @return mixed
      * @since 4.3.4
      */
-    public function call( $sMethodName, ...$aParameters ) {
+    public function call( /* $sMethodName, ...$aParameters */ ) {
+        $_aParameters   = func_get_args();
+        $_sMethodName   = array_shift( $_aParameters );
         $this->aOutputs = array();
         $this->_doBefore();
-        $_mResult       = call_user_func_array( array( $this, $sMethodName ), $aParameters );
+        $_mResult       = call_user_func_array( array( $this, $_sMethodName ), $_aParameters );
         $this->_doAfter();
         return $_mResult;
     }
@@ -83,15 +83,16 @@ abstract class AmazonAutoLinks_Run_Base extends AmazonAutoLinks_Run_Utility {
      * @param mixed ...$mValues
      * @since 4.3.4
      */
-    protected function _outputDetails( $sTitle, ...$mValues ) {
+    protected function _outputDetails( /* $sTitle, ...$mValues */ ) {
         $_aParams = func_get_args();
         if ( 1 === func_num_args() ) {
             $this->aOutputs[] = $this->_getDetails( $_aParams[ 0 ] );
             return;
         }
         $_sTitle  = array_shift( $_aParams );
+        $_aValues = $_aParams;
         $_sOutput = "<h5>{$_sTitle}</h5>";
-        foreach( $mValues as $_mValue ) {
+        foreach( $_aValues as $_mValue ) {
             $_sOutput .= $this->_getDetails( $_mValue );
         }
         $this->aOutputs[] = $_sOutput;

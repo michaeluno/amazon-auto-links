@@ -41,16 +41,17 @@ class AmazonAutoLinks_Test_Event_Ajax_Scratches extends AmazonAutoLinks_Test_Eve
         }
 
     /**
-     * @param string $sClassName The class name to test.
-     * @param string $sFilePath The file path of the class.
-     * @param array $aTags Tags set in the `@tags` annotation in test method doc-blocks.
-     * @param string $sMethodPrefix The prefix of methods to test.
+     * @param  string $sClassName    The class name to test.
+     * @param  string $sFilePath     The file path of the class.
+     * @param  array  $aTags         Tags set in the `@tags` annotation in test method doc-blocks.
+     * @param  array  $aArguments    Arguments to pass to test methods.
+     * @param  string $sMethodPrefix The prefix of methods to test.
      * @return array
      * @throws ReflectionException
      * @since   4.3.0
      */
-    protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='scratch' ) {
-        return parent::_getResults( $sClassName, $sFilePath, $aTags, 'scratch' );
+    protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), array $aArguments=array(), $sMethodPrefix='scratch' ) {
+        return parent::_getResults( $sClassName, $sFilePath, $aTags, $aArguments, 'scratch' );
     }
 
 }

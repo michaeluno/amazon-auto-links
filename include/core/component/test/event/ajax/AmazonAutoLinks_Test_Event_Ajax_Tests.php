@@ -57,7 +57,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' )
             );
 
-            $_sFilePath = $this->getElement( $aPost, array( 'file_path' ), '' );
+            $_sFilePath  = $this->getElement( $aPost, array( 'filePath' ), '' );
             if ( ! file_exists( $_sFilePath ) ) {
                 throw new Exception( 'The file does not exist: ' . $_sFilePath  );
             }
@@ -66,8 +66,9 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
             $this->___include( $_sClassName, $_sFilePath );
 
-            $_aTags    = $this->getElementAsArray( $aPost, array( 'tags' ) );
-            $_aResults = $this->_getResults( $_sClassName, $_sFilePath, $_aTags );
+            $_aTags      = $this->getElementAsArray( $aPost, array( 'tags' ) );
+            $_aArguments = $this->getElementAsArray( $aPost, array( 'testArguments' ) );
+            $_aResults   = $this->_getResults( $_sClassName, $_sFilePath, $_aTags, $_aArguments );
 
         } catch ( Exception $_oException ) {
             // throw new Exception( $_oException->getMessage() . '<hr />' . 'Line: ' . $_oException->getLine() )
@@ -110,12 +111,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
          * @param  string $sClassName    The class name to test.
          * @param  string $sFilePath     The file path of the class.
          * @param  array  $aTags         Tags set in the `@tags` annotation in test method doc-blocks.
+         * @param  array  $aArguments    Arguments to pass to test methods.
          * @param  string $sMethodPrefix The prefix of methods to test.
          * @throws ReflectionException
          * @since  4.3.0
          * @return array
          */
-        protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), $sMethodPrefix='test' ) {
+        protected function _getResults( $sClassName, $sFilePath, array $aTags=array(), array $aArguments=array(), $sMethodPrefix='test' ) {
 
             $_aResults   = array();
             $_oClass     = new ReflectionClass( $sClassName );
@@ -124,7 +126,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     continue;
                 }
                 $this->___bBreak = $this->___hasAnnotation( $_oMethod, array( 'break' ) );
-                $_aResults[] = $this->___getMethodTested( $_oMethod, $sFilePath );
+                $_aResults[] = $this->___getMethodTested( $_oMethod, $aArguments, $sFilePath );
             }
             $this->___bBreak = false;
             return $_aResults;
@@ -177,10 +179,11 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             /**
              * @return array
              * @param ReflectionMethod $oMethod
+             * @param array  $aArguments
              * @param string $sFilePath
              * @since 4.3.0
              */
-            private function ___getMethodTested( ReflectionMethod $oMethod, $sFilePath ) {
+            private function ___getMethodTested( ReflectionMethod $oMethod, array $aArguments, $sFilePath ) {
 
                 $_sPurpose    = $this->___getDocBlockAnnotation( $oMethod, 'purpose' );
                 $_sClassName  = $oMethod->class;
@@ -190,7 +193,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
                     // Perform testing
                     ob_start(); // Capture start
-                    $_aResult  = $this->___getEachMethodTested( $_sClassName, $_sMethodName, $_sPurpose, $sFilePath );
+                    $_aResult  = $this->___getEachMethodTested( $_sClassName, $_sMethodName, $aArguments, $_sPurpose, $sFilePath );
                     $_sContent = ob_get_contents();
                     ob_end_clean(); // Capture end
                     if ( $_sContent ) {
@@ -357,20 +360,21 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         }
 
         /**
-         * @param string $sClassName
-         * @param string $sMethodName
-         * @param string $sPurpose
-         * @param string $sFilePath
+         * @param  string $sClassName
+         * @param  string $sMethodName
+         * @param  array $aArguments
+         * @param  string $sPurpose
+         * @param  string $sFilePath
          * @return array
          * @throws AmazonAutoLinks_Test_Exception
          * @throws Exception
          */
-        private function ___getEachMethodTested( $sClassName, $sMethodName, $sPurpose, $sFilePath ) {
+        private function ___getEachMethodTested( $sClassName, $sMethodName, array $aArguments, $sPurpose, $sFilePath ) {
 
             $_oTestClass = new $sClassName;
             try {
 
-                $_mResult    = $_oTestClass->call( $sMethodName );
+                $_mResult    = call_user_func_array( array( $_oTestClass, $sMethodName ), $aArguments );
                 if ( ! empty( $_oTestClass->aErrors ) ) {
                     $_mResult = false;
                 }

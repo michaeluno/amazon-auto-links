@@ -37,9 +37,12 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @since 4.3.4
      * @return mixed
      */
-    public function call( $sMethodName, ...$aParameters ) {
+    public function call( /* $sMethodName, ...$aParameters */ ) {
+        $_aParameters = func_get_args();
+        $_sMethodName = array_shift( $_aParameters );
         $this->aErrors = array();
-        return parent::call( $sMethodName, ...$aParameters );
+        return call_user_func_array( array( 'parent', $_sMethodName ), $_aParameters );
+        // return parent::call( $_sMethodName, ...$aParameters );
     }
 
     /**

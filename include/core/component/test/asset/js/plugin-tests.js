@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.0.4
+ * @version 1.1.0
  */
 (function($){
 
@@ -59,6 +59,12 @@
                 $( this ).closest( 'fieldset' ).after( '<span class="item-select-error">* Please select items.</span>' );
                 return false;
             }
+
+            // Arguments to pass to the tests.
+            var _aTestArguments = $( 'input.test-arguments' ).map( function(){
+                return $(this).val();
+            } ).get();
+
             _oCheckedItems.each( function() {
 
                 var _sLabel = $( this ).closest( 'label' ).text();
@@ -76,7 +82,7 @@
                 var _aFiles = aalTests.files[ _sLabel ];
                 $.each( _aFiles, function( index, sFilePath ) {
                      $( '*[class*="' + _sResultClass + '"]' ).html( '' );  // clear previous results
-                    ___runFile( _sLabel, sFilePath, _aTags );
+                    ___runFile( _sLabel, sFilePath, _aTags, _aTestArguments );
                 } );
 
             } );
@@ -84,7 +90,7 @@
 
         });
 
-        function ___runFile( sLabel, sFilePath, aTags ) {
+        function ___runFile( sLabel, sFilePath, aTags, aTestArguments ) {
 
             var _oStartButton = $( '.aal-tests' );
             ajaxManager.addRequest( {
@@ -96,8 +102,9 @@
                 data: {
                     action: aalTests.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalTests.nonce,   // the nonce value set in template.php
-                    file_path: sFilePath,
+                    filePath: sFilePath,
                     tags: aTags,
+                    testArguments: aTestArguments,
                 },
                 // Custom properties.
                 spinnerImage: $( '<img src="' + aalTests.spinnerURL + '" alt="Now loading..." />' ),

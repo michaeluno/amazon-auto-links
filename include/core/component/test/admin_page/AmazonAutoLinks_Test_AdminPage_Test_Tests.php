@@ -62,6 +62,22 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                 'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks.'
             ),
             array(
+                'title'      => 'Arguments',
+                'field_id'   => '_arguments',
+                'repeatable' => true,
+                'save'       => 'false',
+                'type'       => 'text',
+                'attributes' => array(
+                    'field' => array(
+                        'style' => 'min-width: auto;',
+                    )
+                ),
+                'class' => array(
+                    'field' => 'test-arguments',
+                ),
+                'description' => 'The arguments to pass to the test methods.'
+            ),
+            array(
                 'title'     => 'Error',
                 'field_id'  => '_error',
                 'save'      => 'false',
