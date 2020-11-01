@@ -37,15 +37,10 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
     return;
 }
 
-// 1. Delete the temporary directory
-$_sPluginTempDirPath     = AmazonAutoLinks_Registry::getPluginTempDirPath();
+// 1. Delete the plugin temporary directory
 $_sPluginSiteTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
-if ( file_exists( $_sPluginSiteTempDirPath ) && is_dir( $_sPluginSiteTempDirPath ) ) {
+if ( AmazonAutoLinks_Utility::doesDirectoryExist( $_sPluginSiteTempDirPath ) ) {
     AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sPluginSiteTempDirPath );
-}
-/// Consider other sites on the same server uses the plugin
-if ( is_dir( $_sPluginTempDirPath ) && AmazonAutoLinks_Utility::isDirectoryEmpty( $_sPluginTempDirPath ) ) {
-    AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sPluginTempDirPath );
 }
 
 // 2. Delete transients

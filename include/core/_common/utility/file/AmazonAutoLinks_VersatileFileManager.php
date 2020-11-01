@@ -73,7 +73,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * @return string
      */
     protected function _getTemporaryDirectoryPath() {
-        return $this->_getBaseTemporaryDirectoryPath() . '/versatile';
+        return $this->_getBaseTemporaryDirectoryPath() . '/ephemeral';
     }
 
     /**

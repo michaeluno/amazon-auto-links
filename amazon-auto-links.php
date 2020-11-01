@@ -85,15 +85,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     
     /**
      * 
-     * @since       2.0.6
+     * @since 2.0.6
      */    
     static public $sDirPath;
-
-    /**
-     * @since   3.7.7
-     * @var string
-     */
-    static public $sTempDirName = 'WPAAL';
 
     /**
      * @since       3
@@ -332,24 +326,11 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         }
 
     /**
-     * @var   string    Caches the plugin temporary directory path.
      * @since 4.3.8
+     * @var   string
      */
-    static private $___sPluginTempDirPath;
+    static public $sTempDirNameSuffix = 'WPAAL_';
 
-    /**
-     * @return string A temporary directory path for the plugin
-     * @since  4.3.4
-     */
-    static public function getPluginTempDirPath() {
-        if ( isset( self::$___sPluginTempDirPath ) ) {
-            return self::$___sPluginTempDirPath;
-        }
-        $_sSystemTempDir             = wp_normalize_path( sys_get_temp_dir() );
-        self::$___sPluginTempDirPath = untrailingslashit( $_sSystemTempDir ) . '/' . self::$sTempDirName;
-        return self::$___sPluginTempDirPath;
-    }
-    
     /**
      * @var   string    Caches the plugin site temporary directory path.
      * @since 4.3.8
@@ -358,6 +339,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     
     /**
      * @remark Consider a case that the server hosts multiple WordPress sites. In that case, a temp directory needs to be created one per site.
+     * It used to create a plugin specific parent directory but it caused a problem on a shared server that one creates it with the permission, 0755, with umask() and other users became unable to create a directory inside it.
      * @since  4.3.4
      * @return string   A temporary directory path for the site.
      */
@@ -365,7 +347,8 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         if ( isset( self::$___sPluginSiteTempDirPath ) ) {
             return self::$___sPluginSiteTempDirPath;
         }
-        self::$___sPluginSiteTempDirPath = self::getPluginTempDirPath() . '/' . md5( site_url() );
+        $_sSystemTempDirPath             = untrailingslashit( wp_normalize_path( sys_get_temp_dir() ) );
+        self::$___sPluginSiteTempDirPath = $_sSystemTempDirPath . '/' . self::$sTempDirNameSuffix . md5( site_url() );
         return self::$___sPluginSiteTempDirPath;
     }
 
