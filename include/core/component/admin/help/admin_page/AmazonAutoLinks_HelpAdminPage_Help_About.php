@@ -172,9 +172,10 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             $this->getDirectoryCreatedRecursive( $_sPluginSiteTempDirPath, $_sSystemTempDirPath, 0755, true );
             return array(
                 'System Temporary Directory'      => $this->___getDirectoryPermissionInformation( $_sSystemTempDirPath ),
-                'Plugin Temporary Directory'      => $this->___getDirectoryPermissionInformation( dirname( $_sPluginSiteTempDirPath ) ),
                 'Plugin Site Temporary Directory' => $this->___getDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
+                'Plugin Site Temporary Test Directory' => $this->___getTestDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
                 'wp-content'                      => $this->___getDirectoryPermissionInformation( WP_CONTENT_DIR ),
+                'wp-content Test Directory'                      => $this->___getTestDirectoryPermissionInformation( WP_CONTENT_DIR ),
             );
         }
             /**
@@ -193,6 +194,19 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                         ? posix_getpwuid( fileowner( $sDirPath ) )
                         : 'n/a',
                 );
+            }
+            /**
+             * Creates a test dir and remove it to see whether this is possible.
+             * @param  string $sDirPath
+             * @return array
+             * @since  4.3.8
+             */
+            private function ___getTestDirectoryPermissionInformation( $sDirPath ) {
+                $_sTestDirPath = $sDirPath . '/test';
+                $this->getDirectoryCreated( $_sTestDirPath, 0755 );
+                $_aInformation = $this->___getDirectoryPermissionInformation( $_sTestDirPath );
+                $_aInformation[ 'deleted' ] = rmdir( $_sTestDirPath );
+                return $_aInformation;
             }
 
     /**
