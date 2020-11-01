@@ -76,6 +76,8 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader extends AmazonAutoLinks_Pl
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Ajax_LocaleChange;
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog;
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog;
+        new AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog;
+        new AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog;
     }
 
 }

@@ -5,7 +5,7 @@
  *
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
- * @name Chart.js Loader
+ * @name Chart Loader
  * @version 1.0.0
  */
 (function($){
@@ -17,8 +17,11 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof aalChartJSLoader ) {
-            console.log( 'Amazon Auto Links', 'Chart.js Loader', 'The script dat is not passed.' );
+            console.log( 'Amazon Auto Links', 'Chart Loader', 'The script dat is not passed.' );
             return;
+        }
+        if ( aalChartJSLoader.debugMode ) {
+            console.log( 'Amazon Auto Links', 'Chart Loader', aalChartJSLoader );
         }
 
         _oChartElement = $( '#' + aalChartJSLoader.chartID );
@@ -37,8 +40,6 @@
         var _isStartTime = $( 'input.from' ).val();
         var _isEndTime   = $( 'input.to' ).val();
         var _oThis       = $( this );
-        _isStartTime = _isStartTime ? _isStartTime : aalChartJSLoader.startTime;
-        _isEndTime   = _isEndTime ? _isEndTime : aalChartJSLoader.endTime;
         $.ajax( {
             type: "post",
             dataType: 'json',
@@ -120,9 +121,9 @@
                 return 0;
             }
 
-            var _iScrollLeft        = $( window ).scrollLeft();
-            var _aOffsetSideMetaBox = _oSideMetaBox.offset();
-            var _iSideMetaBoxPosX   = _aOffsetSideMetaBox.left - _iScrollLeft;
+            var _iScrollLeft            = $( window ).scrollLeft();
+            var _aOffsetSideMetaBox     = _oSideMetaBox.offset();
+            var _iSideMetaBoxPosX       = _aOffsetSideMetaBox.left - _iScrollLeft;
             var _aOffsetCanvasContainer = _oCanvasContainer.offset();
             var _iCanvasContainerPosX2  = _aOffsetCanvasContainer.left + _oCanvasContainer.width() - _iScrollLeft;
 
@@ -155,6 +156,12 @@
 
 
     function getChartCreated( oChartElement, aX, aY, iTotal ) {
+
+        // Store data for export
+        var _oChartContainer = oChartElement.parent();
+        _oChartContainer.after( "<input type='hidden' name='chart-x' value='" + aX.join( '|' ) + "'/>" );
+        _oChartContainer.after( "<input type='hidden' name='chart-y' value='" + aY.join( '|' ) + "'/>" );
+
         return new Chart(
             oChartElement,
             {
@@ -188,22 +195,26 @@
                     },
                     scales: {
                         xAxes: [{
-                            type: 'time',
-                            time: {
-                                unit: 'day',
-                                displayFormats: {
-                                    day: 'YYYY-MMM-D',  // the callback function _formatDateLabel() receives values with this format
-                                },
-                                tooltipFormat: 'll',
-                            },
-                            ticks: {
-                                callback: _formatDateLabel,
-                                source: 'labels'
-                            },
-                            scaleLabel: {
-                                display:     true,
-                                labelString: aalChartJSLoader.labels.dates
-                            }
+                            // type: 'time',
+                            // time: {
+                            //     unit: 'day',
+                            //     displayFormats: {
+                            //         day: 'YYYY-MMM-D',  // the callback function _formatDateLabel() receives values with this format
+                            //     },
+                            //     tooltipFormat: 'll',
+                            //     parser: function ( utcMoment ) {
+                            //         return moment( utcMoment ).utcOffset( aalChartJSLoader.GMTOffset ); // '+0900'
+                            //         // return moment( utcMoment ).utcOffset( '-2300' ); // '+0900'
+                            //     }
+                            // },
+                            // ticks: {
+                            //     callback: _formatDateLabel,
+                            //     source: 'labels'
+                            // },
+                            // scaleLabel: {
+                            //     display:     true,
+                            //     labelString: aalChartJSLoader.labels.dates
+                            // }
                         }],
                         yAxes: [{
                             scaleLabel: {

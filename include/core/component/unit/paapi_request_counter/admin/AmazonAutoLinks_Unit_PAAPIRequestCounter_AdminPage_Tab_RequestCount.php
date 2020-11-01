@@ -30,6 +30,11 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
     private $___iDefaultEndTime;
 
     /**
+     * @var array
+     */
+    private $___aLog;
+
+    /**
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _construct( $oFactory ) {
@@ -51,9 +56,6 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
             'style'     => array(
                 AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css',
             ),
-            'script'    => array(
-                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/Chart.bundle.min.js',
-            ),
         );
     }
 
@@ -67,6 +69,8 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
     protected function _loadTab( $oAdminPage ) {
 
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
         $this->___enqueueResources( $oAdminPage );
 
     }
@@ -83,9 +87,21 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
 
             $_sDefaultLocale = AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility::getDefaultLocale();
             $_oLogData       = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever( $_sDefaultLocale );
-            $_oLogData->setVariablesForChart( $_aLogX, $_aLogY, $this->___iDefaultStartTime, $this->___iDefaultEndTime, $this->getGMTOffset() );
+            $this->___aLog   = $_oLogData->getCountLog( $_aLogX, $_aLogY, $this->___iDefaultStartTime, $this->___iDefaultEndTime, - $this->getGMTOffset() );
 
-            wp_enqueue_script( 'jquery' );
+            $this->___registerMomentJS();
+
+            wp_enqueue_script( 'jquery', 'moment' );
+            $oAdminPage->enqueueScript(
+                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/Chart.min.js',
+                $this->sPageSlug,
+                $this->sTabSlug,
+                array(
+                    'handle_id'     => 'chart.js',
+                    'dependencies'  => array( 'jquery', 'moment' ),
+                    'in_footer'     => true,
+                )
+            );
             $oAdminPage->enqueueScript(
                 $oAdminPage->oUtil->isDebugMode()
                     ? AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.js'
@@ -94,7 +110,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                 $this->sTabSlug,
                 array(
                     'handle_id'     => 'aalChartJSLoader',
-                    'dependencies'  => array( 'jquery', ),
+                    'dependencies'  => array( 'jquery', 'moment', 'chart.js' ),
                     'translation'   => array(
                         'debugMode' => $oAdminPage->oUtil->isDebugMode(),
                         'ajaxURL'   => admin_url( 'admin-ajax.php' ),
@@ -108,16 +124,68 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                             'dates'  => __( 'Dates', 'amazon-auto-links' ),
                             'counts' => __( 'Counts', 'amazon-auto-links' ),
                         ),
+                        'GMTOffset' => str_replace( ':', '', $this->getGMTOffsetString() ),
                         'logX'      => $_aLogX,
                         'logY'      => $_aLogY,
                         'total'     => number_format( array_sum( $_aLogY ) ),
                         'chartID'   => 'PAAPIRequestCountChart',
-                        'startTime' => $this->___iDefaultStartTime,
-                        'endTime'   => $this->___iDefaultEndTime,
                     ),
                     'in_footer'     => true,
                 )
             );
+            $oAdminPage->enqueueScript(
+                $this->isDebugMode()
+                    ? AmazonAutoLinks_MainLoader::$sDirPath . '/asset/js/import-button.js'
+                    : AmazonAutoLinks_MainLoader::$sDirPath . '/asset/js/import-button.min.js',
+                $this->sPageSlug,
+                $this->sTabSlug,
+                array(
+                    'handle_id'     => 'aalImportButton',
+                    'dependencies'  => array( 'jquery', ),
+                    'in_footer'     => true,
+                )
+            );
         }
+            /**
+             * Registers Moment.js for WordPress version that does not support it.
+             * Below WordPress 5.0.0 (might not be accurate), moment.js is not included.
+             */
+            private function ___registerMomentJS() {
+                if ( wp_script_is( 'moment', 'registered' ) ) {
+                     return;
+                }
+                $_sFilePath = $this->isDebugMode()
+                    ? AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/moment/moment.js'
+                    : AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/moment/moment.min.js';
+                wp_register_script( 'moment', $this->getResolvedSRC( $_sFilePath ) );
+            }
+
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     */
+    protected function _doTab( $oFactory ) {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( ! ( $oFactory->oUtil->isDebugMode() || $_oOption->isDebug() ) ) {
+            return;
+        }
+
+        $_sDefaultLocale   = AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility::getDefaultLocale();
+
+        echo "<h3>Debug</h3>";
+        echo "<h4>Log</h4>";
+        AmazonAutoLinks_Debug::dump( $this->___aLog );
+
+
+        echo "<h4>Database Log</h4>";
+        $_oDatabaseLog     = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $_sDefaultLocale );
+        $_aLogFromDatabase = $_oDatabaseLog->get( 0, time() );
+        AmazonAutoLinks_Debug::dump( $_aLogFromDatabase );
+
+        echo "<h4>File Log</h4>";
+        $_oFileLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( $_sDefaultLocale );
+        $_aLogFromFile = $_oFileLog->get( 0, time() );
+        AmazonAutoLinks_Debug::dump( $_aLogFromFile );
+
+    }
 
 }

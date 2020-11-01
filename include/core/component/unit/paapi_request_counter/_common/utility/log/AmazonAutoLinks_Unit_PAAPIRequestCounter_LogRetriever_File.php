@@ -17,42 +17,44 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonA
 
     /**
      * @param  integer $iStartTime  If 0, starts from the first found item.
-     * @param  integer $iEndTime
+     * @param  integer $iEndTime    If larger than the current time, the current time will be applied.
      * @param  array   $aFilePaths  Stores the parsed file paths. Used to move log data into the database.
      * @return array
      * @since  4.4.0
      */
     public function get( $iStartTime, $iEndTime, &$aFilePaths=array() ) {
-        $aFilePaths = $this->getAsArray( $aFilePaths );
-        $_oCounter  = new AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter( $this->sLocale );
-        $_sDirPath  = $_oCounter->getDirectoryPath();
-        if ( ! is_dir( $_sDirPath ) ) {
+        $aFilePaths        = $this->getAsArray( $aFilePaths );
+        $_oCounter         = new AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter( $this->sLocale );
+        $_sDirPath         = $_oCounter->getDirectoryPath();
+        $_bIsDir           = is_dir( $_sDirPath );
+        $_iFirstItemTime   = $_bIsDir ? $this->___getFirstFoundItemTime( $_sDirPath ) : 0;
+        $_iNow             = time();
+        $iStartTime        = $iStartTime < $_iFirstItemTime ? $_iFirstItemTime : $iStartTime;
+        $iEndTime          = $iEndTime <= $_iNow ? $iEndTime : $_iNow;
+        if ( ! $_bIsDir ) {
             return array();
-        }        
+        }
         return $this->___getRaw( $_sDirPath, $iStartTime, $iEndTime, $aFilePaths );
     }
 
     /**
      * @param  string  $sDirPath    The subject directory.
-     * @param  integer $iTimeFrom   The timestamp of the start of the range, not GMT compliant.
-     * @param  integer $iTimeTo     The timestamp of the end of the range, not GMT compliant.
+     * @param  integer $iStartTime  The timestamp of the start of the range, not GMT compliant.
+     * @param  integer $iEndTime    The timestamp of the end of the range, not GMT compliant.
      * @param  array  &$aFilePaths
      * @return array   Returns the raw log data of the given time range.
      * @remark Directory structure: .../{locale}/{year}/{month}/{day} and getDirectoryPath() gives till .../{locale}
      * @since  4.4.0
      */
-    private function ___getRaw( $sDirPath, $iTimeFrom, $iTimeTo, array &$aFilePaths ) {
+    private function ___getRaw( $sDirPath, $iStartTime, $iEndTime, array &$aFilePaths ) {
 
         $_aCountLog        = array();
-        $_iNow             = time();
-        $iTimeFrom         = $iTimeFrom ? $iTimeFrom : $this->___getFirstFoundItemTime( $sDirPath );
-        $iTimeTo           = $iTimeTo <= $_iNow ? $iTimeTo : $_iNow;
         $this->_setVariablesOfTime(
             $_sStartYear, $_sEndYear,
             $_sStartMonth, $_sEndMonth,
             $_sStartDate, $_sEndDate,
             $_sStartHour, $_sEndHour,
-            $iTimeFrom, $iTimeTo
+            $iStartTime, $iEndTime
         );
         $_aYearDirPaths    = $this->___getYearDirectoryPaths( $_sStartYear, $_sEndYear, $sDirPath );
         $_sLastYearDirPath = end($_aYearDirPaths );

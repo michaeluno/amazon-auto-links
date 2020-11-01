@@ -17,19 +17,19 @@ class Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever extends AmazonA
     /**
      * @tags chart
      */
-    public function test_setVariablesForChart_US() {
+    public function test_getCountLog_US() {
         $this->_outputDetails( 'GMT Offset', $this->getGMTOffset() );
         $_oFileLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever( 'US' );
-        $_oFileLog->setVariablesForChart( $_aDates, $_aCounts, time() - ( 3 * 86400 ), time(), $this->getGMTOffset() );
+        $_oFileLog->getCountLog( $_aDates, $_aCounts, time() - ( 3 * 86400 ), time(), $this->getGMTOffset() );
         $this->_assertNotEmpty( $_aDates );
         $this->_assertNotEmpty( $_aCounts );
     }
     /**
      * @tags chart
      */
-    public function test_setVariablesForChart_IT() {
+    public function test_getCountLog_IT() {
         $_oFileLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever( 'IT' );
-        $_oFileLog->setVariablesForChart( $_aDates, $_aCounts, time() - ( 7 * 86400 ), time(), $this->getGMTOffset() );
+        $_oFileLog->getCountLog( $_aDates, $_aCounts, time() - ( 7 * 86400 ), time(), $this->getGMTOffset() );
         $this->_assertNotEmpty( $_aDates );
         $this->_assertNotEmpty( $_aCounts );
     }

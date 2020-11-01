@@ -28,7 +28,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
      */
     public function __construct( $sLocale ) {
         parent::__construct( $sLocale );
-        $this->aAllLog = $this->getRawFromDatabase();
+        $this->aAllLog = $this->___getRawFromDatabase();
     }
 
     /**
@@ -38,6 +38,14 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
     public function save() {
         update_option( $this->___getOptionKey( $this->sLocale ), $this->aAllLog );
     }
+        /**
+         * @remark This retrieves all the stored data in the options table record without any specific time range.
+         * @return array
+         * @since  4.4.0
+         */
+        private function ___getRawFromDatabase() {
+            return $this->getAsArray( get_option( $this->___getOptionKey( $this->sLocale ), array() ) );
+        }
 
     /**
      * Sets the log.
@@ -51,11 +59,20 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
     /**
      * @param integer $iStartTime
      * @param integer $iEndTime
+     * @since 4.4.0
      */
     public function truncate( $iStartTime, $iEndTime ) {
         $this->set( $this->get( $iStartTime, $iEndTime ) );
     }
 
+    /**
+     * @return array
+     * @since  4.4.0
+     */
+    public function getAll() {
+        return $this->aAllLog;
+    }
+    
     /**
      * @param  integer $iStartTime
      * @param  integer $iEndTime
@@ -63,34 +80,49 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
      * @since  4.4.0
      */
     public function get( $iStartTime, $iEndTime ) {
-        if ( empty( $this->aAllLog ) ) {
+
+        $_aAllLog = $this->getAll();
+        
+        ksort( $_aAllLog );
+
+        $_iFirstItemTime = $this->_getFirstItemTime( $_aAllLog );
+
+        // Update the start and end times.
+        $_iNow           = time();
+        $iStartTime      = $iStartTime < $_iFirstItemTime ? $_iFirstItemTime : $iStartTime;
+        $iEndTime        = $iEndTime > $_iNow ? $_iNow : $iEndTime;
+
+        // If empty, no need to parse log.
+        if ( empty( $_aAllLog ) ) {
             return array();
         }
-        if ( ! $iStartTime && $iEndTime >= time() ) {
-            return $this->aAllLog;
+        // If the entire log is in the specified range, no need to parse.
+        if ( $iStartTime <= $_iFirstItemTime && $iEndTime >= $_iNow ) {
+            return $_aAllLog;
         }
-        return $this->___getRaw( $this->aAllLog, $iStartTime, $iEndTime );
+
+        return $this->___getRaw( $_aAllLog, $iStartTime, $iEndTime );
+
     }
         /**
          * @param  array   $aStoredLog
-         * @param  integer $iTimeFrom   The timestamp of the start of the range.
-         * @param  integer $iTimeTo     The timestamp of the end of the range.
+         * @param  integer $iStartTime   The timestamp of the start of the range.
+         * @param  integer $iEndTime     The timestamp of the end of the range.
          * @return array
          * @sicne  4.4.0
          */
-        private function ___getRaw( array $aStoredLog, $iTimeFrom, $iTimeTo ) {
+        private function ___getRaw( array $aStoredLog, &$iStartTime, &$iEndTime ) {
 
-            ksort( $aStoredLog );
 
-            $_aCountLog  = array();
-            $iTimeFrom   = $iTimeFrom ? $iTimeFrom : $this->___getFirstFoundItemTime( $aStoredLog );
+            $_aCountLog      = array();
+
 
             $this->_setVariablesOfTime(
                 $_sStartYear, $_sEndYear,
                 $_sStartMonth, $_sEndMonth,
                 $_sStartDate, $_sEndDate,
                 $_sStartHour, $_sEndHour,
-                $iTimeFrom, $iTimeTo
+                $iStartTime, $iEndTime
             );
 
             foreach( $aStoredLog as $_iThisYear => $_aLogByYear ) { // the key gets converted to integer automatically in PHP
@@ -114,22 +146,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
             return $_aCountLog;
 
         }
-            private function ___getFirstFoundItemTime( array $aAllLog ) {
-                $_sYear  = $this->___getFirstFoundItem( $aAllLog );
-                $_sMonth = $this->___getFirstFoundItem( $aAllLog[ $_sYear ] );
-                $_sDate  = $this->___getFirstFoundItem( $aAllLog[ $_sYear ][ $_sMonth ] );
-                $_sHour  = $this->___getFirstFoundItem( $aAllLog[ $_sYear ][ $_sMonth ][ $_sDate ] );
-                return strtotime( "{$_sYear}-{$_sMonth}-{$_sDate} {$_sHour}:00" );
-            }
-                private function ___getFirstFoundItem( $aLog ) {
-                    ksort( $aLog );
-                    foreach( $aLog as $_sThis => $_aThisLog ) {
-                        if ( ! empty( $_aThisLog ) ) {
-                            return $_sThis;
-                        }
-                    }
-                    return '';
-                }
+
             private function ___getLogByEachYear( array $aLogByYear, $sStartMonth, $sEndMonth, $sStartDate, $sEndDate, $sStartHour, $sEndHour, $sThisYear ) {
                 $_sStartMonth = null === $sStartMonth ? '01' : $sStartMonth;
                 $_sEndMonth   = null === $sEndMonth   ? '12' : $sEndMonth;
@@ -184,36 +201,20 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
                             if ( ! $this->_isInRange( ( integer ) $sStartHour, ( integer ) $_sThisHour, ( integer ) $sEndHour ) ) {
                                 continue;
                             }
-                            $_aLogByDate[ $_sThisHour ] = $_iThisCount;
+                            $_aLogByDate[ $_sThisHour ] = ( integer ) $_iThisCount;
                         }
                         return $_aLogByDate;
                     }
 
     /**
-     * @return array
+     * @param  string $sLocale
      * @since  4.4.0
+     * @return string
      */
-    public function getRawFromDatabase() {
-        return $this->___getRawFromDatabase( $this->sLocale );
+    private function ___getOptionKey( $sLocale ) {
+        return isset( AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ $sLocale ] )
+            ? AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ $sLocale ]
+            : AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ 'US' ];
     }
-        /**
-         * @remark This retrieves all the stored data in the options table record without any specific time range.
-         * @param  string $sLocale
-         * @return array
-         * @since  4.4.0
-         */
-        private function ___getRawFromDatabase( $sLocale ) {
-            return $this->getAsArray( get_option( $this->___getOptionKey( $sLocale ), array() ) );
-        }
 
-        /**
-         * @param  string $sLocale
-         * @since  4.4.0
-         * @return string
-         */
-        private function ___getOptionKey( $sLocale ) {
-            return isset( AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ $sLocale ] )
-                ? AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ $sLocale ]
-                : AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ][ 'US' ];
-        }
 }

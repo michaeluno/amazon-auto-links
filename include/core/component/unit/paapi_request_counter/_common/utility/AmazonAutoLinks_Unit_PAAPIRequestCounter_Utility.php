@@ -15,6 +15,27 @@
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility extends AmazonAutoLinks_Unit_Utility {
 
     /**
+     * @param  array  $aList
+     * @param  string $sDelimiter
+     * @param  string $sEnclosure
+     * @param  string $sEscapeChar
+     * @see    https://stackoverflow.com/questions/13108157/php-array-to-csv/53882337#53882337
+     * @return string
+     * @since  4.4.0
+     */
+    static public function getCSV( array $aList, $sDelimiter=',', $sEnclosure='"', $sEscapeChar= "\\" ) {
+        $_rFile = fopen('php://memory', 'r+' ); // r+
+        foreach( $aList as $_aFields ) {
+            fputcsv( $_rFile, $_aFields, $sDelimiter, $sEnclosure, $sEscapeChar );
+        }
+        rewind( $_rFile );
+        $_bsCSV = stream_get_contents( $_rFile );
+        return false === $_bsCSV
+            ? ''
+            : rtrim( $_bsCSV );
+    }
+
+    /**
      * @param  string $sDirPath
      * @param  null|callable $cCallable
      * @param  boolean $bRecursive

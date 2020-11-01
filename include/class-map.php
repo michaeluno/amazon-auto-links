@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.6 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.0b01 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -203,6 +203,7 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
+    "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_APIRequestSearchProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestSearchProducts.php", 
@@ -212,9 +213,13 @@ return array(
     "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
     "AmazonAutoLinks_Unit_Event_Action_CheckTasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Unit_Event_Action_CheckTasks.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Ajax_LocaleChange" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/ajax/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Ajax_LocaleChange.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Filter_Counter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/filter/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Filter_Counter.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/wpcron/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog.php", 
