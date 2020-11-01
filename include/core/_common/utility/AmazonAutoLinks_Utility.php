@@ -126,6 +126,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         $_iOldUmask = umask( 0 );
         $_bSet      = chmod( $sPath, $iMode ); // on a shared server, sometimes the permission fails to set with mkdir().
         umask( $_iOldUmask );
+        clearstatcache( true, $sPath );
         return $_bSet;
     }
 
@@ -135,10 +136,11 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @param  string  $sDirPath         The subject directory path.
      * @param  string  $sDirPathAncestor The abase ancestor directory path that contains the subject directory path.
      * @param  boolean $bIncludeSelf     Whether to include the subject directory.
+     * @param  boolean $bIncludeBase     Whether to include the most parent (base) directory.
      * @return array   An array holding nested directory paths in the order that parent comes first (with a lower index).
      * @since  4.3.8
      */
-    static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bIncludeSelf=true ) {
+    static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bIncludeSelf=true, $bIncludeBase=true ) {
         $_aNestedDirPaths = array();
         $_sDirPth         = $bIncludeSelf ? $sDirPath : dirname( $sDirPath );
         if ( false === strpos( $_sDirPth, $sDirPathAncestor ) ) {
@@ -147,6 +149,9 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         while ( $sDirPathAncestor !== $_sDirPth ) {
             $_aNestedDirPaths[] = $_sDirPth;
             $_sDirPth = dirname( $_sDirPth );
+        }
+        if ( $bIncludeBase ) {
+            $_aNestedDirPaths[] = $sDirPathAncestor;
         }
         return array_reverse( $_aNestedDirPaths );
     }
@@ -183,11 +188,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
         // Ancestor directories can have the wrong file permissions so check each.
         foreach( self::getNestedDirPaths( $sBaseDirPath, $sDirPath ) as $_sNestedDirPath ) {
-            if ( is_writable( $_sNestedDirPath ) ) {
-                continue;
-            }
-            $_bWritable = self::getDirectoryCreated( $_sNestedDirPath, $iCHMODMode );
-            if ( ! $_bWritable ) {
+            if ( ! self::getDirectoryCreated( $_sNestedDirPath, $iCHMODMode ) ) {
                 return false;
             }
         }
@@ -202,8 +203,13 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @since  4.3.8
      * @remark Recursive option is not supported as parent/ancestor directories can miss a specified CHMOD and causes troubles. So use getDirectoryCreatedRecursive() for that purpose.
      */
-    static public function getDirectoryCreated( $sDirPath, $iCHMODMode ) {
-        $_bCreated = mkdir( $sDirPath, $iCHMODMode, false );
+    static public function getDirectoryCreated( $sDirPath, $iCHMODMode=0755 ) {
+        if ( ! is_writable( dirname( $sDirPath ) ) ) {
+            return false;
+        }
+        $_iOldUmask = umask( 0 );
+        $_bCreated  = mkdir( $sDirPath, $iCHMODMode, false );
+        umask( $_iOldUmask );
         if ( ! $_bCreated ) {
             return false;
         }
