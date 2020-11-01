@@ -77,6 +77,7 @@ class AmazonAutoLinks_Event {
         private function ___handleActions() {
             new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
             new AmazonAutoLinks_Event_Error_Log;  // [4.2.0]
+            new AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory; // [4.3.8]
         }
 
         private function ___handleFilters() {

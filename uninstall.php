@@ -38,9 +38,14 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
 }
 
 // 1. Delete the plugin temporary directory
-$_sPluginSiteTempDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
-if ( AmazonAutoLinks_Utility::doesDirectoryExist( $_sPluginSiteTempDirPath ) ) {
-    AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sPluginSiteTempDirPath );
+$_aTempDirPaths = array(
+    AmazonAutoLinks_Registry::getPluginSiteTempDirPath(),
+    untrailingslashit( wp_normalize_path( sys_get_temp_dir() ) ) . '/WPAAL', // old deprecated one
+);
+foreach( $_aTempDirPaths as $_sDirPath ) {
+    if ( AmazonAutoLinks_Utility::doesDirectoryExist( $_sDirPath ) ) {
+        AmazonAutoLinks_Utility::removeDirectoryRecursive( $_sDirPath );
+    }
 }
 
 // 2. Delete transients
