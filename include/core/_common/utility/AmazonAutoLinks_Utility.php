@@ -103,6 +103,21 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
+     * Checks whether the path is a directory and it exists.
+     * @remark `is_dir()` is not reliable by itself as it can return true on non-existing path.
+     * @since  4.3.8
+     * @param  string  $sPath
+     * @param  boolean $bCheckWritable Whether to check if the directory is writable or not.
+     * @return boolean
+     */
+    static public function doesDirectoryExist( $sPath, $bCheckWritable=true ) {
+        $_bExistsAndDir = file_exists( $sPath ) && is_dir( $sPath );
+        return $bCheckWritable
+            ? $_bExistsAndDir && is_writable( $sPath )
+            : $_bExistsAndDir;
+    }
+
+    /**
      * @param  string  $sPath
      * @param  integer $iMode
      * @return boolean true if set; otherwise, false.
@@ -119,13 +134,13 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      * @remark The paths must be normalized.
      * @param  string  $sDirPath         The subject directory path.
      * @param  string  $sDirPathAncestor The abase ancestor directory path that contains the subject directory path.
-     * @param  boolean $bExcludeSelf     Whether to exclude the subject directory.
-     * @return array
+     * @param  boolean $bIncludeSelf     Whether to include the subject directory.
+     * @return array   An array holding nested directory paths in the order that parent comes first (with a lower index).
      * @since  4.3.8
      */
-    static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bExcludeSelf=false ) {
+    static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bIncludeSelf=true ) {
         $_aNestedDirPaths = array();
-        $_sDirPth         = $bExcludeSelf ? dirname( $sDirPath ) : $sDirPath;
+        $_sDirPth         = $bIncludeSelf ? $sDirPath : dirname( $sDirPath );
         if ( false === strpos( $_sDirPth, $sDirPathAncestor ) ) {
             return $_aNestedDirPaths;
         }
@@ -146,15 +161,14 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
      */
     static public function getDirectoryCreatedRecursive( $sDirPath, $sBaseDirPath, $iCHMODMode=0755, $bMakeWritable=true ) {
 
-        if ( is_dir( $sDirPath ) ) {
+        if ( self::doesDirectoryExist( $sDirPath, false ) ) {
             if ( is_writable( $sDirPath ) ) {
                 return true;
             }
             if ( ! $bMakeWritable ) {
                 return false;
             }
-            $_aNestedDirPaths = self::getNestedDirPaths( $sBaseDirPath, $sDirPath, false );
-            foreach( $_aNestedDirPaths as $_sNestedDirPath ) {
+            foreach( self::getNestedDirPaths( $sBaseDirPath, $sDirPath ) as $_sNestedDirPath ) {
                 if ( is_writable( $_sNestedDirPath ) ) {
                     continue;
                 }
@@ -168,8 +182,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         // At this point, the directory does not exist.
 
         // Ancestor directories can have the wrong file permissions so check each.
-        $_aNestedDirPaths = self::getNestedDirPaths( $sBaseDirPath, $sDirPath, false );
-        foreach( $_aNestedDirPaths as $_sNestedDirPath ) {
+        foreach( self::getNestedDirPaths( $sBaseDirPath, $sDirPath ) as $_sNestedDirPath ) {
             if ( is_writable( $_sNestedDirPath ) ) {
                 continue;
             }
@@ -221,12 +234,12 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
 
     /**
      * @remark  used upon plugin uninstall.
-     * @param   $sDirectoryPath
+     * @param   string $sDirectoryPath
      * @since   3.7.10
      */
     static public function removeDirectoryRecursive( $sDirectoryPath ) {
 
-        if ( ! is_dir( $sDirectoryPath ) ) {
+        if ( ! self::doesDirectoryExist( $sDirectoryPath, true ) ) {
             return;
         }
         $_aItems = scandir( $sDirectoryPath );
