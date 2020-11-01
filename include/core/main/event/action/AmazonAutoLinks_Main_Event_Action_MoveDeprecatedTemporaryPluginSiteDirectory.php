@@ -32,7 +32,7 @@ class AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirecto
         if ( ! $this->doesDirectoryExist( $_sDeprecatedDirPath ) ) {
             return;
         }
-        rename( $_sDeprecatedDirPath, AmazonAutoLinks_Registry::getPluginSiteTempDirPath() );
+        @rename( $_sDeprecatedDirPath, AmazonAutoLinks_Registry::getPluginSiteTempDirPath() );
     }
 
 }
