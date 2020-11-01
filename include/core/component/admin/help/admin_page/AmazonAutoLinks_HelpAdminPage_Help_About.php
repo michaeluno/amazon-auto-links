@@ -127,19 +127,19 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                     'style' => 'height: 300px;',
                 ),
             ),            
-            array(
-                'title'     => __( 'Server Information', 'amazon-auto-links' ),
-                'field_id'  => 'server_information',
-                'type'      => 'system',
-                'data'      => array(
-                      // 'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
-                      // 'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
-                      // 'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
-                ),
-                'attributes' => array(
-                    'style' => 'height: 300px;',
-                ),
-            ),
+            // array(
+            //     'title'     => __( 'Server Information', 'amazon-auto-links' ),
+            //     'field_id'  => 'server_information',
+            //     'type'      => 'system',
+            //     'data'      => array(
+            //           // 'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+            //           // 'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
+            //           // 'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
+            //     ),
+            //     'attributes' => array(
+            //         'style' => 'height: 300px;',
+            //     ),
+            // ),
             array()
         );
     }
@@ -175,7 +175,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'Plugin Site Temporary Directory' => $this->___getDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
                 'Plugin Site Temporary Test Directory' => $this->___getTestDirectoryPermissionInformation( $_sPluginSiteTempDirPath ),
                 'wp-content'                      => $this->___getDirectoryPermissionInformation( WP_CONTENT_DIR ),
-                'wp-content Test Directory'                      => $this->___getTestDirectoryPermissionInformation( WP_CONTENT_DIR ),
+                'wp-content Test Directory'       => $this->___getTestDirectoryPermissionInformation( WP_CONTENT_DIR ),
             );
         }
             /**
