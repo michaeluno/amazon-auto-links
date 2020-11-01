@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.1.0
+ * @version 1.1.1
  */
 (function($){
 
@@ -64,6 +64,9 @@
             var _aTestArguments = $( 'input.test-arguments' ).map( function(){
                 return $(this).val();
             } ).get();
+            if ( 1 === _aTestArguments.length && '' === _aTestArguments[ 0 ] ) {
+                _aTestArguments = [];
+            }
 
             _oCheckedItems.each( function() {
 
