@@ -1,5 +1,5 @@
 <?php 
-return array( 
+return array(
     "AmazonAutoLinks_Run_Database_Delete_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_products/AmazonAutoLinks_Run_Database_Delete_aal_products.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/AmazonAutoLinks_Run_Database_Delete_aal_request_cache.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_Delete_aal_tasks.php", 
@@ -13,6 +13,7 @@ return array(
     "AmazonAutoLinks_Scratch_Database_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_products/AmazonAutoLinks_Scratch_Database_aal_products.php", 
     "AmazonAutoLinks_Scratch_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_request_cache/AmazonAutoLinks_Scratch_Database_aal_request_cache.php", 
     "AmazonAutoLinks_Scratch_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_tasks/AmazonAutoLinks_Scratch_Database_aal_tasks.php", 
+    "AmazonAutoLinks_Scratch_DisplayOptions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/options/AmazonAutoLinks_Scratch_DisplayOptions.php", 
     "AmazonAutoLinks_Scratch_PAAPIRequestCounter" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/paapi_request_counter/AmazonAutoLinks_Scratch_PAAPIRequestCounter.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 
     "AmazonAutoLinks_Scratch_Test2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test2.php", 
