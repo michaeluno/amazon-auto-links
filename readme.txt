@@ -307,10 +307,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.3.8 - 11/02/2020 =
-- Added the `File Permissions` field in the `About` tab of the `Help page`.
+- Added the `File Permissions` field in the `About` tab of the `Help` page.
 - Regenerated the base language file.
 - Fixed a bug that failed to create a plugin temporary directory on some sites causing a PHP Warning: file_put_contents(...) failed to open stream: No such file or directory in ...AmazonAutoLinks_VersatileFileManager.php on line 89.
-- Removed the `Server Information` field in the `About` tab of the `Help page`.
+- Removed the `Server Information` field in the `About` tab of the `Help` page.
 
 = 4.3.7 - 10/28/2020 =
 - Fixed a bug that caused the PHP error, "Parse error: syntax error, unexpected ')' in ...AmazonAutoLinks_UnitOutput__ItemFormatter.php on line 130" in below PHP 7.3.
