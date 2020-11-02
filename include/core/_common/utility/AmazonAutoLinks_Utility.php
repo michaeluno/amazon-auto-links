@@ -143,6 +143,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
     static public function getNestedDirPaths( $sDirPathAncestor, $sDirPath, $bIncludeSelf=true, $bIncludeBase=true ) {
         $_aNestedDirPaths = array();
         $_sDirPth         = $bIncludeSelf ? $sDirPath : dirname( $sDirPath );
+        $sDirPathAncestor = untrailingslashit( $sDirPathAncestor );
         if ( false === strpos( $_sDirPth, $sDirPathAncestor ) ) {
             return $_aNestedDirPaths;
         }
