@@ -76,7 +76,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
                 'field_id'      => 'filter_hooks',
                 'type'          => 'textarea',
                 'title'         => __( 'Custom Filter Hooks' ),
-                'description'   => __( 'If the areas to apply link conversion are not listed above and if you know the filter hook to apply to, specify here one per line.' ),
+                'description'   => __( 'If the areas to apply link conversion are not listed above and if you know the filter hook to apply to, specify here one per line.', 'amazon-auto-links' ),
             ),
             array()
         );
