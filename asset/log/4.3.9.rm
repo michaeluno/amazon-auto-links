@@ -1,3 +1,4 @@
+- Added the Italian translation.
+- Updated the Japanese translation items.
 - Fixed a bug that caused a PHP warning saying the directory already exists with mkdir().
 - Fixed a bug that some translation items were unable to translate.
-- Updated the Japanese translation items.
