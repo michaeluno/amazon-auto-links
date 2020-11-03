@@ -77,7 +77,7 @@ class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
                             
         $_sVendorURL = $this->_getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/credit/amazon-auto-links-250x250.jpg' ) );
+        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ) );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width: 100%; max-width: 100%;'>"
                 . "<a href='{$_sVendorURL}' target='_blank'>"
@@ -90,7 +90,7 @@ class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
 
         $_sVendorURL = $this->_getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/credit/amazon-auto-links-horizontal.jpg' ) );
+        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ) );
 
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width: 100%; max-width: 100%;'>"

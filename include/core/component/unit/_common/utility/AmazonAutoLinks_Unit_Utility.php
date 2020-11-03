@@ -792,7 +792,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         if ( ! self::getElement( $aProduct, 'is_prime' ) ) {
             return '';
         }
-        $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/unit/prime.gif' );
+        $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/unit/prime.gif', true );
         $_aAttributes    = array(
             'role'  => 'img',
             'class' => 'prime-icon',

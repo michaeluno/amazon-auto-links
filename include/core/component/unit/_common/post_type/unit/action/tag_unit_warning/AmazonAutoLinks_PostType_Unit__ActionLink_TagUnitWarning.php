@@ -38,7 +38,7 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_TagUnitWarning extends AmazonAut
             $_sTitle              = __( 'Amazon has deprecated the tags feature. So this is no longer functional.', 'amazon-auto-links' );
             $_sWarning            = __( 'Warning!', 'amazon-auto-links' );
             $_sURL                = 'https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571';
-            $_sExclamationIconURL = AmazonAutoLinks_Registry::getPluginURL( 'asset/image/exclamationmark_16x16.png' );
+            $_sExclamationIconURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/exclamationmark_16x16.png', true );
             return "<a href='" . esc_url( $_sURL ) . "' target='_blank'>"
                     . "<img src='" . esc_url( $_sExclamationIconURL ) . "' alt='" . esc_attr( $_sWarning ) . "' title='" . esc_attr( $_sTitle ) . "' />"
                 . "</a> ";
