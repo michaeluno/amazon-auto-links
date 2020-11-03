@@ -15,6 +15,7 @@
     "ext-json": "*",
     "ext-zlib": "*",
     "ext-curl": "*",
-    "ext-libxml": "*"
+    "ext-libxml": "*",
+    "ext-posix": "*"
   }
 }

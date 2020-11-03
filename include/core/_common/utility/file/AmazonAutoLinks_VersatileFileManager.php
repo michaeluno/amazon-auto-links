@@ -35,6 +35,13 @@ class AmazonAutoLinks_VersatileFileManager {
     protected $_sFilePath = '';
 
     /**
+     * Tells whether the directory is accessible or not.
+     * @var   bool
+     * @sicne 4.4.0
+     */
+    protected $_bWritable = false;
+
+    /**
      * Sets up properties and create a temp directory.
      *
      * @param string  $sIdentifier      A string to identify the lock file.
@@ -42,15 +49,14 @@ class AmazonAutoLinks_VersatileFileManager {
      * @param string  $sFileNamePrefix  A prefix to prepend to the file name.
      */
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
-        $this->_sIdentifier       = $sIdentifier;
-        $this->_sTempDirPath      = $this->_getDirectoryPath();
-        if ( ! is_dir( $this->_sTempDirPath ) ) {
-            mkdir( $this->_sTempDirPath, 0777, true );
-        }
-        $this->_iTimeout          = $iTimeout;
-        $this->_sFileNamePrefix   = $sFileNamePrefix;
-        $this->_sFilePath         = $this->___getFilePath();
+        $this->_sIdentifier        = $sIdentifier;
+        $this->_sTempDirPath       = $this->_getTemporaryDirectoryPath();
+        $this->_bWritable          = AmazonAutoLinks_Utility::getDirectoryCreatedRecursive( $this->_sTempDirPath, $this->_getBaseTemporaryDirectoryPath() );
+        $this->_iTimeout           = $iTimeout;
+        $this->_sFileNamePrefix    = $sFileNamePrefix;
+        $this->_sFilePath          = $this->___getFilePath();
     }
+
         /**
          * @remark Consider the file resides in the server's shared temporary directory.
          * @return string
@@ -71,6 +77,34 @@ class AmazonAutoLinks_VersatileFileManager {
     }
 
     /**
+     * @remark Override this in an extended class.
+     * @since  4.3.5
+     * @return string
+     */
+    protected function _getTemporaryDirectoryPath() {
+        return $this->_getBaseTemporaryDirectoryPath() . '/ephemeral';
+    }
+
+    /**
+     * @remark This is needed to apply proper CHMOD to directories between the base directory and the subject directory.
+     * @remark Override this in an extended class.
+     * @sinec  4.3.8
+     * @return string
+     */
+    protected function _getBaseTemporaryDirectoryPath() {
+        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
+    }
+
+    /**
+     * Checks whether it is possible to access the directory and write files.
+     * @return bool
+     * @since  4.4.0
+     */
+    public function canWrite() {
+        return $this->_bWritable;
+    }
+
+    /**
      * Returns the file contents if it is not expired.
      * @since  4.3.4
      */
@@ -86,9 +120,13 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.4
      */
     public function set( $sText ) {
+        // @todo Use the utility method to create a directory.
         $_sDirPath = dirname( $this->_sFilePath );
         if ( ! is_dir( $_sDirPath ) ) {
             mkdir( $_sDirPath, 0777, true );
+        }
+        if ( ! $this->canWrite() ) {
+            return false;
         }
         return file_put_contents( $this->_sFilePath, $sText, LOCK_EX );
     }
@@ -98,6 +136,9 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.5
      */
     public function delete() {
+        if ( ! $this->_bWritable ) {
+            return false;
+        }
         return unlink( $this->_sFilePath );
     }
 
@@ -208,6 +249,5 @@ class AmazonAutoLinks_VersatileFileManager {
     protected function _getDefaultContent() {
         return ( string ) microtime( true );
     }
-
 
 }
