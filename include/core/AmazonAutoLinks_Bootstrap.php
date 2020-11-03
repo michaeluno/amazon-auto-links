@@ -10,9 +10,8 @@
 
 /**
  * Loads the plugin.
- * 
- * @action      do      aal_action_after_loading_plugin
- * @since       3
+ *
+ * @since 3
  */
 final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework_PluginBootstrap {
     
@@ -74,7 +73,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @since       3
      */
     public function getClasses() {
-        return include( dirname( $this->sFilePath ) . '/include/class-map.php' );
+        return include( dirname( __FILE__ ) . '/class-map.php' );
     }
 
     /**
@@ -247,10 +246,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * Includes additional files.
          */
         private function ___include() {
-            
-            // Functions
-            include( dirname( $this->sFilePath ) . '/include/core/function/functions.php' );
-                        
+            include( dirname( __FILE__ ) . '/function/functions.php' );
         }
     
 }

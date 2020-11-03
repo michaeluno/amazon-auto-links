@@ -5,7 +5,8 @@
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
  */
-return array(
+return array( 
+    "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php", 
     "AmazonAutoLinks_AutoInsertLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/AmazonAutoLinks_AutoInsertLoader.php", 
     "AmazonAutoLinks_AutoInsertAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage.php", 
     "AmazonAutoLinks_AutoInsertAdminPage_AutoInsert" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php", 
@@ -455,7 +456,6 @@ return array(
     "AmazonAutoLinks_Output___ArgumentFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_Base.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_UnitID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_UnitID.php", 
-    "AmazonAutoLinks_Units" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/_deprecated/AmazonAutoLinks_Units.php", 
     "AmazonAutoLinks_AdminPage_Page_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Page_Base.php", 
     "AmazonAutoLinks_AdminPage_RootBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_RootBase.php", 
     "AmazonAutoLinks_AdminPage_Section_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Section_Base.php", 

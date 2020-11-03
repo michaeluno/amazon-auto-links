@@ -5,7 +5,7 @@
  */
 /* Configuration */
 $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
-$sResultFilePath	= $sTargetBaseDir . '/include/class-map.php';
+$sResultFilePath	= $sTargetBaseDir . '/include/core/class-map.php';
 
 /* If accessed from a browser, exit. */
 $bIsCLI				= php_sapi_name() == 'cli';
@@ -31,24 +31,24 @@ echo 'Started...' . $sCarriageReturn;
 
 $_oGenerator = new \PHPClassMapGenerator\PHPClassMapGenerator(
     $sTargetBaseDir,
-    [ $sTargetBaseDir . '/include/core/' ],
+    array( $sTargetBaseDir . '/include/core/' ),
     $sResultFilePath,
-    [
+    array(
         'output_buffer'     => true,
         'output_var_name'	=>	'return',
         'base_dir_var'  	=>	'AmazonAutoLinks_Registry::$sDirPath',
         'header_type'		=>	'CONSTANTS',
         'header_class_name'	=>	'AmazonAutoLinks_Registry',
         'header_class_path'	=>	$sTargetBaseDir . '/amazon-auto-links.php',
-        'search'            => [
+        'search'            => array(
 //            'allowed_extensions'     => [ 'php' ],
 //            'exclude_dir_paths'      => [],
-            'exclude_dir_names'      => [ '_del', '_bak', 'apf', 'library', '_notes' ],
+            'exclude_dir_names'      => array( '_del', '_bak', 'apf', 'library', '_notes' ),
 //            'exclude_file_names'     => [ '.min.', ],
 //            'is_recursive'           => true,
 //            'ignore_note_file_names' => [ 'ignore-class-map.txt' ],
-        ],
-    ]
+        ),
+    )
 );
 
 echo 'Done!' . $sCarriageReturn;

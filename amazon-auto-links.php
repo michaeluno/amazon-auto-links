@@ -378,5 +378,5 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 AmazonAutoLinks_Registry::setUp( __FILE__ );
 
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
-include( dirname( __FILE__ ).'/include/AmazonAutoLinks_Bootstrap.php' );
+include( dirname( __FILE__ ).'/include/core/AmazonAutoLinks_Bootstrap.php' );
 new AmazonAutoLinks_Bootstrap( AmazonAutoLinks_Registry::$sFilePath, AmazonAutoLinks_Registry::HOOK_SLUG );
