@@ -135,8 +135,8 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
             );
             $oAdminPage->enqueueScript(
                 $this->isDebugMode()
-                    ? AmazonAutoLinks_MainLoader::$sDirPath . '/asset/js/import-button.js'
-                    : AmazonAutoLinks_MainLoader::$sDirPath . '/asset/js/import-button.min.js',
+                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/import-button.js'
+                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/import-button.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(

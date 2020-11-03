@@ -149,12 +149,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     public function replyToPluginDeactivation() {
         
         // Clean transients.
-        AmazonAutoLinks_WPUtility::cleanTransients( 
-            AmazonAutoLinks_Registry::TRANSIENT_PREFIX
-        );
-        AmazonAutoLinks_WPUtility::cleanTransients( 
-            'apf_'
-        );
+        AmazonAutoLinks_WPUtility::cleanTransients( AmazonAutoLinks_Registry::TRANSIENT_PREFIX );
+        AmazonAutoLinks_WPUtility::cleanTransients( 'apf_' );
         
     }        
     
@@ -189,11 +185,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             
         // Include PHP files.
         $this->___include();
-            
-        // Load the main component.
-        new AmazonAutoLinks_MainLoader( $this->sFilePath );
-               
-        // Load sub-components
+
+        // Load components
         $this->___loadComponents();
                             
         // Trigger the action. 2.1.2+
@@ -206,6 +199,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          * @return      void
          */
         private function ___loadComponents() {
+
+            // Main
+            new AmazonAutoLinks_Main_Loader( $this->sFilePath );
             
             // Templates
             new AmazonAutoLinks_TemplateLoader( $this->sFilePath );
@@ -233,11 +229,6 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
 
             // [4.1.0]
             new AmazonAutoLinks_ThirdPartySupportLoader;
-            
-            /// Admin only sub-components
-            if ( $this->bIsAdmin ) {
-                $this->___loadAdminComponents();
-            }            
 
             // [3.8.10]
             new AmazonAutoLinks_Loader_LinkConverter;
@@ -246,32 +237,12 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // [4.0.0]
             new AmazonAutoLinks_CustomOEmbed_Loader;
 
-
             new AmazonAutoLinks_Test_Loader; // [4.3.0]
-
 
             new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
         }
-            /**
-             * @since       3.3.0
-             * @return      void
-             */
-            private function ___loadAdminComponents() {
-                            
-                new AmazonAutoLinks_SettingsAdminPageLoader;
-                
-                new AmazonAutoLinks_ToolAdminPage(
-                    AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ],
-                    $this->sFilePath 
-                );
-                
-                new AmazonAutoLinks_HelpAdminPage;
-                new AmazonAutoLinks_ReportAdminPage;
-                new AmazonAutoLinks_InfoBoxLoader;
-                
-            }
-        
+
         /**
          * Includes additional files.
          */
