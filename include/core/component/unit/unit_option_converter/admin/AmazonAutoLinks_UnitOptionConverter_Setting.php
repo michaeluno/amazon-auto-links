@@ -20,17 +20,13 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
      * Sets up hooks.
      */
     public function __construct() {
-       
-        add_action( 
-            'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], 
-            array( $this, 'replyToLoadPage' )
-        );
-                
+        add_action( 'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], array( $this, 'replyToLoadPage' ) );
     }
     
     /**
-     * @return      void
-     * @callback    action      load_{page slug}
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @return   void
+     * @callback action      load_{page slug}
      */
     public function replyToLoadPage( $oFactory ) {
         

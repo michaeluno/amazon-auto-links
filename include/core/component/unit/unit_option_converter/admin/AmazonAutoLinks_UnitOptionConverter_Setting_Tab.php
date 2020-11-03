@@ -34,7 +34,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
     public function replyToLoadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert( 
+        new AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert(
             $oAdminPage,
             $this->sPageSlug,
             array(

@@ -11,13 +11,11 @@
 /**
  * Converts template options
  * 
- * @package      Amazon Auto Links
- * @since        3
- * @since        3.5.0      Renamed from `AmazonAutoLinks_Event_Action_UnitOptionConverter`.
- *
- * @action       aal_action_event_convert_template_options
+ * @package Amazon Auto Links
+ * @since   3
+ * @since   3.5.0      Renamed from `AmazonAutoLinks_Event_Action_UnitOptionConverter`.
  */
-class AmazonAutoLinks_Event___Action_UnitOptionConverter extends AmazonAutoLinks_Event___Action_Base {
+class AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter extends AmazonAutoLinks_Event___Action_Base {
 
     protected $_sActionHookName     = 'aal_action_event_convert_unit_options';
     protected $_iCallbackParameters = 2;

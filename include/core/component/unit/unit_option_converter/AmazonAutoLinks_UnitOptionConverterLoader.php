@@ -28,7 +28,7 @@ class AmazonAutoLinks_UnitOptionConverterLoader {
     }
     
     public function replyToLoad() {
-        new AmazonAutoLinks_Event___Action_UnitOptionConverter;
+        new AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter;
     }
     
 }

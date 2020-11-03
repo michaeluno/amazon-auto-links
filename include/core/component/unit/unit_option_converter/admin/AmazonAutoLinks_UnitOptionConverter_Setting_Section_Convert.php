@@ -12,9 +12,8 @@
  * Adds a form section to an in-page tab.
  * 
  * @since       3.3.0
- * @action      schedule        aal_action_event_convert_unit_options
  */
-class AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert extends AmazonAutoLinks_AdminPage_Section_Base {
 
     protected function _getArguments() {
         return array(
