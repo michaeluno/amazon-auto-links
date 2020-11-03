@@ -208,6 +208,9 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
         if ( ! is_writable( dirname( $sDirPath ) ) ) {
             return false;
         }
+        if ( self::doesDirectoryExist( $sDirPath, false ) ) {
+            return is_writable( $sDirPath );
+        }
         $_iOldUmask = umask( 0 );
         $_bCreated  = mkdir( $sDirPath, $iCHMODMode, false );
         umask( $_iOldUmask );
