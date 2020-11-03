@@ -34,20 +34,18 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
      * The content filter callback method.
      * 
      * Alternatively use the `content_{instantiated class name}` method instead.
+     * @param string $sContent
      */
     public function content( $sContent ) {
         return $this->___getProInfo()
             . $this->___getAffiliateInfo()
-            . $this->___getAnnouncements()
-            ;        
+            . $this->___getAnnouncements();
     }
         /**
          * @return      string
          */    
         private function ___getProInfo() {
-            $_sProImage = esc_url( 
-                AmazonAutoLinks_Registry::getPluginURL( 'asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg' ) 
-            );            
+            $_sProImage = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg', true ) );
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
                 : "<a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
@@ -76,14 +74,14 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
                 . "</p>"
                 . "<a href='{$_sLink}' target='_blank'>"
                     . "<img style='max-width:100%; max-width: 250px;' src='"
-                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/tip/credit_link.jpg' ) )
+                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/tip/credit_link.jpg', true ) )
                         . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>"
                     . "</a>"
                     ;
         }
 
         /**
-         * 
+         * @return string   The plugin announcement output.
          */
         private function ___getAnnouncements() {
             $_sOutput = '';

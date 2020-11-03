@@ -19,8 +19,9 @@ class AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate extends AmazonAutoLi
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
+     *
+     * @param  string $sFieldIDPrefix
+     * @return array
      */    
     public function get( $sFieldIDPrefix='' ) {
                         
@@ -31,7 +32,7 @@ class AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate extends AmazonAutoLi
                 'title'         => __( 'Amazon Auto Links Pro Affiliate ID', 'amazon-auto-links' ),
                 'tip'           => array(
                     "<img style='float: left; margin: 1em 1.6em 1em 0.5em; text-align:center; max-height: 200px;' src='"
-                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/tip/credit_link.jpg' ) )
+                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/tip/credit_link.jpg', true ) )
                         . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>",
                     __( 'If you set your affiliate ID of Amazon Auto Links Pro here, the credit text at the bottom of unit outputs will be linked to the Amazon Auto Links Pro product page.', 'amazon-auto-links' ),
                 ),

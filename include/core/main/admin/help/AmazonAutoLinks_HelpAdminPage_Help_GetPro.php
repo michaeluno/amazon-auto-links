@@ -34,18 +34,20 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
      * @callback add_action() load_{page slug}_{tab slug}
      */
     public function replyToLoadTab( $oFactory ) {
-        
-        $oFactory->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/get_pro.css' );
+        $_sPath = $oFactory->oUtil->isDebugMode()
+            ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/get_pro.css'
+            : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/get_pro.min.css';
+        $oFactory->enqueueStyle( $_sPath );
     }
     
     /**
-     * 
-     * @callback        action      do_{page slug}_{tab slug}
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback add_action() do_{page slug}_{tab slug}
      */
     public function replyToDoTab( $oFactory ) {
         
-        $_sCheckMark        = esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/checkmark.gif' ) );
-        $_sDeclineMark      = esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/declinedmark.gif' ) );
+        $_sCheckMark        = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/upgrade/checkmark.gif', true ) );
+        $_sDeclineMark      = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/declinedmark.gif', true ) );
         $_sAvailable        = __( 'Available', 'amazon-auto-links' );
         $_sUnavailable      = __( 'Unavailable', 'amazon-auto-links' );
         $_sImgAvailable     = "<img class='feature-available' title='{$_sAvailable}' alt='{$_sAvailable}' src='{$_sCheckMark}' />";
@@ -53,7 +55,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
         
     ?>
         <h3><?php _e( 'Get Pro Now!', 'amazon-auto-links' ); ?></h3>
-        <p><?php _e( 'Please consider upgrading to the pro version if you like the plugin and want more useful features, which includes unlimited numbers of categories, units, and items, and more!', 'amazon-auto-links' ); ?></p>
+        <p class="description"><?php _e( 'Please consider upgrading to the pro version if you like the plugin and want more useful features, which includes unlimited numbers of categories, units, and items, and more!', 'amazon-auto-links' ); ?></p>
         <?php $this->___printBuyNowButton(); ?>
         <h3><?php _e( 'Supported Features', 'amazon-auto-links' ); ?></h3>
         <div class="get-pro">
@@ -151,12 +153,11 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
             ?>
             <div class="get-now-button">
                 <a target="_blank" href="<?php echo esc_url( $_sURL ); ?>?lang=<?php echo $_sLang; ?>" title="<?php echo esc_attr( $_sMessage ); ?>">
-                    <img src="<?php echo AmazonAutoLinks_Registry::getPluginURL( 'asset/image/buynowbutton.gif' ); ?>" alt="<?php echo esc_attr( $_sMessage ); ?>" />
+                    <img src="<?php echo AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/upgrade/buynowbutton.gif', true ); ?>" alt="<?php echo esc_attr( $_sMessage ); ?>" />
                 </a>
             </div>    
             <?php
 
         }
-        
-            
+
 }
