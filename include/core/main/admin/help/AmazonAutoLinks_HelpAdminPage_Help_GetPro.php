@@ -29,14 +29,13 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
 
     /**
      * Triggered when the tab is loaded.
-     * 
-     * @callback        action      load_{page slug}_{tab slug}
+     *
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback add_action() load_{page slug}_{tab slug}
      */
     public function replyToLoadTab( $oFactory ) {
         
-        $oFactory->enqueueStyle( 
-            AmazonAutoLinks_Registry::getPluginURL( 'asset/css/get_pro.css' ) 
-        );   
+        $oFactory->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/get_pro.css' );
     }
     
     /**
@@ -55,7 +54,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
     ?>
         <h3><?php _e( 'Get Pro Now!', 'amazon-auto-links' ); ?></h3>
         <p><?php _e( 'Please consider upgrading to the pro version if you like the plugin and want more useful features, which includes unlimited numbers of categories, units, and items, and more!', 'amazon-auto-links' ); ?></p>
-        <?php $this->_printBuyNowButton(); ?>
+        <?php $this->___printBuyNowButton(); ?>
         <h3><?php _e( 'Supported Features', 'amazon-auto-links' ); ?></h3>
         <div class="get-pro">
             <table class="aal-table" cellspacing="0" cellpadding="10">
