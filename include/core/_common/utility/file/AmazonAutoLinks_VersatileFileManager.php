@@ -50,7 +50,7 @@ class AmazonAutoLinks_VersatileFileManager {
      */
     public function __construct( $sIdentifier, $iTimeout=30, $sFileNamePrefix='AALTemp_' ) {
         $this->_sIdentifier        = $sIdentifier;
-        $this->_sTempDirPath       = $this->_getTemporaryDirectoryPath();
+        $this->_sTempDirPath       = $this->getDirectoryPath();
         $this->_bWritable          = AmazonAutoLinks_Utility::getDirectoryCreatedRecursive( $this->_sTempDirPath, $this->_getBaseTemporaryDirectoryPath() );
         $this->_iTimeout           = $iTimeout;
         $this->_sFileNamePrefix    = $sFileNamePrefix;
@@ -68,20 +68,11 @@ class AmazonAutoLinks_VersatileFileManager {
         }
 
     /**
-     * @remark Override this in an extended class.
      * @since  4.3.5
+     * @since  4.4.0    Changed the visibility from protected to public.
      * @return string
      */
-    protected function _getDirectoryPath() {
-        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/versatile';
-    }
-
-    /**
-     * @remark Override this in an extended class.
-     * @since  4.3.5
-     * @return string
-     */
-    protected function _getTemporaryDirectoryPath() {
+    public function getDirectoryPath() {
         return $this->_getBaseTemporaryDirectoryPath() . '/ephemeral';
     }
 
@@ -97,11 +88,14 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * Checks whether it is possible to access the directory and write files.
-     * @return bool
+     * @param  string  $sPath   A file or directory path to check. If empty, the directory path set in the constructor will be applied.
+     * @return boolean
      * @since  4.4.0
      */
-    public function canWrite() {
-        return $this->_bWritable;
+    public function canWrite( $sPath='' ) {
+        return $sPath
+            ? is_writable( $sPath )
+            : $this->_bWritable;
     }
 
     /**
@@ -120,15 +114,22 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since  4.3.4
      */
     public function set( $sText ) {
-        // @todo Use the utility method to create a directory.
+
+        $_bWritable = $this->canWrite();
+
+        // Check if the directory exists.
         $_sDirPath = dirname( $this->_sFilePath );
-        if ( ! is_dir( $_sDirPath ) ) {
-            mkdir( $_sDirPath, 0777, true );
+        if ( ! AmazonAutoLinks_Utility::doesDirectoryExist( $_sDirPath, false ) ) {
+            $_bWritable = AmazonAutoLinks_Utility::getDirectoryCreatedRecursive( $_sDirPath, $this->_getBaseTemporaryDirectoryPath() );
         }
-        if ( ! $this->canWrite() ) {
+
+        // Without this check, file_put_contents() throws a warning.
+        if ( ! $_bWritable ) {
             return false;
         }
+
         return file_put_contents( $this->_sFilePath, $sText, LOCK_EX );
+
     }
 
     /**

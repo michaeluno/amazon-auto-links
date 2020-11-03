@@ -23,7 +23,7 @@ class AmazonAutoLinks_Scratch_PAAPIRequestCounter extends AmazonAutoLinks_Scratc
      */
     public function scratch_GenerateLog() {
         $_oMock    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter', array( 'US' ) );
-        $_sDirPath = $_oMock->call( '_getDirectoryPath' );
+        $_sDirPath = $_oMock->call( 'getDirectoryPath' );
         if ( ! is_dir( $_sDirPath ) ) {
             mkdir( $_sDirPath, 0777, true );
         }

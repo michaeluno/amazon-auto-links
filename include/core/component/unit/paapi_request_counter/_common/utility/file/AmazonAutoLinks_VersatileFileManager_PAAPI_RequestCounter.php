@@ -31,19 +31,10 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
     }
 
     /**
-     * @remark Although there is the protected method of this, to display the log, the directory path needed to retrieve from outside.
      * @return string
      * @since  4.4.0
      */
     public function getDirectoryPath() {
-        return $this->_getDirectoryPath();
-    }
-
-    /**
-     * @return string
-     * @since  4.4.0
-     */
-    protected function _getDirectoryPath() {
         return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/paapi_request_count/' . $this->_sIdentifier; // storing the locale code
     }
 
@@ -75,6 +66,6 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
      */
     public function getFilePath( $iTime=0 ) {
         $iTime = $iTime ? $iTime : time();
-        return $this->_getDirectoryPath() . '/' . date( 'Y/m/d/H', $iTime ) . '.txt';
+        return $this->getDirectoryPath() . '/' . date( 'Y/m/d/H', $iTime ) . '.txt';
     }
 }
