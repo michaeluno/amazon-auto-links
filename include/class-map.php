@@ -1,11 +1,11 @@
 <?php 
 /**
-    Amazon Auto Links v4.3.8b04 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.3.8 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
  */
-return array(
+return array( 
     "AmazonAutoLinks_HelpAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage.php", 
     "AmazonAutoLinks_HelpAdminPage_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_About" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php", 
@@ -451,6 +451,7 @@ return array(
     "AmazonAutoLinks_Debug" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Debug.php", 
     "AmazonAutoLinks_PluginUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_PluginUtility.php", 
     "AmazonAutoLinks_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Utility.php", 
+    "AmazonAutoLinks_Utility_FileSystem" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Utility_FileSystem.php", 
     "AmazonAutoLinks_Utility_String" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Utility_String.php", 
     "AmazonAutoLinks_Utility_XML" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Utility_XML.php", 
     "AmazonAutoLinks_WPUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_WPUtility.php", 
