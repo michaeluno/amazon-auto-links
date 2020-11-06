@@ -5,7 +5,7 @@
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
  */
-return array( 
+return array(
     "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php", 
     "AmazonAutoLinks_AutoInsertLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/AmazonAutoLinks_AutoInsertLoader.php", 
     "AmazonAutoLinks_AutoInsertAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage.php", 
@@ -156,10 +156,10 @@ return array(
     "AmazonAutoLinks_Event___Filter_CustomerReviewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Filter_CustomerReviewCache.php", 
     "AmazonAutoLinks_Unit_Event_Action_CheckTasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Unit_Event_Action_CheckTasks.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader.php", 
-    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php", 
-    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php", 
-    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php", 
-    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php", 
+    "AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/admin/tab/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog.php", 
     "AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog.php", 
