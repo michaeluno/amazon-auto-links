@@ -98,11 +98,13 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_A
         $_iSizeInBytes = file_exists( $_sFilePath )
             ? filesize( $_sFilePath )
             : 0;
+        echo "<div class='debug-output'>";
         AmazonAutoLinks_Debug::dump( array(
             'file path' => $_sFilePath,
             'exists'    => file_exists( $_sFilePath ) ? 'Yes' : 'No',
             'size'      => $this->getReadableBytes( $_iSizeInBytes ),
         ) );
+        echo "</div>";
 
     }
         protected function _getLogFileObject() {
