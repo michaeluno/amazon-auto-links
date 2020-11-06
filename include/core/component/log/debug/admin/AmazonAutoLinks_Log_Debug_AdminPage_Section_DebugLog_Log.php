@@ -20,7 +20,7 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log extends AmazonAut
      */
     protected function _getArguments() {
         return array(
-            'section_id'    => 'log',
+            'section_id'    => 'debug_log',
             'title'         => 'Debug Log',
         );
     }

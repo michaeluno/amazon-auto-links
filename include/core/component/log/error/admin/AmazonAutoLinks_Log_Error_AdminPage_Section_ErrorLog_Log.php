@@ -42,86 +42,70 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
 
     /**
      * Adds form fields.
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param       string $sSectionID
      * @since       3.9.0
      * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
-
-        $_aLogTextAreaAttributes = array(
-            'readonly'  => 'readonly',
-            'style'     => 'min-height: 720px;',
-            'wrap'      => 'off',
-            'class'     => 'width-full log',
-        );
-        $oFactory->addSettingFields(
-            $sSectionID, // the target section id
-            array(
-                'field_id'          => '_filters',
-                'title'             => __( 'Filters', 'amazon-auto-links' ),
-                'content'           => array(
-                    array(
-                        'field_id'          => 'include',
-                        'title'             => __( 'Include', 'amazon-auto-links' ),
-                        'type'              => 'text',
-                        'save'              => false,
-                        'class'             => array(
-                            'input' => 'width-full filter-include',
-                            'field' => 'width-full',
-                        ),
-                    ),
-                    array(
-                        'field_id'          => 'exclude',
-                        'title'             => __( 'Exclude', 'amazon-auto-links' ),
-                        'type'              => 'text',
-                        'save'              => false,
-                        'class'             => array(
-                            'input' => 'width-full filter-exclude',
-                            'field' => 'width-full',
-                        ),
-                    ),
-                ),
-                'description'       => __( 'Type characters that match log entries to include/exclude separated commas.', 'amazon-auto-links' ),
-            ),
-            array(
-                'field_id'          => '_log',
-                'save'              => false,
-                'show_title_column' => false,
-                'class'             => array(
-                    'field' => 'width-full',
-                    'input' => 'width-full log',
-                ),
-                'content'           => $this->___getCopyToClipboardButton()
-                    . $this->___getLogHTMLPart(),
-            ),
-//            array(
-//                'field_id'          => '_log',
-//                'title'             => __( 'Log', 'amazon-auto-links' ),
-//                'type'              => 'textarea',
-//                'save'              => false,
-//                'show_title_column' => false,
-//                'attributes'        => array(
-//                    'readonly'  => 'readonly',
-//                    'style'     => 'min-height: 720px;',
-//                    'wrap'      => 'off',
-//                ),
-//                'class'             => array(
-//                    'field' => 'width-full',
-//                    'input' => 'width-full log',
-//                ),
-//                'value'             => $this->___getErrorLog(),
-//            ),
-            array(
-                'field_id'          => '_clear',
-                'title'             => __( 'Clear', 'amazon-auto-links' ),
-                'type'              => 'submit',
-                'save'              => false,
-                'show_title_column' => false,
-                'value'             => __( 'Clear', 'amazon-auto-links' ),
-            ),
-            array()
-        );
-
+        foreach( $this->_getFields() as $_aFieldset ) {
+            $oFactory->addSettingFields( $sSectionID, $_aFieldset );
+        }
     }
+        /**
+         * @return array[]
+         * @sinec  4.4.0
+         */
+        protected function _getFields() {
+            return array(
+                array(
+                    'field_id'          => '_filters',
+                    'title'             => __( 'Filters', 'amazon-auto-links' ),
+                    'content'           => array(
+                        array(
+                            'field_id'          => 'include',
+                            'title'             => __( 'Include', 'amazon-auto-links' ),
+                            'type'              => 'text',
+                            'save'              => false,
+                            'class'             => array(
+                                'input' => 'width-full filter-include',
+                                'field' => 'width-full',
+                            ),
+                        ),
+                        array(
+                            'field_id'          => 'exclude',
+                            'title'             => __( 'Exclude', 'amazon-auto-links' ),
+                            'type'              => 'text',
+                            'save'              => false,
+                            'class'             => array(
+                                'input' => 'width-full filter-exclude',
+                                'field' => 'width-full',
+                            ),
+                        ),
+                    ),
+                    'description'       => __( 'Type characters that match log entries to include/exclude separated commas.', 'amazon-auto-links' ),
+                ),
+                array(
+                    'field_id'          => '_log',
+                    'save'              => false,
+                    'show_title_column' => false,
+                    'class'             => array(
+                        'field' => 'width-full',
+                        'input' => 'width-full log',
+                    ),
+                    'content'           => $this->___getCopyToClipboardButton()
+                        . $this->___getLogHTMLPart(),
+                ),
+                array(
+                    'field_id'          => '_clear',
+                    'title'             => __( 'Clear', 'amazon-auto-links' ),
+                    'type'              => 'submit',
+                    'save'              => false,
+                    'show_title_column' => false,
+                    'value'             => __( 'Clear', 'amazon-auto-links' ),
+                )
+            );
+        }
         private function ___getCopyToClipboardButton() {
             return "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>";
         }
