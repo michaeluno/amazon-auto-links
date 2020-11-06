@@ -23,9 +23,17 @@ class AmazonAutoLinks_Log_Debug_Event_DebugLog extends AmazonAutoLinks_Event_Err
 
     /**
      * @return string   The name of the option record that stores the log.
+     * @deprecated 4.4.0 No longer uses the options table but a file.
      */
     protected function _getOptionKey() {
         return AmazonAutoLinks_Registry::$aOptionKeys[ 'debug_log' ];
+    }
+
+    /**
+     * @return AmazonAutoLinks_Log_VersatileFileManager_ErrorLog
+     */
+    protected function _getFileHandlerObject() {
+        return new AmazonAutoLinks_Log_VersatileFileManager_DebugLog;
     }
 
 }

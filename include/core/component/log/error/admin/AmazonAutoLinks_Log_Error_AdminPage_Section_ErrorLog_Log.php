@@ -16,8 +16,9 @@
 class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
-     * @var string
-     * @since   4.3.0
+     * @var       string
+     * @since     4.3.0
+     * @deprecatd 4.4.0  Uses a file.
      */
     protected $_sOptionKey = '';
 
@@ -33,12 +34,13 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
      * 
      * @since       3.9.0
      * @return      void
+     * @deprecated  4.4.0
      */
-    protected function _construct( $oFactory ) {
+/*    protected function _construct( $oFactory ) {
 
         $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
 
-    }
+    }*/
 
     /**
      * Adds form fields.
@@ -110,7 +112,10 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
             return "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>";
         }
         private function ___getLogHTMLPart() {
-            $_aLog          = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
+            // @deprecated 4.4.0
+            // $_aLog          = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
+            $_oLogFile      = $this->_getLogFileObject();
+            $_aLog          = $_oLogFile->get();
             $_sLogHTMLPart  = '';
             foreach( array_reverse( $_aLog ) as $_aLogItem ) {
                 $_sLogHTMLPart .= $this->___getLogEntryHTMLPart( $this->getAsArray( $_aLogItem ) );
@@ -118,6 +123,14 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
             return "<div class='log'>" . $_sLogHTMLPart . "</div>";
 
         }
+
+            /**
+             * @return AmazonAutoLinks_Log_VersatileFileManager_ErrorLog
+             */
+            protected function _getLogFileObject() {
+                return new AmazonAutoLinks_Log_VersatileFileManager_ErrorLog;
+            }
+
             private function ___getLogEntryHTMLPart( array $aLogItem ) {
 
                 $_aRequired = array(
@@ -185,9 +198,19 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
 
                 }
 
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param  array $aSubmitInfo
+     * @return array
+     */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
         $oAdminPage->setSettingNotice( '' ); // disable the notice
-        delete_option( $this->_sOptionKey );
+        // @deprecated 4.4.0
+        // delete_option( $this->_sOptionKey );
+        $_oFile = $this->_getLogFileObject();
+        $_oFile->delete();
         return $aInputs;
     }
 

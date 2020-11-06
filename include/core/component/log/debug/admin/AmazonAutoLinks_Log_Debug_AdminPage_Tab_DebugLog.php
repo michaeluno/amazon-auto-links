@@ -41,5 +41,12 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Tab_DebugLog extends AmazonAutoLinks_L
         $this->_enqueueResources( $oAdminPage );
 
     }
-        
+
+    /**
+     * @return AmazonAutoLinks_Log_VersatileFileManager_DebugLog
+     */
+    protected function _getLogFileObject() {
+        return new AmazonAutoLinks_Log_VersatileFileManager_DebugLog;
+    }
+
 }

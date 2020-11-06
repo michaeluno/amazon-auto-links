@@ -19,11 +19,12 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
      * Stores error logs;
      * @var array
      */
-    protected $_aErrorLog = array();
+    protected $_aLog = array();
 
     /**
      * Override in an extended class.
      * @var string
+     * @deprecated 4.4.0
      */
     protected $_sOptionKey = '';
 
@@ -46,7 +47,7 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
             return;
         }
 
-        $this->_sOptionKey = $this->_getOptionKey();
+        // $this->_sOptionKey = $this->_getOptionKey();
 
         add_action( $this->_sActionName, array( $this, 'replyToLogErrors' ), 10, 5 );
 
@@ -54,6 +55,7 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @return string   The name of the option record that stores the log.
+     * @deprecated 4.4.0
      */
     protected function _getOptionKey() {
         return AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
@@ -62,20 +64,25 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
     /**
      * Called when an error is detected and AmazonAutoLinks_Error is instantiated.
      *
-     * @return      void
-     * @since       4.2.0
-     * @since       4.3.0       Added the `$sCurrentHook` parameter.
-     * @callback    action      aal_action_error
+     * @param    integer|string $isCode
+     * @param    string         $sErrorMessage
+     * @param    array          $aData
+     * @param    string         $sCurrentHook
+     * @param    string         $sStackTrace
+     * @since    4.3.0          Added the `$sCurrentHook` parameter.
+     * @callback add_action()   aal_action_error
+     * @since    4.2.0
      */
     public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $sStackTrace='' ) {
 
-        if ( ! $this->_sOptionKey ) {
+        // @deprecated 4.4.0 No longer uses the options table but a file.
+        /*if ( ! $this->_sOptionKey ) {
             AmazonAutoLinks_Debug::log(
                 'The option key is not set.' . PHP_EOL . AmazonAutoLinks_Debug::getStackTrace(),
                 WP_CONTENT_DIR . '/aal_errors.log'
             );
             return;
-        }
+        }*/
 
         $sErrorMessage = trim( $sErrorMessage );
         $sErrorMessage = $sErrorMessage
@@ -88,22 +95,25 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
         $this->___setErrorLogItem( $sErrorMessage, $aData, $sCurrentHook, $sStackTrace );
 
     }
+
         /**
-         * @param string the error message
-         * @param array $aExtra
-         * @since   4.0.0
-         * @since   4.3.0   Changed the scope to `private` from `public`.
-         * @since   4.3.0   Added the `$sCurrentHook` parameter.
+         * @param string $sMessage
+         * @param array  $aExtra
+         * @param string $sCurrentHook
+         * @param string $sStackTrace
+         * @since 4.0.0
+         * @since 4.3.0  Changed the scope to `private` from `public`.
+         * @since 4.3.0  Added the `$sCurrentHook` parameter.
          */
         private function ___setErrorLogItem( $sMessage, array $aExtra=array(), $sCurrentHook='', $sStackTrace='' ) {
 
             // For the first time of calling this method in a page
-            if ( empty( $this->_aErrorLog ) ) {
+            if ( empty( $this->_aLog ) ) {
                 add_action( 'shutdown', array( $this, 'replyToUpdateErrorLog' ) );
             }
             $_iMicroTime = microtime( true );
             $_iIndex     = ( integer ) ( $_iMicroTime * 1000 ); // as the float part will be omitted when assigned as a key, multiple by 1000
-            $this->_aErrorLog[ $_iIndex ] = array(
+            $this->_aLog[ $_iIndex ] = array(
                 // required keys
                 'time'           => $_iMicroTime,
                 'message'        => $sMessage,
@@ -121,16 +131,39 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
      */
     public function replyToUpdateErrorLog() {
 
-        if ( empty( $this->_aErrorLog ) ) {
+        if ( empty( $this->_aLog ) ) {
             return;
         }
-        $_aErrorLog  = $this->getAsArray( get_option( $this->_sOptionKey, array() ) );
-        $_aErrorLog  = $_aErrorLog + $this->_aErrorLog;
-
-        // Keep up to latest 300 items
-        $_aErrorLog = array_slice( $_aErrorLog, $this->_iLogLength * -1, $this->_iLogLength, true );
-        update_option( $this->_sOptionKey, $_aErrorLog );
-
+        // @deprecated 4.4.0
+        // $this->_saveInOptionsTable( $this->_sOptionKey );
+        $this->___saveInFile();
     }
+        private function ___saveInFile() {
+            $_oFile = $this->_getFileHandlerObject();
+            $_aLog  = $_oFile->get();
+            $_aLog  = $_aLog + $this->_aLog;
+            $_aLog  = array_slice( $_aLog, $this->_iLogLength * -1, $this->_iLogLength, true );
+            $_oFile->setLog( $_aLog );
+        }
+
+        /**
+         * @return AmazonAutoLinks_Log_VersatileFileManager_ErrorLog
+         */
+        protected function _getFileHandlerObject() {
+            return new AmazonAutoLinks_Log_VersatileFileManager_ErrorLog;
+        }
+        /**
+         * Stores the log in the options table.
+         * @param string $sOptionKey
+         * @deprecated 4.4.0
+         */
+        /*protected function _saveInOptionsTable( $sOptionKey ) {
+            $_aLog  = $this->getAsArray( get_option( $sOptionKey, array() ) );
+            $_aLog  = $_aLog + $this->_aLog;
+
+            // Keep up to latest 300 items
+            $_aLog = array_slice( $_aLog, $this->_iLogLength * -1, $this->_iLogLength, true );
+            update_option( $sOptionKey, $_aLog );
+        }*/
 
 }

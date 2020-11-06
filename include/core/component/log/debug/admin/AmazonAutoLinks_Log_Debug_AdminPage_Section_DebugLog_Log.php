@@ -29,11 +29,18 @@ class AmazonAutoLinks_Log_Debug_AdminPage_Section_DebugLog_Log extends AmazonAut
      * A user constructor.
      * 
      * @since       4.3.0
-     * @return      void
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @deprecated  4.4.0
      */
-    protected function _construct( $oFactory ) {
-        $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'debug_log' ];
+    // protected function _construct( $oFactory ) {
+    //     $this->_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'debug_log' ];
+    // }
+
+    /**
+     * @return AmazonAutoLinks_Log_VersatileFileManager_DebugLog
+     */
+    protected function _getLogFileObject() {
+        return new AmazonAutoLinks_Log_VersatileFileManager_DebugLog;
     }
 
 }

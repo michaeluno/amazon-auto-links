@@ -115,10 +115,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'tasks'         => 'aal_tasks_version',
         ),
 
-        // 3.9.0
+        // [3.9.0]
+        // @deprecated 4.4.0 Uses a file.
         'error_log'             => 'amazon_auto_links_error_log',
 
-        // 4.3.0
+        // [4.3.0]
+        // @deprecated 4.4.0 Uses a file.
         'debug_log'             => 'amazon_auto_links_debug_log',
 
         // 4.4.0
