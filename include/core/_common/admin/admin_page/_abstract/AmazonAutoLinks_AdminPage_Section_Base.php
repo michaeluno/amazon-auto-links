@@ -58,14 +58,14 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
             return;
         }
 
-        $this->_construct( $oFactory ); // 4.3.0 Moved above `_addSection()`.
+        $this->_construct( $oFactory ); // 4.3.0 Moved above `___addSection()`.
 
-        $this->_addSection( $oFactory, $sPageSlug, $aSectionDefinition );
+        $this->___addSection( $oFactory, $sPageSlug, $aSectionDefinition );
 
     }
 
     /**
-     * @since   3.11.1
+     * @since  3.11.1
      * @return array
      */
     protected function _getArguments() {
@@ -74,7 +74,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
     }
         /**
          * @return array
-         * @since   3.7.9
+         * @since  3.7.9
          *
          * @deprecated 3.11.1   Use getArguments().
          */
@@ -82,7 +82,12 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
             return array();
         }
 
-    private function _addSection( $oFactory, $sPageSlug, array $aSectionDefinition ) {
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param string $sPageSlug
+     * @param array  $aSectionDefinition
+     */
+    private function ___addSection( $oFactory, $sPageSlug, array $aSectionDefinition ) {
         
         add_action( 
             'validation_' . $oFactory->oProp->sClassName . '_' . $this->sSectionID,
@@ -108,19 +113,21 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
 
     /**
      * Called when adding fields.
-     * @remark      This method should be overridden in each extended class.
+     * @param  AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param  string $sSectionID
+     * @remark This method should be overridden in each extended class.
      */
     protected function _addFields( $oFactory, $sSectionID ) {}
  
     /**
      * Called upon form validation.
      *
-     * @param array $aInputs
-     * @param array $aOldInputs
-     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
-     * @param array $aSubmitInfo
-     * @callback        filter      'validation_{class name}_{section id}'
-     * @return array
+     * @param    array $aInputs
+     * @param    array $aOldInputs
+     * @param    AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param    array $aSubmitInfo
+     * @callback add_filter() validation_{class name}_{section id}
+     * @return   array
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
