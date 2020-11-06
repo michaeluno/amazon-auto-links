@@ -17,7 +17,7 @@ use PHPClassMapGenerator\Header\HeaderGenerator;
  * This is meant to be used for the callback function for the spl_autoload_register() function.
  *
  * @remark		The parsed class file must have a name of the class defined in the file.
- * @version		1.1.0
+ * @version		1.1.1
  */
 class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
 
@@ -142,7 +142,7 @@ class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
             if ( file_exists( $sOutputFilePath ) ) {
                 unlink( $sOutputFilePath );
             }
-            file_put_contents( $sOutputFilePath, $this->getMap() . PHP_EOL, FILE_APPEND | LOCK_EX );
+            file_put_contents( $sOutputFilePath, $this->getMap(),LOCK_EX );
         }
 
     /**
@@ -154,7 +154,7 @@ class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
         $_aData = array(
             mb_convert_encoding( '<?php ' . PHP_EOL . $this->sHeaderComment, 'UTF-8', 'auto' ),
             'return' === $this->aOptions[ 'output_var_name' ]
-                ? 'return array( ' . PHP_EOL
+                ? 'return array(' . PHP_EOL
                 : $this->aOptions[ 'output_var_name' ] . ' = array( ' . PHP_EOL,
         );
         foreach( $this->get() as $_sClassName => $_sPath ) {
@@ -191,8 +191,8 @@ class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
         return $this->_getItems( $this->aScanDirPaths, $this->sOutputFilePath );
     }
         /**
-         * @param $aScanDirPaths
-         * @param $sOutputFilePath
+         * @param  array  $aScanDirPaths
+         * @param  string $sOutputFilePath
          * @return array
          */
         protected function _getItems( array $aScanDirPaths, $sOutputFilePath ) {
@@ -254,12 +254,11 @@ class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
 
 
     /**
-     * @param $sBaseDirPath
-     * @param $asScanDirPaths
-     * @param $sOutputFilePath
-     * @param array $aOptions
-     * @since   1.1.0
-     * @return void
+     * @param  string       $sBaseDirPath
+     * @param  array|string $asScanDirPaths
+     * @param  string       $sOutputFilePath
+     * @param  array        $aOptions
+     * @since  1.1.0
      */
     protected function _setProperties( $sBaseDirPath, $asScanDirPaths, $sOutputFilePath, array $aOptions ) {
         $this->sBaseDirPath     = $this->_getPathFormatted( $sBaseDirPath );
@@ -271,9 +270,9 @@ class PHPClassMapGenerator implements interfacePHPClassMapGenerator {
         $this->___setItems();
     }
         /**
-         * @param array $aOptions
+         * @param  array $aOptions
          * @return array
-         * @since   1.1.0
+         * @since  1.1.0
          */
         private function ___getOptionsFormatted( array $aOptions ) {
             $aOptions			    = $aOptions + self::$_aStructure_Options;

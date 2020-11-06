@@ -29,7 +29,7 @@ class FileListGenerator {
     public function get() {
         $_aFiles = array();
         foreach( $this->aDirPaths as $_sDirPath ) {
-            $_aFilesPerDir = $this->___getPerDir( $_sDirPath );
+            $_aFilesPerDir = $this->___getFilePathsPerDirectory( $_sDirPath );
             $_aFiles       = array_merge( $_aFilesPerDir, $_aFiles );
         }
         return array_unique( $_aFiles );
@@ -46,7 +46,7 @@ class FileListGenerator {
          * @param string
          * @return array
          */
-        private function ___getPerDir( $sDirPath ) {
+        private function ___getFilePathsPerDirectory( $sDirPath ) {
 
             $sDirPath            = rtrim( $sDirPath, '\\/' ) . DIRECTORY_SEPARATOR;    // ensures the trailing (back/)slash exists.
             $_aExcludingDirPaths = $this->_getPathsFormatted( $this->aSearchOptions[ 'exclude_dir_paths' ] );

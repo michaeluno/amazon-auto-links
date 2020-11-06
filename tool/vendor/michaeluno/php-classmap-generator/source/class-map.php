@@ -1,11 +1,11 @@
 <?php 
 /**
-    PHP Class Map Generator v1.1.0 by Michael Uno 
+    PHP Class Map Generator v1.1.1 by Michael Uno 
     Generates PHP class maps for auto-load.
     <https://en.michaeluno.jp>
     Michael Uno <2020>; Licensed under MIT
  */
-return array( 
+return array(
     "PHPClassMapGenerator\\PHPClassMapGenerator" => __DIR__ . "/PHPClassMapGenerator.php", 
     "PHPClassMapGenerator\\Autoload" => __DIR__ . "/autoload.php", 
     "PHPClassMapGenerator\\interfacePHPClassMapGenerator" => __DIR__ . "/interfacePHPClassMapGenerator.php", 
