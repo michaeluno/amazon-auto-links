@@ -15,6 +15,27 @@
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility extends AmazonAutoLinks_Unit_Utility {
 
     /**
+     * @param  boolean $bGMTOffset Whether to adjust the time with GMT offset.
+     * @return integer
+     * @since  4.4.0
+     */
+    static public function getDefaultChartStartTime( $bGMTOffset=false ) {
+        return ( ( integer ) strtotime('tomorrow midnight' ) )
+            - ( 86400 * 7 )
+            + ( $bGMTOffset ? self::getGMTOffset() : 0 );
+    }
+
+    /**
+     * @param  boolean $bGMTOffset Whether to adjust the time with GMT offset.
+     * @return integer
+     * @since  4.4.0
+     */
+    static public function getDefaultChartEndTime( $bGMTOffset=false ) {
+        return time() // now
+            + ( $bGMTOffset ? self::getGMTOffset() : 0 );
+    }
+
+    /**
      * @param  array  $aList
      * @param  string $sDelimiter
      * @param  string $sEnclosure

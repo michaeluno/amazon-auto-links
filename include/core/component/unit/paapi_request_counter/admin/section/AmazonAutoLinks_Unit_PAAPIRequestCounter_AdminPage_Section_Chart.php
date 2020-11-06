@@ -51,6 +51,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart extends A
         $_oOption            = AmazonAutoLinks_Option::getInstance();
         $_bDateRange         = $_oOption->isPAAPIRequestCountChartDateRangeSupported();
         $_sProFeatureMessage = $_bDateRange ? null : sprintf( __( 'This feature requires <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ), AmazonAutoLinks_Registry::STORE_URI_PRO );
+        $_oUtil              = new AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility;
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -80,8 +81,8 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart extends A
                 'type'              => 'date_range',
                 'save'              => false,
                 'default'           => array(
-                    'from' => date( 'Y/m/d', time() - ( 86400 * 6 ) ),
-                    'to'   => date( 'Y/m/d', time() ),
+                    'from' => date( 'Y/m/d', $_oUtil->getDefaultChartStartTime( true ) ),
+                    'to'   => date( 'Y/m/d', $_oUtil->getDefaultChartEndTime( true ) ),
                 ),
                 'attributes' => array(
                     'disabled' => $_bDateRange ? null : 'disabled',

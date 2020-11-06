@@ -21,15 +21,6 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
     public $oUtil;
 
     /**
-     * @var integer
-     */
-    private $___iDefaultStartTime;
-    /**
-     * @var integer
-     */
-    private $___iDefaultEndTime;
-
-    /**
      * @var array
      */
     private $___aLog;
@@ -39,9 +30,6 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
      */
     protected function _construct( $oFactory ) {
         $this->oUtil = new AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility;
-        $_iNow       = time();
-        $this->___iDefaultStartTime = $_iNow - ( 86400 * 6 );
-        $this->___iDefaultEndTime   = $_iNow;
     }
 
     /**
@@ -87,7 +75,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
 
             $_sDefaultLocale = AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility::getDefaultLocale();
             $_oLogData       = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever( $_sDefaultLocale );
-            $this->___aLog   = $_oLogData->getCountLog( $_aLogX, $_aLogY, $this->___iDefaultStartTime, $this->___iDefaultEndTime, - $this->getGMTOffset() );
+            $this->___aLog   = $_oLogData->getCountLog( $_aLogX, $_aLogY, $this->oUtil->getDefaultChartStartTime(), $this->oUtil->getDefaultChartEndTime(), $this->getGMTOffset() );
 
             $this->___registerMomentJS();
 
@@ -172,6 +160,41 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
         $_sDefaultLocale   = AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility::getDefaultLocale();
 
         echo "<h3>Debug</h3>";
+        echo "<h4>Start and End Times</h4>";
+        $_iStartTime    = $this->oUtil->getDefaultChartStartTime();
+        $_iStartTimeGMT = $this->oUtil->getDefaultChartStartTime( true );
+        $_iEndTime      = $this->oUtil->getDefaultChartEndTime();
+        $_iEndTimeGMT   = $this->oUtil->getDefaultChartEndTime( true );
+        $_iNow          = time();
+        $_iNowGMT       = time() + $this->oUtil->getGMTOffset();
+        AmazonAutoLinks_Debug::dump( array(
+            'timestamp' => array(
+                'start'      => $_iStartTime,
+                'now'        => $_iNow,
+                'end'        => $_iEndTime,
+            ),
+            'time' => array(
+                'start'           => date( 'Y-m-d H:i:s', $_iStartTime ),
+                'now'             => date( 'Y-m-d H:i:s', $_iNow ),
+                'end'             => date( 'Y-m-d H:i:s', $_iEndTime ),
+            ),
+            'timestamp gmt' => array(
+                'start'  => $_iStartTimeGMT,
+                'now'    => $_iNowGMT,
+                'end'    => $_iEndTimeGMT,
+            ),
+            'time gmt' => array(
+                'start'       => date( 'Y-m-d H:i:s', $_iStartTimeGMT ),
+                'now'         => date( 'Y-m-d H:i:s', $_iNowGMT ),
+                'end'         => date( 'Y-m-d H:i:s', $_iEndTimeGMT ),
+            ),
+            'label gmt' => array(
+                'start' => date( 'Y/m/d', $_iStartTimeGMT ),
+                'now'   => date( 'Y/m/d', $_iNowGMT ),
+                'end'   => date( 'Y/m/d', $_iEndTimeGMT ),
+            ),
+        ) );
+
         echo "<h4>Log</h4>";
         AmazonAutoLinks_Debug::dump( $this->___aLog );
 
