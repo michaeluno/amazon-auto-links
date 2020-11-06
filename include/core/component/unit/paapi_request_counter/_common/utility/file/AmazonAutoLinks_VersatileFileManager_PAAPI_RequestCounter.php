@@ -44,7 +44,12 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
      */
     public function increment() {
         $this->_sFilePath = $this->getFilePath( time() );    // update the file path as it changes on the called time.
-        $this->set( ( integer ) $this->get() + 1 );
+        $_bsCount         = $this->get();
+        if ( false == $_bsCount ) { // if the file is locked by the system,
+            // @todo Implement a fallback.
+            return;
+        }
+        $this->set( ( ( integer ) $_bsCount ) + 1 );
         $this->___scheduleSaveIntoDatabase();
     }
         static private $___aLoaded = array();
