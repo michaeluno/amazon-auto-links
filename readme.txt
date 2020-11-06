@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.1
 Requires MySQL:     5.0.3
-Stable tag:         4.3.8
+Stable tag:         4.3.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Generates links of Amazon products just coming out today. Pick categories and th
 
 Still manually searching products and pasting affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
-The links are tagged with your Amazon Associate ID. This WordPress plugin supports 14 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
+The links are tagged with your Amazon Associate ID. This WordPress plugin supports 17 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
 If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
@@ -40,7 +40,7 @@ If you want to simply display your desired specific product in a post, don't wor
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Germany, Japan, Italy, Spain, United Kingdom, United States, Canada, France, Australia, India, Mexico, Turkey, United Arab Emirates, Brazil, Singapore and Saudi Arabia. China is supported for the category unit type.
+Includes Australia, Brazil, Canada, France, Germany, India, Italy, Japan, Mexico, Netherlands, Singapore, Saudi Arabia, Spain, Turkey, United Arab Emirates, United Kingdom, and United States. China is supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -97,6 +97,7 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 - English
 - Japanese
 - German
+- Italian
 
 == Installation ==
 
@@ -305,6 +306,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.3.9 - 11/06/2020 =
+- Added the Italian translation.
+- Updated the Japanese translation items.
+- Fixed a bug that caused a PHP warning saying the directory already exists with mkdir().
+- Fixed a bug that some translation items were unable to translate.
 
 = 4.3.8 - 11/02/2020 =
 - Added the `File Permissions` field in the `About` tab of the `Help` page.

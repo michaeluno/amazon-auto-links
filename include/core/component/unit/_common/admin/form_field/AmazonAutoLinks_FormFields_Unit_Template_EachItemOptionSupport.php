@@ -58,10 +58,10 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                'after_input'       => "<div style='margin:auto; width:100%; clear: both;'>"
                         . "<img src='" . AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/columns.gif', true ) . "' title='" . __( 'The number of columns', 'amazon-auto-links' ) . "' style='width:220px; margin-top: 8px;' alt='" . esc_attr( __( 'Columns', 'amazon-auto-links' ) ) . "' />"
                     . "</div>",
-                'tip'               => __( 'This option requires a column supported template to be activated.' ),
+                'tip'               => __( 'This option requires a column supported template to be activated.', 'amazon-auto-links' ),
                 'description'       => $_iMaxCol > 1 
                     ? '' 
-                    : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!' ), 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' ),
+                    : ' ' . sprintf( __( 'Get one <a href="%1$s" target="_blank">here</a>!', 'amazon-auto-links' ), 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' ),
                 'default'           => 4,
                 'delimiter'         => '',
             ),

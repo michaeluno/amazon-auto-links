@@ -103,7 +103,7 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
             array(
                 'field_id'              => 'external_provider',
                 'type'                  => 'url',
-                'title'                 => __( 'External oEmbed Provider' ),
+                'title'                 => __( 'External oEmbed Provider', 'amazon-auto-links' ),
                 'description'           => array(
                    __( "Have another WordPress site with this plugin's oEmbed option enabled and specify the URL here so that the embedded contents will be rendered in that site and it saves load on this site.", 'amazon-auto-links' ),
                    __( 'Leave it blank to make the site itself as the provider.', 'amazon-auto-links' ),

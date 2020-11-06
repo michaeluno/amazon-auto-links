@@ -13,7 +13,7 @@
  * @since       2
  * @since       3       Changed the name from `AmazonAutoLinks_Utilities`.
  */
-class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_XML {
+class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     static private $___aObjectCache = array();
     /**
