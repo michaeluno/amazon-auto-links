@@ -48,7 +48,13 @@ $_aFileInfoStruct = [
     'name'     => '@name',
     'version'  => '@version',
 ];
+$_iCount = 1;
 foreach( $_oGenerator->get() as $_sScriptPath ) {
+
+    $_sDirPath       = dirname( $_sScriptPath );
+    $_sBaseNameWOExt = pathinfo( $_sScriptPath, PATHINFO_FILENAME );
+    $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.js';
+    $_sPrevContent   = file_exists( $_sMinScriptPath ) ? trim( file_get_contents( $_sMinScriptPath ) ) : '';
 
     $_aFileInfo      = $_oGenerator->getFileHeaderComment( $_sScriptPath, $_aFileInfoStruct );
     $_sScriptName    = trim( "{$_aFileInfo[ 'name' ]} {$_aFileInfo[ 'version' ]}" );
@@ -56,10 +62,12 @@ foreach( $_oGenerator->get() as $_sScriptPath ) {
     $_oMinifier      = Asika\Minifier\MinifierFactory::create('js' );
     $_oMinifier->addFile( $_sScriptPath );
     $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
-    $_sDirPath       = dirname( $_sScriptPath );
-    $_sBaseNameWOExt = pathinfo( $_sScriptPath, PATHINFO_FILENAME );
-    $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.js';
+    if ( $_sPrevContent === $_sContent ) {
+        continue;
+    }
+
     file_put_contents( $_sMinScriptPath, $_sContent );
-    echo 'Writing to ' . $_sMinScriptPath . $sCarriageReturn;
+    echo "{$_iCount}: Writing to " . $_sMinScriptPath . $sCarriageReturn;
+    $_iCount++;
 }
 echo 'Done!' . $sCarriageReturn;

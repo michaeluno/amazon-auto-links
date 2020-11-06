@@ -51,7 +51,13 @@ $_aFileInfoStruct = [
     'Name'     => 'Template Name:',
     'Version'     => 'Version:',
 ];
+$_iCount = 1;
 foreach( $_oGenerator->get() as $_sFilePath ) {
+
+    $_sDirPath       = dirname( $_sFilePath );
+    $_sBaseNameWOExt = pathinfo( $_sFilePath, PATHINFO_FILENAME );
+    $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.css';
+    $_sPrevContent   = file_exists( $_sMinScriptPath ) ? trim( file_get_contents( $_sMinScriptPath ) ) : '';
 
     $_aFileInfo      = $_oGenerator->getFileHeaderComment( $_sFilePath, $_aFileInfoStruct );
     $_sTitle         = trim( "{$_aFileInfo[ 'name' ]} {$_aFileInfo[ 'version' ]} {$_aFileInfo[ 'Name' ]} {$_aFileInfo[ 'Version' ]}" );
@@ -59,10 +65,12 @@ foreach( $_oGenerator->get() as $_sFilePath ) {
     $_oMinifier      = Asika\Minifier\MinifierFactory::create('css' );
     $_oMinifier->addFile( $_sFilePath );
     $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
-    $_sDirPath       = dirname( $_sFilePath );
-    $_sBaseNameWOExt = pathinfo( $_sFilePath, PATHINFO_FILENAME );
-    $_sMinScriptPath = $_sDirPath . '/' . $_sBaseNameWOExt . '.min.css';
+    if ( $_sPrevContent === $_sContent ) {
+        continue;
+    }
+
     file_put_contents( $_sMinScriptPath, $_sContent );
-    echo 'Writing to ' . $_sMinScriptPath . $sCarriageReturn;
+    echo "{$_iCount}: Writing to " . $_sMinScriptPath . $sCarriageReturn;
+    $_iCount++;
 }
 echo 'Done!' . $sCarriageReturn;
