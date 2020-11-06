@@ -101,10 +101,11 @@ class AmazonAutoLinks_VersatileFileManager {
     /**
      * Returns the file contents if it is not expired.
      * @since  4.3.4
+     * @return false|string false on failure. Otherwise, the file content.
      */
     public function get() {
         return $this->isAlive()
-            ? file_get_contents( $this->_sFilePath )
+            ? @file_get_contents( $this->_sFilePath )
             : '';
     }
 
