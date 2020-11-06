@@ -195,26 +195,26 @@
                     },
                     scales: {
                         xAxes: [{
-                            // type: 'time',
-                            // time: {
-                            //     unit: 'day',
-                            //     displayFormats: {
-                            //         day: 'YYYY-MMM-D',  // the callback function _formatDateLabel() receives values with this format
-                            //     },
-                            //     tooltipFormat: 'll',
-                            //     parser: function ( utcMoment ) {
-                            //         return moment( utcMoment ).utcOffset( aalChartJSLoader.GMTOffset ); // '+0900'
-                            //         // return moment( utcMoment ).utcOffset( '-2300' ); // '+0900'
-                            //     }
-                            // },
-                            // ticks: {
-                            //     callback: _formatDateLabel,
-                            //     source: 'labels'
-                            // },
-                            // scaleLabel: {
-                            //     display:     true,
-                            //     labelString: aalChartJSLoader.labels.dates
-                            // }
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                displayFormats: {
+                                    day: 'YYYY-MMM-D',  // the callback function _formatDateLabel() receives values with this format
+                                },
+                                tooltipFormat: 'll',
+                                parser: function ( utcMoment ) {
+                                    return moment( utcMoment ).utcOffset( aalChartJSLoader.GMTOffset ); // '+0900'
+                                    // return moment( utcMoment ).utcOffset( '-2300' ); // '+0900'
+                                }
+                            },
+                            ticks: {
+                                callback: _formatDateLabel,
+                                source: 'labels'
+                            },
+                            scaleLabel: {
+                                display:     true,
+                                labelString: aalChartJSLoader.labels.dates
+                            }
                         }],
                         yAxes: [{
                             scaleLabel: {
