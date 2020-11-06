@@ -306,6 +306,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.3.9 - 11/06/2020 =
+- Added the Italian translation.
+- Updated the Japanese translation items.
+- Fixed a bug that caused a PHP warning saying the directory already exists with mkdir().
+- Fixed a bug that some translation items were unable to translate.
+
 = 4.3.8 - 11/02/2020 =
 - Added the `File Permissions` field in the `About` tab of the `Help` page.
 - Regenerated the base language file.
