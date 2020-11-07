@@ -23,9 +23,9 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting extends
         return array(
             'section_id'    => '_porting',
             'save'          => false,
-            'title'         => __( 'Data Porting', 'amazon-auto-links' ),
+            'title'         => __( 'Log Data', 'amazon-auto-links' ),
             'description'   => array(
-                __( 'Export/import count log data.', 'amazon-auto-links' ) . ' '
+                __( 'Export/import/delete count log data.', 'amazon-auto-links' ) . ' '
                 . __( 'The locale selected in the above line chart will be applied.', 'amazon-auto-links' ),
             ),
         );
@@ -78,9 +78,50 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting extends
                     ),
                 ),
             ),
+            array(
+                'field_id'          => '_delete',
+                'title'             => __( 'Delete', 'amazon-auto-links' ),
+                'save'              => false,
+                'type'              => 'submit',
+                'value'             => __( 'Delete', 'amazon-auto-links' ),
+                'confirm'           => __( 'Confirm this deletes the entire count log data.', 'amazon-auto-links' ),
+            ),
             array()
         );
 
     }
+
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param  array $aSubmitInfo
+     * @return array
+     * @since  4.4.0
+     */
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+        if ( '_delete' === $this->getElement( $aSubmitInfo, array( 'field_id' ) ) ) {
+            $this->___deleteCountLog( $oAdminPage );
+        }
+        return $aInputs;
+    }
+        /**
+         * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+         * @since 4.4.0
+         */
+        private function ___deleteCountLog( $oAdminPage ) {
+
+            foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ] as $_sOptionKey ) {
+                delete_option( $_sOptionKey );
+            }
+            $_sDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/paapi_request_count';
+            $_bEmptied = $this->emptyDirectory( $_sDirPath );
+            if ( $_bEmptied ) {
+                $oAdminPage->setSettingNotice( __( 'Count log has been deleted.', 'amazon-auto-links' ) );
+                return;
+            }
+            new AmazonAutoLinks_Error( 'PAAPI_REQUEST_COUNT_REMOVE_DIR', 'Could not empty the log directory.', $_sDirPath );
+
+        }
 
 }
