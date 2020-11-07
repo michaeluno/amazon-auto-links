@@ -3,7 +3,6 @@
 ## Minor
 - [PAAPIRequestCounter][4.4.0] Remove log data when the enable option is unchecked.
 - [Refactor][Internal] Move global asset directory to the main component.
-- [Internal] Use files to store plugin error log and debug log.
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve. 
 
