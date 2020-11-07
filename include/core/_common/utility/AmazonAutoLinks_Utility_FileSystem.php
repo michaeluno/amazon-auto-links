@@ -179,26 +179,47 @@ class AmazonAutoLinks_Utility_FileSystem extends AmazonAutoLinks_Utility_XML {
     }
 
     /**
-     * @remark  used upon plugin uninstall.
-     * @param   string $sDirectoryPath
+     * @remark  Used upon plugin uninstall.
      * @since   3.7.10
+     * @param   string  $sDirectoryPath
+     * @return  boolean true if removed; otherwise, false.
      */
     static public function removeDirectoryRecursive( $sDirectoryPath ) {
 
         if ( ! self::doesDirectoryExist( $sDirectoryPath, true ) ) {
-            return;
+            return false;
+        }
+        $_bEmptied = self::emptyDirectory( $sDirectoryPath );
+        return $_bEmptied
+            ? rmdir( $sDirectoryPath )
+            : false;
+
+    }
+
+    /**
+     * Makes a given directory empty.
+     * @param  string  $sDirectoryPath
+     * @return boolean true if the directory becomes empty; otherwise, false.
+     * @since  4.4.0
+     */
+    static public function emptyDirectory( $sDirectoryPath ) {
+
+        if ( ! self::doesDirectoryExist( $sDirectoryPath, true ) ) {
+            return false;
         }
         $_aItems = scandir( $sDirectoryPath );
+        $_aItems = is_array( $_aItems ) ? $_aItems : array();
         foreach( $_aItems as $_sItem ) {
-            if ( $_sItem !== "." && $_sItem !== ".." ) {
-                if ( is_dir($sDirectoryPath . "/" . $_sItem ) ) {
-                    self::removeDirectoryRecursive($sDirectoryPath . "/" . $_sItem );
-                    continue;
-                }
-                unlink($sDirectoryPath . "/" . $_sItem );
+            if ( $_sItem === "." || $_sItem === ".." ) {
+                continue;
             }
+            if ( is_dir($sDirectoryPath . "/" . $_sItem ) ) {
+                self::removeDirectoryRecursive($sDirectoryPath . "/" . $_sItem );
+                continue;
+            }
+            unlink($sDirectoryPath . "/" . $_sItem );
         }
-        rmdir( $sDirectoryPath );
+        return self::isDirectoryEmpty( $sDirectoryPath );
 
     }
 
