@@ -72,15 +72,43 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount ex
                 'field_id'          => '_save',
                 'save'              => false,
                 'type'              => 'submit',
+                'value'             => __( 'Save', 'amazon-auto-links' ),
             ),
             array()
         );
 
     }
 
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param  array $aSubmitInfo
+     * @return array
+     * @since  4.4.0
+     */
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+        if ( ! $aInputs[ 'enable' ] ) {
+            $this->___deleteCountLog( $oAdminPage );
+        }
+        return $aInputs;
+    }
+        /**
+         * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+         * @since 4.4.0
+         */
+        private function ___deleteCountLog( $oAdminPage ) {
 
-    // public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
-    //     return $aInputs;
-    // }
+            foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'paapi_request_counter' ] as $_sOptionKey ) {
+                delete_option( $_sOptionKey );
+            }
+            $_sDirPath = AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/paapi_request_count';
+            $_bEmptied = $this->emptyDirectory( $_sDirPath );
+            if ( $_bEmptied ) {
+                $oAdminPage->setSettingNotice( __( 'Count log has been deleted.', 'amazon-auto-links' ) );
+                return;
+            }
+            new AmazonAutoLinks_Error( 'PAAPI_REQUEST_COUNT_REMOVE_DIR', 'Could not empty the log directory.', $_sDirPath );
 
+        }
 }
