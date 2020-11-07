@@ -16,8 +16,8 @@
 class AmazonAutoLinks_Log_VersatileFileManager_ErrorLog extends AmazonAutoLinks_VersatileFileManager {
 
     protected $_sIdentifier     = 'ErrorLog';
-    protected $_iTimeOut        = 2592000; // 86400 * 30  (30 days)
-    protected $_sFileNamePrefix = 'ErrorLog_';
+    protected $_iTimeOut        = 2592000;      // 86400 * 30  (30 days)
+    protected $_sFileNamePrefix = 'ErrorLog_';  // unused
 
     /**
      * @since 4.4.0
@@ -32,6 +32,14 @@ class AmazonAutoLinks_Log_VersatileFileManager_ErrorLog extends AmazonAutoLinks_
      */
     public function getDirectoryPath() {
         return $this->_getBaseTemporaryDirectoryPath() . '/log';
+    }
+
+    /**
+     * @return string
+     * @since  4.4.0
+     */
+    protected function _getFilePath() {
+        return $this->_sTempDirPath . '/' . $this->_sIdentifier . '.log';
     }
 
     /**
