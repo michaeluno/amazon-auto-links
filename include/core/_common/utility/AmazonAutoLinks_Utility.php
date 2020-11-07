@@ -15,37 +15,6 @@
  */
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
-    static private $___aObjectCache = array();
-    /**
-     * @param string|array $asName  If array, it represents a multi-dimensional keys.
-     * @param mixed        $mValue
-     * @since 4.3.6
-     */
-    static public function setObjectCache( $asName, $mValue ) {
-        self::setMultiDimensionalArray( self::$___aObjectCache, self::getAsArray( $asName ), $mValue );
-    }
-
-    /**
-     * @param array|string $asName
-     * @since 4.3.6
-     */
-    static public function unsetObjectCache( $asName ) {
-        self::unsetDimensionalArrayElement( self::$___aObjectCache, self::getAsArray( $asName ) );
-    }
-
-    /**
-     * Caches values in the class property.
-     *
-     * @remark The stored data will be gone after the page load.
-     * @param  array|string $asName The key of the object cache array. If an array is given, it represents the multi-dimensional keys.
-     * @param  mixed $mDefault
-     * @return mixed
-     * @since  4.3.6
-     */
-    static public function getObjectCache( $asName, $mDefault=null ) {
-        return self::getArrayValueByArrayKeys( self::$___aObjectCache, self::getAsArray( $asName ), $mDefault );
-    }
-    
     /**
      * @param  string $sURL
      * @return string
