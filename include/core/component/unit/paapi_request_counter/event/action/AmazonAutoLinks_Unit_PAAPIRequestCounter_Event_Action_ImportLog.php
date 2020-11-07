@@ -16,6 +16,7 @@
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog extends AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog {
 
     /**
+     * Sets up hooks.
      * @param    AmazonAutoLinks_AdminPageFramework $oFactory
      * @callback add_action() load_{page slug}_{tab slug}
      */
@@ -34,12 +35,16 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog extends Am
     public function replyToGetImportDataFormatted( $sCSV, $aOptions, $sFieldID, $sInputID, $sFormatType, $sOptionKey, $oFactory ) {
 
         try {
-            $this->___saveCountLog( $sCSV );
-        } catch ( Exception $_oException ) {
-            $oFactory->setSettingNotice( $_oException->getMessage() );
-        }
 
+            $this->___saveCountLog( $sCSV );
+
+        } catch ( Exception $_oException ) {
+
+            $oFactory->setSettingNotice( $_oException->getMessage() );
+
+        }
         return $sCSV;
+
     }
 
         /**
@@ -52,7 +57,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog extends Am
             if ( ! $_sLocale ) {
                 throw new Exception( __( 'The locale could not be detected. The data might be corrupt.', 'amazon-auto-links' ) );
             }
-            $_oLog    = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $_sLocale );
+            $_oLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $_sLocale );
             $_oLog->set( $this->uniteArrays( $_oLog->getAll(), $_aCSVLog ) );
             $_oLog->save();
 
@@ -79,4 +84,5 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog extends Am
                 }
                 return $_aLog;
             }
+
 }
