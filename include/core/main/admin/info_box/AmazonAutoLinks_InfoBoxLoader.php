@@ -9,7 +9,7 @@
  */
 
 /**
- * Loads the iofo-box component.
+ * Loads the info-box component.
  *  
  * @package     Amazon Auto Links
  * @since       3.1.0
@@ -38,7 +38,7 @@ class AmazonAutoLinks_InfoBoxLoader {
             $_aTargetPageSlugs,
             'side',                                       // context
             'low'                                     // priority
-        );    
+        );
     
     }    
         /**
