@@ -92,7 +92,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_A
             return;
         }
         echo "<h3>Debug</h3>";
-        echo "<h4>Log File Path</h4>";
+        echo "<h4>Log File</h4>";
         $_oFile        = $this->_getLogFileObject();
         $_sFilePath    = $_oFile->getFilePath();
         $_iSizeInBytes = file_exists( $_sFilePath )
