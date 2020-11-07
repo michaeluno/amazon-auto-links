@@ -167,6 +167,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
         $_iEndTimeGMT   = $this->oUtil->getDefaultChartEndTime( true );
         $_iNow          = time();
         $_iNowGMT       = time() + $this->oUtil->getGMTOffset();
+        echo "<div>";
         AmazonAutoLinks_Debug::dump( array(
             'timestamp' => array(
                 'start'      => $_iStartTime,
@@ -194,20 +195,26 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                 'end'   => date( 'Y/m/d', $_iEndTimeGMT ),
             ),
         ) );
+        echo "</div>";
 
         echo "<h4>Log</h4>";
+        echo "<div>";
         AmazonAutoLinks_Debug::dump( $this->___aLog );
-
+        echo "</div>";
 
         echo "<h4>Database Log</h4>";
         $_oDatabaseLog     = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $_sDefaultLocale );
         $_aLogFromDatabase = $_oDatabaseLog->get( 0, time() );
+        echo "<div>";
         AmazonAutoLinks_Debug::dump( $_aLogFromDatabase );
+        echo "</div>";
 
         echo "<h4>File Log</h4>";
         $_oFileLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( $_sDefaultLocale );
         $_aLogFromFile = $_oFileLog->get( 0, time() );
+        echo "<div>";
         AmazonAutoLinks_Debug::dump( $_aLogFromFile );
+        echo "</div>";
 
     }
 
