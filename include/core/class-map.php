@@ -420,7 +420,7 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting_Misc_FormOption" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php", 
     "AmazonAutoLinks_AdminPage_Setting_Reset" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php", 
     "AmazonAutoLinks_AdminPage_Setting_Reset_Data" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php", 
-    "AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php", 
+    "AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php",
     "AmazonAutoLinks_ToolAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/tool/AmazonAutoLinks_ToolAdminPage.php", 
     "AmazonAutoLinks_ToolAdminPage_Tool" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/tool/AmazonAutoLinks_ToolAdminPage_Tool.php", 
     "AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php", 

@@ -9,11 +9,11 @@
  */
 
 /**
- * Adds the 'Capability' form section to the 'Misc' tab.
+ * Adds the 'Reset Settings' form section to the 'Misc' tab.
  * 
  * @since       3
  */
-class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @return array
@@ -32,8 +32,8 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
     /**
      * A user constructor.
      * 
-     * @since       3
-     * @return      void
+     * @since 3
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _construct( $oFactory ) {
              
@@ -49,8 +49,9 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
     
     /**
      * Adds form fields.
-     * @since       3
-     * @return      void
+     * @since 3
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param string $sSectionID
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
@@ -62,6 +63,8 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
                 'type'              => 'submit',
                 'reset'             => true,
                 'value'             => __( 'Restore', 'amazon-auto-links' ),
+                'confirm'           => __( 'Confirm that this deletes the current stored options and restores the default options.', 'amazon-auto-links' ),
+                'skip_confirmation' => true,
                 'tip'               => __( 'Restore the default options.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'size'          => 30,
@@ -73,13 +76,17 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
                 'type'              => 'checkbox',
                 'label'             => __( 'Delete options and caches when the plugin is uninstalled.', 'amazon-auto-links' ),
             )           
-        );          
-            
-    
+        );
     
     }
-        
-    public function replyToResetOptions( $asKeyToReset, $aInput, $oFactory, $aSubmitInfo ) {
+
+    /**
+     * @param array|string $asKeyToReset
+     * @param array $aInputs
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param array $aSubmitInfo
+     */
+    public function replyToResetOptions( $asKeyToReset, $aInputs, $oFactory, $aSubmitInfo ) {
         
         // Delete the template options as well.
         delete_option(
@@ -101,7 +108,9 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings extends AmazonAutoLin
         delete_option(
             AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ]
         );
-    
+
+        $oFactory->setSettingNotice( __( 'The default options have been restored.', 'amazon-auto-links' ), 'updated' );
+
     }
    
 }

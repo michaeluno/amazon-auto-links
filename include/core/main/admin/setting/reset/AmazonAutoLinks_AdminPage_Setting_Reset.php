@@ -31,11 +31,12 @@ class AmazonAutoLinks_AdminPage_Setting_Reset extends AmazonAutoLinks_AdminPage_
 
     /**
      * Triggered when the tab is loaded.
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
      */
     public function replyToLoadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_AdminPage_Setting_Reset_RestSettings( 
+        new AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions(
             $oAdminPage,
             $this->sPageSlug, 
             array(
