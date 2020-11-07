@@ -54,18 +54,18 @@ class AmazonAutoLinks_VersatileFileManager {
         $this->_bWritable          = AmazonAutoLinks_Utility::getDirectoryCreatedRecursive( $this->_sTempDirPath, $this->_getBaseTemporaryDirectoryPath() );
         $this->_iTimeout           = $iTimeout;
         $this->_sFileNamePrefix    = $sFileNamePrefix;
-        $this->_sFilePath          = $this->___getFilePath();
+        $this->_sFilePath          = $this->_getFilePath();
     }
 
-        /**
-         * @remark Consider the file resides in the server's shared temporary directory.
-         * @return string
-         */
-        private function ___getFilePath() {
-            return $this->_sTempDirPath . '/'
-                . $this->_sFileNamePrefix . md5(site_url() . $this->_sIdentifier )
-                . '.txt';
-        }
+    /**
+     * @remark Consider the file resides in the server's shared temporary directory.
+     * @return string
+     */
+    protected function _getFilePath() {
+        return $this->_sTempDirPath . '/'
+            . $this->_sFileNamePrefix . md5(site_url() . $this->_sIdentifier )
+            . '.txt';
+    }
 
     /**
      * @since  4.3.5
