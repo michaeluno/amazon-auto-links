@@ -121,18 +121,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                     'in_footer'     => true,
                 )
             );
-            $oAdminPage->enqueueScript(
-                $this->isDebugMode()
-                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/import-button.js'
-                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/import-button.min.js',
-                $this->sPageSlug,
-                $this->sTabSlug,
-                array(
-                    'handle_id'     => 'aalImportButton',
-                    'dependencies'  => array( 'jquery', ),
-                    'in_footer'     => true,
-                )
-            );
+
         }
             /**
              * Registers Moment.js for WordPress version that does not support it.
