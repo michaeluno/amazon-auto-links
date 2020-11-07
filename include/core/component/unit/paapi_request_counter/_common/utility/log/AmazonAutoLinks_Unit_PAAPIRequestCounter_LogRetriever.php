@@ -234,6 +234,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever extends AmazonAutoLi
      * @param  integer $iStartTime
      * @param  integer $iEndTime
      * @return string
+     * @since  4.4.0
      */
     public function getAsCSV( $iStartTime, $iEndTime ) {
         $_aLogAsCSV = $this->getCountLog( $_aDates, $_aCounts, $iStartTime, $iEndTime, 0, true, true );
@@ -256,6 +257,16 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever extends AmazonAutoLi
         $_oFileLogData     = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( $this->sLocale );
         $_aLogFromFiles    = $_oFileLogData->get( $iStartTime, $iEndTime );
         return $this->uniteArrays( $_aLogFromDatabase, $_aLogFromFiles );
+    }
+
+    /**
+     * @since 4.4.0
+     */
+    public function delete() {
+        $_oDatabaseLogData = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $this->sLocale );
+        $_oDatabaseLogData->delete();
+        $_oFileLogData     = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( $this->sLocale );
+        $_oFileLogData->delete();
     }
 
 }

@@ -16,6 +16,16 @@
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Base {
 
     /**
+     * @since  4.4.0
+     * @return boolean true if the count log data was deleted, false otherwise.
+     */
+    public function delete() {
+        $_oCounter = new AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter( $this->sLocale );
+        return $this->emptyDirectory( $_oCounter->getDirectoryPath() );
+    }
+
+
+    /**
      * @param  integer $iStartTime  If 0, starts from the first found item.
      * @param  integer $iEndTime    If larger than the current time, the current time will be applied.
      * @param  array   $aFilePaths  Stores the parsed file paths. Used to move log data into the database.

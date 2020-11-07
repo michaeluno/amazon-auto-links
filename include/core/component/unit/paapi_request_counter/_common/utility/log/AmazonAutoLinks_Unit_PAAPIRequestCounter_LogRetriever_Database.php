@@ -66,6 +66,14 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
     }
 
     /**
+     * @since  4.4.0
+     * @return boolean true if the count log data was deleted, false otherwise.
+     */
+    public function delete() {
+        return delete_option( get_option( $this->___getOptionKey( $this->sLocale ) ) );
+    }
+
+    /**
      * @return array
      * @since  4.4.0
      */
