@@ -8,7 +8,7 @@ class AmazonAutoLinks_AdminPageFramework_FieldType_submit extends AmazonAutoLink
     public $aFieldTypeSlugs = array('submit',);
     protected $aDefaultKeys = array('redirect_url' => null, 'href' => null, 'reset' => null, 'email' => null, 'confirm' => '', 'skip_confirmation' => false, 'attributes' => array('class' => 'button button-primary',),);
     protected function getStyles() {
-        return ".amazon-auto-links-field input[type='submit'] {margin-bottom: 0.5em;}.amazon-auto-links-field-submit .submit-confirm-container {display: inline-block;margin-left: 1em;vertical-align: middle;}.amazon-auto-links-field-submit .field-error.submit-confirmation-warning {float: none;margin-left: 0.8em;}";
+        return ".amazon-auto-links-field input[type='submit'] {margin-bottom: 0.5em;}.amazon-auto-links-field-submit .submit-confirm-container {display: inline-block;margin-left: 1em;vertical-align: middle;}.amazon-auto-links-field-submit .field-error.submit-confirmation-warning {float: none;}";
     }
     protected function getScripts() {
         return <<<JAVASCRIPTS
@@ -25,8 +25,8 @@ jQuery( document ).ready( function(){
                 return true;
             }           
             // At this point, the checkbox is not checked.
-            var _sErrorTag = "<span class='field-error submit-confirmation-warning'>* " + _confirmCheckbox.attr( 'data-error-message' ) + "</span>";
-            _fieldSubmit.find( '.submit-confirm-container label' ).append( _sErrorTag );
+            var _sErrorTag = "<p class='field-error submit-confirmation-warning'><span>* " + _confirmCheckbox.attr( 'data-error-message' ) + "</span></p>";
+            _fieldSubmit.find( '.submit-confirm-container' ).append( _sErrorTag );
             return false;        
         } );     
     });            
