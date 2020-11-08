@@ -8,9 +8,9 @@
  */
 
 /**
- * Handles 'url' unit options.
+ * Outputs the 'url' unit.
  * 
- * @since       3.2.0
+ * @since 3.2.0
  */
 class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_lookup {
     
@@ -21,15 +21,13 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
     
     /**
      * Stores the default structure and key-values of the unit.
-     * @remark      Accessed from the base class constructor to construct a default option array.
+     * @remark Accessed from the base class constructor to construct a default option array.
      */    
     static public $aStructure_Default = array(
-    
-        'urls'           => '',  // (string|array)
-        'search_per_keyword'    => true,
-        '_found_items'   => '',  // (string)
-        '_sort'          => 'raw',  // 3.2.1+ (string)
-
+        'urls'               => '',  // (string|array)
+        'search_per_keyword' => false, // [4.4.0] Changed it to false to save API calls.
+        '_found_items'       => '',  // (string)
+        '_sort'              => 'raw',  // [3.2.1] (string)
     );
     
     /**
@@ -53,13 +51,9 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
      * @since  4.0.0 Renamed from format() as it was too general.
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
-
         $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
-        
         $aUnitOptions[ 'urls' ]  = $this->getAsArray( $aUnitOptions[ 'urls' ] );
-                
         return $aUnitOptions;
-        
     }    
 
 }
