@@ -1,5 +1,9 @@
 == Change log ==
 
+= 1.2.8 =
+- Fixed an issue that the image containers were not the same width when there is aa product thumbnail is narrower than others.
+- Fixed an issue that the thumbnails container width stuck out and overlapped with the product body element.
+
 = 1.2.7 =
 - Fixed an issue that some thumbnail images (img) exceeded the height of its container.
 
