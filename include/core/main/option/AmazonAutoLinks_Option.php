@@ -246,8 +246,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
              * 1: show the error
              * 2: show the error as an HTML comment
              * @since   4.1.0   Changed the type to integer from boolean
+             * @since   4.4.0   Changed it to 1 from 2.
              */
-            'show_errors'   => 2,
+            'show_errors'   => 1,
 
             // 3.2.0+
             'show_now_retrieving_message'   => true,
