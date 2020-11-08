@@ -79,8 +79,8 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_ToolAdminPage( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ], $this->sScriptPath );
             new AmazonAutoLinks_HelpAdminPage;
             new AmazonAutoLinks_ReportAdminPage;
-            new AmazonAutoLinks_InfoBoxLoader;
             new AmazonAutoLinks_AdminPage( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], $this->sScriptPath );
+            new AmazonAutoLinks_InfoBoxLoader; // must be called after new AmazonAutoLinks_AdminPage(); otherwise, setting notices do not appear.
 
             /**
              * Delay the check with the below action so that the screen type can be determined.
