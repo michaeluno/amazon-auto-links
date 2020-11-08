@@ -197,7 +197,7 @@ abstract class AmazonAutoLinks_AdminPageFramework_Router extends AmazonAutoLinks
             $aFieldset['tab_slug'] = $this->oUtil->getElement($aSectionsets, array($_sSectionPath, 'tab_slug'), $this->oProp->getCurrentInPageTabSlugIfAdded());
             $_aSectionset = $this->oUtil->getElementAsArray($aSectionsets, $_sSectionPath);
             $aFieldset['section_title'] = $this->oUtil->getElement($_aSectionset, 'title');
-            $aFieldset['capability'] = $aFieldset['capability'] ? $aFieldset['capability'] : $this->_replyToGetCapabilityForForm($this->oUtil->getElement($_aSectionset, 'capability'), $aSectionset['page_slug'], $aSectionset['tab_slug']);
+            $aFieldset['capability'] = $aFieldset['capability'] ? $aFieldset['capability'] : $this->_replyToGetCapabilityForForm($this->oUtil->getElement($_aSectionset, 'capability'), $_aSectionset['page_slug'], $_aSectionset['tab_slug']);
             return parent::_replyToFormatFieldsetDefinition($aFieldset, $aSectionsets);
         }
         public function _replyToFormatSectionsetDefinition($aSectionset) {
