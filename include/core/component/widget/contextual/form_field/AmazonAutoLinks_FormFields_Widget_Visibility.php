@@ -11,20 +11,22 @@
 /**
  * Provides the form fields definitions.
  * 
- * @since           3  
+ * @since 3
  */
 class AmazonAutoLinks_FormFields_Widget_Visibility extends AmazonAutoLinks_FormFields_Base {
 
     /**
      * Returns field definition arrays.
-     * 
-     * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
-     */    
+     *
+     * Pass an empty string to the parameter for meta box options.
+     *
+     * @param  string $sFieldIDPrefix
+     * @param  string $sUnitType
+     * @return array
+     */
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
         
-        $_aFields       = array(
+        return array(
             array(
                 'field_id'      => $sFieldIDPrefix. 'width',
                 'type'          => 'number',
@@ -93,9 +95,6 @@ class AmazonAutoLinks_FormFields_Widget_Visibility extends AmazonAutoLinks_FormF
             array()
         );
 
-       
-        return $_aFields;
-        
     }
       
 }

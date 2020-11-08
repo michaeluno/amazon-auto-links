@@ -39,12 +39,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
         
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToModifyCSSRules' ) );
-        
         add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'replyToSetDefaultOptions' ) );        
         
         
     }    
         /**
+         * @param       string  $sCSSRules
          * @return      string
          */
         public function replyToModifyCSSRules( $sCSSRules ) {
@@ -75,6 +75,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         
         /**
          * Sets the default options.
+         * @param       array $aOptions
          * @return      array
          * @since       3.3.0
          */
@@ -116,7 +117,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         $_aClasses = array(
             'AmazonAutoLinks_FormFields_Widget_ContextualProduct',
             'AmazonAutoLinks_FormFields_Unit_Common',
-//            'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
+           // 'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
@@ -161,6 +162,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
     }
         /**
          * Modifies the 'button_id' field to add lables for selection.
+         * @param       array   $aFieldset
          * @return      array
          * @since       3.3.0
          */
@@ -171,8 +173,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
 
         /**
          * Adds form fields by the given class names.
-         * @since       3.0.3
-         * @return      void
+         * @since 3.0.3
+         * @param array $aClassNames
          */
         private function _addFieldsByFieldClass( $aClassNames ) {     
             foreach( $aClassNames as $_sClassName ) {            
@@ -209,11 +211,15 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 
                 $this->addSettingFields( $aField );
             }
-    
+
     /**
      * Validates the submitted form data.
-     * 
-     * @callback        filter      validation_{instantiated class name}
+     *
+     * @callback add_filter()   validation_{instantiated class name}
+     * @param    array $aSubmit
+     * @param    array $aStored
+     * @param    AmazonAutoLinks_AdminPageFramework_Widget $oAdminWidget
+     * @return   array
      */
     public function validate( $aSubmit, $aStored, $oAdminWidget ) {
         
@@ -221,9 +227,6 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         if ( empty( $aSubmit ) ) {
             return $aSubmit;
         }
-
-        // @fixed 3.6.0 Not sure why {...}_search was used here. It should be {...}_contextual
-//         $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
 
         $_aDefaults = apply_filters( 'aal_filter_default_unit_options_contextual', array() );
         $aSubmit    = array( 'unit_type' => 'contextual' )  // 3.6.0+ for Ajax unit loading
@@ -244,10 +247,6 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      */
     public function content( $sContent, $aArguments, $aFormData ) {
 
-//$sContent = $sContent
-//    . '<h3>Testing</h3>'
-//    . "<div>" . AmazonAutoLinks_Debug::get( $aFormData ) . "</div>";
-
         $aFormData = $this->_getFormattedFormData( $aFormData );        
         if ( 
             ! in_array( 
@@ -260,7 +259,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         }        
 
         // @todo 3.6.0+ Echo JavaScript loading specific outputs.
-//        $_bLoadAsJS = $this->getElement( $aFormData, array( 'load_with_javascript' ) );
+        // $_bLoadAsJS = $this->getElement( $aFormData, array( 'load_with_javascript' ) );
 
         // Store widget instance information so that the output function knows what to do with JavaScript loading.
         $aFormData[ '_widget_option_name' ] = $this->oProp->oWidget->option_name;
@@ -273,10 +272,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         return $sContent . $_sOutput;
     
     }
-        
         /**
-         * 
-         * @return      array
+         * @param   array $aFormData
+         * @return  array
          */
         private function _getFormattedFormData( array $aFormData ) {
             $aFormData = $aFormData + array(
@@ -322,10 +320,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             return $aFormData;
 
         }
-        
+
         /**
          * Returns the output of the widget.
-         * @return      string
+         *
+         * @param  array  $aFormData
+         * @return string
          */
         private function _getOutput( $aFormData ) {
             $aFormData[ 'unit_type' ] = 'contextual';

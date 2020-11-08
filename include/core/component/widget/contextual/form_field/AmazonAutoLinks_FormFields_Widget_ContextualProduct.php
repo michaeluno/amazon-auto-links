@@ -13,17 +13,17 @@
  * 
  * @since           3
  * @since           3.5.0       Changed the parent class to `AmazonAutoLinks_FormFields_ContextualUnit_Main` from `AmazonAutoLinks_FormFields_Base`.
- * @extends         AmazonAutoLinks_FormFields_ContextualUnit_Main
  */
 class AmazonAutoLinks_FormFields_Widget_ContextualProduct extends AmazonAutoLinks_FormFields_ContextualUnit_Main {
 
     /**
      * Returns field definition arrays.
-     * 
-     * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
-     */    
+     *
+     * Pass an empty string to the parameter for meta box options.
+     *
+     * @param  string $sFieldIDPrefix
+     * @return array
+     */
     public function get( $sFieldIDPrefix='' ) {
 
         $_aFields       = array(
