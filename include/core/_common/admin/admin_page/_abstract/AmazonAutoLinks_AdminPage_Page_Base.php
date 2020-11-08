@@ -11,12 +11,13 @@
 /**
  * Provides an abstract base for adding pages.
  * 
- * @since       3
+ * @since 3
  */
 abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_AdminPage_RootBase {
 
     /**
      * Stores the factory object.
+     * @var AmazonAutoLinks_AdminPageFramework
      */
     public $oFactory;
 
@@ -27,6 +28,8 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
 
     /**
      * Sets up hooks and properties.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param array $aPageArguments
      */
     public function __construct( $oFactory, array $aPageArguments=array() ) {
         
@@ -71,6 +74,7 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     /**
      * Called when the page loads.
      *
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
      public function replyToLoadPage( $oFactory ) {
          $this->_loadPage( $oFactory );
@@ -87,7 +91,6 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
      * @since   4.4.0
      * @remark  Override this method in an extended class/
      * @param   AmazonAutoLinks_AdminPageFramework $oFactory
-     * @return  void
      */
     protected function _doPageSettings( $oFactory ) {
 
@@ -97,14 +100,20 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
 
     }
 
-
     /**
-     * @param $oFactory
-     * @since   3.7.9
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @since 3.7.9
      */
     protected function _loadPage( $oFactory ) {}
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @since 3.7.9
+     */
     protected function _doPage( $oFactory ) {}
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @since 3.7.9
+     */
     protected function _doAfterPage( $oFactory ) {}
-
 
 }

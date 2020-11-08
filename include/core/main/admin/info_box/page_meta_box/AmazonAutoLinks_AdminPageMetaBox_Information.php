@@ -15,26 +15,23 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_Admin
      */
     public function setUp() {
 
-        $_bProInstalled    = class_exists(
-            'AmazonAutoLinksPro_Registry', 
-            false       // disable auto-load for performance
-        );
-        
+        $_bProInstalled    = class_exists( 'AmazonAutoLinksPro_Registry', false );
         $_oOption          = AmazonAutoLinks_Option::getInstance();
         $_bJoinedAffiliate = $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' );
         
         // Disable the meta box if the Pro version exists.
         if ( $_bProInstalled && $_bJoinedAffiliate ) {
             $this->oProp->aPageSlugs = array();
-        }        
+        }
         
-    }    
+    }
     
     /**
      * The content filter callback method.
      * 
      * Alternatively use the `content_{instantiated class name}` method instead.
-     * @param string $sContent
+     * @param  string $sContent
+     * @return string
      */
     public function content( $sContent ) {
         return $this->___getProInfo()

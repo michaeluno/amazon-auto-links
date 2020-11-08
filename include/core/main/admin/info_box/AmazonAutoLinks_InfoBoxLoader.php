@@ -21,7 +21,7 @@ class AmazonAutoLinks_InfoBoxLoader {
      */
     public function __construct() {
         
-        $_aTargetPageSlugs = array( // page slugs
+        $_aTargetPageSlugs = array(
             AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
             AmazonAutoLinks_Registry::$aAdminPages[ 'help' ],
@@ -33,29 +33,26 @@ class AmazonAutoLinks_InfoBoxLoader {
         }
             
         new AmazonAutoLinks_AdminPageMetaBox_Information(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Information', 'amazon-auto-links' ), // title
+        null,                                // meta box id - passing null will make it auto generate
+            __( 'Information', 'amazon-auto-links' ),  // title
             $_aTargetPageSlugs,
-            'side',                                       // context
-            'low'                                     // priority
+            'side',                            // context
+            'low'                               // priority
         );
     
     }    
         /**
-         * @return      boolean
+         * @param   array   $aTargetPageSlugs
+         * @return  boolean
          */
         private function _shouldProceed( $aTargetPageSlugs ) {
-        
             if ( ! is_admin() ) {
                 return false;
-            }        
-        
+            }
             if ( ! isset( $_GET[ 'page' ] ) ) {
                 return false;
             }
-            
             return in_array( $_GET[ 'page' ], $aTargetPageSlugs );
-        
         }
     
 }
