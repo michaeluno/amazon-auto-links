@@ -15,11 +15,12 @@
 .log .log-item {
     margin: 0.32em 0 0 0.32em;
 }
-.log .log-item-title  {
+.log .log-item-title {
     margin: 0;
     font-weight: normal;
     font-size: 1em;
     line-height: 1.4; /* to be same as log-item-message */
+    word-break: break-all; /* without this, a long title breaks the layout */
 }
 .log .log-item-message {
     margin: 0;
@@ -37,7 +38,7 @@
 
 .log .log-item-head {
     display: inline;
-    white-space: nowrap;
+    /*white-space: nowrap;*/ /* broke the layout */
 }
 
 
