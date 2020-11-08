@@ -34,22 +34,20 @@ class AmazonAutoLinks_CustomOEmbed_Content_NonIframe {
     }
 
     /**
-     * @param $aMatches
-     * @param $aAttributes
-     * @param $sURL
-     * @param $aAttributesRaw
-     *
-     * @return false|string
-     * @callback function wp_embed_register_handler
+     * @param    array  $aMatches
+     * @param    array  $aAttributes
+     * @param    string $sURL
+     * @param    array  $aAttributesRaw
+     * @return   false|string
+     * @callback wp_embed_register_handler()
      */
     public function replyToSimulateWPPost( $aMatches, $aAttributes, $sURL, $aAttributesRaw ) {
         $_oOption      = AmazonAutoLinks_Option::getInstance();
         $_aArguments   = array(
-            'uri'         => $sURL,
+            'uri'         => urldecode( $sURL ),
             'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
         );
         return AmazonAutoLinks( $_aArguments, false );
     }
-
 
 }
