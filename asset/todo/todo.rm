@@ -1,6 +1,7 @@
 # Todos
 
 ## Minor
+- [Internal] Fix an issue that reusing of old caches of HTTP requests on an HTTP request error is not working.
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
