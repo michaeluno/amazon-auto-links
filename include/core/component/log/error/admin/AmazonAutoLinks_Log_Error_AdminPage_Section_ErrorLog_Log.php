@@ -151,7 +151,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                 $_sStackTrace  = $this->getElement( $aLogItem, array( 'stack_trace' ), '' );
                 $_sDetails     = $this->___getArrayRepresentation( $_aExtra, $_sPad );
                 $_sDetails     = $_sDetails
-                    ? "<div class='extra'>" . $_sDetails . "</div>"
+                    ? "<div class='extra'>" . strip_tags( $_sDetails ) . "</div>"
                     : '';
                 $_sDetails    .= ( $_sStackTrace
                     ? "<textarea class='stack-trace' wrap='off' readonly='readonly'>" . $_sStackTrace . "</textarea>"
@@ -162,7 +162,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                                 . "<h5 class='log-item-title'>" . $_sTime . $_sPageLoadID . $_sCurrentHook . $_sURL . "</h5>"
                                 . (
                                     $aLogItem[ 'message' ]
-                                        ? "<p class='log-item-message'>" . $_sPad . $aLogItem[ 'message' ] . "</p>"
+                                        ? "<p class='log-item-message'>" . $_sPad . strip_tags( $aLogItem[ 'message' ] ) . "</p>"
                                         : ''
                                 )
                             . "</div>"
