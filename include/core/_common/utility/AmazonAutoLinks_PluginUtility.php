@@ -11,7 +11,6 @@
 /**
  * Provides plugin specific utility methods that uses WordPress built-in functions.
  *
- * @package     Amazon Auto Links
  * @since       3
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
@@ -188,16 +187,15 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @param string $sText
-     *
-     * @return array    An array holding found ASINs.
-     * @since   4.0.0
+     * @param  string $sText    The text to extract ASINs from.
+     * @return array  An array holding found ASINs.
+     * @since  4.0.0
      */
     static public function getASINs( $sText ) {
         $sText = preg_replace(
             array(
                 '/[A-Z0-9]{11,}/',      // Remove strings like an ASIN but with more than 10 characters.
-                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers with heading `qid=`.
+                '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers with heading `qid=`.
             ),
             '',
             $sText
@@ -615,9 +613,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      void
      */
     static public function goToAPIAuthenticationPage()  {
-        exit(
-            wp_safe_redirect( self::getAPIAuthenticationPageURL() )
-        );        
+        exit( wp_safe_redirect( self::getAPIAuthenticationPageURL() ) );
     }
     
     /**
