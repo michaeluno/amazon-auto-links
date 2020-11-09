@@ -41,12 +41,26 @@ class AmazonAutoLinks_CustomOEmbed_Loader {
         new AmazonAutoLinks_CustomOEmbed_Content_Iframe;
         if ( ! $_oOption->get( array( 'custom_oembed', 'use_iframe' ) ) ) {
             new AmazonAutoLinks_CustomOEmbed_Content_NonIframe;
+            return;
         }
+
+        // Add resources for iframe
+        add_action( 'wp_enqueue_scripts', array( $this, 'replyToLoadResources' ) );
 
         // For debugging
         // add_filter( 'the_content', array( $this, 'testMeta' ) );
 
     }
+        public function replyToLoadResources() {
+
+            // array(), $ver = false, $in_footer = false
+            $_sPath = defined( 'WP_DEBUG' ) && WP_DEBUG
+                ? self::$sDirPath . '/asset/js/iframe-height-adjuster.js'
+                : self::$sDirPath . '/asset/js/iframe-height-adjuster.min.js';
+            $_sURL  = AmazonAutoLinks_Utility::getSRCFromPath( $_sPath );
+            wp_enqueue_script( 'aal-embed-height-adjuster', $_sURL, array(), false, false );
+
+        }
 
     private function ___loadAdminPages() {
         if ( ! is_admin() ) {

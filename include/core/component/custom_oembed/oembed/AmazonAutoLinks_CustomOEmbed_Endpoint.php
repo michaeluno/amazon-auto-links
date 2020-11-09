@@ -64,7 +64,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
             'scrolling'     => 'no',
             'marginwidth'   => '0',
             'marginheight'  => '0',
-            'class'         => 'wp-embedded-content',
+            'class'         => 'wp-embedded-content aal-embed',
             'data-secret'   => $_sNonce,       // without this wp-embed.js adds the `src` attribute and it causes to load the frame source again which results in calling the unit output function twice in a very short period of time which causes duplicate API requests.
         );
         $_sIFrame = "<iframe " . AmazonAutoLinks_Utility::getAttributes( $_aAttributes ) . "></iframe>";
