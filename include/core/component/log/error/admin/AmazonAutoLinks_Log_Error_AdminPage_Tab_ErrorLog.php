@@ -86,29 +86,4 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_A
             );
         }
 
-    protected function _doAfterTab( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! ( $_oOption->isDebug() || $_oOption->isDebugMode() ) ) {
-            return;
-        }
-        echo "<h3>Debug</h3>";
-        echo "<h4>Log File</h4>";
-        $_oFile        = $this->_getLogFileObject();
-        $_sFilePath    = $_oFile->getFilePath();
-        $_iSizeInBytes = file_exists( $_sFilePath )
-            ? filesize( $_sFilePath )
-            : 0;
-        echo "<div class='debug-output'>";
-        AmazonAutoLinks_Debug::dump( array(
-            'file path' => $_sFilePath,
-            'exists'    => file_exists( $_sFilePath ) ? 'Yes' : 'No',
-            'size'      => $this->getReadableBytes( $_iSizeInBytes ),
-        ) );
-        echo "</div>";
-
-    }
-        protected function _getLogFileObject() {
-            return new AmazonAutoLinks_Log_VersatileFileManager_ErrorLog;
-        }
-
 }

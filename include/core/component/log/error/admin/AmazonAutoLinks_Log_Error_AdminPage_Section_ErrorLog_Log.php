@@ -59,6 +59,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
          * @sinec  4.4.0
          */
         protected function _getFields() {
+            $_oOption = AmazonAutoLinks_Option::getInstance();
             return array(
                 array(
                     'field_id'          => '_filters',
@@ -105,9 +106,30 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                     'save'              => false,
                     'show_title_column' => false,
                     'value'             => __( 'Clear', 'amazon-auto-links' ),
+                ),
+                array(
+                    'field_id'          => '_debug_title',
+                    'title'             => 'Debug',
+                    'if'                => $_oOption->isDebug() || $_oOption->isDebugMode(),
+                    'save'              => false,
+                    'content'           => $this->___getDebugOutput(),
                 )
             );
         }
+            private function ___getDebugOutput() {
+                $_oFile        = $this->_getLogFileObject();
+                $_sFilePath    = $_oFile->getFilePath();
+                $_iSizeInBytes = file_exists( $_sFilePath )
+                    ? filesize( $_sFilePath )
+                    : 0;
+                return "<div class='debug-output'>"
+                        . AmazonAutoLinks_Debug::get( array(
+                            'file path' => $_sFilePath,
+                            'exists'    => file_exists( $_sFilePath ) ? 'Yes' : 'No',
+                            'size'      => $this->getReadableBytes( $_iSizeInBytes ),
+                        ) )
+                    .  "</div>";
+            }
         private function ___getCopyToClipboardButton() {
             return "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>";
         }
