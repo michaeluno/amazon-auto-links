@@ -1,17 +1,26 @@
 # Todos
 
 ## Minor
-- [PAAPIRequestCounter][4.4.0] Remove log data when the enable option is unchecked.
-- [Refactor][Internal] Move global asset directory to the main component.
+- [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
-- [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve. 
+- [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
+- [UI] Show a warning to the user when the default locale and the associate tag are not set. 
 
-## Meager
-- [Feature] For the `embed` unit type, when the user pastes a search result URL of an Amazon store, fetch products from the search result page and display them. 
-- [UI] Make the General setting tab the default in the Settings page.
-- [UI] Deprecate the Authentication setting tab and add the PA-API setting tab which includes the today's request counts, test API keys input, recent PA-API errors, and last connected time.   
-- [Feature] Add a PA-API request counter and its chart.
-- [Feature] Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
+## Meager 
+- [4.4.0][Feature] For the `embed` unit type, when the user pastes a search result URL of an Amazon store, fetch products from the search result page and display them. 
+- [4.5.0][UI] Make the General setting tab the default in the Settings page. 
+- [4.5.0][UI] Add the PA-API setting Tab.
+    - Deprecate the Authentication setting tab.
+    - Include the today's request counts. 
+    - Include the test API keys input and deprecate the automatic connection test as it consumes API calls. 
+    - Display recent PA-API errors
+    - Display the last connected time.
+    - Add a UI for the timed blacklisted ASINs that allows the user to remove and add them.
+    - Allow multiple locales to set API keys.
+    - Deprecate `$oOption->isAPIConnected()` checks.
+- [4.5.0][Feature][Timed Blacklist] 
+    - Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
+    - [UI] Add the timed blacklist ASINs UI in the PA-API tab. 
 - [Internal] Add the SubscriptionID parameter to product links when AWS keys are given.
 - [Internal] Reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - [Feature] Introduce a new unit type Comparison Table.
