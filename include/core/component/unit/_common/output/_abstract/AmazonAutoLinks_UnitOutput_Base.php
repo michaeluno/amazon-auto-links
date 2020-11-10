@@ -552,8 +552,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         // c: only errors
-        if ( isset( $_aError[ 'Message' ], $_aError[ 'Code' ] ) ) {
-            return $_aError[ 'Code' ] . ': ' . $_aError[ 'Message' ];
+        if ( isset( $_aError[ 'Message' ] ) ) {
+            $_aError = $_aError + array( 'Code' => '' );
+            $_sCode  = $_aError[ 'Code' ] ? $_aError[ 'Code' ] . ': ' : '';
+            return $_sCode . $_aError[ 'Message' ];
         }
 
         // d: no error
