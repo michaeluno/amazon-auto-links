@@ -76,10 +76,10 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
             $_sClassName = isset( $_sClassName ) ? $_sClassName : '';
             throw new Exception(
                 // results array
-                array(
+                serialize( array(
                     // each result array
                     $this->___getExceptionResult( $_oException, $_sClassName, '', '' )
-                )
+                ) )
             );
         }
 

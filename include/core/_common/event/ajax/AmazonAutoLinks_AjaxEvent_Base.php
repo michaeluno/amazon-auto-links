@@ -83,8 +83,8 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
 
         } catch ( Exception $_oException ) {
 
-            $_bSuccess = false;
-            $_asMessage = $_oException->getMessage();
+            $_bSuccess  = false;
+            $_asMessage = maybe_unserialize( $_oException->getMessage() );
 
         }
         exit(
