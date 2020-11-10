@@ -119,58 +119,8 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 );
                 $_aHTMLBodies[ $_sURL ] = $_oHTTP->getBody();
             }
-            // Set a debug output
-            $this->___setDebugInfoForHTMLBodies( $_aHTMLBodies );
             return $_aHTMLBodies;
 
         }
-            
-            /**
-             * Stores retrieved HTML bodies for debug outputs.
-             * @since       3.2.2
-             */
-            private $_aHTMLs = array();
-            /**
-             * @param      array $aHTMLs
-             * @since      3.2.2
-             * @return     void
-             */
-            private function ___setDebugInfoForHTMLBodies( array $aHTMLs ) {
-                if ( ! $this->oOption->isDebug() ) {
-                    return;
-                }
-                $this->_aHTMLs = $aHTMLs;
-                add_filter( 
-                    'aal_filter_unit_output',
-                    array( $this, '_replyToAddHTMLBodies' ),
-                    20,  // priority
-                    3    // 3 parameters
-                );                
-            }
-                /**
-                 * @since    3.2.2
-                 * @param    string $sProductHTML
-                 * @param    string $sASIN
-                 * @param    string $sLocale
-                 * @return   string
-                 * @callback add_filter()      aal_filter_unit_output
-                 */
-                public function _replyToAddHTMLBodies( $sProductHTML, $sASIN, $sLocale ) {
-                    remove_filter(
-                        'aal_filter_unit_output',
-                        array( $this, '_replyToAddHTMLBodies' ),
-                        20  // priority
-                    );
-                    $_aHTMLs = $this->_aHTMLs;
-                    $this->_aHTMLs = array();   // reset for next outputs.
-                    return $sProductHTML
-                        . '<pre class="debug" style="max-height: 300px; overflow-y: scroll; overflow-x: auto; padding: 0 1em; word-wrap: break-word; word-break: break-all; margin: 1em 0;">'
-                            . '<h3>' 
-                                . __( 'Debug Info', 'amazon-auto-links' ) 
-                                . ' - ' . __( 'HTTP Bodies', 'amazon-auto-links' ) 
-                            . '</h3>'
-                            . AmazonAutoLinks_Debug::get( $_aHTMLs )      
-                        . "</pre>";
-                }
 
 }

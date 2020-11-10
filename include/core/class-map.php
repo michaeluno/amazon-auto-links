@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.0b01 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.0b02 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -284,6 +284,7 @@ return array(
     "AmazonAutoLinks_FormFields_URLUnit_Submit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Submit.php", 
     "AmazonAutoLinks_PostMetaBox_URLUnit_Advanced" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_PostMetaBox_URLUnit_Advanced.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Main_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php", 
+    "AmazonAutoLinks_Unit_URL_Event_DebugOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php", 
     "AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher.php", 
     "AmazonAutoLinks_Unit_URL_Event_RenewCacheAction" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_RenewCacheAction.php", 
     "AmazonAutoLinks_UnitOption_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php", 
