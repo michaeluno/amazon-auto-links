@@ -22,7 +22,6 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
     public function __construct() {
 
         $_oOption  = AmazonAutoLinks_Option::getInstance();
-
         $_bEnabled = $_oOption->get( 'convert_links', 'enabled' );
         if ( ! $_bEnabled ) {
             return;
@@ -42,16 +41,19 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
 
 
     }
+
         /**
          * Sets up hooks
+         *
+         * @param AmazonAutoLinks_Option $oOption
          */
-        private function ___setHooks( $_oOption ) {
+        private function ___setHooks( $oOption ) {
             // Set hooks
-            $_sFilterHooks = $_oOption->get( 'convert_links', 'filter_hooks' );
+            $_sFilterHooks = $oOption->get( 'convert_links', 'filter_hooks' );
             $_sFilterHooks = str_replace( array( "\r\n", "\r" ), "\n", $_sFilterHooks );
             $_aFilterHooks = explode( "\n", $_sFilterHooks );
 
-            $_aWhere = $this->getAsArray( $_oOption->get( 'convert_links', 'where' ) );
+            $_aWhere = $this->getAsArray( $oOption->get( 'convert_links', 'where' ) );
             foreach( $_aWhere as $_sHookName => $_bEnabled ) {
                 if ( ! $_bEnabled ) {
                     continue;
@@ -69,6 +71,7 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
         }
 
     /**
+     * @param   string  $sHTML
      * @return  string
      */
     public function replyToFilterContentsForPosts( $sHTML ) {
@@ -80,22 +83,18 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
+     * @param   string  $sHTML
      * @return  string
      */
     public function replyToFilterContents( $sHTML ) {
-        return preg_replace_callback(
-            $this->___getPattern(),
-            array( $this, 'replyToConvertLink' ),
-            $sHTML
-        );
+        return preg_replace_callback( $this->___getPattern(), array( $this, 'replyToConvertLink' ), $sHTML );
 
     }
-
         /**
-         * @param array $aMatches
-         * @remark $aMatches[ 2 ] contains the url
-         * @return string
-         * @callback    preg_replace_callback()
+         * @param    array $aMatches
+         * @remark   $aMatches[ 2 ] contains the url
+         * @return   string
+         * @callback preg_replace_callback()
          */
         public function replyToConvertLink( $aMatches ) {
 
@@ -116,20 +115,10 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
                     . $_sURL
                 . $aMatches[ 4 ];
         }
-        /**
-         * @return  boolean
-         * @deprecated      kept for debugging
-         */
-        private function ___hasAmazonLinks( $sHTML ) {
-            $_sPattern  = '\shref\=["\']'; // src attribute
-            $_sPattern .= "(https?\:\/\/)"; // SCHEME
-            $_sPattern .= ".+?amazon\.";
-            if ( preg_match( "/" . $_sPattern . "/i", $sHTML ) ) {
-                return true;
-            }
-            return false;
-        }
 
+        /**
+         * @return string A regex pattern.
+         */
         private function ___getPattern() {
 
             $_sPatternHref  = "("; // first element open
@@ -159,6 +148,7 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
             // match all characters, including newlines
             $_sNeedle .= "U"; // Pattern Modifier - makes the regex ungready
             return $_sNeedle;
+
         }
 
 }
