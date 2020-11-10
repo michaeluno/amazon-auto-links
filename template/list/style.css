@@ -391,6 +391,10 @@
 .wp-embed .amazon-products-container-list .amazon-product-thumbnail {
     width: auto !important; /* Fixes the thumbnail width sticking out and overlaps with the product body */
 }
+.wp-embed .amazon-products-container-list .now-retrieving {
+    font-size: small;
+}
+
 /* Buttons */
 .amazon-products-container-list .amazon-auto-links-button-container button {
     margin: 0 auto;

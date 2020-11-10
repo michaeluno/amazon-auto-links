@@ -1,5 +1,5 @@
-- Added the ability to log PA-API request counts.
-- Tweaked the style of the `List` template regarding the thumbnail width.
+- Added the ability to log PA-API request counts.   
+- Tweaked the style of the `List` template regarding the thumbnail width and the font size of now-retrieving elements in embedded iframe.
 - Fixed a bug that `Item Look-up` units failed to retrieve products with PA-API with a certain number of items.   
 - Fixed a bug that did not resume now-retrieving elements for iframe embedded outputs. 
 - Fixed a bug that caused a PHP notice, "file_get_contents(): read of ... bytes failed with errno=13 Permission denied in ...AmazonAutoLinks_VersatileFileManager.php on line 107."
