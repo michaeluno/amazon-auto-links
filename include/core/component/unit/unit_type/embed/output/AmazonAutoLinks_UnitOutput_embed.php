@@ -37,6 +37,13 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     public static $aStructure_Product = array();
 
     /**
+     * Indicates whether the given URLs contain a non-product URL.
+     * @var bool
+     * @since 4.4.0
+     */
+    private $___bNonProductURL = false;
+
+    /**
      * Fetches product data and returns the associative array containing the output of product links.
      *
      * @param array $aURLs
@@ -44,40 +51,99 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      */
     public function fetch( $aURLs=array() ) {
 
-        $_aURLs     = preg_split( "/\s+/", trim( ( string ) $this->oUnitOption->get( 'uri' ) ), 0, PREG_SPLIT_NO_EMPTY );
-        $_aURLs     = array_merge( $aURLs, $_aURLs );
-        $_aProducts = array();
-        $_iCount    = ( integer ) $this->oUnitOption->get( 'count' );
-        $_sLanguage = $this->oUnitOption->get( 'language' );
-        $_sURL      = '';
-        foreach( $_aURLs as $_iIndex => $_sURL ) {
-            if ( $_iIndex > $_iCount ) {
-                break;
-            }
-            // multiple ASINs can be embedded in a single URL like https://amazon.com/dp/ABCDEFGHIJ?tag=my-associate-21,ABCDEFGHI2,ABCDEFGHI3
-            $_aASINs       = $this->getASINs( $_sURL );
-            $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
-            foreach( $_aASINs as $_sASIN ) {
-                $_aProduct = $this->___getProduct( $_sURL, $_sASIN, $_sAssociateID, $_sLanguage );
-                // @deprecated 4.2.2 A structure array is returned on failure instead of an empty array.
-//                if ( empty( $_aProduct ) ) {
-//                    continue;
-//                }
-                $_aProducts[ $_sASIN ] = $_aProduct;
-            }
+        $_aURLs                  = array_merge(
+            $aURLs,
+            // Originally the glue was \s+ but not sure what this was for.
+            // If it is split by a white space, search result URL cannot be parsed properly such as https://www.amazon.it/s?k=harry potter&...
+            preg_split( "/[\r\n]+/", trim( ( string ) $this->oUnitOption->get( 'uri' ) ), 0, PREG_SPLIT_NO_EMPTY )
+        );
+        $_sLanguage              = $this->oUnitOption->get( 'language' );
+        $_aASINsPerURL           = $this->___getASINsPerURL( $_aURLs, $_sLanguage, $_aASINsPerNonProductURL );
+        $_iCount                 = ( integer ) $this->oUnitOption->get( 'count' );
+        $_aProducts              = $this->___getProductsWithASINs( $_aASINsPerURL, $_iCount, $_sAssociateID, $_sLocale, $_sLanguage );
+        $_aASINsOfNonProductURLs = $this->___getASINsOfNonProductURL( $_aASINsPerNonProductURL );
+        $this->___bNonProductURL = ! empty( $_aASINsPerNonProductURL ); // referred when displaying errors
 
+        // Set these only they could be detected from the URL. Otherwise, leave it to the default.
+        if ( $_sAssociateID ) {
+            $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
         }
-        $_sLocale      = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
-        $_sAssociateID = $this->___getAssociateIDFromURL( $_sURL );
-        $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
-        $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
+        $_sAssociateID = $this->oUnitOption->get( 'associate_id' ); // re-retrieve the value as `$_sAssociateID` can be empty
+        if ( $_sLocale ) {
+            $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
+        }
+        $_sLocale = $this->oUnitOption->get( 'country' );   // re-retrieve the value as `$_sLocale` can be empty
 
         $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ) );
+        $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs );
+
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
+        $_aProducts        = array_merge( $_aProducts, $_aProductsByURLs );
         return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
 
     }
         /**
+         * @param  array   $aASINsPerNonProductURL
+         * @return array
+         * @since  4.4.0
+         */
+        private function ___getASINsOfNonProductURL( array $aASINsPerNonProductURL ) {
+            $_aASINs = array();
+            foreach( $aASINsPerNonProductURL as $_aASINsByURL ) {
+                $_aASINs = array_merge( $_aASINs, $_aASINsByURL );
+            }
+            return array_unique( $_aASINs );
+        }
+        /**
+         * @param  array $aURLs
+         * @param  string $sLanguage
+         * @param  array|null $aASINsPerNonProductURL
+         * @return array An array holding ASINs by URL.
+         */
+        private function ___getASINsPerURL( array $aURLs, $sLanguage, &$aASINsPerNonProductURL ) {
+            $aASINsPerNonProductURL = array();
+            $aASINPerURL            = array();
+            $aProductURLs           = array_unique( $aURLs );
+            foreach( $aProductURLs as $_iIndex => $_sURL ) {
+                // Multiple ASINs can be embedded in a single URL like https://amazon.com/dp/ABCDEFGHIJ?tag=my-associate-21,ABCDEFGHI2,ABCDEFGHI3
+                $_aASINs = $this->getASINs( $_sURL );
+                if ( ! empty( $_aASINs ) ) {
+                    $aASINPerURL[ $_sURL ] = $_aASINs;
+                    continue;
+                }
+                $aASINsPerNonProductURL[ $_sURL ] = $this->getASINsFromHTMLs( array( $this->___getProductPage( $_sURL, $sLanguage ) ) );
+            }
+            return $aASINPerURL;
+        }
+
+        /**
+         * @param  array   $aASINsPerURL
+         * @param  integer $iNumberOfItems
+         * @param  string  $sAssociateID
+         * @param  string  $sLocale
+         * @param  string  $sLanguage
+         * @return array
+         * @since  4.4.0
+         */
+        private function ___getProductsWithASINs( array $aASINsPerURL, $iNumberOfItems, &$sAssociateID, &$sLocale, $sLanguage ) {
+            $_aProducts    = array();
+            $_sLocale      = '';
+            $_sAssociateID = '';
+            foreach( $aASINsPerURL as $_sURL => $_aASINs ) {
+                $_sThisLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
+                $_sLocale      = $_sLocale ? $_sLocale : $_sThisLocale;
+                $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->___getAssociateIDFromURL( $_sURL );
+                foreach( $_aASINs as $_sASIN ) {
+                    $_aProduct = $this->___getProductScraped( $_sASIN, $_sThisLocale, $_sAssociateID, $sLanguage );
+                    $_aProducts[ $_sASIN ] = $_aProduct;
+                }
+            }
+            $sAssociateID = $_sAssociateID;
+            $sLocale      = $_sLocale;
+            return $_aProducts;
+        }
+
+    /**
          * @param array $aProductsByScraping
          * @param array $aProductsByPAAPI
          * @since 4.2.9
@@ -93,6 +159,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
             return $aProductsByScraping;
         }
+
         /**
          * @param array $aASINs A numerically indexed array of ASINs.
          * @since 4.2.9
@@ -100,55 +167,42 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          */
         private function ___getProductsByPAAPI( array $aASINs ) {
 
+            if ( empty( $aASINs ) ) {
+                return array();
+            }
+
             // If the API keys are set, perform an API request
             if ( ! $this->oOption->isAPIKeySet() ) {
                 return array();
             }
 
-            $_oUnit      = new AmazonAutoLinks_UnitOutput_item_lookup( array( 'ItemIds' => $aASINs ) + $this->oUnitOption->get() );
-            return $_oUnit->fetch();
+            $_oItemLookUpUnit = new AmazonAutoLinks_UnitOutput_item_lookup( array( 'ItemIds' => $aASINs ) + $this->oUnitOption->get() );
+            return $_oItemLookUpUnit->fetch();
 
         }
+
         /**
-         * @param  string $sURL
          * @param  string $sASIN
+         * @param  string $sLocale
          * @param  string $sAssociateID
          * @param  string $sLanguage
-         * @return array  A product array. Even if it fails to retrieve product data, a structure array will be returned and it's not empty.
+         * @return array
+         * @since  4.4.0
          */
-        private function ___getProduct( $sURL, $sASIN, $sAssociateID, $sLanguage ) {
+        private function ___getProductScraped( $sASIN, $sLocale, $sAssociateID, $sLanguage ) {
 
-            $_sDomain      = parse_url( $sURL, PHP_URL_SCHEME ) . '://' . parse_url( $sURL, PHP_URL_HOST );
-            $_sURL         = add_query_arg(
-                array(
-                    'tag'      => $sAssociateID,
-                    'language' => $sLanguage,
-                ),
-                $_sDomain . '/dp/' . $sASIN . '/'
-            );
-
-            $_sHTML    = $this->___getProductPage( $_sURL, $sLanguage );
-            $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sURL );
-            $_aProduct = $_oScraper->get( $sAssociateID, $_sDomain );
-
-            // @deprecated 4.2.2 Even if it fails to retrieve product data, a structure array will be returned and it's not empty
-//            if ( empty( $_aProduct ) ) {
-//                return $_aProduct;
-//            }
+            $_sProductURL = $this->___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, $_sURLDomain );
+            $_sHTML    = $this->___getProductPage( $_sProductURL, $sLanguage );
+            $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sProductURL );
+            $_aProduct = $_oScraper->get( $sAssociateID, $_sURLDomain );
 
             // If the thumbnail is not set, it means failure of retrieving the product data.
             if ( ! isset( $_aProduct[ 'thumbnail_url' ] ) ) {
-                // @deprecated 4.2.2
-//                $_aProduct[ 'thumbnail_url' ] = $this->getThumbnailURLFromASIN(
-//                    $_aProduct[ 'ASIN' ],
-//                    $this->___getLocaleFromURL( $_aProduct[ 'product_url' ] ),
-//                    $this->oUnitOption->get( 'image_size' )
-//                );
                 unset( $_aProduct[ '_features' ] );
                 return $_aProduct;
             }
 
-            $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sURL );
+            $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sProductURL );
             $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
                 isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : implode( ' ', $_aProduct[ '_features' ] ),
                 $this->oUnitOption->get( 'description_length' ),
@@ -169,6 +223,26 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_aProduct;
 
         }
+            /**
+             * @param string $sASIN
+             * @param string $sAssociateID
+             * @param string $sLocale
+             * @param string $sLanguage
+             * @param string $sURLDomain
+             * @return string
+             */
+            private function ___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, &$sURLDomain ) {
+                $_oLocale      = new AmazonAutoLinks_Locale( $sLocale );
+                $_sDomain      = $_oLocale->getDomain();
+                $sURLDomain    = 'https://' . $_sDomain;
+                return add_query_arg(
+                    array(
+                        'tag'      => $sAssociateID,
+                        'language' => $sLanguage,
+                    ),
+                    $sURLDomain . '/dp/' . $sASIN . '/'
+                );
+            }
 
             /**
              * @param  string $sURL
@@ -180,7 +254,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
                 add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
                 add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
-                add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20, 2 );
+                add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100, 2 );
 
                 $_oHTTP   = new AmazonAutoLinks_HTTPClient(
                     $sURL,
@@ -195,7 +269,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 $_sHTTPBody = $_oHTTP->getBody();
                 remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
                 remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
-                remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20 );
+                remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100 );
 
                 return $_sHTTPBody;
 
@@ -233,6 +307,13 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @since   4.2.2
      */
     protected function _getError( $aProducts ) {
+
+        if ( $this->___bNonProductURL && ! empty( $this->___aErrors ) ) {
+            $_sErrors = implode( ' ', $this->___aErrors );
+            $this->___aErrors = array();
+            return $_sErrors;
+        }
+
         /**
          * For users not using PA-API keys, errors should be displayed.
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
@@ -243,6 +324,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_sErrors;
         }
         return parent::_getError( $aProducts );
+
     }
 
     /**
@@ -259,7 +341,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @since  4.3.4 Changed the parameters to be singular.
      */
     public function replyToCaptureError( $aoResponse, $sURL ) {
-        remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 20 );
         if ( ! is_wp_error( $aoResponse ) ) {
             return $aoResponse;
         }
@@ -287,7 +368,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return array();
         }
 
-        $aProduct[ 'content' ]          = $this->_getContents( $aProduct, $aDBRow, $aScheduleIdentifier );
+        $aProduct[ 'content' ]          = AmazonAutoLinks_Unit_Utility::getContent( $aProduct );
         $_sDescriptionExtracted         = $this->_getDescriptionSanitized(
             $aProduct[ 'content' ],
             $this->oUnitOption->get( 'description_length' ),

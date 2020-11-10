@@ -7,8 +7,7 @@
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
 - [UI] Show a warning to the user when the default locale and the associate tag are not set. 
 
-## Meager 
-- [4.4.0][Feature] For the `embed` unit type, when the user pastes a search result URL of an Amazon store, fetch products from the search result page and display them. 
+## Major  
 - [4.5.0][UI] Make the General setting tab the default in the Settings page. 
 - [4.5.0][UI] Add the PA-API setting Tab.
     - Deprecate the Authentication setting tab.
