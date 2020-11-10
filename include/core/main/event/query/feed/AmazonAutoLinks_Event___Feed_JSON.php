@@ -24,7 +24,7 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
         add_filter(
             'aal_filter_unit_output',
             array( $this, 'replyToRemoveCredit' ),
-            PHP_INT_MAX // the priority of the credit comment insertion callback is `100` so it must be larger than that.
+            PHP_INT_MAX  - 100 // the priority of the credit comment insertion callback is `100` so it must be larger than that.
         );
         add_action( 'init', array( $this, 'replyToLoadJSONFeed' ), 999 );
 
@@ -46,16 +46,15 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
             'Content-Type: application/json; charset=' . get_option( 'blog_charset' ),
             true
         );
-        AmazonAutoLinks(
-            $_aArguments,
-            true    // echo or return
-        );
+        AmazonAutoLinks( $_aArguments, true );
         exit;
 
     }
 
     /**
-     * @since       3.1.0
+     * @param  string $sUnitOutput
+     * @return string
+     * @since  3.1.0
      */
     public function replyToRemoveCredit( $sUnitOutput ) {
         return str_replace(
