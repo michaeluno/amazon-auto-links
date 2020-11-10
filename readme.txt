@@ -243,6 +243,21 @@ Optionally, the following arguments may be set.
 These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
 If these arguments are omitted, the values set in the setting page will be used.
 
+= Shortcode to Display Buttons =
+Although with the `%button%` tag in the `Item Format` unit option allows you to insert a button, a button itself can be displayed indipendently with the shortcode, `[aal_button ...]`.
+
+It accepts the following parameters.
+
+- `asin` - (required, string) Comma delimited ASINs.
+- `type` - (optional, integer) 0: Link to the product page, 1: Add to cart button. Default: `1`.
+- `id` - (optional, integer) The button ID. To use the button created via Dashboard -> Amazon Auto Links -> Manage Buttons, specify the button ID.
+- `quantity` - (optional, integer) The quantity of the item to add to cart. When multiple ASINs are specified, separate the values by commas.
+- `country` - (optional, string) The locale of the marketplace. If not set, the default value set in the Default setting tab will be applied.
+- `associate_id` - (optional, string) The associate tag. If not set, the default value set in the Default setting tab will be applied.
+- `access_key` - (optional, string) The public PA-API key. If not set, the default value set in the Authentication tab will be applied.
+- `label` - (optional, string) The button label. e.g. 'Buy Now'. Default: `Buy Now`.
+- `offer_listing_id` - (optional, scalar) An offer listing id that Amazon gives.
+
 = How to Create Own Template =
 
 <h5><strong>Step 1</strong></h5>
