@@ -43,7 +43,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Stores blocked product ASINs by filters.
-     * Used to insert these in an output error of No Products Found so that it will be
+     * Used to insert these in an output error of No Products Found so that it will be easier to debug.
      * @var   array
      * @since 4.1.0
      */
