@@ -282,11 +282,21 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      */
     public function getRequest( $iCount ) {
         
+        $_sAssociateID = $this->oUnitOption->get( 'associate_id' );
+        if ( ! $_sAssociateID ) {
+            return array(
+                'Error' => array(
+                    'Code'    => $this->sUnitType,
+                    'Message' => 'An Associate tag is not set.',
+                )
+            );
+        }
+
         $_oAPI = new AmazonAutoLinks_PAAPI50(
             $this->oUnitOption->get( 'country' ), 
             $this->oOption->get( 'authentication_keys', 'access_key' ),
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
-            $this->oUnitOption->get( 'associate_id' )
+            $_sAssociateID
         );
 
         // First, perform the search for the first page regardless the specified count (number of items).
