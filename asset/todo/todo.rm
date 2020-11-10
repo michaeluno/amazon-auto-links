@@ -22,16 +22,18 @@
     - [UI] Add the timed blacklist ASINs UI in the PA-API tab. 
 - [Internal] Add the SubscriptionID parameter to product links when AWS keys are given.
 - [Internal] Reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
-- [Feature] Introduce a new unit type Comparison Table.
+- [Feature] Introduce a new unit type Comparison Table -> this can be a template.
 - [Feature][Template] Add a card template.
 - [Feature] Add the ability to select a caching type from either database or file.
-- [Feature] Add the ability to get caches from shared cache servers.
-- [Feature] Add the ability to submit caches to shared cache servers.
-- [Feature] Add the ability to make the site a shared cache server.
 - [Feature] Add the ability to create actual posts from units.
-- [Feature] Add a button with an icon.
-- [Feature] Add an orange button.
-- [Feature] Add a gray button.
-- [Feature] Add a button with a background image.
-- [Feature] Add a button with a SVG icon.
-- [Feature] Add a clone action link to buttons.
+- [Feature] Implement a shared caching system.
+    - Add the ability to get caches from shared cache servers.
+    - Add the ability to submit caches to shared cache servers.
+    - Add the ability to make the site a shared cache server.
+- [Feature][Button] Add a clone action link to buttons.
+- [Feature][Button] Add new buttons.
+    - Add a button with an icon.
+    - Add an orange button.
+    - Add a gray button.
+    - Add a button with a background image.
+    - Add a button with a SVG icon.
