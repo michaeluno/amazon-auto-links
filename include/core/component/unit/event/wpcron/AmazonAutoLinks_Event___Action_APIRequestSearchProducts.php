@@ -67,7 +67,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
         $_aParams        = func_get_args() + array( array(), '', '', '', '' );
         $_aList          = $_aParams[ 0 ];
-        $_sAssociateID   = $_aParams[ 1 ];
+        $_sAssociateID   = $this->___getAssociateTag( $_aParams[ 1 ], $_aParams );
         $_sLocale        = $_aParams[ 2 ];
         $_sCurrency      = $_aParams[ 3 ];
         $_sLanguage      = $_aParams[ 4 ];
@@ -100,7 +100,26 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
 
     }
-
+        /**
+         * Applies a fallback when an Associate tag is not passed.
+         * @remark Although this should not occur, while developing there was a case that an Associate tag was npt passed and it was hard to debug. So trigger an error log and apply a default one.
+         * @param  string $sPassedAssociateTag
+         * @param  array  $aParams
+         * @return string
+         * @since  4.4.0
+         */
+        private function ___getAssociateTag( $sPassedAssociateTag, array $aParams ) {
+            if ( $sPassedAssociateTag ) {
+                return $sPassedAssociateTag;
+            }
+            $_sLocale       = $aParams[ 2 ];
+            $_oOption       = AmazonAutoLinks_Option::getInstance();
+            $_sAssociateTag = $_sLocale === $_oOption->get( 'unit_default', 'country' )
+                ? $_oOption->get( 'unit_default', 'associate_id' )
+                : '';
+            new AmazonAutoLinks_Error( 'EVENT_SEARCH_PRODUCTS', "The associate tag is not given. The fallback, {$_sAssociateTag}, is applied.", $aParams );
+            return $_sAssociateTag;
+        }
         /**
          * @param array  $aResponse
          * @param array  $aList
