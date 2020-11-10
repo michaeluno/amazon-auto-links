@@ -259,8 +259,9 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * This filter passes the value of the both cached one and the newly fetched one.
          * This is useful to check errors.
          * @since   4.2.2
+         * @since   4.4.0   Added the `$this->sRequestType` parameter.
          */
-        return apply_filters( 'aal_filter_http_request_result', $_aoResponse, $this->sURL, $this->aArguments, $this->iCacheDuration );
+        return apply_filters( 'aal_filter_http_request_result', $_aoResponse, $this->sURL, $this->aArguments, $this->iCacheDuration, $this->sRequestType );
 
     }
 
