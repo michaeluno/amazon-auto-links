@@ -47,9 +47,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
     public function setUp() {
         
         $this->setRootMenuPageBySlug( 'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
-        
-        add_action( 'load_' . $this->oProp->sClassName, array( $this, 'replyToDoPageSettings' ) );
-        
+
         if ( 'plugins.php' === $this->oProp->sPageNow ) {
             $this->addLinkToPluginDescription(
                 "<a href='https://wordpress.org/support/plugin/amazon-auto-links' target='_blank'>" 
@@ -63,14 +61,26 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
 
     }
         
-        /**
+    public function load() {
+
+        $this->___doPageSettings();
+
+        $_sPHPVersion = phpversion();
+        if ( version_compare( $_sPHPVersion, '5.6.20', '>=' ) ) {
+            return;
+        }
+        $_sMessage = sprintf( __( 'The plugin soon drops support for your PHP version %1$s. Please update PHP to the latest.' ), $_sPHPVersion );
+        AmazonAutoLinks_Registry::setAdminNotice( $_sMessage );
+
+    }
+         /**
          * Do page styling.
          * @since    3
+         * @since    4.4.0  Changed the visibility to private and renamed from `replyToDoPageSettings()`.
          * @return   void
-         * @callback add_action()    load_{class name}
          */
-        public function replyToDoPageSettings() {
-                        
+        private function ___doPageSettings() {
+
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $this->setInPageTabTag( 'h2' );                
             $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
