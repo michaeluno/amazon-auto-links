@@ -112,13 +112,66 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
             $this->oUnitOption->get( 'associate_id' )
         );
-        return $_oAPI->request(
-            $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ) ),
-            $this->oUnitOption->get( 'cache_duration' ),
-            $this->oUnitOption->get( '_force_cache_renewal' )
+
+        $_aItemIDs           = array_merge(
+            $this->getAsArray( $this->oUnitOption->get( 'ItemIds' ) ),
+            explode( ',', $this->oUnitOption->get( 'ItemId' ) )
         );
+        // @todo Filter with timed black list items
+        $_aItemIDs           = array_filter( array_unique( $_aItemIDs ), array( $this, 'isASINAllowed' ) );
+
+        $_aResponse          = array();
+        $_aChunksItemIDs     = array_chunk( $_aItemIDs, 10 );   // the maximum number of items that can be queried is 10
+        $_iCacheDuration     = $this->oUnitOption->get( 'cache_duration' );
+        $_bForceCacheRenewal = $this->oUnitOption->get( '_force_cache_renewal' );
+        foreach( $_aChunksItemIDs as $_iIndex => $_aChunkBy10 ) {
+            if ( empty( $_aChunkBy10 ) ) {
+                break;
+            }
+            $_aChunkBy10 = array_filter( $_aChunkBy10 ); // sometimes an empty element gets inserted so drop them
+            $_aPayload   = $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ) );
+            $_aPayload[ 'ItemIds' ] = $_aChunkBy10;
+            $_aThisResponse = $_oAPI->request( $_aPayload, $_iCacheDuration, $_bForceCacheRenewal );
+            $_aResponse  = $this->___getResponsesMerged( $_aResponse, $_aThisResponse );
+            if ( $iCount <= count( $this->getElementAsArray( $_aResponse, array( $this->_sResponseItemsParentKey, 'Items' ) ) ) ) {
+                break;
+            }
+        }
+        return $_aResponse;
 
     }
+        /**
+         * @param  array $aMainResponse
+         * @param  array $aSubResponse
+         * @return array
+         * @sinece 4.4.0
+         */
+        private function ___getResponsesMerged( array $aMainResponse, array $aSubResponse ) {
+
+            $_aItems = array_merge(
+                $this->getElementAsArray( $aMainResponse, array( $this->_sResponseItemsParentKey, 'Items' ) ),
+                $this->getElementAsArray( $aSubResponse, array( $this->_sResponseItemsParentKey, 'Items' ) )
+            );
+            if ( ! empty( $_aItems ) ) {
+                $this->setMultidimensionalArray( $aMainResponse, array( $this->_sResponseItemsParentKey, 'Items' ), $_aItems );
+            }
+
+            $_aErrors = array_merge(
+                $this->getElementAsArray( $aMainResponse, array( 'Errors' ) ),
+                $this->getElementAsArray( $aSubResponse, array( 'Errors' ) )
+            );
+            if ( ! empty( $_aErrors ) ) {
+                $aMainResponse[ 'Errors' ] = $_aErrors;
+            }
+
+            $_sError = $this->getElement( $aMainResponse, array( 'Error', 'Message' ) ) . ' ' . $this->getElement( $aSubResponse, array( 'Error', 'Message' ) );
+            $_sError = trim( $_sError );
+            if ( $_sError ) {
+                $aMainResponse[ 'Error' ] = $_sError;
+            }
+            return $aMainResponse;
+
+        }
 
     /**
      *

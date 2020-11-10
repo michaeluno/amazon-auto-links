@@ -15,7 +15,16 @@
  * @since       3
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoLinks_UnitOutput_Base {
-    
+
+    /**
+     * @param  string  $sASIN
+     * @return boolean
+     * @since  4.4.0   Added in order to be used with `array_filter()`.
+     */
+    public function isASINAllowed( $sASIN ) {
+        return ! $this->isASINBlocked( $sASIN );
+    }
+
     /**
      * @param       string  $sASIN
      * @return      boolean

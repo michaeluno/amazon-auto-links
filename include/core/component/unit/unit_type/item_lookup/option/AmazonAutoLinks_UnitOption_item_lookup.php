@@ -112,6 +112,5 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
             return $aUnitOptions;
             
         }            
-    
 
 }
