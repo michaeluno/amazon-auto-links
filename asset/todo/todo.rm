@@ -5,7 +5,6 @@
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
-- [UI] Show a warning to the user when the default locale and the associate tag are not set. 
 
 ## Major  
 - [4.5.0][UI] Make the General setting tab the default in the Settings page. 

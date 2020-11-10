@@ -148,6 +148,7 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
+    "AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php",
     "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
