@@ -15,6 +15,96 @@
 abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_Utility {
 
     /**
+     * Parses the given HTML content and returns found ASINs.
+     * @since       3.2.0
+     * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
+     * @sicne       4.4.0   Moved from `AmazonAutoLinks_UnitOutput_url`.
+     * @param       array   $aHTMLs An array holding string HTML documents.
+     * @return      array
+     */
+    static public function getASINsFromHTMLs( $aHTMLs ) {
+
+        $_aURLs  = array();
+        $_aTexts = array();
+        $_oDOM   = new AmazonAutoLinks_DOM;
+        foreach( $aHTMLs as $_sURL => $_sHTML ) {
+
+            $_oDoc      = $_oDOM->loadDOMFromHTML( $_sHTML );
+            $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'noscript' ) );
+            $_oDOM->removeComments( $_oDoc );
+
+            // HTML documents, extract a tag href attribute value.
+            $_aURLs     = $_aURLs + self::___getLinksFromHTML( $_oDoc );
+
+            // For plain text pages, sanitize HTML entities.
+            $_sText     = $_oDOM->getTagOuterHTML( $_oDoc, 'body' );
+            $_sText     = str_replace(
+                array( '&#13;', '&#10;' ), // search
+                PHP_EOL, // replacement
+                $_sText // subject
+            );
+            $_aTexts[ $_sURL ] = $_sText;
+
+        }
+
+        $_aURLs = $_aURLs + self::___getURLsFromText( implode( PHP_EOL, $_aTexts ) );
+        return self::___getASINsExtractedFromURLs( $_aURLs );
+
+    }
+        /**
+         * @param       array       $aURLs
+         * @return      array
+         */
+        static private function ___getASINsExtractedFromURLs( array $aURLs ) {
+            $_aASINs = array();
+            foreach( $aURLs as $_sURL ) {
+                $_sASIN = self::getASINFromURL( $_sURL );
+                if ( ! $_sASIN ) {
+                    continue;
+                }
+                $_aASINs[ $_sASIN ] = $_sASIN;
+            }
+            return $_aASINs;
+        }
+
+        /**
+         * @param       DOMDocument $oDOM
+         * @return      array
+         */
+        static private function ___getLinksFromHTML( $oDOM ) {
+
+            $_aLinks = array();
+            foreach( $oDOM->getElementsByTagName( 'a' ) as $nodeA ) {
+                $sHref = $nodeA->getAttribute( 'href' );
+                $_aLinks[ $sHref ] = $sHref;
+            }
+            return $_aLinks;
+
+        }
+
+        /**
+         * Finds and returns urls from a given string.
+         * @param       string   $sText
+         * @return      array    List of urls
+         */
+        static private function ___getURLsFromText( $sText ) {
+
+            $_aURLs = array();
+            preg_match_all(
+                '#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#s',
+                $sText,
+                $_aURLs
+            );
+            $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
+
+            // Make it associative so that duplicate items will be removed.
+            return empty( $_aURLs )
+                ? $_aURLs
+                : array_combine( $_aURLs, $_aURLs );
+
+        }
+
+    /**
      * @param  string         $sImageURL
      * @param  integer|string $isImageSize
      * @param  string         $sLocale
@@ -67,6 +157,8 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
 
     /**
      * Strips HTML tags and sanitizes the product title.
+     * @param   string      $sTitle
+     * @param   integer     $iTitleLength
      * @return  string|null
      * @since   unknown 
      * @since   3.10.0  Renamed from `_getTitleSanitized()`
@@ -103,6 +195,8 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      * @since       2.1.1
      * @since       3.5.0       Renamed from `_formatProductTitle()`.
      * @since       3.10.0      Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @param       array       $aProduct
+     * @param       string      $sFormat
      * @return      string|null
      */
     static public function getProductTitleFormatted( array $aProduct, $sFormat ) {

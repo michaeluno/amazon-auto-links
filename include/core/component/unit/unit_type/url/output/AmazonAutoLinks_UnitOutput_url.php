@@ -42,7 +42,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
         $_aHTMLs = $this->_getHTMLBodies( $_aURLs );
         
         // Retrieve ASINs from the given documents. Supports plain text.
-        $_aFoundASINs = $this->_getFoundItems( $_aHTMLs );
+        $_aFoundASINs = $this->getASINsFromHTMLs( $_aHTMLs );
         $_bNoProducts = empty( $_aFoundASINs );
 
         // Update unit options.
@@ -148,10 +148,12 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 );                
             }
                 /**
-                 * @since       3.2.2
-                 * @return      string
-                 * @callback    filter      aal_filter_unit_output
-                 * @todo       Probably `remove_filter( 'aal_filter_unit_output )` has to be done in the callback.
+                 * @since    3.2.2
+                 * @param    string $sProductHTML
+                 * @param    string $sASIN
+                 * @param    string $sLocale
+                 * @return   string
+                 * @callback add_filter()      aal_filter_unit_output
                  */
                 public function _replyToAddHTMLBodies( $sProductHTML, $sASIN, $sLocale ) {
                     remove_filter(
@@ -170,92 +172,5 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                             . AmazonAutoLinks_Debug::get( $_aHTMLs )      
                         . "</pre>";
                 }
-        
-        /**
-         * Parses the given HTML content and returns found ASINs.
-         * @since       3.2.0
-         * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
-         * @return      array
-         * @param       array   $aHTMLs
-         */
-        protected function _getFoundItems( $aHTMLs ) {
-
-            $_aURLs  = array();
-            $_aTexts = array();
-            $_oDOM   = new AmazonAutoLinks_DOM;
-            foreach( $aHTMLs as $_sURL => $_sHTML ) {
-            
-                $_oDoc      = $_oDOM->loadDOMFromHTML( $_sHTML );
-                $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'noscript' ) );
-                
-                // HTML documents, extract a tag href attribute value.
-                $_aURLs     = $_aURLs + $this->___getLinksFromHTML( $_oDoc );
-            
-                // For plain text pages, sanitize HTML entities.
-                $_sText     = $_oDOM->getTagOuterHTML( $_oDoc, 'body' );
-                $_sText     = str_replace( 
-                    array( '&#13;', '&#10;' ), // search
-                    PHP_EOL, // replacement
-                    $_sText // subject
-                );
-                $_aTexts[ $_sURL ] = $_sText;
-                
-            }
-            
-            $_aURLs = $_aURLs + $this->___getURLsFromText( implode( PHP_EOL, $_aTexts ) );
-            $_aASINs = $this->___getASINsExtracted( $_aURLs );
-            return $_aASINs;
-
-        }
-            /**
-             * @return      array
-             */
-            private function ___getASINsExtracted( array $aURLs ) {
-                
-                $_aASINs = array();
-                foreach( $aURLs as $_sURL ) {
-                    $_sASIN = $this->getASINFromURL( $_sURL );
-                    if ( ! $_sASIN ) {
-                        continue;
-                    }
-                    $_aASINs[ $_sASIN ] = $_sASIN;
-                }
-                return $_aASINs;
-            }
-            /**
-             * 
-             * @return      array
-             */
-            private function ___getLinksFromHTML( $oDOM ) {
-                
-                $_aLinks = array();
-                foreach( $oDOM->getElementsByTagName( 'a' ) as $nodeA ) {
-                    $sHref = $nodeA->getAttribute( 'href' );                
-                    $_aLinks[ $sHref ] = $sHref;
-                }
-                return $_aLinks;
-                
-            }        
-            
-            /**
-             * Finds and returns urls from a given string.
-             * @return      array    List of urls
-             */
-            private function ___getURLsFromText( $sText ) {
-
-                $_aURLs = array();
-                preg_match_all(
-                    '#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#s',
-                    $sText,
-                    $_aURLs
-                );
-                $_aURLs = array_merge( $_aURLs[ 0 ], $_aURLs[ 1 ] );
-
-                // Make it associative so that duplicate items will be removed.
-                return empty( $_aURLs )
-                    ? $_aURLs
-                    : array_combine( $_aURLs, $_aURLs );
-
-            }
 
 }
