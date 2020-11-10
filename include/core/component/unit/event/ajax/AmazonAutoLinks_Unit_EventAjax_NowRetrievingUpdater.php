@@ -26,6 +26,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
 
     protected function _construct() {
         add_action( 'wp_enqueue_scripts', array( $this, 'replyToEnqueueResources' ) );
+        add_action( 'enqueue_embed_scripts', array( $this, 'replyToEnqueueResources' ) ); // [4.4.0]
     }
 
     /**

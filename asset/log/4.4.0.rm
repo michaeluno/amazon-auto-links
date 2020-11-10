@@ -1,5 +1,6 @@
 - Added the ability to log PA-API request counts.
 - Tweaked the style of the `List` template regarding the thumbnail width.
+- Fixed a bug that did not resume now-retrieving elements for iframe embedded outputs. 
 - Fixed a bug that caused a PHP notice, "file_get_contents(): read of ... bytes failed with errno=13 Permission denied in ...AmazonAutoLinks_VersatileFileManager.php on line 107."
 - Fixed a bug that caused broken mark-ups in the Error Log tab when a log item includes a detail of some HTML elements.
 - Changed the default value of the `Show Errors` unit option to `Show errors`.  
