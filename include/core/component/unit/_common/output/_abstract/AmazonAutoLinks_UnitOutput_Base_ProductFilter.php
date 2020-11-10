@@ -17,6 +17,7 @@
 abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoLinks_UnitOutput_Base {
     
     /**
+     * @param       string  $sASIN
      * @return      boolean
      * @since       3
      * @since       3.5.0       Changed the scope from protected.
@@ -42,6 +43,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
         return false;
     }    
     /**
+     * @param       string      $sTitle
      * @return      boolean
      * @since       3
      * @since       3.5.0       Changed the scope from protected.
@@ -79,6 +81,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
         return false;                
     }
 
+    /**
+     * @param string $sASIN
+     */
     protected function setParsedASIN( $sASIN ) {
         $this->oUnitProductFilter->markParsed( $sASIN );
         $this->oGlobalProductFilter->markParsed( $sASIN );        
@@ -108,6 +113,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
          *
          * @since       3.1.0
          * @since       3.5.0       Changed the visibility scope from protected.
+         * @param       string      $sImageURL
          * @return      boolean
          * @todo research what else image urls represent no-image.
          */
@@ -127,6 +133,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
      * @since       3.2.1
      * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_url`.
      * @since       3.9.3       Changed the scope to `protected`. Moved from `AmazonAutoLinks_UnitOutput_item_lookup`.
+     * @param       array       $aProducts
+     * @return      array
      */
     protected function _getItemsSorted_( $aProducts ) {
         return $this->_getItemsSorted_raw( $aProducts );
