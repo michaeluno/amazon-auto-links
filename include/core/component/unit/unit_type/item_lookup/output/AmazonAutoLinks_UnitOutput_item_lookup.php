@@ -164,10 +164,9 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
                 $aMainResponse[ 'Errors' ] = $_aErrors;
             }
 
-            $_sError = $this->getElement( $aMainResponse, array( 'Error', 'Message' ) ) . ' ' . $this->getElement( $aSubResponse, array( 'Error', 'Message' ) );
-            $_sError = trim( $_sError );
+            $_sError = trim( $this->getElement( $aMainResponse, array( 'Error', 'Message' ) ) . ' ' . $this->getElement( $aSubResponse, array( 'Error', 'Message' ) ) );
             if ( $_sError ) {
-                $aMainResponse[ 'Error' ] = $_sError;
+                $this->setMultidimensionalArray( $aMainResponse, array( 'Error', 'Message' ), $_sError );
             }
             return $aMainResponse;
 
