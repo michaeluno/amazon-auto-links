@@ -2,6 +2,7 @@
 return array(
     "AmazonAutoLinks_Run_Database_Delete_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_products/AmazonAutoLinks_Run_Database_Delete_aal_products.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/AmazonAutoLinks_Run_Database_Delete_aal_request_cache.php", 
+    "AmazonAutoLinks_Run_Database_Delete_Records_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_request_cache/records/AmazonAutoLinks_Run_Database_Delete_Records_aal_request_cache.php", 
     "AmazonAutoLinks_Run_Database_Delete_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/database/aal_tasks/AmazonAutoLinks_Run_Database_Delete_aal_tasks.php", 
     "AmazonAutoLinks_Run_PluginOption_amazon_auto_links" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/option/amazon_auto_links/AmazonAutoLinks_Run_PluginOption_amazon_auto_links.php", 
     "AmazonAutoLinks_Run_PluginOption_option_key" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/delete/option/option_key/AmazonAutoLinks_Run_PluginOption_option_key.php", 
