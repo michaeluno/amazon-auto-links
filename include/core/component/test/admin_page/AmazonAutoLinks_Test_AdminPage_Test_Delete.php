@@ -32,7 +32,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Delete extends AmazonAutoLinks_Test_Ad
             '_default',
             array(
                 'title'     => '<span class="error">Danger Zone</span>',
-                'content'   => '<p class="description"><span class="error">The plugin database tables will be deleted.</span></p>',
+                'content'   => '<p class="description"><span class="error">Stored data including plugin database tables, table records, and options will be deleted.</span></p>',
                 'field_id'  => '_danger_zone',
                 'save'      => 'false',
             )
