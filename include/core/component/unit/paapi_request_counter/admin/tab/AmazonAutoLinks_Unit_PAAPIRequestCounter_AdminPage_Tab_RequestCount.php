@@ -93,7 +93,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
             $oAdminPage->enqueueScript(
                 $oAdminPage->oUtil->isDebugMode()
                     ? AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.js'
-                    : AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.min',
+                    : AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(
