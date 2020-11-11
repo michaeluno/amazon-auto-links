@@ -9,7 +9,7 @@
  */
 
 /**
- * Adds the 'Porting' form section to the 'PA-API Request Counts' tab.
+ * Adds the 'Porting' form section to the 'PA-API Request Counter' tab.
  * 
  * @since 4.4.0
  */

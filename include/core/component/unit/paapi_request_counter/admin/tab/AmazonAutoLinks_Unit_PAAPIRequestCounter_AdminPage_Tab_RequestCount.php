@@ -39,7 +39,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
     protected function _getArguments() {
         return array(
             'tab_slug'  => 'paapi_request_counts',
-            'title'     => __( 'PA-API Request Counts', 'amazon-auto-links' ),
+            'title'     => __( 'PA-API Request Counter', 'amazon-auto-links' ),
             'order'     => 5,
             'style'     => array(
                 AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css',
