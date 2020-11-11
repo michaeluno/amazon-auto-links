@@ -36,7 +36,6 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog extends Amaz
 
         $_aParams       = func_get_args() + array( null );
         $_sLocale       = $_aParams[ 0 ];
-
         $_oDatabaseLog  = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database( $_sLocale );
         $_aDatabaseLog  = $_oDatabaseLog->get( 0, PHP_INT_MAX );
         $_oFileLog      = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( $_sLocale );
@@ -57,11 +56,14 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog extends Amaz
         private function ___cleanFileLog( array $aFilePaths ) {
 
             // Handle files.
+            $_aDeleted      = array();
+            $_aUndeleted    = array();
             $_aDateDirPaths = array();
             foreach( $aFilePaths as $_sFilePath ) {
                 $_sDirPath    = dirname( $_sFilePath );
                 $_aDateDirPaths[ $_sDirPath ] = $_sDirPath; // to make it unique, set the path as the key
-                unlink( $_sFilePath );
+                $_bDeleted    = unlink( $_sFilePath );
+                $_bDeleted ? array_push( $_aDeleted, $_sFilePath ) : array_push( $_aUndeleted, $_sFilePath );
             }
 
             // Handle date directories.
@@ -70,7 +72,8 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog extends Amaz
                 $_sMonthDirPath = dirname( $_sThisDirPath );
                 $_aMonthDirPaths[ $_sMonthDirPath ] = $_sMonthDirPath;
                 if ( $this->isDirectoryEmpty( $_sThisDirPath ) ) {
-                    rmdir( $_sThisDirPath );
+                    $_bDeleted = rmdir( $_sThisDirPath );
+                    $_bDeleted ? array_push( $_aDeleted, $_sThisDirPath ) : array_push( $_aUndeleted, $_sThisDirPath );
                 }
             }
 
@@ -80,14 +83,16 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog extends Amaz
                 $_sYearDirPath = dirname( $_sThisDirPath );
                 $_aYearDirPaths[ $_sYearDirPath ] = $_sYearDirPath;
                 if ( $this->isDirectoryEmpty( $_sThisDirPath ) ) {
-                    rmdir( $_sThisDirPath );
+                    $_bDeleted = rmdir( $_sThisDirPath );
+                    $_bDeleted ? array_push( $_aDeleted, $_sThisDirPath ) : array_push( $_aUndeleted, $_sThisDirPath );
                 }
             }
 
             // Handle year directories.
             foreach( $_aYearDirPaths as $_sThisYearPath ) {
                 if ( $this->isDirectoryEmpty( $_sThisYearPath ) ) {
-                    rmdir( $_sThisYearPath );
+                    $_bDeleted = rmdir( $_sThisYearPath );
+                    $_bDeleted ? array_push( $_aDeleted, $_sThisYearPath ) : array_push( $_aUndeleted, $_sThisYearPath );
                 }
             }
 
