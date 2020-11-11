@@ -20,12 +20,12 @@
     font-weight: normal;
     font-size: 1em;
     line-height: 1.4; /* to be same as log-item-message */
-    word-break: break-all; /* without this, a long title breaks the layout */
+    white-space: nowrap;
 }
 .log .log-item-message {
     margin: 0;
-    white-space: normal; /* without this the log container sticks out */
     line-height: 1.4; /* to be same as log-item-title */
+    white-space: nowrap;
 }
 
 .log .log-item-body {
@@ -33,12 +33,10 @@
     white-space: nowrap;
 }
 .log .log-item-body .extra {
-    white-space: pre-wrap;
 }
 
 .log .log-item-head {
     display: inline;
-    /*white-space: nowrap;*/ /* broke the layout */
 }
 
 

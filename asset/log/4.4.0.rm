@@ -3,6 +3,7 @@
 - Added a warning in unit outputs when an Associate tag is not set.
 - Added a warning when the site PHP version is below 5.6.20.   
 - Tweaked the style of the `List` template regarding the thumbnail width and the font size of now-retrieving elements in embedded iframe.
+- Tweaked the style of the Error Log and Debug Log tab screens. 
 - Fixed a bug that `Item Look-up` units failed to retrieve products with PA-API with a certain number of items.   
 - Fixed a bug that did not resume now-retrieving elements for iframe embedded outputs. 
 - Fixed a bug that caused a PHP notice, "file_get_contents(): read of ... bytes failed with errno=13 Permission denied in ...AmazonAutoLinks_VersatileFileManager.php on line 107."

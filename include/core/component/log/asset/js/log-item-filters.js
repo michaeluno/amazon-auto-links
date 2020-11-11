@@ -17,12 +17,6 @@
         }
         _debugLog( 'Amazon Auto Links', 'Log Filter Script', aalLog );
 
-        // Log container
-        var _oLog = $( '.log' );
-        _oLog.css( {
-            'display': 'block',
-        } );
-
         // Clipboard
         $( '.copy-to-clipboard' ).click( function (event) {
             var _oLogClone = $( '.log' ).clone();  // re-retrieve the element as it can be updated
@@ -32,12 +26,23 @@
             alert( _bCopied ? aalLog.labels.copied : aalLog.labels.not_copied );
         });
 
-        var _oLogRaw = _oLog.clone();
 
+        // Filter input fields.
+        var _oLogRaw = $( '.log' ).clone();
         $( 'input.filter-include, input.filter-exclude' ).change( function (event) {
             _filterLog( _oLogRaw.clone(), $( 'input.filter-include' ), $( 'input.filter-exclude' ) );
         }).trigger( 'change' );
 
+
+        // Fix layout
+        $( window ).trigger( 'resize' );
+        var observer = new MutationObserver( _fixFormLayout );
+        var target = document.querySelector('#side-sortables' );
+            observer.observe(target, {
+            attributes: true
+        });
+
+    });
         function _filterLog( oLogClone, oInputInclude, oInputExclude ) {
 
             var _sTypedInclude = oInputInclude.val();
@@ -73,7 +78,41 @@
 
         }
 
-    });
+    // Fix the form layout
+    $( window ).resize( debounce( _fixFormLayout ) );  // window resize
+    function _fixFormLayout( event ) {
+        var _iSectionWidth = $( '.amazon-auto-links-section' ).width();
+        if ( ! _iSectionWidth ) {
+            return;
+        }
+        $( '.log' ).width( _iSectionWidth )
+            .show();
+        $( '.debug-output' ).width( _iSectionWidth );
+    }
+    // function _getFormSectionRightPosition() {
+    //     var _oSubject = $( '.amazon-auto-links-section > table' ).first();
+    //     if ( ! _oSubject.length ) {
+    //         return 0;
+    //     }
+    //     var _iScrollLeft        = $( window ).scrollLeft();
+    //     var _aOffsetSubject     = _oSubject.offset();
+    //     return _aOffsetSubject.left + _oSubject.width() - _iScrollLeft;
+    // }
+    // function _getSideMetaBoxLeftPosition() {
+    //     var _oSideMetaBox    = $( "#side-sortables" );
+    //     if ( ! _oSideMetaBox.length ) {
+    //         return 0;
+    //     }
+    //     var _iScrollLeft            = $( window ).scrollLeft();
+    //     var _aOffsetSideMetaBox     = _oSideMetaBox.offset();
+    //     var _iSideMetaBoxPosX       = _aOffsetSideMetaBox.left - _iScrollLeft;
+    //
+    //     // For one column layout,
+    //     if ( _iSideMetaBoxPosX < 480 ) {
+    //         return 0;
+    //     }
+    //     return _iSideMetaBoxPosX;
+    // }
 
     /**
      * Disallow the enter key in the form.
@@ -119,5 +158,7 @@
         } );
         return _bFound;
     }
+
+
 
 }(jQuery));

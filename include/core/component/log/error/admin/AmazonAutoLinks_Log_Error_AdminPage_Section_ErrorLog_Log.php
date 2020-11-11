@@ -112,6 +112,12 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                     'title'             => 'Debug',
                     'if'                => $_oOption->isDebug() || $_oOption->isDebugMode(),
                     'save'              => false,
+                ),
+                array(
+                    'field_id'          => '_debug_output',
+                    'show_title_column' => false,
+                    'if'                => $_oOption->isDebug() || $_oOption->isDebugMode(),
+                    'save'              => false,
                     'content'           => $this->___getDebugOutput(),
                 )
             );
@@ -131,7 +137,9 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                     .  "</div>";
             }
         private function ___getCopyToClipboardButton() {
-            return "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>";
+            return "<div class='button-container-copy-to-clipboard'>"
+                    . "<a class='button-secondary copy-to-clipboard'>" . __( 'Copy to Clipboard', 'amazon-auto-links' ) . "</a>"
+                . "</div>";
         }
         private function ___getLogHTMLPart() {
             // @deprecated 4.4.0
