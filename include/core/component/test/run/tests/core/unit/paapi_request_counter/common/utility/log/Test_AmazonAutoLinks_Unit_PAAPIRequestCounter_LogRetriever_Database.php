@@ -15,13 +15,6 @@
 class Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends AmazonAutoLinks_UnitTest_Base {
 
     /**
-     * @tags action
-     */
-    public function test_doAction_aal_action_paapi_request_counter_save_log() {
-        do_action( 'aal_action_paapi_request_counter_save_log', 'US' );
-    }
-
-    /**
      * @tags log
      */
     // public function test_get() {
