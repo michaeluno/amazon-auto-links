@@ -28,7 +28,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
      */
     public function __construct( $sLocale ) {
         parent::__construct( $sLocale );
-        $this->aAllLog = $this->___getRawFromDatabase();
+        $this->set( $this->___getRawFromDatabase() );
     }
 
     /**
@@ -53,7 +53,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
      * @since 4.4.0
      */
     public function set( array $aAllLog ) {
-        $this->aAllLog = $aAllLog;
+        $this->aAllLog = $this->_getArraySortedByKeyRecursive( $aAllLog );
     }
 
     /**

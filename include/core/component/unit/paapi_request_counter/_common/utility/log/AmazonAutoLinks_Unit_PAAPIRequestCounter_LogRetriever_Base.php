@@ -166,5 +166,20 @@ abstract class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Base extend
                 }
                 return '';
             }
-    
+
+    /**
+     * Applies ksort() to the given array recursively.
+     * This is used to sort log data as their order gets messed when merging with file and database logs.
+     * @param  mixed $mValue
+     * @return array
+     * @since  4.4.0
+     */
+    protected function _getArraySortedByKeyRecursive( $mValue ) {
+        if ( ! is_array( $mValue ) ) {
+            return $mValue;
+        }
+        ksort( $mValue );
+        return array_map( array( $this, '_getArraySortedByKeyRecursive' ), $mValue );
+    }
+
 }
