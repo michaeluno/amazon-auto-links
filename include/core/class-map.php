@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.0b02 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.0b03 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -148,7 +148,7 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
-    "AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php",
+    "AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php", 
     "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 
     "AmazonAutoLinks_Unit_Log_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Log_PAAPIErrors.php", 
     "AmazonAutoLinks_Event___Action_APIRequestCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/wpcron/AmazonAutoLinks_Event___Action_APIRequestCacheRenewal.php", 
@@ -518,6 +518,7 @@ return array(
     "AmazonAutoLinks_PAAPI50_Locale_MX" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_MX.php", 
     "AmazonAutoLinks_PAAPI50_Locale_NL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_NL.php", 
     "AmazonAutoLinks_PAAPI50_Locale_SA" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SA.php", 
+    "AmazonAutoLinks_PAAPI50_Locale_SE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SE.php", 
     "AmazonAutoLinks_PAAPI50_Locale_SG" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SG.php", 
     "AmazonAutoLinks_PAAPI50_Locale_TR" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_TR.php", 
     "AmazonAutoLinks_PAAPI50_Locale_UK" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_UK.php", 
@@ -553,6 +554,7 @@ return array(
     "AmazonAutoLinks_Locale_MX" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_MX.php", 
     "AmazonAutoLinks_Locale_NL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_NL.php", 
     "AmazonAutoLinks_Locale_SA" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_SA.php", 
+    "AmazonAutoLinks_Locale_SE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_SE.php", 
     "AmazonAutoLinks_Locale_SG" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_SG.php", 
     "AmazonAutoLinks_Locale_TR" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_TR.php", 
     "AmazonAutoLinks_Locale_UK" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_UK.php", 

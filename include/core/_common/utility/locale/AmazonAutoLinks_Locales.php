@@ -22,7 +22,7 @@ class AmazonAutoLinks_Locales {
         return array(
             'CA', 'CN', 'FR', 'DE', 'IT', 'JP', 'UK',
             'ES', 'US', 'IN', 'BR', 'MX', 'AU', 'TR',
-            'AE', 'SG', 'NL', 'SA',
+            'AE', 'SG', 'NL', 'SA', 'SE',
         );
     }
 

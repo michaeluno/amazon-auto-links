@@ -40,7 +40,7 @@ If you want to simply display your desired specific product in a post, don't wor
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
 = Supports All Amazon Associates Locales =
-Includes Australia, Brazil, Canada, France, Germany, India, Italy, Japan, Mexico, Netherlands, Singapore, Saudi Arabia, Spain, Turkey, United Arab Emirates, United Kingdom, and United States. China is supported for the category unit type.
+Includes Australia, Brazil, Canada, France, Germany, India, Italy, Japan, Mexico, Netherlands, Singapore, Saudi Arabia, Spain, Turkey, United Arab Emirates, United Kingdom, Sweden, and United States. China is supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
@@ -213,7 +213,7 @@ The `id`, `asin` and `search` arguments cannot be used together.
 
 Optionally, the following arguments may be set.
 
-- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, `MX`, `AU`, `TR`, `AE`, `SG` and `NL`.
+- `country` - (string) the locale of the store. Accepted values are `CA`, `CN`, `FR`, `DE`, `IT`, `JP`, `UK`, `ES`, `US`, `IN`, `BR`, `MX`, `AU`, `TR`, `AE`, `SG`, `SE`, and `NL`.
 - `associate_id` - (string) the Amazon Associates ID for the affiliate.
 - `count` - (integer) determines how many items should be displayed.
 - `image_size` - (integer) the image size in pixels.
