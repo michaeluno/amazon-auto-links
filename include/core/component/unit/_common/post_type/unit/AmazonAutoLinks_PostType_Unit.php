@@ -187,8 +187,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $this->enqueueScripts(
             array(
                 $this->oUtil->isDebugMode()
-                    ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
-                    : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js',
+                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.js'
+                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.min.js',
             ),
             array(
                 'handle_id'     => 'aalUtility',

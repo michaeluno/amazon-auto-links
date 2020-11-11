@@ -424,8 +424,8 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
 
             $_oVerifier = new AmazonAutoLinks_Test_ClassLister( $sBaseDirPath, $aClassMap, $aBaseClasses );
             $_sUtilityScriptPath = $this->isDebugMode()
-                ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
-                : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js';
+                ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.js'
+                : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.min.js';
             wp_enqueue_script( 'aalUtility', $this->getSRCFromPath( $_sUtilityScriptPath ), array( 'jquery' ), true );
             $this->___enqueueAjaxScript(
                 'aalTests',

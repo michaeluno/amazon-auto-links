@@ -55,8 +55,8 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_A
 
             $oAdminPage->enqueueScript(
                 $oAdminPage->oUtil->isDebugMode()
-                    ? AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.js'
-                    : AmazonAutoLinks_Registry::$sDirPath . '/asset/js/utility.min.js',
+                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.js'
+                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(
