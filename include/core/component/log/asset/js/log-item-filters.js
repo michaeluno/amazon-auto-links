@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Log Item Filters
- * @version 1.0.2
+ * @version 1.0.3
  */
 (function($){
 
@@ -63,7 +63,8 @@
                 }
             } );
 
-            $( '.log' ).replaceWith( oLogClone );
+            $( '.log' ).replaceWith( oLogClone.show() );
+            _fixFormLayout();
 
             // Accordion
             $( '.log-item-head' ).click( function() {
