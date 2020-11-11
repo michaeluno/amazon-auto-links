@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Plugin Tests
- * @version 1.1.1
+ * @version 1.1.2
  */
 (function($){
 
@@ -224,7 +224,7 @@
     /**
      * Disallow the enter key in the form.
      */
-    $( document ).on( 'keydown', 'input.test-tags', function( event ) {
+    $( document ).on( 'keydown', 'input.test-tags, input.test-arguments ', function( event ) {
         if ( "Enter" !== event.key ) {
             return true;
         }
