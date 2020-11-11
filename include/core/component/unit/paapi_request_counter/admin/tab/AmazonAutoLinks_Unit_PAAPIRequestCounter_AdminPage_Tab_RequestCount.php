@@ -92,13 +92,25 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
             );
             $oAdminPage->enqueueScript(
                 $oAdminPage->oUtil->isDebugMode()
+                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.js'
+                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.min.js',
+                $this->sPageSlug,
+                $this->sTabSlug,
+                array(
+                    'handle_id'     => 'aalUtility',
+                    'dependencies'  => array( 'jquery', ),
+                    'in_footer'     => true,
+                )
+            );
+            $oAdminPage->enqueueScript(
+                $oAdminPage->oUtil->isDebugMode()
                     ? AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.js'
                     : AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-loader.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(
                     'handle_id'     => 'aalChartJSLoader',
-                    'dependencies'  => array( 'jquery', 'moment', 'chart.js' ),
+                    'dependencies'  => array( 'jquery', 'moment', 'chart.js', 'aalUtility' ),
                     'translation'   => array(
                         'debugMode' => $oAdminPage->oUtil->isDebugMode(),
                         'ajaxURL'   => admin_url( 'admin-ajax.php' ),

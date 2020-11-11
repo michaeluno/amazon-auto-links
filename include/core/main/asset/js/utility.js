@@ -53,4 +53,22 @@
         }
         return succeed;
     }
+
+    /**
+     * Cancels callback within the set time span, which is 200 milliseconds by default.
+     * @param func
+     * @param timeout
+     * @returns {function(): void}
+     */
+    debounce = function ( func , timeout ) {
+       var timeoutID , timeout = timeout || 200;
+       return function () {
+          var scope = this , args = arguments;
+          clearTimeout( timeoutID );
+          timeoutID = setTimeout( function () {
+              func.apply( scope , Array.prototype.slice.call( args ) );
+          } , timeout );
+       }
+    }
+    
 }(jQuery));        

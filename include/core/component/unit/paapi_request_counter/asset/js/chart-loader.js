@@ -31,7 +31,7 @@
 
         // When the browser shrinks, the canvas does not resize by itself, so cover that.
         _oCanvasContainer = _oChartElement.parent();
-        $( window ).resize( debouncer( resizedWindow ) );  // window resize
+        $( window ).resize( debounce( resizeCanvasContainer ) );  // window resize
 
     }); // document ready
 
@@ -103,7 +103,7 @@
      * Called when the browser window is resized.
      * @param event
      */
-    function resizedWindow( event ) {
+    function resizeCanvasContainer( event ) {
 
         var _iOverlap = _getSideMetaBoxOverlapWidth();
         if ( ! _iOverlap ) {
@@ -136,23 +136,6 @@
                 : 0;
 
         }
-
-    /**
-     * Cancels callback within the set time span, which is 200 milliseconds.
-     * @param func
-     * @param timeout
-     * @returns {function(): void}
-     */
-    function debouncer( func , timeout ) {
-       var timeoutID , timeout = timeout || 200;
-       return function () {
-          var scope = this , args = arguments;
-          clearTimeout( timeoutID );
-          timeoutID = setTimeout( function () {
-              func.apply( scope , Array.prototype.slice.call( args ) );
-          } , timeout );
-       }
-    }
 
 
     function getChartCreated( oChartElement, aX, aY, iTotal ) {
