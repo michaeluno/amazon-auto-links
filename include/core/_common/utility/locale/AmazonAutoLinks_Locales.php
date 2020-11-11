@@ -116,4 +116,13 @@ class AmazonAutoLinks_Locales {
         return false === $_sLocale ? $sDefaultLocale : $_sLocale;
     }
 
+    /**
+     * @param  string $sLocale
+     * @return boolean
+     * @since  4.4.0
+     */
+    static public function isValidLocale( $sLocale ) {
+        return in_array( $sLocale, self::getLocales(), true );
+    }
+
 }
