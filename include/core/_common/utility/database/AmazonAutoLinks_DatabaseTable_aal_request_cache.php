@@ -204,6 +204,12 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
                 if ( empty( $aRow ) ) {
                     return array();
                 }
+                $aRow  = $aRow + array(
+                    'modified_time' => null,
+                    'expiration_time' => null,
+                    'charset' => null,
+                    'cache' => null,
+                );
                 $_aRow = array(
                         'remained_time' => null !== $iCacheDuration
                             ? strtotime( $aRow[ 'modified_time' ] ) + $iCacheDuration - time()
@@ -225,9 +231,30 @@ class AmazonAutoLinks_DatabaseTable_aal_request_cache extends AmazonAutoLinks_Da
                     '_expiration_timestamp'  => strtotime( $aRow[ 'expiration_time' ] ),
                     
                 );
-            }     
-            
-    
+            }
+
+
+    /**
+     * @remark Currently only used by scratches.
+     * @param  string  $sSQLQuery
+     * @param  boolean $bFormat
+     * @return array
+     * @since  4.4.0
+     */
+    public function getCachesByQuery( $sSQLQuery, $bFormat=false ) {
+        $_aResults =  $this->getRows( $sSQLQuery );
+        $_aRows = array();
+        foreach( $_aResults as $_aResult ) {
+            if ( ! is_array( $_aResult ) ) {
+                continue;
+            }
+            $_aRows[ $_aResult[ 'name' ] ] = $bFormat
+                ? $this->___getRowFormatted( $_aResult, null )
+                : $_aResult;
+        }
+        return $_aRows;
+    }
+
     /**
      * Deletes the cache(s) by given cache name(s).
      * @param array|string $asNames
