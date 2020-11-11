@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.0.1
+	@version 1.0.2
  */
 /* General */
 .width-full,
@@ -60,9 +60,15 @@
 .debug {
 	max-width: 100%;
 }
-pre.dump-array {
-    width: inherit !important;   
+.debug-output {
+	box-sizing: border-box;
 }
+pre.dump-array {
+	box-sizing: border-box;
+	margin: 0;
+    width: inherit;
+}
+
 
 .right-submit-button {
     margin-right: 2em;
