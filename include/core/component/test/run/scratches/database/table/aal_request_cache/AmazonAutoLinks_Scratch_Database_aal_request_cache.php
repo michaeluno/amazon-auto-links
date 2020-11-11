@@ -53,7 +53,7 @@ class AmazonAutoLinks_Scratch_Database_aal_request_cache extends AmazonAutoLinks
         }
         $_sRequestType  = trim( $_aParameters[ 1 ] );
         $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-        $_sQuery        = "SELECT name, request_uri, type"
+        $_sQuery        = "SELECT name, request_uri, type, modified_time"
             . " FROM `{$_oTable->aArguments[ 'table_name' ]}`"
             . " WHERE request_uri LIKE '%s'"
             . ( $_sRequestType ? " AND type = '%s'" : '' )
