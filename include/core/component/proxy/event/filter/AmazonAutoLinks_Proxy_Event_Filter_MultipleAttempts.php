@@ -68,14 +68,15 @@ class AmazonAutoLinks_Proxy_Event_Filter_MultipleAttempts extends AmazonAutoLink
             return $aoResponse;
         }
         $aArguments[ 'attempts' ] = $_iAttempts + 1;
-        
+        $aArguments[ 'interval' ] = 0;
+
         $_oHTTP = new AmazonAutoLinks_HTTPClient(
             $sURL,
             $iCacheDuration,
-            $aArguments,   // setting `raw` because the response format must be an array or an instance of WP_Error
+            $aArguments,
             $sRequestType
         );
-        $_aoResponse = $_oHTTP->getResponse();
+        $_aoResponse = $_oHTTP->getResponse();  // not retrieving the HTTP body because the response format must be an array or an instance of WP_Error
         return $this->___hasError( $_aoResponse, $sURL )
             ? $_aoPrevious  // the response of the previous attempt
             : $_aoResponse;
