@@ -79,7 +79,7 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
             unset( $_aProxies[ $_biIndex ] );
 
         }
-        $_aUnusables     = array_unique( $_aUnusables );
+        $_aUnusables     = $this->getBottomMostItems( array_unique( $_aUnusables ), 1000 );
 
         // Save
         $_oToolOption->set( array( 'proxies', 'proxy_list' ), implode( PHP_EOL, $_aProxies ) );
