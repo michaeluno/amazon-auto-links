@@ -49,16 +49,26 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      * Used to cut off too many items.
      *
      * @remark The array should be numerically indexed, not associative.
-     * @param array $aItems
-     * @param integer $iCount
+     * @param  array   $aItems
+     * @param  integer $iCount
+     * @param  boolean $bPreserveKeys
      * @return array
-     * @since   4.2.0
+     * @since  4.2.0
      */
-    static public function getTopmostItems( array $aItems, $iCount ) {
+    static public function getTopMostItems( array $aItems, $iCount, $bPreserveKeys=false ) {
+        return array_slice( $aItems, 0, ( integer ) $iCount, $bPreserveKeys );
+    }
+
+    /**
+     * @param  array   $aItems
+     * @param  integer $iCount
+     * @param  boolean $bPreserveKeys
+     * @return array
+     * @since  4.4.0
+     */
+    static public function getBottomMostItems( array $aItems, $iCount, $bPreserveKeys=false ) {
         $iCount = ( integer ) $iCount;
-        $aItems = array_reverse( $aItems );
-        $aItems = array_slice( $aItems, $iCount * -1, $iCount, true );
-        return array_reverse( $aItems );
+        return array_slice( $aItems, $iCount * -1, $iCount, $bPreserveKeys );
     }
 
     /**

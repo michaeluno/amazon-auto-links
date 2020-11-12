@@ -77,25 +77,28 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
-     * @return bool
      * @tags array
      */
-    public function test_getTopmostItems() {
+    public function test_getTopMostItems() {
         $_aArray = array(
             'a', 'b', 'c', 'd', 'e', 'f', 'g'
         );
-        return array( 'a', 'b', 'c', ) === $this->getTopmostItems( $_aArray, 3 );
+        $this->_assertEqual( array( 'a', 'b', 'c', ), $this->getTopMostItems( $_aArray, 3 ) );
+        $this->_assertEmpty( $this->getTopMostItems( $_aArray, 0 ) );
     }
+
     /**
      * @return bool
      * @tags array
      */
-    public function test_getTopmostItems2() {
+    public function test_getBottomMostItems() {
         $_aArray = array(
             'a', 'b', 'c', 'd', 'e', 'f', 'g'
         );
-        return empty( $this->getTopmostItems( $_aArray, 0 ) );
+        $this->_assertEqual( array( 'e', 'f', 'g', ), $this->getBottomMostItems( $_aArray, 3 ) );
+        $this->_assertEmpty( $this->getBottomMostItems( $_aArray, 0 ) );
     }
+
 
     /**
      * @throws Exception

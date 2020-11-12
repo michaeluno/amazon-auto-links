@@ -52,7 +52,7 @@ class AmazonAutoLinks_Proxy_Event_WPCronAction_ProxyUpdate extends AmazonAutoLin
         // Retrieve new proxies.
         $_aProxies       = array_merge( $_aProxies, $this->___getNewProxies() );
         $_aProxies       = array_unique( $_aProxies );
-        $_aProxies       = $this->getTopmostItems( $_aProxies, 10000 );
+        $_aProxies       = $this->getTopMostItems( $_aProxies, 10000 );
 
         // Save
         /// Store the last run time.

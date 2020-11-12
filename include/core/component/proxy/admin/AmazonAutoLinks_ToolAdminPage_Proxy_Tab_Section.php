@@ -204,7 +204,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
             $_aSanitized = array_unique( $_aSanitized );
 
             // Keep up to 10000
-            $_aSanitized = $this->getTopmostItems( $_aSanitized, 10000 );
+            $_aSanitized = $this->getTopMostItems( $_aSanitized, 10000 );
 
             $_sProxies   = implode( PHP_EOL, $_aSanitized );
             $aInputs[ 'proxy_list' ] = $_sProxies;
