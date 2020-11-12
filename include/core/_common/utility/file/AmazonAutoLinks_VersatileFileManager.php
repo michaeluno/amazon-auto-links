@@ -186,7 +186,7 @@ class AmazonAutoLinks_VersatileFileManager {
             return false; // not alive (not created yet)
         }
         $_iModifiedTime = $this->getModificationTime();
-        if ( $_iModifiedTime + $this->_iTimeout > time() ) {
+        if ( $_iModifiedTime + $this->_iTimeout >= time() ) {
             // the file is not timed-out yet
             return true; // alive
         }
