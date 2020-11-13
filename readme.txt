@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.5.1
+Tested up to:       5.5.3
 Requires MySQL:     5.0.3
-Stable tag:         4.3.9
+Stable tag:         4.4.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,23 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.0 - 11/13/20020 =
+- Added the Sweden locale.
+- Added the ability to process pasted Amazon URLs in the post editor when they are not of a product URL by performing like the URL unit type.
+- Added the ability to log PA-API request counts.
+- Added a warning in unit outputs when an Associate tag is not set.
+- Added a warning when the site PHP version is below 5.6.20.
+- Tweaked the style of the `List` template regarding the thumbnail width and the font size of now-retrieving elements in embedded iframe.
+- Tweaked the style of the Error Log and Debug Log tab screens.
+- Fixed a bug that unusable proxies were not cleared automatically.
+- Fixed a bug that `Item Look-up` units failed to retrieve products with PA-API with a certain number of items.
+- Fixed a bug that did not resume now-retrieving elements for iframe embedded outputs.
+- Fixed a bug that caused a PHP notice, "file_get_contents(): read of ... bytes failed with errno=13 Permission denied in ...AmazonAutoLinks_VersatileFileManager.php on line 107."
+- Fixed a bug that caused broken mark-ups in the Error Log tab when a log item includes a detail of some HTML elements.
+- Fixed a bug that caused a PHP fatal error: "Uncaught Error: Wrong parameters for Exception ..." in the `Tests` page when an Ajax request failed.
+- Changed the default value of the `Show Errors` unit option to `Show errors`.
+- Moved the `Error Log` and `Debug Log` tabs to the `Reports` page.
 
 = 4.3.9 - 11/06/2020 =
 - Added the Italian translation.
