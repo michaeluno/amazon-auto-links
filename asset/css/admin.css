@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.0.2
+	@version 1.0.3
  */
 /* General */
 .width-full,
@@ -91,7 +91,7 @@ pre.dump-array {
 	padding: 0; 
 	max-height: 60px; 
 	float: right;
-	display: inline-box;
+	display: inline-block;
 }
 
 .upgrade-to-pro {

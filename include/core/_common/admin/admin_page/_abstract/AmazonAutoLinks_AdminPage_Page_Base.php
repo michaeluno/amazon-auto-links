@@ -64,7 +64,7 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
 
         $_sPageStyleSheetPath = $this->isDebugMode()
             ? AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . '.css'
-            : AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . 'min.css';
+            : AmazonAutoLinks_Registry::$sDirPath . '/asset/css/' . $this->sPageSlug . '.min.css';
         if ( file_exists( $_sPageStyleSheetPath ) ) {
             $this->oFactory->enqueueStyle( $_sPageStyleSheetPath, $this->sPageSlug );
         }
