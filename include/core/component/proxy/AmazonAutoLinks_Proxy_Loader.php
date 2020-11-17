@@ -83,7 +83,7 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
 
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $oFactory->setInPageTabTag( 'h2' );
-            $oFactory->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+            $oFactory->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
 
         }
 

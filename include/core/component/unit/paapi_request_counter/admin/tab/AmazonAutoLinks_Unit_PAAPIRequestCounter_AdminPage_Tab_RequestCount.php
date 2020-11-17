@@ -42,7 +42,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
             'title'     => __( 'PA-API Request Counter', 'amazon-auto-links' ),
             'order'     => 5,
             'style'     => array(
-                AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css',
+                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
             ),
         );
     }

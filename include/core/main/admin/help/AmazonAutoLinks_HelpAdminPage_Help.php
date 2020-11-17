@@ -25,8 +25,8 @@ class AmazonAutoLinks_HelpAdminPage_Help extends AmazonAutoLinks_AdminPage_Page_
             'title'     => __( 'Help', 'amazon-auto-links' ),
             'order'     => 1000, // to be the last menu item
             'style'     => array(
-                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
-                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/code.css' ),
+                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/code.css',
             ),
         );
     }

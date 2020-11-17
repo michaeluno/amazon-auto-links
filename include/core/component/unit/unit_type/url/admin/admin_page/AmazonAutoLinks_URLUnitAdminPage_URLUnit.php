@@ -25,7 +25,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'url_unit' ],
             'title'         => __( 'Add Unit by URL', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-            'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+            'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
         );
     }
 

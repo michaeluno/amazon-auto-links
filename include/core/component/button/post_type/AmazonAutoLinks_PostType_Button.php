@@ -75,8 +75,8 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             
             $this->enqueueStyles(
                 array(
-                    AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css',
-                    AmazonAutoLinks_Registry::$sDirPath . '/asset/css/edit.aal-button.css',
+                    AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+                    AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/css/edit.aal-button.css',
                 )
             );
 

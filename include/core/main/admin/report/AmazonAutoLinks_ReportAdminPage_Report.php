@@ -25,7 +25,7 @@ class AmazonAutoLinks_ReportAdminPage_Report extends AmazonAutoLinks_AdminPage_P
             'title'     => __( 'Reports', 'amazon-auto-links' ),
             'order'     => 80, // to be the last menu item
             'style'     => array(
-                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
                 AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/report.css',
             ),
         );

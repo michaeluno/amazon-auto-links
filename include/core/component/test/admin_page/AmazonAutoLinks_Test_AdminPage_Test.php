@@ -25,7 +25,7 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
             'title'     => 'Tests',
             'order'     => 99999, // to be the last menu item
 //            'style'     => array(
-//                AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+//                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
 //                AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ),
 //            ),
         );

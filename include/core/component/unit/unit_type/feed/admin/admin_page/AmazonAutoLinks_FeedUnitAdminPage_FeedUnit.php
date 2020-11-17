@@ -25,7 +25,7 @@ class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnit
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'feed_unit' ],
             'title'         => __( 'Add Feed Unit', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-            'style'         => AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ),
+            'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
         );
     }
 

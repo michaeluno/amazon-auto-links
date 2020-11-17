@@ -104,7 +104,7 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
         $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
         $this->setInPageTabTag( 'h2' );                
         
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
                 
         // @todo examine whether this is necessary or not.            
         $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            

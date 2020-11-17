@@ -156,7 +156,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );
             
         $this->enqueueStyles(
-            AmazonAutoLinks_Registry::$sDirPath . '/asset/css/admin.css'
+            AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css'
         );
 
         // For the post listing table

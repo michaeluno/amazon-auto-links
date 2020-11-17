@@ -143,7 +143,7 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
         $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
         $this->setInPageTabTag( 'h2' );                
    
-        $this->enqueueStyle( AmazonAutoLinks_Registry::getPluginURL( 'asset/css/admin.css' ) );
+        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
                     
     }
         
