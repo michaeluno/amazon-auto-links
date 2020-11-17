@@ -1,0 +1,56 @@
+/**
+ * @name Unit Post Type
+ * @version 1.0.0
+ */
+#post-body-content {
+    margin-bottom: 10px;
+}
+#edit-slug-box {
+    display: none;
+}
+
+/* Hide the submit button for the post type drop-down filter */
+#post-query-submit {
+    display: none;
+}            
+/* List Table Columns */
+.column-status {
+    width: 7.6%;
+    text-align: center;  
+}            
+.column-unit_type, 
+.column-template,            
+.column-feed {
+    width:10%; 
+}
+/* Feed column */
+.column-feed { 
+    text-align: center 
+}
+.feed-icon {
+    display: inline-block;
+    margin-top: 0.4em;
+    margin-right: 0.8em;
+}
+/* Status Circle */
+.circle {
+    height: 1em;
+    width: 1em;              
+    border-radius: 50%;
+    display: inline-block;                                
+}
+.green {            
+    background-color: #339933;
+}
+.gray {
+    background-color: #999999;
+}
+.red {
+    background-color: red;
+}
+.unknown {
+    background-color: #DDD;
+} 
+.column-status .circle {
+    margin-top: 0.4em;
+}

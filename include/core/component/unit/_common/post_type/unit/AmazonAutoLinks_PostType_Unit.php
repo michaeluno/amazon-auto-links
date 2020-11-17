@@ -148,15 +148,27 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
      */
     public function load() {
 
+        if ( ! $this->oProp->bIsAdmin ) {
+            return;
+        }
+
         $this->setAutoSave( false );
         $this->setAuthorTableFilter( false );            
         add_filter( 'months_dropdown_results', '__return_empty_array' );
         
         add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );
         add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );
-            
+
+        $_bDebugMode = $this->oUtil->isDebugMode();
         $this->enqueueStyles(
-            AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css'
+            array(
+                $_bDebugMode
+                    ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css'
+                    : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.min.css',
+                $_bDebugMode
+                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/css/aal-unit-post-type.css'
+                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/css/aal-unit-post-type.min.css',
+            )
         );
 
         // For the post listing table
@@ -169,7 +181,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
 
         $this->enqueueScripts(
             array(
-                $this->oUtil->isDebugMode()
+                $_bDebugMode
                     ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.js'
                     : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
             ),
@@ -180,13 +192,13 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                     'labels' => array(
                         'copied'    => __( 'Copied the text.', 'amazon-auto-links' ),
                     ),
-                    'debugMode' => $this->oUtil->isDebugMode(),
+                    'debugMode' => $_bDebugMode,
                 ),
             )
         );
         $this->enqueueScripts(
             array(
-                $this->oUtil->isDebugMode()
+                $_bDebugMode
                     ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.js'
                     : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/utility.min.js',
             ),
@@ -198,7 +210,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         );
         $this->enqueueScripts(
             array(
-                $this->oUtil->isDebugMode()
+                $_bDebugMode
                     ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
                     : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
             ),
@@ -214,7 +226,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             )
         );
 
-        // 3.7.6+ Set nonce
+        // [3.7.6+] Set nonce
         add_action( 'admin_footer', array( $this, 'replyToEmbedNonce' ) );
 
     }
@@ -244,69 +256,20 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
      * @callback        filter      style_{class name}
      */
     public function style_AmazonAutoLinks_PostType_Unit() {
-        $_sNone = 'none';
-        $_sSpinnerURL = admin_url( 'images/loading.gif' );
-        return "#post-body-content {
-                margin-bottom: 10px;
-            }
-            #edit-slug-box {
-                display: {$_sNone};
-            }
-            #icon-edit.icon32.icon32-posts-" . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] . " {
-                background:url('" . AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ) . "') no-repeat;
-            }            
-            /* Hide the submit button for the post type drop-down filter */
-            #post-query-submit {
-                display: {$_sNone};
-            }            
-            /* List Table Columns */
-            .column-status {
-                width: 7.6%;
-                text-align: center;  
-            }            
-            .column-unit_type, 
-            .column-template,            
-            .column-feed {
-                width:10%; 
-            }
-            /* Feed column */
-            .column-feed { 
-                text-align: center 
-            }
-            .feed-icon {
-                display: inline-block;
-                margin-top: 0.4em;
-                margin-right: 0.8em;
-            }
-            /* Status Circle */
-            .circle {
-                height: 1em;
-                width: 1em;              
-                border-radius: 50%;
-                display: inline-block;                                
-            }
-            .green {            
-                background-color: #339933;
-            }
-            .gray {
-                background-color: #999999;
-            }
-            .red {
-                background-color: red;
-            }
-            .unknown {
-                background-color: #DDD;
-            }
-            .circle.loading {
-                background-image: url({$_sSpinnerURL});
-                background-repeat: no-repeat;            
-                min-height: 16px;
-                min-width: 16px;            
-            }            
-            .column-status .circle {
-                margin-top: 0.4em;
-            }
-        ";
-    }
+        $_sSpinnerURL    = admin_url( 'images/loading.gif' );
+        $_sUnitPostType  = AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
+        $_sScreenIconURL = AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" );
+        return <<<CSS
+#icon-edit.icon32.icon32-posts-{$_sUnitPostType} {
+    background:url('{$_sScreenIconURL}') no-repeat;
+}            
+.circle.loading {
+    background-image: url({$_sSpinnerURL});
+    background-repeat: no-repeat;            
+    min-height: 16px;
+    min-width: 16px;            
 }
+CSS;
+    }
 
+}
