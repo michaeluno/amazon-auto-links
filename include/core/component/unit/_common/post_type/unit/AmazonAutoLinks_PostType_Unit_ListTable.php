@@ -66,8 +66,9 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             'cb'                    => '<input type="checkbox" />',   
             'title'                 => __( 'Unit Name', 'amazon-auto-links' ),    
             'status'                => __( 'Status', 'amazon-auto-links' ),
-            'unit_type'             => __( 'Unit Type', 'amazon-auto-links' ),
-            'template'              => __( 'Template', 'amazon-auto-links' ),
+            'details'               => __( 'Details', 'amazon-auto-links' ),
+            // 'unit_type'             => __( 'Unit Type', 'amazon-auto-links' ),
+            // 'template'              => __( 'Template', 'amazon-auto-links' ),
             'amazon_auto_links_tag' => __( 'Labels', 'amazon-auto-links' ),  
             'code'                  => __( 'Shortcode / PHP Code', 'amazon-auto-links' ),
             'feed'                  => __( 'Feed', 'amazon-auto-links' ), // 3.1.0+
@@ -123,27 +124,64 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         
     }
     /**
-     * @callback        filter      cell_{post type slug}_{column key}
-     * @return          string
+     * @param    string       $sCell
+     * @param    integer      $iPostID
+     * @callback add_filter() cell_{post type slug}_{column key}
+     * @return   string
      */
-    public function cell_amazon_auto_links_unit_type( $sCell, $iPostID ) {
-        
-        $_sUnitType       = get_post_meta( $iPostID, 'unit_type', true );
-        $_aUnitTypeLabels = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
-        return isset( $_aUnitTypeLabels[ $_sUnitType ] )
-            ? $_aUnitTypeLabels[ $_sUnitType ]
-            : __( 'Unknown', 'amazon-auto-links' );
-        
+    public function cell_amazon_auto_links_details( $sCell, $iPostID ) {
+
+        $_sID                 = __( 'ID', 'amazon-auto-links' );
+        $_sLocale             = __( 'Country', 'amazon-auto-links' );
+        $_sUnitType           = __( 'Unit Type', 'amazon-auto-links' );
+        $_sTemplate           = __( 'Template', 'amazon-auto-links' );
+        $_sThisUnitType       = get_post_meta( $iPostID, 'unit_type', true );
+        $_aUnitTypeLabels     = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
+        $_sThisUnitTypeLabel  = $this->oUtil->getElement( $_aUnitTypeLabels, array( $_sThisUnitType ), __( 'Unknown', 'amazon-auto-links' ) );
+        $_sThisTemplate       = $this->___getTemplateNameOfUnit( $iPostID );
+        $_sThisLocale         = get_post_meta( $iPostID, 'country', true );
+        return "<ul>"
+                . "<li><span class='detail-title'>{$_sID}:</span><span class='detail-value'>{$iPostID}</span></li>"
+                . "<li><span class='detail-title'>{$_sLocale}:</span><span class='detail-value'>{$_sThisLocale}</span></li>"
+                . "<li><span class='detail-title'>{$_sUnitType}:</span><span class='detail-value'>{$_sThisUnitTypeLabel}</span></li>"
+                . "<li><span class='detail-title'>{$_sTemplate}:</span><span class='detail-value'>{$_sThisTemplate}</span></li>"
+            . "</ul>";
     }
+        /**
+         * @param  integer $iPostID
+         * @return string
+         * @since  4.4.1
+         */
+        private function ___getTemplateNameOfUnit( $iPostID ) {
+            return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID(
+                untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
+            );
+        }
+    
     /**
      * @callback        filter      cell_{post type slug}_{column key}
      * @return          string
+     * @deprecated      4.4.1       Now displayed in the Details column.
      */
-    public function cell_amazon_auto_links_template( $sCell, $iPostID ) {
-        return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID( 
-            untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
-        );
-    }    
+    // public function cell_amazon_auto_links_unit_type( $sCell, $iPostID ) {
+    //
+    //     $_sUnitType       = get_post_meta( $iPostID, 'unit_type', true );
+    //     $_aUnitTypeLabels = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
+    //     return isset( $_aUnitTypeLabels[ $_sUnitType ] )
+    //         ? $_aUnitTypeLabels[ $_sUnitType ]
+    //         : __( 'Unknown', 'amazon-auto-links' );
+    //
+    // }
+    /**
+     * @callback        filter      cell_{post type slug}_{column key}
+     * @return          string
+     * @deprecated      4.4.1       Now displayed in the Details column.
+     */
+    // public function cell_amazon_auto_links_template( $sCell, $iPostID ) {
+    //     return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID(
+    //         untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
+    //     );
+    // }
     
     /**
      * @callback        filter      cell_{post type slug}_{column name}

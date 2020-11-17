@@ -1,1 +1,2 @@
+- Added the `Details` column in the unit listing table and removed the `Template` and `Unit Type` columns. 
 - Fixed a bug that dud not load stylesheets in the setting pages. 
