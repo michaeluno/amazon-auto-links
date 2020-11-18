@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2020-11-03 18:23+0900\n"
+"POT-Creation-Date: 2020-11-18 09:51+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: asset\n"
 "X-Poedit-SearchPathExcluded-4: tool\n"
 
-#: include/AmazonAutoLinks_Bootstrap.php:139
+#: include/core/AmazonAutoLinks_Bootstrap.php:138
 msgid "Deactivating the plugin"
 msgstr ""
 
@@ -32,27 +32,27 @@ msgstr ""
 msgid "The method is not defined: %1$s"
 msgstr ""
 
-#: include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Section_Base.php:133
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:306
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:289
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:84
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ExternalScript.php:68
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:75
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php:70
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:83
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:115
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:78
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:83
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:78
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:113
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:168
+#: include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Section_Base.php:140
 #: include/core/component/auto_insert/admin_page/edit/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit.php:120
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:128
 #: include/core/component/third_party_support/phpzon/admin/AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon.php:126
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:177
 #: include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:84
 #: include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation.php:108
 #: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base.php:32
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:178
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:306
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:289
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:84
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ExternalScript.php:68
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:75
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php:70
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:83
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:115
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:78
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:83
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:78
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:113
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:167
 msgid "There was something wrong with your input."
 msgstr ""
 
@@ -62,7 +62,6 @@ msgstr ""
 
 #: include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php:50
 #: include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php:51
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:54
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:46
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable.php:38
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable.php:47
@@ -80,13 +79,13 @@ msgstr ""
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_AutoInsert.php:25
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:65
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:26
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:54
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:121
 msgid "On"
 msgstr ""
 
 #: include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php:50
 #: include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php:51
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:55
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:47
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable.php:39
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable.php:48
@@ -104,6 +103,7 @@ msgstr ""
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_AutoInsert.php:26
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:66
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:27
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:55
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:122
 msgid "Off"
 msgstr ""
@@ -125,79 +125,79 @@ msgstr ""
 msgid "Could not get a user ID."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:297
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:295
 #, php-format
 msgid ""
 "Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> to "
 "enable this feature."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:300
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:298
 msgid "Please consider upgrading to Pro to enable this feature."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:463
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:461
 #: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:223
 #: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:67
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
 #: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:236
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:43
-#: include/core/main/option/AmazonAutoLinks_Option.php:321
 #: include/core/main/option/AmazonAutoLinks_Option.php:331
+#: include/core/main/option/AmazonAutoLinks_Option.php:341
 msgid "Buy Now"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:490
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:488
 msgid "Theme button"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:645
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:641
 #, php-format
 msgid ""
 "<a href=\"%1$s\">Amazon Product Advertising API keys</a> must be set to "
 "enable this option."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:657
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:653
 #, php-format
 msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more units!"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:657
+#: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:653
 #, php-format
 msgid ""
 "Make sure to empty the <a href=\"%2$s\">trash box</a> to delete the units "
 "completely!"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:220
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:281
 msgid "Post / Page Content"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:221
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:282
 msgid "Excerpt"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:222
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:283
 msgid "Comment"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:223
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:73
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:284
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:74
 #: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:112
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:224
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:285
 msgid "Feed Excerpt"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:234
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:295
 msgid "Post / Page Content on Publish"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:237
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:298
 msgid "inserts product links into the database so they will be static."
 msgstr ""
 
@@ -497,6 +497,14 @@ msgstr ""
 msgid "Saudi Riyal"
 msgstr ""
 
+#: include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SE.php:67
+msgid "Swedish - SWEDEN"
+msgstr ""
+
+#: include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SE.php:77
+msgid "Swedish Krona"
+msgstr ""
+
 #: include/core/_common/utility/interpreter/api/locale/AmazonAutoLinks_PAAPI50_Locale_SG.php:68
 msgid "English - SINGAPORE"
 msgstr ""
@@ -753,10 +761,10 @@ msgid "United Arab Emirates"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_AU.php:50
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:39
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:83
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:47
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:54
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:39
 msgid "Australia"
 msgstr ""
 
@@ -768,7 +776,7 @@ msgid "Brazil"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_Base.php:225
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:31
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:31
 msgid "Impression Counter"
 msgstr ""
 
@@ -794,10 +802,10 @@ msgid "Germany"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_ES.php:48
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:40
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:78
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:42
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:49
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:40
 msgid "Spain"
 msgstr ""
 
@@ -816,10 +824,10 @@ msgid "India"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_IT.php:48
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:38
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:75
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:39
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:46
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:38
 msgid "Italy"
 msgstr ""
 
@@ -831,10 +839,10 @@ msgid "Japan"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_MX.php:51
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:41
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:82
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:46
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:53
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:41
 msgid "Mexico"
 msgstr ""
 
@@ -844,6 +852,10 @@ msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_SA.php:50
 msgid "Saudi Arabia"
+msgstr ""
+
+#: include/core/_common/utility/locale/AmazonAutoLinks_Locale_SE.php:48
+msgid "Sweden"
 msgstr ""
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_SG.php:50
@@ -866,1000 +878,6 @@ msgstr ""
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:43
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:50
 msgid "United States"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help.php:25
-msgid "Help"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:26
-msgid "About"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:45
-msgid "Plugin Information"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:58
-msgid "Database Tables"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:74
-msgid "General Options"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:87
-msgid "Tools Options"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:100
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php:31
-msgid "Template Options"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_About.php:113
-msgid "File Permissions"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:26
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:46
-msgid "Change Log"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_FAQ.php:26
-msgid "FAQ"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:26
-msgid "Get Pro"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:50
-msgid "Available"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:51
-msgid "Unavailable"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:56
-msgid "Get Pro Now!"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:57
-msgid ""
-"Please consider upgrading to the pro version if you like the plugin and want "
-"more useful features, which includes unlimited numbers of categories, units, "
-"and items, and more!"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:59
-msgid "Supported Features"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:65
-msgid "Standard"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:66
-msgid "Pro"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:69
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:48
-msgid "Image Size"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:74
-msgid "Black and White List"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:79
-#: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:36
-#: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:90
-#: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:120
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
-#: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:91
-msgid "Sort Order"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:84
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:63
-msgid "Direct Link Bonus"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:89
-msgid "Insert in Posts and Feeds"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:94
-msgid "Widget"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:99
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:136
-msgid "Max Number of Items to Show"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:101
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:106
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:111
-msgid "Unlimited"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:104
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:138
-msgid "Max Number of Categories Per Unit"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:109
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:140
-msgid "Max Number of Units"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:114
-msgid "Export and Import Units"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:119
-msgid "Exclude Sub Categories"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:124
-msgid "Multiple Columns"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:129
-msgid "Advanced Search Options"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:137
-msgid "Get pro for unlimited items to show."
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:139
-msgid "Get pro for unlimited categories to set up!"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:141
-msgid ""
-"Get pro for unlimited units so that you can put ads as many as you want."
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:151
-msgid "Get Now!"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:26
-#: include/core/main/admin_page/AmazonAutoLinks_AdminPage.php:66
-msgid "Support"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:44
-msgid "Support Forum"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:48
-#, php-format
-msgid ""
-"To get free support, visit the <a href=\"%1$s\" target=\"_blank\">support "
-"forum</a>."
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:54
-msgid "Priority Support"
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Support.php:58
-#, php-format
-msgid ""
-"You can get priority email support by purchasing <a href=\"%1$s\" target="
-"\"_blank\">Pro</a>."
-msgstr ""
-
-#: include/core/component/admin/help/admin_page/AmazonAutoLinks_HelpAdminPage_Help_Tips.php:26
-msgid "Tips"
-msgstr ""
-
-#: include/core/component/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:36
-msgid "Information"
-msgstr ""
-
-#: include/core/component/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:68
-msgid "Join Affiliate Program "
-msgstr ""
-
-#: include/core/component/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:71
-msgid "Earn commissions by setting a credit link in the unit output."
-msgstr ""
-
-#: include/core/component/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:73
-#, php-format
-msgid ""
-"<a href=\"%1$s\" target=\"_blank\">Sign up</a> for the affiliate program "
-"first."
-msgstr ""
-
-#: include/core/component/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:80
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:35
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:24
-msgid "Credit Link"
-msgstr ""
-
-#: include/core/component/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:56
-#: include/core/component/admin/setting/admin_page/AmazonAutoLinks_AdminPage_Setting.php:25
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
-msgid "Settings"
-msgstr ""
-
-#: include/core/component/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:61
-msgid "Custom Order"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php:26
-msgid "3rd Party"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/AmazonAutoLinks_AdminPage_Setting.php:61
-#: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:51
-#: include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php:167
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
-msgid "Debug Info"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/AmazonAutoLinks_AdminPage_Setting.php:64
-msgid "Saved Options"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:26
-msgid "Authentication"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:25
-msgid "AWS Access Key Identifiers"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:27
-#, php-format
-msgid ""
-"Credentials are required to perform search requests with Amazon <a href="
-"\"%1$s\" target=\"_blank\">Product Advertising API</a>."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:31
-#, php-format
-msgid ""
-"The keys can be obtained by logging in to the <a href=\"%1$s\" target="
-"\"_blank\">Amazon Web Services web site</a>."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:35
-#, php-format
-msgid ""
-"The instruction is documented <a href=\"%1$s\" target=\"_blank\">here</a>."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:64
-#: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:35
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Column.php:56
-#: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:29
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:68
-msgid "Status"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:69
-#, php-format
-msgid ""
-"If you get an error, try testing your keys with <a href=\"%1$s\" target="
-"\"_blank\">Scratchpad</a>."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:75
-msgid "Access Key"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:77
-msgid "The public key consisting of 20 alphabetic characters."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:87
-msgid "Secret Access Key"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:89
-msgid "The private key consisting of 40 alphabetic characters."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:99
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:23
-#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:54
-msgid "Associate ID"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:102
-msgid "The Amazon Associates tag."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:103
-msgid "Some locales may require this to be set."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:108
-msgid "Server Locale"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:110
-msgid ""
-"The region of the API server. If you are unsure, select <code>US</code>."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:116
-msgid "Disclaimer"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:122
-#, php-format
-msgid ""
-"Please check the <a href=\"%1$s\" target=\"_blank\">Amazon.com Product "
-"Advertising API License Agreement</a> to be safe."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:131
-msgid "Disconnect"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:132
-msgid "Connect"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:200
-msgid "Either a public key or private key is not set."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:253
-msgid "Connected"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:254
-msgid "Disconnected"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:280
-msgid "Disconnected."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:291
-msgid "The Access Key ID must consist of 20 characters."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:299
-msgid "The Secret Access Key must consist of 40 characters."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:319
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:320
-msgid "Sent Value"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:323
-msgid "Failed authentication."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php:26
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:90
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:174
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:88
-msgid "Cache"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:25
-msgid "Caches"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:92
-msgid "Sizes"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:95
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:112
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:140
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:208
-#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/AmazonAutoLinks_FormFields_SearchUnit_Base.php:17
-#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:63
-msgid "Products"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:99
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:114
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:142
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:214
-msgid "HTTP Requests"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:110
-msgid "Clear Caches"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:113
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:115
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:141
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:143
-#, php-format
-msgid "%1$s item(s)."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:126
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:154
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:115
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:119
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:86
-#: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
-msgid "Clear"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:138
-msgid "Clear Expired Caches"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:165
-msgid "Compress"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:167
-msgid "Compress caches"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:172
-msgid "Caching Mode"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:175
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:40
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:239
-msgid "Normal"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:175
-msgid "relies on WP Cron to renew caches."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:176
-msgid "Intense"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:176
-msgid "relies on the plugin caching method to renew caches."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:178
-msgid ""
-"The intense mode should only be enabled when the normal mode does not work."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:184
-msgid "Cache Clean-up Interval"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:185
-msgid ""
-"With this periodic check, expired cache items will be automatically deleted. "
-"If the overall cache size exceeds the set amount, they will be deleted from "
-"old."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:188
-msgid "hour(s)"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:189
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:110
-msgid "day(s)"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:190
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:111
-msgid "week(s)"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:205
-msgid "Maximum Overall Cache Sizes"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:220
-msgid "Leave it blank for unlimited."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:242
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:150
-msgid "Last Run"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:153
-msgid "n/a"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:249
-msgid "The periodic check of cache removal is not scheduled."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:250
-msgid "It could be a WP Cron issue. Please consult the site administrator."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:251
-msgid "If this is left unfixed, caches will not be cleared."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:258
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:157
-#, php-format
-msgid "Next scheduled at %1$s."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:362
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:417
-msgid "Caches have been cleared."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:368
-#: include/core/component/admin/setting/admin_page/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:423
-msgid "Select at least one."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:26
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:53
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:51
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:64
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
-#: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:64
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilter.php:86
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilter.php:98
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:53
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:80
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:89
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:98
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:62
-#: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
-msgid "Default"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:50
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:122
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:40
-msgid "Common"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:58
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:132
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:70
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:52
-msgid "Template"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:66
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:64
-msgid "Product Filter"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:74
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:76
-msgid "Advanced Product Filter"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:82
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
-msgid "Submit"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:99
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:164
-#: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:100
-msgid "Locale"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:107
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:184
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting.php:100
-msgid "Common Advanced"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:122
-msgid "Default Unit Options"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/AmazonAutoLinks_AdminPage_Setting_Default.php:126
-msgid ""
-"The unit options set here will be applied to the output of shortcodes and "
-"newly created units."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Locale.php:128
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:106
-msgid "The unit default options have been reset."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter.php:29
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:27
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ProductFilter.php:27
-#: include/core/component/unit_option_converter/admin_page/page_meta_box/AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilter.php:25
-msgid "Set the criteria to filter fetched items."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:25
-#: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Save.php:30
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:123
-#: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:215
-msgid "Save"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:42
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:26
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
-msgid "Reset"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:50
-msgid "I'd like to reset unit defaults."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:79
-msgid "Please check the check box to reset the default settings."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General.php:26
-msgid "General"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:25
-msgid "Custom Query Key"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:50
-msgid "Link Style Query Key"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:51
-msgid "Define the query parameter key for the cloaking link style."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ExternalScript.php:25
-msgid "External Scripts"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:48
-msgid "RSS Content Tag"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:50
-msgid ""
-"By default, the plugin uses the <code>description</code> tag for excerpt and "
-"the <code>content</code> for the entire product output."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:51
-msgid ""
-"However, some RSS readers cannot retrieve contents of <code>content</code> "
-"tag. In that case, enable this option to replace the output of the "
-"<code>content</code> tag with the <code>description</code> tag."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:53
-msgid ""
-"Use the <code>content</code> tag instead of <code>description</code> tag for "
-"the complete product output."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php:25
-msgid "miunosoft Affiliate"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:25
-msgid "Global Product Filters"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:25
-#: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:296
-msgid "Unit Preview"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:49
-msgid "Post Type Label"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:50
-msgid "Set the name which appear in breadcrumbs."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:62
-msgid "Post Type Slug"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:63
-msgid "Up to 20 characters with small-case alpha numeric characters."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:74
-msgid "Visibility"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:75
-msgid "Visible to non-logged-in users."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:81
-msgid "Searchable"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:82
-msgid ""
-"Possible for the WordPress search form to find the plugin preview pages."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:25
-msgid "Widgets"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:48
-msgid "Registered Widgets"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:50
-#: include/core/component/widget/AmazonAutoLinks_WidgetsLoader.php:37
-msgid "Contextual Products"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:51
-msgid "By Unit"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:53
-msgid "Check widgets which should be listed in the widget page."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php:26
-msgid "Misc"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:26
-msgid "Access Rights"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:28
-msgid "Set the access levels to the plugin setting pages."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
-msgid "Capability"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:54
-msgid ""
-"Select the user role that is allowed to access the plugin setting pages."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:58
-msgid "Administrator"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:59
-msgid "Editor"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:60
-#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:40
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
-msgid "Author"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:61
-msgid "Contributor"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:62
-msgid "Subscriber"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
-#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
-#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:62
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
-msgid "Debug"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:27
-msgid "For developers who need to see the internal workings of the plugin."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:51
-msgid "Debug Mode"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:26
-msgid "Form"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:27
-msgid "Set allowed HTML tags etc."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:52
-msgid "Allowed HTML Tags"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:53
-msgid ""
-"Enter allowed HTML tags for the form input, per line or separated by commas. "
-"By default, WordPress applies a filter called KSES that strips out certain "
-"tags before the user input is saved in the database for security reasons."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:63
-msgid "Allowed HTML Tag Attributes"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:64
-msgid ""
-"Enter allowed HTML tag attributes for options that enter HTML tags such as "
-"Item Format unit option."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:74
-msgid "Allowed Inline CSS Properties"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:75
-msgid ""
-"Enter allowed inline CSS properties for options that enter HTML tags such as "
-"Item Format unit option."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:27
-msgid "Data"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:29
-msgid "Handles export/import plugin options."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:30
-msgid "Units, auto-insert and buttons are not included."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:54
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
-msgid "Export Options"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:59
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
-msgid "Import Options"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:61
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
-msgid "Import"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:25
-msgid "Reset Settings"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:27
-msgid "If you get broken options, initialize them by performing reset."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:61
-msgid "Restore Default"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:64
-msgid "Restore"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:65
-msgid "Restore the default options."
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:72
-msgid "Delete Options upon Uninstall"
-msgstr ""
-
-#: include/core/component/admin/setting/admin_page/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetSetting.php:74
-msgid "Delete options and caches when the plugin is uninstalled."
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:33
-#, php-format
-msgid ""
-"Add the Amazon impression counter, the <a href=\"%1$s\" target=\"_blank"
-"\">Link Update JavaScript script</a>, to track link impressions."
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:37
-msgid "The script is not available for the following locales."
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:31
-msgid "Amazon Auto Links Pro Affiliate ID"
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:36
-msgid ""
-"If you set your affiliate ID of Amazon Auto Links Pro here, the credit text "
-"at the bottom of unit outputs will be linked to the Amazon Auto Links Pro "
-"product page."
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:39
-msgid ""
-"Earn commissions by putting a link to the product page of Amazon Auto Links "
-"Pro in the credit link of unit outputs."
-msgstr ""
-
-#: include/core/component/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:41
-#, php-format
-msgid ""
-"You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for Amazon "
-"Auto Links Pro affiliate program to get commisions."
-msgstr ""
-
-#: include/core/component/admin/tool/admin_page/AmazonAutoLinks_ToolAdminPage_Tool.php:25
-msgid "Tools"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php:33
-msgid "Convert template options in units with batch processing."
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:45
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:66
-msgid "Number of Units"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:53
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:76
-msgid "Remaining Scheduled Tasks"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:67
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:90
-msgid "Unit Types"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:95
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:109
-msgid "Convert"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:106
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:120
-msgid "Convert Options"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:107
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:121
-msgid "Get Pro!"
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:113
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:127
-#, php-format
-msgid ""
-"In order to use this feature, please consider purchasing <a href=\"%1$s\" "
-"target=\"_blank\">Pro</a>."
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:156
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:166
-msgid "At least one item needs to be checked."
-msgstr ""
-
-#: include/core/component/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:181
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:191
-#, php-format
-msgid "Scheduled %1$s unit(s) for the batch processing."
 msgstr ""
 
 #: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:25
@@ -1975,6 +993,14 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
+#: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Save.php:30
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:123
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:74
+#: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:215
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:25
+msgid "Save"
+msgstr ""
+
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Static.php:26
 msgid "Static Insertion"
 msgstr ""
@@ -1992,6 +1018,14 @@ msgstr ""
 msgid ""
 "Make sure you pick appropriate post types in the below sections of Where to "
 "Enable/Disable."
+msgstr ""
+
+#: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:35
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Column.php:56
+#: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:29
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:68
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:64
+msgid "Status"
 msgstr ""
 
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Status.php:38
@@ -2145,7 +1179,7 @@ msgstr ""
 
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:35
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:33
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:112
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:116
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:130
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:89
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:143
@@ -2213,6 +1247,23 @@ msgstr ""
 msgid "Hover"
 msgstr ""
 
+#: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:64
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilter.php:86
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_ProductFilter.php:98
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:53
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:80
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:89
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:98
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:62
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:26
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:53
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:51
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:64
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
+#: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
+msgid "Default"
+msgstr ""
+
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Background.php:23
 msgid "Background Switch"
 msgstr ""
@@ -2272,7 +1323,7 @@ msgid "Border Width"
 msgstr ""
 
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Box.php:22
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:31
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:33
 msgid "Width"
 msgstr ""
 
@@ -2469,6 +1520,7 @@ msgstr ""
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:55
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:44
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:54
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:45
 msgid "Enable"
 msgstr ""
 
@@ -2562,25 +1614,6 @@ msgstr ""
 msgid "Amazon Product"
 msgstr ""
 
-#: include/core/component/database_updater/admin/AmazonAutoLinks_DatabaseUpdater_AdminNotice.php:39
-#, php-format
-msgid "Update the plugin database table by clicking <a href=\"%1$s\">here</a>."
-msgstr ""
-
-#: include/core/component/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:53
-msgid "The database tables have been successfully updated."
-msgstr ""
-
-#: include/core/component/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:81
-#, php-format
-msgid "Failed to update the database table, %1$s."
-msgstr ""
-
-#: include/core/component/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:82
-#, php-format
-msgid "Failed to install the database table, %1$s."
-msgstr ""
-
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:23
 msgid "Convert Links"
 msgstr ""
@@ -2632,41 +1665,50 @@ msgstr ""
 msgid "A default Associate ID needs to be set."
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog.php:27
-msgid "Error Log"
-msgstr ""
-
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog.php:80
-msgid "Copied the log to the clipboard."
-msgstr ""
-
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog.php:81
-msgid "Failed to copied the log to the clipboard."
-msgstr ""
-
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:27
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:28
 msgid "Errors"
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:60
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:66
 msgid "Filters"
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:64
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:70
 msgid "Include"
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:74
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:80
 msgid "Exclude"
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:83
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:89
 msgid ""
 "Type characters that match log entries to include/exclude separated commas."
 msgstr ""
 
-#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tool_ErrorLog_Log.php:126
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:104
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:108
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:86
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:126
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:154
+#: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
+msgid "Clear"
+msgstr ""
+
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:141
 msgid "Copy to Clipboard"
+msgstr ""
+
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog.php:27
+msgid "Error Log"
+msgstr ""
+
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog.php:80
+msgid "Copied the log to the clipboard."
+msgstr ""
+
+#: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog.php:81
+msgid "Failed to copied the log to the clipboard."
 msgstr ""
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab.php:26
@@ -2728,6 +1770,34 @@ msgstr ""
 msgid "Update Interval"
 msgstr ""
 
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:110
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:56
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:189
+msgid "day(s)"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:111
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:57
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:190
+msgid "week(s)"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:150
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:242
+msgid "Last Run"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:153
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
+msgid "n/a"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:157
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:258
+#, php-format
+msgid "Next scheduled at %1$s."
+msgstr ""
+
 #: include/core/component/template/AmazonAutoLinks_TemplateLoader.php:56
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template.php:25
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_GetNew.php:55
@@ -2755,6 +1825,13 @@ msgstr ""
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_GetNew.php:98
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_GetNew.php:104
 msgid "Get it Now"
+msgstr ""
+
+#: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
+#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:64
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
+msgid "Debug"
 msgstr ""
 
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:72
@@ -2835,21 +1912,54 @@ msgid ""
 "Check the shortcode of PhpZon to convert its outputs into Amazon Auto Links'."
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:142
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:126
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:36
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:50
+msgid "Common"
+msgstr ""
+
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:136
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:137
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:48
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:58
+msgid "Template"
+msgstr ""
+
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:146
 msgid "Unit Product Filters"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:152
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:156
 msgid "Advanced Unit Product Filters"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:194
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:168
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:70
+#: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:100
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:99
+msgid "Locale"
+msgstr ""
+
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:178
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:84
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php:26
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:90
+msgid "Cache"
+msgstr ""
+
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:188
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:96
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:107
+msgid "Common Advanced"
+msgstr ""
+
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:198
 msgid "Debug Information"
 msgstr ""
 
 #: include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php:245
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:135
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:232
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:140
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:271
 msgid "Unknown"
 msgstr ""
 
@@ -2874,7 +1984,7 @@ msgstr ""
 #: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:24
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:94
 #: include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php:53
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContxtualProduct.php:33
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContextualProduct.php:33
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:80
 msgid "Title"
 msgstr ""
@@ -3032,6 +2142,12 @@ msgstr ""
 msgid "Default: <code>%1$s</code>"
 msgstr ""
 
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:23
+#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:54
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:99
+msgid "Associate ID"
+msgstr ""
+
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:31
 msgid "Maximum Number of Items"
 msgstr ""
@@ -3047,6 +2163,11 @@ msgid ""
 "less than this set count."
 msgstr ""
 
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:48
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:70
+msgid "Image Size"
+msgstr ""
+
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:49
 msgid "pixel"
 msgstr ""
@@ -3059,6 +2180,11 @@ msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:52
 msgid "Max"
+msgstr ""
+
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:63
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:85
+msgid "Direct Link Bonus"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:69
@@ -3127,7 +2253,7 @@ msgid "Now Loading Text"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:47
-#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:345
+#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:346
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:330
 msgid "Now loading..."
 msgstr ""
@@ -3167,7 +2293,7 @@ msgid ""
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:111
-#: include/core/main/option/AmazonAutoLinks_Option.php:320
+#: include/core/main/option/AmazonAutoLinks_Option.php:330
 msgid "read more"
 msgstr ""
 
@@ -3229,7 +2355,7 @@ msgid "Value"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:157
-#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:116
+#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:117
 msgid "URL"
 msgstr ""
 
@@ -3242,11 +2368,18 @@ msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Country.php:23
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:29
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:135
 #: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:29
 #: include/core/component/unit/unit_type/contextual/admin/form_field/AmazonAutoLinks_FormFields_ContextualUnit_Main.php:69
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:33
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:40
 msgid "Country"
+msgstr ""
+
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:24
+#: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:75
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:36
+msgid "Credit Link"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:29
@@ -3255,6 +2388,12 @@ msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:38
 msgid "Credit Link Type"
+msgstr ""
+
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:40
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:278
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:175
+msgid "Normal"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:44
@@ -3490,8 +2629,15 @@ msgid "Create"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_DebugInfo.php:33
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:23
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:22
 msgid "Unit Options"
+msgstr ""
+
+#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ProductFilter.php:27
+#: include/core/component/unit/unit_option_converter/admin/page_meta_box/AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilter.php:25
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter.php:29
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:27
+msgid "Set the criteria to filter fetched items."
 msgstr ""
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ViewLink.php:37
@@ -3622,11 +2768,11 @@ msgstr ""
 msgid "Units"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:181
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:193
 msgid "Copied the text."
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:233
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:245
 msgid "Set the unit name here."
 msgstr ""
 
@@ -3643,42 +2789,50 @@ msgid "Unit Name"
 msgstr ""
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:69
-msgid "Unit Type"
-msgstr ""
-
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:71
-msgid "Labels"
+msgid "Details"
 msgstr ""
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:72
+msgid "Labels"
+msgstr ""
+
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:73
 msgid "Shortcode / PHP Code"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:170
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:134
+msgid "ID"
+msgstr ""
+
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:136
+msgid "Unit Type"
+msgstr ""
+
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:208
 msgid "RSS Feed by ID"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:176
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:214
 msgid "JSON Feed by ID"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:244
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:283
 msgid "Ready"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:244
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:283
 msgid "Loading"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:248
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:287
 msgid "Unit Error"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:256
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:295
 msgid "Show"
 msgstr ""
 
-#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:262
+#: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:301
 msgid "Copy"
 msgstr ""
 
@@ -3747,13 +2901,205 @@ msgid "Failed to load product links."
 msgstr ""
 
 #: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:51
+#: include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php:90
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
+msgid "Debug Info"
+msgstr ""
+
+#: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:51
 msgid "Row"
+msgstr ""
+
+#: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php:46
+msgid "The Associate tag is not set. Please check your unit settings."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:26
+msgid "Graph"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:27
+msgid "Shows how many times the plugin performed PA-API requests."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:53
+#, php-format
+msgid "This feature requires <a href=\"%1$s\" target=\"_blank\">Pro</a>."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:80
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:52
+msgid "Date Range"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:100
+msgid "Set"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:26
+msgid "Log Data"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:28
+msgid "Export/import/delete count log data."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:29
+msgid "The locale selected in the above line chart will be applied."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:46
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
+msgid "Export"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:51
+msgid "All"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:51
+msgid "All the stored data."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:52
+msgid "Applies the time range set in the above line chart."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:61
+msgid "Download"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:62
+msgid "Export as CSV."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:70
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:73
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:61
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
+msgid "Import"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:83
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:86
+msgid "Delete"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:87
+msgid "Confirm this deletes the entire count log data."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:120
+msgid "Count log has been deleted."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:25
+msgid "Product Advertising API Request Counter"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:46
+msgid "Log PA-API request counts."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:50
+msgid "Retention Period"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:52
+msgid "Sets how long the log should be kept."
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/tab/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php:42
+msgid "PA-API Request Counter"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/tab/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php:123
+msgid "total"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/tab/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php:124
+msgid "Dates"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/admin/tab/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount.php:125
+msgid "Counts"
+msgstr ""
+
+#: include/core/component/unit/paapi_request_counter/event/action/AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ImportLog.php:58
+msgid "The locale could not be detected. The data might be corrupt."
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:60
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:66
+msgid "Product Filter"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:72
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:74
+msgid "Advanced Product Filter"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:24
+msgid "Convert unit options with batch processing."
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:65
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:44
+msgid "Number of Units"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:75
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:52
+msgid "Remaining Scheduled Tasks"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:89
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:66
+msgid "Unit Types"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:108
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:94
+msgid "Convert"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:119
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:105
+msgid "Convert Options"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:120
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:106
+msgid "Get Pro!"
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:126
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:112
+#, php-format
+msgid ""
+"In order to use this feature, please consider purchasing <a href=\"%1$s\" "
+"target=\"_blank\">Pro</a>."
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:165
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:155
+msgid "At least one item needs to be checked."
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert.php:190
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:180
+#, php-format
+msgid "Scheduled %1$s unit(s) for the batch processing."
+msgstr ""
+
+#: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting_Tab.php:26
+msgid "Unit Option Converter"
 msgstr ""
 
 #: include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php:101
 #: include/core/component/unit/unit_type/contextual/AmazonAutoLinks_UnitTypeLoader_contextual.php:70
 #: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:74
-#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:79
+#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:80
 msgid "Main"
 msgstr ""
 
@@ -3768,7 +3114,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:63
+#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:65
 msgid "Form Options"
 msgstr ""
 
@@ -3882,6 +3228,11 @@ msgstr ""
 msgid "Preview of This Category"
 msgstr ""
 
+#: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:296
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:25
+msgid "Unit Preview"
+msgstr ""
+
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar.php:52
 #, php-format
 msgid ""
@@ -3902,6 +3253,15 @@ msgstr ""
 
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb.php:58
 msgid "Failed to generate the breadcrumb."
+msgstr ""
+
+#: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:36
+#: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:90
+#: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:120
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:92
+#: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:91
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:80
+msgid "Sort Order"
 msgstr ""
 
 #: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:40
@@ -4365,6 +3725,12 @@ msgstr ""
 msgid "Artist"
 msgstr ""
 
+#: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:40
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:60
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
+msgid "Author"
+msgstr ""
+
 #: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:41
 msgid "Brand"
 msgstr ""
@@ -4502,6 +3868,15 @@ msgid ""
 "having at least one offer which is Prime Eligible."
 msgstr ""
 
+#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/AmazonAutoLinks_FormFields_SearchUnit_Base.php:17
+#: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:63
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:95
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:112
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:140
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:208
+msgid "Products"
+msgstr ""
+
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/AmazonAutoLinks_FormFields_SearchUnit_Base.php:19
 msgid "Item Lookup"
 msgstr ""
@@ -4520,22 +3895,22 @@ msgid ""
 "returns some or all of the item attributes with the given item identifier."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1046
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1056
 #, php-format
 msgid "by %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1051
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1061
 #, php-format
 msgid "for %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1061
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1071
 #, php-format
 msgid "New from %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1066
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1076
 #, php-format
 msgid "Used from %1$s"
 msgstr ""
@@ -4575,7 +3950,7 @@ msgid ""
 "\">ScratchPad</a>."
 msgstr ""
 
-#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:88
+#: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:89
 msgid "URL Unit Advanced"
 msgstr ""
 
@@ -4606,7 +3981,11 @@ msgstr ""
 msgid "Found Products"
 msgstr ""
 
-#: include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php:41
+#: include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php:91
+msgid "HTTP Bodies"
+msgstr ""
+
+#: include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php:39
 msgid "Retrieving items..."
 msgstr ""
 
@@ -4614,21 +3993,14 @@ msgstr ""
 msgid "Product not found."
 msgstr ""
 
-#: include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php:168
-msgid "HTTP Bodies"
-msgstr ""
-
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab.php:26
-msgid "Unit Option Converter"
-msgstr ""
-
-#: include/core/component/unit_option_converter/admin_page/AmazonAutoLinks_UnitOptionConverter_Setting_Tab_Convert.php:25
-msgid "Convert unit options with batch processing."
-msgstr ""
-
 #: include/core/component/widget/AmazonAutoLinks_WidgetsLoader.php:29
 #, php-format
 msgid "%1$s by Unit"
+msgstr ""
+
+#: include/core/component/widget/AmazonAutoLinks_WidgetsLoader.php:37
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:50
+msgid "Contextual Products"
 msgstr ""
 
 #: include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php:36
@@ -4646,66 +4018,854 @@ msgid ""
 "contents."
 msgstr ""
 
-#: include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:103
+#: include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:104
 #, php-format
 msgid "Please set up API keys first from <a href=\"%1$s\">this page</a>."
 msgstr ""
 
-#: include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:132
+#: include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php:133
 msgid "Product Filters"
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContxtualProduct.php:38
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_ContextualProduct.php:38
 msgid "Show widget title on no result."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:45
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:64
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:47
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:66
 msgid "Set 0 for no limit."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:50
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:52
 msgid "Height"
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:69
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:71
 msgid "Available Page Types"
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:71
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:73
 msgid "The home page."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:72
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:74
 msgid "The front page."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:73
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:75
 msgid "Single pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:74
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:76
 msgid "Post type archive pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:75
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:77
 msgid "Taxonomy archive pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:76
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:78
 msgid "Date archive pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:77
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:79
 msgid "Author pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:78
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:80
 msgid "Search result pages."
 msgstr ""
 
-#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:79
+#: include/core/component/widget/contextual/form_field/AmazonAutoLinks_FormFields_Widget_Visibility.php:81
 msgid "The 404 page."
+msgstr ""
+
+#: include/core/main/admin/AmazonAutoLinks_AdminPage.php:54
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php:26
+msgid "Support"
+msgstr ""
+
+#: include/core/main/admin/AmazonAutoLinks_AdminPage.php:72
+#, php-format
+msgid ""
+"The plugin soon drops support for your PHP version %1$s. Please update PHP "
+"to the latest."
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help.php:25
+msgid "Help"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:26
+msgid "About"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:45
+msgid "Plugin Information"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:58
+msgid "Database Tables"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:74
+msgid "General Options"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:87
+msgid "Tools Options"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:100
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php:32
+msgid "Template Options"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:113
+msgid "File Permissions"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:25
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:45
+msgid "Change Log"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_FAQ.php:26
+msgid "FAQ"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:26
+msgid "Get Pro"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:51
+msgid "Available"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:52
+msgid "Unavailable"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:57
+msgid "Get Pro Now!"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:58
+msgid ""
+"Please consider upgrading to the pro version if you like the plugin and want "
+"more useful features, which includes unlimited numbers of categories, units, "
+"and items, and more!"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:60
+msgid "Supported Features"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:66
+msgid "Standard"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:67
+msgid "Pro"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:75
+msgid "Black and White List"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:90
+msgid "Insert in Posts and Feeds"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:95
+msgid "Widget"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:100
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:137
+msgid "Max Number of Items to Show"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:102
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:107
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:112
+msgid "Unlimited"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:105
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:139
+msgid "Max Number of Categories Per Unit"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:110
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:141
+msgid "Max Number of Units"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:115
+msgid "Export and Import Units"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:120
+msgid "Exclude Sub Categories"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:125
+msgid "Multiple Columns"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:130
+msgid "Advanced Search Options"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:138
+msgid "Get pro for unlimited items to show."
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:140
+msgid "Get pro for unlimited categories to set up!"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:142
+msgid ""
+"Get pro for unlimited units so that you can put ads as many as you want."
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:152
+msgid "Get Now!"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php:44
+msgid "Support Forum"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php:48
+#, php-format
+msgid ""
+"To get free support, visit the <a href=\"%1$s\" target=\"_blank\">support "
+"forum</a>."
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php:54
+msgid "Priority Support"
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php:58
+#, php-format
+msgid ""
+"You can get priority email support by purchasing <a href=\"%1$s\" target="
+"\"_blank\">Pro</a>."
+msgstr ""
+
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Tips.php:26
+msgid "Tips"
+msgstr ""
+
+#: include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:37
+msgid "Information"
+msgstr ""
+
+#: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:63
+msgid "Join Affiliate Program "
+msgstr ""
+
+#: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:66
+msgid "Earn commissions by setting a credit link in the unit output."
+msgstr ""
+
+#: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php:68
+#, php-format
+msgid ""
+"<a href=\"%1$s\" target=\"_blank\">Sign up</a> for the affiliate program "
+"first."
+msgstr ""
+
+#: include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php:25
+msgid "Reports"
+msgstr ""
+
+#: include/core/main/admin/setting/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php:26
+msgid "3rd Party"
+msgstr ""
+
+#: include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php:25
+#: include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:56
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
+msgid "Settings"
+msgstr ""
+
+#: include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php:70
+msgid "Saved Options"
+msgstr ""
+
+#: include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:61
+msgid "Custom Order"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php:26
+msgid "Authentication"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:25
+msgid "AWS Access Key Identifiers"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:27
+#, php-format
+msgid ""
+"Credentials are required to perform search requests with Amazon <a href="
+"\"%1$s\" target=\"_blank\">Product Advertising API</a>."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:31
+#, php-format
+msgid ""
+"The keys can be obtained by logging in to the <a href=\"%1$s\" target="
+"\"_blank\">Amazon Web Services web site</a>."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:35
+#, php-format
+msgid ""
+"The instruction is documented <a href=\"%1$s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:69
+#, php-format
+msgid ""
+"If you get an error, try testing your keys with <a href=\"%1$s\" target="
+"\"_blank\">Scratchpad</a>."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:75
+msgid "Access Key"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:77
+msgid "The public key consisting of 20 alphabetic characters."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:87
+msgid "Secret Access Key"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:89
+msgid "The private key consisting of 40 alphabetic characters."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:102
+msgid "The Amazon Associates tag."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:103
+msgid "Some locales may require this to be set."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:108
+msgid "Server Locale"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:110
+msgid ""
+"The region of the API server. If you are unsure, select <code>US</code>."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:116
+msgid "Disclaimer"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:122
+#, php-format
+msgid ""
+"Please check the <a href=\"%1$s\" target=\"_blank\">Amazon.com Product "
+"Advertising API License Agreement</a> to be safe."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:131
+msgid "Disconnect"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:132
+msgid "Connect"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:200
+msgid "Either a public key or private key is not set."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:253
+msgid "Connected"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:254
+msgid "Disconnected"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:280
+msgid "Disconnected."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:291
+msgid "The Access Key ID must consist of 20 characters."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:299
+msgid "The Secret Access Key must consist of 40 characters."
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:319
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:320
+msgid "Sent Value"
+msgstr ""
+
+#: include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php:323
+msgid "Failed authentication."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:25
+msgid "Caches"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:92
+msgid "Sizes"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:99
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:114
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:142
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:214
+msgid "HTTP Requests"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:110
+msgid "Clear Caches"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:113
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:115
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:141
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:143
+#, php-format
+msgid "%1$s item(s)."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:138
+msgid "Clear Expired Caches"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:165
+msgid "Compress"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:167
+msgid "Compress caches"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:172
+msgid "Caching Mode"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:175
+msgid "relies on WP Cron to renew caches."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:176
+msgid "Intense"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:176
+msgid "relies on the plugin caching method to renew caches."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:178
+msgid ""
+"The intense mode should only be enabled when the normal mode does not work."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:184
+msgid "Cache Clean-up Interval"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:185
+msgid ""
+"With this periodic check, expired cache items will be automatically deleted. "
+"If the overall cache size exceeds the set amount, they will be deleted from "
+"old."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:188
+msgid "hour(s)"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:205
+msgid "Maximum Overall Cache Sizes"
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:220
+msgid "Leave it blank for unlimited."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:249
+msgid "The periodic check of cache removal is not scheduled."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:250
+msgid "It could be a WP Cron issue. Please consult the site administrator."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:251
+msgid "If this is left unfixed, caches will not be cleared."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:362
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:417
+msgid "Caches have been cleared."
+msgstr ""
+
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:368
+#: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:423
+msgid "Select at least one."
+msgstr ""
+
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:82
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
+msgid "Submit"
+msgstr ""
+
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:122
+msgid "Default Unit Options"
+msgstr ""
+
+#: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:126
+msgid ""
+"The unit options set here will be applied to the output of shortcodes and "
+"newly created units."
+msgstr ""
+
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Locale.php:128
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:106
+msgid "The unit default options have been reset."
+msgstr ""
+
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:42
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:26
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
+msgid "Reset"
+msgstr ""
+
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:50
+msgid "I'd like to reset unit defaults."
+msgstr ""
+
+#: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:79
+msgid "Please check the check box to reset the default settings."
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:33
+#, php-format
+msgid ""
+"Add the Amazon impression counter, the <a href=\"%1$s\" target=\"_blank"
+"\">Link Update JavaScript script</a>, to track link impressions."
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php:37
+msgid "The script is not available for the following locales."
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:32
+msgid "Amazon Auto Links Pro Affiliate ID"
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:37
+msgid ""
+"If you set your affiliate ID of Amazon Auto Links Pro here, the credit text "
+"at the bottom of unit outputs will be linked to the Amazon Auto Links Pro "
+"product page."
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:40
+msgid ""
+"Earn commissions by putting a link to the product page of Amazon Auto Links "
+"Pro in the credit link of unit outputs."
+msgstr ""
+
+#: include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php:42
+#, php-format
+msgid ""
+"You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for Amazon "
+"Auto Links Pro affiliate program to get commisions."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General.php:26
+msgid "General"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:25
+msgid "Custom Query Key"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:50
+msgid "Link Style Query Key"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php:51
+msgid "Define the query parameter key for the cloaking link style."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ExternalScript.php:25
+msgid "External Scripts"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:48
+msgid "RSS Content Tag"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:50
+msgid ""
+"By default, the plugin uses the <code>description</code> tag for excerpt and "
+"the <code>content</code> for the entire product output."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:51
+msgid ""
+"However, some RSS readers cannot retrieve contents of <code>content</code> "
+"tag. In that case, enable this option to replace the output of the "
+"<code>content</code> tag with the <code>description</code> tag."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:53
+msgid ""
+"Use the <code>content</code> tag instead of <code>description</code> tag for "
+"the complete product output."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php:25
+msgid "miunosoft Affiliate"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:25
+msgid "Global Product Filters"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:49
+msgid "Post Type Label"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:50
+msgid "Set the name which appear in breadcrumbs."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:62
+msgid "Post Type Slug"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:63
+msgid "Up to 20 characters with small-case alpha numeric characters."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:74
+msgid "Visibility"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:75
+msgid "Visible to non-logged-in users."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:81
+msgid "Searchable"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:82
+msgid ""
+"Possible for the WordPress search form to find the plugin preview pages."
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:25
+msgid "Widgets"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:48
+msgid "Registered Widgets"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:51
+msgid "By Unit"
+msgstr ""
+
+#: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:53
+msgid "Check widgets which should be listed in the widget page."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc.php:26
+msgid "Misc"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:26
+msgid "Access Rights"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:28
+msgid "Set the access levels to the plugin setting pages."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
+msgid "Capability"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:54
+msgid ""
+"Select the user role that is allowed to access the plugin setting pages."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:58
+msgid "Administrator"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:59
+msgid "Editor"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:61
+msgid "Contributor"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:62
+msgid "Subscriber"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:27
+msgid "For developers who need to see the internal workings of the plugin."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:51
+msgid "Debug Mode"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:26
+msgid "Form"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:27
+msgid "Set allowed HTML tags etc."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:52
+msgid "Allowed HTML Tags"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:53
+msgid ""
+"Enter allowed HTML tags for the form input, per line or separated by commas. "
+"By default, WordPress applies a filter called KSES that strips out certain "
+"tags before the user input is saved in the database for security reasons."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:63
+msgid "Allowed HTML Tag Attributes"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:64
+msgid ""
+"Enter allowed HTML tag attributes for options that enter HTML tags such as "
+"Item Format unit option."
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:74
+msgid "Allowed Inline CSS Properties"
+msgstr ""
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:75
+msgid ""
+"Enter allowed inline CSS properties for options that enter HTML tags such as "
+"Item Format unit option."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:27
+msgid "Data"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:29
+msgid "Handles export/import plugin options."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:30
+msgid "Units, auto-insert and buttons are not included."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:54
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
+msgid "Export Options"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:59
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
+msgid "Import Options"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:25
+msgid "Reset Settings"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:27
+msgid "If you get broken options, initialize them by performing reset."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:62
+msgid "Restore Default"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:65
+msgid "Restore"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:66
+msgid ""
+"Confirm that this deletes the current stored options and restores the "
+"default options."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:68
+msgid "Restore the default options."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:75
+msgid "Delete Options upon Uninstall"
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:77
+msgid "Delete options and caches when the plugin is uninstalled."
+msgstr ""
+
+#: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:112
+msgid "The default options have been restored."
+msgstr ""
+
+#: include/core/main/admin/tool/AmazonAutoLinks_ToolAdminPage_Tool.php:25
+msgid "Tools"
+msgstr ""
+
+#: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php:34
+msgid "Convert template options in units with batch processing."
+msgstr ""
+
+#: include/core/main/database_updater/admin/AmazonAutoLinks_DatabaseUpdater_AdminNotice.php:39
+#, php-format
+msgid "Update the plugin database table by clicking <a href=\"%1$s\">here</a>."
+msgstr ""
+
+#: include/core/main/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:53
+msgid "The database tables have been successfully updated."
+msgstr ""
+
+#: include/core/main/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:81
+#, php-format
+msgid "Failed to update the database table, %1$s."
+msgstr ""
+
+#: include/core/main/database_updater/event/ajax/AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater.php:82
+#, php-format
+msgid "Failed to install the database table, %1$s."
 msgstr ""
 
 #: include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php:40
@@ -4728,6 +4888,18 @@ msgstr ""
 msgid "The method is called too early. Perform <code>%2$s</code> earlier."
 msgstr ""
 
+#: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:192
+#: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:198
+#: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:195
+msgid "From"
+msgstr ""
+
+#: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:193
+#: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:199
+#: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:196
+msgid "To"
+msgstr ""
+
 #: include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #, php-format
 msgid ""
@@ -4746,10 +4918,6 @@ msgstr ""
 
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 msgid "The options have been cleared."
-msgstr ""
-
-#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
-msgid "Export"
 msgstr ""
 
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
@@ -5039,6 +5207,18 @@ msgstr ""
 
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:142
 msgid "Warning."
+msgstr ""
+
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:143
+msgid "Submit the form."
+msgstr ""
+
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:144
+msgid "Please check this box if you want to proceed."
+msgstr ""
+
+#: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:145
+msgid "No file is selected."
 msgstr ""
 
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
