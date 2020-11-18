@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.5.3
 Requires MySQL:     5.0.3
-Stable tag:         4.4.0
+Stable tag:         4.4.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.1 - 11/18/2020 =
+- Added the `Details` column in the unit listing table and removed the `Template` and `Unit Type` columns.
+- Fixed a bug that dud not load stylesheets in the setting pages.
 
 = 4.4.0 - 11/13/20020 =
 - Added the Sweden locale.
