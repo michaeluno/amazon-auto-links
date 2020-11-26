@@ -1,6 +1,7 @@
 # Todos
 
 ## Minor
+- [Bug] Fix a bug that cloning a unit does not clone template options. 
 - [Internal] Fix an issue that reusing of old caches of HTTP requests on an HTTP request error is not working.
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
