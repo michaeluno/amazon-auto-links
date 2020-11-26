@@ -232,7 +232,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         // @see https://webservices.amazon.com/paapi5/documentation/offers.html#savingbasis
         $_sProperPrice   = self::getElement(
             $aItem,
-            array( 'Offers', 'Listings', 'SavingBasis', 'DisplayAmount' ),
+            array( 'Offers', 'Listings', 0, 'SavingBasis', 'DisplayAmount' ),
             $_sBuyingPrice
         );
         $_sDiscountedPrice   = $_sSavingPrice ? $_sBuyingPrice : '';
