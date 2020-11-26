@@ -1,3 +1,4 @@
 - Tweaked the UI of Manage Units listing table not to display feed icons for contextual units.
+- Fixed a bug that the discount filter did not function.   
 - Fixed a bug that caused a PHP warning, "Division by zero in ...AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate.php on line 71.
 - Fixed a bug that proper product prices were not displayed.

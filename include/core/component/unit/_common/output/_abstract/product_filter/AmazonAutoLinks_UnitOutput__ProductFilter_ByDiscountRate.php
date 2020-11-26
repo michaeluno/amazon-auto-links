@@ -36,11 +36,11 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
         // Case: Already set. This can occur with feed units.
-        if ( isset( $aProduct[ 'price' ], $aProduct[ 'discounted_price' ], $aProduct[ 'lowest_new_price' ] ) && is_numeric( $aProduct[ 'price' ] ) ) {
+        if ( isset( $aProduct[ 'price_amount' ], $aProduct[ 'discounted_price_amount' ], $aProduct[ 'lowest_new_price_amount' ] ) && is_numeric( $aProduct[ 'price_amount' ] ) ) {
 
-            $_iPrice      = ( integer ) $aProduct[ 'price' ];
-            $_iLowestNew  = ( integer ) $aProduct[ 'discounted_price' ];
-            $_iDiscounted = ( integer ) $aProduct[ 'lowest_new_price' ];
+            $_iPrice      = ( integer ) $aProduct[ 'price_amount' ];
+            $_iLowestNew  = ( integer ) $aProduct[ 'discounted_price_amount' ];
+            $_iDiscounted = ( integer ) $aProduct[ 'lowest_new_price_amount' ];
 
         } else {
 
@@ -52,9 +52,9 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
                 $this->_oUnitOutput->oUnitOption
             );
 
-            $_inPrice      = $_oRow->getCell( 'price' );
-            $_inDiscounted = $_oRow->getCell( 'discounted_price' );
-            $_inLowestNew  = $_oRow->getCell( 'lowest_new_price' );
+            $_inPrice      = $_oRow->getCell( 'price_amount' );
+            $_inDiscounted = $_oRow->getCell( 'discounted_price_amount' );
+            $_inLowestNew  = $_oRow->getCell( 'lowest_new_price_amount' );
 
             // If the data is not ready, do not show them.
             if ( ! $this->___isProductReady( $_inPrice, $_inDiscounted, $_inLowestNew ) ) {
