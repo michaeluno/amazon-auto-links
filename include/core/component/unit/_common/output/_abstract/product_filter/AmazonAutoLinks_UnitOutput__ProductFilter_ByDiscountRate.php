@@ -68,7 +68,9 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
         }
 
         $_iLowest               = min( $_iLowestNew, $_iDiscounted );
-        $_dDiscountPercentage   = 100 - round( ( $_iLowest / $_iPrice ) * 100, 2 );
+        $_dDiscountPercentage   = $_iPrice
+            ? 100 - round( ( $_iLowest / $_iPrice ) * 100, 2 )
+            : 0;
         $_dAcceptedDiscountRate = ( double ) $this->_oUnitOutput->oUnitOption->get( '_filter_by_discount_rate', 'amount' );
         $_sCase                 = $this->_oUnitOutput->oUnitOption->get( '_filter_by_discount_rate', 'case' );
         switch ( $_sCase ) {
