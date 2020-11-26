@@ -1,6 +1,6 @@
 /**
  * @name Unit Post Type
- * @version 1.0.0
+ * @version 1.0.1
  */
 #post-body-content {
     margin-bottom: 10px;
@@ -15,7 +15,7 @@
 }            
 /* List Table Columns */
 .column-status {
-    width: 7.6%;
+    width: 7.2%;
     text-align: center;  
 }            
 .column-unit_type, 
@@ -31,6 +31,10 @@
     display: inline-block;
     margin-top: 0.4em;
     margin-right: 0.8em;
+}
+/* Labels (taxonomy tag ) column */
+.column-amazon_auto_links_tag {
+    width: 16%;
 }
 /* Status Circle */
 .circle {
@@ -59,17 +63,22 @@
 .column-details ul {
     margin: 0;
 }
+tr.type-amazon_auto_links:first-child td ul {
+    margin-bottom: 0.1em;
+}
 .column-details li {
     box-sizing: border-box;
+    margin-bottom: 0;
+    font-size: 96%;
 }
 .column-details span.detail-title {
     box-sizing: border-box;
     display: inline-block;
-    width: 36%;
+    width: 44%;
     color: #777;
 }
 .column-details span.detail-value {
     box-sizing: border-box;
     display: inline-block;
-    width: 62%;
+    width: 54%;
 }
