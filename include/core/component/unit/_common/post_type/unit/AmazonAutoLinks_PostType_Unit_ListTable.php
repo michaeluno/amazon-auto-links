@@ -136,8 +136,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         $_sUnitType           = __( 'Unit Type', 'amazon-auto-links' );
         $_sTemplate           = __( 'Template', 'amazon-auto-links' );
         $_sThisUnitType       = get_post_meta( $iPostID, 'unit_type', true );
-        $_aUnitTypeLabels     = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
-        $_sThisUnitTypeLabel  = $this->oUtil->getElement( $_aUnitTypeLabels, array( $_sThisUnitType ), __( 'Unknown', 'amazon-auto-links' ) );
+        $_sThisUnitTypeLabel  = AmazonAutoLinks_PluginUtility::getUnitTypeLabel( $_sThisUnitType );
         $_sThisTemplate       = $this->___getTemplateNameOfUnit( $iPostID );
         $_sThisLocale         = get_post_meta( $iPostID, 'country', true );
         return "<ul>"
@@ -195,14 +194,19 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     }
 
     /**
-     * @callback        filter      cell_{post type slug}_{column name}
-     * @return          string
+     * @param    string       $sCell
+     * @param    integer      $iPostID
+     * @callback add_filter() cell_{post type slug}_{column name}
+     * @return   string
      */
     public function cell_amazon_auto_links_feed( $sCell, $iPostID ) {
-           
-        // Feed by ID
-        $_aOutput   = array();
-        $_aOutput[] = "<p>"
+
+        $_aOutput            = array();
+        $_sThisUnitType      = get_post_meta( $iPostID, 'unit_type', true );
+        if ( in_array( $_sThisUnitType, array( 'contextual', '', null, false, 'unknown' ), true ) ) {
+            return $sCell;
+        }
+        $_aOutput[]          = "<p>"
                 . $this->_getFeedIcon( 
                     'rss2', 
                     __( 'RSS Feed by ID', 'amazon-auto-links' ), 
@@ -216,7 +220,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                     $iPostID 
                 ) 
             . "</p>";
-        return implode( '', $_aOutput );
+        return implode( '', $_aOutput ) . $sCell;
         
     }    
         /**

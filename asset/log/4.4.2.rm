@@ -1,1 +1,2 @@
-- Fixed a bug that proper product prices were not displayed. 
+- Tweaked the UI of Manage Units listing table not to display feed icons for contextual units. 
+- Fixed a bug that proper product prices were not displayed.

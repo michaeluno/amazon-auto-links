@@ -391,6 +391,16 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
+     * @param  string $sUnitTypeSlug
+     * @since  4.4.2
+     * @return string
+     */
+    static public function getUnitTypeLabel( $sUnitTypeSlug ) {
+        $_aUnitTypeLabels     = self::getUnitTypeLabels();
+        return self::getElement( $_aUnitTypeLabels, array( $sUnitTypeSlug ), __( 'Unknown', 'amazon-auto-links' ) );
+    }
+
+    /**
      * @param string $sDegreeType
      * @param array $aArguments
      *
