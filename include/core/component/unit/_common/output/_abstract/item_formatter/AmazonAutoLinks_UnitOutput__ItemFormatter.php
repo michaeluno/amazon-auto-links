@@ -57,62 +57,38 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
      */
     private function ___getProductOutputFormatted( array $aProduct ) {
 
-        $_iUpdatedTime = $this->___getProductUpdatedTime( $aProduct[ 'updated_date' ] );
-        $_sUpdatedDate = $this->getSiteReadableDate( $_iUpdatedTime, self::$___sSiteDateFormat, true );
-
-        $_sOutput      = str_replace(
-            array(
-                "%href%",
-                "%title_text%",
-                "%description_text%",
-                "%title%",
-                "%image%",
-                "%description%",
-                "%rating%",
-                "%review%",
-                "%price%",
-                "%button%",
-                "%image_set%",
-                "%content%",        // 3.3.0
-                "%meta%",           // 3.3.0
-                "%similar%",        // 3.3.0
-                "%category%",       // 3.8.0
-                "%feature%",        // 3.8.0
-                "%rank%",           // 3.8.0
-                "%date%",           // 3.8.0  the date that the data is retrieved and updated
-                "%disclaimer%",     // 3.2.0
-                "%prime%",
-                "<!-- %_review_rate% -->",      // 3.9.2
-                "<!-- %_discount_rate% -->",    // 3.9.2
-                "%image_size%",     // 4.1.0
-                "%author%",         // 4.1.0
-            ),
-            array(
-                esc_url( $aProduct[ 'product_url' ] ),
-                $aProduct[ 'title' ],
-                $aProduct[ 'text_description' ],
-                $aProduct[ 'formatted_title' ],
-                $aProduct[ 'formatted_thumbnail' ],
-                $aProduct[ 'description' ],
-                $aProduct[ 'formatted_rating' ],
-                $aProduct[ 'review' ],
-                $aProduct[ 'formatted_price' ],
-                $aProduct[ 'button' ],
-                $aProduct[ 'image_set' ],
-                $aProduct[ 'content' ], // 3.3.0+
-                $aProduct[ 'meta' ], // 3.3.0+
-                $aProduct[ 'similar_products' ], // 3.3.0+
-                $aProduct[ 'category' ],       // 3.8.0+
-                $aProduct[ 'feature' ],        // 3.8.0+
-                $aProduct[ 'sales_rank' ],     // 3.8.0+
-                $_sUpdatedDate,    // 3.8.0+
-                $this->___getPricingDisclaimer( $_sUpdatedDate ), // 3.2.0+
-                $this->getPrimeMark( $aProduct ),  // 3.9.0+
-                '', // 3.9.2
-                '', // 3.9.2
-                $this->___oUnitOutput->oUnitOption->get( 'image_size' ),        // 4.1.0
-                $this->___getAuthorOutput( $aProduct ),  // 4.1.0
-            ),
+        $_iUpdatedTime  = $this->___getProductUpdatedTime( $aProduct[ 'updated_date' ] );
+        $_sUpdatedDate  = $this->getSiteReadableDate( $_iUpdatedTime, self::$___sSiteDateFormat, true );
+        $_aReplacements = array(
+            "%href%"                        => esc_url( $aProduct[ 'product_url' ] ),
+            "%title_text%"                  => $aProduct[ 'title' ],
+            "%description_text%"            => $aProduct[ 'text_description' ],
+            "%title%"                       => $aProduct[ 'formatted_title' ],
+            "%image%"                       => $aProduct[ 'formatted_thumbnail' ],
+            "%description%"                 => $aProduct[ 'description' ],
+            "%rating%"                      => $aProduct[ 'formatted_rating' ],
+            "%review%"                      => $aProduct[ 'review' ],
+            "%price%"                       => $aProduct[ 'formatted_price' ],
+            "%button%"                      => $aProduct[ 'button' ],
+            "%image_set%"                   => $aProduct[ 'image_set' ],
+            "%content%"                     => $aProduct[ 'content' ],                                  // [3.3.0+]
+            "%meta%"                        => $aProduct[ 'meta' ],                                     // [3.3.0+]
+            "%similar%"                     => $aProduct[ 'similar_products' ],                         // [3.3.0+]
+            "%category%"                    => $aProduct[ 'category' ],                                 // [3.8.0+]
+            "%feature%"                     => $aProduct[ 'feature' ],                                  // [3.8.0+]
+            "%rank%"                        => $aProduct[ 'sales_rank' ],                               // [3.8.0+]
+            "%date%"                        => $_sUpdatedDate,                                          // [3.8.0+] The date that the data is retrieved and updated.
+            "%disclaimer%"                  => $this->___getPricingDisclaimer( $_sUpdatedDate ),        // [3.2.0+]
+            "%prime%"                       => $this->getPrimeMark( $aProduct ),                        // [3.9.0+]
+            "<!-- %_review_rate% -->"       => '',                                                      // [3.9.2+]
+            "<!-- %_discount_rate% -->"     => '',                                                      // [3.9.2+]
+            "%image_size%"                  => $this->___oUnitOutput->oUnitOption->get( 'image_size' ), // [4.1.0+]
+            "%author%"                      => $this->___getAuthorOutput( $aProduct ),                  // [4.1.0+]
+        );
+        $_aReplacements = apply_filters( 'aal_filter_unit_item_format_tag_replacements', $_aReplacements, $aProduct ); // [4.4.2+] Allows third parties to add custom tags.
+        $_sOutput       = str_replace(
+            array_keys( $_aReplacements ),
+            array_values( $_aReplacements ),
             apply_filters(
                 'aal_filter_unit_item_format',
                 $this->___oUnitOutput->oUnitOption->get( 'item_format' ),
