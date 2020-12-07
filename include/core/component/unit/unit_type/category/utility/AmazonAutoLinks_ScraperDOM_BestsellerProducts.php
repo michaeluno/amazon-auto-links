@@ -26,7 +26,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         'rating_point'      => null,    // (integer)
         'review_count'      => null,    // (integer)
         'formatted_price'   => null,    // (string) HTML formatted price
-        'is_prime'          => null,
+        'is_prime'          => null,    // (boolean)
     );
 
 
@@ -197,14 +197,15 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
             }
         }
         /**
-         * @param $oXPath
-         * @param $oItemNode
-         *
-         * @return bool
+         * @param  $oXPath
+         * @param  $oItemNode
+         * @return true|null    True when found; otherwise, null.
+         * @since  ?
+         * @since  4.4.3        Made it not to return false when not found so that later it will be resumed with the value stored in the database table.
          */
         private function ___hasPrimeSupport( DOMXPath $oXPath, $oItemNode ) {
             $_oIcons = $oXPath->query( './/i[contains(@class, "a-icon-prime")]', $oItemNode );
-            return ( boolean ) $_oIcons->length;
+            return $_oIcons->length ? true : null;
         }
         /**
          * @param $oXPath
