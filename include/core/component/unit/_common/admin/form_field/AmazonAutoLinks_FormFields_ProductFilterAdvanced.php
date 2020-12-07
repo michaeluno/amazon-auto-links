@@ -24,6 +24,7 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
      */
     public function get( $sFieldIDPrefix='' ) {
 
+        $_bAPIKeysSet  = $this->oOption->isAPIKeySet();
         $_aFields      = array(
             array(
                 'field_id'      => '_no_pending_items',
@@ -37,24 +38,28 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                 'type'          => 'checkbox',
                 'title'         => __( 'Adult Products', 'amazon-auto-links' ),
                 'label'         => sprintf( __( 'Do not show adult products', 'amazon-auto-links' ), '' ),
+                'description'   => array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning(), ),
             ),
             array(
                 'field_id'      => '_filter_by_prime_eligibility',
                 'type'          => 'checkbox',
                 'title'         => __( 'Delivery Eligibility', 'amazon-auto-links' ),
                 'label'         => __( 'Do not show items ineligible for the Amazon Prime service.', 'amazon-auto-links' ),
+                'description'   => array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning(), ),
             ),
             array(
                 'field_id'      => '_filter_by_free_shipping',
                 'type'          => 'checkbox',
                 'show_title_column' => false,
                 'label'         => __( 'Do not show items ineligible for free shipping.', 'amazon-auto-links' ),
+                'description'   => array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning(), ),
             ),
             array(
                 'field_id'      => '_filter_by_fba',
                 'type'          => 'checkbox',
                 'show_title_column' => false,
                 'label'         => __( 'Do not show items ineligible for FBA (Fulfilled by Amazon).', 'amazon-auto-links' ),
+                'description'   => array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning(), ),
             ),
             array(
                 'field_id'      => '_filter_by_rating',
@@ -115,6 +120,7 @@ class AmazonAutoLinks_FormFields_ProductFilterAdvanced extends AmazonAutoLinks_F
                         ),
                     ),
                 ),
+                'description'   => array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning(), ),
             ),
         );
 

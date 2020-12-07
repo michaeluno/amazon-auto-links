@@ -1,1 +1,2 @@
+- Tweaked the UI of unit settings to have a warning message for some options that require PA-API keys when PA-API keys are not set.
 - Fixed a bug that the prime flag was not set properly for category units. 
