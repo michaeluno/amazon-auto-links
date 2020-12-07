@@ -47,6 +47,7 @@ _memos
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.stackdump
 
 ### Test setting files.
 settings.cfg
