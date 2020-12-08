@@ -46,13 +46,23 @@ class AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput extends AmazonAutoLi
          * @sine   4.3.5
          */
         private function ___getProductDebugInformation( $sProductID, $oUnitOutput, array $aProduct, array $aProductDBRow ) {
-            return '<pre class="debug" style="max-height: 300px; overflow-y: scroll; overflow-x: auto; padding: 1em; word-wrap: break-word; word-break: break-all; margin: 1em 0;">'
+            $_aAttributes = array(
+                'class' => 'debug',
+                'style' => 'max-height: 300px; overflow-y: scroll; overflow-x: auto; padding: 1em; word-wrap: break-word; word-break: break-all; margin: 1em 0;',
+            );
+            return '<pre ' . $this->getAttributes( $_aAttributes ) . '>'
                 . '<h4>'
-                    . __( 'Debug Info', 'amazon-auto-links' ) . ' - ' . __( 'Row', 'amazon-auto-links' )
-                    . ': ' . $sProductID
+                    . __( 'Debug Info', 'amazon-auto-links' ) . ' - ' . __( 'Row', 'amazon-auto-links' ) . ': ' . $sProductID
                 . '</h4>'
                 . AmazonAutoLinks_Debug::getDetails( $aProductDBRow )
+            . "</pre>"
+            . '<pre ' . $this->getAttributes( $_aAttributes ) . '>'
+                . '<h4>'
+                    . __( 'Debug Info', 'amazon-auto-links' ) . ' - ' . __( 'Product', 'amazon-auto-links' )
+                . '</h4>'
+                . AmazonAutoLinks_Debug::getDetails( $aProduct )
             . "</pre>";
+
         }
 
 }

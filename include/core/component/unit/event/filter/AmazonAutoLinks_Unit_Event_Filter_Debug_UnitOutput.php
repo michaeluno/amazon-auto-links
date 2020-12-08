@@ -58,8 +58,6 @@ class AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput extends AmazonAutoLinks
                 . AmazonAutoLinks_Debug::getDetails( $aUnitArguments )
                 . "<h5>Plugin Options</h5>"
                 . AmazonAutoLinks_Debug::getDetails( $aPluginOptions )
-                . "<h5>Fetched Data</h5>"
-                . AmazonAutoLinks_Debug::getDetails( $aProducts )
                 . "<span style='float:right;'>"
                     . AmazonAutoLinks_Registry::NAME
                     . ' ' . AmazonAutoLinks_Registry::VERSION
