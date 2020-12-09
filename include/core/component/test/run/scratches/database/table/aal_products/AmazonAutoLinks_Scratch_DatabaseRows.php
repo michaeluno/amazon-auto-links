@@ -16,5 +16,19 @@
 */
 class AmazonAutoLinks_Scratch_DatabaseRows extends AmazonAutoLinks_Scratch_Base {
 
+    /**
+     * @tags product, row
+     * @throws Exception
+     */
+    public function scratch_getProductRow() {
+        $_aProductIDs = func_get_args();
+        if ( empty( $_aProductIDs ) ) {
+            throw new Exception( 'Product IDs must be passed in the argument input field.' );
+        }
+        foreach( $_aProductIDs as $_sProductID ) {
+            $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            $this->_outputDetails( $_oTable->getRowsByProductID( array( $_sProductID ) ) );
+        }
+    }
 
 }
