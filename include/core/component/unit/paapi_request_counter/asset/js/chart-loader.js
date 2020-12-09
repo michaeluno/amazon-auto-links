@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2020 Michael Uno
  * @name Chart Loader
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -171,8 +171,11 @@
                     },
                     tooltips: {
                         callbacks: {
-                            label: function( tooltipItem ) {
-                                return tooltipItem.yLabel;
+                            title: function( tooltipItems, data ) {
+                                return data.labels[ tooltipItems[ 0 ].index ];
+                            },
+                            label: function( tooltipItem, data ) {
+                                return aalChartJSLoader.labels.count + ': ' + tooltipItem.yLabel;
                             }
                         }
                     },
@@ -187,7 +190,6 @@
                                 tooltipFormat: 'll',
                                 parser: function ( utcMoment ) {
                                     return moment( utcMoment ).utcOffset( aalChartJSLoader.GMTOffset ); // '+0900'
-                                    // return moment( utcMoment ).utcOffset( '-2300' ); // '+0900'
                                 }
                             },
                             ticks: {

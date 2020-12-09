@@ -122,6 +122,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                             // 'Last7Days' => __( 'Last 7 Days', 'amazon-auto-links' ),
                             'total'  => __( 'total', 'amazon-auto-links' ),
                             'dates'  => __( 'Dates', 'amazon-auto-links' ),
+                            'count'  => __( 'Count', 'amazon-auto-links' ),
                             'counts' => __( 'Counts', 'amazon-auto-links' ),
                         ),
                         'GMTOffset' => str_replace( ':', '', $this->getGMTOffsetString() ),
