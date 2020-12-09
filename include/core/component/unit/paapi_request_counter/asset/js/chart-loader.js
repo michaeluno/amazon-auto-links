@@ -205,7 +205,8 @@
                                 labelString: aalChartJSLoader.labels.counts
                             },
                             ticks: {
-                              suggestedMin: 0
+                                suggestedMin: 0,
+                                stepSize: 1
                             }
                         }]
                     }
