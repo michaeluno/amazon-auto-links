@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.5.3
+Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.2
+Stable tag:         4.4.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.3 - 12/10/2020 =
+- Added the `Products` tab in the `Report` page.
+- Tweaked the UI of unit settings to have a warning message for some options that require PA-API keys when PA-API keys are not set.
+- Fixed a bug in the chart of PA-API request counter which displayed the wrong step size and that the tooltip title was not set properly.
+- Fixed a bug that the prime flag was not set properly for category units.
 
 = 4.4.2 - 11/27/2020 =
 - Tweaked the UI of Manage Units listing table not to display feed icons for contextual units.
