@@ -38,7 +38,8 @@ class AmazonAutoLinks_ReportAdminPage_Report extends AmazonAutoLinks_AdminPage_P
     public function replyToLoadPage( $oFactory ) {
 
         // Tabs
-        // new AmazonAutoLinks_HelpAdminPage_Help_Support( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Tab_Products( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Tab_Product( $this->oFactory, $this->sPageSlug );
 
         $this->_doPageSettings( $oFactory );
         

@@ -1,3 +1,4 @@
+- Added the `Products` tab in the `Report` page.
 - Tweaked the UI of unit settings to have a warning message for some options that require PA-API keys when PA-API keys are not set.
 - Fixed a bug in the chart of PA-API request counter which displayed the wrong step size and that the tooltip title was not set properly.     
 - Fixed a bug that the prime flag was not set properly for category units. 

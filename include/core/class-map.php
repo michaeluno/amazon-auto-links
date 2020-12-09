@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.0b03 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.3b01 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -388,6 +388,9 @@ return array(
     "AmazonAutoLinks_AdminPageMetaBox_Information" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php", 
     "AmazonAutoLinks_ReportAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage.php", 
     "AmazonAutoLinks_ReportAdminPage_Report" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php", 
+    "AmazonAutoLinks_AdminPage_Tab_Product" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php", 
+    "AmazonAutoLinks_AdminPage_Tab_Products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Products.php", 
+    "AmazonAutoLinks_ListTable_Products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php", 
     "AmazonAutoLinks_AdminPage_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php", 
     "AmazonAutoLinks_SettingsAdminPageLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php", 
     "AmazonAutoLinks_AdminPage_Setting_3rdParty" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php", 
@@ -538,6 +541,7 @@ return array(
     "AmazonAutoLinks_ScraperDOM_CustomerReview_Each" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_CustomerReview_Each.php", 
     "AmazonAutoLinks_ScraperDOM_UserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_UserRating.php", 
     "AmazonAutoLinks_ScraperDOM_WidgetUserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/scraper/AmazonAutoLinks_ScraperDOM_WidgetUserRating.php", 
+    "AmazonAutoLinks_ListTableWrap_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/list_table/AmazonAutoLinks_ListTableWrap_Base.php", 
     "AmazonAutoLinks_Locale" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale.php", 
     "AmazonAutoLinks_Locale_AE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_AE.php", 
     "AmazonAutoLinks_Locale_AU" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_AU.php", 
