@@ -68,12 +68,12 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
      * @param    string         $sErrorMessage
      * @param    array          $aData
      * @param    string         $sCurrentHook
-     * @param    string         $sStackTrace
+     * @param    boolean|string $bsStackTrace
      * @since    4.3.0          Added the `$sCurrentHook` parameter.
      * @callback add_action()   aal_action_error
      * @since    4.2.0
      */
-    public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $sStackTrace='' ) {
+    public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $bsStackTrace='' ) {
 
         // @deprecated 4.4.0 No longer uses the options table but a file.
         /*if ( ! $this->_sOptionKey ) {
@@ -92,7 +92,10 @@ class AmazonAutoLinks_Event_Error_Log extends AmazonAutoLinks_PluginUtility {
         $sErrorMessage = $_sCode
             ? $_sCode . ': ' . $sErrorMessage
             : $sErrorMessage;
-        $this->___setErrorLogItem( $sErrorMessage, $aData, $sCurrentHook, $sStackTrace );
+        $_sStackTrace = $bsStackTrace === true
+            ? AmazonAutoLinks_Debug::getStackTrace( 2 )
+            : $bsStackTrace;
+        $this->___setErrorLogItem( $sErrorMessage, $aData, $sCurrentHook, $_sStackTrace );
 
     }
 
