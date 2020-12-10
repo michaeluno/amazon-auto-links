@@ -94,8 +94,10 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
          */
         private function ___doTaskActions( array $aActionTasks, AmazonAutoLinks_DatabaseTable_aal_tasks $_oTaskTable ) {
             foreach( $aActionTasks as $_aTask ) {
-                $_aTask = $_aTask + array( 'action' => '', 'arguments' => array() );
+                $_aTask = $_aTask + array( 'name' => '', 'action' => '', 'arguments' => array() );
                 if ( empty( $_aTask[ 'action' ] ) || empty( $_aTask[ 'arguments' ] ) ) {
+                    new AmazonAutoLinks_Error( 'PLUGIN_TASK', 'An invalid task: ' . $_aTask[ 'name' ], $_aTask, true );
+                    $_oTaskTable->deleteRows( $_aTask[ 'name' ] );
                     continue;
                 }
                 $_aParams = $_aTask[ 'arguments' ];

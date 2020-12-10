@@ -46,7 +46,8 @@ class AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo extends AmazonAutoLink
      */
     public function replyToBundleParameters( array $aTasksPerActionName ) {
 
-        $_aTasks = array();
+        $_aTasksError = array();
+        $_aTasks      = array();
         foreach( $aTasksPerActionName as $_aTask ) {
             /**
              * @var array $_aArguments
@@ -66,6 +67,8 @@ class AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo extends AmazonAutoLink
             $_sCurrency          = $_aArguments[ 3 ];
             $_sLanguage          = $_aArguments[ 4 ];
             if ( ! $_sLocale ) {
+                new AmazonAutoLinks_Error( 'MERGING_PLUGIN_TASKS', 'The task argument is corrupt.', $_aTask, false );
+                $_aTasksError[] = array( 'name' => $_aTask[ 'name' ] );
                 continue;
             }
             $_sKey               = "{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
@@ -73,7 +76,7 @@ class AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo extends AmazonAutoLink
             $_aTasks[ $_sKey ][] = $_aTask;
 
         }
-        return $this->___getTaskItemsJoined( $_aTasks );
+        return array_merge( $this->___getTaskItemsJoined( $_aTasks ), $_aTasksError );
 
     }
         /**
