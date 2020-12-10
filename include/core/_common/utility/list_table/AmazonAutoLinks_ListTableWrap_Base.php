@@ -17,7 +17,7 @@ if ( ! class_exists( 'WP_List_Table', false ) ) {
  * @since       4.4.3
  */
 abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
-    
+
     /**
      * @var         array
      * @since       4.4.3
@@ -38,7 +38,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
     /**
      * Sets up properties and hooks.
-     *
+     * @since 4.4.3
      */
     public function __construct(){
 
@@ -51,11 +51,11 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
         }
 
         $this->oUtil = new AmazonAutoLinks_PluginUtility;
-        
+
     }
 
     /**
-     * @callback        action      admin_notices
+     * * @since 4.4.3
      */
     public function _replyToDelayConstructor() {
         parent::__construct( $this->aArguments );
@@ -63,17 +63,23 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
     /**
      * Defines columns.
+     * @since 4.4.3
      */
     public function get_columns() {
         return $this->_getColumns();
     }
-    
+
+    /**
+     * @since 4.4.3
+     * @return array
+     */
     public function get_hidden_columns() {
         return $this->_getHiddenColumns();
     }
 
     /**
      * Defines sortable columns.
+     * @since 4.4.3
      */
     public function get_sortable_columns() {
         return $this->_getSortableColumns();
@@ -83,7 +89,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
      * Undefined column items will be passed.
      *
      * Show the whole array contents for troubleshooting.
-     *
+     * @since 4.4.3
      */
     public function column_default( $aItem, $sColumnName ) {
         return '<pre>'
@@ -95,6 +101,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
      *
      * @param array $aItem
      * @return string
+     * @since 4.4.3
      */
     public function column_cb( $aItem ) {
         return sprintf(
@@ -104,6 +111,10 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
         );
     }
 
+    /**
+     * @return array
+     * @since  4.4.3
+     */
     public function get_bulk_actions() {
         return $this->_getBulkActions();
     }
@@ -111,7 +122,8 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
     /**
      * Processes bulk actions of the table form.
      *
-     * @remark      This method uses redirect so it must be called before the header gets sent.
+     * @remark This method uses redirect so it must be called before the header gets sent.
+     * @since  4.4.3
      */
     public function process_bulk_action() {
         $this->_processBulkAction();
@@ -119,6 +131,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
     /**
      * Sets up items for table rows.
+     * @since 4.4.3
      */
     public function prepare_items() {
 
@@ -127,7 +140,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
             $this->get_hidden_columns(),
             $this->get_sortable_columns()
         );
-        
+
         $this->process_bulk_action();
 
         $_iPerPage     = $this->get_items_per_page('records_per_page', 20 );
@@ -190,16 +203,22 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
         );
     }
 
+    /**
+     * @return array
+     * @since  4.4.3
+     */
     protected function _getBulkActions() {
         return array(
             'delete'    => __( 'Delete', 'amazon-auto-links' ),
-            // 'activate'    => __( 'Activate', 'amazon-auto-links' ),
-            // 'deactivate'  => __( 'Deactivate', 'amazon-auto-links' ),
         );
     }
 
-
-    protected function _processBulkAction() {}
+    /**
+     * @since 4.4.3
+     */
+    protected function _processBulkAction() {
+        exit;
+    }
 
     /**
      * @param  integer $iPerPage
@@ -211,6 +230,10 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
         return array();
     }
 
+    /**
+     * @return integer
+     * @since  4.4.3
+     */
     protected function _getTotalCount() {
         return 0;
     }

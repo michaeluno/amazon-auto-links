@@ -8,10 +8,6 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
 */
 
-if ( ! class_exists( 'WP_List_Table', false ) ) {
-    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
-}
-
 /**
  * Handles the list table of Amazon products.
  * @since       4.4.3
@@ -68,6 +64,10 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         );
     }
 
+    /**
+     * @return array
+     * @since  4.4.3
+     */
     protected function _getBulkActions() {
         return array(
             'delete'    => __( 'Delete', 'amazon-auto-links' ),
@@ -76,11 +76,14 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         );
     }
 
+    /**
+     * @since  4.4.3
+     */    
     protected function _processBulkAction() {
 
         switch( strtolower( $this->current_action() ) ){
             case 'delete':
-                $this->_deleteItems( ( array ) $_REQUEST[ 'object_id' ] );
+                $this->___deleteItems( ( array ) $_REQUEST[ 'object_id' ] );
                 break;
             default:
                 return;    // do nothing.
@@ -94,8 +97,11 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         );
 
     }
-
-        protected function _deleteItems( array $aObjectIDs ) {
+        /**
+         * @param array $aObjectIDs
+         * @since 4.4.3
+         */
+        private function ___deleteItems( array $aObjectIDs ) {
             $_sInProducts = '(' . implode( ',', $aObjectIDs ) . ')';
             $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
             $_oTable->getVariable(
@@ -103,12 +109,11 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
                 . "WHERE object_id IN {$_sInProducts}"
             );
         }
-
-
+        
     /**
-     *
-     * @param array $aItem
+     * @param  array $aItem
      * @return string
+     * @since  4.4.3
      */
     public function column_cb( $aItem ) {
         return sprintf(
@@ -268,6 +273,9 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         return $_oTable->getVariable( $_sQuery );
     }
 
+    /**
+     * @sicne  4.4.3
+     */
     public function display() {
         $this->search_box( __( 'Search by ASIN or Title', 'amazon-auto-links' ),'search_product' );
         parent::display();
@@ -275,6 +283,11 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
 
     // Utilities
 
+    /**
+     * @param  array  $aDetails
+     * @return string
+     * @sicne  4.4.3
+     */
     private function ___getDetailList( array $aDetails ) {
         $_sList = '';
         foreach( $aDetails as $_sKey => $_sValue ) {
@@ -284,6 +297,12 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         }
         return "<ul>" . $_sList . "</ul>";
     }
+
+    /**
+     * @param  mixed  $mValue
+     * @return string
+     * @since  4.4.3
+     */
     private function ___getYesOrNo( $mValue ) {
         if ( ! isset( $mValue ) ) {
             return 'n/a';
