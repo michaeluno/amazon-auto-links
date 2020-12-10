@@ -175,7 +175,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                     $_iIteration++;
                     if ( $_iIteration > 10 ) {
                         $_sMessage = sprintf(
-                            'The API request is locked. It is unlocked until %1$s. Now is %2$s.',
+                            'The API request is locked. It will be unlocked at %1$s. Now: %2$s.',
                             $this->getSiteReadableDate( $_oLock->getModificationTime() + 1, 'Y/m/d/ H:i:s' ), // modification + 1
                             $this->getSiteReadableDate( time(), 'Y/m/d/ H:i:s' )
                         );
