@@ -40,6 +40,7 @@ class AmazonAutoLinks_ReportAdminPage_Report extends AmazonAutoLinks_AdminPage_P
         // Tabs
         new AmazonAutoLinks_AdminPage_Tab_Products( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_AdminPage_Tab_Product( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Tab_SiteDebugLog( $this->oFactory, $this->sPageSlug );
 
         $this->_doPageSettings( $oFactory );
         
