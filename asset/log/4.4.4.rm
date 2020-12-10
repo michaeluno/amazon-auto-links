@@ -1,3 +1,4 @@
-- Added the `Site Debug Log` tab in the `Reports` page.
+- Added the `Tasks` tab in the `Reports` page.
+- Added the `Site Debug Log` tab in the `Reports` page which appears when the site debug mode it turned on.
 - Tweaked the style of the UI of the `Products` tab. 
 - Fixed a bug that tests could not run via UI on some systems.  

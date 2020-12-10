@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.3 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.4b02 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -392,6 +392,8 @@ return array(
     "AmazonAutoLinks_AdminPage_Tab_Products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Products.php", 
     "AmazonAutoLinks_ListTable_Products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php", 
     "AmazonAutoLinks_AdminPage_Tab_SiteDebugLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/site_debug_log/AmazonAutoLinks_AdminPage_Tab_SiteDebugLog.php", 
+    "AmazonAutoLinks_AdminPage_Tab_Tasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/task/AmazonAutoLinks_AdminPage_Tab_Tasks.php", 
+    "AmazonAutoLinks_ListTable_Tasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/task/AmazonAutoLinks_ListTable_Tasks.php", 
     "AmazonAutoLinks_AdminPage_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php", 
     "AmazonAutoLinks_SettingsAdminPageLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php", 
     "AmazonAutoLinks_AdminPage_Setting_3rdParty" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php", 
