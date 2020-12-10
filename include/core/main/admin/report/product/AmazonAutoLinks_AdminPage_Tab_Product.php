@@ -30,15 +30,11 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
         );
     }
 
-    // private $___oListTable;
-
-    /**
-     * Triggered when the tab is loaded.
-     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
-     */
-    protected function _loadTab( $oAdminPage ) {
-
-
+    protected function _construct( $oAdminPage ) {
+        // Disable these query keys embedded in navigation tab links
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'orderby';
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'order';
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'product_id';
     }
 
     /**

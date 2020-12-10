@@ -201,10 +201,10 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
      */
     public function column_flags( $aItem ){
         $_aDetails = array(
-            __( 'Prime', 'amazon-auto-links' )          => $this->___getYesOrNo( $aItem[ 'is_prime' ] ),
-            __( 'Adult', 'amazon-auto-links' )          => $this->___getYesOrNo( $aItem[ 'is_adult' ] ),
-            __( 'Free Shipping', 'amazon-auto-links' )  => $this->___getYesOrNo( $aItem[ 'delivery_free_shipping' ] ),
-            __( 'Delivery FBA', 'amazon-auto-links' )   => $this->___getYesOrNo( $aItem[ 'delivery_fba' ] ),
+            __( 'Prime', 'amazon-auto-links' )          => $this->_getYesOrNo( $aItem[ 'is_prime' ] ),
+            __( 'Adult', 'amazon-auto-links' )          => $this->_getYesOrNo( $aItem[ 'is_adult' ] ),
+            __( 'Free Shipping', 'amazon-auto-links' )  => $this->_getYesOrNo( $aItem[ 'delivery_free_shipping' ] ),
+            __( 'Delivery FBA', 'amazon-auto-links' )   => $this->_getYesOrNo( $aItem[ 'delivery_fba' ] ),
         );
         return $this->___getDetailList( $_aDetails );
     }
@@ -222,7 +222,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
             __( 'Updated', 'amazon-auto-links' )  => $aItem[ 'modified_time' ],
             __( 'Expires', 'amazon-auto-links' )  => $aItem[ 'expiration_time' ],
             __( 'Now', 'amazon-auto-links' )      => date( 'Y-m-d H:i:s', time() ), // no GMT offset
-            __( 'Expired', 'amazon-auto-links' )  => $this->___getYesOrNo( strtotime( $aItem[ 'expiration_time' ] ) < time() ),
+            __( 'Expired', 'amazon-auto-links' )  => $this->_getYesOrNo( strtotime( $aItem[ 'expiration_time' ] ) < time() ),
         );
         $_sOutput = "<div class='details'>";
         foreach( $_aDetails as $_sKey => $_sValue ) {
@@ -297,18 +297,5 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         return "<div class='details'>" . $_sList . "</div>";
     }
 
-    /**
-     * @param  mixed  $mValue
-     * @return string
-     * @since  4.4.3
-     */
-    private function ___getYesOrNo( $mValue ) {
-        if ( ! isset( $mValue ) ) {
-            return 'n/a';
-        }
-        return ! empty( $mValue )
-            ? __( 'Yes', 'amazon-auto-links' )
-            : __( 'No', 'amazon-auto-links' );
-    }
 
 }

@@ -28,14 +28,21 @@ class AmazonAutoLinks_AdminPage_Tab_Products extends AmazonAutoLinks_AdminPage_T
         );
     }
 
-    private $___oListTable;
+    /**
+     * @var AmazonAutoLinks_ListTableWrap_Base
+     */
+    protected $_oListTable;
 
     protected function _construct( $oAdminPage ) {
-        add_action(
-            "do_form_{$this->sPageSlug}_{$this->sTabSlug}",
-            array( $this, 'replyToDoBeforeForm' )
-        );
-    }
+
+        // Disable these query keys embedded in navigation tab links
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'orderby';
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'order';
+        $oAdminPage->oProp->aDisallowedQueryKeys[] = 'product_id';
+
+        // For the table output.
+        add_action( "do_form_{$this->sPageSlug}_{$this->sTabSlug}", array( $this, 'replyToDoBeforeForm' ) );
+     }
 
     /**
      * Triggered when the tab is loaded.
@@ -43,8 +50,8 @@ class AmazonAutoLinks_AdminPage_Tab_Products extends AmazonAutoLinks_AdminPage_T
      */
     protected function _loadTab( $oAdminPage ) {
 
-        $this->___oListTable = new AmazonAutoLinks_ListTable_Products;
-        $this->___oListTable->process_bulk_action();
+        $this->_oListTable = new AmazonAutoLinks_ListTable_Products;
+        $this->_oListTable->process_bulk_action();
 
     }
 
@@ -53,11 +60,11 @@ class AmazonAutoLinks_AdminPage_Tab_Products extends AmazonAutoLinks_AdminPage_T
      */
     public function replyToDoBeforeForm( $oAdminPage ) {
 
-        $this->___oListTable->prepare_items();
+        $this->_oListTable->prepare_items();
         ?>
         <div class="list-table-container">
             <form id="amazon-products" method="post">
-                <?php $this->___oListTable->display() ?>
+                <?php $this->_oListTable->display() ?>
             </form>
         </div>
         <?php

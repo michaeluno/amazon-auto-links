@@ -238,4 +238,20 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
         return 0;
     }
 
+    /* Utility Methods */
+
+    /**
+     * @param  mixed  $mValue
+     * @return string
+     * @since  4.4.3
+     */
+    protected function _getYesOrNo( $mValue ) {
+        if ( ! isset( $mValue ) ) {
+            return 'n/a';
+        }
+        return ! empty( $mValue )
+            ? __( 'Yes', 'amazon-auto-links' )
+            : __( 'No', 'amazon-auto-links' );
+    }
+
 }
