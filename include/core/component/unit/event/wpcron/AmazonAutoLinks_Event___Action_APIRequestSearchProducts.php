@@ -72,16 +72,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_sCurrency      = $_aParams[ 3 ];
         $_sLanguage      = $_aParams[ 4 ];
         $_aASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
-        $_aResponse      = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
-        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
+        $_aoResponse     = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
+        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aoResponse, current_filter(), true );
 
         /**
          * If there are item-specific errors, insert the error in the Items element
          * so the row will be updated and empty values will be inserted
          * then it will avoid triggering this background routine over and over again for not setting values.
          */
-        if ( isset( $_aResponse[ 'Errors' ] ) ) {
-            $this->___setErroredItems( $_aResponse );
+        if ( isset( $_aoResponse[ 'Errors' ] ) ) {
+            $this->___setErroredItems( $_aoResponse );
         }
         /**
          * Cases:
@@ -89,17 +89,21 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          *  - errors with found items
          *  - only found items
          */
-        if ( ! isset( $_aResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
-            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS_ERROR', "Response does not contain items.", $_aResponse, current_filter(), '' );
+        if ( is_wp_error( $_aoResponse ) ) {
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', $_aoResponse->get_error_code() . ' ' . $_aoResponse->get_error_message(), array(), '' );
+            return;
+        }
+        if ( ! isset( $_aoResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', "Response does not contain items.", $_aoResponse, '' );
             return;
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
         if ( ! $_sTableVersion ) {
-            new AmazonAutoLinks_Error( 'SETTING_DATABASE_TABLE_ROW', 'The products cache table does not seem to be installed.', array(), true );
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', 'The products cache table does not seem to be installed.', array(), true );
             return;
         }
 
-        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
+        $this->___setProductRows( $_aoResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
 
     }
         /**
@@ -264,7 +268,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * @param  string $sLocale
          * @param  string $sCurrency
          * @param  string $sLanguage
-         * @return array
+         * @return array|WP_Error
          */
         private function ___getAPIResponse( array $aASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
 
