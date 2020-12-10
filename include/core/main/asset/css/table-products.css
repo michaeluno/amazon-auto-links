@@ -52,7 +52,6 @@
     flex-basis: 70%;
 }
 
-
 /* Column - Image */
 .column-image {
     width: 10%;
@@ -68,7 +67,6 @@
     max-width: 100px;
 }
 
-
 /* List */
 table.products ul {
     margin: 0;
@@ -81,18 +79,6 @@ table.products li {
     margin-bottom: 0;
     font-size: 96%;
 }
-
-/*table.products span.detail-title {*/
-/*    box-sizing: border-box;*/
-/*    display: inline-block;*/
-/*    width: 44%;*/
-/*    color: #777;*/
-/*}*/
-/*table.products span.detail-value {*/
-/*    box-sizing: border-box;*/
-/*    display: inline-block;*/
-/*    width: auto;*/
-/*}*/
 
 /* Search Box */
 p.search-box {

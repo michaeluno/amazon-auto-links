@@ -26,7 +26,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
             'parent_tab_slug' => 'products',
             'show_in_page_tab' => false,
             'order'     => 55,
-            'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/product-table.css',
+            'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/table-product.css',
         );
     }
 
