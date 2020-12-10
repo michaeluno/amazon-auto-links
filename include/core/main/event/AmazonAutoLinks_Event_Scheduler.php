@@ -303,17 +303,19 @@ class AmazonAutoLinks_Event_Scheduler {
         $_sLanguage = $_aRequestBaseInfo[ 3 ];
         self::$___aScheduledProductIDs[] = "{$sASIN}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
 
-        self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = func_get_args() + (
-            defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? array(
-                    'debug' => array(
-                        'time'         => microtime( true ),
-                        'stacktrace'   => AmazonAutoLinks_Debug::getStackTrace(),
-                        'page_load_id' => AmazonAutoLinks_Utility::getPageLoadID(),
-                    ),
-                )
-                : array()
-        );
+        self::$___aScheduledProductInformation[ $sAssociateIDLocaleCurLang ][ $sASIN ] = func_get_args();
+        // @deprecated 4.4.4 There is a case that the arguments are not serialized properly. Although it is not certain that removing this helps or not, just deprecate it at the moment.
+        // + (
+        //     defined( 'WP_DEBUG' ) && WP_DEBUG
+        //         ? array(
+        //             'debug' => array(
+        //                 'time'         => microtime( true ),
+        //                 'stacktrace'   => AmazonAutoLinks_Debug::getStackTrace(),
+        //                 'page_load_id' => AmazonAutoLinks_Utility::getPageLoadID(),
+        //             ),
+        //         )
+        //         : array()
+        // );
 
     }
         /**
@@ -357,12 +359,11 @@ class AmazonAutoLinks_Event_Scheduler {
                     $_sLanguage    = $_aRequestInfo[ 3 ];
 
                     foreach( $_aItems as $_sASIN => $_aItem ) {
-                        $_aDebugInfo  = AmazonAutoLinks_Utility::getElementAsArray( $_aItem, array( 'debug' ) );
                         $_aTaskRows[] = array(
                             // ASIN|Locale|Currency|Language
                             'name'          => $_aItem[ 1 ] . '|' . $_sLocale . '|' . $_sCurrency . '|' . $_sLanguage,  // product_id
                             'action'        => 'aal_action_api_get_products_info',
-                            'arguments'     => array( array( $_aItem ), $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage, $_aDebugInfo ),
+                            'arguments'     => array( array( $_aItem ), $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage ),
                             'creation_time' => date( 'Y-m-d H:i:s', time() ),
                             'next_run_time' => date( 'Y-m-d H:i:s', time() ),
                         );
