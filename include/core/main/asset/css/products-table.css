@@ -1,5 +1,23 @@
+/* Admin Page Framework default form element */
 #poststuff {
     display: none;
+}
+
+/* Flex box for details */
+.details {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.detail-name {
+    flex-basis: 40%;
+    flex-shrink: 2;
+    color: #777;
+}
+.detail-value {
+    flex-basis: 60%;
+    flex-shrink: 1;
+    white-space: nowrap;
 }
 
 /* Products table */
@@ -8,7 +26,34 @@
     margin-top: 1em;
 }
 
-/* Image */
+/* Column - Date */
+.column-modified_time {
+    width: 16%;
+}
+/* Column - Flags */
+.column-flags {
+    width: 12%;
+}
+.column-flags .detail-name {
+    flex-basis: 68%;
+}
+.column-flags .detail-value {
+    flex-basis: 32%;
+}
+
+/* Column - Price */
+.column-prices {
+    width: 15%;
+}
+.column-prices .detail-name {
+    flex-basis: 30%;
+}
+.column-prices .detail-value {
+    flex-basis: 70%;
+}
+
+
+/* Column - Image */
 .column-image {
     width: 10%;
     vertical-align: middle;
@@ -23,6 +68,7 @@
     max-width: 100px;
 }
 
+
 /* List */
 table.products ul {
     margin: 0;
@@ -35,25 +81,20 @@ table.products li {
     margin-bottom: 0;
     font-size: 96%;
 }
-table.products span.detail-title {
-    box-sizing: border-box;
-    display: inline-block;
-    width: 44%;
-    color: #777;
-}
-table.products span.detail-value {
-    box-sizing: border-box;
-    display: inline-block;
-    width: auto;
-}
 
-/* Category List */
-/*.column-categories li {*/
-/*    list-style: disc;*/
-/*    margin-left: 1.2em;*/
+/*table.products span.detail-title {*/
+/*    box-sizing: border-box;*/
+/*    display: inline-block;*/
+/*    width: 44%;*/
+/*    color: #777;*/
+/*}*/
+/*table.products span.detail-value {*/
+/*    box-sizing: border-box;*/
+/*    display: inline-block;*/
+/*    width: auto;*/
 /*}*/
 
-
+/* Search Box */
 p.search-box {
     margin-bottom: 0.2em;
 }

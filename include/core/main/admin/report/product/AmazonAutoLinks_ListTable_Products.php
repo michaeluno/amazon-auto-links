@@ -40,7 +40,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
             'product'       => __( 'Product', 'amazon-auto-links' ),
             'categories'    => __( 'Category', 'amazon-auto-links' ),
             'prices'        => __( 'Price', 'amazon-auto-links' ),
-            'details'       => __( 'Details', 'amazon-auto-links' ),
+            'flags'         => __( 'Flags', 'amazon-auto-links' ),
             'modified_time' => __( 'Date', 'amazon-auto-links' ),
         );
     }
@@ -56,11 +56,10 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
      * @since  4.4.3
      */
     protected function _getSortableColumns() {
+        // true means it's already sorted
         return array(
-            'title'             => array( 'title', false ),    //true means it's already sorted
-            'modified_time'     => array( 'modified_time', false ),     //true means it's already sorted
-            // 'thumbnail'  => array( 'thumbnail', false ),
-            // 'description'   => array( 'description', false ),
+            'title'             => array( 'title', false ),
+            'modified_time'     => array( 'modified_time', false ),
         );
     }
 
@@ -71,8 +70,6 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
     protected function _getBulkActions() {
         return array(
             'delete'    => __( 'Delete', 'amazon-auto-links' ),
-            // 'activate'    => __( 'Activate', 'amazon-auto-links' ),
-            // 'deactivate'  => __( 'Deactivate', 'amazon-auto-links' ),
         );
     }
 
@@ -202,7 +199,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
      * @param  array $aItem
      * @return string
      */
-    public function column_details( $aItem ){
+    public function column_flags( $aItem ){
         $_aDetails = array(
             __( 'Prime', 'amazon-auto-links' )          => $this->___getYesOrNo( $aItem[ 'is_prime' ] ),
             __( 'Adult', 'amazon-auto-links' )          => $this->___getYesOrNo( $aItem[ 'is_adult' ] ),
@@ -214,25 +211,27 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
 
     public function column_prices( $aItem ) {
         $_aDetails = array(
-            __( 'Proper', 'amazon-auto-links' )     => $aItem[ 'price_formatted' ],
-            __( 'Discounted', 'amazon-auto-links' ) => $aItem[ 'discounted_price_formatted' ],
+            __( 'Proper', 'amazon-auto-links' )   => $aItem[ 'price_formatted' ],
+            __( 'Discount', 'amazon-auto-links' ) => $aItem[ 'discounted_price_formatted' ],
         );
         return $this->___getDetailList( $_aDetails );
     }
 
     public function column_modified_time( $aItem ) {
         $_aDetails = array(
-            __( 'Modified', 'amazon-auto-links' ) => $aItem[ 'modified_time' ],
+            __( 'Updated', 'amazon-auto-links' )  => $aItem[ 'modified_time' ],
             __( 'Expires', 'amazon-auto-links' )  => $aItem[ 'expiration_time' ],
+            __( 'Now', 'amazon-auto-links' )      => date( 'Y-m-d H:i:s', time() ), // no GMT offset
+            __( 'Expired', 'amazon-auto-links' )  => $this->___getYesOrNo( strtotime( $aItem[ 'expiration_time' ] ) < time() ),
         );
-        $_sOutput = "<ul>";
+        $_sOutput = "<div class='details'>";
         foreach( $_aDetails as $_sKey => $_sValue ) {
-            $_sOutput .= "<li><span class='detail-title'>{$_sKey}:</span></li>"
-                . "<li><span class='detail-value'>{$_sValue}</span></li>";
+            $_sOutput .= "<div class='detail-name'><span>{$_sKey}:</span></div>"
+                . "<div class='detail-value'><span>{$_sValue}</span></div>";
         }
-        $_sOutput .= "</ul>";
-        return $_sOutput;
-        // return $this->___getDetailList( $_aDetails );
+        $_sOutput .= "</div>";
+        // return $_sOutput;
+        return $this->___getDetailList( $_aDetails );
     }
 
 
@@ -292,10 +291,10 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         $_sList = '';
         foreach( $aDetails as $_sKey => $_sValue ) {
             $_sList .= $_sKey
-                ? "<li><span class='detail-title'>" . $_sKey . ":</span><span class='detail-value'>" . $_sValue . "</span></li>"
-                : "<li><span class='detail-value'>" . $_sValue . "</span></li>";
+                ? "<div class='detail-name'><span>" . $_sKey . ":</span></div><div class='detail-value'><span>" . $_sValue . "</span></div>"
+                : "<div class='detail-name'><span>" . $_sValue . "</span></div>";
         }
-        return "<ul>" . $_sList . "</ul>";
+        return "<div class='details'>" . $_sList . "</div>";
     }
 
     /**
