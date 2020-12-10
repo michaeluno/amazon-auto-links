@@ -23,7 +23,7 @@ class AmazonAutoLinks_AdminPage_Tab_SiteDebugLog extends AmazonAutoLinks_AdminPa
         return array(
             'tab_slug'         => 'site_debug_log',
             'title'            => __( 'Site Debug Log', 'amazon-auto-links' ),
-            'order'            => 60,
+            'order'            => 100,
             'show_in_page_tab' => $this->isDebugMode(),
             'style'            => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/site-debug-log.css',
         );
