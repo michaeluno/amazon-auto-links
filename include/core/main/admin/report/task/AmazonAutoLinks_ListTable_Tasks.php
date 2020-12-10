@@ -183,9 +183,9 @@ class AmazonAutoLinks_ListTable_Tasks extends AmazonAutoLinks_ListTableWrap_Base
      * @since  4.4.4
      */
     public function column_arguments( $aItem ) {
-return 'coming soon....';
-        $_aArguments = maybe_unserialize( $aItem[ 'arguments' ] );
-        return AmazonAutoLinks_Debug::getDetails( $_aArguments );
+        return is_array( $aItem[ 'arguments' ] )
+            ? "<p>Array, " . __( 'length', 'amazon-auto-links' ) . ": " . count( $aItem[ 'arguments' ] ) . "</p>"
+            : "<p class='error'>" . __( 'corrupt', 'amazon-auto-links' ) . "</p>";
     }
 
     /**

@@ -3,6 +3,10 @@
     display: none;
 }
 
+.error {
+    color: red;
+}
+
 .column-due {
     width: 10%;
 }
