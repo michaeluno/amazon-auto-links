@@ -6,4 +6,5 @@
 }
 .amazon-auto-links-field-textarea textarea {
     height: 1200px;
+    white-space: pre;
 }
