@@ -47,6 +47,10 @@ class AmazonAutoLinks_DatabaseTable_aal_tasks extends AmazonAutoLinks_DatabaseTa
      * @param array|string $asNames
      */
     public function deleteRows( $asNames='' ) {
+
+        if ( empty( $asNames ) ) {
+            return;
+        }
                 
         $_aNames = is_array( $asNames ) ? $asNames : array( 0 => $asNames );
 
