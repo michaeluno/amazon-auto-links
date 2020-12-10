@@ -52,7 +52,11 @@ class AmazonAutoLinks_Test_ClassLister {
             $_sCategory  = str_replace( $this->___sBaseDirPath, '', $_sFilePath );
             $_sCategory  = ltrim( $_sCategory, '/' );
             $_sCategory  = pathinfo( $_sCategory, PATHINFO_DIRNAME );
-            $_sFilePath  = ltrim( $_sFilePath, '/' );
+            // @deprecated 4.4.4 This might be causing a problem on Unix based systems.
+            // $_sFilePath  = ltrim( $_sFilePath, '/' );
+            if ( ! file_exists( $_sFilePath ) ) {
+                continue;
+            }
             
             $_aClassFiles[ $_sCategory ] = isset( $_aClassFiles[ $_sCategory ] ) ? $_aClassFiles[ $_sCategory ] : array();
             $_aClassFiles[ $_sCategory ][] = $_sFilePath;

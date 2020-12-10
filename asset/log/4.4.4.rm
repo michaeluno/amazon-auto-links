@@ -1,1 +1,2 @@
-- Added the `Site Debug Log` tab in the `Reports` page. 
+- Added the `Site Debug Log` tab in the `Reports` page.
+- Fixed a bug that tests could not run via UI on some systems.  
