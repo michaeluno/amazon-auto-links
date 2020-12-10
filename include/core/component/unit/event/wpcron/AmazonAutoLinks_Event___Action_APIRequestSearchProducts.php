@@ -71,8 +71,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_sLocale        = $_aParams[ 2 ];
         $_sCurrency      = $_aParams[ 3 ];
         $_sLanguage      = $_aParams[ 4 ];
-        $_sASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
-        $_aResponse      = $this->___getAPIResponse( $_sASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
+        $_aASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
+        $_aResponse      = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
+        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
 
         /**
          * If there are item-specific errors, insert the error in the Items element
@@ -89,6 +90,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          *  - only found items
          */
         if ( ! isset( $_aResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
+            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS_ERROR', "Response does not contain items.", $_aResponse, current_filter(), '' );
             return;
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
@@ -154,6 +156,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
             }
 
+            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " of rows: ", array() , current_filter(), '' );
             if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
                 foreach( $_aRows as $_sKey => $_aRow ) {                   
                     $_aKey          = explode( '|', $_sKey );
