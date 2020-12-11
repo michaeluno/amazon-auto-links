@@ -293,7 +293,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                     'ItemIds'              => $aASINs,
                     'preferred_currency'   => $sCurrency,
                     'language'             => $sLanguage,
-                    'county'               => $sLocale,
+                    'country'              => $sLocale,
                     'associate_id'         => $sAssociateID,
                     'cache_duration'       => $_iCacheDuration,
                     '_force_cache_renewal' => false,
