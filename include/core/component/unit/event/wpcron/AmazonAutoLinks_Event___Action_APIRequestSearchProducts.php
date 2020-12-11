@@ -93,7 +93,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             $_sMessage = isset( $_aResponse[ 'Error' ][ 'Message' ] )
                 ? $_aResponse[ 'Error' ][ 'Message' ]
                 : 'Response does not contain items';
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, $_aResponse, '' );
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, array( 'response' => $_aResponse, 'asins'=> $_aASINs, 'locale' => $_sLocale, 'currency' => $_sCurrency, 'language' => $_sLanguage ), '' );
             return;
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
@@ -159,7 +159,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
             }
 
-            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " of rows: ", array() , current_filter(), '' );
+            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " row(s): ", array_keys( $_aRows ) , current_filter(), '' );
             if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
                 foreach( $_aRows as $_sKey => $_aRow ) {                   
                     $_aKey          = explode( '|', $_sKey );
