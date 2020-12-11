@@ -93,7 +93,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             $_sMessage = isset( $_aResponse[ 'Error' ][ 'Message' ] )
                 ? $_aResponse[ 'Error' ][ 'Message' ]
                 : 'Response does not contain items';
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, array( 'response' => $_aResponse, 'asins'=> $_aASINs, 'locale' => $_sLocale, 'currency' => $_sCurrency, 'language' => $_sLanguage ), '' );
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, array( 'associate_id' => $_sAssociateID, 'asins'=> $_aASINs, 'locale' => $_sLocale, 'currency' => $_sCurrency, 'language' => $_sLanguage, 'response' => $_aResponse ), '' );
             return;
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
