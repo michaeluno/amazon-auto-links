@@ -58,13 +58,26 @@
     vertical-align: middle;
 }
 .thumbnail {
+
     margin: 0 auto;
     width: 100%;
     max-width: 100px;
+
+    /* Border */
+    border: 1px solid #ddd;
+    padding: 0.4em;
+    border-radius: 4px;
+
+    /* Centering */
+    vertical-align: middle;
+    display : flex;
+    align-items : center;
+    justify-content: center;
+
 }
 .thumbnail img {
-    width: 100%;
     max-width: 100px;
+    max-height: 100px;
 }
 
 /* List */
