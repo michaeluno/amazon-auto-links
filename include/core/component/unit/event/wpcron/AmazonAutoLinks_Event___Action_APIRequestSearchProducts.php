@@ -50,7 +50,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_aParameters = func_get_args();
 
         if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ . '_' . serialize( $_aParameters ) ) ) {
-            new AmazonAutoLinks_Error( 'GET_PRODUCTS_INFO', 'A same HTTP request is made.', $_aParameters, true );
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS', 'A same HTTP request is made.', $_aParameters, true );
             return false;
         }
         if ( $this->_isLocked( $_aParameters ) ) {
@@ -72,16 +72,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_sCurrency      = $_aParams[ 3 ];
         $_sLanguage      = $_aParams[ 4 ];
         $_aASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
-        $_aoResponse     = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
-        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aoResponse, current_filter(), true );
+        $_aResponse      = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
+        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
 
         /**
          * If there are item-specific errors, insert the error in the Items element
          * so the row will be updated and empty values will be inserted
          * then it will avoid triggering this background routine over and over again for not setting values.
          */
-        if ( isset( $_aoResponse[ 'Errors' ] ) ) {
-            $this->___setErroredItems( $_aoResponse );
+        if ( isset( $_aResponse[ 'Errors' ] ) ) {
+            $this->___setErroredItems( $_aResponse );
         }
         /**
          * Cases:
@@ -89,21 +89,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          *  - errors with found items
          *  - only found items
          */
-        if ( is_wp_error( $_aoResponse ) ) {
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', $_aoResponse->get_error_code() . ' ' . $_aoResponse->get_error_message(), array(), '' );
-            return;
-        }
-        if ( ! isset( $_aoResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', "Response does not contain items.", $_aoResponse, '' );
+        if ( ! isset( $_aResponse[ 'ItemsResult' ][ 'Items' ] ) ) {
+            $_sMessage = isset( $_aResponse[ 'Error' ][ 'Message' ] )
+                ? $_aResponse[ 'Error' ][ 'Message' ]
+                : 'Response does not contain items';
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, $_aResponse, '' );
             return;
         }
         $_sTableVersion = get_option( 'aal_products_version', '0' );
         if ( ! $_sTableVersion ) {
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_ERROR', 'The products cache table does not seem to be installed.', array(), true );
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', 'The products cache table does not seem to be installed.', array(), true );
             return;
         }
 
-        $this->___setProductRows( $_aoResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
+        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
 
     }
         /**
@@ -268,7 +267,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * @param  string $sLocale
          * @param  string $sCurrency
          * @param  string $sLanguage
-         * @return array|WP_Error
+         * @return array
          */
         private function ___getAPIResponse( array $aASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
 
