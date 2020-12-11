@@ -372,17 +372,17 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 // @deprecated  3.9.0   Now when %review% or %rating% is not set, it won't trigger the background routine.
                 // If these are set, even the user places those variables later on,
                 // the background routine won't be triggered and the values will not be shown.
-//                        $_aRow[ 'rating' ]                  = 0;
-//                        $_aRow[ 'rating_image_url' ]        = '';
-//                        $_aRow[ 'rating_html' ]             = '';
-//                        $_aRow[ 'number_of_reviews' ]       = 0;
-//                        $_aRow[ 'customer_review_url' ]     = '';
-//                        $_aRow[ 'customer_review_charset' ] = '';
-//                        $_aRow[ 'customer_reviews' ]        = '';
+                // $_aRow[ 'rating' ]                  = 0;
+                // $_aRow[ 'rating_image_url' ]        = '';
+                // $_aRow[ 'rating_html' ]             = '';
+                // $_aRow[ 'number_of_reviews' ]       = 0;
+                // $_aRow[ 'customer_review_url' ]     = '';
+                // $_aRow[ 'customer_review_charset' ] = '';
+                // $_aRow[ 'customer_reviews' ]        = '';
 
                 // 3.8.0+ If the table version is 1.1.0b01 or above,
                 $_sCurrentVersion = get_option( "aal_products_version", '0' );
-                if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=')) {
+                if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=') ) {
                     $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
                     $_aRow[ 'features' ]   = AmazonAutoLinks_Unit_Utility::getFeatures( $_aFeatures );
                     $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
@@ -390,7 +390,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 }
 
                 // 3.9.0+ If the table version is 1.2.0b01 or above,
-                if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=')) {
+                if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=') ) {
                     $_aRow[ 'is_prime' ] = AmazonAutoLinks_Unit_Utility::isPrime( $aItem );
                     $_aRow[ 'is_adult' ] = ( boolean ) $this->getElement(
                         $aItem,
@@ -406,7 +406,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 }
 
                 // 3.10.0+
-                if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=')) {
+                if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=') ) {
                     $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
                     $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );
                 }
