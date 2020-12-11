@@ -36,7 +36,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
         $_iRating = $this->___getRating( $aProduct, $aRow, $aRowIdentifier );
-
+AmazonAutoLinks_Debug::log( $_iRating );
         // The value is two digits such as 30 for 3.0.
         $_iAcceptedRate = ( integer ) ( $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'amount' ) * 10 );
         $_sCase = $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'case' );
@@ -65,7 +65,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
         private function ___getRating( $aProduct, $aRow, $aRowIdentifier ) {
 
             // Case: the product array already holds the value. This happens especially for the feed unit type.
-            $_insRating = $this->getElement( $aProduct, 'rating' );
+            $_insRating = $this->getElement( $aProduct, array( 'rating' ), $this->getElement( $aProduct, 'rating_point' ) );
             if ( is_numeric( $_insRating ) ) {
                 // Case: 4.5, 5, 2, 3.5, 1 etc.
                 if ( 5 >= $_insRating ) {
