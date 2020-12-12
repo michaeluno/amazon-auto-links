@@ -51,6 +51,10 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         if ( $oPost->post_type !== $this->oProp->sPostType ) {
             return $aActions;
         }
+        // For the trash listing, the view key is not set.
+        if ( ! isset( $aActions[ 'view' ] ) ) {
+            return $aActions;
+        }
         $aActions[ 'view' ] = links_add_target( $aActions[ 'view' ] );
         return $aActions;
     }

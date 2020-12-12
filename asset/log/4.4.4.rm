@@ -5,3 +5,4 @@
 - Fixed a bug that invalid plugin tasks were not cleared properly. 
 - Fixed a bug that a product filter was not functioning for category units.  
 - Fixed a bug that tests could not run via UI on some systems.
+- Fixed a bug that caused a PHP notice, "Undefined index: view in ...AmazonAutoLinks_PostType_Unit_ListTable.php on line 54".
