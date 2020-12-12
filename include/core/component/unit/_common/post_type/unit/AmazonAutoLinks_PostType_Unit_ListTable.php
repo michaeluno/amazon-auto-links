@@ -18,7 +18,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         
     /**
      * Sets up hooks.
-     * @since       3.2.0
+     * @since 3.2.0
      */
     public function setUp() {
     
@@ -42,10 +42,10 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     }
 
     /**
-     * @param $aActions
-     * @param WP_Post $oPost
+     * @param  $aActions
+     * @param  WP_Post $oPost
      * @return array
-     * @since   4.3.0
+     * @since  4.3.0
      */
     public function replyToModifyActionLinks( $aActions, $oPost ) {
         if ( $oPost->post_type !== $this->oProp->sPostType ) {
@@ -57,71 +57,73 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         
     /**
      * Defines the column header of the unit listing table.
-     *
-     * @callback     filter      columns_{post type slug}
+     * 
+     * @param        array   $aHeaderColumns
+     * @callback     add_filter()  columns_{post type slug}
      * @return       array
      */
     public function replyToModifyColumnHeader( $aHeaderColumns ) {
         return array(
-            'cb'                    => '<input type="checkbox" />',   
-            'title'                 => __( 'Unit Name', 'amazon-auto-links' ),    
+            'cb'                    => '<input type="checkbox" />',
+            'title'                 => __( 'Unit Name', 'amazon-auto-links' ),
             'status'                => __( 'Status', 'amazon-auto-links' ),
             'details'               => __( 'Details', 'amazon-auto-links' ),
             // 'unit_type'             => __( 'Unit Type', 'amazon-auto-links' ),
             // 'template'              => __( 'Template', 'amazon-auto-links' ),
-            'amazon_auto_links_tag' => __( 'Labels', 'amazon-auto-links' ),  
+            'amazon_auto_links_tag' => __( 'Labels', 'amazon-auto-links' ),
             'code'                  => __( 'Shortcode / PHP Code', 'amazon-auto-links' ),
             'feed'                  => __( 'Feed', 'amazon-auto-links' ), // 3.1.0+
-        );                      
-    }    
-        
+        );
+    }
+
     /**
-     * 
-     * @callback        filter      cell_ + post type slug + column name
-     * @return          string
+     * @param    string  $sCell
+     * @param    integer $iPostID
+     * @callback add_filter() cell_ + post type slug + column name
+     * @return   string
      */
-    public function cell_amazon_auto_links_amazon_auto_links_tag( $sCell, $iPostID ) {    
-        
+    public function cell_amazon_auto_links_amazon_auto_links_tag( $sCell, $iPostID ) {
+
         // Get the genres for the post.
-        $_aTerms = get_the_terms( 
-            $iPostID, 
+        $_aTerms = get_the_terms(
+            $iPostID,
             AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ]
         );
-    
+
         // If no tag is assigned to the post,
-        if ( empty( $_aTerms ) ) { 
-            return '—'; 
+        if ( empty( $_aTerms ) ) {
+            return '—';
         }
-        
-        // Loop through each term, linking to the 'edit posts' page for the specific term. 
+
+        // Loop through each term, linking to the 'edit posts' page for the specific term.
         $_aOutput = array();
         foreach( $_aTerms as $_oTerm ) {
-            $_aOutput[] = sprintf( 
+            $_aOutput[] = sprintf(
                 '<a href="%s">%s</a>',
-                esc_url( 
-                    add_query_arg( 
-                        array( 
-                            'post_type' => $GLOBALS[ 'post' ]->post_type, 
-                            AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ] => $_oTerm->slug 
-                        ), 
-                        'edit.php' 
-                    ) 
+                esc_url(
+                    add_query_arg(
+                        array(
+                            'post_type' => $GLOBALS[ 'post' ]->post_type,
+                            AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ] => $_oTerm->slug
+                        ),
+                        'edit.php'
+                    )
                 ),
-                esc_html( 
-                    sanitize_term_field( 
-                        'name', 
-                        $_oTerm->name, 
-                        $_oTerm->term_id, 
-                        AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ], 
-                        'display' 
-                    ) 
+                esc_html(
+                    sanitize_term_field(
+                        'name',
+                        $_oTerm->name,
+                        $_oTerm->term_id,
+                        AmazonAutoLinks_Registry::$aTaxonomies[ 'tag' ],
+                        'display'
+                    )
                 )
             );
         }
 
         // Join the terms, separating them with a comma.
         return join( ', ', $_aOutput );
-        
+
     }
     /**
      * @param    string       $sCell
@@ -156,7 +158,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
             );
         }
-    
+
     /**
      * @callback        filter      cell_{post type slug}_{column key}
      * @return          string
@@ -181,10 +183,12 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
     //         untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
     //     );
     // }
-    
+
     /**
-     * @callback        filter      cell_{post type slug}_{column name}
-     * @return          string
+     * @callback add_filter() cell_{post type slug}_{column name}
+     * @param    string  $sCell
+     * @param    integer $iPostID
+     * @return   string
      */
     public function cell_amazon_auto_links_code( $sCell, $iPostID ) {
         return '<p>'
@@ -207,32 +211,35 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             return $sCell;
         }
         $_aOutput[]          = "<p>"
-                . $this->_getFeedIcon( 
-                    'rss2', 
-                    __( 'RSS Feed by ID', 'amazon-auto-links' ), 
-                    'id', 
-                    $iPostID 
+                . $this->_getFeedIcon(
+                    'rss2',
+                    __( 'RSS Feed by ID', 'amazon-auto-links' ),
+                    'id',
+                    $iPostID
                 )
-                . $this->_getFeedIcon( 
-                    'json', 
-                    __( 'JSON Feed by ID', 'amazon-auto-links' ), 
-                    'id', 
-                    $iPostID 
-                ) 
+                . $this->_getFeedIcon(
+                    'json',
+                    __( 'JSON Feed by ID', 'amazon-auto-links' ),
+                    'id',
+                    $iPostID
+                )
             . "</p>";
         return implode( '', $_aOutput ) . $sCell;
-        
-    }    
+
+    }
         /**
-         * 
+         * @param       string  $sType
+         * @param       string  $sLabel
+         * @param       string  $sKey
+         * @param       mixed   $mValue
          * @since       3.1.0
          * @return      string
          */
         private function _getFeedIcon( $sType, $sLabel, $sKey, $mValue ) {
             $_oOption     = AmazonAutoLinks_Option::getInstance();
-            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );                    
-            $_sImgURL     = AmazonAutoLinks_Registry::getPluginURL(                 
-                'rss2' === $sType 
+            $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
+            $_sImgURL     = AmazonAutoLinks_Registry::getPluginURL(
+                'rss2' === $sType
                     ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/rss16x16.gif'
                     : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/json16x16.gif',
                 true
@@ -264,9 +271,11 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         }
 
     /**
-     * @callback        filter      cell_{post type slug}_{column key}
-     * @return          string
-     * @since       3.7.0
+     * @callback add_filter() cell_{post type slug}_{column key}
+     * @param    string  $sCell
+     * @param    integer $iPostID
+     * @return   string
+     * @since    3.7.0
      */
     public function cell_amazon_auto_links_status( $sCell, $iPostID ) {
 
@@ -308,6 +317,5 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             . "</div>";
 
     }
-
-
+    
 }
