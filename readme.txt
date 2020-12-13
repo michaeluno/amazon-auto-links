@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.3
+Stable tag:         4.4.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,16 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.4 - 12/13/2020 =
+- Added the `Tasks` tab in the `Reports` page.
+- Added the `Site Debug Log` tab in the `Reports` page which appears when the site debug mode it turned on.
+- Tweaked the style of the UI of the `Products` tab.
+- Fixed a bug that background routines of updating products failed when the default country was not set.
+- Fixed a bug that invalid plugin tasks were not cleared properly.
+- Fixed a bug that a product filter was not functioning for category units.
+- Fixed a bug that tests could not run via UI on some systems.
+- Fixed a bug that caused a PHP notice, "Undefined index: view in ...AmazonAutoLinks_PostType_Unit_ListTable.php on line 54".
 
 = 4.4.3 - 12/10/2020 =
 - Added the `Products` tab in the `Reports` page.
