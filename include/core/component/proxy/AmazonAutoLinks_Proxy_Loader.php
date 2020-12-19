@@ -28,8 +28,10 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
 
         self::$sDirPath  = dirname( __FILE__ );
 
+        new AmazonAutoLinks_Proxy_WebPageDumper_Loader;
+
         $this->sPageSlug = AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ];
-        add_action( 'load_' . $this->sPageSlug, array( $this, 'replyToLoadPage' ) );
+        add_action( 'load_' . $this->sPageSlug, array( $this, 'replyToLoadAdminPage' ) );
 
         new AmazonAutoLinks_Proxy_Event_Ajax_LoadProxyList;
         new AmazonAutoLinks_Proxy_Event_Filter_FetchProxyList;
@@ -60,7 +62,7 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
      * @param           AmazonAutoLinks_AdminPageFramework
      * @callback        action      load_{page slug}
      */
-    public function replyToLoadPage( $oFactory ) {
+    public function replyToLoadAdminPage( $oFactory ) {
 
         // Register custom filed type.
         new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
@@ -71,15 +73,17 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
             $this->sPageSlug
         );
 
-        $this->___doPageSettings( $oFactory );
+        $this->_doPageSettings( $oFactory );
 
     }
         /**
          * Page styling
-         * @since       4.2.0
-         * @return      void
+         * @since  4.2.0
+         * @sicne  4.5.0   Change the visitility scope to protected from private.
+         * @param  AmazonAutoLinks_AdminPageFramework $oFactory
+         * @return void
          */
-        private function ___doPageSettings( $oFactory ) {
+        protected function _doPageSettings( $oFactory ) {
 
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $oFactory->setInPageTabTag( 'h2' );
