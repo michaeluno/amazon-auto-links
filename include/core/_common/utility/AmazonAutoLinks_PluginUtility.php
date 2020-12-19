@@ -15,6 +15,23 @@
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
+    /**
+     * @param  string $sHTML
+     * @param  string $sDefaultString
+     * @param  array  $aRemoveTags
+     * @return string
+     */
+    static public function getHTMLBody( $sHTML, $sDefaultString='', array $aRemoveTags=array( 'script', 'style', 'head' ) ) {
+        $_oDOM       = new AmazonAutoLinks_DOM;
+        $_oDoc       = $_oDOM->loadDOMFromHTML( $sHTML );
+        $_oDOM->removeTags( $_oDoc, $aRemoveTags );
+        $_oXPath     = new DOMXPath( $_oDoc );
+        $_noBodyNode = $_oXPath->query( "/html/body" )->item( 0 );
+        return $_noBodyNode
+            ? $_oDoc->saveXml( $_noBodyNode, LIBXML_NOEMPTYTAG )
+            : $sDefaultString;
+    }
+
     static private $___aTasks = array();
 
     /**
