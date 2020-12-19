@@ -134,7 +134,7 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
                 return;
             }
             $this->_assertPrefix( '2', $_oHTTP->getStatusCode(), 'The HTTP status code must begin with 2 such as 200.', $_oHTTP->getStatusMessage() );
-            $this->_assertFalse( empty( $_oHTTP->getCookiesParsable() ),"{$_sLocale}: If blocked, cookies are empty." );
+            $this->_assertFalse( $this->isEmpty( $_oHTTP->getCookiesParsable() ),"{$_sLocale}: If blocked, cookies are empty." );
             $this->_assertNotEmpty( $this->getASINs( $_oHTTP->getBody() ), "{$_sLocale}: Find ASINs in the page." );
 
         }
