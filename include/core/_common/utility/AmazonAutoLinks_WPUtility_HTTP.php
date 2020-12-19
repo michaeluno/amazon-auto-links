@@ -17,7 +17,7 @@
 class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
 
     /**
-     * Extracts the 'set-cookie' element from header.
+     * Extracts the HTTP header from the given response.
      * @param WP_Error|array $aoResponse
      * @return array
      * @since 4.3.4
