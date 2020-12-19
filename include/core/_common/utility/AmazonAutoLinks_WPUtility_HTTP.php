@@ -221,7 +221,11 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
         static private function ___getWPHTTPCookiesFromResponseHeader( array $aResponseHeader, $sURL='' ) {
 
             $_aRequestCookies = array();
-            $_aSetCookies     = self::getElementAsArray( $aResponseHeader, 'set-cookie' ); // there is a case that this is a string of a single entry
+            // There is a case that the 'set-cookie' element is not an array.
+            $_asSetCookies    = self::getElement( $aResponseHeader, 'set-cookie', array() ); // there is a case that this is a string of a single entry
+            $_aSetCookies     = is_scalar( $_asSetCookies )
+                ? ( array ) preg_split( "/[\r\n]+/", $_asSetCookies, 0, PREG_SPLIT_NO_EMPTY )
+                : $_asSetCookies;
             foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
                 if ( ! $_sSetCookieEntry ) {
                     continue;
