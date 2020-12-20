@@ -35,15 +35,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab extends AmazonAutoLinks_AdminPage_
     public function replyToLoadTab( $oAdminPage ) {
 
         // Form sections
-        new AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section(
-            $oAdminPage,
-            $this->sPageSlug,
-            array(
-                'section_id'    => 'proxies',
-                'tab_slug'      => $this->sTabSlug,
-                'title'         => __( 'HTTP Proxies', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section( $oAdminPage, $this->sPageSlug );
 
         $this->___loadAjaxScript();
 

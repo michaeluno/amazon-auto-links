@@ -16,6 +16,18 @@
 class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
+     * @return array
+     * @since  4.5.0
+     */
+    protected function _getArguments() {
+        return array(
+            'section_id'    => 'proxies',
+            'tab_slug'      => $this->sTabSlug,
+            'title'         => __( 'HTTP Proxies', 'amazon-auto-links' ),
+        );
+    }
+
+    /**
      * A user constructor.
      * 
      * @since       4.2.0
