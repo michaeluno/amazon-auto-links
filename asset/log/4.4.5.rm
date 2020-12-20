@@ -1,0 +1,1 @@
+- Fixed an issue that user-defined custom CSS rules set via Additional CSS of Customizer did not load in plugin embedded pages for iframe.

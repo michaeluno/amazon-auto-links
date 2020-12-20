@@ -57,6 +57,9 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
             // @todo if external site option is enabled add this
             // header('Access-Control-Allow-Origin: *' );
         }
+
+        add_action( 'embed_head', 'wp_custom_css_cb', 101 );    // The custom CSS rules set via Customize -> Additional CSS
+
         ?>
         <!DOCTYPE html>
         <html <?php language_attributes(); ?> class="no-js">
