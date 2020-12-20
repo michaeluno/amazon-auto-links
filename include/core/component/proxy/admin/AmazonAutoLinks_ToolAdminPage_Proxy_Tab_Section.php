@@ -19,6 +19,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
      * A user constructor.
      * 
      * @since       4.2.0
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @return      void
      */
     protected function _construct( $oFactory ) {}
@@ -26,6 +27,8 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
     /**
      * Adds form fields.
      * @since       4.2.0
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param       string $sSectionID
      * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
@@ -165,11 +168,6 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
 
-        // @deprecated 4.2.0
-//        if ( $this->getElement( $aInputs, 'enable' ) ) {
-//            $this->___deleteCaptchaBlockedCaches();
-//        }
-
         // If the Clear button is pressed,
         if ( '_clear' === $this->getElement( $aSubmitInfo, 'field_id' ) ) {
             $aInputs[ 'unusable' ] = '';
@@ -209,15 +207,6 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
             $_sProxies   = implode( PHP_EOL, $_aSanitized );
             $aInputs[ 'proxy_list' ] = $_sProxies;
             return $aInputs;
-
-        }
-
-        /**
-         * @since   4.2.0
-         * @todo    complete this method
-         * @deprecated 4.2.0    The cached HTTP response bodies are character-encoded so the database search does not work.
-         */
-        private function ___deleteCaptchaBlockedCaches() {
 
         }
 
