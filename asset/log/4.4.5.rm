@@ -1,3 +1,4 @@
+- Fixed a bug that height of embedded outputs with iframe was not adjusted properly when multiple instances were present.  
 - Fixed a bug that using caches failed in some cases when an HTTP response contains an error.
 - Fixed a bug with checks of setting PA-API keys which possibly resulted in unnecessary PA-API calls when they are not set.  
 - Fixed a bug that errors are not displayed for embedded outputs with iframe for a product of a different locale from the one set in the Authentication screen.
