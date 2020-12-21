@@ -319,7 +319,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * For users not using PA-API keys, errors should be displayed.
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
          */
-        if ( ! $this->oOption->isAPIConnected() && ! empty( $this->___aErrors ) ) {
+        $_sLocale = $this->oUnitOption->get( 'country' );
+        if ( ! $this->oOption->isAPIKeySet( $_sLocale ) && ! empty( $this->___aErrors ) ) {
             $_sErrors = implode( ' ', $this->___aErrors );
             $this->___aErrors = array();
             return $_sErrors;
