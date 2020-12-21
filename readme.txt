@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.4
+Stable tag:         4.4.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Generates links of Amazon products just coming out today. Pick categories and th
 
 Still manually searching products and pasting affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
-The links are tagged with your Amazon Associate ID. This WordPress plugin supports 17 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
+The links are tagged with your Amazon Associate ID. This WordPress plugin supports 18 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
 
 If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
@@ -321,6 +321,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.5 - 12/21/2020 =
+- Fixed a bug that errors are not displayed for embedded outputs with iframe for a product of a different locale from the one set in the Authentication screen.
+- Fixed a bug that unnecessary PA-API requests were performed when a product URL of a different locale from the one set in the Authentication screen is pasted in the post editor.
+- Fixed an issue that user-defined custom CSS rules set via Additional CSS of Customizer did not load in plugin embedded pages for iframe.
 
 = 4.4.4 - 12/13/2020 =
 - Added the `Tasks` tab in the `Reports` page.
