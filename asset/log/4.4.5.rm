@@ -1,3 +1,4 @@
+- Tweaked the style of the List template regarding vertical margins of buttons.
 - Fixed a bug that height of embedded outputs with iframe was not adjusted properly when multiple instances were present.  
 - Fixed a bug that using caches failed in some cases when an HTTP response contains an error.
 - Fixed a bug with checks of setting PA-API keys which possibly resulted in unnecessary PA-API calls when they are not set.  
