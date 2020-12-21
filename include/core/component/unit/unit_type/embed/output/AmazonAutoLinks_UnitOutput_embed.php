@@ -74,8 +74,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         }
         $_sLocale = $this->oUnitOption->get( 'country' );   // re-retrieve the value as `$_sLocale` can be empty
 
-        $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ) );
-        $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs );
+        $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ), $_sLocale );
+        $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs, $_sLocale );
 
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
         $_aProducts        = array_merge( $_aProducts, $_aProductsByURLs );
@@ -161,18 +161,19 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         }
 
         /**
-         * @param array $aASINs A numerically indexed array of ASINs.
-         * @since 4.2.9
+         * @param  array  $aASINs  A numerically indexed array of ASINs.
+         * @param  string $sLocale
+         * @since  4.2.9
          * @return array
          */
-        private function ___getProductsByPAAPI( array $aASINs ) {
+        private function ___getProductsByPAAPI( array $aASINs, $sLocale ) {
 
             if ( empty( $aASINs ) ) {
                 return array();
             }
 
             // If the API keys are set, perform an API request
-            if ( ! $this->oOption->isAPIKeySet() ) {
+            if ( ! $this->oOption->isAPIKeySet( $sLocale ) ) {
                 return array();
             }
 

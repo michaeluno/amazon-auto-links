@@ -1,1 +1,2 @@
+- Fixed a bug that unnecessary PA-API requests were performed when a product URL of a different locale from the one set in the Authentication screen is pasted in the post editor.   
 - Fixed an issue that user-defined custom CSS rules set via Additional CSS of Customizer did not load in plugin embedded pages for iframe.
