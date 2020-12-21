@@ -319,15 +319,37 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * For users not using PA-API keys, errors should be displayed.
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
          */
-        $_sLocale = $this->oUnitOption->get( 'country' );
-        if ( ! $this->oOption->isAPIKeySet( $_sLocale ) && ! empty( $this->___aErrors ) ) {
-            $_sErrors = implode( ' ', $this->___aErrors );
-            $this->___aErrors = array();
-            return $_sErrors;
+        $_sLocale       = $this->oUnitOption->get( 'country' );
+        if ( ! $this->oOption->isAPIKeySet( $_sLocale ) ) {
+            if ( ! empty( $this->___aErrors ) ) {
+                $_sErrors = implode( ' ', $this->___aErrors );
+                $this->___aErrors = array();
+                return $_sErrors;
+            }
+            $aProducts = $this->___getProductsFilteredForWithoutPAAPI( $aProducts );
         }
+
         return parent::_getError( $aProducts );
 
     }
+        /**
+         * Filters out unfinished product data.
+         *
+         * For some reasons, like cloudflare cache errors, the Amazon product page responds with the 200 status but shows an error.
+         * In that case, products data become unfinished. So remove those.
+         * @param  array $aProducts
+         *
+         * @return array
+         * @since  4.4.5
+         */
+        private function ___getProductsFilteredForWithoutPAAPI( $aProducts ) {
+            foreach( $aProducts as $_iIndex => $_aProduct ) {
+                if ( ! $this->getElement( $_aProduct, 'thumbnail_url' ) && ! isset( $aProducts[ 'title' ] ) ) {
+                    unset( $aProducts[ $_iIndex ] );
+                }
+            }
+            return $aProducts;
+        }
 
     /**
      * Stores captured HTTP errors.
