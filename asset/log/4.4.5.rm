@@ -1,4 +1,5 @@
 - Tweaked the style of the List template regarding vertical margins of buttons.
+- Fixed a bug that unnecessary debug log was created when some unit options are enabled, started since 4.4.4.
 - Fixed a bug with embedded outputs that did not display errors when no product is found.   
 - Fixed a bug that height of embedded outputs with iframe was not adjusted properly when multiple instances were present.  
 - Fixed a bug that using caches failed in some cases when an HTTP response contains an error.

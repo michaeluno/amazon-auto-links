@@ -36,7 +36,7 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByRating extends AmazonAutoLinks
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
         $_iRating = $this->___getRating( $aProduct, $aRow, $aRowIdentifier );
-AmazonAutoLinks_Debug::log( $_iRating );
+
         // The value is two digits such as 30 for 3.0.
         $_iAcceptedRate = ( integer ) ( $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'amount' ) * 10 );
         $_sCase = $this->_oUnitOutput->oUnitOption->get( '_filter_by_rating', 'case' );
