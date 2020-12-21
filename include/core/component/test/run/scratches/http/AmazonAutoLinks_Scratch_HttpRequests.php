@@ -31,11 +31,13 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
 
         $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration );
         $_aoResponse = $_oHTTP->getRawResponse();
+        $this->_outputDetails( 'Status', $_oHTTP->getStatusCode() . ' ' . $_oHTTP->getStatusMessage() );
         $this->_outputDetails( 'Header', $this->getHeaderFromResponse( $_aoResponse ) );
         if ( is_wp_error( $_aoResponse ) ) {
             $this->_outputDetails( 'Error ' . $_aoResponse->get_error_code(),  $_aoResponse->get_error_message() );
         }
         $_sHTML = wp_remote_retrieve_body( $_aoResponse );
+        $this->_output( '<strong>Body</strong>' );
         $this->_output( $this->getHTMLBody( $_sHTML ) );
     }
 
