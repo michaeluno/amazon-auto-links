@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.4
+Stable tag:         4.4.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -322,7 +322,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.4.5 - 12/21/2020 =
+= 4.4.5 - 12/22/2020 =
+- Tweaked the style of the List template regarding vertical margins of buttons.
+- Fixed a bug that unnecessary debug log was created when some unit options are enabled, started since 4.4.4.
+- Fixed a bug with embedded outputs that did not display errors when no product is found.
+- Fixed a bug that height of embedded outputs with iframe was not adjusted properly when multiple instances were present.
+- Fixed a bug that using caches failed in some cases when an HTTP response contains an error.
+- Fixed a bug with checks of setting PA-API keys which possibly resulted in unnecessary PA-API calls when they are not set.
 - Fixed a bug that errors are not displayed for embedded outputs with iframe for a product of a different locale from the one set in the Authentication screen.
 - Fixed a bug that unnecessary PA-API requests were performed when a product URL of a different locale from the one set in the Authentication screen is pasted in the post editor.
 - Fixed an issue that user-defined custom CSS rules set via Additional CSS of Customizer did not load in plugin embedded pages for iframe.
