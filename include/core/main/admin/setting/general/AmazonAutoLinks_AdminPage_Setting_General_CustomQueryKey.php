@@ -55,6 +55,9 @@ class AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey extends AmazonAut
                             . $_oOption->aDefault[ 'query' ][ 'cloak' ]
                         . '</code>',
                 ),
+                'attributes'     => array(
+                    'required' => 'required'
+                ),
             )
         );
     

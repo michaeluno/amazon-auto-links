@@ -1,0 +1,1 @@
+- Fixed an issue that the `Link Style Query Key` general option could be empty, which resulted in unit RSS and JSON feeds broken.	
