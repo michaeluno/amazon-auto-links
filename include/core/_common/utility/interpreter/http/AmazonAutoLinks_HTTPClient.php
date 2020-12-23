@@ -720,7 +720,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             + $this->aArgumentStructure
             + $this->aCustomArguments;
 
-        // [4.3.4] Skips formatting. This is used in the multiple mode.
+        // [4.3.4] Skips formatting. This is used in the multiple URL mode.
         if ( $aArguments[ 'skip_argument_format' ] ) {
             return $aArguments;
         }
@@ -730,10 +730,10 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
         // Drop unsupported arguments
         // @deprecated 4.3.4 Support custom arguments. Can be used to pass data to the background routine.
-//        $aArguments = array_intersect_key(
-//            $aArguments,    // subject that its elements get extracted
-//            $this->aArguments + $this->aArgumentStructure + $this->aCustomArguments    // model to be compared with
-//        );
+        // $aArguments = array_intersect_key(
+        //     $aArguments,    // subject that its elements get extracted
+        //     $this->aArguments + $this->aArgumentStructure + $this->aCustomArguments    // model to be compared with
+        // );
 
         // [4.2.0]
         $aArguments[ 'user-agent' ] = $aArguments[ 'user-agent' ]
