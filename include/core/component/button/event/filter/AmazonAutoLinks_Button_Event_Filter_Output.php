@@ -49,7 +49,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             'type'         => $_oOption->get( array( 'unit_default', 'button_type' ), 1 ),
             'id'           => 0,   // can be omitted
             'asin'         => '',  // comma delimited ASINs
-            'country'      => $_oOption->get( array( 'unit_default', 'country' ), 1 ),
+            'country'      => $_oOption->get( array( 'unit_default', 'country' ), 'US' ),
             'associate_id' => $_oOption->get( array( 'unit_default', 'associate_id' ), '' ),  // Associate ID
             'access_key'   => $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ),
         ) + $this->_aArguments;
