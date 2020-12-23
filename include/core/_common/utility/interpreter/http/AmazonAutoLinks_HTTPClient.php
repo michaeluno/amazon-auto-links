@@ -849,7 +849,10 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @since  4.3.4
      */
     public function getStatusMessage() {
-        return $this->getElement( $this->getRawResponse(), array( 'response', 'message' ) );
+        $_aoResponse = $this->getRawResponse();
+        return is_wp_error( $_aoResponse )
+            ? $_aoResponse->get_error_code() . ': ' . $_aoResponse->get_error_message()
+            : $this->getElement( $_aoResponse, array( 'response', 'message' ) );
     }
 
     /**
