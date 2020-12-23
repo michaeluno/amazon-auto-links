@@ -43,6 +43,10 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
 
     /**
      * Sets up hooks and properties.
+     *
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param string $sPageSlug
+     * @param array $aTabDefinition
      */
     public function __construct( $oFactory, $sPageSlug, array $aTabDefinition=array() ) {
         
@@ -53,7 +57,7 @@ abstract class AmazonAutoLinks_AdminPage_Tab_Base extends AmazonAutoLinks_AdminP
             + $this->_getTab();
         $this->sTabSlug     = isset( $aTabDefinition[ 'tab_slug' ] )
             ? $aTabDefinition[ 'tab_slug' ]
-            : '';
+            : $this->sTabSlug;
         
         if ( ! $this->sTabSlug ) {
             return;
