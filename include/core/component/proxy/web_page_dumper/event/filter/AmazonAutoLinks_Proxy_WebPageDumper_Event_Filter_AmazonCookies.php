@@ -35,16 +35,23 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies extends Ama
 
         $_sURLWebPageDumper = $this->getWebPageDumperURL();
         if ( ! $_sURLWebPageDumper ) {
-            return $aCookies;
+            return array();
         }
 
         $_aArguments        = array(
             'renew_cache' => true,
             'timeout' => 30, // seconds. Set a longer one as Web Page Dumper servers are often sleeping.
         );
+        $_sRequestURL       = $oLocale->getMarketPlaceURL();
         $_oCookieGetter     = new AmazonAutoLinks_Locale_AmazonCookies( $oLocale, $sLanguage );
-        $_oHTTP             = new AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient( $_sURLWebPageDumper, $oLocale->getBestSellersURL(), 86400, $_aArguments, $_oCookieGetter->sRequestType );
-        return $this->getCookiesMerged( $_oHTTP->getCookies(), $aCookies );
+        $_oHTTP             = new AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient( $_sURLWebPageDumper, $_sRequestURL, 86400, $_aArguments, $_oCookieGetter->sRequestType );
+        $_aCookies          = $_oHTTP->getCookies();
+
+        if ( empty( $_aCookies ) ) {
+            new AmazonAutoLinks_Error( 'WEB_PAGE_DUMPER', 'Failed to retrieve cookies.', array( 'url' => $_sRequestURL )  );
+            return array();
+        }
+        return $this->getCookiesMerged( $_aCookies, $aCookies );
 
     }
 
