@@ -22,14 +22,25 @@ class AmazonAutoLinks_Scratch_AmazonCookies extends AmazonAutoLinks_Scratch_Base
      * @throws Exception
      */
     public function scratch_showSavedCookies() {
+
         $_aParameters = func_get_args() + array( '' );
         $_sLocale     = $_aParameters[ 0 ];
         if ( ! $_sLocale ) {
             throw new Exception( 'Pass a locale code to the first parameter.' );
         }
+        $this->_output( "<strong>$_sLocale</strong>" );
+
+        $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $_sLocale );
+        $this->_outputDetails( "File", $this->getCookiesToParse( $_oVersatileCookies->get() ) );
+
+        $_sTransientPrefix     = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
+        $_sTransientKey        = "_transient_{$_sTransientPrefix}_cookies_{$_sLocale}";
+        $this->_outputDetails( "Transient", $this->getCookiesToParse( $this->getAsArray( get_option( $_sTransientKey, array() ) ) ) );
+
         $_oLocale        = new AmazonAutoLinks_Locale( $_sLocale );
         $_oAmazonCookies = new AmazonAutoLinks_Locale_AmazonCookies( $_oLocale->get() );
-        $this->_outputDetails( $_sLocale, $this->getCookiesToParse( $_oAmazonCookies->get() ) );
+        $this->_outputDetails( "Direct", $this->getCookiesToParse( $_oAmazonCookies->get() ) );
+
     }
 
 
