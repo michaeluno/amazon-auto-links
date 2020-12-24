@@ -84,7 +84,14 @@ class AmazonAutoLinks_VersatileFileManager_AmazonCookies extends AmazonAutoLinks
                 $_oCookie = $_soCookie instanceof WP_Http_Cookie
                     ? $_soCookie
                     : AmazonAutoLinks_WPUtility::getWPHTTPCookieFromCookieItem( $_soCookie, $_isIndexOrName, $sURL );
+
                 $aCookies[ $_isIndexOrName ] = $_oCookie;
+
+                // [4.5.0] Allow an unset domain
+                if ( ! isset( $_oCookie->domain ) ) {
+                    continue;
+                }
+
                 if ( false === stripos( $_oCookie->domain, $_sSubDomain ) ) {
                     unset( $aCookies[ $_isIndexOrName ] );
                 }
