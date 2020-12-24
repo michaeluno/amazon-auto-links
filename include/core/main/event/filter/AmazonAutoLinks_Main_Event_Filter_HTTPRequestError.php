@@ -62,6 +62,10 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestError extends AmazonAutoLinks
         }
 
         // Use the old cache if available
+        if ( empty( $aOldCache ) ) {
+            $_oCacheTable  = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+            $aOldCache = $_oCacheTable->getCache( $sCacheName, $iCacheDuration );
+        }
         $_mOldData = $this->getElement( $aOldCache, array( 'data' ) );
         if ( ! empty( $_mOldData ) ) {
             do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Using the old cache for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );

@@ -11,21 +11,21 @@
 /**
  * Provides utility methods that uses WordPerss built-in functions.
  *
- * @since       1
- * @since       3       Made it extend `AmazonAutoLinks_AdminPageFramework_Debug`.
+ * @since   1
+ * @since   3     Made it extend `AmazonAutoLinks_AdminPageFramework_Debug`.
  */
 class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
 
     /**
      * Logs the given variable output to a file.
      *
-     * @param mixed $mValue The value to log.
-     * @param string $sFilePath The log file path.
-     * @param boolean $bStackTrace The log file path.
-     * @param integer $iTrace
-     * @param integer $iStringLengthLimit
-     * @param integer $iArrayDepthLimit
-     * @return      void
+     * @param  mixed   $mValue The value to log.
+     * @param  string  $sFilePath The log file path.
+     * @param  boolean $bStackTrace The log file path.
+     * @param  integer $iTrace
+     * @param  integer $iStringLengthLimit
+     * @param  integer $iArrayDepthLimit
+     * @return void
      */
     static public function log( $mValue, $sFilePath=null, $bStackTrace=false, $iTrace=0, $iStringLengthLimit=99999, $iArrayDepthLimit=50 ) {
 

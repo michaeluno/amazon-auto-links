@@ -74,8 +74,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         }
         $_sLocale = $this->oUnitOption->get( 'country' );   // re-retrieve the value as `$_sLocale` can be empty
 
-        $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ) );
-        $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs );
+        $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ), $_sLocale );
+        $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs, $_sLocale );
 
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
         $_aProducts        = array_merge( $_aProducts, $_aProductsByURLs );
@@ -161,18 +161,19 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         }
 
         /**
-         * @param array $aASINs A numerically indexed array of ASINs.
-         * @since 4.2.9
+         * @param  array  $aASINs  A numerically indexed array of ASINs.
+         * @param  string $sLocale
+         * @since  4.2.9
          * @return array
          */
-        private function ___getProductsByPAAPI( array $aASINs ) {
+        private function ___getProductsByPAAPI( array $aASINs, $sLocale ) {
 
             if ( empty( $aASINs ) ) {
                 return array();
             }
 
             // If the API keys are set, perform an API request
-            if ( ! $this->oOption->isAPIKeySet() ) {
+            if ( ! $this->oOption->isAPIKeySet( $sLocale ) ) {
                 return array();
             }
 
@@ -318,14 +319,37 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * For users not using PA-API keys, errors should be displayed.
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
          */
-        if ( ! $this->oOption->isAPIConnected() && ! empty( $this->___aErrors ) ) {
-            $_sErrors = implode( ' ', $this->___aErrors );
-            $this->___aErrors = array();
-            return $_sErrors;
+        $_sLocale       = $this->oUnitOption->get( 'country' );
+        if ( ! $this->oOption->isAPIKeySet( $_sLocale ) ) {
+            if ( ! empty( $this->___aErrors ) ) {
+                $_sErrors = implode( ' ', $this->___aErrors );
+                $this->___aErrors = array();
+                return $_sErrors;
+            }
+            $aProducts = $this->___getProductsFilteredForWithoutPAAPI( $aProducts );
         }
+
         return parent::_getError( $aProducts );
 
     }
+        /**
+         * Filters out unfinished product data.
+         *
+         * For some reasons, like cloudflare cache errors, the Amazon product page responds with the 200 status but shows an error.
+         * In that case, products data become unfinished. So remove those.
+         * @param  array $aProducts
+         *
+         * @return array
+         * @since  4.4.5
+         */
+        private function ___getProductsFilteredForWithoutPAAPI( $aProducts ) {
+            foreach( $aProducts as $_iIndex => $_aProduct ) {
+                if ( ! $this->getElement( $_aProduct, 'thumbnail_url' ) && ! isset( $aProducts[ 'title' ] ) ) {
+                    unset( $aProducts[ $_iIndex ] );
+                }
+            }
+            return $aProducts;
+        }
 
     /**
      * Stores captured HTTP errors.

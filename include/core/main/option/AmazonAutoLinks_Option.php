@@ -87,11 +87,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'cloak' => 'productlink'
         ),
         'authentication_keys' => array(
-            'access_key'                => '',   // public key
-            'access_key_secret'         => '',   // private key
+            'access_key'                => '',     // public key
+            'access_key_secret'         => '',     // private key
             'api_authentication_status' => false,
-            'associates_test_tag'       => '',  // 3.6.7+
-            'server_locale'             => 'US', // 3.4.4+
+            'associates_test_tag'       => '',     // 3.6.7+
+            'server_locale'             => null,   // [3.4.4] Added [4.5.0] Removed the default value of 'US' as the value must be checked when checking whether the API keys are set.
         ),            
         // Hidden options
         'template' => array(
@@ -554,15 +554,19 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
         $_sPublicKey = $this->get( 'authentication_keys', 'access_key' );
         $_sSecretKey = $this->get( 'authentication_keys', 'access_key_secret' );
+        $_bKeysSet   = ( boolean ) ( $_sPublicKey && $_sSecretKey );
 
         if ( ! $sLocale ) {
-            return ( boolean ) ( $_sPublicKey && $_sSecretKey );
+            return $_bKeysSet;
         }
 
         // At this point, the locale is specified.
         $_sStoredLocale = strtoupper( ( string ) $this->get( 'authentication_keys', 'server_locale' ) );
         $sLocale        = strtoupper( ( string ) $sLocale );
-        return $sLocale === $_sStoredLocale;
+        if ( $sLocale !== $_sStoredLocale ) {
+            return false;
+        }
+        return $_bKeysSet;
 
     }
     

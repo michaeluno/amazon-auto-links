@@ -109,7 +109,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
                 'type'              => 'select',
                 'description'       => __( 'The region of the API server. If you are unsure, select <code>US</code>.', 'amazon-auto-links' ),
                 'label'             => AmazonAutoLinks_PAAPI50___Locales::getHostLabels(),
-                'default'           => 'US',
+                'default'           => 'US',    // this is needed as in the option class it is not set on purpose (to check API keys are set the default value  must not set)
             ),                
             array(
                 'field_id'          => 'disclaimer',
@@ -264,7 +264,7 @@ class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extend
      * @since       3
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
-    
+
         $_bVerified = true;
         $_aErrors   = array();
 
