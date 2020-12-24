@@ -21,7 +21,7 @@ class AmazonAutoLinks_Scratch_AmazonCookies extends AmazonAutoLinks_Scratch_Base
      * @tags   cookies
      * @throws Exception
      */
-    public function scratch_saveFileLogToDatabase() {
+    public function scratch_showSavedCookies() {
         $_aParameters = func_get_args() + array( '' );
         $_sLocale     = $_aParameters[ 0 ];
         if ( ! $_sLocale ) {
