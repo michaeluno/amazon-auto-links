@@ -1,4 +1,7 @@
-/* Products table */
+/*
+ * @name Products table
+ * @version 1.0.1
+ */
 .float-right {
     float: right;
 }
@@ -23,14 +26,8 @@
 table.product-details {
     margin-top: 2em;
 }
-.go-back {
-    vertical-align: middle;
-}
 .small-icon {
     font-size: 1em;
-}
-.go-back .dashicons-arrow-left-alt:before {
-    vertical-align: middle;
 }
 
 .column-key {

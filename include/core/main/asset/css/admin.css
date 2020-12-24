@@ -162,3 +162,14 @@ span.warning {
     display: inline-block;
     width: 100%;
 }
+
+/* Go Back link */
+.go-back {
+    vertical-align: middle;
+}
+.small-icon {
+    font-size: 1em;
+}
+.go-back .dashicons-arrow-left-alt:before {
+    vertical-align: middle;
+}
