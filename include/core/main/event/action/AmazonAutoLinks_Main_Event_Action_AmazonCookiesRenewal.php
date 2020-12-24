@@ -9,7 +9,9 @@
  */
 
 /**
- * Handles renewing Amazon site cookies.
+ * Handles renewing Amazon site cookies stores in a transient.
+ *
+ * This does not do anything to the cookie file stored in the system temporary area.
  *
  * @since        4.5.0
  */
@@ -28,10 +30,8 @@ class AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal extends AmazonAutoL
      * @since  4.0.0
      */
     public function replyToRenewAmazonCookies( $sLocale, $sLanguage ) {
-        $_oLocaleSelector = new AmazonAutoLinks_Locale( $sLocale );
-        $_oLocale         = $_oLocaleSelector->get();
-        $_oCookieGetter   = new AmazonAutoLinks_Locale_AmazonCookies( $_oLocale, $sLanguage );
-        $_oCookieGetter->get();
+        $_oLocale  = new AmazonAutoLinks_Locale( $sLocale );
+        $_oLocale->getHTTPRequestCookies( $sLanguage, true );
     }
 
 }

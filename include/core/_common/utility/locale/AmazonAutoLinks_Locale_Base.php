@@ -200,17 +200,22 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
 
     /**
      * @see    WP_Http_Cookie
-     * @param  string $sLanguage The preferred language.
+     * @param  string  $sLanguage      The preferred language.
+     * @param  boolean $bRenewCookies  Whether to renew cookies. If this is true, the transient will not be used.
      * @return array|WP_Http_Cookie[]  An array for the `cookies` argument of `wp_remote_request()`.
      * @remark Be aware that this method takes time, meaning slow as this performs at least two HTTP requests if not cached.
      * @since  4.3.4
+     * @since  4.5.0    Added the `$bRenewCookies` parameter.
      */
-    public function getHTTPRequestCookies( $sLanguage='' ) {
+    public function getHTTPRequestCookies( $sLanguage='', $bRenewCookies=false ) {
 
-        $_aCachedCookies = $this->___getCookieTransient( $sLanguage );
-        if ( ! empty( $_aCachedCookies ) ) {
-            return $_aCachedCookies;
+        if ( ! $bRenewCookies ) {
+            $_aCachedCookies = $this->___getCookieTransient( $sLanguage );
+            if ( ! empty( $_aCachedCookies ) ) {
+                return $_aCachedCookies;
+            }
         }
+
         $_oCookieGetter = new AmazonAutoLinks_Locale_AmazonCookies( $this, $sLanguage );
         $_aCookies = $_oCookieGetter->get();
         $this->___setCookieTransient( $_aCookies, $_oCookieGetter );

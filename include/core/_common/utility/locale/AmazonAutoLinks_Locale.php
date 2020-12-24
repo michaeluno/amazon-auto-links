@@ -159,12 +159,14 @@ class AmazonAutoLinks_Locale {
     }
 
     /**
-     * @param  string $sLanguage The preferred language.
-     * @return array  An array for the `cookies` argument of `wp_remote_request()`.
+     * @param  string  $sLanguage The preferred language.
+     * @param  boolean $bRenewCookies Whether to renew cookies.
+     * @return array   An array for the `cookies` argument of `wp_remote_request()`.
      * @since  4.3.4
+     * @since  4.5.0   Added the `$bRenewCookies` parameter.
      */
-    public function getHTTPRequestCookies( $sLanguage='' ) {
-        return $this->oLocale->getHTTPRequestCookies( $sLanguage );
+    public function getHTTPRequestCookies( $sLanguage='', $bRenewCookies=false ) {
+        return $this->oLocale->getHTTPRequestCookies( $sLanguage, $bRenewCookies );
     }
 
     /**
