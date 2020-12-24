@@ -40,18 +40,6 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
     public $iCacheDuration = 604800;    // ( 60 * 60 * 24 * 7 ) : 7 days
 
     /**
-     * @var   string
-     * @since 4.3.4
-     */
-    public $sTransientKey  = '';
-
-    /**
-     * @var   string
-     * @since 4.3.4
-     */
-    public $sTransientKeyTimeout = '';
-
-    /**
      * The request type passed to `AmazonAutoLinks_HTTPClient`.
      *
      * With this set, the cookies will not be suppressed by filters since the `amazon_cookie` type is excepted.
@@ -71,9 +59,6 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
         $this->oLocale              = $oLocale;
         $this->sLocale              = $oLocale->sSlug;
         $this->sLanguage            = $sLanguage;
-        $_sTransientPrefix          = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
-        $this->sTransientKey        = "_transient_{$_sTransientPrefix}_cookies_{$this->oLocale->sSlug}";
-        $this->sTransientKeyTimeout = "_transient_timeout_{$_sTransientPrefix}_cookies_{$this->oLocale->sSlug}";
     }
 
     /**
@@ -82,25 +67,17 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
      * @remark  Be aware that this method takes time, meaning slow as this performs at least two HTTP requests if not cached.
      */
     public function get() {
-
-        // Check cache.
-        $_aCachedCookies = $this->___getCookieTransient();
-        if ( ! empty( $_aCachedCookies ) ) {
-            return $_aCachedCookies;
-        }
-
-        $_aCookies = $this->___getCookies();
-        // It seems Amazon servers parses cookies from last.
-        // This is important when there are cookies with the same name.
-        $_aCookies = array_reverse( $_aCookies );
-        $this->___setCookieTransient( $_aCookies );
-        return $_aCookies;
-
+        return $this->___getCookies();
     }
         /**
          * @return WP_Http_Cookie[]
          */
         private function ___getCookies() {
+
+            $_aCustomCookies  = apply_filters( 'aal_filter_custom_amazon_cookies', array(), $this->oLocale, $this->sLanguage );
+            if ( ! empty( $_aCustomCookies ) ) {
+                return $_aCustomCookies;
+            }
 
             $_sURL            = $this->oLocale->getAssociatesURL();
             $_aRequestCookies = $this->___getAssociatesRequestCookiesGenerated( $_sURL, $this->sLocale, $this->sLanguage );
@@ -122,36 +99,9 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
 
             }
 
-            // The method does not exists any more.
-            return $_aLastCookies;
+            // It seems Amazon servers parses cookies from last. This is important when there are cookies with the same name.
+            return array_reverse( $_aLastCookies );
 
-        }
-
-        /**
-         * @return WP_Http_Cookie[]
-         * @since  4.3.4
-         */
-        private function ___getCookieTransient() {
-            if ( $this->isExpired( ( integer ) get_option( $this->sTransientKeyTimeout, 0 ) ) ) {
-                return array();
-            }
-            return $this->getAsArray( get_option( $this->sTransientKey, array() ) );
-        }
-        /**
-         * Sets an option looking like a transient in the options table.
-         * The data is stored as an option but with the transient name.
-         * This is to enable the autoload option but with an expiration time.
-         * By using set_transient(), if an expiration time is given, the autoload option will be disabled.
-         * @param  array   $aCookies
-         * @return boolean
-         * @since  4.3.4
-         */
-        private function ___setCookieTransient( array $aCookies ) {
-            $_sTransientPrefix = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
-            $_sNameTimeout     = "_transient_timeout_{$_sTransientPrefix}_cookies_{$this->oLocale->sSlug}";
-            $_sName            = "_transient_{$_sTransientPrefix}_cookies_{$this->oLocale->sSlug}";
-            update_option( $_sNameTimeout, time() + $this->iCacheDuration );
-            return update_option( $_sName, $aCookies );
         }
 
         /**

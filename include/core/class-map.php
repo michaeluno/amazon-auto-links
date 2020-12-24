@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.4b02 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.4.4 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -97,6 +97,14 @@ return array(
     "AmazonAutoLinks_Proxy_Fetch_https" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/utility/fetch/AmazonAutoLinks_Proxy_Fetch_https.php", 
     "AmazonAutoLinks_Proxy_Fetch_socks4" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/utility/fetch/AmazonAutoLinks_Proxy_Fetch_socks4.php", 
     "AmazonAutoLinks_Proxy_Fetch_socks5" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/utility/fetch/AmazonAutoLinks_Proxy_Fetch_socks5.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/AmazonAutoLinks_Proxy_WebPageDumper_Loader.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Admin" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php", 
     "AmazonAutoLinks_Shortcode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/shortcode/AmazonAutoLinks_Shortcode.php", 
     "AmazonAutoLinks_TemplateLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/AmazonAutoLinks_TemplateLoader.php", 
     "AmazonAutoLinks_TemplateResourceLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/AmazonAutoLinks_TemplateResourceLoader.php", 
@@ -446,7 +454,9 @@ return array(
     "AmazonAutoLinks_Event___Action_DeleteExpiredCaches" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_DeleteExpiredCaches.php", 
     "AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal.php", 
+    "AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal.php", 
     "AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory.php", 
+    "AmazonAutoLinks_Main_Event_Filter_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_AmazonCookies.php", 
     "AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies.php", 

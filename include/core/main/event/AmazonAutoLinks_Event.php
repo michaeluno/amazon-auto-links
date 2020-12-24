@@ -78,6 +78,7 @@ class AmazonAutoLinks_Event {
             new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
             new AmazonAutoLinks_Event_Error_Log;  // [4.2.0]
             new AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory; // [4.3.8]
+            new AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal; // [4.5.0]
         }
 
         private function ___handleFilters() {
@@ -86,6 +87,7 @@ class AmazonAutoLinks_Event {
             new AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError;   // [4.2.2]
             new AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies; // [4.3.4]
             new AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType;             // [4.3.5]
+            new AmazonAutoLinks_Main_Event_Filter_AmazonCookies;                     // [4.5.0]
         }
 
         /**

@@ -18,6 +18,7 @@ return array(
     "AmazonAutoLinks_Scratch_Database_aal_request_cache" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_request_cache/AmazonAutoLinks_Scratch_Database_aal_request_cache.php", 
     "AmazonAutoLinks_Scratch_Database_aal_tasks" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/database/table/aal_tasks/AmazonAutoLinks_Scratch_Database_aal_tasks.php", 
     "AmazonAutoLinks_Scratch_HttpRequests" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/http/AmazonAutoLinks_Scratch_HttpRequests.php", 
+    "AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/http/web_page_dumper/AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper.php", 
     "AmazonAutoLinks_Scratch_DisplayOptions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/options/AmazonAutoLinks_Scratch_DisplayOptions.php", 
     "AmazonAutoLinks_Scratch_PAAPIRequestCounter" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/paapi_request_counter/AmazonAutoLinks_Scratch_PAAPIRequestCounter.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 

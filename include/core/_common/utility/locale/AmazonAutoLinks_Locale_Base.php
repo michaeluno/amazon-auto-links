@@ -12,7 +12,7 @@
  *
  * @since       4.3.4
  */
-abstract class AmazonAutoLinks_Locale_Base {
+abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * The locale code.
@@ -206,9 +206,53 @@ abstract class AmazonAutoLinks_Locale_Base {
      * @since  4.3.4
      */
     public function getHTTPRequestCookies( $sLanguage='' ) {
+
+        $_aCachedCookies = $this->___getCookieTransient( $sLanguage );
+        if ( ! empty( $_aCachedCookies ) ) {
+            return $_aCachedCookies;
+        }
         $_oCookieGetter = new AmazonAutoLinks_Locale_AmazonCookies( $this, $sLanguage );
-        return $_oCookieGetter->get();
+        $_aCookies = $_oCookieGetter->get();
+        $this->___setCookieTransient( $_aCookies, $_oCookieGetter );
+        return $_aCookies;
+
     }
+        /**
+         * @param  string $sLanguage
+         * @return WP_Http_Cookie[]
+         * @since  4.3.4
+         * @since  4.5.0    Moved from AmazonAutoLinks_Locale_AmazonCookies
+         */
+        private function ___getCookieTransient( $sLanguage ) {
+            $_sTransientPrefix     = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
+            $_sTransientKey        = "_transient_{$_sTransientPrefix}_cookies_{$this->sSlug}";
+            $_sTransientKeyTimeout = "_transient_timeout_{$_sTransientPrefix}_cookies_{$this->sSlug}";
+            $_aCookies             = $this->getAsArray( get_option( $_sTransientKey, array() ) );
+            $_aOldCookies          = $_aCookies;
+            $_iLifespan            = ( integer ) get_option( $_sTransientKeyTimeout, 0 );
+            if ( $this->isExpired( $_iLifespan ) ) {
+                $_aCookies = array();
+            }
+            return $this->getAsArray( apply_filters( 'aal_filter_amazon_cookies_cache', $_aCookies, $_iLifespan, $this, $sLanguage, $_aOldCookies ) );
+        }
+        /**
+         * Sets an option looking like a transient in the options table.
+         * The data is stored as an option but with the transient name.
+         * This is to enable the autoload option but with an expiration time.
+         * By using set_transient(), if an expiration time is given, the autoload option will be disabled.
+         * @param  array   $aCookies
+         * @param  AmazonAutoLinks_Locale_AmazonCookies $oCookieGetter
+         * @return boolean
+         * @since  4.3.4
+         * @since  4.5.0    Moved from AmazonAutoLinks_Locale_AmazonCookies
+         */
+        private function ___setCookieTransient( array $aCookies, AmazonAutoLinks_Locale_AmazonCookies $oCookieGetter ) {
+            $_sTransientPrefix = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
+            $_sNameTimeout     = "_transient_timeout_{$_sTransientPrefix}_cookies_{$this->sSlug}";
+            $_sName            = "_transient_{$_sTransientPrefix}_cookies_{$this->sSlug}";
+            update_option( $_sNameTimeout, time() + $oCookieGetter->iCacheDuration );
+            return update_option( $_sName, $aCookies );
+        }
 
     /**
      * @remark The supported locales: US, CA, FR, DE, UK, JP.
