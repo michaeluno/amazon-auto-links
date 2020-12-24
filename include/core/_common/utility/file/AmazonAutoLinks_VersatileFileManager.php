@@ -141,6 +141,9 @@ class AmazonAutoLinks_VersatileFileManager {
         if ( ! $this->_bWritable ) {
             return false;
         }
+        if ( ! file_exists( $this->_sFilePath ) ) {
+            return false;
+        }
         return unlink( $this->_sFilePath );
     }
 
