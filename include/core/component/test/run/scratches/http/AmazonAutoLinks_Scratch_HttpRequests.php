@@ -28,8 +28,11 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
         if ( ! filter_var( $_sURL, FILTER_VALIDATE_URL ) ) {
             throw new Exception( 'Set a URL in the argument input field.' );
         }
-
-        $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration );
+        $this->_outputDetails( 'URL', $_sURL );
+        $_aArguments = array(
+            'timeout' => 30,    // seconds
+        );
+        $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, $_aArguments );
         $_aoResponse = $_oHTTP->getRawResponse();
         $this->_outputDetails( 'Header', $this->getHeaderFromResponse( $_aoResponse ) );
         if ( is_wp_error( $_aoResponse ) ) {
