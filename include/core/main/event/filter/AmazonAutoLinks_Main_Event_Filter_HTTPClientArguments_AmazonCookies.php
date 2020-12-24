@@ -48,8 +48,12 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
         $_oOption           = AmazonAutoLinks_Option::getInstance();
         $_sDefaultLocale    = ( string ) $_oOption->get( array( 'unit_default', 'country' ), 'US' );
         $_sLocale           = AmazonAutoLinks_Locales::getLocaleFromURL( $sURL, $_sDefaultLocale );
+        $_sTransientPrefix  = AmazonAutoLinks_Registry::TRANSIENT_PREFIX;
+        $_sTransientKey     = "_transient_{$_sTransientPrefix}_cookies_{$_sLocale}";
+        $_aStoredCookies    = $this->getAsArray( get_option( $_sTransientKey, array() ) );
+        $_aCookiesToSave    = $this->getCookiesMerged( $_aResponseCookies, $_aStoredCookies );
         $_oVersatileCookies = new AmazonAutoLinks_VersatileFileManager_AmazonCookies( $_sLocale );
-        $_oVersatileCookies->setCache( $_aResponseCookies, $sURL );
+        $_oVersatileCookies->setCache( $_aCookiesToSave, $sURL );
         return $aoResponse;
 
     }
