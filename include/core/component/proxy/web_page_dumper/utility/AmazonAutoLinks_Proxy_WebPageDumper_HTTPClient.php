@@ -54,19 +54,25 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
      */
     protected function _getHTTPRequested( $sURL, array $aArguments ) {
 
-        $_aoResponse = $this->___getServerWakenUp();
+        $_aoResponse = $this->___getServerWokenUp();
         if ( is_wp_error( $_aoResponse ) ) {
             return $_aoResponse;
         }
         return parent::_getHTTPRequested( $this->___getWebPageDumperEndpoint( $this->sWebPageDumperURL, $sURL ), $aArguments );
 
     }
+        static private $___aWoken = array();
         /**
          * Web Page Dumper might be sleeping so try accessing multiple times.
-         * @return array|WP_Error
+         * @return array|WP_Error|true
          * @since  4.5.0
          */
-        private function ___getServerWakenUp() {
+        private function ___getServerWokenUp() {
+
+            // Already woken?
+            if ( ! empty( self::$___aWoken[ $this->sWebPageDumperURL ] ) ) {
+                return array();
+            }
 
             for ( $_i = 1 ; $_i <= 4; $_i++ ) {
                 $_aArguments = array(
@@ -74,9 +80,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
                 );
                 $_aoResponse = wp_remote_get( $this->sWebPageDumperURL, $_aArguments );
                 if ( $this->hasPrefix( '2', $this->___getStatusCode( $_aoResponse ) ) ) {
+                    self::$___aWoken[ $this->sWebPageDumperURL ] = true;
                     return $_aoResponse;
                 }
                 if ( false === strpos( $this->___getStatusMessage( $_aoResponse ), 'timed out' ) ) {
+                    self::$___aWoken[ $this->sWebPageDumperURL ] = true;
                     return $_aoResponse;
                 }
                 // cURL error 28: Operation timed out after 30001 milliseconds with 0 bytes received
