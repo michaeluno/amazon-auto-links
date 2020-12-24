@@ -388,7 +388,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         private function ___getHTTPResponse( $sURL, array $aArguments ) {
 
             do_action( 'aal_action_http_remote_get', $sURL, $aArguments, $this->sRequestType ); // 3.5.0
-            $_aoResponse = $this->___getHTTPRequested( $sURL, $aArguments );
+            $_aoResponse = $this->_getHTTPRequested( $sURL, $aArguments );
 
             /**
              * Allows the response to be modified, mainly for multiple attempts with different proxies.
@@ -399,13 +399,13 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
         }
             /**
-             * @param $sURL
-             * @param array $aArguments
-             *
+             * @param  string $sURL
+             * @param  array  $aArguments
              * @return array|WP_Error
-             * @since   4.2.0
+             * @since  4.2.0
+             * @since  4.5.0  Changed the visibility scope from private to protected for extended classes, especially for Web Page Dumper.
              */
-            private function ___getHTTPRequested( $sURL, array $aArguments ) {
+            protected function _getHTTPRequested( $sURL, array $aArguments ) {
 
                 // Give intervals.
                 $this->___haveInterval( $aArguments[ 'interval' ] );
