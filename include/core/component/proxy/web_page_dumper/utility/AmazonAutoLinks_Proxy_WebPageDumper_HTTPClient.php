@@ -77,6 +77,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
             for ( $_i = 1 ; $_i <= 4; $_i++ ) {
                 $_aArguments = array(
                     'timeout' => $_i * 5,
+                    'reject_unsafe_urls' => ! $this->isDebugMode(),
                 );
                 $_aoResponse = wp_remote_get( $this->sWebPageDumperURL, $_aArguments );
                 if ( $this->hasPrefix( '2', $this->___getStatusCode( $_aoResponse ) ) ) {

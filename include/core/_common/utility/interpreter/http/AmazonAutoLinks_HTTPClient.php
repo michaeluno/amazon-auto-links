@@ -725,6 +725,9 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             return $aArguments;
         }
 
+        // [4.5.0] Allow localhost in development environments.
+        $aArguments[ 'reject_unsafe_urls' ] = ! $this->isDebugMode();
+
         // WordPress v3.7 or later, it should be true.
         $aArguments[ 'sslverify' ] = version_compare( $GLOBALS[ 'wp_version' ], '3.7', '>=' );
 
