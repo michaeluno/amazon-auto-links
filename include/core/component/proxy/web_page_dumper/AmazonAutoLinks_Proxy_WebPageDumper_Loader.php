@@ -37,7 +37,6 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
 
         private function ___load() {
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies;
-            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability;
         }
 
 

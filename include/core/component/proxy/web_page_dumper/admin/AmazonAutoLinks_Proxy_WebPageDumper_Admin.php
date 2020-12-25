@@ -48,6 +48,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin extends AmazonAutoLinks_PluginUt
 
     public function replyToLoadTab( $oFactory ) {
 
+        // this must be called regardless of the option is enabled or not so that when the option is not checked, the ajax test can run.
+        new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability;
+
         // Form Sections
         new AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section( $oFactory, $this->sPageSlug );
 
