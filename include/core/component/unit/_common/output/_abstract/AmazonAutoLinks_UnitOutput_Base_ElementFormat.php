@@ -304,17 +304,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Strips tags and truncates the given string.
      *
-     * @param string $sDescription
-     * @param null|integer|double $nMaxLength   A numeric value that determines the length.
-     * @param string $sReadMoreText
-     *
+     * @param  string $sContent
+     * @param  null|integer|double $nMaxLength   A numeric value that determines the length.
+     * @param  string $sReadMoreText
      * @return string
-     * @since       unknown
-     * @since       3.3.0       Renamed from `sanitizeDescription()`.
+     * @since  unknown
+     * @since  3.3.0       Renamed from `sanitizeDescription()`.
      */
-    protected function _getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
+    protected function _getDescriptionSanitized( $sContent, $nMaxLength=null, $sReadMoreText='' ) {
 
-        $sDescription = strip_tags( $sDescription );
+        $_sDescription = strip_tags( $sContent );
         
         // Title character length
         $nMaxLength = $nMaxLength 
@@ -324,12 +323,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             return ''; 
         }
         
-        $sDescription = ( $nMaxLength > 0 && $this->getStringLength( $sDescription ) > $nMaxLength )
-            ? esc_attr( $this->getSubstring( $sDescription, 0, $nMaxLength ) ) . '...'
+        $_sDescription = ( $nMaxLength > 0 && $this->getStringLength( $_sDescription ) > $nMaxLength )
+            ? esc_attr( $this->getSubstring( $_sDescription, 0, $nMaxLength ) ) . '...'
                 . $sReadMoreText
-            : esc_attr( $sDescription );
+            : esc_attr( $_sDescription );
         
-        return trim( $sDescription );
+        return trim( $_sDescription );
         
     }
 
