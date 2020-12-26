@@ -350,11 +350,10 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          */
         private function ___getProductImages( DOMXPath $oXPath, DOMNode $oItemNode ) {
             $_aImages           = array();
-            $_oSRCs             = $oXPath->query( './/div[@id="altImages"]//img/@src', $oItemNode );
+            $_oSRCs             = $oXPath->query( './/div[@id="altImages"]//li[contains(@class, "imageThumbnail")]//img/@src', $oItemNode );
             if ( ! $_oSRCs->length  ) {
                 $_oSRCs = $oXPath->query( './/div[@id="imageBlock"]//img/@src', $oItemNode );
             }
-
             foreach( $_oSRCs as $_oAttribute ) {
                 $_aImages[] = trim( $_oAttribute->nodeValue );
             }
