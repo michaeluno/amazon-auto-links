@@ -204,19 +204,19 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
 
             $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sProductURL );
+            $_aProduct[ 'content' ]      = ! empty( $_aProduct[ 'content' ] )
+                ? "<div class='amazon-product-content'>"
+                    . $_aProduct[ 'content' ]
+                . "</div>"
+                : '';
             $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
-                isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : implode( ' ', $_aProduct[ '_features' ] ),
+                isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : ( $_aProduct[ 'content' ] ? $_aProduct[ 'content' ] : implode( ' ', $_aProduct[ '_features' ] ) ),
                 $this->oUnitOption->get( 'description_length' ),
                 $this->_getReadMoreText( $_aProduct[ 'product_url' ] )
             );
             $_aProduct[ 'description' ]  = $_sDescriptionExtracted
                 ? "<div class='amazon-product-description'>"
                     . $_sDescriptionExtracted
-                . "</div>"
-                : '';
-            $_aProduct[ 'content' ]      = ! empty( $_aProduct[ 'feature' ] )
-                ? "<div class='amazon-product-content'>"
-                    . $_aProduct[ 'feature' ]
                 . "</div>"
                 : '';
 
@@ -392,17 +392,22 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return array();
         }
 
-        $aProduct[ 'content' ]          = AmazonAutoLinks_Unit_Utility::getContent( $aProduct );
-        $_sDescriptionExtracted         = $this->_getDescriptionSanitized(
-            $aProduct[ 'content' ],
-            $this->oUnitOption->get( 'description_length' ),
-            $this->_getReadMoreText( $aProduct[ 'product_url' ] )
-        );
-        $aProduct[ 'description' ]      = $_sDescriptionExtracted
-            ? "<div class='amazon-product-description'>"
-                    . $_sDescriptionExtracted
-                . "</div>"
-            : '';
+
+        $aProduct[ 'content' ]          = empty( $aProduct[ 'content' ] )
+            ? AmazonAutoLinks_Unit_Utility::getContent( $aProduct )
+            : $aProduct[ 'content' ];
+        if ( empty( $aProduct[ 'description' ] ) ) {
+            $_sDescriptionExtracted         = $this->_getDescriptionSanitized(
+                $aProduct[ 'content' ],
+                $this->oUnitOption->get( 'description_length' ),
+                $this->_getReadMoreText( $aProduct[ 'product_url' ] )
+            );
+            $aProduct[ 'description' ]      = $_sDescriptionExtracted
+                ? "<div class='amazon-product-description'>"
+                        . $_sDescriptionExtracted
+                    . "</div>"
+                : '';
+        }
 
         $aProduct[ 'text_description' ] = strip_tags( $aProduct[ 'description' ] );
         if ( $this->isDescriptionBlocked( $aProduct[ 'text_description' ] ) ) {

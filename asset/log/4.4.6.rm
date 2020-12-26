@@ -1,0 +1,1 @@
+- Fixed a bug that the `%description%` and `%content%` were not functioning for the embed unit type when the PA-API keys are not set. 
