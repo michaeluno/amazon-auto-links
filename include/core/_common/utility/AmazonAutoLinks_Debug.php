@@ -27,7 +27,7 @@ class AmazonAutoLinks_Debug extends AmazonAutoLinks_AdminPageFramework_Debug {
      * @param  integer $iArrayDepthLimit
      * @return void
      */
-    static public function log( $mValue, $sFilePath=null, $bStackTrace=false, $iTrace=0, $iStringLengthLimit=99999, $iArrayDepthLimit=50 ) {
+    static public function log( $mValue, $sFilePath=null, $bStackTrace=false, $iTrace=0, $iStringLengthLimit=PHP_INT_MAX, $iArrayDepthLimit=50 ) {
 
         self::$iLegibleStringCharacterLimit = PHP_INT_MAX;
         self::$iLegibleArrayDepthLimit = PHP_INT_MAX;
