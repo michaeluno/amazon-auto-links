@@ -32,14 +32,6 @@ class AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper extends AmazonAutoLinks
         $_sWebDumperURL = AmazonAutoLinks_Proxy_WebPageDumper_Utility::getWebPageDumperURL();
         $_sURLEndpoint  = untrailingslashit( $_sWebDumperURL ) . '/www/';
         $this->_output( '<strong>Web Page Dumper</strong>: <a href="' . esc_url( $_sWebDumperURL ) . '" target="_blank">' . $_sWebDumperURL . '</a>' );
-        $_sURL = add_query_arg(
-            array(
-                'url'    => urlencode( $_sURL ),
-                'output' => 'html',
-                'reload' => 1,
-            ),
-            $_sURLEndpoint
-        );
         $_sURLImage = add_query_arg(
             array(
                 'url'    => urlencode( $_sURL ),
@@ -52,12 +44,17 @@ class AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper extends AmazonAutoLinks
             ),
             $_sURLEndpoint
         );
-        $this->_output( '<strong>URL</strong>: <a href="' . esc_url( $_sURL ) . '" target="_blank">' . $_sURL . '</a>' );
+
 
         $_aArguments = array(
             'timeout' => 60,    // seconds
+            'renew_cache' => true,
         );
-        $_aoResponse = wp_remote_get( $_sURL, $_aArguments );
+
+        $_oHTTP       = new AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient( $_sWebDumperURL, $_sURL, 86400, $_aArguments );
+        $_sRequestURL = $_oHTTP->getRequestURL();
+        $this->_output( '<strong>URL (Endpoint)</strong>: <a href="' . esc_url( $_sRequestURL ) . '" target="_blank">' . $_sRequestURL . '</a>' );
+        $_aoResponse  = $_oHTTP->getResponse();
         $this->_outputDetails( 'Header', $this->getHeaderFromResponse( $_aoResponse ) );
         $this->_outputDetails( 'Cookies', $this->getCookiesToParseFromResponse( $_aoResponse ) );
         if ( is_wp_error( $_aoResponse ) ) {
@@ -70,6 +67,7 @@ class AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper extends AmazonAutoLinks
             return false;
         }
         if ( false !== strpos( $_sHTML, '<html' ) ) {
+            $this->_output( "<strong>Body</strong>" );
             $this->_output( $this->getHTMLBody( $_sHTML ) );
         }
         $this->_output( "<strong>Screenshot</strong>" );
