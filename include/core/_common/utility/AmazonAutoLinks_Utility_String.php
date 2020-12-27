@@ -91,12 +91,18 @@ class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_
      * @since       2.1.2
      * @since       3           Moved from `AmazonAutoLinks_Utility`
      */
-    static private $_bFunctionExists_mb_substr;    
-    
+    static private $_bFunctionExists_mb_substr;
+
     /**
      * Returns the substring of the given subject string.
-     * @since       2.1.2
-     * @since       3           Moved from `AmazonAutoLinks_Utility`
+     *
+     * @param  string       $sString
+     * @param  integer      $iStart
+     * @param  integer|null $iLength
+     * @param  string|null  $sEncoding
+     * @return false|string
+     * @since  3            Moved from `AmazonAutoLinks_Utility`
+     * @since  2.1.2
      */
     static public function getSubstring( $sString, $iStart, $iLength=null, $sEncoding=null ) {
 
