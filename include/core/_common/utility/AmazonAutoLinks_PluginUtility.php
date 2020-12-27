@@ -106,15 +106,15 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @since  4.5.0
      */
     static public function getHTTPResponseError( $aoResponse, $sURL ) {
-        $_aError = self::___getWPError( $aoResponse );
+        $_aError = self::___getWPErrorAsArray( $aoResponse );
         if ( ! empty( $_aError ) ) {
             return $_aError;
         }
-        $_aError = self::___getHTTPStatusError( $aoResponse );
+        $_aError = self::___getHTTPStatusErrorAsArray( $aoResponse );
         if ( ! empty( $_aError ) ) {
             return $_aError;
         }
-        return self::___getCaptchaError( $aoResponse, $sURL );
+        return self::___getCaptchaErrorAsArray( $aoResponse, $sURL );
     }
         /**
          * @param  WP_Error|array $aoResponse
@@ -122,7 +122,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
          * @since  4.3.5
          * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
          */
-        static private function ___getWPError( $aoResponse ) {
+        static private function ___getWPErrorAsArray( $aoResponse ) {
             if ( is_wp_error( $aoResponse ) ) {
                 return array(
                     '(WP_ERROR) ' . $aoResponse->get_error_code() => $aoResponse->get_error_message(),
@@ -135,7 +135,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
          * @return array
          * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
          */
-        static private function ___getHTTPStatusError( array $aResponse ) {
+        static private function ___getHTTPStatusErrorAsArray( array $aResponse ) {
             $_sCode    = self::getElement( $aResponse, array( 'response', 'code' ) );
             $_s1stChar = substr( $_sCode, 0, 1 );
             if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
@@ -156,7 +156,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
          * @since  4.3.4
          * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
          */
-        static private function ___getCaptchaError( array $aResponse, $sURL ) {
+        static private function ___getCaptchaErrorAsArray( array $aResponse, $sURL ) {
             if ( self::isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $aResponse ), $sURL ) ) {
                 return array(
                     'CAPTCHA' => 'Blocked by Captcha',
