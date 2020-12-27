@@ -1,4 +1,5 @@
-- Fixed a bug that embedded outputs were not possible with the locales of Sweden, Saudi Arabia, Singapole, UAE, Turkey, and China.  
+- Fixed a bug with embedded outputs that failed to display base64 encoded sub-images.   
+- Fixed a bug that embedded outputs were not possible with the locales of Sweden, Saudi Arabia, Singapore, UAE, Turkey, and China.  
 - Fixed a bug with embedded outputs that review counts were not accurate for some cases.
 - Fixed a bug that the `%description%` and `%content%` were not functioning for the embed unit type when the PA-API keys are not set.
 - Fixed a bug with embedded outputs that thumbnails were not displayed with some locales.
