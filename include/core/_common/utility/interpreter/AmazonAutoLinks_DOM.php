@@ -63,11 +63,8 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
      * @return DOMDocument
      */
     public function loadDOMFromHTMLElement( $sHTMLElements, $sMBLang='uni', $sSourceCharSet='' ) {
-        return $this->loadDOMFromHTML( 
-            // Enclosing in a div tag prevents from inserting the comment <!-- xml version .... --> when using saveXML() later.
-            '<div>' 
-                . $sHTMLElements 
-            . '</div>', 
+        return $this->loadDOMFromHTML(
+            '<div>' . $sHTMLElements . '</div>', // Enclosing in a div tag prevents from inserting the comment <!-- xml version .... --> when using saveXML() later.
             $sMBLang,
             $sSourceCharSet 
         );
@@ -110,7 +107,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         if ( ! empty( $sMBLang ) && $this->bIsMBStringInstalled ) {
             mb_language( $sMBLang ); 
         }
-       
+
         if ( false !== $sSourceCharSet ) {
             $sHTML       = $this->convertCharacterEncoding(
                 $sHTML, // subject
