@@ -338,6 +338,9 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                 return null;
             }
             $_oDOMNode = $_onContents->item( 0 );
+            if ( null === $_oDOMNode ) {
+                return null;
+            }
 
             $this->___removeTags( $oXPath, array( 'style', 'script', 'noscript' ), $_oDOMNode );
             $this->___fixImgAttributes( $oXPath, $_oDOMNode );
