@@ -41,6 +41,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
     public function __construct( $sWebPageDumperURL, $sRequestURL, $iCacheDuration=86400, array $aArguments=array(), $sRequestType='web_page_dumper', array $aCache=array() ) {
 
         $this->sWebPageDumperURL = $sWebPageDumperURL;
+        $aArguments[ 'doing_web_page_dumper' ] = true;
         parent::__construct( $sRequestURL, $iCacheDuration, $aArguments, $sRequestType, $aCache );
 
     }
@@ -58,7 +59,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
         if ( is_wp_error( $_aoResponse ) ) {
             return $_aoResponse;
         }
-        return parent::_getHTTPRequested( $this->___getWebPageDumperEndpoint( $this->sWebPageDumperURL, $sURL ), $aArguments );
+        return parent::_getHTTPRequested( $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $sURL ), $aArguments );
 
     }
         static private $___aWoken = array();
@@ -109,18 +110,31 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
         /**
          * @param  string $sWebPageDumperURL
          * @param  string $sRequestURL
-         *
          * @return string
+         * @since  4.5.0
          */
-        private function ___getWebPageDumperEndpoint( $sWebPageDumperURL, $sRequestURL ) {
+        private function ___getWebPageDumperRequestURL( $sWebPageDumperURL, $sRequestURL ) {
+            $_aArguments = array(
+                'url'    => urlencode( $sRequestURL ),
+                'output' => 'html',
+            );
+            $_aArguments = apply_filters( 'aal_filter_web_page_dumper_arguments', $_aArguments, $sRequestURL );
             return add_query_arg(
-                array(
-                    'url'    => urlencode( $sRequestURL ),
-                    'output' => 'html',
-                    'reload' => 1,
-                ),
-                preg_replace( '/\/(www(\/?))?$/', '', $sWebPageDumperURL ) . '/www/'
+                $_aArguments,
+                $this->___getEndpoint( $this->sWebPageDumperURL )
             );
         }
+        private function ___getEndpoint( $sWebPageDumperURL ) {
+            return preg_replace( '/\/(www(\/?))?$/', '', $sWebPageDumperURL ) . '/www/';
+        }
+
+    /**
+     * @remark Mainly for scratches.
+     * @return string
+     * @since  4.5.0
+     */
+    public function getRequestURL() {
+        return $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $this->sURL );
+    }
 
 }

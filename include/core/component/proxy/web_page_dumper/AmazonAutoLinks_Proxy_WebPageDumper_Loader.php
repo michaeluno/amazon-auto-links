@@ -31,12 +31,14 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
             return;
         }
 
-        $this->___load();
+        $this->___loadEvents();
 
     }
 
-        private function ___load() {
+        private function ___loadEvents() {
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies;
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse;
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments;
         }
 
 
