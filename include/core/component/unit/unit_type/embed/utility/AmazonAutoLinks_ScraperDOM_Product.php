@@ -337,17 +337,17 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             if ( empty( $_onContents ) ) {
                 return null;
             }
-            $_nsContents = null;
             $_oDOMNode = $_onContents->item( 0 );
 
             $this->___removeTags( $oXPath, array( 'style', 'script', 'noscript' ), $_oDOMNode );
             $this->___fixImgAttributes( $oXPath, $_oDOMNode );
             $this->___fixInlineStyles( $_oDOMNode );
             $this->___removeComments( $oXPath, $_oDOMNode );
-            $_sContent    = $this->oDOM->getInnerHTML( $_oDOMNode );
-            $_nsContents .= preg_replace( '/(?!>)(\s+[\r\n]+)(?=\s+<)/', PHP_EOL, $_sContent ); // sanitize extra line breaks
-
-            return $_nsContents;
+            $_sContent = $this->oDoc->saveXml( $_oDOMNode, LIBXML_NOEMPTYTAG );
+            $_sContent = trim( preg_replace( '/(?!>)(\s+[\r\n]+)(?=\s+<)/', PHP_EOL, $_sContent ) ); // sanitize extra line breaks
+            return $_sContent
+                ? $_sContent
+                : null;
         }
             /**
              * @param DOMNode $oDOMNode
