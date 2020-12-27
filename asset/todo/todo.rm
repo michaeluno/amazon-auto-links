@@ -1,6 +1,11 @@
 # Todos
 
 ## Minor
+- [4.5.0] Fix: Too many cookies are stored.
+- [4.5.0] the embed unit type should capture rating information
+- [4.5.0] the embed unit type should update product data after scraping
+- [4.5.0] Create a stylesheet that applies to all the templates. 
+- [4.5.0] Fix image widths displayed with the %content% tag.
 - [Bug] Fix a bug that cloning a unit does not clone template options. 
 - [Internal] Fix an issue that reusing of old caches of HTTP requests on an HTTP request error is not working.
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
