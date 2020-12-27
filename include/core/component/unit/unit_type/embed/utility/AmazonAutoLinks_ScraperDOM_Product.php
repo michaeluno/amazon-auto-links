@@ -113,6 +113,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             return $_aProduct;
         }
 
+        $this->___removeUnnecessary( $_oXPath, $_oItemNode );
 
         // Optional
         $_aProduct[ 'title' ]               = $this->___getProductTitle( $_oXPath, $_oItemNode );
@@ -149,6 +150,20 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         return $_aProduct;
 
     }
+        /**
+         * @param DOMXPath $oXPath
+         * @param DOMNode  $oItemNode
+         * @since 4.4.6
+         */
+        private function ___removeUnnecessary( DOMXPath $oXPath, DOMNode $oItemNode ) {
+            $_boDOMNodeList = $oXPath->query( './/*[@id="prsubswidget"]', $oItemNode );
+            if ( false === $_boDOMNodeList ) {
+                return;
+            }
+            foreach( $_boDOMNodeList as $_oDOMNode ) {
+                $_oDOMNode->parentNode->removeChild( $_oDOMNode );
+            }
+        }
 
         /**
          * @param  string $sURLMaybeRelative
@@ -207,11 +222,16 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          * @return int|null
          */
         protected function _getReviewCount( DOMXPath $oXPath, DOMNode $oRatingNode ) {
-            $_oNodes = $oXPath->query( './/a[not(contains(@title, "5"))]', $oRatingNode );
-            foreach( $_oNodes as $_oNode ) {
+
+            $_oNodeList = $oXPath->query( '//span[@id="acrCustomerReviewText"]', $oRatingNode );
+            if ( ! $_oNodeList->length ) {
+                $_oNodeList = $oXPath->query( './/a[not(contains(@title, "5"))]', $oRatingNode );
+            }
+            foreach( $_oNodeList as $_oNode ) {
                 return ( integer ) preg_replace( '/[^0-9]/', '', $_oNode->nodeValue );
             }
             return null;
+
         }
 
         /**
@@ -221,9 +241,10 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          * @return int|null
          */
         protected function _getRatingPoint( DOMXPath $oXPath, $oRatingNode ) {
-            $_oNodes = $oXPath->query( './/a[contains(@title, "5")]', $oRatingNode );
+
+            $_oNodes = $oXPath->query( './/i[contains(@class, "a-star")]/span', $oRatingNode );
             if ( ! $_oNodes->length ) {
-                $_oNodes = $oXPath->query( './/i[contains(@class, "a-star")]/span', $oRatingNode );
+                $_oNodes = $oXPath->query( './/a[contains(@title, "5")]', $oRatingNode );   // old Amazon site design
             }
             foreach( $_oNodes as $_oNode ) {
                 $_sRatingPoint = trim( $_oNode->nodeValue );
@@ -266,8 +287,11 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          * @return mixed    null|DOMNode
          */
         protected function _getRatingNode( DOMXPath $oXPath, $oItemNode, $sSiteDomain, $sAssociateID ) {
-            // * is used to match `div` or `span`
-            $_oRatingNodes = $oXPath->query( './/*[./a/i[contains(@class, "a-icon-star")]]', $oItemNode );
+
+            $_oRatingNodes = $oXPath->query( '//*[@id="averageCustomerReviews"]', $oItemNode );
+            if ( ! $_oRatingNodes->length ) {
+                $_oRatingNodes = $oXPath->query( './/*[./a/i[contains(@class, "a-icon-star")]]', $oItemNode ); // * is used to match `div` or `span`
+            }
             foreach( $_oRatingNodes as $_oRatingNode ) {
                 // Convert the link
                 $_oANodes = $oXPath->query( './/a', $_oRatingNode );
