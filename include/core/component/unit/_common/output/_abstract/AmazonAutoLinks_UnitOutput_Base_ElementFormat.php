@@ -304,26 +304,23 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Strips tags and truncates the given string.
      *
-     * @param string $sDescription
-     * @param null|integer|double $nMaxLength   A numeric value that determines the length.
-     * @param string $sReadMoreText
-     *
+     * @param  string              $sDescription
+     * @param  null|integer|double $nMaxLength    A numeric value that determines the length.
+     * @param  string              $sReadMoreText
      * @return string
-     * @since       unknown
-     * @since       3.3.0       Renamed from `sanitizeDescription()`.
+     * @since  unknown
+     * @since  3.3.0               Renamed from `sanitizeDescription()`.
      */
     protected function _getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
 
         $sDescription = strip_tags( $sDescription );
-        
+        $sDescription = preg_replace( '/[\s\t]+/', ' ', $sDescription );
+
         // Title character length
-        $nMaxLength = $nMaxLength 
-            ? $nMaxLength 
-            : $this->oUnitOption->get( 'description_length' );
+        $nMaxLength = $nMaxLength ? $nMaxLength : $this->oUnitOption->get( 'description_length' );
         if ( $nMaxLength == 0 ) { 
             return ''; 
         }
-        
         $sDescription = ( $nMaxLength > 0 && $this->getStringLength( $sDescription ) > $nMaxLength )
             ? esc_attr( $this->getSubstring( $sDescription, 0, $nMaxLength ) ) . '...'
                 . $sReadMoreText
