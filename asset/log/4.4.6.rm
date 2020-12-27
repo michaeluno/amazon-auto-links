@@ -1,2 +1,3 @@
-- Fixed a bug with embedded outputs that rating counts were not accurate for some cases.
+- Fixed a bug that embedded outputs were not possible with the locales of Sweden, Saudi Arabia, Singapole, UAE, Turkey, and China.  
+- Fixed a bug with embedded outputs that review counts were not accurate for some cases.
 - Fixed a bug that the `%description%` and `%content%` were not functioning for the embed unit type when the PA-API keys are not set. 
