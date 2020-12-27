@@ -166,6 +166,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
 
     /**
      *
+     * @remark Be careful that the output becomes HTML-entity-encoded so `html_entity_decode( $output )` must be applied after that.
      * @param  DOMNode $oNode
      * @return string
      */
@@ -176,16 +177,10 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
         }
         $oChildNodes = $oNode->childNodes; 
         foreach ( $oChildNodes as $_oChildNode ) { 
-            $_oTempDom    = new DOMDocument( '1.0', $this->sCharEncoding );
-            
-            $_oImportedNode = $_oTempDom->importNode( 
-                $_oChildNode, 
-                true 
-            );
+            $_oTempDom      = new DOMDocument( '1.0', $this->sCharEncoding );
+            $_oImportedNode = $_oTempDom->importNode( $_oChildNode, true );
             if ( $_oImportedNode ) {
-                $_oTempDom->appendChild( 
-                    $_oImportedNode    
-                ); 
+                $_oTempDom->appendChild( $_oImportedNode );
             } 
 
             // [4.3.4] Clean HTML.
@@ -195,7 +190,7 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             $sInnerHTML .= $this->___getAutoInjectedWrapperTagsRemoved( @$_oTempDom->saveHTML() );
             
         } 
-        return $sInnerHTML;     
+        return $sInnerHTML; // @todo might need html_entity_decode( $sInnerHTML )
         
     }
         /**
