@@ -100,6 +100,72 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
+     * @param  WP_Error|array $aoResponse
+     * @param  string $sURL
+     * @return array Consists of an error code as a key and a message as the value.
+     * @since  4.5.0
+     */
+    static public function getHTTPResponseError( $aoResponse, $sURL ) {
+        $_aError = self::___getWPError( $aoResponse );
+        if ( ! empty( $_aError ) ) {
+            return $_aError;
+        }
+        $_aError = self::___getHTTPStatusError( $aoResponse );
+        if ( ! empty( $_aError ) ) {
+            return $_aError;
+        }
+        return self::___getCaptchaError( $aoResponse, $sURL );
+    }
+        /**
+         * @param  WP_Error|array $aoResponse
+         * @return array
+         * @since  4.3.5
+         * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
+         */
+        static private function ___getWPError( $aoResponse ) {
+            if ( is_wp_error( $aoResponse ) ) {
+                return array(
+                    '(WP_ERROR) ' . $aoResponse->get_error_code() => $aoResponse->get_error_message(),
+                );
+            }
+            return array();
+        }
+        /**
+         * @param  array $aResponse
+         * @return array
+         * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
+         */
+        static private function ___getHTTPStatusError( array $aResponse ) {
+            $_sCode    = self::getElement( $aResponse, array( 'response', 'code' ) );
+            $_s1stChar = substr( $_sCode, 0, 1 );
+            if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
+                return array();
+            }
+            return array(
+                '(HTTP_STATUS_ERROR) ' . $_sCode => self::getElement( $aResponse, array( 'response', 'message' ) )
+            );
+        }
+
+        /**
+         *
+         * Since v4.3.4, the timing of creating captcha error WP_Error object has changed
+         * and therefore, the error needs to be captured here.
+         * @param  array  $aResponse
+         * @param  string $sURL
+         * @return array
+         * @since  4.3.4
+         * @sinee  4.5.0 Moved from `AmazonAutoLinks_Main_Event_Filter_HTTPRequestError`.
+         */
+        static private function ___getCaptchaError( array $aResponse, $sURL ) {
+            if ( self::isBlockedByAmazonCaptcha( wp_remote_retrieve_body( $aResponse ), $sURL ) ) {
+                return array(
+                    'CAPTCHA' => 'Blocked by Captcha',
+                );
+            }
+            return array();
+        }
+
+    /**
      * @param   string  string $sHTML
      * @param   string  string $sURL
      * @since   4.2.2
