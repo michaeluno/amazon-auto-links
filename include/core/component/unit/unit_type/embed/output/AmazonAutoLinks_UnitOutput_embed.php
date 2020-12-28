@@ -322,6 +322,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_sLocale       = $this->oUnitOption->get( 'country' );
         if ( ! $this->oOption->isAPIKeySet( $_sLocale ) ) {
             if ( ! empty( $this->___aErrors ) ) {
+                $this->___aErrors = array_map( array( $this, '___replyToSetASINToErrorMessage' ), $this->___aErrors, array_keys( $this->___aErrors ) );
                 $_sErrors = implode( ' ', $this->___aErrors );
                 $this->___aErrors = array();
                 return $_sErrors;
@@ -332,6 +333,21 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         return parent::_getError( $aProducts );
 
     }
+        /**
+         * @param    string $sErrorMessage
+         * @param    string $sURL
+         * @return   string
+         * @callback array_map()
+         * @since    4.4.6
+         */
+        private function ___replyToSetASINToErrorMessage( $sErrorMessage, $sURL ) {
+            $_aASINs = $this->getASINs( $sURL );
+            if ( empty( $_aASINs ) ) {
+                return $sErrorMessage;
+            }
+            $_sASINs  = implode( ', ', $_aASINs );
+            return $sErrorMessage . " ({$_sASINs})";
+        }
         /**
          * Filters out unfinished product data.
          *
