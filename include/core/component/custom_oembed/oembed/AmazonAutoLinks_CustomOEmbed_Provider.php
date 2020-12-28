@@ -45,9 +45,9 @@ class AmazonAutoLinks_CustomOEmbed_Provider {
             ),
             site_url()
         );
-        $aProviders = $aProviders + array(
+        $aProviders = array(
             "#https?://([a-z0-9-]+\.)?amazon\.[a-z]+(\.[a-z])?/.*#i" => array( $_sEndpointURL, true ),
-        ); // with array union, the element will be placed at the bottom of the array.
+        ) + $aProviders; // with array union, the element will be placed at the top of the array.
         $aProviders[ "#https?://([a-z0-9-]+\.)?amazon\.(com|com\.mx|com\.br|ca)/.*#i" ] = array( $_sEndpointURL, true );
         $aProviders[ "#https?://([a-z0-9-]+\.)?amazon\.(co\.uk|de|fr|it|es|in|nl|ru)/.*#i" ] = array( $_sEndpointURL, true );
         $aProviders[ "#https?://([a-z0-9-]+\.)?amazon\.(co\.jp|com\.au)/.*#i" ] = array( $_sEndpointURL, true );
