@@ -1,3 +1,4 @@
+- Fixed a bug that iframe elements of embedded outputs flickered when multiple instances of them were present in one page. 
 - Fixed a bug with embedded outputs that failed to display base64 encoded sub-images.   
 - Fixed a bug that embedded outputs were not possible with the locales of Sweden, Saudi Arabia, Singapore, UAE, Turkey, and China.  
 - Fixed a bug with embedded outputs that review counts were not accurate for some cases.
