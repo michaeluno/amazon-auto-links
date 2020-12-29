@@ -14,7 +14,7 @@
  * @remark Has a caching system built-in.
  * @remark Handles auto-encoding of the document from the source character set to the site character set.
  * @since  3
- * @sicne  4.3.4 Deprecated the multiple URLs.  For multiple URLs to process at once, use `AmazonAutoLinks_HTTPClient_Multiple`.
+ * @since  4.3.4 Deprecated the multiple URLs.  For multiple URLs to process at once, use `AmazonAutoLinks_HTTPClient_Multiple`.
  */
 class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
@@ -48,14 +48,14 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores the processing URL.
-     * @var string
-     * @sicne 4.3.4
+     * @var   string
+     * @since 4.3.4
      */
     public $sURL;
 
     /**
      * Stores the processing response cache name.
-     * @var string
+     * @var   string
      * @since 4.3.4
      */
     public $sCacheName;
@@ -116,8 +116,8 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @param array   $aArguments
      * @param string  $sRequestType
      * @param array   $aCache           A cache array to suppress the database cache. This is used for multiple URLs to query them for caches at once.
-     * @sicne 3
-     * @sicne 4.3.4   Added the $aCache array.
+     * @since 3
+     * @since 4.3.4   Added the $aCache array.
      */
     public function __construct( $sURL, $iCacheDuration=86400, array $aArguments=array(), $sRequestType='wp_remote_get', array $aCache=array() ) {
 
@@ -168,8 +168,8 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * Returns the HTTP body.
      *
      * An alias of getBody().
-     * @remark      Handles character encoding conversion.
-     * @return      string
+     * @remark Handles character encoding conversion.
+     * @return string
      */
     public function get() {
         return $this->getBody();
@@ -195,7 +195,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * @remark Handles character encoding conversion. Encodes the document from the source character set to the site character set.
          * @param  string  $sHTTPBody    An HTTP body.
          * @param  string  $sCharSetFrom A character set of the HTTP body.
-         * @sicne  4.3.4
+         * @since  4.3.4
          * @return string
          */
         private function ___getResponseBodySanitized( $sHTTPBody, $sCharSetFrom ) {
