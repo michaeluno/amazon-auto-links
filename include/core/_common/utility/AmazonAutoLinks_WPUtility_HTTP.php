@@ -160,7 +160,7 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
      * @since  4.3.5
      */
     static public function getWPHTTPCookieFromCookieItem( $soCookie, $isIndexOrName='', $sURL='' ) {
-        $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
+        $_sDomain = $sURL ? parse_url( $sURL, PHP_URL_HOST ) : null;
         if ( $soCookie instanceof WP_Http_Cookie ) {
             $soCookie->domain = $soCookie->domain ? $soCookie->domain : $_sDomain; /* @see WP_Http_Cookie::__construct() */
             $soCookie->path   = $soCookie->path ? $soCookie->path : '/';
@@ -253,7 +253,7 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
                 if ( ! isset( $_aElement[ 0 ], $_aElement[ 1 ] ) ) {
                     continue;
                 }
-                $_aCookie[ $_aElement[ 0 ] ] = $_aElement[ 1 ];
+                $_aCookie[ strtolower( $_aElement[ 0 ] ) ] = $_aElement[ 1 ];
             }
             $_oCookie = new WP_Http_Cookie( $_aCookie );
             return self::getWPHTTPCookieFromCookieItem( $_oCookie, '', $sURL );
