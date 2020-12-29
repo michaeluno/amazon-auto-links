@@ -46,25 +46,28 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
                 '',  // mb_lang
                 false, // use file_get_contents()
                 $_bsCharSetFrom // detect encoding
-            );                    
+            );
+            return;
         }        
-        // Else if it is a file path, 
-        // disable warnings here as in PHP 5.3 or above, PHP_MAXPATHLEN is defined and it may cause warnings
-        else if ( @file_exists( $sURLOrFilePathOrHTML ) ) {
-            $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
-                file_get_contents( $sURLOrFilePathOrHTML ),
-                '', // mb_lang
-                $_bsCharSetFrom
-            );            
+        // Else if it is a file path, (disable warnings here as in PHP 5.3 or above, PHP_MAXPATHLEN is defined and it may cause warnings)
+        if ( @file_exists( $sURLOrFilePathOrHTML ) ) {
+            $sURLOrFilePathOrHTML = file_get_contents( $sURLOrFilePathOrHTML );
         } 
         // Else, treat it as HTML contents.
-        else {
-            $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
+        $_sTestHTML = substr( $sURLOrFilePathOrHTML, 0, 20 );
+        if ( false !== stripos( $_sTestHTML, '<html ' ) ) { // complete HTML document
+            $this->oDoc = $this->oDOM->loadDOMFromHTML(
                 $sURLOrFilePathOrHTML,
                 '', // mb_lang
                 $_bsCharSetFrom // detect encoding
             );
-        }        
+            return;
+        }
+        $this->oDoc = $this->oDOM->loadDOMFromHTMLElement(
+            $sURLOrFilePathOrHTML,
+            '', // mb_lang
+            $_bsCharSetFrom // detect encoding
+        );
 
     }
 

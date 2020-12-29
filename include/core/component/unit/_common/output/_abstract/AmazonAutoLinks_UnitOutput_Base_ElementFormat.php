@@ -304,31 +304,29 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Strips tags and truncates the given string.
      *
-     * @param  string $sContent
-     * @param  null|integer|double $nMaxLength   A numeric value that determines the length.
-     * @param  string $sReadMoreText
+     * @param  string              $sDescription
+     * @param  null|integer|double $nMaxLength    A numeric value that determines the length.
+     * @param  string              $sReadMoreText
      * @return string
      * @since  unknown
-     * @since  3.3.0       Renamed from `sanitizeDescription()`.
+     * @since  3.3.0               Renamed from `sanitizeDescription()`.
      */
-    protected function _getDescriptionSanitized( $sContent, $nMaxLength=null, $sReadMoreText='' ) {
+    protected function _getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
 
-        $_sDescription = strip_tags( $sContent );
-        
+        $sDescription = strip_tags( $sDescription );
+        $sDescription = preg_replace( '/[\s\t]+/', ' ', $sDescription );
+
         // Title character length
-        $nMaxLength = $nMaxLength 
-            ? $nMaxLength 
-            : $this->oUnitOption->get( 'description_length' );
+        $nMaxLength = $nMaxLength ? $nMaxLength : $this->oUnitOption->get( 'description_length' );
         if ( $nMaxLength == 0 ) { 
             return ''; 
         }
-        
-        $_sDescription = ( $nMaxLength > 0 && $this->getStringLength( $_sDescription ) > $nMaxLength )
-            ? esc_attr( $this->getSubstring( $_sDescription, 0, $nMaxLength ) ) . '...'
+        $sDescription = ( $nMaxLength > 0 && $this->getStringLength( $sDescription ) > $nMaxLength )
+            ? esc_attr( $this->getSubstring( $sDescription, 0, $nMaxLength ) ) . '...'
                 . $sReadMoreText
-            : esc_attr( $_sDescription );
+            : esc_attr( $sDescription );
         
-        return trim( $_sDescription );
+        return trim( $sDescription );
         
     }
 

@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.5
+Stable tag:         4.4.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.4.6 - 12/29/2020 =
+- Fixed a bug that iframe elements of embedded outputs flickered when multiple instances of them were present in one page.
+- Fixed a bug with embedded outputs that failed to display base64 encoded sub-images.
+- Fixed a bug that embedded outputs were not possible with the locales of Sweden, Saudi Arabia, Singapore, UAE, Turkey, and China.
+- Fixed a bug with embedded outputs that review counts were not accurate for some cases.
+- Fixed a bug that the `%description%` and `%content%` were not functioning for the embed unit type when the PA-API keys are not set.
+- Fixed a bug with embedded outputs that thumbnails were not displayed with some locales.
 
 = 4.4.5 - 12/22/2020 =
 - Tweaked the style of the List template regarding vertical margins of buttons.

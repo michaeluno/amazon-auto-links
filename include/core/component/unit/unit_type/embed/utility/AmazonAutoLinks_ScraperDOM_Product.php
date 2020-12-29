@@ -337,16 +337,20 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             if ( empty( $_onContents ) ) {
                 return null;
             }
-            $_nsContents = null;
-            foreach( $_onContents as $_oContent ) {
-                $this->___removeComments( $oXPath, $_oContent );
-                $this->___removeTags( array( 'style', 'script', 'noscript' ), $_oContent );
-                $this->___fixImgAttributes( $oXPath, $_oContent );
-                $this->___fixInlineStyles( $_oContent );
-                $_sContent    = $this->oDOM->getInnerHTML( $_oContent );
-                $_nsContents .= preg_replace( '/(?!>)(\s+[\r\n]+)(?=\s+<)/', PHP_EOL, $_sContent ); // sanitize extra line breaks
+            $_oDOMNode = $_onContents->item( 0 );
+            if ( null === $_oDOMNode ) {
+                return null;
             }
-            return $_nsContents;
+
+            $this->___removeTags( $oXPath, array( 'style', 'script', 'noscript' ), $_oDOMNode );
+            $this->___fixImgAttributes( $oXPath, $_oDOMNode );
+            $this->___fixInlineStyles( $_oDOMNode );
+            $this->___removeComments( $oXPath, $_oDOMNode );
+            $_sContent = $this->oDoc->saveXml( $_oDOMNode, LIBXML_NOEMPTYTAG );
+            $_sContent = trim( preg_replace( '/(?!>)(\s+[\r\n]+)(?=\s+<)/', PHP_EOL, $_sContent ) ); // sanitize extra line breaks
+            return $_sContent
+                ? $_sContent
+                : null;
         }
             /**
              * @param DOMNode $oDOMNode
@@ -391,13 +395,17 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             }
             /**
              * @remark Using XPath somehow did not find elements.
-             * @param  array $aTags
-             * @param  DOMNode $oDOMNode
+             * @param  DOMXPath $oXPath
+             * @param  array    $aTags
+             * @param  DOMNode  $oDOMNode
              * @since  4.4.6
              */
-            private function ___removeTags( array $aTags,DOMNode $oDOMNode ) {
+            private function ___removeTags( DOMXPath $oXPath, array $aTags, DOMNode $oDOMNode ) {
                 foreach( $aTags as $_sTag ) {
-                    foreach( $oDOMNode->getElementsByTagName( $_sTag ) as $_oTagDOMNode ) {
+                    /** @var DOMNodeList $_oDONNodeList */
+                    $_oDONNodeList  = $oXPath->query( '//' . $_sTag , $oDOMNode );
+                    foreach( $_oDONNodeList as $_oTagDOMNode ) {
+                        /** @var DOMElement $_oTagDOMNode */
                         $_oTagDOMNode->parentNode->removeChild( $_oTagDOMNode );
                     }
                 }
