@@ -142,6 +142,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'TR'    => 'aal_paapi_request_count_log_tr',
             'US'    => 'aal_paapi_request_count_log_us',
             'UK'    => 'aal_paapi_request_count_log_uk',
+            'SE'    => 'aal_paapi_request_count_log_se',
         ),
 
         // Legacy option keys - not used and should be deleted on uninstall.
