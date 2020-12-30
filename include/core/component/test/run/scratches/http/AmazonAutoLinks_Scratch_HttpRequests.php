@@ -28,21 +28,17 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
         if ( ! filter_var( $_sURL, FILTER_VALIDATE_URL ) ) {
             throw new Exception( 'Set a URL in the argument input field.' );
         }
-        $this->_outputDetails( 'URL', $_sURL );
+
         $_aArguments = array(
             'timeout' => 30,    // seconds
-
         );
+
+        add_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10, 2 );
         $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, $_aArguments );
         $_aoResponse = $_oHTTP->getRawResponse();
-        $this->_outputDetails( 'Status', $_oHTTP->getStatusCode() . ' ' . $_oHTTP->getStatusMessage() );
-        $this->_outputDetails( 'Header', $this->getHeaderFromResponse( $_aoResponse ) );
-        if ( is_wp_error( $_aoResponse ) ) {
-            $this->_outputDetails( 'Error ' . $_aoResponse->get_error_code(),  $_aoResponse->get_error_message() );
-        }
-        $_sHTML = wp_remote_retrieve_body( $_aoResponse );
-        $this->_output( '<strong>Body</strong>' );
-        $this->_output( $this->getHTMLBody( $_sHTML ) );
+        remove_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10 );
+        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL );
+
     }
 
     /**
@@ -51,6 +47,7 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
      * @throws  Exception
      */
     public function scratch_wp_remote_get() {
+
         $_aParameters    = func_get_args() + array( '', 0 );
         $_sURL           = $_aParameters[ 0 ];
         if ( ! filter_var( $_sURL, FILTER_VALIDATE_URL ) ) {
@@ -61,15 +58,32 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
             'timeout' => 30,    // seconds
         );
 
+        add_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10, 2 );
         $_aoResponse = wp_remote_get( $_sURL, $_aArguments );
-        $this->_outputDetails( 'Status', ( integer ) $this->getElement( ( array ) $_aoResponse, array( 'response', 'code' ) ) . ' ' . $this->getElement( $_aoResponse, array( 'response', 'message' ) ) );
-        $this->_outputDetails( 'Header', $this->getHeaderFromResponse( $_aoResponse ) );
-        if ( is_wp_error( $_aoResponse ) ) {
-            $this->_outputDetails( 'Error ' . $_aoResponse->get_error_code(),  $_aoResponse->get_error_message() );
-        }
-        $_sHTML = wp_remote_retrieve_body( $_aoResponse );
-        $this->_output( '<strong>Body</strong>' );
-        $this->_output( $this->getHTMLBody( $_sHTML ) );
+        remove_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10 );
+        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL );
+
     }
 
+    private function ___outputDetailsOfHTTPResponse( $aoResponse, $sURL ) {
+        $this->_outputDetails( 'URL', $sURL );
+        $this->_outputDetails( 'Response Status', ( integer ) $this->getElement( ( array ) $aoResponse, array( 'response', 'code' ) ) . ' ' . $this->getElement( $aoResponse, array( 'response', 'message' ) ) );
+        $this->_outputDetails( 'Response Header', $this->getHeaderFromResponse( $aoResponse ) );
+        if ( is_wp_error( $aoResponse ) ) {
+            $this->_outputDetails( 'Error ' . $aoResponse->get_error_code(),  $aoResponse->get_error_message() );
+        }
+        $_sHTML = wp_remote_retrieve_body( $aoResponse );
+        $this->_output( '<strong>Body</strong>' );
+        $this->_output( $this->getHTMLBody( $_sHTML ) );
+
+    }
+
+    public function replyToCaptureRequestHeader( $aParameters, $aHeader ) {
+        $this->_outputDetails( 'Request Parameters (hook: requests-requests.before_request)', $aParameters );
+        $_sCookie = $this->getElement( $aHeader, 'Cookie' );
+        if ( ! empty( $_sCookie ) ) {
+            $aHeader[ 'Cookie' ] = $this->getStringIntoArray( $_sCookie, ';', '=' );
+        }
+        $this->_outputDetails( 'Request Header (hook: requests-requests.before_request)', $aHeader );
+    }
 }
