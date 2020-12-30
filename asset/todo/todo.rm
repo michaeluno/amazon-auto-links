@@ -1,8 +1,6 @@
 # Todos
 
 ## Minor
-- [4.5.0] Fix: Too many cookies are stored.
-- [4.5.0] the embed unit type should update product data after scraping
 - [4.5.0] Create a stylesheet that applies to all the templates. 
 - [4.5.0] Fix image widths displayed with the %content% tag.
 - [Bug] Fix a bug that cloning a unit does not clone template options. 
@@ -11,6 +9,11 @@
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
 
+### Low Priority
+- The embed unit type should update product data after scraping 
+  -> this is not simple to do; even when the cache exists, a database query will be performed and it will be an extra query
+  -> to solve that, it might be necessary to use post metas associated with the post which embeds the product. However, if the same product is embedded across multiple posts, duplicate product data will be stored in the database.
+  
 ## Major  
 - [4.5.0][UI] Make the General setting tab the default in the Settings page. 
 - [4.5.0][UI] Add the PA-API setting Tab.
