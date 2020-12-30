@@ -863,7 +863,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @since  4.3.4
      */
     public function getCookies() {
-        return $this->getRequestCookiesFromResponse( $this->getRawResponse() );
+        return $this->getRequestCookiesFromResponse( $this->getRawResponse(), $this->sURL );
     }
 
     /**
@@ -874,7 +874,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
      * @since 4.3.4
      */
     public function getCookiesParsable() {
-        return $this->getCookiesToParseFromResponse( $this->getRawResponse() );
+        return $this->getCookiesToParseFromResponse( $this->getRawResponse(), $this->sURL );
     }
 
 }

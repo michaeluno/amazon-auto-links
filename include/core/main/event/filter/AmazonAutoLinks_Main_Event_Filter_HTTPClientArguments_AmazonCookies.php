@@ -40,7 +40,7 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments_AmazonCookies extend
         if ( ! $this->isAmazonURL( $sURL ) ) {
             return $aoResponse;
         }
-        $_aResponseCookies = $this->getRequestCookiesFromResponse( $aoResponse );
+        $_aResponseCookies = $this->getRequestCookiesFromResponse( $aoResponse, $sURL );
         if ( empty( $_aResponseCookies ) ) {
             return $aoResponse;
         }

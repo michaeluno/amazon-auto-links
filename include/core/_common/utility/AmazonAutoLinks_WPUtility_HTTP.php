@@ -40,13 +40,14 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
     /**
      * Converts the 'cookies' response element into an array for parsing.
      * @remrak Do not use this to set cookies for wp_remote_request() as the structure is different.
-     * @param $aoResponse
+     * @param  array|WP_Error $aoResponse
+     * @param  string         $sURL
      * @return array
-     * @see WP_Http_Cookie
-     * @since 4.3.4
+     * @see    WP_Http_Cookie
+     * @since  4.3.4
      */
-    static public function getCookiesToParseFromResponse( $aoResponse ) {
-        $_aCookies = self::getRequestCookiesFromResponse( $aoResponse );
+    static public function getCookiesToParseFromResponse( $aoResponse, $sURL='' ) {
+        $_aCookies = self::getRequestCookiesFromResponse( $aoResponse, $sURL );
         return self::getCookiesToParse( $_aCookies );
     }
 
@@ -160,7 +161,7 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
      * @since  4.3.5
      */
     static public function getWPHTTPCookieFromCookieItem( $soCookie, $isIndexOrName='', $sURL='' ) {
-        $_sDomain = $sURL ? parse_url( $sURL, PHP_URL_HOST ) : null;
+        $_sDomain = $sURL ? '.' . parse_url( $sURL, PHP_URL_HOST ) : null;
         if ( $soCookie instanceof WP_Http_Cookie ) {
             $soCookie->domain = $soCookie->domain ? $soCookie->domain : $_sDomain; /* @see WP_Http_Cookie::__construct() */
             $soCookie->path   = $soCookie->path ? $soCookie->path : '/';
@@ -226,11 +227,20 @@ class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
             $_aSetCookies     = is_scalar( $_asSetCookies )
                 ? ( array ) preg_split( "/[\r\n]+/", $_asSetCookies, 0, PREG_SPLIT_NO_EMPTY )
                 : $_asSetCookies;
+            $_sSubDomain      = self::getSubDomain( $sURL );
+
             foreach( $_aSetCookies as $_iIndex => $_sSetCookieEntry ) {
                 if ( ! $_sSetCookieEntry ) {
                     continue;
                 }
-                $_aRequestCookies[] = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry, $sURL );
+                $_oWPHttpCookie = self::___getSetCookieEntryConvertedToWPHTTPCookie( $_sSetCookieEntry, $sURL );
+
+                // Drop third party cookies if the $sURL parameter is given and the cookie has the domain attribute.
+                $_bCheckDomain  = isset( $_oWPHttpCookie->domain ) && $_sSubDomain;
+                if ( $_bCheckDomain && false === stripos( $_oWPHttpCookie->domain, $_sSubDomain ) ) {
+                    continue;
+                }
+                $_aRequestCookies[] = $_oWPHttpCookie;
             }
             return $_aRequestCookies;
 
