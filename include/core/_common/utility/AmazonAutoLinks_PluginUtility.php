@@ -724,6 +724,21 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
+     * @return string
+     * @since  4.5.0  Moved from `AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection`.
+     */
+    static public function getProxySettingScreenURL() {
+        return add_query_arg(
+            array(
+                'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
+                'tab'       => 'proxy',
+            ),
+            admin_url( 'edit.php' )
+        );
+    }
+
+    /**
      * Returns a warning message for when PA-API keys are not set.
      * @return  string
      * @since   4.0.0

@@ -175,17 +175,6 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
         }
 
-        private function ___getProxySettingScreenURL() {
-            return add_query_arg(
-                array(
-                    'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                    'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
-                    'tab'       => 'proxy',
-                ),
-                admin_url( 'edit.php' )
-            );
-        }
-
     /**
      * @return string
      */
@@ -197,7 +186,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             ? ''
             : sprintf(
                 __( 'If this continues, try enabling the proxy from <a href="%1$s">here</a>.', 'amazon-auto-links' ),
-                $this->___getProxySettingScreenURL()
+                $this->getProxySettingScreenURL()
             ) . ' ';
         $_sReloadButton  = '<a class="button button-small button-reload">'
                 . __( 'Reload', 'amazon-auto-links' )
