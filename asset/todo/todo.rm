@@ -2,7 +2,6 @@
 
 ## Minor
 - [4.5.0] Fix: Too many cookies are stored.
-- [4.5.0] the embed unit type should capture rating information
 - [4.5.0] the embed unit type should update product data after scraping
 - [4.5.0] Create a stylesheet that applies to all the templates. 
 - [4.5.0] Fix image widths displayed with the %content% tag.
