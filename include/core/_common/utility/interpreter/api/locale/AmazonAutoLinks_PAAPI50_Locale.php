@@ -111,6 +111,14 @@ class AmazonAutoLinks_PAAPI50_Locale {
     }
 
     /**
+     * @return string
+     * @since  4.5.0
+     */
+    public function getLicenseAgreementURL() {
+        return $this->oAPILocale->sLicenseURL;
+    }
+
+    /**
      * @param  string $sMethodName
      * @param  array $aArguments
      * @return mixed|void
