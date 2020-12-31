@@ -59,6 +59,12 @@ class AmazonAutoLinks_PAAPI50_Locale_IN extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sLicenseURL = 'https://affiliate-program.amazon.in/help/operating/agreement';
 
     /**
+     * @var string
+     * @since 4.5.0
+     */
+    public $sDisclaimer = 'CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON SELLER SERVICES PRIVATE LIMITED. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.';
+
+    /**
      * @return array
      */
     public function getLanguages() {

@@ -59,6 +59,12 @@ class AmazonAutoLinks_PAAPI50_Locale_JP extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sLicenseURL = 'https://affiliate.amazon.co.jp/help/operating/paapilicenseagreement';
 
     /**
+     * @var string
+     * @since 4.5.0
+     */
+    public $sDisclaimer = '［「本アプリケーション内」／「本サイト上」］で表示されるコンテンツの一部は、アマゾンジャパン合同会社またはその関連会社により提供されたものです。これらのコンテンツは「現状有姿」で提供されており、随時変更または削除される場合があります。';
+
+    /**
      * @return array
      */
     public function getLanguages() {

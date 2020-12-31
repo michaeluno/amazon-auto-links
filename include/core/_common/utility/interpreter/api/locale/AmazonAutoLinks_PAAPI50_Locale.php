@@ -119,6 +119,14 @@ class AmazonAutoLinks_PAAPI50_Locale {
     }
 
     /**
+     * @return string
+     * @since  4.5.0
+     */
+    public function getDisclaimer() {
+        return $this->oAPILocale->sDisclaimer;
+    }
+
+    /**
      * @param  string $sMethodName
      * @param  array $aArguments
      * @return mixed|void

@@ -59,6 +59,12 @@ class AmazonAutoLinks_PAAPI50_Locale_SE extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sLicenseURL = 'https://affiliate-program.amazon.se/help/operating/policies/#Associates%20Program%20IP%20License';
 
     /**
+     * @var string
+     * @since 4.5.0
+     */
+    public $sDisclaimer = 'CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.';
+
+    /**
      * @return array
      * @see    https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html#valid-languages
      */

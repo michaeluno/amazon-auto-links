@@ -53,6 +53,12 @@ class AmazonAutoLinks_PAAPI50_Locale_TR extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sDefaultCurrency = 'TRY';
 
     /**
+     * @var string
+     * @since 4.5.0 Seems the content is not available yet.
+     */
+    public $sLicenseURL = 'https://gelirortakligi.amazon.com.tr/help/operating/policies';
+
+    /**
      * @return array
      */
     public function getLanguages() {

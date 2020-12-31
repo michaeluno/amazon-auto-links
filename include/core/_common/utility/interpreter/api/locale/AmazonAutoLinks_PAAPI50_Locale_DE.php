@@ -58,6 +58,12 @@ class AmazonAutoLinks_PAAPI50_Locale_DE extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sLicenseURL = 'https://partnernet.amazon.de/help/operating/license';
 
     /**
+     * @var string
+     * @since 4.5.0
+     */
+    public $sDisclaimer = 'BESTIMMTE INHALTE, DIE [IN DIESER ANWENDUNG oder AUF DIESER WEBSITE ERSCHEINEN, je nachdem, was zutrifft] STAMMT VON AMAZON EUROPE CORE S.à r.l. DIESE INHALTE WERDEN IN DER VORLIEGENDEN FORM BEREITGESTELLT UND KÖNNEN JEDERZEIT GEÄNDERT ODER ENTFERNT WERDEN.';
+
+    /**
      * @return array
      */
     public function getLanguages() {

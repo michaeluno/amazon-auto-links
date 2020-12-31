@@ -60,6 +60,12 @@ class AmazonAutoLinks_PAAPI50_Locale_MX extends AmazonAutoLinks_PAAPI50_Locale_B
     public $sLicenseURL = 'https://afiliados.amazon.com.mx/help/operating/policies#Associates%20Program%20IP%20License';
 
     /**
+     * @var string
+     * @since 4.5.0
+     */
+    public $sDisclaimer = 'PARTE DEL CONTENIDO QUE APARECE [EN ESTA APLICACIÓN o EN ESTE SITIO, según fuera aplicable] PROCEDE DE AMAZON. ESTE CONTENIDO SE PROPORCIONA ‘EN LAS CONDICIONES EN QUE SE ENCUENTRA’ Y ESTÁ SUJETO A MODIFICACIÓN O ELIMINACIÓN EN CUALQUIER MOMENTO.';
+
+    /**
      * @return array
      */
     public function getLanguages() {
