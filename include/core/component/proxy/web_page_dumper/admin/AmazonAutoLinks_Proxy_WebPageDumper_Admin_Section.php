@@ -101,6 +101,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
     }
 
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+        if ( $aInputs[ 'enable' ] && empty( $aInputs[ 'list' ] ) ) {
+            $oAdminPage->setSettingNotice( __( 'The list is empty.', 'amazon-auto-links' ) );
+            return $aOldInputs;
+
+        }
         if ( $aInputs[ 'enable' ] && ! $this->getElement( $aOldInputs, array( 'enable' ) ) ) {
             $this->___renewAmazonCookies();
         }
