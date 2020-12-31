@@ -29,6 +29,15 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
         );
     }
 
+    /**
+     * @param  string $sLocale The locale slug.
+     * @return boolean
+     * @since  4.5.0
+     */
+    static public function exists( $sLocale ) {
+        return in_array( strtoupper( $sLocale ), self::getLocales(), true );
+    }
+
     static private $___aLocaleObjects;
     /**
      * Returns supported locale objects.
