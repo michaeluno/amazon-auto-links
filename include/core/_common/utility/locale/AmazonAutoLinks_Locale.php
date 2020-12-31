@@ -62,6 +62,14 @@ class AmazonAutoLinks_Locale {
     }
 
     /**
+     * @return string The country name.
+     * @since  4.5.0
+     */
+    public function getName() {
+        return $this->oLocale->getName();
+    }
+
+    /**
      * @return string
      * @since  4.3.4
      */

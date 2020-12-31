@@ -42,6 +42,14 @@ class AmazonAutoLinks_Locale_IT extends AmazonAutoLinks_Locale_Base {
     public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAjUlEQVRIS2NkqPITZ2D4s4eBgUEHiHGCJvFgfNIYcpr5WXjVMzIwXPnFwOLCyFDldZmQ5SCTqO0AkJkgR4Ac8B/E0TfTxeviYx4tJIXAf29/vOq3790Llh91wGgIjIbAaAiMhsBoCIyGwGgIjIbAoAiBAWuUMjD8Pw8MAXCzfB+wfahFz2Y5yPLfDKyeAJLRsoJQI/N3AAAAAElFTkSuQmCC';
 
     /**
+     * @return string The country name.
+     * @since  4.5.0
+     */
+    public function getName() {
+        return __( 'Italy', 'amazon-auto-links' );
+    }
+
+    /**
      * @return string
      */
     public function getLabel() {

@@ -42,6 +42,14 @@ class AmazonAutoLinks_Locale_SE extends AmazonAutoLinks_Locale_Base {
     public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAmUlEQVRIS2OUclvky8jINJuBgUEciHGCJ84xKHIye5fgU06M3Mv///+lMkq7L3lByHKQaTRwAMjYlyAH/AexNDU18Lp6d4ELirzrhD3E+BKnmuvXb4DlRh0wGgKjITDwIfC/iwFcDjCECVCUr0nWvOoDpBwYdcCAh8BoXTAaAqMhMBoCA9wofcYIbZbPAdYLYnRulj8DNsszAARqsQATyOMBAAAAAElFTkSuQmCC';
 
     /**
+     * @return string The country name.
+     * @since  4.5.0
+     */
+    public function getName() {
+        return __( 'Sweden', 'amazon-auto-links' );
+    }
+
+    /**
      * @return string
      */
     public function getLabel() {

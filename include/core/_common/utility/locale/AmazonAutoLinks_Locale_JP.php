@@ -47,6 +47,14 @@ class AmazonAutoLinks_Locale_JP extends AmazonAutoLinks_Locale_Base {
     public $sBlackCurtainURL = 'https://www.amazon.co.jp/gp/product/black-curtain-redirect.html';
 
     /**
+     * @return string The country name.
+     * @since  4.5.0
+     */
+    public function getName() {
+        return __( 'Japan', 'amazon-auto-links' );
+    }
+
+    /**
      * @return string
      */
     public function getLabel() {

@@ -62,6 +62,14 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
     // Methods to override.
 
     /**
+     * @return string The country name.
+     * @since  4.5.0
+     */
+    public function getName() {
+        return 'THE COUNTRY NAME (Default)';
+    }
+
+    /**
      * @return string
      * @remark Override it.
      */
