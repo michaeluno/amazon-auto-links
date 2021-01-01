@@ -9,7 +9,7 @@
  */
 
 /**
- * Updates the plugin database table.
+ * Updates the language and currency options based on the selected locale (country) unit option.
  * @since   4.3.0
  *
  */
