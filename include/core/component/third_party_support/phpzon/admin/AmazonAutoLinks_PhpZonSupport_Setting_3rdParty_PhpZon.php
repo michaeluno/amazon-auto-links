@@ -74,7 +74,10 @@ class AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon extends AmazonAutoLi
                     array(
                         'field_id'  => '_arrow',
                         'save'      => 'false',
-                        'content'   => ' -> ',
+                        'content'   => '<span class="icon-right-arrow dashicons dashicons-arrow-right-alt"></span>',
+                        'class'         => array(
+                            'fieldset' => 'container-right-arrow'
+                        ),
                     ),
                     array(
                         'field_id'      => 'aal',
@@ -83,7 +86,6 @@ class AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon extends AmazonAutoLi
                         'label'         => AmazonAutoLinks_TemplateOption::getInstance()->getUsableTemplateLabels(),
                     ),
                 ),
-
             )
         );    
     

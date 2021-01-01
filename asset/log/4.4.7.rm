@@ -1,1 +1,2 @@
-- Fixed a bug that Amazon site cookies were not stored properly. 
+- Fixed a bug that Amazon site cookies were not stored properly.
+- Tweaked the style of UI of the `3rd Party` tab. 

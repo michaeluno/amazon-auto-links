@@ -18,16 +18,22 @@ class AmazonAutoLinks_AdminPage_Setting_3rdParty extends AmazonAutoLinks_AdminPa
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
             'tab_slug'  => '3rd_party',
             'title'     => __( '3rd Party', 'amazon-auto-links' ),
             'order'     => 60,
+            'style'     => $this->isDebugMode()
+                ? AmazonAutoLinks_SettingsAdminPageLoader::$sDirPath . '/asset/css/third-party.css'
+                : AmazonAutoLinks_SettingsAdminPageLoader::$sDirPath . '/asset/css/third-party.min.css',
         );
     }
 
+    /**
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
+     */
     protected function _doTab( $oAdminPage ) {
         echo "<div class='right-submit-button'>"
                 . get_submit_button()  
