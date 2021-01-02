@@ -62,11 +62,13 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
     /**
      * Performs a test request.
      *
-     * @remark      Used in the Authentication plugin setting admin page.
-     * @return      boolean|string  If succeeds, returns true; otherwise, the error message.
-     * @since       3.9.0
+     * @remark Used in the `Associates` plugin setting admin screen.
+     * @param  integer $iCacheDuration
+     * @return boolean|string  If succeeds, returns true; otherwise, the error message.
+     * @since  3.9.0
+     * @since  4.5.0 Added the `$iCacheDuration` parameter.
      */
-    public function test() {
+    public function test( $iCacheDuration=600 ) {
 
         $_sPrevRequestType     = $this->___sRequestType;
         $this->___sRequestType = 'api50_test';
@@ -74,24 +76,18 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
             0 => 'WordPress',  1 => 'PHP',  2 => 'MySQL',
             3 => 'JavaScript', 4 => 'HTML', 5 => 'CSS'
         );
-        $_iDigit      = $this->___getFirstTwoDigitsOfCurrentMinute();
+        $_iDigit      = $this->___getFirstDigitOfCurrentMinute();
         $_sKeyword    = isset( $_aKeywords[ $_iDigit ] )
             ? $_aKeywords[ $_iDigit ]
             : $_aKeywords[ 0 ];
         $_aPayload    = array(
                 'Keywords'      => $_sKeyword,
-                // 'ItemPage'      => 1,
                 'ItemCount'     => 1,
                 'Operation'     => 'SearchItems',
-                // 'ItemIds' => array( '2016212594', ),
-                // 'Operation' => 'GetItems',
-                // 'Operation' => 'GetBrowseNodes',
-                // "BrowseNodeIds" => array( '3040', '3045' ),
-                // 'LanguagesOfPreference' => array( 'en_US', ),
                 'Resources'     => array(),
             ) + $this->___aPayload;
 
-        $_aResponse = $this->request( $_aPayload, 60 * 10 );
+        $_aResponse = $this->request( $_aPayload, $iCacheDuration );
 
         $this->___sRequestType = $_sPrevRequestType;
         if ( isset( $_aResponse[ 'Error' ] ) ) {
@@ -101,7 +97,7 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         return true;
 
     }
-        private function ___getFirstTwoDigitsOfCurrentMinute() {
+        private function ___getFirstDigitOfCurrentMinute() {
             $_iCurrentMinute = ( integer ) date( 'i' );
             $_dCurrentMinute = $_iCurrentMinute / 10;
             return ( integer ) floor( $_dCurrentMinute );
