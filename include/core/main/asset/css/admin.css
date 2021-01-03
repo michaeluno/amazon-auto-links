@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.0.3
+	@version 1.0.4
  */
 /* General */
 .width-full,
@@ -22,6 +22,11 @@
 .postbox .amazon-auto-links-section .width-two-third
 {
 	width: 76%;
+}
+
+/* Admin Page */
+#post-body > .amazon-auto-links-content {
+	margin-bottom: 0;
 }
 
 /* Form fields */
