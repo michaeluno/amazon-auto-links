@@ -10,9 +10,8 @@
 
 /**
  * Creates 'button' custom post type.
- * 
-
- * @since       3
+ *
+ * @since 3
  */
 class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_ListTable {
     
@@ -207,8 +206,8 @@ td .description {
 }
 CSS;
         return $this->oUtil->isDebugMode()
-            ? $this->oUtil->getCSSMinified( $_sCSS )
-            : trim( $_sCSS );
+            ? trim( $_sCSS )
+            : $this->oUtil->getCSSMinified( $_sCSS );
 
     }
 }
