@@ -11,8 +11,9 @@
 /**
  * Adds the 'Generator' tab to the 'Tools' page of the loader plugin.
  * 
- * @since       3
- * @extends     AmazonAutoLinks_AdminPage_Tab_Base
+ * @since      3
+ * @extends    AmazonAutoLinks_AdminPage_Tab_Base
+ * @deprecated 4.5.0
  */
 class AmazonAutoLinks_AdminPage_Setting_Authentication extends AmazonAutoLinks_AdminPage_Tab_Base {
 

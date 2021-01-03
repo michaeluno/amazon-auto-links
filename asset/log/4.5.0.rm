@@ -1,2 +1,5 @@
+- Added the ability to set Associate IDs and PA-API key pairs for multiple locales.  
+- Added the `Associates` setting tab.
 - Added the ability to utilize Web Page Dumper to help HTTP requests. 
 - Fixed an issue that the `Link Style Query Key` general option could be empty, which resulted in unit RSS and JSON feeds broken.	
+- Deprecated the `Authentication` setting tab.

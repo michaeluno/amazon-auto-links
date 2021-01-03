@@ -11,7 +11,8 @@
 /**
  * Adds the 'Authentication Keys' section to the 'Authentication' tab.
  * 
- * @since       3
+ * @since      3
+ * @deprecated 4.5.0
  */
 class AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys extends AmazonAutoLinks_AdminPage_Section_Base {
 

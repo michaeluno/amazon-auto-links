@@ -32,6 +32,7 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
         );
 
         new AmazonAutoLinks_Admin_Settings_Event_Ajax_LocaleSelect;
+        new AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck;
 
     }    
     

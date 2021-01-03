@@ -1,0 +1,134 @@
+/**
+ * @name Admin Tab - Associates
+ * @version 1.0.0
+ */
+
+
+/* Nested Fields */
+.locales fieldset.multiple-nesting {
+    margin-bottom: 0.4em;
+}
+
+
+.title-disclaimer {
+    vertical-align: top;
+    margin-bottom: 0.72em;
+}
+.container-disclaimer {
+    display: inline-block;
+}
+
+
+.locales .with-nested-fields > .amazon-auto-links-fieldset.child-fieldset > .amazon-auto-links-child-field-title {
+    margin: 0.4em 0 0em !important;
+    width: auto;
+    vertical-align: middle;
+    min-width: 146px;
+}
+.locales .paapi .with-nested-fields > .amazon-auto-links-fieldset.child-fieldset > .amazon-auto-links-child-field-title {
+    min-width: 132px; /* 146px (.title-locale-field:min-width) - 14px (.amazon-auto-links-fieldset.multiple-nesting: margin-left) */
+}
+.locales fieldset .amazon-auto-links-fields {
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+/* PA-API Status Field  */
+fieldset.fieldset-connectivity label {
+    width: auto;
+}
+.status-connectivity {
+    display: inline-block;
+}
+.status-connectivity > span {
+    margin-right: 0.4em;
+    vertical-align: middle;
+}
+.status-connected {
+    color: #0fb90f;
+    text-align: right;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.72em;
+}
+.status-connectivity.connected,
+.status-connectivity.disconnected
+{
+    font-weight: normal;
+}
+.status-connectivity.connected {
+    color: green;
+}
+.status-connectivity.disconnected {
+    color: red;
+}
+.status-connectivity.untested {
+    color: inherit;
+}
+
+
+.country-name {
+    display: inline-block;
+    width: auto;
+}
+.country-flag {
+    text-align: right;
+    display: inline-block;
+}
+
+.market-place-domain {
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+.paapi.amazon-auto-links-fieldset > .amazon-auto-links-fields > .amazon-auto-links-field.with-nested-fields > .amazon-auto-links-fieldset.multiple-nesting {
+    margin-left: 14px;
+}
+
+/* PA-API Check */
+.container-button {
+    display: inline-block;
+    vertical-align: middle;
+}
+.response-text-paapi-check {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 1em;
+    width: 78%;
+}
+
+/* Ajax Spinner */
+.aal-spinner {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto;
+    margin-left: 0.5em;
+}
+/* Ajax Response Text */
+.response-text-paapi-check > div.container-response-text {
+    margin: 0 1em;
+    padding: 0;
+}
+.response-text-paapi-check > div.container-response-text > p {
+    margin: 0;
+    padding: 0 1.2em 0 1em;
+    font-size: 13px;
+    margin: 0.3em 0 0.48em;
+}
+
+/* Field Error */
+span.error {
+    color: red;
+    margin: 0 1em;
+}
+
+/* General - should be placed at the bottom to override the `display` property */
+.stay-right {
+    text-align: right;
+    float: right;
+    clear: right;
+}
+.hidden {
+    display: none;
+}

@@ -38,7 +38,8 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
 
         // Tabs
-        new AmazonAutoLinks_AdminPage_Setting_Authentication( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_Main_AdminPage_Tab_Associates( $this->oFactory, $this->sPageSlug );
+        // new AmazonAutoLinks_AdminPage_Setting_Authentication( $this->oFactory, $this->sPageSlug ); // @deprecated 4.5.0
         new AmazonAutoLinks_AdminPage_Setting_General( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_AdminPage_Setting_Default( $this->oFactory, $this->sPageSlug );
         new AmazonAutoLinks_AdminPage_Setting_Cache( $this->oFactory, $this->sPageSlug );

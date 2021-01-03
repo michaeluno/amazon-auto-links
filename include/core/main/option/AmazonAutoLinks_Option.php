@@ -532,10 +532,18 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     /**
      * Checks whether the API keys are set and it has been verified.
      * @since       3
+     * @deprecated  4.5.0       Use `getPAAPIStatus()`.
+     * @see         getPAAPIStatus()
      * @return      boolean     true if connected; otherwise false.
+     * @todo There are sill lines using this method.
      */
     public function isAPIConnected() {
-        return ( boolean ) $this->get( 'authentication_keys', 'api_authentication_status' );
+
+        // @deprecated 4.5.0
+        // return ( boolean ) $this->get( 'authentication_keys', 'api_authentication_status' );
+
+        return true === $this->getPAAPIStatus( $this->get( 'authentication_keys', 'server_locale' ) );
+
     }
 
     /**
@@ -614,5 +622,85 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     public function isAdvancedProductFiltersAllowed() {
         return false;
     }
-    
+
+    /**
+     * @param  string $sLocale
+     * @return string
+     * @since  4.5.0
+     */
+    public function getAssociateID( $sLocale ) {
+        $_nsAssociateID = $this->get( array( 'associates', $sLocale, 'associate_id' ) );
+        if ( ! empty( $_nsAssociateID ) ) {
+            return $_nsAssociateID;
+        }
+        // For backward compatibility with below 4.5.0.
+        if ( $this->get( array( 'unit_default', 'country' ), '' ) === $sLocale ) {
+            $_sUnitDefaultAssociateID = $this->get( array( 'unit_default', 'associate_id' ), '' );
+            if ( $_sUnitDefaultAssociateID ) {
+                return $_sUnitDefaultAssociateID;
+            }
+        }
+        return $this->get( array( 'authentication_keys', 'server_locale' ), '' ) === $sLocale
+            ? ( string ) $this->get( array( 'authentication_keys', 'associates_test_tag' ) )
+            : '';
+    }
+    /**
+     * @param  string  $sLocale
+     * @return boolean|null null: untested. true: connected, false: disconnected.
+     * @since  4.5.0
+     */
+    public function getPAAPIStatus( $sLocale ) {
+
+        /**
+         * Possible values:
+         *  - null - the user hasn't saved the settings
+         *  - '' (empty string)   the user saved the settings but did not fill the options of this locale
+         *  - 1 (string number) - connected
+         *  - 0 (string number) - disconnected (error occurred in tests)
+         */
+        $_bnStatus = $this->get( array( 'associates', $sLocale, 'paapi', 'status' ) );
+        if ( strlen( $_bnStatus ) ) {
+            return ( boolean ) $_bnStatus;
+        }
+        // For backward-compatibility with below 4.5.0
+        $_sLocale  = $this->get( array( 'authentication_keys', 'server_locale' ) );
+        if ( $_sLocale !== $sLocale ) {
+            return null;
+        }
+        $_bnStatus = $this->get(
+            array( 'authentication_keys', 'api_authentication_status' )
+        );
+        return null === $_bnStatus ? null : ( boolean ) $_bnStatus;
+
+    }
+
+    /**
+     * @param  string $sLocale
+     * @return string
+     * @since  4.5.0
+     */
+    public function getPAAPIAccessKey( $sLocale ) {
+        $_nsAccessKey = $this->get( array( 'associates', $sLocale, 'paapi', 'access_key' ) );
+        if ( null !== $_nsAccessKey ) {
+            return ( string ) $_nsAccessKey;
+        }
+        return $sLocale === $this->get( array( 'authentication_keys', 'server_locale' ), '' )
+            ? ( string ) $this->get( array( 'authentication_keys', 'access_key' ), '' )
+            : '';
+    }
+    /**
+     * @param  string $sLocale
+     * @return string
+     * @since  4.5.0
+     */
+    public function getPAAPISecretKey( $sLocale ) {
+        $_nsAccessKey = $this->get( array( 'associates', $sLocale, 'paapi', 'secret_key' ) );
+        if ( null !== $_nsAccessKey ) {
+            return ( string ) $_nsAccessKey;
+        }
+        return $sLocale === $this->get( array( 'authentication_keys', 'server_locale' ), '' )
+            ? ( string ) $this->get( array( 'authentication_keys', 'access_key_secret' ), '' )
+            : '';
+    }
+
 }

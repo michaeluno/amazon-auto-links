@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.4.5 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.5.0b01 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -407,6 +407,8 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php", 
     "AmazonAutoLinks_SettingsAdminPageLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php", 
     "AmazonAutoLinks_AdminPage_Setting_3rdParty" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php", 
+    "AmazonAutoLinks_Main_AdminPage_Section_Associates" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php", 
+    "AmazonAutoLinks_Main_AdminPage_Tab_Associates" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Tab_Associates.php", 
     "AmazonAutoLinks_AdminPage_Setting_Authentication" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php", 
     "AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php", 
     "AmazonAutoLinks_AdminPage_Setting_Cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php", 
@@ -422,6 +424,7 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php", 
     "AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template.php", 
     "AmazonAutoLinks_Admin_Settings_Event_Ajax_LocaleSelect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_LocaleSelect.php", 
+    "AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php", 
     "AmazonAutoLinks_FormFields_Setting_ExternalScript" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php", 
     "AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/form_field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php", 
     "AmazonAutoLinks_AdminPage_Setting_General" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General.php", 
