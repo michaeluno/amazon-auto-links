@@ -18,7 +18,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Cache extends AmazonAutoLinks_UnitPostMeta
      */ 
     public function setUp() {
 
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache( $this );
         $_aFields = $_oFields->get( 
             '',     // field id prefix
             'category'  // unit type

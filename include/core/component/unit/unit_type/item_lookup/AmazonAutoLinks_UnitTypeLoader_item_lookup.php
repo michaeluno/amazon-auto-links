@@ -44,8 +44,8 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
     /**
      * Adds post meta boxes.
      * 
-     * @since       3.3.0
-     * @return      void
+     * @since   3.3.0
+     * @param   string $sScriptPath
      */
     protected function _loadAdminComponents( $sScriptPath ) {
         
@@ -92,5 +92,4 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
         return __( 'Item Look-up', 'amazon-auto-links' );
     }
 
-   
 }

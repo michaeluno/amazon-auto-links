@@ -24,7 +24,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_feed extends AmazonAutoLinks_UnitPost
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_FeedUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_FeedUnit_Main( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
                 continue;

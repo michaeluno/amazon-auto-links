@@ -26,7 +26,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilterAdvance
         $this->addSettingFields( $this->_sSectionID );
 
         $_aClassNames = array(
-            'AmazonAutoLinks_FormFields_ProductFilterAdvanced',
+            'AmazonAutoLinks_FormFields_Unit_ProductFilterAdvanced',
         );
         $this->_addFieldsByClasses( $_aClassNames );
                     

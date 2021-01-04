@@ -24,15 +24,13 @@ class AmazonAutoLinks_UnitPostMetaBox_Advanced_item_lookup extends AmazonAutoLin
      * Sets up form fields.
      */ 
     public function setUp() {
-        
-        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced;
+        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;
             }
             $this->addSettingFields( $_aField );
         }
-                    
     }
     
     /**

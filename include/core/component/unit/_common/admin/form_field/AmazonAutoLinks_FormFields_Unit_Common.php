@@ -2,9 +2,10 @@
 /**
  * Provides the form fields definitions.
  * 
- * @since           3.1.0
+ * @since 3.1.0
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.
@@ -107,7 +108,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
             )
         );
         
-        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit( $this->oFactory );
         $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );             
         
         return array_merge(

@@ -34,7 +34,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
             'AmazonAutoLinks_FormFields_Button_Selector',
         );
         foreach( $_aClasses as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $this );
             $_aFields = $_oFields->get();
             foreach( $_aFields as $_aField ) {           
                 $this->addSettingFields( $_aField );

@@ -20,7 +20,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Template extends AmazonAutoLinks_UnitPostM
 
         // @deprecated 4.0.0
         // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport( $this );
         $_aFields = $_oFields->get(
             '',     // field id prefix
             'category'  // unit type

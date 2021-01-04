@@ -25,7 +25,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Cache extends Amazon
         );        
         $this->addSettingFields( $this->_sSectionID );
         
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache( $this );
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );

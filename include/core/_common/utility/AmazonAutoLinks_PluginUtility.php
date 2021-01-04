@@ -710,15 +710,18 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
     
     /**
+     * @param       array       $aAdditionalQuery   Used to specify a locale.
      * @return      string
+     * @since       unknown
+     * @since       4.5.0       Changed the tab to Associates as the Authentication tab is deprecated. Added the `$aAdditionalQuery` parameter.
      */
-    static public function getAPIAuthenticationPageURL() {
+    static public function getAPIAuthenticationPageURL( array $aAdditionalQuery=array() ) {
         return add_query_arg(
             array( 
                 'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
                 'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                'tab'       => 'authentication',
-            ), 
+                'tab'       => 'associates',
+            ) + $aAdditionalQuery,
             admin_url( 'edit.php' )
         );
     }
@@ -741,13 +744,16 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Returns a warning message for when PA-API keys are not set.
      * @return  string
+     * @param   string  $sLocale
      * @since   4.0.0
+     * @since   4.5.0   Added the `$sLocale` parameter.
      */
-    static public function getAPIKeyUnsetWarning() {
+    static public function getAPIKeyUnsetWarning( $sLocale='' ) {
+        $_aAdditionalQueries = $sLocale ? array( 'locale' => $sLocale ) : array();
         return '<span class="warning">* '
             . sprintf(
                 __( '<a href="%1$s">Amazon Product Advertising API keys</a> must be set to enable this option.', 'amazon-auto-links' ),
-                self::getAPIAuthenticationPageURL()
+                self::getAPIAuthenticationPageURL( $_aAdditionalQueries )
             )
             . '</span>';
     }

@@ -20,20 +20,17 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_New extends AmazonAutoLinks
      * Returns a list of classes that define form fields.
      * @access      protected       The extended ..._New  class will override this mthoed.
      * @return      array
+     * @todo        Rename the method name.
      */
-    protected function getFormFieldClasses() {         
-
+    protected function getFormFieldClasses() {
         return array(
-            // 'AmazonAutoLinks_FormFields_AutoInsert_GoBack',
             'AmazonAutoLinks_FormFields_AutoInsert_Status',
-            // 'AmazonAutoLinks_FormFields_AutoInsert_PostID',
             'AmazonAutoLinks_FormFields_AutoInsert_Area',
             'AmazonAutoLinks_FormFields_AutoInsert_Static',
             'AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable',
             'AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable',
             'AmazonAutoLinks_FormFields_AutoInsert_Save',
-        );      
-     
+        );
     }    
         
     /**

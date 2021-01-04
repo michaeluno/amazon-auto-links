@@ -272,7 +272,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         private function ___getAPIResponse( array $aASINs, $sAssociateID, $sLocale, $sCurrency, $sLanguage ) {
 
             $_oOption     = AmazonAutoLinks_Option::getInstance();
-            if ( ! $_oOption->isAPIConnected() ) {
+            if ( ! $_oOption->getPAAPIStatus( $sLocale ) ) {
                 return array();
             }
             $_sPublicKey  = $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );

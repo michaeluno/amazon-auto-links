@@ -25,7 +25,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_search extends AmazonAutoLinks_UnitPo
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_SearchUnit_ProductSearch;
+        $_oFields = new AmazonAutoLinks_FormFields_SearchUnit_ProductSearch( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;

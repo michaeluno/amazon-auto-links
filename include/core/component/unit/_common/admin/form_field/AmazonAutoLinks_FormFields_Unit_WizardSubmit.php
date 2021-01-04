@@ -2,9 +2,10 @@
 /**
  * Define form fields of submit fields for unit type wizards.
  *
- * @since           3.5.0
+ * @since 3.5.0
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_WizardSubmit extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_WizardSubmit extends AmazonAutoLinks_FormFields_Unit_Base {
 
     protected $_sUnitType = '';
 

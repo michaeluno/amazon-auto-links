@@ -275,7 +275,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 ? $_sItemFormat
                 : apply_filters(
                     'aal_filter_template_default_item_format_' . $sTemplateID,
-                    $this->getElement( $aUnitOptions, array( 'item_format' ), '' )   // backward-compatibility for v3 or below
+                    $this->getElement( $aUnitOptions, array( 'item_format' ), '' ),   // backward-compatibility for v3 or below
+                    $this->getElement( $aUnitOptions, array( 'country' ), 'US' )  // [4.5.0]
                 );
 
             // Append internal tags.

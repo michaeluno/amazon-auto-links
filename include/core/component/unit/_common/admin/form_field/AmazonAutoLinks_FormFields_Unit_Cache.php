@@ -2,9 +2,10 @@
 /**
  * Provides the field definitions of Cache unit options.
  * 
- * @since           3  
+ * @since 3
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_Cache extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Cache extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.

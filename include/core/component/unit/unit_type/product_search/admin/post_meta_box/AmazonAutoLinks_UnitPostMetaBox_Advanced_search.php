@@ -23,7 +23,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Advanced_search extends AmazonAutoLinks_Un
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced;
+        $_oFields = new AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( 'unit_title' === $_aField[ 'field_id' ] ) {
                 continue;

@@ -270,14 +270,15 @@ class AmazonAutoLinks_Event_Scheduler {
     static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isAPIConnected() ) {
-            return;
-        }
 
         // 4.0.1 Case: the PA-API keys are set but not for the requested locale. This occurs with embedded links.
         $_aRequestBaseInfo = explode( '|', $sAssociateIDLocaleCurLang );
         $_sLocale          = $_aRequestBaseInfo[ 1 ]; // the 2nd item
-        if ( ! $_oOption->isAPIKeySet( $_sLocale ) ) {
+        if ( ! $_oOption->isPAAPIKeySet( $_sLocale ) ) {
+            return;
+        }
+
+        if ( ! $_oOption->getPAAPIStatus( $_sLocale ) ) {
             return;
         }
 

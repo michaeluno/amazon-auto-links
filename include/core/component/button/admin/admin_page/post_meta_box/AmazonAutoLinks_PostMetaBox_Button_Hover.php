@@ -16,7 +16,7 @@ class AmazonAutoLinks_PostMetaBox_Button_Hover extends AmazonAutoLinks_PostMetaB
     
     public function setUp() {       
     
-        $_oFields = new AmazonAutoLinks_FormFields_Button_Hover;
+        $_oFields = new AmazonAutoLinks_FormFields_Button_Hover( $this );
         foreach( $_oFields->get() as $_aField ) {            
             $this->addSettingFields( $_aField );
         }     

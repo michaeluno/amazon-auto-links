@@ -49,7 +49,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         
         // Add Fields
         foreach( $this->___getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    

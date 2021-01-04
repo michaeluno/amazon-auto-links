@@ -51,7 +51,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products exte
         // Add Fields
         $_aValues = $oFactory->getValue();
         foreach( $this->___getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get( '', $_aValues ) as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    

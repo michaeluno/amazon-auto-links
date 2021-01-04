@@ -27,11 +27,12 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Base extends AmazonA
 
     /**
      * Adds form fields.
-     * @since       3.3.0
+     * @since  3.3.0
+     * @param  array $aClassNames
      */
     protected function _addFieldsByClasses( $aClassNames ) {
         foreach( $aClassNames as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $this );
             foreach( $_oFields->get() as $_aField ) {
                 $this->addSettingFields( $_aField );
             }

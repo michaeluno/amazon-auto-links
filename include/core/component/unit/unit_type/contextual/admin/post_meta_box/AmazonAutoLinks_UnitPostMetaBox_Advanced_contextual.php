@@ -15,14 +15,14 @@
  */
 class AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual extends AmazonAutoLinks_UnitPostMetaBox_Main_contextual {
 
-        /**
-         * @return      array
-         */
-        protected function _getFieldClasses() {
-            return array(
-                'AmazonAutoLinks_FormFields_ContextualUnit_Advanced',
-            );
-        }
+    /**
+     * @return      array
+     */
+    protected function _getFieldClasses() {
+        return array(
+            'AmazonAutoLinks_FormFields_ContextualUnit_Advanced',
+        );
+    }
 
     
 }

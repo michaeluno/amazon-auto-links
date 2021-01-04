@@ -2,10 +2,11 @@
 /**
  * Provides the definitions of auto-insert form fields for units.
  * 
- * @since           3  
- * @remark          The admin page and meta box access it.
+ * @since  3
+ * @since  4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
+ * @remark The admin page and meta box access it.
  */
-class AmazonAutoLinks_FormFields_Unit_AutoInsert extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_AutoInsert extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.
@@ -15,7 +16,6 @@ class AmazonAutoLinks_FormFields_Unit_AutoInsert extends AmazonAutoLinks_FormFie
      * @return      array
      */    
     public function get() {
-                        
         return array(    
             array(
                 'field_id'      => 'auto_insert',
@@ -30,5 +30,4 @@ class AmazonAutoLinks_FormFields_Unit_AutoInsert extends AmazonAutoLinks_FormFie
             ),        
         );
     }
-  
 }

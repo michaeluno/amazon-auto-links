@@ -2,13 +2,16 @@
 /**
  * Provides the common methods for creating form fields definitions.
  * 
- * @since           3  
+ * @since  3
+ * @since  4.5.0    Changed the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLinks_FormFields_Base {
+abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * 
-     * @access      protected       This class will be extended and this method will be accessed from an extended class.
+     * @access protected This class will be extended and this method will be accessed from an extended class.
+     * @param  string    $sSearchTypeKey
+     * @return string
      */
     protected function _getSearchTypeLabel( $sSearchTypeKey ) {
         switch ( $sSearchTypeKey ) {
@@ -24,7 +27,6 @@ abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLink
 
     /**
      * @param       array   $aUnitOptions
-     *
      * @return      array   A list of labels for HTML `<option>` form tags.
      * @remark      Called by the Product Search and Item Look-up unit types.
      * @since       3.5.5
@@ -52,8 +54,8 @@ abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLink
         // Check if it is a meta box. If so. use the stored locale.
         $_iPostID = AmazonAutoLinks_WPUtility::getCurrentPostID();
         if ( ! $_iPostID ) {
-//            $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
-//            return $_oLocale->getSearchIndex();
+            // $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+            // return $_oLocale->getSearchIndex();
             return array(); // not found
         }
         $_sLocale = get_post_meta(

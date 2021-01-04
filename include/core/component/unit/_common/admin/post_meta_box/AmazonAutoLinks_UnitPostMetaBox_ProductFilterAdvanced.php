@@ -19,7 +19,7 @@ class AmazonAutoLinks_UnitPostMetaBox_ProductFilterAdvanced extends AmazonAutoLi
     public function setUp() {
 
         $_aClassNames = array(
-            'AmazonAutoLinks_FormFields_ProductFilterAdvanced',
+            'AmazonAutoLinks_FormFields_Unit_ProductFilterAdvanced',
         );
         $this->_addFieldsByClasses( $_aClassNames );
                     

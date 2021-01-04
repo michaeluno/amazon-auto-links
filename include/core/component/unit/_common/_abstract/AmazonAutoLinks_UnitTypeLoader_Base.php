@@ -138,7 +138,7 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
          */
         public function replyToGetProtectedMetaKeys( $aMetaKeys ) {                
             foreach( $this->aFieldClasses as $_sClassName ) {
-                $_oFields = new $_sClassName;
+                $_oFields = new $_sClassName(); // not passing a factory object to the first parameter as it's not necessary to get only field IDs.
                 $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
             }            
             return array_merge( $aMetaKeys, $this->aProtectedMetaKeys );

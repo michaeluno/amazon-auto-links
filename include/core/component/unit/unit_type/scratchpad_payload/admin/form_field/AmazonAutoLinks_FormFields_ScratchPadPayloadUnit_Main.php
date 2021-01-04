@@ -2,20 +2,21 @@
 /**
  * Provides the definitions of form fields for the 'scratchpad_payload' unit type.
  * 
- * @since           4.1.0
+ * @since  4.1.0
+ * @since  4.5.0    Changed the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.
      * 
-     * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
+     * Pass an empty string to the parameter for meta box options.
+     *
+     * @param  string $sFieldIDPrefix
+     * @return array
      */    
     public function get( $sFieldIDPrefix='' ) {
-            
-        $_oOption = $this->oOption;
+
         $_aFields = array(  
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',

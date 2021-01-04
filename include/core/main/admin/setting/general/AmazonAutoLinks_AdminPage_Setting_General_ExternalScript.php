@@ -36,12 +36,14 @@ class AmazonAutoLinks_AdminPage_Setting_General_ExternalScript extends AmazonAut
     
     /**
      * Adds form fields.
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param       string $sSectionID
      * @since       3.1.0
      * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
-        $_oFields = new AmazonAutoLinks_FormFields_Setting_ExternalScript;
+        $_oFields = new AmazonAutoLinks_FormFields_Setting_ExternalScript( $oFactory );
         foreach( $_oFields->get() as $_aField ) {
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id,

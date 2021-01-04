@@ -30,7 +30,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_AutoInsert exte
      */
     protected function _addFields( $oFactory, $sSectionID ) {
         
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_AutoInsert;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_AutoInsert( $oFactory );
         foreach( $_oFields->get() as $_aField ) {
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id    
@@ -38,7 +38,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_AutoInsert exte
             );
         }
         
-        $_oFields = new AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton;
+        $_oFields = new AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton( $oFactory );
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {
             $oFactory->addSettingFields(

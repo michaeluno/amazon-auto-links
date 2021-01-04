@@ -2,9 +2,10 @@
 /**
  * Provides the definitions of auto-insert form fields for units.
  * 
- * @since           3.2.3
+ * @since 3.2.3
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.

@@ -44,12 +44,12 @@ class AmazonAutoLinks_Unit_Admin_Utility extends AmazonAutoLinks_PluginUtility {
      * Redirect the user to the API connect page.
      *
      * @param $oFactory
-     * @since   3.9.0
+     * @since 3.9.0
      */
     static public function checkAPIKeys( $oFactory ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( $_oOption->isAPIConnected() ) {
+        if ( $_oOption->isPAAPIConnectedByAnyLocale() ) {
             return;
         }
 

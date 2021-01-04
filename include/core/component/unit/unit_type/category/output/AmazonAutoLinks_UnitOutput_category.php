@@ -84,7 +84,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
     protected function _setProperties() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( $_oOption->isAPIConnected() ) {
+        if ( $_oOption->getPAAPIStatus( $this->oUnitOption->get( 'country' ) ) ) {
             $this->_aItemFormatDatabaseVariables[] = '%description%'; // updated in `replyToFormatProductWithDBRow()`.
             $this->_aItemFormatDatabaseVariables[] = '%content%';
             $this->_aItemFormatDatabaseVariables[] = '%feature%';     // 3.8.0

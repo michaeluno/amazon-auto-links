@@ -76,7 +76,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
         );    
         // @deprecated 4.0.0 To support default item format options for each template
         // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport; // 4.0.0+
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport( $oFactory ); // 4.0.0+
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {
             $oFactory->addSettingFields(

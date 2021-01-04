@@ -319,7 +319,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
     public function replyToEnqueueResources() {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isAPIConnected() ) {
+        if ( ! $_oOption->isPAAPIConnectedByAnyLocale() ) {
             return;
         }
         $_sScriptHandle = 'aal-now-retrieving-updater';

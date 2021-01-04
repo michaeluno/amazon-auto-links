@@ -2,15 +2,18 @@
 /**
  * Provides the definitions of form fields.
  * 
- * @since           4.0.0
+ * @since 4.0.0
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
      *
+     * @param       string  $sFieldIDPrefix
+     * @param       string  $sUnitType
      * @return      array
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
@@ -100,8 +103,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
         }
 
             /**
-             * @param string $sTemplateID
-             *
+             * @param  string $sTemplateID
              * @return string
              */
             private function ___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ) {
@@ -112,10 +114,9 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             }
 
         /**
-         * @param array $aActiveTemplateLabels
-         * @param $sFieldIDPrefix
-         * @param array $aDefaultItemFormat
-         *
+         * @param  array  $aActiveTemplateLabels
+         * @param  string $sFieldIDPrefix
+         * @param  array  $aDefaultItemFormat
          * @return array
          */
         private function ___getTemplateFormatFields( array $aActiveTemplateLabels, $sFieldIDPrefix, array $aDefaultItemFormat ) {
@@ -148,9 +149,9 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
          */
         private function ___getField_ItemFormat( $sFieldIDPrefix, $sDefault, $sTemplateID ) {
 
-            $sDefault       = apply_filters( 'aal_filter_template_default_item_format_' . $sTemplateID, $sDefault );
-
-            $_bAPIConnected = $this->oOption->isAPIConnected();
+            $_sLocale       = $this->oFactory->getValue( 'country' );
+            $sDefault       = apply_filters( 'aal_filter_template_default_item_format_' . $sTemplateID, $sDefault, $_sLocale );
+            $_bAPIConnected = ( boolean ) $this->oOption->getPAAPIStatus( $_sLocale );
             $_sDel          = $_bAPIConnected
                 ? ''
                 : "delete-line";

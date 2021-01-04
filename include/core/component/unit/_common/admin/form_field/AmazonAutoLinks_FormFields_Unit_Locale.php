@@ -2,20 +2,23 @@
 /**
  * Provides methods to retrieve field definitions for locales.
  *
- * @since           3.10.0
+ * @since 3.10.0
+ * @since 4.5.0 Change the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
-     * 
-     * @return      array
+     *
+     * @param   string $sFieldIDPrefix
+     * @return  array
      */    
     public function get( $sFieldIDPrefix='' ) {
 
-        $_bAPIKeysSet  = $this->oOption->isAPIKeySet();
+        $_sLocale      = $this->oFactory->getValue( 'country' );
+        $_bAPIKeysSet  = $this->oOption->isPAAPIKeySet( $_sLocale );
         $_aAttributes  = $_bAPIKeysSet
             ? array()
             : array(
@@ -40,7 +43,7 @@ class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_
                     __( 'When the desired language is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
                     $_bAPIKeysSet
                         ? ''
-                        : $this->getAPIKeyUnsetWarning(),
+                        : $this->getAPIKeyUnsetWarning( $_sLocale ),
                 ),
                 'attributes'        => $_aAttributes,
             ),
@@ -53,7 +56,7 @@ class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_
                     __( 'When the desired currency is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
                     $_bAPIKeysSet
                         ? ''
-                        : $this->getAPIKeyUnsetWarning(),
+                        : $this->getAPIKeyUnsetWarning( $_sLocale ),
                 ),
                 'attributes'        => $_aAttributes,
             ),

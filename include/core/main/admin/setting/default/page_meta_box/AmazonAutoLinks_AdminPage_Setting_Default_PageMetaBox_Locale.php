@@ -38,7 +38,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Locale extends Amazo
                 'AmazonAutoLinks_FormFields_Unit_Locale',
             );
             foreach( $_aClasses as $_sClassName ) {
-                $_oFields = new $_sClassName;
+                $_oFields = new $_sClassName( $this );
                 $_aFields = $_oFields->get();
                 foreach( $_aFields as $_aField ) {
                     if ( $this->oUtil->getElement( $_aField, array( 'field_id' ) ) === 'country' ) {

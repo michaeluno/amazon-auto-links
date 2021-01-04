@@ -101,7 +101,8 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
         /**
          * @return      array
          * @since       3.3.0
-         * @callback    filter      aal_filter_custom_meta_keys
+         * @param       array       $aMetaKeys
+         * @callback    add_filter  aal_filter_custom_meta_keys
          */
         public function replyToAddProtectedMetaKeys( $aMetaKeys ) {
             
@@ -117,7 +118,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
             
             );
             foreach( $_aClassNames as $_sClassName ) {
-                $_oFields = new $_sClassName;
+                $_oFields = new $_sClassName();  // not passing a factory object as it's hard and not necessary only to get field IDs.
                 $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
             }
             

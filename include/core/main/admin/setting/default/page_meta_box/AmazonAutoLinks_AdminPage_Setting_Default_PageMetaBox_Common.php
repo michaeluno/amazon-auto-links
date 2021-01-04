@@ -30,7 +30,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common extends Amazo
             'AmazonAutoLinks_FormFields_Unit_Common',
         );
         foreach( $_aClasses as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $this );
             $_aFields = $_oFields->get();
             foreach( $_aFields as $_aField ) {           
                 $this->addSettingFields( $_aField );

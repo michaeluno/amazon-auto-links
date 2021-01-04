@@ -25,7 +25,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
      */ 
     public function setUp() {
 
-        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_ItemLookupUnit_Main( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ), true ) ) {
                 continue;

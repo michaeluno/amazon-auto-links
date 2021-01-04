@@ -136,15 +136,27 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * If a meta key is specified, it returns the value of the meta.
      * @since   3
      * @since   4.2.6   Added the $asDefaults parameter.
+     * @sinee   4.5.0   Uses object caches to reduce SQL queries.
      */
     static public function getPostMeta( $iPostID, $sKey='', $asDefaults=array() ) {
 
         self::$___aDefaults_getPostMeta = self::getAsArray( $asDefaults );
         if ( $sKey ) {
+
+            if ( ! empty( $_aPostMetaCached ) && isset( $_aPostMetaCached[ $sKey ] ) ) {
+                return $_aPostMetaCached[ $sKey ];
+            }
+            $_mPostMetaSingleCached = self::getObjectCache( __METHOD__ . $iPostID . '_' . $sKey );
+            if ( ! empty( $_mPostMetaSingleCached ) ) {
+                return $_mPostMetaSingleCached;
+            }
+
             self::$___aDefaults_getPostMeta = array( $sKey => $asDefaults );
             add_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10, 5 );
             $_mValue = get_post_meta( $iPostID, $sKey, true );
             remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
+
+            self::setObjectCache( __METHOD__ . $iPostID . '_' . $sKey, $_mValue );
             return $_mValue;
         }
 
@@ -155,6 +167,11 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
         if ( ! $iPostID ) {
             self::$___aDefaults_getPostMeta = array();
             return $_aPostMeta;
+        }
+
+        $_aPostMetaCached = self::getObjectCache( __METHOD__ . $iPostID );
+        if ( ! empty( $_aPostMetaCached ) ) {
+            return $_aPostMetaCached;
         }
 
         $_aMetaKeys = get_post_custom_keys( $iPostID );
@@ -172,6 +189,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
         }
         self::$___aDefaults_getPostMeta = array();
+        self::setObjectCache( __METHOD__ . $iPostID, $_aPostMeta );
         return $_aPostMeta;                
         
     }

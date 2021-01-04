@@ -24,7 +24,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload extends AmazonAuto
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main;
+        $_oFields = new AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main( $this );
         foreach( $_oFields->get() as $_aField ) {
             if ( in_array( $_aField[ 'field_id' ], array( 'unit_title', 'country' ) ) ) {
                 continue;

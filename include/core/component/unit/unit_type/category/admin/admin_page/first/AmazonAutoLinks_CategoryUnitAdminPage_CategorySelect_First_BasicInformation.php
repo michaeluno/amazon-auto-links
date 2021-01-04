@@ -34,13 +34,14 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
     /**
      * Adds form fields.
      * @since       3
-     * @return      void
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param       string $sSectionID
      */
     protected function _addFields( $oFactory, $sSectionID ) {
         
-        $_oFieldsBasicInformation = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation;
-        $_oFieldsCommon           = new AmazonAutoLinks_FormFields_Unit_Common;
-        $_oFieldsCredit           = new AmazonAutoLinks_FormFields_Unit_Credit;
+        $_oFieldsBasicInformation = new AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation( $oFactory );
+        $_oFieldsCommon           = new AmazonAutoLinks_FormFields_Unit_Common( $oFactory );
+        $_oFieldsCredit           = new AmazonAutoLinks_FormFields_Unit_Credit( $oFactory );
         $_aFields                 = array_merge(
             array(
                 array(

@@ -383,7 +383,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultOutputFormats() {
 
-        $_bAPIConnected = $this->isAPIConnected();
+        $_bAPIConnected = ( boolean ) $this->isPAAPIConnectedByAnyLocale();
         return array(
             'unit_format' => '%text%' . PHP_EOL
                 . '%products%',  // 4.3.0
@@ -538,12 +538,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @todo There are sill lines using this method.
      */
     public function isAPIConnected() {
-
         // @deprecated 4.5.0
         // return ( boolean ) $this->get( 'authentication_keys', 'api_authentication_status' );
-
-        return true === $this->getPAAPIStatus( $this->get( 'authentication_keys', 'server_locale' ) );
-
+        return true === $this->isPAAPIConnectedByAnyLocale();
     }
 
     /**
@@ -557,25 +554,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return  boolean
      * @since   3.9.2
      * @since   4.0.1       Added the `$sLocale` parameter.
+     * @deprecated 4.5.0    Use
+     * @see isPAAPIKeySet()
      */
     public function isAPIKeySet( $sLocale='' ) {
-
-        $_sPublicKey = $this->get( 'authentication_keys', 'access_key' );
-        $_sSecretKey = $this->get( 'authentication_keys', 'access_key_secret' );
-        $_bKeysSet   = ( boolean ) ( $_sPublicKey && $_sSecretKey );
-
-        if ( ! $sLocale ) {
-            return $_bKeysSet;
-        }
-
-        // At this point, the locale is specified.
-        $_sStoredLocale = strtoupper( ( string ) $this->get( 'authentication_keys', 'server_locale' ) );
-        $sLocale        = strtoupper( ( string ) $sLocale );
-        if ( $sLocale !== $_sStoredLocale ) {
-            return false;
-        }
-        return $_bKeysSet;
-
+        return $this->isPAAPIKeySet( $sLocale );
     }
     
     /**
@@ -649,7 +632,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @return boolean|null null: untested. true: connected, false: disconnected.
      * @since  4.5.0
      */
-    public function getPAAPIStatus( $sLocale ) {
+    public function getPAAPIStatus( $sLocale='' ) {
+
+        $sLocale = empty( $sLocale ) ? $this->getMainLocale() : strtoupper( $sLocale );
 
         /**
          * Possible values:
@@ -672,6 +657,35 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         );
         return null === $_bnStatus ? null : ( boolean ) $_bnStatus;
 
+    }
+
+    /**
+     * Checks whether any locale connects with PA-API.
+     * Unlike getPAAPIStatus() that check only the main or given locale, this returns true when any of the locale is connected to PA-API
+     * @return false
+     * @since  4.5.0
+     */
+    public function isPAAPIConnectedByAnyLocale() {
+        $_bnConnected = $this->getObjectCache( __METHOD__ );
+        if ( isset( $_bnConnected ) ) {
+            return $_bnConnected;
+        }
+
+        $_bnConnected = $this->getPAAPIStatus();
+        if ( $_bnConnected ) {
+            $this->setObjectCache( __METHOD__, true );
+            return true;
+        }
+
+        $_bConnected  = false;
+        foreach( $this->getAsArray( $this->get( array( 'associates' ) ) ) as $_sLocale => $_aLocale ) {
+            if ( $this->getElement( $_aLocale, array( 'paapi', 'status' ) ) ) {
+                $_bConnected = true;
+                break;
+            }
+        }
+        $this->setObjectCache( __METHOD__, $_bConnected );
+        return $_bConnected;
     }
 
     /**
@@ -701,6 +715,56 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         return $sLocale === $this->get( array( 'authentication_keys', 'server_locale' ), '' )
             ? ( string ) $this->get( array( 'authentication_keys', 'access_key_secret' ), '' )
             : '';
+    }
+
+    /**
+     * @return string The locale code consisting of the two characters.
+     * @since  4.5.0
+     */
+    public function getMainLocale() {
+        $_nsLocale = $this->get( array( 'associates', 'locale' ) );
+        if ( null !== $_nsLocale ) {
+            return strtoupper( $_nsLocale );
+        }
+        // For backward compatibility with below 4.5.0.
+        $_sTestLocale = $this->get( array( 'authentication_keys', 'server_locale' ) );
+        if ( ! empty( $_sTestLocale ) ) {
+            return strtoupper( $_sTestLocale );
+        }
+        return strtoupper( $this->get( array( 'unit_default', 'country' ), 'US' ) );
+    }
+
+    /**
+     * @param  string  $sLocale
+     * @return boolean
+     * @since  4.5.0
+     */
+    public function isPAAPIKeySet( $sLocale='' ) {
+
+        $_sLocale = empty( $sLocale ) ? $this->getMainLocale() : $sLocale;
+        $_aPAAPI  = $this->getAsArray( $this->get( array( 'associates', $_sLocale, 'paapi' ) ) );
+        if ( $this->getElement( $_aPAAPI, array( 'access_key' ) ) && $this->getElement( $_aPAAPI, array( 'secret_key' ) ) ) {
+            return true;
+        }
+
+        // For backward compatibility with below 4.5.0.
+
+        $_sPublicKey = $this->get( 'authentication_keys', 'access_key' );
+        $_sSecretKey = $this->get( 'authentication_keys', 'access_key_secret' );
+        $_bKeysSet   = ( boolean ) ( $_sPublicKey && $_sSecretKey );
+
+        if ( ! $sLocale ) {
+            return $_bKeysSet;
+        }
+
+        // At this point, the locale is specified.
+        $_sStoredLocale = strtoupper( ( string ) $this->get( 'authentication_keys', 'server_locale' ) );
+        $sLocale        = strtoupper( ( string ) $sLocale );
+        if ( $sLocale !== $_sStoredLocale ) {
+            return false;
+        }
+        return $_bKeysSet;
+
     }
 
 }

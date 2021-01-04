@@ -16,7 +16,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Cache extends Amaz
      */ 
     public function setUp() {
         
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Cache( $this );
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );

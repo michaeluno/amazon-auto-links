@@ -19,7 +19,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template extends A
 
         // @deprecated 4.0.0
         // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport;
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport( $this );
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );

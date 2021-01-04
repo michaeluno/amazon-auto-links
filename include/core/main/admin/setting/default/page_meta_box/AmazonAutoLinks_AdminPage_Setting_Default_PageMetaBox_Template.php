@@ -28,7 +28,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Template extends Ama
 
         // @deprecated 4.0.0 To support default item format options for each template
         // $_oFields = new AmazonAutoLinks_FormFields_Unit_Template;
-        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport; // 4.0.0+
+        $_oFields = new AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport( $this ); // 4.0.0+
         $_aFields = $_oFields->get();
         foreach( $_aFields as $_aField ) {           
             $this->addSettingFields( $_aField );

@@ -49,9 +49,10 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
         );        
         
         // Add Fields
-        foreach( $this->_getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
-            foreach( $_oFields->get( '', $oFactory->getValue() ) as $_aField ) {
+        $_aUnitOptions = $oFactory->getValue();
+        foreach( $this->___getFormFieldClasses() as $_sClassName ) {
+            $_oFields = new $_sClassName( $oFactory );
+            foreach( $_oFields->get( '', $_aUnitOptions ) as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
                     $_aField
@@ -63,7 +64,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends 
         /**
          * @return  array
          */
-        private function _getFormFieldClasses() {
+        private function ___getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_ItemLookupUnit_Main',
                 'AmazonAutoLinks_FormFields_Unit_Common',

@@ -2,9 +2,10 @@
 /**
  * Provides the definitions of form fields for the 'feed' unit type.
  * 
- * @since           4.0.0
+ * @since  4.0.0
+ * @since  4.5.0    Changed the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_FeedUnit_Main extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_FeedUnit_Main extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.

@@ -173,7 +173,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
 
             // If the API keys are set, perform an API request
-            if ( ! $this->oOption->isAPIKeySet( $sLocale ) ) {
+            if ( ! $this->oOption->isPAAPIKeySet( $sLocale ) ) {
                 return array();
             }
 
@@ -320,7 +320,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * Otherwise, even failing to access to the store page, API requests can be preformed with ASIN.
          */
         $_sLocale       = $this->oUnitOption->get( 'country' );
-        if ( ! $this->oOption->isAPIKeySet( $_sLocale ) ) {
+        if ( ! $this->oOption->isPAAPIKeySet( $_sLocale ) ) {
             if ( ! empty( $this->___aErrors ) ) {
                 $this->___aErrors = array_map( array( $this, '___replyToSetASINToErrorMessage' ), $this->___aErrors, array_keys( $this->___aErrors ), array_fill(0, count( $this->___aErrors ), $_sLocale ) );
                 $_sErrors = implode( ' ', $this->___aErrors );

@@ -1,11 +1,12 @@
 <?php
 /**
  * Provides the definitions of form fields for the category type unit.
- * 
- * @since           3  
+ *
  * @remark          The admin page and meta box access it.
+ * @since  3
+ * @since  4.5.0    Changed the parent class from `AmazonAutoLinks_FormFields_Base` to `AmazonAutoLinks_FormFields_Unit_Base`.
  */
-class AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton extends AmazonAutoLinks_FormFields_Unit_Base {
 
     /**
      * Returns field definition arrays.

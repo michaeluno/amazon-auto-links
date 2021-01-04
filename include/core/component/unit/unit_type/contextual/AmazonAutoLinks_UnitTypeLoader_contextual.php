@@ -36,9 +36,7 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_UnitType
     /**
      * Stores class names of form fields.
      */
-    public $aFieldClasses = array(
-//        'AmazonAutoLinks_FormFields_URLUnit_Main',
-    );    
+    public $aFieldClasses = array();
     
     /**
      * Stores protected meta key names.

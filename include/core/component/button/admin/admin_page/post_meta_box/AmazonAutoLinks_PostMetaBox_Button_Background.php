@@ -15,8 +15,8 @@ class AmazonAutoLinks_PostMetaBox_Button_Background extends AmazonAutoLinks_Post
 
     
     public function setUp() {        
-    
-        $_oFields = new AmazonAutoLinks_FormFields_Button_Background;
+
+        $_oFields = new AmazonAutoLinks_FormFields_Button_Background( $this );
         foreach( $_oFields->get() as $_aField ) {            
             $this->addSettingFields( $_aField );
         }          

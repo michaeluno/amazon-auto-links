@@ -39,19 +39,18 @@ class AmazonAutoLinks_AdminPage_Setting_General_ProductFilters extends AmazonAut
     
     /**
      * Adds form fields.
-     * @since       3
-     * @return      void
+     * @since   3
+     * @param   AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param   string $sSectionID
      */
     protected function _addFields( $oFactory, $sSectionID ) {
-
-        $_oFields = new AmazonAutoLinks_FormFields_ProductFilter;
+        $_oFields = new AmazonAutoLinks_FormFields_ProductFilter( $oFactory );
         foreach( $_oFields->get() as $_aField ) {
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id,
                 $_aField
             );
         }
-    
     }
         
     

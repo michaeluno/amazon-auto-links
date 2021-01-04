@@ -30,8 +30,8 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
     }
 
     /**
-     * 
-     * @callback        action      load_{page slug}
+     * @param    $oFactory  AmazonAutoLinks_AdminPageFramework
+     * @callback add_action load_{page slug}
      */ 
     public function replyToLoadPage( $oFactory ) {
         
@@ -43,7 +43,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         
         // Add Fields
         foreach( $this->_getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
@@ -91,8 +91,8 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         }
     
     /**
-     * 
-     * @callback        action      do_after_{page slug}
+     * @param           AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback        add_action      do_after_{page slug}
      */
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();

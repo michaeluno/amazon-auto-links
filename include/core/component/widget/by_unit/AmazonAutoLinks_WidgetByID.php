@@ -90,12 +90,13 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
         /**
          * Adds form fields by the given class names.
          * @since       3.0.5
+         * @param       array  $aClassNames
          * @return      void
          */
         private function _addFieldsByFieldClass( $aClassNames ) {    
         
-            foreach( $aClassNames as $_sClsssName ) {            
-                $_oFields = new $_sClsssName;
+            foreach( $aClassNames as $_sClassName ) {
+                $_oFields = new $_sClassName( $this );
                 foreach( $_oFields->get() as $_aField ) {
                     
                     $_aField = $_aField + array(

@@ -16,7 +16,7 @@ class AmazonAutoLinks_PostMetaBox_Button_Border extends AmazonAutoLinks_PostMeta
     
     public function setUp() {    
 
-        $_oFields = new AmazonAutoLinks_FormFields_Button_Border;
+        $_oFields = new AmazonAutoLinks_FormFields_Button_Border( $this );
         foreach( $_oFields->get() as $_aField ) {            
             $this->addSettingFields( $_aField );
         }       

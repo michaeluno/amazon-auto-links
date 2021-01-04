@@ -32,6 +32,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
     
     /**
      * Triggered when the tab is loaded.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     public function replyToLoadTab( $oFactory ) {
       
@@ -48,8 +49,8 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         );        
         
         // Add Fields
-        foreach( $this->getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
+        foreach( $this->___getFormFieldClasses() as $_sClassName ) {
+            $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
@@ -62,7 +63,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         /**
          * @return  array
          */
-        private function getFormFieldClasses() {
+        private function ___getFormFieldClasses() {
             return array(
                 'AmazonAutoLinks_FormFields_SearchUnit_SearchType',
                 'AmazonAutoLinks_FormFields_SearchUnit_ProceedButton',

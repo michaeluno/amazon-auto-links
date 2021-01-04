@@ -1,6 +1,7 @@
 # Todos
 
 ## Minor
+- [4.5.0] Deprecate the AmazonAutoLinks_Option::isAPIConnected() and AmazonAutoLinks_Option::isAPIKeySet() methods.
 - [4.5.0][Web Page Dumper] Add an option to exclude hosts by a portion of URL.
 - [4.5.0] Deprecate the Embed -> Override Associates ID Used in URL section and use the value set in the new Associates section.
 - [4.5.0] Support multiple locales for the Link Conversion functionality.  

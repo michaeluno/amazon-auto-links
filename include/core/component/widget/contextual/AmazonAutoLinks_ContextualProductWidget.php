@@ -79,11 +79,42 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @return      array
          * @since       3.3.0
          */
-        public function replyToSetDefaultOptions( $aOptions ) {          
+        public function replyToSetDefaultOptions( $aOptions ) {
             $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
             return $aOptions + $_aDefaults;
         }
-        
+
+
+    /**
+     * @since 4.5.0
+     */
+    public function getValue() {
+        $_aParameters = func_get_args();
+        if ( empty( $_aParameters ) ) {
+            return $this->___getWidgetOptions();
+        }
+        if ( is_array( $_aParameters[ 0 ] ) ) {
+            return $this->oUtil->getElement( $this->___getWidgetOptions(), $_aParameters[ 0 ], $this->oUtil->getElement( $_aParameters, 1 ) );
+        }
+        return $this->oUtil->getElement( $this->___getWidgetOptions(), $_aParameters );
+    }
+
+    /**
+     * @return array
+     * @since  4.5.0
+     */
+    private function ___getWidgetOptions() {
+        $_aCache = AmazonAutoLinks_PluginUtility::getObjectCache( __METHOD__ . $this->oProp->oWidget->id );
+        if ( null !== $_aCache ) {
+            return $_aCache;
+        }
+        $_aOptions = $this->oUtil->getElementAsArray(
+            $this->oProp->oWidget->get_settings(),
+            $this->oProp->oWidget->number
+        );
+        AmazonAutoLinks_PluginUtility::setObjectCache( __METHOD__ . $this->oProp->oWidget->id, $_aOptions );
+        return $_aOptions;
+    }
 
     /**
      * Sets up the form.
@@ -91,18 +122,18 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      * Alternatively you may use load_{instantiated class name} method.
      */
     public function load() {
-                
+
         $_oOption       = AmazonAutoLinks_Option::getInstance();
-        $_bAPIConnected = $_oOption->isAPIConnected();
+        $_bAPIConnected = ( boolean ) $_oOption->getPAAPIStatus( $this->getValue( 'country' ) );
         if ( ! $_bAPIConnected ) {
             $this->addSettingField(
                 array(
                     'field_id'    => '_message_dummy_id',
                     'type'        => '_message',
                     'description' => array(
-                        sprintf( 
+                        sprintf(
                             __( 'Please set up API keys first from <a href="%1$s">this page</a>.', 'amazon-auto-links' ),
-                            AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL()
+                            AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL( array( 'locale' => $this->getValue( 'country' ) ) )
                         ),
                     ),
                     'save'        => false,
@@ -125,8 +156,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport',   // 4.0.0+
             'AmazonAutoLinks_FormFields_Widget_Visibility',
         );
-        $this->_addFieldsByFieldClass( $_aClasses );
-        
+        $this->___addFieldsByFieldClass( $_aClasses );
+
         // Product filters
         $this->addSettingSections(
             array(
@@ -139,10 +170,10 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 ),
             )
         );
-      
+
         // Add fields
         $this->addSettingFields( 'product_filters' );   // Set the target section.
-        $this->_addFieldsByFieldClass(
+        $this->___addFieldsByFieldClass(
             array(
                 'AmazonAutoLinks_FormFields_ProductFilter',
                 'AmazonAutoLinks_FormFields_ProductFilter_Image',
@@ -151,14 +182,14 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
 
         // Add fields
         $this->addSettingFields( '_default' );  // Set the target section.
-        $this->_addFieldsByFieldClass(
+        $this->___addFieldsByFieldClass(
             array(
-                'AmazonAutoLinks_FormFields_ProductFilterAdvanced',
+                'AmazonAutoLinks_FormFields_Unit_ProductFilterAdvanced',
             )
         );
 
         add_filter( 'field_definition_' . $this->oProp->sClassName . '_button_id', array( $this, 'replyToSetActiveButtonLabels' ) );
-        
+
     }
         /**
          * Modifies the 'button_id' field to add lables for selection.
@@ -176,9 +207,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          * @since 3.0.3
          * @param array $aClassNames
          */
-        private function _addFieldsByFieldClass( $aClassNames ) {     
+        private function ___addFieldsByFieldClass( $aClassNames ) {     
             foreach( $aClassNames as $_sClassName ) {            
-                $_oFields = new $_sClassName;
+                $_oFields = new $_sClassName( $this );
                 $_aFields = 'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport' === $_sClassName
                     ? $_oFields->get( '', 'contextual_widget' )
                     : $_oFields->get();

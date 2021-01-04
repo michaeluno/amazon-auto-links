@@ -30,6 +30,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate extends Amazo
      * A user constructor.
      * 
      * @since       3.2.0
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @return      void
      */
     protected function _construct( $oFactory ) {}
@@ -37,18 +38,18 @@ class AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate extends Amazo
     /**
      * Adds form fields.
      * @since       3.2.0
+     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param       string $sSectionID
      * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
-
-        $_oFields = new AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate;
+        $_oFields = new AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate( $oFactory );
         foreach( $_oFields->get() as $_aField ) {
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id,
                 $_aField
             );
         }
-    
     }
         
     

@@ -65,7 +65,7 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
             throw new Exception( 'A product with a pending element is not allowed.' );
         }
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isAPIKeySet( $sLocale ) ) {
+        if ( ! $_oOption->isPAAPIKeySet( $sLocale ) ) {
             return '';
         }
         return $this->_oUnitOption->get( 'show_now_retrieving_message' )

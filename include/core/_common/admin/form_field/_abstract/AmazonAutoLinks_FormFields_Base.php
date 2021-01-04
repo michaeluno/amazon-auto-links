@@ -25,9 +25,22 @@ abstract class AmazonAutoLinks_FormFields_Base extends AmazonAutoLinks_PluginUti
      * @var AmazonAutoLinks_TemplateOption
      */
     public $oTemplateOption;
-    
-    public function __construct() {
-        
+
+    /**
+     * @var AmazonAutoLinks_AdminPageFramework_Factory
+     */
+    public $oFactory;
+
+    /**
+     * AmazonAutoLinks_FormFields_Base constructor.
+     *
+     * @param AmazonAutoLinks_AdminPageFramework_Factory $oFactory
+     * @since 3
+     * @since 4.5.0 Added the `$oFactory` parameter.
+     */
+    public function __construct( $oFactory=null ) {
+
+        $this->oFactory        = $oFactory;
         $this->oOption         = AmazonAutoLinks_Option::getInstance();
         $this->oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         

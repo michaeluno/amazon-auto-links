@@ -28,6 +28,10 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         );
     }
 
+    protected function _construct( $oFactory ) {
+        $oFactory->oProp->aDisallowedQueryKeys[] = 'locale';    // for the Associates tab
+    }
+
     /**
      * Gets load when the page starts loading.
      * @param    AmazonAutoLinks_AdminPageFramework $oFactory

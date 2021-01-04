@@ -15,7 +15,7 @@ class AmazonAutoLinks_PostMetaBox_Button_Text extends AmazonAutoLinks_PostMetaBo
 
     public function setUp() {        
     
-        $_oFields = new AmazonAutoLinks_FormFields_Button_Text;
+        $_oFields = new AmazonAutoLinks_FormFields_Button_Text( $this );
         foreach( $_oFields->get() as $_aField ) {            
             $this->addSettingFields( $_aField );
         }      

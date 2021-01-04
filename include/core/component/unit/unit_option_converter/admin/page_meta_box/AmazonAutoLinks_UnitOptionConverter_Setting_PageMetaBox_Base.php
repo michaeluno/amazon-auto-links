@@ -19,11 +19,12 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Base extends Amazo
 
     /**
      * Adds form fields.
-     * @since       3.3.0
+     * @param array $aClassNames
+     * @since 3.3.0
      */
     protected function _addFieldsByClasses( $aClassNames ) {
         foreach( $aClassNames as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $this );
             foreach( $_oFields->get() as $_aField ) {
                 $this->addSettingFields( $_aField );
             }

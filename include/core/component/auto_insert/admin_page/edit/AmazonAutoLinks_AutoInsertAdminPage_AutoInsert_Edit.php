@@ -18,6 +18,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
         
     /**
      * Triggered when the tab is loaded.
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     public function replyToLoadTab( $oFactory ) {
         
@@ -35,7 +36,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
         
         // Add Fields
         foreach( $this->getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName;
+            $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
@@ -52,11 +53,10 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
          * Returns a list of classes that define form fields.
          * @access      protected       The extended ..._New  class will override this mthoed.
          * @return      array
+         * @todo        Rename the method name.
          */
-        protected function getFormFieldClasses() {         
-
+        protected function getFormFieldClasses() {
             return array(
-                // 'AmazonAutoLinks_FormFields_AutoInsert_GoBack',
                 'AmazonAutoLinks_FormFields_AutoInsert_Status',
                 'AmazonAutoLinks_FormFields_AutoInsert_PostID',
                 'AmazonAutoLinks_FormFields_AutoInsert_Area',
@@ -64,12 +64,12 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
                 'AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable',
                 'AmazonAutoLinks_FormFields_AutoInsert_WhereToDisable',
                 'AmazonAutoLinks_FormFields_AutoInsert_Save',
-            );      
-         
+            );
         }
         
     /**
      * Adds the label element to the `unit_ids` field.
+     * @param       array $aFieldset
      * @return      array
      * @since       3.3.0
      */
