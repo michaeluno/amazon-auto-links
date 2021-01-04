@@ -5,3 +5,4 @@
 - Fixed an issue that the `Link Style Query Key` general option could be empty, which resulted in unit RSS and JSON feeds broken.
 - Deprecated the `Associates IDs` option in the `oEmbed` section in place of `Amazon Associates` section.
 - Deprecated the `Authentication` setting tab.
+- Updated the base translation file.
