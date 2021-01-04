@@ -111,25 +111,6 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
 
     }
 
-    public function load() {
-        // $this->___checkAPIKeys();    // @deprecated  3.9.0
-    }
-        /**
-         * @deprecated  3.9.0
-         */
-/*        private function ___checkAPIKeys() {
-            $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( $_oOption->isAPIConnected() ) {
-                return;
-            }
-
-            $this->setSettingNotice(
-                __( 'You need to set API keys first to create a Search unit.', 'amazon-auto-links' ),
-                'updated'
-            );
-
-            // Go to the Authentication tab of the Settings page.
-            AmazonAutoLinks_PluginUtility::goToAPIAuthenticationPage();
-        }*/
+    public function load() {}
         
 }

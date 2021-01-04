@@ -103,10 +103,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 return $_aProduct;
             }
 
-            // Even the API is disconnected, it should return the cache
-//            if ( ! $this->oOption->isAPIConnected() ) {
-//                return $_aProduct;
-//            }
+            // @deprecated Even the API is disconnected, it should return the cache
+            // if ( ! $this->oOption->isAPIConnected() ) {
+            //     return $_aProduct;
+            // }
 
             // Rating and Reviews - these need to access the plugin cache database. e.g. %rating%, %review%
             $_aDBProductRow                 = $this->___getDBProductRow(
