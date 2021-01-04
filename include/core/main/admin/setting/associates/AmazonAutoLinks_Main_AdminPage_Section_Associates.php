@@ -115,6 +115,7 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
             return $_aSelectors;
         }
         /**
+         * @param  array $aLocaleSlugs
          * @return array
          */
         private function ___getLocaleFieldSets( array $aLocaleSlugs ) {
