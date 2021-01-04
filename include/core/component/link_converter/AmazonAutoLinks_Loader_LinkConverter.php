@@ -22,23 +22,20 @@ class AmazonAutoLinks_Loader_LinkConverter {
             $this->___loadAdminComponents();
         }
 
-        new AmazonAutoLinks_LinkConverter;
+        $_oOption  = AmazonAutoLinks_Option::getInstance();
+        $_bEnabled = $_oOption->get( 'convert_links', 'enabled' );
+        if ( ! $_bEnabled ) {
+            return;
+        }
+
+        new AmazonAutoLinks_LinkConverter_Output;
 
     }
-
         private function ___loadAdminComponents() {
-            add_action(
-                'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                array( $this, 'replyToLoadPage' )
-            );
+            add_action( 'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'main' ], array( $this, 'replyToLoadPage' ) );
         }
-        public function replyToLoadPage( $oAdminPage ) {
-            new AmazonAutoLinks_LinkConverter_Setting_Tab(
-                $oAdminPage,
-                AmazonAutoLinks_Registry::$aAdminPages[ 'main' ]
-            );
-        }
-
-
+            public function replyToLoadPage( $oAdminPage ) {
+                new AmazonAutoLinks_LinkConverter_Setting_Tab( $oAdminPage, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
+            }
 
 }

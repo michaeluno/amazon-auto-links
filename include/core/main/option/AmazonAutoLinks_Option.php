@@ -614,19 +614,19 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     public function getAssociateID( $sLocale ) {
         $_nsAssociateID = $this->get( array( 'associates', $sLocale, 'associate_id' ) );
         if ( ! empty( $_nsAssociateID ) ) {
-            return $_nsAssociateID;
+            return trim( $_nsAssociateID );
         }
         // For backward compatibility with below 4.5.0.
         if ( $this->get( array( 'unit_default', 'country' ), '' ) === $sLocale ) {
             $_sUnitDefaultAssociateID = $this->get( array( 'unit_default', 'associate_id' ), '' );
             if ( $_sUnitDefaultAssociateID ) {
-                return $_sUnitDefaultAssociateID;
+                return trim( $_sUnitDefaultAssociateID );
             }
         }
         if ( $this->get( array( 'authentication_keys', 'server_locale' ), '' ) === $sLocale ) {
-            return ( string ) $this->get( array( 'authentication_keys', 'associates_test_tag' ) );
+            return trim( ( string ) $this->get( array( 'authentication_keys', 'associates_test_tag' ) ) );
         }
-        return $this->get( array( 'custom_oembed', 'associates_ids', $sLocale ), '' );
+        return trim( $this->get( array( 'custom_oembed', 'associates_ids', $sLocale ), '' ) );
 
     }
     /**

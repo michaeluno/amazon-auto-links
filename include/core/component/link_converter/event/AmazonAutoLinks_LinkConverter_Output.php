@@ -13,48 +13,47 @@
  *
  * @package      Amazon Auto Links
  * @since        3.8.0
+ * @since        4.5.0      Renamed from `AmazonAutoLinks_LinkConverter`.
  */
-class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility {
+
+    /**
+     * @var AmazonAutoLinks_Option
+     */
+    public $oOption;
 
     private $___sUnitPostType = '';
-    private $___sAssociateID  = '';
 
+    /**
+     * Sets up hooks and properties.
+     * @remark Assumes that the component-enable option check is already handled.
+     */
     public function __construct() {
 
-        $_oOption  = AmazonAutoLinks_Option::getInstance();
-        $_bEnabled = $_oOption->get( 'convert_links', 'enabled' );
-        if ( ! $_bEnabled ) {
-            return;
-        }
-        $this->___sAssociateID = trim( ( string ) $_oOption->get( 'unit_default', 'associate_id' ) );
-        if ( ! $this->___sAssociateID ) {
-            return;
-        }
+        $this->oOption = AmazonAutoLinks_Option::getInstance();
 
-        $this->___setHooks( $_oOption );
+        $this->___setHooks(
+            $this->oOption->get( 'convert_links', 'filter_hooks' ),
+            $this->getAsArray( $this->oOption->get( 'convert_links', 'where' ) )
+        );
 
-        // Properties
-        $_sPreviewPostType      = trim( ( string ) $_oOption->get( 'unit_preview', 'preview_post_type_slug' ) );
-        $this->___sUnitPostType = $_sPreviewPostType
-            ? $_sPreviewPostType
-            : AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
-
+        $_sPreviewPostType      = trim( ( string ) $this->oOption->get( 'unit_preview', 'preview_post_type_slug' ) );
+        $this->___sUnitPostType = $_sPreviewPostType ? $_sPreviewPostType : AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
 
     }
 
         /**
          * Sets up hooks
          *
-         * @param AmazonAutoLinks_Option $oOption
+         * @param string $sFilterHooks
+         * @param array $aWhere
          */
-        private function ___setHooks( $oOption ) {
-            // Set hooks
-            $_sFilterHooks = $oOption->get( 'convert_links', 'filter_hooks' );
-            $_sFilterHooks = str_replace( array( "\r\n", "\r" ), "\n", $_sFilterHooks );
+        private function ___setHooks( $sFilterHooks, array $aWhere ) {
+
+            $_sFilterHooks = str_replace( array( "\r\n", "\r" ), "\n", $sFilterHooks );
             $_aFilterHooks = explode( "\n", $_sFilterHooks );
 
-            $_aWhere = $this->getAsArray( $oOption->get( 'convert_links', 'where' ) );
-            foreach( $_aWhere as $_sHookName => $_bEnabled ) {
+            foreach( $aWhere as $_sHookName => $_bEnabled ) {
                 if ( ! $_bEnabled ) {
                     continue;
                 }
@@ -68,6 +67,7 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
                 }
                 add_filter( $_sFilterHook, array( $this, 'replyToFilterContents' ), 11 );
             }
+
         }
 
     /**
@@ -88,7 +88,6 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
      */
     public function replyToFilterContents( $sHTML ) {
         return preg_replace_callback( $this->___getPattern(), array( $this, 'replyToConvertLink' ), $sHTML );
-
     }
         /**
          * @param    array $aMatches
@@ -98,24 +97,38 @@ class AmazonAutoLinks_LinkConverter extends AmazonAutoLinks_PluginUtility {
          */
         public function replyToConvertLink( $aMatches ) {
 
+            $_sParsedURL   = $aMatches[ 2 ];
+            $_sLocale      = AmazonAutoLinks_Locales::getLocaleFromURL( $_sParsedURL );
+            $_sAssociateID = $this->___getAssociateIDByLocale( $_sLocale );
+
             // If the tag is already inserted,
-            if ( false !== strpos( $aMatches[ 2 ], $this->___sAssociateID ) ) {
-                return $aMatches[ 1 ]
-                        . $aMatches[ 2 ]
-                    . $aMatches[ 4 ];
+            if ( false !== strpos( $_sParsedURL, $_sAssociateID ) ) {
+                return $aMatches[ 1 ] . $_sParsedURL . $aMatches[ 4 ];
             }
 
             $_sURL = add_query_arg(
                 array(
-                    'tag' => $this->___sAssociateID,
+                    'tag' => $_sAssociateID,
                 ),
-                $aMatches[ 2 ]
+                $_sParsedURL
             );
-            return $aMatches[ 1 ]
-                    . $_sURL
-                . $aMatches[ 4 ];
-        }
+            return $aMatches[ 1 ] . $_sURL . $aMatches[ 4 ];
 
+        }
+            /**
+             * @param  string $sLocale
+             * @return string
+             * @since  4.5.0
+             */
+            private function ___getAssociateIDByLocale( $sLocale ) {
+                $_sAssociateID = $this->getObjectCache( __METHOD__ . $sLocale );
+                if ( ! empty( $_sAssociateID ) ) {
+                    return $_sAssociateID;
+                }
+                $_sAssociateID = $this->oOption->getAssociateID( $sLocale );
+                $this->setObjectCache( __METHOD__ . $sLocale, $_sAssociateID );
+                return $_sAssociateID;
+            }
         /**
          * @return string A regex pattern.
          */
