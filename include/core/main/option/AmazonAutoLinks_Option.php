@@ -623,9 +623,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 return $_sUnitDefaultAssociateID;
             }
         }
-        return $this->get( array( 'authentication_keys', 'server_locale' ), '' ) === $sLocale
-            ? ( string ) $this->get( array( 'authentication_keys', 'associates_test_tag' ) )
-            : '';
+        if ( $this->get( array( 'authentication_keys', 'server_locale' ), '' ) === $sLocale ) {
+            return ( string ) $this->get( array( 'authentication_keys', 'associates_test_tag' ) );
+        }
+        return $this->get( array( 'custom_oembed', 'associates_ids', $sLocale ), '' );
+
     }
     /**
      * @param  string  $sLocale
