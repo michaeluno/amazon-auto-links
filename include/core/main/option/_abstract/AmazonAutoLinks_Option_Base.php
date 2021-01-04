@@ -33,9 +33,11 @@ abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     );
     
     /**
-     * stores the option key for this plugin. 
+     * Stores the option key for this plugin.
+     * @since 3
+     * @since 4.5.0 Changed the access to public from protected.
      */
-    protected $sOptionKey = '';        
+    public $sOptionKey = '';
          
     /**
      * Stores whether the currently loading page is in the network admin area.
