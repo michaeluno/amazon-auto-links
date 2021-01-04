@@ -73,8 +73,7 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
             ),
             array(
                 'field_id'       => 'override_associates_id_of_url',
-                'type'           => 'revealer',
-                'select_type'    => 'radio',
+                'type'           => 'radio',
                 'title'          => __( 'Override Associates ID Used in URL', 'amazon-auto-links' ),
                 'label'                 => array(
                     1 => __( 'Yes', 'amazon-auto-links' ),
@@ -82,24 +81,21 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
                 ),
                 'description'    => array(
                     __( 'Override the Associates ID set in the pasted URL in the post editor.', 'amazon-auto-links' ),
-                    __( 'For example, if <code>https://amazon.com/dp/B07PCMWTSG?tag=myasscoaiteid-21</code> is pasted in the post editor, the ID, <code>myassociateid-21</code> will be used without this option enabled. To use a preset ID, set it in the below option.', 'amazon-auto-links' ),
-                    __( 'If this option is not enabled and there is no Associates ID in the pasted URL, the default Associates ID set in the Default section will be used.', 'amazon-auto-links' ),
-                ),
-                'selectors'      => array(
-                    1 => '.oembed_associate_ids',
-                ),
-                // 'default'        => false,
-            ),
-            array(
-                'field_id'       => 'associates_ids',
-                'type'           => 'text',
-                'title'          => __( 'Associates IDs', 'amazon-auto-links' ),
-                'label'          => $this->___getCountryLabels(),
-                'description'    => __( 'When an Associates ID is not found in the pasted URL in the editor, the value set in this option will be used when the above option is enabled.', 'amazon-auto-links' ),
-                'class'          => array(
-                    'fieldrow' => 'oembed_associate_ids',
+                    __( 'For example, if <code>https://amazon.com/dp/B07PCMWTSG?tag=myasscoaiteid-21</code> is pasted in the post editor, the ID, <code>myassociateid-21</code> will be used without this option enabled.', 'amazon-auto-links' )
+                    . ' ' . sprintf( __( 'To use a preset ID, set it in the <a href="%1$s">Amazon Associates</a> section.', 'amazon-auto-links' ), esc_url( $this->getAPIAuthenticationPageURL() ) )
                 ),
             ),
+            // @deprecated 4.5.0
+            // array(
+            //     'field_id'       => 'associates_ids',
+            //     'type'           => 'text',
+            //     'title'          => __( 'Associates IDs', 'amazon-auto-links' ),
+            //     'label'          => $this->___getCountryLabels(),
+            //     'description'    => __( 'When an Associates ID is not found in the pasted URL in the editor, the value set in this option will be used when the above option is enabled.', 'amazon-auto-links' ),
+            //     'class'          => array(
+            //         'fieldrow' => 'oembed_associate_ids',
+            //     ),
+            // ),
             array(
                 'field_id'              => 'external_provider',
                 'type'                  => 'url',
@@ -118,21 +114,20 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
     }
         /**
          * @return array
+         * @deprecated 4.5.0
          */
-        private function ___getCountryLabels() {
-
-            $_aLabels        = array();
-            $_aLocaleObjects = AmazonAutoLinks_Locales::getLocaleObjects();
-            foreach( $_aLocaleObjects as $_sLocale => $_oLocale ) {
-                $_sFlagImage = $_oLocale->getFlagImg();
-                $_sDomain    = $_oLocale->getDomain();
-                $_sAlt       = esc_attr( 'Country Flag - ' . $_sLocale );
-                $_aLabels[ $_sLocale ] = "<img class='country-flag' src='{$_sFlagImage}' alt='{$_sAlt}' />"
-                    . "<span class='store-domain'>" . $_sDomain . "</span>";
-            }
-            return $_aLabels;
-
-        }
+        // private function ___getCountryLabels() {
+        //     $_aLabels        = array();
+        //     $_aLocaleObjects = AmazonAutoLinks_Locales::getLocaleObjects();
+        //     foreach( $_aLocaleObjects as $_sLocale => $_oLocale ) {
+        //         $_sFlagImage = $_oLocale->getFlagImg();
+        //         $_sDomain    = $_oLocale->getDomain();
+        //         $_sAlt       = esc_attr( 'Country Flag - ' . $_sLocale );
+        //         $_aLabels[ $_sLocale ] = "<img class='country-flag' src='{$_sFlagImage}' alt='{$_sAlt}' />"
+        //             . "<span class='store-domain'>" . $_sDomain . "</span>";
+        //     }
+        //     return $_aLabels;
+        // }
 
     /**
       * Called upon form validation.

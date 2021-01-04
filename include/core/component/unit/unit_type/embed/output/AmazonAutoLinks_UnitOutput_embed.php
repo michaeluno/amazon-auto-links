@@ -291,9 +291,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                     }
                 }
 
-                $_sHost   = parse_url( $sURL, PHP_URL_HOST ); // without https://
-                $_sLocale = AmazonAutoLinks_Locales::getLocaleByDomain( $_sHost );
-                $_sSetAssociatesID = $this->oOption->get( 'custom_oembed', 'associates_ids', $_sLocale );
+                $_sHost            = parse_url( $sURL, PHP_URL_HOST ); // without https://
+                $_sLocale          = AmazonAutoLinks_Locales::getLocaleByDomain( $_sHost );
+                $_sSetAssociatesID = $this->oOption->getAssociateID( $_sLocale );
                 return $_sSetAssociatesID
                     ? $_sSetAssociatesID
                     : ( string ) $this->oUnitOption->get( 'associate_id' );
