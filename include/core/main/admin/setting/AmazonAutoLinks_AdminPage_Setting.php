@@ -74,7 +74,7 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
             . "<h4 style='display:block; clear:both;'>"
                 . __( 'Saved Options', 'amazon-auto-links' )
             .  "</h4>"
-            . $oFactory->oDebug->getDetails( $oFactory->getValue() )
+            . $oFactory->oDebug->getDetails( get_option( $_oOption->sOptionKey ) )
             . "</div>";
 
     }
