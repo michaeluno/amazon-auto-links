@@ -412,8 +412,6 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting_3rdParty" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/3rdparty/AmazonAutoLinks_AdminPage_Setting_3rdParty.php", 
     "AmazonAutoLinks_Main_AdminPage_Section_Associates" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php", 
     "AmazonAutoLinks_Main_AdminPage_Tab_Associates" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Tab_Associates.php", 
-    "AmazonAutoLinks_AdminPage_Setting_Authentication" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication.php", 
-    "AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/authentication/AmazonAutoLinks_AdminPage_Setting_Authentication_AuthenticationKeys.php", 
     "AmazonAutoLinks_AdminPage_Setting_Cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php", 
     "AmazonAutoLinks_AdminPage_Setting_Cache_Cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php", 
     "AmazonAutoLinks_AdminPage_Setting_Default" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php", 
