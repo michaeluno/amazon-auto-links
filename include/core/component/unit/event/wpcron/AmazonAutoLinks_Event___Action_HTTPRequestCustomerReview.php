@@ -27,6 +27,13 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
     protected $_iHTTPRequestInterval = 10;
 
     /**
+     * @since 4.5.0
+     */
+    protected function _construct() {
+        $this->_iHTTPRequestInterval = apply_filters( 'aal_filter_http_request_interval_customer_reviews', $this->_iHTTPRequestInterval );
+    }
+
+    /**
      * @return bool
      * @since 4.3.0
      */

@@ -115,6 +115,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
             $_iCount    = 1;
             $_aTaskRows = array();
+            $_iInterval = apply_filters( 'aal_filter_http_request_interval_customer_reviews', 10 );
             foreach( self::$___aReviewItems as $_sProductID => $_aParameters ) {
                 $_iNow        = time();
                 $_aTaskRows[] = array(
@@ -122,7 +123,7 @@ class AmazonAutoLinks_Event_Scheduler {
                     'action'        => 'aal_action_api_get_customer_review',
                     'arguments'     => $_aParameters,
                     'creation_time' => date( 'Y-m-d H:i:s', $_iNow ),
-                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * 10 ) ),
+                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * $_iInterval ) ),
                 );
                 $_iCount++;
             }
@@ -216,6 +217,7 @@ class AmazonAutoLinks_Event_Scheduler {
 
             $_iCount    = 1;
             $_aTaskRows = array();
+            $_iInterval = apply_filters( 'aal_filter_http_request_interval_customer_reviews', 10 );
             foreach( self::$___aRatingItems as $_sProductID => $_aParameters ) {
                 $_iNow        = time();
                 $_aTaskRows[] = array(
@@ -223,7 +225,7 @@ class AmazonAutoLinks_Event_Scheduler {
                     'action'        => 'aal_action_api_get_product_rating',
                     'arguments'     => $_aParameters,
                     'creation_time' => date( 'Y-m-d H:i:s', $_iNow ),
-                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * 10 ) ),
+                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * $_iInterval ) ),
                 );
                 $_iCount++;
             }
