@@ -44,6 +44,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
         $aArguments[ 'doing_web_page_dumper' ] = true;
         parent::__construct( $sRequestURL, $iCacheDuration, $aArguments, $sRequestType, $aCache );
 
+        do_action( 'aal_action_debug_log', 'WEB_PAGE_DUMPER', "Using Web Page Dumper: {$sWebPageDumperURL} Request: {$sRequestURL}", array(), current_filter(), false );
+
     }
 
     /**

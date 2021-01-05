@@ -52,8 +52,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse extends Amaz
             return $aoResponse;
         }
         $_sURLWebPageDumper = $this->getWebPageDumperURL();
-        do_action( 'aal_action_debug_log', 'WEB_PAGE_DUMPER', "Using Web Page Dumper: {$_sURLWebPageDumper} Request: {$sURL}", array(), current_filter(), false );
-        $aArguments = array(
+        $aArguments         = array(
             'renew_cache'           => true,
             'timeout'               => 60, // seconds. Set a longer one as Web Page Dumper servers are often sleeping.
         ) + $aArguments;
