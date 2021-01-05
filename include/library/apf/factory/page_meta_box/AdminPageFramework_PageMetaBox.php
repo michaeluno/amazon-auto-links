@@ -96,8 +96,7 @@ abstract class AmazonAutoLinks_AdminPageFramework_PageMetaBox_Router extends Ama
         }
         public function _replyToGetSavedFormData() {
             $_aPageOptions = isset($this->oProp->oAdminPage->oProp) ? $this->oProp->oAdminPage->oProp->aOptions : array();
-            $_aPageOptions = $this->oUtil->addAndApplyFilter($this, 'options_' . $this->oProp->sClassName, $_aPageOptions);
-            return $this->oUtil->castArrayContents($this->oForm->getDataStructureFromAddedFieldsets(), $_aPageOptions);
+            $_aPageOptions = $this->oUtil->addAndApplyFilter($this, 'options_' . $this->oProp->sClassName, $_aPageOptions);            return $this->oUtil->castArrayContents($this->oForm->getDataStructureFromAddedFieldsets(), $_aPageOptions);
         }
         private function _getPageMetaBoxOptionsFromPageOptions(array $aPageOptions, array $aFieldsets) {
             $_aOptions = array();
