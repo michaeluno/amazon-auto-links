@@ -230,7 +230,7 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                                 ),
                             ),
                             array(
-                                'title'             => __( 'Last Connected', 'amazon-auto-links' ),
+                                'title'             => __( 'Last Checked', 'amazon-auto-links' ),
                                 'field_id'          => 'last_connected',
                                 'content'           => $this->___getPAAPILastChecked( $sLocale )
                             ),
