@@ -5,14 +5,14 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2020 Michael Uno
+ * Copyright (c) 2013-2021 Michael Uno
  */
 
 /**
  * Lists responsive columns.
  * 
  * @package     Amazon Auto Links
- * @copyright   Copyright (c) 2013-2020, Michael Uno
+ * @copyright   Copyright (c) 2013-2021, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.0.0
  * @since       3       Chnaged the name from `AmazonAutoLinks_ListExtensions`

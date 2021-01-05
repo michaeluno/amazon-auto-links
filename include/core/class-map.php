@@ -3,7 +3,7 @@
     Amazon Auto Links v4.5.0b04 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
-    Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
+    Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
  */
 return array(
     "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php", 
