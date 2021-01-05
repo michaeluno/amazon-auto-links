@@ -36,8 +36,10 @@ class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
     /**
      * Returns the output based on the shortcode arguments.
      * 
-     * @since       2.0.0
-     * @since       2.1.1       Change the name from `getOutput()`.
+     * @since  2.0.0
+     * @since  2.1.1  Change the name from `getOutput()`.
+     * @param  array  $aArguments
+     * @return string
      */
     public function _replyToGetOutput( $aArguments ) {
         return AmazonAutoLinks( $aArguments, false );
