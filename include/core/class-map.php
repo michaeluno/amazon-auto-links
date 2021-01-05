@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.5.0b04 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.5.0b08 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -489,6 +489,7 @@ return array(
     "AmazonAutoLinks_AdminPage_Tab_ReadMeBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Tab_ReadMeBase.php", 
     "AmazonAutoLinks_Column" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/columns/AmazonAutoLinks_Column.php", 
     "AmazonAutoLinks_FormFields_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/form_field/_abstract/AmazonAutoLinks_FormFields_Base.php", 
+    "AmazonAutoLinks_PageMetaBox_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/form_field/_abstract/AmazonAutoLinks_PageMetaBox_Base.php", 
     "AmazonAutoLinks_PostMetaBox_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_meta_box/_abstract/AmazonAutoLinks_PostMetaBox_Base.php", 
     "AmazonAutoLinks_PostType__ActionLink_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__ActionLink_Base.php", 
     "AmazonAutoLinks_PostType__Common___ActionLink_Status_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php", 

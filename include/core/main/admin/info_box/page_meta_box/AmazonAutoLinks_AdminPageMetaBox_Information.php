@@ -8,7 +8,7 @@
  * Copyright (c) 2013-2021 Michael Uno
  */
  
-class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_AdminPageFramework_PageMetaBox {
+class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_PageMetaBox_Base {
         
     /**
      * (optional) Use the setUp() method to define settings of this meta box.
