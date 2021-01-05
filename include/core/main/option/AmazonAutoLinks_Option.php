@@ -447,6 +447,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
+     * @return false
+     * @since  4.5.0
+     */
+    public function isAdvancedWebPageDumperOptionSupported() {
+        return false;
+    }
+
+    /**
      * @return  boolean
      * @param   integer|null $iNumberOfUnits
      */

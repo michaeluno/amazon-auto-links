@@ -41,6 +41,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments;
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestInterval;
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse;
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL;
         }
 
 

@@ -51,6 +51,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse extends Amaz
         if ( $this->getElement( $aArguments, array( 'doing_web_page_dumper' ) ) ) {
             return $aoResponse;
         }
+        if ( ! apply_filters( 'aal_filter_web_page_dumper_is_allowed', true, $sURL, $aArguments, $sRequestType ) ) {
+            return $aoResponse;
+        }
         $_sURLWebPageDumper = $this->getWebPageDumperURL();
         $aArguments         = array(
             'renew_cache'           => true,
