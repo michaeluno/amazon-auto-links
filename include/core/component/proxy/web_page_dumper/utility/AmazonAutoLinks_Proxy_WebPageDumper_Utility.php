@@ -40,7 +40,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Utility extends AmazonAutoLinks_Plugin
      * @return boolean
      * @since  4.5.0
      */
-    static public function getUserRatingURL( $sURL ) {
+    static public function isUserRatingURL( $sURL ) {
         if ( ! self::isAmazonURL( $sURL ) ) {
             return false;
         }

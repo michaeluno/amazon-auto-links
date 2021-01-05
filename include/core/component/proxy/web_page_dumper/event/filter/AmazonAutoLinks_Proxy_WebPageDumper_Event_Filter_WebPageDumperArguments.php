@@ -35,7 +35,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
      * @since  4.5.0
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
-        if ( $this->getUserRatingURL( $sRequestURL ) ) {
+        if ( $this->isUserRatingURL( $sRequestURL ) ) {
             $aArguments[ 'cache' ]  = 1;
             $aArguments[ 'reload' ] = 1;
             // @deprecated

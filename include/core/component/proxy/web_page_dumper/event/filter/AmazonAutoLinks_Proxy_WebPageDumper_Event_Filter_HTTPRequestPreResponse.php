@@ -39,7 +39,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse ex
             return $aoResponse;
         }
 
-        if ( ! $this->___isCustomerRatingRequest( $sRequestURL, $aArguments ) ) {
+        if ( ! $this->___shouldUseWebPageDumper( $sRequestURL, $aArguments ) ) {
             return $aoResponse;
         }
 
@@ -56,11 +56,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse ex
          * @param  array  $aArguments
          * @return boolean
          */
-        private function ___isCustomerRatingRequest( $sRequestURL, $aArguments ) {
+        private function ___shouldUseWebPageDumper( $sRequestURL, $aArguments ) {
             if ( $this->getElement( $aArguments, array( 'doing_web_page_dumper' ) ) ) {
                 return false;
             }
-            return $this->getUserRatingURL( $sRequestURL );
+            return $this->isUserRatingURL( $sRequestURL );
         }
 
 }
