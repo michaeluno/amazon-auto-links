@@ -36,11 +36,12 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
         if ( $this->getUserRatingURL( $sRequestURL ) ) {
-            $aArguments[ 'cache' ]  = 0;
+            $aArguments[ 'cache' ]  = 1;
             $aArguments[ 'reload' ] = 1;
-            $aArguments[ 'block' ]  = array(
-                'types' => array( 'script' )
-            );
+            // @deprecated
+            // $aArguments[ 'block' ]  = array(
+            //     'types' => array( 'script' )
+            // );
         }
         return $aArguments;
     }
