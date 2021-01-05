@@ -40,8 +40,8 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'title'                         => null,   // (string) The product name.
         'links'                         => null,   // (string)
         'rating'                        => null,   // (integer)    e.g. 45
-        'rating_image_url'              => null,   // (string)
-        'rating_html'                   => null,   // (string)
+        'rating_image_url'              => null,   // (string)  // @todo deprecate it
+        'rating_html'                   => null,   // (string)  // @todo deprecate it
         'price'                         => null,   // (integer)    Listed price. e.g. 46.56
         'price_formatted'               => null,   // (string)
         'currency'                      => null,   // (string)  e.g. USD
@@ -58,7 +58,7 @@ class AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Databas
         'images'                        => null,   // (string) serialized array containing product lists
         'similar_products'              => null,   // (string) serialized array containing product lists
         'editorial_reviews'             => null,   // (string) serialized array containing editorial review text.
-        'customer_review_url'           => null,   // (string)
+        'customer_review_url'           => null,   // (string)  // @todo deprecate it
         'customer_review_charset'       => null,   // (string)
         'customer_reviews'              => null,   // (string) serialized array containing user reviews.
         'number_of_reviews'             => null,   // (integer) number of customer reviews.
