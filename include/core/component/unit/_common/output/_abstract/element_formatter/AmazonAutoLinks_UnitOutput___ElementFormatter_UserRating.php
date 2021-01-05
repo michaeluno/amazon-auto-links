@@ -54,17 +54,18 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
     }
         /**
          * @since   3.9.0
+         * @param   integer $iRating
          * @return  string
          */
         private function ___getRatingOutput( $iRating ) {
-
             $_iReviewCount  = ( integer ) $this->_getCell( 'number_of_reviews' );
-            $_sReviewURL    = ( string )  $this->_getCell( 'customer_review_url' );
+            $_oLocale       = new AmazonAutoLinks_Locale( $this->_sLocale );
+            $_sReviewURL    = $_oLocale->getCustomerReviewURL( $this->_sASIN, $this->_sAssociateID, $this->_oUnitOption->get( 'language' ) );
             return "<div class='amazon-customer-rating-stars'>"
                     . AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRating, $_sReviewURL, $_iReviewCount )
                 . "</div>";
-
         }
+
         /**
          * @since   3.5.0
          * @return  string
