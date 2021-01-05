@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.5.0b02 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.5.0b04 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2020, Michael Uno; Licensed under GPL v2 or later
@@ -104,6 +104,7 @@ return array(
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestInterval" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestInterval.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient.php", 
