@@ -116,6 +116,10 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
     public function request( array $aPayload, $iCacheDuration=86400, $bForceRenew=false ) {
 
         $aPayload     = $aPayload + $this->___aPayload;
+        $_aError      = $this->___getPreRequestError( $aPayload );
+        if ( ! empty( $_aError ) ) {
+            return $_aError;
+        }
         ksort( $aPayload ); // this is important for generating the id of caches.
         $_oAPIHeader  = new AmazonAutoLinks_PAAPI50___RequestHeaderGenerator(
             $this->___sPublicKey,
@@ -196,7 +200,38 @@ class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
         return $_aResponse;
 
     }
-
+        /**
+         * @param  array $aPayload
+         * @return array
+         * @since  4.5.0
+         */
+        private function ___getPreRequestError( array $aPayload ) {
+            if ( ! $this->___sLocale ) {
+                return array(
+                    'Error' => array(
+                        'Message' => 'The locale is not set.',
+                        'Code'    => 'PAAPI'
+                    )
+                );
+            }
+            if ( ! $this->___sPublicKey || ! $this->___sSecretKey ) {
+                return array(
+                    'Error' => array(
+                        'Message' => 'The PA-API keys are not set.',
+                        'Code'    => 'PAAPI'
+                    )
+                );
+            }
+            if ( empty( $aPayload[ 'PartnerTag' ]  ) ) {
+                return array(
+                    'Error' => array(
+                        'Message' => 'The Associate ID is not set.',
+                        'Code'    => 'PAAPI'
+                    )
+                );
+            }
+            return array();
+        }
         /**
          * @param array $aWPRemoteResponse
          *
