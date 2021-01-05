@@ -620,6 +620,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
      * @since  4.5.0
      */
     public function getAssociateID( $sLocale ) {
+
+        $sLocale        = strtoupper( $sLocale );
         $_nsAssociateID = $this->get( array( 'associates', $sLocale, 'associate_id' ) );
         if ( ! empty( $_nsAssociateID ) ) {
             return trim( $_nsAssociateID );
