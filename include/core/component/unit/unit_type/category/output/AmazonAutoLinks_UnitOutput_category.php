@@ -541,7 +541,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                             $_aProduct[ 'ASIN' ],
                             $_sLocale,
                             $_sAssociateID,
-                            $this->oOption->get( 'authentication_keys', 'access_key' ), // public access key
+                            $this->oOption->getPAAPIAccessKey( $_sLocale ), // public access key
                             $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                         );
                     }

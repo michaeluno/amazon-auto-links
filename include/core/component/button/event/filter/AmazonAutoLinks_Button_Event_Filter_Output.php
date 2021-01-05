@@ -45,13 +45,14 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     public function replyToGetLinkedButton( $sOutput, $aArguments ) {
 
         $_oOption   = AmazonAutoLinks_Option::getInstance();
+        $_sLocale   = $_oOption->getMainLocale();
         $aArguments = $this->getAsArray( $aArguments ) + array(
             'type'         => $_oOption->get( array( 'unit_default', 'button_type' ), 1 ),
             'id'           => 0,   // can be omitted
             'asin'         => '',  // comma delimited ASINs
-            'country'      => $_oOption->get( array( 'unit_default', 'country' ), 'US' ),
+            'country'      => $_sLocale,
             'associate_id' => $_oOption->get( array( 'unit_default', 'associate_id' ), '' ),  // Associate ID
-            'access_key'   => $_oOption->get( array( 'authentication_keys', 'access_key' ), '' ),
+            'access_key'   => $_oOption->getPAAPIAccessKey( $_sLocale ),
         ) + $this->_aArguments;
         return $this->___getButtonOutput( $aArguments );
 
@@ -93,7 +94,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             private function ___getProductURL( array $aArguments ) {
                 $_sLocale    = $aArguments[ 'country' ];
                 $_sASIN      = $aArguments[ 'asin' ];
-                $_aASINs     = $this->getStringIntoArray( $_sASIN, ',' ); // format it as it can be comma delimtted
+                $_aASINs     = $this->getStringIntoArray( $_sASIN, ',' ); // format it as it can be comma delimited
                 $sASIN       = reset( $_aASINs );
                 $_oLocale    = new AmazonAutoLinks_Locale( $_sLocale );
                 $_sURL       = $_oLocale->getMarketPlaceURL( '/dp/' . $sASIN );

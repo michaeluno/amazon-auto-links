@@ -116,10 +116,11 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             );
         }
 
-        $_oAPI = new AmazonAutoLinks_PAAPI50(
-            $this->oUnitOption->get( 'country' ),
-            $this->oOption->get( 'authentication_keys', 'access_key' ),
-            $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
+        $_sLocale = $this->oUnitOption->get( 'country' );
+        $_oAPI    = new AmazonAutoLinks_PAAPI50(
+            $_sLocale,
+            $this->oOption->getPAAPIAccessKey( $_sLocale ),
+            $this->oOption->getPAAPISecretKey( $_sLocale ),
             $_sAssociateID
         );
 

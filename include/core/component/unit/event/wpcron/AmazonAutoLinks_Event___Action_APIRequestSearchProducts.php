@@ -275,8 +275,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             if ( ! $_oOption->getPAAPIStatus( $sLocale ) ) {
                 return array();
             }
-            $_sPublicKey  = $_oOption->get( array( 'authentication_keys', 'access_key' ), '' );
-            $_sPrivateKey = $_oOption->get( array( 'authentication_keys', 'access_key_secret' ), '' );
+            $_sPublicKey  = $_oOption->getPAAPIAccessKey( $sLocale );
+            $_sPrivateKey = $_oOption->getPAAPISecretKey( $sLocale );
             if ( empty( $_sPublicKey ) || empty( $_sPrivateKey ) ) {
                 return array();
             }

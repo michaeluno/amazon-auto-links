@@ -123,10 +123,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility extends AmazonAutoLinks_U
      */
     static public function getDefaultLocale() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        return ( string ) $_oOption->get(
-            array( 'authentication_keys', 'server_locale' ),
-            $_oOption->get( array( 'unit_default', 'country' ), 'US' )
-        );
+        return $_oOption->getMainLocale();
     }
 
     /**

@@ -292,10 +292,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             );
         }
 
-        $_oAPI = new AmazonAutoLinks_PAAPI50(
-            $this->oUnitOption->get( 'country' ), 
-            $this->oOption->get( 'authentication_keys', 'access_key' ),
-            $this->oOption->get( 'authentication_keys', 'access_key_secret' ),
+        $_sLocale = $this->oUnitOption->get( 'country' );
+        $_oAPI    = new AmazonAutoLinks_PAAPI50(
+            $_sLocale,
+            $this->oOption->getPAAPIAccessKey( $_sLocale ),
+            $this->oOption->getPAAPISecretKey( $_sLocale ),
             $_sAssociateID
         );
 
@@ -960,7 +961,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $_aProduct[ 'ASIN' ],
                         $_sLocale,
                         $_sAssociateID,
-                        $this->oOption->get( 'authentication_keys', 'access_key' ), // public access key
+                        $this->oOption->getPAAPIAccessKey( $_sLocale ), // public access key
                         $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                     );
                 }
