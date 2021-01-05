@@ -387,7 +387,11 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          */
         private function ___getHTTPResponse( $sURL, array $aArguments ) {
 
-            do_action( 'aal_action_http_remote_get', $sURL, $aArguments, $this->sRequestType ); // 3.5.0
+            do_action( 'aal_action_http_remote_get', $sURL, $aArguments, $this->sRequestType ); // [3.5.0]
+            $_aoResponse = apply_filters( 'aal_filter_http_request_pre_response', array(), $sURL, $this->iCacheDuration, $aArguments, $this->sRequestType );   // [4.5.0] Allow custom HTTP requests
+            if ( ! empty( $_aoResponse ) ) {
+                return $_aoResponse;
+            }
             $_aoResponse = $this->_getHTTPRequested( $sURL, $aArguments );
 
             /**
