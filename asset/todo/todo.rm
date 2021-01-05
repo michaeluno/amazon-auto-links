@@ -1,12 +1,10 @@
 # Todos
 
 ## Minor
-- [4.5.0] Deprecate the AmazonAutoLinks_Option::isAPIConnected() and AmazonAutoLinks_Option::isAPIKeySet() methods.
 - [4.5.0][Web Page Dumper] Add an option to exclude hosts by a portion of URL.
-- [4.5.0] Deprecate the Embed -> Override Associates ID Used in URL section and use the value set in the new Associates section.
-- [4.5.0] Support multiple locales for the Link Conversion functionality.  
-- [4.5.0] Create a stylesheet that applies to all the templates. 
-- [4.5.0] Fix image widths displayed with the %content% tag.
+- [4.5.1] Add an option "Use these proxies for Web Page Dumper".
+- [4.6.0] Fix image widths displayed with the %content% tag.
+- [4.6.0] Create a stylesheet that applies to all the templates. 
 - [Bug] Fix a bug that cloning a unit does not clone template options.
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
@@ -19,14 +17,12 @@
   -> maybe only storing the record ID of a table (linked ID) can solve it
   
 ## Major   
-- [4.5.0][UI] Add the Associates setting Tab.
-    - Include the today's request counts.
-    - Display recent PA-API errors
-    - Display the last connected time.
-    - Add a UI for the timed blacklisted ASINs that allows the user to remove and add them.
+- [4.6.0][UI] Change the PA-API Request Counter tab to PA-API and include the followings
+    - the today's request counts.
+    - recent PA-API errors
 - [Feature][Timed Blacklist] 
     - Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
-    - [UI] Add the timed blacklist ASINs UI in the PA-API tab. 
+    - [UI] Add the timed blacklist ASINs UI. 
 - [Internal] Add the SubscriptionID parameter to product links when AWS keys are given.
 - [Internal] Reflect the product URL query parameters given by the PA API when available for the category units as it can now show products without the API.
 - [Feature] Introduce a new unit type Comparison Table -> this can be a template.
