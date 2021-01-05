@@ -36,7 +36,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
         if ( $this->getUserRatingURL( $sRequestURL ) ) {
-            $aArguments[ 'reload' ] = true;
+            $aArguments[ 'cache' ]  = 0;
+            $aArguments[ 'reload' ] = 1;
             $aArguments[ 'block' ]  = array(
                 'types' => array( 'script' )
             );
