@@ -88,8 +88,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                 'id'        => null,    // required when parsed in the Output class
             )
             + $this->getDefaultOptionStructure()
-            + $_oOption->get( 'unit_default' )      // [3.4.0]
-            ;
+            + $_oOption->get( 'unit_default' );      // [3.4.0]
+
         $this->aRawOptions     = $aUnitOptions;
         $this->aUnitOptions    = $iUnitID
             ? $aUnitOptions 
@@ -139,6 +139,10 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
 
         $_oOption           = AmazonAutoLinks_Option::getInstance();
+
+        // [4.5.0] Before merging with the unit defaults, associate_id, language, and preferred currency, are locale-dependant. So set it first.
+        $aUnitOptions       = $this->___getLocaleSpecificsAdded( $aUnitOptions, $aDefaults, $_oOption );
+
         $aUnitOptions       = $aUnitOptions + $aDefaults;
         $aUnitOptions       = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
 
@@ -198,7 +202,43 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         return $aUnitOptions;
         
     }
+        /**
+         * associate_id, language, and preferred currency, are locale-dependant.
+         * @param  array $aUnitOptions
+         * @param  array $aDefaults
+         * @param  AmazonAutoLinks_Option $oOption
+         * @return array
+         * @since  4.5.0
+         */
+        private function ___getLocaleSpecificsAdded( array $aUnitOptions, array $aDefaults, AmazonAutoLinks_Option $oOption ) {
 
+            // For units, do nothing as there is the Associate ID unit option field and it is set.
+            if ( $this->iUnitID ) {
+                return $aUnitOptions;
+            }
+
+            // For direct arguments,
+            /// If the country argument is not set, leave it to the unit defaults.
+            if ( empty( $aUnitOptions[ 'country' ] ) ) {
+                return $aUnitOptions;
+            }
+
+            /// At this point, the country (locale) is explicitly set.
+
+            $aUnitOptions[ 'country' ] = strtoupper( $aUnitOptions[ 'country' ] );
+
+            /// If the given locale is the same as the unit default locale, leave it to the unit defaults.
+            if ( $aUnitOptions[ 'country' ] === $this->getElement( $aDefaults, array( 'country' ) ) ) {
+                return $aUnitOptions;
+            }
+
+            /// Use the value set in the Associates section.
+            $aUnitOptions[ 'associate_id' ]         = $oOption->getAssociateID( $aUnitOptions[ 'country' ] );
+            $aUnitOptions[ 'language' ]             = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'language' );
+            $aUnitOptions[ 'preferred_currency' ]   = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'currency' );
+            return $aUnitOptions;
+
+        }
         /**
          * Extracts the Output Formats unit option from the unit options array.
          * @param   array $aUnitOptions
