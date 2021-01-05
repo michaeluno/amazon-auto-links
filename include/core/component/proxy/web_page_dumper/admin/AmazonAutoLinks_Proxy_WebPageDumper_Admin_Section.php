@@ -54,6 +54,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'title'           => __( 'Enable', 'amazon-auto-links' ),
                 'label'           => sprintf( __( 'Utilize %1$s to assist HTTP requests.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                 'type'            => 'checkbox',
+                'description'     => array(
+                    sprintf( __( 'API requests will not use %1$s', 'amazon-auto-links' ), 'Web Page Dumper' ),
+                ),
             ),
             array( 
                 'field_id'        => 'list',
@@ -68,9 +71,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 ),
                 'default'         => 'https://web-page-dumper.herokuapp.com/',
                 'description'     => array(
-                    sprintf( __( 'Enter addresses of %1$s one per line.', 'amazon-auto-links' ), 'Web Page Dumper' ),
-                    'e.g.<code>https://web-page-dumper.herokuapp.com/</code>',
-                    sprintf( __( 'It is better to create your own %1$s so that it will run faster.', 'amazon-auto-links' ), 'Web Page Dumper' ) . ' ' . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ), esc_url( add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) ) ),
+                    sprintf( __( 'Enter addresses of %1$s one per line.', 'amazon-auto-links' ), 'Web Page Dumper' )
+                    . ' e.g.<code>https://web-page-dumper.herokuapp.com/</code>',
+                    sprintf( __( 'It is recommended to create your own %1$s for better performance.', 'amazon-auto-links' ), 'Web Page Dumper' ) . ' ' . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ), esc_url( add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) ) ),
                 ),
             ),
             array(
