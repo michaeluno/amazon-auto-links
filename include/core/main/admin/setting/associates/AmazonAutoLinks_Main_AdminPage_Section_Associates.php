@@ -207,6 +207,20 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                                 ),
                             ),
                             array(
+                                'title'             => __( 'Preferred Language' ),
+                                'field_id'          => 'language',
+                                'type'              => 'select',
+                                'label'             => $_oPAAPILocale->getLanguages(),
+                                'default'           => $_oPAAPILocale->getDefaultLanguage(),
+                            ),
+                            array(
+                                'title'             => __( 'Preferred Currency' ),
+                                'type'              => 'select',
+                                'field_id'          => 'currency',
+                                'label'             => $_oPAAPILocale->getCurrencies(),
+                                'default'           => $_oPAAPILocale->getDefaultCurrency(),
+                            ),
+                            array(
                                 'title'             => __( 'Status', 'amazon-auto-links' ),
                                 'field_id'          => '_status',
                                 'save'              => false,
