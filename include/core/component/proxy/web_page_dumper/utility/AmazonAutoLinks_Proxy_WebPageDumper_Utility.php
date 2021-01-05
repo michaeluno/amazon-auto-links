@@ -35,4 +35,16 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Utility extends AmazonAutoLinks_Plugin
         return ( string ) $_sURLWebPageDumper;
     }
 
+    /**
+     * @param  string $sURL
+     * @return boolean
+     * @since  4.5.0
+     */
+    static public function getUserRatingURL( $sURL ) {
+        if ( ! self::isAmazonURL( $sURL ) ) {
+            return false;
+        }
+        return false !== strpos( strtok( $sURL, '?' ), 'customer-reviews/widgets/average-customer-review/popover' );
+    }
+
 }

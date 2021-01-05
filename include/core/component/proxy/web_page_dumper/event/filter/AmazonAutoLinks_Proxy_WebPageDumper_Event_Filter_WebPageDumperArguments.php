@@ -29,13 +29,13 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
     }
 
     /**
-     * @param  array $aArguments
+     * @param  array  $aArguments
      * @param  string $sRequestURL
      * @return array
      * @since  4.5.0
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
-        if ( false !== strpos( $sRequestURL, 'customer-reviews/widgets/average-customer-review/popover' ) ) {
+        if ( $this->getUserRatingURL( $sRequestURL ) ) {
             $aArguments[ 'reload' ] = true;
             $aArguments[ 'block' ]  = array(
                 'types' => array( 'script' )
