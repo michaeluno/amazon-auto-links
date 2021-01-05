@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2021-01-05 07:06+0900\n"
+"POT-Creation-Date: 2021-01-06 08:11+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,7 +145,7 @@ msgstr ""
 #: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:224
 #: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:67
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
-#: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:236
+#: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:237
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:43
 #: include/core/main/option/AmazonAutoLinks_Option.php:331
 #: include/core/main/option/AmazonAutoLinks_Option.php:341
@@ -1042,7 +1042,7 @@ msgid "Go Back"
 msgstr ""
 
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_Save.php:30
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:138
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:141
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:74
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:215
 #: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:25
@@ -1072,7 +1072,7 @@ msgstr ""
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Column.php:56
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:29
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:73
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:210
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:224
 msgid "Status"
 msgstr ""
 
@@ -1568,7 +1568,7 @@ msgstr ""
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:52
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:55
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:59
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:54
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:55
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:54
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:45
 msgid "Enable"
@@ -1707,6 +1707,7 @@ msgid "Include"
 msgstr ""
 
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:80
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:125
 msgid "Exclude"
 msgstr ""
 
@@ -1717,7 +1718,7 @@ msgstr ""
 
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:104
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:108
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:101
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:104
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:126
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:154
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
@@ -1746,82 +1747,90 @@ msgid "HTTP Proxies"
 msgstr ""
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:61
-msgid ""
-"Enable proxies for regular HTTP requests that this plugin performs. API "
-"requests will not use proxies."
+msgid "Enable proxies for regular HTTP requests that this plugin performs."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:65
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:59
+#, php-format
+msgid "API requests will not use %1$s"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
+msgid "HTTP proxies"
+msgstr ""
+
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:68
 msgid "Proxy List"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:72
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:75
 msgid ""
 "Enter proxy addresses one per line. Accepts up to 10000 items at a maximum."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:73
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:76
 #, php-format
 msgid "The format: <code>%1$s</code>"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:79
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:82
 msgid "Load"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:87
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:90
 msgid "Unusable"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:94
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:97
 msgid ""
 "Unusable items will be listed here and updated automatically when they are "
 "found defunct."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:95
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:98
 msgid "To clear this unusable proxy list, just remove the input and save."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:109
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:112
 msgid "Automatic Updates"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:111
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:114
 msgid "Enable automatic updates for the proxy list."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:117
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:120
 msgid "This is available in Pro."
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:122
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:125
 msgid "Update Interval"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:125
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:128
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:56
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:189
 msgid "day(s)"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:126
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:129
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:57
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:190
 msgid "week(s)"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:165
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:168
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:242
 msgid "Last Run"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:168
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:171
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
 msgid "n/a"
 msgstr ""
 
-#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:172
+#: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:175
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:258
 #, php-format
 msgid "Next scheduled at %1$s."
@@ -1846,47 +1855,94 @@ msgid ""
 "assists HTTP requests."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:55
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:56
 #, php-format
 msgid "Utilize %1$s to assist HTTP requests."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:60
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:64
 msgid "List"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:71
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:74
 #, php-format
 msgid "Enter addresses of %1$s one per line."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:73
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:76
 #, php-format
-msgid "It is better to create your own %1$s so that it will run faster."
+msgid "It is recommended to have your own %1$s for better performance."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:73
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:76
 #, php-format
 msgid "To create one, see <a href=\"%1$s\">here</a>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:87
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:90
 msgid "Test"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:88
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:91
 msgid "Check"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:89
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:92
 msgid "Add to List"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:93
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:96
 msgid "Type a URL of Web Page Dumper here to check if it is alive."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:105
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:103
+msgid "Always"
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:114
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:134
+msgid "This requires Pro."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:115
+#, php-format
+msgid "Always use %1$s for these URLs."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:116
+#, php-format
+msgid ""
+"By default %1$s is used as a fallback when a regular HTTP request fails."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:117
+#, php-format
+msgid "For HTTP requests of these URL patterns will use %1$s first."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:118
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:137
+msgid "Set URL patterns with a wildcard one per line."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:119
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:138
+#, php-format
+msgid ""
+"The plugin uses <code><a href=\"%1$s\" target=\"_blank\">fnmatch()</a></"
+"code> for the matching mechanism."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:135
+#, php-format
+msgid "Do not use %1$s for these URLs."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:136
+msgid "The <code>Always</code> options takes precedence."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:149
 msgid "The list is empty."
 msgstr ""
 
@@ -2416,6 +2472,7 @@ msgid "Horizontal Image"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:40
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:210
 msgid "Preferred Language"
 msgstr ""
 
@@ -2426,6 +2483,7 @@ msgid ""
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:53
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:217
 msgid "Preferred Currency"
 msgstr ""
 
@@ -4011,22 +4069,22 @@ msgid ""
 "returns some or all of the item attributes with the given item identifier."
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1056
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1057
 #, php-format
 msgid "by %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1061
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1062
 #, php-format
 msgid "for %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1071
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1072
 #, php-format
 msgid "New from %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1076
+#: include/core/component/unit/unit_type/product_search/output/AmazonAutoLinks_UnitOutput_search.php:1077
 #, php-format
 msgid "Used from %1$s"
 msgstr ""
@@ -4669,48 +4727,48 @@ msgstr ""
 msgid "Secret Key"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:219
-msgid "Last Connected"
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:233
+msgid "Last Checked"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:245
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:259
 msgid "Check PA-API connection."
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:246
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:260
 msgid "Check API"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:250
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:264
 #, php-format
 msgid ""
 "If you get an error, try testing your keys with <a href=\"%1$s\" target="
 "\"_blank\">Scratchpad</a>."
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:255
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:269
 msgid "Disclaimer"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:262
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:276
 #, php-format
 msgid ""
 "Please check the <a href=\"%1$s\" target=\"_blank\">PA-API license "
 "agreement</a> to be safe."
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:284
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:285
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:298
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:299
 msgid "Connected"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:287
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:288
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:301
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:302
 msgid "Disconnected"
 msgstr ""
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:290
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:291
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:304
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:305
 msgid "Untested"
 msgstr ""
 
