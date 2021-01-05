@@ -22,9 +22,10 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
      * @throws  Exception
      */
     public function scratch_requestHTTP() {
-        $_aParameters    = func_get_args() + array( '', 0 );
+        $_aParameters    = func_get_args() + array( '', 0, false );
         $_sURL           = $_aParameters[ 0 ];
         $_iCacheDuration = ( integer ) $_aParameters[ 1 ];
+        $_bEscapeHTML    = ( boolean ) $_aParameters[ 2 ];
         if ( ! filter_var( $_sURL, FILTER_VALIDATE_URL ) ) {
             throw new Exception( 'Set a URL in the argument input field.' );
         }
@@ -37,7 +38,7 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
         $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sURL, $_iCacheDuration, $_aArguments );
         $_aoResponse = $_oHTTP->getRawResponse();
         remove_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10 );
-        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL );
+        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL, $_bEscapeHTML );
 
     }
 
@@ -48,7 +49,7 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
      */
     public function scratch_wp_remote_get() {
 
-        $_aParameters    = func_get_args() + array( '', 0 );
+        $_aParameters    = func_get_args() + array( '', 0, false );
         $_sURL           = $_aParameters[ 0 ];
         if ( ! filter_var( $_sURL, FILTER_VALIDATE_URL ) ) {
             throw new Exception( 'Set a URL in the argument input field.' );
@@ -61,11 +62,11 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
         add_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10, 2 );
         $_aoResponse = wp_remote_get( $_sURL, $_aArguments );
         remove_action( 'requests-requests.before_request', array( $this, 'replyToCaptureRequestHeader' ), 10 );
-        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL );
+        $this->___outputDetailsOfHTTPResponse( $_aoResponse, $_sURL, ( boolean ) $_aParameters[ 2 ] );
 
     }
 
-    private function ___outputDetailsOfHTTPResponse( $aoResponse, $sURL ) {
+    private function ___outputDetailsOfHTTPResponse( $aoResponse, $sURL, $bEscapeHTML ) {
         $this->_outputDetails( 'URL', $sURL );
         $this->_outputDetails( 'Response Status', ( integer ) $this->getElement( ( array ) $aoResponse, array( 'response', 'code' ) ) . ' ' . $this->getElement( $aoResponse, array( 'response', 'message' ) ) );
         $this->_outputDetails( 'Response Header', $this->getHeaderFromResponse( $aoResponse ) );
@@ -73,8 +74,13 @@ class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base 
             $this->_outputDetails( 'Error ' . $aoResponse->get_error_code(),  $aoResponse->get_error_message() );
         }
         $_sHTML = wp_remote_retrieve_body( $aoResponse );
-        $this->_output( '<strong>Body</strong>' );
-        $this->_output( $this->getHTMLBody( $_sHTML ) );
+
+        if ( $bEscapeHTML ) {
+            $this->_outputDetails( 'Body', $this->getHTMLBody( $_sHTML ) );
+        } else {
+            $this->_output( '<strong>Body</strong>' );
+            $this->_output( $this->getHTMLBody( $_sHTML ) );
+        }
 
     }
 
