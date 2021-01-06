@@ -279,7 +279,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aHooks            = $this->___getHooksSetPerOutput();
 
         $_aOptions          = $this->oOption->aOptions;
-        $_aArguments        = $this->oUnitOption->get();
         $_iUnitID           = ( integer ) $this->oUnitOption->get( 'id' ); // there are cases that called dynamically without units like the shortcode
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
 
@@ -300,7 +299,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
-            $_sContent  = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
+            $_aArguments = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
+            $_sContent   = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
         } catch ( Exception $_oException ) {
 
@@ -315,7 +315,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         $_sContent          = $this->___getUnitFormatApplied( $_sContent );     // 4.3.0
-        $_sContent          = apply_filters( 'aal_filter_unit_output', $_sContent, $_aArguments, $_sTemplatePath, $_aOptions, $_aProducts );
+        $_sContent          = apply_filters( 'aal_filter_unit_output', $_sContent, $this->oUnitOption->get(), $_sTemplatePath, $_aOptions, $_aProducts );
 
         $this->___removeHooksPerOutput( $_aHooks );
         return $_sContent;
