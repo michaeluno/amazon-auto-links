@@ -339,7 +339,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
             $_sURLAdminProxyTab = $this->getProxySettingScreenURL();
             return '* ' .__( 'Message for administrator', 'amazon-auto-links' ) . ': '
-                . sprintf( __( 'Consider enabling the %1$s option.', 'amazon-auto-links' ), "<a href='" . esc_url( $_sURLAdminProxyTab ) . "' target='_blank'>Web Page Dumper</a>" );
+                . sprintf( __( 'Consider enabling the %1$s option.', 'amazon-auto-links' ), "<a href='" . esc_url( $_sURLAdminProxyTab ) . "' target='_blank'>" . __( 'HTTP Proxies', 'amazon-auto-links' ) . "</a>" );
         }
         /**
          * @param    string $sErrorMessage
