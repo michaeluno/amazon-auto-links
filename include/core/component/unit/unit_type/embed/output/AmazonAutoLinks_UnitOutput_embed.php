@@ -57,6 +57,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             // If it is split by a white space, search result URL cannot be parsed properly such as https://www.amazon.it/s?k=harry potter&...
             preg_split( "/[\r\n]+/", trim( ( string ) $this->oUnitOption->get( 'uri' ) ), 0, PREG_SPLIT_NO_EMPTY )
         );
+
         $_sLanguage              = $this->oUnitOption->get( 'language' );
         $_aASINsPerURL           = $this->___getASINsPerURL( $_aURLs, $_sLanguage, $_aASINsPerNonProductURL );
         $_iCount                 = ( integer ) $this->oUnitOption->get( 'count' );
@@ -64,12 +65,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_aASINsOfNonProductURLs = $this->___getASINsOfNonProductURL( $_aASINsPerNonProductURL );
         $this->___bNonProductURL = ! empty( $_aASINsPerNonProductURL ); // referred when displaying errors
 
-        // Set these only they could be detected from the URL. Otherwise, leave it to the default.
-        if ( $_sAssociateID ) {
-            $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
-        }
-        $_sAssociateID = $this->oUnitOption->get( 'associate_id' ); // re-retrieve the value as `$_sAssociateID` can be empty
-        if ( $_sLocale ) {
+        // Set the Associate ID and locale. These could be detected from the URL. If not detected, give an empty value so that a warning will be displayed.
+        $this->oUnitOption->set( 'associate_id', $_sAssociateID ); // some elements are formatted based on this value
+        if ( $_sLocale ) {  // for non-amazon sites, locale cannot be detected and empty
             $this->oUnitOption->set( 'country', $_sLocale ); // when no image is found, the alternative thumbnail is based on the default locale
         }
         $_sLocale = $this->oUnitOption->get( 'country' );   // re-retrieve the value as `$_sLocale` can be empty
@@ -132,7 +130,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             foreach( $aASINsPerURL as $_sURL => $_aASINs ) {
                 $_sThisLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sLocale      = $_sLocale ? $_sLocale : $_sThisLocale;
-                $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->___getAssociateIDFromURL( $_sURL );
+                $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->___getAssociateIDFromURL( $_sURL, $_sThisLocale );
                 foreach( $_aASINs as $_sASIN ) {
                     $_aProduct = $this->___getProductScraped( $_sASIN, $_sThisLocale, $_sAssociateID, $sLanguage );
                     $_aProducts[ $_sASIN ] = $_aProduct;
@@ -276,11 +274,11 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
             }
             /**
-             * @param string $sURL
-             *
-             * @return  string
+             * @param  string $sURL
+             * @param  string $sLocale
+             * @return string
              */
-            private function ___getAssociateIDFromURL( $sURL ) {
+            private function ___getAssociateIDFromURL( $sURL, $sLocale ) {
 
                 $_bOverrideAssociatesIDOfURL = ( boolean ) $this->oOption->get( 'custom_oembed', 'override_associates_id_of_url' );
                 if ( ! $_bOverrideAssociatesIDOfURL ) {
@@ -290,13 +288,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         return $_aQuery[ 'tag' ];
                     }
                 }
-
-                $_sHost            = parse_url( $sURL, PHP_URL_HOST ); // without https://
-                $_sLocale          = AmazonAutoLinks_Locales::getLocaleByDomain( $_sHost );
-                $_sSetAssociatesID = $this->oOption->getAssociateID( $_sLocale );
-                return $_sSetAssociatesID
-                    ? $_sSetAssociatesID
-                    : ( string ) $this->oUnitOption->get( 'associate_id' );
+                return $this->oOption->getAssociateID( $sLocale );
 
             }
 
