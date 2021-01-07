@@ -149,7 +149,9 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
          */
         private function ___getField_ItemFormat( $sFieldIDPrefix, $sDefault, $sTemplateID ) {
 
-            $_sLocale       = $this->oFactory->getValue( 'country' );
+            $_sLocale       = isset( $this->oFactory ) && method_exists( $this->oFactory, 'getValue' )
+                ? $this->oFactory->getValue( 'country' )
+                : '';
             $sDefault       = apply_filters( 'aal_filter_template_default_item_format_' . $sTemplateID, $sDefault, $_sLocale );
             $_bAPIConnected = ( boolean ) $this->oOption->getPAAPIStatus( $_sLocale );
             $_sDel          = $_bAPIConnected
