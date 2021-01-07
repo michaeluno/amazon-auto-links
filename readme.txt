@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.4.6
+Stable tag:         4.5.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,20 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.0 - 01/07/2021 =
+- Added the ability to set Associate IDs and PA-API key pairs for multiple locales.
+- Added support for multiple locales for the link converter.
+- Added the `Associates` setting tab.
+- Added the ability to utilize Web Page Dumper to help HTTP requests.
+- Optimized HTTP requests.
+- Fixed an issue that the `Link Style Query Key` general option could be empty, which resulted in unit RSS and JSON feeds broken.
+- Deprecated the `Associates IDs` option in the `oEmbed` section in place of `Amazon Associates` section.
+- Deprecated the `Authentication` setting tab.
+- Updated the base translation file.
+- Updated the Japanese translation.
+- Fixed a bug that Amazon site cookies were not stored properly.
+- Tweaked the style of UI of the `3rd Party` tab.
 
 = 4.4.6 - 12/29/2020 =
 - Fixed a bug that iframe elements of embedded outputs flickered when multiple instances of them were present in one page.
