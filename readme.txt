@@ -322,6 +322,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.5.1 - 01/08/2021 =
+- Fixed an issue that caused a PHP error, "Call to a member function getValue() on null in ...AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:152" on some servers.
+
 = 4.5.0 - 01/07/2021 =
 - Added the ability to set Associate IDs and PA-API key pairs for multiple locales.
 - Added support for multiple locales for the link converter.

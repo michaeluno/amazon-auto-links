@@ -1,1 +1,1 @@
-- Fixed a bug that caused a PHP error, "Call to a member function getValue() on null in ...AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:152" on some servers.
+- Fixed an issue that caused a PHP error, "Call to a member function getValue() on null in ...AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:152" on some servers.
