@@ -1,0 +1,1 @@
+- Fixed a bug that caused a PHP warning, "strpos(): Empty needle in "...AmazonAutoLinks_LinkConverter_Output.php on line 105". 

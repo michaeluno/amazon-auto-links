@@ -102,7 +102,7 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
             $_sAssociateID = $this->___getAssociateIDByLocale( $_sLocale );
 
             // If the tag is already inserted,
-            if ( false !== strpos( $_sParsedURL, $_sAssociateID ) ) {
+            if ( strlen( $_sAssociateID ) && false !== strpos( $_sParsedURL, $_sAssociateID ) ) {
                 return $aMatches[ 1 ] . $_sParsedURL . $aMatches[ 4 ];
             }
 
