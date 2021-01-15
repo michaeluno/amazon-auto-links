@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.5.1
+Stable tag:         4.5.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.2 - 01/15/2021 =
+- Fixed a bug that caused a PHP warning, "strpos(): Empty needle in "...AmazonAutoLinks_LinkConverter_Output.php on line 105". 
 
 = 4.5.1 - 01/08/2021 =
 - Fixed an issue that caused a PHP error, "Call to a member function getValue() on null in ...AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:152" on some servers.
