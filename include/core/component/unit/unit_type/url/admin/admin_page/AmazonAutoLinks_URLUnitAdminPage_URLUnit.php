@@ -16,16 +16,20 @@
  */
 class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage_Page_Base {
 
+    public $sTabSlug = 'first';
+
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'url_unit' ],
             'title'         => __( 'Add Unit by URL', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );
     }
 
@@ -34,7 +38,21 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
      * @callback add_action load_{page slug}
      */ 
     public function replyToLoadPage( $oFactory ) {
-        
+
+        // Form Section - we use the default one ('_default'), meaning no section.
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $oFactory->addInPageTabs(
+            $this->sPageSlug,
+            array(
+                'tab_slug' => $this->sTabSlug,
+                'title'    => __( 'Add Unit by URL', 'amazon-auto-links' ),
+                'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
+            )
+        );
+        $this->oFactory->setPageHeadingTabsVisibility( false );
+        $this->oFactory->setPageTitleVisibility( false );
+        $this->oFactory->setInPageTabsVisibility( false );
+
         // Form Section - we use the default one ('_default'), meaning no section.
         $oFactory->addSettingSections(
             $this->sPageSlug, // target page slug
@@ -68,7 +86,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
          */
         protected function _getSectionArguments() {
             return array(
-                // 'tab_slug'      => $this->sTabSlug,
+                'tab_slug'      => $this->sTabSlug,
                 'section_id'    => '_default',
                 'description'   => array(
                     __( 'The URL unit type allows you to search products found in the page with specified urls.', 'amazon-auto-links' ),

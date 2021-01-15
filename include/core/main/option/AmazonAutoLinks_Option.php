@@ -31,7 +31,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     
         'capabilities' => array(
             'setting_page_capability' => 'manage_options',
-        ),        
+            'create_units'            => 'edit_pages',
+        ),
         'debug' => array(
             'debug_mode' => 0,
         ),

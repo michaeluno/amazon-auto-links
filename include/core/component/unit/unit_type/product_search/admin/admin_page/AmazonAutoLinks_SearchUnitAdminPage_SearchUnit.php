@@ -20,10 +20,12 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
      * @since   3.11.1
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ],
             'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );
     }
 

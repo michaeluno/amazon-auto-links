@@ -21,11 +21,13 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
      * @since   4.1.0
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
             'title'         => __( 'Add Unit by ScratchPad Payload', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );
     }
 

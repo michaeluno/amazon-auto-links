@@ -11,19 +11,21 @@
 /**
  * Adds the 'Add Unit by Category' page.
  * 
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
      * @return array
-     * @since 3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
             'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
             // 'show_in_menu'  => false,
         );
     }
@@ -31,8 +33,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
     /**
      * A user constructor.
      * 
-     * @since       3
-     * @return      void
+     * @since 3
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _construct( $oFactory ) {
         

@@ -50,11 +50,26 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_
             array(
                 'field_id'      => 'setting_page_capability',
                 'type'          => 'select',
-                'title'         => __( 'Capability', 'amazon-auto-links' ),
+                'title'         => __( 'Settings', 'amazon-auto-links' ),
                 'tip'           => __( 'Select the user role that is allowed to access the plugin setting pages.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ': ' . __( 'Administrator', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'Administrator', 'amazon-auto-links' ) . '</code>',
                 'capability'    => 'manage_options',
                 'label'         => array(                        
+                    'manage_options' => __( 'Administrator', 'amazon-auto-links' ),
+                    'edit_pages'     => __( 'Editor', 'amazon-auto-links' ),
+                    'publish_posts'  => __( 'Author', 'amazon-auto-links' ),
+                    'edit_posts'     => __( 'Contributor', 'amazon-auto-links' ),
+                    'read'           => __( 'Subscriber', 'amazon-auto-links' ),
+                ),
+            ),
+            array(
+                'field_id'      => 'create_units',
+                'type'          => 'select',
+                'title'         => __( 'Creating Units', 'amazon-auto-links' ),
+                'description'   => __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'Editor', 'amazon-auto-links' ) . '</code>',
+                'capability'    => 'manage_options',
+                'default'       => 'edit_pages',
+                'label'         => array(
                     'manage_options' => __( 'Administrator', 'amazon-auto-links' ),
                     'edit_pages'     => __( 'Editor', 'amazon-auto-links' ),
                     'publish_posts'  => __( 'Author', 'amazon-auto-links' ),

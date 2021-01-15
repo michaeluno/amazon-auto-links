@@ -21,11 +21,13 @@ class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnit
      * @since   4.0.0
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'feed_unit' ],
             'title'         => __( 'Add Feed Unit', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );
     }
 
@@ -34,6 +36,7 @@ class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnit
      * @since   4.0.0
      */
     protected function _getSectionArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             // 'tab_slug'      => $this->sTabSlug,
             'section_id'    => '_default',
@@ -41,6 +44,7 @@ class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnit
                 __( 'The feed unit type allows you to import unit data of external sites that set up Amazon Auto Links. Make use of this unit to save API calls.', 'amazon-auto-links' ),
                 __( 'After creating a unit on another site, copy the JSON feed URL found in the Manage Units page. Then paste the URL in the option field here.', 'amazon-auto-links' ),
             ),
+            'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );
     }
 
