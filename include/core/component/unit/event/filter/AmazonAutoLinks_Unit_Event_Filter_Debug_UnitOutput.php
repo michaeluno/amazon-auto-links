@@ -36,7 +36,11 @@ class AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput extends AmazonAutoLinks
         if ( $this->getElement( $aUnitOptions, array( 'is_preview' ) ) ) {
             return $sOutputHTML;
         }
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return $sOutputHTML;
+        }
         return $sOutputHTML . $this->___getUnitDebugInformation( $aUnitOptions, $sTemplatePath, $aPluginOptions, $aProducts );
+
     }
         /**
          * Prints out unit debug information.
