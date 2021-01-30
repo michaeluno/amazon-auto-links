@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.0
 Requires MySQL:     5.0.3
-Stable tag:         4.5.2
+Stable tag:         4.5.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.3 - 01/31/2021 =
+- Added the `Creating Units` option under the `Access Rights` section of the `Misc` tab which lets the user set a user role to allow creating units.
+- Fixed a bug that the wrong status was displayed when testing PA-API keys failed in the Associates tab.
+- Fixed a bug that setting forms could not load in PHP 8.0.
 
 = 4.5.2 - 01/15/2021 =
 - Fixed a bug that caused a PHP warning, "strpos(): Empty needle in "...AmazonAutoLinks_LinkConverter_Output.php on line 105". 

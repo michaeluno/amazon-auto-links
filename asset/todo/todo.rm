@@ -1,7 +1,6 @@
 # Todos
 
 ## Minor
-- [4.5.0][Web Page Dumper] Add an option to exclude hosts by a portion of URL.
 - [4.5.1] Add an option "Use these proxies for Web Page Dumper".
 - [4.6.0] Fix image widths displayed with the %content% tag.
 - [4.6.0] Create a stylesheet that applies to all the templates. 
