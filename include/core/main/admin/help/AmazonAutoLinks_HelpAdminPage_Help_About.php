@@ -24,6 +24,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
         return array(
             'tab_slug'  => 'about',
             'title'     => __( 'About', 'amazon-auto-links' ),
+            'capability' => 'manage_options',
         );
     }
 
