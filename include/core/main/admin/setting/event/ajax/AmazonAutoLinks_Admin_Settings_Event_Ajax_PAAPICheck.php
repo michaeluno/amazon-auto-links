@@ -36,13 +36,15 @@ class AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck extends AmazonAutoLin
 
         $_iNow         = time();
         $_aResponse    = array(
-            'last_connected'           => $_iNow,
-            'last_connected_readable'  => $this->getSiteReadableDate( $_iNow, get_option( 'date_format' ) . ' H:i:s', true ),
+            'error'                    => 0,
+            'last_checked'           => $_iNow,
+            'last_checked_readable'  => $this->getSiteReadableDate( $_iNow, get_option( 'date_format' ) . ' H:i:s', true ),
         );
         try {
             $this->___getPAAPITested( $_sLocale, $_sAssociateID, $_sAccessKey, $_sSecretKey );
         } catch ( Exception $oException ) {
             return array(
+                'error'     => 1,
                 'message'   => $oException->getMessage(),
             ) + $_aResponse;
         }

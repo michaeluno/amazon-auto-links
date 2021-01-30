@@ -101,10 +101,16 @@
                         _oContainerPAAPI.find( 'input.status' ).val( 0 );
                         return;
                     }
-                    _showPAAPICheckResponseText( _oThis, _oContainerPAAPI, response.result.message );
-                    _oContainerPAAPI.find( '.paapi-last-connected' ).html( response.result.last_connected_readable );
-                    _oContainerPAAPI.find( 'input.last-connected' ).val( response.result.last_connected );
-                    _oContainerPAAPI.find( 'input.status' ).val( 1 );
+                    if ( response.result.error ) {
+                        _showPAAPICheckResponseError( _oThis, _oContainerPAAPI, response.result.message );
+                        _oContainerPAAPI.find( 'input.status' ).val( 0 );
+                    } else {
+                        _showPAAPICheckResponseText( _oThis, _oContainerPAAPI, response.result.message );
+                        _oContainerPAAPI.find( 'input.status' ).val( 1 );
+                    }
+                    _oContainerPAAPI.find( '.paapi-last-checked' ).html( response.result.last_checked_readable );
+                    _oContainerPAAPI.find( 'input.last-checked' ).val( response.result.last_checked );
+
                 },
                 error: function( response ) {
                     _debugLog( 'Ajax response error', response );

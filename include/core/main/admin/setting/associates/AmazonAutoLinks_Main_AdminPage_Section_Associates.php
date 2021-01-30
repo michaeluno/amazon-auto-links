@@ -247,7 +247,7 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                                 // Stores a timestamp
                                 'field_id'          => 'last_connected',
                                 'class'             => array(
-                                    'input' => 'last-connected'
+                                    'input' => 'last-checked'
                                 ),
                                 'type'              => 'hidden',
                                 'hidden'            => true,
@@ -286,7 +286,7 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                 private function ___getPAAPILastChecked( $sLocale ) {
                     $_oOption      = AmazonAutoLinks_Option::getInstance();
                     $_iLastChecked = ( integer ) $_oOption->get( array( 'associates', $sLocale, 'paapi', 'last_connected' ) );
-                    return "<span class='paapi-last-connected'>"
+                    return "<span class='paapi-last-checked'>"
                             . $this->getSiteReadableDate( $_iLastChecked, get_option( 'date_format' ) . ' H:i:s', true )
                         . "</span>";
                 }
