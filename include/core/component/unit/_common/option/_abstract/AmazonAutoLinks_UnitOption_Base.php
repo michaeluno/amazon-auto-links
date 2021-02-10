@@ -233,7 +233,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             }
 
             /// Use the value set in the Associates section.
-            $aUnitOptions[ 'associate_id' ]         = $oOption->getAssociateID( $aUnitOptions[ 'country' ] );
+            $aUnitOptions[ 'associate_id' ]         = empty( $aUnitOptions[ 'associate_id' ] )
+                ? $oOption->getAssociateID( $aUnitOptions[ 'country' ] )
+                : $aUnitOptions[ 'associate_id' ];
             $aUnitOptions[ 'language' ]             = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'language' );
             $aUnitOptions[ 'preferred_currency' ]   = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'currency' );
             return $aUnitOptions;
