@@ -221,7 +221,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         private function ___printDebugInformation( $oFactory ) {
 
             $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( ! $_oOption->isDebug() ) {
+            if ( ! $_oOption->isDebug() && ! $_oOption->isDebugMode() ) {
                 return;
             }
             echo "<h3>"
