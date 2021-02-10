@@ -1,3 +1,0 @@
-- Fixed a bug that failed to create a plugin temporary directory on some sites causing a PHP Warning: file_put_contents(...) failed to open stream: No such file or directory in ...AmazonAutoLinks_VersatileFileManager.php on line 89.
-- Added the `File Permissions` field in the `About` tab of the `Help page`.
-- Removed the `Server Information` field in the `About` tab of the `Help page`.
