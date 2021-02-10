@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.6.0
+Tested up to:       5.6.1
 Requires MySQL:     5.0.3
-Stable tag:         4.5.3
+Stable tag:         4.5.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.4 - 02/11/2021 =
+- Fixed a bug that the `associate_id` direct unit argument did not take effect, which started from v4.5.0.
+- Fixed a bug that an Associate ID input value was lost when creating category units, which started from v4.5.0.
+- Fixed a bug that the `Item Format` unit option was not saved properly, which started from v4.5.3.
 
 = 4.5.3 - 01/31/2021 =
 - Added the `Creating Units` option under the `Access Rights` section of the `Misc` tab which lets the user set a user role to allow creating units.
