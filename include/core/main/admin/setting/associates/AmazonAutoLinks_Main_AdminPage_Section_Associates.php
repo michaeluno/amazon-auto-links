@@ -261,7 +261,10 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                                         . "</a>"
                                     . "</div>"
                                     . "<div class='response-text-paapi-check'></div>",
-                                'description'       => __( 'If you get an error, try testing your keys with <a href="%1$s" target="_blank">Scratchpad</a>.', 'amazon-auto-links' ),
+                                'description'       => sprintf(
+                                    __( 'If you get an error, try testing your keys with <a href="%1$s" target="_blank">Scratchpad</a>.', 'amazon-auto-links' ),
+                                    esc_url( 'https://webservices.amazon.com/paapi5/scratchpad/index.html' )
+                                ),
                             ),
                             array(
                                 'field_id'          => '_disclaimer',
