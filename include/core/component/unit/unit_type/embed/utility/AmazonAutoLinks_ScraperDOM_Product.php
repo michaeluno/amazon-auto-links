@@ -420,7 +420,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         private function ___getFeatures( DOMXPath $oXPath, DOMNode $oItemNode ) {
             $_aFeatures   = array();
             $_onFeatures  = $oXPath->query( './/div[@id="feature-bullets"]', $oItemNode );
-            if ( null === $_onFeatures ) {
+            if ( null === $_onFeatures || ! $_onFeatures->length ) {
                 return $_aFeatures;
             }
             $_oLis        = $oXPath->query( './/li', $_onFeatures->item( 0 ) );

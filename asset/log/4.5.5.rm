@@ -1,0 +1,1 @@
+- Fixed a bug that the `%feature%` tag displayed the wrong output for the `embed` unit type.  
