@@ -38,7 +38,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
     /**
      * Indicates whether the given URLs contain a non-product URL.
-     * @var bool
+     * @var   boolean
      * @since 4.4.0
      */
     private $___bNonProductURL = false;
@@ -46,8 +46,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     /**
      * Fetches product data and returns the associative array containing the output of product links.
      *
-     * @param array $aURLs
-     * @return            array            An array contains products.
+     * @param  array $aURLs
+     * @return array An array contains products.
      */
     public function fetch( $aURLs=array() ) {
 
@@ -141,10 +141,10 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             return $_aProducts;
         }
 
-    /**
-         * @param array $aProductsByScraping
-         * @param array $aProductsByPAAPI
-         * @since 4.2.9
+        /**
+         * @param  array $aProductsByScraping
+         * @param  array $aProductsByPAAPI
+         * @since  4.2.9
          * @return array
          */
         private function ___getProductsMerged( array $aProductsByScraping, array $aProductsByPAAPI ) {
@@ -294,10 +294,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
     /**
      * Overrides parent method to return errors specific to this embed unit type.
-     * @param array $aProducts
-     *
+     * @param  array  $aProducts
      * @return string
-     * @since   4.2.2
+     * @since  4.2.2
      */
     protected function _getError( $aProducts ) {
 
@@ -363,7 +362,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * For some reasons, like cloudflare cache errors, the Amazon product page responds with the 200 status but shows an error.
          * In that case, products data become unfinished. So remove those.
          * @param  array $aProducts
-         *
          * @return array
          * @since  4.4.5
          */
@@ -402,12 +400,12 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      *
      * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
      *
-     * @since       4.2.10
-     * @return      array
-     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
-     * @param   array $aProduct
-     * @param   array $aDBRow
-     * @param   array $aScheduleIdentifier
+     * @since    4.2.10
+     * @return   array
+     * @callback add_filter      aal_filter_unit_each_product_with_database_row
+     * @param    array $aProduct
+     * @param    array $aDBRow
+     * @param    array $aScheduleIdentifier
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
 
