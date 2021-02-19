@@ -123,7 +123,12 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
         }
         return parent::_shouldProceed();
     }
-    
+
+    /**
+     * @param  string $sFilterName
+     * @param  array  $aArguments
+     * @return string
+     */
     protected function _getFiltersApplied( $sFilterName, $aArguments ) {
         
         $sContent = $this->getElement( $aArguments, 0 );
@@ -154,12 +159,18 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
             }
     
             $aAutoInsertOptions = $this->aAutoInsertOptions[ $iAutoInsertID ];
-            
+
+            $_aUnitIDs   = $this->_getUnitIDsFiltered( $this->getAsArray( $aAutoInsertOptions[ 'unit_ids' ] ) );
+            if ( empty( $_aUnitIDs ) ) {
+                continue;
+            }
+
             // position - above, below, or both,
             $sPosition   = $aAutoInsertOptions[ 'position' ];
             $_aArguments = array( 
-                'id' => $aAutoInsertOptions[ 'unit_ids' ]
+                'id' => $_aUnitIDs,
             );
+
             if ( $sPosition == 'above' || $sPosition == 'both' ) {
                 $sPre  .= AmazonAutoLinks( $_aArguments, false );
             }

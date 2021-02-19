@@ -204,7 +204,8 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
     protected function _doActions( $sActionName, $aArguments ) {}
 
     /**
-     * @since       3.4.10
+     * @since  3.4.10
+     * @return string|array
      */
     protected function _getFiltersApplied( $sFilterName, $aArguments ) {
         return $this->getElement( $aArguments, 0 );
@@ -444,5 +445,20 @@ abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_Plu
             return true;
             
         }
-        
+
+
+    /**
+     * @param  array $aUnitIDs
+     * @return array
+     * @since  4.5.5
+     */
+    protected function _getUnitIDsFiltered( array $aUnitIDs ) {
+        foreach( $aUnitIDs as $_iIndex => $_iUnitID ) {
+            if ( ! in_array( get_post_status( $_iUnitID ), array( 'private', 'publish' ), true ) ) {
+                unset( $aUnitIDs[ $_iIndex ] );
+            }
+        }
+        return $aUnitIDs;
+    }
+
 }

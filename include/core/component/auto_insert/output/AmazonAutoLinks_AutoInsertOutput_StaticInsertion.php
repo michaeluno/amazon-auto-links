@@ -28,7 +28,7 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
     }
     
     /**
-     * @return      string
+     * @return array|string
      */
     protected function _getFiltersApplied( $sFilterName, $aArguments ) {
 
@@ -84,12 +84,16 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
                 }
 
                 $_aAutoInsertOptions = $this->aAutoInsertOptions[ $_iAutoInsertID ];        
-                
+                $_aUnitIDs   = $this->_getUnitIDsFiltered( $this->getAsArray( $_aAutoInsertOptions[ 'unit_ids' ] ) );
+                if ( empty( $_aUnitIDs ) ) {
+                    continue;
+                }
+
                 // position - above, below, or both,
                 $_sPosition  = $_aAutoInsertOptions[ 'static_position' ];
-                $_aArguments = array( 
-                    'id' => $_aAutoInsertOptions[ 'unit_ids' ]
-                );                       
+                $_aArguments = array(
+                    'id' => $_aUnitIDs,
+                );
                 if ( 'above' === $_sPosition || 'both' === $_sPosition ) {
                     $sPre  .= AmazonAutoLinks( $_aArguments, false );
                 }
