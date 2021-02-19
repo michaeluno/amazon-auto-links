@@ -117,7 +117,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
 
         // Optional
         $_aProduct[ 'title' ]               = $this->___getProductTitle( $_oXPath, $_oItemNode );
-        $_aImages                           = $this->___getProductImages( $_oXPath, $_oItemNode );
+        $_aImages                           = $this->___getProductImages( $_oXPath, $_oItemNode, $_aProduct[ 'ASIN' ] );
         $_aProduct[ 'thumbnail_url' ]       = $this->___getThumbnailURLFormatted( array_shift($_aImages ) );  // extract the first array item
         $_aProduct[ 'image_set' ]           = $this->_oUtil->getSubImageOutput( $_aImages, $_aProduct[ 'title' ], $_aProduct[ 'product_url' ] );
         if ( $_aProduct[ 'thumbnail_url' ] && ! $_aProduct[ 'image_set' ] ) {
@@ -454,12 +454,12 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         }
 
         /**
-         * @param $oXPath
-         * @param $oItemNode
-         *
+         * @param  DOMXPath $oXPath
+         * @param  DOMNode  $oItemNode
+         * @param  string   $sASIN
          * @return array    holding image URLs including sub-images
          */
-        private function ___getProductImages( DOMXPath $oXPath, DOMNode $oItemNode ) {
+        private function ___getProductImages( DOMXPath $oXPath, DOMNode $oItemNode, $sASIN ) {
             $_aImages           = array();
             $_oSRCs             = $oXPath->query( './/div[@id="altImages"]//li[contains(@class, "imageThumbnail")]//img/@src', $oItemNode );
             if ( ! $_oSRCs->length  ) {
@@ -467,6 +467,9 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
             }
             foreach( $_oSRCs as $_oAttribute ) {
                 $_aImages[] = trim( $_oAttribute->nodeValue );
+            }
+            if ( empty( $_aImages ) ) {
+                $_aImages[] = 'https://images-na.ssl-images-amazon.com/images/P/' . $sASIN . '.01.L.jpg';
             }
             return $_aImages;
         }

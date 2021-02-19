@@ -191,12 +191,12 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         private function ___getProductScraped( $sASIN, $sLocale, $sAssociateID, $sLanguage ) {
 
             $_sProductURL = $this->___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, $_sURLDomain );
-            $_sHTML    = $this->___getProductPage( $_sProductURL, $sLanguage );
-            $_oScraper = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sProductURL );
-            $_aProduct = $_oScraper->get( $sAssociateID, $_sURLDomain );
+            $_sHTML       = $this->___getProductPage( $_sProductURL, $sLanguage );
+            $_oScraper    = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sProductURL );
+            $_aProduct    = $_oScraper->get( $sAssociateID, $_sURLDomain );
 
-            // If the thumbnail is not set, it means failure of retrieving the product data.
-            if ( ! isset( $_aProduct[ 'thumbnail_url' ] ) ) {
+            // If the title is not set, it means failure of retrieving the product data.
+            if ( ! isset( $_aProduct[ 'title' ] ) ) { // it was 'thumbnail_url' before
                 unset( $_aProduct[ '_features' ] );
                 return $_aProduct;
             }
