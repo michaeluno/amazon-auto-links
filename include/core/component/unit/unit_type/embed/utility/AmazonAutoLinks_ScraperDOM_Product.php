@@ -205,6 +205,9 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                 $_noNode = $oXPath->query( './/div[@id="buybox"]//span[contains(@class, "offer-price")]//text()', $oItemNode )->item( 0 );
             }
             if ( null === $_noNode ) {
+                $_noNode = $oXPath->query( './/span[@id="kindle-price"]//text()', $oItemNode )->item( 0 );
+            }
+            if ( null === $_noNode ) {
                 return null;
             }
             return "<span class='amazon-prices'>"
@@ -212,7 +215,6 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
                         . trim( $_noNode->nodeValue )
                     . "</span>"
                 . "</span>";
-
         }
 
         /**
