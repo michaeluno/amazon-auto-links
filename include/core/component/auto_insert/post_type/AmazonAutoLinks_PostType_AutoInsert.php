@@ -13,8 +13,6 @@
  */
 class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoInsert_Action {
 
-
-
     /**
      * Sets up properties and hooks.
      */
@@ -135,18 +133,23 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
                     'posts_per_page' => -1, // ALL posts
                     'fields'         => 'ids',  // return an array of post IDs
                 )
-            );       
+            );
+            $_iDeleted = 0;
             foreach( $_oQuery->posts as $_iAutoInsertPostID ) {
                 $_aUnitIDs = get_post_meta( $_iAutoInsertPostID, 'unit_ids', true );
                 if ( empty( $_aUnitIDs ) || ! is_array( $_aUnitIDs ) ) {
                     wp_delete_post( $_iAutoInsertPostID );
+                    $_iDeleted++;
                     continue;
                 }
                 if ( ! $this->_doPostsExist( $_aUnitIDs ) ) {
                     wp_delete_post( $_iAutoInsertPostID );
+                    $_iDeleted++;
                     continue;
                 }
-
+            }
+            if ( $_iDeleted ) {
+                do_action( 'aal_action_update_active_auto_inserts' );
             }
             
         }
@@ -166,13 +169,11 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
                 }
                 return false;
             }
-        
 
-
-
-    
-
-    // Style for this custom post type pages
+    /**
+     * Style for this custom post type pages
+     * @return string
+     */
     public function style_AmazonAutoLinks_PostType_AutoInsert() {
         $_sNone = 'none';
         return "#post-body-content {
