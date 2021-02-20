@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.6.1
 Requires MySQL:     5.0.3
-Stable tag:         4.5.4
+Stable tag:         4.5.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -321,6 +321,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.5 - 02/20/2021 =
+- Fixed a bug that active auto-insert items were not updated properly when deleting a unit.
+- Fixed a bug that auto-insert outputs were displayed even for deleted/trashed units.
+- Fixed a bug that some prices for books were not displayed for the `embed` unit type.
+- Fixed a bug that some product thumbnails did not load for the `embed` unit type.
+- Fixed a bug that the `%feature%` tag displayed the wrong output for the `embed` unit type.
 
 = 4.5.4 - 02/11/2021 =
 - Fixed a bug that the `associate_id` direct unit argument did not take effect, which started from v4.5.0.
