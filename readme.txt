@@ -1,39 +1,39 @@
 ﻿=== Amazon Auto Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon associate, amazon associates, amazon affiliate, amazon affiliates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
+Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.6.1
+Tested up to:       5.6.2
 Requires MySQL:     5.0.3
 Stable tag:         4.5.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
-Generates links of Amazon products just coming out today. Pick categories and they appear even in JavaScript disabled browsers.
+Generates Amazon affiliate links of products just coming out today. Pick categories and they appear even in JavaScript disabled browsers.
 
 == Description ==
 
-= Display Amazon Associates Links with Minimal Effort =
+= Display Amazon Associates Affiliate Links with Minimal Effort =
 
-Still manually searching products and pasting affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
+Still manually searching products and pasting Amazon affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
-The links are tagged with your Amazon Associate ID. This WordPress plugin supports 18 Amazon locales and works even on JavaScript disabled browsers. Insert the ads as widget or place generated shortcode or PHP code where the links should appear.
+Amazon Auto Links is a WordPress plugin for affiliates to create Amazon affiliate links. The links are tagged with your Amazon Associates ID. All the Amazon locales are supported and it works even on JavaScript disabled browsers. Insert the ads as widget, place shortcode, or use auto-insert to display units automatically where the links should appear.
 
 If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
-Display affiliate links along with your posts with this plugin to generate actual income with minimal efforts.
+Display Amazon affiliate links along with your posts with this plugin to earn commissions with minimal efforts.
 
 = Compatible with PA-API 5! =
-As of 2019/10/31, Amazon ended PA-API v4 and your site may no longer be able to display Amazon products with old API keys. In that case, regenerate keys on the Amazon Associates member's area and you are good to go!
+As of 2019/10/31, Amazon ended PA-API (Product Advertising API) v4 and your site may no longer be able to display Amazon products with old API keys. In that case, regenerate keys on the Amazon Associates member's area and you are good to go!
 
 = Migrate from Amazon Associates Link Builder =
 Are you looking for an alternative to the discontinued Amazon Associates Link Builder plugin? If so, this plugin can take care of their shortcodes inserted with their Gutenberg block.
 
 Just enable the option and you don't have to edit thousands of posts to replace the shortcode.
 
-= Want to display a selected product in a post? =
-If you want to simply display your desired specific product in a post, don't worry. You can do that too. Just paste the product URL in the post editor. No shortcode is required.
+= Display a particular product in a post =
+If you want to simply display your desired specific products in a post, don't worry. You can do that too. Just paste the product URL in the post editor. No shortcode is required.
 
 = See How Amazon Affiliate Links are Displayed =
 
@@ -52,7 +52,7 @@ Just check where you want the product links to appear with auto-insert.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type.
 
 = Auto Link Conversion =
-Hyper links to Amazon products in posts and comments can be transformed into your associate links. This is useful if your site allows guests to post contents that include Amazon links.
+Hyper links to Amazon products in posts and comments can be transformed into your associate affiliate links. This is useful if your site allows guests to post contents that include Amazon links.
 
 = Widgets =
 Place the widget in the sidebar and select the unit you created. The product links will appear in where you want.
@@ -63,8 +63,8 @@ Place the widget in the sidebar and select the unit you created. The product lin
 = Shortcode and PHP Function =
 Insert the ads in specific posts and pages with the shortcode. If you want to insert in the theme template, use the PHP code the plugin provides to produce the outputs.
 
-= Filter Unwanted Products =
-If there are some items you don't want to display, you can create a black and white list by description, title, and ASIN.
+= Filter Products =
+You can filter out certain products you don't want to display with a black and white list by description, title, and ASIN.
 
 = Custom Buttons =
 Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output.
@@ -79,6 +79,7 @@ If you have a web site that can display RSS feed contents, just create a WordPre
 - **Image Size** - The size of thumbnails can be specified. It supports up to 500 pixel large with a clean resolution.
 - **Sort Order** - Shuffle the product links so that the visitor won't get bored as it gives refreshed impression.
 - **URL cloaking** - You can obfuscate the link urls so it helps to prevent being blocked by browser Ad-blocking add-ons.
+- **Load with Javascript** - Decides whether to display units with JavaScript.
 - and more.
 
 = Customize Outputs =
@@ -89,6 +90,7 @@ Besides the **Item Format** unit option which lets you design the output of a un
 - **Product Search** - create a unit of a search result.
 - **Item Look-up** - display specific products.
 - **URL** - list items from an external web source.
+- **ScratchPad Payload** - for more complex PA-API queries.
 
 = Getting Started =
 To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
@@ -98,6 +100,7 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 - Japanese
 - German
 - Italian
+- Spanish
 
 == Installation ==
 
