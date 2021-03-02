@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Amazon Auto Links 4.0.0\n"
+"Project-Id-Version: Amazon Auto Links\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-auto-"
 "links\n"
-"POT-Creation-Date: 2021-01-06 08:12+0900\n"
-"PO-Revision-Date: 2021-01-06 08:25+0900\n"
+"POT-Creation-Date: 2021-03-02 10:58+0900\n"
+"PO-Revision-Date: 2021-03-02 11:00+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -48,7 +48,7 @@ msgstr "メソッドが定義されていません: %1$s"
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:82
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:115
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php:78
-#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:83
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:98
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:78
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php:113
 #: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format.php:167
@@ -149,8 +149,8 @@ msgstr "不明"
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
 #: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:237
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php:43
-#: include/core/main/option/AmazonAutoLinks_Option.php:331
-#: include/core/main/option/AmazonAutoLinks_Option.php:341
+#: include/core/main/option/AmazonAutoLinks_Option.php:332
+#: include/core/main/option/AmazonAutoLinks_Option.php:342
 msgid "Buy Now"
 msgstr "今すぐ購入"
 
@@ -933,23 +933,23 @@ msgstr "イギリス"
 msgid "United States"
 msgstr "アメリカ合衆国"
 
-#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:25
+#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:26
 msgid "Add/Edit Auto-insert"
 msgstr "新規自動挿入を追加/編集"
 
-#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:45
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:30
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:31
+#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:47
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:28
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:29
 msgid "Add New Auto-insert"
 msgstr "新規自動挿入を追加"
 
-#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:46
-#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:55
+#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:48
+#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:58
 msgid "Define where you want units to be inserted."
 msgstr "自動挿入が実行される場所を定義します。"
 
-#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:54
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:33
+#: include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php:57
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:31
 msgid "Edit Auto-insert"
 msgstr "自動挿入の編集"
 
@@ -1222,17 +1222,17 @@ msgstr "チェックされた項目で投稿タイプに属しないものは効
 msgid "Leave all unchecked not to enable this option."
 msgstr "このオプションを有効にしない場合はすべてチェックを外します。"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:27
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:28
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:43
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:25
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:26
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:41
 msgid "Auto-insert"
 msgstr "自動挿入"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:29
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:27
 msgid "Manage Auto-insert"
 msgstr "自動挿入の管理"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:32
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:30
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Action.php:65
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:29
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:127
@@ -1240,11 +1240,11 @@ msgstr "自動挿入の管理"
 msgid "Edit"
 msgstr "編集"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:34
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:32
 msgid "New Auto-insert"
 msgstr "新規自動挿入"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:35
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:33
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:32
 #: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:116
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:130
@@ -1254,23 +1254,23 @@ msgstr "新規自動挿入"
 msgid "View"
 msgstr "閲覧"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:36
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:34
 msgid "View Auto-insert"
 msgstr "自動挿入を閲覧"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:37
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:35
 msgid "Search Auto-insert Definitions"
 msgstr "自動挿入を検索"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:38
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:36
 msgid "No definitions found for Auto-insert"
 msgstr "自動挿入の定義は見つかりません"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:39
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:37
 msgid "No definitions Found for Auto-insert in Trash"
 msgstr "ゴミ箱には自動挿入の定義は見つかりません"
 
-#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:40
+#: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:38
 msgid "Parent Auto-insert"
 msgstr "親自動挿入"
 
@@ -1328,6 +1328,7 @@ msgstr "ホバー"
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:51
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:64
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:69
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Default"
 msgstr "デフォルト"
@@ -1616,7 +1617,7 @@ msgstr "埋め込みに使用するテンプレートを選択します。"
 
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:70
 msgid "Use iframe"
-msgstr "iframe を使用"
+msgstr "iframe の使用"
 
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:71
 msgid ""
@@ -1690,7 +1691,7 @@ msgstr "投稿とコメントの内容にある Amazon のリンクをコンバ�
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:69
 msgid "Applies to"
-msgstr "次に適用: "
+msgstr "次に適用:"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:71
 msgid "Post contents"
@@ -1781,6 +1782,7 @@ msgstr "クリップボードにログをコピーするのに失敗しました
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab.php:26
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:26
+#: include/core/component/unit/unit_type/embed/output/AmazonAutoLinks_UnitOutput_embed.php:341
 msgid "HTTP Proxies"
 msgstr "HTTP プロキシ"
 
@@ -1792,7 +1794,7 @@ msgstr "通常の HTTP リクエストに対してプロキシを有効にしま
 #: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:59
 #, php-format
 msgid "API requests will not use %1$s"
-msgstr "API リクエストには %1$s は使用されません。"
+msgstr "API リクエストには %1$s は使用されません"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
 msgid "HTTP proxies"
@@ -2055,7 +2057,7 @@ msgid "Blocked by Captcha."
 msgstr "キャプチャによりブロックされました。"
 
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:57
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:50
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:52
 msgid "OK"
 msgstr "OK"
 
@@ -2089,7 +2091,7 @@ msgid "Get it Now"
 msgstr "プロを今すぐ入手"
 
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
-#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:64
+#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:66
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
 msgid "Debug"
@@ -2278,7 +2280,7 @@ msgstr "初期値: <code>%1$s</code>"
 #: include/core/component/unit/unit_type/product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:55
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:156
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Tab_Associates.php:76
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:66
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:68
 msgid "Associate ID"
 msgstr "アソシエイトID"
 
@@ -2436,7 +2438,7 @@ msgstr ""
 "ない場合は空白で残します。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:83
-#: include/core/main/option/AmazonAutoLinks_Option.php:330
+#: include/core/main/option/AmazonAutoLinks_Option.php:331
 msgid "read more"
 msgstr "もっと読む"
 
@@ -2698,161 +2700,161 @@ msgstr ""
 msgid "Output Formats"
 msgstr "出力フォーマット"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:168
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:170
 msgid "Item Format"
 msgstr "アイテムフォーマット"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:182
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:184
 msgid "Sets the layout of the product. The following tags are available."
 msgstr "プロダクトのレイアウトを設定します。以下のタグが使用可能です。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:183
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:185
 msgid "a product link url"
 msgstr "プロダクトリンクの URL"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:184
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:186
 msgid "a title with HTML tags defined in the Title Format option"
 msgstr "タイトルフォーマット設定で定められた HTML タグ付きのタイトル"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:185
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:187
 msgid "a title without HTML tags"
 msgstr "HTML タグ無しのタイトル"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:186
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:188
 msgid "a thumbnail with HTML tags defined in the Image Format option"
 msgstr "画像フォーマット設定で定められた HTML タグ付きのサムネイル"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:187
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:189
 msgid "sub-images"
 msgstr "サブ画像"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:188
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:190
 msgid "the thumbnail size set in the Image Size option"
 msgstr "画像サイズ設定で指定されたサムネイルのサイズ"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:189
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:191
 msgid "a description with HTML tags"
 msgstr "HTML タグ付きの商品説明"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:190
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:192
 msgid "a description without HTML tags"
 msgstr "HTML タグ無しの商品説明"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:191
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:193
 msgid "a product price"
 msgstr "プロダクト価格"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:192
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:194
 msgid "user rating"
 msgstr "ユーザー(カスタマー)評価"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:193
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:195
 msgid "customer reviews."
 msgstr "カスタマーレビュー。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:194
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:196
 msgid "a store link button."
 msgstr "ストアリンクボタン。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:195
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:197
 msgid "a disclaimer for the product information"
 msgstr "プロダクト情報に関する免責事項"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:196
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:198
 msgid "a full product HTML description"
 msgstr "HTML タグ付きでのプロダクトの全説明"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:198
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:200
 msgid "meta data of the product"
 msgstr "商品の関連データ"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:199
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:201
 msgid "the author of the product"
 msgstr "商品の著作者"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:200
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:202
 msgid "categories that the product belongs to"
 msgstr "商品が属するカテゴリー"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:201
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:203
 msgid "list of product features"
 msgstr "プロダクトの特徴のリスト"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:202
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:204
 msgid "sales rank of the product"
 msgstr "商品のセールスランク"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:203
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:205
 msgid "the updated date"
 msgstr "更新日"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:204
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:206
 msgid "prime mark"
 msgstr "プライムマーク"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:209
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:211
 #, php-format
 msgid "Some items need <a href=\"%1$s\">API</a> to be set up."
 msgstr ""
 "幾つかの項目は <a href=\"%1$s\">API</a> がセットアップされている必要がありま"
 "す。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:215
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:217
 msgid "Some tags require the plugin database table to be updated."
 msgstr "幾つかのタグはプラグインのデータベーステーブルの更新が必要です。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:232
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:234
 msgid "Unit Format"
 msgstr "ユニットフォーマット"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:238
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:240
 msgid "Sets the layout of the unit."
 msgstr "ユニットのレイアウトを設定します。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:239
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:241
 msgid "the custom text set in the <b>Custom Text</b> option."
 msgstr "<b>カスタムテキスト</b>オプションで設定された任意のテキスト。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:240
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:242
 msgid "products"
 msgstr "商品"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:259
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:261
 msgid "Title Format"
 msgstr "タイトルのフォーマット"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:265
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:267
 msgid "Sets the layout of the title."
 msgstr "タイトルのレイアウトを設定します。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:266
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:295
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:268
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:297
 msgid "product link url"
 msgstr "商品リンク URL"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:267
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:296
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:269
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:298
 msgid "title"
 msgstr "タイトル"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:268
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:300
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:270
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:302
 msgid "description without HTML tags"
 msgstr "HTML タグなしの詳細"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:288
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:290
 msgid "Image Format"
 msgstr "イメージフォーマット"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:294
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:296
 msgid "Sets the layout of the image."
 msgstr "画像のレイアウトを設定します。"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:297
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:299
 msgid "image url"
 msgstr "画像の URL"
 
-#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:299
+#: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:301
 msgid "image size"
 msgstr "イメージサイズ"
 
@@ -2955,7 +2957,7 @@ msgid "Amazon Auto Links Unit"
 msgstr "Amazon Auto Links ユニット"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:125
-#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:25
+#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:26
 #: include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First.php:27
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second.php:34
 msgid "Add Unit by Category"
@@ -3362,7 +3364,7 @@ msgstr "追加されたカテゴリー"
 msgid "Category"
 msgstr "カテゴリー"
 
-#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:65
+#: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:67
 msgid "Form Options"
 msgstr "フォームオプション"
 
@@ -3380,10 +3382,10 @@ msgstr "基本情報を埋め、カテゴリー選択のフォームに進みま
 
 #: include/core/component/unit/unit_type/category/admin/admin_page/first/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation.php:91
 #: include/core/component/unit/unit_type/contextual/admin/admin_page/AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit.php:113
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:87
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:91
 #: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:94
-#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:91
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:135
+#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:93
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:153
 msgid "The associate ID cannot be empty."
 msgstr "アソシエイト ID は空欄にはできません。"
 
@@ -3658,12 +3660,12 @@ msgstr ""
 
 #: include/core/component/unit/unit_type/contextual/admin/admin_page/AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit.php:122
 #: include/core/component/unit/unit_type/contextual/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_contextual.php:68
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:96
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:100
 #: include/core/component/unit/unit_type/feed/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_feed.php:73
 #: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:102
-#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:100
+#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:102
 #: include/core/component/unit/unit_type/scratchpad_payload/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload.php:76
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:144
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:162
 #: include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php:74
 msgid "There was an error in your input."
 msgstr "入力に誤りがあります。"
@@ -3712,20 +3714,20 @@ msgstr "除外検索キーワードを半角英数コンマ (,) で区切って�
 msgid "test, demo"
 msgstr "テスト, デモ"
 
-#: include/core/component/unit/unit_type/embed/output/AmazonAutoLinks_UnitOutput_embed.php:349
+#: include/core/component/unit/unit_type/embed/output/AmazonAutoLinks_UnitOutput_embed.php:340
 msgid "Message for administrator"
 msgstr "管理者へのメッセージ"
 
-#: include/core/component/unit/unit_type/embed/output/AmazonAutoLinks_UnitOutput_embed.php:350
+#: include/core/component/unit/unit_type/embed/output/AmazonAutoLinks_UnitOutput_embed.php:341
 #, php-format
 msgid "Consider enabling the %1$s option."
 msgstr "%1$s オプションを有効にすることを検討して下さい。"
 
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:26
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:27
 msgid "Add Feed Unit"
 msgstr "フィードユニットの追加"
 
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:41
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:44
 msgid ""
 "The feed unit type allows you to import unit data of external sites that set "
 "up Amazon Auto Links. Make use of this unit to save API calls."
@@ -3734,7 +3736,7 @@ msgstr ""
 "のユニットデータをインポートしします。API の呼び出し回数を節約するのに使えま"
 "す。"
 
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:42
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:45
 msgid ""
 "After creating a unit on another site, copy the JSON feed URL found in the "
 "Manage Units page. Then paste the URL in the option field here."
@@ -3742,9 +3744,9 @@ msgstr ""
 "別のサイトでユニットを作成後、ユニット管理のページにある JSON フィード URL を"
 "コピーし、このオプションフィールドに貼り付けます。"
 
-#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:82
+#: include/core/component/unit/unit_type/feed/admin/admin_page/AmazonAutoLinks_FeedUnitAdminPage_FeedUnit.php:86
 #: include/core/component/unit/unit_type/feed/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_feed.php:64
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:130
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:148
 #: include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php:65
 msgid "Please set a url."
 msgstr "URL を設定してください。"
@@ -3787,7 +3789,7 @@ msgstr "単品検索"
 
 #: include/core/component/unit/unit_type/item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup
 #: .php:26
-#: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit.php:25
+#: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit.php:26
 #: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:26
 #: include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php:26
 msgid "Add Unit by Search"
@@ -4029,6 +4031,7 @@ msgstr "アーティスト"
 
 #: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:41
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:60
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:75
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
 msgid "Author"
 msgstr "作者"
@@ -4245,11 +4248,11 @@ msgstr "ScratchPad ペイロードメイン"
 msgid "ScratchPad Payload"
 msgstr "ScratchPad ペイロード"
 
-#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:26
+#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:27
 msgid "Add Unit by ScratchPad Payload"
 msgstr "ScratchPad ペイロードでユニットを追加"
 
-#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:42
+#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:44
 #, php-format
 msgid ""
 "The ScratchPad payload unit type allows you to import PA-API queries "
@@ -4258,7 +4261,7 @@ msgstr ""
 "ScratchPad ペイロードユニットタイプは<a href=\"%1$s\" target=\"_blank"
 "\">ScratchPad</a>で生成された PA-API クエリをインポートすることができます。"
 
-#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:86
+#: include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php:88
 #: include/core/component/unit/unit_type/scratchpad_payload/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload.php:67
 msgid "Please set a valid payload JSON."
 msgstr "正しいペイロード JSON を入力してください。"
@@ -4280,18 +4283,19 @@ msgstr ""
 msgid "URL Unit Advanced"
 msgstr "URL ユニット詳細"
 
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:26
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:29
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:48
 msgid "Add Unit by URL"
 msgstr "URL ユニットの追加"
 
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:59
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:77
 #, php-format
 msgid "Please upgrade to <a href=\"%1$s\">Pro</a> to add more items!"
 msgstr ""
 "これ以上項目を追加するには、<a href=\"%1$s\" target=\"_blank\">プロ版</a>へ"
 "アップグレードしてください !"
 
-#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:74
+#: include/core/component/unit/unit_type/url/admin/admin_page/AmazonAutoLinks_URLUnitAdminPage_URLUnit.php:92
 msgid ""
 "The URL unit type allows you to search products found in the page with "
 "specified urls."
@@ -4536,28 +4540,28 @@ msgstr "ヘルプ"
 msgid "About"
 msgstr "アバウト"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:45
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:46
 msgid "Plugin Information"
 msgstr "プラグイン情報"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:58
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:59
 msgid "Database Tables"
 msgstr "データベーステーブル"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:74
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:75
 msgid "General Options"
 msgstr "一般設定"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:87
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:88
 msgid "Tools Options"
 msgstr "ツール設定"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:100
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:101
 #: include/core/main/admin/tool/template_option_converter/AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter.php:32
 msgid "Template Options"
 msgstr "テンプレート設定"
 
-#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:113
+#: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:114
 msgid "File Permissions"
 msgstr "ファイルアクセス権"
 
@@ -4865,6 +4869,7 @@ msgstr "サードパーティ"
 
 #: include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php:25
 #: include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:57
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
 msgid "Settings"
 msgstr "設定"
@@ -4923,7 +4928,7 @@ msgstr "PA-API の接続を確認します。"
 msgid "Check API"
 msgstr "API 動作確認"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:264
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:265
 #, php-format
 msgid ""
 "If you get an error, try testing your keys with <a href=\"%1$s\" target="
@@ -4932,11 +4937,11 @@ msgstr ""
 "もしエラーが出た場合、<a href=\"%1$s\" target=\"_blank\">Scratchpad</a> で"
 "キーをテストしてみてください。"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:269
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:272
 msgid "Disclaimer"
 msgstr "免責"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:276
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:279
 #, php-format
 msgid ""
 "Please check the <a href=\"%1$s\" target=\"_blank\">PA-API license "
@@ -4945,18 +4950,18 @@ msgstr ""
 "安全のため、<a href=\"%1$s\" target=\"_blank\">ライセンス要項</a> をご確認く"
 "ださい。"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:298
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:299
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:301
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:302
 msgid "Connected"
 msgstr "接続されています"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:301
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:302
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:304
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:305
 msgid "Disconnected"
 msgstr "非接続"
 
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:304
-#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:305
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:307
+#: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:308
 msgid "Untested"
 msgstr "未確認"
 
@@ -5127,19 +5132,19 @@ msgstr "ユニットの初期設定をリセットします。"
 msgid "Please check the check box to reset the default settings."
 msgstr "初期設定をリセットするにはチェックボックスにチェックを入れて下さい。"
 
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:65
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:67
 msgid "locale"
 msgstr "地域"
 
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:67
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:69
 msgid "access key"
 msgstr "アクセスキー"
 
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:68
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:70
 msgid "secret access key"
 msgstr "秘密アクセスキー"
 
-#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:73
+#: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:75
 #, php-format
 msgid "The option, %1$s, is empty."
 msgstr "%1$s の設定が空白です。"
@@ -5263,10 +5268,6 @@ msgstr "アクセス権限"
 msgid "Set the access levels to the plugin setting pages."
 msgstr "プラグイン設定ページのアクセス権限を設定します。"
 
-#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
-msgid "Capability"
-msgstr "権限"
-
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:54
 msgid ""
 "Select the user role that is allowed to access the plugin setting pages."
@@ -5275,20 +5276,29 @@ msgstr ""
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:58
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:73
 msgid "Administrator"
 msgstr "管理者"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:59
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:69
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:74
 msgid "Editor"
 msgstr "編集者"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:61
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:76
 msgid "Contributor"
 msgstr "寄稿者"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:62
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:77
 msgid "Subscriber"
 msgstr "購読者"
+
+#: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:68
+msgid "Creating Units"
+msgstr "ユニットの作成"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:27
 msgid "For developers who need to see the internal workings of the plugin."
@@ -5957,6 +5967,9 @@ msgstr "セッションはクッキーのみ使用"
 #: template/rss2/template.php:38
 msgid "Amazon Products"
 msgstr "Amazon プロダクト"
+
+#~ msgid "Capability"
+#~ msgstr "権限"
 
 #, php-format
 #~ msgid "It is better to create your own %1$s so that it will run faster."
