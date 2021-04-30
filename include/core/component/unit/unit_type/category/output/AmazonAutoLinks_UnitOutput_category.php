@@ -327,6 +327,10 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
              * @return array
              */
             private function ___getHTTPBodies( array $aURLs ) {
+                // URLs for exclusion items may be empty
+                if ( empty( $aURLs ) ) {
+                    return array();
+                }
                 $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
                     $aURLs,
                     $this->oUnitOption->get( 'cache_duration' ),
