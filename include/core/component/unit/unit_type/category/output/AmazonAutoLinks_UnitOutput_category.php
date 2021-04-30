@@ -164,8 +164,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
     }
         /**
          * Returns the subject urls for this unit.
-         * @scope   protected   the category2 unit output class extends this method to set own URLs.
-         * @param   $aURLs
+         * @param   array $aURLs
          * @since   3.9.0
          * @return  array
          */
