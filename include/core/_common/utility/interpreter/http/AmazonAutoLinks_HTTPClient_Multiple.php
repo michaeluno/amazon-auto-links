@@ -31,6 +31,13 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
     public $aCaches = array();
 
     /**
+     * A flag that indicates whether HTTP requests have been made or not
+     * @var boolean
+     * @since 4.5.6
+     */
+    private $___bPropertiesSet = false;
+
+    /**
      * Sets up properties.
      *
      * @param array   $aURLs          Each element must be unique.
@@ -90,11 +97,10 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
     }
 
         private function ___setRequestProperties() {
-            static $_bCalled = false;
-            if ( $_bCalled ) {
+            if ( $this->___bPropertiesSet ) {
                 return;
             }
-            $_bCalled = true;
+            $this->___bPropertiesSet = true;
             $this->___setCaches();
             $this->___setHTTPs();
         }
