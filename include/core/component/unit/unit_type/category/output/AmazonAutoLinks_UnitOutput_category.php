@@ -627,8 +627,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
         $_sDescription              = ( $aProduct[ 'description' ] || $_sDescriptionExtracted )
             ? trim( $aProduct[ 'description' ] . " " . $_sDescriptionExtracted ) // only the meta is added by default
             : ''; // 3.10.0 If there is no description, do not even add the div element, which cause an extra margin as a block element.
-        $aProduct[ 'description' ]  = $_sDescription;
-        $_aProduct[ 'text_description' ] = strip_tags( $aProduct[ 'description' ] );
+        $aProduct[ 'description' ]      = $_sDescription;
+        $aProduct[ 'text_description' ] = strip_tags( $aProduct[ 'description' ] );
         return $aProduct;
 
     }
