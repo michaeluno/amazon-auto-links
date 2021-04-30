@@ -25,8 +25,6 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
      */
     public $aHTTPs = array();
 
-
-    public $aCacheNames = array();
     /**
      * @var array
      */
