@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.6.2
+Tested up to:       5.7.1
 Requires MySQL:     5.0.3
-Stable tag:         4.5.5
+Stable tag:         4.5.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.6 - 04/30/2021 =
+- Fixed a bug that the `%description_text%` tag was not formatted properly for category and some other unit types.
+- Fixed a bug that second or subsequent category units in the same page did not appear, started since v4.3.4.
+- Updated Japanese translation items.
+- Updated Spanish translation items.
 
 = 4.5.5 - 02/20/2021 =
 - Fixed a bug that active auto-insert items were not updated properly when deleting a unit.
