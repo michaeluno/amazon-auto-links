@@ -1,7 +1,7 @@
 == Change log ==
 
 = 1.2.10 =
-- Tweaked image layout for mobile screens.
+- Tweaked layout for mobile screens.
 - Tweaked product thumbnails to have rounded corners.
 
 = 1.2.9 =

@@ -417,4 +417,8 @@
     width: 100%;
     margin-bottom: 1em;
   }
+  .amazon-products-container-list .amazon-auto-links-product-body {
+    font-size: small;
+    width: 100%;
+  }
 }
