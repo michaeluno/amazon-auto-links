@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.10 =
+- Tweaked image layout for mobile screens.
+
 = 1.2.9 =
 - Added vertical margin to the button container.
 
