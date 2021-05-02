@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.1
 Requires MySQL:     5.0.3
-Stable tag:         4.5.6
+Stable tag:         4.5.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.7 - 05/03/2021 =
+- Tweaked the `List` template to adjust layout and font sizes for mobile screens.
+- Tweaked the `List` template to give rounded corners to product thumbnails.
 
 = 4.5.6 - 04/30/2021 =
 - Fixed a bug that the `%description_text%` tag was not formatted properly for category and some other unit types.
