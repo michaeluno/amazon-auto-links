@@ -41,7 +41,7 @@
 	max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-
+    border-radius: 3.2%;
 }
 .amazon-products-container-list .amazon-auto-links-credit {
 	font-size: smaller;
