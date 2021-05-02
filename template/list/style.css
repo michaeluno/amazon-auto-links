@@ -37,11 +37,18 @@
 	text-align: center;
     padding: 1em;
 }
+/* Giving thumbnails a corner-rounded frame not to directly apply to the image (modifying the image may be a violation of terms) */
+.amazon-products-container-list .amazon-product-thumbnail a {
+    display: inline-block;
+    background-color: white;
+    padding: 0.8em;
+    border: none;
+    border-radius: 4%;
+}
 .amazon-products-container-list .amazon-product-thumbnail img {
 	max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 3.2%;
 }
 .amazon-products-container-list .amazon-auto-links-credit {
 	font-size: smaller;
