@@ -336,7 +336,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     $this->oUnitOption->get( array( 'custom_text' ), '' ),
                     $sUnitOutput
                 ),
-                $this->oUnitOption->get( array( 'unit_format' ), '' )
+                apply_filters( 'aal_filter_unit_format', $this->oUnitOption->get( array( 'unit_format' ), '' ), $this->oUnitOption ) // 4.5.8 - the RSS template should remove custom text
             );
         }
         /**

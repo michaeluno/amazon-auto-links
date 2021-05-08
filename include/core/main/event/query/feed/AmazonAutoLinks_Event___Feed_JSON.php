@@ -42,10 +42,9 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
         $_aArguments[ '_no_outer_container' ]  = true;
         $_aArguments[ 'show_errors' ]          = 0;
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
-        header(
-            'Content-Type: application/json; charset=' . get_option( 'blog_charset' ),
-            true
-        );
+
+        add_filter( 'aal_filter_unit_format', array( $this, 'replyToGetUnitFormat' ) );
+        header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ), true );
         AmazonAutoLinks( $_aArguments, true );
         exit;
 
@@ -62,6 +61,16 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
             '',
             $sUnitOutput
         );
+    }
+
+    /**
+     * Forces the unit format to only have `%products%` to avoid validation errors.
+     * @param  string $sUnitFormat
+     * @return string
+     * @since  4.5.8
+     */
+    public function replyToGetUnitFormat( $sUnitFormat ) {
+        return '%products%';
     }
 
 }
