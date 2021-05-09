@@ -327,6 +327,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.5.8 - 05/09/2021 =
 - Fixed a bug that unit custom text was inserted for RSS and JSON outputs which resulted in validation errors.
+- Fixed a bug that a box shadow line around product thumbnails appeared in the `List` template for some themes.
 
 = 4.5.7 - 05/03/2021 =
 - Tweaked the `List` template to adjust layout and font sizes for mobile screens.

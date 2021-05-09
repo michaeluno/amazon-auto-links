@@ -1,5 +1,9 @@
 == Change log ==
 
+= 1.2.11 =
+- Fixed duplicated rules.
+- Tweaked the thumbnails link style.
+
 = 1.2.10 =
 - Tweaked layout for mobile screens.
 - Tweaked product thumbnails to have rounded corners.
