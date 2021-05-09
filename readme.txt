@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.1
 Requires MySQL:     5.0.3
-Stable tag:         4.5.7
+Stable tag:         4.5.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.8 - 05/09/2021 =
+- Fixed a bug that unit custom text was inserted for RSS and JSON outputs which resulted in validation errors.
 
 = 4.5.7 - 05/03/2021 =
 - Tweaked the `List` template to adjust layout and font sizes for mobile screens.
