@@ -18,15 +18,19 @@ class AmazonAutoLinks_VersatileFileManager_PAAPILock extends AmazonAutoLinks_Ver
     /**
      * Sets up properties.
      *
-     * @param string  $sLocale  The locale code as an identifier.
+     * @param string  $sLocale          The locale code as an identifier. Needed for a file prefix.
+     * @param string  $sAccessKeyPublic
+     * @param string  $sAccessKeySecret
      * @param integer $iTimeout
      * @param string  $sFileNamePrefix
+     * @since 4.3.5
+     * @since 4.5.9   Added the `$sAccessKeyPublic` and `$sAccessKeySecret` parameter.
      */
-    public function __construct( $sLocale, $iTimeout=1, $sFileNamePrefix='' ) {
+    public function __construct( $sLocale, $sAccessKeyPublic, $sAccessKeySecret, $iTimeout=1, $sFileNamePrefix='' ) {
         $sFileNamePrefix = $sFileNamePrefix
             ? $sFileNamePrefix
             : AmazonAutoLinks_Registry::TRANSIENT_PREFIX . "_LOCK_PAAPI_REQUEST_{$sLocale}_";
-        parent::__construct( $sLocale, $iTimeout, $sFileNamePrefix );
+        parent::__construct( md5( $sLocale . $sAccessKeyPublic . $sAccessKeySecret ), $iTimeout, $sFileNamePrefix );
     }
 
 }

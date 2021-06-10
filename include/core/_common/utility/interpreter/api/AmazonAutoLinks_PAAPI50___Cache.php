@@ -134,11 +134,14 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                  * @todo  Let the user decide the lock interval.
                  */
                 private function ___setAPIRequestLock( array $aArguments ) {
-
-                    $_oFile = new AmazonAutoLinks_VersatileFileManager_PAAPILock( $this->___sLocale );
-                    $_oFile->lock( time() + ( 60 * 30 ) ); // 30 minutes
-
-                }            
+                    $_aAPIParams = $this->getElementAsArray( $aArguments, array( 'constructor_parameters' ) );
+                    $_oLock      = new AmazonAutoLinks_VersatileFileManager_PAAPILock(
+                        $this->___sLocale,
+                        $this->getElement( $_aAPIParams, array( 1 ) ), // public access key
+                        $this->getElement( $_aAPIParams, array( 2 ) )  // secret access key
+                    );
+                    $_oLock->lock( time() + ( 60 * 30 ) ); // 30 minutes
+                }
                 /**
                  * @param  array $aErrors
                  * @return boolean
@@ -168,14 +171,20 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
              */
             public function replyToHaveHTTPRequestInterval( $sRequestURL, $aArguments, $sRequestType ) {
 
+                $_aAPIParams = $this->getElementAsArray( $aArguments, array( 'constructor_parameters' ) );
+                $_oLock      = new AmazonAutoLinks_VersatileFileManager_PAAPILock(
+                    $this->___sLocale,
+                    $this->getElement( $_aAPIParams, array( 1 ) ), // public access key
+                    $this->getElement( $_aAPIParams, array( 2 ) )  // secret access key
+                );
+
                 $_iIteration = 0;
-                $_oLock      = new AmazonAutoLinks_VersatileFileManager_PAAPILock( $this->___sLocale );
                 while( $_oLock->isLocked() ) {
                     sleep( 1 );
                     $_iIteration++;
                     if ( $_iIteration > 10 ) {
                         $_sMessage = sprintf(
-                            'The API request is locked. It will be unlocked at %1$s. Now: %2$s.',
+                            'The API request is locked until %1$s. Now: %2$s.',
                             $this->getSiteReadableDate( $_oLock->getModificationTime() + 1, 'Y-m-d H:i:s' ), // modification + 1
                             $this->getSiteReadableDate( time(), 'Y-m-d H:i:s' )
                         );
