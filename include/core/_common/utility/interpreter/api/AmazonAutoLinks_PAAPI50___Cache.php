@@ -136,7 +136,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                 private function ___setAPIRequestLock( array $aArguments ) {
 
                     $_oFile = new AmazonAutoLinks_VersatileFileManager_PAAPILock( $this->___sLocale );
-                    $_oFile->lock( time() + ( 60 * 30 ) ); // 30 minites
+                    $_oFile->lock( time() + ( 60 * 30 ) ); // 30 minutes
 
                 }            
                 /**
