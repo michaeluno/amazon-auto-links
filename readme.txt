@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.7.1
+Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.5.8
+Stable tag:         4.5.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -324,6 +324,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.5.9 - 06/11/2011 =
+- Fixed a bug that re-entering a new pair of PA-API keys for a locale too soon resulted in the locked error message if the previous keys produced an error.
 
 = 4.5.8 - 05/09/2021 =
 - Fixed a bug that unit custom text was inserted for RSS and JSON outputs which resulted in validation errors.
