@@ -128,7 +128,41 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             return $_aTemplates;
          
         }
-    
+
+    /**
+     * Returns an array of common templates.
+     *
+     * Common templates are the plugin buil-in ones and auto-load without requiring user to activate.
+     *
+     * @since 3.6.0
+     */
+    public function getCommonTemplates() {
+        if ( ! empty( self::$___aCommonTemplates ) ) {
+            return self::$___aCommonTemplates;
+        }
+
+        $_aDirPaths  = array(
+            '_common' => AmazonAutoLinks_Registry::$sDirPath . '/template/_common',
+        );
+        $_aTemplates = array();
+        foreach( $_aDirPaths as $_sID => $_sDirPath ) {
+            $_aTemplates[ $_sID ] = array(
+                'is_active' => true,
+                'dir_path'  => wp_normalize_path( $_sDirPath ),
+                'id'        => $_sID,
+            );
+        }
+
+        self::$___aCommonTemplates = $_aTemplates;
+        return $_aTemplates;
+    }
+        /**
+         * Stores caches of common templates.
+         * @var array
+         * @since 3.6.0
+         */
+        static private $___aCommonTemplates = array();
+
     /**
      * Returns an array that holds arrays of activated template information.
      * 

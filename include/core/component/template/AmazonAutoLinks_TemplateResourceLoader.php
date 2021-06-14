@@ -47,7 +47,7 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         add_action( 'init', array( $this, 'replyToLoadFunctions' ) );
     }
         public function replyToLoadFunctions() {
-            foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+            foreach( $this->_oTemplateOption->getCommonTemplates() + $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
                 if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
                     continue;
                 }
@@ -85,7 +85,7 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         public function _replyToEnqueueActiveTemplateStyles() {
             
             // This must be called after the option object has been established.
-            foreach( $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
+            foreach( $this->_oTemplateOption->getCommonTemplates() + $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
                 
                 $_sCSSPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
                 $_sMinPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
