@@ -254,7 +254,10 @@
     position: relative;
     /*top: 2px;*/
 }
-
+.amazon-products-container-search .amazon-prime svg {
+    height: 1.4em;
+    margin-right: 0.2em;
+}
 /* Prices */
 .amazon-products-container-search .amazon-prices {
     line-height: 1;

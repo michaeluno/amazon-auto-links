@@ -26,3 +26,10 @@ span.crAvgStars a {
     position: relative;
     top: -1px;
 }
+
+/* Prime icon */
+.amazon-prime svg {
+    position: relative;
+    height: 1.2em;
+    vertical-align: middle;
+}

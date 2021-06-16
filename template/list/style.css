@@ -304,6 +304,9 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+.amazon-products-container-list .amazon-prime svg {
+    vertical-align: top;
+}
 
 /* Prices */
 .amazon-products-container-list .amazon-prices {
