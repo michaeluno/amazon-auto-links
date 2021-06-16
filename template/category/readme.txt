@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.0 =
+- Moved some rules to the common template.
+
 = 1.1.1 =
 - Tweaked the style of rating stars and description.
 

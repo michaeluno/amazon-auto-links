@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.1.1
+    Version:        1.2.0
     License:        GNU General Public License v2 or later
     Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -114,16 +114,12 @@
 .amazon-products-container-search .reviews-voting-stripe {
     border-right: 0 !important;
 }
-.amazon-products-container-search span.crAvgStars a {
-    text-decoration: none;
-    border-bottom: 0;
-    /* No underlines in hyper links with box shadow */
-    box-shadow: none;
-}
+
 .amazon-products-container-search .amazon-customer-rating-stars {
     display: inline-block;
-    /*margin: 0.4em 0;*/
-    vertical-align: text-bottom;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: medium;
 }
 .amazon-products-container-search .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -132,11 +128,11 @@
     vertical-align: middle;
 }
 .amazon-products-container-search .crIFrameNumCustReviews .crAvgStars {
-    font-size: small;
     white-space: nowrap;
-    margin-right: 0.4em;
 }
-
+.amazon-products-container-search .review-stars svg {
+    vertical-align: bottom;
+}
 /* Sub-images */
 .amazon-products-container-search .sub-image-container {
     display: inline-block;
@@ -245,6 +241,8 @@
 .amazon-products-container-search .amazon-prime {
     display: inline-block;
     vertical-align: middle;
+    line-height: 1;
+    padding-top: 2px;
 }
 .amazon-products-container-search .prime-icon {
     display: inline-block;
@@ -257,9 +255,12 @@
     /*top: 2px;*/
 }
 
-/* Customer Reviews */
-/* Rating Stars */
 /* Prices */
+.amazon-products-container-search .amazon-prices {
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-block;
+}
 
 /* Categories */
 .amazon-products-container-search ul.categories {

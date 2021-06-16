@@ -15,6 +15,9 @@
 	overflow-x: hidden;
     width: 100%;
 }
+.amazon-products-container-list * {
+    box-sizing: border-box;
+}
 .amazon-products-container-list a {
     color: inherit; /* this prevents a theme native text color for button text in .wp-embed elements */
 	text-decoration: none;
@@ -113,6 +116,7 @@
 .amazon-products-container-list .crIFrameNumCustReviews {
     display: inline-block;
     vertical-align: middle;
+    height: auto;
 }
 .amazon-products-container-list .amazon-customer-reviews .review-date {
     font-size: smaller;
@@ -138,13 +142,8 @@
 }
 .amazon-products-container-list .crAvgStars {
     white-space: nowrap;
-    margin-right: 0.4em;
 }
 .amazon-products-container-list span.crAvgStars a {
-    text-decoration: none;
-    border-bottom: 0;
-    /* No underlines in hyper links with box shadow */
-    box-shadow: none;
     font-size: small;
 }
 
@@ -152,6 +151,7 @@
     display: inline-block;
     margin: 0 0.2em 0 0;
     vertical-align: middle;
+    line-height: 1.6;
 }
 .amazon-products-container-list .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -159,15 +159,16 @@
     /* In some themes the rating number and the star image do not align. This is for the fix.  */
     vertical-align: text-top;
 }
-.amazon-products-container-list .amazon-customer-rating-stars img,
-.amazon-products-container-list .amazon-customer-rating-stars .review-stars,
-.amazon-products-container-list .amazon-customer-rating-stars .review-count
+.amazon-products-container-list .amazon-customer-rating-stars img
 {
     display: inline-block;
     vertical-align: middle;
 }
 .amazon-products-container-list .amazon-customer-rating-stars .review-stars {
-    margin-right: -6px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right: 0.44em;
+    line-height: 1;
 }
 .amazon-products-container-list .amazon-customer-rating-stars img
 {
@@ -176,6 +177,7 @@
 .amazon-products-container-list .amazon-customer-rating-stars .review-count {
     margin-top: 2px;
     margin-left: -2px;
+    display: inline;
 }
 
 /* Button */
@@ -211,13 +213,13 @@
     text-decoration: none;
 }
 .amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip > span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
-    z-index:999;
-    display:none;
-    padding:14px 20px;
-    margin-top:-30px;
-    margin-left:28px;
-    width:300px;
-    line-height:16px;
+    z-index: 999;
+    display: none;
+    padding: 14px 20px;
+    margin-top: -30px;
+    margin-left: 28px;
+    width: 300px;
+    line-height: 16px;
 
 }
 .amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip:hover > span.amazon-disclaimer-tooltip-content {
@@ -290,21 +292,29 @@
 .amazon-products-container-list .amazon-prime {
     display: inline-block;
     vertical-align: middle;
+    height: 1em;
+    line-height: 1.6;
+    font-size: medium;
+    margin-right: 0.2em;
 }
 .amazon-products-container-list .prime-icon {
     display: inline-block;
-    width: 48px;
+    width: 60px;
     height: 1em;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: bottom;
-    position: relative;
-    top: 3px;
-    left: -2px;
 }
 
 /* Prices */
-.amazon-products-container-list .amazon-prices,
+.amazon-products-container-list .amazon-prices {
+    margin-right: 0.4em;
+    line-height: 1.6;
+}
+.amazon-products-container-list .amazon-prices {
+	font-size: small;
+    display: inline-block;
+    vertical-align: middle;
+}
 .amazon-products-container-list .amazon-product-price,
 .amazon-products-container-list .amazon-product-discounted-price,
 .amazon-products-container-list .amazon-product-lowest-new-price,
@@ -312,9 +322,7 @@
 .amazon-products-container-list .amazon-prices .proper-price,
 .amazon-products-container-list .amazon-prices .offered-price
 {
-	font-size: small;
-    display: inline-block;
-    vertical-align: middle;
+    display: inline;
 }
 
 .amazon-products-container-list .amazon-product-lowest-new-price-value,
@@ -330,7 +338,7 @@
 }
 /* Features */
 .amazon-products-container-list ul.features {
-    margin: 0.4em 0;
+    margin: 1em 0 0.4em 0;
 }
 
 /* Widget Area */
@@ -417,6 +425,9 @@
 .amazon-products-container-list .now-retrieving.context-image_set {
     min-height: 40px;
     margin: 0;
+}
+.amazon-products-container-list .now-retrieving.context-feature {
+    margin-top: 0.8em;
 }
 
 /* Responsive */

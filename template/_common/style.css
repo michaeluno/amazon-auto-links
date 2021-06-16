@@ -13,10 +13,16 @@
 
 
 /* Rating stars */
+span.crAvgStars a {
+    text-decoration: none;
+    border-bottom: 0;
+    /* No underlines in hyper links with box shadow */
+    box-shadow: none;
+}
 .review-stars svg {
     width: auto;
-    height: 1.12em;
+    height: 1em;
     vertical-align: middle;
-    margin: 0 0.8em 0 0.4em;
-    padding-bottom: 1px;
+    position: relative;
+    top: -1px;
 }
