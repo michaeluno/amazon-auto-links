@@ -13,28 +13,17 @@
  *
  * @package     Amazon Auto Links
  * @since       3.5.0
+ * @since       4.6.0   Extends `AmazonAutoLinks_Event___Feed_Base`.
  */
-class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_Event___Feed_Base {
 
     /**
-     * Sets up hooks.
+     * @since       4.6.0
      */
-    public function __construct() {
+    protected function _load() {
 
-        add_filter(
-            'aal_filter_unit_output',
-            array( $this, 'replyToRemoveCredit' ),
-            PHP_INT_MAX  - 100 // the priority of the credit comment insertion callback is `100` so it must be larger than that.
-        );
-        add_action( 'init', array( $this, 'replyToLoadJSONFeed' ), 999 );
-
-    }
-
-    /**
-     *
-     * @since       3.1.0
-     */
-    public function replyToLoadJSONFeed() {
+        // the priority of the credit comment insertion callback is `100` so it must be larger than that.
+        add_filter( 'aal_filter_unit_output', array( $this, 'replyToRemoveCredit' ), PHP_INT_MAX  - 100 );
 
         $_aArguments = $_GET;
         $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
@@ -43,34 +32,19 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_PluginUtility {
         $_aArguments[ 'show_errors' ]          = 0;
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
 
-        add_filter( 'aal_filter_unit_format', array( $this, 'replyToGetUnitFormat' ) );
         header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ), true );
         AmazonAutoLinks( $_aArguments, true );
-        exit;
 
     }
 
     /**
-     * @param  string $sUnitOutput
-     * @return string
-     * @since  3.1.0
+     * @param    string $sUnitOutput
+     * @return   string
+     * @since    3.1.0
+     * @callback add_action aal_filter_unit_output
      */
     public function replyToRemoveCredit( $sUnitOutput ) {
-        return str_replace(
-            $this->getCommentCredit(),
-            '',
-            $sUnitOutput
-        );
-    }
-
-    /**
-     * Forces the unit format to only have `%products%` to avoid validation errors.
-     * @param  string $sUnitFormat
-     * @return string
-     * @since  4.5.8
-     */
-    public function replyToGetUnitFormat( $sUnitFormat ) {
-        return '%products%';
+        return str_replace( $this->getCommentCredit(), '', $sUnitOutput );
     }
 
 }

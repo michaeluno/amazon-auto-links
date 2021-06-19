@@ -13,21 +13,14 @@
  *
  * @package     Amazon Auto Links
  * @since       3.5.0
+ * @since       4.6.0   Extends `AmazonAutoLinks_Event___Feed_Base`.
  */
-class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_Event___Feed_Base {
 
     /**
-     * Sets up hooks.
+     * @since 4.6.0
      */
-    public function __construct() {
-        add_action( 'init', array( $this, 'replyToLoadRSS2Feed' ), 999 );
-    }
-
-    /**
-     *
-     * @since       3.1.0
-     */
-    public function replyToLoadRSS2Feed() {
+    protected function _load() {
 
         $_aArguments = $_GET;
         $_aArguments[ 'template_path' ]        = wp_normalize_path( AmazonAutoLinks_Registry::$sDirPath . '/template/rss2/template.php' );
@@ -36,20 +29,9 @@ class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_PluginUtility {
         $_aArguments[ 'show_errors' ]          = 0;
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
 
-        add_filter( 'aal_filter_unit_format', array( $this, 'replyToGetUnitFormat' ) );
         header( 'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ), true );
         AmazonAutoLinks( $_aArguments, true );
-        exit;
-    }
 
-    /**
-     * Forces the unit format to only have `%products%` to avoid RSS validation errors.
-     * @param  string $sUnitFormat
-     * @return string
-     * @since  4.5.8
-     */
-    public function replyToGetUnitFormat( $sUnitFormat ) {
-        return '%products%';
     }
 
 }

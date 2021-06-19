@@ -474,6 +474,7 @@ return array(
     "AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPResponseCaptureCaptchaError.php", 
     "AmazonAutoLinks_Event___Query_Feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Feed.php", 
     "AmazonAutoLinks_Event___Query_Redirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Redirect.php", 
+    "AmazonAutoLinks_Event___Feed_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_Base.php", 
     "AmazonAutoLinks_Event___Feed_JSON" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_JSON.php", 
     "AmazonAutoLinks_Event___Feed_RSS2" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_RSS2.php", 
     "AmazonAutoLinks_Option" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/AmazonAutoLinks_Option.php", 
