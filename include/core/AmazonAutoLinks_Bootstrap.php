@@ -240,6 +240,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
 
             new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
+            new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
+
         }
 
         /**

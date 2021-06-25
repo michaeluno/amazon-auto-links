@@ -51,6 +51,9 @@ Just check where you want the product links to appear with auto-insert.
 - **Static Contents Conversion** - If you want the product link to be static, it is possible. This means if you deactivate the plugin, the converted contents will remain.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type.
 
+= Geotargeting =
+You can transform your Amazon affiliate links into the ones of the locale that the site visitor resides, presumed by IP address. So you won't miss commission fees from visitors coming outside of your country.
+
 = Auto Link Conversion =
 Hyper links to Amazon products in posts and comments can be transformed into your associate affiliate links. This is useful if your site allows guests to post contents that include Amazon links.
 

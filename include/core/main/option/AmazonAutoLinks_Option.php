@@ -173,10 +173,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         // 4.6.0+
         'geotargeting'         => array(
             'enable'                => false,
-            'resolve_localhost'     => true,    // @todo set it false
             'non_plugin_links'      => false,
-            'use_cookies'           => false,
-            'frontend_requests'     => false,
+            'api_providers'         => array(
+                'cloudflare'     => true,
+                'db-ip.com'      => true,
+                'geoiplookup.io' => true,
+                'geoplugin.net'  => true,
+            ),
         ),
     
         // 3.4.0+
