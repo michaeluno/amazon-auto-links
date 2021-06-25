@@ -169,6 +169,15 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'unit'      => 86400,
             ),
         ),
+
+        // 4.6.0+
+        'geotargeting'         => array(
+            'enable'                => false,
+            'resolve_localhost'     => true,    // @todo set it false
+            'non_plugin_links'      => false,
+            'use_cookies'           => false,
+            'frontend_requests'     => false,
+        ),
     
         // 3.4.0+
         'unit_default'  => array(

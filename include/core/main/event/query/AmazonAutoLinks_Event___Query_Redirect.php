@@ -86,14 +86,7 @@ class AmazonAutoLinks_Event___Query_Redirect {
 
             unset( $_aGET[ 'ref' ], $_aGET[ 'ref' ], $_aGET[ 'locale' ], $_aGET[ $sQueryKey ] );
             $_sStoreURL     = add_query_arg( $_aGET, $_sStoreURL );
-            exit( 
-                wp_redirect( 
-                    apply_filters( 
-                        'aal_filter_store_redirect_url',
-                        $_sStoreURL 
-                    ) 
-                ) 
-            );
+            exit( wp_redirect( apply_filters( 'aal_filter_store_redirect_url', $_sStoreURL, $sASIN, $aGET ) ) );
                     
         }
         
