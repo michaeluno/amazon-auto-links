@@ -34,6 +34,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
             'description'   => __( 'Select categories.', 'amazon-auto-links' ),
             'style'         => array(
+                AmazonAutoLinks_Registry::getPluginURL( 'template/_common/style.css' ),
                 AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ), // the Preview template CSS file.
                 AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/css/category_selection.css',  // 4.2.0
             ),
