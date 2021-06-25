@@ -69,7 +69,7 @@ return array(
     "AmazonAutoLinks_Geotargeting_EventAjax_GeolocationResolver" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/event/ajax/AmazonAutoLinks_Geotargeting_EventAjax_GeolocationResolver.php", 
     "AmazonAutoLinks_Geotargeting_EventQuery_SearchRedirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/event/query/AmazonAutoLinks_Geotargeting_EventQuery_SearchRedirect.php", 
     "AmazonAutoLinks_Geotargeting_Resource" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/resource/AmazonAutoLinks_Geotargeting_Resource.php", 
-    "AmaAmazonAutoLinks_Geotargeting_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/utility/AmazonAutoLinks_Geotargeting_Utility.php", 
+    "AmazonAutoLinks_Geotargeting_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/utility/AmazonAutoLinks_Geotargeting_Utility.php",
     "AmazonAutoLinks_Loader_LinkConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/AmazonAutoLinks_Loader_LinkConverter.php", 
     "AmazonAutoLinks_LinkConverter_Setting_Section_Convert" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php", 
     "AmazonAutoLinks_LinkConverter_Setting_Tab" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php", 
