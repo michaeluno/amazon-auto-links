@@ -63,29 +63,29 @@ class AmazonAutoLinks_Event___Query_Redirect {
          * For URL cloaking redirects.
          *
          * @param string $sASIN
-         * @param array  $aArgs
+         * @param array  $aGET
          * @param string $sQueryKey
          * @since 3.8.10  Made it respect additional URL query parameters.
          * @since 3
          */
-        private function ___goToStore( $sASIN, $aArgs, $sQueryKey ) {
+        private function ___goToStore( $sASIN, $aGET, $sQueryKey ) {
             
-            $aArgs = $aArgs + array(
+            $_aGET = $aGET + array(
                 'locale' => null,
                 'tag'    => null,
                 'ref'    => null,
             );
             
             // http://www.amazon.[domain-suffix]/dp/ASIN/[asin]/ref=[...]?tag=[associate-id]
-            $_oLocale       = new AmazonAutoLinks_Locale( $aArgs[ 'locale' ] );
+            $_oLocale       = new AmazonAutoLinks_Locale( $_aGET[ 'locale' ] );
             $_sURL          = $_oLocale->getMarketPlaceURL();
             $_aURLElements  = parse_url( $_sURL );
             $_sStoreURL     = $_aURLElements[ 'scheme' ] . '://' . $_aURLElements[ 'host' ]
                 . '/dp/ASIN/' . $sASIN . '/' 
-                . ( empty( $aArgs[ 'ref' ] ) ? '' : 'ref=nosim' );
+                . ( empty( $_aGET[ 'ref' ] ) ? '' : 'ref=nosim' );
 
-            unset( $aArgs[ 'ref' ], $aArgs[ 'ref' ], $aArgs[ 'locale' ], $aArgs[ $sQueryKey ] );
-            $_sStoreURL     = add_query_arg( $aArgs, $_sStoreURL );
+            unset( $_aGET[ 'ref' ], $_aGET[ 'ref' ], $_aGET[ 'locale' ], $_aGET[ $sQueryKey ] );
+            $_sStoreURL     = add_query_arg( $_aGET, $_sStoreURL );
             exit( 
                 wp_redirect( 
                     apply_filters( 
