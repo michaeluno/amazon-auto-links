@@ -143,7 +143,7 @@
             ? sSelector
             : parseInt( bNonPluginLinks ) ? 'a' : '.amazon-auto-links a';   // json '0' yields true so convert it to an integer
 
-        debugLog( 'Target Selector', _sSelector );
+        debugLog( 'Target Selector >>>', _sSelector, '<<< Locale Domain >>>', _sLocaleDomain, '<<<' );
 
         var _oHrefs         = $( _sSelector )
           .filter( function() {
@@ -157,7 +157,7 @@
                 return false;
             }
 
-            if ( this.href.match( /https?:\/\/(\w+\.)?amazon\./ ) ) {
+            if ( this.href.match( /https?:\/\/(\w+\.?)amazon\./ ) ) {
                 return true;
             }
             var _regexPattern = sQueryKey + '\=.+locale\=';
