@@ -75,6 +75,11 @@
      */
     function convertAmazonLinksByGeolocation( aAPIProviders ) {
 
+        if ( ! getObjectLength( aalGeoResolver.availableLocales ) ) {
+            debugLog( 'No available locale. Do nothing.' );
+            return;
+        }
+
         // Retrieve the cache from storage
         var localCache = getLocalStorageTTL( localStorageKey, 86400 * 7 ); // @todo set it back to 86400 * 7
         debugLog( 'Stored cache:', localCache );
@@ -279,5 +284,20 @@
     function getJSONObjectCloned( jsonObj ) {
         return JSON.parse( JSON.stringify( jsonObj ) );
     }
+
+    /**
+     * @see https://stackoverflow.com/a/6700
+     * @param obj
+     * @returns {number}
+     */
+    function getObjectLength( obj ) {
+      var size = 0,
+        key;
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+      }
+      return size;
+    };
+
 
 }(jQuery));
