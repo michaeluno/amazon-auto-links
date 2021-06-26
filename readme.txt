@@ -328,7 +328,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.5.9 - 06/11/2011 =
+= 4.6.0 - 06/26/2021 =
+- Added the geotargeting feature.
+- Added the Poland locale.
+- Tweaked the visual elements to use SVG icons rather than image files.
+
+= 4.5.9 - 06/11/2021 =
 - Fixed a bug that re-entering a new pair of PA-API keys for a locale too soon resulted in the locked error message if the previous keys produced an error.
 
 = 4.5.8 - 05/09/2021 =
