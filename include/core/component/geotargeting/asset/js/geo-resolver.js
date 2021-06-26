@@ -141,7 +141,8 @@
         var _sLocaleDomain  = _oLocale.domain.replace( /^www\./, '' );
         var _sSelector      = sSelector
             ? sSelector
-            : bNonPluginLinks ? 'a' : '.amazon-auto-links a';
+            : parseInt( bNonPluginLinks ) ? 'a' : '.amazon-auto-links a';   // json '0' yields true so convert it to an integer
+
         debugLog( 'Target Selector', _sSelector );
 
         var _oHrefs         = $( _sSelector )
