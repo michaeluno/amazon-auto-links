@@ -48,7 +48,7 @@ class AmazonAutoLinks_Geotargeting_Resource extends AmazonAutoLinks_Geotargeting
             'apiProviders'     => $this->___getAPIProviders( $_oOption ),
         ) + $_aGeotargeting;
 
-        $_sPath = defined( 'WP_DEBUG' ) && WP_DEBUG
+        $_sPath = $_oOption->isDebug() || $this->isDebugMode()
             ? AmazonAutoLinks_Geotargeting_Loader::$sDirPath . '/asset/js/geo-resolver.js'
             : AmazonAutoLinks_Geotargeting_Loader::$sDirPath . '/asset/js/geo-resolver.min.js';
         $_sURL  = AmazonAutoLinks_Utility::getSRCFromPath( $_sPath );
