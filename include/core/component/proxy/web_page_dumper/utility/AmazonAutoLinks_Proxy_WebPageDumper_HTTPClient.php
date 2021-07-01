@@ -49,6 +49,19 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
     }
 
     /**
+     * @param  array $aArguments
+     * @param  array|string $asURLs
+     * @return array
+     * @since  4.6.0
+     */
+    protected function _getArgumentsFormatted( array $aArguments, $asURLs ) {
+        $_aArguments = parent::_getArgumentsFormatted( $aArguments, $asURLs );
+        $_aArguments[ 'user-agent' ]  = isset( $_aArguments[ 'user-agent' ] ) ? $_aArguments[ 'user-agent' ] : 'WordPress/' . $GLOBALS[ 'wp_version' ];
+        $_aArguments[ 'user-agent' ] .= '; ' . AmazonAutoLinks_Registry::NAME . '/' . AmazonAutoLinks_Registry::VERSION;
+        return $_aArguments;
+    }
+
+    /**
      * @remark This method is reached when there is no cache for the request URL.
      * @param  string $sURL
      * @param  array  $aArguments
