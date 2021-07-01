@@ -48,6 +48,9 @@ class AmazonAutoLinks_UnitTypeLoader_feed extends AmazonAutoLinks_UnitTypeLoader
 
     protected function _construct( $sScriptPath ) {
         self::$sDirPath = dirname( __FILE__ );
+
+        // Events
+        new AmazonAutoLinks_Unit_Feed_Event_RenewCacheAction;
     }
 
     /**
@@ -79,17 +82,7 @@ class AmazonAutoLinks_UnitTypeLoader_feed extends AmazonAutoLinks_UnitTypeLoader
             'high'    // priority - e.g. 'high', 'core', 'default' or 'low'
         );
 
-//        add_action( 'do_meta_boxes', array( $this, 'replyToRemoveMetaBoxes' ) );
-
     }
-
-//        public function replyToRemoveMetaBoxes() {
-//            remove_meta_box(
-//                'amazon_auto_links_locale',
-//                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], // screen: post type slug
-//                'side'
-//            );
-//        }
 
     /**
      * Determines the unit type from given output arguments.
