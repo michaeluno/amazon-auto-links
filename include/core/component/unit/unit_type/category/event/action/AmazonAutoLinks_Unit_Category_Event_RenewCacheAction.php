@@ -20,7 +20,7 @@ class AmazonAutoLinks_Unit_Category_Event_RenewCacheAction extends AmazonAutoLin
 
     public function replyToDoAction( array $aPostIDs ) {
         foreach( $aPostIDs as $_iPostID ) {
-            $_sUnitType = get_post_meta( $_iPostID, 'unit_type', true );
+            $_sUnitType = $this->getPostMeta( $_iPostID, 'unit_type' );
             if ( 'category' !== $_sUnitType ) { // 3.8.1 Changed the value was `url` although the subject unit type is `category`.
                 continue;
             }
@@ -30,7 +30,7 @@ class AmazonAutoLinks_Unit_Category_Event_RenewCacheAction extends AmazonAutoLin
         private function ___deleteHTTPRequestCache( $iPostID ) {
 
             $_aURLs          = $this->___getSubjectURLs( $iPostID );
-            $_iCacheDuration = get_post_meta( $iPostID, 'cache_duration', true );
+            $_iCacheDuration = ( integer ) $this->getPostMeta( $iPostID, 'cache_duration' );
             delete_post_meta( $iPostID, '_error' );
 
             // Just delete caches. Renewing will be done when a prefetch is called.

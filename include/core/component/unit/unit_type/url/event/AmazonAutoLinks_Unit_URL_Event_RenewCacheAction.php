@@ -20,7 +20,7 @@ class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_Pl
 
     public function replyToDoAction( array $aPostIDs ) {
         foreach( $aPostIDs as $_iPostID ) {
-            $_sUnitType = get_post_meta( $_iPostID, 'unit_type', true );
+            $_sUnitType = $this->getPostMeta( $_iPostID, 'unit_type' );
             if ( 'url' !== $_sUnitType ) {
                 continue;
             }
@@ -29,8 +29,8 @@ class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_Pl
     }
         private function ___deleteHTTPRequestCache( $iPostID ) {
 
-            $_aURLs          = $this->getAsArray( get_post_meta( $iPostID, 'urls', true ) );
-            $_iCacheDuration = ( integer ) get_post_meta( $iPostID, 'cache_duration', true );
+            $_aURLs          = $this->getAsArray( $this->getPostMeta( $iPostID, 'urls' ) );
+            $_iCacheDuration = ( integer ) $this->getPostMeta( $iPostID, 'cache_duration' );
             delete_post_meta( $iPostID, '_error' );
 
             // Just delete caches. Renewing will be done when a prefetch is called.
