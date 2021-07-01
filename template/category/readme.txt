@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.1 =
+- Tweaked line alignment of descriptions, rating stars and prices.
+
 = 1.2.0 =
 - Moved some rules to the common template.
 
