@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.0
+Stable tag:         4.6.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.1 - 07/02/2021 =
+- Fixed a bug that rating stars could not be displayed with Ajax, started in v4.6.0.
+- Fixed a bug that the `formatted_rating` element of JSON feeds was not formatted properly for the change made in v4.6.0.
+- Fixed a bug that the `Renew Cache` unit action link did not renew the feed cache.
+- Tweaked line alignment of descriptions, rating stars, and prices of the `Category` template.
+- Updated the base and Japanese translation files.
 
 = 4.6.0 - 06/26/2021 =
 - Added the geotargeting feature.
