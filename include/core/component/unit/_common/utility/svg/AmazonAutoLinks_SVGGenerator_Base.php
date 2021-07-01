@@ -47,15 +47,30 @@ class AmazonAutoLinks_SVGGenerator_Base {
     static public $bSVGShown = false;
 
     /**
+     * @var   array
+     * @since 4.6.1
+     */
+    static public $aDefinitionHooks = array();
+
+    /**
      * Sets up properties and hooks.
      * @param boolean $bUseCache
      * @param string  $sTitle
      * @param string  $sSRCFallbackImage
      */
     public function __construct( $bUseCache=true, $sTitle='', $sSRCFallbackImage='' ) {
+
         $this->bUseCache         = $bUseCache;
         $this->sTitle            = $sTitle;
         $this->sSRCFallbackImage = $sSRCFallbackImage;
+
+        $_sExtendedClassName     =  get_class( $this );
+        if ( $bUseCache && ! isset( self::$aDefinitionHooks[ $_sExtendedClassName ] ) ) {
+            add_action( 'wp_footer', array( $this, 'replyToRenderSVGDefinition' ) );
+            add_action( 'embed_footer', array( $this, 'replyToRenderSVGDefinition' ) );
+            self::$aDefinitionHooks[ $_sExtendedClassName ] = true;
+        }
+
     }
 
     /**
@@ -67,6 +82,26 @@ class AmazonAutoLinks_SVGGenerator_Base {
                 . $this->sSVGInnerHTML
                 . "<image src='" . esc_url( $this->sSRCFallbackImage ) . "' />"
             . "</svg>";
+    }
+
+    /**
+     *
+     * @since 4.6.1
+     * @callback add_action wp_footer
+     * @callback add_action embed_footer
+     */
+    public function replyToRenderSVGDefinition() {
+        echo $this->_getDefinition();
+    }
+
+    /**
+     * @since  4.6.1
+     * @remark Override this method.
+     * @return string The SVG definition for reuse.
+     * @param  boolean $bVisible Whether to make it visible or not
+     */
+    protected function _getDefinition( $bVisible=false ) {
+        return '';
     }
 
 }
