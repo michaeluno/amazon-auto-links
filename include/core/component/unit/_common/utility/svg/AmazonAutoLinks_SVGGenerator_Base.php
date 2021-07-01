@@ -104,4 +104,13 @@ class AmazonAutoLinks_SVGGenerator_Base {
         return '';
     }
 
+    /**
+     * @return string
+     * @since  4.6.1
+     * @remark The now-retrieving updater uses this method.
+     */
+    public function getDefinition() {
+        return $this->_getDefinition();
+    }
+
 }

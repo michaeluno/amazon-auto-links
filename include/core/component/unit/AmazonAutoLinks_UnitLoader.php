@@ -88,6 +88,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors; // [4.3.5]
             new AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning; // [4.4.0]
 
+            new AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement; // [4.6.1]
             $this->___loadDebugEvents(); // [4.3.5]
 
         }

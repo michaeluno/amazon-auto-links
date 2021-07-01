@@ -309,7 +309,11 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 if ( ! isset( $_aProduct[ $aDueElement[ 'context' ] ] ) ) {
                     return null;
                 }
-                return $_aProduct[ $aDueElement[ 'context' ] ];
+                /**
+                 * Allows components to modify product element for Ajax requests.
+                 * @since 4.6.0
+                 */
+                return apply_filters( 'aal_filter_now_retrieving_product_element', $_aProduct[ $aDueElement[ 'context' ] ], $aDueElement[ 'context' ], $_aProduct );
             }
 
     /**
