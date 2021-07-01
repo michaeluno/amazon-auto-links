@@ -1,1 +1,2 @@
+- Fixed a bug that the `formatted_rating` element of JSON feeds was not formatted properly for the change made in v4.6.0.  
 - Updated the base and Japanese translation files.

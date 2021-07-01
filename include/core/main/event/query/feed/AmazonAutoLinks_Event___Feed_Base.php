@@ -30,6 +30,7 @@ class AmazonAutoLinks_Event___Feed_Base extends AmazonAutoLinks_PluginUtility {
     public function replyToSetHooks() {
         add_filter( 'aal_filter_unit_format', array( $this, 'replyToGetUnitFormat' ) );
         add_filter( 'aal_filter_unit_item_format_tag_replacements', array( $this, 'replyToGetTagReplacements' ), 10, 2 );
+        add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToGetStarIconReplacement' ) );
     }
 
     /**
@@ -48,6 +49,16 @@ class AmazonAutoLinks_Event___Feed_Base extends AmazonAutoLinks_PluginUtility {
      */
     public function replyToGetUnitFormat( $sUnitFormat ) {
         return '%products%';
+    }
+
+    /**
+     * @param  array $aProduct
+     * @since  4.6.1
+     * @return array
+     */
+    public function replyToGetStarIconReplacement( array $aProduct ) {
+        $aProduct[ 'formatted_rating' ] = $this->___getIndividualRatingStarOutput( $aProduct[ 'formatted_rating' ], $aProduct );
+        return $aProduct;
     }
 
     /**
@@ -89,7 +100,9 @@ class AmazonAutoLinks_Event___Feed_Base extends AmazonAutoLinks_PluginUtility {
             preg_match( '/data-review-url\=[\'"](.+?)[\'"]/', $sOutput, $_aMatches );
             $_sReviewURL    = isset( $_aMatches[ 1 ] ) ? $_aMatches[ 1 ] : '';
 
-            return AmazonAutoLinks_Unit_Utility::getRatingOutput( $_iRating, $_sReviewURL, $_iReviewCount, false );
+            return "<div class='amazon-customer-rating-stars'>"
+                    . AmazonAutoLinks_Unit_Utility::getRatingOutput( $_iRating, $_sReviewURL, $_iReviewCount, false )
+                . "</div>";
         }
 
     /**
