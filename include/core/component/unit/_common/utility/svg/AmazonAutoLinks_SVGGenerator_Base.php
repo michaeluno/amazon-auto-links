@@ -69,6 +69,7 @@ class AmazonAutoLinks_SVGGenerator_Base {
             add_action( 'wp_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
             add_action( 'embed_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
             add_action( 'admin_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
+            add_filter( 'aal_filter_category_select_unit_preview', array( $this, 'replyToGetSVGDefinition' ) );
             self::$aDefinitionHooks[ $_sExtendedClassName ] = true;
         }
 
@@ -83,6 +84,15 @@ class AmazonAutoLinks_SVGGenerator_Base {
                 . $this->sSVGInnerHTML
                 . "<image src='" . esc_url( $this->sSRCFallbackImage ) . "' />"
             . "</svg>";
+    }
+
+    /**
+     * @param  string $sUnitPreview The category selection unit preview
+     * @return string
+     * @since  4.6.2
+     */
+    public function replyToGetSVGDefinition( $sUnitPreview ) {
+        return $sUnitPreview . $this->_getDefinition();
     }
 
     /**

@@ -42,9 +42,13 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview exte
             'show_errors'   => 1,
         ) + $_aUnitOptions;
 
+        $_sUnitPreview = $this->___getUnitPreview( $aPost, $_aUnitOptions );
+
         // The JavaScript script receives this response array
         return array(
-            'unit_preview'      => $this->___getUnitPreview( $aPost, $_aUnitOptions ),
+            'unit_preview' => apply_filters(
+                'aal_filter_category_select_unit_preview', $_sUnitPreview, $aPost, $_aUnitOptions
+            ),
         );
 
     }
