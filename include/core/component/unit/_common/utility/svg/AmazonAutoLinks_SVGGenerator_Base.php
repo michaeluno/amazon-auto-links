@@ -68,6 +68,7 @@ class AmazonAutoLinks_SVGGenerator_Base {
         if ( $bUseCache && ! isset( self::$aDefinitionHooks[ $_sExtendedClassName ] ) ) {
             add_action( 'wp_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
             add_action( 'embed_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
+            add_action( 'admin_footer', array( $this, 'replyToRenderSVGDefinition' ), 100 );
             self::$aDefinitionHooks[ $_sExtendedClassName ] = true;
         }
 
