@@ -1,1 +1,2 @@
+- Fixed a bug that rating values were not accurate in locales which use `,`.
 - Fixed an issue that rating star icons were not filled in some cases.  

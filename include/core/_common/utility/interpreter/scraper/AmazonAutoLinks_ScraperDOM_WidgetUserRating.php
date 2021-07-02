@@ -35,12 +35,24 @@ class AmazonAutoLinks_ScraperDOM_WidgetUserRating extends AmazonAutoLinks_Scrape
             return null;
         }
         if ( count( $_aMatches ) === 1 ) {
-            return ( integer ) ( ( ( double ) reset( $_aMatches ) ) * 10 );
+            return $this->___getRatingNumberSanitized( reset( $_aMatches ) );
         }
-        // Compare them and return the one with the least number
-        return ( integer ) ( ( ( double ) min( $_aMatches ) ) * 10 );
+
+        // Convert string numbers to integer such as `4,4`.
+        // Then, compare and return the one with the smallest.
+        $_aMatches = array_map( array( $this, '___getRatingNumberSanitized' ), $_aMatches );
+        return min( $_aMatches );
 
     }
+        /**
+         * @param  string  $sNumber
+         * @return integer The sanitized number.
+         * @since  4.6.2
+         */
+        private function ___getRatingNumberSanitized( $sNumber ) {
+            $_sNumber = ( double ) str_replace( ',', '.', $sNumber );
+            return ( integer ) ( $_sNumber * 10 );
+        }
 
     /**
      * @return integer|null     null on failure.
