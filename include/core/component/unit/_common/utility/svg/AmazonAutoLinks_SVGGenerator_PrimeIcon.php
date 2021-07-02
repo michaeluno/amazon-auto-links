@@ -14,6 +14,10 @@
  */
 class AmazonAutoLinks_SVGGenerator_PrimeIcon extends AmazonAutoLinks_SVGGenerator_Base {
 
+    /**
+     * @return string
+     * @since  4.6.0
+     */
     public function get() {
 
         if ( ! $this->bUseCache ) {
@@ -30,14 +34,13 @@ class AmazonAutoLinks_SVGGenerator_PrimeIcon extends AmazonAutoLinks_SVGGenerato
     }
 
     /**
-     * @return string
+     * @return string  Invisible SVG definition element.
      * @since  4.6.1
      */
     protected function _getDefinition( $bVisible=false ) {
         $_sTitle   = $this->sTitle ? "<title>" . esc_html( $this->sTitle ) . "</title>" : '';
-        $_sClass   = $bVisible ? '' : " class='definition'";
-        $_sDisplay = $bVisible ? '' : " display='none'";
-        return "<svg {$_sClass}{$_sDisplay}height='20px' viewBox='0 0 64 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet'>"    // xMinYMin meet to align left
+        $_sStyle   = $bVisible ? '' : " style='position: absolute; width: 0; height: 0; overflow: hidden;'";
+        return "<svg{$_sStyle} height='20px' viewBox='0 0 64 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet'>"    // xMinYMin meet to align left
                 . $_sTitle
                 . "<g id='svg-prime-icon' transform='translate(-1.4046423,-0.11313718)'>"
                     . "<g fill='#fd9a18' transform='matrix(1.1343643,0,0,0.86753814,-0.1955262,0.39080443)'>"
