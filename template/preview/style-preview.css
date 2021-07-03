@@ -27,3 +27,7 @@ span.offered-price {
     color: #B12704;
     font-weight: bold;
 }
+
+.amazon-customer-rating-stars .review-stars svg {
+    top: -2px;
+}
