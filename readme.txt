@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.2
+Stable tag:         4.6.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.3 - 07/04/2021 =
+- Fixed an issue that rating stars in `embed` type units were not vertically aligned properly, started in 4.6.0.
+- Fixed a bug that encoded query parameters in a URL set to setting fields were removed.
 
 = 4.6.2 - 07/03/2021 =
 - Fixed a bug that rating star icons did not appear in the category selection page, started in 4.6.1.
