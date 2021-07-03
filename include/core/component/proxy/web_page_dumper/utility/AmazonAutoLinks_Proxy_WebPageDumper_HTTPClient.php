@@ -57,7 +57,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
     protected function _getArgumentsFormatted( array $aArguments, $asURLs ) {
         $_aArguments = parent::_getArgumentsFormatted( $aArguments, $asURLs );
         $_aArguments[ 'user-agent' ]  = isset( $_aArguments[ 'user-agent' ] ) ? $_aArguments[ 'user-agent' ] : 'WordPress/' . $GLOBALS[ 'wp_version' ];
-        $_aArguments[ 'user-agent' ] .= '; ' . AmazonAutoLinks_Registry::NAME . '/' . AmazonAutoLinks_Registry::VERSION;
+        $_aArguments[ 'user-agent' ] .= '; ' . AmazonAutoLinks_Registry::NAME . '/' . AmazonAutoLinks_Registry::VERSION . '; ' . site_url();
         return $_aArguments;
     }
 
@@ -94,7 +94,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
                 $_aArguments = array(
                     'timeout' => $_i * 5,
                     'reject_unsafe_urls' => ! $this->isDebugMode(),
-                    'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ] . '; ' . AmazonAutoLinks_Registry::NAME . '/' . AmazonAutoLinks_Registry::VERSION,
+                    'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ] . '; ' . AmazonAutoLinks_Registry::NAME . '/' . AmazonAutoLinks_Registry::VERSION . '; ' . site_url(),
                 );
                 $_aoResponse = wp_remote_get( $this->sWebPageDumperURL, $_aArguments );
                 if ( $this->hasPrefix( '2', $this->___getStatusCode( $_aoResponse ) ) ) {
