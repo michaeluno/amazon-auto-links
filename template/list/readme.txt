@@ -1,6 +1,9 @@
 == Change log ==
 
 = 1.2.11 =
+- Tweaked the rating star vertical alignment in `embed` units.
+
+= 1.2.11 =
 - Fixed duplicated rules.
 - Tweaked the thumbnails link style.
 

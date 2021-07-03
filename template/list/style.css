@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.11
+    Version:        1.2.12
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -115,7 +115,7 @@
 }
 .amazon-products-container-list .crIFrameNumCustReviews {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
     height: auto;
 }
 .amazon-products-container-list .amazon-customer-reviews .review-date {
@@ -144,7 +144,7 @@
     white-space: nowrap;
 }
 .amazon-products-container-list span.crAvgStars a {
-    font-size: small;
+    font-size: inherit;
 }
 
 .amazon-products-container-list .amazon-customer-rating-stars {
@@ -152,6 +152,7 @@
     margin: 0 0.2em 0 0;
     vertical-align: middle;
     line-height: 1.6;
+    font-size: small;
 }
 .amazon-products-container-list .amazon-customer-rating-stars img {
     /* Prevents rating stars from being wrapped */
@@ -178,6 +179,9 @@
     margin-top: 2px;
     margin-left: -2px;
     display: inline;
+}
+.amazon-products-container-list .amazon-customer-rating-stars .review-stars svg {
+    top: -2px;
 }
 
 /* Button */
@@ -402,7 +406,8 @@
     font-size: medium;
 }
 .wp-embed .amazon-products-container-list .amazon-customer-rating-stars .review-stars {
-    line-height: 2em;
+    /* @deprecated 4.6.3 - not look good with SVG icons */
+    /*line-height: 2em;*/
 }
 .wp-embed .amazon-products-container-list > :last-child {
     margin-bottom: 0;

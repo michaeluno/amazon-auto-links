@@ -1,1 +1,2 @@
+- Fixed an issue that rating stars in `embed` type units were not vertically aligned properly, started in 4.6.0. 
 - Fixed a bug that encoded query parameters in a URL set to setting fields were removed.  
