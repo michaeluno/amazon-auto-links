@@ -1,6 +1,7 @@
 == Change log ==
 
-= 1.2.11 =
+= 1.2.12 =
+- Tweaked margins of prices.
 - Tweaked the rating star vertical alignment in `embed` units.
 
 = 1.2.11 =
