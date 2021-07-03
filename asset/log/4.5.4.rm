@@ -1,3 +1,0 @@
-- Fixed a bug that the `associate_id` direct unit argument did not take effect, which started from v4.5.0.
-- Fixed a bug that an Associate ID input value was lost when creating category units, which started from v4.5.0.
-- Fixed a bug that the `Item Format` unit option was not saved properly, which started from v4.5.3.

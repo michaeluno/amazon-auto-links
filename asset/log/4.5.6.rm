@@ -1,4 +1,0 @@
-- Fixed a bug that the `%description_text%` tag was not formatted properly for category and some other unit types. 
-- Fixed a bug that second or subsequent category units in the same page did not appear, started since v4.3.4.
-- Updated Japanese translation items.  
-- Updated Spanish translation items.  

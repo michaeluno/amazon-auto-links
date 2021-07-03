@@ -1,5 +1,0 @@
-- Fixed a bug that active auto-insert items were not updated properly when deleting a unit.
-- Fixed a bug that auto-insert outputs were displayed even for deleted/trashed units.
-- Fixed a bug that some prices for books were not displayed for the `embed` unit type.
-- Fixed a bug that some product thumbnails did not load for the `embed` unit type.
-- Fixed a bug that the `%feature%` tag displayed the wrong output for the `embed` unit type.  

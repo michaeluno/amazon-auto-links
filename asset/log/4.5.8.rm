@@ -1,1 +1,0 @@
-- Fixed a bug that unit custom text was inserted for RSS and JSON outputs which resulted in validation errors. 

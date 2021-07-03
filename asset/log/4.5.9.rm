@@ -1,1 +1,0 @@
-- Fixed a bug that reentering a new pair of PA-API keys too soon resulted in the locked error message if the previous keys produced an error. 
