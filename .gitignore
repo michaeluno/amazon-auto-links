@@ -9,6 +9,7 @@ _memos
 # backup files.
 *.old
 *.bak
+*.orig
 
 # Compiled source #
 ###################
