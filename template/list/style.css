@@ -181,7 +181,7 @@
     display: inline;
 }
 .amazon-products-container-list .amazon-customer-rating-stars .review-stars svg {
-    top: -2px;
+    top: -3px;
 }
 
 /* Button */
@@ -417,6 +417,9 @@
 }
 .wp-embed .amazon-products-container-list .now-retrieving {
     font-size: small;
+}
+.wp-embed .amazon-products-container-list .amazon-customer-rating-stars .review-stars svg {
+    top: -2px;
 }
 
 /* Buttons */
