@@ -37,6 +37,12 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
     public $oUtil;
 
     /**
+     * @var    string Generated nonce.
+     * @since  4.7.0
+     */
+    public $sNonce;
+
+    /**
      * Sets up properties and hooks.
      * @since 4.4.3
      */
@@ -52,6 +58,14 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
         $this->oUtil = new AmazonAutoLinks_PluginUtility;
 
+    }
+
+    /**
+     * @param string $sKey
+     * @since 4.7.0
+     */
+    public function setNonce( $sKey ) {
+        $this->sNonce = wp_create_nonce( $sKey );
     }
 
     /**
