@@ -39,9 +39,8 @@
         if ( 'undefined' === typeof aalButtonPreview ) {
             return false;
         }
-        if ( debugMode ) {
-            console.log( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
-        }
+
+        debugLog( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
 
         var _setPreviewButton = function( iButtonID, oSelect ) {
 
@@ -50,9 +49,7 @@
                 .find( '.amazon-auto-links-button' );
 
             if( 'undefined' === typeof aalButtonPreview.activeButtons[ iButtonID ] ) {
-                if ( debugMode ) {
-                    console.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
-                }
+                debugLog.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
                 return;
             }
 
@@ -179,6 +176,11 @@
 
     } ); // document ready
 
-
+    function debugLog( ...args ) {
+        if ( ! parseInt( aalButtonPreview.debugMode ) ) {
+            return;
+        }
+        console.log( 'AAL Debug(Button Preview):', ...args );
+    }
 
 }( jQuery ));
