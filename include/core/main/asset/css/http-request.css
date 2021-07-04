@@ -1,0 +1,29 @@
+
+.icon-view {
+    margin-left: 0.2em;
+}
+.icon-warning {
+    color: #ff0000;
+}
+
+.column-key {
+    width: 12%;
+}
+
+table.widefat th {
+    width: 12%;
+}
+table.widefat .table-header th,
+table.widefat .table-header td {
+    background-color: #FFF;
+    border-bottom: 1px solid #ccc;
+}
+table.widefat.http-request-cache {
+    margin-bottom: 2em;
+}
+table.widefat tr {
+    vertical-align: middle;
+}
+table.widefat td {
+    padding: 8px 10px 0;
+}

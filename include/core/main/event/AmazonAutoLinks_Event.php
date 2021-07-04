@@ -60,6 +60,8 @@ class AmazonAutoLinks_Event {
          */
         private function ___handleQueryURL() {
 
+            new AmazonAutoLinks_Main_Event_Query_HTTPRequestCache;      // [4.7.0+]
+
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
             if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
