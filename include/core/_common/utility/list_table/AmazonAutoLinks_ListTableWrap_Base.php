@@ -89,12 +89,18 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
      * Undefined column items will be passed.
      *
      * Show the whole array contents for troubleshooting.
+     * @param  array  $aItem        A row item
+     * @param  string $sColumnName  The column name.
+     * @return string
      * @since 4.4.3
      */
     public function column_default( $aItem, $sColumnName ) {
-        return '<pre>'
-                . print_r( $aItem, true )
-            . '</pre>';
+        if ( ! isset( $aItem[ $sColumnName ] ) ) {
+            return 'Value not set';
+        }
+        return is_scalar( $aItem[ $sColumnName ] )
+            ? "<p>{$aItem[ $sColumnName ]}</p>"
+            : gettype( $aItem[ $sColumnName ] );
     }
 
     /**

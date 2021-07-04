@@ -120,15 +120,6 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         );
     }
 
-    public function column_default( $aItem, $sColumnName ) {
-        if ( ! isset( $aItem[ $sColumnName ] ) ) {
-            return 'Value not set';
-        }
-        return is_scalar( $aItem[ $sColumnName ] )
-            ? "<p>{$aItem[ $sColumnName ]}</p>"
-            : gettype( $aItem[ $sColumnName ] );
-    }
-
     /**
      * @param  array $aItem
      * @return string
