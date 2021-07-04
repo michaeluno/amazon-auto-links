@@ -211,8 +211,9 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @since   4.3.0
+     * @since  4.3.0
      * @return array
+     * @remark Seems not used
      */
     public function replyToGetJSButtonTranslation( $aLabels ) {
         $_aButtonIDs = $this->getActiveButtonIDs();
