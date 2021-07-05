@@ -328,6 +328,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.6.4 - 07/06/2021 =
+- Fixed an issue that in some locales, categories were displayed in English in the category selection page.
+- Fixed a bug that black rating stars were displayed with Feed units.
+- Fixed a bug that the selected button label was not properly displayed in the unit editing page.
+- Fixed a bug that labels of created buttons were not loaded.
+
 = 4.6.3 - 07/04/2021 =
 - Fixed an issue that rating stars in `embed` type units were not vertically aligned properly, started in 4.6.0.
 - Fixed a bug that encoded query parameters in a URL set to setting fields were removed.
