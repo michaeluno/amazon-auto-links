@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-auto-"
 "links\n"
-"POT-Creation-Date: 2021-07-01 20:38+0900\n"
-"PO-Revision-Date: 2021-07-01 20:44+0900\n"
+"POT-Creation-Date: 2021-07-06 04:19+0900\n"
+"PO-Revision-Date: 2021-07-06 04:19+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -27,6 +27,7 @@ msgid "Deactivating the plugin"
 msgstr "プラグインの停止中"
 
 #: include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_RootBase.php:55
+#: include/library/apf.orig/factory/_common/_abstract/AdminPageFramework_Factory.php:171
 #: include/library/apf/factory/_common/_abstract/AdminPageFramework_Factory.php:171
 #, php-format
 msgid "The method is not defined: %1$s"
@@ -80,6 +81,7 @@ msgstr "アクションは処理されませんでした。"
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:93
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:98
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:54
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:121
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:121
 msgid "On"
 msgstr "オン"
@@ -105,6 +107,7 @@ msgstr "オン"
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:86
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:94
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:55
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:122
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:122
 msgid "Off"
 msgstr "オフ"
@@ -146,7 +149,7 @@ msgid "Unknown"
 msgstr "不明"
 
 #: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:554
-#: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:224
+#: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:225
 #: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:67
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
 #: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:237
@@ -198,7 +201,7 @@ msgstr "コメント"
 
 #: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:284
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:79
-#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:112
+#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:105
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr "フィード"
@@ -787,12 +790,14 @@ msgstr "消去"
 
 #: include/core/_common/utility/list_table/AmazonAutoLinks_ListTableWrap_Base.php:253
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:79
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:119
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:119
 msgid "Yes"
 msgstr "はい"
 
 #: include/core/_common/utility/list_table/AmazonAutoLinks_ListTableWrap_Base.php:254
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:80
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:120
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:120
 msgid "No"
 msgstr "いいえ"
@@ -1258,7 +1263,7 @@ msgstr "新規自動挿入"
 
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:33
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:32
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:116
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:119
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:130
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:89
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:143
@@ -1341,6 +1346,7 @@ msgstr "ホバー"
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:64
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:69
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Default"
 msgstr "デフォルト"
@@ -1743,6 +1749,7 @@ msgid "Post contents"
 msgstr "投稿内容"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:72
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:84
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:84
 msgid "Comments"
 msgstr "コメント"
@@ -1805,6 +1812,7 @@ msgstr "ログエントリーに合致する文字をコンマで区切って入
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:104
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:126
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:154
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Clear"
 msgstr "消去"
@@ -2138,6 +2146,7 @@ msgstr "プロを今すぐ入手"
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
 #: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:66
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
 msgid "Debug"
 msgstr "デバッグ"
@@ -2171,6 +2180,8 @@ msgid "Activate"
 msgstr "有効化"
 
 #: include/core/component/template/admin_page/list_table/AmazonAutoLinks_ListTable_Template.php:198
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Version"
@@ -2232,28 +2243,28 @@ msgstr ""
 "PhpZon のショートコードで Amazon Auto Links の出力にコンバートさせたいものを"
 "チェックします。"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:126
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:129
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:36
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:50
 msgid "Common"
 msgstr "共通"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:136
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:139
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:143
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:48
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:58
 msgid "Template"
 msgstr "テンプレート"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:146
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:149
 msgid "Unit Product Filters"
 msgstr "ユニットプロダクトフィルター"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:156
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:159
 msgid "Advanced Unit Product Filters"
 msgstr "プロダクトフィルター詳細"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:168
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:171
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:70
 #: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:100
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:186
@@ -2262,20 +2273,20 @@ msgstr "プロダクトフィルター詳細"
 msgid "Locale"
 msgstr "地域"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:178
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:181
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:84
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php:26
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:90
 msgid "Cache"
 msgstr "キャッシュ"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:188
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:191
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:96
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:107
 msgid "Common Advanced"
 msgstr "共通詳細"
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:198
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:201
 msgid "Debug Information"
 msgstr "デバッグ情報"
 
@@ -2441,7 +2452,7 @@ msgid "Now Loading Text"
 msgstr "只今テキストを読み込み中"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:44
-#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:346
+#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:350
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:330
 msgid "Now loading..."
 msgstr "只今読み込み中 ..."
@@ -3187,6 +3198,7 @@ msgstr "プロダクトリンクの読み込みに失敗しました。"
 #: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:55
 #: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:61
 #: include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php:90
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
 msgid "Debug Info"
 msgstr "デバッグ情報"
@@ -3242,6 +3254,7 @@ msgid "The locale selected in the above line chart will be applied."
 msgstr "上のグラフで選択された地域が適用されます。"
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:46
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
 msgid "Export"
 msgstr "エクスポート"
@@ -3269,6 +3282,7 @@ msgstr "CSV ファイルとしてエクスポート。"
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:70
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:73
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:61
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
 msgid "Import"
 msgstr "インポート"
@@ -3392,7 +3406,7 @@ msgstr "ユニット設定変換"
 
 #: include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php:101
 #: include/core/component/unit/unit_type/contextual/AmazonAutoLinks_UnitTypeLoader_contextual.php:68
-#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:74
+#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:77
 #: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:80
 msgid "Main"
 msgstr "メイン"
@@ -3585,6 +3599,7 @@ msgstr "未加工"
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:42
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:65
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:38
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:80
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:80
 msgid "Title"
 msgstr "タイトル"
@@ -3662,17 +3677,17 @@ msgstr "除外サブカテゴリーは設定されていません。"
 msgid "Could not load the page as no URL is given."
 msgstr "URL が渡されなかった為ページを読み込めませんでした。"
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:57
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:72
 #, php-format
 msgid "Could not load the page: %1$s"
 msgstr "ページを読み込みできませんでした: %1$s"
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:70
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:85
 #, php-format
 msgid "Could not retrieve the category list: %1$s."
 msgstr "カテゴリーリストの取得に失敗しました: %1$s."
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:188
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:203
 #, php-format
 msgid ""
 "If this continues, try enabling the proxy from <a href=\"%1$s\">here</a>."
@@ -3680,7 +3695,7 @@ msgstr ""
 "もしこれが続くようでしたら、<a href=\"%1$s\">こちら</a>からプロキシを有効にし"
 "てみてください。"
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:192
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:207
 msgid "Reload"
 msgstr "リロード"
 
@@ -4077,6 +4092,7 @@ msgstr "アーティスト"
 #: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:41
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:60
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:75
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
 msgid "Author"
 msgstr "作者"
@@ -4805,6 +4821,7 @@ msgid "Flags"
 msgstr "フラッグ"
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:44
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:85
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:85
 msgid "Date"
 msgstr "日付"
@@ -4818,6 +4835,7 @@ msgid "Currency"
 msgstr "通貨"
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:188
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Language"
 msgstr "言語"
@@ -4915,6 +4933,7 @@ msgstr "サードパーティ"
 #: include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php:25
 #: include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:57
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
 msgid "Settings"
 msgstr "設定"
@@ -5143,6 +5162,7 @@ msgid "Select at least one."
 msgstr "少なくとも１つを選択。"
 
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:82
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
 msgid "Submit"
 msgstr "送信"
@@ -5165,6 +5185,7 @@ msgstr "ユニットの初期設定はリセットされました。"
 
 #: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:42
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:26
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
 msgid "Reset"
 msgstr "リセット"
@@ -5412,11 +5433,13 @@ msgid "Units, auto-insert and buttons are not included."
 msgstr "ユニット、オートインサート、ボタンは含みません。"
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:54
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
 msgid "Export Options"
 msgstr "エキスポート設定"
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:59
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
 msgid "Import Options"
 msgstr "インポート設定"
@@ -5506,6 +5529,7 @@ msgstr ""
 "もしユニットを削除した場合、Auto-insert (自動挿入) の定義を更新する必要があり"
 "ます。"
 
+#: include/library/apf.orig/admin-page-framework.php:46
 #: include/library/apf/admin-page-framework.php:46
 #, php-format
 msgid "The method is called too early. Perform <code>%2$s</code> earlier."
@@ -5513,18 +5537,25 @@ msgstr ""
 "メソッドの呼び出しが早すぎました。<code>%2$s</code> を早めに実行してくださ"
 "い。"
 
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:192
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:198
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:195
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:192
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:198
 #: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:195
 msgid "From"
 msgstr "始"
 
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:193
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:199
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:196
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:193
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:199
 #: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:196
 msgid "To"
 msgstr "終"
 
+#: include/library/apf.orig/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #: include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #, php-format
 msgid ""
@@ -5534,68 +5565,84 @@ msgstr ""
 "このリビーラーフィールドタイプは適切に動作するには Admin Page Framework %1$s "
 "が必要です。"
 
+#: include/library/apf.orig/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:186
 #: include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:186
 #, php-format
 msgid "You are using the framework version %2$s."
 msgstr "フレームワークバージョン %2$s を利用しています。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:56
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:56
 msgid "The options have been updated."
 msgstr "設定が更新されました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 msgid "The options have been cleared."
 msgstr "設定が消去されました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
 msgid "An error occurred while uploading the import file."
 msgstr "インポートファイルをアップロード中にエラーが発生しました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:64
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:64
 #, php-format
 msgid "The uploaded file type is not supported: %1$s"
 msgstr "アップロードされたファイルタイプはサポートされていません: %1$s"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:65
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:65
 msgid "Could not load the importing data."
 msgstr "インポートデータを読み込みできませんでした。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:66
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:66
 msgid "The uploaded file has been imported."
 msgstr "アップロードされたファイルはインポートされました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:67
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:67
 msgid "No data could be imported."
 msgstr "データをインポートできませんでした。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:68
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:68
 msgid "Upload Image"
 msgstr "画像アップロード"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:69
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:69
 msgid "Use This Image"
 msgstr "この画像を使う"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 msgid "Insert from URL"
 msgstr "URL から挿入"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:71
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:71
 msgid "Are you sure you want to reset the options?"
 msgstr "本当に設定をリセットしますか ?"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:72
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:72
 msgid "Please confirm your action."
 msgstr "アクションを確認してください。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:73
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:73
 msgid "The specified options have been deleted."
 msgstr "指定された設定は削除されました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:74
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:74
 msgid "A problem occurred while processing the form data. Please try again."
 msgstr "フォームデータを処理中に問題が生じました。もう一度お試しください。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:75
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:75
 #, php-format
 msgid ""
@@ -5609,216 +5656,268 @@ msgstr ""
 "合わせください。<code>max input vars</code>: %1$s. <code>$_POST</code> "
 "count: %2$s"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:76
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:76
 msgid "Is it okay to send the email?"
 msgstr "Eメールを送信してもよろしいですか ?"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:77
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:77
 msgid "The email has been sent."
 msgstr "Eメールは送信されました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:78
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:78
 msgid "The email has been scheduled."
 msgstr "Eメールはスケジュールされました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:79
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:79
 msgid "There was a problem sending the email"
 msgstr "Eメールの送信に問題がありました"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:82
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:82
 msgid "Categories"
 msgstr "カテゴリー"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:83
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:83
 msgid "Tags"
 msgstr "タグ"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:86
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:86
 msgid "Show All"
 msgstr "すべて表示"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:87
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:87
 msgid "Show All Authors"
 msgstr "すべての投稿者を開示"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:88
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:88
 msgid "Thank you for creating with"
 msgstr "作成ありがとうございます"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:89
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:89
 msgid "and"
 msgstr "と"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:91
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:91
 msgid "Manage"
 msgstr "編集"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:92
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:92
 msgid "Select Image"
 msgstr "画像を選択"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:93
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:93
 msgid "Upload File"
 msgstr "ファイルのアップロード"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:94
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:94
 msgid "Use This File"
 msgstr "このファイルを使う"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:95
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:95
 msgid "Select File"
 msgstr "ファイルを選択"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:96
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:96
 msgid "Remove Value"
 msgstr "値を除去"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
 msgid "Select All"
 msgstr "すべて選択"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:98
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:98
 msgid "Select None"
 msgstr "選択無し"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:99
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:99
 msgid "No term found."
 msgstr "タームが見つかりません。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:100
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:100
 msgid "Select"
 msgstr "選択"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:101
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:101
 msgid "Insert"
 msgstr "挿入"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:102
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:102
 msgid "Use This"
 msgstr "これを使用"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:103
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:103
 msgid "Return to Library"
 msgstr "ライブラリへ戻る"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:104
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:104
 #, php-format
 msgid "%1$s queries in %2$s seconds."
 msgstr "%2$s秒中に%1$sのクエリ。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:105
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:105
 #, php-format
 msgid "%1$s out of %2$s MB (%3$s) memory used."
 msgstr "%2$s MB (%3$s) 中の%1$s MBが使用されました。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:106
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:106
 #, php-format
 msgid "Peak memory usage %1$s MB."
 msgstr "ピークメモリ使用量は%1$sMBです。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:107
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:107
 #, php-format
 msgid "Initial memory usage  %1$s MB."
 msgstr "初期メモリ使用量は%1$sMBです。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:108
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:108
 msgid "The allowed maximum number of fields is {0}."
 msgstr "最大 {0} 個までのフィールドが複製できます。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:109
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:109
 msgid "The allowed minimum number of fields is {0}."
 msgstr "最小 {0} 個のフィールドが必要です。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:110
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:110
 msgid "Add"
 msgstr "追加"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:111
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:111
 msgid "Remove"
 msgstr "削除"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:112
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:112
 msgid "The allowed maximum number of sections is {0}"
 msgstr "最大 {0} 個までのセクションが複製できます。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:113
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:113
 msgid "The allowed minimum number of sections is {0}"
 msgstr "最小 {0} 個のセクションが必要です。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:114
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:114
 msgid "Add Section"
 msgstr "セクションを追加"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:115
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:115
 msgid "Remove Section"
 msgstr "セクションの削除"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:116
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:116
 msgid "Toggle All"
 msgstr "すべてを切り替える"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:117
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:117
 msgid "Toggle all collapsible sections"
 msgstr "すべての折りたたみ可能セクションの切り替え"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:123
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:123
 msgid "Enabled"
 msgstr "有効"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:124
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:124
 msgid "Disabled"
 msgstr "無効"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:125
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:125
 msgid "Supported"
 msgstr "サポート済"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:126
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:126
 msgid "Not Supported"
 msgstr "非サポート"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:127
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:127
 msgid "Functional"
 msgstr "機能中"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:128
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:128
 msgid "Not Functional"
 msgstr "非機能"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:129
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:129
 msgid "Too Long"
 msgstr "非常に長い"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:130
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:130
 msgid "Acceptable"
 msgstr "許容可"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:131
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:131
 msgid "No log found."
 msgstr "ログが見つかりません。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:132
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:132
 #, php-format
 msgid "The method is called too early: %1$s"
 msgstr "メソッドの呼び出しが早すぎます: %1$s"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:134
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:134
 msgid "Click here to expand to view the contents."
 msgstr "コンテンツを開くにはここをクリックします。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:135
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:135
 msgid "Click here to collapse the contents."
 msgstr "コンテンツを折りたたむにはここをクリック。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:136
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:136
 msgid "Loading..."
 msgstr "読込中 ..."
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
 msgid "Please enable JavaScript for better user experience."
 msgstr ""
 "より良いユーザー体験のためにブラウザの JavaScript を有効にしてください。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:139
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:139
 msgid ""
 "This information will be disabled when <code>WP_DEBUG</code> is set to "
@@ -5827,184 +5926,231 @@ msgstr ""
 "<code>wp-config.php</code>において、<code>WP_DEBUG</code> が<code>false</"
 "code>に設定されている場合、この情報は見えなくなります。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:140
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:140
 msgid "The ability to repeat sections is disabled."
 msgstr "セクションの複製は無効にされています。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:141
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:141
 msgid "The ability to repeat fields is disabled."
 msgstr "フィールドの複製は無効にされています。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:142
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:142
 msgid "Warning."
 msgstr "注意。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:143
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:143
 msgid "Submit the form."
 msgstr "フォームを送信。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:144
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:144
 msgid "Please check this box if you want to proceed."
 msgstr "次に進むにはこれにチェックを入れます。"
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:145
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:145
 msgid "No file is selected."
 msgstr "ファイルが選択されていません。"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Select Color"
 msgstr "色を選択"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Current Color"
 msgstr "現在の色"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:65
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:65
 msgid "No browser information found."
 msgstr "ブラウザ情報は見つかりません。"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Memory Limit"
 msgstr "メモリ制限"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Multi-site"
 msgstr "マルチサイト"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Permalink Structure"
 msgstr "パーマリンク構造"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Active Theme"
 msgstr "有効なテーマ"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Registered Post Statuses"
 msgstr "登録された投稿ステータス"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix"
 msgstr "テーブル接頭辞"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix Length"
 msgstr "テーブル接頭辞の長さ"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix Status"
 msgstr "テーブル接頭辞のステータス"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Multibite String Extension"
 msgstr "複数の文字列の拡張子"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "WP_CONTENT_DIR Writeable"
 msgstr "WP_CONTENT_DIR 書き込み可"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Active Plugins"
 msgstr "有効なプラグイン"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Network Active Plugins"
 msgstr "ネットワーク上の有効なプラグイン"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Constants"
 msgstr "定数"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Safe Mode"
 msgstr "セーフモード"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Upload Max Size"
 msgstr "アップロードの最大サイズ"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Post Max Size"
 msgstr "投稿最大サイズ"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Upload Max File Size"
 msgstr "アップロードファイルの最大サイズ"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Max Execution Time"
 msgstr "最大実行時間"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Max Input Vars"
 msgstr "Input Vars (フォーム内のinputタグ) の最大数"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Argument Separator"
 msgstr "引数区切り"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Allow URL File Open"
 msgstr "URL File Open の許可"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Display Errors"
 msgstr "表示エラー"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Log Errors"
 msgstr "エラーを記録する"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Error log location"
 msgstr "エラーログの場所"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Error Reporting Level"
 msgstr "エラーレポートレベル"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "FSOCKOPEN"
 msgstr "FSOCKOPEN"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "cURL"
 msgstr "cURL"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "SOAP"
 msgstr "SOAP"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "SUHOSIN"
 msgstr "SUHOSIN"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Web Server"
 msgstr "ウェブサーバー"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session"
 msgstr "セッション"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Name"
 msgstr "セッション名"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Cookie Path"
 msgstr "セッションクッキーのパス"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Save Path"
 msgstr "セッション保存パス"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Use Cookies"
 msgstr "セッションはクッキーを使用"
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Use Only Cookies"
 msgstr "セッションはクッキーのみ使用"

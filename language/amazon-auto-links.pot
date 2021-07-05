@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2021-07-01 20:38+0900\n"
+"POT-Creation-Date: 2021-07-06 04:18+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,7 @@ msgid "Deactivating the plugin"
 msgstr ""
 
 #: include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_RootBase.php:55
+#: include/library/apf.orig/factory/_common/_abstract/AdminPageFramework_Factory.php:171
 #: include/library/apf/factory/_common/_abstract/AdminPageFramework_Factory.php:171
 #, php-format
 msgid "The method is not defined: %1$s"
@@ -80,6 +81,7 @@ msgstr ""
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:93
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:98
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:54
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:121
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:121
 msgid "On"
 msgstr ""
@@ -105,6 +107,7 @@ msgstr ""
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:86
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:94
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:55
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:122
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:122
 msgid "Off"
 msgstr ""
@@ -144,7 +147,7 @@ msgid "Unknown"
 msgstr ""
 
 #: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:554
-#: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:224
+#: include/core/component/button/AmazonAutoLinks_ButtonLoader.php:225
 #: include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php:67
 #: include/core/component/button/admin/form_field/AmazonAutoLinks_FormFields_Button_Text.php:23
 #: include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php:237
@@ -191,7 +194,7 @@ msgstr ""
 
 #: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:284
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:79
-#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:112
+#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:105
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr ""
@@ -780,12 +783,14 @@ msgstr ""
 
 #: include/core/_common/utility/list_table/AmazonAutoLinks_ListTableWrap_Base.php:253
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:79
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:119
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:119
 msgid "Yes"
 msgstr ""
 
 #: include/core/_common/utility/list_table/AmazonAutoLinks_ListTableWrap_Base.php:254
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:80
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:120
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:120
 msgid "No"
 msgstr ""
@@ -1239,7 +1244,7 @@ msgstr ""
 
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:33
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:32
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:116
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:119
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php:130
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:89
 #: include/core/component/unit/_common/post_type/unit_preview/AmazonAutoLinks_PostType_UnitPreview.php:143
@@ -1322,6 +1327,7 @@ msgstr ""
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php:64
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:55
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:69
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Default"
 msgstr ""
@@ -1705,6 +1711,7 @@ msgid "Post contents"
 msgstr ""
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:72
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:84
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:84
 msgid "Comments"
 msgstr ""
@@ -1765,6 +1772,7 @@ msgstr ""
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:104
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:126
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:154
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Clear"
 msgstr ""
@@ -2079,6 +2087,7 @@ msgstr ""
 #: include/core/component/template/admin_page/AmazonAutoLinks_AdminPage_Template_ListTable.php:68
 #: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:66
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:26
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:138
 msgid "Debug"
 msgstr ""
@@ -2112,6 +2121,8 @@ msgid "Activate"
 msgstr ""
 
 #: include/core/component/template/admin_page/list_table/AmazonAutoLinks_ListTable_Template.php:198
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Version"
@@ -2165,28 +2176,28 @@ msgid ""
 "Check the shortcode of PhpZon to convert its outputs into Amazon Auto Links'."
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:126
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:129
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:36
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:50
 msgid "Common"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:136
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:139
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:143
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:48
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:58
 msgid "Template"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:146
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:149
 msgid "Unit Product Filters"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:156
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:159
 msgid "Advanced Unit Product Filters"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:168
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:171
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:70
 #: include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:100
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:186
@@ -2195,20 +2206,20 @@ msgstr ""
 msgid "Locale"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:178
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:181
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:84
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache.php:26
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:90
 msgid "Cache"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:188
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:191
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:96
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:107
 msgid "Common Advanced"
 msgstr ""
 
-#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:198
+#: include/core/component/unit/AmazonAutoLinks_UnitLoader.php:201
 msgid "Debug Information"
 msgstr ""
 
@@ -2365,7 +2376,7 @@ msgid "Now Loading Text"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:44
-#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:346
+#: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php:350
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:330
 msgid "Now loading..."
 msgstr ""
@@ -3089,6 +3100,7 @@ msgstr ""
 #: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:55
 #: include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput.php:61
 #: include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php:90
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:133
 msgid "Debug Info"
 msgstr ""
@@ -3141,6 +3153,7 @@ msgid "The locale selected in the above line chart will be applied."
 msgstr ""
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:46
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:58
 msgid "Export"
 msgstr ""
@@ -3168,6 +3181,7 @@ msgstr ""
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:70
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Porting.php:73
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:61
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:60
 msgid "Import"
 msgstr ""
@@ -3289,7 +3303,7 @@ msgstr ""
 
 #: include/core/component/unit/unit_type/category/AmazonAutoLinks_UnitTypeLoader_category.php:101
 #: include/core/component/unit/unit_type/contextual/AmazonAutoLinks_UnitTypeLoader_contextual.php:68
-#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:74
+#: include/core/component/unit/unit_type/feed/AmazonAutoLinks_UnitTypeLoader_feed.php:77
 #: include/core/component/unit/unit_type/url/AmazonAutoLinks_UnitTypeLoader_url.php:80
 msgid "Main"
 msgstr ""
@@ -3473,6 +3487,7 @@ msgstr ""
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:42
 #: include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php:65
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:38
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:80
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:80
 msgid "Title"
 msgstr ""
@@ -3550,23 +3565,23 @@ msgstr ""
 msgid "Could not load the page as no URL is given."
 msgstr ""
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:57
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:72
 #, php-format
 msgid "Could not load the page: %1$s"
 msgstr ""
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:70
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:85
 #, php-format
 msgid "Could not retrieve the category list: %1$s."
 msgstr ""
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:188
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:203
 #, php-format
 msgid ""
 "If this continues, try enabling the proxy from <a href=\"%1$s\">here</a>."
 msgstr ""
 
-#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:192
+#: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:207
 msgid "Reload"
 msgstr ""
 
@@ -3943,6 +3958,7 @@ msgstr ""
 #: include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:41
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:60
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:75
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:81
 msgid "Author"
 msgstr ""
@@ -4619,6 +4635,7 @@ msgid "Flags"
 msgstr ""
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:44
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:85
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:85
 msgid "Date"
 msgstr ""
@@ -4632,6 +4649,7 @@ msgid "Currency"
 msgstr ""
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_ListTable_Products.php:188
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Language"
 msgstr ""
@@ -4729,6 +4747,7 @@ msgstr ""
 #: include/core/main/admin/setting/AmazonAutoLinks_AdminPage_Setting.php:25
 #: include/core/main/admin/setting/AmazonAutoLinks_SettingsAdminPageLoader.php:57
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php:53
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:90
 msgid "Settings"
 msgstr ""
@@ -4950,6 +4969,7 @@ msgid "Select at least one."
 msgstr ""
 
 #: include/core/main/admin/setting/default/AmazonAutoLinks_AdminPage_Setting_Default.php:82
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:62
 msgid "Submit"
 msgstr ""
@@ -4971,6 +4991,7 @@ msgstr ""
 
 #: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit.php:42
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php:26
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:118
 msgid "Reset"
 msgstr ""
@@ -5203,11 +5224,13 @@ msgid "Units, auto-insert and buttons are not included."
 msgstr ""
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:54
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:59
 msgid "Export Options"
 msgstr ""
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php:59
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:61
 msgid "Import Options"
 msgstr ""
@@ -5292,23 +5315,31 @@ msgid ""
 "unit."
 msgstr ""
 
+#: include/library/apf.orig/admin-page-framework.php:46
 #: include/library/apf/admin-page-framework.php:46
 #, php-format
 msgid "The method is called too early. Perform <code>%2$s</code> earlier."
 msgstr ""
 
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:192
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:198
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:195
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:192
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:198
 #: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:195
 msgid "From"
 msgstr ""
 
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:193
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:199
+#: include/library/apf.orig/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:196
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateRangeCustomFieldType.php:193
 #: include/library/apf/custom-field-types/date-time-custom-field-types/DateTimeRangeCustomFieldType.php:199
 #: include/library/apf/custom-field-types/date-time-custom-field-types/TimeRangeCustomFieldType.php:196
 msgid "To"
 msgstr ""
 
+#: include/library/apf.orig/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #: include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:185
 #, php-format
 msgid ""
@@ -5316,68 +5347,84 @@ msgid ""
 "function properly."
 msgstr ""
 
+#: include/library/apf.orig/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:186
 #: include/library/apf/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php:186
 #, php-format
 msgid "You are using the framework version %2$s."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:56
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:56
 msgid "The options have been updated."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:57
 msgid "The options have been cleared."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:63
 msgid "An error occurred while uploading the import file."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:64
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:64
 #, php-format
 msgid "The uploaded file type is not supported: %1$s"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:65
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:65
 msgid "Could not load the importing data."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:66
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:66
 msgid "The uploaded file has been imported."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:67
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:67
 msgid "No data could be imported."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:68
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:68
 msgid "Upload Image"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:69
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:69
 msgid "Use This Image"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 msgid "Insert from URL"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:71
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:71
 msgid "Are you sure you want to reset the options?"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:72
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:72
 msgid "Please confirm your action."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:73
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:73
 msgid "The specified options have been deleted."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:74
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:74
 msgid "A problem occurred while processing the form data. Please try again."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:75
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:75
 #, php-format
 msgid ""
@@ -5387,399 +5434,498 @@ msgid ""
 "count: %2$s"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:76
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:76
 msgid "Is it okay to send the email?"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:77
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:77
 msgid "The email has been sent."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:78
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:78
 msgid "The email has been scheduled."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:79
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:79
 msgid "There was a problem sending the email"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:82
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:82
 msgid "Categories"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:83
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:83
 msgid "Tags"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:86
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:86
 msgid "Show All"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:87
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:87
 msgid "Show All Authors"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:88
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:88
 msgid "Thank you for creating with"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:89
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:89
 msgid "and"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:91
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:91
 msgid "Manage"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:92
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:92
 msgid "Select Image"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:93
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:93
 msgid "Upload File"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:94
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:94
 msgid "Use This File"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:95
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:95
 msgid "Select File"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:96
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:96
 msgid "Remove Value"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
 msgid "Select All"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:98
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:98
 msgid "Select None"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:99
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:99
 msgid "No term found."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:100
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:100
 msgid "Select"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:101
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:101
 msgid "Insert"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:102
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:102
 msgid "Use This"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:103
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:103
 msgid "Return to Library"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:104
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:104
 #, php-format
 msgid "%1$s queries in %2$s seconds."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:105
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:105
 #, php-format
 msgid "%1$s out of %2$s MB (%3$s) memory used."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:106
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:106
 #, php-format
 msgid "Peak memory usage %1$s MB."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:107
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:107
 #, php-format
 msgid "Initial memory usage  %1$s MB."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:108
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:108
 msgid "The allowed maximum number of fields is {0}."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:109
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:109
 msgid "The allowed minimum number of fields is {0}."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:110
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:110
 msgid "Add"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:111
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:111
 msgid "Remove"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:112
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:112
 msgid "The allowed maximum number of sections is {0}"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:113
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:113
 msgid "The allowed minimum number of sections is {0}"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:114
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:114
 msgid "Add Section"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:115
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:115
 msgid "Remove Section"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:116
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:116
 msgid "Toggle All"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:117
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:117
 msgid "Toggle all collapsible sections"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:123
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:123
 msgid "Enabled"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:124
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:124
 msgid "Disabled"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:125
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:125
 msgid "Supported"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:126
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:126
 msgid "Not Supported"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:127
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:127
 msgid "Functional"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:128
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:128
 msgid "Not Functional"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:129
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:129
 msgid "Too Long"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:130
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:130
 msgid "Acceptable"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:131
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:131
 msgid "No log found."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:132
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:132
 #, php-format
 msgid "The method is called too early: %1$s"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:134
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:134
 msgid "Click here to expand to view the contents."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:135
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:135
 msgid "Click here to collapse the contents."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:136
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:136
 msgid "Loading..."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
 msgid "Please enable JavaScript for better user experience."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:139
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:139
 msgid ""
 "This information will be disabled when <code>WP_DEBUG</code> is set to "
 "<code>false</code> in <code>wp-config.php</code>."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:140
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:140
 msgid "The ability to repeat sections is disabled."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:141
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:141
 msgid "The ability to repeat fields is disabled."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:142
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:142
 msgid "Warning."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:143
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:143
 msgid "Submit the form."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:144
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:144
 msgid "Please check this box if you want to proceed."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/_abstract/_model/AdminPageFramework_Message.php:145
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:145
 msgid "No file is selected."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Select Color"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_color.php:196
 msgid "Current Color"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:65
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:65
 msgid "No browser information found."
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Memory Limit"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Multi-site"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Permalink Structure"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Active Theme"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Registered Post Statuses"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix Length"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Table Prefix Status"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Multibite String Extension"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "WP_CONTENT_DIR Writeable"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Active Plugins"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 msgid "Network Active Plugins"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:92
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Constants"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Safe Mode"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Upload Max Size"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Post Max Size"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Upload Max File Size"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Max Execution Time"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Max Input Vars"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Argument Separator"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Allow URL File Open"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Display Errors"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Log Errors"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Error log location"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "Error Reporting Level"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "FSOCKOPEN"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "cURL"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "SOAP"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:168
 msgid "SUHOSIN"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Web Server"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Name"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Cookie Path"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Save Path"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Use Cookies"
 msgstr ""
 
+#: include/library/apf.orig/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 #: include/library/apf/factory/_common/form/field_type/AdminPageFramework_FieldType_system.php:172
 msgid "Session Use Only Cookies"
 msgstr ""
