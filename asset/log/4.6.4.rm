@@ -1,1 +1,2 @@
+- Fixed a bug that the selected button label was not properly displayed in the unit editing page.
 - Fixed a bug that labels of created buttons were not loaded.

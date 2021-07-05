@@ -1,10 +1,8 @@
 /**
  * @name Button Preview in Unit Definition Page
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
-
-    var debugMode   = 'undefined' !== typeof aalButtonPreview.debugMode ? aalButtonPreview.debugMode : 0;
 
     /**
      * Global function called from an iframe document.
@@ -85,7 +83,8 @@
         var _oButtonSelect = $( '.button-select-row' ).find( 'select' ); // the select tag
         _oButtonSelect.change( function() {
             _setPreviewButton( $( this ).val(), $( this ) );
-        } ).trigger( 'change' );
+        } );
+        _oButtonSelect.trigger( 'change' );
 
         // When the Override Button Label option is toggled, update the label.
         $( 'input.override-button-label[type=checkbox]' ).change( function() {
