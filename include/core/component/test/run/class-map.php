@@ -23,6 +23,7 @@ return array(
     "AmazonAutoLinks_Scratch_PAAPIRequestCounter" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/paapi_request_counter/AmazonAutoLinks_Scratch_PAAPIRequestCounter.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 
     "AmazonAutoLinks_Scratch_Test2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test2.php", 
+    "AmazonAutoLinks_Scratch_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/functions/AmazonAutoLinks_Scratch_WordPress_Functions.php", 
     "AmazonAutoLinks_Scratch_WordPress_Post" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/post/AmazonAutoLinks_Scratch_WordPress_Post.php", 
     "AmazonAutoLinks_Scratch_WordPress_Transients" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/transient/AmazonAutoLinks_Scratch_WordPress_Transients.php", 
     "AmazonAutoLinks_UnitTest_FrameworkUtility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/admin_page_framework/AmazonAutoLinks_UnitTest_FrameworkUtility.php", 
