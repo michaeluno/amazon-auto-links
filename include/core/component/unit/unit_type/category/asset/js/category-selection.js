@@ -1,6 +1,6 @@
 /*
     @name Category Selection
-    @version 1.0.0
+    @version 1.0.1
  */
 (function($){
 
@@ -95,7 +95,7 @@
         }
 
     function handleButton_RemoveChecked() {
-        $( '#button-remove-checked' ).click( function( event ) {
+        $( '#button-remove-checked' ).on( 'click', function( event ) {
             event.preventDefault();
 
             // Check if any added category checkbox is checked.
@@ -139,7 +139,7 @@
         }
 
     function handleButton_AddExcludingCategory() {
-        $( '#button-add-excluding-category' ).click( function( event ){
+        $( '#button-add-excluding-category' ).on( 'click', function( event ){
             event.preventDefault();
             // If the current URL is not set or the cache is not set,
             if ( 'undefined' === typeof sCurrentURL ) {
@@ -170,7 +170,7 @@
     }
 
     function handleButton_AddCategory() {
-        $( '#button-add-category' ).click( function( event ){
+        $( '#button-add-category' ).on( 'click', function( event ){
             event.preventDefault();
             // If the current URL is not set or the cache is not set,
             if ( 'undefined' === typeof sCurrentURL ) {
@@ -225,7 +225,7 @@
             oInsert.find( 'input[type=checkbox]' ).attr( "checked", false );
 
             /// when the Added Categories item once removed, the event binding gets lost. So re-bind the click event.
-            oInsert.find( 'a' ).unbind( 'click' ).click( ___handleCategoryLinkEvents );
+            oInsert.find( 'a' ).off( 'click' ).on( 'click', ___handleCategoryLinkEvents );
             oContainer.append( oInsert );
 
             // Enable the Remove Checkbox and Create buttons
@@ -246,7 +246,7 @@
      */
     function handleExistentCategoryItems() {
         var _oContainers = $( '#added-categories, #excluding-categories' );
-        _oContainers.find( 'a' ).click( ___handleCategoryLinkEvents );
+        _oContainers.find( 'a' ).on( 'click', ___handleCategoryLinkEvents );
     }
 
     /**
@@ -309,7 +309,7 @@
                     $( '#category-select-breadcrumb' ).after( '<p class="response-error"><span class="warning">'  + response.result + '</span></p>' );
 
                     // Reload button event
-                    $( '.button-reload' ).click( function( event ) {
+                    $( '.button-reload' ).on( 'click', function( event ) {
                         event.preventDefault();
                         handleCategoryList( sURL, true ); // recursive call
                         return false;
@@ -376,9 +376,9 @@
             }
 
             // (Re)Bind click event to the newly loaded link elements.
-            oResponse[ 'category_list' ].find( 'a' ).unbind( 'click' ).click( ___handleCategoryLinkEvents );
-            oResponse[ 'checkbox_added' ].find( 'a' ).unbind( 'click' ).click( ___handleCategoryLinkEvents );
-            oResponse[ 'checkbox_excluded' ].find( 'a' ).unbind( 'click' ).click( ___handleCategoryLinkEvents );
+            oResponse[ 'category_list' ].find( 'a' ).off( 'click' ).on( 'click', ___handleCategoryLinkEvents );
+            oResponse[ 'checkbox_added' ].find( 'a' ).off( 'click' ).on( 'click',  ___handleCategoryLinkEvents );
+            oResponse[ 'checkbox_excluded' ].find( 'a' ).off( 'click' ).on( 'click', ___handleCategoryLinkEvents );
 
             // Enable the `Add Category` button.
             $( '#button-add-category' ).removeAttr( 'disabled' );
