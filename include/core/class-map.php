@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.1b01 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.4b01 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <http://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -160,6 +160,7 @@ return array(
     "AmazonAutoLinks_PhpZonSupport_Shortcode_phpbay" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/phpzon/shortcode/AmazonAutoLinks_PhpZonSupport_Shortcode_phpbay.php", 
     "AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/phpzon/shortcode/AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon.php", 
     "AmazonAutoLinks_UnitLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/AmazonAutoLinks_UnitLoader.php", 
+    "AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks.php", 
     "AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater.php", 

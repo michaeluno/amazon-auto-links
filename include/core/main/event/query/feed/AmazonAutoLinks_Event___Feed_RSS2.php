@@ -18,6 +18,12 @@
 class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_Event___Feed_Base {
 
     /**
+     * @var string The feed type such as rss2 or json.
+     * @since 4.6.4
+     */
+    public $sType = 'rss2';
+
+    /**
      * @since 4.6.0
      */
     protected function _load() {

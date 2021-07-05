@@ -66,29 +66,31 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
         public function replyToLoadEvents() {
 
             new AmazonAutoLinks_Event___Action_UnitPrefetchByID;
-            new AmazonAutoLinks_Event___Action_APIRequestSearchProducts;    // 3.7.7+
-            new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;  // 3.9.0
-            new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;      // 3.5.0
-            new AmazonAutoLinks_Event___Action_HTTPRequestRating;           // 4.3.4
+            new AmazonAutoLinks_Event___Action_APIRequestSearchProducts;    // [3.7.7]
+            new AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview;   // [3.9.0]
+            new AmazonAutoLinks_Event___Action_APIRequestCacheRenewal;      // [3.5.0]
+            new AmazonAutoLinks_Event___Action_HTTPRequestRating;           // [4.3.4]
 
+            new AmazonAutoLinks_Unit_Log_PAAPIErrors; // [3.9.0]
 
-            new AmazonAutoLinks_Unit_Log_PAAPIErrors; // 3.9.0
-
-            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // 3.6.0
+            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // [3.6.0]
             new AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater;
-            new AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater; // 4.3.0
+            new AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater; // [4.3.0]
 
-            new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // 4.3.0
+            new AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder; // [4.3.0]
 
-            new AmazonAutoLinks_Event_Filter_ProductLinks;  // 4.3.0
+            new AmazonAutoLinks_Event_Filter_ProductLinks;    // [4.3.0]
 
-            new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // 4.3.0
-            new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // 4.3.0
+            new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // [4.3.0]
+            new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // [4.3.0]
 
             new AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors; // [4.3.5]
             new AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning; // [4.4.0]
 
             new AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement; // [4.6.1]
+
+            new AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks; // [4.6.4]
+
             $this->___loadDebugEvents(); // [4.3.5]
 
         }
