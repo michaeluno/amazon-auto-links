@@ -1,7 +1,7 @@
 <?php
 /**
  *    Plugin Name:    Amazon Auto Links
- *    Plugin URI:     http://en.michaeluno.jp/amazon-auto-links
+ *    Plugin URI:     https://en.michaeluno.jp/amazon-auto-links
  *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *    Author:         Michael Uno (miunosoft)
  *    Author URI:     http://michaeluno.jp
@@ -21,10 +21,10 @@ class AmazonAutoLinks_Registry_Base {
     const VERSION        = '4.6.4b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME           = 'Amazon Auto Links';
     const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
-    const URI            = 'http://en.michaeluno.jp/amazon-auto-links';
+    const URI            = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR         = 'miunosoft (Michael Uno)';
-    const AUTHOR_URI     = 'http://en.michaeluno.jp/';
-    const PLUGIN_URI     = 'http://en.michaeluno.jp/amazon-auto-links';
+    const AUTHOR_URI     = 'https://en.michaeluno.jp/';
+    const PLUGIN_URI     = 'https://en.michaeluno.jp/amazon-auto-links';
     const COPYRIGHT      = 'Copyright (c) 2013-2021, Michael Uno';
     const LICENSE        = 'GPL v2 or later';
     const CONTRIBUTORS   = '';
