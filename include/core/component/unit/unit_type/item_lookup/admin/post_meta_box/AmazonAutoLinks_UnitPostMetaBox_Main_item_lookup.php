@@ -51,7 +51,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_item_lookup extends AmazonAutoLinks_U
                     'SKU'   => 'SKU',
                     'UPC'   => '<span class="' . ( $_bUPCAllowed ? "" : "disabled" ) . '">UPC <span class="description">(' . __( 'Not available in the CA locale.', 'amazon-auto-links' ) . ')</span></span>',
                     'EAN'   => 'EAN',
-                    'ISBN'  => '<span class="' . ( $_bISBNAllowed ? "" : "disabled" ) . '">ISBN <span class="description">(' . __( 'The US locale only, when the search index is Books.', 'amaozn-auto-links' ) .')</span></span>',
+                    'ISBN'  => '<span class="' . ( $_bISBNAllowed ? "" : "disabled" ) . '">ISBN <span class="description">(' . __( 'The US locale only, when the search index is Books.', 'amazon-auto-links' ) .')</span></span>',
                 ),
                 'attributes' => array(              
                     'UPC' => array(

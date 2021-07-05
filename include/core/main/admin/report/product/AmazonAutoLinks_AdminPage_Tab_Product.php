@@ -66,7 +66,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
             private function ___getTableRows( array $aProduct ) {
                 if ( empty( $aProduct ) ) {
                     return "<tr>"
-                            . "<td colspan='2'>" . __( 'No data found.', 'amaozn-auto-links' ) . "</td>"
+                            . "<td colspan='2'>" . __( 'No data found.', 'amazon-auto-links' ) . "</td>"
                         . "</tr>";
                 }
                 $_sOutput = '';
