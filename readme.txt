@@ -329,6 +329,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.6.4 - 07/06/2021 =
+- Fixed a bug that broke the layout in the category selection page when there is a product description in the preview.
 - Fixed an issue that in some locales, categories were displayed in English in the category selection page.
 - Fixed a bug that black rating stars were displayed with Feed units.
 - Fixed a bug that the selected button label was not properly displayed in the unit editing page.
