@@ -1,6 +1,6 @@
 /**
  * @name Button Preview in Unit Definition Page
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -41,13 +41,12 @@
         debugLog( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
 
         var _setPreviewButton = function( iButtonID, oSelect ) {
-
             iButtonID = parseInt( iButtonID );
             var _oButton = oSelect.closest( 'fieldset' )
                 .find( '.amazon-auto-links-button' );
 
             if( 'undefined' === typeof aalButtonPreview.activeButtons[ iButtonID ] ) {
-                debugLog.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
+                debugLog.log( 'the button label does not exist. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
                 return;
             }
 
@@ -79,15 +78,15 @@
 
         };
 
-        // Initially set the preview and  the button select change.
+        // Initially set the preview and the button select change.
         var _oButtonSelect = $( '.button-select-row' ).find( 'select' ); // the select tag
-        _oButtonSelect.change( function() {
+        _oButtonSelect.on( 'change', function() {
             _setPreviewButton( $( this ).val(), $( this ) );
         } );
         _oButtonSelect.trigger( 'change' );
 
         // When the Override Button Label option is toggled, update the label.
-        $( 'input.override-button-label[type=checkbox]' ).change( function() {
+        $( 'input.override-button-label[type=checkbox]' ).on( 'change', function() {
             if ( ! $( this ).prop( 'checked' ) ) {
                 ___revertButtonLabels( _oButtonSelect );
                 return;
@@ -99,7 +98,7 @@
         } );
 
         // Override the button label when the Button Label field is entered.
-        $( 'input.button-label[type=text]' ).change( function(){
+        $( 'input.button-label[type=text]' ).on( 'change', function(){
             var _oOverrideLabel = $( this ).closest( '.amazon-auto-links-section-table' )
                 .find( 'input.override-button-label[type=checkbox]' );
             if ( ! _oOverrideLabel.prop( 'checked' ) ) {
@@ -121,7 +120,16 @@
 
 
         function ___revertButtonLabels( oButtonSelect ) {
+
             ___setButtonLabel_iframe( aalButtonPreview.activeButtons[ 0 ], oButtonSelect );
+
+            // [4.6.5] With a newly created unit, the selected button initial label always "Buy Now" for some reasons. This fixes it.
+            var _iButtonID = parseInt( oButtonSelect.val() );
+            if ( _iButtonID && aalButtonPreview.activeButtons[ _iButtonID ] ) {
+                ___setButtonLabel_div( aalButtonPreview.activeButtons[ _iButtonID ], oButtonSelect );
+                return;
+            }
+
             $.each( aalButtonPreview.activeButtons, function( __iButtonID, __sButtonLabel ) {
                 if ( 0 === __iButtonID ) {
                     return true; // skip
@@ -129,6 +137,7 @@
                 ___setButtonLabel_div( __sButtonLabel, oButtonSelect );
                 return false;  // break
             } );
+
         }
 
         /**
