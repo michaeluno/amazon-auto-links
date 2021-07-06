@@ -68,7 +68,6 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
             array(
                 'field_id'      => $sFieldIDPrefix . 'country',
                 'type'          => 'hidden',
-//                'title'         => __( 'Locale', 'amazon-auto-links' ),
                 'attributes'    => array(
                     'readonly'=> 'readonly',
                     'fieldrow' => array(
@@ -102,7 +101,13 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                     'NewestArrivals'        => "<strong>" . __( 'Newest Arrivals', 'amazon-auto-links' ) . "</strong> - " . __( 'Sorts results with according to newest arrivals.', 'amazon-auto-links' ) . '<br />',
                 ),
                 'default'       => 'Relevance',
-//                'description'   => __( 'When the search index is selected to <code>All</code>, this option does not take effect.', 'amazon-auto-links' ),
+            ),
+            array(
+                'field_id'      => $sFieldIDPrefix . 'shuffle',
+                'title'         => __( 'Shuffle', 'amazon-auto-links' ),
+                'type'          => 'checkbox',
+                'label'         => __( 'Shuffle products to change the order.', 'amazon-auto-links' ),
+                'default'       => false,
             ),
         );
         return $_aFields;

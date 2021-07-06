@@ -596,13 +596,19 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
      * @return      array
      */
     protected function getProducts( $aResponse ) {
+
+        $_aItems = $this->getElementAsArray( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ), array() );
+        if ( $this->oUnitOption->get( 'shuffle' ) ) {
+            shuffle( $_aItems ); // [4.7.0+] For the Product Search units, as they don't have the 'random' sort order, this option makes it possible to shuffule products.
+        }
         return $this->_getProductsFromResponseItems(
-            $this->getElementAsArray( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ), array() ),  // Items
+            $_aItems,  // Items
             strtoupper( $this->oUnitOption->get( 'country' ) ), // locale
             $this->oUnitOption->get( 'associate_id' ),          // associate id
             $this->getElement( $aResponse, array( '_ResponseDate' ) ), // response date - no need to adjust for GMT, will be done later
             $this->oUnitOption->get( 'count' )
         );
+        
     }
         /**
          * @param       array   $aItems
