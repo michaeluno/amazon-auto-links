@@ -63,9 +63,9 @@
                 // Make sure the button container is visible. By default it is hidden for widget forms.
                 _oButtonContainer.show();
                 _oButtonContainer.siblings( '.iframe-button-preview-container' ).css({ // hide
-                   'position':  'absolute',
+                    'position':  'absolute',
                     'top':      '-9999px',
-                    'z-depth':  -100,
+                    'z-depth':  '-100',
                 });
                 return;
             }
@@ -74,7 +74,7 @@
             _oButtonContainer.hide();
             ___setButtonLabel_iframe( _sButtonLabel, oSelect );
             _oButtonContainer.siblings( '.iframe-button-preview-container' )
-                .css({ 'position': 'static', 'top': 0, 'z-depth': 1, }); // show
+                .css({ 'position': 'static', 'top': '0', 'z-depth': '1', }); // show
 
         };
 
