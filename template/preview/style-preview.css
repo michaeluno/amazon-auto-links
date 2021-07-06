@@ -31,3 +31,7 @@ span.offered-price {
 .amazon-customer-rating-stars .review-stars svg {
     top: -2px;
 }
+
+.products-container .amazon-product-description {
+	word-break: break-word;
+}

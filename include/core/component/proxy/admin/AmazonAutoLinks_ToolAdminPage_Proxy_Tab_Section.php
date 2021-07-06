@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -60,7 +60,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'type'            => 'checkbox',
                 'label'           => __( 'Enable proxies for regular HTTP requests that this plugin performs.', 'amazon-auto-links' ),
                 'description'     => array(
-                    sprintf( __( 'API requests will not use %1$s', 'amazon-auto-links' ), __( 'HTTP proxies', 'amaozn-auto-links' ) ),
+                    sprintf( __( 'API requests will not use %1$s', 'amazon-auto-links' ), __( 'HTTP proxies', 'amazon-auto-links' ) ),
                 ),
             ),
             array( 

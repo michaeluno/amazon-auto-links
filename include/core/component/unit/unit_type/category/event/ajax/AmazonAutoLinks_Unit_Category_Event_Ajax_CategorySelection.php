@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -41,9 +41,24 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             throw new Exception( __( 'Could not load the page as no URL is given.', 'amazon-auto-links' ) );
         }
 
-        // Access the Amazon store site and retrieve the category list.
+        $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+        $_oOption = AmazonAutoLinks_Option::getInstance();
 
-        $_oHTTP = new AmazonAutoLinks_HTTPClient( $_sCategoryListURL, 86400 * 7, array( 'timeout'   => 10, ) );
+        // Access the Amazon store site and retrieve the category list.
+        $_oHTTP = new AmazonAutoLinks_HTTPClient(
+            $_sCategoryListURL,
+            86400 * 7,
+            array(
+                'timeout'   => 10,
+
+                // Without these, the language becomes English in some locales.
+                // Note that this is not possible with Web Page Dumper. So if the site is blocked and let Web Page Dumper to assist, the language may not be displayed as desired.
+                'cookies'   => array(
+                    'i18n-prefs' =>	$_oOption->get( array( 'associates', $_sLocale, 'paapi', 'currency' ), $_oLocale->getDefaultCurrency() ),
+                    'lc-acb' . strtolower( $_sLocale ) => $_oOption->get( array( 'associates', $_sLocale, 'paapi', 'language' ), $_oLocale->getDefaultLanguage() ),
+                ),
+            )
+        );
         // be careful that the $_POST values are passed as a string due to the JavaScript Ajax data handling
         // @see https://stackoverflow.com/questions/7408976/bool-parameter-from-jquery-ajax-received-as-literal-string-false-true-in-php
         if ( ( boolean ) $this->getElement( $aPost, array( 'reload' ) ) ) {

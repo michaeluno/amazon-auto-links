@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -66,7 +66,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
             private function ___getTableRows( array $aProduct ) {
                 if ( empty( $aProduct ) ) {
                     return "<tr>"
-                            . "<td colspan='2'>" . __( 'No data found.', 'amaozn-auto-links' ) . "</td>"
+                            . "<td colspan='2'>" . __( 'No data found.', 'amazon-auto-links' ) . "</td>"
                         . "</tr>";
                 }
                 $_sOutput = '';

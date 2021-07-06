@@ -1,10 +1,8 @@
 /**
  * @name Button Preview in Unit Definition Page
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
-
-    var debugMode   = 'undefined' !== typeof aalButtonPreview.debugMode ? aalButtonPreview.debugMode : 0;
 
     /**
      * Global function called from an iframe document.
@@ -39,9 +37,8 @@
         if ( 'undefined' === typeof aalButtonPreview ) {
             return false;
         }
-        if ( debugMode ) {
-            console.log( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
-        }
+
+        debugLog( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
 
         var _setPreviewButton = function( iButtonID, oSelect ) {
 
@@ -50,9 +47,7 @@
                 .find( '.amazon-auto-links-button' );
 
             if( 'undefined' === typeof aalButtonPreview.activeButtons[ iButtonID ] ) {
-                if ( debugMode ) {
-                    console.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
-                }
+                debugLog.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
                 return;
             }
 
@@ -88,7 +83,8 @@
         var _oButtonSelect = $( '.button-select-row' ).find( 'select' ); // the select tag
         _oButtonSelect.change( function() {
             _setPreviewButton( $( this ).val(), $( this ) );
-        } ).trigger( 'change' );
+        } );
+        _oButtonSelect.trigger( 'change' );
 
         // When the Override Button Label option is toggled, update the label.
         $( 'input.override-button-label[type=checkbox]' ).change( function() {
@@ -179,6 +175,11 @@
 
     } ); // document ready
 
-
+    function debugLog( ...args ) {
+        if ( ! parseInt( aalButtonPreview.debugMode ) ) {
+            return;
+        }
+        console.log( 'AAL Debug(Button Preview):', ...args );
+    }
 
 }( jQuery ));

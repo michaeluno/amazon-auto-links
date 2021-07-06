@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -52,7 +52,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
             array(
                 'field_id'              => 'enabled',
                 'type'                  => 'revealer',
-                'title'                 => __( 'Enable', 'amaozn-auto-links' ),
+                'title'                 => __( 'Enable', 'amazon-auto-links' ),
                 'select_type'           => 'radio',
                 // 'show_title_column'     => false,
                 'label'                 => array(

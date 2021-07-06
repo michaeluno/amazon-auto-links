@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -58,7 +58,7 @@ class AmazonAutoLinks_SettingsAdminPageLoader {
                     . "</a>"
             );
             $oFactory->addLinkToPluginDescription(
-                "<a href='" . esc_url( 'http://en.michaeluno.jp/custom-order' ) . "'>"
+                "<a href='" . esc_url( 'https://en.michaeluno.jp/custom-order' ) . "'>"
                         . __( 'Custom Order', 'amazon-auto-links' )
                     . "</a>"
             );

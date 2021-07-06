@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -211,8 +211,9 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @since   4.3.0
+     * @since  4.3.0
      * @return array
+     * @remark Seems not used
      */
     public function replyToGetJSButtonTranslation( $aLabels ) {
         $_aButtonIDs = $this->getActiveButtonIDs();

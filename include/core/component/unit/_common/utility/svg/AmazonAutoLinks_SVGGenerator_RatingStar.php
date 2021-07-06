@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -53,7 +53,7 @@ class AmazonAutoLinks_SVGGenerator_RatingStar extends AmazonAutoLinks_SVGGenerat
             $_sDefsGradient = '';
         }
         if ( ! $this->bUseCache ) {
-            $_sSVG = $this->_getDefinition( true );
+            $_sSVG = $this->_getDefinition( false );
         }
         return $_sSVG . "<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 160 32' enable-background='new 0 0 160 32'>"
                 . $_sTitle

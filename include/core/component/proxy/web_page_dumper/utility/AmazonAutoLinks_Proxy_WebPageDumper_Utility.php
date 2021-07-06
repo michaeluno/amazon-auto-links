@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -45,6 +45,18 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Utility extends AmazonAutoLinks_Plugin
             return false;
         }
         return false !== strpos( strtok( $sURL, '?' ), 'customer-reviews/widgets/average-customer-review/popover' );
+    }
+
+    /**
+     * @param  string $sURL
+     * @since  4.6.4
+     * @return boolean
+     */
+    static public function isBestSellerURL( $sURL ) {
+        if ( ! self::isAmazonURL( $sURL ) ) {
+            return false;
+        }
+        return false !== strpos( strtok( $sURL, '?' ), '/gp/bestsellers/' );
     }
 
 }

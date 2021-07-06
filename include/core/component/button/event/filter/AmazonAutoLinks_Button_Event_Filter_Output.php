@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -25,7 +25,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
         'country'           => '',   // the locale (country)
         'associate_id'      => '',
         'access_key'        => '',   // public PA-API access key
-        'label'             => 'Buy Now',
+        'label'             => '',   // MUST be empty. Otherwise, the 'button label' unit option does not take efferect.
         'offer_listing_id'  => '',   // offer listing id that Amazon gives
     );
 
@@ -235,7 +235,6 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             return $_oOption->get( array( 'unit_default', 'override_button_label' ), false )
                 ? $_oOption->get( array( 'unit_default', 'button_label' ), '' )
                 : __( 'Buy Now', 'amazon-auto-links' );
-
         }
 
 }

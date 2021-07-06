@@ -2,7 +2,7 @@
 /**
  * Amazon Auto Links
  * 
- * http://en.michaeluno.jp/amazn-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * 
  */

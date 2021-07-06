@@ -4,7 +4,7 @@
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
- * http://en.michaeluno.jp/amazon-auto-links/
+ * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
 
@@ -16,6 +16,12 @@
  * @since       4.6.0   Extends `AmazonAutoLinks_Event___Feed_Base`.
  */
 class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_Event___Feed_Base {
+
+    /**
+     * @var string The feed type such as rss2 or json.
+     * @since 4.6.4
+     */
+    public $sType = 'rss2';
 
     /**
      * @since 4.6.0
