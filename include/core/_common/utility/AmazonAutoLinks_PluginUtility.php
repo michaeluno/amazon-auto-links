@@ -557,7 +557,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
                 $_aLabels[ $_iButtonID ] = $_sDefaultLabel;
                 continue;
             }
-            $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
+            $_sButtonLabel = self::getPostMeta( $_iButtonID, 'button_label', '' );
             $_aLabels[ $_iButtonID ] = $_sButtonLabel ? $_sButtonLabel : $_sDefaultLabel;
         }
         return $_aLabels;
