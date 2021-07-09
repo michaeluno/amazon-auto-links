@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.4
+Stable tag:         4.6.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.5 - 07/10/2021 =
+- Tweaked the style of thumbnails in the category selection page.
+- Fixed a bug that an initial selected button label was incorrect in the unit edit page.
+- Fixed some JQMIGRATE warnings in the browser console.
 
 = 4.6.4 - 07/06/2021 =
 - Fixed a bug that broke the layout in the category selection page when there is a product description in the preview.
