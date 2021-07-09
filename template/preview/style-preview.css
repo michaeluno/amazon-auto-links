@@ -15,9 +15,14 @@
 .product-thumbnail {
 	margin: 20px auto;
 	text-align: center;
+    padding: 0.8em;
+    background-color: #fff;
+    border-radius: 0.8em;
 }
 .product-thumbnail img {
+	vertical-align: middle;
 }
+
 .amazon-auto-links-credit {
 	font-size: smaller;
 }
