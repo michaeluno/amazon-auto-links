@@ -220,7 +220,7 @@ class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageF
             'apfRevealerFieldType',
             $this->getResolvedSRC( dirname( __FILE__ ) . '/js/revealer.js' ),
             array( 'jquery' ),
-            false,
+            false
         );
         wp_localize_script( 'apfRevealerFieldType', 'apfRevealerFieldType', $_aData );
     }
