@@ -136,29 +136,49 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      * @return   string
      */
     public function cell_amazon_auto_links_details( $sCell, $iPostID ) {
-
-        $_sID                   = __( 'ID', 'amazon-auto-links' );
-        $_sLocale               = __( 'Country', 'amazon-auto-links' );
-        $_sUnitType             = __( 'Unit Type', 'amazon-auto-links' );
-        $_sTemplate             = __( 'Template', 'amazon-auto-links' );
-        $_sThisUnitType         = get_post_meta( $iPostID, 'unit_type', true );
-        $_sThisUnitTypeLabel    = AmazonAutoLinks_PluginUtility::getUnitTypeLabel( $_sThisUnitType );
-        $_sThisTemplate         = $this->___getTemplateNameOfUnit( $iPostID );
-        $_sTemplateWarningClass = $_sThisTemplate ? '' : 'warning';
-        $_sTemplateWarningIcon  = $_sThisTemplate
-            ? ''
-            : '<span class="icon-warning dashicons dashicons-warning"></span>';
-        $_sThisTemplate         = $_sThisTemplate
-            ? $_sThisTemplate
-            : __( 'Unselected', 'amazon-auto-links' );
-        $_sThisLocale           = get_post_meta( $iPostID, 'country', true );
         return "<ul>"
-                . "<li><span class='detail-title'>{$_sID}:</span><span class='detail-value'>{$iPostID}</span></li>"
-                . "<li><span class='detail-title'>{$_sLocale}:</span><span class='detail-value'>{$_sThisLocale}</span></li>"
-                . "<li><span class='detail-title'>{$_sUnitType}:</span><span class='detail-value'>{$_sThisUnitTypeLabel}</span></li>"
-                . "<li><span class='detail-title'>{$_sTemplate}:<span class='warning'>{$_sTemplateWarningIcon}</span></span><span class='detail-value {$_sTemplateWarningClass}'>{$_sThisTemplate}</span></li>"
+                . $this->___getDetailListItem( __( 'ID', 'amazon-auto-links' ), $iPostID, $iPostID )
+                . $this->___getDetailListItem( __( 'Country', 'amazon-auto-links' ), get_post_meta( $iPostID, 'country', true ), $iPostID )
+                . $this->___getDetailListItem( __( 'Unit Type', 'amazon-auto-links' ), $this->___getUnitTypeLabel( get_post_meta( $iPostID, 'unit_type', true ) ), $iPostID )
+                . $this->___getDetailListItem( __( 'Template', 'amazon-auto-links' ), $this->___getTemplateNameOfUnit( $iPostID ), $iPostID )
             . "</ul>";
     }
+        /**
+         * @param string $sUnitTypeSlug
+         * @return string
+         * @since  4.6.6
+         */
+        private function ___getUnitTypeLabel( $sUnitTypeSlug ) {
+            $_aUnitTypeLabels = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
+            return AmazonAutoLinks_PluginUtility::getElement( $_aUnitTypeLabels, array( $sUnitTypeSlug ) );
+        }
+        /**
+         * @param  string   $sDetailTitle
+         * @param  string   $sDetailValue
+         * @param  integer  $iPostID
+         * @param  callable $cWarning       A callback function to insert a warning element.
+         * @since  4.6.6
+         * @return string 
+         */
+        private function ___getDetailListItem( $sDetailTitle, $sDetailValue, $iPostID, $cWarning=null ) {
+            if ( $sDetailValue ) {
+                return "<li>"
+                        . "<span class='detail-title'>{$sDetailTitle}:</span>"
+                        . "<span class='detail-value'>{$sDetailValue}</span>"
+                    . "</li>";
+            }
+            $_sWarningClass  = 'warning';
+            $_sWarningIcon   = '<span class="icon-warning dashicons dashicons-warning"></span>';
+            $_sFallbackValue = __( 'Unsaved', 'amazon-auto-links' );
+            return "<li>"
+                    . "<span class='detail-title'>{$sDetailTitle}:<span class='warning'>{$_sWarningIcon}</span></span>"
+                    . "<span class='detail-value {$_sWarningClass}'>{$_sFallbackValue}</span>"
+                    . ( is_callable( $cWarning ) ? call_user_func_array( $cWarning, array( $iPostID ) ) : '' )
+                ."</li>"
+
+                ;
+
+        }
         /**
          * @param  integer $iPostID
          * @return string
