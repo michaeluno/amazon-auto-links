@@ -1,6 +1,6 @@
 /**
  * @name Button Preview in Unit Definition Page
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -38,60 +38,22 @@
             return false;
         }
 
-        debugLog( 'Amazon Auto Links Button Preview Script', aalButtonPreview );
+        debugLog( aalButtonPreview );
 
-        var _setPreviewButton = function( iButtonID, oSelect ) {
-
-            iButtonID = parseInt( iButtonID );
-            var _oButton = oSelect.closest( 'fieldset' )
-                .find( '.amazon-auto-links-button' );
-
-            if( 'undefined' === typeof aalButtonPreview.activeButtons[ iButtonID ] ) {
-                debugLog.log( 'the button label does not exists. button ID', iButtonID, 'active buttons', aalButtonPreview.activeButtons );
-                return;
-            }
-
-            var _oButtonContainer = $( _oButton ).parent();
-            var _sButtonLabel     = oSelect.closest( '.amazon-auto-links-section-table' ).find( 'input.override-button-label[type=checkbox]' ).prop( 'checked' )
-                ? oSelect.closest( '.amazon-auto-links-section-table' ).find( 'input.button-label[type=text]' ).val()
-                : aalButtonPreview.activeButtons[ iButtonID ];
-
-            // <div> type button
-            if ( iButtonID ) {
-                $( _oButton ).attr('class', 'amazon-auto-links-button amazon-auto-links-button-' + iButtonID );
-                ___setButtonLabel_div( _sButtonLabel, oSelect );
-
-                // Make sure the button container is visible. By default it is hidden for widget forms.
-                _oButtonContainer.show();
-                _oButtonContainer.siblings( '.iframe-button-preview-container' ).css({ // hide
-                   'position':  'absolute',
-                    'top':      '-9999px',
-                    'z-depth':  -100,
-                });
-                return;
-            }
-
-            // the <button> type
-            _oButtonContainer.hide();
-            ___setButtonLabel_iframe( _sButtonLabel, oSelect );
-            _oButtonContainer.siblings( '.iframe-button-preview-container' )
-                .css({ 'position': 'static', 'top': 0, 'z-depth': 1, }); // show
-
-        };
-
-        // Initially set the preview and  the button select change.
+        // Initially set the preview and the button select change.
         var _oButtonSelect = $( '.button-select-row' ).find( 'select' ); // the select tag
-        _oButtonSelect.change( function() {
+        _oButtonSelect.on( 'change', function() {
             _setPreviewButton( $( this ).val(), $( this ) );
         } );
         _oButtonSelect.trigger( 'change' );
 
         // When the Override Button Label option is toggled, update the label.
-        $( 'input.override-button-label[type=checkbox]' ).change( function() {
-            if ( ! $( this ).prop( 'checked' ) ) {
+        $( 'input.override-button-label[type=checkbox]' ).on( 'change', function() {
+            if ( ! $( this ).is( ':checked' ) ) {
                 ___revertButtonLabels( _oButtonSelect );
                 return;
             }
+            debugLog( 'The Override Label option is on.' );
             ___setButtonLabelByInput(
                 $( this ).closest( '.amazon-auto-links-section-table' )
                 .find( 'input.button-label[type=text]' ).first()
@@ -99,12 +61,13 @@
         } );
 
         // Override the button label when the Button Label field is entered.
-        $( 'input.button-label[type=text]' ).change( function(){
+        $( 'input.button-label[type=text]' ).on( 'change', function(){
             var _oOverrideLabel = $( this ).closest( '.amazon-auto-links-section-table' )
                 .find( 'input.override-button-label[type=checkbox]' );
-            if ( ! _oOverrideLabel.prop( 'checked' ) ) {
+            if ( ! _oOverrideLabel.is( ':checked' ) ) {
                 return;
             }
+            debugLog( 'The Override Label option is on.' );
             ___setButtonLabelByInput( this );
         } );
 
@@ -119,16 +82,66 @@
 
         });
 
+        function _setPreviewButton( iButtonID, oSelect ) {
+            iButtonID = parseInt( iButtonID );
+            var _oButton = oSelect.closest( 'fieldset' )
+                .find( '.amazon-auto-links-button' );
+
+            if( 'undefined' === typeof aalButtonPreview.activeButtons[ iButtonID ] ) {
+                debugLog.log( 'The button label does not exist. button ID:', iButtonID, 'Active buttons:', aalButtonPreview.activeButtons );
+                return;
+            }
+
+            var _oButtonContainer = $( _oButton ).parent();
+            var _sButtonLabel     = oSelect.closest( '.amazon-auto-links-section-table' ).find( 'input.override-button-label[type=checkbox]' ).is( ':checked' )
+                ? oSelect.closest( '.amazon-auto-links-section-table' ).find( 'input.button-label[type=text]' ).val()
+                : aalButtonPreview.activeButtons[ iButtonID ];
+
+            debugLog( 'Setting the button label: ', _sButtonLabel, ' ID: ', iButtonID );
+
+            // <div> type button
+            if ( iButtonID ) {
+                $( _oButton ).attr('class', 'amazon-auto-links-button amazon-auto-links-button-' + iButtonID );
+                ___setButtonLabel_div( _sButtonLabel, oSelect );
+
+                // Make sure the button container is visible. By default it is hidden for widget forms.
+                _oButtonContainer.show();
+                _oButtonContainer.siblings( '.iframe-button-preview-container' ).css({ // hide
+                    'position':  'absolute',
+                    'top':      '-9999px',
+                    'z-depth':  '-100',
+                });
+                return;
+            }
+
+            // the <button> type
+            _oButtonContainer.hide();
+            ___setButtonLabel_iframe( _sButtonLabel, oSelect );
+            _oButtonContainer.siblings( '.iframe-button-preview-container' )
+                .css({ 'position': 'static', 'top': '0', 'z-depth': '1', }); // show
+
+        }
 
         function ___revertButtonLabels( oButtonSelect ) {
+
             ___setButtonLabel_iframe( aalButtonPreview.activeButtons[ 0 ], oButtonSelect );
-            $.each( aalButtonPreview.activeButtons, function( __iButtonID, __sButtonLabel ) {
-                if ( 0 === __iButtonID ) {
-                    return true; // skip
-                }
-                ___setButtonLabel_div( __sButtonLabel, oButtonSelect );
-                return false;  // break
-            } );
+
+            // [4.6.5] With a newly created unit, the selected button initial label always "Buy Now" for some reasons. This fixes it.
+            var _iButtonID = parseInt( oButtonSelect.val() );
+            if ( _iButtonID && aalButtonPreview.activeButtons[ _iButtonID ] ) {
+                ___setButtonLabel_div( aalButtonPreview.activeButtons[ _iButtonID ], oButtonSelect );
+            }
+            debugLog( 'Reverting the button label: ', aalButtonPreview.activeButtons[ _iButtonID ], ' ID: ', _iButtonID );
+
+            // @deprecated 4.6.5
+            // $.each( aalButtonPreview.activeButtons, function( __iButtonID, __sButtonLabel ) {
+            //     if ( 0 === __iButtonID ) {
+            //         return true; // skip
+            //     }
+            //     ___setButtonLabel_div( __sButtonLabel, oButtonSelect );
+            //     return false;  // break
+            // } );
+
         }
 
         /**

@@ -1,0 +1,3 @@
+- Tweaked the style of thumbnails in the category selection page.
+- Fixed a bug that an initial selected button label was incorrect in the unit edit page. 
+- Fixed some JQMIGRATE warnings in the browser console.

@@ -1,13 +1,13 @@
 /**
  * @name Button Preview Event Binder
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
     $( document ).ready( function() {
 
         // The input that switches certain inputs        
         $( 'input[data-switch][type="radio"]' )
-            .change( function() {
+            .on( 'change', function() {
                 
                 var _sSubjectSelector = this.value;
                 var _sSwitchSelector  = $( this ).attr( 'data-switch' );
