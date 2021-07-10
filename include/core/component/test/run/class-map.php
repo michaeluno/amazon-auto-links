@@ -21,6 +21,7 @@ return array(
     "AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/http/web_page_dumper/AmazonAutoLinks_Scratch_HttpRequests_WebPageDumper.php", 
     "AmazonAutoLinks_Scratch_DisplayOptions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/options/AmazonAutoLinks_Scratch_DisplayOptions.php", 
     "AmazonAutoLinks_Scratch_PAAPIRequestCounter" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/paapi_request_counter/AmazonAutoLinks_Scratch_PAAPIRequestCounter.php", 
+    "AmazonAutoLinks_Scratch_PostMeta" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/posts/AmazonAutoLinks_Scratch_PostMeta.php", 
     "AmazonAutoLinks_Scratch_Test" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test.php", 
     "AmazonAutoLinks_Scratch_Test2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/test/AmazonAutoLinks_Scratch_Test2.php", 
     "AmazonAutoLinks_Scratch_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/scratches/wordpress/functions/AmazonAutoLinks_Scratch_WordPress_Functions.php", 
