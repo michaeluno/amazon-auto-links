@@ -96,3 +96,6 @@ tr.type-amazon_auto_links:first-child td ul {
 .column-details .detail-value.warning {
     font-style: italic;
 }
+.warning-tooltip-content {
+    display: none;
+}

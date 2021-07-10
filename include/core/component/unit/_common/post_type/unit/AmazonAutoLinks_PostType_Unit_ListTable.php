@@ -137,12 +137,25 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function cell_amazon_auto_links_details( $sCell, $iPostID ) {
         return "<ul>"
-                . $this->___getDetailListItem( __( 'ID', 'amazon-auto-links' ), $iPostID, $iPostID )
-                . $this->___getDetailListItem( __( 'Country', 'amazon-auto-links' ), get_post_meta( $iPostID, 'country', true ), $iPostID )
-                . $this->___getDetailListItem( __( 'Unit Type', 'amazon-auto-links' ), $this->___getUnitTypeLabel( get_post_meta( $iPostID, 'unit_type', true ) ), $iPostID )
-                . $this->___getDetailListItem( __( 'Template', 'amazon-auto-links' ), $this->___getTemplateNameOfUnit( $iPostID ), $iPostID )
+                . $this->___getDetailListItem( __( 'ID', 'amazon-auto-links' ), $iPostID, 'unit-id', $iPostID )
+                . $this->___getDetailListItem( __( 'Country', 'amazon-auto-links' ), get_post_meta( $iPostID, 'country', true ), 'locale', $iPostID )
+                . $this->___getDetailListItem( __( 'Unit Type', 'amazon-auto-links' ), $this->___getUnitTypeLabel( get_post_meta( $iPostID, 'unit_type', true ) ), 'unit-type', $iPostID )
+                . $this->___getDetailListItem( __( 'Template', 'amazon-auto-links' ), $this->___getTemplateNameOfUnit( $iPostID ), 'template', $iPostID, array( $this, '___getWarningElementForTemplate' ) )
             . "</ul>";
     }
+        /**
+         * @param  $iPostID
+         * @since  4.6.6
+         * @return string
+         */
+        private function ___getWarningElementForTemplate( $iPostID ) {
+            return "<div class='warning-tooltip-content'>"
+                . "<p>"
+                    . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
+                    . AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', __( 'Unsaved', 'amazon-auto-links' ) )
+                . "</p>"
+            . "</div>";
+        }
         /**
          * @param string $sUnitTypeSlug
          * @return string
@@ -155,12 +168,13 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         /**
          * @param  string   $sDetailTitle
          * @param  string   $sDetailValue
+         * @param  string   $sContext
          * @param  integer  $iPostID
          * @param  callable $cWarning       A callback function to insert a warning element.
          * @since  4.6.6
          * @return string 
          */
-        private function ___getDetailListItem( $sDetailTitle, $sDetailValue, $iPostID, $cWarning=null ) {
+        private function ___getDetailListItem( $sDetailTitle, $sDetailValue, $sContext, $iPostID, $cWarning=null ) {
             if ( $sDetailValue ) {
                 return "<li>"
                         . "<span class='detail-title'>{$sDetailTitle}:</span>"
@@ -170,12 +184,14 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             $_sWarningClass  = 'warning';
             $_sWarningIcon   = '<span class="icon-warning dashicons dashicons-warning"></span>';
             $_sFallbackValue = __( 'Unsaved', 'amazon-auto-links' );
-            return "<li>"
+            $_sID            = "detail-list-{$sContext}-{$iPostID}";
+            return "<li data-has-warning='1' id='$_sID'>"
                     . "<span class='detail-title'>{$sDetailTitle}:<span class='warning'>{$_sWarningIcon}</span></span>"
-                    . "<span class='detail-value {$_sWarningClass}'>{$_sFallbackValue}</span>"
+                    . "<a href='#{$_sID}'>"    // to show an underline on mouse-hovering
+                        . "<span class='detail-value {$_sWarningClass}'>{$_sFallbackValue}</span>"
+                    . "</a>"
                     . ( is_callable( $cWarning ) ? call_user_func_array( $cWarning, array( $iPostID ) ) : '' )
-                ."</li>"
-
+                . "</li>"
                 ;
 
         }
@@ -186,7 +202,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
          */
         private function ___getTemplateNameOfUnit( $iPostID ) {
             return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID(
-                untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
+                untrailingslashit( AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id' ) ) // template id
             );
         }
 

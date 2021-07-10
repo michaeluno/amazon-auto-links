@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Manage Units
- * @version 1.0.0
+ * @version 1.1.0
  */
 (function($){
 
@@ -21,6 +21,20 @@
             aalCopyToClipboard( document.getElementById( $( this ).attr( 'data-target' ) ) );
             alert( aalManageUnits.labels.copied );
         });
+
+
+        // Warning tooltip
+        $( 'li[data-has-warning] a' ).on( 'click', function() {
+            var _oLi      = $( this ).closest( 'li' );
+            var _sContent = _oLi.find( '.warning-tooltip-content' ).html();
+            $( this ).pointer({
+                content: _sContent,
+                position: 'left ',
+                close: function() {}
+            }).pointer( 'open' );
+            return false;   // do not click
+        } );
+
 
     });
 
