@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Plugin Tests
- * @version 1.1.2
+ * @version 1.1.3
  */
 (function($){
 
@@ -19,6 +19,8 @@
             console.log( 'Amazon Auto Links', 'The test script failed to load' );
             return;
         }
+
+        debugLog( aalTests );
 
         ajaxManager.run();
 
@@ -275,5 +277,12 @@
             }
          };
     }()); // AjaxManager
+
+    function debugLog( ...message ) {
+        if ( ! parseInt( aalTests.debugMode ) ) {
+            return;
+        }
+        console.log( 'AAL Unit Tests:', ...message );
+    }
 
 }(jQuery));
