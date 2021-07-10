@@ -74,6 +74,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                 ),
                 'class' => array(
                     'field' => 'test-arguments',
+                    'input' => 'test-argument',
                 ),
                 'description' => 'The arguments to pass to the test methods.'
             ),

@@ -63,7 +63,7 @@
             }
 
             // Arguments to pass to the tests.
-            var _aTestArguments = $( 'input.test-arguments' ).map( function(){
+            var _aTestArguments = $( 'input.test-argument' ).map( function(){
                 return $(this).val();
             } ).get();
             if ( 1 === _aTestArguments.length && '' === _aTestArguments[ 0 ] ) {
