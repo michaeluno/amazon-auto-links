@@ -137,19 +137,26 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
      */
     public function cell_amazon_auto_links_details( $sCell, $iPostID ) {
 
-        $_sID                 = __( 'ID', 'amazon-auto-links' );
-        $_sLocale             = __( 'Country', 'amazon-auto-links' );
-        $_sUnitType           = __( 'Unit Type', 'amazon-auto-links' );
-        $_sTemplate           = __( 'Template', 'amazon-auto-links' );
-        $_sThisUnitType       = get_post_meta( $iPostID, 'unit_type', true );
-        $_sThisUnitTypeLabel  = AmazonAutoLinks_PluginUtility::getUnitTypeLabel( $_sThisUnitType );
-        $_sThisTemplate       = $this->___getTemplateNameOfUnit( $iPostID );
-        $_sThisLocale         = get_post_meta( $iPostID, 'country', true );
+        $_sID                   = __( 'ID', 'amazon-auto-links' );
+        $_sLocale               = __( 'Country', 'amazon-auto-links' );
+        $_sUnitType             = __( 'Unit Type', 'amazon-auto-links' );
+        $_sTemplate             = __( 'Template', 'amazon-auto-links' );
+        $_sThisUnitType         = get_post_meta( $iPostID, 'unit_type', true );
+        $_sThisUnitTypeLabel    = AmazonAutoLinks_PluginUtility::getUnitTypeLabel( $_sThisUnitType );
+        $_sThisTemplate         = $this->___getTemplateNameOfUnit( $iPostID );
+        $_sTemplateWarningClass = $_sThisTemplate ? '' : 'warning';
+        $_sTemplateWarningIcon  = $_sThisTemplate
+            ? ''
+            : '<span class="icon-warning dashicons dashicons-warning"></span>';
+        $_sThisTemplate         = $_sThisTemplate
+            ? $_sThisTemplate
+            : __( 'Unselected', 'amazon-auto-links' );
+        $_sThisLocale           = get_post_meta( $iPostID, 'country', true );
         return "<ul>"
                 . "<li><span class='detail-title'>{$_sID}:</span><span class='detail-value'>{$iPostID}</span></li>"
                 . "<li><span class='detail-title'>{$_sLocale}:</span><span class='detail-value'>{$_sThisLocale}</span></li>"
                 . "<li><span class='detail-title'>{$_sUnitType}:</span><span class='detail-value'>{$_sThisUnitTypeLabel}</span></li>"
-                . "<li><span class='detail-title'>{$_sTemplate}:</span><span class='detail-value'>{$_sThisTemplate}</span></li>"
+                . "<li><span class='detail-title'>{$_sTemplate}:<span class='warning'>{$_sTemplateWarningIcon}</span></span><span class='detail-value {$_sTemplateWarningClass}'>{$_sThisTemplate}</span></li>"
             . "</ul>";
     }
         /**

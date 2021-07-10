@@ -1,6 +1,6 @@
 /**
  * @name Unit Post Type
- * @version 1.0.1
+ * @version 1.1.0
  */
 #post-body-content {
     margin-bottom: 10px;
@@ -81,4 +81,18 @@ tr.type-amazon_auto_links:first-child td ul {
     box-sizing: border-box;
     display: inline-block;
     width: 54%;
+}
+
+/* Warnings */
+.column-details .detail-title span.warning {
+    float: right;
+}
+.column-details .detail-title .icon-warning {
+    font-size: 16px;
+    vertical-align: sub;
+    height: 16px;
+    line-height: 1;
+}
+.column-details .detail-value.warning {
+    font-style: italic;
 }
