@@ -43,27 +43,24 @@
             }).pointer( 'open' );
 
             // Handle toolitip closing
-            var _this    = this;
-            $( this ).add( '.wp-pointer' ).on( 'mouseleave', function(){
+            var _self    = this;
+            $( this ).add( '.aal-pointer' ).on( 'mouseleave', function(){
 
-                var _thisMouseLeave = this;
+                var _selfMouseLeave = this;
                 // Set a timeout for the tooltip to close, allowing us to clear this trigger if the mouse comes back over
                 var _timeoutId = setTimeout(function(){
-                    $( _this ).pointer( 'close' );
-                    $( _this ).off( 'mouseleave' );
-                    $( _thisMouseLeave ).off( 'mouseleave' );
-                    $( _this ).off( 'mouseenter' );
-                    $( _thisMouseLeave ).off( 'mouseenter' );
+                    $( _self ).pointer( 'close' );
+                    $( _self ).off( 'mouseleave' );
+                    $( _selfMouseLeave ).off( 'mouseleave' );
+                    $( _self ).off( 'mouseenter' );
+                    $( _selfMouseLeave ).off( 'mouseenter' );
                 }, 650 );
-                $( _this ).data( 'timeoutId', _timeoutId );
+                $( _self ).data( 'timeoutId', _timeoutId );
 
             } );
-            $( this ).add( '.wp-pointer' ).on( 'mouseenter', function(){
-                clearTimeout( $( _this ).data('timeoutId' ) );
+            $( this ).add( '.aal-pointer' ).on( 'mouseenter', function(){
+                clearTimeout( $( _self ).data('timeoutId' ) );
             });
-
-
-
 
             return false;   // do not click
 
