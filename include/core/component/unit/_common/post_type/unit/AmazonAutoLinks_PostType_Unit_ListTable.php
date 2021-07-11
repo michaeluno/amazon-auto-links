@@ -149,16 +149,28 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
          * @return string
          */
         private function ___getWarningElementForTemplate( $iPostID ) {
+            $_sTemplateID     = AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', null );
+            $_bTemplateExists = false;
+            if ( $_sTemplateID ) {
+                $_aAvailableTemplates = AmazonAutoLinks_TemplateOption::getInstance()->getUploadedTemplates();
+                $_bTemplateExists      = ! empty( $_aAvailableTemplates[ $_sTemplateID ] );
+            }
+            $_sMessage    = $_bTemplateExists
+                ? sprintf(
+                    __( 'The template is not activated. Try activating the template via %1$s.', 'amazon-auto-links' ),
+                    __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Templates', 'amazon-auto-links' )
+                )
+                : sprintf(
+                   __( 'For some reasons, the template for the unit is not saved. Please consult the developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
+                   __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
+                );
             return "<div class='warning-tooltip-content'>"
                 . "<p>"
-                   . sprintf(
-                       __( 'For some reasons, the template for the unit is not saved. Please consult the developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
-                       __( 'Dashboard' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
-                   )
+                   . $_sMessage
                 . "</p>"
                 . "<p>"
                    . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
-                   . AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', __( 'Unsaved', 'amazon-auto-links' ) )
+                   . ( $_sTemplateID ? $_sTemplateID : __( 'Unsaved', 'amazon-auto-links' ) )
                 . "</p>"
             . "</div>";
         }
@@ -189,7 +201,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             }
             $_sWarningClass  = 'warning';
             $_sWarningIcon   = '<span class="icon-warning dashicons dashicons-warning"></span>';
-            $_sFallbackValue = __( 'Unsaved', 'amazon-auto-links' );
+            $_sFallbackValue = __( 'Unknown', 'amazon-auto-links' );
             $_sID            = "detail-list-{$sContext}-{$iPostID}";
             return "<li data-has-warning='1' id='$_sID'>"
                     . "<span class='detail-title'>{$sDetailTitle}:<span class='warning'>{$_sWarningIcon}</span></span>"
