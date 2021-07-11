@@ -151,8 +151,14 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
         private function ___getWarningElementForTemplate( $iPostID ) {
             return "<div class='warning-tooltip-content'>"
                 . "<p>"
-                    . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
-                    . AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', __( 'Unsaved', 'amazon-auto-links' ) )
+                   . sprintf(
+                       __( 'For some reasons, the template for the unit is not saved. Please consult the developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
+                       __( 'Dashboard' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
+                   )
+                . "</p>"
+                . "<p>"
+                   . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
+                   . AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', __( 'Unsaved', 'amazon-auto-links' ) )
                 . "</p>"
             . "</div>";
         }
@@ -191,9 +197,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                         . "<span class='detail-value {$_sWarningClass}'>{$_sFallbackValue}</span>"
                     . "</a>"
                     . ( is_callable( $cWarning ) ? call_user_func_array( $cWarning, array( $iPostID ) ) : '' )
-                . "</li>"
-                ;
-
+                . "</li>";
         }
         /**
          * @param  integer $iPostID
