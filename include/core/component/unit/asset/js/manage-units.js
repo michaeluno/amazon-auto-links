@@ -24,15 +24,48 @@
 
 
         // Warning tooltip
-        $( 'li[data-has-warning] a' ).on( 'click', function() {
+        var _oTooltipWarnings = $( 'li[data-has-warning] a' );
+        _oTooltipWarnings.on( 'click', function() {
+            return false; // disable click
+        });
+        _oTooltipWarnings.on( 'mouseover', function() {
+
             var _oLi      = $( this ).closest( 'li' );
             var _sContent = _oLi.find( '.warning-tooltip-content' ).html();
+
+            // Open the tooltip
             $( this ).pointer({
                 content: _sContent,
-                position: 'left ',
+                position: 'top',
+                buttons: function() {},
                 close: function() {}
             }).pointer( 'open' );
+
+            // Handle toolitip closing
+            var _this    = this;
+            $( this ).add( '.wp-pointer' ).on( 'mouseleave', function(){
+
+                var _thisMouseLeave = this;
+                // Set a timeout for the tooltip to close, allowing us to clear this trigger if the mouse comes back over
+                var _timeoutId = setTimeout(function(){
+                    $( _this ).pointer( 'close' );
+                    $( _this ).off( 'mouseleave' );
+                    $( _thisMouseLeave ).off( 'mouseleave' );
+                    $( _this ).off( 'mouseenter' );
+                    $( _thisMouseLeave ).off( 'mouseenter' );
+                }, 650 );
+                $( _this ).data( 'timeoutId', _timeoutId );
+
+            } );
+            $( this ).add( '.wp-pointer' ).on( 'mouseenter', function(){
+                clearTimeout( $( _this ).data('timeoutId' ) );
+            });
+
+
+
+
             return false;   // do not click
+
         } );
 
 
