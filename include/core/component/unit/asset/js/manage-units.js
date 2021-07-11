@@ -35,6 +35,7 @@
 
             // Open the tooltip
             $( this ).pointer({
+                pointerClass: 'aal-pointer',
                 content: _sContent,
                 position: 'top',
                 buttons: function() {},
