@@ -183,7 +183,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         ),
 
         // 4.6.6+ - stores timestamps
-        'times' => array(
+        'user_actions' => array(
             'last_saved'  => 0,
             'first_saved' => 0,
         ),

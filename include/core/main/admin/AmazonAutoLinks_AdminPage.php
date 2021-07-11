@@ -174,12 +174,12 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
      * @since  4.6.6
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
-        if ( ! isset( $aInputs[ 'times' ] ) ) {
-            $aInputs[ 'times' ] = array();
+        if ( ! isset( $aInputs[ 'user_actions' ] ) ) {
+            $aInputs[ 'user_actions' ] = array();
         }
-        $aInputs[ 'times' ][ 'last_saved' ] = time();
-        if ( empty( $aInputs[ 'times' ][ 'first_saved' ] ) ) {
-            $aInputs[ 'times' ][ 'first_saved' ] = time();
+        $aInputs[ 'user_actions' ][ 'last_saved' ] = time();
+        if ( empty( $aInputs[ 'user_actions' ][ 'first_saved' ] ) ) {
+            $aInputs[ 'user_actions' ][ 'first_saved' ] = time();
         }
         $_iUserID = get_current_user_id();
         $_iTime   = get_user_meta( $_iUserID, 'aal_first_saved', true );
