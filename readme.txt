@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.5
+Stable tag:         4.6.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.6 - 07/12/2021 =
+- Added warning messages in the unit listing table when the template unit option is not stored properly.
+- Fixed a bug that arguments could not be passed in the test/scratch UI, started in v4.6.5.
 
 = 4.6.5 - 07/10/2021 =
 - Tweaked the style of thumbnails in the category selection page.
