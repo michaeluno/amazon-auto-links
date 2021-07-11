@@ -87,5 +87,24 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
         
         }
+
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param  array $aSubmitInfo
+     * @return array
+     * @since  4.6.6
+     */
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+        if ( ! isset( $aInputs[ 'times' ] ) ) {
+            $aInputs[ 'times' ] = array();
+        }
+        $aInputs[ 'times' ][ 'last_saved' ] = time();
+        if ( empty( $aInputs[ 'times' ][ 'first_saved' ] ) ) {
+            $aInputs[ 'times' ][ 'first_saved' ] = time();
+        }
+        return $aInputs;
+    }
           
 }

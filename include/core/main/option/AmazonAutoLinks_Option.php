@@ -181,7 +181,13 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 'geoplugin.net'  => true,
             ),
         ),
-    
+
+        // 4.6.6+ - stores timestamps
+        'times' => array(
+            'last_saved'  => 0,
+            'first_saved' => 0,
+        ),
+
         // 3.4.0+
         'unit_default'  => array(
             'unit_type'                     => null,
