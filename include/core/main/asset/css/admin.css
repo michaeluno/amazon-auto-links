@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.0.4
+	@version 1.1.0
  */
 /* General */
 .width-full,
@@ -177,4 +177,30 @@ span.warning {
 }
 .go-back .dashicons-arrow-left-alt:before {
     vertical-align: middle;
+}
+
+/* Footer Text */
+.aal-rating-prompt .icon-dismiss {
+	font-size: 14px;
+	padding: 3px 0;
+	text-decoration: none;
+}
+.aal-rating-prompt  .icon-info {
+	color: #0084ff;
+}
+.aal-have-you-rated {
+	margin-right: 0.2em;
+}
+.aal-have-you-rated-answer svg {
+	height: 10px;
+}
+.aal-have-you-rated-answer > span {
+	margin-right: 0.2em;
+}
+.aal-footer-left-original {
+	display: none;
+}
+.aal-thanks-for-rating {
+	margin-right: 0.2em;
+	font-style: italic;
 }

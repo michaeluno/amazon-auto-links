@@ -150,6 +150,17 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'v2'                    => 'amazon_auto_links_admin',
         
     );
+
+    /**
+     * Used user meta keys.
+     * @var string[]
+     * @sicne 4.6.0
+     */
+    static public $aUserMeta = array(
+        // key => meta key
+        'first_saved'   => 'aal_first_saved',
+        'rated'         => 'aal_rated',
+    );
         
     /**
      * Used admin pages.

@@ -79,6 +79,9 @@ class AmazonAutoLinks_Event {
             new AmazonAutoLinks_Event_Error_Log;  // [4.2.0]
             new AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory; // [4.3.8]
             new AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal; // [4.5.0]
+
+            // Ajax
+            new AmazonAutoLinks_Main_EventAjax_RatingPrompt; // [4.6.6]
         }
 
         private function ___handleFilters() {

@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.4b01 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.5 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -477,6 +477,7 @@ return array(
     "AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal.php", 
     "AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Main_Event_Action_AmazonCookiesRenewal.php", 
     "AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/action/AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory.php", 
+    "AmazonAutoLinks_Main_EventAjax_RatingPrompt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/ajax/AmazonAutoLinks_Main_EventAjax_RatingPrompt.php", 
     "AmazonAutoLinks_Main_Event_Filter_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_AmazonCookies.php", 
     "AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType.php", 
     "AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/filter/AmazonAutoLinks_Main_Event_Filter_HTTPClientArguments.php", 
