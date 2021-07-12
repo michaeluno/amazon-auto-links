@@ -179,6 +179,10 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         add_thickbox();
         wp_enqueue_script( 'jquery' );
 
+        // for warnings
+        wp_enqueue_style( 'wp-pointer' );
+        wp_enqueue_script( 'wp-pointer' );
+
         $this->enqueueScripts(
             array(
                 $_bDebugMode

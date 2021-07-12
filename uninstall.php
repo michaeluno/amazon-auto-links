@@ -69,7 +69,12 @@ $_bDelete  = isset( $_aOptions[ 'reset_settings' ][ 'reset_on_uninstall' ] )
 if ( ! $_bDelete ) {
     return;
 }
-    
+
+// User Meta
+foreach( AmazonAutoLinks_Registry::$aUserMeta as $_sUserMetaKey ) {
+    delete_user_meta( get_current_user_id(), $_sUserMetaKey );
+}
+
 array_walk_recursive( 
     AmazonAutoLinks_Registry::$aOptionKeys, // subject array
     'delete_option'   // function name

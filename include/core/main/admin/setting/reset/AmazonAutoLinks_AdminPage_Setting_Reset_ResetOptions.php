@@ -109,6 +109,9 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
             AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ]
         );
 
+        // User meta
+        delete_user_meta( get_current_user_id(), 'aal_rated' );
+
         $oFactory->setSettingNotice( __( 'The default options have been restored.', 'amazon-auto-links' ), 'updated' );
 
     }

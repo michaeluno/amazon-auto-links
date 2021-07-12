@@ -477,6 +477,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @param  string $sUnitTypeSlug
      * @since  4.4.2
      * @return string
+     * @deprecated 4.6.5    Used in only one place.
      */
     static public function getUnitTypeLabel( $sUnitTypeSlug ) {
         $_aUnitTypeLabels     = self::getUnitTypeLabels();
