@@ -1,1 +1,1 @@
-- Changed the handle IDs of template stylesheets to be simple.
+- Optimized the way to enqueue template stylesheets with a simpler handle ID and a version.

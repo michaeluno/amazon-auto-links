@@ -86,15 +86,16 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
             
             // This must be called after the option object has been established.
             foreach( $this->_oTemplateOption->getCommonTemplates() + $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-                
-                $_sCSSPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
-                $_sMinPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
-                $_sCSSPath = ! $this->isDebugMode() && file_exists( $_sMinPath )
+
+                $_aTemplate = $_aTemplate + array( 'id' => '', 'version' => AmazonAutoLinks_Registry::VERSION );
+                $_sCSSPath  = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
+                $_sMinPath  = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
+                $_sCSSPath  = ! $this->isDebugMode() && file_exists( $_sMinPath )
                     ? $_sMinPath
                     : $_sCSSPath;
                 $_sURL     = $this->getSRCFromPath( $_sCSSPath );
                 $_sHandle  = $this->___getStyleHandleID( $_aTemplate[ 'id' ] );
-                wp_register_style( $_sHandle, $_sURL );
+                wp_register_style( $_sHandle, $_sURL, array(), $_aTemplate[ 'version' ] );
                 wp_enqueue_style( $_sHandle );
                 
             }
