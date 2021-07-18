@@ -90,6 +90,12 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                 // The id may be a relative path of the template directory
                 $_sDirPath = $this->getAbsolutePathFromRelative( $sID );
                 if ( ! file_exists( $_sDirPath ) ) {
+                    $_aErrorInfo = array(
+                        'template_id' => $sID,
+                        'dir_path'    => $_sDirPath,
+                        'activate'    => $bActivate,
+                    );
+                    new AmazonAutoLinks_Error( 'TEMPLATE_ACTIVATION_STATUS', 'The given template does not exist so could not toggle the activation status.', $_aErrorInfo, false );
                     return $aTemplates;
                 }
 
