@@ -43,8 +43,8 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
         private function ___getTemplatesStatusToggled( array $aTemplateIDs, $bActivate ) {
             $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
             $_aTemplates      = $this->getAsArray( $_oTemplateOption->get() );
-            foreach( $aTemplateIDs as $_sID ) {
-                $_aTemplates = $this->___getTemplateStatusToggled( $_sID, $_aTemplates, $bActivate );
+            foreach( $aTemplateIDs as $_sTemplateID ) {
+                $_aTemplates = $this->___getTemplateStatusToggled( $_sTemplateID, $_aTemplates, $bActivate );
             }
             $_oTemplateOption->aOptions = $_aTemplates;
             $_oTemplateOption->save();
@@ -60,7 +60,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
                 $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
 
-                if ( isset( $aTemplates[ $sID ] )  ) {
+                if ( isset( $aTemplates[ $sID ] ) && $_oTemplateOption->exists( $sID ) ) {
                     return $this->___getTemplatesWithUpdatedActivationStatus( $aTemplates, $sID, $bActivate, $_oTemplateOption );
                 }
 
