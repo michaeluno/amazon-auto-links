@@ -13,7 +13,7 @@
  *
  * @since       3.7.4
  */
-class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
 
