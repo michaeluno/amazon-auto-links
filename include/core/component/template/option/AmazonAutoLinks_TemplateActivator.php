@@ -39,7 +39,8 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
 
         /**
          * @param array $aTemplateIDs
-         * @param boolean   $bActivate true for activation; false for deactivation
+         * @param boolean $bActivate true for activation; false for deactivation
+         * @param $bForce
          */
         private function ___getTemplatesStatusToggled( array $aTemplateIDs, $bActivate, $bForce ) {
             $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
@@ -84,7 +85,7 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                     return $aTemplates;
                 }
 
-                // At this point, an unstored template is given.
+                // At this point, an un-stored template is given.
 
                 // The id may be a relative path of the template directory
                 $_sDirPath = $this->getAbsolutePathFromRelative( $sID );
