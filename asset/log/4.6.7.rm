@@ -1,1 +1,2 @@
+- Added a setting notice when activating/deactivating a template.
 - Optimized the way to enqueue template stylesheets with a simpler handle ID and a version.

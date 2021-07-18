@@ -15,6 +15,12 @@
  */
 class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoLinks_PluginUtility {
 
+    /**
+     * @var     array
+     * @since   4.6.7
+     */
+    private $___aToggledTemplateNames = array();
+
     public function __construct() {
 
         add_action( 'aal_action_activate_templates', array( $this, 'replyToActivateTemplates' ), 10 );
@@ -49,7 +55,20 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
             $_oTemplateOption->aOptions = $_aTemplates;
             $_oTemplateOption->save();
 
+            $this->___setSettingNoticeOfToggleTemplates( $bActivate );
         }
+            /**
+             * @param boolean $bActivate
+             * @since 4.6.7
+             */
+            private function ___setSettingNoticeOfToggleTemplates( $bActivate ) {
+                $this->___aToggledTemplateNames = array_filter( $this->___aToggledTemplateNames ); // drop non-true values
+                $_aTemplateNames = implode( ', ', $this->___aToggledTemplateNames );
+                $_sMessage       = $bActivate
+                    ? sprintf( __( 'The template, %1$s, has been activated.', 'amazon-auto-links' ), $_aTemplateNames )
+                    : sprintf( __( 'The template, %1$s, has been deactivated.', 'amazon-auto-links' ), $_aTemplateNames );
+                do_action( 'aal_action_set_admin_setting_notice', $_sMessage, 'updated' );
+            }
             /**
              * @param  string   $sID            The passed templated ID.
              * @param  array    $aTemplates
@@ -74,7 +93,9 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                         'dir_path'    => $_sDirPath,
                         'activate'    => $bActivate,
                     );
-                    new AmazonAutoLinks_Error( 'TEMPLATE_ACTIVATION_STATUS', 'The given template does not exist so could not toggle the activation status.', $_aErrorInfo, false );
+                    $_sMessage = __( 'The given template does not exist so could not toggle the activation status.', 'amazon-auto-links' );
+                    new AmazonAutoLinks_Error( 'TEMPLATE_ACTIVATION_STATUS', $_sMessage, $_aErrorInfo, false );
+                    do_action( 'aal_action_set_admin_setting_notice', $_sMessage, 'error' );
                     return $aTemplates;
                 }
 
@@ -83,6 +104,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                 $aTemplates[ $_sTemplateID ] = array(
                     'is_active' => $bActivate,
                 ) + $this->getAsArray( $_aTemplate );
+                $this->___aToggledTemplateNames[] = $this->getElement( $_aTemplate, 'name' );
                 return $aTemplates;
 
             }
@@ -105,11 +127,15 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                         $_aTemplate = $this->getAsArray( $_aTemplate );
                     }
 
-                    $aTemplates[ $sTemplateID ] = array(
+                    $_aTemplate = array(
                         'is_active' => $bActivate,
                     )
                         + $_aTemplate
                         + $this->getElementAsArray( $aTemplates, $sTemplateID );
+
+                    $this->___aToggledTemplateNames[] = $this->getElement( $_aTemplate, 'name' );
+
+                    $aTemplates[ $sTemplateID ] = $_aTemplate;
                     return $aTemplates;
                 }
 

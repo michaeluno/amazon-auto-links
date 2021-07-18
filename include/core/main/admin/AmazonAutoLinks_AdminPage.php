@@ -61,6 +61,8 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
 
         add_filter( 'footer_left_' . $this->oProp->sClassName, array( $this, 'replyToModifyFooterLeft' ) );
 
+        // [4.6.7] Allows components to set setting notices
+        add_action( 'aal_action_set_admin_setting_notice', array( $this, 'replyToSetSettingNotice' ), 10, 2 );
 
     }
         
@@ -188,5 +190,14 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         }
         return $aInputs;
     }
-          
+
+    /**
+     * @param string $sMessage
+     * @param string $sType
+     * @since 4.6.7
+     */
+    public function replyToSetSettingNotice( $sMessage, $sType='error' ) {
+        $this->setSettingNotice( $sMessage, $sType );
+    }
+
 }
