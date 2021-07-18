@@ -51,7 +51,7 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
 
         }
             /**
-             * @param  string   $sID
+             * @param  string   $sID            The passed templated ID.
              * @param  array    $aTemplates
              * @param  boolean  $bActivate
              * @return array
@@ -59,24 +59,9 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
             private function ___getTemplateStatusToggled( $sID, array $aTemplates, $bActivate ) {
 
                 $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
-                $_aTemplate         = array();
 
                 if ( isset( $aTemplates[ $sID ] )  ) {
-                    // @since 3.10.0 If activating, renew the template information.
-                    if ( $bActivate ) {
-                        $_sDirPath  = $this->getAbsolutePathFromRelative( $sID );
-                        $_aTemplate = file_exists( $_sDirPath )
-                            ? $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath )
-                            : array();
-                        $_aTemplate = $this->getAsArray( $_aTemplate );
-                    }
-
-                    $aTemplates[ $sID ] = array(
-                        'is_active' => $bActivate,
-                    )
-                        + $_aTemplate
-                        + $this->getElementAsArray( $aTemplates, $sID );
-                    return $aTemplates;
+                    return $this->___getTemplatesWithUpdatedActivationStatus( $aTemplates, $sID, $bActivate, $_oTemplateOption );
                 }
 
                 // At this point, an un-stored template is given.
@@ -100,5 +85,31 @@ class AmazonAutoLinks_TemplateActivator extends AmazonAutoLinks_PluginUtility {
                 return $aTemplates;
 
             }
+                /**
+                 * @param  array     $aTemplates
+                 * @param  string    $sTemplateID
+                 * @param  boolean   $bActivate
+                 * @param  AmazonAutoLinks_TemplateOption $oTemplateOption
+                 * @return array
+                 * @since  4.6.7
+                 */
+                private function ___getTemplatesWithUpdatedActivationStatus( array $aTemplates, $sTemplateID, $bActivate, $oTemplateOption ) {
+                    $_aTemplate         = array();
+                    // @since 3.10.0 If activating, renew the template information.
+                    if ( $bActivate ) {
+                        $_sDirPath  = $this->getAbsolutePathFromRelative( $sTemplateID );
+                        $_aTemplate = file_exists( $_sDirPath )
+                            ? $oTemplateOption->getTemplateArrayByDirPath( $_sDirPath )
+                            : array();
+                        $_aTemplate = $this->getAsArray( $_aTemplate );
+                    }
+
+                    $aTemplates[ $sTemplateID ] = array(
+                        'is_active' => $bActivate,
+                    )
+                        + $_aTemplate
+                        + $this->getElementAsArray( $aTemplates, $sTemplateID );
+                    return $aTemplates;
+                }
 
 }
