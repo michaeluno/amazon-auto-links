@@ -13,7 +13,7 @@
  * @since      3       
  */
 class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
-   
+
     /**
      * Calculates the absolute path from the given relative path to the WordPress installed directory.
      * 
@@ -65,28 +65,6 @@ class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
         
         return false;        
         
-    }    
-
-    /**
-     * Calculates the URL from the given path.
-     * 
-     * @static
-     * @access           public
-     * @return           string            The source url
-     * @since            2.0.1
-     * @since            2.0.3.1           Prevented "/./" to be inserted in the url.
-     * @since            3.8.0              Not to escape the url.
-     * @todo            Can be deprecated as this is the same as the framework method.
-     * @deprecated  4.0.0       Use the framework one
-     */
-    /*static public function getSRCFromPath( $sFilePath ) {
-                        
-        $_oWPStyles     = new WP_Styles();    // It doesn't matter whether the file is a style or not. Just use the built-in WordPress class to calculate the SRC URL.
-        $_sRelativePath = AmazonAutoLinks_Utility::getRelativePath( ABSPATH, $sFilePath );       
-        $_sRelativePath = preg_replace( "/^\.[\/\\\]/", '', $_sRelativePath, 1 ); // removes the heading ./ or .\ 
-        $sHref          = trailingslashit( $_oWPStyles->base_url ) . $_sRelativePath;
-        return $sHref;
-
-    }*/
+    }
     
 }
