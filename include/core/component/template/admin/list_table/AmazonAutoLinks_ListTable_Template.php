@@ -235,10 +235,10 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         
         switch( strtolower( $this->current_action() ) ){
             case 'activate':
-                do_action( 'aal_action_activate_templates', ( array ) $_REQUEST[ 'template' ], true );
+                do_action( 'aal_action_activate_templates', ( array ) $_REQUEST[ 'template' ] );
                 break;
             case 'deactivate':
-                do_action( 'aal_action_deactivate_templates', ( array ) $_REQUEST[ 'template' ], true );
+                do_action( 'aal_action_deactivate_templates', ( array ) $_REQUEST[ 'template' ] );
                 break;    
             default:
                 return;    // do nothing.

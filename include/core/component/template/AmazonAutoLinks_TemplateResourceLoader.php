@@ -86,20 +86,57 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
             
             // This must be called after the option object has been established.
             foreach( $this->_oTemplateOption->getCommonTemplates() + $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
-                
-                $_sCSSPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
-                $_sMinPath = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
-                $_sCSSPath = ! $this->isDebugMode() && file_exists( $_sMinPath )
+
+                $_aTemplate = $_aTemplate + array( 'id' => '', 'version' => AmazonAutoLinks_Registry::VERSION );
+                $_sCSSPath  = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css';
+                $_sMinPath  = $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.min.css';
+                $_sCSSPath  = ! $this->isDebugMode() && file_exists( $_sMinPath )
                     ? $_sMinPath
                     : $_sCSSPath;
                 $_sURL     = $this->getSRCFromPath( $_sCSSPath );
-                $_sHandle  = 'amazon-auto-links-' . strtolower( $_aTemplate[ 'id' ] );
-                wp_register_style( $_sHandle, $_sURL );
+                $_sHandle  = $this->___getStyleHandleID( $_aTemplate[ 'id' ] );
+                wp_register_style( $_sHandle, $_sURL, array(), $_aTemplate[ 'version' ] );
                 wp_enqueue_style( $_sHandle );
                 
             }
             
-        }   
+        }
+            /**
+             * @var  string[]
+             * @sicne 4.6.7
+             */
+            static private $___aStyleHandleIDs = array();
+
+            /**
+             * @param  string $sTemplateID
+             * @since  4.6.7
+             * @return string
+             */
+            private function ___getStyleHandleID( $sTemplateID ) {
+                $_sHandleID  = 'amazon-auto-links-' . strtolower( basename( $sTemplateID ) );
+                if ( ! in_array( $_sHandleID, self::$___aStyleHandleIDs, true ) ) {
+                    self::$___aStyleHandleIDs[] = $_sHandleID;
+                    return $_sHandleID;
+                }
+                $_sHandleID = $this->___getStringWithTrailingDigits( $_sHandleID, 2 );
+                self::$___aStyleHandleIDs[] = $_sHandleID;
+                return $_sHandleID;
+            }
+                private function ___getStringWithTrailingDigits( $sString, $iStartDigit=2 ) {
+                    $_sStringOriginal = $sString;
+                    $_sString         = preg_replace_callback( '/-\K(\d+)$/', array( $this, '___replyToIncrementMatchTailingDigits' ), $sString );
+                    if ( $_sStringOriginal === $_sString ) {
+                        return $_sString . '-' . $iStartDigit;
+                    }
+                    return $_sString;
+                }
+                    private function ___replyToIncrementMatchTailingDigits( $aMatches ) {
+                        if ( isset( $aMatches[ 1 ] ) && is_numeric( $aMatches[ 1 ] ) ) {
+                            return $aMatches[ 1 ] + 1;
+                        }
+                        return $aMatches[ 0 ];
+                    }
+
         /**
          * Prints a style tag by joining all the custom CSS rules set in the active template options.
          * 

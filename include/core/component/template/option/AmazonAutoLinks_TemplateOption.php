@@ -725,5 +725,16 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         }
         return '';
     }
+
+    /**
+     * Checks whether the template exists in the uploaded templates.
+     * @param  string $sTemplateID
+     * @return boolean
+     * @since  4.6.7
+     */
+    public function exists( $sTemplateID ) {
+        $_aAvailableTemplates = $this->getUploadedTemplates();
+        return ! empty( $_aAvailableTemplates[ $sTemplateID ] );
+    }
         
 }

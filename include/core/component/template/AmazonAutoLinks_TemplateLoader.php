@@ -21,16 +21,11 @@ class AmazonAutoLinks_TemplateLoader {
      */
     public function __construct( $sScriptPath ) {
 
-        new AmazonAutoLinks_TemplateActivator;
+        new AmazonAutoLinks_Template_Event_Action_ActivationStatus;
         new AmazonAutoLinks_TemplateResourceLoader;
         
         if ( is_admin() ) {
-            
-            add_action( 
-                'set_up_' . 'AmazonAutoLinks_AdminPage',
-                array( $this, 'replyToSetUpAdminPage' )
-            );
-            
+            add_action( 'set_up_' . 'AmazonAutoLinks_AdminPage', array( $this, 'replyToSetUpAdminPage' ) );
         }
         
     }    

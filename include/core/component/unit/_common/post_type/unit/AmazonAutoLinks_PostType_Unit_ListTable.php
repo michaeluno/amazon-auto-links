@@ -152,8 +152,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             $_sTemplateID     = AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', null );
             $_bTemplateExists = false;
             if ( $_sTemplateID ) {
-                $_aAvailableTemplates = AmazonAutoLinks_TemplateOption::getInstance()->getUploadedTemplates();
-                $_bTemplateExists      = ! empty( $_aAvailableTemplates[ $_sTemplateID ] );
+                $_bTemplateExists = AmazonAutoLinks_TemplateOption::getInstance()->exists( $_sTemplateID );
             }
             $_sMessage    = $_bTemplateExists
                 ? sprintf(
