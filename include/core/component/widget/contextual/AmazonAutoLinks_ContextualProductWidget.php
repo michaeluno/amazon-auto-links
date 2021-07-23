@@ -362,6 +362,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          */
         private function _getOutput( $aFormData ) {
             $aFormData[ 'unit_type' ] = 'contextual';
+            // [4.6.8] Search units have the `Title` argument and this causes a conflict in WordPress 5.8
+            unset( $aFormData[ 'title' ] );
             return AmazonAutoLinks( $aFormData, false );
         }
        
