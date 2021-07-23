@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.6 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.7 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -395,6 +395,7 @@ return array(
     "AmazonAutoLinks_SVGGenerator_PrimeIcon" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/svg/AmazonAutoLinks_SVGGenerator_PrimeIcon.php", 
     "AmazonAutoLinks_SVGGenerator_RatingStar" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/svg/AmazonAutoLinks_SVGGenerator_RatingStar.php", 
     "AmazonAutoLinks_UnitTypeLoader_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php", 
+    "AmazonAutoLinks_Widget_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/AmazonAutoLinks_Widget_Utility.php", 
     "AmazonAutoLinks_WidgetsLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/AmazonAutoLinks_WidgetsLoader.php", 
     "AmazonAutoLinks_WidgetByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php", 
     "AmazonAutoLinks_ContextualProductWidget" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/contextual/AmazonAutoLinks_ContextualProductWidget.php", 

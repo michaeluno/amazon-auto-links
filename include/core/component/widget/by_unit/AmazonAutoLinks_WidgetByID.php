@@ -144,15 +144,10 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
      * Alternatively you may use the content_{instantiated class name} method.
      */
     public function content( $sContent, $aArguments, $aFormData ) {
-        
-        $aFormData = $this->_getFormattedFormData( $aFormData );    
-        
-        if ( 
-            ! in_array( 
-                AmazonAutoLinks_PluginUtility::getCurrentPageType(), 
-                $aFormData[ 'available_page_types' ] 
-            )
-        ) {
+
+        $aFormData = $this->___getFormattedFormData( $aFormData );    
+
+        if ( ! $this->___shouldRender( $aFormData ) ) {
             $this->oProp->bShowWidgetTitle = false;
             return $sContent;
         }                
@@ -161,20 +156,29 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
         $aFormData[ '_widget_option_name' ] = $this->oProp->oWidget->option_name;
         $aFormData[ '_widget_number' ] = $this->oProp->oWidget->number;
 
-        return $sContent
-            . AmazonAutoLinks( 
-                $aFormData, 
-                false // echo or return
-            );
+        return $sContent . AmazonAutoLinks( $aFormData, false );
     
     }
-
+        /**
+         * @param  array $aFormData
+         * @return boolean
+         * @since  4.6.8
+         */
+        private function ___shouldRender( $aFormData ) {
+            if ( AmazonAutoLinks_Widget_Utility::isInWidgetPreview() ) {
+                return true;
+            }
+            return in_array(
+                AmazonAutoLinks_PluginUtility::getCurrentPageType(),
+                $aFormData[ 'available_page_types' ]
+            );
+        }
         /**
          * 
          * @since       3.0.5
          * @return      array
          */
-        private function _getFormattedFormData( array $aFormData ) {
+        private function ___getFormattedFormData( array $aFormData ) {
             $aFormData = $aFormData + array(
                 'title'                     => null,
                 'width'                     => 100,

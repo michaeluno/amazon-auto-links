@@ -279,7 +279,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
     public function content( $sContent, $aArguments, $aFormData ) {
 
         $aFormData = $this->_getFormattedFormData( $aFormData );        
-        if ( 
+        if (
+            ! AmazonAutoLinks_Widget_Utility::isInWidgetPreview()
+            &&
             ! in_array( 
                 AmazonAutoLinks_PluginUtility::getCurrentPageType(), 
                 $aFormData[ 'available_page_types' ] 
