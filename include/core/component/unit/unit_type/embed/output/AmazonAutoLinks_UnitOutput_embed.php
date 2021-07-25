@@ -81,6 +81,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
     }
         /**
+         * @remark The user might past an Amazon site url but not of the product page.
          * @param  array   $aASINsPerNonProductURL
          * @return array
          * @since  4.4.0
