@@ -132,15 +132,122 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 $_sThisLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sLocale      = $_sLocale ? $_sLocale : $_sThisLocale;
                 $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->___getAssociateIDFromURL( $_sURL, $_sThisLocale );
-                foreach( $_aASINs as $_sASIN ) {
-                    $_aProduct = $this->___getProductScraped( $_sASIN, $_sThisLocale, $_sAssociateID, $sLanguage );
-                    $_aProducts[ $_sASIN ] = $_aProduct;
-                }
+                $_aProducts    = $_aProducts + $this->___getProductsScraped( $_aASINs, $_sThisLocale, $_sAssociateID, $sLanguage );
             }
             $sAssociateID = $_sAssociateID;
             $sLocale      = $_sLocale;
             return $_aProducts;
         }
+            /**
+             * @param  array  $aASINs
+             * @param  string $sLocale
+             * @param  string $sAssociateID
+             * @param  string $sLanguage
+             * @return array
+             * @since  4.6.9
+             */
+            private function ___getProductsScraped( array $aASINs, $sLocale, $sAssociateID, $sLanguage ) {
+                $_aProducts = array();
+                foreach( $aASINs as $_sASIN ) {
+                    $_aProduct = $this->___getProductScraped( $_sASIN, $sLocale, $sAssociateID, $sLanguage );
+                    $_aProducts[ $_sASIN ] = $_aProduct;
+                }
+                return $_aProducts;
+            }
+                /**
+                 * @param  string $sASIN
+                 * @param  string $sLocale
+                 * @param  string $sAssociateID
+                 * @param  string $sLanguage
+                 * @return array
+                 * @since  4.4.0
+                 */
+                private function ___getProductScraped( $sASIN, $sLocale, $sAssociateID, $sLanguage ) {
+
+                    $_sProductURL = $this->___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, $_sURLDomain );
+                    $_sHTML       = $this->___getProductPage( $_sProductURL, $sLanguage );
+                    $_oScraper    = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sProductURL );
+                    $_aProduct    = $_oScraper->get( $sAssociateID, $_sURLDomain );
+
+                    // If the title is not set, it means failure of retrieving the product data.
+                    if ( ! isset( $_aProduct[ 'title' ] ) ) { // it was 'thumbnail_url' before
+                        unset( $_aProduct[ '_features' ] );
+                        return $_aProduct;
+                    }
+
+                    $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sProductURL );
+                    $_aProduct[ 'content' ]      = ! empty( $_aProduct[ 'content' ] )
+                        ? "<div class='amazon-product-content'>"
+                            . $_aProduct[ 'content' ]
+                        . "</div>"
+                        : '';
+                    $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
+                        isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : ( $_aProduct[ 'content' ] ? $_aProduct[ 'content' ] : implode( ' ', $_aProduct[ '_features' ] ) ),
+                        $this->oUnitOption->get( 'description_length' ),
+                        $this->_getReadMoreText( $_aProduct[ 'product_url' ] )
+                    );
+                    $_aProduct[ 'description' ]  = $_sDescriptionExtracted
+                        ? "<div class='amazon-product-description'>"
+                            . $_sDescriptionExtracted
+                        . "</div>"
+                        : '';
+
+                    unset( $_aProduct[ '_features' ] );
+                    return $_aProduct;
+
+                }
+                    /**
+                     * @param string $sASIN
+                     * @param string $sAssociateID
+                     * @param string $sLocale
+                     * @param string $sLanguage
+                     * @param string $sURLDomain
+                     * @return string
+                     */
+                    private function ___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, &$sURLDomain ) {
+                        $_oLocale      = new AmazonAutoLinks_Locale( $sLocale );
+                        $_sDomain      = $_oLocale->getDomain();
+                        $sURLDomain    = 'https://' . $_sDomain;
+                        return add_query_arg(
+                            array(
+                                'tag'      => $sAssociateID,
+                                'language' => $sLanguage,
+                            ),
+                            $sURLDomain . '/dp/' . $sASIN . '/'
+                        );
+                    }
+
+                    /**
+                     * @param  string $sURL
+                     * @param  string $sLanguage
+                     * @return string
+                     * @since  4.3.4
+                     */
+                    private function ___getProductPage( $sURL, $sLanguage ) {
+
+                        add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
+                        add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
+                        add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100, 2 );
+
+                        $_oHTTP   = new AmazonAutoLinks_HTTPClient(
+                            $sURL,
+                            86400,
+                            array(
+                                'timeout'     => 20,    // 20 seconds as the default is 5 seconds and it often times out
+                                'redirection' => 20,
+                            ),
+                            $this->sUnitType . '_unit_type' // request type
+                        );
+
+                        $_sHTTPBody = $_oHTTP->getBody();
+                        remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+                        remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+                        remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100 );
+
+                        return $_sHTTPBody;
+
+                    }
+
 
         /**
          * @param  array $aProductsByScraping
@@ -181,99 +288,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
         }
 
-        /**
-         * @param  string $sASIN
-         * @param  string $sLocale
-         * @param  string $sAssociateID
-         * @param  string $sLanguage
-         * @return array
-         * @since  4.4.0
-         */
-        private function ___getProductScraped( $sASIN, $sLocale, $sAssociateID, $sLanguage ) {
-
-            $_sProductURL = $this->___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, $_sURLDomain );
-            $_sHTML       = $this->___getProductPage( $_sProductURL, $sLanguage );
-            $_oScraper    = new AmazonAutoLinks_ScraperDOM_Product( $_sHTML, $_sProductURL );
-            $_aProduct    = $_oScraper->get( $sAssociateID, $_sURLDomain );
-
-            // If the title is not set, it means failure of retrieving the product data.
-            if ( ! isset( $_aProduct[ 'title' ] ) ) { // it was 'thumbnail_url' before
-                unset( $_aProduct[ '_features' ] );
-                return $_aProduct;
-            }
-
-            $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sProductURL );
-            $_aProduct[ 'content' ]      = ! empty( $_aProduct[ 'content' ] )
-                ? "<div class='amazon-product-content'>"
-                    . $_aProduct[ 'content' ]
-                . "</div>"
-                : '';
-            $_sDescriptionExtracted      = $this->_getDescriptionSanitized(
-                isset( $_aProduct[ 'description' ] ) ? $_aProduct[ 'description' ] : ( $_aProduct[ 'content' ] ? $_aProduct[ 'content' ] : implode( ' ', $_aProduct[ '_features' ] ) ),
-                $this->oUnitOption->get( 'description_length' ),
-                $this->_getReadMoreText( $_aProduct[ 'product_url' ] )
-            );
-            $_aProduct[ 'description' ]  = $_sDescriptionExtracted
-                ? "<div class='amazon-product-description'>"
-                    . $_sDescriptionExtracted
-                . "</div>"
-                : '';
-
-            unset( $_aProduct[ '_features' ] );
-            return $_aProduct;
-
-        }
-            /**
-             * @param string $sASIN
-             * @param string $sAssociateID
-             * @param string $sLocale
-             * @param string $sLanguage
-             * @param string $sURLDomain
-             * @return string
-             */
-            private function ___getProductURL( $sASIN, $sAssociateID, $sLocale, $sLanguage, &$sURLDomain ) {
-                $_oLocale      = new AmazonAutoLinks_Locale( $sLocale );
-                $_sDomain      = $_oLocale->getDomain();
-                $sURLDomain    = 'https://' . $_sDomain;
-                return add_query_arg(
-                    array(
-                        'tag'      => $sAssociateID,
-                        'language' => $sLanguage,
-                    ),
-                    $sURLDomain . '/dp/' . $sASIN . '/'
-                );
-            }
-
-            /**
-             * @param  string $sURL
-             * @param  string $sLanguage
-             * @return string
-             * @since  4.3.4
-             */
-            private function ___getProductPage( $sURL, $sLanguage ) {
-
-                add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 4 );
-                add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 5 );
-                add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100, 2 );
-
-                $_oHTTP   = new AmazonAutoLinks_HTTPClient(
-                    $sURL,
-                    86400,
-                    array(
-                        'timeout'     => 20,    // 20 seconds as the default is 5 seconds and it often times out
-                        'redirection' => 20,
-                    ),
-                    $this->sUnitType . '_unit_type' // request type
-                );
-
-                $_sHTTPBody = $_oHTTP->getBody();
-                remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
-                remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
-                remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100 );
-
-                return $_sHTTPBody;
-
-            }
             /**
              * @param  string $sURL
              * @param  string $sLocale
