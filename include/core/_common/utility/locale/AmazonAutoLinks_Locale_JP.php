@@ -12,7 +12,7 @@
  *
  * @since       4.3.4
  */
-class AmazonAutoLinks_Locale_JP extends AmazonAutoLinks_Locale_Base {
+class AmazonAutoLinks_Locale_JP extends AmazonAutoLinks_Locale_EastAsia {
 
     /**
      * The locale code.

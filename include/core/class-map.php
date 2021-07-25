@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.7 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.8 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -585,7 +585,6 @@ return array(
     "AmazonAutoLinks_Locale_AE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_AE.php", 
     "AmazonAutoLinks_Locale_AU" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_AU.php", 
     "AmazonAutoLinks_Locale_BR" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_BR.php", 
-    "AmazonAutoLinks_Locale_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_Base.php", 
     "AmazonAutoLinks_Locale_CA" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_CA.php", 
     "AmazonAutoLinks_Locale_CN" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_CN.php", 
     "AmazonAutoLinks_Locale_DE" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_DE.php", 
@@ -605,5 +604,9 @@ return array(
     "AmazonAutoLinks_Locale_US" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locale_US.php", 
     "AmazonAutoLinks_Locales" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/AmazonAutoLinks_Locales.php", 
     "AmazonAutoLinks_Locale_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/cookie/AmazonAutoLinks_Locale_AmazonCookies.php", 
+    "AmazonAutoLinks_Locale_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/_abstract/AmazonAutoLinks_Locale_Base.php", 
+    "AmazonAutoLinks_Locale_EastAsia" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/_abstract/AmazonAutoLinks_Locale_EastAsia.php", 
+    "AmazonAutoLinks_Locale_EuropeanUnion" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/_abstract/AmazonAutoLinks_Locale_EuropeanUnion.php", 
+    "AmazonAutoLinks_Locale_NorthAmerica" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/locale/_abstract/AmazonAutoLinks_Locale_NorthAmerica.php", 
     "AmazonAutoLinks_TemplateUtility_NoOuterContainer" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/template/AmazonAutoLinks_TemplateUtility_NoOuterContainer.php", 
 );

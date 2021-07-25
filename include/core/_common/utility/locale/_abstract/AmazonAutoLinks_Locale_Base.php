@@ -59,6 +59,14 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
      */
     public $sNoImageURL = '';
 
+    /**
+     * @remark There are locales which do not support this such as AU.
+     * Currently, the supported locales are US, CA, FR, IT, DE, ES, JP, IN
+     * @var string
+     * @since 4.6.9
+     */
+    public $sAdSystemServer = '';
+
     // Methods to override.
 
     /**
@@ -204,6 +212,48 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
      */
     public function getAddToCartURL() {
         return $this->getMarketPlaceURL() . '/gp/aws/cart/add.html';
+    }
+
+    /**
+     * Returns the ISO 3166 country code.
+     * Mostly the same as the slug. But the UK locale will be GB.
+     * @see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+     * @since  4.6.9
+     * @return string
+     */
+    public function getCountryCode() {
+        return $this->sSlug;
+    }
+
+    /**
+     * @since  4.6.9
+     * @param  array    $aPayload   API request parameters.
+     * @return string   The endpoint URI
+     */
+    public function getAdWidgetAPIEndpoint( array $aPayload=array() ) {
+        return $this->sAdSystemServer
+            ? add_query_arg( $aPayload, 'https://' . $this->sAdSystemServer . '/widgets/q' )
+            : '';
+    }
+
+    /**
+     * @param array|string  $asKeywords
+     * @param array         $aPayload       API request parameters.
+     * @since 4.6.9
+     * @return string       The endpoint URI
+     */
+    public function getAdWidgetAPIEndpoint_Search( $asKeywords, array $aPayload=array() ) {
+        return $this->getAdWidgetAPIEndpoint( $aPayload + array(
+            'Operation'      => 'GetResults',
+            'Keywords'       => is_array( $asKeywords ) ? implode( '|', $asKeywords ) : $asKeywords,
+            'SearchIndex'    => 'All',
+            'multipageStart' => 0,
+            'InstanceId'     => 0,
+            'multipageCount' => 20, // max number of items // @todo check how many is allowed
+            'TemplateId'     => 'MobileSearchResults',
+            'ServiceVersion' => '20070822',
+            'MarketPlace'    => $this->getCountryCode(),
+        ) );
     }
 
     /**

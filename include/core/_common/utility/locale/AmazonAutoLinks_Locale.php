@@ -167,6 +167,25 @@ class AmazonAutoLinks_Locale {
     }
 
     /**
+     * @param  array $aPayload
+     * @return string
+     * @since  4.6.9
+     */
+    public function getAdWidgetAPIEndpoint( array $aPayload ) {
+        return $this->oLocale->getAdWidgetAPIEndpoint( $aPayload );
+    }
+
+    /**
+     * @param  array|string $asKeywords
+     * @param  array $aPayload
+     * @return string
+     * @since  4.6.9
+     */
+    public function getAdWidgetAPIEndpoint_Search( $asKeywords, array $aPayload=array() ) {
+        return $this->oLocale->getAdWidgetAPIEndpoint_Search( $asKeywords, $aPayload );
+    }
+
+    /**
      * @param  string  $sLanguage The preferred language.
      * @param  boolean $bRenewCookies Whether to renew cookies.
      * @return array   An array for the `cookies` argument of `wp_remote_request()`.
