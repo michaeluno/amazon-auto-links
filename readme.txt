@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.8
+Stable tag:         4.6.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,11 +328,15 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.6.9 - 07/27/2021 =
+- Optimized the method to retrieve product ratings and prices for some locales.
+- Optimized HTTP requests for embed units for some locales.
+
 = 4.6.8 - 07/24/2021 =
 - Fixed an incompatibility issue with WordPress 5.8 regarding the plugin widget by unit with search units.
 - Fixed an incompatibility issue with WordPress 5.8 regarding widget previews.
 
-= 4.6.7 - 07/12/2021 =
+= 4.6.7 - 07/19/2021 =
 - Added a setting notice when activating/deactivating a template.
 - Added the ability to reformat template data when activating a template.
 - Tweaked how the template stylesheets are enqueued with a simpler handle ID and a version.
