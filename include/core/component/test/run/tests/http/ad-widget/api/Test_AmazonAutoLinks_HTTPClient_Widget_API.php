@@ -24,8 +24,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_US() {
         $_sASIN   = 'B07FKR6KXF';
         $_sLocale = 'US';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -35,7 +35,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         $_sASIN   = 'B085M66LH1';
         $_sLocale = 'CA';
         $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
         /**
@@ -45,8 +46,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_CN() {
             $_sASIN   = 'B01JRE0IU6';
             $_sLocale = 'CN';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
     /**
@@ -55,8 +56,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_FR() {
         $_sASIN   = 'B07FQ4DJ7X';
         $_sLocale = 'FR';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -65,8 +66,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_DE() {
         $_sASIN   = 'B07FQ4DJ7X';
         $_sLocale = 'DE';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -75,8 +76,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_IT() {
         $_sASIN   = 'B07FQ4DJ7X';
         $_sLocale = 'IT';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -85,8 +86,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_ES() {
         $_sASIN   = 'B07ZZVWB4L';
         $_sLocale = 'ES';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -95,8 +96,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_UK() {
         $_sASIN   = 'B07PJV3JPR';
         $_sLocale = 'UK';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
         /**
@@ -106,8 +107,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_PL() {
             $_sASIN   = 'B085K45C3S';
             $_sLocale = 'PL';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
         /**
@@ -117,8 +118,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_NL() {
             $_sASIN   = 'B085K45C3S';
             $_sLocale = 'NL';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
         /**
@@ -128,8 +129,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_SE() {
             $_sASIN   = 'B085K45C3S';
             $_sLocale = 'SE';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
     /**
@@ -138,8 +139,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_JP() {
         $_sASIN   = 'B07PFFMQ64';
         $_sLocale = 'JP';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
     /**
@@ -148,8 +149,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
     public function test_IN() {
         $_sASIN   = 'B086978F2L';
         $_sLocale = 'IN';
-        $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-        $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+        $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
     }
 
         /**
@@ -159,8 +160,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_AU() {
             $_sASIN   = 'B07ZZW1B82';
             $_sLocale = 'AU';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
         /**
@@ -170,8 +171,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_MX() {
             $_sASIN   = 'B085K45C3S';
             $_sLocale = 'MX';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
 
         /**
@@ -181,8 +182,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_TR() {
             $_sASIN   = 'B01DF29XFW';
             $_sLocale = 'TR';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
         /**
          * @tags BR
@@ -191,8 +192,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_BR() {
             $_sASIN   = 'B07ZZW745X';
             $_sLocale = 'BR';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
         /**
          * @tags SG
@@ -201,7 +202,8 @@ class Test_AmazonAutoLinks_HTTPClient_Widget_API extends Test_AmazonAutoLinks_HT
         public function test_SG() {
             $_sASIN   = 'B095LQBP4Y';
             $_sLocale = 'SG';
-            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
-            $this->_testUnblocked( $_oLocale->getAdWidgetAPIEndpoint_Search( $_sASIN ), $_sLocale, false, false );
+            $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+            $this->_testUnblocked( $_oAdWidgetAPI->getEndpoint( $_sASIN ), $_sLocale, false, false );
         }
+
 }
