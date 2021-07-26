@@ -74,11 +74,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
 
         $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ), $_sLocale );
         $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs, $_sLocale );
-
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
         $_aProducts        = array_merge( $_aProducts, $_aProductsByURLs );
         return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
-
     }
         /**
          * @remark The user might past an Amazon site url but not of the product page.
@@ -125,19 +123,72 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
          * @since  4.4.0
          */
         private function ___getProductsWithASINs( array $aASINsPerURL, $iNumberOfItems, &$sAssociateID, &$sLocale, $sLanguage ) {
-            $_aProducts    = array();
-            $_sLocale      = '';
-            $_sAssociateID = '';
+            $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
+            $_aProducts         = array();
+            $_sLocale           = '';
+            $_sAssociateID      = '';
             foreach( $aASINsPerURL as $_sURL => $_aASINs ) {
                 $_sThisLocale  = AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) );
                 $_sLocale      = $_sLocale ? $_sLocale : $_sThisLocale;
                 $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->___getAssociateIDFromURL( $_sURL, $_sThisLocale );
+                if ( in_array( $_sLocale, $_aAdWidgetLocales, true ) ) {
+                    $_aProducts = $_aProducts + $this->___getProductsByAdWidgetAPI( $_aASINs, $_sThisLocale, $_sAssociateID, $sLanguage );
+                    continue;
+                }
                 $_aProducts    = $_aProducts + $this->___getProductsScraped( $_aASINs, $_sThisLocale, $_sAssociateID, $sLanguage );
             }
             $sAssociateID = $_sAssociateID;
             $sLocale      = $_sLocale;
             return $_aProducts;
         }
+            /**
+             * @param  array $aASINs
+             * @param  string $sLocale
+             * @param  string $sAssociateID
+             * @param  string $sLanguage
+             * @return array
+             * @since  4.6.9
+             */
+            private function ___getProductsByAdWidgetAPI( array $aASINs, $sLocale, $sAssociateID, $sLanguage ) {
+                $_aProducts          = array();
+                $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $sLocale );
+                $_aResponse          = $_oAdWidgetAPISearch->get( $aASINs );
+                foreach( $this->getElementAsArray( $_aResponse, array( 'results' ) ) as $_aItem ) {
+                    $_aStructure_Item = array(
+                        'ASIN'          => null,    'Title'             => null,
+                        'Price'         => null,    'ListPrice'         => null,
+                        'ImageUrl'      => null,    'DetailPageURL'     => null,
+                        'Rating'        => null,    'TotalReviews'      => null,
+                        'Subtitle'      => null,    'IsPrimeEligible'   => null,
+                    );
+                    $_aItem    = $_aItem + $_aStructure_Item;
+                    $_aProduct = array(
+                        'ASIN'              => $_aItem[ 'ASIN' ],
+                        'product_url'       => $_aItem[ 'DetailPageURL' ],
+                        'thumbnail_url'     => $_aItem[ 'ImageUrl' ],
+                        'title'             => $_aItem[ 'Title' ],
+                        'rating'            => ( integer ) ( ( ( double ) $_aItem[ 'Rating' ] ) * 10 ),
+                        'number_of_reviews' => ( integer ) $_aItem[ 'TotalReviews' ],
+                        'formatted_price'   => AmazonAutoLinks_Unit_Utility::getPrice( $_aItem[ 'ListPrice' ], null, null, $_aItem[ 'Price' ], $_aItem[ 'Price' ] ),
+                        'is_prime'          => ( boolean ) $_aItem[ 'IsPrimeEligible' ],
+                    ) + $_aItem;
+                    $_aProduct[ 'formatted_rating' ] = $this->___getFormattedRating( $_aProduct[ 'rating' ], $_aProduct[ 'number_of_reviews' ], $sLocale, $_aItem[ 'ASIN' ], $sAssociateID, $sLanguage );
+                    $_aProducts[ $_aItem[ 'ASIN' ] ] = $_aProduct;
+                }
+                return $_aProducts;
+            }
+                /**
+                 * @return string
+                 * @since  4.6.0
+                 */
+                private function ___getFormattedRating( $iRating, $iReviewCount, $sLocale, $sASIN, $sAssociateID, $sLanguage ) {
+                    $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
+                    $_sReviewURL    = $_oLocale->getCustomerReviewURL( $sASIN, $sAssociateID, $sLanguage );
+                    return "<div class='amazon-customer-rating-stars'>"
+                            . AmazonAutoLinks_Unit_Utility::getRatingOutput( $iRating, $_sReviewURL, $iReviewCount )
+                        . "</div>";
+                }
+
             /**
              * @param  array  $aASINs
              * @param  string $sLocale
@@ -261,7 +312,17 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 if ( ! isset( $aProductsByScraping[ $_sASIN ] ) ) {
                     continue;
                 }
-                $aProductsByScraping[ $_sASIN ] = $_aProduct + $aProductsByScraping[ $_sASIN ];
+                $_aProductByScraping = $aProductsByScraping[ $_sASIN ];
+                $_aOverride          = array_intersect_key(
+                    $_aProductByScraping,
+                    array(
+                        'rating'            => null,
+                        'number_of_reviews' => null,
+                        'formatted_rating'  => null,
+                        'is_prime'          => null,
+                    )
+                );
+                $aProductsByScraping[ $_sASIN ] = $_aOverride + $_aProduct + $_aProductByScraping;
             }
             return $aProductsByScraping;
         }

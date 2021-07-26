@@ -38,14 +38,29 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
     }
 
     /**
-     * @tags US, multi words
+     * @tags multi words
      */
-    public function test_US() {
+    public function test_multi_words() {
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'US' );
         $_aResponse          = $_oAdWidgetAPISearch->get(
             'Microsoft Keyboard',
             array(
                 'multipageCount' => 10,
+            )
+        );
+        $this->_outputDetails( 'response', $_aResponse );
+        $this->_assertFalse( empty( $_aResponse ) );
+    }
+
+    /**
+     * @tags US
+     */
+    public function test_US() {
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'US' );
+        $_aResponse          = $_oAdWidgetAPISearch->get(
+            array( 'B00000J3LO' ),
+            array(
+                'multipageCount' => 20,
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
