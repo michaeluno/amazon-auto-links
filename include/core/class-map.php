@@ -539,6 +539,8 @@ return array(
     "AmazonAutoLinks_HTMLCleaner" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_HTMLCleaner.php", 
     "AmazonAutoLinks_HTMLStringTruncator" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_HTMLStringTruncator.php", 
     "AmazonAutoLinks_RenameTags" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_RenameTags.php", 
+    "AmazonAutoLinks_AdWidgetAPI_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/ad-widget-api/AmazonAutoLinks_AdWidgetAPI_Base.php", 
+    "AmazonAutoLinks_AdWidgetAPI_Search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/ad-widget-api/AmazonAutoLinks_AdWidgetAPI_Search.php", 
     "AmazonAutoLinks_HTTPClient" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/http/AmazonAutoLinks_HTTPClient.php", 
     "AmazonAutoLinks_HTTPClient_Multiple" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/http/AmazonAutoLinks_HTTPClient_Multiple.php", 
     "AmazonAutoLinks_PAAPI50" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/paapi/AmazonAutoLinks_PAAPI50.php", 
