@@ -66,12 +66,12 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
      */
     public function getEndpoint( $asKeywords, array $aPayload=array() ) {
         return $this->oLocale->getAdWidgetAPIEndpoint( $aPayload + array(
+            'multipageCount' => 20, // 20 is the max number of items    // @remark Not sure but this key must come first. Otherwise, the response become empty
             'Operation'      => 'GetResults',
             'Keywords'       => is_array( $asKeywords ) ? implode( '|', $asKeywords ) : $asKeywords,
             'SearchIndex'    => 'All',
             'multipageStart' => 0,
             'InstanceId'     => 0,
-            'multipageCount' => 20, // 20 is the max number of items
             'TemplateId'     => 'MobileSearchResults',
             'ServiceVersion' => '20070822',
             'MarketPlace'    => $this->oLocale->getCountryCode(),
