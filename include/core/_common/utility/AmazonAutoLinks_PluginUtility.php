@@ -15,13 +15,6 @@
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
-    /**
-     * @return boolean
-     * @since  4.6.8
-     */
-    static public function isRESTRequest() {
-        return defined( 'REST_REQUEST' ) && REST_REQUEST;
-    }
 
     /**
      * @param  string $sHTML

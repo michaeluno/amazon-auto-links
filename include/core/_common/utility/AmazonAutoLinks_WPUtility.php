@@ -18,6 +18,14 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
 
     /**
+     * @return boolean
+     * @since  4.6.8
+     */
+    static public function isRESTRequest() {
+        return defined( 'REST_REQUEST' ) && REST_REQUEST;
+    }
+
+    /**
      * @return string e.g. +09:00
      * @since  4.4.0
      */
