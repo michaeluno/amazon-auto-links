@@ -62,7 +62,9 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         $_aASINsPerURL           = $this->___getASINsPerURL( $_aURLs, $_sLanguage, $_aASINsPerNonProductURL );
         $_iCount                 = ( integer ) $this->oUnitOption->get( 'count' );
         $_aProducts              = $this->___getProductsWithASINs( $_aASINsPerURL, $_iCount, $_sAssociateID, $_sLocale, $_sLanguage );
+        $_aProducts              = $_aProducts + $this->___getProductsWithASINs( $_aASINsPerNonProductURL, $_iCount, $_sAssociateID, $_sLocale, $_sLanguage );
         $_aASINsOfNonProductURLs = $this->___getASINsOfNonProductURL( $_aASINsPerNonProductURL );
+
         $this->___bNonProductURL = ! empty( $_aASINsPerNonProductURL ); // referred when displaying errors
 
         // Set the Associate ID and locale. These could be detected from the URL. If not detected, give an empty value so that a warning will be displayed.
@@ -137,8 +139,8 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 }
                 $_aProducts    = $_aProducts + $this->___getProductsScraped( $_aASINs, $_sThisLocale, $_sAssociateID, $sLanguage );
             }
-            $sAssociateID = $_sAssociateID;
-            $sLocale      = $_sLocale;
+            $sAssociateID = $_sAssociateID ? $_sAssociateID : $sAssociateID;
+            $sLocale      = $_sLocale ? $_sLocale : $sLocale;
             return $_aProducts;
         }
             /**
@@ -150,9 +152,20 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
              * @since  4.6.9
              */
             private function ___getProductsByAdWidgetAPI( array $aASINs, $sLocale, $sAssociateID, $sLanguage ) {
+
+                // Capture the modified date of the response
+                add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 1 );
+                add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 2 );
+
                 $_aProducts          = array();
-                $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $sLocale );
+                $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $sLocale, ( integer ) $this->oUnitOption->get( 'cache_duration' ) );
                 $_aResponse          = $_oAdWidgetAPISearch->get( $aASINs );
+                $_aChunks            = array_chunk( $aASINs, 20 );
+                $_sAPIEndpoint       = $_oAdWidgetAPISearch->getEndpoint( reset( $_aChunks ) );
+
+                remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+                remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+
                 foreach( $this->getElementAsArray( $_aResponse, array( 'results' ) ) as $_aItem ) {
                     $_aStructure_Item = array(
                         'ASIN'          => null,    'Title'             => null,
@@ -171,6 +184,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         'number_of_reviews' => ( integer ) $_aItem[ 'TotalReviews' ],
                         'formatted_price'   => AmazonAutoLinks_Unit_Utility::getPrice( $_aItem[ 'ListPrice' ], null, null, $_aItem[ 'Price' ], $_aItem[ 'Price' ] ),
                         'is_prime'          => ( boolean ) $_aItem[ 'IsPrimeEligible' ],
+                        'updated_date'      => $this->getElement( $this->_aModifiedDates, $_sAPIEndpoint ),
                     ) + $_aItem;
                     $_aProduct[ 'formatted_rating' ] = $this->___getFormattedRating( $_aProduct[ 'rating' ], $_aProduct[ 'number_of_reviews' ], $sLocale, $_aItem[ 'ASIN' ], $sAssociateID, $sLanguage );
                     $_aProducts[ $_aItem[ 'ASIN' ] ] = $_aProduct;
@@ -179,7 +193,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
             }
                 /**
                  * @return string
-                 * @since  4.6.0
+                 * @since  4.6.9
                  */
                 private function ___getFormattedRating( $iRating, $iReviewCount, $sLocale, $sASIN, $sAssociateID, $sLanguage ) {
                     $_oLocale       = new AmazonAutoLinks_Locale( $sLocale );
@@ -294,7 +308,6 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
                         remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
                         remove_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureError' ), 100 );
-
                         return $_sHTTPBody;
 
                     }
@@ -320,6 +333,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         'number_of_reviews' => null,
                         'formatted_rating'  => null,
                         'is_prime'          => null,
+                        'updated_date'      => null,
                     )
                 );
                 $aProductsByScraping[ $_sASIN ] = $_aOverride + $_aProduct + $_aProductByScraping;
