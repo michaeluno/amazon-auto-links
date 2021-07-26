@@ -237,26 +237,6 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
     }
 
     /**
-     * @param array|string  $asKeywords
-     * @param array         $aPayload       API request parameters.
-     * @since 4.6.9
-     * @return string       The endpoint URI
-     */
-    public function getAdWidgetAPIEndpoint_Search( $asKeywords, array $aPayload=array() ) {
-        return $this->getAdWidgetAPIEndpoint( $aPayload + array(
-            'Operation'      => 'GetResults',
-            'Keywords'       => is_array( $asKeywords ) ? implode( '|', $asKeywords ) : $asKeywords,
-            'SearchIndex'    => 'All',
-            'multipageStart' => 0,
-            'InstanceId'     => 0,
-            'multipageCount' => 20, // max number of items // @todo check how many is allowed
-            'TemplateId'     => 'MobileSearchResults',
-            'ServiceVersion' => '20070822',
-            'MarketPlace'    => $this->getCountryCode(),
-        ) );
-    }
-
-    /**
      * @see    WP_Http_Cookie
      * @param  string  $sLanguage      The preferred language.
      * @param  boolean $bRenewCookies  Whether to renew cookies. If this is true, the transient will not be used.
