@@ -285,14 +285,14 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     static public function getASINs( $sText ) {
         $sText = preg_replace(
             array(
-                '/[A-Z0-9]{11,}/',      // Remove strings like an ASIN but with more than 10 characters.
+                '/[A-Z0-9]{11,}/',     // Remove strings like an ASIN but with more than 10 characters.
                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers with heading `qid=`.
             ),
             '',
             $sText
         );
         $_biResult = preg_match_all(
-            '/[A-Z0-9]{10}/', // needle - [A-Z0-9]{10} is the ASIN
+            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9])/', // needle - [A-Z0-9]{10} is the ASIN
             $sText,           // subject
             $_aMatches        // match container
         );
