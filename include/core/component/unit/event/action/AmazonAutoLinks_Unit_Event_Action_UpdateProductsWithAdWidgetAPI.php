@@ -85,8 +85,12 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
                 $_aRows = array();
                 foreach( $aProducts as $_aProduct ) {
-                    $_aItem           = $aItems[ $_aProduct[ 'ASIN' ] ];
-                    $_sKey            = "{$_aProduct[ 'ASIN' ]}|{$sLocaleSlug}|{$_sDefaultCurrency}|{$_sDefaultLanguage}";
+                    $_sASIN           = $_aProduct[ 'ASIN' ];
+                    if ( ! isset( $aItems[ $_sASIN ] ) ) {  // the search result may contain unspecified ASINs
+                        continue;
+                    }
+                    $_aItem           = $aItems[ $_sASIN ];
+                    $_sKey            = "{$_sASIN}|{$sLocaleSlug}|{$_sDefaultCurrency}|{$_sDefaultLanguage}";
                     $_aStoredRow      = $this->getElementAsArray( $aStoredRows, array( $_sKey ) );
                     $_aRow            = $this->___getRowFormatted( $_aProduct, $_aStoredRow, $_iCacheDuration, $_aProduct[ 'ASIN' ], $sLocaleSlug, $_sDefaultCurrency, $_sDefaultLanguage );
                     $_aRows[ $_sKey ] = $_aRow;
