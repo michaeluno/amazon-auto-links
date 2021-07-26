@@ -25,8 +25,24 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
         if ( ! $this->oLocale->get()->sAdSystemServer ) {
             return array();
         }
-        $_sEndpoint  = $this->getEndpoint( $asKeywords, $aPayload );
-        return $this->getJSONFromJSONP( $this->getResponse( $_sEndpoint ) );
+        $_aResult     = array(
+            'results' => array(),
+        );
+        $_aKeywords   = $this->getAsArray( $asKeywords );
+        $_aChunksBy20 = array_chunk( $_aKeywords, 20 );      // the maximum number of items is 20
+        foreach( $_aChunksBy20 as $_aChunkBy20 ) {
+            $_sEndpoint  = $this->getEndpoint( $_aChunkBy20, $aPayload );
+            $_aResponse  = $this->getJSONFromJSONP( $this->getResponse( $_sEndpoint ) );
+            if ( ! isset( $_aResponse[ 'results' ] ) ) {
+                continue;
+            }
+            // Merge items
+            $_aResult[ 'results' ] = array_merge( $_aResult[ 'results' ], $_aResponse[ 'results' ] );
+            unset( $_aResponse[ 'results' ] );
+            // Merge other elements such as `InstanceId` and `MarketPlace`.
+            $_aResult    = $_aResult + $_aResponse;
+        }
+        return $_aResult;
     }
 
     /**
