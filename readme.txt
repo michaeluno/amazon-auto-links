@@ -331,6 +331,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.6.9 - 07/27/2021 =
 - Optimized the method to retrieve product ratings and prices for some locales.
 - Optimized HTTP requests for embed units for some locales.
+- Fixed vertical scrollbars not to appear with the List template in embedded views.
 
 = 4.6.8 - 07/24/2021 =
 - Fixed an incompatibility issue with WordPress 5.8 regarding the plugin widget by unit with search units.
