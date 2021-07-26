@@ -1,1 +1,2 @@
+- Optimized the performance of product element updater for some locales. 
 - Optimized HTTP requests for embed units for some locales.

@@ -45,6 +45,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }
 
         $_aAllItems           = $this->getElementAsArray( $aPost, array( 'items' ) );
+        $this->___updateProductsWithAdWidgetAPI( $_aAllItems );
         $_aProducts           = $this->___getProducts( $_aAllItems );
         $_aElements           = array();
         foreach( $_aAllItems as $_sASINLocaleCurLang => $_aDueElements ) {
@@ -58,6 +59,68 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         return $_aElements;
 
     }
+        /**
+         * @param array $aAllItems
+         * The structure:
+            [B08MF4NHXZ|IT|EUR|it_IT] => Array (
+                [formatted_rating] => Array(
+                    [item_format_tags] => (string, len`gth: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+                    [call_id] => (string, length: 13) 60fecdb30833c
+                    [cache_duration] => (string, length: 5) 86400
+                    [attempt] => (string, length: 1) 1
+                    [id] => (string, length: 3) 693
+                    [context] => (string, length: 16) formatted_rating
+                    [tag] => (string, length: 15) amazonwidget-21
+                    [asin] => (string, length: 10) B08MF4NHXZ
+                    [language] => (string, length: 5) it_IT
+                    [currency] => (string, length: 3) EUR
+                    [type] => (string, length: 6) search
+                    [locale] => (string, length: 2) IT`
+                )
+            )
+            [B08FHT7ZVH|IT|EUR|it_IT] => Array(
+                [formatted_rating] => Array(
+                    [item_format_tags] => (string, length: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+                    [call_id] => (string, length: 13) 60fecdb30833c
+                    [cache_duration] => (string, length: 5) 86400
+                    [attempt] => (string, length: 1) 1
+                    [id] => (string, length: 3) 693
+                    [context] => (string, length: 16) formatted_rating
+                    [tag] => (string, length: 15) amazonwidget-21
+                    [asin] => (string, length: 10) B08FHT7ZVH
+                    [language] => (string, length: 5) it_IT
+                    [currency] => (string, length: 3) EUR
+                    [type] => (string, length: 6) search
+                    [locale] => (string, length: 2) IT
+                )
+         * )
+         * @since  4.6.9
+         * @remark The Ad Widget API does not support currency and language.
+         */
+        private function ___updateProductsWithAdWidgetAPI( array $aAllItems ) {
+            $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
+            $_aItemsByLocale    = array();
+            $_aAllowedContexts  = array( 'formatted_price', 'formatted_rating', 'title' );
+            foreach( $aAllItems as $_sASINLocaleCurLang => $_aElements ) {
+                $_aContexts          = array_keys( $_aElements );
+                if ( ! count( array_intersect( $_aContexts, $_aAllowedContexts ) ) ) {
+                    continue;
+                }
+                $_aASINLocaleCurLang = explode( '|', $_sASINLocaleCurLang );
+                $_sASINThis          = $_aASINLocaleCurLang[ 0 ];
+                $_sLocaleThis        = $_aASINLocaleCurLang[ 1 ];
+                if ( ! in_array( $_sLocaleThis, $_aAdWidgetLocales, true ) ) {
+                    continue;
+                }
+                $_aItemsByLocale[ $_sLocaleThis ] = isset( $_aItemsByLocale[ $_sLocaleThis ] ) ? $_aItemsByLocale[ $_sLocaleThis ] : array();
+                $_aItemsByLocale[ $_sLocaleThis ][ $_sASINThis ] = array(
+                    'ASIN' => $_sASINThis,
+                ) + reset( $_aElements ); // the first item
+            }
+            foreach( $_aItemsByLocale as $_sLocale => $_aItems ) {
+                do_action( 'aal_action_update_products_with_ad_widget_api', $_sLocale, $_aItems );
+            }
+        }
         /**
          * @param array $aResults
          * @since 4.3.1

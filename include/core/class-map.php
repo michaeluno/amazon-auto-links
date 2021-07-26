@@ -161,6 +161,7 @@ return array(
     "AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/phpzon/shortcode/AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon.php", 
     "AmazonAutoLinks_UnitLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/AmazonAutoLinks_UnitLoader.php", 
     "AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks.php", 
+    "AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI.php", 
     "AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater.php", 
