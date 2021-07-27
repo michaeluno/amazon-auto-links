@@ -1,2 +1,3 @@
-- Fix a bug that the category list became unable to select after failing loading categories in the category selection page, which started in 4.6.4.
-- Fix a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.  
+- Fixed a bug that the category list became unable to select after failing loading categories in the category selection page, which started in 4.6.4.
+- Fixed a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.
+- Fixed an issue that clicking on an action link from the paged view of custom post type post listing table resulted in landing on the initial view.   
