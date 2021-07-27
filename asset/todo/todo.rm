@@ -1,8 +1,7 @@
 # Todos
 
 ## Minor
-- Test the plugin template system on wordpress.org. (there is a reported case that templates cannot be selected on sites hosted by wordpress.org) 
-- Fix a bug that clicking on a Renew Cache action link in a paged view opens in an unpaged view.
+- Test the plugin template system on wordpress.com. (there is a reported case that templates cannot be selected on sites hosted by wordpress.com)
 - Add an option "Use these proxies for Web Page Dumper".
 - Fix image widths displayed with the %content% tag. *unsure what this is about
 - [Bug] Fix a bug that cloning a unit does not clone template options. *unconfirmed
