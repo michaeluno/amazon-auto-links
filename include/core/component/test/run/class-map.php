@@ -45,6 +45,7 @@ return array(
     "Test_AmazonAutoLinks_WPUtility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_WPUtility.php", 
     "Test_AmazonAutoLinks_WPUtility_HTTP" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/Test_AmazonAutoLinks_WPUtility_HTTP.php", 
     "Test_AmazonAutoLinks_DatabaseTable_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/database/Test_AmazonAutoLinks_DatabaseTable_Utility.php", 
+    "Test_AmazonAutoLinks_DatabaseTable_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/database/Test_AmazonAutoLinks_DatabaseTable_aal_products.php", 
     "Test_AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager.php", 
     "Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 
     "Test_AmazonAutoLinks_AdWidgetAPI_Search" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/interpreter/ad-widget-api/Test_AmazonAutoLinks_AdWidgetAPI_Search.php", 
