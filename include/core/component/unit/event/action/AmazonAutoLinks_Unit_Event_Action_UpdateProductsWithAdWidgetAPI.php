@@ -48,8 +48,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
          */
         private function ___setProductsIntoDatabase( array $aProducts, array $aItems, $sLocaleSlug ) {
             $_aStoredRows = $this->___getStoredRows( $aItems, $sLocaleSlug );
-            $_aRows       = $this->___getRowsFormatted( $aProducts, $aItems, $sLocaleSlug, $_aStoredRows );
-            $this->setProductDatabaseRows( $_aRows );
+            $_aRowsSets   = $this->___getRowsSets( $aProducts, $aItems, $sLocaleSlug, $_aStoredRows );
+            foreach( $_aRowsSets as $_aRowsSet )
+            $this->setProductDatabaseRows( $_aRowsSet );
         }
             private function ___getStoredRows( $aItems, $sLocaleSlug ) {
 
@@ -75,7 +76,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
              * @return array
              * @remark The column names must much across al rows to properly insert into the table without errors.
              */
-            private function ___getRowsFormatted( array $aProducts, array $aItems, $sLocaleSlug, array $aStoredRows ) {
+            private function ___getRowsSets( array $aProducts, array $aItems, $sLocaleSlug, array $aStoredRows ) {
 
                 $_oLocale           = new AmazonAutoLinks_PAAPI50_Locale( $sLocaleSlug );
                 $_sDefaultCurrency  = $_oLocale->getDefaultCurrency();
@@ -83,7 +84,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                 $_oOption           = AmazonAutoLinks_Option::getInstance();
                 $_iCacheDuration    = $_oOption->get( 'unit_default', 'cache_duration' );
 
-                $_aRows = array();
+                $_aRowsSets    = array(
+                    'default' => array(),
+                );
                 foreach( $aProducts as $_aProduct ) {
                     $_sASIN           = $_aProduct[ 'ASIN' ];
                     if ( ! isset( $aItems[ $_sASIN ] ) ) {  // the search result may contain unspecified ASINs
@@ -93,23 +96,41 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                     $_sKey            = "{$_sASIN}|{$sLocaleSlug}|{$_sDefaultCurrency}|{$_sDefaultLanguage}";
                     $_aStoredRow      = $this->getElementAsArray( $aStoredRows, array( $_sKey ) );
                     $_aRow            = $this->___getRowFormatted( $_aProduct, $_aStoredRow, $_iCacheDuration, $_aProduct[ 'ASIN' ], $sLocaleSlug, $_sDefaultCurrency, $_sDefaultLanguage );
-                    $_aRows[ $_sKey ] = $_aRow;
+                    $_aRowsSets[ 'default' ][ $_sKey ] = $_aRow;
+
                     // If the user has different language and currency preference than the default one,
+                    $_sTableVersion   = get_option( "aal_products_version", '0' );
                     if ( $_sDefaultCurrency !== $_aItem[ 'currency' ] ) {
-                        $_aRow[ 'price' ] = $_aRow[ 'price_formatted' ] = $_aRow[ 'discounted_price' ] =  $_aRow[ 'discounted_price_formatted' ] = null;
+                        unset(
+                            $_aRow[ 'price' ],              $_aRow[ 'price_formatted' ],
+                            $_aRow[ 'discounted_price' ],   $_aRow[ 'discounted_price_formatted' ]
+                        );
+                        $_aRow[ 'currency' ] = $_aItem[ 'currency' ];
+                        if ( version_compare( $_sTableVersion, '1.2.0b01', '>=') ) {
+                            $_aRow[ 'preferred_currency' ] = $_aItem[ 'currency' ];
+                        }
                     }
                     // with different language than the default one,
                     if ( $_sDefaultLanguage !== $_aItem[ 'language' ] ) {
-                        $_aRow[ 'title' ] = null;
+                        unset( $_aRow[ 'title' ] );
+                        if ( version_compare( $_sTableVersion, '1.2.0b01', '>=') ) {
+                            $_aRow[ 'language' ] = $_aItem[ 'language' ];
+                        }
                     }
                     $_sKey            = "{$_aProduct[ 'ASIN' ]}|{$sLocaleSlug}|{$_aItem[ 'currency' ]}|{$_aItem[ 'language' ]}";
-                    if ( version_compare( get_option( "aal_products_version", '0' ), '1.4.0b01', '>=' ) ) {
+                    if ( version_compare( $_sTableVersion, '1.4.0b01', '>=' ) ) {
                         $_aRow[ 'product_id' ] = $_sKey;
                     }
 
-                    $_aRows[ $_sKey ] = $_aRow;
+                    // Multiple SQL queries are necessary per combinations of columns
+                    $_aColumns = array_keys( $_aRow );
+                    sort( $_aColumns );
+                    $_sColumns = implode( '|', $_aColumns );
+                    $_aRowsSets[ $_sColumns ] = isset( $_aRowsSets[ $_sColumns ] ) ? $_aRowsSets[ $_sColumns ] : array();
+                    $_aRowsSets[ $_sColumns ][ $_sKey ] = $_aRow;
+
                 }
-                return $_aRows;
+                return $_aRowsSets;
 
             }
 
