@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.9
+Stable tag:         4.6.10
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.10 - 07/28/2021 =
+- Fixed a bug that the category list became unable to select after failing loading categories in the category selection page, which started in 4.6.4.
+- Fixed a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.
+- Fixed an issue that clicking on an action link from the paged view of custom post type post listing table resulted in landing on the initial view.
 
 = 4.6.9 - 07/27/2021 =
 - Optimized the method to retrieve product ratings and prices for some locales.
