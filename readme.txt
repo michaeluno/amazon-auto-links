@@ -329,7 +329,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.6.10 - 07/28/2021 =
-- Fixed a bug that the category list became unable to select after failing to load categories in the category selection page, which started in 4.6.4.
+- Fixed a bug that the category list became unable to select after failing to load categories in the category selection page, which started in v4.6.4.
 - Fixed a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.
 - Fixed an issue that clicking on an action link from the paged view of custom post type post listing table resulted in landing on the initial view.
 - Fixed a bug that the wrong query parameters for language and currency were set for category and embed units if PA-API keys were not set for the locale.
