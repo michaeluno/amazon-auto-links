@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.8 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.10 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -171,6 +171,7 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Debug_UnitOutput.php", 
     "AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
+    "AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo.php", 
     "AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php", 
     "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 

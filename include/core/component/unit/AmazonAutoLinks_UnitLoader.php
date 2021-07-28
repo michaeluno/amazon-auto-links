@@ -93,6 +93,8 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
 
             new AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI; // [4.6.9]
 
+            new AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode; // [4.6.11]
+
             $this->___loadDebugEvents(); // [4.3.5]
 
         }

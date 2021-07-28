@@ -28,6 +28,8 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                     1 => __( 'Show errors.', 'amazon-auto-links' ),
                     2 => __( 'Show errors as an HTML comment.', 'amazon-auto-links' ),
                 ),
+                'description'       => __( 'Determines how you like to display unit errors.', 'amazon-auto-links' )
+                    . ' ' . __( 'For logged-in users who have the privilege to edit units, unit errors will be displayed regardless of this option', 'amazon-auto-links' ),
                 'default'           => 2,
             ),
             array(
