@@ -123,9 +123,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                     }
 
                     // Multiple SQL queries are necessary per combinations of columns
-                    $_aColumns = array_keys( $_aRow );
-                    sort( $_aColumns );
-                    $_sColumns = implode( '|', $_aColumns );
+                    $_aColumnNames = array_keys( $_aRow );
+                    sort( $_aColumnNames );
+                    $_sColumns = implode( '|', $_aColumnNames );
                     $_aRowsSets[ $_sColumns ] = isset( $_aRowsSets[ $_sColumns ] ) ? $_aRowsSets[ $_sColumns ] : array();
                     $_aRowsSets[ $_sColumns ][ $_sKey ] = $_aRow;
 
