@@ -62,37 +62,39 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         /**
          * @param array $aAllItems
          * The structure:
-            [B08MF4NHXZ|IT|EUR|it_IT] => Array (
-                [formatted_rating] => Array(
-                    [item_format_tags] => (string, len`gth: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
-                    [call_id] => (string, length: 13) 60fecdb30833c
-                    [cache_duration] => (string, length: 5) 86400
-                    [attempt] => (string, length: 1) 1
-                    [id] => (string, length: 3) 693
-                    [context] => (string, length: 16) formatted_rating
-                    [tag] => (string, length: 15) amazonwidget-21
-                    [asin] => (string, length: 10) B08MF4NHXZ
-                    [language] => (string, length: 5) it_IT
-                    [currency] => (string, length: 3) EUR
-                    [type] => (string, length: 6) search
-                    [locale] => (string, length: 2) IT`
-                )
-            )
-            [B08FHT7ZVH|IT|EUR|it_IT] => Array(
-                [formatted_rating] => Array(
-                    [item_format_tags] => (string, length: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
-                    [call_id] => (string, length: 13) 60fecdb30833c
-                    [cache_duration] => (string, length: 5) 86400
-                    [attempt] => (string, length: 1) 1
-                    [id] => (string, length: 3) 693
-                    [context] => (string, length: 16) formatted_rating
-                    [tag] => (string, length: 15) amazonwidget-21
-                    [asin] => (string, length: 10) B08FHT7ZVH
-                    [language] => (string, length: 5) it_IT
-                    [currency] => (string, length: 3) EUR
-                    [type] => (string, length: 6) search
-                    [locale] => (string, length: 2) IT
-                )
+         * Array(
+         *     [B08MF4NHXZ|IT|EUR|it_IT] => Array(
+         *         [formatted_rating] => Array(
+         *             [item_format_tags] => (string, len`gth: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+         *             [call_id] => (string, length: 13) 60fecdb30833c
+         *             [cache_duration] => (string, length: 5) 86400
+         *             [attempt] => (string, length: 1) 1
+         *             [id] => (string, length: 3) 693
+         *             [context] => (string, length: 16) formatted_rating
+         *             [tag] => (string, length: 15) amazonwidget-21
+         *             [asin] => (string, length: 10) B08MF4NHXZ
+         *             [language] => (string, length: 5) it_IT
+         *             [currency] => (string, length: 3) EUR
+         *             [type] => (string, length: 6) search
+         *             [locale] => (string, length: 2) IT`
+         *          )
+         *      ),
+         *     [B08FHT7ZVH|IT|EUR|it_IT] => Array(
+         *         [formatted_rating] => Array(
+         *             [item_format_tags] => (string, length: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+         *             [call_id] => (string, length: 13) 60fecdb30833c
+         *             [cache_duration] => (string, length: 5) 86400
+         *             [attempt] => (string, length: 1) 1
+         *             [id] => (string, length: 3) 693
+         *             [context] => (string, length: 16) formatted_rating
+         *             [tag] => (string, length: 15) amazonwidget-21
+         *             [asin] => (string, length: 10) B08FHT7ZVH
+         *             [language] => (string, length: 5) it_IT
+         *             [currency] => (string, length: 3) EUR
+         *             [type] => (string, length: 6) search
+         *             [locale] => (string, length: 2) IT
+         *         ),
+         *     ),
          * )
          * @since  4.6.9
          * @remark The Ad Widget API does not support currency and language.
