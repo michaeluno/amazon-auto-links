@@ -172,6 +172,7 @@ return array(
     "AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement.php", 
     "AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors.php", 
     "AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode.php", 
+    "AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductRatings" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductRatings.php", 
     "AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo.php", 
     "AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning.php", 
     "AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/log/AmazonAutoLinks_Unit_Event_Action_PAAPIRequestCount.php", 
