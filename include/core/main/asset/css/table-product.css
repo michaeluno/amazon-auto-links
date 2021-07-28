@@ -1,6 +1,6 @@
 /*
  * @name Products table
- * @version 1.0.1
+ * @version 1.0.2
  */
 .float-right {
     float: right;
@@ -25,6 +25,11 @@
 
 table.product-details {
     margin-top: 2em;
+    margin-bottom: 2em;
+}
+table.product-details table.product-details {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .small-icon {
     font-size: 1em;
@@ -32,6 +37,9 @@ table.product-details {
 
 .column-key {
     width: 26%;
+}
+table.product-details table.product-details .column-key {
+    width: 12%;
 }
 
 .centered {
