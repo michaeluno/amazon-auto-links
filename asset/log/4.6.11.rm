@@ -1,1 +1,2 @@
-- Tweaked the behavior of showing unit errors to show them when the user is logged-in and can edit units regardless of the `Show Errors` unit option.  
+- Tweaked the behavior of showing unit errors to show them when the user is logged-in and can edit units regardless of the `Show Errors` unit option.
+- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.  

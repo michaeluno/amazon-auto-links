@@ -175,6 +175,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
                         'rating'             => ( integer ) ( ( ( double ) $aProduct[ 'Rating' ] ) * 10 ),
                         'number_of_reviews'  => ( integer ) $aProduct[ 'TotalReviews' ],
+                        // These are deprecated columns but if left unset, a background rating update task will be kept triggering. So set an empty string.
+                        'rating_image_url'   => '',
+                        'rating_html'        => '',
                     );
 
                     // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
