@@ -82,7 +82,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Event_Filter_ProductLinks;    // [4.3.0]
 
             new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // [4.3.0]
-            new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // [4.3.0]
+            new AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo; // [4.3.0]
 
             new AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors; // [4.3.5]
             new AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning; // [4.4.0]
