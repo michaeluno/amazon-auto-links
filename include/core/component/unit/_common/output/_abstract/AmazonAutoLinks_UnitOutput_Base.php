@@ -306,6 +306,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
             $_sErrorMessage  = $_oException->getMessage();
             $_iShowErrorMode = ( integer ) $this->oUnitOption->get( 'show_errors' );
+            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $this->oUnitOption->get() );
             $_sContent       = $this->___getErrorOutput( $_iShowErrorMode, $_sErrorMessage );
 
             if ( ! $_bHasPreviousError && $_iUnitID ) {

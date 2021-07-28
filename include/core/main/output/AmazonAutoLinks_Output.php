@@ -180,17 +180,19 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
                      */
                     return trim( apply_filters_ref_array( 'aal_filter_unit_output_' . $sUnitType, array( '', $aUnitOptions, &$_oUnitOption ) ) );
                 }
-                return apply_filters( 'aal_filter_unit_output_unknown', $this->___getUnknownUnitTypeMessage( $sUnitType ), $aUnitOptions );
+                return apply_filters( 'aal_filter_unit_output_unknown', $this->___getUnknownUnitTypeMessage( $sUnitType, $aUnitOptions ), $aUnitOptions );
 
             }
                 /**
                  * @param  string $sUnitType
+                 * @param  array  $aUnitOptions
                  * @return string
                  * @since  4.3.5
                  */
-                private function ___getUnknownUnitTypeMessage( $sUnitType ) {
+                private function ___getUnknownUnitTypeMessage( $sUnitType, array $aUnitOptions ) {
                     $_oOption    = AmazonAutoLinks_Option::getInstance();
                     $_iShowError = ( integer ) $_oOption->get( 'unit_default', 'show_errors' ); // 0: do not show, 1: show, 2: show as HTML comment
+                    $_iShowError = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowError, $aUnitOptions );
                     if ( ! $_iShowError ) {
                         return '';
                     }
