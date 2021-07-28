@@ -100,6 +100,10 @@ class AmazonAutoLinks_Unit_Event_Action_CheckTasks extends AmazonAutoLinks_Event
                     $_oTaskTable->deleteRows( $_aTask[ 'name' ] );
                     continue;
                 }
+                if ( is_string( $_aTask[ 'arguments' ] ) && '__delete' === $_aTask[ 'arguments' ] ) {
+                    $_oTaskTable->deleteRows( $_aTask[ 'name' ] );
+                    continue;
+                }
                 $_aParams = $_aTask[ 'arguments' ];
                 array_unshift($_aParams, $_aTask[ 'action' ] );
                 call_user_func_array( 'do_action', $_aParams );
