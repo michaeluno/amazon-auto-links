@@ -328,6 +328,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.6.11 - 07/29/2021 =
+- Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
+- Tweaked a UI visual element.
+- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.
+- Optimized the method to retrieve product ratings and prices for some locales.
+
 = 4.6.10 - 07/28/2021 =
 - Fixed a bug that the category list became unable to select after failing to load categories in the category selection page, which started in v4.6.4.
 - Fixed a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.

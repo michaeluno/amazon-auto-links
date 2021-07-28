@@ -43,9 +43,9 @@
 - [Feature] Add a new Search unit type that works with the Ad Widget API (the supported locales will be limited).
     - In this case, the existing menu "Add Unit by Search" need to be renamed. Maybe, "Add Unit by PA-API". 
 - [Feature] Add the ability to create posts from units.
-    - The ability of automating it will not be includeed as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
+    - The ability of automating it will not be included as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
 - [Feature] Add an opt-in component that handles user specific options such as asking allow to load image links in the setting pages from the developer's site. 
-- [Feature] Add a Gutenberg block to create and compose links.
+- [Feature] Add a Gutenberg block to create and compose product links.
 - [Feature] Add a Gutenberg block to select units.
 - [4.7.0][Feature] Add a UI to search and display http request data.  
 - [4.7.0][Feature] Add a random sort option for the Product Search units.  
