@@ -120,7 +120,9 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 ) + reset( $_aElements ); // the first item
             }
             foreach( $_aItemsByLocale as $_sLocale => $_aItems ) {
-                do_action( 'aal_action_update_products_with_ad_widget_api', $_sLocale, $_aItems );
+                $_aFirstItem     = reset( $_aItems );
+                $_iCacheDuration = $this->getElement( $_aFirstItem, array( 'cache_duration' ) );
+                do_action( 'aal_action_update_products_with_ad_widget_api', $_sLocale, $_aItems, $_iCacheDuration, false );
             }
         }
         /**

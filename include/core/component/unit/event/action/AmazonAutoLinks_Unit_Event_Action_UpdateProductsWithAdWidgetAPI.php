@@ -19,13 +19,13 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
      * @since  4.6.9
      */
     public function __construct() {
-        add_action( 'aal_action_update_products_with_ad_widget_api', array( $this, 'replyToUpdateProducts' ), 10, 2 );
+        add_action( 'aal_action_update_products_with_ad_widget_api', array( $this, 'replyToUpdateProducts' ), 10, 4 );
     }
 
     /**
      * @since 4.6.9
      */
-    public function replyToUpdateProducts( $sLocaleSlug, $aItems ) {
+    public function replyToUpdateProducts( $sLocaleSlug, $aItems, $iCacheDuration, $bForceRenew ) {
 
         // Should proceed?
         $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
@@ -33,22 +33,25 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
             return;
         }
 
-        $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, array_keys( $aItems ) );
+        $_oOption           = AmazonAutoLinks_Option::getInstance();
+        $iCacheDuration     = isset( $iCacheDuration ) ? $iCacheDuration : ( integer ) $_oOption->get( 'unit_default', 'cache_duration' );
+        $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, array_keys( $aItems ), $iCacheDuration, $bForceRenew );
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
 
         // do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS_ADWIDGETAPI', "{$sLocaleSlug}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
-        $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug );
+        $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug, $iCacheDuration );
 
     }
         /**
-         * @param array  $aProducts     The API response products
-         * @param array  $aItems        The passed item array to the action hook, holding the currency, language, ASIN info.
-         * @param string $sLocaleSlug
+         * @param array   $aProducts     The API response products
+         * @param array   $aItems        The passed item array to the action hook, holding the currency, language, ASIN info.
+         * @param string  $sLocaleSlug
+         * @param integer $iCacheDuration
          * @since 4.6.9
          */
-        private function ___setProductsIntoDatabase( array $aProducts, array $aItems, $sLocaleSlug ) {
+        private function ___setProductsIntoDatabase( array $aProducts, array $aItems, $sLocaleSlug, $iCacheDuration ) {
             $_aStoredRows = $this->___getStoredRows( $aItems, $sLocaleSlug );
-            $_aRowsSets   = $this->___getRowsSets( $aProducts, $aItems, $sLocaleSlug, $_aStoredRows );
+            $_aRowsSets   = $this->___getRowsSets( $aProducts, $aItems, $sLocaleSlug, $_aStoredRows, $iCacheDuration );
             foreach( $_aRowsSets as $_aRowsSet )
             $this->setProductDatabaseRows( $_aRowsSet );
         }
@@ -72,17 +75,16 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
              * @param  array   $aItems
              * @param  string  $sLocaleSlug
              * @param  array   $aStoredRows
+             * @param  integer $iCacheDuration
              * @since  4.6.9
              * @return array
              * @remark The column names must much across al rows to properly insert into the table without errors.
              */
-            private function ___getRowsSets( array $aProducts, array $aItems, $sLocaleSlug, array $aStoredRows ) {
+            private function ___getRowsSets( array $aProducts, array $aItems, $sLocaleSlug, array $aStoredRows, $iCacheDuration ) {
 
                 $_oLocale           = new AmazonAutoLinks_PAAPI50_Locale( $sLocaleSlug );
                 $_sDefaultCurrency  = $_oLocale->getDefaultCurrency();
                 $_sDefaultLanguage  = $_oLocale->getDefaultLanguage();
-                $_oOption           = AmazonAutoLinks_Option::getInstance();
-                $_iCacheDuration    = $_oOption->get( 'unit_default', 'cache_duration' );
 
                 $_aRowsSets    = array(
                     'default' => array(),
@@ -95,7 +97,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                     $_aItem           = $aItems[ $_sASIN ];
                     $_sKey            = "{$_sASIN}|{$sLocaleSlug}|{$_sDefaultCurrency}|{$_sDefaultLanguage}";
                     $_aStoredRow      = $this->getElementAsArray( $aStoredRows, array( $_sKey ) );
-                    $_aRow            = $this->___getRowFormatted( $_aProduct, $_aStoredRow, $_iCacheDuration, $_aProduct[ 'ASIN' ], $sLocaleSlug, $_sDefaultCurrency, $_sDefaultLanguage );
+                    $_aRow            = $this->___getRowFormatted( $_aProduct, $_aStoredRow, $iCacheDuration, $_aProduct[ 'ASIN' ], $sLocaleSlug, $_sDefaultCurrency, $_sDefaultLanguage );
                     $_aRowsSets[ 'default' ][ $_sKey ] = $_aRow;
 
                     // If the user has different language and currency preference than the default one,
@@ -198,16 +200,19 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                 }
 
         /**
-         * @param  string $sLocale
-         * @param  array $aASINs
+         * @param  string  $sLocale
+         * @param  array   $aASINs
+         * @param  integer $iCacheDuration
+         * @param  boolean $bForceRenew
          * @return array
          * @since  4.6.9
          */
-        private function ___getAPIResponse( $sLocale, array $aASINs ) {
+        private function ___getAPIResponse( $sLocale, array $aASINs, $iCacheDuration, $bForceRenew ) {
             sort($aASINs ); // for caching. The request URL should be the same to find its cache.
-            $_oOption           = AmazonAutoLinks_Option::getInstance();
-            $_iCacheDuration    = $_oOption->get( 'unit_default', 'cache_duration' );
-            $_oAdWidgetAPI      = new AmazonAutoLinks_AdWidgetAPI_Search( $sLocale, $_iCacheDuration );
+            $_aArguments        = array(
+                'renew_cache' => $bForceRenew
+            );
+            $_oAdWidgetAPI      = new AmazonAutoLinks_AdWidgetAPI_Search( $sLocale, $iCacheDuration, $_aArguments );
             return $_oAdWidgetAPI->get( $aASINs );
         }
 
