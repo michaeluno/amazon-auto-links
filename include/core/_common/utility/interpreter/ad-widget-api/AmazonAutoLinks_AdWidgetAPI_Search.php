@@ -46,19 +46,6 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
     }
 
     /**
-     * @param  string $sEndpoint
-     * @return string
-     * @since  4.6.9
-     */
-    public function getResponse( $sEndpoint ) {
-        $_aArguments = array(
-            'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ],
-        );
-        $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
-        return $_oHTTP->getBody();
-    }
-
-    /**
      * @param array|string  $asKeywords
      * @param array         $aPayload       API request parameters.
      * @since 4.6.9

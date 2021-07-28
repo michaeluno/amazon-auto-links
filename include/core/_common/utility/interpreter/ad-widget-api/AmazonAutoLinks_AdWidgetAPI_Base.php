@@ -11,7 +11,7 @@
 /**
  * Performs Ad Widget API Search requests.
  *
- * @sicne       4.6.9
+ * @since       4.6.11
  */
 class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
 
@@ -26,11 +26,31 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
     public $iCacheDuration = 86400;
 
     /**
+     * @var array
+     * @since 4.6.11
+     */
+    public $aHTTPArguments = array();
+
+    /**
      * Sets up properties and hooks.
      */
-    public function __construct( $sLocale, $iCacheDuration=86400 ) {
-        $this->oLocale = new AmazonAutoLinks_Locale( $sLocale );
+    public function __construct( $sLocale, $iCacheDuration=86400, array $aHTTPArguments=array() ) {
+        $this->oLocale        = new AmazonAutoLinks_Locale( $sLocale );
         $this->iCacheDuration = $iCacheDuration;
+        $this->aHTTPArguments = $aHTTPArguments;
+    }
+
+    /**
+     * @param  string $sEndpoint
+     * @return string
+     * @since  4.6.9
+     */
+    public function getResponse( $sEndpoint ) {
+        $_aArguments = $this->aHTTPArguments + array(
+            'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ],
+        );
+        $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
+        return $_oHTTP->getBody();
     }
 
     /**
