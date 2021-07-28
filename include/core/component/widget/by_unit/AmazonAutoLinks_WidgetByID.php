@@ -204,8 +204,6 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
                 array_filter( $aFormData[ 'available_page_types' ] ) 
             );
 
-            // $aFormData[ 'show_errors' ] = 0;
-            
             return $aFormData;
             
         }        

@@ -340,8 +340,6 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 array_filter( $aFormData[ 'available_page_types' ] ) 
             );
 
-            // $aFormData[ 'show_errors' ] = 0;
-
             // 4.2.7 - the widget form does not support currency and language.
             // For cases that the user have saved the form before v4.2.4 may have incorrect values of them.
             // Let the unit option class to format those arguments.
