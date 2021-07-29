@@ -48,7 +48,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview exte
         return array(
             'unit_preview' => apply_filters(
                 'aal_filter_category_select_unit_preview', $_sUnitPreview, $aPost, $_aUnitOptions
-            ),
+            ) . apply_filters( 'aal_filter_svg_definitions', '' ),
         );
 
     }
