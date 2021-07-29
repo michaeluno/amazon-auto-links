@@ -48,18 +48,6 @@ $_sHeight = $_sHeight
 $_sInlineStyle = $_sWidth . $_sHeight;
 
 ?>
-<?php if ( ! isset( $aProducts ) || empty( $aProducts ) ) : ?>
-    <div><p><?php _e( 'No products found.', 'amazon-auto-links' ); ?></p></div>
-    <?php return true; ?>
-<?php endif; ?>
-<?php if ( isset( $aProducts[ 'Error' ][ 'Message' ], $aProducts[ 'Error' ][ 'Code' ] ) ) : ?>
-    <div class="error">
-        <p>
-            <?php echo AmazonAutoLinks_Registry::NAME . ': ' . $aProducts[ 'Error' ][ 'Code' ] . ': '. $aProducts[ 'Error' ][ 'Message' ]; ?>
-        </p>
-    </div>
-<?php return true; ?>
-<?php endif; ?>
 
 <div class="<?php echo $sClassAttributes_ProductsContainer; ?>" style="<?php echo $_sInlineStyle; ?>">
 <?php foreach( $aProducts as $_aProduct ) : ?>
