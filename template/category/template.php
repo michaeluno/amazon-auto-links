@@ -25,8 +25,9 @@ $_aStructure_Product = array(
     'thumbnail_url'     => '',    
 );
   
-$sClassAttributes_ProductsContainer = 'amazon-products-container' . ' amazon-unit-' . $aArguments['id'];
-$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] ) ? '' : ' amazon-label-' . implode( ' amazon-label-', $aArguments['_labels'] );        
+$sClassAttributes_ProductsContainer = 'amazon-products-container' . ' amazon-unit-' . $aArguments[ 'id' ];
+$sClassAttributes_ProductsContainer .= empty( $aArguments['_labels'] ) ? '' : ' amazon-label-' . implode( ' amazon-label-', $aArguments[ '_labels' ] );
+$sClassAttributes_ProductsContainer .= empty( $aArguments[ 'unit_type' ] ) ? '' : ' unit-type-' . $aArguments[ 'unit_type' ];
 
 $_sWidth  = AmazonAutoLinks_PluginUtility::getDegree( 'width', $aArguments );
 $_sWidth  = $_sWidth
@@ -44,10 +45,10 @@ $_sInlineStyle = $_sWidth . $_sHeight;
     <?php return true; ?>
 <?php endif; ?>    
 
-<?php if ( isset( $aProducts['Error']['Message'], $aProducts['Error']['Code'] ) ) : ?>    
+<?php if ( isset( $aProducts[ 'Error' ][ 'Message' ], $aProducts[ 'Error' ][ 'Code' ] ) ) : ?>
     <div class="error">
         <p>
-            <?php echo AmazonAutoLinks_Registry::NAME . ': ' . $aProducts['Error']['Code'] . ': '. $aProducts['Error']['Message']; ?>
+            <?php echo AmazonAutoLinks_Registry::NAME . ': ' . $aProducts[ 'Error' ][ 'Code' ] . ': '. $aProducts[ 'Error' ][ 'Message' ]; ?>
         </p>
     </div>
 <?php return true; ?>

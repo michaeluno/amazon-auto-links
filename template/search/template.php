@@ -34,9 +34,8 @@ $_aStructure_Product = array(
 ); 
 
 $sClassAttributes_ProductsContainer = 'amazon-products-container-search' . ' amazon-unit-' . $aArguments[ 'id' ];
-$sClassAttributes_ProductsContainer .= empty( $aArguments[ '_labels' ] )
-    ? ''
-    : ' amazon-label-' . implode( ' amazon-label-', $aArguments[ '_labels' ] );
+$sClassAttributes_ProductsContainer .= empty( $aArguments[ '_labels' ] ) ? '' : ' amazon-label-' . implode( ' amazon-label-', $aArguments[ '_labels' ] );
+$sClassAttributes_ProductsContainer .= empty( $aArguments[ 'unit_type' ] ) ? '' : ' unit-type-' . $aArguments[ 'unit_type' ];
 
 $_sWidth  = AmazonAutoLinks_PluginUtility::getDegree( 'width', $aArguments );
 $_sWidth  = $_sWidth
