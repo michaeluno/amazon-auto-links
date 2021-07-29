@@ -1,0 +1,1 @@
+- Fix a bug that RSS and JSON feeds became invalid for logged-in users with the privilege of editing units, started in 4.6.11. 
