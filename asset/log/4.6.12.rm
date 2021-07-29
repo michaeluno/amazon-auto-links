@@ -1,1 +1,2 @@
-- Fix a bug that RSS and JSON feeds became invalid for logged-in users with the privilege of editing units, started in 4.6.11. 
+- Fixed a bug that rating stars were not displayed with the `Load with JavaScript` unit option enabled, started in 4.6.0.
+- Fixed a bug that RSS and JSON feeds became invalid for logged-in users with the privilege of editing units, started in 4.6.11. 
