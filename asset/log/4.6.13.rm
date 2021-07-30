@@ -1,1 +1,2 @@
+- Fixed an issue that there were some remaining data in cleaning plugin data upon plugin uninstall. 
 - Fixed an issue that the layout of the `List` template for sites with the Japanese language was broken.  

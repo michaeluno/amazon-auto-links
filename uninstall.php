@@ -70,9 +70,15 @@ if ( ! $_bDelete ) {
     return;
 }
 
-// User Meta
+// 4. User Meta
 foreach( AmazonAutoLinks_Registry::$aUserMeta as $_sUserMetaKey ) {
-    delete_user_meta( get_current_user_id(), $_sUserMetaKey );
+    delete_metadata(
+        'user',        // the meta type
+        0,              // this doesn't actually matter in this call
+        $_sUserMetaKey,         // the meta key to be removed everywhere
+        '',            // this also doesn't actually matter in this call
+        true             // tells the function "yes, please remove them all"
+    );
 }
 
 array_walk_recursive( 
@@ -80,12 +86,12 @@ array_walk_recursive(
     'delete_option'   // function name
 );
 
-// 4. Delete tables
+// 5. Delete tables
 new AmazonAutoLinks_DatabaseTableInstall(
     false   // uninstall
 );
 
-// 5. [3.6.6+] Delete Custom Post Type Posts
+// 6. [3.6.6+] Delete Custom Post Type Posts
 foreach( AmazonAutoLinks_Registry::$aPostTypes as $_sKey => $_sPostTypeSlug ) {
     _deleteAmazonAutoLinksPosts( $_sPostTypeSlug );
 }
