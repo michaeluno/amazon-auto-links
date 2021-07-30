@@ -63,6 +63,11 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         if ( ! $_oOption->isDebug() && ! $this->isDebugMode() ) {
             return;
         }
+        // Some option values contain sensitive information so avoid displaying to users below the administrator privilege.
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
         echo "<div class='debug'>"
             . "<h3 style='display:block; clear:both;'>"
                 . 'Debug Info'
