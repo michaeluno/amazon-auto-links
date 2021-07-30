@@ -1,3 +1,4 @@
+- Tweaked the `List` template regarding a responsive width.
 - Optimized the translation items by reducing some of them.
 - Fixed an issue that there were some remaining data in cleaning plugin data upon plugin uninstall. 
-- Fixed an issue that the layout of the `List` template for sites with the Japanese language was broken.  
+- Fixed an issue that the layout of the L`ist` template for sites with the Japanese language was broken.  

@@ -445,7 +445,8 @@
 }
 
 /* Responsive */
-@media only screen and (max-width: 560px) {
+/* [4.6.13] Changed the max-width to 520 from 560 to be compatible with the embed view of the Twenty Seventeen theme */
+@media only screen and (max-width: 520px) {
   .amazon-products-container-list .amazon-auto-links-product-image {
     width: 100%;
     margin-bottom: 1em;
