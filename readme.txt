@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.11
+Stable tag:         4.6.12
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.12 - 07/30/2021 =
+- Fixed a bug that rating stars were not displayed with the `Load with JavaScript` unit option enabled, started in 4.6.0.
+- Fixed a bug that RSS and JSON feeds became invalid for logged-in users with the privilege of editing units, started in 4.6.11.
 
 = 4.6.11 - 07/29/2021 =
 - Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
