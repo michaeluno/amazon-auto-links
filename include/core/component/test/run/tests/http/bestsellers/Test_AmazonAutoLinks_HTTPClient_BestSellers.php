@@ -80,7 +80,7 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
          * @param $_sURL
          * @param $_sLocale
          */
-        protected function _testUnblocked( $_sURL, $_sLocale ) {
+        protected function _testUnblocked( $_sURL, $_sLocale, $bHTMLDocument=true, $bCheckCookie=true ) {
 
             $_oLocale           = new AmazonAutoLinks_Locale( $_sLocale );
             $this->_output( 'URL: ' . $_sURL );
@@ -129,13 +129,24 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
             $_bResult = $this->_assertNotWPError( $_aoResponse, "{$_sLocale}: If blocked by Captcha, WP_Error will be returned." );
             if ( ! $_bResult ) {
                 $this->_outputDetails( 'Cookies', $this->getCookiesToParse( $_aCookies ) );
-                $this->_output( 'HTML RAW Body' );
-                $this->_output( $this->___getHTMLBody( wp_remote_retrieve_body( $_oHTTP->getRawResponse() ) ) );
+                $this->_output( 'HTML Raw Body' );
+                $_sBody = wp_remote_retrieve_body( $_oHTTP->getRawResponse() );
+                $this->_output(
+                    $bHTMLDocument
+                        ? $this->___getHTMLBody( $_sBody )
+                        : $_sBody
+                );
                 return;
             }
             $this->_assertPrefix( '2', $_oHTTP->getStatusCode(), 'The HTTP status code must begin with 2 such as 200.', $_oHTTP->getStatusMessage() );
-            $this->_assertFalse( $this->isEmpty( $_oHTTP->getCookiesParsable() ),"{$_sLocale}: If blocked, cookies are empty." );
-            $this->_assertNotEmpty( $this->getASINs( $_oHTTP->getBody() ), "{$_sLocale}: Find ASINs in the page." );
+            if ( $bCheckCookie ) {
+                $this->_assertFalse( $this->isEmpty( $_oHTTP->getCookiesParsable() ),"{$_sLocale}: If blocked, cookies are empty." );
+            }
+            $_sBody = $_oHTTP->getBody();
+            $this->_assertNotEmpty( $this->getASINs( $_sBody ), "{$_sLocale}: Find ASINs in the page." );
+            if ( ! $bHTMLDocument ) {
+                $this->_outputDetails( 'HTTP Body', $_sBody );
+            }
 
         }
             /**

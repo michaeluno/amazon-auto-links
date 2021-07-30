@@ -101,13 +101,12 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         $_sBreadcrumb       = $_oBreadcrumb->get();
         return array(
             'breadcrumb'        => $_sBreadcrumb,
-            'category_list'     => $_sCategoryList,
+            'category_list'     => $_sCategoryList . "<!-- Current Page: {$_sCategoryListURL} -->",
             'selected_url'      => $_sCategoryListURL,
             'checkbox_added'    => AmazonAutoLinks_Unit_Utility_category::getCategoryCheckbox( $_sCategoryListURL, $_sBreadcrumb, 'added' ),
             'checkbox_excluded' => AmazonAutoLinks_Unit_Utility_category::getCategoryCheckbox( $_sCategoryListURL, $_sBreadcrumb, 'excluded' ),
             'category_preview'  => $_sUnitOutput,
         );
-
     }
 
         /**

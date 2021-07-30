@@ -8,7 +8,7 @@
  */
 
 /**
- * The Dutch locale class.
+ * The Netherlands locale class.
  *
  * @since       4.3.4
  */

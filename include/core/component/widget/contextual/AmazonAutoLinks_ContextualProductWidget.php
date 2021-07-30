@@ -279,7 +279,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
     public function content( $sContent, $aArguments, $aFormData ) {
 
         $aFormData = $this->_getFormattedFormData( $aFormData );        
-        if ( 
+        if (
+            ! AmazonAutoLinks_Widget_Utility::isInWidgetPreview()
+            &&
             ! in_array( 
                 AmazonAutoLinks_PluginUtility::getCurrentPageType(), 
                 $aFormData[ 'available_page_types' ] 
@@ -338,8 +340,6 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                 array_filter( $aFormData[ 'available_page_types' ] ) 
             );
 
-            // $aFormData[ 'show_errors' ] = 0;
-
             // 4.2.7 - the widget form does not support currency and language.
             // For cases that the user have saved the form before v4.2.4 may have incorrect values of them.
             // Let the unit option class to format those arguments.
@@ -360,6 +360,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
          */
         private function _getOutput( $aFormData ) {
             $aFormData[ 'unit_type' ] = 'contextual';
+            // [4.6.8] Search units have the `Title` argument and this causes a conflict in WordPress 5.8
+            unset( $aFormData[ 'title' ] );
             return AmazonAutoLinks( $aFormData, false );
         }
        

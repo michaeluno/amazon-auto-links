@@ -34,7 +34,12 @@ class AmazonAutoLinks_UnitPostMetaBox_ViewLink extends AmazonAutoLinks_UnitPostM
         ?>
         <div style="padding: 0.8em 0 1.5em; ">
             <div style="text-align: center;">
-                <p style="font-size: 1.2em; margin-bottom: 1.5em;"><a style="text-decoration: none;" target="_blank" href="<?php echo $_sViewLink; ?>"><?php _e( 'View Unit', 'amazon-auto-links' ); ?></a></p>
+                <p style="font-size: 1.2em; margin-bottom: 1.5em;">
+                    <a style="text-decoration: none;" target="_blank" href="<?php echo $_sViewLink; ?>">
+                        <?php _e( 'View Unit', 'amazon-auto-links' ); ?>
+                        &nbsp;<span class='dashicons dashicons-external' style="vertical-align: text-bottom;"></span>
+                    </a>
+                </p>
             </div>
         </div>
         <?php

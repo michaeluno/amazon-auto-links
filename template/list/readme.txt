@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.13 =
+- Fixed a bug that the vertical scrollbar appears sometimes in embedded views.
+
 = 1.2.12 =
 - Tweaked margins of prices.
 - Tweaked the rating star vertical alignment in `embed` units.

@@ -30,6 +30,7 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_Event___Feed_Bas
 
         // the priority of the credit comment insertion callback is `100` so it must be larger than that.
         add_filter( 'aal_filter_unit_output', array( $this, 'replyToRemoveCredit' ), PHP_INT_MAX  - 100 );
+        add_filter( 'aal_filter_unit_show_error_mode', '__return_zero' );
 
         $_aArguments = $_GET;
         $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';

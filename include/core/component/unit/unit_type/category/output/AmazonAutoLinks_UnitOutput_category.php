@@ -506,11 +506,12 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     }
 
                     // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
+                    $_bPAAPIKeysSet = $this->oOption->isPAAPIKeySet( $_sLocale );
                     $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
                         $_aProduct[ 'product_url' ],
                         $_aProduct[ 'ASIN' ],
-                        $this->oUnitOption->get( 'language' ),
-                        $this->oUnitOption->get( 'preferred_currency' )
+                        $_bPAAPIKeysSet ? $this->oUnitOption->get( 'language' ) : '',
+                        $_bPAAPIKeysSet ? $this->oUnitOption->get( 'preferred_currency' ) : ''
                     );
 
                     // Title

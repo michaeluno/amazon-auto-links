@@ -188,12 +188,14 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
          */
         private function ___reload() {
 
-            $_sURLSendback = add_query_arg(
-                array(
-                    'post_type' => $this->_oFactory->oProp->sPostType,
-                ),
-                admin_url( 'edit.php' )
+            $_aArguments   = array(
+                'post_type' => $this->_oFactory->oProp->sPostType,
             );
+            $_iPaged = $this->getElement( $_GET, 'paged' );
+            if ( $_iPaged ) {
+                $_aArguments[ 'paged' ] = $_iPaged;
+            }
+            $_sURLSendback = add_query_arg( $_aArguments, admin_url( 'edit.php' ) );
             wp_safe_redirect( $_sURLSendback );
             exit();
 

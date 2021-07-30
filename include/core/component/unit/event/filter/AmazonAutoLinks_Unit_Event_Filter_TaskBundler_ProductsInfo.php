@@ -9,10 +9,11 @@
  */
 
 /**
- * Updates unit status via ajax calls.
+ * Bundles plugin tasks of `aal_action_api_get_products_info`.
  * @since   4.3.0
+ * @since   4.6.11  Renamed from `AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo`.
  */
-class AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @since 4.3.0

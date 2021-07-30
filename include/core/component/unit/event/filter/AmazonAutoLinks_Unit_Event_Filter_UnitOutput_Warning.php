@@ -40,6 +40,7 @@ class AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning extends AmazonAutoLin
                 return '';
             }
             $_iShowErrorMode = ( integer ) $this->getElement( $aUnitOptions,array( 'show_errors' ), 1 );
+            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $aUnitOptions );
             if ( ! $_iShowErrorMode ) {
                 return '';
             }

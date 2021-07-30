@@ -16,6 +16,33 @@
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
+     * Sets rows to the aal_products table.
+     * @since 4.6.9
+     */
+    static public function setProductDatabaseRows( array $aRows ) {
+        $_sTableVersion = get_option( 'aal_products_version', '0' );
+        if ( ! $_sTableVersion ) {
+            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', 'The products cache table does not seem to be installed.', array(), true );
+            return;
+        }        
+        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $aRows ) . " row(s): ", array_keys( $aRows ) , current_filter(), '' );
+        if ( version_compare( $_sTableVersion, '1.4.0b01', '<' ) ) {
+            foreach( $aRows as $_sKey => $_aRow ) {
+                // {$_sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}
+                $_aKey          = explode( '|', $_sKey ) + array( null, null, null, null );
+                $_sASIN         = $_aKey[ 0 ];
+                $_sLocale       = $_aKey[ 1 ];
+                $_sCurrency     = $_aKey[ 2 ];
+                $_sLanguage     = $_aKey[ 3 ];
+                $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+                $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $_sLocale ), $_aRow, $_sCurrency, $_sLanguage );
+            }
+            return;
+        }
+        $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+        $_oProductTable->setRows( $aRows );
+    }
+    /**
      * @param  string $sHTML
      * @param  string $sDefaultString
      * @param  array  $aRemoveTags
@@ -277,14 +304,14 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     static public function getASINs( $sText ) {
         $sText = preg_replace(
             array(
-                '/[A-Z0-9]{11,}/',      // Remove strings like an ASIN but with more than 10 characters.
+                '/[A-Z0-9]{11,}/',     // Remove strings like an ASIN but with more than 10 characters.
                 '/qid\=[0-9]{10}/',    // Remove ones consisting of only numbers with heading `qid=`.
             ),
             '',
             $sText
         );
         $_biResult = preg_match_all(
-            '/[A-Z0-9]{10}/', // needle - [A-Z0-9]{10} is the ASIN
+            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9])/', // needle - [A-Z0-9]{10} is the ASIN
             $sText,           // subject
             $_aMatches        // match container
         );

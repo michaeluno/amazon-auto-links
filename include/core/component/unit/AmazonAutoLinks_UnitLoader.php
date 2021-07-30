@@ -82,7 +82,8 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Event_Filter_ProductLinks;    // [4.3.0]
 
             new AmazonAutoLinks_Unit_Event_Action_CheckTasks; // [4.3.0]
-            new AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo; // [4.3.0]
+            new AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo; // [4.3.0]
+            new AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductRatings; // [4.6.11]
 
             new AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors; // [4.3.5]
             new AmazonAutoLinks_Unit_Event_Filter_UnitOutput_Warning; // [4.4.0]
@@ -90,6 +91,10 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Unit_Event_Filter_NowRetrievingUpdaterElement; // [4.6.1]
 
             new AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks; // [4.6.4]
+
+            new AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI; // [4.6.9]
+
+            new AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode; // [4.6.11]
 
             $this->___loadDebugEvents(); // [4.3.5]
 

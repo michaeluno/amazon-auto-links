@@ -1,0 +1,4 @@
+- Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
+- Tweaked a UI visual element. 
+- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.
+- Optimized the method to retrieve product ratings and prices for some locales.

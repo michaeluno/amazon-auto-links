@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.12
+    Version:        1.2.13
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -393,6 +393,9 @@
 }
 
 /* For Embedded Pages - amazon-auto-links/embed */
+.wp-embed .amazon-products-container-list {
+    overflow-y: hidden;
+}
 .wp-embed .amazon-products-container-list .amazon-product-title {
     font-size: 1.36em;
     margin-top: 0;

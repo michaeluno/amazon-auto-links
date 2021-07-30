@@ -12,7 +12,7 @@
  *
  * @since       4.3.4
  */
-class AmazonAutoLinks_Locale_UK extends AmazonAutoLinks_Locale_Base {
+class AmazonAutoLinks_Locale_UK extends AmazonAutoLinks_Locale_EuropeanUnion {
 
     /**
      * The locale code.
@@ -54,6 +54,16 @@ class AmazonAutoLinks_Locale_UK extends AmazonAutoLinks_Locale_Base {
      */
     public function getLabel() {
         return $this->sSlug . ' - ' . __( 'United Kingdom', 'amazon-auto-links' );
+    }
+
+    /* Returns the ISO 3166 country code.
+     * Mostly the same as the slug. But the UK locale will be GB.
+     * @see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+     * @since  4.6.9
+     * @return string
+     */
+    public function getCountryCode() {
+        return 'GB';
     }
 
     /**

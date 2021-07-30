@@ -27,6 +27,25 @@ class AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_E
 
         $sASIN       = $sLocale = $sCurrency = $sLanguage = $iCacheDuration = $bForceRenew = null;
         $this->___setParameters( func_get_args(), $sASIN, $sLocale, $sCurrency, $sLanguage, $iCacheDuration, $bForceRenew );
+
+        // [4.6.9]
+        $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
+        if ( in_array( $sLocale, $_aAdWidgetLocales, true ) ) {
+            do_action(
+                'aal_action_update_products_with_ad_widget_api',
+                $sLocale,
+                array(
+                    $sASIN => array(
+                        'ASIN'     => $sASIN,       'asin'     => $sASIN,
+                        'locale'   => $sLocale,     'currency' => $sCurrency,   'language' => $sLanguage,
+                    )
+                ),
+                $iCacheDuration,
+                $bForceRenew
+            );
+            return;
+        }
+
         $_sURL       = $this->___getRatingWidgetPageURL( $sASIN, $sLocale );
         $_sHTML      = $this->___getWidgetPage( $_sURL, $iCacheDuration, $bForceRenew, $sLocale, $sLanguage );
         $_aRow       = $this->___getRowFormatted( $_sHTML, $iCacheDuration, $sASIN, $sLocale, $sCurrency, $sLanguage );

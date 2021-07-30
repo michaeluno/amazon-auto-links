@@ -125,4 +125,18 @@ class AmazonAutoLinks_Locales {
         return in_array( $sLocale, self::getLocales(), true );
     }
 
+    /**
+     * @since 4.6.9
+     * @return array Holding locale slugs that support the ad widget API.
+     */
+    static public function getLocalesWithAdWidgetAPISupport() {
+        $_aSupportedLocales = array();
+        foreach( self::getLocaleObjects() as $_oLocale ) {
+            if ( $_oLocale->sAdSystemServer ) {
+                $_aSupportedLocales[] = $_oLocale->sSlug;
+            }
+        }
+        return $_aSupportedLocales;
+    }
+
 }

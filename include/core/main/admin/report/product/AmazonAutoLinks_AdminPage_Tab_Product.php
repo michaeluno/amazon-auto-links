@@ -82,9 +82,17 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
                     if ( is_null( $mValue ) ) {
                         $mValue = '(null)';
                     }
-                    return is_scalar( $mValue )
-                        ? "<td class='column-value'><p>{$mValue}</p></td>"
-                        : "<td class='column-value'>" . AmazonAutoLinks_Debug::getDetails( $mValue ) . "</td>";
+                    if ( is_scalar( $mValue ) ) {
+                        return "<td class='column-value'><p>{$mValue}</p></td>";
+                    }
+                    if ( is_array( $mValue ) ) {
+                        return "<td class='column-value'>"
+                                . $this->___getProductDetails( $mValue )
+                            . "</td>";
+                    }
+                    return "<td class='column-value'>"
+                            . AmazonAutoLinks_Debug::getDetails( $mValue )
+                        . "</td>";
                 }
         private function ___getGoBackLink() {
             $_sProductsPageURL = add_query_arg(

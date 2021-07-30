@@ -29,6 +29,7 @@ class AmazonAutoLinks_Event_Scheduler {
         }
         $_aArguments = is_scalar( $iaArguments ) ? array( 'id' => $iaArguments ) : ( array ) $iaArguments;
         AmazonAutoLinks_PluginUtility::scheduleSingleWPCronTask( 'aal_action_unit_prefetch', array( $_aArguments ) );
+        AmazonAutoLinks_Shadow::see();
 
     }
 
@@ -215,17 +216,24 @@ class AmazonAutoLinks_Event_Scheduler {
          */
         static public function replyToQueueRatingRetrieval() {
 
-            $_iCount    = 1;
-            $_aTaskRows = array();
-            $_iInterval = apply_filters( 'aal_filter_http_request_interval_customer_reviews', 10 );
+            $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
+            $_iCount            = 1;
+            $_aTaskRows         = array();
+            $_iInterval         = apply_filters( 'aal_filter_http_request_interval_customer_reviews', 10 );
             foreach( self::$___aRatingItems as $_sProductID => $_aParameters ) {
-                $_iNow        = time();
-                $_aTaskRows[] = array(
+                $_aProductInfo = explode( '|', $_sProductID ) + array( '', '', '', '' );
+                $_sLocale      = $_aProductInfo[ 1 ];
+                $_iNow         = time();
+                $_aTaskRows[]  = array(
                     'name'          => 'get_rating_' . $_sProductID,  // (unique column)
                     'action'        => 'aal_action_api_get_product_rating',
                     'arguments'     => $_aParameters,
                     'creation_time' => date( 'Y-m-d H:i:s', $_iNow ),
-                    'next_run_time' => date( 'Y-m-d H:i:s', $_iNow + ( $_iCount * $_iInterval ) ),
+                    'next_run_time' => date( 'Y-m-d H:i:s',
+                        in_array( $_sLocale, $_aAdWidgetLocales, true )
+                            ? $_iNow    // for Ad Widget API supported locales, tasks will be bundled
+                            : $_iNow + ( $_iCount * $_iInterval )
+                    ),
                 );
                 $_iCount++;
             }

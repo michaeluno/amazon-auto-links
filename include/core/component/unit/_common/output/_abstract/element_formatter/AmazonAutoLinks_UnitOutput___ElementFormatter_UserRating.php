@@ -38,9 +38,14 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
             return $this->___getFormattedOutput( $_snEncodedHTML );
         }
         // For 3.9.0 or above, generate the output from the rating value.
-        $_inRating      = $this->_getCell( 'rating' );
+        $_inRating      = isset( $this->_aProduct[ 'rating' ] ) // embed unit type sets it with the ad widget api
+            ? $this->_aProduct[ 'rating' ]
+            : $this->_getCell( 'rating' );
         if ( $_inRating ) {
-            return $this->___getRatingOutput( $_inRating );
+            return $this->___getRatingOutput(
+                $_inRating,
+                isset( $this->_aProduct[ 'number_of_reviews' ] ) ? ( integer ) $this->_aProduct[ 'number_of_reviews' ] : null
+            );
         }
         if ( null === $_snEncodedHTML && null === $_inRating ) {
             return $this->_getPendingMessage(
@@ -55,10 +60,13 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
         /**
          * @since   3.9.0
          * @param   integer $iRating
+         * @param   integer|null $iNumberOfReviews
          * @return  string
          */
-        private function ___getRatingOutput( $iRating ) {
-            $_iReviewCount  = ( integer ) $this->_getCell( 'number_of_reviews' );
+        private function ___getRatingOutput( $iRating, $iNumberOfReviews ) {
+            $_iReviewCount  = isset( $iNumberOfReviews )
+                ? $iNumberOfReviews
+                : ( integer ) $this->_getCell( 'number_of_reviews' );
             $_oLocale       = new AmazonAutoLinks_Locale( $this->_sLocale );
             $_sReviewURL    = $_oLocale->getCustomerReviewURL( $this->_sASIN, $this->_sAssociateID, $this->_oUnitOption->get( 'language' ) );
             return "<div class='amazon-customer-rating-stars'>"

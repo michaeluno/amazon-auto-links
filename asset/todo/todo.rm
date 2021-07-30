@@ -1,24 +1,58 @@
 # Todos
 
 ## Minor
-- [4.5.1] Add an option "Use these proxies for Web Page Dumper".
-- [4.6.0] Fix image widths displayed with the %content% tag.
-- [4.6.0] Create a stylesheet that applies to all the templates. 
-- [Bug] Fix a bug that cloning a unit does not clone template options.
+- Test the plugin template system on wordpress.com. (there is a reported case that templates cannot be selected on sites hosted by wordpress.com)
+- Add an option "Use these proxies for Web Page Dumper".
+- Fix image widths displayed with the %content% tag. *unsure what this is about
+- [Bug] Fix a bug that cloning a unit does not clone template options. *unconfirmed
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
 - [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
 - [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
 
-### Low Priority
+### Maybe
 - The embed unit type should update product data after scraping 
-  -> this is not simple to do; even when the cache exists, a database query will be performed and it will cause extra queries
-  -> to solve that, it might be necessary to use post metas associated with the post which embeds the product. However, if the same product is embedded across multiple posts, duplicate product data will be stored in the database.
-  -> maybe only storing the record ID of a table (linked ID) can solve it
+  > This is not simple to do; even when the cache exists, a database query will be performed and it will cause extra queries
+  > to solve that, it might be necessary to use post metas associated with the post which embeds the product. However, if the same product is embedded across multiple posts, duplicate product data will be stored in the database.
+  > maybe only storing the record ID of a table (linked ID) can solve it
+- Have a means to prompt the user to update Web Page Dumper if they are using old versions of it. 
   
-## Major   
-- [4.6.0][UI] Change the PA-API Request Counter tab to PA-API and include the followings
-    - the today's request counts.
-    - recent PA-API errors
+## Major
+- [Feature] Add a unit option to set text for the disclaimer pop up link.
+- [Feature] Create an Affiliate Disclosure setting section.
+  - e.g. Add a textarea field to define text inserted in the footer.
+  > YourNicheSite.com is a participant in the Amazon Services LLC Associates Program, 
+  > an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising 
+  > and linking to (“your website name” (amazon.com, or endless.com, MYHABIT.com, SmallParts.com, or AmazonWireless.com)
+  
+  This is due to the following Amazon Associate policy
+  > 5. Identifying Yourself as an Associate
+  > You must clearly and prominently state the following, 
+  > or any substantially similar statement previously allowed under this Agreement, 
+  > on your Site or any other location where Amazon may authorize your display or
+  > other use of Program Content: “As an Amazon Associate I earn from qualifying purchases.”
+  > Except for this disclosure, and other than as required by applicable law, 
+  > you will not make any public communication with respect to this Agreement 
+  > or your participation in the Associates Program without our advance written permission. 
+  > You will not misrepresent or embellish our relationship with you 
+  > (including by expressing or implying that we support, sponsor, or endorse you),
+  > or express or imply any affiliation between us and you or any other person 
+  > or entity except as expressly permitted by this Agreement.
+  > (source: https://affiliate-program.amazon.com/help/operating/agreement)
+
+
+- [Feature] Add a new Search unit type that works with the Ad Widget API (the supported locales will be limited).
+    - In this case, the existing menu "Add Unit by Search" need to be renamed. Maybe, "Add Unit by PA-API". 
+- [Feature] Add the ability to create posts from units.
+    - The ability of automating it will not be included as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
+- [Feature] Add an opt-in component that handles user specific options such as asking allow to load image links in the setting pages from the developer's site. 
+- [Feature] Add a Gutenberg block to create and compose product links.
+- [Feature] Add a Gutenberg block to select units.
+- [4.7.0][Feature] Add a UI to search and display http request data.  
+- [4.7.0][Feature] Add a random sort option for the Product Search units.  
+- [4.6][Feature] Add an option to the Geotargeting component that asks whether to only transform links for products which exist in the user's locale store.   
+- [UI] Change the PA-API Request Counter tab to PA-API and include the followings
+    - The today's request counts.
+    - Recent PA-API errors
 - [Feature][Timed Blacklist] 
     - Add timed blacklist ASINs when API returns, "ItemNotAccessible: The ItemId {ASIN} is not accessible through the Product Advertising API."
     - [UI] Add the timed blacklist ASINs UI. 
@@ -38,4 +72,4 @@
     - Add an orange button.
     - Add a gray button.
     - Add a button with a background image.
-    - Add a button with a SVG icon.
+    - Add a button with an SVG icon.

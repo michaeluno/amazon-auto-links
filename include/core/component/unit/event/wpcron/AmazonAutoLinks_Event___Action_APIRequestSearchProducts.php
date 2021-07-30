@@ -159,18 +159,20 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
             }
 
-            do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " row(s): ", array_keys( $_aRows ) , current_filter(), '' );
-            if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
-                foreach( $_aRows as $_sKey => $_aRow ) {                   
-                    $_aKey          = explode( '|', $_sKey );
-                    $_sASIN         = reset( $_aKey );
-                    $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-                    $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $sLocale ), $_aRow, $sCurrency, $sLanguage );
-                }
-                return;
-            }
-            $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-            $_oProductTable->setRows( $_aRows );
+            $this->setProductDatabaseRows( $_aRows );
+            // @deprecated 3.6.9 Moved to `setProductDatabaseRows()`.
+            // do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " row(s): ", array_keys( $_aRows ) , current_filter(), '' );
+            // if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
+            //     foreach( $_aRows as $_sKey => $_aRow ) {
+            //         $_aKey          = explode( '|', $_sKey );
+            //         $_sASIN         = reset( $_aKey );
+            //         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            //         $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $sLocale ), $_aRow, $sCurrency, $sLanguage );
+            //     }
+            //     return;
+            // }
+            // $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
+            // $_oProductTable->setRows( $_aRows );
 
         }
 

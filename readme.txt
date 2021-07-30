@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.7
+Stable tag:         4.6.12
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,7 +328,32 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.6.7 - 07/12/2021 =
+= 4.6.12 - 07/30/2021 =
+- Fixed a bug that rating stars were not displayed with the `Load with JavaScript` unit option enabled, started in 4.6.0.
+- Fixed a bug that RSS and JSON feeds became invalid for logged-in users with the privilege of editing units, started in 4.6.11.
+
+= 4.6.11 - 07/29/2021 =
+- Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
+- Tweaked a UI visual element.
+- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.
+- Optimized the method to retrieve product ratings and prices for some locales.
+
+= 4.6.10 - 07/28/2021 =
+- Fixed a bug that the category list became unable to select after failing to load categories in the category selection page, which started in v4.6.4.
+- Fixed a bug that product data was not cached properly when the currency or the language option was not the default one, started in v4.6.9.
+- Fixed an issue that clicking on an action link from the paged view of custom post type post listing table resulted in landing on the initial view.
+- Fixed a bug that the wrong query parameters for language and currency were set for category and embed units if PA-API keys were not set for the locale.
+
+= 4.6.9 - 07/27/2021 =
+- Optimized the method to retrieve product ratings and prices for some locales.
+- Optimized HTTP requests for embed units for some locales.
+- Fixed vertical scrollbars not to appear with the List template in embedded views.
+
+= 4.6.8 - 07/24/2021 =
+- Fixed an incompatibility issue with WordPress 5.8 regarding the plugin widget by unit with search units.
+- Fixed an incompatibility issue with WordPress 5.8 regarding widget previews.
+
+= 4.6.7 - 07/19/2021 =
 - Added a setting notice when activating/deactivating a template.
 - Added the ability to reformat template data when activating a template.
 - Tweaked how the template stylesheets are enqueued with a simpler handle ID and a version.

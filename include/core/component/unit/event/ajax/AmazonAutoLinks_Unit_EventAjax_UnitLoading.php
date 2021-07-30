@@ -76,7 +76,8 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             // `load_with_javascript` must be set to false as it just returns the Ajax replacement output.
             $aArguments[ 'load_with_javascript' ] = false;
 
-            return AmazonAutoLinks( $aArguments, false );
+            return AmazonAutoLinks( $aArguments, false )
+                . apply_filters( 'aal_filter_svg_definitions', '' );
 
         }
 
