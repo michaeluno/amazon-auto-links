@@ -41,8 +41,6 @@
                     of: this.element,
                     collision: 'fit none'
 			    },
-                // Add support for the jQuery.ui.position() arguments to be passed through the `position` argument.
-                'string' === typeof this.options.position ? {} : this.options.position,
                 position
             );
 			this.pointer.position( _optionsPosition ); // The object comes before this.options.position so the user can override position.of.
