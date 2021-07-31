@@ -378,6 +378,10 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
                         : esc_url( $_sImageURL ),
                     'class' => 'sub-image',
                     'alt'   => $_sTitle,
+                    'data-src'  => self::hasPrefix( 'data:image/', $_sImageURL )
+                        ? $_sImageURL
+                        : esc_url( self::getImageURLBySize( $_sImageURL, 500 ) ),
+                    'data-href' => esc_url( $sProductURL ),
                 )
             );
             $_sATag     = self::getHTMLTag(

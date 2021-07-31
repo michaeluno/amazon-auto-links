@@ -18,10 +18,21 @@ class AmazonAutoLinks_Template_Common_ResourceLoader extends AmazonAutoLinks_WPU
         wp_enqueue_style( 'wp-pointer' );
         wp_enqueue_script( 'aal-pointer-tooltip' );
         wp_enqueue_script(
-            'amazon-auto-links-product-tooltip',
+            'aal-product-tooltip',
             AmazonAutoLinks_Registry::getPluginURL( $this->isDebugMode()
                 ? dirname( __FILE__ ) . '/js/product-tooltip.js'
                 : dirname( __FILE__ ) . '/js/product-tooltip.min.js',
+                true
+            ),
+            array( 'aal-pointer-tooltip' ),
+            '1.0.0',
+            true
+        );
+        wp_enqueue_script(
+            'aal-image-preview',
+            AmazonAutoLinks_Registry::getPluginURL( $this->isDebugMode()
+                ? dirname( __FILE__ ) . '/js/product-image-preview.js'
+                : dirname( __FILE__ ) . '/js/product-image-preview.min.js',
                 true
             ),
             array( 'aal-pointer-tooltip' ),
