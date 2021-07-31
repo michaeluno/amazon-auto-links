@@ -18,8 +18,7 @@
     $.widget( 'aal.aalPointer', $.wp.pointer, {
         /**
          * Overrides the reposition() method.
-         * Just adds the `within` option to the ui position() arguments
-         * so that the tooltip does not exceed the container
+		 * The show() method is replaced with fadeIn().
          */
 		reposition: function() {
 			var position;
