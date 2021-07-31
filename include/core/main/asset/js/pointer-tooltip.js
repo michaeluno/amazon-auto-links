@@ -47,7 +47,20 @@
             );
 			this.pointer.position( _optionsPosition ); // The object comes before this.options.position so the user can override position.of.
 			this.repoint();
+		},
+		_create: function() {
+       		this._super();
+       		if ( this.options.pointerHeight ) {
+				this.pointer
+					.css({
+						height: this.options.pointerHeight+'px'
+					});
+			}
+		},
+		get: function() {
+			return this.pointer;
 		}
+
     } );
 
 }(jQuery));
