@@ -41,8 +41,8 @@
                 position: {
                     edge: 'right',
                     align: 'center',
-                    within: $( this ).closest( '.amazon-product-container' ) // <-- this is added
-                    // collision: 'flip',
+                    within: $( this ).closest( '.amazon-product-container' ), // <-- this is added
+                    collision: 'fit',
                 },
                 buttons: function() {},
                 close: function() {},

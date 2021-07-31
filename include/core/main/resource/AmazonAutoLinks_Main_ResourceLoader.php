@@ -22,6 +22,7 @@ class AmazonAutoLinks_Main_ResourceLoader extends AmazonAutoLinks_PluginUtility 
      */
     public function __construct() {
         add_action( 'wp_loaded', array( $this, 'replyToRegisterResources' ) );
+        add_action( 'embed_head', array( $this, 'replyToRegisterResources' ) );
     }
 
     /**

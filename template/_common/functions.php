@@ -12,6 +12,7 @@ class AmazonAutoLinks_Template_Common_ResourceLoader extends AmazonAutoLinks_WPU
      */
     public function __construct() {
         add_action( 'wp_enqueue_scripts', array( $this, 'replyToEnqueueScripts' ) );
+        add_action( 'enqueue_embed_scripts', array( $this, 'replyToEnqueueScripts' ) );
     }
     public function replyToEnqueueScripts() {
         wp_enqueue_style( 'wp-pointer' );
