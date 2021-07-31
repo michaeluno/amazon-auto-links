@@ -75,11 +75,8 @@ class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {
             if ( ! is_admin() ) {
                 return false;
             }
-            if ( AmazonAutoLinks_WPUtility::isDebugMode() ) {
-                return true;
-            }
             $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( $_oOption->isDebug() ) {
+            if ( $_oOption->isDebug( 'test' ) ) {
                 return true;
             }
             return false;

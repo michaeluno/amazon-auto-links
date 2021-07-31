@@ -39,7 +39,7 @@ class AmazonAutoLinks_Geotargeting_Resource extends AmazonAutoLinks_Geotargeting
             'nonce'            => wp_create_nonce( $_sActionHookSuffix ),
             'spinnerURL'       => admin_url( 'images/loading.gif' ),
             'pluginName'       => AmazonAutoLinks_Registry::NAME,
-            'debugMode'        => $_oOption->isDebug() || $this->isDebugMode(),
+            'debugMode'        => $_oOption->isDebug( 'js' ),
 
             // 'clientIPAddress'  => $this->getClientIPAddress(), // @deprecated
             'defaultLocale'    => $_oOption->getMainLocale(),
@@ -48,7 +48,7 @@ class AmazonAutoLinks_Geotargeting_Resource extends AmazonAutoLinks_Geotargeting
             'apiProviders'     => $this->___getAPIProviders( $_oOption ),
         ) + $_aGeotargeting;
 
-        $_sPath = $_oOption->isDebug() || $this->isDebugMode()
+        $_sPath = $_oOption->isDebug( 'js' )
             ? AmazonAutoLinks_Geotargeting_Loader::$sDirPath . '/asset/js/geo-resolver.js'
             : AmazonAutoLinks_Geotargeting_Loader::$sDirPath . '/asset/js/geo-resolver.min.js';
         $_sURL  = AmazonAutoLinks_Utility::getSRCFromPath( $_sPath );

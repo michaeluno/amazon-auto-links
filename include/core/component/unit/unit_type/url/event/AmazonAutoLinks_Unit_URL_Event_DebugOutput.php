@@ -23,7 +23,7 @@ class AmazonAutoLinks_Unit_URL_Event_DebugOutput extends AmazonAutoLinks_PluginU
     
     public function __construct() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug( 'front_end' ) ) {
             return;
         }        
         add_filter( 'aal_filter_http_request_result', array( $this, 'replyToCaptureHTTPResponse' ), 10, 5 );

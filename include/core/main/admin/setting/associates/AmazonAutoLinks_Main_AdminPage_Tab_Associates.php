@@ -67,7 +67,7 @@ class AmazonAutoLinks_Main_AdminPage_Tab_Associates extends AmazonAutoLinks_Admi
                         'spinnerURL'        => admin_url( 'images/loading.gif' ),
                         'pluginName'        => AmazonAutoLinks_Registry::NAME,
                         'scriptName'        => 'PA-API Check',
-                        'debugMode'         => $oAdminPage->oUtil->isDebugMode(),
+                        'debugMode'         => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
                         'label'             => array(
                             'keyLengthAccessKey'  => __( 'The Access key length should be 20.', 'amazon-auto-links' ),
                             'keyLengthSecretKey'  => __( 'The Secret key length should be 40.', 'amazon-auto-links' ),

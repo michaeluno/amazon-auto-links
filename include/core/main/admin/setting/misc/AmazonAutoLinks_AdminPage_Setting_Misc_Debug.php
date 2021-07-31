@@ -47,15 +47,36 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_Admin
             $sSectionID, // the target section id    
             array(
                 'field_id'      => 'debug_mode',
-                'type'          => 'radio',
+                'type'          => 'revealer',
+                'select_type'   => 'radio',
                 'title'         => __( 'Debug Mode', 'amazon-auto-links' ),
                 'capability'    => 'manage_options',
                 'label'         => array(
                     1 => __( 'On', 'amazon-auto-links' ),
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
+                'selectors'     => array(
+                    1 => '.debug-mode-visibility'
+                ),
                 'default'       => 0,
-            )
+            ),
+            array(
+                'field_id'      => 'visibility',
+                'type'          => 'checkbox',
+                'label'         => array(
+                    'font_end'  => __( 'Front-end', 'amazon-auto-links' ),
+                    'js'        => __( 'Browser Console', 'amazon-auto-links' ),
+                    'back_end'  => __( 'Back-end', 'amazon-auto-links' ),
+                    'test'      => __( 'Tests', 'amazon-auto-links' ),
+                    'log'       => __( 'Log', 'amazon-auto-links' ),
+                ),
+                'class'         => array(
+                    'fieldrow' => 'debug-mode-visibility',
+                ),
+                'description'   => array(
+                    __( 'Check debug components to enable.', 'amazon-auto-links' ),
+                ),
+            ),
         );    
     
     }

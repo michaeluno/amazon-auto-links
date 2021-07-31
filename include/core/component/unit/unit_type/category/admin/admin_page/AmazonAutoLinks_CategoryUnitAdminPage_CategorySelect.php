@@ -59,7 +59,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
     public function replyToDoPage( $oFactory ) {}
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }        
         echo "<h3>" 

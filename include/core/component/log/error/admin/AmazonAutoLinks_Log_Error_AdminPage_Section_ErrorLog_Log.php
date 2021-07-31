@@ -110,13 +110,13 @@ class AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log extends AmazonAut
                 array(
                     'field_id'          => '_debug_title',
                     'title'             => 'Debug',
-                    'if'                => $_oOption->isDebug() || $_oOption->isDebugMode(),
+                    'if'                => $_oOption->isDebug( 'back_end' ),
                     'save'              => false,
                 ),
                 array(
                     'field_id'          => '_debug_output',
                     'show_title_column' => false,
-                    'if'                => $_oOption->isDebug() || $_oOption->isDebugMode(),
+                    'if'                => $_oOption->isDebug( 'back_end' ),
                     'save'              => false,
                     'content'           => $this->___getDebugOutput(),
                 )

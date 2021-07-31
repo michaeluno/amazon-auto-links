@@ -451,7 +451,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
         private function ___enqueueAjaxScript( $sScriptHandle, array $aTranslations, $sScriptSRC ) {
 
             $_aScriptData   = $aTranslations + array(
-                'debugMode'        => $this->isDebugMode(),
+                'debugMode'        => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
                 'ajaxURL'          => admin_url( 'admin-ajax.php' ),
                 'actionHookSuffix' => $this->_sActionHookSuffix,
                 'nonce'            => wp_create_nonce( $this->_sNonceKey ),

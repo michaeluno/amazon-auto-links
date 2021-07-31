@@ -105,7 +105,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             private function ___loadDebugEvents() {
 
                 $_oOption = AmazonAutoLinks_Option::getInstance();
-                if ( ! $_oOption->isDebug() ) {
+                if ( ! $_oOption->isDebug( 'front_end' ) ) {
                     return;
                 }
                 new AmazonAutoLinks_Unit_Event_Filter_Debug_ProductOutput;

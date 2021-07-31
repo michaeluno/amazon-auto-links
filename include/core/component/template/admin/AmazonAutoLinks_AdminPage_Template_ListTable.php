@@ -60,7 +60,7 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
     public function replyToDoAfterTab( $oFactory ) {
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
         

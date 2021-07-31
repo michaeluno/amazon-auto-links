@@ -68,7 +68,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _doAfterPage( $oFactory ) {
-        if ( ! $oFactory->oUtil->isDebugMode() ) {
+        if ( ! AmazonAutoLinks_Option::getInstance()->isDebug( 'back_end' ) ) {
             return;
         }
         echo "<h4>Debug</h4>"

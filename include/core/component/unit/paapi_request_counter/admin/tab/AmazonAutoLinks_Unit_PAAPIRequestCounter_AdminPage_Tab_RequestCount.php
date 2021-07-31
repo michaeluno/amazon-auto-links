@@ -112,7 +112,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                     'handle_id'     => 'aalChartJSLoader',
                     'dependencies'  => array( 'jquery', 'moment', 'chart.js', 'aalUtility' ),
                     'translation'   => array(
-                        'debugMode' => $oAdminPage->oUtil->isDebugMode(),
+                        'debugMode' => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
                         'ajaxURL'   => admin_url( 'admin-ajax.php' ),
                         'actionHookSuffix'  => 'aal_action_ajax_paapi_request_count_locale_change',
                         'nonce'             => wp_create_nonce( 'aal_action_ajax_paapi_request_count_locale_change' ),
@@ -155,7 +155,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
      */
     protected function _doTab( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! ( $oFactory->oUtil->isDebugMode() || $_oOption->isDebug() ) ) {
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
 

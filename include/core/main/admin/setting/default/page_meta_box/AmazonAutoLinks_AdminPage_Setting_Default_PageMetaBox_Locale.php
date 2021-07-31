@@ -72,7 +72,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Locale extends Amazo
                         'spinnerURL'        => admin_url( 'images/loading.gif' ),
                         'pluginName'        => AmazonAutoLinks_Registry::NAME,
                         'scriptName'        => 'Locale Select',
-                        'debugMode'         => $this->oUtil->isDebugMode(),
+                        'debugMode'         => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
                         'label'             => array(
                         ),
                     ),

@@ -72,7 +72,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
  
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
         echo "<p>Debug</p>"

@@ -122,7 +122,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * @since   4.2.2
          */
         private function ___getDebugInformation( $sLocale, array $aUnitOptions ) {
-            $_bPluginDebugMode  = AmazonAutoLinks_Option::getInstance()->isDebug();
+            $_bPluginDebugMode  = AmazonAutoLinks_Option::getInstance()->isDebug( 'js' );
             $_aDebugInformation = array(
                 'debugMode' => $_bPluginDebugMode,
             );
@@ -222,7 +222,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
         private function ___printDebugInformation( $oFactory ) {
 
             $_oOption = AmazonAutoLinks_Option::getInstance();
-            if ( ! $_oOption->isDebug() && ! $_oOption->isDebugMode() ) {
+            if ( $_oOption->isDebug( 'back_end' ) ) {
                 return;
             }
             echo "<h3>"

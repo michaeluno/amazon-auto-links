@@ -34,7 +34,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'create_units'            => 'edit_pages',
         ),
         'debug' => array(
-            'debug_mode' => 0,
+            'debug_mode'    => 0,
+            'visibility'    => array(
+                'front_end' => 0,
+                'js'        => 1,
+                'back_end'  => 1,
+                'test'      => 1,
+                'log'       => 1,
+            ),
         ),
         'form_options' => array(
             'allowed_html_tags'             => 'style, noscript',
@@ -590,10 +597,22 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     
     /**
      * Checks whether the plugin debug mode is on.
+     * @param       array|string  $asDebugElement The debug output elements to display.
      * @return      boolean
+     * @since       4.7.0         Added the `$asDebugElement` parameter.
      */
-    public function isDebug() {
-        return ( boolean ) $this->get( 'debug', 'debug_mode' );
+    public function isDebug( $asDebugElement='' ) {
+        if ( ! ( boolean ) $this->get( 'debug', 'debug_mode' ) ) {
+            return false;
+        }
+        // If the debug element is not specified, let the site debug mode decide
+        if ( empty( $asDebugElement ) ) {
+            return $this->isDebugMode(); // site debug mode
+        }
+        $_aDebugElements = $this->getAsArray( $asDebugElement );
+        $_aVisibility    = $this->getAsArray( $this->get( 'debug', 'visibility' ) );
+        $_aVisibility    = array_keys( array_filter( $_aVisibility ) );
+        return ( boolean ) count( array_intersect( $_aVisibility, $_aDebugElements ) );
     }
     
     /**

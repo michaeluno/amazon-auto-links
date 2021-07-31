@@ -23,7 +23,7 @@ class AmazonAutoLinks_UnitPostMetaBox_DebugInfo extends AmazonAutoLinks_UnitPost
         }
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        return $_oOption->isDebug();
+        return $_oOption->isDebug( 'back_end' );
         
     }
     

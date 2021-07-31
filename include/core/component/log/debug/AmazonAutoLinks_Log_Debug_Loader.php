@@ -34,7 +34,8 @@ class AmazonAutoLinks_Log_Debug_Loader extends AmazonAutoLinks_PluginUtility {
 
         self::$sDirPath = dirname( __FILE__ );
 
-        if ( ! $this->isDebugMode() ) {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( ! $_oOption->isDebug( 'log' ) ) {
             return;
         }
 

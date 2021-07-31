@@ -60,9 +60,10 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
     protected function _doAfterPage( $oFactory ) {
             
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() && ! $this->isDebugMode() ) {
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
+
         echo "<div class='debug'>"
             . "<h3 style='display:block; clear:both;'>"
                 . 'Debug Info'

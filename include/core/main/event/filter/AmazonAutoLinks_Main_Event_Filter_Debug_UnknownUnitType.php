@@ -19,7 +19,7 @@ class AmazonAutoLinks_Main_Event_Filter_Debug_UnknownUnitType extends AmazonAuto
     public function __construct() {
 
         $_oOption  = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug() ) {
+        if ( ! $_oOption->isDebug( 'front_end' ) ) {
             return;
         }
         add_filter( 'aal_filter_unit_output_unknown', array( $this, 'replyToUnknownUnitTypeOutputs' ), 10, 2 );
