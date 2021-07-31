@@ -34,7 +34,8 @@
 				top: 0,
 				left: 0,
 				zIndex: zindex++ // Increment the z-index so that it shows above other opened pointers.
-			}).show();
+			});
+			this.pointer.fadeIn( this.options.fadeIn );
             var _optionsPosition = $.extend(
                 {
                     of: this.element,
