@@ -135,8 +135,7 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
                 if ( isset( $_aCache ) ) {
                     return $_aCache;
                 }
-                $_aCache = ( array ) apply_filters( 'aal_filter_custom_meta_keys', array() );
-                return $_aCache;        
+                return ( array ) apply_filters( 'aal_filter_custom_meta_keys', array() );
             }    
     
 }
