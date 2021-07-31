@@ -1,2 +1,3 @@
 - Added the `shuffle` unit option for Product Search units.
-- Added the `HTTP Requests` UI in the `Reports` page, which allows the user to display or delete HTTP request caches. 
+- Added the `HTTP Requests` UI in the `Reports` page, which allows the user to display or delete HTTP request caches.
+- Fixed an issue that disclaimer pop-up tooltips were often cut off.  
