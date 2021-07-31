@@ -11,10 +11,48 @@
     Text Domain:    amazon-auto-links
 */
 
+/* Image Preview Tooltip */
+.aal-image-preview-tooltip .wp-pointer-arrow {
+    display: none;
+}
+.aal-image-preview-tooltip .wp-pointer-content {
+    padding: 12px;
+    border-radius: 0.4em;
+    /*max-height: 100%; */
+    /* Center child elements  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+}
+.aal-image-preview-tooltip .wp-pointer-content a {
+    height: inherit;
+    width: inherit;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aal-image-preview-tooltip .wp-pointer-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* Center image */
+    vertical-align: middle;
+    display: block;
+    margin: auto;
+}
+
 /* Pointer Tooltip */
 .aal-tooltip .wp-pointer-content {
     padding: 1em;
     border-radius: 0.4em;
+    color: #444;
 }
 
 /* Rating stars */
