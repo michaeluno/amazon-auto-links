@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.10 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.12 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -507,6 +507,7 @@ return array(
     "AmazonAutoLinks_Output___ArgumentFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_Base.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_UnitID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_UnitID.php", 
+    "AmazonAutoLinks_Main_ResourceLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/resource/AmazonAutoLinks_Main_ResourceLoader.php", 
     "AmazonAutoLinks_AdminPage_Page_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Page_Base.php", 
     "AmazonAutoLinks_AdminPage_RootBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_RootBase.php", 
     "AmazonAutoLinks_AdminPage_Section_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/admin_page/_abstract/AmazonAutoLinks_AdminPage_Section_Base.php", 

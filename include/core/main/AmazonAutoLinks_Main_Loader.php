@@ -54,7 +54,10 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
         
         // Events
         new AmazonAutoLinks_Event;               
-                
+
+        // Resources
+        new AmazonAutoLinks_Main_ResourceLoader;
+
         // Outputs
         new AmazonAutoLinks_Credit;            
         
