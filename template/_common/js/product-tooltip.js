@@ -41,7 +41,7 @@
                 position: {
                     edge: 'right',
                     align: 'center',
-                    within: $( this ).closest( '.amazon-product-container' ), // <-- this is added
+                    within: $( this ).closest( '.amazon-product-container, .amazon-auto-links' ), // <-- this is added
                     collision: 'fit',
                 },
                 buttons: function() {},
