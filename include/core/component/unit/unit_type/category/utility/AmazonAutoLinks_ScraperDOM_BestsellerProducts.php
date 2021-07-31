@@ -70,7 +70,6 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
             $_aProducts[ $_aProduct[ 'ASIN' ] ] = $_aProduct + $this->_aProduct;
 
         }
-
         return $_aProducts;
 
     }
@@ -107,10 +106,14 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
 
         /**
          * @param DOMXPath $oXPath
-         * @param $oItemNode
+         * @param $oRatingNode
+         * @return null|integer
          */
         protected function _getReviewCount( DOMXPath $oXPath, $oRatingNode ) {
             $_oNodes = $oXPath->query( './/a[not(contains(@title, "5"))]', $oRatingNode );
+            if ( ! $_oNodes->length ) {
+                $_oNodes = $oXPath->query( './/span[contains(@class, "a-size-small")]', $oRatingNode ); // added 2021/08/01
+            }
             foreach( $_oNodes as $_oNode ) {
                 $_iCount = ( integer ) preg_replace( '/[^0-9]/', '', $_oNode->nodeValue );
                 return $_iCount;
@@ -119,7 +122,8 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         }
         /**
          * @param DOMXPath $oXPath
-         * @param $oItemNode
+         * @param $oRatingNode
+         * @return null|integer
          */
         protected function _getRatingPoint( DOMXPath $oXPath, $oRatingNode ) {
             $_oNodes = $oXPath->query( './/a[contains(@title, "5")]', $oRatingNode );
