@@ -107,9 +107,10 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
             }
             $_oContainerNode = $_oContainerNodes->item( 0 );
             $_oItemNodes      = $oXPath->query(
-                './/*[contains(@class, "p13n-asin")]',
+                './/*[contains(@class, "p13n-asin") or contains(@class, "a-carousel-card")]',  // a-carousel-card is added 2021/08/01. Possibly, a new design.
                 $_oContainerNode
             );
+
             if ( ! $_oItemNodes->length ) {
                 throw new Exception( 'the container found (old design) but the items not found' );
             }
