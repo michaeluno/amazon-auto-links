@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.12
+Stable tag:         4.6.13
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,13 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.13 - 08/01/2021 =
+- Tweaked the `List` template regarding a responsive width.
+- Optimized the translation items by reducing some of them.
+- Fixed an issue that category units failed to find products in the new design of best-seller pages.
+- Fixed an issue that there were some remaining data in cleaning plugin data upon plugin uninstall.
+- Fixed an issue that the layout of the L`ist` template for sites with the Japanese language was broken.
 
 = 4.6.12 - 07/30/2021 =
 - Fixed a bug that rating stars were not displayed with the `Load with JavaScript` unit option enabled, started in 4.6.0.
