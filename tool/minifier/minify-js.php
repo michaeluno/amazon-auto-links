@@ -9,6 +9,7 @@ $sTargetBaseDir		= dirname( dirname( dirname( __FILE__ ) ) );
 $aTargetDirs        = array(
     $sTargetBaseDir . '/asset/js/',
     $sTargetBaseDir . '/include/core/',
+    $sTargetBaseDir . '/template/',
 );
 
 /* If accessed from a browser, exit. */
