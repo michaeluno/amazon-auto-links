@@ -10,7 +10,7 @@
 
  
 /**
- * Loads the button component
+ * Loads the main component
  *  
  * @package Amazon Auto Links
  * @since   3.3.0
