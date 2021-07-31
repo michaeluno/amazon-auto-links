@@ -83,7 +83,6 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         if ( ! $_sCategoryList ) {
             throw new Exception(
                 sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), $_sCategoryListURL )
-                . ' ' . $_sHTML
                 . ' ' . $this->___getReloadMessage()
             );
         }
