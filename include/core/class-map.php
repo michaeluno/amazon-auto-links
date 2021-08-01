@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.10 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.13 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -228,8 +228,10 @@ return array(
     "AmazonAutoLinks_Form_CategorySelect___Sidebar" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar.php", 
     "AmazonAutoLinks_Form_CategorySelect___Sidebar__R18" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar__R18.php", 
     "AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb.php", 
+    "AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbC" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbC.php", 
     "AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList.php", 
     "AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB.php", 
+    "AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC.php", 
     "AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL.php", 
     "AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php", 
     "AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton.php", 
