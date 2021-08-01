@@ -331,6 +331,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.6.13 - 08/01/2021 =
 - Tweaked the `List` template regarding a responsive width.
 - Optimized the translation items by reducing some of them.
+- Fixed an issue that category selection failed to generate lists sometimes in the category selection page.
 - Fixed an issue that category units failed to find products in the new design of best-seller pages.
 - Fixed an issue that there were some remaining data in cleaning plugin data upon plugin uninstall.
 - Fixed an issue that the layout of the L`ist` template for sites with the Japanese language was broken.
