@@ -111,7 +111,15 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
 
     public function column_request_uri( $aItem ) {
         $_sPreviewURL = site_url( '?aal-http-request-cache=1&name=' . $aItem[ 'name' ] . '&nonce=' . $this->sNonce );
-        return "<a target='_blank' href='" . esc_url( $_sPreviewURL ) . "'>" . $aItem[ 'request_uri' ] . "</a>" . ' '
+        $_sDetailURL  = add_query_arg(
+            array(
+                'tab'        => 'http_request',
+                'name'       => $aItem[ 'name' ],
+            )
+        );
+        return "<a href='" . esc_url( $_sDetailURL ) . "'>"
+               . $aItem[ 'request_uri' ]
+            . "</a>" . ' '
             . $this->row_actions( $this->___getActionLinks( $aItem, $_sPreviewURL ) );
     }
 
@@ -129,16 +137,24 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
                 )
             );
             return array(
-                'view'  => sprintf(
-                    '<a target="_blank" href="%1$s">' . __( 'View Cache', 'amazon-auto-links' ) . '</a>',
-                    esc_url( $sPreviewURL )
-                ),
                 'detail'  => sprintf(
-                    '<a href="%1$s">' . __( 'Details', 'amazon-auto-links' ) . '</a>',
+                    '<a href="%1$s" title="' . esc_attr( __( 'View the cache details.', 'amazon-auto-links' ) ) . '">'
+                        . __( 'Details', 'amazon-auto-links' )
+                    . '</a>',
                     esc_url( $_sDetailURL )
                 ),
+                'view'  => sprintf(
+                    '<a target="_blank" href="%1$s" title="' . esc_attr( __( 'View the stored cache contents.', 'amazon-auto-links' ) ) . '" >'
+                        . __( 'View', 'amazon-auto-links' )
+                        . '&nbsp;<span class="icon-view dashicons dashicons-external"></span>'
+                    . '</a>',
+                    esc_url( $sPreviewURL )
+                ),
                 'original'  => sprintf(
-                    '<a target="_blank" href="%1$s">' . __( 'Visit Original', 'amazon-auto-links' ) . '</a>',
+                    '<a target="_blank" href="%1$s" title="' . esc_attr( __( 'Visit the original page.', 'amazon-auto-links' ) ) . '">'
+                            . __( 'Source', 'amazon-auto-links' )
+                            . '&nbsp;<span class="icon-view dashicons dashicons-external"></span>'
+                        . '</a>',
                     esc_url( $aItem[ 'request_uri' ] )
                 ),
                 'delete' => sprintf(
