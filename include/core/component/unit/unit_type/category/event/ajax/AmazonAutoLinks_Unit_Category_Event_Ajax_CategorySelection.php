@@ -77,13 +77,11 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         // DOM Helper creates a `DOMDocument` instance
         $_oDOMHelper  = new AmazonAutoLinks_DOM;
         $_oDoc        = $_oDOMHelper->loadDOMFromHTMLElement( $_sHTML, '', false );
-        $_oBreadcrumb = new AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb( $_oDoc, $_sLocale );
 
         $_sCategoryList = $this->___getCategoryList( $_oDoc, $_sCategoryListURL );
         if ( ! $_sCategoryList ) {
             throw new Exception(
                 sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), $_sCategoryListURL )
-                . ' ' . $_sHTML
                 . ' ' . $this->___getReloadMessage()
             );
         }
@@ -98,7 +96,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         $_sUnitOutput       = $_oCategoryPreview->get( array( $_sCategoryListURL ) );
 
         // The JavaScript script receives this response array
-        $_sBreadcrumb       = $_oBreadcrumb->get();
+        $_sBreadcrumb       = $this->___getBreadcrumb( $_oDoc, $_sLocale );
         return array(
             'breadcrumb'        => $_sBreadcrumb,
             'category_list'     => $_sCategoryList . "<!-- Current Page: {$_sCategoryListURL} -->",
@@ -139,6 +137,23 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             return $_aUnitOptions;
 
         }
+
+        /**
+         * @since  4.6.13
+         * @return string
+         */
+        private function ___getBreadcrumb( $oDoc, $sLocale ) {
+            $_oBreadcrumb = new AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbC( $oDoc, $sLocale );
+            $_sBreadcrumb = $_oBreadcrumb->get();
+            if ( $_sBreadcrumb ) {
+                return $_sBreadcrumb;
+            }
+            $_oBreadcrumb = new AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb( $oDoc, $sLocale );
+            $_sBreadcrumb = $_oBreadcrumb->get();
+            return $_sBreadcrumb
+                ? $_sBreadcrumb
+                : __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+        }
         /**
          * @param DOMDocument $oDoc
          * @param string $sPageURL
@@ -148,11 +163,18 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
          */
         private function ___getCategoryList( $oDoc, $sPageURL ) {
 
+            $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC( $oDoc, $sPageURL );
+            $_sCategoryList = $_oCategoryList->get();
+            if ( $_sCategoryList ) {
+                return $_sCategoryList;
+            }
+
             $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList( $oDoc, $sPageURL );
             $_sCategoryList = $_oCategoryList->get();
             if ( $_sCategoryList ) {
                 return $_sCategoryList;
             }
+
             $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB( $oDoc, $sPageURL );
             return $_oCategoryList->get();
 

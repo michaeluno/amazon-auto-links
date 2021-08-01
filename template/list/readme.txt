@@ -1,5 +1,9 @@
 == Change log ==
 
+= 1.2.14 =
+- Changed the responsive max-width from 560 to 520 to be compatible with the embed view of the Twenty Seventeen theme.
+- Tweaked the content body width for the site enabling the Japanese language.
+
 = 1.2.13 =
 - Fixed a bug that the vertical scrollbar appears sometimes in embedded views.
 

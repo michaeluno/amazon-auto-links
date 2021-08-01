@@ -60,7 +60,11 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
     protected function _doAfterPage( $oFactory ) {
             
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug( 'back_end' ) ) {
+        if ( ! $_oOption->isDebug() && ! $this->isDebugMode() ) {
+            return;
+        }
+        // Some option values contain sensitive information so avoid displaying to users below the administrator privilege.
+        if ( ! current_user_can( 'manage_options' ) ) {
             return;
         }
 

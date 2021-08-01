@@ -45,6 +45,14 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
+        $_aUserRoleLabels = $this->___getUserRoleTranslated( array(
+            'manage_options' => 'Administrator',
+            'edit_pages'     => 'Editor',
+            'publish_posts'  => 'Author',
+            'edit_posts'     => 'Contributor',
+            'read'           => 'Subscriber',
+        ) );
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id    
             array(
@@ -54,13 +62,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_
                 'tip'           => __( 'Select the user role that is allowed to access the plugin setting pages.', 'amazon-auto-links' ),
                 'description'   => __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'Administrator', 'amazon-auto-links' ) . '</code>',
                 'capability'    => 'manage_options',
-                'label'         => array(                        
-                    'manage_options' => __( 'Administrator', 'amazon-auto-links' ),
-                    'edit_pages'     => __( 'Editor', 'amazon-auto-links' ),
-                    'publish_posts'  => __( 'Author', 'amazon-auto-links' ),
-                    'edit_posts'     => __( 'Contributor', 'amazon-auto-links' ),
-                    'read'           => __( 'Subscriber', 'amazon-auto-links' ),
-                ),
+                'label'         => $_aUserRoleLabels,
             ),
             array(
                 'field_id'      => 'create_units',
@@ -69,17 +71,24 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Capability extends AmazonAutoLinks_
                 'description'   => __( 'Default', 'amazon-auto-links' ) . ': <code>' . __( 'Editor', 'amazon-auto-links' ) . '</code>',
                 'capability'    => 'manage_options',
                 'default'       => 'edit_pages',
-                'label'         => array(
-                    'manage_options' => __( 'Administrator', 'amazon-auto-links' ),
-                    'edit_pages'     => __( 'Editor', 'amazon-auto-links' ),
-                    'publish_posts'  => __( 'Author', 'amazon-auto-links' ),
-                    'edit_posts'     => __( 'Contributor', 'amazon-auto-links' ),
-                    'read'           => __( 'Subscriber', 'amazon-auto-links' ),
-                ),
+                'label'         => $_aUserRoleLabels,
             )
         );
     }
-        
+
+        /**
+         * @param  array $aStructure
+         * @return array
+         * @since  4.6.13
+         */
+        private function ___getUserRoleTranslated( array $aStructure ) {
+            $_aTranslated = array();
+            foreach ( $aStructure as $_sLabelKey => $_sUserRole ) {
+                $_sNameTranslated = translate_user_role( $_sUserRole );
+                $_aTranslated[ $_sLabelKey ] = $_sNameTranslated;
+            }
+            return $_aTranslated;
+        }
     
     /**
      * Validates the submitted form data.

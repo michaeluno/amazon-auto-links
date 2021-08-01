@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.13
+    Version:        1.2.14
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -73,7 +73,7 @@
 /* Body (vs image) */
 .amazon-products-container-list .amazon-auto-links-product-body {
     display: inline-block;
-    width: 66%;
+    width: 65.8%;   /* Changed from 66% since it breaks the layout when the site language is set to Japanese */
     font-size: x-small;
 }
 
@@ -445,7 +445,8 @@
 }
 
 /* Responsive */
-@media only screen and (max-width: 560px) {
+/* [4.6.13] Changed the max-width to 520 from 560 to be compatible with the embed view of the Twenty Seventeen theme */
+@media only screen and (max-width: 520px) {
   .amazon-products-container-list .amazon-auto-links-product-image {
     width: 100%;
     margin-bottom: 1em;

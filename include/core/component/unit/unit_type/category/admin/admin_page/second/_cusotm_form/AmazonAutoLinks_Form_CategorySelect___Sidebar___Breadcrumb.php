@@ -15,47 +15,54 @@
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
-    private $___sLocale    = 'US';
-    private $___oDoc;
+    protected $_sLocale    = 'US';
+    protected $_oDoc;
+
+    /**
+     * A part of class selector for the selected list element.
+     * @var string
+     * @since 4.6.13
+     */
+    protected $_sClassSelectorSelected = 'zg_selected';
+
     /**
      * @since       3.5.7
      */
     public function __construct( DOMDocument $oDoc, $sLocale ) {
-
-        $this->___sLocale    = $sLocale;
-        $this->___oDoc       = $oDoc;
-
+        $this->_sLocale    = $sLocale;
+        $this->_oDoc       = $oDoc;
     }
 
     /**
      * @since       3.5.7
      */
     public function get() {
-        return $this->___getBreadcrumb( $this->___oDoc, $this->___sLocale );
+        return $this->_getBreadcrumb( $this->_oDoc, $this->_sLocale );
     }
         /**
          * Creates a breadcrumb of the Amazon page sidebar.
          *
-         * This is specific to Amazon's store page so if the site page sucture changes, it won't work.
+         * This is specific to Amazon's store page so if the site page structure changes, it won't work.
          * Especially it uses the unique id and class names including zg_browseRoot, zg_selected, the sidebar element IDs.
          *
          * @since           2.0.0
          * @since           3.5.7   Changed the scope to private as this is only used in this class.
-         * @since           3.5.7     Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since           3.5.7   Moved from `AmazonAutoLinks_Form_CategorySelect`.
          * @since           3.9.1   No longer uses PHP Simple DOM Parser.
+         * @since           4.6.13  Change the scope from private to protected as an extended class is added.
          * @return          string  The generated category breadcrumb.
          */
-        private function ___getBreadcrumb( DOMDocument $oDoc, $sLocale='US' ) {
+        protected function _getBreadcrumb( DOMDocument $oDoc, $sLocale='US' ) {
 
             $aBreadcrumb    = array();
 
             $_oXpath        = new DOMXPath( $oDoc );
             $_nodeSelected  = $_oXpath->query(
-                "//*[contains(@class, 'zg_selected')]"
+                "//*[contains(@class, '{$this->_sClassSelectorSelected}')]"
             )->item( 0 );
 
             if ( ! $_nodeSelected ) {
-                return __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+                return '';
             }
 
             // Current category
@@ -74,7 +81,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
             } While (
                 is_object( $_nodeClimb )
                 && method_exists( $_nodeClimb, 'getAttribute' ) // it can be the root DOMDocument object and in that case the method does not exist
-                && 'zg_browseRoot' !== $_nodeClimb->getAttribute( 'id' )
+                && $this->_isNotListRoot( $_nodeClimb )
             );
 
             array_pop( $aBreadcrumb );    // remove the last element
@@ -84,4 +91,12 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
         }
 
+        /**
+         * @param  $oNode
+         * @since  4.6.13
+         * @return boolean
+         */
+        protected function _isNotListRoot( $oNode ) {
+            return 'zg_browseRoot' !== $oNode->getAttribute( 'id' );
+        }
 }
