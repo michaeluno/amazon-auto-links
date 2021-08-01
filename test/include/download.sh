@@ -22,6 +22,7 @@ download() {
         
     elif [ `which wget` ]; then
         wget -nv -O "$2" "$1" --no-check-certificate 1> NUL 2> NUL
-    fi        
+    fi
+    rm -f NUL
     
 }

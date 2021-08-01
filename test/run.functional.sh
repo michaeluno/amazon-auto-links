@@ -64,6 +64,10 @@ echo "Coverage File Path: $COVERAGE_FILE_PATH"
 
 # Make sure Codeception is installed
 downloadCodeception "$CODECEPT"
+## Codeception PHP 5.x Build has not been able to call the phar file absolute path since around January 2019
+cp "$CODECEPT" codecept.phar
+CODECEPT=codecept.phar
+php $CODECEPT --version
 
 # Check if the codecemption configuration file exists.
 if [ ! -f "$CODECEPT_TEST_DIR/codeception.yml" ]; then
@@ -97,7 +101,7 @@ fi
 # php "$CODECEPT" run functional -g wp --debug --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP
 
 # php "$CODECEPT" run functional -g core --debug --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP
-php "$CODECEPT" run functional -g wp --debug --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
+php "$CODECEPT" run functional --debug --colors --config="$CODECEPT_TEST_DIR" $OPTION_GROUP $OPTION_SKIP_GROUP $OPTION_COVERAGE
 
 # Copy the coverage file to the specified path
 if [[ ! -z "$COVERAGE_FILE_PATH" ]]; then
