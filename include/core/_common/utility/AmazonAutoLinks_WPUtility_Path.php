@@ -41,7 +41,8 @@ class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
      * This is necessary when some users build the WordPress site locally and immigrate to the production site.
      * In that case, the stored absolute path won't work so it needs to be converted to the one that works in the new environment.
      * 
-     * @since            3
+     * @since      3
+     * @deprecated 4.7.0 Unused
      */
     public static function getReadableFilePath( $sFilePath, $sRelativePathToABSPATH='' ) {
         
