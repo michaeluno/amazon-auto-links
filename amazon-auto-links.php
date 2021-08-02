@@ -284,7 +284,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     public static function getPluginURL( $sPath='', $bAbsolute=false ) {
         $_sRelativePath = $bAbsolute
-            ? str_replace('\\', '/', str_replace( self::$sDirPath, '', $sPath ) )
+            ? ltrim( str_replace('\\', '/', str_replace( self::$sDirPath, '', $sPath ) ), '/' )
             : $sPath;
         if ( isset( self::$___sPluginURLCache ) ) {
             return self::$___sPluginURLCache . $_sRelativePath;
