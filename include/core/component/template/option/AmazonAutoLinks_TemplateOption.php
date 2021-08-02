@@ -267,7 +267,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'relative_dir_path' ] = $this->getElement(
                 $aTemplate,
                 'relative_dir_path',
-                str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $aTemplate[ 'strDirPath' ] ) ) )
+                str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( dirname( WP_CONTENT_DIR ), $aTemplate[ 'strDirPath' ] ) ) )
             );                        
             $aTemplate[ 'relative_dir_path' ] = wp_normalize_path( $aTemplate[ 'relative_dir_path' ] );
             
@@ -652,15 +652,18 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     }
 
     /**
-     * @param   string $sDirPath
+     * Retrieves a template ID from a given directory path.
      *
+     * A template ID is a relative path to the WP_CONTENT_DIR parent directory.
+     *
+     * @param   string $sDirPath
      * @return  string
      * @since   4.0.0
      * @scope   public  Each template accesses this method to get the ID for filters.
      */
     public function getTemplateID( $sDirPath ) {
         $sDirPath = wp_normalize_path( $sDirPath );
-        $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        $sDirPath = $this->getRelativePath( dirname( WP_CONTENT_DIR ), $sDirPath );
         return untrailingslashit( $sDirPath );
     }
 
