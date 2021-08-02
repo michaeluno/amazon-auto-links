@@ -1,3 +1,3 @@
 #!/usr/bin/php
-php generate-class-map-tests.php
+php generate-tests.php
 $SHELL
