@@ -154,13 +154,14 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID       = ( string ) $this->oUnitOption->get( 'associate_id' );
-        $_iCount             = ( integer ) $this->oUnitOption->get( 'count' );
+        $_iCountUserSet      = ( integer ) $this->oUnitOption->get( 'count' );
+        $_iCount             = $_iCountUserSet < 10 ? 10 : $_iCountUserSet;     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
 
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
         $_aProducts          = $this->___getProductsSorted( $_aProducts );
 
-        return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
-
+        $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
+        return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
     }
         /**
          * Returns the subject urls for this unit.
@@ -410,8 +411,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                         $_aProduct = $this->___getProduct( $_aItem, $sLocale, $sAssociateID );
 
                     } catch ( Exception $_oException ) {
-                        // When the items is filtered, this is reached
-                        // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+                        // When the items are filtered out, this is reached
                         if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
                             $this->aBlockedASINs[ $_sASIN ] = $_sASIN;
                         }
@@ -430,10 +430,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     // Store the product
                     $_aProducts[]           = $_aProduct;
 
+                    // @deprecated 4.6.14 - this causes too many database queries
+                    // when product filter options are set. For example, * in the blacklist title and a few items in the White List ASIN.
+                    // the items will be truncated later
                     // Max Number of Items
-                    if ( count( $_aProducts ) >= $iCount ) {
-                        break;
-                    }
+                    // if ( count( $_aProducts ) >= $iCount ) {
+                    //     break;
+                    // }
 
                 }
 
@@ -462,7 +465,12 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                         $_aProducts             = $this->_getProductsFormatted( $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID );
                         $_iCountAfterFormatting = count( $_aProducts );
-                        if ( $_iResultCount > $_iCountAfterFormatting ) {
+
+                        if (
+                               count( $aItems )                         // the fetched items still exist. $aItems element are deleted after formatting in the above _getProducts() method.
+                            && $_iCount > $_iCountAfterFormatting       // if the resulting count does not meet the expected count
+                            && $_iResultCount > $_iCountAfterFormatting // this means that at least one item is filtered out with filters in the above _getProductsFormatted() method
+                        ) {
                             throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
                         }
 

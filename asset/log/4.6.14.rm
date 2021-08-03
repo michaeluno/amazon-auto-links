@@ -1,1 +1,2 @@
+- Fixed a bug that using a combination of White List ASIN and Black List Title/Description options caused too many database queries. 
 - Fixed a bug with the White List ASIN option that did not allow products to be displayed with the specified ASINs. 
