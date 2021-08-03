@@ -34,13 +34,6 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
 
         parent::__construct( $sURLOrFIlePathOrHTML, $sCharset );
 
-//            $_oDOM      = new AmazonAutoLinks_DOM;
-//            $this->oDoc = $_oDOM->loadDOMFromURL(
-//                'https://www.amazon.co.jp/gp/bestsellers/diy/2039681051/ref=zg_bs_nav_diy_1_diy',
-//                '',  // mb_lang
-//                false, // use file_get_contents()
-//                true
-//            );
         $this->_oXPath       = new DOMXPath( $this->oDoc );
         $this->_oItemNodes   = $this->___getItemNodes();
 
