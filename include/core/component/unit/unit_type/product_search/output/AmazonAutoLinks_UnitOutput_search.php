@@ -640,7 +640,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $this->oUnitOption->get( 'preferred_currency' )
                     );
                     $_sContent      = $this->getContent( $_aItem );
-                    $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
+                    $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL, $_aItem[ 'ASIN' ] );
     
                     // At this point, update the black&white lists as this item is parsed.
                     $this->setParsedASIN( $_aItem[ 'ASIN' ] );
@@ -779,7 +779,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_sTitle = $_sTitle
                     ? $_sTitle
                     : $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
-                if ( $this->isTitleBlocked( $_sTitle ) ) {
+
+                if (
+                         $this->isTitleBlocked( $_sTitle )
+                    && ! $this->isASINWhiteListed( $aItem[ 'ASIN' ] )
+                ) {
                     throw new Exception( '(product filter) The title is black-listed: ' . $_sTitle );
                 }
                 return $this->getTitleSanitized( $_sTitle, $this->oUnitOption->get( 'title_length' ) );
@@ -825,15 +829,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @return string
              * @throws Exception
              * @since  3.5.0
-             * @since  4.1.0   Added the `$sASIN` parameter.
+             * @since  4.6.14  Added the `$sASIN` parameter.
              */
-            private function ___getDescription( $sContent, $sProductURL ) {
+            private function ___getDescription( $sContent, $sProductURL, $sASIN ) {
                 $_sDescription  = $this->_getDescriptionSanitized(
                     $sContent,
                     $this->oUnitOption->get( 'description_length' ),
                     $this->_getReadMoreText( $sProductURL )
                 );
-                $this->___checkDescriptionBlocked( $_sDescription );
+                $this->___checkDescriptionBlocked( $_sDescription, $sASIN );
                 return $_sDescription;
             }
                 /**
@@ -841,7 +845,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                  * @throws Exception
                  * @param  string $sDescription
                  */
-                private function ___checkDescriptionBlocked( $sDescription ) {
+                private function ___checkDescriptionBlocked( $sDescription, $sASIN ) {
+                    if ( $this->isASINWhiteListed( $sASIN ) ) {
+                        return;
+                    }
                     if ( $this->isDescriptionBlocked( $sDescription ) ) {
                         throw new Exception( '(product filter) The description is not allowed: ' . $sDescription );
                     }
