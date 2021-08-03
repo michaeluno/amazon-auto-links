@@ -26,6 +26,23 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
     }
 
     /**
+     * @remark The difference against isASINAllowed() is this only check wither the ASIN is white listed
+     * as opposed to isASINAllowed() which return true if the item is neither whitelisted nor blacklisted.
+     * @param  string  $sASIN
+     * @return boolean
+     * @since  4.6.14
+     */
+    public function isASINWhiteListed( $sASIN ) {
+        if ( $this->oUnitProductFilter->isASINAllowed( $sASIN ) ) {
+            return true;
+        }
+        if ( $this->oGlobalProductFilter->isASINAllowed( $sASIN ) ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param       string  $sASIN
      * @return      boolean
      * @since       3

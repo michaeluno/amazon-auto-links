@@ -581,20 +581,25 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @since    4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
      */
     public function replyToFilterProducts( $aProduct ) {
+
         if ( empty( $aProduct ) ) {
-            return array();
-        }
-        if ( $this->isTitleBlocked( $this->getElement( $aProduct, array( 'raw_title' ) ) ) ) {
             return array();
         }
         // Check whether no-image should be skipped.
         if ( ! $this->isImageAllowed( $this->getElement( $aProduct, array( 'thumbnail_url' ) ) ) ) {
             return array();
         }
-        if ( $this->isDescriptionBlocked( $aProduct[ 'text_description' ] ) ) {
-            $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
-            return array(); // will be dropped
+
+        if (
+               $this->isTitleBlocked( $this->getElement( $aProduct, array( 'raw_title' ) ) )
+            || $this->isDescriptionBlocked( $aProduct[ 'text_description' ] )
+        ) {
+            if ( ! $this->isASINWhiteListed( $aProduct[ 'ASIN' ] ) ) {
+                $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
+                return array();
+            }
         }
+
         return $aProduct;
     }
 
