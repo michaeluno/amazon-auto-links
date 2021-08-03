@@ -598,14 +598,21 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             return array();
         }
 
+        $_sTitleRaw     = $this->getElement( $aProduct, array( 'raw_title' ) );
+        $_sDescription  = $aProduct[ 'text_description' ];
         if (
-               $this->isTitleBlocked( $this->getElement( $aProduct, array( 'raw_title' ) ) )
-            || $this->isDescriptionBlocked( $aProduct[ 'text_description' ] )
+            // If blacklisted
+            (
+                $this->isTitleBlocked( $_sTitleRaw )
+                || $this->isDescriptionBlocked( $_sDescription )
+            ) &&
+            // And not white listed
+            ! (
+              $this->isWhiteListed( $aProduct[ 'ASIN' ], $_sTitleRaw, $_sDescription )
+            )
         ) {
-            if ( ! $this->isASINWhiteListed( $aProduct[ 'ASIN' ] ) ) {
-                $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
-                return array();
-            }
+            $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
+            return array();
         }
 
         return $aProduct;
