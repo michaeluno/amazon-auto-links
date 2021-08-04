@@ -82,6 +82,14 @@ class AmazonAutoLinks_Shadow {
     }
 
     /**
+     * Checks if the current page is loaded as the AmazonAutoLinks_Shadow background routine.
+     * @since  4.6.15
+     */
+    static public function isBackground() {
+        return self::___isBackground();
+    }
+
+    /**
      * Handles plugin cron tasks.
      * 
      * Called from the constructor. 
