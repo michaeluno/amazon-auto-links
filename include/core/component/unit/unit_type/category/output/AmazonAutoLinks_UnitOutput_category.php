@@ -413,7 +413,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     } catch ( Exception $_oException ) {
                         // When the items are filtered out, this is reached
                         if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
-                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN;
+                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN; // for error message
                         }
                         continue;   // skip
                     }
@@ -447,51 +447,51 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 /**
                  * Second iteration
-                 * @param  array   $aItems
-                 * @param  array   $_aProducts
+                 * @param  array   $aRawItems               Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
+                 * @param  array   $aProducts               Initially formatted items. (There are two formatting iterations and the second one is done in this method).
                  * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
-                 * @param  string  $_sLocale
-                 * @param  string  $_sAssociateID
-                 * @param  integer $_iCount
+                 * @param  string  $sLocale
+                 * @param  string  $sAssociateID
+                 * @param  integer $iUserSetMaxCount        The user set max count.
                  * @return array
                  * @since  3.9.0
                  */
-                private function ___getProductsFormatted( $aItems, $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID, $_iCount ) {
-
+                private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
+                    
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
-                    $_iResultCount          = count( $_aProducts );
+                    $_iCountFormatBefore = count( $aProducts );
                     try {
 
-                        $_aProducts             = $this->_getProductsFormatted( $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID );
-                        $_iCountAfterFormatting = count( $_aProducts );
+                        $aProducts          = $this->_getProductsFormatted( $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID );
+                        $_iCountFormatAfter = count( $aProducts );
 
                         if (
-                               count( $aItems )                         // the fetched items still exist. $aItems element are deleted after formatting in the above _getProducts() method.
-                            && $_iCount > $_iCountAfterFormatting       // if the resulting count does not meet the expected count
-                            && $_iResultCount > $_iCountAfterFormatting // this means that at least one item is filtered out with filters in the above _getProductsFormatted() method
+                               count( $aRawItems )                        // The fetched items still exist. $aRawItems element are deleted after formatting in the above _getProducts() method.
+                            && $iUserSetMaxCount > $_iCountFormatAfter    // If the resulting count (after format) does not meet the expected count.
+                            && $_iCountFormatBefore > $_iCountFormatAfter // This means that at least one item is filtered out with filters in the above _getProductsFormatted() method.
                         ) {
-                            throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
+                            throw new Exception( $iUserSetMaxCount - $_iCountFormatAfter ); // passing a count for another call
                         }
 
                     } catch ( Exception $_oException ) {
 
                         // Recursive call
                         $_aAdditionalProducts = $this->_getProducts(
-                            $aItems,
-                            $_sLocale,
-                            $_sAssociateID,
+                            $aRawItems,
+                            $sLocale,
+                            $sAssociateID,
                             ( integer ) $_oException->getMessage() // the number of items to retrieve
                         );
-                        $_aProducts = array_merge( $_aProducts, $_aAdditionalProducts );
+                        $aProducts = array_merge( $aProducts, $_aAdditionalProducts );
 
                     }
 
-                    // These removal are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
+                    // These removals are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
                     remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
                     remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
 
-                    return $_aProducts;
+                    return $aProducts;
 
                 }
 
