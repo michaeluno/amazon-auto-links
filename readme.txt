@@ -330,8 +330,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.6.15 - 08/05/2021 =
 - Tweaked the way to generate template IDs.
+- Fixed an incorrect UI label.
+- Fixed a bug that product updated dates became unavailable when selection multiple sources in category units.
 - Fixed a bug that using a combination of White and Black List options produced duplicated items in some cases.
-- Fixed PHP notices of calling functions incorrectly when the unit is saved with the Load with JavaScript unit option enabled.
+- Fixed PHP notices that says calling functions incorrectly which appear when the unit is saved with the Load with JavaScript unit option enabled.
 
 = 4.6.14 - 08/04/2021 =
 - Fixed a bug that using a combination of White List ASIN and Black List Title/Description options caused too many database queries.
@@ -352,7 +354,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.6.11 - 07/29/2021 =
 - Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
 - Tweaked a UI visual element.
-- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.
+- Fixed a bug that unnecessary background tasks were kept being created for some locales, started in v4.6.9.
 - Optimized the method to retrieve product ratings and prices for some locales.
 
 = 4.6.10 - 07/28/2021 =
