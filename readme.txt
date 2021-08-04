@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.13
+Stable tag:         4.6.14
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.14 - 08/04/2021 =
+- Fixed a bug that using a combination of White List ASIN and Black List Title/Description options caused too many database queries.
+- Fixed a bug with the White List options that did not whitelist products to be displayed with specified keywords.
 
 = 4.6.13 - 08/01/2021 =
 - Tweaked the `List` template regarding a responsive width.
