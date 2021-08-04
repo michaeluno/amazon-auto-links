@@ -718,7 +718,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array
      */
     public function replyToCaptureUpdatedDate( $aCache ) {
-        remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
         $this->_aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
         return $aCache;
     }
@@ -731,7 +730,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array|WP_Error
      */
     public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
         $this->_aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
         return $aoResponse;
     }
