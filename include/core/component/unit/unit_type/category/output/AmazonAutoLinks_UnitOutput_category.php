@@ -159,7 +159,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
         $_aProducts          = $this->___getProductsSorted( $_aProducts );
-
         $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
         return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
     }
@@ -398,13 +397,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_sCurrency           = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage           = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
-                foreach ( $aItems as $_iIndex => $_aItem ) {
+                foreach ( $aItems as $_isIndex => $_aItem ) {
 
                     $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
 
                     // This parsed item is no longer needed and must be removed once it is parsed
                     // as this method is called recursively.
-                    unset( $aItems[ $_sASIN ] );
+                    unset( $aItems[ $_isIndex ] );
 
                     try {
 
@@ -457,7 +456,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                  * @since  3.9.0
                  */
                 private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
-                    
+
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
                     $_iCountFormatBefore = count( $aProducts );
@@ -465,7 +464,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                         $aProducts          = $this->_getProductsFormatted( $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID );
                         $_iCountFormatAfter = count( $aProducts );
-
                         if (
                                count( $aRawItems )                        // The fetched items still exist. $aRawItems element are deleted after formatting in the above _getProducts() method.
                             && $iUserSetMaxCount > $_iCountFormatAfter    // If the resulting count (after format) does not meet the expected count.

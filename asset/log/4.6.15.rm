@@ -1,1 +1,2 @@
-- Fixed PHP notices of calling functions incorrectly when the unit is saved with the Load with JavaScript unit option enabled.
+- Fixed a bug that using a combination of White and Black List options produced duplicated items in some cases. 
+- Fixed PHP notices of calling functions incorrectly when the unit is saved with the Load with JavaScript unit option enabled. 
