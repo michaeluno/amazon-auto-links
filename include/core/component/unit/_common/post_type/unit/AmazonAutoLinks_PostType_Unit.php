@@ -31,7 +31,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setArguments(
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
-                'labels'                => $this->getLabels( $_oOption ),
+                'labels'                => $this->___getLabels( $_oOption ),
                 
                 // If a custom preview post type is set, make it not public. 
                 // However, other ui arguments should be enabled.
@@ -105,7 +105,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         /**
          * @return      array       Label arguments.
          */
-        private function getLabels( $oOption ) {
+        private function ___getLabels( $oOption ) {
             
             // Allow the user to set custom post type name which appears in the breadcrumb.
             $_sFrontendName = $oOption->get( 
@@ -139,6 +139,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 ) 
                 : array(
                     'name'                  => $_sFrontendName,
+                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
                 );
             
         }

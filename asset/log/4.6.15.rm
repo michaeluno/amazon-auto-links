@@ -1,4 +1,5 @@
 - Tweaked the way to generate template IDs.
+- Fixed an incorrect UI label. 
 - Fixed a bug that product updated dates became unavailable when selection multiple sources in category units. 
 - Fixed a bug that using a combination of White and Black List options produced duplicated items in some cases. 
 - Fixed PHP notices of calling functions incorrectly when the unit is saved with the Load with JavaScript unit option enabled. 
