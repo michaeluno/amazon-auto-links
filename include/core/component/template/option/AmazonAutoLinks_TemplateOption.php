@@ -267,7 +267,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'relative_dir_path' ] = $this->getElement(
                 $aTemplate,
                 'relative_dir_path',
-                str_replace( '\\', '/', untrailingslashit( $this->getRelativePath( ABSPATH, $aTemplate[ 'strDirPath' ] ) ) )
+                $this->getRelativePathTo( ABSPATH, $aTemplate[ 'strDirPath' ] )
             );                        
             $aTemplate[ 'relative_dir_path' ] = wp_normalize_path( $aTemplate[ 'relative_dir_path' ] );
             
@@ -662,8 +662,22 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @scope   public  Each template accesses this method to get the ID for filters.
      */
     public function getTemplateID( $sDirPath ) {
+        return $this->getRelativePathTo( ABSPATH, $sDirPath );
+        // @deprecated 4.6.16 Moved to getRelativePathTo().
+        // $sDirPath = wp_normalize_path( $sDirPath );
+        // $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        // return untrailingslashit( $sDirPath );
+    }
+
+    /**
+     * @param  string $sBasePath
+     * @param  string $sDirPath
+     * @return string
+     * @since  4.6.16
+     */
+    public function getRelativePathTo( $sBasePath, $sDirPath ) {
         $sDirPath = wp_normalize_path( $sDirPath );
-        $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        $sDirPath = $this->getRelativePath( $sBasePath, $sDirPath );
         return untrailingslashit( $sDirPath );
     }
 
