@@ -127,7 +127,51 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
-            ),            
+            ),
+            array(
+                'title'     => __( 'Paths', 'amazon-auto-links' ) . ' & ' . __( 'URLs', 'amazon-auto-links' ),
+                'field_id'  => 'paths',
+                'type'      => 'system',
+                'data'      => array(
+                    'Current Time'   => '', 'Admin Page Framework' => '', 'WordPress'     => '',
+                    'PHP'            => '', 'Server'               => '', 'PHP Error Log' => '',
+                    'MySQL'          => '', 'MySQL Error Log'      => '', 'Browser'       => '',
+                    'Paths' => array(
+                        'ABSPATH'               => ABSPATH,
+                        'WP_CONTENT_DIR'        => WP_CONTENT_DIR,
+                        'get_home_path()'       => get_home_path(),
+                        'wp_upload_dir()'       => wp_upload_dir(),
+                        'plugin_dir_path( __FILE__ )' => plugin_dir_path( AmazonAutoLinks_Registry::$sFilePath ),
+                        'Exists'                => array(
+                            "ABSPATH . 'wp-admin'" => file_exists( ABSPATH . 'wp-admin' ) ? 'Yes' : 'No',
+                            "ABSPATH . 'wp-admin/includes/upgrade.php'"             => file_exists( ABSPATH . 'wp-admin/includes/upgrade.php' ) ? 'Yes' : 'No',
+                            "ABSPATH . 'wp-admin/includes/plugin.php'"              => file_exists( ABSPATH . 'wp-admin/includes/plugin.php' ) ? 'Yes' : 'No',
+                            "ABSPATH . 'wp-admin/includes/class-wp-list-table.php'" => file_exists( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' ) ? 'Yes' : 'No',
+                            "WP_CONTENT_DIR" => file_exists( WP_CONTENT_DIR ) ? 'Yes' : 'No',
+                        ),
+                    ),
+                    'URLs' => array(
+                        'WP_CONTENT_URL'  => WP_CONTENT_URL,
+                        'home_url()'      => home_url(),
+                        'content_url()'   => content_url(),
+                        'admin_url()'     => admin_url(),
+                        'site_url()'      => site_url(),
+                        'includes_url()'  => includes_url(),
+                        'plugins_url()'   => plugins_url(),
+                        'WP_Style::base_url' => (new WP_Styles())->base_url,
+                        "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ),
+                        'plugin_dir_url( __FILE__ )'  => plugin_dir_url( AmazonAutoLinks_Registry::$sFilePath ),
+                        'plugin_basename( __FILE__ )' => plugin_basename( AmazonAutoLinks_Registry::$sFilePath ),
+                        'Exists'          => array(
+                            "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => $this->___doesURLExist( plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ) ) ? 'Yes' : 'No',
+                        ),
+                    ),
+                    'Default Template ID'   => AmazonAutoLinks_TemplateOption::getInstance()->getTemplateID( AmazonAutoLinks_Registry::$sDirPath . '/template/list' ),
+                ),
+                'attributes' => array(
+                    'style' => 'height: 300px;',
+                ),
+            ),
             // array(
             //     'title'     => __( 'Server Information', 'amazon-auto-links' ),
             //     'field_id'  => 'server_information',
@@ -144,7 +188,18 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
             array()
         );
     }
-
+        /**
+         * @param  string $sURL
+         * @return boolean
+         * @since  4.6.15
+         */
+        private function ___doesURLExist( $sURL ) {
+            $file_headers = @get_headers( $sURL );
+            if( ! $file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' ) {
+                return false;
+            }
+            return true;
+        }
         /**
          * @return int|string
          * @since  4.3.8
