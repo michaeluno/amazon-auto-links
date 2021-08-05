@@ -78,16 +78,16 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
             private function ___getTemplateStatusToggled( $sID, array $aTemplates, $bActivate ) {
 
                 $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
-
                 if ( isset( $aTemplates[ $sID ] ) && $_oTemplateOption->exists( $sID ) ) {
                     return $this->___getTemplatesWithUpdatedActivationStatus( $aTemplates, $sID, $bActivate, $_oTemplateOption );
                 }
 
                 // At this point, an un-stored template is given.
-
                 // The id may be a relative path of the template directory
                 // $_sDirPath = $this->getAbsolutePathFromRelative( $sID ); // @deprecated 4.6.16 Causes duplicated templates with a slightly different template ID in the list table when the site has a custom WP_CONTENT_URL & WP_CONTENT_DIR
                 $_sDirPath = $this->___getTemplateDirPath( $sID, $_oTemplateOption );
+
+                unset( $aTemplates[ $sID ] );   // 4.6.16 drop the non-existent template
                 if ( ! file_exists( $_sDirPath ) ) {
                     $_aErrorInfo = array(
                         'template_id' => $sID,
@@ -102,6 +102,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
                 $_aTemplate         = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
                 $_sTemplateID       = $_aTemplate[ 'id' ];
+
                 $aTemplates[ $_sTemplateID ] = array(
                     'is_active' => $bActivate,
                 ) + $this->getAsArray( $_aTemplate );
@@ -138,23 +139,25 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                  * @since  4.6.7
                  */
                 private function ___getTemplatesWithUpdatedActivationStatus( array $aTemplates, $sTemplateID, $bActivate, $oTemplateOption ) {
-                    $_aTemplate         = array();
-                    // @since 3.10.0 If activating, renew the template information.
-                    if ( $bActivate ) {
-                        $_sDirPath  = $this->___getTemplateDirPath( $sTemplateID, $oTemplateOption );
-                        $_aTemplate = file_exists( $_sDirPath )
-                            ? $this->getAsArray( $oTemplateOption->getTemplateArrayByDirPath( $_sDirPath ) )
-                            : array();
+
+                    $this->___aToggledTemplateNames[] = $this->getElement( $aTemplates, array( $sTemplateID, 'name' ) );
+
+                    // @since 4.6.16 If deactivating, remove the template array
+                    if ( ! $bActivate ) {
+                        unset( $aTemplates[ $sTemplateID ] );
+                        return $aTemplates;
                     }
 
+                    // @since 3.10.0 If activating, renew the template information.
+                    $_sDirPath  = $this->___getTemplateDirPath( $sTemplateID, $oTemplateOption );
+                    $_aTemplate = file_exists( $_sDirPath )
+                        ? $this->getAsArray( $oTemplateOption->getTemplateArrayByDirPath( $_sDirPath ) )
+                        : array();
                     $_aTemplate = array(
-                        'is_active' => $bActivate,
-                    )
+                            'is_active' => true,
+                        )
                         + $_aTemplate
                         + $this->getElementAsArray( $aTemplates, $sTemplateID );
-
-                    $this->___aToggledTemplateNames[] = $this->getElement( $_aTemplate, 'name' );
-
                     $aTemplates[ $sTemplateID ] = $_aTemplate;
                     return $aTemplates;
                 }
