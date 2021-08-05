@@ -64,24 +64,16 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
             return;
         }
         
-        echo "<h3>" 
-                . __( 'Debug', 'amazon-auto-links' ) 
-            . "</h3>";
-            
-        echo "<h4>" 
-                . __( 'Raw Template Option Values', 'amazon-auto-links' ) 
-            . "</h4>";
+        echo "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>";
+        echo "<h4>" . 'Raw Template Option Values' . "</h4>";
         echo $oFactory->oDebug->get(
             get_option(
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ],
                 array()
             )
-            
         );            
         
-        echo "<h4>" 
-                . __( 'Data of Active Templates', 'amazon-auto-links' ) 
-            . "</h4>";        
+        echo "<h4>" . 'Data of Stored Templates' . "</h4>";
         echo $oFactory->oDebug->get(
             AmazonAutoLinks_TemplateOption::getInstance()->get()
         );
