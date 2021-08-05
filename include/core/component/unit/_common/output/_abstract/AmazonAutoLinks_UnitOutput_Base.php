@@ -351,12 +351,14 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 return '';
             }
             $_iFilteredOut = count( $this->aBlockedASINs );
+            $_iUnitID      = $this->oUnitOption->get( 'id' );
             return 2 === $iShowErrorMode
                 ? "<!-- "
-                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
-                    . ' ' . $_iFilteredOut . ' items are filtered out: [' . implode( ', ', $this->aBlockedASINs ) . ']'
+                    . AmazonAutoLinks_Registry::NAME. ": " . $sErrorMessage
+                    . " {$_iFilteredOut} items are filtered out: [" . implode( ', ', $this->aBlockedASINs ) . "]"
+                    . " Type: {$this->sUnitType} ID: {$_iUnitID}"
                   . " -->"
-                : "<div class='warning'><p>"
+                : "<div class='warning' data-type='{$this->sUnitType}' data-id='{$_iUnitID}'><p>"
                     . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
                     . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
                   . "</p></div>";
