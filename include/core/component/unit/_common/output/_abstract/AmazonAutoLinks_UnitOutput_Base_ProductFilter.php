@@ -26,6 +26,73 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
     }
 
     /**
+     * @param  string $sASIN
+     * @param  string $sTitle
+     * @param  string $sDescription
+     * @return boolean
+     * @sine   4.6.14
+     */
+    public function isWhiteListed( $sASIN, $sTitle, $sDescription ) {
+        if ( $this->isASINWhiteListed( $sASIN ) ) {
+            return true;
+        }
+        if ( $this->isTitleWhiteListed( $sTitle ) ) {
+            return true;
+        }
+        if ( $this->isDescriptionWhiteListed( $sDescription ) ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param  string $sDescription
+     * @return boolean
+     * @since  4.6.14
+     */
+    public function isDescriptionWhiteListed( $sDescription ) {
+        if ( $this->oUnitProductFilter->isDescriptionAllowed( $sDescription ) ) {
+            return true;
+        }
+        if ( $this->oGlobalProductFilter->isDescriptionAllowed( $sDescription ) ) {
+            return true;
+        }
+        return false;        
+    }    
+
+    /**
+     * @param  string $sTitle
+     * @return boolean
+     * @since  4.6.14
+     */
+    public function isTitleWhiteListed( $sTitle ) {
+        if ( $this->oUnitProductFilter->isTitleAllowed( $sTitle ) ) {
+            return true;
+        }
+        if ( $this->oGlobalProductFilter->isTitleAllowed( $sTitle ) ) {
+            return true;
+        }
+        return false;        
+    }
+    
+    /**
+     * @remark The difference against isASINAllowed() is this only check wither the ASIN is white listed
+     * as opposed to isASINAllowed() which return true if the item is neither whitelisted nor blacklisted.
+     * @param  string  $sASIN
+     * @return boolean
+     * @since  4.6.14
+     */
+    public function isASINWhiteListed( $sASIN ) {
+        if ( $this->oUnitProductFilter->isASINAllowed( $sASIN ) ) {
+            return true;
+        }
+        if ( $this->oGlobalProductFilter->isASINAllowed( $sASIN ) ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * @param       string  $sASIN
      * @return      boolean
      * @since       3

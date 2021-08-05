@@ -11,7 +11,7 @@
 /**
  * Handles filtering products in unit outputs.
  * 
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
 
@@ -145,7 +145,7 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
      * Used to prevent duplicate items in a page.
      */
     public function markParsed( $sASIN ) {
-        if ( ! in_array( $sASIN, self::$aParsed ) ) {
+        if ( ! in_array( $sASIN, self::$aParsed, true ) ) {
             self::$aParsed[] = $sASIN;
         }      
         $this->aBlackListASINs[] = $sASIN;
@@ -157,58 +157,37 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
      */
     public function isASINAllowed( $sASIN ) {
         if ( $this->bASINRestricted ) {
-            return in_array(
-                $sASIN,
-                $this->aAllowedASINs
-            );
+            return in_array( $sASIN, $this->aAllowedASINs, true );
         }
-        return in_array(
-            $sASIN,
-            $this->aWhiteListASINs
-        );
+        return in_array( $sASIN, $this->aWhiteListASINs, true );
     }
     public function isASINBlocked( $sASIN ) {
         if ( $this->bASINRestricted ) {
-            return ! in_array(
-                $sASIN,
-                $this->aAllowedASINs
-            );
+            return ! in_array( $sASIN, $this->aAllowedASINs, true );
         }        
         if ( $this->bNoDuplicate ) {
-            if ( in_array( $sASIN, self::$aParsed ) ) {
+            if ( in_array( $sASIN, self::$aParsed, true ) ) {
                 return true;
             }
         }
-        return in_array( $sASIN, $this->aBlackListASINs );
+        return in_array( $sASIN, $this->aBlackListASINs, true );
     }
     public function isTitleAllowed( $sTitle ) {
-        return $this->_isListed( 
-            $sTitle, 
-            $this->aWhiteListTitles
-        );
+        return $this->_isListed( $sTitle, $this->aWhiteListTitles );
     }
     public function isTitleBlocked( $sTitle ) {
-        return $this->_isListed( 
-            $sTitle, 
-            $this->aBlackListTitles
-        );          
+        return $this->_isListed( $sTitle, $this->aBlackListTitles );
     }     
     public function isDescriptionAllowed( $sDescription ) {
-        return $this->_isListed( 
-            $sDescription, 
-            $this->aWhiteListDescriptions
-        );                  
+        return $this->_isListed( $sDescription, $this->aWhiteListDescriptions );
     }
     public function isDescriptionBlocked( $sDescription ) {
-        return $this->_isListed( 
-            $sDescription, 
-            $this->aBlackListDescriptions
-        );                  
+        return $this->_isListed( $sDescription, $this->aBlackListDescriptions );
     }
         /**
          * Checks whether the given string is matches the sub-strings of the given list
          * 
-         * @return      true
+         * @return boolean
          */
         protected function _isListed( $sSubject, array $aList ) {
             

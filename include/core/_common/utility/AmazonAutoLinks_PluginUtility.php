@@ -559,9 +559,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * 
      * @since       3
+     * @since       4.6.15      Added the check for wp_query existent. Otherwise, the 'doing it wrong' warning appears if the variable is not established.
      * @return      string      The type slug
      */
     static public function getCurrentPageType() {
+	    if ( ! isset( $GLOBALS[ 'wp_query' ] ) ) {
+	        return '';
+        }
         foreach( self::$_aFunctionNamesWithSlugs as $_sFuncName => $_sTypeSlug ) {
             if ( call_user_func( $_sFuncName ) ) {
                 return $_sTypeSlug;

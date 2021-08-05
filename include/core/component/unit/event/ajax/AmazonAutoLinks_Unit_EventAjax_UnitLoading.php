@@ -139,6 +139,13 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return;
         }
+        if (
+            $this->isDoingAjax()
+            || 'wp-cron.php' === $GLOBALS[ 'pagenow' ]
+            || AmazonAutoLinks_Shadow::isBackground()
+        ) {
+            return;
+        }
 
         $_sScriptHandle = 'aal-ajax-unit-loading';
         $_aScriptData   = array(

@@ -154,13 +154,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID       = ( string ) $this->oUnitOption->get( 'associate_id' );
-        $_iCount             = ( integer ) $this->oUnitOption->get( 'count' );
+        $_iCountUserSet      = ( integer ) $this->oUnitOption->get( 'count' );
+        $_iCount             = $_iCountUserSet < 10 ? 10 : $_iCountUserSet;     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
 
         $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
         $_aProducts          = $this->___getProductsSorted( $_aProducts );
-
-        return $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
-
+        $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
+        return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
     }
         /**
          * Returns the subject urls for this unit.
@@ -397,23 +397,22 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 $_sCurrency           = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
                 $_sLanguage           = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
-                foreach ( $aItems as $_iIndex => $_aItem ) {
+                foreach ( $aItems as $_isIndex => $_aItem ) {
 
                     $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
 
                     // This parsed item is no longer needed and must be removed once it is parsed
                     // as this method is called recursively.
-                    unset( $aItems[ $_sASIN ] );
+                    unset( $aItems[ $_isIndex ] );
 
                     try {
 
                         $_aProduct = $this->___getProduct( $_aItem, $sLocale, $sAssociateID );
 
                     } catch ( Exception $_oException ) {
-                        // When the items is filtered, this is reached
-                        // AmazonAutoLinks_Debug::log( $_oException->getMessage() );
+                        // When the items are filtered out, this is reached
                         if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
-                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN;
+                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN; // for error message
                         }
                         continue;   // skip
                     }
@@ -430,10 +429,13 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                     // Store the product
                     $_aProducts[]           = $_aProduct;
 
+                    // @deprecated 4.6.14 - this causes too many database queries
+                    // when product filter options are set. For example, * in the blacklist title and a few items in the White List ASIN.
+                    // the items will be truncated later
                     // Max Number of Items
-                    if ( count( $_aProducts ) >= $iCount ) {
-                        break;
-                    }
+                    // if ( count( $_aProducts ) >= $iCount ) {
+                    //     break;
+                    // }
 
                 }
 
@@ -444,46 +446,50 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
 
                 /**
                  * Second iteration
-                 * @param  array   $aItems
-                 * @param  array   $_aProducts
+                 * @param  array   $aRawItems               Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
+                 * @param  array   $aProducts               Initially formatted items. (There are two formatting iterations and the second one is done in this method).
                  * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
-                 * @param  string  $_sLocale
-                 * @param  string  $_sAssociateID
-                 * @param  integer $_iCount
+                 * @param  string  $sLocale
+                 * @param  string  $sAssociateID
+                 * @param  integer $iUserSetMaxCount        The user set max count.
                  * @return array
                  * @since  3.9.0
                  */
-                private function ___getProductsFormatted( $aItems, $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID, $_iCount ) {
+                private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
 
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
                     add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
-                    $_iResultCount          = count( $_aProducts );
+                    $_iCountFormatBefore = count( $aProducts );
                     try {
 
-                        $_aProducts             = $this->_getProductsFormatted( $_aProducts, $aASINLocaleCurLangs, $_sLocale, $_sAssociateID );
-                        $_iCountAfterFormatting = count( $_aProducts );
-                        if ( $_iResultCount > $_iCountAfterFormatting ) {
-                            throw new Exception( $_iCount - $_iCountAfterFormatting ); // passing a count for another call
+                        $aProducts          = $this->_getProductsFormatted( $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID );
+                        $_iCountFormatAfter = count( $aProducts );
+                        if (
+                               count( $aRawItems )                        // The fetched items still exist. $aRawItems element are deleted after formatting in the above _getProducts() method.
+                            && $iUserSetMaxCount > $_iCountFormatAfter    // If the resulting count (after format) does not meet the expected count.
+                            && $_iCountFormatBefore > $_iCountFormatAfter // This means that at least one item is filtered out with filters in the above _getProductsFormatted() method.
+                        ) {
+                            throw new Exception( $iUserSetMaxCount - $_iCountFormatAfter ); // passing a count for another call
                         }
 
                     } catch ( Exception $_oException ) {
 
                         // Recursive call
                         $_aAdditionalProducts = $this->_getProducts(
-                            $aItems,
-                            $_sLocale,
-                            $_sAssociateID,
+                            $aRawItems,
+                            $sLocale,
+                            $sAssociateID,
                             ( integer ) $_oException->getMessage() // the number of items to retrieve
                         );
-                        $_aProducts = array_merge( $_aProducts, $_aAdditionalProducts );
+                        $aProducts = array_merge( $aProducts, $_aAdditionalProducts );
 
                     }
 
-                    // These removal are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
+                    // These removals are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
                     remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
                     remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
 
-                    return $_aProducts;
+                    return $aProducts;
 
                 }
 
@@ -581,20 +587,32 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @since    4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
      */
     public function replyToFilterProducts( $aProduct ) {
+
         if ( empty( $aProduct ) ) {
-            return array();
-        }
-        if ( $this->isTitleBlocked( $this->getElement( $aProduct, array( 'raw_title' ) ) ) ) {
             return array();
         }
         // Check whether no-image should be skipped.
         if ( ! $this->isImageAllowed( $this->getElement( $aProduct, array( 'thumbnail_url' ) ) ) ) {
             return array();
         }
-        if ( $this->isDescriptionBlocked( $aProduct[ 'text_description' ] ) ) {
+
+        $_sTitleRaw     = $this->getElement( $aProduct, array( 'raw_title' ) );
+        $_sDescription  = $aProduct[ 'text_description' ];
+        if (
+            // If blacklisted
+            (
+                $this->isTitleBlocked( $_sTitleRaw )
+                || $this->isDescriptionBlocked( $_sDescription )
+            ) &&
+            // And not white listed
+            ! (
+              $this->isWhiteListed( $aProduct[ 'ASIN' ], $_sTitleRaw, $_sDescription )
+            )
+        ) {
             $this->aBlockedASINs[ $aProduct[ 'ASIN' ] ] = $aProduct[ 'ASIN' ];
-            return array(); // will be dropped
+            return array();
         }
+
         return $aProduct;
     }
 
@@ -700,7 +718,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array
      */
     public function replyToCaptureUpdatedDate( $aCache ) {
-        remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
         $this->_aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
         return $aCache;
     }
@@ -713,7 +730,6 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array|WP_Error
      */
     public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
         $this->_aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
         return $aoResponse;
     }

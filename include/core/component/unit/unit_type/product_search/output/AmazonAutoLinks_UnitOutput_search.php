@@ -637,7 +637,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
                 try {
                     $_aItem         = $this->___getItemStructured( $_aItem );
-                    $_sTitle        = $this->___getTitle( $_aItem );
+                    $_sTitleRaw     = $this->___getTitleRaw( $_aItem );
+                    $_sTitle        = $this->getTitleSanitized( $_sTitleRaw, $this->oUnitOption->get( 'title_length' ) );
                     $_sThumbnailURL = $this->___getThumbnailURL( $_aItem );
                     $_sProductURL   = $this->getProductLinkURLFormatted(
                         rawurldecode( $_aItem[ 'DetailPageURL' ] ),
@@ -646,8 +647,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         $this->oUnitOption->get( 'preferred_currency' )
                     );
                     $_sContent      = $this->getContent( $_aItem );
-                    $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL );
-    
+                    $_sDescription  = $this->___getDescription( $_sContent, $_sProductURL  );
+                    $this->___checkProductBlocked( $_aItem[ 'ASIN' ], $_sTitleRaw, $_sDescription );
+
                     // At this point, update the black&white lists as this item is parsed.
                     $this->setParsedASIN( $_aItem[ 'ASIN' ] );
 
@@ -756,40 +758,35 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 if ( ! is_array( $aItem ) ) {
                     throw new Exception( 'The product element must be an array.' );
                 }
-                $_aItem = $aItem + self::$aStructure_Item;
-                $this->___checkASINBlocked( $_aItem[ 'ASIN' ] );
-                return $_aItem;
+                return $aItem + self::$aStructure_Item;
             }
-                /**
-                 * @throws  Exception
-                 * @since   3.5.0
-                 * @param   string $sASIN
-                 */
-                private function ___checkASINBlocked( $sASIN ) {
-                    if ( ! $this->isASINBlocked( $sASIN ) ) {
-                        return;
-                    }
-                    throw new Exception( '(product filter) The product ASIN is black-listed: ' . $sASIN );
-                }
 
-            /**
-             * @param array $aItem
-             *
-             * @return  string
-             * @throws Exception
-             * @since   3.5.0
-             */
-            private function ___getTitle( $aItem ) {
-
+            private function ___getTitleRaw( $aItem ) {
                 $_sTitle = $this->oUnitOption->get( array( 'product_title' ) );
-                $_sTitle = $_sTitle
+                return $_sTitle
                     ? $_sTitle
                     : $this->getElement( $aItem, array( 'ItemInfo', 'Title', 'DisplayValue' ), '' );
-                if ( $this->isTitleBlocked( $_sTitle ) ) {
-                    throw new Exception( '(product filter) The title is black-listed: ' . $_sTitle );
-                }
-                return $this->getTitleSanitized( $_sTitle, $this->oUnitOption->get( 'title_length' ) );
+            }
 
+            /**
+             * @param  string $sASIN
+             * @param  string $sTitleRaw
+             * @param  string $sDescription
+             * @throws Exception
+             */
+            private function ___checkProductBlocked( $sASIN, $sTitleRaw, $sDescription ) {
+                if ( $this->isWhiteListed( $sASIN, $sTitleRaw, $sDescription ) ) {
+                    return;
+                }
+                if ( $this->isASINBlocked( $sASIN ) ) {
+                    throw new Exception( '(product filter) The product ASIN is black-listed: ' . $sASIN );
+                }
+                if ( $this->isTitleBlocked( $sTitleRaw ) ) {
+                    throw new Exception( '(product filter) The title is black-listed: ' . $sTitleRaw );
+                }
+                if ( $this->isDescriptionBlocked( $sDescription ) ) {
+                    throw new Exception( '(product filter) The description is not allowed: ' . $sDescription );
+                }
             }
 
             /**
@@ -829,29 +826,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @param  string $sContent
              * @param  string $sProductURL
              * @return string
-             * @throws Exception
              * @since  3.5.0
-             * @since  4.1.0   Added the `$sASIN` parameter.
              */
             private function ___getDescription( $sContent, $sProductURL ) {
-                $_sDescription  = $this->_getDescriptionSanitized(
+                return $this->_getDescriptionSanitized(
                     $sContent,
                     $this->oUnitOption->get( 'description_length' ),
                     $this->_getReadMoreText( $sProductURL )
                 );
-                $this->___checkDescriptionBlocked( $_sDescription );
-                return $_sDescription;
             }
-                /**
-                 * @since  3.5.0
-                 * @throws Exception
-                 * @param  string $sDescription
-                 */
-                private function ___checkDescriptionBlocked( $sDescription ) {
-                    if ( $this->isDescriptionBlocked( $sDescription ) ) {
-                        throw new Exception( '(product filter) The description is not allowed: ' . $sDescription );
-                    }
-                }
 
             /**
              * @param array $_aItem

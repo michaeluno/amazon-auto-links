@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.13
+Stable tag:         4.6.15
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -328,6 +328,17 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.6.15 - 08/05/2021 =
+- Tweaked the way to generate template IDs.
+- Fixed an incorrect UI label.
+- Fixed a bug that product updated dates became unavailable when selection multiple sources in category units.
+- Fixed a bug that using a combination of White and Black List options produced duplicated items in some cases.
+- Fixed PHP notices that says calling functions incorrectly which appear when the unit is saved with the Load with JavaScript unit option enabled.
+
+= 4.6.14 - 08/04/2021 =
+- Fixed a bug that using a combination of White List ASIN and Black List Title/Description options caused too many database queries.
+- Fixed a bug with the White List options that did not whitelist products to be displayed with specified keywords.
+
 = 4.6.13 - 08/01/2021 =
 - Tweaked the `List` template regarding a responsive width.
 - Optimized the translation items by reducing some of them.
@@ -343,7 +354,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 = 4.6.11 - 07/29/2021 =
 - Tweaked the behavior of showing unit errors to show them to the logged-in user with the privilege of edit units regardless of the `Show Errors` unit option.
 - Tweaked a UI visual element.
-- Fixed a bug that unnecessary background tasks were kept created for some locales, started in v4.6.9.
+- Fixed a bug that unnecessary background tasks were kept being created for some locales, started in v4.6.9.
 - Optimized the method to retrieve product ratings and prices for some locales.
 
 = 4.6.10 - 07/28/2021 =
