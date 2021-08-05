@@ -141,11 +141,10 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                     $_aTemplate         = array();
                     // @since 3.10.0 If activating, renew the template information.
                     if ( $bActivate ) {
-                        $_sDirPath  = $this->getAbsolutePathFromRelative( $sTemplateID );
+                        $_sDirPath  = $this->___getTemplateDirPath( $sTemplateID, $oTemplateOption );
                         $_aTemplate = file_exists( $_sDirPath )
-                            ? $oTemplateOption->getTemplateArrayByDirPath( $_sDirPath )
+                            ? $this->getAsArray( $oTemplateOption->getTemplateArrayByDirPath( $_sDirPath ) )
                             : array();
-                        $_aTemplate = $this->getAsArray( $_aTemplate );
                     }
 
                     $_aTemplate = array(
