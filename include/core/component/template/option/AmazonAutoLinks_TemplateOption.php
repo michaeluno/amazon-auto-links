@@ -368,17 +368,21 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
  
     /**
      * Retrieves the label(name) of the template by template id
-     * 
+     *
      * @remark            Used when rendering the post type table of units.
-     */ 
+     */
     public function getTemplateNameByID( $sTemplateID ) {
-        return $this->get(
-            array( $sTemplateID, 'name' ), // dimensional keys
-            '' // default
-        );    
+        // Not using getActiveTemplates() here because there could be missed templates by getUploadedTemplates()
+        // after the template ID generation mechanism is changed in 4.6.16. Those unloaded templates are stored in $this->>get()
+        return $this->getElement( $this->get() + $this->getUploadedTemplates(), array( $sTemplateID, 'name' ), '' );
+        // @deprecated 4.6.16
+        // return $this->get(
+        //     array( $sTemplateID, 'name' ), // dimensional keys
+        //     '' // default
+        // );
     }
- 
- 
+
+
     /**
      * Returns an array holding active template labels.
      * @since       3
