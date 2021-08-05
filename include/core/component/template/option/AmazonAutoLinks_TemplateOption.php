@@ -278,8 +278,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 'dir_path',
                 $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ], ABSPATH )
             );
-            $aTemplate[ 'dir_path' ]          = untrailingslashit( $aTemplate[ 'dir_path' ] );
-            
+            $aTemplate[ 'dir_path' ]          = realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) );
+
             // Check required files. Consider the possibility that the user may directly delete the template files/folders.
             $_aRequiredFiles = array(
                 $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css',
@@ -538,6 +538,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          */
         public function getTemplateArrayByDirPath( $sDirPath, $bExtraInfo=true ) {
 
+            $sDirPath       = realpath( $sDirPath );
             $_sRelativePath = $this->getTemplateID( $sDirPath ); // at the moment, the ID serves as a relative path
             $_aData         = array(
                 'dir_path'              => $sDirPath,
