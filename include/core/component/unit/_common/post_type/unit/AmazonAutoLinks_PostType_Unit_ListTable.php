@@ -220,7 +220,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                     'AAL_UNIT_TABLE_DETAIL_TEMPLATE',
                     "The template {$sTemplateName} has an issue: {$sTemplateID}",
                     array(
-                        'value'   => $sTemplateName,
+                        'value'   => $sTemplateName ? $sTemplateName : __( 'Unknown', 'amaozn-auto-links' ),
                         'content' => "<p>"
                                 . $this->___getTemplateDetailErrorMessage( $sTemplateID )
                             . "</p>"
