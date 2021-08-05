@@ -86,7 +86,8 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                 // At this point, an un-stored template is given.
 
                 // The id may be a relative path of the template directory
-                $_sDirPath = $this->getAbsolutePathFromRelative( $sID );
+                // $_sDirPath = $this->getAbsolutePathFromRelative( $sID ); // @deprecated 4.6.16 Causes duplicated templates with a slightly different template ID in the list table when the site has a custom WP_CONTENT_URL & WP_CONTENT_DIR
+                $_sDirPath = $this->___getTemplateDirPath( $sID, $_oTemplateOption );
                 if ( ! file_exists( $_sDirPath ) ) {
                     $_aErrorInfo = array(
                         'template_id' => $sID,
@@ -108,6 +109,26 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                 return $aTemplates;
 
             }
+                /**
+                 * @param  string $sTemplateID
+                 * @param  AmazonAutoLinks_TemplateOption $_oTemplateOption
+                 * @return string
+                 * @since  4.6.16
+                 */
+                private function ___getTemplateDirPath( $sTemplateID, $_oTemplateOption ) {
+                    $_aAvailableTemplates = $_oTemplateOption->getActiveTemplates() + $_oTemplateOption->getUploadedTemplates();
+                    foreach( $_aAvailableTemplates as $_sTemplateID => $_aTemplate ) {
+                        if ( $_sTemplateID !== $sTemplateID ) {
+                            continue;
+                        }
+                        return $this->getElement(
+                            $_aTemplate,
+                            array( 'dir_path' ),
+                            $this->getElement( $_aTemplate, array( 'strDirPath' ) ) // backward-compat
+                        );
+                    }
+                    return '';
+                }
                 /**
                  * @param  array     $aTemplates
                  * @param  string    $sTemplateID
