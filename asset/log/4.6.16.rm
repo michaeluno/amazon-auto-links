@@ -1,0 +1,1 @@
+- Reverted the change made in 4.6.15 regarding the way of generating template IDs.
