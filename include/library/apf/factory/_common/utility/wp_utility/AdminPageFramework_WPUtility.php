@@ -26,6 +26,11 @@ class AmazonAutoLinks_AdminPageFramework_WPUtility_URL extends AmazonAutoLinks_A
         return $sSubjectURL;
     }
     static public function getSRCFromPath($sFilePath) {
+        $_sRelativePath = AmazonAutoLinks_AdminPageFramework_Utility::getRelativePath( WP_CONTENT_DIR , $sFilePath );
+        $_sRelativePath = preg_replace("/^\.[\/\\\]/", '', $_sRelativePath, 1);
+        return content_url( $_sRelativePath );
+    }
+    static public function _getSRCFromPath($sFilePath) {
         $_oWPStyles = new WP_Styles();
         $_sRelativePath = AmazonAutoLinks_AdminPageFramework_Utility::getRelativePath(preg_replace('/[\/\\\\]wp-content$/', '', rtrim(WP_CONTENT_DIR, '/\\')), $sFilePath);
         $_sRelativePath = preg_replace("/^\.[\/\\\]/", '', $_sRelativePath, 1);
