@@ -276,7 +276,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'dir_path' ]          = $this->getElement(
                 $aTemplate,
                 'dir_path',
-                $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ] )
+                $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ], ABSPATH )
             );
             $aTemplate[ 'dir_path' ]          = untrailingslashit( $aTemplate[ 'dir_path' ] );
             
