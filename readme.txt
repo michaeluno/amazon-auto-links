@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.7.2
 Requires MySQL:     5.0.3
-Stable tag:         4.6.15
+Stable tag:         4.6.16
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.16 - 08/06/2021 =
+- Fixed a bug that caused a critical error on some sites with v4.6.15 by reverting the method of generating template IDs.
+- Added the Paths and URLs section in the `About` page.
+- Tweaked unit warning messages.
 
 = 4.6.15 - 08/05/2021 =
 - Tweaked the way to generate template IDs.
