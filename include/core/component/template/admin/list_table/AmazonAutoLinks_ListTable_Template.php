@@ -137,12 +137,17 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aItem[ 'id' ]
         );    
 
+        // [4.6.17] If the template is not valid, add a warning icon
+        $_sWarning = $aItem[ 'is_valid' ]
+            ? ""
+            : "<span class='warning dashicons dashicons-warning'></span>";
+
         // Return the title contents
         return sprintf(
             '%1$s %2$s',    // <span style="color:silver">(id:%2$s)</span>
             $aItem[ 'is_active' ]   /*$1%s*/ 
-                ? "<strong>{$aItem[ 'name' ]}</strong>" 
-                : $aItem[ 'name' ],
+                ? $_sWarning . "<strong>{$aItem[ 'name' ]}</strong>"
+                : $_sWarning . $aItem[ 'name' ],
             $this->row_actions( $aActions ) /*$2%s*/ 
         );
         
