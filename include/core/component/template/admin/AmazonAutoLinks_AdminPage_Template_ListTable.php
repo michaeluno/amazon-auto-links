@@ -91,20 +91,17 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
             return;
         }
 
+        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         echo "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>";
         echo "<div class='aal-accordion'>";
-        echo "<h4>"
-             . 'Raw Template Option Values' . "</h4>";
-        echo "<div>" . $oFactory->oDebug->get(
-            get_option(
-                AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ],
-                array()
-            )
-        ) . "</div>";
+        echo "<h4>" . 'Active Templates' . "</h4>";
+        echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->getActiveTemplates() ) . "</div>";
+        echo "<h4>" . 'Uploaded Templates' . "</h4>";
+        echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->getUploadedTemplates() ) . "</div>";
+        echo "<h4>" . 'Raw Template Option Values' . "</h4>";
+        echo "<div>" . $oFactory->oDebug->getDetails( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ], array() ) ) . "</div>";
         echo "<h4>" . 'Data of Stored Templates' . "</h4>";
-        echo "<div>" . $oFactory->oDebug->get(
-            AmazonAutoLinks_TemplateOption::getInstance()->get()
-        ) . "</div>";
+        echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->get() ) . "</div>";
         echo "</div>"; // .aal-accordion
         
     }
