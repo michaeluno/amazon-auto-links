@@ -15,11 +15,19 @@
  * @since       3.1.0
 */
 class AmazonAutoLinks_TemplateLoader {
-    
+
+    /**
+     * @var   string
+     * @since 4.6.17
+     */
+    static $sDirPath;
+
     /**
      * Loads necessary components.
      */
     public function __construct( $sScriptPath ) {
+
+        self::$sDirPath = dirname( __FILE__ );
 
         new AmazonAutoLinks_Template_Event_Action_ActivationStatus;
         new AmazonAutoLinks_TemplateResourceLoader;
@@ -56,7 +64,5 @@ class AmazonAutoLinks_TemplateLoader {
        
         
     }
-    
-  
     
 }
