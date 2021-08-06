@@ -15,6 +15,24 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_AdminPage_Tab_Base {
+
+    /**
+     * @since  4.6.17
+     * @return array
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'table',
+            'title'     => __( 'Installed', 'amazon-auto-links' ),
+            'script'    => array(
+                AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/js/lightbox.js',
+            ),
+            'style'     => array(
+                AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/css/lightbox.css',
+            ),
+        );
+    }
+
     /**
      * @var AmazonAutoLinks_ListTable_Template
      */

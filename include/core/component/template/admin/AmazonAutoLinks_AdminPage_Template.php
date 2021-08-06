@@ -33,28 +33,8 @@ class AmazonAutoLinks_AdminPage_Template extends AmazonAutoLinks_AdminPage_Page_
     public function replyToLoadPage( $oFactory ) {
         
         // Tabs
-        new AmazonAutoLinks_AdminPage_Template_ListTable( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'table',
-                'title'     => __( 'Installed', 'amazon-auto-links' ),
-                'script'    => array(
-                    dirname( __FILE__ ) . '/lightbox2/js/lightbox.js',
-                ),
-                'style'     => array(
-                    dirname( __FILE__ ) . '/lightbox2/css/lightbox.css',
-                ),
-            )
-        );
-        new AmazonAutoLinks_AdminPage_Template_GetNew( 
-            $this->oFactory,
-            $this->sPageSlug,
-            array( 
-                'tab_slug'  => 'get',
-                'title'     => __( 'Get New', 'amazon-auto-links' ),
-            )
-        );
+        new AmazonAutoLinks_AdminPage_Template_ListTable( $this->oFactory, $this->sPageSlug );
+        new AmazonAutoLinks_AdminPage_Template_GetNew( $this->oFactory, $this->sPageSlug );
 
     }
         

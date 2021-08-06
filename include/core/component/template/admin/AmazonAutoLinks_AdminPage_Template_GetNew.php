@@ -15,7 +15,18 @@
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPage_Tab_Base {
-    
+
+    /**
+     * @since  4.6.17
+     * @return array
+     */
+    protected function _getArguments() {
+        return array(
+            'tab_slug'  => 'get',
+            'title'     => __( 'Get New', 'amazon-auto-links' ),
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * 
