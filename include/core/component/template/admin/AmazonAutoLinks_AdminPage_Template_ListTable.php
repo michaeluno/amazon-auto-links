@@ -25,7 +25,16 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
             'tab_slug'  => 'table',
             'title'     => __( 'Installed', 'amazon-auto-links' ),
             'script'    => array(
-                AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/js/lightbox.js',
+                array(
+                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
+                    'in_footer'     => true,
+                ),
+                array(
+                    'src'           => AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/js/lightbox.js',
+                    'dependencies'  => array( 'jquery', ),
+                    'in_footer'     => true,
+                ),
             ),
             'style'     => array(
                 AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/css/lightbox.css',
@@ -81,20 +90,22 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         if ( ! $_oOption->isDebug() ) {
             return;
         }
-        
+
         echo "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>";
-        echo "<h4>" . 'Raw Template Option Values' . "</h4>";
-        echo $oFactory->oDebug->get(
+        echo "<div class='aal-accordion'>";
+        echo "<h4>"
+             . 'Raw Template Option Values' . "</h4>";
+        echo "<div>" . $oFactory->oDebug->get(
             get_option(
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ],
                 array()
             )
-        );            
-        
+        ) . "</div>";
         echo "<h4>" . 'Data of Stored Templates' . "</h4>";
-        echo $oFactory->oDebug->get(
+        echo "<div>" . $oFactory->oDebug->get(
             AmazonAutoLinks_TemplateOption::getInstance()->get()
-        );
+        ) . "</div>";
+        echo "</div>"; // .aal-accordion
         
     }
 }

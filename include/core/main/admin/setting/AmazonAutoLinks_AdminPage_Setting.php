@@ -25,6 +25,13 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
             'title'         => __( 'Settings', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'order'         => 50,
+            'script'        => array(
+                array(
+                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
+                    'in_footer'     => true,
+                ),
+            ),
         );
     }
 
@@ -69,17 +76,19 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         }
 
         echo "<div class='debug'>"
-            . "<h3 style='display:block; clear:both;'>"
-                . 'Debug Info'
-            . "</h3>"
-            . "<h4 style='display:block; clear:both;'>"
-                . 'Options (formatted)'
-            .  "</h4>"
-            . $oFactory->oDebug->getDetails( $_oOption->get() )
-            . "<h4 style='display:block; clear:both;'>"
-                . __( 'Saved Options', 'amazon-auto-links' )
-            .  "</h4>"
-            . $oFactory->oDebug->getDetails( get_option( $_oOption->sOptionKey ) )
+                . "<h3 style='display:block; clear:both;'>"
+                    . 'Debug Info'
+                . "</h3>"
+                . "<div class='aal-accordion'>"
+                    . "<h4 style='display:block; clear:both;'>"
+                        . 'Options (formatted)'
+                    .  "</h4>"
+                    . "<div>" . $oFactory->oDebug->getDetails( $_oOption->get() ) . "</div>"
+                    . "<h4 style='display:block; clear:both;'>"
+                        . __( 'Saved Options', 'amazon-auto-links' )
+                    .  "</h4>"
+                    . "<div>" . $oFactory->oDebug->getDetails( get_option( $_oOption->sOptionKey ) ) . "</div>"
+                . "</div>"
             . "</div>";
 
     }

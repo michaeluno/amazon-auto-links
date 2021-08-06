@@ -225,11 +225,13 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             if ( ! $_oOption->isDebug() && ! $_oOption->isDebugMode() ) {
                 return;
             }
-            echo "<h3>"
-                    . __( 'Transients', 'amazon-auto-links' )
-                . "</h3>";
-            $oFactory->oDebug->dump( array( 'key' => $GLOBALS[ 'aal_transient_id' ] ) );
-            $oFactory->oDebug->dump( $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) ) );
+            echo "<div class='aal-accordion'>";
+            echo "<h4>" . 'Transients' . "</h4>";
+            echo "<div>";
+                $oFactory->oDebug->dump( array( 'key' => $GLOBALS[ 'aal_transient_id' ] ) );
+                $oFactory->oDebug->dump( $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) ) );
+            echo "</div>";
+            echo "</div>";
 
         }
 
