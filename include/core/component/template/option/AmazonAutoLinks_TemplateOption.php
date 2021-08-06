@@ -764,7 +764,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     /**
      * Checks if the template ID is valid or not.
      *
-     * Currently, template IDs are a relative path to dirname( WP_CONTENT_DIR ).
+     * Currently, template IDs are a relative path to ABSPATH.
      * So if the path does not resolve, it is not valid. It occurs when the site has moved to another host.
      *
      * This method is used to list templates in the listing table.
@@ -773,7 +773,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @since  4.6.17
      */
     public function isValidID( $sTemplateID ) {
-        $_sPath = $this->getAbsolutePathFromRelative( $sTemplateID, dirname( WP_CONTENT_DIR ) );
+        $_sPath = $this->getAbsolutePathFromRelative( $sTemplateID, ABSPATH );
         $_sPath = realpath( $_sPath );
         return file_exists( $_sPath );
     }
