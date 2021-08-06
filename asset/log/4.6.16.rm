@@ -1,1 +1,3 @@
-- Reverted the change made in 4.6.15 regarding the way of generating template IDs.
+- Fixed a bug that caused a critical error on some sites with v4.6.15 by reverting the method of generating template IDs.
+- Added the Paths and URLs section in the `About` page.
+- Tweaked unit warning messages.
