@@ -32,7 +32,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         'id'                => null,  // (string)
         'old_id'            => null,  // (string) v2 id (strID)
         'is_active'         => null,  // (boolean)
-        'is_valid'          => true,  // (boolean)  [4.6.17+] indicates whether the template ID is valid or not.
+        'is_valid'          => null,  // (boolean)  [4.6.17+] indicates whether the template ID is valid or not. Don't rely on this value of saved data as the site might hae migrated while storing the old site information.
         'index'             => null,  // (integer)
         'name'              => null,  // (string)   will be used to list templates in options.
         
