@@ -213,7 +213,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
              * @param  string $sTemplateID
              * @param  string $sTemplateName
              * @return WP_Error
-             * @since  4.6.16
+             * @since  4.6.17
              */
             private function ___getTemplateDetailError( $sTemplateID, $sTemplateName ) {
                 return new WP_Error(
@@ -234,7 +234,7 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 /**
                  * @param  string $sTemplateID
                  * @return string
-                 * @since  4.6.16
+                 * @since  4.6.17
                  */
                 private function ___getTemplateDetailErrorMessage( $sTemplateID ) {
                     $_bTemplateExists = false;

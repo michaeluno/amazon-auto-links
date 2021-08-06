@@ -373,9 +373,9 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public function getTemplateNameByID( $sTemplateID ) {
         // Not using getActiveTemplates() here because there could be missed templates by getUploadedTemplates()
-        // after the template ID generation mechanism is changed in 4.6.16. Those unloaded templates are stored in $this->>get()
+        // after the template ID generation mechanism is changed in 4.6.17. Those unloaded templates are stored in $this->>get()
         return $this->getElement( $this->get() + $this->getUploadedTemplates(), array( $sTemplateID, 'name' ), '' );
-        // @deprecated 4.6.16
+        // @deprecated 4.6.17
         // return $this->get(
         //     array( $sTemplateID, 'name' ), // dimensional keys
         //     '' // default
@@ -668,7 +668,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public function getTemplateID( $sDirPath ) {
         return $this->getRelativePathTo( ABSPATH, $sDirPath );
-        // @deprecated 4.6.16 Moved to getRelativePathTo().
+        // @deprecated 4.6.17 Moved to getRelativePathTo().
         // $sDirPath = wp_normalize_path( $sDirPath );
         // $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
         // return untrailingslashit( $sDirPath );
@@ -678,7 +678,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @param  string $sBasePath
      * @param  string $sDirPath
      * @return string
-     * @since  4.6.16
+     * @since  4.6.17
      */
     public function getRelativePathTo( $sBasePath, $sDirPath ) {
         $sDirPath = wp_normalize_path( $sDirPath );

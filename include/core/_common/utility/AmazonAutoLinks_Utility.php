@@ -91,7 +91,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      *
      * @param       string          $sFilePath
      * @return      false|mixed     false on failure. Otherwise, the return value of the included file.
-     * @deprecated  4.6.16          Use include_once() as it doesn't have any performance issue as of PHP 5.
+     * @deprecated  4.6.17          Use include_once() as it doesn't have any performance issue as of PHP 5.
      */
     static public function includeOnce( $sFilePath ) {
 

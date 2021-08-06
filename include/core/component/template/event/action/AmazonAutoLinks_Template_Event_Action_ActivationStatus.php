@@ -84,10 +84,10 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
                 // At this point, an un-stored template is given.
                 // The id may be a relative path of the template directory
-                // $_sDirPath = $this->getAbsolutePathFromRelative( $sID ); // @deprecated 4.6.16 Causes duplicated templates with a slightly different template ID in the list table when the site has a custom WP_CONTENT_URL & WP_CONTENT_DIR
+                // $_sDirPath = $this->getAbsolutePathFromRelative( $sID ); // @deprecated 4.6.17 Causes duplicated templates with a slightly different template ID in the list table when the site has a custom WP_CONTENT_URL & WP_CONTENT_DIR
                 $_sDirPath = $this->___getTemplateDirPath( $sID, $_oTemplateOption );
 
-                unset( $aTemplates[ $sID ] );   // 4.6.16 drop the non-existent template
+                unset( $aTemplates[ $sID ] );   // 4.6.17 drop the non-existent template
                 if ( ! file_exists( $_sDirPath ) ) {
                     $_aErrorInfo = array(
                         'template_id' => $sID,
@@ -114,7 +114,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                  * @param  string $sTemplateID
                  * @param  AmazonAutoLinks_TemplateOption $_oTemplateOption
                  * @return string
-                 * @since  4.6.16
+                 * @since  4.6.17
                  */
                 private function ___getTemplateDirPath( $sTemplateID, $_oTemplateOption ) {
                     $_aAvailableTemplates = $_oTemplateOption->getActiveTemplates() + $_oTemplateOption->getUploadedTemplates();
@@ -142,7 +142,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
                     $this->___aToggledTemplateNames[] = $this->getElement( $aTemplates, array( $sTemplateID, 'name' ) );
 
-                    // @since 4.6.16 If deactivating, remove the template array
+                    // @since 4.6.17 If deactivating, remove the template array
                     if ( ! $bActivate ) {
                         unset( $aTemplates[ $sTemplateID ] );
                         return $aTemplates;
