@@ -1,9 +1,9 @@
 /*
 	@name Templates
-	@version 1.0.0
+	@version 1.0.1
  */
 .widefat td	{
-	vertical-align: middle;
+	vertical-align: top;
 }
 .column-thumbnail {
 	width: 20%;

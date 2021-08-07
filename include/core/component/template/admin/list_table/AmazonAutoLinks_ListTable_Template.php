@@ -148,7 +148,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aItem[ 'is_active' ]   /*$1%s*/ 
                 ? $_sWarning . "<strong>{$aItem[ 'name' ]}</strong>"
                 : $_sWarning . $aItem[ 'name' ],
-            $this->row_actions( $aActions ) /*$2%s*/ 
+            $this->row_actions( $aActions, true ) /*$2%s*/
         );
         
     }
@@ -214,7 +214,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         return sprintf(
             '%1$s <div class="active second">%2$s</div>',
             $aItem[ 'description' ],    /*$1%s*/ 
-            $this->row_actions( $aActions ) /*$2%s*/
+            $this->row_actions( $aActions, false ) /*$2%s*/
         );
 
     }
