@@ -778,4 +778,19 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return file_exists( $_sPath );
     }
 
+    /**
+     * Returns all the available templates.
+     *
+     * This adds the `is_valid` element.
+     * @return array
+     * @since  4.6.17
+     */
+    public function getAvailable() {
+        $_aTemplates = $this->getActiveTemplates() + $this->getUploadedTemplates();
+        foreach( $_aTemplates as $_sID => $_aTemplate ) {
+            $_aTemplates[ $_sID ][ 'is_valid' ] = $this->isValidID( $_sID );
+        }
+        return $_aTemplates;
+    }
+
 }
