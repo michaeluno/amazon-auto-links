@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.15 =
+- Used .amazon-auto-links-widget instead of the .widget and .widget-area selectors for layouts in widgets.
+
 = 1.2.14 =
 - Changed the responsive max-width from 560 to 520 to be compatible with the embed view of the Twenty Seventeen theme.
 - Tweaked the content body width for the site enabling the Japanese language.
