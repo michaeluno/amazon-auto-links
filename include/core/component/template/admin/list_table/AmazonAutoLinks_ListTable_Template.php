@@ -144,12 +144,14 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
 
         // Return the title contents
         return sprintf(
-            '%1$s %2$s',    // <span style="color:silver">(id:%2$s)</span>
+            '%1$s %2$s %3$s',    // <span style="color:silver">(id:%2$s)</span>
             $aItem[ 'is_active' ]   /*$1%s*/ 
-                ? $_sWarning . "<strong>{$aItem[ 'name' ]}</strong>"
-                : $_sWarning . $aItem[ 'name' ],
-            $this->row_actions( $aActions, true ) /*$2%s*/
+                ? "<p>" . $_sWarning . "<strong>{$aItem[ 'name' ]}</strong></p>"
+                : "<p>" . $_sWarning . $aItem[ 'name' ] . "</p>",
+            AmazonAutoLinks_Option::getInstance()->isDebug() ? "<div>ID: {$aItem[ 'id' ]}</div>" : '',
+            $this->row_actions( $aActions, true ) /*$3%s*/
         );
+
         
     }
 

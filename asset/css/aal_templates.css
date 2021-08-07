@@ -5,6 +5,9 @@
 .widefat td	{
 	vertical-align: top;
 }
+.widefat td p {
+	margin-bottom: 0.2em;
+}
 .column-thumbnail {
 	width: 20%;
 }
