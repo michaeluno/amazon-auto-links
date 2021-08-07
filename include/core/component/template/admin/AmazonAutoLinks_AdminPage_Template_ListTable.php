@@ -55,23 +55,11 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
     public function replyToLoadTab( $oAdminPage ) {
 
         // Set the list table data.
-        $this->___oTemplateListTable = new AmazonAutoLinks_ListTable_Template( $this->___getTemplateListData() );
+        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
+        $this->___oTemplateListTable = new AmazonAutoLinks_ListTable_Template( $_oTemplateOption->getAvailable() );
         $this->___oTemplateListTable->process_bulk_action();
 
     }
-        /**
-         * @since  4.6.17
-         * @return array
-         */
-        private function ___getTemplateListData() {
-            $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-            $_aAvailable      = $_oTemplateOption->getActiveTemplates() // precedence
-                + $_oTemplateOption->getUploadedTemplates();
-            foreach( $_aAvailable as $_sTemplateID => $_aTemplate ) {
-                $_aAvailable[ $_sTemplateID ][ 'is_valid' ] = $_oTemplateOption->isValidID( $_sTemplateID );
-            }
-            return $_aAvailable;
-        }
 
     /**
      *
@@ -103,6 +91,8 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         echo "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>";
         echo "<div class='aal-accordion'>";
+        echo "<h4>" . 'Available Templates' . "</h4>";
+        echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->getAvailable() ) . "</div>";
         echo "<h4>" . 'Active Templates' . "</h4>";
         echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->getActiveTemplates() ) . "</div>";
         echo "<h4>" . 'Uploaded Templates' . "</h4>";
