@@ -115,8 +115,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         // Build row actions
         $aActions = array();
         if ( $aItem[ 'is_active' ] ) {
+            $_sLabel = $aItem[ 'is_valid' ] ? __( 'Deactivate', 'amazon-auto-links' ) : __( 'Remove', 'amazon-auto-links' );
             $aActions[ 'deactivate' ] = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Deactivate', 'amazon-auto-links' ) . '</a>', 
+                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . $_sLabel . '</a>',
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
                 $_REQUEST[ 'page' ], 
                 'deactivate', 
@@ -140,14 +141,23 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         // [4.6.17] If the template is not valid, add a warning icon
         $_sWarning = $aItem[ 'is_valid' ]
             ? ""
-            : "<span class='warning dashicons dashicons-warning'></span>";
+            : "<div class='warning icon-container' data-has-warning='1'>"
+                . "<span class='dashicons dashicons-warning'></span>"
+                . "<div class='tooltip-content'>"
+                    . "<p>"
+                        . __( 'The plugin cannot load the template.', 'amazon-auto-links' )
+                        . ' ' . __( 'Please remove this from the action link. If there are associated units to this template, please update their template unit setting.', 'amazon-auto-links' )
+                    . "</p>"
+                ."</div>"
+            . "</div>";
+
 
         // Return the title contents
         return sprintf(
             '%1$s %2$s %3$s',    // <span style="color:silver">(id:%2$s)</span>
             $aItem[ 'is_active' ]   /*$1%s*/ 
-                ? "<p>" . $_sWarning . "<strong>{$aItem[ 'name' ]}</strong></p>"
-                : "<p>" . $_sWarning . $aItem[ 'name' ] . "</p>",
+                ? "<div class='name-container'>" . $_sWarning . "<strong>{$aItem[ 'name' ]}</strong></div>"
+                : "<div class='name-container'>" . $_sWarning . $aItem[ 'name' ] . "</div>",
             AmazonAutoLinks_Option::getInstance()->isDebug() ? "<div>ID: {$aItem[ 'id' ]}</div>" : '',
             $this->row_actions( $aActions, true ) /*$3%s*/
         );

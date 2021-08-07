@@ -21,6 +21,7 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
      * @return array
      */
     protected function _getArguments() {
+        
         return array(
             'tab_slug'  => 'table',
             'title'     => __( 'Installed', 'amazon-auto-links' ),
@@ -33,6 +34,11 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
                 array(
                     'src'           => AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/lightbox2/js/lightbox.js',
                     'dependencies'  => array( 'jquery', ),
+                    'in_footer'     => true,
+                ),
+                array(
+                    'src'           => AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/js/warning-tooltip.js',
+                    'dependencies'  => array( 'jquery', 'wp-pointer' ),
                     'in_footer'     => true,
                 ),
             ),
@@ -53,6 +59,8 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
      * @callback        load_{page slug}_{tab slug}
      */
     public function replyToLoadTab( $oAdminPage ) {
+
+        wp_enqueue_style( 'wp-pointer' );
 
         // Set the list table data.
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();

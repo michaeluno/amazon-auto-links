@@ -5,9 +5,6 @@
 .widefat td	{
 	vertical-align: top;
 }
-.widefat td p {
-	margin-bottom: 0.2em;
-}
 .column-thumbnail {
 	width: 20%;
 }
@@ -18,6 +15,10 @@
 	float: right;
 }
 
+
+.name-container {
+	margin-bottom: 0.2em;
+}
 
 /* Make fetched template listing images fit in the container */
 div.amazon_auto_links_columns_col div.amazon_auto_links_item img {    
@@ -43,9 +44,18 @@ div.amazon_auto_links_columns_col div.amazon_auto_links_item img {
 }
 
 /* Warnings */
-span.warning.dashicons.dashicons-warning {
+div.icon-container {
+	display: inline-block;
+}
+.warning span.dashicons.dashicons-warning {
+	color: red;
     margin-right: 0.2em;
     font-size: 16px;
     vertical-align: text-bottom;
     display: inline;
+}
+
+/* Tooltips */
+.tooltip-content {
+	display: none;
 }
