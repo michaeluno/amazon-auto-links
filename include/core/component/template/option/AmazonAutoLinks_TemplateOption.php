@@ -74,7 +74,14 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * Stores the self instance.
      */
     static public $oSelf;
-    
+
+    /**
+     * @var    string    The base path that a template relative path is based on.
+     * @remark The value is set in the constructor.
+     * @since  4.6.17
+     */
+    static public $sBasePath;
+
     /**
      * Returns an instance of the self.
      * 
@@ -96,7 +103,16 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         return self::$oSelf;
         
     }
-    
+
+    /**
+     * @param string $sOptionKey
+     * @since 4.6.17
+     */
+    public function __construct( $sOptionKey ) {
+        self::$sBasePath = ABSPATH;
+        parent::__construct( $sOptionKey );
+    }
+
     /**
      * Returns the formatted options array.
      * @return  array
@@ -108,11 +124,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          * @return      array       plugin default templates which should be activated upon installation / restoring factory default.
          */
         private function ___getDefaultTemplates() {
-            
             $_aDirPaths = array(
-//                AmazonAutoLinks_Registry::$sDirPath . '/template/category',   // @deprecated 4.0.0    Now use list
-//                AmazonAutoLinks_Registry::$sDirPath . '/template/search',     // @deprecated 4.0.0    Now use list
-//                AmazonAutoLinks_Registry::$sDirPath . '/template/list'  // 3.8.0
                 dirname( $this->getDefaultTemplatePathByUnitType( '' ) ),
             );
             $_iIndex     = 0;
@@ -127,7 +139,6 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $_aTemplates[ $_aTemplate[ 'id' ] ] = $_aTemplate;
             }
             return $_aTemplates;
-         
         }
 
     /**
@@ -268,7 +279,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'relative_dir_path' ] = $this->getElement(
                 $aTemplate,
                 'relative_dir_path',
-                $this->getRelativePathTo( ABSPATH, $aTemplate[ 'strDirPath' ] )
+                $this->getRelativePathTo( self::$sBasePath, $aTemplate[ 'strDirPath' ] )
             );
             $aTemplate[ 'relative_dir_path' ] = wp_normalize_path( $aTemplate[ 'relative_dir_path' ] );
 
@@ -277,7 +288,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'dir_path' ]          = $this->getElement(
                 $aTemplate,
                 'dir_path',
-                $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ], ABSPATH )
+                $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ], self::$sBasePath )
             );
             $aTemplate[ 'dir_path' ]          = realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) );
 
@@ -660,7 +671,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     /**
      * Retrieves a template ID from a given directory path.
      *
-     * A template ID is a relative path to ABSPATH.
+     * A template ID is a relative path to self::$sBasePath.
      *
      * @param   string $sDirPath
      * @return  string
@@ -668,10 +679,10 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @scope   public  Each template accesses this method to get the ID for filters.
      */
     public function getTemplateID( $sDirPath ) {
-        return $this->getRelativePathTo( ABSPATH, $sDirPath );
+        return $this->getRelativePathTo( self::$sBasePath, $sDirPath );
         // @deprecated 4.6.17 Moved to getRelativePathTo().
         // $sDirPath = wp_normalize_path( $sDirPath );
-        // $sDirPath = $this->getRelativePath( ABSPATH, $sDirPath );
+        // $sDirPath = $this->getRelativePath( self::$sBasePath, $sDirPath );
         // return untrailingslashit( $sDirPath );
     }
 
@@ -764,7 +775,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
     /**
      * Checks if the template ID is valid or not.
      *
-     * Currently, template IDs are a relative path to ABSPATH.
+     * Currently, template IDs are a relative path to self::$sBasePath.
      * So if the path does not resolve, it is not valid. It occurs when the site has moved to another host.
      *
      * This method is used to list templates in the listing table.
@@ -773,7 +784,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @since  4.6.17
      */
     public function isValidID( $sTemplateID ) {
-        $_sPath = $this->getAbsolutePathFromRelative( $sTemplateID, ABSPATH );
+        $_sPath = $this->getAbsolutePathFromRelative( $sTemplateID, self::$sBasePath );
         $_sPath = realpath( $_sPath );
         return file_exists( $_sPath );
     }
