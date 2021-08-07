@@ -109,7 +109,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @since 4.6.17
      */
     public function __construct( $sOptionKey ) {
-        self::$sBasePath = ABSPATH;
+        self::$sBasePath = dirname( WP_CONTENT_DIR );
         parent::__construct( $sOptionKey );
     }
 
