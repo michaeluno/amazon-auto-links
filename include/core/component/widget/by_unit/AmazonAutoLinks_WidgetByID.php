@@ -34,6 +34,7 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
         $this->setArguments( 
             array(
                 'description'   =>  __( 'Displays Amazon product unit outputs.', 'amazon-auto-links' ),
+                'classname'     => 'widget-aal-unit-by-id amazon-auto-links-widget admin_page_framework_widget'
             ) 
         );
     
