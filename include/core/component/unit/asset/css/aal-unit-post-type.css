@@ -100,10 +100,3 @@ tr.type-amazon_auto_links:first-child td ul {
 .warning-tooltip-content {
     display: none;
 }
-/* Override the tooltip arrow color*/
-.aal-pointer .wp-pointer-arrow, .wp-pointer-undefined .wp-pointer-arrow {
-    border-bottom-color: #c3c4c7;
-}
-.aal-pointer .wp-pointer-arrow-inner, .wp-pointer-undefined .wp-pointer-arrow-inner {
-    border-bottom-color: #FFF;
-}
