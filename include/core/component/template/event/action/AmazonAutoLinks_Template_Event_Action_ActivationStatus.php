@@ -103,10 +103,16 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                 $_aTemplate         = $_oTemplateOption->getTemplateArrayByDirPath( $_sDirPath );
                 $_sTemplateID       = $_aTemplate[ 'id' ];
 
+                $this->___aToggledTemplateNames[] = $this->getElement( $_aTemplate, 'name' );
+
+                // The newly generated template ID already exists. So don't touch. The deactivated item will be deleted and gone.
+                if ( isset( $aTemplates[ $_sTemplateID ] ) ) {
+                    return $aTemplates;
+                }
+
                 $aTemplates[ $_sTemplateID ] = array(
                     'is_active' => $bActivate,
                 ) + $this->getAsArray( $_aTemplate );
-                $this->___aToggledTemplateNames[] = $this->getElement( $_aTemplate, 'name' );
                 return $aTemplates;
 
             }
