@@ -760,6 +760,19 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * @return string
+     * @since  4.6.17 Moved from `AmazonAutoLinks_UnitOutput_embed::___getGuideMessageForErrors()`.
+     */
+    static public function getEnableHTTPProxyOptionMessage() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return '';
+        }
+        $_sURLAdminProxyTab = self::getProxySettingScreenURL();
+        return '* ' . __( 'Message for administrator', 'amazon-auto-links' ) . ': '
+            . sprintf( __( 'Consider enabling the %1$s option.', 'amazon-auto-links' ), "<a href='" . esc_url( $_sURLAdminProxyTab ) . "' target='_blank'>" . __( 'HTTP Proxies', 'amazon-auto-links' ) . "</a>" );
+    }
+
+    /**
+     * @return string
      * @since  4.5.0  Moved from `AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection`.
      */
     static public function getProxySettingScreenURL() {
