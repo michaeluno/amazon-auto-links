@@ -1,6 +1,6 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.17b03 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.17b04 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -371,6 +371,7 @@ return array(
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Title" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_Title.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/element_formatter/AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating.php", 
     "AmazonAutoLinks_UnitOutput__ErrorChecker" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/error/AmazonAutoLinks_UnitOutput__ErrorChecker.php", 
+    "AmazonAutoLinks_UnitOutput__HTTPErrorChecks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/error/AmazonAutoLinks_UnitOutput__HTTPErrorChecks.php", 
     "AmazonAutoLinks_UnitOutput__ItemFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/item_formatter/AmazonAutoLinks_UnitOutput__ItemFormatter.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_Base.php", 

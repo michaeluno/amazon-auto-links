@@ -433,6 +433,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
                 new AmazonAutoLinks_UnitOutput__Credit( $this ),
                 new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
+                new AmazonAutoLinks_UnitOutput__HTTPErrorChecks( $this ),
             );
 
             // 3.7.5+
@@ -533,11 +534,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         $_sUnitStatusMetaKey = '_error';
         $_sError = $this->_getError( $aProducts );
+        $_sNotes = implode( ', ', $this->aNotes );
+        $_sNotes = $_sNotes ? ' ' . $_sNotes : '';
         if ( $_sError ) {
             update_post_meta(
                 $iUnitID, // post id
                 $_sUnitStatusMetaKey, // meta key
-                $_sError    // value
+                $_sError . $_sNotes    // value
             );
             return;
         }
@@ -545,6 +548,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // At this point, the response has no error.
 
         $_snStoredError = get_post_meta( $iUnitID, $_sUnitStatusMetaKey, true );
+         // $_snStoredError = $this->oUnitOption->get( '_error' ); // might save a database query
         if ( 'normal' !== $_snStoredError ) {
             update_post_meta(
                 $iUnitID, // post id
