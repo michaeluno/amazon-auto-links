@@ -28,17 +28,19 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public static $aStructure_Template = array(
 
-        'relative_dir_path' => null,  // (string)
-        'id'                => null,  // (string)
-        'old_id'            => null,  // (string) v2 id (strID)
-        'is_active'         => null,  // (boolean)
-        'is_valid'          => null,  // (boolean)  [4.6.17+] indicates whether the template ID is valid or not. Don't rely on this value of saved data as the site might hae migrated while storing the old site information.
-        'index'             => null,  // (integer)
-        'name'              => null,  // (string)   will be used to list templates in options.
+        'relative_dir_path' => null,    // (string)
+        'id'                => null,    // (string)
+        'old_id'            => null,    // (string) v2 id (strID)
+        'is_active'         => null,    // (boolean)
+        'is_valid'          => null,    // (boolean)  [4.6.17+] indicates whether the template ID is valid or not. Don't rely on this value of saved data as the site might hae migrated while storing the old site information.
+        'should_remove'     => null,    // (boolean)  [4.6.17+] indicates whether the template should be removed
+        'warnings'          => array(), // (array)    [4.6.17+] stores warnings when the template has an issue
+        'index'             => null,    // (integer)
+        'name'              => null,    // (string)   will be used to list templates in options.
         
         // assigned at the load time
-        'template_path'     => null,  // (string) template.php
-        'dir_path'          => null,  // (string)        
+        'template_path'     => null,    // (string) template.php
+        'dir_path'          => null,    // (string)
         
         // for listing table
         'description'       => null,
@@ -804,6 +806,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         $_aTemplates = $this->getActiveTemplates() + $this->getUploadedTemplates();
         foreach( $_aTemplates as $_sID => $_aTemplate ) {
             $_aTemplates[ $_sID ][ 'is_valid' ] = $this->isValidID( $_sID );
+            $_aTemplates[ $_sID ][ 'should_remove' ] = ! $_aTemplates[ $_sID ][ 'is_valid' ];
         }
         $_aTemplates = apply_filters( 'aal_filter_available_templates', $_aTemplates );
         $_aCache     = $_aTemplates;

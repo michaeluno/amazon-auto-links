@@ -111,11 +111,13 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      * @callback        filter      column_{$column_title}
      */ 
     public function column_name( $aItem ){    
-        
+
+        $_sWarning = apply_filters( 'aal_filter_template_list_table_warning', '', $aItem ); // [4.6.17+]
+
         // Build row actions
         $aActions = array();
         if ( $aItem[ 'is_active' ] ) {
-            $_sLabel = $aItem[ 'is_valid' ] ? __( 'Deactivate', 'amazon-auto-links' ) : __( 'Remove', 'amazon-auto-links' );
+            $_sLabel = $aItem[ 'should_remove' ] ? __( 'Remove', 'amazon-auto-links' ) : __( 'Deactivate', 'amazon-auto-links' );
             $aActions[ 'deactivate' ] = sprintf( 
                 '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . $_sLabel . '</a>',
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
@@ -136,21 +138,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             'aal_filter_template_listing_table_action_links', 
             $aActions, 
             $aItem[ 'id' ]
-        );    
-
-        // [4.6.17] If the template is not valid, add a warning icon
-        $_sWarning = $aItem[ 'is_valid' ]
-            ? ""
-            : "<div class='warning icon-container' data-has-warning='1'>"
-                . "<span class='dashicons dashicons-warning'></span>"
-                . "<div class='tooltip-content'>"
-                    . "<p>"
-                        . __( 'The plugin cannot load the template.', 'amazon-auto-links' )
-                        . ' ' . __( 'Please remove this from the action link. If there are associated units to this template, please update their template unit setting.', 'amazon-auto-links' )
-                    . "</p>"
-                ."</div>"
-            . "</div>";
-
+        );
 
         // Return the title contents
         return sprintf(
