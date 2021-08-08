@@ -23,10 +23,55 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
     public function __construct() {
 
-        add_action( 'aal_action_activate_templates', array( $this, 'replyToActivateTemplates' ), 10 );
-        add_action( 'aal_action_deactivate_templates', array( $this, 'replyToDeactivateTemplates' ), 10 );
+        add_action( 'aal_action_activate_templates', array( $this, 'replyToActivateTemplates' ) );
+        add_action( 'aal_action_deactivate_templates', array( $this, 'replyToDeactivateTemplates' ) );
+        add_action( 'aal_action_remove_templates', array( $this, 'replyToRemoveTemplates' ) );
 
     }
+
+    /**
+     * @param array $aTemplateIDs
+     * @since 4.6.17
+     */
+    public function replyToRemoveTemplates( array $aTemplateIDs ) {
+        $_aRemoved        = array();
+        $_aCouldNotRemove = array();
+        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
+        $_aTemplates      = $this->getAsArray( $_oTemplateOption->get() );
+        foreach( $aTemplateIDs as $_sTemplateID ) {
+            if ( ! isset( $_aTemplates[ $_sTemplateID ] ) ) {
+                $_aCouldNotRemove[] = $_sTemplateID;
+                continue;
+            }
+            $_aRemoved[] = $this->getElement( $_aTemplates, array( $_sTemplateID, 'name' ) );
+            unset( $_aTemplates[ $_sTemplateID ] );
+        }
+        $_oTemplateOption->aOptions = $_aTemplates;
+        $_oTemplateOption->save();
+
+        $this->___setSettingNoticeOfRemovedTemplates( $_aRemoved, $_aCouldNotRemove );
+    }
+        /**
+         * @param array  $aRemoved
+         * @param array  $aCouldNotRemove
+         * @since 4.6.17
+         */
+        private function ___setSettingNoticeOfRemovedTemplates( $aRemoved, $aCouldNotRemove ) {
+            if ( ! empty( $aRemoved ) ) {
+                do_action(
+                    'aal_action_set_admin_setting_notice',
+                    sprintf( __( 'The template, %1$s, has been removed.', 'amazon-auto-links' ), implode( ', ', $aRemoved ) ),
+                    'updated'
+                );
+            }
+            if ( ! empty( $aCouldNotRemove ) ) {
+                do_action(
+                    'aal_action_set_admin_setting_notice',
+                    sprintf( __( 'The template, %1$s, could not be removed.', 'amazon-auto-links' ), implode( ', ', $aCouldNotRemove ) ),
+                    'updated'
+                );
+            }
+        }
 
     /**
      * @param array an array holding template IDs or template option arrays.
@@ -57,18 +102,6 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
             $this->___setSettingNoticeOfToggleTemplates( $bActivate );
         }
-            /**
-             * @param boolean $bActivate
-             * @since 4.6.7
-             */
-            private function ___setSettingNoticeOfToggleTemplates( $bActivate ) {
-                $this->___aToggledTemplateNames = array_filter( $this->___aToggledTemplateNames ); // drop non-true values
-                $_aTemplateNames = implode( ', ', $this->___aToggledTemplateNames );
-                $_sMessage       = $bActivate
-                    ? sprintf( __( 'The template, %1$s, has been activated.', 'amazon-auto-links' ), $_aTemplateNames )
-                    : sprintf( __( 'The template, %1$s, has been deactivated.', 'amazon-auto-links' ), $_aTemplateNames );
-                do_action( 'aal_action_set_admin_setting_notice', $_sMessage, 'updated' );
-            }
             /**
              * @param  string   $sID            The passed templated ID.
              * @param  array    $aTemplates
@@ -168,4 +201,16 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                     return $aTemplates;
                 }
 
+            /**
+             * @param boolean $bActivate
+             * @since 4.6.7
+             */
+            private function ___setSettingNoticeOfToggleTemplates( $bActivate ) {
+                $this->___aToggledTemplateNames = array_filter( $this->___aToggledTemplateNames ); // drop non-true values
+                $_sTemplateNames = implode( ', ', $this->___aToggledTemplateNames );
+                $_sMessage       = $bActivate
+                    ? sprintf( __( 'The template, %1$s, has been activated.', 'amazon-auto-links' ), $_sTemplateNames )
+                    : sprintf( __( 'The template, %1$s, has been deactivated.', 'amazon-auto-links' ), $_sTemplateNames );
+                do_action( 'aal_action_set_admin_setting_notice', $_sMessage, 'updated' );
+            }
 }

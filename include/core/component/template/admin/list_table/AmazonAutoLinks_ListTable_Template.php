@@ -117,9 +117,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         // Build row actions
         $aActions = array();
         if ( $aItem[ 'is_active' ] ) {
-            $_sLabel = $aItem[ 'should_remove' ] ? __( 'Remove', 'amazon-auto-links' ) : __( 'Deactivate', 'amazon-auto-links' );
             $aActions[ 'deactivate' ] = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . $_sLabel . '</a>',
+                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Deactivate', 'amazon-auto-links' ) . '</a>',
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
                 $_REQUEST[ 'page' ], 
                 'deactivate', 
@@ -131,6 +130,16 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
                 $_REQUEST[ 'page' ], 
                 'activate', 
+                $aItem[ 'id' ]
+            );
+        }
+        if ( $aItem[ 'should_remove' ] ) {
+            unset( $aActions[ 'deactivate' ] );
+            $aActions[ 'remove' ] = sprintf(
+                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Remove', 'amazon-auto-links' ) . '</a>',
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                $_REQUEST[ 'page' ],
+                'remove',
                 $aItem[ 'id' ]
             );
         }
@@ -239,6 +248,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
         
         switch( strtolower( $this->current_action() ) ){
+            case 'remove': // [4.6.17]
+                do_action( 'aal_action_remove_templates', ( array ) $_REQUEST[ 'template' ] );
+                break;
             case 'activate':
                 do_action( 'aal_action_activate_templates', ( array ) $_REQUEST[ 'template' ] );
                 break;
