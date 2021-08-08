@@ -575,8 +575,30 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     protected function _getError( $aProducts ) {
         $this->___setErrors( $aProducts );
-        return trim( implode( ' ', $this->aErrors ) );
+        $_sErrors = trim( implode( ' ', $this->aErrors ) );
+        if ( ! $_sErrors ) {
+            return $_sErrors;
+        }
+        $_aNotes  = array_map( array( $this, '___replyToGetPrintableNotes' ), $this->aNotes );
+        $_sNotes  = implode( ' ', $_aNotes );
+        $_sNotes  = $_sNotes ? ' ' . $_sNotes : '';
+        return $_sErrors . $_sNotes;
     }
+        /**
+         * @param  string $sNote
+         * @return string
+         * @since  4.6.17
+         */
+        private function ___replyToGetPrintableNotes( $sNote ) {
+            if ( false !== strpos( $sNote, 'BLOCKED_BY_CAPTCHA' ) ) {
+                $_aNoteParts = explode( '.', $sNote );
+                $_aNoteParts = explode( ':', $_aNoteParts[ 0 ] );
+                $_sGuide     = $this->getEnableHTTPProxyOptionMessage();
+                $_sGuide     = $_sGuide ? ' ' . $_sGuide : '';
+                return $_aNoteParts[ 1 ] . '.' . $_sGuide;
+            }
+            return $sNote;
+        }
         /**
          * @since  4.6.17   Moved from AmazonAutoLinks_UnitOutput_Base::_getError()
          */
