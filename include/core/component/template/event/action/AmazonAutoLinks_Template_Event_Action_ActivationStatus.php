@@ -78,7 +78,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
             private function ___getTemplateStatusToggled( $sID, array $aTemplates, $bActivate ) {
 
                 $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
-                if ( isset( $aTemplates[ $sID ] ) && $_oTemplateOption->exists( $sID ) ) {
+                if ( isset( $aTemplates[ $sID ] ) ) {
                     return $this->___getTemplatesWithUpdatedActivationStatus( $aTemplates, $sID, $bActivate, $_oTemplateOption );
                 }
 
