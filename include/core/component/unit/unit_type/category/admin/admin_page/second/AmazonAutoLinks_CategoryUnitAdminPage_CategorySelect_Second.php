@@ -122,7 +122,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * @since   4.2.2
          */
         private function ___getDebugInformation( $sLocale, array $aUnitOptions ) {
-            $_bPluginDebugMode  = AmazonAutoLinks_Option::getInstance()->isDebug();
+            $_bPluginDebugMode  = AmazonAutoLinks_Option::getInstance()->isDebug() || $this->isDebugMode();
             $_aDebugInformation = array(
                 'debugMode' => $_bPluginDebugMode,
             );
