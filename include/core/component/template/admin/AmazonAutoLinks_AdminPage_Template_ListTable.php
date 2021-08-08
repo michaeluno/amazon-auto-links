@@ -21,7 +21,7 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
      * @return array
      */
     protected function _getArguments() {
-        
+
         return array(
             'tab_slug'  => 'table',
             'title'     => __( 'Installed', 'amazon-auto-links' ),
@@ -61,6 +61,8 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
     public function replyToLoadTab( $oAdminPage ) {
 
         wp_enqueue_style( 'wp-pointer' );
+
+        do_action( 'aal_action_before_template_list_set_up' );
 
         // Set the list table data.
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();

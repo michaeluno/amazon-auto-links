@@ -805,7 +805,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         foreach( $_aTemplates as $_sID => $_aTemplate ) {
             $_aTemplates[ $_sID ][ 'is_valid' ] = $this->isValidID( $_sID );
         }
-        $_aCache = $_aTemplates;
+        $_aTemplates = apply_filters( 'aal_filter_available_templates', $_aTemplates );
+        $_aCache     = $_aTemplates;
         return $_aTemplates;
     }
 
