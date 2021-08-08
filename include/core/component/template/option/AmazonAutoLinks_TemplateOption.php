@@ -797,10 +797,15 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      * @since  4.6.17
      */
     public function getAvailable() {
+        static $_aCache;
+        if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }
         $_aTemplates = $this->getActiveTemplates() + $this->getUploadedTemplates();
         foreach( $_aTemplates as $_sID => $_aTemplate ) {
             $_aTemplates[ $_sID ][ 'is_valid' ] = $this->isValidID( $_sID );
         }
+        $_aCache = $_aTemplates;
         return $_aTemplates;
     }
 
