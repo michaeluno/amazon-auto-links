@@ -30,24 +30,6 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
     }
 
     /**
-     * A user constructor.
-     * 
-     * @since 3
-     * @param AmazonAutoLinks_AdminPageFramework $oFactory
-     */
-    protected function _construct( $oFactory ) {
-             
-        // reset_{instantiated class name}_{section id}_{field id}
-        add_action( 
-            "reset_{$oFactory->oProp->sClassName}_{$this->sSectionID}_all",
-            array( $this, 'replyToResetOptions' ), 
-            10, // priority
-            4 // number of parameters
-        );
-        
-    }
-    
-    /**
      * Adds form fields.
      * @since 3
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
@@ -57,11 +39,32 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
 
        $oFactory->addSettingFields(
             $sSectionID, // the target section id
+            array(
+                'field_id'              => 'reset_components',
+                'title'                 => __( 'Restore Defaults', 'amazon-auto-links' ),
+                'type'                  => 'checkbox',
+                'select_all_button'     => true,
+                'select_none_button'    => true,
+                'label'                 => array(
+                    'general'  => __( 'General', 'amazon-auto-links' ),
+                    'template' => __( 'Templates', 'amazon-auto-links' ),
+                    'tool'     => __( 'Tools', 'amazon-auto-links' ),
+                    // 'button'   => __( 'Buttons', 'amazon-auto-links' ),
+                    // 'opt_in'   => __( 'Opt-in', 'amazon-auto-links' ),   // not implemented yet
+                ),
+                'save'                  => false,
+                'default'               => array(
+                    'general'  => true,
+                    'template' => true,
+                    'tool'     => true,
+                    // 'button'   => true,
+                ),
+            ),
             array( 
-                'field_id'          => 'all',
-                'title'             => __( 'Restore Default', 'amazon-auto-links' ),
+                'field_id'          => 'restore',
                 'type'              => 'submit',
-                'reset'             => true,
+                'save'              => false,
+                // 'reset'             => true,
                 'value'             => __( 'Restore', 'amazon-auto-links' ),
                 'confirm'           => __( 'Confirm that this deletes the current stored options and restores the default options.', 'amazon-auto-links' ),
                 'skip_confirmation' => true,
@@ -81,39 +84,59 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
     }
 
     /**
-     * @param array|string $asKeyToReset
-     * @param array $aInputs
-     * @param AmazonAutoLinks_AdminPageFramework $oFactory
-     * @param array $aSubmitInfo
+     *
      */
-    public function replyToResetOptions( $asKeyToReset, $aInputs, $oFactory, $aSubmitInfo ) {
-        
-        // Delete the template options as well.
-        delete_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ]
-        );
-        
-        // Button options
-        delete_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ]
-        );
-        
-        // Last inputs
-        delete_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ]
-        );
-
-        // Tools
-        // Last inputs
-        delete_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ]
-        );
-
-        // User meta
-        delete_user_meta( get_current_user_id(), 'aal_rated' );
-
-        $oFactory->setSettingNotice( __( 'The default options have been restored.', 'amazon-auto-links' ), 'updated' );
-
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+        if ( 'restore' === $aSubmitInfo[ 'field_id' ] ) {
+            add_filter( 'validation_' . $oFactory->oProp->sClassName, array( $this, 'replyToResetOptions' ), 999, 4 );
+            return $aOldInputs;
+        }
+        return $aInputs;
     }
-   
+        public function replyToResetOptions( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+            $this->___resetOptions( $aInputs[ 'reset_settings' ][ 'reset_components' ], $oFactory );
+            return $aInputs;    // do not return an empty array as the user might not check `general`.
+        }
+            /**
+             * @param AmazonAutoLinks_AdminPageFramework $oFactory
+             */
+            private function ___resetOptions( $aResetComponents, $oFactory ) {
+
+                $_aCheckedComponents = array_filter( $aResetComponents );
+                if ( empty( $_aCheckedComponents ) ) {
+                    $oFactory->setSettingNotice( __( 'At least one item needs to be checked.', 'amazon-auto-links' ), 'error' );
+                    return;
+                }
+
+                if ( $aResetComponents[ 'general' ] ) {
+
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
+
+                    // Last inputs
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ] );
+
+                    // Opt-in
+                    delete_user_meta( get_current_user_id(), 'aal_rated' );
+
+                }
+
+                // Delete the template options as well.
+                if ( $aResetComponents[ 'template' ] ) {
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ] );
+                }
+
+                // Button options
+                // if ( $aResetComponents[ 'button' ] ) {
+                //     delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ] );
+                // }
+
+                // Tools
+                if ( $aResetComponents[ 'tool' ] ) {
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ] );
+                }
+
+                $oFactory->setSettingNotice( __( 'The default options have been restored.', 'amazon-auto-links' ), 'updated' );
+
+            }
+
 }

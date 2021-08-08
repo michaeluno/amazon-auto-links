@@ -1,3 +1,4 @@
+- Added checkbox items to the `Restore Defaults` option which allows the user to select which options to delete. 
 - Fixed an incompatibility issue with sites with custom `WP_CONTENT_DIR` and `WP_CONTENT_URL`.
 - Tweaked the layout of the `List` template in widgets.
 - Tweaked the unit listing table UI to display a warning when the selected template is deactivated.
