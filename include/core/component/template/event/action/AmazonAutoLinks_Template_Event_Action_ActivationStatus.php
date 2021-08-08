@@ -40,8 +40,13 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
         $_aTemplates      = $this->getAsArray( $_oTemplateOption->get() );
         foreach( $aTemplateIDs as $_sTemplateID ) {
             if ( ! isset( $_aTemplates[ $_sTemplateID ] ) ) {
-                $_aCouldNotRemove[] = $_sTemplateID;
-                continue;
+                // There is a case, which is a broken template options, that the passed template ID (picked from the array key) does not match the stored 'id' value
+                $_sThisTemplateID = $this->___getTheBrokenTemplateID( $_sTemplateID, $_aTemplates );
+                if ( ! $_sThisTemplateID ) {
+                    $_aCouldNotRemove[] = $_sTemplateID;
+                    continue;
+                }
+                $_sTemplateID = $_sThisTemplateID;
             }
             $_aRemoved[] = $this->getElement( $_aTemplates, array( $_sTemplateID, 'name' ) );
             unset( $_aTemplates[ $_sTemplateID ] );
@@ -51,6 +56,24 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
 
         $this->___setSettingNoticeOfRemovedTemplates( $_aRemoved, $_aCouldNotRemove );
     }
+        /**
+         * @param  string $sBrokenTemplateID
+         * @param  array  $aTemplates
+         * @return string
+         * @since  4.6.17
+         */
+        private function ___getTheBrokenTemplateID( $sBrokenTemplateID, array $aTemplates ) {
+            foreach( $aTemplates as $_sProbableBrokenTemplateID => $_aTemplate ) {
+                $_aTemplate = $_aTemplate + array( 'id' => null );
+                if ( ! $_aTemplate[ 'id' ] ) {
+                    continue;
+                }
+                if ( $_aTemplate[ 'id' ] === $sBrokenTemplateID ) {
+                    return $_sProbableBrokenTemplateID;
+                }
+            }
+            return '';
+        }
         /**
          * @param array  $aRemoved
          * @param array  $aCouldNotRemove
