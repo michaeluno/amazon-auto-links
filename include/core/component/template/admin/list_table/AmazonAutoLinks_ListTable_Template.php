@@ -243,6 +243,16 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      */
     public function process_bulk_action() {
 
+        if ( isset( $_REQUEST[ 'action' ] ) && '-1' === ( ( string ) $_REQUEST[ 'action' ] ) ) {
+            do_action(
+                'aal_action_set_admin_setting_notice',
+                __( 'At least one item needs to be checked.', 'amazon-auto-links' ),
+                'error'
+            );
+            $this->___reload();
+        }
+
+        // Normal page load
         if ( ! isset( $_REQUEST[ 'template' ] ) ) {
             return;
         }
@@ -262,20 +272,23 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
 
         // Reload the page.
-        exit( 
-            wp_safe_redirect( 
-                add_query_arg( 
-                    array(
-                        'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                        'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
-                        'tab'       => 'table',
-                    ), 
-                    admin_url( $GLOBALS[ 'pagenow' ] ) 
-                )
-            )
-        );
-       
+        $this->___reload();
+
     }
+        private function ___reload() {
+            exit(
+                wp_safe_redirect(
+                    add_query_arg(
+                        array(
+                            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                            'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
+                            'tab'       => 'table',
+                        ),
+                        admin_url( $GLOBALS[ 'pagenow' ] )
+                    )
+                )
+            );
+        }
 
     /**
      * Sets up items for table rows.
