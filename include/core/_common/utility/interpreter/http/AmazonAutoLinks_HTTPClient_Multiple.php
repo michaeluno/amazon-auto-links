@@ -91,6 +91,7 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
         $this->___setRequestProperties();
         $_aResponses = array();
         foreach( $this->aHTTPs as $_sURL => $_oHTTP ) {
+            $this->sURL = $_sURL;
             $_aResponses[ $_sURL ] = $_oHTTP->getResponse();
         }
         return $_aResponses;
