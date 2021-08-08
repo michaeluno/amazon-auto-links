@@ -164,6 +164,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                         'plugin_basename( __FILE__ )' => plugin_basename( AmazonAutoLinks_Registry::$sFilePath ),
                         'Exists'          => array(
                             "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => $this->___doesURLExist( plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ) ) ? 'Yes' : 'No',
+                            "getSRCFromPath( {plugin dir path} . '/template/category/screenshot.jpg' )" => $this->___doesURLExist( $this->getSRCFromPath( AmazonAutoLinks_Registry::$sDirPath . '/template/category/screenshot.jpg' ) ) ? 'Yes' : 'No',
                         ),
                     ),
                     'Default Template ID'   => AmazonAutoLinks_TemplateOption::getInstance()->getTemplateID( AmazonAutoLinks_Registry::$sDirPath . '/template/list' ),
