@@ -109,6 +109,28 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     protected $_sResponseItemsParentKey = '';
 
     /**
+     * Stores major unit error messages.
+     *
+     * If this has at least one item, the template will not be called but only the error will be shown.
+     *
+     * @since  4.6.17
+     * @var    array
+     * @remark The visibility scope is public as delegation classes might need to access it.
+     */
+    public $aErrors = array();
+
+    /**
+     * Stores additional notes about the unit outputs.
+     *
+     * Inserted at the bottom of the unit output as an HTML comment.
+     *
+     * @since  4.6.17
+     * @var    array
+     * @remark The visibility scope is public as delegation classes might need to access it.
+     */
+    public $aNotes = array();
+
+    /**
      * Sets up properties.
      *
      * @param array|AmazonAutoLinks_UnitOption_Base $aoUnitOptions
@@ -302,6 +324,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             $_aArguments = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
             $_sContent   = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
+            // [4.6.17+] Add notes
+            $_sNotes     = trim( implode( ', ', $this->aNotes ) );
+            $_sContent  .= $_sNotes ? "<!-- {$_sNotes} -->": '';
+
         } catch ( Exception $_oException ) {
 
             $_sErrorMessage  = $_oException->getMessage();
@@ -352,16 +378,21 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             }
             $_iFilteredOut = count( $this->aBlockedASINs );
             $_iUnitID      = $this->oUnitOption->get( 'id' );
+            $_sNotes       = implode( ',', $this->aNotes );
             return 2 === $iShowErrorMode
                 ? "<!-- "
                     . AmazonAutoLinks_Registry::NAME. ": " . $sErrorMessage
                     . " {$_iFilteredOut} items are filtered out: [" . implode( ', ', $this->aBlockedASINs ) . "]"
                     . " Type: {$this->sUnitType} ID: {$_iUnitID}"
+                    . ( $_sNotes ? " Notes: {$_sNotes}" : '' )
                   . " -->"
-                : "<div class='warning' data-type='{$this->sUnitType}' data-id='{$_iUnitID}'><p>"
-                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
-                    . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
-                  . "</p></div>";
+                : "<div class='warning' data-type='{$this->sUnitType}' data-id='{$_iUnitID}'>"
+                    . "<p>"
+                            . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
+                            . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
+                        . "</p>"
+                    . "</div>"
+                    . ( $_sNotes ? "<!-- Notes: {$_sNotes} -->" : '' );
         }
 
         /**
@@ -539,31 +570,39 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @param       array   $aProducts
      */
     protected function _getError( $aProducts ) {
-
-        // a: No items
-        if ( empty( $aProducts ) ) {
-            return __( 'No products found.', 'amazon-auto-links' );
-        }
-
-        // b: items and errors
-        $_aError    = $this->getElement( $aProducts, array( 'Error' ), array() );
-        if (
-            ! empty( $_aError )
-            && isset( $aProducts[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
-        ) {
-            return '';
-        }
-
-        // c: only errors
-        if ( isset( $_aError[ 'Message' ] ) ) {
-            $_aError = $_aError + array( 'Code' => '' );
-            $_sCode  = $_aError[ 'Code' ] ? $_aError[ 'Code' ] . ': ' : '';
-            return $_sCode . $_aError[ 'Message' ];
-        }
-
-        // d: no error
-        return '';
+        $this->___setErrors( $aProducts );
+        return trim( implode( ' ', $this->aErrors ) );
     }
+        /**
+         * @since  4.6.17   Moved from AmazonAutoLinks_UnitOutput_Base::_getError()
+         */
+        private function ___setErrors( $aProducts ) {
+
+            // a: No items
+            if ( empty( $aProducts ) ) {
+                $this->aErrors[] = __( 'No products found.', 'amazon-auto-links' );
+                return;
+            }
+
+            // b: items and errors
+            $_aError    = $this->getElement( $aProducts, array( 'Error' ), array() );
+            if (
+                ! empty( $_aError )
+                && isset( $aProducts[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
+            ) {
+                return;
+            }
+
+            // c: only errors
+            if ( isset( $_aError[ 'Message' ] ) ) {
+                $_aError = $_aError + array( 'Code' => '' );
+                $_sCode  = $_aError[ 'Code' ] ? $_aError[ 'Code' ] . ': ' : '';
+                $this->aErrors[] = $_sCode . $_aError[ 'Message' ];
+                return;
+            }
+
+            // d: no error
+        }
 
     /**
      * Renders the product links.
