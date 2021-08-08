@@ -260,8 +260,9 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
          * This is useful to check errors.
          * @since   4.2.2
          * @since   4.4.0   Added the `$this->sRequestType` parameter.
+         * @since   4.6.17  Added the `$this->sCacheName` parameter.
          */
-        return apply_filters( 'aal_filter_http_request_result', $_aoResponse, $this->sURL, $this->aArguments, $this->iCacheDuration, $this->sRequestType );
+        return apply_filters( 'aal_filter_http_request_result', $_aoResponse, $this->sURL, $this->aArguments, $this->iCacheDuration, $this->sRequestType, $this->sCacheName );
 
     }
 
