@@ -68,7 +68,7 @@ class AmazonAutoLinks_Template_Event_Action_ActivationStatus extends AmazonAutoL
                 do_action(
                     'aal_action_set_admin_setting_notice',
                     sprintf( __( 'The template, %1$s, could not be removed.', 'amazon-auto-links' ), implode( ', ', $aCouldNotRemove ) ),
-                    'updated'
+                    'error'
                 );
             }
         }
