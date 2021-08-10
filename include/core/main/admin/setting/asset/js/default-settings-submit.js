@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Default Settings Submit
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -38,7 +38,7 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalSubmit.debugMode ) {
+        if ( ! parseInt( aalSubmit.debugMode ) ) {
             return;
         }
         console.log( ...args );

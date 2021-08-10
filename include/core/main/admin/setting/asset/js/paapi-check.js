@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name PA-API check
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -148,7 +148,7 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalPAAPICheck.debugMode ) {
+        if ( ! parseInt( aalPAAPICheck.debugMode ) ) {
             return;
         }
         console.log( aalPAAPICheck.pluginName, aalPAAPICheck.scriptName, ...args );

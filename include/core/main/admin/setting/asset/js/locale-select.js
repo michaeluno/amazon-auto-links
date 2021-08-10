@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Locale Select
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -73,7 +73,7 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalLocaleSelect.debugMode ) {
+        if ( ! parseInt( aalLocaleSelect.debugMode ) ) {
             return;
         }
         console.log( aalLocaleSelect.pluginName, aalLocaleSelect.scriptName, ...args );
