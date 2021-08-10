@@ -11,10 +11,10 @@
  * A base class of custom action link components for the plugin custom post types.
  *
  * @remark The action link needs to have the following GET request parameters
- *  - $_GET[ 'custom_action' ],
- *  - $_GET[ 'nonce' ],
- *  - $_GET[ 'post' ],
- *  - $_GET[ 'post_type' ]
+ *  - GET[ 'custom_action' ],
+ *  - GET[ 'nonce' ],
+ *  - GET[ 'post' ],
+ *  - GET[ 'post_type' ]
  *
  * @since       3.7.8
  */

@@ -33,7 +33,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
     }
 
     /**
-     * $_GET contains the following keys:
+     * GET contains the following keys:
      * ```
      *   [maxwidth] => (string) e.g. 600
      *   [maxheight] => (string) e.g. 960

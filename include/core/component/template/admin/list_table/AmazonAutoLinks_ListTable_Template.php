@@ -34,7 +34,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
     public $oUtil;
 
     /**
-     * @var array Stores sanitized $_GET data
+     * @var array Stores sanitized GET data
      * @since 4.6.18
      */
     public $aREQUEST = array(
