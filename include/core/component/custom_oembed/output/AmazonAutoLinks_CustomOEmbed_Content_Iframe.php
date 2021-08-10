@@ -123,7 +123,6 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
     private function ___printProductOutput() {
         if ( ! isset( $_GET[ 'uri' ] ) ) {
             echo "<p>The URL is not passed.</p>";
-            AmazonAutoLinks_Debug::dump( $_REQUEST );
             return;
         }
 
