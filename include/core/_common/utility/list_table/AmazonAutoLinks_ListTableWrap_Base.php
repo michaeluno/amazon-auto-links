@@ -59,7 +59,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
         $this->oUtil = new AmazonAutoLinks_PluginUtility;
 
-        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( '_sanitize_text_fields', $_REQUEST ) + $this->aREQUEST;
+        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( 'sanitize_text_field', $_REQUEST ) + $this->aREQUEST;
 
     }
 

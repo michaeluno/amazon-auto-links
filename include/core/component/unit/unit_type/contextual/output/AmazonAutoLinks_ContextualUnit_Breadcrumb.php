@@ -149,7 +149,7 @@ class AmazonAutoLinks_ContextualUnit_Breadcrumb extends AmazonAutoLinks_PluginUt
     private function ___getItemsByType_search() {
         $_aKeywords = array();
         if ( isset( $this->___aGET[ 's' ] ) ) {
-            $_aKeywords[] = _sanitize_text_fields( $this->___aGET[ 's' ] );
+            $_aKeywords[] = sanitize_text_field( $this->___aGET[ 's' ] );
         }
         return $_aKeywords;                
     }                    

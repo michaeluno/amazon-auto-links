@@ -68,7 +68,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          */
         private function ___getSiteSearchKeywords() {
 
-            $_sQuery = _sanitize_text_fields( $this->getElement( $this->___aGET, 's' ) );
+            $_sQuery = sanitize_text_field( $this->getElement( $this->___aGET, 's' ) );
             $_sQuery = str_replace(
                 array( '+' ),
                 ',',

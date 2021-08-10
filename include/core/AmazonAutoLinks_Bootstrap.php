@@ -95,7 +95,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         
             // The form transient key will be sent via the both get and post methods.
             $GLOBALS[ 'aal_transient_id' ] = isset( $_REQUEST[ 'transient_id' ] )
-                ? _sanitize_text_fields( $_REQUEST[ 'transient_id' ] )
+                ? sanitize_text_field( $_REQUEST[ 'transient_id' ] )
                 : AmazonAutoLinks_Registry::TRANSIENT_PREFIX 
                     . '_Form' 
                     . '_' . get_current_user_id() 

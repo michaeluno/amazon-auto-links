@@ -56,7 +56,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
 
         $this->aData = $aData;
 
-        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( '_sanitize_text_fields', $_REQUEST ) + $this->aREQUEST;
+        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( 'sanitize_text_field', $_REQUEST ) + $this->aREQUEST;
 
         // Set parent defaults
         $this->aArguments = array(

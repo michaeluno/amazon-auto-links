@@ -46,7 +46,7 @@ class AmazonAutoLinks_Log_Debug_Event_DebugLog extends AmazonAutoLinks_Event_Err
      */
     public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $bsStackTrace='' ) {
         $aData = $aData + array(
-            'request' => $this->getArrayMappedRecursive( '_sanitize_text_fields', $_REQUEST ),
+            'request' => $this->getArrayMappedRecursive( 'sanitize_text_field', $_REQUEST ),
         );
         parent::replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $bsStackTrace );
     }
