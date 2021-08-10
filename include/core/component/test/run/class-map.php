@@ -31,6 +31,7 @@ return array(
     "AmazonAutoLinks_UnitTest_FrameworkUtility_Transient" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/admin_page_framework/AmazonAutoLinks_UnitTest_FrameworkUtility_Transient.php", 
     "Test_AmazonAutoLinks_Button_Event_Filter_Output" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/button/event/filter/Test_AmazonAutoLinks_Button_Event_Filter_Output.php", 
     "Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/database_updater/event/action/Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140.php", 
+    "Test_AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/admin/setting/event/ajax/Test_AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/event/action/Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
