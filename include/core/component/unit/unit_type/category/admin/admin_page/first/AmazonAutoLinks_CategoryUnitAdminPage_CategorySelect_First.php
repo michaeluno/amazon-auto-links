@@ -92,7 +92,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
                 'page'          => $this->sPageSlug, // AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
                 'tab'           => $this->sTabSlug, // 'first'
             ) 
-            + $_GET,
+            + $this->getHTTPQueryGET(),
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
 

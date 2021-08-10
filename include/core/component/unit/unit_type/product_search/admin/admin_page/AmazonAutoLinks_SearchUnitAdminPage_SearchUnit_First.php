@@ -153,7 +153,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
                         array( 
                             'tab'          => $_sTabSlug, 
                             'transient_id' => $aInput[ 'transient_id' ],
-                       ) + $_GET,
+                       ) + $this->getHTTPQueryGET(),
                        $aInput[ 'bounce_url' ] 
                     ) 
                 )

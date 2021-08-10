@@ -89,7 +89,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         // Reload the page.
         exit(
             wp_safe_redirect(
-                remove_query_arg( array( 'action', 'object_id' ), add_query_arg( $_GET, admin_url( $GLOBALS[ 'pagenow' ] ) ) )
+                remove_query_arg( array( 'action', 'object_id' ), add_query_arg( $this->oUtil->getHTTPQueryGET(), admin_url( $GLOBALS[ 'pagenow' ] ) ) )
             )
         );
 
@@ -144,7 +144,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
             array(
                 'action' => 'delete',
                 'object_id' => $aItem[ 'object_id' ]
-            ) + $_GET,
+            ) + $_GET,  // sanitization done with esc_url() below
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
         $_aActionLinks = array(

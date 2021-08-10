@@ -32,7 +32,9 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_Event___Feed_Bas
         add_filter( 'aal_filter_unit_output', array( $this, 'replyToRemoveCredit' ), PHP_INT_MAX  - 100 );
         add_filter( 'aal_filter_unit_show_error_mode', '__return_zero' );
 
-        $_aArguments = $_GET;
+        $_aArguments = array(
+            'id' => absint( $this->getHTTPQueryGET( 'id' ) ),
+        );
         $_aArguments[ 'template_path' ]        = AmazonAutoLinks_Registry::$sDirPath . '/template/json/template.php';
         $_aArguments[ 'credit_link' ]          = false;
         $_aArguments[ '_no_outer_container' ]  = true;

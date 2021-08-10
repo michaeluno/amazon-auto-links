@@ -37,7 +37,7 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
      */
     public function replyToPrintButtonPreview() {
         wp_enqueue_script( 'jquery' );
-        $_sButtonLabel = $this->getElement( $_GET, array( 'button-label' ), 'Buy Now' );
+        $_sButtonLabel = sanitize_text_field( $this->getElement( $_GET, array( 'button-label' ), 'Buy Now' ) );   // sanitization done
         $_iButtonID    = ( integer ) $this->getElement( $_GET, array( 'button-id' ), 0 );       // sanitization done
         $_sHeader      = $this->getOutputBuffer( 'get_header' );
         $_sHeader      = force_balance_tags( $_sHeader );

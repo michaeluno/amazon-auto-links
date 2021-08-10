@@ -50,7 +50,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_ProceedButton extends AmazonAutoLi
                         'aal_action'    => 'select_category',
                         'tab'           => 'second',
                     )
-                    + $_GET,
+                    + $this->getHTTPQueryGET(),
                     admin_url( $GLOBALS[ 'pagenow' ] )
                 ),
             )
