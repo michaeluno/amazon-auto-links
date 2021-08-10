@@ -1,12 +1,12 @@
 <?php 
 /**
-    Amazon Auto Links v4.6.17b04 by miunosoft (Michael Uno) 
+    Amazon Auto Links v4.6.17 by miunosoft (Michael Uno) 
     Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
  */
 return array(
-    "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php", 
+    "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php",
     "AmazonAutoLinks_AutoInsertLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/AmazonAutoLinks_AutoInsertLoader.php", 
     "AmazonAutoLinks_AutoInsertAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage.php", 
     "AmazonAutoLinks_AutoInsertAdminPage_AutoInsert" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/admin_page/AmazonAutoLinks_AutoInsertAdminPage_AutoInsert.php", 
@@ -126,6 +126,7 @@ return array(
     "AmazonAutoLinks_AdminPage_Template_ListTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_ListTable.php", 
     "AmazonAutoLinks_ListTable_Template" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/admin/list_table/AmazonAutoLinks_ListTable_Template.php", 
     "AmazonAutoLinks_Template_Event_Action_ActivationStatus" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php", 
+    "AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php", 
     "AmazonAutoLinks_Template_Event_Filter_TemplateListWarning" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/event/filter/AmazonAutoLinks_Template_Event_Filter_TemplateListWarning.php", 
     "AmazonAutoLinks_TemplateOption" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/template/option/AmazonAutoLinks_TemplateOption.php", 
     "AmazonAutoLinks_Test_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/test/AmazonAutoLinks_Test_Loader.php", 

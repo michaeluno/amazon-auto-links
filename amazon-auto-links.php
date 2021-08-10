@@ -158,8 +158,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     static public $aUserMeta = array(
         // key => meta key
-        'first_saved'   => 'aal_first_saved',
-        'rated'         => 'aal_rated',
+        'first_saved'        => 'aal_first_saved',
+        'rated'              => 'aal_rated',
+        'load_new_templates' => 'aal_load_new_templates',
     );
         
     /**

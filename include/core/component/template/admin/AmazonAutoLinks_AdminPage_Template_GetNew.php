@@ -21,9 +21,30 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
      * @return array
      */
     protected function _getArguments() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'tab_slug'  => 'get',
             'title'     => __( 'Get New', 'amazon-auto-links' ),
+            'style'     => AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/css/get-new.css',
+            'script'    => array(
+                array(
+                    'src'           => AmazonAutoLinks_TemplateLoader::$sDirPath . '/asset/js/get-new-templates.js',
+                    'dependencies'  => array( 'jquery', 'wp-pointer' ),
+                    'in_footer'     => true,
+                    'handle_id'     => 'aalNewTemplates',
+                    'translation'   => array(
+                        'ajaxURL'          => admin_url( 'admin-ajax.php' ),
+                        'actionHookSuffix' => 'aal_action_get_new_templates',
+                        'nonce'            => wp_create_nonce( 'aal_action_get_new_templates' ),
+                        'spinnerURL'       => admin_url( 'images/loading.gif' ),
+                        'pluginName'       => AmazonAutoLinks_Registry::NAME . ' ' . AmazonAutoLinks_Registry::VERSION,
+                        'debugMode'        => $_oOption->isDebug() || $this->isDebugMode(),
+                        'labels'           => array(
+                            'error' => __( 'Something went wrong.', 'amazon-auto-links' ),
+                        ),
+                    ),
+                ),
+            ),
         );
     }
 
@@ -57,11 +78,8 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
      * @callback        do_{page_slug}_{tab slug}
      */
     public function replyToDoTab( $oFactory ) {
-        
-        $_oRSS = new AmazonAutoLinks_RSSClient(
-            'http://feeds.feedburner.com/AmazonAutoLinksTemplates'
-        );
 
+        $_bAllowed = ( boolean ) get_user_meta( get_current_user_id(), 'aal_load_new_templates', true );
         echo "<h3>" 
                 . __( 'Templates', 'amazon-auto-links' ) 
             . "</h3>";
@@ -71,50 +89,29 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
                     'wpplugins@michaeluno.jp' 
                  ) 
             . "</p>";
-        
-        $_aItems = $_oRSS->get();
-        if ( empty( $_aItems ) ) {
-            echo "<p>" 
-                    . __( 'No extension has been found.', 'amazon-auto-links' ) 
-                . "</p>";
-            return;
-        }
+        $_sClassLoad   = $_bAllowed ? 'load-button hidden' : 'load-button button button-hero';
+        echo "<div class='template-list'>"
+                . "<div class='button-container do-not-load " . ( $_bAllowed ? '' : 'hidden' ) . "'>"
+                    . "<span class='do-not-load-button button button-small'>"
+                        . __( 'Do not load automatically', 'amazon-auto-links' )
+                    . "</span>"
+                . "</div>"
+                . "<div class='align-center button-container has-tooltip load'>"
+                    . "<span class='{$_sClassLoad}' data-allowed='" . esc_attr( $_bAllowed ) . "'>"
+                        . "<strong>"
+                            . __( 'Load', 'amazon-auto-links' )
+                        . "</strong>"
+                    . "</span>"
+                    . "<p class='tooltip-content'>"
+                        . "<span>" . __( 'Click the button to load available templates!', 'amazon-auto-links' ) . "</span>"
+                        . " <span>" . sprintf( __( 'This will access <code>%1$s</code> to retrieve data.', 'amazon-auto-links' ), 'feeds.feedburner.com' ). "</span>"
+                    . "</p>"
+                . "</div>"
+            . "</div>";
+        echo "<div>"
 
-        // Format the description element.
-        foreach( $_aItems as &$_aItem ) {
-            $_aItem = array(
-                'description' => $this->_getFormattedDescription( $_aItem ),            
-            ) + $_aItem;
-        }
-        
-        // Get the column output.
-        $_oColumn = new AmazonAutoLinks_Column(
-            $_aItems, // data
-            3,  // number of columns
-            'amazon_auto_links_' // selector prefix
-        );
-        echo $_oColumn->get();
-        
+            ."</div>";
+
     }   
 
-        /**
-         * @return      string
-         */
-        private function _getFormattedDescription( $aItem ) {
-            $_aAttributes = array(
-                'href'      => $aItem[ 'link' ],
-                'rel'       => 'nofollow',
-                'class'     => 'button button-secondary',
-                'target'    => '_blank',
-                'title'     => esc_attr( __( 'Get it Now', 'amazon-auto-links' ) ),
-            );
-            return "<h4>" . $aItem[ 'title' ] . "</h4>"
-                . $aItem[ 'description' ] 
-                . "<div class='get-now'>"
-                    . "<a " . AmazonAutoLinks_WPUtility::generateAttributes( $_aAttributes ) . ">"
-                        . __( 'Get it Now', 'amazon-auto-links' )
-                    . "</a>"
-               . "</div>";
-        }
-        
 }

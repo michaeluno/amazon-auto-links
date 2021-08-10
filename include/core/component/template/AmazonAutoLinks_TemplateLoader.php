@@ -31,6 +31,7 @@ class AmazonAutoLinks_TemplateLoader {
 
         new AmazonAutoLinks_Template_Event_Action_ActivationStatus;
         new AmazonAutoLinks_Template_Event_Filter_TemplateListWarning;  // [4.6.17+]
+        new AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader;     // [4.6.18+]
         new AmazonAutoLinks_TemplateResourceLoader;
         
         if ( is_admin() ) {
