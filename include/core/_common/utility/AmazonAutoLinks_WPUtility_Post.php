@@ -64,17 +64,17 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
 
         // When editing a post, usually this is available.
         if ( isset( $_GET[ 'post' ] ) ) {
-            return $_GET[ 'post' ];
+            return absint( $_GET[ 'post' ] );
         }
     
         // It is set when the user send the form in post.php.
         if ( isset( $_POST[ 'post_ID' ] ) ) {
-            return $_POST[ 'post_ID' ];
+            return absint( $_POST[ 'post_ID' ] );
         }
         
         // This also shoudl be available.
         if ( isset( $GLOBALS[ 'post' ], $GLOBALS[ 'post' ]->ID ) ) {
-            return $GLOBALS[ 'post' ]->ID;
+            return absint( $GLOBALS[ 'post' ]->ID );
         }
         
         return 0;

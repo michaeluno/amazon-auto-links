@@ -95,6 +95,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      * @param       $aGET
      * @return      array
      * @since       3.6.0
+     * @remark      Will be sanitized later.
      */
     public function replyToGetHTTPGETRequest( $aGET ) {
         return isset( $_POST[ 'REQUEST' ] )
@@ -107,7 +108,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerPostObject( $oPost ) {
         return isset( $_POST[ 'post_id' ] ) && $_POST[ 'post_id' ]
-            ? get_post( $_POST[ 'post_id' ] )
+            ? get_post( absint( $_POST[ 'post_id' ] ) )
             : $oPost;
     }
 
@@ -117,7 +118,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerPageType( $sPageType ) {
         return isset( $_POST[ 'page_type' ] ) && $_POST[ 'page_type' ]
-            ? $_POST[ 'page_type' ]
+            ? sanitize_text_field( $_POST[ 'page_type' ] )
             : $sPageType;
     }
 
@@ -127,7 +128,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerTermObject( $oTerm ) {
         return isset( $_POST[ 'term_id' ] ) && $_POST[ 'term_id' ]
-            ? get_term( $_POST[ 'term_id' ] )
+            ? get_term( absint( $_POST[ 'term_id' ] ) )
             : $oTerm;
     }
     /**
@@ -136,7 +137,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerAuthor( $sAuthor ) {
         return isset( $_POST[ 'author_name' ] ) && $_POST[ 'author_name' ]
-            ? $_POST[ 'author_name' ]
+            ? sanitize_text_field( $_POST[ 'author_name' ] )
             : $sAuthor;
     }
 

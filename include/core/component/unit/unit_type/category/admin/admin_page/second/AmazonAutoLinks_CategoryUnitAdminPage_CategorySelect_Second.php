@@ -275,7 +275,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
              * ```
              * md5( $aCurrentCategory[ 'page_url' ] ) => array(
              *         'breadcrumb' => 'US > Books',
-             *         'page_url'   => 'http://...'        // the page url of the categor
+             *         'page_url'   => 'http://...'        // the page url of the category
              * );
              * ```
              */
