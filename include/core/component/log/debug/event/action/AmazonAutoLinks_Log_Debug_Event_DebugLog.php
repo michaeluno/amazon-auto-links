@@ -36,4 +36,19 @@ class AmazonAutoLinks_Log_Debug_Event_DebugLog extends AmazonAutoLinks_Event_Err
         return new AmazonAutoLinks_Log_VersatileFileManager_DebugLog;
     }
 
+    /**
+     * @param int|string $isCode
+     * @param string     $sErrorMessage
+     * @param array      $aData
+     * @param string     $sCurrentHook
+     * @param string     $bsStackTrace
+     * @since 4.6.18
+     */
+    public function replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $bsStackTrace='' ) {
+        $aData = $aData + array(
+            'request' => $this->getArrayMappedRecursive( '_sanitize_text_fields', $_REQUEST ),
+        );
+        parent::replyToLogErrors( $isCode, $sErrorMessage, $aData, $sCurrentHook, $bsStackTrace );
+    }
+
 }
