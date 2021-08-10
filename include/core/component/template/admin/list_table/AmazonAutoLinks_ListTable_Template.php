@@ -37,7 +37,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      * @var array Stores sanitized $_GET data
      * @since 4.6.18
      */
-    public $aGet = array(
+    public $aREQUEST = array(
         'page'      => null,
         'action'    => null,
         'template'  => null,
@@ -56,7 +56,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
 
         $this->aData = $aData;
 
-        $this->aGet  = array_map( '_sanitize_text_fields', $_GET ) + $this->aGet;
+        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( '_sanitize_text_fields', $_REQUEST ) + $this->aREQUEST;
 
         // Set parent defaults
         $this->aArguments = array(
@@ -140,7 +140,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         $_aActions  = array();
         $_aURLQuery = array(
             'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-            'page'      => $this->aGet[ 'page' ],
+            'page'      => $this->aREQUEST[ 'page' ],
             'action'    => null,
             'template'  => $aItem[ 'id' ],
         );  
@@ -255,7 +255,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      */
     public function process_bulk_action() {
 
-        if ( isset( $this->aGet[ 'action' ] ) && '-1' === ( ( string ) $this->aGet[ 'action' ] ) ) {
+        if ( isset( $this->aREQUEST[ 'action' ] ) && '-1' === ( ( string ) $this->aREQUEST[ 'action' ] ) ) {
             do_action(
                 'aal_action_set_admin_setting_notice',
                 __( 'At least one item needs to be checked.', 'amazon-auto-links' ),
@@ -265,11 +265,11 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         }
 
         // Normal page load
-        if ( ! isset( $this->aGet[ 'template' ] ) ) {
+        if ( ! isset( $this->aREQUEST[ 'template' ] ) ) {
             return;
         }
 
-        $_aTemplateIDs = $this->oUtil->getElementAsArray( $this->aGet, array( 'template' ) );
+        $_aTemplateIDs = $this->oUtil->getElementAsArray( $this->aREQUEST, array( 'template' ) );
         switch( strtolower( $this->current_action() ) ){
             case 'remove': // [4.6.17]
                 do_action( 'aal_action_remove_templates', $_aTemplateIDs );
@@ -367,8 +367,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         public function usort_reorder( $a, $b ) {
             
             // If no sort, default to title
-            $sOrderBy = ( ! empty( $this->aGet[ 'orderby' ] ) )
-                ? $this->aGet[ 'orderby' ]
+            $sOrderBy = ( ! empty( $this->aREQUEST[ 'orderby' ] ) )
+                ? $this->aREQUEST[ 'orderby' ]
                 : 'name'; 
             if ( 'description' === $sOrderBy ) {
                 $sOrderBy = 'description';
@@ -377,9 +377,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             }
                         
             // If no order, default to asc
-            $sOrder = empty( $this->aGet['order'] )
+            $sOrder = empty( $this->aREQUEST['order'] )
                 ? 'asc'
-                : $this->aGet['order'];
+                : $this->aREQUEST['order'];
                 
             // Determine sort order
             $result = isset( $a[ $sOrderBy ], $b[ $sOrderBy ] )
