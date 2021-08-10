@@ -57,8 +57,8 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     public function render() {
         
         $sPageURL = $this->___getPageURL(
-            isset( $_GET[ 'href' ] )
-                ? $_GET[ 'href' ]
+            isset( $_GET[ 'href' ] )    // sanitization unnecessary as just checking
+                ? $_GET[ 'href' ]                   // sanitization done by passing ___getPageURL()
             : '', 
             $this->oUnitOption->get( 'country' )
         );

@@ -49,10 +49,10 @@ class AmazonAutoLinks_InfoBoxLoader {
             if ( ! is_admin() ) {
                 return false;
             }
-            if ( ! isset( $_GET[ 'page' ] ) ) {
+            if ( ! isset( $_GET[ 'page' ] ) ) { // sanitization unnecessary as just checking
                 return false;
             }
-            return in_array( $_GET[ 'page' ], $aTargetPageSlugs );
+            return in_array( $_GET[ 'page' ], $aTargetPageSlugs, true );    // sanitization unnecessary as just checking
         }
     
 }

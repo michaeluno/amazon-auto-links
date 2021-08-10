@@ -23,18 +23,18 @@ class AmazonAutoLinks_Event___Query_Redirect {
      */
     public function __construct( $sQueryKey ) {
 
-        $_sQueryValue = $_GET[ $sQueryKey ];
+        $_aGet = AmazonAutoLinks_PluginUtility::getArrayMappedRecursive( 'sanitize_text_field', $_GET );    // sanitization done
 
-        if ( 'feed' === $_sQueryValue ) {
+        if ( 'feed' === $_aGet[ $sQueryKey ] ) {
             return;
         }
 
-        if ( 'vendor' === $_sQueryValue ) {
+        if ( 'vendor' === $_aGet[ $sQueryKey ] ) {
             $this->___goToVendor();
         }
 
         // At this point, it is a cloaked URL.
-        $this->___goToStore( $_sQueryValue, $_GET, $sQueryKey );
+        $this->___goToStore( $_aGet[ $sQueryKey ], $_aGet, $sQueryKey );
         
     }
         

@@ -15,7 +15,7 @@ class AmazonAutoLinks_UnitPostMetaBox_ViewLink extends AmazonAutoLinks_UnitPostM
     
     public function setUp() {
         
-        if ( ! isset( $_GET[ 'post' ] ) ) {
+        if ( ! isset( $_GET[ 'post' ] ) ) {     // sanitization unnecessary as just checking
             return;
         }        
         add_action(

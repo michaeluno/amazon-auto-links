@@ -54,7 +54,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
                         'field' => 'width-half',
                     ),
                     // the previous value should not appear
-                    'value'         => isset( $_GET[ 'transient_id' ] )
+                    'value'         => isset( $_GET[ 'transient_id' ] ) // sanitization unnecessary as just checking
                         ? ''
                         : null,
                 ),                       

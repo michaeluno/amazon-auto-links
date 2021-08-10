@@ -20,7 +20,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
     
     public function setUp() {
         
-        if ( ! isset( $_GET[ 'post' ] ) ) {
+        if ( ! isset( $_GET[ 'post' ] ) ) { // sanitization unnecessary as just checking
             return;
         }        
         add_action(
@@ -41,7 +41,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
                 'page'          => AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
                 'tab'           => 'second',
                 'post_type'     => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                'post'          => $_GET[ 'post' ],
+                'post'          => absint( $_GET[ 'post' ] ),   // sanitization done
                 'transient_id'  => uniqid(),
                 'aal_action'    => 'select_category',
             ),
@@ -61,14 +61,14 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit_category extends AmazonAutoLinks_Un
         
         $_aCategories           = $this->oUtil->getAsArray(
             get_post_meta( 
-                $_GET[ 'post' ], 
+                absint( $_GET[ 'post' ] ),  // sanitization done
                 'categories', 
                 true 
            )
         );
         $_aExcludingCategories  = $this->oUtil->getAsArray(
             get_post_meta( 
-                $_GET[ 'post' ], 
+                absint( $_GET[ 'post' ] ),  // sanitization done
                 'categories_exclude', 
                 true 
             )

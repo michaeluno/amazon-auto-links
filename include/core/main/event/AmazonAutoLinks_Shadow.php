@@ -307,7 +307,7 @@ class AmazonAutoLinks_Shadow {
      * @since 4.3.0
      */
     static private function ___isDoingWPCron() {
-        if ( isset( $_GET[ 'doing_wp_cron' ] ) ) {
+        if ( isset( $_GET[ 'doing_wp_cron' ] ) ) {  // sanitization unnecessary as just checking
             return true;
         }
         if ( defined( 'DOING_CRON' ) && DOING_CRON ) {

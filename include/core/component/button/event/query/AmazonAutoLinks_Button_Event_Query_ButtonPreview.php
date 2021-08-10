@@ -22,10 +22,10 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
      */
     public function __construct() {
 
-        if ( ! isset( $_GET[ 'aal-button-preview' ] ) ) {
+        if ( ! isset( $_GET[ 'aal-button-preview' ] ) ) {       // sanitization unnecessary as just checking
             return;
         }
-        if ( ! $_GET[ 'aal-button-preview' ] ) {
+        if ( ! $_GET[ 'aal-button-preview' ] ) {                // sanitization unnecessary as just checking
             return;
         }
         add_action( 'wp', array( $this, 'replyToPrintButtonPreview' ) );
@@ -38,7 +38,7 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
     public function replyToPrintButtonPreview() {
         wp_enqueue_script( 'jquery' );
         $_sButtonLabel = $this->getElement( $_GET, array( 'button-label' ), 'Buy Now' );
-        $_iButtonID    = $this->getElement( $_GET, array( 'button-id' ), 0 );
+        $_iButtonID    = ( integer ) $this->getElement( $_GET, array( 'button-id' ), 0 );       // sanitization done
         $_sHeader      = $this->getOutputBuffer( 'get_header' );
         $_sHeader      = force_balance_tags( $_sHeader );
         $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted

@@ -95,11 +95,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
             + $_GET,
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
-        // @deprecated 4.2.0 Not necessary
-//        $oFactory->setSettingNotice(
-//            __( 'Select a category from the below list.', 'amazon-auto-links' ),
-//            'updated'
-//         );
+
         $oFactory->setSettingNotice( '' ); // disable the message
          
         // Store the inputs for the next time.

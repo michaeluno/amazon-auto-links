@@ -62,7 +62,7 @@ class AmazonAutoLinks_Event {
 
             $_oOption     = AmazonAutoLinks_Option::getInstance();
             $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
-            if ( ! isset( $_GET[ $_sQueryKey ] ) ) {
+            if ( ! isset( $_GET[ $_sQueryKey ] ) ) {    // sanitization unnecessary as just checking
                 return;
             }
 

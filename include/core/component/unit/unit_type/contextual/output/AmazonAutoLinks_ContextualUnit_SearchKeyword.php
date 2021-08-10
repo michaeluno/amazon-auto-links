@@ -12,9 +12,8 @@
 /**
  * Provides methods to find search keywords from the current page.
  * 
- * @since           3
- * @since           3.5.0       Renamed from `AmazonAutoLinks_ContextualProductWidget_SearchKeyword`.
- * @filter          aal_filter_post_object
+ * @since 3
+ * @since 3.5.0 Renamed from `AmazonAutoLinks_ContextualProductWidget_SearchKeyword`.
  */
 class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_PluginUtility {
 
@@ -39,7 +38,11 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             'aal_filter_post_object', 
             $this->getElement( $GLOBALS, 'post' )
         );
-        $this->___aGET             = apply_filters( 'aal_filter_http_get', $_GET );
+        // Currently, only the `s` element is used
+        $_aGET                     = array(
+            's' => _sanitize_text_fields( $this->getElement( $_GET, array( 's' ) ) ),   // sanitization done
+        );
+        $this->___aGET             = apply_filters( 'aal_filter_http_get', $_aGET );
     }
     
     /**
@@ -68,7 +71,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          */
         private function ___getSiteSearchKeywords() {
 
-            $_sQuery = sanitize_text_field( $this->getElement( $this->___aGET, 's' ) );
+            $_sQuery = $this->getElement( $this->___aGET, 's' );
             $_sQuery = str_replace(
                 array( '+' ),
                 ',',

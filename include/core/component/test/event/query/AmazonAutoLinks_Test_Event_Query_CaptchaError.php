@@ -16,10 +16,10 @@
 class AmazonAutoLinks_Test_Event_Query_CaptchaError {
 
     public function __construct() {
-        if ( ! isset( $_GET[ 'aal_test' ] ) ) {
+        if ( ! isset( $_GET[ 'aal_test' ] ) ) {             // sanitization unnecessary as just checking
             return;
         }
-        if ( 'captcha_error' !== $_GET[ 'aal_test' ] ) {
+        if ( 'captcha_error' !== $_GET[ 'aal_test' ] ) {    // sanitization unnecessary as just checking
             return;
         }
 

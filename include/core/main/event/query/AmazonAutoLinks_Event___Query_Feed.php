@@ -24,11 +24,11 @@ class AmazonAutoLinks_Event___Query_Feed extends AmazonAutoLinks_PluginUtility {
      */
     public function __construct( $sQueryKey ) {
 
-        if ( 'feed' !== $_GET[ $sQueryKey ] ) {
+        if ( 'feed' !== $_GET[ $sQueryKey ] ) {     // sanitization unnecessary as just checking
             return;
         }
-        switch( $this->getElement( $_GET, array( 'output' ), '' ) ) {
-        
+        $_sOutputType = sanitize_text_field( strtolower( $this->getElement( $_GET, array( 'output' ), '' ) ) ); // sanitization done
+        switch( $_sOutputType ) {
             case 'json':
                 new AmazonAutoLinks_Event___Feed_JSON;
                 break;

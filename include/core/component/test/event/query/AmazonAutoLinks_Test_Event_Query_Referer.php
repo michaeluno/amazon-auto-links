@@ -16,10 +16,10 @@
 class AmazonAutoLinks_Test_Event_Query_Referer {
 
     public function __construct() {
-        if ( ! isset( $_GET[ 'aal_test' ] ) ) {
+        if ( ! isset( $_GET[ 'aal_test' ] ) ) {         // sanitization unnecessary
             return;
         }
-        if ( 'referer' !== $_GET[ 'aal_test' ] ) {
+        if ( 'referer' !== $_GET[ 'aal_test' ] ) {      // sanitization unnecessary
             return;
         }
 

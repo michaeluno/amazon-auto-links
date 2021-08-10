@@ -24,10 +24,10 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      */
     public function __construct() {
 
-        if ( ! isset( $_GET[ 'embed' ] ) ) {
+        if ( ! isset( $_GET[ 'embed' ] ) ) {    // sanitization unnecessary as just checking
             return;
         }
-        if ( $_GET[ 'embed' ] !== 'amazon-auto-links' ) {
+        if ( $_GET[ 'embed' ] !== 'amazon-auto-links' ) {   // sanitization unnecessary as just checking
             return;
         }
         add_action( 'init', array( $this, 'replyToLoadFrame' ) );
@@ -121,14 +121,14 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      * Prints the product output.
      */
     private function ___printProductOutput() {
-        if ( ! isset( $_GET[ 'uri' ] ) ) {
+        if ( ! isset( $_GET[ 'uri' ] ) ) {  // sanitization unnecessary as just checking
             echo "<p>The URL is not passed.</p>";
             return;
         }
 
         $_oOption      = AmazonAutoLinks_Option::getInstance();
         $_aArguments   = array(
-            'uri'         => urldecode( $_GET[ 'uri' ] ),
+            'uri'         => urldecode( AmazonAutoLinks_PluginUtility::getURLSanitized( $_GET[ 'uri' ] ) ), // sanitization done
             'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
         );
         AmazonAutoLinks( $_aArguments );

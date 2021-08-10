@@ -100,7 +100,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
                     'action_hook_suffix_unit_preview'   => 'aal_unit_preview',
                     'spinnerURL'                        => admin_url( 'images/loading.gif' ),
                     'transientID'                       => $GLOBALS[ 'aal_transient_id' ],
-                    'postID'                            => $this->getElement( $_GET, array( 'post' ), 0 ), // for editing category selection, a post id is passed
+                    'postID'                            => absint( $this->getElement( $_GET, array( 'post' ), 0 ) ), // for editing category selection, a post id is passed. // sanitization done
                     'maxNumberOfCategories'             => ( integer ) AmazonAutoLinks_Option::getInstance()->getMaximumNumberOfCategories(),
                     'rootURL'                           => $_sRootCategoryURL,
                     'translation'                       => array(
@@ -163,13 +163,12 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
          * There are two cases:
          *  a) Creating a new unit
          *  b) Editing the category selection of an already created unit
-         * For the second case, `$_GET[ 'post ]` is set.
+         * For the second case, GET[ 'post' ] is set.
          * @return array
          */
         private function ___getUnitOptions() {
 
-            if ( ! isset( $_GET[ 'post' ] ) ) {
-//                $_aUnitOptions = $this->getAsArray( get_transient( $GLOBALS[ 'aal_transient_id' ] ) );
+            if ( ! isset( $_GET[ 'post' ] ) ) { // sanitization unnecessary as just checking
                 $_aUnitOptions = $this->oFactory->getSavedOptions();
                 if ( empty( $_aUnitOptions ) ) {
                     new AmazonAutoLinks_Error( 'CATEGORY_SELECTION_AJAX_CALL', 'The unit options are empty. Transient: ' . $GLOBALS[ 'aal_transient_id' ], $_aUnitOptions, true );
@@ -178,7 +177,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             }
 
             $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
-                ( integer ) $_GET[ 'post' ], // unit id
+                ( integer ) $_GET[ 'post' ], // unit id // sanitization done
                 array() // unit options
             );
             return $_oUnitOption->get();
@@ -285,7 +284,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             $aInputs[ 'categories_exclude' ] = $this->getCategoryArgumentsFormatted( $_aExcluded );
 
             $_oUnitOption = new AmazonAutoLinks_UnitOption_category(
-                ( integer ) $this->getElement( $_GET, array( 'post' ), 0 ), // unit id
+                ( integer ) $this->getElement( $_GET, array( 'post' ), 0 ), // unit id // sanitization done
                 $aInputs // unit options
             );
             $_iPostID = $this->___postUnitByCategory(
@@ -338,7 +337,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             $_iPostID = 0;
             
             // Create a custom post if it's a new unit.
-            if ( ! isset( $_GET[ 'post' ] ) || ! $_GET[ 'post' ] ) {
+            if ( ! isset( $_GET[ 'post' ] ) || ! $_GET[ 'post' ] ) {    // sanitization unnecessary as just checking
                 $_iPostID = wp_insert_post(
                     array(
                         'comment_status'    => 'closed',
@@ -354,7 +353,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             // Add meta fields.
             $_iPostID = 1 == $aOptions[ 'mode' ]
                 ? $_iPostID 
-                : $_GET[ 'post' ];
+                : absint( $_GET[ 'post' ] );    // sanitization done
             
             // Remove unnecessary items.
             // The unit title was converted to post_title above.

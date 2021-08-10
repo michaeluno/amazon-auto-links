@@ -28,8 +28,8 @@ class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox
      * @deprecated
      */
 /*     public function replyToPrintMetaBoxConetnt( $oFactory ) {
-        $_sPostTitle = isset( $_GET[ 'post' ] )
-            ? get_the_title( $_GET[ 'post' ] )
+        $_sPostTitle = isset( $_GET[ 'post' ] )             // sanitization unnecessary as just checking
+            ? get_the_title( absint( $_GET[ 'post' ] ) )    // sanitization done
             : '';
         $_sPostTitle = $_sPostTitle
             ? $_sPostTitle

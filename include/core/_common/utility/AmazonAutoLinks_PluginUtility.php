@@ -263,8 +263,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             return false;
         }
         return in_array(
-            self::getElement( $_GET, 'post_type' ),
-            AmazonAutoLinks_Registry::$aPostTypes
+            self::getElement( $_GET, 'post_type' ), // sanitization unnecessary as just checking
+            AmazonAutoLinks_Registry::$aPostTypes,
+            true
         );
 
     }
