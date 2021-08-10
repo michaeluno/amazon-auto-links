@@ -82,7 +82,7 @@ class AmazonAutoLinks_ListTable_Tasks extends AmazonAutoLinks_ListTableWrap_Base
         // Reload the page.
         exit(
             wp_safe_redirect(
-                remove_query_arg( array( 'action', 'name' ), add_query_arg( $this->aREQUEST, admin_url( $GLOBALS[ 'pagenow' ] ) ) )
+                remove_query_arg( array( 'action', 'name' ), add_query_arg( $_GET, admin_url( $GLOBALS[ 'pagenow' ] ) ) )
             )
         );
 
