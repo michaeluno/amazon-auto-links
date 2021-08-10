@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.2.0
+	@version 1.2.1
  */
 /* General */
 .width-full,
@@ -256,4 +256,12 @@ pre.dump-array {
 }
 .aal-pointer .wp-pointer-arrow-inner, .wp-pointer-undefined .wp-pointer-arrow-inner {
     border-bottom-color: #FFF;
+}
+
+/* Announcements */
+.announcement-item {
+	margin-bottom: 1em;
+}
+.announcements h4 {
+	margin: 0.8em 0;
 }
