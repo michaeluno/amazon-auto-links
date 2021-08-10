@@ -28,11 +28,19 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
     public $aArguments  = array();
 
     /**
+     * @var   AmazonAutoLinks_PluginUtility
+     * @since 4.6.18
+     */
+    public $oUtil;
+
+    /**
      * Sets up properties and hooks.
      *
      * @param array $aData  The data to list.
      */
     public function __construct( array $aData ){
+
+        $this->oUtil = new AmazonAutoLinks_PluginUtility;
 
         $this->aData = $aData;
 
@@ -120,7 +128,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aActions[ 'deactivate' ] = sprintf( 
                 '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Deactivate', 'amazon-auto-links' ) . '</a>',
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $_REQUEST[ 'page' ], 
+                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
                 'deactivate', 
                 $aItem[ 'id' ]
             );
@@ -128,7 +136,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aActions[ 'activate' ]   = sprintf( 
                 '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Activate', 'amazon-auto-links' ) . '</a>', 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $_REQUEST[ 'page' ], 
+                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
                 'activate', 
                 $aItem[ 'id' ]
             );
@@ -138,7 +146,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aActions[ 'remove' ] = sprintf(
                 '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Remove', 'amazon-auto-links' ) . '</a>',
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                $_REQUEST[ 'page' ],
+                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
                 'remove',
                 $aItem[ 'id' ]
             );
@@ -168,7 +176,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      * @return string
      */
     public function column_thumbnail( $aItem ) {
-        
+
         $_sThumbnailPath = $this->___getThumbnailPath( $aItem );
         if ( ! file_exists( $_sThumbnailPath ) ) {
             return '';

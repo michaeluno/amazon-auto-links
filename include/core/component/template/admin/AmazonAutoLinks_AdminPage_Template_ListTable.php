@@ -81,9 +81,9 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         ?>
         <form id="template-filter" method="get">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-            <input type="hidden" name="page" value="<?php echo isset( $_REQUEST['page'] ) ? $_REQUEST['page'] : 'aal_templates'; ?>" />
-            <input type="hidden" name="tab" value="<?php echo isset( $_REQUEST['tab'] ) ? $_REQUEST['tab'] : 'table'; ?>" />
-            <input type="hidden" name="post_type" value="<?php echo isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]; ?>" />
+            <input type="hidden" name="page" value="<?php echo AmazonAutoLinks_Registry::$aAdminPages[ 'template' ]; ?>" />
+            <input type="hidden" name="tab" value="table" />
+            <input type="hidden" name="post_type" value="<?php echo AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]; ?>" />
             <!-- Now we can render the completed list table -->
             <?php $this->___oTemplateListTable->display() ?>
         </form>        
