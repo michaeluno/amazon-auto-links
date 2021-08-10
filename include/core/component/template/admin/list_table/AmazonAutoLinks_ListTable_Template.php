@@ -113,47 +113,38 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aItem[ 'id' ]  /*$2%s*/ // The value of the checkbox should be the record's id
         );
     }    
-    
+
     /**
      * 
      * @callback        filter      column_{$column_title}
      */ 
     public function column_name( $aItem ){    
 
-        $_sWarning = apply_filters( 'aal_filter_template_list_table_warning', '', $aItem ); // [4.6.17+]
+        $_sWarning  = apply_filters( 'aal_filter_template_list_table_warning', '', $aItem ); // [4.6.17+]
 
         // Build row actions
-        $aActions = array();
+        $_aActions  = array();
+        $_aURLQuery = array(
+            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+            'page'      => $this->oUtil->getElementAsTextField( $_GET, 'page' ),
+            'action'    => null,
+            'template'  => $aItem[ 'id' ],
+        );  
         if ( $aItem[ 'is_active' ] ) {
-            $aActions[ 'deactivate' ] = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Deactivate', 'amazon-auto-links' ) . '</a>',
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
-                'deactivate', 
-                $aItem[ 'id' ]
-            );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'deactivate', ) + $_aURLQuery ) );
+            $_aActions[ 'deactivate' ] = "<a href='{$_sHref}'>" . __( 'Deactivate', 'amazon-auto-links' ) . '</a>';
         } else  {
-            $aActions[ 'activate' ]   = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Activate', 'amazon-auto-links' ) . '</a>', 
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
-                'activate', 
-                $aItem[ 'id' ]
-            );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'activate', ) + $_aURLQuery ) );
+            $_aActions[ 'activate' ] = "<a href='{$_sHref}'>" . __( 'Activate', 'amazon-auto-links' ) . '</a>';
         }
         if ( $aItem[ 'should_remove' ] ) {
-            unset( $aActions[ 'deactivate' ] );
-            $aActions[ 'remove' ] = sprintf(
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Remove', 'amazon-auto-links' ) . '</a>',
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                $this->oUtil->getElementAsTextField( $_GET, 'page' ),
-                'remove',
-                $aItem[ 'id' ]
-            );
+            unset( $_aActions[ 'deactivate' ] );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'remove', ) + $_aURLQuery ) );
+            $_aActions[ 'remove' ] = "<a href='{$_sHref}'>" . __( 'Remove', 'amazon-auto-links' ) . '</a>';
         }
-        $aActions = apply_filters( 
+        $_aActions = apply_filters( 
             'aal_filter_template_listing_table_action_links', 
-            $aActions, 
+            $_aActions, 
             $aItem[ 'id' ]
         );
 
@@ -164,10 +155,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
                 ? "<div class='name-container'>" . $_sWarning . "<strong>{$aItem[ 'name' ]}</strong></div>"
                 : "<div class='name-container'>" . $_sWarning . $aItem[ 'name' ] . "</div>",
             AmazonAutoLinks_Option::getInstance()->isDebug() ? "<div>ID: {$aItem[ 'id' ]}</div>" : '',
-            $this->row_actions( $aActions, true ) /*$3%s*/
+            $this->row_actions( $_aActions, true ) /*$3%s*/
         );
 
-        
     }
 
     /**
