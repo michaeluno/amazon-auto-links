@@ -18,6 +18,16 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
 
     /**
+     * Retrieves an array element as string and sanitizes it.
+     * @return string
+     * @since  4.6.18
+     */
+    static public function getElementAsTextField( $aSubject, $aisKey, $sDefault='' ) {
+        $_sFieldValue = ( string ) self::getElement( $aSubject, $aisKey, $sDefault );
+        return sanitize_text_field( $_sFieldValue );
+    }
+
+    /**
      * @return boolean
      * @since  4.6.8
      */
