@@ -25,10 +25,18 @@ class AmazonAutoLinks_Proxy_Event_Ajax_LoadProxyList extends AmazonAutoLinks_Aja
     protected $_sNonceKey = 'aal_nonce_ajax_aal_proxy_loader';
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array();
+    }
+
+    /**
      * @return string|boolean
      * @throws Exception        Throws a string value of an error message.
+     * @param  array $aPost     POST data. Unused at the moment.
      */
     protected function _getResponse( array $aPost ) {
 

@@ -23,12 +23,26 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview exte
      * @var string
      */
     protected $_sNonceKey = 'aalNonceCategorySelection';
+            //
+            // $_aAddedCategories     = ;
+            // $_aExcludingCategories = ;
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'urls_added'    => array_map( array( $this, 'getURLSanitized' ), $this->getElementAsArray( $aPost, array( 'urls_added' ) ) ),
+            'urls_excluded' => array_map( array( $this, 'getURLSanitized' ), $this->getElementAsArray( $aPost, array( 'urls_excluded' ) ) ),
+        ) + parent::_getPostSanitized( $aPost );
+    }
+
+    /**
      * @return array
      * @throws Exception        Throws a string value of an error message.
+     * @param  array     $aPost Sanitized POST data.
      */
     protected function _getResponse( array $aPost ) {
 

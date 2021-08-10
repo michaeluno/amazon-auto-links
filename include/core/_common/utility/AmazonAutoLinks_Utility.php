@@ -16,6 +16,18 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
+     * @param  string $sURL
+     * @return string|false
+     * @since  4.6.18
+     */
+    static public function getURLSanitized( $sURL ) {
+        $sURL = strip_tags( $sURL );
+        $sURL = stripslashes( $sURL );
+        $sURL = trim( $sURL );
+        return filter_var( $sURL, FILTER_VALIDATE_URL );
+    }
+
+    /**
      * @remark Used to sanitize HTTP request values which can contain arrays.
      * @param  callable $cCallback
      * @param  array    $aInput

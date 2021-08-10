@@ -22,10 +22,24 @@ class AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck extends AmazonAutoLin
     protected function _construct() {}
 
     /**
-     * @param  array     $aPost The POST array.
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'locale'        => sanitize_text_field( $this->getElement( $aPost, array( 'locale' ), '' ) ),
+            'associate_id'  => sanitize_text_field( $this->getElement( $aPost, array( 'associate_id' ), '' ) ),
+            'access_key'    => sanitize_text_field( $this->getElement( $aPost, array( 'access_key' ), '' ) ),
+            'secret_key'    => sanitize_text_field( $this->getElement( $aPost, array( 'secret_key' ), '' ) ),
+        );
+    }
+
+    /**
      * @return array
      * @throws Exception Throws a string value of an error message.
      * @since  4.5.0
+     * @param  array     $aPost Sanitized POST array including the `locale`, `associate_id`, `access_key`, and `secret_key` elements.
      */
     protected function _getResponse( array $aPost ) {
 
@@ -36,7 +50,7 @@ class AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck extends AmazonAutoLin
 
         $_iNow         = time();
         $_aResponse    = array(
-            'error'                    => 0,
+            'error'                  => 0,
             'last_checked'           => $_iNow,
             'last_checked_readable'  => $this->getSiteReadableDate( $_iNow, get_option( 'date_format' ) . ' H:i:s', true ),
         );

@@ -25,10 +25,19 @@ class AmazonAutoLinks_Geotargeting_EventAjax_GeolocationResolver extends AmazonA
     protected $_bGuest    = true;
 
     /**
-     * @param  array            $aPost $_POST data
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array();
+    }
+
+    /**
      * @return string|array
      * @throws Exception        Throws a string value of an error message.
      * @since  4.6.0
+     * @param  array $aPost     POST data. Unused at the moment.
      */
     protected function _getResponse( array $aPost ) {
 

@@ -24,10 +24,18 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
     }
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array();
+    }
+
+    /**
      * @return boolean
-     * @throws Exception        Throws a string value of an error message.
+     * @throws Exception Throws a string value of an error message.
+     * @param  array     $aPost Unused at the moment.
      */
     protected function _getResponse( array $aPost ) {
 

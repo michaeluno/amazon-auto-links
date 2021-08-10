@@ -35,14 +35,24 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
     }
 
     /**
-     * @param array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'data' => $this->getElementAsArray( $aPost, 'data' ),
+        );
+    }
+
+    /**
      * @return string|array
-     * @throws Exception        Throws a string value of an error message.
+     * @throws Exception    Throws a string value of an error message.
+     * @param  array        $aPost  POST data, containing the `data' element.
      */
     protected function _getResponse( array $aPost ) {
 
-        if ( ! isset( $aPost[ 'data' ] ) ) {
+        if ( empty( $aPost[ 'data' ] ) ) {
             throw new Exception( __( 'Failed to load the unit.', 'amazon-auto-links' ) );
         }
 
@@ -190,7 +200,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
                 'post_id'       => get_the_ID(),
                 'REQUEST'       => array(
                     // Currently, contextual units only use the `s` field.
-                    's' => _sanitize_text_fields( $this->getElement( $_REQUEST, array( 's' ) ) ),
+                    's' => sanitize_text_field( $this->getElement( $_REQUEST, array( 's' ) ) ),
                 ),
             );
             if ( 'taxonomy' === $_sPageType ) {
