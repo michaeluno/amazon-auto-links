@@ -49,7 +49,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
         // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_nopriv_}aal_unit_ajax_loading` action hook )
 
         // For the contextual widget
-        add_filter( 'aal_filter_http_get', array( $this, 'replyToSetReferrerHTTPGET' ) );
+        add_filter( 'aal_filter_http_get', array( $this, 'replyToGetHTTPGETRequest' ) );
         add_filter( 'aal_filter_post_object', array( $this, 'replyToSetReferrerPostObject' ) );
         add_filter( 'aal_filter_current_page_type', array( $this, 'replyToSetReferrerPageType' ) );
         add_filter( 'aal_filter_current_queried_term_object', array( $this, 'replyToSetReferrerTermObject' ) );
@@ -86,7 +86,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      * @return      array
      * @since       3.6.0
      */
-    public function replyToSetReferrerHTTPGET( $aGET ) {
+    public function replyToGetHTTPGETRequest( $aGET ) {
         return isset( $_POST[ 'REQUEST' ] )
             ? $_POST[ 'REQUEST' ]
             : $aGET;
@@ -188,7 +188,10 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
                 'author_name'   => '',
                 'page_type'     => $_sPageType,
                 'post_id'       => get_the_ID(),
-                'REQUEST'       => $_REQUEST,
+                'REQUEST'       => array(
+                    // Currently, contextual units only use the `s` field.
+                    's' => _sanitize_text_fields( $this->getElement( $_REQUEST, array( 's' ) ) ),
+                ),
             );
             if ( 'taxonomy' === $_sPageType ) {
                 $_oTerm = $this->getCurrentQueriedObject();
