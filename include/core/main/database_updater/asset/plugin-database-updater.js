@@ -21,7 +21,6 @@
                 type: "post",
                 dataType: 'json',
                 url: aalDBUpdater.ajaxURL,
-                // Data set to $_POSt and $_REQUEST
                 data: {
                     action: aalDBUpdater.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalDBUpdater.nonce,   // the nonce value set in template.php

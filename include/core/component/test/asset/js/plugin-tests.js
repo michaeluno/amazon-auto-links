@@ -103,7 +103,6 @@
                 dataType: 'json',
                 async: true,
                 url: aalTests.ajaxURL,
-                // Data set to $_POSt and $_REQUEST
                 data: {
                     action: aalTests.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalTests.nonce,   // the nonce value set in template.php

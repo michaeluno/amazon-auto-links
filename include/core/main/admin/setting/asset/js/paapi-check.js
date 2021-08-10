@@ -77,7 +77,6 @@
                 async: true,
                 cache: true,
                 url: aalPAAPICheck.ajaxURL,
-                // Data set to $_POST and $_REQUEST
                 data: {
                     action: aalPAAPICheck.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalPAAPICheck.nonce,   // the nonce value set in template.php

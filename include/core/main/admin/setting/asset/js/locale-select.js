@@ -31,7 +31,6 @@
                 async: true,
                 cache: true,
                 url: aalLocaleSelect.ajaxURL,
-                // Data set to $_POST and $_REQUEST
                 data: {
                     action: aalLocaleSelect.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalLocaleSelect.nonce,   // the nonce value set in template.php

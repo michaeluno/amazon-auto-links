@@ -27,7 +27,6 @@
                 type: 'post',
                 dataType: 'json',
                 url: aalProxyLoader.ajaxURL,
-                // Data set to $_POSt and $_REQUEST
                 data: {
                     // Required
                     action: aalProxyLoader.action_hook_suffix,  // WordPress action hook name which follows after `wp_ajax_`

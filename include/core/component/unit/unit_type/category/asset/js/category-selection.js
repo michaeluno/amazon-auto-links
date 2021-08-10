@@ -283,7 +283,6 @@
             dataType: 'json',
             url: aalCategorySelection.ajaxURL,
             // async: false,   // to prevent the user click on the other lists while loading
-            // Data set to $_POSt and $_REQUEST
             data: {
                 // Required
                 action: aalCategorySelection.action_hook_suffix_category_list,  // WordPress action hook name which follows after `wp_ajax_`

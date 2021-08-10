@@ -65,7 +65,6 @@
                 type: 'post',
                 dataType: 'json',
                 url: aalWebPageDumperTester.ajaxURL,
-                // Data set to $_POSt and $_REQUEST
                 data: {
                     // Required
                     action: aalWebPageDumperTester.actionHookSuffix,  // WordPress action hook name which follows after `wp_ajax_`
