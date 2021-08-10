@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.7.2
+Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.17
+Stable tag:         4.6.18
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -327,6 +327,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.18 - 08/11/2021 =
+- Tweaked the UI of the `Get New` screen of the `Templates` page.
+- Fixed unnecessary browser console log items.
+- Fixed raw HTTP request values, which could cause possible security issues.
 
 = 4.6.17 - 08/09/2021 =
 - Added checkbox items to the `Restore Defaults` option which allows the user to select which options to delete.
