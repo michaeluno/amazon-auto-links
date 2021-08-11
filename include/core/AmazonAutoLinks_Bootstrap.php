@@ -236,11 +236,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // [4.0.0]
             new AmazonAutoLinks_CustomOEmbed_Loader;
 
-            new AmazonAutoLinks_Test_Loader; // [4.3.0]
-
             new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
             new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
+
+            // [4.6.19] Released versions don't include these
+            if ( file_exists( dirname( __FILE__ ) . '/component/test' ) ) {
+                new AmazonAutoLinks_Test_Loader; // [4.3.0]
+            }
 
         }
 
