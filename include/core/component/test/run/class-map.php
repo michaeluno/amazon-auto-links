@@ -74,5 +74,6 @@ return array(
     "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
     "AmazonAutoLinks_UnitTest_WordPress_Options" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Options.php", 
     "AmazonAutoLinks_UnitTest_WordPress_add_action" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/add_action/AmazonAutoLinks_UnitTest_WordPress_add_action.php", 
+    "AmazonAutoLinks_UnitTest_WordPress_KSESFunctions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/kses/AmazonAutoLinks_UnitTest_WordPress_KSESFunctions.php", 
     "Test_wp_remote_head" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/wp_remote_request/Test_wp_remote_head.php", 
 );
