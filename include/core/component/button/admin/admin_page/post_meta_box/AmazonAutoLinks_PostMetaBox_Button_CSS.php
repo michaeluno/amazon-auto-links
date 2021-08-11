@@ -13,35 +13,11 @@
  */
 class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox_Button {
 
-    
     public function setUp() {
-        
         $_oFields = new AmazonAutoLinks_FormFields_Button_CSS( $this );
         foreach( $_oFields->get() as $_aField ) {            
             $this->addSettingFields( $_aField );
-        }        
-
+        }
     }
-    
-    /**
-     * Draws the Select Category submit button and some other links.
-     * @deprecated
-     */
-/*     public function replyToPrintMetaBoxConetnt( $oFactory ) {
-        $_sPostTitle = isset( $_GET[ 'post' ] )             // sanitization unnecessary as just checking
-            ? get_the_title( absint( $_GET[ 'post' ] ) )    // sanitization done
-            : '';
-        $_sPostTitle = $_sPostTitle
-            ? $_sPostTitle
-            : __( 'Buy Now', 'amazon-auto-links' );
-
-        ?>
-        <div style="margin: 3em 0 1.5em 1em;">
-            <div style="margin-left: auto; margin-right: auto; text-align:center;">
-                <div class="amazon-auto-links-button"><?php echo $_sPostTitle; ?></div>
-            </div>            
-        </div>
-        <?php
-    }     */
     
 }
