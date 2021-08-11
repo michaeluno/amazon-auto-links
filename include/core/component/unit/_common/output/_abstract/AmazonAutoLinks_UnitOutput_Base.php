@@ -176,39 +176,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->bDBTableAccess    = $this->___hasCustomDBTableAccess();
 
     }
-        /**
-         * @since   3.7.5
-         * @return  boolean
-         */
-        private function ___hasCustomProductLinkURLQuery() {
-            $_aLinkQueryRaw = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
-            foreach( $_aLinkQueryRaw as $_iIndex => $_aKeyValue ) {
-                $_aQueryKeyValue = array_filter( $_aKeyValue );
-                if ( empty( $_aQueryKeyValue ) ) {
-                    continue;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        /**
-         * @param    string $sURL
-         * @param    string $sRawURL
-         * @param    string $sASIN
-         * @param    AmazonAutoLinks_UnitOption_Base $aUnitOptions
-         * @return   string
-         * @since    3.7.5
-         * @callback add_filter()  aal_filter_product_link
-         */
-        public function replyToModifyProductURLs( $sURL, $sRawURL, $sASIN, $aUnitOptions ) {
-            $_aQuery     = array();
-            $_aKeyValues = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
-            foreach( $_aKeyValues as $_iIndex => $_aKeyValue ) {
-                $_aQuery[ $_aKeyValue[ 'key' ] ] = $_aKeyValue[ 'value' ];
-            }
-            return add_query_arg( $_aQuery, $sURL );
-        }
 
         /**
          * Sanitizes a raw product title.
@@ -424,7 +391,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         private function ___getHooksSetPerOutput() {
 
             add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-            $_aHooks = array(
+            return array(
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
                 new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
@@ -434,13 +401,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 new AmazonAutoLinks_UnitOutput__Credit( $this ),
                 new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
                 new AmazonAutoLinks_UnitOutput__HTTPErrorChecks( $this ),
+                new AmazonAutoLinks_UnitOutput__CustomQueryArguments( $this ),  // 4.6.19
             );
-
-            // 3.7.5+
-            if ( $this->___hasCustomProductLinkURLQuery() ) {
-                add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
-            }
-            return $_aHooks;
 
         }
 
@@ -453,7 +415,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___removeHooksPerOutput( array $aHooks ) {
             remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-            remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
             foreach( $aHooks as $_oHook ) {
                 $_oHook->__destruct();
             }

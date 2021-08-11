@@ -353,6 +353,7 @@ return array(
     "AmazonAutoLinks_UnitOutput__ErrorChecker" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/action/error/AmazonAutoLinks_UnitOutput__ErrorChecker.php", 
     "AmazonAutoLinks_UnitOutput__HTTPErrorChecks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/action/error/AmazonAutoLinks_UnitOutput__HTTPErrorChecks.php", 
     "AmazonAutoLinks_UnitOutput__Credit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__Credit.php", 
+    "AmazonAutoLinks_UnitOutput__CustomQueryArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__CustomQueryArguments.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_Base.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate.php", 
