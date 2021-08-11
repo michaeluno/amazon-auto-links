@@ -1,0 +1,2 @@
+- Updated JavaScript libraries.
+- Fixed raw HTTP request values, which could cause possible security issues.

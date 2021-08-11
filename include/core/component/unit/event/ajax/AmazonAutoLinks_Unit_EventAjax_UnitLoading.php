@@ -99,7 +99,9 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToGetHTTPGETRequest( $aGET ) {
         return isset( $_POST[ 'REQUEST' ] )
-            ? $_POST[ 'REQUEST' ]
+            ? array(
+                's' => _sanitize_text_fields( $this->getElement( $_POST, array( 's' ) ) ),   // sanitization done
+            )
             : $aGET;
     }
     /**
