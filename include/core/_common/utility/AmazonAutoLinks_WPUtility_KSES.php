@@ -131,6 +131,45 @@ class AmazonAutoLinks_WPUtility_KSES extends AmazonAutoLinks_WPUtility_HTTP {
     }
 
     /**
+     * Escapes the given string for the KSES filter with the criteria of allowing tags, tag attributes, and the protocol.
+     * @param  string $sString
+     * @param  array  $aAllowedHTMLTags
+     * Structure:
+     * ```
+     * array(
+     *      'svg' => array(
+     *          'viewport' => true,
+     *           'fill' => true,
+     *      ),
+     *      'use' => array(
+     *          'stroke' => true,
+     *          'fill' => true,
+     *      ),
+     *      ...
+     * )
+     * ```
+     * @param  array  $aAllowedProtocols
+     * @return string
+     * @since  4.6.19
+     */
+    static public function getEscapedWithKSES( $sString, $aAllowedHTMLTags=array(), $aAllowedProtocols=array() ) {
+        if ( empty( $aAllowedProtocols ) ) {
+            $aAllowedProtocols = wp_allowed_protocols();
+        }
+        if ( empty( $aAllowedHTMLTags ) ) {
+            $aAllowedHTMLTags = wp_kses_allowed_html( 'post' );
+        }
+        $sString = addslashes( $sString );                                              // the original function call was doing this - could be redundant but haven't fully tested it
+        $sString = stripslashes( $sString );                                            // wp_filter_post_kses()
+        $sString = wp_kses_no_null( $sString );                                         // wp_kses()
+        $sString = wp_kses_normalize_entities( $sString );                              // wp_kses()
+        $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols );     // WP changed the order of these funcs and added args to wp_kses_hook
+        $sString = wp_kses_split( $sString, $aAllowedHTMLTags, $aAllowedProtocols );
+        $sString = addslashes( $sString );                                              // wp_filter_post_kses()
+        return stripslashes( $sString );                                                // the original function call was doing this - could be redundant but haven't fully tested it
+    }
+
+    /**
      * Escapes the given string for the KSES filter with the criteria of allowing/disallowing tags and the protocol.
      *
      * @remark      Attributes are not supported at this moment.
@@ -145,7 +184,7 @@ class AmazonAutoLinks_WPUtility_KSES extends AmazonAutoLinks_WPUtility_HTTP {
      * @return      string
      * @see         wp_kses()
      */
-    static public function getEscapedWithKSES( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
+    static public function getEscapedWithKSESLegacy( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
         $aFormatAllowedTags = array();
         foreach( $aAllowedTags as $sTag ) {
@@ -164,19 +203,7 @@ class AmazonAutoLinks_WPUtility_KSES extends AmazonAutoLinks_WPUtility_HTTP {
         foreach( $aAllowedHTMLTags as $_sTagName => $_aAttributes ) {
             $aAllowedHTMLTags[ $_sTagName ] = $_aAttributes + $_aFormattedAllowedAttributes;
         }
-
-        if ( empty( $aAllowedProtocols ) ) {
-            $aAllowedProtocols = wp_allowed_protocols();
-        }
-
-        $sString = addslashes( $sString );                                              // the original function call was doing this - could be redundant but haven't fully tested it
-        $sString = stripslashes( $sString );                                            // wp_filter_post_kses()
-        $sString = wp_kses_no_null( $sString );                                         // wp_kses()
-        $sString = wp_kses_normalize_entities( $sString );                              // wp_kses()
-        $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols );     // WP changed the order of these funcs and added args to wp_kses_hook
-        $sString = wp_kses_split( $sString, $aAllowedHTMLTags, $aAllowedProtocols );
-        $sString = addslashes( $sString );                                              // wp_filter_post_kses()
-        return stripslashes( $sString );                                                // the original function call was doing this - could be redundant but haven't fully tested it
+        return self::getEscapedWithKSES( $sString );
 
     }
         /**
@@ -186,10 +213,10 @@ class AmazonAutoLinks_WPUtility_KSES extends AmazonAutoLinks_WPUtility_HTTP {
          * @param array  $aAllowedProtocols
          * @param array  $aAllowedAttributes
          * @return       string
-         * @deprecated   4.6.19 Use getEscapedWithKSES()
+         * @deprecated   4.6.19 Use getEscapedWithKSESLegacy()
          */
         static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
-            return self::getEscapedWithKSES( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() );
+            return self::getEscapedWithKSESLegacy( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() );
         }
 
 }
