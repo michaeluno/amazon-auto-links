@@ -1,5 +1,6 @@
 - Added the `Security` setting section in the `Misc` screen. 
 - Deprecated the `Form` setting section in the `Misc` screen.
+- Fixed some unloaded images in the plugin setting pages.
 - Fixed a bug that restoring default options for the general options was not properly processed, started in v4.6.17.   
 - Updated JavaScript libraries.
 - Fixed some unescaped HTML outputs.
