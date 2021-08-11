@@ -1,2 +1,3 @@
 - Updated JavaScript libraries.
+- Fixed some unescaped HTML outputs.
 - Fixed raw HTTP request values, which could cause possible security issues.
