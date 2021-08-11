@@ -415,7 +415,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     static public function getCommentCredit() {
-        return '<!-- Rendered with Amazon Auto Links by miunosoft -->';
+        return "<!-- Rendered with " . AmazonAutoLinks_Registry::NAME . " by miunosoft -->";
     }
     
     /**
