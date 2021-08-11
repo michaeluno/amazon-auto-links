@@ -54,10 +54,7 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
         
         // Events
         new AmazonAutoLinks_Event;               
-                
-        // Outputs
-        new AmazonAutoLinks_Credit;            
-        
+
         // Back-end
         if ( is_admin() ) {
             $this->___loadAdminComponents();

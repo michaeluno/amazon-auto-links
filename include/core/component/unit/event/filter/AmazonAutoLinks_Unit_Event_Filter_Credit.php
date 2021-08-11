@@ -11,9 +11,10 @@
 /**
  * Provides methods to generate credit links.
  * 
- * @since       3.2.3
+ * @since   3.2.3
+ * @since   4.6.19 Renamed from ``. 
  */
-class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Sets up hooks.
