@@ -1,4 +1,4 @@
-# [Amazon Auto Links](http://wordpress.org/plugins/amazon-auto-links/) #
+# [Auto Links for Amazon Associates (formally Amazon Auto Links)](http://wordpress.org/plugins/amazon-auto-links/) #
 
 ### Welcome to our GitHub Repository
 

@@ -1,6 +1,6 @@
 <?php
 /**
- *    Plugin Name:    Amazon Auto Links
+ *    Plugin Name:    Auto Amazon Links (formally Amazon Auto Links)
  *    Plugin URI:     https://en.michaeluno.jp/amazon-auto-links
  *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *    Author:         Michael Uno (miunosoft)
