@@ -38,7 +38,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
 
     /**
      * @remark Not using GET as bulk actions parse POST.
-     * @var    array  Stores sanitized $_REQUEST values.
+     * @var    array  Stores sanitized REQUEST values.
      * @since  4.6.17
      */
     public $aREQUEST = array();
