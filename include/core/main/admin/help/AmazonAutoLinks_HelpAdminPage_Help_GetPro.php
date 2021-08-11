@@ -84,11 +84,6 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
                 'pro'  => __( 'Unlimited', 'amazon-auto-links' ),
             ),
             array(
-                'text' => __( 'Max Number of Categories per Unit', 'amazon-auto-links' ),
-                'free' => 3,
-                'pro'  => __( 'Unlimited', 'amazon-auto-links' ),
-            ),
-            array(
                 'text' => __( 'Max Number of Units', 'amazon-auto-links' ),
                 'free' => 3,
                 'pro'  => __( 'Unlimited', 'amazon-auto-links' ),
@@ -141,8 +136,6 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
         </div>    
         <h4><?php esc_html_e( 'Max Number of Items to Show', 'amazon-auto-links' ); ?></h4>
         <p><?php  esc_html_e( 'Get pro for unlimited items to show.', 'amazon-auto-links' ); ?></p>
-        <h4><?php esc_html_e( 'Max Number of Categories Per Unit', 'amazon-auto-links' ); ?></h4>
-        <p><?php  esc_html_e( 'Get pro for unlimited categories to set up!', 'amazon-auto-links' ); ?></p>
         <h4><?php esc_html_e( 'Max Number of Units', 'amazon-auto-links' ); ?></h4>
         <p><?php  esc_html_e( 'Get pro for unlimited units so that you can put ads as many as you want.', 'amazon-auto-links' ); ?></p>
         
