@@ -15,6 +15,21 @@
 class AmazonAutoLinks_Utility_FileSystem extends AmazonAutoLinks_Utility_XML {
 
     /**
+     * Checks multiple file existence.
+     *
+     * @param   array|string    $asFilePaths
+     * @return  boolean
+     */
+    static public function doFilesExist( $asFilePaths ) {
+        foreach( self::getAsArray( $asFilePaths ) as $_sFilePath ) {
+            if ( ! file_exists( $_sFilePath ) ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * @remark  used upon plugin uninstall.
      * @param   string $sDirectoryPath
      * @return  bool|null

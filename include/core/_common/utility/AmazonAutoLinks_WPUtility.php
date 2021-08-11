@@ -338,21 +338,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
     }
     
     /**
-     * Checks multiple file existence.
-     *
-     * @param       array|string    $asFilePaths
-     * @return      boolean
-     */
-    static public function doFilesExist( $asFilePaths ) {        
-        foreach( self::getAsArray( $asFilePaths ) as $_sFilePath ) {
-            if ( ! file_exists( $_sFilePath ) ) {
-                return false;
-            }
-        }                
-        return true;
-    }
-
-    /**
      * Returns an array of the installed taxonomies on the site.
      * 
      */
