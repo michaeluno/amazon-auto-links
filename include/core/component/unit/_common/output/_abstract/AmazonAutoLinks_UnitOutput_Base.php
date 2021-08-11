@@ -449,6 +449,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
 
+            $oOption = AmazonAutoLinks_Option::getInstance();
+
             // Include the template
             defined( 'WP_DEBUG' ) && WP_DEBUG
                 ? include( $sTemplatePath )

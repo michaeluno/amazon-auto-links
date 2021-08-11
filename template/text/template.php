@@ -10,15 +10,14 @@
 
 /**
  * Available variables.
- *
- * @var array $aOptions the plugin options
+ * @var AmazonAutoLinks_Option $oOption
+ * @var array $aOptions the plugin options @deprecated use $oOption
  * @var array $aProducts the fetched product links
  * @var array $aArguments the user defined unit arguments such as image size and count etc.
  */
-
 new AmazonAutoLinks_TemplateUtility_NoOuterContainer;
 
 foreach( $aProducts as $_aProduct ) : ?>
-    <?php echo $_aProduct[ 'formatted_item' ]; ?>
+    <?php echo wp_kses( $_aProduct[ 'formatted_item' ], $oOption->getAllowedHTMLTags() ); ?>
 <?php
 endforeach;

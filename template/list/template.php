@@ -9,13 +9,12 @@
 */
 
 /**
-* Available variables.
-*
-* @var array $aOptions the plugin options
-* @var array $aProducts the fetched product links
-* @var array $aArguments the user defined unit arguments such as image size and count etc.
-*/
-
+ * Available variables.
+ * @var AmazonAutoLinks_Option $oOption
+ * @var array $aOptions the plugin options @deprecated use $oOption
+ * @var array $aProducts the fetched product links
+ * @var array $aArguments the user defined unit arguments such as image size and count etc.
+ */
 $_aStructure_Product = array(
     'product_url'       => '',
     'title'             => '',
@@ -41,11 +40,11 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 
 ?>
     
-<div class="<?php echo $sClassAttributes_ProductsContainer; ?>" style="<?php echo $_sInlineStyle; ?>">
+<div class="<?php echo esc_attr( $sClassAttributes_ProductsContainer ); ?>" style="<?php echo $_sInlineStyle; ?>">
 <?php foreach( $aProducts as $_aProduct ) : ?>
     <?php $_aProduct = $_aProduct + $_aStructure_Product; ?>
     <div class="amazon-product-container">
-        <?php echo $_aProduct[ 'formatted_item' ]; ?>
+        <?php echo wp_kses( $_aProduct[ 'formatted_item' ], $oOption->getAllowedHTMLTags() ); ?>
     </div>
 <?php endforeach; ?>    
 </div>
