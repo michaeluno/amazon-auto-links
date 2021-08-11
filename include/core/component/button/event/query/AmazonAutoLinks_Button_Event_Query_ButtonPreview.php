@@ -48,35 +48,35 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
         $_oXpath       = new DOMXPath( $_oDoc );
         $_oTags        = $_oXpath->query( "/html/head" );
         $_oTag         = $_oTags->item( 0 );
-        $_sScript      = <<<SCRIPT
-<script type="text/javascript">
-
-    function aalCallSetButtonPreviewIframeStyle() {
-        var _oButton = document.getElementById( "preview-button" );
-        var _iWidth  = 0;
-        var _iHeight = 0;
-        if ( 'undefined' !== typeof _oButton && null !== _oButton  ) {
-            _iWidth  = _oButton.offsetWidth;
-            _iHeight = _oButton.offsetHeight;
-        }         
-        if ( 'undefined' !== typeof parent.aalSetButtonPreviewIframeStyle ) {
-            window.parent.aalSetButtonPreviewIframeStyle( _iWidth, _iHeight );            
-        }        
-    }
-    window.addEventListener( 'DOMContentLoaded', function( e ) {
-        aalCallSetButtonPreviewIframeStyle(); 
-    } );
-</script>
-SCRIPT;
-        $_sHead        = "<head>" . $_oDOM->getInnerHTML( $_oTag ) . $_sScript . "</head>";
 
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
-    <?php echo $_sHead; ?>
+    <?php echo "<head>"
+       . $_oDOM->getInnerHTML( $_oTag )
+       . "<script type='text/javascript'>"
+               . <<<JAVASCRIPT
+function aalCallSetButtonPreviewIframeStyle() {
+    var _oButton = document.getElementById( "preview-button" );
+    var _iWidth  = 0;
+    var _iHeight = 0;
+    if ( 'undefined' !== typeof _oButton && null !== _oButton  ) {
+        _iWidth  = _oButton.offsetWidth;
+        _iHeight = _oButton.offsetHeight;
+    }         
+    if ( 'undefined' !== typeof parent.aalSetButtonPreviewIframeStyle ) {
+        window.parent.aalSetButtonPreviewIframeStyle( _iWidth, _iHeight );            
+    }        
+}
+window.addEventListener( 'DOMContentLoaded', function( e ) {
+    aalCallSetButtonPreviewIframeStyle(); 
+} );
+JAVASCRIPT
+       . "</script>"
+    . "</head>"; ?>
     <body>
         <div id="preview-button" style="display: inline-block;"><?php //inline-block to fit the width to the child element. ?>
-            <?php echo $this->getButton( $_iButtonID, $_sButtonLabel, true, false ); ?>
+            <?php echo wp_kses( $this->getButton( $_iButtonID, $_sButtonLabel, true, false ), 'post' ); ?>
         </div>
     </body>
 </html>
