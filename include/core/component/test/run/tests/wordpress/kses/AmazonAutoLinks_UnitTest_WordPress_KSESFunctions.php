@@ -75,11 +75,7 @@ class AmazonAutoLinks_UnitTest_WordPress_KSESFunctions extends AmazonAutoLinks_U
 </svg>
 OUTPUT;
         $_sOutput = trim( $_sOutput );
-        add_filter( 'safe_style_css', function( $styles ) {
-            $styles[] = 'display';
-            $styles[] = 'position';
-            return $styles;
-        } );
+        add_filter( 'safe_style_css', array( $this, 'replyToGetStyleCSS' ) );
         $_aCommonAttributes   = array(
             'id'    => true,
             'class' => true,
@@ -146,6 +142,15 @@ OUTPUT;
             }
         }
 
+    }
+
+    /**
+     * @return array
+     */
+    public function replyToGetStyleCSS() {
+        $styles[] = 'display';
+        $styles[] = 'position';
+        return $styles;
     }
 
 }
