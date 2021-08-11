@@ -47,11 +47,9 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
          * @callback        action      admin_head
          */
         public function replyToPrintCustomStyleTag() {
-            // echo "<style type='text/css'></style>";
             echo "<style type='text/css' id='amazon-auto-links-button-style'>" . PHP_EOL
                     . '.amazon-auto-links-button {}' . PHP_EOL
-                . "</style>";                    
-                
+                . "</style>";
         }
         
         /**

@@ -18,7 +18,7 @@
 
 $_oUtil          = new AmazonAutoLinks_PluginUtility;
 $_aUsingHTMLTags = $oOption->getAllowedHTMLTags();
-echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>'; 
+echo '<?xml version="1.0" encoding="' . esc_attr( get_option( 'blog_charset' ) ) . '"?' . '>';
 
 ?>
 <rss version="2.0"

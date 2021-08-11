@@ -239,7 +239,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
          * @since   3.7.6
          */
         public function replyToEmbedNonce() {
-            echo "<input type='hidden' id='amazon-auto-links-nonce' value='{$this->_sNonce}' />";
+            echo "<input type='hidden' id='amazon-auto-links-nonce' value='" . esc_attr( $this->_sNonce ) . "' />";
         }
 
 

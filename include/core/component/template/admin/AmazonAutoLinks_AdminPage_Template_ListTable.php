@@ -81,9 +81,9 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         ?>
         <form id="template-filter" method="get">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-            <input type="hidden" name="page" value="<?php echo AmazonAutoLinks_Registry::$aAdminPages[ 'template' ]; ?>" />
+            <input type="hidden" name="page" value="<?php echo esc_attr( AmazonAutoLinks_Registry::$aAdminPages[ 'template' ] ); ?>" />
             <input type="hidden" name="tab" value="table" />
-            <input type="hidden" name="post_type" value="<?php echo AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]; ?>" />
+            <input type="hidden" name="post_type" value="<?php echo esc_attr( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] ); ?>" />
             <!-- Now we can render the completed list table -->
             <?php $this->___oTemplateListTable->display() ?>
         </form>        
@@ -99,7 +99,7 @@ class AmazonAutoLinks_AdminPage_Template_ListTable extends AmazonAutoLinks_Admin
         }
 
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        echo "<h3>" . __( 'Debug', 'amazon-auto-links' ) . "</h3>";
+        echo "<h3>" . esc_html__( 'Debug', 'amazon-auto-links' ) . "</h3>";
         echo "<div class='aal-accordion'>";
         echo "<h4>" . 'Available Templates' . "</h4>";
         echo "<div>" . $oFactory->oDebug->getDetails( $_oTemplateOption->getAvailable() ) . "</div>";

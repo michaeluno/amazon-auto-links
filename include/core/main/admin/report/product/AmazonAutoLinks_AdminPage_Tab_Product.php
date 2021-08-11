@@ -50,7 +50,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
         $_sImage        = $_sThumbnailURL
             ? "<img src='" . esc_url( $_sThumbnailURL ) . "' alt='thumbnail-{$_aProduct[ 'product_id' ]}' title='" . esc_attr( $_aProduct[ 'title' ] ) . "' />"
             : "<div class='centered'><span>" . __( 'No thumbnail', 'amazon-auto-links' ) . "</span></div>";
-        echo "<div class='product-thumbnail float-right'>" . $_sImage . "</div>";
+        echo "<div class='product-thumbnail float-right'>" . wp_kses( $_sImage, 'post' ) . "</div>";
         echo wp_kses( $this->___getGoBackLink(), 'post' );
         echo "<h3>" . __( 'Product Details', 'amazon-auto-links' ) . "</h3>";
         echo wp_kses( $this->___getProductDetails( $_aProduct ), 'post' );

@@ -117,15 +117,12 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
      * @return      void
      */
     protected function _doTab( $oFactory ) {
-        
         echo "<h3>" 
-                . __( 'Default Unit Options', 'amazon-auto-links' )
+                . esc_html__( 'Default Unit Options', 'amazon-auto-links' )
             . "</h3>";
-            
         echo "<p>"
-                . __( 'The unit options set here will be applied to the output of shortcodes and newly created units.', 'amazon-auto-links' )
+                . esc_html__( 'The unit options set here will be applied to the output of shortcodes and newly created units.', 'amazon-auto-links' )
             . "</p>";
-        
     }
 
 }
