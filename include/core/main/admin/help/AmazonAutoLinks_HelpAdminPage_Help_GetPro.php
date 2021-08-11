@@ -144,18 +144,15 @@ class AmazonAutoLinks_HelpAdminPage_Help_GetPro extends AmazonAutoLinks_AdminPag
         
     }
         private function ___printBuyNowButton() {
-        
             $_sURL     = 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/';
-            $_sLang    = defined( 'WPLANG' ) ? WPLANG : 'en';
             $_sMessage = __( 'Get Now!', 'amazon-auto-links' );
             ?>
             <div class="get-now-button">
-                <a target="_blank" href="<?php echo esc_url( $_sURL ); ?>?lang=<?php echo $_sLang; ?>" title="<?php echo esc_attr( $_sMessage ); ?>">
+                <a target="_blank" href="<?php echo esc_url( $_sURL ); ?>?lang=<?php echo ( defined( 'WPLANG' ) ? WPLANG : 'en' ); ?>" title="<?php echo esc_attr( $_sMessage ); ?>">
                     <img src="<?php echo esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/upgrade/buynowbutton.gif', true ) ); ?>" alt="<?php echo esc_attr( $_sMessage ); ?>" />
                 </a>
             </div>    
             <?php
-
         }
 
 }

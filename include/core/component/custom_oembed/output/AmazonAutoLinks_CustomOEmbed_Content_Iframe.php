@@ -121,6 +121,7 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      * Prints the product output.
      */
     private function ___printProductOutput() {
+
         if ( ! isset( $_GET[ 'uri' ] ) ) {  // sanitization unnecessary as just checking
             echo "<p>The URL is not passed.</p>";
             return;
@@ -142,11 +143,8 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
      * @see print_embed_scripts()
      */
     public function printEmbedScripts() {
-        $_sTypeAttribute = current_theme_supports( 'html5', 'script' )
-            ? ''
-            : ' type="text/javascript"';
         ?>
-        <script<?php echo $_sTypeAttribute; ?>>
+        <script<?php echo ( current_theme_supports( 'html5', 'script' ) ? '' : ' type="text/javascript"' ); ?>>
         <?php
             $_sComponentDirPath = AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath;
             $_sFilePath         = defined( 'WP_DEBUG' ) && WP_DEBUG
