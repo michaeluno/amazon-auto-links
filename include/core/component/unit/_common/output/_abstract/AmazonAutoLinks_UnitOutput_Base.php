@@ -309,6 +309,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aProducts         = $this->fetch( $aURLs );
         $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
+        $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
         try {
 
             $_sError = $this->_getError( $_aProducts );
@@ -321,7 +322,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
-            $_aArguments = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
             $_sContent   = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
             // [4.6.17+] Add notes
@@ -332,7 +332,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
             $_sErrorMessage  = $_oException->getMessage();
             $_iShowErrorMode = ( integer ) $this->oUnitOption->get( 'show_errors' );
-            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $this->oUnitOption->get() );
+            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $_aArguments );
             $_sContent       = $this->___getErrorOutput( $_iShowErrorMode, $_sErrorMessage );
 
             if ( ! $_bHasPreviousError && $_iUnitID ) {
