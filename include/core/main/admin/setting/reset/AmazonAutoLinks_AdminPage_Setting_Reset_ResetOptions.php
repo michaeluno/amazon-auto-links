@@ -109,15 +109,7 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
                 }
 
                 if ( $aResetComponents[ 'general' ] ) {
-
-                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
-
-                    // Last inputs
-                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ] );
-
-                    // Opt-in
-                    delete_user_meta( get_current_user_id(), 'aal_rated' );
-
+                    add_action( 'shutdown', array( $this, 'replyToDeleteOptions' ) );
                 }
 
                 // Delete the template options as well.
@@ -139,4 +131,18 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
 
             }
 
+                /**
+                 * @since 4.6.19
+                 */
+                public function replyToDeleteOptions() {
+                    // General
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
+
+                    // Last inputs
+                    delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ] );
+
+                    // Opt-in
+                    delete_user_meta( get_current_user_id(), 'aal_rated' );
+
+                }
 }

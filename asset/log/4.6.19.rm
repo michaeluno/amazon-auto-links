@@ -1,3 +1,4 @@
+- Fixed a bug that restoring default options for the general options was not properly processed, started in v4.6.17.   
 - Updated JavaScript libraries.
 - Fixed some unescaped HTML outputs.
 - Fixed raw HTTP request values, which could cause possible security issues.
