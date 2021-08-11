@@ -147,10 +147,10 @@ OUTPUT;
     /**
      * @return array
      */
-    public function replyToGetStyleCSS() {
-        $styles[] = 'display';
-        $styles[] = 'position';
-        return $styles;
+    public function replyToGetStyleCSS( $aStyles ) {
+        $aStyles[] = 'display';
+        $aStyles[] = 'position';
+        return $aStyles;
     }
 
 }
