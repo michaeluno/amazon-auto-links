@@ -149,6 +149,16 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
     }
 
     /**
+     * @remark Used as a callback such as with array_filter().
+     * @param  $mValue
+     * @return boolean
+     * @since  4.6.19
+     */
+    static public function isNotEmpty( $mValue ) {
+        return ! empty( $mValue );
+    }
+
+    /**
      * Trims each delimited element of the given string with the specified delimiter.
      *
      * ```
