@@ -403,17 +403,19 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
      * @param       array       $aAllowedAttributes         e.g. array( 'rel', 'itemtype', 'style' )
      * @since       2.0.0
      * @since       3.1.0       Added the $aAllowedAttributes parameter.
+     * @since       4.6.19      Renamed from `escapeKSESFilter()`.
      * @return      string
+     * @see         wp_kses()
      */
-    static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
+    static public function getEscapedWithKSES( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
 
         $aFormatAllowedTags = array();
         foreach( $aAllowedTags as $sTag ) {
             $aFormatAllowedTags[ $sTag ] = array();    // activate the inline style attribute.
         }
-        $aAllowedHTMLTags = AmazonAutoLinks_Utility::uniteArrays( $aFormatAllowedTags, $GLOBALS['allowedposttags'] );    // the first parameter takes over the second.
+        $aAllowedHTMLTags = AmazonAutoLinks_Utility::uniteArrays( $aFormatAllowedTags, $GLOBALS[ 'allowedposttags' ] );    // the first parameter takes over the second.
         
-        foreach ( $aDisallowedTags as $sTag ) {
+        foreach( $aDisallowedTags as $sTag ) {
             if ( isset( $aAllowedHTMLTags[ $sTag ] ) ) {
                 unset( $aAllowedHTMLTags[ $sTag ] );
             }
@@ -429,16 +431,27 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
             $aAllowedProtocols = wp_allowed_protocols();            
         }
             
-        $sString = addslashes( $sString );                    // the original function call was doing this - could be redundant but haven't fully tested it
-        $sString = stripslashes( $sString );                    // wp_filter_post_kses()
-        $sString = wp_kses_no_null( $sString );                // wp_kses()
-        $sString = wp_kses_normalize_entities( $sString );    // wp_kses()
-        $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols ); // WP changed the order of these funcs and added args to wp_kses_hook
+        $sString = addslashes( $sString );                                              // the original function call was doing this - could be redundant but haven't fully tested it
+        $sString = stripslashes( $sString );                                            // wp_filter_post_kses()
+        $sString = wp_kses_no_null( $sString );                                         // wp_kses()
+        $sString = wp_kses_normalize_entities( $sString );                              // wp_kses()
+        $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols );     // WP changed the order of these funcs and added args to wp_kses_hook
         $sString = wp_kses_split( $sString, $aAllowedHTMLTags, $aAllowedProtocols );        
-        $sString = addslashes( $sString );                // wp_filter_post_kses()
-        $sString = stripslashes( $sString );                // the original function call was doing this - could be redundant but haven't fully tested it
-        return $sString;
+        $sString = addslashes( $sString );                                              // wp_filter_post_kses()
+        return stripslashes( $sString );                                                // the original function call was doing this - could be redundant but haven't fully tested it
         
-    }        
+    }
+        /**
+         * @param string $sString
+         * @param array  $aAllowedTags
+         * @param array  $aDisallowedTags
+         * @param array  $aAllowedProtocols
+         * @param array  $aAllowedAttributes
+         * @return       string
+         * @deprecated   4.6.19 Use getEscapedWithKSES()
+         */
+        static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
+            return self::getEscapedWithKSES( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() );
+        }
 
 }

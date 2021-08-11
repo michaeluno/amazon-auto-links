@@ -95,7 +95,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                     if ( ! isset( $aInputs[ $_sLegacyKey ] ) ) {
                         continue;
                     }
-                    $aOutputFormat[ $_sLegacyKey ] = $this->escapeKSESFilter(
+                    $aOutputFormat[ $_sLegacyKey ] = $this->getEscapedWithKSES(
                         $aOutputFormat[ $_sLegacyKey ],
                         $aAllowedHTMLTags,
                         array(),
