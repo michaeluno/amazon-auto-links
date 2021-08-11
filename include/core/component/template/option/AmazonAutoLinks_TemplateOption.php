@@ -14,7 +14,7 @@
  * @since       3
  */
 class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
-  
+
     /**
      * Caches the active templates.
      * 

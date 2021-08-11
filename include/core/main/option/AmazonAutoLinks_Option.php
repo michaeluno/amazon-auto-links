@@ -849,4 +849,83 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
     }
 
+    /**
+     * @return array
+     * @since  4.6.19
+     */
+    public function getAllowedHTMLTags() {
+        static $_aCache;
+        if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }
+        $_aResult = self::uniteArrays(
+            $this->getRequiredKSESHTMLTags(),
+            $this->___getAllowedHTMLTags(),
+            $this->___getAllowedHTMLTagsLegacy(),
+            wp_kses_allowed_html( 'post' )
+        );
+        $_aCache  = $_aResult;
+        return $_aResult;
+    }
+
+        /**
+         * @return array
+         * @since  4.6.19
+         * @remark For backward compatibility for v4.6.18 or below.
+         */
+        private function ___getAllowedHTMLTagsLegacy() {
+            $_aOldAllowedHTMLTags = $this->getStringIntoArray( str_replace( PHP_EOL, ',', $this->get( 'form_options', 'allowed_html_tags' ) ), ',' );
+            return array_fill_keys( $_aOldAllowedHTMLTags, $this->getAllowedHTMLAttributesLegacy() );
+        }
+            /**
+             * @return array
+             * @since  4.6.19
+             * @remark For backward compatibility for v4.6.18 or below.
+             */
+            public function getAllowedHTMLAttributesLegacy() {
+                static $_aCache;
+                if ( isset( $_aCache ) ) {
+                    return $_aCache;
+                }
+                $_sAttributes        = str_replace( PHP_EOL, ',', $this->get( 'form_options', 'allowed_attributes' ) );
+                $_aAllowedAttributes = $this->getKSESHTMLAttributes( $_sAttributes );
+                $_aCache             = $_aAllowedAttributes;
+                return $_aAllowedAttributes;
+            }
+
+        /**
+         * @return array
+         * @since  4.6.19
+        */
+        private function ___getAllowedHTMLTags() {
+            $_aAllowedHTMLTags = array();
+            foreach( $this->getAsArray( $this->get( 'security', 'allowed_html' ) ) as $_aItem ) {
+                $_aItem       = $_aItem + array( 'tags' => '', 'attributes' => '' );
+                $_aTags       = $this->getStringIntoArray( $_aItem[ 'tags' ], ',' );
+                $_aAttributes = $this->getKSESHTMLAttributes( $_aItem[ 'attributes' ] );
+                foreach( $_aTags as $_sTag ) {
+                    $_aAllowedHTMLTags[ $_sTag ] = isset( $_aAllowedHTMLTags[ $_sTag ] )
+                        ? array_merge( $_aAllowedHTMLTags[ $_sTag ], $_aAttributes )
+                        : $_aAttributes;
+                }
+            }
+            return $_aAllowedHTMLTags;
+        }
+
+    /**
+     * @return array
+     * @since  4.6.19
+     */
+    public function getAllowedHTMLInlineStyles() {
+        static $_aCache;
+        if ( isset( $_aCache ) ) {
+            return $_aCache;
+        }
+        $_aAllowedAttributes = $this->getStringIntoArray( $this->get( 'security', 'allowed_inline_css_properties' ), ',' );
+        $_aPluginRequired    = array( 'display', 'position', 'overflow' );
+        $_aAllowedAttributes = array_unique( array_merge( $_aAllowedAttributes, $_aPluginRequired  ) );
+        $_aCache             = $_aAllowedAttributes;
+        return $_aAllowedAttributes;
+    }
+
 }

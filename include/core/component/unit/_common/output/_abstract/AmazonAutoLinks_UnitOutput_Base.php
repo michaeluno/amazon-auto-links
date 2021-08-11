@@ -389,21 +389,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @return  array   An array holding hook objects.
          */
         private function ___getHooksSetPerOutput() {
-
             add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
             return array(
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
                 new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ),  // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ),               // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ),      // 3.10.0
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
                 new AmazonAutoLinks_UnitOutput__Credit( $this ),
                 new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
                 new AmazonAutoLinks_UnitOutput__HTTPErrorChecks( $this ),
-                new AmazonAutoLinks_UnitOutput__CustomQueryArguments( $this ),  // 4.6.19
+                new AmazonAutoLinks_UnitOutput__CustomQueryArguments( $this ),              // 4.6.19
+                new AmazonAutoLinks_UnitOutput__AllowedInlineCSS( $this ),                  // 4.6.19
             );
-
         }
 
         /**
