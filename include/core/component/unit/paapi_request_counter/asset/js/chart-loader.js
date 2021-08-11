@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Chart Loader
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -17,11 +17,11 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof aalChartJSLoader ) {
-            console.log( 'Amazon Auto Links', 'Chart Loader', 'The script dat is not passed.' );
+            debugLog( 'Amazon Auto Links', 'Chart Loader', 'The script dat is not passed.' );
             return;
         }
         if ( aalChartJSLoader.debugMode ) {
-            console.log( 'Amazon Auto Links', 'Chart Loader', aalChartJSLoader );
+            debugLog( 'Amazon Auto Links', 'Chart Loader', aalChartJSLoader );
         }
 
         _oChartElement = $( '#' + aalChartJSLoader.chartID );
@@ -281,4 +281,12 @@
             }
             return sValue;
         }
+
+    function debugLog( ...args ) {
+        if ( ! parseInt( aalChartJSLoader.debugMode ) ) {
+            return;
+        }
+        console.log( 'AAL Debug (Chart Loader):', ...args );
+    }
+
 }(jQuery));
