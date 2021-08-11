@@ -102,7 +102,7 @@ class AmazonAutoLinks_SVGGenerator_Base {
      * @callback add_action embed_footer
      */
     public function replyToRenderSVGDefinition() {
-        echo $this->_getDefinition();
+        echo apply_filters( 'aal_filter_output_svg_definition', $this->_getDefinition() );
     }
 
     /**

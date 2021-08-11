@@ -25,7 +25,7 @@ class AmazonAutoLinks_Test_Event_Query_Referer {
 
         // echo '<h4>$_SERVER</h4>';
         // echo AmazonAutoLinks_Debug::getDetails( $_SERVER );
-        echo $_SERVER[ 'HTTP_REFERER' ];
+        echo esc_html( $_SERVER[ 'HTTP_REFERER' ] );
         exit();
 
     }

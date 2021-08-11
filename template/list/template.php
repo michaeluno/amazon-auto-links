@@ -40,7 +40,7 @@ $_sInlineStyle = $_sWidth . $_sHeight;
 
 ?>
     
-<div class="<?php echo esc_attr( $sClassAttributes_ProductsContainer ); ?>" style="<?php echo $_sInlineStyle; ?>">
+<div class="<?php echo esc_attr( $sClassAttributes_ProductsContainer ); ?>" style="<?php echo esc_attr( $_sInlineStyle ); ?>">
 <?php foreach( $aProducts as $_aProduct ) : ?>
     <?php $_aProduct = $_aProduct + $_aStructure_Product; ?>
     <div class="amazon-product-container">
