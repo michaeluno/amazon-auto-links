@@ -40,14 +40,14 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
             array(
                 'tab_slug'      => $this->sTabSlug,
             )
-        );           
-        new AmazonAutoLinks_AdminPage_Setting_Misc_FormOption( 
+        );
+        new AmazonAutoLinks_AdminPage_Setting_Misc_Security(
             $oAdminPage,
-            $this->sPageSlug, 
+            $this->sPageSlug,
             array(
                 'tab_slug'      => $this->sTabSlug,
             )
-        );        
+        );
         new AmazonAutoLinks_AdminPage_Setting_Misc_Debug( 
             $oAdminPage,
             $this->sPageSlug, 
@@ -55,7 +55,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc extends AmazonAutoLinks_AdminPage_T
                 'tab_slug'      => $this->sTabSlug,
             )
         );
-        
+
     }
             
     protected function _doTab( $oFactory ) {

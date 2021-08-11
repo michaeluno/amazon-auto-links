@@ -21,16 +21,14 @@ abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
      * 
      * @access      public      Let the data being modified from outside.
      */
-    public $aOptions = array(        
-    );  
+    public $aOptions = array();
     
     /**
      * Represents the options array structure and their default values.
      * 
      * @remark      Override this value in an extended class.
      */
-    public $aDefault = array(
-    );
+    public $aDefault = array();
     
     /**
      * Stores the option key for this plugin.

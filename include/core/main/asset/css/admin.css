@@ -51,6 +51,22 @@ hr {
 .optional {
 	margin-left: 1em;
 }
+.italic {
+	font-style: italic;
+}
+.inline-block {
+	display: inline-block;
+}
+.margin-left-1em {
+	margin-left: 1em;
+}
+.margin-right-1em {
+	margin-right: 1em;
+}
+.margin-bottom-dot-4em {
+	margin-bottom: 0.4em;
+}
+
 
 /* Admin Page */
 #post-body > .amazon-auto-links-content {
@@ -108,6 +124,11 @@ span.disabled {
 }
 .upgrade-notice a {
 	vertical-align: bottom;
+}
+
+/** Fix nested field repeatable buttons */
+.with-nested-fields .amazon-auto-links-repeatable-field-buttons .repeatable-field-button {
+	padding: 0.16em 0.4em 0;
 }
 
 

@@ -465,6 +465,7 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting_Misc_Capability" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Capability.php", 
     "AmazonAutoLinks_AdminPage_Setting_Misc_Debug" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php", 
     "AmazonAutoLinks_AdminPage_Setting_Misc_FormOption" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_FormOption.php", 
+    "AmazonAutoLinks_AdminPage_Setting_Misc_Security" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php", 
     "AmazonAutoLinks_AdminPage_Setting_Reset" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset.php", 
     "AmazonAutoLinks_AdminPage_Setting_Reset_Data" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_Data.php", 
     "AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php", 
