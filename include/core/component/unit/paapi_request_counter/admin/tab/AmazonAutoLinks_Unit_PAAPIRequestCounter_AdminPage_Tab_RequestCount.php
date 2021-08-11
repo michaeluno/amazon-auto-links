@@ -81,13 +81,14 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
 
             wp_enqueue_script( 'jquery', 'moment' );
             $oAdminPage->enqueueScript(
-                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/Chart.min.js',
+                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/chart.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(
                     'handle_id'     => 'chart.js',
                     'dependencies'  => array( 'jquery', 'moment' ),
                     'in_footer'     => true,
+                    'version'       => '3.5.0',
                 )
             );
             $oAdminPage->enqueueScript(
