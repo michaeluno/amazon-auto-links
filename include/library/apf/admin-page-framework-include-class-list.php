@@ -10,7 +10,6 @@ $aClassFiles = array(
     "AmazonAutoLinks_AdminPageFramework_ImportOptions"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/AdminPageFramework_ImportOptions.php", 
     "AmazonAutoLinks_AdminPageFramework_Property_admin_page"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/AdminPageFramework_Property_admin_page.php", 
     "AmazonAutoLinks_AdminPageFramework_Model_Menu__RegisterMenu"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/delegate/AdminPageFramework_Model_Menu__RegisterMenu.php", 
-    "AmazonAutoLinks_AdminPageFramework_Model__FormEmailHandler"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/delegate/AdminPageFramework_Model__FormEmailHandler.php", 
     "AmazonAutoLinks_AdminPageFramework_Model__FormRedirectHandler"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/delegate/AdminPageFramework_Model__FormRedirectHandler.php", 
     "AmazonAutoLinks_AdminPageFramework_Model__FormSubmission"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/delegate/AdminPageFramework_Model__FormSubmission.php", 
     "AmazonAutoLinks_AdminPageFramework_Model__FormSubmission__Validator"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/_model/delegate/validaor/AdminPageFramework_Model__FormSubmission__Validator.php", 

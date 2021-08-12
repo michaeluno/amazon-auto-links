@@ -117,7 +117,7 @@ if ( ! class_exists( 'AmazonAutoLinks_RevealerCustomFieldType' ) ) :
  * @since       1.0.0
  * @package     AmazonAutoLinks_AdminPageFrameworkFieldTypePack
  * @subpackage  CustomFieldType
- * @version     1.1.0
+ * @version     1.1.1
  */
 class AmazonAutoLinks_RevealerCustomFieldType extends AmazonAutoLinks_AdminPageFramework_FieldType {
         
