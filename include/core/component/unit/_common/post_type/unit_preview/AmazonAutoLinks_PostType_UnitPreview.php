@@ -133,7 +133,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
                 'labels' => array(
                     'name'                  => AmazonAutoLinks_Registry::NAME,
-                    'singular_name'         => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
+                    'singular_name'         => sprintf( __( '%1$s Unit', 'amazon-auto-links' ), AmazonAutoLinks_Registry::NAME ),
                     'menu_name'             => AmazonAutoLinks_Registry::NAME,    // this changes the root menu name so cannot simply put Manage Unit here
                     'add_new'               => __( 'Add New Unit by Category', 'amazon-auto-links' ),
                     'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),

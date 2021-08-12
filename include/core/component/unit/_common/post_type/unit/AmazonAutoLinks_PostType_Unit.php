@@ -121,7 +121,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                         AmazonAutoLinks_Registry::NAME
                     ),
                     'all_items'             => __( 'Manage Units', 'amazon-auto-links' ),    // sub menu label
-                    'singular_name'         => __( 'Amazon Auto Links Unit', 'amazon-auto-links' ),
+                    'singular_name'         => sprintf( __( '%1$s Unit', 'amazon-auto-links' ), AmazonAutoLinks_Registry::NAME ),
                     'add_new'               => __( 'Add Unit by Category', 'amazon-auto-links' ),
                     'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
                     'edit'                  => __( 'Edit', 'amazon-auto-links' ),

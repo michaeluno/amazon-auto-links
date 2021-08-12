@@ -66,7 +66,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
                 'Error' =>
                     array(
                         'Message' => __( 'No products found.', 'amazon-auto-links' ),
-                        'Code'    => 'Amazon Auto Links'
+                        'Code'    => AmazonAutoLinks_Registry::NAME,
                     ),
             );
         }
