@@ -170,6 +170,9 @@ Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure
 = Is the China locales supported? =
 For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support it.
 
+= Is this plugin Amazon Auto Links? =
+Yes, that's a former name of this plugin and it is now Auto Amazon Links.
+
 == Other Notes ==
 
 = Shortcode and Function Parameters =
@@ -343,7 +346,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed raw HTTP request values, which could cause possible security issues.
 
 = 4.6.18 - 08/11/2021 =
-- Renamed the plugin to `Auto Amazon Links`.
+- Changed the plugin to `Auto Amazon Links`.
 - Tweaked the UI of the `Get New` screen of the `Templates` page.
 - Fixed unnecessary browser console log items.
 - Fixed raw HTTP request values, which could cause possible security issues.
