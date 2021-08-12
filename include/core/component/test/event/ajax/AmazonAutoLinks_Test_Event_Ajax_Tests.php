@@ -469,6 +469,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 'actionHookSuffix' => $this->_sActionHookSuffix,
                 'nonce'            => wp_create_nonce( $this->_sNonceKey ),
                 'spinnerURL'       => admin_url( 'images/loading.gif' ),
+                'pluginName'       => AmazonAutoLinks_Registry::NAME,
                 // no labels set as tests are only available when the site debug mode is on.
                 // Also text regarding tests such as error messages should not be translated.
             );

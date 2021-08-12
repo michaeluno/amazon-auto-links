@@ -76,7 +76,7 @@ class AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog extends AmazonAutoLinks_A
                     'dependencies'  => array( 'jquery', 'jquery-ui-accordion', 'aalUtility' ),
                     'translation'   => array(
                         'debugMode' => $oAdminPage->oUtil->isDebugMode(),
-                        'pluginName' => AmazonAutoLinks_Registry::NAME . ' ' . AmazonAutoLinks_Registry::VERSION,
+                        'pluginName' => AmazonAutoLinks_Registry::NAME,
                         'labels'     => array(
                             'copied' => __( 'Copied the log to the clipboard.' ),
                             'not_copied' => __( 'Failed to copied the log to the clipboard.' ),

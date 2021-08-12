@@ -37,7 +37,7 @@ class AmazonAutoLinks_AdminPage_Template_GetNew extends AmazonAutoLinks_AdminPag
                         'actionHookSuffix' => 'aal_action_get_new_templates',
                         'nonce'            => wp_create_nonce( 'aal_action_get_new_templates' ),
                         'spinnerURL'       => admin_url( 'images/loading.gif' ),
-                        'pluginName'       => AmazonAutoLinks_Registry::NAME . ' ' . AmazonAutoLinks_Registry::VERSION,
+                        'pluginName'       => AmazonAutoLinks_Registry::NAME,
                         'debugMode'        => $_oOption->isDebug() || $this->isDebugMode(),
                         'labels'           => array(
                             'error' => __( 'Something went wrong.', 'amazon-auto-links' ),
