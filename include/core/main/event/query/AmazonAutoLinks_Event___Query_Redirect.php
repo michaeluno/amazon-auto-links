@@ -23,7 +23,7 @@ class AmazonAutoLinks_Event___Query_Redirect {
      */
     public function __construct( $sQueryKey ) {
 
-        $_aGet = AmazonAutoLinks_PluginUtility::getArrayMappedRecursive( 'sanitize_text_field', $_GET );    // sanitization done
+        $_aGet = AmazonAutoLinks_Utility::getHTTPQueryGET();
 
         if ( 'feed' === $_aGet[ $sQueryKey ] ) {
             return;

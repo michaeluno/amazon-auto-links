@@ -51,19 +51,15 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog extends Am
     public function replyToFilterExportData() {
 
         $_sOptionKey  = AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ];
-        $_sLocale     = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_locale' ), 'US' );
-        $_sLocale     = sanitize_text_field( $_sLocale );
-        $_sExportType = $this->getElement( $_POST, array( $_sOptionKey, '_porting', '_export_type' ) );
-        $_sExportType = sanitize_text_field( $_sExportType );
+        $_sLocale     = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_locale' ), 'US' ) );
+        $_sExportType = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_porting', '_export_type' ) ) );
         if ( 'all' === $_sExportType ) {
             return $this->___getCountLogAsCSVArray( 0, PHP_INT_MAX, $_sLocale );
         }
 
-        $_sStartDate  = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'from' ) );
-        $_sStartDate  = sanitize_text_field( $_sStartDate );
+        $_sStartDate  = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'from' ) ) );
         $_sStartDate  = str_replace( '/', '-', $_sStartDate ) . ' 00:00';
-        $_sEndDate    = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'to' ) );
-        $_sEndDate    = sanitize_text_field( $_sEndDate );
+        $_sEndDate    = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'to' ) ) );
         $_sEndDate    = str_replace( '/', '-', $_sEndDate ) . ' 00:00';
         $_iStartTime  = strtotime( $_sStartDate ) - $this->getGMTOffset();
         $_iEndTime    = strtotime( $_sEndDate ) - $this->getGMTOffset();
@@ -78,20 +74,16 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_ExportLog extends Am
     public function replyToGetExportFileName() {
 
         $_sOptionKey  = AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ];
-        $_sLocale     = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_locale' ), 'US' );
-        $_sLocale     = sanitize_text_field( $_sLocale );
-        $_sExportType = $this->getElement( $_POST, array( $_sOptionKey, '_porting', '_export_type' ) );
-        $_sExportType = sanitize_text_field( $_sExportType );
+        $_sLocale     = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_locale' ), 'US' ) );
+        $_sExportType = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_porting', '_export_type' ) ) );
 
         if ( 'all' === $_sExportType ) {
             $_sToday = date( 'Ymd', time() + $this->getGMTOffset() );
             return "PAAPIRequestCounts_{$_sLocale}-All-{$_sToday}.csv";
         }
-        $_sEndDate   = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'to' ) );
-        $_sEndDate   = sanitize_text_field( $_sEndDate );
+        $_sEndDate   = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'to' ) ) );
         $_sEndDate   = str_replace( '/', '', $_sEndDate );
-        $_sStartDate = $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'from' ) );
-        $_sStartDate = sanitize_text_field( $_sStartDate );
+        $_sStartDate = sanitize_text_field( $this->getElement( $_POST, array( $_sOptionKey, '_graph', '_date_range', 'from' ) ) );
         $_sStartDate = str_replace( '/', '', $_sStartDate );
         return "PAAPIRequestCounts_{$_sLocale}-{$_sStartDate}-{$_sEndDate}.csv";
 

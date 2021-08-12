@@ -41,7 +41,7 @@ abstract class AmazonAutoLinks_FormFields_SearchUnit_Base extends AmazonAutoLink
         }
 
         // If the current page is the unit creation admin page, retrieve the value from the transient
-        $_sTransientID = sanitize_text_field( $this->getElement( $_GET, 'transient_id' ) ); // sanitization done
+        $_sTransientID = $this->getHTTPQueryGET( 'transient_id', '' );
         if ( $_sTransientID ) {
             $_aInputs = get_transient( $_sTransientID );
             $_sLocale = $this->getElement( $_aInputs, 'country' );

@@ -42,7 +42,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
      */
     protected function _doTab( $oAdminPage ) {
 
-        $_sProductID    = isset( $_GET[ 'product_id' ] ) ? sanitize_text_field( $_GET[ 'product_id' ] ) : '';   // sanitization done
+        $_sProductID    = $this->getHTTPQueryGET( 'product_id', '' );
         $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_aProducts     = $_sProductID ? $_oTable->getRowsByProductID( array( $_sProductID ) ) : array();
         $_aProduct      = reset( $_aProducts );

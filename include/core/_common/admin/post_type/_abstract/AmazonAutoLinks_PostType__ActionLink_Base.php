@@ -141,8 +141,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
         if ( ! $this->___shouldDoAction() ) {
             return;
         }
-        $_sNonce = $this->getElement( $_GET, 'nonce' ); // sanitization unnecessary
-        if ( ! wp_verify_nonce( $_sNonce, $this->_sNonceKey ) ) {
+        if ( ! wp_verify_nonce( $this->getElement( $_GET, 'nonce' ), $this->_sNonceKey ) ) {    // sanitization unnecessary
             new AmazonAutoLinks_AdminPageFramework_AdminNotice(
                 __( 'The action could not be processed.', 'amazon-auto-links' ),
                 array(
@@ -162,7 +161,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
          */
         private function ___shouldDoAction() {
 
-            $_aGET = $_GET; // sanitization unnecessary as just checking
+            $_aGET = $_GET; // sanitization unnecessary as just checking values. It's better not sanitized to let it fail checks when modified unexpectedly
 
             // If a WordPress action is performed, do nothing.
             if ( isset( $_aGET[ 'action' ] ) ) {
