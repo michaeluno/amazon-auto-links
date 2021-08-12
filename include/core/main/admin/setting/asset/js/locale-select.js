@@ -81,7 +81,7 @@
 
     function _canLoad() {
         if ( 'undefined' === typeof aalLocaleSelect ) {
-            console.log( 'Amazon Auto Links:', 'the locale selection script is not loaded.' );
+            console.log( 'The locale selection script is not loaded.' );
             return false;
         }
         return true;

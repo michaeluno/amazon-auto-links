@@ -74,8 +74,9 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit extends Amazo
             array(
                 'handle_id'   => 'aalSubmit',
                 'translation' => array(
-                    'debugMode' => $this->oUtil->isDebugMode(),
-                    'label'     => array(
+                    'pluginName' => AmazonAutoLinks_Registry::NAME,
+                    'debugMode'  => $this->oUtil->isDebugMode(),
+                    'label'      => array(
                         'please_confirm' => __( 'Please check the check box to reset the default settings.', 'amazon-auto-links' ),
                     ),
                 ),

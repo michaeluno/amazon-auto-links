@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name PA-API check
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
@@ -156,7 +156,7 @@
 
     function _canLoad() {
         if ( 'undefined' === typeof aalPAAPICheck ) {
-            console.log( 'Amazon Auto Links:', 'the PA-API check script is not loaded.' );
+            console.log( 'the PA-API check script is not loaded.' );
             return false;
         }
         return true;

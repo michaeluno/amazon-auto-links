@@ -6,14 +6,14 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Manage Units
- * @version 1.1.0
+ * @version 1.1.1
  */
 (function($){
 
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof aalManageUnits ) {
-            console.log( 'Amazon Auto Links', 'Translation items are not loaded.' );
+            console.log( 'Translation items are not loaded.' );
             return;
         }
 

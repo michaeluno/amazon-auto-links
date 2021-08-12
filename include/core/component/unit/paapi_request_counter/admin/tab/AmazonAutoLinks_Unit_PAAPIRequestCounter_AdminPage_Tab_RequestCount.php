@@ -113,6 +113,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                     'handle_id'     => 'aalChartJSLoader',
                     'dependencies'  => array( 'jquery', 'moment', 'chart.js', 'aalUtility' ),
                     'translation'   => array(
+                        'pluginName' => AmazonAutoLinks_Registry::NAME,
                         'debugMode' => $oAdminPage->oUtil->isDebugMode(),
                         'ajaxURL'   => admin_url( 'admin-ajax.php' ),
                         'actionHookSuffix'  => 'aal_action_ajax_paapi_request_count_locale_change',

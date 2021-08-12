@@ -1,6 +1,6 @@
 /**
  * @name Now-Retrieving Updater
- * @version 1.0.3
+ * @version 1.0.4
  */
 (function($){
 
@@ -10,7 +10,7 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof( aalNowRetrieving ) ) {
-            console.log( 'Amazon Auto Links', 'Now-Retrieving Updater', 'Failed to load.' );
+            console.log( 'Now-Retrieving Updater: Failed to load.' );
             return;
         }
         processNowRetrieving( this );
