@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.19
+Stable tag:         4.6.20
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -331,7 +331,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.6.20 =
+= 4.6.20 - 08/12/2021 =
 - Fixed raw HTTP request values, which could cause possible security issues.
 - Fixed a bug that selected locale in the `Associates` screen was not reflected, started in v4.6.18.
 
