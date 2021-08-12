@@ -31,17 +31,20 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      * @remark Used to sanitize HTTP request values which can contain arrays.
      * @param  callable $cCallback
      * @param  array    $aInput
+     * @param  array    $aArguments
      * @return array
      * @since  4.6.18
+     * @deprecated 4.6.20
+     * @todo remove this as defined in the framework.
      */
-    static public function getArrayMappedRecursive( $cCallback, $aInput ) {
+    static public function getArrayMappedRecursive( $cCallback, $aInput, array $aArguments=array() ) {
         $_aOutput = array();
         foreach( $aInput as $_isKey => $_vValue ) {
             if ( is_array( $_vValue ) ) {
                 $_aOutput[ $_isKey ] = self::getArrayMappedRecursive( $cCallback, $_vValue );
                 continue;
             }
-            $_aOutput[ $_isKey ] = call_user_func_array( $cCallback, array( $_vValue ) );
+            $_aOutput[ $_isKey ] = call_user_func_array( $cCallback, array_merge( array( $_vValue ), $aArguments ) );
         }
         return $_aOutput;
     }

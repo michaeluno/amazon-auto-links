@@ -22,6 +22,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
      * @param  array|string $asKeys Dimensional keys for the value to retrieve. If empty, the entire array will be returned.
      * @return string|array
      * @since  4.6.18
+     * @deprecated 4.6.20   Remove this as the framework has implemented this.
      */
     static public function getHTTPQueryGET( $asKeys=array(), $mDefault=null ) {
         static $_aCache;
