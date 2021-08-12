@@ -67,7 +67,7 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                 'selectors'         => $this->___getLocaleSelectors( $_aLocaleSlugs ),
                 'description'       => __( 'The country of the marketplace.', 'amazon-auto-links' )
                     . ' ' . __( 'This selected locale serves as the main locale.', 'amazon-auto-links' ),
-                'value'             => sanitize_text_field( $this->getElement( $_GET, array( 'locale' ) ) ),    // sanitization done
+                'value'             => $this->getHTTPQueryGET( 'locale', null ),    // sanitization done
             )
         );
         foreach( $this->___getLocaleFieldSets( $_aLocaleSlugs ) as $_aFieldset ) {
