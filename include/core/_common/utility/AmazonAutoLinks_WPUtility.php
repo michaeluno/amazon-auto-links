@@ -18,35 +18,6 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
-     * Returns sanitized values of GET HTTP queries.
-     * @param  array|string $asKeys Dimensional keys for the value to retrieve. If empty, the entire array will be returned.
-     * @return string|array
-     * @since  4.6.18
-     * @deprecated 4.6.20   Remove this as the framework has implemented this.
-     */
-    static public function getHTTPQueryGET( $asKeys=array(), $mDefault=null ) {
-        static $_aCache;
-        $_aCache = isset( $_aCache )
-            ? $_aCache
-            : self::getArrayMappedRecursive( 'sanitize_text_field', $_GET );    // sanitization done
-        if ( empty( $asKeys ) ) {
-            return $_aCache;
-        }
-        return self::getElement( $_aCache, $asKeys, $mDefault );
-    }
-
-    /**
-     * Retrieves an array element as string and sanitizes it.
-     * @return string
-     * @since  4.6.18
-     * @deprecated 4.6.18   Unused
-     */
-    // static public function getElementAsTextField( $aSubject, $aisKey, $sDefault='' ) {
-    //     $_sFieldValue = ( string ) self::getElement( $aSubject, $aisKey, $sDefault );
-    //     return sanitize_text_field( $_sFieldValue );
-    // }
-
-    /**
      * @return boolean
      * @since  4.6.8
      */
