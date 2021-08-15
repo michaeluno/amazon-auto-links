@@ -37,10 +37,7 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
             sprintf(
                 '<b>' . AmazonAutoLinks_Registry::NAME . '</b>: '
                     . __( 'Update the plugin database table by clicking <a href="%1$s">here</a>.', 'amazon-auto-links' ),
-                add_query_arg(
-                    $_GET + array( 'aal_action' => 'db_update',  ),
-                    self::getPageNow()
-                )
+                esc_url( add_query_arg( $_GET + array( 'aal_action' => 'db_update',  ), self::getPageNow() ) )  // sanitization done with esc_url()
             ),
             array( 'class' => 'notice-info aal_db_update' )
         );

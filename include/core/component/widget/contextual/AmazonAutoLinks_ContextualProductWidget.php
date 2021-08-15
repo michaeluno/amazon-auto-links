@@ -33,6 +33,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         $this->setArguments( 
             array(
                 'description'   =>  __( 'Displays Amazon product links contextually related to the current page contents.', 'amazon-auto-links' ),
+                'classname'     => 'widget-aal-contextual amazon-auto-links-widget admin_page_framework_widget',
             ) 
         );
         

@@ -26,7 +26,7 @@ class AmazonAutoLinks_FormFields_Unit_WizardSubmit extends AmazonAutoLinks_FormF
                 'value'             => $GLOBALS[ 'aal_transient_id' ],
 
                 // Set a custom name attribute without any dimensional key.
-                // The form will check $_REQUEST[ 'transient_id' ] to repopulate form data from the transient.
+                // The form will check REQUEST[ 'transient_id' ] to repopulate form data from the transient.
                 'attributes'        => array(
                     'name'  => 'transient_id',
                 ),

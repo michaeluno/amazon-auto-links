@@ -42,10 +42,10 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
             echo "<div class='go-back'>"
                     . "<span class='dashicons dashicons-arrow-left-alt small-icon'></span>"
                     . "<a href='{$_sURLProxyTab}'>"
-                        . __( 'Go Back', 'amazon-auto-links' )
+                        . esc_html__( 'Go Back', 'amazon-auto-links' )
                     . "</a>"
                 . "</div>";
-            echo "<h3>" . __( 'Create Your Own Web Page Dumper', 'amazon-auto-links' ) . "</h3>";
+            echo "<h3>" . esc_html__( 'Create Your Own Web Page Dumper', 'amazon-auto-links' ) . "</h3>";
 
             $_sURLImageCreateNewApp   = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/create-new-app.png' ) );
             $_sURLImageOpenApp        = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/open-app.png' ) );

@@ -25,10 +25,20 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
     protected $_sNonceKey = 'aal_nonce_ajax_aal_web_page_dumper_test_availability';
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'url' => $this->getURLSanitized( $this->getElement( $aPost, array( 'url' ) ) ),
+        );
+    }
+
+    /**
      * @return string|boolean
      * @throws Exception        Throws a string value of an error message.
+     * @param  array $aPost     Contains the sanitized `url` element.
      */
     protected function _getResponse( array $aPost ) {
 

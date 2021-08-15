@@ -46,7 +46,7 @@ class AmazonAutoLinks_Unit_Utility_category extends AmazonAutoLinks_Unit_Utility
         return add_query_arg(
             array(
                 'href' => $_oEncrypt->encode( $sURL ),
-            ) + $aQueries + $_GET
+            ) + $aQueries + self::getHTTPQueryGET()
             , admin_url( $GLOBALS[ 'pagenow' ] )
         );
     }

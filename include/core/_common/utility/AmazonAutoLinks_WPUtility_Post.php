@@ -63,18 +63,18 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     static public function getCurrentPostID() {
 
         // When editing a post, usually this is available.
-        if ( isset( $_GET[ 'post' ] ) ) {
-            return $_GET[ 'post' ];
+        if ( isset( $_GET[ 'post' ] ) ) {           // sanitization unnecessary as just checking
+            return absint( $_GET[ 'post' ] );       // sanitization done
         }
     
         // It is set when the user send the form in post.php.
-        if ( isset( $_POST[ 'post_ID' ] ) ) {
-            return $_POST[ 'post_ID' ];
+        if ( isset( $_POST[ 'post_ID' ] ) ) {       // sanitization unnecessary as just checking
+            return absint( $_POST[ 'post_ID' ] );   // sanitization done
         }
         
         // This also shoudl be available.
         if ( isset( $GLOBALS[ 'post' ], $GLOBALS[ 'post' ]->ID ) ) {
-            return $GLOBALS[ 'post' ]->ID;
+            return absint( $GLOBALS[ 'post' ]->ID );
         }
         
         return 0;

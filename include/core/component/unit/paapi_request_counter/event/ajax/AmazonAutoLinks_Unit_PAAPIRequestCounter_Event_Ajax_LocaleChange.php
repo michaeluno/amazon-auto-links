@@ -30,10 +30,23 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Ajax_LocaleChange extends A
     }
 
     /**
-     * @param  array $aPost
+     * @param  array $aPost Passed POST data.
      * @return array
-     * @throws Exception        Throws a string value of an error message.
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'locale'    => sanitize_text_field( $this->getElement( $aPost, array( 'locale' ), 'US' ) ),
+            'startTime' => sanitize_text_field( $this->getElement( $aPost, array( 'startTime' ) ) ),
+            'endTime'   => sanitize_text_field( $this->getElement( $aPost, array( 'endTime' ) ) ),
+        );
+    }
+
+    /**
+     * @return array
+     * @throws Exception Throws a string value of an error message.
      * @since  4.4.0
+     * @param  array     $aPost Sanitized POST data. Includes the `locale`, `startTime`, and `endTime` elements.
      */
     protected function _getResponse( array $aPost ) {
 
@@ -74,4 +87,5 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Ajax_LocaleChange extends A
                 : strtotime( str_replace( '/', '-', $isDate ) . ' 23:59' );
             return $_iDateTimeStamp + $this->getGMTOffset();
         }
+
 }

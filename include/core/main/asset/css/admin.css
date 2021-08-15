@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.1.0
+	@version 1.2.1
  */
 /* General */
 .width-full,
@@ -23,6 +23,50 @@
 {
 	width: 76%;
 }
+
+.top-right {
+	margin: 0;
+	padding: 0;
+	max-height: 60px;
+	float: right;
+	display: inline-block;
+}
+
+hr {
+	margin-top: 20px;
+	border: 0;
+	height: 1px;
+	background: #DDD;
+	width: 96%;
+}
+
+.right-submit-button {
+    margin-right: 2em;
+    float: right;
+}
+.right-button {
+	margin-top: 8px;
+	float: right;
+}
+.optional {
+	margin-left: 1em;
+}
+.italic {
+	font-style: italic;
+}
+.inline-block {
+	display: inline-block;
+}
+.margin-left-1em {
+	margin-left: 1em;
+}
+.margin-right-1em {
+	margin-right: 1em;
+}
+.margin-bottom-dot-4em {
+	margin-bottom: 0.4em;
+}
+
 
 /* Admin Page */
 #post-body > .amazon-auto-links-content {
@@ -55,55 +99,18 @@
 	font-style: italic;
 }
 
-
 .amazon-auto-links-fields.repeatable .amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container {
 	width: auto;
 }
 
-
-/* Debug output */
-.debug {
-	max-width: 100%;
-}
-.debug-output {
-	box-sizing: border-box;
-}
-pre.dump-array {
-	box-sizing: border-box;
-	margin: 0;
-    width: inherit;
-}
-
-
-.right-submit-button {
-    margin-right: 2em;
-    float: right;
-}
-.right-button {
-	margin-top: 8px;
-	float: right;
-}
-.optional {
-	margin-left: 1em;
-}
-
+/* Form Elements */
 .wrap div.settings-error.error,
 .wrap div.error{
 	margin-top: 36px;
 }
-.top-right { 
-	margin: 0; 
-	padding: 0; 
-	max-height: 60px; 
-	float: right;
-	display: inline-block;
-}
-
-.upgrade-to-pro {
-	
-}
-.description.upgrade-notice {
-	margin-left: 1em;
+input.read-only,
+textarea.read-only {
+	background-color: #F6F6F6;
 }
 
 span.disabled { 
@@ -118,18 +125,20 @@ span.disabled {
 .upgrade-notice a {
 	vertical-align: bottom;
 }
-hr {
-	margin-top: 20px;
-	border: 0;
-	height: 1px;
-	background: #DDD;
-	width: 96%;
-}
-input.read-only, 
-textarea.read-only {
-	background-color: #F6F6F6;
-}	
 
+/** Fix nested field repeatable buttons */
+.with-nested-fields .amazon-auto-links-repeatable-field-buttons .repeatable-field-button {
+	padding: 0.16em 0.4em 0;
+}
+
+
+/* For Pro */
+.upgrade-to-pro {
+
+}
+.description.upgrade-notice {
+	margin-left: 1em;
+}
 .get-now {
 	margin-bottom: 10px;
 }
@@ -203,4 +212,77 @@ span.warning {
 .aal-thanks-for-rating {
 	margin-right: 0.2em;
 	font-style: italic;
+}
+
+/* Debug output */
+.debug {
+	max-width: 100%;
+}
+.debug-output {
+	box-sizing: border-box;
+}
+pre.dump-array {
+	box-sizing: border-box;
+	margin: 0;
+    width: inherit;
+}
+
+/* Accordion (Collapsible) */
+.aal-accordion, .aal-accordion * {
+	box-sizing: border-box;
+}
+.aal-accordion > * {
+	margin: 1em 1.6em 1em 0.4em;
+}
+.aal-accordion > h1,
+.aal-accordion > h2,
+.aal-accordion > h3,
+.aal-accordion > h4,
+.aal-accordion > h5,
+.aal-accordion > h6
+{
+	margin-bottom: 0;
+	border: 1px solid #c3c4c7;
+	font-size: 13px;
+	background-color: #fff;
+	padding: 1em 1em 1em 0.8em;
+	position: relative;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.aal-accordion > h1 .dashicons,
+.aal-accordion > h2 .dashicons,
+.aal-accordion > h3 .dashicons,
+.aal-accordion > h4 .dashicons,
+.aal-accordion > h5 .dashicons,
+.aal-accordion > h6 .dashicons
+{
+    margin-right: 0.6em;
+    margin-left: 0.2em;
+}
+.aal-accordion .ui-accordion-header-collapsed .dashicons-arrow-up:before {
+    content: "\f140";
+}
+.aal-accordion .ui-accordion-content {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	margin-top: 0;
+	padding-top: 1px; /* without this somehow empty space appears just below the accordion title affected by pre.dump padding-top */
+}
+
+/* Override the tooltip arrow color*/
+.aal-pointer .wp-pointer-arrow, .wp-pointer-undefined .wp-pointer-arrow {
+    border-bottom-color: #c3c4c7;
+}
+.aal-pointer .wp-pointer-arrow-inner, .wp-pointer-undefined .wp-pointer-arrow-inner {
+    border-bottom-color: #FFF;
+}
+
+/* Announcements */
+.announcement-item {
+	margin-bottom: 1em;
+}
+.announcements h4 {
+	margin: 0.8em 0;
 }

@@ -79,7 +79,8 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
             if ( ! $this->_bGuest && ! get_current_user_id() ) {
                 throw new Exception( __( 'Could not get a user ID.', 'amazon-auto-links' ) );
             }
-            $_asMessage = $this->_getResponse( $_POST );
+
+            $_asMessage = $this->_getResponse( $this->_getPostSanitized( $_POST ) );
 
         } catch ( Exception $_oException ) {
 
@@ -100,9 +101,18 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
     }
 
     /**
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return $this->getArrayMappedRecursive( 'sanitize_text_field', $aPost );
+    }
+
+    /**
      * Override this method to return a response.
-     * @param  array $aPost The $_POST array.
      * @return array|string
+     * @param  array $aPost     Sanitized POST data.
      */
     protected function _getResponse( array $aPost ) {
         return array();

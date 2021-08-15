@@ -54,7 +54,7 @@ class AmazonAutoLinks_PostType_AutoInsert_Column extends AmazonAutoLinks_AdminPa
             'cb'                => '<input type="checkbox" />',    // Checkbox for bulk actions. 
             'auto_inserts'      => __( 'Auto-insert Definitions', 'amazon-auto-links' ),
             'status'            => __( 'Status', 'amazon-auto-links' ),
-            'area'              => __( 'Areas', 'amazon-auto-links' ),  // Post title. Includes "edit", "quick edit", "trash" and "view" links. If $mode (set from $_REQUEST['mode']) is 'excerpt', a post excerpt is included between the title and links.
+            'area'              => __( 'Areas', 'amazon-auto-links' ),  // Post title. Includes "edit", "quick edit", "trash" and "view" links. If $mode (set from REQUEST['mode']) is 'excerpt', a post excerpt is included between the title and links.
         );        
         
     }

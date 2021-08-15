@@ -33,7 +33,9 @@ return array(
     "Test_AmazonAutoLinks_Registry" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/Test_AmazonAutoLinks_Registry.php", 
     "Test_AmazonAutoLinks_Button_Event_Filter_Output" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/button/event/filter/Test_AmazonAutoLinks_Button_Event_Filter_Output.php", 
     "Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/database_updater/event/action/Test_AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140.php", 
+    "Test_AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/admin/setting/event/ajax/Test_AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/event/action/Test_AmazonAutoLinks_Event___Action_HTTPCacheRenewal.php", 
+    "Test_AmazonAutoLinks_Option" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/main/option/Test_AmazonAutoLinks_Option.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview.php", 
     "Test_AmazonAutoLinks_Event___Action_HTTPRequestRating" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/event/wpcron/Test_AmazonAutoLinks_Event___Action_HTTPRequestRating.php", 
     "Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/unit/paapi_request_counter/common/utility/Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_Utility.php", 
@@ -75,5 +77,6 @@ return array(
     "AmazonAutoLinks_UnitTest_WordPress_Functions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Functions.php", 
     "AmazonAutoLinks_UnitTest_WordPress_Options" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/AmazonAutoLinks_UnitTest_WordPress_Options.php", 
     "AmazonAutoLinks_UnitTest_WordPress_add_action" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/add_action/AmazonAutoLinks_UnitTest_WordPress_add_action.php", 
+    "AmazonAutoLinks_UnitTest_WordPress_KSESFunctions" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/kses/AmazonAutoLinks_UnitTest_WordPress_KSESFunctions.php", 
     "Test_wp_remote_head" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/wordpress/wp_remote_request/Test_wp_remote_head.php", 
 );

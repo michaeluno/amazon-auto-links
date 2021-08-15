@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Locale Select
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -31,7 +31,6 @@
                 async: true,
                 cache: true,
                 url: aalLocaleSelect.ajaxURL,
-                // Data set to $_POST and $_REQUEST
                 data: {
                     action: aalLocaleSelect.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalLocaleSelect.nonce,   // the nonce value set in template.php
@@ -74,7 +73,7 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalLocaleSelect.debugMode ) {
+        if ( ! parseInt( aalLocaleSelect.debugMode ) ) {
             return;
         }
         console.log( aalLocaleSelect.pluginName, aalLocaleSelect.scriptName, ...args );
@@ -82,7 +81,7 @@
 
     function _canLoad() {
         if ( 'undefined' === typeof aalLocaleSelect ) {
-            console.log( 'Amazon Auto Links:', 'the locale selection script is not loaded.' );
+            console.log( 'The locale selection script is not loaded.' );
             return false;
         }
         return true;

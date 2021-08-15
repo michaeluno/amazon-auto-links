@@ -40,7 +40,7 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_RenewCache extends AmazonAutoLin
                 'post'          => $oPost->ID,
                 'nonce'         => $this->_sCustomNonce,
             )
-            // admin_url( $this->_oFactory->oProp->sPageNow )   // [4.6.10] omit the base URL so that the current URL will be applied including the paged $_GET parameter
+            // admin_url( $this->_oFactory->oProp->sPageNow )   // [4.6.10] omit the base URL so that the current URL will be applied including the paged GET parameter
         );
         $_sLabel = $this->_getActionLabel();
         return "<a href='" . esc_url( $_sURL ) . "' title='" . esc_attr( $_sLabel ) . "'>"

@@ -25,10 +25,23 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
     protected $_sNonceKey = 'aalNonceCategorySelection';
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'postID'        => absint( self::sanitizeFileName( $this->getElement( $aPost, array( 'postID' ) ) ) ),
+            'transientID'   => sanitize_text_field( $this->getElement( $aPost, array( 'transientID' ), '' ) ),
+            'selected_url'  => $this->getURLSanitized( $this->getElement( $aPost, array( 'selected_url' ), '' ) ),
+            'reload'        => ( boolean ) $this->getElement( $aPost, array( 'reload' ) ),
+        );
+    }
+
+    /**
      * @return array
      * @throws Exception        Throws a string value of an error message.
+     * @param  array     $aPost Sanitized POST data containing `postID`, `transienttID`, `selected_url`, and `reload`.
      */
     protected function _getResponse( array $aPost ) {
 
@@ -59,7 +72,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
                 ),
             )
         );
-        // be careful that the $_POST values are passed as a string due to the JavaScript Ajax data handling
+        // be careful that the POST values are passed as a string due to the JavaScript Ajax data handling
         // @see https://stackoverflow.com/questions/7408976/bool-parameter-from-jquery-ajax-received-as-literal-string-false-true-in-php
         if ( ( boolean ) $this->getElement( $aPost, array( 'reload' ) ) ) {
             // Case: the user first got a captcha error and enabled the proxy option then clicked the Reload button.
@@ -108,8 +121,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
     }
 
         /**
-         * @param array $aPost
-         *
+         * @param  array $aPost
          * @return array
          */
         protected function _getUnitOptions( array $aPost ) {

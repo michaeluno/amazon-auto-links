@@ -21,10 +21,11 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
      */
     public function __construct() {
 
-        if ( ! isset( $_GET[ 'oembed' ], $_GET[ 'endpoint' ] ) ) {
+        $_aGET = $_GET; // sanitization unnecessary
+        if ( ! isset( $_aGET[ 'oembed' ], $_aGET[ 'endpoint' ] ) ) {
             return;
         }
-        if ( $_GET[ 'oembed' ] !== 'amazon-auto-links' ) {
+        if ( $_aGET[ 'oembed' ] !== 'amazon-auto-links' ) {
             return;
         }
 
@@ -33,7 +34,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
     }
 
     /**
-     * $_GET contains the following keys:
+     * GET contains the following keys:
      * ```
      *   [maxwidth] => (string) e.g. 600
      *   [maxheight] => (string) e.g. 960
@@ -51,8 +52,8 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
         $_sIFrameURL        = add_query_arg(
             array(
                 'embed'  => 'amazon-auto-links',    // usually the value is 1 for normal oEmbed posts but here we use a custom value to differentiate the request to process own custom outputs
-                // 'url'    => urlencode( $_GET[ 'url' ] ), // the key is reserved by the core for oEmbed discovery routine and when used, it causes recursive requests.
-                'uri'    => urlencode( $_GET[ 'url' ] ),
+                // 'url' => ... the key is reserved by the core for oEmbed discovery routine and when used, it causes recursive requests.
+                'uri'    => urlencode( AmazonAutoLinks_PluginUtility::getURLSanitized( $_GET[ 'url' ] ) ),  // sanitization done
             ),
             $_sProviderEndpoint . "#secret={$_sNonce}" // referred by wp-embed.js and wp-embed-template-lite.js
         );
@@ -82,7 +83,7 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
             'html'          => $_sIFrame,
         );
 
-        if ( 'xml' === $_GET[ 'format' ] ) {
+        if ( 'xml' === $_GET[ 'format' ] ) {    // sanitization unnecessary as just checking
             if ( ! headers_sent() ) {
                 header( 'Content-Type', 'text/xml; charset=' . get_option( 'blog_charset' ) );
             }

@@ -1,6 +1,6 @@
 /**
  * @name Geo-resolver
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -275,7 +275,7 @@
     }
 
     function debugLog( ...args ) {
-        if ( ! aalGeoResolver.debugMode ) {
+        if ( ! parseInt( aalGeoResolver.debugMode ) ) {
             return;
         }
         console.log( 'AAL Debug(Geotargeting):', ...args );

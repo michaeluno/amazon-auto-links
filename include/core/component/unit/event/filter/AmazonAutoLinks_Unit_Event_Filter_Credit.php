@@ -11,9 +11,10 @@
 /**
  * Provides methods to generate credit links.
  * 
- * @since       3.2.3
+ * @since   3.2.3
+ * @since   4.6.19 Renamed from ``. 
  */
-class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Sets up hooks.
@@ -60,61 +61,51 @@ class AmazonAutoLinks_Credit extends AmazonAutoLinks_PluginUtility {
     /**
      * @return      string
      */
-    public function replyToGetCreditLink_0( $sCredit, $oOption ) {            
-                            
-        $_sVendorURL = $this->_getVendorURL( $oOption );
+    public function replyToGetCreditLink_0( $sCredit, $oOption ) {
+        $_sVendorURL = $this->___getVendorURL( $oOption );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width: 100%;'>"
-                . "<span style='margin: 1em 0.4em; float: right; clear: both; background-image: url(" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/menu_icon_16x16.png' ) ) . "); background-repeat:no-repeat; background-position: 0 50%; padding-left: 20px; font-size: smaller;'>"
-                    ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author' target='_blank' style='border: none;'>"
+                . "<span style='margin:1em 0.4em;float:right;clear:both;background-image:url(" . esc_url( AmazonAutoLinks_Registry::getPluginURL( 'asset/image/menu_icon_16x16.png' ) ) . ");background-repeat:no-repeat;background-position: 0 50%;padding-left:20px;font-size: smaller'>"
+                    ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author' target='_blank' style='border:none'>"
                         . AmazonAutoLinks_Registry::NAME
                     . "</a>"
                 . "</span>"
             . "</div>";
-            
     }
-    public function replyToGetCreditLink_1( $sCredit, $oOption ) {            
-                            
-        $_sVendorURL = $this->_getVendorURL( $oOption );
+    public function replyToGetCreditLink_1( $sCredit, $oOption ) {
+        $_sVendorURL = $this->___getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
         $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ) );
         return $sCredit
-            . "<div class='amazon-auto-links-credit' style='width: 100%; max-width: 100%;'>"
+            . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
                 . "<a href='{$_sVendorURL}' target='_blank'>"
-                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width: 100%; margin-left: auto; margin-right: auto; display:block;' />"
+                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width:100%;margin-left:auto;margin-right:auto;display:block' />"
                 . "</a>"
             . "</div>";
-            
     }
-    public function replyToGetCreditLink_2( $sCredit, $oOption ) {            
-
-        $_sVendorURL = $this->_getVendorURL( $oOption );
+    public function replyToGetCreditLink_2( $sCredit, $oOption ) {
+        $_sVendorURL = $this->___getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
         $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ) );
-
         return $sCredit
-            . "<div class='amazon-auto-links-credit' style='width: 100%; max-width: 100%;'>"
+            . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
                 . "<a href='{$_sVendorURL}' target='_blank'>"
-                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width: 100%; margin-left: auto; margin-right: auto; display:block;' />"
+                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width:100%;margin-left:auto;margin-right:auto;display:block' />"
                 . "</a>"
             . "</div>";
-            
     }
     
     /**
-     * @return      string
+     * @return string
      */
-    private function _getVendorURL( $oOption ) {
-        
+    private function ___getVendorURL( $oOption ) {
         $_sQueryKey  = $oOption->get( 'query', 'cloak' );
         return add_query_arg(
             array(
                 $_sQueryKey => 'vendor',
             ),
             site_url()
-        );        
-        
+        );
     }
-    
-        
+
 }

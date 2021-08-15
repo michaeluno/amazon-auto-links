@@ -28,8 +28,8 @@ class AmazonAutoLinks_FormFields_Button_Preview extends AmazonAutoLinks_FormFiel
                 'before_field'      => "<div style='margin: 3em 3em 3em 0; width:100%;'>"
                     . "<div style='margin-left: auto; margin-right: auto; '>" // text-align:center;
                         . AmazonAutoLinks_PluginUtility::getButton(
-                                isset( $_GET[ 'post' ] ) 
-                                    ? $_GET[ 'post' ] 
+                                isset( $_GET[ 'post' ] )        // sanitization unnecessary as just checking
+                                    ? ( integer ) $_GET[ 'post' ]        // sanitization done
                                     : -1    // must have a value; otherwise, the button tag type, <button>, will be displayed 4.3.0
                             )
                     . "</div>"

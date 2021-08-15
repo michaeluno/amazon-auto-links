@@ -1,6 +1,6 @@
 /*
     @name Category Selection
-    @version 1.0.1
+    @version 1.0.2
  */
 (function($){
 
@@ -25,12 +25,9 @@
         handleButton_RemoveChecked();
 
         // Debugging
-        if ( aalCategorySelection.debugMode ) {
-            console.log( 'Amazon Auto Links - debug', aalCategorySelection.debug );
-            delete aalCategorySelection.debug;
-            console.log( 'Amazon Auto Links - arguments', aalCategorySelection );
-        }
-
+        debugLog( 'debug info: ', aalCategorySelection.debug );
+        delete aalCategorySelection.debug;
+        debugLog( 'arguments: ', aalCategorySelection );
 
     });
 
@@ -286,7 +283,6 @@
             dataType: 'json',
             url: aalCategorySelection.ajaxURL,
             // async: false,   // to prevent the user click on the other lists while loading
-            // Data set to $_POSt and $_REQUEST
             data: {
                 // Required
                 action: aalCategorySelection.action_hook_suffix_category_list,  // WordPress action hook name which follows after `wp_ajax_`
@@ -449,7 +445,7 @@
                 urls_excluded: ___getURLsExcluded(),
             },
             success: function ( response ) {
-
+                debugLog( 'response: ', response );
                 if ( ! response.success ) {
 
                     // @todo insert the error in the unit preview area
@@ -492,5 +488,12 @@
             } );
             return _aURLs;
         }
+
+    function debugLog( ...args ) {
+        if ( ! parseInt( aalCategorySelection.debugMode ) ) {
+            return;
+        }
+        console.log( 'AAL Category Selection:', ...args );
+    }
 
 }(jQuery));

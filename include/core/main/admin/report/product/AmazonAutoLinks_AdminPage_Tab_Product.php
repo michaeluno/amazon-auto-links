@@ -42,7 +42,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
      */
     protected function _doTab( $oAdminPage ) {
 
-        $_sProductID    = isset( $_GET[ 'product_id' ] ) ? $_GET[ 'product_id' ] : '';
+        $_sProductID    = $this->getHTTPQueryGET( 'product_id', '' );
         $_oTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_aProducts     = $_sProductID ? $_oTable->getRowsByProductID( array( $_sProductID ) ) : array();
         $_aProduct      = reset( $_aProducts );
@@ -50,10 +50,10 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
         $_sImage        = $_sThumbnailURL
             ? "<img src='" . esc_url( $_sThumbnailURL ) . "' alt='thumbnail-{$_aProduct[ 'product_id' ]}' title='" . esc_attr( $_aProduct[ 'title' ] ) . "' />"
             : "<div class='centered'><span>" . __( 'No thumbnail', 'amazon-auto-links' ) . "</span></div>";
-        echo "<div class='product-thumbnail float-right'>" . $_sImage . "</div>";
-        echo $this->___getGoBackLink();
+        echo "<div class='product-thumbnail float-right'>" . wp_kses( $_sImage, 'post' ) . "</div>";
+        echo wp_kses( $this->___getGoBackLink(), 'post' );
         echo "<h3>" . __( 'Product Details', 'amazon-auto-links' ) . "</h3>";
-        echo $this->___getProductDetails( $_aProduct );
+        echo wp_kses( $this->___getProductDetails( $_aProduct ), 'post' );
     }
         private function ___getProductDetails( array $aProduct ) {
             // return "<table class='wp-list-table widefat fixed striped table-view-list'>"
@@ -108,7 +108,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
             );
             return "<div class='go-back'>"
                     . "<span class='dashicons dashicons-arrow-left-alt small-icon'></span>"
-                    . "<a href='{$_sProductsPageURL}'>"
+                    . "<a href='" . esc_url( $_sProductsPageURL ) . "'>"
                         . __( 'Go Back', 'amazon-auto-links' )
                     . "</a>"
                 . "</div>";

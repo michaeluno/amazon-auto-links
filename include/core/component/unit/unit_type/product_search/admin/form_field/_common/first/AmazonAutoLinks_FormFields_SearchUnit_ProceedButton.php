@@ -32,7 +32,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProceedButton extends AmazonAutoLink
                 'value'     => add_query_arg( 
                     array( 
                         'transient_id' => $GLOBALS[ 'aal_transient_id' ],
-                    ) + $_GET, 
+                    ) + $this->getHTTPQueryGET(),
                     admin_url( $GLOBALS['pagenow'] ) 
                 ),
             ),                

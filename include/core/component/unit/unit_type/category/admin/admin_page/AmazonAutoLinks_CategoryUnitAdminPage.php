@@ -53,19 +53,19 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
     public function setOptions( $aOptions ) {
 
         $_aUnitOptions = array();
-        if ( isset( $_GET[ 'post' ] ) ) {
+        if ( isset( $_GET[ 'post' ] ) ) {   // sanitization unnecessary as just checking
             $_oOption      = AmazonAutoLinks_Option::getInstance();
-            $_aUnitOptions = AmazonAutoLinks_WPUtility::getPostMeta( $_GET[ 'post' ], '', $_oOption->get( 'unit_default' ) );
+            $_aUnitOptions = AmazonAutoLinks_WPUtility::getPostMeta( absint( $_GET[ 'post' ] ), '', $_oOption->get( 'unit_default' ) );     // sanitization done
         }
         
         // Set some items for the edit mode.
-        $_iMode    = ! isset( $_GET[ 'post' ] ); // 0: edit, 1: new
+        $_iMode    = ! isset( $_GET[ 'post' ] ); // 0: edit, 1: new // sanitization unnecessary as just checking
         $_aOptions = array(
             'mode'       => $_iMode,
         );
         if ( ! $_iMode ) {
             $_aOptions[ 'bounce_url' ] = AmazonAutoLinks_WPUtility::getPostDefinitionEditPageURL(
-                $_GET[ 'post' ],  // post id
+                absint( $_GET[ 'post' ] ),  // post id  // sanitization done
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
             );
         }

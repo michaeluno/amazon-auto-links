@@ -81,13 +81,14 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
 
             wp_enqueue_script( 'jquery', 'moment' );
             $oAdminPage->enqueueScript(
-                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/Chart.min.js',
+                AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader::$sDirPath . '/asset/js/chart-js/chart.min.js',
                 $this->sPageSlug,
                 $this->sTabSlug,
                 array(
                     'handle_id'     => 'chart.js',
                     'dependencies'  => array( 'jquery', 'moment' ),
                     'in_footer'     => true,
+                    'version'       => '3.5.0',
                 )
             );
             $oAdminPage->enqueueScript(
@@ -112,6 +113,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Tab_RequestCount extend
                     'handle_id'     => 'aalChartJSLoader',
                     'dependencies'  => array( 'jquery', 'moment', 'chart.js', 'aalUtility' ),
                     'translation'   => array(
+                        'pluginName' => AmazonAutoLinks_Registry::NAME,
                         'debugMode' => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
                         'ajaxURL'   => admin_url( 'admin-ajax.php' ),
                         'actionHookSuffix'  => 'aal_action_ajax_paapi_request_count_locale_change',

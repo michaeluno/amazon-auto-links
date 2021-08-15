@@ -10,15 +10,15 @@
 
 /**
  * Available variables.
- *
- * @var array $aOptions the plugin options
+ * @var AmazonAutoLinks_Option $oOption
+ * @var array $aOptions the plugin options @deprecated use $oOption
  * @var array $aProducts the fetched product links
  * @var array $aArguments the user defined unit arguments such as image size and count etc.
  */
 
-$_oUtil   = new AmazonAutoLinks_PluginUtility;
-$_oOption = AmazonAutoLinks_Option::getInstance();
-echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>'; 
+$_oUtil          = new AmazonAutoLinks_PluginUtility;
+$_aUsingHTMLTags = $oOption->getAllowedHTMLTags();
+echo '<?xml version="1.0" encoding="' . esc_attr( get_option( 'blog_charset' ) ) . '"?' . '>';
 
 ?>
 <rss version="2.0"
@@ -66,20 +66,20 @@ echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>
 
     ?>    
     <item>
-        <title><![CDATA[<?php echo $_aProduct[ 'title' ]; ?>]]></title>
+        <title><![CDATA[<?php echo wp_kses( $_aProduct[ 'title' ], $_aUsingHTMLTags ); ?>]]></title>
         <link><?php echo esc_url( $_aProduct[ 'product_url' ] ); ?></link>
         <!--<comments></comments>-->
         <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', $_aProduct[ 'updated_date' ], false ); ?></pubDate>
         <!--<dc:creator><![CDATA[]]></dc:creator>-->
         <?php if ( $sLabels ): ?>
-        <category><![CDATA[<?php echo $sLabels; ?>]]></category>
+        <category><![CDATA[<?php echo wp_kses( $sLabels, $_aUsingHTMLTags ); ?>]]></category>
         <?php endif; ?>
-        <guid isPermaLink="false"><?php echo $_sGUID; ?></guid>        
-        <?php if ( ! $_oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
-        <description><![CDATA[<?php echo $_aProduct[ 'description' ]; ?>]]></description>
-        <content:encoded><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></content:encoded>
+        <guid isPermaLink="false"><?php echo wp_kses( $_sGUID, $_aUsingHTMLTags ); ?></guid>
+        <?php if ( ! $oOption->get( 'feed', 'use_description_tag_for_rss_product_content' ) ) : ?>
+        <description><![CDATA[<?php echo wp_kses( $_aProduct[ 'description' ], $_aUsingHTMLTags ); ?>]]></description>
+        <content:encoded><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . wp_kses( $_aProduct[ 'formatted_item' ], $_aUsingHTMLTags ) . "</div></div>"; ?>]]></content:encoded>
         <?php else : ?>
-        <description><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . $_aProduct[ 'formatted_item' ] . "</div></div>"; ?>]]></description>        
+        <description><![CDATA[<?php echo "<div class='amazon-products-container'><div class='amazon-product-container'>" . wp_kses( $_aProduct[ 'formatted_item' ], $_aUsingHTMLTags ) . "</div></div>"; ?>]]></description>
         <?php endif; ?>
         <!--<wfw:commentRss></wfw:commentRss>-->
         <!--<slash:comments></slash:comments>-->

@@ -57,13 +57,12 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
     public function render() {
         
         $sPageURL = $this->___getPageURL(
-            isset( $_GET[ 'href' ] )
-                ? $_GET[ 'href' ]
+            isset( $_GET[ 'href' ] )    // sanitization unnecessary as just checking
+                ? $_GET[ 'href' ]                   // sanitization done by passing ___getPageURL()
             : '', 
             $this->oUnitOption->get( 'country' )
         );
-        // @deprecated 4.2.0
-//        $_oSidebar      = new AmazonAutoLinks_Form_CategorySelect___Sidebar( $sPageURL, $this->oUnitOption->get( 'country' ) );
+
         $this->_printPreviewTable(
             array(
                 'bNew'                          => isset( $this->aOptions[ 'mode' ] ) 
@@ -75,14 +74,9 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                 'aSelectedPageURLs'             => wp_list_pluck( $this->oUnitOption->get( 'categories' ), 'page_url' ),
                 'sBounceURL'                    => $this->aOptions[ 'bounce_url' ],
                 'aWorkingURLs'                  => array(),
-
-// @deprecated 4.2.0
-//                'sBreadcrumb'                   => $_oSidebar->get( 'Breadcrumb' ),
                 'sBreadcrumb'                   => '<span class="now-loading-breadcrumb">'
                     . $this->___getNowLoading()
                     . '</span>',
-                // @deprecated 4.2.0
-//                'sSidebarHTML'                  => $_oSidebar->get( 'CategoryList' ),
                 'sSidebarHTML'                  => '<span class="now-loading-category-list">'
                     . $this->___getNowLoading()
                     . '</span>',
@@ -112,15 +106,15 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
          * @since       3.5.7       Changed the scope to private as this is only used in this class.
          * @deprecated  As bestseller feeds are deprecated this is no longer needed.
          */
-        private function ___getSelectedRSSURLs( $aCategories ) {
-                
-            $aURLs = array();
-            foreach( $aCategories as $aCategory ) {
-                $aURLs[] = $aCategory[ 'feed_url' ];
-            }
-            return $aURLs;
-            
-        }    
+        // private function ___getSelectedRSSURLs( $aCategories ) {
+        //
+        //     $aURLs = array();
+        //     foreach( $aCategories as $aCategory ) {
+        //         $aURLs[] = $aCategory[ 'feed_url' ];
+        //     }
+        //     return $aURLs;
+        //
+        // }
         /**
          * 
          * $aCategory = array(
@@ -173,17 +167,12 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         /// Edit the excluding category unit option for preview
         $_aPreviewUnitOptions = $this->oUnitOption->get();
         $_aPreviewUnitOptions[ 'categories_exclude' ] = array();
-        // @deprecated 4.2.0
-//        $_oAALCatPreview   = new AmazonAutoLinks_UnitOutput_category( $_aPreviewUnitOptions );
-//        $_oAALUnitPreview  = new AmazonAutoLinks_UnitOutput_category( $this->oUnitOption );
-
-        $_bNested          = false !== strpos( $aPageElements[ 'sBreadcrumb' ], '>' );
 
         // Buttons 
-        $bReachedLimit      = $this->_isNumberOfCategoryReachedLimit(
-            count( $this->oUnitOption->get( 'categories' ) )
-            + count( $this->oUnitOption->get( 'categories_exclude' ) )
-        );
+        // $bReachedLimit      = $this->_isNumberOfCategoryReachedLimit(
+        //     count( $this->oUnitOption->get( 'categories' ) )
+        //     + count( $this->oUnitOption->get( 'categories_exclude' ) )
+        // );
         $bIsAlreadyAdded    = $this->___isAddedCategory(
             $aPageElements[ 'sBreadcrumb' ],
             $this->oUnitOption->get( 'categories' )
@@ -196,10 +185,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
             $aPageElements[ 'sBreadcrumb' ],
             $this->oUnitOption->get( 'categories' )
         );
-        // @deprecated 4.2.0
-//        $sAddDisabled       = ! $_bNested || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory
-//            ? "disabled='disabled'"
-//            : "";
+
         $sAddDisabled = "disabled='disabled'";
         $sExcludeDisabled   = $this->isEmpty( $this->oUnitOption->get( 'categories' ) ) || $bIsAlreadyAdded || $bIsAlreadyAddedExcludingCategory || ! $bIsSubCategoryOfAddedItems
             ? "disabled='disabled'"
@@ -224,95 +210,83 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
         $sSelectArrow       = "<img id='arrow-select' class='hidden category-select-left-bottom-arrow' title='" . esc_attr( __( 'Select a category from the links!', 'amazon-auto-links' ) ) . "' src='" . esc_url( $_sSelectArrowURL ) . "'/>";
 
         $_oEncrypt          = new AmazonAutoLinks_Encrypt;
+        $_oOption           = AmazonAutoLinks_Option::getInstance();
+        $_aUsingHTMLTags    = array( 'input' => array(
+            'type'  => true,
+            'name'  => true,
+            'id'    => true,
+            'style' => true,
+            'value' => true,
+        ) ) + $_oOption->getAllowedHTMLTags();
         ?>
 
-<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $_oEncrypt->encode( $aPageElements[ 'sBreadcrumb' ] ) ;?>" />
-<input type="hidden" name="amazon_auto_links_cat_select[category][feed_url]" value="<?php echo $aPageElements[ 'sRSSURL' ]; ?>" />
-<input type="hidden" name="amazon_auto_links_cat_select[category][page_url]" value="<?php echo $aPageElements[ 'sPageURL' ]; ?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][breadcrumb]" value="<?php echo $_oEncrypt->encode( $aPageElements[ 'sBreadcrumb' ] ); ?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][feed_url]" value="<?php echo esc_url( $aPageElements[ 'sRSSURL' ] ); ?>" />
+<input type="hidden" name="amazon_auto_links_cat_select[category][page_url]" value="<?php echo esc_url( $aPageElements[ 'sPageURL' ] ); ?>" />
 <table class="category-select-table">
     <tbody>
         <tr>
             <td class="category-select-first-column">
-                <h3><?php _e( 'Current Selection', 'amazon-auto-links' ); ?></h3>
-                <p id="category-select-breadcrumb"><?php echo $aPageElements[ 'sBreadcrumb' ]; ?></p>
+                <h3><?php esc_html_e( 'Current Selection', 'amazon-auto-links' ); ?></h3>
+                <p id="category-select-breadcrumb"><?php echo wp_kses( $aPageElements[ 'sBreadcrumb' ], $_aUsingHTMLTags ); ?></p>
             </td>
             <td class="category-select-second-column" colspan="2">
                 <div class="category-select-submit-buttons">
-                    <span class="primary"><a class="button button-primary" href="<?php echo $aPageElements[ 'sBounceURL' ]; ?>"><?php _e( 'Go Back', 'amazon-auto-links' ); ?></a></span>
-                    <span class="primary"><?php echo $sCreateArrow; ?><input id="button-save-unit" type="submit" name="amazon_auto_links_cat_select[save]" class="button button-primary" value="<?php echo $sCreateOrSave; ?>" <?php echo $sCreateDisabled; ?> /></span>
-                    <span><?php echo $sAddArrow; ?><input id="button-add-category" type="submit" name="amazon_auto_links_cat_select[add]" class="button button-secondary" value="<?php _e( 'Add Category', 'amazon-auto-links' ); ?>" <?php echo $sAddDisabled; ?> /></span>
-                    <span><input id="button-add-excluding-category" type="submit" name="amazon_auto_links_cat_select[exclude]" class="button button-secondary" value="<?php _e( 'Add Excluding Category', 'amazon-auto-links' ); ?>" <?php echo $sExcludeDisabled; ?> /></span>
-                    <span><input id="button-remove-checked" type="submit" name="amazon_auto_links_cat_select[remove]" class="button button-secondary" value="<?php _e( 'Remove Checked', 'amazon-auto-links' ); ?>" <?php echo $sRemoveDisabled; ?> /></span>
+                    <span class="primary"><a class="button button-primary" href="<?php echo esc_url( $aPageElements[ 'sBounceURL' ] ); ?>"><?php esc_html_e( 'Go Back', 'amazon-auto-links' ); ?></a></span>
+                    <span class="primary"><?php echo wp_kses( $sCreateArrow, $_aUsingHTMLTags ); ?><input id="button-save-unit" type="submit" name="amazon_auto_links_cat_select[save]" class="button button-primary" value="<?php echo esc_attr( $sCreateOrSave ); ?>" <?php echo wp_kses( $sCreateDisabled, $_aUsingHTMLTags ); ?> /></span>
+                    <span><?php echo wp_kses( $sAddArrow, $_aUsingHTMLTags ); ?><input id="button-add-category" type="submit" name="amazon_auto_links_cat_select[add]" class="button button-secondary" value="<?php esc_html_e( 'Add Category', 'amazon-auto-links' ); ?>" <?php echo wp_kses( $sAddDisabled, $_aUsingHTMLTags ); ?> /></span>
+                    <span><input id="button-add-excluding-category" type="submit" name="amazon_auto_links_cat_select[exclude]" class="button button-secondary" value="<?php esc_html_e( 'Add Excluding Category', 'amazon-auto-links' ); ?>" <?php echo wp_kses( $sExcludeDisabled, $_aUsingHTMLTags ); ?> /></span>
+                    <span><input id="button-remove-checked" type="submit" name="amazon_auto_links_cat_select[remove]" class="button button-secondary" value="<?php esc_html_e( 'Remove Checked', 'amazon-auto-links' ); ?>" <?php echo wp_kses( $sRemoveDisabled, $_aUsingHTMLTags ); ?> /></span>
                 </div>
                 <div id="selected-categories">
-                    <h3><?php _e( 'Added Categories', 'amazon-auto-links' ); ?></h3>
+                    <h3><?php esc_html_e( 'Added Categories', 'amazon-auto-links' ); ?></h3>
                     <div id="added-categories">
-                        <?php echo $aPageElements[ 'sSelectedCategories' ]; ?>
+                        <?php echo wp_kses( $aPageElements[ 'sSelectedCategories' ], $_aUsingHTMLTags ); ?>
                     </div>
-                    <h3><?php _e( 'Added Excluding Sub-categories', 'amazon-auto-links' ); ?></h3>
+                    <h3><?php esc_html_e( 'Added Excluding Sub-categories', 'amazon-auto-links' ); ?></h3>
                     <div id="excluding-categories">
-                        <?php echo $aPageElements[ 'sSelectedExcludingCategories' ]; ?>
+                        <?php echo wp_kses( $aPageElements[ 'sSelectedExcludingCategories' ], $_aUsingHTMLTags ); ?>
                     </div>
                 </div>
             </td>
         </tr>
         <tr>
             <td class="category-select-first-column">
-                <h3 id="category-select-title"><?php _e( 'Select Category', 'amazon-auto-links' ); ?></h3>
+                <h3 id="category-select-title"><?php esc_html_e( 'Select Category', 'amazon-auto-links' ); ?></h3>
                 <div id="category-list">
-                <?php echo $sSelectArrow; ?>
-                <?php echo $aPageElements[ 'sSidebarHTML' ]
-                    ? $aPageElements[ 'sSidebarHTML' ]
-                    : "<p>" . __( 'Failed to generate the category list.', 'amazon-auto-links' ) . "</p>";
+                <?php echo wp_kses( $sSelectArrow, $_aUsingHTMLTags ); ?>
+                <?php echo ( ( boolean ) $aPageElements[ 'sSidebarHTML' ] )
+                    ? wp_kses( $aPageElements[ 'sSidebarHTML' ], $_aUsingHTMLTags )
+                    : "<p>" . esc_html__( 'Failed to generate the category list.', 'amazon-auto-links' ) . "</p>";
                 ?>
                 </div>
             </td>
             <td class="category-select-second-column category-select-preview-left">
                 <h3>
-                    <?php echo __( 'Preview of This Category', 'amazon-auto-links' ); ?>
+                    <?php echo esc_html__( 'Preview of This Category', 'amazon-auto-links' ); ?>
                 </h3>
-                <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
+                <div class="widthfixer" style="width:<?php echo esc_attr( $this->oUnitOption->get( 'image_size' ) ); ?>px;"></div>
 
                 <?php
                 /**
                  * @since   3.8.1   Changed the value to give to the below `render()` method from a RSS URL to a page URL as feeds are deprecated.
                  */
-//                if ( $_bNested && $aPageElements[ 'sPageURL' ] ) {
-                    // @deprecated 4.2.0 Now relies on Ajax
-                    // $_oAALCatPreview->render( array( $aPageElements[ 'sPageURL' ] ) );
-                    echo '<div id="category-preview">'
-                            . '<p clsas="now-loading-category-preview">'
-                                . $this->___getNowLoading()
-                            . '</p>'
-                         . '</div>';
-//                } else {
-//                    echo "<p class=''>";
-//                    _e( 'Please select a category from the list on the left.', 'amazon-auto-links' );
-//                    echo "</p>";
-//                }
+                echo '<div id="category-preview">'
+                        . '<p clsas="now-loading-category-preview">'
+                            . wp_kses( $this->___getNowLoading(), $_aUsingHTMLTags )
+                        . '</p>'
+                     . '</div>';
                 ?>
             </td>
             <td class="category-select-third-column category-select-preview-right">
-                <h3 id="unit-preview-title"><?php _e( 'Unit Preview', 'amazon-auto-links' ); ?></h3>
-                <div class="widthfixer" style="width:<?php echo $this->oUnitOption->get( 'image_size' ); ?>px;"></div>
-                <?php                         
-//                if ( ! $this->isEmpty( $aPageElements[ 'aSelectedPageURLs' ] ) ) {
-                    /**
-                     * @since   3.8.1   Changed the value to give to the below `render()` method from RSS URLs to page URLs as best seller feeds are deprecated by Amazon.
-                     * @deprecated 4.2.0    Now rely on Ajax.
-                     */
-                    // $_oAALUnitPreview->render( $aPageElements[ 'aSelectedPageURLs' ] );
-//                    flush();
-                    echo '<div id="unit-preview">'
-                            . '<p class="now-loading-unit-preview">'
-                                . $this->___getNowLoading()
-                            . '</p>'
-                        . '</div>';
-//                } else {
-//                    echo "<p>";
-//                    _e( 'Please add a category from the list after selecting it.', 'amazon-auto-links' );
-//                    echo "</p>";
-//                }
+                <h3 id="unit-preview-title"><?php esc_html_e( 'Unit Preview', 'amazon-auto-links' ); ?></h3>
+                <div class="widthfixer" style="width:<?php echo esc_attr( $this->oUnitOption->get( 'image_size' ) ); ?>px;"></div>
+                <?php
+                echo '<div id="unit-preview">'
+                        . '<p class="now-loading-unit-preview">'
+                            . wp_kses( $this->___getNowLoading(), $_aUsingHTMLTags )
+                        . '</p>'
+                    . '</div>';
                 ?>
             </td>
         </tr>

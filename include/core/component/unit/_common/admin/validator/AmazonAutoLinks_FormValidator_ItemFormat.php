@@ -44,37 +44,15 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
             $_oOption = AmazonAutoLinks_Option::getInstance();    
 
             add_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
-            $_aAllowedHTMLTags = $this->getStringIntoArray(
-                str_replace(
-                    PHP_EOL,            // search
-                    ',',                // replace
-                    $_oOption->get(     // subject
-                        'form_options',     // first dimensional key
-                        'allowed_html_tags' // second dimensional key
-                    )
-                ), 
-                ',' 
-            );
-            $_aAllowedAttributes = $this->getStringIntoArray(
-                str_replace(
-                    PHP_EOL,            // search
-                    ',',                // replace
-                    $_oOption->get(     // subject
-                        'form_options',     // first dimensional key
-                        'allowed_attributes' // second dimensional key
-                    )
-                ), 
-                ',' 
-            );
+            $_aAllowedHTMLTags   = $_oOption->getAllowedHTMLTags();
 
             // For backward compatibility for v3 or below
-            $aInputs = $this->___getInputEscapedForKSES( $aInputs, $_aAllowedHTMLTags, $_aAllowedAttributes );
+            $aInputs = $this->___getInputEscapedForKSES( $aInputs, $_aAllowedHTMLTags );
 
             // The option added since v4.0.0 in place of `item_format`.
             $aInputs[ 'output_formats' ] = $this->___getInputEscapedForKSES(
                 $this->getElementAsArray( $aInputs, array( 'output_formats' ) ),
-                $_aAllowedHTMLTags,
-                $_aAllowedAttributes
+                $_aAllowedHTMLTags
             );
 
             remove_filter( 'safe_style_css', array( $this, 'replyToAddAllowedInlineCSSProperties' ) );
@@ -83,24 +61,20 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
         }
 
             /**
-             * @param array $aOutputFormat
-             * @param array $aAllowedHTMLTags
-             * @param array $aAllowedAttributes
-             *
-             * @return array    Sanitized array with escaped form values.
+             * @param  array $aOutputFormat
+             * @param  array $aAllowedHTMLTags
+             * @return array Sanitized array with escaped form values.
+             * @return array
              */
-            private function ___getInputEscapedForKSES( array $aOutputFormat, array $aAllowedHTMLTags, array $aAllowedAttributes ) {
+            private function ___getInputEscapedForKSES( array $aOutputFormat, array $aAllowedHTMLTags ) {
                 $_sKeysToCheck = array( 'item_format', 'image_format', 'title_format', 'unit_format' );
                 foreach( $_sKeysToCheck as $_sLegacyKey ) {
-                    if ( ! isset( $aInputs[ $_sLegacyKey ] ) ) {
+                    if ( ! isset( $aOutputFormat[ $_sLegacyKey ] ) ) {
                         continue;
                     }
-                    $aOutputFormat[ $_sLegacyKey ] = $this->escapeKSESFilter(
+                    $aOutputFormat[ $_sLegacyKey ] = $this->getEscapedWithKSES(
                         $aOutputFormat[ $_sLegacyKey ],
-                        $aAllowedHTMLTags,
-                        array(),
-                        array(),
-                        $aAllowedAttributes
+                        $aAllowedHTMLTags
                     );
                 }
                 return $aOutputFormat;
@@ -116,7 +90,7 @@ class AmazonAutoLinks_FormValidator_ItemFormat extends AmazonAutoLinks_PluginUti
                         PHP_EOL,            // search
                         ',',                // replace
                         $_oOption->get(     // subject
-                            'form_options',     // first dimensional key
+                            'security',     // first dimensional key
                             'allowed_inline_css_properties' // second dimensional key
                         )
                     ),

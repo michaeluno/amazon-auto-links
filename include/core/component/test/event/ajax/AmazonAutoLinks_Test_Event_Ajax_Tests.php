@@ -41,10 +41,23 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
     );
 
     /**
-     * @param  array $aPost
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'filePath'      => realpath( trim( $this->getElement( $aPost, array( 'filePath' ), '' ) ) ),
+            'tags'          => array_map( 'sanitize_text_field', $this->getElementAsArray( $aPost, array( 'tags' ) ) ),
+            'testArguments' => array_map( 'sanitize_text_field', $this->getElementAsArray( $aPost, array( 'testArguments' ) ) ),
+        );
+    }
+
+    /**
      *
      * @return array
-     * @throws Exception        Throws a string value of an error message.
+     * @throws Exception    Throws a string value of an error message.
+     * @param  array $aPost Sanitized POST data. Contains the `filePath`, `tags`, and `testArguments` elements.
      */
     protected function _getResponse( array $aPost ) {
 
@@ -456,6 +469,7 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 'actionHookSuffix' => $this->_sActionHookSuffix,
                 'nonce'            => wp_create_nonce( $this->_sNonceKey ),
                 'spinnerURL'       => admin_url( 'images/loading.gif' ),
+                'pluginName'       => AmazonAutoLinks_Registry::NAME,
                 // no labels set as tests are only available when the site debug mode is on.
                 // Also text regarding tests such as error messages should not be translated.
             );

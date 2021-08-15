@@ -90,12 +90,12 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * Sets up global variables.
      */
     public function setGlobals() {
-        
+
         if ( $this->bIsAdmin ) { 
         
             // The form transient key will be sent via the both get and post methods.
             $GLOBALS[ 'aal_transient_id' ] = isset( $_REQUEST[ 'transient_id' ] )
-                ? $_REQUEST[ 'transient_id' ]
+                ? sanitize_text_field( $_REQUEST[ 'transient_id' ] )
                 : AmazonAutoLinks_Registry::TRANSIENT_PREFIX 
                     . '_Form' 
                     . '_' . get_current_user_id() 
@@ -236,11 +236,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // [4.0.0]
             new AmazonAutoLinks_CustomOEmbed_Loader;
 
-            new AmazonAutoLinks_Test_Loader; // [4.3.0]
-
             new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
             new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
+
+            // [4.6.19] Released versions don't include these
+            if ( file_exists( dirname( __FILE__ ) . '/component/test' ) ) {
+                new AmazonAutoLinks_Test_Loader; // [4.3.0]
+            }
 
         }
 

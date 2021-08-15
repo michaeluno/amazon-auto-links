@@ -393,7 +393,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
         if ( $this->___bNonProductURL && ! empty( $this->___aErrors ) ) {
             $_sErrors = implode( ' ', $this->___aErrors );
             $this->___aErrors = array();
-            return $_sErrors . ' ' . $this->___getGuideMessageForErrors();
+            return $_sErrors . ' ' . $this->getEnableHTTPProxyOptionMessage();
         }
 
         /**
@@ -406,30 +406,17 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                 $this->___aErrors = array_map( array( $this, '___replyToSetASINToErrorMessage' ), $this->___aErrors, array_keys( $this->___aErrors ), array_fill(0, count( $this->___aErrors ), $_sLocale ) );
                 $_sErrors = implode( ' ', $this->___aErrors );
                 $this->___aErrors = array();
-                return $_sErrors  . ' ' . $this->___getGuideMessageForErrors();
+                return $_sErrors  . ' ' . $this->getEnableHTTPProxyOptionMessage();
             }
             $aProducts = $this->___getProductsFilteredForWithoutPAAPI( $aProducts );
         }
 
         $_sErrorMessage = parent::_getError( $aProducts );
         return $_sErrorMessage
-            ? $_sErrorMessage . ' ' . $this->___getGuideMessageForErrors()
+            ? $_sErrorMessage . ' ' . $this->getEnableHTTPProxyOptionMessage()
             : $_sErrorMessage;
 
     }
-        /**
-         * Gets a message for guidance for logged-in users.
-         * @since  4.5.0
-         * @return string
-         */
-        private function ___getGuideMessageForErrors(){
-            if ( ! current_user_can( 'manage_options' ) ) {
-                return '';
-            }
-            $_sURLAdminProxyTab = $this->getProxySettingScreenURL();
-            return '* ' .__( 'Message for administrator', 'amazon-auto-links' ) . ': '
-                . sprintf( __( 'Consider enabling the %1$s option.', 'amazon-auto-links' ), "<a href='" . esc_url( $_sURLAdminProxyTab ) . "' target='_blank'>" . __( 'HTTP Proxies', 'amazon-auto-links' ) . "</a>" );
-        }
         /**
          * @param    string $sErrorMessage
          * @param    string $sURL

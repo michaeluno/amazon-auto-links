@@ -1,0 +1,9 @@
+- Added checkbox items to the `Restore Defaults` option which allows the user to select which options to delete.
+- Fixed an incompatibility issue with sites with custom `WP_CONTENT_DIR` and `WP_CONTENT_URL`.
+- Fixed a setting message that appears when the user performs an action with no item in the template listing page.
+- Tweaked the date format of the `%date%` and `%disclaimer%` `Output Format` tags.
+- Tweaked unit error messages.
+- Tweaked the layout of the `List` template in widgets.
+- Tweaked the unit listing table UI to display a warning when the selected template is deactivated.
+- Tweaked the template listing table UI.
+- Tweaked the debug output UI.

@@ -35,21 +35,31 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
     }
 
     /**
-     * @param array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'data' => $this->getElementAsArray( $aPost, 'data' ),
+        );
+    }
+
+    /**
      * @return string|array
-     * @throws Exception        Throws a string value of an error message.
+     * @throws Exception    Throws a string value of an error message.
+     * @param  array        $aPost  POST data, containing the `data' element.
      */
     protected function _getResponse( array $aPost ) {
 
-        if ( ! isset( $aPost[ 'data' ] ) ) {
+        if ( empty( $aPost[ 'data' ] ) ) {
             throw new Exception( __( 'Failed to load the unit.', 'amazon-auto-links' ) );
         }
 
         // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_nopriv_}aal_unit_ajax_loading` action hook )
 
         // For the contextual widget
-        add_filter( 'aal_filter_http_get', array( $this, 'replyToSetReferrerHTTPGET' ) );
+        add_filter( 'aal_filter_http_get', array( $this, 'replyToGetHTTPGETRequest' ) );
         add_filter( 'aal_filter_post_object', array( $this, 'replyToSetReferrerPostObject' ) );
         add_filter( 'aal_filter_current_page_type', array( $this, 'replyToSetReferrerPageType' ) );
         add_filter( 'aal_filter_current_queried_term_object', array( $this, 'replyToSetReferrerTermObject' ) );
@@ -85,10 +95,13 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      * @param       $aGET
      * @return      array
      * @since       3.6.0
+     * @remark      Will be sanitized later.
      */
-    public function replyToSetReferrerHTTPGET( $aGET ) {
+    public function replyToGetHTTPGETRequest( $aGET ) {
         return isset( $_POST[ 'REQUEST' ] )
-            ? $_POST[ 'REQUEST' ]
+            ? array(
+                's' => _sanitize_text_fields( $this->getElement( $_POST, array( 's' ) ) ),   // sanitization done
+            )
             : $aGET;
     }
     /**
@@ -97,7 +110,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerPostObject( $oPost ) {
         return isset( $_POST[ 'post_id' ] ) && $_POST[ 'post_id' ]
-            ? get_post( $_POST[ 'post_id' ] )
+            ? get_post( absint( $_POST[ 'post_id' ] ) )
             : $oPost;
     }
 
@@ -107,7 +120,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerPageType( $sPageType ) {
         return isset( $_POST[ 'page_type' ] ) && $_POST[ 'page_type' ]
-            ? $_POST[ 'page_type' ]
+            ? sanitize_text_field( $_POST[ 'page_type' ] )
             : $sPageType;
     }
 
@@ -117,7 +130,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerTermObject( $oTerm ) {
         return isset( $_POST[ 'term_id' ] ) && $_POST[ 'term_id' ]
-            ? get_term( $_POST[ 'term_id' ] )
+            ? get_term( absint( $_POST[ 'term_id' ] ) )
             : $oTerm;
     }
     /**
@@ -126,7 +139,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
      */
     public function replyToSetReferrerAuthor( $sAuthor ) {
         return isset( $_POST[ 'author_name' ] ) && $_POST[ 'author_name' ]
-            ? $_POST[ 'author_name' ]
+            ? sanitize_text_field( $_POST[ 'author_name' ] )
             : $sAuthor;
     }
 
@@ -188,7 +201,10 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
                 'author_name'   => '',
                 'page_type'     => $_sPageType,
                 'post_id'       => get_the_ID(),
-                'REQUEST'       => $_REQUEST,
+                'REQUEST'       => array(
+                    // Currently, contextual units only use the `s` field.
+                    's' => sanitize_text_field( $this->getElement( $_REQUEST, array( 's' ) ) ),
+                ),
             );
             if ( 'taxonomy' === $_sPageType ) {
                 $_oTerm = $this->getCurrentQueriedObject();

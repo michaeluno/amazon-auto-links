@@ -23,6 +23,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
      * @var string
      */
     static private $___sSiteDateFormat;
+    static private $___sGMTOffset;
 
     /**
      * AmazonAutoLinks_UnitOutput__ItemFormatter constructor.
@@ -37,6 +38,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
         $this->___aProduct    = $aProduct;
         $this->___aCacheDBRow = $aCacheDBRow;
         self::$___sSiteDateFormat = isset( self::$___sSiteDateFormat ) ? self::$___sSiteDateFormat : get_option( 'date_format' );
+        self::$___sGMTOffset      = isset( self::$___sGMTOffset ) ? self::$___sGMTOffset : 'GMT ' . $this->getGMTOffsetString();
     }
 
     /**
@@ -58,7 +60,8 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     private function ___getProductOutputFormatted( array $aProduct ) {
 
         $_iUpdatedTime  = $this->___getProductUpdatedTime( $aProduct[ 'updated_date' ] );
-        $_sUpdatedDate  = $this->getSiteReadableDate( $_iUpdatedTime, self::$___sSiteDateFormat, true );
+        $_sUpdatedDate  = $this->getSiteReadableDate( $_iUpdatedTime, self::$___sSiteDateFormat . ' H:i', true );
+        $_sUpdatedDate  = 'n/a' === $_sUpdatedDate ? $_sUpdatedDate : $_sUpdatedDate . ' ' . self::$___sGMTOffset;
         $_aReplacements = array(
             "%href%"                        => esc_url( $aProduct[ 'product_url' ] ),
             "%title_text%"                  => $aProduct[ 'title' ],

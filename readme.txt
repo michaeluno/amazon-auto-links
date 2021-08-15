@@ -1,12 +1,12 @@
-﻿=== Amazon Auto Links - Amazon Associates Affiliate Plugin ===
+﻿=== Auto Amazon Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.7.2
+Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.15
+Stable tag:         4.6.20
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -170,6 +170,9 @@ Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure
 = Is the China locales supported? =
 For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support it.
 
+= Is this plugin Amazon Auto Links? =
+Yes, that's a former name of this plugin and it is now Auto Amazon Links.
+
 == Other Notes ==
 
 = Shortcode and Function Parameters =
@@ -327,6 +330,42 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.20 - 08/12/2021 =
+- Fixed raw HTTP request values, which could cause possible security issues.
+- Fixed a bug that selected locale in the `Associates` screen was not reflected, started in v4.6.18.
+
+= 4.6.19 - 08/12/2021 =
+- Added the `Security` setting section in the `Misc` screen.
+- Deprecated the `Form` setting section in the `Misc` screen.
+- Fixed a bug that the `Output Formats` options were not saved properly.
+- Fixed some unloaded images in the plugin setting pages.
+- Fixed a bug that restoring default options for the general options was not properly processed, started in v4.6.17.
+- Updated JavaScript libraries.
+- Fixed some unescaped HTML outputs.
+- Fixed raw HTTP request values, which could cause possible security issues.
+
+= 4.6.18 - 08/11/2021 =
+- Changed the plugin to `Auto Amazon Links`.
+- Tweaked the UI of the `Get New` screen of the `Templates` page.
+- Fixed unnecessary browser console log items.
+- Fixed raw HTTP request values, which could cause possible security issues.
+
+= 4.6.17 - 08/09/2021 =
+- Added checkbox items to the `Restore Defaults` option which allows the user to select which options to delete.
+- Fixed an incompatibility issue with sites with custom `WP_CONTENT_DIR` and `WP_CONTENT_URL`.
+- Fixed a setting message that appears when the user performs an action with no item in the template listing page.
+- Tweaked the date format of the `%date%` and `%disclaimer%` `Output Format` tags.
+- Tweaked unit error messages.
+- Tweaked the layout of the `List` template in widgets.
+- Tweaked the unit listing table UI to display a warning when the selected template is deactivated.
+- Tweaked the template listing table UI.
+- Tweaked the debug output UI.
+
+= 4.6.16 - 08/06/2021 =
+- Fixed a bug that caused a critical error on some sites with v4.6.15 by reverting the method of generating template IDs.
+- Added the Paths and URLs section in the `About` page.
+- Tweaked unit warning messages.
 
 = 4.6.15 - 08/05/2021 =
 - Tweaked the way to generate template IDs.

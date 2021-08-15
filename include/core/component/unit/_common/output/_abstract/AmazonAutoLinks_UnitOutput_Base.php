@@ -109,6 +109,28 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     protected $_sResponseItemsParentKey = '';
 
     /**
+     * Stores major unit error messages.
+     *
+     * If this has at least one item, the template will not be called but only the error will be shown.
+     *
+     * @since  4.6.17
+     * @var    array
+     * @remark The visibility scope is public as delegation classes might need to access it.
+     */
+    public $aErrors = array();
+
+    /**
+     * Stores additional notes about the unit outputs.
+     *
+     * Inserted at the bottom of the unit output as an HTML comment.
+     *
+     * @since  4.6.17
+     * @var    array
+     * @remark The visibility scope is public as delegation classes might need to access it.
+     */
+    public $aNotes = array();
+
+    /**
      * Sets up properties.
      *
      * @param array|AmazonAutoLinks_UnitOption_Base $aoUnitOptions
@@ -154,39 +176,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->bDBTableAccess    = $this->___hasCustomDBTableAccess();
 
     }
-        /**
-         * @since   3.7.5
-         * @return  boolean
-         */
-        private function ___hasCustomProductLinkURLQuery() {
-            $_aLinkQueryRaw = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
-            foreach( $_aLinkQueryRaw as $_iIndex => $_aKeyValue ) {
-                $_aQueryKeyValue = array_filter( $_aKeyValue );
-                if ( empty( $_aQueryKeyValue ) ) {
-                    continue;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        /**
-         * @param    string $sURL
-         * @param    string $sRawURL
-         * @param    string $sASIN
-         * @param    AmazonAutoLinks_UnitOption_Base $aUnitOptions
-         * @return   string
-         * @since    3.7.5
-         * @callback add_filter()  aal_filter_product_link
-         */
-        public function replyToModifyProductURLs( $sURL, $sRawURL, $sASIN, $aUnitOptions ) {
-            $_aQuery     = array();
-            $_aKeyValues = $this->getAsArray( $this->oUnitOption->get( '_custom_url_query_string' ) );
-            foreach( $_aKeyValues as $_iIndex => $_aKeyValue ) {
-                $_aQuery[ $_aKeyValue[ 'key' ] ] = $_aKeyValue[ 'value' ];
-            }
-            return add_query_arg( $_aQuery, $sURL );
-        }
 
         /**
          * Sanitizes a raw product title.
@@ -287,6 +276,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aProducts         = $this->fetch( $aURLs );
         $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
+        $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
         try {
 
             $_sError = $this->_getError( $_aProducts );
@@ -299,14 +289,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
-            $_aArguments = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
             $_sContent   = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
+
+            // [4.6.17+] Add notes
+            $_sNotes     = trim( implode( ', ', $this->aNotes ) );
+            $_sContent  .= $_sNotes ? "<!-- {$_sNotes} -->": '';
 
         } catch ( Exception $_oException ) {
 
             $_sErrorMessage  = $_oException->getMessage();
             $_iShowErrorMode = ( integer ) $this->oUnitOption->get( 'show_errors' );
-            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $this->oUnitOption->get() );
+            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $_aArguments );
             $_sContent       = $this->___getErrorOutput( $_iShowErrorMode, $_sErrorMessage );
 
             if ( ! $_bHasPreviousError && $_iUnitID ) {
@@ -334,7 +327,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     '%products%'
                 ),
                 array(
-                    $this->oUnitOption->get( array( 'custom_text' ), '' ),
+                    wp_kses( $this->oUnitOption->get( array( 'custom_text' ), '' ), $this->oOption->getAllowedHTMLTags() ),
                     $sUnitOutput
                 ),
                 apply_filters( 'aal_filter_unit_format', $this->oUnitOption->get( array( 'unit_format' ), '' ), $this->oUnitOption ) // 4.5.8 - the RSS template should remove custom text
@@ -351,15 +344,22 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 return '';
             }
             $_iFilteredOut = count( $this->aBlockedASINs );
+            $_iUnitID      = $this->oUnitOption->get( 'id' );
+            $_sNotes       = implode( ',', $this->aNotes );
             return 2 === $iShowErrorMode
                 ? "<!-- "
-                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
-                    . ' ' . $_iFilteredOut . ' items are filtered out: [' . implode( ', ', $this->aBlockedASINs ) . ']'
+                    . AmazonAutoLinks_Registry::NAME. ": " . $sErrorMessage
+                    . " {$_iFilteredOut} items are filtered out: [" . implode( ', ', $this->aBlockedASINs ) . "]"
+                    . " Type: {$this->sUnitType} ID: {$_iUnitID}"
+                    . ( $_sNotes ? " Notes: {$_sNotes}" : '' )
                   . " -->"
-                : "<div class='warning'><p>"
-                    . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
-                    . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
-                  . "</p></div>";
+                : "<div class='warning' data-type='{$this->sUnitType}' data-id='{$_iUnitID}'>"
+                    . "<p>"
+                            . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
+                            . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
+                        . "</p>"
+                    . "</div>"
+                    . ( $_sNotes ? "<!-- Notes: {$_sNotes} -->" : '' );
         }
 
         /**
@@ -389,25 +389,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @return  array   An array holding hook objects.
          */
         private function ___getHooksSetPerOutput() {
-
             add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-            $_aHooks = array(
+            return array(
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByRating( $this ),
                 new AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts( $this ),
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ), // 3.10.0
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ), // 3.10.0
-                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ), // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByPrimeEligibility( $this ),  // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFBA( $this ),               // 3.10.0
+                new AmazonAutoLinks_UnitOutput__ProductFilter_ByFreeShipping( $this ),      // 3.10.0
                 new AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate( $this ),
                 new AmazonAutoLinks_UnitOutput__Credit( $this ),
                 new AmazonAutoLinks_UnitOutput__ErrorChecker( $this ),
+                new AmazonAutoLinks_UnitOutput__HTTPErrorChecks( $this ),
+                new AmazonAutoLinks_UnitOutput__CustomQueryArguments( $this ),              // 4.6.19
+                new AmazonAutoLinks_UnitOutput__AllowedInlineCSS( $this ),                  // 4.6.19
             );
-
-            // 3.7.5+
-            if ( $this->___hasCustomProductLinkURLQuery() ) {
-                add_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100, 4 );
-            }
-            return $_aHooks;
-
         }
 
         /**
@@ -419,7 +414,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___removeHooksPerOutput( array $aHooks ) {
             remove_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
-            remove_filter( 'aal_filter_product_link', array( $this, 'replyToModifyProductURLs' ), 100 );
             foreach( $aHooks as $_oHook ) {
                 $_oHook->__destruct();
             }
@@ -454,6 +448,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @remark      Not using include_once() because templates can be loaded multiple times.
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
+
+            $oOption = AmazonAutoLinks_Option::getInstance();
 
             // Include the template
             defined( 'WP_DEBUG' ) && WP_DEBUG
@@ -500,11 +496,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         $_sUnitStatusMetaKey = '_error';
         $_sError = $this->_getError( $aProducts );
+        $_sNotes = implode( ', ', $this->aNotes );
+        $_sNotes = $_sNotes ? ' ' . $_sNotes : '';
         if ( $_sError ) {
             update_post_meta(
                 $iUnitID, // post id
                 $_sUnitStatusMetaKey, // meta key
-                $_sError    // value
+                $_sError . $_sNotes    // value
             );
             return;
         }
@@ -512,6 +510,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // At this point, the response has no error.
 
         $_snStoredError = get_post_meta( $iUnitID, $_sUnitStatusMetaKey, true );
+         // $_snStoredError = $this->oUnitOption->get( '_error' ); // might save a database query
         if ( 'normal' !== $_snStoredError ) {
             update_post_meta(
                 $iUnitID, // post id
@@ -537,31 +536,61 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @param       array   $aProducts
      */
     protected function _getError( $aProducts ) {
-
-        // a: No items
-        if ( empty( $aProducts ) ) {
-            return __( 'No products found.', 'amazon-auto-links' );
+        $this->___setErrors( $aProducts );
+        $_sErrors = trim( implode( ' ', $this->aErrors ) );
+        if ( ! $_sErrors ) {
+            return $_sErrors;
         }
-
-        // b: items and errors
-        $_aError    = $this->getElement( $aProducts, array( 'Error' ), array() );
-        if (
-            ! empty( $_aError )
-            && isset( $aProducts[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
-        ) {
-            return '';
-        }
-
-        // c: only errors
-        if ( isset( $_aError[ 'Message' ] ) ) {
-            $_aError = $_aError + array( 'Code' => '' );
-            $_sCode  = $_aError[ 'Code' ] ? $_aError[ 'Code' ] . ': ' : '';
-            return $_sCode . $_aError[ 'Message' ];
-        }
-
-        // d: no error
-        return '';
+        $_aNotes  = array_map( array( $this, '___replyToGetPrintableNotes' ), $this->aNotes );
+        $_sNotes  = implode( ' ', $_aNotes );
+        $_sNotes  = $_sNotes ? ' ' . $_sNotes : '';
+        return $_sErrors . $_sNotes;
     }
+        /**
+         * @param  string $sNote
+         * @return string
+         * @since  4.6.17
+         */
+        private function ___replyToGetPrintableNotes( $sNote ) {
+            if ( false !== strpos( $sNote, 'BLOCKED_BY_CAPTCHA' ) ) {
+                $_aNoteParts = explode( '.', $sNote );
+                $_aNoteParts = explode( ':', $_aNoteParts[ 0 ] );
+                $_sGuide     = $this->getEnableHTTPProxyOptionMessage();
+                $_sGuide     = $_sGuide ? ' ' . $_sGuide : '';
+                return $_aNoteParts[ 1 ] . '.' . $_sGuide;
+            }
+            return $sNote;
+        }
+        /**
+         * @since  4.6.17   Moved from AmazonAutoLinks_UnitOutput_Base::_getError()
+         */
+        private function ___setErrors( $aProducts ) {
+
+            // a: No items
+            if ( empty( $aProducts ) ) {
+                $this->aErrors[] = __( 'No products found.', 'amazon-auto-links' );
+                return;
+            }
+
+            // b: items and errors
+            $_aError    = $this->getElement( $aProducts, array( 'Error' ), array() );
+            if (
+                ! empty( $_aError )
+                && isset( $aProducts[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
+            ) {
+                return;
+            }
+
+            // c: only errors
+            if ( isset( $_aError[ 'Message' ] ) ) {
+                $_aError = $_aError + array( 'Code' => '' );
+                $_sCode  = $_aError[ 'Code' ] ? $_aError[ 'Code' ] . ': ' : '';
+                $this->aErrors[] = $_sCode . $_aError[ 'Message' ];
+                return;
+            }
+
+            // d: no error
+        }
 
     /**
      * Renders the product links.

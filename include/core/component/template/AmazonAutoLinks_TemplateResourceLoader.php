@@ -51,7 +51,10 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
                 if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
                     continue;
                 }
-                $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php' );
+                if ( file_exists( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php' ) ) {
+                    include_once( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'functions.php' );
+                }
+
             }
         }
     
@@ -191,7 +194,9 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
                 if ( ! isset( $_aTemplate[ 'dir_path' ] ) ) {
                     continue;
                 }
-                $this->includeOnce( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' );
+                if ( file_exists( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' ) ) {
+                    include_once( $_aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'settings.php' );
+                }
             }
         }
   

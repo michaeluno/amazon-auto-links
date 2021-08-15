@@ -18,6 +18,9 @@
  */
 class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
 
+    /**
+     * @var array
+     */
     public $aURLs;
 
     /**
@@ -29,6 +32,12 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
      * @var array
      */
     public $aCaches = array();
+
+    /**
+     * @var   array
+     * @since 4.6.17
+     */
+    public $aCacheNames = array();
 
     /**
      * A flag that indicates whether HTTP requests have been made or not
@@ -53,9 +62,20 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
         foreach( array_unique( $aURLs ) as $_sURL ) {
             $_sCacheName = $this->_getCacheName( $_sURL, $this->aArguments, $this->sRequestType );
             $this->aURLs[ $_sCacheName ] = $_sURL;
+            $this->aCacheNames[ $_sURL ] = $_sCacheName;
         }
         $this->iCacheDuration = $iCacheDuration;
 
+    }
+
+    /**
+     * @return string
+     * @since  4.6.17
+     */
+    public function getCacheName( /* $sURL */ ) {
+        $_aParams = func_get_args() + array( '' );
+        $_sURL    = $_aParams[ 0 ];
+        return $this->getElement( $this->aCacheNames, array( $_sURL ), '' );
     }
 
     /**
@@ -79,6 +99,8 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
         $this->___setRequestProperties();
         $_aResponses = array();
         foreach( $this->aHTTPs as $_sURL => $_oHTTP ) {
+            $this->sURL = $_sURL;   // this property is passed to filters
+            $this->sCacheName = $this->getCacheName( $this->sURL );
             $_aResponses[ $_sURL ] = $_oHTTP->get();
         }
         return $_aResponses;
@@ -91,6 +113,8 @@ class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
         $this->___setRequestProperties();
         $_aResponses = array();
         foreach( $this->aHTTPs as $_sURL => $_oHTTP ) {
+            $this->sURL = $_sURL;   // this property is passed to filters
+            $this->sCacheName = $this->getCacheName( $this->sURL );
             $_aResponses[ $_sURL ] = $_oHTTP->getResponse();
         }
         return $_aResponses;

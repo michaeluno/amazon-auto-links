@@ -84,16 +84,16 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
      * @return      boolean
      */
     protected function isUserClickedAddNewLink( $sPostTypeSlug ) {
-        if ( 'post-new.php' !== $GLOBALS['pagenow'] ) {
+        if ( 'post-new.php' !== $GLOBALS[ 'pagenow' ] ) {
             return false;
         }
-        if ( 1 !== count( $_GET ) ) {
+        if ( 1 !== count( $_GET ) ) {                       // sanitization unnecessary as just checking
             return false;
         }
-        if ( ! isset( $_GET[ 'post_type' ] ) ) {
+        if ( ! isset( $_GET[ 'post_type' ] ) ) {            // sanitization unnecessary as just checking
             return false;
         }
-        return $sPostTypeSlug === $_GET[ 'post_type' ];            
+        return $sPostTypeSlug === $_GET[ 'post_type' ];     // sanitization unnecessary as just checking
     }
 
     /**

@@ -19,7 +19,6 @@
                 type: "post",
                 dataType: 'json',
                 url: aalRatingPrompt.ajaxURL,
-                // Data set to $_POST and $_REQUEST
                 data: {
                     action: aalRatingPrompt.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalRatingPrompt.nonce,   // the nonce value set in template.php

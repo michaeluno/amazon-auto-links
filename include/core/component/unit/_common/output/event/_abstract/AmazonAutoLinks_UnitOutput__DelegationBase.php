@@ -15,6 +15,9 @@
  */
 abstract class AmazonAutoLinks_UnitOutput__DelegationBase extends AmazonAutoLinks_UnitOutput_Utility {
 
+    /**
+     * @var AmazonAutoLinks_UnitOutput_Base
+     */
     protected $_oUnitOutput;
 
     /**
@@ -38,6 +41,7 @@ abstract class AmazonAutoLinks_UnitOutput__DelegationBase extends AmazonAutoLink
 
         $this->_oUnitOutput = $oUnitOutput;
 
+        $this->_construct();    // should be before _shouldProceed() as _shouldProceed() may refer to properties set in _construct()
         if ( ! $this->_shouldProceed() ) {
             return;
         }
@@ -46,8 +50,6 @@ abstract class AmazonAutoLinks_UnitOutput__DelegationBase extends AmazonAutoLink
         $this->_aActionArguments = $this->_getActionArguments();
         $this->___addHooks( $this->_aFilterArguments, 'add_filter' );
         $this->___addHooks( $this->_aActionArguments, 'add_action' );
-
-        $this->_construct();
 
     }
         /**

@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Log Item Filters
- * @version 1.0.3
+ * @version 1.0.5
  */
 (function($){
 
@@ -15,7 +15,7 @@
         if ( ! _canLoad() ) {
             return;
         }
-        _debugLog( 'Amazon Auto Links', 'Log Filter Script', aalLog );
+        _debugLog( 'Log Filter Script', aalLog );
 
         // Clipboard
         $( '.copy-to-clipboard' ).click( function (event) {
@@ -127,19 +127,19 @@
     });
 
     function _debugLog( ...args ) {
-        if ( ! aalLog.debugMode ) {
+        if ( ! parseInt( aalLog.debugMode ) ) {
             return;
         }
-        console.log( ...args );
+        console.log( aalLog.pluginName, ...args );
     }
 
     function _canLoad() {
         if ( 'undefined' === typeof aalLog ) {
-            console.log( 'Amazon Auto Links:', 'the lof filter script is not loaded.' );
+            console.log( 'the log filter script is not loaded.' );
             return false;
         }
         if ( 'undefined' === typeof aalCopyToClipboard ) {
-            console.log( 'Amazon Auto Links:', 'the utility script is not loaded.' );
+            console.log( 'the utility script is not loaded.' );
             return false;
         }
         return true;

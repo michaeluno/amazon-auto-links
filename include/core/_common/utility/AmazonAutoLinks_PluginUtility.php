@@ -263,8 +263,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             return false;
         }
         return in_array(
-            self::getElement( $_GET, 'post_type' ),
-            AmazonAutoLinks_Registry::$aPostTypes
+            self::getElement( $_GET, 'post_type' ), // sanitization unnecessary as just checking
+            AmazonAutoLinks_Registry::$aPostTypes,
+            true
         );
 
     }
@@ -414,7 +415,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return      string
      */
     static public function getCommentCredit() {
-        return '<!-- Rendered with Amazon Auto Links by miunosoft -->';
+        return "<!-- Rendered with " . AmazonAutoLinks_Registry::NAME . " by miunosoft -->";
     }
     
     /**
@@ -756,6 +757,19 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             ) + $aAdditionalQuery,
             admin_url( 'edit.php' )
         );
+    }
+
+    /**
+     * @return string
+     * @since  4.6.17 Moved from `AmazonAutoLinks_UnitOutput_embed::___getGuideMessageForErrors()`.
+     */
+    static public function getEnableHTTPProxyOptionMessage() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return '';
+        }
+        $_sURLAdminProxyTab = self::getProxySettingScreenURL();
+        return '* ' . __( 'Message for administrator', 'amazon-auto-links' ) . ': '
+            . sprintf( __( 'Consider enabling the %1$s option.', 'amazon-auto-links' ), "<a href='" . esc_url( $_sURLAdminProxyTab ) . "' target='_blank'>" . __( 'HTTP Proxies', 'amazon-auto-links' ) . "</a>" );
     }
 
     /**

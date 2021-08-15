@@ -28,13 +28,35 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
     public $aArguments  = array();
 
     /**
+     * @var   AmazonAutoLinks_PluginUtility
+     * @since 4.6.18
+     */
+    public $oUtil;
+
+    /**
+     * @var array Stores sanitized GET data
+     * @since 4.6.18
+     */
+    public $aREQUEST = array(
+        'page'      => null,
+        'action'    => null,
+        'template'  => null,
+        'orderby'   => null,
+        'order'     => null,
+    );
+
+    /**
      * Sets up properties and hooks.
      *
      * @param array $aData  The data to list.
      */
     public function __construct( array $aData ){
 
+        $this->oUtil = new AmazonAutoLinks_PluginUtility;
+
         $this->aData = $aData;
+
+        $this->aREQUEST = $this->oUtil->getArrayMappedRecursive( 'sanitize_text_field', $_REQUEST ) + $this->aREQUEST;
 
         // Set parent defaults
         $this->aArguments = array(
@@ -105,47 +127,51 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             $aItem[ 'id' ]  /*$2%s*/ // The value of the checkbox should be the record's id
         );
     }    
-    
+
     /**
      * 
      * @callback        filter      column_{$column_title}
      */ 
     public function column_name( $aItem ){    
-        
+
+        $_sWarning  = apply_filters( 'aal_filter_template_list_table_warning', '', $aItem ); // [4.6.17+]
+
         // Build row actions
-        $aActions = array();
+        $_aActions  = array();
+        $_aURLQuery = array(
+            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+            'page'      => $this->aREQUEST[ 'page' ],
+            'action'    => null,
+            'template'  => $aItem[ 'id' ],
+        );  
         if ( $aItem[ 'is_active' ] ) {
-            $aActions[ 'deactivate' ] = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Deactivate', 'amazon-auto-links' ) . '</a>', 
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $_REQUEST[ 'page' ], 
-                'deactivate', 
-                $aItem[ 'id' ]
-            );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'deactivate', ) + $_aURLQuery ) );
+            $_aActions[ 'deactivate' ] = "<a href='{$_sHref}'>" . __( 'Deactivate', 'amazon-auto-links' ) . '</a>';
         } else  {
-            $aActions[ 'activate' ]   = sprintf( 
-                '<a href="?post_type=%s&page=%s&action=%s&template=%s">' . __( 'Activate', 'amazon-auto-links' ) . '</a>', 
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], 
-                $_REQUEST[ 'page' ], 
-                'activate', 
-                $aItem[ 'id' ]
-            );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'activate', ) + $_aURLQuery ) );
+            $_aActions[ 'activate' ] = "<a href='{$_sHref}'>" . __( 'Activate', 'amazon-auto-links' ) . '</a>';
         }
-        $aActions = apply_filters( 
+        if ( $aItem[ 'should_remove' ] ) {
+            unset( $_aActions[ 'deactivate' ] );
+            $_sHref = esc_url( add_query_arg( array( 'action' => 'remove', ) + $_aURLQuery ) );
+            $_aActions[ 'remove' ] = "<a href='{$_sHref}'>" . __( 'Remove', 'amazon-auto-links' ) . '</a>';
+        }
+        $_aActions = apply_filters( 
             'aal_filter_template_listing_table_action_links', 
-            $aActions, 
+            $_aActions, 
             $aItem[ 'id' ]
-        );    
+        );
 
         // Return the title contents
         return sprintf(
-            '%1$s %2$s',    // <span style="color:silver">(id:%2$s)</span>
+            '%1$s %2$s %3$s',    // <span style="color:silver">(id:%2$s)</span>
             $aItem[ 'is_active' ]   /*$1%s*/ 
-                ? "<strong>{$aItem[ 'name' ]}</strong>" 
-                : $aItem[ 'name' ],
-            $this->row_actions( $aActions ) /*$2%s*/ 
+                ? "<div class='name-container'>" . $_sWarning . "<strong>{$aItem[ 'name' ]}</strong></div>"
+                : "<div class='name-container'>" . $_sWarning . $aItem[ 'name' ] . "</div>",
+            AmazonAutoLinks_Option::getInstance()->isDebug() ? "<div>ID: {$aItem[ 'id' ]}</div>" : '',
+            $this->row_actions( $_aActions, true ) /*$3%s*/
         );
-        
+
     }
 
     /**
@@ -154,7 +180,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      * @return string
      */
     public function column_thumbnail( $aItem ) {
-        
+
         $_sThumbnailPath = $this->___getThumbnailPath( $aItem );
         if ( ! file_exists( $_sThumbnailPath ) ) {
             return '';
@@ -209,7 +235,7 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         return sprintf(
             '%1$s <div class="active second">%2$s</div>',
             $aItem[ 'description' ],    /*$1%s*/ 
-            $this->row_actions( $aActions ) /*$2%s*/
+            $this->row_actions( $aActions, false ) /*$2%s*/
         );
 
     }
@@ -229,36 +255,53 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
      */
     public function process_bulk_action() {
 
-        if ( ! isset( $_REQUEST[ 'template' ] ) ) {
+        if ( isset( $this->aREQUEST[ 'action' ] ) && '-1' === ( ( string ) $this->aREQUEST[ 'action' ] ) ) {
+            do_action(
+                'aal_action_set_admin_setting_notice',
+                __( 'At least one item needs to be checked.', 'amazon-auto-links' ),
+                'error'
+            );
+            $this->___reload();
+        }
+
+        // Normal page load
+        if ( ! isset( $this->aREQUEST[ 'template' ] ) ) {
             return;
         }
-        
+
+        $_aTemplateIDs = $this->oUtil->getElementAsArray( $this->aREQUEST, array( 'template' ) );
         switch( strtolower( $this->current_action() ) ){
+            case 'remove': // [4.6.17]
+                do_action( 'aal_action_remove_templates', $_aTemplateIDs );
+                break;
             case 'activate':
-                do_action( 'aal_action_activate_templates', ( array ) $_REQUEST[ 'template' ] );
+                do_action( 'aal_action_activate_templates', $_aTemplateIDs );
                 break;
             case 'deactivate':
-                do_action( 'aal_action_deactivate_templates', ( array ) $_REQUEST[ 'template' ] );
+                do_action( 'aal_action_deactivate_templates', $_aTemplateIDs );
                 break;    
             default:
                 return;    // do nothing.
         }
 
         // Reload the page.
-        exit( 
-            wp_safe_redirect( 
-                add_query_arg( 
-                    array(
-                        'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                        'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
-                        'tab'       => 'table',
-                    ), 
-                    admin_url( $GLOBALS[ 'pagenow' ] ) 
-                )
-            )
-        );
-       
+        $this->___reload();
+
     }
+        private function ___reload() {
+            exit(
+                wp_safe_redirect(
+                    add_query_arg(
+                        array(
+                            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                            'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'template' ],
+                            'tab'       => 'table',
+                        ),
+                        admin_url( $GLOBALS[ 'pagenow' ] )
+                    )
+                )
+            );
+        }
 
     /**
      * Sets up items for table rows.
@@ -324,8 +367,8 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
         public function usort_reorder( $a, $b ) {
             
             // If no sort, default to title
-            $sOrderBy = ( ! empty( $_REQUEST[ 'orderby' ] ) )
-                ? $_REQUEST[ 'orderby' ]
+            $sOrderBy = ( ! empty( $this->aREQUEST[ 'orderby' ] ) )
+                ? $this->aREQUEST[ 'orderby' ]
                 : 'name'; 
             if ( 'description' === $sOrderBy ) {
                 $sOrderBy = 'description';
@@ -334,9 +377,9 @@ class AmazonAutoLinks_ListTable_Template extends WP_List_Table {
             }
                         
             // If no order, default to asc
-            $sOrder = empty( $_REQUEST['order'] )
+            $sOrder = empty( $this->aREQUEST['order'] )
                 ? 'asc'
-                : $_REQUEST['order'];
+                : $this->aREQUEST['order'];
                 
             // Determine sort order
             $result = isset( $a[ $sOrderBy ], $b[ $sOrderBy ] )

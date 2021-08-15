@@ -15,13 +15,23 @@
  * @since       3.1.0
 */
 class AmazonAutoLinks_TemplateLoader {
-    
+
+    /**
+     * @var   string
+     * @since 4.6.17
+     */
+    static $sDirPath;
+
     /**
      * Loads necessary components.
      */
     public function __construct( $sScriptPath ) {
 
+        self::$sDirPath = dirname( __FILE__ );
+
         new AmazonAutoLinks_Template_Event_Action_ActivationStatus;
+        new AmazonAutoLinks_Template_Event_Filter_TemplateListWarning;  // [4.6.17+]
+        new AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader;     // [4.6.18+]
         new AmazonAutoLinks_TemplateResourceLoader;
         
         if ( is_admin() ) {
@@ -56,7 +66,5 @@ class AmazonAutoLinks_TemplateLoader {
        
         
     }
-    
-  
     
 }

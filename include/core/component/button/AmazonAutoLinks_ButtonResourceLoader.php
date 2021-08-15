@@ -54,12 +54,13 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
 
         // Add style tags only in the button listing page for preview.
         if ( 
-            isset( $_GET[ 'post_type' ] )
+            isset( $_GET[ 'post_type' ] )   // sanitization unnecessary as just checking
             && in_array( 
-                $_GET[ 'post_type' ],
+                $_GET[ 'post_type' ],       // sanitization unnecessary as just checking
                 array(
                     AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
-                )
+                ),
+                true
             )
         ) {                    
             add_action(

@@ -20,16 +20,17 @@ class AmazonAutoLinks_WPUtility_Path extends AmazonAutoLinks_Utility {
      * @since       3
      * @return      string
      */
-    static public function getAbsolutePathFromRelative( $sRelativePath ) {
-        
+    static public function getAbsolutePathFromRelative( $sRelativePath, $sBasePath='' ) {
+
+        $_sBasePath     = $sBasePath ? $sBasePath : ABSPATH;
+
         // removes the heading ./ or .\ 
         $sRelativePath  = preg_replace( "/^\.[\/\\\]/", '', $sRelativePath, 1 );    
         
         // removes the leading slash and backslashes.
         $sRelativePath  = ltrim( $sRelativePath,'/\\'); 
 
-        // APSPATH has a trailing slash.
-        return ABSPATH . $sRelativePath;    
+        return trailingslashit( $_sBasePath ) . $sRelativePath;
     }
     
    

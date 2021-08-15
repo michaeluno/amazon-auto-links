@@ -15,7 +15,7 @@
  * @since       2
  * @since       3       Changed the name from `AmazonAutoLinks_WPUtilities`.
  */
-class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
+class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
      * @return boolean
@@ -308,21 +308,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
                 ),
         );        
     }
-    
-    /**
-     * Checks multiple file existence.
-     *
-     * @param       array|string    $asFilePaths
-     * @return      boolean
-     */
-    static public function doFilesExist( $asFilePaths ) {        
-        foreach( self::getAsArray( $asFilePaths ) as $_sFilePath ) {
-            if ( ! file_exists( $_sFilePath ) ) {
-                return false;
-            }
-        }                
-        return true;
-    }
 
     /**
      * Returns an array of the installed taxonomies on the site.
@@ -359,58 +344,9 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_HTTP {
      */
     public static function getCurrentAdminURL() {
         return add_query_arg( 
-            $_GET, 
+            self::getHTTPQueryGET(),
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
     }
-        
-    /**
-     * Escapes the given string for the KSES filter with the criteria of allowing/disallowing tags and the protocol.
-     * 
-     * @remark      Attributes are not supported at this moment.
-     * @param       string      $sString
-     * @param       array       $aAllowedTags               e.g. array( 'noscript', 'style', )
-     * @param       array       $aAllowedProtocols
-     * @param       array       $aDisallowedTags            e.g. array( 'table', 'tbody', 'thoot', 'thead', 'th', 'tr' )
-     * @param       array       $aAllowedAttributes         e.g. array( 'rel', 'itemtype', 'style' )
-     * @since       2.0.0
-     * @since       3.1.0       Added the $aAllowedAttributes parameter.
-     * @return      string
-     */
-    static public function escapeKSESFilter( $sString, $aAllowedTags=array(), $aDisallowedTags=array(), $aAllowedProtocols=array(), $aAllowedAttributes=array() ) {
-
-        $aFormatAllowedTags = array();
-        foreach( $aAllowedTags as $sTag ) {
-            $aFormatAllowedTags[ $sTag ] = array();    // activate the inline style attribute.
-        }
-        $aAllowedHTMLTags = AmazonAutoLinks_Utility::uniteArrays( $aFormatAllowedTags, $GLOBALS['allowedposttags'] );    // the first parameter takes over the second.
-        
-        foreach ( $aDisallowedTags as $sTag ) {
-            if ( isset( $aAllowedHTMLTags[ $sTag ] ) ) {
-                unset( $aAllowedHTMLTags[ $sTag ] );
-            }
-        }
-        
-        // Set allowed attributes.
-        $_aFormattedAllowedAttributes = array_fill_keys( $aAllowedAttributes, 1 );
-        foreach( $aAllowedHTMLTags as $_sTagName => $_aAttributes ) {
-            $aAllowedHTMLTags[ $_sTagName ] = $_aAttributes + $_aFormattedAllowedAttributes;
-        }
-        
-        if ( empty( $aAllowedProtocols ) ) {
-            $aAllowedProtocols = wp_allowed_protocols();            
-        }
-            
-        $sString = addslashes( $sString );                    // the original function call was doing this - could be redundant but haven't fully tested it
-        $sString = stripslashes( $sString );                    // wp_filter_post_kses()
-        $sString = wp_kses_no_null( $sString );                // wp_kses()
-        $sString = wp_kses_normalize_entities( $sString );    // wp_kses()
-        $sString = wp_kses_hook( $sString, $aAllowedHTMLTags, $aAllowedProtocols ); // WP changed the order of these funcs and added args to wp_kses_hook
-        $sString = wp_kses_split( $sString, $aAllowedHTMLTags, $aAllowedProtocols );        
-        $sString = addslashes( $sString );                // wp_filter_post_kses()
-        $sString = stripslashes( $sString );                // the original function call was doing this - could be redundant but haven't fully tested it
-        return $sString;
-        
-    }        
 
 }

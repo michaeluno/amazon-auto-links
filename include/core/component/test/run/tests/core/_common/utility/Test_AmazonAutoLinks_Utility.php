@@ -145,22 +145,6 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     /**
-     * @purpose The second call with the same path should return false.
-     * @return bool
-     * @tags file
-     * @throws Exception
-     */
-    public function test_includeOnce() {
-
-        $_sVar = $this->includeOnce( dirname( __FILE__ ) . '/include-once.php' );
-        if ( 'foo' !== $_sVar ) {
-            throw new Exception( 'The file is not included.' );
-        }
-        return false === $this->includeOnce( dirname( __FILE__ ) . '/include-once.php' );;
-
-    }
-
-    /**
      * @return bool
      */
     public function test_isEmpty() {

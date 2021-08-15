@@ -1,6 +1,7 @@
 /test export-ignore  
 /tool export-ignore
 _note export-ignore
+/include/core/component/test export-ignore
 
 .gitattributes export-ignore  
 .gitignore export-ignore

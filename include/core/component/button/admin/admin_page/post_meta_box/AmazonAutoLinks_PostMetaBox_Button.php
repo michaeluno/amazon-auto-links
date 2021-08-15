@@ -47,11 +47,9 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
          * @callback        action      admin_head
          */
         public function replyToPrintCustomStyleTag() {
-            // echo "<style type='text/css'></style>";
             echo "<style type='text/css' id='amazon-auto-links-button-style'>" . PHP_EOL
                     . '.amazon-auto-links-button {}' . PHP_EOL
-                . "</style>";                    
-                
+                . "</style>";
         }
         
         /**
@@ -83,8 +81,8 @@ abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminP
                     'handle_id'    => 'aal_button_script_preview_updater',
                     'dependencies' => array( 'jquery' ),
                     'translation'  => array(
-                        'post_id' => isset( $_GET[ 'post' ] )
-                            ? $_GET[ 'post' ]
+                        'post_id' => isset( $_GET[ 'post' ] )   // sanitization unnecessary as just checking
+                            ? absint( $_GET[ 'post' ] )         // sanitization done
                             : '___button_id___',
                     ),
                     'in_footer'    => true,

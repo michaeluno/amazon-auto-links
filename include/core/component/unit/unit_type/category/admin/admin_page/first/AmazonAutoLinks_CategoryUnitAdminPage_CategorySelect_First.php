@@ -83,11 +83,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
             $oFactory->setFieldErrors( $_aErrors );     
             $oFactory->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
             return $aInput;
-        }        
-             
-        // $aInput[ 'transient_id' ] = isset( $_REQUEST[ 'transient_id' ] )
-            // ? $_REQUEST[ 'transient_id' ]
-            // : AmazonAutoLinks_Registry::TRANSIENT_PREFIX . '_CreateUnit_' . uniqid();
+        }
+
         $aInput[ 'bounce_url' ]   = add_query_arg(
             array(  
                 'transient_id'  => $aInput[ 'transient_id' ],
@@ -95,14 +92,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
                 'page'          => $this->sPageSlug, // AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
                 'tab'           => $this->sTabSlug, // 'first'
             ) 
-            + $_GET,
+            + $this->getHTTPQueryGET(),
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
-        // @deprecated 4.2.0 Not necessary
-//        $oFactory->setSettingNotice(
-//            __( 'Select a category from the below list.', 'amazon-auto-links' ),
-//            'updated'
-//         );
+
         $oFactory->setSettingNotice( '' ); // disable the message
          
         // Store the inputs for the next time.

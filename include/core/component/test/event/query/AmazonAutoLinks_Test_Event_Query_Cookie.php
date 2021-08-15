@@ -16,10 +16,10 @@
 class AmazonAutoLinks_Test_Event_Query_Cookie {
 
     public function __construct() {
-        if ( ! isset( $_GET[ 'aal_test' ] ) ) {
+        if ( ! isset( $_GET[ 'aal_test' ] ) ) {     // sanitization unnecessary as just checking
             return;
         }
-        if ( 'cookie' !== $_GET[ 'aal_test' ] ) {
+        if ( 'cookie' !== $_GET[ 'aal_test' ] ) {   // sanitization unnecessary as just checking
             return;
         }
         $this->___setCookies();

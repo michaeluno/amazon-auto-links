@@ -1,11 +1,11 @@
 <?php
 /**
- *    Plugin Name:    Amazon Auto Links
+ *    Plugin Name:    Auto Amazon Links
  *    Plugin URI:     https://en.michaeluno.jp/amazon-auto-links
- *    Description:    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *    Description:    Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *    Author:         Michael Uno (miunosoft)
  *    Author URI:     http://michaeluno.jp
- *    Version:        4.6.15
+ *    Version:        4.6.20
  *    Text Domain:    amazon-auto-links
  *    Domain Path:    /language
  */
@@ -18,9 +18,9 @@
  */
 class AmazonAutoLinks_Registry_Base {
 
-    const VERSION        = '4.6.15';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
-    const NAME           = 'Amazon Auto Links';
-    const DESCRIPTION    = 'Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+    const VERSION        = '4.6.20';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const NAME           = 'Auto Amazon Links';
+    const DESCRIPTION    = 'Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI            = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR         = 'miunosoft (Michael Uno)';
     const AUTHOR_URI     = 'https://en.michaeluno.jp/';
@@ -158,8 +158,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     static public $aUserMeta = array(
         // key => meta key
-        'first_saved'   => 'aal_first_saved',
-        'rated'         => 'aal_rated',
+        'first_saved'        => 'aal_first_saved',
+        'rated'              => 'aal_rated',
+        'load_new_templates' => 'aal_load_new_templates',
     );
         
     /**

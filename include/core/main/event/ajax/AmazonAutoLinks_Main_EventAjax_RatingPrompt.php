@@ -19,10 +19,18 @@ class AmazonAutoLinks_Main_EventAjax_RatingPrompt extends AmazonAutoLinks_AjaxEv
     protected $_bGuest = false;
 
     /**
-     * @param array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array();
+    }
+
+    /**
      * @return string
      * @throws Exception
+     * @param  array     $aPost Unused at the moment.
      */
     protected function _getResponse( array $aPost ) {
 

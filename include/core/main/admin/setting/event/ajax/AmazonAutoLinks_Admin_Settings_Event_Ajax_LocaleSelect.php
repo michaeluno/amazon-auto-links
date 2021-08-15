@@ -22,26 +22,28 @@ class AmazonAutoLinks_Admin_Settings_Event_Ajax_LocaleSelect extends AmazonAutoL
     protected function _construct() {}
 
     /**
-     * @param  array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'locale' => sanitize_text_field( $this->getElement( $aPost, array( 'locale' ), '' ) ),
+        );
+    }
+
+    /**
      * @return array
      * @throws Exception        Throws a string value of an error message.
      * @since  4.3.0
+     * @param  array     $aPost Contains the sanitized `locale` POST element.
      */
     protected function _getResponse( array $aPost ) {
-
         $_sLocale = $this->getElement( $aPost, array( 'locale' ), '' );
-
-//        $_aErrors = array();
-//        if ( ! empty( $_aErrors ) ) {
-//            throw new Exception( implode( '', $_aErrors ) );
-//        }
-
         return array(
             'language'  => $this->___getLanguageSelectOptionsByLocale( $_sLocale ),
             'currency'  => $this->___getCurrencySelectOptionsByLocale( $_sLocale ),
         );
-
     }
 
         /**

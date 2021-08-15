@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Plugin Tests
- * @version 1.1.3
+ * @version 1.1.4
  */
 (function($){
 
@@ -16,7 +16,7 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof aalTests ) {
-            console.log( 'Amazon Auto Links', 'The test script failed to load' );
+            console.log( 'The test script failed to load' );
             return;
         }
 
@@ -103,7 +103,6 @@
                 dataType: 'json',
                 async: true,
                 url: aalTests.ajaxURL,
-                // Data set to $_POSt and $_REQUEST
                 data: {
                     action: aalTests.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalTests.nonce,   // the nonce value set in template.php
@@ -282,7 +281,7 @@
         if ( ! parseInt( aalTests.debugMode ) ) {
             return;
         }
-        console.log( 'AAL Unit Tests:', ...message );
+        console.log( aalTests.pluginName + ' Unit Tests:', ...message );
     }
 
 }(jQuery));

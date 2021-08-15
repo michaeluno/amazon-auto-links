@@ -1,6 +1,6 @@
 /**
  * @name Now-Retrieving Updater
- * @version 1.0.3
+ * @version 1.0.4
  */
 (function($){
 
@@ -10,7 +10,7 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof( aalNowRetrieving ) ) {
-            console.log( 'Amazon Auto Links', 'Now-Retrieving Updater', 'Failed to load.' );
+            console.log( 'Now-Retrieving Updater: Failed to load.' );
             return;
         }
         processNowRetrieving( this );
@@ -66,7 +66,6 @@
             type: "post",
             dataType: 'json',
             url: aalNowRetrieving.ajaxURL,
-            // Data set to $_POST and $_REQUEST
             data: {
                 action: aalNowRetrieving.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                 aal_nonce: aalNowRetrieving.nonce,   // the nonce value

@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name PA-API check
- * @version 1.0.0
+ * @version 1.0.2
  */
 (function($){
 
@@ -77,7 +77,6 @@
                 async: true,
                 cache: true,
                 url: aalPAAPICheck.ajaxURL,
-                // Data set to $_POST and $_REQUEST
                 data: {
                     action: aalPAAPICheck.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                     aal_nonce: aalPAAPICheck.nonce,   // the nonce value set in template.php
@@ -149,7 +148,7 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalPAAPICheck.debugMode ) {
+        if ( ! parseInt( aalPAAPICheck.debugMode ) ) {
             return;
         }
         console.log( aalPAAPICheck.pluginName, aalPAAPICheck.scriptName, ...args );
@@ -157,7 +156,7 @@
 
     function _canLoad() {
         if ( 'undefined' === typeof aalPAAPICheck ) {
-            console.log( 'Amazon Auto Links:', 'the PA-API check script is not loaded.' );
+            console.log( 'the PA-API check script is not loaded.' );
             return false;
         }
         return true;

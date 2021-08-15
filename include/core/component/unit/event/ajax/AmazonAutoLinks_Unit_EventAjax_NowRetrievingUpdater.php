@@ -30,11 +30,21 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
     }
 
     /**
-     * @param array $aPost
-     *
+     * @param  array $aPost Passed POST data.
+     * @return array
+     * @since  4.6.18
+     */
+    protected function _getPostSanitized( array $aPost ) {
+        return array(
+            'items' => $this->getElementAsArray( $aPost, array( 'items' ) ),
+        );
+    }
+
+    /**
      * @return string|array
      * @throws Exception        Throws a string value of an error message.
-     * @since 4.3.0
+     * @since  4.3.0
+     * @param array $aPost      POST data array containing, the `items` array element.
      */
     protected function _getResponse( array $aPost ) {
 
@@ -76,7 +86,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          *             [language] => (string, length: 5) it_IT
          *             [currency] => (string, length: 3) EUR
          *             [type] => (string, length: 6) search
-         *             [locale] => (string, length: 2) IT`
+         *             [locale] => (string, length: 2) IT
          *          )
          *      ),
          *     [B08FHT7ZVH|IT|EUR|it_IT] => Array(
@@ -121,7 +131,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             }
             foreach( $_aItemsByLocale as $_sLocale => $_aItems ) {
                 $_aFirstItem     = reset( $_aItems );
-                $_iCacheDuration = $this->getElement( $_aFirstItem, array( 'cache_duration' ) );
+                $_iCacheDuration = ( integer ) $this->getElement( $_aFirstItem, array( 'cache_duration' ) );
                 do_action( 'aal_action_update_products_with_ad_widget_api', $_sLocale, $_aItems, $_iCacheDuration, false );
             }
         }
@@ -205,7 +215,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }
         /**
          * @return array An array holding sets of unit options, separated by locale-currency-language.
-         * @param  array $aAllItems Due items to update.
+         * @param  array $aAllItems Items to update.
          * @since  4.3.0
          */
         private function ___getUnitOptionSets( array $aAllItems ) {

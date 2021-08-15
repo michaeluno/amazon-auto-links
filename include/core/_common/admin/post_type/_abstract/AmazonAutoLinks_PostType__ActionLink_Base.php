@@ -11,10 +11,10 @@
  * A base class of custom action link components for the plugin custom post types.
  *
  * @remark The action link needs to have the following GET request parameters
- *  - $_GET[ 'custom_action' ],
- *  - $_GET[ 'nonce' ],
- *  - $_GET[ 'post' ],
- *  - $_GET[ 'post_type' ]
+ *  - GET[ 'custom_action' ],
+ *  - GET[ 'nonce' ],
+ *  - GET[ 'post' ],
+ *  - GET[ 'post_type' ]
  *
  * @since       3.7.8
  */
@@ -108,10 +108,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
         if ( $sDoAction !== $this->_sActionSlug ) {
             return $sSendbackURL;
         }
-        $aPostIDs = is_array( $aPostIDs )
-            ? $aPostIDs
-            : array( $aPostIDs );
-        $this->_doAction( $aPostIDs );
+        $this->_doAction( $this->getAsArray( $aPostIDs ) );
         return $sSendbackURL;
     }
 
@@ -144,8 +141,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
         if ( ! $this->___shouldDoAction() ) {
             return;
         }
-        $_sNonce = $this->getElement( $_GET, 'nonce' );
-        if ( ! wp_verify_nonce( $_sNonce, $this->_sNonceKey ) ) {
+        if ( ! wp_verify_nonce( $this->getElement( $_GET, 'nonce' ), $this->_sNonceKey ) ) {    // sanitization unnecessary
             new AmazonAutoLinks_AdminPageFramework_AdminNotice(
                 __( 'The action could not be processed.', 'amazon-auto-links' ),
                 array(
@@ -155,7 +151,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
             return;
         }
 
-        $this->_doAction( $_GET[ 'post' ] );
+        $this->_doAction( absint( $_GET[ 'post' ] ) );  // sanitization done
 
         $this->___reload();
 
@@ -165,21 +161,23 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
          */
         private function ___shouldDoAction() {
 
+            $_aGET = $_GET; // sanitization unnecessary as just checking values. It's better not sanitized to let it fail checks when modified unexpectedly
+
             // If a WordPress action is performed, do nothing.
-            if ( isset( $_GET[ 'action' ] ) ) {
+            if ( isset( $_aGET[ 'action' ] ) ) {
                 return false;
             }
             $_bIsRequiredKeysSent = isset(
-                $_GET[ 'custom_action' ],
-                $_GET[ 'nonce' ],
-                $_GET[ 'post' ],
-                $_GET[ 'post_type' ]
+                $_aGET[ 'custom_action' ],
+                $_aGET[ 'nonce' ],
+                $_aGET[ 'post' ],
+                $_aGET[ 'post_type' ]
             );
             if ( ! $_bIsRequiredKeysSent ) {
                 return false;
             }
 
-            return $_GET[ 'custom_action' ] === $this->_sActionSlug;
+            return $_aGET[ 'custom_action' ] === $this->_sActionSlug;
 
         }
 
@@ -191,7 +189,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
             $_aArguments   = array(
                 'post_type' => $this->_oFactory->oProp->sPostType,
             );
-            $_iPaged = $this->getElement( $_GET, 'paged' );
+            $_iPaged = ( integer ) $this->getElement( $_GET, 'paged' );   // sanitization done
             if ( $_iPaged ) {
                 $_aArguments[ 'paged' ] = $_iPaged;
             }

@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Default Settings Submit
- * @version 1.0.0
+ * @version 1.0.2
  */
 (function($){
 
@@ -15,7 +15,7 @@
         if ( ! _canLoad() ) {
             return;
         }
-        _debugLog( 'Amazon Auto Links', 'Submit Script', aalSubmit );
+        _debugLog( 'Submit Script', aalSubmit );
 
         $( '.reset-defaults' ).click( function( event ) {
 
@@ -38,15 +38,15 @@
 
 
     function _debugLog( ...args ) {
-        if ( ! aalSubmit.debugMode ) {
+        if ( ! parseInt( aalSubmit.debugMode ) ) {
             return;
         }
-        console.log( ...args );
+        console.log( aalSubmit.pluginName, ...args );
     }
 
     function _canLoad() {
         if ( 'undefined' === typeof aalSubmit ) {
-            console.log( 'Amazon Auto Links:', 'the submit script is not loaded.' );
+            console.log( 'The submit script is not loaded.' );
             return false;
         }
         return true;

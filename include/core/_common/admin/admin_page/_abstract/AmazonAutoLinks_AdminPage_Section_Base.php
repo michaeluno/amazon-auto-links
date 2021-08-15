@@ -89,7 +89,7 @@ abstract class AmazonAutoLinks_AdminPage_Section_Base extends AmazonAutoLinks_Ad
      */
     private function ___addSection( $oFactory, $sPageSlug, array $aSectionDefinition ) {
         
-        add_action( 
+        add_filter(
             'validation_' . $oFactory->oProp->sClassName . '_' . $this->sSectionID,
             array( $this, 'validate' ), 
             10, 

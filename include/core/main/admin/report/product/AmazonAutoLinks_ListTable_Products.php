@@ -80,7 +80,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
 
         switch( strtolower( $this->current_action() ) ){
             case 'delete':
-                $this->___deleteItems( ( array ) $_REQUEST[ 'object_id' ] );
+                $this->___deleteItems( $this->oUtil->getElementAsArray( $this->aREQUEST, array( 'object_id' ) ) );
                 break;
             default:
                 return;    // do nothing.
@@ -89,7 +89,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         // Reload the page.
         exit(
             wp_safe_redirect(
-                remove_query_arg( array( 'action', 'object_id' ), add_query_arg( $_GET, admin_url( $GLOBALS[ 'pagenow' ] ) ) )
+                remove_query_arg( array( 'action', 'object_id' ), add_query_arg( $this->oUtil->getHTTPQueryGET(), admin_url( $GLOBALS[ 'pagenow' ] ) ) )
             )
         );
 
@@ -135,7 +135,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
             array(
                 'action' => 'delete',
                 'object_id' => $aItem[ 'object_id' ]
-            ) + $_GET,
+            ) + $_GET,  // sanitization done with esc_url() below
             admin_url( $GLOBALS[ 'pagenow' ] )
         );
         $_aActionLinks = array(
@@ -236,16 +236,16 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_sQuery = "SELECT * "
             . "FROM `" . $_oTable->getTableName() . "`";
-        if ( isset( $_REQUEST[ 's' ]) ) {
-            $_sQuery .= " WHERE asin ='" . $_REQUEST[ 's' ] . "'"
-                . ' OR title LIKE "%' . $_REQUEST[ 's' ] . '%"';
+        if ( isset( $this->aREQUEST[ 's' ]) ) {
+            $_sQuery .= " WHERE asin ='" . $this->aREQUEST[ 's' ] . "'"
+                . ' OR title LIKE "%' . $this->aREQUEST[ 's' ] . '%"';
         }
-        $_REQUEST[ 'orderby' ] = empty( $_REQUEST[ 'orderby' ] )
+        $this->aREQUEST[ 'orderby' ] = empty( $this->aREQUEST[ 'orderby' ] )
             ? 'modified_time'   // default
-            : $_REQUEST[ 'orderby' ];
-        if ( ! empty( $_REQUEST[ 'orderby' ] ) ) {
-            $_sQuery .= ' ORDER BY ' . esc_sql( $_REQUEST[ 'orderby' ] );
-            $_sQuery .= ! empty( $_REQUEST[ 'order' ] ) ? ' ' . esc_sql( $_REQUEST[ 'order' ] ) : ' DESC';
+            : $this->aREQUEST[ 'orderby' ];
+        if ( ! empty( $this->aREQUEST[ 'orderby' ] ) ) {
+            $_sQuery .= ' ORDER BY ' . esc_sql( $this->aREQUEST[ 'orderby' ] );
+            $_sQuery .= ! empty( $this->aREQUEST[ 'order' ] ) ? ' ' . esc_sql( $this->aREQUEST[ 'order' ] ) : ' DESC';
         }
         $_sQuery    .= " LIMIT " . $iPerPage;
         $_sQuery    .= ' OFFSET ' . ( ( $iPageNumber - 1 ) * $iPerPage );

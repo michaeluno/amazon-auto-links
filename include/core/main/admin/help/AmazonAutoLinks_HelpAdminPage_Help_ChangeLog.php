@@ -42,7 +42,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_ChangeLog extends AmazonAutoLinks_Admin
         $_oWPReadmeParser = new AmazonAutoLinks_AdminPageFramework_WPReadmeParser( 
             AmazonAutoLinks_Registry::$sDirPath . '/readme.txt'
         );    
-        echo "<h3>" . __( 'Change Log', 'amazon-auto-links' ) . "</h3>"
+        echo "<h3>" . esc_html__( 'Change Log', 'amazon-auto-links' ) . "</h3>"
             . $_oWPReadmeParser->getSection( 'Changelog' );    
 
     }

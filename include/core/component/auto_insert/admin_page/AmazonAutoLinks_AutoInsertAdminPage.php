@@ -108,7 +108,7 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
         $_oUtil        = new AmazonAutoLinks_WPUtility;
         $_iPostID      = $_oUtil->getCurrentPostID();
         $_aUnitOptions = $_iPostID 
-            ? $_oUtil->getPostMeta( $_GET[ 'post' ] )
+            ? $_oUtil->getPostMeta( absint( $_GET[ 'post' ] ) ) // sanitization done
             : array();
         return $aOptions + $_aUnitOptions + self::$aStructure_AutoInsertDefaultOptions;
      

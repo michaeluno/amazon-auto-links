@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.14
+    Version:        1.2.16
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -166,7 +166,7 @@
     vertical-align: middle;
 }
 .amazon-products-container-list .amazon-customer-rating-stars .review-stars {
-    display: inline-block;
+    display: inline;
     vertical-align: text-bottom;
     margin-right: 0.44em;
     line-height: 1;
@@ -181,7 +181,7 @@
     display: inline;
 }
 .amazon-products-container-list .amazon-customer-rating-stars .review-stars svg {
-    top: -3px;
+    top: -2px;
 }
 
 /* Button */
@@ -349,42 +349,30 @@
 }
 
 /* Widget Area */
-.widget .amazon-products-container-list .amazon-product-container,
-.widget-area .amazon-products-container-list .amazon-product-container
-{
+.amazon-auto-links-widget .amazon-products-container-list .amazon-product-container {
     padding-right: 1em;
 }
 /* Widget Area - Body */
-.widget .amazon-products-container-list .amazon-auto-links-product-body,
-.widget-area .amazon-products-container-list .amazon-auto-links-product-body
-{
+.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-body {
     width: auto;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 /* Widget Area - Images */
-.widget .amazon-products-container-list .amazon-auto-links-product-image,
-.widget-area .amazon-products-container-list .amazon-auto-links-product-image
-{
+.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-image {
     width: 100%;
     max-width: none;
 }
 /* Widget Area - Sub-images */
-.widget .amazon-products-container-list .sub-image-container,
-.widget-area .amazon-products-container-list .sub-image-container
-{
+.amazon-auto-links-widget .amazon-products-container-list .sub-image-container {
     margin: 0.4em 0.4em 0 0;
 }
-.widget .amazon-products-container-list .sub-images,
-.widget-area .amazon-products-container-list .sub-images
-{
+.amazon-auto-links-widget .amazon-products-container-list .sub-images {
     margin-bottom: 1em;
 }
 /* Widget Area - Contents*/
-.widget .amazon-products-container-list .amazon-product-content *,
-.widget-area .amazon-products-container-list .amazon-product-content *
-{
+.amazon-auto-links-widget .amazon-products-container-list .amazon-product-content * {
     width: auto;
     display: inline-block;
     max-width: 100%;

@@ -34,9 +34,12 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_PageM
      * @return string
      */
     public function content( $sContent ) {
-        return $this->___getProInfo()
-            . $this->___getAffiliateInfo()
-            . $this->___getAnnouncements();
+        return "<div class='announcements'>"
+                . $this->___getProInfo()
+                . $this->___getAffiliateInfo()
+                . $this->___getCooperatorsWanted()
+            . "</div>";
+            // . $this->___getAnnouncements();
     }
         /**
          * @return      string
@@ -45,9 +48,9 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_PageM
             $_sProImage = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg', true ) );
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
-                : "<a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
+                : "<div class='announcement-item'><a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
                     . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}' alt='Amazon Auto Links Pro'/>"
-                . "</a>";            
+                . "</a></div>";
         }
         
         /**
@@ -59,30 +62,52 @@ class AmazonAutoLinks_AdminPageMetaBox_Information extends AmazonAutoLinks_PageM
             $_sLink = 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/';
             return $_bJoinedAffiliate
                 ? ''
-                : "<h4>" 
-                    . __( 'Join Affiliate Program ', 'admin-page-framework-loader' ) 
-                . "</h4>"            
-                . "<p>"
-                    . __( 'Earn commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
-                    . ' ' . sprintf( 
-                        __( '<a href="%1$s" target="_blank">Sign up</a> for the affiliate program first.', 'amazon-auto-links' ),
-                        $_sLink
-                    )
-                . "</p>"
-                . "<a href='{$_sLink}' target='_blank'>"
-                    . "<img style='max-width:100%; max-width: 250px;' src='"
-                        . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/tip/credit_link.jpg', true ) )
-                        . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>"
-                    . "</a>"
-                    ;
+                : "<div class='announcement-item'>"
+                    . "<h4>"
+                        . __( 'Join Affiliate Program   ', 'admin-page-framework-loader' )
+                    . "</h4>"
+                    . "<p>"
+                        . __( 'Earn commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
+                        . ' ' . sprintf(
+                            __( '<a href="%1$s" target="_blank">Sign up</a> for the affiliate program first.', 'amazon-auto-links' ),
+                            $_sLink
+                        )
+                    . "</p>"
+                    . "<a href='{$_sLink}' target='_blank'>"
+                        . "<img style='max-width:100%; max-width: 250px;' src='"
+                            . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/tip/credit_link.jpg', true ) )
+                            . "' alt='" . __( 'Credit Link', 'amazon-auto-links' ) . "'/>"
+                        . "</a>"
+                    . "</div>";
+        }
+
+        private function ___getCooperatorsWanted() {
+            $_sImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath .'/asset/image/information/cooperators-wanted.gif', true );
+            return "<div class='announcement-item'>"
+                    . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "<h4>"
+                        . __( 'Cooperators Wanted!', 'admin-page-framework-loader' )
+                    . "</h4>"
+                    . "<p>" . __( 'Be one of those and get discounts by contributing to the plugin development.', 'amazon-auto-links' ) . "</p>"
+                    . "<ul>"
+                        . "<li><strong>" . __( 'Beta Testers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can test the plugin and find problems.', 'amazon-auto-links' ) . "</li>"
+                        . "<li><strong>" . __( 'Template Designers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can code and design plugin templates.', 'amazon-auto-links' ) . "</li>"
+                        . "<li><strong>" . __( 'Graphic Designers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can design visual elements such as images for plugin pages.', 'amazon-auto-links' ) . "</li>"
+                        . "<li><strong>" . __( 'Translators', 'amazon-auto-links' ) . "</strong> - " . __( 'who can translate text used in the plugin.', 'amazon-auto-links' ) . "</li>"
+                        . "<li>" . __( 'And possibly not listed!', 'amazon-auto-links' ) . "</li>"
+                    . "</ul>"
+                    . "<p>" . sprintf( __( 'For more details please visit <a href="%1$s" target="_blank">here</a>', 'amazon-auto-links' ), esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/cooperators-wanted/' ) ). "</p>"
+                . "</div>"
+            ;
         }
 
         /**
          * @return string   The plugin announcement output.
+         * @deprecated 4.3.18
          */
         private function ___getAnnouncements() {
             $_sOutput = '';
-            $_oRSS    = new AmazonAutoLinks_RSSClient( 'https://feeds.feedburner.com/AmazonAutoLinks_Announcements' );
+            $_oRSS    = new AmazonAutoLinks_RSSClient( 'https://feeds.feedburner.com/AmazonAutoLinks_Announcements?1' );
             $_aItems  = $_oRSS->get();
             foreach( $_aItems as $_aItem ) {
                 $_sOutput .= "<h4>" . $_aItem[ 'title' ] . "</h4>"

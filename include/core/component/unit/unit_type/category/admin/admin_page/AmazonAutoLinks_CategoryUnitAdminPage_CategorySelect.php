@@ -27,6 +27,13 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
             // 'show_in_menu'  => false,
+            'script'        => array(
+                array(
+                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
+                    'in_footer'     => true,
+                ),
+            ),
         );
     }
 
@@ -62,14 +69,15 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
         if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }        
-        echo "<h3>" 
-                . __( 'Debug', 'amazon-auto-links' ) 
-                . ": " . __( 'Form Options', 'amazon-auto-links' )
-            . "</h3>"
-            . $oFactory->oDebug->get( 
-                // $oFactory->oProp->aOptions 
-                $oFactory->getSavedOptions()
-            );
+        echo "<div class='aal-accordion'>"
+                . "<h3>"
+                   . 'Debug: Form Options'
+                . "</h3>"
+                . "<div>" . $oFactory->oDebug->get(
+                    // $oFactory->oProp->aOptions
+                    $oFactory->getSavedOptions()
+                ) . "</div>"
+            . "</div>";
       
     }
 }

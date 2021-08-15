@@ -17,6 +17,18 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
      * @param  string $sURL
+     * @return string|false
+     * @since  4.6.18
+     */
+    static public function getURLSanitized( $sURL ) {
+        $sURL = strip_tags( $sURL );
+        $sURL = stripslashes( $sURL );
+        $sURL = trim( $sURL );
+        return filter_var( $sURL, FILTER_VALIDATE_URL );
+    }
+
+    /**
+     * @param  string $sURL
      * @return string
      * @since  4.3.4
      */
@@ -91,6 +103,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      *
      * @param       string          $sFilePath
      * @return      false|mixed     false on failure. Otherwise, the return value of the included file.
+     * @deprecated  4.6.17          Use include_once() as it doesn't have any performance issue as of PHP 5.
      */
     static public function includeOnce( $sFilePath ) {
 
@@ -114,6 +127,16 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      */
     static public function isEmpty( $mValue ) {
         return ( boolean ) empty( $mValue );
+    }
+
+    /**
+     * @remark Used as a callback such as with array_filter().
+     * @param  $mValue
+     * @return boolean
+     * @since  4.6.19
+     */
+    static public function isNotEmpty( $mValue ) {
+        return ! empty( $mValue );
     }
 
     /**

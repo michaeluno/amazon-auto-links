@@ -140,39 +140,9 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                 . $this->___getDetailListItem( __( 'ID', 'amazon-auto-links' ), $iPostID, 'unit-id', $iPostID )
                 . $this->___getDetailListItem( __( 'Country', 'amazon-auto-links' ), get_post_meta( $iPostID, 'country', true ), 'locale', $iPostID )
                 . $this->___getDetailListItem( __( 'Unit Type', 'amazon-auto-links' ), $this->___getUnitTypeLabel( get_post_meta( $iPostID, 'unit_type', true ) ), 'unit-type', $iPostID )
-                . $this->___getDetailListItem( __( 'Template', 'amazon-auto-links' ), $this->___getTemplateNameOfUnit( $iPostID ), 'template', $iPostID, array( $this, '___getWarningElementForTemplate' ) )
+                . $this->___getDetailListItem( __( 'Template', 'amazon-auto-links' ), $this->___getTemplateNameOfUnit( $iPostID ), 'template', $iPostID )
             . "</ul>";
     }
-        /**
-         * @param  $iPostID
-         * @since  4.6.6
-         * @return string
-         */
-        private function ___getWarningElementForTemplate( $iPostID ) {
-            $_sTemplateID     = AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id', null );
-            $_bTemplateExists = false;
-            if ( $_sTemplateID ) {
-                $_bTemplateExists = AmazonAutoLinks_TemplateOption::getInstance()->exists( $_sTemplateID );
-            }
-            $_sMessage    = $_bTemplateExists
-                ? sprintf(
-                    __( 'The template is not activated. Try activating the template via %1$s.', 'amazon-auto-links' ),
-                    __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Templates', 'amazon-auto-links' )
-                )
-                : sprintf(
-                   __( 'For some reasons, the template for the unit is not saved. Please consult the developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
-                   __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
-                );
-            return "<div class='warning-tooltip-content'>"
-                . "<p>"
-                   . $_sMessage
-                . "</p>"
-                . "<p>"
-                   . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
-                   . ( $_sTemplateID ? $_sTemplateID : __( 'Unsaved', 'amazon-auto-links' ) )
-                . "</p>"
-            . "</div>";
-        }
         /**
          * @param string $sUnitTypeSlug
          * @return string
@@ -183,68 +153,105 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             return AmazonAutoLinks_PluginUtility::getElement( $_aUnitTypeLabels, array( $sUnitTypeSlug ) );
         }
         /**
-         * @param  string   $sDetailTitle
-         * @param  string   $sDetailValue
-         * @param  string   $sContext
-         * @param  integer  $iPostID
-         * @param  callable $cWarning       A callback function to insert a warning element.
+         * @param  string           $sDetailTitle
+         * @param  string|WP_Error  $osDetailValue
+         * @param  string           $sContext
+         * @param  integer          $iPostID
          * @since  4.6.6
          * @return string 
          */
-        private function ___getDetailListItem( $sDetailTitle, $sDetailValue, $sContext, $iPostID, $cWarning=null ) {
-            if ( $sDetailValue ) {
+        private function ___getDetailListItem( $sDetailTitle, $osDetailValue, $sContext, $iPostID ) {
+            $_bIsWPError = is_wp_error( $osDetailValue );
+            if ( ! $_bIsWPError && $osDetailValue ) {
+                $_sDetailValue = $osDetailValue;
                 return "<li>"
                         . "<span class='detail-title'>{$sDetailTitle}:</span>"
-                        . "<span class='detail-value'>{$sDetailValue}</span>"
+                        . "<span class='detail-value'>{$_sDetailValue}</span>"
                     . "</li>";
             }
+            $_aErrorDefault  = array(
+                'message' => '',
+                'value'   => __( 'Unknown', 'amazon-auto-links' ),
+                'content' => '',
+            );
+            $_aError         = $_bIsWPError
+                ? array(
+                    'message' => $osDetailValue->get_error_message(),
+                ) + $osDetailValue->get_error_data()
+                  + $_aErrorDefault
+                : $_aErrorDefault;
             $_sWarningClass  = 'warning';
             $_sWarningIcon   = '<span class="icon-warning dashicons dashicons-warning"></span>';
-            $_sFallbackValue = __( 'Unknown', 'amazon-auto-links' );
             $_sID            = "detail-list-{$sContext}-{$iPostID}";
             return "<li data-has-warning='1' id='$_sID'>"
                     . "<span class='detail-title'>{$sDetailTitle}:<span class='warning'>{$_sWarningIcon}</span></span>"
                     . "<a href='#{$_sID}'>"    // to show an underline on mouse-hovering
-                        . "<span class='detail-value {$_sWarningClass}'>{$_sFallbackValue}</span>"
+                        . "<span class='detail-value {$_sWarningClass}'>{$_aError[ 'value' ]}</span>"
                     . "</a>"
-                    . ( is_callable( $cWarning ) ? call_user_func_array( $cWarning, array( $iPostID ) ) : '' )
+                    . ( $_bIsWPError
+                        ? "<div class='warning-tooltip-content'>"
+                            . $_aError[ 'content' ]
+                       . "</div>"
+                       : ""
+                  )
                 . "</li>";
         }
         /**
          * @param  integer $iPostID
-         * @return string
+         * @return string|WP_Error
          * @since  4.4.1
          */
         private function ___getTemplateNameOfUnit( $iPostID ) {
-            return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID(
-                untrailingslashit( AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id' ) ) // template id
-            );
+            $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
+            $_sTemplateID     = untrailingslashit( AmazonAutoLinks_PluginUtility::getPostMeta( $iPostID, 'template_id' ) ); // template id
+            $_sTemplateName   = $_oTemplateOption->getTemplateNameByID( $_sTemplateID );
+            return $_oTemplateOption->isActive( $_sTemplateID )
+                ? $_sTemplateName
+                : $this->___getTemplateDetailError( $_sTemplateID, $_sTemplateName );
         }
-
-    /**
-     * @callback        filter      cell_{post type slug}_{column key}
-     * @return          string
-     * @deprecated      4.4.1       Now displayed in the Details column.
-     */
-    // public function cell_amazon_auto_links_unit_type( $sCell, $iPostID ) {
-    //
-    //     $_sUnitType       = get_post_meta( $iPostID, 'unit_type', true );
-    //     $_aUnitTypeLabels = AmazonAutoLinks_PluginUtility::getUnitTypeLabels();
-    //     return isset( $_aUnitTypeLabels[ $_sUnitType ] )
-    //         ? $_aUnitTypeLabels[ $_sUnitType ]
-    //         : __( 'Unknown', 'amazon-auto-links' );
-    //
-    // }
-    /**
-     * @callback        filter      cell_{post type slug}_{column key}
-     * @return          string
-     * @deprecated      4.4.1       Now displayed in the Details column.
-     */
-    // public function cell_amazon_auto_links_template( $sCell, $iPostID ) {
-    //     return AmazonAutoLinks_TemplateOption::getInstance()->getTemplateNameByID(
-    //         untrailingslashit( get_post_meta( $iPostID, 'template_id', true ) ) // template id
-    //     );
-    // }
+            /**
+             * @param  string $sTemplateID
+             * @param  string $sTemplateName
+             * @return WP_Error
+             * @since  4.6.17
+             */
+            private function ___getTemplateDetailError( $sTemplateID, $sTemplateName ) {
+                return new WP_Error(
+                    'AAL_UNIT_TABLE_DETAIL_TEMPLATE',
+                    "The template {$sTemplateName} has an issue: {$sTemplateID}",
+                    array(
+                        'value'   => $sTemplateName ? $sTemplateName : __( 'Unknown', 'amaozn-auto-links' ),
+                        'content' => "<p>"
+                                . $this->___getTemplateDetailErrorMessage( $sTemplateID )
+                            . "</p>"
+                            . "<p>"
+                               . "<strong>" . __( 'Template ID', 'amazon-auto-links' ) . "</strong>: "
+                               . ( $sTemplateID ? $sTemplateID : __( 'Unsaved', 'amazon-auto-links' ) )
+                            . "</p>",
+                    )
+                );
+            }
+                /**
+                 * @param  string $sTemplateID
+                 * @return string
+                 * @since  4.6.17
+                 */
+                private function ___getTemplateDetailErrorMessage( $sTemplateID ) {
+                    $_bTemplateExists = false;
+                    if ( $sTemplateID ) {
+                        $_bTemplateExists = AmazonAutoLinks_TemplateOption::getInstance()->exists( $sTemplateID );
+                    }
+                    if ( $_bTemplateExists ) {
+                        return sprintf(
+                            __( 'The template is not activated. Try activating the template via %1$s.', 'amazon-auto-links' ) . ' ' . __( 'The default template will be applied instead.', 'amazon-auto-links' ),
+                            __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Templates', 'amazon-auto-links' )
+                        );
+                    }
+                    return sprintf(
+                       __( 'For some reasons, the template for the unit is not saved. If re-saving the unit does not solve the issue, consult the plugin developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
+                       __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
+                    );
+                }
 
     /**
      * @callback add_filter() cell_{post type slug}_{column name}

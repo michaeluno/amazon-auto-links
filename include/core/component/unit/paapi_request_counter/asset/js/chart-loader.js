@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Chart Loader
- * @version 1.0.1
+ * @version 1.0.3
  */
 (function($){
 
@@ -17,11 +17,11 @@
     $( document ).ready( function() {
 
         if ( 'undefined' === typeof aalChartJSLoader ) {
-            console.log( 'Amazon Auto Links', 'Chart Loader', 'The script dat is not passed.' );
+            debugLog( 'Chart Loader:', 'The script dat is not passed.' );
             return;
         }
         if ( aalChartJSLoader.debugMode ) {
-            console.log( 'Amazon Auto Links', 'Chart Loader', aalChartJSLoader );
+            debugLog( 'Chart Loader', aalChartJSLoader );
         }
 
         _oChartElement = $( '#' + aalChartJSLoader.chartID );
@@ -46,7 +46,6 @@
             async: true,
             cache: true,
             url: aalChartJSLoader.ajaxURL,
-            // Data set to $_POST and $_REQUEST
             data: {
                 action: aalChartJSLoader.actionHookSuffix,   // WordPress action hook name which follows after `wp_ajax_`
                 aal_nonce: aalChartJSLoader.nonce,   // the nonce value set in template.php
@@ -282,4 +281,12 @@
             }
             return sValue;
         }
+
+    function debugLog( ...args ) {
+        if ( ! parseInt( aalChartJSLoader.debugMode ) ) {
+            return;
+        }
+        console.log( aalChartJSLoader.pluginName + ' (Chart Loader):', ...args );
+    }
+
 }(jQuery));
