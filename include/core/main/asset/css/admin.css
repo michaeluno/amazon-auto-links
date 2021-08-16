@@ -23,6 +23,12 @@
 {
 	width: 76%;
 }
+.width-one-fourth {
+	width: 25%;
+}
+.width-one-fifth {
+	width: 20%;
+}
 
 .top-right {
 	margin: 0;
@@ -67,10 +73,21 @@ hr {
 	margin-bottom: 0.4em;
 }
 
-
 /* Admin Page */
 #post-body > .amazon-auto-links-content {
 	margin-bottom: 0;
+}
+
+/* Array Tables */
+.column-key {
+    max-width: 26%;
+}
+/* Nested tables */
+table table .column-key {
+    max-width: 12%;
+}
+table ul.numeric {
+	list-style-type: decimal
 }
 
 /* Form fields */

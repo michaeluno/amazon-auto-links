@@ -59,6 +59,9 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
                 'table' => array(
                     'class' => 'widefat striped fixed product-details',
                 ),
+                'td'    => array(
+                    array( 'class' => 'width-one-fourth', ),  // first td
+                )
             )
         );
         echo wp_kses( $_oArrayTable->get(), 'post' );
