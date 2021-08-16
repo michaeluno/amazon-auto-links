@@ -52,16 +52,16 @@ class AmazonAutoLinks_Test_AdminPage_Test_Delete extends AmazonAutoLinks_Test_Ad
     }
 
     /**
-     * @return string
+     * @return array
      * @since  4.6.21
      */
-    protected function _getFilesOutput() {
+    protected function _getFileList() {
         $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
             AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete',
             include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
             array( 'AmazonAutoLinks_Scratch_Base' )
         );
-        return AmazonAutoLinks_Debug::get( $_oVerifier->get() );
+        return $_oVerifier->get();
     }
             
 }
