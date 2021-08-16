@@ -21,7 +21,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends Amaz
 
     /**
      * @throws ReflectionException
-     * @tags us
+     * @tags us, slow
      */
     public function test_getReview() {
 
@@ -38,7 +38,7 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends Amaz
          */
         $_aoResponse = $_oMock->call( '___getReviewPageResponse', array( &$_oHTTP, $_sURL, $_sLocale, 86400, true, $_sLanguage ) );
         $this->_output( 'Character Set: ' . $_oHTTP->getCharacterSet() );
-        $this->_outputDetails( 'Cookies: ', $this->getCookiesFromResponse( $_aoResponse ) );
+        $this->_outputDetails( 'Cookies: ', $this->getRequestCookiesFromResponse( $_aoResponse ) );
         $this->_assertFalse( is_wp_error( $_aoResponse ), 'Maybe blocked', $_aoResponse );
 
         // Get review elements
