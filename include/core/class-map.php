@@ -1,7 +1,7 @@
 <?php 
 /**
-    Auto Amazon Links v4.6.19b01 by miunosoft (Michael Uno) 
-    Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+    Auto Amazon Links v4.6.20 by miunosoft (Michael Uno) 
+    Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
  */
@@ -525,6 +525,7 @@ return array(
     "AmazonAutoLinks_AjaxEvent_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/ajax/AmazonAutoLinks_AjaxEvent_Base.php", 
     "AmazonAutoLinks_Event___Action_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/wpcron/AmazonAutoLinks_Event___Action_Base.php", 
     "AmazonAutoLinks_Event___Filter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/wpcron/AmazonAutoLinks_Event___Filter_Base.php", 
+    "AmazonAutoLinks_ArrayTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_ArrayTable.php", 
     "AmazonAutoLinks_Debug" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Debug.php", 
     "AmazonAutoLinks_PluginUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_PluginUtility.php", 
     "AmazonAutoLinks_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Utility.php", 
