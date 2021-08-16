@@ -59,7 +59,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                 'class'     => array(
                     'input' => 'width-full test-tags',
                 ),
-                'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks.'
+                'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks. To exclude certain tags, add a prefix of `-`.'
             ),
             array(
                 'title'      => 'Arguments',
