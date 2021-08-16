@@ -19,6 +19,14 @@
 class Test_AmazonAutoLinks_Option extends AmazonAutoLinks_UnitTest_Base {
 
     /**
+     * @tags property
+     */
+    public function testProperties() {
+        $_oOption       = AmazonAutoLinks_Option::getInstance();
+        $this->_assertNotEmpty( $_oOption->aOptions );
+    }
+
+    /**
      * @tags kses
      */
     public function test_getAllowedHTMLTags() {
