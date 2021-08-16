@@ -82,7 +82,7 @@ class Test_AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_UnitTest
     }
 
     /**
-     * @tags cookie, DE
+     * @tags cookie, DE, session
      * @throws ReflectionException
      */
     public function test__getSessionIDCookie() {
