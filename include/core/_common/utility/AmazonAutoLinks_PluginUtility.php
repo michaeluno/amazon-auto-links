@@ -312,7 +312,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $sText
         );
         $_biResult = preg_match_all(
-            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9])/', // needle - [A-Z0-9]{10} is the ASIN
+            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9]|$)/', // needle - [A-Z0-9]{10} is the ASIN, (?=[^a-zA-Z0-9]|$) is non alphanumeric and without $, an ASIN at the end of the string
             $sText,           // subject
             $_aMatches        // match container
         );
