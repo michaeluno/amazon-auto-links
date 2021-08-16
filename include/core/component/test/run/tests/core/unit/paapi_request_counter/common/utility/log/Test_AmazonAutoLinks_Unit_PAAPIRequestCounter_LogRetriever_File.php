@@ -18,6 +18,8 @@ class Test_AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File extends Am
      * @tags log
      */
     public function test_get() {
+        $_oCounter         = new AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter( 'US' );
+        $this->_assertTrue( is_dir( $_oCounter->getDirectoryPath() ), 'is directory?: ' . $_oCounter->getDirectoryPath() );
         $_oFileLog = new AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_File( 'US' );
         $this->_assertNotEmpty( $_oFileLog->get( time() - ( 3 * 86400 ), time(), $_aFilePaths ) );
         $this->_assertNotEmpty( $_aFilePaths );
