@@ -1,0 +1,6 @@
+/*! Admin Page Framework - Form for WordPress 4.7 or above 1.0.0 */
+/* Fixes that the section tabs' bottom borders are not aligned */
+.amazon-auto-links-content ul.amazon-auto-links-section-tabs > li.amazon-auto-links-section-tab {
+  margin-bottom: -2px;
+}
+/*# sourceMappingURL=form_4_7_or_above.css.map */

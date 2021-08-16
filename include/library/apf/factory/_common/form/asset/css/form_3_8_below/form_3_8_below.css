@@ -1,0 +1,24 @@
+/*! Admin Page Framework - Form for WordPress below 3.8 1.0.0 */
+.amazon-auto-links-field .remove_value.button.button-small {
+  line-height: 1.5em;
+}
+
+.amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box.accordion-section-title:after,
+.amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box.accordion-section-title:after {
+  content: "";
+  top: 18px;
+}
+
+.amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box.accordion-section-title.collapsed:after,
+.amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box.accordion-section-title.collapsed:after {
+  content: "";
+}
+
+.amazon-auto-links-collapsible-toggle-all-button.button {
+  font-size: 1em;
+}
+
+.amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .amazon-auto-links-repeatable-section-buttons {
+  top: -8px;
+}
+/*# sourceMappingURL=form_3_8_below.css.map */
