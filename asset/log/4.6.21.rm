@@ -1,2 +1,3 @@
+- Tweaked the default `Item Format` option value.
 - Fixed a bug that plugin options were not properly loaded causing inaccessible setting pages, started in v4.6.19.
 - Fixed a bug that a last ASIN set to the `ASINs` unit option of the `Item Look-up` unit type got removed, started from v4.6.9.  
