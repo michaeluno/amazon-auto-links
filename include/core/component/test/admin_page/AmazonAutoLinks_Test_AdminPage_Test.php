@@ -28,6 +28,9 @@ class AmazonAutoLinks_Test_AdminPage_Test extends AmazonAutoLinks_AdminPage_Page
 //                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
 //                AmazonAutoLinks_Registry::getPluginURL( '/asset/css/code.css' ),
 //            ),
+            'script'    => array(
+                'src'   => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+            ),
         );
     }
 

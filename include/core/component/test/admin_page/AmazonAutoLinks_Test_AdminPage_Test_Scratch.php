@@ -56,16 +56,18 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
         parent::_doTab( $oFactory );
 
     }
-        protected function _printFiles() {
-            echo "<div class='files-container'>";
-            echo "<h4>Files</h4>";
-            $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
-                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches',
-                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
-                array( 'AmazonAutoLinks_Scratch_Base' )
-            );
-            AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
-            echo "</div>";
-        }
-            
+
+    /**
+     * @return string
+     * @since  4.6.21
+     */
+    protected function _getFilesOutput() {
+        $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches',
+            include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+            array( 'AmazonAutoLinks_Scratch_Base' )
+        );
+        return AmazonAutoLinks_Debug::get( $_oVerifier->get() );
+    }
+
 }
