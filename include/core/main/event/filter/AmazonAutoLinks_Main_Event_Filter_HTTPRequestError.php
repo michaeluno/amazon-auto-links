@@ -68,11 +68,11 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestError extends AmazonAutoLinks
         }
         $_mOldData = $this->getElement( $aOldCache, array( 'data' ) );
         if ( ! empty( $_mOldData ) ) {
-            do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Using the old cache for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );
+            do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Using the old cache, {$sCacheName}, for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );
             return $_mOldData;
         }
 
-        do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Not using an old cache for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );
+        do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Not using an old cache, {$sCacheName}, for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );
         return $aoResponse;
 
     }
