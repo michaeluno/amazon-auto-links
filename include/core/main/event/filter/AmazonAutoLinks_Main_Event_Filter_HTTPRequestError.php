@@ -69,6 +69,10 @@ class AmazonAutoLinks_Main_Event_Filter_HTTPRequestError extends AmazonAutoLinks
         $_mOldData = $this->getElement( $aOldCache, array( 'data' ) );
         if ( ! empty( $_mOldData ) ) {
             do_action( 'aal_action_debug_log', 'HTTP_REQUEST_CACHE', "Using the old cache, {$sCacheName}, for {$sURL}.", AmazonAutoLinks_PluginUtility::getAsArray( $aOldCache ), current_filter(), true );
+            // Returning the old data
+            // Remark: the modified time in the database column will be updated. We don't change the modified time to the old one here
+            // because the plugin does not check the value of the column of expiration time but the (modified time + cache duration)
+            // so if the modified time is not updated, the plugin tries to renew the cache persistently whenever the request cache is retrieved, which drags down the server resource heavily.
             return $_mOldData;
         }
 
