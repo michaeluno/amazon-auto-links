@@ -69,6 +69,16 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
     );
 
     /**
+     * @param  array $aURLs
+     * @return array|array[]
+     * @since  4.6.22
+     */
+    protected function _getResponses( array $aURLs=array() ) {
+        $this->oUnitOption->set( 'search_per_keyword', false ); // [4.6.22+] This option for the item_lookup unit type is deprecated and it is always off.
+        return parent::_getResponses( $aURLs );
+    }
+
+    /**
      * Sorts items.
      * @remark      Overriding the method in the `AmazonutoLinks_Unit_search` class.
      * @since       3.2.1

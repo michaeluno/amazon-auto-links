@@ -1,1 +1,2 @@
-- Optimized the method of renewing HTTP request caches. 
+- Optimized the method of renewing HTTP request caches.
+- Deprecated the `Query per Item` unit option for the `Item Look-up` and `URL` unit types.
