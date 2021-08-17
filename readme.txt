@@ -18,7 +18,7 @@ Generates Amazon affiliate links of products just coming out today. Pick categor
 
 Still manually searching products and pasting Amazon affiliate links in WordPress posts? What happens if the products get outdated? With this plugin, you do not have to worry about it nor trouble to do such repetitive tasks. Just pick categories which suit your site and it will automatically display the links of decent products just coming out from Amazon today.
 
-Amazon Auto Links is a WordPress plugin for affiliates to create Amazon affiliate links. The links are tagged with your Amazon Associates ID. All the Amazon locales are supported and it works even on JavaScript disabled browsers. Insert the ads as widget, place shortcode, or use auto-insert to display units automatically where the links should appear.
+Auto Amazon Links is a WordPress plugin for affiliates to create Amazon affiliate links. The links are tagged with your Amazon Associates ID. All the Amazon locales are supported and it works even on JavaScript disabled browsers. Insert the ads as widget, place shortcode, or use auto-insert to display units automatically where the links should appear.
 
 If you want to search a specific product, yes, you can do that too. If you are good at HTML and CSS coding and know a little about PHP, you can create your own template! That means you can design the layout.
 
@@ -112,7 +112,7 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 
 = Getting Started =
-1. Go to **Dashboard** -> **Amazon Auto Links** -> **Add Unit by Category**.
+1. Go to **Dashboard** -> **Auto Amazon Links** -> **Add Unit by Category**.
 1. Configure the options and select categories.
 1. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is available in the **Appearance** -> **Widgets** page as well.
 
@@ -134,9 +134,9 @@ More detailed instruction, please refer to the [To register as a Product Adverti
 Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0.
 
 = I'm migrating from Amazon Associates Link Builder (AALB). Can this plugin display products with their shortcodes? =
-Yes, enable the option by going to `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `3rd Party` -> `Amazon Associates Link Builder`.
+Yes, enable the option by going to `Dashboard` -> `Auto Amazon Links` -> `Settings` -> `3rd Party` -> `Amazon Associates Link Builder`.
 
-There you also want to set the __Template Conversion__ option. Make sure you enable your desired Amazon Auto Links templates in `Dashboard` -> `Amazon Auto Links` -> `Templates`. Then reload the `3rd Party` screen. There you'll see active templates are listed for the conversion option.
+There you also want to set the __Template Conversion__ option. Make sure you enable your desired Auto Amazon Links templates in `Dashboard` -> `Auto Amazon Links` -> `Templates`. Then reload the `3rd Party` screen. There you'll see active templates are listed for the conversion option.
 
 = What does a Unit mean? =
 
@@ -162,7 +162,7 @@ Yes, with [Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amaz
 Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto-links). If it is feasible, it will be included in the to-do list in the Other Notes section.
 
 = I get Amazon product links everywhere on the site after creating some units. How can I restrict them to certain pages? =
-Go to `Dashboard` -> `Amazon Auto Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
+Go to `Dashboard` -> `Auto Amazon Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
 
 = My credentials do not seem to be authenticated. How can I check if my access keys are the correct ones? =
 Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure your keys work there as well.
