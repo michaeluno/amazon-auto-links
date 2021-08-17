@@ -38,7 +38,6 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
         $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, array_keys( $aItems ), $iCacheDuration, $bForceRenew );
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
 
-        // do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS_ADWIDGETAPI', "{$sLocaleSlug}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
         $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug, $iCacheDuration );
 
     }
@@ -52,8 +51,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
         private function ___setProductsIntoDatabase( array $aProducts, array $aItems, $sLocaleSlug, $iCacheDuration ) {
             $_aStoredRows = $this->___getStoredRows( $aItems, $sLocaleSlug );
             $_aRowsSets   = $this->___getRowsSets( $aProducts, $aItems, $sLocaleSlug, $_aStoredRows, $iCacheDuration );
-            foreach( $_aRowsSets as $_aRowsSet )
-            $this->setProductDatabaseRows( $_aRowsSet );
+            foreach( $_aRowsSets as $_aRowsSet ) {
+                $this->setProductDatabaseRows( $_aRowsSet );
+            }
         }
             private function ___getStoredRows( $aItems, $sLocaleSlug ) {
 
