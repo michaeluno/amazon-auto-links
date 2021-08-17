@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.20
+Stable tag:         4.6.21
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.21 - 08/17/2021 =
+- Tweaked the default `Item Format` option value.
+- Fixed a bug that plugin options were not properly loaded causing inaccessible setting pages, started in v4.6.19.
+- Fixed a bug that a last ASIN set to the `ASINs` unit option of the `Item Look-up` unit type got removed, started from v4.6.9.
 
 = 4.6.20 - 08/12/2021 =
 - Fixed raw HTTP request values, which could cause possible security issues.
