@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.21
+Stable tag:         4.6.22
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.22 - 08/18/2021 =
+- Optimized the method of renewing HTTP request caches.
+- Deprecated the `Query per Item` unit option for the `Item Look-up` and `URL` unit types.
 
 = 4.6.21 - 08/17/2021 =
 - Tweaked the default `Item Format` option value.
