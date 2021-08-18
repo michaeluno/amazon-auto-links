@@ -12,7 +12,7 @@
  *
  * @package     Amazon Auto Links
  * @since       4.3.4
- * @tags        rating
+ * @tags        rating, slow
  * @see         AmazonAutoLinks_Event___Action_HTTPRequestRating
 */
 class Test_AmazonAutoLinks_Event___Action_HTTPRequestRating extends AmazonAutoLinks_UnitTest_Base {

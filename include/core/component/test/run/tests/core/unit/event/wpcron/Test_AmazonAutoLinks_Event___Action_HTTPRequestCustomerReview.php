@@ -21,12 +21,14 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends Amaz
 
     /**
      * @throws ReflectionException
-     * @tags us
+     * @tags us, slow
      */
     public function test_getReview() {
 
         $_sASIN      = 'B01B8R6V2E';
         $_sLocale    = 'US';
+        $_oLocale    = new AmazonAutoLinks_PAAPI50_Locale( $_sASIN );
+        $_sLanguage  = $_oLocale->getDefaultLanguage();
         $_oMock      = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview' );
         $_sURL       = $_oMock->call( '___getReviewPageURL', array( $_sASIN, $_sLocale ) );
         $_sURL       = add_query_arg( array( 'tag' => uniqid() ), $_sURL );
@@ -34,9 +36,9 @@ class Test_AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends Amaz
         /**
          * @var AmazonAutoLinks_HTTPClient $_oHTTP
          */
-        $_aoResponse = $_oMock->call( '___getReviewPageResponse', array( &$_oHTTP, $_sURL, $_sLocale, 86400, true ) );
+        $_aoResponse = $_oMock->call( '___getReviewPageResponse', array( &$_oHTTP, $_sURL, $_sLocale, 86400, true, $_sLanguage ) );
         $this->_output( 'Character Set: ' . $_oHTTP->getCharacterSet() );
-        $this->_outputDetails( 'Cookies: ', $this->getCookiesFromResponse( $_aoResponse ) );
+        $this->_outputDetails( 'Cookies: ', $this->getRequestCookiesFromResponse( $_aoResponse ) );
         $this->_assertFalse( is_wp_error( $_aoResponse ), 'Maybe blocked', $_aoResponse );
 
         // Get review elements

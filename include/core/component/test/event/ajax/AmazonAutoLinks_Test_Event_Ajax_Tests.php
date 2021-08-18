@@ -176,6 +176,13 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                     return false;
                 }
 
+                if ( $this->___hasDisallowedTags( $oMethod->getDeclaringClass(), $aTags ) ) {
+                    return false;
+                }
+                if ( $this->___hasDisallowedTags( $oMethod, $aTags ) ) {
+                    return false;
+                }
+
                 if ( $this->___hasAllowedTags( $oMethod->getDeclaringClass(), $aTags ) ) {
                     return true;
                 }
@@ -239,6 +246,20 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 return ( boolean ) preg_match('/@(' . $_sPattern . ')\s+.*?\n/s', $_sDockBlock );
             }
 
+            private function ___hasDisallowedTags( $oSubject, array $aSpecifiedTags ) {
+
+                if ( empty( $aSpecifiedTags ) ) {
+                    return false;
+                }
+                $_aDocBlockTags     = $this->getStringIntoArray( $this->___getDocBlockAnnotation( $oSubject, 'tags' ), ',' );
+                $_aPassedTagsDeny   = array_filter( $aSpecifiedTags, array( $this, '___hasMinusPrefix' ) );
+                $_aPassedTagsDeny   = array_map( array( $this, '___getMinusPrefixRemoved' ), $_aPassedTagsDeny );
+                return ! $this->isEmpty( array_intersect( $_aPassedTagsDeny, $_aDocBlockTags ) );
+
+            }
+                private function ___hasMinusPrefix( $sString ) {
+                    return $this->hasPrefix( '-', $sString );
+                }
             /**
              * @param ReflectionClass|ReflectionMethod $oSubject
              * @param array $aSpecifiedTags
@@ -252,12 +273,21 @@ class AmazonAutoLinks_Test_Event_Ajax_Tests extends AmazonAutoLinks_AjaxEvent_Ba
                 }
                 // At this point there are specified tags that can only go through.
                 $_aDocBlockTags = $this->getStringIntoArray( $this->___getDocBlockAnnotation( $oSubject, 'tags' ), ',' );
-                if ( $this->isEmpty( array_intersect( $aSpecifiedTags, $_aDocBlockTags ) ) ) {
-                    return false;
+                $_aPassedTagsNormal = array_filter( $aSpecifiedTags, array( $this, '___hasNoMinusPrefix' ) );
+
+                // Not specified, meaning all tags are allowed.
+                if ( empty( $_aPassedTagsNormal ) ) {
+                    return true;
                 }
-                return true;
+                return ! $this->isEmpty( array_intersect( $_aPassedTagsNormal, $_aDocBlockTags ) );
 
             }
+                private function ___getMinusPrefixRemoved( $sString ) {
+                    return $this->getPrefixRemoved( $sString, '-' );
+                }
+                private function ___hasNoMinusPrefix( $sString ) {
+                    return ! $this->hasPrefix( '-', $sString );
+                }
             /**
              * @param Exception|AmazonAutoLinks_Test_Exception $oException
              * @param string $sClassName

@@ -24,8 +24,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         if ( ! $_sTableVersion ) {
             new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', 'The products cache table does not seem to be installed.', array(), true );
             return;
-        }        
-        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $aRows ) . " row(s): ", array_keys( $aRows ) , current_filter(), '' );
+        }
+        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $aRows ) . " row(s): ", array_keys( $aRows ) , current_filter(), true );
         if ( version_compare( $_sTableVersion, '1.4.0b01', '<' ) ) {
             foreach( $aRows as $_sKey => $_aRow ) {
                 // {$_sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}
@@ -312,7 +312,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $sText
         );
         $_biResult = preg_match_all(
-            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9])/', // needle - [A-Z0-9]{10} is the ASIN
+            '/(?<![a-zA-Z0-9])[A-Z0-9]{10}(?=[^a-zA-Z0-9]|$)/', // needle - [A-Z0-9]{10} is the ASIN, (?=[^a-zA-Z0-9]|$) is non alphanumeric and without $, an ASIN at the end of the string
             $sText,           // subject
             $_aMatches        // match container
         );

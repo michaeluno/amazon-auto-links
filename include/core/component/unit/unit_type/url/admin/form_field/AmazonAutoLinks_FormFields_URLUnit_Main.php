@@ -78,15 +78,16 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                     'input' => 'width-full',
                     'field' => 'two-third',
                 ),
-            ),    
-            array(
-                'field_id'      => $sFieldIDPrefix . 'search_per_keyword',
-                'type'          => 'checkbox',
-                'title'         => __( 'Query per Term', 'amazon-auto-links' ),
-                'tip'           => __( 'Although Amazon API allows multiple search terms to be set per request, when one of them returns an error, the entire result becomes an error. To prevent it, check this option so that the rest will be returned.', 'amazon-auto-links' ),
-                'label'         => __( 'Perform search per item.', 'amazon-auto-links' ),
-                'default'       => false,
-            ),      
+            ),
+            // @deprecated 4.6.22
+            // array(
+            //     'field_id'      => $sFieldIDPrefix . 'search_per_keyword',
+            //     'type'          => 'checkbox',
+            //     'title'         => __( 'Query per Term', 'amazon-auto-links' ),
+            //     'tip'           => __( 'Although Amazon API allows multiple search terms to be set per request, when one of them returns an error, the entire result becomes an error. To prevent it, check this option so that the rest will be returned.', 'amazon-auto-links' ),
+            //     'label'         => __( 'Perform search per item.', 'amazon-auto-links' ),
+            //     'default'       => false,
+            // ),
             array(
                 'field_id'          => $sFieldIDPrefix . '_sort',
                 'type'              => 'select',

@@ -657,6 +657,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         private function ___setCacheInDatabase( $sURL, $sCacheName, $aoResponse, $iCacheDuration, $aArguments, array $aOldCache, $sRequestType ) {
 
             $_sCharSet       = $this->___getCharacterSetFromResponse( $aoResponse );
+            $aOldCache       = apply_filters( 'aal_filter_http_request_set_cache_old_cache', $aOldCache, $sCacheName, $sURL );  // [4.6.22+]
             $aoResponse      = apply_filters( "aal_filter_http_request_set_cache_{$sRequestType}", $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL, $aArguments );
             $aoResponse      = apply_filters( 'aal_filter_http_request_set_cache', $aoResponse, $sCacheName, $_sCharSet, $iCacheDuration, $sURL, $aArguments, $aOldCache );
             $iCacheDuration  = apply_filters( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, $iCacheDuration, $sCacheName, $sURL, $sRequestType );
@@ -665,19 +666,16 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
             if ( ! $iCacheDuration ) {
                 return;
             }
+            $_aColumns       = array( // extra column items
+                'request_uri' => $sURL,
+                'type'        => $sRequestType,
+                'charset'     => $_sCharSet,
+            );
+            $_aColumns       = apply_filters( 'aal_filter_http_request_set_cache_columns', $_aColumns, $sCacheName, $aoResponse );  // [4.6.22+]
 
             $aoResponse      = $this->___getCacheCompressed( $aoResponse );  // [3.7.6]
             $_oCacheTable    = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
-            $_bResult        = $_oCacheTable->setCache(
-                $sCacheName, // name
-                $aoResponse,
-                $iCacheDuration,
-                array( // extra column items
-                    'request_uri' => $sURL,
-                    'type'        => $sRequestType,
-                    'charset'     => $_sCharSet,
-                )
-            );
+            $_bResult        = $_oCacheTable->setCache( $sCacheName, $aoResponse, $iCacheDuration, $_aColumns );
             if ( $_bResult ) {
                 do_action( 'aal_action_set_http_request_cache', $sCacheName, $sURL, $aoResponse, $iCacheDuration, $_sCharSet );
             }

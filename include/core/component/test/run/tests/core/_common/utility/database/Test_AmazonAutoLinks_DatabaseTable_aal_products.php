@@ -35,7 +35,7 @@ class Test_AmazonAutoLinks_DatabaseTable_aal_products extends AmazonAutoLinks_Un
                 'locale'                => 'IT',
                 'language'              => 'it_IT',
                 'preferred_currency'    => 'EUR',
-                // 'title'                 => 'Dummy',
+                'title'                 => 'Dummy',
             ),
         );
         $_mResult = $_oTable->setRows( $_aRows );

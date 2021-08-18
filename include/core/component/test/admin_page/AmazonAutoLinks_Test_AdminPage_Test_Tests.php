@@ -59,7 +59,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                 'class'     => array(
                     'input' => 'width-full test-tags',
                 ),
-                'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks.'
+                'description'   => 'Type tags separated with commas. Tags refer to terms set to the <code>@tags</code> annotation in test method doc-blocks. To exclude certain tags, add a prefix of `-`.'
             ),
             array(
                 'title'      => 'Arguments',
@@ -172,15 +172,42 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
         $this->_printFiles();
     }
         protected function _printFiles() {
-            echo "<div class='files-container'>";
-            echo "<h4>Test Files</h4>";
-            $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
-                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests',
-                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
-                array( 'AmazonAutoLinks_UnitTest_Base' )
-            );
-            AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
-            echo "</div>";
+            echo "<div class='files-container aal-accordion'>";
+                echo "<h4>Files</h4>";
+                echo "<div>"
+                        . $this->___getFilesOutput()
+                    . "</div>";
+            echo "</div>"; // .files-container
         }
+            /**
+             * @return string
+             * @since  4.6.21
+             */
+            private function ___getFilesOutput() {
+                $_oArrayTable = new AmazonAutoLinks_ArrayTable(
+                    $this->_getFileList(),
+                    array(
+                        'table' => array(
+                            'class' => 'widefat striped fixed product-details',
+                        ),
+                        'td'    => array(
+                            array( 'class' => 'width-one-fourth', ),  // first td
+                        )
+                    )
+                );
+                return wp_kses( $_oArrayTable->get(), 'post' );
+            }
+                /**
+                 * @return array
+                 * @since  4.6.21
+                 */
+                protected function _getFileList() {
+                    $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
+                        AmazonAutoLinks_Test_Loader::$sDirPath . '/run/tests',
+                        include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+                        array( 'AmazonAutoLinks_UnitTest_Base' )
+                    );
+                    return $_oVerifier->get();
+                }
 
 }

@@ -35,13 +35,6 @@ table.product-details table.product-details {
     font-size: 1em;
 }
 
-.column-key {
-    width: 26%;
-}
-table.product-details table.product-details .column-key {
-    width: 12%;
-}
-
 .centered {
     display : flex;
     align-items : center;

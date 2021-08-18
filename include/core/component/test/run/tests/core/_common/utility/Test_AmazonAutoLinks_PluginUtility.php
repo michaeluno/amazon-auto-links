@@ -70,6 +70,11 @@ class Test_AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
         return ! AmazonAutoLinks_PluginUtility::isPluginAdminPage();
     }
 
+    /**
+     * @return bool
+     * @throws Exception
+     * @tags ASIN
+     */
     public function test_getASINsExtracted() {
         $_sText  = 'teries-Count/dp/B00MNV8E0C/ref=sr_1_3?dchild=1' . PHP_EOL
             . '-Set/dp/B00R3Z49G6/ref=sr_1_10?dchild' . PHP_EOL
@@ -79,6 +84,18 @@ class Test_AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_UnitTest_Base {
             throw new Exception('Could not extract ASINs correctly. ' . $_sASINs );
         }
         return true;
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     * @tags ASIN
+     */
+    public function test_getASINs() {
+        $_sText  = '8831780980, B07SP4WQVJ';
+        $_aASINs = AmazonAutoLinks_PluginUtility::getASINs( $_sText );
+        $this->_assertEqual( 2, count( $_aASINs ) );
+        $this->_assertEqual( array( '8831780980', 'B07SP4WQVJ' ), $_aASINs );
     }
 
     /**

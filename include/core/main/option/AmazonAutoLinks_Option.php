@@ -356,7 +356,26 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         )
         
     );
-       
+
+    /**
+     * Sets up properties.
+     * @param string $sOptionKey
+     * @since 4.6.21
+     */
+    public function __construct( $sOptionKey ) {
+
+        parent::__construct( $sOptionKey );
+
+        // After `this->aOptions` is created. Set the unit default Item Format option.
+        // Be careful not to move this code block in `_getFormattedOptions()` as `getDefaultOutputFormats()` calls some methods accessing the established option values.
+        $this->aOptions[ 'unit_default' ] = $this->aOptions[ 'unit_default' ]
+            + $this->getDefaultOutputFormats();  // needs to check API is connected
+        if ( ! $this->aOptions[ 'unit_default' ][ 'override_button_label' ] ) {
+            $this->aOptions[ 'unit_default' ][ 'button_label' ] = __( 'Buy Now', 'amazon-auto-links' );
+        }
+
+    }
+
     /**
      * Returns the formatted options array.
      * @remark  `$sOptionKey` property must be set before calling this method.
@@ -373,16 +392,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         // Handle the `security` default values
         $this->aDefault[ 'security' ] = $this->___getDefaultSecurityOptions( $this->aDefault[ 'security' ], $_aRawOptions );
 
-        $_aFormatted  = $this->uniteArrays( $_aRawOptions, $this->aDefault );   // same as parent::_getFormattedOptions();
+        return $this->uniteArrays( $_aRawOptions, $this->aDefault );   // same as parent::_getFormattedOptions();
 
-        // After `this->aOptions` is created. Set the unit default Item Format option.
-        $_aFormatted[ 'unit_default' ] = $_aFormatted[ 'unit_default' ]
-            + $this->getDefaultOutputFormats();  // needs to check API is connected
-        if ( ! $_aFormatted[ 'unit_default' ][ 'override_button_label' ] ) {
-            $_aFormatted[ 'unit_default' ][ 'button_label' ] = __( 'Buy Now', 'amazon-auto-links' );
-        }
-
-        return $_aFormatted;
     }
         /**
          * @remark This is for backward compatibility with v4.6.18 or below.
@@ -491,9 +502,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             . '    </div>' . PHP_EOL
             . '    <div class="amazon-auto-links-product-body">' . PHP_EOL
             . '        %title%' . PHP_EOL
-            . '        %rating% %prime% %price%' . PHP_EOL
+            . '        %rating% %prime% %price% %disclaimer%' . PHP_EOL
             . '        %description%' . PHP_EOL
-            . '        %disclaimer%' . PHP_EOL
             . '    </div>' . PHP_EOL
             . '</div>';
     }
@@ -771,13 +781,11 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         if ( isset( $_bnConnected ) ) {
             return $_bnConnected;
         }
-
         $_bnConnected = $this->getPAAPIStatus();
         if ( $_bnConnected ) {
             $this->setObjectCache( __METHOD__, true );
             return true;
         }
-
         $_bConnected  = false;
         foreach( $this->getAsArray( $this->get( array( 'associates' ) ) ) as $_sLocale => $_aLocale ) {
             if ( $this->getElement( $_aLocale, array( 'paapi', 'status' ) ) ) {

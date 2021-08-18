@@ -105,8 +105,16 @@ class Test_AmazonAutoLinks_Utility extends AmazonAutoLinks_UnitTest_Base {
      * @tags file system, path
      */
     public function test_isDirectoryEmpty() {
-        $_bnEmpty = $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_empty' );
-        $this->_assertTrue( $_bnEmpty, 'the actual directory is empty and this value should be true.' );
+        $_sSiteTemp = AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
+        $_sTempDir  = 'test-' . uniqid();
+        $_sDirPath  = $_sSiteTemp . '/' . $_sTempDir;
+        if ( ! file_exists($_sDirPath ) ) {
+            mkdir( $_sDirPath, 0777, true);
+        }
+        $this->_assertTrue( file_exists( $_sDirPath ), 'the checking directory should exist in the first place.' );
+        $this->_assertTrue( $this->isDirectoryEmpty( $_sDirPath ), 'the actual directory is empty and this value should be true.' );
+        $this->_assertTrue( rmdir($_sDirPath ), 'Removing the temporary test empty directory.' );
+
         $_bnEmpty = $this->isDirectoryEmpty( dirname( __FILE__ ) .'/_non_existent_path' );
         $this->_assertTrue( is_null( $_bnEmpty ), 'Checking non-existing directory should yield null.' );
         $this->_assertFalse( $this->isDirectoryEmpty( dirname( __FILE__ ) ), 'The test file directory so it must not yield true.' );

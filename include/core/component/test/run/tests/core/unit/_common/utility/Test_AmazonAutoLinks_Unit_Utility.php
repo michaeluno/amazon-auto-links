@@ -57,7 +57,7 @@ class Test_AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_UnitTest_Base {
     }
 
     public function test_getFormattedRatingFromItem() {
-        return $this->oUtil->getFormattedRatingFromItem( $this->aItem, 'US' );
+        return $this->oUtil->getFormattedRatingFromItem( $this->aItem, 'US', 'amazonwidget-20' );
     }
 
 

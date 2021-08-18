@@ -28,12 +28,14 @@ Mostly used tags are:
 - `Feat:` or `Feature:` - A new feature.
 - `Fix:` - A bug fix.
 - `Docs:` or `Document:` - Documentation only changes.
-- `Clean:` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
+- `Style:` - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
 - `Refactor:` - A code change that neither fixes a bug nor adds a feature.
 - `Optimize:` - A code change that improves performance.
 - `Tweak:` - A code change that make slight changes to program behaviors.
 - `Test:` - Adding missing or correcting existing tests.
+- `Debug:` - Changes regarding debugging.
 - `Scratch:` - Adding scratches.
+- `Setup:` - Changes to the build process or auxiliary tools and libraries to set up.
 - `Chore:` - Changes to the build process or auxiliary tools and libraries such as documentation generation.
 - `Release:` - Changes relating to releases
 

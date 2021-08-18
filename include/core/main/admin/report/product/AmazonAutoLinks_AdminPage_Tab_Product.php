@@ -53,47 +53,19 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
         echo "<div class='product-thumbnail float-right'>" . wp_kses( $_sImage, 'post' ) . "</div>";
         echo wp_kses( $this->___getGoBackLink(), 'post' );
         echo "<h3>" . __( 'Product Details', 'amazon-auto-links' ) . "</h3>";
-        echo wp_kses( $this->___getProductDetails( $_aProduct ), 'post' );
+        $_oArrayTable = new AmazonAutoLinks_ArrayTable(
+            $_aProduct,
+            array(
+                'table' => array(
+                    'class' => 'widefat striped fixed product-details',
+                ),
+                'td'    => array(
+                    array( 'class' => 'width-one-fourth', ),  // first td
+                )
+            )
+        );
+        echo wp_kses( $_oArrayTable->get(), 'post' );
     }
-        private function ___getProductDetails( array $aProduct ) {
-            // return "<table class='wp-list-table widefat fixed striped table-view-list'>"
-            return "<table class='widefat striped fixed product-details'>"
-                    . "<tbody>"
-                        . $this->___getTableRows( $aProduct )
-                    . "</tbody>"
-                . "</table>";
-        }
-            private function ___getTableRows( array $aProduct ) {
-                if ( empty( $aProduct ) ) {
-                    return "<tr>"
-                            . "<td colspan='2'>" . __( 'No data found.', 'amazon-auto-links' ) . "</td>"
-                        . "</tr>";
-                }
-                $_sOutput = '';
-                foreach( $aProduct as $_sColumnName => $_asValue ) {
-                    $_sOutput .= "<tr>";
-                    $_sOutput .= "<td class='column-key'><p>{$_sColumnName}</p></td>";
-                    $_sOutput .= $this->___getColumnValue( $_asValue );
-                    $_sOutput .= "</tr>";
-                }
-                return $_sOutput;
-            }
-                private function ___getColumnValue( $mValue ) {
-                    if ( is_null( $mValue ) ) {
-                        $mValue = '(null)';
-                    }
-                    if ( is_scalar( $mValue ) ) {
-                        return "<td class='column-value'><p>{$mValue}</p></td>";
-                    }
-                    if ( is_array( $mValue ) ) {
-                        return "<td class='column-value'>"
-                                . $this->___getProductDetails( $mValue )
-                            . "</td>";
-                    }
-                    return "<td class='column-value'>"
-                            . AmazonAutoLinks_Debug::getDetails( $mValue )
-                        . "</td>";
-                }
         private function ___getGoBackLink() {
             $_sProductsPageURL = add_query_arg(
                 array(

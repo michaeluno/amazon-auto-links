@@ -51,16 +51,17 @@ class AmazonAutoLinks_Test_AdminPage_Test_Delete extends AmazonAutoLinks_Test_Ad
         );
     }
 
-    protected function _printFiles() {
-        echo "<div class='files-container'>";
-        echo "<h4>Files</h4>";
+    /**
+     * @return array
+     * @since  4.6.21
+     */
+    protected function _getFileList() {
         $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
             AmazonAutoLinks_Test_Loader::$sDirPath . '/run/delete',
             include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
             array( 'AmazonAutoLinks_Scratch_Base' )
         );
-        AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
-        echo "</div>";
+        return $_oVerifier->get();
     }
             
 }

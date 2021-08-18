@@ -77,9 +77,9 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
             $_sURL            = $this->oLocale->getAssociatesURL();
             $_aRequestCookies = $this->___getAssociatesRequestCookiesGenerated( $_sURL, $this->sLocale, $this->sLanguage );
 
-            $_aCustomCookies  = apply_filters( 'aal_filter_custom_amazon_cookies', $_aRequestCookies, $this->oLocale, $this->sLanguage );
+            $_aCustomCookies  = apply_filters( 'aal_filter_custom_amazon_cookies', array(), $this->oLocale, $this->sLanguage );
             if ( ! empty( $_aCustomCookies ) ) {
-                return $_aCustomCookies;
+                return $this->getCookiesMerged( $_aCustomCookies, $_aRequestCookies );
             }
 
             $_sLastSessionID  = null;
@@ -325,6 +325,19 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
          * @since  4.3.4
          */
         private function ___getCookieDomain( $sURL ) {
+            // https://amazon.co.uk is not parsed properly and results in co.uk
+            // while https://www.amazon.co.uk results in amazon.co.uk
+            $sURL = str_replace(
+                array(
+                    'https://amazon.',
+                    'http://amazon.',
+                ),
+                array(
+                    'https://www.amazon.',
+                    'http://www.amazon.',
+                ),
+                $sURL
+            );
             return '.' . ltrim( $this->getSubDomain( $sURL ), '.' );
         }
 

@@ -72,6 +72,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
         }
 
         // Now do the API request and get responses.
+        $this->oUnitOption->set( 'search_per_keyword', false ); // [4.6.22+] This option for the url unit type is deprecated and it is always off.
         return parent::_getResponses( $_aURLs );
         
     }  

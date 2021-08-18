@@ -67,6 +67,13 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
     }
 
     /**
+     * @var array
+     * @since 4.6.22
+     */
+    private $___aOldCache = array();
+    private $___sOldCacheName;
+
+    /**
      * @callback add_action() aal_action_http_cache_renewal
      */
     protected function _doAction( /* $sURL, $iCacheDuration, $aArguments, $sType='wp_remote_get' */ ) {
@@ -76,11 +83,34 @@ class AmazonAutoLinks_Event___Action_HTTPCacheRenewal extends AmazonAutoLinks_Ev
         $iCacheDuration = $_aArguments[ 1 ];
         $aArguments     = $_aArguments[ 2 ];
         $sType          = $_aArguments[ 3 ];
+
         $_oHTTP         = new AmazonAutoLinks_HTTPClient( $sURL, $iCacheDuration, $aArguments, $sType );
+        $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
+        $this->___sOldCacheName = $_oHTTP->getCacheName();
+        $this->___aOldCache     = $_oCacheTable->getCache( $this->___sOldCacheName, $iCacheDuration );
         $_oHTTP->deleteCache();
-        $_oHTTP->get();
+        // At this point the cache is no longer exists in the database
+
+        add_filter( 'aal_filter_http_request_set_cache_old_cache', array( $this, 'replyToGetOldCache' ), 10, 2 );
+
+        $_oHTTP->get(); // preforms an entirely new request and sets a cache
+
+        remove_filter( 'aal_filter_http_request_set_cache_old_cache', array( $this, 'replyToGetOldCache' ), 10 );
 
     }
+        /**
+         * This is used to restore old cache when the new cache contains an error.
+         * @param  array  $aOldCache
+         * @param  string $sCacheName
+         * @return array
+         * @since  4.6.22
+         */
+        public function replyToGetOldCache( $aOldCache, $sCacheName ) {
+            if ( $sCacheName !== $this->___sOldCacheName ) {
+                return $aOldCache;
+            }
+            return $this->___aOldCache;
+        }
 
     /**
      *

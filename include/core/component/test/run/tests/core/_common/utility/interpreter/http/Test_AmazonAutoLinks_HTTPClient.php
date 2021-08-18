@@ -189,7 +189,7 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
 
         $_sURL       = 'https://affiliate-program.amazon.com/';
         $_oMock      = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_HTTPClient', array( $_sURL ) );
-        $_aoResponse = $_oMock->call( 'getRaw' );
+        $_aoResponse = $_oMock->call( 'getResponse' );
 
         $_aHeader    = $this->getHeaderFromResponse( $_aoResponse );
         $this->_assertTrue( ! empty( $_aHeader ), 'The header item must not empty.', $_aHeader );
@@ -210,9 +210,9 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
         $_sURL       = 'https://www.amazon.co.uk/gp/customer-reviews/widgets/average-customer-review/popover/ref=dpx_acr_pop_?contextId=dpx&asin=B01B8R6V2E';
         $_oHTTP      = new AmazonAutoLinks_HTTPClient( $_sURL );
         $_oHTTP->get();
-        $_oMocked    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_HTTPClient', ( $_sURL ) );
+        $_oMocked    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_HTTPClient', array( $_sURL ) );
         $_sCacheName = $_oMocked->oClass->getCacheName();
-        $_aCache     = $_oMocked->call( '___getCacheFromDatabase', array( $_sCacheName, 8640, array() ) );
+        $_aCache     = $_oMocked->call( '___getCacheFromDatabase', array( $_sCacheName, 8640, array(), $_oMocked->get( 'aArguments' ) ) );
         $this->_output( 'cache name: ' . $_sCacheName );
         $this->_outputDetails( 'cache', $_aCache );
         return ! empty( $this->getElement( $_aCache, 'data' ) );
@@ -261,9 +261,9 @@ class Test_AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_UnitTest_HTTPReque
         $_oHTTP      = new AmazonAutoLinks_HTTPClient( $_sURL );
         $_oHTTP->get();
         $_oHTTP->deleteCache();
-        $_oMocked    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_HTTPClient', ( $_sURL ) );
+        $_oMocked    = new AmazonAutoLinks_MockClass( 'AmazonAutoLinks_HTTPClient', array( $_sURL ) );
         $_sCacheName = $_oMocked->oClass->getCacheName();
-        $_aCache     = $_oMocked->call( '___getCacheFromDatabase', array( $_sCacheName, 8640, array() ) );
+        $_aCache     = $_oMocked->call( '___getCacheFromDatabase', array( $_sCacheName, 8640, array(), $_oMocked->get( 'aArguments' ) ) );
         return empty( $this->getElement( $_aCache, 'data' ) );
     }
 }

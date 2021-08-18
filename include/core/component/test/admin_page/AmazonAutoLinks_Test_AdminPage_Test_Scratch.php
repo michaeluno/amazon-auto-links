@@ -28,15 +28,6 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
     }
 
     /**
-     * Triggered when the tab is loaded.
-     * 
-     * @callback        action      load_{page slug}_{tab slug}
-     */
-    protected function _loadTab( $oAdminPage ) {
-        parent::_loadTab( $oAdminPage );
-    }
-
-    /**
      * @return array
      */
     protected function _getTagLabelsForCheckBox() {
@@ -47,25 +38,17 @@ class AmazonAutoLinks_Test_AdminPage_Test_Scratch extends AmazonAutoLinks_Test_A
         );
     }
 
-
     /**
-     * Write scratches here to test something.
-     * @callback        action      do_{page slug}_{tab slug}
+     * @return array
+     * @since  4.6.21
      */
-    protected function _doTab( $oFactory ) {
-        parent::_doTab( $oFactory );
-
+    protected function _getFileList() {
+        $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
+            AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches',
+            include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
+            array( 'AmazonAutoLinks_Scratch_Base' )
+        );
+        return $_oVerifier->get();
     }
-        protected function _printFiles() {
-            echo "<div class='files-container'>";
-            echo "<h4>Files</h4>";
-            $_oVerifier = new AmazonAutoLinks_Test_ClassLister(
-                AmazonAutoLinks_Test_Loader::$sDirPath . '/run/scratches',
-                include( AmazonAutoLinks_Test_Loader::$sDirPath . '/run/class-map.php' ),
-                array( 'AmazonAutoLinks_Scratch_Base' )
-            );
-            AmazonAutoLinks_Debug::dump( $_oVerifier->get() );
-            echo "</div>";
-        }
-            
+
 }

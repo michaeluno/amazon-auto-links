@@ -73,10 +73,16 @@ class Test_AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_UnitTest
         $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
         $this->_assertEqual( '.amazon.co.uk', $_sDomain );
 
+        $_sURL    = 'https://amazon.co.jp/';
+        $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
+        $this->_assertEqual( '.amazon.co.jp', $_sDomain );
+        $_sURL    = 'https://www.amazon.co.jp/';
+        $_sDomain = $this->oMock->call( '___getCookieDomain', array( $_sURL ) );
+        $this->_assertEqual( '.amazon.co.jp', $_sDomain );
     }
 
     /**
-     * @tags cookie, DE
+     * @tags cookie, DE, session
      * @throws ReflectionException
      */
     public function test__getSessionIDCookie() {
