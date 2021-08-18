@@ -237,6 +237,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                     // If the title is not set, it means failure of retrieving the product data.
                     if ( ! isset( $_aProduct[ 'title' ] ) ) { // it was 'thumbnail_url' before
                         unset( $_aProduct[ '_features' ] );
+                        unset( $_aProduct[ '_sub_image_urls' ] );
                         return $_aProduct;
                     }
 
@@ -257,7 +258,18 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         . "</div>"
                         : '';
 
+                    $_aProduct[ 'image_set' ]           = $this->getSubImageOutput(
+                        $_aProduct[ '_sub_image_urls' ],
+                        $_aProduct[ 'title' ],
+                        $_aProduct[ 'product_url' ],
+                        ( boolean ) $this->oUnitOption->get( 'pop_up_image' )
+                    );
+                    if ( $_aProduct[ 'thumbnail_url' ] && ! $_aProduct[ 'image_set' ] ) {
+                        $_aProduct[ 'image_set' ] = "<div class='sub-images'></div>"; // change the value from null to an empty tag so that further data inspection will not continue
+                    }
+
                     unset( $_aProduct[ '_features' ] );
+                    unset( $_aProduct[ '_sub_image_urls' ] );
                     return $_aProduct;
 
                 }

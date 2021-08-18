@@ -359,32 +359,33 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     }*/
 
     /**
-     * @param array     $aImageURLs     A numerically index array holding sub-image URLs.
-     * @param string    $sTitle         The product title.
-     * @param string    $sProductURL    The product URL.
-     *
-     * @return      string|null  An HTML portion of a set of sub-images.
-     * @since       4.0.0
+     * @param  array     $aImageURLs     A numerically indexed array holding sub-image URLs.
+     * @param  string    $sTitle         The product title.
+     * @param  string    $sProductURL    The product URL.
+     * @param  boolean   $bImagePreview  Whether to enable image previews.
+     * @return string|null  An HTML portion of a set of sub-images.
+     * @since  4.0.0
+     * @since  4.7.0     Added the `$bImagePreview` parameter.
      */
-    static public function getSubImageOutput( array $aImageURLs, $sTitle, $sProductURL ) {
+    static public function getSubImageOutput( array $aImageURLs, $sTitle, $sProductURL, $bImagePreview=true ) {
         $_aSubImageTags = array();
         foreach( $aImageURLs as $_iIndex => $_sImageURL ) {
-            $_sTitle    = trim( $sTitle ) . ' #' . ( $_iIndex + 1 );
-            $_sImageTag = self::getHTMLTag(
-                'img',
-                array(
-                    'src'   => self::hasPrefix( 'data:image/', $_sImageURL )
-                        ? $_sImageURL
-                        : esc_url( $_sImageURL ),
-                    'class' => 'sub-image',
-                    'alt'   => $_sTitle,
-                    'data-src'  => self::hasPrefix( 'data:image/', $_sImageURL )
-                        ? $_sImageURL
-                        : esc_url( self::getImageURLBySize( $_sImageURL, 500 ) ),
-                    'data-href' => esc_url( $sProductURL ),
-                )
+            $_sTitle      = trim( $sTitle ) . ' #' . ( $_iIndex + 1 );
+            $_aAttributes = array(
+                'src'   => self::hasPrefix( 'data:image/', $_sImageURL )
+                    ? $_sImageURL
+                    : esc_url( $_sImageURL ),
+                'class' => 'sub-image',
+                'alt'   => $_sTitle,
             );
-            $_sATag     = self::getHTMLTag(
+            if ( $bImagePreview ) {
+                $_aAttributes[ 'data-large-src' ] = self::hasPrefix( 'data:image/', $_sImageURL )
+                    ? $_sImageURL
+                    : esc_url( self::getImageURLBySize( $_sImageURL, 500 ) );
+                $_aAttributes[ 'data-href' ] = esc_url( $sProductURL );
+            }
+            $_sImageTag     = self::getHTMLTag( 'img', $_aAttributes );
+            $_sATag         = self::getHTMLTag(
                 'a',
                 array(
                     'href'   => esc_url( $sProductURL ),
@@ -414,11 +415,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  string  $sTitle
      * @param  integer $iMaxImageSize    The maximum size of each sub-image.
      * @param  integer $iMaxNumberOfImages
+     * @param  boolean $bImagePreview
      * @return string
      * @since  3       Originally defined in `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
      * @since  3.8.11  Renamed from `___getFormattedOutput()` and moved from `AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet`.
+     * @since  4.7.0   Added the `$bImagePreview` parameter.
      */
-    static public function getSubImages( array $aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
+    static public function getSubImages( array $aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages, $bImagePreview=true ) {
 
         if ( empty( $aImages ) ) {
             return '';
@@ -426,7 +429,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         return self::getSubImageOutput(
             self::___getSubImageURLs( $aImages, $iMaxImageSize, $iMaxNumberOfImages ),  // extract image urls
             strip_tags( $sTitle ),
-            $sProductURL
+            $sProductURL,
+            $bImagePreview
         );
 
     }
@@ -517,6 +521,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
         preg_match( "/.+\/(.+)$/i", $sImgURL, $_aMatches );
         $_sAfterLastSlash = self::getElement( $_aMatches, array( 1 ), '' );
+        // from JS Script string.replace( /(?<=\.*[_A-Z,\.]+)(\d+)(?=[,_\.])/g, imageSize ) );
         $_sDigitsReplaced = preg_replace(
             '/(?<=[\w,])(\d{1,3})(?=[,_])/i',
             '${2}'. $iImageSize,

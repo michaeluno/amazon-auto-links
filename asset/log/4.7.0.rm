@@ -1,5 +1,5 @@
-- Added the ability to pop up images on mouse hover.  
-- Added the `shuffle` unit option for Product Search units.
+- Added the `Pop-up Image Preview` unit option.  
+- Added the `Shuffle` unit option for Product Search units.
 - Added the `HTTP Requests` UI in the `Reports` page, which allows the user to display or delete HTTP request caches.
 - Added the sub-options to the `Debug Mode` option to decide which debug components to enable.
 - Fixed a bug that showing field tooltips affected the screen width.

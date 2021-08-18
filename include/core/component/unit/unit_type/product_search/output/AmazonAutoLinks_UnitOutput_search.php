@@ -927,7 +927,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $_sProductURL,
                     $sTitle,
                     $this->oUnitOption->get( 'subimage_size' ),
-                    $this->oUnitOption->get( 'subimage_max_count' )
+                    $this->oUnitOption->get( 'subimage_max_count' ),
+                    ( boolean ) $this->oUnitOption->get( 'pop_up_images' )
                 );
 
                 // Add meta data to the description
@@ -1000,12 +1001,14 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @param  string  $sTitle
              * @param  integer $iMaxImageSize
              * @param  integer $iMaxNumberOfImages
+             * @param  boolean $bImagePreview
              * @return string
              * @since  3.8.11
+             * @since  4.7.0   Added the `$bImagePreview` parameter.
              */
-            private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages ) {
+            private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages, $bImagePreview=true ) {
                 $_aImages = $this->getImageSet( $aItem );
-                return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages );
+                return $this->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages, $bImagePreview );
             }
 
             /**

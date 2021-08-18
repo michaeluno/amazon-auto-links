@@ -41,7 +41,8 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet extends AmazonAutoL
             $this->_aProduct[ 'product_url' ],
             $this->_aProduct[ 'formatted_title' ],
             $this->_oUnitOption->get( 'subimage_size' ),
-            $this->_oUnitOption->get( 'subimage_max_count' )
+            $this->_oUnitOption->get( 'subimage_max_count' ),
+            ( boolean ) $this->_oUnitOption->get( 'pop_up_images' )
         );
 
     }

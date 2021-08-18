@@ -6,32 +6,36 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
     var imageSize = 420;
 
     $( document ).ready( function() {
-        var _mainThumbnails = $( '.amazon-product-thumbnail img' );
-        setImageData( _mainThumbnails );
-        initialize( _mainThumbnails );
-        initialize( '.amazon-auto-links-product-image img[data-src]' );
-    } );
-    $( 'body' ).on( 'aal_ajax_loaded_unit', function( event ) {
-        var _mainThumbnails = $( event.target ).find( '.amazon-product-thumbnail img' );
-        setImageData( _mainThumbnails );
-        initialize( _mainThumbnails );
-        initialize( $( event.target ).find( '.amazon-auto-links-product-image img[data-src]' ) );
+        setMainThumbnailDataAttributes( this );
+        initialize( '.amazon-auto-links-product-image img[data-large-src]' );
     } );
 
-    function setImageData( target ) {
-        $( target ).each( function() {
-            $( this ).data( 'href', $( this ).closest( 'a' ).attr( 'href' ) );
-            // $( this ).data( 'src', $( this ).attr( 'src' ).replace( /(?<=\.)(?<=_[A-Z]+)(\d+)(?=_\.)/, imageSize ) )
-            $( this ).data( 'src', $( this ).attr( 'src' ).replace( /(?<=\.*[_A-Z,\.]+)(\d+)(?=[,_\.])/g, imageSize ) );
+    $( 'body' ).on( 'aal_ajax_loaded_unit', function( event ) {
+        setMainThumbnailDataAttributes( event.target );
+        initialize( $( event.target ).find( '.amazon-auto-links-product-image img[data-large-src]' ) );
+    } );
+
+    function setMainThumbnailDataAttributes( target ) {
+        $( target ).find( '.amazon-product-thumbnail-container[data-large-src]' ).each( function(){
+            $( this ).find( '.amazon-product-thumbnail img' ).attr( 'data-large-src', $( this ).attr( 'data-large-src' ) )
+                .attr( 'href', $( this ).attr( 'data-href' ) );
         } );
     }
+
+    // @deprecated
+    // function setImageData( target ) {
+    //     $( target ).each( function() {
+    //         $( this ).data( 'href', $( this ).closest( 'a' ).attr( 'href' ) );
+    //             $( this ).data( 'largeSrc', $( this ).attr( 'src' ).replace( /(?<=\.*[_A-Z,\.]+)(\d+)(?=[,_\.])/g, imageSize ) );
+    //     } );
+    // }
 
     function initialize( target ) {
 
@@ -41,7 +45,7 @@
         });
         _imagePreviewPopup.on( 'mouseover', function() {
 
-            var _srcImg = $( this ).data( 'src' ); 
+            var _srcImg = $( this ).data( 'largeSrc' );
             if ( ! _srcImg ) {
                 return;
             }
@@ -61,7 +65,7 @@
                 pointerWidth: parseInt( _maxSize ),
                 pointerHeight: parseInt( _maxSize ),
                 content: function() {
-                    return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'src' ) + "' /></a>";
+                    return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'largeSrc' ) + "' /></a>";
                 },
                 position: {
                     edge: 'bottom',
@@ -105,10 +109,10 @@
 
             // var _oPointer = $( this ).aalPointer( 'get' );
 
-    
+
             // Handle toolitip closing
             $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseleave', function(){
-    
+
                 var _selfMouseLeave = this;
                 // Set a timeout for the tooltip to close, allowing us to clear this trigger if the mouse comes back over
                 var _timeoutId = setTimeout(function(){
@@ -119,12 +123,12 @@
                     $( _selfMouseLeave ).off( 'mouseenter' );
                 }, 200 );
                 $( _self ).data( 'timeoutId', _timeoutId );
-    
+
             } );
             $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseenter', function(){
                 clearTimeout( $( _self ).data('timeoutId' ) );
             });
-            
+
         });
     }
 

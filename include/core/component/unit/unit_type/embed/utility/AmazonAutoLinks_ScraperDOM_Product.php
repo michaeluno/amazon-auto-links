@@ -27,7 +27,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
 
         // optional
         'thumbnail_url'     => null,
-        'image_set'         => null,    // (string) sub-image set output
+        // 'image_set'         => null,    // (string) sub-image set output // @deprecatd 4.7.0
         'title'             => null,
         'formatted_rating'  => null,    // (string) partial HTML string
         'rating_point'      => null,    // (integer)
@@ -38,7 +38,8 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         'content'           => null,    // (string) a product content
 
         // internal
-        '_features'     => array(), // (array) the product features
+        '_features'         => array(), // (array) the product features
+        '_sub_image_urls'   => array(), // (array) holding product image urls
 
     );
 
@@ -119,11 +120,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
         $_aProduct[ 'title' ]               = $this->___getProductTitle( $_oXPath, $_oItemNode );
         $_aImages                           = $this->___getProductImages( $_oXPath, $_oItemNode, $_aProduct[ 'ASIN' ] );
         $_aProduct[ 'thumbnail_url' ]       = $this->___getThumbnailURLFormatted( array_shift($_aImages ) );  // extract the first array item
-        $_aProduct[ 'image_set' ]           = $this->_oUtil->getSubImageOutput( $_aImages, $_aProduct[ 'title' ], $_aProduct[ 'product_url' ] );
-        if ( $_aProduct[ 'thumbnail_url' ] && ! $_aProduct[ 'image_set' ] ) {
-            $_aProduct[ 'image_set' ] = "<div class='sub-images'></div>"; // change the value from null to an empty tag so that further data inspection will not continue
-        }
-
+        $_aProduct[ '_sub_image_urls' ]     = $_aImages;
         $_aProduct[ '_features' ]           = $this->___getFeatures( $_oXPath, $_oItemNode );   // internal element which will be unset later on
         $_aProduct[ 'feature' ]             = $this->_oUtil->getFeatures( $_aProduct[ '_features' ] );
         $_aProduct[ 'feature' ]             = $_aProduct[ 'feature' ]
@@ -459,7 +456,7 @@ class AmazonAutoLinks_ScraperDOM_Product extends AmazonAutoLinks_ScraperDOM_Base
          * @param  DOMXPath $oXPath
          * @param  DOMNode  $oItemNode
          * @param  string   $sASIN
-         * @return array    holding image URLs including sub-images
+         * @return string[] holding image URLs including sub-images
          */
         private function ___getProductImages( DOMXPath $oXPath, DOMNode $oItemNode, $sASIN ) {
             $_aImages           = array();

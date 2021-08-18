@@ -353,6 +353,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
             // 4.3.0
             'custom_text'                   => '',
+
+            // 4.7.0
+            'pop_up_images'                 => true,
         )
         
     );

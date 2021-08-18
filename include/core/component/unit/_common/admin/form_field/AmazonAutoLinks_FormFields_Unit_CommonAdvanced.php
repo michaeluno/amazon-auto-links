@@ -40,6 +40,13 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'default'           => false,
             ),
             array(
+                'field_id'          => $sFieldIDPrefix . 'pop_up_images',
+                'type'              => 'checkbox',
+                'title'             => __( 'Pop-up Image Preview', 'amazon-auto-links' ),
+                'label'             => __( 'Show pop-up image previews on mouseover.', 'amazon-auto-links' ),
+                'default'           => false,
+            ),
+            array(
                 'field_id'          => $sFieldIDPrefix . '_now_loading_text',
                 'type'              => 'text',
                 'title'             => __( 'Now Loading Text', 'amazon-auto-links' ),

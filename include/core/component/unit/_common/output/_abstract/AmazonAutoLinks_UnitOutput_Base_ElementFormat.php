@@ -276,9 +276,19 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      */
     protected function _getProductThumbnailFormatted( array $aProduct ) {
 
-        $_iImageSize = $this->oUnitOption->get( 'image_size' );
-        return isset( $aProduct[ 'thumbnail_url' ] )
-            ? str_replace( 
+        if ( ! isset( $aProduct[ 'thumbnail_url' ] ) ) {
+            return '';
+        }
+        $_iImageSize   = $this->oUnitOption->get( 'image_size' );
+        $_sProductUL   = esc_url( $aProduct[ 'product_url' ] );
+        $_sLImageURL   = esc_url( $this->getImageURLBySize( $aProduct[ 'thumbnail_url' ], 500 ) );
+        $_bPopupImage  = ( boolean ) $this->oUnitOption->get( 'pop_up_images' );
+        $_sAttributes  = "class='amazon-product-thumbnail-container'";
+        $_sAttributes .= $_bPopupImage
+            ? " data-href='{$_sProductUL}' data-large-src={$_sLImageURL}"
+            : "";
+        return "<div {$_sAttributes}>"
+            . str_replace(
                 array( 
                     "%href%", 
                     "%title_text%", 
@@ -288,16 +298,17 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                     "%image_size%",         // 4.1.0
                 ),
                 array( 
-                    esc_url( $aProduct[ 'product_url' ] ),
+                    $_sProductUL,
                     esc_attr( strip_tags( $aProduct[ 'title' ] ) ),
-                    $aProduct[ 'thumbnail_url' ], 
+                    esc_url( $aProduct[ 'thumbnail_url' ] ),
                     $_iImageSize,
                     esc_attr( $aProduct[ 'text_description' ] ),
                     $_iImageSize    // 4.1.0
                 ),
                 $this->oUnitOption->get( 'image_format' )
-            ) 
-            : '';            
+            )
+            // ;
+            . "</div>";
         
     }
 
