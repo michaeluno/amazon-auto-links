@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*! Admin Page Framework Form Style 1.0.5 */
+/*! Admin Page Framework Form Style 1.0.6 */
 .amazon-auto-links-form-warning {
   font-size: 1em;
 }
@@ -787,5 +787,60 @@ a.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-
   border-width: 6px;
   border-style: solid;
   border-color: transparent #F8F8F8 transparent transparent;
+}
+
+/* Checkbox Field Type */
+.select_all_button_container,
+.select_none_button_container {
+  display: inline-block;
+  margin-bottom: 0.4em;
+}
+
+.amazon-auto-links-checkbox-label {
+  margin-top: 0.1em;
+}
+
+.amazon-auto-links-field input[type=checkbox] {
+  margin-right: 0.5em;
+}
+
+.amazon-auto-links-field-checkbox .amazon-auto-links-input-label-container {
+  padding-right: 1em;
+}
+
+.amazon-auto-links-field.amazon-auto-links-field-checkbox .amazon-auto-links-input-label-string {
+  display: inline;
+  /* Checkbox labels should not fold(wrap) by creating an indent after the check box */
+}
+
+/* Contact Field Type */
+.amazon-auto-links-field-contact .result-placeholder {
+  margin-bottom: 0.4em;
+}
+
+.amazon-auto-links-field-contact .result-placeholder .success {
+  color: #00a32a;
+}
+
+.amazon-auto-links-field-contact .result-placeholder .error {
+  color: #d63638;
+}
+
+/* Radio Field Type */
+.amazon-auto-links-field input[type=radio] {
+  margin-right: 0.5em;
+}
+
+.amazon-auto-links-field-radio .amazon-auto-links-input-label-container {
+  padding-right: 1em;
+}
+
+.amazon-auto-links-field-radio .amazon-auto-links-input-container {
+  display: inline;
+}
+
+.amazon-auto-links-field.amazon-auto-links-field-radio .amazon-auto-links-input-label-string {
+  display: inline;
+  /* radio labels should not fold(wrap) after the check box */
 }
 /*# sourceMappingURL=form.css.map */
