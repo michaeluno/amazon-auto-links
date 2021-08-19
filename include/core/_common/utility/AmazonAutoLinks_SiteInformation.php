@@ -16,9 +16,21 @@
 class AmazonAutoLinks_SiteInformation extends AmazonAutoLinks_Utility {
 
     /**
+     * @since 4.7.0
+     */
+    static public function get() {
+        return array(
+            'Plugin'          => self::getPlugin(),
+            'File Permission' => self::getFilePermissions(),
+            'Database Tables' => self::getCustomDatabaseTables(),
+            'Paths & URLs'    => self::getPathsAndURLs(),
+        );
+    }
+
+    /**
      * Retrieves information regarding file permissions.
      * @return array
-     * @sinec  4.7.0
+     * @sincc  4.7.0
      */
     static public function getFilePermissions() {
         return array(

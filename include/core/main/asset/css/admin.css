@@ -72,6 +72,9 @@ hr {
 .margin-bottom-dot-4em {
 	margin-bottom: 0.4em;
 }
+.align-center {
+	text-align: center;
+}
 
 /* Admin Page */
 #post-body > .amazon-auto-links-content {

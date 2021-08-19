@@ -24,42 +24,38 @@ class AmazonAutoLinks_HelpAdminPage_Help_Support extends AmazonAutoLinks_AdminPa
         return array(
             'tab_slug'  => 'support',
             'title'     => __( 'Support', 'amazon-auto-links' ),
+            'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/help.css',
         );
     }
 
     /**
      * Triggered when the tab is loaded.
-     * 
-     * @callback        action      load_{page slug}_{tab slug}
+     * @param AmazonAutoLinks_AdminPageFramework $oAdminPage
      */
-    protected function _loadTab( $oAdminPage ) {}
-    
+    protected function _loadTab( $oAdminPage ) {
+
+        new AmazonAutoLinks_RevealerCustomFieldType( $oAdminPage->oProp->sClassName );
+
+        // Sections
+        new AmazonAutoLinks_HelpAdminPage_Help_Section_Select( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug ) );
+        new AmazonAutoLinks_HelpAdminPage_Help_Section_Support( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug ) );
+        new AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug ) );
+        new AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug ) );
+        add_action( "do_form_{$this->sPageSlug}_{$this->sTabSlug}", array( $this, 'replyToDoForm' ) );
+
+    }
+
+    /**
+     * @param $oFactory
+     * @callback add_action() do_form_{page slug}_{tab_slug}
+     */
+    public function replyToDoForm( $oFactory ) {
+    }
+
     /**
      * 
      * @callback        action      do_{page slug}_{tab slug}
      */
-    protected function _doTab( $oFactory ) {
-        
-        echo "<h3>" 
-                . esc_html__( 'Support Forum', 'amazon-auto-links' )
-            . "</h3>";
-        echo "<p>"
-            . wp_kses( sprintf(
-                __( 'To get free support, visit the <a href="%1$s" target="_blank">support forum</a>.', 'amazon-auto-links' ),
-                'https://wordpress.org/support/plugin/amazon-auto-links'
-            ), 'post' )
-            . "</p>";
-
-        echo "<h3>" 
-                . esc_html__( 'Priority Support', 'amazon-auto-links' )
-            . "</h3>";
-        echo "<p>"
-                . wp_kses( sprintf(
-                    __( 'You can get priority email support by purchasing <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ),
-                    'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
-                ), 'post' )
-            . "</p>";
-            
-    }    
+    protected function _doTab( $oFactory ) {}
             
 }
