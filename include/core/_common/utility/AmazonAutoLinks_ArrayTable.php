@@ -154,4 +154,7 @@ class AmazonAutoLinks_ArrayTable extends AmazonAutoLinks_Utility {
     static public function isMultidimensional( array $aArray ) {
         return count( $aArray ) !== count( $aArray, COUNT_RECURSIVE );
     }
+    static public function isAssociativeArray( array $aArray ) {
+        return ( bool ) count( array_filter( array_keys( $aArray ), 'is_string' ) );
+    }
 }
