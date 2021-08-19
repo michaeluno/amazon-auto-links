@@ -394,21 +394,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         );       
         return $_oQuery->posts;
     }    
-       
-    /**
-     * @since       3.2.4
-     * @return      string
-     * @param       boolean $bHasLink
-     */
-    static public function getUpgradePromptMessage( $bHasLink=true ) {        
-        return $bHasLink
-            ? sprintf(
-                __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
-                esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' )
-            )
-            : __( 'Please consider upgrading to Pro to enable this feature.', 'amazon-auto-links' );
-    }
-    
+
     /**
      * Returns the HTML credit comment.
      * @since       3.1.0
@@ -814,6 +800,20 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             esc_url( AmazonAutoLinks_Registry::STORE_URI_PRO ),
             admin_url( 'edit.php?post_status=trash&post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] )
         );
+    }
+
+    /**
+     * @since       3.2.4
+     * @return      string
+     * @param       boolean $bHasLink
+     */
+    static public function getUpgradePromptMessage( $bHasLink=true ) {
+        return $bHasLink
+            ? sprintf(
+                __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
+                esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' )
+            )
+            : __( 'Please consider upgrading to Pro to enable this feature.', 'amazon-auto-links' );
     }
 
 }
