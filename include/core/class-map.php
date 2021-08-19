@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.6.20 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.6.22 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -425,7 +425,7 @@ return array(
     "AmazonAutoLinks_HelpAdminPage_Help_FAQ" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_FAQ.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_GetPro" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_Support" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Support.php", 
-    "AmazonAutoLinks_HelpAdminPage_Help_Tips" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Tips.php", 
+    "AmazonAutoLinks_HelpAdminPage_Help_Tips" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Tips.php",
     "AmazonAutoLinks_InfoBoxLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php", 
     "AmazonAutoLinks_AdminPageMetaBox_Information" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php", 
     "AmazonAutoLinks_ReportAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage.php", 
@@ -556,6 +556,7 @@ return array(
     "AmazonAutoLinks_Encrypt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_Encrypt.php", 
     "AmazonAutoLinks_HTMLCleaner" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_HTMLCleaner.php", 
     "AmazonAutoLinks_HTMLStringTruncator" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_HTMLStringTruncator.php", 
+    "AmazonAutoLinks_Message" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_Message.php", 
     "AmazonAutoLinks_RenameTags" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/AmazonAutoLinks_RenameTags.php", 
     "AmazonAutoLinks_AdWidgetAPI_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/ad-widget-api/AmazonAutoLinks_AdWidgetAPI_Base.php", 
     "AmazonAutoLinks_AdWidgetAPI_Search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/interpreter/ad-widget-api/AmazonAutoLinks_AdWidgetAPI_Search.php", 

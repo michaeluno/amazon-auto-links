@@ -25,7 +25,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         // Check the limitation.
         $_oOption         = AmazonAutoLinks_Option::getInstance();
         if ( $_oOption->isUnitLimitReached() ) {
-            $oFactory->setSettingNotice( $this->getUpgradePromptMessageToAddMoreUnits() );
+            $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return ;
         }            
         

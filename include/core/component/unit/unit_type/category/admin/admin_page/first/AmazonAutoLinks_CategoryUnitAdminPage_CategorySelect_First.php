@@ -73,7 +73,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
 
             // must set an field error array which does not yield empty so that it won't be redirected.
             $oFactory->setFieldErrors( array( 'error' ) );        
-            $oFactory->setSettingNotice( $this->getUpgradePromptMessageToAddMoreUnits() );
+            $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInput;
             
         }   

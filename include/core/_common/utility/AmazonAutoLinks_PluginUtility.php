@@ -790,30 +790,4 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             . '</span>';
     }
 
-    /**
-     * @return  string
-     * @sicne   4.0.0
-     */
-    static public function getUpgradePromptMessageToAddMoreUnits() {
-        return sprintf(
-            __( 'Please upgrade to <a href="%1$s">Pro</a> to add more units!', 'amazon-auto-links' ) . ' ' . __( 'Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' ),
-            esc_url( AmazonAutoLinks_Registry::STORE_URI_PRO ),
-            admin_url( 'edit.php?post_status=trash&post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] )
-        );
-    }
-
-    /**
-     * @since       3.2.4
-     * @return      string
-     * @param       boolean $bHasLink
-     */
-    static public function getUpgradePromptMessage( $bHasLink=true ) {
-        return $bHasLink
-            ? sprintf(
-                __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' ),
-                esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' )
-            )
-            : __( 'Please consider upgrading to Pro to enable this feature.', 'amazon-auto-links' );
-    }
-
 }

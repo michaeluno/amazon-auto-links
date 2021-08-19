@@ -111,7 +111,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'description'     => array(
                     ( $_bAdvanced
                         ? ''
-                        : '<span class="warning">' . __( 'This requires Pro.', 'amazon-auto-links' ) . '</span> ' )
+                        : '<span class="warning">' . AmazonAutoLinks_Message::getThisIsAvailableInPro() . '</span> ' )
                     . ' ' . sprintf( __( 'Always use %1$s for these URLs.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' ' . sprintf( __( 'By default %1$s is used as a fallback when a regular HTTP request fails.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' ' . sprintf( __( 'For HTTP requests of these URL patterns will use %1$s first.', 'amazon-auto-links' ), 'Web Page Dumper' )
@@ -131,7 +131,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'description'     => array(
                     ( $_bAdvanced
                         ? ''
-                        : '<span class="warning">' . __( 'This requires Pro.', 'amazon-auto-links' ) . '</span> ' )
+                        : '<span class="warning">' . AmazonAutoLinks_Message::getThisIsAvailableInPro() . '</span> ' )
                     . sprintf( __( 'Do not use %1$s for these URLs.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' ' . __( 'The <code>Always</code> options takes precedence.', 'amazon-auto-links' )
                     . ' ' . __( 'Set URL patterns with a wildcard one per line.', 'amazon-auto-links' )

@@ -157,7 +157,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool_TemplateOptionConverter_Format extends 
         
         $_oOption = AmazonAutoLinks_Option::getInstance();  
         if ( ! $_oOption->isAdvancedAllowed() ) {
-            $oAdminPage->setSettingNotice( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage() );
+            $oAdminPage->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessage() );
             return $aOldInputs;
         }
         

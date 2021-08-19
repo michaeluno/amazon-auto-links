@@ -48,7 +48,7 @@ class AmazonAutoLinks_PostType_Unit__ActionLink_CloneUnit extends AmazonAutoLink
             ? "<a href='" . esc_attr( $_sURL ) . "' title='" . esc_attr( $_sTitle ) . "'>"
                 . $_sLabel
             . "</a> "
-            : "<span class='disabled' title='" . esc_attr( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage( false /* no link */ ) ) . "'>"
+            : "<span class='disabled' title='" . esc_attr( AmazonAutoLinks_Message::getUpgradePromptMessage( false /* no link */ ) ) . "'>"
                 . $_sLabel
             . "</span>";
 

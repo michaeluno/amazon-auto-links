@@ -76,7 +76,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
             $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
-            $oFactory->setSettingNotice( $this->getUpgradePromptMessageToAddMoreUnits() );
+            $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
         }        
         

@@ -167,7 +167,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Section_Convert extends Amazon
         
         $_oOption = AmazonAutoLinks_Option::getInstance();  
         if ( ! $_oOption->isAdvancedAllowed() ) {
-            $oAdminPage->setSettingNotice( AmazonAutoLinks_PluginUtility::getUpgradePromptMessage() );
+            $oAdminPage->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessage() );
             return $aOldInputs;
         }
         
