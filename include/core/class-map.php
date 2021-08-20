@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.6.20 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.6.22 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -116,6 +116,9 @@ return array(
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPostSanitization" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPostSanitization.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php", 
     "AmazonAutoLinks_Shortcode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/shortcode/AmazonAutoLinks_Shortcode.php", 

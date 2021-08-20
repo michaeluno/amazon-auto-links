@@ -26,15 +26,43 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
             new AmazonAutoLinks_Proxy_WebPageDumper_Admin;
         }
 
-        $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
-        if ( ! $_oToolOption->get( array( 'web_page_dumper', 'enable' ), false ) ) {
+        $this->___loadEventsMust();
+
+        if ( ! $this->___shouldProceed() ) {
             return;
         }
 
         $this->___loadEvents();
 
     }
+        /**
+         * @return boolean
+         * @since  4.6.23
+         */
+        private function ___shouldProceed() {
+            $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
+            if ( $_oToolOption->get( array( 'web_page_dumper', 'enable' ), false ) ) {
+                return true;
+            }
+            if ( $this->isDoingAjax() && $this->getElement( $_POST, array( 'enableWebPageDumper' ) ) ) {
+                return true;
+            }
+            return false;
+        }
 
+        /**
+         * Loads events that must be loaded regardless of whether the option is enabled or not.
+         * @since 4.6.23
+         */
+        private function ___loadEventsMust() {
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPostSanitization;    // [4.6.23+]
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage;       // [4.6.23+]
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection;                    // [4.6.23+]
+        }
+
+        /**
+         *
+         */
         private function ___loadEvents() {
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies;
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse;
@@ -43,6 +71,5 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse;
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL;
         }
-
 
 }

@@ -30,28 +30,35 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
      * @since  4.6.18
      */
     protected function _getPostSanitized( array $aPost ) {
-        return array(
-            'postID'        => absint( $this->getElement( $aPost, array( 'postID' ) ) ),
-            'transientID'   => sanitize_text_field( $this->getElement( $aPost, array( 'transientID' ), '' ) ),
-            'selected_url'  => $this->getURLSanitized( $this->getElement( $aPost, array( 'selected_url' ), '' ) ),
-            'reload'        => ( boolean ) $this->getElement( $aPost, array( 'reload' ) ),
+        $_aPost = array(
+            'postID'              => absint( $this->getElement( $aPost, array( 'postID' ) ) ),
+            'transientID'         => sanitize_text_field( $this->getElement( $aPost, array( 'transientID' ), '' ) ),
+            'selected_url'        => $this->getURLSanitized( $this->getElement( $aPost, array( 'selected_url' ), '' ) ),
+            'reload'              => ( boolean ) $this->getElement( $aPost, array( 'reload' ) ),
         );
+        $_aPost = apply_filters( 'aal_filter_ajax_post_sanitization_category_selection', $_aPost );
+        return $this->getAsArray( $_aPost );
     }
 
     /**
      * @return array
      * @throws Exception        Throws a string value of an error message.
-     * @param  array     $aPost Sanitized POST data containing `postID`, `transienttID`, `selected_url`, and `reload`.
+     * @param  array     $aPost Sanitized POST data containing `postID`, `transientID`, `selected_url`, and `reload`.
      */
     protected function _getResponse( array $aPost ) {
 
+        do_action( 'aal_action_ajax_response_category_selection', $aPost ); // [4.6.23+]
+// throw new Exception(
+//     "<span class='warning'>" . sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), 'https://dummy.url' ) . "</span>"
+//     . ' ' . $this->___getReloadMessage()
+// );
         // Passing the unit options via transient as passing through JS results in escaped characters and causes errors.
         $_aUnitOptions      = $this->_getUnitOptions( $aPost );
         $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
         $_sCategoryListURL  = $this->___getCategoryListURL( $aPost, $_sLocale );
 
         if ( ! $_sCategoryListURL ) {
-            throw new Exception( __( 'Could not load the page as no URL is given.', 'amazon-auto-links' ) );
+            throw new Exception( "<span class='warning'>" . __( 'Could not load the page as no URL is given.', 'amazon-auto-links' ) . "</span>" );
         }
 
         $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
@@ -82,7 +89,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         $_sHTML = $_oHTTP->get();
         if ( ! $_sHTML ) {
             throw new Exception(
-                sprintf( __( 'Could not load the page: %1$s', 'amazon-auto-links' ), $_sCategoryListURL )
+                "<span class='warning'>" . sprintf( __( 'Could not load the page: %1$s', 'amazon-auto-links' ), $_sCategoryListURL ) . "</span>"
                 . ' ' . $this->___getReloadMessage()
             );
         }
@@ -94,7 +101,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         $_sCategoryList = $this->___getCategoryList( $_oDoc, $_sCategoryListURL );
         if ( ! $_sCategoryList ) {
             throw new Exception(
-                sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), $_sCategoryListURL )
+                "<span class='warning'>" . sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), $_sCategoryListURL ) . "</span>"
                 . ' ' . $this->___getReloadMessage()
             );
         }
@@ -229,17 +236,20 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
     private function ___getReloadMessage() {
 
         $_aToolsOptions  = $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ], array() ) );
-        $_bProxyEnabled  = $this->getElement( $_aToolsOptions, array( 'proxies', 'enable' ), false );
-        $_sProxyMessage  = $_bProxyEnabled
+        $_bWPDEnabled    = $this->getElement( $_aToolsOptions, array( 'web_page_dumper', 'enable' ), false );
+        $_sProxyMessage  = $_bWPDEnabled
             ? ''
             : sprintf(
-                __( 'If this continues, try enabling the proxy from <a href="%1$s">here</a>.', 'amazon-auto-links' ),
+                __( 'If this continues, try enabling <a href="%1$s" target="_blank">proxies</a>.', 'amazon-auto-links' ),
                 $this->getProxySettingScreenURL()
             ) . ' ';
-        $_sReloadButton  = '<a class="button button-small button-reload">'
-                . __( 'Reload', 'amazon-auto-links' )
-            . '</a>';
-        return $_sProxyMessage . $_sReloadButton;
+        $_sReloadButton  = "<a class='button button-small button-reload'>"
+                    . "<span class='dashicons dashicons-image-rotate'></span>"
+                    . __( 'Reload', 'amazon-auto-links' )
+                . "</a>"
+            . "</span>";
+        return "<span class='warning'>" . $_sProxyMessage . "</span>"
+            . apply_filters( 'aal_filter_output_category_selection_reload_message', $_sReloadButton );
 
     }
 
