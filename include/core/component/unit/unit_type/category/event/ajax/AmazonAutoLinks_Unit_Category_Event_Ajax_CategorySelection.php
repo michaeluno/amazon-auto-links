@@ -31,7 +31,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
      */
     protected function _getPostSanitized( array $aPost ) {
         return array(
-            'postID'        => absint( self::sanitizeFileName( $this->getElement( $aPost, array( 'postID' ) ) ) ),
+            'postID'        => absint( $this->getElement( $aPost, array( 'postID' ) ) ),
             'transientID'   => sanitize_text_field( $this->getElement( $aPost, array( 'transientID' ), '' ) ),
             'selected_url'  => $this->getURLSanitized( $this->getElement( $aPost, array( 'selected_url' ), '' ) ),
             'reload'        => ( boolean ) $this->getElement( $aPost, array( 'reload' ) ),
