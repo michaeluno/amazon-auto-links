@@ -1,13 +1,14 @@
 # Todos
 
 ## Minor
-- Test the plugin template system on wordpress.com. (there is a reported case that templates cannot be selected on sites hosted by wordpress.com)
-- Add an option "Use these proxies for Web Page Dumper".
-- Fix image widths displayed with the %content% tag. *unsure what this is about
+- Add country flag icons to locale select fields. - partially done. 
+- Add an option "Use these proxies for Web Page Dumper". *unsure about this
+- Fix image widths displayed with the %content% tag. *unsure about this
 - [Bug] Fix a bug that cloning a unit does not clone template options. *unconfirmed
 - [Refactor][Internal] Move global asset directory to the main component. (partially done.)
-- [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither not set nor sent.
-- [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. -> output container can contain multiple units and this is not simple to achieve.
+- [Internal] Fix an issue: when the proxy option is enabled with `AmazonAutoLinks_HTTPClient`, cookies are neither set nor sent.
+- [Feature][Internal] Add the data-unit-type or data-type attribute in the output container. This helps for technical support. 
+  -> output container can contain multiple units and this is not simple to achieve.
 
 ### Maybe
 - The embed unit type should update product data after scraping 
@@ -17,6 +18,7 @@
 - Have a means to prompt the user to update Web Page Dumper if they are using old versions of it. 
   
 ## Major
+- [Feature] Add a new unit type, Item Pick-up, which allows the user to pick up products from search and existing units.
 - [Feature] Add a unit option to set text for the disclaimer pop up link.
 - [Feature] Create an Affiliate Disclosure setting section.
   - e.g. Add a textarea field to define text inserted in the footer.
@@ -46,9 +48,7 @@
     - The ability of automating it will not be included as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
 - [Feature] Add an opt-in component that handles user specific options such as asking allow to load image links in the setting pages from the developer's site. 
 - [Feature] Add a Gutenberg block to create and compose product links.
-- [Feature] Add a Gutenberg block to select units.
-- [4.7.0][Feature] Add a UI to search and display http request data.  
-- [4.7.0][Feature] Add a random sort option for the Product Search units.  
+- [Feature] Add a Gutenberg block to select units.  
 - [4.6][Feature] Add an option to the Geotargeting component that asks whether to only transform links for products which exist in the user's locale store.   
 - [UI] Change the PA-API Request Counter tab to PA-API and include the followings
     - The today's request counts.
@@ -61,7 +61,6 @@
 - [Feature] Introduce a new unit type Comparison Table -> this can be a template.
 - [Feature][Template] Add a card template.
 - [Feature] Add the ability to select a caching type from either database or file.
-- [Feature] Add the ability to create actual posts from units.
 - [Feature] Implement a shared caching system.
     - Add the ability to get caches from shared cache servers.
     - Add the ability to submit caches to shared cache servers.
