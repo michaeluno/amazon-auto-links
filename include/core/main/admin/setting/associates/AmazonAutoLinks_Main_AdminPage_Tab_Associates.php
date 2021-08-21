@@ -34,6 +34,8 @@ class AmazonAutoLinks_Main_AdminPage_Tab_Associates extends AmazonAutoLinks_Admi
      */
     protected function _loadTab( $oAdminPage ) {
 
+        new AmazonAutoLinks_Select2CustomFieldType( $oAdminPage->oProp->sClassName );
+
         // Sections
         new AmazonAutoLinks_Main_AdminPage_Section_Associates(
             $oAdminPage,

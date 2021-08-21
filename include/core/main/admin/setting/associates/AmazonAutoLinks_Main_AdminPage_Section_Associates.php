@@ -60,11 +60,11 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
             array(
                 'field_id'          => 'locale',
                 'title'             => __( 'Locale', 'amazon-auto-links' ),
-                'type'              => 'revealer',
-                'select_type'       => 'select',
+                'type'              => 'select2',
                 'default'           => $this->___getDefaultLocale(),
                 'label'             => $_aLocaleNames,
-                'selectors'         => $this->___getLocaleSelectors( $_aLocaleSlugs ),
+                'selector'          => $this->___getLocaleSelectors( $_aLocaleSlugs ),
+                'icon'              => $this->___getLocaleIcons( $_aLocaleSlugs ),
                 'description'       => __( 'The country of the marketplace.', 'amazon-auto-links' )
                     . ' ' . __( 'This selected locale serves as the main locale.', 'amazon-auto-links' ),
                 'value'             => $this->getHTTPQueryGET( 'locale', null ),    // sanitization done
@@ -114,6 +114,25 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
             }
             return $_aSelectors;
         }
+
+        /**
+         * @param  array $aLocaleSlugs
+         * @return array
+         * @since  4.7.0
+         */
+        private function ___getLocaleIcons( array $aLocaleSlugs ) {
+            $_aIcons = array();
+            foreach( $aLocaleSlugs as $_sLocale ) {
+                $_sFlagCode = 'UK' === $_sLocale
+                    ? 'gb'
+                    : strtolower( $_sLocale );
+                $_sIconPath  = AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/country_flags/' . $_sFlagCode . '.svg';
+                $_sIconURL   = AmazonAutoLinks_Registry::getPluginURL( $_sIconPath, true );
+                $_aIcons[ $_sLocale ] = "<img style='min-width:32px;' src='" . esc_url( $_sIconURL ) . "' />";
+            }
+            return $_aIcons;
+        }
+
         /**
          * @param  array $aLocaleSlugs
          * @return array
@@ -126,11 +145,8 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
                 $_aFieldSets[]  = array(
                     'field_id' => $_sLocale,
                     'title'    => "<span class='country-name'>" . $_oLocale->getName() . "</span>"
-                        . "<div class='stay-right'>"
-                            . "<div class='country-flag'><img src='" . $_oLocale->getFlagImg() . "' alt='" . esc_attr( $_sCountryName ) . "' title='" . esc_attr( $_sCountryName ) . "' /></div>"
-                        . "</div>"
-                        . "<div class='stay-right'>"
-                            . "<span class='market-place-domain'>" . $_oLocale->getDomain() . "</span>"
+                        . "<div class=''>"
+                            . "<span class='market-place-domain'>(" . $_oLocale->getDomain() . ")</span>"
                         . "</div>",
                     'class'    => array(
                         'fieldrow' => array( 'locale-' . strtolower( $_sLocale ), 'locale' ),
