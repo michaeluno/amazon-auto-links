@@ -257,6 +257,7 @@ $aClassFiles = array(
     "AmazonAutoLinks_AdminPageFramework_Utility_Deprecated"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_Deprecated.php", 
     "AmazonAutoLinks_AdminPageFramework_Utility_File"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_File.php", 
     "AmazonAutoLinks_AdminPageFramework_Utility_HTMLAttribute"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_HTMLAttribute.php", 
+    "AmazonAutoLinks_AdminPageFramework_Utility_Interpreter"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_Interpreter.php", 
     "AmazonAutoLinks_AdminPageFramework_Utility_Path"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_Path.php", 
     "AmazonAutoLinks_AdminPageFramework_Utility_String"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_String.php", 
     "AmazonAutoLinks_AdminPageFramework_Utility_SystemInformation"=> AmazonAutoLinks_AdminPageFramework_Registry::$sDirPath . "/factory/_common/utility/base_utility/AdminPageFramework_Utility_SystemInformation.php", 
