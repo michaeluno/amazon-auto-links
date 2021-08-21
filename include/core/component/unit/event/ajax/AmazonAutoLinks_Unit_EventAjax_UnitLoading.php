@@ -186,7 +186,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
         // in JavaScript, object properties are accessed as ajax_object.ajax_url, ajax_object.we_value
         wp_localize_script(
             $_sScriptHandle,
-            'aalAjaxUnitLoading ', // variable name
+            'aalAjaxUnitLoading', // variable name
             $_aScriptData
         );
     }
