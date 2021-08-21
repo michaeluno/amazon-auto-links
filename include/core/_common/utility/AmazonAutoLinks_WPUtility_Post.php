@@ -206,7 +206,6 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             if ( isset( self::$___aDefaults_getPostMeta[ $sMetaKey ] ) ) {
                 return self::$___aDefaults_getPostMeta[ $sMetaKey ];
             }
-            remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
             self::$___aDefaults_getPostMeta = array();
             return $mValue;
         }
