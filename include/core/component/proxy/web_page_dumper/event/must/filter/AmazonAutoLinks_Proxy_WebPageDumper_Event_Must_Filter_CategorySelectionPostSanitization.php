@@ -29,14 +29,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPos
      * @since  4.6.23
      */
     public function replyToSanitizePost( $aPost ) {
-AmazonAutoLinks_Debug::log( '$_POST' );
-AmazonAutoLinks_Debug::log( $_POST );
-        $_aPost = array(
+        return array(
             'enableWebPageDumper' => ( boolean ) $this->getElement( $_POST, 'enableWebPageDumper' ),
         ) + $aPost;
-AmazonAutoLinks_Debug::log( '$_aPost' );
-AmazonAutoLinks_Debug::log( $_aPost );
-return $_aPost;
     }
 
 }

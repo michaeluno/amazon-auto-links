@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.6.23
+Stable tag:         4.6.24
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.6.24 - 08/21/2021 =
+- Fixed a bug that debug log files were created when the Web Page Dumper option is enabled, started in v4.6.23.
 
 = 4.6.23 - 08/21/2021 =
 - Tweaked the UI of the category selection screen regarding the `Reload` button.
