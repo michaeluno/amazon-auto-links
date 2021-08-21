@@ -31,8 +31,6 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection ex
         if ( ! ( boolean ) $this->getElement( $aPost, 'enableWebPageDumper' ) ) {
             return;
         }
-AmazonAutoLinks_Debug::log( $_POST );
-AmazonAutoLinks_Debug::log( $aPost );
         $this->___setWebPageDumperEnabled();
     }
         /**
