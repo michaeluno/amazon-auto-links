@@ -153,14 +153,18 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
     /**
      * Used user meta keys.
-     * @var string[]
+     * @var   string[]
      * @sicne 4.6.0
      */
     static public $aUserMeta = array(
         // key => meta key
-        'first_saved'        => 'aal_first_saved',
-        'rated'              => 'aal_rated',
-        'load_new_templates' => 'aal_load_new_templates',
+        'first_saved'          => 'aal_first_saved',
+        'rated'                => 'aal_rated',
+        'load_new_templates'   => 'aal_load_new_templates',
+        'surveys'              => 'aal_surveys',                // 4.7.0
+        'announcements'        => 'aal_announcements',          // 4.7.0
+        'developer_amazon_tag' => 'aal_developer_amazon_tag',   // 4.7.0
+        'usage_data'           => 'aal_usage_data',             // 4.7.0
     );
         
     /**

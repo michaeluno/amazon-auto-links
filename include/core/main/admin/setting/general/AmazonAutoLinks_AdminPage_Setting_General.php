@@ -72,11 +72,7 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
             array( 'tab_slug' => $this->sTabSlug, )
         );              
      
-        new AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate( 
-            $oAdminPage,
-            $this->sPageSlug, 
-            array( 'tab_slug' => $this->sTabSlug, )
-        );         
+
      
     }
     

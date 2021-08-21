@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.6.22 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.6.24 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -88,6 +88,11 @@ return array(
     "AmazonAutoLinks_Event_Error_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log.php", 
     "AmazonAutoLinks_Event_Error_Log_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log_HTTPRequestCache.php", 
     "AmazonAutoLinks_Log_VersatileFileManager_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/_common/utility/file/AmazonAutoLinks_Log_VersatileFileManager_ErrorLog.php", 
+    "AmazonAutoLinks_OptIn_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt_in/AmazonAutoLinks_OptIn_Loader.php", 
+    "AmazonAutoLinks_OptIn_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt_in/admin/AmazonAutoLinks_OptIn_Setting.php", 
+    "AmazonAutoLinks_OptIn_Setting_Section_Affiliate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt_in/admin/AmazonAutoLinks_OptIn_Setting_Section_Affiliate.php", 
+    "AmazonAutoLinks_OptIn_Setting_Section_UserBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt_in/admin/AmazonAutoLinks_OptIn_Setting_Section_UserBase.php", 
+    "AmazonAutoLinks_OptIn_Setting_Tab_OptIn" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt_in/admin/AmazonAutoLinks_OptIn_Setting_Tab_OptIn.php", 
     "AmazonAutoLinks_Proxy_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/AmazonAutoLinks_Proxy_Loader.php", 
     "AmazonAutoLinks_ToolAdminPage_Proxy_Tab" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab.php", 
     "AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php", 
@@ -420,7 +425,6 @@ return array(
     "AmazonAutoLinks_FormFields_ProductFilter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter.php", 
     "AmazonAutoLinks_FormFields_ProductFilter_Image" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/form/field/AmazonAutoLinks_FormFields_ProductFilter_Image.php", 
     "AmazonAutoLinks_FormFields_Setting_ExternalScript" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/form/field/AmazonAutoLinks_FormFields_Setting_ExternalScript.php", 
-    "AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/form/field/AmazonAutoLinks_FormFields_Setting_MiunosoftAffiliate.php", 
     "AmazonAutoLinks_HelpAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage.php", 
     "AmazonAutoLinks_HelpAdminPage_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_About" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php", 
@@ -470,7 +474,6 @@ return array(
     "AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_ExternalScript" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ExternalScript.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_Feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php", 
-    "AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_ProductFilters" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_UnitPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_UnitPreview.php", 
     "AmazonAutoLinks_AdminPage_Setting_General_Widgets" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Widgets.php", 
@@ -537,7 +540,7 @@ return array(
     "AmazonAutoLinks_PostType__Common___ActionLink_Status_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php", 
     "AmazonAutoLinks_AjaxEvent_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/ajax/AmazonAutoLinks_AjaxEvent_Base.php", 
     "AmazonAutoLinks_Event___Action_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/wpcron/AmazonAutoLinks_Event___Action_Base.php", 
-    "AmazonAutoLinks_Event___Filter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/wpcron/AmazonAutoLinks_Event___Filter_Base.php",
+    "AmazonAutoLinks_Event___Filter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/wpcron/AmazonAutoLinks_Event___Filter_Base.php", 
     "AmazonAutoLinks_Debug" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Debug.php", 
     "AmazonAutoLinks_Message" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Message.php", 
     "AmazonAutoLinks_PluginUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_PluginUtility.php", 
