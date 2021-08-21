@@ -32,7 +32,12 @@ class AmazonAutoLinks_ToolOption extends AmazonAutoLinks_Option_Base {
             ),
             'update_last_run_time'  => 0,  // ( integer ) with no visible field and updated with the automatic proxy update
         ),
-
+        'web_page_dumper'   => array(
+            'enable'                => false,
+            'list'                  => '',
+            'always'                => '',
+            'excludes'              => '',
+        ),
     );
 
     /**

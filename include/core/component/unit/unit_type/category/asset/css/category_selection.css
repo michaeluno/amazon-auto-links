@@ -1,3 +1,10 @@
+/**
+ * @name Category Selection
+ * @version 1.0.1
+ */
+.display-inline-block {
+	display: inline-block;
+}
 .now-loading {
 	display: inline-block;
 }
@@ -16,11 +23,24 @@
 	display: inline-block;
 }
 
-.button.button-reload {
+.button.button-reload.button-small {
 	margin-top: 0.4em;
-	margin-left: 0.2em;
+	margin-left: 0;
+	padding: 0 10px 0 6px;
+}
+.button.button-reload .dashicons {
+	font-size: 1em;
+    vertical-align: text-top;
+    line-height: 1;
+    height: 1em;
 }
 
+.label-checkbox {
+	margin-right: 0.4em;
+}
+.label-checkbox input {
+	margin-right: 0.4em;
+}
 
 /* Added/Excluding Checkbox */
 #added-categories a, #excluding-categories a {

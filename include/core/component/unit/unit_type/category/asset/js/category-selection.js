@@ -1,6 +1,6 @@
 /*
     @name Category Selection
-    @version 1.0.2
+    @version 1.1.0
  */
 (function($){
 
@@ -255,6 +255,7 @@
      * - from a click event of the category links
      *
      * @param sURL
+     * @param bReload
      */
     function handleCategoryList( sURL, bReload ) {
 
@@ -292,9 +293,10 @@
                 postID: aalCategorySelection.postID,
                 selected_url: sURL,   // the link url that the user clicks on the link of the category list. Here it is empty because of the first time of loading
                 reload: ( typeof bReload !== 'undefined' && bReload ) ? 1 : 0,    // whether the request if from the Reload button. In this case, the previous cache should be cleared upon a new request.
+                enableWebPageDumper: $( 'input[type="checkbox"]#enable-web-page-dumper' ).is( ':checked' ) ? 1 : 0, // without converting to 1/0, a string value of 'true' or 'false' is passsed.
             },
             success: function ( response ) {
-
+                debugLog( 'response (category list)', response );
                 if ( ! response.success ) {
 
                     // For the first time loading
@@ -302,7 +304,7 @@
 
                     // For the second time or more
                     $( '.response-error' ).remove(); // clear the previous error.
-                    $( '#category-select-breadcrumb' ).after( '<p class="response-error"><span class="warning">'  + response.result + '</span></p>' );
+                    $( '#category-select-breadcrumb' ).after( '<div class="response-error">' + response.result + '</div>' );
 
                     // Reload button event
                     $( '.button-reload' ).on( 'click', function( event ) {
@@ -334,7 +336,7 @@
             }, // success:
             error: function( response ) {
                 console.log( 'error', response );
-                $( '.now-loading-breadcrumb' ).html( '<p class="response-error">' + response.responseText + '</p>' );
+                $( '.now-loading-breadcrumb' ).html( '<div class="response-error"><p>' + response.responseText + '</p></div>' );
             },
             complete: function() {
 
@@ -362,6 +364,7 @@
             // Set the outputs.
             $( '#category-select-breadcrumb' ).html( oResponse[ 'breadcrumb' ] )
                 .append( '<span id="current-url" class="hidden">' + sURL + '</span>' );
+            oResponse[ 'category_list' ].find( 'script' ).remove();
             $( '#category-list' ).html( oResponse[ 'category_list' ] );
             $( '#category-preview' ).html( oResponse[ 'category_preview' ] );
 
@@ -445,11 +448,11 @@
                 urls_excluded: ___getURLsExcluded(),
             },
             success: function ( response ) {
-                debugLog( 'response: ', response );
+                debugLog( 'response (unit preview):', response );
                 if ( ! response.success ) {
 
                     // @todo insert the error in the unit preview area
-                    $( '#unit-preview' ).html( $( '<div>' + '<p class="response-error">' + response.result + '</p>' + '</div>' ) );
+                    $( '#unit-preview' ).html( $( '<div class="response-error">' + '<p>' + response.result + '</p>' + '</div>' ) );
                     return;
 
                 }
@@ -466,7 +469,7 @@
             }, // success:
             error: function( response ) {
                 // Show errors for the unit preview in the unit preview section
-                $( '#unit-preview' ).html( $( '<div>' + '<p class="response-error">' + response.responseText + '</p>' + '</div>' ) );
+                $( '#unit-preview' ).html( $( '<div class="response-error">' + '<p>' + response.responseText + '</p>' + '</div>' ) );
             },
             complete: function() {
                 _oSpinner.remove();
