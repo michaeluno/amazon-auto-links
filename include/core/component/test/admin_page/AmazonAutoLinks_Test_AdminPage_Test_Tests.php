@@ -184,7 +184,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
              * @since  4.6.21
              */
             private function ___getFilesOutput() {
-                $_oArrayTable = new AmazonAutoLinks_ArrayTable(
+                $_sTable = $this->getTableOfArray(
                     $this->_getFileList(),
                     array(
                         'table' => array(
@@ -195,7 +195,7 @@ class AmazonAutoLinks_Test_AdminPage_Test_Tests extends AmazonAutoLinks_AdminPag
                         )
                     )
                 );
-                return wp_kses( $_oArrayTable->get(), 'post' );
+                return wp_kses( $_sTable, 'post' );
             }
                 /**
                  * @return array

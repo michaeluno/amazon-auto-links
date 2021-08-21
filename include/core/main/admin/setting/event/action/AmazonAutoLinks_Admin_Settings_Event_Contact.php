@@ -64,20 +64,23 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
             // 'PHP'               => $this->getPHPInfo(),
             // 'MySQL'             => $this->getMySQLInfo(),
         );
-        $_oTable   = new AmazonAutoLinks_ArrayTable( $_aData, array(
-            'td' => array(
-                array(
-                    'style' => 'vertical-align: top; width: 12%;',
+        $_sTable = $this->getTableOfArray(
+            $_aData,
+            array(
+                'td' => array(
+                    array(
+                        'style' => 'vertical-align: top; width: 12%;',
+                    ),
+                    array(
+                        'style' => 'vertical-align: top;',
+                    ),
                 ),
-                array(
-                    'style' => 'vertical-align: top;',
-                ),
-            ),
-        ) );
+            )
+        );
         wp_mail(
             $this->getElement( $this->___aEmail, 'to' ),
             sprintf( 'Reporting Issue of %1$s (Site Information)', AmazonAutoLinks_Registry::NAME . ' ' . AmazonAutoLinks_Registry::VERSION ),
-            $_oTable->get()
+            $_sTable
         );
     }
 

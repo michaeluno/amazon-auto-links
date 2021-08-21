@@ -53,7 +53,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
         echo "<div class='product-thumbnail float-right'>" . wp_kses( $_sImage, 'post' ) . "</div>";
         echo wp_kses( $this->___getGoBackLink(), 'post' );
         echo "<h3>" . __( 'Product Details', 'amazon-auto-links' ) . "</h3>";
-        $_oArrayTable = new AmazonAutoLinks_ArrayTable(
+        $_sTable = $this->getTableOfArray(
             $_aProduct,
             array(
                 'table' => array(
@@ -64,7 +64,7 @@ class AmazonAutoLinks_AdminPage_Tab_Product extends AmazonAutoLinks_AdminPage_Ta
                 )
             )
         );
-        echo wp_kses( $_oArrayTable->get(), 'post' );
+        echo wp_kses( $_sTable, 'post' );
     }
         private function ___getGoBackLink() {
             $_sProductsPageURL = add_query_arg(

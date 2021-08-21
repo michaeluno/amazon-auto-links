@@ -53,9 +53,13 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
             $_aData         = $aCache[ 'data' ];
 
             if ( is_wp_error( $_aData ) ) {
-                return $this->___getTable(
+                return $this->getTableOfArray(
                     array( '<span class="icon-warning dashicons dashicons-warning"></span> WP_Error' => $_aData->get_error_code() . ': ' . $_aData->get_error_message() ),
-                    'widefat striped fixed http-request-cache cache-data'
+                    array(
+                        'table' => array(
+                            'class' => 'widefat striped fixed http-request-cache cache-data',
+                        ),
+                    )
                 );
             }
 
@@ -79,98 +83,48 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
             $_aData[ 'headers' ] = $this->getHeaderFromResponse( $_aData );
             $_aData[ 'cookies' ] = $this->getCookiesToParse( $_aData[ 'cookies' ] );
 
-            return $this->___getTable(
+            return $this->getTableOfArray(
                 $_aData,
-                'widefat striped fixed http-request-cache cache-data',
+                array(
+                    'table' => array(
+                        'class' => 'widefat striped fixed http-request-cache cache-data',
+                    ),
+                    'td'    => array(
+                        array( 'class' => 'width-one-fourth', ),  // first td
+                    ),
+                    'th'    => array(
+                        array( 'class' => 'width-one-fourth column-key', ),  // first td
+                        array( 'style' => 'width: 88%;', ),  // 2nd td
+                    ),
+                ),
                 array( __( 'Preview', 'amazon-auto-links' ) => $_sPreviewLink )
             );
-
         }
-            /**
-             * @param  array $aData
-             * @param  string $sClasses Class attributes
-             * @param  array $aHeader
-             *
-             * @return string
-             * @since  4.7.0
-             */
-            private function ___getTable( $aData, $sClasses, $aHeader=array() ) {
-                return "<table class='{$sClasses}'>"
-                        . $this->___getTableHeader( $aHeader )
-                        . "<tbody>"
-                            . $this->___getTableRows( $aData )
-                        . "</tbody>"
-                    . "</table>";
-            }
-                private function ___getTableHeader( array $aHeader ) {
-                    $_sOutput = '';
-                    foreach( $aHeader as $_sKey => $_sValue ) {
-                        $_sOutput = "<tr class='table-header'>"
-                                . "<th>{$_sKey}</th>"
-                                . "<td>{$_sValue}</td>"
-                            . "</tr>";
-                    }
-                    return $_sOutput;
-                }
-            /**
-             * @param array  $aArray
-             * @param string $sKeySearch
-             * @param string $sKeyInsert
-             * @param mixed $mData
-             * @see   https://stackoverflow.com/a/9847709
-             */
-            private function ___setValueBeforeKey( &$aArray, $sKeySearch, $sKeyInsert, $mData = null ) {
-                 // if the key doesn't exist
-                if ( false === ($_iOffset = array_search($sKeySearch, array_keys($aArray)))  ) {
-                    $_iOffset = 0; // should we prepend $aArray with $mData?
-                    $_iOffset = count($aArray); // or should we append $aArray with $mData? lets pick this one...
-                }
-                $aArray = array_merge(
-                    array_slice( $aArray, 0, $_iOffset ),
-                    array( $sKeyInsert => $mData ),
-                    array_slice( $aArray, $_iOffset )
-                );
-            }
 
+        /**
+         * @param  array $aCache
+         * @return string
+         * @since  4.7.0
+         */
         private function ___getCacheDetails( array $aCache ) {
             unset( $aCache[ 'data' ] );
-            return "<table class='widefat striped fixed http-request-cache cache-details'>"
-                    . "<tbody>"
-                        . $this->___getTableRows( $aCache )
-                    . "</tbody>"
-                . "</table>";
+            return $this->getTableOfArray(
+                $aCache,
+                array(
+                    'table' => array(
+                        'class' => 'widefat striped fixed http-request-cache cache-details',
+                    ),
+                    'td'    => array(
+                        array( 'class' => 'width-one-fourth', ),  // first td
+                    )
+                )
+            );
         }
-            private function ___getTableRows( array $aCache ) {
-                if ( empty( $aCache ) ) {
-                    return "<tr>"
-                            . "<td colspan='2'>" . __( 'No data found.', 'amazon-auto-links' ) . "</td>"
-                        . "</tr>";
-                }
-                $_sOutput = '';
-                foreach( $aCache as $_sColumnName => $_asValue ) {
-                    $_sOutput .= $this->___getTableRow( $_sColumnName, $_asValue );
-                }
-                return $_sOutput;
-            }
-                private function ___getTableRow( $sColumnName, $asValue ) {
-                    return "<tr>"
-                            . "<td class='column-key'><p>{$sColumnName}</p></td>"
-                            . $this->___getColumnValue( $asValue, $sColumnName )
-                        . "</tr>";
-                }
-                private function ___getColumnValue( $mValue, $sClasses ) {
-                    if ( is_array( $mValue ) ) {
-                        return "<td>"
-                                . $this->___getTable( $mValue, 'widefat striped fixed ' . $sClasses )
-                            . "</td>";
-                    }
-                    if ( is_null( $mValue ) ) {
-                        $mValue = '(null)';
-                    }
-                    return is_scalar( $mValue )
-                        ? "<td class='column-value'><p>{$mValue}</p></td>"
-                        : "<td class='column-value'>" . AmazonAutoLinks_Debug::getDetails( $mValue ) . "</td>";
-                }
+
+        /**
+         * @return string
+         * @since  4.7.0
+         */
         private function ___getGoBackLink() {
             $_sProductsPageURL = add_query_arg(
                 array(
