@@ -80,6 +80,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
 
         if (  $this->_isInThePage() ) {
             $this->_sNonce = wp_create_nonce( $this->_sNonceKey );
+            add_filter( 'get_user_option_meta-box-order_' . $this->oProp->sPostType, array( $this, 'replyToSetMetaBoxOrder' ) );    // 4.7.0+
+
         }
 
         // 4.1.0+
@@ -89,6 +91,20 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
            
     }
 
+        /**
+         * @param  array $aOrder
+         * @return array
+         * @since  4.7.0
+         */
+        public function replyToSetMetaBoxOrder( $aOrder ) {
+            if ( ! empty( $aOrder ) ) {
+                return $aOrder;
+            }
+            // Set the default order
+            $aOrder = $this->oUtil->getAsArray( $aOrder );
+            $aOrder[ 'side' ] = 'amazonautolinks_unitpostmetabox_viewlink,amazonautolinks_unitpostmetabox_submit_category,submitdiv';
+            return $aOrder;
+        }
         /**
          * @since   4.1.0
          */
