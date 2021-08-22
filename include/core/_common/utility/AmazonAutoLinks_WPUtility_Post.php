@@ -89,6 +89,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * @param  string $strPostType
      * @param  string $perm
      * @return false|mixed|object
+     * @see    wp_count_posts()
      * @since  2.0.0
      */
     static public function countPosts( $strPostType, $perm='' ) {
