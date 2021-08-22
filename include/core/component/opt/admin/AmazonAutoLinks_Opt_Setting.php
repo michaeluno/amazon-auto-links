@@ -9,29 +9,28 @@
  */
 
 /**
- * Loads the admin pages of the Opt-in component.
+ * Loads the admin pages of the `Opt` component.
  *
- * @package      Amazon Auto Links/OptIn
+ * @package      Amazon Auto Links/Opt
  * @since        4.7.0
  */
-class AmazonAutoLinks_OptIn_Setting {
+class AmazonAutoLinks_Opt_Setting {
 
     /**
      * Sets up hooks.
+     * @since 4.7.0
      */
     public function __construct() {
-
         add_action( 'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'main' ], array( $this, 'replyToLoadPage' ) );
-
     }
 
     /**
      * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @return      void
-     * @callback    action      load_{page slug}_{tab slug}
+     * @callback    add_action()      load_{page slug}_{tab slug}
+     * @since       4.7.0
      */
     public function replyToLoadPage( $oFactory ) {
-        new AmazonAutoLinks_OptIn_Setting_Tab_OptIn( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
+        new AmazonAutoLinks_Opt_Setting_Tab_Opt( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
     }
 
 }

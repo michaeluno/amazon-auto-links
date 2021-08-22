@@ -14,7 +14,7 @@
  * @since       3.2.0
  * @since       4.7.0   Moved from the main component and renamed from `AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate`.
  */
-class AmazonAutoLinks_OptIn_Setting_Section_Affiliate extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @return array

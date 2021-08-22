@@ -9,11 +9,11 @@
  */
 
 /**
- * Adds the 'Opt-in' in-page tab to the 'Settings' page.
+ * Adds the 'Opt' in-page tab to the 'Settings' page.
  *
  * @since       4.7.0
  */
-class AmazonAutoLinks_OptIn_Setting_Tab_OptIn extends AmazonAutoLinks_AdminPage_Tab_Base {
+class AmazonAutoLinks_Opt_Setting_Tab_Opt extends AmazonAutoLinks_AdminPage_Tab_Base {
 
     /**
      * @return array
@@ -21,8 +21,8 @@ class AmazonAutoLinks_OptIn_Setting_Tab_OptIn extends AmazonAutoLinks_AdminPage_
      */
     protected function _getArguments() {
         return array(
-            'tab_slug'  => 'optin',
-            'title'     => __( 'Opt-in', 'amazon-auto-links' ),
+            'tab_slug'  => 'opt',
+            'title'     => __( 'Opt', 'amazon-auto-links' ),
             'order'     => 100,
             // 'style'     => AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath . '/asset/css/settings.css',
         );
@@ -33,12 +33,12 @@ class AmazonAutoLinks_OptIn_Setting_Tab_OptIn extends AmazonAutoLinks_AdminPage_
      * @since 4.7.0
      */
     protected function _loadTab( $oAdminPage ) {
-        new AmazonAutoLinks_OptIn_Setting_Section_UserBase(
+        new AmazonAutoLinks_Opt_In_Setting_Section_UserBase(
             $oAdminPage,
             $this->sPageSlug,
             array( 'tab_slug' => $this->sTabSlug, )
         );
-        new AmazonAutoLinks_OptIn_Setting_Section_Affiliate(
+        new AmazonAutoLinks_Opt_In_Setting_Section_Affiliate(
             $oAdminPage,
             $this->sPageSlug,
             array( 'tab_slug' => $this->sTabSlug, )

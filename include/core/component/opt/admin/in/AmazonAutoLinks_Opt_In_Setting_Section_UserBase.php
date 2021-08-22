@@ -13,7 +13,7 @@
  *
  * @since       4.7.0
  */
-class AmazonAutoLinks_OptIn_Setting_Section_UserBase extends AmazonAutoLinks_AdminPage_Section_Base {
+class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_AdminPage_Section_Base {
 
     protected function _getArguments() {
         return array(

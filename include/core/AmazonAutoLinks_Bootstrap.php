@@ -240,7 +240,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
 
             new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
 
-            new AmazonAutoLinks_OptIn_Loader; // [4.7.0]
+            new AmazonAutoLinks_Opt_Loader; // [4.7.0]
 
             // [4.6.19] Released versions don't include these
             if ( file_exists( dirname( __FILE__ ) . '/component/test' ) ) {
