@@ -1,5 +1,6 @@
 - Added the `Pop-up Image Preview` unit option.
-- Added the `Opt` screen of the `Settings` page. 
+- Added the `Opt` screen of the `Settings` page.
+- Added the ability to reset meta box order and screen layouts of the plugin setting pages.
 - Added the `Feedback` and `Report Issues` contact forms in the `Support` screen of the `Help` page. 
 - Added the `Shuffle` unit option for Product Search units.
 - Added the `HTTP Requests` screen in the `Reports` page, which allows the user to display or delete HTTP request caches.

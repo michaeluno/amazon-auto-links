@@ -28,6 +28,20 @@ class AmazonAutoLinks_Opt_Setting_Tab_Opt extends AmazonAutoLinks_AdminPage_Tab_
         );
     }
 
+    protected function _construct( $oFactory ) {
+        // Hook the load tab event later than Opt-in and Opt-out.
+        remove_action( "load_{$this->sPageSlug}_{$this->sTabSlug}", array( $this, 'replyToLoadTab' ) );
+        add_action( "load_{$this->sPageSlug}_{$this->sTabSlug}", array( $this, 'replyToLoadTab' ), 100 );
+    }
+
+    protected function _loadTab( $oFactory ) {
+        new AmazonAutoLinks_Opt_Setting_Section_UI(
+            $oFactory,
+            $this->sPageSlug,
+            array( 'tab_slug' => $this->sTabSlug, )
+        );
+    }
+
     /**
      * @param $oAdminPage
      * @sinec 4.7.0
