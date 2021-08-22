@@ -59,7 +59,10 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
                         'table' => array(
                             'class' => 'widefat striped fixed http-request-cache cache-data',
                         ),
-                    )
+                    ),
+                    array(),
+                    array(),
+                    false
                 );
             }
 
@@ -97,7 +100,9 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
                         array( 'style' => 'width: 88%;', ),  // 2nd td
                     ),
                 ),
-                array( __( 'Preview', 'amazon-auto-links' ) => $_sPreviewLink )
+                array( __( 'Preview', 'amazon-auto-links' ) => $_sPreviewLink ),
+                array(),
+                false
             );
         }
 
