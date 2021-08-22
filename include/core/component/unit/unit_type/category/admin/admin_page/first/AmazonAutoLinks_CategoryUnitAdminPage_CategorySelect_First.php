@@ -12,7 +12,6 @@
  * Adds the 'Add Unit by Category' tab to the 'Add Unit by Category' page of the loader plugin.
  * 
  * @since       3
- * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonAutoLinks_AdminPage_Tab_Base {
     
@@ -60,9 +59,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
     
     /**
      * 
-     * @callback        filter      validation_{page slug}_{tab slug}
+     * @callback add_filter() validation_{page slug}_{tab slug}
+     * @return   array
      */
-    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
         $_bVerified = ! $oFactory->hasFieldError();
         $_aErrors   = array();
@@ -71,10 +71,10 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
 
-            // must set an field error array which does not yield empty so that it won't be redirected.
+            // must set a field error array which does not yield empty so that it won't be redirected.
             $oFactory->setFieldErrors( array( 'error' ) );        
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
-            return $aOldInput;
+            return $aOldInputs;
             
         }   
 
@@ -82,12 +82,12 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
         if ( ! $_bVerified ) {
             $oFactory->setFieldErrors( $_aErrors );     
             $oFactory->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aInput;
+            return $aInputs;
         }
 
-        $aInput[ 'bounce_url' ]   = add_query_arg(
+        $aInputs[ 'bounce_url' ]   = add_query_arg(
             array(  
-                'transient_id'  => $aInput[ 'transient_id' ],
+                'transient_id'  => $aInputs[ 'transient_id' ],
                 'aal_action'    => 'select_category',
                 'page'          => $this->sPageSlug, // AmazonAutoLinks_Registry::$aAdminPages[ 'category_select' ],
                 'tab'           => $this->sTabSlug, // 'first'
@@ -101,12 +101,12 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
         // Store the inputs for the next time.
         update_option( 
             AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInput,
+            $aInputs,
             false       // disable auto-load 
         );
         
-        return $aInput;
+        return $aInputs;
         
     }
-    
+
 }
