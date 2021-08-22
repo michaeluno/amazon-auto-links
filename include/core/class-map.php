@@ -93,6 +93,7 @@ return array(
     "AmazonAutoLinks_Opt_Setting_Tab_Opt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Tab_Opt.php", 
     "AmazonAutoLinks_Opt_In_Setting_Section_Affiliate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/in/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php", 
     "AmazonAutoLinks_Opt_In_Setting_Section_UserBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/in/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php", 
+    "AmazonAutoLinks_Opt_Out_Setting_Section_UserBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/out/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php", 
     "AmazonAutoLinks_Proxy_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/AmazonAutoLinks_Proxy_Loader.php", 
     "AmazonAutoLinks_ToolAdminPage_Proxy_Tab" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab.php", 
     "AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php", 

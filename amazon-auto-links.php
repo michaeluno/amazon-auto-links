@@ -158,13 +158,19 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      */
     static public $aUserMeta = array(
         // key => meta key
-        'first_saved'          => 'aal_first_saved',
-        'rated'                => 'aal_rated',
-        'load_new_templates'   => 'aal_load_new_templates',
-        'surveys'              => 'aal_surveys',                // 4.7.0
-        'announcements'        => 'aal_announcements',          // 4.7.0
-        'developer_amazon_tag' => 'aal_developer_amazon_tag',   // 4.7.0
-        'usage_data'           => 'aal_usage_data',             // 4.7.0
+        'first_saved'                    => 'aal_first_saved',
+        // Opt-in
+        'load_new_templates'             => 'aal_load_new_templates',
+        'surveys'                        => 'aal_surveys',                          // 4.7.0
+        'announcements'                  => 'aal_announcements',                    // 4.7.0
+        'developer_amazon_tag'           => 'aal_developer_amazon_tag',             // 4.7.0
+        'usage_data'                     => 'aal_usage_data',                       // 4.7.0
+        // Out-out
+        'rated'                          => 'aal_rated',
+        'never_ask_surveys'              => 'aal_never_ask_surveys',                // 4.7.0
+        'never_ask_announcements'        => 'aal_never_ask_announcements',          // 4.7.0
+        'never_ask_developer_amazon_tag' => 'aal_never_ask_developer_amazon_tag',   // 4.7.0
+        'never_ask_usage_data'           => 'aal_never_ask_usage_data',             // 4.7.0
     );
         
     /**

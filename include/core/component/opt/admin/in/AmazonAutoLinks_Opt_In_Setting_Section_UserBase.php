@@ -17,9 +17,10 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
 
     protected function _getArguments() {
         return array(
-            'section_id'    => 'user_base',
+            'section_id'    => 'opt_in_user_base',
             'tab_slug'      => $this->sTabSlug,
             'title'         => __( 'Opt-in', 'amazon-auto-links' ),
+            'save'          => false,
             'description'   => array(
                  __( 'Decide whether to allow what the plugin asks you.', 'amazon-auto-links' ),
             ),
@@ -38,28 +39,6 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
         $_sStars  = $_oSVG->get( 50 );
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
-            array(
-                'field_id'              => 'aal_rated',
-                'type'                  => 'checkbox',
-                'title'                 => __( 'Plugin Review', 'amazon-auto-links' ),
-                'label'                 => sprintf(
-                    __( 'Have you <a href="%1$s" target="_blank">rated the plugin</a>?', 'amazon-auto-links' ),
-                    'https://wordpress.org/support/plugin/amazon-auto-links/reviews/'
-                ),
-                'description'           => array(
-                    "<span class='aal-have-you-rated-answer'>"
-                        . "<span>"
-                            . sprintf(
-                                __( 'Give the plugin <a href="%1$s" target="_blank">%2$s</a> to encourage the development!', 'amazon-auto-links' ),
-                                'https://wordpress.org/support/plugin/amazon-auto-links/reviews/',
-                                $_sStars
-                        )
-                        . "</span>"
-                    . "</span>"
-                ),
-                'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_rated', true ),
-            ),
             array(
                 'field_id'              => 'aal_surveys',
                 'type'                  => 'checkbox',
