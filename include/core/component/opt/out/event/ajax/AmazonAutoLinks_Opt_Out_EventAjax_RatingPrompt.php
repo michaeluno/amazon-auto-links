@@ -10,9 +10,10 @@
 
 /**
  * Handles the rating prompt display.
- * @since   4.5.6
+ * @since   4.6.6
+ * @since   Renamed from `AmazonAutoLinks_Main_EventAjax_RatingPrompt`.
  */
-class AmazonAutoLinks_Main_EventAjax_RatingPrompt extends AmazonAutoLinks_AjaxEvent_Base {
+class AmazonAutoLinks_Opt_Out_EventAjax_RatingPrompt extends AmazonAutoLinks_AjaxEvent_Base {
 
     protected $_sActionHookSuffix = 'aal_action_rating_prompt';
 

@@ -9,11 +9,11 @@
  */
 
 /**
- * Loads the component, Opt
+ * Loads the sub-component of Opt, Opt-in
  *
  * @since        4.7.0
  */
-class AmazonAutoLinks_Opt_Loader {
+class AmazonAutoLinks_Opt_In_Loader {
 
     /**
      * @var   string
@@ -30,9 +30,6 @@ class AmazonAutoLinks_Opt_Loader {
 
         $this->___loadAdminPages();
 
-        new AmazonAutoLinks_Opt_Out_Loader;
-        new AmazonAutoLinks_Opt_In_Loader;
-
     }
 
     /**
@@ -42,7 +39,7 @@ class AmazonAutoLinks_Opt_Loader {
         if ( ! is_admin() ) {
             return;
         }
-        new AmazonAutoLinks_Opt_Setting;
+        new AmazonAutoLinks_Opt_In_Setting;
     }
 
 }

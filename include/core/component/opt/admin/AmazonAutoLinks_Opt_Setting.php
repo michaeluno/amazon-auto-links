@@ -26,7 +26,7 @@ class AmazonAutoLinks_Opt_Setting {
 
     /**
      * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @callback    add_action()      load_{page slug}_{tab slug}
+     * @callback    add_action()      load_{page slug}
      * @since       4.7.0
      */
     public function replyToLoadPage( $oFactory ) {

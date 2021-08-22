@@ -29,28 +29,6 @@ class AmazonAutoLinks_Opt_Setting_Tab_Opt extends AmazonAutoLinks_AdminPage_Tab_
     }
 
     /**
-     * Triggered when the tab is loaded.
-     * @since 4.7.0
-     */
-    protected function _loadTab( $oAdminPage ) {
-        new AmazonAutoLinks_Opt_In_Setting_Section_UserBase(
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-        new AmazonAutoLinks_Opt_Out_Setting_Section_UserBase(
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-        new AmazonAutoLinks_Opt_In_Setting_Section_Affiliate(
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-    }
-
-    /**
      * @param $oAdminPage
      * @sinec 4.7.0
      */

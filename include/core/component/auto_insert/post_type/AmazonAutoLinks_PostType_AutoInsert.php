@@ -64,7 +64,13 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
         
             $this->setAuthorTableFilter( false );
             add_filter( 'months_dropdown_results', '__return_empty_array' );
-        
+
+            $this->enqueueStyles(
+                array(
+                    AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+                )
+            );
+
         }
 
         // If a unit is deleted, check auto-insert items if there are empty items. If so, delete them as well.

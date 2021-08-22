@@ -59,8 +59,6 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
 
-        add_filter( 'footer_left_' . $this->oProp->sClassName, array( $this, 'replyToModifyFooterLeft' ) );
-
         // [4.6.7] Allows components to set setting notices
         add_action( 'aal_action_set_admin_setting_notice', array( $this, 'replyToSetSettingNotice' ), 10, 2 );
 
@@ -69,24 +67,10 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
     public function load() {
 
         $this->___doPageSettings();
-        $this->___enqueuePageResources();
         $this->___setAdminNoticePluginWarning();
 
     }
-        /**
-         * @since 4.6.6
-         */
-        private function ___enqueuePageResources() {
-            $_sMin = $this->oUtil->isDebugMode() ? '' : '.min';
-            wp_enqueue_script( 'aal-rating-prompt', $this->oUtil->getResolvedSRC( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/js/rating-prompt{$_sMin}.js" ), array( 'jquery' ), false, true );
-            $_sActionHookSuffix = 'aal_action_rating_prompt';
-            $_aData = array(
-                'actionHookSuffix' => $_sActionHookSuffix,
-                'nonce'            => wp_create_nonce( $_sActionHookSuffix ),
-                'ajaxURL'          => admin_url( 'admin-ajax.php' ),
-            );
-            wp_localize_script( 'aal-rating-prompt', 'aalRatingPrompt', $_aData );
-        }
+
         /**
          * @since 4.6.6
          */
@@ -113,59 +97,6 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
         
         }
-
-    /**
-     * @param  string $sFooterHTML
-     * @return string
-     * @since  4.6.6
-     */
-    public function replyToModifyFooterLeft( $sFooterHTML ) {
-
-        $_iUserID = get_current_user_id();
-        $_iTimeFirstSaved = get_user_meta( $_iUserID, 'aal_first_saved', true );
-        if ( ! $_iTimeFirstSaved ) {
-            return $sFooterHTML;
-        }
-        if ( time() < $_iTimeFirstSaved + ( 86400 * 30 ) ) { // 30 days past
-            return $sFooterHTML;
-        }
-        if ( get_user_meta( $_iUserID, 'aal_rated', true ) ) {
-            return "<span class='aal-thanks-for-rating'>"
-                   . sprintf( __( 'Thanks for <a href="%1$s" target="_blank">rating</a>', 'amazon-auto-links' ), 'https://wordpress.org/support/plugin/amazon-auto-links/reviews/' )
-                . "</span>"
-                . $sFooterHTML;
-        }
-        $_oSVG   = new AmazonAutoLinks_SVGGenerator_RatingStar( true, __( 'Five stars', 'amazon-auto-links' ) );
-        $_sStars = $_oSVG->get( 50 );
-        return "<span class='aal-rating-prompt'>"
-            . "<span class='aal-have-you-rated'>"
-                . "<span class='icon-info dashicons dashicons-editor-help'></span>"
-                . __( 'Is the plugin useful?', 'amazon-auto-links' )
-            . "</span>"
-            . "<span class='aal-have-you-rated-answer'>"
-                . "<span>"
-                    . sprintf(
-                        __( 'Give the plugin <a href="%1$s" target="_blank">%2$s</a> to encourage the development!', 'amazon-auto-links' ),
-                        'https://wordpress.org/support/plugin/amazon-auto-links/reviews/',
-                        $_sStars
-               )
-                . "</span>"
-            . "</span>"
-            . "<span id='aal-rating-prompt-dismissal' class='aal-have-you-rated-dismiss'>"
-               . "<a href='#aal-rating-prompt-dismissal' data-rated='" . time() . "'>"
-                   . "<span class='icon-dismiss dashicons dashicons-dismiss'></span>"
-                   . __( 'Dismiss', 'amazon-auto-links' )
-               . "</a>"
-            . "</span>"
-        . "</span>" // .aal-rating-prompt
-        . "<span class='aal-footer-left-original'>"
-           . "<span class='aal-thanks-for-rating'>"
-                . sprintf( __( 'Thanks for <a href="%1$s" target="_blank">rating</a>', 'amazon-auto-links' ), 'https://wordpress.org/support/plugin/amazon-auto-links/reviews/' )
-           .  "</span>"
-           . $sFooterHTML
-        . "</span>";
-
-    }
 
     /**
      * @param  array $aInputs

@@ -9,11 +9,11 @@
  */
 
 /**
- * Loads the component, Opt
+ * Loads the sub-component of Opt, Opt-out
  *
  * @since        4.7.0
  */
-class AmazonAutoLinks_Opt_Loader {
+class AmazonAutoLinks_Opt_Out_Loader {
 
     /**
      * @var   string
@@ -29,10 +29,13 @@ class AmazonAutoLinks_Opt_Loader {
         self::$sDirPath = dirname( __FILE__ );
 
         $this->___loadAdminPages();
+        add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
 
-        new AmazonAutoLinks_Opt_Out_Loader;
-        new AmazonAutoLinks_Opt_In_Loader;
+    }
 
+    public function replyToLoadEvents() {
+        // Ajax
+        new AmazonAutoLinks_Opt_Out_EventAjax_RatingPrompt; // [4.6.6]
     }
 
     /**
@@ -42,7 +45,7 @@ class AmazonAutoLinks_Opt_Loader {
         if ( ! is_admin() ) {
             return;
         }
-        new AmazonAutoLinks_Opt_Setting;
+        new AmazonAutoLinks_Opt_Out_Setting;
     }
 
 }

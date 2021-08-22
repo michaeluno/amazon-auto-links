@@ -35,8 +35,7 @@ class AmazonAutoLinks_Opt_Out_Setting_Section_UserBase extends AmazonAutoLinks_O
     protected function _addFields( $oFactory, $sSectionID ) {
 
         $_iUserID = get_current_user_id();
-        $_oSVG    = new AmazonAutoLinks_SVGGenerator_RatingStar( true, __( 'Five stars', 'amazon-auto-links' ) );
-        $_sStars  = $_oSVG->get( 50 );
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -50,11 +49,7 @@ class AmazonAutoLinks_Opt_Out_Setting_Section_UserBase extends AmazonAutoLinks_O
                 'description'           => array(
                     "<span class='aal-have-you-rated-answer'>"
                         . "<span>"
-                            . sprintf(
-                                __( 'Give the plugin <a href="%1$s" target="_blank">%2$s</a> to encourage the development!', 'amazon-auto-links' ),
-                                'https://wordpress.org/support/plugin/amazon-auto-links/reviews/',
-                                $_sStars
-                        )
+                            . AmazonAutoLinks_Opt_Message::getGiveThePlugin5Stars()
                         . "</span>"
                     . "</span>"
                 ),
