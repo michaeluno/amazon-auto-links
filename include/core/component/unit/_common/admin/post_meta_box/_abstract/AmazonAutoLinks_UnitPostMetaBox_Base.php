@@ -117,4 +117,25 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         }
     }
 
+    /**
+     * This is meant to server as a callback function.
+     * Call it like `add_action( 'do_meta_boxes', array( $this, 'replyToRemoveLocaleMetaBox' ) );`
+     * @param    string $sPostType
+     * @callback add_action() do_meta_boxes
+     * @since    4.7.0
+     */
+    public function replyToRemoveLocaleMetaBox( $sPostType ) {
+        if ( ! in_array( $sPostType, $this->oProp->aPostTypes, true ) ) {
+            return;
+        }
+        if ( $this->oUtil->hasBeenCalled( __METHOD__ ) ) {
+            return;
+        }
+        remove_meta_box(
+            'amazon_auto_links_locale',
+            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], // screen: post type slug
+            'side'
+        );
+    }
+
 }

@@ -37,15 +37,8 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload extends AmazonAuto
     }
 
     public function load() {
-        add_action( 'do_meta_boxes', array( $this, 'replyToRemoveMetaBoxes' ) );
+        add_action( 'do_meta_boxes', array( $this, 'replyToRemoveLocaleMetaBox' ) );
     }
-        public function replyToRemoveMetaBoxes() {
-            remove_meta_box(
-                'amazon_auto_links_locale',
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], // screen: post type slug
-                'side'
-            );
-        }
 
     /**
      * Validates submitted form data.
