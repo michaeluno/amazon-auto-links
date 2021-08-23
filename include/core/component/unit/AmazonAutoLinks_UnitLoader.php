@@ -119,16 +119,6 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
      * Loads admin components.
      */
     private function ___loadAdminComponents() {
-                
-        new AmazonAutoLinks_UnitPostMetaBox_ViewLink(
-            null,
-            __( 'View', 'amazon-auto-links' ), // meta box title
-            array( // post type slugs: post, page, etc.
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-            ), 
-            'side', // context - e.g. 'normal', 'advanced', or 'side'
-            'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
-        );                    
 
         new AmazonAutoLinks_UnitPostMetaBox_Common(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
@@ -170,7 +160,25 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
         );
 
-        // Common meta boxes
+        new AmazonAutoLinks_UnitPostMetaBox_ViewLink(
+            null,
+            __( 'View', 'amazon-auto-links' ), // meta box title
+            array( // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'side', // context - e.g. 'normal', 'advanced', or 'side'
+            'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
+
+        new AmazonAutoLinks_UnitPostMetaBox_Submit(
+            'submitdiv',    // override the built-in one
+            __( 'Publish', 'amazon-auto-links' ), // meta box title
+            array( // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'side', // context - e.g. 'normal', 'advanced', or 'side'
+            'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
 
         new AmazonAutoLinks_UnitPostMetaBox_Locale(
             'amazon_auto_links_locale',       // meta box ID is given so that the Feed unit type can remove this meta box using this ID
@@ -186,11 +194,11 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
             __( 'Cache', 'amazon-auto-links' ), // title
             array(      // post type slugs: post, page, etc.
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-            ), 
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
             'side',     // context - e.g. 'normal', 'advanced', or 'side'
             'core'   // priority - e.g. 'high', 'core', 'default' or 'low'
-        );                   
+        );
 
         new AmazonAutoLinks_UnitPostMetaBox_CommonAdvanced(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.

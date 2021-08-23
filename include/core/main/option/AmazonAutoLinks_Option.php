@@ -545,6 +545,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
+     * @return false
+     * @since  4.7.0
+     */
+    public function isAdvancedUnitSubmitSupported() {
+        return false;
+    }
+
+    /**
      * @return  boolean
      * @param   integer|null $iNumberOfUnits
      */
