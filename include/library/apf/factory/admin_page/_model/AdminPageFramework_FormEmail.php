@@ -46,7 +46,8 @@ class AmazonAutoLinks_AdminPageFramework_FormEmail extends AmazonAutoLinks_Admin
             return $this->getReadableListOfArray(( array )$this->___getEmailArgument($aInputs, $aEmailOptions, 'message', $sSubmitSectionID)) . $this->getReadableListOfArray($this->getElementAsArray($aEmailOptions, array('data')));
         }
         $_aAttributes = array('td' => array(array('style' => 'vertical-align: top; width: 12%;',), array('style' => 'vertical-align: top; white-space: pre;',),),);
-        return $this->getTableOfArray(( array )$this->___getEmailArgument($aInputs, $aEmailOptions, 'message', $sSubmitSectionID), $_aAttributes) . $this->getTableOfArray($this->getElementAsArray($aEmailOptions, array('data')), $_aAttributes);
+        return $this->getTableOfArray(( array )$this->___getEmailArgument($aInputs, $aEmailOptions, 'message', $sSubmitSectionID), $_aAttributes, array(), array(), false )
+               . $this->getTableOfArray($this->getElementAsArray($aEmailOptions, array('data')), $_aAttributes );
     }
     private function ___getAttachmentsFormatted($asAttachments) {
         if (empty($asAttachments)) {
