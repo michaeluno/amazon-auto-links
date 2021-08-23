@@ -46,18 +46,29 @@ class AmazonAutoLinks_Message {
     /**
      * @return string
      * @since  4.7.0
-     * @deprecated
      */
-    // static public function getThisRequiresPro() {
-    //     return __( 'This requires Pro.', 'amazon-auto-links' );
-    // }
+    static public function getThisIsAvailableInPro() {
+        return __( 'Available in Pro.', 'amazon-auto-links' );
+    }
+
+    /**
+     * @param  string $sEmailAddress
+     * @return string
+     * @since  4.7.0
+     */
+    static public function getMessageNotSent( $sEmailAddress ) {
+        return sprintf(
+            __( 'For some reasons, the message could not be sent. Please contact %1$s directly.', 'amazon-auto-links' ),
+            $sEmailAddress
+        );
+    }
 
     /**
      * @return string
      * @since  4.7.0
      */
-    static public function getThisIsAvailableInPro() {
-        return __( 'Available in Pro.', 'amazon-auto-links' );
+    static public function getActivateLicense() {
+        return __( 'Please activate the license.', 'amazon-auto-links' );
     }
 
 }

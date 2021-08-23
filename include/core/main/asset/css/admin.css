@@ -1,6 +1,6 @@
 /*
 	@name Admin
-	@version 1.2.1
+	@version 1.2.2
  */
 /* General */
 .width-full,
@@ -74,6 +74,12 @@ hr {
 }
 .align-center {
 	text-align: center;
+}
+
+/* Dash-icons */
+p .dashicons {
+	margin-left: 0.2em;
+	margin-right: 0.2em;
 }
 
 /* Admin Page */
@@ -153,9 +159,6 @@ span.disabled {
 
 
 /* For Pro */
-.upgrade-to-pro {
-
-}
 .description.upgrade-notice {
 	margin-left: 1em;
 }

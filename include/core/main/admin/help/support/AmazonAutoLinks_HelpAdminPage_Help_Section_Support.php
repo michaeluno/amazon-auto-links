@@ -25,7 +25,6 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
         return array(
             'tab_slug'      => $this->sTabSlug,
             'section_id'    => $this->sSectionID,
-            // 'title'         => __( 'Technical Support', 'amazon-auto-links' ),
             'description'   => __( 'Got stuck? Get technical support.', 'amazon-auto-links' ),
         );
     }
@@ -133,19 +132,20 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                 'value'             => __( 'Send', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'field' => array(
-                        'style' => 'float:right; clear:none; display: inline;',
+                        'style' => 'float:right; clear:none; display: inline-block; text-align: right;',
                     ),
                     'disabled' => 'disabled',
                 ),
                 'skip_confirmation' => true,
                 'system_message'    => array(
                     'success' => __( 'We will get back to you soon!', 'amazon-auto-links' ),
+                    'failure' => AmazonAutoLinks_Message::getMessageNotSent( 'aal-support@michaeluno.jp' ),
                 ),
                 'email'             => array(
                     // Each argument can accept a string or an array representing the dimensional array key.
                     // For example, if there is a field for the email title, and its section id is 'my_section'  and  the field id is 'my_field', pass an array, array( 'my_section', 'my_field' )
                     'to'            => '',
-                    'subject'       => 'Reporting Issue',
+                    'subject'       => 'If this message is sent, it means hacked.',
                     'message'       => array( $this->sSectionID ), // the section name enclosed in an array. If it is a field, set it to the second element like array( 'seciton id', 'field id' ).
                     'headers'       => '',
                     'attachments'   => '', // the file path(s)
@@ -161,23 +161,32 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
             ),
             array(
                 'field_id'          => 'support_forums',
-                'title'             => __( 'Support Forums', 'amazon-auto-links' ),
-                'content'           => "<p>"
-                    . sprintf(
-                        __( 'To get free support, visit the <a href="%1$s" target="_blank">support forum</a>.', 'amazon-auto-links' ),
-                'https://wordpress.org/support/plugin/amazon-auto-links'
-                    )
-                . "</p>",
-            ),
-            array(
-                'field_id'          => 'priority_support',
-                'title'             => __( 'Priority Support' ),
-                'content'           => "<p>"
-                    . sprintf(
-                        __( 'You can get priority email support by purchasing <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ),
-                        'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
-                    )
-                . "</p>",
+                'show_title_column' => false,
+                'content'           => $this->getTableOfArray(
+                    array(
+                        __( 'Support Forums', 'amazon-auto-links' ) => sprintf(
+                            __( 'To get free support, visit the <a href="%1$s" target="_blank">support forum</a>.', 'amazon-auto-links' ),
+                    'https://wordpress.org/support/plugin/amazon-auto-links'
+                        )
+                        . "<a href='https://wordpress.org/support/plugin/amazon-auto-links' target='_blank'><span class='dashicons dashicons-external'></span></a>",
+                        __( 'Priority Support', 'amazon-auto-links' ) => sprintf(
+                            __( 'You can get priority email support by purchasing <a href="%1$s" target="_blank">Pro</a>.', 'amazon-auto-links' ),
+                            'https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/'
+                        )
+                        . "<a href='https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/' target='_blank'><span class='dashicons dashicons-external'></span></a>",
+                    ),
+                    array(
+                        'table' => array(
+                            'class' => 'widefat striped fixed',
+                        ),
+                        'td'    => array(
+                            array( 'class' => 'width-one-fourth', ),  // first td
+                        )
+                    ),
+                    array(),
+                    array(),
+                    false
+                ),
             ),
             array()
         );

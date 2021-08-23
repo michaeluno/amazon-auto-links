@@ -113,7 +113,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                 'value'             => __( 'Send', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'field' => array(
-                        'style' => 'float:right; clear:none; display: inline;',
+                        'style' => 'float:right; clear:none; display: inline-block; text-align: right;',
                     ),
                 ),
                 'skip_confirmation' => true,
