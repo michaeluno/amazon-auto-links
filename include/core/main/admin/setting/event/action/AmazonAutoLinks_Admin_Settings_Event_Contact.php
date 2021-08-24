@@ -58,9 +58,9 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
         unset( $_aData[ 'Plugin' ] );
         $_aData    = $_aData + array(
             'WordPress'         => class_exists( 'WP_Debug_Data' ) ? WP_Debug_Data::debug_data() : array(),
-            'General Options'   => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] ) ),
+            'General Options'   => $this->___getGeneralOptions(),
             'Template Options'  => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ] ) ),
-            'Tools Options'     => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ] ) ),
+            'Tools Options'     => $this->___getToolsOptions(),
             // 'PHP'               => $this->getPHPInfo(),
             // 'MySQL'             => $this->getMySQLInfo(),
         );
@@ -83,6 +83,31 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
             $_sTable
         );
     }
+        private function ___getGeneralOptions() {
+            $_aOptions = $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] ) );
+            foreach( $this->getElementAsArray( $_aOptions, 'associates'  ) as $_sLocale => $_aAssociate ) {
+                if ( ! is_array( $_aAssociate ) ) {
+                    continue;
+                }
+                $_sAccessKey = $this->getElement( $_aAssociate, array( 'paapi', 'access_key' ) );
+                if ( $_sAccessKey ) {
+                    $_aOptions[ 'associates' ][ $_sLocale ][ 'paapi' ][ 'access_key' ] = '********';
+                }
+                $_sSecretKey = $this->getElement( $_aAssociate, array( 'paapi', 'secret_key' ) );
+                if ( $_sSecretKey ) {
+                    $_aOptions[ 'associates' ][ $_sLocale ][ 'paapi' ][ 'secret_key' ] = '********';
+                }
+            }
+            return $_aOptions;
+        }
+        private function ___getToolsOptions() {
+            $_aToolsOptions    = $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ] ) );
+            $_sUnusableProxies = $this->getElement( $_aToolsOptions, array( 'proxies', 'unusable' ) );
+            if ( $_sUnusableProxies ) {
+                $_aToolsOptions[ 'proxies' ][ 'unusable' ] = count( explode( PHP_EOL, $_sUnusableProxies ) ) . ' items';
+            }
+            return $_aToolsOptions;
+        }
 
     /**
      * @param $aWPMail
