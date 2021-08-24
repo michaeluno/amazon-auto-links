@@ -43,6 +43,12 @@ abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
     protected $bIsNetworkAdmin = false;
 
     /**
+     * @var   array Stores the raw options.
+     * @since 4.7.0
+     */
+    private $___aRawOptions;
+
+    /**
      * Sets up properties.
      * @param string $sOptionKey
      */
@@ -70,11 +76,15 @@ abstract class AmazonAutoLinks_Option_Base extends AmazonAutoLinks_WPUtility {
      * @return array  An array holding options stored in the options table without merging with the default values.
      */
     public function getRawOptions() {
-        return $this->getAsArray(
+        if ( isset( $this->___aRawOptions ) ) {
+            return $this->___aRawOptions;
+        }
+        $this->___aRawOptions = $this->getAsArray(
             $this->bIsNetworkAdmin
                 ? get_site_option( $this->sOptionKey, array() )
                 : get_option( $this->sOptionKey, array() )
         );
+        return $this->___aRawOptions;
     }
         
     /**
