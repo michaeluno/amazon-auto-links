@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Pointer Tooltip
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
 
@@ -25,9 +25,9 @@
         $( _this ).find( '.amazon-disclaimer-tooltip-content-text' ).css( 'display', 'none' );
 
         var _pointerTooltip = $( _this );
-        _pointerTooltip.on( 'click', function() {
-            return false; // disable click
-        });
+        // _pointerTooltip.on( 'click', function() {
+        //     return false; // disable click
+        // });
         _pointerTooltip.on( 'mouseover', function() {
 
             // Open the tooltip
@@ -39,10 +39,10 @@
                 },
                 // position: 'right',
                 position: {
-                    edge: 'right',
+                    edge: 'bottom',
                     align: 'center',
                     within: $( this ).closest( '.amazon-product-container, .amazon-auto-links' ), // <-- this is added
-                    collision: 'fit',
+                    collision: 'fit none',
                 },
                 buttons: function() {},
                 close: function() {},

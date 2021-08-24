@@ -44,6 +44,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             ),
         ),
 
+        // 4.7.0+
+        'disclosure' => array(
+            'page'                    => null,     // the page id, set in the constructor
+            'disclosure_text'         => null,     // set in the constructor
+            'link_disclaimer_to_page' => true,
+            'disclaimer_text'         => null,     // set in the constructor
+        ),
+
         // [4.6.19+]
         'security' => array(
             'allowed_html' => array(
@@ -55,11 +63,12 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'allowed_inline_css_properties' => 'min-height, max-height, min-width, max-width, display, float',
         ),
 
-        'form_options' => array(    // @deprecated 4.6.19 Migrated to the `security` element
-            'allowed_html_tags'             => null,
-            'allowed_attributes'            => null,
-            'allowed_inline_css_properties' => null,
-        ),
+        // @deprecated 4.6.19 Migrated to the `security` element
+        // 'form_options' => array(
+        //     'allowed_html_tags'             => null,
+        //     'allowed_attributes'            => null,
+        //     'allowed_inline_css_properties' => null,
+        // ),
 
         'product_filters'       => array(
             'black_list'     => array(
@@ -384,6 +393,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
         // Handle the `security` default values
         $this->aDefault[ 'security' ] = $this->___getDefaultSecurityOptions( $this->aDefault[ 'security' ], $_aRawOptions );
+
+        $this->aDefault[ 'disclosure' ][ 'disclosure_text' ] = __( '%site_host% is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn commission fees by advertising and linking to the following web sites. %associates_list%', 'amazon-auto-links' );
+        $this->aDefault[ 'disclosure' ][ 'disclaimer_text' ] = __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' );
 
         return $this->uniteArrays( $_aRawOptions, $this->aDefault );   // same as parent::_getFormattedOptions();
 

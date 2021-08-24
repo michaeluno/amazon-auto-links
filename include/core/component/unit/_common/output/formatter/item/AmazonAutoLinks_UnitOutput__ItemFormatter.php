@@ -169,11 +169,15 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
              * @return      string
              */
             private function ___getDisclaimerTooltip() {
-                return "<a href='#' class='amazon-disclaimer-tooltip'>"
+                $_sText   = __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' );
+                $_sURL    = apply_filters( 'aal_filter_unit_output_disclaimer_link_url', '' );
+                $_sHref   = $_sURL ? "href='" . esc_url( $_sURL ) . "'" : '';
+                $_sTarget = $_sURL ? " target='_blank'" : '';
+                return "<a {$_sHref}{$_sTarget} class='amazon-disclaimer-tooltip'>"
                         . __( 'More info', 'amazon-auto-links' )
                         . "<span class='amazon-disclaimer-tooltip-content'>"
                             . "<span class='amazon-disclaimer-tooltip-content-text'>"   // needed for widget CSS
-                                . __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' )
+                                . apply_filters( 'aal_filter_unit_output_disclaimer_text', $_sText, $this->___oUnitOutput->oUnitOption ) // 4.7.0
                             . "</span>"
                         . "</span>"
                     . "</a>";

@@ -223,24 +223,23 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
             // Tools - Unit option converter. This component has an event handler so needs to be loaded in the front-end as well.
             new AmazonAutoLinks_UnitOptionConverterLoader;
 
-            /// [4.2.0]
-            new AmazonAutoLinks_Proxy_Loader;
+            new AmazonAutoLinks_Proxy_Loader; // [4.2.0]
 
-            // [4.1.0]
-            new AmazonAutoLinks_ThirdPartySupportLoader;
+            new AmazonAutoLinks_ThirdPartySupportLoader; // [4.1.0]
 
             // [3.8.10]
             new AmazonAutoLinks_Loader_LinkConverter;
             new AmazonAutoLinks_DatabaseUpdater_Loader;
 
-            // [4.0.0]
-            new AmazonAutoLinks_CustomOEmbed_Loader;
+            new AmazonAutoLinks_CustomOEmbed_Loader; // [4.0.0]
 
             new AmazonAutoLinks_Log_Loader;  // [4.3.0]
 
             new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
 
             new AmazonAutoLinks_Opt_Loader; // [4.7.0]
+
+            new AmazonAutoLinks_Disclosure_Loader; // [4.7.0]
 
             // [4.6.19] Released versions don't include these
             if ( file_exists( dirname( __FILE__ ) . '/component/test' ) ) {

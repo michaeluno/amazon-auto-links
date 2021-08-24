@@ -233,9 +233,10 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * Used shortcode slugs
      */
     static public $aShortcodes = array(
-        'main'    => 'amazon_auto_links',
-        'button'  => 'aal_button',        // 4.3.0
-        'v1'      => 'amazonautolinks',   // backward compatibility for v1
+        'main'        => 'amazon_auto_links',
+        'button'      => 'aal_button',        // 4.3.0
+        'disclosure'  => 'aal_disclosure',    // 4.7.0
+        'v1'          => 'amazonautolinks',   // backward compatibility for v1
     );
 
     /**
