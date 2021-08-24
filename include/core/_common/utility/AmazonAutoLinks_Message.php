@@ -33,12 +33,13 @@ class AmazonAutoLinks_Message {
      * @since 4.7.0 Stores default messages.
      */
     public $aDefaults = array(
-        'activate_license'  => 'Please activate the license.',
-        'message_not_sent'  => 'For some reasons, the message could not be sent. Please contact %1$s directly.',
-        'consider_pro'      => 'Please consider upgrading to Pro to enable this feature.',
-        'consider_pro_link' => 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.',
-        'available_in_pro'  => 'Available in Pro.',
-        'upgrade_to_pro'    => 'Please upgrade to <a href="%1$s">Pro</a> to add more units!',
+        'activate_license'   => 'Please activate the license.',
+        'message_not_sent'   => 'For some reasons, the message could not be sent. Please contact %1$s directly.',
+        'consider_pro'       => 'Please consider upgrading to Pro to enable this feature.',
+        'consider_pro_link'  => 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.',
+        'available_in_pro'   => 'Available in Pro.',
+        'upgrade_to_pro'     => 'Please upgrade to <a href="%1$s">Pro</a> to add more units!',
+        'agree_to_send_info' => 'I understand that the system information including a PHP version and WordPress version etc. and plugin settings will be sent along with the messages to help troubleshooting.',
     );
 
     /**
@@ -145,6 +146,7 @@ class AmazonAutoLinks_Message {
         __( 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.', 'amazon-auto-links' );
         __( 'Available in Pro.', 'amazon-auto-links' );
         __( 'Please upgrade to <a href="%1$s">Pro</a> to add more units!', 'amazon-auto-links' ) . ' ' . __( 'Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' );
+        __( 'I understand that the system information including a PHP version and WordPress version etc. and plugin settings will be sent along with the messages to help troubleshooting.', 'amazon-auto-links' );
     }
 
 }

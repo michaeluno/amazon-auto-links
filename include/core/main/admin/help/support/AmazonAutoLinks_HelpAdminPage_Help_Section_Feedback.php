@@ -85,6 +85,9 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback extends AmazonAutoLink
                 'field_id'          => 'pros',
                 'title'             => __( 'What do you like about the plugin?', 'amazon-auto-links' ),
                 'type'              => 'textarea',
+                'rich'              => array(
+                    'media_buttons' => false,
+                ),
                 'description'       => __( 'Tell us what you use the plugin for mainly.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     // 'required'  => 'required',
@@ -95,6 +98,9 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback extends AmazonAutoLink
                 'field_id'          => 'cons',
                 'title'             => __( 'What are missing in the plugin?', 'amazon-auto-links' ),
                 'type'              => 'textarea',
+                'rich'              => array(
+                    'media_buttons' => false,
+                ),
                 'description'      => __( 'Tell us what you wish to have as a feature and what can be improved.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'required'  => 'required',

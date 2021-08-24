@@ -81,7 +81,10 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                 'field_id'          => 'description',
                 'title'             => __( 'What happened?', 'amazon-auto-links' ),
                 'type'              => 'textarea',
-                'rich'              => true,
+                'rich'              => array(
+                    'textarea_rows' => 10,  // set height
+                    'media_buttons' => false,
+                ),
                 'description'       => __( 'Tell us the problem with as much details as possible.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'required'      => 'required',
@@ -117,7 +120,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                 'title'             => __( 'Confirmation', 'amazon-auto-links' )
                     . ' (' . __( 'required', 'amazon-auto-links' ) . ')',
                 'type'              => 'checkbox',
-                'label'             => __( 'I understand that the system information including a PHP version and WordPress version etc. will be sent along with the messages to help developer trouble-shoot the problem.', 'amazon-auto-links' ),
+                'label'             => AmazonAutoLinks_Message::get( 'agree_to_send_info' ),
                 'attributes'        => array(
                     'required'  => 'required',
                     // 'disabled'  => 'disabled',

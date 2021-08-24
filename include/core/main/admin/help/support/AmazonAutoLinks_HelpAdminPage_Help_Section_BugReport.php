@@ -68,6 +68,9 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                 'field_id'          => 'expected_result',
                 'title'             => __( 'Expected Behavior', 'amazon-auto-links' ),
                 'type'              => 'textarea',
+                'rich'              => array(
+                    'media_buttons' => false,
+                ),
                 'description'       => __( 'Tell how the framework should work.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'required'  => 'required',
@@ -78,7 +81,10 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                 'field_id'          => 'actual_result',
                 'title'             => __( 'Actual Behavior', 'amazon-auto-links' ),
                 'type'              => 'textarea',
-                'description'      => __( 'Describe the behavior of the framework.', 'amazon-auto-links' ),
+                'rich'              => array(
+                    'media_buttons' => false,
+                ),
+                'description'       => __( 'Describe the behavior of the framework.', 'amazon-auto-links' ),
                 'attributes'        => array(
                     'required'  => 'required',
                     'style'     => 'min-height: 260px;',
@@ -101,7 +107,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                 'title'             => __( 'Confirmation', 'amazon-auto-links' )
                     . ' (' . __( 'required', 'amazon-auto-links' ) . ')',
                 'type'              => 'checkbox',
-                'label'             => __( 'I understand that the system information including a PHP version and WordPress version etc. will be sent along with the messages to help developer trouble-shoot the problem.', 'amazon-auto-links' ),
+                'label'             => AmazonAutoLinks_Message::get( 'agree_to_send_info' ),
                 'attributes'        => array(
                     'required'  => 'required',
                 ),
