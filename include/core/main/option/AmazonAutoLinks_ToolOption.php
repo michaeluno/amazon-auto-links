@@ -38,6 +38,17 @@ class AmazonAutoLinks_ToolOption extends AmazonAutoLinks_Option_Base {
             'always'                => '',
             'excludes'              => '',
         ),
+
+        // 3.8.0, 4.7.0 Moved from the main options
+        'convert_links' => array(
+            'enabled'               => false,
+            'where'                 => array(
+                'the_content'  => 1,
+                'comment_text' => 1,
+            ),
+            'filter_hooks'   => '',
+        ),
+
     );
 
     /**

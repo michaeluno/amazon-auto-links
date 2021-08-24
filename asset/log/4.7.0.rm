@@ -5,6 +5,7 @@
 - Added the `Shuffle` unit option for Product Search units.
 - Added the `HTTP Requests` screen in the `Reports` page, which allows the user to display or delete HTTP request caches.
 - Added the sub-options to the `Debug Mode` option to decide which debug components to enable.
+- Moved the `Converter` screen to the `Tools` page. 
 - Tweaked UI elements.
 - Fixed a bug that showing field tooltips affected the screen width.
 - Fixed an issue that disclaimer pop-up tooltips were often cut off.  

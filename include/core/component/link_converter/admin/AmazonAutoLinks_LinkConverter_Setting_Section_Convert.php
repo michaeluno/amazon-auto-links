@@ -42,7 +42,8 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
-        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $_oOption     = AmazonAutoLinks_Option::getInstance();
+        $_aRawOptions = $_oOption->getRawOptions();
 
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
@@ -54,6 +55,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
                     1 => __( 'On', 'amazon-auto-links' ),
                     0 => __( 'Off', 'amazon-auto-links' ),
                 ),
+                'value' => $this->getElement( $_aRawOptions, array( 'convert_links', 'enabled' ) ), // backward compatibility
             ),
             array(
                 'field_id'  => 'where',
@@ -63,12 +65,14 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
                     'the_content'     => __( 'Post contents', 'amazon-auto-links' ),
                     'comment_text'    => __( 'Comments', 'amazon-auto-links' ),
                 ),
+                'value' => $this->getElement( $_aRawOptions, array( 'convert_links', 'where' ) ), // backward compatibility
             ),
             array(
                 'field_id'      => 'filter_hooks',
                 'type'          => 'textarea',
                 'title'         => __( 'Custom Filter Hooks' ),
                 'description'   => __( 'If the areas to apply link conversion are not listed above and if you know the filter hook to apply to, specify here one per line.', 'amazon-auto-links' ),
+                'value' => $this->getElement( $_aRawOptions, array( 'convert_links', 'filter_hooks' ) ), // backward compatibility
             ),
             array()
         );
@@ -84,30 +88,42 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
 
         $_aErrors       = array();
 
-        $_oOption       = AmazonAutoLinks_Option::getInstance();
-        $_sAssociateID  = trim( ( string ) $_oOption->get( 'unit_default', 'associate_id' ) );
-
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
+        $_oOption       = AmazonAutoLinks_Option::getInstance();
+        $_sAssociateID  = trim( ( string ) $_oOption->getAssociateID( $_oOption->getMainLocale() ) );
         if ( ! $_sAssociateID ) {
             $oAdminPage->setFieldErrors( $_aErrors );
             $_sMessage = __( 'Please set the default Amazon Associate ID first.', 'amazon-auto-links' ) . ' '
                 . sprintf(
                     __( 'Go to <a href="%1$s">set</a>.', 'amazon-auto-links' ),
                     esc_url( add_query_arg(
-                    array(
-                             'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                             'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
-                             'tab'       => 'default',
-                         ),
-                         'edit.php'
+                        array(
+                            'post_type' => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                            'page'      => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
+                            'tab'       => 'associates',
+                        ),
+                        'edit.php'
                     ) )
                 );
             $oAdminPage->setSettingNotice( $_sMessage );
             return $aOldInputs;
         }
 
+        $this->___unsetLegacyOptions();
         return $aInputs;
 
-     }
+    }
+        /**
+         * Cleans up old option values.
+         * @since 4.7.0
+         */
+        private function ___unsetLegacyOptions() {
+            $_aOptions = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ] );
+            if ( empty( $_aOptions ) ) {
+                return;
+            }
+            unset( $_aOptions[ 'convert_links' ] );
+            update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], $_aOptions );
+        }
 
 }

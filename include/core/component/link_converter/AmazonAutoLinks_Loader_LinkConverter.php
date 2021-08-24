@@ -22,20 +22,35 @@ class AmazonAutoLinks_Loader_LinkConverter {
             $this->___loadAdminComponents();
         }
 
-        $_oOption  = AmazonAutoLinks_Option::getInstance();
-        $_bEnabled = $_oOption->get( 'convert_links', 'enabled' );
-        if ( ! $_bEnabled ) {
+        if ( ! $this->___shouldProceed() ) {
             return;
         }
 
         new AmazonAutoLinks_LinkConverter_Output;
 
     }
+        /**
+         * @return boolean
+         * @since  4.7.0
+         */
+        private function ___shouldProceed() {
+
+            // Backward compatibility with below 4.7.0.
+            $_oOption     = AmazonAutoLinks_Option::getInstance();
+            $_aRawOptions = $_oOption->getRawOptions();
+            if ( isset( $_aRawOptions[ 'convert_links' ] ) ) {
+                return ( boolean ) $_oOption->get( 'convert_links', 'enabled' );
+            }
+            $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
+            return ( boolean ) $_oToolOption->get( 'convert_links', 'enabled' );
+
+        }
+
         private function ___loadAdminComponents() {
-            add_action( 'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'main' ], array( $this, 'replyToLoadPage' ) );
+            add_action( 'load_' . AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], array( $this, 'replyToLoadPage' ) );
         }
             public function replyToLoadPage( $oAdminPage ) {
-                new AmazonAutoLinks_LinkConverter_Setting_Tab( $oAdminPage, AmazonAutoLinks_Registry::$aAdminPages[ 'main' ] );
+                new AmazonAutoLinks_LinkConverter_Setting_Tab( $oAdminPage, AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] );
             }
 
 }

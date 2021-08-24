@@ -18,11 +18,22 @@
 class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @var AmazonAutoLinks_Option
+     * @var AmazonAutoLinks_Option|AmazonAutoLinks_ToolOption
      */
     public $oOption;
 
     private $___sUnitPostType = '';
+
+    /**
+     * @var AmazonAutoLinks_ToolOption
+     * @since 4.7.0
+     */
+    public $oToolOption;
+    /**
+     * @var AmazonAutoLinks_Option
+     * @since 4.7.0
+     */
+    public $oMainOption;
 
     /**
      * Sets up hooks and properties.
@@ -30,14 +41,18 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
      */
     public function __construct() {
 
-        $this->oOption = AmazonAutoLinks_Option::getInstance();
-
+        $this->oToolOption = AmazonAutoLinks_ToolOption::getInstance();
+        $this->oMainOption = AmazonAutoLinks_Option::getInstance();
+        $_aRawMainOptions  = $this->oMainOption->getRawOptions();
+        $this->oOption     = isset( $_aRawMainOptions[ 'convert_links' ] )
+            ? $this->oMainOption
+            : $this->oToolOption;
         $this->___setHooks(
             $this->oOption->get( 'convert_links', 'filter_hooks' ),
             $this->getAsArray( $this->oOption->get( 'convert_links', 'where' ) )
         );
 
-        $_sPreviewPostType      = trim( ( string ) $this->oOption->get( 'unit_preview', 'preview_post_type_slug' ) );
+        $_sPreviewPostType      = trim( ( string ) $this->oMainOption->get( 'unit_preview', 'preview_post_type_slug' ) );
         $this->___sUnitPostType = $_sPreviewPostType ? $_sPreviewPostType : AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
 
     }
@@ -125,7 +140,7 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
                 if ( ! empty( $_sAssociateID ) ) {
                     return $_sAssociateID;
                 }
-                $_sAssociateID = $this->oOption->getAssociateID( $sLocale );
+                $_sAssociateID = $this->oMainOption->getAssociateID( $sLocale );
                 $this->setObjectCache( __METHOD__ . $sLocale, $_sAssociateID );
                 return $_sAssociateID;
             }
