@@ -23,7 +23,6 @@ class AmazonAutoLinks_Geotargeting_Setting_Tab_Geotargeting extends AmazonAutoLi
             'tab_slug'  => 'geotargeting',
             'title'     => __( 'Geotargeting', 'amazon-auto-links' ),
             'order'     => 20,
-            'style'     => AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath . '/asset/css/settings.css',
         );
     }
 
