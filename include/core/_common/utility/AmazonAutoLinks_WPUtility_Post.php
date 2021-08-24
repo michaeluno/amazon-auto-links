@@ -229,7 +229,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             + array(
                 'comment_status'    => 'closed',
                 'ping_status'       => 'closed',
-                'post_author'       =>  get_current_user_id(), // $GLOBALS[ 'user_ID' ],
+                'post_author'       => get_current_user_id(),
                 'post_title'        => '',
                 'post_status'       => 'publish',
                 'post_type'         => $sPostTypeSlug,
