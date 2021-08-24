@@ -98,7 +98,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                     'max' => 1,
                     // 'disabled'      => array(
                     //     'message'       => AmazonAutoLinks_Message::getUpgradePromptMessage(),
-                    //     'caption'       => AmazonAutoLinks_Message::getThisIsAvailableInPro(),
+                    //     'caption'       => AmazonAutoLinks_Message::get( 'available_in_pro' ),
                     //     'box_width'     => 300,
                     //     'box_height'    => 100,
                     // ),
@@ -156,7 +156,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                 'before_fieldset'   => "<div title='" . esc_attr( AmazonAutoLinks_Message::getUpgradePromptMessage( false ) ) . "'>",
                 'after_fieldset'    => "</div>",
                 'after_input'       => "<p><span class='description warning'>"
-                        . AmazonAutoLinks_Message::getThisIsAvailableInPro()
+                        . AmazonAutoLinks_Message::get( 'available_in_pro' )
                     . "</span></p>",
             ),
             array(

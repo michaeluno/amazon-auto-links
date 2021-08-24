@@ -117,7 +117,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 'description'     => array(
                     $_bAdvanced
                         ? ''
-                        : '<span class="warning">' . __( 'This is available in Pro.', 'amazon-auto-links' ) . '</span>'
+                        : '<span class="warning">' . AmazonAutoLinks_Message::get( 'available_in_pro' ) . '</span>'
                 ),
             ),
             array(
