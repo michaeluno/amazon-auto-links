@@ -81,7 +81,7 @@ class Test_AmazonAutoLinks_WPUtility extends AmazonAutoLinks_UnitTest_Base {
      * @return bool
      */
     public function test_doFilesExist2() {
-        $_aClassFiles = include( AmazonAutoLinks_Registry::$sDirPath . '/include/class-map.php' );
+        $_aClassFiles = include( AmazonAutoLinks_Registry::$sDirPath . '/include/core/class-map.php' );
         return AmazonAutoLinks_WPUtility::doFilesExist( $_aClassFiles );
     }
 
