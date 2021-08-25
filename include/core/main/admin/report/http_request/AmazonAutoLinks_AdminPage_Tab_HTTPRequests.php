@@ -25,6 +25,7 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequests extends AmazonAutoLinks_AdminPa
             'title'     => __( 'HTTP Requests', 'amazon-auto-links' ),
             'order'     => 60,
             'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/http-requests.css',
+            'if'        => AmazonAutoLinks_Option::getInstance()->isDebug( 'back_end' ),
         );
     }
 
