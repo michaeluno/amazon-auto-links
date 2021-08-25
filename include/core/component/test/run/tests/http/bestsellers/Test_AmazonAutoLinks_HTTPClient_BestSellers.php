@@ -133,7 +133,7 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
                 $_sBody = wp_remote_retrieve_body( $_oHTTP->getRawResponse() );
                 $this->_output(
                     $bHTMLDocument
-                        ? $this->___getHTMLBody( $_sBody )
+                        ? $this->_getHTMLBody( $_sBody )
                         : $_sBody
                 );
                 return;
@@ -149,24 +149,8 @@ class Test_AmazonAutoLinks_HTTPClient_BestSellers extends AmazonAutoLinks_UnitTe
             }
 
         }
-            /**
-             * @param $sHTML
-             *
-             * @return false|string
-             */
-            private function ___getHTMLBody( $sHTML ) {
-                $_oDOM       = new AmazonAutoLinks_DOM;
-                $_oDoc       = $_oDOM->loadDOMFromHTML( $sHTML );
-                $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'head' ) );
-                $_oXPath     = new DOMXPath( $_oDoc );
-                $_noBodyNode = $_oXPath->query( "/html/body" )->item( 0 );
-                return $_noBodyNode
-                    ? $_oDoc->saveXml( $_noBodyNode, LIBXML_NOEMPTYTAG )
-                    : '[EMPTY STRING]';
-            }
 
         protected function _testSessionMatch( $_sURL, $_sLocale ) {
-
 
             $this->_output( 'URL: ' . $_sURL );
 

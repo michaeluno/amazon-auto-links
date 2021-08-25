@@ -42,4 +42,21 @@ abstract class AmazonAutoLinks_UnitTest_HTTPRequest_Base extends AmazonAutoLinks
         $this->aLastArguments  = $aArguments;
     }
 
+    /**
+     * @param  string $sHTML
+     * @return false|string
+     * @since  4.3.4
+     * @since  4.7.0    Moved from `Test_AmazonAutoLinks_HTTPClient_BestSellers` and changed the visibility scope from privte to protected.
+     */
+    protected function _getHTMLBody( $sHTML ) {
+        $_oDOM       = new AmazonAutoLinks_DOM;
+        $_oDoc       = $_oDOM->loadDOMFromHTML( $sHTML );
+        $_oDOM->removeTags( $_oDoc, array( 'script', 'style', 'head' ) );
+        $_oXPath     = new DOMXPath( $_oDoc );
+        $_noBodyNode = $_oXPath->query( "/html/body" )->item( 0 );
+        return $_noBodyNode
+            ? $_oDoc->saveXml( $_noBodyNode, LIBXML_NOEMPTYTAG )
+            : '[EMPTY STRING]';
+    }
+
 }
