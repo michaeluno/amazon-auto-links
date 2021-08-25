@@ -8,6 +8,7 @@
  *    Version:        4.7.0b03
  *    Text Domain:    amazon-auto-links
  *    Domain Path:    /language
+ *    GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
  */
 
 /**
