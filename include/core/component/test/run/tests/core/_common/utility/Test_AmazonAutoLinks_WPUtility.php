@@ -18,6 +18,27 @@
 class Test_AmazonAutoLinks_WPUtility extends AmazonAutoLinks_UnitTest_Base {
 
     /**
+     * @tags post
+     */
+    public function test_getPostByGUID() {
+        $_aPost = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID' );
+        $this->_outputDetails( gettype( $_aPost ) );
+        $this->_assertTrue( is_array( $_aPost ) );
+        $this->_assertNotEmpty( $_aPost );
+        $this->_assertTrue( isset( $_aPost[ 'ID' ] ) );
+        $_aPost = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID', 'ARRAY_A' );
+        $this->_outputDetails( gettype( $_aPost ) );
+        $this->_assertTrue( is_array( $_aPost ) );
+        $this->_assertNotEmpty( $_aPost );
+        $this->_assertTrue( isset( $_aPost[ 'ID' ] ) );
+        $_oPost = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID', OBJECT );
+        $this->_outputDetails( gettype( $_oPost ) );
+        $this->_assertTrue( is_object( $_oPost ) );
+        $this->_assertNotEmpty( $_oPost->ID );
+    }
+
+
+    /**
      * @throws Exception
      * @tags timezone, gmt
      */

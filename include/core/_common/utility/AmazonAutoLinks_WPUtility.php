@@ -19,20 +19,26 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
      * @param  string $sGUID
-     * @return array
+     * @param  string $sColumns The column parameter passed to the SQL query.
+     * @param  string $sOutput  ARRAY_A or OBJECT
+     * @see    wpdb::get_row()
+     * @return array|object
      * @since  4.7.0
      */
-    static public function getPostByGUID( $sGUID, $sColumns='*' ) {
+    static public function getPostByGUID( $sGUID, $sColumns='*', $sOutput=ARRAY_A ) {
         global $wpdb;
-        return self::getAsArray(
-            $wpdb->get_row(
-                $wpdb->prepare(
-                    "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE guid=%s",
-                    $sGUID
-                ),
-                ARRAY_A
-            )
+        $_aoResult = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE guid=%s",
+                $sGUID
+            ),
+            $sOutput
         );
+        if ( is_object( $_aoResult ) ) {
+            return $_aoResult;
+        }
+        return self::getAsArray( $_aoResult );
+
     }
 
     /**
