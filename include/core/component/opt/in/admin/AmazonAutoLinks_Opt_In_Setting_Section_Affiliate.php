@@ -62,7 +62,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_A
                     __( 'Earn commissions by putting a link to the product page of Amazon Auto Links Pro in the credit link of unit outputs.', 'amazon-auto-links' ),
                     sprintf(
                         __( 'You need to <a href="%1$s" target="_blank">sign up</a> first for Amazon Auto Links Pro affiliate program to get commisions.', 'amazon-auto-links' ),
-                        'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/'
+                        esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/' )
                     ),
                     'e.g. <code>456</code>',
                 ),

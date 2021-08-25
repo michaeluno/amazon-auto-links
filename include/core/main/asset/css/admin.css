@@ -1,7 +1,8 @@
-/*
-	@name Admin
-	@version 1.2.2
+/**
+ * @name Admin
+ * @version 1.2.3
  */
+
 /* General */
 .width-100 {
 	width: 100%;
@@ -89,7 +90,7 @@ hr {
 	padding: 1em 2em 1em 2.8em;
 	border-left: 4px solid #00a32a;
 	line-height: 1.6;
-	background: taransparent;
+	background: transparent;
 }
 .blockquote::before{
   font-family: Arial;
@@ -108,6 +109,11 @@ hr {
   color: #333333;
   font-style: normal;
   margin-top: 0.4em;
+}
+
+/* Icon color */
+.icon-info {
+	color: #0084ff;
 }
 
 /* Dash-icons */
@@ -251,9 +257,6 @@ span.warning {
 	font-size: 14px;
 	padding: 3px 0;
 	text-decoration: none;
-}
-.aal-rating-prompt  .icon-info {
-	color: #0084ff;
 }
 .aal-have-you-rated {
 	margin-right: 0.2em;

@@ -33,6 +33,9 @@ class AmazonAutoLinks_Opt_Loader {
         new AmazonAutoLinks_Opt_Out_Loader;
         new AmazonAutoLinks_Opt_In_Loader;
 
+        // Events
+        new AmazonAutoLinks_Opt_Event_Filter_SettingTabURL;
+
     }
 
     /**

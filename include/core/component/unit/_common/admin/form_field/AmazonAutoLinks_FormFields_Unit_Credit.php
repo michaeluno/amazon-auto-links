@@ -15,7 +15,7 @@ class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_
      * @return      array
      */    
     public function get( $sFieldIDPrefix='' ) {
-
+        $_oOption       = AmazonAutoLinks_Option::getInstance();
         return array(    
             array(
                 'field_id'          => $sFieldIDPrefix . 'credit_link',
@@ -56,6 +56,16 @@ class AmazonAutoLinks_FormFields_Unit_Credit extends AmazonAutoLinks_FormFields_
                 'hidden'            => true,
                 'class'             => array(
                     'fieldrow'  => 'fieldrow_credit_link_type'
+                ),
+                'description'       => array(
+                    $_oOption->get( 'miunosoft_affiliate', 'affiliate_id' )
+                        ? ''
+                        : '<span class="icon-info dashicons dashicons-info"></span>'
+                          . sprintf(
+                              __( 'Participate in the <a href="%1$s" target="_blank">Pro affiliate program</a> and get an affiliate ID. Then earn commissions by setting it <a href="%2$s">here</a>.', 'amazon-auto-links' ),
+                              esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/affiliate-area/' ),
+                              esc_url( apply_filters( 'aal_filter_opt_setting_tab_url', '', 'affiliate_id' ) )
+                          ),
                 ),
             )
         );
