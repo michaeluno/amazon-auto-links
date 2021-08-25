@@ -12,7 +12,7 @@
  * Provides methods to generate credit links.
  * 
  * @since   3.2.3
- * @since   4.6.19 Renamed from ``. 
+ * @since   4.6.19 Renamed from `?`.
  */
 class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUtility {
 
@@ -20,33 +20,10 @@ class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUti
      * Sets up hooks.
      */
     public function __construct() {
-        
-        add_filter(
-            'aal_filter_credit_comment',
-            array( $this, 'replyToGetCreditComment' )
-        );        
-        
-        add_filter( 
-            'aal_filter_credit_link_0',
-            array( $this, 'replyToGetCreditLink_0' ),
-            10,
-            2
-        );
-
-        add_filter( 
-            'aal_filter_credit_link_1',
-            array( $this, 'replyToGetCreditLink_1' ),
-            10,
-            2
-        );
-
-        add_filter( 
-            'aal_filter_credit_link_2',
-            array( $this, 'replyToGetCreditLink_2' ),
-            10,
-            2
-        );
-        
+        add_filter( 'aal_filter_credit_comment', array( $this, 'replyToGetCreditComment' ) );
+        add_filter( 'aal_filter_credit_link_0', array( $this, 'replyToGetCreditLink_0' ), 10, 2 );
+        add_filter( 'aal_filter_credit_link_1', array( $this, 'replyToGetCreditLink_1' ), 10, 2 );
+        add_filter( 'aal_filter_credit_link_2', array( $this, 'replyToGetCreditLink_2' ), 10, 2 );
     }
 
     /**
@@ -54,8 +31,7 @@ class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUti
      * @since       3.2.3
      */
     public function replyToGetCreditComment( $sCredit ) {
-        return $sCredit
-            . self::getCommentCredit();
+        return $sCredit . self::getCommentCredit();
     }
 
     /**
