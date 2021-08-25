@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.6.24 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.0b01 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -66,7 +66,7 @@ return array(
     "AmazonAutoLinks_Disclosure_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting.php", 
     "AmazonAutoLinks_Disclosure_Setting_Section_Disclosure" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php", 
     "AmazonAutoLinks_Disclosure_Setting_Tab_Disclosure" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Tab_Disclosure.php", 
-    "AmazonAutoLinks_Disclosure_Event_Action_PluginActivation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/event/action/AmazonAutoLinks_Disclosure_Event_Action_PluginActivation.php", 
+    "AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/event/action/AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage.php", 
     "AmazonAutoLinks_Disclosure_Event_Filter_DisclaimerTooltip" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/event/filter/AmazonAutoLinks_Disclosure_Event_Filter_DisclaimerTooltip.php", 
     "AmazonAutoLinks_Disclosure_Shortcode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/shortcode/AmazonAutoLinks_Disclosure_Shortcode.php", 
     "AmazonAutoLinks_Disclosure_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/disclosure/utility/AmazonAutoLinks_Disclosure_Utility.php", 

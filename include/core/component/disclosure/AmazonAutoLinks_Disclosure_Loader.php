@@ -37,7 +37,7 @@ class AmazonAutoLinks_Disclosure_Loader {
         // Shortcode
         new AmazonAutoLinks_Disclosure_Shortcode;
         // Events
-        new AmazonAutoLinks_Disclosure_Event_Action_PluginActivation;
+        new AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage;
         new AmazonAutoLinks_Disclosure_Event_Filter_DisclaimerTooltip;
     }
 
