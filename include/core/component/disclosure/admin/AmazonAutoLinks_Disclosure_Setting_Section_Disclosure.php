@@ -27,6 +27,13 @@ class AmazonAutoLinks_Disclosure_Setting_Section_Disclosure extends AmazonAutoLi
         );
     }
 
+    protected function _construct( $oFactory ) {
+        add_filter(
+            'field_definition_' . $oFactory->oProp->sClassName . '_' . $this->sSectionID . '_page',
+            array( $this, 'replyToGetFieldDefinition_page' )
+        );
+    }
+
     /**
      * Adds form fields.
      * @since       4.7.0
@@ -133,6 +140,24 @@ QUOTE
             ),
             array()
         );
+
+    }
+
+    /**
+     * There is a case that the user deletes the set page. In that case, the option remains to keep the non-existent post ID.
+     * So here checks if the post exists, then if not, it gives an empty value.
+     * @param  array $aField
+     * @return array
+     */
+    public function replyToGetFieldDefinition_page( $aField ) {
+
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        $_iPage   = $_oOption->get( 'disclosure', 'page', 'value' );
+        $_oPost   = get_post( $_iPage );
+        if ( null === $_oPost ) {
+            $aField[ 'value' ] = array();
+        }
+        return $aField;
 
     }
 
