@@ -71,9 +71,10 @@ if ( ! $_bDelete ) {
 }
 
 // Delete Pages
-$_iDisclosurePage = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID' );
-if ( $_iDisclosurePage ) {
-    wp_delete_post( $_iDisclosurePage, true );
+$_aDisclosurePage   = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID' );
+$_iDisclosurePageID = AmazonAutoLinks_WPUtility::getElement( $_aDisclosurePage, 'ID' );
+if ( $_iDisclosurePageID ) {
+    wp_delete_post( $_iDisclosurePageID, true );
 }
 
 // User Meta
