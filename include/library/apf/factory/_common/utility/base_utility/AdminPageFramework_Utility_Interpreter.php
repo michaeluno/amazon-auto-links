@@ -48,7 +48,7 @@ class AmazonAutoLinks_AdminPageFramework_Utility_Interpreter extends AmazonAutoL
         return implode(PHP_EOL, $_aOutput);
     }
     static public function getTableOfArray(array $aArray, array $aAllAttributes = array(), array $aHeader = array(), array $aFooter = array(), $bEscape = true) {
-        $_aAllAttributes = $aAllAttributes + array('table' => array(), 'tbody' => array(), 'td' => array(array(), array(),), 'tr' => array(), 't' => array(), 'ul' => array(), 'li' => array(),);
+        $_aAllAttributes = $aAllAttributes + array('table' => array(), 'tbody' => array(), 'td' => array(array(), array(),), 'tr' => array(), 't' => array(), 'ul' => array(), 'li' => array(), 'p' => array(),);
         return "<table " . self::getAttributes(self::getElementAsArray($_aAllAttributes, 'table')) . ">" . self::___getTableHeader($aHeader, $_aAllAttributes, $bEscape) . "<tbody " . self::getAttributes(self::getElementAsArray($_aAllAttributes, 'tbody')) . ">" . self::___getTableRows($aArray, $_aAllAttributes, $bEscape) . "</tbody>" . self::___getTableFooter($aFooter, $_aAllAttributes, $bEscape) . "</table>";
     }
     static private function ___getHTMLEscaped($sOutput, $bEscape) {
@@ -91,10 +91,11 @@ class AmazonAutoLinks_AdminPageFramework_Utility_Interpreter extends AmazonAutoL
         }
         $_aTDAttrFirst = self::getElementAsArray($aAllAttributes, array('td', 0)) + $_aTDAttr;
         $_aTDAttrFirst['class'] = self::___addClass('column-key', self::getElement($_aTDAttrFirst, array('class'), ''));
+        $_aPAttr = self::getElementAsArray($aAllAttributes, array('p'));
         $_sOutput = '';
         foreach ($aItem as $_sColumnName => $_asValue) {
             $_sOutput.= "<tr " . self::getAttributes($_aTRAttr) . ">";
-            $_sOutput.= "<td " . self::getAttributes($_aTDAttrFirst) . ">" . "<p>" . self::___getHTMLEscaped($_sColumnName, $bEscape) . "</p>" . "</td>";
+            $_sOutput.= "<td " . self::getAttributes($_aTDAttrFirst) . ">" . "<p " . self::getAttributes($_aPAttr) . ">" . self::___getHTMLEscaped($_sColumnName, $bEscape) . "</p>" . "</td>";
             $_sOutput.= self::___getColumnValue($_asValue, $aAllAttributes, $bEscape);
             $_sOutput.= "</tr>";
         }
@@ -113,8 +114,9 @@ class AmazonAutoLinks_AdminPageFramework_Utility_Interpreter extends AmazonAutoL
         if (is_null($mValue)) {
             $mValue = '(null)';
         }
+        $_aPAttr = self::getElementAsArray($aAllAttributes, 'p');
         if (is_scalar($mValue)) {
-            return "<td " . self::getAttributes($_aTDAttrSecond) . ">" . "<p>" . self::___getHTMLEscaped($mValue, $bEscape) . "</p>" . "</td>";
+            return "<td " . self::getAttributes($_aTDAttrSecond) . ">" . "<p " . self::getAttributes($_aPAttr) . ">" . self::___getHTMLEscaped($mValue, $bEscape) . "</p>" . "</td>";
         }
         if (is_array($mValue)) {
             return self::isAssociativeArray($mValue) || self::isMultiDimensional($mValue) ? "<td " . self::getAttributes($_aTDAttrSecond) . ">" . self::getTableOfArray($mValue, $aAllAttributes) . "</td>" : "<td " . self::getAttributes($_aTDAttrSecond) . ">" . self::___getList($mValue, $aAllAttributes, $bEscape) . "</td>";

@@ -54,7 +54,7 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
             return;
         }
         @include_once( ABSPATH . 'wp-admin/includes/class-wp-debug-data.php' );
-        $_aData    = AmazonAutoLinks_SiteInformation::get();
+        $_aData    = AmazonAutoLinks_SiteInformation::get( false ); // not including extra as it can cause failure on sending emails on some servers.
         unset( $_aData[ 'Plugin' ] );
         $_aData    = $_aData + array(
             'WordPress'         => class_exists( 'WP_Debug_Data' ) ? WP_Debug_Data::debug_data() : array(),
@@ -67,6 +67,9 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
         $_sTable = $this->getTableOfArray(
             $_aData,
             array(
+                'p'  => array(
+                    'style' => 'height: 1em; margin: 0.2em 0.2em 0.2em 0;',
+                ),
                 'td' => array(
                     array(
                         'style' => 'vertical-align: top; width: 12%;',

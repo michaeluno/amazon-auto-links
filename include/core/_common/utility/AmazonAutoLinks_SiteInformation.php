@@ -17,13 +17,22 @@ class AmazonAutoLinks_SiteInformation extends AmazonAutoLinks_Utility {
 
     /**
      * @since 4.7.0
+     * @param boolean $bExtra Whether to include extra data.
      */
-    static public function get() {
+    static public function get( $bExtra=true ) {
         return array(
+            'Site'            => self::getSite(),
             'Plugin'          => self::getPlugin(),
             'File Permission' => self::getFilePermissions(),
             'Database Tables' => self::getCustomDatabaseTables(),
-            'Paths & URLs'    => self::getPathsAndURLs(),
+            'Paths & URLs'    => self::getPathsAndURLs( $bExtra ),    // no extra as sending a mail fails on Sakura
+        );
+    }
+
+    static public function getSite() {
+        return array(
+            'URL' => site_url(),
+            'Multisite' => is_multisite() ? 'Yes' : 'No',
         );
     }
 
@@ -115,7 +124,7 @@ class AmazonAutoLinks_SiteInformation extends AmazonAutoLinks_Utility {
      * @return array
      * @sinec  4.7.0
      */
-    static public function getPathsAndURLs() {
+    static public function getPathsAndURLs( $bExtra=true ) {
         return array(
             'Paths' => array(
                 'ABSPATH'               => ABSPATH,
@@ -141,12 +150,12 @@ class AmazonAutoLinks_SiteInformation extends AmazonAutoLinks_Utility {
                 'plugins_url()'   => plugins_url(),
                 'WP_Style::base_url' => (new WP_Styles())->base_url,
                 "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ),
-                'plugin_dir_url( __FILE__ )'  => plugin_dir_url( AmazonAutoLinks_Registry::$sFilePath ),
+                'plugin_dir_url( __FILE__ )'  => $bExtra ? plugin_dir_url( AmazonAutoLinks_Registry::$sFilePath ) : '(unset)',   // somehow sending an email fails with this included
                 'plugin_basename( __FILE__ )' => plugin_basename( AmazonAutoLinks_Registry::$sFilePath ),
-                'Exists'          => array(
+                'Exists'          => $bExtra ? array(
                     "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => self::___doesURLExist( plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ) ) ? 'Yes' : 'No',
                     "getSRCFromPath( {plugin dir path} . '/template/category/screenshot.jpg' )" => self::___doesURLExist( self::getSRCFromPath( AmazonAutoLinks_Registry::$sDirPath . '/template/category/screenshot.jpg' ) ) ? 'Yes' : 'No',
-                ),
+                ) : '(unset)',
             ),
         );
     }
