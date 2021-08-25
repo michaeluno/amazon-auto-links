@@ -18,6 +18,24 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
+     * @param  string $sGUID
+     * @return array
+     * @since  4.7.0
+     */
+    static public function getPostByGUID( $sGUID, $sColumns='*' ) {
+        global $wpdb;
+        return self::getAsArray(
+            $wpdb->get_row(
+                $wpdb->prepare(
+                    "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE guid=%s",
+                    $sGUID
+                ),
+                ARRAY_A
+            )
+        );
+    }
+
+    /**
      * @return boolean
      * @since  4.6.8
      */

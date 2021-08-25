@@ -16,35 +16,6 @@
 class AmazonAutoLinks_Disclosure_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @param  string $sGUID
-     * @return integer
-     * @since  4.7.0
-     * @deprecated 4.7.0
-     */
-    // static public function getPostIDFromGUID( $sGUID ){
-    //     global $wpdb;
-    //     return ( integer ) $wpdb->query( $wpdb->prepare( "SELECT ID FROM `{$wpdb->base_prefix}posts` WHERE guid=%s", $sGUID ) );
-    // }
-
-    /**
-     * @param  string $sGUID
-     * @return array
-     * @since  4.7.0
-     */
-    static public function getPostByGUID( $sGUID, $sColumns='*' ) {
-        global $wpdb;
-        return self::getAsArray(
-            $wpdb->get_row(
-                $wpdb->prepare(
-                    "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE guid=%s",
-                    $sGUID
-                ),
-                ARRAY_A
-            )
-        );
-    }
-
-    /**
      * Retrieves and return posts with the array structure of `select2` AJAX format.
      *
      * <h4>Structure of Response Array</h4>

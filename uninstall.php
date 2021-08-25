@@ -37,7 +37,7 @@ if ( ! class_exists( 'AmazonAutoLinks_Registry' ) ) {
     return;
 }
 
-// 1. Delete the plugin temporary directory
+// Delete the plugin temporary directory
 $_aTempDirPaths = array(
     AmazonAutoLinks_Registry::getPluginSiteTempDirPath(),
     untrailingslashit( wp_normalize_path( sys_get_temp_dir() ) ) . '/WPAAL', // old deprecated one
@@ -48,7 +48,7 @@ foreach( $_aTempDirPaths as $_sDirPath ) {
     }
 }
 
-// 2. Delete transients
+// Delete transients
 $_aPrefixes = array(
     AmazonAutoLinks_Registry::TRANSIENT_PREFIX, // the plugin transients
     'apf_',      // the admin page framework transients
@@ -61,7 +61,7 @@ foreach( $_aPrefixes as $_sPrefix ) {
     $GLOBALS[ 'wpdb' ]->query( "DELETE FROM `" . $GLOBALS[ 'table_prefix' ] . "options` WHERE `option_name` LIKE ( '_transient_timeout_%{$_sPrefix}%' )" );
 }
 
-// 3. Delete options
+// Delete options
 $_aOptions = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'main' ], array() );
 $_bDelete  = isset( $_aOptions[ 'reset_settings' ][ 'reset_on_uninstall' ] ) 
     ? $_aOptions[ 'reset_settings' ][ 'reset_on_uninstall' ]
@@ -70,14 +70,20 @@ if ( ! $_bDelete ) {
     return;
 }
 
-// 4. User Meta
+// Delete Pages
+$_iDisclosurePage = AmazonAutoLinks_WPUtility::getPostByGUID( 'https://aal-affiliate-disclosure-page', 'ID' );
+if ( $_iDisclosurePage ) {
+    wp_delete_post( $_iDisclosurePage, true );
+}
+
+// User Meta
 foreach( AmazonAutoLinks_Registry::$aUserMeta as $_sUserMetaKey ) {
     delete_metadata(
         'user',        // the meta type
         0,              // this doesn't actually matter in this call
         $_sUserMetaKey,         // the meta key to be removed everywhere
         '',            // this also doesn't actually matter in this call
-        true             // tells the function "yes, please remove them all"
+        true            // tells the function "yes, please remove them all"
     );
 }
 
@@ -86,12 +92,12 @@ array_walk_recursive(
     'delete_option'   // function name
 );
 
-// 5. Delete tables
+// Delete tables
 new AmazonAutoLinks_DatabaseTableInstall(
     false   // uninstall
 );
 
-// 6. [3.6.6+] Delete Custom Post Type Posts
+// [3.6.6+] Delete Custom Post Type Posts
 foreach( AmazonAutoLinks_Registry::$aPostTypes as $_sKey => $_sPostTypeSlug ) {
     _deleteAmazonAutoLinksPosts( $_sPostTypeSlug );
 }
