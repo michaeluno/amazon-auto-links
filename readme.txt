@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.7.0b03
+Stable tag:         4.7.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,20 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.0 - 08/26/2021 =
+- Added the `Disclosure` setting screen that allows the user to configure affiliate disclosure.
+- Added the `Pop-up Image Preview` unit option.
+- Added the `Opt` screen of the `Settings` page.
+- Added the ability to reset meta box order and screen layouts of the plugin setting pages.
+- Added the `Feedback` and `Report Issues` contact forms in the `Support` screen of the `Help` page.
+- Added the `Shuffle` unit option for Product Search units.
+- Added the `HTTP Requests` screen in the `Reports` page, which appears when the `backend` debug mode is turned on and allows the user to display or delete HTTP request caches.
+- Added the sub-options to the `Debug Mode` option to decide which debug components to enable.
+- Moved the `Converter` screen to the `Tools` page and renamed it to `Link Converter`.
+- Tweaked UI elements.
+- Fixed a bug that showing field tooltips affected the screen width.
+- Fixed an issue that disclaimer pop-up tooltips were often cut off.
 
 = 4.6.24 - 08/21/2021 =
 - Fixed a bug that debug log files were created when the Web Page Dumper option is enabled, started in v4.6.23.
