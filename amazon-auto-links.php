@@ -364,12 +364,14 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         static public $aAdminNotices = array();
         static public function replyToShowAdminNotices() {
             foreach( self::$aAdminNotices as $_aNotice ) {
-                $_sType = esc_attr( $_aNotice[ 'type' ] );
-                echo "<div class='{$_sType}'>"
+                $_sClass  = "notice is-dismissible {$_aNotice[ 'type' ]} hidden";
+                $_sScript = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
+                echo "<div class='" . esc_attr( $_sClass ) . "' style='opacity:0;'>"
                      . "<p>"
                         . '<strong>' . self::NAME . '</strong>: '
                         . $_aNotice[ 'message' ]
                      . "</p>"
+                     . "<img src onerror='" . esc_js( $_sScript ) . "' style='display:none;'/>"
                      . "</div>";
             }
         }
