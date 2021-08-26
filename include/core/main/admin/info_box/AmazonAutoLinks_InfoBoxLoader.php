@@ -31,10 +31,10 @@ class AmazonAutoLinks_InfoBoxLoader {
         if ( ! $this->_shouldProceed( $_aTargetPageSlugs ) ) {
             return;
         }
-            
-        new AmazonAutoLinks_AdminPageMetaBox_Information(
+
+        new AmazonAutoLinks_AdminPageMetaBox_Announcement(
         null,                                // meta box id - passing null will make it auto generate
-            __( 'Information', 'amazon-auto-links' ),  // title
+            __( 'Announcements', 'amazon-auto-links' ),  // title
             $_aTargetPageSlugs,
             'side',                            // context
             'low'                               // priority

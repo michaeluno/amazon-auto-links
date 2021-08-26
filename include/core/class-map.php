@@ -456,7 +456,7 @@ return array(
     "AmazonAutoLinks_HelpAdminPage_Help_Section_Select" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php", 
     "AmazonAutoLinks_HelpAdminPage_Help_Section_Support" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php", 
     "AmazonAutoLinks_InfoBoxLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php", 
-    "AmazonAutoLinks_AdminPageMetaBox_Information" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Information.php", 
+    "AmazonAutoLinks_AdminPageMetaBox_Announcement" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php", 
     "AmazonAutoLinks_ReportAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage.php", 
     "AmazonAutoLinks_ReportAdminPage_Report" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php", 
     "AmazonAutoLinks_AdminPage_Tab_HTTPRequest" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/admin/report/http_request/AmazonAutoLinks_AdminPage_Tab_HTTPRequest.php", 
