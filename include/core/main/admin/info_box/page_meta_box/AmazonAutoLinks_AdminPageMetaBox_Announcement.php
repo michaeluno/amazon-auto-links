@@ -45,7 +45,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
          * @return      string
          */    
         private function ___getProInfo() {
-            $_sProImage = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/information/amazon-auto-links-pro-affiliate-250x250.jpg', true ) );
+            $_sProImage = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/information/auto-amazon-links-pro-banner-250x250.jpg', true ) );
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
                 : "<div class='announcement-item'><a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
