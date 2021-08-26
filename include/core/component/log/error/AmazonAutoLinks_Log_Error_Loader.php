@@ -34,9 +34,10 @@ class AmazonAutoLinks_Log_Error_Loader extends AmazonAutoLinks_PluginUtility {
 
         self::$sDirPath = dirname( __FILE__ );
 
-
         $this->___loadAdminComponents();
 
+        // Events
+        new AmazonAutoLinks_Log_Error_Event_Filter_LogFilePath;
 
     }
         /**

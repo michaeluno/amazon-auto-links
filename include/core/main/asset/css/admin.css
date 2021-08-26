@@ -1,6 +1,6 @@
 /**
  * @name Admin
- * @version 1.2.4
+ * @version 1.2.5
  */
 
 /* General */
@@ -109,6 +109,11 @@ hr {
   color: #333333;
   font-style: normal;
   margin-top: 0.4em;
+}
+
+/* WordPress built-in elements */
+button.notice-dismiss {
+	height: 100%;
 }
 
 /* Icon color */

@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.0b03 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.0 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -93,6 +93,7 @@ return array(
     "AmazonAutoLinks_Log_Error_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/AmazonAutoLinks_Log_Error_Loader.php", 
     "AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php", 
     "AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Tab_ErrorLog.php", 
+    "AmazonAutoLinks_Log_Error_Event_Filter_LogFilePath" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/filter/AmazonAutoLinks_Log_Error_Event_Filter_LogFilePath.php", 
     "AmazonAutoLinks_Event_Error_Log" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log.php", 
     "AmazonAutoLinks_Event_Error_Log_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/event/log/AmazonAutoLinks_Event_Error_Log_HTTPRequestCache.php", 
     "AmazonAutoLinks_Log_VersatileFileManager_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/_common/utility/file/AmazonAutoLinks_Log_VersatileFileManager_ErrorLog.php", 
@@ -138,6 +139,7 @@ return array(
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPResponse.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_IsAllowedURL.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPostSanitization" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionPostSanitization.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage.php", 
