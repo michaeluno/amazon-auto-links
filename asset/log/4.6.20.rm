@@ -1,2 +1,0 @@
-- Fixed raw HTTP request values, which could cause possible security issues.
-- Fixed a bug that selected locale in the `Associates` screen was not reflected, started in v4.6.18.

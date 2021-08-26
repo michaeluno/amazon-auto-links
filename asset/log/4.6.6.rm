@@ -1,2 +1,0 @@
-- Added warning messages in the unit listing table when the template unit option is not stored properly.
-- Fixed a bug that arguments could not be passed in the test/scratch UI, started in v4.6.5. 

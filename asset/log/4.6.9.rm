@@ -1,3 +1,0 @@
-- Optimized the method to retrieve product ratings and prices for some locales.
-- Optimized HTTP requests for embed units for some locales.
-- Fixed vertical scrollbars not to appear with the List template in embedded views.

@@ -1,1 +1,0 @@
-- Fixed a bug that debug log files were created when the Web Page Dumper option is enabled, started in v4.6.23.

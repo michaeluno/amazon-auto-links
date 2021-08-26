@@ -1,5 +1,0 @@
-- Fixed a bug that rating stars could not be displayed with Ajax, started in v4.6.0.
-- Fixed a bug that the `formatted_rating` element of JSON feeds was not formatted properly for the change made in v4.6.0.
-- Fixed a bug that the `Renew Cache` unit action link did not renew the feed cache.
-- Tweaked line alignment of descriptions, rating stars, and prices of the `Category` template. 
-- Updated the base and Japanese translation files.

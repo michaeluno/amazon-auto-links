@@ -1,3 +1,0 @@
-- Fixed a bug that rating star icons did not appear in the category selection page, started in 4.6.1. 
-- Fixed a bug that rating values were not accurate in locales which use `,`.
-- Fixed an issue that rating star icons were not filled in some cases.  

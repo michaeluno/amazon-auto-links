@@ -1,4 +1,0 @@
-- Renamed the plugin to `Auto Amazon Links`.
-- Tweaked the UI of the `Get New` screen of the `Templates` page.
-- Fixed unnecessary browser console log items.
-- Fixed raw HTTP request values, which could cause possible security issues.
