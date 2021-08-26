@@ -256,7 +256,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             return false;
         }
         $_sPageNow = self::getPageNow();
-        if ( in_array( $_sPageNow, AmazonAutoLinks_Registry::$aAdminPages ) ) {
+        if ( in_array( $_sPageNow, AmazonAutoLinks_Registry::$aAdminPages, true ) ) {
             return true;
         }
         if ( 'edit.php' !== $_sPageNow ) {
