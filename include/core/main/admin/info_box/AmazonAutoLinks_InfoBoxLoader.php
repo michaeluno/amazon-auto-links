@@ -34,7 +34,7 @@ class AmazonAutoLinks_InfoBoxLoader {
 
         new AmazonAutoLinks_AdminPageMetaBox_Announcement(
         null,                                // meta box id - passing null will make it auto generate
-            __( 'Announcements', 'amazon-auto-links' ),  // title
+            '<span class="metabox-title"><span class="dashicons dashicons-megaphone"></span>' . __( 'Announcements', 'amazon-auto-links' ) . "</span>",  // title
             $_aTargetPageSlugs,
             'side',                            // context
             'low'                               // priority
