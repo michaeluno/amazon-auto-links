@@ -95,6 +95,17 @@ class AmazonAutoLinks_Disclosure_Setting_Section_Disclosure extends AmazonAutoLi
                 'default'   => $_anPageFieldDefault,
             ),
             array(
+                'field_id'          => 'create_page',
+                'type'              => 'submit',
+                'attributes'        => array(
+                    'class' => 'button button-secondary',
+                ),
+                'save'              => false,
+                'value'             => __( 'Create', 'amazon-auto-links' ),
+                'if'                => ! $_iPageID,
+                'description'       => __( 'An affiliate disclosure page is missing on your site. Create one.', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'          => 'disclosure_text',
                 'title'             => __( 'Disclosure Text', 'amazon-auto-links' ),
                 'type'              => 'textarea',
@@ -168,8 +179,35 @@ QUOTE
       * @callback add_filter()      'validation_{class name}_{section id}'
       */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+
         $aInputs[ 'disclosure_text' ] = str_replace( '[aal_disclosure]', '', $aInputs[ 'disclosure_text' ] );
+
+        if ( 'create_page' === $aSubmitInfo[ 'field_id' ] ) {
+            return $this->___getInputsByCreatingDisclosurePage( $aInputs, $oAdminPage );
+        }
         return $aInputs;
     }
+        /**
+         * @return array
+         * @since  4.7.1
+         */
+        private function ___getInputsByCreatingDisclosurePage( $aInputs, $oAdminPage ) {
+
+            $_iPostID  = AmazonAutoLinks_Disclosure_Utility::getDisclosurePageCreated();
+            if ( $_iPostID ) {
+                $_oPost = get_post( $_iPostID );
+                $aInputs[ 'page' ] = array(
+                    'value' => $_iPostID,
+                    'encoded' => json_encode( array( array( 'id' => $_iPostID, 'text' => $_oPost->post_title ) ) ),
+                );
+            }
+
+            $_sMessage = $_iPostID
+                ? __( 'A page has been created.', 'amazon-auto-links' )
+                : __( 'Could not create a page.', 'amazon-auto-links' );
+            $oAdminPage->setSettingNotice( $_sMessage, $_iPostID ? 'updated' : 'error' );
+            return $aInputs;
+        }
+
 
 }

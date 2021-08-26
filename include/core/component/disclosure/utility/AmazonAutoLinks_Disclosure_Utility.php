@@ -16,6 +16,25 @@
 class AmazonAutoLinks_Disclosure_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @return integer
+     */
+    static public function getDisclosurePageCreated() {
+        $_sPageContent = <<<PAGECONENT
+<!-- wp:shortcode -->
+[aal_disclosure]
+<!-- /wp:shortcode -->
+PAGECONENT;
+        return self::createPost(
+            'page',
+            array( // post columns
+                'post_title'    => __( 'Affiliate Disclosure', 'amazon-auto-links' ),
+                'post_content'  => $_sPageContent,
+                'guid'          => AmazonAutoLinks_Disclosure_Loader::$sDisclosureGUID,
+            )
+        );
+    }
+
+    /**
      * Retrieves and return posts with the array structure of `select2` AJAX format.
      *
      * <h4>Structure of Response Array</h4>

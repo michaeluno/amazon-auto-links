@@ -104,7 +104,7 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
             if ( $this->___hasDisclosurePage() ) {
                 return;
             }
-            $this->___createDisclosurePage();
+            $this->getDisclosurePageCreated();
         }
             /**
              * @return boolean
@@ -114,26 +114,5 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
                 $_aDisclosurePage = AmazonAutoLinks_Disclosure_Utility::getPostByGUID( AmazonAutoLinks_Disclosure_Loader::$sDisclosureGUID, 'ID' );
                 return ( boolean ) $this->getElement( $_aDisclosurePage, 'ID' );
             }
-
-            /**
-             * @since  4.7.0
-             */
-            private function ___createDisclosurePage() {
-                $this->createPost(
-                    'page',
-                    array( // post columns
-                        'post_title'    => __( 'Affiliate Disclosure', 'amazon-auto-links' ),
-                        'post_content'  => $this->___getPageContent(),
-                        'guid'          => AmazonAutoLinks_Disclosure_Loader::$sDisclosureGUID,
-                    )
-                );
-            }
-                private function ___getPageContent() {
-                    return <<<PAGECONTENT
-<!-- wp:shortcode -->
-[aal_disclosure]
-<!-- /wp:shortcode -->
-PAGECONTENT;
-                }
 
 }
