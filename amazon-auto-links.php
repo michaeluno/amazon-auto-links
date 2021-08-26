@@ -355,19 +355,24 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * @param   string $sMessage
      * @param   string $sType
+     * @param   string $sDashIcon   The past part of a dash-icon class such as `warning` in `dashicons-warning`.
      * @since   3.11.0
      */
-    static public function setAdminNotice( $sMessage, $sType='error' ) {
-        self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType );
+    static public function setAdminNotice( $sMessage, $sType='error', $sDashIcon='' ) {
+        self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType, 'icon' => $sDashIcon );
         add_action( 'admin_notices', array( __CLASS__, 'replyToShowAdminNotices' ) );
     }
         static public $aAdminNotices = array();
         static public function replyToShowAdminNotices() {
             foreach( self::$aAdminNotices as $_aNotice ) {
-                $_sClass  = "notice is-dismissible {$_aNotice[ 'type' ]} hidden";
-                $_sScript = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
+                $_sIconStyle  = 'margin-left: -4px; vertical-align: middle;';
+                $_sIconStyle .= $_aNotice[ 'type' ] === 'error' ? 'color:#d63638;' : 'color:#00a32a;';
+                $_sIcon       = $_aNotice[ 'icon' ] ? "<span class='dashicons dashicons-" . esc_attr( $_aNotice[ 'icon' ] ) . "' style='" . esc_attr( $_sIconStyle ) . "'></span>" : '';
+                $_sClass      = "notice is-dismissible {$_aNotice[ 'type' ]} hidden";
+                $_sScript     = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
                 echo "<div class='" . esc_attr( $_sClass ) . "' style='opacity:0;'>"
                      . "<p>"
+                        . $_sIcon
                         . '<strong>' . self::NAME . '</strong>: '
                         . $_aNotice[ 'message' ]
                      . "</p>"
