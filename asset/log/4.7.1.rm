@@ -1,2 +1,3 @@
 - Added a button to create a disclosure page when it does not exist in the `Disclosure` screen. D
 - Tweaked setting UI.
+- Fixed a bug that pop-up images for product thumbnails did not have the correct links.  

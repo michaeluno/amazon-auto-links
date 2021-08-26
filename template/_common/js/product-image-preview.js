@@ -6,14 +6,14 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.1
+ * @version 1.0.2
  */
 (function($){
 
     var imageSize = 420;
 
     $( document ).ready( function() {
-        setMainThumbnailDataAttributes( this );
+        setMainThumbnailDataAttributes( $( 'body' ) );
         initialize( '.amazon-auto-links-product-image img[data-large-src]' );
     } );
 
@@ -25,7 +25,7 @@
     function setMainThumbnailDataAttributes( target ) {
         $( target ).find( '.amazon-product-thumbnail-container[data-large-src]' ).each( function(){
             $( this ).find( '.amazon-product-thumbnail img' ).attr( 'data-large-src', $( this ).attr( 'data-large-src' ) )
-                .attr( 'href', $( this ).attr( 'data-href' ) );
+                .attr( 'data-href', $( this ).attr( 'data-href' ) );
         } );
     }
 
