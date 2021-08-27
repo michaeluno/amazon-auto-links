@@ -58,9 +58,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
             )
         );
         $_sMessage = __( 'You have a captcha error. Consider enabling Web Page Dumper.', 'amazon-auto-links' )
-            . "<button class='button button-secondary button-small' style='margin-left:1em;'>"
-                . "<a href='" . esc_url( $_sURL ) . "' style='text-decoration:none;'>" . __( 'Enable', 'amazon-auto-links' ) . "</a>"
-            . "</button>";
+             . "<a href='" . esc_url( $_sURL ) . "' style='text-decoration:none;margin-left:1em;' class='button-link'>"
+                . "<button class='button button-secondary button-small'>"
+                    . __( 'Enable', 'amazon-auto-links' )
+                . "</button>"
+            . "</a>";
         AmazonAutoLinks_Registry::setAdminNotice(
             $_sMessage,
             'error',
