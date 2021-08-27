@@ -84,17 +84,24 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
     }
 
     /**
-     *
+     * @var   array Stores restore field input values when the Restore button is pressed.
+     * @since 4.7.2
+     */
+    private $___aRestore = array();
+
+    /**
+     * @return array
      */
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
         if ( 'restore' === $aSubmitInfo[ 'field_id' ] ) {
+            $this->___aRestore = $aInputs[ 'reset_components' ];
             add_filter( 'validation_' . $oFactory->oProp->sClassName, array( $this, 'replyToResetOptions' ), 999, 4 );
             return $aOldInputs;
         }
         return $aInputs;
     }
         public function replyToResetOptions( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
-            $this->___resetOptions( $aInputs[ 'reset_settings' ][ 'reset_components' ], $oFactory );
+            $this->___resetOptions( $this->___aRestore, $oFactory );
             return $aInputs;    // do not return an empty array as the user might not check `general`.
         }
             /**

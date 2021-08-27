@@ -1,0 +1,1 @@
+- Fixed a bug that the component checkboxes did not take effect in the `Reset` screen and resulted in restoring all the settings.   
