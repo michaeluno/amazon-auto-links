@@ -1,5 +1,6 @@
 - Added the `Opt` checkbox in the `Restore Defaults` setting field.
 - Tweaked UI elements.
+- Fixed a bug that Web Page Dumper caused the error, "a valid URL was not provided", when the list was empty.
 - Fixed a bug that a default option value of the Web Page Dumper section failed to be set after Tools options were reset. 
 - Fixed a bug that caused the PHP Fatal error, "Uncaught Error: Call to a member function get_page_permastruct() on null". 
 - Fixed a bug that the component checkboxes did not take effect in the `Reset` screen and resulted in restoring all the settings.   

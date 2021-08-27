@@ -41,6 +41,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
          */
         private function ___shouldProceed() {
             $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
+            if ( ! trim( $_oToolOption->get( array( 'web_page_dumper', 'list' ), '' ) ) ) {
+                return false;   // if the list is empty, even though the option is enabled, there is nothing the component can do
+            }
             if ( $_oToolOption->get( array( 'web_page_dumper', 'enable' ), false ) ) {
                 return true;
             }
