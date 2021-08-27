@@ -1,6 +1,6 @@
 /**
  * @name Admin
- * @version 1.2.5
+ * @version 1.2.6
  */
 
 /* General */
@@ -129,6 +129,10 @@ p .dashicons {
 .metabox-title .dashicons {
 	margin-right: 0.32em;
 }
+.metabox-prefs .dashicons {
+	vertical-align: sub;
+}
+
 /* Admin Page */
 #post-body > .amazon-auto-links-content {
 	margin-bottom: 0;
