@@ -34,7 +34,7 @@ class AmazonAutoLinks_ToolOption extends AmazonAutoLinks_Option_Base {
         ),
         'web_page_dumper'   => array(
             'enable'                => false,
-            'list'                  => '',
+            'list'                  => 'https://web-page-dumper.herokuapp.com/',
             'always'                => '',
             'excludes'              => '',
         ),

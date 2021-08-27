@@ -69,7 +69,6 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'class'           => array(
                     'input' => 'list-web-page-dumper',
                 ),
-                'default'         => 'https://web-page-dumper.herokuapp.com/',
                 'description'     => array(
                     sprintf( __( 'Enter addresses of %1$s one per line.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' e.g.<code>https://web-page-dumper.herokuapp.com/</code>',
