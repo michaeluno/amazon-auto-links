@@ -169,6 +169,9 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
 button.amazon-auto-links-button {
     white-space: nowrap;
 }
+.amazon-auto-links-button-link {
+    text-decoration: none;
+}
 CSS;
     }
     /**

@@ -121,7 +121,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
          */
         private function ___getLinkButton( $isButtonID, $sProductURL, $sLabel ) {
             $sProductURL = esc_url( $sProductURL );
-            return "<a href='{$sProductURL}' target='_blank' rel='nofollow noopener'>"
+            return "<a href='{$sProductURL}' target='_blank' rel='nofollow noopener' class='amazon-auto-links-button-link'>"
                     . $this->getButton( $isButtonID, $sLabel )
                 . "</a>";
         }
@@ -164,7 +164,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
                     : 1;
             }
             $_sButtonURL    = esc_url( add_query_arg( $_aQuery, $_sURL ) );
-            return "<a href='{$_sButtonURL}' target='_blank' rel='nofollow noopener'>"
+            return "<a href='{$_sButtonURL}' target='_blank' rel='nofollow noopener' class='amazon-auto-links-button-link'>"
                     . $this->getButton( $isButtonID, $sLabel )
                 . "</a>";
 
