@@ -49,14 +49,16 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
                     'general'  => __( 'General', 'amazon-auto-links' ),
                     'template' => __( 'Templates', 'amazon-auto-links' ),
                     'tool'     => __( 'Tools', 'amazon-auto-links' ),
+                    'opt'      => __( 'Opt', 'amazon-auto-links' ),
                     // 'button'   => __( 'Buttons', 'amazon-auto-links' ),
                     // 'opt_in'   => __( 'Opt-in', 'amazon-auto-links' ),   // not implemented yet
                 ),
                 'save'                  => false,
                 'default'               => array(
-                    'general'  => true,
-                    'template' => true,
-                    'tool'     => true,
+                    'general'   => true,
+                    'template'  => true,
+                    'tool'      => true,
+                    'opt'       => true,
                     // 'button'   => true,
                 ),
             ),
@@ -134,10 +136,25 @@ class AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions extends AmazonAutoLin
                     delete_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'tools' ] );
                 }
 
+                // Opt
+                if ( $aResetComponents[ 'opt' ] ) {
+                    $this->___deleteOptMeta();
+                }
+
                 $oFactory->setSettingNotice( __( 'The default options have been restored.', 'amazon-auto-links' ), 'updated' );
 
             }
-
+                /**
+                 * @since 4.7.2
+                 */
+                private function ___deleteOptMeta() {
+                    $_iUserID  = get_current_user_id();
+                    $_aOptKeys = AmazonAutoLinks_Registry::$aUserMeta;
+                    unset( $_aOptKeys[ 'first_saved' ] );
+                    foreach( AmazonAutoLinks_Registry::$aUserMeta as $_sUserMetaKey ) {
+                        delete_user_meta( $_iUserID, $_sUserMetaKey );
+                    }
+                }
                 /**
                  * @since 4.6.19
                  */
