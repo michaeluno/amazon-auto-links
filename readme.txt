@@ -332,7 +332,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.7.1 - 08/27/2021 =
-- Added a button to create a disclosure page when it does not exist in the `Disclosure` screen. D
+- Added a button to create a disclosure page when it does not exist in the `Disclosure` screen.
 - Tweaked the style of buttons regarding text decoration.
 - Tweaked setting UI.
 - Fixed a bug that pop-up images for product thumbnails did not have the correct links.
