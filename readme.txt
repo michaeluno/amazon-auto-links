@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.7.0
+Stable tag:         4.7.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.1 - 08/27/2021 =
+- Added a button to create a disclosure page when it does not exist in the `Disclosure` screen. D
+- Tweaked the style of buttons regarding text decoration.
+- Tweaked setting UI.
+- Fixed a bug that pop-up images for product thumbnails did not have the correct links.
 
 = 4.7.0 - 08/26/2021 =
 - Added the `Disclosure` setting screen that allows the user to configure affiliate disclosure.
