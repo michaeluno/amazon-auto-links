@@ -24,6 +24,13 @@ class AmazonAutoLinks_Disclosure_Event_Filter_DisclaimerTooltip extends AmazonAu
      * @since 4.7.0
      */
     public function __construct() {
+
+        // If it is called in the background, tooltips are not needed.
+        // Also, get_permalink() causes an error when called too early.
+        if ( AmazonAutoLinks_Shadow::isBackground() ) {
+            return;
+        }
+
         add_filter( 'aal_filter_unit_output_disclaimer_text', array( $this, 'replyToGetDisclaimerText' ) );
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
