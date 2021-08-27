@@ -1,0 +1,2 @@
+Date        Version  Downloads Percentage Estimated Installs
+2021-08-26  4.7      4284      23.6       18152
