@@ -64,7 +64,9 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
 
         // Strip the enclosing JS function
         // @see https://gist.github.com/umutakturk/3804958
-        $_sJSONJS   = preg_replace("/[^(]*\((.*)\)/", "$1", $sJSONP );
+        // Not using preg_replace() to cover malformed JSONP enclosed in HTML tags, which occurs with Web Page Dumper.
+        preg_match( "/[^(]*\((.*)\)/", $sJSONP, $_aMatches );
+        $_sJSONJS   = isset( $_aMatches[ 1 ] ) ? $_aMatches[ 1 ] : '';
 
         // The JSON syntax is still JS based. Enclose keys with double quotes
         // @see https://stackoverflow.com/a/40326949

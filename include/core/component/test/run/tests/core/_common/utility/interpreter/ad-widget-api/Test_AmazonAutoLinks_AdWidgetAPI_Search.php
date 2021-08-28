@@ -21,6 +21,16 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
     /**
      * @tags UK
      */
+    public function test_getEndPoint() {
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'UK' );
+        $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( array( 'B002U3CB7A' ) );
+        $this->_getDetails( 'Endpoint', $_sEndpointURL );
+        $this->_assertNotEmpty( filter_var( $_sEndpointURL, FILTER_VALIDATE_URL ) );
+    }
+
+    /**
+     * @tags UK
+     */
     public function test_UK() {
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'UK' );
         $_aResponse          = $_oAdWidgetAPISearch->get(

@@ -52,6 +52,7 @@ return array(
     "Test_AmazonAutoLinks_DatabaseTable_aal_products" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/database/Test_AmazonAutoLinks_DatabaseTable_aal_products.php", 
     "Test_AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager.php", 
     "Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/file/Test_AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 
+    "Test_AmazonAutoLinks_AdWidgetAPI_Base" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/interpreter/ad-widget-api/Test_AmazonAutoLinks_AdWidgetAPI_Base.php", 
     "Test_AmazonAutoLinks_AdWidgetAPI_Search" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/interpreter/ad-widget-api/Test_AmazonAutoLinks_AdWidgetAPI_Search.php", 
     "Test_AmazonAutoLinks_HTTPClient" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/interpreter/http/Test_AmazonAutoLinks_HTTPClient.php", 
     "Test_AmazonAutoLinks_HTTPClient_Part2" => AmazonAutoLinks_Test_Loader::$sDirPath . "/run/tests/core/_common/utility/interpreter/http/Test_AmazonAutoLinks_HTTPClient_Part2.php", 
