@@ -18,6 +18,13 @@
 - Have a means to prompt the user to update Web Page Dumper if they are using old versions of it. 
   
 ## Major
+- [Feature] Add a notification component.
+  - Save notifications in a new options record with time stamps.
+  - When the notification options is not empty, 
+    - add the "Notifications" menu item 
+    - add a count notice in the menu item
+    - add the "Notifications" page/post meta boxes
+  - Add the ability for other components to interact with it by adding and removing notifications, performing certain actions such as saving an option for the component.   
 - [Feature] Add a new unit type, Item Pick-up, which allows the user to pick up products from search and existing units.
 - [Feature] Add a new Search unit type that works with the Ad Widget API (the supported locales will be limited).
     - In this case, the existing menu "Add Unit by Search" need to be renamed. Maybe, "Add Unit by PA-API". 
