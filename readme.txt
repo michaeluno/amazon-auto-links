@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.7.1
+Stable tag:         4.7.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.2 - 08/28/2021 =
+- Added the `Opt` checkbox in the `Restore Defaults` setting field.
+- Tweaked UI elements.
+- Fixed a bug that Web Page Dumper caused the error, "a valid URL was not provided", when the list was empty.
+- Fixed a bug that a default option value of the Web Page Dumper section failed to be set after Tools options were reset.
+- Fixed a bug that caused the PHP Fatal error, "Uncaught Error: Call to a member function get_page_permastruct() on null".
+- Fixed a bug that the component checkboxes did not take effect in the `Reset` screen and resulted in restoring all the settings.
 
 = 4.7.1 - 08/27/2021 =
 - Added a button to create a disclosure page when it does not exist in the `Disclosure` screen.
