@@ -13,32 +13,15 @@
  *
  * @since        4.7.1
  */
-class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice extends AmazonAutoLinks_Utility {
+class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice extends AmazonAutoLinks_Event_Action_AdminNotices_Base {
 
     public $sNonceKey = 'aal_action_web_page_dumper_enable';
-
-    /**
-     * Sets up hooks.
-     * @since 4.7.1
-     */
-    public function __construct() {
-        add_action( 'load_' . 'AmazonAutoLinks_AdminPage', array( $this, 'replyToDo' ) );
-        add_action( 'load_' . 'AmazonAutoLinks_ToolAdminPage', array( $this, 'replyToDo' ) );
-
-        // At the moment, when JavaScript is disabled, in these pages, the setting notice cannot be displayed.
-        add_action( 'load_' . 'AmazonAutoLinks_PostType_Unit', array( $this, 'replyToDo' ) );
-        add_action( 'load_' . 'AmazonAutoLinks_PostType_AutoInsert', array( $this, 'replyToDo' ) );
-        add_action( 'load_' . 'AmazonAutoLinks_PostType_Button', array( $this, 'replyToDo' ) );
-    }
 
     /**
      * @since 4.7.1
      * @param AmazonAutoLinks_AdminPageFramework_Factory $oFactory
      */
     public function replyToDo( $oFactory ) {
-        if ( ! is_admin() ) {
-            return;
-        }
         if ( isset( $_GET[ 'action' ], $_GET[ 'nonce' ] ) && 'enableWebPageDumper' === $_GET[ 'action' ] ) {
             $this->___handleEnableAction( $this->getHTTPQueryGET( 'nonce' ), $oFactory );
             return;
