@@ -13,7 +13,7 @@
             event.preventDefault();
             var _oSpinner   = $( '<img class="ajax-spinner test-web-page-dumper-spinner" src="' + aalWebPageDumperEnable.spinnerURL + '" alt="Spinner" />' );
             _oSpinner.css({
-                'vertical-alignment': 'middle',
+                'vertical-align': 'middle',
                 'margin': '0 0.6em',
             });
             $( this ).after( _oSpinner );
