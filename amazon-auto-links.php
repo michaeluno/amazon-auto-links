@@ -354,7 +354,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
     /**
      * @param   string $sMessage
-     * @param   string $sType
+     * @param   string $sType       `error`, `updated`, `info`, and `bell` are accepted.
      * @param   string $sDashIcon   The past part of a dash-icon class such as `warning` in `dashicons-warning`.
      * @since   3.11.0
      */
@@ -364,12 +364,19 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     }
         static public $aAdminNotices = array();
         static public function replyToShowAdminNotices() {
+            $_aColorsByType = array(
+                'error'   => '#d63638', // red
+                'updated' => '#00a32a', // green
+                'info'    => '#0084ff', // blue
+                'bell'    => '#969200', // gold
+            );
             foreach( self::$aAdminNotices as $_aNotice ) {
+                $_sColor      = isset( $_aColorsByType[ $_aNotice[ 'type' ] ] ) ? $_aColorsByType[ $_aNotice[ 'type' ] ] : $_aColorsByType[ 'updated' ];
                 $_sIconStyle  = 'margin-left: -4px; vertical-align: middle;';
-                $_sIconStyle .= $_aNotice[ 'type' ] === 'error' ? 'color:#d63638;' : 'color:#00a32a;';
+                $_sIconStyle .= "color:{$_sColor};";
                 $_sIcon       = $_aNotice[ 'icon' ] ? "<span class='dashicons dashicons-" . esc_attr( $_aNotice[ 'icon' ] ) . "' style='" . esc_attr( $_sIconStyle ) . "'></span>" : '';
                 $_sClass      = "notice is-dismissible {$_aNotice[ 'type' ]} hidden";
-                $_sScript     = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
+                $_sScript     = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";_this.style["margin-top"]="15px";_this.style["border-left-color"]="' . $_sColor .  '"},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
                 echo "<div class='" . esc_attr( $_sClass ) . "' style='opacity:0;'>"
                      . "<p>"
                         . $_sIcon
