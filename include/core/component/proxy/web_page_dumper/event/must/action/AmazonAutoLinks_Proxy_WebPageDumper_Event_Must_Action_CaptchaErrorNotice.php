@@ -15,7 +15,7 @@
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice extends AmazonAutoLinks_Utility {
 
-    public $sNonceKey = 'aal-link-action-enable-web-page-dumper';
+    public $sNonceKey = 'aal_action_web_page_dumper_enable';
 
     /**
      * Sets up hooks.
@@ -25,10 +25,10 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
         add_action( 'load_' . 'AmazonAutoLinks_AdminPage', array( $this, 'replyToDo' ) );
         add_action( 'load_' . 'AmazonAutoLinks_ToolAdminPage', array( $this, 'replyToDo' ) );
 
-        // At the moment, not showing messages in  the post listing pages as setSettingNotice() is not supported in these factory classes
-        // add_action( 'load_' . 'AmazonAutoLinks_PostType_Unit', array( $this, 'replyToDo' ) );
-        // add_action( 'load_' . 'AmazonAutoLinks_PostType_AutoInsert', array( $this, 'replyToDo' ) );
-        // add_action( 'load_' . 'AmazonAutoLinks_PostType_Button', array( $this, 'replyToDo' ) );
+        // At the moment, when JavaScript is disabled, in these pages, the setting notice cannot be displayed.
+        add_action( 'load_' . 'AmazonAutoLinks_PostType_Unit', array( $this, 'replyToDo' ) );
+        add_action( 'load_' . 'AmazonAutoLinks_PostType_AutoInsert', array( $this, 'replyToDo' ) );
+        add_action( 'load_' . 'AmazonAutoLinks_PostType_Button', array( $this, 'replyToDo' ) );
     }
 
     /**
@@ -58,7 +58,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
             )
         );
         $_sMessage = __( 'You have a captcha error. Consider enabling Web Page Dumper.', 'amazon-auto-links' )
-             . "<a href='" . esc_url( $_sURL ) . "' style='text-decoration:none;margin-left:1em;' class='button-link'>"
+             . "<a href='" . esc_url( $_sURL ) . "' style='text-decoration:none;margin-left:1em;' class='button-link web-page-dumper-action' data-action='enable'>"
                 . "<button class='button button-secondary button-small'>"
                     . __( 'Enable', 'amazon-auto-links' )
                 . "</button>"
@@ -68,7 +68,30 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
             'error',
             'warning'
         );
+        $this->___enqueueScript();
     }
+        /**
+         * @since 4.7.3
+         */
+        private function ___enqueueScript() {
+            $_sMin = $this->isDebugMode() ? '' : '.min';
+            wp_enqueue_script(
+                'web-page-dumper-enable-button',
+                AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . "/asset/js/web-page-dumper-enable-button{$_sMin}.js", true ),
+                array( 'jquery' ),
+                AmazonAutoLinks_Registry::VERSION,
+                true
+            );
+            $_aData = array(
+                'ajaxURL'          => admin_url( 'admin-ajax.php' ),
+                'actionHookSuffix' => $this->sNonceKey,
+                'nonce'            => wp_create_nonce( $this->sNonceKey ),
+                'spinnerURL'       => admin_url( 'images/loading.gif' ),
+                'pluginName'       => AmazonAutoLinks_Registry::NAME,
+                'debugMode'        => AmazonAutoLinks_Option::getInstance()->isDebug( 'js' ),
+            );
+            wp_localize_script( 'web-page-dumper-enable-button', 'aalWebPageDumperEnable', $_aData );
+        }
         /**
          * @return boolean
          * @since  4.7.1

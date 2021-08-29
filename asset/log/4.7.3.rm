@@ -1,1 +1,2 @@
+- Tweaked setting UI elements.
 - Fixed a bug that some HTTP responses were not parsed properly.

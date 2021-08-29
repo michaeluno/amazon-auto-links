@@ -62,6 +62,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage;       // [4.6.23+]
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CategorySelection;                    // [4.6.23+]
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice;                   // [4.7.1+]
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable;  // 4.7.3
         }
 
         /**
