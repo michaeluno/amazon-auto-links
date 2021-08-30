@@ -35,14 +35,21 @@ class AmazonAutoLinks_Opt_Loader {
 
         // Events
         add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
-        new AmazonAutoLinks_Opt_Event_Filter_SettingTabURL;
 
     }
 
     public function replyToLoadEvents() {
-        // Ajax
-        new AmazonAutoLinks_Opt_Event_Action_AdminFooter;   // [4.7.3]
-        new AmazonAutoLinks_Opt_EventAjax_RatingPrompt;     // [4.6.6]
+
+        new AmazonAutoLinks_Opt_Event_Filter_SettingTabURL;
+
+        if ( ! is_admin() ) {
+            return;
+        }
+        new AmazonAutoLinks_Opt_Event_Action_AdminFooter;       // [4.7.3]
+        new AmazonAutoLinks_Opt_Event_Action_AdminNotices;      // [4.7.3]
+        new AmazonAutoLinks_Opt_EventAjax_RatingPrompt;         // [4.6.6]
+        new AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey;    // [4.7.3]
+
     }
 
     /**

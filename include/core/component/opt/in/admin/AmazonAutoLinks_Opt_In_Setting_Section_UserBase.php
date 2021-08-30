@@ -45,7 +45,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
                 'title'                 => __( 'Survey', 'amazon-auto-links' ),
                 'label'                 => __( 'Allow the plugin to ask you questionnaires from time to time.', 'amazon-auto-links' ),
                 'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_surveys', true ),
+                'value'                 => ( boolean ) get_user_meta( $_iUserID, 'aal_surveys', true ),
             ),
             array(
                 'field_id'              => 'aal_announcements',
@@ -53,7 +53,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
                 'title'                 => __( 'Announcement Feeds', 'amazon-auto-links' ),
                 'label'                 => __( 'Allow the plugin to load plugin announcement feeds from external sources and display them.', 'amazon-auto-links' ),
                 'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_announcements', true ),
+                'value'                 => ( boolean ) get_user_meta( $_iUserID, 'aal_announcements', true ),
             ),
             array(
                 'field_id'              => 'aal_developer_amazon_tag',
@@ -61,7 +61,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
                 'title'                 => __( 'Developer\'s Amazon Associates Tags in Settings', 'amazon-auto-links' ),
                 'label'                 => __( 'Allow the plugin to insert developer\'s Amazon Associates tags in the Amazon product links shown in the plugin setting pages.', 'amazon-auto-links' ),
                 'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_developer_amazon_tag', true ),
+                'value'                 => ( boolean ) get_user_meta( $_iUserID, 'aal_developer_amazon_tag', true ),
             ),
             array(
                 'field_id'              => 'aal_usage_data',
@@ -69,7 +69,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
                 'title'                 => __( 'Usage Data', 'amazon-auto-links' ),
                 'label'                 => __( 'Allow the plugin to collect plugin usage data.', 'amazon-auto-links' ),
                 'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_usage_data', true ),
+                'value'                 => ( boolean ) get_user_meta( $_iUserID, 'aal_usage_data', true ),
             ),
             array(
                 'field_id'              => 'aal_load_new_templates',
@@ -77,7 +77,7 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
                 'title'                 => __( 'New Template Feeds', 'amazon-auto-links' ),
                 'label'                 => __( 'Allow the plugin to load new template feeds from external sources.', 'amazon-auto-links' ),
                 'save'                  => false,
-                'value'                 => get_user_meta( $_iUserID, 'aal_load_new_templates', true ),
+                'value'                 => ( boolean ) get_user_meta( $_iUserID, 'aal_load_new_templates', true ),
             ),
             array()
         );
@@ -93,9 +93,25 @@ class AmazonAutoLinks_Opt_In_Setting_Section_UserBase extends AmazonAutoLinks_Ad
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
         $_iUserID = get_current_user_id();
         foreach( $aInputs as $_sMetaKey => $_mValue ) {
-            update_user_meta( $_iUserID, $_sMetaKey, ( boolean ) $_mValue );
+            update_user_meta( $_iUserID, $_sMetaKey, $this->___getInputFormatted( $_iUserID, $_sMetaKey, $_mValue ) );
         }
         return array(); // do not save anything.
     }
+        /**
+         * @param  integer $iUserID
+         * @param  string  $sMetaKey
+         * @param  false|null|integer $mValue
+         * @return integer
+         * @since  4.7.3
+         */
+        private function ___getInputFormatted( $iUserID, $sMetaKey, $mValue ) {
+            if ( ! $mValue ) {
+                return 0;
+            }
+            $_iOldTimeStamp = ( integer ) get_user_meta( $iUserID, $sMetaKey, true );
+            return $_iOldTimeStamp && 1 !== $_iOldTimeStamp
+                ? $_iOldTimeStamp
+                : time();
+        }
 
 }

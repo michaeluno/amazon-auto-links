@@ -104,6 +104,7 @@ return array(
     "AmazonAutoLinks_Opt_Event_Action_AdminFooter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php", 
     "AmazonAutoLinks_Opt_Event_Action_AdminNotices" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php", 
     "AmazonAutoLinks_Opt_EventAjax_RatingPrompt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_EventAjax_RatingPrompt.php", 
+    "AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php", 
     "AmazonAutoLinks_Opt_Event_Filter_SettingTabURL" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/filter/AmazonAutoLinks_Opt_Event_Filter_SettingTabURL.php", 
     "AmazonAutoLinks_Opt_In_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/in/AmazonAutoLinks_Opt_In_Loader.php", 
     "AmazonAutoLinks_Opt_In_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting.php", 
