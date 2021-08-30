@@ -29,13 +29,7 @@ class AmazonAutoLinks_Opt_Out_Loader {
         self::$sDirPath = dirname( __FILE__ );
 
         $this->___loadAdminPages();
-        add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
 
-    }
-
-    public function replyToLoadEvents() {
-        // Ajax
-        new AmazonAutoLinks_Opt_Out_EventAjax_RatingPrompt; // [4.6.6]
     }
 
     /**

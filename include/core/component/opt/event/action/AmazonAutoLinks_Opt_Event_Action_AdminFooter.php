@@ -69,7 +69,7 @@ class AmazonAutoLinks_Opt_Event_Action_AdminFooter {
             $_sMin = $oFactory->oUtil->isDebugMode() ? '' : '.min';
             wp_enqueue_script(
                 'aal-rating-prompt',
-                $oFactory->oUtil->getResolvedSRC( AmazonAutoLinks_Opt_Out_Loader::$sDirPath . "/asset/js/rating-prompt{$_sMin}.js" ), array( 'jquery' ),
+                $oFactory->oUtil->getResolvedSRC( AmazonAutoLinks_Opt_Loader::$sDirPath . "/asset/js/rating-prompt{$_sMin}.js" ), array( 'jquery' ),
                 false,
                 true
             );

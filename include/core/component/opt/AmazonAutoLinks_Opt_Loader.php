@@ -34,8 +34,15 @@ class AmazonAutoLinks_Opt_Loader {
         new AmazonAutoLinks_Opt_In_Loader;
 
         // Events
+        add_action( 'aal_action_events', array( $this, 'replyToLoadEvents' ) );
         new AmazonAutoLinks_Opt_Event_Filter_SettingTabURL;
 
+    }
+
+    public function replyToLoadEvents() {
+        // Ajax
+        new AmazonAutoLinks_Opt_Event_Action_AdminFooter;   // [4.7.3]
+        new AmazonAutoLinks_Opt_EventAjax_RatingPrompt;     // [4.6.6]
     }
 
     /**
