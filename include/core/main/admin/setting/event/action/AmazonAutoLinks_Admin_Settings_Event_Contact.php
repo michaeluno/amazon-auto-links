@@ -54,7 +54,7 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
             return;
         }
         @include_once( ABSPATH . 'wp-admin/includes/class-wp-debug-data.php' );
-        // @deprecated some sites fails to send emails with large data
+        // @deprecated some sites fail to send emails with large data
         // $_aData    = AmazonAutoLinks_SiteInformation::get( false ); // not including extra as it can cause failure on sending emails on some servers.
         // unset( $_aData[ 'Plugin' ] );
         // $_aData    = array(
