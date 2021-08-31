@@ -70,8 +70,9 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
 
         // The JSON syntax is still JS based. Enclose keys with double quotes
         // @see https://stackoverflow.com/a/40326949
-        $_sJSONJS   = preg_replace('/("(.*?)"|(\w+))(\s*:\s*(".*?"|.))/s', '"$2$3"$4', $_sJSONJS );
-        $_sJSON     = preg_replace('/("(.*?)"|(\w+))(\s*:\s*)\+?(0+(?=\d))?(".*?"|.)/s', '"$2$3"$4$6', $_sJSONJS );
+        // (?<!\\\)" <-- this avoids matching \" which is escaped double quotes
+        $_sJSONJS   = preg_replace('/("(.*?)(?<!\\\)"|(\w+))(\s*:\s*(".*?(?<!\\\)"|.))/s', '"$2$3"$4', $_sJSONJS );
+        $_sJSON     = preg_replace('/("(.*?)(?<!\\\)"|(\w+))(\s*:\s*)\+?(0+(?=\d))?(".*?(?<!\\\)"|.)/s', '"$2$3"$4$6', $_sJSONJS );
         return json_decode( $_sJSON, true );
 
     }
