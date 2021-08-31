@@ -15,7 +15,7 @@
   > This is not simple to do; even when the cache exists, a database query will be performed and it will cause extra queries
   > to solve that, it might be necessary to use post metas associated with the post which embeds the product. However, if the same product is embedded across multiple posts, duplicate product data will be stored in the database.
   > maybe only storing the record ID of a table (linked ID) can solve it
-- Have a means to prompt the user to update Web Page Dumper if they are using old versions of it. 
+- Have a means to encourage the user to update Web Page Dumper if they are using old versions of it. 
   
 ## Major
 - [Feature] Add a notification component.
