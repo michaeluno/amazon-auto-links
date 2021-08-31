@@ -45,10 +45,12 @@ class AmazonAutoLinks_Opt_Loader {
         if ( ! is_admin() ) {
             return;
         }
-        new AmazonAutoLinks_Opt_Event_Action_AdminFooter;       // [4.7.3]
-        new AmazonAutoLinks_Opt_Event_Action_AdminNotices;      // [4.7.3]
-        new AmazonAutoLinks_Opt_EventAjax_RatingPrompt;         // [4.6.6]
-        new AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey;    // [4.7.3]
+        new AmazonAutoLinks_Opt_Event_Action_AdminFooter;               // [4.7.3]
+        new AmazonAutoLinks_Opt_Event_Action_AdminNotices;              // [4.7.3]
+        new AmazonAutoLinks_Opt_EventAjax_RatingPrompt;                 // [4.6.6]
+        new AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey;            // [4.7.3]
+        new AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation;  // [4.7.3]
+        new AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation;    // [4.7.3]
 
     }
 
