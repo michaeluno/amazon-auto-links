@@ -331,6 +331,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
+= 4.7.3 - 09/01/2021 =
+- Tweaked setting UI elements.
+- Fixed a bug that some HTTP responses were not parsed properly.
+
 = 4.7.2 - 08/28/2021 =
 - Added the `Opt` checkbox in the `Restore Defaults` setting field.
 - Tweaked UI elements.
