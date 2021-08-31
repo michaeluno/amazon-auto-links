@@ -54,16 +54,20 @@ class AmazonAutoLinks_Admin_Settings_Event_Contact extends AmazonAutoLinks_Event
             return;
         }
         @include_once( ABSPATH . 'wp-admin/includes/class-wp-debug-data.php' );
-        $_aData    = AmazonAutoLinks_SiteInformation::get( false ); // not including extra as it can cause failure on sending emails on some servers.
-        unset( $_aData[ 'Plugin' ] );
-        $_aData    = $_aData + array(
-            'WordPress'         => class_exists( 'WP_Debug_Data' ) ? WP_Debug_Data::debug_data() : array(),
-            'General Options'   => $this->___getGeneralOptions(),
-            'Template Options'  => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ] ) ),
-            'Tools Options'     => $this->___getToolsOptions(),
+        // @deprecated some sites fails to send emails with large data
+        // $_aData    = AmazonAutoLinks_SiteInformation::get( false ); // not including extra as it can cause failure on sending emails on some servers.
+        // unset( $_aData[ 'Plugin' ] );
+        // $_aData    = array(
+            // 'WordPress'         => class_exists( 'WP_Debug_Data' ) ? WP_Debug_Data::debug_data() : array(),
+            // 'General Options'   => $this->___getGeneralOptions(),
+            // 'Template Options'  => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ] ) ),
+            // 'Tools Options'     => $this->___getToolsOptions(),
             // 'PHP'               => $this->getPHPInfo(),
             // 'MySQL'             => $this->getMySQLInfo(),
-        );
+        // );
+        $_aData  = class_exists( 'WP_Debug_Data' )
+            ? WP_Debug_Data::debug_data()
+            : array();
         $_sTable = $this->getTableOfArray(
             $_aData,
             array(
