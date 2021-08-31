@@ -39,12 +39,10 @@ class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_
                 'type'              => 'select',
                 'title'             => __( 'Preferred Language', 'amazon-auto-links' ),
                 'label'             => array(), // will be assigned in the field_{class name} callback
-                'description'       => array(
-                    __( 'When the desired language is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
-                    $_bAPIKeysSet
-                        ? ''
-                        : $this->getAPIKeyUnsetWarning( $_sLocale ),
-                ),
+                'tip'               => __( 'When the desired language is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
+                'description'       => $_bAPIKeysSet
+                    ? ''
+                    : $this->getAPIKeyUnsetWarning( $_sLocale ),
                 'attributes'        => $_aAttributes,
             ),
             array(
@@ -52,12 +50,10 @@ class AmazonAutoLinks_FormFields_Unit_Locale extends AmazonAutoLinks_FormFields_
                 'type'              => 'select',
                 'title'             => __( 'Preferred Currency', 'amazon-auto-links' ),
                 'label'             => array(), // will be assigned in the field_{class name} callback
-                'description'       => array(
-                    __( 'When the desired currency is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
-                    $_bAPIKeysSet
-                        ? ''
-                        : $this->getAPIKeyUnsetWarning( $_sLocale ),
-                ),
+                'tip'               => __( 'When the desired currency is not available for the item, the default one set by Amazon will be applied.', 'amazon-auto-links' ),
+                'description'       => $_bAPIKeysSet
+                    ? ''
+                    : $this->getAPIKeyUnsetWarning( $_sLocale ),
                 'attributes'        => $_aAttributes,
             ),
         );

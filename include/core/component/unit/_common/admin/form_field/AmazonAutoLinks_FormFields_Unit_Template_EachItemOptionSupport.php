@@ -71,7 +71,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             array(
                 'field_id'          => $sFieldIDPrefix . 'custom_text',
                 'title'             => __( 'Custom Text', 'amazon-auto-links' ),
-                'description'       => __( 'The text replaced with the <code>%text%</code> tag in the <b>Unit Format<b> option.', 'amazon-auto-links' ),
+                'tip'               => __( 'The text replaced with the <code>%text%</code> tag in the <b>Unit Format</b> option.', 'amazon-auto-links' ),
                 'type'              => 'textarea',
                 'rich'              => true,
                 'class'             => array(
@@ -180,8 +180,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'field'     => 'width-full',
                     'input'     => 'width-full',
                 ),
-                'description'       => array(
-                    __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -212,11 +211,10 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                                 . "</span>",
                                 $this->getAPIAuthenticationPageURL()
                             )
-                        ),
-                        $_bTableUpdateRequired
+                        )
+                        . ( $_bTableUpdateRequired
                             ? '<span style="color: red;">' . __( 'Some tags require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
-                            : '',
-                    ),
+                            : '' )
             );
         }
 
@@ -237,7 +235,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'attributes'        => array(
                     'rows'      => 6,
                 ),
-                'description'        => __( 'Sets the layout of the unit.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => __( 'Sets the layout of the unit.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%text%</code> - ' . __( 'the custom text set in the <b>Custom Text</b> option.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%products%</code> - ' . __( 'products', 'amazon-auto-links' ),
                 'class'         => array(
@@ -264,7 +262,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'attributes'        => array(
                     'rows'      => 6,
                 ),
-                'description'        => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
@@ -293,7 +291,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'rows'      => 6,
                 ),
                 'default'       => $sDefault,
-                'description'   => __( 'Sets the layout of the image.', 'amazon-auto-links' ) . '<br />'
+                'tip'           => __( 'Sets the layout of the image.', 'amazon-auto-links' ) . '<br />'
                     . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
                     . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
                     . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'

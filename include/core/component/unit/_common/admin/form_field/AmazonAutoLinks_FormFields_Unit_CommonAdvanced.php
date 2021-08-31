@@ -28,7 +28,7 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                     1 => __( 'Show errors.', 'amazon-auto-links' ),
                     2 => __( 'Show errors as an HTML comment.', 'amazon-auto-links' ),
                 ),
-                'description'       => __( 'Determines how you like to display unit errors.', 'amazon-auto-links' )
+                'tip'               => __( 'Determines how you like to display unit errors.', 'amazon-auto-links' )
                     . ' ' . __( 'For logged-in users who have the privilege to edit units, unit errors will be displayed regardless of this option', 'amazon-auto-links' ),
                 'default'           => 2,
             ),
@@ -102,7 +102,7 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
                 'title'             => __( 'Include Extra', 'amazon-auto-links' ),
                 'type'              => 'checkbox',
                 'label'             => __( 'Include sub-elements such as voting buttons.', 'amazon-auto-links' ),
-                'description'       => __( 'To keep it simple, uncheck it.', 'amazon-auto-links' ),
+                'tip'               => __( 'To keep it simple, uncheck it.', 'amazon-auto-links' ),
                 'default'           => false,
             ),     
             array(
@@ -133,7 +133,7 @@ class AmazonAutoLinks_FormFields_Unit_CommonAdvanced extends AmazonAutoLinks_For
         $_aFieldURLQueryString = array(
             'field_id'          => $sFieldIDPrefix . '_custom_url_query_string',
             'title'             => __( 'Custom URL Query', 'amazon-auto-links' ),
-            'description'       => __( 'Key-value pairs added to product links.', 'amazon-auto-links' )
+            'tip'               => __( 'Key-value pairs added to product links.', 'amazon-auto-links' )
                 . ' e.g. ' . __( 'Key', 'amazon-auto-links' ) . ': <code>foo</code> ' . __( 'Value', 'amazon-auto-links' ) . ': <code>bar</code> -> '
                 . __( 'URL', 'amazon-auto-links' ) . ': https://amazon.com/...?<code>foo=bar</code>',
             'type'              => 'text',

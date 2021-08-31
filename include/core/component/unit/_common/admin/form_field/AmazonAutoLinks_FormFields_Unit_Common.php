@@ -31,10 +31,8 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'field_id'      => 'count',
                 'title'         => __( 'Maximum Number of Items', 'amazon-auto-links' ),
                 'type'          => 'number',
-                'description'   => array(
-                    __( 'A maximum number of products to display.', 'amazon-auto-links' )
-                    . ' ' . __( 'When the number of items fetched from the resource does not reach the set count or items are filtered out by filter options, the result count can be less than this set count.', 'amazon-auto-links' )
-                ),
+                'tip'           => __( 'A maximum number of products to display.', 'amazon-auto-links' )
+                    . ' ' . __( 'When the number of items fetched from the resource does not reach the set count or items are filtered out by filter options, the result count can be less than this set count.', 'amazon-auto-links' ),
                 'default'       => 10,
                 'attributes'    => array(
                     'min' => 1,
@@ -66,7 +64,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'   => sprintf( 
+                'description'   => sprintf(
                     __( 'Inserts <code>ref=nosim</code> in the link url. For more information, visit <a href="%1$s">this page</a>.', 'amazon-auto-links' ), 
                     'https://affiliate-program.amazon.co.uk/gp/associates/help/t5/a21' 
                 ),

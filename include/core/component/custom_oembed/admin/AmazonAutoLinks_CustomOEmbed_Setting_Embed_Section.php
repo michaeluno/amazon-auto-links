@@ -20,10 +20,8 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
             'section_id'    => 'custom_oembed',
             'tab_slug'      => $this->sTabSlug,
             'title'         => __( 'oEmbed', 'amazon-auto-links' ),
-            'description'   => array(
-                __( 'oEmbed is an open format to provide embedded contents for web pages, which WordPress also natively supports.', 'amazon-auto-links' ),
-                __( 'By enabling this feature, simply pasting a product URL starting with <code>http(s)://www.amazon...</code> in the post editor generates Amazon product link outputs.', 'amazon-auto-links' ),
-            ),
+            'tip'           => __( 'oEmbed is an open format to provide embedded contents for web pages, which WordPress also natively supports.', 'amazon-auto-links' ),
+            'description'   => __( 'By enabling this feature, simply pasting a product URL starting with <code>http(s)://www.amazon...</code> in the post editor generates Amazon product link outputs.', 'amazon-auto-links' ),
         );
     }
 
@@ -68,7 +66,7 @@ class AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section extends AmazonAutoLinks
                 'field_id'              => 'use_iframe',
                 'type'                  => 'checkbox',
                 'title'                 => __( 'Use iframe', 'amazon-auto-links' ),
-                'description'           => __( 'When enabling this option, product links will be displayed in iframe. Otherwise, they will be directly rendered.', 'amazon-auto-links' ),
+                'tip'                   => __( 'When enabling this option, product links will be displayed in iframe. Otherwise, they will be directly rendered.', 'amazon-auto-links' ),
                 'label'                 => __( 'Show product links in iframe', 'amazon-auto-links' ),
             ),
             array(
