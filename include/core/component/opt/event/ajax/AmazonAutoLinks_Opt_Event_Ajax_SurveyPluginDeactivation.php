@@ -96,7 +96,7 @@ class AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation extends AmazonAuto
         // There seems to be a case that somehow the reason element is missing. In that case, set all the feedback form inputs to see what's going on.
         if ( ! $_sReason ) {
             $_aData = $_aData + array(
-                'Form:' => $_aForm,
+                'Post:' => $this->getArrayMappedRecursive( 'sanitize_text_field', $aPost ),
             );
         }
 
