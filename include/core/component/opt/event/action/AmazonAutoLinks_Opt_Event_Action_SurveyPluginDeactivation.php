@@ -197,7 +197,7 @@ class AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation extends AmazonAu
                 ),
                 array(
                     'label' => esc_html__( 'It\'s a temporary deactivation. I\'m just debugging an issue.', 'amazon-auto-links' ),
-                    'value' => 'not_something_looking_for',
+                    'value' => 'temporary_deactivation',
                 ),
                 array(
                     'label' => esc_html__( 'Other.', 'amazon-auto-links' ),

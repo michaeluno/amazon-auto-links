@@ -93,6 +93,12 @@ class AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation extends AmazonAuto
             'MySQL:'          => $GLOBALS[ 'wpdb' ]->get_var( "SELECT VERSION();" ),
             'Usage Duration:' => $this->___getUsageDuration() . ' days',
         );
+        // There seems to be a case that somehow the reason element is missing. In that case, set all the feedback form inputs to see what's going on.
+        if ( ! $_sReason ) {
+            $_aData = $_aData + array(
+                'Form:' => $_aForm,
+            );
+        }
 
         $_sMessage = $this->getTableOfArray(
             $_aData,
