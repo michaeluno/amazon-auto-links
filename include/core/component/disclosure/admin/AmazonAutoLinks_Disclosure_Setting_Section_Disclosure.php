@@ -79,11 +79,11 @@ class AmazonAutoLinks_Disclosure_Setting_Section_Disclosure extends AmazonAutoLi
                 'type'              => 'select2',
                 'label'             => array(),
                 // 'description'       => '<span class="dashicons dashicons-welcome-write-blog"></span><a href="">' . __( 'Edit' ) . '</a>',   // @todo set the url
-                'description'       => array(
-                    // __( 'The following shortcodes are available.', 'amazon-auto-links' ),
-                    // '<ul>'
-                    //     . '<li><code>[aal_associates]</code> - ' . __( 'Lists Amazon Associates sites that you are enrolled in as an affiliate.', 'amazon-auto-links' ) . '</li>'
-                    // . '</ul>',
+                'tip'       => array(
+                    __( 'The following shortcodes are available in the page.', 'amazon-auto-links' ),
+                    '<ul>'
+                        . '<li><code>[aal_associates]</code> - ' . __( 'Lists Amazon Associates sites that you are enrolled in as an affiliate.', 'amazon-auto-links' ) . '</li>'
+                    . '</ul>',
                 ),
                 'options'         => array(
                     'minimumInputLength' => 2,
