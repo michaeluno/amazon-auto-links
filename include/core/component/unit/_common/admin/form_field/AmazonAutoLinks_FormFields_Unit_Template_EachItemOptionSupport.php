@@ -180,7 +180,9 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'field'     => 'width-full',
                     'input'     => 'width-full',
                 ),
-                'tip'               => __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
+                'tip'               => array(
+                    'width'   => 480,
+                    'content' => __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
                         . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
                         . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
@@ -215,6 +217,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                         . ( $_bTableUpdateRequired
                             ? '<span style="color: red;">' . __( 'Some tags require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
                             : '' )
+                ),
             );
         }
 
@@ -235,9 +238,14 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'attributes'        => array(
                     'rows'      => 6,
                 ),
-                'tip'               => __( 'Sets the layout of the unit.', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%text%</code> - ' . __( 'the custom text set in the <b>Custom Text</b> option.', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%products%</code> - ' . __( 'products', 'amazon-auto-links' ),
+                'tip'               => array(
+                    'content' => __( 'Sets the layout of the unit.', 'amazon-auto-links' )
+                        . ' ' . __( 'The following tags are available.', 'amazon-auto-links' )
+                        . '<br />'
+                        . '<code>%text%</code> - ' . __( 'the custom text set in the <b>Custom Text</b> option.', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%products%</code> - ' . __( 'products', 'amazon-auto-links' ),
+                    'width'   => 480,
+                ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
                     'field'     => 'width-full',
@@ -262,10 +270,15 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'attributes'        => array(
                     'rows'      => 6,
                 ),
-                'tip'               => __( 'Sets the layout of the title.', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
+                'tip'               => array(
+                    'width'   => 480,
+                    'content' => __( 'Sets the layout of the title.', 'amazon-auto-links' )
+                        . ' ' . __( 'The following tags are available.', 'amazon-auto-links' )
+                        . '<br />'
+                        . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
+                ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
                     'field'     => 'width-full',
@@ -291,13 +304,17 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'rows'      => 6,
                 ),
                 'default'       => $sDefault,
-                'tip'           => __( 'Sets the layout of the image.', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'
-                    // . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />' // @deprecated 4.1.0
-                    . '<code>%image_size%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />'
-                    . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
+                'tip'           => array(
+                    'width'   => 480,
+                    'content' => __( 'Sets the layout of the image.', 'amazon-auto-links' )
+                        . ' ' . __( 'The following tags are available.', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%href%</code> - ' . __( 'product link url', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%title_text%</code> - ' . __( 'title', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%src%</code> - ' . __( 'image url', 'amazon-auto-links' ) . '<br />'
+                        // . '<code>%max_width%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />' // @deprecated 4.1.0
+                        . '<code>%image_size%</code> - ' . __( 'image size', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%description_text%</code> - ' . __( 'description without HTML tags', 'amazon-auto-links' ),
+                ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
                     'field'     => 'width-full',

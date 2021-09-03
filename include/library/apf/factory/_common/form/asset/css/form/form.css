@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*! Admin Page Framework Form Style 1.0.6 */
+/*! Admin Page Framework Form Style 1.0.7 */
 .amazon-auto-links-form-warning {
   font-size: 1em;
 }
@@ -689,21 +689,21 @@ th > label > span > .amazon-auto-links-form-tooltip {
 }
 
 /* Regular section titles have the `+` button and collapsible title bar has a triangle icon so give a left margin */
-.amazon-auto-links-section-title a.amazon-auto-links-form-tooltip,
-.amazon-auto-links-collapsible-title a.amazon-auto-links-form-tooltip {
+.amazon-auto-links-section-title .amazon-auto-links-form-tooltip,
+.amazon-auto-links-collapsible-title .amazon-auto-links-form-tooltip {
   margin-left: 0.2em;
   vertical-align: text-top;
   /* 3.8.13+ Fixes vertical alignment, especially in the collapsible section title area. */
 }
 
-.amazon-auto-links-section-tab a.amazon-auto-links-form-tooltip {
+.amazon-auto-links-section-tab .amazon-auto-links-form-tooltip {
   margin-left: 0.48em;
   vertical-align: middle;
 }
 
 /* Question Mark (?) - we want it to be a little bit smaller than the title */
-.amazon-auto-links-section-title a.amazon-auto-links-form-tooltip > span,
-.amazon-auto-links-collapsible-title a.amazon-auto-links-form-tooltip > span {
+.amazon-auto-links-section-title .amazon-auto-links-form-tooltip > span,
+.amazon-auto-links-collapsible-title .amazon-auto-links-form-tooltip > span {
   font-size: inherit;
 }
 
@@ -722,7 +722,7 @@ th > label > span > .amazon-auto-links-form-tooltip {
   display: none;
 }
 
-a.amazon-auto-links-form-tooltip {
+.amazon-auto-links-form-tooltip {
   outline: none;
   text-decoration: none;
   cursor: default;
@@ -730,15 +730,15 @@ a.amazon-auto-links-form-tooltip {
   margin: 0 0.2em;
 }
 
-a.amazon-auto-links-form-tooltip > .amazon-auto-links-form-tooltip-content > .amazon-auto-links-form-tooltip-title {
+.amazon-auto-links-form-tooltip > .amazon-auto-links-form-tooltip-content > .amazon-auto-links-form-tooltip-title {
   font-weight: bold;
 }
 
-a.amazon-auto-links-form-tooltip strong {
+.amazon-auto-links-form-tooltip strong {
   line-height: 30px;
 }
 
-a.amazon-auto-links-form-tooltip:hover {
+.amazon-auto-links-form-tooltip:hover {
   text-decoration: none;
 }
 
@@ -749,23 +749,23 @@ a.amazon-auto-links-form-tooltip:hover {
 }
 
 /* Debug Info - Field Arguments */
-a.amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content {
+.amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content {
   min-width: 640px;
   background-color: #F8F8F8;
 }
 
-a.amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content .dump-array {
+.amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content .dump-array {
   max-height: 400px;
   margin: 20px 8px;
 }
 
 /* For smaller screens */
 @media (max-width: 640px) {
-  a.amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content {
+  .amazon-auto-links-form-tooltip.debug-info-field-arguments > span.amazon-auto-links-form-tooltip-content {
     max-width: 280px;
   }
 }
-a.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-auto-links-form-tooltip-content::before {
+.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-auto-links-form-tooltip-content::before {
   content: " ";
   position: absolute;
   top: 36px;
@@ -777,7 +777,7 @@ a.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-
   border-color: transparent #DCA transparent transparent;
 }
 
-a.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-auto-links-form-tooltip-content::after {
+.amazon-auto-links-form-tooltip.debug-info-field-arguments:hover > span.amazon-auto-links-form-tooltip-content::after {
   content: " ";
   position: absolute;
   top: 38px;
