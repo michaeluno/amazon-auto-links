@@ -32,22 +32,12 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
                 'field_id'      => $sFieldIDPrefix . 'country',
                 'type'          => 'select',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
-                'label'         => array(                        
-                    'CA' => 'CA - ' . __( 'Canada', 'amazon-auto-links' ),
-                    'CN' => 'CN - ' . __( 'China', 'amazon-auto-links' ),
-                    'FR' => 'FR - ' . __( 'France', 'amazon-auto-links' ),
-                    'DE' => 'DE - ' . __( 'Germany', 'amazon-auto-links' ),
-                    'IT' => 'IT - ' . __( 'Italy', 'amazon-auto-links' ),
-                    'JP' => 'JP - ' . __( 'Japan', 'amazon-auto-links' ),
-                    'UK' => 'UK - ' . __( 'United Kingdom', 'amazon-auto-links' ),
-                    'ES' => 'ES - ' . __( 'Spain', 'amazon-auto-links' ),
-                    'US' => 'US - ' . __( 'United States', 'amazon-auto-links' ),
-                    'IN' => 'IN - ' . __( 'India', 'amazon-auto-links' ),
-                    'BR' => 'BR - ' . __( 'Brazil', 'amazon-auto-links' ),
-                    'MX' => 'MX - ' . __( 'Mexico', 'amazon-auto-links' ),
-                    'AU' => 'AU - ' . __( 'Australia', 'amazon-auto-links' ),
+                'label'         => $this->getPAAPILocaleFieldLabels(),
+                'description'   => sprintf(
+                    __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
+                    $this->getAPIAuthenticationPageURL()
                 ),
-                'default' => 'US',
+                'default'       => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
             ),                
             array(
                 'field_id'      => $sFieldIDPrefix . 'associate_id',
@@ -70,5 +60,5 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
             ),
         );
     }
-  
+
 }

@@ -790,4 +790,23 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             . '</span>';
     }
 
+    /**
+     * @return string[]
+     * @since  4.7.4
+     */
+    static public function getPAAPILocaleFieldLabels() {
+        $_oOption  = AmazonAutoLinks_Option::getInstance();
+        $_aLabels  = array();
+        $_aLocales = AmazonAutoLinks_PAAPI50___Locales::getLocaleObjects();
+        foreach( $_aLocales as $_sLocale => $_oLocale ) {
+            if ( ! $_oOption->isPAAPIKeySet( $_sLocale ) ) {
+                continue;
+            }
+            $_oLocale       = new AmazonAutoLinks_Locale( $_sLocale );
+            $_sCountryName  = $_oLocale->getName();
+            $_aLabels[ $_sLocale ] = $_sCountryName;
+        }
+        return $_aLabels;
+    }
+
 }
