@@ -40,9 +40,11 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                         ? 40 
                         : 60,
                 ),
-                'tip'           => __( 'Enter the keyword to search.', 'amazon-auto-links' ),
-                'description'   => __( 'For multiple items, separate them by commas.', 'amazon-auto-links' )
-                    . ' e.g. <code>WordPress, PHP</code>',
+                'tip'           => array(
+                    __( 'Enter the keyword to search.', 'amazon-auto-links' ),
+                    __( 'For multiple items, separate them by commas.', 'amazon-auto-links' )
+                        . ' e.g. <code>WordPress, PHP</code>',
+                ),
                 'class'         => array(
                     'input' => 'width-full',
                     'field' => 'width-two-third',

@@ -22,7 +22,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'field_id'      => $sFieldIDPrefix . 'associate_id',
                 'type'          => 'text',
                 'title'         => __( 'Associate ID', 'amazon-auto-links' ),
-                'description'   => 'e.g. <code>miunosoft-20</code>',
+                'tip'           => 'e.g. <code>miunosoft-20</code>',
                 'attributes'    => array(
                     'required'  => 'required',
                 ),
@@ -47,9 +47,11 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'title'         => __( 'Image Size', 'amazon-auto-links' ),
                 'after_input'   => ' ' . __( 'pixel', 'amazon-auto-links' ),
                 'delimiter'     => '',
-                'tip'           => __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
-                'description'   => __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
+                'tip'           => array(
+                    __( 'The maximum width of the product image in pixel. Set <code>0</code> for no image.', 'amazon-auto-links' ),
+                    __( 'Max', 'amazon-auto-links' ) . ': <code>500</code> '
                     . ' ' . __( 'Default', 'amazon-auto-links' ) . ': <code>160</code>',
+                ),
                 'attributes'    => array(
                     'max' => 500,
                     'min' => 0,
@@ -64,7 +66,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                     1   => __( 'On', 'amazon-auto-links' ),
                     0   => __( 'Off', 'amazon-auto-links' ),
                 ),
-                'description'   => sprintf(
+                'tip'           => sprintf(
                     __( 'Inserts <code>ref=nosim</code> in the link url. For more information, visit <a href="%1$s">this page</a>.', 'amazon-auto-links' ), 
                     'https://affiliate-program.amazon.co.uk/gp/associates/help/t5/a21' 
                 ),
@@ -75,17 +77,19 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'type'          => 'number',
                 'title'         => __( 'Title Length', 'amazon-auto-links' ),
                 'tip'           => __( 'The allowed character length for the title.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
+                    . __( 'Use it to prevent a broken layout caused by a very long product title. Set -1 for no limit.', 'amazon-auto-links' )
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ": <code>-1</code>",
                 'default'       => -1,
             ),   
             array(
                 'field_id'      => $sFieldIDPrefix . 'description_length',
                 'type'          => 'number',
                 'title'         => __( 'Description Length', 'amazon-auto-links' ),
-                'tip'           => __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
-                    . __( 'Set -1 for no limit.', 'amazon-auto-links' ),
-                'description'   => __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
+                'tip'           => array(
+                    __( 'The allowed character length for the description.', 'amazon-auto-links' ) . '&nbsp;'
+                    . __( 'Set <code>-1</code> for no limit.', 'amazon-auto-links' )
+                    . ' ' . __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
+                ),
                 'default'       => 250,
             ),                
             array(

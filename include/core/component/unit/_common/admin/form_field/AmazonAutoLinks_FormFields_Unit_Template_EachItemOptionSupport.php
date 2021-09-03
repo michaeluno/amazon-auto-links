@@ -35,14 +35,14 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'select_type'       => 'select',
                 'selectors'         => $this->___getRevealerSelectorsForItemFormatFields( $_aActiveTemplateLabels ),
                 'title'             => __( 'Template Name', 'amazon-auto-links' ),
-                'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' ),
                 'label'             => $_aActiveTemplateLabels,
                 'default'           => $this->oTemplateOption->getDefaultTemplateIDByUnitType( $sUnitType ),
-                'description'       => sprintf(
-                    __( 'If the template you like to use is not listed here, make sure it is activated in the <a href="%1$s">%2$s</a> screen.', 'amazon-auto-links' ),
-                    esc_url( $_sTemplateScreenURL ),
-                    __( 'Templates', 'amazon-auto-links' )
-                ),
+                'tip'               => __( 'Sets a default template for this unit.', 'amazon-auto-links' )
+                    . ' ' . sprintf(
+                        __( 'If the template you like to use is not listed here, make sure it is activated in the <a href="%1$s">%2$s</a> screen.', 'amazon-auto-links' ),
+                        esc_url( $_sTemplateScreenURL ),
+                        __( 'Templates', 'amazon-auto-links' )
+                    ),
             ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'column',
