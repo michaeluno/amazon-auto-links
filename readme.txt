@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.0
 Requires MySQL:     5.0.3
-Stable tag:         4.7.3
+Stable tag:         4.7.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.4 - 09/04/2021 =
+- Tweaked setting UI elements.
+- Fixed a bug that search, contextual, and URL units did not support some locales.
 
 = 4.7.3 - 09/01/2021 =
 - Tweaked setting UI elements.
