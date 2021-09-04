@@ -1,7 +1,6 @@
 # Todos
 
-## Minor
-- Add country flag icons to locale select fields. - partially done. 
+## Minor 
 - Add an option "Use these proxies for Web Page Dumper". *unsure about this
 - Fix image widths displayed with the %content% tag. *unsure about this
 - [Bug] Fix a bug that cloning a unit does not clone template options. *unconfirmed
