@@ -35,7 +35,9 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     public function replyToLoadTab( $oFactory ) {
-      
+
+        new AmazonAutoLinks_Select2CustomFieldType( $oFactory->oProp->sClassName );
+
         // Add form fields
         $oFactory->addSettingSections(
             $this->sPageSlug, // target page slug

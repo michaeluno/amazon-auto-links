@@ -64,20 +64,36 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                     ' e.g. <code>' . __( 'test, demo', 'amazon-auto-links' ) . '</code>',
                 ),
             ),
-            array(
-                'field_id'          => $sFieldIDPrefix . 'country',
-                'type'              => 'select',
-                'title'             => __( 'Country', 'amazon-auto-links' ),
-                'label'             => $this->getPAAPILocaleFieldLabels(),
-                'description'       => sprintf(
-                    __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
-                    $this->getAPIAuthenticationPageURL()
-                ),
-                'default'           => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
-            ),
+            $this->___getCountryField( $sFieldIDPrefix ),
         );
         return $_aFields;
 
     }
+        /**
+         * @param  string $sFieldIDPrefix
+         * @return array
+         * @since  4.7.4
+         */
+        private function ___getCountryField( $sFieldIDPrefix ) {
+            $_aBase = array(
+                'field_id'          => $sFieldIDPrefix . 'country',
+                'type'              => 'select',
+                'title'             => __( 'Country', 'amazon-auto-links' ),
+                'label'             => $this->getPAAPILocaleFieldLabels(),
+                'default'           => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
+            );
+            // In the widget page in WordPress 5.8 or above, the select2 field type does not load
+            if ( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] !== $_GET[ 'post_type' ] ) {
+                return $_aBase;
+            }
+            return array(
+                'type'              => 'select2',
+                'icon'              => $this->getLocaleIcons( array_keys( $this->getPAAPILocaleFieldLabels() ) ),
+                'description'       => sprintf(
+                    __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
+                    $this->getAPIAuthenticationPageURL()
+                ),
+            ) + $_aBase;
+        }
 
 }

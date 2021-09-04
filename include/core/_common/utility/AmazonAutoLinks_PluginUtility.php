@@ -809,4 +809,23 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         return $_aLabels;
     }
 
+    /**
+     * @param  array $aLocaleSlugs
+     * @return array
+     * @since  4.7.0
+     * @since  4.7.4 Moved from `AmazonAutoLinks_Main_AdminPage_Section_Associates`.
+     */
+    static public function getLocaleIcons( array $aLocaleSlugs ) {
+        $_aIcons = array();
+        foreach( $aLocaleSlugs as $_sLocale ) {
+            $_sFlagCode = 'UK' === $_sLocale
+                ? 'gb'
+                : strtolower( $_sLocale );
+            $_sIconPath  = AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/country_flags/' . $_sFlagCode . '.svg';
+            $_sIconURL   = AmazonAutoLinks_Registry::getPluginURL( $_sIconPath, true );
+            $_aIcons[ $_sLocale ] = "<img style='min-width:32px;' src='" . esc_url( $_sIconURL ) . "' />";
+        }
+        return $_aIcons;
+    }
+
 }

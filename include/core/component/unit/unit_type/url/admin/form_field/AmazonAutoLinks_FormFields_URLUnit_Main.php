@@ -38,9 +38,10 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
             ),        
             array(
                 'field_id'      => $sFieldIDPrefix . 'country',
-                'type'          => 'select',
+                'type'          => 'select2',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
                 'label'         => $this->getPAAPILocaleFieldLabels(),
+                'icon'          => $this->getLocaleIcons( array_keys( $this->getPAAPILocaleFieldLabels() ) ),
                 'description'   => sprintf(
                     __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
                     $this->getAPIAuthenticationPageURL()

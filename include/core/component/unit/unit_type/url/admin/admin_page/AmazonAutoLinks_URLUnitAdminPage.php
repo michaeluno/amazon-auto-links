@@ -30,6 +30,8 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
                     
         // Add pages
         $this->_addPages();
+
+        $this->setInPageTabTag( 'h2' );
      
     }
 
