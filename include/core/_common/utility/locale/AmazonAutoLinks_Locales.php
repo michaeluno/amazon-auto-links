@@ -126,15 +126,19 @@ class AmazonAutoLinks_Locales {
     }
 
     /**
-     * @since 4.6.9
-     * @return array Holding locale slugs that support the ad widget API.
+     * @since  4.6.9
+     * @since  4.7.5 Added the `$bReturnObject` parameter.
+     * @return string[]|AmazonAutoLinks_Locale_Base[] Holding locale slugs/objects that support the ad widget API.
      */
-    static public function getLocalesWithAdWidgetAPISupport() {
+    static public function getLocalesWithAdWidgetAPISupport( $bReturnObject=false ) {
         $_aSupportedLocales = array();
         foreach( self::getLocaleObjects() as $_oLocale ) {
-            if ( $_oLocale->sAdSystemServer ) {
-                $_aSupportedLocales[] = $_oLocale->sSlug;
+            if ( ! $_oLocale->sAdSystemServer ) {
+                continue;
             }
+            $_aSupportedLocales[] = $bReturnObject
+                ? $_oLocale
+                : $_oLocale->sSlug;
         }
         return $_aSupportedLocales;
     }
