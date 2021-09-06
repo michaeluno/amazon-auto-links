@@ -50,7 +50,7 @@ class AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader extends AmazonAutoL
         update_user_meta( get_current_user_id(), 'aal_load_new_templates', true );
 
         $_oRSS = new AmazonAutoLinks_RSSClient(
-            'http://feeds.feedburner.com/AmazonAutoLinksTemplates'
+            'https://feeds.feedburner.com/AmazonAutoLinksTemplates'
         );
         $_aItems = $_oRSS->get();
         if ( empty( $_aItems ) ) {
