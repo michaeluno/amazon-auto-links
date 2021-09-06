@@ -143,4 +143,27 @@ class AmazonAutoLinks_Locales {
         return $_aSupportedLocales;
     }
 
+    /**
+     * @var   string[]
+     * @since 4.7.5
+     */
+    static private $___aAdWidgetHosts;
+
+    /**
+     * @return array
+     * @since  4.7.5
+     */
+    static public function getAdWidgetAPIHosts() {
+        if ( isset( self::$___aAdWidgetHosts ) ) {
+            return self::$___aAdWidgetHosts;
+        }
+        $_aLocales = self::getLocalesWithAdWidgetAPISupport( true );
+        $_aAdSystemHosts = array();
+        foreach( $_aLocales as $_oLocale ) {
+            $_aAdSystemHosts[ $_oLocale->sSlug ] = $_oLocale->sAdSystemServer;
+        }
+        self::$___aAdWidgetHosts = $_aAdSystemHosts;
+        return self::$___aAdWidgetHosts;
+    }
+
 }

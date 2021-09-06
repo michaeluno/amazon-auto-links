@@ -35,6 +35,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
      * @since  4.5.0
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
+
         if ( $this->isUserRatingURL( $sRequestURL ) ) {
             $aArguments[ 'cache' ]  = 1;
             $aArguments[ 'reload' ] = 1;
@@ -42,6 +43,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
             // $aArguments[ 'block' ]  = array(
             //     'types' => array( 'script' )
             // );
+            return $aArguments;
         }
 
         if ( $this->isBestSellerURL( $sRequestURL ) ) {
@@ -58,8 +60,65 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
                     'value' => $_oOption->get( array( 'associates', $_sLocale, 'paapi', 'currency' ), $_oLocale->getDefaultCurrency() ),
                 ),
             );
+            return $aArguments;
         }
+
+        if ( $this->___isTextRequest( $sRequestURL ) ) {
+            $aArguments[ 'output' ] = 'text';
+            return $aArguments;
+        }
+
         return $aArguments;
     }
+        /**
+         * @param  string  $sURL
+         * @return boolean
+         * @since  4.7.5
+         */
+        private function ___isTextRequest( $sURL ) {
+            if ( $this->___isXMLRequest( $sURL ) ) {
+                return true;
+            }
+            if ( $this->___isJSONRequest( $sURL ) ) {
+                return true;
+            }
+            return false;
+        }
+            /**
+             * @param  string  $sURL
+             * @return boolean
+             * @since  4.7.5
+             */
+            private function ___isXMLRequest( $sURL ) {
+                if ( false !== strpos( $sURL, '://feeds.feedburner.com' ) ) {
+                    return true;
+                }
+                return false;
+            }
+            /**
+             * @param  string  $sURL
+             * @return boolean
+             * @since  4.7.5
+             */
+            private function ___isJSONRequest( $sURL ) {
+                if ( $this->___isAdWidgetRequest( $sURL ) ) {
+                    return true;
+                }
+                return false;
+            }
+                /**
+                 * @param  string  $sURL
+                 * @return boolean
+                 * @since  4.7.5
+                 */
+                private function ___isAdWidgetRequest( $sURL ) {
+                    if ( ! in_array( parse_url( $sURL, PHP_URL_HOST ), AmazonAutoLinks_Locales::getAdWidgetAPIHosts(), true ) ) {
+                        return false;
+                    }
+                    if ( false !== strpos( $sURL, 'Operation=GetResults' ) ) {
+                        return true;
+                    }
+                    return false;
+                }
 
 }
