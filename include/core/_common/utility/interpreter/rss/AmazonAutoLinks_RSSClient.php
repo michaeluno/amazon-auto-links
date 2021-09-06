@@ -45,17 +45,29 @@ class AmazonAutoLinks_RSSClient extends AmazonAutoLinks_PluginUtility {
      * Sets up properties
      *
      * @param array|string $asURLs
-     * @param int $iCacheDuration
-     * @param bool $bForceCacheClear
-     * @since       3.7.6   Added the `$bForceCacheClear` parameter.
-     * @since       unknown
+     * @param integer      $iCacheDuration
+     * @param boolean      $bForceCacheClear
+     * @since              unknown
+     * @since              3.7.6   Added the `$bForceCacheClear` parameter.
+     * @since              4.7.5   The `$asURLs` parameter became optiona.
      */
-    public function __construct( $asURLs, $iCacheDuration=86400, $bForceCacheClear=false ) {
-        
+    public function __construct( $asURLs='', $iCacheDuration=86400, $bForceCacheClear=false ) {
+
         $this->aURLs            = $this->getAsArray( $asURLs );
         $this->iCacheDuration   = $iCacheDuration;
         $this->bForceCacheClear = $bForceCacheClear;
-        
+
+    }
+
+    /**
+     * @param  string $sXML
+     * @return array Items.
+     * @since  4.7.5
+     */
+    public function getFromXML( $sXML ) {
+        $_aItems = $this->___getRSSItems( $sXML );
+        $this->_sort( $_aItems );
+        return $_aItems;
     }
 
     public function get() {
