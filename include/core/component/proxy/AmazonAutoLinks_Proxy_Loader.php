@@ -79,16 +79,13 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
         /**
          * Page styling
          * @since  4.2.0
-         * @sicne  4.5.0   Change the visitility scope to protected from private.
+         * @sicne  4.5.0   Change the visibility scope to protected from private.
          * @param  AmazonAutoLinks_AdminPageFramework $oFactory
          * @return void
          */
         protected function _doPageSettings( $oFactory ) {
-
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $oFactory->setInPageTabTag( 'h2' );
-            $oFactory->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-
         }
 
 }

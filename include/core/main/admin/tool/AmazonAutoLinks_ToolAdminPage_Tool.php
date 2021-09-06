@@ -24,7 +24,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
             'page_slug' => AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ],
             'title'     => __( 'Tools', 'amazon-auto-links' ),
             'order'     => 900,
-            // 'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',  // not sure why but the debug table seems to be fine without this
+            'style'     => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',  // not sure why but the debug table seems to be fine without this
             'script'    => array(
                 array(
                     'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
@@ -48,11 +48,8 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
          * @return      void
          */
         private function ___doPageSettings( $oFactory ) {
-                        
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
-            $oFactory->setInPageTabTag( 'h2' );                
-            $oFactory->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-  
+            $oFactory->setInPageTabTag( 'h2' );
         }
 
     /**
