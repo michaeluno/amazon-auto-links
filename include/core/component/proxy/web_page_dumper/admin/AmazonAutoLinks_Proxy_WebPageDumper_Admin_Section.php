@@ -56,7 +56,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'label'           => sprintf( __( 'Utilize %1$s to assist HTTP requests.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                 'type'            => 'checkbox',
                 'description'     => array(
-                    sprintf( __( 'API requests will not use %1$s', 'amazon-auto-links' ), 'Web Page Dumper' ),
+                    sprintf( __( 'PA-API requests does not use %1$s.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                 ),
             ),
             array( 
