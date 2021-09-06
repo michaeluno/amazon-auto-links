@@ -30,6 +30,43 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
      */
     protected $_bGuest    = false;
 
+    protected function _construct() {
+        add_action( 'aal_action_admin_load_tab_web_page_dumper', array( $this, 'replyToEnqueueScripts' ) );
+    }
+        /**
+         * @since    4.5.0
+         * @since    4.7.5        Moved from `AmazonAutoLinks_Proxy_WebPageDumper_Admin`.
+         * @callback add_action() aal_action_admin_load_tab_web_page_dumper
+         */
+        public function replyToEnqueueScripts() {
+            $_sScriptHandle = 'aal_web_page_dumper_test_availability';
+            $_aScriptData   = array(
+                'nonce'                 => wp_create_nonce( 'aal_nonce_ajax_' . $_sScriptHandle ),
+                'actionHookSuffix'      => $_sScriptHandle, // WordPress action hook name which follows after `wp_ajax_`
+                'label'                 => array(
+                    'enterURL'    => __( 'Please enter a URL.', 'amazon-auto-links' ),
+                    'testing'     => __( 'Testing...', 'amazon-auto-links' ),
+                    'alradyAdded' => __( 'Already added.', 'amazon-auto-links' ),
+                ),
+            ) + $this->getScriptDataBase();
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script(
+                $_sScriptHandle,    // handle
+                $this->getSRCFromPath(
+                    $this->isDebugMode()
+                        ? AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/js/web-page-dumper-tester.js'
+                        : AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/js/web-page-dumper-tester.min.js'
+                ),
+                array( 'jquery' ),
+                true
+            );
+            wp_localize_script(
+                $_sScriptHandle,
+                'aalWebPageDumperTester',        // variable name on JavaScript side
+                $_aScriptData
+            );
+        }
+
     /**
      * @param  array $aPost Passed POST data.
      * @return array

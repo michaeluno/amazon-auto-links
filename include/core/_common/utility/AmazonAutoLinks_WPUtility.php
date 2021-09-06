@@ -18,6 +18,27 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
+     * @var    array
+     * @since  4.7.5
+     */
+    static private $___aScriptDataBase;
+
+    /**
+     * @return array
+     * @since  4.7.5
+     */
+    static public function getScriptDataBase() {
+        if ( isset( self::$___aScriptDataBase ) ) {
+            return self::$___aScriptDataBase;
+        }
+        self::$___aScriptDataBase = array(
+            'ajaxURL'               => admin_url( 'admin-ajax.php' ),
+            'spinnerURL'            => admin_url( 'images/loading.gif' ),
+        );
+        return self::$___aScriptDataBase;
+    }
+
+    /**
      * @param  string $sGUID
      * @param  string $sColumns The column parameter passed to the SQL query.
      * @param  string $sOutput  ARRAY_A or OBJECT

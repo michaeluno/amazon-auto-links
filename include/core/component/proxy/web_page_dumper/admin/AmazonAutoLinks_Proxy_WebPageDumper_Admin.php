@@ -54,41 +54,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin extends AmazonAutoLinks_PluginUt
         // Form Sections
         new AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section( $oFactory, $this->sPageSlug );
 
-        $this->___loadAjaxScript();
+        do_action( 'aal_action_admin_load_tab_web_page_dumper' );
 
     }
-
-
-        private function ___loadAjaxScript() {
-
-            $_sScriptHandle = 'aal_web_page_dumper_test_availability';
-            $_aScriptData   = array(
-                'ajaxURL'               => admin_url( 'admin-ajax.php' ),
-                'nonce'                 => wp_create_nonce( 'aal_nonce_ajax_' . $_sScriptHandle ),
-                'actionHookSuffix'      => $_sScriptHandle, // WordPress action hook name which follows after `wp_ajax_`
-                'spinnerURL'            => admin_url( 'images/loading.gif' ),
-                'label'                 => array(
-                    'enterURL'    => __( 'Please enter a URL.', 'amazon-auto-links' ),
-                    'testing'     => __( 'Testing...', 'amazon-auto-links' ),
-                    'alradyAdded' => __( 'Already added.', 'amazon-auto-links' ),
-                ),
-            );
-            wp_enqueue_script( 'jquery' );
-            wp_enqueue_script(
-                $_sScriptHandle,    // handle
-                $this->getSRCFromPath(
-                    $this->isDebugMode()
-                        ? AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/js/web-page-dumper-tester.js'
-                        : AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/js/web-page-dumper-tester.min.js'
-                ),
-                array( 'jquery' ),
-                true
-            );
-            wp_localize_script(
-                $_sScriptHandle,
-                'aalWebPageDumperTester',        // variable name on JavaScript side
-                $_aScriptData
-            );
-        }
 
 }
