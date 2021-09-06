@@ -25,6 +25,12 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
     protected $_sNonceKey = 'aal_nonce_ajax_aal_web_page_dumper_test_availability';
 
     /**
+     * Whether to be accessible for non-logged-in users (guests).
+     * @var boolean
+     */
+    protected $_bGuest    = false;
+
+    /**
      * @param  array $aPost Passed POST data.
      * @return array
      * @since  4.6.18
@@ -47,14 +53,28 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
             throw new Exception( 'The passed value is not an URL' );
         }
 
-        $_oOption         = AmazonAutoLinks_Option::getInstance();
-        $_oLocale         = new AmazonAutoLinks_Locale( $_oOption->get( array( 'unit_default', 'country' ), 'US' ) );
-        $_sURLBestsellers = $_oLocale->getBestSellersURL();
-        $_aArguments      = array(
+        $_aArguments       = array(
             'timeout' => 30,
         );
-        $_oHTTP           = new AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient( $_sURLWebPageDumper, $_sURLBestsellers, 0, $_aArguments, 'web_page_dumper' );
-        $_iStatusCode     = $_oHTTP->getStatusCode();
+
+        $_oHTTP            = new AmazonAutoLinks_HTTPClient( untrailingslashit( $_sURLWebPageDumper ) . '/version', 0, $_aArguments );
+        $_sVersion         = $_oHTTP->getBody();
+        $_sRequiredVersion = AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
+        if ( version_compare( $_sVersion, $_sRequiredVersion, '<' ) ) {
+            throw new Exception(
+                sprintf(
+                    __( 'Please update the Web Page Dumper application. Your version: %1$s. Expected version: %2$s or above.', 'amazon-auto-links' ),
+                    $_sVersion,
+                    $_sRequiredVersion
+                )
+            );
+        }
+
+        $_oOption          = AmazonAutoLinks_Option::getInstance();
+        $_oLocale          = new AmazonAutoLinks_Locale( $_oOption->get( array( 'unit_default', 'country' ), 'US' ) );
+        $_sURLBestsellers  = $_oLocale->getBestSellersURL();
+        $_oHTTP            = new AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient( $_sURLWebPageDumper, $_sURLBestsellers, 0, $_aArguments, 'web_page_dumper' );
+        $_iStatusCode      = $_oHTTP->getStatusCode();
         if ( ! $this->hasPrefix( '2', $_iStatusCode ) ) {
             $_sMessage = $_iStatusCode
                 ? $_iStatusCode . ': ' . $_oHTTP->getStatusMessage() . ' ' . $_sURLBestsellers

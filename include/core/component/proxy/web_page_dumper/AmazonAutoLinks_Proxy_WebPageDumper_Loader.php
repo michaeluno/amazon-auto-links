@@ -18,6 +18,13 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginU
 
     static public $sDirPath;
 
+    /**
+     * The required Web Page Dumper version.
+     * @var string
+     * @since 4.7.5
+     */
+    const REQUIRED_VERSION = '1.8.0';
+
     public function __construct() {
 
         self::$sDirPath  = dirname( __FILE__ );
