@@ -30,11 +30,22 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
         );
     }
 
+    protected function _construct( $oFactory ) {
+        if ( $oFactory->oProp->getCurrentTab() !== $this->sTabSlug ) {
+            return;
+        }
+        add_action(
+            "do_{$this->sPageSlug}",
+            array( $this, 'replyToDoTabEarly' ),
+            5
+        );
+    }
+
     /**
      * Triggered when the tab is loaded.
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
-    protected function _doTab( $oFactory ) {
+    public function replyToDoTabEarly( $oFactory ) {
         $this->___print();
     }
         private function ___print() {
