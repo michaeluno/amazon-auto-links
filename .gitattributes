@@ -10,6 +10,7 @@ _note export-ignore
 *.bak export-ignore
 *.old export-ignore
 *.idea export-ignore
+*.pdn export-ignore
 
 # Ignore all differences in line endings
 # @see https://stackoverflow.com/questions/20496084/git-status-ignore-line-endings-identical-files-windows-linux-environment/29518701#29518701
