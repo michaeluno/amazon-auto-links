@@ -46,16 +46,20 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     public function replyToDoTabEarly( $oFactory ) {
-        $this->___print();
+        echo $this->___getGoBackButton();
+        $this->___printCreateWebPageDumper();
     }
-        private function ___print() {
-            $_sURLProxyTab = esc_url( add_query_arg( array( 'tab' => 'proxy' ) ) );
-            echo "<div class='go-back'>"
+        private function ___getGoBackButton() {
+            return "<div class='go-back'>"
                     . "<span class='dashicons dashicons-arrow-left-alt small-icon'></span>"
-                    . "<a href='{$_sURLProxyTab}'>"
+                    . "<a href='" . esc_url( add_query_arg( array( 'tab' => 'proxy' ) ) ) . "'>"
                         . esc_html__( 'Go Back', 'amazon-auto-links' )
                     . "</a>"
                 . "</div>";
+        }
+        private function ___printCreateWebPageDumper() {
+
+            echo "<span id='create-own-web-page-dumper'></span>";
             echo "<h3>" . esc_html__( 'Create Your Own Web Page Dumper', 'amazon-auto-links' ) . "</h3>";
 
             $_sURLImageCreateNewApp   = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/create-new-app.png' ) );
