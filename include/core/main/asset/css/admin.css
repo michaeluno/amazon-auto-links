@@ -1,6 +1,6 @@
 /**
  * @name Admin
- * @version 1.2.6
+ * @version 1.2.7
  */
 
 /* General */
@@ -32,6 +32,10 @@
 }
 .width-one-fifth {
 	width: 20%;
+}
+
+.mb-1 {
+	margin-bottom: 1em;
 }
 
 .top-right {

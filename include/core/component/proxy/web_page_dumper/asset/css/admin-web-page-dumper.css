@@ -1,6 +1,6 @@
 /**
  * Amazon Auto Links - Web Page Dumper Admin
- * @version 1.0.0
+ * @version 1.0.1
  */
 .amazon-auto-links-sctionsets .amazon-auto-links-sectionset,
 .amazon-auto-links-sctionsets .amazon-auto-links-section,
@@ -53,8 +53,8 @@
     margin: 1em auto;
 }
 .screenshot img {
-    width: 600px;
-    max-width: 100%;
+    width: auto;
+    max-width: 80%;
     margin: auto;
 
     border: solid 1px #ccc;

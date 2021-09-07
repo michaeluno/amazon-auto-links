@@ -35,7 +35,12 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
     /**
      * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
-    protected function _construct( $oFactory ) {}
+    protected function _construct( $oFactory ) {
+        add_filter(
+            'field_definition_' . $oFactory->oProp->sClassName . '_' . $this->sSectionID . '_update_required',
+            array( $this, 'replyToGetFieldDefinition_update_required' )
+        );
+    }
 
     /**
      * Adds form fields.
@@ -46,8 +51,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
-        $_oOption   = AmazonAutoLinks_Option::getInstance();
-        $_bAdvanced = $_oOption->isAdvancedWebPageDumperOptionSupported();
+        $_oOption     = AmazonAutoLinks_Option::getInstance();
+        $_bAdvanced   = $_oOption->isAdvancedWebPageDumperOptionSupported();
+        $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -72,7 +78,12 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                 'description'     => array(
                     sprintf( __( 'Enter addresses of %1$s one per line.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' e.g.<code>https://web-page-dumper.herokuapp.com/</code>',
-                    sprintf( __( 'It is recommended to have your own %1$s for better performance.', 'amazon-auto-links' ), 'Web Page Dumper' ) . ' ' . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ), esc_url( add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) ) ),
+                    sprintf(
+                        __( 'It is recommended to have your own %1$s for better performance.', 'amazon-auto-links' ), 'Web Page Dumper' ) . ' ' . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ),
+                        esc_url(
+                            add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#creating-own-web-page-dumper'
+                        )
+                    ),
                 ),
             ),
             array(
@@ -94,6 +105,33 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                             'name'        => '',
                             'placeholder' => __( 'Type a URL of Web Page Dumper here to check if it is alive.', 'amazon-auto-links' ),
                         ),
+                    ),
+                ),
+            ),
+            array(
+                'field_id'        => 'update_required',
+                'title'           => __( 'Update Required', 'amazon-auto-links' ),
+                'if'              => ( boolean ) $_oToolOption->get( $this->sSectionID, 'enable' ),
+                'hidden'          => true,
+                'attributes'      => array(
+                    'style'     => 'height: 100px; width: 100%;',
+                    'readonly'  => 'readonly',
+                ),
+                'class'           => array(
+                    'fieldrow'  => 'web-page-dumper-update-required-fieldrow',
+                ),
+                'content'         => "<div class='mb-1'><div class='web-page-dumper-update-required-table'></div></div>",
+                'description'     => array(
+                    "<div class='notice-warning'>"
+                        . "<p class=''><span class='field-error'>"
+                        . "<span class='dashicons dashicons-warning'></span>"
+                        . __( 'Some of your Web Page Dumper instances are outdated and will not function properly. Please update them to the latest.', 'amazon-auto-links' )
+                        . ' ' . sprintf( __( 'The required Version is <code>%1$s</code> or above.', 'amazon-auto-links' ), AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION )
+                    . "</span></p>"
+                    . "</div>",
+                    sprintf(
+                        __( 'To update a Web Page Dumper instance, please see <a href="%1$s">here</a>.' ),
+                        add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#updating-web-page-dumper'
                     ),
                 ),
             ),
@@ -178,5 +216,35 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
             }
 
         }
+
+    public function replyToGetFieldDefinition_update_required( $aField ) {
+        $_oToolOption   = AmazonAutoLinks_ToolOption::getInstance();
+        $_aVersions     = $_oToolOption->get( $this->sSectionID, 'versions' );
+        if ( empty( $_aVersions ) ) {
+            return $aField;
+        }
+        $_sList         = $_oToolOption->get( $this->sSectionID, 'list' );
+        $_aItems        = explode( PHP_EOL, $_sList );
+        $_sRequired     = AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
+        $_aInsufficient = array();
+        foreach( $_aVersions as $_sURL => $_aVersion ) {
+            if ( ! in_array( $_sURL, $_aItems, true ) ) {
+                continue;
+            }
+            $_sVersion = $this->getElement( $_aVersion, 'version' );
+            if ( version_compare( $_sVersion, $_sRequired, '>=' ) ) {
+                continue;
+            }
+            $_aInsufficient[ $_sURL ] = $_sVersion ? $_sVersion : __( 'n/a', 'amazon-auto-links' );
+        }
+        if ( empty( $_aInsufficient ) ) {
+            return $aField;
+        }
+        $aField[ 'hidden' ]  = false;
+        $aField[ 'content' ] = "<div class='mb-1'>"
+               . AmazonAutoLinks_Proxy_WebPageDumper_Utility::getWebPageDumperVersionTable( $_aInsufficient )
+            . "</div>";
+        return $aField;
+    }
 
 }

@@ -37,6 +37,7 @@ class AmazonAutoLinks_ToolOption extends AmazonAutoLinks_Option_Base {
             'list'                  => 'https://web-page-dumper.herokuapp.com/',
             'always'                => '',
             'excludes'              => '',
+            'versions'              => array(), // [4.7.5+]
         ),
 
         // 3.8.0, 4.7.0 Moved from the main options

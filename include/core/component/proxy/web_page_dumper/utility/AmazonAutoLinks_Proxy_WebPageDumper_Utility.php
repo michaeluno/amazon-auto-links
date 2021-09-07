@@ -17,6 +17,43 @@
 class AmazonAutoLinks_Proxy_WebPageDumper_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param  array $aVersions
+     * @return string
+     * @since  4.7.5
+     */
+    static public function getWebPageDumperVersionTable( array $aVersions ) {
+        return self::getTableOfArray(
+            $aVersions,
+            array(
+                'table' => array(
+                    'class' => 'widefat striped fixed',
+                ),
+                'th'    => array(
+                   'style' => 'padding: 8px 10px; height: 1em;',
+                    array(),
+                    array(
+                        'class' => 'width-one-fourth',  // 2nd td
+                        'style' => 'width: 25%; padding: 8px 10px; height: 1em;'
+                    ),
+                ),
+                'td'    => array(
+                    array(
+                        'style' => 'max-width: unset;',
+                    ),
+                    array(
+                        'class' => 'width-one-fourth',  // 2nd td
+                    ),
+                ),
+            ),
+            array(
+                "<span>" . __( 'URL', 'amazon-auto-links' ) . '</span>' => "<span>" . __( 'Version', 'amazon-auto-links' ) . "</span>",
+            ),
+            array(),
+            false
+        );
+    }
+
+    /**
      * @since  4.5.0
      * @return string
      */

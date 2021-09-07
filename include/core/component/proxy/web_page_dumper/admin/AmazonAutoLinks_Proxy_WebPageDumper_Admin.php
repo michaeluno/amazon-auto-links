@@ -50,7 +50,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin extends AmazonAutoLinks_PluginUt
 
         // this must be called regardless of the option is enabled or not so that when the option is not checked, the ajax test can run.
         new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability;
-
+        if ( AmazonAutoLinks_ToolOption::getInstance()->get( array( 'web_page_dumper', 'enable' ), false ) ) {
+            new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks; // [4.7.5+]
+        }
         // Form Sections
         new AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section( $oFactory, $this->sPageSlug );
 

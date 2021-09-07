@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.2 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.4 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -102,8 +102,8 @@ return array(
     "AmazonAutoLinks_Opt_Setting_Section_UI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php", 
     "AmazonAutoLinks_Opt_Setting_Tab_Opt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Tab_Opt.php", 
     "AmazonAutoLinks_Opt_Event_Action_AdminFooter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php", 
-    "AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php", 
     "AmazonAutoLinks_Opt_Event_Action_AdminNotices" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php", 
+    "AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php", 
     "AmazonAutoLinks_Opt_EventAjax_RatingPrompt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_EventAjax_RatingPrompt.php", 
     "AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php", 
     "AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation.php", 
@@ -138,6 +138,7 @@ return array(
     "AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php", 
+    "AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestInterval" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestInterval.php", 
     "AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/proxy/web_page_dumper/event/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_HTTPRequestPreResponse.php", 

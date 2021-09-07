@@ -95,12 +95,12 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
         );
 
         $_oHTTP            = new AmazonAutoLinks_HTTPClient( untrailingslashit( $_sURLWebPageDumper ) . '/version', 0, $_aArguments );
-        $_sVersion         = $_oHTTP->getBody();
+        $_sVersion         = trim( $_oHTTP->getBody() );
         $_sRequiredVersion = AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
         if ( version_compare( $_sVersion, $_sRequiredVersion, '<' ) ) {
             throw new Exception(
                 sprintf(
-                    __( 'Please update the Web Page Dumper application. Your version: %1$s. Expected version: %2$s or above.', 'amazon-auto-links' ),
+                    __( 'Please update the Web Page Dumper application. Your version: <code>%1$s</code>. Expected version: <code>%2$s</code> or above.', 'amazon-auto-links' ),
                     $_sVersion,
                     $_sRequiredVersion
                 )
