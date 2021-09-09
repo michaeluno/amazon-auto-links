@@ -16,10 +16,20 @@
 class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_WPUtility {
 
     /**
+     * @param  string $sVersion
+     * @return string
+     * @since  4.7.5
+     */
+    static public function getVersionSanitized( $sVersion ) {
+        preg_match( '/^([\da-z.-]+)$/', trim( $sVersion ), $_aMatches );
+        return isset( $_aMatches[ 1 ] ) ? ( string ) $_aMatches[ 1 ] : '';
+    }
+
+    /**
      * Checks if a given string is JSON.
-     * @param $sString
-     * @return bool
-     * @since   3.9.0
+     * @param  string $sString
+     * @return boolean
+     * @since  3.9.0
      */
     static public function isJSON( $sString ) {
        json_decode( $sString );
