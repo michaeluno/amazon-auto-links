@@ -39,16 +39,18 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices e
                 return;
             }
 
-            $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
-            $_aVersions   = $this->getAsArray( $_oToolOption->get( 'web_page_dumper', 'versions' ) );
             $_sRequired   = AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
+            $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
+            $_aList       = explode( PHP_EOL, $_oToolOption->get( array( 'web_page_dumper', 'list' ), '' ) );
+            $_aVersions   = $this->getAsArray( $_oToolOption->get( 'web_page_dumper', 'versions' ) );
             $_aToNotify   = array();
             $_aToCheck    = array();
             $_iNow        = time();
-            foreach( $_aVersions as $_sURL => $_aVersion ) {
+            foreach( $_aList as $_sURL ) {
+                $_aVersion     = $this->getElementAsArray( $_aVersions, array( $_sURL ) );
                 $_sVersion     = $this->getElement( $_aVersion, 'version' );
-                $_iLastChecked = $this->getElement( $_aVersion, 'checked' );
-                if ( version_compare( $_sRequired, $_sVersion, '>' ) ) {
+                $_iLastChecked = ( integer ) $this->getElement( $_aVersion, 'checked' );
+                if ( $_iLastChecked && version_compare( $_sRequired, $_sVersion, '>' ) ) {
                     $_aToNotify[ $_sURL ] = $_sVersion;
                 }
                 if ( $_iNow < $_iLastChecked + 86400 ) {
@@ -84,7 +86,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices e
                                    'tab'  => 'web_page_dumper_help'
                                 ) + $this->getHTTPQueryGET(),
                                 admin_url( 'edit.php' )
-                            ) . '#updating-web-page-dumper',
+                            ) . '#updating-web-page-dumper'
                         )
                         . ' ' . sprintf(
                             __( 'Required version: <code>%1$s</code> or above.', 'amazon-auto-links' ),
