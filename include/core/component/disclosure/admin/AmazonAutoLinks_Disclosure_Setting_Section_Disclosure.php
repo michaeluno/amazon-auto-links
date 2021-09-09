@@ -106,6 +106,14 @@ class AmazonAutoLinks_Disclosure_Setting_Section_Disclosure extends AmazonAutoLi
                 'description'       => __( 'An affiliate disclosure page is missing on your site. Create one.', 'amazon-auto-links' ),
             ),
             array(
+                'field_id'          => 'never_create_page',
+                'type'              => 'checkbox',
+                'title'             => __( 'No Need', 'amazon-auto-links' ),
+                'label'             => __( 'Never automatically create a disclosure page.', 'amazon-auto-links' ),
+                'tip'               => __( 'By default, the plugin attempts to create an affiliate disclosure page when it does not exist upon plugin activation and updates.', 'amazon-auto-links' )
+                    . ' ' . __( 'Check this option only if your locale does not require affiliate disclosure statements.', 'amazon-auto-links' ),
+            ),
+            array(
                 'field_id'          => 'disclosure_text',
                 'title'             => __( 'Disclosure Text', 'amazon-auto-links' ),
                 'type'              => 'textarea',

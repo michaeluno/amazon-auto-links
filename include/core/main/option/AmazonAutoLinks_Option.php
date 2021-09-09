@@ -47,6 +47,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         // 4.7.0+
         'disclosure' => array(
             'page'                    => null,     // the page id, set in the constructor
+            'never_create_page'       => false,    // [4.7.5+]
             'disclosure_text'         => null,     // set in the constructor
             'link_disclaimer_to_page' => true,
             'disclaimer_text'         => null,     // set in the constructor

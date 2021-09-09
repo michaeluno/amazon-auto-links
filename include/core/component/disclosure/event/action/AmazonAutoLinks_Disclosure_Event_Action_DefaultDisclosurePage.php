@@ -19,6 +19,10 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
      * @since 4.7.0
      */
     public function __construct() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( $_oOption->get( 'disclosure', 'never_create_page' ) ) {
+            return;
+        }
         add_action( 'aal_action_plugin_activated', array( $this, 'replyToDoOnPluginActivation' ) );
         add_action( 'upgrader_process_complete', array( $this, 'replyToDoOnPluginUpdate' ), 10, 2 );
         add_action( 'upgrader_overwrote_package', array( $this, 'replyToDoOnPluginOverwrite' ), 10, 3 );
