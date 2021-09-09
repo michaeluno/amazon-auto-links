@@ -32,7 +32,9 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
      * Triggered when the tab is loaded.
      */
     public function replyToLoadTab( $oAdminPage ) {
-        
+
+        new AmazonAutoLinks_Select2CustomFieldType( $oAdminPage->oProp->sClassName );
+
         // Form sections
         new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation(
             $oAdminPage,

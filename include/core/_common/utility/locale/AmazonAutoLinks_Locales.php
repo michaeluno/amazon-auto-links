@@ -61,6 +61,24 @@ class AmazonAutoLinks_Locales {
         return $_aLabels;
     }
 
+    static private $___aNameCaches;
+
+    /**
+     * @return array
+     * @since  4.7.5
+     */
+    static public function getNames() {
+        if ( isset( self::$___aNameCaches ) ) {
+            return self::$___aNameCaches;
+        }
+        $_aLabels = array();
+        foreach( self::getLocaleObjects() as $_sLocale => $_oLocale ) {
+            $_aLabels[ $_sLocale ] = $_oLocale->getName();
+        }
+        self::$___aNameCaches = $_aLabels;
+        return $_aLabels;        
+    }
+
     static private $___aDomains;
 
     /**

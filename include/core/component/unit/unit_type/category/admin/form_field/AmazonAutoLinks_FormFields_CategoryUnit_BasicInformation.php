@@ -16,8 +16,8 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
      * @return      array
      */    
     public function get( $sFieldIDPrefix='' ) {
-            
-        $_oOption = $this->oOption;
+
+        $_aLabels = AmazonAutoLinks_Locales::getNames();
         $_aFields = array(
             array(
                 'field_id'      => 'unit_type',
@@ -28,8 +28,9 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
             array(
                 'field_id'      => 'country',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
-                'type'          => 'select',
-                'label'         => AmazonAutoLinks_Locales::getLabels(),
+                'type'          => 'select2',
+                'label'         => $_aLabels,
+                'icon'          => $this->getLocaleIcons( array_keys( $_aLabels ) ),
                 'default'       => 'US',
             ),
             array(
