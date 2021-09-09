@@ -99,7 +99,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks extends Amazo
         foreach( $_aVersions as $_sURL => $_sVersion ) {
 
             $_sVersion = trim( $_sVersion );
-            $_aVersionsToSave[ $_sURL ] = $this->___getVersionToSave( $_sVersion, $_sURL, $_aSavedVersions );
+            $_aVersionsToSave[ $_sURL ] = $this->_getVersionToSave( $_sVersion, $_sURL, $_aSavedVersions );
             $_sVersion = $this->getElement( $_aVersionsToSave[ $_sURL ], 'version' );
 
             if ( version_compare( $_sVersion, $_sRequired, '>=' ) ) {
@@ -115,12 +115,18 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks extends Amazo
 
         // Return insufficient items to display
         if ( ! empty( $_aInsufficient ) ) {
-            throw new Exception( AmazonAutoLinks_Proxy_WebPageDumper_Utility::getWebPageDumperVersionTable( $_aInsufficient ) );
+            throw new Exception( $this->_getErrorOutput( $_aInsufficient ) );
         }
         return '';
     }
-
-
+        /**
+         * @param  array $aInsufficient
+         * @return string
+         * @since  4.7.5
+         */
+        protected function _getErrorOutput( array $aInsufficient ) {
+            return AmazonAutoLinks_Proxy_WebPageDumper_Utility::getWebPageDumperVersionTable( $aInsufficient );
+        }
         /**
          * @param  string $sVersion
          * @param  string $sURL
@@ -128,11 +134,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks extends Amazo
          * @return array
          * @since  4.7.5
          */
-        private function ___getVersionToSave( $sVersion, $sURL, $aSavedVersions ) {
+        protected function _getVersionToSave( $sVersion, $sURL, $aSavedVersions ) {
             if ( $sVersion && is_scalar( $sVersion ) ) {
                 return array(
                     'checked' => time(),
-                    'version' => $sVersion,
+                    'version' => $this->getVersionSanitized( $sVersion ),
                 );
             }
             $_aSavedVersion = $this->getElementAsArray( $aSavedVersions, array( $sURL ) );
