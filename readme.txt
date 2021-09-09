@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.8.0
+Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         4.7.4
+Stable tag:         4.7.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.5 - 09/05/2021 =
+- Added the `No Need` field in the `Affilite Disclosure` setting section.
+- Added the `Update Required` field in the `Web Page Dumper` setting section.
+- Added a setting notice for outdated Web Page Dumper instances.
+- Tweaked setting UI elements.
+- Fixed a bug that disclaimer links were linking to the Affiliate Disclosure page even when the page is not accessible.
+- Fixed a bug that some HTTP requests were not parsed properly.
 
 = 4.7.4 - 09/04/2021 =
 - Tweaked setting UI elements.
