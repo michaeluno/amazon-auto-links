@@ -58,6 +58,10 @@ class AmazonAutoLinks_Disclosure_Event_Filter_DisclaimerTooltip extends AmazonAu
         }
         $_aPage   = $this->oOption->get( 'disclosure', 'page' );
         $_iPostID = ( integer ) $this->getElement( $_aPage, 'value' );
+        if ( 'publish' !== get_post_status( $_iPostID ) ) {
+            $this->sDisclaimerURLCache = '';
+            return $this->sDisclaimerURLCache;
+        }
         $_sURL    = get_permalink( $_iPostID );
         $this->sDisclaimerURLCache = $_sURL;
         return $this->sDisclaimerURLCache ? $this->sDisclaimerURLCache : $sURL;

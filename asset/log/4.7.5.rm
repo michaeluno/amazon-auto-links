@@ -1,2 +1,3 @@
 - Added the `Update Required` field in the `Web Page Dumper` setting section.
+- Fixed a bug that disclaimer links were linking to the Affiliate Disclosure page even when the page is not accessible.
 - Fixed a bug that some HTTP requests were not parsed properly.
