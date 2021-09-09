@@ -48,14 +48,18 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin extends AmazonAutoLinks_PluginUt
 
     public function replyToLoadTab( $oFactory ) {
 
-        // this must be called regardless of the option is enabled or not so that when the option is not checked, the ajax test can run.
+        // This must be called regardless of the option is enabled or not so that when the option is not checked, the ajax test can run.
         new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability;
+
+        // This should be called when the option is enabled
         if ( AmazonAutoLinks_ToolOption::getInstance()->get( array( 'web_page_dumper', 'enable' ), false ) ) {
             new AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks; // [4.7.5+]
         }
+
         // Form Sections
         new AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section( $oFactory, $this->sPageSlug );
 
+        // The above ajax events use this action hook.
         do_action( 'aal_action_admin_load_tab_web_page_dumper' );
 
     }
