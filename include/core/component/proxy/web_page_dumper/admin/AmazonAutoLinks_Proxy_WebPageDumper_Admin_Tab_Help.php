@@ -31,7 +31,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
     }
 
     protected function _construct( $oFactory ) {
-        if ( $oFactory->oProp->getCurrentTab() !== $this->sTabSlug ) {
+        if ( $oFactory->oProp->getCurrentTabSlug() !== $this->sTabSlug ) {
             return;
         }
         add_action( "do_{$this->sPageSlug}", array( $this, 'replyToDoTabEarly' ), 5 );
