@@ -17,7 +17,9 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Common extends Amazo
      * ( optional ) Use the setUp() method to define settings of this meta box.
      */
     public function setUp() {
-        
+
+        new AmazonAutoLinks_Select2CustomFieldType( $this->oProp->sClassName );
+
         $this->addSettingSections(
             array(
                 'section_id'    => $this->_sSectionID,

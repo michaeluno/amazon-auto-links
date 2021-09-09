@@ -17,12 +17,14 @@ class AmazonAutoLinks_FormFields_Unit_Country extends AmazonAutoLinks_FormFields
      */    
     public function get( $sFieldIDPrefix='' ) {
 
+        $_aLabels = AmazonAutoLinks_Locales::getNames();
         return array(    
             array(
                 'field_id'          => $sFieldIDPrefix . 'country',
-                'type'              => 'select',
+                'type'              => 'select2',
                 'title'             => __( 'Country', 'amazon-auto-links' ),
-                'label'             => AmazonAutoLinks_Locales::getLabels(),
+                'label'             => $_aLabels,
+                'icon'              => $this->getLocaleIcons( array_keys( $_aLabels ) ),
                 'default'           => 'US',
             ),          
         );
