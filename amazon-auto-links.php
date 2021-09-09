@@ -356,10 +356,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * @param   string $sMessage
      * @param   string $sType       `error`, `updated`, `info`, and `bell` are accepted.
      * @param   string $sDashIcon   The past part of a dash-icon class such as `warning` in `dashicons-warning`.
+     * @param   string $sExtra      Extra output placed outside the `<p>` tag for the message.
      * @since   3.11.0
+     * @since   4.7.5  Added the `$sExtra` parameter.
      */
-    static public function setAdminNotice( $sMessage, $sType='error', $sDashIcon='' ) {
-        self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType, 'icon' => $sDashIcon );
+    static public function setAdminNotice( $sMessage, $sType='error', $sDashIcon='', $sExtra='' ) {
+        self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType, 'icon' => $sDashIcon, 'extra' => $sExtra, );
         add_action( 'admin_notices', array( __CLASS__, 'replyToShowAdminNotices' ) );
     }
         static public $aAdminNotices = array();
@@ -377,12 +379,16 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
                 $_sIcon       = $_aNotice[ 'icon' ] ? "<span class='dashicons dashicons-" . esc_attr( $_aNotice[ 'icon' ] ) . "' style='" . esc_attr( $_sIconStyle ) . "'></span>" : '';
                 $_sClass      = "notice is-dismissible {$_aNotice[ 'type' ]} hidden";
                 $_sScript     = 'var _this=this.parentElement;setTimeout(function(){_this.style.display="block";_this.style["margin-top"]="15px";_this.style["border-left-color"]="' . $_sColor .  '"},3000);setTimeout(function(){_this.style.transition="opacity 1s";_this.style.opacity=1;},3010);';
+                $_sExtra      = $_aNotice[ 'extra' ]
+                    ? "<div class='extra'>" . $_aNotice[ 'extra' ] . "</div>"
+                    : '';
                 echo "<div class='" . esc_attr( $_sClass ) . "' style='opacity:0;'>"
                      . "<p>"
                         . $_sIcon
                         . '<strong>' . self::NAME . '</strong>: '
                         . $_aNotice[ 'message' ]
                      . "</p>"
+                     . $_sExtra
                      . "<img src onerror='" . esc_js( $_sScript ) . "' style='display:none;'/>"
                      . "</div>";
             }
