@@ -33,7 +33,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                 'type'          => 'number',
                 'tip'           => __( 'A maximum number of products to display.', 'amazon-auto-links' )
                     . ' ' . __( 'When the number of items fetched from the resource does not reach the set count or items are filtered out by filter options, the result count can be less than this set count.', 'amazon-auto-links' ),
-                'default'       => 10,
+                'default'       => 5,
                 'attributes'    => array(
                     'min' => 1,
                     'max' => $_oOption->getMaximumProductLinkCount() 
