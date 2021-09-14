@@ -83,7 +83,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 'default'           => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
             );
             // In the widget page in WordPress 5.8 or above, the select2 field type does not load
-            if ( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] !== $_GET[ 'post_type' ] ) {
+            if ( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] !== $this->getHTTPQueryGET( 'post_type' ) ) {
                 return $_aBase;
             }
             return array(
