@@ -153,25 +153,12 @@ class AmazonAutoLinks_SiteInformation extends AmazonAutoLinks_Utility {
                 'plugin_dir_url( __FILE__ )'  => $bExtra ? plugin_dir_url( AmazonAutoLinks_Registry::$sFilePath ) : '(unset)',   // somehow sending an email fails with this included
                 'plugin_basename( __FILE__ )' => plugin_basename( AmazonAutoLinks_Registry::$sFilePath ),
                 'Exists'          => $bExtra ? array(
-                    "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => self::___doesURLExist( plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ) ) ? 'Yes' : 'No',
-                    "getSRCFromPath( {plugin dir path} . '/template/category/screenshot.jpg' )" => self::___doesURLExist( self::getSRCFromPath( AmazonAutoLinks_Registry::$sDirPath . '/template/category/screenshot.jpg' ) ) ? 'Yes' : 'No',
+                    "plugins_url( 'asset/image/menu_icon_16x16.png', __FILE__ )" => self::doesURLExist( plugins_url( 'asset/image/menu_icon_16x16.png', AmazonAutoLinks_Registry::$sFilePath ) ) ? 'Yes' : 'No',
+                    "getSRCFromPath( {plugin dir path} . '/template/category/screenshot.jpg' )" => self::doesURLExist( self::getSRCFromPath( AmazonAutoLinks_Registry::$sDirPath . '/template/category/screenshot.jpg' ) ) ? 'Yes' : 'No',
                 ) : '(unset)',
             ),
         );
     }
-        /**
-         * @param  string  $sURL
-         * @return boolean
-         * @since  4.6.15
-         * @since  4.7.0   Moved from `AmazonAutoLinks_HelpAdminPage_Help_About`.
-         */
-        static private function ___doesURLExist( $sURL ) {
-            $file_headers = @get_headers( $sURL );
-            if( ! $file_headers || $file_headers[ 0 ] == 'HTTP/1.1 404 Not Found' ) {
-                return false;
-            }
-            return true;
-        }    
     
     /**
      * Retrieves information regarding the plugin specific custom database tables.

@@ -16,6 +16,19 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
+     * @param  string  $sURL
+     * @return boolean
+     * @since  4.7.6
+     */
+    static public function doesURLExist( $sURL ) {
+        $file_headers = @get_headers( $sURL );
+        if( ! $file_headers || $file_headers[ 0 ] == 'HTTP/1.1 404 Not Found' ) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * @param  string $sURL
      * @return string|false
      * @since  4.6.18
