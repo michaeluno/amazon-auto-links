@@ -9,7 +9,7 @@
  */
 
 /**
- * Adds the 'Site' form section.
+ * Adds the 'UI' form section.
  *
  * @since       4.7.0
  */
@@ -17,7 +17,7 @@ class AmazonAutoLinks_Opt_Setting_Section_UI extends AmazonAutoLinks_AdminPage_S
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  4.7.0
      */
     protected function _getArguments() {
         return array(
@@ -30,10 +30,9 @@ class AmazonAutoLinks_Opt_Setting_Section_UI extends AmazonAutoLinks_AdminPage_S
 
     /**
      * Adds form fields.
-     * @since       3.2.0
+     * @since       4.7.0
      * @param       AmazonAutoLinks_AdminPageFramework $oFactory
      * @param       string $sSectionID
-     * @return      void
      */
     protected function _addFields( $oFactory, $sSectionID ) {
         $oFactory->addSettingFields(
