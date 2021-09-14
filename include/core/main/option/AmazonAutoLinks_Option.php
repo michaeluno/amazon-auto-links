@@ -214,7 +214,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'unit_title'                    => null,
             'cache_duration'                => 86400,  // 60*60*24
             
-            'count'                         => 10,
+            'count'                         => 5,
             'column'                        => 4,
             'country'                       => 'US',
             'associate_id'                  => null,
