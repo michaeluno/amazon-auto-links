@@ -39,8 +39,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_AmazonCookies extends Ama
         }
 
         $_aArguments        = array(
-            'renew_cache' => true,
-            'timeout' => 30, // seconds. Set a longer one as Web Page Dumper servers are often sleeping.
+            'renew_cache'     => true,
+            'timeout'         => 30, // seconds. Set a longer one as Web Page Dumper servers are often sleeping.
+            'web_page_dumper' => array(
+                'reload' => true,
+            ),
         );
         $_sRequestURL       = $oLocale->getBestSellersURL();
         $_oCookieGetter     = new AmazonAutoLinks_Locale_AmazonCookies( $oLocale, $sLanguage );

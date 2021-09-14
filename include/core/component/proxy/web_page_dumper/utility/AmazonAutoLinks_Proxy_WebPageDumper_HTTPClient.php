@@ -74,7 +74,10 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
         if ( is_wp_error( $_aoResponse ) ) {
             return $_aoResponse;
         }
-        return parent::_getHTTPRequested( $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $sURL ), $aArguments );
+        return parent::_getHTTPRequested(
+            $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $sURL, $this->getElementAsArray( $aArguments, 'web_page_dumper' ) ),
+            $aArguments
+        );
 
     }
         static private $___aWoken = array();
@@ -129,8 +132,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
          * @return string
          * @since  4.5.0
          */
-        private function ___getWebPageDumperRequestURL( $sWebPageDumperURL, $sRequestURL ) {
-            $_aArguments = array(
+        private function ___getWebPageDumperRequestURL( $sWebPageDumperURL, $sRequestURL, $aWPDArguments=array() ) {
+            $_aArguments = $aWPDArguments + array(
                 'url'    => urlencode( $sRequestURL ),
                 'output' => 'html',
             );
@@ -150,7 +153,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTT
      * @since  4.5.0
      */
     public function getRequestURL() {
-        return $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $this->sURL );
+        return $this->___getWebPageDumperRequestURL( $this->sWebPageDumperURL, $this->sURL, $this->getElementAsArray( $this->aArguments, 'web_page_dumper' ) );
     }
 
 }
