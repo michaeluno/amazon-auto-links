@@ -272,7 +272,7 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
                  * @since   3.8.1   Changed the value to give to the below `render()` method from a RSS URL to a page URL as feeds are deprecated.
                  */
                 echo '<div id="category-preview">'
-                        . '<p clsas="now-loading-category-preview">'
+                        . '<p class="now-loading-category-preview">'
                             . wp_kses( $this->___getNowLoading(), $_aUsingHTMLTags )
                         . '</p>'
                      . '</div>';
