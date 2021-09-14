@@ -68,7 +68,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
-        }        
+        }
+        echo "<hr />";
         echo "<div class='aal-accordion'>"
                 . "<h3>"
                    . 'Debug: Form Options'
