@@ -29,15 +29,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
     );
 
     public function __construct( $sPageURL, $sLocale='US' ) {
-
-        // Include the library.
-        // @deprecated 3.9.1
-//        if ( ! class_exists( 'simple_html_dom_node', false ) ) {
-//            include_once( AmazonAutoLinks_Registry::$sDirPath . '/include/library/simple_html_dom.php' );
-//        }
-
         $this->___setElements( $sPageURL, $sLocale );
-
     }
 
         /**
@@ -74,12 +66,11 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
         }
             /**
              * Fetches page HTML source contents.
-             * @param string $sPageURL
-             * @sicne   3.9.1
+             * @param  string $sPageURL
              * @return string
+             * @sicne  3.9.1
              */
             private function ___getPageHTML( $sPageURL ) {
-                // $_sClassName = $this->_sHTTPClientClass; // @deprecated 4.2.0
                 $_oHTTP = new AmazonAutoLinks_HTTPClient(
                     $sPageURL,
                     86400,
@@ -95,8 +86,8 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
              *  - the user navigated to the R18 area.
              *  - the page layout has changed to the new design.
              *  - other unknown reasons.
-             * @since       3.5.7
-             * @since       3.9.1       Removed the `$oHTTP` parameter.
+             * @since 3.5.7
+             * @since 3.9.1 Removed the `$oHTTP` parameter.
              */
             protected function _handleExceptionsToSetElements( DOMDocument $oDoc, $sPageURL, $sLocale ) {
 
@@ -149,8 +140,8 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                     private function ___getElements_zg_browseRoot( DOMDocument $oDoc, $sPageURL, $sLocale ) {
 
                         // @deprecated 3.9.1 - Amazon sites no longer provide feeds for best seller items
-//                        $_oFeedURL      = new AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL( $oSimpleDOM, $sPageURL );
-//                        $_sRSSURL       = $_oFeedURL->get();
+                        // $_oFeedURL      = new AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL( $oSimpleDOM, $sPageURL );
+                        // $_sRSSURL       = $_oFeedURL->get();
 
                         $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList( $oDoc, $sPageURL );
                         $_sCategoryList = $_oCategoryList->get();
@@ -168,20 +159,19 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
                     }
 
                     /**
-                     * @param DOMDocument $oDoc
-                     * @param $sPageURL
-                     * @param $sLocale
-                     *
+                     * @param  DOMDocument  $oDoc
+                     * @param  string       $sPageURL
+                     * @param  string       $sLocale
                      * @return array
-                     * @since   3.5.7
-                     * @since   3.9.1   No longer uses PHP Simple DOM Parser
-                     * @since   3.9.1   Changed the scope to protected.
+                     * @since  3.5.7
+                     * @since  3.9.1   No longer uses PHP Simple DOM Parser
+                     * @since  3.9.1   Changed the scope to protected.
                      */
                     protected function _getElements_crown_category_nav( DOMDocument $oDoc, $sPageURL, $sLocale ) {
 
                         // @deprecated 3.9.1 Amazon sites no longer provide feeds.
-//                        $_oFeedURL      = new AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL( $oDoc, $sPageURL );
-//                        $_sRSSURL       = $_oFeedURL->get();
+                        // $_oFeedURL      = new AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL( $oDoc, $sPageURL );
+                        // $_sRSSURL       = $_oFeedURL->get();
 
                         $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB( $oDoc, $sPageURL );
                         return array(
@@ -193,12 +183,10 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
 
                     }
 
-
-
     /**
-     * @param       string      $sElement       The sidebar element name to retrieve.
-     * @return      string|array
-     * @since       3.5.7
+     * @param  string       $sElementName The sidebar element name to retrieve.
+     * @return string|array
+     * @since  3.5.7
      */
     public function get( $sElementName='' ) {
 

@@ -48,10 +48,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
     protected function _getResponse( array $aPost ) {
 
         do_action( 'aal_action_ajax_response_category_selection', $aPost ); // [4.6.23+]
-// throw new Exception(
-//     "<span class='warning'>" . sprintf( __( 'Could not retrieve the category list: %1$s.', 'amazon-auto-links' ), 'https://dummy.url' ) . "</span>"
-//     . ' ' . $this->___getReloadMessage()
-// );
+
         // Passing the unit options via transient as passing through JS results in escaped characters and causes errors.
         $_aUnitOptions      = $this->_getUnitOptions( $aPost );
         $_sLocale           = $this->getElement( $_aUnitOptions, array( 'country' ), 'US' );
