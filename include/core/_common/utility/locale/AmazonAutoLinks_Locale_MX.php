@@ -25,7 +25,7 @@ class AmazonAutoLinks_Locale_MX extends AmazonAutoLinks_Locale_Base {
      * @var string
      * @remark Unknown. Made it same as the ES locale.
      */
-    public $sLocaleNumber = '30';
+    public $sLocaleNumber = '33';
 
     /**
      * @var string e.g. www.amazon.com

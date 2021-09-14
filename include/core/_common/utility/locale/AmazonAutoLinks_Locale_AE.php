@@ -25,7 +25,7 @@ class AmazonAutoLinks_Locale_AE extends AmazonAutoLinks_Locale_Base {
      * @var string
      * @remark Unknown. Same as U.S.
      */
-    public $sLocaleNumber = '01';
+    public $sLocaleNumber = '39';
 
     /**
      * @var string e.g. www.amazon.com

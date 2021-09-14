@@ -16,6 +16,18 @@
  * @see     AmazonAutoLinks_Locales
 */
 class Test_AmazonAutoLinks_Locales extends AmazonAutoLinks_UnitTest_Base {
+
+    /**
+     * @tags image
+     */
+    public function test_getNoImageURL() {
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_oLocale ) {
+            $_sURL = $_oLocale->getNoImageURL();
+            $this->_output( "<h4>" . $_oLocale->sSlug . "</h4><img src='" . esc_url( $_sURL ) . "' alt='" . esc_attr( $_oLocale->sSlug ) . "'/>" );
+            $this->_assertTrue( $this->doesURLExist( $_sURL ) );
+        }
+    }
+
     /**
      * @tags domain
      */

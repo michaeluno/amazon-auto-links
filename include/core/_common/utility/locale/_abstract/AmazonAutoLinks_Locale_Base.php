@@ -23,6 +23,17 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
 
     /**
      * Two digits locale number.
+     *
+     * This can be checked in a URL like the following were 15 is the locale number, which is for amazon.ca.
+     *
+     * ```
+     * https://images-eu.ssl-images-amazon.com/images/G/15/ShoppingPortal/logo._TTD_.png
+     * ```
+     * Interestingly, 34 is for amazon.ru which does not exist.
+     * ```
+     * https://images-eu.ssl-images-amazon.com/images/G/34/ShoppingPortal/logo._TTD_.png
+     * ```
+     *
      * @var string
      * @remark Override it.
      */

@@ -24,7 +24,7 @@ class AmazonAutoLinks_Locale_CA extends AmazonAutoLinks_Locale_NorthAmerica {
      * Two digits locale number.
      * @var string
      */
-    public $sLocaleNumber = '01';
+    public $sLocaleNumber = '15';
 
     /**
      * @var string
