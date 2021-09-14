@@ -1,1 +1,2 @@
+- Fixed a bug that spinner images kept appearing even after Ajax requests are done in the category selection screen. 
 - Fixed a bug that an unnecessary checkbox appeared in the category selection screen.  

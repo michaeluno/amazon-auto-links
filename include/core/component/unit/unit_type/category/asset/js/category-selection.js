@@ -1,6 +1,6 @@
 /*
     @name Category Selection
-    @version 1.1.0
+    @version 1.1.1
  */
 (function($){
 
@@ -279,7 +279,7 @@
 
         // Background processing
         bProcessing = true;
-        jQuery.ajax( {
+        $.ajax( {
             type: 'post',
             dataType: 'json',
             url: aalCategorySelection.ajaxURL,
@@ -301,6 +301,10 @@
 
                     // For the first time loading
                     $( '.now-loading-category-list' ).replaceWith( '' );
+
+                    // Remove the initial spinners
+                    $( '#category-select-breadcrumb .now-loading-breadcrumb' ).remove();
+                    $( '#category-preview .now-loading-category-preview' ).remove();
 
                     // For the second time or more
                     $( '.response-error' ).remove(); // clear the previous error.
@@ -339,10 +343,8 @@
                 $( '.now-loading-breadcrumb' ).html( '<div class="response-error"><p>' + response.responseText + '</p></div>' );
             },
             complete: function() {
-
                 _oSpinner.remove();
                 bProcessing = false;
-
             }
         } ); // ajax - category preview and category list
 
@@ -434,7 +436,7 @@
         // For unit previews
         var _oSpinner   = $( '<span class="ajax-spinner"><img src="' + aalCategorySelection.spinnerURL + '" alt="Spinner" /></span>' );
         $( '#unit-preview-title' ).append( _oSpinner );
-        jQuery.ajax( {
+        $.ajax( {
             type: 'post',
             dataType: 'json',
             url: aalCategorySelection.ajaxURL,
