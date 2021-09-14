@@ -101,11 +101,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
         $oFactory->setSettingNotice( '' ); // disable the message
          
         // Store the inputs for the next time.
-        update_option( 
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInputs,
-            false       // disable auto-load 
-        );
+        update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInputs );
         
         return $aInputs;
         

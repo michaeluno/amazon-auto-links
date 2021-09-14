@@ -65,10 +65,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
      * @since       3.2.0
      */
     protected function _getLastUnitInputs() {
-        $_aLastInputs = get_option( 
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            array()
-        );           
+        $_aLastInputs = $this->oUtil->getAsArray( get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ) );
         unset( 
             $_aLastInputs[ 'unit_title' ],
             $_aLastInputs[ 'Keywords' ],

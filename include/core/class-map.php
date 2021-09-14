@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.4 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.5 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -99,6 +99,7 @@ return array(
     "AmazonAutoLinks_Log_VersatileFileManager_ErrorLog" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/log/error/_common/utility/file/AmazonAutoLinks_Log_VersatileFileManager_ErrorLog.php", 
     "AmazonAutoLinks_Opt_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/AmazonAutoLinks_Opt_Loader.php", 
     "AmazonAutoLinks_Opt_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting.php", 
+    "AmazonAutoLinks_Opt_Setting_Section_Form" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_Form.php", 
     "AmazonAutoLinks_Opt_Setting_Section_UI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php", 
     "AmazonAutoLinks_Opt_Setting_Tab_Opt" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Tab_Opt.php", 
     "AmazonAutoLinks_Opt_Event_Action_AdminFooter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php", 

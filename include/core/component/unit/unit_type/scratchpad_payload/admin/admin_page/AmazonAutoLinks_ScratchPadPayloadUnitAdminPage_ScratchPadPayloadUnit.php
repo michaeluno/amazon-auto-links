@@ -107,11 +107,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
         $_bDoAutoInsert = $aInputs[ 'auto_insert' ];
 
         // Store the inputs for the next time.
-        update_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInputs,
-            false       // disable auto-load
-        );
+        update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInputs );
 
         // Format the unit options to sanitize the data.
         $_oUnitOptions = new AmazonAutoLinks_UnitOption_scratchpad_payload(

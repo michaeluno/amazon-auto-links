@@ -169,11 +169,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         $_bDoAutoInsert = $aInput[ 'auto_insert' ];
 
         // Store the inputs for the next time.
-        update_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInput,
-            false       // disable auto-load
-        );
+        update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInput );
 
         // Format the unit options to sanitize the data.
         $_oUnitOptions = new AmazonAutoLinks_UnitOption_url(

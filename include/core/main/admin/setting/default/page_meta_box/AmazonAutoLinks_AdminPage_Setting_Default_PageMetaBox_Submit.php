@@ -116,6 +116,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Submit extends Amazo
         public function replyToUnsetUnitDefaults() {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_oOption->update( array( 'unit_default' ), array() );
+            delete_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ] );
         }
     
 }

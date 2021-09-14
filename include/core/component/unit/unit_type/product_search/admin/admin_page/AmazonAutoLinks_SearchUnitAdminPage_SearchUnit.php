@@ -77,7 +77,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             );
         echo "<h4>Last Inputs</h4>"
             . $oFactory->oDebug->get(
-                get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ] )
+                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true )
             );
     }
         

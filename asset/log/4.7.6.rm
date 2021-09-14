@@ -1,3 +1,4 @@
+- Added the `Form` setting section and the `Input Cache` field in the `Opt` screen. 
 - Fixed an issue that loading a category list for the first time sometimes failed in the category selection screen.  
 - Fixed an issue that the no-image-available images were not in their languages for some locales.
 - Fixed a PHP notice, "Undefined index: post_type" occurred in some Ajax calls.

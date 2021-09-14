@@ -35,11 +35,8 @@ class AmazonAutoLinks_Opt_Setting_Tab_Opt extends AmazonAutoLinks_AdminPage_Tab_
     }
 
     protected function _loadTab( $oFactory ) {
-        new AmazonAutoLinks_Opt_Setting_Section_UI(
-            $oFactory,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
+        new AmazonAutoLinks_Opt_Setting_Section_UI( $oFactory, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_Opt_Setting_Section_Form( $oFactory, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
     }
 
     /**

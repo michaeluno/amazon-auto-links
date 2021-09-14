@@ -37,11 +37,7 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
         $_iNewPostID = $this->___createSearchUnit( $aInputs );
         
         // Store the inputs for the next time.
-        update_option( 
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'last_input' ],
-            $aInputs,
-            false       // disable auto-load 
-        );            
+        update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInputs );
         
         $this->_goToNextPage( $_iNewPostID );
         

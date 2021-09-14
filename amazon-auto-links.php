@@ -106,7 +106,8 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         // 3.3.0+ The Tools page
         'tools'                 => 'amazon_auto_links_tools',
         
-        // 3.2.0+
+        // [3.2.0+]
+        // @deprecated 4.7.6    Uses user meta
         'last_input'            => 'amazon_auto_links_last_input',
         
         'table_versions'        => array(
@@ -160,6 +161,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static public $aUserMeta = array(
         // key => meta key
         'first_saved'                    => 'aal_first_saved',
+        'last_inputs'                    => 'aal_last_inputs',                      // 4.7.6
         // Opt-in
         'load_new_templates'             => 'aal_load_new_templates',
         'surveys'                        => 'aal_surveys',                          // 4.7.0
