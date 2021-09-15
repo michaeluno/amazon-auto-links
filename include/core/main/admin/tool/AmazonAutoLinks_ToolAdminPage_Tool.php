@@ -74,7 +74,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
                             'td'    => array(
                                 array( 'class' => 'width-one-fifth', ),  // first td
                             )
-                        ),
+                        )
                     )
                 . "</div>"
             . "</div>";
