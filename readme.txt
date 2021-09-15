@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         4.7.5
+Stable tag:         4.7.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -331,7 +331,15 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 4.7.5 - 09/05/2021 =
+= 4.7.6 - 09/15/2021 =
+- Added the `Form` setting section and the `Input Cache` field in the `Opt` screen.
+- Fixed an issue that loading a category list for the first time sometimes failed in the category selection screen.
+- Fixed an issue that the no-image-available images were not in their languages for some locales.
+- Fixed a PHP notice, "Undefined index: post_type" occurred in some Ajax calls.
+- Fixed a bug that spinner images kept appearing even after Ajax requests are done in the category selection screen.
+- Fixed a bug that an unnecessary checkbox appeared in the category selection screen.
+
+= 4.7.5 - 09/10/2021 =
 - Added the `No Need` field in the `Affilite Disclosure` setting section.
 - Added the `Update Required` field in the `Web Page Dumper` setting section.
 - Added a setting notice for outdated Web Page Dumper instances.
