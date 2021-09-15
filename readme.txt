@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         4.7.6
+Stable tag:         4.7.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.7 - 09/16/2021 =
+- Fixed a bug that caused a syntax error in PHP 7.2 or below, started since 4.7.5.
+- Fixed an issue that HTTP requests with Web Page Dumper failed for some cases.
 
 = 4.7.6 - 09/15/2021 =
 - Added the `Form` setting section and the `Input Cache` field in the `Opt` screen.
