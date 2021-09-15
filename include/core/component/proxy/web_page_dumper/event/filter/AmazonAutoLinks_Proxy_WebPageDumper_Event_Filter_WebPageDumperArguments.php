@@ -60,6 +60,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
                     'value' => $_oOption->get( array( 'associates', $_sLocale, 'paapi', 'currency' ), $_oLocale->getDefaultCurrency() ),
                 ),
             );
+            $aArguments[ 'reload' ] = 1;
             return $aArguments;
         }
 
