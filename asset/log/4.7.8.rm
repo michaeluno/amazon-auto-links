@@ -1,0 +1,1 @@
+- Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.

@@ -36,17 +36,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
      */
     public function replyToGetWebPageDumperArguments( $aArguments, $sRequestURL ) {
 
-        if ( $this->isUserRatingURL( $sRequestURL ) ) {
-            $aArguments[ 'cache' ]  = 1;
+        if ( self::isAmazonURL( $sRequestURL ) ) {
             $aArguments[ 'reload' ] = 1;
-            // @deprecated
-            // $aArguments[ 'block' ]  = array(
-            //     'types' => array( 'script' )
-            // );
-            return $aArguments;
-        }
-
-        if ( $this->isBestSellerURL( $sRequestURL ) ) {
             $_oOption = AmazonAutoLinks_Option::getInstance();
             $_sLocale = AmazonAutoLinks_Locales::getLocaleFromURL( $sRequestURL );
             $_oLocale = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
@@ -60,7 +51,10 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
                     'value' => $_oOption->get( array( 'associates', $_sLocale, 'paapi', 'currency' ), $_oLocale->getDefaultCurrency() ),
                 ),
             );
-            $aArguments[ 'reload' ] = 1;
+        }
+
+        if ( $this->isUserRatingURL( $sRequestURL ) ) {
+            $aArguments[ 'cache' ]  = 1;
             return $aArguments;
         }
 

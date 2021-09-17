@@ -1,2 +1,2 @@
 - Fixed a bug that caused a syntax error in PHP 7.2 or below, started since 4.7.5.
-- Fixed an issue that HTTP requests with Web Page Dumper failed for some cases.
+- Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.

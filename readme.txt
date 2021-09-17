@@ -333,7 +333,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 4.7.7 - 09/16/2021 =
 - Fixed a bug that caused a syntax error in PHP 7.2 or below, started since 4.7.5.
-- Fixed an issue that HTTP requests with Web Page Dumper failed for some cases.
+- Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.
 
 = 4.7.6 - 09/15/2021 =
 - Added the `Form` setting section and the `Input Cache` field in the `Opt` screen.
