@@ -35,15 +35,18 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
      * - asin (string)
      * - associate_id (string)
      * @callback    add_filter      aal_filter_unit_each_product_with_database_row
-     * @return      array           The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returend to be filtered out.
+     * @return      array           The filtered product definition array. If it does not meet the user-set criteria, an empty array will be returned to be filtered out.
      */
     public function replyToFilterProduct( $aProduct, $aRow, $aRowIdentifier ) {
 
-        $_bSet                  = $this->___setVariablesOfPrice( $aProduct, $aRow, $aRowIdentifier, $_iPrice, $_iLowestNew, $_iDiscounted );
+        $_bSet                  = $this->___setVariablesOfPrice( $aProduct, $aRow, $aRowIdentifier, $_iPrice, $_insLowestNew, $_insDiscounted );
         if ( ! $_bSet ) {
             return array();
         }
-        $_iLowest               = $_iDiscounted ? min( $_iLowestNew, $_iDiscounted ) : $_iLowestNew;
+        $_aCompare              = array_filter( array( $_insLowestNew, $_insDiscounted ), 'strlen' ); // applying 'strlen' will drop null and empty strings
+        $_iLowest               = empty( $_aCompare )
+            ? $_iPrice
+            : ( integer ) min( $_aCompare );
         $_dDiscountPercentage   = $_iPrice
             ? 100 - round( ( $_iLowest / $_iPrice ) * 100, 2 )
             : 0;
@@ -65,20 +68,19 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
          * @param  array    $aProduct
          * @param  array    $aRow
          * @param  array    $aRowIdentifier
-         * @param  integer &$_iPrice
-         * @param  integer &$_iLowestNew
-         * @param  integer &$_iDiscounted
+         * @param  integer &$iPrice
+         * @param  integer|string|null &$insLowestNew
+         * @param  integer|string|null &$insDiscounted
          * @return boolean  true if variables are set. Otherwise, false.
          * @since  4.2.2
          */
-        private function ___setVariablesOfPrice( $aProduct, $aRow, $aRowIdentifier, &$_iPrice, &$_iLowestNew, &$_iDiscounted ) {
+        private function ___setVariablesOfPrice( $aProduct, $aRow, $aRowIdentifier, &$iPrice, &$insLowestNew, &$insDiscounted ) {
 
             // Case: Already set. This can occur with feed units.
             if ( isset( $aProduct[ 'price_amount' ], $aProduct[ 'discounted_price_amount' ], $aProduct[ 'lowest_new_price_amount' ] ) && is_numeric( $aProduct[ 'price_amount' ] ) ) {
-
-                $_iPrice      = ( integer ) $aProduct[ 'price_amount' ];
-                $_iLowestNew  = ( integer ) $aProduct[ 'discounted_price_amount' ];
-                $_iDiscounted = ( integer ) $aProduct[ 'lowest_new_price_amount' ];
+                $iPrice        = ( integer ) $aProduct[ 'price_amount' ];
+                $insLowestNew  = $aProduct[ 'discounted_price_amount' ] ? ( integer ) $aProduct[ 'discounted_price_amount' ] : $aProduct[ 'discounted_price_amount' ];
+                $insDiscounted = $aProduct[ 'lowest_new_price_amount' ] ? ( integer ) $aProduct[ 'lowest_new_price_amount' ] : $aProduct[ 'lowest_new_price_amount' ];
                 return true;
             }
 
@@ -100,9 +102,9 @@ class AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate extends AmazonAut
                 return false;
             }
 
-            $_iPrice      = ( integer ) $_inPrice;
-            $_iLowestNew  = ( integer ) $_inLowestNew;
-            $_iDiscounted = ( integer ) $_inDiscounted;
+            $iPrice        = ( integer ) $_inPrice;
+            $insLowestNew  = $_inLowestNew  ? ( integer ) $_inLowestNew : $_inLowestNew;
+            $insDiscounted = $_inDiscounted ? ( integer ) $_inDiscounted : $_inDiscounted;
             return true;
 
         }
