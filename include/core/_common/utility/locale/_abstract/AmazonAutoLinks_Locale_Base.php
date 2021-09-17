@@ -24,8 +24,11 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
     /**
      * Two digits locale number.
      *
-     * This can be checked in a URL like the following were 15 is the locale number, which is for amazon.ca.
+     * This can be checked by visiting the store site of the locale to check
+     * and opening the Sources tab in the developer (DevTool) panel in Chrome
+     * and navigate to an image directory with `G/NN` where `NN` is the locale number.
      *
+     * This is for the Canadian locale where 15 denotes the locale number.
      * ```
      * https://images-eu.ssl-images-amazon.com/images/G/15/ShoppingPortal/logo._TTD_.png
      * ```

@@ -18,12 +18,26 @@
 class Test_AmazonAutoLinks_Locales extends AmazonAutoLinks_UnitTest_Base {
 
     /**
-     * @tags image
+     * @tags no-image
      */
     public function test_getNoImageURL() {
         foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_oLocale ) {
             $_sURL = $_oLocale->getNoImageURL();
             $this->_output( "<h4>" . $_oLocale->sSlug . "</h4><img src='" . esc_url( $_sURL ) . "' alt='" . esc_attr( $_oLocale->sSlug ) . "'/>" );
+            $this->_assertTrue( $this->doesURLExist( $_sURL ) );
+        }
+    }
+
+    /**
+     * @tags image
+     * @see  https://gist.github.com/Foo-x/c1b954b6601f40877e13687eead09135
+     */
+    public function test_LocaleNumber() {
+        $_sASIN = '1408855658';
+        foreach( AmazonAutoLinks_Locales::getLocaleObjects() as $_oLocale ) {
+            $_sLocaleNumber = $_oLocale->getLocaleNumber();
+            $_sURL          = "https://images-na.ssl-images-amazon.com/images/P/{$_sASIN}.{$_sLocaleNumber}.THUMBZZZ";
+            $this->_output( "<h4>" . $_oLocale->sSlug . ": {$_sLocaleNumber}</h4><p>{$_sURL}</p><img src='" . esc_url( $_sURL ) . "' alt='" . esc_attr( $_oLocale->sSlug ) . "'/>" );
             $this->_assertTrue( $this->doesURLExist( $_sURL ) );
         }
     }

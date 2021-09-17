@@ -24,7 +24,7 @@ class AmazonAutoLinks_Locale_SE extends AmazonAutoLinks_Locale_Base {
      * Two digits locale number.
      * @var string
      */
-    public $sLocaleNumber = '01'; // unknown
+    public $sLocaleNumber = '46';
 
     /**
      * @var string

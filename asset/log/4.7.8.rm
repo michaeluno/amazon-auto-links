@@ -1,2 +1,3 @@
+- Fixed the no-image-available images for the Swedish locale.
 - Fixed a bug that the `Discount Rate` unit filter option produced inaccurate results. 
 - Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.
