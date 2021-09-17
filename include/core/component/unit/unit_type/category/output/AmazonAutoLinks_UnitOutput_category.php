@@ -254,23 +254,23 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $_aProducts = $this->___getExcludesApplied( $_aProducts, $aExcludeURLs, $aExcludeASINs );
 
             // Make sure to fill the set number of item count
-            $_iPage         = 2;    // starts from 2
-            $_iFoundCount   = count( $_aProducts );
-            while( $_iFoundCount < $iItemCount ) {
+            $_iPage     = 2;    // starts from 2
+            $_iMaxPage  = ( integer ) apply_filters( 'aal_filter_amazon_bestseller_category_max_number_of_page', 2 );   // 4.7.8
+            while( ( count( $_aProducts ) < $iItemCount ) && ( $_iPage <= $_iMaxPage ) ) {
                 $_aURLs          = $this->___getURLsPageIncremented( $aURLs, $_iPage );
                 $_aExcludeURLs   = $this->___getURLsPageIncremented( $aExcludeURLs, $_iPage );
-                $_aThisFound     = $this->___getFoundProducts( $_aURLs, $_aExcludeURLs, $_iFoundCount - $iItemCount, $aExcludeASINs );  // recursive call
+                $_aThisFound     = $this->___getProductsFromURLs( $_aURLs );
+                $_aThisFound     = empty( $_aThisFound )
+                    ? $_aThisFound
+                    : $this->___getExcludesApplied( $_aThisFound, $_aExcludeURLs, $aExcludeASINs );
                 if ( empty( $_aThisFound ) ) {
                     break;
                 }
                 $_aNewFoundItems = array_diff( array_keys( $_aThisFound ), array_keys( $_aProducts ) );
                 if ( empty( $_aNewFoundItems ) ) {
-                    break;  // if the previous found items cover the the newly found items, then it could be a page that does not support pagination.
+                    break;  // if the previous found items cover the newly found items, then it could be a page that does not support pagination.
                 }
-                $_aProducts     = $_aProducts + $_aThisFound;
-                if ( $_iPage > 10 ) {
-                    break;
-                }
+                $_aProducts      = $_aProducts + $_aThisFound;
                 $_iPage++;
             }
             return $_aProducts;
