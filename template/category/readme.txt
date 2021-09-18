@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.3 =
+- Added rules for the discount element.
+
 = 1.2.1 =
 - Tweaked line alignment of descriptions, rating stars and prices.
 

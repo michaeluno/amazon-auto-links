@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.2.0
+    Version:        1.2.1
     License:        GNU General Public License v2 or later
     Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -258,8 +258,10 @@
     height: 1.4em;
     margin-right: 0.2em;
 }
-/* Prices */
-.amazon-products-container-search .amazon-prices {
+/* Prices and Discount */
+.amazon-products-container-search .amazon-prices,
+.amazon-products-container-search .amazon-discount
+{
     line-height: 1;
     vertical-align: middle;
     display: inline-block;

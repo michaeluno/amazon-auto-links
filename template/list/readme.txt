@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.17 =
+- Added rules for the discount element.
+
 = 1.2.15 =
 - Used .amazon-auto-links-widget instead of the .widget and .widget-area selectors for layouts in widgets.
 

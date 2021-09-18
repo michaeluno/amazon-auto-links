@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.1 =
+- Added rules for the discount element.
+
 = 1.2.0 =
 - Moved some rules to the common template.
 

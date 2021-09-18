@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.16
+    Version:        1.2.17
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -312,12 +312,16 @@
     vertical-align: top;
 }
 
-/* Prices */
-.amazon-products-container-list .amazon-prices {
+/* Prices and Discount */
+.amazon-products-container-list .amazon-prices,
+.amazon-products-container-list .amazon-discount
+{
     margin-right: 0.2em; /* This needs to be consistent with the prime mark and rating star icons */
     line-height: 1.6;
 }
-.amazon-products-container-list .amazon-prices {
+.amazon-products-container-list .amazon-prices,
+.amazon-products-container-list .amazon-discount
+{
 	font-size: small;
     display: inline-block;
     vertical-align: middle;
