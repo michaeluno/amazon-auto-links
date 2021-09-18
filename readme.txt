@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         4.7.7
+Stable tag:         4.7.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +330,14 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 4.7.8 - 09/19/2021 =
+- Optimized the method of displaying prices with Category units to be more accurate when the PA-API keys are set.
+- Fixed a bug that inaccurate prices were stored with search-type units resulting in miscalculated discount rates.
+- Fixed a bug that malformed prices were stored with some locales resulting in miscalculating discount rates, started since v4.6.9.
+- Fixed the no-image-available images for the Swedish locale.
+- Fixed a bug that the `Discount Rate` unit filter option produced inaccurate results.
+- Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.
 
 = 4.7.7 - 09/16/2021 =
 - Fixed a bug that caused a syntax error in PHP 7.2 or below, started since 4.7.5.
