@@ -26,44 +26,11 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
     public $sUnitType = 'category';
 
-    public static $aStructure_Product = array(
-        'thumbnail_url'         => null,
-        'ASIN'                  => null,
-        'product_url'           => null,
-        'raw_title'             => null,
-        'title'                 => null,
-        'description'           => null,    // the formatted feed item description - some elements are removed 
-        'text_description'      => null,    // the non-html description
-            
-        // [3]
-        'formatted_price'       => null, // 4.0.0+ (string|null) HTML formatted price. Changed from the name, `price` to be compatible with merged database table column key names.
-        'review'                => null,
-        'formatted_rating'      => null, // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
-        'image_set'             => null,
-        'button'                => null,
-
-        // [3.8.11]
-        'proper_price'          => null,
-
-        // used for disclaimer
-        'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless
-        
-        // [3.3.0]
-        'content'               => null,
-        'meta'                  => null,
-        'similar_products'      => null,
-
-        // [3.8.0]
-        'category'              => null,
-        'feature'               => null,
-        'sales_rank'            => null,
-
-        // [3.9.0]
-        'is_prime'              => null,
-
-        // [4.1.0]
-        'author'                => null,
-    );
+    /**
+     * Unit type specific product structure.
+     * @var array
+     */
+    public static $aStructure_Product = array();
 
     /* @deprecated 4.3.4 Seems unnecessary. */
     /* public function get( $aURLs=array(), $sTemplatePath=null ) {
@@ -91,6 +58,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
             $this->_aItemFormatDatabaseVariables[] = '%category%';    // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%rank%';        // 3.8.0
             $this->_aItemFormatDatabaseVariables[] = '%prime%';       // 3.9.0
+            $this->_aItemFormatDatabaseVariables[] = '%discount%';    // 4.7.8
         }
     }
 
@@ -504,7 +472,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                  */
                 private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
 
-                    $_aProduct = $_aItem + self::$aStructure_Product;
+                    $_aProduct = $_aItem + self::$aStructure_Product + self::$aStructure_ProductCommon;
 
                     // ASIN - required to detect duplicated items.
                     if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {

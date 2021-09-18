@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.5 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.8b01 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -413,6 +413,7 @@ return array(
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Base.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Categories" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Categories.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview.php", 
+    "AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Features" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Features.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Price" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Price.php", 

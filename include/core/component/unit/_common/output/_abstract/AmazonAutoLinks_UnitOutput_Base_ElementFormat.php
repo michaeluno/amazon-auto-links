@@ -17,7 +17,53 @@
  *
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoLinks_UnitOutput_Base_ProductFilter {
-        
+
+    /**
+     * @var   array
+     * @since 4.7.8
+     */
+    static public $aStructure_ProductCommon = array(
+        'thumbnail_url'         => null,
+        'ASIN'                  => null,
+        'product_url'           => null,
+        'raw_title'             => null,
+        'title'                 => null,
+        'description'           => null,    // the formatted feed item description - some elements are removed
+        'text_description'      => null,    // the non-html description
+
+        // [3]
+        'formatted_price'       => null, // 4.0.0+ (string|null) HTML formatted price. Changed from the name, `price` to be compatible with merged database table column key names.
+        'review'                => null,
+        'formatted_rating'      => null, // 4.0.0+ Changed from `rating` to distinguish from the database table column key name
+        'image_set'             => null,
+        'button'                => null,
+
+        // [3.8.11]
+        'proper_price'          => null,
+
+        // used for disclaimer
+        'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless
+
+        // [3.3.0]
+        'content'               => null,
+        'meta'                  => null,
+        'similar_products'      => null,
+
+        // [3.8.0]
+        'category'              => null,
+        'feature'               => null,
+        'sales_rank'            => null,
+
+        // [3.9.0]
+        'is_prime'              => null,
+
+        // [4.1.0]
+        'author'                => null,
+
+        // [4.7.8]
+        'formatted_discount'    => null,
+    );
+
     /**
      * @return      array
      * @since       unknown
@@ -54,7 +100,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             // Item
             $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
                 $this,
-                $_aProduct,
+                $_aProduct + self::$aStructure_ProductCommon,
                 $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage )
             );
             $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
@@ -176,6 +222,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             if ( $_sNativeThumbnailURL !== $_aProduct[ 'thumbnail_url' ] ) {
                 $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
             }
+
+            // 4.7.8
+            $_oDiscount                   = new AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'formatted_discount' ] = $_oDiscount->get();
 
             /**
              * Merge the product array with the database product row

@@ -28,6 +28,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%similar%', '%category%', '%rank%', '%prime%',
         '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
+        '%discount%'                          // 4.7.8
     );
 
     /**
