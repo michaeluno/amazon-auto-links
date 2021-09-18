@@ -1,3 +1,4 @@
+- Fixed a bug that malformed prices were stored with some locales, started since v4.6.9.  
 - Fixed inaccurate prices with Category units when the PA-API keys are set. 
 - Fixed the no-image-available images for the Swedish locale.
 - Fixed a bug that the `Discount Rate` unit filter option produced inaccurate results. 
