@@ -25,8 +25,14 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
         // For search-type units, this value is already set with API response.
         // @deprecated 3.10.0 - The API SearchItems and GetItems operations give different results and GetItems is more up-to-date.
         // @since 4.0.0 Re-added. For feed units, the element is already set
-        if ( isset ( $this->_aProduct[ 'formatted_price' ] ) ) {
-            return $this->_aProduct[ 'formatted_price' ];
+        // @since 4.7.8 - Category unit prices which are already set are not accurate.
+        // if ( isset ( $this->_aProduct[ 'formatted_price' ] ) ) {
+        //     return $this->_aProduct[ 'formatted_price' ];
+        // }
+        if ( 'category' !== $this->_oUnitOption->sUnitType ) {
+            if ( isset ( $this->_aProduct[ 'formatted_price' ] ) ) {
+                return $this->_aProduct[ 'formatted_price' ];
+            }
         }
 
         $_sPriceFormatted = $this->_getCell( 'price_formatted' );
