@@ -174,7 +174,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
             private function ___getOutputByUnitType( $sUnitType, array $aUnitOptions ) {
 
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
-                if ( in_array( $sUnitType, $_aRegisteredUnitTypes ) ) {
+                if ( in_array( $sUnitType, $_aRegisteredUnitTypes, true ) ) {
                     /**
                      * Each unit type hooks into this filter hook and generates their outputs.
                      */
