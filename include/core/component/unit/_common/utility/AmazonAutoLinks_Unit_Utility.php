@@ -214,15 +214,15 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     static public function getPrices( array $aItem ) {
         
         // The actual displayed tag price. This can be a discount price or proper price.
-        $_aBuyingPrice       = self::getElementAsArray(
+        $_aBuyingPrice        = self::getElementAsArray(
             $aItem,
             array( 'Offers', 'Listings', 0, 'Price' )
         );
-        $_sBuyingPrice       = self::getElement( $_aBuyingPrice, array( 'DisplayAmount' ), '' );
-        $_sCurrency          = self::getElement( $_aBuyingPrice, array( 'Currency' ), '' );
-        $_inBuyingPrice      = self::getElement( $_aBuyingPrice, array( 'Amount' ) );
+        $_sBuyingPrice        = self::getElement( $_aBuyingPrice, array( 'DisplayAmount' ), '' );
+        $_sCurrency           = self::getElement( $_aBuyingPrice, array( 'Currency' ), '' );
+        $_inBuyingPrice       = self::getElement( $_aBuyingPrice, array( 'Amount' ) );
         // Saved price, present if there is a discount
-        $_sSavingPrice       = self::getElement(
+        $_sSavingPrice        = self::getElement(
             $aItem,
             array( 'Offers', 'Listings', 0, 'Price', 'Savings', 'DisplayAmount' ),
             ''
@@ -230,17 +230,22 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
         // There cases that `SavingBasis` is missing when there is no discount item.
         // @see https://webservices.amazon.com/paapi5/documentation/offers.html#savingbasis
-        $_sProperPrice   = self::getElement(
+        $_sProperPrice        = self::getElement(
             $aItem,
             array( 'Offers', 'Listings', 0, 'SavingBasis', 'DisplayAmount' ),
             $_sBuyingPrice
         );
-        $_sDiscountedPrice   = $_sSavingPrice ? $_sBuyingPrice : '';
-        $_inDiscountedPrice  = $_sSavingPrice ? $_inBuyingPrice : null;
-        $_aSummaries = self::getElementAsArray( $aItem, array( 'Offers', 'Summaries' ) );
-        $_aLowests   = self::___getLowestPrices( $_aSummaries );
-
-        $_aPrices = array(
+        $_ndProperPriceAmount = self::getElement(
+            $aItem,
+            array( 'Offers', 'Listings', 0, 'SavingBasis', 'Amount' ),
+            $_inBuyingPrice
+        );
+        $_isProperPriceAmount = isset( $_ndProperPriceAmount ) ? $_ndProperPriceAmount * 100 : '';
+        $_sDiscountedPrice    = $_sSavingPrice ? $_sBuyingPrice : '';
+        $_inDiscountedPrice   = $_sSavingPrice ? $_inBuyingPrice : null;
+        $_aSummaries          = self::getElementAsArray( $aItem, array( 'Offers', 'Summaries' ) );
+        $_aLowests            = self::___getLowestPrices( $_aSummaries );
+        $_aPrices             = array(
             'proper_price'       => $_sProperPrice  // 3.8.11 changed from `price`
                 ? "<span class='amazon-product-price-value'>"  
                        . "<span class='proper-price'>" . $_sProperPrice . "</span>"
@@ -264,8 +269,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
             // For DB
             'currency'                      => $_sCurrency,
-            'price_amount'                  => is_null( $_inBuyingPrice ) ? '' : $_inBuyingPrice * 100, // price
-            'price_formatted'               => $_sBuyingPrice,  // price_formatted
+            'price_amount'                  => $_isProperPriceAmount,
+            'price_formatted'               => $_sProperPrice,  // price_formatted
             'lowest_new_price_amount'       => is_null( $_aLowests[ 'new_amount' ] ) ? '' : $_aLowests[ 'new_amount' ] * 100, // lowest_new_price
             'lowest_new_price_formatted'    => $_aLowests[ 'new_formatted' ], // lowest_new_price_formatted
             'lowest_used_price_amount'      => is_null( $_aLowests[ 'used_amount' ] ) ? '' : $_aLowests[ 'used_amount' ] * 100, // lowest_used_price
