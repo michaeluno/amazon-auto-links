@@ -24,7 +24,13 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     /**
      * Stores the associated page slug with the adding section.
      */
-    public $sPageSlug;    
+    public $sPageSlug;
+
+    /**
+     * @var array
+     * @since 4.7.9
+     */
+    public $aArguments = array();
 
     /**
      * Sets up hooks and properties.
@@ -34,13 +40,13 @@ abstract class AmazonAutoLinks_AdminPage_Page_Base extends AmazonAutoLinks_Admin
     public function __construct( $oFactory, array $aPageArguments=array() ) {
         
         $this->oFactory     = $oFactory;
-        $_aPageArguments    = $this->_getArguments() + $aPageArguments + array(
+        $this->aArguments   = $this->_getArguments() + $aPageArguments + array(
             'page_slug'     => null,
             'title'         => null,
             'screen_icon'   => null,
         );
-        $this->sPageSlug    = $_aPageArguments[ 'page_slug' ];
-        $this->___addPage( $_aPageArguments );
+        $this->sPageSlug    = $this->aArguments[ 'page_slug' ];
+        $this->___addPage( $this->aArguments );
         $this->_construct( $oFactory );
                 
     }

@@ -47,6 +47,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             $this->sPageSlug,
             array(
                 'tab_slug' => $this->sTabSlug,
+                // 'title'    => $this->aArguments[ 'title' ],
                 'title'    => __( 'Add Unit by URL', 'amazon-auto-links' ),
                 'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
             )
