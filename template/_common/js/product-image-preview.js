@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.3
+ * @version 1.0.4
  */
 (function ( $ ) {
 
@@ -51,6 +51,9 @@
         ? (_maxSize * 0.8)    // this occurs in the embedded view. This is to prevent the image to be cut off
         : imageSize;
 
+      // Close previously opened other tooltips
+      $( '.aal-image-preview-tooltip' ).trigger( 'aalPointer:close' );
+
       // Open the tooltip
       $( this ).aalPointer( {
         pointerClass: 'aal-image-preview-tooltip',
@@ -66,10 +69,8 @@
           collision: 'fit',   // don't exceed the container set with the `within` argument
         },
         fadeIn: 300,
-        buttons: function () {
-        },
-        close: function () {
-        },
+        buttons: function () {},
+        close: function () {},
         show: function ( event, t ) {
           t.pointer.fadeIn( 300 );
           t.opened();
@@ -101,19 +102,27 @@
       };
       img.src = _srcImg;  // set the image
 
-      // Handle toolitip closing
-      $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseleave', function () {
+      // Handle toolitip closing. aalPointer:close is a custom event for this tooltip.
+      $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseleave aalPointer:close', function ( event ) {
 
         var _selfMouseLeave = this;
-        // Set a timeout for the tooltip to close, allowing us to clear this trigger if the mouse comes back over
-        var _timeoutId = setTimeout( function () {
+
+        if ( 'mouseleave' === event.type ) {
+          // Set a timeout for the tooltip to close, allowing us to clear this trigger if the mouse comes back over
+          var _timeoutId = setTimeout( _closeTooltip, 200 );
+          $( _self ).data( 'timeoutId', _timeoutId );
+        }
+        if ( 'aalPointer:close' === event.type ) {
+          _closeTooltip();
+        }
+
+        function _closeTooltip() {
           $( _self ).aalPointer( 'close' );
           $( _self ).off( 'mouseleave' );
           $( _selfMouseLeave ).off( 'mouseleave' );
           $( _self ).off( 'mouseenter' );
           $( _selfMouseLeave ).off( 'mouseenter' );
-        }, 200 );
-        $( _self ).data( 'timeoutId', _timeoutId );
+        }
 
       } );
       $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseenter', function () {
