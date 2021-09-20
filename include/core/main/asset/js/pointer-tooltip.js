@@ -8,7 +8,7 @@
  *
  * @name Pointer Tooltip jQuery Widget
  * @description Extends the WordPress pointer tooltip widget to have additional features.
- * @version 1.0.0
+ * @version 1.1.0
  */
 (function ( $ ) {
 
@@ -53,9 +53,6 @@
             height: this.options.pointerHeight + 'px'
           } );
       }
-    },
-    get: function () {
-      return this.pointer;
     }
 
   } );

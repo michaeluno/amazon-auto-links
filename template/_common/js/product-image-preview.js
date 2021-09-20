@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.2
+ * @version 1.0.3
  */
 (function ( $ ) {
 
@@ -85,7 +85,7 @@
       // Wait for the image to load to check its dimension
       var img = new Image();
       img.onload = function () {
-        var _pointer = $( _self ).aalPointer( 'get' );
+        var _pointer = $( _self ).aalPointer( 'widget' );
         // Check portrait or landscape
         // if landscape
         if ( this.width > this.height ) {
@@ -100,9 +100,6 @@
         $( _self ).aalPointer( 'open' );
       };
       img.src = _srcImg;  // set the image
-
-      // var _oPointer = $( this ).aalPointer( 'get' );
-
 
       // Handle toolitip closing
       $( this ).add( '.aal-image-preview-tooltip' ).on( 'mouseleave', function () {
