@@ -146,7 +146,7 @@ When you display Amazon products, you would specify a unit and the plugin will g
 
 = What would be the benefit to upgrade to the pro version? =
 
-With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestriceted as well. Please consider upgrading it. [Auto Amazon Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
+With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestricted as well. Please consider upgrading it. [Auto Amazon Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
 
 = I get a blank white page after adding a unit to the theme. What is it? What should I do? =
 
@@ -253,7 +253,7 @@ These values can be pre-defined from the setting page via `Dashboard` -> `Auto A
 If these arguments are omitted, the values set in the setting page will be used.
 
 = Shortcode to Display Buttons =
-Although with the `%button%` tag in the `Item Format` unit option allows you to insert a button, a button itself can be displayed indipendently with the shortcode, `[aal_button ...]`.
+Although with the `%button%` tag in the `Item Format` unit option allows you to insert a button, a button itself can be displayed independently with the shortcode, `[aal_button ...]`.
 
 It accepts the following parameters.
 
@@ -357,7 +357,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that an unnecessary checkbox appeared in the category selection screen.
 
 = 4.7.5 - 09/10/2021 =
-- Added the `No Need` field in the `Affilite Disclosure` setting section.
+- Added the `No Need` field in the `Affiliate Disclosure` setting section.
 - Added the `Update Required` field in the `Web Page Dumper` setting section.
 - Added a setting notice for outdated Web Page Dumper instances.
 - Tweaked setting UI elements.
@@ -1224,7 +1224,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.2.2 - 12/09/2015 =
 - Added a unit option to select credit link type.
-- Fixed a bug that reselecting categories via the Select Categories button in the Category unit editing page let to a fatal error, introduced in v3.2.0.
+- Fixed a bug that re-selecting categories via the Select Categories button in the Category unit editing page let to a fatal error, introduced in v3.2.0.
 - Changed the minimum required cache duration to `600`.
 - Changed the Found Items field in the URL unit definition page to display Not Found message for finding no item.
 
@@ -1487,7 +1487,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Added: the Debug Log option and page. 
 * Changed: the default value of the Prefetch Category Lists option to Off.
 * Fixed: the Japanese localization file name.
-* Disabled: the warining message to occur:  Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8.
+* Disabled: the warning message to occur:  Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8.
 
 = 1.2.1 - 02/18/2013 = 
 * Fixed: a bug that changing unit option values did not take effect when the Proceed button was pressed via the Manage Unit page.
@@ -1506,7 +1506,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Fixed: the styles of the Manage Unit table by loading the stylesheet in all the setting tab pages of the plugin.
 * Changed: the file name to amazon-auto-links.php from amazonautolinks.php
 * Changed: the text domain to amazon-auto-links from amazonautolinks.
-* Changed: the timimng of registering classes to be extension-friendly.
+* Changed: the timing of registering classes to be extension-friendly.
 * Changed: code formatting to extend the plugin more easily.
 
 = 1.1.8 - 01/19/2013 = 
@@ -1584,7 +1584,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Removed: the widget functionality since it produced a blank page in some systems and the cause and solution could not be found.
 
 = 1.0.2 - 09/12/2012 =
-* Fixed: an issue that form buttons did not appear in the category selection page in WordPress version 3.1x or ealier.
+* Fixed: an issue that form buttons did not appear in the category selection page in WordPress version 3.1x or earlier.
 
 = 1.0.1 - 09/10/2012 =
 * Added: the Widget option.
