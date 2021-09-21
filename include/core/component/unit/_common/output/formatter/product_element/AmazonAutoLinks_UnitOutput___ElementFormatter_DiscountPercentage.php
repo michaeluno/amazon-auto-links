@@ -11,7 +11,7 @@
 /**
  * A class that provides methods to format product discount percentage.
  *
- * @since       4.7.8
+ * @since 4.7.8
  */
 class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
@@ -22,7 +22,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
      */
     public function get() {
 
-        // For feed units, this value is already set.
+        // For feed an PA-API search units, this value is already set.
         if ( isset ( $this->_aProduct[ 'formatted_discount' ] ) ) {
             return $this->_aProduct[ 'formatted_discount' ];
         }
@@ -32,18 +32,9 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
             return '';
         }
 
-        $_inPercentage = ( integer ) $this->getPercentage(); // floor positive decimal numbers by casting integer
-        if ( ! isset( $_inPercentage ) ) {
-            return '';
-        }
-        if ( ! $_inPercentage ) {
-            return '';
-        }
-        return "<span class='amazon-discount'>"
-                . "<span class='discount-label'>"
-                    . sprintf( __( '%1$s%% Off', 'amazon-auto-links' ), $_inPercentage )
-                . "</span>"
-            . "</span>";
+        return $this->getFormattedDiscount(
+            ( integer ) $this->getPercentage()  // floor positive decimal numbers by casting integer
+        );
 
     }
 

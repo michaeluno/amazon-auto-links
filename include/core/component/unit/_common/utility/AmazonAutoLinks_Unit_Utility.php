@@ -214,38 +214,43 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     static public function getPrices( array $aItem ) {
         
         // The actual displayed tag price. This can be a discount price or proper price.
-        $_aBuyingPrice        = self::getElementAsArray(
+        $_aBuyingPrice         = self::getElementAsArray(
             $aItem,
             array( 'Offers', 'Listings', 0, 'Price' )
         );
-        $_sBuyingPrice        = self::getElement( $_aBuyingPrice, array( 'DisplayAmount' ), '' );
-        $_sCurrency           = self::getElement( $_aBuyingPrice, array( 'Currency' ), '' );
-        $_inBuyingPrice       = self::getElement( $_aBuyingPrice, array( 'Amount' ) );
+        $_sBuyingPrice         = self::getElement( $_aBuyingPrice, array( 'DisplayAmount' ), '' );
+        $_sCurrency            = self::getElement( $_aBuyingPrice, array( 'Currency' ), '' );
+        $_inBuyingPrice        = self::getElement( $_aBuyingPrice, array( 'Amount' ) );
         // Saved price, present if there is a discount
-        $_sSavingPrice        = self::getElement(
+        $_sSavingPrice         = self::getElement(
             $aItem,
             array( 'Offers', 'Listings', 0, 'Price', 'Savings', 'DisplayAmount' ),
             ''
         );
 
-        // There cases that `SavingBasis` is missing when there is no discount item.
+        // There are cases that `SavingBasis` is missing when there is no discount item.
         // @see https://webservices.amazon.com/paapi5/documentation/offers.html#savingbasis
-        $_sProperPrice        = self::getElement(
+        $_sProperPrice         = self::getElement(
             $aItem,
             array( 'Offers', 'Listings', 0, 'SavingBasis', 'DisplayAmount' ),
             $_sBuyingPrice
         );
-        $_ndProperPriceAmount = self::getElement(
+        $_ndProperPriceAmount  = self::getElement(
             $aItem,
             array( 'Offers', 'Listings', 0, 'SavingBasis', 'Amount' ),
             $_inBuyingPrice
         );
-        $_isProperPriceAmount = isset( $_ndProperPriceAmount ) ? $_ndProperPriceAmount * 100 : '';
-        $_sDiscountedPrice    = $_sSavingPrice ? $_sBuyingPrice : '';
-        $_inDiscountedPrice   = $_sSavingPrice ? $_inBuyingPrice : null;
-        $_aSummaries          = self::getElementAsArray( $aItem, array( 'Offers', 'Summaries' ) );
-        $_aLowests            = self::___getLowestPrices( $_aSummaries );
-        $_aPrices             = array(
+        $_isProperPriceAmount  = isset( $_ndProperPriceAmount ) ? $_ndProperPriceAmount * 100 : '';
+        $_sDiscountedPrice     = $_sSavingPrice ? $_sBuyingPrice : '';
+        $_inDiscountedPrice    = $_sSavingPrice ? $_inBuyingPrice : null;
+        $_aSummaries           = self::getElementAsArray( $aItem, array( 'Offers', 'Summaries' ) );
+        $_aLowests             = self::___getLowestPrices( $_aSummaries );
+        $_isDiscountPercentage = self::getElement(
+            $aItem,
+            array( 'Offers', 'Listings', 0, 'Price', 'Savings', 'Percentage' ),
+            ''
+        );
+        $_aPrices              = array(
             'proper_price'       => $_sProperPrice  // 3.8.11 changed from `price`
                 ? "<span class='amazon-product-price-value'>"  
                        . "<span class='proper-price'>" . $_sProperPrice . "</span>"
@@ -277,6 +282,10 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             'lowest_used_price_formatted'   => $_aLowests[ 'used_formatted' ], // lowest_used_price_formatted
             'discounted_price_amount'       => is_null( $_inDiscountedPrice ) ? '' : $_inDiscountedPrice * 100, // discounted_price
             'discounted_price_formatted'    => $_sDiscountedPrice, // discounted_price_formatted
+
+            // [3.7.10+] for discount rates and labels
+            'discount_percentage'           => $_isDiscountPercentage,
+            'formatted_discount'            => self::getFormattedDiscount( $_isDiscountPercentage ),
         );
 
         $_aPrices[ 'formatted_price' ] = self::getPrice(
@@ -330,6 +339,21 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             return $_aLowests;
         }
 
+    /**
+     * @param  integer|string|null $insPercentage
+     * @return string
+     * @since  4.7.10
+     */
+    static public function getFormattedDiscount( $insPercentage ) {
+        if ( ! $insPercentage ) {
+            return '';
+        }
+        return "<span class='amazon-discount'>"
+                . "<span class='discount-label'>"
+                    . sprintf( __( '%1$s%% Off', 'amazon-auto-links' ), $insPercentage )
+                . "</span>"
+            . "</span>";
+    }
 
     /**
      *
