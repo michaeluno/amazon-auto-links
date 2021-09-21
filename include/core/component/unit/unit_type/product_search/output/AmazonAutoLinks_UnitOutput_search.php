@@ -774,15 +774,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }
 
             /**
-             * @param array $_aItem
-             * @param string $sTitle
-             * @param string $_sThumbnailURL
-             * @param string $_sProductURL
-             * @param string $_sContent
-             * @param string $_sDescription
-             * @param string $_sLocale
-             * @param string $_sAssociateID
-             * @param string $_sResponseDate
+             * @param  array     $_aItem
+             * @param  string    $sTitle
+             * @param  string    $_sThumbnailURL
+             * @param  string    $_sProductURL
+             * @param  string    $_sContent
+             * @param  string    $_sDescription
+             * @param  string    $_sLocale
+             * @param  string    $_sAssociateID
+             * @param  string    $_sResponseDate
              * @return array
              * @throws Exception
              * @compat PA-API5
