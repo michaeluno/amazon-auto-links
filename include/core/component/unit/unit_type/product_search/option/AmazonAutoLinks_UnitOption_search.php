@@ -10,8 +10,7 @@
 /**
  * Handles search unit options.
  * 
- * @since       3
-
+ * @since 3
  */
 class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base {
 
@@ -49,12 +48,10 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'MinimumPrice'          => null,
         'MinPercentageOff'      => null,
         'MerchantId'            => null,    // 2.0.7+
-        'MarketplaceDomain'     => null,    // 2.1.0+
+        'MarketplaceDomain'     => null,    // 2.1.0+ @deprecated No longer available in PA-API 5
         'ItemPage'              => null,
 
         'MinReviewsRating'      => 0,       // 3.9.1
-//        'MinSavingPercent'      => 0,       // 3.9.1 - same as `MinPercentageOff`
-//        'Merchant'              => null,    // 3.9.1 - same as `MerchantId`
         'DeliveryFlags'         => null,    // (array) 3.10.0
     );
     
@@ -66,33 +63,40 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'power'                 => 'Power',             
         'operation'             => 'Operation',
         'title'                 => 'Title',            
-        'sort'                  => 'Sort',                
+        'sort'                  => 'Sort',              // alias for `sortby`
         'searchindex'           => 'SearchIndex',
-        'browsenode'            => 'BrowseNode',          
+        'browsenode'            => 'BrowseNode',        // alias for `browsenodeid`
         'availability'          => 'Availability',
         'condition'             => 'Condition',         
-        'maximumprice'          => 'MaximumPrice',
-        'minimumprice'          => 'MinimumPrice',         
-        'minpercentageoff'      => 'MinPercentageOff',
-        'merchantid'            => 'MerchantId',     
-        'marketplacedomain'     => 'MarketplaceDomain',
+        'maximumprice'          => 'MaximumPrice',      // alias for `maxprice`
+        'minimumprice'          => 'MinimumPrice',
+        'minpercentageoff'      => 'MinPercentageOff',  // alias for `minsavingpercent`
+        'merchantid'            => 'MerchantId',
+        'marketplacedomain'     => 'MarketplaceDomain', // @deprecated
         'itempage'              => 'ItemPage',
+        // [4.8.0+] For PA-API5 parameters
+        'minsavingpercent'      => 'MinPercentageOff',  // alias for `minpercentageoff`
+        'minreviewsrating'      => 'MinReviewsRating',
+        'merchant'              => 'MerchantId',        // alias for `merchantid`
+        'minprice'              => 'MinimumPrice',      // alias for `minimumprice`
+        'maxprice'              => 'MaximumPrice',      // alias for `maximumprice`
+        'browsenodeid'          => 'BrowseNode',        // alias for `browsenode`
+        'sortby'                => 'Sort',              // alias for `sort`
+        'currencyofpreference'  => 'preferred_currency',
+        'languagesofpreference' => 'language',
     );
 
     /**
-     * @param array $aUnitOptions
-     * @param array $aDefaults
-     * @param array $aRawOptions
-     *
+     * @param  array $aUnitOptions
+     * @param  array $aDefaults
+     * @param  array $aRawOptions
      * @return array
-     * @since       3.4.6
-     * @since       4.0.0   Renamed from format() as it is too general.
+     * @since  3.4.6
+     * @since  4.0.0 Renamed from format() as it is too general.
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
-
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
         return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
-        
     }
     
 }
