@@ -40,7 +40,9 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
             return '';
         }
         return "<span class='amazon-discount'>"
-                . sprintf( __( '%1$s%% Off', 'amazon-auto-links' ), $_inPercentage )
+                . "<span class='discount-label'>"
+                    . sprintf( __( '%1$s%% Off', 'amazon-auto-links' ), $_inPercentage )
+                . "</span>"
             . "</span>";
 
     }
