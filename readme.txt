@@ -146,7 +146,7 @@ When you display Amazon products, you would specify a unit and the plugin will g
 
 = What would be the benefit to upgrade to the pro version? =
 
-With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestriceted as well. Please consider upgrading it. [Amazon Auto Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
+With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestriceted as well. Please consider upgrading it. [Auto Amazon Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
 
 = I get a blank white page after adding a unit to the theme. What is it? What should I do? =
 
@@ -249,7 +249,7 @@ Optionally, the following arguments may be set.
     - `1`: show the error.
     - `2`: show the error in an HTML comment.
 
-These values can be pre-defined from the setting page via `Dashboard` -> `Amazon Auto Links` -> `Settings` -> `Default`.
+These values can be pre-defined from the setting page via `Dashboard` -> `Auto Amazon Links` -> `Settings` -> `Default`.
 If these arguments are omitted, the values set in the setting page will be used.
 
 = Shortcode to Display Buttons =
@@ -259,7 +259,7 @@ It accepts the following parameters.
 
 - `asin` - (required, string) Comma delimited ASINs.
 - `type` - (optional, integer) 0: Link to the product page, 1: Add to cart button. Default: `1`.
-- `id` - (optional, integer) The button ID. To use the button created via Dashboard -> Amazon Auto Links -> Manage Buttons, specify the button ID.
+- `id` - (optional, integer) The button ID. To use the button created via Dashboard -> Auto Amazon Links -> Manage Buttons, specify the button ID.
 - `quantity` - (optional, integer) The quantity of the item to add to cart. When multiple ASINs are specified, separate the values by commas.
 - `country` - (optional, string) The locale of the marketplace. If not set, the default value set in the Default setting tab will be applied.
 - `associate_id` - (optional, string) The associate tag. If not set, the default value set in the Default setting tab will be applied.
