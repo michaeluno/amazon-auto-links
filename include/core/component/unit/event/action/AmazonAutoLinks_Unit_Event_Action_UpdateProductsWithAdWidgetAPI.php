@@ -35,12 +35,34 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
         $_oOption           = AmazonAutoLinks_Option::getInstance();
         $iCacheDuration     = isset( $iCacheDuration ) ? $iCacheDuration : ( integer ) $_oOption->get( 'unit_default', 'cache_duration' );
-        $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, array_keys( $aItems ), $iCacheDuration, $bForceRenew );
+        $_aASINsToSearch    = array_keys( $aItems );
+        $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, $_aASINsToSearch, $iCacheDuration, $bForceRenew );
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
-
+        $_aProducts         = array_merge( $_aProducts, $this->___getMissedProducts( $_aASINsToSearch, $_aProducts ) );
         $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug, $iCacheDuration );
 
     }
+        /**
+         * Construct empty product data.
+         * Without adding empty data, the plugin keeps checking to update product elements front the front-end.
+         * @return array A simulated response products array of products that are missed in the response.*
+         * @since  4.7.9
+         */
+        private function ___getMissedProducts( $aASINsToSearch, $aProducts ) {
+            $_aASINsOfResponse = wp_list_pluck( $aProducts, 'ASIN' );
+            $_aASINsMissed     = array_diff( $aASINsToSearch, $_aASINsOfResponse );
+            $_aProductsMissed  = array();
+            foreach( $_aASINsMissed as $_sASIN ) {
+                $_aProductsMissed[] = array(
+                    'ASIN'              => $_sASIN, 'Title'             => '',
+                    'Price'             => '',      'ListPrice'         => '',
+                    'ImageUrl'          => '',      'DetailPageURL'     => '',
+                    'Rating'            => '',      'TotalReviews'      => '',
+                    'Subtitle'          => '',      'IsPrimeEligible'   => '',
+                );
+            }
+            return $_aProductsMissed;
+        }
         /**
          * @param array   $aProducts     The API response products
          * @param array   $aItems        The passed item array to the action hook, holding the currency, language, ASIN info.
@@ -158,7 +180,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         'asin_locale'        => $sASIN . '_' . $sLocale,
                         'locale'             => $sLocale,
                         'modified_time'      => date( 'Y-m-d H:i:s' ),
-                        'title'              => $aProduct[ 'Title' ],
+                        'title'              => strlen( $aProduct[ 'Title' ] ) ? $aProduct[ 'Title' ] : $aStoredRow[ 'title' ],
                         'links'              => empty( $aStoredRow[ 'links' ] ) ? $aProduct[ 'DetailPageURL' ] : $aStoredRow[ 'links' ],
                         'images'             => empty( $aStoredRow[ 'images' ] ) ? ( $aProduct[ 'ImageUrl' ] ? array(
                             'main' => array(

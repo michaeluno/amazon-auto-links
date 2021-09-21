@@ -332,6 +332,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 == Changelog ==
 
 = 4.7.9 - 09/21/2021 =
+- Fixed a bug that kept trying updating product elements for some non-existing products.
 - Fixed a bug that the wrong page title was displayed for the `Add Feed Unit` and `Add Unit by ScratchPad Payload` pages.
 - Fixed a bug that pop-up thumbnails sometimes got stuck when multiple of them are displayed at the same time.
 
