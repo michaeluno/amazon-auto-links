@@ -24,34 +24,34 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     /**
      * Stores the unit option key that is used for the search.
      * This is needed for the `search_per_keyword` option.
-     * @since       3.2.0
+     * @since 3.2.0
      */
     public $sSearchTermKey = 'Keywords';
 
     /**
      * The array element key name that contains `Items` element.
      * PA-API 5 operations such as `GetItems`, `SearchItems` have different key names such as `ItemsResult` abd `SearchResult`.
-     * @var string
-     * @since   3.9.0
+     * @var   string
+     * @since 3.9.0
      */
     protected $_sResponseItemsParentKey = 'SearchResult';
 
     /**
      * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
-     * @since       3.5.0
-     * @var array
+     * @since 3.5.0
+     * @var   array
      */
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%rating%', '%similar%',
         '%_discount_rate%', '%_review_rate%', // 3.9.2  - used for advanced filters
-        '%price%',                            // 3.10.0   - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
+        '%price%',                            // 3.10.0 - as preferred currency is now supported, the `GetItem` operation is more up-to-date than `SearchItem` then sometimes it gives a different result so use it if available.
         '%discount%'                          // 4.7.8
     );
 
     /**
      * Represents the array structure of the item array element of API response data.
-     * @since            unknown
-     * @todo        3.9.0       The structure has been entirely changed in PA-API5
+     * @since unknown
+     * @todo  3.9.0   The structure has been entirely changed in PA-API5
      */    
     public static $aStructure_Item = array(
         'ASIN'              => null,
@@ -60,14 +60,17 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         'BrowseNodeInfo'    => null,
         'Images'            => null,
         'Offers'            => null,
-// @deprecated       'ItemAttributes'    => null,
-// @deprecated      'EditorialReviews'  => null,
-//        'ItemLinks'         => null,
-//        'ImageSets'         => null,
-//        'BrowseNodes'       => null,
-//        'SimilarProducts'   => null,
-//        'MediumImage'       => null,
-//        'OfferSummary'      => null,
+        /**
+         * @deprecated
+         */
+        // 'ItemAttributes'    => null,
+        // 'EditorialReviews'  => null,
+        // 'ItemLinks'         => null,
+        // 'ImageSets'         => null,
+        // 'BrowseNodes'       => null,
+        // 'SimilarProducts'   => null,
+        // 'MediumImage'       => null,
+        // 'OfferSummary'      => null,
     );
 
     /**
@@ -95,11 +98,11 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     }
 
         /**
-         * @since       3.1.4
-         * @since       3.8.1      Added the $aURLs parameter.
-         * @param       array      $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
-         * @scope       protected  The 'url' unit type will extend this method.
-         * @return      array
+         * @since  3.1.4
+         * @since  3.8.1      Added the $aURLs parameter.
+         * @param  array      $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
+         * @scope  protected  The 'url' unit type will extend this method.
+         * @return array
          */
         protected function _getResponses( array $aURLs=array() ) {
 
@@ -117,8 +120,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         }
             /**
              * Sanitizes the search terms.
-             * @since       3.2.0
-             * @return      void
+             * @since 3.2.0
              */
             private function ___setSearchTerms() {
 
@@ -257,10 +259,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 }            
 
                 /**
-                 * @remark      This sets the minimum count as 10 to cover cases that too few items shown
+                 * @remark This sets the minimum count as 10 to cover cases that too few items shown
                  * due to removals with product filters. 10 is also the maximum count for the API `ItemID` parameter.
-                 * @since       3.8.7
-                 * @return      integer     The item count.
+                 * @since  3.8.7
+                 * @return integer     The item count.
                  */
                 private function ___getCountForSearchPerKeyword() {
                     $_iCount = $this->oOption->isAdvancedAllowed()
@@ -318,19 +320,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             return $_aResponse;
         }
 
-        // @deprecated 3.9.0
-//        if ( ! isset( $_aResponse[ 'Items' ][ 'Item' ] ) || ! is_array( $_aResponse[ 'Items' ][ 'Item' ] ) ) {
-//            return $_aResponse;
-//        }
-
-        // @deprecated 3.9.0
-        // Calculate the required number of pages.
-//        $_iPage = $this->_getTotalPageNumber(
-//            $iCount,
-//            $_aResponse,
-//            $this->oUnitOption->get( 'SearchIndex' )
-//        );
-
         /**
          * As PA-API 5.0 does not return reliable total page count,
          * perform search from the lowest page number and when it hits an error stop.
@@ -339,20 +328,6 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         $_aResponseTrunk = $_aResponse;
 
-        // @deprecated 3.9.0
-        // Prefetch from backwards. First perform fetching data in the background if caches are not available. Parse backwards
-/*        $_iScheduled = 0;
-        for ( $_i = $_iPage; $_i >= 2 ; $_i-- ) {
-            $_iScheduled += ( integer ) $_oAPI->scheduleInBackground(
-                $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ), $_i ),
-                $this->oUnitOption->get( 'cache_duration' )
-            );
-        }
-        if ( $_iScheduled ) {
-            // there are items scheduled to fetch in the background, do it right now.
-            AmazonAutoLinks_Shadow::gaze();
-        }*/
-        
         // Start from the second page since the first page has been already done. 
         for ( $_i = 2; $_i <= $_iMaxPage; $_i++ ) {
 
@@ -380,9 +355,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         
     }
         /**
-         * @param $aResponse
-         *
-         * @return bool
+         * @param  array $aResponse
+         * @return boolean
          */
         private function ___hasItem( array $aResponse ) {
             $_aItems = $this->getElement( $aResponse, array( $this->_sResponseItemsParentKey, 'Items' ) );
@@ -393,37 +367,13 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         }
 
         /**
-         * Returns the total page number
-         *
-         * @since   2.0.4.1b
-         * @see     http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemSearch.html
-         * @see https://forums.aws.amazon.com/message.jspa?messageID=919160
-         * @return  integer
-         * @deprecated 3.9.0 `SearchResult` is not reliable for the bug that only returns 146 for every search request.
-         */
-/*        protected function _getTotalPageNumber( $iCount, $aResponse, $sSearchIndex='All' ) {
-            return 0;
-            // @remark `SearchResult` is not reliable for the bug that only returns 146 for every search request.
-            // @see https://forums.aws.amazon.com/message.jspa?messageID=919160
-            // $_iTotalResultCount = $this->getElement( $aResponse, array( $this->_sResponseItemsParentKey, 'TotalResultCount' ), 0 );
-
-            $iMaxAllowedPages = $sSearchIndex == 'All' ? 5 : 10;
-            $iPage = ceil( $iCount / 10 );
-            $iPage = $iPage > $iMaxAllowedPages ? $iMaxAllowedPages : $iPage;
-            $iFoundTotalPages = isset( $aResponse[ 'Items' ][ 'TotalPages' ] ) ? $aResponse[ 'Items' ][ 'TotalPages' ] : 1;
-            return $iFoundTotalPages <= $iPage ?
-                $iFoundTotalPages
-                : $iPage;
-
-        }*/
-        /**
          * Adds product item elements in a response array if the same ASIN is not already in there
          *
-         * @since       2.0.4.1
-         * @since       3.9.0   Changed the scope to private.
-         * @param       array   $aMain
-         * @param       array   $aItems
-         * @return      array
+         * @since  2.0.4.1
+         * @since  3.9.0   Changed the scope to private.
+         * @param  array   $aMain
+         * @param  array   $aItems
+         * @return array
          */
         private function ___addItems( $aMain, $aItems ) {
 
@@ -521,10 +471,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
         /**
          * For backward compatibility for PA-API 4
          *
-         * @param string $sOperation
-         *
+         * @param  string $sOperation
          * @return string
-         * @since   3.9.0
+         * @since  3.9.0
          */
         protected function _getOperation( $sOperation ) {
             // ItemSearch, ItemLookup, SimilarityLookup
@@ -573,28 +522,15 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
             // Other values will be treated as Relevance as default.
             return 'Relevance';
-            // sales rank option is not available in PA-API 5.0
-            // @deprecated 3.10.0
-//            if (
-//                in_array(
-//                    strtolower( $_sSortOption ),
-//                    array(
-//                        'relevancerank', 'salesrank',
-//                        'all', 'raw'    // not sure how these get passed in the search unit type but there is a report of an error with these
-//                    )
-//                )
-//            ) {
-//                return 'Relevance';
-//            }
-//            return $_sSortOption;
+
         }
 
 
     /**
      * Constructs products array to be parsed in the template.
      *
-     * @param       array       $aResponse
-     * @return      array
+     * @param  array $aResponse
+     * @return array
      */
     protected function getProducts( $aResponse ) {
 
@@ -865,7 +801,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             ) {
 
                 // Construct a product array. This will be passed to a template.
-                // @remark  For values that could not retrieved, leave it null so that later it will be filled with formatting routine or triggers a background routine to retrieve product data
+                // @remark  For values that could not be retrieved, leave it null so that later it will be filled with formatting routine or triggers a background routine to retrieve product data
                 $_aProduct = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
@@ -881,7 +817,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                         strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
                     ),
                     'author'             => $this->___getAuthors( $_aItem ),
-// @todo 3.9.0 implement manufacturer, brand, etc.
+                    // @todo 3.9.0 implement manufacturer, brand, etc.
                     'updated_date'       => $_sResponseDate, // not GMT aware at this point. Will be formatted later in the ItemFormatter class.
                     'release_date'       => $this->getElement(
                         $_aItem,
@@ -980,9 +916,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }
                 /**
                  * Extracts authors of an item
-                 * @param array $aItem
-                 * @since   3.9.0
-                 * @return  string
+                 * @param  array  $aItem
+                 * @since  3.9.0
+                 * @return string
                  */
                 private function ___getAuthors( array $aItem ) {
                     $_aAuthors      = array();
@@ -1013,10 +949,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
             }
 
             /**
-             * @param array $aItem
-             * @return  string
-             * @since   3.8.0
-             * @since   3.8.11  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+             * @param  array  $aItem
+             * @return string
+             * @since  3.8.0
+             * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
              */
             private function ___getCategories( array $aItem ) {
                 $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
@@ -1039,8 +975,8 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              *
              * @since   2.1.1
              * @return  string
-             * @param   array $aProduct
-             * @todo    3.9.0   Add `brand`, `manufacturer` etc
+             * @param   array  $aProduct
+             * @todo    3.9.0  Add `brand`, `manufacturer` etc
              */
             private function ___getProductMetaFormatted( array $aProduct ) {
 
