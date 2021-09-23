@@ -200,6 +200,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                         // . "<code class='{$_sDel}'>%similar%</code> - " . __( 'similar products.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+ // @deprecated 3.9.0
                         . "<code class='{$_sDel}'>%meta%</code> - " . __( 'meta data of the product', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
                         . "<code class='{$_sDel}'>%author%</code> - " . __( 'the author of the product', 'amazon-auto-links' ) . '<br />'    // 4.1.0+
+                        . "<code class='{$_sDel}'>%author_text%</code> - " . __( 'the author text without HTML tags', 'amazon-auto-links' ) . '<br />'    // 4.7.10+
                         . "<code class='{$_sDel}'>%category%</code> - " . __( 'categories that the product belongs to', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
                         . "<code class='{$_sDel}'>%feature%</code> - " . __( 'list of product features', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
                         . "<code class='{$_sDel}'>%rank%</code> - " . __( 'sales rank of the product', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
