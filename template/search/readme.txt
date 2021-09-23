@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.2 =
+- Tweaked vertical alignment of author elements.
+
 = 1.2.1 =
 - Added rules for the discount element.
 
