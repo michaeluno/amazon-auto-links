@@ -25,6 +25,12 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
     private $___sUnitPostType = '';
 
     /**
+     * @var integer
+     * @since 4.7.10
+     */
+    public $iHookPriority = 11;
+
+    /**
      * @var AmazonAutoLinks_ToolOption
      * @since 4.7.0
      */
@@ -41,12 +47,13 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
      */
     public function __construct() {
 
-        $this->oToolOption = AmazonAutoLinks_ToolOption::getInstance();
-        $this->oMainOption = AmazonAutoLinks_Option::getInstance();
-        $_aRawMainOptions  = $this->oMainOption->getRawOptions();
-        $this->oOption     = isset( $_aRawMainOptions[ 'convert_links' ] )
+        $this->oToolOption   = AmazonAutoLinks_ToolOption::getInstance();
+        $this->oMainOption   = AmazonAutoLinks_Option::getInstance();
+        $_aRawMainOptions    = $this->oMainOption->getRawOptions();
+        $this->oOption       = isset( $_aRawMainOptions[ 'convert_links' ] )
             ? $this->oMainOption
             : $this->oToolOption;
+        $this->iHookPriority = $this->oOption->get( array( 'convert_links', 'hook_priority' ), $this->iHookPriority );
         $this->___setHooks(
             $this->oOption->get( 'convert_links', 'filter_hooks' ),
             $this->getAsArray( $this->oOption->get( 'convert_links', 'where' ) )
@@ -77,10 +84,10 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
             $_aFilterHooks = array_unique( $_aFilterHooks );
             foreach( $_aFilterHooks as $_sFilterHook ) {
                 if ( 'the_content' === $_sFilterHook ) {
-                    add_filter( $_sFilterHook, array( $this, 'replyToFilterContentsForPosts' ), 11 );
+                    add_filter( $_sFilterHook, array( $this, 'replyToFilterContentsForPosts' ), $this->iHookPriority );
                     continue;
                 }
-                add_filter( $_sFilterHook, array( $this, 'replyToFilterContents' ), 11 );
+                add_filter( $_sFilterHook, array( $this, 'replyToFilterContents' ), $this->iHookPriority );
             }
 
         }
