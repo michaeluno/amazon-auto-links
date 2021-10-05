@@ -47,7 +47,8 @@ class AmazonAutoLinks_ToolOption extends AmazonAutoLinks_Option_Base {
                 'the_content'  => 1,
                 'comment_text' => 1,
             ),
-            'filter_hooks'   => '',
+            'filter_hooks'          => '',
+            'hook_priority'         => 11,  // [4.7.10+]
         ),
 
     );

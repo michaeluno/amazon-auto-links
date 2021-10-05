@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.18 =
+- Remove the font size for author elements.
+
 = 1.2.17 =
 - Added rules for the discount element.
 

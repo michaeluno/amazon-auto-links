@@ -60,7 +60,7 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
             array(
                 'field_id'  => 'where',
                 'type'      => 'checkbox',
-                'title'     => __( 'Applies to' ),
+                'title'     => __( 'Applies to', 'amazon-auto-links' ),
                 'label'     => array(
                     'the_content'     => __( 'Post contents', 'amazon-auto-links' ),
                     'comment_text'    => __( 'Comments', 'amazon-auto-links' ),
@@ -70,9 +70,15 @@ class AmazonAutoLinks_LinkConverter_Setting_Section_Convert extends AmazonAutoLi
             array(
                 'field_id'      => 'filter_hooks',
                 'type'          => 'textarea',
-                'title'         => __( 'Custom Filter Hooks' ),
+                'title'         => __( 'Custom Filter Hooks', 'amazon-auto-links' ),
                 'description'   => __( 'If the areas to apply link conversion are not listed above and if you know the filter hook to apply to, specify here one per line.', 'amazon-auto-links' ),
                 'value' => $this->getElement( $_aRawOptions, array( 'convert_links', 'filter_hooks' ) ), // backward compatibility
+            ),
+            array(
+                'field_id'  => 'hook_priority',
+                'type'      => 'number',
+                'title'     => __( 'Hook Priority', 'amazon-auto-links' ),
+                'tip'       => __( 'If the links are not converted, try increase the value.', 'amazon-auto-links' ),
             ),
             array()
         );

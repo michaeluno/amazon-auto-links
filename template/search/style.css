@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.2.1
+    Version:        1.2.2
     License:        GNU General Public License v2 or later
     Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -81,9 +81,10 @@
 }
 
 /* Meta */
-.amazon-products-container-search > .amazon-product-container  .amazon-product-meta {
+.amazon-products-container-search > .amazon-product-container .amazon-product-meta {
     display: inline;
     margin-right: 0.4em;
+    vertical-align: middle;
 }
 
 /* Customer Reviews */

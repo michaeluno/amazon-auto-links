@@ -924,10 +924,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     $_aAuthors      = array();
                     $_aContributors = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'ByLineInfo', 'Contributors' ), array() );
                     foreach( $_aContributors as $_aContributor ) {
-                        $_sAuthor = $this->getElement( $_aContributor, array( 'RoleType' ) );
-                        if ( 'author' === $_sAuthor ) {
-                            $_aAuthors[] = $this->getElement( $_aContributor, array( 'Name' ) );
-                        }
+                        $_aAuthors[] = $this->getElement( $_aContributor, array( 'Name' ) );
                     }
                     return implode( ", ", $_aAuthors );
                 }

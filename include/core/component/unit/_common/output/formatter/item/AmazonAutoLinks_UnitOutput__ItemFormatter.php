@@ -87,6 +87,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
             '<!-- %_discount_rate% -->'     => '',                                                      // [3.9.2+]
             '%image_size%'                  => $this->___oUnitOutput->oUnitOption->get( 'image_size' ), // [4.1.0+]
             '%author%'                      => $this->___getAuthorOutput( $aProduct ),                  // [4.1.0+]
+            '%author_text%'                 => $this->getElement( $aProduct, array( 'author' ), '' ),   // [4.7.10+]
             '%discount%'                    => $aProduct[ 'formatted_discount' ], // [4.7.8+] // $this->getElement( $aProduct, 'discount', '' ),
         );
         $_aReplacements = apply_filters( 'aal_filter_unit_item_format_tag_replacements', $_aReplacements, $aProduct ); // [4.4.2+] Allows third parties to add custom tags.
@@ -112,7 +113,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
 
         /**
          * @since  4.1.0
-         * @param  array $aProduct
+         * @param  array  $aProduct
          * @return string
          */
         private function ___getAuthorOutput( array $aProduct ){
