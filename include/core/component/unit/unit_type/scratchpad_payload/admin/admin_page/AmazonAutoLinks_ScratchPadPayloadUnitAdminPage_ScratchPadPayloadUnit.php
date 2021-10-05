@@ -24,7 +24,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
         $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
-            'title'         => __( 'Add Unit by ScratchPad Payload', 'amazon-auto-links' ),
+            'title'         => __( 'Add Unit by Custom PA-API Payload', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
@@ -41,7 +41,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
             'section_id'    => '_default',
             'description'   => array(
                 sprintf(
-                    __( 'The ScratchPad payload unit type allows you to import PA-API queries generated on <a href="%1$s" target="_blank">ScratchPad</a>.', 'amazon-auto-links' ),
+                    __( 'The custom PA-API payload units allow you to import PA-API queries generated on <a href="%1$s" target="_blank">ScratchPad</a>.', 'amazon-auto-links' ),
                     'https://webservices.amazon.com/paapi5/scratchpad/'
                 ),
             ),

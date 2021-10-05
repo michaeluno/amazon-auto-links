@@ -63,7 +63,7 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
         // Post meta boxes
         new AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload(
             null,   // meta box ID - null for auto-generate
-            __( 'ScratchPad Payload Main', 'amazon-auto-links' ),
+            __( 'Custom PA-API Payload Main', 'amazon-auto-links' ),
             array( // post type slugs: post, page, etc.
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
             ),
@@ -100,7 +100,7 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      * @since       4.1.0
      */
     protected function _getLabel() {
-        return __( 'ScratchPad Payload', 'amazon-auto-links' );
+        return __( 'Custom PA-API Payload', 'amazon-auto-links' );
     }
 
 }

@@ -28,7 +28,7 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                 'type'          => 'text',
-                'description'   => 'e.g. <code>My ScratchPad Payload Unit</code>',
+                'description'   => 'e.g. <code>My Custom PA-API Payload Unit</code>',
                 'value'         => '',    // a previous value should not appear
                 'class'         => array(
                     'input' => 'width-full',
