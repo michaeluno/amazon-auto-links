@@ -52,7 +52,10 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
  "Operation": "SearchItems"
 }</code></pre>',
                 ),
-                'tip'           => '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_scratchpad_payload::$sDirPath . '/asset/image/payload_json.jpg' ) . '" style="width:100%"/>',
+                'tip'           => array(
+                    'width'   => 680,
+                    'content' => '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_scratchpad_payload::$sDirPath . '/asset/image/payload_json.jpg' ) . '" style="width:100%; min-width: 480px;"/>',
+                ),
                 'attributes'    => array(
                     'style' => 'height: 200px; width: 100%; min-width: 400px;'
                 ),
