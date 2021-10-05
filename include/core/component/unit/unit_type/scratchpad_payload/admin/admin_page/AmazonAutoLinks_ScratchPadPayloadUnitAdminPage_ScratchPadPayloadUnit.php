@@ -11,8 +11,7 @@
 /**
  * Adds a setting page for creating tag units.
  * 
- * @since       4.1.0
- * @action      schedule        aal_action_unit_prefetch
+ * @since 4.1.0
  */
 class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
 
@@ -64,7 +63,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
     
     /**
      * 
-     * @callback        filter      validation + _ + page slug
+     * @callback add_filter()      validation + _ + page slug
      */
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
