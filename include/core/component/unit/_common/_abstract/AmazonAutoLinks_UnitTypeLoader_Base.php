@@ -245,4 +245,12 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
             return __( 'Unknown', 'amazon-auto-links' );
         }
 
+    /**
+     * @return string
+     * @since  5.0.0
+     */
+    protected function _getDescription() {
+        return 'This is a default description. Override this in an extended class.';
+    }
+
 }
