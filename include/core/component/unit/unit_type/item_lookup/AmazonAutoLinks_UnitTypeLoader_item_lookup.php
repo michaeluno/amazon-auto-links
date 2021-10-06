@@ -85,11 +85,11 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
     }
 
     /**
-     * @return      string
-     * @since       3.5.0
+     * @return string
+     * @since  3.5.0
      */
     protected function _getLabel() {
-        return __( 'Item Look-up', 'amazon-auto-links' );
+        return __( 'PA-API Item Look-up', 'amazon-auto-links' );
     }
 
 }

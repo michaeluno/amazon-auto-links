@@ -99,7 +99,7 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * @since       3.5.0
      */
     protected function _getLabel() {
-        return __( 'Product Search', 'amazon-auto-links' );
+        return __( 'PA-API Product Search', 'amazon-auto-links' );
     }
 
 }
