@@ -11,7 +11,7 @@
 /**
  * Provides common methods for simple wizard form pages.
  * 
- * @since       3
+ * @since 3
  */
 abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_AdminPageFramework {
 
@@ -23,33 +23,21 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         if ( ! $this->oProp->bIsAdmin ) {
             return;
         }     
-        add_filter( 
-            'options_' . $this->oProp->sClassName,
-            array( $this, 'setOptions' )
-        );
-        add_action( 
-            'set_up_' . $this->oProp->sClassName,
-            array( $this, 'registerFieldTypes' )
-        );
-        add_action( 
-            'load_' . $this->oProp->sClassName,
-            array( $this, 'replyToRegisterFieldTypes' )
-        );        
-        add_action( 
-            'load_' . $this->oProp->sClassName,
-            array( $this, 'doPageSettings' )
-        );        
+        add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'setOptions' ) );
+        add_action( 'set_up_' . $this->oProp->sClassName, array( $this, 'registerFieldTypes' ) );
+        add_action( 'load_' . $this->oProp->sClassName, array( $this, 'replyToRegisterFieldTypes' ) );
+        add_action( 'load_' . $this->oProp->sClassName, array( $this, 'doPageSettings' ) );
                 
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-        $_oOption    = AmazonAutoLinks_Option::getInstance();
+        $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
 
     }
 
     /**
      * Sets the default option values for the setting form.
-     * @callback    filter      `options_{class name}`
-     * @return      array       The options array.
+     * @callback add_filter() options_{class name}
+     * @return   array        The options array.
      */
     public function setOptions( $aOptions ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -57,8 +45,6 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             + $this->_getLastUnitInputs()
             + $_oOption->get( 'unit_default' );
     }
-
-
 
     /**
      * @return      array
@@ -95,13 +81,10 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
 
     /**
      * Registers custom filed types.
-     * @return      void
-     * @callback    action      load_{instantiated class name}
+     * @callback add_action() load_{instantiated class name}
      */
     public function replyToRegisterFieldTypes() {
-        
-        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );                
-      
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
     }
         
     /**
@@ -111,8 +94,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
     
     /**
      * Page styling
-     * @since       3
-     * @return      void
+     * @since 3
      */
     public function doPageSettings() {}
         
