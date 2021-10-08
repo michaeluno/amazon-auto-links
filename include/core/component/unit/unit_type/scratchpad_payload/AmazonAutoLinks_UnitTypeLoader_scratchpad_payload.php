@@ -10,9 +10,8 @@
 
 /**
  * Loads the units component.
- *  
- * @package     Amazon Auto Links
- * @since       4.1.0
+ *
+ * @since 4.1.0
 */
 class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_UnitTypeLoader_Base {
 
@@ -21,7 +20,7 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
      * @remark  Without this declaration, the value refers to the parent one.
-     * @var string
+     * @var     string
      * @since   4.2.0
      */
     static public $sDirPath = '';
@@ -45,8 +44,7 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
     /**
      * Adds post meta boxes.
      * 
-     * @since       4.1.0
-     * @return      void
+     * @since 4.1.0
      */
     protected function _loadAdminComponents( $sScriptPath ) {
 
@@ -84,10 +82,10 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
 
     /**
      * Determines the unit type from given output arguments.
-     * @param       string      $sUnitTypeSlug
-     * @param       array       $aArguments
-     * @return      string
-     * @since       4.1.0
+     * @param  string $sUnitTypeSlug
+     * @param  array  $aArguments
+     * @return string
+     * @since  4.1.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         return in_array( $this->_getOperationArgument( $aArguments ), array( 'payload', ) )
@@ -96,8 +94,8 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
     }
 
     /**
-     * @return      string
-     * @since       4.1.0
+     * @return string
+     * @since  4.1.0
      */
     protected function _getLabel() {
         return __( 'Custom PA-API Payload', 'amazon-auto-links' );

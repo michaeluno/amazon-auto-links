@@ -10,9 +10,8 @@
 
 /**
  * Loads a particular unit type.
- *  
- * @package     Amazon Auto Links
- * @since       3.3.0
+ *
+ * @since 3.3.0
 */
 class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility {
 

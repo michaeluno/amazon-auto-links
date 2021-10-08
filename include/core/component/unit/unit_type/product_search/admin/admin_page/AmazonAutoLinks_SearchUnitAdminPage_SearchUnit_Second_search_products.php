@@ -11,14 +11,13 @@
 /**
  * Adds a tab to a setting page.
  * 
- * @since       3
- * @extends     AmazonAutoLinks_AdminPage_Tab_Base
+ * @since 3
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(

@@ -11,8 +11,7 @@
 /**
  * Provides some shared methods.
  * 
- * @since       3
- * @extends     AmazonAutoLinks_AdminPage_Tab_Base
+ * @since 3
  */
 abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extends AmazonAutoLinks_AdminPage_Tab_Base {
       
@@ -100,7 +99,7 @@ abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extend
     
     /**
      * 
-     * @since       3
+     * @since 3
      */
     protected function _createAutoInsert( $iNewPostID ) {
         

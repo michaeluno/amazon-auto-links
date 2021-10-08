@@ -11,14 +11,13 @@
 /**
  * Adds a tab to a setting page.
  * 
- * @since       3
- * @extends     AmazonAutoLinks_AdminPage_Tab_Base
+ * @since 3
  */
 class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLinks_AdminPage_Tab_Base {
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -73,9 +72,9 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         }    
     /**
      * 
-     * @callback        filter      validation_{page slug}_{tab slug}
+     * @callback add_filter() validation_{page slug}_{tab slug}
      */ 
-    public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
         $_bVerified = ! $oFactory->hasFieldError();
         $_aErrors   = array();
@@ -87,22 +86,20 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
             // must set an field error array which does not yield empty so that it won't be redirected.
             $oFactory->setFieldErrors( array( 'error' ) );        
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
-            return $aOldInput;
+            return $aOldInputs;
             
         }   
         
-        if ( empty( $aInput[ 'associate_id' ] ) ) {
-            
+        if ( empty( $aInputs[ 'associate_id' ] ) ) {
             $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
-            $_bVerified = false;                            
-            
+            $_bVerified = false;
         }        
 
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oFactory->setFieldErrors( $_aErrors );     
             $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
-            return $aInput;
+            return $aInputs;
         }        
         
         // This should be the last check in the entire page validation checks.
@@ -113,17 +110,15 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
             )
         ) {
             // Will exit the script.
-            unset( $aInput[ 'submit_proceed' ] );
-            $this->___goToNextPage( $aInput );
+            unset( $aInputs[ 'submit_proceed' ] );
+            $this->___goToNextPage( $aInputs );
         }
-        
-        return $aInput;
+
+        return $aInputs;
         
     }
     
-    
         /**
-         * 
          * @remark      Will redirect the user to the next page and exits the script.
          */
         private function ___goToNextPage( $aInput ) {

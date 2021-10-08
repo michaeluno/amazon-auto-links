@@ -9,10 +9,9 @@
  */
 
 /**
- * Loads the units component.
- *  
- * @package     Amazon Auto Links
- * @since       3.3.0
+ * Loads the component of `item_lookup` unit type.
+ *
+ * @since   3.3.0
 */
 class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTypeLoader_Base {
 
@@ -20,16 +19,16 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
-     * @remark  Without this declaration, the value refers to the parent one.
-     * @var string
-     * @since   4.2.0
+     * @remark Without this declaration, the value refers to the parent one.
+     * @var    string
+     * @since  4.2.0
      */
     static public $sDirPath = '';
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.3.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  3.3.0
      */
     public $sUnitTypeSlug = 'item_lookup';
     
@@ -72,10 +71,10 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
 
     /**
      * Determines the unit type from given output arguments.
-     * @param       string      $sUnitTypeSlug
-     * @param       array       $aArguments
-     * @return      string
-     * @since       3.5.0
+     * @param  string $sUnitTypeSlug
+     * @param  array  $aArguments
+     * @return string
+     * @since  3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         $_sOperation = $this->_getOperationArgument( $aArguments );

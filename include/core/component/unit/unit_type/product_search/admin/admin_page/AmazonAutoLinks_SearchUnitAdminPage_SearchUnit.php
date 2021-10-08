@@ -41,7 +41,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
     /**
      *
      * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @callback        action      load_{page slug}
+     * @callback    add_action()      load_{page slug}
      */
     protected function _loadPage( $oFactory ) {
 

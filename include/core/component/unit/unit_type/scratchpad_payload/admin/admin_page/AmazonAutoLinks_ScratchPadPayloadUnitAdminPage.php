@@ -24,5 +24,4 @@ final class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage extends AmazonAutoLin
         new AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit( $this );
     }
 
-        
 }

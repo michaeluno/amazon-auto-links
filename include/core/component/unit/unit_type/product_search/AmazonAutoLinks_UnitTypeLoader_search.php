@@ -20,9 +20,9 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
-     * @remark  Without this declaration, the value refers to the parent one.
-     * @var string
-     * @since   4.2.0
+     * @remark Without this declaration, the value refers to the parent one.
+     * @var    string
+     * @since  4.2.0
      */
     static public $sDirPath = '';
 
@@ -95,8 +95,8 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
     }
 
     /**
-     * @return      string
-     * @since       3.5.0
+     * @return string
+     * @since  3.5.0
      */
     protected function _getLabel() {
         return __( 'PA-API Product Search', 'amazon-auto-links' );
