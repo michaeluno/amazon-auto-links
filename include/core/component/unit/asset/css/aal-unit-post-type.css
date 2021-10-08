@@ -1,6 +1,6 @@
 /**
  * @name Unit Post Type
- * @version 1.1.0
+ * @version 1.1.1
  */
 #post-body-content {
     margin-bottom: 10px;
@@ -15,13 +15,15 @@
 }            
 /* List Table Columns */
 .column-status {
-    width: 7.2%;
+    width: 5.2%;
     text-align: center;  
 }            
 .column-unit_type, 
-.column-template,            
-.column-feed {
+.column-template {
     width:10%; 
+}
+.column-feed {
+    width: 5%;
 }
 /* Feed column */
 .column-feed { 
@@ -34,7 +36,7 @@
 }
 /* Labels (taxonomy tag ) column */
 .column-amazon_auto_links_tag {
-    width: 16%;
+    width: 12%;
 }
 /* Status Circle */
 .circle {
@@ -74,13 +76,13 @@ tr.type-amazon_auto_links:first-child td ul {
 .column-details span.detail-title {
     box-sizing: border-box;
     display: inline-block;
-    width: 44%;
+    width: 36%;
     color: #777;
 }
 .column-details span.detail-value {
     box-sizing: border-box;
     display: inline-block;
-    width: 54%;
+    width: 64%;
 }
 
 /* Warnings */
