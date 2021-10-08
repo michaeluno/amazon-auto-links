@@ -12,6 +12,7 @@
  * Adds a setting page for creating tag units.
  * 
  * @since 4.1.0
+ * @deprecated 5.0.0
  */
 class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
 
@@ -23,7 +24,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
         $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
-            'title'         => __( 'Add Unit by Custom PA-API Payload', 'amazon-auto-links' ),
+            'title'         => __( 'Add Unit by PA-API Custom Payload', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),

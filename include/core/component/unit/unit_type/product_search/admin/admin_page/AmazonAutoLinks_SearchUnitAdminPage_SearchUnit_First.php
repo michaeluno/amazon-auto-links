@@ -22,7 +22,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
     protected function _getArguments() {
         return array(
             'tab_slug'      => 'first',
-            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
+            'title'         => __( 'Add Unit by PA-API', 'amazon-auto-links' ),
             'description'   => __( 'Select the search type.', 'amazon-auto-links' ),
         );
     }
@@ -121,40 +121,14 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         /**
          * @remark      Will redirect the user to the next page and exits the script.
          */
-        private function ___goToNextPage( $aInput ) {
-            
-            // Set the unit type based on the chosen one.
-            // Redirect to the appropriate page by the search type.
-            switch( $aInput[ 'Operation' ] ) {
-                default:
-                case 'ItemSearch':
-                case 'SearchItems':
-                    $_sTabSlug = 'search_products';                
-                    break;
-                case 'ItemLookup':
-                case 'GetItems':        // 4.0.6 - fix a bug that did not let the user reach the Item Look-up option screen.
-                    $_sTabSlug = 'item_lookup';
-                    break;
-            }                
-
+        private function ___goToNextPage( $aInputs ) {
             $this->setTransient(
-                $aInput[ 'transient_id' ],  // key
-                $aInput, // data
-                60*10*6*24 // seconds 
+                $aInputs[ 'transient_id' ],  // key
+                $aInputs, // data
+                60*10*6*24 // 24 hours in seconds
             );
-
-            // Go to the next page.
-            exit( 
-                wp_redirect( 
-                    add_query_arg( 
-                        array( 
-                            'tab'          => $_sTabSlug, 
-                            'transient_id' => $aInput[ 'transient_id' ],
-                       ) + $this->getHTTPQueryGET(),
-                       $aInput[ 'bounce_url' ] 
-                    ) 
-                )
-            );
+            $_sURLNextPage = apply_filters( 'aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url', '', $aInputs );
+            exit( wp_redirect( $_sURLNextPage ) );
         }    
 
 }

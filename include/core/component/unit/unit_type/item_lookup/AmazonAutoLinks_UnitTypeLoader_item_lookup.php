@@ -13,7 +13,7 @@
  *
  * @since   3.3.0
 */
-class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTypeLoader_Base {
+class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTypeLoader_search {
 
     /**
      * Stores each unit type component directory path.
@@ -38,8 +38,34 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
     public $aFieldClasses = array(
         'AmazonAutoLinks_FormFields_ItemLookupUnit_Main',
         'AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced',
-    );    
-    
+    );
+
+    /**
+     * @var   string
+     * @since 5.0.0
+     */
+    protected $_sPAAPIOperation = 'GetItems';
+
+    /**
+     * @param    string $sURL
+     * @param    array  $aInputs
+     * @since    5.0.0
+     * @return   string
+     * @callback add_filter() aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url
+     */
+    public function replyToGetUnitCreationPageURL( $sURL, $aInputs ) {
+        if ( ! in_array( $aInputs[ 'Operation' ], array( 'ItemLookup', $this->_sPAAPIOperation ), true ) ) {
+            return $sURL;
+        }
+        return add_query_arg(
+            array(
+                'tab'          => 'item_lookup',
+                'transient_id' => $aInputs[ 'transient_id' ],
+           ) + $this->getHTTPQueryGET(),
+           $aInputs[ 'bounce_url' ]
+        );
+    }
+
     /**
      * Adds post meta boxes.
      * 
@@ -78,7 +104,7 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         $_sOperation = $this->_getOperationArgument( $aArguments );
-        return in_array( $_sOperation, array( 'ItemLookup', 'GetItems' ), true )  // ItemLookup for backward-compatibility
+        return in_array( $_sOperation, array( 'ItemLookup', $this->_sPAAPIOperation ), true )  // ItemLookup for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }
@@ -89,6 +115,22 @@ class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTyp
      */
     protected function _getLabel() {
         return __( 'PA-API Item Look-up', 'amazon-auto-links' );
+    }
+
+    /**
+     * @since  5.0.0
+     * @return string
+     */
+    protected function _getShortName() {
+        return __( 'Item Look-up', 'amazon-auto-links' );
+    }
+
+    /**
+     * @return string
+     * @since  5.0.0
+     */
+    protected function _getDescription() {
+        return __( 'Returns some or all of the item attributes with the given item identifier.', 'amazon-auto-links' );
     }
 
 }

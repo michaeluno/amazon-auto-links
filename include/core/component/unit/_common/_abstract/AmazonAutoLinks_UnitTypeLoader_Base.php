@@ -211,20 +211,6 @@ class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility 
             return $sUnitTypeSlug;
         }
 
-        /**
-         * @remark Shortcode argument keys are all lower-case.
-         * @since  3.4.6
-         * @since  3.5.0  Moved from `AmazonAutoLinks_Output`.
-         * @return string
-         * @param  array  $aArguments
-         */
-        protected function _getOperationArgument( $aArguments ) {
-            $_sOperation = $this->getElement( $aArguments, 'Operation' );
-            return $_sOperation
-                ? $_sOperation
-                : $this->getElement( $aArguments, 'operation', '' );
-        }
-
     /**
      * @callback    add_filter      aal_filter_registered_unit_type_labels
      * @param       array           $aLabels

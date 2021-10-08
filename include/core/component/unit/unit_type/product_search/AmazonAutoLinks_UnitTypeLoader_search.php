@@ -39,8 +39,52 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
     public $aFieldClasses = array(
         'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
         'AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced',
-    );    
-    
+    );
+
+    /**
+     * @var   string
+     * @since 5.0.0
+     */
+    protected $_sPAAPIOperation = 'SearchItems';
+
+    /**
+     * @param string $sScriptPath
+     * @since 5.0.0
+     */
+    protected function _construct( $sScriptPath ) {
+        add_filter( 'aal_filter_unit_paapi_unit_types', array( $this, 'replyToGetPAAPIUnitTypes' ) );
+        add_filter( 'aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url', array( $this, 'replyToGetUnitCreationPageURL' ), 10, 2 );
+    }
+        /**
+         * @since  5.0.0
+         * @param  array $aUnitTypes
+         * @return string[]
+         */
+        public function replyToGetPAAPIUnitTypes( $aUnitTypes ) {
+            return $aUnitTypes + array(
+                $this->_sPAAPIOperation => "<strong>" . $this->_getShortName() . "</strong>" . ' - ' . $this->_getDescription(),
+            );
+        }
+        /**
+         * @param    string $sURL
+         * @param    array  $aInputs
+         * @since    5.0.0
+         * @return   string
+         * @callback add_filter() aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url
+         */
+        public function replyToGetUnitCreationPageURL( $sURL, $aInputs ) {
+            if ( ! in_array( $aInputs[ 'Operation' ], array( 'ItemSearch', $this->_sPAAPIOperation ), true ) ) {
+                return $sURL;
+            }
+            return add_query_arg(
+                array(
+                    'tab'          => 'search_products',
+                    'transient_id' => $aInputs[ 'transient_id' ],
+               ) + $this->getHTTPQueryGET(),
+               $aInputs[ 'bounce_url' ]
+            );
+        }
+
     /**
      * Adds post meta boxes.
      * 
@@ -82,16 +126,39 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
     }     
 
     /**
+     * @remark Shortcode argument keys are all lower-case.
+     * @since  3.4.6
+     * @since  3.5.0  Moved from `AmazonAutoLinks_Output`.
+     * @since  5.0.0  Moved from `AmazonAutoLinks_UnitTypeLoader_Base`.
+     * @return string
+     * @param  array  $aArguments
+     */
+    protected function _getOperationArgument( $aArguments ) {
+        $_sOperation = $this->getElement( $aArguments, 'Operation' );
+        return $_sOperation
+            ? $_sOperation
+            : $this->getElement( $aArguments, 'operation', '' );
+    }
+
+    /**
      * Determines the unit type from given output arguments.
-     * @param       string      $sUnitTypeSlug
-     * @param       array       $aArguments
-     * @return      string
-     * @since       3.5.0
+     * @param  string $sUnitTypeSlug
+     * @param  array  $aArguments
+     * @return string
+     * @since  3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return in_array( $this->_getOperationArgument( $aArguments ), array( 'ItemSearch', 'SearchItems' ) ) // ItemSearch is for backward-compatibility
+        return in_array( $this->_getOperationArgument( $aArguments ), array( 'ItemSearch', $this->_sPAAPIOperation ), true ) // ItemSearch is for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
+    }
+
+    /**
+     * @return string
+     * @since  5.0.0
+     */
+    protected function _getShortName() {
+        return __( 'Product Search', 'amazon-auto-links' );
     }
 
     /**
@@ -100,6 +167,14 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      */
     protected function _getLabel() {
         return __( 'PA-API Product Search', 'amazon-auto-links' );
+    }
+
+    /**
+     * @return string
+     * @since  5.0.0
+     */
+    protected function _getDescription() {
+        return __( 'Returns items that satisfy the search criteria in the title and descriptions.', 'amazon-auto-links' );
     }
 
 }

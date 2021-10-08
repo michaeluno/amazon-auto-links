@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.8b01 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.10b04 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -315,7 +315,7 @@ return array(
     "AmazonAutoLinks_UnitOption_feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/feed/option/AmazonAutoLinks_UnitOption_feed.php", 
     "AmazonAutoLinks_UnitOutput_feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/feed/output/AmazonAutoLinks_UnitOutput_feed.php", 
     "AmazonAutoLinks_UnitTypeLoader_item_lookup" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/AmazonAutoLinks_UnitTypeLoader_item_lookup.php", 
-    "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup .php", 
+    "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup.php", 
     "AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Advanced.php", 
     "AmazonAutoLinks_FormFields_ItemLookupUnit_Main" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Advanced_item_lookup" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/item_lookup/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Advanced_item_lookup.php", 
@@ -326,7 +326,6 @@ return array(
     "AmazonAutoLinks_SearchUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage.php", 
     "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit.php", 
     "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php", 
-    "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base.php", 
     "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php", 
     "AmazonAutoLinks_FormFields_SearchUnit_ProductSearch" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php", 
     "AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php", 
@@ -341,6 +340,8 @@ return array(
     "AmazonAutoLinks_UnitTypeLoader_scratchpad_payload" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/AmazonAutoLinks_UnitTypeLoader_scratchpad_payload.php", 
     "AmazonAutoLinks_ScratchPadPayloadUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage.php", 
     "AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit.php", 
+    "AmazonAutoLinks_ScratchPadUnit_Admin_Page" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Page.php", 
+    "AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php", 
     "AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/form_field/AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main.php", 
     "AmazonAutoLinks_FormFields_ScratchPadPayload_Submit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/form_field/AmazonAutoLinks_FormFields_ScratchPadPayload_Submit.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/scratchpad_payload/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload.php", 
@@ -359,6 +360,7 @@ return array(
     "AmazonAutoLinks_Unit_URL_Event_RenewCacheAction" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_RenewCacheAction.php", 
     "AmazonAutoLinks_UnitOption_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php", 
     "AmazonAutoLinks_UnitOutput_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php", 
+    "AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/_common/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base.php", 
     "AmazonAutoLinks_SimpleWizardAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/admin_page/_abstract/AmazonAutoLinks_SimpleWizardAdminPage.php", 
     "AmazonAutoLinks_FormFields_Unit_AutoInsert" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_AutoInsert.php", 
     "AmazonAutoLinks_FormFields_Unit_Cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Cache.php", 

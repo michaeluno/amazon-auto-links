@@ -13,9 +13,10 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
      * Pass an empty string to the parameter for meta box options.
      *
      * @param  string $sFieldIDPrefix
+     * @param  array  $aUnitOptions
      * @return array
      */    
-    public function get( $sFieldIDPrefix='' ) {
+    public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
 
         $_aFields = array(  
             array(
@@ -28,8 +29,7 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                 'field_id'      => $sFieldIDPrefix . 'unit_title',
                 'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                 'type'          => 'text',
-                'description'   => 'e.g. <code>My Custom PA-API Payload Unit</code>',
-                'value'         => '',    // a previous value should not appear
+                'description'   => 'e.g. <code>My PA-API Custom Payload Unit</code>',
                 'class'         => array(
                     'input' => 'width-full',
                     'field' => 'width-half',

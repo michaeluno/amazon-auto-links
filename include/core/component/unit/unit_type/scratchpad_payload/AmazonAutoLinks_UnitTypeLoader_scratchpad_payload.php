@@ -13,7 +13,7 @@
  *
  * @since 4.1.0
 */
-class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_UnitTypeLoader_Base {
+class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_UnitTypeLoader_search {
 
     /**
      * Stores each unit type component directory path.
@@ -32,6 +32,11 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      */
     public $sUnitTypeSlug = 'scratchpad_payload';
 
+    /**
+     * @var   string
+     * @since 5.0.0
+     */
+    protected $_sPAAPIOperation = 'payload';
 
     /**
      * @param $sScriptPath
@@ -39,6 +44,33 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      */
     protected function _construct( $sScriptPath ) {
         self::$sDirPath = dirname( __FILE__ );
+        parent::_construct( $sScriptPath );
+    }
+
+    /**
+     * @param    string $sURL
+     * @param    array  $aInputs
+     * @since    5.0.0
+     * @return   string
+     * @callback add_filter() aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url
+     */
+    public function replyToGetUnitCreationPageURL( $sURL, $aInputs ) {
+        if ( $aInputs[ 'Operation' ] !== $this->_sPAAPIOperation ) {
+            return $sURL;
+        }
+        // $_aQuery = array(
+        //     'page' => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
+        // ) + $this->getHTTPQueryGET();
+        // unset( $_aQuery[ 'tab' ] );
+        // return add_query_arg( $_aQuery, $aInputs[ 'bounce_url' ] );
+
+        return add_query_arg(
+            array(
+                'tab'          => 'custom_payload',
+                'transient_id' => $aInputs[ 'transient_id' ],
+           ) + $this->getHTTPQueryGET(),
+           $aInputs[ 'bounce_url' ]
+        );
     }
 
     /**
@@ -49,34 +81,38 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
     protected function _loadAdminComponents( $sScriptPath ) {
 
         // Admin pages
-        new AmazonAutoLinks_ScratchPadPayloadUnitAdminPage(
-            array(
-                'type'      => 'transient',
-                'key'       => $GLOBALS[ 'aal_transient_id' ],
-                'duration'  => 60*60*24*2,
-            ),
-            $sScriptPath
-        );
-        
+
+        // @deprecated 5.0.0
+        // new AmazonAutoLinks_ScratchPadPayloadUnitAdminPage(
+        //     array(
+        //         'type'      => 'transient',
+        //         'key'       => $GLOBALS[ 'aal_transient_id' ],
+        //         'duration'  => 60*60*24*2,
+        //     ),
+        //     $sScriptPath
+        // );
+
+        new AmazonAutoLinks_ScratchPadUnit_Admin_Page;
+
         // Post meta boxes
         new AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload(
             null,   // meta box ID - null for auto-generate
-            __( 'Custom PA-API Payload Main', 'amazon-auto-links' ),
+            __( 'Custom Payload Main', 'amazon-auto-links' ),
             array( // post type slugs: post, page, etc.
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
             ),
             'normal', // context - e.g. 'normal', 'advanced', or 'side'
             'high'  // priority - e.g. 'high', 'core', 'default' or 'low'
         );
-//        new AmazonAutoLinks_UnitPostMetaBox_Advanced_search(
-//            null,   // meta box ID - null for auto-generate
-//            __( 'Product Search Advanced', 'amazon-auto-links' ),
-//            array( // post type slugs: post, page, etc.
-//                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-//            ),
-//            'normal', // context - e.g. 'normal', 'advanced', or 'side'
-//            'low' // priority - e.g. 'high', 'core', 'default' or 'low'
-//        );
+       // new AmazonAutoLinks_UnitPostMetaBox_Advanced_search(
+       //     null,   // meta box ID - null for auto-generate
+       //     __( 'Product Search Advanced', 'amazon-auto-links' ),
+       //     array( // post type slugs: post, page, etc.
+       //         AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+       //     ),
+       //     'normal', // context - e.g. 'normal', 'advanced', or 'side'
+       //     'low' // priority - e.g. 'high', 'core', 'default' or 'low'
+       // );
         
     }     
 
@@ -88,7 +124,7 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      * @since  4.1.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return in_array( $this->_getOperationArgument( $aArguments ), array( 'payload', ) )
+        return $this->_getOperationArgument( $aArguments ) === $this->_sPAAPIOperation
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }
@@ -98,7 +134,26 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
      * @since  4.1.0
      */
     protected function _getLabel() {
-        return __( 'Custom PA-API Payload', 'amazon-auto-links' );
+        return __( 'PA-API Custom Payload', 'amazon-auto-links' );
+    }
+
+    /**
+     * @since  5.0.0
+     * @return string
+     */
+    protected function _getShortName() {
+        return __( 'Custom Payload', 'amazon-auto-links' );
+    }
+
+    /**
+     * @return string
+     * @since  5.0.0
+     */
+    protected function _getDescription() {
+        return sprintf(
+            __( 'Returns items using a custom payload generated with <a target="_blank" href="%1$s">ScratchPad</a>.', 'amazon-auto-links' ),
+            esc_url( 'https://webservices.amazon.com/paapi5/scratchpad/' )
+        );
     }
 
 }

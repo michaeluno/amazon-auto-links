@@ -22,55 +22,24 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products exte
     protected function _getArguments() {
         return array(
             'tab_slug'      => 'search_products',
-            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' )
-                . ' - ' . __( 'Product Search', 'amazon-auto-links' ),
+            'title'         => __( 'Add Unit by PA-API Product Search', 'amazon-auto-links' ),
             'description'   => __( 'Create a search unit.', 'amazon-auto-links' ),
         );
     }
 
-    protected function _construct( $oFactory ) {}
-    
     /**
-     * Triggered when the tab is loaded.
+     * @return array
+     * @since  3
+     * @since  5.0.0   Changed the visibility scope from private to protected.
      */
-    protected function _loadTab( $oFactory ) {
-      
-        // Add form fields
-        $oFactory->addSettingSections(
-            $this->sPageSlug, // target page slug
-            array(
-                'tab_slug'      => $this->sTabSlug,
-                'section_id'    => '_default', 
-                'description'   => array(
-                    __( 'Create a unit.', 'amazon-auto-links' ),
-                ),
-            )     
-        );        
-        
-        // Add Fields
-        $_aValues = $oFactory->getValue();
-        foreach( $this->___getFormFieldClasses() as $_sClassName ) {
-            $_oFields = new $_sClassName( $oFactory );
-            foreach( $_oFields->get( '', $_aValues ) as $_aField ) {
-                $oFactory->addSettingFields(
-                    '_default', // the target section id    
-                    $_aField
-                );
-            }                    
-        }
-        
+    protected function _getFormFieldClasses() {
+        return array(
+            'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
+            'AmazonAutoLinks_FormFields_Unit_Common',
+            'AmazonAutoLinks_FormFields_Unit_Credit',
+            'AmazonAutoLinks_FormFields_Unit_AutoInsert',
+            'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
+        );
     }
-        /**
-         * @return  array
-         */
-        private function ___getFormFieldClasses() {
-            return array(
-                'AmazonAutoLinks_FormFields_SearchUnit_ProductSearch',
-                'AmazonAutoLinks_FormFields_Unit_Common',
-                'AmazonAutoLinks_FormFields_Unit_Credit',                
-                'AmazonAutoLinks_FormFields_Unit_AutoInsert',
-                'AmazonAutoLinks_FormFields_SearchUnit_CreateButton',
-            );
-        }        
 
 }

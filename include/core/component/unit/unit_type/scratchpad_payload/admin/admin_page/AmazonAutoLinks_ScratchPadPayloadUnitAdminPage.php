@@ -12,7 +12,8 @@
 /**
  * Deals with the plugin admin pages.
  * 
- * @since       4.1.0
+ * @since      4.1.0
+ * @deprecated 5.0.0
  */
 final class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage extends AmazonAutoLinks_URLUnitAdminPage {
 

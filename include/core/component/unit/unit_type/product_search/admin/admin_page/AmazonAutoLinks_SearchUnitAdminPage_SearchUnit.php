@@ -23,21 +23,19 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
         $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ],
-            'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
+            'title'         => __( 'Add Unit by PA-API', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
+            'script'        => array(
+                array(
+                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
+                    'in_footer'     => true,
+                ),
+            ),
         );
     }
 
-    /**
-     * A user constructor.
-     *
-     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @since       3
-     * @return      void
-     */
-    protected function _construct( $oFactory ) {}
-    
     /**
      *
      * @param       AmazonAutoLinks_AdminPageFramework $oFactory
@@ -71,14 +69,26 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
         if ( ! AmazonAutoLinks_Option::getInstance()->isDebug( 'back_end' ) ) {
             return;
         }
-        echo "<h4>Debug</h4>"
-            . $oFactory->oDebug->get( 
-                $oFactory->oProp->aOptions 
-            );
-        echo "<h4>Last Inputs</h4>"
-            . $oFactory->oDebug->get(
-                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true )
-            );
+        $_aTableArguments = array(
+            'table' => array(
+                'class' => 'widefat striped fixed width-full',
+            ),
+            'td'    => array(
+                array( 'class' => 'width-one-fifth', ),  // first td
+            )
+        );
+        echo "<h3>Debug</h3>";
+        echo "<div class='aal-accordion'>"
+            . "<h4>Last Inputs</h4>"
+            . $this->getTableOfArray(
+                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ),
+                $_aTableArguments
+            )
+            . "</div>";
+        echo "<div class='aal-accordion'>"
+            . "<h4>Unit Options</h4>"
+            . $this->getTableOfArray( $oFactory->oProp->aOptions, $_aTableArguments )
+            . "</div>";
     }
         
 }
