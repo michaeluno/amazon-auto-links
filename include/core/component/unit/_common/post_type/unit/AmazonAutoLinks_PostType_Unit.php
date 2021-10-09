@@ -10,20 +10,21 @@
 
 /**
  * Creates Amazon Auto Links custom post type.
- * 
- * @package     Amazon Auto Links
- * @since       2.0.0
- * 
- * @filter      apply       aal_filter_admin_menu_name
+ *
+ * @since 2.0.0
  */
 class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostContent {
 
     /**
      * Used in the Manage Units page for action links and ajax calls.
-     * @var     string
-     * @since   3.7.6
+     * @var   string
+     * @since 3.7.6
      */
     protected $_sNonceKey = 'aal_unit_listing_table';
+    /**
+     * @var   string
+     * @since 3.7.6
+     */
     protected $_sNonce    = '';
 
     public function setUp() {
@@ -119,7 +120,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
             }
 
         /**
-         * @return      array       Label arguments.
+         * @return array Label arguments.
          */
         private function ___getLabels( $oOption ) {
             
@@ -159,9 +160,10 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 );
             
         }
+
     /**
      * Called when the edit.php of the post type starts loading.
-     * @since       3.3.5
+     * @since 3.3.5
      */
     public function load() {
 
@@ -252,7 +254,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
 
     }
         /**
-         * @since   3.7.6
+         * @since 3.7.6
          */
         public function replyToEmbedNonce() {
             echo "<input type='hidden' id='amazon-auto-links-nonce' value='" . esc_attr( $this->_sNonce ) . "' />";
@@ -260,13 +262,13 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
 
 
     /**
-     * @callback        filter      `enter_title_here`
+     * @callback add_filter() enter_title_here
      */
     public function replyToModifyTitleMetaBoxFieldLabel( $strText ) {
         return __( 'Set the unit name here.', 'amazon-auto-links' );        
     }
     /**
-     * @callback        action       `edit_form_after_title`
+     * @callback add_action() edit_form_after_title
      */
     public function replyToAddTextAfterTitle() {
         //@todo insert plugin news text headline.
@@ -274,7 +276,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         
     /**
      * Style for this custom post type pages
-     * @callback        filter      style_{class name}
+     * @callback add_filter() style_{class name}
+     * @return   string
      */
     public function style_AmazonAutoLinks_PostType_Unit() {
         $_sSpinnerURL    = admin_url( 'images/loading.gif' );
