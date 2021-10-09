@@ -11,14 +11,13 @@
 /**
  * Adds a setting page for creating tag units.
  * 
- * @since       3.5.0
- * @action      schedule        aal_action_unit_prefetch
+ * @since 3.5.0
  */
 class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
-     * @return  array
-     * @since   3.11.1
+     * @return array
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -31,7 +30,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
 
     /**
      * 
-     * @callback        action      load_{page slug}
+     * @callback add_action() load_{page slug}
      */ 
     public function replyToLoadPage( $oFactory ) {
 
@@ -53,6 +52,9 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         foreach( $this->___getFormFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
+                if ( 'associate_id' === $_aField[ 'field_id' ] ) {
+                    continue;
+                }
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
                     $_aField
@@ -77,8 +79,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         }
     
     /**
-     * 
-     * @callback        action      do_after_{page slug}
+     * @callback add_action() do_after_{page slug}
      */
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -92,8 +93,8 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
     }
     
     /**
-     * 
-     * @callback        filter      validation + _ + page slug
+     * @callback add_filter() validation + _ + page slug
+     * @return   array
      */
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 

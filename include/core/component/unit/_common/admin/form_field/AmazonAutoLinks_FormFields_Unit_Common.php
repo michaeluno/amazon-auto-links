@@ -114,7 +114,7 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
         $_aCreditFields = $_oCreditFields->get( $sFieldIDPrefix );             
         
         return array_merge(
-            $_aFields,          // comes first
+            $_aFields,         // comes first
             $_aCreditFields    // appended
         );    
         

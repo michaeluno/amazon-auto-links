@@ -11,11 +11,13 @@
 /**
  * Adds a setting page for creating tag units.
  * 
- * @since       3.2.0
- * @action      schedule        aal_action_unit_prefetch
+ * @since 3.2.0
  */
 class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage_Page_Base {
 
+    /**
+     * @var string
+     */
     public $sTabSlug = 'first';
 
     /**
@@ -96,9 +98,9 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             );
         }
         /**
-         * @since       3
-         * @since       4.0.0   Changed the scope to protected as the feed unit type extends this class and uses this method.
-         * @return      array
+         * @since  3
+         * @since  4.0.0   Changed the scope to protected as the feed unit type extends this class and uses this method.
+         * @return array
          */
         protected function _getFormFieldClasses() {
             return array(
@@ -111,8 +113,8 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         }
     
     /**
-     * @param           AmazonAutoLinks_AdminPageFramework $oFactory
-     * @callback        add_action      do_after_{page slug}
+     * @param    AmazonAutoLinks_AdminPageFramework $oFactory
+     * @callback add_action() do_after_{page slug}
      */
     public function replyToDoAfterPage( $oFactory ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -126,8 +128,8 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
     }
     
     /**
-     * 
-     * @callback        filter      validation + _ + page slug
+     * @callback add_filter()      validation + _ + page slug
+     * @return   array
      */
     public function validate( $aInput, $aOldInput, $oFactory, $aSubmitInfo ) {
 
@@ -144,7 +146,7 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             return $aOldInput;
         }        
         
-        // Check if a url iset.
+        // Check if a URL is set.
         $aInput[ 'urls' ] = $_oUtil->getAsArray( $aInput[ 'urls' ] );
         if ( empty( $aInput[ 'urls' ] ) ) {
             $_aErrors[ 'urls' ] = __( 'Please set a url.', 'amazon-auto-links' );
