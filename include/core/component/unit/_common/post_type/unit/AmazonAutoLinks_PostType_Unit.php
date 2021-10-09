@@ -280,9 +280,9 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
      * @return   string
      */
     public function style_AmazonAutoLinks_PostType_Unit() {
-        $_sSpinnerURL    = admin_url( 'images/loading.gif' );
+        $_sSpinnerURL    = esc_url( admin_url( 'images/loading.gif' ) );
         $_sUnitPostType  = AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
-        $_sScreenIconURL = AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" );
+        $_sScreenIconURL = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ) );
         return <<<CSS
 #icon-edit.icon32.icon32-posts-{$_sUnitPostType} {
     background:url('{$_sScreenIconURL}') no-repeat;

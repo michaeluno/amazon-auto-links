@@ -23,7 +23,7 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'main' ],
             'title'         => __( 'Settings', 'amazon-auto-links' ),
-            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'order'         => 50,
             'script'        => array(
                 array(

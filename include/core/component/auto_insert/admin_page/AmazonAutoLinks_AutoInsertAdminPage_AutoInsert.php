@@ -24,7 +24,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'auto_insert' ],
             'title'         => __( 'Add/Edit Auto-insert', 'amazon-auto-links' ),
-            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'show_in_menu'  => false,
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
             'script'        => array(

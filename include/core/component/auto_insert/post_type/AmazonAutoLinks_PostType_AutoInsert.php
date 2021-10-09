@@ -191,7 +191,7 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
                 display: {$_sNone};
             }
             #icon-edit.icon32.icon32-posts-" . AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ] . " {
-                background:url('" . AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ) . "') no-repeat;
+                background:url('" . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ) ) . "') no-repeat;
             } 
             /* Hide the submit button for the post type drop-down filter */
             #post-query-submit {

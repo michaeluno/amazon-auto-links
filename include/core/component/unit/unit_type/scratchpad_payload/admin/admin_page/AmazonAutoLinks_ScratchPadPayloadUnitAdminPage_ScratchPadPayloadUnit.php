@@ -25,7 +25,7 @@ class AmazonAutoLinks_ScratchPadPayloadUnitAdminPage_ScratchPadPayloadUnit exten
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
             'title'         => __( 'Add Unit by PA-API Custom Payload', 'amazon-auto-links' ),
-            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
         );

@@ -24,7 +24,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         return array(
             'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'contextual_unit' ],
             'title'         => __( 'Add Contextual Unit', 'amazon-auto-links' ),
-            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+            'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
         );
     }
