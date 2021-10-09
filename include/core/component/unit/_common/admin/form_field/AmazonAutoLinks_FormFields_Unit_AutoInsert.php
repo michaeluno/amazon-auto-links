@@ -26,7 +26,7 @@ class AmazonAutoLinks_FormFields_Unit_AutoInsert extends AmazonAutoLinks_FormFie
                     0        => __( 'Off', 'amazon-auto-links' ),
                 ),
                 'description'   => __( 'Set it On to insert product links into post and pages automatically. More advanced options can be configured later.', 'amazon-auto-links' ),
-                'default'       => 1,
+                'default'       => false,
             ),        
         );
     }
