@@ -38,13 +38,14 @@ class AmazonAutoLinks_FormFields_SearchUnit_SearchType extends AmazonAutoLinks_F
                     $this->getAPIAuthenticationPageURL()
                 ),
                 'default'           => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
-            ),                
-            array(
-                'field_id'          => $sFieldIDPrefix . 'associate_id',
-                'type'              => 'text',
-                'title'             => __( 'Associate ID', 'amazon-auto-links' ),
-                'description'       => 'e.g. <code>miunosoft-20</code>',
-            ),        
+            ),
+            // @deprecated 5.0.0
+            // array(
+            //     'field_id'          => $sFieldIDPrefix . 'associate_id',
+            //     'type'              => 'text',
+            //     'title'             => __( 'Associate ID', 'amazon-auto-links' ),
+            //     'description'       => 'e.g. <code>miunosoft-20</code>',
+            // ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'Operation',
                 'type'              => 'radio',

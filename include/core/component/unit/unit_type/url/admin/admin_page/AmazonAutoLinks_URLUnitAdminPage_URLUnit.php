@@ -67,6 +67,9 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
         foreach( $this->_getFormFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
+                if ( 'associate_id' === $_aField[ 'field_id' ] ) {
+                    continue;
+                }
                 $oFactory->addSettingFields(
                     '_default', // the target section id    
                     $_aField
@@ -152,12 +155,9 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
             $_aErrors[ 'urls' ] = __( 'Please set a url.', 'amazon-auto-links' );
             $_bVerified = false;
         }
-                
-        if ( empty( $aInput[ 'associate_id' ] ) ) {
-            $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
-            $_bVerified = false;
-        }
-        
+
+        $aInput[ 'associate_id' ] = $_oOption->getAssociateID( $aInput[ 'country' ] );
+
         // An invalid value is found.
         if ( ! $_bVerified ) {
         

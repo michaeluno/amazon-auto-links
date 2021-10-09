@@ -11,31 +11,28 @@
 /**
  * Adds the 'Category' form section to the 'Add Unit by Category' tab.
  * 
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformation extends AmazonAutoLinks_AdminPage_Section_Base {
     
     /**
      * A user constructor.
-     * 
-     * @since       3
-     * @return      void
+     * @since  3
      */
     protected function _construct( $oFactory ) {
-        
         add_filter(
             "validation_{$this->sPageSlug}_{$this->sTabSlug}",
             array( $this, 'validateTabForm' ),
             5,  // higher priority
-            4   // number of prameters
+            4   // number of parameters
         );    
     }
     
     /**
      * Adds form fields.
-     * @since       3
-     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @param       string $sSectionID
+     * @since 3
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
+     * @param string $sSectionID
      */
     protected function _addFields( $oFactory, $sSectionID ) {
         
@@ -48,7 +45,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
                     'field_id'      => 'unit_title',
                     'title'         => __( 'Unit Name', 'amazon-auto-links' ),
                     'type'          => 'text',
-                    'description'   => 'e.g. <code>My Unit</code>',
+                    'description'   => 'e.g. <code>My Category Unit</code>',
                     'class'         => array(
                         'input' => 'width-full',
                         'field' => 'width-half',
@@ -65,34 +62,29 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
         );
         
         foreach( $_aFields as $_aField ) {
+            if ( 'associate_id' === $_aField[ 'field_id' ] ) {
+                continue;
+            }
             $oFactory->addSettingFields(
                 $sSectionID, // the target section id    
                 $_aField
             );
         }
-                        
-        
+
     }
            
     
     /**
      * Validates the submitted form data.
      * 
-     * @since       3
+     * @since 3
      */
     public function validateTabForm( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
-    
-        $_bVerified = true;
-        $_aErrors   = array();
 
-        $aInput[ 'associate_id' ] = trim( $aInput[ 'associate_id' ] );
-        if ( empty( $aInput[ 'associate_id' ] ) ) {
-            
-            $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
-            $_bVerified = false;
-            
-        }
-            
+        $_oOption   = AmazonAutoLinks_Option::getInstance();
+
+        $aInput[ 'associate_id' ] = $_oOption->getAssociateID( $aInput[ 'country' ] );
+
         // Evacuate some extra field items.
         $_aInputTemp = $aInput;
             
@@ -101,17 +93,8 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First_BasicInformatio
             null,   // unit id
             $aInput
         );
-        $aInput = $_oUnitOptions->get() + $_aInputTemp;
-        
-        // An invalid value is found. Set a field error array and an admin notice and return the old values.
-        if ( ! $_bVerified ) {
-            $oAdminPage->setFieldErrors( $_aErrors );     
-            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aInput;
-        }
+        return $_oUnitOptions->get() + $_aInputTemp;
 
-        return $aInput;     
-        
     }   
     
 }

@@ -98,7 +98,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
      */
     public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
-        $_bVerified       = true;
+        // $_bVerified       = true;
         $_aErrors         = array();
         $_oOption         = AmazonAutoLinks_Option::getInstance();
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
@@ -110,22 +110,18 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
         }        
-        
 
-        if ( empty( $aInputs[ 'associate_id' ] ) ) {
-            $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
-            $_bVerified = false;
-        }
-        
+        $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
+
         // An invalid value is found.
-        if ( ! $_bVerified ) {
-        
-            // Set the error array for the input fields.
-            $oFactory->setFieldErrors( $_aErrors );        
-            $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
-            return $aInputs;
-            
-        }        
+        // if ( ! $_bVerified ) {
+        //
+        //     // Set the error array for the input fields.
+        //     $oFactory->setFieldErrors( $_aErrors );
+        //     $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
+        //     return $aInputs;
+        //
+        // }
         
         $_bDoAutoInsert = $aInputs[ 'auto_insert' ];
 

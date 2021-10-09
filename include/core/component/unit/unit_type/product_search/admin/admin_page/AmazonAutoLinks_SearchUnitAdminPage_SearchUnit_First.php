@@ -83,17 +83,14 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         // Check the limitation.
         if ( $_oOption->isUnitLimitReached() ) {
 
-            // must set an field error array which does not yield empty so that it won't be redirected.
+            // must set a field error array which does not yield empty so that it won't be redirected.
             $oFactory->setFieldErrors( array( 'error' ) );        
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
             
         }   
-        
-        if ( empty( $aInputs[ 'associate_id' ] ) ) {
-            $_aErrors[ 'associate_id' ] = __( 'The associate ID cannot be empty.', 'amazon-auto-links' );
-            $_bVerified = false;
-        }        
+
+        $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
 
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
