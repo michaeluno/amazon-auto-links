@@ -44,7 +44,9 @@ class AmazonAutoLinks_PostType_AutoInsert extends AmazonAutoLinks_PostType_AutoI
                 'menu_position'         => 120,
                 'supports'              => array( 'title' ),    // 'supports' => array( 'title', 'editor', 'comments', 'thumbnail' ),    // 'custom-fields'
                 'taxonomies'            => array( '' ),
-                'menu_icon'             => AmazonAutoLinks_Registry::getPluginURL( 'asset/image/menu_icon_16x16.png' ),
+                'menu_icon'             => $this->oProp->bIsAdmin
+                    ? AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/icon/menu_icon_16x16.png', true )
+                    : null,
                 'has_archive'           => false,
                 'hierarchical'          => false,
                 'show_admin_column'     => true,

@@ -48,7 +48,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 'supports'              => array( 'title' ),
                 'taxonomies'            => array( '' ),
                 'menu_icon'             => $this->oProp->bIsAdmin
-                    ? AmazonAutoLinks_Registry::getPluginURL( 'asset/image/menu_icon_16x16.png' )
+                    ? AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/icon/menu_icon_16x16.png', true )
                     : null,
                 'hierarchical'          => false,
                 'show_admin_column'     => true,
