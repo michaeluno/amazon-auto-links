@@ -75,21 +75,7 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
                 'AmazonAutoLinks_FormFields_ContextualUnit_Submit',
             );
         }
-    
-    /**
-     * @callback add_action() do_after_{page slug}
-     */
-    public function replyToDoAfterPage( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug( 'back_end' ) ) {
-            return;
-        }
-        echo "<p>Debug</p>"
-            . $oFactory->oDebug->get( 
-                $oFactory->oProp->aOptions 
-            );       
-    }
-    
+
     /**
      * @callback add_filter() validation + _ + page slug
      * @return   array

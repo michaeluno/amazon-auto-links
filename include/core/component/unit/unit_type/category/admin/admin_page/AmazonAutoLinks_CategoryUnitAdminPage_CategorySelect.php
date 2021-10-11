@@ -26,14 +26,6 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
             'title'         => __( 'Add Unit by Category', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
-            // 'show_in_menu'  => false,
-            'script'        => array(
-                array(
-                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
-                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
-                    'in_footer'     => true,
-                ),
-            ),
         );
     }
 
@@ -64,21 +56,6 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect extends AmazonAutoLin
         }
  
     public function replyToDoPage( $oFactory ) {}
-    public function replyToDoAfterPage( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug( 'back_end' ) ) {
-            return;
-        }
-        echo "<hr />";
-        echo "<div class='aal-accordion'>"
-                . "<h3>"
-                   . 'Debug: Form Options'
-                . "</h3>"
-                . "<div>" . $oFactory->oDebug->get(
-                    // $oFactory->oProp->aOptions
-                    $oFactory->getSavedOptions()
-                ) . "</div>"
-            . "</div>";
-      
-    }
+    public function replyToDoAfterPage( $oFactory ) {}
+
 }

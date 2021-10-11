@@ -26,13 +26,6 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
             'title'         => __( 'Add Unit by PA-API', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
-            'script'        => array(
-                array(
-                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
-                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
-                    'in_footer'     => true,
-                ),
-            ),
         );
     }
 
@@ -55,40 +48,9 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
     }
 
         private function ___doPageSettings() {
-            
             $this->oFactory->setPageHeadingTabsVisibility( false );
             $this->oFactory->setPageTitleVisibility( false ); 
             $this->oFactory->setInPageTabsVisibility( false );
-            
         }
 
-    /**
-     * @param AmazonAutoLinks_AdminPageFramework $oFactory
-     */
-    protected function _doAfterPage( $oFactory ) {
-        if ( ! AmazonAutoLinks_Option::getInstance()->isDebug( 'back_end' ) ) {
-            return;
-        }
-        $_aTableArguments = array(
-            'table' => array(
-                'class' => 'widefat striped fixed width-full',
-            ),
-            'td'    => array(
-                array( 'class' => 'width-one-fifth', ),  // first td
-            )
-        );
-        echo "<h3>Debug</h3>";
-        echo "<div class='aal-accordion'>"
-            . "<h4>Last Inputs</h4>"
-            . $this->getTableOfArray(
-                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ),
-                $_aTableArguments
-            )
-            . "</div>";
-        echo "<div class='aal-accordion'>"
-            . "<h4>Unit Options</h4>"
-            . $this->getTableOfArray( $oFactory->oProp->aOptions, $_aTableArguments )
-            . "</div>";
-    }
-        
 }

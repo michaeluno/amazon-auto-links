@@ -27,13 +27,6 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'show_in_menu'  => false,
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
-            'script'        => array(
-                array(
-                    'src'           => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
-                    'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
-                    'in_footer'     => true,
-                ),
-            ),
         );
     }
 
@@ -76,17 +69,5 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert extends AmazonAutoLinks_Adm
         $oFactory->setInPageTabsVisibility( false );      
       
     }
- 
-    public function replyToDoAfterPage( $oFactory ) {
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isDebug( 'back_end' ) ) {
-            return;
-        }
-        echo "<div class='aal-accordion'>"
-            . "<h3>Debug</h3>"
-            . "<div>" . $oFactory->oDebug->get(
-                $oFactory->oProp->aOptions 
-            ) . "</div>"
-            . "</div>";
-    }
+
 }

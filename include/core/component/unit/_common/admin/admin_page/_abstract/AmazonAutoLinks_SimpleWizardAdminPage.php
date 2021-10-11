@@ -26,7 +26,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'setOptions' ) );
         add_action( 'load_' . $this->oProp->sClassName, array( $this, 'replyToRegisterFieldTypes' ) );
         add_action( 'load_' . $this->oProp->sClassName, array( $this, 'doPageSettings' ) );
-                
+        add_action( "do_after_{$this->oProp->sClassName}", array( $this, 'replyToDoAfterPage' ) );
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setCapability( $_oOption->get( array( 'capabilities', 'setting_page_capability' ), 'manage_options' ) );
@@ -43,6 +43,14 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         $this->setPageTitleVisibility( true ); // disable the page title of a specific page.
         $this->_addPages();
         $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
+        $this->enqueueScript( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/js/accordion.js',
+            '',
+            '',
+            array(
+                'dependencies'  => array( 'jquery', 'jquery-ui-accordion', ),
+                'in_footer'     => true,
+            )
+        );
     }
 
     /**
@@ -110,5 +118,39 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
      * @since 3
      */
     public function doPageSettings() {}
-        
+
+    /**
+     * @since 5.0.0
+     */
+    public function replyToDoAfterPage() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( ! $_oOption->isDebug( 'back_end' ) ) {
+            return;
+        }
+        echo "<hr />";
+        $_aTableArguments = array(
+            'table' => array(
+                'class' => 'widefat striped fixed width-full',
+            ),
+            'td'    => array(
+                array( 'class' => 'width-one-fifth', ),  // first td
+            )
+        );
+        echo "<div class='aal-accordion'>"
+            . "<h4>Last Inputs</h4>"
+            . $this->oUtil->getTableOfArray(
+                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ),
+                $_aTableArguments
+            )
+            . "</div>";
+        echo "<div class='aal-accordion'>"
+                . "<h3>"
+                   . 'Debug: Form Options'
+                . "</h3>"
+                . "<div>"
+                    . $this->oUtil->getTableOfArray( $this->getSavedOptions(), $_aTableArguments )
+                . "</div>"
+            . "</div>";
+    }
+
 }
