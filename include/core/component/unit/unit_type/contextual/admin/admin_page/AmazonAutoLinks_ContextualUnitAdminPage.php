@@ -10,34 +10,18 @@
 
 
 /**
- * Deals with the plugin admin pages.
+ * Adds admin pages for the contextual unit type.
  * 
- * @since       3.5.0
+ * @since 3.5.0
  */
 final class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
-     * Sets up admin pages.
+     * Adds admin pages.
+     * @since 5.0.0
      */
-    public function setUp() {
-        
-        // Page group root.
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
-                    
-        // Add pages
+    protected function _addPages() {
         new AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit( $this );
-     
-    }
-        
-    /**
-     * Page styling
-     * @since       3
-     * @return      void
-     */
-    public function doPageSettings() {                
-        $this->setPageTitleVisibility( true ); // disable the page title of a specific page.   
     }
         
 }

@@ -35,6 +35,24 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
     }
 
     /**
+     * Sets up admin pages.
+     * @since 5.0.0
+     */
+    public function setUp() {
+        $this->setRootMenuPageBySlug( 'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
+        $this->setInPageTabTag( 'h2' );
+        $this->setPageTitleVisibility( true ); // disable the page title of a specific page.
+        $this->_addPages();
+        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
+    }
+
+    /**
+     * @since  5.0.0
+     * @remark Extend this method in an extended class.
+     */
+    protected function _addPages() {}
+
+    /**
      * Sets the default option values for the setting form.
      * @callback add_filter() options_{class name}
      * @return   array        The options array.

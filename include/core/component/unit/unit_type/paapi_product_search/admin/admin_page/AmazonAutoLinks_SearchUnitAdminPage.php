@@ -8,45 +8,28 @@
  * Copyright (c) 2013-2021 Michael Uno
  */
 
-
 /**
  * Deals with the plugin admin pages.
  * 
- * @since       3
+ * @since 3
  */
 final class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
-     * Sets up admin pages.
+     * Adds admin pages.
+     * @since 5.0.0
      */
-    public function setUp() {
-        
-        // Page group root.
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
-                    
-        // Add pages
+    protected function _addPages() {
         new AmazonAutoLinks_SearchUnitAdminPage_SearchUnit( $this );
-        
     }
-    /**
-     * Registers custom filed types of Admin Page Framework.
-     */
-    public function registerFieldTypes() {}
-    
+
     /**
      * Page styling
-     * @since       3
-     * @return      void
+     * @since 3
      */
     public function doPageSettings() {
-
         $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-        $this->setInPageTabTag( 'h2' );                
         $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-
     }
         
 }

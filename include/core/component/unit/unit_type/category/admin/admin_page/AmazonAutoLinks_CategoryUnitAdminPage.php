@@ -12,7 +12,7 @@
 /**
  * Deals with the plugin admin pages.
  * 
- * @since       3
+ * @since 3
  */
 final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
@@ -47,8 +47,8 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
         
     /**
      * Sets the default option values for the setting form.
-     * @callback    filter      `options_{class name}`
-     * @return      array       The options array.
+     * @callback add_filter() options_{class name}
+     * @return   array        The options array.
      */
     public function setOptions( $aOptions ) {
 
@@ -71,46 +71,30 @@ final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Simple
         }
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        
-        $_aOptions = $aOptions 
+        return $aOptions
             + $_aOptions
             + $_aUnitOptions
             + $this->_getLastUnitInputs()
             + $_oOption->get( 'unit_default' )  // 3.4.0+
             ;
-        return $_aOptions;
         
     }
-        
-    /**
-     * Sets up admin pages.
-     */
-    public function setUp() {
-        
-        $this->setRootMenuPageBySlug( 'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
-                    
-        // Add pages
-        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect( $this );
 
+    /**
+     * Adds admin pages.
+     * @since 5.0.0
+     */
+    protected function _addPages() {
+        new AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect( $this );
     }
 
     /**
      * Page styling
-     * @since       3
-     * @return      void
+     * @since 3
      */
     public function doPageSettings() {
-                    
         $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-        $this->setInPageTabTag( 'h2' );                
-        
-        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-                
-        // @todo examine whether this is necessary or not.            
-        $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
-
+        $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );
     }
 
-    public function load() {}
-        
 }

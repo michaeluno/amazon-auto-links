@@ -8,11 +8,10 @@
  * Copyright (c) 2013-2021 Michael Uno
  */
 
-
 /**
  * Deals with the plugin admin pages of Auto-insert.
  * 
- * @since       3
+ * @since 3
  */
 final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
@@ -100,8 +99,8 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
         
     /**
      * Sets the default option values for the setting form.
-     * @callback    filter      `options_{class name}`
-     * @return      array       The options array.
+     * @callback add_filter() options_{class name}
+     * @return   array        The options array.
      */
     public function setOptions( $aOptions ) {
         
@@ -113,21 +112,13 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
         return $aOptions + $_aUnitOptions + self::$aStructure_AutoInsertDefaultOptions;
      
     }
-
-    /**
-     * Sets up admin pages.
+        /**
+     * @since 5.0.0
      */
-    public function setUp() {
-        
-        // Page group root.
-        $this->setRootMenuPageBySlug( 
-            'edit.php?post_type=' . AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
-                    
-        // Add pages
+    protected function _addPages() {
         new AmazonAutoLinks_AutoInsertAdminPage_AutoInsert( $this );
-        
     }
+
     /**
      * Registers custom filed types of Admin Page Framework.
      */
@@ -135,16 +126,8 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
     
     /**
      * Page styling
-     * @since       3
-     * @return      void
+     * @since 3
      */
-    public function doPageSettings() {
-                    
-        $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-        $this->setInPageTabTag( 'h2' );                
-   
-        $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-                    
-    }
+    public function doPageSettings() {}
         
 }
