@@ -21,7 +21,7 @@ class AmazonAutoLinks_ScratchPadUnit_Admin_Page {
      * Sets up properties and hooks.
      */
     public function __construct() {
-        $this->sPageSlug = AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ];
+        $this->sPageSlug = AmazonAutoLinks_Registry::$aAdminPages[ 'paapi_search_unit' ];
         add_action( 'load_' . $this->sPageSlug, array( $this, 'replyToLoadPage' ), 20 );
     }
 

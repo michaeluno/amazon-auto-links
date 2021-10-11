@@ -22,7 +22,7 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit extends AmazonAutoLinks_Adm
     protected function _getArguments() {
         $_oOption = AmazonAutoLinks_Option::getInstance();
         return array(
-            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'search_unit' ],
+            'page_slug'     => AmazonAutoLinks_Registry::$aAdminPages[ 'paapi_search_unit' ],
             'title'         => __( 'Add Unit by PA-API', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),

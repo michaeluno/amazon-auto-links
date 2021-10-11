@@ -58,12 +58,6 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
         if ( $aInputs[ 'Operation' ] !== $this->_sPAAPIOperation ) {
             return $sURL;
         }
-        // $_aQuery = array(
-        //     'page' => AmazonAutoLinks_Registry::$aAdminPages[ 'scratchpad_payload' ],
-        // ) + $this->getHTTPQueryGET();
-        // unset( $_aQuery[ 'tab' ] );
-        // return add_query_arg( $_aQuery, $aInputs[ 'bounce_url' ] );
-
         return add_query_arg(
             array(
                 'tab'          => 'custom_payload',
