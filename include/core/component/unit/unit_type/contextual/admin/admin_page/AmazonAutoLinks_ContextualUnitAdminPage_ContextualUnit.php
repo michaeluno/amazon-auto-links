@@ -34,8 +34,6 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
      */ 
     public function replyToLoadPage( $oFactory ) {
 
-        new AmazonAutoLinks_Select2CustomFieldType( $oFactory->oProp->sClassName );
-
         // Form Section - we use the default one ('_default'), meaning no section.
         $oFactory->addSettingSections(
             $this->sPageSlug, // target page slug

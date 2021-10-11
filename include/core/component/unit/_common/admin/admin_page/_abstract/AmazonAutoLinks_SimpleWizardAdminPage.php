@@ -102,6 +102,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
      */
     public function replyToRegisterFieldTypes() {
         new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
+        new AmazonAutoLinks_Select2CustomFieldType( $this->oProp->sClassName );
     }
 
     /**

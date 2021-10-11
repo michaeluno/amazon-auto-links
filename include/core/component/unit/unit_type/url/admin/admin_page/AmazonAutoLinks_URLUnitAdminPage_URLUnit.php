@@ -41,8 +41,6 @@ class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_AdminPage
      */ 
     public function replyToLoadPage( $oFactory ) {
 
-        new AmazonAutoLinks_Select2CustomFieldType( $oFactory->oProp->sClassName );
-
         // Form Section - we use the default one ('_default'), meaning no section.
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $oFactory->addInPageTabs(
