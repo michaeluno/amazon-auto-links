@@ -24,7 +24,6 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
             return;
         }     
         add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'setOptions' ) );
-        add_action( 'set_up_' . $this->oProp->sClassName, array( $this, 'registerFieldTypes' ) );
         add_action( 'load_' . $this->oProp->sClassName, array( $this, 'replyToRegisterFieldTypes' ) );
         add_action( 'load_' . $this->oProp->sClassName, array( $this, 'doPageSettings' ) );
                 
@@ -104,12 +103,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
     public function replyToRegisterFieldTypes() {
         new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
     }
-        
-    /**
-     * Registers custom filed types of Admin Page Framework.
-     */
-    public function registerFieldTypes() {}
-    
+
     /**
      * Page styling
      * @since 3

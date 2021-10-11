@@ -120,11 +120,6 @@ final class AmazonAutoLinks_AutoInsertAdminPage extends AmazonAutoLinks_SimpleWi
     }
 
     /**
-     * Registers custom filed types of Admin Page Framework.
-     */
-    public function registerFieldTypes() {}
-    
-    /**
      * Page styling
      * @since 3
      */
