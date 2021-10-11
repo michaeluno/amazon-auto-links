@@ -68,9 +68,10 @@ abstract class AmazonAutoLinks_AdminPage_RootBase extends AmazonAutoLinks_Plugin
     protected function _construct( $oFactory ) {}
 
 
-    protected function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
         return $this->_validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
     }
+
     /**
      * @param $aInputs
      * @param $aOldInputs
