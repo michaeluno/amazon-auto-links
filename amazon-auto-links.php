@@ -186,7 +186,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         'category_select'          => 'aal_add_category_unit',             // Add Unit by Category
         'auto_insert'              => 'aal_define_auto_insert',            // Add Auto-insert
         'tag_unit'                 => 'aal_add_tag_unit',                  // Add Unit by Tag
-        'paapi_search_unit'        => 'aal_add_search_unit',               // Add Unit by PA-API Search
+        'paapi_search_unit'        => 'aal_add_paapi_unit',                // Add Unit by PA-API Search
         'url_unit'                 => 'aal_add_url_unit',                  // 3.2.0+
         'feed_unit'                => 'aal_add_feed_unit',                 // 4.0.0+
         'contextual_unit'          => 'aal_add_contextual_unit',           // 3.5.0+
