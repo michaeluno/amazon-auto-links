@@ -185,8 +185,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                     ? AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css'
                     : AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.min.css',
                 $_bDebugMode
-                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/css/aal-unit-post-type.css'
-                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/css/aal-unit-post-type.min.css',
+                    ? AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/css/aal-unit-post-type.css'
+                    : AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/css/aal-unit-post-type.min.css',
             )
         );
 
@@ -205,8 +205,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $this->enqueueScripts(
             array(
                 $_bDebugMode
-                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.js'
-                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units.min.js',
+                    ? AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/js/manage-units.js'
+                    : AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/js/manage-units.min.js',
             ),
             array(
                 'handle_id'     => 'aalManageUnits',
@@ -234,8 +234,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $this->enqueueScripts(
             array(
                 $_bDebugMode
-                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
-                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
+                    ? AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/js/manage-units-unit-status-updater.js'
+                    : AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/js/manage-units-unit-status-updater.min.js',
             ),
             array(
                 'handle_id'     => 'aalUnitStatusUpdater',

@@ -59,7 +59,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     // 'min' => 1, // <-- not sure this horizontally diminishes the input element
                 ),
                'after_input'       => "<div style='margin:auto; width:100%; clear: both;'>"
-                        . "<img src='" . AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/columns.gif', true ) . "' title='" . __( 'The number of columns', 'amazon-auto-links' ) . "' style='width:220px; margin-top: 8px;' alt='" . esc_attr( __( 'Columns', 'amazon-auto-links' ) ) . "' />"
+                        . "<img src='" . AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/columns.gif', true ) . "' title='" . __( 'The number of columns', 'amazon-auto-links' ) . "' style='width:220px; margin-top: 8px;' alt='" . esc_attr( __( 'Columns', 'amazon-auto-links' ) ) . "' />"
                     . "</div>",
                 'tip'               => __( 'This option requires a column supported template to be activated.', 'amazon-auto-links' ),
                 'description'       => $_iMaxCol > 1 

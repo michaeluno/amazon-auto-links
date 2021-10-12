@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       3.3.0
 */
-class AmazonAutoLinks_UnitTypesLoader extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores class names of common form fields among all the unit types.

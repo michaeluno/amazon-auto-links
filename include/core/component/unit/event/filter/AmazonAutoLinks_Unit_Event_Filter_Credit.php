@@ -51,7 +51,7 @@ class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUti
     public function replyToGetCreditLink_1( $sCredit, $oOption ) {
         $_sVendorURL = $this->___getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ) );
+        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ) );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
                 . "<a href='{$_sVendorURL}' target='_blank'>"
@@ -62,7 +62,7 @@ class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUti
     public function replyToGetCreditLink_2( $sCredit, $oOption ) {
         $_sVendorURL = $this->___getVendorURL( $oOption );
         $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ) );
+        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ) );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
                 . "<a href='{$_sVendorURL}' target='_blank'>"

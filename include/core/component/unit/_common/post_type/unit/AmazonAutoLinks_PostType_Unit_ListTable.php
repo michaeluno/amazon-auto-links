@@ -309,8 +309,8 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
             $_sQueryKey   = $_oOption->get( 'query', 'cloak' );
             $_sImgURL     = AmazonAutoLinks_Registry::getPluginURL(
                 'rss2' === $sType
-                    ? AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/rss16x16.gif'
-                    : AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/json16x16.gif',
+                    ? AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/rss16x16.gif'
+                    : AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/json16x16.gif',
                 true
             );
             return "<span class='feed-icon'>"

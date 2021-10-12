@@ -410,7 +410,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script(
             $_sScriptHandle,
-            $this->getSRCFromPath( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
+            $this->getSRCFromPath( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/js/' . $_sFileBaseName ),
             array( 'jquery' ),
             false,
             true

@@ -891,7 +891,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
         if ( ! self::getElement( $aProduct, 'is_prime' ) ) {
             return '';
         }
-        $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_UnitLoader::$sDirPath . '/asset/image/unit/prime.gif', true );
+        $_sPrimeImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/unit/prime.gif', true );
         $_oSVGRatingStar = new AmazonAutoLinks_SVGGenerator_PrimeIcon( $bUseSVGCache, __( 'Available for Amazon Prime', 'amazon-auto-links' ), $_sPrimeImageURL );
         return "<span class='amazon-prime'>"
                 . $_oSVGRatingStar->get()

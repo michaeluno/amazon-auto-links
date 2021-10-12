@@ -10,24 +10,23 @@
 
 /**
  * Loads the unit component.
- *  
- * @package     Amazon Auto Links
- * @since       4.3.0
+ *
+ * @since 4.3.0
 */
-class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stored the component directory path.
      *
      * Referred to enqueue resources.
      *
-     * @var string
-     * @since   4.3.0
+     * @var   string
+     * @since 4.3.0
      */
     static public $sDirPath = '';
 
     /**
-     * AmazonAutoLinks_UnitLoader constructor.
+     * Loads the unit component.
      *
      * @param string $sScriptPath the plugin main file path.
      */
@@ -44,7 +43,7 @@ class AmazonAutoLinks_UnitLoader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_PostType_UnitPreview;
 
         // Unit Types
-        new AmazonAutoLinks_UnitTypesLoader( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitTypes_Loader( $sScriptPath );
 
         // [4.4.0] PA-API Request Counter
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader;
