@@ -27,8 +27,6 @@ class AmazonAutoLinks_Log_Error_Loader extends AmazonAutoLinks_PluginUtility {
     static public $sDirPath = '';
 
     /**
-     * AmazonAutoLinks_UnitLoader constructor.
-     *
      */
     public function __construct() {
 
