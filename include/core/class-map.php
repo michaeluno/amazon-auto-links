@@ -444,7 +444,7 @@ return array(
     "AmazonAutoLinks_SVGGenerator_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/svg/AmazonAutoLinks_SVGGenerator_Base.php", 
     "AmazonAutoLinks_SVGGenerator_PrimeIcon" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/svg/AmazonAutoLinks_SVGGenerator_PrimeIcon.php", 
     "AmazonAutoLinks_SVGGenerator_RatingStar" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/utility/svg/AmazonAutoLinks_SVGGenerator_RatingStar.php", 
-    "AmazonAutoLinks_UnitTypeLoader_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_UnitTypeLoader_Base.php", 
+    "AmazonAutoLinks_Unit_UnitType_Loader_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/_abstract/AmazonAutoLinks_Unit_UnitType_Loader_Base.php", 
     "AmazonAutoLinks_Widget_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/AmazonAutoLinks_Widget_Utility.php", 
     "AmazonAutoLinks_WidgetsLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/AmazonAutoLinks_WidgetsLoader.php", 
     "AmazonAutoLinks_WidgetByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/widget/by_unit/AmazonAutoLinks_WidgetByID.php", 

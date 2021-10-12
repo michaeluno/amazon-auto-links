@@ -17,7 +17,7 @@
  * @package     Amazon Auto Links
  * @since       4.0.0
 */
-class AmazonAutoLinks_UnitTypeLoader_embed extends AmazonAutoLinks_UnitTypeLoader_Base {
+class AmazonAutoLinks_UnitTypeLoader_embed extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.

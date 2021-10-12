@@ -12,8 +12,9 @@
  * Loads a particular unit type.
  *
  * @since 3.3.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_Base`.
 */
-class AmazonAutoLinks_UnitTypeLoader_Base extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores each unit type component directory path.

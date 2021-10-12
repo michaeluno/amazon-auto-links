@@ -14,7 +14,7 @@
  * @package     Amazon Auto Links
  * @since       3.3.0
 */
-class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoader_Base {
+class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
@@ -129,7 +129,7 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_UnitTypeLoad
      * @remark Shortcode argument keys are all lower-case.
      * @since  3.4.6
      * @since  3.5.0  Moved from `AmazonAutoLinks_Output`.
-     * @since  5.0.0  Moved from `AmazonAutoLinks_UnitTypeLoader_Base`.
+     * @since  5.0.0  Moved from `AmazonAutoLinks_Unit_UnitType_Loader_Base`.
      * @return string
      * @param  array  $aArguments
      */
