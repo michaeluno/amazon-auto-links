@@ -80,30 +80,19 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
 
     /**
      * Sorts items.
-     * @remark      Overriding the method in the `AmazonutoLinks_Unit_search` class.
-     * @since       3.2.1
-     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_url`.
-     * @return      array
-     * @param       array $aResponse
+     * @remark Overriding the method in the `AmazonutoLinks_Unit_search` class.
+     * @since  3.2.1
+     * @since  3.5.0 Moved from `AmazonAutoLinks_UnitOutput_url`.
+     * @return array
+     * @param  array $aResponse
      */
     protected function getProducts( $aResponse ) {
-
-        $_sSortType = $this->oUnitOption->get(
-            array( '_sort' ),  // dimensional path
-            'raw'   // default
-        );
-
         $_aProducts = parent::getProducts( $aResponse );
-
-        /*
-         * 'title'             => __( 'Title', 'amazon-auto-links' ),
-         * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
-         * 'random'            => __( 'Random', 'amazon-auto-links' ),
-         * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
-         */
-        $_sMethodName = "_getItemsSorted_{$_sSortType}";
-        return $this->{$_sMethodName}( $_aProducts );
-
+        $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort(
+            $_aProducts,
+            $this->oUnitOption->get( array( '_sort' ), 'raw' )
+        );
+        return $_oSorter->get();
     }
 
     /**

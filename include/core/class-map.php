@@ -427,6 +427,7 @@ return array(
     "AmazonAutoLinks_UnitOutput_Base_ElementFormat" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base_ElementFormat.php", 
     "AmazonAutoLinks_UnitOutput_Base_ProductFilter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base_ProductFilter.php", 
     "AmazonAutoLinks_UnitOutput_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/utility/AmazonAutoLinks_UnitOutput_Utility.php", 
+    "AmazonAutoLinks_Unit_Output_Sort" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/_abstract/utility/AmazonAutoLinks_Unit_Output_Sort.php", 
     "AmazonAutoLinks_PostType_Unit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit.php", 
     "AmazonAutoLinks_PostType_Unit_ListTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php", 
     "AmazonAutoLinks_PostType_Unit_PostContent" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_PostContent.php", 

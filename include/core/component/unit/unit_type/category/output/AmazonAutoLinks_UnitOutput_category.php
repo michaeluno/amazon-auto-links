@@ -98,8 +98,8 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
          */
         protected function _getProductsSorted( $aProducts ) {
             $_sSortType   = $this->___getSortOrder();
-            $_sMethodName = "_getItemsSorted_{$_sSortType}";
-            return $this->{$_sMethodName}( $aProducts );
+            $_oSorter     = new AmazonAutoLinks_Unit_Output_Sort( $aProducts, $_sSortType );
+            return $_oSorter->get();
         }
             /**
              * Gets the sort type.
