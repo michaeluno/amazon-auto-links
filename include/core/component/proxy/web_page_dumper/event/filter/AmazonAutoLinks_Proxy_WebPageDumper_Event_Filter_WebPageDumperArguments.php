@@ -11,7 +11,7 @@
 /**
  * Modifies arguments sent to Web Page Dumper.
  *
- * @since        4.5.0
+ * @since 4.5.0
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments extends AmazonAutoLinks_Proxy_WebPageDumper_Utility {
 
@@ -54,7 +54,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Filter_WebPageDumperArguments ex
         }
 
         if ( $this->isUserRatingURL( $sRequestURL ) ) {
-            $aArguments[ 'cache' ]  = 1;
+            $aArguments[ 'cache' ]  = 2;
             return $aArguments;
         }
 
