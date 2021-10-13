@@ -16,13 +16,6 @@
 abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_AdminPageFramework {
 
     /**
-     * Whether PA-API access is required or not.
-     * @since 5.0.0
-     * @var   boolean
-     */
-    public $bRequirePAAPI = false;
-
-    /**
      * User constructor.
      */
     public function start() {
@@ -58,15 +51,6 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
                 'in_footer'     => true,
             )
         );
-    }
-
-    /**
-     * @since 5.0.0
-     */
-    public function load() {
-        if ( $this->bRequirePAAPI ) {
-            AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
-        }
     }
 
     /**

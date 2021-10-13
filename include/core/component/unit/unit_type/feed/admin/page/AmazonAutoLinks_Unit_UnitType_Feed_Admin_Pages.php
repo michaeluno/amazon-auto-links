@@ -15,7 +15,7 @@
  * @since 4.0.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_FeedUnitAdminPage`.
  */
-final class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Pages extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Pages extends AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard {
 
     /**
      * @remark Added for extended classes.

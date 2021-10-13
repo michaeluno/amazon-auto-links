@@ -8,27 +8,27 @@
  * Copyright (c) 2013-2021 Michael Uno
  */
 
-
 /**
- * Adds admin pages for the contextual unit type.
+ * A base class to create simple wizard form pages for unit creation.
  * 
- * @since 3.5.0
+ * @since 5
  */
-final class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard {
+abstract class AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
      * Whether PA-API access is required or not.
      * @since 5.0.0
      * @var   boolean
      */
-    public $bRequirePAAPI = true;
+    public $bRequirePAAPI = false;
 
     /**
-     * Adds admin pages.
      * @since 5.0.0
      */
-    protected function _addPages() {
-        new AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit( $this );
+    public function load() {
+        if ( $this->bRequirePAAPI ) {
+            AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
+        }
     }
-        
+
 }

@@ -14,7 +14,7 @@
  * 
  * @since 3
  */
-final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_CategoryUnitAdminPage extends AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard {
 
     /**
      * User constructor.

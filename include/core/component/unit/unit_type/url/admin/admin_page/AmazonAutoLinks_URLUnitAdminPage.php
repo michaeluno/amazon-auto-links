@@ -15,7 +15,7 @@
  * @since  3.2.0
  * @since  5.0.0 Re-added the final scope as the feed unit type no longer extends this class.
  */
-final class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard {
 
     /**
      * Whether PA-API access is required or not.

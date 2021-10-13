@@ -13,7 +13,7 @@
  * 
  * @since 3
  */
-final class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_Unit_Admin_Page_UnitCreationWizard {
 
     /**
      * Whether PA-API access is required or not.
