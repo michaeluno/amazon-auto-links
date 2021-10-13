@@ -13,7 +13,7 @@
  * 
  * @since 3.2.0
  */
-class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_Unit_UnitType_AdminPages_Page_UnitCreationWizardBase {
+class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase {
 
     /**
      * @return array

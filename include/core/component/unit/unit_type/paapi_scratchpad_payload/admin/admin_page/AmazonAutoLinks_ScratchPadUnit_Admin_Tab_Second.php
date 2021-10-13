@@ -13,7 +13,7 @@
  * 
  * @since 5.0.0
  */
-class AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
+class AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second extends AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base {
 
     /**
      * @return array

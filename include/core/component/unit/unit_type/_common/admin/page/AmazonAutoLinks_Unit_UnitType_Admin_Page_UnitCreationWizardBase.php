@@ -13,7 +13,7 @@
  * 
  * @since 5.0.0
  */
-abstract class AmazonAutoLinks_Unit_UnitType_AdminPages_Page_UnitCreationWizardBase extends AmazonAutoLinks_AdminPage_Page_Base {
+abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
      * @var string

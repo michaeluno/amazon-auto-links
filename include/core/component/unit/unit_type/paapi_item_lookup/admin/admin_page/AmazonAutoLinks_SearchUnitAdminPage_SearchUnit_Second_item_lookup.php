@@ -13,7 +13,7 @@
  * 
  * @since 3
  */
-class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base {
+class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup extends AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base {
 
     /**
      * @return array

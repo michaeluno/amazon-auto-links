@@ -12,8 +12,9 @@
  * Provides some shared methods.
  * 
  * @since 3
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base`.
  */
-abstract class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_Base extends AmazonAutoLinks_AdminPage_Tab_Base {
+abstract class AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base extends AmazonAutoLinks_AdminPage_Tab_Base {
 
     /**
      * Triggered when the tab is loaded.
