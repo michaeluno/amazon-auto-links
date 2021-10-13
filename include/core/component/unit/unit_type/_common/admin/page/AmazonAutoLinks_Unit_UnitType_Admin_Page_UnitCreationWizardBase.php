@@ -17,8 +17,21 @@ abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase e
 
     /**
      * @var string
+     * @since 5.0.0
+     */
+    public $sUnitType = '';
+
+    /**
+     * @var string
      */
     public $sTabSlug = 'first';
+
+    /**
+     * Whether to add the Associate ID field.
+     * @var boolean
+     * @since 5.0.0
+     */
+    public $bAssociateIDField = false;
 
     /**
      * @return array
@@ -59,7 +72,7 @@ abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase e
         foreach( $this->_getFormFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName( $oFactory );
             foreach( $_oFields->get() as $_aField ) {
-                if ( 'associate_id' === $_aField[ 'field_id' ] ) {
+                if ( ! $this->bAssociateIDField && 'associate_id' === $_aField[ 'field_id' ] ) {
                     continue;
                 }
                 $oFactory->addSettingFields(
@@ -124,14 +137,19 @@ abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase e
             return $aOldInputs;
         }
 
-        $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
+        // The feed unit type does not have this field.
+        if ( isset( $aInputs[ 'country' ] ) ) {
+            $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
+        }
 
         $_bDoAutoInsert = $aInputs[ 'auto_insert' ];
 
         // Format the unit options to sanitize the data.
-        $_oUnitOptions = new AmazonAutoLinks_UnitOption_url( null, $aInputs );
+        $_sUnitType               = $this->getElement( $aInputs, array( 'unit_type' ), $this->sUnitType );
+        $_sUnitOptionClass        = "AmazonAutoLinks_UnitOption_{$_sUnitType}";
+        $_oUnitOptions            = new $_sUnitOptionClass( null, $aInputs );
         $aInputs                  = $_oUnitOptions->get();
-        $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( $aInputs[ 'unit_type' ] );
+        $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( $_sUnitType );
 
         // Store the inputs for the next time.
         update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInputs );

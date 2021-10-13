@@ -16,6 +16,12 @@
 class AmazonAutoLinks_URLUnitAdminPage_URLUnit extends AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase {
 
     /**
+     * @var   string
+     * @since 5.0.0
+     */
+    public $sUnitType = 'url';
+
+    /**
      * @return array
      * @since  3.11.1
      */

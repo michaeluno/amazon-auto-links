@@ -14,7 +14,19 @@
  * @since 4.0.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_FeedUnitAdminPage_FeedUnit`.
  */
-class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
+class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase {
+
+    /**
+     * @var string
+     * @since 5.0.0
+     */
+    public $sUnitType = 'feed';
+
+    /**
+     * @var boolean
+     * @since 5.0.0
+     */
+    public $bAssociateIDField = true;
 
     /**
      * @return  array
@@ -63,23 +75,14 @@ class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoL
     }
     
     /**
-     * 
-     * @callback        filter      validation + _ + page slug
+     * @callback add_filter() validation + _ + page slug
      */
-    public function validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
+    protected function _validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo ) {
 
         $_bVerified       = true;
         $_aErrors         = array();
         $_oOption         = AmazonAutoLinks_Option::getInstance();
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
 
-        // Check the limitation.
-        if ( $_oOption->isUnitLimitReached() ) {
-            $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
-            $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
-            return $aOldInputs;
-        }        
-        
         // Check if a url is set.
         $aInputs[ 'feed_urls' ] = $this->getAsArray( $aInputs[ 'feed_urls' ] );
         if ( empty( $aInputs[ 'feed_urls' ] ) ) {
@@ -101,48 +104,8 @@ class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoL
             return $aInputs;
             
         }        
-        
-        $_bDoAutoInsert = $aInputs[ 'auto_insert' ];
 
-        // Store the inputs for the next time.
-        update_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], $aInputs );
-
-        // Format the unit options to sanitize the data.
-        $_oUnitOptions = new AmazonAutoLinks_UnitOption_feed(
-            null,   // unit id
-            $aInputs
-        );
-        $aInputs                  = $_oUnitOptions->get();
-        $aInputs[ 'template_id' ] = $_oTemplateOption->getDefaultTemplateIDByUnitType( 'feed' );
-
-        // Create a unit post
-        $_iNewPostID = $this->insertPost( 
-            $aInputs,
-            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );
-                
-        // Create an auto insert
-        if ( $_bDoAutoInsert ) {
-            $this->createAutoInsert( $_iNewPostID );
-        }
-        
-        // Clean the temporary form options data.
-        $this->deleteTransient(
-            $GLOBALS[ 'aal_transient_id' ]
-        );
-        
-        // Schedule pre-fetching the unit feed in the background
-        // so that by the time the user opens the unit page, the cache will be ready.
-        AmazonAutoLinks_Event_Scheduler::prefetch( $_iNewPostID );
-
-        // Go to the post editing page and exit. This way the framework won't create a new form transient row.
-        $this->goToPostDefinitionPage(
-            $_iNewPostID,
-            AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-        );        
-        
-        // This won't be reached.
-        return $aInputs;
+        return parent::_validate( $aInputs, $aOldInputs, $oFactory, $aSubmitInfo );
         
     }   
             
