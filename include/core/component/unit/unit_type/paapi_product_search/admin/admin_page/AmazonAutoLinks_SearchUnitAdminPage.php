@@ -16,6 +16,13 @@
 final class AmazonAutoLinks_SearchUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
 
     /**
+     * Whether PA-API access is required or not.
+     * @since 5.0.0
+     * @var   boolean
+     */
+    public $bRequirePAAPI = true;
+
+    /**
      * Adds admin pages.
      * @since 5.0.0
      */

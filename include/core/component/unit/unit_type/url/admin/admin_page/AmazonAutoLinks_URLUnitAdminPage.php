@@ -13,10 +13,16 @@
  * Deals with the plugin admin pages.
  * 
  * @since  3.2.0
- * @remark This class is not final as being extended by the feed unit type admin page class.
- * @see    AmazonAutoLinks_FeedUnitAdminPage
+ * @since  5.0.0 Re-added the final scope as the feed unit type no longer extends this class.
  */
-class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+final class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdminPage {
+
+    /**
+     * Whether PA-API access is required or not.
+     * @since 5.0.0
+     * @var   boolean
+     */
+    public $bRequirePAAPI = true;
 
     /**
      * Adds admin pages.
@@ -24,10 +30,6 @@ class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_SimpleWizardAdmin
      */
     protected function _addPages() {
         new AmazonAutoLinks_URLUnitAdminPage_URLUnit( $this );
-    }
-
-    public function load() {
-        AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
     }
 
 }
