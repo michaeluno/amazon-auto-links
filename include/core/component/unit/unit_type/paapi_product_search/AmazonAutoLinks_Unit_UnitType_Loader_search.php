@@ -10,11 +10,11 @@
 
 /**
  * Loads the units component.
- *  
- * @package     Amazon Auto Links
- * @since       3.3.0
+ *
+ * @since 3.3.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_search`.
 */
-class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+class AmazonAutoLinks_Unit_UnitType_Loader_search extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
@@ -28,8 +28,8 @@ class AmazonAutoLinks_UnitTypeLoader_search extends AmazonAutoLinks_Unit_UnitTyp
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.3.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  3.3.0
      */
     public $sUnitTypeSlug = 'search';
     

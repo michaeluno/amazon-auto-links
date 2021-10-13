@@ -11,9 +11,10 @@
 /**
  * Loads the component of `item_lookup` unit type.
  *
- * @since   3.3.0
+ * @since 3.3.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_item_lookup`.
 */
-class AmazonAutoLinks_UnitTypeLoader_item_lookup extends AmazonAutoLinks_UnitTypeLoader_search {
+class AmazonAutoLinks_Unit_UnitType_Loader_item_lookup extends AmazonAutoLinks_Unit_UnitType_Loader_search {
 
     /**
      * Stores each unit type component directory path.

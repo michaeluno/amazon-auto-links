@@ -80,7 +80,7 @@ class AmazonAutoLinks_FormFields_FeedUnit_Main extends AmazonAutoLinks_FormField
                     __( 'Paste the JSON feed URL of an Amazon Auto Links unit on an external site.', 'amazon-auto-links' )
                     . ' e.g. <code>http://{your-site}?productlink=feed&output=json&id=189</code>',
                     isset( $_GET[ 'page' ] ) && AmazonAutoLinks_Registry::$aAdminPages[ 'feed_unit' ] === $_GET[ 'page' ]   // sanitization unnecessary as just checking
-                        ? '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_feed::$sDirPath . '/asset/image/screenshot_json_link.png' ) . '" style="display: inline-block; max-height: 140px;" />'
+                        ? '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_feed::$sDirPath . '/asset/image/screenshot_json_link.png' ) . '" style="display: inline-block; max-height: 140px;" />'
                         : null,
                 ),
             ),

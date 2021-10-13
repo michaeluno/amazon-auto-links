@@ -54,7 +54,7 @@ class AmazonAutoLinks_FormFields_ScratchPadPayloadUnit_Main extends AmazonAutoLi
                 ),
                 'tip'           => array(
                     'width'   => 680,
-                    'content' => '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_scratchpad_payload::$sDirPath . '/asset/image/payload_json.jpg' ) . '" style="width:100%; min-width: 480px;"/>',
+                    'content' => '<img src="' . $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload::$sDirPath . '/asset/image/payload_json.jpg' ) . '" style="width:100%; min-width: 480px;"/>',
                 ),
                 'attributes'    => array(
                     'style' => 'height: 200px; width: 100%; min-width: 400px;'

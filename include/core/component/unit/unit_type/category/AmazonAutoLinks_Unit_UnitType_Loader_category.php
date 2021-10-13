@@ -10,26 +10,26 @@
 
 /**
  * Loads the units component.
- *  
- * @package     Amazon Auto Links
- * @since       3.3.0
-*/
-class AmazonAutoLinks_UnitTypeLoader_category extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+ *
+ * @since 3.3.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_category`.
+ */
+class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
-     * @remark  Without this declaration, the value refers to the parent one.
-     * @var string
-     * @since   4.2.0
+     * @remark Without this declaration, the value refers to the parent one.
+     * @var    string
+     * @since  4.2.0
      */
     static public $sDirPath = '';
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.3.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  3.3.0
      */
     public $sUnitTypeSlug = 'category';
     

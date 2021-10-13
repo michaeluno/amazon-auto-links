@@ -12,8 +12,9 @@
  * Loads the units component.
  *
  * @since 4.1.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_scratchpad_payload`.
 */
-class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_UnitTypeLoader_search {
+class AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload extends AmazonAutoLinks_Unit_UnitType_Loader_search {
 
     /**
      * Stores each unit type component directory path.
@@ -27,8 +28,8 @@ class AmazonAutoLinks_UnitTypeLoader_scratchpad_payload extends AmazonAutoLinks_
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       4.1.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  4.1.0
      */
     public $sUnitTypeSlug = 'scratchpad_payload';
 

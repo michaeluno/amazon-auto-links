@@ -202,11 +202,11 @@ class AmazonAutoLinks_Form_CategorySelect extends AmazonAutoLinks_Form_CategoryS
 
         // Arrows
         /// @deprecated 4.2.0
-        $_sAddArrowURL      = $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/image/arrow_right.png' );
+        $_sAddArrowURL      = $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_category::$sDirPath . '/asset/image/arrow_right.png' );
         $sAddArrow          = "<img id='arrow-add' class='hidden category-select-right-arrow' title='" . __( 'Add the current selection!', 'amazon-auto-links' ) . "' src='" . esc_url( $_sAddArrowURL ) . "'/>";
-        $_sCreateArrowURL   = $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/image/arrow_right.png' );
+        $_sCreateArrowURL   = $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_category::$sDirPath . '/asset/image/arrow_right.png' );
         $sCreateArrow       = "<img id='arrow-create' class='hidden category-select-right-arrow' title='" . esc_attr( __( 'Create the unit!', 'amazon-auto-links' ) ) . "' src='" . esc_url( $_sCreateArrowURL ) . "'/>";
-        $_sSelectArrowURL   = $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/image/arrow_left_bottom.png' );
+        $_sSelectArrowURL   = $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_category::$sDirPath . '/asset/image/arrow_left_bottom.png' );
         $sSelectArrow       = "<img id='arrow-select' class='hidden category-select-left-bottom-arrow' title='" . esc_attr( __( 'Select a category from the links!', 'amazon-auto-links' ) ) . "' src='" . esc_url( $_sSelectArrowURL ) . "'/>";
 
         $_oEncrypt          = new AmazonAutoLinks_Encrypt;

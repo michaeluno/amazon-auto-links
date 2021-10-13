@@ -24,7 +24,7 @@ class AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second extends AmazonAutoLinks_Un
             'tab_slug'      => 'custom_payload',
             'title'         => __( 'Add Unit by PA-API Custom Payload', 'amazon-auto-links' ),
             'description'   => __( 'Create a unit by custom payload.', 'amazon-auto-links' ),
-            'style'         => AmazonAutoLinks_UnitTypeLoader_scratchpad_payload::$sDirPath . '/asset/css/admin_custom_payload_unit.css',
+            'style'         => AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload::$sDirPath . '/asset/css/admin_custom_payload_unit.css',
         );
     }
 

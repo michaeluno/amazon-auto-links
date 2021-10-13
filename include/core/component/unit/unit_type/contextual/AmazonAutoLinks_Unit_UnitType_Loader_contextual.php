@@ -9,12 +9,12 @@
  */
 
 /**
- * Loads the `url` unit type components.
- *  
- * @package     Amazon Auto Links
- * @since       3.3.0
+ * Loads the `contextual` unit type.
+ *
+ * @since 3.5.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_contextual`.
 */
-class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+class AmazonAutoLinks_Unit_UnitType_Loader_contextual extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
@@ -29,43 +29,31 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_Unit_UnitType_L
     /**
      * Stores the unit type slug.
      * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.3.0
+     * @since       3.5.0
      */
-    public $sUnitTypeSlug = 'url';
+    public $sUnitTypeSlug = 'contextual';
     
     /**
      * Stores class names of form fields.
      */
-    public $aFieldClasses = array(
-        'AmazonAutoLinks_FormFields_URLUnit_Main',
-    );    
+    public $aFieldClasses = array();
     
     /**
      * Stores protected meta key names.
      */    
     public $aProtectedMetaKeys = array(
-    );
-
-    /**
-     * URL unit specific event callbacks.
-     * @param $sScriptPath
-     */
-    protected function _construct( $sScriptPath ) {
-        // new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher; // @deprecated 4.3.2
-        new AmazonAutoLinks_Unit_URL_Event_RenewCacheAction;
-        new AmazonAutoLinks_Unit_URL_Event_DebugOutput; // [4.4.0]
-    }
-
+    );    
+    
     /**
      * Adds post meta boxes.
      * 
-     * @since       3.3.0
+     * @since       3.5.0
      * @return      void
      */
     protected function _loadAdminComponents( $sScriptPath ) {
 
         // Admin pages
-        new AmazonAutoLinks_URLUnitAdminPage(
+        new AmazonAutoLinks_ContextualUnitAdminPage(
             array(
                 'type'      => 'transient',
                 'key'       => $GLOBALS[ 'aal_transient_id' ],
@@ -75,25 +63,26 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_Unit_UnitType_L
         );         
               
         // Post meta boxes
-        new AmazonAutoLinks_UnitPostMetaBox_Main_url(
+        new AmazonAutoLinks_UnitPostMetaBox_Main_contextual(
             null,
             __( 'Main', 'amazon-auto-links' ), // meta box title
             array(     // post type slugs: post, page, etc.
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
-            ), 
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
             'normal', // context (what kind of metabox this is)
             'high'    // priority - e.g. 'high', 'core', 'default' or 'low'
-        );   
-        new AmazonAutoLinks_PostMetaBox_URLUnit_Advanced(
-            null,     // meta box ID - null for auto-generate
-            __( 'URL Unit Advanced', 'amazon-auto-links' ),
-            array(    // post type slugs: post, page, etc.
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-            ),                 
-            'normal', // context - e.g. 'normal', 'advanced', or 'side'
-            'low'     // priority - e.g. 'high', 'core', 'default' or 'low'
         );
-        
+
+        new AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual(
+            null,
+            __( 'Advanced', 'amazon-auto-links' ), // meta box title
+            array(     // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'normal', // context (what kind of metabox this is)
+            'default'    // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
+
     }
 
     /**
@@ -104,7 +93,7 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_Unit_UnitType_L
      * @since       3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return isset( $aArguments[ 'urls' ] )
+        return isset( $aArguments[ 'criteria' ], $aArguments[ 'additional_keywords' ] )
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }
@@ -114,7 +103,7 @@ class AmazonAutoLinks_UnitTypeLoader_url extends AmazonAutoLinks_Unit_UnitType_L
      * @since       3.5.0
      */
     protected function _getLabel() {
-        return __( 'URL', 'amazon-auto-links' );
+        return __( 'Contextual', 'amazon-auto-links' );
     }
 
 }

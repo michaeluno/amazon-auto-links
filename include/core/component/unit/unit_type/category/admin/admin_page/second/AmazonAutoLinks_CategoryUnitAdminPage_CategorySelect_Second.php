@@ -36,7 +36,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             'style'         => array(
                 AmazonAutoLinks_Registry::getPluginURL( 'template/_common/style.css' ),
                 AmazonAutoLinks_Registry::getPluginURL( 'template/preview/style-preview.css' ), // the Preview template CSS file.
-                AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/css/category_selection.css',  // 4.2.0
+                AmazonAutoLinks_Unit_UnitType_Loader_category::$sDirPath . '/asset/css/category_selection.css',  // 4.2.0
             ),
         );
     }
@@ -84,7 +84,7 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_Second extends Amazon
             wp_enqueue_script( 'jquery' );
             wp_enqueue_script(
                 $this->___sAjaxScriptHandle1,    // handle
-                $this->getSRCFromPath( AmazonAutoLinks_UnitTypeLoader_category::$sDirPath . '/asset/js/category-selection.js' ), // 4.2.0
+                $this->getSRCFromPath( AmazonAutoLinks_Unit_UnitType_Loader_category::$sDirPath . '/asset/js/category-selection.js' ), // 4.2.0
                 array( 'jquery' ),
                 false,
                 true

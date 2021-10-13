@@ -9,29 +9,31 @@
  */
 
 /**
- * Loads the `contextual` unit type.
- *  
- * @package     Amazon Auto Links
- * @since       3.5.0
-*/
-class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+ * Loads the Feed unit type components.
+ *
+ * The Feed unit type allows the user to display products of units created in another WordPress site installing Amazon Auto Links.
+ *
+ * @since 4.0.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_feed`.
+ */
+class AmazonAutoLinks_Unit_UnitType_Loader_feed extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
      *
      * Component specific assets are placed inside the component directory and to load them the component path needs to be known.
-     * @remark  Without this declaration, the value refers to the parent one.
-     * @var string
-     * @since   4.2.0
+     * @remark Without this declaration, the value refers to the parent one.
+     * @var    string
+     * @since  4.0.0
      */
     static public $sDirPath = '';
 
     /**
      * Stores the unit type slug.
-     * @remark      Each extended class should assign own unique unit type slug here.
-     * @since       3.5.0
+     * @remark Each extended class should assign own unique unit type slug here.
+     * @since  4.0.0
      */
-    public $sUnitTypeSlug = 'contextual';
+    public $sUnitTypeSlug = 'feed';
     
     /**
      * Stores class names of form fields.
@@ -41,29 +43,35 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_Unit_Uni
     /**
      * Stores protected meta key names.
      */    
-    public $aProtectedMetaKeys = array(
-    );    
-    
+    public $aProtectedMetaKeys = array();
+
+    protected function _construct( $sScriptPath ) {
+        self::$sDirPath = dirname( __FILE__ );
+
+        // Events
+        new AmazonAutoLinks_Unit_Feed_Event_RenewCacheAction;
+    }
+
     /**
      * Adds post meta boxes.
      * 
-     * @since       3.5.0
+     * @since       4.0.0
      * @return      void
      */
     protected function _loadAdminComponents( $sScriptPath ) {
 
         // Admin pages
-        new AmazonAutoLinks_ContextualUnitAdminPage(
+        new AmazonAutoLinks_FeedUnitAdminPage(
             array(
                 'type'      => 'transient',
                 'key'       => $GLOBALS[ 'aal_transient_id' ],
                 'duration'  => 60*60*24*2,
             ),
             $sScriptPath
-        );         
-              
+        );
+
         // Post meta boxes
-        new AmazonAutoLinks_UnitPostMetaBox_Main_contextual(
+        new AmazonAutoLinks_UnitPostMetaBox_Main_feed(
             null,
             __( 'Main', 'amazon-auto-links' ), // meta box title
             array(     // post type slugs: post, page, etc.
@@ -73,16 +81,6 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_Unit_Uni
             'high'    // priority - e.g. 'high', 'core', 'default' or 'low'
         );
 
-        new AmazonAutoLinks_UnitPostMetaBox_Advanced_contextual(
-            null,
-            __( 'Advanced', 'amazon-auto-links' ), // meta box title
-            array(     // post type slugs: post, page, etc.
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
-            ),
-            'normal', // context (what kind of metabox this is)
-            'default'    // priority - e.g. 'high', 'core', 'default' or 'low'
-        );
-
     }
 
     /**
@@ -90,20 +88,20 @@ class AmazonAutoLinks_UnitTypeLoader_contextual extends AmazonAutoLinks_Unit_Uni
      * @param       string      $sUnitTypeSlug
      * @param       array       $aArguments
      * @return      string
-     * @since       3.5.0
+     * @since       4.0.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
-        return isset( $aArguments[ 'criteria' ], $aArguments[ 'additional_keywords' ] )
+        return isset( $aArguments[ 'feed_urls' ] )
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
     }
 
     /**
      * @return      string
-     * @since       3.5.0
+     * @since       4.0.0
      */
     protected function _getLabel() {
-        return __( 'Contextual', 'amazon-auto-links' );
+        return __( 'Feed', 'amazon-auto-links' );
     }
 
 }
