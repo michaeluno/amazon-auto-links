@@ -254,7 +254,7 @@ return array(
     "AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilterAdvanced" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_option_converter/admin/page_meta_box/AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilterAdvanced.php", 
     "AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_option_converter/admin/page_meta_box/AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template.php", 
     "AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_option_converter/event/AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter.php", 
-    "AmazonAutoLinks_Unit_UnitTypes_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/AmazonAutoLinks_Unit_UnitTypes_Loader.php",
+    "AmazonAutoLinks_Unit_UnitTypes_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/AmazonAutoLinks_Unit_UnitTypes_Loader.php", 
     "AmazonAutoLinks_Unit_UnitType_Loader_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/AmazonAutoLinks_Unit_UnitType_Loader_category.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php", 

@@ -41,15 +41,14 @@ class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitTyp
     protected function _construct( $sScriptPath ) {
 
         // Unit types
-        new AmazonAutoLinks_UnitTypeLoader_category( $sScriptPath );
-        new AmazonAutoLinks_Unit_UnitTypeLoader_ad_widget_search( $sScriptPath ); // 5.0.0
-        new AmazonAutoLinks_UnitTypeLoader_search( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_item_lookup( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_url( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_contextual( $sScriptPath );
-        new AmazonAutoLinks_UnitTypeLoader_embed( $sScriptPath ); // 4.0.0
-        new AmazonAutoLinks_UnitTypeLoader_feed( $sScriptPath );  // 4.0.0
-        new AmazonAutoLinks_UnitTypeLoader_scratchpad_payload( $sScriptPath );  // 4.1.0
+        new AmazonAutoLinks_Unit_UnitType_Loader_category( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_search( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_item_lookup( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_url( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_contextual( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_embed( $sScriptPath ); // 4.0.0
+        new AmazonAutoLinks_Unit_UnitType_Loader_feed( $sScriptPath );  // 4.0.0
+        new AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload( $sScriptPath );  // 4.1.0
 
     }
 
