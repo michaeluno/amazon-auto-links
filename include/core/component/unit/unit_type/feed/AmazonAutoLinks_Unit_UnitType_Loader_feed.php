@@ -61,7 +61,7 @@ class AmazonAutoLinks_Unit_UnitType_Loader_feed extends AmazonAutoLinks_Unit_Uni
     protected function _loadAdminComponents( $sScriptPath ) {
 
         // Admin pages
-        new AmazonAutoLinks_FeedUnitAdminPage(
+        new AmazonAutoLinks_Unit_UnitType_Feed_Admin_Pages(
             array(
                 'type'      => 'transient',
                 'key'       => $GLOBALS[ 'aal_transient_id' ],

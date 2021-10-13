@@ -11,10 +11,10 @@
 /**
  * Adds a setting page for creating tag units.
  * 
- * @since       4.0.0
- * @action      schedule        aal_action_unit_prefetch
+ * @since 4.0.0
+ * @since 5.0.0 Renamed from `AmazonAutoLinks_FeedUnitAdminPage_FeedUnit`.
  */
-class AmazonAutoLinks_FeedUnitAdminPage_FeedUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
+class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoLinks_URLUnitAdminPage_URLUnit {
 
     /**
      * @return  array
