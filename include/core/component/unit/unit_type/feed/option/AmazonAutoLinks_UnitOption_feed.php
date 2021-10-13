@@ -25,7 +25,8 @@ class AmazonAutoLinks_UnitOption_feed extends AmazonAutoLinks_UnitOption_Base {
      * @remark      Accessed from the base class constructor to construct a default option array.
      */
     static public $aStructure_Default = array(
-        'feed_urls'             => '',   // (string|array) The URL(s) of the importing feed.
+        'feed_urls'             => '',      // (string|array) The URL(s) of the importing feed.
+        'sort'                  => 'raw',   // 5.0.0
     );
 
 }

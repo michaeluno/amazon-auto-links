@@ -3,4 +3,5 @@
 - Changed the name of the unit type, `Product Search`, to `PA-API Product Search`. 
 - Changed the name of the unit type, `Item Look-up`, to `PA-API Item Look-up`. 
 - Changed the name of the unit type, `ScratchPad Payload`, to `PA-API Custom Payload`.
+- Fixed a bug that the sort option for the feed unit type did not take effect.
 - Optimized HTTP requests.

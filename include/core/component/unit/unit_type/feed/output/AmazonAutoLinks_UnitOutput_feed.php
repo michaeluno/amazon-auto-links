@@ -53,6 +53,9 @@ class AmazonAutoLinks_UnitOutput_feed extends AmazonAutoLinks_UnitOutput_categor
             $_aProducts = $_aProducts+ $this->___getProducts( $_sFeedURL );
         }
 
+        $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort( $_aProducts, $this->oUnitOption->get( 'sort' ) );
+        $_aProducts = $_oSorter->get();
+
         return $this->_getProducts(
             $_aProducts,
             ( string ) $this->oUnitOption->get( 'country' ),
