@@ -1,3 +1,4 @@
+- Added the `%discount%` item format tag which displays product discount percentage.
 - Tweaked UI elements.
 - Changed some option default values.
 - Changed the name of the unit type, `Product Search`, to `PA-API Product Search`. 

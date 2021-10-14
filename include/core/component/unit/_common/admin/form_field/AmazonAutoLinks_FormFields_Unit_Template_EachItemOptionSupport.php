@@ -262,6 +262,10 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                         'description'   => __( 'a product price', 'amazon-auto-links' ),
                         'available'     => $_bAdWidgetSupport || ( $bAPIConnected && $_bTableSupport ),
                     ),
+                    '%discount%' => array(
+                        'description'   => __( 'discount percentage', 'amazon-auto-links' ), // 5.0.0+
+                        'available'     => $_bAdWidgetSupport || ( $bAPIConnected && $_bTableSupport ),
+                    ),
                     '%rating%' => array(
                         'description'   => __( 'user rating', 'amazon-auto-links' ),
                         'available'     => true,
