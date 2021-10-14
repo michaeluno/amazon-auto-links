@@ -82,7 +82,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             array(
                 'field_id'          => $sFieldIDPrefix . 'output_formats',
                 'title'             => __( 'Output Formats', 'amazon-auto-links' ),
-                'content'           => $this->___getTemplateFormatFields( $_aActiveTemplateLabels, $sFieldIDPrefix, $_aOutputFormats ),
+                'content'           => $this->___getTemplateFormatFields( $_aActiveTemplateLabels, $sFieldIDPrefix, $_aOutputFormats, $sUnitType ),
             )
         );
 
@@ -117,16 +117,17 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
          * @param  array  $aActiveTemplateLabels
          * @param  string $sFieldIDPrefix
          * @param  array  $aDefaultItemFormat
+         * @param  string $sUnitType
          * @return array
          */
-        private function ___getTemplateFormatFields( array $aActiveTemplateLabels, $sFieldIDPrefix, array $aDefaultItemFormat ) {
+        private function ___getTemplateFormatFields( array $aActiveTemplateLabels, $sFieldIDPrefix, array $aDefaultItemFormat, $sUnitType ) {
             $_aFormatFields = array();
             foreach( $aActiveTemplateLabels as $_sTemplateID => $_sLabel ) {
                 $_aFormatFields[] = array(
                     'field_id' => $_sTemplateID,
                     'content'   => array(
                         $this->___getField_UnitFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'unit_format' ], $_sTemplateID ),
-                        $this->___getField_ItemFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'item_format' ], $_sTemplateID ),
+                        $this->___getField_ItemFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'item_format' ], $_sTemplateID, $sUnitType ),
                         $this->___getField_TitleFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'title_format' ], $_sTemplateID ),
                         $this->___getField_ImageFormat( $sFieldIDPrefix, $aDefaultItemFormat[ 'image_format' ], $_sTemplateID )
                     ),
@@ -141,26 +142,27 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
         }
 
         /**
-         * @param string $sFieldIDPrefix
-         * @param string $sDefault
-         * @param string $sTemplateID
-         *
+         * @param  string $sFieldIDPrefix
+         * @param  string $sDefault
+         * @param  string $sTemplateID
+         * @param  string $sUnitType
          * @return array
+         * @since  unknown
+         * @since  5.0.0   Added the `$sUnitType` parameter.
          */
-        private function ___getField_ItemFormat( $sFieldIDPrefix, $sDefault, $sTemplateID ) {
+        private function ___getField_ItemFormat( $sFieldIDPrefix, $sDefault, $sTemplateID, $sUnitType ) {
 
             $_sLocale       = isset( $this->oFactory ) && method_exists( $this->oFactory, 'getValue' )
                 ? $this->oFactory->getValue( 'country' )
                 : '';
-            $sDefault       = apply_filters( 'aal_filter_template_default_item_format_' . $sTemplateID, $sDefault, $_sLocale );
+            $_sUnitType     = isset( $this->oFactory ) && method_exists( $this->oFactory, 'getValue' )
+                ? $this->oFactory->getValue( array( 'unit_type' ), $sUnitType )
+                : $sUnitType;
+            $_sUnitType     = empty( $_sUnitType ) ? $sUnitType : $_sUnitType; // somehow, an empty array is set sometimes.
             $_bAPIConnected = ( boolean ) $this->oOption->getPAAPIStatus( $_sLocale );
-            $_sDel          = $_bAPIConnected
-                ? ''
-                : "delete-line";
             // 3.8.0 If the database table version is below 1.1.0b01,
             $_bTableUpdateRequired = false;
             if ( version_compare( get_option( "aal_products_version", '0' ), '1.1.0b01', '<' ) ) {
-                $_sDel = $_sDel ? $_sDel : 'delete-line';
                 $_bTableUpdateRequired = true;
             }
 
@@ -174,7 +176,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                         'style: margin-bottom: 0;',
                     ),
                 ),
-                'default'           => $sDefault,
+                'default'           => apply_filters( 'aal_filter_template_default_item_format_' . $sTemplateID, $sDefault, $_sLocale ),
                 'class'         => array(
                     'fieldset'  => $this->___getClassAttributeNameFromTemplateIDGenerated( $sTemplateID ),
                     'field'     => 'width-full',
@@ -183,44 +185,150 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                 'tip'               => array(
                     'width'   => 480,
                     'content' => __( 'Sets the layout of the product. The following tags are available.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%href%</code> - " . __( 'a product link url', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%title%</code> - " . __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%title_text%</code> - " . __( 'a title without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%image%</code> - " . __( 'a thumbnail with HTML tags defined in the Image Format option', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%image_set%</code> - " . __( 'sub-images', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%image_size%</code> - " . __( 'the thumbnail size set in the Image Size option', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%description%</code> - " . __( 'a description with HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%description_text%</code> - " . __( 'a description without HTML tags', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%price%</code> - " . __( 'a product price', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%rating%</code> - " . __( 'user rating', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%review%</code> - " . __( 'customer reviews.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%button%</code> - " . __( 'a store link button.', 'amazon-auto-links' ) . '<br />'
-                        . "<code>%disclaimer%</code> - " . __( 'a disclaimer for the product information', 'amazon-auto-links' ) . '<br />'
-                        . "<code class='{$_sDel}'>%content%</code> - " . __( 'a full product HTML description', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
-                        // . "<code class='{$_sDel}'>%similar%</code> - " . __( 'similar products.', 'amazon-auto-links' ) . '<br />'    // 3.3.0+ // @deprecated 3.9.0
-                        . "<code class='{$_sDel}'>%meta%</code> - " . __( 'meta data of the product', 'amazon-auto-links' ) . '<br />'    // 3.3.0+
-                        . "<code class='{$_sDel}'>%author%</code> - " . __( 'the author of the product', 'amazon-auto-links' ) . '<br />'    // 4.1.0+
-                        . "<code class='{$_sDel}'>%author_text%</code> - " . __( 'the author text without HTML tags', 'amazon-auto-links' ) . '<br />'    // 4.7.10+
-                        . "<code class='{$_sDel}'>%category%</code> - " . __( 'categories that the product belongs to', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code class='{$_sDel}'>%feature%</code> - " . __( 'list of product features', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code class='{$_sDel}'>%rank%</code> - " . __( 'sales rank of the product', 'amazon-auto-links' ) . '<br />'    // 3.8.0+
-                        . "<code>%date%</code> - " . __( 'the updated date', 'amazon-auto-links' ) . '<br />' // 3.8.0+
-                        . "<code class='{$_sDel}'>%prime%</code> - " . __( 'prime mark', 'amazon-auto-links' ) . '<br />'    // 3.9.0+
-                        . ( $_bAPIConnected
-                            ? null
-                            : sprintf(
-                                '* <span class="warning">'
-                                    . __( 'Some items need <a href="%1$s">API</a> to be set up.', 'amazon-auto-links' )
-                                . "</span>",
-                                $this->getAPIAuthenticationPageURL()
-                            )
-                        )
-                        . ( $_bTableUpdateRequired
-                            ? '<span style="color: red;">' . __( 'Some tags require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>"
-                            : '' )
+                        . $this->___getItemFormatTags( $_sUnitType, $_sLocale, $_bAPIConnected, $_bTableUpdateRequired )
+                        . $this->___getPAAPIRequirementNotice( $_bAPIConnected )
+                        . $this->___getTableUpdateNotice( $_bTableUpdateRequired )
                 ),
             );
         }
+            /**
+             * @param  boolean $bTableUpdateRequired
+             * @return string
+             * @since  5.0.0
+             */
+            private function ___getTableUpdateNotice( $bTableUpdateRequired ) {
+                if ( ! $bTableUpdateRequired ) {
+                    return '';
+                }
+                return '<span style="color: red;">' . __( 'Some tags require the plugin database table to be updated.', 'amazon-auto-links' ) . "</span>";
+            }
+            /**
+             * @param  boolean $bAPIConnected
+             * @return string
+             * @sicne  5.0.0
+             */
+            private function ___getPAAPIRequirementNotice( $bAPIConnected ) {
+                if ( $bAPIConnected ) {
+                    return '';
+                }
+                return sprintf(
+                    '* <span class="warning">'
+                        . __( 'Some items need <a href="%1$s">API</a> to be set up.', 'amazon-auto-links' )
+                    . "</span>",
+                    $this->getAPIAuthenticationPageURL()
+                );
+            }
+            /**
+             * @return string
+             * @since  5.0.0
+             */
+            private function ___getItemFormatTags( $sUnitType, $sLocale, $bAPIConnected, $bTableUpdateRequired ) {
+                $_bTableSupport    = ( version_compare( get_option( "aal_products_version", '0' ), '1.1.0b01', '>=' ) );
+                $_bAdWidgetSupport = in_array( $sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true );
+                $_aTags            = array(
+                    '%href%' => array(
+                        'description'   => __( 'a product link url', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%title%' => array(
+                        'description'   => __( 'a title with HTML tags defined in the Title Format option', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%title_text%' => array(
+                        'description'   => __( 'a title without HTML tags', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%image%' => array(
+                        'description'   => __( 'a thumbnail with HTML tags defined in the Image Format option', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%image_set%' => array(
+                        'description'   => __( 'sub-images', 'amazon-auto-links' ),
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%image_size%' => array(
+                        'description'   => __( 'the thumbnail size set in the Image Size option', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%description%' => array(
+                        'description'   => __( 'a description with HTML tags', 'amazon-auto-links' ),
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%description_text%' => array(
+                        'description'   => __( 'a description without HTML tags', 'amazon-auto-links' ),
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%price%' => array(
+                        'description'   => __( 'a product price', 'amazon-auto-links' ),
+                        'available'     => $_bAdWidgetSupport || ( $bAPIConnected && $_bTableSupport ),
+                    ),
+                    '%rating%' => array(
+                        'description'   => __( 'user rating', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%review%' => array(
+                        'description'   => __( 'customer reviews.', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%button%' => array(
+                        'description'   => __( 'a store link button.', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%disclaimer%' => array(
+                        'description'   => __( 'a disclaimer for the product information', 'amazon-auto-links' ),
+                        'available'     => true,
+                    ),
+                    '%date%' => array(
+                        'description'   => __( 'the updated date', 'amazon-auto-links' ),   // 3.8.0+
+                        'available'     => true,
+                    ),
+                    '%content%' => array(
+                        'description'   => __( 'a full product HTML description', 'amazon-auto-links' ), // 3.3.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%meta%' => array(
+                        'description'   => __( 'meta data of the product', 'amazon-auto-links' ), // 3.3.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%author%' => array(
+                        'description'   => __( 'the author of the product', 'amazon-auto-links' ), // 4.1.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%author_text%' => array(
+                        'description'   => __( 'the author text without HTML tags', 'amazon-auto-links' ), // 4.7.10+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%category%' => array(
+                        'description'   => __( 'categories that the product belongs to', 'amazon-auto-links' ), // 3.8.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%feature%' => array(
+                        'description'   => __( 'list of product features', 'amazon-auto-links' ), // 3.8.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%rank%' => array(
+                        'description'   => __( 'sales rank of the product', 'amazon-auto-links' ), // 3.8.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                    '%prime%' => array(
+                        'description'   => __( 'prime mark', 'amazon-auto-links' ), // 3.9.0+
+                        'available'     => $bAPIConnected && $_bTableSupport,
+                    ),
+                );
+                $_aTags = apply_filters( 'aal_filter_admin_item_format_tags', $_aTags, $sUnitType, $sLocale, $bAPIConnected, $bTableUpdateRequired );
+                $_sOutput = '';
+                foreach( $_aTags as $_sTagName => $_aTag ) {
+                    $_aTag       = $_aTag + array( 'description' => '', 'available' => true );
+                    $_sName   = $_aTag[ 'available' ]
+                        ? "<code>{$_sTagName}</code>"
+                        : "<code class='delete-line'>{$_sTagName}</code>";
+                    $_sOutput .= "<li>"
+                           . $_sName . ' - ' . $_aTag[ 'description' ] . '<br />'
+                        . "</li>";
+                }
+                return "<ul>" . $_sOutput . "</ul>";
+
+            }
 
         /**
          * @param   string  $sFieldIDPrefix
