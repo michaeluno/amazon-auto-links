@@ -42,9 +42,10 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @since 3.9.0
      * @since 4.0.0 Changed the scope to protected as the Embed unit type extends this class and uses this property.
      * @since 4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
+     * @since 5.0.0 Changed the scope to public from protected as delegator classes access it.
      * @var   array
      */
-    protected $_aModifiedDates = array();
+    public $aModifiedDates = array();
 
     /**
      * Sets up type-specific properties.
@@ -325,7 +326,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 foreach( $aHTMLs as $_sURL => $_sHTML ) {
                     $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
                     $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
-                    $_sModifiedDate   = $this->getElement( $this->_aModifiedDates, $_sURL );
+                    $_sModifiedDate   = $this->getElement( $this->aModifiedDates, $_sURL );
                     foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
                         $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
                     }
@@ -688,7 +689,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array
      */
     public function replyToCaptureUpdatedDate( $aCache ) {
-        $this->_aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
+        $this->aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
         return $aCache;
     }
 
@@ -700,7 +701,7 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * @return   array|WP_Error
      */
     public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        $this->_aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
+        $this->aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
         return $aoResponse;
     }
         /**

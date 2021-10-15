@@ -184,7 +184,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         'number_of_reviews' => ( integer ) $_aItem[ 'TotalReviews' ],
                         'formatted_price'   => AmazonAutoLinks_Unit_Utility::getPrice( $_aItem[ 'ListPrice' ], null, null, $_aItem[ 'Price' ], $_aItem[ 'Price' ] ),
                         'is_prime'          => ( boolean ) $_aItem[ 'IsPrimeEligible' ],
-                        'updated_date'      => $this->getElement( $this->_aModifiedDates, $_sAPIEndpoint ),
+                        'updated_date'      => $this->getElement( $this->aModifiedDates, $_sAPIEndpoint ),
                     ) + $_aItem;
                     $_aProduct[ 'formatted_rating' ] = $this->___getFormattedRating( $_aProduct[ 'rating' ], $_aProduct[ 'number_of_reviews' ], $sLocale, $_aItem[ 'ASIN' ], $sAssociateID, $sLanguage );
                     $_aProducts[ $_aItem[ 'ASIN' ] ] = $_aProduct;
@@ -241,7 +241,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
                         return $_aProduct;
                     }
 
-                    $_aProduct[ 'updated_date' ] = $this->getElement( $this->_aModifiedDates, $_sProductURL );
+                    $_aProduct[ 'updated_date' ] = $this->getElement( $this->aModifiedDates, $_sProductURL );
                     $_aProduct[ 'content' ]      = ! empty( $_aProduct[ 'content' ] )
                         ? "<div class='amazon-product-content'>"
                             . $_aProduct[ 'content' ]
