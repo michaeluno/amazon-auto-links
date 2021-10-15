@@ -50,29 +50,31 @@ class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit
 
     /**
      * Determines whether the unit type requires the PA API access.
-     * @var bool
-     * @since   3.9.0
+     * @var   boolean
+     * @since 3.9.0
      */
     public $bRequirePAAPI = false;
 
     /**
-     * @param $sScriptPath
-     * @since   3.7.6
+     * @param string $sScriptPath
+     * @since 3.7.6
      */
     protected function _construct( $sScriptPath ) {
-        // Category unit specific event callbacks
-        new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
 
         self::$sDirPath = dirname( __FILE__ );
 
+        // Category unit specific event callbacks
+        new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
+        new AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher;
+        new AmazonAutoLinks_Unit_Category_Event_Filter_ProductsSorter;
 
     }
 
     /**
-     * @param $bRequired
-     * @since   3.9.0
-     * @callback    filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
-     * @return bool
+     * @param    boolean $bRequired
+     * @since    3.9.0
+     * @callback add_filter() aal_filter_unit_type_is_api_access_required_{unit type slug}
+     * @return   boolean
      */
     public function replyToDetermineAPIRequirement( $bRequired ) {
         return false;
@@ -82,8 +84,7 @@ class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit
     /**
      * Adds post meta boxes.
      * 
-     * @since       3.3.0
-     * @return      void
+     * @since 3.3.0
      */
     protected function _loadAdminComponents( $sScriptPath ) {
 
@@ -123,10 +124,10 @@ class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit
 
     /**
      * Determines the unit type from given output arguments.
-     * @param       string      $sUnitTypeSlug
-     * @param       array       $aArguments
-     * @return      string
-     * @since       3.5.0
+     * @param  string $sUnitTypeSlug
+     * @param  array  $aArguments
+     * @return string
+     * @since  3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
         return isset( $aArguments[ 'categories' ] )
@@ -135,8 +136,8 @@ class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit
     }
 
     /**
-     * @return      string
-     * @since       3.5.0
+     * @return string
+     * @since  3.5.0
      */
     protected function _getLabel() {
         return __( 'Category', 'amazon-auto-links' );

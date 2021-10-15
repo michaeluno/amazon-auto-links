@@ -75,479 +75,216 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      */
     public function fetch() {
 
-        $_aPageURLs          = wp_list_pluck( $this->oUnitOption->get( array( 'categories' ), array() ), 'page_url' );
-        $_aPageURLs          = $this->___getURLs( $_aPageURLs );
-        $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
-        $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
-
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
         $_sAssociateID       = ( string ) $this->oUnitOption->get( 'associate_id' );
         $_iCountUserSet      = ( integer ) $this->oUnitOption->get( 'count' );
         $_iCount             = $_iCountUserSet < 10 ? 10 : $_iCountUserSet;     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
 
-        $_aProducts          = $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount );
-        $_aProducts          = $this->_getProductsSorted( $_aProducts );
+        $_aProducts          = apply_filters( 'aal_filter_unit_output_products_from_source_' . $this->sUnitType, array(), $this );
         $_aProducts          = $this->_getProducts( $_aProducts, $_sLocale, $_sAssociateID, $_iCount );
         return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
+
     }
 
         /**
-         * @param  $aProducts
+         * @param  array   $aItems
+         * @param  string  $sLocale       The `country` unit argument value
+         * @param  string  $sAssociateID
+         * @param  integer $iCount
          * @return array
-         * @since  4.3.4
-         * @since  5.0.0      Changed the visibility scope to `protected`.
+         * @since  3.9.0
+         * @since  4.0.0   Changed the scope to protected for the Embed unit type to extend this class.
          */
-        protected function _getProductsSorted( $aProducts ) {
-            $_sSortType   = $this->___getSortOrder();
-            $_oSorter     = new AmazonAutoLinks_Unit_Output_Sort( $aProducts, $_sSortType );
-            return $_oSorter->get();
-        }
-            /**
-             * Gets the sort type.
-             *
-             * ### Accepted Values
-             * 'title'             => __( 'Title', 'amazon-auto-links' ),
-             * 'title_descending'  => __( 'Title Descending', 'amazon-auto-links' ),
-             * 'random'            => __( 'Random', 'amazon-auto-links' ),
-             * 'raw'               => __( 'Raw', 'amazon-auto-links' ),
-             *
-             * @since  3
-             * @since  3.9.3  Changed the visibility to `protected`.
-             * @since  4.3.4  Changed the visibility to `private` as unused except by this class.
-             * @return string
-             */
-            private function ___getSortOrder() {
-                $_sSortOrder = $this->oUnitOption->get( 'sort' );
-                switch( $_sSortOrder ) {
-                    case 'raw':
-                        return 'raw';
-                    case 'date':
-                        return 'date_descending';
-                    case 'title':
-                        return 'title_ascending';
-                    case 'title_descending':
-                    case 'random':
-                        return $_sSortOrder;
-                    default:
-                        return 'random';
-                }
-            }
+        protected function _getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
 
-        /**
-         * Returns the subject urls for this unit.
-         * @param   array $aURLs
-         * @since   3.9.0
-         * @return  array
-         */
-        private function ___getURLs( array $aURLs ) {
+            // First Iteration - Extract displaying ASINs.
+            $_aASINLocaleCurLangs = array();  // stores added product ASINs, locales, currencies and languages for performing a custom database query.
+            $_aProducts           = array();
 
-            $_aAllURLs = array();
-            foreach( $aURLs as $_sURL ) {
+            $_sLocale             = $sLocale ? strtoupper( $sLocale ) : strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
+            $_sCurrency           = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
+            $_sLanguage           = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
 
-                foreach ( $this->oUnitOption->get( 'feed_type' ) as $_sSlug => $_bEnabled ) {
+            foreach ( $aItems as $_isIndex => $_aItem ) {
 
-                    if ( ! $_bEnabled ) {
-                        continue;
+                $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
+
+                // This parsed item is no longer needed and must be removed once it is parsed
+                // as this method is called recursively.
+                unset( $aItems[ $_isIndex ] );
+
+                try {
+
+                    $_aProduct = $this->___getProduct( $_aItem, $sLocale, $sAssociateID );
+
+                } catch ( Exception $_oException ) {
+                    // When the items are filtered out, this is reached
+                    if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
+                        $this->aBlockedASINs[ $_sASIN ] = $_sASIN; // for error message
                     }
-
-                    if ( 'bestsellers' === $_sSlug ) {
-                        $_aAllURLs[] = $_sURL;
-                        continue;
-                    }
-
-                    // At this point, it is not the best seller page.
-                    $_sReplaced = str_replace(
-                        array( '/gp/bestsellers/', '/gp/top-sellers/' ),
-                        "/gp/{$_sSlug}/",
-                        $_sURL
-                    );
-                    if ( $_sURL !== $_sReplaced ) {
-                        $_aAllURLs[] = $_sReplaced;
-                        continue;
-                    }
-
-                    /**
-                     * For a case of the US locale, the bestseller URLs of some categories have changed.
-                     * @since   3.8.13
-                     * For example, Best Sellers in Laptop Accessories
-                     * ### The original URL structure
-                     * https://www.amazon.com/bestsellers/pc/3011391011/ref=zg_bs_nav_pc_1_pc
-                     * https://www.amazon.com/bestsellers/pc/ref=zg_bs_nav_pc_1_pc
-                     * ### Current structure
-                     * https://www.amazon.com/Best-Sellers-Computers-Accessories-Laptop/zgbs/pc/3011391011/
-                     * If the feed type slug is `new-releases`, it should be changed to
-                     * https://www.amazon.com/gp/new-releases/pc/3011391011
-                     * ### Test Cases
-                     * https://www.amazon.com/Best-Sellers-Sports-Collectibles/zgbs/sports-collectibles/
-                     * https://www.amazon.com/gp/new-releases/pc/ref=zg_bs_nav_pc_1_pc
-                     * https://www.amazon.com/Best-Sellers-Grocery-Gourmet-Food-Beverage-Gifts/zgbs/grocery/2255571011
-                     */
-                    $_sURL = preg_replace( '/ref=.+$/', '', $_sURL );  // remove the ending part `ref=...`.
-                    $_sURL = rtrim( $_sURL, '/\\' ) . '/';  // trailingslashit()
-                    preg_match( '/\/[^\/]+\/(\d+\/)?(?=$)/', $_sURL, $_aMatches );
-                    if ( isset( $_aMatches[ 0 ] ) ) {
-                        $_aURLParts = parse_url( $_sURL );
-                        $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';
-                        $_sDomain   = isset( $_aURLParts[ 'host' ] ) ? $_aURLParts[ 'host' ] : '';
-                        $_sReplaced = $_sScheme . '://' . $_sDomain . '/gp/' . $_sSlug . $_aMatches[ 0 ];
-                        $_aAllURLs[] = $_sReplaced;
-                        continue;
-                    }
-
+                    continue;   // skip
                 }
 
-            }
 
-            return array_unique( $_aAllURLs );
-
-        }
-
-        /**
-         * Fetches product data.
-         * @remark Called recursively.
-         * @param  array    $aURLs
-         * @param  array    $aExcludeURLs
-         * @param  integer  $iItemCount
-         * @param  array    $aExcludeASINs
-         * @return array
-         */
-        private function ___getFoundProducts( array $aURLs, array $aExcludeURLs, $iItemCount, array $aExcludeASINs=array() ) {
-
-            // Find products
-            $_aProducts = $this->___getProductsFromURLs( $aURLs );
-
-            // If no items found, no need to continue.
-            if ( empty( $_aProducts ) ) {
-                return $_aProducts;
-            }
-
-            // Excluding Items - $aExcludeASINs will be updated.
-            $_aProducts = $this->___getExcludesApplied( $_aProducts, $aExcludeURLs, $aExcludeASINs );
-
-            // Make sure to fill the set number of item count
-            $_iPage     = 2;    // starts from 2
-            $_iMaxPage  = ( integer ) apply_filters( 'aal_filter_amazon_bestseller_category_max_number_of_page', 2 );   // 4.7.8
-            while( ( count( $_aProducts ) < $iItemCount ) && ( $_iPage <= $_iMaxPage ) ) {
-                $_aURLs          = $this->___getURLsPageIncremented( $aURLs, $_iPage );
-                $_aExcludeURLs   = $this->___getURLsPageIncremented( $aExcludeURLs, $_iPage );
-                $_aThisFound     = $this->___getProductsFromURLs( $_aURLs );
-                $_aThisFound     = empty( $_aThisFound )
-                    ? $_aThisFound
-                    : $this->___getExcludesApplied( $_aThisFound, $_aExcludeURLs, $aExcludeASINs );
-                if ( empty( $_aThisFound ) ) {
-                    break;
-                }
-                $_aNewFoundItems = array_diff( array_keys( $_aThisFound ), array_keys( $_aProducts ) );
-                if ( empty( $_aNewFoundItems ) ) {
-                    break;  // if the previous found items cover the newly found items, then it could be a page that does not support pagination.
-                }
-                $_aProducts      = $_aProducts + $_aThisFound;
-                $_iPage++;
-            }
-            return $_aProducts;
-
-        }
-            /**
-             * @param  array $aURLs
-             * @return array
-             * @since  4.3.4
-             */
-            private function ___getProductsFromURLs( array $aURLs ) {
-                add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 1 );
-                add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 2 );
-                $_aHTMLs          = $this->___getHTTPBodies( $aURLs );
-                remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
-                remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
-                $_sAssociateID    = $this->oUnitOption->get( 'associate_id' );
-                $_oLocale         = new AmazonAutoLinks_Locale( $this->oUnitOption->get( 'country' ) );
-                $_sMarketPlaceURL = $_oLocale->getMarketPlaceURL();
-                return $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sMarketPlaceURL );
-            }
-            /**
-             * @param  array $aProducts
-             * @param  array $aExcludeURLs
-             * @param  array $aExcludeASINs
-             * @return array
-             * @since  4.3.4
-             */
-            private function ___getExcludesApplied( array $aProducts, array $aExcludeURLs, array &$aExcludeASINs ) {
-                $_aExcludeHTMLs    = $this->___getHTTPBodies( $aExcludeURLs );
-                $_aExcludeASINs    = array_unique( array_merge( $aExcludeASINs, $this->___getASINsExtracted( $_aExcludeHTMLs ) ) );
-                $_aExcludeASINKeys = array_flip( $_aExcludeASINs );
-                return array_diff_key( $aProducts, $_aExcludeASINKeys );
-            }
-            /**
-             * @param  array   $aURLs
-             * @param  integer $iPage
-             * @return array
-             */
-            private function ___getURLsPageIncremented( array $aURLs, $iPage ) {
-                $_aURLs = array();
-                foreach( $aURLs as $_iIndex => $_sURL ) {
-                    $_aURLs[ $_iIndex ] = add_query_arg(
-                        array(
-                           'pg' => $iPage,
-                        ),
-                        $_sURL
-                    );
-                }
-                return $_aURLs;
-            }
-            /**
-             * @param array $aURLs
-             * @return array
-             */
-            private function ___getHTTPBodies( array $aURLs ) {
-                // URLs for exclusion items may be empty
-                if ( empty( $aURLs ) ) {
-                    return array();
-                }
-                $_oHTTP = new AmazonAutoLinks_HTTPClient_Multiple(
-                    $aURLs,
-                    $this->oUnitOption->get( 'cache_duration' ),
-                    array(  // http arguments
-                        'timeout'     => 20,
-                        'redirection' => 20,
-                    ),
-                    $this->sUnitType . '_unit_type' // request type
+                $_aASINLocaleCurLang    = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+                $_aASINLocaleCurLangs[ $_aASINLocaleCurLang ] = array(
+                    'asin'      => $_aProduct[ 'ASIN' ],
+                    'locale'    => $_sLocale,
+                    'currency'  => $_sCurrency,
+                    'language'  => $_sLanguage,
                 );
-                return $_oHTTP->get();
+
+                // Store the product
+                $_aProducts[]           = $_aProduct;
+
+                // @deprecated 4.6.14 - this causes too many database queries
+                // when product filter options are set. For example, * in the blacklist title and a few items in the White List ASIN.
+                // the items will be truncated later
+                // Max Number of Items
+                // if ( count( $_aProducts ) >= $iCount ) {
+                //     break;
+                // }
+
             }
 
+            // Second iteration
+            return $this->___getProductsFormatted( $aItems, $_aProducts, $_aASINLocaleCurLangs, $sLocale, $sAssociateID, $iCount );
+
+        }
+
             /**
-             * @param array $aHTMLs
-             * @param $sAssociateID
-             * @param $sSiteDomain
-             *
+             * Second iteration
+             * @param  array   $aRawItems               Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
+             * @param  array   $aProducts               Initially formatted items. (There are two formatting iterations and the second one is done in this method).
+             * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
+             * @param  string  $sLocale
+             * @param  string  $sAssociateID
+             * @param  integer $iUserSetMaxCount        The user set max count.
              * @return array
+             * @since  3.9.0
              */
-            private function ___getProductsScraped( array $aHTMLs, $sAssociateID, $sSiteDomain ) {
-                $_aProducts = array();
-                foreach( $aHTMLs as $_sURL => $_sHTML ) {
-                    $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
-                    $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
-                    $_sModifiedDate   = $this->getElement( $this->aModifiedDates, $_sURL );
-                    foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
-                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
-                    }
-                    $_aProducts       = $_aProducts + $_aFoundProducts;
-                }
-                return $_aProducts;
-            }
+            private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
 
-            /**
-             * @param  array $aHTMLs
-             * @return array A linear array holding found ASINs
-             */
-            private function ___getASINsExtracted( array $aHTMLs ) {
-                $_aASINs = array();
-                foreach( $aHTMLs as $_sHTML ) {
-                    $_oASINScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts_ASIN( $_sHTML );
-                    $_aASINs = array_merge( $_aASINs, $_oASINScraper->get() );
-                }
-                return array_unique( $_aASINs );
-            }
+                add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
+                add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
+                $_iCountFormatBefore = count( $aProducts );
+                try {
 
-            /**
-             * @param array   $aItems
-             * @param string  $sLocale       The `country` unit argument value
-             * @param string  $sAssociateID
-             * @param integer $iCount
-             *
-             * @return      array
-             * @since       3.9.0
-             * @since       4.0.0   Changed the scope to protected for the Embed unit type to extend this class.
-             */
-            protected function _getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
-
-                // First Iteration - Extract displaying ASINs.
-                $_aASINLocaleCurLangs = array();  // stores added product ASINs, locales, currencies and languages for performing a custom database query.
-                $_aProducts           = array();
-
-                $_sLocale             = $sLocale ? strtoupper( $sLocale ) : strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) );
-                $_sCurrency           = $this->oUnitOption->get( array( 'preferred_currency' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale ) );
-                $_sLanguage           = $this->oUnitOption->get( array( 'language' ), AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale ) );
-
-                foreach ( $aItems as $_isIndex => $_aItem ) {
-
-                    $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
-
-                    // This parsed item is no longer needed and must be removed once it is parsed
-                    // as this method is called recursively.
-                    unset( $aItems[ $_isIndex ] );
-
-                    try {
-
-                        $_aProduct = $this->___getProduct( $_aItem, $sLocale, $sAssociateID );
-
-                    } catch ( Exception $_oException ) {
-                        // When the items are filtered out, this is reached
-                        if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
-                            $this->aBlockedASINs[ $_sASIN ] = $_sASIN; // for error message
-                        }
-                        continue;   // skip
+                    $aProducts          = $this->_getProductsFormatted( $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID );
+                    $_iCountFormatAfter = count( $aProducts );
+                    if (
+                           count( $aRawItems )                        // The fetched items still exist. $aRawItems element are deleted after formatting in the above _getProducts() method.
+                        && $iUserSetMaxCount > $_iCountFormatAfter    // If the resulting count (after format) does not meet the expected count.
+                        && $_iCountFormatBefore > $_iCountFormatAfter // This means that at least one item is filtered out with filters in the above _getProductsFormatted() method.
+                    ) {
+                        throw new Exception( $iUserSetMaxCount - $_iCountFormatAfter ); // passing a count for another call
                     }
 
+                } catch ( Exception $_oException ) {
 
-                    $_aASINLocaleCurLang    = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
-                    $_aASINLocaleCurLangs[ $_aASINLocaleCurLang ] = array(
-                        'asin'      => $_aProduct[ 'ASIN' ],
-                        'locale'    => $_sLocale,
-                        'currency'  => $_sCurrency,
-                        'language'  => $_sLanguage,
+                    // Recursive call
+                    $_aAdditionalProducts = $this->_getProducts(
+                        $aRawItems,
+                        $sLocale,
+                        $sAssociateID,
+                        ( integer ) $_oException->getMessage() // the number of items to retrieve
                     );
-
-                    // Store the product
-                    $_aProducts[]           = $_aProduct;
-
-                    // @deprecated 4.6.14 - this causes too many database queries
-                    // when product filter options are set. For example, * in the blacklist title and a few items in the White List ASIN.
-                    // the items will be truncated later
-                    // Max Number of Items
-                    // if ( count( $_aProducts ) >= $iCount ) {
-                    //     break;
-                    // }
+                    $aProducts = array_merge( $aProducts, $_aAdditionalProducts );
 
                 }
 
-                // Second iteration
-                return $this->___getProductsFormatted( $aItems, $_aProducts, $_aASINLocaleCurLangs, $sLocale, $sAssociateID, $iCount );
+                // These removals are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
+                remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
+                remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
+
+                return $aProducts;
 
             }
 
-                /**
-                 * Second iteration
-                 * @param  array   $aRawItems               Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
-                 * @param  array   $aProducts               Initially formatted items. (There are two formatting iterations and the second one is done in this method).
-                 * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
-                 * @param  string  $sLocale
-                 * @param  string  $sAssociateID
-                 * @param  integer $iUserSetMaxCount        The user set max count.
-                 * @return array
-                 * @since  3.9.0
-                 */
-                private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
+            /**
+             *
+             * @param  array  $_aItem
+             * @param  string $_sLocale
+             * @param  string $_sAssociateID
+             * @return array
+             * @throws Exception
+             * @since  3.9.0
+             */
+            private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
 
-                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10, 3 );
-                    add_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100, 1 );
-                    $_iCountFormatBefore = count( $aProducts );
-                    try {
+                $_aProduct = $_aItem + self::$aStructure_Product + self::$aStructure_ProductCommon;
 
-                        $aProducts          = $this->_getProductsFormatted( $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID );
-                        $_iCountFormatAfter = count( $aProducts );
-                        if (
-                               count( $aRawItems )                        // The fetched items still exist. $aRawItems element are deleted after formatting in the above _getProducts() method.
-                            && $iUserSetMaxCount > $_iCountFormatAfter    // If the resulting count (after format) does not meet the expected count.
-                            && $_iCountFormatBefore > $_iCountFormatAfter // This means that at least one item is filtered out with filters in the above _getProductsFormatted() method.
-                        ) {
-                            throw new Exception( $iUserSetMaxCount - $_iCountFormatAfter ); // passing a count for another call
-                        }
-
-                    } catch ( Exception $_oException ) {
-
-                        // Recursive call
-                        $_aAdditionalProducts = $this->_getProducts(
-                            $aRawItems,
-                            $sLocale,
-                            $sAssociateID,
-                            ( integer ) $_oException->getMessage() // the number of items to retrieve
-                        );
-                        $aProducts = array_merge( $aProducts, $_aAdditionalProducts );
-
-                    }
-
-                    // These removals are necessary as the hooks might not be called so the remove_filter() inside the callback method does not get triggered.
-                    remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFormatProductWithDBRow' ), 10 );
-                    remove_filter( 'aal_filter_unit_each_product_with_database_row', array( $this, 'replyToFilterProducts' ), 100 );
-
-                    return $aProducts;
-
+                // ASIN - required to detect duplicated items.
+                if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
+                    throw new Exception( '(product filter) The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
                 }
 
-                /**
-                 *
-                 * @param  array  $_aItem
-                 * @param  string $_sLocale
-                 * @param  string $_sAssociateID
-                 * @return array
-                 * @throws Exception
-                 * @since  3.9.0
-                 */
-                private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
+                // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
+                $_bPAAPIKeysSet = $this->oOption->isPAAPIKeySet( $_sLocale );
+                $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
+                    $_aProduct[ 'product_url' ],
+                    $_aProduct[ 'ASIN' ],
+                    $_bPAAPIKeysSet ? $this->oUnitOption->get( 'language' ) : '',
+                    $_bPAAPIKeysSet ? $this->oUnitOption->get( 'preferred_currency' ) : ''
+                );
 
-                    $_aProduct = $_aItem + self::$aStructure_Product + self::$aStructure_ProductCommon;
+                // Title
+                $_aProduct[ 'raw_title' ] = $this->getElement( $_aProduct, 'title' );
+                $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
 
-                    // ASIN - required to detect duplicated items.
-                    if ( $this->isASINBlocked( $_aProduct[ 'ASIN' ] ) ) {
-                        throw new Exception( '(product filter) The ASIN is black-listed: ' . $_aProduct[ 'ASIN' ] );
-                    }
+                // At this point, update the black&white lists as this item is parsed.
+                $this->setParsedASIN( $_aProduct[ 'ASIN' ] );
 
-                    // Product Link (hyperlinked url) - ref=nosim, linkstyle, associate id etc.
-                    $_bPAAPIKeysSet = $this->oOption->isPAAPIKeySet( $_sLocale );
-                    $_aProduct[ 'product_url' ] = $this->getProductLinkURLFormatted(
+                // Thumbnail
+                $_aProduct[ 'thumbnail_url' ]    = $this->getProductImageURLFormatted(
+                    $_aProduct[ 'thumbnail_url' ],
+                      $this->oUnitOption->get( 'image_size' ),
+                      strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
+                );
+
+                // Format the item
+                // Thumbnail
+                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
+
+                // Title
+                $_aProduct[ 'formatted_title' ]     = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
+
+                // Button - check if the %button% variable exists in the item format definition.
+                // It accesses the database, so if not found, the method should not be called.
+                if ( $this->oUnitOption->hasItemFormatTags( array( '%button%', ) ) ) {
+                    $_aProduct[ 'button' ] = $this->_getButton(
+                        $this->oUnitOption->get( 'button_type' ),
+                        $this->_getButtonID(),
                         $_aProduct[ 'product_url' ],
                         $_aProduct[ 'ASIN' ],
-                        $_bPAAPIKeysSet ? $this->oUnitOption->get( 'language' ) : '',
-                        $_bPAAPIKeysSet ? $this->oUnitOption->get( 'preferred_currency' ) : ''
+                        $_sLocale,
+                        $_sAssociateID,
+                        $this->oOption->getPAAPIAccessKey( $_sLocale ), // public access key
+                        $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
                     );
-
-                    // Title
-                    $_aProduct[ 'raw_title' ] = $this->getElement( $_aProduct, 'title' );
-                    $_aProduct[ 'title' ]     = $this->getTitleSanitized( $_aProduct[ 'raw_title' ], $this->oUnitOption->get( 'title_length' ) );
-
-                    // At this point, update the black&white lists as this item is parsed.
-                    $this->setParsedASIN( $_aProduct[ 'ASIN' ] );
-
-                    // Thumbnail
-                    $_aProduct[ 'thumbnail_url' ]    = $this->getProductImageURLFormatted(
-                        $_aProduct[ 'thumbnail_url' ],
-                          $this->oUnitOption->get( 'image_size' ),
-                          strtoupper( $this->oUnitOption->get( 'country' ) )  // locale
-                    );
-
-                    // Format the item
-                    // Thumbnail
-                    $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
-
-                    // Title
-                    $_aProduct[ 'formatted_title' ]     = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
-
-                    // Button - check if the %button% variable exists in the item format definition.
-                    // It accesses the database, so if not found, the method should not be called.
-                    if ( $this->oUnitOption->hasItemFormatTags( array( '%button%', ) ) ) {
-                        $_aProduct[ 'button' ] = $this->_getButton(
-                            $this->oUnitOption->get( 'button_type' ),
-                            $this->_getButtonID(),
-                            $_aProduct[ 'product_url' ],
-                            $_aProduct[ 'ASIN' ],
-                            $_sLocale,
-                            $_sAssociateID,
-                            $this->oOption->getPAAPIAccessKey( $_sLocale ), // public access key
-                            $this->oUnitOption->get( 'override_button_label' ) ? $this->oUnitOption->get( 'button_label' ) : null
-                        );
-                    }
-
-                    /**
-                     * Let third-parties filter products.
-                     * @since 3.4.13
-                     */
-                    $_aProduct = apply_filters(
-                        'aal_filter_unit_each_product',
-                        $_aProduct,
-                        array(
-                            'locale'        => $_sLocale,
-                            'asin'          => $_aProduct[ 'ASIN' ],
-                            'associate_id'  => $_sAssociateID,
-                            'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
-                        ),
-                        $this
-                    );
-                    if ( empty( $_aProduct ) ) {
-                        throw new Exception( 'The product array is empty. Most likely it is filtered out.' );
-                    }
-                    return $_aProduct;
-
                 }
+
+                /**
+                 * Let third-parties filter products.
+                 * @since 3.4.13
+                 */
+                $_aProduct = apply_filters(
+                    'aal_filter_unit_each_product',
+                    $_aProduct,
+                    array(
+                        'locale'        => $_sLocale,
+                        'asin'          => $_aProduct[ 'ASIN' ],
+                        'associate_id'  => $_sAssociateID,
+                        'asin_locale'   => $_aProduct[ 'ASIN' ] . '_' . strtoupper( $_sLocale ),
+                    ),
+                    $this
+                );
+                if ( empty( $_aProduct ) ) {
+                    throw new Exception( 'The product array is empty. Most likely it is filtered out.' );
+                }
+                return $_aProduct;
+
+            }
 
     /**
      * @remark   The timing of filtering items by image and title is changed in order to support resuming with caches.
@@ -682,43 +419,5 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
                 }
                 return is_array( $anReviews );
             }
-
-    /**
-     * @param    array  $aCache
-     * @callback add_filter() aal_filter_http_response_cache
-     * @return   array
-     */
-    public function replyToCaptureUpdatedDate( $aCache ) {
-        $this->aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
-        return $aCache;
-    }
-
-    /**
-     * @param    array|WP_error $aoResponse
-     * @param    string         $sURL
-     * @callback add_filter()   aal_filter_http_request_response
-     * @since    4.2.2
-     * @return   array|WP_Error
-     */
-    public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        $this->aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
-        return $aoResponse;
-    }
-        /**
-         * Extracts the last-modified header item and convert it to the unix timestamp.
-         * @since   4.2.10
-         * @param   WP_Error|array  $aoResponse
-         * @param   integer         $iDefault
-         * @return  integer
-         */
-        private function ___getLastModified( $aoResponse, $iDefault=0 ) {
-            $_sResponseDate = wp_remote_retrieve_header( $aoResponse, 'last-modified' );
-            $_sResponseDate = $_sResponseDate
-                ? $_sResponseDate
-                : wp_remote_retrieve_header( $aoResponse, 'date' );
-            return $_sResponseDate
-                ? strtotime( $_sResponseDate )
-                : $iDefault;
-        }
 
 }

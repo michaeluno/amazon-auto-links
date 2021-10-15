@@ -280,6 +280,8 @@ return array(
     "AmazonAutoLinks_Unit_Category_Event_RenewCacheAction" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/action/AmazonAutoLinks_Unit_Category_Event_RenewCacheAction.php", 
     "AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php", 
     "AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview.php", 
+    "AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/filter/AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher.php",
+    "AmazonAutoLinks_Unit_Category_Event_Filter_ProductsSorter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/event/filter/AmazonAutoLinks_Unit_Category_Event_Filter_ProductsSorter.php", 
     "AmazonAutoLinks_UnitOption_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/option/AmazonAutoLinks_UnitOption_category.php", 
     "AmazonAutoLinks_UnitOutput_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/output/AmazonAutoLinks_UnitOutput_category.php", 
     "AmazonAutoLinks_ScraperDOM_BestsellerProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/utility/AmazonAutoLinks_ScraperDOM_BestsellerProducts.php", 
