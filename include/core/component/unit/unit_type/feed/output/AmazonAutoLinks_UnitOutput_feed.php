@@ -38,19 +38,17 @@ class AmazonAutoLinks_UnitOutput_feed extends AmazonAutoLinks_UnitOutput_categor
     /**
      * Fetches product data and returns the associative array containing the output of product links.
      *
-     * @param array $aURLs
-     * @return            array            An array contains products.
+     * @return array An array contains products.
+     * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
-    public function fetch( $aURLs=array() ) {
+    public function fetch() {
 
         $_aProducts    = array();
-        $_aFeedURLs    = $this->getAsArray( $this->oUnitOption->get( 'feed_urls' ) );
-        $_aFeedURLs    = array_merge( $_aFeedURLs, $aURLs );
-        foreach( $_aFeedURLs as $_sFeedURL ) {
+        foreach( $this->getAsArray( $this->oUnitOption->get( 'feed_urls' ) ) as $_sFeedURL ) {
             if ( false === filter_var( $_sFeedURL, FILTER_VALIDATE_URL ) ){
                 continue;
             }
-            $_aProducts = $_aProducts+ $this->___getProducts( $_sFeedURL );
+            $_aProducts = $_aProducts + $this->___getProducts( $_sFeedURL );
         }
 
         $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort( $_aProducts, $this->oUnitOption->get( 'sort' ) );

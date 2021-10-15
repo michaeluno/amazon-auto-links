@@ -68,14 +68,14 @@ class AmazonAutoLinks_UnitOutput_category extends AmazonAutoLinks_UnitOutput_Bas
      * If the first parameter is not given,
      * it will determine the RSS urls by the post IDs from the given arguments set in the constructor.
      *
-     * @param  array $aURLs
      * @return array The array contains product information.
      * @since  4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
+     * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
-    public function fetch( $aURLs=array() ) {
+    public function fetch() {
 
         $_aPageURLs          = wp_list_pluck( $this->oUnitOption->get( array( 'categories' ), array() ), 'page_url' );
-        $_aPageURLs          = array_merge( $aURLs, $this->___getURLs( $_aPageURLs ) );
+        $_aPageURLs          = $this->___getURLs( $_aPageURLs );
         $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
         $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
 

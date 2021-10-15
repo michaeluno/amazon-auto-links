@@ -49,15 +49,14 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      *
      * @param  array $aURLs
      * @return array An array contains products.
+     * @since  ?
+     * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
-    public function fetch( $aURLs=array() ) {
+    public function fetch() {
 
-        $_aURLs                  = array_merge(
-            $aURLs,
-            // Originally the glue was \s+ but not sure what this was for.
-            // If it is split by a white space, search result URL cannot be parsed properly such as https://www.amazon.it/s?k=harry potter&...
-            preg_split( "/[\r\n]+/", trim( ( string ) $this->oUnitOption->get( 'uri' ) ), 0, PREG_SPLIT_NO_EMPTY )
-        );
+        // Originally the glue was \s+ but not sure what this was for.
+        // If it is split by a white space, search result URL cannot be parsed properly such as https://www.amazon.it/s?k=harry potter&...
+        $_aURLs                  = preg_split( "/[\r\n]+/", trim( ( string ) $this->oUnitOption->get( 'uri' ) ), 0, PREG_SPLIT_NO_EMPTY );
 
         $_sLanguage              = $this->oUnitOption->get( 'language' );
         $_aASINsPerURL           = $this->___getASINsPerURL( $_aURLs, $_sLanguage, $_aASINsPerNonProductURL );

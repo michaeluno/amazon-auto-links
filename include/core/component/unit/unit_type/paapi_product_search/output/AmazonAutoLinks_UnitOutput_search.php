@@ -74,14 +74,14 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
     );
 
     /**
-     *
-     * @param     array $aURLs
-     * @return    array The response array.
+     * @return array The response array.
+     * @since  ?
+     * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
-    public function fetch( $aURLs=array() ) {
+    public function fetch() {
 
         // Get API responses
-        $_aResponse = $this->_getResponses( $aURLs );
+        $_aResponse = $this->_getResponses();
         $_aError    = $this->getElement( $_aResponse, array( 'Error' ), array() );
 
         // Check errors
@@ -99,12 +99,12 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
         /**
          * @since  3.1.4
-         * @since  3.8.1      Added the $aURLs parameter.
-         * @param  array      $aURLs      The `search` unit type does not use this parameter but `url` and `category` do.
+         * @since  3.8.1      Added the `$aURLs` parameter.
+         * @since  5.0.0      Removed the first parameter `$aURLs`.
          * @scope  protected  The 'url' unit type will extend this method.
          * @return array
          */
-        protected function _getResponses( array $aURLs=array() ) {
+        protected function _getResponses() {
 
             // Sanitize the search terms
             $this->___setSearchTerms();

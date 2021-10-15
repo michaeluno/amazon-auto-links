@@ -256,15 +256,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     /**
      * Gets the output of product links by specifying a template.
      *
-     * @remark      The local variables defined in this method will be accessible in the template file.
-     *
-     * @param array $aURLs
-     *
-     * @return      string
-     * @since
-     * @since       4.0.2   Deprecated the second $sTemplatePath parameter.
+     * @remark The local variables defined in this method will be accessible in the template file.
+     * @return string
+     * @since  ?
+     * @since  4.0.2  Deprecated the second parameter of `$sTemplatePath`.
+     * @since  5.0.0  Deprecated the first parameter of `$aURLs`.
      */
-    public function get( $aURLs=array() ) {
+    public function get() {
 
         $_aHooks            = $this->___getHooksSetPerOutput();
 
@@ -273,9 +271,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
 
         $_sTemplatePath     = $this->___getTemplatePath();
-
-        $_aProducts         = $this->fetch( $aURLs );
-        $_aProducts         = apply_filters( 'aal_filter_products', $_aProducts, $aURLs, $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
+        $_aProducts         = apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
         $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
         try {
@@ -605,11 +601,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Retrieves product link data from a remote server.
-     * @remark      should be extended and must return an array.
-     * @return      array
-     * @param       array $aURLs
+     * @remark Should be extended and must return an array.
+     * @return array
+     * @since  ?
+     * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
-    public function fetch( $aURLs ) {
+    public function fetch() {
         return array(); 
     }
 

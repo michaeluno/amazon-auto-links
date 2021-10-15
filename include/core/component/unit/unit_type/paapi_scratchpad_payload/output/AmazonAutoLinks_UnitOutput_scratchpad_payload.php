@@ -35,9 +35,11 @@ class AmazonAutoLinks_UnitOutput_scratchpad_payload extends AmazonAutoLinks_Unit
     /**
      * Performs API requests and get response.
      *
-     * @return      array
+     * @return array
+     * @since  ?
+     * @since  5.0.0  Removed the first parameter of `$aURLs`.
      */
-    protected function _getResponses( array $aURLs=array() ) {
+    protected function _getResponses() {
 
         $_sPayloadJSON = $this->oUnitOption->get( 'payload' );
         $_aPayload     = ( array ) json_decode( $_sPayloadJSON,true );

@@ -27,18 +27,18 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
      * First, sets up the unit options for the item look up API query.
      * 
      * @since       3.2.0
-     * @since       3.8.1       Added the `$aURLs` parameter to accept direct URLs to be passsed.
+     * @since       3.8.1       Added the `$aURLs` parameter to accept direct URLs to be passed.
+     * @since       5.0.0       Removed the first parameter `$aURLs`.
      * @scope       protected   The 'url' unit type will extend this method.
-     * @param       array       $aURLs
      * @return      array
      */
-    protected function _getResponses( array $aURLs=array() ) {
+    protected function _getResponses() {
 
         /**
-         * Retrieve the HTML body from data base. It will fetch if the data does not exist.
+         * Retrieve the HTML body from the database table. It will fetch if the data does not exist.
          * Also updates the `_found_items` unit option.
          */
-        $_aURLs  = array_merge( $aURLs, $this->getAsArray( $this->oUnitOption->get( 'urls' ) ) );
+        $_aURLs  = $this->getAsArray( $this->oUnitOption->get( 'urls' ) );
         $_aHTMLs = $this->_getHTMLBodies( $_aURLs );
         
         // Retrieve ASINs from the given documents. Supports plain text.
@@ -73,7 +73,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
 
         // Now do the API request and get responses.
         $this->oUnitOption->set( 'search_per_keyword', false ); // [4.6.22+] This option for the url unit type is deprecated and it is always off.
-        return parent::_getResponses( $_aURLs );
+        return parent::_getResponses();
         
     }  
 
