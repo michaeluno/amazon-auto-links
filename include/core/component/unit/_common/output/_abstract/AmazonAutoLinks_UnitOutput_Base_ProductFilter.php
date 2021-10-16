@@ -141,7 +141,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
         return false;        
     }
 
-    protected function isDescriptionBlocked( $sDescription ) {
+    /**
+     * @param  string $sDescription
+     * @return boolean
+     * @since  ?
+     * @since  5.0.0   Changed the visibility scope to public from protected as the products-formatter classes access this.
+     */
+    public function isDescriptionBlocked( $sDescription ) {
         if ( $this->oUnitProductFilter->isDescriptionAllowed( $sDescription ) ) {
             return false;
         }
@@ -159,8 +165,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ProductFilter extends AmazonAutoL
 
     /**
      * @param string $sASIN
+     * @since ?
+     * @since 5.0.0 Changed the visibility scope to public from protected as formetter classes access this.
      */
-    protected function setParsedASIN( $sASIN ) {
+    public function setParsedASIN( $sASIN ) {
         $this->oUnitProductFilter->markParsed( $sASIN );
         $this->oGlobalProductFilter->markParsed( $sASIN );        
     }

@@ -67,6 +67,7 @@ class AmazonAutoLinks_Unit_UnitType_Loader_category extends AmazonAutoLinks_Unit
         new AmazonAutoLinks_Unit_Category_Event_RenewCacheAction;
         new AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher;
         new AmazonAutoLinks_Unit_Category_Event_Filter_ProductsSorter;
+        new AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter;
 
     }
 

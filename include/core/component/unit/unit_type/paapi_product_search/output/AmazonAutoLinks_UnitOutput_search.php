@@ -657,7 +657,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
 
                     $_iResultCount = count( $_aProducts );
                     // Second iteration.
-                    $_aProducts = $this->_getProductsFormatted(
+                    $_aProducts = $this->getProductsFormatted(
                         $_aProducts,
                         $aASINLocaleCurLangs,
                         $_sLocale,
@@ -766,10 +766,10 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
              * @since  3.5.0
              */
             private function ___getDescription( $sContent, $sProductURL ) {
-                return $this->_getDescriptionSanitized(
+                return $this->getDescriptionFormatted(
                     $sContent,
                     $this->oUnitOption->get( 'description_length' ),
-                    $this->_getReadMoreText( $sProductURL )
+                    $this->getReadMoreText( $sProductURL )
                 );
             }
 
@@ -806,7 +806,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
                     'title'              => $sTitle, // the shortcode parameter 'title' can suppress the title in the parsed data but an empty string is not accepted. To remove a title, use the `Title Length` / `Item Format` option.
-                    'text_description'   => $this->_getDescriptionSanitized( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
+                    'text_description'   => $this->getDescriptionFormatted( $_sContent, 250, '' /* no read more link */ ),  // forced-truncated version of the contents
                     'description'        => $_sDescription, // reflects the user set character length. Additional meta data will be prepended.
                     'meta'               => '', // @todo maybe deprecated?
                     'content'            => $_sContent,
@@ -873,7 +873,7 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 $_aProduct[ 'description' ] = $this->___getProductDescriptionFormatted( $_aProduct );
     
                 // Thumbnail
-                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
+                $_aProduct[ 'formatted_thumbnail' ] = $this->getProductThumbnailFormatted( $_aProduct );
 
                 // Title
                 $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
@@ -881,9 +881,9 @@ class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_
                 // Button - check if the %button% variable exists in the item format definition.
                 // It accesses the database, so if not found, the method should not be called.
                 if ( $this->oUnitOption->hasItemFormatTags( array( '%button%', ) ) ) {
-                    $_aProduct[ 'button' ] = $this->_getButton(
+                    $_aProduct[ 'button' ] = $this->getButtonFormatted(
                         $this->oUnitOption->get( 'button_type' ),
-                        $this->_getButtonID(),
+                        $this->getButtonID(),
                         $_aProduct[ 'product_url' ],
                         $_aProduct[ 'ASIN' ],
                         $_sLocale,

@@ -46,7 +46,11 @@ class AmazonAutoLinks_Unit_UnitType_Loader_embed extends AmazonAutoLinks_Unit_Un
      */    
     public $aProtectedMetaKeys = array();
 
-    protected function _construct( $sScriptPath ) {}
+    protected function _construct( $sScriptPath ) {
+        // Events
+        new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher;
+        new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFormatter;
+    }
 
     /**
      * Adds post meta boxes.

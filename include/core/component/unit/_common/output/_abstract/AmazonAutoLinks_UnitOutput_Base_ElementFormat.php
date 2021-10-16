@@ -65,15 +65,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     );
 
     /**
-     * @return      array
-     * @since       unknown
-     * @since       3.5.0   Renamed from `_formatProducts()`.
-     * @param       array   $aProducts
-     * @param       array   $aASINLocaleCurLangs
-     * @param       string  $sLocale
-     * @param       string  $sAssociateID
+     * @return array
+     * @since  ?
+     * @since  3.5.0  Renamed from `_formatProducts()`.
+     * @since  5.0.0  Changed the visibility scope to public from protected as formatter classes access it.
+     * @param  array  $aProducts
+     * @param  array  $aASINLocaleCurLangs
+     * @param  string $sLocale
+     * @param  string $sAssociateID
      */
-    protected function _getProductsFormatted( array $aProducts, array $aASINLocaleCurLangs, $sLocale, $sAssociateID ) {
+    public function getProductsFormatted( array $aProducts, array $aASINLocaleCurLangs, $sLocale, $sAssociateID ) {
 
         $_aDBProductRows = $this->___getProductsRowsFromDatabase( $aASINLocaleCurLangs );
         $_sLocale        = strtoupper( $this->oUnitOption->get( array( 'country' ), 'US' ) ); // @todo use the third parameter value
@@ -220,7 +221,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 ? $_aProduct[ 'thumbnail_url' ]
                 : $this->getElement( $_aDBProductRow, array( 'images', 'main', 'MediumImage' ), '' );
             if ( $_sNativeThumbnailURL !== $_aProduct[ 'thumbnail_url' ] ) {
-                $_aProduct[ 'formatted_thumbnail' ] = $this->_getProductThumbnailFormatted( $_aProduct );
+                $_aProduct[ 'formatted_thumbnail' ] = $this->getProductThumbnailFormatted( $_aProduct );
             }
 
             // 4.7.8
@@ -321,12 +322,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Returns the formatted product thumbnail HTML block.
      *
-     * @param       array       $aProduct
-     * @since       2.1.1
-     * @since       3.5.0       Renamed from `_formatProductThumbnail()`.
-     * @return      string
+     * @param  array  $aProduct
+     * @since  2.1.1
+     * @since  3.5.0  Renamed from `_formatProductThumbnail()`.
+     * @return string
      */
-    protected function _getProductThumbnailFormatted( array $aProduct ) {
+    public function getProductThumbnailFormatted( array $aProduct ) {
 
         if ( ! isset( $aProduct[ 'thumbnail_url' ] ) ) {
             return '';
@@ -371,10 +372,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @param  null|integer|double $nMaxLength    A numeric value that determines the length.
      * @param  string              $sReadMoreText
      * @return string
-     * @since  unknown
+     * @since  ?
      * @since  3.3.0               Renamed from `sanitizeDescription()`.
+     * @since  5.0.0               Changed the visibility scope to public from protected as formatter classes access this. Renamed from `_getDescriptionSanitized()`.
      */
-    protected function _getDescriptionSanitized( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
+    public function getDescriptionFormatted( $sDescription, $nMaxLength=null, $sReadMoreText='' ) {
 
         $sDescription = strip_tags( $sDescription );
         $sDescription = preg_replace( '/[\s\t]+/', ' ', $sDescription );
@@ -394,11 +396,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     }
 
     /**
-     * @param       string  The url to be linked.
-     * @return      string
-     * @since       3.3.0
+     * @param  string The url to be linked.
+     * @return string
+     * @since  3.3.0
+     * @sicne  5.0.0  Changed the visibility scope to public from protected as formatter classes access this.
      */
-    protected function _getReadMoreText( $sReadMoreURL ) {
+    public function getReadMoreText( $sReadMoreURL ) {
         
         if ( ! $sReadMoreURL ) {
             return '';
@@ -440,19 +443,19 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Formats a button.
      *
-     * @param integer        $iButtonType
-     * @param integer|string $isButtonID
-     * @param string         $sProductURL
-     * @param string         $sASIN
-     * @param string         $sLocale
-     * @param string         $sAssociateID
-     * @param string         $sAccessKey
-     * @param string         $nsButtonLabelToOverride
-     *
-     * @return      string
-     * @since       3
+     * @param  integer        $iButtonType
+     * @param  integer|string $isButtonID
+     * @param  string         $sProductURL
+     * @param  string         $sASIN
+     * @param  string         $sLocale
+     * @param  string         $sAssociateID
+     * @param  string         $sAccessKey
+     * @param  string         $nsButtonLabelToOverride
+     * @return string
+     * @since  3
+     * @since  5.0.0  Renamed from `_getButton()`. Changed the visibility scope to public from protected as accessed from formatter classes.
      */
-    protected function _getButton( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey, $nsButtonLabelToOverride=null ) {
+    public function getButtonFormatted( $iButtonType, $isButtonID, $sProductURL, $sASIN, $sLocale, $sAssociateID, $sAccessKey, $nsButtonLabelToOverride=null ) {
         $_aButtonArguments = array(
             'type'          => ( integer ) $iButtonType,
             'id'            => ( integer ) $isButtonID,
@@ -470,20 +473,22 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
     /**
      * Formats the given url such as adding associate ID, ref=nosim, and link style.
      *
-     * @remark      The similarity product formatter class accesses this method.
-     * @param string $sURL
-     * @param string $sASIN
-     * @param string $sLanguageCode
-     * @param string $sCurrency
-     * @return      string
-     * @since       unknown
-     * @since       3.5.0       Changed the visibility scope from protected.
-     * @since       3.10.0      Added the `$sLanguageCode` and `$sCurrency` parameter.
-     * @since       4.3.0       Moved major part to a separate class.
+     * @remark The similarity product formatter class accesses this method.
+     * @param  string $sURL
+     * @param  string $sASIN
+     * @param  string $sLanguageCode
+     * @param  string $sCurrency
+     * @return string
+     * @since  ?
+     * @since  3.5.0  Changed the visibility scope from protected.
+     * @since  3.10.0 Added the `$sLanguageCode` and `$sCurrency` parameter.
+     * @since  4.3.0  Moved major part to a separate class.
      */
     public function getProductLinkURLFormatted( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
-
-        // 3.6.4+   Allows third parties to modify the link.
+        /**
+         * Allows third parties to modify the link.
+         * @since 3.6.4
+         */
         return apply_filters(
            'aal_filter_product_link', // filter hook name
             $sURL,    // filtering value
@@ -493,7 +498,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             $sLanguageCode,                             // 4.3.0
             $sCurrency                                  // 4.3.0
         );
-
     }
 
     /**
@@ -505,25 +509,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @deprecated  3.9.0   Use the method of `AmazonAutoLinks_Unit_Utility`.
      */
     protected function _getContents( $aItem ) {
-
-        // @deprecated 3.9.0    EditorialReviews no longer exist in the response of PA-API 5.0.
-/*        $_aEditorialReviews = $this->getElementAsArray(
-            $aItem,
-            array( 'EditorialReviews', 'EditorialReview' )
-        );
-        $_oContentFormatter = new AmazonAutoLinks_UnitOutput__Format_content( 
-            $_aEditorialReviews,
-            $this->oDOM,
-            $this->oUnitOption
-        );
-        $_sContents = $_oContentFormatter->get();*/
-
         $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
         $_sContents = implode( ' ', $_aFeatures );
         return "<div class='amazon-product-content'>"
                 . $_sContents
             . "</div>";
-
     }
 
 }

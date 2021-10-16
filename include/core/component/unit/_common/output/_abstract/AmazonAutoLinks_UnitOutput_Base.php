@@ -176,6 +176,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         // Properties set after the user constructor as some properties need to be updated in individual unit types.
         $this->bDBTableAccess    = $this->___hasCustomDBTableAccess();
 
+        $this->aErrors           = array();
+
     }
 
         /**
@@ -228,18 +230,19 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
     /**
-     * Sets up properties.
-     * @remark      Called after required properties are all set up.
-     * @remark      Should be overridden in an extended class.
-     * @return      void
+     * Sets up unit-type-specific properties.
+     * @remark Called after required properties are all set up.
+     * @remark Should be overridden in an extended class.
      */
     protected function _setProperties() {}
 
     /**
      * 
-     * @return      string|integer      The set button id. If not set, `default` will be returned.
+     * @return string|integer      The set button id. If not set, `default` will be returned.
+     * @since  ?
+     * @since  5.0.0 Changed the visibility scope to public from protected as accessed from formatter classes.
      */
-    protected function _getButtonID() {
+    public function getButtonID() {
         
         $_iButtonID = ( integer ) $this->oUnitOption->get( 'button_id' );
         
@@ -607,7 +610,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @since  5.0.0 Removed the first parameter of `$aURLs`.
      */
     public function fetch() {
-        return array(); 
+        $_aProducts = apply_filters( 'aal_filter_unit_output_products_from_source_' . $this->sUnitType, array(), $this );
+        $_aProducts = apply_filters( 'aal_filter_unit_output_products_format_' . $this->sUnitType, $_aProducts, $this );
+        return $this->getAsArray( $_aProducts );
     }
 
 }

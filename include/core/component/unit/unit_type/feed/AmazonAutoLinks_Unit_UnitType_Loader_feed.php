@@ -45,18 +45,25 @@ class AmazonAutoLinks_Unit_UnitType_Loader_feed extends AmazonAutoLinks_Unit_Uni
      */    
     public $aProtectedMetaKeys = array();
 
+    /**
+     * @param string $sScriptPath
+     */
     protected function _construct( $sScriptPath ) {
+
         self::$sDirPath = dirname( __FILE__ );
 
         // Events
         new AmazonAutoLinks_Unit_Feed_Event_RenewCacheAction;
+        new AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsFetcher;   // 5.0.0+
+        new AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsSorter;    // 5.0.0+
+        new AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsFormatter; // 5.0.0+
+
     }
 
     /**
      * Adds post meta boxes.
      * 
-     * @since       4.0.0
-     * @return      void
+     * @since 4.0.0
      */
     protected function _loadAdminComponents( $sScriptPath ) {
 
