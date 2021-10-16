@@ -14,28 +14,25 @@
  */
 class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFormatter_Base {
 
-    public $sUnitType = 'category';
-
     /**
-     * @var AmazonAutoLinks_UnitOutput_category
+     * @var   string
+     * @since 5.0.0
      */
-    public $oUnitOutput;
+    public $sUnitType = 'category';
 
     /**
      * Unit type specific product structure.
      * @var array
+     * @since 5.0.0
      */
     public static $aStructure_Product = array();
 
     /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_category $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
-
-        $this->oUnitOutput = $oUnitOutput;
+    protected function _getItemsFormatted( $aProducts ) {
 
         $_iCountUserSet      = ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' );
         $_aProducts          = $this->___getProducts(
@@ -44,7 +41,6 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
             ( string ) $this->oUnitOutput->oUnitOption->get( 'associate_id' ),
             $_iCountUserSet < 10 ? 10 : $_iCountUserSet     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
         );
-        unset( $this->oUnitOutput );
         return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
 
     }

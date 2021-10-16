@@ -17,18 +17,11 @@ class AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsFetcher extends AmazonAutoL
     public $sUnitType = 'feed';
 
     /**
-     * @var AmazonAutoLinks_UnitOutput_feed
-     */
-    public $oUnitOutput;
-
-    /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_feed $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
-        $this->oUnitOutput = $oUnitOutput;
+    protected function _getItemsFromSource( $aProducts ) {
         $_aProducts    = array();
         foreach( $this->getAsArray( $this->oUnitOutput->oUnitOption->get( 'feed_urls' ) ) as $_sFeedURL ) {
             if ( false === filter_var( $_sFeedURL, FILTER_VALIDATE_URL ) ){
@@ -36,7 +29,6 @@ class AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsFetcher extends AmazonAutoL
             }
             $_aProducts = $_aProducts + $this->___getProducts( $_sFeedURL );
         }
-        unset( $this->oUnitOutput );
         return $_aProducts;
     }
 

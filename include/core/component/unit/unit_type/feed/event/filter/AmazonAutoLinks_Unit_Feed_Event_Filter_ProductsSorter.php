@@ -20,12 +20,11 @@ class AmazonAutoLinks_Unit_Feed_Event_Filter_ProductsSorter extends AmazonAutoLi
 
     /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_category $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
-        $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort( $aProducts, $oUnitOutput->oUnitOption->get( 'sort' ) );
+    protected function _getItemsFromSource( $aProducts ) {
+        $_oSorter = new AmazonAutoLinks_Unit_Output_Sort( $aProducts, $this->oUnitOutput->oUnitOption->get( 'sort' ) );
         return $_oSorter->get();
     }
 

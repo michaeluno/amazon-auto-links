@@ -20,14 +20,13 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsSorter extends AmazonAu
 
     /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_category $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
+    protected function _getItemsFromSource( $aProducts ) {
         $_oSorter     = new AmazonAutoLinks_Unit_Output_Sort(
             $aProducts,
-            $this->___getSortOrder( $oUnitOutput->oUnitOption->get( 'sort' ) )
+            $this->___getSortOrder( $this->oUnitOutput->oUnitOption->get( 'sort' ) )
         );
         return $_oSorter->get();
     }

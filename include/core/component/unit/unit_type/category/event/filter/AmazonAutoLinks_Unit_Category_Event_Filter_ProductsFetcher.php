@@ -23,24 +23,20 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
 
     /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_category $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
+    protected function _getItemsFromSource( $aProducts ) {
 
-        $this->oUnitOutput   = $oUnitOutput;
-        $_aPageURLs          = wp_list_pluck( $oUnitOutput->oUnitOption->get( array( 'categories' ), array() ), 'page_url' );
+        $_aPageURLs          = wp_list_pluck( $this->oUnitOutput->oUnitOption->get( array( 'categories' ), array() ), 'page_url' );
         $_aPageURLs          = $this->___getURLs( $_aPageURLs );
-        $_aExcludingPageURLs = wp_list_pluck( $oUnitOutput->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
+        $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOutput->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
         $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
 
-        $_iCountUserSet      = ( integer ) $oUnitOutput->oUnitOption->get( 'count' );
+        $_iCountUserSet      = ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' );
         $_iCount             = $_iCountUserSet < 10 ? 10 : $_iCountUserSet;     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
 
-        $_aProducts          = array_merge( $aProducts, $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount ) );
-        unset( $this->oUnitOutput );
-        return $_aProducts;
+        return array_merge( $aProducts, $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount ) );
 
     }
 
