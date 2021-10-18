@@ -13,6 +13,7 @@
  *
  * @since 3.3.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_search`.
+ * @remak This class does not have the `final` notation as this is extended by some other classes.
 */
 class AmazonAutoLinks_Unit_UnitType_Loader_search extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
@@ -52,8 +53,17 @@ class AmazonAutoLinks_Unit_UnitType_Loader_search extends AmazonAutoLinks_Unit_U
      * @since 5.0.0
      */
     protected function _construct( $sScriptPath ) {
+
         add_filter( 'aal_filter_unit_paapi_unit_types', array( $this, 'replyToGetPAAPIUnitTypes' ) );
         add_filter( 'aal_filter_admin_unit_paapi_unit_types_unit_creation_page_url', array( $this, 'replyToGetUnitCreationPageURL' ), 10, 2 );
+
+        // Extended classes have a different unit type slug
+        if ( 'search' === $this->sUnitTypeSlug ) {
+            new AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher;
+            new AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsSorter;
+            new AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter;
+        }
+
     }
         /**
          * @since  5.0.0

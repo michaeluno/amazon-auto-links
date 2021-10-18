@@ -14,7 +14,7 @@
  * @since 3.3.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_item_lookup`.
 */
-class AmazonAutoLinks_Unit_UnitType_Loader_item_lookup extends AmazonAutoLinks_Unit_UnitType_Loader_search {
+final class AmazonAutoLinks_Unit_UnitType_Loader_item_lookup extends AmazonAutoLinks_Unit_UnitType_Loader_search {
 
     /**
      * Stores each unit type component directory path.
@@ -46,6 +46,21 @@ class AmazonAutoLinks_Unit_UnitType_Loader_item_lookup extends AmazonAutoLinks_U
      * @since 5.0.0
      */
     protected $_sPAAPIOperation = 'GetItems';
+
+    /**
+     * @remark Do not remove this method to override the parent method handling unit-type specific set-ups.
+     * @param  string $sScriptPath
+     * @since  5.0.0
+     */
+    protected function _construct( $sScriptPath ) {
+        // Extended classes have a different unit type slug
+        if ( 'item_lookup' === $this->sUnitTypeSlug ) {
+            new AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsFetcher;
+            new AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsSorter;
+            new AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsFormatter;
+        }
+        parent::_construct( $sScriptPath );
+    }
 
     /**
      * @param    string $sURL

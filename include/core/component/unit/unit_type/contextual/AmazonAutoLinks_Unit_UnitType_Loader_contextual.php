@@ -14,7 +14,7 @@
  * @since 3.5.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_contextual`.
 */
-class AmazonAutoLinks_Unit_UnitType_Loader_contextual extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+final class AmazonAutoLinks_Unit_UnitType_Loader_contextual extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.

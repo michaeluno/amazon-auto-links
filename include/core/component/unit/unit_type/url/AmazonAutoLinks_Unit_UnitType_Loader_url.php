@@ -14,7 +14,7 @@
  * @since 3.3.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_url`.
  */
-class AmazonAutoLinks_Unit_UnitType_Loader_url extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+final class AmazonAutoLinks_Unit_UnitType_Loader_url extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.
@@ -54,6 +54,10 @@ class AmazonAutoLinks_Unit_UnitType_Loader_url extends AmazonAutoLinks_Unit_Unit
         // new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher; // @deprecated 4.3.2
         new AmazonAutoLinks_Unit_URL_Event_RenewCacheAction;
         new AmazonAutoLinks_Unit_URL_Event_DebugOutput; // [4.4.0]
+
+        new AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher;
+        new AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFormatter;
+        new AmazonAutoLinks_Unit_URL_Event_Filter_ProductsSorter;
     }
 
     /**

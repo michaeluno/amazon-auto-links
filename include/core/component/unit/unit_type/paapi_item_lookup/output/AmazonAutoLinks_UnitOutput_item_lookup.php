@@ -21,14 +21,6 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * @var    string
      */    
     public $sUnitType = 'item_lookup';
-    
-    /**
-     * Stores the unit option key that is used for the search.
-     * This is needed for the `search_per_keyword` option.
-     * @since 3.2.0
-     * @var   string
-     */
-    public $sSearchTermKey = 'ItemId';
 
     /**
      * The array element key name that contains `Items` element.
@@ -37,7 +29,6 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      * @since 3.9.0
      */
     protected $_sResponseItemsParentKey = 'ItemsResult';
-
 
     /**
      * Represents the array structure of the API request arguments.
@@ -67,33 +58,6 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
 //        'VariationPage'         => null,
 //        'ResponseGroup'         => null,
     );
-
-    /**
-     * @return array|array[]
-     * @since  4.6.22
-     * @since  5.0.0  Removed the first parameter of `$aURLs`.
-     */
-    protected function _getResponses() {
-        $this->oUnitOption->set( 'search_per_keyword', false ); // [4.6.22+] This option for the item_lookup unit type is deprecated and it is always off.
-        return parent::_getResponses();
-    }
-
-    /**
-     * Sorts items.
-     * @remark Overriding the method in the `AmazonutoLinks_Unit_search` class.
-     * @since  3.2.1
-     * @since  3.5.0 Moved from `AmazonAutoLinks_UnitOutput_url`.
-     * @return array
-     * @param  array $aResponse
-     */
-    protected function getProducts( $aResponse ) {
-        $_aProducts = parent::getProducts( $aResponse );
-        $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort(
-            $_aProducts,
-            $this->oUnitOption->get( array( '_sort' ), 'raw' )
-        );
-        return $_oSorter->get();
-    }
 
     /**
      * Performs an Amazon Product API request.
@@ -139,7 +103,7 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
                 break;
             }
             $_aChunkBy10 = array_filter( $_aChunkBy10 ); // sometimes an empty element gets inserted so drop them
-            $_aPayload   = $this->getAPIParameters( $this->oUnitOption->get( 'Operation' ) );
+            $_aPayload   = $this->_getAPIParameters( $this->oUnitOption->get( 'Operation' ) );
             $_aPayload[ 'ItemIds' ] = $_aChunkBy10;
             $_aThisResponse = $_oAPI->request( $_aPayload, $_iCacheDuration, $_bForceCacheRenewal );
             $_aResponse  = $this->___getResponsesMerged( $_aResponse, $_aThisResponse );
@@ -157,6 +121,10 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
          * @sinece 4.4.0
          */
         private function ___getResponsesMerged( array $aMainResponse, array $aSubResponse ) {
+
+            if ( ! isset( $aMainResponse[ '_ResponseDate' ] ) && isset( $aSubResponse[ '_ResponseDate' ] ) ) {
+                $aMainResponse[ '_ResponseDate' ] = $this->getElement( $aSubResponse, array( '_ResponseDate' ) );
+            }
 
             $_aItems = array_merge(
                 $this->getElementAsArray( $aMainResponse, array( $this->_sResponseItemsParentKey, 'Items' ) ),
@@ -186,12 +154,13 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
      *
      * @see    http://docs.aws.amazon.com/AWSECommerceService/latest/DG/ItemLookup.html
      * @since  2.0.2
-     * @since  4.3.1        Renamed from `getAPIParameterArray()`. Made the scope public from protected. This is for the background routine of getting products data that need to replicate API payload of the item_lookup unit.
-     * @param  string       $sOperation
-     * @param  integer      $iItemPage
+     * @since  4.3.1   Renamed from `getAPIParameterArray()`. Made the scope public from protected. This is for the background routine of getting products data that need to replicate API payload of the item_lookup unit.
+     * @since  5.0.0   Changed the visibility scope to protected from public as this is not used from outside.
+     * @param  string  $sOperation
+     * @param  integer $iItemPage
      * @return array
      */
-    public function getAPIParameters( $sOperation='GetItems', $iItemPage=0 ) {
+    protected function _getAPIParameters( $sOperation='GetItems', $iItemPage=0 ) {
 
         $_aUnitOptions = $this->oUnitOption->get() + self::$aStructure_APIParameters;
         $_aPayload     = array(

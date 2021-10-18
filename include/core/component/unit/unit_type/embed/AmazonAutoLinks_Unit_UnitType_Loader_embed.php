@@ -17,7 +17,7 @@
  * @since 4.0.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_embed`.
  */
-class AmazonAutoLinks_Unit_UnitType_Loader_embed extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
+final class AmazonAutoLinks_Unit_UnitType_Loader_embed extends AmazonAutoLinks_Unit_UnitType_Loader_Base {
 
     /**
      * Stores each unit type component directory path.

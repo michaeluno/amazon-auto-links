@@ -14,7 +14,7 @@
  * @since 4.1.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_scratchpad_payload`.
 */
-class AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload extends AmazonAutoLinks_Unit_UnitType_Loader_search {
+final class AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload extends AmazonAutoLinks_Unit_UnitType_Loader_search {
 
     /**
      * Stores each unit type component directory path.
@@ -40,11 +40,17 @@ class AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload extends AmazonAuto
     protected $_sPAAPIOperation = 'payload';
 
     /**
-     * @param $sScriptPath
-     * @since   4.1.0
+     * @param string $sScriptPath
+     * @since 4.1.0
      */
     protected function _construct( $sScriptPath ) {
         self::$sDirPath = dirname( __FILE__ );
+
+        if ( 'scratchpad_payload' === $this->sUnitTypeSlug ) {
+            new AmazonAutoLinks_Unit_PAAPICustomPayload_Event_Filter_ProductsFetcher;
+            new AmazonAutoLinks_Unit_PAAPICustomPayload_Event_Filter_ProductsFormatter;
+            new AmazonAutoLinks_Unit_PAAPICustomPayload_Event_Filter_ProductsSorter;
+        }
         parent::_construct( $sScriptPath );
     }
 
