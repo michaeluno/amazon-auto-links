@@ -43,8 +43,8 @@ abstract class AmazonAutoLinks_PageMetaBox_Base extends AmazonAutoLinks_AdminPag
         $_mDefault = null;
         if ( is_array( $_aParameters[ 0 ] ) ) {
             $_mDefault    = $this->oUtil->getElement( $_aParameters, 1 );
-            $_aParameters = $_aParameters[ 0 ];
             array_unshift( $_aParameters[ 0 ], $this->_sSectionID );
+            $_aParameters = $_aParameters[ 0 ];
         } else {
             array_unshift( $_aParameters, $this->_sSectionID );
         }
