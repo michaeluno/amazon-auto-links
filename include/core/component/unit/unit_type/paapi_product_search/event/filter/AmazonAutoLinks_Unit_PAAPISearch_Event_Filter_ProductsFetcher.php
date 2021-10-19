@@ -52,18 +52,38 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
 
         $this->oUnitOutput->sResponseDate = $this->getElement( $_aResponse, array( '_ResponseDate' ) );
 
+        // Find the `Items` container key.
+        $_sItemsKey = $this->___getResponseItemsParentKey( $_aResponse );
+
         // Errors
         if (
             ! empty( $_aError )
-            && ! isset( $_aResponse[ $this->_sResponseItemsParentKey ] )    // There are cases that error is set but items are returned
+            && ! isset( $_aResponse[ $_sItemsKey ] )    // There are cases that error is set but items are returned
         ) {
             return $_aResponse;
         }
 
         // Extract items
-        return $this->getElementAsArray( $_aResponse, array( $this->_sResponseItemsParentKey, 'Items' ), array() );
+        return $this->getElementAsArray( $_aResponse, array( $_sItemsKey, 'Items' ), array() );
 
     }
+        /**
+         * @param  array $aResponse
+         * @return string
+         * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_scratchpad_payload`. Renamed from `___getItemsKey()`.
+         */
+        private function ___getResponseItemsParentKey( $aResponse ) {
+            if ( $this->_sResponseItemsParentKey ) {
+                return $this->_sResponseItemsParentKey;
+            }
+            // Search from the response array. This is important for the Custom Payload unit type, which extends this class.
+            foreach( $aResponse as $_sKey => $_aItem ) {
+                if ( isset( $_aItem[ 'Items' ] ) ) {
+                    return $_sKey;
+                }
+            }
+            return '';
+        }
         /**
          * @since  3.1.4
          * @since  3.8.1      Added the `$aURLs` parameter.
@@ -77,13 +97,14 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
 
             // Normal operation
             if ( ! $this->oUnitOutput->oUnitOption->get( 'search_per_keyword' ) ) {
-                return $this->oUnitOutput->getRequest( $this->oUnitOutput->oUnitOption->get( 'count' ) );
-            } 
+                return $this->oUnitOutput->getAPIResponse( ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' ) );
+            }
 
             // For contextual search, perform search by each keyword
             return $this->___getResponsesByMultipleKeywords();
             
         }
+
             /**
              * Sanitizes the search terms.
              * @since 3.2.0
@@ -157,7 +178,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
                         // 3.2.1+ Nested array is supported to auto-truncate terms more than 10 as API does not allow it.
                         $_sSearchTerms
                     );
-                    $_aResponse = $this->oUnitOutput->getRequest( $_iCount );
+                    $_aResponse = $this->oUnitOutput->getAPIResponse( $_iCount );
                     $_aItems    = $this->___getItemsMerged( $_aItems, $_aResponse );                    
                     if ( count( $_aItems ) >= $_iCount ) {
                         break;
@@ -219,9 +240,8 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
                         $_aParsedASINs[ $_sASIN ] = $_sASIN;
                         
                     }
-                    $aItems = array_values( $aItems );
-                    return $aItems;
-                    
+                    return array_values( $aItems );
+
                 }            
 
                 /**

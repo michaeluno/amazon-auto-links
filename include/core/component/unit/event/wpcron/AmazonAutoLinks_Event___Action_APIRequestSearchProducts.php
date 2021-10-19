@@ -290,18 +290,16 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
              */
             $_iCacheDuration = $_oOption->get( 'unit_default', 'cache_duration' );
             $_iCacheDuration = ( integer ) round( $_iCacheDuration * 0.96 );  // a big shorter than the unit cache duration as this item look-up cache should expire by the next called time.
-            $_oUnit          = new AmazonAutoLinks_UnitOutput_item_lookup(
-                array(
-                    'ItemIds'              => $aASINs,
-                    'preferred_currency'   => $sCurrency,
-                    'language'             => $sLanguage,
-                    'country'              => $sLocale,
-                    'associate_id'         => $sAssociateID,
-                    'cache_duration'       => $_iCacheDuration,
-                    '_force_cache_renewal' => false,
-                )
-            );
-            return $_oUnit->getRequest( PHP_INT_MAX );
+            $_oUnit          = new AmazonAutoLinks_UnitOutput_item_lookup( array(
+                'ItemIds'              => $aASINs,
+                'preferred_currency'   => $sCurrency,
+                'language'             => $sLanguage,
+                'country'              => $sLocale,
+                'associate_id'         => $sAssociateID,
+                'cache_duration'       => $_iCacheDuration,
+                '_force_cache_renewal' => false,
+            ) );
+            return $_oUnit->getAPIResponse( PHP_INT_MAX );
 
         }
 

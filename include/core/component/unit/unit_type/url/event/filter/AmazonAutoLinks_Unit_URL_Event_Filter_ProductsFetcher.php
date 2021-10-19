@@ -71,7 +71,6 @@ class AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher extends AmazonAutoLi
         }
 
         // Now do the API request and get responses.
-        $this->oUnitOutput->oUnitOption->set( 'search_per_keyword', false ); // [4.6.22+] This option for the url unit type is deprecated and it is always off.
         return parent::_getResponses();
 
     }
@@ -84,10 +83,7 @@ class AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher extends AmazonAutoLi
         private function ___setUnitTypeSpecificUnitOptions( $aFoundASINs ) {
 
             // Set the found items to the `ItemId` argument.
-            $this->oUnitOutput->oUnitOption->set(
-                $this->sSearchTermKey,  // ItemId
-                implode( ',', $aFoundASINs )
-            );
+            $this->oUnitOutput->oUnitOption->set( 'ItemIds', $aFoundASINs );
 
             // In v3.2.0, the `Operation` meta was missing and `ItemSearch` may be stored instead. So override it here.
             $this->oUnitOutput->oUnitOption->set( 'Operation', 'ItemLookup' );

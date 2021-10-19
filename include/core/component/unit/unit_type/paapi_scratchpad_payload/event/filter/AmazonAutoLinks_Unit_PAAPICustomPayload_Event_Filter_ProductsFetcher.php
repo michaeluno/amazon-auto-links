@@ -47,58 +47,13 @@ class AmazonAutoLinks_Unit_PAAPICustomPayload_Event_Filter_ProductsFetcher exten
      * @since  5.0.0  Removed the first parameter of `$aURLs`. Moved from `AmazonAutoLinks_UnitOutput_scratchpad_payload`.
      */
     protected function _getResponses() {
-
-        $_sPayloadJSON = $this->oUnitOutput->oUnitOption->get( 'payload' );
-        $_aPayload     = ( array ) json_decode( $_sPayloadJSON,true );
-        $_aResponse    = $this->___getRequest( $_aPayload, $this->oUnitOutput->oUnitOption->get( 'count' ) );
-        $this->_sResponseItemsParentKey = $this->___getItemsKey( $_aResponse );
-        return $_aResponse;
-
+        $_sLocale       = $this->oUnitOutput->oUnitOption->get( 'country' );
+        $_oPAAPIRequest = new AmazonAutoLinks_Unit_PAAPI5_Request_CustomPayload(
+            $this->oUnitOutput->oUnitOption,
+            $this->oUnitOutput->oOption->getPAAPIAccessKey( $_sLocale ),
+            $this->oUnitOutput->oOption->getPAAPISecretKey( $_sLocale )
+        );
+        return $_oPAAPIRequest->getPAAPIResponse( $this->oUnitOutput->oUnitOption->get( 'count' ) );
     }
-        /**
-         * Searches the key name that holds the `Items` element
-         * @param  array  $aPayload
-         * @return string The key name
-         * @since  ?
-         * @since  Moved from `AmazonAutoLinks_UnitOutput_scratchpad_payload`.
-         */
-        private function ___getItemsKey( array $aPayload ) {
-            foreach( $aPayload as $_sKey => $_aItem ) {
-                if ( isset( $_aItem[ 'Items' ] ) ) {
-                    return $_sKey;
-                }
-            }
-            return '';
-        }
-
-        /**
-         * @param  array   $aPayload
-         * @param  integer $iCount
-         * @return array
-         * @since  4.1.0
-         * @since  5.0.0   Moved from `AmazonAutoLinks_UnitOutput_scratchpad_payload`.
-         */
-        private function ___getRequest( array $aPayload, $iCount ) {
-
-            $_sAssociateID = $this->oUnitOutput->oUnitOption->get( 'associate_id' );
-            $_sAssociateID = $_sAssociateID ? $_sAssociateID : $this->getElement( $aPayload, 'PartnerTag' );
-
-            $aPayload[ 'Resources' ] = AmazonAutoLinks_PAAPI50___Payload::$aResources
-                + $this->getElementAsArray( $aPayload, 'Resources' );
-
-            $_sLocale = AmazonAutoLinks_Locales::getLocaleByDomain( $this->getElement( $aPayload, 'Marketplace' ) );
-            $_oAPI    = new AmazonAutoLinks_PAAPI50(
-                $_sLocale,
-                $this->oUnitOutput->oOption->getPAAPIAccessKey( $_sLocale ),
-                $this->oUnitOutput->oOption->getPAAPISecretKey( $_sLocale ),
-                $_sAssociateID
-            );
-            return $_oAPI->request(
-                $aPayload,
-                $this->oUnitOutput->oUnitOption->get( 'cache_duration' ),
-                $this->oUnitOutput->oUnitOption->get( '_force_cache_renewal' )
-            );
-
-        }
     
 }

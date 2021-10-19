@@ -78,37 +78,36 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      * @return  array
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
-
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
         $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
-        $aUnitOptions = $this->sanitize( $aUnitOptions );
-        return $aUnitOptions;
-        
+        return $this->___getOptionsFormatted( $aUnitOptions );
     }    
     
         /**
-         * Sanitizes the unit options of the item_lookup unit type.
+         * Formats the unit-type-specific options of the item_lookup unit type.
          * 
-         * @since       2.0.2
-         * @since       3      Moved from ``.
-         * @return      array
-         * @param       array  $aUnitOptions
+         * @since  2.0.2
+         * @since  3      Moved from ``.
+         * @since  5      Renamed from `sanitize()`.
+         * @return array
+         * @param  array  $aUnitOptions
          */
-        protected function sanitize( array $aUnitOptions ) {
+        protected function ___getOptionsFormatted( array $aUnitOptions ) {
             
-            // if the ISDN is spceified, the search index must be set to Books.
+            // if an ISDN is specified, the search index must be set to Books.
             if ( 
                 isset( $aUnitOptions[ 'IdType' ], $aUnitOptions[ 'SearchIndex' ] )
                 && 'ISBN' === $aUnitOptions[ 'IdType' ]
             ) {
                 $aUnitOptions[ 'SearchIndex' ] = 'Books';
             }
-            $aUnitOptions[ 'ItemId' ] =  trim( 
-                $this->getEachDelimitedElementTrimmed(
-                    $aUnitOptions[ 'ItemId' ], 
-                    ',' 
-                ) 
+            $aUnitOptions[ 'ItemId' ] =  trim( $this->getEachDelimitedElementTrimmed( $aUnitOptions[ 'ItemId' ], ',' ) );
+
+            $_aItemIDs = array_merge(
+                $this->getElementAsArray( $aUnitOptions, 'ItemIds' ),
+                $this->getStringIntoArray( str_replace( PHP_EOL, ',', $aUnitOptions[ 'ItemId' ] ), ',' )
             );
+            $aUnitOptions[ 'ItemIds' ] = array_unique( $_aItemIDs );
             return $aUnitOptions;
             
         }            
