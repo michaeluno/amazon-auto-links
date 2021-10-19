@@ -30,7 +30,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
         if ( $_oToolOption->get( array( 'web_page_dumper', 'enable' ), false ) ) {
             return;
         }
-        if ( $this->___hasCaptchaErrors() ) {
+        if ( ! $this->___hasCaptchaErrors() ) {
             return;
         }
         // @todo add setting notice with an ajax script
