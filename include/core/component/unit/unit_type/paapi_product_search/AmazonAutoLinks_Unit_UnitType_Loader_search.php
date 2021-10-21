@@ -158,9 +158,17 @@ class AmazonAutoLinks_Unit_UnitType_Loader_search extends AmazonAutoLinks_Unit_U
      * @since  3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
+
+        // Check the shortcode argument
+        if ( isset( $aArguments[ 'search' ] ) ) {
+            return $this->sUnitTypeSlug;
+        }
+
+        // Check the PA-API arguments
         return in_array( $this->_getOperationArgument( $aArguments ), array( 'ItemSearch', $this->_sPAAPIOperation ), true ) // ItemSearch is for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
+
     }
 
     /**

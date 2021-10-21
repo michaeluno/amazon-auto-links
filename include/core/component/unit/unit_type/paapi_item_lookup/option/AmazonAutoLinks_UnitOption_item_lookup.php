@@ -51,6 +51,7 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      * @since       3.4.6
      */
     public static $aShortcodeArgumentKeys = array(
+        'asin'                  => 'ASIN',          // 5.0.0 the shortcode argument
         'operation'             => 'Operation',
         'searchindex'           => 'SearchIndex',
         'merchantid'            => 'MerchantId',     
@@ -79,10 +80,25 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+        $aUnitOptions = $this->___getShortcodeArgumentsConverted( $aUnitOptions );
         $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
+        $aUnitOptions[ 'Operation' ]      = 'GetItems';
         return $this->___getOptionsFormatted( $aUnitOptions );
-    }    
-    
+    }
+        /**
+         * @param  array $aUnitOptions
+         * @return array
+         * @since  5.0.0
+         */
+        private function ___getShortcodeArgumentsConverted( $aUnitOptions ) {
+            if ( ! isset( $aUnitOptions[ 'ASIN' ] ) ) {
+                return $aUnitOptions;
+            }
+            $_aASINs = $this->getStringIntoArray( $aUnitOptions[ 'ASIN' ], ',' );
+            $aUnitOptions[ 'ItemId' ]         = implode( ',', $_aASINs );
+            $aUnitOptions[ '_allowed_ASINs' ] = $_aASINs;
+            return $aUnitOptions;
+        }
         /**
          * Formats the unit-type-specific options of the item_lookup unit type.
          * 

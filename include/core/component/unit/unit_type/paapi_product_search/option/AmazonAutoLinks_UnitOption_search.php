@@ -59,6 +59,7 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
      * @since       3.4.6
      */
     public static $aShortcodeArgumentKeys = array(
+        'search'                => 'Keywords',          // 5.0.0+ the shortcode argument
         'keywords'              => 'Keywords',
         'power'                 => 'Power',             
         'operation'             => 'Operation',
@@ -95,8 +96,9 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
      * @since  4.0.0 Renamed from format() as it is too general.
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
+        $aUnitOptions[ 'Operation' ]     = 'SearchItems';
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
         return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
     }
-    
+
 }

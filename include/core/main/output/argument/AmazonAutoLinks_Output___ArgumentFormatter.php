@@ -18,15 +18,11 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
     );
 
     /**
-     * @return      array
+     * @return array
      */
     public function get() {
-
         $this->___setUnitIDArgument();
-        $this->___setASINArguments();
-        $this->___setSearchArguments();
         return $this->_aArguments;
-
     }
         /**
          * Sets the `id` argument.
@@ -35,35 +31,11 @@ class AmazonAutoLinks_Output___ArgumentFormatter extends AmazonAutoLinks_Output_
             $this->_aArguments[ '_unit_ids' ] = $this->___getUnitIDs();
         }
             /**
-             * @return      array
+             * @return array
              */
             private function ___getUnitIDs() {
                 $_oUnitIDArgumentFormatter = new AmazonAutoLinks_Output___ArgumentFormatter_UnitID( $this->_aArguments );
                 return $_oUnitIDArgumentFormatter->get();
             }
-
-        /**
-         * Generates necessary arguments if the `asin` argument is set.
-         * @return      void
-         */
-        private function ___setASINArguments() {
-            if ( ! isset( $this->_aArguments[ 'asin' ] ) ) {
-                return;
-            }
-            $_aASINs = $this->getStringIntoArray( $this->_aArguments[ 'asin' ], ',' );
-            $this->_aArguments[ 'ItemId' ]         = implode( ',', $_aASINs );
-            $this->_aArguments[ 'Operation' ]      = 'GetItems';
-            $this->_aArguments[ '_allowed_ASINs' ] = $_aASINs;
-            $this->_aArguments[ 'unit_type' ]      = 'item_lookup';
-        }
-
-        private function ___setSearchArguments() {
-            if ( ! isset( $this->_aArguments[ 'search' ] ) ) {
-                return;
-            }
-            $this->_aArguments[ 'Operation' ]     = 'SearchItems';
-            $this->_aArguments[ 'Keywords' ]      = $this->_aArguments[ 'search' ];
-            $this->_aArguments[ 'unit_type' ]     = 'search';
-        }
 
 }

@@ -119,10 +119,18 @@ final class AmazonAutoLinks_Unit_UnitType_Loader_item_lookup extends AmazonAutoL
      * @since  3.5.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
+
+        // Check the shortcode arguments
+        if ( isset( $aArguments[ 'asin' ] ) || isset( $aArguments[ 'ASIN' ] ) ) {
+            return $this->sUnitTypeSlug;
+        }
+
+        // Check the PA-API arguments
         $_sOperation = $this->_getOperationArgument( $aArguments );
         return in_array( $_sOperation, array( 'ItemLookup', $this->_sPAAPIOperation ), true )  // ItemLookup for backward-compatibility
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;
+
     }
 
     /**
