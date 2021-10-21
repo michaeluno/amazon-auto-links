@@ -189,11 +189,11 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         ) : null ) : $aStoredRow[ 'images' ],
                         'currency'           => $sCurrency,
                         'price'              => strlen( $aProduct[ 'ListPrice' ] )
-                            ? $this->___getPriceAmountExtracted( $aProduct[ 'ListPrice' ] )
+                            ? AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'ListPrice' ] )
                             : $aStoredRow[ 'price' ],
                         'price_formatted'    => strlen( $aProduct[ 'ListPrice' ] ) ? $aProduct[ 'ListPrice' ] : $aStoredRow[ 'price_formatted' ],
                         'discounted_price'   => strlen( $aProduct[ 'Price' ] )
-                            ? $this->___getPriceAmountExtracted( $aProduct[ 'Price' ] )
+                            ? AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'Price' ] )
                             : $aStoredRow[ 'discounted_price' ],
                         'discounted_price_formatted' => strlen( $aProduct[ 'Price' ] ) ? $aProduct[ 'Price' ] : $aStoredRow[ 'discounted_price_formatted' ],
 
@@ -225,20 +225,6 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
                     return $_aRow;
                 }
-                    /**
-                     * Extracts the price amount from a given formatted readable price string.
-                     * Passed price string is like:
-                     *  - 10,40 € (0,43 € / unità)
-                     * @param  string  $sReadablePrice
-                     * @return integer|string
-                     * @since  4.7.8
-                     */
-                    private function ___getPriceAmountExtracted( $sReadablePrice ) {
-                        preg_match( "/[0-9,.]+/", $sReadablePrice, $_aMatches );    // extracts the first occurrence of digits with comma
-                        return isset( $_aMatches[ 0 ] )
-                            ? ( integer ) preg_replace("/[^0-9]/", '', $_aMatches[ 0 ] )
-                            : '';
-                    }
 
         /**
          * @param  string  $sLocale

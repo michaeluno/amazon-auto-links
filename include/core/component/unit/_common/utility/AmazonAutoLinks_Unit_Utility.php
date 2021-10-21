@@ -159,6 +159,21 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     }
 
+    /**
+     * Extracts the price amount from a given formatted readable price string.
+     * Passed price string is like:
+     *  - 10,40 € (0,43 € / unità)
+     * @param  string  $sReadablePrice
+     * @return integer|string
+     * @since  4.7.8
+     * @since  5.0.0   Moved from `AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI`.
+     */
+    static public function getPriceAmountExtracted( $sReadablePrice ) {
+        preg_match( "/[0-9,.]+/", $sReadablePrice, $_aMatches );    // extracts the first occurrence of digits with comma
+        return isset( $_aMatches[ 0 ] )
+            ? ( integer ) preg_replace("/[^0-9]/", '', $_aMatches[ 0 ] )
+            : '';
+    }
 
     /**
      * Generates price output.
