@@ -52,7 +52,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
          * @return array
          * @since  3.9.0
          * @since  4.0.0   Changed the scope to protected for the Embed unit type to extend this class.
-         * @since  5.0.0   Moved from ``.
+         * @since  5.0.0   Moved from `AmazonAutoLinks_UnitOutput_category`.
          */
         private function ___getProducts( array $aItems, $sLocale, $sAssociateID, $iCount ) {
 
@@ -74,7 +74,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
 
                 try {
 
-                    $_aProduct = $this->___getProduct( $_aItem, $sLocale, $sAssociateID );
+                    $_aProduct = $this->_getProduct( $_aItem, $sLocale, $sAssociateID );
 
                 } catch ( Exception $_oException ) {
                     // When the items are filtered out, this is reached
@@ -121,6 +121,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
              * @param  integer $iUserSetMaxCount        The user set max count.
              * @return array
              * @since  3.9.0
+             * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
              */
             private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
 
@@ -167,8 +168,9 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
              * @return array
              * @throws Exception
              * @since  3.9.0
+             * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`. Changed the visibility to protected from private as an extended class access this.
              */
-            private function ___getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
+            protected function _getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
 
                 $_aProduct = $_aItem + self::$aStructure_Product + AmazonAutoLinks_UnitOutput_Base_ElementFormat::$aStructure_ProductCommon;
 
@@ -251,6 +253,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
      * @callback add_filter() aal_filter_unit_each_product_with_database_row
      * @since    4.2.8
      * @since    4.3.4 Moved from `AmazonAutoLinks_UnitOutput_category3`.
+     * @since    5.0.0 Moved from `AmazonAutoLinks_UnitOutput_category`.
      */
     public function replyToFilterProducts( $aProduct ) {
 
@@ -291,8 +294,9 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
      * @param array $aDBRow
      * @param array $aScheduleIdentifier
      * @return      array
-     * @callback    add_filter      aal_filter_unit_each_product_with_database_row
+     * @callback    add_filter()      aal_filter_unit_each_product_with_database_row
      * @since       3.3.0
+     * @since       5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
 
@@ -324,6 +328,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
          * @return string
          * @since  3.3.0
          * @since  4.3.4  Changed the visibility to private from protected.
+         * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
          * @param  array  $aProduct
          */
         private function ___getContents( $aProduct /*, $aDBRow, $aScheduleIdentifier */ ) {
@@ -363,8 +368,9 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
              * For backward compatibility of a case that still the editorial reviews are stored in the cache.
              * @param  $anReviews
              * @remark This element is deprecated in PA-API 5.
-             * @return bool
+             * @return boolean
              * @since  3.10.0
+             * @since  5.0.0   Moved from `AmazonAutoLinks_UnitOutput_category`.
              */
             private function ___hasEditorialReviews( $anReviews ) {
                 // if null, the product data is not inserted in the plugin's database table.
