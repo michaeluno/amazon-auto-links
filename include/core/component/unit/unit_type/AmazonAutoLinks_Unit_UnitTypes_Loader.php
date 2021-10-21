@@ -42,6 +42,7 @@ class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitTyp
 
         // Unit types
         new AmazonAutoLinks_Unit_UnitType_Loader_category( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search( $sScriptPath );  // 5.0.0
         new AmazonAutoLinks_Unit_UnitType_Loader_search( $sScriptPath );
         new AmazonAutoLinks_Unit_UnitType_Loader_item_lookup( $sScriptPath );
         new AmazonAutoLinks_Unit_UnitType_Loader_url( $sScriptPath );

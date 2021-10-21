@@ -12,7 +12,7 @@
  *
  * @since 5.0.0
  */
-abstract class AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFormatter_Base extends AmazonAutoLinks_PluginUtility {
+abstract class AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFormatter_Base extends AmazonAutoLinks_Unit_Utility {
 
     /**
      * @var   string

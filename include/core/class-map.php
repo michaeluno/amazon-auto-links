@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.10b04 by miunosoft (Michael Uno) 
+    Auto Amazon Links v4.7.10b05 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -255,6 +255,17 @@ return array(
     "AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_option_converter/admin/page_meta_box/AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template.php", 
     "AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_option_converter/event/AmazonAutoLinks_Unit_UnitOptionConverter_Event_Action_UnitOptionConverter.php", 
     "AmazonAutoLinks_Unit_UnitTypes_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/AmazonAutoLinks_Unit_UnitTypes_Loader.php", 
+    "AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search.php", 
+    "AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/admin/form/field/AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main.php", 
+    "AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Submit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/admin/form/field/AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Submit.php", 
+    "AmazonAutoLinks_Unit_UnitType_AdminPages_Page_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/admin/page/AmazonAutoLinks_Unit_UnitType_AdminPages_Page_ad_widget_search.php", 
+    "AmazonAutoLinks_Unit_UnitType_AdminPages_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/admin/page/AmazonAutoLinks_Unit_UnitType_AdminPages_ad_widget_search.php", 
+    "AmazonAutoLinks_Unit_UnitType_Admin_PostMetaBox_Main_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/admin/post_meta_box/AmazonAutoLinks_Unit_UnitType_Admin_PostMetaBox_Main_ad_widget_search.php", 
+    "AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/event/filter/AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher.php", 
+    "AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/event/filter/AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatter.php", 
+    "AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsSorter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/event/filter/AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsSorter.php", 
+    "AmazonAutoLinks_UnitOption_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/option/AmazonAutoLinks_UnitOption_ad_widget_search.php", 
+    "AmazonAutoLinks_UnitOutput_ad_widget_search" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/ad_widget_search/output/AmazonAutoLinks_UnitOutput_ad_widget_search.php", 
     "AmazonAutoLinks_Unit_UnitType_Loader_category" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/AmazonAutoLinks_Unit_UnitType_Loader_category.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage.php", 
     "AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php", 
