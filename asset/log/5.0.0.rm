@@ -1,4 +1,4 @@
-- Added the new unit type, `Product Search` which performs product searches without PA-API.
+- Added the new unit type, `Product Search`, which performs product searches without PA-API. 
 - Added the `%discount%` item format tag which displays product discount percentage.
 - Tweaked UI elements.
 - Changed some option default values.

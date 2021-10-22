@@ -109,6 +109,12 @@ final class AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search extends Amazon
      * @since  5.0.0
      */
     protected function _getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments ) {
+        if ( isset( $aArguments[ 'asin' ] ) ) {
+            return $this->sUnitTypeSlug;
+        }
+        if ( isset( $aArguments[ 'search' ] ) ) {
+            return $this->sUnitTypeSlug;
+        }
         return isset( $aArguments[ 'Keywords' ] )
             ? $this->sUnitTypeSlug
             : $sUnitTypeSlug;

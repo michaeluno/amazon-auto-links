@@ -42,7 +42,6 @@ class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitTyp
 
         // Unit types
         new AmazonAutoLinks_Unit_UnitType_Loader_category( $sScriptPath );
-        new AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search( $sScriptPath );  // 5.0.0
         new AmazonAutoLinks_Unit_UnitType_Loader_search( $sScriptPath );
         new AmazonAutoLinks_Unit_UnitType_Loader_item_lookup( $sScriptPath );
         new AmazonAutoLinks_Unit_UnitType_Loader_url( $sScriptPath );
@@ -50,6 +49,7 @@ class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitTyp
         new AmazonAutoLinks_Unit_UnitType_Loader_embed( $sScriptPath ); // 4.0.0
         new AmazonAutoLinks_Unit_UnitType_Loader_feed( $sScriptPath );  // 4.0.0
         new AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload( $sScriptPath );  // 4.1.0
+        new AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search( $sScriptPath );  // 5.0.0 - this must be called after `search` and `item_lookup` field types as the _getUnitTypeSlugByOutputArguments() method of this unit type must be called after theirs.
 
     }
 
