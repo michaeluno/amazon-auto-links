@@ -34,45 +34,17 @@ class AmazonAutoLinks_AdminPage_Setting_General extends AmazonAutoLinks_AdminPag
     protected function _loadTab( $oAdminPage ) {
         
         // Form sections
-        new AmazonAutoLinks_AdminPage_Setting_General_ProductFilters(
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-        
+        new AmazonAutoLinks_AdminPage_Setting_General_ProductFilters( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+
         // 3.3.0+
-        new AmazonAutoLinks_AdminPage_Setting_General_Feed( 
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
+        new AmazonAutoLinks_AdminPage_Setting_General_Feed( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
 
         // 3.9.0+
-        new AmazonAutoLinks_AdminPage_Setting_General_Widgets(
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
+        new AmazonAutoLinks_AdminPage_Setting_General_Widgets( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
 
-        new AmazonAutoLinks_AdminPage_Setting_General_UnitPreview( 
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-
-        new AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey( 
-            $oAdminPage,
-            $this->sPageSlug,
-            array( 'tab_slug' => $this->sTabSlug, )
-        );
-
-        new AmazonAutoLinks_AdminPage_Setting_General_ExternalScript( 
-            $oAdminPage,
-            $this->sPageSlug, 
-            array( 'tab_slug' => $this->sTabSlug, )
-        );              
-     
-
+        new AmazonAutoLinks_AdminPage_Setting_General_UnitPreview( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_AdminPage_Setting_General_CustomQueryKey( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
+        new AmazonAutoLinks_AdminPage_Setting_General_ExternalScript( $oAdminPage, $this->sPageSlug, array( 'tab_slug' => $this->sTabSlug, ) );
      
     }
     
