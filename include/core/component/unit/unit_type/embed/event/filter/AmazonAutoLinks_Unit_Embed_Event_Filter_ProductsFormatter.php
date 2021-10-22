@@ -25,15 +25,15 @@ class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFormatter extends AmazonAu
      */
     public static $aStructure_Product = array();
 
-
     /**
      * Called when the unit has access to the plugin custom database table.
      *
      * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
      *
      * @since    4.2.10
+     * @since    5.0.0  Moved from ``.
      * @return   array
-     * @callback add_filter      aal_filter_unit_each_product_with_database_row
+     * @callback add_filter()      aal_filter_unit_each_product_with_database_row
      * @param    array $aProduct
      * @param    array $aDBRow
      * @param    array $aScheduleIdentifier

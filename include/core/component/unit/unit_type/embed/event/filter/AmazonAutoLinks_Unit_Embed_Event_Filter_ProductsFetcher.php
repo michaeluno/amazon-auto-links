@@ -31,15 +31,13 @@ class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher extends AmazonAuto
      * @var array
      */
     public static $aStructure_Product = array();
-    
+
     /**
      * @param  array $aProducts
-     * @param  AmazonAutoLinks_UnitOutput_embed $oUnitOutput
      * @return array
      * @since  5.0.0
      */
-    public function replyToGet( $aProducts, $oUnitOutput ) {
-        $this->oUnitOutput = $oUnitOutput;
+    protected function _getItemsFromSource( $aProducts ) {
 
         // Originally the glue was \s+ but not sure what this was for.
         // If it is split by a white space, search result URL cannot be parsed properly such as https://www.amazon.it/s?k=harry potter&...
@@ -64,10 +62,8 @@ class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher extends AmazonAuto
         $_aProductsByPAAPI = $this->___getProductsByPAAPI( array_keys( $_aProducts ), $_sLocale );
         $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs, $_sLocale );
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
-        $_aProducts        = array_merge( $_aProducts, $_aProductsByURLs );
-
-        unset( $this->oUnitOutput );
-        return $_aProducts;
+        return array_merge( $_aProducts, $_aProductsByURLs );
+        
     }
 
         /**
