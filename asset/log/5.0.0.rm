@@ -1,9 +1,15 @@
 - Added the new unit type, `Product Search`, which performs product searches without PA-API. 
 - Added the `%discount%` item format tag which displays product discount percentage.
+- Added the sub-arguments of the shortcode `[amazon_auto_links]` for the `search` argument, `MinReviewsRating`, `Merchant`, `MinPrice`, `MaxPrice`, `BrowseNodeId`, `SortBy`, `CurrencyOfPreference`, and `LanguagesOfPreference` (Requires PA-API).
+- Added the `Hook Priority` option in the `Link Converter` section of the `Tools` page.
+- Added the `%author_text%` Item Format tag.
+- Added the ability to include names other than authors such as artist, writer and producer with the `%author%` Item Format tag. 
 - Tweaked UI elements.
+- Tweaked the style of product author elements.
+- Fixed a bug that the sort option for the feed unit type did not take effect.
+- Fixed a bug that an admin notice that asks to enable Web Page Dumper appeared when unnecessary.
+- Optimized HTTP requests for Web Page Dumper.
 - Changed some option default values.
 - Changed the name of the unit type, `Product Search`, to `PA-API Product Search`. 
 - Changed the name of the unit type, `Item Look-up`, to `PA-API Item Look-up`. 
 - Changed the name of the unit type, `ScratchPad Payload`, to `PA-API Custom Payload`.
-- Fixed a bug that the sort option for the feed unit type did not take effect.
-- Optimized HTTP requests.
