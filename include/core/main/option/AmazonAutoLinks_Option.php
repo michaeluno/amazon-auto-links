@@ -508,7 +508,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             . '    </div>' . PHP_EOL
             . '    <div class="amazon-auto-links-product-body">' . PHP_EOL
             . '        %title%' . PHP_EOL
-            . '        %rating% %prime% %price% %disclaimer%' . PHP_EOL
+            . '        %rating% %prime% %discount% %price% %disclaimer%' . PHP_EOL
             . '        %description%' . PHP_EOL
             . '    </div>' . PHP_EOL
             . '</div>';
@@ -524,7 +524,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             . '    </div>' . PHP_EOL
             . '    <div class="amazon-auto-links-product-body">' . PHP_EOL
             . '        %title%' . PHP_EOL
-            . '        %rating% %prime% %price% %disclaimer%' . PHP_EOL
+            . '        %rating% %prime% %discount% %price% %disclaimer%' . PHP_EOL
             . '        %description%' . PHP_EOL
             . '    </div>' . PHP_EOL
             . '</div>';
