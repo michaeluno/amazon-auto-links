@@ -820,9 +820,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             if ( ! $_oOption->isPAAPIKeySet( $_sLocale ) ) {
                 continue;
             }
-            $_oLocale       = new AmazonAutoLinks_Locale( $_sLocale );
-            $_sCountryName  = $_oLocale->getName();
-            $_aLabels[ $_sLocale ] = $_sCountryName;
+            $_oLocale = new AmazonAutoLinks_Locale( $_sLocale );
+            $_aLabels[ $_sLocale ] = $_oLocale->getName();
         }
         return $_aLabels;
     }
