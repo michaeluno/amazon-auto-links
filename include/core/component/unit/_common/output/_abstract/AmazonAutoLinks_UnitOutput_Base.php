@@ -183,9 +183,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         /**
          * Sanitizes a raw product title.
-         * @remark      Overridden by an extended class.
-         * @return      string
-         * @param       string $sTitle
+         * @remark Overridden by an extended class.
+         * @return string
+         * @param  string $sTitle
          */
         public function replyToModifyRawTitle( $sTitle ) {
             return $sTitle;
@@ -196,10 +196,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * 
          * @remark      For the category unit type, the %description%, %content%, and %price% tags (variables) need to access the database table
          * and it requires the API to be connected.
-         * @remark      MUST be called after `_setProperties()`. This is important as some extended classes modifies `_aItemFormatDatabaseVariable` property.
-         * @since       3.3.0
-         * @since       3.5.0       Changed the visibility scope from protected.
-         * @return      boolean
+         * @remark MUST be called after `_setProperties()`. This is important as some extended classes modifies `_aItemFormatDatabaseVariable` property.
+         * @since  3.3.0
+         * @since  3.5.0       Changed the visibility scope from protected.
+         * @return boolean
          */
         private function ___hasCustomDBTableAccess() {
 
@@ -317,9 +317,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     }
         /**
-         * @param   string $sUnitOutput
-         * @return  string
-         * @since   4.3.0
+         * @param  string $sUnitOutput
+         * @return string
+         * @since  4.3.0
          */
         private function ___getUnitFormatApplied( $sUnitOutput ) {
             return str_replace(
@@ -335,10 +335,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             );
         }
         /**
-         * @param   $iShowErrorMode
-         * @param   $sErrorMessage
-         * @return  string
-         * @since   4.1.0
+         * @param  integer $iShowErrorMode
+         * @param  string  $sErrorMessage
+         * @return string
+         * @since  4.1.0
          */
         private function ___getErrorOutput( $iShowErrorMode, $sErrorMessage ) {
             if ( ! $iShowErrorMode ) {
@@ -364,8 +364,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         /**
-         * @since       4.0.2
-         * @return      string  The template path.
+         * @since  4.0.2
+         * @return string  The template path.
          */
         private function ___getTemplatePath() {
 
@@ -410,7 +410,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * Removes hooks per output basis.
          *
          * @param array $aHooks An array holding hook objects set by the ___getHooksSetPerOutput() method.
-         * @see ___getHooksSetPerOutput()
+         * @see   ___getHooksSetPerOutput()
          * @since 4.0.0
          */
         private function ___removeHooksPerOutput( array $aHooks ) {
@@ -439,14 +439,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             return true;
         }
         /**
-         * @param       array       $aOptions
-         * @param       array       $aArguments
-         * @param       array       $aProducts
-         * @param       string      $sTemplatePath
-         * @since       3.5.0
-         * @return      void
-         * @callback    method      self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
-         * @remark      Not using include_once() because templates can be loaded multiple times.
+         * @param    array       $aOptions
+         * @param    array       $aArguments
+         * @param    array       $aProducts
+         * @param    string      $sTemplatePath
+         * @since    3.5.0
+         * @callback self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
+         * @remark   Not using include_once() because templates can be loaded multiple times.
          */
         public function replyToGetOutput( $aOptions, $aArguments, $aProducts, $sTemplatePath ) {
 

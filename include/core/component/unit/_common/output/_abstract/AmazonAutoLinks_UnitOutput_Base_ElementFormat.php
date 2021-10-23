@@ -13,8 +13,7 @@
  * 
  * Provides shared methods and properties relating formatting product elements.
  *
- * @since       3
- *
+ * @since 3
  */
 abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoLinks_UnitOutput_Base_ProductFilter {
 
@@ -408,7 +407,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         }
         $sReadMoreURL = esc_url( $sReadMoreURL );
         
-        $_sText = $this->oUnitOption->get( 'description_suffix' );
+        $_sText       = $this->oUnitOption->get( 'description_suffix' );
         if ( ! $_sText ) {
             return '';
         }
@@ -423,21 +422,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * 
      * This does not create a final result of the title as this method is called from sorting items as well.
      *
-     * @param       string  $sTitle
-     * @remark      Used for sorting as well.
-     * @since       3
-     * @return      string
+     * @param  string  $sTitle
+     * @remark Used for sorting as well.
+     * @since  3
+     * @return string
      */
     public function replyToModifyRawTitle( $sTitle ) {
-        
         $sTitle = strip_tags( ( string ) $sTitle );
-        
-        // Remove heading numbering e.g. #2. Product name
         return $this->oUnitOption->get( 'keep_raw_title' )
             ? $sTitle
-            : trim( preg_replace( '/#\d+?:\s+?/i', '', $sTitle ) );
-            
-            
+            : trim( preg_replace( '/#\d+?:\s+?/i', '', $sTitle ) ); // Remove heading numbering e.g. #2. Product name
     }
 
     /**
