@@ -388,6 +388,7 @@ return array(
     "AmazonAutoLinks_Unit_URL_Event_Filter_ProductsSorter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/filter/AmazonAutoLinks_Unit_URL_Event_Filter_ProductsSorter.php", 
     "AmazonAutoLinks_UnitOption_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/option/AmazonAutoLinks_UnitOption_url.php", 
     "AmazonAutoLinks_UnitOutput_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/output/AmazonAutoLinks_UnitOutput_url.php", 
+    "AmazonAutoLinks_Unit_UnitType_URL_Output_ASINsFromHTMLs" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/output/AmazonAutoLinks_Unit_UnitType_URL_Output_ASINsFromHTMLs.php", 
     "AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/_common/admin/page/AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase.php", 
     "AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/_common/admin/tab/AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base.php", 
     "AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFetcher_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/_common/event/filter/AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFetcher_Base.php", 
