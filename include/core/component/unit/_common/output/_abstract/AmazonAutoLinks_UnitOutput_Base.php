@@ -615,4 +615,56 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         return $this->getAsArray( $_aProducts );
     }
 
+    /**
+     * @return boolean
+     * @since  5.0.0
+     */
+    protected function _shouldUsePAAPI() {
+
+        $_bAPIStatus         = false !== $this->oOption->getPAAPIStatus();
+        $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
+        if ( ! in_array( $_sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
+            return $_bAPIStatus;
+        }
+        // If the user wants to display products with non-default currency or language, use PA-API
+        $_sCurrencyDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
+        $_sCurrency          = $this->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
+        if ( $_sCurrencyDefault !== $_sCurrency ) {
+            return $_bAPIStatus;
+        }
+        $_sLanguageDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
+        $_sLanguage          = $this->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
+        if ( $_sLanguageDefault !== $_sLanguage ) {
+            return $_bAPIStatus;
+        }
+        if ( $this->hasAdvancedSearchOptions() ) {
+            return $_bAPIStatus;
+        }
+        return false;
+
+    }
+        /**
+         * @return boolean Whether the unit arguments contain advanced search options which require PA-API.
+         * @since  5.0.0
+         */
+        private function hasAdvancedSearchOptions() {
+            $_aAdvancedArgumentKeys = array(
+                // The value doesn't matter
+                'SearchIndex'       => true,
+                'BrowseNode'        => true,
+                'Availability'      => true,
+                'Condition'         => true,
+                'MaximumPrice'      => true,
+                'MinimumPrice'      => true,
+                'MinPercentageOff'  => true,
+                'MerchantId'        => true,
+                'MinReviewsRating'  => true,
+                'DeliveryFlags'     => true,
+            );
+            $_aAdvancedArguments   = array_intersect_key( $this->oUnitOption->get(), $_aAdvancedArgumentKeys );
+            $_aAdvancedDefaults    = array_intersect_key( $this->oUnitOption->aDefault, $_aAdvancedArgumentKeys );
+            $_aNonDefaults         = array_diff_assoc( $_aAdvancedArguments, $_aAdvancedDefaults );
+            return ! empty( $_aNonDefaults );
+        }
+
 }
