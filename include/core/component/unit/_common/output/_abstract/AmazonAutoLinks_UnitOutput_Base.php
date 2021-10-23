@@ -145,7 +145,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $this->oUnitOption          = is_object( $aoUnitOptions )
             ? $aoUnitOptions
             : new $_sUnitOptionClassName( $this->getElement( $aoUnitOptions, array( 'id' ) ), $aoUnitOptions );
-        $this->oUnitOption->sCallID = $this->sCallID;
+        $this->oUnitOption->sCallID   = $this->sCallID;
+        $this->oUnitOption->sUnitType = $this->sUnitType;
 
         $this->oOption              = AmazonAutoLinks_Option::getInstance();
         $this->oProductTable        = new AmazonAutoLinks_DatabaseTable_aal_products;
