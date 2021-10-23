@@ -50,16 +50,16 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
 
         // Shortcode arguments
         if ( isset( $aUnitOptions[ 'asin' ] ) ) {
-            $_sKeywords = $this->getStringIntoArray( $aUnitOptions[ 'asin' ], ',' );;
+            $_aKeywords = $this->getStringIntoArray( $aUnitOptions[ 'asin' ], ',' );;
             $aUnitOptions[ 'Keywords' ] = isset( $aUnitOptions[ 'Keywords' ] ) && $aUnitOptions[ 'Keywords' ]
-                ? $aUnitOptions[ 'Keywords' ] . ', ' . $_sKeywords
-                : $_sKeywords;
+                ? array_unique( array_merge( $this->getStringIntoArray( $aUnitOptions[ 'Keywords' ], ',' ), $_aKeywords ) )
+                : $_aKeywords;
         }
         if ( isset( $aUnitOptions[ 'search' ] ) ) {
-            $_sKeywords = $this->getStringIntoArray( $aUnitOptions[ 'search' ], ',' );
+            $_aKeywords = $this->getStringIntoArray( $aUnitOptions[ 'search' ], ',' );
             $aUnitOptions[ 'Keywords' ] = isset( $aUnitOptions[ 'Keywords' ] ) && $aUnitOptions[ 'Keywords' ]
-                ? $aUnitOptions[ 'Keywords' ] . ', ' . $_sKeywords
-                : $_sKeywords;
+                ? array_unique( array_merge( $this->getStringIntoArray( $aUnitOptions[ 'Keywords' ], ',' ), $_aKeywords ) )
+                : $_aKeywords;
         }
 
         $_aUnitOptions = $this->_getShortcodeArgumentKeysSanitized(
@@ -70,4 +70,5 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
         return parent::_getUnitOptionsFormatted( $_aUnitOptions, $aDefaults, $aRawOptions );
 
     }
+
 }
