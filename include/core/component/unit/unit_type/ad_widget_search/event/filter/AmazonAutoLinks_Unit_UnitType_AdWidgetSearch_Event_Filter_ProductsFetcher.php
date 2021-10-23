@@ -28,16 +28,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
      */
     protected function _getItemsFromSource( $aProducts ) {
 
-        $_sLocale            = ( string ) $this->oUnitOutput->oUnitOption->get( 'country' );
-        // @todo do PA-API search
-        // $_sCurrencyDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
-        // $_sCurrency          = $this->oUnitOutput->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
-        // $_sLanguageDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
-        // $_sLanguage          = $this->oUnitOutput->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
-        // if ( $_sCurrencyDefault !== $_sCurrency || $_sLanguageDefault !== $_sLanguage ) {
-        //
-        // }
-
+        $_sLocale      = ( string ) $this->oUnitOutput->oUnitOption->get( 'country' );
         $_asKeywords   = $this->oUnitOutput->oUnitOption->get( array( 'Keywords' ), array() );
         $_aKeywords    = is_array( $_asKeywords )
             ? $_asKeywords
