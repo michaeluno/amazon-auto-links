@@ -12,7 +12,7 @@
  *
  * @since       3.7.5
  */
-class AmazonAutoLinks_Unit_URL_Event_RenewCacheAction extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_URL_Event_Action_RenewCache extends AmazonAutoLinks_PluginUtility {
 
     public function __construct() {
         add_action( 'aal_action_renew_unit_caches', array( $this, 'replyToDoAction' ) );

@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v4.7.10b05 by miunosoft (Michael Uno) 
+    Auto Amazon Links v5.0.0b02 by miunosoft (Michael Uno) 
     Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -381,9 +381,8 @@ return array(
     "AmazonAutoLinks_FormFields_URLUnit_Submit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Submit.php", 
     "AmazonAutoLinks_PostMetaBox_URLUnit_Advanced" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_PostMetaBox_URLUnit_Advanced.php", 
     "AmazonAutoLinks_UnitPostMetaBox_Main_url" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_url.php", 
-    "AmazonAutoLinks_Unit_URL_Event_DebugOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_DebugOutput.php", 
-    "AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher.php", 
-    "AmazonAutoLinks_Unit_URL_Event_RenewCacheAction" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/AmazonAutoLinks_Unit_URL_Event_RenewCacheAction.php", 
+    "AmazonAutoLinks_Unit_URL_Event_Action_RenewCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/action/AmazonAutoLinks_Unit_URL_Event_Action_RenewCache.php", 
+    "AmazonAutoLinks_Unit_URL_Event_Filter_DebugOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/filter/AmazonAutoLinks_Unit_URL_Event_Filter_DebugOutput.php", 
     "AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/filter/AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher.php", 
     "AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/filter/AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFormatter.php", 
     "AmazonAutoLinks_Unit_URL_Event_Filter_ProductsSorter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/unit_type/url/event/filter/AmazonAutoLinks_Unit_URL_Event_Filter_ProductsSorter.php", 

@@ -51,9 +51,9 @@ final class AmazonAutoLinks_Unit_UnitType_Loader_url extends AmazonAutoLinks_Uni
      * @param $sScriptPath
      */
     protected function _construct( $sScriptPath ) {
-        // new AmazonAutoLinks_Unit_URL_Event_HTTPCacheDiminisher; // @deprecated 4.3.2
-        new AmazonAutoLinks_Unit_URL_Event_RenewCacheAction;
-        new AmazonAutoLinks_Unit_URL_Event_DebugOutput; // [4.4.0]
+        
+        new AmazonAutoLinks_Unit_URL_Event_Action_RenewCache;
+        new AmazonAutoLinks_Unit_URL_Event_Filter_DebugOutput; // [4.4.0]
 
         new AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFetcher;
         new AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFormatter;

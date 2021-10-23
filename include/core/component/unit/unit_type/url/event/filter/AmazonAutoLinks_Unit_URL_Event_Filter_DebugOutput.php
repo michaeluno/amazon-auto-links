@@ -12,7 +12,7 @@
  *
  * @since 4.4.0
  */
-class AmazonAutoLinks_Unit_URL_Event_DebugOutput extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Unit_URL_Event_Filter_DebugOutput extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Stores retrieved HTML bodies for debug outputs.
