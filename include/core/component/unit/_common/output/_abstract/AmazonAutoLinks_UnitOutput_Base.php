@@ -622,8 +622,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      */
     protected function _shouldUsePAAPI() {
 
-        $_bAPIStatus         = false !== $this->oOption->getPAAPIStatus();
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
+        $_bAPIStatus         = false !== $this->oOption->getPAAPIStatus( $_sLocale );
         if ( ! in_array( $_sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
             return $_bAPIStatus;
         }
