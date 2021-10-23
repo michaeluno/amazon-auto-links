@@ -47,7 +47,7 @@ class AmazonAutoLinks_UnitOption_search extends AmazonAutoLinks_UnitOption_Base 
         'MaximumPrice'          => null,
         'MinimumPrice'          => null,
         'MinPercentageOff'      => null,
-        'MerchantId'            => null,    // 2.0.7+
+        'MerchantId'            => 'All',    // 2.0.7+
         'MarketplaceDomain'     => null,    // 2.1.0+ @deprecated No longer available in PA-API 5
         'ItemPage'              => null,
 
