@@ -599,8 +599,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @param       array $aURLs
      * @return      void
      */
-    public function render( $aURLs=array() ) {
-        echo $this->get( $aURLs );
+    public function render() {
+        echo $this->get();
     }
 
     /**
