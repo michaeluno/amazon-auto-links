@@ -30,15 +30,23 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     
     /**
      * Stores a product database table object.
+     * @var AmazonAutoLinks_DatabaseTable_aal_products
      */
     public $oProductTable;
 
+    /**
+     * @var boolean
+     */
     public $bIsSSL;
 
     /**
      * Stores a product filter object.
+     * @var AmazonAutoLinks_ProductFilter
      */
     public $oGlobalProductFilter;
+    /**
+     * @var AmazonAutoLinks_ProductFilter
+     */
     public $oUnitProductFilter;
 
     /**
@@ -220,12 +228,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 return true;
             }
             // @deprecated 3.9.2 these are checked with the item format option, %_discount_rate%, $review_rate%.
-//            if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
-//                return true;
-//            }
-//            if ( $this->oUnitOption->get( '_filter_by_discount_rate', 'enabled' ) ) {
-//                return true;
-//            }
+            // if ( $this->oUnitOption->get( '_filter_by_rating', 'enabled' ) ) {
+            //     return true;
+            // }
+            // if ( $this->oUnitOption->get( '_filter_by_discount_rate', 'enabled' ) ) {
+            //     return true;
+            // }
             return false;
 
         }
@@ -386,8 +394,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         /**
          * Sets up hooks per output basis.
-         * @since   4.0.0
-         * @return  array   An array holding hook objects.
+         * @since  4.0.0
+         * @return array An array holding hook objects.
          */
         private function ___getHooksSetPerOutput() {
             add_filter( 'aal_filter_unit_product_raw_title', array( $this, 'replyToModifyRawTitle' ), 10 );
@@ -486,7 +494,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      *
      * @param       array   $aProducts
      * @param       integer $iUnitID        The unit (post) ID.
-     * @callback    filter  aal_filter_products
+     * @callback    add_filter() aal_filter_products
      * @see         AmazonAutoLinks_UnitOutput__ErrorChecker::_replyToCheckErrors()
      * @remark      Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
      * @retuen      void
@@ -525,15 +533,15 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * Returns the error message if found.
      *
      * Cases:
-     * a: no items -> error
-     * b: items and errors are returned -> fine
-     * c: only errors -> error
-     * d: no errors -> fine
+     * - a) no items                      -> error
+     * - b) items and errors are returned -> fine
+     * - c) only errors                   -> error
+     * - d) no errors                     -> fine
      *
-     * @since       3.7.0
-     * @remark      Override this method in each extended class.
-     * @return      string  The found error message. An empty string if no error is found.
-     * @param       array   $aProducts
+     * @since  3.7.0
+     * @remark Override this method in each extended class.
+     * @return string  The found error message. An empty string if no error is found.
+     * @param  array   $aProducts
      */
     protected function _getError( $aProducts ) {
         $this->___setErrors( $aProducts );
@@ -594,8 +602,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Renders the product links.
-     *
-     * @return void
      */
     public function render() {
         echo $this->get();
