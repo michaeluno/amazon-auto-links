@@ -11,93 +11,79 @@
 /**
  * Provides methods to output of contextual units.
  *
- * @remark      Unlike unit output classes of other unit types, this does not extend the unit output base class.
- * @package     Amazon Auto Links
- * @since       3.5.0
- * @filter      aal_filter_contextual_keywords
+ * @since 3.5.0
+ * @since 5.0.0 Extends a unit output class like other unit type output classes.
  */
-class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_UnitOutput_ad_widget_search {
 
     /**
-     * @var array
+     * Stores the unit type.
+     * @sicne  5.0.0
      */
-    private $___aArguments = array();
+    public $sUnitType = 'contextual';
 
     /**
-     * Sets up properties.
-     * @param array $aArguments
-     */
-    public function __construct( $aArguments ) {
-        $this->___aArguments = $this->___getArgumentsFormatted( $aArguments );
-    }
-        /**
-         * @param $aArguments
-         * @return array
-         */
-        private function ___getArgumentsFormatted( $aArguments ) {
-            $_oUnitOptions = new AmazonAutoLinks_UnitOption_contextual(
-                $this->getElement( $aArguments, array( 'id' ) ),   // unit id
-                $aArguments
-            );
-            return $aArguments + $_oUnitOptions->get();
-        }
-
-    /**
-     * @return      string
+     * @return string
      */
     public function get() {
 
-        $_oContextualSearch = new AmazonAutoLinks_ContextualUnit_SearchKeyword(
-            $this->___aArguments[ 'criteria' ],
-            $this->___aArguments[ 'additional_keywords' ],
-            $this->___aArguments[ 'excluding_keywords' ]
-        );
-        $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
-        if ( empty( $_aSearchKeywords ) ) {
-            return '';
-        }
-
-        shuffle ( $_aSearchKeywords );
-        array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
-
-        // 3.6.0+ This allows third parties to modify search keywords for cases that the keyword gets too long for long product title.
-        // @see https://wordpress.org/support/topic/problem-with-title-width/
-        $_aSearchKeywords = apply_filters( 'aal_filter_contextual_keywords', $_aSearchKeywords );
-
-        $_aArguments = $this->___aArguments;
-        unset( $_aArguments[ 'title' ] );   // this is a widget title field value and causes a conflict with the PA-API payload argument.
-
-        return AmazonAutoLinks(
-            array(
-                'Keywords'         => implode( ',', $_aSearchKeywords ),
-                'Operation'        => 'SearchItems',
-
-                /**
-                 * Fixed a bug that contextual widgets did not return outputs
-                 * due to the form data having the value of `category` for the `unit_type` argument.
-                 * This was because the unit option formatter class did not set the correct `unit_type` in the class,
-                 * which has been fixed in 3.4.7.
-                 *
-                 * So setting the value here is a workaround to keep backward compatibility.
-                 * @since       3.4.7
-                 */
-                'unit_type'        => 'search',
-
-                // The `Power` parameter will not be used as it only works with the Books category.
-
-                // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
-                // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
-                // So here we set a plugin specific option to perform search by each keyword.
-                'search_per_keyword'    => true,
-
-                // 3.6.0+ This avoids dabble nested containers.
-                // '_no_outer_container'  => true,  // @todo figure out why this does not take effect.
-
-            )
-            + $_aArguments,
-            false // echo or output
-        );
+        // this is a widget title field value and causes a conflict with the PA-API payload argument.
+        $this->oUnitOption->delete( 'title' );
+        $this->oUnitOption->set( 'Keywords', implode( ',', $this->___getKeywords() ) );
+        // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
+        // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
+        // So here we set a plugin specific option to perform search by each keyword.
+        $this->oUnitOption->set( 'search_per_keyword', true );
+        // if ( $this->_shouldUsePAAPI() ) {
+        //     return $this->___getOutputByPAAPISearch();
+        // }
+        return $this->___getOutputByAdWidgetSearch();
 
     }
+        /**
+         * @return string
+         * @since  5.0.0
+         */
+        private function ___getOutputByPAAPISearch() {
+            // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
+            // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
+            // So here we set a plugin specific option to perform search by each keyword.
+            $this->oUnitOption->set( 'search_per_keyword', true );
+            $_aUnitOptions = $this->oUnitOption->get();
+            $_oUnitOutput  = new AmazonAutoLinks_UnitOutput_search( $_aUnitOptions );
+            return $_oUnitOutput->get();
+        }
+        /**
+         * @return string
+         * @since  5.0.0
+         */
+        private function ___getOutputByAdWidgetSearch() {
+            $_aUnitOptions = $this->oUnitOption->get();
+            $_oUnitOutput  = new AmazonAutoLinks_UnitOutput_ad_widget_search( $_aUnitOptions );
+            return $_oUnitOutput->get();
+        }
+
+        /**
+         * @return array
+         * @since  5.0.0
+         */
+        private function ___getKeywords() {
+
+            $_oContextualSearch = new AmazonAutoLinks_ContextualUnit_SearchKeyword(
+                $this->oUnitOption->get( 'criteria' ),
+                $this->oUnitOption->get( 'additional_keywords' ),
+                $this->oUnitOption->get( 'excluding_keywords' )
+            );
+            $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
+
+            shuffle( $_aSearchKeywords );
+            array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
+
+            // 3.6.0+ This allows third parties to modify search keywords for cases that the keyword gets too long for long product title.
+            // @see https://wordpress.org/support/topic/problem-with-title-width/
+            $_aSearchKeywords = apply_filters( 'aal_filter_contextual_keywords', $_aSearchKeywords );
+            return $this->getAsArray( $_aSearchKeywords );
+
+        }
 
 }

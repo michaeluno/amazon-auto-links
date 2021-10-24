@@ -73,7 +73,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Stores a unit option object.
-     * @var AmazonAutoLinks_UnitOption_Base
+     * @var AmazonAutoLinks_UnitOption_contextual
      */
     public $oUnitOption;
 
@@ -595,8 +595,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     /**
      * Renders the product links.
      *
-     * @param       array $aURLs
-     * @return      void
+     * @return void
      */
     public function render() {
         echo $this->get();
@@ -622,34 +621,62 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     protected function _shouldUsePAAPI() {
 
         $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
-        $_bAPIStatus         = false !== $this->oOption->getPAAPIStatus( $_sLocale );
+        $_bAPIKeysSet        = $this->oOption->isPAAPIKeySet( $_sLocale );
         if ( ! in_array( $_sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
-            return $_bAPIStatus;
+            return $_bAPIKeysSet;
         }
         // If the user wants to display products with non-default currency or language, use PA-API
-        $_sCurrencyDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $_sLocale );
-        $_sCurrency          = $this->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
-        if ( $_sCurrencyDefault !== $_sCurrency ) {
-            return $_bAPIStatus;
+        if ( ! $this->___hasDefaultCurrencyOption( $_sLocale ) ) {
+            return $_bAPIKeysSet;
         }
-        $_sLanguageDefault   = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $_sLocale );
-        $_sLanguage          = $this->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
-        if ( $_sLanguageDefault !== $_sLanguage ) {
-            return $_bAPIStatus;
+        if ( ! $this->___hasDefaultLanguageOption( $_sLocale ) ) {
+            return $_bAPIKeysSet;
         }
-        if ( $this->hasAdvancedSearchOptions() ) {
-            return $_bAPIStatus;
+        // If the sort option is given and it is not the default one, use PA-API
+        if ( $this->___hasNonDefaultSortOption() ) {
+            return $_bAPIKeysSet;
+        }
+        if ( $this->___hasAdvancedSearchOptions() ) {
+            return $_bAPIKeysSet;
         }
         return false;
 
     }
         /**
+         * @param  string  $sLocale
+         * @return boolean
+         * @since  5.0.0
+         */
+        private function ___hasDefaultCurrencyOption( $sLocale ) {
+            $_sCurrencyDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $sLocale );
+            $_sCurrency        = $this->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
+            return $_sCurrencyDefault === $_sCurrency;
+        }
+        /**
+         * @param  string  $sLocale
+         * @return boolean
+         * @since  5.0.0
+         */
+        private function ___hasDefaultLanguageOption( $sLocale ) {
+            $_sLanguageDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $sLocale );
+            $_sLanguage        = $this->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
+            return $_sLanguageDefault === $_sLanguage;
+        }
+        /**
+         * @return boolean
+         * @since  5.0.0
+         */
+        private function ___hasNonDefaultSortOption() {
+            $_sSort = $this->oUnitOption->get( 'Sort' );
+            return $_sSort && 'Relevance' !== $_sSort;
+        }
+        /**
          * @return boolean Whether the unit arguments contain advanced search options which require PA-API.
          * @since  5.0.0
          */
-        private function hasAdvancedSearchOptions() {
+        private function ___hasAdvancedSearchOptions() {
             $_aAdvancedArgumentKeys = array(
-                // The value doesn't matter
+                // The value doesn't matter as only the keys are compared
                 'SearchIndex'       => true,
                 'BrowseNode'        => true,
                 'Availability'      => true,

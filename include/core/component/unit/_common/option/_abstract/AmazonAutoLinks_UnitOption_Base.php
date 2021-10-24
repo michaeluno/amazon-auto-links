@@ -462,6 +462,15 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     }
 
     /**
+     * Unsets an array element with dimentional keys.
+     * @param array|string $asOptionKey
+     * @since 5.0.0
+     */
+    public function delete( $asOptionKey ) {
+        $this->unsetDimensionalArrayElement( $this->aUnitOptions, $this->getAsArray( $asOptionKey ) );
+    }
+
+    /**
      * @param  array   $aTagsToSearch The `item_format` unit argument tags to search.
      * @since  4.3.4
      * @return boolean

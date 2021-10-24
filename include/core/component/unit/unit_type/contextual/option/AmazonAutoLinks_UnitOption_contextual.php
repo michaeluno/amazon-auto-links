@@ -34,8 +34,8 @@ class AmazonAutoLinks_UnitOption_contextual extends AmazonAutoLinks_UnitOption_s
         'excluding_keywords'    => '',  // 3.12.0
         'country'               => 'US',
 
-//        'search_per_keyword'    => true,
-//        '_sort'                 => 'raw',
+       // 'search_per_keyword'    => true,
+       // '_sort'                 => 'raw',
 
     );
     
@@ -45,20 +45,7 @@ class AmazonAutoLinks_UnitOption_contextual extends AmazonAutoLinks_UnitOption_s
      */
     protected function getDefaultOptionStructure() {
         return self::$aStructure_Default
-            + parent::getDefaultOptionStructure();       
-    }
-
-    /**
-     *
-     * @param  array $aUnitOptions
-     * @param  array $aDefaults
-     * @param  array $aRawOptions
-     * @return array
-     * @since  3.5.0
-     * @since  4.0.0   Renamed from `format()` as it was too general.
-     */
-    protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
-        return parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
+            + AmazonAutoLinks_UnitOption_search::$aStructure_Default;
     }
 
 }

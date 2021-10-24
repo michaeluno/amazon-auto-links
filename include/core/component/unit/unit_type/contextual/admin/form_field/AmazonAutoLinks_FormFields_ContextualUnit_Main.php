@@ -75,11 +75,13 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
          * @since  4.7.4
          */
         private function ___getCountryField( $sFieldIDPrefix ) {
-            $_aBase = array(
+
+            $_aLabels = $this->___getLocaleLabels();
+            $_aBase   = array(
                 'field_id'          => $sFieldIDPrefix . 'country',
                 'type'              => 'select',
                 'title'             => __( 'Country', 'amazon-auto-links' ),
-                'label'             => $this->getPAAPILocaleFieldLabels(),
+                'label'             => $_aLabels,
                 'default'           => AmazonAutoLinks_Option::getInstance()->getMainLocale(),
             );
             // In the widget page in WordPress 5.8 or above, the select2 field type does not load
@@ -88,12 +90,24 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
             }
             return array(
                 'type'              => 'select2',
-                'icon'              => $this->getLocaleIcons( array_keys( $this->getPAAPILocaleFieldLabels() ) ),
+                'icon'              => $this->getLocaleIcons( array_keys( $_aLabels ) ),
                 'description'       => sprintf(
                     __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
                     $this->getAPIAuthenticationPageURL()
                 ),
             ) + $_aBase;
         }
+            /**
+             * @return string[]
+             * @since  5.0.0
+             */
+            private function ___getLocaleLabels() {
+                $_aAdWidgetLocales = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport( true );
+                $_aLocaleLabels    = array();
+                foreach( $_aAdWidgetLocales as $_oLocale ) {
+                    $_aLocaleLabels[ $_oLocale->sSlug ] = $_oLocale->getName();
+                }
+                return $_aLocaleLabels + $this->getPAAPILocaleFieldLabels();
+            }
 
 }
