@@ -30,29 +30,15 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_UnitOutput_a
         // this is a widget title field value and causes a conflict with the PA-API payload argument.
         $this->oUnitOption->delete( 'title' );
         $this->oUnitOption->set( 'Keywords', implode( ',', $this->___getKeywords() ) );
+
         // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
         // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
         // So here we set a plugin specific option to perform search by each keyword.
         $this->oUnitOption->set( 'search_per_keyword', true );
-        // if ( $this->_shouldUsePAAPI() ) {
-        //     return $this->___getOutputByPAAPISearch();
-        // }
+
         return $this->___getOutputByAdWidgetSearch();
 
     }
-        /**
-         * @return string
-         * @since  5.0.0
-         */
-        private function ___getOutputByPAAPISearch() {
-            // 3.1.4+   By default the given comma-delimited multiple keywords such as `PHP,WordPress` are searched in one query.
-            // The Amazon API does not provide an OR operator for the Keywords parameter. The `Power` argument cannot be used for categories other than Books.
-            // So here we set a plugin specific option to perform search by each keyword.
-            $this->oUnitOption->set( 'search_per_keyword', true );
-            $_aUnitOptions = $this->oUnitOption->get();
-            $_oUnitOutput  = new AmazonAutoLinks_UnitOutput_search( $_aUnitOptions );
-            return $_oUnitOutput->get();
-        }
         /**
          * @return string
          * @since  5.0.0

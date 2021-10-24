@@ -11,7 +11,6 @@
  * Handles ad_widget_search unit options.
  * 
  * @since 5.0.0
-
  */
 class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOption_Base {
 
@@ -50,7 +49,7 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
 
         // Shortcode arguments
         if ( isset( $aUnitOptions[ 'asin' ] ) ) {
-            $_aKeywords = $this->getStringIntoArray( $aUnitOptions[ 'asin' ], ',' );;
+            $_aKeywords = $this->getStringIntoArray( $aUnitOptions[ 'asin' ], ',' );
             $aUnitOptions[ 'Keywords' ] = isset( $aUnitOptions[ 'Keywords' ] ) && $aUnitOptions[ 'Keywords' ]
                 ? array_unique( array_merge( $this->getStringIntoArray( $aUnitOptions[ 'Keywords' ], ',' ), $_aKeywords ) )
                 : $_aKeywords;
@@ -66,7 +65,6 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
             $aUnitOptions,
             AmazonAutoLinks_UnitOption_search::$aShortcodeArgumentKeys + AmazonAutoLinks_UnitOption_item_lookup::$aShortcodeArgumentKeys
         );
-
         return parent::_getUnitOptionsFormatted( $_aUnitOptions, $aDefaults, $aRawOptions );
 
     }
