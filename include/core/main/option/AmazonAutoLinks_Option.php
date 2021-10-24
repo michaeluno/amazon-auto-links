@@ -727,6 +727,15 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
+     * @param  string  $sLocale
+     * @return boolean
+     * @since  5.0.0
+     */
+    public function hasAssociateID( $sLocale ) {
+        return ( boolean ) $this->getAssociateID( $sLocale );
+    }
+
+    /**
      * @param  string $sLocale
      * @return string
      * @since  4.5.0

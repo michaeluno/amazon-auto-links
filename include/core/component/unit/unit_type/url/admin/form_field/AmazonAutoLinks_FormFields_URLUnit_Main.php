@@ -16,9 +16,10 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
      * @return array
      */    
     public function get( $sFieldIDPrefix='' ) {
-            
-        $_oOption = $this->oOption;
-        $_aFields = array(  
+
+        $_aLocaleLabels  = $this->getAdWidgetAPILocaleFieldLabels() + $this->getPAAPILocaleFieldLabels();
+        $_oOption        = $this->oOption;
+        $_aFields        = array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',
                 'type'          => 'hidden',
@@ -40,8 +41,8 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 'field_id'      => $sFieldIDPrefix . 'country',
                 'type'          => 'select2',
                 'title'         => __( 'Country', 'amazon-auto-links' ),
-                'label'         => $this->getPAAPILocaleFieldLabels(),
-                'icon'          => $this->getLocaleIcons( array_keys( $this->getPAAPILocaleFieldLabels() ) ),
+                'label'         => $_aLocaleLabels,
+                'icon'          => $this->getLocaleIcons( array_keys( $_aLocaleLabels ) ),
                 'description'   => sprintf(
                     __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
                     $this->getAPIAuthenticationPageURL()

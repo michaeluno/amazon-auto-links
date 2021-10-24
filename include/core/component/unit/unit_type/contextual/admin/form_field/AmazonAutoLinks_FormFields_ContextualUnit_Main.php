@@ -76,7 +76,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
          */
         private function ___getCountryField( $sFieldIDPrefix ) {
 
-            $_aLabels = $this->___getLocaleLabels();
+            $_aLabels = $this->getAdWidgetAPILocaleFieldLabels() + $this->getPAAPILocaleFieldLabels();
             $_aBase   = array(
                 'field_id'          => $sFieldIDPrefix . 'country',
                 'type'              => 'select',
@@ -97,17 +97,5 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 ),
             ) + $_aBase;
         }
-            /**
-             * @return string[]
-             * @since  5.0.0
-             */
-            private function ___getLocaleLabels() {
-                $_aAdWidgetLocales = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport( true );
-                $_aLocaleLabels    = array();
-                foreach( $_aAdWidgetLocales as $_oLocale ) {
-                    $_aLocaleLabels[ $_oLocale->sSlug ] = $_oLocale->getName();
-                }
-                return $_aLocaleLabels + $this->getPAAPILocaleFieldLabels();
-            }
 
 }
