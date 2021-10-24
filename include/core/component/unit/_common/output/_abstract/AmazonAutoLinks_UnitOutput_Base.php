@@ -674,7 +674,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___hasNonDefaultSortOption() {
             $_sSort = $this->oUnitOption->get( 'Sort' );
-            return $_sSort && 'Relevance' !== $_sSort;
+            return $_sSort && ! in_array( $_sSort, array( 'Relevance', 'raw' ) );
         }
         /**
          * @return boolean Whether the unit arguments contain advanced search options which require PA-API.
