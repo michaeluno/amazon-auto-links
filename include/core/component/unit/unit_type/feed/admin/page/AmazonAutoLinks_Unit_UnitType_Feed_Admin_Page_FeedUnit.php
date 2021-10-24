@@ -40,6 +40,7 @@ class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoL
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'style'         => AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
+            'order'         => 44,
         );
     }
 

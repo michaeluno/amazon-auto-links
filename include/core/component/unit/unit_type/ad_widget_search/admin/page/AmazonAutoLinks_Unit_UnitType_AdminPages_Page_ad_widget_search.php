@@ -32,6 +32,7 @@ class AmazonAutoLinks_Unit_UnitType_AdminPages_Page_ad_widget_search extends Ama
             'title'         => __( 'Add Unit by Search', 'amazon-auto-links' ),
             'screen_icon'   => AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . "/asset/image/icon/screen_icon_32x32.png", true ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),
+            'order'         => 41,
         );
     }
 
