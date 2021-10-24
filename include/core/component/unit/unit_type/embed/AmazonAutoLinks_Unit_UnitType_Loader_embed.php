@@ -48,8 +48,9 @@ final class AmazonAutoLinks_Unit_UnitType_Loader_embed extends AmazonAutoLinks_U
 
     protected function _construct( $sScriptPath ) {
         // Events
-        new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher;
-        new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFormatter;
+        // @deprecated 5.0.0
+        // new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher;
+        // new AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFormatter;
     }
 
     /**

@@ -11,6 +11,7 @@
  * Formats products array.
  *
  * @since 5.0.0
+ * @deprecated 5.0.0
  */
 class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFormatter extends AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter {
 

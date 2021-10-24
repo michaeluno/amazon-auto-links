@@ -40,10 +40,42 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
     public $bNonProductURL = false;
 
     /**
+     * @return string
+     * @since  5.0.0
+     */
+    public function get() {
+
+        // As of v5.0.0, multiple URLs are not supported. Only accepts a single URL.
+        $_sURL    = trim( ( string ) $this->oUnitOption->get( 'uri' ) );
+        $this->oUnitOption->set( 'country', AmazonAutoLinks_Locales::getLocaleFromURL( $_sURL, ( string ) $this->oUnitOption->get( array( 'country' ), 'US' ) ) );
+        $_aASINs  = $this->getASINs( $_sURL );
+        if ( empty( $_aASINs ) ) {
+            $this->oUnitOption->set( 'urls', array( $_sURL ) );
+            return $this->___getOutputByURLUnitType( $this->oUnitOption->get() );
+        }
+        $this->oUnitOption->set( 'asin', $_aASINs );
+        return $this->___getOutputByAdWidgetSearchUnitType( $this->oUnitOption->get() );
+
+    }
+        /**
+         * @return string
+         * @since  5.0.0
+         */
+        private function ___getOutputByURLUnitType( $aUnitOptions ) {
+            $_oUnitOutput = new AmazonAutoLinks_UnitOutput_url( $aUnitOptions );
+            return $_oUnitOutput->get();
+        }
+        private function ___getOutputByAdWidgetSearchUnitType( $aUnitOptions ) {
+            $_oUnitOutput = new AmazonAutoLinks_UnitOutput_ad_widget_search( $aUnitOptions );
+            return $_oUnitOutput->get();
+        }
+
+    /**
      * Overrides parent method to return errors specific to this embed unit type.
      * @param  array  $aProducts
      * @return string
      * @since  4.2.2
+     * @deprecated 5.0.0
      */
     protected function _getError( $aProducts ) {
 

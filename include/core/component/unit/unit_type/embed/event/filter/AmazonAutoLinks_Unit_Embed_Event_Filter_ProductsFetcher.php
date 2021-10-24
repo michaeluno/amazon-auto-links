@@ -11,6 +11,7 @@
  * Fetches product data from outside source.
  *
  * @since 5.0.0
+ * @deprecated 5.0.0
  */
 class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher extends AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher {
 
@@ -63,7 +64,7 @@ class AmazonAutoLinks_Unit_Embed_Event_Filter_ProductsFetcher extends AmazonAuto
         $_aProductsByURLs  = $this->___getProductsByPAAPI( $_aASINsOfNonProductURLs, $_sLocale );
         $_aProducts        = $this->___getProductsMerged( $_aProducts, $_aProductsByPAAPI );
         return array_merge( $_aProducts, $_aProductsByURLs );
-        
+
     }
 
         /**
