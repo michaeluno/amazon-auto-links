@@ -353,7 +353,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 return '';
             }
             $_iFilteredOut = count( $this->aBlockedASINs );
-            $_iUnitID      = $this->oUnitOption->get( 'id' );
+            $_iUnitID      = ( integer ) $this->oUnitOption->get( 'id' );
+            $_sLocale      = $this->oUnitOption->get( 'country' );
             $_sNotes       = implode( ',', $this->aNotes );
             return 2 === $iShowErrorMode
                 ? "<!-- "
@@ -362,7 +363,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                     . " Type: {$this->sUnitType} ID: {$_iUnitID}"
                     . ( $_sNotes ? " Notes: {$_sNotes}" : '' )
                   . " -->"
-                : "<div class='warning' data-type='{$this->sUnitType}' data-id='{$_iUnitID}'>"
+                : "<div class='warning' data-type='" . esc_attr( $this->sUnitType ) . "' data-id='{$_iUnitID}' data-locale='" . esc_attr( $_sLocale ) . "'>"
                     . "<p>"
                             . AmazonAutoLinks_Registry::NAME. ': ' . $sErrorMessage
                             . ( $_iFilteredOut ? ' (' . $_iFilteredOut . ' items filtered out)' : '' )
