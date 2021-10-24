@@ -250,18 +250,18 @@ class AmazonAutoLinks_Unit_PAAPI5_Request_SearchItems extends AmazonAutoLinks_Un
         private function ___getParameterSortBy( $sSort ) {
                         
             // First, check if it is a valid values. If so, just return it.
-            if ( in_array( $sSort, array( 'AvgCustomerReviews', 'Featured', 'NewestArrivals', 'Relevance', 'Price:HighToLow', 'Price:LowToHigh' ) ) ) {
+            if ( in_array( $sSort, array( 'AvgCustomerReviews', 'Featured', 'NewestArrivals', 'Relevance', 'Price:HighToLow', 'Price:LowToHigh' ), true ) ) {
                 return $sSort;
             }
 
             // Check backward compatible values.
-            if ( in_array( $sSort, array( 'price', 'pricerank' ) ) ) {
+            if ( in_array( $sSort, array( 'price', 'pricerank' ), true ) ) {
                 return 'Price:LowToHigh';
             }
-            if ( in_array( $sSort, array( '-price', 'inversepricerank' ) ) ) {
+            if ( in_array( $sSort, array( '-price', 'inversepricerank' ), true ) ) {
                 return 'Price:HighToLow';
             }
-            if ( in_array( $sSort, array( 'reviewrank' ) ) ) {
+            if ( in_array( $sSort, array( 'reviewrank' ), true ) ) {
                 return 'AvgCustomerReviews';
             }
 
