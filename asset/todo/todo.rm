@@ -23,9 +23,7 @@
     - add a count notice in the menu item
     - add the "Notifications" page/post meta boxes
   - Add the ability for other components to interact with it by adding and removing notifications, performing certain actions such as saving an option for the component.   
-- [Feature] Add a new unit type, Item Pick-up, which allows the user to pick up products from search and existing units.
-- [Feature] Add a new Search unit type that works with the Ad Widget API (the supported locales will be limited).
-    - In this case, the existing menu "Add Unit by Search" need to be renamed. Maybe, "Add Unit by PA-API". 
+- [Feature] Add a new unit type, Item Pick-up, which allows the user to pick up products from search and existing units. 
 - [Feature] Add the ability to create posts from units.
     - The ability of automating it will not be included as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
 - [Feature] Add a Gutenberg block to create and compose product links.
