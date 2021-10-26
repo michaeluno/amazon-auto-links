@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Handles plugin's shortcodes.
  * 
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3.11.0
  */
 class AmazonAutoLinks_AALBSupport_Shortcode_amazon_link extends AmazonAutoLinks_WPUtility {

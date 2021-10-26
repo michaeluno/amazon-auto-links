@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Creates Amazon product links by ItemSearch.
  * 
- * @package         Amazon Auto Links
+ * @package         Auto Amazon Links
  */
 class AmazonAutoLinks_UnitOutput_search extends AmazonAutoLinks_UnitOutput_Base_ElementFormat {
     

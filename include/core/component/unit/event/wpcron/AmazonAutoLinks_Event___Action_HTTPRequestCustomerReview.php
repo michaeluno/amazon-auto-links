@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -10,7 +10,7 @@
 
 /**
  * Retrieves customer reviews and the rating of the given product and updates the product cache.
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3.9.0
  * @since        4.3.4  Renamed from `AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview2`. Changed the action hook name from `aal_action_api_get_customer_review2`.
  */

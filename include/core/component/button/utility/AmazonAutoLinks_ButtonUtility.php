@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  *  Provides shared utility methods among the button component.
  *  
- *  @package    Amazon Auto Links
+ *  @package    Auto Amazon Links
  *  @since      4.0.1
  */
 class AmazonAutoLinks_ButtonUtility extends AmazonAutoLinks_PluginUtility {

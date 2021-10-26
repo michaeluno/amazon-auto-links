@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -14,7 +14,7 @@
  * This replaces the iframe outputs to direct plugin Amazon product outputs
  * for cases that some user might not like to use iframe.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        4.0.0
  */
 class AmazonAutoLinks_CustomOEmbed_Content_NonIframe {

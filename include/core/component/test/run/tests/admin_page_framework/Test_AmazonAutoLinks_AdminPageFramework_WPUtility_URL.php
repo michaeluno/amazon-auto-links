@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Tests AmazonAutoLinks_AdminPageFramework_WPUtility_URL methods.
  *  
- * @package Amazon Auto Links
+ * @package Auto Amazon Links
  * @see     AmazonAutoLinks_AdminPageFramework_WPUtility_URL
  * @since   4.7.0
 */

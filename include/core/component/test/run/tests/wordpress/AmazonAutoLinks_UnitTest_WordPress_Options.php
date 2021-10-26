@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * WordPress-related option tests.
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_UnitTest_WordPress_Options extends AmazonAutoLinks_UnitTest_Base {

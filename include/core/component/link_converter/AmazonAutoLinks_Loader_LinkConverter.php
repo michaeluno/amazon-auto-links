@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Loads the unit option converter component.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3.8.0
  */
 class AmazonAutoLinks_Loader_LinkConverter {

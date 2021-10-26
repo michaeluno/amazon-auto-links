@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Tests the class, `AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck`.
  *
- * @package Amazon Auto Links
+ * @package Auto Amazon Links
  * @since   4.6.18
  * @see     AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck
  * @tags    http

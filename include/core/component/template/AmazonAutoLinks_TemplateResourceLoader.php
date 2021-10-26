@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -12,7 +12,7 @@
 /**
  * Loads template components such as style.css, template.php, functions.php etc.
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3
  * 
  * @filter      apply       aal_filter_template_custom_css

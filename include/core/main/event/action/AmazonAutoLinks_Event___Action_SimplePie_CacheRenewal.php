@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Handles  SimplePie cache renewal events.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3
  * @tood         Removed this class and related lines and files.
  * @deprecated   4.3.4

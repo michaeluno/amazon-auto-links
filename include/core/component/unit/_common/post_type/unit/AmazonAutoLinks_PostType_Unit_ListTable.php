@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Provides methods for rendering post listing table contents.
  * 
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3
  */
 class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageFramework_PostType {
@@ -244,12 +244,12 @@ class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageF
                     if ( $_bTemplateExists ) {
                         return sprintf(
                             __( 'The template is not activated. Try activating the template via %1$s.', 'amazon-auto-links' ) . ' ' . __( 'The default template will be applied instead.', 'amazon-auto-links' ),
-                            __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Templates', 'amazon-auto-links' )
+                            __( 'Dashboard', 'amazon-auto-links' ) . ' > Auto Amazon Links > ' . __( 'Templates', 'amazon-auto-links' )
                         );
                     }
                     return sprintf(
                        __( 'For some reasons, the template for the unit is not saved. If re-saving the unit does not solve the issue, consult the plugin developer with the following template ID and the template options found in %1$s', 'amazon-auto-links' ),
-                       __( 'Dashboard', 'amazon-auto-links' ) . ' > Amazon Auto Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
+                       __( 'Dashboard', 'amazon-auto-links' ) . ' > Auto Amazon Links > ' . __( 'Help', 'amazon-auto-links' ) . ' > ' . __( 'About', 'amazon-auto-links' ) . ' > ' . __( 'Template Options', 'amazon-auto-links' )
                     );
                 }
 

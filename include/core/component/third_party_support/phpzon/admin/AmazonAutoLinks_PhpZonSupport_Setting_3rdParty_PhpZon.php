@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -52,7 +52,7 @@ class AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon extends AmazonAutoLi
                 'field_id'      => 'shortcodes',
                 'type'          => 'checkbox',
                 'title'         => __( 'Shortcodes', 'amazon-auto-links' ),
-                'description'   => __( 'Check the shortcode of PhpZon to convert its outputs into Amazon Auto Links\'.', 'amazon-auto-links' ),
+                'description'   => __( 'Check the shortcode of PhpZon to convert its outputs into Auto Amazon Links\'.', 'amazon-auto-links' ),
                 'capability'    => 'manage_options',
                 'label'         => array(
                     'phpzon'    => '<code>phpzon</code>',

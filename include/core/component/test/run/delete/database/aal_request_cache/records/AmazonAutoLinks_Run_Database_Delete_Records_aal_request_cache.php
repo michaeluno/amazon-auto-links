@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * A scratch class to delete a database table records of `aal_request_cache`.
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Run_Database_Delete_Records_aal_request_cache extends AmazonAutoLinks_Scratch_Base {

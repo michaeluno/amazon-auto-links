@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -12,7 +12,7 @@
 /**
  * Outputs the HTTP request cache content.
  *
- * @package    Amazon Auto Links
+ * @package    Auto Amazon Links
  * @since      4.7.0
  */
 class AmazonAutoLinks_Main_Event_Query_HTTPRequestCache extends AmazonAutoLinks_PluginUtility {

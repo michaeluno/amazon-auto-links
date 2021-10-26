@@ -1,8 +1,8 @@
-# [Auto Links for Amazon Associates (formally Amazon Auto Links)](http://wordpress.org/plugins/amazon-auto-links/) #
+# [Auto Amazon Links (formerly Auto Amazon Links)](http://wordpress.org/plugins/amazon-auto-links/) #
 
 ### Welcome to our GitHub Repository
 
-Amazon Auto Links is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.
+Auto Amazon Links is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.
 
 ## Screenshots ##
 Coming soon...
@@ -19,7 +19,7 @@ Coming soon...
 
 1. Upload **`amazon-auto-links.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to **Dashboard** -> **Amazon Auto Links** -> **Add Unit by Category**.
+3. Go to **Dashboard** -> **Auto Amazon Links** -> **Add Unit by Category**.
 4. Configure the options and select categories.
 5. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is avaiable in the **Apparence** -> **Widgets** page as well.
 
@@ -27,10 +27,10 @@ Coming soon...
 If you find an issue, let us know [here](https://github.com/michaeluno/amazon-auto-links/issues)!
 
 ## Support ##
-This is a developer's portal for Amazon Auto Links and should _not_ be used for support. Please visit the [support forums](http://wordpress.org/support/plugin/amazon-auto-links).
+This is a developer's portal for Auto Amazon Links and should _not_ be used for support. Please visit the [support forums](http://wordpress.org/support/plugin/amazon-auto-links).
 
 ## Contributions ##
-Anyone is welcome to contribute to Amazon Auto Links.
+Anyone is welcome to contribute to Auto Amazon Links.
 
 There are various ways you can contribute:
 
@@ -46,7 +46,7 @@ If you like it, please rate and review it in the [WordPress Plugin Directory](ht
 
 ## Copyright and License ##
 
-### Amazon Auto Links ###
+### Auto Amazon Links ###
 Released under the [GPL v2](./LICENSE.txt) or later.
 Copyright © 2014-2016 Michael Uno
 

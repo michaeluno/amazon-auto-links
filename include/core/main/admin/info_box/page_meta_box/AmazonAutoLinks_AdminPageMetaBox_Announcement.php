@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -49,7 +49,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
             return class_exists( 'AmazonAutoLinksPro_Registry', false )
                 ? ''
                 : "<div class='announcement-item'><a href='https://store.michaeluno.jp/amazon-auto-links-pro/amazon-auto-links-pro' target='_blank'>"
-                    . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}' alt='Amazon Auto Links Pro'/>"
+                    . "<img style='max-width: 100%; max-width:250px;' src='{$_sProImage}' alt='Auto Amazon Links Pro'/>"
                 . "</a></div>";
         }
         

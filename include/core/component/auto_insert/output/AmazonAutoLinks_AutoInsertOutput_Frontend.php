@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Inserts product links into the pre-defined area of page contents. 
  * 
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       2.0.0
 */
 class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInsertOutput_Base {

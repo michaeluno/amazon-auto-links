@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * A scratch class to manage plugin options.
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Run_PluginOption_amazon_auto_links extends AmazonAutoLinks_Scratch_Base {

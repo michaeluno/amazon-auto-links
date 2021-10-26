@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -13,9 +13,9 @@
  *
  * Amazon Associates Link Builder (AALB) is discontinues as of Feb 11, 2020.
  * This component attempts to convert their shortcode outputs into this plugin outputs.
- * So the users of AALB can safely migrate to Amazon Auto Links without modifying the database.
+ * So the users of AALB can safely migrate to Auto Amazon Links without modifying the database.
  * 
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3.11.1
  */
 class AmazonAutoLinks_AALBSupportLoader {

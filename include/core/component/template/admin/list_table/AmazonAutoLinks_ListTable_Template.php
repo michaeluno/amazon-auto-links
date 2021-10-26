@@ -2,7 +2,7 @@
 /**
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @copyright   Copyright (c) 2013-2021, Michael Uno
  * @authorurl   http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
@@ -13,7 +13,7 @@ if ( ! class_exists( 'WP_List_Table', false ) ) {
 }
 
 /**
- * Handles the list table of Amazon Auto Links templates. 
+ * Handles the list table of Auto Amazon Links templates.
  * @filter      aal_filter_template_listing_table_action_links
  * @since       2.0.0
  */

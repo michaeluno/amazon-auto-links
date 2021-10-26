@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Provides utility methods that uses WordPress built-in functions.
  *
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       2
  * @since       3       Changed the name from `AmazonAutoLinks_WPUtilities`.
  */

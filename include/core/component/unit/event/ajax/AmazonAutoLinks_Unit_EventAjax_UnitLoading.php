@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -14,7 +14,7 @@
  * If the `load_with_javascript` unit option is enabled, the unit displays a minimal output
  * and the Javascript script with Ajax replaces it with the content generated with this class method.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3.6.0
  * @since        4.3.0 Renamed from `AmazonAutoLinks_Event___Action_AjaxUnitLoading`
  * @since        4.3.0 Changed the base class from `AmazonAutoLinks_Event___Action_Base`.

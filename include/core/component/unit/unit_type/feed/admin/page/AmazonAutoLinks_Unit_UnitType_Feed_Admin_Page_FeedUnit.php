@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -54,7 +54,7 @@ class AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit extends AmazonAutoL
             // 'tab_slug'      => $this->sTabSlug,
             'section_id'    => '_default',
             'description'   => array(
-                __( 'The feed unit type allows you to import unit data of external sites that set up Amazon Auto Links. Make use of this unit to save API calls.', 'amazon-auto-links' ),
+                __( 'The feed unit type allows you to import unit data of external sites that set up Auto Amazon Links. Make use of this unit to save API calls.', 'amazon-auto-links' ),
                 __( 'After creating a unit on another site, copy the JSON feed URL found in the Manage Units page. Then paste the URL in the option field here.', 'amazon-auto-links' ),
             ),
             'capability'    => $_oOption->get( array( 'capabilities', 'create_units' ), 'edit_pages' ),

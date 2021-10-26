@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -18,7 +18,7 @@
  * And flag the cache as not expired to be loaded in front-end normally.
  * 4. In the callback of the `aal_action_http_cache_renewal` action hook, perform the HTTP request by removing the existing cache.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        3
  *
  */

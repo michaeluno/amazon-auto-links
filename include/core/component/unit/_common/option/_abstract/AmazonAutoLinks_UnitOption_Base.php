@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  * 
  * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
@@ -307,8 +307,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
              *
              * Applying filters here is important for 3rd party template conversions such as AALB.
              * For example, there is a case:
-             *  1. the user saves the default unit options (Amazon Auto Links -> Settings -> Default)
-             *  2. activates the desired template such as Text. (Amazon Auto Links -> Templates)
+             *  1. the user saves the default unit options (Auto Amazon Links -> Settings -> Default)
+             *  2. activates the desired template such as Text. (Auto Amazon Links -> Templates)
              *  3. set the Template Conversion option. (Settings -> 3rd Party -> AALB)
              * In this case, even though the `template_id` argument is properly converted to Text, the default item format option is not set, which results in setting the global default item format and showing unnecessary unit output elements such as sub-images.
              */

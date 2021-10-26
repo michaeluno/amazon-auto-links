@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -12,7 +12,7 @@
 /**
  *  Loads the button component
  *  
- *  @package    Amazon Auto Links
+ *  @package    Auto Amazon Links
  *  @since      3.3.0
  */
 class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {

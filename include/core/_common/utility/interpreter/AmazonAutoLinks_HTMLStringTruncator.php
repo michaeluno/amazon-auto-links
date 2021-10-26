@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -12,7 +12,7 @@
  * Provides method to truncate HTML string while preserving tags.
  * 
  * @see         http://stackoverflow.com/questions/16583676/shorten-text-without-splitting-words-or-breaking-html-tags/16584383#16584383
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3.3.0
  * @deprecated  Note used at the moment.
  */

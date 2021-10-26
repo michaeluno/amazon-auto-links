@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Loads the admin pages of the `Opt` component.
  *
- * @package      Amazon Auto Links/Opt
+ * @package      Auto Amazon Links/Opt
  * @since        4.7.0
  */
 class AmazonAutoLinks_Opt_In_Setting {

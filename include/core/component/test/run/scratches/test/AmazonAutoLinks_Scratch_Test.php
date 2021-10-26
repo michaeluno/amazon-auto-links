@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Scratches to deliberately cause errors to test the UI.
  *  
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       4.3.4
 */
 class AmazonAutoLinks_Scratch_Test extends AmazonAutoLinks_Scratch_Base {

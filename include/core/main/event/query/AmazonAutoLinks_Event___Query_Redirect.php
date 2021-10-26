@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -10,7 +10,7 @@
 
 /**
  * Redirects the visitor to an appropriate page depending on the request.
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3
  * @since       3.5.0   Renamed from `AmazonAutoLinks_Event_Redirect`
  */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Enables the Web Page Dumper option
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        4.7.3
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable extends AmazonAutoLinks_AjaxEvent_Base {

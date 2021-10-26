@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Responds with the data of category list unit preview for the category selection screen.
  *
- * @package      Amazon Auto Links
+ * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelectionUnitPreview extends AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection {

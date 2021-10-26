@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -11,7 +11,7 @@
 /**
  * Loads the Feed unit type components.
  *
- * The Feed unit type allows the user to display products of units created in another WordPress site installing Amazon Auto Links.
+ * The Feed unit type allows the user to display products of units created in another WordPress site installing Auto Amazon Links.
  *
  * @since 4.0.0
  * @since 5.0.0 Renamed from `AmazonAutoLinks_UnitTypeLoader_feed`.

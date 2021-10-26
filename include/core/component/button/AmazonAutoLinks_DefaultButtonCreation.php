@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -12,7 +12,7 @@
  * Creates a default button if there is not.
  * 
  * @remark      Expected to be called when a plugin is activated.
- * @package     Amazon Auto Links
+ * @package     Auto Amazon Links
  * @since       3
  */
 class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_ButtonUtility {

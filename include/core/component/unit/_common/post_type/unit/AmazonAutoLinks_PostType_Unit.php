@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -9,7 +9,7 @@
  */
 
 /**
- * Creates Amazon Auto Links custom post type.
+ * Creates Auto Amazon Links custom post type.
  *
  * @since 2.0.0
  */
@@ -147,8 +147,8 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                     'view'                  => __( 'View', 'amazon-auto-links' ),
                     'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
                     'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
-                    'not_found'             => __( 'No unit found for Amazon Auto Links', 'amazon-auto-links' ),
-                    'not_found_in_trash'    => __( 'No Unit Found for Amazon Auto Links in Trash', 'amazon-auto-links' ),
+                    'not_found'             => __( 'No unit found for Auto Amazon Links', 'amazon-auto-links' ),
+                    'not_found_in_trash'    => __( 'No Unit Found for Auto Amazon Links in Trash', 'amazon-auto-links' ),
                     'parent'                => __( 'Parent Unit', 'amazon-auto-links' ),
                     
                     // framework specific keys

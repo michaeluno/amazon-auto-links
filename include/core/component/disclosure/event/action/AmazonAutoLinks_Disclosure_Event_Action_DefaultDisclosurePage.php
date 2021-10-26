@@ -1,6 +1,6 @@
 <?php
 /**
- * Amazon Auto Links
+ * Auto Amazon Links
  *
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
@@ -33,7 +33,7 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
      * @param array  $aPluginInfo  Takes the following strucure.
      * ```
      * array(
-     *    [Name] => (string, length: 47) Amazon Auto Links - Drop Products without Price
+     *    [Name] => (string, length: 47) Auto Amazon Links - Drop Products without Price
      *    [PluginURI] => (string, length: 42) https://en.michaeluno.jp/amazon-auto-links
      *    [Version] => (string, length: 5) 1.0.0
      *    [Description] => (string, length: 30) Drops products without a price
@@ -45,7 +45,7 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
      *    [RequiresWP] => (string, length: 0)
      *    [RequiresPHP] => (string, length: 0)
      *    [UpdateURI] => (string, length: 0)
-     *    [Title] => (string, length: 47) Amazon Auto Links - Drop Products without Price
+     *    [Title] => (string, length: 47) Auto Amazon Links - Drop Products without Price
      *    [AuthorName] => (string, length: 23) Michael Uno (miunosoft)
      * )
      * ```
