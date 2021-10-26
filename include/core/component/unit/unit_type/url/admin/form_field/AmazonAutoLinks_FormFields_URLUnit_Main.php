@@ -43,10 +43,7 @@ class AmazonAutoLinks_FormFields_URLUnit_Main extends AmazonAutoLinks_FormFields
                 'title'         => __( 'Country', 'amazon-auto-links' ),
                 'label'         => $_aLocaleLabels,
                 'icon'          => $this->getLocaleIcons( array_keys( $_aLocaleLabels ) ),
-                'description'   => sprintf(
-                    __( 'If the country is not listed, set PA-API keys in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
-                    $this->getAPIAuthenticationPageURL()
-                ),
+                'description'   => AmazonAutoLinks_Message::getLocaleFieldGuide() . ' ' . AmazonAutoLinks_Message::get( 'locale_field_tip_paapi' ),
                 'default'       => $_oOption->getMainLocale(),
             ),                     
             array(

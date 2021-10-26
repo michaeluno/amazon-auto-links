@@ -41,17 +41,7 @@ class AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main extends AmazonAutoLinks
                 'type'          => 'select2',
                 'label'         => $_aLabels,
                 'icon'          => $this->getLocaleIcons( array_keys( $_aLabels ) ),
-                'tip'           => array(
-                    sprintf(
-                        __( 'Supported countries are %1$s.', 'amazon-auto-links' ),
-                        implode( ", ", $_aSupportedLocales )
-                    ),
-                    ' ' . sprintf(
-                        __( 'If the country is not listed, set an Associate ID in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
-                        $this->getAPIAuthenticationPageURL()
-                    ),
-                ),
-                // 'description'   => ,
+                'description'   => AmazonAutoLinks_Message::getLocaleFieldGuide() . ' ' . AmazonAutoLinks_Message::get( 'locale_field_tip_paapi' ),
                 'default'       => 'US',
             ),
             array(
@@ -97,4 +87,5 @@ class AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main extends AmazonAutoLinks
                 array_combine( $aSupportedLocales, $aSupportedLocales )
             );
         }
+
 }

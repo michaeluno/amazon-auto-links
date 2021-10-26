@@ -33,13 +33,15 @@ class AmazonAutoLinks_Message {
      * @since 4.7.0 Stores default messages.
      */
     public $aDefaults = array(
-        'activate_license'   => 'Please activate the license.',
-        'message_not_sent'   => 'For some reasons, the message could not be sent. Please contact %1$s directly.',
-        'consider_pro'       => 'Please consider upgrading to Pro to enable this feature.',
-        'consider_pro_link'  => 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.',
-        'available_in_pro'   => 'Available in Pro.',
-        'upgrade_to_pro'     => 'Please upgrade to <a href="%1$s">Pro</a> to add more units!',
-        'agree_to_send_info' => 'I understand that the system information including a PHP version and WordPress version etc. and plugin settings will be sent along with the messages to help troubleshooting.',
+        'activate_license'            => 'Please activate the license.',
+        'message_not_sent'            => 'For some reasons, the message could not be sent. Please contact %1$s directly.',
+        'consider_pro'                => 'Please consider upgrading to Pro to enable this feature.',
+        'consider_pro_link'           => 'Please consider upgrading to <a href="%1$s" target="_blank">Pro</a> to enable this feature.',
+        'available_in_pro'            => 'Available in Pro.',
+        'upgrade_to_pro'              => 'Please upgrade to <a href="%1$s">Pro</a> to add more units!',
+        'agree_to_send_info'          => 'I understand that the system information including a PHP version and WordPress version etc. and plugin settings will be sent along with the messages to help troubleshooting.',
+        'locale_field_tip_associates' => 'If the country is not listed, set an Associate ID in the <a href="%1$s">Associates</a> section.', // 5.0.0
+        'locale_field_tip_paapi'      => 'For countries which require PA-API, set PA-API keys as well.', // 5.0.0
     );
 
     /**
@@ -127,6 +129,18 @@ class AmazonAutoLinks_Message {
     }
 
     /**
+     * @param  boolean $bHasLink
+     * @return string
+     * @since  5.0.0
+     */
+    static public function getLocaleFieldGuide( $bHasLink=true ) {
+        $_sMessage = self::get( 'locale_field_tip_associates' );
+        return $bHasLink
+            ? sprintf( $_sMessage, AmazonAutoLinks_PluginUtility::getAPIAuthenticationPageURL() )
+            : strip_tags( $_sMessage );
+    }
+
+    /**
      * @param  string $sEmailAddress
      * @return string
      * @since  4.7.0
@@ -147,6 +161,8 @@ class AmazonAutoLinks_Message {
         __( 'Available in Pro.', 'amazon-auto-links' );
         __( 'Please upgrade to <a href="%1$s">Pro</a> to add more units!', 'amazon-auto-links' ) . ' ' . __( 'Make sure to empty the <a href="%2$s">trash box</a> to delete the units completely!', 'amazon-auto-links' );
         __( 'I understand that the system information including a PHP version and WordPress version etc. and plugin settings will be sent along with the messages to help troubleshooting.', 'amazon-auto-links' );
+        __( 'If the country is not listed, set an Associate ID in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ); // 5.0.0
+        __( 'For countries which require PA-API, set PA-API keys as well.', 'amazon-auto-links' );  // 5.0.0
     }
 
 }

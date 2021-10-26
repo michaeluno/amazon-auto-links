@@ -31,10 +31,7 @@ class AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation extends AmazonAut
                 'type'          => 'select2',
                 'label'         => $_aLabels,
                 'icon'          => $this->getLocaleIcons( array_keys( $_aLabels ) ),
-                'description'       => sprintf(
-                    __( 'If the country is not listed, set an Associate ID in the <a href="%1$s">Associates</a> section.', 'amazon-auto-links' ),
-                    $this->getAPIAuthenticationPageURL()
-                ),
+                'description'   => AmazonAutoLinks_Message::getLocaleFieldGuide(),
                 'default'       => 'US',
             ),
             array(
