@@ -124,9 +124,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      */
     public function load() {
 
-        $_oOption       = AmazonAutoLinks_Option::getInstance();
-        $_bAPIConnected = ( boolean ) $_oOption->getPAAPIStatus( $this->getValue( 'country' ) );
-        if ( ! $_bAPIConnected ) {
+        if ( ! $this->___isPAAPIRequired() ) {
             $this->addSettingField(
                 array(
                     'field_id'    => '_message_dummy_id',
@@ -192,6 +190,20 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         add_filter( 'field_definition_' . $this->oProp->sClassName . '_button_id', array( $this, 'replyToSetActiveButtonLabels' ) );
 
     }
+
+        /**
+         * @return boolean
+         * @since  5.0.0
+         */
+        private function ___isPAAPIRequired() {
+            $_sLocale           = $this->getValue( 'country' );
+            $_aAdWidgetLocales  = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
+            if ( in_array( $_sLocale, $_aAdWidgetLocales, true ) ) {
+                return false;
+            }
+            $_oOption    = AmazonAutoLinks_Option::getInstance();
+            return ( boolean ) $_oOption->getPAAPIStatus( $_sLocale );
+        }
         /**
          * Modifies the 'button_id' field to add lables for selection.
          * @param       array   $aFieldset
