@@ -54,8 +54,8 @@ class AmazonAutoLinks_PostType_UnitPreview {
     
         /// Modify the links
         add_filter( 'post_row_actions', array( $this, 'replyToAddViewActionLink' ), 10, 2 );
-        add_filter( 'post_type_link', array( $this, 'replyToModifyPermalinks' ), 10, 3 );
-        add_filter( 'post_link', array( $this, 'replyToModifyPermalinks' ), 10, 3 );
+        add_filter( 'post_type_link', array( $this, 'replyToGetModifiedPermalinks' ), 10, 3 );
+        add_filter( 'post_link', array( $this, 'replyToGetModifiedPermalinks' ), 10, 3 );
         add_filter( "previous_post_link", array( $this, 'replyToModifyPostLink' ), 10, 4 );
         add_filter( "next_post_link", array( $this, 'replyToModifyPostLink' ), 10, 4 );    
 
@@ -139,14 +139,10 @@ class AmazonAutoLinks_PostType_UnitPreview {
          * @param    boolean      $bLeaveName     Whether to keep the post name.
          * @return   string
          */
-        public function replyToModifyPermalinks( $sPermalink, $oPost, $bLeaveName ) {
-
-            if ( $this->sDefaultPreviewSlug !== $oPost->post_type ) {
-                return $sPermalink;
-            }
-
-            return $this->___getDefaultPostTypeSlugReplaced( $sPermalink );
-            
+        public function replyToGetModifiedPermalinks( $sPermalink, $oPost, $bLeaveName ) {
+            return $this->sDefaultPreviewSlug !== $oPost->post_type
+                ? $sPermalink
+                : $this->___getDefaultPostTypeSlugReplaced( $sPermalink );
         }    
            
         /**
@@ -173,14 +169,13 @@ class AmazonAutoLinks_PostType_UnitPreview {
     
     /**
      * 
-     * @since       2.2.0
-     * @callback    filter      request
-     * @return      array       The database query request array.
+     * @since    2.2.0
+     * @callback add_filter() request
+     * @return   array        The database query request array.
      */
     public function replyToModifyDatabaseQuery( $aRequest ) {
 
         $_oOption = AmazonAutoLinks_Option::getInstance();
-    
         if ( ! isset( $aRequest[ 'post_type' ], $aRequest[ 'name' ] ) ) {
             return $aRequest;
         }
@@ -191,7 +186,6 @@ class AmazonAutoLinks_PostType_UnitPreview {
             return $aRequest;
         }
         
-
         $aRequest[ 'post_type' ] = $this->sDefaultPreviewSlug;
         $aRequest[ $this->sDefaultPreviewSlug ] = $aRequest[ 'name' ];
         return $aRequest;
