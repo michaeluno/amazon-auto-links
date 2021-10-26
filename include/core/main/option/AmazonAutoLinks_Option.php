@@ -688,22 +688,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         $_aVisibility    = array_keys( array_filter( $_aVisibility ) );
         return ( boolean ) count( array_intersect( $_aVisibility, $_aDebugElements ) );
     }
-    
-    /**
-     * 
-     * @since       2.2.0
-     * @return      boolean
-     */
-    public function isCustomPreviewPostTypeSet()  {
-        
-        $_sPreviewPostTypeSlug = $this->get( 'unit_preview', 'preview_post_type_slug' );
-        if ( ! $_sPreviewPostTypeSlug ) {
-            return false;
-        }
-        return AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] !== $_sPreviewPostTypeSlug;
-        
-    }    
-    
+
     /**
      * 
      * @since  2.2.0

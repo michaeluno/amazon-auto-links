@@ -36,7 +36,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 
                 // If a custom preview post type is set, make it not public. 
                 // However, other ui arguments should be enabled.
-                'public'                => ! $_oOption->isCustomPreviewPostTypeSet(),
+                'public'                => true,
                 'publicly_queryable'    => $_oOption->isPreviewVisible(),
                 'has_archive'           => true,
                 'show_ui'               => true,

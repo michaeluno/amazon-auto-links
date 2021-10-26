@@ -36,7 +36,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
         
         // If a custom preview post type is not set, do nothing.
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        if ( ! $_oOption->isCustomPreviewPostTypeSet() ) {
+        if ( ! $this->___isCustomPreviewPostTypeSet( $_oOption ) ) {
             return;
         }
 
@@ -51,7 +51,8 @@ class AmazonAutoLinks_PostType_UnitPreview {
         // Hooks
         /// Post Type
         add_action( 'init', array( $this, 'replyToRegisterCustomPreviewPostType' ) );
-    
+        add_filter( 'register_post_type_args', array( $this, 'replyToGetDefaultUnitPostTypeArguments' ), 10, 2 );
+
         /// Modify the links
         add_filter( 'post_row_actions', array( $this, 'replyToAddViewActionLink' ), 10, 2 );
         add_filter( 'post_type_link', array( $this, 'replyToGetModifiedPermalinks' ), 10, 3 );
@@ -63,7 +64,34 @@ class AmazonAutoLinks_PostType_UnitPreview {
         add_filter( 'request', array( $this, 'replyToModifyDatabaseQuery' ) );
 
     }
-    
+        /**
+         * @param  AmazonAutoLinks_Option $oOption
+         * @since  2.2.0
+         * @since  5.0.0   Moved from `AmazonAutoLinks_Option`. Changed the visibility scope to private from public. Added the `$oOption` parameter.
+         * @return boolean
+         */
+        private function ___isCustomPreviewPostTypeSet( $oOption )  {
+            $_sPreviewPostTypeSlug = $oOption->get( 'unit_preview', 'preview_post_type_slug' );
+            if ( ! $_sPreviewPostTypeSlug ) {
+                return false;
+            }
+            return AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] !== $_sPreviewPostTypeSlug;
+        }
+
+    /**
+     * @param  array  $aArguments
+     * @param  string $sPostTypeSlug
+     * @return array
+     * @since  5.0.0
+     */
+    public function replyToGetDefaultUnitPostTypeArguments( $aArguments, $sPostTypeSlug ) {
+        if ( $sPostTypeSlug !== $this->sDefaultPreviewSlug ) {
+            return $aArguments;
+        }
+        $aArguments[ 'public' ] = false;
+        return $aArguments;
+    }
+
     /**
      * Modifies the action link of the post listing table.
      * 
@@ -116,8 +144,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
 
         if ( ! $this->sPreviewPostTypeSlug ) {
             return;
-        }    
-    
+        }
         $_oOption = AmazonAutoLinks_Option::getInstance();
         register_post_type(
             $this->sPreviewPostTypeSlug,
@@ -126,6 +153,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
                 'public'             => true,
                 'show_ui'            => false,
                 'publicly_queryable' => $_oOption->isPreviewVisible(),
+                'show_in_nav_menus'  => false,  // even though this is set to `true`, in the Menus UI screen, the posts do not appear for some reasons.
             )        
         );
             
