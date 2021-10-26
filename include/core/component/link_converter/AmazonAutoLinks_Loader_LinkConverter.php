@@ -11,7 +11,6 @@
 /**
  * Loads the unit option converter component.
  *
- * @package      Auto Amazon Links
  * @since        3.8.0
  */
 class AmazonAutoLinks_Loader_LinkConverter {

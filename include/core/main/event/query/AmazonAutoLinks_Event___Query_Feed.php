@@ -11,7 +11,6 @@
 /**
  * Deals with feed outputs.
  * 
- * @package     Auto Amazon Links
  * @since       3.1.0
  * @since       3.5.0   Renamed from `AmazonAutoLinks_Event_Feed`.
  * 

@@ -11,7 +11,6 @@
 /**
  * A scratch class for WordPress functions defined in functions.php.
  *  
- * @package     Auto Amazon Links
  * @since       4.6.4
 */
 class AmazonAutoLinks_Scratch_WordPress_Functions extends AmazonAutoLinks_Scratch_Base {

@@ -11,7 +11,6 @@
 /**
  * Responds with the data of category list of user's choosing.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonAutoLinks_AjaxEvent_Base {

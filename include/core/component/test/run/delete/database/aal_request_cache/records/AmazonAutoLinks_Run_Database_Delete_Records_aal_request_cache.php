@@ -11,7 +11,6 @@
 /**
  * A scratch class to delete a database table records of `aal_request_cache`.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Run_Database_Delete_Records_aal_request_cache extends AmazonAutoLinks_Scratch_Base {

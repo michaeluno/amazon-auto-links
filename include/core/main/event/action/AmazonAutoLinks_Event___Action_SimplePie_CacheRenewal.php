@@ -11,7 +11,6 @@
 /**
  * Handles  SimplePie cache renewal events.
  *
- * @package      Auto Amazon Links
  * @since        3
  * @tood         Removed this class and related lines and files.
  * @deprecated   4.3.4

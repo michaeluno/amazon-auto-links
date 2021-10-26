@@ -11,7 +11,6 @@
 /**
  * A unit test utility class.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.4
 */
 class AmazonAutoLinks_Run_Utility extends AmazonAutoLinks_PluginUtility {

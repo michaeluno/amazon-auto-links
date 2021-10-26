@@ -11,7 +11,6 @@
 /**
  * A scratch class for the PA-API request counter.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Scratch_PAAPIRequestCounter extends AmazonAutoLinks_Scratch_Base {

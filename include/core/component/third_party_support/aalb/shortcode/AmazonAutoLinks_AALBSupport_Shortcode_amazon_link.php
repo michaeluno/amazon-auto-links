@@ -11,7 +11,6 @@
 /**
  * Handles plugin's shortcodes.
  * 
- * @package     Auto Amazon Links
  * @since       3.11.0
  */
 class AmazonAutoLinks_AALBSupport_Shortcode_amazon_link extends AmazonAutoLinks_WPUtility {

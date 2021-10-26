@@ -11,7 +11,6 @@
 /**
  * Loads the admin pages of the Geo-targeting component.
  *
- * @package      Auto Amazon Links/Geotargeting
  * @since        4.6.0
  */
 class AmazonAutoLinks_Geotargeting_Setting {

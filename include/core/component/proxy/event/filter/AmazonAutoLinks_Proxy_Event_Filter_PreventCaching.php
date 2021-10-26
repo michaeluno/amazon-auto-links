@@ -11,7 +11,6 @@
 /**
  * Prevents caching HTTP requests with a proxy on failure.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Proxy_Event_Filter_PreventCaching extends AmazonAutoLinks_PluginUtility {

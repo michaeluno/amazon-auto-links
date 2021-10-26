@@ -11,7 +11,6 @@
 /**
  * Tests add_action() function.
  *  
- * @package Auto Amazon Links
  * @since   4.3.4
  * @tags    add_action
 */

@@ -11,7 +11,6 @@
 /**
  * A scratch class for Amazon cookies.
  *  
- * @package     Auto Amazon Links
  * @since       4.5.0
 */
 class AmazonAutoLinks_Scratch_AmazonCookies extends AmazonAutoLinks_Scratch_Base {

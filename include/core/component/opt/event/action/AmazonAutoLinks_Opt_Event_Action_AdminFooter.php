@@ -11,7 +11,6 @@
 /**
  * Inserts messages in the admin footer
  *
- * @package      Auto Amazon Links/Opt
  * @since        4.7.3
  */
 class AmazonAutoLinks_Opt_Event_Action_AdminFooter {

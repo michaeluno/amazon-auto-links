@@ -11,7 +11,6 @@
 /**
  * Tests the class, `AmazonAutoLinks_Event___Action_HTTPCacheRenewal`.
  *
- * @package Auto Amazon Links
  * @since   4.3.4
  * @see     AmazonAutoLinks_Event___Action_HTTPCacheRenewal
  * @tags    http

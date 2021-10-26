@@ -11,7 +11,6 @@
 /**
  * A scratch class for WordPress posts.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_WordPress_Post extends AmazonAutoLinks_Scratch_Base {

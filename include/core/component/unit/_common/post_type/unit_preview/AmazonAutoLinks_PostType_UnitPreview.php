@@ -11,7 +11,6 @@
 /**
  * Creates Auto Amazon Links custom preview post type.
  * 
- * @package     Auto Amazon Links
  * @since       2.2.0
  */
 class AmazonAutoLinks_PostType_UnitPreview {

@@ -11,7 +11,6 @@
 /**
  * Saves unusable proxies.
  *
- * @package      Auto Amazon Links
  * @since        4.3.0
  */
 class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 extends AmazonAutoLinks_PluginUtility {

@@ -11,7 +11,6 @@
 /**
  * A scratch class for aal_products database table.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.3
 */
 class AmazonAutoLinks_Scratch_Database_set_aal_products extends AmazonAutoLinks_Scratch_Base {

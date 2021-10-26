@@ -11,7 +11,6 @@
 /**
  * Utility tests.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_UnitTest_FrameworkUtility extends AmazonAutoLinks_UnitTest_Base {

@@ -11,7 +11,6 @@
 /**
  * A WP Cron action that updates the proxy list.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Proxy_Event_WPCronAction_ProxyUpdate extends AmazonAutoLinks_Event___Action_Base {

@@ -11,7 +11,6 @@
 /**
  * Tests AmazonAutoLinks_AdminPageFramework_WPUtility_URL methods.
  *  
- * @package Auto Amazon Links
  * @see     AmazonAutoLinks_AdminPageFramework_WPUtility_URL
  * @since   4.7.0
 */

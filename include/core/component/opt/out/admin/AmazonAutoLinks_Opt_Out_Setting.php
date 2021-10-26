@@ -11,7 +11,6 @@
 /**
  * Loads the admin pages of the `Opt` component.
  *
- * @package      Auto Amazon Links/Opt
  * @since        4.7.0
  */
 class AmazonAutoLinks_Opt_Out_Setting {

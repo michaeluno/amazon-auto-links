@@ -11,7 +11,6 @@
 /**
  * Inserts product links into the pre-defined area of page contents. 
  *  
- * @package     Auto Amazon Links
  * @since       2.0.5
 */
 abstract class AmazonAutoLinks_AutoInsertOutput_Base extends AmazonAutoLinks_PluginUtility {

@@ -9,7 +9,6 @@
 /**
  * Handles unit outputs.
  * 
- * @package     Auto Amazon Links
  * @since       2
  * @since       3       Changed the name from `AmazonAutoLinks_Units`
 */

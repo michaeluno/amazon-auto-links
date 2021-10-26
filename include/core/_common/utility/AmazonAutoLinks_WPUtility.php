@@ -11,7 +11,6 @@
 /**
  * Provides utility methods that uses WordPress built-in functions.
  *
- * @package     Auto Amazon Links
  * @since       2
  * @since       3       Changed the name from `AmazonAutoLinks_WPUtilities`.
  */

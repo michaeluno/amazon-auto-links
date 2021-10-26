@@ -11,7 +11,6 @@
 /**
  * A scratch class for task database.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_Database_aal_tasks extends AmazonAutoLinks_Scratch_Base {

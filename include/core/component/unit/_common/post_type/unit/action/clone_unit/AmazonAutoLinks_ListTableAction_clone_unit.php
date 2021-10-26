@@ -11,7 +11,6 @@
 /**
  * Provides methods to clone units.
  * 
- * @package     Auto Amazon Links
  * @since       3.3.0
  */
 class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginUtility {

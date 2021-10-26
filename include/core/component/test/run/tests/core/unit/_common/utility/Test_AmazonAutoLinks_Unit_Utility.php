@@ -11,7 +11,6 @@
 /**
  * Tests the AmazonAutoLinks_Unit_Utility class methods.
  *
- * @package     Auto Amazon Links
  * @since       4.3.2
  * @see         AmazonAutoLinks_Unit_Utility
 */

@@ -11,7 +11,6 @@
 /**
  * Tests the class.
  *
- * @package     Auto Amazon Links
  * @since       4.3.1
 */
 class Test_AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_UnitTest_Base {

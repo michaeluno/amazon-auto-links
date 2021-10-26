@@ -11,7 +11,6 @@
 /**
  * A scratch class that displays options.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_DisplayOptions extends AmazonAutoLinks_Scratch_Base {

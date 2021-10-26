@@ -11,7 +11,6 @@
 /**
  * Handles AALB Gutenberg block contents.
  * 
- * @package     Auto Amazon Links
  * @since       3.11.0
  */
 class AmazonAutoLinks_AALBSupport_GutenbergBlock extends AmazonAutoLinks_WPUtility {

@@ -11,7 +11,6 @@
 /**
  * The bootstrap of the database updater component.
  *
- * @package      Auto Amazon Links
  * @since        3.8.0
  */
 class AmazonAutoLinks_DatabaseUpdater_Loader {

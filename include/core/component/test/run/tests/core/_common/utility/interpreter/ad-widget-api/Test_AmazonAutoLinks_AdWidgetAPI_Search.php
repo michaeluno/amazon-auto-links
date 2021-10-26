@@ -11,7 +11,6 @@
 /**
  * Tests AmazonAutoLinks_HTTPClient.
  *
- * @package Auto Amazon Links
  * @since   4.6.9
  * @see     AmazonAutoLinks_AdWidgetAPI_Search
  * @tags    ad-widget-api

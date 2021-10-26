@@ -11,7 +11,6 @@
 /**
  * Tests the class, `AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck`.
  *
- * @package Auto Amazon Links
  * @since   4.6.18
  * @see     AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck
  * @tags    http

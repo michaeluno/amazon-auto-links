@@ -11,7 +11,6 @@
 /**
  * Loads the component, HTTP Proxy.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  *
  * @todo        Remove caches of failed response with proxies.

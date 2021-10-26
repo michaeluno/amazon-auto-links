@@ -11,7 +11,6 @@
 /**
  * Tests the `AmazonAutoLinks_VersatileFileManager_AmazonCookies` class.
  *
- * @package Auto Amazon Links
  * @since   4.3.5
  * @see     AmazonAutoLinks_VersatileFileManager
  * @tags    files

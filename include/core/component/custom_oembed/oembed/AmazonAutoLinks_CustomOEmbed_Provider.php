@@ -13,7 +13,6 @@
  *
  * This enables the feature of oEmbed for links of Amazon stores.
  *
- * @package      Auto Amazon Links
  * @since        4.0.0
  */
 class AmazonAutoLinks_CustomOEmbed_Provider {

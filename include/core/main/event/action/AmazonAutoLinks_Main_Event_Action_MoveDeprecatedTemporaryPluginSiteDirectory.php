@@ -11,7 +11,6 @@
 /**
  * Handles moving deprecated plugin site temporary directory.
  *
- * @package      Auto Amazon Links
  * @since        4.3.8
  */
 class AmazonAutoLinks_Main_Event_Action_MoveDeprecatedTemporaryPluginSiteDirectory extends AmazonAutoLinks_PluginUtility {

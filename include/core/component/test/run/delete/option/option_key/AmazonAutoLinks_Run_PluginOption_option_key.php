@@ -11,7 +11,6 @@
 /**
  * A scratch class to manage plugin options.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Run_PluginOption_option_key extends AmazonAutoLinks_Scratch_Base {

@@ -11,7 +11,6 @@
 /**
  * Provides utility methods regarding WordPress KSES functionality.
  *
- * @package Auto Amazon Links
  * @since   4.6.19
  */
 class AmazonAutoLinks_WPUtility_KSES extends AmazonAutoLinks_WPUtility_HTTP {

@@ -11,7 +11,6 @@
 /**
  * Verifies given classes that can run tests.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.4
 */
 class AmazonAutoLinks_Test_ClassLister {

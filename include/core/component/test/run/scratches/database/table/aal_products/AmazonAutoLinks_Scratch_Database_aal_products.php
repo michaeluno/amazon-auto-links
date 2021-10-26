@@ -11,7 +11,6 @@
 /**
  * A scratch class for HTTP request cache database.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_Database_aal_products extends AmazonAutoLinks_Scratch_Base {

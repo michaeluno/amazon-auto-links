@@ -2,7 +2,6 @@
 /**
  * Provides a means of an alternative to WP Cron on the server that disables WP Cron.
  * 
- * @package     AmazonAutoLinks_Shadow
  * @copyright   Copyright (c) 2013, Michael Uno
  * @authorurl   https://github.com/michaeluno/WP_Shadow
 */

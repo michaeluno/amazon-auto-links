@@ -11,7 +11,6 @@
 /**
  * A scratch class for the database.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_Database extends AmazonAutoLinks_Scratch_Base {

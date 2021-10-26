@@ -11,7 +11,6 @@
 /**
  * Tests the AmazonAutoLinks_WPUtility class.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
  * @see         AmazonAutoLinks_WPUtility
 */

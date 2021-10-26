@@ -11,7 +11,6 @@
 /**
  * A scratch class to delete a database table.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Run_Database_Delete_aal_tasks extends AmazonAutoLinks_Scratch_Base {

@@ -12,7 +12,6 @@
 /**
  *  Loads the button component
  *  
- *  @package    Auto Amazon Links
  *  @since      3.3.0
  */
 class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {

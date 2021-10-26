@@ -11,7 +11,6 @@
 /**
  * Loads the admin pages of the Disclosure component.
  *
- * @package      Auto Amazon Links/Disclosure
  * @since        4.7.0
  */
 class AmazonAutoLinks_Disclosure_Setting {

@@ -12,7 +12,6 @@
 /**
  * Outputs the button preview.
  *
- * @package    Auto Amazon Links
  * @since      4.3.0
  */
 class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_PluginUtility {

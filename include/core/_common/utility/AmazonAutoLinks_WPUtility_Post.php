@@ -11,7 +11,6 @@
 /**
  * Provides utility methods that uses WordPress built-in functions.
  *
- * @package     Auto Amazon Links
  * @since       3       
  */
 class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {

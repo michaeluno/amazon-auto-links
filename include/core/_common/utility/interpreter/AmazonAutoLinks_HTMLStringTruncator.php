@@ -12,7 +12,6 @@
  * Provides method to truncate HTML string while preserving tags.
  * 
  * @see         http://stackoverflow.com/questions/16583676/shorten-text-without-splitting-words-or-breaking-html-tags/16584383#16584383
- * @package     Auto Amazon Links
  * @since       3.3.0
  * @deprecated  Note used at the moment.
  */

@@ -11,7 +11,6 @@
 /**
  * General tests regarding WordPress functions.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_UnitTest_WordPress_Functions extends AmazonAutoLinks_UnitTest_Base {

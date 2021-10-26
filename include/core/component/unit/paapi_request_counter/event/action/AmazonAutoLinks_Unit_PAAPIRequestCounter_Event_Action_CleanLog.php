@@ -10,7 +10,6 @@
 
 /**
  * Cleans PA-API Request count log stored as files and the database options table.
- * @package      Auto Amazon Links
  * @since        4.4.0
  */
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_CleanLog extends AmazonAutoLinks_Event___Action_Base {

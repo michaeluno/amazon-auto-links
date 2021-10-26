@@ -10,7 +10,6 @@
 
 /**
  * Redirects the visitor to an appropriate page depending on the request.
- * @package     Auto Amazon Links
  * @since       3
  * @since       3.5.0   Renamed from `AmazonAutoLinks_Event_Redirect`
  */

@@ -11,7 +11,6 @@
 /**
  * Creates Amazon product links by Item Look-up.
  * 
- * @package         Auto Amazon Links
  */
 class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_search {
     

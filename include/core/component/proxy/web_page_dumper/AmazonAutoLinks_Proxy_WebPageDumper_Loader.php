@@ -11,7 +11,6 @@
 /**
  * Loads the Web Page Dumper sub-component.
  *
- * @package      Auto Amazon Links
  * @since        4.5.0
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Loader extends AmazonAutoLinks_PluginUtility {

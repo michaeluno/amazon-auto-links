@@ -11,7 +11,6 @@
 /**
  * Provides methods for rendering post listing table contents.
  * 
- * @package     Auto Amazon Links
  * @since       3
  */
 class AmazonAutoLinks_PostType_Unit_ListTable extends AmazonAutoLinks_AdminPageFramework_PostType {

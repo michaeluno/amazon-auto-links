@@ -12,7 +12,6 @@
 /**
  * Outputs the HTTP request cache content.
  *
- * @package    Auto Amazon Links
  * @since      4.7.0
  */
 class AmazonAutoLinks_Main_Event_Query_HTTPRequestCache extends AmazonAutoLinks_PluginUtility {

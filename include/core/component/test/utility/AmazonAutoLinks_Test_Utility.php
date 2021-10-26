@@ -11,7 +11,6 @@
 /**
  * Provides utility methods for the Test component.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Test_Utility extends AmazonAutoLinks_PluginUtility {

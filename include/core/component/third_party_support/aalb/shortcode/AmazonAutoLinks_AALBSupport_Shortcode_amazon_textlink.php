@@ -11,7 +11,6 @@
 /**
  * Handles plugin's shortcodes.
  * 
- * @package     Auto Amazon Links
  * @since       4.0.0
  */
 class AmazonAutoLinks_AALBSupport_Shortcode_amazon_textlink extends AmazonAutoLinks_AALBSupport_Shortcode_amazon_link {

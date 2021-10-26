@@ -11,7 +11,6 @@
 /**
  * Displays admin notices to prompt users to update the database.
  *
- * @package      Auto Amazon Links
  * @since        3.8.0
  */
 class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_PluginUtility {

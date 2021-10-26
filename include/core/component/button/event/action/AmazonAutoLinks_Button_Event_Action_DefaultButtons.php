@@ -12,7 +12,6 @@
 /**
  *  Creates default buttons.
  *  
- *  @package    Auto Amazon Links
  *  @since      4.3.0
  */
 class AmazonAutoLinks_Button_Event_Action_DefaultButtons extends AmazonAutoLinks_PluginUtility {

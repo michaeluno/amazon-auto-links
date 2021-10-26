@@ -11,7 +11,6 @@
 /**
  * Provides Dom related functions.
  * 
- * @package     Auto Amazon Links
  * @since       2.0.0
  * @since       3       Extends `AmazonAutoLinks_WPUtility`.
  */

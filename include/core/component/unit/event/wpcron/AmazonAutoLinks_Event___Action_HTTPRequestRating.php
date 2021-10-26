@@ -11,7 +11,6 @@
 /**
  * Retrieve rating information of the given product and updates the product cache.
  *
- * @package      Auto Amazon Links
  * @since        4.3.4
  * @remark       Not used at the moment and still being tested.
  */

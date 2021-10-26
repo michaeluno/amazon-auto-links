@@ -11,7 +11,6 @@
 /**
  *  Provides shared utility methods among the button component.
  *  
- *  @package    Auto Amazon Links
  *  @since      4.0.1
  */
 class AmazonAutoLinks_ButtonUtility extends AmazonAutoLinks_PluginUtility {

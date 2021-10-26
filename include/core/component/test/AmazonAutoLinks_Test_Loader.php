@@ -11,7 +11,6 @@
 /**
  * Loads the test component.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Test_Loader extends AmazonAutoLinks_PluginUtility {

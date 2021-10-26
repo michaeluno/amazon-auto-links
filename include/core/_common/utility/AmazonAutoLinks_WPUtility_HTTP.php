@@ -11,7 +11,6 @@
 /**
  * Provides utility methods regarding wp_remote_request().
  *
- * @package Auto Amazon Links
  * @since   4.3.5
  */
 class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {

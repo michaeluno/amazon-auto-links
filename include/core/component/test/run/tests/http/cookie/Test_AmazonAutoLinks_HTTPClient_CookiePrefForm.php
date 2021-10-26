@@ -11,7 +11,6 @@
 /**
  * Tests cookies of AmazonAutoLinks_HTTPClient.
  *
- * @package Auto Amazon Links
  * @since   4.3.4
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    form

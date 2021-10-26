@@ -42,7 +42,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
- * @package     Auto Amazon Links
  * @copyright   Copyright (c) 2013-2021, Michael Uno
  * @authorurl   http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License

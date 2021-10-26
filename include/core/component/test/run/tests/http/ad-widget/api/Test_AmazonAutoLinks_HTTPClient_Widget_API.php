@@ -11,7 +11,6 @@
 /**
  * Tests accessing widget api responses.
  *
- * @package Auto Amazon Links
  * @since   4.6.9
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http

@@ -11,7 +11,6 @@
 /**
  * Loads new available templates.
  *
- * @package      Auto Amazon Links
  * @since        4.6.18
  */
 class AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader extends AmazonAutoLinks_AjaxEvent_Base {

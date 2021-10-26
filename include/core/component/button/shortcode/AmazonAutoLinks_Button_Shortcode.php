@@ -11,7 +11,6 @@
 /**
  * Implements the button shortcode
  * 
- * @package     AmazonAutoLinks
  * @since       4.3.0
  */
 class AmazonAutoLinks_Button_Shortcode extends AmazonAutoLinks_WPUtility {

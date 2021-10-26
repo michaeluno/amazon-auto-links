@@ -11,7 +11,6 @@
 /**
  * Handles JSON feed output.
  *
- * @package     Auto Amazon Links
  * @since       3.5.0
  * @since       4.6.0   Extends `AmazonAutoLinks_Event___Feed_Base`.
  */

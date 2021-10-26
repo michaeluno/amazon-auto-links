@@ -11,7 +11,6 @@
 /**
  * A unit test base class.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {

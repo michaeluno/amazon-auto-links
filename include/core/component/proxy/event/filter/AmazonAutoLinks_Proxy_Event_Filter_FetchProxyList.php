@@ -11,7 +11,6 @@
 /**
  * Loads the component, HTTP Proxy.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Proxy_Event_Filter_FetchProxyList extends AmazonAutoLinks_PluginUtility {

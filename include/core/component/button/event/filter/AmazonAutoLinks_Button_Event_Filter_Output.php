@@ -12,7 +12,6 @@
 /**
  *  Outputs the button.
  *  
- *  @package    Auto Amazon Links
  *  @since      4.3.0
  */
 class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginUtility {

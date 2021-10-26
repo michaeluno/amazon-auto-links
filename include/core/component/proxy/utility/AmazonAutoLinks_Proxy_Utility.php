@@ -11,7 +11,6 @@
 /**
  * Provides utility methods for the Proxy component.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Proxy_Utility extends AmazonAutoLinks_PluginUtility {

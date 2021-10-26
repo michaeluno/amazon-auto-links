@@ -11,7 +11,6 @@
 /**
  * Tests accessing Amazon top pages.
  *
- * @package Auto Amazon Links
  * @since   4.3.5
  * @see     AmazonAutoLinks_HTTPClient
  * @tags    http

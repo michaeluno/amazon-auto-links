@@ -11,7 +11,6 @@
 /**
  * A wrapper class for the HTTP client class.
  *
- * @package      Auto Amazon Links
  * @since        4.5.0
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_HTTPClient extends AmazonAutoLinks_HTTPClient {

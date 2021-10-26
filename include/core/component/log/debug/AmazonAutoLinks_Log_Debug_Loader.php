@@ -11,7 +11,6 @@
 /**
  * Loads the debug component.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Log_Debug_Loader extends AmazonAutoLinks_PluginUtility {

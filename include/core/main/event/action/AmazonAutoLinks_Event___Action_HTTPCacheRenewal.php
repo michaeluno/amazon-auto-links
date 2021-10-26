@@ -18,7 +18,6 @@
  * And flag the cache as not expired to be loaded in front-end normally.
  * 4. In the callback of the `aal_action_http_cache_renewal` action hook, perform the HTTP request by removing the existing cache.
  *
- * @package      Auto Amazon Links
  * @since        3
  *
  */

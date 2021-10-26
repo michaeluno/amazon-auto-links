@@ -11,7 +11,6 @@
 /**
  * Tests KSES related functions
  *  
- * @package Auto Amazon Links
  * @since   4.6.19
  * @tags    kses
 */

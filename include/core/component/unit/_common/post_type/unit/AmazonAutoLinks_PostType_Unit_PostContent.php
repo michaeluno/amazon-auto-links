@@ -11,7 +11,6 @@
 /**
  * Provides method to render post contents in a single post page.
  * 
- * @package     Auto Amazon Links
  * @since       3
  * 
  */

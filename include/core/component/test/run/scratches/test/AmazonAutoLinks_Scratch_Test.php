@@ -11,7 +11,6 @@
 /**
  * Scratches to deliberately cause errors to test the UI.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.4
 */
 class AmazonAutoLinks_Scratch_Test extends AmazonAutoLinks_Scratch_Base {

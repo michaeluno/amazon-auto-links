@@ -11,7 +11,6 @@
 /**
  * Lists responsive columns.
  * 
- * @package     Auto Amazon Links
  * @copyright   Copyright (c) 2013-2021, Michael Uno
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.0.0

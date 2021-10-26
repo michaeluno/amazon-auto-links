@@ -11,7 +11,6 @@
 /**
  * A scratch class to manage plugin options.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Run_PluginOption_amazon_auto_links_paapi_request_counts extends AmazonAutoLinks_Scratch_Base {

@@ -11,7 +11,6 @@
 /**
  * Tests for unit options.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_UnitTest_UnitOption extends AmazonAutoLinks_UnitTest_Base {

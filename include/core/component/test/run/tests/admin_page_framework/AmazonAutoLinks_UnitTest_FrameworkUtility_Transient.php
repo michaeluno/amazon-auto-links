@@ -11,7 +11,6 @@
 /**
  * Utility tests regarding transients.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
  * @tags        transient
 */

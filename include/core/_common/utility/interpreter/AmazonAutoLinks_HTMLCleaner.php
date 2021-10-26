@@ -13,7 +13,6 @@
  *
  * At the moment, applied to downloaded HTML documents.
  *
- * @package     AmazonAutoLinks/Utility
  * @since       3.7.7
  */
 class AmazonAutoLinks_HTMLCleaner {

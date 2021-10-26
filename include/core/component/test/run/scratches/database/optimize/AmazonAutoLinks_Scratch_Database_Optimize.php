@@ -11,7 +11,6 @@
 /**
  * Optimize database tables.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Scratch_Database_Optimize extends AmazonAutoLinks_Scratch_Base {

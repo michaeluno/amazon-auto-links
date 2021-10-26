@@ -11,7 +11,6 @@
 /**
  * Generates product links.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_Event_Filter_ProductLinks extends AmazonAutoLinks_PluginUtility {

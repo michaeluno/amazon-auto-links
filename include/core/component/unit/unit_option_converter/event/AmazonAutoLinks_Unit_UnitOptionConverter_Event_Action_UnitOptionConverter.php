@@ -11,7 +11,6 @@
 /**
  * Converts template options
  * 
- * @package Auto Amazon Links
  * @since   3
  * @since   3.5.0      Renamed from `AmazonAutoLinks_Event_Action_UnitOptionConverter`.
  */

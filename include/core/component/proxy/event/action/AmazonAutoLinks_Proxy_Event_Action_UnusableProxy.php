@@ -11,7 +11,6 @@
 /**
  * Saves unusable proxies.
  *
- * @package      Auto Amazon Links
  * @since        4.2.0
  */
 class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_PluginUtility {

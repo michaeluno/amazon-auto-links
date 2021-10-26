@@ -12,7 +12,6 @@
 /**
  * Loads the main component
  *  
- * @package Auto Amazon Links
  * @since   3.3.0
  * @since   4.4.0   Renamed from `AmazonAutoLinks_MainLoader`.
  */

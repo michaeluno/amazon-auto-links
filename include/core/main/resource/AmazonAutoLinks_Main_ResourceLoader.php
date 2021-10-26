@@ -12,7 +12,6 @@
 /**
  * Handles the resource file registration for the main component.
  *  
- * @package Auto Amazon Links
  * @since   4.7.0
  */
 class AmazonAutoLinks_Main_ResourceLoader extends AmazonAutoLinks_PluginUtility {

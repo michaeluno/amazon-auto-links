@@ -11,7 +11,6 @@
 /**
  * A scratch class that displays post meta
  *  
- * @package     Auto Amazon Links
  * @since       4.6.6
 */
 class AmazonAutoLinks_Scratch_PostMeta extends AmazonAutoLinks_Scratch_Base {

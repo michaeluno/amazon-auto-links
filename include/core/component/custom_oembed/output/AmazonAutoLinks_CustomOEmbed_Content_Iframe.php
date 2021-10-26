@@ -13,7 +13,6 @@
  *
  * This is necessary for Gutenberg embed blocks to render previews.
  *
- * @package      Auto Amazon Links
  * @since        4.0.0
  */
 class AmazonAutoLinks_CustomOEmbed_Content_Iframe {

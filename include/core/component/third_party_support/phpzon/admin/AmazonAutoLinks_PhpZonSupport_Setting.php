@@ -11,7 +11,6 @@
 /**
  * Loads the PhpZon support admin screen
  * 
- * @package      Auto Amazon Links
  * @since        4.1.0
  */
 class AmazonAutoLinks_PhpZonSupport_Setting {

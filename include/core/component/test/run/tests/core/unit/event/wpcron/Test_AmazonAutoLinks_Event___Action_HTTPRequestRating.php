@@ -10,7 +10,6 @@
 
 /**
  *
- * @package     Auto Amazon Links
  * @since       4.3.4
  * @tags        rating, slow
  * @see         AmazonAutoLinks_Event___Action_HTTPRequestRating

@@ -11,7 +11,6 @@
 /**
  * Loads the PA-API request counter sub-component.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader extends AmazonAutoLinks_PluginUtility {

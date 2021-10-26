@@ -15,7 +15,6 @@
  * Say, the user got a Captcha error and then enabled the proxy option. In that case, the cache with a Captcha error will be
  * returned until the expiration time. So this class shortens the expiration time if the parsing HTTP response has a Captcha error.
  *
- * @package      Auto Amazon Links
  * @since        4.2.2
  */
 class AmazonAutoLinks_Proxy_Event_Filter_CheckExistentCaptchaErrors extends AmazonAutoLinks_PluginUtility {

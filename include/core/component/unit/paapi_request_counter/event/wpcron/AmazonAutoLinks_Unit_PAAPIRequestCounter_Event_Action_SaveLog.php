@@ -10,7 +10,6 @@
 
 /**
  * Stores log data stored as files into the database options table.
- * @package      Auto Amazon Links
  * @since        4.4.0
  */
 class AmazonAutoLinks_Unit_PAAPIRequestCounter_Event_Action_SaveLog extends AmazonAutoLinks_Event___Action_Base {

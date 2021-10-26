@@ -11,7 +11,6 @@
 /**
  * Provides method to rename tags in DOM.
  * 
- * @package     Auto Amazon Links
  * @since       3.3.0
  */
 class AmazonAutoLinks_RenameTags extends AmazonAutoLInks_DOM {

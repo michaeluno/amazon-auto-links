@@ -11,7 +11,6 @@
 /**
  * Loads the info-box component.
  *  
- * @package     Auto Amazon Links
  * @since       3.1.0
 */
 class AmazonAutoLinks_InfoBoxLoader {

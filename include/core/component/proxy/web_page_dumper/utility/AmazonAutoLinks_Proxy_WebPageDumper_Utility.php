@@ -11,7 +11,6 @@
 /**
  * Provides utility methods for the Proxy/WebPageDumper component.
  *
- * @package      Auto Amazon Links
  * @since        4.5.0
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Utility extends AmazonAutoLinks_PluginUtility {

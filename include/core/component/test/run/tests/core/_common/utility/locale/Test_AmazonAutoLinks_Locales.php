@@ -11,7 +11,6 @@
 /**
  * Tests the `AmazonAutoLinks_Locales` class.
  *
- * @package Auto Amazon Links
  * @since   4.3.5
  * @see     AmazonAutoLinks_Locales
 */

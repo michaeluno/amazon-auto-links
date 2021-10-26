@@ -11,7 +11,6 @@
 /**
  * Provides methods to renew unit caches.
  * 
- * @package     Auto Amazon Links
  * @since       3.5.0
  */
 class AmazonAutoLinks_ListTableAction_renew_cache extends AmazonAutoLinks_PluginUtility {

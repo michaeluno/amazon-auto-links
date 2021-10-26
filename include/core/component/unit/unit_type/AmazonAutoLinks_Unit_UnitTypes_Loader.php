@@ -11,7 +11,6 @@
 /**
  * Loads the unit types/
  *  
- * @package     Auto Amazon Links
  * @since       3.3.0
 */
 class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitType_Loader_Base {

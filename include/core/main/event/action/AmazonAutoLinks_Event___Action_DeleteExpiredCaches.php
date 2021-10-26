@@ -11,7 +11,6 @@
 /**
  * Deletes expired caches stored in the plugin custom database tables.
  *
- * @package      Auto Amazon Links
  * @since        3.4.0
  */
 class AmazonAutoLinks_Event___Action_DeleteExpiredCaches extends AmazonAutoLinks_Event___Action_Base {

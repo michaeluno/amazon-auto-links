@@ -11,7 +11,6 @@
 /**
  * A scratch class for WordPress transients.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
  * @tags        transient
 */

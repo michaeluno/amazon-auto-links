@@ -11,7 +11,6 @@
 /**
  * Tests wp_remote_head()
  *
- * @package Auto Amazon Links
  * @since   4.3.4
  * @see     wp_remote_head()
  * @tags    http, wp_remote_head

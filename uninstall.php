@@ -2,7 +2,6 @@
 /**
  * Cleans up the plugin options, custom post type posts, and custom database tables.
  *    
- * @package      Auto Amazon Links
  * @copyright    Copyright (c) 2013-2021, <Michael Uno>
  * @author       Michael Uno
  * @authorurl    http://michaeluno.jp

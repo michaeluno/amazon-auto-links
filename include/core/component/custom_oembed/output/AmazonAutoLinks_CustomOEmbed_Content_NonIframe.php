@@ -14,7 +14,6 @@
  * This replaces the iframe outputs to direct plugin Amazon product outputs
  * for cases that some user might not like to use iframe.
  *
- * @package      Auto Amazon Links
  * @since        4.0.0
  */
 class AmazonAutoLinks_CustomOEmbed_Content_NonIframe {

@@ -11,7 +11,6 @@
 /**
  * Provides shared utility methods for the widget component.
  *  
- * @package     Auto Amazon Links
  * @since       4.6.8
 */
 class AmazonAutoLinks_Widget_Utility extends AmazonAutoLinks_PluginUtility {

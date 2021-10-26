@@ -15,7 +15,6 @@
  * This component attempts to convert their shortcode outputs into this plugin outputs.
  * So the users of AALB can safely migrate to Auto Amazon Links without modifying the database.
  * 
- * @package      Auto Amazon Links
  * @since        3.11.1
  */
 class AmazonAutoLinks_AALBSupportLoader {

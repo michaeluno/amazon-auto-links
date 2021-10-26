@@ -11,7 +11,6 @@
 /**
  * Tests the AmazonAutoLinks_Locale_AmazonCookie class.
  *
- * @package Auto Amazon Links
  * @since   4.3.4
  * @see     AmazonAutoLinks_Locale_AmazonCookies
 */

@@ -11,7 +11,6 @@
 /**
  * Tests the class, `AmazonAutoLinks_Option`.
  *
- * @package Auto Amazon Links
  * @since   4.6.19
  * @see     AmazonAutoLinks_Option
  * @tags    option

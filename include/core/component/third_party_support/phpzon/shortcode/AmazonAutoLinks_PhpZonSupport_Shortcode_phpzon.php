@@ -11,7 +11,6 @@
 /**
  * Handles PhpZon's shortcodes.
  * 
- * @package     Auto Amazon Links
  * @since       4.1.0
  */
 class AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon extends AmazonAutoLinks_WPUtility {

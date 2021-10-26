@@ -11,7 +11,6 @@
 /**
  * Enables the Web Page Dumper option
  *
- * @package      Auto Amazon Links
  * @since        4.7.3
  */
 class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable extends AmazonAutoLinks_AjaxEvent_Base {

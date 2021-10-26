@@ -11,7 +11,6 @@
 /**
  * Defines button post type.
  * 
- * @package     Auto Amazon Links
  * @since       3
  */
 abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks_AdminPageFramework_PostType {

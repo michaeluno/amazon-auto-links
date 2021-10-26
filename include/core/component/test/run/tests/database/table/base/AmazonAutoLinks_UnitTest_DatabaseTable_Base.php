@@ -11,7 +11,6 @@
 /**
  * Tests for the plugin database.
  *  
- * @package     Auto Amazon Links
  * @since       4.3.0
 */
 class AmazonAutoLinks_UnitTest_DatabaseTable_Base extends AmazonAutoLinks_UnitTest_Base {

@@ -11,7 +11,6 @@
 /**
  * Tests the `AmazonAutoLinks_PluginUtility` class.
  *  
- * @package Auto Amazon Links
  * @see     AmazonAutoLinks_PluginUtility
  * @since   4.3.0
 */

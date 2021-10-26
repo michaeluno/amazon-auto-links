@@ -11,7 +11,6 @@
 /**
  * WordPress-related option tests.
  *  
- * @package     Auto Amazon Links
  * @since       4.4.0
 */
 class AmazonAutoLinks_UnitTest_WordPress_Options extends AmazonAutoLinks_UnitTest_Base {

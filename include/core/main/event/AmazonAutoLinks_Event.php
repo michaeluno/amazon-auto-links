@@ -11,7 +11,6 @@
 /**
  * Plugin event handler.
  * 
- * @package Auto Amazon Links
  * @since   2.0.0
  */
 class AmazonAutoLinks_Event {

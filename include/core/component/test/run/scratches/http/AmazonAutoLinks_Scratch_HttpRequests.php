@@ -11,7 +11,6 @@
 /**
  * A scratch class for HTTP requests.
  *  
- * @package     Auto Amazon Links
  * @since       4.5.0
 */
 class AmazonAutoLinks_Scratch_HttpRequests extends AmazonAutoLinks_Scratch_Base {

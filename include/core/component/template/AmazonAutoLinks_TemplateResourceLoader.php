@@ -12,7 +12,6 @@
 /**
  * Loads template components such as style.css, template.php, functions.php etc.
  *  
- * @package     Auto Amazon Links
  * @since       3
  * 
  * @filter      apply       aal_filter_template_custom_css
