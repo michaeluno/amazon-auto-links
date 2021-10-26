@@ -706,21 +706,19 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     
     /**
      * 
-     * @since       2.2.0
-     * @return      boolean
+     * @since  2.2.0
+     * @return boolean
      */
     public function isPreviewVisible() {
-        
         if ( $this->get( 'unit_preview', 'visible_to_guests' ) ) {
             return true;
         }
-        return ( boolean ) is_user_logged_in();
-        
+        return is_user_logged_in();
     }
 
     /**
-     * @return bool
-     * @since   3.5.0
+     * @return boolean
+     * @since  3.5.0
      */
     public function isAdvancedProductFiltersAllowed() {
         return false;
