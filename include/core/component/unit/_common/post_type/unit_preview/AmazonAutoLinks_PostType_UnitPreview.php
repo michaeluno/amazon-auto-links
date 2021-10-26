@@ -26,7 +26,13 @@ class AmazonAutoLinks_PostType_UnitPreview {
      * @since 2.2.0
      */
     protected $sPreviewPostTypeSlug = '';
-      
+
+    /**
+     * @var   boolean
+     * @since 5.0.0
+     */
+    public $bIsPreviewVisible = true;
+
     /**
      * Sets up hooks and properties.
      *
@@ -43,6 +49,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
         // Properties
         $this->sDefaultPreviewSlug  = AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ];
         $this->sPreviewPostTypeSlug = $sPreviewPostTypeSlug ? $sPreviewPostTypeSlug : $_oOption->get( 'unit_preview', 'preview_post_type_slug' );
+        $this->bIsPreviewVisible    = $_oOption->isPreviewVisible();
         
         if ( ! $this->sPreviewPostTypeSlug ) {
             return;
@@ -145,14 +152,13 @@ class AmazonAutoLinks_PostType_UnitPreview {
         if ( ! $this->sPreviewPostTypeSlug ) {
             return;
         }
-        $_oOption = AmazonAutoLinks_Option::getInstance();
         register_post_type(
             $this->sPreviewPostTypeSlug,
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
                 'labels'             => AmazonAutoLinks_Unit_Utility::getUnitPostTypeLabels(),
                 'public'             => true,
                 'show_ui'            => false,
-                'publicly_queryable' => $_oOption->isPreviewVisible(),
+                'publicly_queryable' => $this->bIsPreviewVisible,
                 'show_in_nav_menus'  => false,  // even though this is set to `true`, in the Menus UI screen, the posts do not appear for some reasons.
             )        
         );
@@ -203,14 +209,13 @@ class AmazonAutoLinks_PostType_UnitPreview {
      */
     public function replyToModifyDatabaseQuery( $aRequest ) {
 
-        $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! isset( $aRequest[ 'post_type' ], $aRequest[ 'name' ] ) ) {
             return $aRequest;
         }
         if ( $this->sPreviewPostTypeSlug !== $aRequest[ 'post_type' ] ) {
             return $aRequest;
         }
-        if ( ! $_oOption->isPreviewVisible() ) {
+        if ( ! $this->bIsPreviewVisible ) {
             return $aRequest;
         }
         
