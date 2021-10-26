@@ -205,7 +205,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             /**
              * @param  boolean $bAPIConnected
              * @return string
-             * @sicne  5.0.0
+             * @since  5.0.0
              */
             private function ___getPAAPIRequirementNotice( $bAPIConnected ) {
                 if ( $bAPIConnected ) {

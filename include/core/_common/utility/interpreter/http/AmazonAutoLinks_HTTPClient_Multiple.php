@@ -14,7 +14,7 @@
  * Accepts multiple URLs to be passed.
  * It saves database queries by retrieving caches at once.
  *
- * @sicne 4.3.4
+ * @since 4.3.4
  */
 class AmazonAutoLinks_HTTPClient_Multiple extends AmazonAutoLinks_HTTPClient {
 

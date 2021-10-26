@@ -103,7 +103,7 @@ class AmazonAutoLinks_Unit_PAAPI5_Request_GetItems extends AmazonAutoLinks_Unit_
          * @param  array $aSubResponse
          * @return array
          * @since  4.4.0
-         * @sicne  5.0.0 Moved from `AmazonAutoLinks_UnitOutput_item_lookup`.
+         * @since  5.0.0 Moved from `AmazonAutoLinks_UnitOutput_item_lookup`.
          */
         private function ___getResponsesMerged( array $aMainResponse, array $aSubResponse ) {
 

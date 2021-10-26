@@ -230,7 +230,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
      * @param  integer $iPerPage
      * @param  integer $iPageNumber
      * @return array
-     * @sicne  4.4.3
+     * @since  4.4.3
      */
     protected function _getData( $iPerPage, $iPageNumber ) {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
@@ -255,7 +255,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
 
     /**
      * @return integer
-     * @sicne  4.4.3
+     * @since  4.4.3
      */
     protected function _getTotalCount() {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
@@ -264,7 +264,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
     }
 
     /**
-     * @sicne  4.4.3
+     * @since  4.4.3
      */
     public function display() {
         $this->search_box( __( 'Search by ASIN or Title', 'amazon-auto-links' ),'search_product' );
@@ -276,7 +276,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
     /**
      * @param  array  $aDetails
      * @return string
-     * @sicne  4.4.3
+     * @since  4.4.3
      */
     private function ___getDetailList( array $aDetails ) {
         $_sList = '';

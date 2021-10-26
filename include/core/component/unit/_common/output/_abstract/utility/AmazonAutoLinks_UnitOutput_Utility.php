@@ -18,7 +18,7 @@ abstract class AmazonAutoLinks_UnitOutput_Utility extends AmazonAutoLinks_Unit_U
      * Parses the given HTML content and returns found ASINs.
      * @since       3.2.0
      * @since       3.8.1   Changed the visibility scope to protected from private as category unit accesses this method.
-     * @sicne       4.4.0   Moved from `AmazonAutoLinks_UnitOutput_url`.
+     * @since       4.4.0   Moved from `AmazonAutoLinks_UnitOutput_url`.
      * @param       array   $aHTMLs An array holding string HTML documents.
      * @return      array
      */

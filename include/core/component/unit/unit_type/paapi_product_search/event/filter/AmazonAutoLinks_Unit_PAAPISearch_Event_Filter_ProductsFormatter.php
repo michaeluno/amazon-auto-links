@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
 
     /**
      * @var   AmazonAutoLinks_UnitOutput_search
-     * @sicne 5.0.0
+     * @since 5.0.0
      */
     public $oUnitOutput;
 

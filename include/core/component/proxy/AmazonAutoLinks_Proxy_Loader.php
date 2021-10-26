@@ -79,7 +79,7 @@ class AmazonAutoLinks_Proxy_Loader extends AmazonAutoLinks_PluginUtility {
         /**
          * Page styling
          * @since  4.2.0
-         * @sicne  4.5.0   Change the visibility scope to protected from private.
+         * @since  4.5.0   Change the visibility scope to protected from private.
          * @param  AmazonAutoLinks_AdminPageFramework $oFactory
          * @return void
          */

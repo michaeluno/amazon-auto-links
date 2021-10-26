@@ -40,7 +40,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
 
     /**
      * @return double|null null when the data is not ready.
-     * @sicne  4.7.8
+     * @since  4.7.8
      */
     public function getPercentage() {
         $_bSet      = $this->___setVariablesOfPrice( $this->_aProduct, $this->_aRow, $_iPrice, $_insLowestNew, $_insDiscounted );

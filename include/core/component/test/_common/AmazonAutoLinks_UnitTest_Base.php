@@ -50,7 +50,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  string  $sMessage
      * @param  mixed   $mData
      * @return boolean
-     * @sicne  4.3.4
+     * @since  4.3.4
      */
     protected function _assertTrue( $bActual, $sMessage='', $mData=array()) {
         $sMessage = $sMessage ? $sMessage : "Assert true.";
@@ -65,7 +65,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  boolean $bActual
      * @param  string $sMessage
      * @param  mixed $mData
-     * @sicne  4.3.4
+     * @since  4.3.4
      * @return boolean
      */
     protected function _assertFalse( $bActual, $sMessage='', $mData=array() ) {
@@ -124,7 +124,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
         return $this->_assertNotEmpty( $mActual, $sMessage, $mData, true );
     }
     /**
-     * @sicne  4.3.4
+     * @since  4.3.4
      * @param  mixed  $mExpected
      * @param  mixed  $mActual
      * @param  string $sMessage
@@ -151,7 +151,7 @@ abstract class AmazonAutoLinks_UnitTest_Base extends AmazonAutoLinks_Run_Base {
      * @param  string  $sMessage
      * @param  mixed   $mData
      * @return boolean
-     * @sicne  4.3.4
+     * @since  4.3.4
      */
     protected function _assertPrefix( $sPrefix, $sHaystack, $sMessage='', $mData=array() ) {
         $sMessage = $sMessage ? $sMessage : "Check if the string has the specified prefix.";

@@ -106,7 +106,7 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
         }
             /**
              * @var  string[]
-             * @sicne 4.6.7
+             * @since 4.6.7
              */
             static private $___aStyleHandleIDs = array();
 

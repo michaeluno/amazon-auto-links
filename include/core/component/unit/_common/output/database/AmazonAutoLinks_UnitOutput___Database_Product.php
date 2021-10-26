@@ -92,9 +92,9 @@ class AmazonAutoLinks_UnitOutput___Database_Product extends AmazonAutoLinks_Unit
          * @param   mixed  $mDefault
          * @param   array  $aScheduleTask
          * @since   3
-         * @sicne   3.5.0       Moved from `AmazonAutoLinks_UnitOutput__Base_CustomDBTable`.
-         * @sicne   3.5.0       Changed the scope from protected.
-         * @sicne   3.8.12      Added the `$aAPIRawItem` parameter.
+         * @since   3.5.0       Moved from `AmazonAutoLinks_UnitOutput__Base_CustomDBTable`.
+         * @since   3.5.0       Changed the scope from protected.
+         * @since   3.8.12      Added the `$aAPIRawItem` parameter.
          * @since   4.3.0       Deprecated the `$aAPIRawItem` parameter as it is not used.
          * @return  mixed
          */

@@ -18,7 +18,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_UnitOutput_a
 
     /**
      * Stores the unit type.
-     * @sicne  5.0.0
+     * @since  5.0.0
      */
     public $sUnitType = 'contextual';
 

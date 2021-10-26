@@ -11,7 +11,7 @@
 /**
  * Performs PA-API 5.0 requests.
  *
- * @sicne       3.9.0
+ * @since       3.9.0
  */
 class AmazonAutoLinks_PAAPI50 extends AmazonAutoLinks_PluginUtility {
 

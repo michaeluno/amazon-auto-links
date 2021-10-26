@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract and construct category list of the given page.
  *
- * @sicne       4.6.13
+ * @since       4.6.13
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC extends AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList {
 

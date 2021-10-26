@@ -30,14 +30,14 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @var   string
-     * @sicne 4.3.4  Stores the file path.
+     * @since 4.3.4  Stores the file path.
      */
     protected $_sFilePath = '';
 
     /**
      * Tells whether the directory is accessible or not.
      * @var   bool
-     * @sicne 4.4.0
+     * @since 4.4.0
      */
     protected $_bWritable = false;
 

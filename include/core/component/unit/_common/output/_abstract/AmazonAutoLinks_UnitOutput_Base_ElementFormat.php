@@ -398,7 +398,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
      * @param  string The url to be linked.
      * @return string
      * @since  3.3.0
-     * @sicne  5.0.0  Changed the visibility scope to public from protected as formatter classes access this.
+     * @since  5.0.0  Changed the visibility scope to public from protected as formatter classes access this.
      */
     public function getReadMoreText( $sReadMoreURL ) {
         

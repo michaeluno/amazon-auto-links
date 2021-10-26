@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract and construct category list of the given page.
  *
- * @sicne       3.5.7
+ * @since       3.5.7
  * @since       3.9.1   No longer uses PHP Simple DOM Parser.
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends AmazonAutoLinks_Form_CategorySelect__Utility {

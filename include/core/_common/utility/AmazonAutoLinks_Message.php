@@ -103,7 +103,7 @@ class AmazonAutoLinks_Message {
 
     /**
      * @return  string
-     * @sicne   4.0.0
+     * @since   4.0.0
      * @since   4.7.0   Moved from `AmazonAutoLinks_PluginUtility`
      */
     static public function getUpgradePromptMessageToAddMoreUnits() {

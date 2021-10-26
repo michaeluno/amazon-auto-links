@@ -404,7 +404,7 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         /**
          * @param array $aColumnNames e.g. array( 'object_id', 'title', 'asin' )
          * @return string
-         * @sicne   4.3.0
+         * @since   4.3.0
          */
         private function ___getQueryStatementUpdateRow( array $aColumnNames ) {
             $_aKeyValues     = array();

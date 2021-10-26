@@ -61,7 +61,7 @@ class AmazonAutoLinks_Template_Event_Filter_TemplateListWarning extends AmazonAu
     /**
      * Checks if there are duplicated items.
      * @param  array  $aAvailableTemplates
-     * @sicne  4.6.17
+     * @since  4.6.17
      * @return array
      */
     public function replyToParseAvailableTemplates( array $aAvailableTemplates ) {

@@ -18,7 +18,7 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
     /**
      * Stores the unit type.
      * @remark The base constructor creates a unit option object based on this value.
-     * @sicne  5.0.0
+     * @since  5.0.0
      */
     public $sUnitType = 'ad_widget_search';
 

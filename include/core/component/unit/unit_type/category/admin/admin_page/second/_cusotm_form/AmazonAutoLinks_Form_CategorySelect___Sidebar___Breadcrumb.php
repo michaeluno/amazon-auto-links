@@ -11,7 +11,7 @@
 /**
  * Provides methods to generate breadcrumb of selected categories.
  *
- * @sicne       3.5.7
+ * @since       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 

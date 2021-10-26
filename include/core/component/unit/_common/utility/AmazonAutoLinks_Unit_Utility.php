@@ -620,7 +620,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
          * @param array $aBrowseNodes
          *
          * @return array
-         * @sicne   3.8.0
+         * @since   3.8.0
          * @since   3.8.11      Moved from `AmazonAutoLinks_UnitOutput_Utility`
          */
         static private function ___getBrowseNodes( array $aBrowseNodes ) {

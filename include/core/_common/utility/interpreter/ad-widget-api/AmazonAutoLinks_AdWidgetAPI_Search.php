@@ -11,7 +11,7 @@
 /**
  * Performs Ad Widget API Search requests.
  *
- * @sicne       4.6.9
+ * @since       4.6.9
  */
 class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Base {
 

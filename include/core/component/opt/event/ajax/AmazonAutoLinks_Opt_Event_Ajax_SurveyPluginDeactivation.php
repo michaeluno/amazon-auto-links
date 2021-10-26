@@ -152,7 +152,7 @@ class AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation extends AmazonAuto
 
     /**
      * @return string
-     * @sicne  4.7.3
+     * @since  4.7.3
      */
     public function replyToSetEmailSenderAddress( $sEmailAddress ) {
         if ( ! $this->___bAnonymous ) {
@@ -170,7 +170,7 @@ class AmazonAutoLinks_Opt_Event_Ajax_SurveyPluginDeactivation extends AmazonAuto
 
     /**
      * @return string
-     * @sicne  4.7.3
+     * @since  4.7.3
      */
     public function replyToSetEmailSenderName( $sSenderName ) {
         if ( $this->___bAnonymous ) {

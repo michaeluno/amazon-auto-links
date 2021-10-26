@@ -253,7 +253,7 @@ abstract class AmazonAutoLinks_ListTableWrap_Base extends WP_List_Table {
      * @param  integer $iPerPage
      * @param  integer $iCurrentPage
      * @return array
-     * @sicne  4.4.3
+     * @since  4.4.3
      */
     protected function _getData( $iPerPage, $iCurrentPage ) {
         return array();

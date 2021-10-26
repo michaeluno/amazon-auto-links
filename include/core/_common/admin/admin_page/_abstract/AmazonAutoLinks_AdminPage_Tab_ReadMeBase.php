@@ -11,7 +11,7 @@
 /**
  * A base class that provides methods to display readme file contents.
  * 
- * @sicne       3       Extends `AmazonAutoLinks_AdminPage_Tab_Base`.
+ * @since       3       Extends `AmazonAutoLinks_AdminPage_Tab_Base`.
  * @extends     AmazonAutoLinks_AdminPage_Tab_Base
  */
 abstract class AmazonAutoLinks_AdminPage_Tab_ReadMeBase extends AmazonAutoLinks_AdminPage_Tab_Base {

@@ -117,7 +117,7 @@ class AmazonAutoLinks_Unit_PAAPIRequestCounter_LogRetriever_Database extends Ama
          * @param  integer $iStartTime   The timestamp of the start of the range.
          * @param  integer $iEndTime     The timestamp of the end of the range.
          * @return array
-         * @sicne  4.4.0
+         * @since  4.4.0
          */
         private function ___getRaw( array $aStoredLog, &$iStartTime, &$iEndTime ) {
 

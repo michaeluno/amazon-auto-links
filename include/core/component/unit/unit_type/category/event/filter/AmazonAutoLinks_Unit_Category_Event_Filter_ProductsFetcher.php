@@ -119,7 +119,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
          * @param  array    $aExcludeASINs
          * @return array
          * @since  ?
-         * @sicne  5.0.0    Moved from `AmazonAutoLinks_UnitOutput_category`.
+         * @since  5.0.0    Moved from `AmazonAutoLinks_UnitOutput_category`.
          */
         private function ___getFoundProducts( array $aURLs, array $aExcludeURLs, $iItemCount, array $aExcludeASINs=array() ) {
 

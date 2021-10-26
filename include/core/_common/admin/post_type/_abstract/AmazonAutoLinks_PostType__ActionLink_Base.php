@@ -117,7 +117,7 @@ class AmazonAutoLinks_PostType__ActionLink_Base extends AmazonAutoLinks_PluginUt
      *
      * @return      array
      * @callback    filter      bulk_actions-{screen id}
-     * @sicne       3.7.6
+     * @since       3.7.6
      */
     public function replyToAddBulkAction( $aActionLabels ) {
         $aActionLabels[ $this->_sActionSlug ] = $this->_getActionLabel();

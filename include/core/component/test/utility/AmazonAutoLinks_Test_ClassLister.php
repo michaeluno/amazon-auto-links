@@ -26,7 +26,7 @@ class AmazonAutoLinks_Test_ClassLister {
      * @param string $sBaseDirPath
      * @param array  $aClassFiles
      * @param array  $aBaseClasses
-     * @sicne 4.3.4
+     * @since 4.3.4
      */
     public function __construct( $sBaseDirPath, array $aClassFiles, array $aBaseClasses ) {
         

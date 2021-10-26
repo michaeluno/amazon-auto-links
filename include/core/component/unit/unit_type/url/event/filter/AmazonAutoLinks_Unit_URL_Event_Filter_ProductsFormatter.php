@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_URL_Event_Filter_ProductsFormatter extends AmazonAuto
 
     /**
      * @var   AmazonAutoLinks_UnitOutput_url
-     * @sicne 5.0.0
+     * @since 5.0.0
      */
     public $oUnitOutput;
 

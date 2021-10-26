@@ -225,7 +225,7 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
     }
         /**
          * @return      string
-         * @sicne       3.5.0
+         * @since       3.5.0
          */
         protected function _getLabel() {
             return __( 'Unknown', 'amazon-auto-links' );

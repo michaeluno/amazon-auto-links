@@ -156,7 +156,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * Used user meta keys.
      * @var   string[]
-     * @sicne 4.6.0
+     * @since 4.6.0
      */
     static public $aUserMeta = array(
         // key => meta key

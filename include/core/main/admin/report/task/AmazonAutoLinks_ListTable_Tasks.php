@@ -192,7 +192,7 @@ class AmazonAutoLinks_ListTable_Tasks extends AmazonAutoLinks_ListTableWrap_Base
      * @param  integer $iPerPage
      * @param  integer $iPageNumber
      * @return array
-     * @sicne  4.4.4
+     * @since  4.4.4
      */
     protected function _getData( $iPerPage, $iPageNumber ) {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;
@@ -217,7 +217,7 @@ class AmazonAutoLinks_ListTable_Tasks extends AmazonAutoLinks_ListTableWrap_Base
 
     /**
      * @return integer
-     * @sicne  4.4.4
+     * @since  4.4.4
      */
     protected function _getTotalCount() {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_tasks;

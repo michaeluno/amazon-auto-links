@@ -11,7 +11,7 @@
 /**
  * Provides methods to retrieve sidebar menu list elements of Amazon best selling products.
  *
- * @sicne       3.5.7
+ * @since       3.5.7
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUtility {
 
@@ -68,7 +68,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar extends AmazonAutoLinks_WPUt
              * Fetches page HTML source contents.
              * @param  string $sPageURL
              * @return string
-             * @sicne  3.9.1
+             * @since  3.9.1
              */
             private function ___getPageHTML( $sPageURL ) {
                 $_oHTTP = new AmazonAutoLinks_HTTPClient(

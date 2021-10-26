@@ -11,7 +11,7 @@
 /**
  * Provides methods to extract the feed (RSS2) url of the specified page with a Simple DOM object.
  *
- * @sicne       3.5.7
+ * @since       3.5.7
  * @deprecated  3.9.1   Amazon sites no longer provide feeds for best seller items
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar___FeedURL {

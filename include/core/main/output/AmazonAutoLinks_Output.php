@@ -25,7 +25,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * @remark      Used for JavaScript loading.
      * Also, since v4.3.4 the unit option class accepts raw options to be passed. The 'item_format', 'image_format', 'title_format', 'unit_format' options need to use this to suppress the default.
      * @var         array
-     * @sicne       3.6.0
+     * @since       3.6.0
      */
     private $___aRawArguments = array();
 
@@ -37,7 +37,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
      * $_sOutput = AmazonAutoLinks_Output::getInstance()->render();
      * </code>
      *
-     * @sicne  2.1.1
+     * @since  2.1.1
      * @param  array $aArguments
      * @return AmazonAutoLinks_Output
      */

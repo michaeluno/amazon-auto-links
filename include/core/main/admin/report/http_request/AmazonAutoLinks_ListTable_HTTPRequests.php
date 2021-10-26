@@ -214,7 +214,7 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
      * @param  integer $iPerPage
      * @param  integer $iPageNumber
      * @return array
-     * @sicne  4.7.0
+     * @since  4.7.0
      */
     protected function _getData( $iPerPage, $iPageNumber ) {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
@@ -237,7 +237,7 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
 
     /**
      * @return integer
-     * @sicne  4.7.0
+     * @since  4.7.0
      */
     protected function _getTotalCount() {
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
@@ -246,7 +246,7 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
     }
 
     /**
-     * @sicne  4.7.0
+     * @since  4.7.0
      */
     public function display() {
         $this->search_box( __( 'Search by URL', 'amazon-auto-links' ),'search_http_request_cache' );

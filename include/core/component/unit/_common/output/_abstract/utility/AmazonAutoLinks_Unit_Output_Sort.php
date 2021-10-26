@@ -16,7 +16,7 @@ class AmazonAutoLinks_Unit_Output_Sort extends AmazonAutoLinks_Unit_Utility {
 
     /**
      * @var   array
-     * @sicne 5.0.0
+     * @since 5.0.0
      */
     public $aProducts = array();
 

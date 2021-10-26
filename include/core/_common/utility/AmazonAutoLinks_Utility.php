@@ -51,7 +51,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
      * @param  string $sHost
-     * @sicne  4.3.4
+     * @since  4.3.4
      * @return string
      */
     static public function getSubDomainFromHostName( $sHost ) {

@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_PAAPICustomPayload_Event_Filter_ProductsFormatter ext
 
     /**
      * @var   AmazonAutoLinks_UnitOutput_scratchpad_payload
-     * @sicne 5.0.0
+     * @since 5.0.0
      */
     public $oUnitOutput;
 

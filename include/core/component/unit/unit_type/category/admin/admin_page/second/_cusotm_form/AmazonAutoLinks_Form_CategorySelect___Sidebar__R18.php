@@ -11,7 +11,7 @@
 /**
  * Provides methods to retrieve sidebar menu list elements of Amazon best selling products for R18 areas.
  *
- * @sicne       3.5.7
+ * @since       3.5.7
  * @deprecated       3.9.1
  */
 class AmazonAutoLinks_Form_CategorySelect___Sidebar__R18 extends AmazonAutoLinks_Form_CategorySelect___Sidebar {
