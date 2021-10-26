@@ -129,25 +129,10 @@ class AmazonAutoLinks_PostType_UnitPreview {
         register_post_type(
             $this->sPreviewPostTypeSlug,
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
-                'labels' => array(
-                    'name'                  => AmazonAutoLinks_Registry::NAME,
-                    'singular_name'         => sprintf( __( '%1$s Unit', 'amazon-auto-links' ), AmazonAutoLinks_Registry::NAME ),
-                    'menu_name'             => AmazonAutoLinks_Registry::NAME,    // this changes the root menu name so cannot simply put Manage Unit here
-                    'add_new'               => __( 'Add New Unit by Category', 'amazon-auto-links' ),
-                    'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
-                    'edit'                  => __( 'Edit', 'amazon-auto-links' ),
-                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
-                    'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
-                    'view'                  => __( 'View', 'amazon-auto-links' ),
-                    'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
-                    'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
-                    'not_found'             => __( 'No unit found for Auto Amazon Links', 'amazon-auto-links' ),
-                    'not_found_in_trash'    => __( 'No Unit Found for Auto Amazon Links in Trash', 'amazon-auto-links' ),
-                    'parent'                => 'Parent Unit'
-                ),
-                'public'                => true,
-                'show_ui'               => false,
-                'publicly_queryable'    => $_oOption->isPreviewVisible(),
+                'labels'             => AmazonAutoLinks_Unit_Utility::getUnitPostTypeLabels(),
+                'public'             => true,
+                'show_ui'            => false,
+                'publicly_queryable' => $_oOption->isPreviewVisible(),
             )        
         );
             

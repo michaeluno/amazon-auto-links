@@ -32,7 +32,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
         $_oOption = AmazonAutoLinks_Option::getInstance();
         $this->setArguments(
             array(            // argument - for the array structure, refer to http://codex.wordpress.org/Function_Reference/register_post_type#Arguments
-                'labels'                => $this->___getLabels( $_oOption ),
+                'labels'                => AmazonAutoLinks_Unit_Utility::getUnitPostTypeLabels(),
                 
                 // If a custom preview post type is set, make it not public. 
                 // However, other ui arguments should be enabled.
@@ -119,47 +119,6 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 $oWPAdminBar->remove_node( 'new-' . $this->oProp->sPostType );
             }
 
-        /**
-         * @return array Label arguments.
-         */
-        private function ___getLabels( $oOption ) {
-            
-            // Allow the user to set custom post type name which appears in the breadcrumb.
-            $_sFrontendName = $oOption->get( 
-                array( 'unit_preview', 'preview_post_type_label' ), 
-                AmazonAutoLinks_Registry::NAME
-            );
-            
-            return $this->oProp->bIsAdmin
-                ? array(
-                    'name'                  => $_sFrontendName,
-                    'menu_name'             => apply_filters(
-                        'aal_filter_admin_menu_name',
-                        AmazonAutoLinks_Registry::NAME
-                    ),
-                    'all_items'             => __( 'Manage Units', 'amazon-auto-links' ),    // sub menu label
-                    'singular_name'         => sprintf( __( '%1$s Unit', 'amazon-auto-links' ), AmazonAutoLinks_Registry::NAME ),
-                    'add_new'               => __( 'Add Unit by Category', 'amazon-auto-links' ),
-                    'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
-                    'edit'                  => __( 'Edit', 'amazon-auto-links' ),
-                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
-                    'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
-                    'view'                  => __( 'View', 'amazon-auto-links' ),
-                    'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
-                    'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
-                    'not_found'             => __( 'No unit found for Auto Amazon Links', 'amazon-auto-links' ),
-                    'not_found_in_trash'    => __( 'No Unit Found for Auto Amazon Links in Trash', 'amazon-auto-links' ),
-                    'parent'                => __( 'Parent Unit', 'amazon-auto-links' ),
-                    
-                    // framework specific keys
-                    'plugin_action_link'    => __( 'Units', 'amazon-auto-links' ),
-                ) 
-                : array(
-                    'name'                  => $_sFrontendName,
-                    'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
-                );
-            
-        }
 
     /**
      * Called when the edit.php of the post type starts loading.

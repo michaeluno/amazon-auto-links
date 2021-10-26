@@ -10,9 +10,52 @@
 
 /**
  * A class that provides utility methods for the unit component.
- * @since   3.8.11
+ * @since 3.8.11
  */
 class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
+
+    /**
+     * @since  5.0.0
+     * @return array The unit post type label arguments
+     */
+    static public function getUnitPostTypeLabels() {
+
+        // Allow the user to set custom post type name which appears in the breadcrumb.
+        $_oOption       = AmazonAutoLinks_Option::getInstance();
+        $_sFrontendName = $_oOption->get(
+            array( 'unit_preview', 'preview_post_type_label' ),
+            AmazonAutoLinks_Registry::NAME
+        );
+        return is_admin()
+            ? array(
+                'name'                  => $_sFrontendName,
+                'menu_name'             => apply_filters(
+                    'aal_filter_admin_menu_name',
+                    AmazonAutoLinks_Registry::NAME
+                ),
+                'all_items'             => __( 'Manage Units', 'amazon-auto-links' ),    // sub menu label
+                'singular_name'         => sprintf( __( '%1$s Unit', 'amazon-auto-links' ), AmazonAutoLinks_Registry::NAME ),
+                'add_new'               => __( 'Add Unit by Category', 'amazon-auto-links' ),
+                'add_new_item'          => __( 'Add New Unit', 'amazon-auto-links' ),
+                'edit'                  => __( 'Edit', 'amazon-auto-links' ),
+                'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
+                'new_item'              => __( 'New Unit', 'amazon-auto-links' ),
+                'view'                  => __( 'View', 'amazon-auto-links' ),
+                'view_item'             => __( 'View Product Links', 'amazon-auto-links' ),
+                'search_items'          => __( 'Search Units', 'amazon-auto-links' ),
+                'not_found'             => __( 'No unit found for Auto Amazon Links', 'amazon-auto-links' ),
+                'not_found_in_trash'    => __( 'No Unit Found for Auto Amazon Links in Trash', 'amazon-auto-links' ),
+                'parent'                => __( 'Parent Unit', 'amazon-auto-links' ),
+
+                // framework specific keys
+                'plugin_action_link'    => __( 'Units', 'amazon-auto-links' ),
+            )
+            : array(
+                'name'                  => $_sFrontendName,
+                'edit_item'             => __( 'Edit Unit', 'amazon-auto-links' ),
+            );
+
+    }
 
     /**
      * @param array $aItem  A product array of a PA-API 5 response.
