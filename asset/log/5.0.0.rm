@@ -6,6 +6,7 @@
 - Added the ability to include names other than authors such as artist, writer and producer with the `%author%` Item Format tag. 
 - Tweaked UI elements.
 - Tweaked the style of product author elements.
+- Fixed an issue that the post slug field is missing in the Quick Edit form when a custom post type slug for the unit preview post type is given.
 - Fixed a bug that the sort option for the feed unit type did not take effect.
 - Fixed a bug that an admin notice that asks to enable Web Page Dumper appeared when unnecessary.
 - Optimized HTTP requests for Web Page Dumper.
