@@ -62,9 +62,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
         add_filter( 'post_link', array( $this, '_replyToModifyPermalinks' ), 10, 3 );
         add_filter( "previous_post_link", array( $this, '_replyToModifyPostLink' ), 10, 4 );
         add_filter( "next_post_link", array( $this, '_replyToModifyPostLink' ), 10, 4 );    
-        
-        add_filter( 'aal_filter_unit_view_url', array( $this, '_replyToModifyViewURL' ), 10, 1 );
-        
+
         /// Modify database queries
         add_filter( 'request', array( $this, '_replyToModifyDatabaseQuery' ) );
 
