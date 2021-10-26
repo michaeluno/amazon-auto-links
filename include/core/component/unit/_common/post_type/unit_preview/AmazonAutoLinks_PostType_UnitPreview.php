@@ -80,7 +80,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
             return $aActions;
         }    
         
-        $_sLink = $this->_replaceWithUserSetPostTypeSlug( get_permalink( $oPost->ID ) );
+        $_sLink = $this->___getDefaultPostTypeSlugReplaced( get_permalink( $oPost->ID ) );
         $aActions[ 'view' ] = '<a target="_blank" href="'
             . $_sLink . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $oPost->post_title ) ) . '" rel="permalink">' 
                 . __( 'View' )
@@ -105,7 +105,8 @@ class AmazonAutoLinks_PostType_UnitPreview {
         if ( $this->sDefaultPreviewSlug !== $oPost->post_type ) {
             return $sOutput;
         }
-        return $this->_replaceWithUserSetPostTypeSlug( $sOutput );
+        return $this->___getDefaultPostTypeSlugReplaced( $sOutput );
+
     }
 
     /**
@@ -166,16 +167,16 @@ class AmazonAutoLinks_PostType_UnitPreview {
                 return $sPermalink;
             }
 
-            return $this->_replaceWithUserSetPostTypeSlug( $sPermalink );
+            return $this->___getDefaultPostTypeSlugReplaced( $sPermalink );
             
         }    
            
         /**
-         * 
-         * @since       2.2.0
-         * @return      string
+         * @return string
+         * @since  2.2.0
+         * @since  5.0.0  Renamed from `_replaceWithUserSetPostTypeSlug()`.
          */
-        private function _replaceWithUserSetPostTypeSlug( $sSubject ) {
+        private function ___getDefaultPostTypeSlugReplaced( $sSubject ) {
             return str_replace(
                 array( 
                     '/' . $this->sDefaultPreviewSlug . '/',
