@@ -1,21 +1,29 @@
 <?php
-
 /**
- *
+ * The class existent check is needed to avoid multiple declarations of the same class.
+ * It occurs upon installing a test version with a different plugin slug (directory name)
+ * due to loading the template files of the old locations, which the plugin remembers with the templates options.
  */
-class AmazonAutoLinks_Template_Text {
+if ( ! class_exists( 'AmazonAutoLinks_Template_Text', false ) ) {
+    class AmazonAutoLinks_Template_Text {
 
-    public function __construct() {
-        $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        $_sTemplateID     = $_oTemplateOption->getTemplateID( dirname( __FILE__ ) );
-        add_filter( 'aal_filter_template_default_item_format_' . $_sTemplateID, array( $this, 'replyToGetDefaultItemFormat' ) );
+        static public $sTemplateID;
+
+        public function __construct() {
+            if ( isset( self::$sTemplateID ) ) {
+                return;
+            }
+            $_oTemplateOption  = AmazonAutoLinks_TemplateOption::getInstance();
+            self::$sTemplateID = $_oTemplateOption->getTemplateID( dirname( __FILE__ ) );
+            add_filter( 'aal_filter_template_default_item_format_' . self::$sTemplateID, array( $this, 'replyToGetDefaultItemFormat' ) );
+        }
+
+        public function replyToGetDefaultItemFormat( $sItemFormat ) {
+            return '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
+                        . '%title_text%'
+                    . '</a>';
+        }
+
     }
-
-    public function replyToGetDefaultItemFormat( $sItemFormat ) {
-        return  '<a href="%href%" title="%title_text%: %description_text%" rel="nofollow noopener" target="_blank">'
-                    . '%title_text%'
-                . '</a>';
-    }
-
 }
 new AmazonAutoLinks_Template_Text;
