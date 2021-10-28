@@ -1,6 +1,0 @@
-- Optimized the method of displaying prices with Category units to be more accurate when the PA-API keys are set.
-- Fixed a bug that inaccurate prices were stored with search-type units resulting in miscalculated discount rates.
-- Fixed a bug that malformed prices were stored with some locales resulting in miscalculating discount rates, started since v4.6.9.   
-- Fixed the no-image-available images for the Swedish locale.
-- Fixed a bug that the `Discount Rate` unit filter option produced inaccurate results. 
-- Fixed an issue that HTTP requests with Web Page Dumper failed in some cases.

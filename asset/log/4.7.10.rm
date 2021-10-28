@@ -1,6 +1,0 @@
-- Added the `Hook Priority` option in the `Link Converter` section of the `Tools` page.
-- Added the `%author_text%` Item Format tag.
-- Added the ability to include names other than authors such as artist, writer and producer with the `%author%` Item Format tag.
-- Tweaked the style of product author elements.
-- Fixed a bug that an admin notice that asks to enable Web Page Dumper appeared when unnecessary.
-- Optimized HTTP requests for Web Page Dumper.

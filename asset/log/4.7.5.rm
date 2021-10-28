@@ -1,6 +1,0 @@
-- Added the `No Need` field in the `Affilite Disclosure` setting section.
-- Added the `Update Required` field in the `Web Page Dumper` setting section.
-- Added a setting notice for outdated Web Page Dumper instances. 
-- Tweaked setting UI elements.
-- Fixed a bug that disclaimer links were linking to the Affiliate Disclosure page even when the page is not accessible.
-- Fixed a bug that some HTTP requests were not parsed properly.

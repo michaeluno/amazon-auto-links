@@ -1,2 +1,0 @@
-- Added the sub-arguments of the shortcode `[amazon_auto_links]` for the `search` argument, `MinReviewsRating`, `Merchant`, `MinPrice`, `MaxPrice`, `BrowseNodeId`, `SortBy`, `CurrencyOfPreference`, and `LanguagesOfPreference`.
-- Added the `%discount%` Item Format tag which displays a discount percentage of the product.

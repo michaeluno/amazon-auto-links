@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         4.7.9
+Stable tag:         5.0.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -218,7 +218,7 @@ The following parameters can be used for the shortcode, `[amazon_auto_links]` or
 <?php AmazonAutoLinks( array( 'search' => 'WordPress' ) ); ?>
 `
 
-When the `search` argument is specified, the following arguments can be used together.
+When the `search` argument is specified, the following arguments can be used, which require PA-API keys.
 
 - `Sort`/`SortBy` - Sort order. Accepts the following values: `AvgCustomerReviews`, `Featured`, `NewestArrivals`, `Price:HighToLow`, `Price:LowToHigh`, `Relevance`. For the details of each value, see [here](https://webservices.amazon.com/paapi5/documentation/search-items.html#sortby-parameter). e.g. `[amazon_auto_links search="WordPress" sort="AvgCustomerReviews"]`
 - `SearchIndex` - Filters search results by category. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html#topics). For example, the [US locale](https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html#search-index), e.g. `[amazon_auto_links search="Oven" sort="Electronics"]`
@@ -347,6 +347,24 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.0.0 - 10/29/2021 =
+- Added the new unit type, `Product Search`, which performs product searches without PA-API.
+- Added the `%discount%` item format tag which displays product discount percentage.
+- Added the sub-arguments of the shortcode `[amazon_auto_links]` for the `search` argument, `MinReviewsRating`, `Merchant`, `MinPrice`, `MaxPrice`, `BrowseNodeId`, `SortBy`, `CurrencyOfPreference`, and `LanguagesOfPreference` (Requires PA-API).
+- Added the `Hook Priority` option in the `Link Converter` section of the `Tools` page.
+- Added the `%author_text%` Item Format tag.
+- Added the ability to include names other than authors such as artist, writer and producer with the `%author%` Item Format tag.
+- Tweaked UI elements.
+- Tweaked the style of product author elements.
+- Fixed an issue that the post slug field is missing in the Quick Edit form when a custom post type slug for the unit preview post type is given.
+- Fixed a bug that the sort option for the feed unit type did not take effect.
+- Fixed a bug that an admin notice that asks to enable Web Page Dumper appeared when unnecessary.
+- Optimized HTTP requests for Web Page Dumper.
+- Changed some option default values.
+- Changed the name of the unit type, `Product Search`, to `PA-API Product Search`.
+- Changed the name of the unit type, `Item Look-up`, to `PA-API Item Look-up`.
+- Changed the name of the unit type, `ScratchPad Payload`, to `PA-API Custom Payload`.
 
 = 4.7.9 - 09/21/2021 =
 - Fixed a bug that kept trying updating product elements for some non-existing products.
