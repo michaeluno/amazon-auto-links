@@ -25,7 +25,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         $_oOption         = AmazonAutoLinks_Option::getInstance();
         if ( $_oOption->isUnitLimitReached() ) {
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
-            return ;
+            return;
         }            
         
         $_iCount      = count( $aPostIDs );
@@ -69,14 +69,14 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             // unset( $_aPostMeta[ '_error' ] );    // stores the unit status
             $_iNewPostID   = $this->createPost( 
                 AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],    // post type slug
-                $this->_getPostColumns( $_oSourcePost ),    // columns
+                $this->___getPostColumns( $_oSourcePost ),    // columns
                 $_aPostMeta,   // meta
-                $this->_getTaxInputArgument( $_oSourcePost )
+                $this->___getTaxInputArgument( $_oSourcePost )
             );
             if ( $_iNewPostID ) {
                                
                 // Give a unique post slug
-                $_iNewPostID = $this->_updatePostSlug( get_post( $_iNewPostID ) );
+                $_iNewPostID = $this->___updatePostSlug( get_post( $_iNewPostID ) );
                 
             }
             return $_iNewPostID;
@@ -86,7 +86,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
              * Give a unique post slug.
              * @return integer The ID of the post if the post is successfully updated in the database. Otherwise returns 0.
              */
-            private function _updatePostSlug( $_oNewPost ) {
+            private function ___updatePostSlug( $_oNewPost ) {
                 
                 if ( ! in_array( $_oNewPost->post_status, array( 'publish', 'future' ) ) ) {
                     return 0;
@@ -112,7 +112,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             /**
              * @return array
              */
-            private function _getTaxInputArgument( $oSourcePost ) {
+            private function ___getTaxInputArgument( $oSourcePost ) {
                 
                 $_aTaxonomy = array();
                 foreach( get_object_taxonomies( $oSourcePost->post_type ) as $_isIndex => $_sTaxonomySlug ) {
@@ -129,7 +129,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             /**
              * @return array
              */
-            private function _getPostColumns( $_oPost ) {
+            private function ___getPostColumns( $_oPost ) {
 
                 $_oCurrentUser = wp_get_current_user();
                 return array(
