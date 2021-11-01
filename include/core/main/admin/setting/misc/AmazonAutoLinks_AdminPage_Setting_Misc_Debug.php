@@ -11,13 +11,13 @@
 /**
  * Adds the 'Debug' form section to the 'Misc' tab.
  * 
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -31,15 +31,14 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_Admin
     /**
      * A user constructor.
      * 
-     * @since       3
-     * @return      void
+     * @since 3
      */
     protected function _construct( $oFactory ) {}
     
     /**
      * Adds form fields.
-     * @since       3
-     * @return      void
+     * @since 3
+
      */
     protected function _addFields( $oFactory, $sSectionID ) {
 
@@ -76,7 +75,7 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_Admin
                 'description'   => array(
                     __( 'Check debug components to enable.', 'amazon-auto-links' ),
                 ),
-            ),
+            )
         );    
     
     }
@@ -85,22 +84,21 @@ class AmazonAutoLinks_AdminPage_Setting_Misc_Debug extends AmazonAutoLinks_Admin
     /**
      * Validates the submitted form data.
      * 
-     * @since       3
+     * @since 3
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
-        
-          
+
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
             $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
+            return $aOldInputs;
         }
                 
-        return $aInput;     
+        return $aInputs;
         
     }
    

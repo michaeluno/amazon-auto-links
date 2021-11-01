@@ -147,7 +147,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
             return $this->getFormattedDiscount(
                 $this->___getDiscountPercentage(
                     $this->getPriceAmountExtracted( $sProperPrice ),
-                    $this->getPriceAmountExtracted( $sDiscountPrice ),
+                    $this->getPriceAmountExtracted( $sDiscountPrice )
                 )
             );
         }
