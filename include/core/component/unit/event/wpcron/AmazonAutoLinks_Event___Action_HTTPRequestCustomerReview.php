@@ -110,7 +110,7 @@ class AmazonAutoLinks_Event___Action_HTTPRequestCustomerReview extends AmazonAut
              * @param  integer $iCacheDuration
              * @param  boolean $bForceRenew
              * @param  string  $sLanguage
-             * @return string
+             * @return array|WP_Error
              * @since  4.3.4
              */
             private function ___getReviewPageResponse( &$oHTTP, $sURL, $sLocale, $iCacheDuration, $bForceRenew, $sLanguage ) {
