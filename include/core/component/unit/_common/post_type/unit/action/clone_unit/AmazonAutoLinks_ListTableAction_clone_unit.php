@@ -11,13 +11,13 @@
 /**
  * Provides methods to clone units.
  * 
- * @since       3.3.0
+ * @since 3.3.0
  */
 class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Performs the action.
-     * @since       3.3.0
+     * @since 3.3.0
      */
     public function __construct( array $aPostIDs, $oFactory ) {
         
@@ -43,8 +43,8 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         if ( ! empty( $_aFailed ) ) {          
             $oFactory->setSettingNotice(
                 sprintf(
-                    __( 'The following unit(s) failed to be cloned.', 'amazon-auto-links' ),
-                    explode( ', ', $_aFailed )
+                    __( 'The following unit(s) failed to be cloned: %1$s', 'amazon-auto-links' ),
+                    implode( ', ', $_aFailed )
                 ),
                 'error'                
             );
@@ -57,9 +57,8 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         
     }
         /**
-         * @since        3.3.0
-         * 
-         * @return      integer     The new post id. If failed, 0.
+         * @since  3.3.0
+         * @return integer The new post id. If failed, 0.
          */
         private function ___cloneUnit( $iPostID ) {
 
@@ -85,7 +84,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
         }
             /**
              * Give a unique post slug.
-             * @return      integer     The ID of the post if the post is successfully updated in the database. Otherwise returns 0.
+             * @return integer The ID of the post if the post is successfully updated in the database. Otherwise returns 0.
              */
             private function _updatePostSlug( $_oNewPost ) {
                 
@@ -111,7 +110,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             }
         
             /**
-             * @return      array
+             * @return array
              */
             private function _getTaxInputArgument( $oSourcePost ) {
                 
@@ -128,7 +127,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             }
         
             /**
-             * @return     array
+             * @return array
              */
             private function _getPostColumns( $_oPost ) {
 

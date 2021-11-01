@@ -25,7 +25,7 @@ class AmazonAutoLinks_Scratch_Test extends AmazonAutoLinks_Scratch_Base {
      * Triggers an error.
      */
     public function scratch_SyntaxError() {
-        return explode( '', array() );
+        return explode( '', '' );
     }
 
 }
