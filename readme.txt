@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         5.0.0
+Stable tag:         5.0.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.0.1 - 11/02/2021 =
+- Fixed a bug that caused a fatal error in PHP 7.2.x or below due to a trailing comma in a function call, which started in v5.0.0.
 
 = 5.0.0 - 10/29/2021 =
 - Added the new unit type, `Product Search`, which performs product searches without PA-API.
