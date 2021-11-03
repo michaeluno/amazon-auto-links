@@ -48,6 +48,7 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
     public function getResponse( $sEndpoint ) {
         $_aArguments = $this->aHTTPArguments + array(
             'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ],
+            'timeout'    => 29,
         );
         $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
         return $_oHTTP->getBody();
