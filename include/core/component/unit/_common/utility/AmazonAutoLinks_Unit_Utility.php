@@ -147,6 +147,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @since   4.2.2
      * @see https://www.oreilly.com/library/view/amazon-hacks/0596005423/ch01s07.html
      * @see https://www.ipentec.com/document/internet-get-amazon-product-image
+     * @see https://stackoverflow.com/a/58921751
      * @remark      This method is not reliable as the locale code is not functioning; even though it is removed or changed, the image is still accessible.
      * This means the image for a product will exist with a particular locale even though the product does not exist for the locale.
      * @deprecated 4.2.2    Not used at the moment.
