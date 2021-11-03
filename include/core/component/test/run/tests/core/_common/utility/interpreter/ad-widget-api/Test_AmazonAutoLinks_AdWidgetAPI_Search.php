@@ -23,7 +23,7 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
     public function test_getEndPoint() {
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'UK' );
         $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( array( 'B002U3CB7A' ) );
-        $this->_getDetails( 'Endpoint', $_sEndpointURL );
+        $this->_outputDetails( 'Endpoint', $_sEndpointURL );
         $this->_assertNotEmpty( filter_var( $_sEndpointURL, FILTER_VALIDATE_URL ) );
     }
 
@@ -43,7 +43,7 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
-        $this->_assertFalse( empty( $_aResponse ) );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
     /**
@@ -58,52 +58,75 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
-        $this->_assertFalse( empty( $_aResponse ) );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
     /**
-     * @tags US
+     * @tags entity, character
+     */
+    public function test_HTMLEntities() {
+        $_aKeywords = array( 'Google&#039;s Strategy', 'Marketing' );
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'UK' );
+        $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( $_aKeywords );
+        $this->_outputDetails( 'Endpoint', $_sEndpointURL );
+        $this->_assertNotEmpty( filter_var( $_sEndpointURL, FILTER_VALIDATE_URL ) );
+        $_aResponse          = $_oAdWidgetAPISearch->get( $_aKeywords, array( 'multipageCount' => 10, ) );
+        $this->_outputDetails( 'response', $_aResponse );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
+    }
+
+    /**
+     * @tags US, multiple
      */
     public function test_US() {
+        $_aKeywords          = array( 'B00000J3LO', 'B07FKR6KXF' );
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'US' );
+        $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( $_aKeywords );
+        $this->_outputDetails( 'Endpoint', $_sEndpointURL );
         $_aResponse          = $_oAdWidgetAPISearch->get(
-            array( 'B00000J3LO' ),
+            $_aKeywords,
             array(
                 'multipageCount' => 20,
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
-        $this->_assertFalse( empty( $_aResponse ) );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
     /**
      * @tags JP
      */
     public function test_JP() {
+        $_aKeywords          = array( 'iPhone' );
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'JP' );
+        $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( $_aKeywords );
+        $this->_outputDetails( 'Endpoint', $_sEndpointURL );
         $_aResponse          = $_oAdWidgetAPISearch->get(
-            'iPhone',
+            $_aKeywords,
             array(
                 'multipageCount' => 20,
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
-        $this->_assertFalse( empty( $_aResponse ) );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
     /**
      * @tags CA
      */
     public function test_CA() {
+        $_aKeywords          = array( 'mouse', 'tablet' );
         $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( 'CA' );
+        $_sEndpointURL       = $_oAdWidgetAPISearch->getEndpoint( $_aKeywords );
+        $this->_outputDetails( 'Endpoint', $_sEndpointURL );
         $_aResponse          = $_oAdWidgetAPISearch->get(
-            array( 'mouse', 'tablet' ),
+            $_aKeywords,
             array(
                 'multipageCount' => 20,
             )
         );
         $this->_outputDetails( 'response', $_aResponse );
-        $this->_assertFalse( empty( $_aResponse ) );
+        $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
 }

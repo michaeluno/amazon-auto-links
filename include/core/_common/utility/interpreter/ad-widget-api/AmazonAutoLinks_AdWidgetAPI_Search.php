@@ -55,7 +55,7 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
         return $this->oLocale->getAdWidgetAPIEndpoint( $aPayload + array(
             'multipageCount' => 20, // 20 is the max number of items    // @remark Not sure but this key must come first. Otherwise, the response become empty
             'Operation'      => 'GetResults',
-            'Keywords'       => is_array( $asKeywords ) ? implode( '|', $asKeywords ) : $asKeywords,
+            'Keywords'       => $this->___getKeywordsFormatted( $asKeywords ),
             'SearchIndex'    => 'All',
             'multipageStart' => 0,
             'InstanceId'     => 0,
@@ -64,5 +64,24 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
             'MarketPlace'    => $this->oLocale->getCountryCode(),
         ) );
     }
+        /**
+         * @since  5.0.2
+         * @return string
+         */
+        private function ___getKeywordsFormatted( $asKeywords ) {
+            $_aKeywords = $this->getAsArray( $asKeywords );
+            $_aKeywords = array_map( array( $this, '___replyToGetEachKeywordFormatted' ), $_aKeywords );
+            return implode( '|', $_aKeywords );
+        }
+            /**
+             * @param    string $sKeyword
+             * @return   string
+             * @since    5.0.2
+             * @callback array_map()
+             */
+            private function ___replyToGetEachKeywordFormatted( $sKeyword ) {
+                $_sKeyword = html_entity_decode( $sKeyword, ENT_QUOTES );   //  Convert apostrophes such as &#039; to normal characters.
+                return urlencode( $_sKeyword ); // Convert white spaces to URL-encoded characters.
+            }
 
 }
