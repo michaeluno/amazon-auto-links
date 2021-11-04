@@ -46,12 +46,13 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
     }
 
     /**
-     * @param array|string  $asKeywords
-     * @param array         $aPayload       API request parameters.
-     * @since 4.6.9
-     * @return string       The endpoint URI
+     * @param  array|string $asKeywords
+     * @param  array        $aPayload   API request parameters.
+     * @since  4.6.9
+     * @return string      The endpoint URI.
      */
     public function getEndpoint( $asKeywords, array $aPayload=array() ) {
+        $aPayload = array_filter( $aPayload, array( $this, 'isNotNull' ) );    // drop null-value elements
         return $this->oLocale->getAdWidgetAPIEndpoint( $aPayload + array(
             'multipageCount' => 20, // 20 is the max number of items    // @remark Not sure but this key must come first. Otherwise, the response become empty
             'Operation'      => 'GetResults',
