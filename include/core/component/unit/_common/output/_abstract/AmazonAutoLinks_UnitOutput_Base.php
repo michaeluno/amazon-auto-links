@@ -684,7 +684,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         private function ___hasAdvancedSearchOptions() {
             $_aAdvancedArgumentKeys = array(
                 // The value doesn't matter as only the keys are compared
-                'SearchIndex'       => true,
+                // 'SearchIndex'       => true, // @deprecated 5.0.2 Ad-widget can accept this parameter with the same values as PA-API
                 'BrowseNode'        => true,
                 'Availability'      => true,
                 'Condition'         => true,

@@ -16,6 +16,7 @@
   > maybe only storing the record ID of a table (linked ID) can solve it
   
 ## Major
+- [Feature] Add the `SearchIndex` unit option for the Product Search unit type. 
 - [Feature] Add a notification component.
   - Save notifications in a new options record with time stamps.
   - When the notification options is not empty, 

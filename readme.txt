@@ -218,20 +218,20 @@ The following parameters can be used for the shortcode, `[amazon_auto_links]` or
 <?php AmazonAutoLinks( array( 'search' => 'WordPress' ) ); ?>
 `
 
-When the `search` argument is specified, the following arguments can be used, which require PA-API keys.
+When the `search` argument is specified, the following arguments can be used.
 
-- `Sort`/`SortBy` - Sort order. Accepts the following values: `AvgCustomerReviews`, `Featured`, `NewestArrivals`, `Price:HighToLow`, `Price:LowToHigh`, `Relevance`. For the details of each value, see [here](https://webservices.amazon.com/paapi5/documentation/search-items.html#sortby-parameter). e.g. `[amazon_auto_links search="WordPress" sort="AvgCustomerReviews"]`
-- `SearchIndex` - Filters search results by category. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html#topics). For example, the [US locale](https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html#search-index), e.g. `[amazon_auto_links search="Oven" sort="Electronics"]`
-- `BrowseNode`/`BrowseNodeId` - Filters search results by category ID.
-- `Availability` - Filters search results to items with the specified product availability status. Accepts `Available` or `IncludeOutOfStock`. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#availability-parameter).
-- `MerchantId`/`Merchant` - Filters search results to items with the specified merchant. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#merchant-parameter).
-- `Condition` - Filters search results to items with the specified product condition. Accepts `Any`, `New`, `Used`, `Collectible` or `Refurbished`. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#condition-parameter).
-- `MaximumPrice`/`MaxPrice` - Filters search results to items with a price below the specified price. The value needs to be formatted in lowest currency denomination. For example, in the US marketplace, set `1234` for $12.34.
-- `MinimumPrice`/`MinPrice` - Filters search results to items with a price above the specified price. The value needs to be formatted in lowest currency denomination. For example, in the US marketplace, set `1234` for $12.34.
-- `MinPercentageOff`/`MinSavingPercent` - Filters search results to items with a specified discount percentage. e.g. `[amazon_auto_links search="shoes" MinSavingPercent=20]` where `20` denotes 20 percent-off.
-- `MinReviewsRating` - Filters search results to items with a customer rating above the specified value. Accepts a positive integer from `2` to `5`. e.g. `[amazon_auto_links search="shoes" MinReviewsRating=4]` for products with a rating above 4.
-- `CurrencyOfPreference` - Preferred currency. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html).
-- `LanguagesOfPreference` - Preferred language specified in the ISO 639 language code. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html).
+- `SearchIndex` - Filters search results by category. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html#topics). For example, the [US locale](https://webservices.amazon.com/paapi5/documentation/locale-reference/united-states.html#search-index), e.g. `[amazon_auto_links search="Oven" SearchIndex="Electronics"]`
+- `Sort`/`SortBy` - (PA-API required) Sort order. Accepts the following values: `AvgCustomerReviews`, `Featured`, `NewestArrivals`, `Price:HighToLow`, `Price:LowToHigh`, `Relevance`. For the details of each value, see [here](https://webservices.amazon.com/paapi5/documentation/search-items.html#sortby-parameter). e.g. `[amazon_auto_links search="WordPress" sort="AvgCustomerReviews"]`
+- `BrowseNode`/`BrowseNodeId` - (PA-API required) Filters search results by category ID.
+- `Availability` - (PA-API required) Filters search results to items with the specified product availability status. Accepts `Available` or `IncludeOutOfStock`. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#availability-parameter).
+- `MerchantId`/`Merchant` - (PA-API required) Filters search results to items with the specified merchant. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#merchant-parameter).
+- `Condition` - (PA-API required) Filters search results to items with the specified product condition. Accepts `Any`, `New`, `Used`, `Collectible` or `Refurbished`. See [details](https://webservices.amazon.com/paapi5/documentation/search-items.html#condition-parameter).
+- `MaximumPrice`/`MaxPrice` - (PA-API required) Filters search results to items with a price below the specified price. The value needs to be formatted in lowest currency denomination. For example, in the US marketplace, set `1234` for $12.34.
+- `MinimumPrice`/`MinPrice` - (PA-API required) Filters search results to items with a price above the specified price. The value needs to be formatted in lowest currency denomination. For example, in the US marketplace, set `1234` for $12.34.
+- `MinPercentageOff`/`MinSavingPercent` - (PA-API required) Filters search results to items with a specified discount percentage. e.g. `[amazon_auto_links search="shoes" MinSavingPercent=20]` where `20` denotes 20 percent-off.
+- `MinReviewsRating` - (PA-API required) Filters search results to items with a customer rating above the specified value. Accepts a positive integer from `2` to `5`. e.g. `[amazon_auto_links search="shoes" MinReviewsRating=4]` for products with a rating above 4.
+- `CurrencyOfPreference` - (PA-API required) Preferred currency. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html).
+- `LanguagesOfPreference` - (PA-API required) Preferred language specified in the ISO 639 language code. For accepted values, see the [locale reference](https://webservices.amazon.com/paapi5/documentation/locale-reference.html).
 
 The `id`, `asin` and `search` arguments cannot be used together.
 

@@ -129,4 +129,85 @@ class Test_AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_UnitTest_H
         $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
     }
 
+
+    /**
+     * @tags JP, SearchIndex
+     */
+    public function test_SearchIndex_JP() {
+        $_sLocale            = 'JP';
+        $_aKeywords          = array( 'iPhone' );
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $_oPAAPILocale       = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+        $_aSearchIndex       = $_oPAAPILocale->getSearchIndex();
+        unset(
+            $_aSearchIndex[ 'All' ],
+            $_aSearchIndex[ 'Toys' ]
+        );
+        foreach( $_aSearchIndex as $_sIndex => $_sLabel ) {
+            $this->_outputDetails( 'Index', $_sIndex );
+            $_aResponse          = $_oAdWidgetAPISearch->get(
+                $_aKeywords,
+                array(
+                    'multipageCount' => 1,
+                    'SearchIndex'    => $_sIndex,
+                )
+            );
+            $this->_outputDetails( 'response', $_aResponse );
+            $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
+        }
+    }
+
+    /**
+     * @tags US, SearchIndex
+     */
+    public function test_SearchIndex_US() {
+        $_sLocale            = 'US';
+        $_aKeywords          = array( 'iPhone' );
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $_oPAAPILocale       = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+        $_aSearchIndex       = $_oPAAPILocale->getSearchIndex();
+        unset(
+            $_aSearchIndex[ 'All' ]
+        );
+        foreach( $_aSearchIndex as $_sIndex => $_sLabel ) {
+            $this->_outputDetails( 'Index', $_sIndex );
+            $_aResponse          = $_oAdWidgetAPISearch->get(
+                $_aKeywords,
+                array(
+                    'multipageCount' => 1,
+                    'SearchIndex'    => $_sIndex,
+                )
+            );
+            $this->_outputDetails( 'response', $_aResponse );
+            $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
+        }
+    }
+
+
+    /**
+     * @tags IT, SearchIndex
+     */
+    public function test_SearchIndex_IT() {
+        $_sLocale            = 'IT';
+        $_aKeywords          = array( 'iPhone' );
+        $_oAdWidgetAPISearch = new AmazonAutoLinks_AdWidgetAPI_Search( $_sLocale );
+        $_oPAAPILocale       = new AmazonAutoLinks_PAAPI50_Locale( $_sLocale );
+        $_aSearchIndex       = $_oPAAPILocale->getSearchIndex();
+        unset(
+            $_aSearchIndex[ 'All' ]
+        );
+        foreach( $_aSearchIndex as $_sIndex => $_sLabel ) {
+            $this->_outputDetails( 'Index', $_sIndex );
+            $_aResponse          = $_oAdWidgetAPISearch->get(
+                $_aKeywords,
+                array(
+                    'multipageCount' => 1,
+                    'SearchIndex'    => $_sIndex,
+                )
+            );
+            $this->_outputDetails( 'response', $_aResponse );
+            $this->_assertFalse( empty( $_aResponse[ 'results' ] ) );
+        }
+    }
+
 }

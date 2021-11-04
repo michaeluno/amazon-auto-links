@@ -38,7 +38,9 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
             $_sLocale,
             ( integer ) $this->oUnitOutput->oUnitOption->get( 'cache_duration' )
         );
-        $_aResponse    = $_oAdWidgetAPI->get( $_aKeywords );
+        $_aResponse     = $_oAdWidgetAPI->get( $_aKeywords, array(
+            'SearchIndex' => $this->oUnitOutput->oUnitOption->get( array( 'SearchIndex' ), null ),
+        ) );
         return $this->getElementAsArray( $_aResponse, array( 'results' ) );
 
     }
