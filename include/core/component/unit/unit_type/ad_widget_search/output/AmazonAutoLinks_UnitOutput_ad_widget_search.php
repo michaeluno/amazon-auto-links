@@ -24,6 +24,7 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
 
     /**
      * @return string
+     * @since  5.0.0
      */
     public function get() {
         if ( $this->_shouldUsePAAPI() ) {
@@ -36,11 +37,16 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
          * @since  5.0.0
          */
         private function ___getOutputByPAAPI() {
-            $_sUnitType = $this->___getPAAPIUnitTypeFromArguments( $this->oUnitOption->aRawOptions );
+            $_sUnitType   = $this->___getPAAPIUnitTypeFromArguments( $this->oUnitOption->aRawOptions );
             $_sClass      = "AmazonAutoLinks_UnitOutput_" . $_sUnitType;
             $_oUnitOutput = new $_sClass( $this->oUnitOption->aRawOptions );
             return $_oUnitOutput->get();
         }
+            /**
+             * @param  array  $aRawArguments
+             * @return string
+             * @sicne  5.0.0
+             */
             private function ___getPAAPIUnitTypeFromArguments( array $aRawArguments ) {
                 if ( isset( $aRawArguments[ 'asin' ] ) ) {
                     return 'item_lookup';
