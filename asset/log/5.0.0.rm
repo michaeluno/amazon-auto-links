@@ -1,4 +1,4 @@
-- Added the new unit type, `Product Search`, which performs product searches without PA-API. 
+- Added the new unit type, `Product Search`, which performs product searches without PA-API for some locales. 
 - Added the `%discount%` item format tag which displays product discount percentage.
 - Added the sub-arguments of the shortcode `[amazon_auto_links]` for the `search` argument, `MinReviewsRating`, `Merchant`, `MinPrice`, `MaxPrice`, `BrowseNodeId`, `SortBy`, `CurrencyOfPreference`, and `LanguagesOfPreference` (Requires PA-API).
 - Added the `Hook Priority` option in the `Link Converter` section of the `Tools` page.

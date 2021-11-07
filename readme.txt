@@ -357,7 +357,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that caused a fatal error in PHP 7.2.x or below due to a trailing comma in a function call, which started in v5.0.0.
 
 = 5.0.0 - 10/29/2021 =
-- Added the new unit type, `Product Search`, which performs product searches without PA-API.
+- Added the new unit type, `Product Search`, which performs product searches without PA-API for some locales.
 - Added the `%discount%` item format tag which displays product discount percentage.
 - Added the sub-arguments of the shortcode `[amazon_auto_links]` for the `search` argument, `MinReviewsRating`, `Merchant`, `MinPrice`, `MaxPrice`, `BrowseNodeId`, `SortBy`, `CurrencyOfPreference`, and `LanguagesOfPreference` (Requires PA-API).
 - Added the `Hook Priority` option in the `Link Converter` section of the `Tools` page.
