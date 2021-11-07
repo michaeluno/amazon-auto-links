@@ -139,7 +139,7 @@ abstract class AmazonAutoLinks_SimpleWizardAdminPage extends AmazonAutoLinks_Adm
         echo "<div class='aal-accordion'>"
             . "<h4>Last Inputs</h4>"
             . $this->oUtil->getTableOfArray(
-                get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ),
+                $this->oUtil->getAsArray( get_user_meta( get_current_user_id(), AmazonAutoLinks_Registry::$aUserMeta[ 'last_inputs' ], true ) ),
                 $_aTableArguments
             )
             . "</div>";

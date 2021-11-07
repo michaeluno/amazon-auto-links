@@ -32,7 +32,7 @@ class AmazonAutoLinks_UnitPostMetaBox_DebugInfo extends AmazonAutoLinks_UnitPost
         return $sOutput 
             . "<h4>Unit Options</h4>"
             . $this->oUtil->getTableOfArray(
-                AmazonAutoLinks_WPUtility::getPostMeta( $GLOBALS[ 'post' ]->ID, '', $_oOption->get( 'unit_default' ) ),
+                $this->oUtil->getAsArray( AmazonAutoLinks_WPUtility::getPostMeta( $GLOBALS[ 'post' ]->ID, '', $_oOption->get( 'unit_default' ) ) ),
                 array(
                     'table' => array(
                         'class' => 'widefat striped fixed product-details',
