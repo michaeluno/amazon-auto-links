@@ -205,6 +205,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
             $_oLocale           = new AmazonAutoLinks_Locale( $sLocale );
             $_sCategoryListURL  = $this->getElement( $aPost, array( 'selected_url' ), '' );
+            $_sCategoryListURL  = wp_normalize_path( $_sCategoryListURL );
             $_sCategoryListURL  = $_sCategoryListURL
                 ? $_sCategoryListURL
                 : $_oLocale->getBestSellersURL();
@@ -220,9 +221,9 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
 
             // Otherwise, it is a plugin generated link URL.
 
-            // Decrypt the href value
+            /// Decrypt the href value
             $_oEncrypt = new AmazonAutoLinks_Encrypt;
-            return $_oEncrypt->decode( $_sHref );
+            return  $_oEncrypt->decode( $_sHref );
 
         }
 

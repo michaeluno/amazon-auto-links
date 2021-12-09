@@ -89,10 +89,11 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
 
             }
                 /**
-                 * @remark
-                 * @since       3.5.7
-                 * @since       4.2.0   No longer encrypts the URL.
-                 * @return      string
+                 * @param  string $sHref
+                 * @param  string $sDomain e.g. amazon.com
+                 * @since  3.5.7
+                 * @since  4.2.0   No longer encrypts the URL.
+                 * @return string
                  */
                 private function ___getHrefSanitized( $sHref, $sDomain ) {
 
@@ -100,17 +101,15 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
                     // e.g. http://amazon.com/ref=zg_bs_123/324-5242552 -> http://amazon.com
                     // e.g. amazon.com/ref=zg_bs_123/324-5242552 -> amazon.com
                     $_aURL  = explode( "ref=", $sHref, 2 );
-                    $sHref  = $_aURL[ 0 ];
+                    $sHref  = $_aURL[ 0 ];  // e.g. /Best-Sellers-Travel/zgbs/mobile-apps/9408785011/
 
                     // There are cases that the href value is relative and absolute URL.
                     // relative: gp/top-sellers/digital-text/,
                     // absolute: https://amazon.com/gp/top-sellers/digital-text/
                     $_aURLParts = parse_url( $sHref );
-                    $sHref      = isset( $_aURLParts[ 'scheme' ] ) && $_aURLParts[ 'scheme' ]
+                    return isset( $_aURLParts[ 'scheme' ] ) && $_aURLParts[ 'scheme' ]
                         ? $sHref
-                        : $sDomain . '/' . $sHref;   // add the domain
-
-                    return $sHref;
+                        : $sDomain . '/' . ltrim( $sHref, '/' );   // add the domain
 
                 }
 
