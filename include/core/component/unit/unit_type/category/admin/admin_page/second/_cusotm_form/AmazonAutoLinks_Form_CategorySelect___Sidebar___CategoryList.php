@@ -49,23 +49,21 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList extends Amazo
         /**
          * Generates the HTML fragment output of the node tree list.
          *
-         * @since           2.0.0
-         * @since           3.5.7       Moved from `AmazonAutoLinks_Form_CategorySelect`.
-         * @since           3.9.1       No longer uses PHP Simple DOM Parser
-         * @return          string
+         * @since  2.0.0
+         * @since  3.5.7  Moved from `AmazonAutoLinks_Form_CategorySelect`.
+         * @since  3.9.1  No longer uses PHP Simple DOM Parser
+         * @return string
          */
         protected function _getCategoryList( DOMDocument $oDoc, $sPageURL ) {
-
             $_oNodeBrowseRoot = $oDoc->getElementById( $this->_sSelector );
             if ( null === $_oNodeBrowseRoot ) {
                 return '';
             }
             $this->_setHrefs( $_oNodeBrowseRoot, $sPageURL );
             $_sHTMLFragment = $oDoc->saveXml( $_oNodeBrowseRoot, LIBXML_NOEMPTYTAG );
-            $_sHTMLFragment = preg_replace( '/(?<=>)\s+|\s+(?=<)/', '', $_sHTMLFragment  );
-            return $_sHTMLFragment; // the sidebar html code
-
+            return preg_replace( '/(?<=>)\s+|\s+(?=<)/', '', $_sHTMLFragment  ); // the sidebar html code
         }
+
             /**
              * Converts href urls io a url with query which contains the original url.
              *
