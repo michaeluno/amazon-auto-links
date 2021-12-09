@@ -91,8 +91,8 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
         }
 
         // DOM Helper creates a `DOMDocument` instance
-        $_oDOMHelper  = new AmazonAutoLinks_DOM;
-        $_oDoc        = $_oDOMHelper->loadDOMFromHTMLElement( $_sHTML, '', false );
+        $_oDOMHelper    = new AmazonAutoLinks_DOM;
+        $_oDoc          = $_oDOMHelper->loadDOMFromHTML( $_sHTML, '', false );
 
         $_sCategoryList = $this->___getCategoryList( $_oDoc, $_sCategoryListURL );
         if ( ! $_sCategoryList ) {
@@ -102,17 +102,24 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
             );
         }
 
+        $_sBreadcrumb       = $this->___getBreadcrumb( $_oDoc, $_sLocale );
+
         // Additional options for previews
         $_aUnitOptions = array(
             'template_path' => AmazonAutoLinks_Registry::$sDirPath . '/template/preview/template.php',
             'is_preview'    => true, // this disables the global ASIN blacklist.
             'show_errors'   => 1,
+            'categories'    => array(
+                'unit_preview' => array(
+                    'breadcrumb'   => $_sBreadcrumb,
+                    'page_url'     => $_sCategoryListURL,
+                ),
+            ),
         ) + $_aUnitOptions;
         $_oCategoryPreview  = new AmazonAutoLinks_UnitOutput_category( $_aUnitOptions );
-        $_sUnitOutput       = $_oCategoryPreview->get( array( $_sCategoryListURL ) );
+        $_sUnitOutput       = $_oCategoryPreview->get();
 
         // The JavaScript script receives this response array
-        $_sBreadcrumb       = $this->___getBreadcrumb( $_oDoc, $_sLocale );
         return array(
             'breadcrumb'        => $_sBreadcrumb,
             'category_list'     => $_sCategoryList . "<!-- Current Page: {$_sCategoryListURL} -->",
