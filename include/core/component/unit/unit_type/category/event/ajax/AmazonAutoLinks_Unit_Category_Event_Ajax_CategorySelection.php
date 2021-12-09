@@ -165,42 +165,45 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
          * @return string
          */
         private function ___getBreadcrumb( $oDoc, $sLocale ) {
-            $_oBreadcrumb = new AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbC( $oDoc, $sLocale );
-            $_sBreadcrumb = $_oBreadcrumb->get();
-            if ( $_sBreadcrumb ) {
-                return $_sBreadcrumb;
+
+            $_aClassNames = array(
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbD',
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___BreadcrumbC',
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb',
+            );
+            foreach( $_aClassNames as $_sClassName ) {
+                $_oBreadcrumb = new $_sClassName( $oDoc, $sLocale );
+                $_sBreadcrumb = $_oBreadcrumb->get();
+                if ( $_sBreadcrumb ) {
+                    return $_sBreadcrumb;
+                }
             }
-            $_oBreadcrumb = new AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb( $oDoc, $sLocale );
-            $_sBreadcrumb = $_oBreadcrumb->get();
-            return $_sBreadcrumb
-                ? $_sBreadcrumb
-                : __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+            return __( 'Failed to generate the breadcrumb.', 'amazon-auto-links' );
+
         }
         /**
-         * @param DOMDocument $oDoc
-         * @param string $sPageURL
-         *
+         * @param  DOMDocument $oDoc
+         * @param  string $sPageURL
          * @return string
-         * @remark There are two site layout types
+         * @remark There are several versions of site layouts.
          */
         private function ___getCategoryList( $oDoc, $sPageURL ) {
-
-            $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC( $oDoc, $sPageURL );
-            $_sCategoryList = $_oCategoryList->get();
-            if ( $_sCategoryList ) {
-                return $_sCategoryList;
+            $_aClassNames = array(
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListD',
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListC',
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList',
+                'AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB'
+            );
+            foreach( $_aClassNames as $_sClassName ) {
+                $_oCategoryList = new $_sClassName( $oDoc, $sPageURL );
+                $_sCategoryList = $_oCategoryList->get();
+                if ( $_sCategoryList ) {
+                    return $_sCategoryList;
+                }
             }
-
-            $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryList( $oDoc, $sPageURL );
-            $_sCategoryList = $_oCategoryList->get();
-            if ( $_sCategoryList ) {
-                return $_sCategoryList;
-            }
-
-            $_oCategoryList = new AmazonAutoLinks_Form_CategorySelect___Sidebar___CategoryListB( $oDoc, $sPageURL );
-            return $_oCategoryList->get();
-
+            return $_sCategoryList;
         }
+
         /**
          * @param array  $aPost
          * @param string $sLocale

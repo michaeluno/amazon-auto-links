@@ -1,1 +1,2 @@
-- Fixed a bug that the `Preview of This Category` section had always no products, which started in v5.0.0.  
+- Fixed an issue that category lists have not been retrieved for some locales. 
+- Fixed a bug that the `Preview of This Category` section had always no products, which started in v5.0.0.

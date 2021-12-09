@@ -236,6 +236,13 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
          * @return string|null  null on failure
          */
         private function ___getProductTitle( DOMXPath $oXPath, $oItemNode ) {
+
+            // [5.0.4+] For the design as of 2021/12/09 on amazon.com
+            $_oTitleTextNode = $oXPath->query( './/a/span/div/text()', $oItemNode )->item( 0 );
+            if ( null !== $_oTitleTextNode ) {
+                return $_oTitleTextNode->nodeValue;
+            }
+
             // The class name `p13n-sc-truncated` is given by JavaScript; for plain HTML, `p13n-sc-truncate` is used.
             $_oTitleNodes = $oXPath->query( './/div[contains(@class, "p13n-sc-truncate")]', $oItemNode );
             foreach( $_oTitleNodes as $_oTitleNode ) {
@@ -246,6 +253,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
                     : ( $_sFallback ? $_sFallback : null );
             }
             return null;
+
         }
 
 

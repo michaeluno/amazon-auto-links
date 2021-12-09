@@ -46,11 +46,16 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
         // Going to parse three types of the web page design structure (old and new, and search).
         try {
 
-            $_oItemNodes = $this->___getItemNodeListTypeCurrent( $this->_oXPath );
+            $_oItemNodes = $this->___getItemNodeListType20211209( $this->_oXPath );
             if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
                 return $_oItemNodes;
             }
-            $_oItemNodes = $this->___getItemNodeListTypeOld( $this->_oXPath );
+
+            $_oItemNodes = $this->___getItemNodeListTypeOld2( $this->_oXPath );
+            if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
+                return $_oItemNodes;
+            }
+            $_oItemNodes = $this->___getItemNodeListTypeOld1( $this->_oXPath );
             if ( ! empty( $_oItemNodes ) && $_oItemNodes->length ) {
                 return $_oItemNodes;
             }
@@ -68,12 +73,34 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
         return array();
 
     }
+
+        /**
+         * @param  $oXPath
+         * @throws Exception
+         * @return DOMNodeList|array
+         * @since  5.0.4
+         */
+        private function ___getItemNodeListType20211209( $oXPath ) {
+            $_oContainerNodes = $oXPath->query( '//div[@id="zg-right-col"]//div[contains(@id, "CardInstance") and contains(@data-card-metrics-id, "p13n-zg-list")]' );
+            if ( ! $_oContainerNodes->length ) {
+                return array();
+            }
+            $_oContainerNode  = $_oContainerNodes->item( 0 );
+            $_oItemNodes      = $oXPath->query(
+                './/*[contains(@class, "zg-grid-general-faceout")]',
+                $_oContainerNode
+            );
+            if ( ! $_oItemNodes->length ) {
+                throw new Exception( 'the container found (current design) but the items not found' );
+            }
+            return $_oItemNodes;
+        }
         /**
          * @throws  Exception
          * @return  DOMNodeList|array
          * @since   3.8.13
          */
-        private function ___getItemNodeListTypeCurrent( $oXPath ) {
+        private function ___getItemNodeListTypeOld2( $oXPath ) {
             $_oContainerNodes = $oXPath->query( '//ol[@id="zg-ordered-list"]' );
             if ( ! $_oContainerNodes->length ) {
                 return array();
@@ -93,7 +120,7 @@ abstract class AmazonAutoLinks_ScraperDOM_BestsellerProducts_Base extends Amazon
          * @return  DOMNodeList|array
          * @since   3.8.13
          */
-        private function ___getItemNodeListTypeOld( $oXPath ) {
+        private function ___getItemNodeListTypeOld1( $oXPath ) {
             $_oContainerNodes = $oXPath->query( '//div[@id="zg_left_col1"]' );
             if ( ! $_oContainerNodes->length ) {
                 return array();
