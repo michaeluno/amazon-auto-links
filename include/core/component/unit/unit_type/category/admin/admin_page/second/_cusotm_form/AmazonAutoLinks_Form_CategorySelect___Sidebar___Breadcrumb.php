@@ -20,7 +20,7 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
     /**
      * A part of class selector for the selected list element.
-     * @var string
+     * @var   string
      * @since 4.6.13
      */
     protected $_sClassSelectorSelected = 'zg_selected';
@@ -71,11 +71,8 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
             // Climb up the node
             $_nodeClimb     = $_nodeSelected->parentNode;
             Do {
-                if ( 'ul' === $_nodeClimb->tagName ) {
-                    $_nodeUpperUl  = $_nodeClimb->parentNode;
-                    $_nodeLi       = $_nodeUpperUl->getElementsByTagName( 'li' )->item( 0 );
-                    $_nodeA        = $_nodeLi->getElementsByTagName( 'a' )->item( 0 );
-                    $aBreadcrumb[] = trim( $_nodeA->nodeValue );
+                if ( $this->_isParentNode( $_nodeClimb ) ) {
+                    $aBreadcrumb[] = $this->_getListItemText( $_nodeClimb );
                 }
                 $_nodeClimb = $_nodeClimb->parentNode;
             } While (
@@ -91,12 +88,34 @@ class AmazonAutoLinks_Form_CategorySelect___Sidebar___Breadcrumb {
 
         }
 
-        /**
-         * @param  $oNode
-         * @since  4.6.13
-         * @return boolean
-         */
-        protected function _isNotListRoot( $oNode ) {
-            return 'zg_browseRoot' !== $oNode->getAttribute( 'id' );
-        }
+    /**
+     * @param  $oNode
+     * @return boolean
+     * @since  5.0.4
+     */
+    protected function _isParentNode( $oNode ) {
+        return 'ul' === $oNode->tagName;
+    }
+
+    /**
+     * @param  $oNode
+     * @return string
+     * @since  5.0.4
+     */
+    protected function _getListItemText( $oNode ) {
+        $_nodeUpperUl  = $oNode->parentNode;
+        $_nodeLi       = $_nodeUpperUl->getElementsByTagName( 'li' )->item( 0 );
+        $_nodeA        = $_nodeLi->getElementsByTagName( 'a' )->item( 0 );
+        return trim( $_nodeA->nodeValue );
+    }
+
+    /**
+     * @param  $oNode
+     * @since  4.6.13
+     * @return boolean
+     */
+    protected function _isNotListRoot( $oNode ) {
+        return 'zg_browseRoot' !== $oNode->getAttribute( 'id' );
+    }
+
 }
