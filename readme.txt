@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.8.1
 Requires MySQL:     5.0.3
-Stable tag:         5.0.3
+Stable tag:         5.0.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.0.4 - 12/10/2021 =
+- Fixed an issue that category lists have not been retrieved for some locales.
+- Fixed a bug that the `Preview of This Category` section had always no products, which started in v5.0.0.
 
 = 5.0.3 - 11/08/2021 =
 - Fixed a bug that caused a PHP fatal error in the unit creation pages in some cases.
