@@ -161,8 +161,9 @@ class AmazonAutoLinks_Unit_PAAPI5_Request_SearchItems extends AmazonAutoLinks_Un
     protected function _getAPIParameters( $sOperation='SearchItems', $iItemPage=0 ) {
 
         $_sTitle                 = $this->getEachDelimitedElementTrimmed( $this->oUnitOption->get( 'Title' ), ',', false );
+        $_sKeywords              = $this->getEachDelimitedElementTrimmed( $this->oUnitOption->get( 'Keywords' ), ',', false );
         $_aPayload               = array(
-            'Keywords'              => $this->getEachDelimitedElementTrimmed( $this->oUnitOption->get( 'Keywords' ), ',', false ),
+            'Keywords'              => strlen( $_sKeywords ) ? $_sKeywords : null,
             'Title'                 => $_sTitle ? $_sTitle : null,
             'Operation'             => $this->_getOperation( $sOperation ),
             'SearchIndex'           => $this->oUnitOption->get( 'SearchIndex' ),
