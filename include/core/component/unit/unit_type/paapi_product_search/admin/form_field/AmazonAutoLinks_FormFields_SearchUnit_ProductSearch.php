@@ -36,7 +36,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'type'          => 'text',
                 'title'         => __( 'Search Keyword', 'amazon-auto-links' ),
                 'attributes'    => array(
-                    'size'          => version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) 
+                    'size'          => version_compare( $GLOBALS[ 'wp_version' ], '3.8', '>=' )
                         ? 40 
                         : 60,
                 ),

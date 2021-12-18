@@ -49,7 +49,7 @@ class AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main extends AmazonAutoLinks
                 'type'          => 'text',
                 'title'         => __( 'Search Keyword', 'amazon-auto-links' ),
                 'attributes'    => array(
-                    'size'          => version_compare( $GLOBALS['wp_version'], '3.8', '>=' )
+                    'size'          => version_compare( $GLOBALS[ 'wp_version' ], '3.8', '>=' )
                         ? 40
                         : 60,
                 ),
