@@ -24,8 +24,8 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
      * @remark Accessed from the base class constructor to construct a default option array.
      */
     static public $aStructure_Default = array(
-        'Keywords'              => '',
-        'sort'                  => 'raw', // title, title_descending
+        'Keywords' => '',
+        'sort'     => 'raw', // title, title_descending
     );
 
     /**
@@ -65,7 +65,14 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
             $aUnitOptions,
             AmazonAutoLinks_UnitOption_search::$aShortcodeArgumentKeys + AmazonAutoLinks_UnitOption_item_lookup::$aShortcodeArgumentKeys
         );
-        return parent::_getUnitOptionsFormatted( $_aUnitOptions, $aDefaults, $aRawOptions );
+
+        $_aUnitOptions = parent::_getUnitOptionsFormatted( $_aUnitOptions, $aDefaults, $aRawOptions );
+
+        // [5.0.6] The shortcode key sanitizing method converts the key name to have the capital S and drop the lower case key element.
+        // But missing the lower-case element causes the meta-box value not to be saved. So keep it.
+        $_aUnitOptions[ 'sort' ] = $_aUnitOptions[ 'Sort' ];
+
+        return $_aUnitOptions;
 
     }
 
