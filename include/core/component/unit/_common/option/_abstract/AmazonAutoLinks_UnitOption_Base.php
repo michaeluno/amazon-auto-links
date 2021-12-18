@@ -397,11 +397,12 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         protected function _getShortcodeArgumentKeysSanitized( array $aUnitOptions, array $aShortcodeArgumentKeys ) {
             // Shortcode parameter keys are converted to lower cases.
             foreach( $aUnitOptions as $_sKey => $_mValue ) {
-                if ( isset( $aShortcodeArgumentKeys[ $_sKey ] ) ) {
-                    $_sCorrectKey = $aShortcodeArgumentKeys[ $_sKey ];
-                    $aUnitOptions[ $_sCorrectKey ] = $_mValue;
-                    unset( $aUnitOptions[ $_sKey ] );
+                if ( ! isset( $aShortcodeArgumentKeys[ $_sKey ] ) ) {
+                    continue;
                 }
+                $_sCorrectKey = $aShortcodeArgumentKeys[ $_sKey ];
+                $aUnitOptions[ $_sCorrectKey ] = $_mValue;
+                unset( $aUnitOptions[ $_sKey ] );
             }
             return $aUnitOptions;
         }
