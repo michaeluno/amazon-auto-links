@@ -23,7 +23,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsSorter extends Amazo
      * @return array
      * @since  5.0.0
      */
-    protected function _getItemsFromSource( $aProducts ) {
+    protected function _getItemsFormatted( $aProducts ) {
         if ( $this->oUnitOutput->oUnitOption->get( 'shuffle' ) ) {
             shuffle( $aProducts ); // [4.7.0+] For the Product Search units, as they don't have the 'random' sort order, this option makes it possible to shuffule products.
         }

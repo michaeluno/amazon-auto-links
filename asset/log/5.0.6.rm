@@ -1,0 +1,1 @@
+- Fixed a bug with the PA-API Product Search unit type that the `Shuffle` unit option did not take effect, which started in v5.0.0.
