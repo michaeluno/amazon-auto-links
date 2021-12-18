@@ -33,7 +33,7 @@ abstract class AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFetcher
     public $oUnitOutput;
 
     public function __construct() {
-        if ( $this->hasBeenCalled( get_class( $this ) . __METHOD__ ) ) {
+        if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ ) ) {
             return;
         }
         if ( ! $this->sUnitType ) {
