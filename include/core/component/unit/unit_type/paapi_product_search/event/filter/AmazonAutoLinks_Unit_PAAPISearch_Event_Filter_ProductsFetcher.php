@@ -97,7 +97,14 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
 
             // Normal operation
             if ( ! $this->oUnitOutput->oUnitOption->get( 'search_per_keyword' ) ) {
-                return $this->oUnitOutput->getAPIResponse( ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' ) );
+                $_iCount = ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' );
+                // [5.0.6] Adding 10 more items when the shuffle option is enabled to avoid displaying always the same items.
+                // @todo Maybe, at a later point, add an advanced option for the internal fetching count for the user to decide how many items to fetch
+                // so that this won't be necessary.
+                $_iCount = $this->oUnitOutput->oUnitOption->get( 'shuffle' )
+                    ? $_iCount + 10
+                    : $_iCount;
+                return $this->oUnitOutput->getAPIResponse( $_iCount );
             }
 
             // For contextual search, perform search by each keyword
