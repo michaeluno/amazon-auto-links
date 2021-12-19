@@ -125,7 +125,10 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFetcher extends Amaz
                  * because shuffling the retrieved truncated results will just display the same products with different order.
                  * @since   3.5.1
                  */
-                if ( 'random' === $this->oUnitOutput->oUnitOption->get( '_sort' ) ) {
+                if (
+                    'random' === $this->oUnitOutput->oUnitOption->get( '_sort' )
+                    || $this->oUnitOutput->oUnitOption->get( 'shuffle' )
+                ) {
                     shuffle( $_aTerms );
                 }
 
