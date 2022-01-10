@@ -1,0 +1,1 @@
+- Fixed a bug with the contextual widget that the setting fields did not appear for newly added widgets, which started since 5.0.0. 
