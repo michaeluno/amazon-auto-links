@@ -147,7 +147,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         $_aClasses = array(
             'AmazonAutoLinks_FormFields_Widget_ContextualProduct',
             'AmazonAutoLinks_FormFields_Unit_Common',
-           // 'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
+            // 'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
             'AmazonAutoLinks_FormFields_Button_Selector',
             'AmazonAutoLinks_FormFields_Unit_Cache',
@@ -230,16 +230,21 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     ? $_oFields->get( '', 'contextual_widget' )
                     : $_oFields->get();
                 foreach( $_aFields as $_aField ) {
+                    // [5.0.7] Drop the required attribute as browsers do not show the pop-up notice for widget forms.
+                    // And without the required field to be filled, the Save action does not start and the user just will think it is broken.
+                    if ( isset( $_aField[ 'attributes' ][ 'required' ] ) ) {
+                        unset( $_aField[ 'attributes' ][ 'required' ] );
+                    }
                     $this->_addField( $_aField, $_sClassName );
                 }
             }            
         }
 
             /**
-             * @param array $aField A fieldset definition array.
+             * @param array  $aField     A fieldset definition array.
              * @param string $sClassName The name of the class that defines the fieldset.
-             * @since       3.1.2
-             * @since       4.3.0       Added the `$sClassName` parameter.
+             * @since 3.1.2
+             * @since 4.3.0  Added the `$sClassName` parameter.
              */
             private function _addField( $aField, $sClassName ) {
 
