@@ -517,7 +517,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         // Construct a template array.
         $_aTemplates = array();
         $_iIndex     = 0;
-        foreach( $this->_getTemplateDirs() as $_sDirPath ) {
+        foreach( $this->___getTemplateDirs() as $_sDirPath ) {
 
             $_aTemplate = $this->getTemplateArrayByDirPath( $_sDirPath );
             if ( empty( $_aTemplate ) ) {
@@ -595,12 +595,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
          * @since  3
          * @return array Contains list of template directory paths.
          */
-        private function _getTemplateDirs() {
+        private function ___getTemplateDirs() {
 
             if ( ! empty( self::$_aTemplateDirs ) ) {
                 return self::$_aTemplateDirs;
             }
-            foreach( $this->_getTemplateContainerDirs() as $__sTemplateDirPath ) {
+            foreach( $this->___getTemplateContainerDirs() as $__sTemplateDirPath ) {
 
                 if ( ! @file_exists( $__sTemplateDirPath  ) ) {
                     continue;
@@ -626,7 +626,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
              * @since  3
              * @return array
              */
-            private function _getTemplateContainerDirs() {
+            private function ___getTemplateContainerDirs() {
                 $_aTemplateContainerDirs    = array();
                 $_aTemplateContainerDirs[]  = AmazonAutoLinks_Registry::$sDirPath . DIRECTORY_SEPARATOR . 'template';
                 $_aTemplateContainerDirs[]  = get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'amazon-auto-links';
