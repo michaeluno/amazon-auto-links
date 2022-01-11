@@ -189,9 +189,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             return self::$_aActiveTemplates;
         }
                 
-        $_aActiveTemplates = $this->___getActiveTemplatesExtracted(
-            $this->get()    // saved all templates
-        );
+        $_aActiveTemplates = $this->___getActiveTemplatesExtracted( $this->get() );    // get() gives saved all templates
 
         // Cache
         self::$_aActiveTemplates = $_aActiveTemplates;
@@ -207,7 +205,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
         private function ___getActiveTemplatesExtracted( array $aTemplates ) {
 
             $_aActiveTemplates = array();
-
+            $_aTemplateDirs    = $this->___getTemplateDirs();
             foreach( $aTemplates as $_sID => $_aTemplate ) {
 
                 // Skip inactive templates.
@@ -224,6 +222,11 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 
                 // 4.1.0 there are cases that while the template is still active, a custom template directory is deleted manually via FTP or whatever
                 if ( ! isset( $_aTemplate[ 'dir_path' ] ) || ! file_exists( $_aTemplate[ 'dir_path' ] ) ) {
+                    continue;
+                }
+
+                // 5.0.7 Skip if it is not in the template directory list. This prevents loading custom templates by deactivated plugins.
+                if ( ! in_array( $_aTemplate[ 'dir_path' ], $_aTemplateDirs, true ) ) {
                     continue;
                 }
 
@@ -290,12 +293,12 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 'dir_path',
                 $this->getAbsolutePathFromRelative( $aTemplate[ 'relative_dir_path' ], self::$sBasePath )
             );
-            $aTemplate[ 'dir_path' ]          = realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) );
+            $aTemplate[ 'dir_path' ]          = wp_normalize_path( realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) ) );
 
             // Check required files. Consider the possibility that the user may directly delete the template files/folders.
             $_aRequiredFiles = array(
-                $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css',
-                $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'template.php',
+                $aTemplate[ 'dir_path' ] . '/' . 'style.css',
+                $aTemplate[ 'dir_path' ] . '/' . 'template.php',
             );
             if ( ! $this->doFilesExist( $_aRequiredFiles ) ) {
                 return false;
@@ -305,7 +308,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             $aTemplate[ 'template_path' ]      = $this->getElement(
                 $aTemplate,
                 'template_path',
-                $aTemplate[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'template.php'
+                $aTemplate[ 'dir_path' ] . '/' . 'template.php'
             );
             $aTemplate[ 'template_path' ]      = wp_normalize_path( $aTemplate[ 'template_path' ] );
 
@@ -372,7 +375,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
 
                 $aTemplate[ 'strTemplatePath' ] = $aTemplate[ 'strTemplatePath' ]    // check if it's not missing
                     ? $aTemplate[ 'strTemplatePath' ]
-                    : dirname( $aTemplate[ 'strCSSPath' ] ) . DIRECTORY_SEPARATOR . 'template.php';
+                    : dirname( $aTemplate[ 'strCSSPath' ] ) . '/' . 'template.php';
 
                 return $aTemplate;
 
@@ -433,9 +436,9 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
      */
     public function getDefaultTemplatePathByUnitType( $sUnitType ) {
         $_sPath = AmazonAutoLinks_Registry::$sDirPath
-            . DIRECTORY_SEPARATOR . 'template'
-            . DIRECTORY_SEPARATOR . $this->getDefaultTemplateDirectoryBaseName( $sUnitType )
-            . DIRECTORY_SEPARATOR . 'template.php';
+            . '/' . 'template'
+            . '/' . $this->getDefaultTemplateDirectoryBaseName( $sUnitType )
+            . '/' . 'template.php';
         return wp_normalize_path( $_sPath );
     }
 
@@ -564,7 +567,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             if ( $bExtraInfo ) {
                 $_aData[ 'thumbnail_path' ] = $this->_getScreenshotPath( $_aData[ 'dir_path' ] );
                 return $this->___getTemplateArrayFormatted(
-                    $this->getTemplateData( $_aData[ 'dir_path' ] . DIRECTORY_SEPARATOR . 'style.css' )
+                    $this->getTemplateData( $_aData[ 'dir_path' ] . '/' . 'style.css' )
                     + $_aData
                 );
             }
@@ -576,8 +579,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
              */
             protected function _getScreenshotPath( $sDirPath ) {
                 foreach( array( 'jpg', 'jpeg', 'png', 'gif' ) as $sExt ) {
-                    if ( file_exists( $sDirPath . DIRECTORY_SEPARATOR . 'screenshot.' . $sExt ) ) {
-                        return $sDirPath . DIRECTORY_SEPARATOR . 'screenshot.' . $sExt;
+                    if ( file_exists( $sDirPath . '/' . 'screenshot.' . $sExt ) ) {
+                        return $sDirPath . '/' . 'screenshot.' . $sExt;
                     }
                 }
                 return null;
@@ -601,23 +604,20 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 return self::$_aTemplateDirs;
             }
             foreach( $this->___getTemplateContainerDirs() as $__sTemplateDirPath ) {
-
                 if ( ! @file_exists( $__sTemplateDirPath  ) ) {
                     continue;
                 }
-                $__aFoundDirs = glob( $__sTemplateDirPath . DIRECTORY_SEPARATOR . "*", GLOB_ONLYDIR );
-                if ( is_array( $__aFoundDirs ) ) {    // glob can return false
-                    self::$_aTemplateDirs = array_merge(
-                        $__aFoundDirs,
-                        self::$_aTemplateDirs
-                    );
+                $__abFoundDirs = glob( $__sTemplateDirPath . DIRECTORY_SEPARATOR . "*", GLOB_ONLYDIR );
+                if ( ! is_array( $__abFoundDirs ) ) {    // glob can return false
+                    continue;
                 }
-
+                self::$_aTemplateDirs = array_merge( $__abFoundDirs, self::$_aTemplateDirs );
             }
             self::$_aTemplateDirs = array_unique( self::$_aTemplateDirs );
             self::$_aTemplateDirs = ( array ) apply_filters( 'aal_filter_template_directories', self::$_aTemplateDirs );
             self::$_aTemplateDirs = array_filter( self::$_aTemplateDirs );    // drops elements of empty values.
             self::$_aTemplateDirs = array_unique( self::$_aTemplateDirs );
+            self::$_aTemplateDirs = array_map( 'wp_normalize_path', self::$_aTemplateDirs );    // 5.0.7 This is needed to filter out custom templates of deactivated plugin
             return self::$_aTemplateDirs;
 
         }
@@ -628,8 +628,8 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
              */
             private function ___getTemplateContainerDirs() {
                 $_aTemplateContainerDirs    = array();
-                $_aTemplateContainerDirs[]  = AmazonAutoLinks_Registry::$sDirPath . DIRECTORY_SEPARATOR . 'template';
-                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'amazon-auto-links';
+                $_aTemplateContainerDirs[]  = AmazonAutoLinks_Registry::$sDirPath . '/' . 'template';
+                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . '/' . 'amazon-auto-links';
                 $_aTemplateContainerDirs    = apply_filters( 'aal_filter_template_container_directories', $_aTemplateContainerDirs );
                 $_aTemplateContainerDirs    = array_filter( $_aTemplateContainerDirs );    // drop elements of empty values.
                 return array_unique( $_aTemplateContainerDirs );
