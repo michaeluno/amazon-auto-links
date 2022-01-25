@@ -2,6 +2,9 @@
 # /tool
 /v2
 
+# Dependencies
+node_modules/
+
 # Editor Files
 .idea
 _memos
