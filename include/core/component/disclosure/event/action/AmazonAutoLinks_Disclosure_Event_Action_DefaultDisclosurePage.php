@@ -79,10 +79,9 @@ class AmazonAutoLinks_Disclosure_Event_Action_DefaultDisclosurePage extends Amaz
         if ( 'plugin' !== $this->getElement( $aHookExtra, 'type' ) ) {
             return;
         }
-        $_sThePluginName = plugin_basename( AmazonAutoLinks_Registry::$sFilePath );
         $_bDetected      = false;
         foreach( $this->getElementAsArray( $aHookExtra, array( 'plugins' ) ) as $_sPlugin ) {
-            if( $_sPlugin === $_sThePluginName ) {
+            if( $_sPlugin === AmazonAutoLinks_Registry::$sBaseName ) {
                 $_bDetected = true;
             }
         }

@@ -72,21 +72,28 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     // const FieldID_LicenseKey        = 'pro_license_key';
 
     /**
-     * @since       3.2.0
+     * @var   string
+     * @since 3.2.0
      */ 
     const STORE_URI_PRO             = 'https://store.michaeluno.jp/amazon-auto-links-pro';
         
     /**
-     * 
-     * @since       2.0.6
+     * @var   string
+     * @since 2.0.6
      */
     static public $sFilePath;  
     
     /**
-     * 
+     * @var   string
      * @since 2.0.6
      */    
     static public $sDirPath;
+
+    /**
+     * @var   string    The plugin base name retrieved with `plugin_basename()`.
+     * @since 5.1.0
+     */
+    static public $sBaseName;
 
     /**
      * @since       3
@@ -284,7 +291,8 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static function setUp( $sPluginFilePath ) {
 
         self::$sFilePath = $sPluginFilePath; 
-        self::$sDirPath  = dirname( self::$sFilePath );  
+        self::$sDirPath  = dirname( self::$sFilePath );
+        self::$sBaseName = plugin_basename( $sPluginFilePath );
         
     }
 

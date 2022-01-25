@@ -56,9 +56,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     
     /**
      * Installs plugin custom database tables.
-     * @callback        function    register_activation_hook()
-     * @callback        action      plugins_loaded
-     * @callback        action      activate_{plugin_basename($file)}
+     * @callback register_activation_hook()
+     * @callback add_action() plugins_loaded
+     * @callback add_action() activate_{plugin_basename($file)}
      */
     public function replyToInstallCustomTables() {
 
@@ -81,8 +81,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      */
     public function setConstants() {
         
-        // for backward compatibility.
-        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", plugin_basename( $this->sFilePath ) ); 
+        // For backward compatibility.
+        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", AmazonAutoLinks_Registry::$sBaseName );
         
     }    
     
@@ -107,9 +107,9 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     
     /**
      * The plugin activation callback method.
-     * @callback    function    register_activation_hook()      action hook: activate_{plugin_basename($file)}
-     * @remark      This callback is called in wp-admin/plugins.php and after this callback, the script just exits with `exit()`.
-     * Also custom post types are not registered by the time this is called.
+     * @callback register_activation_hook()      action hook: activate_{plugin_basename($file)}
+     * @remark   This callback is called in wp-admin/plugins.php and after this callback, the script just exits with `exit()`.
+     * Also, custom post types are not registered by the time this is called.
      */    
     public function replyToPluginActivation() {
 
@@ -157,14 +157,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     /**
      * Load localization files.
      * 
-     * @callback    action      init
+     * @callback add_action() init
      */
     public function setLocalization() {
                 
         load_plugin_textdomain( 
             'amazon-auto-links',
             false, 
-            dirname( plugin_basename( $this->sFilePath ) ) . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
+            dirname( AmazonAutoLinks_Registry::$sBaseName ) . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
         );
 
     }        
@@ -172,8 +172,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     /**
      * Loads the plugin specific components. 
      * 
-     * @remark        All the necessary classes should have been already loaded.
-     * @callback      plugins_loaded        Unless it is set in the constructor's third parameter.
+     * @remark   All the necessary classes should have been already loaded.
+     * @callback add_action() plugins_loaded        Unless it is set in the constructor's third parameter.
      */
     public function setUp() {
         
@@ -194,8 +194,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     }
    
         /**
-         * @since       3.3.0
-         * @return      void
+         * @since 3.3.0
          */
         private function ___loadComponents() {
 
