@@ -36,7 +36,7 @@ $_oGenerator = new \PHPClassMapGenerator\PHPClassMapGenerator(
         'search'            => [
             'allowed_extensions'     => [ 'css' ],
             'exclude_dir_paths'      => [],
-            'exclude_dir_names'      => [ '_del', '_bak', 'apf', 'library' ],
+            'exclude_dir_names'      => [ '_del', '_bak', 'apf', 'library', 'src' ],
             'exclude_file_names'     => [ '.min.', ],
             'is_recursive'           => true,
             'ignore_note_file_names' => [ 'ignore-css-min.txt' ],
@@ -49,7 +49,7 @@ $_aFileInfoStruct = [
     'name'     => '@name',
     'version'  => '@version',
     'Name'     => 'Template Name:',
-    'Version'     => 'Version:',
+    'Version'  => 'Version:',
 ];
 $_iCount = 1;
 foreach( $_oGenerator->get() as $_sFilePath ) {
