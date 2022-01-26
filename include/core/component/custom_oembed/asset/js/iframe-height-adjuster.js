@@ -2,10 +2,10 @@
  * Overwrite/bypass <iframe></iframe> height limit imposed by Wordpress
  * Original idea from bypass-iframe-height-limit plugin by Justin Carboneau
  * Adapted from original /wp-includes/js/wp-embed.js
- * @see https://medium.com/@wlarch/overwrite-and-bypass-wordpress-iframe-height-dimension-limit-using-javascript-9d5035c89e37
- * @name iframe Height Adjuster
- * @version 1.2.0
- * @remark Modified by Michael Uno
+ * @see     https://medium.com/@wlarch/overwrite-and-bypass-wordpress-iframe-height-dimension-limit-using-javascript-9d5035c89e37
+ * @name    iframe Height Adjuster
+ * @version 1.2.1
+ * @remark  Modified by Michael Uno
  */
 (function(window, document) {
     'use strict';
@@ -81,13 +81,12 @@
 
     function adjustFrameHeight( event ) {
         var _attrID  = event.detail.id;
-        var _iHeight = event.detail.height;
+        var _iHeight = parseInt( event.detail.height );
         event.detail.source.setAttribute( 'id', _attrID );
         event.detail.source.setAttribute( 'height', _iHeight.toString() );
 
-        var _secret = event.detail.secret;
-
-        var _css = '#' + _attrID + ' { height: ' + _iHeight + 'px; } ';
+        var _secret = event.detail.data.secret;
+        var _css    = '#' + _attrID + ' { height: ' + _iHeight + 'px; min-height ' + _iHeight + 'px; } ';
 
         // Now add stylesheet
         // wp-embed.js clears any added inline styles, that's why we need to create a style element
@@ -100,7 +99,7 @@
             style = document.createElement( 'style' );
 
         style.type = 'text/css';
-        style.id = 'aalEmbed-style-' + _secret + '-' + event.detail.number;
+        style.id   = 'aalEmbed-style-' + _secret + '-' + event.detail.number;
         style.appendChild( document.createTextNode( _css ) );
         head.appendChild( style );
 
