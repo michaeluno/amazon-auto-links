@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v5.0.4b01 by miunosoft (Michael Uno) 
+    Auto Amazon Links v5.0.7 by miunosoft (Michael Uno) 
     Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -78,6 +78,11 @@ return array(
     "AmazonAutoLinks_Geotargeting_EventQuery_SearchRedirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/event/query/AmazonAutoLinks_Geotargeting_EventQuery_SearchRedirect.php", 
     "AmazonAutoLinks_Geotargeting_Resource" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/resource/AmazonAutoLinks_Geotargeting_Resource.php", 
     "AmazonAutoLinks_Geotargeting_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/geotargeting/utility/AmazonAutoLinks_Geotargeting_Utility.php", 
+    "AmazonAutoLinks_GutenbergBlock_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/gutenberg/AmazonAutoLinks_GutenbergBlock_Loader.php", 
+    "AmazonAutoLinks_GutenbergBlock_UnitBlock" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/gutenberg/unit_block/AmazonAutoLinks_GutenbergBlock_UnitBlock.php", 
+    "AmazonAutoLinks_GutenbergBlock_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/gutenberg/_common/AmazonAutoLinks_GutenbergBlock_Base.php", 
+    "AmazonAutoLinks_GutenbergBlock_Dynamic_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/gutenberg/_common/AmazonAutoLinks_GutenbergBlock_Dynamic_Base.php", 
+    "AmazonAutoLinks_GutenbergBlock_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/gutenberg/_common/AmazonAutoLinks_GutenbergBlock_Utility.php", 
     "AmazonAutoLinks_Loader_LinkConverter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/AmazonAutoLinks_Loader_LinkConverter.php", 
     "AmazonAutoLinks_LinkConverter_Setting_Section_Convert" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php", 
     "AmazonAutoLinks_LinkConverter_Setting_Tab" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php", 
@@ -583,6 +588,7 @@ return array(
     "AmazonAutoLinks_Event___Query_Feed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Feed.php", 
     "AmazonAutoLinks_Event___Query_Redirect" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Event___Query_Redirect.php", 
     "AmazonAutoLinks_Main_Event_Query_HTTPRequestCache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Main_Event_Query_HTTPRequestCache.php", 
+    "AmazonAutoLinks_Main_Event_UnitPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/AmazonAutoLinks_Main_Event_UnitPreview.php", 
     "AmazonAutoLinks_Event___Feed_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_Base.php", 
     "AmazonAutoLinks_Event___Feed_JSON" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_JSON.php", 
     "AmazonAutoLinks_Event___Feed_RSS2" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/event/query/feed/AmazonAutoLinks_Event___Feed_RSS2.php", 

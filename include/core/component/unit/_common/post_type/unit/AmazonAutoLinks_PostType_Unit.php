@@ -42,7 +42,7 @@ class AmazonAutoLinks_PostType_Unit extends AmazonAutoLinks_PostType_Unit_PostCo
                 'show_ui'               => true,
                 'show_in_nav_menus'     => true,
                 'show_in_menu'          => true,
-
+                'show_in_rest'          => true,    // 5.1.0 to show title list in the Gutenberg editor
                 'menu_position'         => 110,
                 'supports'              => array( 'title' ),
                 'taxonomies'            => array( '' ),
