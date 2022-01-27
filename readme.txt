@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.8.3
+Tested up to:       5.9.0
 Requires MySQL:     5.0.3
 Stable tag:         5.0.7
 License:            GPLv2 or later
@@ -347,6 +347,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.0.8 - 01/27/2021 =
+- Fixed a bug that oEmbed output height has not been automatically adjusted in the front-end in recent WordPress versions.
+- Fixed an issue that embedded frame heights in Gutenberg were not automatically adjusted properly.
+- Tweaked the `List` template regarding bottom margin of last products.
 
 = 5.0.7 - 01/12/2021 =
 - Fixed a bug with the contextual widget that the setting fields did not appear for newly added widgets, which started since 5.0.0.
