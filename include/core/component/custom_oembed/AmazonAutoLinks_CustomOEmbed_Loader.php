@@ -45,6 +45,7 @@ class AmazonAutoLinks_CustomOEmbed_Loader {
 
         // Add resources for iframe
         add_action( 'wp_enqueue_scripts', array( $this, 'replyToLoadResources' ) );
+        add_action( 'enqueue_block_editor_assets', array( $this, 'replyToLoadResources' ) );
 
         // For debugging
         // add_filter( 'the_content', array( $this, 'testMeta' ) );
