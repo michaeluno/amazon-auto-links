@@ -3,7 +3,7 @@
  *
  * @see wp-includes/js/wp-embed-template.js
  * @name WP Embed Template Lite
- * @version 1.1.0
+ * @version 1.2.0
  */
 (function ( window, document ) {
 	'use strict';
@@ -15,11 +15,31 @@
 		resizing;
 
 	function sendEmbedMessage( message, value ) {
-		window.parent.postMessage( {
-			message: message,
-			value: value,
-			secret: secret
-		}, '*' );
+
+		var _window = window;
+		// Climb up the iframe tree and send the message if the parent frame is either of the plugin's embedded iframe or the Gutenberg's block iframe.
+		// As in the Gutenberg editor, embedded contents are displayed in nested iframes.
+		while ( isWithinIframe( _window ) ) {
+			var _className = _window.frameElement.getAttribute( 'class' );
+			if ( ! hasSubstring( _className, [ 'aal-embed', 'components-sandbox' ] ) ) {
+				continue;
+			}
+			_window.parent.postMessage( {
+				message: message,
+				value: value,
+				secret: secret
+			}, '*' );
+			_window = _window.parent;
+		}
+
+	}
+
+	function isWithinIframe( _window ) {
+		return _window.frameElement && 'IFRAME' === _window.frameElement.nodeName;
+	}
+
+	function hasSubstring( string, substrings ) {
+		return substrings.some( function(v) { return string.indexOf(v) >= 0; } );
 	}
 
 	function onLoad() {
