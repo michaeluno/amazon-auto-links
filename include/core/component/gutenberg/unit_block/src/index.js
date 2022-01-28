@@ -2,6 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import {
   PanelBody,
+  Placeholder
 } from '@wordpress/components';
 import {
   InspectorControls,
@@ -16,6 +17,8 @@ import { iconAmazon, } from './icons';
 /**
  * Internal dependencies
  */
+import json from '../block.json';
+const { name } = json;
 import PostControl from "./control/PostControl";
 import { getPosts } from "./function/getPosts";
 import { getMaxNumberOfItemsControl } from "./function/getMaxNumberOfItemsControl";
@@ -30,14 +33,21 @@ const getUnitSelectControl = ( attributes, setAttributes ) => {
       posts={ units }
       onChange={(value) => {
           setAttributes( {
-            id: value,
+            id: parseInt( value ) || 0,
           } );
         }
       }
     />
   );
 }
-registerBlockType( 'auto-amazon-links/unit', {
+const emptyResponsePlaceholder = () => (
+  <Placeholder>
+    <p>
+      { __( 'Select a unit.', 'amazon-auto-links' ) }
+    </p>
+  </Placeholder>
+);
+registerBlockType( name, {
   icon: iconAmazon,
   attributes: {
     id: {
@@ -49,7 +59,7 @@ registerBlockType( 'auto-amazon-links/unit', {
     }
   },
 	edit( { name, attributes, setAttributes } ) {
-		const blockProps = useBlockProps();
+    const blockProps = useBlockProps();
 		return (
 			<div { ...blockProps }>
         <InspectorControls>
@@ -62,6 +72,7 @@ registerBlockType( 'auto-amazon-links/unit', {
         <ServerSideRender
           block={ name }
           attributes={ attributes }
+          EmptyResponsePlaceholder={ emptyResponsePlaceholder }
         />
       </div>
 		);

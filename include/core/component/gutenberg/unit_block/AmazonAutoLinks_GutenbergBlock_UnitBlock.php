@@ -54,9 +54,6 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
             'icon'         => 'amazon',
             'textdomain'   => "amazon-auto-links",
             'example'      => array(),
-	        // 'editorScript' => 'file:./build/index.js',
-	        // 'editorStyle'  => 'file:./build/index.css',
-	        // 'style'        => 'file:./build/style-index.css',
 	        'attributes'   => array(
                 'id'    => array(
                     'type'    => 'integer',
@@ -66,6 +63,10 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
                     'type'    => 'integer',
                 ),
             ),
+            // Defined in block.json
+	        // 'editorScript' => 'file:./build/index.js',
+	        // 'editorStyle'  => 'file:./build/index.css',
+	        // 'style'        => 'file:./build/style-index.css',
         );
     }
 
@@ -103,7 +104,7 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
         private function ___getOutputBackend( $aBlockAttributes, $sContent, $aProperties ) {
             $_iUnitID = ( integer ) $this->getElement( $aBlockAttributes, array( 'id' ) );
             if ( ! $_iUnitID ) {
-                return "<p>" . __( 'Select a unit.', 'amazon-auto-links' ) . "</p>";
+                return '';  // returning an empty output will trigger a placeholder component in Gutenberg.
             }
             return "<div class='aal-gutenberg-unit-preview'>"
                     . $this->___getIframeUnitPreview( $aBlockAttributes )
@@ -111,6 +112,7 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
         }
             private function ___getIframeUnitPreview( array $aArguments ) {
                 $_sNonce      = wp_create_nonce( 'aal_unit_preview' );
+                $_sSpinnerURL = esc_url( admin_url( 'images/spinner.gif' ) );
                 $_aAttributes = array(
                     'class'       => 'aal-unit-preview-frame',
                     'src'         => $this->___getUnitPreviewURL( $aArguments ),
@@ -120,6 +122,7 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
                     'height'      => '400',
                     'scrolling'   => 'yes',
                     'data-secret' => $_sNonce,
+                    // 'style'       => 'background-image: url("' . $_sSpinnerURL . '"); background-repeat: no-repeat; background-position: center;',
                 );
                 $_aContainerAttributes = array(
                     'class'       => 'aal-unit-preview-container',
@@ -139,4 +142,5 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
                     $_aQuery = array_filter( $_aQuery, array( $this, 'isNotNull' ) );
                     return add_query_arg( $_aQuery, get_site_url() );
                 }
+
 }

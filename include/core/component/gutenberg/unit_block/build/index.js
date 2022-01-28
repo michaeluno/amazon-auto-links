@@ -201,9 +201,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icons */ "./src/icons.js");
-/* harmony import */ var _control_PostControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./control/PostControl */ "./src/control/PostControl.js");
-/* harmony import */ var _function_getPosts__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./function/getPosts */ "./src/function/getPosts.js");
-/* harmony import */ var _function_getMaxNumberOfItemsControl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./function/getMaxNumberOfItemsControl */ "./src/function/getMaxNumberOfItemsControl.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../block.json */ "./block.json");
+/* harmony import */ var _control_PostControl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./control/PostControl */ "./src/control/PostControl.js");
+/* harmony import */ var _function_getPosts__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./function/getPosts */ "./src/function/getPosts.js");
+/* harmony import */ var _function_getMaxNumberOfItemsControl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./function/getMaxNumberOfItemsControl */ "./src/function/getMaxNumberOfItemsControl.js");
 
 
 
@@ -218,6 +219,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+const {
+  name
+} = _block_json__WEBPACK_IMPORTED_MODULE_9__;
+
 
 
 
@@ -225,20 +230,22 @@ const getUnitSelectControl = (attributes, setAttributes) => {
   const {
     id
   } = attributes;
-  const units = (0,_function_getPosts__WEBPACK_IMPORTED_MODULE_10__.getPosts)('amazon_auto_links');
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_control_PostControl__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  const units = (0,_function_getPosts__WEBPACK_IMPORTED_MODULE_11__.getPosts)('amazon_auto_links');
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_control_PostControl__WEBPACK_IMPORTED_MODULE_10__["default"], {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Unit Name', 'amazon-auto-links'),
     value: id,
     posts: units,
     onChange: value => {
       setAttributes({
-        id: value
+        id: parseInt(value) || 0
       });
     }
   });
 };
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('auto-amazon-links/unit', {
+const emptyResponsePlaceholder = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a unit.', 'amazon-auto-links')));
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(name, {
   icon: _icons__WEBPACK_IMPORTED_MODULE_8__.iconAmazon,
   attributes: {
     id: {
@@ -259,9 +266,10 @@ const getUnitSelectControl = (attributes, setAttributes) => {
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)();
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
       title: 'Combo Box Setting'
-    }, getUnitSelectControl(attributes, setAttributes), (0,_function_getMaxNumberOfItemsControl__WEBPACK_IMPORTED_MODULE_11__.getMaxNumberOfItemsControl)(attributes, setAttributes))), getUnitSelectControl(attributes, setAttributes), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5___default()), {
+    }, getUnitSelectControl(attributes, setAttributes), (0,_function_getMaxNumberOfItemsControl__WEBPACK_IMPORTED_MODULE_12__.getMaxNumberOfItemsControl)(attributes, setAttributes))), getUnitSelectControl(attributes, setAttributes), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_5___default()), {
       block: name,
-      attributes: attributes
+      attributes: attributes,
+      EmptyResponsePlaceholder: emptyResponsePlaceholder
     }));
   }
 
@@ -360,6 +368,16 @@ module.exports = window["wp"]["i18n"];
 /***/ (function(module) {
 
 module.exports = window["wp"]["serverSideRender"];
+
+/***/ }),
+
+/***/ "./block.json":
+/*!********************!*\
+  !*** ./block.json ***!
+  \********************/
+/***/ (function(module) {
+
+module.exports = JSON.parse('{"$schema":"https://json.schemastore.org/block.json","apiVersion":2,"title":"Auto Amazon Links: Unit","name":"auto-amazon-links/unit","editorScript":"file:./build/index.js","editorStyle":"file:./build/index.css","style":"file:./build/style-index.css"}');
 
 /***/ })
 
