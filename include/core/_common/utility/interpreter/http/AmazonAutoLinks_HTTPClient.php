@@ -319,12 +319,10 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                     }
 
                     /**
-                     * @since      3.7.6b01  Deprecated as this seemed to cause unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
-                     * @since      3.12.0    Re-added
+                     * @since 3.7.6b01  Deprecated as this seemed to cause unexpected errors when the cache is not properly set for some reasons like exceeding max_allowed_packet or max_execution_time
+                     * @since 3.12.0    Re-added
                      */
-                    $_bsUncompressed = function_exists( 'gzuncompress' )
-                        ? @gzuncompress( $this->getElement( $aCache, array( 'data', 'body' ), '' ) )    // returns string|false
-                        : false;
+                    $_bsUncompressed = $this->___getCacheUncompressed( $aCache );
                     if ( $_bsUncompressed ) {
                         $aCache[ 'data' ][ 'body' ] = $_bsUncompressed;
                     }
@@ -343,6 +341,29 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                     : $aCache[ 'data' ];
 
             }
+                /**
+                 * @param  array $aCache
+                 * @return false|string
+                 * @since  5.1.0
+                 */
+                private function ___getCacheUncompressed( $aCache ) {
+                    if ( ! function_exists( 'gzuncompress' ) ) {
+                        return false;
+                    }
+                    $_bsCompressed = @gzuncompress( $this->getElement( $aCache, array( 'data', 'body' ), '' ) );    // returns string|false
+                    /**
+                     * Remove the last PHP error caused by above gzuncompress().
+                     * If gzuncompress() fails, it leaves a last error and affects the rendered outputs in the back-end adding the 'php-error' class attribute to the sidebar element.
+                     * @see wp-admin/admin-header.php
+                     */
+                    if ( false === $_bsCompressed ) {
+                        if ( function_exists( 'error_clear_last' ) ) {
+                            error_clear_last();
+                        }
+                    }
+                    return $_bsCompressed;
+                }
+
             /**
              * Retrieves a cache from the database table.
              * @param  string  $sCacheName
