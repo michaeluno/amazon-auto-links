@@ -4,7 +4,7 @@
  * Adapted from original /wp-includes/js/wp-embed.js
  * @see     https://medium.com/@wlarch/overwrite-and-bypass-wordpress-iframe-height-dimension-limit-using-javascript-9d5035c89e37
  * @name    iframe Height Adjuster
- * @version 1.3.0
+ * @version 1.3.1
  * @remark  Modified by Michael Uno
  */
 (function ( window, document ) {
@@ -107,7 +107,7 @@
 
     // Now add stylesheet
     // wp-embed.js clears any added inline styles, that's why we need to create a style element
-    var _styleElem = document.getElementById( 'aalEmbed-style-' + _secret );
+    var _styleElem = document.getElementById( 'aal-embed-style-' + _secret + '-' + event.detail.number );
     if ( _styleElem ) {
       _styleElem.innerHTML = _css;
       return;
@@ -116,7 +116,7 @@
       style = document.createElement( 'style' );
 
     style.type = 'text/css';
-    style.id = 'aalEmbed-style-' + _secret + '-' + event.detail.number;
+    style.id = 'aal-embed-style-' + _secret + '-' + event.detail.number;
     style.appendChild( document.createTextNode( _css ) );
     head.appendChild( style );
 
