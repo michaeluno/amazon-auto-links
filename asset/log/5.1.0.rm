@@ -1,1 +1,2 @@
 - Added the Gutenberg block, "Auto Amazon Links: Unit", that displays selected unit outputs.
+- Fixed a bug that SVG definition elements affecting the content height.

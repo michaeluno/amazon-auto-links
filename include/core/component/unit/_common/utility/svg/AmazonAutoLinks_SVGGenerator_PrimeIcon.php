@@ -39,7 +39,7 @@ class AmazonAutoLinks_SVGGenerator_PrimeIcon extends AmazonAutoLinks_SVGGenerato
      */
     protected function _getDefinition( $bVisible=false ) {
         $_sTitle   = $this->sTitle ? "<title>" . esc_html( $this->sTitle ) . "</title>" : '';
-        $_sStyle   = $bVisible ? '' : " style='position: absolute; width: 0; height: 0; overflow: hidden;'";
+        $_sStyle   = $bVisible ? '' : " style='width: 0; height: 0; overflow: hidden; visibility: hidden; position: absolute; left: -9999px;'";
         return "<svg{$_sStyle} height='20px' viewBox='0 0 64 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet'>"    // xMinYMin meet to align left
                 . $_sTitle
                 . "<g id='svg-prime-icon' transform='translate(-1.4046423,-0.11313718)'>"

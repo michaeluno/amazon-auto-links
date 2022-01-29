@@ -70,7 +70,7 @@ class AmazonAutoLinks_SVGGenerator_RatingStar extends AmazonAutoLinks_SVGGenerat
      * @since  4.6.1
      */
     protected function _getDefinition( $bVisible=false ) {
-        $_sStyle = $bVisible ? '' : " style='position: absolute; width: 0; height: 0; overflow: hidden;'";
+        $_sStyle = $bVisible ? '' : " style='width: 0; height: 0; overflow: hidden; visibility: hidden; position: absolute; left: -9999px;'";
         return "<svg {$_sStyle} xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width=0 height=0 viewBox='0 0 160 32'>"
                 . implode( '', self::$aDefinitions )
                 . "<image src='" . esc_url( $this->sSRCFallbackImage ) . "' />" // fallback for browsers not supporting SVG

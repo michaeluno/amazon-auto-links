@@ -29,7 +29,23 @@ class AmazonAutoLinks_Unit_Event_Filter_SVGOutputEscape extends AmazonAutoLinks_
      */
     public function replyToEscapeSVG( $sSVGOutput ) {
         $_oOption = AmazonAutoLinks_Option::getInstance();
-        return wp_kses( $sSVGOutput, $_oOption->getAllowedHTMLTags() );
+        add_filter( 'safe_style_css', array( $this, 'replyToAddSafeCSSProperties' ) );
+        $_sSVG = wp_kses( $sSVGOutput, $_oOption->getAllowedHTMLTags() );
+        remove_filter( 'safe_style_css', array( $this, 'replyToAddSafeCSSProperties' ) );
+        return $_sSVG;
+    }
+
+    /**
+     * @param array $aCSSAttributes
+     * @since 5.1.0
+     */
+    public function replyToAddSafeCSSProperties( $aCSSAttributes ) {
+        $_aSafe         = array(
+            'width',    'height',
+            'overflow', 'visibility',
+            'position', 'left', 'top', 'right', 'bottom',
+        );
+        return array_merge( $aCSSAttributes, $_aSafe );
     }
 
 }
