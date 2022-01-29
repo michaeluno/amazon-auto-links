@@ -37,7 +37,7 @@ $_oGenerator = new \PHPClassMapGenerator\PHPClassMapGenerator(
             'allowed_extensions'     => [ 'js' ],
             'exclude_dir_paths'      => [],
             'exclude_dir_names'      => [ '_del', '_bak', 'apf', 'library', 'src' ],
-            'exclude_file_names'     => [ '.min.', ],
+            'exclude_file_names'     => [ '.min.', 'postcss.config', 'webpack.config' ],
             'is_recursive'           => true,
             'ignore_note_file_names' => [ 'ignore-js-min.txt' ],
         ],
