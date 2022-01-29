@@ -52,11 +52,7 @@ class AmazonAutoLinks_CustomOEmbed_Loader {
 
     }
         public function replyToLoadResources() {
-            $_sPath = defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? self::$sDirPath . '/asset/js/iframe-height-adjuster.js'
-                : self::$sDirPath . '/asset/js/iframe-height-adjuster.min.js';
-            $_sURL  = AmazonAutoLinks_Utility::getSRCFromPath( $_sPath );
-            wp_enqueue_script( 'aal-embed-height-adjuster', $_sURL, array(), false, true );
+            wp_enqueue_script( 'aal-iframe-height-adjuster' );  // this is registered in the main component
         }
 
     private function ___loadAdminPages() {

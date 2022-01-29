@@ -28,21 +28,28 @@ class AmazonAutoLinks_Main_ResourceLoader extends AmazonAutoLinks_PluginUtility 
      */
     public function replyToRegisterResources() {
 
-        $_sFileURL = AmazonAutoLinks_Registry::getPluginURL(
-                dirname( dirname( __FILE__ ) ) . (
-                    $this->isDebugMode()
-                        ? '/asset/js/pointer-tooltip.js'
-                        : '/asset/js/pointer-tooltip.min.js'
-                ),
-            true
-        );
+        $_sAssetDirectoryPath = dirname( dirname( __FILE__ ) );
+        $_sMin = $this->isDebugMode() ? '' : '.min';
         wp_register_script(
             'aal-pointer-tooltip',
-            $_sFileURL,
+            AmazonAutoLinks_Registry::getPluginURL( $_sAssetDirectoryPath . "/asset/js/pointer-tooltip{$_sMin}.js", true ),
             array( 'jquery', 'wp-pointer', ),
             AmazonAutoLinks_Registry::VERSION,
             true
         );
-
+        wp_register_script(
+            'aal-iframe-height-adjuster',
+            AmazonAutoLinks_Registry::getPluginURL( $_sAssetDirectoryPath . "/asset/js/iframe-height-adjuster{$_sMin}.js", true ),
+            array(),
+            AmazonAutoLinks_Registry::VERSION,
+            true
+        );
+        wp_register_script(
+            'aal-content-height-notifier',
+            AmazonAutoLinks_Registry::getPluginURL( $_sAssetDirectoryPath . "/asset/js/wp-embed-template-lite{$_sMin}.js", true ),
+            array(),
+            AmazonAutoLinks_Registry::VERSION,
+            true
+        );
     }
 }

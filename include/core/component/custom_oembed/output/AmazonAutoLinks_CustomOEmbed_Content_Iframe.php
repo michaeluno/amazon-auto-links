@@ -39,6 +39,7 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
     public function replyToLoadFrame() {
 
         $this->___printHeader();
+        wp_enqueue_script( 'aal-content-height-notifier' ); // this is registered in the main component
         $this->___printContent();
         $this->___printFooter();
         exit();
@@ -106,9 +107,8 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
         /**
          * Prints scripts or data before the closing body tag in the embed template.
          */
-        // removes wp-embed-templates.js as it causes clicks not working
+        // Remove wp-embed-templates.js as it causes clicks not working
         remove_action( 'embed_footer', 'print_embed_scripts' );
-        add_action( 'embed_footer', array( $this, 'printEmbedScripts' ) );
         do_action( 'embed_footer' );
         ?>
         </body>
@@ -133,26 +133,6 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
         );
         AmazonAutoLinks( $_aArguments );
 
-    }
-
-
-    /**
-     * Prints the JavaScript in the embed iframe footer.
-     *
-     * @see print_embed_scripts()
-     */
-    public function printEmbedScripts() {
-        ?>
-        <script<?php echo ( current_theme_supports( 'html5', 'script' ) ? '' : ' type="text/javascript"' ); ?>>
-        <?php
-            $_sComponentDirPath = AmazonAutoLinks_CustomOEmbed_Loader::$sDirPath;
-            $_sFilePath         = defined( 'WP_DEBUG' ) && WP_DEBUG
-                ? $_sComponentDirPath . '/asset/js/wp-embed-template-lite.js'
-                : $_sComponentDirPath . '/asset/js/wp-embed-template-lite.min.js';
-            readfile( $_sFilePath );
-        ?>
-        </script>
-        <?php
     }
 
 }
