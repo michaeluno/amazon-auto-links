@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.2.20 =
+- Remove button margin for last products only in unit previews.
+
 = 1.2.19 =
 - Removed bottom margin for last products.
 
