@@ -28,9 +28,6 @@
 	clear:both;
 	margin-bottom: 1.4em;
 }
-#aal-unit-preview .amazon-products-container-list .amazon-product-container:last-child {
-    margin-bottom: 0;
-}
 .amazon-products-container-list .amazon-product-title {
     margin: 0.1em 0 1em;
 }
@@ -449,4 +446,12 @@
     font-size: small;
     width: 100%;
   }
+}
+
+/* Unit Preview */
+#aal-unit-preview .amazon-products-container-list {
+    overflow-y: hidden;
+}
+#aal-unit-preview .amazon-products-container-list .amazon-product-container:last-child {
+    margin-bottom: 0;
 }

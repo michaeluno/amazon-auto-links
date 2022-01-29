@@ -1,6 +1,7 @@
 == Change log ==
 
 = 1.2.20 =
+- Disabled vertical scrollbars in unit previews.
 - Remove button margin for last products only in unit previews.
 
 = 1.2.19 =
