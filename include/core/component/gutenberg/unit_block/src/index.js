@@ -1,3 +1,6 @@
+/**
+ * WordPres dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import {
@@ -10,13 +13,12 @@ import {
 } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
 
-import './editor.scss';
-import './style.scss';
-import { iconAmazon, } from './icons';
-
 /**
  * Internal dependencies
  */
+import './editor.scss';
+import './style.scss';
+import { iconAmazon, } from './icons';
 import json from '../block.json';
 const { name } = json;
 import PostControl from "./control/PostControl";

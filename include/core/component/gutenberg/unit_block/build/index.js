@@ -207,8 +207,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _function_getMaxNumberOfItemsControl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./function/getMaxNumberOfItemsControl */ "./src/function/getMaxNumberOfItemsControl.js");
 
 
-
-
+/**
+ * WordPres dependencies
+ */
 
 
 
@@ -217,6 +218,9 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
+
+
 
 
 const {
