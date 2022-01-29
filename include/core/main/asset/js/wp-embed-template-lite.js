@@ -3,7 +3,7 @@
  *
  * @see wp-includes/js/wp-embed-template.js
  * @name WP Embed Template Lite
- * @version 1.2.0
+ * @version 1.2.1
  */
 (function ( window, document ) {
 	'use strict';
@@ -19,9 +19,9 @@
 		var _window = window;
 		// Climb up the iframe tree and send the message if the parent frame is either of the plugin's embedded iframe or the Gutenberg's block iframe.
 		// As in the Gutenberg editor, embedded contents are displayed in nested iframes.
-		while ( isWithinIframe( _window ) ) {
+		while ( isWindow( _window ) && isWithinIframe( _window ) ) {
 			var _className = _window.frameElement.getAttribute( 'class' );
-			if ( ! hasSubstring( _className, [ 'aal-embed', 'components-sandbox' ] ) ) {
+			if ( ! hasSubstring( _className, [ 'aal-embed', 'components-sandbox', 'aal-unit-preview-frame' ] ) ) {
 				continue;
 			}
 			_window.parent.postMessage( {
@@ -32,6 +32,10 @@
 			_window = _window.parent;
 		}
 
+	}
+
+	function isWindow( thing ) {
+		return thing && thing.document && thing.location && thing.alert && thing.setInterval;
 	}
 
 	function isWithinIframe( _window ) {

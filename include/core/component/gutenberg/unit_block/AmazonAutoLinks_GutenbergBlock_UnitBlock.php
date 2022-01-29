@@ -115,7 +115,7 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
                 $_sSpinnerURL = esc_url( admin_url( 'images/spinner.gif' ) );
                 $_aAttributes = array(
                     'class'       => 'aal-unit-preview-frame',
-                    'src'         => $this->___getUnitPreviewURL( $aArguments ),
+                    'src'         => $this->___getUnitPreviewURL( $aArguments ) . "#secret={$_sNonce}", // the secret hash is needed for the height adjuster script
                     'frameborder' => '0',
                     'border'      => '0',
                     // 'width'       => '200',

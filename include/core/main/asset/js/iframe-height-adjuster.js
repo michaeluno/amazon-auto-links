@@ -4,7 +4,7 @@
  * Adapted from original /wp-includes/js/wp-embed.js
  * @see     https://medium.com/@wlarch/overwrite-and-bypass-wordpress-iframe-height-dimension-limit-using-javascript-9d5035c89e37
  * @name    iframe Height Adjuster
- * @version 1.3.1
+ * @version 1.3.2
  * @remark  Modified by Michael Uno
  */
 (function ( window, document ) {
@@ -28,7 +28,6 @@
 
   window.aalEmbed.OverwriteIframeHeightLimit = function ( e ) {
     var data = e.data;
-
     // Check if all needed data is provided
     if ( ! (data.secret || data.message || data.value) ) {
       return;
@@ -45,7 +44,7 @@
 
     // Select all iframes
     // var iframes = document.querySelectorAll( 'iframe[data-secret="' + data.secret + '"]' ),
-    var iframes = document.querySelectorAll( 'iframe.components-sandbox, iframe[data-secret="' + data.secret + '"]' ),
+    var iframes = document.querySelectorAll( 'iframe.components-sandbox, iframe[data-secret="' + data.secret + '"], iframe.aal-unit-preview-frame' ),
       i, _thisFrame;
 
     for ( i = 0; i < iframes.length; i++ ) {
@@ -92,13 +91,14 @@
     var _iHeight = event.detail.height;
     event.detail.source.setAttribute( 'id', _attrID );
     event.detail.source.setAttribute( 'height', _iHeight.toString() );
-    event.detail.source.setAttribute( 'scrolling', 'no' );
+    event.detail.source.classList.add( 'aal-adjusted-height' );
 
     var _secret = event.detail.data.secret;
-    var _css = '#' + _attrID + ' { height: ' + _iHeight + 'px; min-height: ' + _iHeight + 'px; overflow: hidden;  } ';
+    var _css = '#' + _attrID + ' { height: ' + _iHeight + 'px; overflow: hidden;  } ';
 
-    // For Gutenberg blocks, set the height to the inner iframe
+    // For Gutenberg oEmbed blocks, set the height to the inner iframe
     if ( event.detail.isSandbox ) {
+      event.detail.source.setAttribute( 'scrolling', 'no' );
       var _innerIframe = event.detail.source.contentWindow.document.querySelector( 'iframe[data-secret="' + _secret + '"]' );
       if ( null !== _innerIframe ) {
         _innerIframe.setAttribute( 'height', _iHeight.toString() );
