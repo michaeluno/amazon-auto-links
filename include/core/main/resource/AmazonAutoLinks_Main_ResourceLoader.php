@@ -20,8 +20,7 @@ class AmazonAutoLinks_Main_ResourceLoader extends AmazonAutoLinks_PluginUtility 
      * Sets up properties and hooks.
      */
     public function __construct() {
-        add_action( 'wp_loaded', array( $this, 'replyToRegisterResources' ) );
-        add_action( 'embed_head', array( $this, 'replyToRegisterResources' ) );
+        add_action( 'init', array( $this, 'replyToRegisterResources' ) );
     }
 
     /**
