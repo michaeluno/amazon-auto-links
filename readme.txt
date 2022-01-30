@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.0
 Requires MySQL:     5.0.3
-Stable tag:         5.0.8
+Stable tag:         5.1.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.1.0 - 01/30/2021 =
+- Added the Gutenberg block, "Auto Amazon Links: Unit", that displays selected unit outputs.
+- Fixed a bug that SVG definition elements affecting the content height.
 
 = 5.0.8 - 01/27/2021 =
 - Fixed a bug that oEmbed output height has not been automatically adjusted in the front-end in recent WordPress versions.
