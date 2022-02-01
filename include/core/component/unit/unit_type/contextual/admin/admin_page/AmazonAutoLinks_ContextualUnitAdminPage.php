@@ -30,5 +30,13 @@ final class AmazonAutoLinks_ContextualUnitAdminPage extends AmazonAutoLinks_Unit
     protected function _addPages() {
         new AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit( $this );
     }
-        
+
+    /**
+     * @since  5.1.1
+     */
+    public function load() {
+        AmazonAutoLinks_Unit_Admin_Utility::checkAssociatesIDAndPAAPIKeys( $this );
+    }
+
+
 }

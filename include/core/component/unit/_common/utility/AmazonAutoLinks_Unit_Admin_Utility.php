@@ -41,6 +41,31 @@ class AmazonAutoLinks_Unit_Admin_Utility extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
+     * Redirect the user to the Associates screen when no locale default is set up
+     * or if the main locale does not support ad-widget and PA-API keys are not set.
+     *
+     * @param $oFactory
+     * @since 5.1.0
+     */
+    static public function checkAssociatesIDAndPAAPIKeys( $oFactory ) {
+
+        $_oOption          = AmazonAutoLinks_Option::getInstance();
+        $_sMainLocal       = $_oOption->getMainLocale();
+        if ( ! $_oOption->getAssociateID( $_sMainLocal ) ) {
+            $_oLocale = new AmazonAutoLinks_Locale( $_sMainLocal );
+            $oFactory->setSettingNotice( sprintf( __( 'Set up an Associate ID first for your main locale, %1$s.', 'amazon-auto-links' ), $_oLocale->getName() ), 'updated' );
+            self::goToAPIAuthenticationPage();
+            return;
+        }
+
+        $_bAdWidgetSupport = in_array( $_sMainLocal, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true );
+        if ( ! $_bAdWidgetSupport ) {
+            self::checkAPIKeys( $oFactory );
+        }
+
+    }
+
+    /**
      * Redirect the user to the API connect page.
      *
      * @param $oFactory
@@ -53,10 +78,7 @@ class AmazonAutoLinks_Unit_Admin_Utility extends AmazonAutoLinks_PluginUtility {
             return;
         }
 
-        $oFactory->setSettingNotice(
-            __( 'You need to set API keys first.', 'amazon-auto-links' ),
-            'updated'
-        );
+        $oFactory->setSettingNotice( __( 'You need to set API keys first.', 'amazon-auto-links' ), 'updated' );
 
         // Go to the Authentication tab of the Settings page.
         self::goToAPIAuthenticationPage();

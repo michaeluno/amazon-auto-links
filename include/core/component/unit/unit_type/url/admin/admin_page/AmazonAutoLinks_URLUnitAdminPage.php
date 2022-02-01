@@ -32,4 +32,11 @@ final class AmazonAutoLinks_URLUnitAdminPage extends AmazonAutoLinks_Unit_Admin_
         new AmazonAutoLinks_URLUnitAdminPage_URLUnit( $this );
     }
 
+    /**
+     * @since  5.1.1
+     */
+    public function load() {
+        AmazonAutoLinks_Unit_Admin_Utility::checkAssociatesIDAndPAAPIKeys( $this );
+    }
+
 }
