@@ -1,6 +1,6 @@
 /**
  * @name Button Preview Updater
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
     
@@ -61,7 +61,7 @@
             });
 
           // remove the text data
-          $( '.amazon-auto-links-button' ).html( oPreviewButton.styles[ 'text' ] );
+          $( '.amazon-auto-links-button' ).text( oPreviewButton.styles[ 'text' ] );
           delete oPreviewButton.styles[ 'text' ];
 
           // combine padding if all are present
