@@ -1,1 +1,1 @@
-- Fixed an issue that button preview label input values were not sanitized.
+- Fixed an issue that button label text were not sanitized.

@@ -184,6 +184,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     public function replyToGetButton( $sOutput, $isButtonID, $sLabel='', $bVisible=true, $bOuterContainer=true ) {
 
         $_sButtonLabel = $this->___getButtonLabel( $isButtonID, $sLabel );
+        $_sButtonLabel = wp_kses( $_sButtonLabel, 'post' );
         $_sNone        = 'none';
         $bVisible      = $bVisible ? '' : "display:{$_sNone};";
 
@@ -213,11 +214,10 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     }
 
         /**
-         * @param integer|string $isButtonID
-         * @param string $sLabel
-         *
+         * @param  integer|string $isButtonID
+         * @param  string $sLabel
          * @return string
-         * @since   4.3.0
+         * @since  4.3.0
          */
         private function ___getButtonLabel( $isButtonID, $sLabel ) {
             $_sButtonLabel = $sLabel
