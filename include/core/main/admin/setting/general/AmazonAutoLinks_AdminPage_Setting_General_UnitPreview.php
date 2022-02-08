@@ -151,7 +151,7 @@ class AmazonAutoLinks_AdminPage_Setting_General_UnitPreview extends AmazonAutoLi
             
             // Force post type registration.
             $_oPostType = new AmazonAutoLinks_PostType_UnitPreview;
-            $_oPostType->_replyToRegisterCustomPreviewPostType( $_sNew );
+            $_oPostType->replyToRegisterCustomPreviewPostType( $_sNew );
             
             // Flush rewrite rules.
             flush_rewrite_rules( true );
