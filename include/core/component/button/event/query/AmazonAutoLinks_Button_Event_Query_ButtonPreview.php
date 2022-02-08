@@ -38,7 +38,8 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
         wp_enqueue_script( 'jquery' );
         $_sButtonLabel = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
         $_iButtonID    = ( integer ) $this->getHTTPQueryGET( 'button-id', 0 );
-        $_sHeader      = $this->getOutputBuffer( array( $this, 'printSiteHTMLHeader' ) );
+        do_action( 'template_redirect' );   // tells WordPress to use the theme // doesn't look well with some themes. And adds the navigation admin bar at the top.
+        $_sHeader      = $this->getOutputBuffer( 'get_header' );
         $_sHeader      = force_balance_tags( $_sHeader );
         $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
         $_oDOM         = new AmazonAutoLinks_DOM;
@@ -72,6 +73,7 @@ window.addEventListener( 'DOMContentLoaded', function( e ) {
 } );
 JAVASCRIPT
        . "</script>"
+       . "<style>html, body { margin: 0 !important; padding: 0 !important; }</style>"
     . "</head>"; ?>
     <body>
         <div id="preview-button" style="display: inline-block;"><?php //inline-block to fit the width to the child element. ?>

@@ -1,3 +1,4 @@
+- Fixed a bug that the theme button preview in unit editing pages failed in recent WordPress versions.  
 - Fixed a bug that caused a warning, "Theme without header.php is deprecated" in the background when loading a unit editing screen.
 - Fixed a bug that updating units caused a PHP fatal error in the background when a certain template is selected.
 - Fixed a bug that caused a PHP fatal error when saving a custom post type slug for the `Unit Preview` option. 
