@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v5.1.2b03 by miunosoft (Michael Uno) 
+    Auto Amazon Links v5.1.2b04 by miunosoft (Michael Uno) 
     Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -204,7 +204,6 @@ return array(
     "AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/third_party_support/phpzon/shortcode/AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon.php", 
     "AmazonAutoLinks_Unit_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/AmazonAutoLinks_Unit_Loader.php", 
     "AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks.php", 
-    "AmazonAutoLinks_Unit_Event_Action_FlushRewriteRules" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_FlushRewriteRules.php", 
     "AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI.php", 
     "AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php", 

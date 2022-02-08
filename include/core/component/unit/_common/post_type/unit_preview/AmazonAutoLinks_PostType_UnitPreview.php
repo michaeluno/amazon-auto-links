@@ -59,6 +59,7 @@ class AmazonAutoLinks_PostType_UnitPreview {
         /// Post Type
         add_action( 'init', array( $this, 'replyToRegisterCustomPreviewPostType' ) );
         add_filter( 'register_post_type_args', array( $this, 'replyToGetDefaultUnitPostTypeArguments' ), 10, 2 );
+        register_activation_hook( AmazonAutoLinks_Registry::$sFilePath , array( $this, 'replyToRegisterCustomPreviewPostType' ) );   // 5.1.2
 
         /// Modify the links
         add_filter( 'post_row_actions', array( $this, 'replyToAddViewActionLink' ), 10, 2 );
