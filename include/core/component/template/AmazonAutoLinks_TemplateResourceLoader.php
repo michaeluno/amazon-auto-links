@@ -44,6 +44,7 @@ class AmazonAutoLinks_TemplateResourceLoader extends AmazonAutoLinks_WPUtility {
      */    
     private function ___loadFunctionsOfActiveTemplates() {
         add_action( 'init', array( $this, 'replyToLoadFunctions' ) );
+        add_action( 'aal_action_unit_prefetch', array( $this, 'replyToLoadFunctions' ), 9 );    // before the main action callback runs
     }
         public function replyToLoadFunctions() {
             foreach( $this->_oTemplateOption->getCommonTemplates() + $this->_oTemplateOption->getActiveTemplates() as $_aTemplate ) {
