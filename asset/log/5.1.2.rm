@@ -1,1 +1,2 @@
+- Fixed an issue that 404 errors appeared for unit preview pages occasionally.
 - Fixed an issue that button label text were not sanitized.

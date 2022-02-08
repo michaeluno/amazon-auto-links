@@ -96,6 +96,9 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
             new AmazonAutoLinks_Unit_Event_Filter_ShowErrorMode; // [4.6.11]
             new AmazonAutoLinks_Unit_Event_Filter_Credit;
             new AmazonAutoLinks_Unit_Event_Filter_SVGOutputEscape;  // [4.6.19]
+
+            new AmazonAutoLinks_Unit_Event_Action_FlushRewriteRules;    // [5.1.2]
+
             $this->___loadDebugEvents(); // [4.3.5]
 
         }
