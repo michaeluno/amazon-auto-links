@@ -17,33 +17,79 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
 
     /**
      * @param  array|string $asKeywords
-     * @param  array $aPayload
+     * @param  array        $aPayload
+     * @param  integer|null $inCount
      * @return array
      * @since  4.6.9
+     * @since  5.1.2        Added the `$inCount` parameter.
      */
-    public function get( $asKeywords, array $aPayload=array() ) {
+    public function get( $asKeywords, array $aPayload=array(), $inCount=null ) {
+
         if ( ! $this->oLocale->get()->sAdSystemServer ) {
             return array();
         }
-        $_aResult     = array(
-            'results' => array(),
-        );
-        $_aKeywords   = $this->getAsArray( $asKeywords );
-        $_aChunksBy20 = array_chunk( $_aKeywords, 20 );      // the maximum number of items is 20
-        foreach( $_aChunksBy20 as $_aChunkBy20 ) {
-            $_sEndpoint  = $this->getEndpoint( $_aChunkBy20, $aPayload );
-            $_aResponse  = $this->getJSONFromJSONP( $this->getResponse( $_sEndpoint ) );
-            if ( ! isset( $_aResponse[ 'results' ] ) ) {
-                continue;
+        $_iOffset = ( integer ) $this->getElement( $aPayload, array( 'multipageStart' ), 0 );
+        $_aResult = $this->___getResultWithOffset( $asKeywords, $aPayload, $_iOffset );
+
+        // Check item count and if it is less than the expected number, perform requests by incrementing the page.
+        $_iExpected  = ( integer ) $inCount;
+        $_iActual    = count( $this->getElementAsArray( $_aResult, array( 'results' ) ) );
+        while( $_iActual && $_iActual < $_iExpected ) {
+            $_iOffset      = $_iOffset + 20;
+            $_aResultPaged = $this->___getResultWithOffset( $asKeywords, $aPayload, $_iOffset );
+            $_iThis        = count( $_aResultPaged[ 'results' ] );
+            if ( ! $_iThis ) {
+                break;  // not found
             }
-            // Merge items
-            $_aResult[ 'results' ] = array_merge( $_aResult[ 'results' ], $_aResponse[ 'results' ] );
-            unset( $_aResponse[ 'results' ] );
-            // Merge other elements such as `InstanceId` and `MarketPlace`.
-            $_aResult    = $_aResult + $_aResponse;
+            $_aResult[ 'results' ] = $this->___getResultItemsMerged( $_aResult[ 'results' ], $_aResultPaged[ 'results' ] );
+            $_iThisActual  = count( $_aResult[ 'results' ] );
+            if ( $_iActual === $_iThisActual ) {
+                break;  // no more new items, found but duplicates
+            }
+            unset( $_aResultPaged[ 'results' ] );
+            $_iActual      = $_iThisActual;
+            $_aResult      = $_aResult + $_aResultPaged;
         }
         return $_aResult;
+
     }
+        private function ___getResultItemsMerged( $aPrecedence, $aAdditional ) {
+            $_aMerged = array();
+            foreach( array_merge( $aPrecedence, $aAdditional ) as $_aItem ) {
+                $_aItem = $_aItem + array( 'ASIN' => '' );
+                $_aMerged[ $_aItem[ 'ASIN' ] ] = $_aItem;
+            }
+            unset( $_aMerged[ '' ] );
+            return $_aMerged;
+        }
+        /**
+         * @param  array|string $asKeywords
+         * @param  array $aPayload
+         * @param  integer $iPage
+         * @return array
+         * @since  5.1.2
+         */
+        private function ___getResultWithOffset( $asKeywords, array $aPayload, $iPage ) {
+            $_aResult     = array(
+                'results' => array(),
+            );
+            $aPayload[ 'multipageStart' ] = $iPage;
+            $_aKeywords   = $this->getAsArray( $asKeywords );
+            $_aChunksBy20 = array_chunk( $_aKeywords, 20 );      // the maximum number of items is 20
+            foreach( $_aChunksBy20 as $_aChunkBy20 ) {
+                $_sEndpoint  = $this->getEndpoint( $_aChunkBy20, $aPayload );
+                $_aResponse  = $this->getJSONFromJSONP( $this->getResponse( $_sEndpoint ) );
+                if ( ! isset( $_aResponse[ 'results' ] ) ) {
+                    continue;
+                }
+                // Merge items
+                $_aResult[ 'results' ] = $this->___getResultItemsMerged( $_aResult[ 'results' ], $_aResponse[ 'results' ] );
+                unset( $_aResponse[ 'results' ] );
+                // Merge other elements such as `InstanceId` and `MarketPlace`.
+                $_aResult    = $_aResult + $_aResponse;
+            }
+            return $_aResult;
+        }
 
     /**
      * @param  array|string $asKeywords
