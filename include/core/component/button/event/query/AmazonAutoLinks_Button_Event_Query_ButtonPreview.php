@@ -28,22 +28,24 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
             return;
         }
         add_action( 'wp', array( $this, 'replyToPrintButtonPreview' ) );
+        add_filter( 'wp_using_themes', '__return_true' );
 
     }
 
     /**
      * @see WP_Styles
+     * @see wp_head()
      */
     public function replyToPrintButtonPreview() {
+
         wp_enqueue_script( 'jquery' );
         $_sButtonLabel = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
         $_iButtonID    = ( integer ) $this->getHTTPQueryGET( 'button-id', 0 );
-        do_action( 'template_redirect' );   // tells WordPress to use the theme // doesn't look well with some themes. And adds the navigation admin bar at the top.
-        $_sHeader      = $this->getOutputBuffer( 'get_header' );
+        $_sHeader      = $this->getOutputBuffer( 'wp_head' );
         $_sHeader      = force_balance_tags( $_sHeader );
         $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
         $_oDOM         = new AmazonAutoLinks_DOM;
-        $_oDoc         = $_oDOM->loadDOMFromHTML( $_sHeader );
+        $_oDoc         = $_oDOM->loadDOMFromHTML( "<html><head>" . $_sHeader . "</head><body></body></html>" );
         $_oDOM->removeTags( $_oDoc, array( 'script' ) );    // in order to use jQuery, comment out this line.
         $_oXpath       = new DOMXPath( $_oDoc );
         $_oTags        = $_oXpath->query( "/html/head" );
