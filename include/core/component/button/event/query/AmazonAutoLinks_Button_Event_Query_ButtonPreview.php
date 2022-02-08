@@ -38,7 +38,7 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
         wp_enqueue_script( 'jquery' );
         $_sButtonLabel = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
         $_iButtonID    = ( integer ) $this->getHTTPQueryGET( 'button-id', 0 );
-        $_sHeader      = $this->getOutputBuffer( 'get_header' );
+        $_sHeader      = $this->getOutputBuffer( array( $this, 'printSiteHTMLHeader' ) );
         $_sHeader      = force_balance_tags( $_sHeader );
         $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
         $_oDOM         = new AmazonAutoLinks_DOM;
