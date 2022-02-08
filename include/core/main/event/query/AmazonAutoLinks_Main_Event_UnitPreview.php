@@ -12,7 +12,7 @@
  * Renders unit preview outputs by respecting the theme style.
  * @since 5.1.0
  */
-class AmazonAutoLinks_Main_Event_UnitPreview extends AmazonAutoLinks_Utility {
+class AmazonAutoLinks_Main_Event_UnitPreview extends AmazonAutoLinks_WPUtility {
 
     /**
      * Sets up properties and hooks.
@@ -38,7 +38,7 @@ class AmazonAutoLinks_Main_Event_UnitPreview extends AmazonAutoLinks_Utility {
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
     <head>
-    <?php echo $this->getOutputBuffer( array( $this, '___replyToSimulateHTMLHeader' ) ); ?>
+    <?php echo $this->getOutputBuffer( array( $this, 'printSiteHTMLHeader' ) ); ?>
     <style type='text/css'><?php echo $this->___getHeaderCSSRules(); ?></style>
     </head>
     <body>
@@ -80,27 +80,6 @@ CSSRULES;
                 return "<p>" . __( 'Select a unit.', 'amazon-auto-links' ) . "</p>";
             }
             return AmazonAutoLinks( $aArguments, false );
-        }
-
-        /**
-         * Simulates a blog header output.
-         * @since  5.1.0
-         * @see    ABSPATH . WPINC . '/theme-compat/header.php'
-         * @remark This is an alternative for `get_header()`, which produces the warning, "theme without header.php is deprecated”
-         */
-        public function ___replyToSimulateHTMLHeader() {
-            ?>
-<link rel="profile" href="https://gmpg.org/xfn/11" />
-<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
-
-<?php if ( file_exists( get_stylesheet_directory() . '/images/kubrickbgwide.jpg' ) ) { ?>
-<style type="text/css" media="screen">
-    #page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbgwide.jpg") repeat-y top; border: none; }
-</style>
-<?php } ?>
-            <?php
-                wp_head();
         }
 
         /**

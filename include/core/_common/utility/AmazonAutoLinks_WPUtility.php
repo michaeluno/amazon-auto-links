@@ -17,6 +17,28 @@
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
+     * Simulates a blog header output.
+     * @since  5.1.0
+     * @since  5.1.2 Moved from `AmazonAutoLinks_Main_Event_UnitPreview`.
+     * @see    ABSPATH . WPINC . '/theme-compat/header.php'
+     * @remark This is an alternative for `get_header()`, which produces the warning, "theme without header.php is deprecated”
+     */
+    static public function printSiteHTMLHeader() {
+        ?>
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
+
+<?php if ( file_exists( get_stylesheet_directory() . '/images/kubrickbgwide.jpg' ) ) { ?>
+<style type="text/css" media="screen">
+#page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbgwide.jpg") repeat-y top; border: none; }
+</style>
+<?php } ?>
+        <?php
+            wp_head();
+    }
+
+    /**
      * @var    array
      * @since  4.7.5
      */
