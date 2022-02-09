@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.0
 Requires MySQL:     5.0.3
-Stable tag:         5.1.1
+Stable tag:         5.1.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -348,19 +348,27 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 == Changelog ==
 
-= 5.1.1 - 02/02/2021 =
+= 5.1.2 - 02/09/2022 =
+- Fixed a bug that the theme button preview in unit editing pages failed in recent WordPress versions.
+- Fixed a bug that caused a warning, "Theme without header.php is deprecated" in the background when loading a unit editing screen.
+- Fixed a bug that updating units caused a PHP fatal error in the background when a certain template is selected.
+- Fixed a bug that caused a PHP fatal error when saving a custom post type slug for the `Unit Preview` option.
+- Fixed a bug that 404 errors appeared for unit preview pages after plugin activation when a custom post type slug is set.
+- Fixed an issue that button label text were not sanitized.
+
+= 5.1.1 - 02/02/2022 =
 - Fixed a bug that search type units could not be created without entering PA-API keys.
 
-= 5.1.0 - 01/30/2021 =
+= 5.1.0 - 01/30/2022 =
 - Added the Gutenberg block, "Auto Amazon Links: Unit", that displays selected unit outputs.
 - Fixed a bug that SVG definition elements affecting the content height.
 
-= 5.0.8 - 01/27/2021 =
+= 5.0.8 - 01/27/2022 =
 - Fixed a bug that oEmbed output height has not been automatically adjusted in the front-end in recent WordPress versions.
 - Fixed an issue that embedded frame heights in Gutenberg were not automatically adjusted properly.
 - Tweaked the `List` template regarding bottom margin of last products.
 
-= 5.0.7 - 01/12/2021 =
+= 5.0.7 - 01/12/2022 =
 - Fixed a bug with the contextual widget that the setting fields did not appear for newly added widgets, which started since 5.0.0.
 - Fixed an issue that active templates of deactivated plugins were still loaded.
 
