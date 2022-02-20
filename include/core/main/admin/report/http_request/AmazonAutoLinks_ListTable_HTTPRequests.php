@@ -219,14 +219,16 @@ class AmazonAutoLinks_ListTable_HTTPRequests extends AmazonAutoLinks_ListTableWr
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $_sQuery = "SELECT * "
             . "FROM `" . $_oTable->getTableName() . "`";
-        if ( isset( $_REQUEST[ 's' ]) ) {
-            $_sQuery .= ' WHERE request_uri LIKE "%' . $_REQUEST[ 's' ] . '%"';
+        if ( isset( $_REQUEST[ 's' ] ) ) {
+            $_sSearchTerm  = esc_sql( $_REQUEST[ 's' ] );
+            $_sQuery      .= ' WHERE request_uri LIKE "%' . $_sSearchTerm . '%"';
+            $_sQuery      .= ' OR name = "' . $_sSearchTerm . '"';
         }
-        $_REQUEST[ 'orderby' ] = empty( $_REQUEST[ 'orderby' ] )
+        $_sOrderBy = empty( $_REQUEST[ 'orderby' ] )
             ? 'modified_time'   // default
-            : $_REQUEST[ 'orderby' ];
-        if ( ! empty( $_REQUEST[ 'orderby' ] ) ) {
-            $_sQuery .= ' ORDER BY ' . esc_sql( $_REQUEST[ 'orderby' ] );
+            : esc_sql( $_REQUEST[ 'orderby' ] );
+        if ( ! empty( $_sOrderBy ) ) {
+            $_sQuery .= ' ORDER BY ' . $_sOrderBy;
             $_sQuery .= ! empty( $_REQUEST[ 'order' ] ) ? ' ' . esc_sql( $_REQUEST[ 'order' ] ) : ' DESC';
         }
         $_sQuery    .= " LIMIT " . $iPerPage;
