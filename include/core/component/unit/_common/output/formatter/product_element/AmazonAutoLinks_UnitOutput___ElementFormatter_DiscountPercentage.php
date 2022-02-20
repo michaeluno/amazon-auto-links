@@ -82,7 +82,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
             $_inLowestNew  = $this->_getCell( 'lowest_new_price' );        // corresponds to `lowest_new_price_amount` in the product array
 
             // If the data is not ready, do not show them.
-            if ( ! $this->___isProductReady( $_inPrice, $_inDiscounted, $_inLowestNew ) ) {
+            if ( ! $this->___isPriceReady( $_inPrice, $_inDiscounted, $_inLowestNew ) ) {
                 return false;
             }
 
@@ -100,7 +100,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
              * @since  3.5.0
              * @since  4.7.8        Moved from `AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate`.
              */
-            private function ___isProductReady( $_inPrice, $_inDiscounted, $_inLowestNew ) {
+            private function ___isPriceReady( $_inPrice, $_inDiscounted, $_inLowestNew ) {
                 if ( empty( $_inPrice ) ) {
                     return false;
                 }
