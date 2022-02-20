@@ -139,7 +139,7 @@ class AmazonAutoLinks_ListTable_Products extends AmazonAutoLinks_ListTableWrap_B
         );
         $_aActionLinks = array(
             'view'  => sprintf(
-                '<a href="%1$s">' . __( 'View', 'amazon-auto-links' ) . '</a>',
+                '<a href="%1$s">' . __( 'Details', 'amazon-auto-links' ) . '</a>',
                 esc_url( $_sDetailURL )
             ),
             'delete' => sprintf(
