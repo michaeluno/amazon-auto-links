@@ -1,1 +1,2 @@
+- Fixed a bug that produce prices were not retrieved properly in some cases.
 - Fixed raw query strings passed from user inputs.

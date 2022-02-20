@@ -188,15 +188,10 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                             )
                         ) : null ) : $aStoredRow[ 'images' ],
                         'currency'           => $sCurrency,
-                        'price'              => strlen( $aProduct[ 'ListPrice' ] )
-                            ? AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'ListPrice' ] )
-                            : $aStoredRow[ 'price' ],
-                        'price_formatted'    => strlen( $aProduct[ 'ListPrice' ] ) ? $aProduct[ 'ListPrice' ] : $aStoredRow[ 'price_formatted' ],
-                        'discounted_price'   => strlen( $aProduct[ 'Price' ] )
-                            ? AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'Price' ] )
-                            : $aStoredRow[ 'discounted_price' ],
-                        'discounted_price_formatted' => strlen( $aProduct[ 'Price' ] ) ? $aProduct[ 'Price' ] : $aStoredRow[ 'discounted_price_formatted' ],
-
+                        'price'                      => $this->___getColumnValueOfPriceAmount( $aProduct, $aStoredRow ),
+                        'price_formatted'            => $this->___getColumnValueOfFormattedPrice( $aProduct, $aStoredRow ),
+                        'discounted_price'           => $this->___getColumnValueOfDiscountPriceAmount( $aProduct, $aStoredRow ),
+                        'discounted_price_formatted' => $this->___getColumnValueOfFormattedDiscountPrice( $aProduct, $aStoredRow ),
                         'rating'             => ( integer ) ( ( ( double ) $aProduct[ 'Rating' ] ) * 10 ),
                         'number_of_reviews'  => ( integer ) $aProduct[ 'TotalReviews' ],
                         // These are deprecated columns but if left unset, a background rating update task will be kept triggering. So set an empty string.
@@ -225,7 +220,50 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
                     return $_aRow;
                 }
-
+                    /**
+                     * @param  array $aProduct
+                     * @param  array $aStoredRow
+                     * @return integer|string
+                     * @since  5.1.3
+                     */
+                    private function ___getColumnValueOfPriceAmount( array $aProduct, array $aStoredRow ) {
+                        // Case: when the 'ListPrice' has a value, it is always the proper price (no discount).
+                        if ( strlen( $aProduct[ 'ListPrice' ] ) ) {
+                            return AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'ListPrice' ] );
+                        }
+                        // Case: 'ListPrice' (for proper price) is empty but 'Price' has a value.
+                        if ( strlen( $aProduct[ 'Price' ] ) ) {
+                            return AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'Price' ] );
+                        }
+                        // Otherwise, a price is not found.
+                        return $aStoredRow[ 'price' ];
+                    }
+                    private function ___getColumnValueOfFormattedPrice( array $aProduct, array $aStoredRow ) {
+                        // Case: when the 'ListPrice' has a value, it is always the proper price (no discount).
+                        if ( strlen( $aProduct[ 'ListPrice' ] ) ) {
+                            return $aProduct[ 'ListPrice' ];
+                        }
+                        // Case: 'ListPrice' (for proper price) is empty but 'Price' has a value.
+                        if ( strlen( $aProduct[ 'Price' ] ) ) {
+                            return $aProduct[ 'Price' ];
+                        }
+                        // Otherwise, a price is not found.
+                        return $aStoredRow[ 'price_formatted' ];
+                    }
+                    private function ___getColumnValueOfDiscountPriceAmount( array $aProduct, array $aStoredRow ) {
+                        // There is a case that `ListPrice` is empty but `Price` has a value. In that case, the `Price` is the proper price.
+                        if ( strlen( $aProduct[ 'Price' ] ) && strlen( $aProduct[ 'ListPrice' ] ) ) {
+                            return AmazonAutoLinks_Unit_Utility::getPriceAmountExtracted( $aProduct[ 'Price' ] );
+                        }
+                        return $aStoredRow[ 'discounted_price' ];
+                    }
+                    private function ___getColumnValueOfFormattedDiscountPrice( array $aProduct, array $aStoredRow ) {
+                        // There is a case that `ListPrice` is empty but `Price` has a value. In that case, the `Price` is the proper price.
+                        if ( strlen( $aProduct[ 'Price' ] ) && strlen( $aProduct[ 'ListPrice' ] ) ) {
+                            return $aProduct[ 'Price' ];
+                        }
+                        return $aStoredRow[ 'discounted_price_formatted' ];
+                    }
         /**
          * @param  string  $sLocale
          * @param  array   $aASINs
