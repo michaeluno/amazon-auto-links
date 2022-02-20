@@ -100,7 +100,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
              * @param  integer $iCacheDuration
              * @since  4.6.9
              * @return array
-             * @remark The column names must much across al rows to properly insert into the table without errors.
+             * @remark The column names must much across all the rows to properly insert into the table without errors.
              */
             private function ___getRowsSets( array $aProducts, array $aItems, $sLocaleSlug, array $aStoredRows, $iCacheDuration ) {
 
