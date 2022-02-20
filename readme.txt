@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.0
 Requires MySQL:     5.0.3
-Stable tag:         5.1.2
+Stable tag:         5.1.3
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -347,6 +347,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.1.3 - 02/20/2022 =
+- Fixed a bug of incorrect discount percentages.
+- Fixed a bug that produce prices were not retrieved properly in some cases.
+- Fixed raw query strings passed from user inputs.
 
 = 5.1.2 - 02/09/2022 =
 - Fixed a bug that the theme button preview in unit editing pages failed in recent WordPress versions.
