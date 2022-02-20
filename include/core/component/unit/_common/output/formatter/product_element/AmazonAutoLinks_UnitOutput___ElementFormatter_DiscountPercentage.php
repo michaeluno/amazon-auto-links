@@ -57,11 +57,11 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
         return ( double ) $_dDiscountPercentage;
     }
         /**
-         * @param  array    $aProduct
-         * @param  array    $aRow
-         * @param  integer &$iPrice
-         * @param  integer|string|null &$insLowestNew
-         * @param  integer|string|null &$insDiscounted
+         * @param  array    $aProduct                       Product data fetched externally.
+         * @param  array    $aRow                           Table row data of the product table.
+         * @param  integer &$iPrice                         The proper price.
+         * @param  integer|string|null &$insLowestNew       Represents the lowest price of newly selling (not second-hand) one.
+         * @param  integer|string|null &$insDiscounted      Represents a discounted price, not discount rate.
          * @return boolean  true if variables are set. Otherwise, false.
          * @since  4.2.2
          * @since  4.7.8    Moved from `AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate`.
@@ -89,6 +89,15 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
             $iPrice        = ( integer ) $_inPrice;
             $insLowestNew  = $_inLowestNew  ? ( integer ) $_inLowestNew : $_inLowestNew;
             $insDiscounted = $_inDiscounted ? ( integer ) $_inDiscounted : $_inDiscounted;
+
+            // 5.1.3 When setting an empty string ('') to the `discounted_price` column, it gets converted to `0` as the column type is bigint(20).
+            // So even when the discount price is not set, 0 can be returned. To avoid regarding it as real 0 price, check the `discounted_price_formatted` column value as well.
+            if ( strlen( $insDiscounted ) && ! $insDiscounted ) {
+                $_nsDiscountFormatted = $this->_getCell( 'discounted_price_formatted' );
+                $insDiscounted        = strlen( $_nsDiscountFormatted ) // value exists (as not null or not empty string)
+                    ? $insDiscounted
+                    : null;
+            }
             return true;
 
         }
