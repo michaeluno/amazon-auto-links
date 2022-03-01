@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/*! Admin Page Framework Form Style 1.0.7 */
+/*! Admin Page Framework Form Style 1.0.12 */
 .amazon-auto-links-form-warning {
   font-size: 1em;
 }
@@ -413,12 +413,23 @@ td.amazon-auto-links-field-td-no-title {
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box {
   font-size: 13px;
   background-color: #fff;
-  padding: 1em 2.6em 1em 2em;
+  padding: 1em 3.6em 1em 1.6em;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  /* 3.9.0 */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box.collapsed .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box.collapsed {
+.amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box.collapsed,
+.amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box.collapsed {
   border-bottom: 1px solid #dfdfdf;
   margin-bottom: 1em;
   /* gives a margin for the debug info at the bottom of the meta box */
@@ -450,7 +461,7 @@ td.amazon-auto-links-field-td-no-title {
   padding: 0;
 }
 
-/* Collapsible Sections Title Dashicon */
+/* Collapsible Sections Title Dash-icon */
 .amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box.accordion-section-title:after,
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box.accordion-section-title:after {
   top: 0.88em;
@@ -529,11 +540,18 @@ tbody.amazon-auto-links-collapsible-content.table-caption {
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .amazon-auto-links-repeatable-section-buttons {
   /* Collapsible section bar has an icon at the right end so the repeatable button needs to be placed before it */
   margin: 0;
+  /*margin-right: 1em;*/
+  /* 3.9.0 the repeatable buttons and the collapsible bottom arrow are too close. */
+  /* @deprecated This can be solved by displaying as flex */
   /* margin-right: 2em; @deprecated 3.8.13+ The section repeatable buttons are no longer float but positioned with the `position` property. */
   /* margin-top: -0.32em; @deprecated 3.8.7+ It is placed somewhat high in WP 4.6.1. */
+  float: none;
+  /* 3.9.0 now the collapsible bar is displayed as flex so no need to float */
+  margin-left: auto;
+  /* 3.9.0 This aligns the button container to right */
 }
 
-/* When a section_title field is in the caption tag, do not set the margin-top to align vertically */
+/* When a `section_title` field is in the caption tag, do not set the margin-top to align vertically */
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .amazon-auto-links-repeatable-section-buttons.section_title_field_sibling {
   margin-top: 0;
 }
@@ -562,7 +580,7 @@ tbody.amazon-auto-links-collapsible-content.table-caption {
 
 .amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box .section-title-outer-container,
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .section-title-outer-container {
-  width: 88%;
+  width: 90%;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
@@ -582,6 +600,12 @@ tbody.amazon-auto-links-collapsible-content.table-caption {
   .amazon-auto-links-collapsible-sections-title.amazon-auto-links-collapsible-type-box .section-title-outer-container,
 .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .section-title-outer-container {
     width: 87.8%;
+  }
+
+  .amazon-auto-links-collapsible-section-title.amazon-auto-links-collapsible-type-box .repeatable-section-button {
+    min-height: unset;
+    height: 40px;
+    width: 40px;
   }
 }
 /* 3.7.0+ For the button type collapsible sections, do not set a white color in the background */
@@ -789,6 +813,26 @@ th > label > span > .amazon-auto-links-form-tooltip {
   border-color: transparent #F8F8F8 transparent transparent;
 }
 
+/* Nested fieldsets 3.8.0+ */
+.amazon-auto-links-fieldset > .amazon-auto-links-fields > .amazon-auto-links-field.with-nested-fields > .amazon-auto-links-fieldset.multiple-nesting {
+  margin-left: 2em;
+}
+
+.amazon-auto-links-fieldset > .amazon-auto-links-fields > .amazon-auto-links-field.with-nested-fields > .amazon-auto-links-fieldset {
+  margin-bottom: 1em;
+}
+
+.with-nested-fields > .amazon-auto-links-fieldset.child-fieldset > .amazon-auto-links-child-field-title {
+  display: inline-block;
+  padding: 0 0 0.4em 0;
+}
+
+.amazon-auto-links-fieldset.child-fieldset > label.amazon-auto-links-child-field-title {
+  display: table-row;
+  /* inline does not create a new line in FireFox */
+  white-space: nowrap;
+}
+
 /* Checkbox Field Type */
 .select_all_button_container,
 .select_none_button_container {
@@ -813,6 +857,42 @@ th > label > span > .amazon-auto-links-form-tooltip {
   /* Checkbox labels should not fold(wrap) by creating an indent after the check box */
 }
 
+/* Color Picker Field Type */
+.repeatable .colorpicker {
+  display: inline;
+}
+
+.amazon-auto-links-field-color .wp-picker-container {
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field-color .ui-widget-content {
+  border: none;
+  background: none;
+  color: transparent;
+}
+
+.amazon-auto-links-field-color .ui-slider-vertical {
+  width: inherit;
+  height: auto;
+  margin-top: -11px;
+}
+
+.amazon-auto-links-field-color .amazon-auto-links-repeatable-field-buttons {
+  margin-top: 0;
+}
+
+.amazon-auto-links-field-color .wp-color-result {
+  /* Overriding the default css rule, margin: 0 6px 6px 0px; to vertically align middle in the sortable box */
+  margin: 3px;
+}
+
+.sortable .amazon-auto-links-field-color .wp-picker-container .wp-color-result.button,
+.sortable .amazon-auto-links-field-color .amazon-auto-links-input-label-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* Contact Field Type */
 .amazon-auto-links-field-contact .result-placeholder {
   margin-bottom: 0.4em;
@@ -824,6 +904,208 @@ th > label > span > .amazon-auto-links-form-tooltip {
 
 .amazon-auto-links-field-contact .result-placeholder .error {
   color: #d63638;
+}
+
+/* Image Field Type */
+/* Image Field Preview Container */
+.amazon-auto-links-field .image_preview {
+  border: none;
+  clear: both;
+  margin-top: 0.4em;
+  margin-bottom: 0.8em;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: inherit;
+}
+
+.amazon-auto-links-field .image_preview img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.widget .amazon-auto-links-field .image_preview {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .amazon-auto-links-field .image_preview {
+    max-width: 600px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .amazon-auto-links-field .image_preview {
+    max-width: 440px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .amazon-auto-links-field .image_preview {
+    max-width: 300px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .amazon-auto-links-field .image_preview {
+    max-width: 240px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .amazon-auto-links-field .image_preview {
+    max-width: 600px;
+  }
+}
+/* Image Uploader Input Field */
+.amazon-auto-links-field-image input {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+/* Image Uploader Button */
+.select_image.button.button-small,
+.remove_image.button.button-small {
+  vertical-align: middle;
+}
+
+.remove_image.button.button-small {
+  margin-left: 0.2em;
+}
+
+@media screen and (max-width: 782px) {
+  .amazon-auto-links-field-image input {
+    margin: 0.5em 0.5em 0.5em 0;
+  }
+}
+/* Import Field Type */
+.amazon-auto-links-field-import input {
+  margin-right: 0.5em;
+}
+
+.amazon-auto-links-field-import,
+.amazon-auto-links-field-import .amazon-auto-links-input-label-container {
+  width: 100%;
+}
+
+.amazon-auto-links-field-import label,
+.form-table td fieldset.amazon-auto-links-fieldset .amazon-auto-links-field-import label {
+  /* for Wordpress 3.8 or above */
+  display: inline-block;
+  /* to display the submit button in the same line to the file input tag */
+  width: auto;
+  vertical-align: middle;
+}
+
+/* Inline-mixed Field Type */
+.amazon-auto-links-field-inline_mixed {
+  width: 98%;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset {
+  display: inline-block;
+  overflow-x: visible;
+  /* Disable scrollbars which appear when the browser width is narrow */
+  padding-right: 0.4em;
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields {
+  display: inline;
+  width: auto;
+  table-layout: auto;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field {
+  float: none;
+  clear: none;
+  width: 100%;
+  display: inline-block;
+  margin-right: auto;
+  vertical-align: middle;
+  /* For the select field type */
+}
+
+/* inline mixed child field title */
+.with-mixed-fields > fieldset > label {
+  width: auto;
+  padding: 0;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field .amazon-auto-links-input-label-string {
+  padding: 0;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > .amazon-auto-links-input-label-container,
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > * > .amazon-auto-links-input-label-container {
+  padding: 0;
+  display: inline;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > .amazon-auto-links-input-label-container > label,
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > * > .amazon-auto-links-input-label-container > label {
+  display: inline;
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > .amazon-auto-links-input-label-container > label > input,
+.amazon-auto-links-field-inline_mixed > fieldset > .amazon-auto-links-fields > .amazon-auto-links-field > * > .amazon-auto-links-input-label-container > label > input {
+  display: inline;
+  min-width: 100%;
+  margin-right: 0.2em;
+  margin-left: auto;
+  vertical-align: middle;
+}
+
+/* Input container label 3.8.0+ */
+.amazon-auto-links-field-inline_mixed .amazon-auto-links-input-label-container,
+.amazon-auto-links-field-inline_mixed .amazon-auto-links-input-label-string {
+  min-width: 0;
+}
+
+/* Buttons - color picker (@todo move this to the color field type) */
+.amazon-auto-links-field-inline_mixed .amazon-auto-links-input-label-container button.button {
+  margin: 0;
+}
+
+/* Repeatable Buttons */
+.amazon-auto-links-field-inline_mixed .repeatable-field-button {
+  /* 3.9.0 Repeatable buttons inside `inline_mixed` fields get horizontally long for some reasons. */
+  width: 32px;
+  height: 32px;
+}
+
+/* Media Field Type */
+/* Media Uploader Button */
+.amazon-auto-links-field-media input {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 782px) {
+  .amazon-auto-links-field-media input {
+    margin: 0.5em 0.5em 0.5em 0;
+  }
+}
+.select_media.button.button-small,
+.remove_media.button.button-small {
+  vertical-align: middle;
+}
+
+.remove_media.button.button-small {
+  margin-left: 0.2em;
+}
+
+/* Post Type Field Type */
+.amazon-auto-links-field input[type=checkbox] {
+  margin-right: 0.5em;
+}
+
+.amazon-auto-links-field-posttype .amazon-auto-links-input-label-container {
+  padding-right: 1em;
 }
 
 /* Radio Field Type */
@@ -842,5 +1124,335 @@ th > label > span > .amazon-auto-links-form-tooltip {
 .amazon-auto-links-field.amazon-auto-links-field-radio .amazon-auto-links-input-label-string {
   display: inline;
   /* radio labels should not fold(wrap) after the check box */
+}
+
+/* Section Title Field Type */
+.amazon-auto-links-section-tab .amazon-auto-links-field-section_title {
+  padding: 0.5em;
+}
+
+.amazon-auto-links-section-tab .amazon-auto-links-field-section_title .amazon-auto-links-input-label-string {
+  vertical-align: middle;
+  margin-left: 0.2em;
+}
+
+.amazon-auto-links-section-tab .amazon-auto-links-fields {
+  display: inline-block;
+}
+
+.amazon-auto-links-field.amazon-auto-links-field-section_title {
+  float: none;
+}
+
+.amazon-auto-links-field.amazon-auto-links-field-section_title input {
+  background-color: #fff;
+  color: #333;
+  border-color: #ddd;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+  border-width: 1px;
+  border-style: solid;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  vertical-align: middle;
+}
+
+/* Select Field Type */
+.amazon-auto-links-field-select .amazon-auto-links-input-label-container {
+  vertical-align: top;
+}
+
+.amazon-auto-links-field-select .amazon-auto-links-input-label-container {
+  padding-right: 1em;
+}
+
+/* Size Field Type */
+.amazon-auto-links-field-size input {
+  text-align: right;
+}
+
+.amazon-auto-links-field-size select.size-field-select {
+  vertical-align: 0;
+}
+
+.amazon-auto-links-field-size label {
+  width: auto;
+}
+
+.form-table td fieldset .amazon-auto-links-field-size label {
+  display: inline-block;
+}
+
+/* Submit Field Type */
+/* Submit Buttons */
+.amazon-auto-links-field input[type=submit] {
+  margin-bottom: 0.5em;
+}
+
+/* Confirmation */
+.amazon-auto-links-field-submit .submit-confirm-container {
+  display: inline-block;
+  margin-left: 1em;
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field-submit .field-error.submit-confirmation-warning {
+  float: none;
+}
+
+/* System Field Type */
+.amazon-auto-links-field-system {
+  width: 100%;
+}
+
+.amazon-auto-links-field-system .amazon-auto-links-input-label-container {
+  width: 100%;
+}
+
+.amazon-auto-links-field-system textarea {
+  background-color: #f9f9f9;
+  width: 97%;
+  outline: 0;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: scroll;
+}
+
+/* Table Field Type */
+.amazon-auto-links-field-table {
+  width: 100%;
+  /* Prevent the width from being shrank when `collapsible` is on */
+  /* Collapsible */
+  /* When the collapsible title bar is clicked, switch the arrow icons */
+}
+.amazon-auto-links-field-table .table-container > table {
+  width: 100%;
+}
+.amazon-auto-links-field-table .table-container > table caption {
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+.amazon-auto-links-field-table .table-container > table .key-value > *:first-child {
+  width: 20%;
+}
+.amazon-auto-links-field-table .table-container > table th,
+.amazon-auto-links-field-table .table-container > table td {
+  padding: 1em;
+}
+.amazon-auto-links-field-table .column-key {
+  width: 20%;
+}
+.amazon-auto-links-field-table .accordion-container {
+  border: 1px solid #c3c4c7;
+  background: #fff;
+}
+.amazon-auto-links-field-table .accordion-title,
+.amazon-auto-links-field-table .accordion-content {
+  padding: 1em;
+}
+.amazon-auto-links-field-table .accordion-content {
+  /* For simple FAQ tables */
+}
+.amazon-auto-links-field-table .accordion-content > p,
+.amazon-auto-links-field-table .accordion-content > .text-content {
+  margin: 1em 1em 2em;
+}
+.amazon-auto-links-field-table .accordion-title {
+  color: #2c3338;
+  font-weight: 500;
+  margin: 0;
+  padding: 1.2em 1em 1.2em 1.5em;
+  /* the right padding needs to be narrower to place the fold arrow icon */
+  line-height: 1;
+  /* To place the title on the left and the icon to the right side by side, similar to .postbox-header, the meta-box container header element selector */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* vertical alignments of items to middle */
+}
+.amazon-auto-links-field-table .accordion-title > h4 {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.amazon-auto-links-field-table .accordion-title.ui-accordion-header-collapsed .icon-collapsible:before {
+  content: "";
+}
+.amazon-auto-links-field-table .accordion-title.ui-accordion-header-active .icon-collapsible:before {
+  content: "";
+}
+
+/* Responsiveness */
+@media screen and (max-width: 782px) {
+  /* when the screen is within 782px, */
+  .amazon-auto-links-field-table .table-container > table .key-value > *:first-child {
+    width: inherit;
+  }
+  .amazon-auto-links-field-table .column-key {
+    width: inherit;
+    padding: 6px 0 4px;
+  }
+  .amazon-auto-links-field-table th > p,
+.amazon-auto-links-field-table td > p {
+    margin: 0 1em;
+  }
+}
+/* Taxonomy Field Type */
+.amazon-auto-links-field .taxonomy-checklist li {
+  margin: 8px 0 8px 20px;
+}
+
+.amazon-auto-links-field div.taxonomy-checklist {
+  padding: 8px 0 8px 10px;
+  margin-bottom: 20px;
+}
+
+.amazon-auto-links-field .taxonomy-checklist ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+.amazon-auto-links-field .taxonomy-checklist ul ul {
+  margin-left: 1em;
+}
+
+.amazon-auto-links-field .taxonomy-checklist-label {
+  white-space: nowrap;
+}
+
+/* Repeatable Buttons */
+.amazon-auto-links-field-taxonomy .amazon-auto-links-repeatable-field-buttons {
+  margin-bottom: 0.6em;
+}
+
+/* Tabbed box */
+.amazon-auto-links-field .tab-box-container.categorydiv {
+  max-height: none;
+}
+
+.amazon-auto-links-field .tab-box-tab-text {
+  display: inline-block;
+  font-size: 13px;
+  font-size: smaller;
+  padding: 2px;
+}
+
+.amazon-auto-links-field .tab-box-tabs {
+  line-height: 12px;
+  margin-bottom: 0;
+}
+
+.amazon-auto-links-field .tab-box-tabs .tab-box-tab.active {
+  display: inline;
+  border-color: #dfdfdf #dfdfdf #fff;
+  margin-bottom: 0px;
+  padding-bottom: 4px;
+  background-color: #fff;
+}
+
+.amazon-auto-links-field .tab-box-container {
+  position: relative;
+  width: 100%;
+  clear: both;
+  margin-bottom: 1em;
+}
+
+.amazon-auto-links-field .tab-box-tabs li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.amazon-auto-links-field .tab-box-contents-container {
+  padding: 0 0 0 1.8em;
+  padding: 0.55em 0.5em 0.55em 1.8em;
+  border: 1px solid #dfdfdf;
+  background-color: #fff;
+}
+
+.amazon-auto-links-field .tab-box-contents {
+  overflow: hidden;
+  overflow-x: hidden;
+  position: relative;
+  top: -1px;
+  height: 300px;
+}
+
+.amazon-auto-links-field .tab-box-content {
+  /* height: 300px; */
+  display: none;
+  overflow: auto;
+  display: block;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.amazon-auto-links-field .tab-box-content .taxonomychecklist {
+  margin-right: 3.2em;
+}
+
+.amazon-auto-links-field .tab-box-content:target,
+.amazon-auto-links-field .tab-box-content:target,
+.amazon-auto-links-field .tab-box-content:target {
+  display: block;
+}
+
+/* tab-box-content */
+.amazon-auto-links-field .tab-box-content .select_all_button_container,
+.amazon-auto-links-field .tab-box-content .select_none_button_container {
+  display: inline-block;
+  /* 3.8.8 For some reasons, it became `block` */
+  margin-top: 0.8em;
+}
+
+/* Nested Checkbox Items */
+.amazon-auto-links-field .taxonomychecklist .children {
+  margin-top: 6px;
+  margin-left: 1em;
+}
+
+/* Text Field Type */
+.amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container {
+  /* vertical-align: top; @depracated 3.7.1 */
+  vertical-align: middle;
+}
+
+.amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container.amazon-auto-links-field-text-multiple-labels {
+  /* When the browser screen width gets narrow, avoid the inputs getting placed next each other. */
+  display: block;
+}
+
+/* Textarea Field Type */
+.amazon-auto-links-field-textarea .amazon-auto-links-input-label-string {
+  vertical-align: top;
+  margin-top: 2px;
+}
+
+/* Rich Text Editor */
+.amazon-auto-links-field-textarea .wp-core-ui.wp-editor-wrap {
+  margin-bottom: 0.5em;
+}
+
+.amazon-auto-links-field-textarea.amazon-auto-links-field .amazon-auto-links-input-label-container {
+  vertical-align: top;
+  float: left;
+  clear: both;
+}
+
+/* For meta-boxes */
+.postbox .amazon-auto-links-field-textarea .amazon-auto-links-input-label-container {
+  width: 100%;
+}
+
+/* Prevents the input box sticks out in a meta box, especially in the side meta box. */
+.amazon-auto-links-field-textarea textarea {
+  max-width: 100%;
 }
 /*# sourceMappingURL=form.css.map */

@@ -1,4 +1,4 @@
-/*! Admin Page Framework - Form Main 1.2.6 */
+/*! Admin Page Framework - Form Main 1.2.7 */
 /**
  * This script should be empty and provide the banner (header comment) for the concatenated bundled script (form.bundle.js).
  */
@@ -597,6 +597,7 @@
 
     // Initialize repeatable buttons
     $( document ).ready( function() {
+
         $( '.amazon-auto-links-fields.repeatable' ).each( function() {
             var _buttonModel = $( this ).siblings( '.repeatable-field-buttons-model' );
             if ( ! _buttonModel.length ) {
@@ -604,13 +605,13 @@
             }
             var _aSettings           = _buttonModel.data();
             var _buttonContainer     = _buttonModel.children( '.amazon-auto-links-repeatable-field-buttons' ).first();
-            _buttonModel.remove();
+            // _buttonModel.remove();   // do not remove it since when the `disable` argument is set, a modal content element gets inserted in this element.
             var _buttonsNestedFields = $( _buttonContainer );
             var _buttonsSmall        = $( _buttonContainer ).clone();
             _buttonsNestedFields.find( '.repeatable-field-button' ).addClass( 'button-large' );
             _buttonsSmall.find( '.repeatable-field-button' ).addClass( 'button-small' );
 
-            // For unnested fields
+            // For non-nested fields
             var _childFields = $( this ).find( '> .amazon-auto-links-field.without-child-fields' );
             var _oButtonPlaceHolders = _childFields.find( '.repeatable-field-buttons' );
             /* If the button place-holder is set in the field type definition, replace it with the created output */
@@ -626,6 +627,7 @@
                     _childFields.prepend( _buttonsSmall );
                 }
             }
+
 
             /**
              * For nested fields, add buttons to the fields tag.
@@ -1588,6 +1590,9 @@
         _oTarget        = _bIsTabbed
             ? _oTarget.find( 'ul.amazon-auto-links-section-tabs' )
             : _oTarget;
+        _oTarget        = ! _bIsTabbed && ! _bCollapsible
+          ? _oTarget.parent()
+          : _oTarget;
 
         _oTarget.off( 'sortupdate' );
         _oTarget.off( 'sortstop' );
@@ -1595,7 +1600,7 @@
         var _aSortableOptions = {
                 items: _bIsTabbed
                     ? '> li:not( .disabled )'
-                    : '> div:not( .disabled, .amazon-auto-links-collapsible-toggle-all-button-container )',
+                    : '.amazon-auto-links-section:not( .disabled, .amazon-auto-links-collapsible-toggle-all-button-container )',
                 handle: _bCollapsible
                     ? '.amazon-auto-links-section-caption'
                     : false,
@@ -1603,33 +1608,42 @@
                 stop: function(e,ui) {
 
                     // Callback the registered callback functions.
-                    jQuery( this ).trigger(
+                    $( this ).trigger(
                         'amazon-auto-links_stopped_sorting_sections',
                         []  // parameters for the callbacks
                     );
 
                 },
 
-
                 // @todo Figure out how to allow the user to highlight text in sortable elements.
                 // cancel: '.amazon-auto-links-section-description, .amazon-auto-links-section-title'
 
-            }
+            };
+
         var _oSortable  = _oTarget.sortable( _aSortableOptions );
 
         if ( ! _bIsTabbed ) {
 
             _oSortable.on( 'sortstop', function() {
 
-                jQuery( this ).find( 'caption > .amazon-auto-links-section-title:not(.amazon-auto-links-collapsible-sections-title,.amazon-auto-links-collapsible-section-title)' ).first().show();
-                jQuery( this ).find( 'caption > .amazon-auto-links-section-title:not(.amazon-auto-links-collapsible-sections-title,.amazon-auto-links-collapsible-section-title)' ).not( ':first' ).hide();
+                $( this ).find( 'caption > .amazon-auto-links-section-title:not(.amazon-auto-links-collapsible-sections-title,.amazon-auto-links-collapsible-section-title)' ).first().show();
+                $( this ).find( 'caption > .amazon-auto-links-section-title:not(.amazon-auto-links-collapsible-sections-title,.amazon-auto-links-collapsible-section-title)' ).not( ':first' ).hide();
 
             } );
 
         }
 
     };
-}( jQuery ));
+
+
+  function debugLog( ...message ) {
+    if ( ! parseInt( AmazonAutoLinks_AdminPageFrameworkScriptFormMain.debugMode ) ) {
+      return;
+    }
+    console.log( 'APF Sortable Sections:', ...message );
+  }
+
+}( jQuery ) );
 /**
  * Extends the core wp-pointer tooltip jQuery widget to add additional features.
  */

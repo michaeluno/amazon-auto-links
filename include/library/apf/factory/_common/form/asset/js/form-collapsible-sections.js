@@ -1,6 +1,9 @@
 /*! Admin Page Framework - Form Collapsible Sections 1.0.1 */
 ( function( $ ) {
 
+    /** global: AmazonAutoLinks_AdminPageFrameworkScriptFormMain */
+    /** global: navigator */
+
     $( document ).ready( function() {
         $( this ).initializeAmazonAutoLinks_AdminPageFrameworkCollapsibleSections();
     });
