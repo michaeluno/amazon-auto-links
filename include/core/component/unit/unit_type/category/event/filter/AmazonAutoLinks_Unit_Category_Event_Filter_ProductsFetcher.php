@@ -268,7 +268,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
      * @return   array
      */
     public function replyToCaptureUpdatedDate( $aCache ) {
-        $this->oUnitOutput->aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->___getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
+        $this->oUnitOutput->aModifiedDates[ $aCache[ 'request_uri' ] ] = $this->getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
         return $aCache;
     }
 
@@ -281,25 +281,8 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
      * @return   array|WP_Error
      */
     public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        $this->oUnitOutput->aModifiedDates[ $sURL ] = $this->___getLastModified( $aoResponse, time() );
+        $this->oUnitOutput->aModifiedDates[ $sURL ] = $this->getLastModified( $aoResponse, time() );
         return $aoResponse;
     }
-        /**
-         * Extracts the last-modified header item and convert it to the unix timestamp.
-         * @since  4.2.10
-         * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
-         * @param  WP_Error|array  $aoResponse
-         * @param  integer         $iDefault
-         * @return integer
-         */
-        private function ___getLastModified( $aoResponse, $iDefault=0 ) {
-            $_sResponseDate = wp_remote_retrieve_header( $aoResponse, 'last-modified' );
-            $_sResponseDate = $_sResponseDate
-                ? $_sResponseDate
-                : wp_remote_retrieve_header( $aoResponse, 'date' );
-            return $_sResponseDate
-                ? strtotime( $_sResponseDate )
-                : $iDefault;
-        }
 
 }

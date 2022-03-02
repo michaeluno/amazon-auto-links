@@ -16,6 +16,25 @@
 class AmazonAutoLinks_WPUtility_HTTP extends AmazonAutoLinks_WPUtility_Post {
 
     /**
+     * Extracts the last-modified header item and convert it to the unix timestamp.
+     * @since  4.2.10
+     * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
+     * @since  5.1.0  Moved from `AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher.php`.
+     * @param  WP_Error|array  $aoResponse
+     * @param  integer         $iDefault
+     * @return integer
+     */
+    static public function getLastModified( $aoResponse, $iDefault=0 ) {
+        $_sResponseDate = wp_remote_retrieve_header( $aoResponse, 'last-modified' );
+        $_sResponseDate = $_sResponseDate
+            ? $_sResponseDate
+            : wp_remote_retrieve_header( $aoResponse, 'date' );
+        return $_sResponseDate
+            ? strtotime( $_sResponseDate )
+            : $iDefault;
+    }
+
+    /**
      * Extracts the HTTP header from the given response.
      * @param WP_Error|array $aoResponse
      * @return array
