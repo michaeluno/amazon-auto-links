@@ -17,7 +17,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
     public $sUnitType = 'ad_widget_search';
 
     /**
-     * @var AmazonAutoLinks_UnitOutput_category
+     * @var AmazonAutoLinks_UnitOutput_ad_widget_search
      */
     public $oUnitOutput;
 
