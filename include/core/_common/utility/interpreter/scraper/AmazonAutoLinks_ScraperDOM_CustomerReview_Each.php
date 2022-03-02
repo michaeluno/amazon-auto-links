@@ -58,7 +58,7 @@ class AmazonAutoLinks_ScraperDOM_CustomerReview_Each extends AmazonAutoLinks_Scr
         
         // Convert image urls for SSL.
         if ( $this->bIsSSL ) {
-            $this->setSSLImagesByDOM( $this->oDoc );
+            $this->_setSSLImagesByDOM( $this->oDoc );
         }
 
         // Modify a tags.

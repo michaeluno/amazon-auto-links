@@ -76,7 +76,7 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
      *
      * @param DOMDocument $oDoc
      */
-    protected function setSSLImagesByDOM( DOMDocument $oDoc ) {
+    protected function _setSSLImagesByDOM( DOMDocument $oDoc ) {
         foreach ( $oDoc->getElementsByTagName( 'img' ) as $_oNodeImg ) {
             $_oNodeImg->attributes->getNamedItem( "src" )->value = $this->getAmazonSSLImageURL(
                 $_oNodeImg->attributes->getNamedItem( "src" )->value
