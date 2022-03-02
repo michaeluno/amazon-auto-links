@@ -281,7 +281,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
      * @return   array|WP_Error
      */
     public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
-        $this->oUnitOutput->aModifiedDates[ $sURL  ] = $this->___getLastModified( $aoResponse, time() );
+        $this->oUnitOutput->aModifiedDates[ $sURL ] = $this->___getLastModified( $aoResponse, time() );
         return $aoResponse;
     }
         /**
