@@ -45,6 +45,9 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
             ),
             ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' )
         );
+
+        // 5.1.0 Set the last modified time
+        $this->oUnitOutput->iLastModified = $this->getElement( $_aResponse, array( '_ModifiedDate' ), 0 );
         return $this->getElementAsArray( $_aResponse, array( 'results' ) );
 
     }

@@ -21,6 +21,12 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
     public $sUnitType = 'ad_widget_search';
 
     /**
+     * @var   AmazonAutoLinks_UnitOutput_ad_widget_search
+     * @since 5.1.0
+     */
+    public $oUnitOutput;
+
+    /**
      * Unit type specific product structure.
      * @var array
      * @since 5.0.0
@@ -87,7 +93,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
         $_aProduct[ 'formatted_title' ]     = $this->oUnitOutput->getProductTitleFormatted( $_aProduct, $this->oUnitOutput->oUnitOption->get( 'title_format' ) );
 
         // Price
-        $_aProduct[ 'formatted_price' ]     = AmazonAutoLinks_Unit_Utility::getPrice( $_aProduct[ 'ListPrice' ], null, null, $_aProduct[ 'Price' ], $_aProduct[ 'Price' ] );
+        $_aProduct[ 'formatted_price' ]     = AmazonAutoLinks_Unit_Utility::getPrice( $_aProduct[ 'ListPrice' ], null, null, $_aProduct[ 'Price' ], $_aProduct[ 'Price' ], $this->oUnitOutput->iLastModified );
 
         // Discount
         $_aProduct[ 'formatted_discount' ]  = $this->___getDiscountFormatted( $_aProduct[ 'ListPrice' ], $_aProduct[ 'Price' ] );
@@ -115,6 +121,8 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
                     : null
             );
         }
+
+        $_aProduct[ 'updated_date' ] = $this->oUnitOutput->iLastModified;
 
         /**
          * Let third-parties filter products.

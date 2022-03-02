@@ -23,6 +23,12 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
     public $sUnitType = 'ad_widget_search';
 
     /**
+     * @var   integer Stores the last modified time of the fetched API response.
+     * @since 5.1.0
+     */
+    public $iLastModified;
+
+    /**
      * @return string
      * @since  5.0.0
      */
