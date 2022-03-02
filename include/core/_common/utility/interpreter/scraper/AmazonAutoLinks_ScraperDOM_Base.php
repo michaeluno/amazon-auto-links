@@ -10,13 +10,13 @@
 /**
  * Provides abstract methods for scraping web contents using DOMDocument
  * 
- * @since        3
+ * @since 3
  */
 abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Indicates whether the site uses https or not.
-     * @var bool
+     * @var boolean
      */
     public $bIsSSL;
 
@@ -84,4 +84,4 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
         }
     }    
     
-} 
+}
