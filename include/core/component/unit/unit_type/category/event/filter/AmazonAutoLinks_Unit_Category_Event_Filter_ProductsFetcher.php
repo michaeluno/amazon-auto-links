@@ -235,9 +235,10 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
             private function ___getProductsScraped( array $aHTMLs, $sAssociateID, $sSiteDomain ) {
                 $_aProducts = array();
                 foreach( $aHTMLs as $_sURL => $_sHTML ) {
-                    $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
-                    $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
                     $_sModifiedDate   = $this->getElement( $this->oUnitOutput->aModifiedDates, $_sURL );
+                    $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
+                    $_oProductScraper->setLastUpdated( is_numeric( $_sModifiedDate ) ? ( integer ) $_sModifiedDate : strtotime( $_sModifiedDate ) );
+                    $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
                     foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
                         $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
                     }

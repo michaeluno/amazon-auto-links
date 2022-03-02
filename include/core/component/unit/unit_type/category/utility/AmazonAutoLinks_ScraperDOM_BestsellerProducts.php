@@ -95,7 +95,7 @@ class AmazonAutoLinks_ScraperDOM_BestsellerProducts extends AmazonAutoLinks_Scra
         protected function _getPrice( DOMXPath $oXPath, $oItemNode ) {
             $_oNodes = $oXPath->query( './/span[contains(@class, "p13n-sc-price")]', $oItemNode );
             foreach( $_oNodes as $_oNode ) {
-                return "<span class='amazon-prices'>"
+                return "<span class='amazon-prices' data-updated='" . $this->iLastUpdated . "'>"
                         . "<span class='offered-price'>"
                             . trim( $_oNode->nodeValue )
                         . "</span>"

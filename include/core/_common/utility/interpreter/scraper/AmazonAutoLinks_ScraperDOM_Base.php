@@ -29,8 +29,16 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
      * Stores a DOM document object.
      * @var DOMDocument
      */
-    public $oDoc;    
-        
+    public $oDoc;
+
+    /**
+     * Stores the last updated timestamp of the product data.
+     * This is not set automatically and needs to be set externally by `setLastUpdated()` method, used by the `embed` and `category` unit types.
+     * @var   integer
+     * @since 5.1.0
+     */
+    public $iLastUpdated;
+
     public function __construct( $sURLOrFilePathOrHTML, $sCharset='' ) {
         
         $this->bIsSSL        = is_ssl();
@@ -82,6 +90,14 @@ abstract class AmazonAutoLinks_ScraperDOM_Base extends AmazonAutoLinks_PluginUti
                 $_oNodeImg->attributes->getNamedItem( "src" )->value
             );    
         }
-    }    
-    
+    }
+
+    /**
+     * @param integer $iLastUpdated
+     * @since 5.1.0
+     */
+    public function setLastUpdated( $iLastUpdated ) {
+        $this->iLastUpdated = ( integer ) $iLastUpdated;
+    }
+
 }
