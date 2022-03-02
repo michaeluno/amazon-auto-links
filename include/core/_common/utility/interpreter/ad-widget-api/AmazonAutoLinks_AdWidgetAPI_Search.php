@@ -11,7 +11,7 @@
 /**
  * Performs Ad Widget API Search requests.
  *
- * @since       4.6.9
+ * @since 4.6.9
  */
 class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Base {
 
@@ -64,8 +64,8 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
         }
         /**
          * @param  array|string $asKeywords
-         * @param  array $aPayload
-         * @param  integer $iPage
+         * @param  array        $aPayload
+         * @param  integer      $iPage
          * @return array
          * @since  5.1.2
          */
@@ -76,20 +76,48 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
             $aPayload[ 'multipageStart' ] = $iPage;
             $_aKeywords   = $this->getAsArray( $asKeywords );
             $_aChunksBy20 = array_chunk( $_aKeywords, 20 );      // the maximum number of items is 20
+            add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 1 );
+            add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 2 );
+            $_iLastModified = null;
+            unset( $this->___iLastModifiedDate );   // clean a previous value
             foreach( $_aChunksBy20 as $_aChunkBy20 ) {
+
                 $_sEndpoint  = $this->getEndpoint( $_aChunkBy20, $aPayload );
                 $_aResponse  = $this->getJSONFromJSONP( $this->getResponse( $_sEndpoint ) );
                 if ( ! isset( $_aResponse[ 'results' ] ) ) {
                     continue;
                 }
+
+                // Capture last modified date
+                $_iLastModified = isset( $_iLastModified ) ? $_iLastModified : $this->___iLastModifiedDate;
+
                 // Merge items
                 $_aResult[ 'results' ] = $this->___getResultItemsMerged( $_aResult[ 'results' ], $_aResponse[ 'results' ] );
                 unset( $_aResponse[ 'results' ] );
+
                 // Merge other elements such as `InstanceId` and `MarketPlace`.
                 $_aResult    = $_aResult + $_aResponse;
+
             }
+            remove_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10 );
+            remove_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10 );
+            unset( $this->___iLastModifiedDate );   // clean-up
+            $_aResult[ '_ModifiedDate' ] = $_iLastModified;
             return $_aResult;
         }
+            /**
+             * @var   string
+             * @since 5.1.0
+             */
+            private $___iLastModifiedDate = '';
+            public function replyToCaptureUpdatedDate( $aCache ) {
+                $this->___iLastModifiedDate = $this->getLastModified( $aCache[ 'data' ], $aCache[ '_modified_timestamp' ] );
+                return $aCache;
+            }
+            public function replyToCaptureUpdatedDateForNewRequest( $aoResponse, $sURL ) {
+                $this->___iLastModifiedDate = $this->getLastModified( $aoResponse, time() );
+                return $aoResponse;
+            }
 
     /**
      * @param  array|string $asKeywords
