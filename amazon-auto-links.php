@@ -24,7 +24,7 @@ class AmazonAutoLinks_Registry_Base {
     const URI            = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR         = 'miunosoft (Michael Uno)';
     const AUTHOR_URI     = 'https://en.michaeluno.jp/';
-    const PLUGIN_URI     = 'https://en.michaeluno.jp/amazon-auto-links';
+    const PLUGIN_URI     = 'https://en.michaeluno.jp/auto-amazon-links';
     const COPYRIGHT      = 'Copyright (c) 2013-2021, Michael Uno';
     const LICENSE        = 'GPL v2 or later';
     const CONTRIBUTORS   = '';
