@@ -144,6 +144,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'JP'    => 'aal_paapi_request_count_log_jp',
             'MX'    => 'aal_paapi_request_count_log_mx',
             'NL'    => 'aal_paapi_request_count_log_nl',
+            'PL'    => 'aal_paapi_request_count_log_pl',
             'SA'    => 'aal_paapi_request_count_log_sa',
             'SG'    => 'aal_paapi_request_count_log_sg',
             'TR'    => 'aal_paapi_request_count_log_tr',
