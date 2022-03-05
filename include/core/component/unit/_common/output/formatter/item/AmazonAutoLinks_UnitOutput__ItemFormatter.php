@@ -81,7 +81,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
             '%feature%'                     => $aProduct[ 'feature' ],                                  // [3.8.0+]
             '%rank%'                        => $aProduct[ 'sales_rank' ],                               // [3.8.0+]
             '%date%'                        => $_sUpdatedDate,                                          // [3.8.0+] The date that the data is retrieved and updated.
-            '%disclaimer%'                  => $this->___getPricingDisclaimer( $_sUpdatedDate ),        // [3.2.0+]
+            '%disclaimer%'                  => $this->___getPricingDisclaimer( $_sUpdatedDate, $_iUpdatedTime ), // [3.2.0+]
             '%prime%'                       => $this->getPrimeMark( $aProduct ),                        // [3.9.0+]
             '<!-- %_review_rate% -->'       => '',                                                      // [3.9.2+]
             '<!-- %_discount_rate% -->'     => '',                                                      // [3.9.2+]
@@ -147,14 +147,15 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
 
         /**
          * @since  3.2.0
-         * @since  3.5.0  Changed the visibility scope from protected.
-         * @since  3.5.0  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-         * @since  3.7.5  Made the date the cached time
-         * @param  string $sUpdatedDate
+         * @since  3.5.0   Changed the visibility scope from protected.
+         * @since  3.5.0   Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+         * @since  3.7.5   Made the date the cached time
+         * @param  string  $sUpdatedDate Human-readable time of the updated time
+         * @param  integer $iUpdatedTime The timestamp of the updated date
          * @return string
          */
-        private function ___getPricingDisclaimer( $sUpdatedDate ) {
-            return "<span class='pricing-disclaimer'>"
+        private function ___getPricingDisclaimer( $sUpdatedDate, $iUpdatedTime ) {
+            return "<span class='pricing-disclaimer' data-updated='" . esc_attr( $iUpdatedTime ) . "'>"
                 . "("
                     . sprintf(
                         __( 'as of %1$s', 'amazon-auto-links' ),
