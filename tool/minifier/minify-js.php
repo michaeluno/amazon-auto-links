@@ -60,15 +60,21 @@ foreach( $_oGenerator->get() as $_sScriptPath ) {
     $_aFileInfo      = $_oGenerator->getFileHeaderComment( $_sScriptPath, $_aFileInfoStruct );
     $_sScriptName    = trim( "{$_aFileInfo[ 'name' ]} {$_aFileInfo[ 'version' ]}" );
     $_sHeader        = $_sScriptName ? "/* {$_sScriptName} */" . PHP_EOL : '';
-    $_oMinifier      = Asika\Minifier\MinifierFactory::create('js' );
-    $_oMinifier->addFile( $_sScriptPath );
-    $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
-    if ( $_sPrevContent === $_sContent ) {
+
+    try {
+        $_oMinifier      = new MatthiasMullie\Minify\JS();
+        $_oMinifier->addFile( $_sScriptPath );
+        $_sContent       = trim( $_sHeader . $_oMinifier->minify() );
+        if ( $_sPrevContent === $_sContent ) {
+            continue;
+        }
+        file_put_contents( $_sMinScriptPath, $_sContent );
+        echo "{$_iCount}: Writing to " . $_sMinScriptPath . $sCarriageReturn;
+        $_iCount++;
+    } catch( IOException $_oIOException ) {
+        echo $_oIOException->getMessage() . $sCarriageReturn;
         continue;
     }
 
-    file_put_contents( $_sMinScriptPath, $_sContent );
-    echo "{$_iCount}: Writing to " . $_sMinScriptPath . $sCarriageReturn;
-    $_iCount++;
 }
 echo 'Done!' . $sCarriageReturn;
