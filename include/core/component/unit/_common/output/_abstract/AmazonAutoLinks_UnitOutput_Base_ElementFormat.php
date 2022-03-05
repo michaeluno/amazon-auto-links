@@ -229,6 +229,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             );
             $_aProduct[ 'formatted_discount' ] = $_oDiscount->get();
 
+            // 5.2.0    The document last updated and the product table updated time can be different as the latter gets updated in the background.
+            // The `updated_date` value is used for elements including prices, disclaimer, prime and customer ratings and it should use the latest value possible.
+            $_oUpdatedTime                = new AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime(
+                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
+            );
+            $_aProduct[ 'updated_date' ]  = $_oUpdatedTime->get();
+
             /**
              * Merge the product array with the database product row
              * This is mainly for the feed unit type that helps sites without API access to reuse data from external sites with API access.

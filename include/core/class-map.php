@@ -1,6 +1,6 @@
 <?php 
 /**
-    Auto Amazon Links v5.1.2b04 by miunosoft (Michael Uno) 
+    Auto Amazon Links v5.1.3 by miunosoft (Michael Uno) 
     Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
     <https://en.michaeluno.jp/amazon-auto-links>
     Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
@@ -460,6 +460,7 @@ return array(
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Price" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Price.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Title" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Title.php", 
+    "AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating.php", 
     "AmazonAutoLinks_ProductFilter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/product_filter/AmazonAutoLinks_ProductFilter.php", 
     "AmazonAutoLinks_UnitOutput__ImpressionCounter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/resource/AmazonAutoLinks_UnitOutput__ImpressionCounter.php", 
