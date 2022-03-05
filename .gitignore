@@ -3,6 +3,7 @@
 /v2
 
 # Dependencies
+tool/vendor
 node_modules/
 
 # Editor Files
