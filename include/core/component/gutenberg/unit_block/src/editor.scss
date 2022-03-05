@@ -20,4 +20,5 @@
 .aal-unit-preview-frame {
 	min-height: 200px;
 	max-height: 400px;
+	width: 100%;  /* For widget blocks in the widget screen, the frame width needs to fully expand to fit its container */
 }

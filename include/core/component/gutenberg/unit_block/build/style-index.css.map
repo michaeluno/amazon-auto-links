@@ -1,1 +1,0 @@
-{"version":3,"file":"style-index.css","mappings":";;;AAAA;EACI;EACA;AACJ,C","sources":["webpack:///./src/style.scss"],"sourcesContent":[".aal-gutenberg-preview {\r\n    max-height: 400px;\r\n    overflow: auto;\r\n}"],"names":[],"sourceRoot":""}
