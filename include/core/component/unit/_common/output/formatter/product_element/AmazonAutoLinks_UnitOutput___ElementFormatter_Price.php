@@ -73,12 +73,15 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Price extends AmazonAutoLink
             $inDiscounted         = $this->_getCell( 'discounted_price' );
             $sDiscountedFormatted = $this->_getCell( 'discounted_price_formatted' );
             $sLowestNewFormatted  = $this->_getCell( 'lowest_new_price_formatted' );
+            $_sUpdatedTime        = $this->getElement( $this->_aRow, array( 'modified_time' ) );
+            $_iUpdatedTime        = empty( $_sUpdatedTime ) ? 0 : strtotime( $_sUpdatedTime );
             return AmazonAutoLinks_Unit_Utility::getPrice(
                 $sPriceFormatted,
                 $inDiscounted,
                 $inLowestNew,
                 $sDiscountedFormatted,
-                $sLowestNewFormatted
+                $sLowestNewFormatted,
+                $_iUpdatedTime
             );
         }
 
