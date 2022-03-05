@@ -10,14 +10,14 @@
 /**
  * Handles unit options.
  * 
- * @since       3
- * @remark      Do not make it abstract as form fields classes need to access the default struture of the item format array.
+ * @since  3
+ * @remark Do not make it abstract as form fields classes need to access the default struture of the item format array.
  */
 class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
     /**
      * Stores the unit type.
-     * @remark      Should be overridden in an extended class.
+     * @remark Should be overridden in an extended class.
      */
     public $sUnitType = 'category';
 
@@ -34,15 +34,15 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     static public $aStructure_Default = array();
     
     /**
-     * @remark      Shortcode argument keys are all converted to lower-cases but Amazon API keys are camel-cased.
-     * @since       3.4.6
+     * @remark Shortcode argument keys are all converted to lower-cases but Amazon API keys are camel-cased.
+     * @since  3.4.6
      */
     static public $aShortcodeArgumentKeys = array();
     
     /**
      * Stores the default unit option values and represents the array structure.
      * 
-     * @remark      Should be defined in an extended class.
+     * @remark Should be defined in an extended class.
      */
     public $aDefault = array();
 
@@ -59,7 +59,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     public $aUnitOptions = array();
 
     /**
-     * Unformatted raw unit options passed directly.
+     * Un-formatted raw unit options passed directly.
      * @var  array 
      * @sine 4.3.4
      */
@@ -67,15 +67,15 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     
     /**
      * @remark Set externally from the output class.
-     * @var string|null Stores a output call ID to distinguish output calls.
+     * @var    string|null Stores a output call ID to distinguish output calls.
      */
     public $sCallID;
 
     /**
      * Sets up properties.
      * 
-     * @param       integer     $iUnitID        The unit ID as a post ID.
-     * @param       array       $aUnitOptions   (optional) The unit option to set. Used to sanitize unit options.
+     * @param integer $iUnitID        The unit ID as a post ID.
+     * @param array   $aUnitOptions   (optional) The unit option to set. Used to sanitize unit options.
      */
     public function __construct( $iUnitID, array $aUnitOptions=array() ) {
 
@@ -114,27 +114,22 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @return      array
+         * @return array
          */
         protected function getDefaultOptionStructure() {
-
-            // This lets PHP 5.2 access static properties of an extended class.
-            $_aProperties = get_class_vars( get_class( $this ) );
+            $_aProperties = get_class_vars( get_class( $this ) );   // This lets PHP 5.2 access static properties of an extended class.
             return $_aProperties[ 'aStructure_Default' ];
-            
         }
 
     /**
-     *
-     * @param array $aUnitOptions
-     * @param array $aDefaults
-     * @param array $aRawOptions
-     *
+     * @since  3
+     * @since  4.0.0 Changed the name from `format()` as it was too general.
+     * @since  4.0.0 Added the `$aDefaults` parameter.
+     * @since  4.3.4 Added the `$aRawOptions` parameter.
+     * @param  array $aUnitOptions
+     * @param  array $aDefaults
+     * @param  array $aRawOptions
      * @return array|mixed
-     * @since       3
-     * @since       4.0.0   Changed the name from `format()` as it was too general.
-     * @since       4.0.0   Added the `$aDefaults` parameter.
-     * @since       4.3.4   Added the `$aRawOptions` parameter.
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
 
@@ -204,11 +199,11 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
     }
         /**
          * associate_id, language, and preferred currency, are locale-dependant.
+         * @since  4.5.0
          * @param  array $aUnitOptions
          * @param  array $aDefaults
          * @param  AmazonAutoLinks_Option $oOption
          * @return array
-         * @since  4.5.0
          */
         private function ___getLocaleSpecificsAdded( array $aUnitOptions, array $aDefaults, AmazonAutoLinks_Option $oOption ) {
 
@@ -243,11 +238,10 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
         /**
          * Extracts the Output Formats unit option from the unit options array.
-         * @param   array $aUnitOptions
-         * @param   string $sTemplateID
-         *
-         * @return  array
          * @since   4.0.4
+         * @param   array  $aUnitOptions
+         * @param   string $sTemplateID
+         * @return  array
          */
         private function ___getOutputFormats( array $aUnitOptions, $sTemplateID ) {
             $_sTemplateFieldKey  = str_replace( array( '.', '/', '\\', '-' ), '_', $sTemplateID ); // the field id (name) gets automatically converted by Admin Page Framework.
@@ -260,12 +254,12 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @param  array  $aUnitOptions       The unit options to parse.
-         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param  string $sTemplateID        The set template ID.
-         * @param  array  $aRawOptions
          * @since  4.3.0
          * @since  4.3.4  Added the `$aRawOptions` parameter.
+         * @param  array  $aUnitOptions   The unit options to parse.
+         * @param  array  $aOutputFormats The `output_formats` element of unit options.
+         * @param  string $sTemplateID    The set template ID.
+         * @param  array  $aRawOptions
          * @return string
          */
         private function ___getUnitFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
@@ -286,17 +280,17 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `item_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param  array  $aUnitOptions       The unit options to parse.
-         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param  string $sTemplateID        The set template ID.
-         * @param  array  $aRawOptions        The raw direct unit options. Used to suppress the option and to check the unit option structure for older versions.
-         * @return string
          * @since  4.0.0
          * @since  4.3.4  Added the `$aRawOptions` parameter.
+         * @param  array  $aUnitOptions   The unit options to parse.
+         * @param  array  $aOutputFormats The `output_formats` element of unit options.
+         * @param  string $sTemplateID    The set template ID.
+         * @param  array  $aRawOptions    The raw direct unit options. Used to suppress the option and to check the unit option structure for older versions.
+         * @return string
          */
         private function ___getItemFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
 
-             // If directly set, use it.
+            // If directly set, use it.
             $_sRawItemFormat = $this->getElement( $aRawOptions, array( 'item_format' ) );
             if ( isset( $_sRawItemFormat ) ) {
                 return $_sRawItemFormat;
@@ -336,13 +330,13 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `image_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param  array  $aUnitOptions       The unit options to parse.
-         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param  string $sTemplateID        The set template ID.
-         * @param  array  $aRawOptions
-         * @return string
          * @since  4.0.0
          * @since  4.3.4  Added the `$aRawOptions` parameter.
+         * @param  array  $aUnitOptions   The unit options to parse.
+         * @param  array  $aOutputFormats The `output_formats` element of unit options.
+         * @param  string $sTemplateID    The set template ID.
+         * @param  array  $aRawOptions
+         * @return string
          */
         private function ___getImageFormat( array $aUnitOptions, array $aOutputFormats, $sTemplateID, array $aRawOptions ) {
             // If directly set, use it.
@@ -362,9 +356,9 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         /**
          * Returns the `title_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.
          *
-         * @param  array  $aUnitOptions       The unit options to parse.
-         * @param  array  $aOutputFormats     The `output_formats` element of unit options.
-         * @param  string $sTemplateID        The set template ID.
+         * @param  array  $aUnitOptions   The unit options to parse.
+         * @param  array  $aOutputFormats The `output_formats` element of unit options.
+         * @param  string $sTemplateID    The set template ID.
          * @param  array  $aRawOptions
          * @return string
          * @since  4.0.0
@@ -388,11 +382,11 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @remark      shortcode arguments are all converted to lower-cases but Amazon API keys are camel-cased.
-         * @param       array       $aUnitOptions
-         * @param       array       $aShortcodeArgumentKeys
-         * @since       3.4.6
-         * @return      array
+         * @remark shortcode arguments are all converted to lower-cases but Amazon API keys are camel-cased.
+         * @since  3.4.6
+         * @param  array $aUnitOptions
+         * @param  array $aShortcodeArgumentKeys
+         * @return array
          */
         protected function _getShortcodeArgumentKeysSanitized( array $aUnitOptions, array $aShortcodeArgumentKeys ) {
             // Shortcode parameter keys are converted to lower cases.
@@ -409,14 +403,8 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
     /**
      * Returns the all associated options if no key is set; otherwise, the value of the specified key.
-     * 
-     * @since       3
-     * @return      
-     */
-    /**
-     * Returns the all associated options if no key is set; otherwise, the value of the specified key.
      *
-     * @since       3
+     * @since  3
      * @return mixed
      */
     public function get( /* $sKey1, $sKey2, $sKey3, ... OR $aKeys, $vDefault */ ) {
@@ -451,7 +439,6 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
      * 
      * @param  array|string $asOptionKey The key path. e.g. 'search_per_keyword'
      * @param  mixed        $mValue
-     * @return void
      * @since  3.1.4
      */
     public function set( $asOptionKey, $mValue ) {
