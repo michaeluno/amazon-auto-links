@@ -363,7 +363,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                     'similar_products'    => '',
 
                 )
-                + $this->oUnitOutput->getPrices( $_aItem, is_numeric( $_sResponseDate ) ? $_sResponseDate : strtotime( $_sResponseDate ) )
+                + $this->oUnitOutput->getPrices( $_aItem )
                 + $_aItem;
 
                 // 3.8.11 Retrieve the images directly from the response rather than the custom database table

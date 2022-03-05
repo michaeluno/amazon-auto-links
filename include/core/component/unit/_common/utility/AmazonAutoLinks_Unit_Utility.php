@@ -227,23 +227,21 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  integer|null $inLowestNew
      * @param  string       $sDiscountedFormatted
      * @param  string       $sLowestNewFormatted
-     * @param  integer      $iUpdatedTime
      * @return string       The price output. If a discount is available, the discounted price is also returned along with the proper price.
      * @since  3.8.11
-     * @since  5.2.0        Added the `$iUpdatedTime` parameter.
      */
-    static public function getPrice( $sPriceFormatted, $inDiscounted, $inLowestNew, $sDiscountedFormatted, $sLowestNewFormatted, $iUpdatedTime=0 ) {
+    static public function getPrice( $sPriceFormatted, $inDiscounted, $inLowestNew, $sDiscountedFormatted, $sLowestNewFormatted ) {
         $_inOffered            = self::___getLowestPrice( $inLowestNew, $inDiscounted );
         $_sLowestFormatted     = $inDiscounted === $_inOffered
             ? $sDiscountedFormatted
             : $sLowestNewFormatted;
         $_bDiscounted          = $_sLowestFormatted && ( $sPriceFormatted !== $_sLowestFormatted );
         return $_bDiscounted
-            ? '<span class="amazon-prices" data-updated="' . ( integer ) $iUpdatedTime . '"><span class="proper-price"><s>' . $sPriceFormatted . '</s></span> '
+            ? '<span class="amazon-prices"><span class="proper-price"><s>' . $sPriceFormatted . '</s></span> '
                 . '<span class="offered-price">' . $_sLowestFormatted . '</span></span>'
             : ( '' === $sPriceFormatted
                 ? ''
-                : '<span class="amazon-prices" data-updated="' . ( integer ) $iUpdatedTime . '"><span class="offered-price">' . $sPriceFormatted . '</span></span>'
+                : '<span class="amazon-prices"><span class="offered-price">' . $sPriceFormatted . '</span></span>'
             );
     }
         /**
@@ -274,7 +272,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param   integer $iUpdatedTime
      * @return  array
      */
-    static public function getPrices( array $aItem, $iUpdatedTime=0 ) {
+    static public function getPrices( array $aItem ) {
         
         // The actual displayed tag price. This can be a discount price or proper price.
         $_aBuyingPrice         = self::getElementAsArray(
@@ -356,8 +354,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             $_inDiscountedPrice,            // integer|null
             $_aLowests[ 'new_amount' ],     // integer|null
             $_sDiscountedPrice,             // string
-            $_aLowests[ 'new_formatted' ],  // string
-            $iUpdatedTime                   // [5.2.0]
+            $_aLowests[ 'new_formatted' ]   // string
         );
         return $_aPrices;
 

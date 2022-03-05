@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
 
     /**
      * @var   AmazonAutoLinks_UnitOutput_ad_widget_search
-     * @since 5.1.0
+     * @since 5.2.0
      */
     public $oUnitOutput;
 
@@ -93,7 +93,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
         $_aProduct[ 'formatted_title' ]     = $this->oUnitOutput->getProductTitleFormatted( $_aProduct, $this->oUnitOutput->oUnitOption->get( 'title_format' ) );
 
         // Price
-        $_aProduct[ 'formatted_price' ]     = AmazonAutoLinks_Unit_Utility::getPrice( $_aProduct[ 'ListPrice' ], null, null, $_aProduct[ 'Price' ], $_aProduct[ 'Price' ], $this->oUnitOutput->iLastModified );
+        $_aProduct[ 'formatted_price' ]     = AmazonAutoLinks_Unit_Utility::getPrice( $_aProduct[ 'ListPrice' ], null, null, $_aProduct[ 'Price' ], $_aProduct[ 'Price' ] );
 
         // Discount
         $_aProduct[ 'formatted_discount' ]  = $this->___getDiscountFormatted( $_aProduct[ 'ListPrice' ], $_aProduct[ 'Price' ] );
