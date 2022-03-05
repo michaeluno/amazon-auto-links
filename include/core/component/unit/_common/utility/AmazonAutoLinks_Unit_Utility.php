@@ -267,9 +267,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     /**
      * Extracts price information from a PA API response item element.
      * @since   3.9.0
-     * @since   5.2.0   Added the `$iUpdatedTime` parameter.
      * @param   array   $aItem
-     * @param   integer $iUpdatedTime
      * @return  array
      */
     static public function getPrices( array $aItem ) {

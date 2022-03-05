@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
 
     /**
      * @var   AmazonAutoLinks_UnitOutput_ad_widget_search
-     * @since 5.2.0
+     * @since 5.1.4
      */
     public $oUnitOutput;
 

@@ -317,7 +317,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
 
             // Insert internal tags.
 
-            /// [5.2.0] Add %_updated_time% when some dynamic elements which needs to be handled with an updated time such as price, disclaimer, prime, ratings are set.
+            /// [5.1.4] Add %_updated_time% when some dynamic elements which needs to be handled with an updated time such as price, disclaimer, prime, ratings are set.
             $_sItemFormat = $this->___getTagOfUpdatedTimeInserted( $_sItemFormat );
 
             /// For hidden Item Format elements, '%_discount_rate%', '%_review_rate%'
@@ -332,7 +332,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         }
             /**
              * Adds the `%_updated_time%` tag when some dynamic elements which needs to be handled with an updated time such as price, disclaimer, prime, ratings are set.
-             * @since  5.2.0
+             * @since  5.1.4
              * @param  string $sItemFormat
              * @return string
              */

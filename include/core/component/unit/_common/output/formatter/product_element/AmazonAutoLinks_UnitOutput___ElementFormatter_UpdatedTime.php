@@ -11,14 +11,14 @@
 /**
  * A class that provides methods to format the `updated_date` element value.
  *
- * @since 5.2.0
+ * @since 5.1.4
  */
 class AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
     /**
      * @return string
      * @throws Exception
-     * @since  5.2.0
+     * @since  5.1.4
      */
     public function get() {
         $_isUpdatedTimeFetched  = $this->_aProduct[ 'updated_date' ];

@@ -178,7 +178,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 'sales_rank'         => 'AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank',           // 3.8.0
                 'title'              => 'AmazonAutoLinks_UnitOutput___ElementFormatter_Title',               // 3.10.0
                 'formatted_discount' => 'AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage',  // 4.7.8
-                'updated_date'       => 'AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime',         // 5.2.0  The document last updated and the product table updated time can be different as the latter gets updated in the background. The `updated_date` value is used for elements including prices, disclaimer, prime and customer ratings and it should use the latest value possible.
+                'updated_date'       => 'AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime',         // 5.1.4  The document last updated and the product table updated time can be different as the latter gets updated in the background. The `updated_date` value is used for elements including prices, disclaimer, prime and customer ratings and it should use the latest value possible.
             );
             foreach( $_aFormatterClasses as $_sKey => $_sClassName ) {
                 $_oFormatter         = new $_sClassName( $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct );
