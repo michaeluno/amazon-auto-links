@@ -11,7 +11,7 @@
 /**
  * A class that provides methods to format product item output.
  *
- * @since       3.5.0
+ * @since 3.5.0
  */
 class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutput_Utility {
 
@@ -42,7 +42,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
     }
 
     /**
-     * @return      string
+     * @return string
      */
     public function get() {
         return $this->___getProductOutputFormatted( $this->___aProduct );
@@ -50,12 +50,12 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
 
     /**
      * Returns the formatted product HTML block.
-     * @since       2.1.1
-     * @since       3.5.0       Changed the visibility scope from protected.
-     * @since       3.5.0       Renamed from `_formatProductOutput()`.
-     * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-     * @param       array       $aProduct
-     * @return      string
+     * @since  2.1.1
+     * @since  3.5.0  Changed the visibility scope from protected.
+     * @since  3.5.0  Renamed from `_formatProductOutput()`.
+     * @since  3.5.0  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+     * @param  array  $aProduct
+     * @return string
      */
     private function ___getProductOutputFormatted( array $aProduct ) {
 
@@ -127,10 +127,9 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 . '</div>';
         }
         /**
-         * @param integer|string $isResponseDate
-         *
-         * @return  int
-         * @since   3.8.0
+         * @param  integer|string $isResponseDate
+         * @return integer
+         * @since  3.8.0
          */
         private function ___getProductUpdatedTime( $isResponseDate ) {
             if ( is_numeric( $isResponseDate ) ) {
@@ -167,9 +166,9 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
                 . "</span>";
         }
             /**
-             * @since       3.2.0
-             * @since       3.5.0       Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-             * @return      string
+             * @since  3.2.0
+             * @since  3.5.0  Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
+             * @return string
              */
             private function ___getDisclaimerTooltip() {
                 $_sText   = __( "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.", 'amazon-auto-links' );
