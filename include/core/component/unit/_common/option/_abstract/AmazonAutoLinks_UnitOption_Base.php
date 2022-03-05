@@ -315,8 +315,12 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
                     $this->getElement( $aUnitOptions, array( 'country' ), 'US' )  // [4.5.0]
                 );
 
-            // Append internal tags.
-            // For hidden Item Format elements, '%_discount_rate%', '%_review_rate%'
+            // Insert internal tags.
+
+            /// [5.2.0] Add %_updated_time% when some dynamic elements which needs to be handled with an updated time such as price, disclaimer, prime, ratings are set.
+            $_sItemFormat = $this->___getTagOfUpdatedTimeInserted( $_sItemFormat );
+
+            /// For hidden Item Format elements, '%_discount_rate%', '%_review_rate%'
             if ( $this->getElement( $aUnitOptions, array( '_filter_by_rating', 'enabled' ) ) ) {
                 $_sItemFormat .= '<!-- %_review_rate% -->';
             }
@@ -326,6 +330,23 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             return $_sItemFormat;
 
         }
+            /**
+             * Adds the `%_updated_time%` tag when some dynamic elements which needs to be handled with an updated time such as price, disclaimer, prime, ratings are set.
+             * @since  5.2.0
+             * @param  string $sItemFormat
+             * @return string
+             */
+            private function ___getTagOfUpdatedTimeInserted( $sItemFormat ) {
+                $_aDynamicElements = array( '%price%', '%disclaimer%', '%prime%', '%discount%', '%rating%' );
+                foreach( $_aDynamicElements as $_sTagToCheck ) {
+                    $_sPreviousItemFormat = $sItemFormat;
+                    $sItemFormat          = str_replace( $_sTagToCheck, $_sTagToCheck . ' <!-- %_updated_time% -->', $sItemFormat );
+                    if ( $_sPreviousItemFormat !== $sItemFormat ) {
+                        return $sItemFormat;
+                    }
+                }
+                return $sItemFormat;
+            }
 
         /**
          * Returns the `image_format` unit option. As of v4, it is not stored anywhere but `output_formats` option holds the value for each template.

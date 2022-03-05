@@ -89,6 +89,7 @@ class AmazonAutoLinks_UnitOutput__ItemFormatter extends AmazonAutoLinks_UnitOutp
             '%author%'                      => $this->___getAuthorOutput( $aProduct ),                  // [4.1.0+]
             '%author_text%'                 => $this->getElement( $aProduct, array( 'author' ), '' ),   // [4.7.10+]
             '%discount%'                    => $aProduct[ 'formatted_discount' ], // [4.7.8+] // $this->getElement( $aProduct, 'discount', '' ),
+            '<!-- %_updated_time% -->'      => "<span class='amazon-product-updated-time' data-updated-timestamp='" . esc_attr( $_iUpdatedTime ) . "' data-updated-time='" . esc_attr( $_sUpdatedDate ) . "'></span>", // 5.2.0
         );
         $_aReplacements = apply_filters( 'aal_filter_unit_item_format_tag_replacements', $_aReplacements, $aProduct ); // [4.4.2+] Allows third parties to add custom tags.
         $_sOutput       = str_replace(
