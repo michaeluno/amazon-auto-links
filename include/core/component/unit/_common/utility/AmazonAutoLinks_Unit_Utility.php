@@ -230,6 +230,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  integer      $iUpdatedTime
      * @return string       The price output. If a discount is available, the discounted price is also returned along with the proper price.
      * @since  3.8.11
+     * @since  5.2.0        Added the `$iUpdatedTime` parameter.
      */
     static public function getPrice( $sPriceFormatted, $inDiscounted, $inLowestNew, $sDiscountedFormatted, $sLowestNewFormatted, $iUpdatedTime=0 ) {
         $_inOffered            = self::___getLowestPrice( $inLowestNew, $inDiscounted );
@@ -267,11 +268,13 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Extracts price information from a PA API response item element.
-     * @param   array $aItem
      * @since   3.9.0
+     * @since   5.2.0   Added the `$iUpdatedTime` parameter.
+     * @param   array   $aItem
+     * @param   integer $iUpdatedTime
      * @return  array
      */
-    static public function getPrices( array $aItem ) {
+    static public function getPrices( array $aItem, $iUpdatedTime=0 ) {
         
         // The actual displayed tag price. This can be a discount price or proper price.
         $_aBuyingPrice         = self::getElementAsArray(
@@ -353,7 +356,8 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             $_inDiscountedPrice,            // integer|null
             $_aLowests[ 'new_amount' ],     // integer|null
             $_sDiscountedPrice,             // string
-            $_aLowests[ 'new_formatted' ]   // string
+            $_aLowests[ 'new_formatted' ],  // string
+            $iUpdatedTime                   // [5.2.0]
         );
         return $_aPrices;
 
