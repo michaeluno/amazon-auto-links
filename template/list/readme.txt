@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.3.0 =
+- Fixed an issue with block widgets that the thumbnail overlaps with the product content body.
+
 = 1.2.20 =
 - Disabled vertical scrollbars in unit previews.
 - Remove button margin for last products only in unit previews.

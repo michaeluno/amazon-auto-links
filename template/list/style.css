@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for the list unit type.
-    Version:        1.2.20
+    Version:        1.3.0
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -352,30 +352,42 @@
 }
 
 /* Widget Area */
-.amazon-auto-links-widget .amazon-products-container-list .amazon-product-container {
+.widget-area .amazon-products-container-list .amazon-product-container,
+.amazon-auto-links-widget .amazon-products-container-list .amazon-product-container
+{
     padding-right: 1em;
 }
 /* Widget Area - Body */
-.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-body {
+.widget-area .amazon-products-container-list .amazon-auto-links-product-body,
+.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-body
+{
     width: auto;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
 /* Widget Area - Images */
-.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-image {
+.widget-area .amazon-products-container-list .amazon-auto-links-product-image,
+.amazon-auto-links-widget .amazon-products-container-list .amazon-auto-links-product-image
+{
     width: 100%;
     max-width: none;
 }
 /* Widget Area - Sub-images */
-.amazon-auto-links-widget .amazon-products-container-list .sub-image-container {
+.widget-area .amazon-products-container-list .sub-image-container,
+.amazon-auto-links-widget .amazon-products-container-list .sub-image-container
+{
     margin: 0.4em 0.4em 0 0;
 }
-.amazon-auto-links-widget .amazon-products-container-list .sub-images {
+.widget-area .amazon-products-container-list .sub-images,
+.amazon-auto-links-widget .amazon-products-container-list .sub-images
+{
     margin-bottom: 1em;
 }
 /* Widget Area - Contents*/
-.amazon-auto-links-widget .amazon-products-container-list .amazon-product-content * {
+.widget-area .amazon-products-container-list .amazon-product-content *,
+.amazon-auto-links-widget .amazon-products-container-list .amazon-product-content *
+{
     width: auto;
     display: inline-block;
     max-width: 100%;

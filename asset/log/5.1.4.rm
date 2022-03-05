@@ -1,1 +1,2 @@
-- Fix a bug that request counter data for the Poland locale was not stored properly. 
+- Fixed an issue with the List template that the layout gets broken with block widgets.   
+- Fixed a bug that request counter data for the Poland locale was not stored properly. 
