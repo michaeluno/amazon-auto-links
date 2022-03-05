@@ -164,77 +164,42 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 $_sLanguage
             );
 
-            $_oPriceFormatter                = new AmazonAutoLinks_UnitOutput___ElementFormatter_Price(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            // @since 4.0.0 the key `price` is deprecated and replaced with `formatted_price`, to be compatible with database table column keys.
-            $_aProduct[ 'formatted_price' ]  = $_oPriceFormatter->get(); // 4.0.0
+            $_sNativeTitle        = $_aProduct[ 'title' ];
+            $_sNativeThumbnailURL = $_aProduct[ 'thumbnail_url' ];
 
-            $_oUserReviewFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption
+            // Format elements
+            $_aFormatterClasses   = array(
+                'formatted_price'    => 'AmazonAutoLinks_UnitOutput___ElementFormatter_Price',               // 4.0.0 The key `price` is deprecated and replaced with `formatted_price`, to be compatible with database table column keys.
+                'review'             => 'AmazonAutoLinks_UnitOutput___ElementFormatter_CustomerReview',
+                'formatted_rating'   => 'AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating',
+                'image_set'          => 'AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet',
+                'feature'            => 'AmazonAutoLinks_UnitOutput___ElementFormatter_Features',            // 3.8.0
+                'category'           => 'AmazonAutoLinks_UnitOutput___ElementFormatter_Categories',          // 3.8.0
+                'sales_rank'         => 'AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank',           // 3.8.0
+                'title'              => 'AmazonAutoLinks_UnitOutput___ElementFormatter_Title',               // 3.10.0
+                'formatted_discount' => 'AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage',  // 4.7.8
+                'updated_date'       => 'AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime',         // 5.2.0  The document last updated and the product table updated time can be different as the latter gets updated in the background. The `updated_date` value is used for elements including prices, disclaimer, prime and customer ratings and it should use the latest value possible.
             );
-            $_aProduct[ 'review' ]           = $_oUserReviewFormatter->get();
-
-            $_oUserRatingFormatter           = new AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'formatted_rating' ] = $_oUserRatingFormatter->get();
-
-            $_oImageSetFormatter             = new AmazonAutoLinks_UnitOutput___ElementFormatter_ImageSet(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'image_set' ]        = $_oImageSetFormatter->get();
+            foreach( $_aFormatterClasses as $_sKey => $_sClassName ) {
+                $_oFormatter         = new $_sClassName( $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct );
+                $_aProduct[ $_sKey ] = $_oFormatter->get();
+            }
 
             // 3.9.0 Deprecated
             $_aProduct[ 'similar_products' ] = '';
 
-            // 3.8.0 adding `feature`, `category`, `rank`
-            // for search-type units, the value is already assigned
-            $_oFeatureFormatter         = new AmazonAutoLinks_UnitOutput___ElementFormatter_Features(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'feature' ]     = $_oFeatureFormatter->get();
-
-            $_oCategoryFormatter         = new AmazonAutoLinks_UnitOutput___ElementFormatter_Categories(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'category' ]     = $_oCategoryFormatter->get();
-            $_oSalesRankFormatter        = new AmazonAutoLinks_UnitOutput___ElementFormatter_SalesRank(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'sales_rank' ]   = $_oSalesRankFormatter->get();
-
             // 3.10.0
-            $_sNativeTitle = $_aProduct[ 'title' ];
-            $_oTitleFormatter            = new AmazonAutoLinks_UnitOutput___ElementFormatter_Title(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'title' ]        = $_oTitleFormatter->get();
             if ( $_sNativeTitle !== $_aProduct[ 'title' ] ) {
                 $_aProduct[ 'formatted_title' ] = $this->getProductTitleFormatted( $_aProduct, $this->oUnitOption->get( 'title_format' ) );
             }
 
             // 4.2.8
-            $_sNativeThumbnailURL         = $_aProduct[ 'thumbnail_url' ];
             $_aProduct[ 'thumbnail_url' ] = isset( $_aProduct[ 'thumbnail_url' ] )
                 ? $_aProduct[ 'thumbnail_url' ]
                 : $this->getElement( $_aDBProductRow, array( 'images', 'main', 'MediumImage' ), '' );
             if ( $_sNativeThumbnailURL !== $_aProduct[ 'thumbnail_url' ] ) {
                 $_aProduct[ 'formatted_thumbnail' ] = $this->getProductThumbnailFormatted( $_aProduct );
             }
-
-            // 4.7.8
-            $_oDiscount                   = new AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'formatted_discount' ] = $_oDiscount->get();
-
-            // 5.2.0    The document last updated and the product table updated time can be different as the latter gets updated in the background.
-            // The `updated_date` value is used for elements including prices, disclaimer, prime and customer ratings and it should use the latest value possible.
-            $_oUpdatedTime                = new AmazonAutoLinks_UnitOutput___ElementFormatter_UpdatedTime(
-                $_aProduct[ 'ASIN' ], $sLocale, $sAssociateID, $_aDBProductRow, $this->oUnitOption, $_aProduct
-            );
-            $_aProduct[ 'updated_date' ]  = $_oUpdatedTime->get();
 
             /**
              * Merge the product array with the database product row
@@ -366,7 +331,6 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
                 ),
                 $this->oUnitOption->get( 'image_format' )
             )
-            // ;
             . "</div>";
         
     }
