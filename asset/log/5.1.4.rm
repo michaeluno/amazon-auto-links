@@ -1,0 +1,1 @@
+- Fix a bug that request counter data for the Poland locale was not stored properly. 
