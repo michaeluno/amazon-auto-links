@@ -1,33 +1,33 @@
 <?php
 /**
- *    Plugin Name:    Auto Amazon Links
- *    Plugin URI:     https://en.michaeluno.jp/amazon-auto-links
- *    Description:    Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
- *    Author:         Michael Uno (miunosoft)
- *    Author URI:     http://michaeluno.jp
- *    Version:        5.1.4b01
- *    Text Domain:    amazon-auto-links
- *    Domain Path:    /language
- *    GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
+ * Plugin Name:       Auto Amazon Links
+ * Plugin URI:        https://en.michaeluno.jp/amazon-auto-links
+ * Description:       Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ * Author:            Michael Uno (miunosoft)
+ * Author URI:        http://michaeluno.jp
+ * Version:           5.1.4
+ * Text Domain:       amazon-auto-links
+ * Domain Path:       /language
+ * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
  */
 
 /**
  * Provides the basic information about the plugin.
  * 
  * @since 2.0.6
- * @since 3       Changed the name from `AmazonAutoLinks_Commons_Base`
+ * @since 3     Changed the name from `AmazonAutoLinks_Commons_Base`
  */
 class AmazonAutoLinks_Registry_Base {
-    const VERSION        = '5.1.4b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
-    const NAME           = 'Auto Amazon Links';
-    const DESCRIPTION    = 'Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
-    const URI            = 'https://en.michaeluno.jp/amazon-auto-links';
-    const AUTHOR         = 'miunosoft (Michael Uno)';
-    const AUTHOR_URI     = 'https://en.michaeluno.jp/';
-    const PLUGIN_URI     = 'https://en.michaeluno.jp/auto-amazon-links';
-    const COPYRIGHT      = 'Copyright (c) 2013-2021, Michael Uno';
-    const LICENSE        = 'GPL v2 or later';
-    const CONTRIBUTORS   = '';
+    const VERSION      = '5.1.4';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const NAME         = 'Auto Amazon Links';
+    const DESCRIPTION  = 'Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+    const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
+    const AUTHOR       = 'miunosoft (Michael Uno)';
+    const AUTHOR_URI   = 'https://en.michaeluno.jp/';
+    const PLUGIN_URI   = 'https://en.michaeluno.jp/auto-amazon-links';
+    const COPYRIGHT    = 'Copyright (c) 2013-2021, Michael Uno';
+    const LICENSE      = 'GPL v2 or later';
+    const CONTRIBUTORS = '';
  
 }
 
