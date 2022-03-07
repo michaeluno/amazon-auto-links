@@ -84,4 +84,30 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
                         
         }        
 
+    /**
+     * Checks whether the meta box should be registered or not in the loading page.
+     * @return boolean
+     * @since  5.2.0
+     */
+    protected function _isInThePage() {
+
+        if ( ! parent::_isInThePage() ) {
+            return false;
+        }
+        
+        // At this point, it is TRUE evaluated by the framework. But we need to evaluate it for the plugin.
+        
+        // Get the post ID.
+        $_iPostID = AmazonAutoLinks_WPUtility::getCurrentPostID();
+        
+        // Maybe post-new.php
+        if ( ! $_iPostID ) {
+            return true;
+        }
+
+        $_sButtonType = get_post_meta( $_iPostID, '_button_type', true );
+        return empty( $_sButtonType );
+
+    }        
+        
 }
