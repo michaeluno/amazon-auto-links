@@ -20,12 +20,12 @@
 class AmazonAutoLinks_Registry_Base {
     const VERSION      = '5.1.4';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME         = 'Auto Amazon Links';
-    const DESCRIPTION  = 'Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+    const DESCRIPTION  = 'Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR       = 'miunosoft (Michael Uno)';
     const AUTHOR_URI   = 'https://en.michaeluno.jp/';
     const PLUGIN_URI   = 'https://en.michaeluno.jp/auto-amazon-links';
-    const COPYRIGHT    = 'Copyright (c) 2013-2021, Michael Uno';
+    const COPYRIGHT    = 'Copyright (c) 2013-2022, Michael Uno';
     const LICENSE      = 'GPL v2 or later';
     const CONTRIBUTORS = '';
  
