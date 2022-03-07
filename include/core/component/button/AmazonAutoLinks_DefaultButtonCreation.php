@@ -70,7 +70,7 @@ class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_ButtonUtilit
                 update_post_meta(
                     $_iPostID, // post id
                     'button_css', // meta key
-                    AmazonAutoLinks_ButtonResourceLoader::getDefaultButtonCSS( $_iPostID ) // value
+                    AmazonAutoLinks_Button_ResourceLoader::getDefaultButtonCSS( $_iPostID ) // value
                 );                  
             }
             return ( integer ) $_iPostID;

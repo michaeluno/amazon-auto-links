@@ -12,11 +12,10 @@
 /**
  *  Loads CSS files (style.css) of active buttons.
  *  
- *  @remark     Currently only handles stylesheets. 
- * 
- *  @since      3
+ *  @remark Currently only handles stylesheets.
+ *  @since  3
  */
-class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility {
+class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_ButtonUtility {
   
     /**
      * Sets up hooks and properties.
@@ -29,25 +28,16 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
 
         // If not front-end
         if ( ! is_admin() ) {
-            add_action( 
-                'wp_head', 
-                array( $this, 'replyToPrintStyleTag' ) 
-            );
-            add_action(
-                'embed_head',
-                array( $this, 'replyToPrintStyleTag' )
-            ); // 4.0.0
+            add_action( 'wp_head', array( $this, 'replyToPrintStyleTag' ) );
+            add_action( 'embed_head', array( $this, 'replyToPrintStyleTag' ) ); // 4.0.0
             return;
         } 
         
-        add_action(
-            'current_screen',
-            array( $this, 'replyToLoadStyleTag' )
-        );
+        add_action( 'current_screen', array( $this, 'replyToLoadStyleTag' ) );
             
     }
     /**
-     * @callback        action      current_screen
+     * @callback add_action() current_screen
      */
     public function replyToLoadStyleTag( $oScreen ) {
 
@@ -62,10 +52,7 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
                 true
             )
         ) {                    
-            add_action(
-                'admin_head' . '-edit.php',
-                array( $this, 'replyToPrintStyleTag' )
-            );
+            add_action( 'admin_head' . '-edit.php', array( $this, 'replyToPrintStyleTag' ) );
             return;
         }
         
@@ -84,14 +71,8 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
             )
         ) {        
             // For unit definition page
-            add_action(
-                'admin_head' . '-post.php',
-                array( $this, 'replyToPrintStyleTag' )
-            );
-            add_action(
-                'admin_head' . '-post-new.php',
-                array( $this, 'replyToPrintStyleTag' )
-            );            
+            add_action( 'admin_head' . '-post.php', array( $this, 'replyToPrintStyleTag' ) );
+            add_action( 'admin_head' . '-post-new.php', array( $this, 'replyToPrintStyleTag' ) );
         }             
         
     }
@@ -99,8 +80,8 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
     /**
      * Enqueues activated templates' CSS file.
      * 
-     * @callback    action      admin_head, wp_head
-     * @since       3
+     * @callback add_action() admin_head, wp_head
+     * @since    3
      */
     public function replyToPrintStyleTag() {
         
@@ -124,8 +105,8 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
     static public $sButtonsCSS;
     /**
      * 
-     * @scope       public      It is static public as unit class needs to retrieve the CSS rules to check the parsing button exists.
-     * @return      string
+     * @remark The visibility scope is static public as unit class needs to retrieve the CSS rules to check the parsing button exists.
+     * @return string
      */
     static public function getButtonsCSS() {
         
@@ -133,18 +114,12 @@ class AmazonAutoLinks_ButtonResourceLoader extends AmazonAutoLinks_ButtonUtility
         if ( isset( self::$sButtonsCSS ) ) {
             return self::$sButtonsCSS;
         }
-        $_sCSSStored = get_option(
-            AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-            ''  // default
-        );
+        $_sCSSStored = get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ], '' );
         if ( ! $_sCSSStored ) {
             // Update the button CSS option.
             $_sCSSStored = self::getCSSRulesOfActiveButtons();
             if ( $_sCSSStored ) {                
-                update_option(
-                    AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-                    $_sCSSStored // data
-                );
+                update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ], $_sCSSStored );
             }
         }        
 
@@ -175,8 +150,8 @@ CSS;
     }
     /**
      * 
-     * @return      string
-     * @scope       public      This is static public as it is accessed from a class that creates a default button.
+     * @return string
+     * @remark The visibility scope is static public as it is accessed from a class that creates a default button.
      */
     static public function getDefaultButtonCSS( $isButtonID='default' ) {
                                         

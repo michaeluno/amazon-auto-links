@@ -67,7 +67,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
          */
         public function replyToSetStyle( $sCSSRules ) {
             return $sCSSRules . PHP_EOL
-                . AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS() . PHP_EOL;
+                . AmazonAutoLinks_Button_ResourceLoader::getButtonsCSS() . PHP_EOL;
         }    
     
         

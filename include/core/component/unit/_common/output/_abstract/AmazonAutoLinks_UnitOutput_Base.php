@@ -256,7 +256,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_iButtonID = ( integer ) $this->oUnitOption->get( 'button_id' );
         
         // Consider cases that options are deleted by external means.
-        $_sCSS = AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS();
+        $_sCSS = AmazonAutoLinks_Button_ResourceLoader::getButtonsCSS();
         if ( $_iButtonID && false !== strpos( $_sCSS, '-' . ( string ) $_iButtonID ) ) {
             return $_iButtonID;
         }

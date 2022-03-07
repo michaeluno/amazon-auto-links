@@ -72,7 +72,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced exten
          */
         public function replyToSetStyle( $sCSSRules ) {
             return $sCSSRules . PHP_EOL
-                . AmazonAutoLinks_ButtonResourceLoader::getButtonsCSS() . PHP_EOL;
+                . AmazonAutoLinks_Button_ResourceLoader::getButtonsCSS() . PHP_EOL;
         }    
         
         /**

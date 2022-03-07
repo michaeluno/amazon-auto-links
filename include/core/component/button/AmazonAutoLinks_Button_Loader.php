@@ -35,7 +35,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
         // Front-end
         
         /// Resource loader
-        new AmazonAutoLinks_ButtonResourceLoader;
+        new AmazonAutoLinks_Button_ResourceLoader;
         
         /// Post type
         new AmazonAutoLinks_PostType_Button(

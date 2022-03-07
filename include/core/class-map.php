@@ -28,7 +28,7 @@ return array(
     "AmazonAutoLinks_PostType_AutoInsert_Column" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Column.php", 
     "AmazonAutoLinks_PostType__AutoInsert___ActionLink_Status" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/auto_insert/post_type/action/AmazonAutoLinks_PostType__AutoInsert___ActionLink_Status.php", 
     "AmazonAutoLinks_Button_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_Button_Loader.php",
-    "AmazonAutoLinks_ButtonResourceLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_ButtonResourceLoader.php", 
+    "AmazonAutoLinks_Button_ResourceLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_Button_ResourceLoader.php", 
     "AmazonAutoLinks_DefaultButtonCreation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Background" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Background.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Base.php", 
