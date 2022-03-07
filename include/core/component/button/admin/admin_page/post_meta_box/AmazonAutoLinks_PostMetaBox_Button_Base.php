@@ -62,7 +62,7 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
                 ? 'button-preview-event-binder.js'
                 : 'button-preview-event-binder.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName,
+                AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
                     'handle_id'    => 'aal_button_script_event_binder',                
@@ -75,7 +75,7 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
                 ? 'button-preview-updater.js'
                 : 'button-preview-updater.min.js';
             $this->enqueueScript(
-                AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName,
+                AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/' . $_sFileBaseName,
                 $this->oProp->aPostTypes,
                 array(  
                     'handle_id'    => 'aal_button_script_preview_updater',

@@ -10,11 +10,11 @@
 
  
 /**
- *  Loads the button component
+ * Loads the button component.
  *  
- *  @since      3.3.0
+ * @since 3.3.0
  */
-class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @var string
@@ -206,7 +206,7 @@ class AmazonAutoLinks_ButtonLoader extends AmazonAutoLinks_PluginUtility {
         $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
             ? 'button-preview-in-unit-definition-page.js'
             : 'button-preview-in-unit-definition-page.min.js';
-        return AmazonAutoLinks_ButtonLoader::$sDirPath . '/asset/js/' . $_sFileBaseName;
+        return AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/' . $_sFileBaseName;
     }
 
     /**
