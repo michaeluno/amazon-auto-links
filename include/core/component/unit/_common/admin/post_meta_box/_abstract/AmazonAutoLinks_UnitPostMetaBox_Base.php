@@ -55,13 +55,12 @@ abstract class AmazonAutoLinks_UnitPostMetaBox_Base extends AmazonAutoLinks_Post
         if ( ! $this->_iPostID ) {
             return true;
         }
-        
-        $_sUnitType = get_post_meta(
-            $this->_iPostID,
-            'unit_type', // meta key
+
+        return in_array(
+            ( string ) get_post_meta( $this->_iPostID, 'unit_type', true ),
+            $this->aUnitTypes,
             true
         );
-        return in_array( $_sUnitType, $this->aUnitTypes );
         
     }
 
