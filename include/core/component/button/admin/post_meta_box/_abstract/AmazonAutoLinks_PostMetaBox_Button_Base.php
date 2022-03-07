@@ -47,7 +47,7 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
         
         /**
          * 
-         * @callback        action      admin_head      For unknown reasons, `wp_enqueue_scripts` does not work.
+         * @callback add_action() admin_head For unknown reasons, `wp_enqueue_scripts` does not work.
          */        
         public function replyToSetScripts() {
 
