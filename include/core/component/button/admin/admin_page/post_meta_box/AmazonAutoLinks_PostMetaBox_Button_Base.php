@@ -13,24 +13,17 @@
  */
 abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_AdminPageFramework_MetaBox {
 
-    
     public function start() {
     
         // Register custom field types
-        new AmazonAutoLinks_RevealerCustomFieldType(
-            $this->oProp->sClassName
-        );
+        new AmazonAutoLinks_RevealerCustomFieldType( $this->oProp->sClassName );
         
-        add_action(
-            "set_up_" . $this->oProp->sClassName,
-            array( $this, 'replyToInsertCustomStyleTag' )
-        );
+        add_action( "set_up_" . $this->oProp->sClassName, array( $this, 'replyToInsertCustomStyleTag' ) );
 
     }
 
     /**
-     * 
-     * @callback        action      set_up_{instantiated class name}
+     * @callback add_action() set_up_{instantiated class name}
      */
     public function replyToInsertCustomStyleTag() {
 
@@ -44,7 +37,7 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
     }
         /**
          * 
-         * @callback        action      admin_head
+         * @callback add_action() admin_head
          */
         public function replyToPrintCustomStyleTag() {
             echo "<style type='text/css' id='amazon-auto-links-button-style'>" . PHP_EOL
@@ -90,6 +83,5 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_A
             ); 
                         
         }        
-    
-    
+
 }
