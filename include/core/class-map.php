@@ -1,9 +1,9 @@
 <?php 
 /**
-    Auto Amazon Links v5.1.3 by miunosoft (Michael Uno) 
-    Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
-    <https://en.michaeluno.jp/amazon-auto-links>
-    Copyright (c) 2013-2021, Michael Uno; Licensed under GPL v2 or later
+ * Auto Amazon Links v5.1.4 by miunosoft (Michael Uno) 
+ * Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ * <https://en.michaeluno.jp/amazon-auto-links>
+ * Copyright (c) 2013-2022, Michael Uno; Licensed under GPL v2 or later
  */
 return array(
     "AmazonAutoLinks_Bootstrap" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/AmazonAutoLinks_Bootstrap.php", 
@@ -30,8 +30,8 @@ return array(
     "AmazonAutoLinks_ButtonLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_ButtonLoader.php", 
     "AmazonAutoLinks_ButtonResourceLoader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_ButtonResourceLoader.php", 
     "AmazonAutoLinks_DefaultButtonCreation" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/AmazonAutoLinks_DefaultButtonCreation.php", 
-    "AmazonAutoLinks_PostMetaBox_Button" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Background" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Background.php", 
+    "AmazonAutoLinks_PostMetaBox_Button_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Base.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Border" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Border.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Box" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Box.php", 
     "AmazonAutoLinks_PostMetaBox_Button_CSS" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/admin/admin_page/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_CSS.php", 

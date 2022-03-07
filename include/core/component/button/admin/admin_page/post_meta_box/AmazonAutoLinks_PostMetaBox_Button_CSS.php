@@ -11,7 +11,7 @@
 /**
  * Defines the meta box that shows a button preview.
  */
-class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox_Button {
+class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox_Button_Base {
 
     public function setUp() {
         $_oFields = new AmazonAutoLinks_FormFields_Button_CSS( $this );

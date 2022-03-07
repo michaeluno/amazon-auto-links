@@ -11,7 +11,7 @@
 /**
  * Defines the meta box for the button post type.
  */
-class AmazonAutoLinks_PostMetaBox_Button_Hover extends AmazonAutoLinks_PostMetaBox_Button {
+class AmazonAutoLinks_PostMetaBox_Button_Hover extends AmazonAutoLinks_PostMetaBox_Button_Base {
 
     
     public function setUp() {       

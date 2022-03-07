@@ -11,7 +11,7 @@
 /**
  * Defines the meta box for the button post type.
  */
-abstract class AmazonAutoLinks_PostMetaBox_Button extends AmazonAutoLinks_AdminPageFramework_MetaBox {
+abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_AdminPageFramework_MetaBox {
 
     
     public function start() {
