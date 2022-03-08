@@ -21,7 +21,6 @@ if ( ! $bIsCLI ) {
 
 /* Include necessary files */
 require( dirname( __DIR__ ) . '/vendor/autoload.php' );
-require( dirname( __FILE__ ) . '/class/vendor/autoload.php' );
 
 /* Create a minified version of the framework. */
 echo 'Started...' . $sCarriageReturn;
