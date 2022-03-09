@@ -1,0 +1,7 @@
+html, body {
+    margin: 0 !important; padding: 0 !important;
+}
+#preview-button {
+    /* inline-block to fit the width to the child element. */
+    display: inline-block
+}
