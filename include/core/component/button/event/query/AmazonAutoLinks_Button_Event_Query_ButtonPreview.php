@@ -39,18 +39,19 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
     public function replyToPrintButtonPreview() {
 
         wp_enqueue_script( 'jquery' );
-        $_sButtonLabel = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
-        $_iButtonID    = ( integer ) $this->getHTTPQueryGET( 'button-id', 0 );
-        $_sHeader      = $this->getOutputBuffer( 'wp_head' );
-        $_sHeader      = force_balance_tags( $_sHeader );
-        $_sHeader      = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
-        $_oDOM         = new AmazonAutoLinks_DOM;
-        $_oDoc         = $_oDOM->loadDOMFromHTML( "<html><head>" . $_sHeader . "</head><body></body></html>" );
+        $_sButtonLabel   = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
+        $_iButtonID      = ( integer ) $this->getHTTPQueryGET( 'button-id', 0 );
+        $_sHeader        = $this->getOutputBuffer( 'wp_head' );
+        $_sHeader        = force_balance_tags( $_sHeader );
+        $_sHeader        = str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
+        $_oDOM           = new AmazonAutoLinks_DOM;
+        $_oDoc           = $_oDOM->loadDOMFromHTML( "<html><head>" . $_sHeader . "</head><body></body></html>" );
         $_oDOM->removeTags( $_oDoc, array( 'script' ) );    // in order to use jQuery, comment out this line.
-        $_oXpath       = new DOMXPath( $_oDoc );
-        $_oTags        = $_oXpath->query( "/html/head" );
-        $_oTag         = $_oTags->item( 0 );
-
+        $_oXpath         = new DOMXPath( $_oDoc );
+        $_oTags          = $_oXpath->query( "/html/head" );
+        $_oTag           = $_oTags->item( 0 );
+        $_sMin           = $this->isDebugMode() ? '' : '.min';
+        $_sStylesheetURL = $this->getSRCFromPath( AmazonAutoLinks_ButtonLoader::$sDirPath . "/asset/css/button-preview-framed-page{$_sMin}.css" );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
@@ -75,7 +76,7 @@ window.addEventListener( 'DOMContentLoaded', function( e ) {
 } );
 JAVASCRIPT
        . "</script>"
-       . "<style>html, body { margin: 0 !important; padding: 0 !important; }</style>"
+       . "<link rel='stylesheet' id='button-preview-style' href='" . esc_url( $_sStylesheetURL ) . "' media='all'>"
     . "</head>"; ?>
     <body>
         <div id="preview-button" style="display: inline-block;"><?php //inline-block to fit the width to the child element. ?>
