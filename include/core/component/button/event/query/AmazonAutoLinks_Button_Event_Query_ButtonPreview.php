@@ -62,7 +62,7 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
        . "<link rel='stylesheet' id='button-preview-style' href='" . esc_url( $_sStylesheetURL ) . "' media='all'>"
     . "</head>"; ?>
     <body>
-        <div id="preview-button" style="display: inline-block;"><?php //inline-block to fit the width to the child element. ?>
+        <div id="preview-button">
             <?php echo wp_kses( $this->getButton( $_iButtonID, $_sButtonLabel, true, false ), 'post' ); ?>
         </div>
     </body>
