@@ -58,8 +58,8 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
 <html <?php language_attributes(); ?> class="no-js no-svg">
     <?php echo "<head>"
        . $_oDOM->getInnerHTML( $_oTag )
-       . "<script src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>"
-       . "<link rel='stylesheet' id='button-preview-style' href='" . esc_url( $_sStylesheetURL ) . "' media='all'>"
+       . "<script id='button-preview-framed-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>"
+       . "<link rel='stylesheet' id='button-preview-framed-style' href='" . esc_url( $_sStylesheetURL ) . "' media='all'>"
     . "</head>"; ?>
     <body>
         <div id="preview-button">
