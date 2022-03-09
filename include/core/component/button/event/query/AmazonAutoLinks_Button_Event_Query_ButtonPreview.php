@@ -52,8 +52,8 @@ class AmazonAutoLinks_Button_Event_Query_ButtonPreview extends AmazonAutoLinks_P
         $_oHeadTags      = $_oXpath->query( "/html/head" );
         $_oHeadTag       = $_oHeadTags->item( 0 );
         $_sMin           = $this->isDebugMode() ? '' : '.min';
-        $_sStylesheetURL = $this->getSRCFromPath( AmazonAutoLinks_ButtonLoader::$sDirPath . "/asset/css/button-preview-framed-page{$_sMin}.css" );
-        $_sScriptURL     = $this->getSRCFromPath( AmazonAutoLinks_ButtonLoader::$sDirPath . "/asset/js/button-preview-framed-page{$_sMin}.js" );
+        $_sStylesheetURL = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/css/button-preview-framed-page{$_sMin}.css" );
+        $_sScriptURL     = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/js/button-preview-framed-page{$_sMin}.js" );
 
 ?>
 <!DOCTYPE html>
