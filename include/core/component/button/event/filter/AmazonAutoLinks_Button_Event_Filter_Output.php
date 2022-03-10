@@ -111,12 +111,11 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             }
 
         /**
-         * @param string|integer $isButtonID
-         * @param string         $sProductURL
-         * @param string         $sLabel
-         *
+         * @since  3.1.0
+         * @param  string|integer $isButtonID
+         * @param  string         $sProductURL
+         * @param  string         $sLabel
          * @return string
-         * @since       3.1.0
          */
         private function ___getLinkButton( $isButtonID, $sProductURL, $sLabel ) {
             $sProductURL = esc_url( $sProductURL );
@@ -173,17 +172,18 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     /**
      * Returns a button output by a given button (custom post) ID.
      *
-     * @param   string $sOutput
-     * @param   integer|string $isButtonID
-     * @param   string $sLabel
-     * @param   bool $bVisible
-     * @param   bool $bOuterContainer
+     * @param   string          $sOutput
+     * @param   integer|string  $isButtonID
+     * @param   null|string     $nsLabel
+     * @param   boolean         $bVisible
+     * @param   boolean         $bOuterContainer
      * @return  string
      * @since   3
+     * @since   5.2.0           Accepts an empty string as a label. Use null to reflect the default label, "Buy Now".
      */
-    public function replyToGetButton( $sOutput, $isButtonID, $sLabel='', $bVisible=true, $bOuterContainer=true ) {
+    public function replyToGetButton( $sOutput, $isButtonID, $nsLabel='', $bVisible=true, $bOuterContainer=true ) {
 
-        $_sButtonLabel = $this->___getButtonLabel( $isButtonID, $sLabel );
+        $_sButtonLabel = $this->___getButtonLabel( $isButtonID, $nsLabel );
         $_sButtonLabel = wp_kses( $_sButtonLabel, 'post' );
         $_sNone        = 'none';
         $bVisible      = $bVisible ? '' : "display:{$_sNone};";
@@ -215,25 +215,44 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
 
         /**
          * @param  integer|string $isButtonID
-         * @param  string $sLabel
+         * @param  string|null    $nsLabel
          * @return string
          * @since  4.3.0
+         * @since  5.2.0          Accepts null for the second parameter to respect an empty label (used for image buttons).
          */
-        private function ___getButtonLabel( $isButtonID, $sLabel ) {
-            $_sButtonLabel = $sLabel
-                ? $sLabel
+        private function ___getButtonLabel( $isButtonID, $nsLabel ) {
+            $_bnsButtonLabel = ! is_null( $nsLabel )
+                ? $nsLabel
                 : (
                     is_numeric( $isButtonID ) && ( $isButtonID > 0 )  // preview sets it to -1
                         ? get_post_meta( $isButtonID, 'button_label', true )
-                        : ''
+                        : null
                 );
-            if ( $_sButtonLabel ) {
-                return $_sButtonLabel;
+            if ( is_string( $_bnsButtonLabel ) ) {  // can be `null` or `false`
+                return $_bnsButtonLabel;
             }
-            $_oOption      = AmazonAutoLinks_Option::getInstance();
+            $_oOption = AmazonAutoLinks_Option::getInstance();
             return $_oOption->get( array( 'unit_default', 'override_button_label' ), false )
                 ? $_oOption->get( array( 'unit_default', 'button_label' ), '' )
                 : __( 'Buy Now', 'amazon-auto-links' );
+        }
+
+        /**
+         * @since  5.2.0
+         * @param  integer|string $isButtonID
+         * @return string   Either `classic`, `theme`, `image`, `button2`
+         */
+        private function ___getButtonType( $isButtonID ) {
+            if ( empty( $isButtonID ) ) {
+                return 'theme';
+            }
+            if ( ! is_numeric( $isButtonID ) ) {
+                return 'classic';
+            }
+            if ( $isButtonID > 0 ) {
+                return get_post_meta( $isButtonID, '_button_type', true );
+            }
+            return 'classic';
         }
 
 }

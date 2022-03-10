@@ -675,14 +675,15 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * Returns a button output by a given button (custom post) ID.
      *
      * @param   integer|string $isButtonID
-     * @param   string $sLabel
-     * @param   bool $bVisible
-     * @param   bool $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
+     * @param   null|string    $nsLabel
+     * @param   boolean        $bVisible
+     * @param   boolean        $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
      * @return  string
      * @since   3
+     * @since   5.2.0          Accepts an empty string to serve as a label. Use null instead to reflect the default label, "Buy Now".
      */
-    static public function getButton( $isButtonID, $sLabel='', $bVisible=true, $bOuterContainer=true ) {
-        return apply_filters( 'aal_filter_button', '', $isButtonID, $sLabel, $bVisible, $bOuterContainer );
+    static public function getButton( $isButtonID, $nsLabel=null, $bVisible=true, $bOuterContainer=true ) {
+        return apply_filters( 'aal_filter_button', '', $isButtonID, $nsLabel, $bVisible, $bOuterContainer );
     }
 
     /**
