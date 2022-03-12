@@ -1,8 +1,12 @@
 /*
 	@name Edit Button
-	@version 1.0.0
+	@version 1.0.1
  */
 td.column-preview.preview {
     width: 100%;
     padding: 1em;
+    /* Center containing items */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
