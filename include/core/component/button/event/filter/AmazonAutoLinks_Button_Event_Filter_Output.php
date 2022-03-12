@@ -33,7 +33,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
      */
     public function __construct() {
         add_filter( 'aal_filter_linked_button', array( $this, 'replyToGetLinkedButton' ), 10, 2 );
-        add_filter( 'aal_filter_button', array( $this, 'replyToGetButton' ), 10, 5 );
+        add_filter( 'aal_filter_button', array( $this, 'replyToGetButton' ), 10, 6 );
     }
 
     /**
@@ -177,34 +177,44 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
      * @param   null|string     $nsLabel
      * @param   boolean         $bVisible
      * @param   boolean         $bOuterContainer
+     * @param   string          $sButtonType        Accepts `classic`, `theme`, `image`, or `button2`.
      * @return  string
      * @since   3
-     * @since   5.2.0           Accepts an empty string as a label. Use null to reflect the default label, "Buy Now".
+     * @since   5.2.0           Accepts an empty string as a label. Use null to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
      */
-    public function replyToGetButton( $sOutput, $isButtonID, $nsLabel='', $bVisible=true, $bOuterContainer=true ) {
+    public function replyToGetButton( $sOutput, $isButtonID, $nsLabel='', $bVisible=true, $bOuterContainer=true, $sButtonType='' ) {
 
         $_sButtonLabel = $this->___getButtonLabel( $isButtonID, $nsLabel );
         $_sButtonLabel = wp_kses( $_sButtonLabel, 'post' );
         $_sNone        = 'none';
         $bVisible      = $bVisible ? '' : "display:{$_sNone};";
-
-        if ( ! $isButtonID ) {
-            $_sButton = "<button type='button' class='amazon-auto-links-button'>"
-                        . $_sButtonLabel
-                    . "</button>";
-            return $bOuterContainer
-                ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-                        . $_sButton
-                    . "</div>"
-                : $_sButton;
-        }
-        $_iButtonID = ( integer ) $isButtonID;
-        $_sButtonIDSelector = $_iButtonID > 0   // preview sets it to -1
-            ? "amazon-auto-links-button-$isButtonID"
-            : "amazon-auto-links-button-___button_id___";
-        $_sButton = "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
-                    . $_sButtonLabel
-                . "</div>";
+        $_sButtonType = $this->___getButtonType( $isButtonID, $sButtonType );
+        $_sButton     = apply_filters(
+            'aal_filter_button_by_type_' . $_sButtonType,
+            "<button type='button' class='amazon-auto-links-button'>"
+                . $_sButtonLabel
+            . "</button>",
+            $isButtonID,
+            $_sButtonLabel
+        );
+        // @deprecated 5.2.0
+        // if ( ! $isButtonID ) {
+        //     $_sButton = "<button type='button' class='amazon-auto-links-button'>"
+        //                 . $_sButtonLabel
+        //             . "</button>";
+        //     return $bOuterContainer
+        //         ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
+        //                 . $_sButton
+        //             . "</div>"
+        //         : $_sButton;
+        // }
+        // $_iButtonID = ( integer ) $isButtonID;
+        // $_sButtonIDSelector = $_iButtonID >= 0   // preview sets it to -1
+        //     ? "amazon-auto-links-button-$isButtonID"
+        //     : "amazon-auto-links-button-___button_id___";
+        // $_sButton = "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
+        //             . $_sButtonLabel
+        //         . "</div>";
         return $bOuterContainer
             ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
                 . $_sButton
@@ -240,19 +250,25 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
         /**
          * @since  5.2.0
          * @param  integer|string $isButtonID
-         * @return string   Either `classic`, `theme`, `image`, `button2`
+         * @param  string         $sButtonType
+         * @return string         Either `classic`, `theme`, `image`, or `button2`
          */
-        private function ___getButtonType( $isButtonID ) {
+        private function ___getButtonType( $isButtonID, $sButtonType ) {
+            $_sDefaultType = 'classic';
+            if ( ! empty( $sButtonType ) ) {
+                return $sButtonType;
+            }
             if ( empty( $isButtonID ) ) {
                 return 'theme';
             }
             if ( ! is_numeric( $isButtonID ) ) {
-                return 'classic';
+                return $_sDefaultType;
             }
             if ( $isButtonID > 0 ) {
-                return get_post_meta( $isButtonID, '_button_type', true );
+                $_sButtonType = get_post_meta( $isButtonID, '_button_type', true );
+                return $_sButtonType ? $_sButtonType : $_sDefaultType;
             }
-            return 'classic';
+            return $_sDefaultType;
         }
 
 }

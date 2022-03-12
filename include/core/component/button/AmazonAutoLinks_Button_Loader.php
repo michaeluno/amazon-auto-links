@@ -44,25 +44,23 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
             $sScriptPath   // script path               
         );
 
-        /// Shortcode   4.3.0
+        /// Shortcode [4.3.0]
         new AmazonAutoLinks_Button_Shortcode;
+
+        /// Button types [5.2.0]
+        new AmazonAutoLinks_Button_Classic_Loader;
+        new AmazonAutoLinks_Button_Button2_Loader;
+        new AmazonAutoLinks_Button_Image_Loader;
 
         /// Events      4.3.0
         new AmazonAutoLinks_Button_Event_Filter_Output;
-        new AmazonAutoLinks_Button_Event_Query_ButtonPreview;
+        new AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme;
         new AmazonAutoLinks_Button_Event_Action_DefaultButtons;
         
         // Back-end
         if ( is_admin() ) {
-            
-            // Post meta boxes    
-            $this->_registerPostMetaBoxes();
-            
-            add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
-
             add_filter( 'aal_filter_admin_button_js_translation', array( $this, 'replyToGetJSButtonTranslation' ) );
             add_filter( 'aal_filter_admin_button_js_preview_src', array( $this, 'replyToGetJSButtonPreviewPath' ) );
-
         }        
 
         // Update button post status change
@@ -73,11 +71,10 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
     }
         
         /**
-         * @remark      When a button is created or edited, this method will be called too early from the system.
+         * @remark   When a button is created or edited, this method will be called too early from the system.
          * However, this hook is also triggered when the user trashes the item from the action link in the post listing table. 
-         * @since       3.3.0
-         * @callback    filter      {new post status}_{post type slug}
-         * @return      string
+         * @since    3.3.0
+         * @callback add_filter() {new post status}_{post type slug}
          */
         public function replyToCheckActiveItemStatusChange( $iPostID, $oPost ) {
             do_action( 'aal_action_update_active_buttons' );
@@ -85,8 +82,8 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
     
         /**
          * Updates the active auto-insert items.
-         * @since           3.3.0
-         * @callback        action      aal_action_update_active_buttons
+         * @since    3.3.0
+         * @callback add_action() aal_action_update_active_buttons
          */
         public function replyToUpdateActiveItems() {
             $_aActiveIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDsQueried();
@@ -96,111 +93,10 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
                 true   // enable auto-load
             );            
         }        
-        
-        /**
-         * @return      array
-         * @since       3.3.0
-         * @param       array       $aMetaKeys
-         * @callback    add_filter  aal_filter_custom_meta_keys
-         */
-        public function replyToAddProtectedMetaKeys( $aMetaKeys ) {
-            
-            $_aClassNames = array(
-                'AmazonAutoLinks_FormFields_Button_Preview',
-                'AmazonAutoLinks_FormFields_Button_Selector',
-                'AmazonAutoLinks_FormFields_Button_Box',
-                'AmazonAutoLinks_FormFields_Button_Hover',
-                'AmazonAutoLinks_FormFields_Button_Text',
-                'AmazonAutoLinks_FormFields_Button_Background',
-                'AmazonAutoLinks_FormFields_Button_Border',
-                'AmazonAutoLinks_FormFields_Button_CSS',
-            
-            );
-            foreach( $_aClassNames as $_sClassName ) {
-                $_oFields = new $_sClassName();  // not passing a factory object as it's hard and not necessary only to get field IDs.
-                $aMetaKeys = array_merge( $aMetaKeys, $_oFields->getFieldIDs() );
-            }
-            
-            return $aMetaKeys;
-
-        }
-    
-
-        /**
-         * Adds post meta boxes.
-         * @since       3.3.0
-         */
-        private function _registerPostMetaBoxes() {
-            
-            new AmazonAutoLinks_PostMetaBox_Button_Preview(
-                null, // meta box ID - null to auto-generate
-                __( 'Button Preview', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ),
-                'side', // context (what kind of metabox this is)
-                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
-            );            
-            new AmazonAutoLinks_PostMetaBox_Button_CSS(
-                null, // meta box ID - null to auto-generate
-                __( 'CSS', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'side', // context (what kind of metabox this is)
-                'high' // priority - 'high', 'sorted', 'core', 'default', 'low'
-            );                        
-            new AmazonAutoLinks_PostMetaBox_Button_Text(
-                null, // meta box ID - null to auto-generate
-                __( 'Text', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'default' // priority                        
-            );
-            new AmazonAutoLinks_PostMetaBox_Button_Box(
-                null, // meta box ID - null to auto-generate
-                __( 'Box', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'default' // priority                        
-            );  
-            new AmazonAutoLinks_PostMetaBox_Button_Border(
-                null, // meta box ID - null to auto-generate
-                __( 'Border', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'default' // priority                        
-            );            
-            new AmazonAutoLinks_PostMetaBox_Button_Background(
-                null, // meta box ID - null to auto-generate
-                __( 'Background', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'default' // priority                        
-            );
-            new AmazonAutoLinks_PostMetaBox_Button_Hover(
-                null, // meta box ID - null to auto-generate
-                __( 'Hover', 'amazon-auto-links' ),
-                array( // post type slugs: post, page, etc.
-                    AmazonAutoLinks_Registry::$aPostTypes[ 'button' ] 
-                ), 
-                'normal', // context (what kind of metabox this is)
-                'default' // priority                        
-            );              
-            
-        }
 
     /**
      * Returns the JavaScript script path of the button preview.
-     * @since   4.3.0
+     * @since 4.3.0
      */
     public function replyToGetJSButtonPreviewPath() {
         $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
@@ -210,9 +106,9 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @since  4.3.0
-     * @return array
-     * @remark Seems not used
+     * @since      4.3.0
+     * @return     array
+     * @deprecated Seems unused
      */
     public function replyToGetJSButtonTranslation( $aLabels ) {
         $_aButtonIDs = $this->getActiveButtonIDs();
@@ -226,6 +122,5 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
         }
         return $_aLabels;
     }
-
 
 }

@@ -31,7 +31,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                     'new_item'              => __( 'New Button', 'amazon-auto-links' ),
                     'view'                  => __( 'View', 'amazon-auto-links' ),
                     'view_item'             => __( 'View Button', 'amazon-auto-links' ),
-                    'search_items'          => __( 'Search Button Definitions', 'amazon-auto-links' ),
+                    'search_items'          => __( 'Search Buttons', 'amazon-auto-links' ),
                     'not_found'             => __( 'No definitions found for Button', 'amazon-auto-links' ),
                     'not_found_in_trash'    => __( 'No definitions Found for Button in Trash', 'amazon-auto-links' ),
                     'parent'                => __( 'Parent Button', 'amazon-auto-links' ),
@@ -62,7 +62,6 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 'submenu_order_manage'  => 8,
             )        
         );
-        
 
         if (  $this->_isInThePage() ) {
             
@@ -81,38 +80,87 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 )
             );
 
-            // unit listing table columns
-            add_filter(    
-                'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
-                array( $this, 'replyToModifyColumnHeader' )
-            );
+            // Unit listing table columns
+            add_filter( 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToModifyColumnHeader' ) );
 
-            // 4.3.0
-            new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );
+            new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );  // [4.3.0]
                      
         }
         
         if ( is_admin() ) {
-            add_action( 
-                'save_post', 
-                array( $this, 'replyToUpdateButtonCSSOnSavingPost', ) 
-            );
-            add_action(
-                'transition_post_status',
-                array( $this, 'replyToUpdateButtonCSSOnPostStatusChange' ),
-                10,  // priority
-                3   // number of parameter
-            );
-
+            add_action( 'save_post', array( $this, 'replyToUpdateButtonCSSOnSavingPost' ) );
+            add_action( 'transition_post_status', array( $this, 'replyToUpdateButtonCSSOnPostStatusChange' ), 10, 3 );
+            add_filter( 'admin_url', array( $this, 'replyToGetCustomAddNewLink' ), 10, 2 );
+            add_action( 'admin_enqueue_scripts', array( $this, 'replyToLoadResources' ) );
         }
 
-        // 4.1.0+
-        add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );
+        add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );    // [4.1.0]
 
     }
 
     /**
-     * @since   4.1.0
+     * @since    5.2.0
+     * @callback admin_enqueue_scripts
+     */
+    public function replyToLoadResources() {
+        $_sURLAddClassicButton = add_query_arg(
+            array(
+                'post_type'   => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
+            ),
+            admin_url( 'post-new.php' )
+        );
+        $this->enqueueScript(
+            AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/button-add-new-buttons.js',
+            array(
+                'handle_id'    => 'aalButtonAddNew',
+                'dependencies' => array( 'jquery' ),
+                'translation'  => array(
+                    'labels' => array(
+                        'generateDefaults' => __( 'Generate Default Buttons', 'amazon-auto-links' ),
+                        'addImage'         => __( 'Add Image Button', 'amazon-auto-links' ),
+                        'addClassic'       => __( 'Add Classic Button', 'amazon-auto-links' ),
+                    ),
+                    'URLs'   => array(
+                        'generateDefaults' => add_query_arg(
+                            array(
+                                'post_type'   => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
+                                'aal_action'  => 'generate_default_buttons',
+                            ),
+                            admin_url( $GLOBALS[ 'pagenow' ] )
+                        ),
+                        'addImage' => add_query_arg(
+                            array(
+                                'post_type'   => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
+                                'button_type' => 'image'
+                            ),
+                            $_sURLAddClassicButton
+                        ),
+                        'addClassic' => $_sURLAddClassicButton,
+                    ),
+                ),
+                'in_footer'    => true,
+            )
+        );
+    }
+
+    /**
+     * @since    5.2.0
+     * @callback add_filter()   admin_url
+     * @param    string         $sURL
+     * @param    string         $sPath
+     * @return   string         Adds the `button_type` query parameter for new button types.
+     */
+    public function replyToGetCustomAddNewLink( $sURL, $sPath ){
+        if( $sPath === 'post-new.php?post_type=' . $this->oProp->sPostType ) {
+            $sURL = add_query_arg( array(
+                'button_type' => 'button2',
+            ), $sURL );
+        }
+        return $sURL;
+    }
+
+    /**
+     * @since 4.1.0
      */
     public function replyToModifyAdminBar() {
         $this->___removeNewLinkInAdminBar( $GLOBALS[ 'wp_admin_bar' ] );
@@ -125,10 +173,9 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
         }
 
         /**
-         * @callback        action      transition_post_status
+         * @callback add_action() transition_post_status
          */    
         public function replyToUpdateButtonCSSOnPostStatusChange( $sNewStatus, $sOldStatus, $oPost ) {
-
 
             if ( $this->oProp->sPostType !== $oPost->post_type ) {
                 return;
@@ -140,14 +187,11 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             // In that case, it is called many times in a single page load.
             // To avoid updating the option over and over again in a single page load,
             // do it only once at shutdown.
-            add_action(
-                'shutdown',
-                array( $this, 'replyToUpdateButtonCSSOnShutdown' )
-            );
+            add_action( 'shutdown', array( $this, 'replyToUpdateButtonCSSOnShutdown' ) );
 
         }
         /**
-         * @callback        action      save_post
+         * @callback add_action() save_post
          */
         public function replyToUpdateButtonCSSOnSavingPost( $iPostID ) {
             
@@ -158,27 +202,20 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             // In that case, it is called many times in a single page load.
             // To avoid updating the option over and over again in a single page load,
             // do it only once at shutdown.
-            add_action(
-                'shutdown',
-                array( $this, 'replyToUpdateButtonCSSOnShutdown' )
-            );            
+            add_action( 'shutdown', array( $this, 'replyToUpdateButtonCSSOnShutdown' ) );
 
         }
         /**
          * Updates the active button CSS rules.
-         * @callback    action  shutdown
+         * @callback add_action() shutdown
          */
         public function replyToUpdateButtonCSSOnShutdown() {
-            update_option(
-                AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ],
-                AmazonAutoLinks_ButtonUtility::getCSSRulesOfActiveButtons()    // data
-            );
+            update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ], AmazonAutoLinks_ButtonUtility::getCSSRulesOfActiveButtons() );
         }
 
     /**
-     * 
-     * @callback    filter      post_updated_messages
-     * @return      array
+     * @callback add_filter() post_updated_messages
+     * @return   array
      */ 
     public function replyToModifyPostUpdatedMessages( $aMessages ) {
         
@@ -195,7 +232,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
         
     /**
      * Style for this custom post type pages
-     * @callback        filter      style_{class name}
+     * @callback add_filter() style_{class name}
      */
     public function style_AmazonAutoLinks_PostType_Button() {
         $_sCSS = <<<CSS

@@ -678,12 +678,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @param   null|string    $nsLabel
      * @param   boolean        $bVisible
      * @param   boolean        $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
+     * @param   string         $sButtonType       Accepts `classic` (default), `theme`, `image`, `button2`
      * @return  string
      * @since   3
-     * @since   5.2.0          Accepts an empty string to serve as a label. Use null instead to reflect the default label, "Buy Now".
+     * @since   5.2.0          Accepts an empty string to serve as a label. Use null instead to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
      */
-    static public function getButton( $isButtonID, $nsLabel=null, $bVisible=true, $bOuterContainer=true ) {
-        return apply_filters( 'aal_filter_button', '', $isButtonID, $nsLabel, $bVisible, $bOuterContainer );
+    static public function getButton( $isButtonID, $nsLabel=null, $bVisible=true, $bOuterContainer=true, $sButtonType='' ) {
+        return apply_filters( 'aal_filter_button', '', $isButtonID, $nsLabel, $bVisible, $bOuterContainer, $sButtonType );
     }
 
     /**

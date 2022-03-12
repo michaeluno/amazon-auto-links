@@ -1,0 +1,17 @@
+#preview-button {
+  /* Center vertically and horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview-button img {
+  /* When a larger dimension is set, the button image size expands for a moment and resizes its proportion, which creates a flickering effect. This prevents it.  */
+/* @deprecated Not working
+  height: unset;
+  max-width: 100%;
+  max-height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;*/
+}
