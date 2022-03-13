@@ -60,7 +60,16 @@ class AmazonAutoLinks_AdminPage_Setting_Default extends AmazonAutoLinks_AdminPag
             'normal',                                     // context (what kind of metabox this is)
             'default'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );        
-        
+
+        // [5.2.0]
+        new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Button(
+            null,                                           // meta box id - passing null will make it auto generate
+            __( 'Button', 'amazon-auto-links' ), // title
+            $_aPageSlugs,
+            'normal',                                     // context (what kind of metabox this is)
+            'default'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
+        );
+
         new AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter(
             null,                                           // meta box id - passing null will make it auto generate
             __( 'Product Filter', 'amazon-auto-links' ), // title

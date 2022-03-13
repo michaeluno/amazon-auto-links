@@ -7,12 +7,15 @@
  * https://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  */
- 
- 
-class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_CommonAdvanced extends AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Base {
+
+
+/**
+ * @since 5.2.0
+ */
+class AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Button extends AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Base {
 
     protected $_aFieldClasses = array(
-        'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
+        'AmazonAutoLinks_FormFields_Unit_Button',
     );
- 
+
 }

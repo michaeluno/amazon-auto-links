@@ -149,7 +149,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             'AmazonAutoLinks_FormFields_Unit_Common',
             // 'AmazonAutoLinks_FormFields_Unit_Locale', // cannot support this yet as it needs to know the selected locale in advance
             'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
-            'AmazonAutoLinks_FormFields_Button_Selector',
+            // 'AmazonAutoLinks_FormFields_Button_Selector',    // @deprecated 5.2.0 Changed to `AmazonAutoLinks_FormFields_Unit_Button`.
+            'AmazonAutoLinks_FormFields_Unit_Button',
             'AmazonAutoLinks_FormFields_Unit_Cache',
             // 'AmazonAutoLinks_FormFields_Unit_Template', @deprecated 4.0.0
             'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport',   // 4.0.0+

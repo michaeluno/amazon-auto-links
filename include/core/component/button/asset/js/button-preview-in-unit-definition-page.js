@@ -23,6 +23,7 @@
                     'transform':    'translateZ(0)',
                     'min-width':    '116px',
                 });
+            // @todo remove this as the CSS rule is set in button-preview-framed-page.css
             _oIframe.contents().find( 'head' )
                 .append( $( "<style type='text/css'>  html, body{ background-color: unset !important; } </style>"));
         } );
@@ -33,12 +34,6 @@
      * @var aalButtonPreview {debugMode:{},activeButtons:{}}
      */
     $( document ).ready( function() {
-
-        if ( 'undefined' === typeof aalButtonPreview ) {
-            return false;
-        }
-
-        debugLog( aalButtonPreview );
 
         // Initially set the preview and the button select change.
         var _oButtonSelect = $( '.button-select-row' ).find( 'select' ); // the select tag
@@ -74,6 +69,8 @@
         /**
          * On contrast to `aalSetButtonPreviewIframeStyle()`, this one only gets called once.
          */
+        // @todo use $( document ).on( 'load', '.iframe-button-preview-container iframe', function() {} );
+        // so dynamic iframe elements' load events can be captured
         $( '.iframe-button-preview-container' ).find( 'iframe' ).on( 'load', function() {
 
             // The initial button label handling is done too early before the iframe contents are loaded when the override option is enabled
@@ -158,9 +155,9 @@
 
         /**
          * Sets the button label of a given string.
-         * @param   string sLabel
-         * @param   object oElem an element in the same section with the button preview
          * @private
+         * @param sLabel
+         * @param oElem
          */
         function ___setButtonLabel( sLabel, oElem ) {
             ___setButtonLabel_div( sLabel, oElem );
@@ -192,7 +189,7 @@
         if ( ! parseInt( aalButtonPreview.debugMode ) ) {
             return;
         }
-        console.log( 'AAL Debug(Button Preview):', ...args );
+        console.log( 'AAL Debug (Button Preview in Unit Definition):', ...args );
     }
 
 }( jQuery ));

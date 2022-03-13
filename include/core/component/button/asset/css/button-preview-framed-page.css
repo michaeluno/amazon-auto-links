@@ -1,5 +1,7 @@
 html, body {
-    margin: 0 !important; padding: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: unset !important;
 }
 #preview-button {
     /* inline-block to fit the width to the child element. */

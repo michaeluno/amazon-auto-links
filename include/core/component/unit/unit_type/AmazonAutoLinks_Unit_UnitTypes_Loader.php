@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_UnitTypes_Loader extends AmazonAutoLinks_Unit_UnitTyp
         // 'AmazonAutoLinks_FormFields_Unit_Template', // kept for backward-compatibility -> 4.0.5 Removed completely to avoid the error saying the class not found.
         'AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport', // 4.0.0+
         'AmazonAutoLinks_FormFields_Unit_CommonAdvanced',
-        'AmazonAutoLinks_FormFields_Button_Selector',
+        // 'AmazonAutoLinks_FormFields_Button_Selector', // @deprecated 5.2.0 Moved to the button meta-box
         'AmazonAutoLinks_FormFields_Unit_Common',    
         'AmazonAutoLinks_FormFields_Unit_Cache',
     );      

@@ -138,7 +138,18 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
             ), 
             'advanced', // context - e.g. 'normal', 'advanced', or 'side'
             'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
-        );  
+        );
+
+        // [5.2.0]
+        new AmazonAutoLinks_UnitPostMetaBox_Button(
+            null,
+            __( 'Button', 'amazon-auto-links' ),
+            array(      // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'advanced', // context - e.g. 'normal', 'advanced', or 'side'
+            'low'       // priority - e.g. 'high', 'core', 'default' or 'low'
+        );
 
         new AmazonAutoLinks_UnitPostMetaBox_ProductFilter(
             null,       // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.

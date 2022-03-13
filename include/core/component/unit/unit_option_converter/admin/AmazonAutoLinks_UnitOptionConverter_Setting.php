@@ -11,7 +11,7 @@
 /**
  * Loads the unit option converter component.
  * 
- * @since        3.3.0
+ * @since 3.3.0
  */
 class AmazonAutoLinks_UnitOptionConverter_Setting {
     
@@ -28,85 +28,71 @@ class AmazonAutoLinks_UnitOptionConverter_Setting {
      * @callback action      load_{page slug}
      */
     public function replyToLoadPage( $oFactory ) {
-        
+
+        $_aPageSlugs = array(
+            AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
+                'unit_option_converter'
+            ),
+        );
         // Page meta boxes.
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Common(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Common', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
-            'normal',                                       // context
-            'core'                                     // priority                    
+            null,                                   // meta box id - passing null will make it auto generate
+            __( 'Common', 'amazon-auto-links' ),              // title
+            $_aPageSlugs,
+            'normal',                                 // context
+            'core'                                     // priority
         );
 
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Template(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Template', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
-            'normal',                                     // context (what kind of metabox this is)
-            'default'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
-        );        
+            null,                                   // meta box id - passing null will make it auto generate
+            __( 'Template', 'amazon-auto-links' ),            // title
+            $_aPageSlugs,
+            'normal',                                 // context (what kind of metabox this is)
+            'default'                                  // priority - 'high', 'sorted', 'core', 'default', 'low'
+        );
+        // [5.2.0]
+        new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Button(
+            null,                                   // meta box id - passing null will make it auto generate
+            __( 'Button', 'amazon-auto-links' ),              // title
+            $_aPageSlugs,
+            'normal',                                 // context (what kind of metabox this is)
+            'default'                                  // priority - 'high', 'sorted', 'core', 'default', 'low'
+        );
         
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilter(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Product Filter', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
-            'normal',                                     // context (what kind of metabox this is)
+            null,                                   // meta box id - passing null will make it auto generate
+            __( 'Product Filter', 'amazon-auto-links' ),      // title
+            $_aPageSlugs,
+            'normal',                                 // context (what kind of metabox this is)
             'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
 
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_ProductFilterAdvanced(
-            null,                                           // meta box id - passing null will make it auto generate
+            null,                                       // meta box id - passing null will make it auto generate
             __( 'Advanced Product Filter', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
+            $_aPageSlugs,
             'normal',                                     // context (what kind of metabox this is)
-            'low'                                     // priority - 'high', 'sorted', 'core', 'default', 'low'
+            'low'                                          // priority - 'high', 'sorted', 'core', 'default', 'low'
         );
 
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_Cache(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Cache', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
-            'side',                                       // context
+            null,                                    // meta box id - passing null will make it auto generate
+            __( 'Cache', 'amazon-auto-links' ),                // title
+            $_aPageSlugs,
+            'side',                                    // context
             'high'                                     // priority                    
         );            
         
         new AmazonAutoLinks_UnitOptionConverter_Setting_PageMetaBox_CommonAdvanced(
-            null,                                           // meta box id - passing null will make it auto generate
-            __( 'Common Advanced', 'amazon-auto-links' ), // title
-            array( // page slugs
-                AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] => array(
-                    'unit_option_converter'
-                ),
-            ),
-            'side',                                       // context
+            null,                                    // meta box id - passing null will make it auto generate
+            __( 'Common Advanced', 'amazon-auto-links' ),      // title
+            $_aPageSlugs,
+            'side',                                    // context
             'high'                                     // priority                    
         );        
         
         // Tabs
-        new AmazonAutoLinks_UnitOptionConverter_Setting_Tab( 
-            $oFactory,
-            AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ]
-        );        
+        new AmazonAutoLinks_UnitOptionConverter_Setting_Tab( $oFactory, AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ] );
                 
     }            
             
