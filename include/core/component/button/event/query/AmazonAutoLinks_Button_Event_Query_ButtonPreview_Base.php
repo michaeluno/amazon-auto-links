@@ -49,21 +49,30 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
      * @see wp_head()
      */
     public function replyToPrintButtonPreview() {
-        $_sButtonLabel   = $this->getHTTPQueryGET( 'button-label', 'Buy Now' );
-        $_isButtonID      = $this->getHTTPQueryGET( 'button-id', 0 );
-?>
+        $_isButtonID       = $this->getHTTPQueryGET( 'button-id', 0 );
+        $_sButtonLabelMeta = $_isButtonID && is_numeric( $_isButtonID )
+            ? get_post_meta( $_isButtonID, 'button_label', true )
+            : '';
+        $_sButtonLabel     = $this->getHTTPQueryGET( 'button-label', $_sButtonLabelMeta ? $_sButtonLabelMeta : 'Buy Now' );
+        $this->___printButtonPreviewContent( $_isButtonID, $_sButtonLabel );
+        exit;
+    }
+        /**
+         * @since 5.2.0
+         */
+        private function ___printButtonPreviewContent( $isButtonID, $sButtonLabel ) {
+            ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
     <?php echo "<head>"
        . $this->_getHeadTagInnerHTML()
     . "</head>"; ?>
     <body>
-        <?php echo wp_kses( $this->_getBodyTagInnerHTML( $_isButtonID, $_sButtonLabel ), 'post' ); ?>
+        <?php echo wp_kses( $this->_getBodyTagInnerHTML( $isButtonID, $sButtonLabel ), 'post' ); ?>
     </body>
 </html>
-        <?php
-        exit;
-    }
+            <?php
+        }
 
     /**
      * @since  5.2.0
