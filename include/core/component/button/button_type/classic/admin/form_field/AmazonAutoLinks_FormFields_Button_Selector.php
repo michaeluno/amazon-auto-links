@@ -11,11 +11,11 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
      * 
      * Pass an empty string to the parameter for meta box options. 
      * 
-     * @return      array
+     * @return array
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
         
-        $_aFields       = array(
+        return array(
             array(
                 'field_id'          => $sFieldIDPrefix . 'button_id',
                 'type'              => 'select',            
@@ -86,9 +86,7 @@ class AmazonAutoLinks_FormFields_Button_Selector extends AmazonAutoLinks_FormFie
                 'default'           => 1,
             ), 
         );
-       
-        return $_aFields;
-        
+
     }
         private function ___getIframeButtonPreview() {
             $_aAttributes = array(
