@@ -28,15 +28,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Button extends AmazonAutoLinks_UnitPostMet
         $this->enqueueScript(
             apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             $this->oProp->aPostTypes,
-            array(
-                'handle_id'    => 'aalButtonPreview',
-                'dependencies' => array( 'jquery' ),
-                'translation'  => array(
-                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
-                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
-                ),
-                'in_footer'    => true,
-            )
+            apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
         );
 
     }

@@ -35,15 +35,7 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Button extends Amazo
             apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             $this->oProp->sPageSlug,
             'default',
-            array(  
-                'handle_id'    => 'aalButtonPreview',
-                'dependencies' => array( 'jquery' ),
-                'translation'  => array(
-                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
-                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
-                ),
-               'in_footer'    => true,
-            )
+            apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
         );
         // @deprecated 5.2.0
         add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToSetStyle' ) );

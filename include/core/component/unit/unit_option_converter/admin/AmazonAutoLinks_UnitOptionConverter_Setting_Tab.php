@@ -46,15 +46,7 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             AmazonAutoLinks_Registry::$aAdminPages[ 'tool' ], // page slug
             '', // tab slug
-            array(  
-                'handle_id'    => 'aalButtonPreview',
-                'dependencies' => array( 'jquery' ),
-                'translation'  => array(
-                    'activeButtons' => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
-                    'debugMode'     => defined( 'WP_DEBUG' ) && WP_DEBUG,
-                ),
-                'in_footer'    => true,
-            )
+            apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
         );      
 
         add_filter( 'style_' . $oAdminPage->oProp->sClassName, array( $this, 'replyToSetStyle' ) );
@@ -69,6 +61,5 @@ class AmazonAutoLinks_UnitOptionConverter_Setting_Tab extends AmazonAutoLinks_Ad
             return $sCSSRules . PHP_EOL
                 . AmazonAutoLinks_Button_ResourceLoader::getButtonsCSS() . PHP_EOL;
         }    
-    
-        
+
 }
