@@ -43,8 +43,15 @@ abstract class AmazonAutoLinks_FormFields_Base extends AmazonAutoLinks_PluginUti
         $this->oFactory        = $oFactory;
         $this->oOption         = AmazonAutoLinks_Option::getInstance();
         $this->oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
-        
+
+        $this->_construct();
     }
+
+    /**
+     * A constructor for extended classes, used for additional properties and setting up hooks.
+     * @since 5.2.0
+     */
+    protected function _construct() {}
     
     /**
      * Should be overridden in an extended class.
