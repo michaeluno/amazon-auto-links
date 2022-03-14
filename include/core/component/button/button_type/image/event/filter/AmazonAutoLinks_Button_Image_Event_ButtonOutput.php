@@ -8,7 +8,6 @@
  * Copyright (c) 2013-2022 Michael Uno
  */
 
-
 /**
  * @since 5.2.0
  */
@@ -44,7 +43,7 @@ class AmazonAutoLinks_Button_Image_Event_ButtonOutput {
             'src' => esc_url( $_sImageURL ),
             'alt' => $sButtonLabel,
         );
-        return "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
+        return "<div class='amazon-auto-links-button {$_sButtonIDSelector}' data-type='image'>"
                 . "<img " . AmazonAutoLinks_Utility::getAttributes( $_aAttributes ) . " />"
             . "</div>";
     }

@@ -8,7 +8,6 @@
  * Copyright (c) 2013-2022 Michael Uno
  */
 
-
 /**
  * @since 5.2.0
  */
@@ -34,7 +33,7 @@ class AmazonAutoLinks_Button_Classic_Event_ButtonOutput {
         $_sButtonIDSelector = $_iButtonID >= 0   // preview sets it to -1
             ? "amazon-auto-links-button-$isButtonID"
             : "amazon-auto-links-button-___button_id___";
-        return "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
+        return "<div class='amazon-auto-links-button {$_sButtonIDSelector}' data-type='classic'>"
                     . $sButtonLabel
                 . "</div>";
     }
