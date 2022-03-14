@@ -12,7 +12,7 @@
 /**
  *  Outputs the button.
  *  
- *  @since      4.3.0
+ *  @since 4.3.0
  */
 class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginUtility {
 
@@ -37,8 +37,8 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     }
 
     /**
-     * @param string $sOutput
-     * @param array $aArguments
+     * @param  string $sOutput
+     * @param  array  $aArguments
      * @return string
      */
     public function replyToGetLinkedButton( $sOutput, $aArguments ) {
@@ -57,10 +57,9 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
 
     }
         /**
-         * @param array $aArguments
-         *
+         * @since  4.3.0
+         * @param  array  $aArguments
          * @return string
-         * @since   4.3.0
          */
         private function ___getButtonOutput( array $aArguments ) {
             switch( ( integer ) $aArguments[ 'type' ] ) {
@@ -87,7 +86,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             }
         }
             /**
-             * @param array $aArguments
+             * @param  array  $aArguments
              * @return string
              */
             private function ___getProductURL( array $aArguments ) {
@@ -127,19 +126,18 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
         /**
          * Returns an add to cart button.
          *
-         * @param string $sASINs        Comma separated ASINs
-         * @param string $sQuantities   Comma separated quantities
-         * @param string $sLocale
-         * @param string $sAssociateID
-         * @param string|integer $isButtonID
-         * @param string $sOfferListingID
-         * @param string $sAccessKey
-         * @param string $sLabel
-         *
+         * @see    https://webservices.amazon.com/paapi5/documentation/add-to-cart-form.html
+         * @since  3.1.0
+         * @since  4.3.0          Moved from `AmazonAutoLinks_UNitOutput_ElementFormat`.
+         * @param  string         $sASINs        Comma separated ASINs
+         * @param  string         $sQuantities   Comma separated quantities
+         * @param  string         $sLocale
+         * @param  string         $sAssociateID
+         * @param  string|integer $isButtonID
+         * @param  string         $sOfferListingID
+         * @param  string         $sAccessKey
+         * @param  string         $sLabel
          * @return string
-         * @since       3.1.0
-         * @see https://webservices.amazon.com/paapi5/documentation/add-to-cart-form.html
-         * @since       4.3.0   Moved from `AmazonAutoLinks_UNitOutput_ElementFormat`.
          */
         private function ___getAddToCartButton( $sASINs, $sQuantities, $sLocale, $sAssociateID, $isButtonID, $sOfferListingID, $sAccessKey='', $sLabel='Buy Now' ) {
 
@@ -172,15 +170,15 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
     /**
      * Returns a button output by a given button (custom post) ID.
      *
-     * @param   string          $sOutput
-     * @param   integer|string  $isButtonID
-     * @param   null|string     $nsLabel
-     * @param   boolean         $bVisible
-     * @param   boolean         $bOuterContainer
-     * @param   string          $sButtonType        Accepts `classic`, `theme`, `image`, or `button2`.
-     * @return  string
-     * @since   3
-     * @since   5.2.0           Accepts an empty string as a label. Use null to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
+     * @param  string         $sOutput
+     * @param  integer|string $isButtonID
+     * @param  null|string    $nsLabel
+     * @param  boolean        $bVisible
+     * @param  boolean        $bOuterContainer
+     * @param  string         $sButtonType        Accepts `classic`, `theme`, `image`, or `button2`.
+     * @return string
+     * @since  3
+     * @since  5.2.0          Accepts an empty string as a label. Use null to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
      */
     public function replyToGetButton( $sOutput, $isButtonID, $nsLabel='', $bVisible=true, $bOuterContainer=true, $sButtonType='' ) {
 
@@ -188,8 +186,8 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
         $_sButtonLabel = wp_kses( $_sButtonLabel, 'post' );
         $_sNone        = 'none';
         $bVisible      = $bVisible ? '' : "display:{$_sNone};";
-        $_sButtonType = $this->___getButtonType( $isButtonID, $sButtonType );
-        $_sButton     = apply_filters(
+        $_sButtonType  = $this->___getButtonType( $isButtonID, $sButtonType );
+        $_sButton      = apply_filters(
             'aal_filter_button_by_type_' . $_sButtonType,
             "<button type='button' class='amazon-auto-links-button'>"
                 . $_sButtonLabel
