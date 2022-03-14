@@ -74,6 +74,7 @@ return array(
     "AmazonAutoLinks_Button_Event_Filter_FieldsetsUnitDefinition" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_FieldsetsUnitDefinition.php", 
     "AmazonAutoLinks_Button_Event_Filter_Output" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_Output.php", 
     "AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/query/AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base.php", 
+    "AmazonAutoLinks_Button_Event_Query_ButtonPreview_ByID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/query/AmazonAutoLinks_Button_Event_Query_ButtonPreview_ByID.php", 
     "AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/query/AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme.php", 
     "AmazonAutoLinks_PostType_Button" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php", 
     "AmazonAutoLinks_PostType_Button_ListTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php", 

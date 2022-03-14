@@ -14,7 +14,7 @@
 class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Button extends AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Base {
 
     /**
-     * @var array
+     * @var   array
      * @since 5.2.0
      */
     protected $_aFieldClasses = array(
@@ -37,23 +37,8 @@ class AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_Button extends Amazo
             'default',
             apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
         );
-        // @deprecated 5.2.0
-        add_filter( 'style_' . $this->oProp->sClassName, array( $this, 'replyToSetStyle' ) );
-                
+
     }
-    
-        /**
-         * @return   string
-         * @callback add_action() style_{class name}
-         * @since    3.4.0
-         * @since    5.2.0  Moved from `AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_CommonAdvanced`.
-         * @deprecated 5.2.0    Now uses iframe to preview button so no need to load CSS in the direct screen
-         */
-        public function replyToSetStyle( $sCSSRules ) {
-            return $sCSSRules . PHP_EOL
-                . AmazonAutoLinks_Button_ResourceLoader::getButtonsCSS() . PHP_EOL;
-        }
-        
         /**
          * Modifies the 'button_id' field to add labels for selection.
          * @return array

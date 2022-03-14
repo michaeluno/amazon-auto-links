@@ -81,7 +81,7 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
      * @return string
      */
     protected function _getBodyTagInnerHTML( $isButtonID, $sButtonLabel ) {
-        return "<div id='preview-button'>"
+        return "<div id='preview-button' data-button-id='" . esc_attr( $isButtonID ) . "'>"
                 . $this->getButton( $isButtonID, $sButtonLabel, true, false )
             . "</div>";
     }

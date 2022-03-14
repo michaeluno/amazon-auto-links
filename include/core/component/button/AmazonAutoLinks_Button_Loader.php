@@ -55,12 +55,12 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
         /// Events [4.3.0]
         new AmazonAutoLinks_Button_Event_Filter_Output;
         new AmazonAutoLinks_Button_Event_Filter_FieldsetsUnitDefinition;    // [5.2.0]
+        new AmazonAutoLinks_Button_Event_Query_ButtonPreview_ByID;          // [5.2.0]
         new AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme;
         new AmazonAutoLinks_Button_Event_Action_DefaultButtons;
         
         // Back-end
         if ( is_admin() ) {
-            // add_filter( 'aal_filter_admin_button_js_translation', array( $this, 'replyToGetJSButtonTranslation' ) );
             add_filter( 'aal_filter_admin_button_js_preview_src', array( $this, 'replyToGetJSButtonPreviewPath' ) );
             add_filter( 'aal_filter_admin_button_js_preview_enqueue_arguments', array( $this, 'replyToGetJSButtonPreviewEnqueueArguments' ) );
         }
@@ -120,28 +120,18 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
             'translation'  => array(
                 'activeButtons'   => AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForJavaScript(),
                 'debugMode'       => defined( 'WP_DEBUG' ) && WP_DEBUG,
-                'previewFrameSRC' => '',
+                'spinnerURL'      => admin_url( 'images/loading.gif' ),
+                'frameSRC'        => add_query_arg(
+                    array(
+                        'aal-button-preview' => '_by_id',
+                        'button-id'          =>'___button_id___',
+                        // 'button-label'       => '',  // @note do not set a button label as an empty value can be accepted as an empty label. To reflect the default label, unset the key.
+                    ),
+                    get_site_url()
+                ),
             ),
            'in_footer'    => true,
         ) + $aArguments;
     }
-
-    /**
-     * @since      4.3.0
-     * @return     array
-     * @deprecated 5.2.0 Seems unused
-     */
-    // public function replyToGetJSButtonTranslation( $aLabels ) {
-    //     $_aButtonIDs = $this->getActiveButtonIDs();
-    //     $_aLabels    = $this->getAsArray( $aLabels );
-    //     foreach( $_aButtonIDs as $_iButtonID ) {
-    //         $_sButtonLabel = get_post_meta( $_iButtonID, 'button_label', true );
-    //         $_sButtonLabel = $_sButtonLabel
-    //             ? $_sButtonLabel
-    //             : __( 'Buy Now', 'amazon-auto-links' );
-    //         $_aLabels[ $_iButtonID ] = $_sButtonLabel;
-    //     }
-    //     return $_aLabels;
-    // }
 
 }
