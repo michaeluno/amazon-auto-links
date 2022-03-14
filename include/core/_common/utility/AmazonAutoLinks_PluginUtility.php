@@ -557,7 +557,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return array
      */
     static public function getActiveButtonLabelsForJavaScript() {
-
         $_aButtonIDs    = self::getActiveButtonIDs();
         $_aLabels       = array();
         $_sDefaultLabel = AmazonAutoLinks_Option::getInstance()->get( array( 'unit_default', 'button_label' ), 'DEBUG' );
@@ -571,7 +570,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             $_aLabels[ $_iButtonID ] = $_sButtonLabel ? $_sButtonLabel : $_sDefaultLabel;
         }
         return $_aLabels;
-
     }
 
     /**
