@@ -5,13 +5,13 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
  * Provides plugin specific utility methods that uses WordPress built-in functions.
  *
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
@@ -199,7 +199,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
      * @return  boolean
      */
     static public function isBlockedByAmazonCaptcha( $sHTML, $sURL ) {
-
         if ( empty ( $sHTML ) ) {
             return false;
         }
@@ -211,7 +210,6 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         $_oXPath    = new DOMXPath( $_oDoc );
         $_noNode    = $_oXPath->query( './/form[@action="/errors/validateCaptcha"]' )->item( 0 );
         return null !== $_noNode;
-
     }
 
     /**
@@ -247,8 +245,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @return      boolean
-     * @since       3.8.0
+     * @since  3.8.0
+     * @return boolean
      */
     static public function isPluginAdminPage() {
 
@@ -271,9 +269,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @remark  Used for breadcrumbs.
-     * @return  null|object
-     * @since   3.6.0
+     * @remark Used for breadcrumbs.
+     * @return null|object
+     * @since  3.6.0
      */
     static public function getCurrentQueriedObject() {
         if ( ! method_exists( $GLOBALS[ 'wp_query' ], 'get_queried_object' ) ) {
@@ -284,11 +282,11 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Finds and extracts ASINs from given text.
-     * @since       3.4.0
-     * @since       3.4.12      Changed it to return an empty string if no ASIN is found.
-     * @return      string
-     * @param       string      $sText
-     * @param       string      $sDelimiter
+     * @since  3.4.0
+     * @since  3.4.12 Changed it to return an empty string if no ASIN is found.
+     * @param  string $sText
+     * @param  string $sDelimiter
+     * @return string
      */
     static public function getASINsExtracted( $sText, $sDelimiter=PHP_EOL ) {
         $_aASINs = self::getASINs( $sText );
@@ -323,24 +321,21 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
      * Removes expired items in the set plugin custom database tables.
-     * @since       3.4.0
-     * @return      void
+     * @since 3.4.0
      */
     static public function deleteExpiredTableItems() {
-        
         $_oCacheTable   = new AmazonAutoLinks_DatabaseTable_aal_request_cache;
         $_oCacheTable->deleteExpired();
         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         $_oProductTable->deleteExpired();        
-        
     }
 
     /**
 
     /**
      * Returns the active auto-insert ids.
-     * @sine        3.3.0
-     * @return      array
+     * @since  3.3.0
+     * @return array
      */
     static public function getActiveAutoInsertIDs() {
         
@@ -370,12 +365,12 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Returns the active auto-insert ids.
      * 
-     * @remark      Do not cache the result as this method can be called multiple times in one page-load.
+     * @remark Do not cache the result as this method can be called multiple times in one page-load.
      * When an auto-insert post is about to be published, the callback for the `transition_post_status` action is triggered and calls this method. However, it is too early 
      * so the plugin triggers another callback after the post is completely published. So in that case, the method gets called twice. 
      * The callback for the `transition_post_status` hook is needed for user's trashing/restoring posts.
-     * @since       3.3.0
-     * @return      array   An numerically indexed array holding active auto-insert IDs.
+     * @since  3.3.0
+     * @return array A numerically indexed array holding active auto-insert IDs.
      */
     static public function getActiveAutoInsertIDsQueried() {
         $_oQuery = new WP_Query(
@@ -397,8 +392,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Returns the HTML credit comment.
-     * @since       3.1.0
-     * @return      string
+     * @since  3.1.0
+     * @return string
      */
     static public function getCommentCredit() {
         return "<!-- Rendered with " . AmazonAutoLinks_Registry::NAME . " by miunosoft -->";
@@ -406,9 +401,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
      * Returns a list of labels (unit taxonomy) associated with the given unit id.
-     * @since       3.1.0
-     * @return      string
-     * @param       integer     $iUnitID
+     * @since  3.1.0
+     * @param  integer $iUnitID
+     * @return string
      */
     static public function getReadableLabelsByUnitID( $iUnitID ) {
         $_aboTerms = get_the_terms( 
@@ -426,9 +421,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
     
     /**
-     * @since       3.1.0
-     * @return      string       Comma-delimited readable unit labels.
-     * @param       array|string $asTermIDs
+     * @since  3.1.0
+     * @param  array|string $asTermIDs
+     * @return string       Comma-delimited readable unit labels.
      */
     static public function getReadableLabelsByLabelID( $asTermIDs ) {
 
@@ -449,13 +444,11 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         return implode( ', ', $_aTermLabels );
         
     }
-    
-    
+
     /**
-     * 
-     * @since       3.1.0
-     * @return      string       comma-delimited unit label ids.
-     * @param       integer      $iUnitID
+     * @since  3.1.0
+     * @param  integer $iUnitID
+     * @return string  comma-delimited unit label ids.
      */
     static public function getLabelIDsByUnitID( $iUnitID ) {
         
@@ -480,8 +473,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Returns an array holding unit type labels.
-     * @since       3
-     * @return      array
+     * @since  3
+     * @return array
      */
     static public function getUnitTypeLabels() {
         return apply_filters( 'aal_filter_registered_unit_type_labels', array() );
@@ -499,11 +492,10 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @param string $sDegreeType
-     * @param array $aArguments
-     *
-     * @return  string
-     * @since   3
+     * @param  string $sDegreeType
+     * @param  array $aArguments
+     * @return string
+     * @since  3
      */
     static public function getDegree( $sDegreeType, $aArguments ) {
         $_iDegree = self::getElement(
@@ -525,8 +517,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * 
-     * @since       3
+     * @since 3
      */
     static private $_aFunctionNamesWithSlugs = array(
         // function name => page type slug
@@ -541,13 +532,13 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         'is_author'             => 'author',
         'is_search'             => 'search',
         'is_404'                => '404',
-//        'wp_doing_ajax'         => 'ajax',  // 3.6.0+ `wp_doing_ajax()` exists in WP 4.7+
+        // 'wp_doing_ajax'         => 'ajax',  // 3.6.0+ `wp_doing_ajax()` exists in WP 4.7+
     );
     /**
      * 
-     * @since       3
-     * @since       4.6.15      Added the check for wp_query existent. Otherwise, the 'doing it wrong' warning appears if the variable is not established.
-     * @return      string      The type slug
+     * @since  3
+     * @since  4.6.15 Added the check for wp_query existent. Otherwise, the 'doing it wrong' warning appears if the variable is not established.
+     * @return string The type slug
      */
     static public function getCurrentPageType() {
 	    if ( ! isset( $GLOBALS[ 'wp_query' ] ) ) {
@@ -561,9 +552,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
         return '';
     }    
 
-/**
-     * @since       3.4.0
-     * @return      array
+    /**
+     * @since  3.4.0
+     * @return array
      */
     static public function getActiveButtonLabelsForJavaScript() {
 
@@ -584,8 +575,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * @since   4.3.0
-     * @return  array
+     * @since  4.3.0
+     * @return array
      */
     static public function getActiveButtonLabelsForFields() {
 
@@ -608,8 +599,7 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     }
 
     /**
-     * 
-     * @return      array       An array holding button IDs.
+     * @return array An array holding button IDs.
      */
     static public function getActiveButtonIDs() {
 
@@ -640,8 +630,8 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Queries active buttons without caches.
-     * @since       3.3.0
-     * @return      array
+     * @since  3.3.0
+     * @return array
      */
     static public function getActiveButtonIDsQueried() {
 
@@ -674,14 +664,14 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Returns a button output by a given button (custom post) ID.
      *
-     * @param   integer|string $isButtonID
-     * @param   null|string    $nsLabel
-     * @param   boolean        $bVisible
-     * @param   boolean        $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
-     * @param   string         $sButtonType       Accepts `classic` (default), `theme`, `image`, `button2`
-     * @return  string
-     * @since   3
-     * @since   5.2.0          Accepts an empty string to serve as a label. Use null instead to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
+     * @param  integer|string $isButtonID
+     * @param  null|string    $nsLabel
+     * @param  boolean        $bVisible
+     * @param  boolean        $bOuterContainer   Whether to display the outer container. When this is false, the visible parameter does not take effect.
+     * @param  string         $sButtonType       Accepts `classic` (default), `theme`, `image`, `button2`
+     * @return string
+     * @since  3
+     * @since  5.2.0          Accepts an empty string to serve as a label. Use null instead to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
      */
     static public function getButton( $isButtonID, $nsLabel=null, $bVisible=true, $bOuterContainer=true, $sButtonType='' ) {
         return apply_filters( 'aal_filter_button', '', $isButtonID, $nsLabel, $bVisible, $bOuterContainer, $sButtonType );
@@ -689,9 +679,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
 
     /**
      * Returns the url using the Amazon SSL image server.
-     * @since       3
-     * @return      string      The converted url.
-     * @param       string      $sImgURL
+     * @since  3
+     * @return string The converted url.
+     * @param  string $sImgURL
      */
     static public function getAmazonSSLImageURL( $sImgURL ) {
         return preg_replace(
@@ -723,18 +713,17 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     
     /**
      * Go to the Authentication tab of the Settings page.
-     * @since       3
-     * @return      void
+     * @since 3
      */
     static public function goToAPIAuthenticationPage()  {
         exit( wp_safe_redirect( self::getAPIAuthenticationPageURL() ) );
     }
     
     /**
-     * @param       array       $aAdditionalQuery   Used to specify a locale.
-     * @return      string
-     * @since       unknown
-     * @since       4.5.0       Changed the tab to Associates as the Authentication tab is deprecated. Added the `$aAdditionalQuery` parameter.
+     * @param  array   $aAdditionalQuery   Used to specify a locale.
+     * @return string
+     * @since  unknown
+     * @since  4.5.0   Changed the tab to Associates as the Authentication tab is deprecated. Added the `$aAdditionalQuery` parameter.
      */
     static public function getAPIAuthenticationPageURL( array $aAdditionalQuery=array() ) {
         return add_query_arg(
@@ -778,9 +767,9 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
     /**
      * Returns a warning message for when PA-API keys are not set.
      * @return  string
-     * @param   string  $sLocale
+     * @param   string $sLocale
      * @since   4.0.0
-     * @since   4.5.0   Added the `$sLocale` parameter.
+     * @since   4.5.0  Added the `$sLocale` parameter.
      */
     static public function getAPIKeyUnsetWarning( $sLocale='' ) {
         $_aAdditionalQueries = $sLocale ? array( 'locale' => $sLocale ) : array();
