@@ -72,13 +72,6 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             // add_filter( 'enter_title_here', array( $this, 'replyToModifyTitleMetaBoxFieldLabel' ) );
             // add_action( 'edit_form_after_title', array( $this, 'replyToAddTextAfterTitle' ) );    
             add_filter( 'post_updated_messages', array( $this, 'replyToModifyPostUpdatedMessages' ) );        
-            
-            $this->enqueueStyles(
-                array(
-                    AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
-                    AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/css/edit.aal-button.css',
-                )
-            );
 
             // Unit listing table columns
             add_filter( 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToModifyColumnHeader' ) );
@@ -103,6 +96,12 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
      * @callback admin_enqueue_scripts
      */
     public function replyToLoadResources() {
+        $this->enqueueStyles(
+            array(
+                AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css',
+                AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/css/edit.aal-button.css',
+            )
+        );
         $_sURLAddClassicButton = add_query_arg(
             array(
                 'post_type'   => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
