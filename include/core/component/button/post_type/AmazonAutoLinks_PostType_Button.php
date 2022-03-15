@@ -141,6 +141,11 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 'in_footer'    => true,
             )
         );
+        // [5.2.0]
+        $this->enqueueScript(
+            apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
+            apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
+        );
     }
 
     /**
