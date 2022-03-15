@@ -16,6 +16,53 @@
 class AmazonAutoLinks_ButtonUtility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @param  integer|string $isButtonID
+     * @param  integer|string $isButtonType         The button type. Accepts `_by_id`, `classic`, `image`, `theme`, `button2`, `0`. `0` is an alias for `theme`.
+     * @param  null|string    $nsButtonLabel        If `null` is passed, the label will not be set. This accepts an empty string as a label.
+     * @param  array          $aFrameAttributes
+     * @param  array          $aContainerAttributes
+     * @since  5.2.0
+     * @return string
+     */
+    static public function getIframeButtonPreview( $isButtonID, $isButtonType, $nsButtonLabel=null, array $aFrameAttributes=array(), array $aContainerAttributes=array() ) {
+        $_aFrameAttributes = $aFrameAttributes + array(
+            'title'          => 'Button Preview of ' . $isButtonID,    // this is a sort of internal (not apparent) attribute to avoid a warning from a browser so no need to translate
+            'class'          => 'frame-button-preview',
+            'data-button-id' => $isButtonID,
+            'frameborder'    => '0',
+            'border'         => '0',
+            // 'width'          => 200,
+            // 'height'         => 60,
+            // 'style'          => 'height:60px;border:none;overflow:hidden;',
+            'style'          => 'height:60px; border:none; overflow:hidden; margin: 0 auto; display: block;',
+            'scrolling'      => 'no',
+            'src'            => self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel ),
+        );
+        $_aContainerAttributes = $aContainerAttributes + array(
+            'class'       => 'iframe-button-preview-container',
+        );
+        return "<div " . self::getAttributes( $_aContainerAttributes ) . ">"
+                . "<iframe " . self::getAttributes( $_aFrameAttributes ) . "></iframe>"
+            . "</div>";
+    }
+        /**
+         * @since  5.2.0
+         * @param  integer|string $isButtonID
+         * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `button2`, `0`. `0` is an alias for `theme`.
+         * @param  null|string    $nsButtonLabel
+         * @return string
+         */
+        static private function ___getButtonPreviewURL( $isButtonID, $isButtonType=0, $nsButtonLabel=null ) {
+            $_aQuery = array(
+                'aal-button-preview' => $isButtonType, // @todo confirm the behavior when 0 is passed
+                'button-id'          => $isButtonID,
+                'button-label'       => $nsButtonLabel,
+            );
+            $_aQuery = array_filter( $_aQuery, array( __CLASS__, 'isNotNull' ) );
+            return add_query_arg( $_aQuery, get_site_url() );
+        }
+
+    /**
      * Returns all CSS rules of active buttons.
      *
      * @return string

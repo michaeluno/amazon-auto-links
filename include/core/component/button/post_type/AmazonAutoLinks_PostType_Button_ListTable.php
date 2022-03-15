@@ -51,35 +51,14 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
      */
     public function cell_aal_button_preview( $sCell, $iPostID ) {
         return $sCell
-            // @deprecated 5.2.0 Uses iframes to display button previews
-            // . AmazonAutoLinks_PluginUtility::getButton( $iPostID )
-            . $this->___getButtonPreviewFrame( $iPostID );
-    }
-        /**
-         * @param  integer $iButtonID
-         * @return string
-         * @since  5.2.0
-         */
-        private function ___getButtonPreviewFrame( $iButtonID ) {
-            $_aAttributes = array(
-                'title'          => 'Button Preview of ' . $iButtonID,
-                'id'             => 'iframe-button-preview-' . $iButtonID,
-                'data-button-id' => $iButtonID,
-                'class'          => 'frame-button-preview',
-                'frameborder'    => 0,
-                'border'         => 0,
-                'style'          => 'height:60px; border:none; overflow:hidden; margin: 0 auto; display: block;',
-                'width'          => 200,
-                'height'         => 60,
-                'scrolling'      => 'no',
-                'src'            => add_query_arg( array(
-                    'aal-button-preview' => '_by_id',
-                    'button-id' => $iButtonID,
-                ), get_site_url() ),
+            . AmazonAutoLinks_ButtonUtility::getIframeButtonPreview(
+                $iPostID,
+                '_by_id',
+                null,
+                array(
+                    'id' => 'iframe-button-preview-' . $iPostID,
+                )
             );
-            return "<div class='iframe-button-preview-container'>"
-                   . "<iframe " . $this->oUtil->getAttributes( $_aAttributes ) . "></iframe>"
-                . "</div>";
-        }
-        
+    }
+
 }
