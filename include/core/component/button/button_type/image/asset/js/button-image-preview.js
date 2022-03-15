@@ -110,18 +110,8 @@
       debounce = setTimeout( function () {
 
         // Update the framed page stylesheet
-        var _style      = _getCSSRulesGenerated( styleHolder );
-        var _styleSheet = $( '<style>', { id: 'button-preview-image-framed-stylesheet' } );
-        _styleSheet.text( _style + '\n' + $( '#custom_css__0' ).val() );
-        var _prevSheet  = previewFrame.contents().find( '#button-preview-image-framed-stylesheet' );
-        if ( _prevSheet.length > 0 ) {
-          _prevSheet.replaceWith( _styleSheet );
-        } else {
-          previewFrame.contents().find( 'head' ).first().append( _styleSheet );
-        }
-        previewFrame.contents().find( 'body .amazon-auto-links-button img' ).attr( 'src', pseudoImg.attr( 'src' ) );
-          // .parent().hide().show( 0 ); // redraw
-
+        var _style = _getCSSRulesGenerated( styleHolder ) + '\n' + $( '#custom_css__0' ).val();
+        _setStyleSheetInFramedPage( _style, 'button-preview-image-framed-stylesheet', previewFrame, pseudoImg );
 
         // Update the Generated CSS field
         $( '#button_css__0' ).text( _style );
@@ -129,6 +119,18 @@
       }, 100 );
 
     } );
+
+    function _setStyleSheetInFramedPage( style, attributeID, previewFrame, pseudoImg ) {
+      var _styleSheet = $( '<style>', { id: attributeID } );
+      _styleSheet.text( style );
+      var _prevSheet = previewFrame.contents().find( '#' + attributeID );
+      if ( _prevSheet.length > 0 ) {
+        _prevSheet.replaceWith( _styleSheet );
+      } else {
+        previewFrame.contents().find( 'head' ).first().append( _styleSheet );
+      }
+      previewFrame.contents().find( 'body .amazon-auto-links-button img' ).attr( 'src', pseudoImg.attr( 'src' ) );
+    }
 
     function _getCSSRulesGenerated( styleHolder ) {
       var _extraCSS = '';
