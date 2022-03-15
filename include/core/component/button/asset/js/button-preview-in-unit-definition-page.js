@@ -26,7 +26,7 @@
    * @remark  it seems whenever the iframe contents are modified, the child script calls this function.
    */
   aalSetButtonPreviewIframeStyle = function ( iWidth, iHeight, isButtonID ) {
-    $( '#iframe-button-preview-' + isButtonID ).width( iWidth ).height( iHeight )
+    $( '#iframe-button-preview-' + isButtonID ).width( iWidth + 10 ).height( iHeight + 10 )
       .css( {
         'width': iWidth + 'px',
         'height': iHeight + 'px',
