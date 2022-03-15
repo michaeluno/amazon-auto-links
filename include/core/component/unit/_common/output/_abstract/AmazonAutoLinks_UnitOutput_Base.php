@@ -247,9 +247,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * 
-     * @return string|integer      The set button id. If not set, `default` will be returned.
+     * @return integer The set button id. If not set, `0` will be returned.
      * @since  ?
-     * @since  5.0.0 Changed the visibility scope to public from protected as accessed from formatter classes.
+     * @since  5.0.0   Changed the visibility scope to public from protected as accessed from formatter classes.
+     * @since  5.2.0   Returns only an integer. When not found, 0 will be returned.
      */
     public function getButtonID() {
         
@@ -260,8 +261,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         if ( $_iButtonID && false !== strpos( $_sCSS, '-' . ( string ) $_iButtonID ) ) {
             return $_iButtonID;
         }
-        
-        return 'default';
+        return 0;
         
     }
 
