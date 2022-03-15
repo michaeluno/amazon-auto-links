@@ -1,5 +1,14 @@
 <?php
 /**
+ * Auto Amazon Links
+ *
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *
+ * https://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2022 Michael Uno
+ */
+
+/**
  * Provides the common methods for creating form fields definitions.
  * 
  * @since  3

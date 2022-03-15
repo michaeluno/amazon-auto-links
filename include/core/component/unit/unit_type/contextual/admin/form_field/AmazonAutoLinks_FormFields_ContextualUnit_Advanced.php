@@ -3,14 +3,14 @@
  * Auto Amazon Links
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno; Licensed GPLv2
+ * Copyright (c) 2013-2022 Michael Uno; Licensed GPLv2
  *
  */
 
 /**
  * Provides the definitions of form fields for the advanced section of the 'contextual' unit type.
  *
- * @since           4.14.0
+ * @since 4.14.0
  */
 class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks_FormFields_SearchUnit_ProductSearch {
 
@@ -19,7 +19,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks
      *
      * Pass an empty string to the parameter for meta box options.
      *
-     * @return      array
+     * @return array
      */
     public function get( $sFieldIDPrefix='', $aUnitOptions=array()  ) {
 

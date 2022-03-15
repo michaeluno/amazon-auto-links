@@ -5,7 +5,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
@@ -22,7 +22,6 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
      * Sets up form fields.
      */ 
     public function setUp() {
-
         foreach( $this->_getFieldClasses() as $_sClassName ) {
             $_oFields = new $_sClassName( $this );
             foreach ( $_oFields->get() as $_aField ) {
@@ -32,11 +31,10 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
                 $this->addSettingFields( $_aField );
             }
         }
-
     }
 
         /**
-         * @return      array
+         * @return array
          */
         protected function _getFieldClasses() {
             return array(
