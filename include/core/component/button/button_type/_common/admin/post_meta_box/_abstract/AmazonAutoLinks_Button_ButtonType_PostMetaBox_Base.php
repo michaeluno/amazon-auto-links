@@ -20,6 +20,12 @@ abstract class AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base extends Amazon
      */
     public $_sButtonType = '';
 
+    /**
+     * @var   array Stores field definition class names.
+     * @since 5.2.0
+     */
+    protected $_aFieldClasses = array();
+
     public function start() {
 
         // Register custom field types
@@ -27,6 +33,18 @@ abstract class AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base extends Amazon
 
         add_action( "set_up_" . $this->oProp->sClassName, array( $this, 'replyToInsertCustomStyleTag' ) );
 
+    }
+
+    /**
+     * @since 5.2.0
+     */
+    public function setUp() {
+        foreach( $this->_aFieldClasses as $_sClassName ) {
+            $_oFields = new $_sClassName( $this );
+            foreach( $_oFields->get() as $_aField ) {
+                $this->addSettingFields( $_aField );
+            }
+        }
     }
 
     /**

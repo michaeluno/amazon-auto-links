@@ -13,11 +13,12 @@
  */
 class AmazonAutoLinks_PostMetaBox_Button_CSS extends AmazonAutoLinks_PostMetaBox_Button_Base {
 
-    public function setUp() {
-        $_oFields = new AmazonAutoLinks_FormFields_Button_CSS( $this );
-        foreach( $_oFields->get() as $_aField ) {            
-            $this->addSettingFields( $_aField );
-        }
-    }
-    
+    /**
+     * @var   array Stores field definition class names.
+     * @since 5.2.0
+     */
+    protected $_aFieldClasses = array(
+        'AmazonAutoLinks_FormFields_Button_CSS',
+    );
+
 }
