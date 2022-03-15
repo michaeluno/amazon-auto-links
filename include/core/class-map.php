@@ -80,7 +80,7 @@ return array(
     "AmazonAutoLinks_PostType_Button_ListTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php", 
     "AmazonAutoLinks_PostType__Button___ActionLink_Status" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/action/AmazonAutoLinks_PostType__Button___ActionLink_Status.php", 
     "AmazonAutoLinks_Button_Shortcode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/shortcode/AmazonAutoLinks_Button_Shortcode.php", 
-    "AmazonAutoLinks_ButtonUtility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/utility/AmazonAutoLinks_ButtonUtility.php", 
+    "AmazonAutoLinks_Button_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/utility/AmazonAutoLinks_Button_Utility.php", 
     "AmazonAutoLinks_CustomOEmbed_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/AmazonAutoLinks_CustomOEmbed_Loader.php", 
     "AmazonAutoLinks_CustomOEmbed_Setting" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting.php", 
     "AmazonAutoLinks_CustomOEmbed_Setting_Embed" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed.php", 

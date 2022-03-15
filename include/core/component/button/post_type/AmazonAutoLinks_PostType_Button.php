@@ -215,7 +215,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
          * @callback add_action() shutdown
          */
         public function replyToUpdateButtonCSSOnShutdown() {
-            update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ], AmazonAutoLinks_ButtonUtility::getCSSRulesOfActiveButtons() );
+            update_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'button_css' ], AmazonAutoLinks_Button_Utility::getCSSRulesOfActiveButtons() );
         }
 
     /**

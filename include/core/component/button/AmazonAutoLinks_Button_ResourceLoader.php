@@ -15,7 +15,7 @@
  *  @remark Currently only handles stylesheets.
  *  @since  3
  */
-class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_ButtonUtility {
+class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_Button_Utility {
   
     /**
      * Sets up hooks and properties.

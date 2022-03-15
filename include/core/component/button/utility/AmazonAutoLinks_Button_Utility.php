@@ -9,11 +9,12 @@
  */
  
 /**
- *  Provides shared utility methods among the button component.
+ * Provides shared utility methods among the button component.
  *  
- *  @since 4.0.1
+ * @since 4.0.1
+ * @since 5.2.0 Renamed from `AmazonAutoLinks_ButtonUtility`.
  */
-class AmazonAutoLinks_ButtonUtility extends AmazonAutoLinks_PluginUtility {
+class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @param  integer|string $isButtonID

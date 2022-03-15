@@ -14,7 +14,7 @@
  * @remark      Expected to be called when a plugin is activated.
  * @since       3
  */
-class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_ButtonUtility {
+class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_Button_Utility {
 
     /**
      * Triggers event actions.

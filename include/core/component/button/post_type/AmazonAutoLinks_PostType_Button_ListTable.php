@@ -51,7 +51,7 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
      */
     public function cell_aal_button_preview( $sCell, $iPostID ) {
         return $sCell
-            . AmazonAutoLinks_ButtonUtility::getIframeButtonPreview(
+            . AmazonAutoLinks_Button_Utility::getIframeButtonPreview(
                 $iPostID,
                 '_by_id',
                 null,
