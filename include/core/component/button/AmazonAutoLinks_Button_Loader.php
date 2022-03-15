@@ -102,8 +102,8 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
      */
     public function replyToGetJSButtonPreviewPath() {
         $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
-            ? 'button-preview-in-unit-definition-page.js'
-            : 'button-preview-in-unit-definition-page.min.js';
+            ? 'button-preview.js'
+            : 'button-preview.min.js';
         return AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/' . $_sFileBaseName;
     }
 
