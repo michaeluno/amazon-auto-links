@@ -39,8 +39,8 @@ If you want to simply display your desired specific products in a post, don't wo
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
-= Supports All Amazon Associates Locales =
-Includes Australia, Brazil, Canada, France, Germany, India, Italy, Japan, Mexico, Netherlands, Singapore, Saudi Arabia, Spain, Turkey, United Arab Emirates, United Kingdom, Sweden, and United States. China is supported for the category unit type.
+= Supports All the Amazon Associates Locales =
+Includes Australia, Brazil, Canada, China, France, Germany, India, Italy, Japan, Mexico, Netherlands, Poland, Singapore, Saudi Arabia, Spain, Sweden, Turkey, United Arab Emirates, United Kingdom, and United States. China is supported for the category unit type.
 
 = Works without JavaScript =
 Some visitors turn off JavaScript in their browsers for security reasons and most ads including Google Adsense will not show up to them. But this one works!
