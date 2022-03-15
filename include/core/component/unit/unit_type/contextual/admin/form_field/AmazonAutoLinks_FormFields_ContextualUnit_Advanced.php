@@ -24,7 +24,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks
     public function get( $sFieldIDPrefix='', $aUnitOptions=array()  ) {
 
         $_aFields           = array();
-        $_aSearchUnitFields = parent::get( $sFieldIDPrefix );
+        $_aSearchUnitFields = parent::get( $sFieldIDPrefix, $aUnitOptions );
 
         $_sLocale           = $this->oFactory->getValue( 'country' );
         $_bAPIKeysSet       = $this->oOption->isPAAPIKeySet( $_sLocale );

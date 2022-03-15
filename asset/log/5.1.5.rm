@@ -1,1 +1,2 @@
+- Fixed a bug with Contextual units that some options were not parsed properly. 
 - Fixed an issue of unnecessary translation items by removing them.
