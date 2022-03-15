@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.9.1
+Tested up to:       5.9.2
 Requires MySQL:     5.0.3
 Stable tag:         5.1.4
 License:            GPLv2 or later
@@ -347,6 +347,10 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.1.5 - 03/15/2022 =
+- Fixed a bug with Contextual units that some options were not parsed properly.
+- Fixed an issue of unnecessary translation items by removing them.
 
 = 5.1.4 - 03/06/2022 =
 - Fixed an issue with the List template that the layout gets broken with block widgets.
