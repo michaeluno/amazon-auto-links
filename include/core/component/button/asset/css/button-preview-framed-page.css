@@ -4,8 +4,8 @@ html, body {
     background-color: unset !important;
 }
 #preview-button {
-    /* inline-block to fit the width to the child element. @deprecated 5.2.0 */
-    /*display: inline-block*/
-    display: block;
-    margin: auto;
+    /* inline-block to fit the width to the child element.
+       This is needed to flexibly expand its width in preview when the button label dynamically changes
+       if `block` is given, the width somehow gets fixed and the label text gets cut off. */
+    display: inline-block
 }
