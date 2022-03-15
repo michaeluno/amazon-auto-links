@@ -34,3 +34,8 @@ td.column-preview.preview {
 {
     margin-bottom: 0;
 }
+
+.amazon-auto-links-fieldset .iframe-button-preview-container {
+    margin: 3em 0;
+    width: 100%;
+}
