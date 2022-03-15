@@ -91,20 +91,20 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
      */
     protected function _getHeadTagInnerHTML() {
         wp_enqueue_script( 'jquery' );
-        $_oDOM           = new AmazonAutoLinks_DOM;
-        $_oDoc           = $_oDOM->loadDOMFromHTML(
+        $_oDOM               = new AmazonAutoLinks_DOM;
+        $_oDoc               = $_oDOM->loadDOMFromHTML(
             "<html><head>" . $this->___getHTMLHeaderConstructed() . "</head><body></body></html>"
         );
         $this->___removeScriptTags(
             $_oDoc,
             array( 'jquery' ) // id attribute prefixes to allow. jQuery scripts are allowed.
         );
-        $_oXpath         = new DOMXPath( $_oDoc );
-        $_oHeadTags      = $_oXpath->query( "/html/head" );
-        $_oHeadTag       = $_oHeadTags->item( 0 );
-        return $_oDOM->getInnerHTML( $_oHeadTag );
-    }
+        $_oXpath             = new DOMXPath( $_oDoc );
+        $_oHeadTags          = $_oXpath->query( "/html/head" );
+        $_oHeadTag           = $_oHeadTags->item( 0 );
+        return $this->_getExtraResourcesAddedToHead( $_oDOM->getInnerHTML( $_oHeadTag ) );
 
+    }
         /**
          * @return string
          */
@@ -142,5 +142,19 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
                 }
                 return false;
             }
+
+    /**
+     * @since  5.2.0
+     * @param  string $sHeadTagInnerHTML
+     * @return string
+     */
+    protected function _getExtraResourcesAddedToHead( $sHeadTagInnerHTML ) {
+        $_sMin              = $this->isDebugMode() ? '' : '.min';
+        $_sStylesheetURL    = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/css/button-preview-framed-page{$_sMin}.css" );
+        $_sScriptURL        = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/js/button-preview-framed-page{$_sMin}.js" );
+        $sHeadTagInnerHTML .= "<script id='button-preview-framed-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>";
+        $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-preview-framed-style' href='" . esc_url( $_sStylesheetURL ) . "' media='all'>";
+        return $sHeadTagInnerHTML;
+    }
 
 }
