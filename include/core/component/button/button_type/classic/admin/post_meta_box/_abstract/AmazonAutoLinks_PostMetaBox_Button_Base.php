@@ -51,10 +51,6 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_B
                 'in_footer'    => true,
             )
         );
-        $this->enqueueStyle(
-            AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/css/button-definition.css",
-            $this->oProp->aPostTypes
-        );
     }
 
     /**

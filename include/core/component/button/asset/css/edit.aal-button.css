@@ -1,7 +1,9 @@
 /*
 	@name Edit Button
-	@version 1.0.2
+	@version 1.0.3
  */
+
+/* List Table */
 td.column-preview.preview {
     min-height: 52px;   /* To vertical centering of containing iframe elements */
     width: 100%;
@@ -10,4 +12,25 @@ td.column-preview.preview {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Edit Screen */
+
+/* Forms */
+.amazon-auto-links-sectionsets .amazon-auto-links-section,
+.amazon-auto-links-sectionsets .amazon-auto-links-section-table .amazon-auto-links-field-td-no-title
+{
+    /* Remove redundant margins */
+    margin-bottom: 0;
+}
+.amazon-auto-links-sectionsets .amazon-auto-links-sectionset
+{
+    display: block;
+}
+
+/* Button preview meta-box */
+#amazonautolinks_postmetabox_button_preview .amazon-auto-links-sectionsets,
+#amazonautolinks_postmetabox_button_preview .amazon-auto-links-sectionset
+{
+    margin-bottom: 0;
 }
