@@ -139,7 +139,11 @@ class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_ButtonUtilit
     -webkit-box-shadow: none;
     box-shadow: none;
     color: inherit;            
-} 
+}
+div.amazon-auto-links-button {
+    /* Depending on the theme, if this is different, the overall height of the button container becomes different. So this constrains the button height as well. `1.3` is of the default WordPress core admin style. This does not apply to the `theme` button type as it uses the <button> tag. */
+    line-height: 1.3;   
+}
 button.amazon-auto-links-button {
     white-space: nowrap;
 }
