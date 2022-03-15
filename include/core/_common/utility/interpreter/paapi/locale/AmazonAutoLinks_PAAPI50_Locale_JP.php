@@ -87,51 +87,50 @@ class AmazonAutoLinks_PAAPI50_Locale_JP extends AmazonAutoLinks_PAAPI50_Locale_B
 
     /**
      * @return array
-     * @remark Unlike the other locales, these items should be translated.
-     * @see https://webservices.amazon.com/paapi5/documentation/locale-reference/japan.html
+     * @see    https://webservices.amazon.com/paapi5/documentation/locale-reference/japan.html
      */
     public function getSearchIndex() {
         return array(
-            'All'                       => __( 'All Departments', 'amazon-auto-links' ),
-            'AmazonVideo'               => __( 'Prime Video', 'amazon-auto-links' ),
-            'Apparel'                   => __( 'Clothing & Accessories', 'amazon-auto-links' ),
-            'Appliances'                => __( 'Large Appliances', 'amazon-auto-links' ),
-            'Automotive'                => __( 'Car & Bike Products', 'amazon-auto-links' ),
-            'Baby'                      => __( 'Baby & Maternity', 'amazon-auto-links' ),
-            'Beauty'                    => __( 'Beauty', 'amazon-auto-links' ),
-            'Books'                     => __( 'Japanese Books', 'amazon-auto-links' ),
-            'Classical'                 => __( 'Classical', 'amazon-auto-links' ),
-            'Computers'                 => __( 'Computers & Accessories', 'amazon-auto-links' ),
-            'CreditCards'               => __( 'Credit Cards', 'amazon-auto-links' ),
-            'DigitalMusic'              => __( 'Digital Music', 'amazon-auto-links' ),
-            'Electronics'               => __( 'Electronics & Cameras', 'amazon-auto-links' ),
-            'EverythingElse'            => __( 'Everything Else', 'amazon-auto-links' ),
-            'Fashion'                   => __( 'Fashion', 'amazon-auto-links' ),
-            'FashionBaby'               => __( 'Kids & Baby', 'amazon-auto-links' ),
-            'FashionMen'                => __( 'Men', 'amazon-auto-links' ),
-            'FashionWomen'              => __( 'Women', 'amazon-auto-links' ),
-            'ForeignBooks'              => __( 'English Books', 'amazon-auto-links' ),
-            'GiftCards'                 => __( 'Gift Cards', 'amazon-auto-links' ),
-            'GroceryAndGourmetFood'     => __( 'Food & Beverage', 'amazon-auto-links' ),
-            'HealthPersonalCare'        => __( 'Health & Personal Care', 'amazon-auto-links' ),
-            'Hobbies'                   => __( 'Hobby', 'amazon-auto-links' ),
-            'HomeAndKitchen'            => __( 'Kitchen & Housewares', 'amazon-auto-links' ),
-            'Industrial'                => __( 'Industrial & Scientific', 'amazon-auto-links' ),
-            'Jewelry'                   => __( 'Jewelry', 'amazon-auto-links' ),
-            'KindleStore'               => __( 'Kindle Store', 'amazon-auto-links' ),
-            'MobileApps'                => __( 'Apps & Games', 'amazon-auto-links' ),
-            'MoviesAndTV'               => __( 'Movies & TV', 'amazon-auto-links' ),
-            'Music'                     => __( 'Music', 'amazon-auto-links' ),
-            'MusicalInstruments'        => __( 'Musical Instruments', 'amazon-auto-links' ),
-            'OfficeProducts'            => __( 'Stationery and Office Products', 'amazon-auto-links' ),
-            'PetSupplies'               => __( 'Pet Supplies', 'amazon-auto-links' ),
-            'Shoes'                     => __( 'Shoes & Bags', 'amazon-auto-links' ),
-            'Software'                  => __( 'Software', 'amazon-auto-links' ),
-            'SportsAndOutdoors'         => __( 'Sports', 'amazon-auto-links' ),
-            'ToolsAndHomeImprovement'   => __( 'DIY, Tools & Garden', 'amazon-auto-links' ),
-            'Toys'                      => __( 'Toys', 'amazon-auto-links' ),
-            'VideoGames'                => __( 'Computer & Video Games', 'amazon-auto-links' ),
-            'Watches'                   => __( 'Watches', 'amazon-auto-links' ),
+            'All'                       => 'すべてのカテゴリー', // 'All Departments'
+            'AmazonVideo'               => 'Prime Video',    // 'Prime Video'
+            'Apparel'                   => '服＆アクセサリー', // 'Clothing & Accessories'
+            'Appliances'                => '大型家電', // 'Large Appliances'
+            'Automotive'                => '車＆バイク', // 'Car & Bike Products'
+            'Baby'                      => 'ベビー＆マタニティー', // 'Baby & Maternity'
+            'Beauty'                    => 'ビューティー', // 'Beauty'
+            'Books'                     => '本', // 'Japanese Books'
+            'Classical'                 => 'クラシック', // 'Classical'
+            'Computers'                 => 'パソコン・周辺機器', // 'Computers & Accessories'
+            'CreditCards'               => 'クレジットカード', // 'Credit Cards'
+            'DigitalMusic'              => 'デジタルミュージック', // 'Digital Music'
+            'Electronics'               => '家電＆カメラ', // 'Electronics & Cameras'
+            'EverythingElse'            => 'その他', // 'Everything Else'
+            'Fashion'                   => 'ファッション', // 'Fashion'
+            'FashionBaby'               => 'ファッション（キッズ＆ベビー）', // 'Kids & Baby'
+            'FashionMen'                => 'ファッション（メンズ）', // 'Men'
+            'FashionWomen'              => 'ファッション（レディース）', // 'Women'
+            'ForeignBooks'              => '洋書', // 'English Books'
+            'GiftCards'                 => 'ギフトカード', // 'Gift Cards'
+            'GroceryAndGourmetFood'     => '食品＆飲料', // 'Food & Beverage'
+            'HealthPersonalCare'        => '健康＆パーソナルケア', // 'Health & Personal Care'
+            'Hobbies'                   => 'ホビー', // 'Hobby'
+            'HomeAndKitchen'            => 'ホーム＆キッチン', // 'Kitchen & Housewares'
+            'Industrial'                => '産業・研究開発用品', // 'Industrial & Scientific'
+            'Jewelry'                   => '産業・研究開発用品', // 'Jewelry'
+            'KindleStore'               => 'Kindleストア', // 'Kindle Store'
+            'MobileApps'                => 'アプリ＆ゲーム', // 'Apps & Games'
+            'MoviesAndTV'               => '動画＆TV', // 'Movies & TV'
+            'Music'                     => 'ミュージック', // 'Music'
+            'MusicalInstruments'        => '楽器・音響機器', // 'Musical Instruments'
+            'OfficeProducts'            => '文房具・オフィス用品', // 'Stationery and Office Products'
+            'PetSupplies'               => 'ペット用品', // 'Pet Supplies'
+            'Shoes'                     => 'シューズ＆バッグ', // 'Shoes & Bags'
+            'Software'                  => 'PCソフト', // 'Software'
+            'SportsAndOutdoors'         => 'スポーツ＆アウトドア', // 'Sports'
+            'ToolsAndHomeImprovement'   => 'DIY・工具・ガーデン', // 'DIY, Tools & Garden'
+            'Toys'                      => 'おもちゃ', // 'Toys'
+            'VideoGames'                => 'ビデオゲーム', // 'Computer & Video Games'
+            'Watches'                   => '腕時計', // 'Watches'
         );
     }
 
