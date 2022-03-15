@@ -1,8 +1,9 @@
 /*
 	@name Edit Button
-	@version 1.0.1
+	@version 1.0.2
  */
 td.column-preview.preview {
+    min-height: 52px;   /* To vertical centering of containing iframe elements */
     width: 100%;
     padding: 1em;
     /* Center containing items */

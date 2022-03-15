@@ -4,6 +4,8 @@ html, body {
     background-color: unset !important;
 }
 #preview-button {
-    /* inline-block to fit the width to the child element. */
-    display: inline-block
+    /* inline-block to fit the width to the child element. @deprecated 5.2.0 */
+    /*display: inline-block*/
+    display: block;
+    margin: auto;
 }
