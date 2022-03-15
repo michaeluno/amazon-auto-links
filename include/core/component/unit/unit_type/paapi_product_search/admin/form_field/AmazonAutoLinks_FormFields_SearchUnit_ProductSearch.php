@@ -1,8 +1,17 @@
 <?php
 /**
+ * Auto Amazon Links
+ *
+ * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ *
+ * https://en.michaeluno.jp/amazon-auto-links/
+ * Copyright (c) 2013-2022 Michael Uno
+ */
+
+/**
  * Provides the definitions of form fields.
  * 
- * @since           3  
+ * @since 3
  */
 class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLinks_FormFields_SearchUnit_Base {
 
@@ -11,11 +20,11 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
      * 
      * Pass an empty string to the parameter for meta box options. 
      * 
-     * @return      array
+     * @return array
      */    
     public function get( $sFieldIDPrefix='', $aUnitOptions=array() ) {
 
-        $_aFields   = array(
+        return array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',
                 'type'          => 'hidden',
@@ -84,8 +93,8 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'label'         => $this->_getSearchIndex( $aUnitOptions ),
                 'default'       => 'All',
                 'tip'           => __( 'Select the category to limit the searching area.', 'amazon-auto-links' ),
-//                'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
-//                    . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
+                // 'description'   => __( 'If the above ID Type is ISBN, this will be automatically set to Books.', 'amazon-auto-links' )
+                //     . ' ' . __( 'If the ID Type is ASIN this option will not take effect.', 'amazon-auto-links' ),
             ),
             array(
                 // @see http://docs.aws.amazon.com/AWSECommerceService/latest/DG/SortingbyPopularityPriceorCondition.html
@@ -112,8 +121,7 @@ class AmazonAutoLinks_FormFields_SearchUnit_ProductSearch extends AmazonAutoLink
                 'default'       => false,
             ),
         );
-        return $_aFields;
-        
+
     }
 
 }

@@ -2,10 +2,10 @@
 /**
  * Plugin Name:       Auto Amazon Links
  * Plugin URI:        https://en.michaeluno.jp/amazon-auto-links
- * Description:       Formerly named, Auto Amazon Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ * Description:       Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * Author:            Michael Uno (miunosoft)
  * Author URI:        http://michaeluno.jp
- * Version:           5.1.4
+ * Version:           5.1.5
  * Text Domain:       amazon-auto-links
  * Domain Path:       /language
  * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
@@ -18,9 +18,9 @@
  * @since 3     Changed the name from `AmazonAutoLinks_Commons_Base`
  */
 class AmazonAutoLinks_Registry_Base {
-    const VERSION      = '5.1.4';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION      = '5.1.5';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME         = 'Auto Amazon Links';
-    const DESCRIPTION  = 'Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
+    const DESCRIPTION  = 'Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR       = 'miunosoft (Michael Uno)';
     const AUTHOR_URI   = 'https://en.michaeluno.jp/';
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
- * @copyright   Copyright (c) 2013-2021, Michael Uno
+ * @copyright   Copyright (c) 2013-2022, Michael Uno
  * @authorurl   http://michaeluno.jp
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       2.0.0
