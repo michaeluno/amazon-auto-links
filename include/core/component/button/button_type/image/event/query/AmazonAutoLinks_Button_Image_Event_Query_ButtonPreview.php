@@ -22,6 +22,12 @@ class AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview extends AmazonAutoL
     public $aButtonTypes = array( 'image' );
 
     /**
+     * @since 5.2.0
+     * @var   string[]
+     */
+    protected $_aDisallowedIDPrefixesCSS = array( 'amazon-auto-links-button-css' );
+
+    /**
      * @since  5.2.0
      * @param  integer $iButtonID
      * @param  string  $sButtonLabel
@@ -46,6 +52,11 @@ class AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview extends AmazonAutoL
         $sHeadTagInnerHTML .= "<script id='button-preview-framed-image-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-preview-framed-style' href='" . esc_url( $_sStylesheetURL1 ) . "' media='all'>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-image-preview-framed-style' href='" . esc_url( $_sStylesheetURL2 ) . "' media='all'>";
+        // The <link id='amazon-auto-links-button-css'> tag is removed with the $_aDisallowedIDPrefixesCSS property.
+        // Still the overall button CSS rules need to be loaded.
+        $sHeadTagInnerHTML .= "<style>"
+                . ( $this->isDebugMode() ? AmazonAutoLinks_Button_ResourceLoader::getOverallButtonCSS() : $this->getCSSMinified( AmazonAutoLinks_Button_ResourceLoader::getOverallButtonCSS() ) )
+            . "</style>";
         return $sHeadTagInnerHTML;
     }
 

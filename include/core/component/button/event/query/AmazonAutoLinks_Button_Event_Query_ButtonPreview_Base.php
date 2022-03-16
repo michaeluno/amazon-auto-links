@@ -22,6 +22,18 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
     public $aButtonTypes = array();
 
     /**
+     * @since 5.2.0
+     * @var   string[]
+     */
+    protected $_aAllowedIDPrefixesJS     = array( 'jquery' );
+
+    /**
+     * @since 5.2.0
+     * @var   string[]
+     */
+    protected $_aDisallowedIDPrefixesCSS = array();
+
+    /**
      * Sets up hooks and properties.
      * @since 5.2.0
      */
@@ -91,19 +103,20 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
      */
     protected function _getHeadTagInnerHTML() {
         wp_enqueue_script( 'jquery' );
-        $_oDOM               = new AmazonAutoLinks_DOM;
-        $_oDoc               = $_oDOM->loadDOMFromHTML(
+        $_oDOM      = new AmazonAutoLinks_DOM;
+        $_oDoc      = $_oDOM->loadDOMFromHTML(
             "<html><head>" . $this->___getHTMLHeaderConstructed() . "</head><body></body></html>"
         );
-        $this->___removeScriptTags(
-            $_oDoc,
-            array( 'jquery' ) // id attribute prefixes to allow. jQuery scripts are allowed.
-        );
-        $_oXpath             = new DOMXPath( $_oDoc );
-        $_oHeadTags          = $_oXpath->query( "/html/head" );
-        $_oHeadTag           = $_oHeadTags->item( 0 );
+        /**
+         * Stylesheets are all allowed except ones that with specified ID attribute prefixes.
+         * JavaScripts are all disallowed except ones that with specified ID attribute prefixes.
+         */
+        $this->___removeStyleSheets( $_oDoc, $this->_aDisallowedIDPrefixesCSS );
+        $this->___removeScriptTags( $_oDoc, $this->_aAllowedIDPrefixesJS );
+        $_oXpath    = new DOMXPath( $_oDoc );
+        $_oHeadTags = $_oXpath->query( "/html/head" );
+        $_oHeadTag  = $_oHeadTags->item( 0 );
         return $this->_getExtraResourcesAddedToHead( $_oDOM->getInnerHTML( $_oHeadTag ) );
-
     }
         /**
          * @return string
@@ -113,6 +126,29 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
             $_sHeader = force_balance_tags( $_sHeader );
             return str_replace( array( "\n", "\r\n", "\r" ), '', $_sHeader ); // prevents `&#13;` from being inserted
         }
+        private function ___removeStyleSheets( DOMDocument $oDom, $aIDPrefixesToRemove=array() ) {
+            $_oXpath    = new DOMXPath( $oDom );
+            $_oNodeList = $_oXpath->query( "//*/*[self::style or self::link]" ); // select `style` or `link` tags
+            if ( false === $_oNodeList ) {
+                return;
+            }
+            foreach( $_oNodeList as $_oNode ) {
+                if ( $this->___hasPrefixInArray( $aIDPrefixesToRemove, $_oNode->getAttribute( 'id' ) ) ) {
+                    /**
+                     * @var DOMNode $_oNode
+                     */
+                    $_oNode->parentNode->removeChild( $_oNode );
+                }
+            }
+        }
+            private function ___hasPrefixInArray( array $aIDPrefixes, $sAttribute ) {
+                foreach( $aIDPrefixes as $_sIDPrefix ) {
+                    if ( $this->hasPrefix( $_sIDPrefix, $sAttribute ) ) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         /**
          * Removes specified tags from the given dom node.
          * @param DOMDocument $oDom
@@ -125,7 +161,7 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
                 return;
             }
             foreach( $_oNodeList as $_oNode ) {
-                if ( $this->___isAllowedScript( $aIDPrefixesToAllow, $_oNode->getAttribute( 'id' ) ) ) {
+                if ( $this->___hasPrefixInArray( $aIDPrefixesToAllow, $_oNode->getAttribute( 'id' ) ) ) {   // is allowed?
                     continue;
                 }
                 /**
@@ -134,14 +170,6 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
                 $_oNode->parentNode->removeChild( $_oNode );
             }
         }
-            private function ___isAllowedScript( array $aIDPrefixes, $sAttribute ) {
-                foreach( $aIDPrefixes as $_sIDPrefix ) {
-                    if ( $this->hasPrefix( $_sIDPrefix, $sAttribute ) ) {
-                        return true;
-                    }                    
-                }
-                return false;
-            }
 
     /**
      * @since  5.2.0
