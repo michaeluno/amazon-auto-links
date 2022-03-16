@@ -26,6 +26,7 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
      * @return string
      */
     static public function getIframeButtonPreview( $isButtonID, $isButtonType, $nsButtonLabel=null, array $aFrameAttributes=array(), array $aContainerAttributes=array() ) {
+        $_sFrameSRC        = self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel );
         $_aFrameAttributes = $aFrameAttributes + array(
             'title'          => 'Button Preview of ' . $isButtonID,    // this is a sort of internal (not apparent) attribute to avoid a warning from a browser so no need to translate
             'class'          => 'frame-button-preview',
@@ -37,7 +38,8 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
             // 'style'          => 'height:60px;border:none;overflow:hidden;',
             'style'          => 'height:60px; border:none; overflow:hidden; margin: 0 auto; display: block; max-width: 100%',   // max-width is needed for the classic button editing screen
             'scrolling'      => 'no',
-            'src'            => self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel ),
+            'src'            => $_sFrameSRC,
+            'data-src'       => $_sFrameSRC,    // this is for screens that have multiple iframes which need to load one by one to reduce the load.
         );
         $_aContainerAttributes = $aContainerAttributes + array(
             'class'       => 'iframe-button-preview-container',

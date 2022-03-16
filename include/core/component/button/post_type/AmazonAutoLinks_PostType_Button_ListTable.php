@@ -50,13 +50,17 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
      * @return   string
      */
     public function cell_aal_button_preview( $sCell, $iPostID ) {
+        // Only load the first iframe, and let other frames being loaded by the script to reduce the load
+        $_aFrameAttributes = $this->oUtil->hasBeenCalled( __METHOD__ )
+            ? array( 'src' => null )
+            : array();
         return $sCell
             . AmazonAutoLinks_Button_Utility::getIframeButtonPreview(
                 $iPostID,
                 '_by_id',
                 null,
-                array(
-                    'id' => 'iframe-button-preview-' . $iPostID,
+                $_aFrameAttributes + array(
+                    'id'  => 'iframe-button-preview-' . $iPostID,
                 )
             );
     }

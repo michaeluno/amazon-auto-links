@@ -145,6 +145,17 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             apply_filters( 'aal_filter_admin_button_js_preview_src', '' ),
             apply_filters( 'aal_filter_admin_button_js_preview_enqueue_arguments', array() )
         );
+
+        // For the button listing table screen,
+        if ( 'edit.php' === $GLOBALS[ 'pagenow' ] ) {
+            $this->enqueueScript(
+                AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/button-preview-frame-delay-loader.js',
+                array(
+                    'dependencies' => array( 'jquery' ),
+                    'in_footer'    => true,
+                )
+            );
+        }
     }
 
     /**
