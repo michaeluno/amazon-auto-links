@@ -8,6 +8,9 @@
  * Copyright (c) 2013-2022 Michael Uno
  */
 
+/**
+ * @since 5.2.0
+ */
 class AmazonAutoLinks_Button_Classic_Loader extends AmazonAutoLinks_Button_ButtonType_Loader {
 
     /**
@@ -21,9 +24,12 @@ class AmazonAutoLinks_Button_Classic_Loader extends AmazonAutoLinks_Button_Butto
      * @since 5.2.0
      */
     protected function _construct() {
+
         self::$sDirPath = dirname( __FILE__ );
 
         new AmazonAutoLinks_Button_Classic_Event_ButtonOutput;
+        new AmazonAutoLinks_Button_Classic_Event_Query_ButtonPreview;
+
     }
 
     /**

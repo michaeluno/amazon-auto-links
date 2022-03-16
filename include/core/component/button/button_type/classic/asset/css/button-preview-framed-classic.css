@@ -1,0 +1,10 @@
+/**
+ * @name    Button Preview Famed Page for Classic Buttons
+ * @version 1.0.0
+ */
+#preview-button {
+  /* Center vertically and horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

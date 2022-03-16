@@ -1,6 +1,6 @@
 /**
- * @name Button Preview Updater
- * @version 1.0.1
+ * @name    Button Preview Updater
+ * @version 1.1.0
  * Updates the button preview in the button definition screen.
  */
 (function($){
@@ -246,13 +246,24 @@
         
         var _sOutput = oPreviewButton.styles_markup 
             + oPreviewButton.styles_hover_markup;
-        var _sStyleTag = '<style id="amazon-auto-links-button-style" type="text/css">' 
-                + _sOutput 
-            + '</style>';
-        $( '#amazon-auto-links-button-style' ).replaceWith( _sStyleTag );
+        // var _sStyleTag = '<style id="amazon-auto-links-button-style" type="text/css">'
+        //         + _sOutput
+        //     + '</style>';
+        // $( '#amazon-auto-links-button-style' ).replaceWith( _sStyleTag );
+        _setStyleSheetInFramedPage( _sOutput, 'amazon-auto-links-button-style', $( '#button-classic-preview-iframe' ) );
         $( 'textarea#button_css__0' ).text( _sOutput );
 
     }
+      function _setStyleSheetInFramedPage( style, attributeID, previewFrame ) {
+        var _styleSheet = $( '<style>', { id: attributeID } );
+        _styleSheet.text( style );
+        var _prevSheet = previewFrame.contents().find( '#' + attributeID );
+        if ( _prevSheet.length > 0 ) {
+          _prevSheet.replaceWith( _styleSheet );
+        } else {
+          previewFrame.contents().find( 'head' ).first().append( _styleSheet );
+        }
+      }
 
     /**
      * Renders an individual style line
@@ -274,8 +285,10 @@
     
     // Initial button update.
     $( document ).ready( function() {
-        oPreviewButton.updateStyles();  
-
+        oPreviewButton.updateStyles();
     });
+    $( '#button-classic-preview-iframe' ).on( 'load', function(){
+        oPreviewButton.updateStyles();
+    } );
 
 }( jQuery ));

@@ -1,7 +1,7 @@
 <?php 
 /**
- * Auto Amazon Links v5.1.4 by miunosoft (Michael Uno) 
- * Formerly named, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
+ * Auto Amazon Links v5.2.0b01 by miunosoft (Michael Uno) 
+ * Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * <https://en.michaeluno.jp/amazon-auto-links>
  * Copyright (c) 2013-2022, Michael Uno; Licensed under GPL v2 or later
  */
@@ -52,6 +52,7 @@ return array(
     "AmazonAutoLinks_PostMetaBox_Button_Text" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/classic/admin/post_meta_box/AmazonAutoLinks_PostMetaBox_Button_Text.php", 
     "AmazonAutoLinks_PostMetaBox_Button_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/classic/admin/post_meta_box/_abstract/AmazonAutoLinks_PostMetaBox_Button_Base.php", 
     "AmazonAutoLinks_Button_Classic_Event_ButtonOutput" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/classic/event/filter/AmazonAutoLinks_Button_Classic_Event_ButtonOutput.php", 
+    "AmazonAutoLinks_Button_Classic_Event_Query_ButtonPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/classic/event/query/AmazonAutoLinks_Button_Classic_Event_Query_ButtonPreview.php", 
     "AmazonAutoLinks_Button_Image_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/image/AmazonAutoLinks_Button_Image_Loader.php", 
     "AmazonAutoLinks_Button_Image_FormFields_ButtonImage" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/image/admin/form_field/AmazonAutoLinks_Button_Image_FormFields_ButtonImage.php", 
     "AmazonAutoLinks_Button_Image_FormFields_CSS" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/image/admin/form_field/AmazonAutoLinks_Button_Image_FormFields_CSS.php", 
