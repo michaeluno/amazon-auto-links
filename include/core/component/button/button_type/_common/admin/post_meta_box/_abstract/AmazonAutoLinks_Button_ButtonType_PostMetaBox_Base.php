@@ -18,7 +18,7 @@ abstract class AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base extends Amazon
      * @var   string
      * @since 5.2.0
      */
-    public $_sButtonType = '';
+    protected $_sButtonType = '';
 
     /**
      * @var   array Stores field definition class names.

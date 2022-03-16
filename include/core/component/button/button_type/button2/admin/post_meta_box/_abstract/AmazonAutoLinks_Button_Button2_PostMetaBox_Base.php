@@ -18,7 +18,7 @@ abstract class AmazonAutoLinks_Button_Button2_PostMetaBox_Base extends AmazonAut
      * @var   string
      * @since 5.2.0
      */
-    public $_sButtonType = 'button2';
+    protected $_sButtonType = 'button2';
 
     /**
      *

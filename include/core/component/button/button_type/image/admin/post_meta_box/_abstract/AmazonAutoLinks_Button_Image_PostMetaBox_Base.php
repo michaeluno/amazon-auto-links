@@ -18,7 +18,7 @@ abstract class AmazonAutoLinks_Button_Image_PostMetaBox_Base extends AmazonAutoL
      * @var   string
      * @since 5.2.0
      */
-    public $_sButtonType = 'image';
+    protected $_sButtonType = 'image';
 
     /**
      *
