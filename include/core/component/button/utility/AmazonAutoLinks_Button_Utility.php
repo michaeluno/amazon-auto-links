@@ -35,7 +35,7 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
             // 'width'          => 200,
             // 'height'         => 60,
             // 'style'          => 'height:60px;border:none;overflow:hidden;',
-            'style'          => 'height:60px; border:none; overflow:hidden; margin: 0 auto; display: block;',
+            'style'          => 'height:60px; border:none; overflow:hidden; margin: 0 auto; display: block; max-width: 100%',   // max-width is needed for the classic button editing screen
             'scrolling'      => 'no',
             'src'            => self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel ),
         );
