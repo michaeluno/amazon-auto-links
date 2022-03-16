@@ -92,7 +92,7 @@
     });
 
     // When the user changes button options,
-    inputs.on( 'change', function () {
+    inputs.on( 'change input', function () {
 
       // Parse inputs
       var _property = $( this ).data( 'property' );
