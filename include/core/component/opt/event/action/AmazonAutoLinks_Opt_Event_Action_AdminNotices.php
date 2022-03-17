@@ -38,7 +38,7 @@ class AmazonAutoLinks_Opt_Event_Action_AdminNotices extends AmazonAutoLinks_Even
             }
             $_sMessage = __( 'Hi!', 'amazon-auto-links' )
                 . ' ' . __( 'The plugin needs to improve.', 'amazon-auto-links' )
-                . ' ' . __( 'Is it okay to ask you questions from time to time?', 'amazon-auto-links' )
+                . ' ' . __( 'Is it okay to ask you questions about plugin improvements from time to time?', 'amazon-auto-links' )
                 . "<label>"
                     . "<button class='button button-secondary button-small button-opt-survey-permission' style='margin: 0 0.4em 0 0.8em;' data-answer='1'>"
                         . __( 'Yes', 'amazon-auto-links' )
