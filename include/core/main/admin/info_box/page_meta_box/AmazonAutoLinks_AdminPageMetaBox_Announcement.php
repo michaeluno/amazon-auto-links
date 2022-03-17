@@ -64,7 +64,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
                 ? ''
                 : "<div class='announcement-item'>"
                     . "<h4>"
-                        . __( 'Join Affiliate Program   ', 'admin-page-framework-loader' )
+                        . __( 'Join Affiliate Program', 'admin-page-framework-loader' )
                     . "</h4>"
                     . "<p>"
                         . __( 'Earn commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
