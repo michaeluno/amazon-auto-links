@@ -96,7 +96,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
             $_sURLImageDeployBranch = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/heroku-manual-deploy.jpg' ) );
             echo "<p class='description'>" . __( 'To update your Web Page Dumper instance, follow the below steps.', 'amazon-auto-links' ) . "</p>"
                 . "<ol>"
-                    . "<li><p>" . sprintf( __( 'Have a <a href="%1$s" target="_blank">Github account</a> if you don\'t have yet.', 'amazon-auto-links' ), esc_url( 'https://github.com/join' ) ) . "</p></li>"
+                    . "<li><p>" . sprintf( __( 'Have a <a href="%1$s" target="_blank">GitHub account</a> if you don\'t have yet.', 'amazon-auto-links' ), esc_url( 'https://github.com/join' ) ) . "</p></li>"
                     . "<li>"
                         . "<p>" . sprintf( __( 'Go to the <a href="%1$s" target="_blank">repository page</a> and fork the Web Page Dumper by pressing <code>%2$s</code>.', 'amazon-auto-links' ), esc_url( 'https://github.com/michaeluno/web-page-dumper' ), 'Fork' ) . "</p>"
                         . "<div class='screenshot'><img src='{$_sURLImageForkRepo}' alt='Fork Repository' /></div>"
