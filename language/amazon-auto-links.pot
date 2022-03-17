@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2022-03-17 07:46+0900\n"
+"POT-Creation-Date: 2022-03-17 19:08+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,6 +26,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-5: node_modules\n"
 "X-Poedit-SearchPathExcluded-6: .idea\n"
 "X-Poedit-SearchPathExcluded-7: build\n"
+"X-Poedit-SearchPathExcluded-8: */build/*.js\n"
 
 #: include/core/AmazonAutoLinks_Bootstrap.php:138
 msgid "Deactivating the plugin"
@@ -230,34 +231,34 @@ msgid ""
 "enable this option."
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:355
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:389
 msgid "Post / Page Content"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:356
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:390
 msgid "Excerpt"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:357
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:391
 msgid "Comment"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:358
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:392
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:78
 #: include/core/component/unit/unit_type/feed/AmazonAutoLinks_Unit_UnitType_Loader_feed.php:111
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:359
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:393
 msgid "Feed Excerpt"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:369
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:403
 msgid "Post / Page Content on Publish"
 msgstr ""
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:372
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:406
 msgid "inserts product links into the database so they will be static."
 msgstr ""
 
@@ -1089,9 +1090,6 @@ msgstr ""
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:29
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Action.php:64
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:29
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:210
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:40
 msgid "Edit"
 msgstr ""
@@ -1886,7 +1884,8 @@ msgid "The plugin needs to improve."
 msgstr ""
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:41
-msgid "Is it okay to ask you questions from time to time?"
+msgid ""
+"Is it okay to ask you questions about plugin improvements from time to time?"
 msgstr ""
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:94
@@ -1916,8 +1915,6 @@ msgid "Submit & Deactivate"
 msgstr ""
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:141
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:117
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:168
 msgid "Cancel"
 msgstr ""
 
@@ -2389,7 +2386,7 @@ msgstr ""
 #: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:99
 #, php-format
 msgid ""
-"Have a <a href=\"%1$s\" target=\"_blank\">Github account</a> if you don't "
+"Have a <a href=\"%1$s\" target=\"_blank\">GitHub account</a> if you don't "
 "have yet."
 msgstr ""
 
@@ -2456,8 +2453,6 @@ msgstr ""
 
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:46
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:116
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:167
 #: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:66
 msgid "OK"
 msgstr ""
@@ -3362,144 +3357,6 @@ msgstr ""
 #: include/core/main/admin/setting/default/page_meta_box/AmazonAutoLinks_AdminPage_Setting_Default_PageMetaBox_ProductFilter.php:29
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:27
 msgid "Set the criteria to filter fetched items."
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:65
-msgid "Status:"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:70
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:105
-msgid "Privately Published"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:73
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:103
-msgid "Published"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:76
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:107
-msgid "Scheduled"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:79
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:109
-msgid "Pending Review"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:83
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:111
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:113
-msgid "Draft"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-msgid "Edit status"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:100
-msgid "Set status"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:125
-msgid "Visibility:"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:131
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:164
-msgid "Private"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:134
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:161
-msgid "Password protected"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:137
-msgid "Public, Sticky"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:140
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:155
-msgid "Public"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-msgid "Edit visibility"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:158
-msgid "Stick this post to the front page"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:162
-msgid "Password:"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:176
-#, php-format
-msgid "%1$s at %2$s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:178
-msgid "M j, Y"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:180
-msgid "H:i"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:184
-#, php-format
-msgid "Scheduled for: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:187
-#, php-format
-msgid "Published on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:189
-msgid "Publish <b>immediately</b>"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:192
-#, php-format
-msgid "Schedule for: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:195
-#, php-format
-msgid "Publish on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:211
-msgid "Edit date and time"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:214
-msgid "Date and time"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:228
-#, php-format
-msgid ""
-"This draft comes from your <a href=\"%s\">unpublished customization changes</"
-"a>. You can edit, but there&#8217;s no need to publish now. It will be "
-"published automatically with those changes."
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Move to Trash"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Delete permanently"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:260
-msgid "Update"
 msgstr ""
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ViewLink.php:37
@@ -5399,7 +5256,7 @@ msgid "Announcements"
 msgstr ""
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:67
-msgid "Join Affiliate Program   "
+msgid "Join Affiliate Program"
 msgstr ""
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:70
