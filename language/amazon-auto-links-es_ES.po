@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2022-03-17 07:46+0900\n"
-"PO-Revision-Date: 2022-03-17 07:55+0900\n"
+"POT-Creation-Date: 2022-03-17 20:12+0900\n"
+"PO-Revision-Date: 2022-03-17 22:04+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: amazon-auto-links.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -131,10 +131,8 @@ msgid "Could not get a user ID."
 msgstr "No se pudo obtener la ID de usuario."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:157
-#, fuzzy
-#| msgid "Deactivating the plugin"
 msgid "Please activate the license."
-msgstr "Desactivación del plugin"
+msgstr "Por favor, active la licencia."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:158
 #, php-format
@@ -142,6 +140,8 @@ msgid ""
 "For some reasons, the message could not be sent. Please contact %1$s "
 "directly."
 msgstr ""
+"Por algunas razones, no se pudo enviar el mensaje. Póngase en contacto "
+"directamente con %1$s."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:159
 msgid "Please consider upgrading to Pro to enable this feature."
@@ -158,8 +158,6 @@ msgstr ""
 "\">Pro</a> para habilitar esta función."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:161
-#, fuzzy
-#| msgid "This is available in Pro."
 msgid "Available in Pro."
 msgstr "Disponible en versión Pro."
 
@@ -183,22 +181,23 @@ msgid ""
 "WordPress version etc. and plugin settings will be sent along with the "
 "messages to help troubleshooting."
 msgstr ""
+"Entiendo que la información del sistema, incluida la versión de PHP y la "
+"versión de WordPress, etc., y la configuración del complemento se enviarán "
+"junto con los mensajes para ayudar a solucionar problemas."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:164
-#, fuzzy, php-format
-#| msgid ""
-#| "To use a preset ID, set it in the <a href=\"%1$s\">Amazon Associates</a> "
-#| "section."
+#, php-format
 msgid ""
 "If the country is not listed, set an Associate ID in the <a href=\"%1$s"
 "\">Associates</a> section."
 msgstr ""
-"Para usar el ID preestablecido, añádelo en la sección <a href=\"%1$s"
-"\">Amazon Associates</a>."
+"Si tu País no está listado, establece un ID de Afiliado en <a href=\"%1$s"
+"\">Amazon Afiliados</a>."
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:165
 msgid "For countries which require PA-API, set PA-API keys as well."
 msgstr ""
+"Para países que requieran PA-API, establece las claves de PA-API también."
 
 #: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:498
 #: include/core/component/unit/_common/_abstract/AmazonAutoLinks_Unit_UnitType_Loader_Base.php:231
@@ -247,34 +246,34 @@ msgstr ""
 "Las claves de <a href=\"%1$s\">la API de publicidad de productos de Amazon</"
 "a> deben estar configuradas para habilitar esta opción."
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:355
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:389
 msgid "Post / Page Content"
 msgstr "Publicar / Contenido de la página"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:356
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:390
 msgid "Excerpt"
 msgstr "Extracto"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:357
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:391
 msgid "Comment"
 msgstr "Comentario"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:358
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:392
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:78
 #: include/core/component/unit/unit_type/feed/AmazonAutoLinks_Unit_UnitType_Loader_feed.php:111
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr "Feed"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:359
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:393
 msgid "Feed Excerpt"
 msgstr "Extracto de feed"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:369
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:403
 msgid "Post / Page Content on Publish"
 msgstr "Publicar / Contenido de la página en Publicar"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:372
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:406
 msgid "inserts product links into the database so they will be static."
 msgstr ""
 "inserta vínculos de producto en la base de datos para que sean estáticos."
@@ -414,7 +413,7 @@ msgstr "Peso Mexicano"
 
 #: include/core/_common/utility/interpreter/paapi/locale/AmazonAutoLinks_PAAPI50_Locale_PL.php:83
 msgid "Polish złoty"
-msgstr ""
+msgstr "Esloti Polaco"
 
 #: include/core/_common/utility/interpreter/paapi/locale/AmazonAutoLinks_PAAPI50_Locale_SA.php:81
 msgid "Saudi Riyal"
@@ -779,7 +778,7 @@ msgstr "Holanda"
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_PL.php:57
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_PL.php:64
 msgid "Poland"
-msgstr ""
+msgstr "Polonia"
 
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_SA.php:50
 #: include/core/_common/utility/locale/AmazonAutoLinks_Locale_SA.php:57
@@ -933,7 +932,7 @@ msgstr ""
 "comas."
 
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_GoBack.php:30
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:53
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:54
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:235
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_AdminPage_Tab_HTTPRequest.php:148
 #: include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php:84
@@ -1128,9 +1127,6 @@ msgstr "Gestionar Auto-insert"
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:29
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Action.php:64
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:29
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:210
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:40
 msgid "Edit"
 msgstr "Editar"
@@ -1492,8 +1488,8 @@ msgstr ""
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:49
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:53
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:59
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:61
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:46
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:47
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:54
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:45
 msgid "Enable"
@@ -1584,25 +1580,24 @@ msgstr "Producto de Amazon"
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:22
 #: include/core/component/disclosure/utility/AmazonAutoLinks_Disclosure_Utility.php:30
 msgid "Affiliate Disclosure"
-msgstr ""
+msgstr "Descargo de responsabilidad de Afiliados"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:24
 msgid "Identify yourself as an associate."
-msgstr ""
+msgstr "Identifícate como afiliado."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:78
-#, fuzzy
-#| msgid "Discount Rate"
 msgid "Disclosure Page"
-msgstr "Tipo de Descuento"
+msgstr "Página del Descargo de responsabilidad"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:83
 msgid "The following shortcodes are available in the page."
-msgstr ""
+msgstr "Shortcodes disponibles en esta página."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:85
 msgid "Lists Amazon Associates sites that you are enrolled in as an affiliate."
 msgstr ""
+"Indica los sitios asociados de Amazon a los que estás inscrito como afiliado."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:104
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_WizardSubmit.php:38
@@ -1614,46 +1609,48 @@ msgstr "Crear"
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:106
 msgid "An affiliate disclosure page is missing on your site. Create one."
 msgstr ""
+"La página del Descargo de responsabilidad de Afiliado no se encuentra en tu "
+"sitio. Debes crear una."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:111
 msgid "No Need"
-msgstr ""
+msgstr "No Necesario"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:112
 msgid "Never automatically create a disclosure page."
-msgstr ""
+msgstr "Nunca crear automáticamente la página del Descargo de responsabilidad."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:113
 msgid ""
 "By default, the plugin attempts to create an affiliate disclosure page when "
 "it does not exist upon plugin activation and updates."
 msgstr ""
+"Por defecto, el plugin intenta crear una página para el Descargo de "
+"responsabilidad de Afiliado cuando no exista después de la activación y "
+"actualización del plugin."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:114
 msgid ""
 "Check this option only if your locale does not require affiliate disclosure "
 "statements."
 msgstr ""
+"Selecciona esta opción si tu localización no requiere descargos de "
+"responsabilidad de afiliado."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:118
-#, fuzzy
-#| msgid "Discount"
 msgid "Disclosure Text"
-msgstr "Descuento"
+msgstr "Texto del Descargo de responsabilidad"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:123
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:356
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:389
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:423
-#, fuzzy
-#| msgid "Sets the layout of the product. The following tags are available."
 msgid "The following tags are available."
-msgstr ""
-"Establece el diseño del producto. Están disponibles las siguientes etiquetas."
+msgstr "Las siguientes etiquetas están disponibles."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:125
 msgid "Your site host name."
-msgstr ""
+msgstr "Nombre del sitio."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:126
 msgid ""
@@ -1661,17 +1658,20 @@ msgid ""
 "automatically generated by parsing your set Associates IDs in the Associates "
 "section."
 msgstr ""
+"Una lista de los Afiliados de Amazon en los que participas, los cuales serán "
+"automáticamente generados cotejando los IDs de Afiliado introducidos en la "
+"sección de Afiliados."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:132
-#, fuzzy
-#| msgid "Disclaimer"
 msgid "Disclaimer Link"
-msgstr "Aviso"
+msgstr "Enlace del Disclaimer"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:134
 msgid ""
 "Link the \"more info\" disclaimer link to the affiliate disclosure page."
 msgstr ""
+"Enlaza el link \"Más información\" del Disclaimer a la página del Descargo "
+"de responsabilidad de Afiliado."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:135
 msgid ""
@@ -1679,53 +1679,44 @@ msgid ""
 "prices and shown with the <code>%disclaimer%</code> tag in the <code>Item "
 "Format</code> unit option."
 msgstr ""
+"El enlace \"Más información\" del disclaimer debe ir situado al lado del "
+"precio del producto y mostrado con la etiqueta <code>%disclaimer%</code> en "
+"la <code>Item Format</code> opción de unidad."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:139
-#, fuzzy
-#| msgid "Disclaimer"
 msgid "Disclaimer Text"
-msgstr "Aviso"
+msgstr "Texto del Disclaimer"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:146
 msgid "Why do we need this?"
-msgstr ""
+msgstr "¿Por qué necesito esto?"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:150
-#, fuzzy, php-format
-#| msgid ""
-#| "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for "
-#| "Amazon Auto Links Pro affiliate program to get commisions."
+#, php-format
 msgid ""
 "According to the <a href=\"%1$s\" target=\"_blank\">terms</a> of Amazon "
 "Associates, it is required to display affiliate disclosure on your site."
 msgstr ""
-"Primero <a href=\"%1$s\" target=\"_blank\">debes registrarte</a> en el "
-"programa de afiliados de Amazon Auto Links Pro para obtener comisiones."
+"De acuerdo con los <a href=\"%1$s\" target=\"_blank\">términos</a> del "
+"programa de afiliados de Amazon, es obligado mostrar el Descargo de "
+"responsabilidad de Afiliado en tu sitio."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:214
-#, fuzzy
-#| msgid "Caches have been cleared."
 msgid "A page has been created."
-msgstr "Las cachés se han borrado."
+msgstr "Página creada."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:215
-#, fuzzy
-#| msgid "Could not get a user ID."
 msgid "Could not create a page."
-msgstr "No se pudo obtener la ID de usuario."
+msgstr "No se ha podido crear la página."
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Tab_Disclosure.php:24
-#, fuzzy
-#| msgid "Discount"
 msgid "Disclosure"
-msgstr "Descuento"
+msgstr "Descargo de responsabilidad"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:22
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Tab_Geotargeting.php:24
-#, fuzzy
-#| msgid "Settings"
 msgid "Geotargeting"
-msgstr "Ajustes"
+msgstr "Geolocalización"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:24
 msgid ""
@@ -1733,33 +1724,32 @@ msgid ""
 "transformed into the ones of the locale where the visitor resides, presumed "
 "by IP address."
 msgstr ""
+"Activando la opción de Geolocalización, los enlaces de Amazon Afiliados se "
+"convertirán a la versión local del visitante, utilizando su IP para "
+"localizarlo."
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:58
-#, fuzzy
-#| msgid "Plugin Options"
 msgid "Non-plugin Links"
-msgstr "Ajustes del Plugin"
+msgstr "Enlaces que no son del plugin"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:59
 #, php-format
 msgid "Attempt to convert Amazon product links that are not generated by %1$s."
 msgstr ""
+"Intenta convertir los enlaces de los productos de Amazon que no son "
+"generados por %1$s."
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:65
-#, fuzzy
-#| msgid "HTTP Proxies"
 msgid "API Providers"
-msgstr "HTTP Proxies"
+msgstr "Proveedores de API"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:66
 msgid "Check API providers you'd like to use."
-msgstr ""
+msgstr "Selecciona los proveedores de API que te gustaría utilizar."
 
 #: include/core/component/gutenberg/unit_block/AmazonAutoLinks_GutenbergBlock_UnitBlock.php:51
-#, fuzzy
-#| msgid "Units"
 msgid "Unit"
-msgstr "Unidades"
+msgstr "Unidad"
 
 #: include/core/component/gutenberg/unit_block/src/function/getMaxNumberOfItemsControl.js:13
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:32
@@ -1782,10 +1772,8 @@ msgstr "Nombre de la unidad"
 
 #: include/core/component/gutenberg/unit_block/src/index.js:48
 #: include/core/main/event/query/AmazonAutoLinks_Main_Event_UnitPreview.php:80
-#, fuzzy
-#| msgid "Select Units"
 msgid "Select a unit."
-msgstr "Seleccionar unidades"
+msgstr "Selecciona una unidad."
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:23
 msgid "Convert Links"
@@ -1824,11 +1812,11 @@ msgstr ""
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:80
 msgid "Hook Priority"
-msgstr ""
+msgstr "Prioridad del Hook"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:81
 msgid "If the links are not converted, try increase the value."
-msgstr ""
+msgstr "Si los enlaces no se convierten, intenta aumentar el valor."
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:102
 msgid "Please set the default Amazon Associate ID first."
@@ -1842,10 +1830,8 @@ msgid "Go to <a href=\"%1$s\">set</a>."
 msgstr "Vaya a <a href=\"%1$s\">conjunto</a>."
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:26
-#, fuzzy
-#| msgid "Converter"
 msgid "Link Converter"
-msgstr "Convertidor"
+msgstr "Conversor de enlaces"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:50
 msgid "A main Associate ID needs to be set."
@@ -1864,7 +1850,7 @@ msgid "Include"
 msgstr "Incluir"
 
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:80
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
 msgid "Exclude"
 msgstr "Excluir"
 
@@ -1905,102 +1891,93 @@ msgid "Form"
 msgstr "Formulario"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_Form.php:43
-#, fuzzy
-#| msgid "Renew Cache"
 msgid "Input Cache"
-msgstr "Renovar la caché"
+msgstr "Caché de entrada"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_Form.php:44
-#, fuzzy
-#| msgid "Set the unit name here."
 msgid "Delete the input cache."
-msgstr "Establezca el nombre de la unidad aquí."
+msgstr "Eliminar el caché de entrada."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:24
 msgid "UI"
-msgstr ""
+msgstr "UI"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:43
-#, fuzzy
-#| msgid "Custom Order"
 msgid "Meta-box Order"
-msgstr "Orden personalizado"
+msgstr "Órden de la caja Meta"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:44
 msgid "Reset the plugin metabox order."
-msgstr ""
+msgstr "Reestablecer el órden de las cajas meta."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:50
 msgid "Meta-box Fold States"
-msgstr ""
+msgstr "Estados de las cajas Meta"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:51
 msgid "Reset the plugin metabox fold states."
-msgstr ""
+msgstr "Reestablecer los estados de las cajas meta."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:57
 msgid "Screen Layout"
-msgstr ""
+msgstr "Diseño de pantalla"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:58
 msgid "Reset the plugin screen layouts."
-msgstr ""
+msgstr "Reestablecer los diseños de pantalla."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:96
-#, fuzzy
-#| msgid "The action could not be processed."
 msgid "Plugin screen layouts could not be reset."
-msgstr "La acción no pudo ser procesada."
+msgstr "Los diseños de pantalla no han podido ser reestablecidos."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:112
 msgid "Plugin meta box order could not be reset."
-msgstr ""
+msgstr "El órden de las cajas meta no puede ser reestablecido."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:127
 msgid "Plugin meta box fold state could not be reset."
-msgstr ""
+msgstr "Los estados de la caja meta no puede ser reestablecido."
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Tab_Opt.php:25
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:52
 msgid "Opt"
-msgstr ""
+msgstr "Opt"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:103
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Thanks for <a href=\"%1$s\" target=\"_blank\">rating</a>"
-msgstr "Obtener uno <a href=\"%1$s\" target=\"_blank\">aquí</a>!"
+msgstr "Gracias por <a href=\"%1$s\" target=\"_blank\">valoración</a>"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:110
 msgid "Is the plugin useful?"
-msgstr ""
+msgstr "¿Es útil el plugin?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:120
 msgid "Dismiss"
-msgstr ""
+msgstr "Cerrar"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:127
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Thanks for <a href=\"%1$s\" target=\"_blank\">rating</a> %2$s"
-msgstr "Obtener uno <a href=\"%1$s\" target=\"_blank\">aquí</a>!"
+msgstr "Gracias por <a href=\"%1$s\" target=\"_blank\">valoración</a> %2$s"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:39
 msgid "Hi!"
-msgstr ""
+msgstr "¡Hola!"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:40
 msgid "The plugin needs to improve."
-msgstr ""
+msgstr "El plugin necesita mejorar."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:41
-msgid "Is it okay to ask you questions from time to time?"
-msgstr ""
+msgid ""
+"Is it okay to ask you questions about plugin improvements from time to time?"
+msgstr "¿Consideras correcto hacerte preguntas de tanto en tanto?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:94
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:126
 msgid "Quick Feedback"
-msgstr ""
+msgstr "Recomendación rápida"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:95
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:150
@@ -2010,108 +1987,101 @@ msgstr "Cargando..."
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:127
 msgid "If you have a moment, please let us know why you are deactivating."
 msgstr ""
+"Si tienes un momento, indícanos los motivos para desinstalar el plugin."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:135
 msgid "Anonymous feedback"
-msgstr ""
+msgstr "Recomendación anónima"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:139
-#, fuzzy
-#| msgid "Deactivate"
 msgid "Skip & Deactivate"
-msgstr "Desactivar"
+msgstr "Saltar y desactivar"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:140
-#, fuzzy
-#| msgid "Deactivate"
 msgid "Submit & Deactivate"
-msgstr "Desactivar"
+msgstr "Enviar y desactivar"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:141
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:117
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:168
-#, fuzzy
-#| msgid "France"
 msgid "Cancel"
-msgstr "Francia"
+msgstr "Cancelar"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:154
 msgid "The plugin is not working."
-msgstr ""
+msgstr "El plugin no funciona."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:158
 msgid "Kindly share what didn't work so we can fix it for future users..."
 msgstr ""
+"Comparte con nosotros si algo ha fallado para poder solucionarlo de cara a "
+"los futuros usuarios..."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:162
 msgid "I found a better plugin."
-msgstr ""
+msgstr "He encontrado un plugin mejor."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:166
 msgid "What's the plugin's name?"
-msgstr ""
+msgstr "¿Cómo se llama el plugin?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:170
 msgid ""
 "The plugin is great. But I need a specific feature that is not supported."
 msgstr ""
+"El plugin está bien. Pero necesito una característica específica que no está "
+"incluida."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:174
 msgid "What feature?"
-msgstr ""
+msgstr "¿Qué característica?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:178
 msgid "I couldn't understand how to make it work."
-msgstr ""
+msgstr "No entiendo cómo funciona."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:182
 msgid "The plugin didn't work as expected."
-msgstr ""
+msgstr "No funciona como esperaba."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:186
 msgid "What did you expect?"
-msgstr ""
+msgstr "¿Qué esperabas?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:190
 msgid "It's not what I was looking for."
-msgstr ""
+msgstr "No es lo que estaba buscando."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:194
 msgid "What you've been looking for?"
-msgstr ""
+msgstr "¿Qué estabas buscando?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:198
 msgid "It's a temporary deactivation. I'm just debugging an issue."
-msgstr ""
+msgstr "Es una desactivación temporal. Estoy solucionando un error."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:202
 msgid "Other."
-msgstr ""
+msgstr "Otro."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:206
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:207
 msgid "Kindly tell us the reason so we can improve."
-msgstr ""
+msgstr "Dinos la razón para poder mejorar."
 
 #: include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php:48
 msgid "Thank you!"
-msgstr ""
+msgstr "¡Muchas gracias!"
 
 #: include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php:49
 msgid "All right."
-msgstr ""
+msgstr "De acuerdo."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:25
-#, fuzzy
-#| msgid "miunosoft Affiliate"
 msgid "Affiliate"
-msgstr "afiliado de miunosoft"
+msgstr "Afiliado"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:54
-#, fuzzy
-#| msgid "Amazon Auto Links Pro Affiliate ID"
 msgid "Auto Amazon Links Pro Affiliate ID"
-msgstr "ID de afiliado de Amazon Auto Links Pro"
+msgstr "ID de afiliado de Auto Amazon Links Pro"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:58
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:25
@@ -2120,165 +2090,150 @@ msgid "Credit Link"
 msgstr "Enlace de autoría"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:59
-#, fuzzy
-#| msgid ""
-#| "If you set your affiliate ID of Amazon Auto Links Pro here, the credit "
-#| "text at the bottom of unit outputs will be linked to the Amazon Auto "
-#| "Links Pro product page."
 msgid ""
 "If you set your affiliate ID of Auto Amazon Links Pro here, the credit text "
 "at the bottom of unit outputs will be linked to the Auto Amazon Links Pro "
 "product page."
 msgstr ""
-"Si configura su ID de afiliado de Amazon Auto Links Pro aquí, el texto de "
-"crédito en la parte inferior de los resultados de la unidad se vinculará a "
-"la página del producto Amazon Auto Links Pro."
+"Si configura su ID de afiliado de Auto Amazon Links Pro aquí, el texto de "
+"crédito en la parte inferior de los resultados de la unidad se enlazará a la "
+"página del producto Auto Amazon Links Pro."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:62
-#, fuzzy
-#| msgid ""
-#| "Earn commissions by putting a link to the product page of Amazon Auto "
-#| "Links Pro in the credit link of unit outputs."
 msgid ""
 "Earn commissions by putting a link to the product page of Auto Amazon Links "
 "Pro in the credit link of unit outputs."
 msgstr ""
-"Gane comisiones poniendo un enlace a la página del producto de Amazon Auto "
+"Gane comisiones poniendo un enlace a la página del producto de Auto Amazon "
 "Links Pro en el enlace de crédito de las salidas de la unidad."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:64
-#, fuzzy, php-format
-#| msgid ""
-#| "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for "
-#| "Amazon Auto Links Pro affiliate program to get commisions."
+#, php-format
 msgid ""
 "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for Auto "
 "Amazon Links Pro affiliate program to get commisions."
 msgstr ""
-"Primero <a href=\"%1$s\" target=\"_blank\">debes registrarte</a> en el "
-"programa de afiliados de Amazon Auto Links Pro para obtener comisiones."
+"Necesitas <a href=\"%1$s\" target=\"_blank\">registrarte</a> en el programa "
+"de afiliados de Auto Amazon Links Pro para obtener comisiones."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:22
 msgid "Opt-in"
-msgstr ""
+msgstr "Opt-in"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:25
 msgid "Decide whether to allow what the plugin asks you."
-msgstr ""
+msgstr "Decide qué permitir cuando te pregunte el plugin."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:38
 #: include/core/component/opt/utility/AmazonAutoLinks_Opt_Message.php:23
-#, fuzzy
-#| msgid "Rating stars"
 msgid "Five stars"
-msgstr "Calificación"
+msgstr "Cinco estrellas"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:45
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:62
 msgid "Survey"
-msgstr ""
+msgstr "Encuesta"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:46
 msgid "Allow the plugin to ask you questionnaires from time to time."
-msgstr ""
+msgstr "Permite al plugin preguntarte cosas de tanto en tanto."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:53
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:70
 msgid "Announcement Feeds"
-msgstr ""
+msgstr "Feeds de Anuncios"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:54
 msgid ""
 "Allow the plugin to load plugin announcement feeds from external sources and "
 "display them."
 msgstr ""
+"Permita que el complemento cargue feeds de anuncios del plugin y los muestre."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:61
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:78
-#, fuzzy
-#| msgid "Set Amazon Associates tags."
 msgid "Developer's Amazon Associates Tags in Settings"
-msgstr "Incluye los tags de Amazon Associates."
+msgstr "Etiquetas de Amazon Afiliados de desarrollador en la configuración"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:62
 msgid ""
 "Allow the plugin to insert developer's Amazon Associates tags in the Amazon "
 "product links shown in the plugin setting pages."
 msgstr ""
+"Permitir al plugin introducir etiquetas de desarrollador de Amazon Afiliados "
+"en los enlaces de los productos de Amazon mostrados en los ajustes del "
+"plugin."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:69
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:86
-#, fuzzy
-#| msgid "Log Data"
 msgid "Usage Data"
-msgstr "Datos del registro"
+msgstr "Datos de uso"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:70
 msgid "Allow the plugin to collect plugin usage data."
-msgstr ""
+msgstr "Permitir al plugin recopilar información de uso."
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:77
-#, fuzzy
-#| msgid "Templates"
 msgid "New Template Feeds"
-msgstr "Plantillas"
+msgstr "Nuevas Plantillas de Feeds"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:78
 msgid "Allow the plugin to load new template feeds from external sources."
 msgstr ""
+"Permitir al plugin cargar nuevas plantillas de feeds de fuentes externas."
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:22
 msgid "Opt-out"
-msgstr ""
+msgstr "Opt-out"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:25
 msgid "Decide whether to disallow what the plugin asks you."
-msgstr ""
+msgstr "Decide qué restringir cuando te pregunte el plugin."
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:44
-#, fuzzy
-#| msgid "Preview"
 msgid "Plugin Review"
-msgstr "Vista previa"
+msgstr "Valora el Plugin"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:46
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Have you <a href=\"%1$s\" target=\"_blank\">rated the plugin</a>?"
-msgstr "Obtener uno <a href=\"%1$s\" target=\"_blank\">aquí</a>!"
+msgstr "Ya has<a href=\"%1$s\" target=\"_blank\">valorado el plugin</a>?"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:63
 msgid ""
 "Never ask whether the plugin can ask you questionnaires from time to time."
 msgstr ""
+"Nunca preguntar si el plugin puede preguntarte cosas de tanto en tanto."
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:71
 msgid ""
 "Never ask whether the plugin can load plugin announcement feeds from "
 "external sources and display them."
 msgstr ""
+"Nunca preguntar si el plugin puede cargar feeds de anuncios de fuentes "
+"externas y mostrarlos."
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:79
 msgid ""
 "Never ask whether the plugin can insert developer's Amazon Associates tags "
 "in the Amazon product links shown in the plugin setting pages."
 msgstr ""
+"Nunca preguntar si el plugin puede insertar etiquetas de desarrollador de "
+"Amazon Afiliados en los productos de Amazon mostrados en los ajustes del "
+"plugin."
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:87
 msgid "Never ask whether the plugin can collect plugin usage data."
-msgstr ""
+msgstr "Nunca preguntar si el plugin puede recopilar datos de uso."
 
 #: include/core/component/opt/utility/AmazonAutoLinks_Opt_Message.php:26
-#, fuzzy, php-format
-#| msgid ""
-#| "Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> "
-#| "to enable this feature."
+#, php-format
 msgid ""
 "Give the plugin <a href=\"%1$s\" target=\"_blank\">%2$s</a> to encourage the "
 "development!"
 msgstr ""
-"Considere la posibilidad de actualizar a <a href=\"%1$s\" target=\"_blank"
-"\">Pro</a> para habilitar esta función."
+"¡Valora el plugin <a href=\"%1$s\" target=\"_blank\">%2$s</a> para motivar "
+"el desarrollo!"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:61
 msgid "Enable proxies for regular HTTP requests that this plugin performs."
@@ -2287,11 +2242,10 @@ msgstr ""
 "plugin."
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:65
-#, fuzzy, php-format
-#| msgid "API requests will not use %1$s"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:68
+#, php-format
 msgid "PA-API requests does not use %1$s."
-msgstr "Las peticiones API no usarán %1$s"
+msgstr "Las peticiones PA-API no usarán %1$s."
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
 msgid "HTTP proxies"
@@ -2366,7 +2320,7 @@ msgid "Last Run"
 msgstr "Última ejecución"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:171
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:238
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:253
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks.php:108
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
 msgid "n/a"
@@ -2378,7 +2332,7 @@ msgstr "n/a"
 msgid "Next scheduled at %1$s."
 msgstr "Siguiente programado en %1$s."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:30
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:31
 #, php-format
 msgid ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a> is a type of proxy server that "
@@ -2387,80 +2341,82 @@ msgstr ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a> es un tipo de servidor proxy que "
 "ayuda a las peticiones HTTP."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:64
 #, php-format
 msgid "Utilize %1$s to assist HTTP requests."
 msgstr "Utiliza %1$s para asistir a las peticiones HTTP."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:73
 msgid "List"
 msgstr "Lista"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:83
 #, php-format
 msgid "Enter addresses of %1$s one per line."
 msgstr "Entra las direcciones de %1$s, una por línea."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:87
 #, php-format
 msgid "It is recommended to have your own %1$s for better performance."
 msgstr "Se recomienda tener tu propio %1$s para mejor rendimiento."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:90
 #, php-format
 msgid "To create one, see <a href=\"%1$s\">here</a>."
 msgstr "Para crear uno, mire <a href=\"%1$s\">aquí</a>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:100
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:104
 msgid "Test"
 msgstr "Test"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:105
 msgid "Check"
 msgstr "Marcado"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:102
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
 msgid "Add to List"
 msgstr "Añadir a la lista"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
-msgid "Type a URL of Web Page Dumper here to check if it is alive."
-msgstr "Escriba aquí una URL de Web Page Dumper para comprobar si está vivo."
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:113
-#, fuzzy
-#| msgid "Updated"
-msgid "Update Required"
-msgstr "Actualizado"
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:128
-msgid ""
-"Some of your Web Page Dumper instances are outdated and will not function "
-"properly. Please update them to the latest."
-msgstr ""
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:129
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:111
 #, php-format
-msgid "The required Version is <code>%1$s</code> or above."
-msgstr ""
+msgid "Type a URL of %1$s here to check if it is alive."
+msgstr "Escriba aquí una URL de %1$s para comprobar si está vivo."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:133
-#, fuzzy, php-format
-#| msgid "To create one, see <a href=\"%1$s\">here</a>."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:118
+msgid "Update Required"
+msgstr "Actualización Requerida"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:134
+#, php-format
 msgid ""
-"To update a Web Page Dumper instance, please see <a href=\"%1$s\">here</a>."
-msgstr "Para crear uno, mire <a href=\"%1$s\">aquí</a>."
+"Some of your %1$s instances are outdated and will not function properly. "
+"Please update them to the latest."
+msgstr ""
+"Algunas de las Instancias de %1$s están desactualizadas y no funcionarán "
+"correctamente. Por favor, actualízalas a la última."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:140
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:136
+#, php-format
+msgid "The required version is <code>%1$s</code> or above."
+msgstr "La versión requerida es <code>%1$s</code> o superior."
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:141
+#, php-format
+msgid "To update a %1$s instance, please see <a href=\"%2$s\">here</a>."
+msgstr ""
+"Para actualizar a una Instancia de %1$s, por favor lea <a href=\"%2$s"
+"\">aquí</a>."
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:149
 msgid "Always"
 msgstr "Siempre"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:152
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
 #, php-format
 msgid "Always use %1$s for these URLs."
 msgstr "Usa siempre %1$s para estas URLs."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:153
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:164
 #, php-format
 msgid ""
 "By default %1$s is used as a fallback when a regular HTTP request fails."
@@ -2468,19 +2424,19 @@ msgstr ""
 "Por defecto, %1$s se utiliza como un recurso cuando falla una petición HTTP "
 "normal."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:154
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:166
 #, php-format
 msgid "For HTTP requests of these URL patterns will use %1$s first."
 msgstr ""
 "Para las solicitudes HTTP de estos patrones de URL se utilizará primero %1$s."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:155
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:174
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:167
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:188
 msgid "Set URL patterns with a wildcard one per line."
 msgstr "Establecer patrones de URL con un comodín, uno por línea."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:156
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:169
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:190
 #, php-format
 msgid ""
 "The plugin uses <code><a href=\"%1$s\" target=\"_blank\">fnmatch()</a></"
@@ -2489,35 +2445,35 @@ msgstr ""
 "El plugin usa <code><a href=\"%1$s\" target=\"_blank\">fnmatch()</a></code> "
 "para comprobar el mecanismo."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:172
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
 #, php-format
 msgid "Do not use %1$s for these URLs."
 msgstr "No uses %1$s para estas URLs."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:173
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:187
 msgid "The <code>Always</code> options takes precedence."
 msgstr "La opción <code>Siempre</code> tiene prioridad."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:201
 msgid "The list is empty."
 msgstr "La lista está vacía."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:26
-msgid "Web Page Dumper Help"
-msgstr "Ayuda Web Page Dumper"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:27
+#, php-format
+msgid "%1$s Help"
+msgstr "%1$s Ayuda"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:59
-#, fuzzy
-#| msgid "Create Your Own Web Page Dumper"
-msgid "Creating Your Own Web Page Dumper"
-msgstr "Crea tu propia Web Page Dumper"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:61
+#, php-format
+msgid "Creating Your Own %1$s"
+msgstr "Crea tu propia Instancia de %1$s"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:64
-msgid "To create your own Web Page Dumper server, follow the below steps."
-msgstr ""
-"Para crear su propio servidor Web Page Dumper, siga los siguientes pasos."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
+#, php-format
+msgid "To create your own %1$s server, follow the below steps."
+msgstr "Para crear su propio servidor %1$s, siga los siguientes pasos."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:66
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:69
 #, php-format
 msgid ""
 "If you don't have a Heroku account, create one from <a href=\"%1$s\" target="
@@ -2526,18 +2482,18 @@ msgstr ""
 "Si no tienes una cuenta Heroku, crea una <a href=\"%1$s\" target=\"_blank"
 "\">aquí</a>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:108
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:116
 #, php-format
 msgid "Log in to <a href=\"%1$s\" target=\"_blank\">Heroku</a>."
 msgstr "Valídate en <a href=\"%1$s\" target=\"_blank\">Heroku</a>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:74
 #, php-format
 msgid "Go to %1$s."
 msgstr "Ves a %1$s."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:75
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
 #, php-format
 msgid ""
 "You will be prompted to deploy the app. Enter your desired app name, for "
@@ -2547,82 +2503,83 @@ msgstr ""
 "aplicación que desee, por ejemplo, <code>%1$s</code>, y pulse <code>%2$s</"
 "code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
 #, php-format
 msgid ""
 "Click on the <code>%1$s</code> button and from the <code>%2$s</code> link, "
-"go to the front page of Web Page Dumper."
+"go to the front page of %3$s."
 msgstr ""
 "Haga clic en el botón <code>%1$s</code> y desde el enlace <code>%2$s</code>, "
-"vaya a la página principal de Web Page Dumper."
+"vaya a la página principal de %3$s."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:89
 msgid "Copy the app address and enter it in the option."
 msgstr "Copia la dirección de la aplicación e introdúcela en la opción."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:91
-#, fuzzy
-#| msgid "Create Your Own Web Page Dumper"
-msgid "Updating Web Page Dumper"
-msgstr "Crea tu propia Web Page Dumper"
-
 #: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:97
-#, fuzzy
-#| msgid "To create your own Web Page Dumper server, follow the below steps."
+#, php-format
+msgid "Updating %1$s"
+msgstr "Actualización de %1$s"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:104
 msgid "To update your Web Page Dumper instance, follow the below steps."
 msgstr ""
-"Para crear su propio servidor Web Page Dumper, siga los siguientes pasos."
+"Para actualizar tu Instancia de Web Page Dumper, siga los siguientes pasos."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:99
-#, fuzzy, php-format
-#| msgid ""
-#| "<a href=\"%1$s\" target=\"_blank\">Sign up</a> for the affiliate program "
-#| "first."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:106
+#, php-format
 msgid ""
-"Have a <a href=\"%1$s\" target=\"_blank\">Github account</a> if you don't "
+"Have a <a href=\"%1$s\" target=\"_blank\">GitHub account</a> if you don't "
 "have yet."
 msgstr ""
-"<a href=\"%1$s\" target=\"_blank\">Regístrese</a> primero en el programa de "
-"afiliados."
+"<a href=\"%1$s\" target=\"_blank\">Crea una cuenta de GitHub</a> si aun no "
+"tienes una."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:109
 #, php-format
 msgid ""
 "Go to the <a href=\"%1$s\" target=\"_blank\">repository page</a> and fork "
-"the Web Page Dumper by pressing <code>%2$s</code>."
+"%2$s by pressing <code>%3$s</code>."
 msgstr ""
+"Ve al <a href=\"%1$s\" target=\"_blank\">repositorio</a> y clona %2$s "
+"(Instancia de Web Page Dumper) presionando <code>%3$s</code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:105
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:113
 #, php-format
 msgid ""
 "If you already have a forked repository, click on <code>%1$s</code> and "
 "<code>%2$s</code>."
 msgstr ""
+"Si ya has clonado el repositorio, haz click en <code>%1$s</code> y <code>"
+"%2$s</code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:110
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
 #, php-format
 msgid ""
-"Select your Web Page Dumper instance and from the <code>%1$s</code> tab, "
-"click on <strong>GitHub</strong> in the <code>Deployment method</code>."
+"Select your %1$s instance and from the <code>%2$s</code> tab, click on "
+"<strong>GitHub</strong> in the <code>%3$s</code>."
 msgstr ""
+"Selecciona tu Instancia de %1$s y desde la pestaña de <code>%2$s</code>, haz "
+"click en <strong>GitHub</strong> en el <code>%3$s</code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:111
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:121
 #, php-format
 msgid ""
 "Search the forked repository by typing <code>%1$s</code> and press <code>"
 "%2$s</code>. Then press <code>%3$s</code>."
 msgstr ""
+"Busca el repositorio clonado escribiendo <code>%1$s</code> y presionando "
+"<code>%2$s</code>. Despues presiona <code>%3$s</code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:115
-#, fuzzy, php-format
-#| msgid "Default: <code>%1$s</code>"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:125
+#, php-format
 msgid "Press <code>%1$s</code>."
-msgstr "Predeterminado:<code>%1$s</code>"
+msgstr "Presiona<code>%1$s</code>."
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:129
 #, php-format
 msgid "For the first time of doing this, you need to press <code>%1$s</code>."
-msgstr ""
+msgstr "La primera vez haciendo esto, necesitas presionar <code>%1$s</code>."
 
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:46
 msgid "Please enter a URL."
@@ -2636,43 +2593,45 @@ msgstr "Testeando..."
 msgid "Already added."
 msgstr "Ya se ha añadido."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:102
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:103
 #, php-format
 msgid ""
-"Please update the Web Page Dumper application. Your version: <code>%1$s</"
-"code>. Expected version: <code>%2$s</code> or above."
+"Please update the %1$s application. Your version: <code>%2$s</code>. "
+"Expected version: <code>%3$s</code> or above."
 msgstr ""
+"Por favor, actualiza la aplicación de Instancia de %1$s. Tu versión: <code>"
+"%2$s</code>. Versión esperada: <code>%3$s</code> o superior."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:121
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
 msgid "Blocked by Captcha."
 msgstr "Bloqueado por Captcha."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:125
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:46
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:116
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:167
 #: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:66
 msgid "OK"
 msgstr "OK"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:80
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:81
+#, php-format
 msgid ""
-"The following Web Page Dumper instances are outdated and will not run "
-"properly. Please update them."
+"The following %1$s instances are outdated and will not run properly. Please "
+"update them."
 msgstr ""
+"Las siguientes Instancias de %1$s están desactualizadas y no funcionarán "
+"correctamente. Por favor, actualízalas."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:82
-#, fuzzy, php-format
-#| msgid "Go to <a href=\"%1$s\">set</a>."
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:83
+#, php-format
 msgid "See <a href=\"%1$s\">how</a>."
-msgstr "Vaya a <a href=\"%1$s\">conjunto</a>."
+msgstr "Ver <a href=\"%1$s\">cómo</a>."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:92
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:93
 #, php-format
 msgid "Required version: <code>%1$s</code> or above."
-msgstr ""
+msgstr "Versión requerida: <code>%1$s</code> o superior."
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:99
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:100
 #: include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php:48
 #: include/core/component/template/admin/list_table/AmazonAutoLinks_ListTable_Template.php:223
 #: include/library/apf/factory/_common/form/field_type/system/AdminPageFramework_FieldType_system.php:69
@@ -2680,20 +2639,19 @@ msgstr ""
 msgid "Version"
 msgstr "Versión"
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:43
-msgid "You have a captcha error. Consider enabling Web Page Dumper."
-msgstr ""
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:44
+#, php-format
+msgid "You have a captcha error. Consider enabling %1$s."
+msgstr "Error de captcha. Considera activar el %1$s."
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:105
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:106
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 msgid "The options have been updated."
 msgstr "Las opciones se han actualizado."
 
 #: include/core/component/proxy/web_page_dumper/event/must/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable.php:48
-#, fuzzy
-#| msgid "Failed to load the unit."
 msgid "Failed to update the option."
-msgstr "No se pudo cargar la unidad."
+msgstr "Error al actualizar la opción."
 
 #: include/core/component/proxy/web_page_dumper/event/must/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable.php:50
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
@@ -2701,10 +2659,9 @@ msgid "Enabled"
 msgstr "Activado"
 
 #: include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage.php:38
-#, fuzzy, php-format
-#| msgid "Enable"
+#, php-format
 msgid "Enable %1$s"
-msgstr "Habilitar"
+msgstr "Habilitar %1$s"
 
 #: include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php:48
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:138
@@ -2727,10 +2684,8 @@ msgid "Get New"
 msgstr "Obtener nuevo"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:43
-#, fuzzy
-#| msgid "Something went wrong with the Ajax request."
 msgid "Something went wrong."
-msgstr "Algo salió mal con la solicitud de Ajax."
+msgstr "Algo salió mal."
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:88
 #, php-format
@@ -2739,16 +2694,16 @@ msgstr "¿Quieres que tu plantilla aparezca aquí? Envíe el archivo a %1$s."
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:96
 msgid "Do not load automatically"
-msgstr ""
+msgstr "No cargar automáticamente"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:106
 msgid "Click the button to load available templates!"
-msgstr ""
+msgstr "¡Presiona el botón para cargar las plantillas disponibles!"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:107
 #, php-format
 msgid "This will access <code>%1$s</code> to retrieve data."
-msgstr ""
+msgstr "Esto accederá a <code>%1$s</code> para obtener datos."
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_ListTable.php:27
 msgid "Installed"
@@ -2793,39 +2748,35 @@ msgid "At least one item needs to be checked."
 msgstr "Es necesario comprobar al menos un elemento."
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:86
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been removed."
-msgstr "El archivo cargado ha sido importado."
+msgstr "La plantilla, %1$s, ha sido eliminada."
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:93
-#, fuzzy, php-format
-#| msgid "The action could not be processed."
+#, php-format
 msgid "The template, %1$s, could not be removed."
-msgstr "La acción no pudo ser procesada."
+msgstr "La plantilla, %1$s, no puede ser eliminada."
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:153
 msgid ""
 "The given template does not exist so could not toggle the activation status."
 msgstr ""
+"La plantilla proporcionada no existe, por lo que no se pudo cambiar el "
+"estado de activación."
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:235
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been activated."
-msgstr "El archivo cargado ha sido importado."
+msgstr "La plantilla, %1$s, ha sido activada."
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:236
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been deactivated."
-msgstr "El archivo cargado ha sido importado."
+msgstr "La plantilla, %1$s, ha sido desactivada."
 
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:57
-#, fuzzy
-#| msgid "No items found."
 msgid "No templates found."
-msgstr "No se encontraron elementos."
+msgstr "No hay plantillas."
 
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:86
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:92
@@ -2837,16 +2788,20 @@ msgid ""
 "This is a duplicate of an already listed template and can cause issues so "
 "please remove it using the action link."
 msgstr ""
+"Este es un duplicado de una plantilla que ya figura en la lista y puede "
+"causar problemas, así que elimínelo usando el enlace de acción."
 
 #: include/core/component/template/event/filter/AmazonAutoLinks_Template_Event_Filter_TemplateListWarning.php:70
 msgid "The plugin cannot load the template."
-msgstr ""
+msgstr "El plugin no puede cargar la plantilla."
 
 #: include/core/component/template/event/filter/AmazonAutoLinks_Template_Event_Filter_TemplateListWarning.php:71
 msgid ""
 "Please remove this from the action link. If there are associated units to "
 "this template, please update their template unit setting."
 msgstr ""
+"Elimine esto del enlace de acción. Si hay unidades asociadas a esta "
+"plantilla, actualice la configuración de su unidad de plantilla."
 
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting.php:42
 msgid "A default Associate ID needs to be set."
@@ -2899,15 +2854,11 @@ msgid "Shortcodes"
 msgstr "Código rápido"
 
 #: include/core/component/third_party_support/phpzon/admin/AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon.php:55
-#, fuzzy
-#| msgid ""
-#| "Check the shortcode of PhpZon to convert its outputs into Amazon Auto "
-#| "Links'."
 msgid ""
 "Check the shortcode of PhpZon to convert its outputs into Auto Amazon Links'."
 msgstr ""
-"Comprueba el shortcode de PhpZon para convertir sus salidas en Amazon Auto "
-"Links'."
+"Comprueba el shortcode de PhpZon para convertir sus salidas hacia Auto "
+"Amazon Links'."
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:125
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:35
@@ -2932,7 +2883,7 @@ msgstr "Filtros de la Unidad Avanzada del producto"
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:175
 msgid "Publish"
-msgstr ""
+msgstr "Publicar"
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:185
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:70
@@ -3084,10 +3035,8 @@ msgid "The allowed character length for the description."
 msgstr "La longitud de carácter permitida para la descripción."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:90
-#, fuzzy
-#| msgid "Set -1 for no limit."
 msgid "Set <code>-1</code> for no limit."
-msgstr "Establecer -1 sin límite."
+msgstr "Establecer <code>-1</code> para ilimitado."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:98
 msgid "Link Style"
@@ -3110,16 +3059,16 @@ msgid "Show errors as an HTML comment."
 msgstr "Mostrar los errores como un comentario HTML."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:31
-#, fuzzy
-#| msgid "Define where you want to display units on the site."
 msgid "Determines how you like to display unit errors."
-msgstr "Defina dónde desea mostrar las unidades en el sitio."
+msgstr "Define cómo quieres mostrar los errores de unidad."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:32
 msgid ""
 "For logged-in users who have the privilege to edit units, unit errors will "
 "be displayed regardless of this option"
 msgstr ""
+"Para los usuarios identificados que tienen privilegios para editar unidades, "
+"los errores de las mismas se mostrarán aunque esta opción esté activada"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:38
 msgid "Load with JavaScript"
@@ -3131,11 +3080,11 @@ msgstr "Cargue la salida con JavaScript."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:45
 msgid "Pop-up Image Preview"
-msgstr ""
+msgstr "Zoom de la imagen"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:46
 msgid "Show pop-up image previews on mouseover."
-msgstr ""
+msgstr "Hacer zoom a la imagen al pasar el ratón."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:52
 msgid "Now Loading Text"
@@ -3302,6 +3251,9 @@ msgid ""
 "a> and get an affiliate ID. Then earn commissions by setting it <a href="
 "\"%2$s\">here</a>."
 msgstr ""
+"Participa en el <a href=\"%1$s\" target=\"_blank\">Pro affiliate program</a> "
+"y obtén tu ID de afiliado. Gana comisiones poniendo tu ID <a href=\"%2$s"
+"\">aquí</a>."
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:40
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:208
@@ -3440,10 +3392,6 @@ msgid "Custom Text"
 msgstr "Texto aleatorio"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:74
-#, fuzzy
-#| msgid ""
-#| "The text replaced with the <code>%text%</code> tag in the <b>Unit "
-#| "Format<b> option."
 msgid ""
 "The text replaced with the <code>%text%</code> tag in the <b>Unit Format</b> "
 "option."
@@ -3514,10 +3462,8 @@ msgid "a product price"
 msgstr "precio del producto"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:266
-#, fuzzy
-#| msgid "Discount Rate"
 msgid "discount percentage"
-msgstr "Tipo de Descuento"
+msgstr "porcentaje de descuento"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:270
 msgid "user rating"
@@ -3552,10 +3498,8 @@ msgid "the author of the product"
 msgstr "autor del produto"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:302
-#, fuzzy
-#| msgid "a title without HTML tags"
 msgid "the author text without HTML tags"
-msgstr "un título sin etiquetas HTML"
+msgstr "el autor del texto sin etiquetas HTML"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:306
 msgid "categories that the product belongs to"
@@ -3635,169 +3579,6 @@ msgstr "tamaño de imagen"
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:27
 msgid "Set the criteria to filter fetched items."
 msgstr "Establezca los criterios para filtrar los elementos capturados."
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:65
-#, fuzzy
-#| msgid "Status"
-msgid "Status:"
-msgstr "Estado"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:70
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:105
-msgid "Privately Published"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:73
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:103
-#, fuzzy
-#| msgid "Refurbished"
-msgid "Published"
-msgstr "Refabricado"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:76
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:107
-msgid "Scheduled"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:79
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:109
-#, fuzzy
-#| msgid "Unit Preview"
-msgid "Pending Review"
-msgstr "Vista previa de la unidad"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:83
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:111
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:113
-msgid "Draft"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-#, fuzzy
-#| msgid "Edit Button"
-msgid "Edit status"
-msgstr "Botón Editar"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:100
-#, fuzzy
-#| msgid "Status"
-msgid "Set status"
-msgstr "Estado"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:125
-#, fuzzy
-#| msgid "Visibility"
-msgid "Visibility:"
-msgstr "Visibilidad"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:131
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:164
-#, fuzzy
-#| msgid "Activate"
-msgid "Private"
-msgstr "Activado"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:134
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:161
-msgid "Password protected"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:137
-msgid "Public, Sticky"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:140
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:155
-msgid "Public"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-#, fuzzy
-#| msgid "Visibility"
-msgid "Edit visibility"
-msgstr "Visibilidad"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:158
-#, fuzzy
-#| msgid "Link to the product page."
-msgid "Stick this post to the front page"
-msgstr "Enlace a la página del producto."
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:162
-msgid "Password:"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:176
-#, php-format
-msgid "%1$s at %2$s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:178
-msgid "M j, Y"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:180
-msgid "H:i"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:184
-#, fuzzy, php-format
-#| msgid "Next scheduled at %1$s."
-msgid "Scheduled for: %s"
-msgstr "Siguiente programado en %1$s."
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:187
-#, php-format
-msgid "Published on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:189
-msgid "Publish <b>immediately</b>"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:192
-#, php-format
-msgid "Schedule for: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:195
-#, php-format
-msgid "Publish on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:211
-#, fuzzy
-#| msgid "Edit Categories"
-msgid "Edit date and time"
-msgstr "Editar categorías"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:214
-#, fuzzy
-#| msgid "Date Range"
-msgid "Date and time"
-msgstr "Rango de fechas"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:228
-#, php-format
-msgid ""
-"This draft comes from your <a href=\"%s\">unpublished customization changes</"
-"a>. You can edit, but there&#8217;s no need to publish now. It will be "
-"published automatically with those changes."
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Move to Trash"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Delete permanently"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:260
-#, fuzzy
-#| msgid "Updated"
-msgid "Update"
-msgstr "Actualizado"
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ViewLink.php:37
 msgid "View Unit"
@@ -3902,30 +3683,26 @@ msgid "Unit Type"
 msgstr "Tipo de unidad"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:227
-#, fuzzy
-#| msgid "Template"
 msgid "Template ID"
-msgstr "Plantilla"
+msgstr "ID de Plantilla"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:228
 msgid "Unsaved"
-msgstr ""
+msgstr "No guardado"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:245
 #, php-format
 msgid "The template is not activated. Try activating the template via %1$s."
-msgstr ""
+msgstr "La plantilla no está activada. Intenta activarla vía %1$s."
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:245
-#, fuzzy
-#| msgid "Sets a default template for this unit."
 msgid "The default template will be applied instead."
-msgstr "Establece una plantilla predeterminada para esta unidad."
+msgstr "La plantilla por defecto se aplicará en su lugar."
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:246
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:251
 msgid "Dashboard"
-msgstr ""
+msgstr "Panel de Control"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:250
 #, php-format
@@ -3934,6 +3711,10 @@ msgid ""
 "unit does not solve the issue, consult the plugin developer with the "
 "following template ID and the template options found in %1$s"
 msgstr ""
+"Por alguna razón, la plantilla para la unidad no se ha guardado. Si "
+"volviendo a guardar la unidad no se soluciona el problema, consulta al "
+"desarrollador del plugin con el siguiente ID de plantilla y las opciones de "
+"la misma que puedes encontrar en %1$s"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:251
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help.php:25
@@ -3980,10 +3761,9 @@ msgid "Copy"
 msgstr "Copiar"
 
 #: include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:46
-#, fuzzy, php-format
-#| msgid "The following unit(s) failed to be cloned."
+#, php-format
 msgid "The following unit(s) failed to be cloned: %1$s"
-msgstr "Las siguientes unidad(s) no se pudieron clonar."
+msgstr "La(s) siguiente(s) unidad(s) no se ha podido clonar: %1$s"
 
 #: include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:53
 msgid "The unit has been cloned successfully."
@@ -4026,6 +3806,7 @@ msgstr "Ver &#8220;%s&#8221;"
 #, php-format
 msgid "Set up an Associate ID first for your main locale, %1$s."
 msgstr ""
+"Configura tu ID de Asociado primero para tu localización principal, %1$s."
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Admin_Utility.php:81
 msgid "You need to set API keys first."
@@ -4036,10 +3817,9 @@ msgid "Manage Units"
 msgstr "Gestionar unidades"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:37
-#, fuzzy, php-format
-#| msgid "%1$s by Unit"
+#, php-format
 msgid "%1$s Unit"
-msgstr "%1$s por unidad"
+msgstr "%1$s Unidad"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:38
 #: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:26
@@ -4070,17 +3850,12 @@ msgid "Search Units"
 msgstr "Unidades de Búsqueda"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:46
-#, fuzzy
-#| msgid "No unit found for Amazon Auto Links"
 msgid "No unit found for Auto Amazon Links"
-msgstr "No se encontraron unidades para Amazon Auto Links"
+msgstr "No se encontraron unidades para Auto Amazon Links"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:47
-#, fuzzy
-#| msgid "No Unit Found for Amazon Auto Links in Trash"
 msgid "No Unit Found for Auto Amazon Links in Trash"
-msgstr ""
-"No se ha encontrado ninguna unidad para Amazon Auto Links en la Papelera"
+msgstr "No se han encontrado unidades para Auto Amazon Links en la Papelera"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:48
 msgid "Parent Unit"
@@ -4094,7 +3869,7 @@ msgstr "Unidades"
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:411
 #, php-format
 msgid "%1$s%% Off"
-msgstr ""
+msgstr "%1$s%% Fuera"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:830
 #, php-format
@@ -4103,7 +3878,7 @@ msgstr "%1$s de 5 estrellas"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:934
 msgid "Available for Amazon Prime"
-msgstr ""
+msgstr "Disponible para Amazon Prime"
 
 #: include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php:55
 msgid "Failed to load the unit."
@@ -4332,14 +4107,9 @@ msgstr ""
 
 #: include/core/component/unit/unit_type/_common/admin/page/AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase.php:104
 #: include/core/component/unit/unit_type/ad_widget_search/admin/page/AmazonAutoLinks_Unit_UnitType_AdminPages_Page_ad_widget_search.php:48
-#, fuzzy
-#| msgid ""
-#| "The URL unit type allows you to search products found in the page with "
-#| "specified urls."
 msgid "The search unit type allows you to search products with keywords."
 msgstr ""
-"El tipo de unidad de URL le permite buscar productos encontrados en la "
-"página con URL especificadas."
+"El tipo de unidad de búsqueda le permite buscar productos con palabras clave."
 
 #: include/core/component/unit/unit_type/_common/admin/tab/AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base.php:31
 msgid "Create a unit."
@@ -4643,13 +4413,11 @@ msgid "Failed to generate the breadcrumb."
 msgstr "No se pudo generar la ruta de navegación."
 
 #: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:250
-#, fuzzy, php-format
-#| msgid ""
-#| "If this continues, try enabling the proxy from <a href=\"%1$s\">here</a>."
+#, php-format
 msgid ""
 "If this continues, try enabling <a href=\"%1$s\" target=\"_blank\">proxies</"
 "a>."
-msgstr "Los botones se pueden crear desde <a href=\"%1$s\">esta pantalla.</a>."
+msgstr "Si persiste, prueba habilitando <a href=\"%1$s\">los proxies</a>."
 
 #: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:255
 msgid "Reload"
@@ -4737,13 +4505,10 @@ msgid "JSON Feed URL"
 msgstr "URL de feed JSON"
 
 #: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:58
-#, fuzzy
-#| msgid ""
-#| "Paste the JSON feed URL of an Amazon Auto Links unit on an external site."
 msgid ""
 "Paste the JSON feed URL of an Auto Amazon Links unit on an external site."
 msgstr ""
-"Pegue la URL de la fuente JSON de una unidad de Amazon Auto Links en un "
+"Pegue la URL de la fuente JSON de una unidad de Auto Amazon Links en un "
 "sitio externo."
 
 #: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:76
@@ -4761,17 +4526,13 @@ msgid "Add Feed Unit"
 msgstr "Agregar unidad de Feed"
 
 #: include/core/component/unit/unit_type/feed/admin/page/AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit.php:57
-#, fuzzy
-#| msgid ""
-#| "The feed unit type allows you to import unit data of external sites that "
-#| "set up Amazon Auto Links. Make use of this unit to save API calls."
 msgid ""
 "The feed unit type allows you to import unit data of external sites that set "
 "up Auto Amazon Links. Make use of this unit to save API calls."
 msgstr ""
 "El tipo de unidad de feed le permite importar datos de unidades de sitios "
-"externos que configuran Amazon Auto Links. Utilice esta unidad para guardar "
-"llamadas a la API."
+"externos que han configurado Auto Amazon Links. Utilice esta unidad para "
+"guardar las llamadas a la API."
 
 #: include/core/component/unit/unit_type/feed/admin/page/AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit.php:58
 msgid ""
@@ -4803,28 +4564,23 @@ msgid "Item Look-up Advanced"
 msgstr "Búsqueda de artículos avanzada"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:141
-#, fuzzy
-#| msgid "Item Look-up"
 msgid "PA-API Item Look-up"
-msgstr "Búsqueda de artículos"
+msgstr "Búsqueda de artículos vía PA-API"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:149
 msgid "Item Look-up"
 msgstr "Búsqueda de artículos"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:157
-#, fuzzy
-#| msgid ""
-#| "returns some or all of the item attributes with the given item identifier."
 msgid ""
 "Returns some or all of the item attributes with the given item identifier."
 msgstr ""
-"devuelve algunos o todos los atributos de elemento con el identificador de "
+"Devuelve alguno o todos los atributos del elemento con el identificador del "
 "elemento especificado."
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup.php:25
 msgid "Add Unit by PA-API Item Look-up"
-msgstr ""
+msgstr "Añadir unidad con Búsqueda de artículos vía PA-API"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup.php:26
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php:26
@@ -4918,28 +4674,20 @@ msgid "Product Search Advanced"
 msgstr "Búsqueda de productos avanzada"
 
 #: include/core/component/unit/unit_type/paapi_product_search/AmazonAutoLinks_Unit_UnitType_Loader_search.php:187
-#, fuzzy
-#| msgid "Product Search"
 msgid "PA-API Product Search"
-msgstr "Buscar producto"
+msgstr "Buscar producto vía PA-API"
 
 #: include/core/component/unit/unit_type/paapi_product_search/AmazonAutoLinks_Unit_UnitType_Loader_search.php:195
-#, fuzzy
-#| msgid ""
-#| "returns items that satisfy the search criteria in the title and "
-#| "descriptions."
 msgid ""
 "Returns items that satisfy the search criteria in the title and descriptions."
 msgstr ""
-"devuelve elementos que cumplen los criterios de búsqueda en el título y las "
+"Devuelve elementos que cumplen los criterios de búsqueda en el título y las "
 "descripciones."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit.php:26
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:25
-#, fuzzy
-#| msgid "Add Unit by URL"
 msgid "Add Unit by PA-API"
-msgstr "Agregar unidad por URL"
+msgstr "Agregar unidad con PA-API"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:26
 msgid "Select the search type."
@@ -4950,10 +4698,8 @@ msgid "Select a search type."
 msgstr "Seleccione un tipo de búsqueda."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php:25
-#, fuzzy
-#| msgid "Add Unit by Search"
 msgid "Add Unit by PA-API Product Search"
-msgstr "Agregar unidad por búsqueda"
+msgstr "Agregar unidad con Búsqueda de productos vía PA-API"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:65
 msgid "Query per Term"
@@ -5042,11 +4788,11 @@ msgstr "Ordena los resultados de acuerdo con lo más nuevo (Lo ultimo)."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:118
 msgid "Shuffle"
-msgstr ""
+msgstr "Mezclar"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:120
 msgid "Shuffle products to change the order."
-msgstr ""
+msgstr "Mezclar productos para cambiar el órden."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:26
 msgid ""
@@ -5102,11 +4848,10 @@ msgstr ""
 "productos pueden desactualizarse rápidamente."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:73
-#, fuzzy
-#| msgid "If the search index is All, this option does not take effect."
 msgid ""
 "If the search index is <code>All</code>, this option does not take effect."
-msgstr "Si el índice de búsqueda es Todo, esta opción no surten efecto."
+msgstr ""
+"Si el índice de búsqueda es <code>Todo</code>, esta opción no surte efecto."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:78
 msgid "Maximum Price"
@@ -5273,23 +5018,18 @@ msgid "Similar Products"
 msgstr "Productos similares"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:37
-#, fuzzy, php-format
-#| msgid ""
-#| "To use a preset ID, set it in the <a href=\"%1$s\">Amazon Associates</a> "
-#| "section."
+#, php-format
 msgid ""
 "If the country is not listed, set PA-API keys in the <a href=\"%1$s"
 "\">Associates</a> section."
 msgstr ""
-"Para usar el ID preestablecido, añádelo en la sección <a href=\"%1$s"
-"\">Amazon Associates</a>."
+"Si el país no está en la lista, establece las claves de PA-API en la sección "
+"de <a href=\"%1$s\">Asociados</a>."
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:52
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:38
-#, fuzzy
-#| msgid "Types"
 msgid "Type"
-msgstr "Tipos"
+msgstr "Tipo"
 
 #: include/core/component/unit/unit_type/paapi_product_search/event/filter/AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter.php:489
 #, php-format
@@ -5312,44 +5052,33 @@ msgid "Used from %1$s"
 msgstr "Usado desde %1$s"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:101
-#, fuzzy
-#| msgid "ScratchPad Payload Main"
 msgid "Custom Payload Main"
-msgstr "ScratchPad Payload principal"
+msgstr "Carga útil principal personalizada"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:138
 msgid "PA-API Custom Payload"
-msgstr ""
+msgstr "Carga útil PA-API personalizada"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:146
-#, fuzzy
-#| msgid "Custom Order"
 msgid "Custom Payload"
-msgstr "Orden personalizado"
+msgstr "Carga útil personalizada"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:155
-#, fuzzy, php-format
-#| msgid ""
-#| "Set the payload value generated on <a href=\"%1$s\" target=\"_blank"
-#| "\">ScratchPad</a>."
+#, php-format
 msgid ""
 "Returns items using a custom payload generated with <a target=\"_blank\" "
 "href=\"%1$s\">ScratchPad</a>."
 msgstr ""
-"Establecer el valor de la carga útil generada en <a href=\"%1$s\" target="
-"\"_blank\">Scratchpad</a>."
+"Devuelve objetos utilizando una carga útil personalizada generada con <a "
+"target=\"_blank\" href=\"%1$s\">ScratchPad</a>."
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:25
-#, fuzzy
-#| msgid "Add Unit by ScratchPad Payload"
 msgid "Add Unit by PA-API Custom Payload"
-msgstr "Añade unidad para ScratchPad Payload"
+msgstr "Agregar unidad por Carga útil personalizada vía PA-API"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:26
-#, fuzzy
-#| msgid "Create a unit."
 msgid "Create a unit by custom payload."
-msgstr "Crea una unidad."
+msgstr "Agregar unidad por Carga útil personalizada."
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:59
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload.php:60
@@ -5617,7 +5346,7 @@ msgstr "Permisos de archivos"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:100
 msgid "Paths"
-msgstr ""
+msgstr "Rutas"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:25
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:45
@@ -5677,10 +5406,8 @@ msgid "Multiple Columns"
 msgstr "Columnas Multiples"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:102
-#, fuzzy
-#| msgid "Template"
 msgid "Carousel Template"
-msgstr "Plantilla"
+msgstr "Plantilla del Carrusél"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:107
 msgid "Advanced Search Options"
@@ -5734,12 +5461,12 @@ msgstr "Consejos"
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:29
 msgid "If you find unexpected behaviour of the plugin, please report it."
 msgstr ""
+"Si encuentras algún funcionamiento erróneo o fallo del plugin, por favor, "
+"repórtalo."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:47
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:46
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:56
-#, fuzzy
-#| msgid "Name"
 msgid "Your Name"
 msgstr "Nombre"
 
@@ -5747,48 +5474,46 @@ msgstr "Nombre"
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:53
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:63
 msgid "Your name."
-msgstr ""
+msgstr "Nombre."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:59
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:58
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:70
 msgid "Your Email Address"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:64
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:63
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:75
 msgid "Type your email that the developer replies back to."
-msgstr ""
+msgstr "Introduce tu correo electrónico para que el desarrollador te responda."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:69
 msgid "Expected Behavior"
-msgstr ""
+msgstr "Funcionamiento Esperado"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:74
 msgid "Tell how the framework should work."
-msgstr ""
+msgstr "Dinos cómo debería funcionar el framework."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:82
 msgid "Actual Behavior"
-msgstr ""
+msgstr "Funcionamiento Actual"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:87
 msgid "Describe the behavior of the framework."
-msgstr ""
+msgstr "Describe el funcionamiento del framework."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:95
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:112
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:98
 msgid "Screenshots"
-msgstr ""
+msgstr "Capturas de pantalla"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:107
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:120
-#, fuzzy
-#| msgid "Information"
 msgid "Confirmation"
-msgstr "Información"
+msgstr "Confirmación"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:108
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:121
@@ -5800,81 +5525,71 @@ msgstr "requerido"
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:126
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:135
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:127
-#, fuzzy
-#| msgid "Thank you for creating with"
 msgid "Thanks for reporting!"
-msgstr "Gracias por crear con"
+msgstr "¡Gracias por reportar!"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:29
 msgid "Tell us about your experience with the plugin!"
-msgstr ""
+msgstr "¡Cuéntanos tu experiencia con el plugin!"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:86
 msgid "What do you like about the plugin?"
-msgstr ""
+msgstr "¿Qué te gusta del plugin?"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:91
 msgid "Tell us what you use the plugin for mainly."
-msgstr ""
+msgstr "Dinos para qué utilizas el plugin mayormente."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:99
-#, fuzzy
-#| msgid "Deactivating the plugin"
 msgid "What are missing in the plugin?"
-msgstr "Desactivación del plugin"
+msgstr "¿Qué hechas de menos en el plugin?"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:104
 msgid "Tell us what you wish to have as a feature and what can be improved."
-msgstr ""
+msgstr "Dinos qué característica nueva te gustaría ver y qué podemos mejorar."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:134
 msgid "Thanks for your feedback!"
-msgstr ""
+msgstr "¡Gracias por tu recomendación!"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:28
 msgid "What this is regarding?"
-msgstr ""
+msgstr "¿De qué trata esto?"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:49
 msgid "Technical Support"
-msgstr ""
+msgstr "Soporte Técnico"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:50
-#, fuzzy
-#| msgid "Feed"
 msgid "Feedback"
-msgstr "Feed"
+msgstr "Feedback"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:51
-#, fuzzy
-#| msgid "Reports"
 msgid "Report Issues"
-msgstr "Reportes"
+msgstr "Reportar Errores"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:28
 msgid "Got stuck? Get technical support."
-msgstr ""
+msgstr "¿Algún problema? Contacta con el soporte técnico."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:82
 msgid "What happened?"
-msgstr ""
+msgstr "¿Qué ha ocurrido?"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:88
 msgid "Tell us the problem with as much details as possible."
-msgstr ""
+msgstr "Cuéntanos el problema con el mayor detalle posible."
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:144
 msgid "We will get back to you soon!"
-msgstr ""
+msgstr "¡Te responderemos en breves!"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:170
-#, fuzzy
-#| msgid "Support Forum"
 msgid "Support Forums"
-msgstr "Foro de soporte"
+msgstr "Foro de Soporte"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:171
 #, php-format
@@ -5899,16 +5614,12 @@ msgstr ""
 "de <a href=\"%1$s\" target=\"_blank\">Pro</a>."
 
 #: include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:36
-#, fuzzy
-#| msgid "Arguments"
 msgid "Announcements"
-msgstr "Argumentos"
+msgstr "Anuncios"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:67
-#, fuzzy
-#| msgid "Join Affiliate Program "
-msgid "Join Affiliate Program   "
-msgstr "Unirse al Programa de Afiliados "
+msgid "Join Affiliate Program"
+msgstr "Únete al Programa de Afiliados"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:70
 msgid "Earn commissions by setting a credit link in the unit output."
@@ -5926,62 +5637,59 @@ msgstr ""
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:89
 msgid "Cooperators Wanted!"
-msgstr ""
+msgstr "¡Buscamos colaboradores!"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:91
 msgid ""
 "Be one of those and get discounts by contributing to the plugin development."
 msgstr ""
+"Se uno de ellos y obtén descuentos contribuyendo al desarrollo del plugin."
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:93
 msgid "Beta Testers"
-msgstr ""
+msgstr "Beta Testers"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:93
 msgid "who can test the plugin and find problems."
-msgstr ""
+msgstr "que pueda probar el plugin y encontrar problemas."
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:94
-#, fuzzy
-#| msgid "Template Options"
 msgid "Template Designers"
-msgstr "Opciones de Plantilla"
+msgstr "Diseñadores de Plantillas"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:94
 msgid "who can code and design plugin templates."
-msgstr ""
+msgstr "que pueda programar y diseñar las plantillas del plugin."
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:95
 msgid "Graphic Designers"
-msgstr ""
+msgstr "Diseñadores Gráficos"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:95
 msgid "who can design visual elements such as images for plugin pages."
 msgstr ""
+"que pueda diseñar elementos gráficos visuales como imágenes para las páginas "
+"del plugin."
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:96
-#, fuzzy
-#| msgid "Transients"
 msgid "Translators"
-msgstr "Transitorios"
+msgstr "Traductores"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:96
 msgid "who can translate text used in the plugin."
-msgstr ""
+msgstr "que pueda traducir el texto utilizado en el plugin."
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:97
 msgid "And possibly not listed!"
-msgstr ""
+msgstr "¡Y posiblemente no esté en la lista!"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:99
-#, fuzzy, php-format
-#| msgid ""
-#| "Browse nodes can be found <a href=\"%1$s\" target=\"_blank\">here</a>."
+#, php-format
 msgid ""
 "For more details please visit <a href=\"%1$s\" target=\"_blank\">here</a>"
 msgstr ""
-"Los Browse Node se pueden encontrar <a href=\"%1$s\" target=\"_blank\">aquí</"
-"a>."
+"Para más detalles, por favor visita <a href=\"%1$s\" target=\"_blank\">aquí</"
+"a>"
 
 #: include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php:25
 msgid "Reports"
@@ -5998,11 +5706,9 @@ msgstr "Peticiones HTTP"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:39
 msgid "Last Modified"
-msgstr ""
+msgstr "Última Modificación"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:40
-#, fuzzy
-#| msgid "Expires"
 msgid "Expiry"
 msgstr "Finaliza"
 
@@ -6013,27 +5719,23 @@ msgstr "Finalizado"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:140
 msgid "View the cache details."
-msgstr ""
+msgstr "Ver detalles de caché."
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:146
-#, fuzzy
-#| msgid "Click here to collapse the contents."
 msgid "View the stored cache contents."
-msgstr "Haga clic aquí para contraer el contenido."
+msgstr "Ver los contenidos almacenados en caché."
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:153
 msgid "Visit the original page."
-msgstr ""
+msgstr "Visitar la página original."
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:154
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:253
-#, fuzzy
-#| msgid "Search Units"
 msgid "Search by URL"
-msgstr "Unidades de Búsqueda"
+msgstr "Buscar por URL"
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php:52
 msgid "No thumbnail"
@@ -6590,25 +6292,19 @@ msgstr "Modo de Depuración"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:66
 msgid "Front-end"
-msgstr ""
+msgstr "Front-end"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:67
-#, fuzzy
-#| msgid "Browse Node ID"
 msgid "Browser Console"
-msgstr "Browse Node ID"
+msgstr "Consola del Buscador"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:68
-#, fuzzy
-#| msgid "Background"
 msgid "Back-end"
-msgstr "Fondo"
+msgstr "Back-end"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:69
-#, fuzzy
-#| msgid "Test"
 msgid "Tests"
-msgstr "Test"
+msgstr "Pruebas"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:70
 msgid "Log"
@@ -6616,27 +6312,25 @@ msgstr "Registro"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:76
 msgid "Check debug components to enable."
-msgstr ""
+msgstr "Comprobar elementos de la depuración para activar."
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:26
 msgid "Security"
-msgstr ""
+msgstr "Seguridad"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:27
 msgid "Set allowed HTML tags in setting forms and plugin outputs etc."
 msgstr ""
+"Establecer etiquetas HTML en los ajustes de los formularios y salidas del "
+"plugin, etc."
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:43
-#, fuzzy
-#| msgid "Allowed HTML Tag Attributes"
 msgid "Allowed HTML Tags & Attributes"
-msgstr "Atributos de etiqueta HTML permitidos"
+msgstr "Etiquetas y Atributos HTML Permitidos"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:44
-#, fuzzy
-#| msgid "Allowed HTML Tag Attributes"
 msgid "Enter allowed HTML tags and tag attributes."
-msgstr "Atributos de etiqueta HTML permitidos"
+msgstr "Introduce Etiquetas y Atributos HTML Permitidos."
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:51
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
@@ -6644,22 +6338,16 @@ msgid "Tags"
 msgstr "Etiquetas"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:57
-#, fuzzy
-#| msgid "For multiple items, separate them by commas."
 msgid "For multiple tags, enter them separated by commas."
-msgstr "Para varios elementos, sepárelos por comas."
+msgstr "Para varias etiquetas, sepáralas por comas."
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:64
-#, fuzzy
-#| msgid "Additional Attribute"
 msgid "Attributes"
-msgstr "Atributo adicional"
+msgstr "Atributos"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:66
-#, fuzzy
-#| msgid "Enter keywords that represent tags separated by commas."
 msgid "Set attributes for the tag, separated by commas."
-msgstr "Escriba palabras clave que representen etiquetas separadas por comas."
+msgstr "Introduce atributos para la etiqueta, separados por comas."
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:81
 msgid "Allowed Inline CSS Properties"
@@ -6705,8 +6393,6 @@ msgid "If you get broken options, initialize them by performing reset."
 msgstr "Si obtiene opciones rotas, inicialícelas realizando un reinicio."
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:44
-#, fuzzy
-#| msgid "Restore Default"
 msgid "Restore Defaults"
 msgstr "Restaurar ajustes predeterminados"
 
@@ -6780,6 +6466,10 @@ msgid ""
 "earn commission fees by advertising and linking to the following web sites. "
 "%associates_list%"
 msgstr ""
+"%site_host% forma parte del Programa de Afiliados de Amazon Services LLC, un "
+"programa de publicidad de afiliados diseñado para proporcionar un medio para "
+"que los sitios ganen tarifas de comisión mediante la publicidad y los "
+"enlaces a los siguientes sitios web. %associates_list%"
 
 #: include/core/main/output/AmazonAutoLinks_Output.php:200
 #, php-format
@@ -7120,7 +6810,7 @@ msgstr "Archivo no seleccionado."
 
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:160
 msgid "Please fill out this field."
-msgstr ""
+msgstr "Rellena este campo."
 
 #: include/library/apf/factory/_common/form/field_type/color/AdminPageFramework_FieldType_color.php:28
 msgid "Select Color"
@@ -7282,11 +6972,119 @@ msgstr "Solo cookies de uso de sesión"
 
 #: include/library/apf/factory/_common/form/field_type/table/AdminPageFramework_FieldType_table.php:35
 msgid "Set the caption with the <code>caption</code> argument."
-msgstr ""
+msgstr "Establece la leyenda con el <code>argumento de leyenda</code>."
 
 #: template/rss2/template.php:38
 msgid "Amazon Products"
 msgstr "Productos de Amazon"
+
+#~ msgid "Web Page Dumper Help"
+#~ msgstr "Ayuda Web Page Dumper"
+
+#~ msgid "Updating Web Page Dumper"
+#~ msgstr "Actualizar Instancia de Web Page Dumper"
+
+#~ msgid "Status:"
+#~ msgstr "Estado:"
+
+#~ msgid "Privately Published"
+#~ msgstr "Publicado en privado"
+
+#~ msgid "Published"
+#~ msgstr "Publicado"
+
+#~ msgid "Scheduled"
+#~ msgstr "Programado"
+
+#~ msgid "Pending Review"
+#~ msgstr "Pendiente de valoración"
+
+#~ msgid "Draft"
+#~ msgstr "Borrador"
+
+#~ msgid "Edit status"
+#~ msgstr "Editar Estado"
+
+#~ msgid "Set status"
+#~ msgstr "Establecer Estado"
+
+#~ msgid "Visibility:"
+#~ msgstr "Visibilidad:"
+
+#~ msgid "Private"
+#~ msgstr "Privado"
+
+#~ msgid "Password protected"
+#~ msgstr "Protegido por contraseña"
+
+#~ msgid "Public, Sticky"
+#~ msgstr "Publico, Fijo"
+
+#~ msgid "Public"
+#~ msgstr "Publico"
+
+#~ msgid "Edit visibility"
+#~ msgstr "Editar visibilidad"
+
+#~ msgid "Stick this post to the front page"
+#~ msgstr "Fijar el post en la página principal"
+
+#~ msgid "Password:"
+#~ msgstr "Contraseña:"
+
+#, php-format
+#~ msgid "%1$s at %2$s"
+#~ msgstr "%1$s en %2$s"
+
+#~ msgid "M j, Y"
+#~ msgstr "M j, Y"
+
+#~ msgid "H:i"
+#~ msgstr "H:i"
+
+#, php-format
+#~ msgid "Scheduled for: %s"
+#~ msgstr "Programado para: %s"
+
+#, php-format
+#~ msgid "Published on: %s"
+#~ msgstr "Publicado en: %s"
+
+#~ msgid "Publish <b>immediately</b>"
+#~ msgstr "Publicar <b>inmediatamente</b>"
+
+#, php-format
+#~ msgid "Schedule for: %s"
+#~ msgstr "Programar para: %s"
+
+#, php-format
+#~ msgid "Publish on: %s"
+#~ msgstr "Publicar el: %s"
+
+#~ msgid "Edit date and time"
+#~ msgstr "Editar fecha y hora"
+
+#~ msgid "Date and time"
+#~ msgstr "Fecha y hora"
+
+#, php-format
+#~ msgid ""
+#~ "This draft comes from your <a href=\"%s\">unpublished customization "
+#~ "changes</a>. You can edit, but there&#8217;s no need to publish now. It "
+#~ "will be published automatically with those changes."
+#~ msgstr ""
+#~ "Este borrador viene de tus <a href=\"%s\">cambios personalizados sin "
+#~ "publicar</a>. Puedes editarlo, pero no tienes por qué publicarlo ahora. "
+#~ "Se publicará automáticamente con los cambios realizados."
+
+#~ msgid "Move to Trash"
+#~ msgstr "Mover a la papelera"
+
+#~ msgid "Delete permanently"
+#~ msgstr "Borrar permanentemente"
+
+#~ msgid "Update"
+#~ msgstr "Actualizar"
 
 #~ msgid "All Departments"
 #~ msgstr "Todos los Departamentos"
@@ -7745,10 +7543,6 @@ msgstr "Productos de Amazon"
 #, php-format
 #~ msgid "Locale: %1$s"
 #~ msgstr "Local: %1$s"
-
-#, php-format
-#~ msgid "Domain: %1$s"
-#~ msgstr "Dominio: %1$s"
 
 #~ msgid "The API returned an error but could not retrieve the error message."
 #~ msgstr ""
