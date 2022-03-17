@@ -23,7 +23,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
     protected function _getArguments() {
         return array(
             'tab_slug'         => 'web_page_dumper_help',
-            'title'            => __( 'Web Page Dumper Help', 'amazon-auto-links' ),
+                                  /* translators: 1: a proper noun (Web Page Dumper) */
+            'title'            => sprintf( __( '%1$s Help', 'amazon-auto-links' ), 'Web Page Dumper' ),
             'order'            => 30,
             'parent_tab_slug'  => 'proxy',
             'show_in_page_tab' => false,
@@ -56,16 +57,19 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
         }
         private function ___printCreateWebPageDumper() {
             echo "<span id='creating-own-web-page-dumper'></span>";
-            echo "<h3>" . esc_html__( 'Creating Your Own Web Page Dumper', 'amazon-auto-links' ) . "</h3>";
+                          /* translators: 1: a proper noun (Web Page Dumper) */
+            echo "<h3>" . esc_html( sprintf( __( 'Creating Your Own %1$s', 'amazon-auto-links' ), 'Web Page Dumper' ) ) . "</h3>";
             $_sURLImageCreateNewApp   = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/create/create-new-app.png' ) );
             $_sURLImageOpenApp        = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/create/open-app.png' ) );
             $_sURLImageManageApp      = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/create/manage-app.png' ) );
             $_sURLImageCopyAppAddress = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/create/copy-app-address.png' ) );
-            echo "<p class='description'>" . __( 'To create your own Web Page Dumper server, follow the below steps.', 'amazon-auto-links' ) . "</p>"
+                                             /* translators: 1: a proper noun (Web Page Dumper) */
+            echo "<p class='description'>" . sprintf( __( 'To create your own %1$s server, follow the below steps.', 'amazon-auto-links' ), 'Web Page Dumper' ) . "</p>"
                 . "<ol>"
                     . "<li><p>" . sprintf( __( 'If you don\'t have a Heroku account, create one from <a href="%1$s" target="_blank">here</a>.', 'amazon-auto-links' ), esc_url( 'https://signup.heroku.com' ) ) . "</p></li>"
                     . "<li><p>" . sprintf( __( 'Log in to <a href="%1$s" target="_blank">Heroku</a>.', 'amazon-auto-links' ), esc_url( 'https://id.heroku.com/login' ) ) . "</p></li>"
                     . "<li><p>"
+                          /* translators: 1: a link to the Web Page Dumper deployment page on Heroku */
                         . sprintf(
                             __( 'Go to %1$s.', 'amazon-auto-links' ),
                             '<a href="' . esc_url( 'https://www.heroku.com/deploy/?template=https://github.com/michaeluno/web-page-dumper' ) . '" target="_blank"><strong>Deploy</strong></a>'
@@ -76,7 +80,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
                         . "<div class='screenshot'><img src='{$_sURLImageCreateNewApp}' alt='Create New App' /></div>"
                     . "</li>"
                     . "<li>"
-                        . "<p>" . sprintf( __( 'Click on the <code>%1$s</code> button and from the <code>%2$s</code> link, go to the front page of Web Page Dumper.', 'amazon-auto-links' ), 'Manage app', 'Open app' ). "</p>"
+                                  /* translators: 1: a fixed UI label (Manage app) 2:  a fixed UI label (Open app) 3: a proper noun (Web Page Dumper) */
+                        . "<p>" . sprintf( __( 'Click on the <code>%1$s</code> button and from the <code>%2$s</code> link, go to the front page of %3$s.', 'amazon-auto-links' ), 'Manage app', 'Open app', 'Web Page Dumper' ). "</p>"
                         . "<div class='screenshot'><img src='{$_sURLImageManageApp}' alt='Manage App' /></div>"
                         . "<div class='screenshot'><img src='{$_sURLImageOpenApp}' alt='Open App' /></div>"
                     . "</li>"
@@ -88,17 +93,20 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
         }
         private function ___printUpdateWebPageDumper() {
             echo "<span id='updating-web-page-dumper'></span>";
-            echo "<h3>" . esc_html__( 'Updating Web Page Dumper', 'amazon-auto-links' ) . "</h3>";
+                                    /* translators: 1: a proper noun (Web Page Dumper) */
+            echo "<h3>" . esc_html( sprintf( __( 'Updating %1$s', 'amazon-auto-links' ), 'Web Page Dumper' ) ) . "</h3>";
             $_sURLImageForkRepo     = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/github-fork-button.jpg' ) );
             $_sURLImageFetchStream  = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/github-update-forked-repository.jpg' ) );
             $_sURLImageHerokuDeploy = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/heroku-sync-repository.jpg' ) );
             $_sURLImageAutoDeploy   = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/heroku-enable-automatic-deploys.jpg' ) );
             $_sURLImageDeployBranch = esc_url( $this->getResolvedSRC( AmazonAutoLinks_Proxy_WebPageDumper_Loader::$sDirPath . '/asset/image/instruction/update/heroku-manual-deploy.jpg' ) );
-            echo "<p class='description'>" . __( 'To update your Web Page Dumper instance, follow the below steps.', 'amazon-auto-links' ) . "</p>"
+                                             /* translators: 1: a proper noun (Web Page Dumper) */
+            echo "<p class='description'>" . sprintf( __( 'To update your Web Page Dumper instance, follow the below steps.', 'amazon-auto-links' ), 'Web Page Dumper' ) . "</p>"
                 . "<ol>"
                     . "<li><p>" . sprintf( __( 'Have a <a href="%1$s" target="_blank">GitHub account</a> if you don\'t have yet.', 'amazon-auto-links' ), esc_url( 'https://github.com/join' ) ) . "</p></li>"
                     . "<li>"
-                        . "<p>" . sprintf( __( 'Go to the <a href="%1$s" target="_blank">repository page</a> and fork the Web Page Dumper by pressing <code>%2$s</code>.', 'amazon-auto-links' ), esc_url( 'https://github.com/michaeluno/web-page-dumper' ), 'Fork' ) . "</p>"
+                                  /* translators: 1: A link to the Web Page Dumper repository 2: a proper noun (Web Page Dumper) 3: a fixed UI label (Fork) */
+                        . "<p>" . sprintf( __( 'Go to the <a href="%1$s" target="_blank">repository page</a> and fork %2$s by pressing <code>%3$s</code>.', 'amazon-auto-links' ), esc_url( 'https://github.com/michaeluno/web-page-dumper' ), 'Web Page Dumper', 'Fork' ) . "</p>"
                         . "<div class='screenshot'><img src='{$_sURLImageForkRepo}' alt='Fork Repository' /></div>"
                     . "</li>"
                     . "<li>"
@@ -107,7 +115,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help extends AmazonAutoLinks
                     . "</li>"
                     . "<li><p>" . sprintf( __( 'Log in to <a href="%1$s" target="_blank">Heroku</a>.', 'amazon-auto-links' ), esc_url( 'https://id.heroku.com/login' ) ) . "</p></li>"
                     . "<li>"
-                        . "<p>" . sprintf( __( 'Select your Web Page Dumper instance and from the <code>%1$s</code> tab, click on <strong>GitHub</strong> in the <code>Deployment method</code>.', 'amazon-auto-links' ), 'Deploy', 'Deployment method' ) . "</p>"
+                                  /* translators: 1: : a proper noun (Web Page Dumper) 2: a fixed UI label (Deploy)  3: a fixed UI label (Deployment method) */
+                        . "<p>" . sprintf( __( 'Select your %1$s instance and from the <code>%2$s</code> tab, click on <strong>GitHub</strong> in the <code>%3$s</code>.', 'amazon-auto-links' ), 'Web Page Dumper', 'Deploy', 'Deployment method' ) . "</p>"
+                                  /* translators: 1: : a repository slug, web page dumper, for Web Page Dumper 2: a fixed UI label (Search)  3: a fixed UI label (Connect) */
                         . "<p>" . sprintf( __( 'Search the forked repository by typing <code>%1$s</code> and press <code>%2$s</code>. Then press <code>%3$s</code>.', 'amazon-auto-links' ), 'web page dumper', 'Search', 'Connect' ) . "</p>"
                         . "<div class='screenshot'><img src='{$_sURLImageHerokuDeploy}' alt='Deploy Repository' /></div>"
                     . "</li>"

@@ -40,7 +40,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice e
                 'nonce'  => wp_create_nonce( $this->sNonceKey ),
             )
         );
-        $_sMessage = __( 'You have a captcha error. Consider enabling Web Page Dumper.', 'amazon-auto-links' )
+                     /* translators: 1: A proper noun (Web Page Dumper) */
+        $_sMessage = sprintf( __( 'You have a captcha error. Consider enabling %1$s.', 'amazon-auto-links' ), 'Web Page Dumper' )
              . "<a href='" . esc_url( $_sURL ) . "' style='text-decoration:none;margin-left:1em;' class='button-link web-page-dumper-action' data-action='enable'>"
                 . "<button class='button button-secondary button-small'>"
                     . __( 'Enable', 'amazon-auto-links' )
