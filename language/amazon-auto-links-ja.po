@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-auto-"
 "links\n"
-"POT-Creation-Date: 2022-03-17 07:46+0900\n"
-"PO-Revision-Date: 2022-03-17 07:52+0900\n"
+"POT-Creation-Date: 2022-03-17 20:12+0900\n"
+"PO-Revision-Date: 2022-03-17 22:27+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -19,13 +19,15 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: language\n"
-"X-Poedit-SearchPathExcluded-1: test\n"
-"X-Poedit-SearchPathExcluded-2: tool\n"
-"X-Poedit-SearchPathExcluded-3: asset\n"
-"X-Poedit-SearchPathExcluded-4: .idea\n"
-"X-Poedit-SearchPathExcluded-5: build\n"
-"X-Poedit-SearchPathExcluded-6: node_modules\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: tool\n"
+"X-Poedit-SearchPathExcluded-2: test\n"
+"X-Poedit-SearchPathExcluded-3: language\n"
+"X-Poedit-SearchPathExcluded-4: asset\n"
+"X-Poedit-SearchPathExcluded-5: node_modules\n"
+"X-Poedit-SearchPathExcluded-6: .idea\n"
+"X-Poedit-SearchPathExcluded-7: build\n"
+"X-Poedit-SearchPathExcluded-8: */build/*.js\n"
 
 #: include/core/AmazonAutoLinks_Bootstrap.php:138
 msgid "Deactivating the plugin"
@@ -130,10 +132,8 @@ msgid "Could not get a user ID."
 msgstr "ユーザー ID の取得ができませんでした。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:157
-#, fuzzy
-#| msgid "Deactivating the plugin."
 msgid "Please activate the license."
-msgstr "プラグインを停止します。"
+msgstr "ライセンスを有効にしてください。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:158
 #, php-format
@@ -141,6 +141,8 @@ msgid ""
 "For some reasons, the message could not be sent. Please contact %1$s "
 "directly."
 msgstr ""
+"何らかの理由で、メッセージを送信できませんでした。%1$sに直接お問い合わせくだ"
+"さい。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:159
 msgid "Please consider upgrading to Pro to enable this feature."
@@ -156,8 +158,6 @@ msgstr ""
 "レードのご検討をお願い致します。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:161
-#, fuzzy
-#| msgid "This is available in Pro."
 msgid "Available in Pro."
 msgstr "こちらはプロ版で使用可能です。"
 
@@ -182,22 +182,21 @@ msgid ""
 "WordPress version etc. and plugin settings will be sent along with the "
 "messages to help troubleshooting."
 msgstr ""
+"トラブルシューティングを円滑に進めるため、メッセージと共にPHP や WordPress の"
+"バージョン等のシステム情報も送信される事に同意します。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:164
-#, fuzzy, php-format
-#| msgid ""
-#| "To use a preset ID, set it in the <a href=\"%1$s\">Amazon Associates</a> "
-#| "section."
+#, php-format
 msgid ""
 "If the country is not listed, set an Associate ID in the <a href=\"%1$s"
 "\">Associates</a> section."
 msgstr ""
-"予め設定された ID を使用するには、 <a href=\"%1$s\">Amazon アソシエイト</a> "
-"セクションで設定します。"
+"国がリストされていない場合、<a href=\"%1$s\">Amazon アソシエイト</a> セクショ"
+"ンでアソシエイト ID を設定します。"
 
 #: include/core/_common/utility/AmazonAutoLinks_Message.php:165
 msgid "For countries which require PA-API, set PA-API keys as well."
-msgstr ""
+msgstr "PA-API が必須な国々に関しては、PA-API キーも設定します。"
 
 #: include/core/_common/utility/AmazonAutoLinks_PluginUtility.php:498
 #: include/core/component/unit/_common/_abstract/AmazonAutoLinks_Unit_UnitType_Loader_Base.php:231
@@ -246,34 +245,34 @@ msgstr ""
 "このオプションを有効にするには、<a href=\"%1$s\">Amazon Product Advertising "
 "API キー</a> を設定する必要があります。"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:355
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:389
 msgid "Post / Page Content"
 msgstr "記事"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:356
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:390
 msgid "Excerpt"
 msgstr "抜粋"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:357
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:391
 msgid "Comment"
 msgstr "コメント"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:358
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:392
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:78
 #: include/core/component/unit/unit_type/feed/AmazonAutoLinks_Unit_UnitType_Loader_feed.php:111
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_Feed.php:25
 msgid "Feed"
 msgstr "フィード"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:359
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:393
 msgid "Feed Excerpt"
 msgstr "フィードの抜粋"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:369
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:403
 msgid "Post / Page Content on Publish"
 msgstr "投稿時の記事内容"
 
-#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:372
+#: include/core/_common/utility/AmazonAutoLinks_WPUtility.php:406
 msgid "inserts product links into the database so they will be static."
 msgstr "これはリンクをデータベースに挿入するので、リンクは静的になります。"
 
@@ -929,7 +928,7 @@ msgstr ""
 "す。複数の場合はコンマで区切ります。"
 
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_GoBack.php:30
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:53
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:54
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:235
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_AdminPage_Tab_HTTPRequest.php:148
 #: include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php:84
@@ -1117,9 +1116,6 @@ msgstr "自動挿入の管理"
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert.php:29
 #: include/core/component/auto_insert/post_type/AmazonAutoLinks_PostType_AutoInsert_Action.php:64
 #: include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php:29
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:210
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:40
 msgid "Edit"
 msgstr "編集"
@@ -1480,8 +1476,8 @@ msgstr ""
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:49
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:53
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:59
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:61
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:46
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:47
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:54
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:45
 msgid "Enable"
@@ -1504,7 +1500,7 @@ msgstr "埋め込みに使用するテンプレートを選択します。"
 
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:68
 msgid "Use iframe"
-msgstr "iframe の使用"
+msgstr "iframe を使用する"
 
 #: include/core/component/custom_oembed/admin/AmazonAutoLinks_CustomOEmbed_Setting_Embed_Section.php:69
 msgid ""
@@ -1571,25 +1567,25 @@ msgstr "Amazon プロダクト"
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:22
 #: include/core/component/disclosure/utility/AmazonAutoLinks_Disclosure_Utility.php:30
 msgid "Affiliate Disclosure"
-msgstr ""
+msgstr "アフィリエイト情報開示"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:24
 msgid "Identify yourself as an associate."
-msgstr ""
+msgstr "ご自身をアソシエイトとして認知させます。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:78
-#, fuzzy
-#| msgid "Discount Rate"
 msgid "Disclosure Page"
-msgstr "ディスカウント率"
+msgstr "情報開示ページ"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:83
 msgid "The following shortcodes are available in the page."
-msgstr ""
+msgstr "以下のショートコードは、そのページで使用できます。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:85
 msgid "Lists Amazon Associates sites that you are enrolled in as an affiliate."
 msgstr ""
+"アフィリエイトとして登録されている Amazon アソシエイトサイトを一覧表示しま"
+"す。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:104
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_WizardSubmit.php:38
@@ -1601,45 +1597,47 @@ msgstr "作成"
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:106
 msgid "An affiliate disclosure page is missing on your site. Create one."
 msgstr ""
+"このサイト上でのアフィリエイト情報開示ページが見つかりません。作成します。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:111
 msgid "No Need"
-msgstr ""
+msgstr "不要"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:112
 msgid "Never automatically create a disclosure page."
-msgstr ""
+msgstr "情報開示ページを自動作成しない。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:113
 msgid ""
 "By default, the plugin attempts to create an affiliate disclosure page when "
 "it does not exist upon plugin activation and updates."
 msgstr ""
+"デフォルトでは、プラグインの有効化と更新時にアフィリエイトの情報開示ページが"
+"存在しない場合、プラグインはアフィリエイトの情報開示ページを作成しようとしま"
+"す。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:114
 msgid ""
 "Check this option only if your locale does not require affiliate disclosure "
 "statements."
 msgstr ""
+"ご利用の地域でアフィリエイト情報開示文言が必要ない場合にのみ、このオプション"
+"をオンにします。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:118
-#, fuzzy
-#| msgid "Discount"
 msgid "Disclosure Text"
-msgstr "割引"
+msgstr "情報開示テキスト"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:123
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:356
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:389
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:423
-#, fuzzy
-#| msgid "Sets the layout of the product. The following tags are available."
 msgid "The following tags are available."
-msgstr "プロダクトのレイアウトを設定します。以下のタグが使用可能です。"
+msgstr "以下のタグが使用できます。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:125
 msgid "Your site host name."
-msgstr ""
+msgstr "当サイトのホスト名。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:126
 msgid ""
@@ -1647,17 +1645,18 @@ msgid ""
 "automatically generated by parsing your set Associates IDs in the Associates "
 "section."
 msgstr ""
+"Amazon アソシエイトセクションで設定したアソシエイツ ID を解析して自動的に生成"
+"される、参加している Amazon アソシエイトのリスト。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:132
-#, fuzzy
-#| msgid "Disclaimer"
 msgid "Disclaimer Link"
-msgstr "免責"
+msgstr "免責事項リンク"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:134
 msgid ""
 "Link the \"more info\" disclaimer link to the affiliate disclosure page."
 msgstr ""
+"「追加情報」免責事項のリンクをアフィリエイト情報開示ページにリンクします。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:135
 msgid ""
@@ -1665,46 +1664,38 @@ msgid ""
 "prices and shown with the <code>%disclaimer%</code> tag in the <code>Item "
 "Format</code> unit option."
 msgstr ""
+"「追加情報」免責事項リンクは、製品価格の横に配置されるものとされており、"
+"<code>アイテムフォーマット</code>ユニットオプションに <code>%disclaimer%</"
+"code> タグを使って表示されます。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:139
-#, fuzzy
-#| msgid "Disclaimer"
 msgid "Disclaimer Text"
-msgstr "免責"
+msgstr "免責事項テキスト"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:146
 msgid "Why do we need this?"
-msgstr ""
+msgstr "なぜこれが必要なのでしょうか？"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:150
-#, fuzzy, php-format
-#| msgid ""
-#| "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for "
-#| "Amazon Auto Links Pro affiliate program to get commisions."
+#, php-format
 msgid ""
 "According to the <a href=\"%1$s\" target=\"_blank\">terms</a> of Amazon "
 "Associates, it is required to display affiliate disclosure on your site."
 msgstr ""
-"コミッションを得るには、まず Amazon Auto Links Pro のアフィリエイトプログラム"
-"に<a href=\"%1$s\" target=\"_blank\">加入</a>する必要があります。"
+"<a href=\"%1$s\"target=\"_blank\"></a>Amazon アソシエイトの利用規約によると、"
+"サイトにアフィリエイトの情報開示を表示する必要があります。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:214
-#, fuzzy
-#| msgid "Caches have been cleared."
 msgid "A page has been created."
-msgstr "キャッシュが消去されました。"
+msgstr "ページが作成されました。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:215
-#, fuzzy
-#| msgid "Could not get a user ID."
 msgid "Could not create a page."
-msgstr "ユーザー ID の取得ができませんでした。"
+msgstr "ページを作成できませんでした。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Tab_Disclosure.php:24
-#, fuzzy
-#| msgid "Discount"
 msgid "Disclosure"
-msgstr "割引"
+msgstr "情報開示"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:22
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Tab_Geotargeting.php:24
@@ -1725,12 +1716,9 @@ msgid "Non-plugin Links"
 msgstr "非プラグインリンク"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:59
-#, fuzzy, php-format
-#| msgid ""
-#| "Attempt to convert Amazon product links that are not generated by Amazon "
-#| "Auto Links."
+#, php-format
 msgid "Attempt to convert Amazon product links that are not generated by %1$s."
-msgstr "Amazon Auto Links で生成していない Amazon 商品リンクの変更を試みる。"
+msgstr "%1$s で生成していない Amazon 商品リンクの変更を試みる。"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:65
 msgid "API Providers"
@@ -1738,11 +1726,9 @@ msgstr "API 提供元"
 
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:66
 msgid "Check API providers you'd like to use."
-msgstr "使用する API プロバイダーをチェックします、"
+msgstr "使用する API プロバイダーを確認します。"
 
 #: include/core/component/gutenberg/unit_block/AmazonAutoLinks_GutenbergBlock_UnitBlock.php:51
-#, fuzzy
-#| msgid "Units"
 msgid "Unit"
 msgstr "ユニット"
 
@@ -1767,10 +1753,8 @@ msgstr "ユニット名"
 
 #: include/core/component/gutenberg/unit_block/src/index.js:48
 #: include/core/main/event/query/AmazonAutoLinks_Main_Event_UnitPreview.php:80
-#, fuzzy
-#| msgid "Select Units"
 msgid "Select a unit."
-msgstr "ユニットの選択"
+msgstr "ユニットの選択。"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:23
 msgid "Convert Links"
@@ -1807,11 +1791,11 @@ msgstr ""
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:80
 msgid "Hook Priority"
-msgstr ""
+msgstr "フックプライオリティ"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:81
 msgid "If the links are not converted, try increase the value."
-msgstr ""
+msgstr "リンクが変換されない場合は、値を増やしてください。"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:102
 msgid "Please set the default Amazon Associate ID first."
@@ -1825,10 +1809,8 @@ msgid "Go to <a href=\"%1$s\">set</a>."
 msgstr "<a href=\"%1$s\">設定</a> へ移動。"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:26
-#, fuzzy
-#| msgid "Converter"
 msgid "Link Converter"
-msgstr "コンバーター"
+msgstr "リンクコンバータ"
 
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Tab.php:50
 msgid "A main Associate ID needs to be set."
@@ -1847,7 +1829,7 @@ msgid "Include"
 msgstr "含ませる"
 
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:80
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
 msgid "Exclude"
 msgstr "除外する"
 
@@ -1886,102 +1868,93 @@ msgid "Form"
 msgstr "フォーム"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_Form.php:43
-#, fuzzy
-#| msgid "Renew Cache"
 msgid "Input Cache"
 msgstr "キャッシュの更新"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_Form.php:44
-#, fuzzy
-#| msgid "Set the unit name here."
 msgid "Delete the input cache."
 msgstr "ユニット名を入力してください。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:24
 msgid "UI"
-msgstr ""
+msgstr "UI"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:43
-#, fuzzy
-#| msgid "Custom Order"
 msgid "Meta-box Order"
-msgstr "カスタムオーダー"
+msgstr "メタボックスの順序"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:44
 msgid "Reset the plugin metabox order."
-msgstr ""
+msgstr "プラグインのメタボックスの順序をリセットする。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:50
 msgid "Meta-box Fold States"
-msgstr ""
+msgstr "メタボックスの開閉状態"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:51
 msgid "Reset the plugin metabox fold states."
-msgstr ""
+msgstr "プラグインのメタボックスの開閉状態をリセットする。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:57
 msgid "Screen Layout"
-msgstr ""
+msgstr "スクリーンレイアウト"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:58
 msgid "Reset the plugin screen layouts."
-msgstr ""
+msgstr "スクリーンレイアウトをリセットする。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:96
-#, fuzzy
-#| msgid "The action could not be processed."
 msgid "Plugin screen layouts could not be reset."
-msgstr "アクションは処理されませんでした。"
+msgstr "プラグインのスクリーンレイアウトをリセットできませんでした。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:112
 msgid "Plugin meta box order could not be reset."
-msgstr ""
+msgstr "プラグインのメタボックスの順序をリセットできませんでした。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Section_UI.php:127
 msgid "Plugin meta box fold state could not be reset."
-msgstr ""
+msgstr "プラグインのメタボックスの開閉状態をリセットできませんでした。"
 
 #: include/core/component/opt/admin/AmazonAutoLinks_Opt_Setting_Tab_Opt.php:25
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:52
 msgid "Opt"
-msgstr ""
+msgstr "オプト"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:103
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Thanks for <a href=\"%1$s\" target=\"_blank\">rating</a>"
-msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット !"
+msgstr "<a href=\"%1$s\" target=\"_blank\">評価</a>をありがとう"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:110
 msgid "Is the plugin useful?"
-msgstr ""
+msgstr "このプラグインは便利ですか?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:120
 msgid "Dismiss"
-msgstr ""
+msgstr "消去"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminFooter.php:127
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Thanks for <a href=\"%1$s\" target=\"_blank\">rating</a> %2$s"
-msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット !"
+msgstr "<a href=\"%1$s\" target=\"_blank\">評価</a>をありがとう %2$s"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:39
 msgid "Hi!"
-msgstr ""
+msgstr "こんにちは！"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:40
 msgid "The plugin needs to improve."
-msgstr ""
+msgstr "プラグインを改善する必要があります。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_AdminNotices.php:41
-msgid "Is it okay to ask you questions from time to time?"
-msgstr ""
+msgid ""
+"Is it okay to ask you questions about plugin improvements from time to time?"
+msgstr "時々プラグインのクオリティ向上の為の質問をしてもよろしいですか？"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:94
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:126
 msgid "Quick Feedback"
-msgstr ""
+msgstr "クイックフィードバック"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:95
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:150
@@ -1990,107 +1963,101 @@ msgstr "読込中 ..."
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:127
 msgid "If you have a moment, please let us know why you are deactivating."
-msgstr ""
+msgstr "少し時間があれば、なぜ無効化するのか教えてください。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:135
 msgid "Anonymous feedback"
-msgstr ""
+msgstr "匿名のフィードバック"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:139
-#, fuzzy
-#| msgid "Deactivate"
 msgid "Skip & Deactivate"
-msgstr "無効化"
+msgstr "スキップ＆無効化"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:140
-#, fuzzy
-#| msgid "Deactivate"
 msgid "Submit & Deactivate"
-msgstr "無効化"
+msgstr "送信＆無効化"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:141
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:117
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:168
 msgid "Cancel"
 msgstr "キャンセル"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:154
 msgid "The plugin is not working."
-msgstr ""
+msgstr "プラグインが動作していません。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:158
 msgid "Kindly share what didn't work so we can fix it for future users..."
 msgstr ""
+"上手くいかなかった事象を、将来のユーザーの為に修正できるように、親切の一環と"
+"して共有します。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:162
 msgid "I found a better plugin."
-msgstr ""
+msgstr "より良いプラグインを見つけました。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:166
 msgid "What's the plugin's name?"
-msgstr ""
+msgstr "そのプラグインの名前は何ですか？"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:170
 msgid ""
 "The plugin is great. But I need a specific feature that is not supported."
 msgstr ""
+"このプラグインは素晴らしいです。しかし、このプラグインにはサポートされていな"
+"い機能が必要です。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:174
 msgid "What feature?"
-msgstr ""
+msgstr "どのような機能でしょうか？"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:178
 msgid "I couldn't understand how to make it work."
-msgstr ""
+msgstr "私はこのプラグインを操作する方法を理解できませんでした。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:182
 msgid "The plugin didn't work as expected."
-msgstr ""
+msgstr "このプラグインは期待どおりに動作しませんでした。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:186
 msgid "What did you expect?"
-msgstr ""
+msgstr "あなたは何を期待していましたか?"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:190
 msgid "It's not what I was looking for."
-msgstr ""
+msgstr "それは私が探していたものではありませんでした。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:194
 msgid "What you've been looking for?"
-msgstr ""
+msgstr "何を探してたのでしょうか？"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:198
 msgid "It's a temporary deactivation. I'm just debugging an issue."
-msgstr ""
+msgstr "これは一時的な無効化です。ちょうど問題をデバッグしています。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:202
 msgid "Other."
-msgstr ""
+msgstr "その他。"
 
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:206
 #: include/core/component/opt/event/action/AmazonAutoLinks_Opt_Event_Action_SurveyPluginDeactivation.php:207
 msgid "Kindly tell us the reason so we can improve."
-msgstr ""
+msgstr "私たちが改善できるように、その理由を教えてください。"
 
 #: include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php:48
 msgid "Thank you!"
-msgstr ""
+msgstr "ありがとうございます！"
 
 #: include/core/component/opt/event/ajax/AmazonAutoLinks_Opt_Event_Ajax_PermissionSurvey.php:49
 msgid "All right."
-msgstr ""
+msgstr "承知しました。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:25
-#, fuzzy
-#| msgid "miunosoft Affiliate"
 msgid "Affiliate"
-msgstr "miunosoft アフィリエイト"
+msgstr "アフィリエイト"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:54
-#, fuzzy
-#| msgid "Amazon Auto Links Pro Affiliate ID"
 msgid "Auto Amazon Links Pro Affiliate ID"
-msgstr "Amazon Auto Links Pro アフィリエイト ID"
+msgstr "Auto Amazon Links Pro アフィリエイト ID"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:58
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Credit.php:25
@@ -2099,175 +2066,164 @@ msgid "Credit Link"
 msgstr "クレジットリンク"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:59
-#, fuzzy
-#| msgid ""
-#| "If you set your affiliate ID of Amazon Auto Links Pro here, the credit "
-#| "text at the bottom of unit outputs will be linked to the Amazon Auto "
-#| "Links Pro product page."
 msgid ""
 "If you set your affiliate ID of Auto Amazon Links Pro here, the credit text "
 "at the bottom of unit outputs will be linked to the Auto Amazon Links Pro "
 "product page."
 msgstr ""
-"Amazon Auto Links Pro のアフィリエイト ID を設定すると、ユニットの出力の最後"
-"のクレジット表記が Amazon Auto Links Pro にリンクされます。"
+"ここで Auto Amazon Links Pro のアフィリエイト ID を設定すると、ユニット出力の"
+"下部にあるクレジットテキストが Auto Amazon Links Pro の商品ページにリンクされ"
+"ます。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:62
-#, fuzzy
-#| msgid ""
-#| "Earn commissions by putting a link to the product page of Amazon Auto "
-#| "Links Pro in the credit link of unit outputs."
 msgid ""
 "Earn commissions by putting a link to the product page of Auto Amazon Links "
 "Pro in the credit link of unit outputs."
 msgstr ""
-"ユニットの出力の最後のクレジット表記を利用して Amazon Auto Links Pro のコミッ"
-"ション料を稼ぎましょう。"
+"ユニット出力のクレジットリンクに Auto Amazon Links Proの製品ページへのリンク"
+"を入れて手数料を獲得します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_Affiliate.php:64
-#, fuzzy, php-format
-#| msgid ""
-#| "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for "
-#| "Amazon Auto Links Pro affiliate program to get commisions."
+#, php-format
 msgid ""
 "You need to <a href=\"%1$s\" target=\"_blank\">sign up</a> first for Auto "
 "Amazon Links Pro affiliate program to get commisions."
 msgstr ""
-"コミッションを得るには、まず Amazon Auto Links Pro のアフィリエイトプログラム"
-"に<a href=\"%1$s\" target=\"_blank\">加入</a>する必要があります。"
+"手数料を得るには、まず Auto Amazon Links Pro のアフィリエイトプログラムに<a "
+"href=\"%1$s\" target=\"_blank\">加入</a>する必要があります。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:22
 msgid "Opt-in"
-msgstr ""
+msgstr "オプト・イン"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:25
 msgid "Decide whether to allow what the plugin asks you."
-msgstr ""
+msgstr "プラグインが求めてくる事に対して何を許可するか決定します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:38
 #: include/core/component/opt/utility/AmazonAutoLinks_Opt_Message.php:23
-#, fuzzy
-#| msgid "Rating stars"
 msgid "Five stars"
-msgstr "レートの星"
+msgstr "5つ星"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:45
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:62
 msgid "Survey"
-msgstr ""
+msgstr "アンケート"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:46
 msgid "Allow the plugin to ask you questionnaires from time to time."
-msgstr ""
+msgstr "プラグインが時々アンケートを尋ねる事を許可します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:53
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:70
 msgid "Announcement Feeds"
-msgstr ""
+msgstr "お知らせフィード"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:54
 msgid ""
 "Allow the plugin to load plugin announcement feeds from external sources and "
 "display them."
 msgstr ""
+"プラグインが外部ソースからプラグインアナウンスフィードを読み込んで表示できる"
+"事を許可します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:61
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:78
-#, fuzzy
-#| msgid "Set Amazon Associates tags."
 msgid "Developer's Amazon Associates Tags in Settings"
-msgstr "Amazon アソシエイトタグ (ID) を設定します。"
+msgstr "設定ページ上の開発者の Amazon アソシエイトタグ"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:62
 msgid ""
 "Allow the plugin to insert developer's Amazon Associates tags in the Amazon "
 "product links shown in the plugin setting pages."
 msgstr ""
+"プラグインの設定ページに表示される Amazon 製品のリンクに、開発者の Amazon ア"
+"ソシエイトタグを挿入することを許可します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:69
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:86
-#, fuzzy
-#| msgid "Log Data"
 msgid "Usage Data"
-msgstr "ログデータ"
+msgstr "使用データ"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:70
 msgid "Allow the plugin to collect plugin usage data."
-msgstr ""
+msgstr "このプラグインがプラグインの使用状況データを収集することを許可します。"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:77
-#, fuzzy
-#| msgid "Get Templates"
 msgid "New Template Feeds"
-msgstr "テンプレートを取得"
+msgstr "新しいテンプレートフィード"
 
 #: include/core/component/opt/in/admin/AmazonAutoLinks_Opt_In_Setting_Section_UserBase.php:78
 msgid "Allow the plugin to load new template feeds from external sources."
 msgstr ""
+"プラグインが外部ソースから新しいテンプレートフィードを読み込むことを許可しま"
+"す。"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:22
 msgid "Opt-out"
-msgstr ""
+msgstr "オプト・アウト"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:25
 msgid "Decide whether to disallow what the plugin asks you."
-msgstr ""
+msgstr "プラグインが求めてくる事に対して何を禁止するかどうかを決定します。"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:44
-#, fuzzy
-#| msgid "Preview"
 msgid "Plugin Review"
-msgstr "プレビュー"
+msgstr "プラグインレビュー"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:46
-#, fuzzy, php-format
-#| msgid "Get one <a href=\"%1$s\" target=\"_blank\">here</a>!"
+#, php-format
 msgid "Have you <a href=\"%1$s\" target=\"_blank\">rated the plugin</a>?"
-msgstr "<a href=\"%1$s\" target=\"_blank\">ここ</a>から一つゲット !"
+msgstr ""
+"このプラグインを <a href=\"%1$s\" target=\"_blank\">評価しましたか</a>?"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:63
 msgid ""
 "Never ask whether the plugin can ask you questionnaires from time to time."
 msgstr ""
+"プラグインが時々アンケートを尋ねることができるかどうかは決して尋ねないでくだ"
+"さい。"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:71
 msgid ""
 "Never ask whether the plugin can load plugin announcement feeds from "
 "external sources and display them."
 msgstr ""
+"プラグインが外部ソースからプラグインアナウンスフィードを読み込んで表示できる"
+"かどうかは決して尋ねないでください。"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:79
 msgid ""
 "Never ask whether the plugin can insert developer's Amazon Associates tags "
 "in the Amazon product links shown in the plugin setting pages."
 msgstr ""
+"プラグイン設定ページに表示される Amazon 製品のリンクに、プラグインが開発者の "
+"Amazon アソシエイトタグを挿入できるかどうかは決して尋ねないでください。"
 
 #: include/core/component/opt/out/admin/AmazonAutoLinks_Opt_Out_Setting_Section_UserBase.php:87
 msgid "Never ask whether the plugin can collect plugin usage data."
 msgstr ""
+"プラグインがプラグインの使用状況データを収集できるかどうかは決して尋ねないで"
+"ください。"
 
 #: include/core/component/opt/utility/AmazonAutoLinks_Opt_Message.php:26
-#, fuzzy, php-format
-#| msgid ""
-#| "Please consider upgrading to <a href=\"%1$s\" target=\"_blank\">Pro</a> "
-#| "to enable this feature."
+#, php-format
 msgid ""
 "Give the plugin <a href=\"%1$s\" target=\"_blank\">%2$s</a> to encourage the "
 "development!"
 msgstr ""
-"この機能を使うには<a href=\"%1$s\" target=\"_blank\">プロ版</a>へのアップグ"
-"レードのご検討をお願い致します。"
+"開発を奨励するためにこのプラグインに <a href=\"%1$s\" target=\"_blank\">"
+"%2$s</a> をお与え下さい！"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:61
 msgid "Enable proxies for regular HTTP requests that this plugin performs."
 msgstr "通常の HTTP リクエストに対してプロキシを有効にします。"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:65
-#, fuzzy, php-format
-#| msgid "API requests will not use %1$s"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:68
+#, php-format
 msgid "PA-API requests does not use %1$s."
-msgstr "API リクエストには %1$s は使用されません"
+msgstr "PA-API リクエストには %1$s は使用されません。"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
 msgid "HTTP proxies"
@@ -2338,7 +2294,7 @@ msgid "Last Run"
 msgstr "最後の実行"
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:171
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:238
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:253
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks.php:108
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
 msgid "n/a"
@@ -2350,7 +2306,7 @@ msgstr "n/a"
 msgid "Next scheduled at %1$s."
 msgstr "%1$s に次の予約。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:30
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:31
 #, php-format
 msgid ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a> is a type of proxy server that "
@@ -2359,82 +2315,81 @@ msgstr ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a> はプロキシサーバーの一種で HTTP "
 "リクエストをアシストします。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:64
 #, php-format
 msgid "Utilize %1$s to assist HTTP requests."
 msgstr "HTTP リクエストを補助するため %1$s を使用する。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:73
 msgid "List"
 msgstr "リスト"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:83
 #, php-format
 msgid "Enter addresses of %1$s one per line."
 msgstr "%1$s のアドレスを１行につき１つづつ入力します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:87
 #, php-format
 msgid "It is recommended to have your own %1$s for better performance."
 msgstr "パフォーマンスの観点からご自身専用の %1$s を利用することを推奨します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:90
 #, php-format
 msgid "To create one, see <a href=\"%1$s\">here</a>."
 msgstr "作成するには<a href=\"%1$s\">こちら</a>を参照。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:100
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:104
 msgid "Test"
 msgstr "テスト"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:105
 msgid "Check"
 msgstr "チェック"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:102
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
 msgid "Add to List"
 msgstr "リストに追加"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
-msgid "Type a URL of Web Page Dumper here to check if it is alive."
-msgstr ""
-"Web Page Dumper の動作確認をするには、ここに Web Page Dumper の URL を入力し"
-"ます。"
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:113
-#, fuzzy
-#| msgid "Updated"
-msgid "Update Required"
-msgstr "更新日"
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:128
-msgid ""
-"Some of your Web Page Dumper instances are outdated and will not function "
-"properly. Please update them to the latest."
-msgstr ""
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:129
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:111
 #, php-format
-msgid "The required Version is <code>%1$s</code> or above."
-msgstr ""
+msgid "Type a URL of %1$s here to check if it is alive."
+msgstr "%1$s の動作確認をするには、ここに URL を入力します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:133
-#, fuzzy, php-format
-#| msgid "To create one, see <a href=\"%1$s\">here</a>."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:118
+msgid "Update Required"
+msgstr "更新が必要です"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:134
+#, php-format
 msgid ""
-"To update a Web Page Dumper instance, please see <a href=\"%1$s\">here</a>."
-msgstr "作成するには<a href=\"%1$s\">こちら</a>を参照。"
+"Some of your %1$s instances are outdated and will not function properly. "
+"Please update them to the latest."
+msgstr ""
+"%1$s インスタンスの一部が古く、正しく機能しません。最新に更新してください。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:140
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:136
+#, php-format
+msgid "The required version is <code>%1$s</code> or above."
+msgstr "必要なバージョンは <code>%1$s</code> 、またはそれ以上です。"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:141
+#, php-format
+msgid "To update a %1$s instance, please see <a href=\"%2$s\">here</a>."
+msgstr ""
+"%1$s インスタンスを更新するには、<a href=\"%2$s\" >こちらを</a>参照してくださ"
+"い。"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:149
 msgid "Always"
 msgstr "常に"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:152
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
 #, php-format
 msgid "Always use %1$s for these URLs."
 msgstr "これらの URL に対して常に %1$s を適用します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:153
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:164
 #, php-format
 msgid ""
 "By default %1$s is used as a fallback when a regular HTTP request fails."
@@ -2442,20 +2397,20 @@ msgstr ""
 "初期状態では %1$s は通常の HTTP リクエストが失敗した際のフォールバックとして"
 "用いられます。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:154
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:166
 #, php-format
 msgid "For HTTP requests of these URL patterns will use %1$s first."
 msgstr ""
 "これらのパターンに該当するURL に対する HTTP リクエストは %1$s をまず使用しま"
 "す。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:155
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:174
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:167
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:188
 msgid "Set URL patterns with a wildcard one per line."
 msgstr "ワイルドカード (*) を含む URL パターンを1行毎に入力します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:156
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:169
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:190
 #, php-format
 msgid ""
 "The plugin uses <code><a href=\"%1$s\" target=\"_blank\">fnmatch()</a></"
@@ -2464,35 +2419,35 @@ msgstr ""
 "このプラグインは、このパターンと URL 文字列の照合を<code><a href=\"%1$s\" "
 "target=\"_blank\">fnmatch()</a></code> 関数を使用して行います。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:172
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
 #, php-format
 msgid "Do not use %1$s for these URLs."
 msgstr "これらの URL に対しては %1$s を使用しない。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:173
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:187
 msgid "The <code>Always</code> options takes precedence."
 msgstr "<code>常に</code>オプションが優先されます。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:201
 msgid "The list is empty."
 msgstr "リストが空です。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:26
-msgid "Web Page Dumper Help"
-msgstr "Web Page Dumper ヘルプ"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:27
+#, php-format
+msgid "%1$s Help"
+msgstr "%1$s ヘルプ"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:59
-#, fuzzy
-#| msgid "Create Your Own Web Page Dumper"
-msgid "Creating Your Own Web Page Dumper"
-msgstr "独自 Web Page Dumper の作成"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:61
+#, php-format
+msgid "Creating Your Own %1$s"
+msgstr "独自 %1$s の作成"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:64
-msgid "To create your own Web Page Dumper server, follow the below steps."
-msgstr ""
-"独自の Web Page Dumper  サーバーを作成するには以下のステップに従います。"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
+#, php-format
+msgid "To create your own %1$s server, follow the below steps."
+msgstr "独自の %1$s サーバーを作成するには以下のステップに従います。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:66
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:69
 #, php-format
 msgid ""
 "If you don't have a Heroku account, create one from <a href=\"%1$s\" target="
@@ -2501,18 +2456,18 @@ msgstr ""
 "もし Heroku のアカウントをお持ちで無い場合、<a href=\"%1$s\" target=\"_blank"
 "\">こちら</a>から作成します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:108
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:116
 #, php-format
 msgid "Log in to <a href=\"%1$s\" target=\"_blank\">Heroku</a>."
 msgstr "<a href=\"%1$s\" target=\"_blank\">Heroku</a>にログイン。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:74
 #, php-format
 msgid "Go to %1$s."
 msgstr "%1$s へ移動。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:75
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
 #, php-format
 msgid ""
 "You will be prompted to deploy the app. Enter your desired app name, for "
@@ -2521,82 +2476,83 @@ msgstr ""
 "アプリの配備を促されます。任意のアプリ名、例えば<code>%1$s</code>を入力し"
 "<code>%2$s</code>を押します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
 #, php-format
 msgid ""
 "Click on the <code>%1$s</code> button and from the <code>%2$s</code> link, "
-"go to the front page of Web Page Dumper."
+"go to the front page of %3$s."
 msgstr ""
-"<code>%1$s</code>ボタンをクリックし、<code>%2$s</code> のリンクから Web Page "
-"Dumper のホームページへ移動します。"
+"<code>%1$s</code>ボタンをクリックし、<code>%2$s</code> のリンクから %3$s の"
+"ホームページへ移動します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:89
 msgid "Copy the app address and enter it in the option."
 msgstr "アプリのアドレスをコピーしこの設定に入力します。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:91
-#, fuzzy
-#| msgid "Create Your Own Web Page Dumper"
-msgid "Updating Web Page Dumper"
-msgstr "独自 Web Page Dumper の作成"
-
 #: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:97
-#, fuzzy
-#| msgid "To create your own Web Page Dumper server, follow the below steps."
+#, php-format
+msgid "Updating %1$s"
+msgstr "%1$s を更新中"
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:104
 msgid "To update your Web Page Dumper instance, follow the below steps."
 msgstr ""
-"独自の Web Page Dumper  サーバーを作成するには以下のステップに従います。"
+"独自の Web Page Dumper サーバーを作成するには以下のステップに従います。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:99
-#, fuzzy, php-format
-#| msgid ""
-#| "<a href=\"%1$s\" target=\"_blank\">Sign up</a> for the affiliate program "
-#| "first."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:106
+#, php-format
 msgid ""
-"Have a <a href=\"%1$s\" target=\"_blank\">Github account</a> if you don't "
+"Have a <a href=\"%1$s\" target=\"_blank\">GitHub account</a> if you don't "
 "have yet."
 msgstr ""
-"まずアフィリエイトプログラムに<a href=\"%1$s\" target=\"_blank\">登録</a>しま"
-"しょう。"
+"まだ <a href=\"%1$s\" target=\"_blank\">GitHub アカウント</a> を持っていない"
+"場合、入手しましょう。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:109
 #, php-format
 msgid ""
 "Go to the <a href=\"%1$s\" target=\"_blank\">repository page</a> and fork "
-"the Web Page Dumper by pressing <code>%2$s</code>."
+"%2$s by pressing <code>%3$s</code>."
 msgstr ""
+"<a href=\"%1$s\" target=\"_blank\">リポジトリページ</a>に移動し、<code>%2$s</"
+"code>を押して %3$s をフォークします。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:105
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:113
 #, php-format
 msgid ""
 "If you already have a forked repository, click on <code>%1$s</code> and "
 "<code>%2$s</code>."
 msgstr ""
+"既にフォークされたリポジトリがある場合は、<code>%1$s</code> と <code>%2$s</"
+"code> をクリックします。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:110
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
 #, php-format
 msgid ""
-"Select your Web Page Dumper instance and from the <code>%1$s</code> tab, "
-"click on <strong>GitHub</strong> in the <code>Deployment method</code>."
+"Select your %1$s instance and from the <code>%2$s</code> tab, click on "
+"<strong>GitHub</strong> in the <code>%3$s</code>."
 msgstr ""
+"%1$s サーバーを選択し、<code>%2$s</code>タブから<code>%3$s</code>の "
+"<strong>GitHub</strong> をクリックします。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:111
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:121
 #, php-format
 msgid ""
 "Search the forked repository by typing <code>%1$s</code> and press <code>"
 "%2$s</code>. Then press <code>%3$s</code>."
 msgstr ""
+"<code>%1$s</code> と入力してフォークされたリポジトリを検索し、<code>%2$s</"
+"code> を押します。次に<code>%3$sを押します</code>。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:115
-#, fuzzy, php-format
-#| msgid "Default: <code>%1$s</code>"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:125
+#, php-format
 msgid "Press <code>%1$s</code>."
-msgstr "初期値: <code>%1$s</code>"
+msgstr "<code>%1$s を押します</code>。"
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:129
 #, php-format
 msgid "For the first time of doing this, you need to press <code>%1$s</code>."
-msgstr ""
+msgstr "これを初めて行う場合、<code>%1$s</code>を押す必要があります。"
 
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:46
 msgid "Please enter a URL."
@@ -2610,43 +2566,43 @@ msgstr "テスト中..."
 msgid "Already added."
 msgstr "既に追加済み。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:102
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:103
 #, php-format
 msgid ""
-"Please update the Web Page Dumper application. Your version: <code>%1$s</"
-"code>. Expected version: <code>%2$s</code> or above."
+"Please update the %1$s application. Your version: <code>%2$s</code>. "
+"Expected version: <code>%3$s</code> or above."
 msgstr ""
+"%1$s アプリケーションを更新してください。お使いのバージョン: <code>%2$s</"
+"code>。必須のバージョン: <code>%3$s</code> 以上。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:121
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
 msgid "Blocked by Captcha."
 msgstr "キャプチャによりブロックされました。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:125
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:46
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:116
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:167
 #: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:66
 msgid "OK"
 msgstr "OK"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:80
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:81
+#, php-format
 msgid ""
-"The following Web Page Dumper instances are outdated and will not run "
-"properly. Please update them."
-msgstr ""
+"The following %1$s instances are outdated and will not run properly. Please "
+"update them."
+msgstr "次の %1$s インスタンスは古く、正しく実行されません。更新してください。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:82
-#, fuzzy, php-format
-#| msgid "Go to <a href=\"%1$s\">set</a>."
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:83
+#, php-format
 msgid "See <a href=\"%1$s\">how</a>."
-msgstr "<a href=\"%1$s\">設定</a> へ移動。"
+msgstr "<a href=\"%1$s\">方法</a>を参照してください。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:92
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:93
 #, php-format
 msgid "Required version: <code>%1$s</code> or above."
-msgstr ""
+msgstr "必要なバージョン: <code>%1$s</code> 以上。"
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:99
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:100
 #: include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php:48
 #: include/core/component/template/admin/list_table/AmazonAutoLinks_ListTable_Template.php:223
 #: include/library/apf/factory/_common/form/field_type/system/AdminPageFramework_FieldType_system.php:69
@@ -2654,20 +2610,19 @@ msgstr ""
 msgid "Version"
 msgstr "バージョン"
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:43
-msgid "You have a captcha error. Consider enabling Web Page Dumper."
-msgstr ""
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:44
+#, php-format
+msgid "You have a captcha error. Consider enabling %1$s."
+msgstr "キャプチャ エラーがあります。%1$s を有効にすることを検討してください。"
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:105
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:106
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 msgid "The options have been updated."
 msgstr "設定が更新されました。"
 
 #: include/core/component/proxy/web_page_dumper/event/must/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable.php:48
-#, fuzzy
-#| msgid "Failed to load the unit."
 msgid "Failed to update the option."
-msgstr "ユニットの読み込みに失敗しました。"
+msgstr "オプションを更新できませんでした。"
 
 #: include/core/component/proxy/web_page_dumper/event/must/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_Enable.php:50
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:137
@@ -2675,10 +2630,9 @@ msgid "Enabled"
 msgstr "有効"
 
 #: include/core/component/proxy/web_page_dumper/event/must/filter/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Filter_CategorySelectionReloadMessage.php:38
-#, fuzzy, php-format
-#| msgid "Enable"
+#, php-format
 msgid "Enable %1$s"
-msgstr "有効にする"
+msgstr "%1$s を有効にする"
 
 #: include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php:48
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:138
@@ -2701,10 +2655,8 @@ msgid "Get New"
 msgstr "新しいものを取得"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:43
-#, fuzzy
-#| msgid "Something went wrong with the Ajax request."
 msgid "Something went wrong."
-msgstr "Ajax リクエストにおいて何か問題が置きました。"
+msgstr "何か問題が置きました。"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:88
 #, php-format
@@ -2713,16 +2665,16 @@ msgstr "あなたのテンプレートをこのリストに追加するには %1
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:96
 msgid "Do not load automatically"
-msgstr ""
+msgstr "自動的に読み込まない"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:106
 msgid "Click the button to load available templates!"
-msgstr ""
+msgstr "ボタンをクリックすることで、使用可能なテンプレートが表示されます！"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_GetNew.php:107
 #, php-format
 msgid "This will access <code>%1$s</code> to retrieve data."
-msgstr ""
+msgstr "データを取得するために <code>%1$s</code> にアクセスします。"
 
 #: include/core/component/template/admin/AmazonAutoLinks_AdminPage_Template_ListTable.php:27
 msgid "Installed"
@@ -2767,39 +2719,35 @@ msgid "At least one item needs to be checked."
 msgstr "少なくとも１つの項目がチェックされている必要があります。"
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:86
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been removed."
-msgstr "アップロードされたファイルはインポートされました。"
+msgstr "テンプレート %1$s は削除されました。"
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:93
-#, fuzzy, php-format
-#| msgid "The action could not be processed."
+#, php-format
 msgid "The template, %1$s, could not be removed."
-msgstr "アクションは処理されませんでした。"
+msgstr "テンプレート %1$s を削除できませんでした。"
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:153
 msgid ""
 "The given template does not exist so could not toggle the activation status."
 msgstr ""
+"指定されたテンプレートが存在しないため、有効化状態を切り替えることができませ"
+"んでした。"
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:235
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been activated."
-msgstr "アップロードされたファイルはインポートされました。"
+msgstr "テンプレート %1$s が有効化されました。"
 
 #: include/core/component/template/event/action/AmazonAutoLinks_Template_Event_Action_ActivationStatus.php:236
-#, fuzzy, php-format
-#| msgid "The uploaded file has been imported."
+#, php-format
 msgid "The template, %1$s, has been deactivated."
-msgstr "アップロードされたファイルはインポートされました。"
+msgstr "テンプレート %1$s は無効化されました。"
 
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:57
-#, fuzzy
-#| msgid "No items found."
 msgid "No templates found."
-msgstr "項目が見つかりません。"
+msgstr "テンプレートが見つかりません。"
 
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:86
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:92
@@ -2811,16 +2759,20 @@ msgid ""
 "This is a duplicate of an already listed template and can cause issues so "
 "please remove it using the action link."
 msgstr ""
+"これは既にリストされているテンプレートの複製であり、問題が発生する可能性があ"
+"るため、アクションリンクを使用して削除してください。"
 
 #: include/core/component/template/event/filter/AmazonAutoLinks_Template_Event_Filter_TemplateListWarning.php:70
 msgid "The plugin cannot load the template."
-msgstr ""
+msgstr "プラグインはテンプレートを読み込めません。"
 
 #: include/core/component/template/event/filter/AmazonAutoLinks_Template_Event_Filter_TemplateListWarning.php:71
 msgid ""
 "Please remove this from the action link. If there are associated units to "
 "this template, please update their template unit setting."
 msgstr ""
+"アクションリンクから削除してください。このテンプレートに関連するユニットがあ"
+"る場合は、テンプレートユニットオプションを更新してください。"
 
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting.php:42
 msgid "A default Associate ID needs to be set."
@@ -2860,27 +2812,23 @@ msgid ""
 "The Amazon Associates Link Builder plugin needs to be deactivated to "
 "property handle their block contents."
 msgstr ""
-"適切に Amazon Associates Link Builder プラグインのブロックコンテンツを処理す"
-"るには、Amazon Associates Link Builderを無効にして下さい。"
+"Amazon Associates Link Builder プラグインのブロックコンテンツを適切に処理する"
+"には、Amazon Associates Link Builderを無効にして下さい。"
 
 #: include/core/component/third_party_support/phpzon/admin/AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon.php:29
 msgid "Parse the shortcode of the PhpZon plugin."
-msgstr "PhpZon プラグインのショートコードを解析する。"
+msgstr "PhpZon プラグインのショートコードを解析します。"
 
 #: include/core/component/third_party_support/phpzon/admin/AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon.php:54
 msgid "Shortcodes"
 msgstr "ショートコード"
 
 #: include/core/component/third_party_support/phpzon/admin/AmazonAutoLinks_PhpZonSupport_Setting_3rdParty_PhpZon.php:55
-#, fuzzy
-#| msgid ""
-#| "Check the shortcode of PhpZon to convert its outputs into Amazon Auto "
-#| "Links'."
 msgid ""
 "Check the shortcode of PhpZon to convert its outputs into Auto Amazon Links'."
 msgstr ""
-"PhpZon のショートコードで Amazon Auto Links の出力にコンバートさせたいものを"
-"チェックします。"
+"PhpZon のショートコードをチェックして、その出力を Auto Amazon Links に変換し"
+"ます。"
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:125
 #: include/core/component/unit/unit_option_converter/admin/AmazonAutoLinks_UnitOptionConverter_Setting.php:35
@@ -2905,7 +2853,7 @@ msgstr "プロダクトフィルター詳細"
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:175
 msgid "Publish"
-msgstr ""
+msgstr "公開"
 
 #: include/core/component/unit/AmazonAutoLinks_Unit_Loader.php:185
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:70
@@ -2981,7 +2929,7 @@ msgstr "初期値: <code>%1$s</code>"
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Tab_Associates.php:78
 #: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:82
 msgid "Associate ID"
-msgstr "アソシエイトID"
+msgstr "アソシエイト ID"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:34
 msgid "A maximum number of products to display."
@@ -3054,8 +3002,6 @@ msgid "The allowed character length for the description."
 msgstr "詳細に対する許容文字数。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Common.php:90
-#, fuzzy
-#| msgid "Set -1 for no limit."
 msgid "Set <code>-1</code> for no limit."
 msgstr "無制限は -1 を設定。"
 
@@ -3080,16 +3026,16 @@ msgid "Show errors as an HTML comment."
 msgstr "HTML コメントとしてエラーを表示させる。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:31
-#, fuzzy
-#| msgid "Define where you want to display units on the site."
 msgid "Determines how you like to display unit errors."
-msgstr "サイト上のどの場所にユニットを表示させるか定義します。"
+msgstr "ユニットエラーの表示方法を指定します。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:32
 msgid ""
 "For logged-in users who have the privilege to edit units, unit errors will "
 "be displayed regardless of this option"
 msgstr ""
+"ユニットを編集する権限を持つログインユーザーの場合、このオプションに関係なく"
+"ユニットエラーが表示されます"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:38
 msgid "Load with JavaScript"
@@ -3100,14 +3046,12 @@ msgid "Load the output with JavaScript."
 msgstr "JavaScript での出力を読み込む。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:45
-#, fuzzy
-#| msgid "No Preview"
 msgid "Pop-up Image Preview"
-msgstr "プレビューはありません"
+msgstr "ポップアップイメージプレビュー"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:46
 msgid "Show pop-up image previews on mouseover."
-msgstr ""
+msgstr "マウスオーバーでポップアップ画像のプレビューを表示します。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_CommonAdvanced.php:52
 msgid "Now Loading Text"
@@ -3271,6 +3215,9 @@ msgid ""
 "a> and get an affiliate ID. Then earn commissions by setting it <a href="
 "\"%2$s\">here</a>."
 msgstr ""
+"<a href=\"%1$s\" target=\"_blank\">Pro アフィリエイトプログラム</a>に参加し、"
+"アフィリエイトIDを取得します。その後、それを<a href=\"%2$s\">ここで</a>設定す"
+"ることによって手数料を獲得できます。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Locale.php:40
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:208
@@ -3405,15 +3352,11 @@ msgid "Custom Text"
 msgstr "カスタムテキスト"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:74
-#, fuzzy
-#| msgid ""
-#| "The text replaced with the <code>%text%</code> tag in the <b>Unit "
-#| "Format<b> option."
 msgid ""
 "The text replaced with the <code>%text%</code> tag in the <b>Unit Format</b> "
 "option."
 msgstr ""
-"<b>ユニットフォーマット</b>オプションにおける<code>%text%</code>と置換される"
+"<b>ユニットフォーマット</b>オプションにおいて<code>%text%</code>と置換される"
 "テキスト。"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:84
@@ -3449,7 +3392,7 @@ msgstr "タイトルフォーマット設定で定められた HTML タグ付き
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:238
 msgid "a title without HTML tags"
-msgstr "HTML タグ無しのタイトル"
+msgstr "HTML タグのないタイトル"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:242
 msgid "a thumbnail with HTML tags defined in the Image Format option"
@@ -3465,19 +3408,17 @@ msgstr "画像サイズ設定で指定されたサムネイルのサイズ"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:254
 msgid "a description with HTML tags"
-msgstr "HTML タグ付きの商品説明"
+msgstr "HTML タグを含む説明"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:258
 msgid "a description without HTML tags"
-msgstr "HTML タグ無しの商品説明"
+msgstr "HTML タグを含まない説明"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:262
 msgid "a product price"
 msgstr "プロダクト価格"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:266
-#, fuzzy
-#| msgid "Discount Rate"
 msgid "discount percentage"
 msgstr "ディスカウント率"
 
@@ -3503,7 +3444,7 @@ msgstr "更新日"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:290
 msgid "a full product HTML description"
-msgstr "HTML タグ付きでのプロダクトの全説明"
+msgstr "HTML タグを含む商品の全説明"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:294
 msgid "meta data of the product"
@@ -3514,10 +3455,8 @@ msgid "the author of the product"
 msgstr "商品の著作者"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:302
-#, fuzzy
-#| msgid "a title without HTML tags"
 msgid "the author text without HTML tags"
-msgstr "HTML タグ無しのタイトル"
+msgstr "HTML タグを含まない著作者テキスト"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:306
 msgid "categories that the product belongs to"
@@ -3572,7 +3511,7 @@ msgstr "タイトル"
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:393
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:429
 msgid "description without HTML tags"
-msgstr "HTML タグなしの詳細"
+msgstr "HTML タグを含まない商品詳細"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:414
 msgid "Image Format"
@@ -3596,169 +3535,6 @@ msgstr "イメージサイズ"
 #: include/core/main/admin/setting/general/AmazonAutoLinks_AdminPage_Setting_General_ProductFilters.php:27
 msgid "Set the criteria to filter fetched items."
 msgstr "取得アイテムをフィルターする条件を定めます。"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:65
-#, fuzzy
-#| msgid "Status"
-msgid "Status:"
-msgstr "状態"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:70
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:105
-msgid "Privately Published"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:73
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:103
-#, fuzzy
-#| msgid "Refurbished"
-msgid "Published"
-msgstr "整備済"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:76
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:107
-msgid "Scheduled"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:79
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:109
-#, fuzzy
-#| msgid "Unit Preview"
-msgid "Pending Review"
-msgstr "ユニットプレビュー"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:83
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:111
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:113
-msgid "Draft"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:96
-#, fuzzy
-#| msgid "Edit Button"
-msgid "Edit status"
-msgstr "ボタンの編集"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:100
-#, fuzzy
-#| msgid "Status"
-msgid "Set status"
-msgstr "状態"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:125
-#, fuzzy
-#| msgid "Visibility"
-msgid "Visibility:"
-msgstr "可視性"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:131
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:164
-#, fuzzy
-#| msgid "Activate"
-msgid "Private"
-msgstr "有効化"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:134
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:161
-msgid "Password protected"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:137
-msgid "Public, Sticky"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:140
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:155
-msgid "Public"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:148
-#, fuzzy
-#| msgid "Visibility"
-msgid "Edit visibility"
-msgstr "可視性"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:158
-#, fuzzy
-#| msgid "Link to the product page."
-msgid "Stick this post to the front page"
-msgstr "プロダクトページにリンクする。"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:162
-msgid "Password:"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:176
-#, php-format
-msgid "%1$s at %2$s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:178
-msgid "M j, Y"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:180
-msgid "H:i"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:184
-#, fuzzy, php-format
-#| msgid "Next scheduled at %1$s."
-msgid "Scheduled for: %s"
-msgstr "%1$s に次の予約。"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:187
-#, php-format
-msgid "Published on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:189
-msgid "Publish <b>immediately</b>"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:192
-#, php-format
-msgid "Schedule for: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:195
-#, php-format
-msgid "Publish on: %s"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:211
-#, fuzzy
-#| msgid "Edit Categories"
-msgid "Edit date and time"
-msgstr "カテゴリーの編集"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:214
-#, fuzzy
-#| msgid "Date Range"
-msgid "Date and time"
-msgstr "期間"
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:228
-#, php-format
-msgid ""
-"This draft comes from your <a href=\"%s\">unpublished customization changes</"
-"a>. You can edit, but there&#8217;s no need to publish now. It will be "
-"published automatically with those changes."
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Move to Trash"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:251
-msgid "Delete permanently"
-msgstr ""
-
-#: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Submit.php:260
-#, fuzzy
-#| msgid "Updated"
-msgid "Update"
-msgstr "更新日"
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ViewLink.php:37
 msgid "View Unit"
@@ -3861,35 +3637,28 @@ msgid "Unit Type"
 msgstr "ユニットタイプ"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:227
-#, fuzzy
-#| msgid "Template"
 msgid "Template ID"
-msgstr "テンプレート"
+msgstr "テンプレート ID"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:228
 msgid "Unsaved"
-msgstr ""
+msgstr "非保存"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:245
-#, fuzzy, php-format
-#| msgid ""
-#| "the template could not be found. Try reselecting the template in the unit "
-#| "option page."
+#, php-format
 msgid "The template is not activated. Try activating the template via %1$s."
 msgstr ""
-"テンプレートが見つかりませんでした。ユニット定義ページでテンプレートを再度選"
-"択してください。"
+"テンプレートは有効化されていません。%1$s 経由でテンプレートを有効化してみてく"
+"ださい。"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:245
-#, fuzzy
-#| msgid "Sets a default template for this unit."
 msgid "The default template will be applied instead."
-msgstr "このユニットに対するデフォルトのテンプレートを設定します。"
+msgstr "代わりに、既定のテンプレートが適用されます。"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:246
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:251
 msgid "Dashboard"
-msgstr ""
+msgstr "ダッシュボード"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:250
 #, php-format
@@ -3898,6 +3667,9 @@ msgid ""
 "unit does not solve the issue, consult the plugin developer with the "
 "following template ID and the template options found in %1$s"
 msgstr ""
+"いくつかの理由により、このユニットのテンプレートは保存されていません。ユニッ"
+"トを再保存しても問題が解決しない場合は、次のテンプレート ID と %1$s にあるテ"
+"ンプレート オプションをプラグイン開発者に相談してください。"
 
 #: include/core/component/unit/_common/post_type/unit/AmazonAutoLinks_PostType_Unit_ListTable.php:251
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help.php:25
@@ -3944,10 +3716,9 @@ msgid "Copy"
 msgstr "コピー"
 
 #: include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:46
-#, fuzzy, php-format
-#| msgid "The following unit(s) failed to be cloned."
+#, php-format
 msgid "The following unit(s) failed to be cloned: %1$s"
-msgstr "次のユニットの複製に失敗しました。"
+msgstr "次のユニットの複製に失敗しました: %1$s"
 
 #: include/core/component/unit/_common/post_type/unit/action/clone_unit/AmazonAutoLinks_ListTableAction_clone_unit.php:53
 msgid "The unit has been cloned successfully."
@@ -3987,7 +3758,7 @@ msgstr "閲覧 &#8220;%s&#8221;"
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Admin_Utility.php:56
 #, php-format
 msgid "Set up an Associate ID first for your main locale, %1$s."
-msgstr ""
+msgstr "メインの国 %1$s 用のアソシエイト ID を設定します。"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Admin_Utility.php:81
 msgid "You need to set API keys first."
@@ -3998,10 +3769,9 @@ msgid "Manage Units"
 msgstr "ユニットの管理"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:37
-#, fuzzy, php-format
-#| msgid "%1$s by Unit"
+#, php-format
 msgid "%1$s Unit"
-msgstr "ユニットによる%1$s"
+msgstr "%1$s ユニット"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:38
 #: include/core/component/unit/unit_type/category/admin/admin_page/AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect.php:26
@@ -4032,16 +3802,12 @@ msgid "Search Units"
 msgstr "ユニットの検索"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:46
-#, fuzzy
-#| msgid "No unit found for Amazon Auto Links"
 msgid "No unit found for Auto Amazon Links"
-msgstr "Amazon Auto Links のユニットは見つかりませんでした"
+msgstr "Auto Amazon Links のユニットは見つかりませんでした"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:47
-#, fuzzy
-#| msgid "No Unit Found for Amazon Auto Links in Trash"
 msgid "No Unit Found for Auto Amazon Links in Trash"
-msgstr "ゴミ箱には Amazon Auto Links のユニットは見つかりませんでした"
+msgstr "ゴミ箱には Auto Amazon Links のユニットは見つかりませんでした"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:48
 msgid "Parent Unit"
@@ -4055,7 +3821,7 @@ msgstr "ユニット"
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:411
 #, php-format
 msgid "%1$s%% Off"
-msgstr ""
+msgstr "%1$s%% オフ"
 
 #: include/core/component/unit/_common/utility/AmazonAutoLinks_Unit_Utility.php:830
 #, php-format
@@ -4101,8 +3867,7 @@ msgstr "グラフ"
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:27
 msgid "Shows how many times the plugin performed PA-API requests."
-msgstr ""
-"PA-API のリクエストがこのプラグインによって何回実行されたかを表示します。"
+msgstr "PA-API リクエストがプラグインによって何回実行されたかを表示します。"
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_Chart.php:53
 #, php-format
@@ -4177,7 +3942,7 @@ msgstr "Product Advertising API リクエストカウンター"
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:46
 msgid "Log PA-API request counts."
-msgstr "PA-API リクエストカウントのログ。"
+msgstr "PA-API リクエストカウントを記録します。"
 
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:50
 msgid "Retention Period"
@@ -4288,14 +4053,9 @@ msgstr ""
 
 #: include/core/component/unit/unit_type/_common/admin/page/AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase.php:104
 #: include/core/component/unit/unit_type/ad_widget_search/admin/page/AmazonAutoLinks_Unit_UnitType_AdminPages_Page_ad_widget_search.php:48
-#, fuzzy
-#| msgid ""
-#| "The URL unit type allows you to search products found in the page with "
-#| "specified urls."
 msgid "The search unit type allows you to search products with keywords."
 msgstr ""
-"URL ユニットタイプは指定された URL のページで見つかったプロダクトを表示させま"
-"す。"
+"検索ユニットタイプを使用すると、キーワードを使用して製品を検索できます。"
 
 #: include/core/component/unit/unit_type/_common/admin/tab/AmazonAutoLinks_Unit_UnitType_Admin_Tab_SearchUnit_Second_Base.php:31
 msgid "Create a unit."
@@ -4596,15 +4356,13 @@ msgid "Failed to generate the breadcrumb."
 msgstr "パンくずリストの生成に失敗しました。"
 
 #: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:250
-#, fuzzy, php-format
-#| msgid ""
-#| "If this continues, try enabling the proxy from <a href=\"%1$s\">here</a>."
+#, php-format
 msgid ""
 "If this continues, try enabling <a href=\"%1$s\" target=\"_blank\">proxies</"
 "a>."
 msgstr ""
-"もしこれが続くようでしたら、<a href=\"%1$s\">こちら</a>からプロキシを有効にし"
-"てみてください。"
+"もしこれが続くようでしたら、<a href=\"%1$s\">プロキシ</a>を有効にしてみてくだ"
+"さい。"
 
 #: include/core/component/unit/unit_type/category/event/ajax/AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection.php:255
 msgid "Reload"
@@ -4689,13 +4447,10 @@ msgid "JSON Feed URL"
 msgstr "JSON フィード URL"
 
 #: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:58
-#, fuzzy
-#| msgid ""
-#| "Paste the JSON feed URL of an Amazon Auto Links unit on an external site."
 msgid ""
 "Paste the JSON feed URL of an Auto Amazon Links unit on an external site."
 msgstr ""
-"Amazon Auto Links ユニットが存在する外部サイトの JSON フィード URL をペースト"
+"Auto Amazon Links ユニットが存在する外部サイトの JSON フィード URL をペースト"
 "します。"
 
 #: include/core/component/unit/unit_type/feed/admin/form_field/AmazonAutoLinks_FormFields_FeedUnit_Main.php:76
@@ -4713,16 +4468,12 @@ msgid "Add Feed Unit"
 msgstr "フィードユニットの追加"
 
 #: include/core/component/unit/unit_type/feed/admin/page/AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit.php:57
-#, fuzzy
-#| msgid ""
-#| "The feed unit type allows you to import unit data of external sites that "
-#| "set up Amazon Auto Links. Make use of this unit to save API calls."
 msgid ""
 "The feed unit type allows you to import unit data of external sites that set "
 "up Auto Amazon Links. Make use of this unit to save API calls."
 msgstr ""
-"フィードユニットタイプは Amazon Auto Links がセットアップされてある外部サイト"
-"のユニットデータをインポートしします。API の呼び出し回数を節約するのに使えま"
+"フィードユニットタイプは Auto Amazon Links がセットアップされてある外部サイト"
+"のユニットデータをインポートします。API の呼び出し回数を節約するのに使えま"
 "す。"
 
 #: include/core/component/unit/unit_type/feed/admin/page/AmazonAutoLinks_Unit_UnitType_Feed_Admin_Page_FeedUnit.php:58
@@ -4754,26 +4505,21 @@ msgid "Item Look-up Advanced"
 msgstr "単品検索詳細"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:141
-#, fuzzy
-#| msgid "Item Look-up"
 msgid "PA-API Item Look-up"
-msgstr "単品検索"
+msgstr "PA-API 単品検索"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:149
 msgid "Item Look-up"
 msgstr "単品検索"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/AmazonAutoLinks_Unit_UnitType_Loader_item_lookup.php:157
-#, fuzzy
-#| msgid ""
-#| "returns some or all of the item attributes with the given item identifier."
 msgid ""
 "Returns some or all of the item attributes with the given item identifier."
-msgstr "与えられた項目にあたる属性の商品。"
+msgstr "指定された項目識別子を持つ項目の属性の一部またはすべてを返します。"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup.php:25
 msgid "Add Unit by PA-API Item Look-up"
-msgstr ""
+msgstr "PA-API 単品検索でユニットを追加"
 
 #: include/core/component/unit/unit_type/paapi_item_lookup/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_item_lookup.php:26
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php:26
@@ -4867,26 +4613,18 @@ msgid "Product Search Advanced"
 msgstr "プロダクト検索詳細"
 
 #: include/core/component/unit/unit_type/paapi_product_search/AmazonAutoLinks_Unit_UnitType_Loader_search.php:187
-#, fuzzy
-#| msgid "Product Search"
 msgid "PA-API Product Search"
-msgstr "商品検索"
+msgstr "PA-API 商品検索"
 
 #: include/core/component/unit/unit_type/paapi_product_search/AmazonAutoLinks_Unit_UnitType_Loader_search.php:195
-#, fuzzy
-#| msgid ""
-#| "returns items that satisfy the search criteria in the title and "
-#| "descriptions."
 msgid ""
 "Returns items that satisfy the search criteria in the title and descriptions."
-msgstr "タイトルと詳細に適用する検索条件を満たす商品。"
+msgstr "タイトルと説明の検索条件を満たす項目を返します。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit.php:26
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:25
-#, fuzzy
-#| msgid "Add Unit by URL"
 msgid "Add Unit by PA-API"
-msgstr "URL ユニットの追加"
+msgstr "PA-API でユニットを追加"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First.php:26
 msgid "Select the search type."
@@ -4897,10 +4635,8 @@ msgid "Select a search type."
 msgstr "プロダクトタイプを選択します。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/admin_page/AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_Second_search_products.php:25
-#, fuzzy
-#| msgid "Add Unit by Search"
 msgid "Add Unit by PA-API Product Search"
-msgstr "検索ユニットの追加"
+msgstr "PA-API 検索ユニットの追加"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:65
 msgid "Query per Term"
@@ -4982,11 +4718,11 @@ msgstr "新着順によるソートを結果に適用します。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:118
 msgid "Shuffle"
-msgstr ""
+msgstr "シャッフル"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearch.php:120
 msgid "Shuffle products to change the order."
-msgstr ""
+msgstr "順序を変更するためにシャッフルします。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:26
 msgid ""
@@ -5039,13 +4775,11 @@ msgid ""
 msgstr "多くの商品はすぐに品切れになるため、それらの商品を除外します。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:73
-#, fuzzy
-#| msgid "If the search index is All, this option does not take effect."
 msgid ""
 "If the search index is <code>All</code>, this option does not take effect."
 msgstr ""
-"もし検索インデックスが 「すべて」に設定されている場合、このオプションは反映さ"
-"れません。"
+"検索インデックスが <code>すべて</code>の場合、このオプションは有効になりませ"
+"ん。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/AmazonAutoLinks_FormFields_SearchUnit_ProductSearchAdvanced.php:78
 msgid "Maximum Price"
@@ -5202,21 +4936,16 @@ msgid "Similar Products"
 msgstr "よく似た商品"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:37
-#, fuzzy, php-format
-#| msgid ""
-#| "To use a preset ID, set it in the <a href=\"%1$s\">Amazon Associates</a> "
-#| "section."
+#, php-format
 msgid ""
 "If the country is not listed, set PA-API keys in the <a href=\"%1$s"
 "\">Associates</a> section."
 msgstr ""
-"予め設定された ID を使用するには、 <a href=\"%1$s\">Amazon アソシエイト</a> "
-"セクションで設定します。"
+"国がリストされていない場合は、PA-API キーを <a href=\"%1$s\">Amazon アソシエ"
+"イト</a>セクションで設定します。"
 
 #: include/core/component/unit/unit_type/paapi_product_search/admin/form_field/_common/first/AmazonAutoLinks_FormFields_SearchUnit_SearchType.php:52
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:38
-#, fuzzy
-#| msgid "Types"
 msgid "Type"
 msgstr "種類"
 
@@ -5241,44 +4970,33 @@ msgid "Used from %1$s"
 msgstr "中古 %1$s より"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:101
-#, fuzzy
-#| msgid "ScratchPad Payload Main"
 msgid "Custom Payload Main"
-msgstr "ScratchPad ペイロードメイン"
+msgstr "カスタムペイロード - メイン"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:138
 msgid "PA-API Custom Payload"
-msgstr ""
+msgstr "PA-API カスタムペイロード"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:146
-#, fuzzy
-#| msgid "Custom Order"
 msgid "Custom Payload"
-msgstr "カスタムオーダー"
+msgstr "カスタムペイロード"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/AmazonAutoLinks_Unit_UnitType_Loader_scratchpad_payload.php:155
-#, fuzzy, php-format
-#| msgid ""
-#| "Set the payload value generated on <a href=\"%1$s\" target=\"_blank"
-#| "\">ScratchPad</a>."
+#, php-format
 msgid ""
 "Returns items using a custom payload generated with <a target=\"_blank\" "
 "href=\"%1$s\">ScratchPad</a>."
 msgstr ""
-"<a href=\"%1$s\" target=\"_blank\">Scratchpad</a> で生成したペイロードの値を"
-"入力します。"
+"<a href=\"%1$s\" target=\"_blank\">ScratchPad</a> で生成されたカスタムペイ"
+"ロードを用いて商品データを返します。"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:25
-#, fuzzy
-#| msgid "Add Unit by ScratchPad Payload"
 msgid "Add Unit by PA-API Custom Payload"
-msgstr "ScratchPad ペイロードでユニットを追加"
+msgstr "PA-API カスタムペイロードでユニットを追加"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:26
-#, fuzzy
-#| msgid "Create a unit."
 msgid "Create a unit by custom payload."
-msgstr "ユニットを作成します。"
+msgstr "カスタムペイロードを用いてユニットを作成します。"
 
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/admin_page/AmazonAutoLinks_ScratchPadUnit_Admin_Tab_Second.php:59
 #: include/core/component/unit/unit_type/paapi_scratchpad_payload/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_Main_scratchpad_payload.php:60
@@ -5537,7 +5255,7 @@ msgstr "ファイルアクセス権"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_About.php:100
 msgid "Paths"
-msgstr ""
+msgstr "パス"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:25
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_ChangeLog.php:45
@@ -5597,10 +5315,8 @@ msgid "Multiple Columns"
 msgstr "複数カラム"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:102
-#, fuzzy
-#| msgid "Select Template"
 msgid "Carousel Template"
-msgstr "テンプレートの選択"
+msgstr "カルーセルテンプレート"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_GetPro.php:107
 msgid "Advanced Search Options"
@@ -5651,13 +5367,11 @@ msgstr "ティップス"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:29
 msgid "If you find unexpected behaviour of the plugin, please report it."
-msgstr ""
+msgstr "プラグインの予期しない動作を見つけた場合は、それを報告してください。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:47
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:46
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:56
-#, fuzzy
-#| msgid "Name"
 msgid "Your Name"
 msgstr "名前"
 
@@ -5665,48 +5379,46 @@ msgstr "名前"
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:53
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:63
 msgid "Your name."
-msgstr ""
+msgstr "名前。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:59
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:58
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:70
 msgid "Your Email Address"
-msgstr ""
+msgstr "メールアドレス"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:64
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:63
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:75
 msgid "Type your email that the developer replies back to."
-msgstr ""
+msgstr "開発者が返信するメールを入力します。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:69
 msgid "Expected Behavior"
-msgstr ""
+msgstr "期待される動作"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:74
 msgid "Tell how the framework should work."
-msgstr ""
+msgstr "フレームワークがどのように動作すべきか記述します。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:82
 msgid "Actual Behavior"
-msgstr ""
+msgstr "実際の動作"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:87
 msgid "Describe the behavior of the framework."
-msgstr ""
+msgstr "フレームワークの動作について説明します。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:95
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:112
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:98
 msgid "Screenshots"
-msgstr ""
+msgstr "スクリーンショット"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:107
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:120
-#, fuzzy
-#| msgid "Information"
 msgid "Confirmation"
-msgstr "お知らせ"
+msgstr "確認"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:108
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:121
@@ -5718,79 +5430,69 @@ msgstr "必須"
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:126
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:135
 msgid "Send"
-msgstr ""
+msgstr "送信"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:127
-#, fuzzy
-#| msgid "Thank you for creating with"
 msgid "Thanks for reporting!"
-msgstr "作成ありがとうございます"
+msgstr "ご報告に感謝します！"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:29
 msgid "Tell us about your experience with the plugin!"
-msgstr ""
+msgstr "プラグインの使用経験について教えてください!"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:86
 msgid "What do you like about the plugin?"
-msgstr ""
+msgstr "このプラグインのどこが好きですか?"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:91
 msgid "Tell us what you use the plugin for mainly."
-msgstr ""
+msgstr "このプラグインの主用目的について教えてください。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:99
-#, fuzzy
-#| msgid "Deactivating the plugin"
 msgid "What are missing in the plugin?"
-msgstr "プラグインの停止中"
+msgstr "このプラグインに欠けているものは何ですか？"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:104
 msgid "Tell us what you wish to have as a feature and what can be improved."
-msgstr ""
+msgstr "機能として、何を望み改善できるかを教えてください。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Feedback.php:134
 msgid "Thanks for your feedback!"
-msgstr ""
+msgstr "フィードバックに感謝します！"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:28
 msgid "What this is regarding?"
-msgstr ""
+msgstr "ご用件は何でしょうか？"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:49
 msgid "Technical Support"
-msgstr ""
+msgstr "テクニカルサポート"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:50
-#, fuzzy
-#| msgid "Feed"
 msgid "Feedback"
-msgstr "フィード"
+msgstr "フィードバック"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Select.php:51
-#, fuzzy
-#| msgid "Reports"
 msgid "Report Issues"
-msgstr "レポート"
+msgstr "問題の報告"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:28
 msgid "Got stuck? Get technical support."
-msgstr ""
+msgstr "行き詰まってしまいましたか？テクニカル サポートを受けましょう。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:82
 msgid "What happened?"
-msgstr ""
+msgstr "何が起こりましたか？"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:88
 msgid "Tell us the problem with as much details as possible."
-msgstr ""
+msgstr "できるだけ詳細に問題を教えてください。"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:144
 msgid "We will get back to you soon!"
-msgstr ""
+msgstr "直ぐにこちらから折り返しご連絡差し上げます！"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_Support.php:170
-#, fuzzy
-#| msgid "Support Forum"
 msgid "Support Forums"
 msgstr "サポートフォーラム"
 
@@ -5817,16 +5519,12 @@ msgstr ""
 "受けることができます。"
 
 #: include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:36
-#, fuzzy
-#| msgid "Arguments"
 msgid "Announcements"
-msgstr "引数"
+msgstr "アナウンス"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:67
-#, fuzzy
-#| msgid "Join Affiliate Program "
-msgid "Join Affiliate Program   "
-msgstr "フリーアフィリエイトプログラムに参加 "
+msgid "Join Affiliate Program"
+msgstr "アフィリエイトプログラムに参加"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:70
 msgid "Earn commissions by setting a credit link in the unit output."
@@ -5845,62 +5543,55 @@ msgstr ""
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:89
 msgid "Cooperators Wanted!"
-msgstr ""
+msgstr "協力者募集！"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:91
 msgid ""
 "Be one of those and get discounts by contributing to the plugin development."
-msgstr ""
+msgstr "それらのいずれかになり、プラグイン開発に貢献して割引特典を得ましょう。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:93
 msgid "Beta Testers"
-msgstr ""
+msgstr "ベータ版テスター"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:93
 msgid "who can test the plugin and find problems."
-msgstr ""
+msgstr "プラグインをテストし、問題を見つけます。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:94
-#, fuzzy
-#| msgid "Template Options"
 msgid "Template Designers"
-msgstr "テンプレート設定"
+msgstr "テンプレートデザイナー"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:94
 msgid "who can code and design plugin templates."
-msgstr ""
+msgstr "プラグインのテンプレートをデザイン、コーディングします。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:95
 msgid "Graphic Designers"
-msgstr ""
+msgstr "グラフィックデザイナー"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:95
 msgid "who can design visual elements such as images for plugin pages."
-msgstr ""
+msgstr "プラグインページの画像やビジュアル要素をデザインします。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:96
-#, fuzzy
-#| msgid "Transients"
 msgid "Translators"
-msgstr "トランジェント (一時保存データ)"
+msgstr "翻訳者"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:96
 msgid "who can translate text used in the plugin."
-msgstr ""
+msgstr "プラグインで使用される文言を翻訳します。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:97
 msgid "And possibly not listed!"
-msgstr ""
+msgstr "そして、可能性としてここに記載されていない事も！"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:99
-#, fuzzy, php-format
-#| msgid ""
-#| "Browse nodes can be found <a href=\"%1$s\" target=\"_blank\">here</a>."
+#, php-format
 msgid ""
 "For more details please visit <a href=\"%1$s\" target=\"_blank\">here</a>"
 msgstr ""
-"<a href=\"%1$s\" target=\"_blank\">ここ</a>からブラウズノードを見つけることが"
-"できます。"
+"詳細については、<a href=\"%1$s\" target=\"_blank\">こちら</a>をご覧ください。"
 
 #: include/core/main/admin/report/AmazonAutoLinks_ReportAdminPage_Report.php:25
 msgid "Reports"
@@ -5917,11 +5608,9 @@ msgstr "HTTP リクエスト"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:39
 msgid "Last Modified"
-msgstr ""
+msgstr "最終更新"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:40
-#, fuzzy
-#| msgid "Expires"
 msgid "Expiry"
 msgstr "期日"
 
@@ -5932,27 +5621,23 @@ msgstr "期限切れ"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:140
 msgid "View the cache details."
-msgstr ""
+msgstr "キャッシュの詳細を閲覧"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:146
-#, fuzzy
-#| msgid "Click here to collapse the contents."
 msgid "View the stored cache contents."
-msgstr "コンテンツを折りたたむにはここをクリック。"
+msgstr "保存されたキャッシュの内容を閲覧。"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:153
 msgid "Visit the original page."
-msgstr ""
+msgstr "オリジナルのページを訪問。"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:154
 msgid "Source"
-msgstr ""
+msgstr "ソース"
 
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_ListTable_HTTPRequests.php:253
-#, fuzzy
-#| msgid "Search Type"
 msgid "Search by URL"
-msgstr "検索タイプ"
+msgstr "URL で検索"
 
 #: include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php:52
 msgid "No thumbnail"
@@ -6103,7 +5788,7 @@ msgstr "Amazon アソシエイトタグ (ID) を設定します。"
 
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:32
 msgid "If you don't have PA-API keys, leave them blank as they are optional."
-msgstr "もし PA-API キーが無い場合、空白にします。必須ではありません。"
+msgstr "もし PA-API キーをお持ちで無い場合空白にします。必須ではありません。"
 
 #: include/core/main/admin/setting/associates/AmazonAutoLinks_Main_AdminPage_Section_Associates.php:68
 msgid "The country of the marketplace."
@@ -6489,23 +6174,17 @@ msgstr "デバッグモード"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:66
 msgid "Front-end"
-msgstr ""
+msgstr "フロントエンド"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:67
-#, fuzzy
-#| msgid "Browse Node ID"
 msgid "Browser Console"
-msgstr "ノード ID の参照"
+msgstr "ブラウザコンソール"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:68
-#, fuzzy
-#| msgid "Background"
 msgid "Back-end"
-msgstr "背景"
+msgstr "バックエンド"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:69
-#, fuzzy
-#| msgid "Test"
 msgid "Tests"
 msgstr "テスト"
 
@@ -6515,27 +6194,25 @@ msgstr "ログ"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Debug.php:76
 msgid "Check debug components to enable."
-msgstr ""
+msgstr "有効にするデバッグ コンポーネントにチェックを入れます。"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:26
 msgid "Security"
-msgstr ""
+msgstr "セキュリティ"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:27
 msgid "Set allowed HTML tags in setting forms and plugin outputs etc."
 msgstr ""
+"フォームやプラグインの出力などを設定する場合に、許可された HTML タグを設定し"
+"ます。"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:43
-#, fuzzy
-#| msgid "Allowed HTML Tag Attributes"
 msgid "Allowed HTML Tags & Attributes"
-msgstr "許可された HTML タグ属性"
+msgstr "許可された HTML タグと属性"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:44
-#, fuzzy
-#| msgid "Allowed HTML Tag Attributes"
 msgid "Enter allowed HTML tags and tag attributes."
-msgstr "許可された HTML タグ属性"
+msgstr "許可された HTML タグとタグ属性を入力します。"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:51
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:97
@@ -6543,22 +6220,16 @@ msgid "Tags"
 msgstr "タグ"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:57
-#, fuzzy
-#| msgid "For multiple items, separate them by commas."
 msgid "For multiple tags, enter them separated by commas."
-msgstr "複数ある場合は、コンマで区切ります。"
+msgstr "複数のタグの場合は、カンマで区切って入力します。"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:64
-#, fuzzy
-#| msgid "Additional Attribute"
 msgid "Attributes"
-msgstr "追加属性"
+msgstr "属性"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:66
-#, fuzzy
-#| msgid "Enter keywords that represent tags separated by commas."
 msgid "Set attributes for the tag, separated by commas."
-msgstr "タグを表すキーワードをコンマで区切って入力します。"
+msgstr "タグの属性をカンマで区切って設定します。"
 
 #: include/core/main/admin/setting/misc/AmazonAutoLinks_AdminPage_Setting_Misc_Security.php:81
 msgid "Allowed Inline CSS Properties"
@@ -6603,8 +6274,6 @@ msgid "If you get broken options, initialize them by performing reset."
 msgstr "もし設定が壊れている場合、リセットをして設定の初期化をします。"
 
 #: include/core/main/admin/setting/reset/AmazonAutoLinks_AdminPage_Setting_Reset_ResetOptions.php:44
-#, fuzzy
-#| msgid "Restore Default"
 msgid "Restore Defaults"
 msgstr "デフォルト設定を復元"
 
@@ -6676,6 +6345,9 @@ msgid ""
 "earn commission fees by advertising and linking to the following web sites. "
 "%associates_list%"
 msgstr ""
+"%site_host%は、サイトが以下のウェブサイトにリンクして手数料を得るための手段を"
+"提供するために設計されたアフィリエイト広告プログラムである Amazon Services "
+"LLC Associates プログラムの参加者です。%associates_list%"
 
 #: include/core/main/output/AmazonAutoLinks_Output.php:200
 #, php-format
@@ -7017,7 +6689,7 @@ msgstr "ファイルが選択されていません。"
 
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:160
 msgid "Please fill out this field."
-msgstr ""
+msgstr "このフィールドの入力が必要です。"
 
 #: include/library/apf/factory/_common/form/field_type/color/AdminPageFramework_FieldType_color.php:28
 msgid "Select Color"
@@ -7179,11 +6851,111 @@ msgstr "セッションはクッキーのみ使用"
 
 #: include/library/apf/factory/_common/form/field_type/table/AdminPageFramework_FieldType_table.php:35
 msgid "Set the caption with the <code>caption</code> argument."
-msgstr ""
+msgstr "<code>キャプション</code>引数を使用してキャプションを設定します。"
 
 #: template/rss2/template.php:38
 msgid "Amazon Products"
 msgstr "Amazon プロダクト"
+
+#~ msgid "Web Page Dumper Help"
+#~ msgstr "Web Page Dumper ヘルプ"
+
+#~ msgid "Updating Web Page Dumper"
+#~ msgstr "独自 Web Page Dumper の作成"
+
+#~ msgid "Status:"
+#~ msgstr "状態:"
+
+#~ msgid "Privately Published"
+#~ msgstr "プライベートで公開"
+
+#~ msgid "Published"
+#~ msgstr "公開済"
+
+#~ msgid "Scheduled"
+#~ msgstr "スケジュール済"
+
+#~ msgid "Pending Review"
+#~ msgstr "レビュー待ち"
+
+#~ msgid "Draft"
+#~ msgstr "ドラフト"
+
+#~ msgid "Edit status"
+#~ msgstr "状態の編集"
+
+#~ msgid "Set status"
+#~ msgstr "状態"
+
+#~ msgid "Visibility:"
+#~ msgstr "可視性:"
+
+#~ msgid "Private"
+#~ msgstr "プライベート"
+
+#~ msgid "Password protected"
+#~ msgstr "パスワード保護"
+
+#~ msgid "Public, Sticky"
+#~ msgstr "公開、スティッキー"
+
+#~ msgid "Public"
+#~ msgstr "パブリック"
+
+#~ msgid "Edit visibility"
+#~ msgstr "可視性の編集"
+
+#~ msgid "Stick this post to the front page"
+#~ msgstr "この投稿をフロントページ上でスティッキーにする"
+
+#~ msgid "Password:"
+#~ msgstr "パスワード:"
+
+#, php-format
+#~ msgid "%1$s at %2$s"
+#~ msgstr "%2$s において %1$s"
+
+#~ msgctxt "publish box date format"
+#~ msgid "M j, Y"
+#~ msgstr "M j, Y"
+
+#~ msgctxt "publish box time format"
+#~ msgid "H:i"
+#~ msgstr "H:i"
+
+#, php-format
+#~ msgid "Scheduled for: %s"
+#~ msgstr "%1$s に次の予約"
+
+#, php-format
+#~ msgid "Published on: %s"
+#~ msgstr "%s に公開"
+
+#~ msgid "Publish <b>immediately</b>"
+#~ msgstr "<b>今すぐ</b>公開"
+
+#, php-format
+#~ msgid "Schedule for: %s"
+#~ msgstr "%s に予約"
+
+#, php-format
+#~ msgid "Publish on: %s"
+#~ msgstr "%s に公開"
+
+#, fuzzy
+#~| msgid "Edit Categories"
+#~ msgid "Edit date and time"
+#~ msgstr "カテゴリーの編集"
+
+#, fuzzy
+#~| msgid "Date Range"
+#~ msgid "Date and time"
+#~ msgstr "期間"
+
+#, fuzzy
+#~| msgid "Updated"
+#~ msgid "Update"
+#~ msgstr "更新日"
 
 #~ msgid "All Departments"
 #~ msgstr "全てのカテゴリー"
@@ -7712,10 +7484,6 @@ msgstr "Amazon プロダクト"
 #, php-format
 #~ msgid "Locale: %1$s"
 #~ msgstr "地域: %1$s"
-
-#, php-format
-#~ msgid "Domain: %1$s"
-#~ msgstr "ドメイン: %1$s"
 
 #~ msgid "The API returned an error but could not retrieve the error message."
 #~ msgstr ""
