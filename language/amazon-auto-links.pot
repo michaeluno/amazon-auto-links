@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Amazon Auto Links\n"
-"POT-Creation-Date: 2022-03-17 19:08+0900\n"
+"POT-Creation-Date: 2022-03-17 20:12+0900\n"
 "PO-Revision-Date: 2020-02-20 08:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -908,7 +908,7 @@ msgid ""
 msgstr ""
 
 #: include/core/component/auto_insert/form_field/AmazonAutoLinks_FormFields_AutoInsert_GoBack.php:30
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:53
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:54
 #: include/core/component/unit/unit_type/category/admin/admin_page/second/_cusotm_form/AmazonAutoLinks_Form_CategorySelect.php:235
 #: include/core/main/admin/report/http_request/AmazonAutoLinks_AdminPage_Tab_HTTPRequest.php:148
 #: include/core/main/admin/report/product/AmazonAutoLinks_AdminPage_Tab_Product.php:84
@@ -1444,8 +1444,8 @@ msgstr ""
 #: include/core/component/geotargeting/admin/AmazonAutoLinks_Geotargeting_Setting_Section_Geotargeting.php:49
 #: include/core/component/link_converter/admin/AmazonAutoLinks_LinkConverter_Setting_Section_Convert.php:53
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:59
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:61
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:46
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:47
 #: include/core/component/third_party_support/aalb/admin/AmazonAutoLinks_AALBSupport_Setting_3rdParty_AALB.php:54
 #: include/core/component/unit/paapi_request_counter/admin/section/AmazonAutoLinks_Unit_PAAPIRequestCounter_AdminPage_Section_RequestCount.php:45
 msgid "Enable"
@@ -1766,7 +1766,7 @@ msgid "Include"
 msgstr ""
 
 #: include/core/component/log/error/admin/AmazonAutoLinks_Log_Error_AdminPage_Section_ErrorLog_Log.php:80
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
 msgid "Exclude"
 msgstr ""
 
@@ -2129,7 +2129,7 @@ msgid "Enable proxies for regular HTTP requests that this plugin performs."
 msgstr ""
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:63
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:65
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:68
 #, php-format
 msgid "PA-API requests does not use %1$s."
 msgstr ""
@@ -2201,7 +2201,7 @@ msgid "Last Run"
 msgstr ""
 
 #: include/core/component/proxy/admin/AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section.php:171
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:238
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:253
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecks.php:108
 #: include/core/main/admin/setting/cache/AmazonAutoLinks_AdminPage_Setting_Cache_Cache.php:245
 msgid "n/a"
@@ -2213,217 +2213,222 @@ msgstr ""
 msgid "Next scheduled at %1$s."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:30
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:31
 #, php-format
 msgid ""
 "<a href=\"%1$s\" target=\"_blank\">%2$s</a> is a type of proxy server that "
 "assists HTTP requests."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:62
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:64
 #, php-format
 msgid "Utilize %1$s to assist HTTP requests."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:73
 msgid "List"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:83
 #, php-format
 msgid "Enter addresses of %1$s one per line."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:87
 #, php-format
 msgid "It is recommended to have your own %1$s for better performance."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:82
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:90
 #, php-format
 msgid "To create one, see <a href=\"%1$s\">here</a>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:100
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:104
 msgid "Test"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:105
 msgid "Check"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:102
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
 msgid "Add to List"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:106
-msgid "Type a URL of Web Page Dumper here to check if it is alive."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:111
+#, php-format
+msgid "Type a URL of %1$s here to check if it is alive."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:113
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:118
 msgid "Update Required"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:128
-msgid ""
-"Some of your Web Page Dumper instances are outdated and will not function "
-"properly. Please update them to the latest."
-msgstr ""
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:129
-#, php-format
-msgid "The required Version is <code>%1$s</code> or above."
-msgstr ""
-
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:133
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:134
 #, php-format
 msgid ""
-"To update a Web Page Dumper instance, please see <a href=\"%1$s\">here</a>."
+"Some of your %1$s instances are outdated and will not function properly. "
+"Please update them to the latest."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:140
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:136
+#, php-format
+msgid "The required version is <code>%1$s</code> or above."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:141
+#, php-format
+msgid "To update a %1$s instance, please see <a href=\"%2$s\">here</a>."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:149
 msgid "Always"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:152
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:162
 #, php-format
 msgid "Always use %1$s for these URLs."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:153
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:164
 #, php-format
 msgid ""
 "By default %1$s is used as a fallback when a regular HTTP request fails."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:154
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:166
 #, php-format
 msgid "For HTTP requests of these URL patterns will use %1$s first."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:155
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:174
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:167
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:188
 msgid "Set URL patterns with a wildcard one per line."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:156
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:175
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:169
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:190
 #, php-format
 msgid ""
 "The plugin uses <code><a href=\"%1$s\" target=\"_blank\">fnmatch()</a></"
 "code> for the matching mechanism."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:172
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
 #, php-format
 msgid "Do not use %1$s for these URLs."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:173
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:187
 msgid "The <code>Always</code> options takes precedence."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:186
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section.php:201
 msgid "The list is empty."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:26
-msgid "Web Page Dumper Help"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:27
+#, php-format
+msgid "%1$s Help"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:59
-msgid "Creating Your Own Web Page Dumper"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:61
+#, php-format
+msgid "Creating Your Own %1$s"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:64
-msgid "To create your own Web Page Dumper server, follow the below steps."
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
+#, php-format
+msgid "To create your own %1$s server, follow the below steps."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:66
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:69
 #, php-format
 msgid ""
 "If you don't have a Heroku account, create one from <a href=\"%1$s\" target="
 "\"_blank\">here</a>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:67
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:108
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:116
 #, php-format
 msgid "Log in to <a href=\"%1$s\" target=\"_blank\">Heroku</a>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:70
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:74
 #, php-format
 msgid "Go to %1$s."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:75
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
 #, php-format
 msgid ""
 "You will be prompted to deploy the app. Enter your desired app name, for "
 "example, <code>%1$s</code>, and press <code>%2$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:79
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
 #, php-format
 msgid ""
 "Click on the <code>%1$s</code> button and from the <code>%2$s</code> link, "
-"go to the front page of Web Page Dumper."
+"go to the front page of %3$s."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:84
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:89
 msgid "Copy the app address and enter it in the option."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:91
-msgid "Updating Web Page Dumper"
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:97
+#, php-format
+msgid "Updating %1$s"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:97
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:104
 msgid "To update your Web Page Dumper instance, follow the below steps."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:99
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:106
 #, php-format
 msgid ""
 "Have a <a href=\"%1$s\" target=\"_blank\">GitHub account</a> if you don't "
 "have yet."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:101
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:109
 #, php-format
 msgid ""
 "Go to the <a href=\"%1$s\" target=\"_blank\">repository page</a> and fork "
-"the Web Page Dumper by pressing <code>%2$s</code>."
+"%2$s by pressing <code>%3$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:105
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:113
 #, php-format
 msgid ""
 "If you already have a forked repository, click on <code>%1$s</code> and "
 "<code>%2$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:110
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
 #, php-format
 msgid ""
-"Select your Web Page Dumper instance and from the <code>%1$s</code> tab, "
-"click on <strong>GitHub</strong> in the <code>Deployment method</code>."
+"Select your %1$s instance and from the <code>%2$s</code> tab, click on "
+"<strong>GitHub</strong> in the <code>%3$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:111
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:121
 #, php-format
 msgid ""
 "Search the forked repository by typing <code>%1$s</code> and press <code>"
 "%2$s</code>. Then press <code>%3$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:115
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:125
 #, php-format
 msgid "Press <code>%1$s</code>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:119
+#: include/core/component/proxy/web_page_dumper/admin/AmazonAutoLinks_Proxy_WebPageDumper_Admin_Tab_Help.php:129
 #, php-format
 msgid "For the first time of doing this, you need to press <code>%1$s</code>."
 msgstr ""
@@ -2440,40 +2445,41 @@ msgstr ""
 msgid "Already added."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:102
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:103
 #, php-format
 msgid ""
-"Please update the Web Page Dumper application. Your version: <code>%1$s</"
-"code>. Expected version: <code>%2$s</code> or above."
-msgstr ""
-
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:121
-msgid "Blocked by Captcha."
+"Please update the %1$s application. Your version: <code>%2$s</code>. "
+"Expected version: <code>%3$s</code> or above."
 msgstr ""
 
 #: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:123
+msgid "Blocked by Captcha."
+msgstr ""
+
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability.php:125
 #: include/core/component/template/event/ajax/AmazonAutoLinks_Template_Event_Ajax_NewTemplatesLoader.php:46
 #: include/core/main/admin/setting/event/ajax/AmazonAutoLinks_Admin_Settings_Event_Ajax_PAAPICheck.php:66
 msgid "OK"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:80
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:81
+#, php-format
 msgid ""
-"The following Web Page Dumper instances are outdated and will not run "
-"properly. Please update them."
+"The following %1$s instances are outdated and will not run properly. Please "
+"update them."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:82
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:83
 #, php-format
 msgid "See <a href=\"%1$s\">how</a>."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:92
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:93
 #, php-format
 msgid "Required version: <code>%1$s</code> or above."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:99
+#: include/core/component/proxy/web_page_dumper/event/ajax/AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices.php:100
 #: include/core/component/proxy/web_page_dumper/utility/AmazonAutoLinks_Proxy_WebPageDumper_Utility.php:48
 #: include/core/component/template/admin/list_table/AmazonAutoLinks_ListTable_Template.php:223
 #: include/library/apf/factory/_common/form/field_type/system/AdminPageFramework_FieldType_system.php:69
@@ -2481,11 +2487,12 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:43
-msgid "You have a captcha error. Consider enabling Web Page Dumper."
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:44
+#, php-format
+msgid "You have a captcha error. Consider enabling %1$s."
 msgstr ""
 
-#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:105
+#: include/core/component/proxy/web_page_dumper/event/must/action/AmazonAutoLinks_Proxy_WebPageDumper_Event_Must_Action_CaptchaErrorNotice.php:106
 #: include/library/apf/factory/_common/_abstract/_model/AdminPageFramework_Message.php:70
 msgid "The options have been updated."
 msgstr ""
