@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/amazon-auto-"
 "links\n"
 "POT-Creation-Date: 2022-03-17 20:12+0900\n"
-"PO-Revision-Date: 2022-03-17 22:27+0900\n"
+"PO-Revision-Date: 2022-03-18 13:02+0900\n"
 "Last-Translator: Michael Uno <michael@michaeluno.jp>\n"
 "Language-Team: miunosoft <wpplugins@michaeluno.jp>\n"
 "Language: ja\n"
@@ -1683,7 +1683,7 @@ msgid ""
 "Associates, it is required to display affiliate disclosure on your site."
 msgstr ""
 "<a href=\"%1$s\"target=\"_blank\"></a>Amazon アソシエイトの利用規約によると、"
-"サイトにアフィリエイトの情報開示を表示する必要があります。"
+"サイトにアフィリエイトの情報を開示する必要があります。"
 
 #: include/core/component/disclosure/admin/AmazonAutoLinks_Disclosure_Setting_Section_Disclosure.php:214
 msgid "A page has been created."
@@ -3492,7 +3492,7 @@ msgstr "商品"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:380
 msgid "Title Format"
-msgstr "タイトルのフォーマット"
+msgstr "タイトルフォーマット"
 
 #: include/core/component/unit/_common/admin/form_field/AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:388
 msgid "Sets the layout of the title."
@@ -3538,7 +3538,7 @@ msgstr "取得アイテムをフィルターする条件を定めます。"
 
 #: include/core/component/unit/_common/admin/post_meta_box/AmazonAutoLinks_UnitPostMetaBox_ViewLink.php:37
 msgid "View Unit"
-msgstr "ユニットの閲覧"
+msgstr "ユニットの表示"
 
 #: include/core/component/unit/_common/output/_abstract/AmazonAutoLinks_UnitOutput_Base.php:580
 msgid "No products found."
@@ -4105,7 +4105,7 @@ msgstr "並び順"
 #: include/core/component/unit/unit_type/paapi_item_lookup/admin/form_field/AmazonAutoLinks_FormFields_ItemLookupUnit_Main.php:123
 #: include/core/component/unit/unit_type/url/admin/form_field/AmazonAutoLinks_FormFields_URLUnit_Main.php:85
 msgid "Raw"
-msgstr "未加工"
+msgstr "そのまま"
 
 #: include/core/component/unit/unit_type/ad_widget_search/admin/form/field/AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main.php:72
 #: include/core/component/unit/unit_type/category/admin/form_field/AmazonAutoLinks_FormFields_CategoryUnit_BasicInformation.php:44
@@ -5363,7 +5363,7 @@ msgstr "今すぐゲット！"
 
 #: include/core/main/admin/help/AmazonAutoLinks_HelpAdminPage_Help_Tips.php:26
 msgid "Tips"
-msgstr "ティップス"
+msgstr "小技"
 
 #: include/core/main/admin/help/support/AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport.php:29
 msgid "If you find unexpected behaviour of the plugin, please report it."
@@ -5520,7 +5520,7 @@ msgstr ""
 
 #: include/core/main/admin/info_box/AmazonAutoLinks_InfoBoxLoader.php:36
 msgid "Announcements"
-msgstr "アナウンス"
+msgstr "お知らせ"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:67
 msgid "Join Affiliate Program"
@@ -5543,12 +5543,14 @@ msgstr ""
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:89
 msgid "Cooperators Wanted!"
-msgstr "協力者募集！"
+msgstr "協力者を募集しています！"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:91
 msgid ""
 "Be one of those and get discounts by contributing to the plugin development."
-msgstr "それらのいずれかになり、プラグイン開発に貢献して割引特典を得ましょう。"
+msgstr ""
+"以下のいずれかになることでプラグイン開発に貢献して割引特典を受け取りましょ"
+"う。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:93
 msgid "Beta Testers"
@@ -5584,7 +5586,7 @@ msgstr "プラグインで使用される文言を翻訳します。"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:97
 msgid "And possibly not listed!"
-msgstr "そして、可能性としてここに記載されていない事も！"
+msgstr "もしくは、可能性としてここに記載されていない事も！"
 
 #: include/core/main/admin/info_box/page_meta_box/AmazonAutoLinks_AdminPageMetaBox_Announcement.php:99
 #, php-format
