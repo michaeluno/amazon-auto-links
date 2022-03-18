@@ -64,7 +64,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
                 ? ''
                 : "<div class='announcement-item'>"
                     . "<h4>"
-                        . __( 'Join Affiliate Program', 'admin-page-framework-loader' )
+                        . __( 'Join Affiliate Program', 'amazon-auto-links' )
                     . "</h4>"
                     . "<p>"
                         . __( 'Earn commissions by setting a credit link in the unit output.', 'amazon-auto-links' )
@@ -86,7 +86,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
             return "<div class='announcement-item'>"
                     . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
                     . "<h4>"
-                        . __( 'Cooperators Wanted!', 'admin-page-framework-loader' )
+                        . __( 'Cooperators Wanted!', 'amazon-auto-links' )
                     . "</h4>"
                     . "<p>" . __( 'Be one of those and get discounts by contributing to the plugin development.', 'amazon-auto-links' ) . "</p>"
                     . "<ul>"
