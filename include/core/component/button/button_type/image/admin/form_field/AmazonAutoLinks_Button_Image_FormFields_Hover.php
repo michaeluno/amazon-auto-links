@@ -19,7 +19,7 @@ class AmazonAutoLinks_Button_Image_FormFields_Hover extends AmazonAutoLinks_Form
                 'field_id'          => $sFieldIDPrefix . '_hover_scale',
                 'type'              => 'checkbox',
                 'title'             => __( 'Scale', 'amazon-auto-links' ),
-                'label'             => __( 'Slightly scale the image on mouse hover.', 'amazon-auto-links' ),
+                'label'             => __( 'Slightly scale the button on mouse hover.', 'amazon-auto-links' ),
                 'default'           => true,
                 'class'     => array(
                     'field' => 'dynamic-button-field',
@@ -32,7 +32,7 @@ class AmazonAutoLinks_Button_Image_FormFields_Hover extends AmazonAutoLinks_Form
                 'field_id'          => $sFieldIDPrefix . '_hover_brightness',
                 'type'              => 'checkbox',
                 'title'             => __( 'Brightness', 'amazon-auto-links' ),
-                'label'             => __( 'Slightly change the brightness of the image on mouse hover.', 'amazon-auto-links' ),
+                'label'             => __( 'Slightly change the brightness of the button on mouse hover.', 'amazon-auto-links' ),
                 'default'           => true,
                 'class'     => array(
                     'field' => 'dynamic-button-field',
