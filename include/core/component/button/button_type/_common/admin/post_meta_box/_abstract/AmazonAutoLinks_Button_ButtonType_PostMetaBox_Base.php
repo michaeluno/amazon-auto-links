@@ -95,7 +95,13 @@ abstract class AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base extends Amazon
      * @since  5.2.0
      */
     protected function _shouldLoad() {
-        return true;
+        if ( ! empty( $_GET[ 'button_type' ] ) && $this->_sButtonType === $_GET[ 'button_type' ] ) {
+            return true;
+        }
+        if ( ! empty( $_REQUEST[ '_button_type' ] ) && $this->_sButtonType === $_REQUEST[ '_button_type' ] ) {
+            return true;
+        }
+        return get_post_meta( AmazonAutoLinks_WPUtility::getCurrentPostID(), '_button_type', true ) === $this->_sButtonType;;
     }
         
 }
