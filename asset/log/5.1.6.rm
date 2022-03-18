@@ -1,3 +1,4 @@
 - Updated the Spanish translation.
 - Updated the Japanese translation.
 - Fixed an issue of unnecessary translation items by removing them.
+- Added the ability to insert custom text to the plugin credit links. 

@@ -5,14 +5,14 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
  * Provides methods to generate credit links.
  * 
- * @since   3.2.3
- * @since   4.6.19 Renamed from `?`.
+ * @since 3.2.3
+ * @since 4.6.19 Renamed from `?`.
  */
 class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUtility {
 
@@ -27,50 +27,67 @@ class AmazonAutoLinks_Unit_Event_Filter_Credit extends AmazonAutoLinks_PluginUti
     }
 
     /**
-     * @return      string
-     * @since       3.2.3
+     * @return string
+     * @since  3.2.3
      */
     public function replyToGetCreditComment( $sCredit ) {
         return $sCredit . self::getCommentCredit();
     }
 
     /**
-     * @return      string
+     * @return string
      */
     public function replyToGetCreditLink_0( $sCredit, $oOption ) {
         $_sVendorURL = $this->___getVendorURL( $oOption );
         return $sCredit
             . "<div class='amazon-auto-links-credit' style='width: 100%;'>"
                 . "<span style='margin:1em 0.4em;float:right;clear:both;background-image:url(" . esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/image/icon/menu_icon_16x16.png', true ) ) . ");background-repeat:no-repeat;background-position: 0 50%;padding-left:20px;font-size: smaller'>"
-                    ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( AmazonAutoLinks_Registry::DESCRIPTION ) . "' rel='author' target='_blank' style='border:none'>"
+                    ."<a href='" . esc_url( $_sVendorURL ) . "' title='" . esc_attr( $this->___getUserMessage( $oOption ) ) . "' rel='author' target='_blank' style='border:none'>"
                         . AmazonAutoLinks_Registry::NAME
                     . "</a>"
                 . "</span>"
             . "</div>";
     }
     public function replyToGetCreditLink_1( $sCredit, $oOption ) {
-        $_sVendorURL = $this->___getVendorURL( $oOption );
-        $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ) );
         return $sCredit
-            . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
-                . "<a href='{$_sVendorURL}' target='_blank'>"
-                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width:100%;margin-left:auto;margin-right:auto;display:block' />"
-                . "</a>"
-            . "</div>";
+            . $this->___getImageOutput(
+                $this->___getVendorURL( $oOption ),
+                AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-250x250.jpg', true ),
+                $this->___getUserMessage( $oOption )
+            );
     }
     public function replyToGetCreditLink_2( $sCredit, $oOption ) {
-        $_sVendorURL = $this->___getVendorURL( $oOption );
-        $_sName      = esc_attr( AmazonAutoLinks_Registry::NAME );
-        $_sImageURL  = esc_url( AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ) );
         return $sCredit
-            . "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
-                . "<a href='{$_sVendorURL}' target='_blank'>"
-                    . "<img alt='{$_sName}' src='{$_sImageURL}' style='max-width:100%;margin-left:auto;margin-right:auto;display:block' />"
+            . $this->___getImageOutput(
+                $this->___getVendorURL( $oOption ),
+                AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Unit_Loader::$sDirPath . '/asset/image/credit/amazon-auto-links-horizontal.jpg', true ),
+                $this->___getUserMessage( $oOption )
+            );
+    }
+        /**
+         * @param  string $sVendorURL
+         * @param  string $sImageSRC
+         * @param  string $sUserComment
+         * @return string
+         * @since  5.1.6
+         */
+        private function ___getImageOutput( $sVendorURL, $sImageSRC, $sUserComment ) {
+            return "<div class='amazon-auto-links-credit' style='width:100%;max-width:100%'>"
+                . "<a href='" . esc_url( $sVendorURL ) . "' target='_blank' title='" . esc_attr( $sUserComment ) . "'>"
+                    . "<img alt='" . esc_attr( $sUserComment ) . "' src='". esc_url( $sImageSRC ) . "' style='max-width:100%;margin-left:auto;margin-right:auto;display:block' />"
                 . "</a>"
             . "</div>";
-    }
-    
+        }
+        /**
+         * @param AmazonAutoLinks_Option $oOption
+         * @sicne 5.1.6
+         */
+        private function ___getUserMessage( $oOption ) {
+            $_sComment = trim( ( string ) $oOption->get( 'miunosoft_affiliate', 'user_comment' ) );
+            return $_sComment
+                ? $_sComment
+                : AmazonAutoLinks_Registry::DESCRIPTION;
+        }
     /**
      * @return string
      */
