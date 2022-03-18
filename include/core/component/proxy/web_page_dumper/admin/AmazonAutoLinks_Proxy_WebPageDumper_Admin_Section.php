@@ -27,6 +27,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
             'tab_slug'      => $this->sTabSlug,
             'title'         => 'Web Page Dumper',
             'description'   => array(
+                /* translators: 1: URL for the Web Page Dumper repository 2: a proper noun (Web Page Dumper) */
                 sprintf( __( '<a href="%1$s" target="_blank">%2$s</a> is a type of proxy server that assists HTTP requests.', 'amazon-auto-links' ), esc_url( 'https://github.com/michaeluno/web-page-dumper' ), 'Web Page Dumper' )
             ),
         );
@@ -59,9 +60,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
             array(
                 'field_id'        => 'enable',
                 'title'           => __( 'Enable', 'amazon-auto-links' ),
+                /* translators: 1: a proper noun (Web Page Dumper) */
                 'label'           => sprintf( __( 'Utilize %1$s to assist HTTP requests.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                 'type'            => 'checkbox',
                 'description'     => array(
+                    /* translators: 1: a proper noun (Web Page Dumper) */
                     sprintf( __( 'PA-API requests does not use %1$s.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                 ),
             ),
@@ -76,14 +79,15 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                     'input' => 'list-web-page-dumper',
                 ),
                 'description'     => array(
+                    /* translators: 1: a proper noun (Web Page Dumper) */
                     sprintf( __( 'Enter addresses of %1$s one per line.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' e.g.<code>https://web-page-dumper.herokuapp.com/</code>',
                     sprintf(
-                        __( 'It is recommended to have your own %1$s for better performance.', 'amazon-auto-links' ), 'Web Page Dumper' ) . ' ' . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ),
-                        esc_url(
-                            add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#creating-own-web-page-dumper'
-                        )
-                    ),
+                        /* translators: 1: a proper noun (Web Page Dumper) */
+                        __( 'It is recommended to have your own %1$s for better performance.', 'amazon-auto-links' ), 'Web Page Dumper'
+                    ) . ' '
+                        /* translators: 1: A link to a setting page describing how to create a Web Page Dumper instance */
+                    . sprintf( __( 'To create one, see <a href="%1$s">here</a>.', 'amazon-auto-links' ), esc_url( add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#creating-own-web-page-dumper' ) ),
                 ),
             ),
             array(
@@ -103,7 +107,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                         'attributes'   => array(
                             'id'          => 'web-page-dumper-input-url',
                             'name'        => '',
-                            'placeholder' => __( 'Type a URL of Web Page Dumper here to check if it is alive.', 'amazon-auto-links' ),
+                            /* translators: 1: a proper noun (Web Page Dumper) */
+                            'placeholder' => sprintf( __( 'Type a URL of %1$s here to check if it is alive.', 'amazon-auto-links' ), 'Web Page Dumper' ),
                         ),
                     ),
                 ),
@@ -125,13 +130,17 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                     "<div class='notice-warning'>"
                         . "<p class=''><span class='field-error'>"
                         . "<span class='dashicons dashicons-warning'></span>"
-                        . __( 'Some of your Web Page Dumper instances are outdated and will not function properly. Please update them to the latest.', 'amazon-auto-links' )
-                        . ' ' . sprintf( __( 'The required Version is <code>%1$s</code> or above.', 'amazon-auto-links' ), AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION )
+                        /* translators: 1: a proper noun (Web Page Dumper) */
+                        . sprintf( __( 'Some of your %1$s instances are outdated and will not function properly. Please update them to the latest.', 'amazon-auto-links' ), 'Web Page Dumper' )
+                        /* translators: 1: a required version of Web Page Dumper */
+                        . ' ' . sprintf( __( 'The required version is <code>%1$s</code> or above.', 'amazon-auto-links' ), AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION )
                     . "</span></p>"
                     . "</div>",
                     sprintf(
-                        __( 'To update a Web Page Dumper instance, please see <a href="%1$s">here</a>.' ),
-                        add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#updating-web-page-dumper'
+                        /* translators: 1: a proper noun (Web Page Dumper) 2: a link to the usage description page */
+                         __( 'To update a %1$s instance, please see <a href="%2$s">here</a>.', 'amazon-auto-links' ),
+                        'Web Page Dumper',
+                        esc_url( add_query_arg( array( 'tab' => 'web_page_dumper_help' ) ) . '#updating-web-page-dumper' )
                     ),
                 ),
             ),
@@ -149,10 +158,14 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                     ( $_bAdvanced
                         ? ''
                         : '<span class="warning">' . AmazonAutoLinks_Message::get( 'available_in_pro' ) . '</span> ' )
+                            /* translators: 1: a proper noun (Web Page Dumper) */
                     . ' ' . sprintf( __( 'Always use %1$s for these URLs.', 'amazon-auto-links' ), 'Web Page Dumper' )
+                            /* translators: 1: a proper noun (Web Page Dumper) */
                     . ' ' . sprintf( __( 'By default %1$s is used as a fallback when a regular HTTP request fails.', 'amazon-auto-links' ), 'Web Page Dumper' )
+                            /* translators: 1: a proper noun (Web Page Dumper) */
                     . ' ' . sprintf( __( 'For HTTP requests of these URL patterns will use %1$s first.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' ' . __( 'Set URL patterns with a wildcard one per line.', 'amazon-auto-links' )
+                            /* translators: 1: a link to the PHP manual page for fnmatch()  */
                     . ' ' . sprintf( __( 'The plugin uses <code><a href="%1$s" target="_blank">fnmatch()</a></code> for the matching mechanism.', 'amazon-auto-links' ), esc_url( 'https://www.php.net/manual/en/function.fnmatch.php' ) )
                     . ' ' . 'e.g.<code>https://some-domain.org/*</code>, <code>*?some-query=some-value</code>',
                 ),
@@ -169,9 +182,11 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
                     ( $_bAdvanced
                         ? ''
                         : '<span class="warning">' . AmazonAutoLinks_Message::get( 'available_in_pro' ) . '</span> ' )
+                      /* translators: 1: a proper noun (Web Page Dumper) */
                     . sprintf( __( 'Do not use %1$s for these URLs.', 'amazon-auto-links' ), 'Web Page Dumper' )
                     . ' ' . __( 'The <code>Always</code> options takes precedence.', 'amazon-auto-links' )
                     . ' ' . __( 'Set URL patterns with a wildcard one per line.', 'amazon-auto-links' )
+                            /* translators: 1: a link to the PHP manual page of fnmatch() */
                     . ' ' . sprintf( __( 'The plugin uses <code><a href="%1$s" target="_blank">fnmatch()</a></code> for the matching mechanism.', 'amazon-auto-links' ), esc_url( 'https://www.php.net/manual/en/function.fnmatch.php' ) )
                     . ' ' . 'e.g.<code>https://some-domain.org/*</code>, <code>*?some-query=some-value</code>',
                 ),

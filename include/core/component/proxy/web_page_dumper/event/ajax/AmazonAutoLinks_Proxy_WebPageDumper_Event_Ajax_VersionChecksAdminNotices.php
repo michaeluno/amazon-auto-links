@@ -77,7 +77,8 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices e
              */
             private function ___setAdminNotice( array $aNotify ) {
                 $_sMessage = "<span>"
-                        . __( 'The following Web Page Dumper instances are outdated and will not run properly. Please update them.', 'amazon-auto-links' )
+                          /* translators: 1: A proper noun (Web Page Dumper) */
+                        . sprintf( __( 'The following %1$s instances are outdated and will not run properly. Please update them.', 'amazon-auto-links' ), 'Web Page Dumper' )
                         . ' ' . sprintf(
                             __( 'See <a href="%1$s">how</a>.', 'amazon-auto-links' ),
                             add_query_arg(

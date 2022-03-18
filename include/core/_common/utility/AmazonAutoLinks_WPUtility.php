@@ -5,17 +5,51 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
  * Provides utility methods that uses WordPress built-in functions.
  *
- * @since       2
- * @since       3       Changed the name from `AmazonAutoLinks_WPUtilities`.
+ * @since 2
+ * @since 3 Changed the name from `AmazonAutoLinks_WPUtilities`.
  */
 class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
+    /**
+     * Wraps the WordPress core translation functions so that third-party translation parser such as POEdit don't catch these.
+     * This is used for translation items defined with the core default text-domain so there is no need to translate by plugin.
+     * @since  5.1.6
+     * @return string
+     */
+    static public function ___( $sString ) {
+        return __( $sString );
+    }
+    /**
+     * Wraps the WordPress core translation functions so that third-party translation parser such as POEdit don't catch these.
+     * This is used for translation items defined with the core default text-domain so there is no need to translate by plugin.
+     * @since 5.1.6
+     */
+    static public function __e( $sString ) {
+        _e( $sString );
+    }
+    /**
+     * Wraps the WordPress core translation functions so that third-party translation parser such as POEdit don't catch these.
+     * This is used for translation items defined with the core default text-domain so there is no need to translate by plugin.
+     * @since 5.1.6
+     */
+    static public function __x( $sString, $sContext ) {
+        _x( $sString, $sContext );
+    }
+    /**
+     * Wraps the WordPress core translation functions so that third-party translation parser such as POEdit don't catch these.
+     * This is used for translation items defined with the core default text-domain so there is no need to translate by plugin.
+     * @since  5.1.6
+     */
+    static public function _esc_html_e( $sString ) {
+        esc_html_e( $sString );
+    }
+    
     /**
      * Simulates a blog header output.
      * @since  5.1.0

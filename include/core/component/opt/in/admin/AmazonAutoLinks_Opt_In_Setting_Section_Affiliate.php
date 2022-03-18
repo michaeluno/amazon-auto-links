@@ -5,20 +5,20 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
  * Adds the 'miunosoft Affiliate' form section.
  * 
- * @since       3.2.0
- * @since       4.7.0   Moved from the main component and renamed from `AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate`.
+ * @since 3.2.0
+ * @since 4.7.0 Moved from the main component and renamed from `AmazonAutoLinks_AdminPage_Setting_General_MiunosoftAffiliate`.
  */
 class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_AdminPage_Section_Base {
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -31,9 +31,8 @@ class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_A
     /**
      * A user constructor.
      * 
-     * @since       3.2.0
-     * @param       AmazonAutoLinks_AdminPageFramework $oFactory
-     * @return      void
+     * @since 3.2.0
+     * @param AmazonAutoLinks_AdminPageFramework $oFactory
      */
     protected function _construct( $oFactory ) {}
     
@@ -66,6 +65,21 @@ class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_A
                     ),
                     'e.g. <code>456</code>',
                 ),
+            ),
+            // [5.1.6]
+            array(
+                'field_id'      => 'user_comment',
+                'type'          => 'textarea',
+                'title'         => __( 'Your Comment', 'amazon-auto-links' ) . '&nbsp;<span class="warning">* (' . __( 'required', 'amazon-auto-links' ) . ')</span>',
+                'description'   => array(
+                    __( 'This text will be placed in the <code>alt</code> and <code>title</code> attributes of the credit link.', 'amazon-auto-links' ),
+                    __( 'What do you think about this plugin?', 'amazon-auto-links' ),
+                    __( 'What you can do with this plugin?', 'amazon-auto-links' ),
+                    __( 'What is special about this plugin?', 'amazon-auto-links' ),
+                ),
+                'attributes'    => array(
+                    'placeholder' => __( 'You can earn commission fees with this WordPress plugin! etc.', 'amazon-auto-links' ),
+                ),
             )
         );
 
@@ -75,23 +89,30 @@ class AmazonAutoLinks_Opt_In_Setting_Section_Affiliate extends AmazonAutoLinks_A
     /**
      * Validates the submitted form data.
      * 
-     * @since       3.2.0
+     * @since 3.2.0
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
-        $_bVerified = true;
+        // $_bVerified = true;
         $_aErrors   = array();
-        
-        $aInput[ 'affiliate_id' ] = trim( $aInput[ 'affiliate_id' ] );
+
+        $aInputs[ 'affiliate_id' ] = trim( $aInputs[ 'affiliate_id' ] );
+        $aInputs[ 'user_comment' ] = trim( $aInputs[ 'user_comment' ] );
+        if ( $aInputs[ 'affiliate_id' ] && empty( $aInputs[ 'user_comment' ] ) ) {
+            $_aErrors[ $this->sSectionID ][ 'user_comment' ] = __( 'Enter your comment about the plugin.', 'amazon-auto-links' );
+            $oAdminPage->setFieldErrors( $_aErrors );
+            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
+            return $aOldInputs;
+        }
         
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
-        if ( ! $_bVerified ) {
-            $oAdminPage->setFieldErrors( $_aErrors );     
-            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
-            return $aOldInput;
-        }
+        // if ( ! $_bVerified ) {
+        //     $oAdminPage->setFieldErrors( $_aErrors );     
+        //     $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'amazon-auto-links' ) );
+        //     return $aOldInputs;
+        // }
                 
-        return $aInput;     
+        return $aInputs;
         
     }
    

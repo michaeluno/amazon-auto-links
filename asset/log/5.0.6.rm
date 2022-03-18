@@ -1,2 +1,0 @@
-- Fixed a bug with the Product Search unit type that the `Sort Order` unit option value could not be saved. 
-- Fixed a bug with the PA-API Product Search unit type that the `Shuffle` unit option did not take effect, which started in v5.0.0.

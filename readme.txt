@@ -284,31 +284,18 @@ It accepts the following parameters.
 - `label` - (optional, string) The button label. e.g. 'Buy Now'. Default: `Buy Now`.
 - `offer_listing_id` - (optional, scalar) An offer listing id that Amazon gives.
 
-= How to Create Own Template =
+= Creating Your Own Template =
 
-<h5><strong>Step 1</strong></h5>
+Download the zip file from the [example templates](https://github.com/michaeluno/amazon-auto-links-example-templates) repository. Make sure it runs as a plugin and a few example template are loaded in the template listing screen (Dashboard -> Auto Amazon Links -> Templates).
 
-Copy an existing template that is located in `...wp-content/plugins/amazon-auto-links/template` and rename the copied folder.
-
-<h5><strong>Step 2</strong></h5>
-
-Remove the files besides `style.css` and `template.php` as other files are optional.
-
-<h5><strong>Step 3</strong></h5>
-
-Edit `style.css` and `template.php` to customize the layout.
-
-<h5><strong>Step 4</strong></h5>
-
-Create a folder named `amazon-auto-links` in your theme's folder. If you are using Twenty Thirteen, the location would be `...wp-content\themes\twentythirteen\amazon-auto-links`.
-
-<h5><strong>Step 5</strong></h5>
-
-Move the working folder(the copied one) to it (the `amazon-auto-links` folder you just created).
-
-<h5><strong>Step 6</strong></h5>
-
-The plugin will automatically detect your template and add it in the template listing table. So activate it.
+Follow the steps described in readme.md of the linked repository and start modifying them. You want to:
+ - rename the root directory, `amazon-auto-links-example-templates`
+ - rename the template directory names, `lightslider` and `minimal`
+ - rename the main plugin file name, `amazon-auto-links-example-templates.php`
+ - rename PHP namespaces, `AutoAmazonLinks\Templates\Examples`
+ - replace `screenshot.jpg` in the template directory
+ - replace the header comment of `style.css` in the template directory
+ - modify CSS rules of `style.css`
 
 = Upgrading V1 to V2 =
 When upgrading v1 to v2, a few options will be lost. That includes:
@@ -668,7 +655,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug that setting forms could not load in PHP 8.0.
 
 = 4.5.2 - 01/15/2021 =
-- Fixed a bug that caused a PHP warning, "strpos(): Empty needle in "...AmazonAutoLinks_LinkConverter_Output.php on line 105". 
+- Fixed a bug that caused a PHP warning, "strpos(): Empty needle in "...AmazonAutoLinks_LinkConverter_Output.php on line 105".
 
 = 4.5.1 - 01/08/2021 =
 - Fixed an issue that caused a PHP error, "Call to a member function getValue() on null in ...AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport.php:152" on some servers.
@@ -1262,32 +1249,32 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Changed the `%price%` variable in the `Item Format` option to display a discounted price when available.
 - Fixed a bug that `ISBN` could not be set with the `Item Look-up` unit type even the locale was set to `US`.
 - Fixed a bug that expired caches were not cleared automatically.
-- Fixed a bug that the custom data base tables did not have the proper character set and collation. 
+- Fixed a bug that the custom data base tables did not have the proper character set and collation.
 
 = 3.3.6 - 01/14/2016 =
 - Fixed PHP warnings caused by using a deprecated method.
 
 = 3.3.5 - 01/13/2016 =
-- Tweaked the style of an Auto-insert option. 
+- Tweaked the style of an Auto-insert option.
 - Fixed a bug that caused a warning when setting the Post Type Slug option ( `Settings` -> `General` -> `Unit Preview` -> `Post Type Slug`).
 - Optimized performance in the admin area.
 
-= 3.3.4 - 01/02/2016 = 
+= 3.3.4 - 01/02/2016 =
 - Fixed a bug that a fatal error occurred with category units on sites enabling SSL.
 - Improved performance of the setting pages.
 
 = 3.3.3 - 12/31/2015 =
 - Fixed a bug that caused illegal string offset warnings with stored template data.
- 
+
 = 3.3.2 - 12/29/2015 =
 - Fixed an issue that the setting forms could not be displayed when third-party plugins or themes have JavaScript errors in the same page.
- 
-= 3.3.1 - 12/25/2015 = 
-- Fixed invalid offset warnings in PHP 7. 
+
+= 3.3.1 - 12/25/2015 =
+- Fixed invalid offset warnings in PHP 7.
 - Fixed a bug that an invalid character was inserted in the RSS feed.
- 
+
 = 3.3.0 - 12/23/2015 =
-- Improved the performance of the auto-insert functionality. 
+- Improved the performance of the auto-insert functionality.
 - Added the `Description Suffix` unit option that let the uset set own text for the `read more` label.
 - Added the `Max Image Size for Similar Product Thumbnails` and `Max number of Similar Products` unit options.
 - Added the `%meta%` variable to the Item Format unit option.
@@ -1303,7 +1290,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed a bug with the contextual product widget which caused a fatal error when the user enabled `Breadcrumb` in the `Additional Criteria` option and enabled `The home page` in the `Available` Page Type` option.
 - Fixed a bug that custom database table versions were not saved properly and caused extra database queries.
 - Reduced the number of database queries in widget forms.
-- Changed the Item Format option to be available. 
+- Changed the Item Format option to be available.
 - Changed the `%description%` variable of the `Category` unit type to include description produced by Amazon Product Advertising API if the user has authenticated the plugin.
 - Deprecated the Template Options Converter.
 
@@ -1311,9 +1298,9 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Fixed an issue that unit preview could not be displayed without re-saving the site permalink options after setting a custom unit preview post type slug.
 - Fixed a bug that a `View` action link was inserted in different post type listing table when a custom unit preview post type slug was set.
 - Fixed a bug in the contextual products widget that the Credit Link option was not displayed properly.
-- Fixed an issue of a fatal error `Maximum function nesting level of 'x' reached` when the server enables the XDebug extension and sets a low value for the `xdebug.max_nesting_level` option. 
+- Fixed an issue of a fatal error `Maximum function nesting level of 'x' reached` when the server enables the XDebug extension and sets a low value for the `xdebug.max_nesting_level` option.
 - Tweaked the appearance of the auto-insert setting page.
- 
+
 = 3.2.3 - 12/11/2015 =
 - Fixed a compatibility issue with WordPress 4.4 that some widget options could not be saved.
 
@@ -1332,7 +1319,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Tweaked the style of `Search` template to wrap descriptions.
 - Removed some advanced options of the URL unit type as their values could not be used rather led to errors.
 
-= 3.2.0 - 12/02/2015 = 
+= 3.2.0 - 12/02/2015 =
 - Enhanced the ability of the contextual product search for the site search terms.
 - Added the `URL` unit type which enables to search products and list them with given urls.
 - Added the `Query per Term` unit option for the `Search`, `Item Look-up`, `Similarity Look-up` unit types.
@@ -1341,7 +1328,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the internal ability to set previous unit option values when creating a new unit.
 - Changed the some option inputs larger including product filter options and search items of the Item look-up and Similarity look-up unit type s.
 - Changed the initial position of the `Template` unit option section.
-- Tweaked the style of setting pages and forms. 
+- Tweaked the style of setting pages and forms.
 - Deprecated the `tag` unit type as it is no longer supported by [Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=16238571).
 
 = 3.1.4 - 11/27/2015 =
@@ -1370,7 +1357,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Added the home and front page criteria for the `Available Page Types` option in the widget form.
 - Tweaked the style of built-in templates.
 - Tweaked the style of the credit link.
-- Fixed PHP warnings related file path lengths set to the `PHP_MAXPATHLEN` constant. 
+- Fixed PHP warnings related file path lengths set to the `PHP_MAXPATHLEN` constant.
 - Fixed an issue that widget by unit could not be displayed in the front/home page, introduced in 3.0.5.
 
 = 3.0.5 - 07/14/2015 =
@@ -1389,7 +1376,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 3.0.2 - 07/04/2015 =
 - Fixed an issue that templates were not properly loaded if the user did not upgrade the options to v3.
- 
+
 = 3.0.1 - 06/30/2015 =
 - Tweaked the formatting of a product element.
 - Fixed an issue that translation files were not loaded in the front-end.
@@ -1432,7 +1419,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 - Changed the displayed product price of the `Search` unit type to use the discount price if there is an offered price.
 - Optimized the performance.
 
-= 2.1.0 - 11/24/2014 = 
+= 2.1.0 - 11/24/2014 =
 - Added the India locale for the search unit type.
 - Fixed an issue that when `Marketpalce` is selected in the `Category` option of the Select unit type, an error was shown.
 
@@ -1500,7 +1487,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Updated: the [Admin Page Framework](http://wordpress.org/plugins/admin-page-framework/) library to v2.1.7.1.
 * Fixed: a bug that taxonomy check list boxes were gone since v2.0.2.
 
-= 2.0.3.2 - 01/07/2014 = 
+= 2.0.3.2 - 01/07/2014 =
 * Fixed: an issue that an image element was inserted when no image of the product was found in the search unit type.
 * Fixed: undefined index warnings with the search unit types.
 * Fixed: a bug in the advanced search option that the Title option did not take effect.
@@ -1510,11 +1497,11 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Fixed: an issue that some outputs broke html tags due to unescaped characters.
 * Fixed: a bug that search units did not return results with the correct item count.
 
-= 2.0.3 - 12/20/2013 = 
+= 2.0.3 - 12/20/2013 =
 * Added: the `Similarity Look-up` unit type which allows to display similar products by ASIN.
 * Changed: the message "Could not identify the unit type." to be inserted as an HTML comment.
 
-= 2.0.2 - 12/17/2013 = 
+= 2.0.2 - 12/17/2013 =
 * Fixed: an issue that too many database queries were performed in the plugin setting pages as of v2.0.1 due to disabling object caching.
 * Added: the `Item Look-up` unit type which allows to pick one or more items by item ID.
 * Fixed: the method handling Amazon Product Advertising API to treat invalid XML returned by the API as an error.
@@ -1549,7 +1536,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Renewed: (***Breaking Changes***)the entire option structure. Accordingly, after running the option importer script, which is displayed as a link in the admin message, the insert position options need to be reconfigured.
 * Renewed: the background-caching system.
 * Renewed: the icon.
-* Renewed: the admin interface. 
+* Renewed: the admin interface.
 
 = 1.2.6 - 09/01/2013 =
 * Added: the ability to use SSL images if the site runs on SSL.
@@ -1579,12 +1566,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Added: the Title Descending sort order option.
 
 = 1.2.2 - 02/21/2013 =
-* Added: the Debug Log option and page. 
+* Added: the Debug Log option and page.
 * Changed: the default value of the Prefetch Category Lists option to Off.
 * Fixed: the Japanese localization file name.
 * Disabled: the warning message to occur:  Warning: DOMElement::setAttribute() [domelement.setattribute]: string is not in UTF-8.
 
-= 1.2.1 - 02/18/2013 = 
+= 1.2.1 - 02/18/2013 =
 * Fixed: a bug that changing unit option values did not take effect when the Proceed button was pressed via the Manage Unit page.
 * Changed: product links to be disabled on the front page ( not only on the home page ) if the "Disable on the home page" option is enabled.
 * Fixed: warning messages, undefined index, which appeared in the debug mode when the Delete Selected Units button was pressed.
@@ -1596,15 +1583,15 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Fixed: a bug that url cloak had not been working as of 1.1.9.
 
 = 1.1.9 - 01/24/2013 =
-* Updated: the Japanese localization file. 
-* Added: the Above and Below Post on Publish check boxes for the auto insert option. 
+* Updated: the Japanese localization file.
+* Added: the Above and Below Post on Publish check boxes for the auto insert option.
 * Fixed: the styles of the Manage Unit table by loading the stylesheet in all the setting tab pages of the plugin.
 * Changed: the file name to amazon-auto-links.php from amazonautolinks.php
 * Changed: the text domain to amazon-auto-links from amazonautolinks.
 * Changed: the timing of registering classes to be extension-friendly.
 * Changed: code formatting to extend the plugin more easily.
 
-= 1.1.8 - 01/19/2013 = 
+= 1.1.8 - 01/19/2013 =
 * Added: the icons for the Operation column of the Manage Unit table .
 * Adjusted: the styles of the Manage Unit page in the admin page.
 * Fixed: an issue that R18 categories requiring additional redirects could not be browsed in the category selection page.
@@ -1632,12 +1619,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Fixed: a bug that the arrow images which indicate where to click did not appear in the category selection page.
 * Added: the ability to delete transients for category caches when the pre-fetch option is set to off.
 * Added: the unit memory usage in the unit preview page.
-* Added: the ability to remove transients when the plug-in is deactivated. 
+* Added: the ability to remove transients when the plug-in is deactivated.
 
 = 1.1.2 - 11/11/2012 =
 * Fixed: a bug which displayed the plugin memory usage in the page footer.
 
-= 1.1.1 - 11/02/2012 = 
+= 1.1.1 - 11/02/2012 =
 * Added: the prefetch category links option, which helps in some servers which sets a low value to the max simultaneous database connections.
 
 = 1.1.0 - 10/26/2012 =
@@ -1645,7 +1632,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 * Fixed: a bug that credit option was forced to be checked in the option page.
 * Fixed: an issue that encryption did not work on servers which disables the mcrypt extension.
 * Fixed: an issue that some form elements of the admin page did not appear on servers with the short_open_tag setting disabled.
-* Fixed: a bug that the AmazonAutoLinks() function did not retrieve the correct unit ID. 
+* Fixed: a bug that the AmazonAutoLinks() function did not retrieve the correct unit ID.
 
 = 1.0.9 - 10/06/2012 =
 * Added: the link cloaking feature.

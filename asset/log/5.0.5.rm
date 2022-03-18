@@ -1,1 +1,0 @@
-- Fixed a bug with the PA-API Product Search unit type that empty value of the Keywords unit option with the Additional Attribute option always resulted in no results.

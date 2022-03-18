@@ -99,7 +99,9 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_TestAvailability extends Am
         if ( version_compare( $_sVersion, $_sRequiredVersion, '<' ) ) {
             throw new Exception(
                 sprintf(
-                    __( 'Please update the Web Page Dumper application. Your version: <code>%1$s</code>. Expected version: <code>%2$s</code> or above.', 'amazon-auto-links' ),
+                    /* translators: 1: A proper noun (Web Page Dumper) 2: Used version 3: Required version */
+                    __( 'Please update the %1$s application. Your version: <code>%2$s</code>. Expected version: <code>%3$s</code> or above.', 'amazon-auto-links' ),
+                    'Web Page Dumper',
                     $_sVersion,
                     $_sRequiredVersion
                 )
