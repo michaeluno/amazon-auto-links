@@ -1,1 +1,0 @@
-- Fixed a bug that caused a fatal error in PHP 7.2.x or below due to a trailing comma in a function call, which started in v5.0.0. 
