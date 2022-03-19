@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.2
 Requires MySQL:     5.0.3
-Stable tag:         5.1.5
+Stable tag:         5.1.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -334,6 +334,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.1.6 - 03/19/2022 =
+- Added the ability to set custom text to the plugin credit links.
+- Fixed an issue of unnecessary translation items by removing them.
+- Updated the Spanish translation.
+- Updated the Japanese translation.
 
 = 5.1.5 - 03/15/2022 =
 - Fixed a bug with Contextual units that some options were not parsed properly.
