@@ -98,7 +98,7 @@ Besides the **Item Format** unit option which lets you design the output of a un
 = Getting Started =
 To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
 
-= Supported Language =
+= Supported Languages =
 - English
 - Japanese
 - German
