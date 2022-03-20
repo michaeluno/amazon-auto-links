@@ -69,6 +69,7 @@ return array(
     "AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/image/event/query/AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview.php", 
     "AmazonAutoLinks_Button_ButtonType_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/_common/AmazonAutoLinks_Button_ButtonType_Loader.php", 
     "AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/_common/admin/form_field/_abstract/AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base.php", 
+    "AmazonAutoLinks_Button_ButtonType_FormFields_Hover_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/_common/admin/form_field/_abstract/AmazonAutoLinks_Button_ButtonType_FormFields_Hover_Base.php", 
     "AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/button_type/_common/admin/post_meta_box/_abstract/AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base.php", 
     "AmazonAutoLinks_Button_Event_Action_DefaultButtons" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/action/AmazonAutoLinks_Button_Event_Action_DefaultButtons.php", 
     "AmazonAutoLinks_Button_Event_Filter_ButtonPreviewIframe" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/filter/AmazonAutoLinks_Button_Event_Filter_ButtonPreviewIframe.php", 
