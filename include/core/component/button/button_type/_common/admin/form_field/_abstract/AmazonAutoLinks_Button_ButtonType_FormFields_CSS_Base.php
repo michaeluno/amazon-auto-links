@@ -7,6 +7,13 @@
 abstract class AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base extends AmazonAutoLinks_FormFields_Base {
 
     /**
+     * @remark Set a button type slug so that `_button_type` meta hidden field will be added.
+     * @since  5.2.0
+     * @var    string Stores the button type slug.
+     */
+    protected $_sButtonType = '';
+
+    /**
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
@@ -17,7 +24,7 @@ abstract class AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base extends Ama
      */    
     public function get() {
         
-        return array(
+        $_aFields = array(
             array(
                 'field_id'      => 'button_css',
                 'type'          => 'textarea',
@@ -41,7 +48,15 @@ abstract class AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base extends Ama
                 ),
             )   
         );
-        
+        if ( $this->_sButtonType ) {
+            $_aFields[] = array(
+                'field_id' => '_button_type',
+                'type'     => 'hidden',
+                'value'    => $this->_sButtonType,
+                'hidden'   => true,
+            );
+        }
+        return $_aFields;
     }
-      
+
 }
