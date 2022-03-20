@@ -22,4 +22,16 @@ class AmazonAutoLinks_Button_Button2_PostMetaBox_Preview extends AmazonAutoLinks
         'AmazonAutoLinks_Button_Button2_FormFields_Preview',
     );
 
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework_MetaBox $oFactory
+     * @return array
+     * @since  5.2.0
+     */
+    public function validate( $aInputs, $aOldInputs, $oFactory ) {
+        $aInputs[ 'button_label' ] = sanitize_text_field( $this->oUtil->getElement( $aInputs, array( '_text', 'label' ), '' ) );
+        return $aInputs;
+    }
+
 }

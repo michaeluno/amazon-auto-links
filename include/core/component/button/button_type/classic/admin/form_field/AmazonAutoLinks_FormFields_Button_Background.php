@@ -64,7 +64,7 @@ class AmazonAutoLinks_FormFields_Button_Background extends AmazonAutoLinks_FormF
             array(
                 'field_id'      => 'background',
                 'type'          => 'color',
-                'title'         => __( 'Background Solid Color', 'amazon-auto-links' ),
+                'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'solid background_on',
                 ),
@@ -77,7 +77,7 @@ class AmazonAutoLinks_FormFields_Button_Background extends AmazonAutoLinks_FormF
             array(
                 'field_id'      => 'bg_start_gradient',
                 'type'          => 'color',
-                'title'         => __( 'Gradient Start Color', 'amazon-auto-links' ),
+                'title'         => __( 'Start Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'gradient background_on',
                 ),            
@@ -89,7 +89,7 @@ class AmazonAutoLinks_FormFields_Button_Background extends AmazonAutoLinks_FormF
             array(
                 'field_id'      => 'bg_end_gradient',
                 'type'          => 'color',
-                'title'         => __( 'Gradient End Color', 'amazon-auto-links' ),
+                'title'         => __( 'End Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'gradient background_on',
                 ),      

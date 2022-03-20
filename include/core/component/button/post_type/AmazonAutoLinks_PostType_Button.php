@@ -14,7 +14,11 @@
  * @since 3
  */
 class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_ListTable {
-    
+
+    public function start() {
+        // add_filter( 'upload_mimes', array( $this, 'replyToGetAllowedFileTypesToUpload' ) );
+    }
+
     public function setUp() {
         
         $_oOption = AmazonAutoLinks_Option::getInstance();
@@ -89,6 +93,17 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
 
         add_action( 'wp_before_admin_bar_render', array( $this, 'replyToModifyAdminBar' ) );    // [4.1.0]
 
+    }
+
+    /**
+     * @since  5.2.0
+     * @param  array $aMimeTypes
+     * @return array
+     */
+    public function replyToGetAllowedFileTypesToUpload( $aMimeTypes ) {
+      $aMimeTypes[ 'svg' ]  = 'image/svg+xml';     // Adding .svg extension
+      $aMimeTypes[ 'svgz' ] = 'application/x-gzip';
+      return $aMimeTypes;
     }
 
     /**

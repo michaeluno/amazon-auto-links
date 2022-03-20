@@ -19,7 +19,7 @@ class AmazonAutoLinks_FormFields_Button_Border extends AmazonAutoLinks_FormField
             array(
                 'field_id'      => 'border_radius',
                 'type'          => 'number',
-                'title'         => __( 'Border Radius', 'amazon-auto-links' ),
+                'title'         => __( 'Radius', 'amazon-auto-links' ),
                 'default'       => 4,
                 'attributes'    => array(
                     'min'           => 0,
@@ -30,7 +30,7 @@ class AmazonAutoLinks_FormFields_Button_Border extends AmazonAutoLinks_FormField
                 'field_id'      => 'border_style_switch',
                 'type'          => 'revealer',
                 'select_type'   => 'radio',
-                'title'         => __( 'Border Style Switch', 'amazon-auto-links' ),
+                'title'         => __( 'Style', 'amazon-auto-links' ),
                 'label'         => array(
                     '.border_style_on' => __( 'On', 'amazon-auto-links' ),
                     '.border_style_off' => __( 'Off', 'amazon-auto-links' ),
@@ -49,7 +49,7 @@ class AmazonAutoLinks_FormFields_Button_Border extends AmazonAutoLinks_FormField
             array(
                 'field_id'      => 'border_color',
                 'type'          => 'color',
-                'title'         => __( 'Border Color', 'amazon-auto-links' ),
+                'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow'  => 'border_style_on',
                 ),              
@@ -61,7 +61,7 @@ class AmazonAutoLinks_FormFields_Button_Border extends AmazonAutoLinks_FormField
             array(
                 'field_id'      => 'border_style',
                 'type'          => 'select',
-                'title'         => __( 'Border Style', 'amazon-auto-links' ),
+                'title'         => __( 'Type', 'amazon-auto-links' ),
                 'label'         => array(
                     'solid'  => __( 'Solid', 'amazon-auto-links' ),
                     'dotted' => __( 'Dotted', 'amazon-auto-links' ),
@@ -78,7 +78,7 @@ class AmazonAutoLinks_FormFields_Button_Border extends AmazonAutoLinks_FormField
             array(
                 'field_id'      => 'border_width',
                 'type'          => 'number',
-                'title'         => __( 'Border Width', 'amazon-auto-links' ),
+                'title'         => __( 'Width', 'amazon-auto-links' ),
                 'attributes'    => array(
                     'data-property' => 'border-width',
                 ),                       

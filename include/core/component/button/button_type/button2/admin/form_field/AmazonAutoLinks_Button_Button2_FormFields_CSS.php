@@ -9,14 +9,15 @@
  */
 
 /**
- * A base class for post meta boxes that define buttons of the `button2` button type and of the `button` post type.
+ * Provides the form fields definitions.
+ * 
  * @since 5.2.0
  */
-abstract class AmazonAutoLinks_Button_Button2_PostMetaBox_Base extends AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base {
+class AmazonAutoLinks_Button_Button2_FormFields_CSS extends AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base {
 
     /**
-     * @var   string
      * @since 5.2.0
+     * @var   string
      */
     protected $_sButtonType = 'button2';
 

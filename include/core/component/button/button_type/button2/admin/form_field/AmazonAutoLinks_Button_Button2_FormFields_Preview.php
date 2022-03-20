@@ -24,19 +24,19 @@ class AmazonAutoLinks_Button_Button2_FormFields_Preview extends AmazonAutoLinks_
     public function get( $sFieldIDPrefix='', $sUnitType='category' ) {
         return array(
             array(
-                'field_id'          => $sFieldIDPrefix . 'button_preview',
-                'type'              => '_preview_button',
-                'show_title_column' => false,
-                'attributes'        => array(
-                    'name'               => '',
-                ), 
-                'save'              => false,
-                'before_field'      => "<div style='margin: 3em 3em 3em 0; width:100%;'>"
-                    . "<div style='margin-left: auto; margin-right: auto; '>" // text-align:center;
-                        . '<p>Iframed button preview will be displayed here</p>'
-                    . "</div>"
-                . "</div>",
-                'default'   => '',
+                'field_id'          => $sFieldIDPrefix . 'button_preview',                'show_title_column' => false,
+                // 'before_field'      => "<div style='margin: 3em 3em 3em 0; width:100%;'>"
+                //     . "<div style='margin-left: auto; margin-right: auto; '>" // text-align:center;
+                //         . '<p>Iframed button preview will be displayed here</p>'
+                //     . "</div>"
+                // . "</div>",
+                'content'           => AmazonAutoLinks_Button_Utility::getIframeButtonPreview(
+                    $this->getHTTPQueryGET( array( 'post' ), '___button_id___' ),
+                    'button2',
+                    __( 'Buy Now', 'amazon-auto-links' ),
+                    array(),
+                    array( 'id' => 'button-image-preview', )
+                ),
             )
         );
     }

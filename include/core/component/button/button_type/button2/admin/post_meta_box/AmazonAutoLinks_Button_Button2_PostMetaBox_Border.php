@@ -9,15 +9,17 @@
  */
 
 /**
- * A base class for post meta boxes that define buttons of the `button2` button type and of the `button` post type.
+ * Defines the meta box that shows a button preview.
  * @since 5.2.0
  */
-abstract class AmazonAutoLinks_Button_Button2_PostMetaBox_Base extends AmazonAutoLinks_Button_ButtonType_PostMetaBox_Base {
+class AmazonAutoLinks_Button_Button2_PostMetaBox_Border extends AmazonAutoLinks_Button_Button2_PostMetaBox_Base {
 
     /**
-     * @var   string
+     * @var   array Stores field definition class names.
      * @since 5.2.0
      */
-    protected $_sButtonType = 'button2';
+    protected $_aFieldClasses = array(
+        'AmazonAutoLinks_Button_Button2_FormFields_Border',
+    );
 
 }

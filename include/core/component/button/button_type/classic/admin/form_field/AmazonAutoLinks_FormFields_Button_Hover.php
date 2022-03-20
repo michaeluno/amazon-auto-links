@@ -64,7 +64,7 @@ class AmazonAutoLinks_FormFields_Button_Hover extends AmazonAutoLinks_FormFields
             array(
                 'field_id'      => 'hover_background',
                 'type'          => 'color',
-                'title'         => __( 'Background Solid Color', 'amazon-auto-links' ),
+                'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'hover_solid hover_on',
                 ),
@@ -77,7 +77,7 @@ class AmazonAutoLinks_FormFields_Button_Hover extends AmazonAutoLinks_FormFields
             array(
                 'field_id'      => 'bg_start_gradient_hover',
                 'type'          => 'color',
-                'title'         => __( 'Gradient Start Color', 'amazon-auto-links' ),
+                'title'         => __( 'Start Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'hover_gradient hover_on',
                 ),                
@@ -89,7 +89,7 @@ class AmazonAutoLinks_FormFields_Button_Hover extends AmazonAutoLinks_FormFields
             array(
                 'field_id'      => 'bg_end_gradient_hover',
                 'type'          => 'color',
-                'title'         => __( 'Gradient End Color', 'amazon-auto-links' ),
+                'title'         => __( 'End Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow' => 'hover_gradient hover_on',
                 ),       

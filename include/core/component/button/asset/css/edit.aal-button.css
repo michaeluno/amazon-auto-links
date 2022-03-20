@@ -17,6 +17,11 @@ td.column-preview.preview {
 /* Edit Screen */
 
 /* Forms */
+.postbox .amazon-auto-links-section .form-table>tbody>tr>th:empty {
+    /* don't show empty titles */
+    display: none;
+}
+
 .amazon-auto-links-sectionsets .amazon-auto-links-section,
 .amazon-auto-links-sectionsets .amazon-auto-links-section-table .amazon-auto-links-field-td-no-title
 {
