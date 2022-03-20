@@ -5,15 +5,28 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
  * Provides utility methods.
- * @since       2
- * @since       3       Changed the name from `AmazonAutoLinks_Utilities`.
+ * @since 2
+ * @since 3 Changed the name from `AmazonAutoLinks_Utilities`.
  */
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
+
+    /**
+     * Checks whether the given string can serve as a "src" attribute value of `<image>` tags.
+     * @since  5.2.0
+     * @param  string  $sSRC
+     * @return boolean
+     */
+    static public function isImageSRC( $sSRC ) {
+        if ( false !== filter_var( $sSRC, FILTER_VALIDATE_URL ) ) {
+            return true;
+        }
+        return ( boolean ) preg_match( '/^data:image(.*?);base64/i', $sSRC );
+    }
 
     /**
      * @param  string  $sURL
