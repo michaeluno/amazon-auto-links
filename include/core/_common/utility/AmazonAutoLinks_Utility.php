@@ -16,6 +16,31 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
+     * Returns an array of size units such as px, em to be used by field definitions.
+     * @since  5.2.0
+     * @return array
+     */
+    static public function getCSSSizeUnits() {
+        return array(
+            'cm'   => 'cm',
+            'mm'   => 'mm',
+            'in'   => 'in',
+            'px'   => 'px',
+            'pt'   => 'pt',
+            'pc'   => 'pc',
+            'em'   => 'em',
+            'ex'   => 'ex',
+            'ch'   => 'ch',
+            'rem'  => 'rem',
+            'vw'   => 'vw',
+            'vh'   => 'vh',
+            'vmin' => 'vmin',
+            'vmax' => 'vmax',
+            '%'    => '%',
+        );
+    }
+
+    /**
      * Checks whether the given string can serve as a "src" attribute value of `<image>` tags.
      * @since  5.2.0
      * @param  string  $sSRC
