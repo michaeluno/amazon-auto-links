@@ -3,7 +3,13 @@
  * @version 1.0.0
  */
 (function ( $ ) {
+  /* global aalImageButtonPreviewEventBinder, */
   $( document ).ready( function () {
+
+    if ( 'undefined' === typeof aalImageButtonPreviewEventBinder ) {
+      return;
+    }
+    console.log( 'AAL Image Button Preview', aalImageButtonPreviewEventBinder );
 
     var buttonID        = 'undefined' === typeof aalImageButtonPreviewEventBinder.postID
       ? '___button_id___'
@@ -14,14 +20,23 @@
       'display': 'block',
       'margin-right': 'auto',
       'margin-left': 'auto',
+      // vertically centering the image @see https://stackoverflow.com/a/23207658
+      'position': 'relative',
     };
+    styleHolder[ '.amazon-auto-links-button-' + buttonID + ':hover' ] = {};
     styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img' ] = {
       'height': 'unset',
       'max-width': '100%',
       'max-height': '100%',
       'margin-right': 'auto',
       'margin-left': 'auto',
-      'display': 'block'
+      'display': 'block',
+      // vertically centering the image @see https://stackoverflow.com/a/23207658
+      'position': 'absolute',
+      'top' : '50%',
+      'left': '50%',
+      '-ms-transform': 'translate(-50%, -50%)',
+      'transform'    : 'translate(-50%, -50%)'
     };
     styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img:hover' ] = {};
 
@@ -52,12 +67,12 @@
       },
       '_hover_scale': function( self ) {
         if ( self.is( ':checked' ) ) {
-          styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img:hover' ][ 'transform' ] = 'scale(1.0);';
-          styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img' ][ 'transform' ] = 'scale(0.98)';
+          styleHolder[ '.amazon-auto-links-button-' + buttonID + ':hover' ][ 'transform' ] = 'scale(1.0);';
+          styleHolder[ '.amazon-auto-links-button-' + buttonID ][ 'transform' ] = 'scale(0.98)';
           return;
         }
-        delete styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img:hover' ][ 'transform' ];
-        delete styleHolder[ '.amazon-auto-links-button-' + buttonID + ' > img' ][ 'transform' ];
+        delete styleHolder[ '.amazon-auto-links-button-' + buttonID + ':hover' ][ 'transform' ];
+        delete styleHolder[ '.amazon-auto-links-button-' + buttonID  ][ 'transform' ];
       },
       '_hover_brightness': function( self ) {
         if ( self.is( ':checked' ) ) {
@@ -123,7 +138,7 @@
 
       // Adjust the iframe size
       previewFrame.css({
-          'max-height':  $( '#_height__0_size' ).val() + $( '#_height__0_unit' ).val(),
+        'max-height':  $( '#_height__0_size' ).val() + $( '#_height__0_unit' ).val(),
       });
 
       // Apply the stylesheet and update field inputs
@@ -136,6 +151,15 @@
 
         // Update the Generated CSS field
         $( '#button_css__0' ).text( _style );
+
+        // Tell the framed window to send back proportional data so that the iframe height will be adjusted with a callback defined in this script
+        previewFrame[ 0 ].contentWindow.postMessage(
+          {
+            event:   'ReloadButtonPreview',
+            nonce:   aalImageButtonPreviewEventBinder.nonce,
+          },
+          location.protocol + '//' + location.host
+        );
 
       }, 100 );
 
@@ -177,6 +201,20 @@
         return _rules;
       }
     }
+
+    if ( ! window.addEventListener ) {
+      return;
+    }
+    // Adjust iframe height on proportional changes
+    window.addEventListener('message', function( event) {
+      if ( event.origin !== location.protocol + '//' + location.host ) {
+        return;
+      }
+      if ( 'undefined' === typeof event.data.height ) {
+        return;
+      }
+      previewFrame.height( event.data.height ).css( 'height', event.data.height + 'px' );
+    }, false );
 
   } );
 

@@ -48,7 +48,7 @@ class AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview extends AmazonAutoL
         $_sMin              = $this->isDebugMode() ? '' : '.min';
         $_sStylesheetURL1   = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/css/button-preview-framed-page" . $_sMin . ".css" );
         $_sStylesheetURL2   = $this->getSRCFromPath( AmazonAutoLinks_Button_Image_Loader::$sDirPath . "/asset/css/button-image-preview-framed" . $_sMin . ".css" );
-        $_sScriptURL        = $this->getSRCFromPath( AmazonAutoLinks_Button_Image_Loader::$sDirPath . "/asset/js/button-image-preview-framed" . $_sMin . ".js" );
+        $_sScriptURL        = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/js/button-preview-framed-page" . $_sMin . ".js" );
         $sHeadTagInnerHTML .= "<script id='button-preview-framed-image-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-preview-framed-style' href='" . esc_url( $_sStylesheetURL1 ) . "' media='all'>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-image-preview-framed-style' href='" . esc_url( $_sStylesheetURL2 ) . "' media='all'>";
