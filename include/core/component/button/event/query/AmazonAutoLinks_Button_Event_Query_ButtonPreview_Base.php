@@ -25,7 +25,7 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
      * @since 5.2.0
      * @var   string[]
      */
-    protected $_aAllowedIDPrefixesJS     = array( 'jquery' );
+    protected $_aAllowedIDPrefixesJS = array( 'jquery' );
 
     /**
      * @since 5.2.0
@@ -34,13 +34,42 @@ abstract class AmazonAutoLinks_Button_Event_Query_ButtonPreview_Base extends Ama
     protected $_aDisallowedIDPrefixesCSS = array();
 
     /**
+     * The GET key name that activates the preview.
+     *
+     * This should also hold the value of the button type to process.
+     *
+     * @since 5.2.0
+     * @var   string
+     */
+    protected $_sActivatorKey = 'aal-button-preview';
+
+    /**
+     * @since 5.2.0
+     * @var   string
+     */
+    protected $_sNonceKey = 'aal_button_preview_nonce';
+
+    /**
      * Sets up hooks and properties.
      * @since 5.2.0
      */
     public function __construct() {
 
-        if ( ! $this->_shouldProceed( $this->getHTTPQueryGET( 'aal-button-preview' ) ) ) {
+        $_sButtonType = $this->getHTTPQueryGET( $this->_sActivatorKey );
+        if ( ! $_sButtonType ) {
             return;
+        }
+
+        // At this point, the request is for a button preview of this plugin.
+
+        // If the security check fails, quit silently.
+        $_sNonce = $this->getHTTPQueryGET( 'nonce' );
+        if ( $_sNonce && ! wp_verify_nonce( $_sNonce, $this->_sNonceKey ) ) {
+            exit;
+        }
+
+        if ( ! $this->_shouldProceed( $_sButtonType ) ) {
+            return; // not existing as there are other extending classes of different button types.
         }
         add_action( 'wp', array( $this, 'replyToPrintButtonPreview' ) );
         add_filter( 'wp_using_themes', '__return_true' );

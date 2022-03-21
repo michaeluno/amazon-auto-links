@@ -22,11 +22,12 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
      * @param  null|string    $nsButtonLabel        If `null` is passed, the label will not be set. This accepts an empty string as a label.
      * @param  array          $aFrameAttributes
      * @param  array          $aContainerAttributes
+     * @param  string         $sNonce               A nonce value
      * @since  5.2.0
      * @return string
      */
-    static public function getIframeButtonPreview( $isButtonID, $isButtonType, $nsButtonLabel=null, array $aFrameAttributes=array(), array $aContainerAttributes=array() ) {
-        $_sFrameSRC        = self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel );
+    static public function getIframeButtonPreview( $isButtonID, $isButtonType, $nsButtonLabel=null, array $aFrameAttributes=array(), array $aContainerAttributes=array(), $sNonce='' ) {
+        $_sFrameSRC        = self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel, $sNonce );
         $_aFrameAttributes = $aFrameAttributes + array(
             'title'          => 'Button Preview of ' . $isButtonID,    // this is a sort of internal (not apparent) attribute to avoid a warning from a browser so no need to translate
             'class'          => 'frame-button-preview',
@@ -53,16 +54,17 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
          * @param  integer|string $isButtonID
          * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `button2`, `0`. `0` is an alias for `theme`.
          * @param  null|string    $nsButtonLabel
+         * @param  string         $sNonce
          * @return string
          */
-        static private function ___getButtonPreviewURL( $isButtonID, $isButtonType=0, $nsButtonLabel=null ) {
+        static private function ___getButtonPreviewURL( $isButtonID, $isButtonType=0, $nsButtonLabel=null, $sNonce='' ) {
             $_aQuery = array(
                 'aal-button-preview' => $isButtonType, // @todo confirm the behavior when 0 is passed
                 'button-id'          => $isButtonID,
                 'button-label'       => $nsButtonLabel,
+                'nonce'              => $sNonce ? $sNonce : wp_create_nonce( 'aal_button_preview_nonce' ),
             );
-            $_aQuery = array_filter( $_aQuery, array( __CLASS__, 'isNotNull' ) );
-            return add_query_arg( $_aQuery, get_site_url() );
+            return add_query_arg( array_filter( $_aQuery, array( __CLASS__, 'isNotNull' ) ), get_site_url() );
         }
 
     /**
