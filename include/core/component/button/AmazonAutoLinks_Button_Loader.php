@@ -5,9 +5,8 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
-
  
 /**
  * Loads the button component.
@@ -124,7 +123,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
                 'frameSRC'        => add_query_arg(
                     array(
                         'aal-button-preview' => '_by_id',
-                        'button-id'          =>'___button_id___',
+                        'button-id'          => '___button_id___',
                         // 'button-label'       => '',  // @note do not set a button label as an empty value can be accepted as an empty label. To reflect the default label, unset the key.
                     ),
                     get_site_url()
