@@ -44,3 +44,6 @@ td.column-preview.preview {
     margin: 3em 0;
     width: 100%;
 }
+.iframe-button-preview-container iframe {
+    width: 100%;
+}
