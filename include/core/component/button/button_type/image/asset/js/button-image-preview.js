@@ -29,9 +29,23 @@
     var inputs          = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
     var debounce;
     var inputProcessor  = {
+      '_width_toggle': function( self ) {
+        if ( ! $( self ).is( ':checked' ) ) {
+          delete styleHolder[ '.amazon-auto-links-button-' + buttonID ][ 'width' ];
+          return;
+        }
+        $( "input[type=number][data-property='width']" ).trigger( 'change' );
+      },
       'width': function( self ) {
         var _oField = self.closest( '.amazon-auto-links-field' );
         styleHolder[ '.amazon-auto-links-button-' + buttonID ][ self.data( 'property' ) ] = _oField.find( 'input' ).val() + _oField.find( 'select' ).val();
+      },
+      '_height_toggle': function( self ) {
+        if ( ! $( self ).is( ':checked' ) ) {
+          delete styleHolder[ '.amazon-auto-links-button-' + buttonID ][ 'height' ];
+          return;
+        }
+        $( "input[type=number][data-property='height']" ).trigger( 'change' );
       },
       'height': function ( self ) {
         this.width( self );
@@ -68,17 +82,17 @@
           });
           // Update the Width and Height options with the image dimensions
           if ( ! _bUnchanged ) {
-            $( '#_width__0_size' ).val( _imgTemp.width );
-            $( '#_width__0_unit' ).val( 'px' )
-              .trigger( 'change' );
-            $( '#_height__0_size' ).val( _imgTemp.height );
-            $( '#_height__0_unit' ).val( 'px' )
-              .trigger( 'change' );
+            $( '#_dimensions_width__0_size' ).val( _imgTemp.width );
+            $( '#_dimensions_width__0_unit' ).val( 'px' );
+            $( '#_dimensions_width_toggle__0_' ).trigger( 'change' );
+            $( '#_dimensions_height__0_size' ).val( _imgTemp.height );
+            $( '#_dimensions_height__0_unit' ).val( 'px' );
+            $( '#_dimensions_height_toggle__0_' ).trigger( 'change' );
           }
         }
         _imgTemp.src = _url;  // this triggers the onload function above
       },
-      '_unknown': function( self ) {
+      '_common': function( self ) {
         if ( ! self.data( 'property' ) ) {
           return;
         }
@@ -88,7 +102,14 @@
 
     // When the preview iframe is loaded,
     previewFrame.on( 'load', function() {
-      inputs.trigger( 'change' );
+      inputs
+        .not( 'input[type=radio]:not(:checked)' ) // exclude radio buttons that are not checked
+        .not( 'input[data-reveal], select[data-reveal]' ) // exclude revealer selectors to avoid unselected hidden inputs by the revealer script triggering the change event and add their CSS rules (hidden inputs should not add their rules)
+        .trigger( 'change' ); // triggering the `change` event will generate a new stylesheet
+      inputs
+        .filter( 'input[data-reveal], select[data-reveal]' )
+        .not( 'input[type=radio]:not(:checked)' )
+        .trigger( 'change' ); // now trigger the `change` event for revealer inputs
     });
 
     // When the user changes button options,
@@ -97,7 +118,7 @@
       // Parse inputs
       var _property = $( this ).data( 'property' );
       _property = typeof _property !== 'string' ? '' : _property;
-      var _methodName = 'undefined' !== typeof inputProcessor[ _property ] ? _property : '_unknown';
+      var _methodName = 'undefined' !== typeof inputProcessor[ _property ] ? _property : '_common';
       inputProcessor[ _methodName ]( $( this ) );
 
       // Adjust the iframe size
