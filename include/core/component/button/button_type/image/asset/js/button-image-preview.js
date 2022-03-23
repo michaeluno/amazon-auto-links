@@ -115,18 +115,6 @@
       }
     };
 
-    // When the preview iframe is loaded,
-    previewFrame.on( 'load', function() {
-      inputs
-        .not( 'input[type=radio]:not(:checked)' ) // exclude radio buttons that are not checked
-        .not( 'input[data-reveal], select[data-reveal]' ) // exclude revealer selectors to avoid unselected hidden inputs by the revealer script triggering the change event and add their CSS rules (hidden inputs should not add their rules)
-        .trigger( 'change' ); // triggering the `change` event will generate a new stylesheet
-      inputs
-        .filter( 'input[data-reveal], select[data-reveal]' )
-        .not( 'input[type=radio]:not(:checked)' )
-        .trigger( 'change' ); // now trigger the `change` event for revealer inputs
-    });
-
     // When the user changes button options,
     inputs.on( 'change input', function () {
 
@@ -201,6 +189,23 @@
         return _rules;
       }
     }
+
+    // When the preview iframe is loaded,
+    previewFrame.on( 'load', function() {
+      inputs
+        .not( 'input[type=radio]:not(:checked)' ) // exclude radio buttons that are not checked
+        .not( 'input[data-reveal], select[data-reveal]' ) // exclude revealer selectors to avoid unselected hidden inputs by the revealer script triggering the change event and add their CSS rules (hidden inputs should not add their rules)
+        .trigger( 'change' ); // triggering the `change` event will generate a new stylesheet
+      inputs
+        .filter( 'input[data-reveal], select[data-reveal]' )
+        .not( 'input[type=radio]:not(:checked)' )
+        .trigger( 'change' ); // now trigger the `change` event for revealer inputs
+    });
+    // There is a case that the frame is already loaded before this is called
+    // @deprecated the image type doesn't seenm to need this. If this is enabled, the image gets resized to the image original proportion.
+    // if ( 'complete' === previewFrame[ 0 ].contentDocument.readyState ) {
+    //   previewFrame.trigger( 'load' );
+    // }
 
     if ( ! window.addEventListener ) {
       return;
