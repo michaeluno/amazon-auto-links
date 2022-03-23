@@ -1,6 +1,6 @@
 /**
  * @name:    Button Preview Framed Page
- * @version: 1.1.1
+ * @version: 1.1.2
  */
 (function () {
 
@@ -18,7 +18,7 @@
   // Add an event listener for a custom event
   document.addEventListener( 'ReloadButtonPreview', function(e) {
 
-    console.log( 'Framed event:', e ); // Prints "Example of an event"
+    // console.log( 'Framed event:', e ); // Prints "Example of an event"
 
     // Tell the parent frame about the dimensions of the document.
     var _previewInfo = getPreviewInformation();
@@ -50,28 +50,39 @@
     if ( 'undefined' === typeof event.data.event ) {
       return;
     }
+    dispatchEvent( event.data.event );
 
-    // Fire an event in an old fashioned way to support older b. @see https://stackoverflow.com/a/2490876
+  }, false );
+
+  /**
+   * Fires an event in an old fashioned way to support older b. 
+   * @see   https://stackoverflow.com/a/2490876 
+   * @param eventName
+   */
+  function dispatchEvent( eventName ) {
     var _element = document;
     var _e; // The custom _e that will be created
     if ( document.createEvent ) {
         _e = document.createEvent( 'HTMLEvents' );
-        _e.initEvent( event.data.event , true, true );
-        _e._eName = event.data.event;
+        _e.initEvent( eventName , true, true );
+        _e._eName = eventName;
         _element.dispatchEvent( _e );
     } else {
         _e = document.createEventObject();
-        _e._eName = event.data.event;
-        _e._eType = event.data.event;
+        _e._eName = eventName;
+        _e._eType = eventName;
         _element.fireEvent( 'on' + _e._eType, _e );
     }
-
-  }, false );
+  }
 
   window.addEventListener( 'DOMContentLoaded', function ( e ) {
     setParentButtonPreviewIframeStyle();
   } );
 
+  /**
+   * If the parent window has the aalSetButtonPreviewIframeStyle() global function, call it.
+   * Also, send a window message with the proportional information of the current document.
+   */
   function setParentButtonPreviewIframeStyle() {
     if ( 'undefined' === typeof parent.aalSetButtonPreviewIframeStyle ) {
       return;
@@ -86,7 +97,7 @@
     var _oButton   = document.getElementById( 'preview-button' );
     var _iWidth    = 0, _iHeight   = 0, _iButtonID = 0;
     if ( 'undefined' !== typeof _oBody && null !== _oBody ) {
-      // There is a case that document height too long viewed in iframe (rare case), so using body.
+      // There is a case that document height gets too long viewed in iframe (rare case), so using body.
       // document.body.getBoundingClientRect().height
       _iHeight   = _oBody.offsetHeight;
     }
