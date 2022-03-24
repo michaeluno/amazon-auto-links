@@ -1,3 +1,4 @@
 - Added a new `Image` button type.
 - Added the button type feature and categorized the existing legacy buttons as `Classic`.
+- Tweaked the UI of the button previews. 
 - Moved the button unit options in the `Common Advanced` section to the new `Button` section.

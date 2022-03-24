@@ -156,6 +156,17 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             )
         );
 
+        // [5.2.0] Only in the Add New or Edit screen, (not the button listing screen)
+        if ( in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ), true ) ) {
+            $this->enqueueScript(
+                AmazonAutoLinks_Button_Loader::$sDirPath . '/asset/js/button-preview-meta-box.js',
+                array(
+                    'dependencies' => array( 'jquery' ),
+                    'in_footer'    => true,
+                )
+            );
+        }
+
         // For the button listing table screen,
         if ( 'edit.php' === $GLOBALS[ 'pagenow' ] ) {
             // [5.2.0]
@@ -171,6 +182,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                 )
             );
         }
+
     }
 
     /**

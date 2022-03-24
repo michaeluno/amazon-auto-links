@@ -1,0 +1,7 @@
+/* Button Preview Meta Box 1.0.0 */
+(function($){var previewMetaBox=$('.iframe-button-preview-container').closest('.postbox');var hasMadeSticky=!1;$(window).on('scroll',function(){if(hasMadeSticky){return}
+if(isOffScreen(previewMetaBox[0])){hasMadeSticky=!1}
+makeSticky()});$(document).ready(function(){if($('#post-body.columns-2').length){var _heightMainMetaBoxContainer=$('#postbox-container-2').height();if($('#postbox-container-1').height()<_heightMainMetaBoxContainer){$('#side-sortables').height(_heightMainMetaBoxContainer)}}
+if(isOffScreen(previewMetaBox[0])){makeSticky()}});function makeSticky(){if(hasMadeSticky){return}
+previewMetaBox.css({'top':Math.ceil($('#wpadminbar').height())+20,'z-index':99999,});var _styleInline=['position: -webkit-sticky','position: sticky',].join(';');previewMetaBox.attr('style',previewMetaBox.attr('style')+_styleInline);hasMadeSticky=!0}
+function isOffScreen(el){var rect=el.getBoundingClientRect();return((rect.x+rect.width)<0||(rect.y+rect.height)<0||(rect.x>window.innerWidth||rect.y>window.innerHeight))}}(jQuery))
