@@ -54,11 +54,13 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
         $_aFrameAttributes = $this->oUtil->hasBeenCalled( __METHOD__ )
             ? array( 'src' => null )
             : array();
+        $_bsButtonLabel     = get_post_meta( $iPostID, 'button_label', true );
+        $_nsButtonLabel     = false === $_bsButtonLabel ? null : $_bsButtonLabel;
         return $sCell
             . AmazonAutoLinks_Button_Utility::getIframeButtonPreview(
                 $iPostID,
                 '_by_id',
-                null,
+                $_nsButtonLabel,
                 $_aFrameAttributes + array(
                     'id'  => 'iframe-button-preview-' . $iPostID,
                 )
