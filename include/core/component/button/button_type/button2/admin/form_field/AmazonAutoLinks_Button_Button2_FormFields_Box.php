@@ -13,7 +13,7 @@
  * 
  * @since 5.2.0
  */
-class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_FormFields_Base {
+class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Button_ButtonType_FormFields_Dimensions_Base {
 
     /**
      * Returns field definition arrays.
@@ -23,33 +23,86 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
      * @return array
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='' ) {
-        return array(
-            array(
-                'field_id'          => '_width',
-                'type'              => 'size',
-                'title'             => __( 'Width', 'amazon-auto-links' ),
-                'units'             => array(
-                    'px' => 'px',
-                    'em' => 'em',
-                    '%'  => '%',
-                ),
-                'default'           => array(
-                    'size' => 148,
-                    'unit' => 'px',
-                ),
-                'class'     => array(
-                    'field' => 'dynamic-button-field',
-                ),
-                'attributes' => array(
-                    'size'  => array(
-                        'data-property' => 'width',
-                        'min'           => 0,
-                    ),
-                    'select' => array(
-                        'data-property' => 'width',
-                    ),
-                ),
-            ),
+        $_aDimensions = parent::get( $sFieldIDPrefix, $sUnitType );
+        $_aFieldsets  = array(
+            // array(
+            //     'field_id'      => '_dimensions',
+            //     'title'         => __( 'Dimensions', 'amazon-auto-links' ),
+            //     'content'       => array(
+            //         array(
+            //             'field_id'      => 'width_toggle',
+            //             'type'          => 'revealer',
+            //             'select_type'   => 'checkbox',
+            //             'label'         => '<strong>' . __( 'Width', 'amazon-auto-links' ) . "<span class='title-colon'>:</span></strong>",
+            //             'selectors'     => '.box-width',
+            //             'class'         => array(
+            //                 'field'     => 'dynamic-button-field',
+            //             ),
+            //             'attributes'    => array(
+            //                 'data-property' => '_width_toggle',
+            //             ),
+            //             'default'       => 0,
+            //         ),
+            //         array(
+            //             'field_id'          => 'width',
+            //             'type'              => 'size',
+            //             'units'             => $this->getCSSSizeUnits(),
+            //             'default'           => array(
+            //                 'size' => 148,
+            //                 'unit' => 'px',
+            //             ),
+            //             'class'     => array(
+            //                 'fieldset' => 'box-width',
+            //                 'field'    => 'dynamic-button-field',
+            //             ),
+            //             'attributes' => array(
+            //                 'size'  => array(
+            //                     'data-property' => 'width',
+            //                     'min'           => 0,
+            //                 ),
+            //                 'select' => array(
+            //                     'data-property' => 'width',
+            //                 ),
+            //             ),
+            //         ),
+            //         array(
+            //             'field_id'      => 'height_toggle',
+            //             'type'          => 'revealer',
+            //             'select_type'   => 'checkbox',
+            //             'label'         => '<strong>' . __( 'Height', 'amazon-auto-links' ) . "<span class='title-colon'>:</span></strong>",
+            //             'selectors'     => '.box-height',
+            //             'class'         => array(
+            //                 'field'     => 'dynamic-button-field',
+            //             ),
+            //             'attributes'    => array(
+            //                 'data-property' => '_height_toggle',
+            //             ),
+            //             'default'       => 0,
+            //         ),
+            //         array(
+            //             'field_id'          => 'height',
+            //             'type'              => 'size',
+            //             'units'             => $this->getCSSSizeUnits(),
+            //             'default'           => array(
+            //                 'size' => 60,
+            //                 'unit' => 'px',
+            //             ),
+            //             'class'     => array(
+            //                 'fieldset' => 'box-height',
+            //                 'field'    => 'dynamic-button-field',
+            //             ),
+            //             'attributes' => array(
+            //                 'size'  => array(
+            //                     'data-property' => 'height',
+            //                     'min'           => 0,
+            //                 ),
+            //                 'select' => array(
+            //                     'data-property' => 'height',
+            //                 ),
+            //             ),
+            //         ),
+            //     ),
+            // ),
             array(
                 'field_id'      => '_padding_type',
                 'type'          => 'revealer',
@@ -64,14 +117,17 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                     'each'  => '.padding-each',
                 ),
                 'class'         => array(
-                    // 'fieldset' => 'button-icon-',
+                    'field'     => 'dynamic-button-field',
                 ),
-                'default'       => 'all',
+                'attributes'    => array(
+                    'data-property' => '_padding_type',
+                ),
+                'default'       => 'each',
             ),
             array(
                 'field_id'      => '_padding',
                 'class'         => array(
-                    // 'fieldset' => 'button-icon-',
+                    'field'     => 'dynamic-button-field',
                 ),
                 'content'       => array(
                     array(
@@ -82,6 +138,7 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                         ),
                         'attributes'    => array(
                             'data-property' => 'padding',
+                            'data-suffix'   => 'px',
                             'min'           => 0,
                         ),
                         'default'       => 1,
@@ -99,9 +156,10 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                                 'title'         => __( 'Top', 'amazon-auto-links' ),
                                 'attributes'    => array(
                                     'data-property' => 'padding-top',
+                                    'data-suffix'   => 'px',
                                     'min'           => 0,
                                 ),
-                                'default'       => 1,
+                                'default'       => 8,
                             ),
                             array(
                                 'field_id'      => 'right',
@@ -109,9 +167,10 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                                 'title'         => __( 'Right', 'amazon-auto-links' ),
                                 'attributes'    => array(
                                     'data-property' => 'padding-right',
+                                    'data-suffix'   => 'px',
                                     'min'           => 0,
                                 ),
-                                'default'       => 1,
+                                'default'       => 16,
                             ),
                             array(
                                 'field_id'      => 'bottom',
@@ -119,9 +178,10 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                                 'title'         => __( 'Bottom', 'amazon-auto-links' ),
                                 'attributes'    => array(
                                     'data-property' => 'padding-bottom',
+                                    'data-suffix'   => 'px',
                                     'min'           => 0,
                                 ),
-                                'default'       => 1,
+                                'default'       => 8,
                             ),
                             array(
                                 'field_id'      => 'left',
@@ -129,15 +189,17 @@ class AmazonAutoLinks_Button_Button2_FormFields_Box extends AmazonAutoLinks_Form
                                 'title'         => __( 'Left', 'amazon-auto-links' ),
                                 'attributes'    => array(
                                     'data-property' => 'padding-left',
+                                    'data-suffix'   => 'px',
                                     'min'           => 0,
                                 ),
-                                'default'       => 1,
+                                'default'       => 16,
                             ),
                         ),
                     ),
                 ),
             ),            
         );
+        return array_merge( $_aDimensions, $_aFieldsets );
     }
       
 }

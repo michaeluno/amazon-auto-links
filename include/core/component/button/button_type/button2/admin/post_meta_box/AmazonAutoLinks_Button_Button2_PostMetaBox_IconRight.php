@@ -12,21 +12,14 @@
  * Defines the meta box that shows a button preview.
  * @since 5.2.0
  */
-class AmazonAutoLinks_Button_Button2_PostMetaBox_Main extends AmazonAutoLinks_Button_Button2_PostMetaBox_Base {
+class AmazonAutoLinks_Button_Button2_PostMetaBox_IconRight extends AmazonAutoLinks_Button_Button2_PostMetaBox_Base {
 
     /**
      * @var   array Stores field definition class names.
      * @since 5.2.0
      */
     protected $_aFieldClasses = array(
-        'AmazonAutoLinks_Button_Button2_FormFields_Main',
+        'AmazonAutoLinks_Button_Button2_FormFields_IconRight',
     );
-
-    /**
-     * @since 5.2.0
-     */
-    public function setUp() {
-        parent::setUp();
-    }
 
 }

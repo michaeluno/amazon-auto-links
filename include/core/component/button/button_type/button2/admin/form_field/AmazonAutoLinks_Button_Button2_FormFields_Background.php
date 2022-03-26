@@ -30,28 +30,24 @@ class AmazonAutoLinks_Button_Button2_FormFields_Background extends AmazonAutoLin
                 'select_type'   => 'radio',
                 'title'         => __( 'Type', 'amazon-auto-links' ),
                 'label'         => array(
-                    'none'      => __( 'None', 'amazon-auto-links' ),
-                    'solid'     => __( 'Solid', 'amazon-auto-links' ),
-                    'gradient'  => __( 'Gradient', 'amazon-auto-links' ),
+                    'none'       => __( 'None', 'amazon-auto-links' ),
+                    'solid'      => __( 'Solid', 'amazon-auto-links' ),
+                    // 'gradient'   => __( 'Gradient', 'amazon-auto-links' ),   // Not implemented yet due to too much complexity in coding
                 ),
                 'selectors'     => array(
-                    'none'      => '.none',
-                    'solid'     => '.solid',
-                    'gradient'  => '.gradient',
+                    'none'       => '.none',
+                    'solid'      => '.background-solid',
+                    // 'gradient'   => '.background-gradient',
                 ),
                 'class'         => array(
-                    'fieldrow'  => 'background_on',
+                    'field'      => 'dynamic-button-field',
                 ),
                 'attributes'    => array(
-                    '.gradient' => array(
-                        'data-property'         => 'background-gradient',
-                        'data-control-display'  => 'background-gradient',
-                        'data-switch'           => '.solid',
-                    ),
-                    '.solid' => array(
+                    // 'gradient'   => array(
+                    //     'data-property'         => 'background-gradient',
+                    // ),
+                    'solid' => array(
                         'data-property'         => 'background-solid',
-                        'data-control-display'  => 'background-solid',
-                        'data-switch'           => '.gradient',
                     ),
                 ),
                 'default'       => 'solid',
@@ -61,41 +57,44 @@ class AmazonAutoLinks_Button_Button2_FormFields_Background extends AmazonAutoLin
                 'type'          => 'color',
                 'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
-                    'fieldrow' => 'solid background_on',
+                    'fieldrow'      => 'background-solid',
+                    'field'         => 'dynamic-button-field',
                 ),
                 'attributes'    => array(
-                    'data-property' => 'background',
+                    'data-property' => 'background-color',
                 ),
                 'default'       => '#4997e5', // '#3498db',
             ),
-            array(
-                'field_id'      => '_bg_gradient_colors',
-                'type'          => 'inline_mixed',
-                'title'         => __( 'Color', 'amazon-auto-links' ),
-                'class'         => array(
-                    'fieldrow' => 'gradient background_on',
-                ),
-                'content'       => array(
-                    array(
-                        'field_id'      => '_bg_start_gradient',
-                        'type'          => 'color',
-                        'title'         => __( 'Start', 'amazon-auto-links' ),
-                        'attributes'    => array(
-                            'data-property' => 'bg-start-gradient',
-                        ),
-                        'default'       => '#4997e5', // '#3498db',
-                    ),
-                    array(
-                        'field_id'      => '_bg_end_gradient',
-                        'type'          => 'color',
-                        'title'         => __( 'End', 'amazon-auto-links' ),
-                        'attributes'    => array(
-                            'data-property' => 'bg-end-gradient',
-                        ),
-                        'default'       => '#3f89ba', // '#2980b9',
-                    )
-                ),
-            ),
+            // Not Implemented yet. This is too complex to implement.
+            // array(
+            //     'field_id'      => '_bg_gradient_colors',
+            //     'type'          => 'inline_mixed',
+            //     'title'         => __( 'Color', 'amazon-auto-links' ),
+            //     'class'         => array(
+            //         'fieldrow' => 'background-gradient',
+            //         'field'    => 'dynamic-button-field',
+            //     ),
+            //     'content'       => array(
+            //         array(
+            //             'field_id'      => '_bg_start_gradient',
+            //             'type'          => 'color',
+            //             'title'         => __( 'Start', 'amazon-auto-links' ),
+            //             'attributes'    => array(
+            //                 'data-property' => 'bg-start-gradient',
+            //             ),
+            //             'default'       => '#4997e5', // '#3498db',
+            //         ),
+            //         array(
+            //             'field_id'      => '_bg_end_gradient',
+            //             'type'          => 'color',
+            //             'title'         => __( 'End', 'amazon-auto-links' ),
+            //             'attributes'    => array(
+            //                 'data-property' => 'bg-end-gradient',
+            //             ),
+            //             'default'       => '#3f89ba', // '#2980b9',
+            //         )
+            //     ),
+            // ),
         );
     }
 

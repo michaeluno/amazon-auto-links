@@ -41,7 +41,8 @@ abstract class AmazonAutoLinks_Button_ButtonType_FormFields_CSS_Base extends Ama
                 'title'         => __( 'Custom CSS', 'amazon-auto-links' ),
                 'description'   => __( 'Enter additional CSS rules here.', 'amazon-auto-links' ),
                 'attributes'    => array(
-                    'style' => 'width: 100%; height: 200px;',
+                    'style'         => 'width: 100%; height: 200px;',
+                    'data-property' => '_custom_css',   // for JavaScript to generate a stylesheet for button previews
                 ),
                 'class'     => array(
                     'field' => 'dynamic-button-field',

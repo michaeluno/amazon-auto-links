@@ -50,6 +50,8 @@ class AmazonAutoLinks_Button_Button2_Event_Query_ButtonPreview extends AmazonAut
         $_sStylesheetURL2   = $this->getSRCFromPath( AmazonAutoLinks_Button_Button2_Loader::$sDirPath . "/asset/css/button-button2-preview-framed" . $_sMin . ".css" );
         // $_sScriptURL        = $this->getSRCFromPath( AmazonAutoLinks_Button_Image_Loader::$sDirPath . "/asset/js/button-image-preview-framed" . $_sMin . ".js" );
         // $sHeadTagInnerHTML .= "<script id='button-preview-framed-image-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>";
+        $_sScriptURL        = $this->getSRCFromPath( AmazonAutoLinks_Button_Loader::$sDirPath . "/asset/js/button-preview-framed-page{$_sMin}.js" );
+        $sHeadTagInnerHTML .= "<script id='button-preview-framed-js' src='" . esc_url( $_sScriptURL ) . "' type='text/javascript'></script>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-preview-framed-style' href='" . esc_url( $_sStylesheetURL1 ) . "' media='all'>";
         $sHeadTagInnerHTML .= "<link rel='stylesheet' id='button-button2-preview-framed-style' href='" . esc_url( $_sStylesheetURL2 ) . "' media='all'>";
         // The <link id='amazon-auto-links-button-css'> tag is removed with the $_aDisallowedIDPrefixesCSS property.

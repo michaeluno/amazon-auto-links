@@ -35,7 +35,7 @@ class AmazonAutoLinks_Button_Button2_FormFields_Preview extends AmazonAutoLinks_
                     'button2',
                     __( 'Buy Now', 'amazon-auto-links' ),
                     array(),
-                    array( 'id' => 'button-image-preview', )
+                    array( 'id' => 'button-preview-button2', )
                 ),
             )
         );

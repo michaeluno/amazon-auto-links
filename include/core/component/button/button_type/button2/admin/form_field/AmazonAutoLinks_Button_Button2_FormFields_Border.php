@@ -32,6 +32,10 @@ class AmazonAutoLinks_Button_Button2_FormFields_Border extends AmazonAutoLinks_F
                 'attributes'    => array(
                     'min'           => 0,
                     'data-property' => 'border-radius',
+                    'data-suffix'   => 'px',
+                ),
+                'class'         => array(
+                    'field'     => 'dynamic-button-field',
                 ),
             ),
             array(
@@ -50,13 +54,11 @@ class AmazonAutoLinks_Button_Button2_FormFields_Border extends AmazonAutoLinks_F
                     'dotted' => '.border-dotted',
                 ),
                 'attributes'    => array(
-                    'select'    => array(
-                        'data-property' => 'border-style',
-                    )
+                    'data-property' => 'border-style',
                 ),
-                // 'class'         => array(
-                //     'fieldrow'  => 'border_style_on',
-                // ),
+                'class'         => array(
+                    'field'     => 'dynamic-button-field',
+                ),
                 'default' =>    'none',
             ),
             array(
@@ -65,6 +67,7 @@ class AmazonAutoLinks_Button_Button2_FormFields_Border extends AmazonAutoLinks_F
                 'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
                     'fieldrow'  => 'border-solid border-dotted',
+                    'field'     => 'dynamic-button-field',
                 ),
                 'attributes'    => array(
                     'data-property' => 'border-color',
@@ -77,9 +80,11 @@ class AmazonAutoLinks_Button_Button2_FormFields_Border extends AmazonAutoLinks_F
                 'title'         => __( 'Width', 'amazon-auto-links' ),
                 'attributes'    => array(
                     'data-property' => 'border-width',
+                    'data-suffix'   => 'px',
                 ),
                 'class'         => array(
                     'fieldrow'  => 'border-solid border-dotted',
+                    'field'     => 'dynamic-button-field',
                 ),
                 'default'       => 1,
             )
