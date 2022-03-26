@@ -83,6 +83,19 @@ hr {
 .align-center {
 	text-align: center;
 }
+.margin-left-2em {
+	margin-left: 1em;
+}
+.margin-left-0point5em {
+	margin-left: 0.5em;
+}
+.margin-top-0 {
+	margin-top: 0;
+}
+.margin-top-1point5em {
+	margin-top: 1.5em;
+}
+
 
 /* Blockquotes */
 .blockquote {
