@@ -5,10 +5,9 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
- 
 /**
  *  Outputs the button.
  *  
@@ -20,11 +19,11 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
         'type'              => 1,    // 0: Link to the product page, 1: Add to cart button.
         'id'                => 0,    // can be omitted
         'asin'              => '',   // comma delimited ASINs
-        'quantity'          => '1',   // comma delimited ASINs
+        'quantity'          => '1',  // comma delimited ASINs
         'country'           => '',   // the locale (country)
         'associate_id'      => '',
         'access_key'        => '',   // public PA-API access key
-        'label'             => '',   // MUST be empty. Otherwise, the 'button label' unit option does not take efferect.
+        'label'             => null, // MUST be empty. Otherwise, the 'button label' unit option does not take effect. [5.2.0] Changed the default value from `''` (empty string) to `null` to respect an empty label.
         'offer_listing_id'  => '',   // offer listing id that Amazon gives
     );
 
@@ -53,6 +52,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             'associate_id' => $_oOption->get( array( 'unit_default', 'associate_id' ), '' ),  // Associate ID
             'access_key'   => $_oOption->getPAAPIAccessKey( $_sLocale ),
         ) + $this->_aArguments;
+        $aArguments[ 'label' ] = $this->___getButtonLabel( $aArguments[ 'id' ], $aArguments[ 'label' ] );
         return $this->___getButtonOutput( $aArguments );
 
     }
@@ -166,7 +166,6 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
 
         }
 
-
     /**
      * Returns a button output by a given button (custom post) ID.
      *
@@ -195,24 +194,6 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
             $isButtonID,
             $_sButtonLabel
         );
-        // @deprecated 5.2.0
-        // if ( ! $isButtonID ) {
-        //     $_sButton = "<button type='button' class='amazon-auto-links-button'>"
-        //                 . $_sButtonLabel
-        //             . "</button>";
-        //     return $bOuterContainer
-        //         ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
-        //                 . $_sButton
-        //             . "</div>"
-        //         : $_sButton;
-        // }
-        // $_iButtonID = ( integer ) $isButtonID;
-        // $_sButtonIDSelector = $_iButtonID >= 0   // preview sets it to -1
-        //     ? "amazon-auto-links-button-$isButtonID"
-        //     : "amazon-auto-links-button-___button_id___";
-        // $_sButton = "<div class='amazon-auto-links-button {$_sButtonIDSelector}'>"
-        //             . $_sButtonLabel
-        //         . "</div>";
         return $bOuterContainer
             ? "<div class='amazon-auto-links-button-container' style='{$bVisible}'>"
                 . $_sButton
