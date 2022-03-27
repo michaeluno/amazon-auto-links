@@ -22,12 +22,26 @@ class AmazonAutoLinks_Button_Image_Loader extends AmazonAutoLinks_Button_ButtonT
 
     /**
      * @since 5.2.0
+     * @var   string
+     */
+    public $sButtonTypeSlug = 'image';
+
+    /**
+     * @since 5.2.0
      */
     protected function _construct() {
         self::$sDirPath = dirname( __FILE__ );
 
         new AmazonAutoLinks_Button_Image_Event_ButtonOutput;
         new AmazonAutoLinks_Button_Image_Event_Query_ButtonPreview;
+    }
+
+    /**
+     * @since  5.2.0
+     * @return string
+     */
+    protected function _getButtonLabel() {
+        return __( 'Image', 'amazon-auto-links' );
     }
 
     /**

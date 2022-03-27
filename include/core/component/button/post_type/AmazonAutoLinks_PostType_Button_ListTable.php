@@ -26,6 +26,7 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
             'cb'                    => '<input type="checkbox" />',   
             'title'                 => __( 'Label', 'amazon-auto-links' ),
             'status'                => __( 'Status', 'amazon-auto-links' ),
+            'details'               => __( 'Details', 'amazon-auto-links' ),
             'shortcode'             => __( 'Shortcode', 'amazon-auto-links' ),
             'preview'               => __( 'Preview', 'amazon-auto-links' ),
         );                      
@@ -44,6 +45,32 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
                . "</span>"
             . "</p>";
     }
+
+    /**
+     * @since    5.2.0
+     * @callback add_filter() cell_{post type slug}_{column slug}
+     * @return   string
+     */
+    public function cell_aal_button_details( $sCell, $iPostID ) {
+        $_sButtonType = get_post_meta( $iPostID, '_button_type', true );
+        $_sButtonType = $_sButtonType ? $_sButtonType : 'classic';
+        return "<ul>"
+                . $this->___getDetailListItem( __( 'ID', 'amazon-auto-links' ), $iPostID )
+                . $this->___getDetailListItem( __( 'Type', 'amazon-auto-links' ), apply_filters( 'aal_button_type_label_' . $_sButtonType, '', $iPostID ) )
+            . "</ul>";
+    }
+        /**
+         * @since  5.2.0
+         * @param  string $sTitle
+         * @param  string $sValue
+         * @return string
+         */
+        private function ___getDetailListItem( $sTitle, $sValue ) {
+            return "<li>"
+                    . "<span class='detail-title'>" . $sTitle . ":</span>"
+                    . "<span class='detail-value'>" . $sValue . "</span>"
+                . "</li>";
+        }
 
     /**
      * @callback add_filter() cell_{post type slug}_{column slug}

@@ -22,6 +22,12 @@ class AmazonAutoLinks_Button_Button2_Loader extends AmazonAutoLinks_Button_Butto
 
     /**
      * @since 5.2.0
+     * @var   string
+     */
+    public $sButtonTypeSlug = 'button2';
+
+    /**
+     * @since 5.2.0
      */
     protected function _construct() {
         self::$sDirPath = dirname( __FILE__ );
@@ -31,19 +37,18 @@ class AmazonAutoLinks_Button_Button2_Loader extends AmazonAutoLinks_Button_Butto
     }
 
     /**
+     * @since  5.2.0
+     * @return string
+     */
+    protected function _getButtonLabel() {
+        return __( 'Button 2', 'amazon-auto-links' );
+    }
+
+    /**
      * @since 5.2.0
      */
     protected function _loadPostMetaBoxes() {
-        // @derpected
-        // new AmazonAutoLinks_Button_Button2_PostMetaBox_Main(
-        //     null, // meta box ID - null to auto-generate
-        //     __( 'Main', 'amazon-auto-links' ),
-        //     array( // post type slugs: post, page, etc.
-        //         AmazonAutoLinks_Registry::$aPostTypes[ 'button' ]
-        //     ),
-        //     'normal', // context (what kind of metabox this is)
-        //     'default' // priority
-        // );
+
         new AmazonAutoLinks_Button_Button2_PostMetaBox_Text(
             null, // meta box ID - null to auto-generate
             __( 'Text', 'amazon-auto-links' ),

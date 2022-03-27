@@ -22,6 +22,12 @@ class AmazonAutoLinks_Button_Classic_Loader extends AmazonAutoLinks_Button_Butto
 
     /**
      * @since 5.2.0
+     * @var   string
+     */
+    public $sButtonTypeSlug = 'classic';
+
+    /**
+     * @since 5.2.0
      */
     protected function _construct() {
 
@@ -30,6 +36,14 @@ class AmazonAutoLinks_Button_Classic_Loader extends AmazonAutoLinks_Button_Butto
         new AmazonAutoLinks_Button_Classic_Event_ButtonOutput;
         new AmazonAutoLinks_Button_Classic_Event_Query_ButtonPreview;
 
+    }
+
+    /**
+     * @since  5.2.0
+     * @return string
+     */
+    protected function _getButtonLabel() {
+        return __( 'Classic', 'amazon-auto-links' );
     }
 
     /**

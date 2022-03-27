@@ -1,6 +1,6 @@
 /*
 	@name Edit Button
-	@version 1.0.3
+	@version 1.0.4
  */
 
 /* List Table */
@@ -12,6 +12,13 @@ td.column-preview.preview {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.column-status {
+    width: 10%;
+}
+.column-details {
+    width: 10%;
 }
 
 /* Edit Screen */
