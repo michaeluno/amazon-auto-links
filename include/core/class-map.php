@@ -666,6 +666,7 @@ return array(
     "AmazonAutoLinks_FormFields_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/form_field/_abstract/AmazonAutoLinks_FormFields_Base.php", 
     "AmazonAutoLinks_PageMetaBox_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/form_field/_abstract/AmazonAutoLinks_PageMetaBox_Base.php", 
     "AmazonAutoLinks_PostMetaBox_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_meta_box/_abstract/AmazonAutoLinks_PostMetaBox_Base.php", 
+    "AmazonAutoLinks_ListTableAction_Clone_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_ListTableAction_Clone_Base.php", 
     "AmazonAutoLinks_PostType__ActionLink_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__ActionLink_Base.php", 
     "AmazonAutoLinks_PostType__Common___ActionLink_Status_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/admin/post_type/_abstract/AmazonAutoLinks_PostType__Common___ActionLink_Status_Base.php", 
     "AmazonAutoLinks_Event_Action_AdminNotices_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/action/AmazonAutoLinks_Event_Action_AdminNotices_Base.php", 
