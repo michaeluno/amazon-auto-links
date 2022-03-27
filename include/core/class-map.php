@@ -99,6 +99,8 @@ return array(
     "AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/event/query/AmazonAutoLinks_Button_Event_Query_ButtonPreview_Theme.php", 
     "AmazonAutoLinks_PostType_Button" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button.php", 
     "AmazonAutoLinks_PostType_Button_ListTable" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/AmazonAutoLinks_PostType_Button_ListTable.php", 
+    "AmazonAutoLinks_Button_ListTableAction_Clone" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/action/AmazonAutoLinks_Button_ListTableAction_Clone.php", 
+    "AmazonAutoLinks_Button_PostType_ActionLink_Clone" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/action/AmazonAutoLinks_Button_PostType_ActionLink_Clone.php", 
     "AmazonAutoLinks_PostType__Button___ActionLink_Status" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/post_type/action/AmazonAutoLinks_PostType__Button___ActionLink_Status.php", 
     "AmazonAutoLinks_Button_Shortcode" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/shortcode/AmazonAutoLinks_Button_Shortcode.php", 
     "AmazonAutoLinks_Button_Utility" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/button/utility/AmazonAutoLinks_Button_Utility.php", 

@@ -629,6 +629,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
+     * @since  5.2.0
+     * @return boolean
+     */
+    public function canCloneButtons() {
+        return false;
+    }
+
+    /**
      * @since  3.7.5
      * @return boolean
      */

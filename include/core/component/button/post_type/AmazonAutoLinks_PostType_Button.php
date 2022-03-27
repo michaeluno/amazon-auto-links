@@ -16,7 +16,8 @@
 class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_ListTable {
 
     public function start() {
-        // add_filter( 'upload_mimes', array( $this, 'replyToGetAllowedFileTypesToUpload' ) );
+        // add_filter( 'upload_mimes', array( $this, 'replyToGetAllowedFileTypesToUpload' ) ); // @deprecated
+        add_action( 'aal_action_clone_button', array( $this, 'replyToUpdateButtonCSSOnSavingPost' ) );
     }
 
     public function setUp() {
@@ -81,7 +82,8 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             add_filter( 'columns_' . AmazonAutoLinks_Registry::$aPostTypes[ 'button' ], array( $this, 'replyToModifyColumnHeader' ) );
 
             new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );  // [4.3.0]
-                     
+            new AmazonAutoLinks_Button_PostType_ActionLink_Clone( $this );      // [5.2.0]
+
         }
 
         if ( is_admin() ) {
