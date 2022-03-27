@@ -654,16 +654,6 @@
           return Boolean( string );
       }
     }
-
-    /**
-     * @see     https://stackoverflow.com/a/47767860
-     * @param   url
-     * @returns {*}
-     * @deprecated Unused at the moment.
-     */
-    function getURLExtension( url ) {
-      return url.split(/[#?]/)[0].split('.').pop().trim();
-    }    
     
   } );
 
