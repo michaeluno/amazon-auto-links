@@ -83,7 +83,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
             new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );  // [4.3.0]
                      
         }
-        
+
         if ( is_admin() ) {
             add_action( 'save_post', array( $this, 'replyToUpdateButtonCSSOnSavingPost' ) );
             add_action( 'transition_post_status', array( $this, 'replyToUpdateButtonCSSOnPostStatusChange' ), 10, 3 );
@@ -99,6 +99,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
      * @since  5.2.0
      * @param  array $aMimeTypes
      * @return array
+     * @deprecated 5.2.0 Doesn't work as WordPress disallows SVG files to be uploaded using the media uploader.
      */
     public function replyToGetAllowedFileTypesToUpload( $aMimeTypes ) {
       $aMimeTypes[ 'svg' ]  = 'image/svg+xml';     // Adding .svg extension
@@ -236,7 +237,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
          * @callback add_action() save_post
          */
         public function replyToUpdateButtonCSSOnSavingPost( $iPostID ) {
-            
+
             if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
                 return;
             }

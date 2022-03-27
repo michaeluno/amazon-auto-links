@@ -87,10 +87,9 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
          * @callback add_action() aal_action_update_active_buttons
          */
         public function replyToUpdateActiveItems() {
-            $_aActiveIDs = AmazonAutoLinks_PluginUtility::getActiveButtonIDsQueried();
             update_option( 
                 AmazonAutoLinks_Registry::$aOptionKeys[ 'active_buttons' ],
-                $_aActiveIDs,
+                AmazonAutoLinks_PluginUtility::getActiveButtonIDsQueried(), // active button IDs
                 true   // enable auto-load
             );            
         }        
