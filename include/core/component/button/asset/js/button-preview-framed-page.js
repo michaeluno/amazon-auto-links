@@ -1,6 +1,6 @@
 /**
  * @name:    Button Preview Framed Page
- * @version: 1.1.2
+ * @version: 1.1.3
  */
 (function () {
 
@@ -14,18 +14,20 @@
   }
 
   var lastHeight;
+  var lastWidth;
 
   // Add an event listener for a custom event
-  document.addEventListener( 'ReloadButtonPreview', function(e) {
+  document.addEventListener( 'ReloadButtonPreview', function( e ) {
 
-    // console.log( 'Framed event:', e ); // Prints "Example of an event"
+    // console.log( 'Framed event:', e );
 
     // Tell the parent frame about the dimensions of the document.
     var _previewInfo = getPreviewInformation();
-    if ( lastHeight === _previewInfo.height ) {
+    if ( lastHeight === _previewInfo.height && lastWidth === _previewInfo.width ) {
       return;
     }
     lastHeight = _previewInfo.height;
+    lastWidth  = _previewInfo.width;
     parent.postMessage( {
 			message: 'height',
 			height: _previewInfo.height,
@@ -33,6 +35,7 @@
       id: _previewInfo.id,
 			nonce: getParameterByName( 'nonce' )
     }, location.protocol + '//' + location.host );
+
   });
 
   /**
