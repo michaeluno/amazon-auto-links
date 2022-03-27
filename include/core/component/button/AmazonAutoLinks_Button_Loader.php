@@ -128,6 +128,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
                     ),
                     get_site_url()
                 ),
+                'nonce'           => wp_create_nonce( 'aal_button_preview_nonce' ),
             ),
            'in_footer'    => true,
         ) + $aArguments;

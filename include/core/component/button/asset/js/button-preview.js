@@ -18,24 +18,6 @@
     'style': 'vertical-align: middle; margin: 0 0.6em;'
   } ).hide();
 
-  /**
-   * Global function called from an iframe document.
-   *
-   * This is needed to get the button preview element dimensions in the framed page
-   * especially when the iframe in the main page is invisible which makes it not possible to get dimensions of the previewed button.
-   * @remark  it seems whenever the iframe contents are modified, the child script calls this function.
-   */
-  aalSetButtonPreviewIframeStyle = function ( iWidth, iHeight, isButtonID ) {
-    $( '#iframe-button-preview-' + isButtonID ).width( iWidth ).height( iHeight )
-      .css( {
-        'width': iWidth + 'px',
-        'height': iHeight + 'px',
-        'visibility': 'visible',
-        'min-width': '116px',
-      } );
-    _spinner.hide();
-  };
-
   $( document ).ready( function(){
     $( '.button-select-row select' ).trigger( 'change' ); // load the first iframe item
   } );
@@ -51,7 +33,9 @@
     if ( _bNew ) {
       var _src = aalButtonPreview.frameSRC.replace( '___button_id___', $( this ).val() );
       var _buttonLabel = _getButtonLabelByID( $( this ).val(), this );
-      _src += 'undefined' === _buttonLabel ? '' : '&button-label=' + _buttonLabel;
+      _src += 'undefined' === _buttonLabel
+        ? '' + '&nonce=' + aalButtonPreview.nonce
+        : '&button-label=' + _buttonLabel + '&nonce=' + aalButtonPreview.nonce; // a nonce is needed for post messages to be verified
       _thisFrame = $( '<iframe>', {
         'id': 'iframe-button-preview-' + $( this ).val(),
         'data-button-id': $( this ).val(),
@@ -104,13 +88,26 @@
       if ( ! _thisFrame.length ) {
         return;
       }
-      _thisFrame.contents().find( '.amazon-auto-links-button[data-type!=image]' )
-        .text(
-          $( element ).closest( '.amazon-auto-links-section-table' ).find( 'input.override-button-label[type=checkbox]' ).is( ':checked' )
-            ? $( element ).closest( '.amazon-auto-links-section-table' ).find( 'input.button-label[type=text]' ).first().val() // Override
-            : aalButtonPreview.activeButtons[ iButtonID ] // Revert the label by using the default label
-        );
-      _thisFrame.get( 0 ).contentWindow.setParentButtonPreviewIframeStyle();  // Update the frame dimension
+      var _frameContents = _thisFrame.contents();
+      var _textContainer = _frameContents.find( '.amazon-auto-links-button .button-label' );
+      _textContainer     = _textContainer.length
+        ? _textContainer
+        : _frameContents.find( '.amazon-auto-links-button[data-type!=image]' );
+      _textContainer.text(
+        $( element ).closest( '.amazon-auto-links-section-table' ).find( 'input.override-button-label[type=checkbox]' ).is( ':checked' )
+          ? $( element ).closest( '.amazon-auto-links-section-table' ).find( 'input.button-label[type=text]' ).first().val() // Override
+          : aalButtonPreview.activeButtons[ iButtonID ] // Revert the label by using the default label
+      );
+      var _width  = Math.ceil( _frameContents.find( '#preview-button' ).width() );
+      var _height = Math.ceil( _frameContents.find( 'body' ).height() );
+      _thisFrame.width( _width ).height( _height )
+        .css( {
+          'width':      _width + 'px',
+          'height':     _height + 'px',
+          'visibility': 'visible',
+          'min-width':  '116px',
+        } );
+
     }
 
   // Override the button label when the Button Label field is entered.
@@ -128,6 +125,50 @@
       _setButtonLabelByID( _buttonID, _select );
     }
   } );
+
+  /**
+   * A global function called from an iframe document.
+   *
+   * This is needed to get the button preview element dimensions in the framed page
+   * especially when the iframe in the main page is invisible which makes it not possible to get dimensions of the previewed button.
+   * @remark  it seems whenever the iframe contents are modified, the child script calls this function.
+   */
+  aalSetButtonPreviewIframeStyle = function ( iWidth, iHeight, isButtonID ) {
+    $( '#iframe-button-preview-' + isButtonID ).width( iWidth ).height( iHeight )
+      .css( {
+        'width': iWidth + 'px',
+        'height': iHeight + 'px',
+        'visibility': 'visible',
+        'min-width': '116px',
+      } );
+    _spinner.hide();
+  };
+
+  /**
+   * Adjust the iframe height on proportional changes with windows messages from the framed window
+   * @deprecated unused but might be needed later at some point when deprecating the above global aalSetButtonPreviewIframeStyle() function.
+   */
+  ( function() { // IIFE for IDE
+    if ( ! window.addEventListener ) {  // there are browsers which don't support this
+      return;
+    }
+    window.addEventListener( 'message', function( event) {
+      if ( event.origin !== location.protocol + '//' + location.host ) {
+        return;
+      }
+      if ( 'undefined' === typeof event.data.height ) {
+        return;
+      }
+      $( '#iframe-button-preview-' + event.data.id ).width( event.data.width ).height( event.data.height )
+        .css( {
+          'width': event.data.width + 'px',
+          'height': event.data.height + 'px',
+          'visibility': 'visible',
+          'min-width': '116px',
+        } );
+      _spinner.hide();
+    }, false );
+  })();
 
   function debugLog( ...args ) {
     if ( ! parseInt( aalButtonPreview.debugMode ) ) {
