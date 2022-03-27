@@ -5,7 +5,7 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
 /**
@@ -27,8 +27,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return;
         }            
-        
-        $_iCount      = count( $aPostIDs );
+
         $_aFailed     = array();
         $_aNewPostIDs = array();
         foreach( $aPostIDs as $_iPostID ) {
@@ -130,7 +129,6 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
              * @return array
              */
             private function ___getPostColumns( $_oPost ) {
-
                 $_oCurrentUser = wp_get_current_user();
                 return array(
                     'comment_status' => $_oPost->comment_status,
@@ -149,8 +147,7 @@ class AmazonAutoLinks_ListTableAction_clone_unit extends AmazonAutoLinks_PluginU
                     'post_type'      => $_oPost->post_type,
                     'to_ping'        => $_oPost->to_ping,
                     'menu_order'     => $_oPost->menu_order
-                );                
-                
+                );
             }
 
 }
