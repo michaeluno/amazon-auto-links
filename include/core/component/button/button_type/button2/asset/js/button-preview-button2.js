@@ -188,7 +188,7 @@
           return getBoolean( this[ 'icon' + getFirstLetterCapitalized( position.toLowerCase() ) ].jqIconToggle.filter( ':checked' ).val() );
         },
         'getIconType': function( position ) {
-          return getBoolean( this[ 'icon' + getFirstLetterCapitalized( position.toLowerCase() ) ].jqIconType.filter( ':checked' ).val() );
+          return this[ 'icon' + getFirstLetterCapitalized( position.toLowerCase() ) ].jqIconType.filter( ':checked' ).val();
         },
         /**
          * Gets the height of the current label element.
@@ -522,6 +522,7 @@
             styleHolder[ _styleKeyIcon ][ 'display' ]             = 'inline-flex'; // this needs to be set regardless the url is empty or not
             var _url         = $( self ).val().trim();
             if ( ! _url.length ) {
+              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
               delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ];
               delete styleHolder[ _styleKeyIcon ][ 'mask-image' ];
               delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ];
@@ -533,6 +534,7 @@
             var _urlCSS = "url('" + _url + "')";
             if ( this.isSVGMaskEnabled( _pos ) ) {
               delete styleHolder[ _styleKeyIcon ][ 'background-image' ];
+              styleHolder[ _styleKeyIcon ][ 'background-color' ] = $( '.dynamic-button-field input[type=text][data-property=_icon_svg_mask_' + _pos + ']' ).val();
             } else {
               delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
               styleHolder[ _styleKeyIcon ][ 'background-image' ]    = _urlCSS;
