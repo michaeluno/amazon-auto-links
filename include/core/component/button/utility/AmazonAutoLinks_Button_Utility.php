@@ -18,7 +18,7 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
      * @param  integer|string $isButtonID
-     * @param  integer|string $isButtonType         The button type. Accepts `_by_id`, `classic`, `image`, `theme`, `button2`, `0`. `0` is an alias for `theme`.
+     * @param  integer|string $isButtonType         The button type. Accepts `_by_id`, `classic`, `image`, `theme`, `flat`, `0`. `0` is an alias for `theme`.
      * @param  null|string    $nsButtonLabel        If `null` is passed, the label will not be set. This accepts an empty string as a label.
      * @param  array          $aFrameAttributes
      * @param  array          $aContainerAttributes
@@ -52,7 +52,7 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
         /**
          * @since  5.2.0
          * @param  integer|string $isButtonID
-         * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `button2`, `0`. `0` is an alias for `theme`.
+         * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `flat`, `0`. `0` is an alias for `theme`.
          * @param  null|string    $nsButtonLabel
          * @param  string         $sNonce
          * @return string

@@ -48,7 +48,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
 
         /// Button types [5.2.0]
         new AmazonAutoLinks_Button_Classic_Loader;
-        new AmazonAutoLinks_Button_Button2_Loader;
+        new AmazonAutoLinks_Button_Flat_Loader;
         new AmazonAutoLinks_Button_Image_Loader;
 
         /// Events [4.3.0]

@@ -198,7 +198,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
     public function replyToGetCustomAddNewLink( $sURL, $sPath ){
         if( $sPath === 'post-new.php?post_type=' . $this->oProp->sPostType ) {
             $sURL = add_query_arg( array(
-                'button_type' => 'button2',
+                'button_type' => 'flat',
             ), $sURL );
         }
         return $sURL;

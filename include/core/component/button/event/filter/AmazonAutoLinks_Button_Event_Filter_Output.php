@@ -174,7 +174,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
      * @param  null|string    $nsLabel
      * @param  boolean        $bVisible
      * @param  boolean        $bOuterContainer
-     * @param  string         $sButtonType        Accepts `classic`, `theme`, `image`, or `button2`.
+     * @param  string         $sButtonType        Accepts `classic`, `theme`, `image`, or `flat`.
      * @return string
      * @since  3
      * @since  5.2.0          Accepts an empty string as a label. Use null to reflect the default label, "Buy Now". Added the `$sButtonType` parameter.
@@ -230,7 +230,7 @@ class AmazonAutoLinks_Button_Event_Filter_Output extends AmazonAutoLinks_PluginU
          * @since  5.2.0
          * @param  integer|string $isButtonID
          * @param  string         $sButtonType
-         * @return string         Either `classic`, `theme`, `image`, or `button2`
+         * @return string         Either `classic`, `theme`, `image`, or `flat`
          */
         private function ___getButtonType( $isButtonID, $sButtonType ) {
             $_sDefaultType = 'classic';
