@@ -19,7 +19,8 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
      * Returns field definition arrays.
      * 
      * Pass an empty string to the parameter for meta box options. 
-     * 
+     *
+     * @since  5.2.0
      * @return array
      */    
     public function get( $sFieldIDPrefix='', $sUnitType='' ) {
@@ -39,27 +40,14 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
         );
     }
         /**
+         * @since  5.2.0
          * @param  string  $sSuffix
          * @param  boolean $bDefault         Whether it is enabled by default.
          * @param  string  $sDefaultImageSRC The default image URL.
          * @return array
-         * @since  5.2.0
          */
         protected function _getIconNestedFieldsets( $sSuffix, $bDefault=false, $sDefaultImageSRC='' ) {
             return array(
-                // @deprecated
-                // array(
-                //     'field_id'          => 'enable',
-                //     'type'              => 'revealer',
-                //     'select_type'       => 'checkbox',
-                //     // 'label'             => '<strong>' . __( 'Enable', 'amazon-auto-links' ) . "<span class='title-colon'>:</span></strong>",
-                //     'label'             => __( 'Enable', 'amazon-auto-links' ),
-                //     'selectors'         => '.button-icon-' . $sSuffix,
-                //     'default'           => $bDefault,
-                //     'attributes'        => array(
-                //         'data-property' => '_icon_toggle_' . $sSuffix,
-                //     ),
-                // ),
                 array(
                     'field_id'          => 'enable',
                     'type'              => 'revealer',
@@ -87,10 +75,10 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                         'svg_file'     => __( 'SVG File', 'amazon-auto-links' ),
                         'image_file'   => __( 'Image File', 'amazon-auto-links' ),
                         // maybe in the future, implement these. But these are complicated to implement
-                        // 'svg_html'        => 'SVG HTML Mark-up',
-                        // 'svg_splice'      => 'Specify an icon ID from an SVG file',
-                        // 'font_icon_css'   => 'Set by a CSS class',
-                        // 'font_icon_glyph' => 'Pick up an icon from font that contains icon lists',
+                        // 'svg_html'        => 'SVG HTML Mark-up', :this requires a complicated sanitization process, to store it in the database plus display it in front-end
+                        // 'svg_splice'      => 'Specify an icon ID from an SVG file', : for this, the user must know the ID of the icon element in the SVG file. This requires at least two fields; one is for the icon ID and the other is for the SVG file path.
+                        // 'font_icon_css'   => 'Set by a CSS class', : for this, it is assumed that the user knows a class name of an icon. And this requires to dynamically set the entered class name to the icon element class attribute.
+                        // 'font_icon_glyph' => 'Pick up an icon from a font file that contains icon lists', : it's hard to know what glyph index are used
                     ),
                     'selectors'         => array(
                         'svg_file'      => '.svg-file-' . $sSuffix,
@@ -443,5 +431,5 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                 ),
             );
         }
-      
+
 }
