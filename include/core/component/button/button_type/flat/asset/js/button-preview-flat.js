@@ -19,9 +19,12 @@
     var styleKeyButtonHover    = styleKeyButton + ':hover';
     var styleKeyButtonChildren = styleKeyButton + ' > *';
     var styleKeyButtonLabel    = styleKeyButton + ' .button-label';
-    var styleKeyIconBoth       = styleKeyButton + ' .button-icon';
-    var styleKeyIconLeft       = styleKeyButton + ' .button-icon-left';
-    var styleKeyIconRight      = styleKeyButton + ' .button-icon-right';
+    var styleKeyIconBoth       = styleKeyButton + ' .button-icon';            // the both icon containers
+    var styleKeyIconIBoth      = styleKeyButton + ' .button-icon > i';        // the both icons
+    var styleKeyIconLeft       = styleKeyButton + ' .button-icon-left';       // the left icon container
+    var styleKeyIconILeft      = styleKeyButton + ' .button-icon-left > i';   // the left icon
+    var styleKeyIconRight      = styleKeyButton + ' .button-icon-right';      // the right icon container
+    var styleKeyIconIRight     = styleKeyButton + ' .button-icon-right > i';  // the right icon
     var styleHolder            = getDefaultStyleHolder();
     var previewFrame           = $( '#button-preview-flat > iframe' ).first();
     var inputs                 = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
@@ -376,6 +379,7 @@
       function _getInputProcessorIcon( position, inputProcessorBase ) {
         var _pos                         = position.toLowerCase();    // left / right
         var _styleKeyIcon                = 'left' === _pos ? styleKeyIconLeft : styleKeyIconRight;
+        var _styleKeyIconI               = 'left' === _pos ? styleKeyIconILeft : styleKeyIconIRight;
         var _iconPos                     = 'icon' + getFirstLetterCapitalized( _pos ); // iconLeft / iconRight
         var _inputProcessorIcon          = _getInputProcessorIcon();
         var _inputProcessorIconSVGFile   = _getInputProcessorIconSVGFile();
@@ -400,7 +404,8 @@
           // data-property: _icon_toggle_left / _icon_toggle_right
           _processor[ '_icon_toggle_' + _pos ] = function( self ) {
             if ( ! getBoolean( self.val() ) ) {
-              styleHolder[ _styleKeyIcon ] = {}; // delete all the rules of the left icon
+              styleHolder[ _styleKeyIcon ]  = {}; // delete all the rules of the left icon
+              styleHolder[ _styleKeyIconI ] = {}; // delete all the rules of the left icon
 
               // Even though the icon is set to off, the image field of the Image File gets shown for some reasons when opening the screen of the existing button to edit (post.php, not Add New). So hide them.
               $( self.data( 'selectors' ) ).hide();
@@ -482,19 +487,20 @@
           // data-property: _icon_image_file_left / _icon_image_file_right
           _processor[ '_icon_image_file_' + _pos ] = function( self ) {
             if ( ! this.isIconEnabled( _pos ) ) {
-              styleHolder[ _styleKeyIcon ] = {};
+              styleHolder[ _styleKeyIcon ]  = {};
+              styleHolder[ _styleKeyIconI ] = {};
               return;
             }
             styleHolder[ _styleKeyIcon ][ 'display' ]             = 'inline-flex';
             var _url    = $( self ).val().trim();
             if ( ! _url.length ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-image' ];
+              delete styleHolder[ _styleKeyIconI ][ 'background-image' ];
               return;
             }
-            styleHolder[ _styleKeyIcon ][ 'background-image' ]    = "url('" + _url + "')";
-            styleHolder[ _styleKeyIcon ][ 'background-size' ]     = 'contain';
-            styleHolder[ _styleKeyIcon ][ 'background-position' ] = 'center';
-            styleHolder[ _styleKeyIcon ][ 'background-repeat' ]   = 'no-repeat';
+            styleHolder[ _styleKeyIconI ][ 'background-image' ]    = "url('" + _url + "')";
+            styleHolder[ _styleKeyIconI ][ 'background-size' ]     = 'contain';
+            styleHolder[ _styleKeyIconI ][ 'background-position' ] = 'center';
+            styleHolder[ _styleKeyIconI ][ 'background-repeat' ]   = 'no-repeat';
             // Dimensions
             var _heightLabel = Math.ceil( this.jqPreviewButtonLabel.height() );
             styleHolder[ _styleKeyIcon ][ 'min-height' ]          = _heightLabel + 'px';
@@ -508,25 +514,26 @@
               return this[ 'icon' + getFirstLetterCapitalized( position ) ].jqIconSVGMaskToggle.is( ':checked' );
             },
             'deleteSVGRules': function( position ) {
-              var _styleKeyIcon = 'left' === position ? styleKeyIconLeft : styleKeyIconRight;
-              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-image' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-position' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-repeat' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-repeat' ];
+              var _styleKeyIconI = 'left' === position ? styleKeyIconILeft : styleKeyIconIRight;
+              delete styleHolder[ _styleKeyIconI ][ 'background-color' ];
+              delete styleHolder[ _styleKeyIconI ][ '-webkit-mask-image' ];
+              delete styleHolder[ _styleKeyIconI ][ 'mask-image' ];
+              delete styleHolder[ _styleKeyIconI ][ '-webkit-mask-position' ];
+              delete styleHolder[ _styleKeyIconI ][ 'mask-position' ];
+              delete styleHolder[ _styleKeyIconI ][ '-webkit-mask-repeat' ];
+              delete styleHolder[ _styleKeyIconI ][ 'mask-repeat' ];
             },
           };
           // data-property: _icon_svg_file_left / _icon_svg_file_right
           _processor[ '_icon_svg_file_' + _pos ] = function( self ) {
             if ( ! this.isIconEnabled( _pos ) ) {
-              styleHolder[ _styleKeyIcon ] = {};
+              styleHolder[ _styleKeyIcon ]  = {};
+              styleHolder[ _styleKeyIconI ] = {};
               return;
             }
             // If icon image type is not svg, remove related CSS rules
             if ( this.getIconType( _pos ) !== 'svg_file' ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
+              delete styleHolder[ _styleKeyIconI ][ 'background-color' ];
             }
             styleHolder[ _styleKeyIcon ][ 'display' ]             = 'inline-flex'; // this needs to be set regardless the url is empty or not
             var _url         = $( self ).val().trim();
@@ -536,45 +543,46 @@
             }
             var _urlCSS = "url('" + _url + "')";
             if ( this.isSVGMaskEnabled( _pos ) ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-image' ];
-              styleHolder[ _styleKeyIcon ][ 'background-color' ] = $( '.dynamic-button-field input[type=text][data-property=_icon_svg_mask_' + _pos + ']' ).val();
+              delete styleHolder[ _styleKeyIconI ][ 'background-image' ];
+              styleHolder[ _styleKeyIconI ][ 'background-color' ] = $( '.dynamic-button-field input[type=text][data-property=_icon_svg_mask_' + _pos + ']' ).val();
             } else {
-              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
-              styleHolder[ _styleKeyIcon ][ 'background-image' ]    = _urlCSS;
+              delete styleHolder[ _styleKeyIconI ][ 'background-color' ];
+              styleHolder[ _styleKeyIconI ][ 'background-image' ]    = _urlCSS;
             }
-            styleHolder[ _styleKeyIcon ][ 'background-size' ]     = 'contain';
-            styleHolder[ _styleKeyIcon ][ 'background-position' ] = 'center';
-            styleHolder[ _styleKeyIcon ][ 'background-repeat' ]   = 'no-repeat';
+            styleHolder[ _styleKeyIconI ][ 'background-size' ]     = 'contain';
+            styleHolder[ _styleKeyIconI ][ 'background-position' ] = 'center';
+            styleHolder[ _styleKeyIconI ][ 'background-repeat' ]   = 'no-repeat';
 
             // For SVG color
-            styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ]    = _urlCSS;
-            styleHolder[ _styleKeyIcon ][ 'mask-image' ]            = _urlCSS;
-            styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ] = 'center center';
-            styleHolder[ _styleKeyIcon ][ 'mask-position' ]         = 'center center';
-            styleHolder[ _styleKeyIcon ][ '-webkit-mask-repeat' ]   = 'no-repeat';
-            styleHolder[ _styleKeyIcon ][ 'mask-repeat' ]           = 'no-repeat';            
+            styleHolder[ _styleKeyIconI ][ '-webkit-mask-image' ]    = _urlCSS;
+            styleHolder[ _styleKeyIconI ][ 'mask-image' ]            = _urlCSS;
+            styleHolder[ _styleKeyIconI ][ '-webkit-mask-position' ] = 'center center';
+            styleHolder[ _styleKeyIconI ][ 'mask-position' ]         = 'center center';
+            styleHolder[ _styleKeyIconI ][ '-webkit-mask-repeat' ]   = 'no-repeat';
+            styleHolder[ _styleKeyIconI ][ 'mask-repeat' ]           = 'no-repeat';
           };
           // data-property: _icon_svg_mask_toggle_left / _icon_svg_mask_toggle_right
           _processor[ '_icon_svg_mask_toggle_' + _pos ] = function( self ) {
             if ( $( self ).is( ':checked' ) ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-image' ];
+              delete styleHolder[ _styleKeyIconI ][ 'background-image' ];
               $( "input[type=text][data-property='_icon_svg_mask_" + _pos + "']" ).trigger( 'change' );
               return;
             }
-            delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
+            delete styleHolder[ _styleKeyIconI ][ 'background-color' ];
             $( "input[type=text][data-property='_icon_svg_file_" + _pos + "']" ).trigger( 'change' );            
           };
           // data-property: _icon_svg_mask_left / _icon_svg_mask_right
           _processor[ '_icon_svg_mask_' + _pos ] = function( self ) {
             if ( ! this.isIconEnabled( _pos ) ) {
-              styleHolder[ _styleKeyIcon ] = {};
+              styleHolder[ _styleKeyIcon ]  = {};
+              styleHolder[ _styleKeyIconI ] = {};
               return;
             }
             if ( this.getIconType( _pos ) !== 'svg_file' ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
+              delete styleHolder[ _styleKeyIconI ][ 'background-color' ];
               return;
             }
-            styleHolder[ _styleKeyIcon ][ 'background-color' ] = $( self ).val();
+            styleHolder[ _styleKeyIconI ][ 'background-color' ] = $( self ).val();
           };
           return _processor;
         }
@@ -594,11 +602,11 @@
         'justify-content': 'space-around',
       };
       _styleHolder[ styleKeyButtonChildren ] = {
-        'align-items': 'center',
-        'display': 'inline-flex',
+        'align-items':    'center',
+        'display':        'inline-flex',
         'vertical-align': 'middle',
       };
-      _styleHolder[ styleKeyButtonLabel ]      = {};
+      _styleHolder[ styleKeyButtonLabel ]    = {};
       _styleHolder[ styleKeyIconBoth ]       = {
         'margin-right':   'auto',
         'margin-left':    'auto',
@@ -607,8 +615,15 @@
         // 'vertical-align': 'middle',
         'height':         'auto', // the icon size is defined with min-width and min-height and the height is set to `auto` to align the element vertically center when the icon height is shorter than the label height
       };
+      _styleHolder[ styleKeyIconIBoth ]      = {
+        'display':        'inline-block',
+        'width':          '100%',
+        'height':         '100%',
+      };
       _styleHolder[ styleKeyIconLeft ]       = {};
+      _styleHolder[ styleKeyIconILeft ]      = {};
       _styleHolder[ styleKeyIconRight ]      = {};
+      _styleHolder[ styleKeyIconIRight ]     = {};
       _styleHolder[ styleKeyButtonHover ]    = {};
       return _styleHolder;
     }
