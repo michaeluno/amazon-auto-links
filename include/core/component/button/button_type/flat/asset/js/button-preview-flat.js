@@ -388,6 +388,19 @@
 
         function _getInputProcessorIcon() {
           var _processor = {};
+          // data-property: _icon_padding_type_left / _icon_padding_type_right
+          _processor[ '_icon_padding_type_' + _pos ] = function( self ) {
+            if ( 'all' === $( self ).val() ) {
+              delete styleHolder[ _styleKeyIcon ][ 'padding-top' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-right' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-bottom' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-left' ];
+              $( "input[type=number][data-property='padding'][data-selector-suffix='" + self.data( 'selectorSuffix' ) + "']" ).trigger( 'change' );
+              return;
+            }
+            delete styleHolder[ _styleKeyIcon ][ 'padding' ];
+            $( "input[type=number][data-property^='padding-'][data-selector-suffix='" + self.data( 'selectorSuffix' ) + "']" ).trigger( 'change' );            
+          };          
           // data-property: _icon_left_margin_type / _icon_right_margin_type
           _processor[ '_icon_' + _pos + '_margin_type' ] = function( self ) {
             if ( 'all' === $( self ).val() ) {

@@ -331,6 +331,112 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                     ),
                 ),
 
+                // Padding
+                array(
+                    'field_id'          => 'padding_type',
+                    'type'              => 'revealer',
+                    'select_type'       => 'radio',
+                    'title'             => __( 'Padding', 'amazon-auto-links' ),
+                    'hidden'            => true,
+                    'label'             => array(
+                        'all'   => __( 'All', 'amazon-auto-links' ),
+                        'each'  => __( 'Each', 'amazon-auto-links'),
+                    ),
+                    'selectors'     => array(
+                        'all'   => '.padding-all-' . $sSuffix ,
+                        'each'  => '.padding-each-' . $sSuffix ,
+                    ),
+                    'class'             => array(
+                        'fieldset' => 'button-icon-' . $sSuffix,
+                    ),
+                    'attributes'        => array(
+                        'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                        'data-property'        => '_icon_padding_type_' . $sSuffix,
+                    ),
+                    'default'           => 'all',                    
+                ),
+                array(
+                    'hidden'        => true,
+                    'field_id'      => 'padding',
+                    'class'         => array(
+                        'fieldset' => 'button-icon-' . $sSuffix,
+                    ),
+                    'content'       => array(
+                        array(
+                            'field_id'      => 'all',
+                            'type'          => 'number',
+                            'class'          => array(
+                                'fieldset'  => 'padding-all-' . $sSuffix ,
+                            ),
+                            'attributes'    => array(
+                                'data-property'        => 'padding',
+                                'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                                'data-suffix'          => 'px',
+                                'min'                  => 0,    // unlike margin, padding does not take negative values in CSS
+                            ),
+                            'default'       => 0,
+                        ),
+                        array(
+                            'field_id'      => 'each',
+                            'type'          => 'inline_mixed',
+                            'class'          => array(
+                                'fieldset'  => 'padding-each-' . $sSuffix ,
+                            ),
+                            'content'       => array(
+                                array(
+                                    'field_id'      => 'top',
+                                    'type'          => 'number',
+                                    'title'         => __( 'Top', 'amazon-auto-links' ),
+                                    'attributes'    => array(
+                                        'data-property'        => 'padding-top',
+                                        'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                                        'data-suffix'          => 'px',
+                                        'min'                  => 0,
+                                    ),
+                                    'default'       => 0,
+                                ),
+                                array(
+                                    'field_id'      => 'right',
+                                    'type'          => 'number',
+                                    'title'         => __( 'Right', 'amazon-auto-links' ),
+                                    'attributes'    => array(
+                                        'data-property'         => 'padding-right',
+                                        'data-selector-suffix'  => '.button-icon-' . $sSuffix,
+                                        'data-suffix'           => 'px',
+                                        'min'                  => 0,
+                                    ),
+                                    'default'       => 0,
+                                ),
+                                array(
+                                    'field_id'      => 'bottom',
+                                    'type'          => 'number',
+                                    'title'         => __( 'Bottom', 'amazon-auto-links' ),
+                                    'attributes'    => array(
+                                        'data-property'        => 'padding-bottom',
+                                        'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                                        'data-suffix'          => 'px',
+                                        'min'                  => 0,
+                                    ),
+                                    'default'       => 0,
+                                ),
+                                array(
+                                    'field_id'      => 'left',
+                                    'type'          => 'number',
+                                    'title'         => __( 'Left', 'amazon-auto-links' ),
+                                    'attributes'    => array(
+                                        'data-property'         => 'padding-left',
+                                        'data-selector-suffix'  => '.button-icon-' . $sSuffix,
+                                        'data-suffix'           => 'px',
+                                        'min'                  => 0,
+                                    ),
+                                    'default'       => 0,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),                
+                
+                // Margin
                 array(
                     'field_id'          => 'margin_type',
                     'type'              => 'revealer',
