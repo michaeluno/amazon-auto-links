@@ -406,19 +406,14 @@
           };
           // data-property: _icon_image_type_left / _icon_image_type_right
           _processor[ '_icon_image_type_' + _pos ] = function( self ) {
+            var _this = this;
             var _imageTypeHandlers = {
               'svg_file': function() {
                 // delete styleHolder[ _styleKeyIcon ][ 'background-image' ]; // no need to remove as the background-image is needed for svg_file as well
                 triggerInputChanges( $( '.svg-file-' + _pos + ' input, .svg-file-' + _pos + ' select' ).not( self ) );
               },
               'image_file': function() {
-                delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
-                delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ];
-                delete styleHolder[ _styleKeyIcon ][ 'mask-image' ];
-                delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ];
-                delete styleHolder[ _styleKeyIcon ][ 'mask-position' ];
-                delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-repeat' ];
-                delete styleHolder[ _styleKeyIcon ][ 'mask-repeat' ];
+                _this.deleteSVGRules( _pos );
                 triggerInputChanges( $( '.image-file-' + _pos + ' input, .image-file-' + _pos + ' select' ).not( self ) );
               },
               '_unknown': function() {
@@ -508,6 +503,16 @@
             'isSVGMaskEnabled': function( position ) {
               return this[ 'icon' + getFirstLetterCapitalized( position ) ].jqIconSVGMaskToggle.is( ':checked' );
             },
+            'deleteSVGRules': function( position ) {
+              var _styleKeyIcon = 'left' === position ? styleKeyIconLeft : styleKeyIconRight;
+              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
+              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ];
+              delete styleHolder[ _styleKeyIcon ][ 'mask-image' ];
+              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ];
+              delete styleHolder[ _styleKeyIcon ][ 'mask-position' ];
+              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-repeat' ];
+              delete styleHolder[ _styleKeyIcon ][ 'mask-repeat' ];
+            },
           };
           // data-property: _icon_svg_file_left / _icon_svg_file_right
           _processor[ '_icon_svg_file_' + _pos ] = function( self ) {
@@ -522,13 +527,7 @@
             styleHolder[ _styleKeyIcon ][ 'display' ]             = 'inline-flex'; // this needs to be set regardless the url is empty or not
             var _url         = $( self ).val().trim();
             if ( ! _url.length ) {
-              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-image' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-image' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-position' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-position' ];
-              delete styleHolder[ _styleKeyIcon ][ '-webkit-mask-repeat' ];
-              delete styleHolder[ _styleKeyIcon ][ 'mask-repeat' ];
+              this.deleteSVGRules( _pos );
               return;
             }
             var _urlCSS = "url('" + _url + "')";
