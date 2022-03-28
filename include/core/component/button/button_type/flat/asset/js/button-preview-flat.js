@@ -16,6 +16,7 @@
       ? '___button_id___'
       : aalFlatButtonPreviewEventBinder.postID;
     var styleKeyButton         = '.amazon-auto-links-button-' + buttonID;
+    var styleKeyButtonElements = '.amazon-auto-links-button-' + buttonID + ' *';
     var styleKeyButtonHover    = styleKeyButton + ':hover';
     var styleKeyButtonChildren = styleKeyButton + ' > *';
     var styleKeyButtonLabel    = styleKeyButton + ' .button-label';
@@ -279,6 +280,11 @@
           }
           var _suffixSelector = 'undefined' !== typeof self.data( 'selectorSuffix' ) && self.data( 'selectorSuffix' ).length ? ' ' + $.trim( self.data( 'selectorSuffix' ) ) : '';
           var _suffixValue    = 'undefined' !== typeof self.data( 'suffix' ) && self.data( 'suffix' ).length ? self.data( 'suffix' ) : '';
+          var _value          = self.val();
+          if ( self.data( 'noEmpty' ) && ! _value.length ) {
+            delete styleHolder[ styleKeyButton + _suffixSelector ][ self.data( 'property' ) ];
+            return;
+          }
           if ( 'undefined' === typeof styleHolder[ styleKeyButton + _suffixSelector ] ) {
             styleHolder[ styleKeyButton + _suffixSelector ] = {};
           }
@@ -388,6 +394,18 @@
 
         function _getInputProcessorIcon() {
           var _processor = {};
+          // data-property: _icon_padding_all_left / _icon_padding_all_right
+          _processor[ '_icon_padding_all_' + _pos ] = function( self ) {
+              delete styleHolder[ _styleKeyIcon ][ 'padding-top' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-right' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-bottom' ];
+              delete styleHolder[ _styleKeyIcon ][ 'padding-left' ];
+              if ( ! self.val().length ) {
+                delete styleHolder[ _styleKeyIcon ][ 'padding' ];
+                return;
+              }
+              styleHolder[ _styleKeyIcon ][ 'padding' ] = self.val() + 'px';
+          };
           // data-property: _icon_padding_type_left / _icon_padding_type_right
           _processor[ '_icon_padding_type_' + _pos ] = function( self ) {
             if ( 'all' === $( self ).val() ) {
@@ -614,6 +632,9 @@
         'display': 'inline-flex',   // to align center, there is a limit with block/inline-block with dynamic UI so inline-flex is used. flex is not used because when the width property is not given, it expands to the full width to fit the container and the button gets too wide
         'justify-content': 'space-around',
       };
+      _styleHolder[ styleKeyButtonElements ] = {
+        'box-sizing':     'border-box',
+      };
       _styleHolder[ styleKeyButtonChildren ] = {
         'align-items':    'center',
         'display':        'inline-flex',
@@ -623,10 +644,9 @@
       _styleHolder[ styleKeyIconBoth ]       = {
         'margin-right':   'auto',
         'margin-left':    'auto',
-        'display':        'none', // by default make them invisible. Then, with the inputs, if the icon option is turned on, override the rule
-        // 'display':        'inline-block',
-        // 'vertical-align': 'middle',
-        'height':         'auto', // the icon size is defined with min-width and min-height and the height is set to `auto` to align the element vertically center when the icon height is shorter than the label height
+        'display':        'none',    // by default make them invisible. Then, with the inputs, if the icon option is turned on, override the rule
+        'height':         'auto',    // the icon size is defined with min-width and min-height and the height is set to `auto` to align the element vertically center when the icon height is shorter than the label height
+        'border':         'solid 0', // there is no option to change the border style for icon containers unlike the Border meta-box section
       };
       _styleHolder[ styleKeyIconIBoth ]      = {
         'display':        'inline-block',

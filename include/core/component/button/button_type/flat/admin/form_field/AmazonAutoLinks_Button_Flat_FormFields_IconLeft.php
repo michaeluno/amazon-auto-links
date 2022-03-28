@@ -196,6 +196,76 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                 //     ),
                 //     'default'           => 'button-icon-' . $sSuffix,
                 // ),
+
+                array(
+                    'field_id'          => 'background',
+                    'type'              => 'inline_mixed',
+                    'title'             => __( 'Background', 'amazon-auto-links' ),
+                    'class'             => array(
+                        'fieldset' => 'button-icon-' . $sSuffix,
+                    ),                    
+                    'content'           => array(
+                        array(
+                            'field_id'          => 'color',
+                            'type'              => 'color',
+                            'title'             => __( 'Color', 'amazon-auto-links' ),
+                            'class'             => array(
+                                'fieldset' => 'margin-left-1em',
+                            ),
+                            'attributes'        => array(
+                                'data-property'        => 'background-color',
+                                'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'field_id'          => 'border',
+                    'type'              => 'inline_mixed',
+                    'title'             => __( 'Border', 'amazon-auto-links' ),
+                    'class'             => array(
+                        'fieldset' => 'button-icon-' . $sSuffix,
+                    ),                    
+                    'content'           => array(
+                        array(
+                            'field_id'   => 'width',
+                            'type'       => 'number',
+                            'title'      => __( 'Width', 'amazon-auto-links' ),
+                            'class'      => array(
+                                'fieldset' => 'margin-left-1em',
+                            ),
+                            'attributes' => array(
+                                'data-property'        => 'border-width',
+                                'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                                'data-suffix'          => 'px',
+                                'data-no-empty'        => true,
+                                'min'                  => 0,
+                            ),
+                        ),
+                        array(
+                            'field_id'   => 'color',
+                            'type'       => 'color',
+                            'title'      => __( 'Color', 'amazon-auto-links' ),
+                            'attributes' => array(
+                                'data-property'        => 'border-color',
+                                'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                            ),
+                        ),
+                        array(
+                            'field_id'   => 'radius',
+                            'type'       => 'number',
+                            'title'      => __( 'Radius', 'amazon-auto-links' ),
+                            'attributes' => array(
+                                'min'                  => 0,
+                                'data-property'        => 'border-radius',
+                                'data-selector-suffix' => '.button-icon-' . $sSuffix,
+                                'data-suffix'          => 'px',
+                                'data-no-empty'        => true,
+                            ),
+                        ),
+                    ),
+                ),
+
                 array(
                     'field_id'          => 'size_constraint',
                     'type'              => 'revealer',
@@ -369,7 +439,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                                 'fieldset'  => 'padding-all-' . $sSuffix ,
                             ),
                             'attributes'    => array(
-                                'data-property'        => 'padding',
+                                'data-property'        => '_icon_padding_all_' . $sSuffix,
                                 'data-selector-suffix' => '.button-icon-' . $sSuffix,
                                 'data-suffix'          => 'px',
                                 'min'                  => 0,    // unlike margin, padding does not take negative values in CSS
