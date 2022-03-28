@@ -37,31 +37,10 @@ class AmazonAutoLinks_Button_Flat_Event_ButtonOutput extends AmazonAutoLinks_Plu
             ? esc_attr( "amazon-auto-links-button-$isButtonID" )
             : "amazon-auto-links-button-___button_id___";
         return "<div class='amazon-auto-links-button {$_sButtonIDSelector}' data-type='" . esc_attr( $this->sButtonType ) . "'>"
-                . "<span class='button-icon button-icon-left'>" . $this->___getImgTagForIcon( $_bIsPost ? $_iButtonID : 0, $sButtonLabel, 'left' ) . "</span>"
+                . "<span class='button-icon button-icon-left'><i></i></span>"
                 . "<span class='button-label'>" . $sButtonLabel. "</span>"
-                . "<span class='button-icon button-icon-right'>" . $this->___getImgTagForIcon( $_bIsPost ? $_iButtonID : 0, $sButtonLabel, 'right' ) . "</span>"
+                . "<span class='button-icon button-icon-right'><i></i></span>"
             . "</div>";
     }
-        /**
-         * @since  5.2.0
-         * @param  integer $iButtonID       The button post ID.
-         * @param  string  $sButtonLabel
-         * @param  string  $sPosition       Icon position, `left` or `right`.
-         * @return string
-         */
-        private function ___getImgTagForIcon( $iButtonID, $sButtonLabel, $sPosition ) {
-            if ( ! $iButtonID ) {
-                return '';
-            }
-            $_aIconMeta = $this->getAsArray( get_post_meta( $iButtonID, '_icon_' . strtolower( $sPosition ), true ) );
-            if ( ! $this->getElement( $_aIconMeta, array( 'enable' ) ) ) {
-                return '';
-            }
-            $_sSRC      = $this->getElement( $_aIconMeta, array( 'image' ), '' );
-            if ( ! $this->isImageSRC( $_sSRC ) ) {
-                return '';
-            }
-            return "<img src='" . esc_url( $_sSRC ) . "' alt='" . esc_attr( $sButtonLabel ) . "' />";
-        }
     
 }
