@@ -563,6 +563,14 @@
           };
           // data-property: _icon_svg_mask_left / _icon_svg_mask_right
           _processor[ '_icon_svg_mask_' + _pos ] = function( self ) {
+            if ( ! this.isIconEnabled( _pos ) ) {
+              styleHolder[ _styleKeyIcon ] = {};
+              return;
+            }
+            if ( this.getIconType( _pos ) !== 'svg_file' ) {
+              delete styleHolder[ _styleKeyIcon ][ 'background-color' ];
+              return;
+            }
             styleHolder[ _styleKeyIcon ][ 'background-color' ] = $( self ).val();
           };
           return _processor;
