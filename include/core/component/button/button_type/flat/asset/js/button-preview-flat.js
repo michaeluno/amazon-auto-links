@@ -180,7 +180,7 @@
         'jqPreviewButtonIconLeft'   : undefined, // stores the jQuery object of the preview button left icon element. Not assigning a value here since iframe can have not been loaded yet.
         'jqPreviewButtonIconRight'  : undefined, // stores the jQuery object of the preview button right icon element. Not assigning a value here since iframe can have not been loaded yet.
         'jqPreviewButtonLabel'      : undefined, // stores the jQuery object of the preview button label element. Not assigning a value here since iframe can have not been loaded yet.
-        'lineHeight'                : 1.3,       // default. It may be different depending on the them
+        'lineHeight'                : 1.3,       // default: 1.3. The line height can be different depending on the them
         'lastUpdatedLineHeight'     : 0,         // the last checked time of the line height of the iframe document
 
         // Methods
@@ -194,11 +194,6 @@
          * Gets the height of the current label element.
          */
         'getLabelHeight': function() {
-
-          // @deprecated defined in the $.on( 'load' ) callback
-          // this.jqPreviewButtonLabel    = 'undefined' === typeof this.jqPreviewButtonLabel
-          //   ? previewFrame.contents().find( 'body .button-label' ).first()
-          //   : this.jqPreviewButtonLabel;
           var _lineHeight  = this.getLineHeightProperty();
           var _fontSize    = this.getFontSize();
           return _fontSize && _lineHeight
