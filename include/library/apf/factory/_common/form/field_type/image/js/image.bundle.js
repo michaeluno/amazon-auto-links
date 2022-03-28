@@ -1,4 +1,4 @@
-/*! Admin Page Framework - Image Field Type 0.0.3 */
+/*! Admin Page Framework - Image Field Type 0.0.4 */
 var apfMain  = AmazonAutoLinks_AdminPageFrameworkScriptFormMain;
 var apfImage = AmazonAutoLinks_AdminPageFrameworkImageFieldType;
 apfImage.hasMediaUploader = !! apfImage.hasMediaUploader;
@@ -342,6 +342,7 @@ apfImage.hasMediaUploader = !! apfImage.hasMediaUploader;
     // Remove buttons
     $( '.remove_image.button' ).on( 'click', function ( event ) {
       setImagePreviewElement( $( this ).data( 'input_id' ), {} );
+      $( '#' + $( this ).data( 'input_id' ) ).trigger( 'change' );
       return false;
     } );
     
