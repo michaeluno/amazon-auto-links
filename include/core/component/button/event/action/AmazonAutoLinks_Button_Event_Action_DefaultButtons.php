@@ -5,14 +5,14 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * https://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  */
 
  
 /**
  *  Creates default buttons.
  *  
- *  @since      4.3.0
+ *  @since 4.3.0
  */
 class AmazonAutoLinks_Button_Event_Action_DefaultButtons extends AmazonAutoLinks_PluginUtility {
 
@@ -25,10 +25,9 @@ class AmazonAutoLinks_Button_Event_Action_DefaultButtons extends AmazonAutoLinks
 
     /**
      * @return void
-     * @callback    add_action  aal_action_plugin_activated
+     * @callback add_action() aal_action_plugin_activated
      */
     public function replyToCreateDefaultButtons() {
-
         $_sButtonPostType = AmazonAutoLinks_Registry::$aPostTypes[ 'button' ];
         if ( ! post_type_exists( $_sButtonPostType ) ) {
             new AmazonAutoLinks_PostType_Button(
@@ -38,7 +37,6 @@ class AmazonAutoLinks_Button_Event_Action_DefaultButtons extends AmazonAutoLinks
             );
         }
         new AmazonAutoLinks_DefaultButtonCreation;
-
     }
 
 }

@@ -44,7 +44,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     /**
      * Wraps the WordPress core translation functions so that third-party translation parser such as POEdit don't catch these.
      * This is used for translation items defined with the core default text-domain so there is no need to translate by plugin.
-     * @since  5.1.6
+     * @since 5.1.6
      */
     static public function _esc_html_e( $sString ) {
         esc_html_e( $sString );
@@ -73,8 +73,8 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     }
 
     /**
-     * @var    array
-     * @since  4.7.5
+     * @var   array
+     * @since 4.7.5
      */
     static private $___aScriptDataBase;
 
@@ -114,7 +114,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
             return $_aoResult;
         }
         return self::getAsArray( $_aoResult );
-
     }
 
     /**
@@ -193,22 +192,19 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
      * @since  3.5.0
      */
     static public function scheduleSingleWPCronTask( $sActionName, array $aArguments=array(), $iTime=0 ) {
-
         if ( wp_next_scheduled( $sActionName, $aArguments ) ) {
             return false;
         }
-
         // In previous WordPress versions, this function did not return true when scheduled. So checking false here.
         $_iTime = $iTime ? $iTime : time();
         return false !== wp_schedule_single_event( $_iTime, $sActionName, $aArguments );
-
     }
 
     /**
      * Returns the readable date-time string.
-     * @param integer     $iTimeStamp
-     * @param null|string $sDateTimeFormat
-     * @param boolean     $bAdjustGMT
+     * @param  integer     $iTimeStamp
+     * @param  null|string $sDateTimeFormat
+     * @param  boolean     $bAdjustGMT
      * @return string
      */
     static public function getSiteReadableDate( $iTimeStamp, $sDateTimeFormat=null, $bAdjustGMT=false ) {
@@ -238,13 +234,12 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     /**
      * Finds scheduled cron tasks by the given action name.
      *  
-     * @since       3
-     * @param       string  $sActionHookName
-     * @return      array
+     * @since  3
+     * @param  string $sActionHookName
+     * @return array
      */
     static public function getScheduledCronTasksByActionName( $sActionHookName ) {
-        
-        $_aTheTasks = array();        
+        $_aTheTasks = array();
         $_aTasks    = ( array ) _get_cron_array();
         foreach ( $_aTasks as $_iTimeStamp => $_aScheduledActionHooks ) {            
             foreach ( ( array ) $_aScheduledActionHooks as $_sScheduledActionHookName => $_aArgs ) {
@@ -255,24 +250,23 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
             }            
         }
         return $_aTheTasks;
-                
-    }    
+    }
     
     /**
      * Stores whether the server installs the mbstring extension or not.
-     * @since       3
+     * @since 3
      */
     static protected $_bMBStringInstalled;
     
     /**
      * Converts a given string into a specified character set.
-     * @since       3
-     * @return      string      The converted string.
-     * @see         http://php.net/manual/en/mbstring.supported-encodings.php
-     * @param       string          $sText                      The subject text string.
-     * @param       string          $sCharSetTo                 The character set to convert to.
-     * @param       string|boolean  $bsCharSetFrom              The character set to convert from. If a character set is not specified, it will be auto-detected.
-     * @param       boolean         $bConvertToHTMLEntities     Whether or not the string should be converted to HTML entities.
+     * @since  3
+     * @return string      The converted string.
+     * @see    http://php.net/manual/en/mbstring.supported-encodings.php
+     * @param  string          $sText                      The subject text string.
+     * @param  string          $sCharSetTo                 The character set to convert to.
+     * @param  string|boolean  $bsCharSetFrom              The character set to convert from. If a character set is not specified, it will be auto-detected.
+     * @param  boolean         $bConvertToHTMLEntities     Whether or not the string should be converted to HTML entities.
      */
     static public function convertCharacterEncoding( $sText, $sCharSetTo='', $bsCharSetFrom=true, $bConvertToHTMLEntities=false ) {
         
@@ -319,9 +313,9 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
      *
-     * @param       string          $sText
-     * @param       string          $sCandidateCharSet
-     * @return      boolean|string  False when not found. Otherwise, the found encoding character set.
+     * @param  string          $sText
+     * @param  string          $sCandidateCharSet
+     * @return boolean|string  False when not found. Otherwise, the found encoding character set.
      */
     static public function getDetectedCharacterSet( $sText, $sCandidateCharSet='' ) {
         
@@ -382,7 +376,7 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
 
     /**
      * Used by auto-insert form field definitions.
-     * @return      array
+     * @return array
      */
     static public function getPredefinedFilters() {            
         return array(                        
@@ -395,8 +389,8 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     }
     /**
      * Used by auto-insert form field definitions.
-     * @param       boolean $bDescription
-     * @return      array
+     * @param  boolean $bDescription
+     * @return array
      */
     static public function getPredefinedFiltersForStatic( $bDescription=true ) {
         return array(
@@ -414,7 +408,6 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
      * 
      */
     public static function getSiteTaxonomies() {
-        
         $_aTaxonomies = get_taxonomies( '', 'names' );
         unset( 
             $_aTaxonomies[ 'nav_menu' ],
@@ -422,14 +415,13 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
             $_aTaxonomies[ 'post_format' ]
         );
         return $_aTaxonomies;
-        
     }
 
     /**
      * Returns an array of associated taxonomies of the given post.
      * 
-     * @param       string|integer|object            $isoPost            Either the post ID or the post object.
-     * @return      array
+     * @param  string|integer|object            $isoPost            Either the post ID or the post object.
+     * @return array
      */
     public static function getPostTaxonomies( $isoPost ) {
         $_oPost = get_post( $isoPost );
@@ -440,13 +432,10 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     
     /**
      * Returns the current url of admin page.
-     * @return      string
+     * @return string
      */
     public static function getCurrentAdminURL() {
-        return add_query_arg( 
-            self::getHTTPQueryGET(),
-            admin_url( $GLOBALS[ 'pagenow' ] )
-        );
+        return add_query_arg( self::getHTTPQueryGET(), admin_url( $GLOBALS[ 'pagenow' ] ) );
     }
 
 }
