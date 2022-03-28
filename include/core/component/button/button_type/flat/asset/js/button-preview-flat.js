@@ -402,7 +402,7 @@
             $( "input[type=number][data-property^='padding-'][data-selector-suffix='" + self.data( 'selectorSuffix' ) + "']" ).trigger( 'change' );            
           };          
           // data-property: _icon_left_margin_type / _icon_right_margin_type
-          _processor[ '_icon_' + _pos + '_margin_type' ] = function( self ) {
+          _processor[ '_icon_margin_type_' + _pos ] = function( self ) {
             if ( 'all' === $( self ).val() ) {
               delete styleHolder[ _styleKeyIcon ][ 'margin-top' ];
               delete styleHolder[ _styleKeyIcon ][ 'margin-right' ];

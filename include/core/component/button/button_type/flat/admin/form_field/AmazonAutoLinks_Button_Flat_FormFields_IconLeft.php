@@ -456,7 +456,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                     ),
                     'attributes'        => array(
                         'data-selector-suffix' => '.button-icon-' . $sSuffix,
-                        'data-property'        => '_icon_' . $sSuffix . '_margin_type',
+                        'data-property'        => '_icon_margin_type_' . $sSuffix,
                     ),
                     'default'           => 'all',
                 ),
