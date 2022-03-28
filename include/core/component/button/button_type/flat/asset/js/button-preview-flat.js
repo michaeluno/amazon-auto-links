@@ -12,7 +12,7 @@
       return;
     }
 
-    var buttonID                        = 'undefined' === typeof aalFlatButtonPreviewEventBinder.postID
+    var buttonID               = 'undefined' === typeof aalFlatButtonPreviewEventBinder.postID
       ? '___button_id___'
       : aalFlatButtonPreviewEventBinder.postID;
     var styleKeyButton         = '.amazon-auto-links-button-' + buttonID;
@@ -27,94 +27,103 @@
     var inputs                 = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
     var debouncers             = {}; // stores setTimeout IDs to debounce function calls
     var inputProcessor         = getInputProcessor();
+    var jqTextAreaButtonCSS    = $( '#button_css__0' );
+    var jqTextAreaCustomCSS    = $( '#custom_css__0' );
 
     // When the user changes button options,
     inputs.on( 'change input', function () {
 
-      // Parse inputs
-      var _property = $( this ).data( 'property' );
-      _property = typeof _property !== 'string' ? '' : _property;
-      var _methodName = 'undefined' !== typeof inputProcessor[ _property ] ? _property : '_common';
-      if ( ! _property.length ) {
-        return;
-      }
       var _self = $( this );
-      clearTimeout( debouncers[ _property + $( this ).data( 'selectorSuffix' ) ] ); // do not call the function too frequent with the debounce logic
-      debouncers[ _property + $( this ).data( 'selectorSuffix' ) ] = setTimeout( function(){
-        inputProcessor[ _methodName ]( _self );
-      }, 100 );
-
-      // Apply the stylesheet and update field inputs
-      clearTimeout( debouncers[ '_stylesheet_generator' ] ); // do not call the function too frequent with the debounce logic
-      debouncers[ '_stylesheet_generator' ] = setTimeout( function () {
-
-        // Update the framed page stylesheet
-        var _style = _getCSSRulesGenerated( sortObject( styleHolder ) ) + '\n' + $( '#custom_css__0' ).val();
-        _setStyleSheetInFramedPage( _style, 'button-preview-flat-framed-stylesheet', previewFrame );
-
-        // Update the Generated CSS field
-        $( '#button_css__0' ).text( _style );
-
-        // Tell the framed window to send back proportional data so that the iframe height will be adjusted with a callback defined in this script
-        previewFrame[ 0 ].contentWindow.postMessage(
-          {
-            message: 'hi there!',
-            event:   'ReloadButtonPreview',
-            nonce:   aalFlatButtonPreviewEventBinder.nonce,
-          },
-          location.protocol + '//' + location.host
-        );
-      }, 200 );
-
-      function _setStyleSheetInFramedPage( style, attributeID, previewFrame ) {
-        var _styleSheet = $( '<style>', { id: attributeID } );
-        _styleSheet.text( style );
-        var _prevSheet = previewFrame.contents().find( '#' + attributeID );
-        if ( _prevSheet.length > 0 ) {
-          _prevSheet.replaceWith( _styleSheet );
-        } else {
-          previewFrame.contents().find( 'head' ).first().append( _styleSheet );
-        }
-      }
       
-      function _getCSSRulesGenerated( styleHolder ) {
-        var _extraCSS = '';
-        for ( var selector in styleHolder ) {
-          if ( ! styleHolder.hasOwnProperty( selector ) ) {
-            continue;
-          }
-          _extraCSS += __getRulesBySelector( selector, styleHolder[ selector ] );
+      // Parse inputs and call the bound callback
+      (function( self ) {
+        var _property = $( self ).data( 'property' );
+        _property = typeof _property !== 'string' ? '' : _property;
+        var _methodName = 'undefined' !== typeof inputProcessor[ _property ] ? _property : '_common';
+        if ( ! _property.length ) {
+          return;
         }
-        return _extraCSS.trim();
-        function __getRulesBySelector( selector, ruleset ) {
-          if ( $.isEmptyObject( ruleset ) ) {
-            return '';
-          }
-          var _rules = selector + ' {\n';
-          for ( var prop in ruleset ) {
-            if ( ! ruleset.hasOwnProperty( prop ) ) {
-              continue;
+        clearTimeout( debouncers[ _property + $( self ).data( 'selectorSuffix' ) ] ); // do not call the function too frequent with the debounce logic
+        debouncers[ _property + $( self ).data( 'selectorSuffix' ) ] = setTimeout( function(){
+          inputProcessor[ _methodName ]( self );
+        }, 100 );
+      })( _self );
+    
+      // Apply the stylesheet and update field inputs
+      (function( self ) {
+
+        clearTimeout( debouncers[ '_stylesheet_generator' ] ); // do not call the function too frequent with the debounce logic
+        debouncers[ '_stylesheet_generator' ] = setTimeout( function () {
+  
+          // Update the framed page stylesheet
+          var _style = _getCSSRulesGenerated( _sortObject( styleHolder ) ) + '\n' + jqTextAreaCustomCSS.val();
+          _setStyleSheetInFramedPage( _style, 'button-preview-flat-framed-stylesheet', previewFrame );
+  
+          // Update the Generated CSS field
+          jqTextAreaButtonCSS.text( _style );
+  
+          // Tell the framed window to send back proportional data so that the iframe height will be adjusted with a callback defined in this script
+          previewFrame[ 0 ].contentWindow.postMessage(
+            {
+              event: 'ReloadButtonPreview',
+              nonce: aalFlatButtonPreviewEventBinder.nonce,
+            },
+            location.protocol + '//' + location.host
+          );
+          
+          function _setStyleSheetInFramedPage( style, attributeID, previewFrame ) {
+            var _styleSheet = $( '<style>', { id: attributeID } );
+            _styleSheet.text( style );
+            var _prevSheet = previewFrame.contents().find( '#' + attributeID );
+            if ( _prevSheet.length > 0 ) {
+              _prevSheet.replaceWith( _styleSheet );
+            } else {
+              previewFrame.contents().find( 'head' ).first().append( _styleSheet );
             }
-            _rules += '    ' + prop + ': ' + ruleset[ prop ] + ';\n';
           }
-          _rules += '}\n';
-          return _rules;
-        }
-      }
-
-      /**
-       * Used to sort the style holder object.
-       * @see     https://stackoverflow.com/a/29622653
-       * @param   obj
-       * @returns {{}}
-       */
-      function sortObject( obj ) {
-        return Object.keys( obj ).sort().reduce( function ( result, key ) {
-          result[ key ] = obj[ key ];
-          return result;
-        }, {} );
-      }
-
+          
+          function _getCSSRulesGenerated( styleHolder ) {
+            var _extraCSS = '';
+            for ( var selector in styleHolder ) {
+              if ( ! styleHolder.hasOwnProperty( selector ) ) {
+                continue;
+              }
+              _extraCSS += __getRulesBySelector( selector, styleHolder[ selector ] );
+            }
+            return _extraCSS.trim();
+            function __getRulesBySelector( selector, ruleset ) {
+              if ( $.isEmptyObject( ruleset ) ) {
+                return '';
+              }
+              var _rules = selector + ' {\n';
+              for ( var prop in ruleset ) {
+                if ( ! ruleset.hasOwnProperty( prop ) ) {
+                  continue;
+                }
+                _rules += '    ' + prop + ': ' + ruleset[ prop ] + ';\n';
+              }
+              _rules += '}\n';
+              return _rules;
+            }
+          }
+    
+          /**
+           * Used to sort the style holder object.
+           * @see     https://stackoverflow.com/a/29622653
+           * @param   obj
+           * @returns {{}}
+           */
+          function _sortObject( obj ) {
+            return Object.keys( obj ).sort().reduce( function ( result, key ) {
+              result[ key ] = obj[ key ];
+              return result;
+            }, {} );
+          }    
+          
+        }, 200 );        
+        
+      })( _self );
+      
     } );
 
     // When the preview iframe is loaded, call input change events to update the preview
