@@ -15,18 +15,18 @@
     var buttonID                        = 'undefined' === typeof aalFlatButtonPreviewEventBinder.postID
       ? '___button_id___'
       : aalFlatButtonPreviewEventBinder.postID;
-    var styleKeyButton              = '.amazon-auto-links-button-' + buttonID;
-    var styleKeyButtonHover         = styleKeyButton + ':hover';
-    var styleKeyButtonChildren      = styleKeyButton + ' > *';
-    var styleKeyIconLabel           = styleKeyButton + ' .button-label';
-    var styleKeyIconBoth            = styleKeyButton + ' .button-icon';
-    var styleKeyIconLeft            = styleKeyButton + ' .button-icon-left';
-    var styleKeyIconRight           = styleKeyButton + ' .button-icon-right';
-    var styleHolder                 = getDefaultStyleHolder();
-    var previewFrame                = $( '#button-preview-flat > iframe' ).first();
-    var inputs                      = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
-    var debouncers                  = {}; // stores setTimeout IDs to debounce function calls
-    var inputProcessor              = getInputProcessor();
+    var styleKeyButton         = '.amazon-auto-links-button-' + buttonID;
+    var styleKeyButtonHover    = styleKeyButton + ':hover';
+    var styleKeyButtonChildren = styleKeyButton + ' > *';
+    var styleKeyIconLabel      = styleKeyButton + ' .button-label';
+    var styleKeyIconBoth       = styleKeyButton + ' .button-icon';
+    var styleKeyIconLeft       = styleKeyButton + ' .button-icon-left';
+    var styleKeyIconRight      = styleKeyButton + ' .button-icon-right';
+    var styleHolder            = getDefaultStyleHolder();
+    var previewFrame           = $( '#button-preview-flat > iframe' ).first();
+    var inputs                 = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
+    var debouncers             = {}; // stores setTimeout IDs to debounce function calls
+    var inputProcessor         = getInputProcessor();
 
     // When the user changes button options,
     inputs.on( 'change input', function () {
