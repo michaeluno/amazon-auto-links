@@ -591,10 +591,6 @@
         'justify-content': 'space-around',
       };
       _styleHolder[ styleKeyButtonChildren ] = {
-// 'position': 'absolute',
-// 'top': '50%',
-// '-ms-transform': 'translateY(-50%)',
-// 'transform': 'translateY(-50%)',
         'align-items': 'center',
         'display': 'inline-flex',
         'vertical-align': 'middle',
