@@ -94,22 +94,31 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
     }
 
     /**
-     * @param  string $sGUID
-     * @param  string $sColumns The column parameter passed to the SQL query.
-     * @param  string $sOutput  ARRAY_A or OBJECT
+     * @param  array|string     $asGUIDs
+     * @param  string           $sColumns The column parameter passed to the SQL query.
+     * @param  string           $sOutput  ARRAY_A or OBJECT
      * @see    wpdb::get_row()
-     * @return array|object
+     * @return array|object     The structure of returned array will be different depending on the type of $asGUIDs parameter value.
+     * If string is given, a structure with one element depth will be returned. If array is given, the first depth will be numerically indexed found records and the second depth in each will have column-value pairs.
      * @since  4.7.0
+     * @since  5.2.0 The first parameter accepts an array.
      */
-    static public function getPostByGUID( $sGUID, $sColumns='*', $sOutput=ARRAY_A ) {
+    static public function getPostByGUID( $asGUIDs, $sColumns='*', $sOutput=ARRAY_A ) {
         global $wpdb;
-        $_aoResult = $wpdb->get_row(
-            $wpdb->prepare(
+        $_aGUIDs   = self::getAsArray( $asGUIDs );
+        if ( ! is_array( $asGUIDs ) ) {
+            $_sQuery = $wpdb->prepare(
                 "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE guid=%s",
-                $sGUID
-            ),
-            $sOutput
-        );
+                $asGUIDs
+            );
+            $_aoResult = $wpdb->get_row( $_sQuery, $sOutput );
+            if ( is_object( $_aoResult ) ) {
+                return $_aoResult;
+            }
+            return self::getAsArray( $_aoResult );
+        }
+        $_sQuery   = "SELECT {$sColumns} FROM `{$wpdb->base_prefix}posts` WHERE `guid` IN (" . "'" . implode( "','", $_aGUIDs ) . "'" . ")";
+        $_aoResult = $wpdb->get_results( $_sQuery, $sOutput );
         if ( is_object( $_aoResult ) ) {
             return $_aoResult;
         }
