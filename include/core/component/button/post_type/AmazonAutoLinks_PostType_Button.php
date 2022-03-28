@@ -267,7 +267,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
         global $post, $post_ID;
     
         $_sPostTypeSlug = get_post_type( $post_ID );
-        if ( ! in_array( $_sPostTypeSlug, array( $this->oProp->sPostType ) ) ) {
+        if ( ! in_array( $_sPostTypeSlug, array( $this->oProp->sPostType ), true ) ) {
             return $aMessages;
         }
         // Disable messages.
