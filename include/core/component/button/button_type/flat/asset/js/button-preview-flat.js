@@ -18,7 +18,7 @@
     var styleKeyButton         = '.amazon-auto-links-button-' + buttonID;
     var styleKeyButtonHover    = styleKeyButton + ':hover';
     var styleKeyButtonChildren = styleKeyButton + ' > *';
-    var styleKeyIconLabel      = styleKeyButton + ' .button-label';
+    var styleKeyButtonLabel    = styleKeyButton + ' .button-label';
     var styleKeyIconBoth       = styleKeyButton + ' .button-icon';
     var styleKeyIconLeft       = styleKeyButton + ' .button-icon-left';
     var styleKeyIconRight      = styleKeyButton + ' .button-icon-right';
@@ -595,7 +595,7 @@
         'display': 'inline-flex',
         'vertical-align': 'middle',
       };
-      _styleHolder[ styleKeyIconLabel ]      = {};
+      _styleHolder[ styleKeyButtonLabel ]      = {};
       _styleHolder[ styleKeyIconBoth ]       = {
         'margin-right':   'auto',
         'margin-left':    'auto',
