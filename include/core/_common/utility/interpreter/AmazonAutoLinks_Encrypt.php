@@ -5,7 +5,7 @@
  * This class provides an alternative for the base64 underscore decode / encode function.
  * Some over-sensitive users have hysterical allergy against the function and tries to flag scripts that use it as virus or malware.
  *
- * @copyright    Copyright (c) 2013-2021, Michael Uno
+ * @copyright    Copyright (c) 2013-2022, Michael Uno
  * @authorurl    http://michaeluno.jp
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since        2.0.0

@@ -2,7 +2,7 @@
 /**
  * Cleans up the plugin options, custom post type posts, and custom database tables.
  *    
- * @copyright    Copyright (c) 2013-2021, <Michael Uno>
+ * @copyright    Copyright (c) 2013-2022, <Michael Uno>
  * @author       Michael Uno
  * @authorurl    http://michaeluno.jp
  * @since        3
