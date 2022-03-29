@@ -15,8 +15,7 @@
   > to solve that, it might be necessary to use post metas associated with the post which embeds the product. However, if the same product is embedded across multiple posts, duplicate product data will be stored in the database.
   > maybe only storing the record ID of a table (linked ID) can solve it
   
-## Major
-- [Feature] Add the `SearchIndex` unit option for the Product Search unit type. 
+## Major 
 - [Feature] Add a notification component.
   - Save notifications in a new options record with time stamps.
   - When the notification options is not empty, 
@@ -27,8 +26,7 @@
 - [Feature] Add a new unit type, Item Pick-up, which allows the user to pick up products from search and existing units. 
 - [Feature] Add the ability to create posts from units.
     - The ability of automating it will not be included as it is regarded as a content generator and it is not allowed in the wordpress.org plugin guideline.
-- [Feature] Add a Gutenberg block to create and compose product links.
-- [Feature] Add a Gutenberg block to select units.  
+- [Feature] Add a Gutenberg block to create and compose product links. 
 - [4.6][Feature] Add an option to the Geotargeting component that asks whether to only transform links for products which exist in the user's locale store.   
 - [UI] Change the PA-API Request Counter tab to PA-API and include the followings
     - The today's request counts.
@@ -45,10 +43,3 @@
     - Add the ability to get caches from shared cache servers.
     - Add the ability to submit caches to shared cache servers.
     - Add the ability to make the site a shared cache server.
-- [Feature][Button] Add a clone action link to buttons.
-- [Feature][Button] Add new buttons.
-    - Add a button with an icon.
-    - Add an orange button.
-    - Add a gray button.
-    - Add a button with a background image.
-    - Add a button with an SVG icon.
