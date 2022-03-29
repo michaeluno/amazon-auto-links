@@ -53,7 +53,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_Background extends AmazonAutoLinks_
                 'default'       => 'solid',
             ),
             array(
-                'field_id'      => '_background',
+                'field_id'      => '_background_color',
                 'type'          => 'color',
                 'title'         => __( 'Color', 'amazon-auto-links' ),
                 'class'         => array(
