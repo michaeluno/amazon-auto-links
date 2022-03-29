@@ -153,9 +153,10 @@ button.amazon-auto-links-button {
 CSS;
     }
     /**
-     * 
-     * @return string
-     * @remark The visibility scope is static public as it is accessed from a class that creates a default button.
+     * @remark     This should be kept for backward compatibility.
+     * @deprecated 5.2.0 There are multiple default buttons
+     * @return     string
+     * @remark     The visibility scope is static public as it is accessed from a class that creates a default button.
      */
     static public function getDefaultButtonCSS( $isButtonID='default' ) {
                                         

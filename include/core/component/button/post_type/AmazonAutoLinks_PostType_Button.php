@@ -83,6 +83,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
 
             new AmazonAutoLinks_PostType__Button___ActionLink_Status( $this );  // [4.3.0]
             new AmazonAutoLinks_Button_PostType_ActionLink_Clone( $this );      // [5.2.0]
+            new AmazonAutoLinks_Button_Event_Query_DefaultButtons;              // [5.2.0]
 
         }
 
@@ -142,6 +143,7 @@ class AmazonAutoLinks_PostType_Button extends AmazonAutoLinks_PostType_Button_Li
                             array(
                                 'post_type'   => AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],
                                 'aal_action'  => 'generate_default_buttons',
+                                'nonce'       => wp_create_nonce( 'aal_admin' ),
                             ),
                             admin_url( $GLOBALS[ 'pagenow' ] )
                         ),

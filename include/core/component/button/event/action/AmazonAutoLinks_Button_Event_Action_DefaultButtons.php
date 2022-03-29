@@ -36,7 +36,9 @@ class AmazonAutoLinks_Button_Event_Action_DefaultButtons extends AmazonAutoLinks
                 AmazonAutoLinks_Registry::$sFilePath   // script path
             );
         }
-        new AmazonAutoLinks_DefaultButtonCreation;
+        // new AmazonAutoLinks_DefaultButtonCreation;   // @deprecated 5.2.0
+        $_oDefaultButtons = new AmazonAutoLinks_Button_DefaultButtons();
+        $_oDefaultButtons->getButtonsCreated();
     }
 
 }

@@ -11,8 +11,9 @@
 /**
  * Creates a default button if there is not.
  * 
- * @remark      Expected to be called when a plugin is activated.
- * @since       3
+ * @remark     Expected to be called when a plugin is activated.
+ * @since      3
+ * @deprecated 5.2.0
  */
 class AmazonAutoLinks_DefaultButtonCreation extends AmazonAutoLinks_Button_Utility {
 
