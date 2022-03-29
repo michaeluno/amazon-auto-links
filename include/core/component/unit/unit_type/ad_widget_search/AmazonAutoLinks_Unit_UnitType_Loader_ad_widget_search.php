@@ -98,7 +98,15 @@ final class AmazonAutoLinks_Unit_UnitType_Loader_ad_widget_search extends Amazon
             'normal', // context (what kind of meta-box this is)
             'high' // priority
         );
-
+        new AmazonAutoLinks_Unit_UnitType_Admin_PostMetaBox_Advanced_ad_widget_search(
+            null,  // meta box ID - can be null. If null is passed, the ID gets automatically generated and the class name with all lower case characters will be applied.
+            __( 'Advanced', 'amazon-auto-links' ), // meta box title
+            array( // post type slugs: post, page, etc.
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
+            ),
+            'normal', // context (what kind of meta-box this is)
+            'core' // priority 'high', 'core', 'default', or 'low'.
+        );
     }
 
     /**

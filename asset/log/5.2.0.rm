@@ -1,3 +1,4 @@
+- Added the `Category` unit option for the `Product Search` units.
 - Added the `Button2` and `Image` button types and the existing buttons are categorized as `Classic`.
 - Tweaked the UI of the button previews. 
 - Moved the button unit options in the `Common Advanced` section to the new `Button` section.
