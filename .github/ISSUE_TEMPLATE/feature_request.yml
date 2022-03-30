@@ -20,7 +20,7 @@ body:
           label: Solution
           description: Describe the solution you'd like to see being implemented.
           placeholder: |
-
+              "I'd like to see [...] being implmented."
       validations:
           required: true
 
