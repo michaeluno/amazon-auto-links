@@ -96,6 +96,12 @@ hr {
 	margin-top: 1.5em;
 }
 
+.no-text-decoration {
+	text-decoration: none;
+}
+.font-size-1point2 {
+	font-size: 1.2em;
+}
 
 /* Blockquotes */
 .blockquote {

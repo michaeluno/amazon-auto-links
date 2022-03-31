@@ -83,20 +83,24 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
 
         private function ___getCooperatorsWanted() {
             $_sImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath .'/asset/image/information/cooperators-wanted.gif', true );
+            $_sPageURL  = 'https://store.michaeluno.jp/amazon-auto-links-pro/cooperators-wanted/';
             return "<div class='announcement-item'>"
                     . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
-                    . "<h4>"
-                        . __( 'Cooperators Wanted!', 'amazon-auto-links' )
+                    . "<h4 class='font-size-1point2'>"
+                        . "<a href='" . esc_url( $_sPageURL ) . "' target='_blank' class='no-text-decoration'>"
+                            . __( 'Cooperators Wanted!', 'amazon-auto-links' )
+                        . "</a>"
                     . "</h4>"
                     . "<p>" . __( 'Be one of those and get discounts by contributing to the plugin development.', 'amazon-auto-links' ) . "</p>"
                     . "<ul>"
-                        . "<li><strong>" . __( 'Beta Testers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can test the plugin and find problems.', 'amazon-auto-links' ) . "</li>"
+                        . "<li><strong>" . __( 'Testers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can test the plugin and find problems.', 'amazon-auto-links' ) . "</li>"
+                        . "<li><strong>" . __( 'Power Users', 'amazon-auto-links' ) . "</strong> - " . __( 'who can suggest useful features.', 'amazon-auto-links' ) . "</li>"
                         . "<li><strong>" . __( 'Template Designers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can code and design plugin templates.', 'amazon-auto-links' ) . "</li>"
                         . "<li><strong>" . __( 'Graphic Designers', 'amazon-auto-links' ) . "</strong> - " . __( 'who can design visual elements such as images for plugin pages.', 'amazon-auto-links' ) . "</li>"
                         . "<li><strong>" . __( 'Translators', 'amazon-auto-links' ) . "</strong> - " . __( 'who can translate text used in the plugin.', 'amazon-auto-links' ) . "</li>"
                         . "<li>" . __( 'And possibly not listed!', 'amazon-auto-links' ) . "</li>"
                     . "</ul>"
-                    . "<p>" . sprintf( __( 'For more details please visit <a href="%1$s" target="_blank">here</a>', 'amazon-auto-links' ), esc_url( 'https://store.michaeluno.jp/amazon-auto-links-pro/cooperators-wanted/' ) ). "</p>"
+                    . "<p>" . sprintf( __( 'For more details please visit <a href="%1$s" target="_blank">here</a>', 'amazon-auto-links' ), esc_url( $_sPageURL ) ) . "</p>"
                 . "</div>"
             ;
         }
