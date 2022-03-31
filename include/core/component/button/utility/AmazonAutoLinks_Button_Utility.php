@@ -27,7 +27,7 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
      * @return string
      */
     static public function getIframeButtonPreview( $isButtonID, $isButtonType, $nsButtonLabel=null, array $aFrameAttributes=array(), array $aContainerAttributes=array(), $sNonce='' ) {
-        $_sFrameSRC        = self::___getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel, $sNonce );
+        $_sFrameSRC        = self::getButtonPreviewURL( $isButtonID, $isButtonType, $nsButtonLabel, $sNonce );
         $_aFrameAttributes = $aFrameAttributes + array(
             'title'          => 'Button Preview of ' . $isButtonID,    // this is a sort of internal (not apparent) attribute to avoid a warning from a browser so no need to translate
             'class'          => 'frame-button-preview',
@@ -49,23 +49,24 @@ class AmazonAutoLinks_Button_Utility extends AmazonAutoLinks_PluginUtility {
                 . "<iframe " . self::getAttributes( $_aFrameAttributes ) . "></iframe>"
             . "</div>";
     }
-        /**
-         * @since  5.2.0
-         * @param  integer|string $isButtonID
-         * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `flat`, `0`. `0` is an alias for `theme`.
-         * @param  null|string    $nsButtonLabel
-         * @param  string         $sNonce
-         * @return string
-         */
-        static private function ___getButtonPreviewURL( $isButtonID, $isButtonType=0, $nsButtonLabel=null, $sNonce='' ) {
-            $_aQuery = array(
-                'aal-button-preview' => $isButtonType, // @todo confirm the behavior when 0 is passed
-                'button-id'          => $isButtonID,
-                'button-label'       => $nsButtonLabel,
-                'nonce'              => $sNonce ? $sNonce : wp_create_nonce( 'aal_button_preview_nonce' ),
-            );
-            return add_query_arg( array_filter( $_aQuery, array( __CLASS__, 'isNotNull' ) ), get_site_url() );
-        }
+    
+    /**
+     * @since  5.2.0
+     * @param  integer|string $isButtonID
+     * @param  integer|string $isButtonType  The button type. Accepts `classic`, `image`, `theme`, `flat`, `0`. `0` is an alias for `theme`.
+     * @param  null|string    $nsButtonLabel
+     * @param  string         $sNonce
+     * @return string
+     */
+    static public function getButtonPreviewURL( $isButtonID, $isButtonType=0, $nsButtonLabel=null, $sNonce='' ) {
+        $_aQuery = array(
+            'aal-button-preview' => $isButtonType, // @todo confirm the behavior when 0 is passed
+            'button-id'          => $isButtonID,
+            'button-label'       => $nsButtonLabel,
+            'nonce'              => $sNonce ? $sNonce : wp_create_nonce( 'aal_button_preview_nonce' ),
+        );
+        return add_query_arg( array_filter( $_aQuery, array( __CLASS__, 'isNotNull' ) ), get_site_url() );
+    }
 
     /**
      * Returns all CSS rules of active buttons.
