@@ -40,7 +40,7 @@
     } );
 
     // When the user changes button options,
-    jqInputs.on( 'change input', function () {
+    $( '.dynamic-button-field' ).on( 'change input amazon-auto-links_field_type_color_cleared', 'input, select, textarea', function () {
 
       var _self = $( this );
       
