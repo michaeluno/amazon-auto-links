@@ -32,9 +32,10 @@ abstract class AmazonAutoLinks_Button_Flat_PostMetaBox_Base extends AmazonAutoLi
                 'dependencies' => array( 'jquery' ),
                 'in_footer'    => true,
                 'translation'  => array(
-                    'postID'    => $this->oUtil->getHTTPQueryGET( array( 'post' ), '___button_id___' ),
-                    'nonce'     => wp_create_nonce( 'aal_button_preview_nonce' ),
-                    'debugMode' => $this->oUtil->isDebugMode(),
+                    'postID'     => $this->oUtil->getHTTPQueryGET( array( 'post' ), '___button_id___' ),
+                    'nonce'      => wp_create_nonce( 'aal_button_preview_nonce' ),
+                    'debugMode'  => $this->oUtil->isDebugMode(),
+                    'spinnerURL' => admin_url( 'images/loading.gif' ),
                 ),
             )
         );

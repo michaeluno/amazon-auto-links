@@ -50,6 +50,7 @@ td.column-preview.preview {
 .amazon-auto-links-fieldset .iframe-button-preview-container {
     margin: 3em 0;
     width: 100%;
+    text-align: center; /* needed to center the spinner image */
 }
 .iframe-button-preview-container iframe {
     width: 100%;

@@ -33,6 +33,11 @@
     var inputProcessor         = getInputProcessor();
     var jqTextAreaButtonCSS    = $( '#button_css__0' );
     var jqTextAreaCustomCSS    = $( '#custom_css__0' );
+    var jqSpinner              = $( '<img>', {
+      'alt': 'Loading...',
+      'src': aalFlatButtonPreviewEventBinder.spinnerURL,
+      'style': 'vertical-align: middle; margin: 0 auto; display: inline-block;'
+    } );
 
     // When the user changes button options,
     jqInputs.on( 'change input', function () {
@@ -132,6 +137,10 @@
 
     // When the preview iframe is loaded, call input change events to update the preview
     (function( jqIframe ) { // IIFE for IDE
+
+      jqIframe.before( jqSpinner );
+      jqIframe.css( { 'visibility': 'hidden' } );  // when the frame loads, prevent the non-styled preview button from being displayed
+
       jqIframe.on( 'load', function() {
 
         // Set properties of the input processor that stores jQuery object of iframe elements
@@ -139,13 +148,14 @@
         inputProcessor.jqPreviewButtonIconRight = $( this ).contents().find( 'body .button-icon-right' );
         inputProcessor.jqPreviewButtonLabel     = $( this ).contents().find( 'body .button-label' ).first();
 
-        // Using a debouncer as there is are cases like the frame gets loaded multiple times in a short period of time
+        // Using a debouncer as there are cases like the frame gets loaded multiple times in a short period of time
         // Note that when the preview meta-box visibility is toggled with the screen layout option (top-right corner of the admin screen) or moved its position (sorted),
         // the frame gets reloaded and this function can be called multiple times in a single page load.
         clearTimeout( debouncers[ '_iframe_preview_loaded' ] ); // do not call the function too frequent with the debounce logic
         debouncers[ '_iframe_preview_loaded' ] = setTimeout( function () {
           triggerInputChanges( jqInputs );
         }, 2000 );
+
       });
       /// There is a case that the frame is already loaded before this is called
       if ( 'complete' === jqIframe[ 0 ].contentDocument.readyState ) {
@@ -154,7 +164,7 @@
     })( jqPreviewFrame );
 
     // Adjust the iframe height on proportional changes with windows messages from the framed window
-    (function( iframe ) { // IIFE for IDE
+    (function( jqIframe ) { // IIFE for IDE
       if ( ! window.addEventListener ) {  // there are browsers which don't support this
         return;
       }
@@ -165,7 +175,11 @@
         if ( 'undefined' === typeof event.data.height ) {
           return;
         }
-        iframe.height( event.data.height ).css( 'height', event.data.height + 'px' );
+        if ( jqSpinner.is( ':visible' ) ) {
+          jqSpinner.hide();
+          jqIframe.css( 'visibility', 'visible' ).hide().fadeIn();
+        }
+        jqIframe.height( event.data.height ).css( 'height', event.data.height + 'px' );
       }, false );
     })( jqPreviewFrame );
 
